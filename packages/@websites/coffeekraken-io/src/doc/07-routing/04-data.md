@@ -18,6 +18,14 @@
 
 To render a view, you certainly need some data. This is handled by the `%viewName.data.js` files.
 
+#### Supported data file types
+
+For now, your can use these formats:
+
+- `filename.data.json`
+- `filename.data.js`
+- `filename.data.php`
+
 > These data files are handled under the hood by the [@coffeekraken/s-data-handler-generic](/package/@coffeekraken/s-data-handler-generic/doc/readme) package.
 
 ## Simple example
@@ -78,6 +86,6 @@ From this point, you can handle pretty much all your data needs.
 
 - **Async functions** are supported as well
 
-> Data files can be `.data.js` as well as `.data.json` formats. More will come like `.data.php`, etc...
+> Data files can be in `.data.js` as well as `.data.json` and `.data.php` formats.
 
 {{/layout-doc }}

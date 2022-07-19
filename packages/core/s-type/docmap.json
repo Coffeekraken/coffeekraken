@@ -6,11 +6,14 @@
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -39,17 +42,16 @@
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
-            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-monorepo",
-            "@coffeekraken/s-notification",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
@@ -87,7 +89,14 @@
             "@coffeekraken.s-type.shared.SType": {
                 "id": "@coffeekraken.s-type.shared.SType",
                 "name": "SType",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
                 "description": "This class is the main one that MUST be used as parent one\nwhen creating any type like object, string, etc...",
                 "namespace": "@coffeekraken.s-type.shared",
                 "example": [
@@ -107,9 +116,16 @@
                 "relPath": "src/shared/_SType.ts",
                 "children": {
                     "typestring": {
-                        "id": "d67f248cf38283f60f4a9e432f52a61dc0ab21f765b894735dfa685dcba5e115",
+                        "id": "sd67f248cf38283f60f4a9e432f52a61dc0ab21f765b894735dfa685dcba5e115",
                         "name": "typeString",
-                        "type": "String",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
                         "description": "This store the typeString passed in the constructor",
                         "since": "2.0.0",
                         "author": {
@@ -118,10 +134,39 @@
                             "url": "https://coffeekraken.io"
                         }
                     },
+                    "types": {
+                        "id": "s9950dcbd9554744ca749b42b098b4bc57c5b4af0f747caf4cb5d3b29a8b6ca25",
+                        "name": "types",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "array",
+                                    "of": [
+                                        "IParseTypeStringResultObj"
+                                    ]
+                                }
+                            ],
+                            "raw": "IParseTypeStringResultObj[]"
+                        },
+                        "description": "This specify the type represented by this SType instance",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
                     "registertype": {
-                        "id": "634edfab2a8878a3a58c367455cd7704a95522a3b8bf5d15522348ebfe1d9ee5",
+                        "id": "s634edfab2a8878a3a58c367455cd7704a95522a3b8bf5d15522348ebfe1d9ee5",
                         "name": "registerType",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This static method allows you to register a new rule\nby passing a valid ISDescriptorRule object",
                         "static": "true",
                         "since": "2.0.0",
@@ -131,9 +176,16 @@
                         }
                     },
                     "parsetypestring": {
-                        "id": "dc8fc7cf09fd8ed51ab96708192538f261515183c85efe28c6c1ae9f54ce1466",
+                        "id": "sdc8fc7cf09fd8ed51ab96708192538f261515183c85efe28c6c1ae9f54ce1466",
                         "name": "parseTypeString",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This static method allows you to parse a type string using the `@coffeekraken/sugar/shared/type/parseTypeString` function.",
                         "static": "true",
                         "since": "2.0.0",
@@ -143,9 +195,16 @@
                         }
                     },
                     "constructor": {
-                        "id": "ea1d71c951c0f396e0a8848fdace207bd0312608d7bc1e7a991b3072dcaceedd",
+                        "id": "sea1d71c951c0f396e0a8848fdace207bd0312608d7bc1e7a991b3072dcaceedd",
                         "name": "constructor",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -155,9 +214,16 @@
                         }
                     },
                     "is": {
-                        "id": "f6d8a2e167ad14074db1199c54bb73d50872cc4c07eabd344983e823a534089a",
+                        "id": "sf6d8a2e167ad14074db1199c54bb73d50872cc4c07eabd344983e823a534089a",
                         "name": "is",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This method make a simple check to see if the passed value correspond to the\ntype that this instance represent.\nSame as the ```check``` method, but return only a Boolean.",
                         "since": "2.0.0",
                         "author": {
@@ -166,9 +232,16 @@
                         }
                     },
                     "check": {
-                        "id": "932dbe00f513bcf402143dc51493816f380bda38584c754c5accc4e1e68a0295",
+                        "id": "s932dbe00f513bcf402143dc51493816f380bda38584c754c5accc4e1e68a0295",
                         "name": "check",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This method allows you to make sure the passed value correspond with the type(s)\nthis instance represent\nIf all is ok, return true, otherwise return an instance of the STypeResult class that\ndescribe what is wrong",
                         "since": "2.0.0",
                         "author": {
@@ -177,9 +250,16 @@
                         }
                     },
                     "cast": {
-                        "id": "f5bbfd712dc6862f2f0e2ec290a015cad9c81ca83be97ba7a1441c4f92891fdd",
+                        "id": "sf5bbfd712dc6862f2f0e2ec290a015cad9c81ca83be97ba7a1441c4f92891fdd",
                         "name": "cast",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This method allows you to cast the passed value to the wanted type.\n!!! If multiple types are passed in the typeString, the first one that\nis \"castable\" to will be used.",
                         "since": "2.0.0",
                         "author": {
@@ -188,9 +268,16 @@
                         }
                     },
                     "canhavechilds": {
-                        "id": "aa00f778998195a988217333dbf059c1651ea165a1b333e0783731c12c68376e",
+                        "id": "saa00f778998195a988217333dbf059c1651ea165a1b333e0783731c12c68376e",
                         "name": "canHaveChilds",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This method simply take a value and return true if can have child(s), false if not",
                         "since": "2.0.0",
                         "author": {
@@ -199,9 +286,16 @@
                         }
                     },
                     "name": {
-                        "id": "c066e32da76dddf544515ea69e00d7deef079c743c00caaa230950239caa269d",
+                        "id": "sc066e32da76dddf544515ea69e00d7deef079c743c00caaa230950239caa269d",
                         "name": "name",
-                        "type": "String",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
                         "description": "Access the descriptor name. Either the value of settings.name, or the constructor name",
                         "since": "2.0.0",
                         "author": {
@@ -210,9 +304,16 @@
                         }
                     },
                     "id": {
-                        "id": "07b42b89db2bb50149f88e05bd8ecd61a62b1886dc6e57beb341c91a5d97c2e0",
+                        "id": "s07b42b89db2bb50149f88e05bd8ecd61a62b1886dc6e57beb341c91a5d97c2e0",
                         "name": "id",
-                        "type": "String",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
                         "description": "Access the descriptor id. Either the value of settings.name, or the constructor name",
                         "since": "2.0.0",
                         "author": {
@@ -225,7 +326,14 @@
             "@coffeekraken.s-type.sugar.js.type.STypeResult": {
                 "id": "@coffeekraken.s-type.sugar.js.type.STypeResult",
                 "name": "STypeResult",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
                 "description": "This class represent what you will get back from the ```SType.apply``` method.\nYou will be able to generate some string terminal version of the return as well as some html\nversion if needed",
                 "namespace": "@coffeekraken.s-type.sugar.js.type",
                 "since": "2.0.0",
@@ -239,9 +347,16 @@
                 "relPath": "src/shared/STypeResult.ts",
                 "children": {
                     "typestring": {
-                        "id": "b7bbbdaeb30afbded038a2dada3249b330182838c17f5f983022d48d1bb421be",
+                        "id": "sb7bbbdaeb30afbded038a2dada3249b330182838c17f5f983022d48d1bb421be",
                         "name": "typeString",
-                        "type": "string",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "string"
+                                }
+                            ],
+                            "raw": "string"
+                        },
                         "description": "Access the type in string format",
                         "since": "2.0.0",
                         "author": {
@@ -251,9 +366,16 @@
                         }
                     },
                     "value": {
-                        "id": "70cfb8607f9205f3a6969de59b33e4e5e5cc6dad1594c53f5f702867d25d84dd",
+                        "id": "s70cfb8607f9205f3a6969de59b33e4e5e5cc6dad1594c53f5f702867d25d84dd",
                         "name": "value",
-                        "type": "string",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "string"
+                                }
+                            ],
+                            "raw": "string"
+                        },
                         "description": "Access the value passed to be type validated",
                         "since": "2.0.0",
                         "author": {
@@ -263,9 +385,16 @@
                         }
                     },
                     "received": {
-                        "id": "0698a89d9914fc4ad325d692873b3a6017c2732105dcd64721439ed5f978ac8a",
+                        "id": "s0698a89d9914fc4ad325d692873b3a6017c2732105dcd64721439ed5f978ac8a",
                         "name": "received",
-                        "type": "ISTypeResultReceived",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISTypeResultReceived"
+                                }
+                            ],
+                            "raw": "ISTypeResultReceived"
+                        },
                         "description": "Access the received descriptor object",
                         "since": "2.0.0",
                         "author": {
@@ -275,9 +404,16 @@
                         }
                     },
                     "expected": {
-                        "id": "360a5b7a28b3129cf5a8417b0f661599ef81a7969e1b91812257a71f60258662",
+                        "id": "s360a5b7a28b3129cf5a8417b0f661599ef81a7969e1b91812257a71f60258662",
                         "name": "expected",
-                        "type": "ISTypeResultExpected",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISTypeResultExpected"
+                                }
+                            ],
+                            "raw": "ISTypeResultExpected"
+                        },
                         "description": "Access the expected descriptor object",
                         "since": "2.0.0",
                         "author": {
@@ -286,10 +422,39 @@
                             "url": "https://coffeekraken.io"
                         }
                     },
+                    "issues": {
+                        "id": "s54ddb59c4bbf893580ab8d091028230b3d6b7981cdc452c9614435260337a5ef",
+                        "name": "issues",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "array",
+                                    "of": [
+                                        "ISTypeResultIssueObj"
+                                    ]
+                                }
+                            ],
+                            "raw": "ISTypeResultIssueObj[]"
+                        },
+                        "description": "Access the issues array",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
                     "settings": {
-                        "id": "c76371ec2d1483f3b94da08e135838c882240c869e5ccdae6a4517e3d3a1b16a",
+                        "id": "sc76371ec2d1483f3b94da08e135838c882240c869e5ccdae6a4517e3d3a1b16a",
                         "name": "settings",
-                        "type": "ISTypeResultSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISTypeResultSettings"
+                                }
+                            ],
+                            "raw": "ISTypeResultSettings"
+                        },
                         "description": "Access the settings object",
                         "since": "2.0.0",
                         "author": {
@@ -299,9 +464,16 @@
                         }
                     },
                     "constructor": {
-                        "id": "1a89c514940eb0896265bdcc93868bccdc3432cd05e1b3d2b4f2ac7136029e96",
+                        "id": "s1a89c514940eb0896265bdcc93868bccdc3432cd05e1b3d2b4f2ac7136029e96",
                         "name": "constructor",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -311,9 +483,16 @@
                         }
                     },
                     "hasissues": {
-                        "id": "d24b5f6924492ca0c150243641b7e8bd53636c8c2b2cea381844cc1677c76aca",
+                        "id": "sd24b5f6924492ca0c150243641b7e8bd53636c8c2b2cea381844cc1677c76aca",
                         "name": "hasIssues",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "Return true if some issues have been detected, false if not",
                         "since": "2.0.0",
                         "author": {
@@ -322,10 +501,36 @@
                             "url": "https://coffeekraken.io"
                         }
                     },
+                    "tostring": {
+                        "id": "s1dac1eaf040517c42d118199fee72753edc9612337bc994c33fa1fab4b6139ff",
+                        "name": "toString",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Functio n"
+                                }
+                            ],
+                            "raw": "Functio n"
+                        },
+                        "description": "This method return a string terminal compatible or html of this result object",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
                     "toconsole": {
-                        "id": "9754ae42efdf2c08fb9693d7ad6c3ccbf3efadf1e676306de3fe51fa7bc27f7c",
+                        "id": "s9754ae42efdf2c08fb9693d7ad6c3ccbf3efadf1e676306de3fe51fa7bc27f7c",
                         "name": "toConsole",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This method simply returns you a terminal compatible string\nof the interface checking result",
                         "since": "2.0.0",
                         "author": {
@@ -339,7 +544,14 @@
             "@coffeekraken.s-type.sugar.js.type.descriptor.arrayTypeDescriptor": {
                 "id": "@coffeekraken.s-type.sugar.js.type.descriptor.arrayTypeDescriptor",
                 "name": "arrayTypeDescriptor",
-                "type": "ISTypeDescriptor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "ISTypeDescriptor"
+                        }
+                    ],
+                    "raw": "ISTypeDescriptor"
+                },
                 "description": "Describe the type \"array\" with some utilities methods like \"is\", \"cast\", etc...",
                 "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
                 "example": [
@@ -362,7 +574,14 @@
             "@coffeekraken.s-type.sugar.js.type.descriptor.bigintTypeDescriptor": {
                 "id": "@coffeekraken.s-type.sugar.js.type.descriptor.bigintTypeDescriptor",
                 "name": "bigintTypeDescriptor",
-                "type": "ISTypeDescriptor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "ISTypeDescriptor"
+                        }
+                    ],
+                    "raw": "ISTypeDescriptor"
+                },
                 "description": "Describe the type \"bigint\" with some utilities methods like \"is\", \"cast\", etc...",
                 "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
                 "example": [
@@ -385,7 +604,14 @@
             "@coffeekraken.s-type.sugar.js.type.descriptor.booleanTypeDescriptor": {
                 "id": "@coffeekraken.s-type.sugar.js.type.descriptor.booleanTypeDescriptor",
                 "name": "booleanTypeDescriptor",
-                "type": "ISTypeDescriptor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "ISTypeDescriptor"
+                        }
+                    ],
+                    "raw": "ISTypeDescriptor"
+                },
                 "description": "Describe the type \"boolean\" with some utilities methods like \"is\", \"cast\", etc...",
                 "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
                 "example": [
@@ -408,7 +634,14 @@
             "@coffeekraken.s-type.sugar.js.type.descriptor.classTypeDescriptor": {
                 "id": "@coffeekraken.s-type.sugar.js.type.descriptor.classTypeDescriptor",
                 "name": "classTypeDescriptor",
-                "type": "ISTypeDescriptor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "ISTypeDescriptor"
+                        }
+                    ],
+                    "raw": "ISTypeDescriptor"
+                },
                 "description": "Describe the type \"class\" with some utilities methods like \"is\", \"cast\", etc...",
                 "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
                 "example": [
@@ -431,7 +664,14 @@
             "@coffeekraken.s-type.sugar.js.type.descriptor.dateTypeDescriptor": {
                 "id": "@coffeekraken.s-type.sugar.js.type.descriptor.dateTypeDescriptor",
                 "name": "dateTypeDescriptor",
-                "type": "ISTypeDescriptor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "ISTypeDescriptor"
+                        }
+                    ],
+                    "raw": "ISTypeDescriptor"
+                },
                 "description": "Describe the type \"date\" with some utilities methods like \"is\", \"cast\", etc...",
                 "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
                 "example": [
@@ -454,7 +694,14 @@
             "@coffeekraken.s-type.sugar.js.type.descriptor.functionTypeDescriptor": {
                 "id": "@coffeekraken.s-type.sugar.js.type.descriptor.functionTypeDescriptor",
                 "name": "functionTypeDescriptor",
-                "type": "ISTypeDescriptor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "ISTypeDescriptor"
+                        }
+                    ],
+                    "raw": "ISTypeDescriptor"
+                },
                 "description": "Describe the type \"function\" with some utilities methods like \"is\", \"cast\", etc...",
                 "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
                 "example": [
@@ -477,7 +724,14 @@
             "@coffeekraken.s-type.sugar.js.type.descriptor.integerTypeDescriptor": {
                 "id": "@coffeekraken.s-type.sugar.js.type.descriptor.integerTypeDescriptor",
                 "name": "integerTypeDescriptor",
-                "type": "ISTypeDescriptor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "ISTypeDescriptor"
+                        }
+                    ],
+                    "raw": "ISTypeDescriptor"
+                },
                 "description": "Describe the type \"integer\" with some utilities methods like \"is\", \"cast\", etc...",
                 "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
                 "example": [
@@ -500,7 +754,14 @@
             "@coffeekraken.s-type.sugar.js.type.descriptor.mapTypeDescriptor": {
                 "id": "@coffeekraken.s-type.sugar.js.type.descriptor.mapTypeDescriptor",
                 "name": "mapTypeDescriptor",
-                "type": "ISTypeDescriptor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "ISTypeDescriptor"
+                        }
+                    ],
+                    "raw": "ISTypeDescriptor"
+                },
                 "description": "Describe the type \"map\" with some utilities methods like \"is\", \"cast\", etc...",
                 "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
                 "example": [
@@ -523,7 +784,14 @@
             "@coffeekraken.s-type.sugar.js.type.descriptor.nullTypeDescriptor": {
                 "id": "@coffeekraken.s-type.sugar.js.type.descriptor.nullTypeDescriptor",
                 "name": "nullTypeDescriptor",
-                "type": "ISTypeDescriptor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "ISTypeDescriptor"
+                        }
+                    ],
+                    "raw": "ISTypeDescriptor"
+                },
                 "description": "Describe the type \"null\" with some utilities methods like \"is\", \"cast\", etc...",
                 "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
                 "example": [
@@ -546,7 +814,14 @@
             "@coffeekraken.s-type.sugar.js.type.descriptor.numberTypeDescriptor": {
                 "id": "@coffeekraken.s-type.sugar.js.type.descriptor.numberTypeDescriptor",
                 "name": "numberTypeDescriptor",
-                "type": "ISTypeDescriptor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "ISTypeDescriptor"
+                        }
+                    ],
+                    "raw": "ISTypeDescriptor"
+                },
                 "description": "Describe the type \"number\" with some utilities methods like \"is\", \"cast\", etc...",
                 "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
                 "example": [
@@ -569,7 +844,14 @@
             "@coffeekraken.s-type.sugar.js.type.descriptor.objectTypeDescriptor": {
                 "id": "@coffeekraken.s-type.sugar.js.type.descriptor.objectTypeDescriptor",
                 "name": "objectTypeDescriptor",
-                "type": "ISTypeDescriptor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "ISTypeDescriptor"
+                        }
+                    ],
+                    "raw": "ISTypeDescriptor"
+                },
                 "description": "Describe the type \"object\" with some utilities methods like \"is\", \"cast\", etc...",
                 "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
                 "example": [
@@ -592,7 +874,14 @@
             "@coffeekraken.s-type.sugar.js.type.descriptor.stringTypeDescriptor": {
                 "id": "@coffeekraken.s-type.sugar.js.type.descriptor.stringTypeDescriptor",
                 "name": "stringTypeDescriptor",
-                "type": "ISTypeDescriptor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "ISTypeDescriptor"
+                        }
+                    ],
+                    "raw": "ISTypeDescriptor"
+                },
                 "description": "Describe the type \"string\" with some utilities methods like \"is\", \"cast\", etc...",
                 "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
                 "example": [
@@ -615,7 +904,14 @@
             "@coffeekraken.s-type.sugar.js.type.descriptor.symbolTypeDescriptor": {
                 "id": "@coffeekraken.s-type.sugar.js.type.descriptor.symbolTypeDescriptor",
                 "name": "symbolTypeDescriptor",
-                "type": "ISTypeDescriptor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "ISTypeDescriptor"
+                        }
+                    ],
+                    "raw": "ISTypeDescriptor"
+                },
                 "description": "Describe the type \"symbol\" with some utilities methods like \"is\", \"cast\", etc...",
                 "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
                 "example": [
@@ -638,7 +934,14 @@
             "@coffeekraken.s-type.sugar.js.type.descriptor.undefinedTypeDescriptor": {
                 "id": "@coffeekraken.s-type.sugar.js.type.descriptor.undefinedTypeDescriptor",
                 "name": "undefinedTypeDescriptor",
-                "type": "ISTypeDescriptor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "ISTypeDescriptor"
+                        }
+                    ],
+                    "raw": "ISTypeDescriptor"
+                },
                 "description": "Describe the type \"undefined\" with some utilities methods like \"is\", \"cast\", etc...",
                 "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
                 "example": [
@@ -661,7 +964,14 @@
             "@coffeekraken.s-type.sugar.js.type.descriptor.weakmapTypeDescriptor": {
                 "id": "@coffeekraken.s-type.sugar.js.type.descriptor.weakmapTypeDescriptor",
                 "name": "weakmapTypeDescriptor",
-                "type": "ISTypeDescriptor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "ISTypeDescriptor"
+                        }
+                    ],
+                    "raw": "ISTypeDescriptor"
+                },
                 "description": "Describe the type \"map\" with some utilities methods like \"is\", \"cast\", etc...",
                 "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
                 "example": [
@@ -684,7 +994,14 @@
             "@coffeekraken.s-type.sugar.js.type.descriptor.weaksetTypeDescriptor": {
                 "id": "@coffeekraken.s-type.sugar.js.type.descriptor.weaksetTypeDescriptor",
                 "name": "weaksetTypeDescriptor",
-                "type": "ISTypeDescriptor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "ISTypeDescriptor"
+                        }
+                    ],
+                    "raw": "ISTypeDescriptor"
+                },
                 "description": "Describe the type \"WeakSet\" with some utilities methods like \"is\", \"cast\", etc...",
                 "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
                 "example": [

@@ -6,11 +6,14 @@
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -39,17 +42,16 @@
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
-            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-monorepo",
-            "@coffeekraken/s-notification",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-postcss-builder",
@@ -87,7 +89,14 @@
             "@coffeekraken.s-panel-component.config.themeUi.panel.borderRadius": {
                 "id": "@coffeekraken.s-panel-component.config.themeUi.panel.borderRadius",
                 "name": "borderRadius",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "[theme.ui.default.borderRadius]",
                 "description": "Specify the default border radius for panel ui",
                 "namespace": "@coffeekraken.s-panel-component.config.themeUi.panel",
@@ -104,7 +113,14 @@
             "@coffeekraken.s-panel-component.config.themeUi.panel.transition": {
                 "id": "@coffeekraken.s-panel-component.config.themeUi.panel.transition",
                 "name": "transition",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "[theme.transition.default]",
                 "description": "Specify the default transition for panel ui",
                 "namespace": "@coffeekraken.s-panel-component.config.themeUi.panel",
@@ -121,7 +137,14 @@
             "@coffeekraken.s-panel-component.config.themeUi.panel.depth": {
                 "id": "@coffeekraken.s-panel-component.config.themeUi.panel.depth",
                 "name": "depth",
-                "type": "Number",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Number"
+                        }
+                    ],
+                    "raw": "Number"
+                },
                 "default": "5",
                 "description": "Specify the default depth for your panel ui",
                 "namespace": "@coffeekraken.s-panel-component.config.themeUi.panel",
@@ -139,7 +162,14 @@
             "@coffeekraken.s-panel-component.doc.README": {
                 "id": "@coffeekraken.s-panel-component.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -169,7 +199,14 @@
                 "id": "@coffeekraken.s-panel-component.js.SPanelComponent",
                 "name": "SPanelComponent",
                 "as": "Panel (modal)",
-                "type": "CustomElement",
+                "type": {
+                    "types": [
+                        {
+                            "type": "CustomElement"
+                        }
+                    ],
+                    "raw": "CustomElement"
+                },
                 "menu": {
                     "tree": [
                         "Styleguide",
@@ -283,6 +320,88 @@
                 "filename": "SPanelComponent.ts",
                 "extension": "ts",
                 "relPath": "src/js/SPanelComponent.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-panel-component.js.interface.SPanelComponentInterface": {
+                "id": "@coffeekraken.s-panel-component.js.interface.SPanelComponentInterface",
+                "name": "SPanelComponentInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ],
+                    "raw": ".                      Class"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe parameters of the SPanelComponent",
+                "namespace": "@coffeekraken.s-panel-component.js.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SPanelComponentInterface",
+                    "description": "",
+                    "definition": {
+                        "position": {
+                            "description": "Specify the side where to display the panel. Can be \"top\",\"left\",\"bottom\" or \"right\"",
+                            "type": "String",
+                            "values": [
+                                "top",
+                                "left",
+                                "bottom",
+                                "right",
+                                "modal"
+                            ],
+                            "default": "modal",
+                            "physical": true
+                        },
+                        "active": {
+                            "description": "Specify the panel initial state",
+                            "type": "Boolean",
+                            "default": false,
+                            "physical": true
+                        },
+                        "backdrop": {
+                            "description": "Specify if you want an \"backdrop\" between the panel and your content",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "triggerer": {
+                            "description": "Specify a css selector that targets the elements in your UI you want to open the panel on click",
+                            "type": "String"
+                        },
+                        "closeOn": {
+                            "description": "Specify which \"action(s)\" close the panel. Valid values are \"click\" or/and \"escape\" or/and \"event:%eventName",
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ","
+                                ]
+                            },
+                            "values": [
+                                "click",
+                                "escape"
+                            ],
+                            "default": [
+                                "click",
+                                "escape"
+                            ]
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SPanelComponentInterface.ts",
+                "extension": "ts",
+                "relPath": "src/js/interface/SPanelComponentInterface.ts",
                 "children": {}
             }
         }

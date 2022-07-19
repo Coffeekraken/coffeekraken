@@ -2882,6 +2882,7 @@ __metadata:
     "@coffeekraken/s-process": ^2.0.0
     "@coffeekraken/s-promise": ^2.0.0
     "@coffeekraken/s-sugar-config": ^2.0.0
+    "@coffeekraken/s-typescript-builder": ^2.0.0
     "@coffeekraken/s-view-renderer": ^2.0.0
     "@coffeekraken/sugar": ^2.0.0
     body-parser: ^1.20.0

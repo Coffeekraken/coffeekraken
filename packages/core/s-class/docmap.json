@@ -6,10 +6,13 @@
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -38,17 +41,16 @@
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
-            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-monorepo",
-            "@coffeekraken/s-notification",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
@@ -87,7 +89,14 @@
             "@coffeekraken.s-class.doc.README": {
                 "id": "@coffeekraken.s-class.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -116,7 +125,14 @@
             "@coffeekraken.s-class.sugar.js.class.SClass": {
                 "id": "@coffeekraken.s-class.sugar.js.class.SClass",
                 "name": "SClass",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
                 "description": "This class is a simple and effective one that manage the ```settings``` property\nand some others features that will be documented asap",
                 "namespace": "@coffeekraken.s-class.sugar.js.class",
                 "status": "beta",
@@ -137,9 +153,16 @@
                 "relPath": "src/shared/SClass.ts",
                 "children": {
                     "metas": {
-                        "id": "0604db087884d62c853f7cd630289a8be9ade2bea2b3f7fa3f36855e4102b7a3",
+                        "id": "s0604db087884d62c853f7cd630289a8be9ade2bea2b3f7fa3f36855e4102b7a3",
                         "name": "metas",
-                        "type": "String",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
                         "description": "Access the metas in the ```settings.metas```",
                         "since": "2.0.0",
                         "author": {
@@ -149,9 +172,16 @@
                         }
                     },
                     "constructor": {
-                        "id": "c72b45495ed2e078a7ff0cb878f99dd464591d4809a83731c128a996648bf3fa",
+                        "id": "sc72b45495ed2e078a7ff0cb878f99dd464591d4809a83731c128a996648bf3fa",
                         "name": "constructor",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {

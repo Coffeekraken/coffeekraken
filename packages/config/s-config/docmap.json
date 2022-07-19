@@ -6,11 +6,14 @@
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -38,17 +41,16 @@
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
-            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-monorepo",
-            "@coffeekraken/s-notification",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
@@ -87,7 +89,14 @@
             "@coffeekraken.s-config.doc.README": {
                 "id": "@coffeekraken.s-config.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -116,7 +125,14 @@
             "@coffeekraken.s-config.s-config.shared.config": {
                 "id": "@coffeekraken.s-config.s-config.shared.config",
                 "name": "config",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
                 "description": "This class allows you to quickly access/update some configuration depending on the data adapters specified.\nThe base available data adapters are:\n- For node:\n- File system adapter: @coffeekraken/s-config/src/node/adapters/SConfigFsAdapter\n- For js:\n- Localstorage adapter: @coffeekraken/s-config/src/js/adapters/SConfigLsAdapter",
                 "namespace": "@coffeekraken.s-config.s-config.shared",
                 "status": "beta",
@@ -137,9 +153,16 @@
                 "relPath": "src/shared/SConfig.ts",
                 "children": {
                     "config": {
-                        "id": "0a25e0ca85420552d6a8cc01e1caa1c8d72f383e9af3cf246494a4754b10a9d1",
+                        "id": "s0a25e0ca85420552d6a8cc01e1caa1c8d72f383e9af3cf246494a4754b10a9d1",
                         "name": "config",
-                        "type": "Object",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
                         "description": "Store the loaded config obect",
                         "since": "2.0.0",
                         "author": {
@@ -149,9 +172,16 @@
                         }
                     },
                     "integrity": {
-                        "id": "26377c32f5f2c628777938cb6284c9ff7c4ecb2d9afadaaac10a0ff5d8822cab",
+                        "id": "s26377c32f5f2c628777938cb6284c9ff7c4ecb2d9afadaaac10a0ff5d8822cab",
                         "name": "integrity",
-                        "type": "Object",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
                         "description": "Store the config integrity",
                         "since": "2.0.0",
                         "author": {
@@ -161,9 +191,16 @@
                         }
                     },
                     "registerpostprocess": {
-                        "id": "45bce6330f90c6dbd845b5fc864c8312167023f597069667087490c8956d5db1",
+                        "id": "s45bce6330f90c6dbd845b5fc864c8312167023f597069667087490c8956d5db1",
                         "name": "registerPostprocess",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This method allows you to register a postprocess function that will be fired once the config is ready so you can make updates as needed",
                         "static": "true",
                         "since": "2.0.0",
@@ -174,9 +211,16 @@
                         }
                     },
                     "registerpreprocess": {
-                        "id": "c22897389c8b46946f3277db162f3bfd825dfe560e7e6141d1f2ebf85d180fb0",
+                        "id": "sc22897389c8b46946f3277db162f3bfd825dfe560e7e6141d1f2ebf85d180fb0",
                         "name": "registerPreprocess",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This method allows you to register a preprocess function that will be fired once the config is ready so you can make updates as needed",
                         "static": "true",
                         "since": "2.0.0",
@@ -187,9 +231,16 @@
                         }
                     },
                     "constructor": {
-                        "id": "b2c69ba197a49e1d8db57960cb20caa4e1bc89eddd667b58dd45dd693302ed81",
+                        "id": "sb2c69ba197a49e1d8db57960cb20caa4e1bc89eddd667b58dd45dd693302ed81",
                         "name": "constructor",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "Init the config instance by passing a name and a settings object to configure your instance",
                         "author": {
                             "name": "Olivier Bossel",
@@ -198,9 +249,16 @@
                         }
                     },
                     "load": {
-                        "id": "f738fac06f43d402c1f304c3772b69eeef7380e34467993199924663ddc3992f",
+                        "id": "sf738fac06f43d402c1f304c3772b69eeef7380e34467993199924663ddc3992f",
                         "name": "load",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "Load the config from the default adapter or from the passed adapter",
                         "example": [
                             {
@@ -215,9 +273,16 @@
                         }
                     },
                     "fromcache": {
-                        "id": "03372ba5234a0a345cd2257897513cd9bf5a236ee638569e06e4caef873d6409",
+                        "id": "s03372ba5234a0a345cd2257897513cd9bf5a236ee638569e06e4caef873d6409",
                         "name": "fromCache",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "Get the config from cache if possible. Otherwise it will resolve to undefined",
                         "example": [
                             {
@@ -232,9 +297,16 @@
                         }
                     },
                     "cache": {
-                        "id": "f0ae931d48b43701bc440a49e8775e611f40c069075459ac475b32c1378919de",
+                        "id": "sf0ae931d48b43701bc440a49e8775e611f40c069075459ac475b32c1378919de",
                         "name": "cache",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "Save the config in the cache to load it faster next time",
                         "example": [
                             {
@@ -249,9 +321,16 @@
                         }
                     },
                     "get": {
-                        "id": "5aa2c696fb01e65c1f78a76282dc6ce8129a7c710074e5c744c5ccb08ded34e6",
+                        "id": "s5aa2c696fb01e65c1f78a76282dc6ce8129a7c710074e5c744c5ccb08ded34e6",
                         "name": "get",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "Get a config depending on the dotted object path passed and either using the first registered adapter found, or the passed one",
                         "example": [
                             {
@@ -266,9 +345,16 @@
                         }
                     },
                     "set": {
-                        "id": "014f487b67419b774a29b8a362c3bc4c7bb97d82e3109497eac97d7b31d03ff1",
+                        "id": "s014f487b67419b774a29b8a362c3bc4c7bb97d82e3109497eac97d7b31d03ff1",
                         "name": "set",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "Set a config depending on the dotted object path passed and the value to set",
                         "example": [
                             {
@@ -283,9 +369,16 @@
                         }
                     },
                     "toobject": {
-                        "id": "5e3c3f9f095253afbb25d09c0ea7f66d3f25e07900648690273ae9fd8f7548a0",
+                        "id": "s5e3c3f9f095253afbb25d09c0ea7f66d3f25e07900648690273ae9fd8f7548a0",
                         "name": "toObject",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This method allows you to get the config in a simple object format",
                         "since": "2.0.0",
                         "author": {
@@ -295,9 +388,16 @@
                         }
                     },
                     "tojson": {
-                        "id": "03799b036127f6528075fb73f35f77402c6877ca674050dbb08a96374f1e7a4c",
+                        "id": "s03799b036127f6528075fb73f35f77402c6877ca674050dbb08a96374f1e7a4c",
                         "name": "toJson",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This method allows you to get the config in a simple json object format",
                         "since": "2.0.0",
                         "author": {
@@ -311,7 +411,14 @@
             "@coffeekraken.s-config.sugar.js.config.adapters.SConfigLsAdapter": {
                 "id": "@coffeekraken.s-config.sugar.js.config.adapters.SConfigLsAdapter",
                 "name": "SConfigLsAdapter",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
                 "description": "This Local Storage adapter for the SConfig class let you define a name for your config and then you can just\nlet the SConfig class do the work for you...",
                 "namespace": "@coffeekraken.s-config.sugar.js.config.adapters",
                 "author": {

@@ -6,11 +6,14 @@
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -38,17 +41,16 @@
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
-            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-monorepo",
-            "@coffeekraken/s-notification",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
@@ -87,7 +89,14 @@
             "@coffeekraken.s-docmap.config.docmap.read.input": {
                 "id": "@coffeekraken.s-docmap.config.docmap.read.input",
                 "name": "input",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "${__packageRoot()}/docmap.json",
                 "description": "Specify the path of the docmap.json source file to read",
                 "namespace": "@coffeekraken.s-docmap.config.docmap.read",
@@ -104,7 +113,14 @@
             "@coffeekraken.s-docmap.config.docmap.read.sort": {
                 "id": "@coffeekraken.s-docmap.config.docmap.read.sort",
                 "name": "sort",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "true",
                 "description": "Specify which of the docmap entries has to be sorted alphabetically.\nThese array values has to be a dotPath like 'menu.documentation'",
                 "namespace": "@coffeekraken.s-docmap.config.docmap.read",
@@ -121,7 +137,14 @@
             "@coffeekraken.s-docmap.config.docmap.read.sortDeep": {
                 "id": "@coffeekraken.s-docmap.config.docmap.read.sortDeep",
                 "name": "sortDeep",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "true",
                 "description": "Specify which of the docmap entries has to be sorted alphabetically and deeply.\nThese array values has to be a dotPath like 'menu.documentation'",
                 "namespace": "@coffeekraken.s-docmap.config.docmap.read",
@@ -138,7 +161,14 @@
             "@coffeekraken.s-docmap.config.docmap.snapshot.outDir": {
                 "id": "@coffeekraken.s-docmap.config.docmap.snapshot.outDir",
                 "name": "outDir",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "[config.storage.package.rootDir]/.docmap",
                 "description": "Specify where to save the generated snapshot",
                 "namespace": "@coffeekraken.s-docmap.config.docmap.snapshot",
@@ -155,7 +185,14 @@
             "@coffeekraken.s-docmap.config.docmap.installSnapshot.glob": {
                 "id": "@coffeekraken.s-docmap.config.docmap.installSnapshot.glob",
                 "name": "glob",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "[config.storage.package.rootDir]/.docmap/*",
                 "description": "Specify where to find the snapshot(s) to install. It must refer\nto folder(s) where a docmap.json and a package.json exists...",
                 "namespace": "@coffeekraken.s-docmap.config.docmap.installSnapshot",
@@ -169,10 +206,71 @@
                 "extension": "config",
                 "relPath": "src/config/docmap.config.ts"
             },
+            "@coffeekraken.s-docmap.config.docmap.build.globs": {
+                "id": "@coffeekraken.s-docmap.config.docmap.build.globs",
+                "name": "globs",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Array",
+                            "of": [
+                                "String"
+                            ]
+                        }
+                    ],
+                    "raw": "Array<String>"
+                },
+                "default": "['*',`src/!(css)/** /*.+(${__commonTextFileExtensions(false).join('|')})`,`dist/+(css)/*`]",
+                "description": "Specify the input globs to use in order to find files that will\nbe used for docmap generation.\nThe syntax is standard glob with an additional feature which is:\n- [glob]:[regex] -> This will search for files using the [glob] part, and search inside them using the [regex] part",
+                "namespace": "@coffeekraken.s-docmap.config.docmap.build",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "docmap.config.ts",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.ts"
+            },
+            "@coffeekraken.s-docmap.config.docmap.build.exclude": {
+                "id": "@coffeekraken.s-docmap.config.docmap.build.exclude",
+                "name": "exclude",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Array",
+                            "of": [
+                                "String"
+                            ]
+                        }
+                    ],
+                    "raw": "Array<String>"
+                },
+                "default": "['**\\/__tests__/**\\/*','**\\/__tests__.wip/**\\/*','**\\/__wip__/**\\/*']",
+                "description": "Specify some regex to apply on different docblock and path properties\nto exclude some files from the buildd docMap json",
+                "namespace": "@coffeekraken.s-docmap.config.docmap.build",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "docmap.config.ts",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.ts"
+            },
             "@coffeekraken.s-docmap.config.docmap.build.noExtends": {
                 "id": "@coffeekraken.s-docmap.config.docmap.build.noExtends",
                 "name": "noExtends",
-                "type": "Boolean",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Boolean"
+                        }
+                    ],
+                    "raw": "Boolean"
+                },
                 "default": "false",
                 "description": "Specify if you want to disable the extends search process that will result in the \"extends\" array in the docmap.json file",
                 "namespace": "@coffeekraken.s-docmap.config.docmap.build",
@@ -189,7 +287,14 @@
             "@coffeekraken.s-docmap.config.docmap.build.filters.namespace": {
                 "id": "@coffeekraken.s-docmap.config.docmap.build.filters.namespace",
                 "name": "namespace",
-                "type": "Regex",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Regex"
+                        }
+                    ],
+                    "raw": "Regex"
+                },
                 "default": "/^.*$/",
                 "description": "Specify some regex to apply on different docblock properties\nto exclude some files from the builded docmap json",
                 "namespace": "@coffeekraken.s-docmap.config.docmap.build.filters",
@@ -206,7 +311,14 @@
             "@coffeekraken.s-docmap.config.docmap.build.filters.type": {
                 "id": "@coffeekraken.s-docmap.config.docmap.build.filters.type",
                 "name": "type",
-                "type": "Regex",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Regex"
+                        }
+                    ],
+                    "raw": "Regex"
+                },
                 "default": "/^(?!CssClass)[a-zA-Z]+$/",
                 "description": "Specify some regex to apply on different docblock properties\nto exclude some files from the builded docmap json",
                 "namespace": "@coffeekraken.s-docmap.config.docmap.build.filters",
@@ -220,10 +332,44 @@
                 "extension": "config",
                 "relPath": "src/config/docmap.config.ts"
             },
+            "@coffeekraken.s-docmap.config.docmap.build.tags": {
+                "id": "@coffeekraken.s-docmap.config.docmap.build.tags",
+                "name": "tags",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Array",
+                            "of": [
+                                "String"
+                            ]
+                        }
+                    ],
+                    "raw": "Array<String>"
+                },
+                "default": "['id','name','type','menu','default','platform','description','namespace','status','example','interface','styleguide','static','since','author']",
+                "description": "Specify which docblock tags you want to integrate to your docmap.json items",
+                "namespace": "@coffeekraken.s-docmap.config.docmap.build",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "docmap.config.ts",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.ts"
+            },
             "@coffeekraken.s-docmap.config.docmap.build.save": {
                 "id": "@coffeekraken.s-docmap.config.docmap.build.save",
                 "name": "save",
-                "type": "Boolean",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Boolean"
+                        }
+                    ],
+                    "raw": "Boolean"
+                },
                 "default": "true",
                 "description": "Specify if you want to save the buildd docmap.json file under the ```outPath``` path",
                 "namespace": "@coffeekraken.s-docmap.config.docmap.build",
@@ -240,7 +386,14 @@
             "@coffeekraken.s-docmap.config.docmap.build.outPath": {
                 "id": "@coffeekraken.s-docmap.config.docmap.build.outPath",
                 "name": "outPath",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "[config.storage.package.rootDir]/docmap.json",
                 "description": "Specify where you want to outPath the file",
                 "namespace": "@coffeekraken.s-docmap.config.docmap.build",
@@ -258,7 +411,14 @@
             "@coffeekraken.s-docmap.doc.README": {
                 "id": "@coffeekraken.s-docmap.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -287,8 +447,15 @@
             "@coffeekraken.s-docmap.node.SDocmap": {
                 "id": "@coffeekraken.s-docmap.node.SDocmap",
                 "name": "SDocmap",
-                "type": "Class",
-                "description": "This class represent the ```docMap.json``` file and allows you to build it from some sources (glob pattern(s))\nand save it inside a directory you choose.",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "description": "This class represent the ```docmap.json``` file and allows you to build it from some sources (glob pattern(s))\nand save it inside a directory you choose.",
                 "namespace": "@coffeekraken.s-docmap.node",
                 "status": "wip",
                 "example": [
@@ -308,9 +475,16 @@
                 "relPath": "src/node/SDocMap.ts",
                 "children": {
                     "registertagproxy": {
-                        "id": "1c42cd6a705d89123d81485bebb789bf985b23306615ecabb1ef62d77cc13e9e",
+                        "id": "s1c42cd6a705d89123d81485bebb789bf985b23306615ecabb1ef62d77cc13e9e",
                         "name": "registerTagProxy",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This static method allows you to register a tag proxy for all the SDocMap instances",
                         "static": "true",
                         "since": "2.0.0",
@@ -321,9 +495,16 @@
                         }
                     },
                     "constructor": {
-                        "id": "fa166a726e2f17bad10f0fa6a932646b6f0d93a5c18c2e6571524f4a269e2402",
+                        "id": "sfa166a726e2f17bad10f0fa6a932646b6f0d93a5c18c2e6571524f4a269e2402",
                         "name": "constructor",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -333,10 +514,17 @@
                         }
                     },
                     "read": {
-                        "id": "4f1762e56d7f982145478c018f7f8ee51d9ac410c566dbd538eadd74f34a1f48",
+                        "id": "s0662162586ed682b463e6bfae3f0223d4c6056a4f282e0e9e166a1513c59a6ee",
                         "name": "read",
-                        "type": "Function",
-                        "description": "This static method allows you to search for docMap.json files and read them to get\nback the content of them in one call. It can take advantage of the cache if",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This static method allows you to search for docmap.json files and read them to get\nback the content of them in one call. It can take advantage of the cache if",
                         "async": "true",
                         "since": "2.0.0",
                         "author": {
@@ -346,9 +534,16 @@
                         }
                     },
                     "extractmenu": {
-                        "id": "3a5389265c41fef10c58b94979c8f59b9971ed124dd40308a9f07123fc039a64",
+                        "id": "s3a5389265c41fef10c58b94979c8f59b9971ed124dd40308a9f07123fc039a64",
                         "name": "extractMenu",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This method allows you to extract the docmap items that have a \"menu\" array property and\nreturn all of these in a structured object",
                         "since": "2.0.0",
                         "author": {
@@ -358,9 +553,16 @@
                         }
                     },
                     "build": {
-                        "id": "6c0ff1fcb78033819984878a4b787529f563dea33d90bf84f136202de0f878a4",
+                        "id": "s6c0ff1fcb78033819984878a4b787529f563dea33d90bf84f136202de0f878a4",
                         "name": "build",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This method allows you to specify one or more glob patterns to scan files for \"@namespace\" docblock tags\nand extract all the necessary informations to build the docmap.json file",
                         "since": "2.0.0",
                         "author": {
@@ -370,9 +572,16 @@
                         }
                     },
                     "installsnapshot": {
-                        "id": "a23933c27da64c0ecaba3ee08c5c79fd7fd755120a515da843dc3e0a69a33213",
+                        "id": "sa23933c27da64c0ecaba3ee08c5c79fd7fd755120a515da843dc3e0a69a33213",
                         "name": "installSnapshot",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This method allows you to install all the snapshots dependencies\nto make the access to these works.",
                         "async": "true",
                         "since": "2.0.0",
@@ -384,10 +593,316 @@
                     }
                 }
             },
+            "@coffeekraken.s-docmap.node.interface.SDocmapBuildParamsInterface": {
+                "id": "@coffeekraken.s-docmap.node.interface.SDocmapBuildParamsInterface",
+                "name": "SDocmapBuildParamsInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ],
+                    "raw": ".                      Class"
+                },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe the minimum requirement\nneeded to build the docMap.json file",
+                "namespace": "@coffeekraken.s-docmap.node.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SDocmapBuildParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "globs": {
+                            "type": "Array<String>",
+                            "description": "Specify some globs to use to search docblocks to use in docmap generation",
+                            "default": [
+                                "*",
+                                "src/!(css)/*{0,4}/*.+(txt|htm|html|md|json|csv|rss|xhtml|asp|c|cgi|cfm|pl|class|cpp|cs|h|java|php|py|sh|swift|vb|js|jsp|jsx|css|ts|tsx|rs|dart)",
+                                "dist/+(css)/*"
+                            ]
+                        },
+                        "exclude": {
+                            "type": "Array<String>",
+                            "description": "Specify some regexp used to exclude files from resulting docMap",
+                            "default": [
+                                "**/__tests__/**/*",
+                                "**/__tests__.wip/**/*",
+                                "**/__wip__/**/*"
+                            ],
+                            "level": 1
+                        },
+                        "tags": {
+                            "type": "Array<String>",
+                            "description": "Specify which docblock tags you want in your final docmap.json file",
+                            "alias": "f",
+                            "default": [
+                                "id",
+                                "name",
+                                "as",
+                                "type",
+                                "menu",
+                                "default",
+                                "platform",
+                                "description",
+                                "namespace",
+                                "status",
+                                "example",
+                                "interface",
+                                "async",
+                                "static",
+                                "since",
+                                "author"
+                            ]
+                        },
+                        "filters": {
+                            "type": "Object<RegExp>",
+                            "description": "Specify some properties and regex to use to filter docblocks",
+                            "default": {
+                                "namespace": {},
+                                "type": {}
+                            }
+                        },
+                        "noExtends": {
+                            "type": {
+                                "type": "Boolean",
+                                "nullishAsTrue": true
+                            },
+                            "description": "Specify if you want to avoid searching for docmap.json files in the dependency packages",
+                            "default": false
+                        },
+                        "save": {
+                            "type": "Boolean",
+                            "alias": "s",
+                            "description": "Specify if you want to save the generated file under the ```outPath``` path",
+                            "default": true
+                        },
+                        "outPath": {
+                            "type": "String",
+                            "alias": "o",
+                            "description": "Specify where you want to save the builded file. Usually saved in package root with the name docmap.json",
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/core/s-docmap/docmap.json"
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SDocmapBuildParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SDocmapBuildParamsInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-docmap.node.interface.SDocmapInstallSnapshotParamsInterface": {
+                "id": "@coffeekraken.s-docmap.node.interface.SDocmapInstallSnapshotParamsInterface",
+                "name": "SDocmapInstallSnapshotParamsInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ],
+                    "raw": ".                      Class"
+                },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe the minimum requirement\nneeded to install snapshots",
+                "namespace": "@coffeekraken.s-docmap.node.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SDocmapInstallSnapshotParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "glob": {
+                            "description": "Specify a glob pattern where to find the snapshots to install",
+                            "type": "String",
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/core/s-docmap/.docmap/*"
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SDocmapInstallSnapshotParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SDocmapInstallSnapshotParamsInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-docmap.node.interface.SDocmapReadParamsInterface": {
+                "id": "@coffeekraken.s-docmap.node.interface.SDocmapReadParamsInterface",
+                "name": "SDocmapReadParamsInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ],
+                    "raw": ".                      Class"
+                },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe the minimum requirement\nneeded to build the docMap.json file",
+                "namespace": "@coffeekraken.s-docmap.node.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SDocMapReadParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "input": {
+                            "description": "Specify the input path to the docmap.json file to read",
+                            "type": "String",
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/core/s-docmap/docmap.json",
+                            "alias": "i"
+                        },
+                        "sort": {
+                            "description": "Specify which of the docmap entries has to be sorted alphabetically.",
+                            "type": "String[]",
+                            "default": [
+                                "menu.packages"
+                            ]
+                        },
+                        "sortDeep": {
+                            "description": "Specify which of the docmap entries has to be sorted alphabetically AND deeply.",
+                            "type": "String[]",
+                            "default": [
+                                "menu.custom.styleguide"
+                            ]
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SDocmapReadParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SDocmapReadParamsInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-docmap.node.interface.SDocmapSettingsInterface": {
+                "id": "@coffeekraken.s-docmap.node.interface.SDocmapSettingsInterface",
+                "name": "SDocmapSettingsInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ],
+                    "raw": ".                      Class"
+                },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe SDocmap settings",
+                "namespace": "@coffeekraken.s-docmap.node.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SDocmapSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "customMenu": {
+                            "description": "Specify some custom menu to generate for the docmap.",
+                            "type": "Object",
+                            "default": {}
+                        },
+                        "tagsProxy": {
+                            "description": "Specify some proxy by tags. A proxy is a function that will be called with the corresponding tag data and return new data for the docmap.json file.",
+                            "type": "Object",
+                            "default": {}
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SDocmapSettingsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SDocmapSettingsInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-docmap.node.interface.SDocmapSnapshotParamsInterface": {
+                "id": "@coffeekraken.s-docmap.node.interface.SDocmapSnapshotParamsInterface",
+                "name": "SDocmapSnapshotParamsInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ],
+                    "raw": ".                      Class"
+                },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe the minimum requirement\nneeded to make a docmap snapshot",
+                "namespace": "@coffeekraken.s-docmap.node.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SDocMapSnapshotParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "outDir": {
+                            "description": "Specify the directory path where to store your snapshots",
+                            "type": "String",
+                            "path": {
+                                "absolute": true,
+                                "tokens": true
+                            },
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/core/s-docmap/.docmap"
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SDocmapSnapshotParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SDocmapSnapshotParamsInterface.ts",
+                "children": {}
+            },
             "@coffeekraken.s-docmap.node.tagsProxy.interfaceTagProxy": {
                 "id": "@coffeekraken.s-docmap.node.tagsProxy.interfaceTagProxy",
                 "name": "interfaceTagProxy",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "node",

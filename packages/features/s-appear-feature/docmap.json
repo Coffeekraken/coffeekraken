@@ -11,6 +11,8 @@
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -34,21 +36,21 @@
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
             "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
-            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-monorepo",
-            "@coffeekraken/s-notification",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
@@ -84,17 +86,24 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-floating-feature.js.SFloatingFeature": {
-                "id": "@coffeekraken.s-floating-feature.js.SFloatingFeature",
-                "name": "SFloatingFeature",
+            "@coffeekraken.s-appear-feature.js.SAppearFeature": {
+                "id": "@coffeekraken.s-appear-feature.js.SAppearFeature",
+                "name": "SAppearFeature",
                 "as": "Floating elements",
-                "type": "Feature",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Feature"
+                        }
+                    ],
+                    "raw": "Feature"
+                },
                 "menu": {
                     "tree": [
                         "Styleguide",
                         "Features"
                     ],
-                    "slug": "/styleguide/feature/s-floating-feature"
+                    "slug": "/styleguide/feature/s-appear-feature"
                 },
                 "platform": [
                     {
@@ -102,67 +111,40 @@
                         "description": ""
                     }
                 ],
-                "description": "This feature allows you to put your floating UI elements like tooltips, etc, under steroid using the\nAMAZING [Floating UI](https://floating-ui.com) package.",
-                "namespace": "@coffeekraken.s-floating-feature.js",
+                "description": "This feature allows you to make some elements appear when it enter the viewport with different\napparition animation as well as custom one depending on your needs.",
+                "namespace": "@coffeekraken.s-appear-feature.js",
                 "status": "beta",
                 "example": [
                     {
                         "language": "html",
                         "title": "Email field",
-                        "code": "<label class=\"s-label\" s-form-validate email>\n   <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"olivier.bossel@coffeekraken.io\" />\n   Email address\n</label>"
+                        "code": "<div class=\"s-ratio:16-9 s-width:50 s-bg:main-surface s-p:30\">\n  Floating element preview. Try to scroll...\n  <div class=\"s-ratio:16-9 s-bg:accent s-color:accent s-radius s-p:30\" s-appear>\n     I'm the appear element\n </div>\n</div>\n<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>\n<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>"
                     }
                 ],
                 "interface": {
-                    "name": "SFloatingFeatureInterface",
+                    "name": "SAppearFeatureInterface",
                     "description": "",
                     "definition": {
-                        "ref": {
-                            "description": "Specify the reference HTMLElement from which to position the floating one. If not specified, will take the previous element in the DOM",
-                            "type": "String"
-                        },
-                        "position": {
-                            "description": "Specify the placement of your floating element. By default it will try to be placed as good as possible.",
+                        "in": {
+                            "description": "Specify the animation you want to use to display your element",
                             "type": "String",
-                            "values": [
-                                "top",
-                                "right",
-                                "bottom",
-                                "left",
-                                "top-start",
-                                "top-end",
-                                "right-start",
-                                "right-end",
-                                "bottom-start",
-                                "bottom-end",
-                                "left-start",
-                                "left-end",
-                                "auto"
-                            ],
-                            "default": "auto"
+                            "default": "fade",
+                            "physical": true
                         },
-                        "shift": {
-                            "description": "Specify a space between the floating element and the viewport side to respect",
-                            "type": "Number",
-                            "default": 10
+                        "out": {
+                            "description": "Specify the animation you want to use to hide your item",
+                            "type": "String",
+                            "physical": true
                         },
-                        "offset": {
-                            "description": "Specify a space between the floating element and the reference one to respect",
-                            "type": "Number"
+                        "delay": {
+                            "description": "Specify a delay before animation in or out your element",
+                            "type": "number"
                         },
-                        "arrow": {
-                            "description": "Specify if you want an arrow or not",
+                        "appear": {
+                            "description": "Specify if the element has to appear. This is usually setted automatically when needed",
                             "type": "Boolean",
-                            "default": true
-                        },
-                        "arrowSize": {
-                            "description": "Specify the size of the arrow in px",
-                            "type": "Number",
-                            "default": 15
-                        },
-                        "arrowPadding": {
-                            "description": "Specify the padding of the arrow in px",
-                            "type": "Number",
-                            "default": 10
+                            "default": false,
+                            "physical": true
                         }
                     }
                 },
@@ -172,9 +154,67 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SFloatingFeature.ts",
+                "filename": "SAppearFeature.ts",
                 "extension": "ts",
-                "relPath": "src/js/SFloatingFeature.ts",
+                "relPath": "src/js/SAppearFeature.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-appear-feature.js.interface.SAppearFeatureInterface": {
+                "id": "@coffeekraken.s-appear-feature.js.interface.SAppearFeatureInterface",
+                "name": "SAppearFeatureInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ],
+                    "raw": ".                      Class"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface represent the attributes of the SAppearFeature",
+                "namespace": "@coffeekraken.s-appear-feature.js.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SAppearFeatureInterface",
+                    "description": "",
+                    "definition": {
+                        "in": {
+                            "description": "Specify the animation you want to use to display your element",
+                            "type": "String",
+                            "default": "fade",
+                            "physical": true
+                        },
+                        "out": {
+                            "description": "Specify the animation you want to use to hide your item",
+                            "type": "String",
+                            "physical": true
+                        },
+                        "delay": {
+                            "description": "Specify a delay before animation in or out your element",
+                            "type": "number"
+                        },
+                        "appear": {
+                            "description": "Specify if the element has to appear. This is usually setted automatically when needed",
+                            "type": "Boolean",
+                            "default": false,
+                            "physical": true
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SAppearFeatureInterface.ts",
+                "extension": "ts",
+                "relPath": "src/js/interface/SAppearFeatureInterface.ts",
                 "children": {}
             }
         }

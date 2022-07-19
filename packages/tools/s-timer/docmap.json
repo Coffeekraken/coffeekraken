@@ -6,11 +6,14 @@
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -39,17 +42,16 @@
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
-            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-monorepo",
-            "@coffeekraken/s-notification",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
@@ -63,6 +65,7 @@
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
@@ -87,7 +90,14 @@
             "@coffeekraken.s-timer.shared.STimer": {
                 "id": "@coffeekraken.s-timer.shared.STimer",
                 "name": "STimer",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
                 "description": "Class that let you create and handle timer with ease.\nWith this class you can set some callback function that will be\ncalled each x ms or tell that you want your callbacks to be called\na certain number of time during the timer time.\nThis class extends the SPromise one, meaning that you can subscribe to differents \"events\" emited by the timer instance. Here's the list:\n- complete: emited when the timer is completed\n- tick: emited at each ticks depending on your settings\n- duration: emited when the duration has been changed\n- tickCount: emited when the tickCount has been changed\n- reset: emited when the timer has been reseted\n- start: emited when the timer starts\n- pause: emited when the timer has been paused\n- stop: emited when the timer has been stoped\n- destroy: emited when the timer has been destroyed",
                 "namespace": "@coffeekraken.s-timer.shared",
                 "status": "beta",
@@ -108,9 +118,16 @@
                 "relPath": "src/shared/STimer.ts",
                 "children": {
                     "constructor": {
-                        "id": "ad22f5c709438ce8beb2cf4b3751a603d7b99fff55a08f5e06b3f9b978cc6f97",
+                        "id": "sad22f5c709438ce8beb2cf4b3751a603d7b99fff55a08f5e06b3f9b978cc6f97",
                         "name": "constructor",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "Constructor",
                         "example": [
                             {
@@ -125,9 +142,16 @@
                         }
                     },
                     "remaing": {
-                        "id": "0fe6f60740905b40a6afd89c507e5e84c30ca323deea5c619a34092f18b49232",
+                        "id": "s0fe6f60740905b40a6afd89c507e5e84c30ca323deea5c619a34092f18b49232",
                         "name": "remaing",
-                        "type": "Number",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ],
+                            "raw": "Number"
+                        },
                         "description": "Get the remaining time in ms",
                         "author": {
                             "name": "Olivier Bossel",
@@ -136,9 +160,16 @@
                         }
                     },
                     "duration": {
-                        "id": "b0af5f438d9664d3babbbb0792ac69bdef2535f8e55d80ce8a92582aa2691c00",
+                        "id": "sb0af5f438d9664d3babbbb0792ac69bdef2535f8e55d80ce8a92582aa2691c00",
                         "name": "duration",
-                        "type": "Number",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ],
+                            "raw": "Number"
+                        },
                         "description": "Set or get the duration. Can be a number in milliseconds, or a time string like '1m', '2s', etc...",
                         "author": {
                             "name": "Olivier Bossel",
@@ -147,9 +178,16 @@
                         }
                     },
                     "tickcount": {
-                        "id": "6e86492a6b364580f833b2a06d4884acec275fd49b59d951942c6d010b5bfa68",
+                        "id": "s6e86492a6b364580f833b2a06d4884acec275fd49b59d951942c6d010b5bfa68",
                         "name": "tickCount",
-                        "type": "Number",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ],
+                            "raw": "Number"
+                        },
                         "description": "Set of get the tickCount",
                         "author": {
                             "name": "Olivier Bossel",
@@ -158,9 +196,16 @@
                         }
                     },
                     "percentage": {
-                        "id": "b0bfb83cf76d41bc1e2a3cada1237be80e661a32718ff326ceaf0a9528dd8659",
+                        "id": "sb0bfb83cf76d41bc1e2a3cada1237be80e661a32718ff326ceaf0a9528dd8659",
                         "name": "percentage",
-                        "type": "Number",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ],
+                            "raw": "Number"
+                        },
                         "description": "Get the current timer advancement percentage",
                         "author": {
                             "name": "Olivier Bossel",
@@ -169,9 +214,16 @@
                         }
                     },
                     "reset": {
-                        "id": "284a595e129d6b2e63623cee681ee849f809c9a9c4b73ee8754b62767393b9d8",
+                        "id": "s284a595e129d6b2e63623cee681ee849f809c9a9c4b73ee8754b62767393b9d8",
                         "name": "reset",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "Reset the timer",
                         "author": {
                             "name": "Olivier Bossel",
@@ -180,9 +232,16 @@
                         }
                     },
                     "start": {
-                        "id": "9ea4c891e0716da41745cea1938aa35c9080307cb29ce68f3dab715428070e2a",
+                        "id": "s9ea4c891e0716da41745cea1938aa35c9080307cb29ce68f3dab715428070e2a",
                         "name": "start",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "Start the timer",
                         "author": {
                             "name": "Olivier Bossel",
@@ -191,9 +250,16 @@
                         }
                     },
                     "pause": {
-                        "id": "871a6e31b296341985ef4d322e2431179d233691c27ed6ff12e77ca8d8eb0935",
+                        "id": "s871a6e31b296341985ef4d322e2431179d233691c27ed6ff12e77ca8d8eb0935",
                         "name": "pause",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "Pause the timer",
                         "author": {
                             "name": "Olivier Bossel",
@@ -202,9 +268,16 @@
                         }
                     },
                     "stop": {
-                        "id": "9d21599b17b5af16d4627554d8332eedb3d80980136b325a50f60ff6ffdd3c56",
+                        "id": "s9d21599b17b5af16d4627554d8332eedb3d80980136b325a50f60ff6ffdd3c56",
                         "name": "stop",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "Stop the timer",
                         "author": {
                             "name": "Olivier Bossel",
@@ -213,9 +286,16 @@
                         }
                     },
                     "destroy": {
-                        "id": "d6fcbad8c0c65b720838fb95136385527d0e7511d1cc66a0b7116b5cf65455ba",
+                        "id": "sd6fcbad8c0c65b720838fb95136385527d0e7511d1cc66a0b7116b5cf65455ba",
                         "name": "destroy",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "Destroy the timer",
                         "author": {
                             "name": "Olivier Bossel",
@@ -224,9 +304,16 @@
                         }
                     },
                     "isstarted": {
-                        "id": "f7e3dd8e52059ade5b002faa6487370da655f73dda82429d3a2bd8c30240d631",
+                        "id": "sf7e3dd8e52059ade5b002faa6487370da655f73dda82429d3a2bd8c30240d631",
                         "name": "isStarted",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "Check if the timer is started",
                         "author": {
                             "name": "Olivier Bossel",

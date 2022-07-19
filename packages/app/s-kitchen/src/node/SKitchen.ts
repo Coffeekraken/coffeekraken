@@ -597,9 +597,13 @@ class SKitchen extends __SClass {
                             // filter shared params using each action "interface"
                             actionParams = __filter(
                                 actionParams,
-                                (key, value) =>
-                                    InterfaceClass.definition[key] !==
-                                    undefined,
+                                (key, value) => {
+                                    if (key === 'env') return true;
+                                    return (
+                                        InterfaceClass.definition[key] !==
+                                        undefined
+                                    );
+                                },
                             );
                         }
 

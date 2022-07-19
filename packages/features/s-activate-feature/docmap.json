@@ -5,11 +5,14 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -38,17 +41,16 @@
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
-            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-monorepo",
-            "@coffeekraken/s-notification",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
@@ -87,7 +89,14 @@
             "@coffeekraken.s-activate-feature.doc.README": {
                 "id": "@coffeekraken.s-activate-feature.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -117,7 +126,14 @@
                 "id": "@coffeekraken.s-activate-feature.js.SActivateFeature",
                 "name": "SActivateFeature",
                 "as": "Activate feature",
-                "type": "Feature",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Feature"
+                        }
+                    ],
+                    "raw": "Feature"
+                },
                 "menu": {
                     "tree": [
                         "Styleguide",
@@ -138,17 +154,17 @@
                     {
                         "language": "html",
                         "title": "Simple click activation",
-                        "code": "<a class=\"s-btn s-color:accent\" href=\"#my-element\" s-activate>Click me!</a>\n<div id=\"my-element\">I will be activated on click</div>\n<style>\n   #my-element.active { background: green; }\n</style>"
+                        "code": "<a class=\"s-btn s-color:accent\" href=\"#my-element\" s-activate>Click me!</a>\n<div id=\"my-element\" class=\"s-radius s-p:30\">I will be activated on click</div>\n<style>\n   #my-element.active { background: green; }\n</style>"
                     },
                     {
                         "language": "html",
                         "title": "Grouping",
-                        "code": "<a href=\"#my-grouped-element-1\" class=\"s-btn s-color:accent\" s-activate group=\"my-tabs\">Tab 1</a>\n<a href=\"#my-grouped-element-2\" class=\"s-btn s-color:accent\" s-activate group=\"my-tabs\">Tab 1</a>\n<a href=\"#my-grouped-element-3\" class=\"s-btn s-color:accent\" s-activate group=\"my-tabs\">Tab 1</a>\n<div id=\"my-grouped-element-1\">Content #1</div>\n<div id=\"my-grouped-element-2\">Content #2</div>\n<div id=\"my-grouped-element-3\">Content #3</div>\n<style>\n   [id^=\"my-grouped-element-\"].active { background: green; }\n</style>"
+                        "code": "<a href=\"#my-grouped-element-1\" class=\"s-btn s-color:accent\" s-activate active group=\"my-tabs\">Tab 1</a>\n<a href=\"#my-grouped-element-2\" class=\"s-btn s-color:accent\" s-activate group=\"my-tabs\">Tab 1</a>\n<a href=\"#my-grouped-element-3\" class=\"s-btn s-color:accent\" s-activate group=\"my-tabs\">Tab 1</a>\n<div id=\"my-grouped-element-1\" class=\"s-radius s-p:30\">Content #1</div>\n<div id=\"my-grouped-element-2\" class=\"s-radius s-p:30\">Content #2</div>\n<div id=\"my-grouped-element-3\" class=\"s-radius s-p:30\">Content #3</div>\n<style>\n   [id^=\"my-grouped-element-\"].active { background: green; }\n</style>"
                     },
                     {
                         "language": "html",
                         "title": "Toggle mode",
-                        "code": "<a class=\"s-btn s-color:accent\" href=\"#my-element-toggle\" s-activate toggle>Click me!</a>\n<div id=\"my-element-toggle\">I will be toggled on click</div>\n<style>\n   #my-element-toggle.active { background: green; }\n</style>"
+                        "code": "<a class=\"s-btn s-color:accent\" href=\"#my-element-toggle\" s-activate toggle>Click me!</a>\n<div id=\"my-element-toggle\" class=\"s-radius s-p:30\">I will be toggled on click</div>\n<style>\n   #my-element-toggle.active { background: green; }\n</style>"
                     }
                 ],
                 "interface": {
@@ -255,9 +271,16 @@
                 "relPath": "src/js/SActivateFeature.ts",
                 "children": {
                     "isactive": {
-                        "id": "5996f2f954ff83c2e00976caa9e0a65091b196af233d9b57d11eb941faa377f0",
+                        "id": "s5996f2f954ff83c2e00976caa9e0a65091b196af233d9b57d11eb941faa377f0",
                         "name": "isActive",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This method allows you to know if this particular s-activate node is active or not",
                         "since": "2.0.0",
                         "author": {
@@ -266,9 +289,16 @@
                         }
                     },
                     "activate": {
-                        "id": "4d2bcb37a9f506b581ac2f5d6f96f79b3be4c3c149de825d758ff75c57bfcbe1",
+                        "id": "s4d2bcb37a9f506b581ac2f5d6f96f79b3be4c3c149de825d758ff75c57bfcbe1",
                         "name": "activate",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This async method allows you to activate this particular s-activate node",
                         "async": "true",
                         "since": "2.0.0",
@@ -278,9 +308,16 @@
                         }
                     },
                     "unactivate": {
-                        "id": "2f5cc4c7a725cd122d0eaa04042183b813df33521c81afd84a5c3ac7086127c8",
+                        "id": "s2f5cc4c7a725cd122d0eaa04042183b813df33521c81afd84a5c3ac7086127c8",
                         "name": "unactivate",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This async method allows you to unactivate this particular s-activate node",
                         "async": "true",
                         "since": "2.0.0",
@@ -290,6 +327,130 @@
                         }
                     }
                 }
+            },
+            "@coffeekraken.s-activate-feature.js.interface.SActivateFeatureInterface": {
+                "id": "@coffeekraken.s-activate-feature.js.interface.SActivateFeatureInterface",
+                "name": "SActivateFeatureInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ],
+                    "raw": ".                      Class"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface represent the attributes of the SActivateFeature",
+                "namespace": "@coffeekraken.s-activate-feature.js.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SActivateFeatureInterface",
+                    "description": "",
+                    "definition": {
+                        "href": {
+                            "description": "Specify the target element(s) to activate/unactivate",
+                            "type": "String",
+                            "default": ""
+                        },
+                        "group": {
+                            "description": "Specify a group id for your element. This is used for things like tabs, etc...",
+                            "type": "String"
+                        },
+                        "toggle": {
+                            "description": "Specify if you want to be able to click on the same element to activate/unactivate it.",
+                            "type": {
+                                "type": "Boolean",
+                                "nullishAsTrue": true
+                            },
+                            "default": false
+                        },
+                        "history": {
+                            "description": "Specify if you want to store and react to history hash changes",
+                            "type": {
+                                "type": "Boolean",
+                                "nullishAsTrue": true
+                            },
+                            "default": false
+                        },
+                        "active": {
+                            "description": "Specify the initial state of your element",
+                            "type": {
+                                "type": "Boolean",
+                                "nullishAsTrue": true
+                            },
+                            "default": false,
+                            "physical": true
+                        },
+                        "activeClass": {
+                            "description": "Specify the class applied on target(s) when active. Default is \"active\"",
+                            "type": "String",
+                            "default": "active"
+                        },
+                        "activeAttribute": {
+                            "description": "Specify the attribute name applied on target(s) when active.",
+                            "type": "String",
+                            "default": "active"
+                        },
+                        "saveState": {
+                            "description": "Specify if you want to save state in localStorage to restore it on page reload, etc...",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "activateTimeout": {
+                            "description": "Specify a timeout before actiavting the target(s)",
+                            "type": "Number",
+                            "default": 0
+                        },
+                        "unactivateTimeout": {
+                            "description": "Specify a timeout before unactivate the target(s)",
+                            "type": "Number",
+                            "default": 0
+                        },
+                        "triggerer": {
+                            "description": "Specify an element selector that will be used as the triggerer instead of this current element",
+                            "type": "String"
+                        },
+                        "trigger": {
+                            "description": "Specify what trigger an activate/unactivate action. Can be \"click\", \"mouseover\", \"mouseout\" and/or \"anchor\"",
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ","
+                                ]
+                            },
+                            "values": [
+                                "click",
+                                "mouseover",
+                                "mouseenter",
+                                "mouseout",
+                                "mouseleave",
+                                "anchor"
+                            ],
+                            "default": [
+                                "click"
+                            ]
+                        },
+                        "unactivateOn": {
+                            "description": "Specify some event(s) catched on the body tag that will unactivate the target(s)",
+                            "type": "Array<String>"
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SActivateFeatureInterface.ts",
+                "extension": "ts",
+                "relPath": "src/js/interface/SActivateFeatureInterface.ts",
+                "children": {}
             }
         }
     }

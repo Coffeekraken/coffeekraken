@@ -6,11 +6,14 @@
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -39,16 +42,15 @@
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
-            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-monorepo",
-            "@coffeekraken/s-notification",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
@@ -62,6 +64,7 @@
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
@@ -87,7 +90,14 @@
             "@coffeekraken.s-handlebars.node.registerHelpers": {
                 "id": "@coffeekraken.s-handlebars.node.registerHelpers",
                 "name": "registerHelpers",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -120,7 +130,14 @@
             "@coffeekraken.s-handlebars.node.helpers.configFileNameFromDocmapPath": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.configFileNameFromDocmapPath",
                 "name": "configFileNameFromDocmapPath",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -147,7 +164,14 @@
             "@coffeekraken.s-handlebars.node.helpers.configFiles": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.configFiles",
                 "name": "configFiles",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -174,7 +198,14 @@
             "@coffeekraken.s-handlebars.node.helpers.configFromDocmap": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.configFromDocmap",
                 "name": "configFromDocmap",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -201,7 +232,14 @@
             "@coffeekraken.s-handlebars.node.helpers.configValue": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.configValue",
                 "name": "configValue",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -228,7 +266,14 @@
             "@coffeekraken.s-handlebars.node.helpers.get": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.get",
                 "name": "get",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -255,7 +300,14 @@
             "@coffeekraken.s-handlebars.node.helpers.ifEqual": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.ifEqual",
                 "name": "ifEqual",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -289,7 +341,14 @@
             "@coffeekraken.s-handlebars.node.helpers.ifMatch": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.ifMatch",
                 "name": "ifMatch",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -323,7 +382,14 @@
             "@coffeekraken.s-handlebars.node.helpers.import": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.import",
                 "name": "import",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -350,7 +416,14 @@
             "@coffeekraken.s-handlebars.node.helpers.includes": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.includes",
                 "name": "includes",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -377,7 +450,14 @@
             "@coffeekraken.s-handlebars.node.helpers.islicense": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.islicense",
                 "name": "islicense",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -404,7 +484,14 @@
             "@coffeekraken.s-handlebars.node.helpers.join": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.join",
                 "name": "join",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -431,7 +518,14 @@
             "@coffeekraken.s-handlebars.node.helpers.jsonStringify": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.jsonStringify",
                 "name": "jsonStringify",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -458,7 +552,14 @@
             "@coffeekraken.s-handlebars.node.helpers.length": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.length",
                 "name": "length",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -485,7 +586,14 @@
             "@coffeekraken.s-handlebars.node.helpers.replace": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.replace",
                 "name": "replace",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -512,7 +620,14 @@
             "@coffeekraken.s-handlebars.node.helpers.rootRelative": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.rootRelative",
                 "name": "rootRelative",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -539,7 +654,14 @@
             "@coffeekraken.s-handlebars.node.helpers.sfile": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.sfile",
                 "name": "sfile",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -566,7 +688,14 @@
             "@coffeekraken.s-handlebars.node.helpers.ShieldsioHandlebarsHelper": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.ShieldsioHandlebarsHelper",
                 "name": "ShieldsioHandlebarsHelper",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -589,7 +718,14 @@
             "@coffeekraken.s-handlebars.node.helpers.sort": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.sort",
                 "name": "sort",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -616,7 +752,14 @@
             "@coffeekraken.s-handlebars.node.helpers.toString": {
                 "id": "@coffeekraken.s-handlebars.node.helpers.toString",
                 "name": "toString",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",

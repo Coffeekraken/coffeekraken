@@ -748,7 +748,7 @@ export default function (env, config) {
                  * @name            interface
                  * @namespace       config.kitchen.actions.postcssBuild
                  * @type            String
-                 * @default        @coffeekraken/s-postcss-builder/node/interface/SPostcssBuilderBuilderBuildParamsInterface
+                 * @default        @coffeekraken/s-postcss-builder/node/interface/SPostcssBuilderBuildParamsInterface
                  *
                  * Specify the postcssBuild build action interface
                  *
@@ -756,7 +756,7 @@ export default function (env, config) {
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 interface:
-                    '@coffeekraken/s-postcss-builder/node/interface/SPostcssBuilderBuilderBuildParamsInterface',
+                    '@coffeekraken/s-postcss-builder/node/interface/SPostcssBuilderBuildParamsInterface',
                 params: {},
                 settings: {
                     processManager: {},
@@ -862,7 +862,7 @@ export default function (env, config) {
                  * @name            interface
                  * @namespace       config.kitchen.actions.imagesBuild
                  * @type            String
-                 * @default        @coffeekraken/s-images-builder/node/interface/SImagesBuilderBuilderBuildParamsInterface
+                 * @default        @coffeekraken/s-images-builder/node/interface/SImagesBuilderBuildParamsInterface
                  *
                  * Specify the imagesBuild build action interface
                  *
@@ -870,7 +870,7 @@ export default function (env, config) {
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 interface:
-                    '@coffeekraken/s-images-builder/node/interface/SImagesBuilderBuilderBuildParamsInterface',
+                    '@coffeekraken/s-images-builder/node/interface/SImagesBuilderBuildParamsInterface',
                 params: {},
                 settings: {
                     processManager: {},

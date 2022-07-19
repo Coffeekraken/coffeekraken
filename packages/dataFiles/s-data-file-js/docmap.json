@@ -6,11 +6,14 @@
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -38,17 +41,16 @@
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
-            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-monorepo",
-            "@coffeekraken/s-notification",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
@@ -87,7 +89,14 @@
             "@coffeekraken.s-data-file-js.doc.README": {
                 "id": "@coffeekraken.s-data-file-js.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -116,7 +125,14 @@
             "@coffeekraken.s-data-file-js.node.SDataFileJs": {
                 "id": "@coffeekraken.s-data-file-js.node.SDataFileJs",
                 "name": "SDataFileJs",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
                 "description": "This class represent the js/json data file loader",
                 "namespace": "@coffeekraken.s-data-file-js.node",
                 "status": "beta",
@@ -130,10 +146,41 @@
                 "extension": "ts",
                 "relPath": "src/node/SDataFileJs.ts",
                 "children": {
+                    "extensions": {
+                        "id": "sbdfe9313edc0797dd45e7d80a7a9e8c32d839bf8743f5a37a394be779c82441c",
+                        "name": "extensions",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "array",
+                                    "of": [
+                                        "String"
+                                    ]
+                                }
+                            ],
+                            "raw": "String[]"
+                        },
+                        "default": "['js', 'json']",
+                        "description": "This static property allow you to define the extensions that the data file loader",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
                     "load": {
-                        "id": "9cdf58ce73f21adfd98936b3dbd2dff0350881dd7e3001ecf11fcdc18af63fac",
+                        "id": "s9cdf58ce73f21adfd98936b3dbd2dff0350881dd7e3001ecf11fcdc18af63fac",
                         "name": "load",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This static method allows you to actually load a data file",
                         "static": "true",
                         "since": "2.0.0",

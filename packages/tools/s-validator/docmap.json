@@ -6,11 +6,14 @@
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -39,17 +42,16 @@
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
-            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-monorepo",
-            "@coffeekraken/s-notification",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
@@ -63,6 +65,7 @@
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
@@ -87,7 +90,14 @@
             "@coffeekraken.s-validator.doc.README": {
                 "id": "@coffeekraken.s-validator.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -116,7 +126,14 @@
             "@coffeekraken.s-validator.shared.SValidation": {
                 "id": "@coffeekraken.s-validator.shared.SValidation",
                 "name": "SValidation",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
                 "description": "This class allows you to validate a lot of data with a lot of validators like \"email\", \"url\", \"min\", \"max\", etc...",
                 "namespace": "@coffeekraken.s-validator.shared",
                 "status": "beta",
@@ -136,23 +153,44 @@
                 "relPath": "src/shared/SValidator.ts",
                 "children": {
                     "registervalidator": {
-                        "id": "97de59a21a2c9612cc10611bca92c07d908db20c55e7253d2e506d4b65154d5d",
+                        "id": "s97de59a21a2c9612cc10611bca92c07d908db20c55e7253d2e506d4b65154d5d",
                         "name": "registerValidator",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This static method allows you to register a new validator",
                         "static": "true"
                     },
                     "registerpreset": {
-                        "id": "6e92834fd4acb059458e2f772cea883c9381ec7b7fb5aa994b402b9a4828fbdd",
+                        "id": "s6e92834fd4acb059458e2f772cea883c9381ec7b7fb5aa994b402b9a4828fbdd",
                         "name": "registerPreset",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This static method allows you to register a new validator",
                         "static": "true"
                     },
                     "getvalidatorsdefinition": {
-                        "id": "3a575d15a73fb7431366df8bde3e086d76c5711084d07b692e4a501b32b2c62f",
+                        "id": "s3a575d15a73fb7431366df8bde3e086d76c5711084d07b692e4a501b32b2c62f",
                         "name": "getValidatorsDefinition",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "Get back an definition of the validators in the SValidator class",
                         "static": "true",
                         "since": "2.0.0",
@@ -162,9 +200,16 @@
                         }
                     },
                     "constructor": {
-                        "id": "3db3c09a20b0a6df60b2528243493d91df69e75da9f5ee18c392ed0280061acb",
+                        "id": "s3db3c09a20b0a6df60b2528243493d91df69e75da9f5ee18c392ed0280061acb",
                         "name": "constructor",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -173,9 +218,16 @@
                         }
                     },
                     "validate": {
-                        "id": "a0f8d00b8a4d202ea6634b65c53c7f8e2bb8c0562686e808e673595b417d9672",
+                        "id": "sa0f8d00b8a4d202ea6634b65c53c7f8e2bb8c0562686e808e673595b417d9672",
                         "name": "validate",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This method allows you to validate any data using a lot of validators like \"email\", \"url\", \"min\", \"max\", etc...\nThe passed rules have to be an object with one or multiple properties representing the validations you want to make on your passed value.",
                         "example": [
                             {
@@ -195,7 +247,14 @@
             "@coffeekraken.s-validator.shared.i18n.en": {
                 "id": "@coffeekraken.s-validator.shared.i18n.en",
                 "name": "en",
-                "type": "Object",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Object"
+                        }
+                    ],
+                    "raw": "Object"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -220,10 +279,90 @@
                 "relPath": "src/shared/i18n/en.ts",
                 "children": {}
             },
+            "@coffeekraken.s-validator.shared.interface.SValidatorSettingsInterface": {
+                "id": "@coffeekraken.s-validator.shared.interface.SValidatorSettingsInterface",
+                "name": "SValidatorSettingsInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ],
+                    "raw": ".                      Class"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe all the SValidator class settings",
+                "namespace": "@coffeekraken.s-validator.shared.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SValidatorSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "i18n": {
+                            "description": "Specify the i18n translation object. See the README for more informations.",
+                            "type": "Object",
+                            "default": {}
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SValidatorSettingsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/shared/interface/SValidatorSettingsInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-validator.shared.interface.SValidatorValidatorsInterface": {
+                "id": "@coffeekraken.s-validator.shared.interface.SValidatorValidatorsInterface",
+                "name": "SValidatorValidatorsInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ],
+                    "raw": ".                      Class"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe all the available validators of the SValidator class",
+                "namespace": "@coffeekraken.s-validator.shared.interface",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SValidatorValidatorsInterface.js",
+                "extension": "js",
+                "relPath": "src/shared/interface/SValidatorValidatorsInterface.js",
+                "children": {}
+            },
             "@coffeekraken.s-validator.shared.validators.alphanum": {
                 "id": "@coffeekraken.s-validator.shared.validators.alphanum",
                 "name": "alphanum",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -257,7 +396,14 @@
             "@coffeekraken.s-validator.shared.validators.color": {
                 "id": "@coffeekraken.s-validator.shared.validators.color",
                 "name": "color",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -291,7 +437,14 @@
             "@coffeekraken.s-validator.shared.validators.creditCard": {
                 "id": "@coffeekraken.s-validator.shared.validators.creditCard",
                 "name": "creditCard",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -325,7 +478,14 @@
             "@coffeekraken.s-validator.shared.validators.email": {
                 "id": "@coffeekraken.s-validator.shared.validators.email",
                 "name": "email",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -359,7 +519,14 @@
             "@coffeekraken.s-validator.shared.validators.hex": {
                 "id": "@coffeekraken.s-validator.shared.validators.hex",
                 "name": "hex",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -393,7 +560,14 @@
             "@coffeekraken.s-validator.shared.validators.integer": {
                 "id": "@coffeekraken.s-validator.shared.validators.integer",
                 "name": "integer",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -427,7 +601,14 @@
             "@coffeekraken.s-validator.shared.validators.isoDate": {
                 "id": "@coffeekraken.s-validator.shared.validators.isoDate",
                 "name": "isoDate",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -461,7 +642,14 @@
             "@coffeekraken.s-validator.shared.validators.isoDateTime": {
                 "id": "@coffeekraken.s-validator.shared.validators.isoDateTime",
                 "name": "isoDateTime",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -495,7 +683,14 @@
             "@coffeekraken.s-validator.shared.validators.isoTime": {
                 "id": "@coffeekraken.s-validator.shared.validators.isoTime",
                 "name": "isoTime",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -529,7 +724,14 @@
             "@coffeekraken.s-validator.shared.validators.max": {
                 "id": "@coffeekraken.s-validator.shared.validators.max",
                 "name": "max",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -563,7 +765,14 @@
             "@coffeekraken.s-validator.shared.validators.min": {
                 "id": "@coffeekraken.s-validator.shared.validators.min",
                 "name": "min",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -597,7 +806,14 @@
             "@coffeekraken.s-validator.shared.validators.negative": {
                 "id": "@coffeekraken.s-validator.shared.validators.negative",
                 "name": "negative",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -631,7 +847,14 @@
             "@coffeekraken.s-validator.shared.validators.number": {
                 "id": "@coffeekraken.s-validator.shared.validators.number",
                 "name": "number",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -662,10 +885,58 @@
                 "relPath": "src/shared/validators/number.ts",
                 "children": {}
             },
+            "@coffeekraken.s-validator.shared.validators.password": {
+                "id": "@coffeekraken.s-validator.shared.validators.password",
+                "name": "password",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Validate using the \"password\" rule.",
+                "namespace": "@coffeekraken.s-validator.shared.validators",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __passwordValidator from '@coffeekraken/s-validator/validators/password\n__passwordValidator('wfoj90ji8jfj', 10);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "password.ts",
+                "extension": "ts",
+                "relPath": "src/shared/validators/password.ts",
+                "children": {}
+            },
             "@coffeekraken.s-validator.shared.validators.pattern": {
                 "id": "@coffeekraken.s-validator.shared.validators.pattern",
                 "name": "pattern",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -699,7 +970,14 @@
             "@coffeekraken.s-validator.shared.validators.positive": {
                 "id": "@coffeekraken.s-validator.shared.validators.positive",
                 "name": "positive",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -733,7 +1011,14 @@
             "@coffeekraken.s-validator.shared.validators.required": {
                 "id": "@coffeekraken.s-validator.shared.validators.required",
                 "name": "required",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",

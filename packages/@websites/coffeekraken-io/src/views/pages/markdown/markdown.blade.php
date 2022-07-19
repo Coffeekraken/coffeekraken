@@ -33,7 +33,7 @@
 
                                 <li id="{{ \Sugar\string\idCompliant($package->name) }}" s-activate
                                     trigger="click,event:actual" href="#{{ \Sugar\string\idCompliant($package->name) }}"
-                                    toggle save-state mount-when="direct" trigger="click,event:actual">
+                                    toggle save-state trigger="click,event:actual">
                                     <div>
                                         <i class="s-icon:folder-opened s-tc:complementary s-when:grandparent:active"></i>
                                         <i class="s-icon:folder"></i>

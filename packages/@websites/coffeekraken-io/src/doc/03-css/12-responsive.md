@@ -81,7 +81,7 @@ Consider having a some buttons with different colors like so:
 ```css
 /**
  * Wrap our classes inside the sugar media classes mixin
- * to generate these classes ALSO for medias like tablet, mobile, etc...
+ * to generate these classes for medias like tablet, mobile, etc...
  */
 @sugar.media.classes {
   .btn {

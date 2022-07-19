@@ -6,6 +6,7 @@
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
@@ -39,16 +40,15 @@
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
-            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-monorepo",
-            "@coffeekraken/s-notification",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
@@ -87,7 +87,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.glob": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.glob",
                 "name": "glob",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "** /+(README|LICENSE|*.md)",
                 "description": "Specify a glob pattern relative to your \"inDir\" config",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default",
@@ -104,7 +111,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.inDir": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.inDir",
                 "name": "inDir",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "[config.storage.src.rootDir]",
                 "description": "Specify the input directory where to search for files to build using the \"glob\" config",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default",
@@ -121,7 +135,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.inPath": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.inPath",
                 "name": "inPath",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "null",
                 "description": "Specify a file path to process.",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default",
@@ -138,7 +159,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.inRaw": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.inRaw",
                 "name": "inRaw",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "null",
                 "description": "Specify some markdown to build in string format.",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default",
@@ -155,7 +183,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.outDir": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.outDir",
                 "name": "outDir",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "[config.storage.dist.rootDir]",
                 "description": "Specify the output directory where to save the processed files.",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default",
@@ -172,7 +207,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.outPath": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.outPath",
                 "name": "outPath",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "null",
                 "description": "Specify an output file path when using the \"inPath\" config",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default",
@@ -189,7 +231,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.save": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.save",
                 "name": "save",
-                "type": "Boolean",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Boolean"
+                        }
+                    ],
+                    "raw": "Boolean"
+                },
                 "default": "true",
                 "description": "Specify if you want to save the processed files out or not",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default",
@@ -206,7 +255,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.target": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.target",
                 "name": "target",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "markdown",
                 "description": "Specify the output target you want. Can be \"markdown\" or \"html\"",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default",
@@ -220,10 +276,44 @@
                 "extension": "config",
                 "relPath": "src/config/markdownBuilder.config.ts"
             },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.protectedTags.default": {
+                "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.protectedTags.default",
+                "name": "protectedTags.default",
+                "type": {
+                    "types": [
+                        {
+                            "type": "array",
+                            "of": [
+                                "String"
+                            ]
+                        }
+                    ],
+                    "raw": "String[]"
+                },
+                "default": "['template','code']",
+                "description": "Specify some tags that should be protected from the markdown transformations like \"template\" or \"code\"...",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "markdownBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.ts"
+            },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.og.match": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.og.match",
                 "name": "match",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "/^<!-- og:(.*) -->$/gm",
                 "description": "Specify the regex to match \"code\" string",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.og",
@@ -240,7 +330,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.og.preprocessor": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.og.preprocessor",
                 "name": "preprocessor",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "description": "Specify a path to a file that export a function which will be used to preprocess data passed to the view.",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.og",
                 "since": "2.0.0",
@@ -256,7 +353,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.og.markdown": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.og.markdown",
                 "name": "markdown",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/transformers/og/og.md')",
                 "description": "Specify the \"markdown\" template to transform this match",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.og",
@@ -273,7 +377,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.code.match": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.code.match",
                 "name": "match",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "/^```([a-zA-Z0-9]+)\\n([\\s\\S]*?)```$/gm",
                 "description": "Specify the regex to match \"code\" string",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.code",
@@ -290,7 +401,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.code.markdown": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.code.markdown",
                 "name": "markdown",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/transformers/code/code.md')",
                 "description": "Specify the \"markdown\" template to transform this match",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.code",
@@ -307,7 +425,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license.markdown": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license.markdown",
                 "name": "markdown",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/license/license.md')",
                 "description": "Specify the \"markdown\" template for this \"license\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license",
@@ -324,7 +449,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-mit.markdown": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-mit.markdown",
                 "name": "markdown",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/licenseMit/licenseMit.md')",
                 "description": "Specify the \"markdown\" template for this \"license-mit\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-mit",
@@ -341,7 +473,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-mit.html": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-mit.html",
                 "name": "html",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/licenseMit/licenseMit.md')",
                 "description": "Specify the \"html\" template for this \"license-mit\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-mit",
@@ -358,7 +497,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-gpl.markdown": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-gpl.markdown",
                 "name": "markdown",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/licenseGpl/licenseGpl.md')",
                 "description": "Specify the \"markdown\" template for this \"license-gpl\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-gpl",
@@ -375,7 +521,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-gpl.html": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-gpl.html",
                 "name": "html",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/licenseGpl/licenseGpl.md')",
                 "description": "Specify the \"html\" template for this \"license-gpl\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-gpl",
@@ -392,7 +545,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-lgpl.markdown": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-lgpl.markdown",
                 "name": "markdown",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/licenseLgpl/licenseLgpl.md')",
                 "description": "Specify the \"markdown\" template for this \"license-lgpl\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-lgpl",
@@ -409,7 +569,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-lgpl.html": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-lgpl.html",
                 "name": "html",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/licenseLgpl/licenseLgpl.md')",
                 "description": "Specify the \"html\" template for this \"license-lgpl\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-lgpl",
@@ -426,7 +593,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-epl-20.markdown": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-epl-20.markdown",
                 "name": "markdown",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/licenseEpl20/licenseEpl20.md')",
                 "description": "Specify the \"markdown\" template for this \"license-epl-20\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-epl-20",
@@ -443,7 +617,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-epl-20.html": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-epl-20.html",
                 "name": "html",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/licenseEpl20/licenseEpl20.md')",
                 "description": "Specify the \"html\" template for this \"license-epl-20\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-epl-20",
@@ -460,7 +641,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-mpl-20.markdown": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-mpl-20.markdown",
                 "name": "markdown",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/licenseMpl20/licenseMpl20.md')",
                 "description": "Specify the \"markdown\" template for this \"license-mpl-20\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-mpl-20",
@@ -477,7 +665,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-mpl-20.html": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-mpl-20.html",
                 "name": "html",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/licenseMpl20/licenseMpl20.md')",
                 "description": "Specify the \"html\" template for this \"license-mpl-20\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-mpl-20",
@@ -494,7 +689,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-cddl-10.markdown": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-cddl-10.markdown",
                 "name": "markdown",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/licenseCddl10/licenseCddl10.md')",
                 "description": "Specify the \"markdown\" template for this \"license-cddl-10\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-cddl-10",
@@ -511,7 +713,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-cddl-10.html": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-cddl-10.html",
                 "name": "html",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/licenseCddl10/licenseCddl10.md')",
                 "description": "Specify the \"html\" template for this \"license-cddl-10\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-cddl-10",
@@ -528,7 +737,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-apache-20.markdown": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-apache-20.markdown",
                 "name": "markdown",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/licenseApache20/licenseApache20.md')",
                 "description": "Specify the \"markdown\" template for this \"license-apache-20\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-apache-20",
@@ -545,7 +761,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-apache-20.html": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-apache-20.html",
                 "name": "html",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/licenseApache20/licenseApache20.md')",
                 "description": "Specify the \"html\" template for this \"license-apache-20\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-apache-20",
@@ -562,7 +785,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-bsd-2-clause.markdown": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-bsd-2-clause.markdown",
                 "name": "markdown",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/licenseBsd2Clause/licenseBsd2Clause.md')",
                 "description": "Specify the \"markdown\" template for this \"license-bsd-2-clause\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-bsd-2-clause",
@@ -579,7 +809,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-bsd-2-clause.html": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-bsd-2-clause.html",
                 "name": "html",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/licenseBsd2Clause/licenseBsd2Clause.md')",
                 "description": "Specify the \"html\" template for this \"license-bsd-2-clause\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-bsd-2-clause",
@@ -596,7 +833,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-bsd-3-clause.markdown": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-bsd-3-clause.markdown",
                 "name": "markdown",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/licenseBsd3Clause/licenseBsd3Clause.md')",
                 "description": "Specify the \"markdown\" template for this \"license-bsd-3-clause\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-bsd-3-clause",
@@ -613,7 +857,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-bsd-3-clause.html": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-bsd-3-clause.html",
                 "name": "html",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/licenseBsd3Clause/licenseBsd3Clause.md')",
                 "description": "Specify the \"html\" template for this \"license-bsd-3-clause\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-bsd-3-clause",
@@ -630,7 +881,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.shields.markdown": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.shields.markdown",
                 "name": "markdown",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/shields/shields.md')",
                 "description": "Specify the \"markdown\" template for this \"shields\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.shields",
@@ -647,7 +905,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.shields.html": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.shields.html",
                 "name": "html",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/shields/shields.md')",
                 "description": "Specify the \"html\" template for this \"shields\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.shields",
@@ -664,7 +929,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.shields.data": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.shields.data",
                 "name": "data",
-                "type": "Object",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Object"
+                        }
+                    ],
+                    "raw": "Object"
+                },
                 "default": "[config.shieldsio]",
                 "description": "Specify specify the datas to use to display the correct shields",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.shields",
@@ -681,7 +953,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.interface.markdown": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.interface.markdown",
                 "name": "markdown",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/interface/interface.md')",
                 "description": "Specify the \"markdown\" template for the \"interface\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.interface",
@@ -698,7 +977,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.interface.html": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.interface.html",
                 "name": "html",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/interface/interface.html')",
                 "description": "Specify the \"html\" template for the \"interface\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.interface",
@@ -715,7 +1001,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.configFiles.markdown": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.configFiles.markdown",
                 "name": "markdown",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/configFiles/configFiles.md')",
                 "description": "Specify the \"markdown\" template for the \"configFiles\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.configFiles",
@@ -732,7 +1025,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.configFiles.html": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.configFiles.html",
                 "name": "html",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/configFiles/configFiles.md')",
                 "description": "Specify the \"html\" template for the \"configFiles\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.configFiles",
@@ -749,7 +1049,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.config.markdown": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.config.markdown",
                 "name": "markdown",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/config/config.md')",
                 "description": "Specify the \"markdown\" template for the \"config\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.config",
@@ -766,7 +1073,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.config.html": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.config.html",
                 "name": "html",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/config/config.md')",
                 "description": "Specify the \"html\" template for the \"config\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.config",
@@ -783,7 +1097,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.recipesList.markdown": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.recipesList.markdown",
                 "name": "markdown",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/recipesList/recipesList.md')",
                 "description": "Specify the \"markdown\" template for the \"recipesList\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.recipesList",
@@ -800,7 +1121,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.recipesList.html": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.recipesList.html",
                 "name": "html",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/recipesList/recipesList.md')",
                 "description": "Specify the \"html\" template for the \"recipesList\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.recipesList",
@@ -817,7 +1145,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.recipe.markdown": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.recipe.markdown",
                 "name": "markdown",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/recipe/recipe.md')",
                 "description": "Specify the \"markdown\" template for the \"recipe\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.recipe",
@@ -834,7 +1169,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.recipe.html": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.recipe.html",
                 "name": "html",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/recipe/recipe.md')",
                 "description": "Specify the \"html\" template for the \"recipe\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.recipe",
@@ -851,7 +1193,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.docMenu.markdown": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.docMenu.markdown",
                 "name": "markdown",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/docMenu/docMenu.md')",
                 "description": "Specify the \"markdown\" template for the \"docMenu\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.docMenu",
@@ -868,7 +1217,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.docMenu.html": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.docMenu.html",
                 "name": "html",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/partials/docMenu/docMenu.md')",
                 "description": "Specify the \"html\" template for the \"docMenu\" partial",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.docMenu",
@@ -885,7 +1241,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.doc.markdown": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.doc.markdown",
                 "name": "markdown",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/layouts/doc/docLayout.md')",
                 "description": "Specify the \"markdown\" template for the \"doc\" layout",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.doc",
@@ -902,7 +1265,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.doc.html": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.doc.html",
                 "name": "html",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/layouts/doc/docLayout.md')",
                 "description": "Specify the \"html\" template for the \"doc\" layout",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.doc",
@@ -919,7 +1289,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.readme.data": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.readme.data",
                 "name": "data",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "[config.doc.layout]",
                 "description": "Specify the data to use for the \"doc\" layout",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.readme",
@@ -936,7 +1313,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.readme.markdown": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.readme.markdown",
                 "name": "markdown",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/layouts/readme/readmeLayout.md')",
                 "description": "Specify the \"markdown\" template for the \"readme\" layout",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.readme",
@@ -953,7 +1337,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.readme.html": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.readme.html",
                 "name": "html",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/layouts/readme/readmeLayout.md')",
                 "description": "Specify the \"html\" template for the \"readme\" layout",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.readme",
@@ -970,7 +1361,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.license.markdown": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.license.markdown",
                 "name": "markdown",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/layouts/license/licenseLayout.md')",
                 "description": "Specify the \"markdown\" template for the \"license\" layout",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.license",
@@ -987,7 +1385,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.license.html": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.license.html",
                 "name": "html",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/layouts/license/licenseLayout.md')",
                 "description": "Specify the \"html\" template for the \"license\" layout",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.license",
@@ -1004,7 +1409,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.readme-header.markdown": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.readme-header.markdown",
                 "name": "markdown",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/sections/readmeHeader/readmeHeaderSection.md')",
                 "description": "Specify the \"markdown\" template for the \"readme-header\" section",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.readme-header",
@@ -1021,7 +1433,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.readme-header.html": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.readme-header.html",
                 "name": "html",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/sections/readmeHeader/readmeHeaderSection.md')",
                 "description": "Specify the \"html\" template for the \"readme-header\" section",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.readme-header",
@@ -1038,7 +1457,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.doc-header.markdown": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.doc-header.markdown",
                 "name": "markdown",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/sections/docHeader/docHeaderSection.md')",
                 "description": "Specify the \"markdown\" template for the \"doc-header\" section",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.doc-header",
@@ -1055,7 +1481,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.doc-header.html": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.doc-header.html",
                 "name": "html",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/sections/docHeader/docHeaderSection.md')",
                 "description": "Specify the \"html\" template for the \"doc-header\" section",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.doc-header",
@@ -1072,7 +1505,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.doc-menu.markdown": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.doc-menu.markdown",
                 "name": "markdown",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/sections/docMenu/docMenuSection.md')",
                 "description": "Specify the \"markdown\" template for the \"doc-menu\" section",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.doc-menu",
@@ -1089,7 +1529,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.doc-menu.html": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.doc-menu.html",
                 "name": "html",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/sections/docMenu/docMenuSection.md')",
                 "description": "Specify the \"html\" template for the \"doc-menu\" section",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.doc-menu",
@@ -1106,7 +1553,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.description.markdown": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.description.markdown",
                 "name": "markdown",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/sections/description/descriptionSection.md')",
                 "description": "Specify the \"markdown\" template for the \"description\" section",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.description",
@@ -1123,7 +1577,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.description.html": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.description.html",
                 "name": "html",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/sections/description/descriptionSection.md')",
                 "description": "Specify the \"html\" template for the \"description\" section",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.description",
@@ -1140,7 +1601,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.install.markdown": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.install.markdown",
                 "name": "markdown",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/sections/install/installSection.md')",
                 "description": "Specify the \"markdown\" template for the \"install\" section",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.install",
@@ -1157,7 +1625,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.install.html": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.install.html",
                 "name": "html",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/sections/install/installSection.md')",
                 "description": "Specify the \"html\" template for the \"install\" section",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.install",
@@ -1174,7 +1649,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.license.markdown": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.license.markdown",
                 "name": "markdown",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/sections/license/licenseSection.md')",
                 "description": "Specify the \"markdown\" template for the \"license\" section",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.license",
@@ -1191,7 +1673,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.license.html": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.license.html",
                 "name": "html",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/sections/license/licenseSection.md')",
                 "description": "Specify the \"html\" template for the \"license\" section",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.license",
@@ -1208,7 +1697,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.contact.markdown": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.contact.markdown",
                 "name": "markdown",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/sections/contact/contactSection.md')",
                 "description": "Specify the \"markdown\" template for the \"contact\" section",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.contact",
@@ -1225,7 +1721,14 @@
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.contact.html": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.contact.html",
                 "name": "html",
-                "type": "String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
                 "default": "__path.resolve(packageRoot,'src/sections/contact/contactSection.md')",
                 "description": "Specify the \"html\" template for the \"contact\" section",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.contact",
@@ -1242,7 +1745,14 @@
                     "markdown": {
                         "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.license.markdown",
                         "name": "markdown",
-                        "type": "String",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
                         "default": "[config.license.layout]",
                         "description": "Specify the data to use for the \"license\" layout",
                         "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.license",
@@ -1256,7 +1766,14 @@
                     "data": {
                         "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.readme.data",
                         "name": "data",
-                        "type": "String",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
                         "default": "[config.readme.layout]",
                         "description": "Specify the data to use for the \"readme\" layout",
                         "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.readme",
@@ -1272,7 +1789,14 @@
             "@coffeekraken.s-markdown-builder.doc.README": {
                 "id": "@coffeekraken.s-markdown-builder.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -1301,7 +1825,14 @@
             "@coffeekraken.s-markdown-builder.node.SMarkdownBuilder": {
                 "id": "@coffeekraken.s-markdown-builder.node.SMarkdownBuilder",
                 "name": "SMarkdownBuilder",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -1328,9 +1859,16 @@
                 "relPath": "src/node/SMarkdownBuilder.ts",
                 "children": {
                     "registerhelper": {
-                        "id": "58fa7b79502700f4ad20de9e2bd0ab447cc7f5b3968119a9a8632e77cdc4c368",
+                        "id": "s58fa7b79502700f4ad20de9e2bd0ab447cc7f5b3968119a9a8632e77cdc4c368",
                         "name": "registerHelper",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This static method allows you to register a new token function that returns an ISMarkdownBuilderToken object\nused to transform your passed markdown",
                         "static": "true",
                         "since": "2.0.0",
@@ -1341,9 +1879,16 @@
                         }
                     },
                     "registerlayout": {
-                        "id": "3ed096d441b3eefa698a71c6855c5d070096747b30248981ca5ecb88d82c845c",
+                        "id": "s3ed096d441b3eefa698a71c6855c5d070096747b30248981ca5ecb88d82c845c",
                         "name": "registerLayout",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This static method allows you to register a new token function that returns an ISMarkdownBuilderToken object\nused to transform your passed markdown",
                         "static": "true",
                         "since": "2.0.0",
@@ -1354,9 +1899,16 @@
                         }
                     },
                     "registerpartial": {
-                        "id": "5b085c312471f86be30db5c5e272b30a01ad82c2a83532196d56bf6afff9b260",
+                        "id": "s5b085c312471f86be30db5c5e272b30a01ad82c2a83532196d56bf6afff9b260",
                         "name": "registerPartial",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This static method allows you to register a new token function that returns an ISMarkdownBuilderToken object\nused to transform your passed markdown",
                         "static": "true",
                         "since": "2.0.0",
@@ -1367,9 +1919,16 @@
                         }
                     },
                     "registersection": {
-                        "id": "0f6e7eda24a3dfc3920fa907827c7fed3bf91857504532b88963a39aa8d39755",
+                        "id": "s0f6e7eda24a3dfc3920fa907827c7fed3bf91857504532b88963a39aa8d39755",
                         "name": "registerSection",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This static method allows you to register a new section",
                         "static": "true",
                         "since": "2.0.0",
@@ -1380,9 +1939,16 @@
                         }
                     },
                     "constructor": {
-                        "id": "25157e6a4133a99a095f14428f2e6cfbeaf0016f59b7d54942bf3c86ee65eec1",
+                        "id": "s25157e6a4133a99a095f14428f2e6cfbeaf0016f59b7d54942bf3c86ee65eec1",
                         "name": "constructor",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -1392,9 +1958,16 @@
                         }
                     },
                     "build": {
-                        "id": "03e4e4a678bff3fb5b2cf33d72629d36d8a7df39cadf8494dc492aa2f39dd71c",
+                        "id": "s03e4e4a678bff3fb5b2cf33d72629d36d8a7df39cadf8494dc492aa2f39dd71c",
                         "name": "build",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This method is the internal builder _build one.\nIt will be called by the SBuilder class with the final params\nfor the build",
                         "async": "true",
                         "since": "2.0.0",
@@ -1405,6 +1978,115 @@
                         }
                     }
                 }
+            },
+            "@coffeekraken.s-markdown-builder.node.interface.SMarkdownBuilderBuildParamsInterface": {
+                "id": "@coffeekraken.s-markdown-builder.node.interface.SMarkdownBuilderBuildParamsInterface",
+                "name": "SMarkdownBuilderBuildParamsInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ],
+                    "raw": ".                      Class"
+                },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe parameters of the SMarkdownBuilder.build method",
+                "namespace": "@coffeekraken.s-markdown-builder.node.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SMarkdownBuilderBuildParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "glob": {
+                            "description": "Specify a glob pattern to target all the markdown files you want to build. This is relative the the \"inDir\" parameter",
+                            "type": "String",
+                            "required": true,
+                            "alias": "g",
+                            "default": "**/+(README|LICENSE|*.md)"
+                        },
+                        "inDir": {
+                            "description": "Specify the input directory where your source files are standing",
+                            "type": "String",
+                            "required": true,
+                            "alias": "d",
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-markdown-builder/src"
+                        },
+                        "inPath": {
+                            "description": "Specify a direct path to a markdown file to build",
+                            "type": "String",
+                            "alias": "p",
+                            "default": null
+                        },
+                        "inRaw": {
+                            "description": "Specify a raw markkdown string to build",
+                            "type": "String",
+                            "alias": "r",
+                            "default": null
+                        },
+                        "outDir": {
+                            "description": "Specify the directory where you want to save your builded files",
+                            "type": "String",
+                            "alias": "o",
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-markdown-builder/dist"
+                        },
+                        "outPath": {
+                            "description": "Specify a path to the output file when you make use of the \"inPath\" parameter",
+                            "type": "String",
+                            "default": null
+                        },
+                        "data": {
+                            "description": "Pass some data to be used in the view",
+                            "tyoe": "Object",
+                            "default": {}
+                        },
+                        "save": {
+                            "description": "Specify if you want to save the builded files or not",
+                            "type": "Boolean",
+                            "alias": "s",
+                            "default": true
+                        },
+                        "target": {
+                            "description": "Specify the target format of the build. Supported values are \"html\" and \"markdown\"",
+                            "type": "String",
+                            "values": [
+                                "html",
+                                "markdown"
+                            ],
+                            "alias": "t",
+                            "default": "markdown"
+                        },
+                        "preset": {
+                            "description": "Specify some preset(s) to use for your build. Presets are defined in the config.markdownBuilder.presets configuration path",
+                            "type": "Array<String>",
+                            "values": [],
+                            "alias": "p"
+                        },
+                        "protectedTags": {
+                            "description": "Specify some tags that should be protected from the markdown transformations like \"template\" or \"code\"...",
+                            "type": "Array<String>",
+                            "default": [
+                                "template",
+                                "code"
+                            ]
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SMarkdownBuilderBuildParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SMarkdownBuilderBuildParamsInterface.ts",
+                "children": {}
             }
         }
     }

@@ -170,14 +170,12 @@ export default class SFeature extends __SClass implements ISFeature {
             },
         );
 
-        (async () => {
+        // @ts-ignore
+        this.componentUtils.waitAndExecute(
+            this.props.mountWhen,
             // @ts-ignore
-            this.componentUtils.waitAndExecute(
-                this.props.mountWhen,
-                // @ts-ignore
-                this.mount?.bind(this),
-            );
-        })();
+            this.mount?.bind(this),
+        );
     }
 
     /**

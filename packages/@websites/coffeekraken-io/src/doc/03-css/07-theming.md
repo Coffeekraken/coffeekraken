@@ -24,13 +24,11 @@ Theming in Coffeekraken is a central part to help you decline your websites into
 
 Some theme(s) are available out of the box. These themes (parts) are useful to avoid starting from scratch but you can of course override everything you want during your development process.
 
-- `theme.config.ts`: Main theme file where all the available themes are listed as well as which theme is active.
-- `themeBase.config.ts`: Main configuration file that can be used as a base for your theme to avoid rewriting everything.
-- `themeLightBase.config.ts`: Extends `themeBase.config.ts` configuration and define some base settings for light themes.
-- `themeDarkBase.config.ts`: Extends `themeBase.config.ts` configuration and define some base settings for light themes.
-- `themeDefault.config.ts`: Define the `default` theme
-- `themeDefaultLight.config.ts`: Extends the `themeLightBase.config.ts` configuration and define some settings fot the default light theme.
-- `themeDefaultDark.config.ts`: Extends the `themeDarkBase.config.ts` configuration and define some settings fot the default dark theme.
+-   `theme.config.ts`: Main theme file where all the available themes are listed as well as which theme is active.
+-   `themeBase.config.ts`: Main configuration file that can be used as a base for your theme to avoid rewriting everything.
+-   `themeDefault.config.ts`: Define the `default` theme
+-   `themeDefaultLight.config.ts`: Extends the `themeBase.config.ts` configuration and define some settings fot the default light theme.
+-   `themeDefaultDark.config.ts`: Extends the `themeBase.config.ts` configuration and define some settings fot the default dark theme.
 
 ## Main entry point
 
@@ -40,18 +38,59 @@ The main one is the `theme.config.ts` file that looks something like this:
 
 ```js
 export default function (env, config) {
-  return {
-    // Specify the theme name to use by default
-    theme: "default",
-    // Specify the theme variant to use by default
-    variant: "light",
-  };
+    return {
+        // Specify the theme name to use by default
+        theme: 'default',
+        // Specify the theme variant to use by default
+        variant: 'light',
+    };
 }
 ```
 
 This configuration assume that the theme `default` exists and has a `light` variant defined.
 
 > Note that this `default` theme is the one used out of the box.
+
+## Make your own
+
+The simpliest way to theme your app/website, etc, is to update the `default-(light|dark)` theme by overriding configurations like so:
+
+#### Updating the colors
+
+Create a file call `.sugar/themeColor.config.ts` and update the colors like so:
+
+```js
+export default (env, config) => {
+    return {
+        // supported syntax: hex/hexa/hsl/hsla
+        base: '...',
+        main: '...',
+        accent: '...',
+        complementary: '...',
+        success: '...',
+        info: '...',
+        warning: '...',
+        error: '...',
+    };
+};
+```
+
+#### Updating the color schemas
+
+Create a file called `.sugar/themeColorSchema(Light|Dark).config.ts` and update the schemas like so:
+
+```js
+export default (env, config) => {
+    return {
+        text: {
+            darken: 20,
+        },
+        surface: {
+            lighten: 40,
+        },
+    };
+};
+```
 
 ## Defining a new theme
 
@@ -83,23 +122,6 @@ export default function (env, config) {
 }
 ```
 
-## Overriding some settings
-
-Let's admit that you use the `default` theme with the `light` variant and you want to update the `main` color. Here's how to do it:
-
-1. Create a file `.sugar/themeDefaultLight.config.ts`
-2. Fill you new file like so:
-
-```js
-export default (env, config) => {
-  return {
-    color: {
-      main: {
-        color: "hsl(156,50,50)",
-      },
-    },
-  };
-};
-```
+> Note that the theming system is based on the [@coffeekraken/s-sugar-config](/package/@coffeekraken/s-sugar-config/doc/readme) package used across the entire echosystem...
 
 {{/layout-doc }}

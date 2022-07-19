@@ -73,8 +73,6 @@ export default class SFloatingFeature extends __SFeature {
         if (this.props.offset === undefined && this.props.arrow) {
             this.props.offset = this.props.arrowSize;
         }
-
-        console.log(this.node, this.props);
         __makeFloat(this.node, this._$ref, this.props);
     }
 }

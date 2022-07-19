@@ -79,8 +79,6 @@ export default class SDashboard extends __SClass {
         // @ts-ignore
         document.dashboard = this;
 
-        console.log(this.settings);
-
         // create the iframe
         this._$iframe = document.createElement('iframe');
         this._$iframe.classList.add(`s-dashboard-iframe`);

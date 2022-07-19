@@ -6,11 +6,14 @@
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -38,17 +41,16 @@
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
-            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-monorepo",
-            "@coffeekraken/s-notification",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
@@ -62,6 +64,7 @@
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
@@ -87,7 +90,14 @@
             "@coffeekraken.s-conductor.doc.README": {
                 "id": "@coffeekraken.s-conductor.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -116,7 +126,14 @@
             "@coffeekraken.s-conductor.s-duration.SConductor": {
                 "id": "@coffeekraken.s-conductor.s-duration.SConductor",
                 "name": "SConductor",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
                 "description": "This class represent the conductor for your UI. With it you can register some \"task\" to execute\nat a specific time. The \"times\" available are these ones:\n\n- direct: Execute directly the task\n- directly: Execute directly the task\n- inViewport: Execute when the element enter the viewport\n- nearViewport: Execute when the element is near the viewport\n- outOfViewport: Execute when the element is out of the viewport\n- domReady: Execute when the DOM is ready\n- visible: Execute when the element became visible\n- stylesheetsReady: Execute when the stylesheets are ready\n- interact: Execute when the user interact with the element. See the [whenInteract API documentation](/api/@coffeekraken.sugar.js.dom.detect.whenInteract).\n- idle: Execute when no other task is running",
                 "namespace": "@coffeekraken.s-conductor.s-duration",
                 "status": "beta",
@@ -136,9 +153,16 @@
                 "relPath": "src/js/SConductor.ts",
                 "children": {
                     "defaultinstance": {
-                        "id": "d4753324c04ebfc11accfcb933686eb53450005586f36e55df25a4a8980c0b2d",
+                        "id": "sd4753324c04ebfc11accfcb933686eb53450005586f36e55df25a4a8980c0b2d",
                         "name": "defaultInstance",
-                        "type": "SConductor",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "SConductor"
+                                }
+                            ],
+                            "raw": "SConductor"
+                        },
                         "description": "Access the default instance of the SConductor class",
                         "static": "true",
                         "since": "2.0.0",
@@ -148,9 +172,16 @@
                         }
                     },
                     "when": {
-                        "id": "ae51a70ccb6af68ef4cf5d3ceb17f336c722b2c6176ad284b634319447b36950",
+                        "id": "sae51a70ccb6af68ef4cf5d3ceb17f336c722b2c6176ad284b634319447b36950",
                         "name": "when",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This method allows you to register a task to execute at a specific time in the \"default\" conductor instance.",
                         "since": "2.0.0",
                         "author": {
@@ -159,9 +190,16 @@
                         }
                     },
                     "setup": {
-                        "id": "00cbff23860494ccb84bee1e23571dec3b5067ed43d8f307bf1c4a8b6e9d968a",
+                        "id": "s00cbff23860494ccb84bee1e23571dec3b5067ed43d8f307bf1c4a8b6e9d968a",
                         "name": "setup",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This static method allows you to setup the \"default\" SConductor instance created when you use the static methods like \"when\", etc...",
                         "static": "true",
                         "since": "2.0.0",
@@ -171,9 +209,16 @@
                         }
                     },
                     "constructor": {
-                        "id": "2ec1eb0b75c3d998c2688ffbf03f92d0487e9a5bd2cd5e533b16e00b2266f575",
+                        "id": "s2ec1eb0b75c3d998c2688ffbf03f92d0487e9a5bd2cd5e533b16e00b2266f575",
                         "name": "constructor",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -182,6 +227,58 @@
                         }
                     }
                 }
+            },
+            "@coffeekraken.s-conductor.js.interface.SConductorSettingsInterface": {
+                "id": "@coffeekraken.s-conductor.js.interface.SConductorSettingsInterface",
+                "name": "SConductorSettingsInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ],
+                    "raw": ".                      Class"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface represent the SConductor settings.",
+                "namespace": "@coffeekraken.s-conductor.js.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SConductorSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "idleTimeout": {
+                            "description": "Specify after how many milliseconds of inactity the SConductor has to be considered as idle ",
+                            "type": "Number",
+                            "default": 500
+                        },
+                        "logTimeout": {
+                            "description": "Specify after how many milliseconds of inactity the SConductor has to log the small analysis",
+                            "type": "Number",
+                            "default": 2000
+                        },
+                        "log": {
+                            "description": "Specify if you want to log the small analysis when the SConductor is idle",
+                            "type": "Boolean",
+                            "default": false
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SConductorSettingsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/js/interface/SConductorSettingsInterface.ts",
+                "children": {}
             }
         }
     }

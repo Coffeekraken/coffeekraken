@@ -5,11 +5,14 @@
         "extends": [
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -38,17 +41,16 @@
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
-            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-monorepo",
-            "@coffeekraken/s-notification",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
@@ -87,7 +89,14 @@
             "@coffeekraken.cli.cli.sugar.cli": {
                 "id": "@coffeekraken.cli.cli.sugar.cli",
                 "name": "sugar.cli",
-                "type": "File",
+                "type": {
+                    "types": [
+                        {
+                            "type": "File"
+                        }
+                    ],
+                    "raw": "File"
+                },
                 "description": "This is the main sugar cli file that split the commands\nby calling the proper files with the parsed cli args",
                 "namespace": "@coffeekraken.cli.cli",
                 "author": {
@@ -100,9 +109,16 @@
                 "relPath": "src/cli/_save.txt",
                 "children": {
                     "command": {
-                        "id": "5b149a76592aad0818663b90731d0b9d7fd984a4048f0c587969069028644cbc",
+                        "id": "s5b149a76592aad0818663b90731d0b9d7fd984a4048f0c587969069028644cbc",
                         "name": "command",
-                        "type": "String",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
                         "description": "Get the correct sugar or sugard commant depending on the environment in which the cli is running",
                         "static": "true",
                         "since": "2.0.0",
@@ -112,9 +128,16 @@
                         }
                     },
                     "replacetokens": {
-                        "id": "4b45b4d201007578dd946447866057773083f8dbc88207dd3b38bf98b35dec75",
+                        "id": "s4b45b4d201007578dd946447866057773083f8dbc88207dd3b38bf98b35dec75",
                         "name": "replaceTokens",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "Replace tokens in a passed command like:\n- %sugar: Replaced by either \"sugar\" or \"sugard\" depending on the environment\n- Support all the tokens supported by the \"replaceTokens\" function of the sugar package",
                         "static": "true",
                         "since": "2.0.0",
@@ -124,9 +147,16 @@
                         }
                     },
                     "replacesugarcommandfordev": {
-                        "id": "5b1a5c1d1361f7cdfffd959a0db8d642e8b8cd8e0ee6694a3ed26b3da9f7e65a",
+                        "id": "s5b1a5c1d1361f7cdfffd959a0db8d642e8b8cd8e0ee6694a3ed26b3da9f7e65a",
                         "name": "replaceSugarCommandForDev",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "Replace the starting \"sugar\" by \"sugard\" in the command line when needed",
                         "static": "true",
                         "since": "2.0.0",
@@ -136,9 +166,16 @@
                         }
                     },
                     "constructor": {
-                        "id": "5d9a55a8985e7967210a2c844fa002e4aa3eb1d74dca4689797842fd7e6e230d",
+                        "id": "s5d9a55a8985e7967210a2c844fa002e4aa3eb1d74dca4689797842fd7e6e230d",
                         "name": "constructor",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -151,7 +188,14 @@
             "@coffeekraken.cli.doc.README": {
                 "id": "@coffeekraken.cli.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -175,6 +219,205 @@
                 "filename": "README.md",
                 "extension": "md",
                 "relPath": "src/doc/README.md",
+                "children": {}
+            },
+            "@coffeekraken.cli.cli.interface.SSugarCliParamsInterface": {
+                "id": "@coffeekraken.cli.cli.interface.SSugarCliParamsInterface",
+                "name": "SSugarCliParamsInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ],
+                    "raw": ".                      Class"
+                },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe parameters of the SSugarCli class",
+                "namespace": "@coffeekraken.cli.cli.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SSugarCliParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "bench": {
+                            "type": {
+                                "type": "Array<String>|Boolean",
+                                "splitChars": [
+                                    ","
+                                ]
+                            },
+                            "default": false,
+                            "explicit": true
+                        },
+                        "logPreset": {
+                            "type": "String",
+                            "values": [
+                                "silent",
+                                "default",
+                                "warn",
+                                "error",
+                                "verbose",
+                                "verboser"
+                            ],
+                            "default": "default",
+                            "explicit": true
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SSugarCliParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/cli/interface/SSugarCliParamsInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.cli.cli.process.interface.SSugarCliProcessKillParamsInterface": {
+                "id": "@coffeekraken.cli.cli.process.interface.SSugarCliProcessKillParamsInterface",
+                "name": "SSugarCliProcessKillParamsInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ],
+                    "raw": ".                      Class"
+                },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe parameters of the `sugar process.kill` command",
+                "namespace": "@coffeekraken.cli.cli.process.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SSugarCliProcessKillParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "id": {
+                            "description": "Specify the process id you want to kill",
+                            "type": "Number",
+                            "alias": "i"
+                        },
+                        "port": {
+                            "description": "Specify the port on which the process you want to kill is binded",
+                            "type": "Number",
+                            "alias": "p"
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SSugarCliProcessKillParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/cli/process/interface/SSugarCliProcessKillParamsInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.cli.node.add.interface.SCliAddManifestJsonParamsInterface": {
+                "id": "@coffeekraken.cli.node.add.interface.SCliAddManifestJsonParamsInterface",
+                "name": "SCliAddManifestJsonParamsInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ],
+                    "raw": ".                      Class"
+                },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface specify the parameters needed to the `sugar add.manifestJson` command.",
+                "namespace": "@coffeekraken.cli.node.add.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SCliAddManifestJsonParamsInterface",
+                    "description": "",
+                    "definition": {}
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SCliAddManifestJsonParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/add/interface/SCliAddManifestJsonParamsInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.cli.node.fs.interface.SCliFsCopyParamsInterface": {
+                "id": "@coffeekraken.cli.node.fs.interface.SCliFsCopyParamsInterface",
+                "name": "SCliFsCopyParamsInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ],
+                    "raw": ".                      Class"
+                },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface specify the parameters needed to the `sugar fs.copy` command.",
+                "namespace": "@coffeekraken.cli.node.fs.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SCliFsCopyParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "src": {
+                            "description": "Specify the file/folder to copy",
+                            "type": "String",
+                            "required": true
+                        },
+                        "glob": {
+                            "description": "Specify a glob pattern to search for files inside the specified src\"",
+                            "type": "String"
+                        },
+                        "dest": {
+                            "description": "Specify the destination file/folder",
+                            "type": "String",
+                            "required": true
+                        },
+                        "chdir": {
+                            "description": "Specify if you want the process to change directory inside the destination one or not",
+                            "type": "Boolean",
+                            "default": false
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SCliFsCopyParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/fs/interface/SCliFsCopyParamsInterface.ts",
                 "children": {}
             }
         }

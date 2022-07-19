@@ -6,11 +6,14 @@
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -38,17 +41,16 @@
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
-            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-monorepo",
-            "@coffeekraken/s-notification",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
@@ -62,6 +64,7 @@
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
@@ -87,7 +90,14 @@
             "@coffeekraken.s-frontend-checker.js.SFrontendCheckeer": {
                 "id": "@coffeekraken.s-frontend-checker.js.SFrontendCheckeer",
                 "name": "SFrontendCheckeer",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -114,9 +124,16 @@
                 "relPath": "src/js/SFrontendChecker.ts",
                 "children": {
                     "level_low": {
-                        "id": "5ebac42d7d0eb05aa3f7a57b2c539c090de0344c06d10c14205d4f899f5b7e9e",
+                        "id": "s5ebac42d7d0eb05aa3f7a57b2c539c090de0344c06d10c14205d4f899f5b7e9e",
                         "name": "LEVEL_LOW",
-                        "type": "Number",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ],
+                            "raw": "Number"
+                        },
                         "description": "Store the \"low\" level id",
                         "static": "true",
                         "since": "2.0.0",
@@ -127,9 +144,16 @@
                         }
                     },
                     "level_medium": {
-                        "id": "4f9d49229ea30d64d1959e3a5159d966cdbf9b088ea6042bc2edb2d0eeebdcb1",
+                        "id": "s4f9d49229ea30d64d1959e3a5159d966cdbf9b088ea6042bc2edb2d0eeebdcb1",
                         "name": "LEVEL_MEDIUM",
-                        "type": "Number",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ],
+                            "raw": "Number"
+                        },
                         "description": "Store the \"medium\" level id",
                         "static": "true",
                         "since": "2.0.0",
@@ -140,9 +164,16 @@
                         }
                     },
                     "level_high": {
-                        "id": "761de26a2bc3ad8bf117159db733b68e9fb644041c332311cce65f3c05f588ef",
+                        "id": "s761de26a2bc3ad8bf117159db733b68e9fb644041c332311cce65f3c05f588ef",
                         "name": "LEVEL_HIGH",
-                        "type": "Number",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ],
+                            "raw": "Number"
+                        },
                         "description": "Store the \"high\" level id",
                         "static": "true",
                         "since": "2.0.0",
@@ -153,9 +184,16 @@
                         }
                     },
                     "status_success": {
-                        "id": "88ca5b7d217e4b9b92a49dbc5d152c6070cac44b618116b3b068e1dd86b57ee8",
+                        "id": "s88ca5b7d217e4b9b92a49dbc5d152c6070cac44b618116b3b068e1dd86b57ee8",
                         "name": "STATUS_SUCCESS",
-                        "type": "Number",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ],
+                            "raw": "Number"
+                        },
                         "description": "Store the \"success\" status",
                         "static": "true",
                         "since": "2.0.0",
@@ -166,9 +204,16 @@
                         }
                     },
                     "status_warning": {
-                        "id": "2b95fd5230e3e91077fa9e2a903f3f050bde47fd4efb1fad78053037cb16e562",
+                        "id": "s2b95fd5230e3e91077fa9e2a903f3f050bde47fd4efb1fad78053037cb16e562",
                         "name": "STATUS_WARNING",
-                        "type": "Number",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ],
+                            "raw": "Number"
+                        },
                         "description": "Store the \"warning\" status",
                         "static": "true",
                         "since": "2.0.0",
@@ -179,9 +224,16 @@
                         }
                     },
                     "status_error": {
-                        "id": "64c735c38133f9013ea021d872b65bfbe7bb5745b051574f2b11f9d84e08b56e",
+                        "id": "s64c735c38133f9013ea021d872b65bfbe7bb5745b051574f2b11f9d84e08b56e",
                         "name": "STATUS_ERROR",
-                        "type": "Number",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ],
+                            "raw": "Number"
+                        },
                         "description": "Store the \"error\" status",
                         "static": "true",
                         "since": "2.0.0",
@@ -192,9 +244,16 @@
                         }
                     },
                     "registercheck": {
-                        "id": "a169de0839bf7470723a11dac3fadc234770941b31b538cdb65bd944be33bd3c",
+                        "id": "sa169de0839bf7470723a11dac3fadc234770941b31b538cdb65bd944be33bd3c",
                         "name": "registerCheck",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This method allows you to register a new check to the SFrontendChecker class.",
                         "static": "true",
                         "since": "2.0.0",
@@ -205,9 +264,16 @@
                         }
                     },
                     "constructor": {
-                        "id": "6edaeab4bf2880ab2804fef643fb12db70440d0576022006290e585721be66e2",
+                        "id": "s6edaeab4bf2880ab2804fef643fb12db70440d0576022006290e585721be66e2",
                         "name": "constructor",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -217,9 +283,16 @@
                         }
                     },
                     "check": {
-                        "id": "7d2d0f911933b4036ed9912c2485a571923dd3d819dcf439cb8efc21a87a0f41",
+                        "id": "s7d2d0f911933b4036ed9912c2485a571923dd3d819dcf439cb8efc21a87a0f41",
                         "name": "check",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "Check the passed context and returns some insights about what is good and what's not.",
                         "since": "2.0.0",
                         "author": {
@@ -233,7 +306,14 @@
             "@coffeekraken.s-frontend-checker.js.checks.author": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.author",
                 "name": "author",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -258,7 +338,14 @@
             "@coffeekraken.s-frontend-checker.js.checks.charset": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.charset",
                 "name": "charset",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -283,7 +370,14 @@
             "@coffeekraken.s-frontend-checker.js.checks.comments": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.comments",
                 "name": "comments",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -308,7 +402,14 @@
             "@coffeekraken.s-frontend-checker.js.checks.cssOrder": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.cssOrder",
                 "name": "cssOrder",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -333,7 +434,14 @@
             "@coffeekraken.s-frontend-checker.js.checks.description": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.description",
                 "name": "description",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -358,7 +466,14 @@
             "@coffeekraken.s-frontend-checker.js.checks.direction": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.direction",
                 "name": "direction",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -383,7 +498,14 @@
             "@coffeekraken.s-frontend-checker.js.checks.doctype": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.doctype",
                 "name": "doctype",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -408,7 +530,14 @@
             "@coffeekraken.s-frontend-checker.js.checks.imagesAlt": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.imagesAlt",
                 "name": "imagesAlt",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -433,7 +562,14 @@
             "@coffeekraken.s-frontend-checker.js.checks.keywords": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.keywords",
                 "name": "keywords",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -458,7 +594,14 @@
             "@coffeekraken.s-frontend-checker.js.checks.language": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.language",
                 "name": "language",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -483,7 +626,14 @@
             "@coffeekraken.s-frontend-checker.js.checks.noopener": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.noopener",
                 "name": "noopener",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -508,7 +658,14 @@
             "@coffeekraken.s-frontend-checker.js.checks.opengraph": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.opengraph",
                 "name": "opengraph",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -533,7 +690,14 @@
             "@coffeekraken.s-frontend-checker.js.checks.printStylesheet": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.printStylesheet",
                 "name": "printStylesheet",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -558,7 +722,14 @@
             "@coffeekraken.s-frontend-checker.js.checks.title": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.title",
                 "name": "title",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -583,7 +754,14 @@
             "@coffeekraken.s-frontend-checker.js.checks.twitterCard": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.twitterCard",
                 "name": "twitterCard",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -608,7 +786,14 @@
             "@coffeekraken.s-frontend-checker.js.checks.uniqueIds": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.uniqueIds",
                 "name": "uniqueIds",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -633,7 +818,14 @@
             "@coffeekraken.s-frontend-checker.js.checks.viewport": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.viewport",
                 "name": "viewport",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -658,7 +850,14 @@
             "@coffeekraken.s-frontend-checker.js.checks.w3c": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.w3c",
                 "name": "w3c",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -683,7 +882,14 @@
             "@coffeekraken.s-frontend-checker.js.checks.webpImages": {
                 "id": "@coffeekraken.s-frontend-checker.js.checks.webpImages",
                 "name": "webpImages",
-                "type": "Function",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -703,6 +909,42 @@
                 "filename": "webpImages.ts",
                 "extension": "ts",
                 "relPath": "src/js/checks/webpImages.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-frontend-checker.js.interface.SFrontendCheckerSettingsInterface": {
+                "id": "@coffeekraken.s-frontend-checker.js.interface.SFrontendCheckerSettingsInterface",
+                "name": "SFrontendCheckerSettingsInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ],
+                    "raw": ".                      Class"
+                },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe settings of the SFrontendChecker class",
+                "namespace": "@coffeekraken.s-frontend-checker.js.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SFrontendCheckerSettingsInterface",
+                    "description": "",
+                    "definition": {}
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SFrontendCheckerSettingsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/js/interface/SFrontendCheckerSettingsInterface.ts",
                 "children": {}
             }
         }

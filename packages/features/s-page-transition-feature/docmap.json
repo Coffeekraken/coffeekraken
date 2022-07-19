@@ -6,11 +6,14 @@
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -39,17 +42,16 @@
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
-            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-monorepo",
-            "@coffeekraken/s-notification",
             "@coffeekraken/s-package",
             "@coffeekraken/s-panel-component",
             "@coffeekraken/s-postcss-builder",
@@ -88,7 +90,14 @@
                 "id": "@coffeekraken.s-page-transition-feature.js.SPageTransitionFeature",
                 "name": "SPageTransitionFeature",
                 "as": "Page transition",
-                "type": "Feature",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Feature"
+                        }
+                    ],
+                    "raw": "Feature"
+                },
                 "menu": {
                     "tree": [
                         "Styleguide",
@@ -160,6 +169,76 @@
                 "filename": "SPageTransitionFeature.ts",
                 "extension": "ts",
                 "relPath": "src/js/SPageTransitionFeature.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-page-transition-feature.js.interface.SPageTransitionFeatureInterface": {
+                "id": "@coffeekraken.s-page-transition-feature.js.interface.SPageTransitionFeatureInterface",
+                "name": "SPageTransitionFeatureInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ],
+                    "raw": ".                      Class"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface represent the attributes of the SPageTransitionFeature",
+                "namespace": "@coffeekraken.s-page-transition-feature.js.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SPageTransitionFeatureInterface",
+                    "description": "",
+                    "definition": {
+                        "patchBody": {
+                            "description": "Specify if you want to patch the body tag with the new page body tag",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "scrollTop": {
+                            "description": "Specify if you want to scroll to the top of the updated element after a transition",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "before": {
+                            "description": "Specify a function to run before the transition",
+                            "type": "Function"
+                        },
+                        "after": {
+                            "description": "Specify a function to run after the transition",
+                            "type": "Function"
+                        },
+                        "autoStyle": {
+                            "description": "Specify if you want to automatically add classes like \"s-tc:error\" on the broken links (only the \"a\" tags)",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "injectBrokenLinkIcon": {
+                            "description": "Specify if you want to inject the \"error\" icon on the broken links",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "brokenLinkIcon": {
+                            "description": "Specify the icon you want to inject on the broken links",
+                            "type": "String",
+                            "default": "<i class=\"s-icon:link-broken-solid\" alt=\"Broken link\"></i>"
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SPageTransitionFeatureInterface.ts",
+                "extension": "ts",
+                "relPath": "src/js/interface/SPageTransitionFeatureInterface.ts",
                 "children": {}
             }
         }

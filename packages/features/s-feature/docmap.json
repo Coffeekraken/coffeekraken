@@ -6,11 +6,14 @@
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -38,17 +41,16 @@
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
-            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-monorepo",
-            "@coffeekraken/s-notification",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
@@ -87,7 +89,14 @@
             "@coffeekraken.s-feature.doc.README": {
                 "id": "@coffeekraken.s-feature.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -116,7 +125,14 @@
             "@coffeekraken.s-feature.shared.SFeature": {
                 "id": "@coffeekraken.s-feature.shared.SFeature",
                 "name": "SFeature",
-                "type": "Class",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
                 "description": "This class allows you to create \"features\". Feature is like webcomponent but does not provide a\ncustom HTML tag.",
                 "namespace": "@coffeekraken.s-feature.shared",
                 "status": "beta",
@@ -136,9 +152,16 @@
                 "relPath": "src/js/SFeature.ts",
                 "children": {
                     "name": {
-                        "id": "e7e78df2166e7195f152267200b29d0243f3fe08045d8a2efd0be7b88f3511a5",
+                        "id": "se7e78df2166e7195f152267200b29d0243f3fe08045d8a2efd0be7b88f3511a5",
                         "name": "name",
-                        "type": "String",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
                         "description": "Store the feature name",
                         "since": "2.0.0",
                         "author": {
@@ -147,9 +170,16 @@
                         }
                     },
                     "node": {
-                        "id": "df262925215f93e339186d394b4a774aa6f60e8ce63e5f24f8140c0b2f96ad71",
+                        "id": "sdf262925215f93e339186d394b4a774aa6f60e8ce63e5f24f8140c0b2f96ad71",
                         "name": "node",
-                        "type": "HTMLElement",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "HTMLElement"
+                                }
+                            ],
+                            "raw": "HTMLElement"
+                        },
                         "description": "Store the component node",
                         "since": "2.0.0",
                         "author": {
@@ -158,9 +188,16 @@
                         }
                     },
                     "props": {
-                        "id": "9ebb834b48dd51aa56ae3d735a8702a7c7d41d04887cb3fbeba89279b5f52d79",
+                        "id": "s9ebb834b48dd51aa56ae3d735a8702a7c7d41d04887cb3fbeba89279b5f52d79",
                         "name": "props",
-                        "type": "Object",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
                         "description": "Store the component props",
                         "since": "2.0.0",
                         "author": {
@@ -169,9 +206,16 @@
                         }
                     },
                     "setdefaultprops": {
-                        "id": "1a20c35a87063cd50d2548b56ff04506cf5ece09ace63d14a2babb418a709ac4",
+                        "id": "s1a20c35a87063cd50d2548b56ff04506cf5ece09ace63d14a2babb418a709ac4",
                         "name": "setDefaultProps",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This static method allows you to set some default props for some particular\ncomponent(s). You can target components using simple css selectorl like \"my-component#cool\".\nOnce the component is instanciated, it will check if some defaults are specified and\nextends them with the passed props.",
                         "static": "true",
                         "since": "2.0.0",
@@ -181,9 +225,16 @@
                         }
                     },
                     "definefeature": {
-                        "id": "b14787f92dc259aad3ff9d777d3e7f721f3ca637436fa0e755629418b47f69f3",
+                        "id": "sb14787f92dc259aad3ff9d777d3e7f721f3ca637436fa0e755629418b47f69f3",
                         "name": "defineFeature",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This static method allows you to register a new feature\nassociated with an HTMLElement attribute like \"s-activate\", etc...",
                         "static": "true",
                         "since": "2.0.0",
@@ -193,9 +244,16 @@
                         }
                     },
                     "constructor": {
-                        "id": "2ec1eb0b75c3d998c2688ffbf03f92d0487e9a5bd2cd5e533b16e00b2266f575",
+                        "id": "s2ec1eb0b75c3d998c2688ffbf03f92d0487e9a5bd2cd5e533b16e00b2266f575",
                         "name": "constructor",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
@@ -204,9 +262,16 @@
                         }
                     },
                     "beforepropchange": {
-                        "id": "71d126a4ce49d1e0db163350525e256270a784d4ba817a0edaaf5f1f0ebe6633",
+                        "id": "s71d126a4ce49d1e0db163350525e256270a784d4ba817a0edaaf5f1f0ebe6633",
                         "name": "beforePropChange",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This method allows you to catch a property change before it actually occurs.\nYou can return the value to set it as it is, return another value to set another one\nor returns undefined to prevent the change to be commited.",
                         "since": "2.0.0",
                         "author": {
@@ -215,9 +280,16 @@
                         }
                     },
                     "afterpropchanged": {
-                        "id": "c8b7e2755dfed65d016ffada8d8c82e86befa17008df6ffd166ae8c81fdc7526",
+                        "id": "sc8b7e2755dfed65d016ffada8d8c82e86befa17008df6ffd166ae8c81fdc7526",
                         "name": "afterPropChanged",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This method allows you to catch properties updates AFTER it has been commited.",
                         "since": "2.0.0",
                         "author": {
@@ -226,9 +298,16 @@
                         }
                     },
                     "mount": {
-                        "id": "495f9428f7bc280f8f206241d94f17373d47972cdf1a31e9535f6f1b131b403f",
+                        "id": "s495f9428f7bc280f8f206241d94f17373d47972cdf1a31e9535f6f1b131b403f",
                         "name": "mount",
-                        "type": "Function",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
                         "description": "This method allows you to actually mount your feature behavior.\nIt will be called depending on the \"mountWhen\" setting setted.",
                         "async": "true",
                         "since": "2.0.0",

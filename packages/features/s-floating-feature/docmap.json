@@ -6,11 +6,14 @@
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -38,17 +41,16 @@
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
-            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-monorepo",
-            "@coffeekraken/s-notification",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
@@ -88,7 +90,14 @@
                 "id": "@coffeekraken.s-floating-feature.js.SFloatingFeature",
                 "name": "SFloatingFeature",
                 "as": "Floating elements",
-                "type": "Feature",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Feature"
+                        }
+                    ],
+                    "raw": "Feature"
+                },
                 "menu": {
                     "tree": [
                         "Styleguide",
@@ -109,7 +118,7 @@
                     {
                         "language": "html",
                         "title": "Email field",
-                        "code": "<label class=\"s-label\" s-form-validate email>\n   <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"olivier.bossel@coffeekraken.io\" />\n   Email address\n</label>"
+                        "code": "<div class=\"s-ratio:16-9 s-width:50 s-bg:main-surface s-p:30\">\n  Floating element preview. Try to scroll...\n  <div class=\"s-ratio:16-9 s-bg:accent s-color:accent s-radius s-p:30\" s-floating>\n     I'm the floating element\n </div>\n</div>\n<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>\n<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>"
                     }
                 ],
                 "interface": {
@@ -175,6 +184,91 @@
                 "filename": "SFloatingFeature.ts",
                 "extension": "ts",
                 "relPath": "src/js/SFloatingFeature.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-floating-feature.js.interface.SFloatingFeatureInterface": {
+                "id": "@coffeekraken.s-floating-feature.js.interface.SFloatingFeatureInterface",
+                "name": "SFloatingFeatureInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ],
+                    "raw": ".                      Class"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface represent the attributes of the SFloatingFeature",
+                "namespace": "@coffeekraken.s-floating-feature.js.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SFloatingFeatureInterface",
+                    "description": "",
+                    "definition": {
+                        "ref": {
+                            "description": "Specify the reference HTMLElement from which to position the floating one. If not specified, will take the previous element in the DOM",
+                            "type": "String"
+                        },
+                        "position": {
+                            "description": "Specify the placement of your floating element. By default it will try to be placed as good as possible.",
+                            "type": "String",
+                            "values": [
+                                "top",
+                                "right",
+                                "bottom",
+                                "left",
+                                "top-start",
+                                "top-end",
+                                "right-start",
+                                "right-end",
+                                "bottom-start",
+                                "bottom-end",
+                                "left-start",
+                                "left-end",
+                                "auto"
+                            ],
+                            "default": "auto"
+                        },
+                        "shift": {
+                            "description": "Specify a space between the floating element and the viewport side to respect",
+                            "type": "Number",
+                            "default": 10
+                        },
+                        "offset": {
+                            "description": "Specify a space between the floating element and the reference one to respect",
+                            "type": "Number"
+                        },
+                        "arrow": {
+                            "description": "Specify if you want an arrow or not",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "arrowSize": {
+                            "description": "Specify the size of the arrow in px",
+                            "type": "Number",
+                            "default": 15
+                        },
+                        "arrowPadding": {
+                            "description": "Specify the padding of the arrow in px",
+                            "type": "Number",
+                            "default": 10
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SFloatingFeatureInterface.ts",
+                "extension": "ts",
+                "relPath": "src/js/interface/SFloatingFeatureInterface.ts",
                 "children": {}
             }
         }

@@ -50,13 +50,15 @@ Create the `sugar.jcon` file at your project root and fill it like so:
             "actions": {
                 "prettyCommand": {
                     "description": "Allows to display 'hello world' on screen",
-                    "process": "./src/node/prettyCommand.cli.js"
+                    "process": "./dist/pkg/%moduleSystem/node/prettyCommand.cli.js"
                 }
             }
         }
     ]
 }
 ```
+
+> Note that you can make uses of the `%moduleSystem` token in your `process` property that will be replaced by either `esm`, or `cjs` depending on the environment you're in.
 
 This will tell the CLI that a `mySoCool` stack exists with a command(s) `prettyCommand`.
 

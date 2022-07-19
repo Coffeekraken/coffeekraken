@@ -13,7 +13,6 @@
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-code-formatter-prettier",
-            "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -31,6 +30,7 @@
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
             "@coffeekraken/s-duration",
+            "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
             "@coffeekraken/s-favicon-builder",
             "@coffeekraken/s-feature",
@@ -86,9 +86,9 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-env.config.env.env": {
-                "id": "@coffeekraken.s-env.config.env.env",
-                "name": "env",
+            "@coffeekraken.s-code-formatter.config.codeFormatter.glob": {
+                "id": "@coffeekraken.s-code-formatter.config.codeFormatter.glob",
+                "name": "glob",
                 "type": {
                     "types": [
                         {
@@ -97,22 +97,44 @@
                     ],
                     "raw": "String"
                 },
-                "default": "process.env.NODE_ENV ?? document.env.ENV ?? 'dev`",
-                "description": "Specify the environment env. This is usually \"production\" or \"dev\" as value.",
-                "namespace": "@coffeekraken.s-env.config.env",
+                "default": "** /*",
+                "description": "Specify the default glob for the SCodeFormatter.format process",
+                "namespace": "@coffeekraken.s-code-formatter.config.codeFormatter",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
+                    "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "env.config.ts",
+                "filename": "codeFormatter.config.ts",
                 "extension": "config",
-                "relPath": "src/config/env.config.ts",
+                "relPath": "src/config/codeFormatter.config.ts"
+            },
+            "@coffeekraken.s-code-formatter.config.codeFormatter.inDir": {
+                "id": "@coffeekraken.s-code-formatter.config.codeFormatter.inDir",
+                "name": "inDir",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[config.storage.src.rootDir]",
+                "description": "Specify the default inDir for the SCodeFormatter.format process",
+                "namespace": "@coffeekraken.s-code-formatter.config.codeFormatter",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "codeFormatter.config.ts",
+                "extension": "config",
+                "relPath": "src/config/codeFormatter.config.ts",
                 "children": {}
             },
-            "@coffeekraken.s-env.doc.README": {
-                "id": "@coffeekraken.s-env.doc.README",
+            "@coffeekraken.s-code-formatter.doc.README": {
+                "id": "@coffeekraken.s-code-formatter.doc.README",
                 "name": "README",
                 "type": {
                     "types": [
@@ -134,7 +156,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@coffeekraken.s-env.doc",
+                "namespace": "@coffeekraken.s-code-formatter.doc",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -147,9 +169,9 @@
                 "relPath": "src/doc/README.md",
                 "children": {}
             },
-            "@coffeekraken.s-env.s-env.node.SEnv": {
-                "id": "@coffeekraken.s-env.s-env.node.SEnv",
-                "name": "SEnv",
+            "@coffeekraken.s-code-formatter.node.SCodeFormatter": {
+                "id": "@coffeekraken.s-code-formatter.node.SCodeFormatter",
+                "name": "SCodeFormatter",
                 "type": {
                     "types": [
                         {
@@ -158,12 +180,13 @@
                     ],
                     "raw": "Class"
                 },
-                "description": "This class allows you to access, set and update environment variables seemlessly on node\nand browser env.\nYou can also check if the environment is a dev one or a production using the\nhelpfull ```is``` function like so: ```sEnv.is('prod')```",
-                "namespace": "@coffeekraken.s-env.s-env.node",
+                "description": "This represent the main code formatter class that allows you to format code like js, css, etc...\nAll the code formatters have to be implemented by exporting an object of type ISCodeFormatterFormatter.",
+                "namespace": "@coffeekraken.s-code-formatter.node",
+                "status": "wip",
                 "example": [
                     {
                         "language": "js",
-                        "code": "import SEnv from '@coffeekraken/s-env';\nthis.get('something');\nSEnv.is('prod');\nSEnv.is('production');\nSEnv.is('development');\n// etc..."
+                        "code": "import __SCodeFormatter from '@coffeekraken/s-code-formatter';\nconst formatter = new __SCodeFormatter();\nawait formatter.format('/my/cool/file.js');"
                     }
                 ],
                 "since": "2.0.0",
@@ -172,63 +195,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SEnv.ts",
+                "filename": "SCodeFormatter.ts",
                 "extension": "ts",
-                "relPath": "src/node/SEnv.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-env.s-env.shared.SEnv": {
-                "id": "@coffeekraken.s-env.s-env.shared.SEnv",
-                "name": "SEnv",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Class"
-                        }
-                    ],
-                    "raw": "Class"
-                },
-                "description": "This class allows you to access, set and update environment variables seemlessly on node\nand browser env.\nYou can also check if the environment is a dev one or a production using the\nhelpfull ```is``` function like so: ```sEnv.is('prod')```",
-                "namespace": "@coffeekraken.s-env.s-env.shared",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import SEnv from '@coffeekraken/s-env';\nthis.get('something');\nSEnv.is('prod');\nSEnv.is('production');\nSEnv.is('development');\n// etc..."
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "SEnv.ts",
-                "extension": "ts",
-                "relPath": "src/shared/SEnv.ts",
+                "relPath": "src/node/SCodeFormatter.ts",
                 "children": {
-                    "env": {
-                        "id": "s3c882527536778ebe3cda2c893232e50953fd4db23e2eafe4b5eca1b2cf49ecb",
-                        "name": "env",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Object"
-                                }
-                            ],
-                            "raw": "Object"
-                        },
-                        "description": "Store the actual environment variables object. In node it will be process.env, in the browser,\ndocument.env",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
-                    "is": {
-                        "id": "sc357a00a09108492292733809ec56df14e55c2978e2c9a558fda1dfc19f11441",
-                        "name": "is",
+                    "registerformatter": {
+                        "id": "s5769095a4723a9579dd15ad18aa93e91fd120d5dba86f7c4df0f45a156214bf7",
+                        "name": "registerFormatter",
                         "type": {
                             "types": [
                                 {
@@ -237,7 +210,7 @@
                             ],
                             "raw": "Function"
                         },
-                        "description": "This static method allows you to check if the environment\nis \"dev\", \"development\", \"prod\" or \"production\"",
+                        "description": "Register a new formatter by passing the ISCodeFormatterFormatter typed object",
                         "static": "true",
                         "since": "2.0.0",
                         "author": {
@@ -246,9 +219,9 @@
                             "url": "https://coffeekraken.io"
                         }
                     },
-                    "get": {
-                        "id": "s863b0c53622da90d13800cca8b98a09cad4b3c06e24f8b62484c4b9d11e227a0",
-                        "name": "get",
+                    "gethandledextensions": {
+                        "id": "s14d40294b864f608f6352abd26af184768469fe977b5dc2283a2d28313ae2a3a",
+                        "name": "getHandledExtensions",
                         "type": {
                             "types": [
                                 {
@@ -257,7 +230,7 @@
                             ],
                             "raw": "Function"
                         },
-                        "description": "This static method allows you to access an env variable.\nThe variables keys are stored in UPPERCASE but you can use lowercase as well",
+                        "description": "Return an array of all the handled extensions with the registered formatter",
                         "static": "true",
                         "since": "2.0.0",
                         "author": {
@@ -266,9 +239,9 @@
                             "url": "https://coffeekraken.io"
                         }
                     },
-                    "set": {
-                        "id": "s3238cad0a4de2ae08a869eb13d976429eeb7b8431293a218aeab84660fa16510",
-                        "name": "set",
+                    "getformatterforextension": {
+                        "id": "s68109c7830eef507b7ca8fa8691c5012123bcb715b8c694504c63a7ccc825b8f",
+                        "name": "getFormatterForExtension",
                         "type": {
                             "types": [
                                 {
@@ -277,7 +250,7 @@
                             ],
                             "raw": "Function"
                         },
-                        "description": "This static method allows you to set an env variable.\nThe variables keys are stored in UPPERCASE but you can use lowercase as well",
+                        "description": "Return the appropriate formatter depending on the passed extension",
                         "static": "true",
                         "since": "2.0.0",
                         "author": {
@@ -286,9 +259,9 @@
                             "url": "https://coffeekraken.io"
                         }
                     },
-                    "delete": {
-                        "id": "s97f8f0f76311c34699d5fcbdac6092a7f8532ce564afee6fb15e9ba281e31c6f",
-                        "name": "delete",
+                    "constructor": {
+                        "id": "s1a89c514940eb0896265bdcc93868bccdc3432cd05e1b3d2b4f2ac7136029e96",
+                        "name": "constructor",
                         "type": {
                             "types": [
                                 {
@@ -297,8 +270,27 @@
                             ],
                             "raw": "Function"
                         },
-                        "description": "This static method allows you to delete an env variable.\nThe variables keys are stored in UPPERCASE but you can use lowercase as well",
-                        "static": "true",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "format": {
+                        "id": "s84027772338af899063887dd39cb3d5dd0461eef87cc6747e1fb53c9337be87f",
+                        "name": "format",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This method allows you to actually format either a string of code (you will need to set the \"language\" param), of directly a file\nby passing a file path.",
+                        "async": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -307,6 +299,67 @@
                         }
                     }
                 }
+            },
+            "@coffeekraken.s-code-formatter.js.interface.SCodeFormatterFormatParamsInterface": {
+                "id": "@coffeekraken.s-code-formatter.js.interface.SCodeFormatterFormatParamsInterface",
+                "name": "SCodeFormatterFormatParamsInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ],
+                    "raw": ".                      Class"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface represent the parameters for the SCodeFormatter.format method",
+                "namespace": "@coffeekraken.s-code-formatter.js.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SCodeFormatterFormatParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "glob": {
+                            "description": "Specify a glog pattern relative to the \"inDir\"",
+                            "type": "String",
+                            "default": "**/*",
+                            "alias": "i"
+                        },
+                        "inDir": {
+                            "description": "Specify the working directory from where the glob will be resolved",
+                            "type": "String",
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/codeFormatters/s-code-formatter/src",
+                            "alias": "d"
+                        },
+                        "watch": {
+                            "description": "Specify if you want to watch for files changes and format them automatically",
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "w"
+                        },
+                        "formatInitial": {
+                            "description": "Specify if you want to format the founded files directly even if you have specified the watch parameter to true",
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "f"
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SCodeFormatterFormatParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SCodeFormatterFormatParamsInterface.ts",
+                "children": {}
             }
         }
     }

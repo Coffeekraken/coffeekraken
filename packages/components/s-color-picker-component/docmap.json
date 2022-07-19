@@ -6,11 +6,14 @@
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
@@ -38,17 +41,16 @@
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
-            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-monorepo",
-            "@coffeekraken/s-notification",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
@@ -87,7 +89,14 @@
             "@coffeekraken.s-color-picker-component.doc.README": {
                 "id": "@coffeekraken.s-color-picker-component.doc.README",
                 "name": "README",
-                "type": "Markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
                 "menu": {
                     "tree": [
                         "Documentation"
@@ -117,7 +126,14 @@
                 "id": "@coffeekraken.s-color-picker-component.js.SColorPickerComponent",
                 "name": "SColorPickerComponent",
                 "as": "Color Picker",
-                "type": "CustomElement",
+                "type": {
+                    "types": [
+                        {
+                            "type": "CustomElement"
+                        }
+                    ],
+                    "raw": "CustomElement"
+                },
                 "menu": {
                     "tree": [
                         "Styleguide",
@@ -138,47 +154,47 @@
                     {
                         "language": "html",
                         "title": "Simple input",
-                        "code": "<label class=\"s-label:responsive\">\n     Choose a color\n     <s-color-picker value=\"#FABB03\" placeholder=\"Choose a color\" input></s-color-picker>\n</label>"
+                        "code": "<label class=\"s-label:responsive\">\n     <span>Choose a color</span>\n     <s-color-picker value=\"#FABB03\" placeholder=\"Choose a color\" input></s-color-picker>\n</label>"
                     },
                     {
                         "language": "html",
                         "title": "With an input and a button",
-                        "code": "<label class=\"s-label:responsive\">\n     Choose a color\n     <s-color-picker value=\"#5101FF\" placeholder=\"Choose a color\" input button></s-color-picker>\n</label>"
+                        "code": "<label class=\"s-label:responsive\">\n     <span>Choose a color</span>\n     <s-color-picker value=\"#5101FF\" placeholder=\"Choose a color\" input button></s-color-picker>\n</label>"
                     },
                     {
                         "language": "html",
                         "title": "With a different format (hsla)",
-                        "code": "<label class=\"s-label:responsive\">\n     Choose a color\n     <s-color-picker value=\"#5101FF\" format=\"hsla\" placeholder=\"Choose a color\" input button></s-color-picker>\n</label>"
+                        "code": "<label class=\"s-label:responsive\">\n     <span>Choose a color</span>\n     <s-color-picker value=\"#5101FF\" format=\"hsla\" placeholder=\"Choose a color\" input button></s-color-picker>\n</label>"
                     },
                     {
                         "language": "html",
                         "title": "Just a button",
-                        "code": "<label class=\"s-label:responsive\">\n     Choose a color\n     <s-color-picker value=\"#55FFFF\" button></s-color-picker>\n</label>"
+                        "code": "<label class=\"s-label:responsive\">\n     <span>Choose a color</span>\n     <s-color-picker value=\"#55FFFF\" button></s-color-picker>\n</label>"
                     },
                     {
                         "language": "html",
                         "title": "With a custom input",
-                        "code": "<label class=\"s-label:responsive\">\n     Choose a color\n     <s-color-picker>\n         <input type=\"text\" class=\"s-input\" placeholder=\"Choose a color\" value=\"#FABB03\" />\n     </s-color-picker>\n</label>"
+                        "code": "<label class=\"s-label:responsive\">\n     <span>Choose a color</span>\n     <s-color-picker>\n         <input type=\"text\" class=\"s-input\" placeholder=\"Choose a color\" value=\"#FABB03\" />\n     </s-color-picker>\n</label>"
                     },
                     {
                         "language": "html",
                         "title": "With a custom button",
-                        "code": "<label class=\"s-label:responsive\">\n     Choose a color\n     <s-color-picker>\n         <button class=\"s-btn s-color:error\">Choose a color</button>\n     </s-color-picker>\n</label>"
+                        "code": "<label class=\"s-label:responsive\">\n     <span>Choose a color</span>\n     <s-color-picker>\n         <button class=\"s-btn s-color:error\">Choose a color</button>\n     </s-color-picker>\n</label>"
                     },
                     {
                         "language": "html",
                         "title": "With a custom input and button",
-                        "code": "<label class=\"s-label:responsive\">\n     Choose a color\n     <s-color-picker>\n         <div class=\"s-group\">\n             <input type=\"text\" class=\"s-input\" placeholder=\"Choose a color\" value=\"#FABB03\" />\n             <button class=\"s-btn s-color:error\">Choose a color</button>\n         </div>\n     </s-color-picker>\n</label>"
+                        "code": "<label class=\"s-label:responsive\">\n     <span>Choose a color</span>\n     <s-color-picker>\n         <div class=\"s-group\">\n             <input type=\"text\" class=\"s-input\" placeholder=\"Choose a color\" value=\"#FABB03\" />\n             <button class=\"s-btn s-color:error\">Choose a color</button>\n         </div>\n     </s-color-picker>\n</label>"
                     },
                     {
                         "language": "html",
                         "title": "Disabled",
-                        "code": "<label class=\"s-label:responsive\">\n     Choose a color\n     <s-color-picker disabled input button></s-color-picker>\n</label>"
+                        "code": "<label class=\"s-label:responsive\">\n     <span>Choose a color</span>\n     <s-color-picker disabled input button></s-color-picker>\n</label>"
                     },
                     {
                         "language": "html",
                         "title": "RTL Support",
-                        "code": "<label class=\"s-label:responsive\" dir=\"rtl\">\n     Choose a color\n     <s-color-picker value=\"#FABB03\" placeholder=\"Choose a color\" input button dir=\"rtl\"></s-color-picker>\n</label>"
+                        "code": "<label class=\"s-label:responsive\" dir=\"rtl\">\n     <span>Choose a color</span>\n     <s-color-picker value=\"#FABB03\" placeholder=\"Choose a color\" input button dir=\"rtl\"></s-color-picker>\n</label>"
                     }
                 ],
                 "interface": {
@@ -337,6 +353,184 @@
                 "filename": "SColorPickerComponent.ts",
                 "extension": "ts",
                 "relPath": "src/js/SColorPickerComponent.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-color-picker-component.js.interface.SColorPickerComponentInterface": {
+                "id": "@coffeekraken.s-color-picker-component.js.interface.SColorPickerComponentInterface",
+                "name": "SColorPickerComponentInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ],
+                    "raw": ".                      Class"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe parameters of the SColorPickerComponent",
+                "namespace": "@coffeekraken.s-color-picker-component.js.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SColorPickerComponentInterface",
+                    "description": "",
+                    "definition": {
+                        "name": {
+                            "description": "Specify the name that will be assigned to the injected input if you don't provide one yourself",
+                            "type": "String",
+                            "default": "color"
+                        },
+                        "value": {
+                            "description": "Specify the initial value for your picker",
+                            "type": "String"
+                        },
+                        "updateInput": {
+                            "description": "Specify when you want to updat the attached input. Can be \"pointermove\", \"pointerup\", \"pointerdown\", \"input\", \"validate\", \"close\"",
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ","
+                                ]
+                            },
+                            "values": [
+                                "pointerdown",
+                                "pointerup",
+                                "pointermove",
+                                "validate",
+                                "reset",
+                                "clear",
+                                "close"
+                            ],
+                            "default": [
+                                "pointerdown",
+                                "pointerup",
+                                "pointermove",
+                                "validate",
+                                "reset",
+                                "clear",
+                                "close"
+                            ]
+                        },
+                        "format": {
+                            "description": "Specify the format of the color you want as end in the input value. Can be \"hex\", \"hexa\", \"rgb\", \"rgba\", \"hsl\" or \"hsla\"",
+                            "type": "String",
+                            "values": [
+                                "hex",
+                                "hexa",
+                                "rgb",
+                                "rgba",
+                                "hsl",
+                                "hsla"
+                            ],
+                            "default": "hex"
+                        },
+                        "inline": {
+                            "description": "Specify if you want to initalize the color picker inline or if you want it to be displayed only when the focus is in the input",
+                            "type": "Boolean",
+                            "default": false,
+                            "physical": true
+                        },
+                        "i18n": {
+                            "description": "Specify some translations for the color picker. You can translate the \"reset\", \"clear\" and \"validate\" buttons",
+                            "type": "Object",
+                            "default": {
+                                "reset": "Reset",
+                                "clear": "Clear",
+                                "validate": "Validate"
+                            }
+                        },
+                        "placeholder": {
+                            "description": "Specify the placeholder that will be assigned to the injected input if you don't provide one yourself",
+                            "type": "String",
+                            "default": "Select a color"
+                        },
+                        "input": {
+                            "description": "Specify if you dont want an automatically injected text input when you dont provide yours",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "button": {
+                            "description": "Specify if you want to display the button or not",
+                            "type": "Boolean",
+                            "default": false,
+                            "physical": true
+                        },
+                        "backdrop": {
+                            "description": "Specify if you want the \".s-backdrop\" element or not",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "actions": {
+                            "description": "Specify the actions buttons you want to display. Can be \"clear\", \"reset\" and \"validate\". If false, hide all button",
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "clear",
+                                "reset",
+                                "validate"
+                            ],
+                            "default": [
+                                "reset",
+                                "validate"
+                            ]
+                        },
+                        "floatSettings": {
+                            "description": "Specify some float settings to pass to the \"makeFloat\" function of the sugar toolkit",
+                            "type": "Object",
+                            "default": {
+                                "position": "auto",
+                                "shift": 10,
+                                "offset": 0,
+                                "arrow": false,
+                                "arrowSize": 15,
+                                "arrowPadding": 10
+                            }
+                        },
+                        "copyIconClass": {
+                            "description": "Specify the class you want to apply on the \"i\" that display the \"copy\" icon",
+                            "type": "String",
+                            "default": "s-icon s-icon--copy"
+                        },
+                        "copiedIconClass": {
+                            "description": "Specify the class you want to apply on the \"i\" that display the \"copy\" icon when the color has been copied",
+                            "type": "String",
+                            "default": "s-icon s-icon--copied"
+                        },
+                        "buttonIconClass": {
+                            "description": "Specify the class you want to apply on the injected button icon",
+                            "type": "String",
+                            "default": "s-icon s-icon--color"
+                        },
+                        "backdropClass": {
+                            "description": "Specify the class to apply on the backdrop when the \"backdrop\" prop is true",
+                            "type": "String",
+                            "default": "s-backdrop"
+                        },
+                        "disabled": {
+                            "description": "Specify if the color picker is disabled",
+                            "type": "Boolean",
+                            "default": false
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SColorPickerComponentInterface.ts",
+                "extension": "ts",
+                "relPath": "src/js/interface/SColorPickerComponentInterface.ts",
                 "children": {}
             }
         }

@@ -11,6 +11,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __parse from '@coffeekraken/sugar/shared/string/parse';
 import { css, html, unsafeCSS } from 'lit';
 // @ts-ignore
+import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
 import __css from '../../../../src/css/s-slider-component.css'; // relative to /dist/pkg/esm/js
 import __SSliderComponentInterface from './interface/SSliderComponentInterface';
 import __SSliderBehavior from './SSliderBehavior';
@@ -247,7 +248,7 @@ import __SSliderBehavior from './SSliderBehavior';
 export interface ISSliderComponentProps extends ISLitComponentDefaultProps {
     direction: 'horizontal' | 'vertical';
     behaviors: __SSliderBehavior[];
-    behavior: __SSliderBehavior | string;
+    behavior: __SSliderBehavior | string | 'none' | 'basic';
     controls: boolean;
     nav: boolean;
     mousewheel: boolean;
@@ -341,7 +342,11 @@ export default class SSlider extends __SLitComponent {
         this._initNavigation();
 
         // default behavior
-        if (this.props.behavior) {
+        if (
+            this.props.behavior &&
+            this.props.behavior !== 'none' &&
+            this.props.behavior !== 'basic'
+        ) {
             if (typeof this.props.behavior === 'string') {
                 let behavior;
                 for (let [behaviorId, behaviorObj] of Object.entries(
@@ -388,6 +393,9 @@ export default class SSlider extends __SLitComponent {
 
         // swipe
         this.props.swipe && this._handleSwipe();
+
+        // actions
+        this._initAttributesActions();
 
         // timer
         if (this.props.autoplay && this.props.timer) {
@@ -459,7 +467,9 @@ export default class SSlider extends __SLitComponent {
         this.$slidesContainer.addEventListener('click', (e) => {
             for (let [i, $slide] of this.$slides.entries()) {
                 if ($slide.contains(e.target) || $slide === e.target) {
-                    this.goTo($slide);
+                    if (this.currentSlide !== $slide) {
+                        this.goTo($slide);
+                    }
                 }
             }
         });
@@ -510,6 +520,43 @@ export default class SSlider extends __SLitComponent {
             observer = new IntersectionObserver(handleIntersect, options);
             observer.observe($slide);
         });
+    }
+
+    /**
+     * This function grab the elements that have attributes like "s-slider-next", "s-slider-previous", "s-slider-goto", etc...
+     * and init them to process the action
+     */
+    _initAttributesActions(): void {
+        // next/previous
+        ['next', 'previous'].forEach((action) => {
+            __querySelectorLive(
+                `[s-slider-${action}]`,
+                ($elm) => {
+                    $elm.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this[action](true);
+                    });
+                },
+                {
+                    rootNode: this,
+                },
+            );
+        });
+        // goto
+        __querySelectorLive(
+            '[s-slider-goto]',
+            ($elm) => {
+                console.log('sl', $elm);
+                $elm.addEventListener('click', (e) => {
+                    const slideIdx =
+                        parseInt($elm.getAttribute('s-slider-goto')) ?? 0;
+                    this.goTo(slideIdx, true);
+                });
+            },
+            {
+                rootNode: this,
+            },
+        );
     }
 
     /**
@@ -1134,29 +1181,31 @@ export default class SSlider extends __SLitComponent {
             return;
         }
 
-        const nextBounds = $to.getBoundingClientRect();
-        const sliderBounds = this.$slidesWrapper.getBoundingClientRect();
+        if (this.props.behavior === 'basic') {
+            const nextBounds = $to.getBoundingClientRect();
+            const sliderBounds = this.$slidesWrapper.getBoundingClientRect();
 
-        const deltaX = nextBounds.left - sliderBounds.left,
-            deltaY = nextBounds.top - sliderBounds.top;
+            const deltaX = nextBounds.left - sliderBounds.left,
+                deltaY = nextBounds.top - sliderBounds.top;
 
-        __easeInterval(
-            this.props.transitionDuration,
-            (percent) => {
-                if (this.props.direction === 'horizontal') {
-                    const computedDelta =
-                        translates.x + (deltaX / 100) * percent * -1;
-                    $slideableItem.style.transform = `translateX(${computedDelta}px)`;
-                } else {
-                    const computedDelta =
-                        translates.y + (deltaY / 100) * percent * -1;
-                    $slideableItem.style.transform = `translateY(${computedDelta}px)`;
-                }
-            },
-            {
-                easing: this.props.transitionEasing,
-            },
-        );
+            __easeInterval(
+                this.props.transitionDuration,
+                (percent) => {
+                    if (this.props.direction === 'horizontal') {
+                        const computedDelta =
+                            translates.x + (deltaX / 100) * percent * -1;
+                        $slideableItem.style.transform = `translateX(${computedDelta}px)`;
+                    } else {
+                        const computedDelta =
+                            translates.y + (deltaY / 100) * percent * -1;
+                        $slideableItem.style.transform = `translateY(${computedDelta}px)`;
+                    }
+                },
+                {
+                    easing: this.props.transitionEasing,
+                },
+            );
+        }
     }
     render() {
         if (!this.$slides.length) return;

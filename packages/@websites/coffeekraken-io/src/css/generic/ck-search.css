@@ -18,7 +18,6 @@
 
   .s-filtrable-input {
     width: 100%;
-    @sugar.color (accent, accent, main);
   }
 
   .s-filtrable-input__keywords {

@@ -47,8 +47,8 @@ export default function ({
 
     const css = `
     ::selection {
-        color: sugar.color(accent, 100);
-        background-color: sugar.color(accent);
+        color: sugar.color(accent, --darken 40);
+        background: sugar.color(accent);
     }
   `;
 

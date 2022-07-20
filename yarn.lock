@@ -1481,6 +1481,7 @@ __metadata:
     "@coffeekraken/s-markdown-builder": ^2.0.0
     "@coffeekraken/s-page-transition-feature": ^2.0.0
     "@coffeekraken/s-panel-component": ^2.0.0
+    "@coffeekraken/s-parallax-feature": ^2.0.0
     "@coffeekraken/s-postcss-sugar-plugin": ^2.0.0
     "@coffeekraken/s-process": ^2.0.0
     "@coffeekraken/s-promise": ^2.0.0
@@ -2405,6 +2406,8 @@ __metadata:
     "@coffeekraken/s-class": ^2.0.0
     "@coffeekraken/s-feature": ^2.0.0
     "@coffeekraken/s-interface": ^2.0.0
+    "@coffeekraken/s-sugar-element": ^2.0.0
+    "@coffeekraken/s-theme": ^2.0.0
     "@coffeekraken/sugar": ^2.0.0
     "@floating-ui/dom": ^0.5.4
   languageName: unknown
@@ -3114,6 +3117,18 @@ __metadata:
     "@coffeekraken/s-lit-component": ^2.0.0
     "@coffeekraken/sugar": ^2.0.0
     lit: ^2.0.0-rc.3
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/s-parallax-feature@^2.0.0, @coffeekraken/s-parallax-feature@workspace:packages/features/s-parallax-feature":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/s-parallax-feature@workspace:packages/features/s-parallax-feature"
+  dependencies:
+    "@coffeekraken/s-class": ^2.0.0
+    "@coffeekraken/s-feature": ^2.0.0
+    "@coffeekraken/s-interface": ^2.0.0
+    "@coffeekraken/sugar": ^2.0.0
+    rematrix: ^0.7.2
   languageName: unknown
   linkType: soft
 

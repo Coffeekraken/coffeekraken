@@ -38,7 +38,9 @@ export default class SSliderComponentInterface extends __SInterface {
             behavior: {
                 description:
                     'Specify which behavior your want to use for your slider. Behavior are like "presets" with different animations, etc...',
+                values: ['none', 'basic'],
                 type: 'String',
+                default: 'none',
             },
             nextIconClass: {
                 description: 'Specify the class of the next icon',
@@ -76,7 +78,7 @@ export default class SSliderComponentInterface extends __SInterface {
                 description:
                     'Specify if you want to enable the click on the slides to navigate or not',
                 type: 'Boolean',
-                default: true,
+                default: false,
             },
             loop: {
                 description:

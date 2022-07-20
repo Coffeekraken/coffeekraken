@@ -56,6 +56,7 @@
         "@coffeekraken/s-markdown-builder": "^2.0.0",
         "@coffeekraken/s-page-transition-feature": "^2.0.0",
         "@coffeekraken/s-panel-component": "^2.0.0",
+        "@coffeekraken/s-parallax-feature": "^2.0.0",
         "@coffeekraken/s-postcss-sugar-plugin": "^2.0.0",
         "@coffeekraken/s-process": "^2.0.0",
         "@coffeekraken/s-promise": "^2.0.0",

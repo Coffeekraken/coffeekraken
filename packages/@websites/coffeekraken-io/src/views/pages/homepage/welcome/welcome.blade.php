@@ -1,58 +1,125 @@
 <section id="homepage-welcome">
 
-    <div class="__content">
+    <s-slider lnf="welcome-header" loop>
 
-        <div s-appear in="bottom">
-            @include('pages.homepage.welcome.partials.content')
-        <div>
+        <div s-slider-slide>
 
-        <div class="s-tooltip:left s-color:complementary __tooltip-1" s-appear in="left" delay="900">
-            Development stack
-        </div>
-        <div class="s-tooltip s-color:complementary __tooltip-2" s-appear in="right" delay="900">
-            UI Components
-        </div>
-        <div class="s-tooltip s-color:accent __tooltip-3" s-appear in="top" delay="900">
-            Production ready
-        </div>
+            <div class="__content">
 
-        <div class="s-avatar s-font:100 __avatar-1" s-appear in="right" delay="600">
-            <img src="https://i.pravatar.cc/300?v=42863" />
-        </div>
-         <div class="s-avatar s-font:100 __avatar-2" s-appear in="bottom" delay="600">
-            <img src="https://i.pravatar.cc/300?v=42863wefwef" />
-        </div>
-        <div class="s-avatar s-font:100 __avatar-3" s-appear in="top" delay="600">
-            <img src="https://i.pravatar.cc/300?v=428632" />
-        </div>
+                <div s-appear in="bottom">
+                    @include('pages.homepage.welcome.partials.content')
+                <div>
 
-        <i class="s-icon:file-ts __icon-1" s-appear in="left" delay="700"></i>
-        <i class="s-icon:file-css __icon-2" s-appear in="right" delay="700"></i>
-        <i class="s-icon:file-html __icon-3" s-appear in="bottom" delay="700"></i>
-        <i class="s-icon:logo-opensource __icon-4" s-appear in="top" delay="700"></i>
-        <i class="s-icon:ui-tooltip __icon-5" s-appear in="bottom" delay="700"></i>
+                <div class="__user-1" s-parallax amount="0.1">
+                    <div class="s-avatar s-font:100">
+                        <img src="https://i.pravatar.cc/300?v=42863" />
+                    </div>
+                    <div class="s-tooltip:left" s-parallax amount="0.05">
+                        Development stack
+                    </div>
+                </div>
 
-        <div class="s-loader:square-dots __loader-1" s-appear in="top" delay="500"></div>
+                <div class="__user-2" s-parallax amount="0.05">
+                    <div class="s-avatar s-font:100">
+                        <img src="https://i.pravatar.cc/300?v=4286e3" />
+                    </div>
+                    <div class="s-tooltip:left" s-parallax amount="0.05">
+                        UI Components
+                    </div>
+                </div>
 
-        <div class="__color-picker s-color:accent" s-appear in="left" delay="800">
-            <s-color-picker backdrop>
-                <button class="s-btn">
-                    <i class="s-icon:color"></i>
-                </button>
-            </s-color-picker>
-        </div>
+                <div class="__user-3" s-parallax amount="0.15">
+                    <div class="s-avatar s-font:100">
+                        <img src="https://i.pravatar.cc/300?v=42w863" />
+                    </div>
+                    <div class="s-tooltip:right" s-parallax amount="0.05">
+                        Production ready
+                    </div>
+                </div>
 
-        <div class="__datetime-picker s-color:accent" s-appear in="right" delay="800">
-            <s-datetime-picker calendar backdrop disable="weekend">
-                <button class="s-btn">
-                    <i class="s-icon:calendar"></i>
-                </button>
-            </s-datetime-picker>
+            </div>
+
         </div>
 
-        
+        <div s-slider-slide>
 
-    </div>
+             <div class="__content">
+
+                <i class="__icon-1 s-icon:calendar s-tc:complementary s-font:80"></i>
+                <i class="__icon-2 s-icon:calendar s-tc:accent s-font:80"></i>
+                <i class="__icon-3 s-icon:calendar s-font:80"></i>
+                <i class="__icon-4 s-icon:calendar s-tc:complementary s-font:80"></i>
+                <i class="__icon-5 s-icon:calendar s-tc:accent s-font:80"></i>
+                <i class="__icon-6 s-icon:calendar s-font:80"></i>
+
+                <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5">Our <span class="s-tc:complementary">clean</span><br /><span class="s-tc:accent">Datetime picker</span></h1>
+
+                <p class="s-typo:lead s-mbe:50 @mobile s-typo:p">
+                    Our datetime picker support all <span class="s-tc:complementary">ISO formats</span>,<br />disabling weekends, <span class="s-tc:accent">specific dates</span> as well as min and max date...<br />All of this in a nice and clean package.
+                </p>
+
+                <s-datetime-picker input button calendar disable="weekend" class="s-color:main">
+                </s-datetime-picker>
+
+                <br />
+
+                <a class="s-font:20 s-display:block s-mbs:30 s-mbe:50" href="/package/@coffeekraken/s-datetime-picker-component/doc/readme" title="Coffeekraken s-datetime-picker component">
+                    <i class="s-icon:documentation s-mie:10"></i> Read the doc
+                </a>
+
+                <br />
+
+                <a class="s-btn s-color:accent" s-slider-previous title="Discover our components!">
+                    <i class="s-icon:arrow-left s-mie:10"></i> Welcome
+                </a>
+                <a class="s-btn s-color:complementary s-mis:10" s-slider-next title="Discover our components!">
+                    Color picker <i class="s-icon:arrow-right s-mis:10"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+        <div s-slider-slide>
+
+             <div class="__content">
+
+                <i class="__icon-1 s-icon:color s-tc:complementary s-font:80"></i>
+                <i class="__icon-2 s-icon:color s-tc:accent s-font:80"></i>
+                <i class="__icon-3 s-icon:color s-font:80"></i>
+                <i class="__icon-4 s-icon:color s-tc:complementary s-font:80"></i>
+                <i class="__icon-5 s-icon:color s-tc:accent s-font:80"></i>
+                <i class="__icon-6 s-icon:color s-font:80"></i>
+
+                <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5">Our <span class="s-tc:complementary">clean</span><br /><span class="s-tc:accent">Color picker</span></h1>
+
+                <p class="s-typo:lead s-mbe:50 @mobile s-typo:p">
+                    Our datetime picker support all <span class="s-tc:complementary">ISO formats</span>,<br />disabling weekends, <span class="s-tc:accent">specific dates</span> as well as min and max date...<br />All of this in a nice and clean package.
+                </p>
+
+                <s-color-picker input button class="s-color:main" format="hsla">
+                </s-color-picker>
+
+                <br />
+
+                <a class="s-font:20 s-display:block s-mbs:30 s-mbe:50" href="/package/@coffeekraken/s-color-picker-component/doc/readme" title="Coffeekraken s-color-picker component">
+                    <i class="s-icon:documentation s-mie:10"></i> Read the doc
+                </a>
+
+                <br />
+
+                <a class="s-btn s-color:accent" s-slider-previous title="Discover our components!">
+                    <i class="s-icon:arrow-left s-mie:10"></i> Datetime picker
+                </a>
+                <a class="s-btn s-color:complementary s-mis:10" s-slider-next title="Discover our components!">
+                    Slider <i class="s-icon:arrow-right s-mis:10"></i>
+                </a>
+
+            </div>
+
+        </div>
+
+    </s-slider>
 
 
 </section>

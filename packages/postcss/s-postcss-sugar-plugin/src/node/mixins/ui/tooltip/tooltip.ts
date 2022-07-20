@@ -98,6 +98,12 @@ export default function ({
             display: block;
             max-width: 9999999px !important;
             pointer-events: none;
+
+            &:before {
+                content: '' !important;
+                position: absolute;
+                background: rgba(0,0,0,0);
+            }
       `);
     }
 
@@ -126,6 +132,7 @@ export default function ({
           background-color: sugar.color(current);
           color: sugar.color(current, foreground);
           transition: sugar.theme(ui.tooltip.transition);
+          transition-property: opacity;
           padding-inline: sugar.padding(ui.tooltip.paddingInline);
           padding-block: sugar.padding(ui.tooltip.paddingBlock);
           @sugar.depth( theme.ui.tooltip.depth);
@@ -138,13 +145,6 @@ export default function ({
                     border-color: sugar.color(current) transparent transparent transparent;
                 }
             }
-
-             &:before {
-                content: '' !important;
-                position: absolute;
-                background: rgba(0,0,0,0);
-            }
-
       `);
     }
 

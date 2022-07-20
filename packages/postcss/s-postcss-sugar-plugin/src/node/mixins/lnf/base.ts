@@ -50,7 +50,6 @@ export default function ({
         color: sugar.color(main, text);
         @sugar.font.family(default);
         @sugar.font.size(default);
-        @sugar.lnf.selection;
         --s-scale: sugar.theme(scale.default);
   `;
 

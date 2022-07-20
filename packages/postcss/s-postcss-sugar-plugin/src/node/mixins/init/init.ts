@@ -51,6 +51,7 @@ export default function ({
         '@sugar.reset;',
         `@sugar.theme(${params.variant}, ${params.theme});`,
         '@sugar.font.faces;',
+        '@sugar.lnf.selection;',
         // '@sugar.lnf.base;', called in the "@sugar.theme" mixin
     ];
 

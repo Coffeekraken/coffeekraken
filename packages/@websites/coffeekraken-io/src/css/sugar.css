@@ -3,8 +3,8 @@
 
 @sugar.classes;
 @sugar.media.classes ('mobile,tablet') {
-  @sugar.classes;
-  /* @sugar.container.classes;
+    @sugar.classes;
+    /* @sugar.container.classes;
     @sugar.grid.classes;
     @sugar.layout.classes;
     @sugar.margin.classes;
@@ -27,6 +27,9 @@
   fa:calendar-alt:calendar
   fa:angle-down:arrow-down
   fa:angle-up:arrow-up
+  fa:angle-left:arrow-left
+  fa:angle-right:arrow-right
+  fa:user-graduate:documentation
   fa:box-open:box
   fa:angle-up
   fa:palette:color

@@ -18,8 +18,8 @@ import {
 import { define as __sSugarFeature } from "@coffeekraken/s-sugar-feature";
 
 import __SLitComponent from "@coffeekraken/s-lit-component";
-// import { define as __sParallaxFeature } from '@coffeekraken/s-parallax-feature';
 import { define as __SSidePanelWebcomponent } from "@coffeekraken/s-panel-component";
+import { define as __sParallaxFeature } from "@coffeekraken/s-parallax-feature";
 import { define as __SRangeWebcomponent } from "@coffeekraken/s-range-component";
 
 // Components
@@ -114,7 +114,7 @@ __SConductor.setup({
   __sAppearFeature();
   __sRefocusFeature();
   __sInlineFeature();
-  // __sParallaxFeature();
+  __sParallaxFeature();
   __sFormValidateFeature({
     customValidations: {
       coffeekraken: (value, helpers) => {

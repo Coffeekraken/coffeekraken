@@ -488,6 +488,7 @@ export default function ({
     );
     vars.code(
         () => `
+        .s-tooltip[placement="top"],
         .s-tooltip {
             @sugar.ui.tooltip($position: top, $scope: position);
         }
@@ -516,6 +517,7 @@ export default function ({
     );
     vars.code(
         () => `
+        .s-tooltip[placement="right"],
         .s-tooltip--right {
             @sugar.ui.tooltip($position: right, $scope: position);
         }
@@ -544,6 +546,7 @@ export default function ({
     );
     vars.code(
         () => `
+        .s-tooltip[placement="left"],
         .s-tooltip--left {
             @sugar.ui.tooltip($position: left, $scope: position);
         }
@@ -572,6 +575,7 @@ export default function ({
     );
     vars.code(
         () => `
+        .s-tooltip[placement="bottom"],
         .s-tooltip--bottom {
             @sugar.ui.tooltip($position: bottom, $scope: position);
         }

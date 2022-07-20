@@ -31,18 +31,18 @@ Here's the list of currently official available components:
 {{#each docmap.menu.slug}}
 {{#ifMatch @key 'styleguide\/ui' }}
 
-- [`{{replace @key '/styleguide/ui/' ''}}`]({{@key}})
-  {{/ifMatch}}
-  {{/each}}
+-   [`{{replace @key '/styleguide/ui/' ''}}`]({{@key}})
+    {{/ifMatch}}
+    {{/each}}
 
 And here's the list of our official `web`components:
 
 {{#each docmap.menu.packages }}
 {{#ifMatch @key '-component$' }}
 
-- [`{{replace @key '@coffeekraken/' ''}}`](/{{@key}}/doc/readme)
-  {{/ifMatch}}
-  {{/each}}
+-   [`{{replace @key '@coffeekraken/' ''}}`](/package/{{@key}}/doc/readme)
+    {{/ifMatch}}
+    {{/each}}
 
 ## Components MUST follow some simple rules
 

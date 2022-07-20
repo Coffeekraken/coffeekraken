@@ -94,7 +94,7 @@ export default function ({
         vars.push(`
             font-size: sugar.scalable(1rem);
             position: absolute;
-            z-index: 500;
+            z-index: 50;
             display: block;
             max-width: 9999999px !important;
             pointer-events: none;

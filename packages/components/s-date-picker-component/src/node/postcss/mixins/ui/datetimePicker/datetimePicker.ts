@@ -115,7 +115,7 @@ export default function ({
 
             &.disabled {
                 opacity: 1 !important;
-                color: sugar.color(base, text, --alpha 0.15);
+                color: sugar.color(base, text, --alpha 0.3);
                 position: relative;
 
                 &:after {
@@ -129,7 +129,7 @@ export default function ({
                     border-radius: sugar.border-radius();
                     transform-origin: 50% 50%;
                     transform: translate(-50%, -50%) rotate(-10deg);
-                    opacity: 0.1;
+                    opacity: 0.3;
                 }
             }
 

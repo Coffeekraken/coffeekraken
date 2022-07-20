@@ -181,7 +181,7 @@ export default function ({
             case 'rounded':
                 vars.push(`
                     img {
-                        border-radius: sugar.border.radius(ui.avatar.borderRadius);
+                        border-radius: 9999px;
                     }
                     `);
                 break;
@@ -189,7 +189,7 @@ export default function ({
             default:
                 vars.push(`
                     img {
-                        border-radius: 0.5em;
+                        border-radius: sugar.border.radius(ui.avatar.borderRadius)m;
                     }
                 `);
                 break;

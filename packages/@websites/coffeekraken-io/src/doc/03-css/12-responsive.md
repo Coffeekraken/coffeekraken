@@ -26,10 +26,10 @@ See this as a simpler replacement for the traditional `@media` css statement. He
 
 ```css
 .my-button {
-  background: red;
-  @sugar.media mobile {
-    background: green;
-  }
+    background: red;
+    @sugar.media mobile {
+        background: green;
+    }
 }
 ```
 
@@ -40,7 +40,7 @@ This(ese) "breakpoints" comes from your theme configuration as all other setting
 `themeMedia.config.ts`
 
 ```js
-{{toString media}}
+export default {{toString media}};
 ```
 
 These settings gives us a "mobile first" approach and 5 breakpoints that are `mobile`, `tablet`, `desktop`, `wide` and `dwarf`. The role of the `defaultAction` property will be more obvious right bellow.
@@ -84,15 +84,15 @@ Consider having a some buttons with different colors like so:
  * to generate these classes for medias like tablet, mobile, etc...
  */
 @sugar.media.classes {
-  .btn {
-    background: red;
-  }
-  .btn-green {
-    background: green;
-  }
-  .btn-yellow {
-    background: yellow;
-  }
+    .btn {
+        background: red;
+    }
+    .btn-green {
+        background: green;
+    }
+    .btn-yellow {
+        background: yellow;
+    }
 }
 ```
 

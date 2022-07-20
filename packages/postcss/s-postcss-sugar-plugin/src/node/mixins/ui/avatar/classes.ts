@@ -12,9 +12,9 @@ import __STheme from '@coffeekraken/s-theme';
  * Generate the avatar classes
  *
  * @param       {('solid')[]}                                                [styles=['solid']]         The style(s) you want to generate
- * @param       {('default'|'square'|'pill'|'circle')[]}                 [shape=['default'|'square','pill','circle']]         The shape(s) you want to generate
+ * @param       {('default'|'square'|'rounded')[]}                 [shape=['default'|'square','pill','rounded']]         The shape(s) you want to generate
  * @param       {'solid''}                                                  [defaultStyle='theme.ui.avatar.defaultStyle']           The default style you want
- * @param       {'default'|'square'|'pill'}                                     [defaultShape='theme.ui.avatar.defaultShape']           The default shape you want
+ * @param       {'default'|'square'|'rounded'}                                     [defaultShape='theme.ui.avatar.defaultShape']           The default shape you want
  * @param       {('bare'|'lnf'|'shape'|'interactive'|'notifications')[]}        [scope=['bare','lnf','shape','interactive','notifications']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
@@ -35,8 +35,8 @@ class postcssSugarPluginUiAvatarClassesInterface extends __SInterface {
             },
             shapes: {
                 type: 'String[]',
-                values: ['default', 'square', 'pill', 'circle'],
-                default: ['default', 'square', 'pill', 'circle'],
+                values: ['default', 'square', 'rounded'],
+                default: ['default', 'square', 'rounded'],
             },
             defaultStyle: {
                 type: 'String',
@@ -45,7 +45,7 @@ class postcssSugarPluginUiAvatarClassesInterface extends __SInterface {
             },
             defaultShape: {
                 type: 'String',
-                values: ['default', 'square', 'pill'],
+                values: ['default', 'square', 'rounded'],
                 default: __STheme.get('ui.avatar.defaultShape'),
             },
             scope: {
@@ -74,9 +74,9 @@ class postcssSugarPluginUiAvatarClassesInterface extends __SInterface {
 
 export interface IPostcssSugarPluginUiAvatarClassesParams {
     styles: 'solid'[];
-    shapes: ('default' | 'square' | 'pill' | 'circle')[];
+    shapes: ('default' | 'square' | 'rounded')[];
     defaultStyle: 'solid';
-    defaultShape: 'default' | 'square' | 'pill' | 'circle';
+    defaultShape: 'default' | 'square' | 'rounded';
     scope: ('bare' | 'lnf' | 'shape' | 'interactive' | 'notifications')[];
 }
 
@@ -144,8 +144,9 @@ export default function ({
             .join('\n')}
         * @cssClass             s-avatar:interactive            Specify that this avatar is interactive
         * 
-        ${finalParams.styles.map((style) => {
-            return ` * @example        html         ${style}
+        ${finalParams.styles
+            .map((style) => {
+                return ` * @example        html         ${style}
                   *   <div class="s-avatar${
                       style === finalParams.defaultStyle ? '' : `:${style}`
                   } s-font:100 s-mie:20">
@@ -188,10 +189,12 @@ export default function ({
                       Math.random() * 99999,
                   )}" />
                   * </div>`;
-        })}
+            })
+            .join('\n')}
         *
-        ${finalParams.shapes.map((shape) => {
-            return ` * @example        html         ${shape}
+        ${finalParams.shapes
+            .map((shape) => {
+                return ` * @example        html         ${shape}
                   *   <div class="s-avatar${
                       shape === finalParams.defaultShape ? '' : `:${shape}`
                   } s-font:100 s-mie:20">
@@ -234,7 +237,8 @@ export default function ({
                       Math.random() * 99999,
                   )}" />
                   * </div>`;
-        })}
+            })
+            .join('\n')}
         * 
         * @example       html         Notifications
         * <div class="s-avatar s-font:100 s-mie:20" notifications="10">

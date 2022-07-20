@@ -1,7 +1,11 @@
 import __SFeature from '@coffeekraken/s-feature';
+import __SSugarElement from '@coffeekraken/s-sugar-element';
+import __STheme from '@coffeekraken/s-theme';
 import __imageLoaded from '@coffeekraken/sugar/js/dom/load/imageLoaded';
 import __imagesLoaded from '@coffeekraken/sugar/js/dom/load/imagesLoaded';
+import __appendStyleTag from '@coffeekraken/sugar/js/dom/tag/appendStyleTag';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 import __SAppearFeatureInterface from './interface/SAppearFeatureInterface';
 
 // @ts-ignore
@@ -42,7 +46,9 @@ import __css from '../../../../src/css/s-appear-feature.css'; // relative to /di
 export interface ISAppearFeatureProps {
     in: string | 'fade';
     out: string | 'fade';
-    delay: number;
+    delay: number[];
+    duration: number[];
+    distance: number[];
     appear: boolean;
 }
 
@@ -71,6 +77,7 @@ export default class SAppearFeature extends __SFeature {
     }
 
     async mount() {
+
         // check if the element is fully loaded (for images)
         switch (this.node.tagName.toLowerCase()) {
             case 'img':
@@ -89,9 +96,81 @@ export default class SAppearFeature extends __SFeature {
     }
 
     appear() {
+        const appearId = __uniqid();
+        let delay = this.props.delay[0];
+        if (this.props.delay.length === 2) {
+            const minDelay = this.props.delay[0],
+                    maxDelay = this.props.delay[1];
+            delay = minDelay + (maxDelay - minDelay) * Math.random();
+        }
+        let duration = this.props.duration[0];
+        if (this.props.duration.length === 2) {
+            const minDuration = this.props.duration[0],
+                    maxDuration = this.props.duration[1];
+            duration = minDuration + (maxDuration - minDuration) * Math.random();
+        }
+
+        let distance = this.props.distance[0];
+        if (this.props.distance.length === 2) {
+            const minDistance = this.props.distance[0],
+                    maxDistance = this.props.distance[1];
+            distance = minDistance + (maxDistance - minDistance) * Math.random();
+        }
+
+        const sugarElement = new __SSugarElement(this.node);
+
         setTimeout(() => {
             this.props.appear = true;
-        }, this.props.delay ?? 0);
+
+            let distanceX = 0,
+                distanceY = 0;
+
+            switch(this.props.in) {
+                case 'top':
+                    distanceY = distance * -1;
+                break;
+                case 'bottom':
+                    distanceY = distance;
+                    break;
+                case 'left':
+                    distanceX = distance * -1;
+                break;
+                case 'right':
+                    distanceX = distance;
+                    break;
+            }
+
+            const newTransforms = sugarElement.simulateTransform({
+                translateX: distanceX,
+                translateY: distanceY
+            });
+
+            const animationStr = `
+                @keyframes s-appear-${appearId} {
+                    from {
+                        transform: ${newTransforms.matrix};
+                        opacity: 0;
+                    }
+                    to {
+                        transform: ${sugarElement.matrixStr};
+                        opacity: 1;
+                    }
+                }
+                [s-appear-id="${appearId}"] {
+                    animation: s-appear-${appearId} ${duration / 1000}s ${__STheme.get('easing.default')} forwards;
+                }
+            `;
+
+            // add style into the page and assign the animation to the node element
+            const $style = __appendStyleTag(animationStr);
+            this.node.setAttribute('s-appear-id', appearId);
+
+            // after animation, remove the animation totally
+            setTimeout(() => {
+                this.node.removeAttribute('s-appear-id');
+                $style.remove();
+            }, duration);
+        }, delay);
     }
 }
 

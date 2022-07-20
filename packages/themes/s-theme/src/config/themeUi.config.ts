@@ -540,14 +540,14 @@ export default (env, config) => {
              * @name          defaultShape
              * @namespace     config.themeUi.avatar
              * @type          String
-             * @default      [theme.ui.default.defaultShape]
+             * @default      rounded
              *
              * Specify the default shape for your avatar ui
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultShape: '[theme.ui.default.defaultShape]',
+            defaultShape: 'rounded',
             /**
              * @name          rhythmVertical
              * @namespace     config.themeUi.avatar

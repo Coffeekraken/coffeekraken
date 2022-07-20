@@ -39,7 +39,6 @@ function getRotateProperties(
     z: number;
 } {
     if (!window.getComputedStyle) return;
-    let idx, mat;
     const style = getComputedStyle($elm);
     const transform =
         style.transform ||
@@ -62,7 +61,7 @@ function getRotateProperties(
         matrixVal10 = parseFloat(values[9]),
         a = Math.round(Math.asin(-matrixVal10 / cosB) * 180 / pi),
         matrixVal1 = parseFloat(values[0]),
-        c = Math.round(Math.acos(matrixVal1 / cosB) * 180 / pi);
+        c = Math.round(Math.acos(matrixVal1 / cosB) * 180 / pi) * -1;
 
     return {
         x: a,

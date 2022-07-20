@@ -51,6 +51,7 @@ export interface ISugarElementTransforms {
     rotateX: number;
     rotateY: number;
     rotateZ: number;
+    matrix?: string;
 }
 
 export default class SSugarElement {
@@ -105,6 +106,46 @@ export default class SSugarElement {
      */
     constructor($elm: HTMLElement) {
         this.$elm = $elm;
+    }
+
+    /**
+     * @name       simulateTransform
+     * @type      Function
+     *
+     * Allows you to get back a new matrix by adding the properties passed
+     * to the current element matrix. This mean that if the element is currently
+     * in translateX 50 and you pass to the translateX argument 10, it will be 60 at the end.
+     * To override the 
+     *
+     * @param       {Number}        [x=null]            The x translation in px
+     * @param       {Number}        [y=null]            The y translation in px
+     * @param      {Number}        [z=null]            The z translation in px
+     * @return     {SSugarElement}                     The sugar element instance
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    simulateTransform(transform: Partial<ISugarElementTransforms>): ISugarElementTransforms {
+        const translateMatrix = __rematrix.translate3d(transform.translateX ?? 0, transform.translateY ?? 0, transform.translateZ ?? 0),
+            rotateXMatrix = __rematrix.rotateX(transform.rotateX ?? 0),
+            rotateYMatrix = __rematrix.rotateY(transform.rotateY ?? 0),
+            rotateZMatrix = __rematrix.rotateZ(transform.rotateZ ?? 0);
+        let newMatrix: number[] = this.matrix;
+         // @ts-ignore
+         newMatrix = [newMatrix, translateMatrix, rotateXMatrix, rotateYMatrix, rotateZMatrix].reduce(__rematrix.multiply);
+
+         const newTranslates = this.getTranslates(newMatrix),
+            newRotates = this.getRotates(newMatrix);
+
+         return {
+            translateX: newTranslates.x,
+            translateY: newTranslates.y,
+            translateZ: newTranslates.z,
+            rotateX: newRotates.x,
+            rotateY: newRotates.y,
+            rotateZ: newRotates.z,
+            matrix: __rematrix.toString(newMatrix)
+         };
     }
 
     /**
@@ -169,11 +210,11 @@ export default class SSugarElement {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    getTranslates(): ISugarElementTranslates {
+    getTranslates(fromMatrix: number[] = this.matrix): ISugarElementTranslates {
         return {
-            x: isNaN(this.matrix[12]) ? 0 : this.matrix[12],
-            y: isNaN(this.matrix[13]) ? 0 : this.matrix[13],
-            z: isNaN(this.matrix[14]) ? 0 : this.matrix[14],
+            x: isNaN(fromMatrix[12]) ? 0 : fromMatrix[12],
+            y: isNaN(fromMatrix[13]) ? 0 : fromMatrix[13],
+            z: isNaN(fromMatrix[14]) ? 0 : fromMatrix[14],
         };
     }
 
@@ -188,8 +229,8 @@ export default class SSugarElement {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    getRotates(): ISugarElementRotates {
-        const matrix = this.matrix.toString();
+    getRotates(fromMatrix: number[] = this.matrix): ISugarElementRotates {
+        const matrix = fromMatrix.toString();
         var values = matrix.split(','),
             pi = Math.PI,
             sinB = parseFloat(values[8]),
@@ -211,7 +252,7 @@ export default class SSugarElement {
      * @name       setTranslate
      * @type      Function
      *
-     * Allows you to set the translate of an HTMLElement by setting his transformation properties.
+     * Allows you to set the translate of an HTMLElement by setting his translates properties.
      * This will override the previous matrix translates. If you want to "add" a translation, use the `translate` method instead;
      *
      * @param       {Number}        [x=null]            The x translation in px
@@ -234,7 +275,7 @@ export default class SSugarElement {
      * @name       translate
      * @type      Function
      *
-     * Allows you to translate an HTMLElement by setting his transformation properties
+     * Allows you to translate an HTMLElement by setting his translate properties
      *
      * @param       {Number}        [x=null]            The x translation in px
      * @param       {Number}        [y=null]            The y translation in px
@@ -285,11 +326,9 @@ export default class SSugarElement {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     setRotate(x?: number, y?: number, z?: number): SSugarElement {
-        const rotateMatrix = __rematrix.multiply(
-            __rematrix.rotateX(x ?? 0),
-            __rematrix.rotateY(y ?? 0),
-            __rematrix.rotateZ(z ?? 0),
-        );
+
+        const rotateMatrix = [__rematrix.rotateX(x ?? 0), __rematrix.rotateX(y ?? 0), __rematrix.rotateX(z ?? 0)].reduce(__rematrix.multiply);
+
         const newMatrix = this.matrix;
         if (x !== undefined) {
             newMatrix[5] = rotateMatrix[5];

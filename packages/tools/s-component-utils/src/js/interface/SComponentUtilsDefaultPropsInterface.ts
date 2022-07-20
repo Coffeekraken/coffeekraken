@@ -45,7 +45,7 @@ export default class SComponentUtilsDefaultPropsInterface extends __SInterface {
                     'Specify if your component adopt the style of the global DOM. This worts only if you are using a shadowRoot element',
                 type: 'Boolean',
                 default: true,
-                physical: true,
+                // physical: true,
             },
             saveState: {
                 description:

@@ -55,6 +55,10 @@ function whenEntersViewport(
             threshold: 0, // visible amount of item shown in relation to root
         };
 
+        // if (__isInViewport(elm)) {
+        //     return resolve(elm);
+        // }
+
         function onChange(changes, observer) {
             changes.forEach((change) => {
                 if (change.intersectionRatio > 0) {

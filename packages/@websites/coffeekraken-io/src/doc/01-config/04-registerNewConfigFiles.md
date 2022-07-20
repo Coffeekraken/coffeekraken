@@ -18,7 +18,7 @@
 
 To register some new configuration files for your package, you just need to create a `sugar.json` file at your package root directory and specify where are stored your configuration files like so:
 
-```json
+```js
 {
   "config": {
     "folders": [

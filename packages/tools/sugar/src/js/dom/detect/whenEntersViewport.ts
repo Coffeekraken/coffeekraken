@@ -1,4 +1,5 @@
 // @ts-nocheck
+// import __isInViewport from '../is/inViewport';
 
 /**
  * @name      whenEntersViewport

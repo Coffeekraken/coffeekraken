@@ -23,10 +23,10 @@ body {
     display: inline-block !important;
 }
 
-[class*='s-btn']:not(s-date-picker [class*='s-btn']):not(.preview
+/* [class*='s-btn']:not(s-date-picker [class*='s-btn']):not(.preview
         [class*='s-btn']) {
     border: none !important;
-}
+} */
 
 .s-container {
     @sugar.media (>=wide) {

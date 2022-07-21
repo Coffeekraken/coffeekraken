@@ -44,11 +44,13 @@ export default function ({
 
     // bare
     if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`
+        vars.push(`p
             font-size: sugar.scalable(1rem);
             display: inline-block;
             padding-inline: sugar.padding(ui.${finalParams.name}.paddingInline);
             padding-block: sugar.padding(ui.${finalParams.name}.paddingBlock);
+
+
         `);
     }
 

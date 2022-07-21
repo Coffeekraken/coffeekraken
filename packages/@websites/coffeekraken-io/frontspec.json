@@ -18,6 +18,10 @@
         }
     },
     "assets": {
+        "google": {
+            "defer": true,
+            "src": "https://apis.google.com/js/platform.js"
+        },
         "dev": {
             "type": "module",
             "defer": true,

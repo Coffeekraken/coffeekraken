@@ -1,0 +1,50 @@
+.s-rating {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+
+    .s-rating__icons-wrapper {
+        display: flex;
+    }
+
+    .s-rating__base {
+    }
+    .s-rating__rate {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}
+
+s-rating[readonly] {
+    pointer-events: none;
+}
+
+s-rating[lnf='default'] {
+    .s-rating__icons-wrapper {
+        i {
+            padding-inline: 5px;
+        }
+    }
+
+    .s-rating:hover .s-rating__rate {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .s-rating__base {
+        color: sugar.color(main, --alpha 0.3);
+    }
+    .s-rating__rate {
+        color: sugar.color(accent);
+        clip-path: polygon(
+            0 0,
+            calc(var(--s-rating-percent) * 1%) 0,
+            calc(var(--s-rating-percent) * 1%) 100%,
+            0 100%
+        );
+
+        i:hover ~ i {
+            color: sugar.color(main, --alpha 0.3);
+        }
+    }
+}

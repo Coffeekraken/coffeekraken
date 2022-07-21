@@ -8,7 +8,7 @@
         "packages/*/*/src/shared/**/*.ts",
         "packages/*/*/.local/.sugar/**/*.ts",
         "packages/*/*/.sugar/**/*.ts"
-    ],
+, "packages/components/s-rating-component/src/js/SRatingComponentts"    ],
     "exclude": [
         "/**/lib",
         "/node_modules/**",

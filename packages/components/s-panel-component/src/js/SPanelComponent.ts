@@ -184,6 +184,8 @@ export default class SPanel extends __SLitComponent {
     }
     isTopPanel() {
         const stackIdx = this.constructor._activePanels.indexOf(this);
+        console.log(this, this.constructor._activePanels);
+
         return stackIdx === this.constructor._activePanels.length - 1;
     }
     updated(changedProperties) {
@@ -217,12 +219,11 @@ export default class SPanel extends __SLitComponent {
             );
         }
 
-        console.log(this.props);
-
         // closeOn property
         this.props.closeOn.forEach((what) => {
             if (what === 'click') {
                 this.addEventListener('click', (e) => {
+                    console.log('ee', this, this._$container, e.target);
                     !this._$container.contains(e.target) &&
                         this.isTopPanel() &&
                         this.close();
@@ -289,6 +290,10 @@ export default class SPanel extends __SLitComponent {
         // put the panel in the body
         if (this.parentNode !== document.body) {
             document.body.appendChild(this);
+        }
+
+        if (!this.constructor._activePanels.includes(this)) {
+            this.constructor._activePanels.push(this);
         }
 
         setTimeout(() => {

@@ -27,6 +27,10 @@
         <ck-settings mount-when="inViewport"></ck-settings>
     </s-panel>
 
+    <s-panel id="ratings" position="right" backdrop>
+        <ck-ratings></ck-ratings>
+    </s-panel>
+
     @include('layouts.footer.footer')
 
     <s-scroll class="scroll-top" to="top">

@@ -326,6 +326,7 @@ export default function ({
         `
       .s-btn--block {
         display: block !important;
+        width: 100%;
       }
     `,
         {

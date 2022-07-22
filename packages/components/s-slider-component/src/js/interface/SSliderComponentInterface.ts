@@ -40,7 +40,8 @@ export default class SSliderComponentInterface extends __SInterface {
                     'Specify which behavior your want to use for your slider. Behavior are like "presets" with different animations, etc...',
                 values: ['none', 'basic'],
                 type: 'String',
-                default: 'none',
+                default: 'basic',
+                physical: true,
             },
             nextIconClass: {
                 description: 'Specify the class of the next icon',
@@ -85,6 +86,12 @@ export default class SSliderComponentInterface extends __SInterface {
                     'Specify if you want to enable the loop behavior or not',
                 type: 'Boolean',
                 default: false,
+            },
+            slide: {
+                description: 'Specify the active slide id',
+                type: 'Number',
+                default: 0,
+                physical: true,
             },
             progress: {
                 description:

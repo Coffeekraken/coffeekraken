@@ -4,14 +4,13 @@ import __SLitComponent, {
     ISLitComponentDefaultProps,
 } from '@coffeekraken/s-lit-component';
 import __onSwipe from '@coffeekraken/sugar/js/dom/detect/onSwipe';
-import __getTranslateProperties from '@coffeekraken/sugar/js/dom/style/getTranslateProperties';
-import __easeInterval from '@coffeekraken/sugar/shared/function/easeInterval';
 import __isClass from '@coffeekraken/sugar/shared/is/class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __parse from '@coffeekraken/sugar/shared/string/parse';
 import { css, html, unsafeCSS } from 'lit';
 // @ts-ignore
 import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
+import __querySelectorUp from '@coffeekraken/sugar/js/dom/query/querySelectorUp';
+import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 import __css from '../../../../src/css/s-slider-component.css'; // relative to /dist/pkg/esm/js
 import __SSliderComponentInterface from './interface/SSliderComponentInterface';
 import __SSliderBehavior from './SSliderBehavior';
@@ -253,6 +252,7 @@ export interface ISSliderComponentProps extends ISLitComponentDefaultProps {
     nav: boolean;
     mousewheel: boolean;
     clickOnSlide: boolean;
+    slide: number;
     loop: boolean;
     progress: boolean;
     timer: number;
@@ -317,13 +317,33 @@ export default class SSlider extends __SLitComponent {
                 interface: __SSliderComponentInterface,
             }),
         );
-        this.$slides = this.querySelectorAll('[s-slider-slide]');
+
+        // assign a uniqid if not already setted
+        if (!this.id) {
+            this.setAttribute('sid', `s-slider-${__uniqid()}`);
+        }
+
+        this.$slides = Array.from(
+            document.querySelectorAll(`[s-slider-slide]`),
+        ).filter(($slide) => {
+            const $parentSlider = __querySelectorUp($slide, 's-slider');
+            if (!$parentSlider) return true;
+            if ($parentSlider === this) return true;
+            return false;
+        });
+
+        console.log(this.$slides);
+
         this.$slides.forEach(($item) => {
             // add the item class
             $item.classList.add(this.componentUtils.className('__slide'));
         });
     }
-    async mount() {}
+    async mount() {
+        console.log('mound');
+        // set the initial slide idx from properties
+        this.state.currentSlideIdx = this.props.slide;
+    }
     async firstUpdated() {
         // bare elements
         this.$root = this.querySelector(
@@ -332,14 +352,17 @@ export default class SSlider extends __SLitComponent {
 
         // slides
         this.$slidesWrapper = this.querySelector(
-            `.${this.componentUtils.className('__slides-wrapper')}`,
+            `.${this.componentUtils.className(
+                '__slides-wrapper',
+            )}:not(s-slider#${
+                this.id
+            } s-slider .${this.componentUtils.className('__slides-wrapper')})`,
         );
         this.$slidesContainer = this.querySelector(
-            `.${this.componentUtils.className('__slides')}`,
+            `.${this.componentUtils.className('__slides')}:not(s-slider#${
+                this.id
+            } s-slider .${this.componentUtils.className('__slides')})`,
         );
-
-        // handle navigation
-        this._initNavigation();
 
         // default behavior
         if (
@@ -425,33 +448,11 @@ export default class SSlider extends __SLitComponent {
     }
 
     /**
-     * This function will get the HTMLElement that are tagged with the "s-slide-nav" attribute.
-     * If the element has no value, it will be treated as a container and will be filled with HTMLElements that will be the actual
-     * navigation items.
-     * If the element has a value, it will be treated as a navigation item and will go to the corresponding slide on click.
-     */
-    _initNavigation() {
-        // navs
-        this.$navs = this.querySelectorAll('[s-slider-nav]');
-
-        if (!this.$navs.length && this.props.nav) {
-            Array(this.$slides.length)
-                .fill()
-                .forEach((v, i) => {
-                    const $nav = document.createElement('div');
-                    $nav.setAttribute('s-slider-nav', i);
-                    this.appendChild($nav);
-                });
-            // navs
-            this.$navs = this.querySelectorAll('[s-slider-nav]');
-        }
-    }
-
-    /**
      * This function listen for mousewheel events and will handle the scroll
      */
     _handleMousewheel() {
         this.addEventListener('wheel', (e) => {
+            e.preventDefault();
             if (e.deltaY < 0) {
                 this.previous();
             } else if (e.deltaY > 0) {
@@ -530,7 +531,7 @@ export default class SSlider extends __SLitComponent {
         // next/previous
         ['next', 'previous'].forEach((action) => {
             __querySelectorLive(
-                `[s-slider-${action}]`,
+                `[s-slider-${action}]:not(s-slider#${this.id} s-slider [s-slider-${action}])`,
                 ($elm) => {
                     $elm.addEventListener('click', (e) => {
                         e.preventDefault();
@@ -636,6 +637,7 @@ export default class SSlider extends __SLitComponent {
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     setCurrentSlideByIdx(idx: number): void {
+        this.props.slide = idx;
         this.state.currentSlideIdx = idx;
     }
 
@@ -988,6 +990,7 @@ export default class SSlider extends __SLitComponent {
         if (!nextSlide || nextSlide.idx === this.currentSlide.idx) return;
         const currentSlide = this.getCurrentSlide();
         this.state.currentSlideIdx = nextSlide.idx;
+        this.props.slide = nextSlide.idx;
 
         this._dispatch('s-slider-goto', {
             currentSlide,
@@ -1173,43 +1176,43 @@ export default class SSlider extends __SLitComponent {
      * of simply changing the current slide.
      */
     _transitionHandler($from, $to) {
-        const $slideableItem = this.$slidesWrapper.children[0];
-        const translates = __getTranslateProperties($slideableItem);
-
         if (this.props.transitionHandler) {
             this.props.transitionHandler($from, $to);
             return;
         }
 
-        if (this.props.behavior === 'basic') {
-            const nextBounds = $to.getBoundingClientRect();
-            const sliderBounds = this.$slidesWrapper.getBoundingClientRect();
-
-            const deltaX = nextBounds.left - sliderBounds.left,
-                deltaY = nextBounds.top - sliderBounds.top;
-
-            __easeInterval(
-                this.props.transitionDuration,
-                (percent) => {
-                    if (this.props.direction === 'horizontal') {
-                        const computedDelta =
-                            translates.x + (deltaX / 100) * percent * -1;
-                        $slideableItem.style.transform = `translateX(${computedDelta}px)`;
-                    } else {
-                        const computedDelta =
-                            translates.y + (deltaY / 100) * percent * -1;
-                        $slideableItem.style.transform = `translateY(${computedDelta}px)`;
-                    }
-                },
-                {
-                    easing: this.props.transitionEasing,
-                },
-            );
+        if (this.props.behavior?.goTo) {
+            this.props.behavior.goTo($from, $to);
+            return;
         }
+
+        // const nextBounds = $to.getBoundingClientRect();
+        // const sliderBounds = this.$slidesWrapper.getBoundingClientRect();
+
+        // const deltaX = nextBounds.left - sliderBounds.left,
+        //     deltaY = nextBounds.top - sliderBounds.top;
+
+        // __easeInterval(
+        //     this.props.transitionDuration,
+        //     (percent) => {
+        //         if (this.props.direction === 'horizontal') {
+        //             const computedDelta =
+        //                 translates.x + (deltaX / 100) * percent * -1;
+        //             $slideableItem.style.transform = `translateX(${computedDelta}px)`;
+        //         } else {
+        //             const computedDelta =
+        //                 translates.y + (deltaY / 100) * percent * -1;
+        //             $slideableItem.style.transform = `translateY(${computedDelta}px)`;
+        //         }
+        //     },
+        //     {
+        //         easing: this.props.transitionEasing,
+        //     },
+        // );
     }
     render() {
         if (!this.$slides.length) return;
-        const curentSlide = this.getCurrentSlide();
+        const currentSlide = this.getCurrentSlide();
         let slide = this.getCurrentSlide();
         return html`
             <div
@@ -1231,7 +1234,7 @@ export default class SSlider extends __SLitComponent {
                     class="${this.componentUtils.className('__slides-wrapper')}"
                 >
                     <div class="${this.componentUtils.className('__slides')}">
-                        ${Array.from(this.$slides).map(($slide, idx) => {
+                        ${this.$slides.map(($slide) => {
                             return $slide;
                         })}
                     </div>
@@ -1252,31 +1255,15 @@ export default class SSlider extends __SLitComponent {
                       `
                     : ''}
                 <div class="${this.componentUtils.className('__nav')}">
-                    ${Array.from(this.$navs).map(($nav, idx) => {
-                        if (!$nav._navInited) {
-                            $nav.addEventListener('click', (e) => {
-                                e.preventDefault();
-                                this.goTo(
-                                    __parse(
-                                        e.target.getAttribute('s-slider-nav'),
-                                    ) ?? idx,
-                                );
-                            });
-                            $nav._navInited = true;
-                        }
-                        if ($nav.getAttribute('s-slider-nav')) {
-                            const id = __parse(
-                                $nav.getAttribute('s-slider-nav'),
-                            );
-                            if (id === curentSlide.id || id === curentSlide.idx)
-                                $nav.classList.add('active');
-                            else $nav.classList.remove('active');
-                        } else {
-                            if (this.state.currentSlideIdx === idx)
-                                $nav.classList.add('active');
-                            else $nav.classList.remove('active');
-                        }
-                        return $nav;
+                    ${this.$slides.map(($slide, idx) => {
+                        return html`
+                            <div
+                                class="${this.componentUtils.className(
+                                    '__nav-item',
+                                )} ${idx === currentSlide.idx ? 'active' : ''}"
+                                @click=${() => this.goTo(idx)}
+                            ></div>
+                        `;
                     })}
                 </div>
                 ${this.props.controls

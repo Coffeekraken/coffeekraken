@@ -1,4 +1,6 @@
 import __slideable from '@coffeekraken/sugar/js/dom/slide/slideable';
+import __getTranslateProperties from '@coffeekraken/sugar/js/dom/style/getTranslateProperties';
+import __easeInterval from '@coffeekraken/sugar/shared/function/easeInterval';
 import __SSliderBehavior from '../SSliderBehavior';
 import __SSliderSlideableBehaviorInterface from './interface/SSliderSlideableBehaviorInterface';
 
@@ -51,6 +53,36 @@ export default class SSliderSlideableBehavior extends __SSliderBehavior {
             // @ts-ignore
             this._$lastGoToSlide = e.detail.$slide;
         });
+    }
+
+    goTo($from, $to) {
+        const $slideableItem = this.$slider.$slidesWrapper.children[0];
+        const translates = __getTranslateProperties($slideableItem);
+
+        const nextBounds = $to.getBoundingClientRect();
+        const sliderBounds =
+            this.$slider.$slidesWrapper.getBoundingClientRect();
+
+        const deltaX = nextBounds.left - sliderBounds.left,
+            deltaY = nextBounds.top - sliderBounds.top;
+
+        __easeInterval(
+            this.$slider.props.transitionDuration,
+            (percent) => {
+                if (this.$slider.props.direction === 'horizontal') {
+                    const computedDelta =
+                        translates.x + (deltaX / 100) * percent * -1;
+                    $slideableItem.style.transform = `translateX(${computedDelta}px)`;
+                } else {
+                    const computedDelta =
+                        translates.y + (deltaY / 100) * percent * -1;
+                    $slideableItem.style.transform = `translateY(${computedDelta}px)`;
+                }
+            },
+            {
+                easing: this.$slider.props.transitionEasing,
+            },
+        );
     }
 
     _handleSlide() {

@@ -44,7 +44,7 @@ export default class SSugarFeatureInterface extends __SInterface {
                 description:
                     'Specify after how many scroll the scrolled class will be applied',
                 type: 'Number',
-                default: 10,
+                default: 100,
             },
             vhvar: {
                 description:

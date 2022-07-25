@@ -23,6 +23,7 @@ export interface ISComponentUtilsSettings {
     style: string;
     state: ISComponentUtilsStateSettings;
     defaultProps?: any;
+    prefixEvent: boolean;
 }
 
 export interface ISComponentUtilsStateSettings {
@@ -60,6 +61,14 @@ export default class SComponentUtils extends __SClass {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
+    _props;
+    get props(): any {
+        return (
+            this._props ??
+            this.node.props ??
+            __SComponentUtilsDefaultPropsInterface.defaults()
+        );
+    }
 
     /**
      * @name            node
@@ -101,7 +110,8 @@ export default class SComponentUtils extends __SClass {
      */
     state = 'pending';
 
-    DefaultPropsInterface: __SInterface = __SComponentUtilsDefaultPropsInterface;
+    DefaultPropsInterface: __SInterface =
+        __SComponentUtilsDefaultPropsInterface;
 
     /**
      * @name            setDefaultProps
@@ -206,6 +216,22 @@ export default class SComponentUtils extends __SClass {
     }
 
     /**
+     * @name            setProps
+     * @type            Function
+     *
+     * This method allows you to set the component props at componentUtils level
+     * to be able to use them across methods.
+     *
+     * @param       {Any}           props           The props to be used
+     *
+     * @since          2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    setProps(props: any): void {
+        this._props = props;
+    }
+
+    /**
      * @name           props
      * @type            Any
      *
@@ -281,6 +307,8 @@ export default class SComponentUtils extends __SClass {
     /**
      * This method handle the passed props object and apply some behaviors
      * like the responsive props, etc...
+     *
+     * This will also set the "props" property in the instance.
      */
     handleProps(
         props: any,
@@ -305,6 +333,9 @@ export default class SComponentUtils extends __SClass {
         if (finalSettings.responsive) {
             this.makePropsResponsive(props);
         }
+
+        // save reference in instance
+        this._props = props;
 
         return props;
     }
@@ -541,10 +572,23 @@ export default class SComponentUtils extends __SClass {
 
         const componentName = this.name;
 
-        // %componentName.%eventName
-        finalSettings.$elm.dispatchEvent(
-            new CustomEvent(`${componentName}.${eventName}`, finalSettings),
-        );
+        if (this.props?.prefixEvent) {
+            // %componentName.%eventName
+            finalSettings.$elm.dispatchEvent(
+                new CustomEvent(`${componentName}.${eventName}`, finalSettings),
+            );
+        } else {
+            // %eventName
+            finalSettings.$elm.dispatchEvent(
+                new CustomEvent(eventName, {
+                    ...finalSettings,
+                    detail: {
+                        ...finalSettings.detail,
+                        eventComponent: componentName,
+                    },
+                }),
+            );
+        }
 
         // %componentName
         finalSettings.$elm.dispatchEvent(
@@ -553,17 +597,6 @@ export default class SComponentUtils extends __SClass {
                 detail: {
                     ...finalSettings.detail,
                     eventType: eventName,
-                },
-            }),
-        );
-
-        // %eventName
-        finalSettings.$elm.dispatchEvent(
-            new CustomEvent(eventName, {
-                ...finalSettings,
-                detail: {
-                    ...finalSettings.detail,
-                    eventComponent: componentName,
                 },
             }),
         );

@@ -66,6 +66,12 @@ export default class SComponentUtilsDefaultPropsInterface extends __SInterface {
                 type: 'Object',
                 default: {},
             },
+            prefixEvent: {
+                description:
+                    'Specify if you want the emitted events to be prefixed by the name of the feature/component like "s-slider.change" or not',
+                type: 'Boolean',
+                default: true,
+            },
         };
     }
 }

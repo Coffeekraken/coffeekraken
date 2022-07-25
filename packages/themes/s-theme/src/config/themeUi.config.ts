@@ -131,14 +131,14 @@ export default (env, config) => {
              * @name          paddingInline
              * @namespace     config.themeUi.form
              * @type          String
-             * @default      1.5
+             * @default      1
              *
              * Specify the default padding inline for form items
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingInline: 1.5,
+            paddingInline: 1,
             /**
              * @name          paddingBlock
              * @namespace     config.themeUi.form

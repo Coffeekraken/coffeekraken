@@ -102,7 +102,7 @@ export default function ({
                     top: 0;
                     line-height: initial;
                     left: sugar.padding(ui.form.paddingInline);
-                    padding-block: calc(sugar.padding(ui.form.paddingBlock) * 1.5);
+                    padding-block: calc(sugar.padding(ui.form.paddingBlock) * 1.2);
                     position: absolute;
                     z-index: 1;
                     transform: scale(1);
@@ -120,15 +120,15 @@ export default function ({
                     }
                     & input:not([type="checkbox"]):not([type="radio"]),
                     & textarea {
-                      padding-block-start: calc(sugar.padding(ui.form.paddingBlock, true) * 1.5 * 1.3);
-                      padding-block-end: calc(sugar.padding(ui.form.paddingBlock, true) * 1.5 * 0.7);
+                      padding-block-start: calc(sugar.padding(ui.form.paddingBlock, true) * 1.5 * 1.2);
+                      padding-block-end: calc(sugar.padding(ui.form.paddingBlock, true) * 1.5 * 0.8);
                     }
                   }
                   
                   & input:not(:placeholder-shown),
                   & textarea:not(:placeholder-shown) {
-                      padding-block-start: calc(sugar.padding(ui.form.paddingBlock, true) * 1.5 * 1.3) !important;
-                      padding-block-end: calc(sugar.padding(ui.form.paddingBlock, true) * 1.5 * 0.7) !important;
+                      padding-block-start: calc(sugar.padding(ui.form.paddingBlock, true) * 1.5 * 1.2) !important;
+                      padding-block-end: calc(sugar.padding(ui.form.paddingBlock, true) * 1.5 * 0.8) !important;
                   }
                   
                   & input:not(:placeholder-shown):not([type="checkbox"]):not([type="radio"]) + span,

@@ -62,6 +62,11 @@ export interface ISFiltrableInputState {
  * @feature           Fully customizable
  * @feature           Built-in search
  *
+ * @event           s-filtrable-input.items              Dispatched when the items are setted of updated
+ * @event           s-filtrable-input.select                Dispatched when an item has been selected
+ * @event           s-filtrable-input                       Dispatched for every events of this component. Check the detail.eventType prop for event type
+ *
+ *
  * @support         chromium
  * @support         firefox
  * @support         safari
@@ -193,14 +198,11 @@ export default class SFiltrableInput extends __SLitComponent {
             }
 
             this.requestUpdate();
-            this.dispatchEvent(
-                new CustomEvent('s-filtrable-input.items', {
-                    bubbles: true,
-                    detail: {
-                        items: this._items,
-                    },
-                }),
-            );
+            this.componentUtils.dispatchEvent('items', {
+                detail: {
+                    items: this._items,
+                },
+            });
         }
 
         // @ts-ignore
@@ -347,9 +349,10 @@ export default class SFiltrableInput extends __SLitComponent {
             }
             this.requestUpdate();
 
-            const $item = this.$list.children[
-                this.filteredItems.indexOf(this.preselectedItems[0])
-            ];
+            const $item =
+                this.$list.children[
+                    this.filteredItems.indexOf(this.preselectedItems[0])
+                ];
             // @ts-ignore
             $item.focus();
         });
@@ -378,9 +381,10 @@ export default class SFiltrableInput extends __SLitComponent {
 
             this.requestUpdate();
 
-            const $item = this.$list.children[
-                this.filteredItems.indexOf(this.preselectedItems[0])
-            ];
+            const $item =
+                this.$list.children[
+                    this.filteredItems.indexOf(this.preselectedItems[0])
+                ];
             // @ts-ignore
             $item.focus();
         });
@@ -478,16 +482,13 @@ export default class SFiltrableInput extends __SLitComponent {
         const $selectedItem = this.$list.children[selectedItemItem];
 
         // dispatch an event
-        const event = new CustomEvent('s-filtrable-input.select', {
-            bubbles: true,
+        this.componentUtils.dispatchEvent('select', {
             detail: {
                 item: this.selectedItems[0],
                 items: this.selectedItems,
                 $elm: $selectedItem,
             },
         });
-        // @ts-ignore
-        this.dispatchEvent(event);
         // @ts-ignore
         this.state.value = this.$input.value;
         // @ts-ignore
@@ -538,14 +539,11 @@ export default class SFiltrableInput extends __SLitComponent {
             }
             this.requestUpdate();
             // @ts-ignore
-            this.dispatchEvent(
-                new CustomEvent('s-filtrable-input.items', {
-                    bubbles: true,
-                    detail: {
-                        items: this._items,
-                    },
-                }),
-            );
+            this.componentUtils.dispatchEvent('items', {
+                detail: {
+                    items: this._items,
+                },
+            });
         }
     }
     async filterItems(needUpdate = true) {

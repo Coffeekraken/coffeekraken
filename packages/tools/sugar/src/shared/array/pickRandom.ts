@@ -1,3 +1,5 @@
+import __unique from './unique';
+
 /**
  * @name            pickRandom
  * @namespace            shared.array
@@ -19,6 +21,26 @@
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function pickRandom(array: any[]): any {
-    return array[Math.round(Math.random() * (array.length - 1))];
+export default function pickRandom(array: any[], count: number = 1): any {
+    // make the array unique
+    array = __unique(array);
+
+    const items: any[] = [];
+    if (count > 1) {
+        if (count >= array.length) {
+            return array;
+        }
+        for (let i = 0; i < count; i++) {
+            let item = pickRandom(array, 1);
+            while (items.includes(item)) {
+                item = pickRandom(array, 1);
+            }
+            items.push(item);
+        }
+        return items;
+    } else if (count === 1) {
+        return array[Math.round(Math.random() * (array.length - 1))];
+    }
+
+    return array;
 }

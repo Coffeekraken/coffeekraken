@@ -1,11 +1,10 @@
 // @ts-nocheck
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __en from '../i18n/en';
 import type {
     ISValidatorResult,
     ISValidatorValidatorSettings,
 } from '../SValidator';
-import __en from '../i18n/en';
-import __isEmail from '@coffeekraken/sugar/shared/is/email';
 
 /**
  * @name            required
@@ -43,10 +42,10 @@ export interface IValidatorEmailSettings extends ISValidatorValidatorSettings {
 
 export const definition = {
     description: 'Make sure a value has been provided',
-    type: 'any',
+    type: 'Boolean',
 };
 
-export default function email(
+export default function required(
     value: any,
     settings?: Partial<IValidatorEmailSettings>,
 ): ISValidatorResult {

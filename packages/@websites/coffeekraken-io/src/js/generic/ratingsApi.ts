@@ -78,23 +78,31 @@ class RatingsApi {
     });
   }
 
+  _readPromise;
   async read() {
+    if (this._readPromise) {
+      return this._readPromise;
+    }
+
     const q = query(collection(this._db, "ratings"), where("rating", ">=", 2));
 
     const querySnapshot = await getDocs(q);
     const ratings: any = [];
     querySnapshot.forEach((doc) => {
       ratings.push(doc.data());
-      ratings.push(doc.data());
-      ratings.push(doc.data());
-      ratings.push(doc.data());
-      ratings.push(doc.data());
-      ratings.push(doc.data());
-      ratings.push(doc.data());
-      ratings.push(doc.data());
-      ratings.push(doc.data());
-      ratings.push(doc.data());
+      // ratings.push(doc.data());
+      // ratings.push(doc.data());
+      // ratings.push(doc.data());
+      // ratings.push(doc.data());
+      // ratings.push(doc.data());
+      // ratings.push(doc.data());
+      // ratings.push(doc.data());
+      // ratings.push(doc.data());
+      // ratings.push(doc.data());
     });
+
+    this._readPromise = ratings;
+
     return ratings;
   }
 }

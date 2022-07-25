@@ -11,6 +11,7 @@ import __authorTag from './tags/author';
 import __contributorTag from './tags/contributor';
 import __cssClass from './tags/cssClass';
 import __descriptionTag from './tags/description';
+import __eventTag from './tags/event';
 import __exampleTag from './tags/example';
 import __installTag from './tags/install';
 import __interfaceTag from './tags/interface';
@@ -479,5 +480,6 @@ SDocblockBlock.registerTag('support', __supportTag);
 SDocblockBlock.registerTag('snippet', __snippetTag);
 SDocblockBlock.registerTag('example', __exampleTag);
 SDocblockBlock.registerTag('todo', __todoTag);
+SDocblockBlock.registerTag('event', __eventTag);
 
 export default SDocblockBlock;

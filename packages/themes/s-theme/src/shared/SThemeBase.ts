@@ -246,17 +246,96 @@ export default class SThemeBase extends __SEventEmitter {
     }
 
     /**
-     * @name      themes
-     * @type      String
+     * @name      themesNames
+     * @type      Object
      * @static
      *
-     * Store the names of all the available themes
+     * Access the defined themes names
      *
      * @since     2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static get themes(): string[] {
+    static get themesNames(): string[] {
         return Object.keys(__SSugarConfig.get('theme.themes'));
+    }
+
+    /**
+     * @name            isDarkMode
+     * @type            Function
+     * @static
+     *
+     * This method returns true if the theme variant is dark, false if not
+     *
+     * @return      {Boolean}               true if variant is dark, false otherwise
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static isDark(): boolean {
+        return this.variant === 'dark';
+    }
+
+    /**
+     * @name            getThemeMetas
+     * @type            Function
+     * @static
+     *
+     * This method allows you to get the theme metas like "name", "theme" and "variant" from the passed HTMLElement
+     *
+     * @return      {any}                               The theme metas object containing the "name", "theme" and "variant" properties
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static getThemeMetas(): any {
+        let defaultTheme = __SSugarConfig.get('theme.theme'),
+            defaultVariant = __SSugarConfig.get('theme.variant');
+
+        let theme = defaultTheme,
+            variant = defaultVariant;
+
+        const metas =
+            __SSugarConfig.get(`theme.themes.${theme}-${variant}.metas`) ?? {};
+
+        return __deepMerge(
+            {
+                name: `${theme ?? defaultTheme}-${variant ?? defaultVariant}`,
+                theme: theme ?? defaultTheme,
+                variant: variant ?? defaultVariant,
+            },
+            metas,
+        );
+    }
+
+    /**
+     * @name      themes
+     * @type      Object
+     * @static
+     *
+     * Access the defined themes
+     *
+     * @since     2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static get themes(): Object {
+        const themes = __SSugarConfig.get('theme.themes');
+        const returnedThemes = {};
+        for (let [themeName, themeObj] of Object.entries(themes)) {
+            const parts = themeName.split('-'),
+                name = parts[0],
+                variant = parts[1] ?? 'light';
+            if (!returnedThemes[name]) {
+                returnedThemes[name] = {
+                    metas: themeObj.metas ?? {},
+                    variants: {},
+                };
+            }
+            if (!returnedThemes[name].variants[variant]) {
+                returnedThemes[name].variants[variant] = themeObj;
+            }
+        }
+
+        return returnedThemes;
     }
 
     /**
@@ -276,6 +355,8 @@ export default class SThemeBase extends __SEventEmitter {
      */
     static _instanciatedThemes: Record<string, SThemeBase> = {};
     static getTheme(theme?: string, variant?: string): SThemeBase {
+        const themesNames = Object.keys(__SSugarConfig.get('theme.themes'));
+
         if (!theme) {
             theme = __SSugarConfig.get('theme.theme');
         }
@@ -283,24 +364,21 @@ export default class SThemeBase extends __SEventEmitter {
             variant = __SSugarConfig.get('theme.variant');
         }
 
+        if (!themesNames.includes(`${theme}-${variant}`)) {
+            theme = __SSugarConfig.get('theme.theme');
+            variant = __SSugarConfig.get('theme.variant');
+        }
+
         if (this._instanciatedThemes[`${theme}-${variant}`]) {
             return this._instanciatedThemes[`${theme}-${variant}`];
         }
 
-        const themes = __SSugarConfig.get('theme.themes');
-
-        if (!themes[`${theme}-${variant}`])
-            throw new Error(
-                `<red>[${
-                    this.theme
-                }]</red> Sorry but the requested theme "<yellow>${theme}-${variant}</yellow>" does not exists. Here's the available themes: <green>${Object.keys(
-                    themes,
-                ).join(',')}</green>`,
+        if (!themesNames[`${theme}-${variant}`]) {
+            this._instanciatedThemes[`${theme}-${variant}`] = new this(
+                theme,
+                variant,
             );
-        this._instanciatedThemes[`${theme}-${variant}`] = new this(
-            theme,
-            variant,
-        );
+        }
         return this._instanciatedThemes[`${theme}-${variant}`];
     }
 

@@ -104,11 +104,13 @@ export default function ({
         position: relative;
         display: inline-block;
         cursor: pointer;
+        user-select: none;
         white-space: nowrap;
         vertical-align: middle;
         padding-inline: sugar.padding(ui.button.paddingInline);
         padding-block: sugar.padding(ui.button.paddingBlock);
 
+      
         & > * {
           pointer-events: none;
         }
@@ -210,8 +212,12 @@ export default function ({
                   color: sugar.color(current, foreground);
 
                   &:hover, &:focus {
-                    background-color: sugar.color(current, 60);
+                    background-color: sugar.color(current, --darken 6);
                     color: sugar.color(current, foreground);
+
+                    @sugar.theme.when(dark) {
+                      background-color: sugar.color(current, --lighten 6);
+                    }
                   }
         `);
                 break;

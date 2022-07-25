@@ -23,7 +23,7 @@
                         @if ($param->values)
                             <ul class="s-dropdown:bottom-end">    
                                 @foreach ($param->values as $value)
-                                    <li class="s-dropdown__item">{{ $value }}<i class="s-mis:10 s-float:right s-icon:ui-copy"></i></li>
+                                    <li class="s-dropdown-item">{{ $value }}<i class="s-mis:10 s-float:right s-icon:ui-copy"></i></li>
                                 @endforeach
                             </ul>
                         @endif

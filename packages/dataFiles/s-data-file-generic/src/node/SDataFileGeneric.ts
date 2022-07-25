@@ -5,6 +5,7 @@ import __SDataFilePhp from '@coffeekraken/s-data-file-php';
 import __SPromise from '@coffeekraken/s-promise';
 import __checkPathWithMultipleExtensions from '@coffeekraken/sugar/node/fs/checkPathWithMultipleExtensions';
 import __extension from '@coffeekraken/sugar/node/fs/extension';
+import __fs from 'fs';
 
 /**
  * @name          SDataFileGeneric
@@ -57,10 +58,13 @@ export default class SDataHandlerGeneric {
                     '',
                 );
 
-            const dataFilePath = __checkPathWithMultipleExtensions(
-                `${filePathWithoutExtension}.data.${extension}`,
-                SDataHandlerGeneric.extensions,
-            );
+            let dataFilePath = filePath;
+            if (!__fs.existsSync(dataFilePath)) {
+                dataFilePath = __checkPathWithMultipleExtensions(
+                    `${filePathWithoutExtension}.data.${extension}`,
+                    SDataHandlerGeneric.extensions,
+                );
+            }
 
             if (!dataFilePath) {
                 return resolve({});

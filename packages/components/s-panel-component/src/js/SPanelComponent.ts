@@ -43,8 +43,8 @@ export interface SPanelComponentProps {
  * @feature         Set an id on your modal and use the "s-panel-open" and "s-panel-close" attribute on any HTMLElement to open/close it
  * @feature         Dispatch some events when the panel is opened or closed
  *
- * @event       panel.open          Dispatched when the panel is opened
- * @event       panel.close         Dispatched when the panel is closed
+ * @event       s-panel.open          Dispatched when the panel is opened
+ * @event       s-panel.close         Dispatched when the panel is closed
  *
  * @install          bash
  * npm i @coffeekraken/s-panel-component
@@ -184,8 +184,6 @@ export default class SPanel extends __SLitComponent {
     }
     isTopPanel() {
         const stackIdx = this.constructor._activePanels.indexOf(this);
-        console.log(this, this.constructor._activePanels);
-
         return stackIdx === this.constructor._activePanels.length - 1;
     }
     updated(changedProperties) {
@@ -223,7 +221,6 @@ export default class SPanel extends __SLitComponent {
         this.props.closeOn.forEach((what) => {
             if (what === 'click') {
                 this.addEventListener('click', (e) => {
-                    console.log('ee', this, this._$container, e.target);
                     !this._$container.contains(e.target) &&
                         this.isTopPanel() &&
                         this.close();
@@ -250,9 +247,21 @@ export default class SPanel extends __SLitComponent {
             }
 
             __querySelectorLive(
+                `[href="#${this.id}"]`,
+                ($elm) => {
+                    $elm.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.open();
+                    });
+                },
+                {},
+            );
+
+            __querySelectorLive(
                 `[s-panel-open="${this.id}"]`,
                 ($elm) => {
                     $elm.addEventListener('click', (e) => {
+                        e.preventDefault();
                         this.open();
                     });
                 },
@@ -262,6 +271,7 @@ export default class SPanel extends __SLitComponent {
                 `[s-panel-close="${this.id}"]`,
                 ($elm) => {
                     $elm.addEventListener('click', (e) => {
+                        e.preventDefault();
                         this.close();
                     });
                 },

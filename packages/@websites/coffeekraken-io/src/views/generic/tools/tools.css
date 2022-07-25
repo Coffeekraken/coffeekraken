@@ -1,35 +1,35 @@
 .tools {
-  position: fixed;
-  top: 70%;
-  right: 0;
-  z-index: 100;
-  transform: translate(0, -50%);
+    position: fixed;
+    top: 70%;
+    right: 0;
+    z-index: 100;
+    transform: translate(0, -50%);
 
-  > * {
-    display: block !important;
-    margin-block: sugar.margin(20);
-    margin-inline-end: sugar.margin(20);
+    > * {
+        display: block !important;
+        margin-block: sugar.margin(20);
+        margin-inline-end: sugar.margin(20);
 
-    > .s-btn {
-      border-radius: 999px !important;
-    }
-  }
-
-  .s-tooltip {
-    width: 350px;
-    padding: sugar.padding(30);
-    background-color: sugar.color(main, surface);
-    background-image: url("/dist/img/discord-illustration-bkg.png");
-    background-position: 50% 50%;
-    background-size: cover;
-
-    &:after {
-      border-color: sugar.color(main, surface) transparent transparent
-        transparent;
+        > .s-btn {
+            border-radius: 999px !important;
+        }
     }
 
-    .s-floating__arrow {
-      background: sugar.color(main, surface);
+    .s-tooltip {
+        width: 400px;
+        padding: sugar.padding(50);
+        background-color: sugar.color(main, surface);
+        background-image: url('/dist/img/discord-illustration-bkg.png');
+        background-position: 50% 50%;
+        background-size: cover;
+
+        &:after {
+            border-color: sugar.color(main, surface) transparent transparent
+                transparent;
+        }
+
+        .s-floating__arrow {
+            background: sugar.color(main, surface);
+        }
     }
-  }
 }

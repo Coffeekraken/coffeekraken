@@ -1,22 +1,11 @@
 .preview-html {
-  .s-slider__slide {
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
-}
-
-s-slider {
-  @sugar.theme.when (dark) {
-    @sugar.color.current (#ffffff);
-  }
-}
-
-s-slider[lnf*="contained"],
-.s-slider__progress {
-  @sugar.color.current (#ffffff);
+    .s-slider__slide {
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
 }
 
 /* @keyframes slider-cards-out-left {

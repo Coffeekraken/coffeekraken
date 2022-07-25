@@ -1,4 +1,5 @@
 import __SSugarJson from '@coffeekraken/s-sugar-json';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
 export function preprocess(env, rawThemeConfig, rawConfig) {
     // setting theme from sugar.json
@@ -11,7 +12,7 @@ export function preprocess(env, rawThemeConfig, rawConfig) {
     // inject each available themes inside the "themes" property
     Object.keys(rawConfig).forEach((configId) => {
         const configObj = rawConfig[configId];
-        if (configObj.themeName && configObj.variants) {
+        if (configObj.themeName && configObj.variants && configObj.metas) {
             Object.keys(configObj.variants).forEach((variantName) => {
                 const themeId = `${configObj.themeName}-${variantName}`;
                 if (!rawThemeConfig.themes[themeId]) {
@@ -19,57 +20,34 @@ export function preprocess(env, rawThemeConfig, rawConfig) {
                         themeId
                     ] = `[config.${configId}.variants.${variantName}]`;
                 }
+                // if (!rawThemeConfig.themes[themeId].metas && configObj.metas) {
+                //     rawThemeConfig.themes[
+                //         themeId
+                //     ].metas = `[config.${configId}.metas]`;
+                // }
             });
         }
     });
     return rawThemeConfig;
 }
 
-// export function postprocess(env, themeConfig, config) {
-//     const themes = themeConfig.themes;
-
-//     Object.keys(themes).forEach((themeName) => {
-//         const themeObj = themes[themeName];
-
-//         // if (!themeObj.color.current) {
-//         //     if (themeObj.defaultColor) {
-//         //         themeObj.color.current = Object.assign(
-//         //             {},
-//         //             themeObj.color[themeObj.defaultColor],
-//         //         );
-//         //     } else {
-//         //         const firstColor =
-//         //             themeObj.color[Object.keys(themeObj.color)[0]];
-//         //         themeObj.color.current = Object.assign({}, firstColor);
-//         //     }
-//         // }
-//         // if (!themeObj.color.accent) {
-//         //     if (themeObj.defaultColor) {
-//         //         themeObj.color.accent = Object.assign(
-//         //             {},
-//         //             themeObj.color[themeObj.defaultColor],
-//         //         );
-//         //     } else {
-//         //         const firstColor =
-//         //             themeObj.color[Object.keys(themeObj.color)[0]];
-//         //         themeObj.color.accent = Object.assign({}, firstColor);
-//         //     }
-//         // }
-//         // if (!themeObj.color.complementary) {
-//         //     if (themeObj.defaultColor) {
-//         //         themeObj.color.complementary = Object.assign(
-//         //             {},
-//         //             themeObj.color[themeObj.defaultColor],
-//         //         );
-//         //     } else {
-//         //         const firstColor =
-//         //             themeObj.color[Object.keys(themeObj.color)[0]];
-//         //         themeObj.color.complementary = Object.assign({}, firstColor);
-//         //     }
-//         // }
-//     });
-//     return themeConfig;
-// }
+export function postprocess(env, themeConfig, config) {
+    for (let [key, value] of Object.entries(config)) {
+        if (value.themeName && value.metas) {
+            for (let [themeName, themeObj] of Object.entries(
+                themeConfig.themes,
+            )) {
+                if (themeName.startsWith(`${value.themeName}-`)) {
+                    if (!themeObj.metas) {
+                        themeObj.metas = {};
+                    }
+                    themeObj.metas = __deepMerge(themeObj.metas, value.metas);
+                }
+            }
+        }
+    }
+    return themeConfig;
+}
 
 export default function (env, config) {
     return {

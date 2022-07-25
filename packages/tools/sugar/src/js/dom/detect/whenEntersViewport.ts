@@ -1,5 +1,5 @@
 // @ts-nocheck
-// import __isInViewport from '../is/inViewport';
+import __isInViewport from '../is/inViewport';
 
 /**
  * @name      whenEntersViewport
@@ -40,7 +40,7 @@ function whenEntersViewport(
     elm: HTMLElement,
     settings: Partials<IWhenEntersViewportSettings> = {},
 ) {
-    const offset = `-${window.innerHeight / 3}px 0px`;
+    const offset = `0px 0px -25% 0px`;
 
     settings = {
         offset,
@@ -56,9 +56,9 @@ function whenEntersViewport(
             threshold: 0, // visible amount of item shown in relation to root
         };
 
-        // if (__isInViewport(elm)) {
-        //     return resolve(elm);
-        // }
+        if (await __isInViewport(elm)) {
+            return resolve(elm);
+        }
 
         function onChange(changes, observer) {
             changes.forEach((change) => {
@@ -76,7 +76,7 @@ function whenEntersViewport(
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
                 observer.disconnect?.();
-                options.rootMargin = `-${window.innerHeight / 3}px 0px`;
+                options.rootMargin = settings.offset;
                 observer = new IntersectionObserver(onChange, options);
                 observer.observe(elm);
             }, 500);

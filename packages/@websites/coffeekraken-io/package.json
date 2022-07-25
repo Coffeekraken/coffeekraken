@@ -74,6 +74,7 @@
         "@coffeekraken/s-sugar-feature": "^2.0.0",
         "@coffeekraken/s-sugar-json": "^2.0.0",
         "@coffeekraken/s-theme": "^2.0.0",
+        "@coffeekraken/s-theme-switcher-component": "^2.0.0",
         "@coffeekraken/s-timer": "^2.0.0",
         "@coffeekraken/s-type": "^2.0.0",
         "@coffeekraken/s-typescript-builder": "^2.0.0",

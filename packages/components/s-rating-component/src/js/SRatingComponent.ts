@@ -27,6 +27,9 @@ export interface ISRatingComponentProps {
  *
  * @feature           Rate with icon based range
  *
+ * @event             s-rating.change            Dispatched when the rating has been updated
+ * @event           s-rating                       Dispatched for every events of this component. Check the detail.eventType prop for event type
+ *
  * @support         chromium
  * @support         firefox
  * @support         safari
@@ -82,12 +85,9 @@ export default class SRatingComponent extends __SLitComponent {
         // update state
         this.state.value = rating;
         // dispatch en update event
-        this.dispatchEvent(
-            new CustomEvent('s-rating.change', {
-                bubbles: true,
-                detail: this.state,
-            }),
-        );
+        this.componentUtils.dispatchEvent('change', {
+            detail: this.state,
+        });
     }
 
     render() {
@@ -98,7 +98,7 @@ export default class SRatingComponent extends __SLitComponent {
                     .value}; --s-rating-min: ${this.props
                     .min}; --s-rating-max: ${this.props
                     .max}; --s-rating-percent: ${(100 / this.props.max) *
-                this.state.value};"
+                this.props.value};"
             >
                 <input
                     type="hidden"

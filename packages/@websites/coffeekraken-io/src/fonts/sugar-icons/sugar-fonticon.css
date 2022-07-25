@@ -1,10 +1,10 @@
 @font-face {
   font-family: "sugar-fonticon";
-  src: url("/dist/fonts/sugar-icons/sugar-fonticon.eot?3487a013510f8c53106b5fe44f18e3ae#iefix")
+  src: url("/dist/fonts/sugar-icons/sugar-fonticon.eot?9d08f536f9a313ab4490bbcfcb0b7e7f#iefix")
       format("embedded-opentype"),
-    url("/dist/fonts/sugar-icons/sugar-fonticon.woff2?3487a013510f8c53106b5fe44f18e3ae")
+    url("/dist/fonts/sugar-icons/sugar-fonticon.woff2?9d08f536f9a313ab4490bbcfcb0b7e7f")
       format("woff2"),
-    url("/dist/fonts/sugar-icons/sugar-fonticon.woff?3487a013510f8c53106b5fe44f18e3ae")
+    url("/dist/fonts/sugar-icons/sugar-fonticon.woff?9d08f536f9a313ab4490bbcfcb0b7e7f")
       format("woff");
 }
 
@@ -48,6 +48,7 @@
 .s-icon--logo-opensource:before,
 .s-icon--logo-vite-solid:before,
 .s-icon--logo-vite:before,
+.s-icon--misc-bubbles:before,
 .s-icon--misc-build-solid:before,
 .s-icon--misc-build:before,
 .s-icon--misc-eye:before,
@@ -212,101 +213,104 @@
 .s-icon--logo-vite:before {
   content: "\f128";
 }
-.s-icon--misc-build-solid:before {
+.s-icon--misc-bubbles:before {
   content: "\f129";
 }
-.s-icon--misc-build:before {
+.s-icon--misc-build-solid:before {
   content: "\f12a";
 }
-.s-icon--misc-eye:before {
+.s-icon--misc-build:before {
   content: "\f12b";
 }
-.s-icon--misc-tools:before {
+.s-icon--misc-eye:before {
   content: "\f12c";
 }
-.s-icon--support-chromium:before {
+.s-icon--misc-tools:before {
   content: "\f12d";
 }
-.s-icon--support-edge:before {
+.s-icon--support-chromium:before {
   content: "\f12e";
 }
-.s-icon--support-firefox:before {
+.s-icon--support-edge:before {
   content: "\f12f";
 }
-.s-icon--support-rtl:before {
+.s-icon--support-firefox:before {
   content: "\f130";
 }
-.s-icon--support-safari:before {
+.s-icon--support-rtl:before {
   content: "\f131";
 }
-.s-icon--theme-colors:before {
+.s-icon--support-safari:before {
   content: "\f132";
 }
-.s-icon--theme:before {
+.s-icon--theme-colors:before {
   content: "\f133";
 }
-.s-icon--ui-align:before {
+.s-icon--theme:before {
   content: "\f134";
 }
-.s-icon--ui-autocomplete:before {
+.s-icon--ui-align:before {
   content: "\f135";
 }
-.s-icon--ui-avatar:before {
+.s-icon--ui-autocomplete:before {
   content: "\f136";
 }
-.s-icon--ui-button:before {
+.s-icon--ui-avatar:before {
   content: "\f137";
 }
-.s-icon--ui-code:before {
+.s-icon--ui-button:before {
   content: "\f138";
 }
-.s-icon--ui-copy:before {
+.s-icon--ui-code:before {
   content: "\f139";
 }
-.s-icon--ui-datepicker:before {
+.s-icon--ui-copy:before {
   content: "\f13a";
 }
-.s-icon--ui-display-preview:before {
+.s-icon--ui-datepicker:before {
   content: "\f13b";
 }
-.s-icon--ui-dropdown:before {
+.s-icon--ui-display-preview:before {
   content: "\f13c";
 }
-.s-icon--ui-link-broken-solid:before {
+.s-icon--ui-dropdown:before {
   content: "\f13d";
 }
-.s-icon--ui-link-broken:before {
+.s-icon--ui-link-broken-solid:before {
   content: "\f13e";
 }
-.s-icon--ui-loader-solid:before {
+.s-icon--ui-link-broken:before {
   content: "\f13f";
 }
-.s-icon--ui-loader:before {
+.s-icon--ui-loader-solid:before {
   content: "\f140";
 }
-.s-icon--ui-more-solid:before {
+.s-icon--ui-loader:before {
   content: "\f141";
 }
-.s-icon--ui-more:before {
+.s-icon--ui-more-solid:before {
   content: "\f142";
 }
-.s-icon--ui-range:before {
+.s-icon--ui-more:before {
   content: "\f143";
 }
-.s-icon--ui-refresh:before {
+.s-icon--ui-range:before {
   content: "\f144";
 }
-.s-icon--ui-switch:before {
+.s-icon--ui-refresh:before {
   content: "\f145";
 }
-.s-icon--ui-tooltip:before {
+.s-icon--ui-switch:before {
   content: "\f146";
 }
-.s-icon--ui-typography:before {
+.s-icon--ui-tooltip:before {
   content: "\f147";
 }
-.s-icon--vue:before {
+.s-icon--ui-typography:before {
   content: "\f148";
+}
+.s-icon--vue:before {
+  content: "\f149";
 }
 .s-icon--animation-easing,
 .s-icon--css-flex,
@@ -348,6 +352,7 @@
 .s-icon--logo-opensource,
 .s-icon--logo-vite-solid,
 .s-icon--logo-vite,
+.s-icon--misc-bubbles,
 .s-icon--misc-build-solid,
 .s-icon--misc-build,
 .s-icon--misc-eye,

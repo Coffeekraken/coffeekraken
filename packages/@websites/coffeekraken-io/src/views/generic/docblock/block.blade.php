@@ -42,6 +42,10 @@
     
     @include('doc.cssClass', ['block' => $block])
     
+    @if ($block->event)
+        @include('doc.event', ['interface' => $block->event])
+    @endif
+
     @if ($block->interface)
         @include('doc.interface', ['interface' => $block->interface])
     @endif

@@ -177,15 +177,12 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
 
             let resPromise;
 
-            console.log('WWW', viewPath);
-
             resPromise = await viewInstance.render(
                 viewPath,
                 data,
                 settings?.viewRenderer ?? {},
             );
 
-            console.log('rr', resPromise);
             pipe(resPromise);
 
             // resPromise.catch(async (e) => {
@@ -457,16 +454,34 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
         }
     }
 
-    _getDataFileClassForView(viewPathWithoutExtension: string): any {
+    _getDataFileClassForView(viewPath: string): any {
         // loop on each dataFiles available
-        for (let i = 0; i < Object.keys(SViewRenderer.dataFiles).length; i++) {
-            const extension = Object.keys(SViewRenderer.dataFiles)[i];
-            if (
-                __fs.existsSync(`${viewPathWithoutExtension}.data.${extension}`)
-            ) {
+        for (let [dataFileExt, DataFileClass] of Object.entries(
+            SViewRenderer.dataFiles,
+        )) {
+            let potentialDataFilePath = viewPath;
+
+            for (let [key, engineObj] of Object.entries(
+                SViewRenderer.engines,
+            )) {
+                // @ts-ignore
+                engineObj.extensions.forEach((ext) => {
+                    const reg = new RegExp(`.${ext}$`);
+                    potentialDataFilePath = potentialDataFilePath.replace(
+                        reg,
+                        '',
+                    );
+                });
+            }
+
+            // add extension
+            potentialDataFilePath += `.data.${dataFileExt}`;
+
+            // check if exists and return if true
+            if (__fs.existsSync(`${potentialDataFilePath}`)) {
                 return {
-                    dataFilePath: `${viewPathWithoutExtension}.data.${extension}`,
-                    DataFileClass: SViewRenderer.dataFiles[extension],
+                    dataFilePath: `${potentialDataFilePath}`,
+                    DataFileClass,
                 };
             }
         }
@@ -550,9 +565,8 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
             }
 
             // get the view renderer engine class for the passed view
-            const RendererEngineClass = this._getRendererEngineClassForView(
-                finalViewPath,
-            );
+            const RendererEngineClass =
+                this._getRendererEngineClassForView(finalViewPath);
             if (!RendererEngineClass) {
                 throw new Error(
                     `<red>[render]</red> No engine is registered for your dotPath "${viewDotPath}"...`,
@@ -560,9 +574,8 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
             }
 
             // data file class and path
-            const dataFileClassAndPath = this._getDataFileClassForView(
-                finalViewPath.replace(`.${__path.extname(finalViewPath)}`, ''),
-            );
+            const dataFileClassAndPath =
+                this._getDataFileClassForView(finalViewPath);
 
             const viewRendererSettings = Object.assign(
                 {},
@@ -574,9 +587,10 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
             const duration = new __SDuration();
 
             if (dataFileClassAndPath) {
-                const gettedData = await dataFileClassAndPath.DataFileClass.load(
-                    dataFileClassAndPath.dataFilePath,
-                );
+                const gettedData =
+                    await dataFileClassAndPath.DataFileClass.load(
+                        dataFileClassAndPath.dataFilePath,
+                    );
                 if (gettedData) data = __deepMerge(gettedData, data);
             }
 

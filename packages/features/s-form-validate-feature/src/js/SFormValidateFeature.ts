@@ -222,8 +222,8 @@ export default class SFormValidateFeature extends __SFeature {
         );
 
         // some default "handlers"
-        if (!this.props.handlers.password) {
-            this.props.handlers.password = this._passwordDefaultHandler;
+        if (!this.props.handlers?.password) {
+            this.props.handlers?.password = this._passwordDefaultHandler;
         }
 
         // init a new SValidator instance
@@ -253,7 +253,7 @@ export default class SFormValidateFeature extends __SFeature {
 
                     // if not a custom event, we stop the propagation and we will
                     // dispatch a "submit" event if their's no errors collected
-                    if (e instanceof CustomEvent) {
+                    if (e instanceof CustomEvent && !e.detail?.internal) {
                     } else {
                         e.stopPropagation();
                     }
@@ -335,13 +335,19 @@ export default class SFormValidateFeature extends __SFeature {
     }
 
     _passwordDefaultHandler({ result, $feature }) {
-        result.metas.levels.forEach((level) => {
-            if (level !== result.metas.validLevels.slice(-1)[0]) {
-                $feature.classList.remove(`password-${level}`);
-            } else {
-                $feature.classList.add(`password-${level}`);
-            }
-        });
+        if (result.valid) {
+            $feature.classList.remove(`password-weak`);
+            $feature.classList.remove(`password-medium`);
+            $feature.classList.remove(`password-strong`);
+        } else if (result.metas?.levels) {
+            result.metas.levels.forEach((level) => {
+                if (level !== result.metas.validLevels.slice(-1)[0]) {
+                    $feature.classList.remove(`password-${level}`);
+                } else {
+                    $feature.classList.add(`password-${level}`);
+                }
+            });
+        }
     }
 
     _initField($field) {
@@ -372,7 +378,18 @@ export default class SFormValidateFeature extends __SFeature {
             if (on === 'enter') {
                 this._$field.addEventListener('keyup', (e) => {
                     if (e.keyCode !== 13) return;
-                    this.validate(e);
+                    if (this._$form) {
+                        this._$form.dispatchEvent(
+                            new CustomEvent('submit', {
+                                bubbles: false,
+                                detail: {
+                                    internal: true, // internal marker to let the validation be made globally on all the validators
+                                },
+                            }),
+                        );
+                    } else {
+                        this.validate(e);
+                    }
                 });
             } else if (on === 'reset') {
                 this._$field.form?.addEventListener(on, (e) => {
@@ -385,7 +402,7 @@ export default class SFormValidateFeature extends __SFeature {
                     // prevent the submit
                     e.preventDefault();
                     // if its an internal event, stop here
-                    if (e instanceof CustomEvent) return;
+                    if (e instanceof CustomEvent && !e.detail?.internal) return;
                     // otherwise, stop propagation
                     e.stopPropagation();
                     // validate the form
@@ -500,12 +517,12 @@ export default class SFormValidateFeature extends __SFeature {
 
             if (this.props.handlers[validator]) {
                 await this.props.handlers[validator]({
-                    result: res.rules[validator],
+                    result: Object.assign({}, res.rules?.[validator] ?? res),
                     props: this.props,
                     $feature: this.node,
                     $form: this._$form,
                     $field: this._$field,
-                    $node: this._nodeByValidator[validator],
+                    $node: this._nodeByValidator?.[validator],
                 });
             }
         }

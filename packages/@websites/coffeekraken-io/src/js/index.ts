@@ -17,6 +17,7 @@ import {
     SSliderSlideableBehavior,
 } from '@coffeekraken/s-slider-component';
 import { define as __sSugarFeature } from '@coffeekraken/s-sugar-feature';
+import { define as __SThemeSwitcherComponent } from '@coffeekraken/s-theme-switcher-component';
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { define as __SSidePanelWebcomponent } from '@coffeekraken/s-panel-component';
@@ -32,6 +33,7 @@ import { define as __CkFallingStarsComponent } from './components/CkFallingStars
 import { define as __CKRatingsComponent } from './components/CKRating';
 import { define as __CKSearchComponent } from './components/CKSearch';
 import { define as __CKSettingsComponent } from './components/CkSettings';
+import { define as __CKWelcomeRatingsComponent } from './components/CKWelcomeRatings';
 
 // import { define as __VersionSelector } from './components/VersionSelector';
 
@@ -85,6 +87,7 @@ __SConductor.setup({
     // __VersionSelector();
     __CKSearchComponent();
     __CkFallingStarsComponent();
+    __CKWelcomeRatingsComponent();
 
     // components
     __CKDiscoverComponent();
@@ -100,6 +103,7 @@ __SConductor.setup({
     __SDatetimePickerComponent();
     __SScrollComponent();
     __SRangeWebcomponent();
+    __SThemeSwitcherComponent();
     __SSliderComponent({
         behaviors: {
             slideable: {

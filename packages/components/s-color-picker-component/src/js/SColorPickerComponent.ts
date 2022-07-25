@@ -61,6 +61,9 @@ export interface ISColorPickerComponentProps {
  * @feature           All the Pickr features are supported
  * @feature           Full support for sugar theming system for easy integration
  *
+ * @event           s-color-picker.change              Dispatched when the color picker change the input value
+ * @event           s-color-picker                       Dispatched for every events of this component. Check the detail.eventType prop for event type
+ *
  * @support         chromium
  * @support         firefox
  * @support         safari
@@ -374,12 +377,9 @@ export default class SColorPicker extends __SLitComponent {
 
         // dispatch a "change" event
         if (step !== 'init') {
-            this._$input.dispatchEvent(
-                new CustomEvent('change', {
-                    bubbles: true,
-                    detail: this._color.toObject(),
-                }),
-            );
+            this.componentUtils.dispatchEvent('change', {
+                detail: this._color.toObject(),
+            });
         }
 
         this.requestUpdate();
@@ -422,14 +422,6 @@ export default class SColorPicker extends __SLitComponent {
 
     _isAlphaWanted() {
         return this.props.format.includes('a');
-    }
-
-    _getPixelFrom($elm, ctx, pos) {
-        const bounds = $elm.getBoundingClientRect();
-        let x = pos.x - bounds.left;
-        let y = pos.y - bounds.top;
-        const pixel = ctx.getImageData(x, y, 1, 1)['data']; // Read pixel Color
-        return pixel;
     }
 
     /**

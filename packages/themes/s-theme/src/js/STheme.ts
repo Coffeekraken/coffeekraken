@@ -1,6 +1,7 @@
 import __SColor from '@coffeekraken/s-color';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __clearTransmations from '@coffeekraken/sugar/js/dom/transmation/clearTransmations';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SThemeBase from '../shared/SThemeBase';
 
 /**
@@ -28,6 +29,42 @@ import __SThemeBase from '../shared/SThemeBase';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default class STheme extends __SThemeBase {
+    /**
+     * @name      theme
+     * @type      String
+     * @static
+     *
+     * Store the current theme applied from the html tag context or from the config
+     *
+     * @since     2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static get theme(): string {
+        const themeAttr = document.querySelector('html')?.getAttribute('theme');
+        if (!themeAttr) {
+            return __SSugarConfig.get('theme.theme');
+        }
+        return themeAttr.split('-')[0];
+    }
+
+    /**
+     * @name      variant
+     * @type      String
+     * @static
+     *
+     * Store the current variant applied from the html tag context or from the config
+     *
+     * @since     2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static get variant(): string {
+        const themeAttr = document.querySelector('html')?.getAttribute('theme');
+        if (!themeAttr) {
+            return __SSugarConfig.get('theme.variant');
+        }
+        return themeAttr.split('-')[1];
+    }
+
     /**
      * @name            setTheme
      * @type            Function
@@ -118,6 +155,24 @@ export default class STheme extends __SThemeBase {
     }
 
     /**
+     * @name            isDarkMode
+     * @type            Function
+     * @static
+     *
+     * This method returns true if the theme variant is dark, false if not
+     *
+     * @param       {HTMLElement}           [$context=document.querySelector('html')]       The context in which to get informations from
+     * @return      {Boolean}               true if variant is dark, false otherwise
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static isDark($context = document.querySelector('html')): boolean {
+        const metas = STheme.getThemeMetas($context);
+        return metas.variant === 'dark';
+    }
+
+    /**
      * @name            preferDark
      * @type            Function
      * @static
@@ -127,7 +182,7 @@ export default class STheme extends __SThemeBase {
      * @return      {Boolean}               true if prefer dark mode, false if not
      *
      * @since       2.0.0
-     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static preferDark(): boolean {
         return (
@@ -190,13 +245,15 @@ export default class STheme extends __SThemeBase {
      *
      * This method allows you to get the theme metas like "name", "theme" and "variant" from the passed HTMLElement
      *
-     * @param       {HTMLElement}       $context        The context from which to get the theme metas
+     * @param       {HTMLElement}       [$context=document.querySelector('html')]        The context from which to get the theme metas
      * @return      {any}                               The theme metas object containing the "name", "theme" and "variant" properties
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static getThemeMetas($context: HTMLElement): any {
+    static getThemeMetas(
+        $context: HTMLElement = document.querySelector('html'),
+    ): any {
         let defaultTheme = __SSugarConfig.get('theme.theme'),
             defaultVariant = __SSugarConfig.get('theme.variant');
 
@@ -215,11 +272,18 @@ export default class STheme extends __SThemeBase {
             (theme = parts[0]), (variant = parts[1]);
         }
 
-        return {
-            name: `${theme ?? defaultTheme}-${variant ?? defaultVariant}`,
-            theme: theme ?? defaultTheme,
-            variant: variant ?? defaultVariant,
-        };
+        const name = `${theme ?? defaultTheme}-${variant ?? defaultVariant}`;
+
+        const metas = __SSugarConfig.get(`theme.themes.${name}.metas`) ?? {};
+
+        return __deepMerge(
+            {
+                name,
+                theme: theme ?? defaultTheme,
+                variant: variant ?? defaultVariant,
+            },
+            metas,
+        );
     }
 
     /**
@@ -419,7 +483,7 @@ export default class STheme extends __SThemeBase {
         this._saveTimeout = setTimeout(() => {
             // save in localStorage
             localStorage.setItem(
-                `s-theme-${this.id}`,
+                `s-theme`,
                 JSON.stringify(this.getOverridedConfig()),
             );
             // emit saved event
@@ -446,7 +510,7 @@ export default class STheme extends __SThemeBase {
         try {
             savedConfigs = JSON.parse(
                 // @ts-ignore
-                localStorage.getItem(`s-theme-${this.id}`),
+                localStorage.getItem(`s-theme`),
             );
         } catch (e) {}
 
@@ -471,7 +535,7 @@ export default class STheme extends __SThemeBase {
      */
     clear(): STheme {
         // delete the local storage
-        localStorage.removeItem(`s-theme-${this.id}`);
+        localStorage.removeItem(`s-theme`);
         // clear in super class
         super.clear();
         // apply the configs

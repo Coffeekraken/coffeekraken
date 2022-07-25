@@ -30,6 +30,8 @@ export default {
       path: "hello.hello",
     },
   ],
+  // works too:
+  // views: ['hello.hello']
 };
 ```
 
@@ -50,6 +52,8 @@ export default {
       path: "hello.hello",
     },
   ],
+  // works too:
+  // views: ['hello.hello']
 };
 ```
 

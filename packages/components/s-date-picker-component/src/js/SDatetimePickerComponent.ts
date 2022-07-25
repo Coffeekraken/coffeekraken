@@ -65,6 +65,9 @@ export interface ISDatetimePickerComponentProps {
  * @support         safari
  * @support         edge
  *
+ * @event           s-datetime-picker.change                                  Dispatched when the datepicker change value
+ * @event           s-datetime-picker                       Dispatched for every events of this component. Check the detail.eventType prop for event type
+ *
  * @install         bash
  * npm i @coffeekraken/s-datetime-picker-component
  *
@@ -565,14 +568,11 @@ export default class SDatetimePicker extends __SLitComponent {
 
         // dispatch a "change" event
         if (step !== 'init') {
-            this._$input.dispatchEvent(
-                new CustomEvent('change', {
-                    bubbles: true,
-                    detail: {
-                        hello: 'world',
-                    },
-                }),
-            );
+            this.componentUtils.dispatchEvent('change', {
+                detail: {
+                    // something...
+                },
+            });
         }
 
         this.requestUpdate();
@@ -971,9 +971,7 @@ export default class SDatetimePicker extends __SLitComponent {
                                             ? 'disabled'
                                             : ''}"
                                     >
-                                        <span>
-                                            ${month}
-                                        </span>
+                                        <span> ${month} </span>
                                     </div>
                                 `,
                             )}
@@ -1001,9 +999,7 @@ export default class SDatetimePicker extends __SLitComponent {
                                             ? 'disabled'
                                             : ''}"
                                     >
-                                        <span>
-                                            ${year}
-                                        </span>
+                                        <span> ${year} </span>
                                     </div>
                                 `,
                             )}

@@ -31,7 +31,7 @@
         @if (count($type->types) > 1)
             <ul class="s-dropdown">
                 @foreach($type->types as $subType)
-                    <li class="s-dropdown__item">{{ $subType->value ? $subType->value : $subType->type }}</li>
+                    <li class="s-dropdown-item">{{ $subType->value ? $subType->value : $subType->type }}</li>
                 @endforeach
             </ul>
         @endif
@@ -39,7 +39,7 @@
         @if (count($type->types) == 1 and $type->types[0]->of and count($type->types[0]->of) > 0)
             <ul class="s-dropdown">
                 @foreach($type->types[0]->of as $subType)
-                    <li class="s-dropdown__item">{{ $subType->value ? $subType->value : $subType->type }}</li>
+                    <li class="s-dropdown-item">{{ $subType->value ? $subType->value : $subType->type }}</li>
                 @endforeach
             </ul>
         @endif

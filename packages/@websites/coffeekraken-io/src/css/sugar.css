@@ -3,8 +3,8 @@
 
 @sugar.classes;
 @sugar.media.classes ('mobile,tablet') {
-    @sugar.classes;
-    /* @sugar.container.classes;
+  @sugar.classes;
+  /* @sugar.container.classes;
     @sugar.grid.classes;
     @sugar.layout.classes;
     @sugar.margin.classes;
@@ -49,7 +49,9 @@
   fa:search:search
   fa:radiation:nothing
   fa:download:import
+  fa:moon:dark-mode
   fa:star:star
+  fa:bugs:bugs
   fa:pen-nib:write
   fab:google:google
   fab:github:github

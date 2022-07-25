@@ -39,7 +39,7 @@
 }
 [s-sugar]:not(#homepage) .bkg,
 .scrolled .bkg {
-  opacity: 0.05;
+  opacity: 0.4;
 }
 [s-sugar]:not(#homepage),
 .scrolled {

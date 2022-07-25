@@ -44,7 +44,7 @@ export default function ({
 
     // bare
     if (finalParams.scope.indexOf('bare') !== -1) {
-        vars.push(`p
+        vars.push(`
             font-size: sugar.scalable(1rem);
             display: inline-block;
             padding-inline: sugar.padding(ui.${finalParams.name}.paddingInline);

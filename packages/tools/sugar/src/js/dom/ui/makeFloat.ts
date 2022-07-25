@@ -184,6 +184,10 @@ export default function makeFloat(
         cleanup();
     });
 
+    $depending.addEventListener('pointerover', () => {
+        update();
+    });
+
     // return the update function
     return {
         update,

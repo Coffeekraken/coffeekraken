@@ -9,7 +9,7 @@
     capabilities!</p>
 
 <a class="s-btn s-color:accent s-scale:14" href="/doc/get-started/get-started" title="Coffeekraken get started!">
-    <i class="s-icon:fire"></i> Get started!
+    <i class="s-icon:fire s-mie:10"></i> Get started!
 </a>
 
 <p class="s-typo:p s-mb:30">
@@ -17,7 +17,7 @@
 </p>
 
 <a class="s-btn s-color:complementary" s-slider-next title="Discover our components!">
-    Discover our components! <i class="s-icon:arrow-right s-mis:10"></i>
+    Take a quick features tour <i class="s-icon:arrow-right s-mis:10"></i>
 </a>
 
 <p class="s-typo:p s-mbs:50">

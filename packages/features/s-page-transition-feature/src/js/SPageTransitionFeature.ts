@@ -141,14 +141,12 @@ export default class SPageTransitionFeature extends __SFeature {
         return new Promise(async (resolve, reject) => {
 
             // dispatch an event
-            $source.dispatchEvent(
-                new CustomEvent('s-page-transition.start', {
-                    detail: {
-                        url,
-                    },
-                    bubbles: true,
-                }),
-            );
+            this.componentUtils.dispatchEvent('start', {
+                $elm: $source,
+                detail: {
+                    url
+                }
+            })
 
             // add classes
             document.body.classList.add('s-page-transition');
@@ -301,15 +299,13 @@ export default class SPageTransitionFeature extends __SFeature {
                 $source.innerHTML = `${$source.innerHTML}${this.props.brokenLinkIcon.replace(/^\<([a-z]+)/, '<$1 s-page-transition-broken-link-icon')}`;
             }
             // dispatch an error event
-            $source.dispatchEvent(
-                new CustomEvent('s-page-transition.error', {
-                    detail: {
-                        code,
-                        $source,
-                    },
-                    bubbles: true,
-                }),
-            );
+            this.componentUtils.dispatchEvent('error', {
+                $elm: $source,
+                detail: {
+                    code,
+                    $source
+                }
+            });
             // before callback
             this.props.onError?.({
                 $source,
@@ -326,15 +322,13 @@ export default class SPageTransitionFeature extends __SFeature {
         }
 
         // dispatch an event
-        $source.dispatchEvent(
-            new CustomEvent('s-page-transition.end', {
-                detail: {
-                    code,
-                    $source,
-                },
-                bubbles: true,
-            }),
-        );
+        this.componentUtils.dispatchEvent('end', {
+            $elm: $source,
+            detail: {
+                code,
+                $source
+            }
+        });
     }
 }
 

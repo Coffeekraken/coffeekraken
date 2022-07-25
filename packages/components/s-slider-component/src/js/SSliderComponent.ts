@@ -33,6 +33,14 @@ import __SSliderBehavior from './SSliderBehavior';
  * @support         safari
  * @support         edge
  *
+ * @event           s-slider.goto                    Dispatched just before the transitionn
+ * @event           s-slider.goto-end                Dispatched just after the transition
+ * @event           s-slider.next                       Dispatched just before the transition to the next slide
+ * @event           s-slider.previous                       Dispatched just before the transition to the previous slide
+ * @event           s-slider.play                        Dispatched when the slider is set to play
+ * @event           s-slider.stop                        Dispatched when the slider is set to stop
+ * @event           s-slider                       Dispatched for every events of this component. Check the detail.eventType prop for event type
+ *
  * @feature         Exteremely customizable
  * @feature         Simply controls (next, previous) built-in
  * @feature         Default dots navigation built-in
@@ -564,21 +572,10 @@ export default class SSlider extends __SLitComponent {
      * This function is just to dispatch event easier with just the name and the details you want...
      */
     _dispatch(name: string, detail: any = {}) {
-        this.dispatchEvent(new CustomEvent(name, { detail, bubbles: true }));
+        this.componentUtils.dispatchEvent(name, {
+            detail,
+        });
     }
-
-    /**
-     * This function simply apply the current state of the slider
-     */
-    // requestUpdate() {
-    //     super.requestUpdate();
-    //     // update slides classes
-    //     this.$slides?.forEach(($slide, i) => {
-    //         if (i === this.state.currentSlideIdx)
-    //             $slide.classList.add('active');
-    //         else $slide.classList.remove('active');
-    //     });
-    // }
 
     /**
      * @name        isLast
@@ -992,14 +989,26 @@ export default class SSlider extends __SLitComponent {
         this.state.currentSlideIdx = nextSlide.idx;
         this.props.slide = nextSlide.idx;
 
-        this._dispatch('s-slider-goto', {
+        if (currentSlide.idx + 1 === nextSlide.idx) {
+            this._dispatch('next', {
+                currentSlide,
+                nextSlide,
+            });
+        } else if (currentSlide.idx - 1 === nextSlide.idx) {
+            this._dispatch('previous', {
+                currentSlide,
+                nextSlide,
+            });
+        }
+
+        this._dispatch('goto', {
             currentSlide,
             nextSlide,
         });
 
         await this._transitionHandler(currentSlide.$side, nextSlide.$slide);
 
-        this._dispatch('s-slider-goto-end', {
+        this._dispatch('goto-end', {
             currentSlide,
             nextSlide,
         });
@@ -1113,6 +1122,9 @@ export default class SSlider extends __SLitComponent {
      */
     play(): SSliderComponent {
         if (!this.props.timer) return;
+        this.componentUtils.dispatchEvent('play', {
+            detail: this,
+        });
         this.state.playing = true;
         this._playSlide(this.currentSlide.idx);
         return this;
@@ -1130,6 +1142,9 @@ export default class SSlider extends __SLitComponent {
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     stop(): SSliderComponent {
+        this.componentUtils.dispatchEvent('stop', {
+            detail: this,
+        });
         this.state.playing = false;
         return this;
     }

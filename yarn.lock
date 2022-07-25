@@ -1499,6 +1499,7 @@ __metadata:
     "@coffeekraken/s-sugar-feature": ^2.0.0
     "@coffeekraken/s-sugar-json": ^2.0.0
     "@coffeekraken/s-theme": ^2.0.0
+    "@coffeekraken/s-theme-switcher-component": ^2.0.0
     "@coffeekraken/s-timer": ^2.0.0
     "@coffeekraken/s-type": ^2.0.0
     "@coffeekraken/s-typescript-builder": ^2.0.0
@@ -3444,6 +3445,17 @@ __metadata:
     "@coffeekraken/sugar": ^2.0.0
     glob-all: ^3.3.0
     stack-trace: 0.0.10
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/s-theme-switcher-component@^2.0.0, @coffeekraken/s-theme-switcher-component@workspace:packages/components/s-theme-switcher-component":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/s-theme-switcher-component@workspace:packages/components/s-theme-switcher-component"
+  dependencies:
+    "@coffeekraken/s-interface": ^2.0.0
+    "@coffeekraken/s-lit-component": ^2.0.0
+    "@coffeekraken/sugar": ^2.0.0
+    lit: ^2.0.0-rc.3
   languageName: unknown
   linkType: soft
 
@@ -11422,12 +11434,6 @@ __metadata:
 "esm-b026f9@workspace:packages/features/s-appear-feature/dist/pkg/esm":
   version: 0.0.0-use.local
   resolution: "esm-b026f9@workspace:packages/features/s-appear-feature/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"esm-e00f02@workspace:packages/components/s-rating-component/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "esm-e00f02@workspace:packages/components/s-rating-component/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 

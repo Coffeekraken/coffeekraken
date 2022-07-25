@@ -28,11 +28,7 @@ export default {
     something: true, // required param
     else: false, // optional param
   },
-  views: [
-    {
-      path: "hello.hello",
-    },
-  ],
+  views: ["hello.hello"],
 };
 ```
 
@@ -45,11 +41,7 @@ You can also use directly the [express route](https://expressjs.com/en/guide/rou
 ```js
 export default {
   slugs: ["/:something/:else?"],
-  views: [
-    {
-      path: "hello.hello",
-    },
-  ],
+  views: ["hello.hello"],
 };
 ```
 

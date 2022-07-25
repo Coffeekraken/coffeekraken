@@ -3,8 +3,10 @@
 import __SBench from '@coffeekraken/s-bench';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
+import __path from 'path';
 
 /**
  * @name                genericHandler
@@ -61,15 +63,24 @@ export default function genericHandler({
 
         const renderedViews: string[] = [];
 
+        const viewsRootDir = __SSugarConfig.get('storage.src.viewsDir');
+
         for (let [idx, viewObj] of pageConfig.views.entries()) {
             let data = Object.assign({}, res.templateData ?? {}),
                 viewPath = viewObj.path;
+
+            let potentialDataFilePath;
 
             // remove the shared data
             delete data.shared;
 
             if (typeof viewObj === 'string') {
                 viewPath = viewObj;
+
+                potentialDataFilePath = __path.resolve(
+                    viewsRootDir,
+                    `${viewPath.replace(/\./g, '/')}.data.js`,
+                );
             }
 
             __SBench.step(

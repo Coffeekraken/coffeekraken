@@ -131,7 +131,7 @@ export default function ({
                     @sugar.depth(ui.dropdown.depth);
                     @sugar.transition(fast);
 
-                    &__item {
+                    &-item {
                         padding-inline: sugar.padding(ui.dropdown.itemPaddingInline);
                         padding-block: sugar.padding(ui.dropdown.itemPaddingBlock);
                         background-color: sugar.color(current, --alpha 0);

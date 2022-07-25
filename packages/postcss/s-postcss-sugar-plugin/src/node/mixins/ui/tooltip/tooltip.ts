@@ -116,6 +116,7 @@ export default function ({
     if (finalParams.scope.indexOf('interactive') !== -1) {
         if (finalParams.interactive) {
             vars.push(`
+                &:not(.s-tooltip-container > .s-tooltip),
                 .s-tooltip-container--active > &,
                 .s-tooltip-container:focus > &,
                 .s-tooltip-container:focus-within > &,

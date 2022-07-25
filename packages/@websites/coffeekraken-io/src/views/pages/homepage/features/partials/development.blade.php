@@ -112,7 +112,7 @@
                 <div>
                     @include('generic.code.example', ['examples' => [
                     'bash' => '# launch the development stack
-                    sugar dev'
+sugar dev'
                     ]])
                 </div>
             </div>
@@ -187,7 +187,7 @@
                 <div>
                     @include('generic.code.example', ['examples' => [
                     'bash' => '# launch the build process
-                    sugar build'
+sugar build'
                     ]])
                 </div>
             </div>
@@ -256,7 +256,7 @@
                 <div>
                     @include('generic.code.example', ['examples' => [
                     'bash' => '# Create a project using sugar step by step process
-                    sugar new'
+sugar new'
                     ]])
                 </div>
 

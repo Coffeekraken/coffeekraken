@@ -4,13 +4,13 @@
 
         <div class="s-layout:1222 s-gap:column:50 @mobile s-layout:1_2 s-mi:30">
 
-            <nav class="sidemenu @mobile s-display:none" s-refocus offset-y="100" trigger="event:actual">
+            <nav class="sidemenu @mobile s-display:none">
 
                 <div class="sidemenu-sub">
                     <ck-doc-sub-nav source=".__content"></ck-doc-sub-nav>
                 </div>
 
-                <div class="sidemenu-main">
+                <div class="sidemenu-main" s-refocus offset-y="100" trigger="event:actual">
 
                     <h5 class="s-typo:h5 s-mbe:20">
                         Coffeekraken

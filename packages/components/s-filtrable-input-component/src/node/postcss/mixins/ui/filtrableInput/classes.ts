@@ -61,117 +61,47 @@ export default function ({
 
     const vars = new CssVars();
 
-    // vars.push(`
-    //   /**
-    //     * @name          Filtrable Input
-    //     * @namespace          sugar.style.ui
-    //     * @type               Styleguide
-    //     * @menu           Styleguide / UI        /styleguide/ui/filtrable-input
-    //     * @platform       css
-    //     * @status       beta
-    //     *
-    //     * These classes allows you to display an input as filtrable
-    //     *
-    //     * @feature          Support for vertical rhythm through the \`s-rhythm:vertical\` class
-    //     * @feature          Support for scaling through the \`s-scale:...\` class
-    //     * @feature          Support for colorizing through the \`s-color:...\` class
-    //     *
-    //     * @support          chromium
-    //     * @support          firefox
-    //     * @support          safari
-    //     * @support          edge
-    //     *
-    //     ${finalParams.styles
-    //         .map((style) => {
-    //             return ` * @cssClass     s-filtrable-input${
-    //                 style === finalParams.defaultStyle ? '' : `:${style}`
-    //             }           Apply the ${style} filtrable input style`;
-    //         })
-    //         .join('\n')}
-    //     * @cssClass            s-rhythm:vertical              Apply the default vertical rhythm on scoped filtered input(s)
-    //     *
-    //     * @example        html
-    //     ${finalParams.styles
-    //         .map((style) => {
-    //             return ` * <!-- ${style} style -->
-    //         * <div class="s-mbe:50">
-    //         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${style} style</h3>
-    //         *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20"><span>Click me!</span></a>
-    //         *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20 s-color:accent"><span>Click me!</span></a>
-    //         *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20 s-color:complementary"><span>Click me!</span></a>
-    //         *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20 s-color:info"><span>Click me!</span></a>
-    //         *   <a tabindex="0" class="s-btn:${style} s-mie:20 s-mbe:20 s-color:error"><span>Click me!</span></a>
-    //         *   <span class="s-btn-group s-mie:20 s-mbe:20">
-    //         *       <a tabindex="0" class="s-btn:${style}"><span>Click me!</span></a>
-    //         *       <a tabindex="0" class="s-btn:${style}"><span>+</span></a>
-    //         *   </span>
-    //         *   <a tabindex="0" disabled class="s-btn:${style} s-mie:20 s-mbe:20"><span>Click me!</span></a>
-    //         * </div>
-    //         * `;
-    //         })
-    //         .join('\n')}
-    //     *
-    //     * <!-- scales -->
-    //     * <div class="s-mbe:50">
-    //     *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scales</h3>
-    //     *   <a tabindex="0" class="s-btn s-scale:07 s-mie:20"><span>Click me!</span></a>
-    //     *   <a tabindex="0" class="s-btn s-scale:1 s-mie:20"><span>Click me!</span></a>
-    //     *   <a tabindex="0" class="s-btn s-scale:13 s-mie:20"><span>Click me!</span></a>
-    //     * </div>
-    //     *
-    //     * <!-- Rhythm and text format -->
-    //     * <div class="s-font:30 s-mbe:50">
-    //     *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Vertical rhythm and text formatting</h3>
-    //     *   <p class="s-typo:p s-mbe:30">
-    //     *       Text format mean that all the \`button\` tags inside the \`s-format:text\` class scope will be **styled automatically** using the default style and color.
-    //     *   </p>
-    //     *   <div class="s-format:text s-rhythm:vertical">
-    //     *       <button>
-    //     *          ${__faker.name.findName()}
-    //     *       </button>
-    //     *       <br />
-    //     *       <button>
-    //     *           ${__faker.name.findName()}
-    //     *       </button>
-    //     *   </div>
-    //     * </div>
-    //     *
-    //     * @since      2.0.0
-    //     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-    //     */
-    // `);
-
-    finalParams.styles.forEach((style) => {
-        let cls = `s-filtrable-input`;
-        if (style !== finalParams.defaultStyle) {
-            cls += `--${style}`;
+    vars.code(
+        `
+        [lnf="default"] > .s-filtrable-input {
+            @sugar.ui.filtrableInput($scope: bare);
         }
+        `,
+        {
+            type: 'CssClass',
+        },
+    );
 
+    if (finalParams.styles.includes(finalParams.defaultStyle)) {
+        // @TODO            example
         vars.comment(
             `/**
-        * @name           ${cls}
-        * @namespace          sugar.style.ui.filtrableInput
-        * @type           CssClass
-        * 
-        * This class represent a(n) "<s-color="accent">${style}</s-color>" filtrable input
-        * 
-        * @example        html
-        * <a class="${cls.replace(/\./gm, ' ').trim()}">I'm a cool button</a>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-      */`,
+            * @name           [lnf="default"] > .s-filtrable-input
+            * @namespace          sugar.style.ui.filtrableInput
+            * @type           CssClass
+            * 
+            * This class represent a(n) "<s-color="accent">default</s-color>" filtrable input
+            * 
+            * @example        html
+            * Example not available for now...
+            * 
+            * @since    2.0.0
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+        */`,
         ).code(
-            `.${cls} {
-        @sugar.ui.filtrableInput($style: ${style});
-     }`,
+            `
+                [lnf="default"] > .s-filtrable-input {
+                    @sugar.color(${finalParams.defaultColor});
+                    @sugar.ui.filtrableInput($style: solid, $scope: lnf);
+                }`,
             {
                 type: 'CssClass',
             },
         );
-    });
+    }
 
     if (finalParams.scope.indexOf('vr') !== -1) {
+        // @TODO            example
         vars.comment(
             `/**
             * @name           s-rhythm:vertical
@@ -182,17 +112,7 @@ export default function ({
             * 
             * @example        html
             * <div class="s-rhythm:vertical">
-            *   <button class="s-btn">
-            *       Hello world
-            *   </button>
-            *   <br />
-            *   <button class="s-btn">
-            *       Hello world
-            *   </button>
-            *   <br />
-            *   <button class="s-btn">
-            *       Hello world
-            *   </button>
+            *   example not available for now...
             * </div>
             * 
             * @since      2.0.0

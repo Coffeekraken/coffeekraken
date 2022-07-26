@@ -12,6 +12,7 @@
 }
 
 @sugar.ui.filtrableinput.classes;
+@sugar.ui.colorpicker.classes;
 @sugar.ui.datetimepicker;
 @sugar.highlightjs.theme;
 
@@ -33,6 +34,7 @@
   fa:box-open:box
   fa:angle-up
   fa:palette:color
+  fa:eye-dropper
   fa:info:info
   fa:bars:menu
   fa:times-circle:close

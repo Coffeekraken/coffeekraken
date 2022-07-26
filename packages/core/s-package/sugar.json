@@ -35,18 +35,6 @@
                     "description": "Generate automatically the 'exports' properties in the package.json file depending on the found 'exports.js' files",
                     "interface": "./dist/pkg/esm/node/interface/SPackageExportsParamsInterface.js",
                     "process": "./dist/pkg/esm/cli/exports.cli.js"
-                },
-                "addReadme": {
-                    "scope": "global",
-                    "description": "Generate automatically the README.md file for your package",
-                    "interface": "./dist/pkg/esm/node/interface/SPackageAddReadmeParamsInterface.js",
-                    "process": "./dist/pkg/esm/cli/addReadme.cli.js"
-                },
-                "applyDefaultPackageJson": {
-                    "scope": "global",
-                    "description": "Applying the default package json defined in the config.package.defaultPackageJson to the current package.json file",
-                    "interface": "./dist/pkg/esm/node/interface/SPackageApplyDefaultPackageJsonParamsInterface.js",
-                    "process": "./dist/pkg/esm/cli/applyDefaultPackageJson.cli.js"
                 }
             }
         }

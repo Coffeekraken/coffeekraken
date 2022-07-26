@@ -25,18 +25,22 @@ export interface ISColorPickerComponentProps {
         | 'pointerdown'
         | 'pointerup'
         | 'pointermove'
-        | 'input'
         | 'validate'
+        | 'eyedropper'
+        | 'reset'
+        | 'clear'
         | 'close'
     )[];
     format: 'hex' | 'hexa' | 'rgb' | 'rgba' | 'hsl' | 'hsla';
     inline: boolean;
     input: boolean;
     button: boolean;
+    eyeDropper: boolean;
     actions: ('clear' | 'reset' | 'validate')[];
     backdrop: boolean;
     floatSettings: Partial<IFloatSettings>;
     copyIconClass: string;
+    eyeDropperIconClass: string;
     copiedIconClass: string;
     buttonIconClass: string;
     backdropClass: string;
@@ -342,6 +346,7 @@ export default class SColorPicker extends __SLitComponent {
             | 'pointerup'
             | 'pointermove'
             | 'validate'
+            | 'eyedropper'
             | 'reset'
             | 'clear'
             | 'close',
@@ -533,24 +538,29 @@ export default class SColorPicker extends __SLitComponent {
         if (pX < 0) pX = 0;
         if (pX > 100) pX = 100;
 
-        this._setShade(pX, pY, saveState);
+        this._setShade(pX, pY * 0.5, saveState);
     }
     _setShade(s: number, l: number, saveState = true): void {
         // calculate lighten correctly
-        let lightness = (l + (100 - s)) / 2;
+        let lightness = l + (100 - s) / 2;
+        lightness *= (l * 2) / 100;
+        let saturation = s;
 
         // save to state if wanted
         if (saveState) {
-            this.state.s = s;
+            this.state.s = saturation;
             this.state.l = lightness;
         }
         // set the actual color values
-        this._color.s = s;
+        this._color.s = saturation;
         this._color.l = lightness;
         // apply the --s-color-picker-a css variable
         this.style.setProperty('--s-color-picker-shade-x', s);
-        this.style.setProperty('--s-color-picker-shade-y', l);
-        this.style.setProperty('--s-color-picker-s', s);
+        this.style.setProperty(
+            '--s-color-picker-shade-y',
+            l * 2 > 100 ? 100 : l * 2,
+        );
+        this.style.setProperty('--s-color-picker-s', saturation);
         this.style.setProperty('--s-color-picker-l', lightness);
         // update the shade canvas with the new color
         this._updateShadeCanvas();
@@ -597,6 +607,19 @@ export default class SColorPicker extends __SLitComponent {
         setTimeout(() => {
             this.props.copyIconClass = originalClass;
         }, 1000);
+    }
+
+    async _eyeDropper() {
+        const eyeDropper = new EyeDropper();
+        const result = await eyeDropper.open();
+        if (!result.sRGBHex) {
+            return;
+        }
+        const newColor = new __SColor(result.sRGBHex);
+        this._setAlpha(1);
+        this._setHue(newColor.h);
+        this._setShade(newColor.s, newColor.l);
+        this._updateInput('eyedropper');
     }
 
     /**
@@ -706,8 +729,12 @@ export default class SColorPicker extends __SLitComponent {
             this._shadeCtx.canvas.height,
         );
 
-        // Create a Vertical Gradient(white to black)
-        let gradientV = this._shadeCtx.createLinearGradient(0, 0, 0, 300);
+        const gradientV = this._shadeCtx.createLinearGradient(
+            0,
+            0,
+            0,
+            this._shadeCtx.canvas.height,
+        );
         gradientV.addColorStop(0, 'rgba(0,0,0,0)');
         gradientV.addColorStop(1, '#000');
         this._shadeCtx.fillStyle = gradientV;
@@ -946,6 +973,25 @@ export default class SColorPicker extends __SLitComponent {
                                       `
                                     : ''}
                             </div>
+                            ${this.props.eyeDropper
+                                ? html`
+                                      <div
+                                          class="${this.componentUtils.className(
+                                              '__eye-dropper',
+                                          )} "
+                                          @click=${() => this._eyeDropper()}
+                                      >
+                                          ${this.props.eyeDropperIconClass
+                                              ? html`
+                                                    <i
+                                                        class="${this.props
+                                                            .eyeDropperIconClass}"
+                                                    ></i>
+                                                `
+                                              : ''}
+                                      </div>
+                                  `
+                                : ''}
                         </div>
                     </div>
                     ${this.props.actions.length

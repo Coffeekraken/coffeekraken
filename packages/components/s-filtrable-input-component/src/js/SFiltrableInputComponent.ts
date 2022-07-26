@@ -689,147 +689,160 @@ export default class SFiltrableInput extends __SLitComponent {
 
     render() {
         return html`
-            <div
-                class="${this.componentUtils.className('__dropdown')} ${this
-                    .props.classes.dropdown}"
-            >
+            <div class="${this.componentUtils.className('')}">
                 <div
-                    class="${this.componentUtils.className('__before')} ${this
-                        .props.classes.before}"
-                    tabindex="-1"
+                    class="${this.componentUtils.className('__dropdown')} ${this
+                        .props.classes.dropdown}"
                 >
-                    ${this._getTemplate('before')}
-                </div>
-                ${this.$input && this.$input.value && this.props.showKeywords
-                    ? html`
-                          <div
-                              tabindex="-1"
-                              class="${this.componentUtils.className(
-                                  '__keywords',
-                              )} ${this.props.classes.keywords}"
-                          >
-                              ${this.$input.value
-                                  .split(' ')
-                                  .filter((s) => s !== '')
-                                  .map(
-                                      (keyword) => html`
-                                          <span
-                                              tabindex="-1"
-                                              @click=${() =>
-                                                  this._removeKeyword(keyword)}
-                                              class="${this.componentUtils.className(
-                                                  '__keyword',
-                                                  's-badge',
-                                              )}"
-                                              >${keyword}</span
-                                          >
-                                      `,
-                                  )}
-                          </div>
-                      `
-                    : ''}
-                <ul
-                    class="${this.componentUtils.className('__list')} ${this
-                        .props.classes.list}"
-                >
-                    ${this.state.isLoading
+                    <div
+                        class="${this.componentUtils.className(
+                            '__before',
+                        )} ${this.props.classes.before}"
+                        tabindex="-1"
+                    >
+                        ${this._getTemplate('before')}
+                    </div>
+                    ${this.$input &&
+                    this.$input.value &&
+                    this.props.showKeywords
                         ? html`
-                              <li
+                              <div
+                                  tabindex="-1"
                                   class="${this.componentUtils.className(
-                                      '__list-item',
-                                  )} ${this.props.classes
-                                      .listItem} ${this.componentUtils.className(
-                                      '__list-loading',
-                                  )}"
+                                      '__keywords',
+                                  )} ${this.props.classes.keywords}"
                               >
-                                  ${this.props.templates?.({
-                                      type: 'loading',
-                                      html,
-                                  }) ??
-                                  // @ts-ignore
-                                  this._baseTemplates({
-                                      type: 'loading',
-                                      html,
-                                  })}
-                              </li>
+                                  ${this.$input.value
+                                      .split(' ')
+                                      .filter((s) => s !== '')
+                                      .map(
+                                          (keyword) => html`
+                                              <span
+                                                  tabindex="-1"
+                                                  @click=${() =>
+                                                      this._removeKeyword(
+                                                          keyword,
+                                                      )}
+                                                  class="${this.componentUtils.className(
+                                                      '__keyword',
+                                                      's-badge',
+                                                  )}"
+                                                  >${keyword}</span
+                                              >
+                                          `,
+                                      )}
+                              </div>
                           `
-                        : !this.state.isLoading &&
-                          this.filteredItems.length <= 0
-                        ? html`
-                              <li
-                                  class="${this.componentUtils.className(
-                                      '__list-item',
-                                  )} ${this.props.classes
-                                      .listItem} ${this.componentUtils.className(
-                                      '__list-no-item',
-                                  )}"
-                              >
-                                  ${this.props.templates?.({
-                                      type: 'empty',
-                                      html,
-                                  }) ??
-                                  // @ts-ignore
-                                  this._baseTemplates({
-                                      type: 'empty',
-                                      html,
-                                  })}
-                              </li>
-                          `
-                        : !this.state.isLoading && this.filteredItems.length
-                        ? this.filteredItems.map((item, idx) =>
-                              idx < this.state.displayedMaxItems
-                                  ? html`
-                                        <li
-                                            @click=${() =>
-                                                this.preselectAndValidate(item)}
-                                            @dblclick=${() =>
-                                                this.preselectValidateAndClose(
-                                                    item,
-                                                )}
-                                            @focus=${() =>
-                                                this._setPreselectedItem(item)}
-                                            style="z-index: ${999999999 - idx}"
-                                            tabindex="-1"
-                                            class="${this.componentUtils.className(
-                                                '__list-item',
-                                            )} ${this.props.classes
-                                                .listItem} ${this.selectedItems.includes(
-                                                item,
-                                            )
-                                                ? 'active'
-                                                : ''}"
-                                            hoverable
-                                        >
-                                            ${this.props.templates?.({
-                                                type: 'item',
-                                                html,
-                                                unsafeHTML,
-                                                item,
-                                                idx,
-                                            }) ??
-                                            // @ts-ignore
-                                            this._baseTemplates({
-                                                type: 'item',
-                                                html,
-                                                unsafeHTML,
-                                                item,
-                                                idx,
-                                            })}
-                                        </li>
-                                    `
-                                  : '',
-                          )
                         : ''}
-                </ul>
-                <div
-                    class="${this.componentUtils.className('__after')} ${this
-                        .props.classes.after}"
-                    tabindex="-1"
-                >
-                    ${this.props.templates?.({
-                        type: 'after',
-                        html,
-                    })}
+                    <ul
+                        class="${this.componentUtils.className('__list')} ${this
+                            .props.classes.list}"
+                    >
+                        ${this.state.isLoading
+                            ? html`
+                                  <li
+                                      class="${this.componentUtils.className(
+                                          '__list-item',
+                                      )} ${this.props.classes
+                                          .listItem} ${this.componentUtils.className(
+                                          '__list-loading',
+                                      )}"
+                                  >
+                                      ${this.props.templates?.({
+                                          type: 'loading',
+                                          html,
+                                      }) ??
+                                      // @ts-ignore
+                                      this._baseTemplates({
+                                          type: 'loading',
+                                          html,
+                                      })}
+                                  </li>
+                              `
+                            : !this.state.isLoading &&
+                              this.filteredItems.length <= 0
+                            ? html`
+                                  <li
+                                      class="${this.componentUtils.className(
+                                          '__list-item',
+                                      )} ${this.props.classes
+                                          .listItem} ${this.componentUtils.className(
+                                          '__list-no-item',
+                                      )}"
+                                  >
+                                      ${this.props.templates?.({
+                                          type: 'empty',
+                                          html,
+                                      }) ??
+                                      // @ts-ignore
+                                      this._baseTemplates({
+                                          type: 'empty',
+                                          html,
+                                      })}
+                                  </li>
+                              `
+                            : !this.state.isLoading && this.filteredItems.length
+                            ? this.filteredItems.map((item, idx) =>
+                                  idx < this.state.displayedMaxItems
+                                      ? html`
+                                            <li
+                                                @click=${() =>
+                                                    this.preselectAndValidate(
+                                                        item,
+                                                    )}
+                                                @dblclick=${() =>
+                                                    this.preselectValidateAndClose(
+                                                        item,
+                                                    )}
+                                                @focus=${() =>
+                                                    this._setPreselectedItem(
+                                                        item,
+                                                    )}
+                                                style="z-index: ${999999999 -
+                                                idx}"
+                                                tabindex="-1"
+                                                class="${this.componentUtils.className(
+                                                    '__list-item',
+                                                )} ${this.props.classes
+                                                    .listItem} ${this.selectedItems.includes(
+                                                    item,
+                                                )
+                                                    ? 'active'
+                                                    : ''}"
+                                                hoverable
+                                            >
+                                                ${this.props.templates?.({
+                                                    type: 'item',
+                                                    html,
+                                                    unsafeHTML,
+                                                    item,
+                                                    idx,
+                                                }) ??
+                                                // @ts-ignore
+                                                this._baseTemplates({
+                                                    type: 'item',
+                                                    html,
+                                                    unsafeHTML,
+                                                    item,
+                                                    idx,
+                                                })}
+                                            </li>
+                                        `
+                                      : '',
+                              )
+                            : ''}
+                    </ul>
+                    <div
+                        class="${this.componentUtils.className(
+                            '__after',
+                        )} ${this.props.classes.after}"
+                        tabindex="-1"
+                    >
+                        ${this.props.templates?.({
+                            type: 'after',
+                            html,
+                        })}
+                    </div>
                 </div>
             </div>
         `;

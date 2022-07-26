@@ -65,6 +65,7 @@ export default function ({
         vars.code(`
 
     s-datetime-picker[lnf='default'] {
+        @sugar.color(${finalParams.defaultColor});
         color: sugar.color(text);
 
         .s-datetime-picker__actions {

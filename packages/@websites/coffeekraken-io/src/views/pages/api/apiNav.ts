@@ -32,6 +32,7 @@ export class ApiNav extends __SLitComponent {
 
     let _dispatchTimeout;
     this.addEventListener("actual", (e) => {
+      console.log("ACTUAL", e.target);
       for (let [key, value] of Object.entries(this._menuStates)) {
         if (e.target.getAttribute("namespace").startsWith(key + ".")) {
           value.opened = true;

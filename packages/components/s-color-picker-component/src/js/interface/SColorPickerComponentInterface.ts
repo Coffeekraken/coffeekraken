@@ -44,15 +44,15 @@ export default class SColorPickerComponentInterface extends __SInterface {
                     'pointerup',
                     'pointermove',
                     'validate',
+                    'eyedropper',
                     'reset',
                     'clear',
                     'close',
                 ],
                 default: [
-                    'pointerdown',
                     'pointerup',
-                    'pointermove',
                     'validate',
+                    'eyedropper',
                     'reset',
                     'clear',
                     'close',
@@ -106,6 +106,12 @@ export default class SColorPickerComponentInterface extends __SInterface {
                 type: 'Boolean',
                 default: false,
             },
+            eyeDropper: {
+                description:
+                    'Specify if you want the eye dropper capability to pick a color anywhere on the screen or not',
+                type: 'Boolean',
+                default: true,
+            },
             actions: {
                 description:
                     'Specify the actions buttons you want to display. Can be "clear", "reset" and "validate". If false, hide all button',
@@ -128,6 +134,12 @@ export default class SColorPickerComponentInterface extends __SInterface {
                     arrowSize: 15,
                     arrowPadding: 10,
                 },
+            },
+            eyeDropperIconClass: {
+                description:
+                    'Specify the class you want to apply on the "i" that display the "eyeDropper" icon',
+                type: 'String',
+                default: 's-icon s-icon--eye-dropper',
             },
             copyIconClass: {
                 description:

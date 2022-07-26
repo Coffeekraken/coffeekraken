@@ -8,7 +8,7 @@
     },
     "cli": [
         {
-            "stack": "monorepo",
+            "stack": "mono",
             "description": "Mono repository related actions",
             "defaultAction": "list",
             "actions": {

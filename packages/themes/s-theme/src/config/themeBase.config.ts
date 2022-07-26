@@ -299,23 +299,6 @@ export default function (env, config) {
          */
         media: '[config.themeMedia]',
 
-        // components: {
-        //     's-code-example': {
-        //         /**
-        //          * @name          rhythmVertical
-        //          * @namespace     config.themeBase.components.s-code-example
-        //          * @type          Object
-        //          * @default       [theme.ui.default.rhythmVertical]
-        //          *
-        //          * Specify the vertical rhythm props for the "s-code-example" component
-        //          *
-        //          * @since       2.0.0
-        //          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        //          */
-        //         rhythmVertical: '[theme.ui.default.rhythmVertical]',
-        //     },
-        // },
-
         /**
          * @name            ui
          * @namespace       config.themeBase

@@ -19,14 +19,14 @@ if ($firstBlock->status == 'wip') {
 
         <div class="s-layout:12222 s-gap:column:50 @mobile s-layout:1_2 s-mi:30">
 
-            <nav class="sidemenu @mobile s-display:none" s-refocus offset-y="100" trigger="event:actual">
+            <nav class="sidemenu @mobile s-display:none">
 
                 <div class="sidemenu-sub">
                     <ck-doc-sub-nav source=".__content"></ck-doc-sub-nav>
                     <div class="s-loader:square-dots s-color:accent s-until:sibling:active"></div>
                 </div>
 
-                <div class="sidemenu-main">
+                <div class="sidemenu-main" s-refocus offset-y="100" trigger="event:actual">
 
                     <h5 class="s-typo:h5 s-mbe:30">
                         Styleguide

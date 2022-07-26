@@ -55,15 +55,18 @@
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-rating-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
@@ -290,7 +293,13 @@
                         },
                         "behavior": {
                             "description": "Specify which behavior your want to use for your slider. Behavior are like \"presets\" with different animations, etc...",
-                            "type": "String"
+                            "values": [
+                                "none",
+                                "basic"
+                            ],
+                            "type": "String",
+                            "default": "basic",
+                            "physical": true
                         },
                         "nextIconClass": {
                             "description": "Specify the class of the next icon",
@@ -323,12 +332,18 @@
                         "clickOnSlide": {
                             "description": "Specify if you want to enable the click on the slides to navigate or not",
                             "type": "Boolean",
-                            "default": true
+                            "default": false
                         },
                         "loop": {
                             "description": "Specify if you want to enable the loop behavior or not",
                             "type": "Boolean",
                             "default": false
+                        },
+                        "slide": {
+                            "description": "Specify the active slide id",
+                            "type": "Number",
+                            "default": 0,
+                            "physical": true
                         },
                         "progress": {
                             "description": "Specify if you want to display the progress bar or not",
@@ -1005,7 +1020,13 @@
                         },
                         "behavior": {
                             "description": "Specify which behavior your want to use for your slider. Behavior are like \"presets\" with different animations, etc...",
-                            "type": "String"
+                            "values": [
+                                "none",
+                                "basic"
+                            ],
+                            "type": "String",
+                            "default": "basic",
+                            "physical": true
                         },
                         "nextIconClass": {
                             "description": "Specify the class of the next icon",
@@ -1038,12 +1059,18 @@
                         "clickOnSlide": {
                             "description": "Specify if you want to enable the click on the slides to navigate or not",
                             "type": "Boolean",
-                            "default": true
+                            "default": false
                         },
                         "loop": {
                             "description": "Specify if you want to enable the loop behavior or not",
                             "type": "Boolean",
                             "default": false
+                        },
+                        "slide": {
+                            "description": "Specify the active slide id",
+                            "type": "Number",
+                            "default": 0,
+                            "physical": true
                         },
                         "progress": {
                             "description": "Specify if you want to display the progress bar or not",

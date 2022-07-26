@@ -1,7 +1,9 @@
 /* @sugar.highlightjs.theme; */
 
-:host {
+s-code-example {
     display: block;
+
+    @sugar.rhythm.vertical (ui.codeExample.rhythmVertical);
 }
 
 .s-code-example {
@@ -14,8 +16,6 @@
             display: block;
         }
     }
-
-    @sugar.rhythm.vertical (ui.codeExample.rhythmVertical);
 }
 
 .hljs {

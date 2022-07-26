@@ -54,11 +54,13 @@
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-rating-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-scroll-component",
@@ -71,6 +73,7 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
@@ -2076,9 +2079,9 @@
                     }
                 }
             },
-            "@coffeekraken.sugar.js.storage.localStorage": {
-                "id": "@coffeekraken.sugar.js.storage.localStorage",
-                "name": "localStorage",
+            "@coffeekraken.sugar.js.storage.indexDb": {
+                "id": "@coffeekraken.sugar.js.storage.indexDb",
+                "name": "indexDb",
                 "type": {
                     "types": [
                         {
@@ -2093,13 +2096,13 @@
                         "description": ""
                     }
                 ],
-                "description": "This localStorage replacement gived you the ability to store large amount of data in indexDB with a similar api that the localStorage one.\nThe only difference is that you can store more data that the localStorage, as well as store directly objects, arrays, etc...\nNote that this API is async due to the nature of indexDB.",
+                "description": "This indexDb replacement gived you the ability to store large amount of data in indexDB with a similar api that the indexDb one.\nThe only difference is that you can store more data that the indexDb, as well as store directly objects, arrays, etc...\nNote that this API is async due to the nature of indexDB.",
                 "namespace": "@coffeekraken.sugar.js.storage",
                 "status": "beta",
                 "example": [
                     {
                         "language": "js",
-                        "code": "import __localStorage from '@coffeekraken/sugar/js/storage/localStorage';\nawait __localStorage.setItem('my-item', 'wefwef.wef.......');\nawait __localStorage.getItem('my-item');"
+                        "code": "import __indexDb from '@coffeekraken/sugar/js/storage/indexDb';\nawait __indexDb.setItem('my-item', 'wefwef.wef.......');\nawait __indexDb.getItem('my-item');\nawait __indexDb.removeItem('my-item');"
                     }
                 ],
                 "since": "2.0.0",
@@ -2108,10 +2111,128 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "localStorage.ts",
+                "filename": "simpleIndexDb.ts",
                 "extension": "ts",
-                "relPath": "src/js/storage/localStorage.ts",
+                "relPath": "src/js/storage/simpleIndexDb.ts",
                 "children": {}
+            },
+            "@coffeekraken.sugar.js.storage.SIndexDb": {
+                "id": "@coffeekraken.sugar.js.storage.SIndexDb",
+                "name": "SIndexDb",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Object"
+                        }
+                    ],
+                    "raw": "Object"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This SIndexDb class gives you a nive and easy way to interact with your indexDb storage.\nIt provides a localStorage like api with the methods \"setItem\", \"getItem\", \"getAll\" and \"removeItem\"\nwrapped in a nice Promise based api.\nYou can also use it through his static methods that are exacly the same as the instance ones.",
+                "namespace": "@coffeekraken.sugar.js.storage",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __SIndexDb from '@coffeekraken/sugar/js/storage/SIndexDb';\nconst db = new __SIndexDb({\n   db: 'my-cool-db', // default: sugar.js.storage.SIndexDb\n   table: 'my-table' // default: default\n});\nawait db.setItem('my-item', 'wefwef.wef.......');\nawait db.getItem('my-item');\nawait db.removeItem('my-item');\n\nawait __SIndexDb.setItem('my-item', 'fwefwefwefwef');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SIndexDb.ts",
+                "extension": "ts",
+                "relPath": "src/js/storage/SIndexDb.ts",
+                "children": {
+                    "setitem": {
+                        "id": "s7663f5ecc452683208ed128e906461070f39171e9e9ee370e5c355ad37e31ced",
+                        "name": "setItem",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This method allows you to add an item into your indexDb",
+                        "async": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "getitem": {
+                        "id": "sb612ac45488972d5ce3525d02eec7f3320c981438fbf8796d0b40e104960126a",
+                        "name": "getItem",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This method allows you to get back an item from your indexDb",
+                        "async": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "getall": {
+                        "id": "s5ee72060fcf63b9f7547095bbbc1dfd29a333a78cb39be443f81159f9938657e",
+                        "name": "getAll",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This method allows you to get back all the items of a table from your indexDb",
+                        "async": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "removeitem": {
+                        "id": "sa5f8e8681ec43583edf975a1574331eddfa533ebabae7bd2998c6aaf95419368",
+                        "name": "removeItem",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This method allows you to delete an item from your indexDb",
+                        "async": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    }
+                }
             },
             "@coffeekraken.sugar.js.token.replaceTokens": {
                 "id": "@coffeekraken.sugar.js.token.replaceTokens",

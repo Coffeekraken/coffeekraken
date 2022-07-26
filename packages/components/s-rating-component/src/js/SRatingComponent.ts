@@ -42,11 +42,17 @@ export interface ISRatingComponentProps {
  * import { define } from '@coffeekraken/s-rating-component';
  * define();
  *
- * @example         html        Copy from an input
- * <div class="s-flex:align-center">
- *      <input class="s-input s-width:30" type="text" value="Hello world" id="my-input" />
- *      <s-rating class="s-mis:20" from="my-input"></s-rating>
- * </div>
+ * @example         html        Simple rating
+ * <s-rating name="my-rating" class="s-color:accent"></s-rating>
+ *
+ * @example         html        More stars
+ * <s-rating name="my-rating" class="s-color:accent" min="1" max="10"></s-rating>
+ *
+ * @example         html        Different icon and color
+ * <s-rating name="my-rating" class="s-color:error" icon="heart"></s-rating>
+ *
+ * @example         html        Changing size
+ * <s-rating name="my-rating" class="s-color:accent s-font:80"></s-rating>
  *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -84,6 +90,7 @@ export default class SRatingComponent extends __SLitComponent {
     _setRating(rating) {
         // update state
         this.state.value = rating;
+
         // dispatch en update event
         this.componentUtils.dispatchEvent('change', {
             detail: this.state,
@@ -98,7 +105,7 @@ export default class SRatingComponent extends __SLitComponent {
                     .value}; --s-rating-min: ${this.props
                     .min}; --s-rating-max: ${this.props
                     .max}; --s-rating-percent: ${(100 / this.props.max) *
-                this.props.value};"
+                this.state.value};"
             >
                 <input
                     type="hidden"

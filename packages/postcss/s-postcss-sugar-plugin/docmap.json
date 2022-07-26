@@ -55,21 +55,25 @@
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-rating-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
@@ -3858,11 +3862,17 @@
                 "example": [
                     {
                         "language": "css",
+                        "title": "Custom styling",
                         "code": ".my-cool-element {\n   @sugar.rhythm.vertical {\n     margin-bottom: 50px;\n   }\n}"
                     },
                     {
+                        "language": "css",
+                        "title": "Theme dot path",
+                        "code": ".my-cool-element {\n   @sugar.rhythm.vertical(ui.codeExample.rhythmVertical);\n}"
+                    },
+                    {
                         "language": "html",
-                        "code": "<h1 class=\"my-cool-element s-rhythm\\:vertical\">Hello world</h1>\n<div class=\"s-rhythm\\:vertical\">\n    <h1 class=\"my-cool-element\">Hello world</h1>\n</div>"
+                        "code": "<div class=\"s-rhythm\\:vertical\">\n    <h1 class=\"my-cool-element\">Hello world</h1>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -3911,6 +3921,53 @@
                 "filename": "classes.ts",
                 "extension": "ts",
                 "relPath": "src/node/mixins/scale/classes.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scale.scale": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scale.scale",
+                "name": "scale",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ],
+                    "raw": "PostcssMixin"
+                },
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to set the --s-scale variable to whatever you want",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scale",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-element {\n   @sugar.scale(1.2);\n}"
+                    }
+                ],
+                "interface": {
+                    "name": "postcssSugarPluginScaleMixinInterface",
+                    "description": "",
+                    "definition": {
+                        "value": {
+                            "type": "Number",
+                            "required": true
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "scale.ts",
+                "extension": "ts",
+                "relPath": "src/node/mixins/scale/scale.ts",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scope.no": {
@@ -5042,7 +5099,7 @@
                                 "square",
                                 "rounded"
                             ],
-                            "default": "default"
+                            "default": "rounded"
                         },
                         "scope": {
                             "type": {
@@ -5123,14 +5180,12 @@
                             "values": [
                                 "default",
                                 "square",
-                                "pill",
-                                "circle"
+                                "rounded"
                             ],
                             "default": [
                                 "default",
                                 "square",
-                                "pill",
-                                "circle"
+                                "rounded"
                             ]
                         },
                         "defaultStyle": {
@@ -5145,9 +5200,9 @@
                             "values": [
                                 "default",
                                 "square",
-                                "pill"
+                                "rounded"
                             ],
-                            "default": "default"
+                            "default": "rounded"
                         },
                         "scope": {
                             "type": {

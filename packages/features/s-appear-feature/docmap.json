@@ -54,22 +54,26 @@
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-rating-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
@@ -117,8 +121,23 @@
                 "example": [
                     {
                         "language": "html",
-                        "title": "Email field",
-                        "code": "<div class=\"s-ratio:16-9 s-width:50 s-bg:main-surface s-p:30\">\n  Floating element preview. Try to scroll...\n  <div class=\"s-ratio:16-9 s-bg:accent s-color:accent s-radius s-p:30\" s-appear>\n     I'm the appear element\n </div>\n</div>\n<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>\n<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>"
+                        "title": "Bottom",
+                        "code": "<div class=\"s-ratio:16-9 s-width:50 s-bg:main-surface s-p:30 s-mbe:50\">\n  <div class=\"s-ratio:16-9 s-bg:accent s-color:accent s-radius s-p:30\" s-appear in=\"bottom\">\n     I'm the appear element\n </div>\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Top",
+                        "code": "<div class=\"s-ratio:16-9 s-width:50 s-bg:main-surface s-p:30 s-mbe:50\">\n  <div class=\"s-ratio:16-9 s-bg:accent s-color:accent s-radius s-p:30\" s-appear in=\"top\">\n     I'm the appear element\n </div>\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Right",
+                        "code": "<div class=\"s-ratio:16-9 s-width:50 s-bg:main-surface s-p:30 s-mbe:50\">\n  <div class=\"s-ratio:16-9 s-bg:accent s-color:accent s-radius s-p:30\" s-appear in=\"right\">\n     I'm the appear element\n </div>\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Left",
+                        "code": "<div class=\"s-ratio:16-9 s-width:50 s-bg:main-surface s-p:30 s-mbe:50\">\n  <div class=\"s-ratio:16-9 s-bg:accent s-color:accent s-radius s-p:30\" s-appear in=\"left\">\n     I'm the appear element\n </div>\n</div>"
                     }
                 ],
                 "interface": {
@@ -137,8 +156,41 @@
                             "physical": true
                         },
                         "delay": {
-                            "description": "Specify a delay before animation in or out your element",
-                            "type": "number"
+                            "description": "Specify a delay before animation in or out your element. Can be an array of two number that define the min delay and the max delay. The real delay will be random between these two numbers",
+                            "type": {
+                                "type": "Array<Number>",
+                                "splitChars": [
+                                    ","
+                                ]
+                            },
+                            "default": [
+                                0
+                            ]
+                        },
+                        "duration": {
+                            "description": "Specify the duration of the animation in ms. Can be an array of two number that define the min delay and the max duration. The real duration will be random between these two numbers",
+                            "type": {
+                                "type": "Array<Number>",
+                                "splitChars": [
+                                    ","
+                                ]
+                            },
+                            "default": [
+                                500
+                            ]
+                        },
+                        "distance": {
+                            "description": "Specify the distance that your element will move if you have set an \"in\" direction. Can be an array of two number that define the min delay and the max distance. The real duration will be random between these two numbers",
+                            "type": {
+                                "type": "Array<Number>",
+                                "splitChars": [
+                                    ","
+                                ]
+                            },
+                            "default": [
+                                100,
+                                120
+                            ]
                         },
                         "appear": {
                             "description": "Specify if the element has to appear. This is usually setted automatically when needed",
@@ -195,8 +247,41 @@
                             "physical": true
                         },
                         "delay": {
-                            "description": "Specify a delay before animation in or out your element",
-                            "type": "number"
+                            "description": "Specify a delay before animation in or out your element. Can be an array of two number that define the min delay and the max delay. The real delay will be random between these two numbers",
+                            "type": {
+                                "type": "Array<Number>",
+                                "splitChars": [
+                                    ","
+                                ]
+                            },
+                            "default": [
+                                0
+                            ]
+                        },
+                        "duration": {
+                            "description": "Specify the duration of the animation in ms. Can be an array of two number that define the min delay and the max duration. The real duration will be random between these two numbers",
+                            "type": {
+                                "type": "Array<Number>",
+                                "splitChars": [
+                                    ","
+                                ]
+                            },
+                            "default": [
+                                500
+                            ]
+                        },
+                        "distance": {
+                            "description": "Specify the distance that your element will move if you have set an \"in\" direction. Can be an array of two number that define the min delay and the max distance. The real duration will be random between these two numbers",
+                            "type": {
+                                "type": "Array<Number>",
+                                "splitChars": [
+                                    ","
+                                ]
+                            },
+                            "default": [
+                                100,
+                                120
+                            ]
                         },
                         "appear": {
                             "description": "Specify if the element has to appear. This is usually setted automatically when needed",

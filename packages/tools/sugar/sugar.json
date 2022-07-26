@@ -15,6 +15,7 @@
                 "run": {
                     "scope": "global",
                     "description": "Run a line command either in current directory or in a(some) specific packages",
+                    "interface": "./dist/pkg/esm/cli/interface/SRunCommandParamsInterface.js",
                     "process": "./dist/pkg/esm/cli/runCommand.cli.js"
                 }
             }

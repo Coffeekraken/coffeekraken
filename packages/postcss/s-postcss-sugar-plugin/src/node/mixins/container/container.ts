@@ -60,7 +60,7 @@ export default function ({
 
     vars.code(
         `
-        margin: auto;
+        margin: 0 auto;
   `,
     );
 

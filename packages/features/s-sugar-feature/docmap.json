@@ -55,21 +55,25 @@
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-rating-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
@@ -144,7 +148,7 @@
                         "scrolledDelta": {
                             "description": "Specify after how many scroll the scrolled class will be applied",
                             "type": "Number",
-                            "default": 10
+                            "default": 200
                         },
                         "vhvar": {
                             "description": "Specify if you want the `--vh` css variable to be computed and available",
@@ -226,7 +230,7 @@
                         "scrolledDelta": {
                             "description": "Specify after how many scroll the scrolled class will be applied",
                             "type": "Number",
-                            "default": 10
+                            "default": 200
                         },
                         "vhvar": {
                             "description": "Specify if you want the `--vh` css variable to be computed and available",

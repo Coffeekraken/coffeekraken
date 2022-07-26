@@ -79,10 +79,7 @@ export default class CkSettings extends __SLitComponent {
             <li class="s-bg:main-surface">
               <label class="s-label s-pi:100 s-pb:30" for="setting-base-color">
                 <span> Base color </span>
-                <s-color-picker
-                  id="setting-base-color"
-                  update-input="pointerup"
-                >
+                <s-color-picker id="setting-base-color">
                   <div class="s-group">
                     <input
                       type="text"
@@ -99,10 +96,7 @@ export default class CkSettings extends __SLitComponent {
             <li class="s-bg:main-surface">
               <label class="s-label s-pi:100 s-pb:30" for="setting-main-color">
                 <span> Main color </span>
-                <s-color-picker
-                  id="setting-main-color"
-                  update-input="pointerup"
-                >
+                <s-color-picker id="setting-main-color">
                   <div class="s-group">
                     <input
                       type="text"
@@ -125,7 +119,6 @@ export default class CkSettings extends __SLitComponent {
                 <s-color-picker
                   style="position:relative"
                   id="setting-accent-color"
-                  update-input="pointerup"
                 >
                   <div class="s-group">
                     <input
@@ -146,10 +139,7 @@ export default class CkSettings extends __SLitComponent {
                 for="setting-complementary-color"
               >
                 <span> Complementary color </span>
-                <s-color-picker
-                  id="setting-complementary-color"
-                  update-input="pointerup"
-                >
+                <s-color-picker id="setting-complementary-color">
                   <div class="s-group">
                     <input
                       type="text"

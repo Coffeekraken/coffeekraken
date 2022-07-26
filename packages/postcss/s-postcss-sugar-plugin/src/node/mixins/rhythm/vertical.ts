@@ -30,15 +30,19 @@ export interface postcssSugarPluginRhythmVerticalMixinParams {
  *
  * @return      {Css}         The generated css
  *
- * @example        css
+ * @example        css          Custom styling
  * .my-cool-element {
  *    \@sugar.rhythm.vertical {
  *      margin-bottom: 50px;
  *    }
  * }
  *
+ * @example         css         Theme dot path
+ * .my-cool-element {
+ *    @sugar.rhythm.vertical(ui.codeExample.rhythmVertical);
+ * }
+ *
  * @example       html
- * <h1 class="my-cool-element s-rhythm\:vertical">Hello world</h1>
  * <div class="s-rhythm\:vertical">
  *     <h1 class="my-cool-element">Hello world</h1>
  * </div>
@@ -58,34 +62,64 @@ export default function ({
     const finalParams = <postcssSugarPluginRhythmVerticalMixinParams>{
         ...(params ?? {}),
     };
-    // const container = new postcssApi.Rule({
-    //     selectors: [`.s-rhythm--vertical`],
-    // });
 
-    let generatedCss;
+    let generatedCss: string[] = [],
+        themeGeneratedCss;
 
     if (params.themePath) {
-        generatedCss = __STheme.jsObjectToCssProperties(
-            __STheme.get(params.themePath) ?? {},
-        );
+        themeGeneratedCss = [
+            __STheme.jsObjectToCssProperties(
+                __STheme.get(params.themePath) ?? {},
+            ),
+        ];
     }
 
+    if (atRule.parent && atRule.parent.selector && themeGeneratedCss) {
+        const newCss = `
+            .s-rhythm--vertical > ${atRule.parent.selector} {
+                ${themeGeneratedCss}
+            }
+        `;
+        generatedCss.push(newCss);
+    }
+
+    const declarations: string[] = [];
+
+    // nested selectors
     if (atRule.nodes?.length) {
         atRule.nodes?.forEach((node) => {
-            if (!node.selector) return;
-            node.selector = node.selector
-                .split(',')
-                .map((sel) => {
-                    return `.s-rhythm--vertical > ${sel}`;
-                })
-                .join(',');
+            // selectors
+            if (node.selector) {
+                node.selector = node.selector
+                    .split(',')
+                    .map((sel) => {
+                        return `.s-rhythm--vertical > ${sel}`;
+                    })
+                    .join(',');
+            } else {
+                // declarations
+                declarations.push(node.toString?.() ?? '');
+                node.remove();
+            }
         });
     }
 
-    // append the generated css from the theme dot path object
-    if (generatedCss) {
-        atRule.append(generatedCss);
+    if (declarations.length) {
+        generatedCss.push(`.s-rhythm--vertical > ${atRule.parent.selector} {
+                ${declarations.join('\n')}
+            }`);
     }
 
-    atRule.replaceWith(atRule.nodes);
+    // generated css
+    if (generatedCss.length) {
+        for (let i = generatedCss.length - 1; i >= 0; i--) {
+            atRule.parent.after(generatedCss[i]);
+        }
+    }
+
+    if (atRule.nodes && atRule.nodes.length) {
+        atRule.replaceWith(atRule.nodes);
+    } else {
+        atRule.remove();
+    }
 }

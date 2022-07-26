@@ -4,6 +4,14 @@ s-slider,
     font-size: sugar.scalable(1rem);
 }
 
+s-slider {
+    > .s-slider,
+    > .s-slider > .s-slider__slides-wrapper,
+    > .s-slider > .s-slider__slides-wrapper > .s-slider__slides {
+        height: 100%;
+    }
+}
+
 s-slider[behavior='basic'] {
     > .s-slider {
         > .s-slider__slides-wrapper {

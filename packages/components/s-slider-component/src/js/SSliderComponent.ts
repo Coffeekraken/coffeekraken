@@ -340,15 +340,12 @@ export default class SSlider extends __SLitComponent {
             return false;
         });
 
-        console.log(this.$slides);
-
         this.$slides.forEach(($item) => {
             // add the item class
             $item.classList.add(this.componentUtils.className('__slide'));
         });
     }
     async mount() {
-        console.log('mound');
         // set the initial slide idx from properties
         this.state.currentSlideIdx = this.props.slide;
     }
@@ -555,7 +552,6 @@ export default class SSlider extends __SLitComponent {
         __querySelectorLive(
             '[s-slider-goto]',
             ($elm) => {
-                console.log('sl', $elm);
                 $elm.addEventListener('click', (e) => {
                     const slideIdx =
                         parseInt($elm.getAttribute('s-slider-goto')) ?? 0;

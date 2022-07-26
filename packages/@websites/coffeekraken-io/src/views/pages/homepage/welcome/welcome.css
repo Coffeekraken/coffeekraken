@@ -140,6 +140,11 @@
     display: flex;
   }
 
+  s-slider[lnf="welcome-header"] {
+    margin-top: 100px;
+    height: calc(100% - 100px);
+  }
+
   [s-slider-slide]:not(s-slider s-slider [s-slider-slide]) {
     flex: 0 0 100%;
     width: 100vw;
@@ -211,7 +216,7 @@
   .__content {
     width: 100%;
     text-align: center;
-    padding-top: 200px;
+    /* padding-top: 200px; */
 
     .s-typo--h3,
     .s-typo--p,

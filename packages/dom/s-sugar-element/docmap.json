@@ -55,21 +55,25 @@
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-rating-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
@@ -202,6 +206,25 @@
                             "url": "https://coffeekraken.io"
                         }
                     },
+                    "simulatetransform": {
+                        "id": "sf49fdf782c59511d8a0ec2f4ffe4662dc6fc1d805b173daa09230f0fb61f8b45",
+                        "name": "simulateTransform",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "Allows you to get back a new matrix by adding the properties passed\nto the current element matrix. This mean that if the element is currently\nin translateX 50 and you pass to the translateX argument 10, it will be 60 at the end.\nTo override the",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
                     "applymatrix": {
                         "id": "s8b21239c860ec1978e648d084cdda25075b657f891e86772d5cd21b8c08647e1",
                         "name": "applyMatrix",
@@ -279,7 +302,7 @@
                         }
                     },
                     "settranslate": {
-                        "id": "sc396100ca6c469936269777f130c210fd44005a9f4b1b96f6371deb6bd4f3544",
+                        "id": "s398abcf5b560e41fdfb5cd1e6baf0fe940b048286b367ef3b524f10ad9bf3d4e",
                         "name": "setTranslate",
                         "type": {
                             "types": [
@@ -289,7 +312,7 @@
                             ],
                             "raw": "Function"
                         },
-                        "description": "Allows you to set the translate of an HTMLElement by setting his transformation properties.\nThis will override the previous matrix translates. If you want to \"add\" a translation, use the `translate` method instead;",
+                        "description": "Allows you to set the translate of an HTMLElement by setting his translates properties.\nThis will override the previous matrix translates. If you want to \"add\" a translation, use the `translate` method instead;",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -298,7 +321,7 @@
                         }
                     },
                     "translate": {
-                        "id": "sdea9bc1545d3ac4cfdd939dd76e9badc714635911dc185aa427aefaa8881f5de",
+                        "id": "s10b4bb043ed01cad39e177e2339e0101e80f1c91cdee532796429711976f40da",
                         "name": "translate",
                         "type": {
                             "types": [
@@ -308,7 +331,7 @@
                             ],
                             "raw": "Function"
                         },
-                        "description": "Allows you to translate an HTMLElement by setting his transformation properties",
+                        "description": "Allows you to translate an HTMLElement by setting his translate properties",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",

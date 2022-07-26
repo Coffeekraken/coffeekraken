@@ -13,20 +13,22 @@ export interface ISThemeSwitcherComponentProps {
 
 /**
  * @name                SThemeSwitcherComponent
- * @as                  Rating
+ * @as                  Theme switcher
  * @namespace           js
  * @type                CustomElement
  * @interface           ./interface/SThemeSwitcherComponentInterface.ts
- * @menu                Styleguide / UI              /styleguide/ui/s-rating
+ * @menu                Styleguide / UI              /styleguide/ui/s-theme-switcher
  * @platform            html
  * @status              beta
  *
- * This component represent a simple rating "stars" based component. You can as well choose the icon you want to use, the number of them, etc...
+ * This component represent a simple theme-switcher that allows you to switch between light and dark mode easily as well as choosing between
+ * all of your themes if you have more than 1 available...
  *
- * @feature           Rate with icon based range
+ * @feature           Switch between light and dark mode
+ * @feaute            Switch between multiple theme if more than 1 are available
  *
- * @event             s-rating.change            Dispatched when the rating has been updated
- * @event           s-rating                       Dispatched for every events of this component. Check the detail.eventType prop for event type
+ * @event             s-theme-switcher.change            Dispatched when the theme has been changed
+ * @event           s-theme-switcher                       Dispatched for every events of this component. Check the detail.eventType prop for event type
  *
  * @support         chromium
  * @support         firefox
@@ -34,17 +36,14 @@ export interface ISThemeSwitcherComponentProps {
  * @support         edge
  *
  * @install           shell
- * npm i @coffeekraken/s-rating-component
+ * npm i @coffeekraken/s-theme-switcher-component
  *
  * @install           js
- * import { define } from '@coffeekraken/s-rating-component';
+ * import { define } from '@coffeekraken/s-theme-switcher-component';
  * define();
  *
- * @example         html        Copy from an input
- * <div class="s-flex:align-center">
- *      <input class="s-input s-width:30" type="text" value="Hello world" id="my-input" />
- *      <s-rating class="s-mis:20" from="my-input"></s-rating>
- * </div>
+ * @example         html        Simple dark mode switcher
+ * <s-theme-switcher></s-theme-switcher>
  *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -83,6 +82,11 @@ export default class SThemeSwitcherComponent extends __SLitComponent {
         } else {
             __STheme.setThemeVariant('dark');
         }
+
+        this.componentUtils.dispatchEvent('change', {
+            detail: __STheme,
+        });
+
         this.requestUpdate();
     }
 

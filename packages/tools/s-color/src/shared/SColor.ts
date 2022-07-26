@@ -416,6 +416,7 @@ class SColor extends __SClass {
     _parse(color) {
         // parse the color
         color = __convert(color, 'hsla');
+
         // assign new color values
         this.h = color.h;
         this.s = color.s;

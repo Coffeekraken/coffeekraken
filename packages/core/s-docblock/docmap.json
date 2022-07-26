@@ -54,22 +54,26 @@
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-rating-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
@@ -600,6 +604,36 @@
                 "filename": "description.ts",
                 "extension": "ts",
                 "relPath": "src/shared/tags/description.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-docblock.shared.tags.eventTag": {
+                "id": "@coffeekraken.s-docblock.shared.tags.eventTag",
+                "name": "eventTag",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Parse the event tag",
+                "namespace": "@coffeekraken.s-docblock.shared.tags",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "event.ts",
+                "extension": "ts",
+                "relPath": "src/shared/tags/event.ts",
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.tags.example": {

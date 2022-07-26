@@ -29,23 +29,41 @@ import __css from '../../../../src/css/s-appear-feature.css'; // relative to /di
  * @support          safari
  * @support          edge
  *
- * @example         html            Email field
- * <div class="s-ratio:16-9 s-width:50 s-bg:main-surface s-p:30">
- *   Floating element preview. Try to scroll...
- *   <div class="s-ratio:16-9 s-bg:accent s-color:accent s-radius s-p:30" s-appear>
+ * @example         html            Bottom
+ * <div class="s-ratio:16-9 s-width:50 s-bg:main-surface s-p:30 s-mbe:50">
+ *   <div class="s-ratio:16-9 s-bg:accent s-color:accent s-radius s-p:30" s-appear in="bottom">
  *      I'm the appear element
  *  </div>
  * </div>
- * <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
- * <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+ *
+ * @example         html            Top
+ * <div class="s-ratio:16-9 s-width:50 s-bg:main-surface s-p:30 s-mbe:50">
+ *   <div class="s-ratio:16-9 s-bg:accent s-color:accent s-radius s-p:30" s-appear in="top">
+ *      I'm the appear element
+ *  </div>
+ * </div>
+ *
+ * @example         html            Right
+ * <div class="s-ratio:16-9 s-width:50 s-bg:main-surface s-p:30 s-mbe:50">
+ *   <div class="s-ratio:16-9 s-bg:accent s-color:accent s-radius s-p:30" s-appear in="right">
+ *      I'm the appear element
+ *  </div>
+ * </div>
+ *
+ * @example         html            Left
+ * <div class="s-ratio:16-9 s-width:50 s-bg:main-surface s-p:30 s-mbe:50">
+ *   <div class="s-ratio:16-9 s-bg:accent s-color:accent s-radius s-p:30" s-appear in="left">
+ *      I'm the appear element
+ *  </div>
+ * </div>
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISAppearFeatureProps {
-    in: string | 'fade';
-    out: string | 'fade';
+    in: string | 'fade' | 'top' | 'right' | 'bottom' | 'left';
+    out: string | 'fade' | 'top' | 'right' | 'bottom' | 'left';
     delay: number[];
     duration: number[];
     distance: number[];
@@ -77,7 +95,6 @@ export default class SAppearFeature extends __SFeature {
     }
 
     async mount() {
-
         // check if the element is fully loaded (for images)
         switch (this.node.tagName.toLowerCase()) {
             case 'img':
@@ -100,21 +117,23 @@ export default class SAppearFeature extends __SFeature {
         let delay = this.props.delay[0];
         if (this.props.delay.length === 2) {
             const minDelay = this.props.delay[0],
-                    maxDelay = this.props.delay[1];
+                maxDelay = this.props.delay[1];
             delay = minDelay + (maxDelay - minDelay) * Math.random();
         }
         let duration = this.props.duration[0];
         if (this.props.duration.length === 2) {
             const minDuration = this.props.duration[0],
-                    maxDuration = this.props.duration[1];
-            duration = minDuration + (maxDuration - minDuration) * Math.random();
+                maxDuration = this.props.duration[1];
+            duration =
+                minDuration + (maxDuration - minDuration) * Math.random();
         }
 
         let distance = this.props.distance[0];
         if (this.props.distance.length === 2) {
             const minDistance = this.props.distance[0],
-                    maxDistance = this.props.distance[1];
-            distance = minDistance + (maxDistance - minDistance) * Math.random();
+                maxDistance = this.props.distance[1];
+            distance =
+                minDistance + (maxDistance - minDistance) * Math.random();
         }
 
         const sugarElement = new __SSugarElement(this.node);
@@ -125,16 +144,16 @@ export default class SAppearFeature extends __SFeature {
             let distanceX = 0,
                 distanceY = 0;
 
-            switch(this.props.in) {
+            switch (this.props.in) {
                 case 'top':
                     distanceY = distance * -1;
-                break;
+                    break;
                 case 'bottom':
                     distanceY = distance;
                     break;
                 case 'left':
                     distanceX = distance * -1;
-                break;
+                    break;
                 case 'right':
                     distanceX = distance;
                     break;
@@ -142,7 +161,7 @@ export default class SAppearFeature extends __SFeature {
 
             const newTransforms = sugarElement.simulateTransform({
                 translateX: distanceX,
-                translateY: distanceY
+                translateY: distanceY,
             });
 
             const animationStr = `
@@ -157,7 +176,9 @@ export default class SAppearFeature extends __SFeature {
                     }
                 }
                 [s-appear-id="${appearId}"] {
-                    animation: s-appear-${appearId} ${duration / 1000}s ${__STheme.get('easing.default')} forwards;
+                    animation: s-appear-${appearId} ${
+                duration / 1000
+            }s ${__STheme.get('easing.default')} forwards;
                 }
             `;
 

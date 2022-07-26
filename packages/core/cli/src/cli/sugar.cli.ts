@@ -564,6 +564,13 @@ export default class SSugarCli {
     }
 
     static log(log) {
+        if (log === '') {
+            this._eventEmitter.emit('log', {
+                value: ' ',
+            });
+            return;
+        }
+
         if (typeof log === 'string') {
             this._eventEmitter.emit('log', {
                 // type: __SLog.TYPE_INFO,
@@ -663,11 +670,15 @@ export default class SSugarCli {
                     `${this.args.stack}.${this.args.action}`
                 ];
 
+            this.log(``);
             this.log(
-                ` Action <cyan>${this.args.stack}.${this.args.action}</cyan>`,
+                `<yellow>${'-'.repeat(process.stdout.columns - 4)}</yellow>`,
             );
             this.log(
-                `<yellow>${'-'.repeat(process.stdout.columns - 2)}</yellow>`,
+                `Action <cyan>${this.args.stack}.${this.args.action}</cyan>`,
+            );
+            this.log(
+                `<yellow>${'-'.repeat(process.stdout.columns - 4)}</yellow>`,
             );
 
             this.log(``);
@@ -679,10 +690,12 @@ export default class SSugarCli {
             this.log(``);
 
             this.log(
-                `<yellow>██</yellow>   <yellow>sugar</yellow> <cyan>${this.args.stack}.${this.args.action}</cyan> <magenta>[arguments]</magenta>`,
+                `<yellow>█</yellow>  <yellow>sugar</yellow> <cyan>${this.args.stack}.${this.args.action}</cyan> <magenta>[arguments]</magenta>`,
             );
 
             this.log(``);
+
+            // console.log('com', commandObj);
 
             if (commandObj.interfacePath) {
                 const { default: int } = await import(commandObj.interfacePath);
@@ -692,7 +705,9 @@ export default class SSugarCli {
                             argObj.alias
                                 ? `(<magenta>-${argObj.alias}</magenta>)`
                                 : ''
-                        }`,
+                        } {<yellow>${
+                            argObj.type.type ?? argObj.type
+                        }</yellow>}`,
                     );
                     this.log(`   ${argObj.description}`);
                     if (argObj.default !== undefined) {
@@ -725,13 +740,11 @@ export default class SSugarCli {
                 this._availableCli.endpoints[stackAction];
         });
 
-        // this.log(
-        //     `<yellow>█ ${'-'.repeat(process.stdout.columns - 2)}</yellow>`,
-        // );
-        this.log(`Stacks and actions list:`);
-        // this.log(
-        //     `<yellow>█ ${'-'.repeat(process.stdout.columns - 2)}</yellow>`,
-        // );
+        this.log(``);
+        this.log(`<yellow>${'-'.repeat(process.stdout.columns - 4)}</yellow>`);
+        this.log(`<yellow>Stacks</yellow> and <cyan>actions</cyan> list`);
+        this.log(`<yellow>${'-'.repeat(process.stdout.columns - 4)}</yellow>`);
+        this.log(``);
 
         Object.keys(sortedByStack).forEach((stack) => {
             const stackObj = sortedByStack[stack];

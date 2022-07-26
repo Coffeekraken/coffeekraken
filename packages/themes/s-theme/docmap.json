@@ -55,11 +55,13 @@
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-rating-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-scroll-component",
@@ -72,6 +74,7 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
             "@coffeekraken/s-typescript-builder",
@@ -2202,6 +2205,52 @@
                 "default": "default",
                 "description": "Specify the default theme name",
                 "namespace": "@coffeekraken.s-theme.config.themeDefault",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeDefault.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeDefault.config.ts"
+            },
+            "@coffeekraken.s-theme.config.themeDefault.metas.title": {
+                "id": "@coffeekraken.s-theme.config.themeDefault.metas.title",
+                "name": "title",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "description": "Specify the theme title",
+                "namespace": "@coffeekraken.s-theme.config.themeDefault.metas",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeDefault.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeDefault.config.ts"
+            },
+            "@coffeekraken.s-theme.config.themeDefault.metas.description": {
+                "id": "@coffeekraken.s-theme.config.themeDefault.metas.description",
+                "name": "description",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "description": "Specify the theme description",
+                "namespace": "@coffeekraken.s-theme.config.themeDefault.metas",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -9012,7 +9061,7 @@
                     ],
                     "raw": "String"
                 },
-                "default": "1.5",
+                "default": "1",
                 "description": "Specify the default padding inline for form items",
                 "namespace": "@coffeekraken.s-theme.config.themeUi.form",
                 "since": "2.0.0",
@@ -9804,7 +9853,7 @@
                     ],
                     "raw": "String"
                 },
-                "default": "[theme.ui.default.defaultShape]",
+                "default": "rounded",
                 "description": "Specify the default shape for your avatar ui",
                 "namespace": "@coffeekraken.s-theme.config.themeUi.avatar",
                 "since": "2.0.0",
@@ -14706,6 +14755,46 @@
                 "extension": "ts",
                 "relPath": "src/js/STheme.ts",
                 "children": {
+                    "theme": {
+                        "id": "s1495ab27f603174872e2da60b737f849ca863fa559c5180529097156d4470f19",
+                        "name": "theme",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "Store the current theme applied from the html tag context or from the config",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "variant": {
+                        "id": "s569b05f67112b98c3690c874cf555e1963fbc65f020fd11af6d2ab7b27368442",
+                        "name": "variant",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "Store the current variant applied from the html tag context or from the config",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
                     "settheme": {
                         "id": "s3bcc8465312cc4e468a5ccc7bea2b2f99e4121475b49620c865665c6824c172f",
                         "name": "setTheme",
@@ -14746,8 +14835,28 @@
                             "url": "https://coffeekraken.io"
                         }
                     },
+                    "isdarkmode": {
+                        "id": "sbcababc78c26412bc333a2ed098f50e183ec065974fde479cc01dbd2cb9f7f06",
+                        "name": "isDarkMode",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This method returns true if the theme variant is dark, false if not",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
                     "preferdark": {
-                        "id": "s775431b547b10583104e2f49a90875c04a9a8d379e01c972b73ba55d45d7c308",
+                        "id": "sd8c624de7cc028f880269fe20e2b27da76c13703705abf8052305f798af841c7",
                         "name": "preferDark",
                         "type": {
                             "types": [
@@ -14759,7 +14868,12 @@
                         },
                         "description": "This method just check if the user prefer the dark mode or not.",
                         "static": "true",
-                        "since": "2.0.0"
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
                     },
                     "setthemevariant": {
                         "id": "se805e1df31cf4864ddb1718241cb6ac17889dde836a93200f98e49b78e03d57f",
@@ -14802,7 +14916,7 @@
                         }
                     },
                     "getthememetas": {
-                        "id": "sf59c9266890229a94e200b4e7ac145feeb26533d192d5e2045ae7e8ab948c6fd",
+                        "id": "s590664ca3554b19b8dad670c23a3b5f2aabcc7db8e53aac01c641ed17b7ff19b",
                         "name": "getThemeMetas",
                         "type": {
                             "types": [
@@ -15180,6 +15294,66 @@
                             "raw": "String"
                         },
                         "description": "Store the computed theme id builded from the theme name and theme variant",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "themesnames": {
+                        "id": "s79f4ea2c2d9e690ade45bf5ea6689098fadd9975a55a8bf171a53c569e8e2fc8",
+                        "name": "themesNames",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "Access the defined themes names",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "isdarkmode": {
+                        "id": "s789a2028ff5763bd12bd4e4a8418027544a2b9ef0aef006a5a71eb1b3e1d673c",
+                        "name": "isDarkMode",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This method returns true if the theme variant is dark, false if not",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "getthememetas": {
+                        "id": "s1f51ee38cc5bba5077a86a6f76b640e90475d45af57739d0a099a9c641b25659",
+                        "name": "getThemeMetas",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This method allows you to get the theme metas like \"name\", \"theme\" and \"variant\" from the passed HTMLElement",
+                        "static": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",

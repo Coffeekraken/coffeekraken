@@ -59,11 +59,6 @@ export default function ({
         * Note that for this to work fine when direction is "rtl", you MUST specify the dir="rtl" attribute
         * on the html tag
         * 
-        * @feature          Support for vertical rhythm through the \`s-rhythm:vertical\` class
-        * @feature          Support for text formatting through the \`s-format:text\` class
-        * @feature          Support for scaling through the \`s-scale:...\` class
-        * @feature          Support for colorizing through the \`s-color:...\` class
-        * 
         * @support          chromium
         * @support          firefox
         * @support          safari
@@ -73,8 +68,26 @@ export default function ({
         * 
         * @example       html       Button group
         * <span class="s-group">
-        *   <a class="s-btn--block">I'm a cool block button</a>
-        *   <a class="s-btn--block">+</a>
+        *   <a class="s-btn">I'm a cool block button</a>
+        *   <a class="s-btn s-color:accent">+</a>
+        * </span>
+        * 
+        * @example       html       Form input group
+        * <span class="s-group s-color:accent">
+        *   <input type="text" class="s-input" placeholder="Type something..." />
+        *   <input type="text" class="s-input" placeholder="And something else..." />
+        * </span>
+        * 
+        * @example       html       MIxed group
+        * <span class="s-group s-color:accent">
+        *   <input type="text" class="s-input" placeholder="Type something..." />
+        *   <a class="s-btn">+</a>
+        * </span>
+        * 
+        * @example       html           RTL support
+        * <span class="s-group" dir="rtl">
+        *   <a class="s-btn">I'm a cool block button</a>
+        *   <a class="s-btn s-color:accent">+</a>
         * </span>
         * 
         * @since      2.0.0
@@ -127,7 +140,6 @@ export default function ({
         &:last-child:not(:first-child):after {
             border-top-left-radius: 0 !important;
             border-bottom-left-radius: 0 !important;
-            border-right: none !important;
         }
       }
 
@@ -150,7 +162,6 @@ export default function ({
         &:first-child:not(:last-child):after {
             border-top-left-radius: 0 !important;
             border-bottom-left-radius: 0 !important;
-            border-left: none !important;
         }
       }
     `,

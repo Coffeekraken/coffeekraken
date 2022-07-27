@@ -221,7 +221,7 @@ export default class SDatetimePicker extends __SLitComponent {
     }
     async firstUpdated() {
         this._$root = this.querySelector(
-            `.${this.componentUtils.className('')}`,
+            `.${this.componentUtils.className('__root')}`,
         );
 
         this._$picker = this.querySelector(
@@ -690,7 +690,7 @@ export default class SDatetimePicker extends __SLitComponent {
         return html`
             <div
                 class="${this.componentUtils.className(
-                    '',
+                    '__root',
                 )} ${this.componentUtils.className('')}--${this.props
                     .floatSettings.position} ${this._isInInteraction
                     ? 'is-interacting'

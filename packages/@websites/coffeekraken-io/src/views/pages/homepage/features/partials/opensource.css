@@ -25,16 +25,18 @@
     overflow: hidden;
     /* margin-top: -300px; */
     @sugar.depth (10);
+    background: white;
 
     @sugar.theme.when dark {
       @sugar.depth (100);
+      background: sugar.color(main, background, --lighten 5%);
     }
 
     @sugar.media mobile {
       margin-top: 0;
     }
 
-    &:before {
+    /* &:before {
       content: "";
       position: absolute;
       top: 0;
@@ -52,6 +54,6 @@
         opacity: 0.05;
         background-image: url("/dist/img/welcome/welcome-bg-01.jpg");
       }
-    }
+    } */
   }
 }

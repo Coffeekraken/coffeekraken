@@ -158,7 +158,7 @@ export default class SRange extends __SLitComponent {
         return html`
             <div
                 class="${this.componentUtils.className(
-                    '',
+                    '__root',
                     's-tooltip-container',
                 )}"
             >

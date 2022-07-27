@@ -33,6 +33,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
  */
 
 export interface ISFeatureSettings extends ISComponentUtilsSettings {
+    name: string;
     interface?: typeof __SInterface;
     defaultProps?: any;
 }
@@ -159,6 +160,11 @@ export default class SFeature extends __SClass implements ISFeature {
 
         // node
         this.node = node;
+
+        // add the base class on the feature
+        this.node.classList.add(
+            ...this.componentUtils.className('').split(' '),
+        );
 
         // assign props
         this.props = this.componentUtils.handleProps(

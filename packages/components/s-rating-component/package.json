@@ -1,6 +1,6 @@
 {
     "name": "@coffeekraken/s-rating-component",
-    "version": "2.0.0",
+    "version": "2.0.0-alpha.0",
     "description": "",
     "type": "module",
     "homepage": "https://coffeekraken.io",
@@ -15,9 +15,9 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-interface": "^2.0.0",
-        "@coffeekraken/s-lit-component": "^2.0.0",
-        "@coffeekraken/sugar": "^2.0.0",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.0",
+        "@coffeekraken/s-lit-component": "^2.0.0-alpha.0",
+        "@coffeekraken/sugar": "^2.0.0-alpha.0",
         "lit": "^2.0.0-rc.3"
     },
     "main": "./dist/pkg/cjs/js/exports.js",

@@ -348,7 +348,7 @@ export default class SPanel extends __SLitComponent {
         return html`
             <div
                 class="${this.componentUtils.className(
-                    '',
+                    '__root',
                 )} ${this.componentUtils.className(`--${this.props.position}`)}"
             >
                 ${this.props.backdrop

@@ -219,6 +219,9 @@ export default class SLitComponent extends LitElement {
                 '',
         });
 
+        // component class
+        this.classList.add(...this.componentUtils.className('').split(' '));
+
         (async () => {
             const defaultProps = __SComponentUtils.getDefaultProps(
                 this.tagName.toLowerCase(),

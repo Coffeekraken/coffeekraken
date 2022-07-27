@@ -58,6 +58,7 @@ export default class SRefocusFeature extends __SFeature {
             node,
             __deepMerge(
                 {
+                    name: 's-refocus',
                     interface: __SRefocusFeatureInterface,
                 },
                 settings ?? {},

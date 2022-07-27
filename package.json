@@ -1,6 +1,6 @@
 {
     "name": "@coffeekraken/coffeekraken",
-    "version": "2.0.0",
+    "version": "2.0.0-alpha.0",
     "description": "We are a young collectve of front-end creative developers with one goal in mind. Build tools to make every team working day life better",
     "type": "module",
     "scripts": {
@@ -50,7 +50,23 @@
         "prettier-plugin-svelte": "^2.2.0",
         "ts-jest": "^27.0.3",
         "typescript-esm": "^2.0.0",
-        "uuid": "^8.3.2"
+        "uuid": "^8.3.2",
+        "@coffeekraken/s-class": "^2.0.0",
+        "@coffeekraken/s-code-formatter": "^2.0.0",
+        "@coffeekraken/s-duration": "^2.0.0",
+        "@coffeekraken/s-glob": "^2.0.0",
+        "@coffeekraken/s-log": "^2.0.0",
+        "@coffeekraken/s-package": "^2.0.0",
+        "@coffeekraken/s-promise": "^2.0.0",
+        "@coffeekraken/s-vite": "^2.0.0",
+        "@coffeekraken/sugar": "^2.0.0",
+        "@coffeekraken/s-interface": "^2.0.0",
+        "@coffeekraken/s-descriptor": "^2.0.0",
+        "@coffeekraken/s-type": "^2.0.0",
+        "@coffeekraken/s-code-formatter-prettier": "^2.0.0",
+        "@coffeekraken/s-event-emitter": "^2.0.0",
+        "@coffeekraken/s-file": "^2.0.0",
+        "@coffeekraken/s-builder": "^2.0.0"
     },
     "globalDependencies": {},
     "devDependencies": {

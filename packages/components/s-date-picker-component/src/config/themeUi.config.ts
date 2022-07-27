@@ -67,7 +67,7 @@ export default (env, config) => {
              * @type          String
              * @default      [theme.ui.default.defaultColor]
              *
-             * Specify the default color for filtrable input ui
+             * Specify the default color for datetime picker ui
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -77,14 +77,14 @@ export default (env, config) => {
              * @name          defaultStyle
              * @namespace     config.themeUi.datetimePicker
              * @type          Number
-             * @default      solid
+             * @default      [theme.ui.default.defaultStyle]
              *
              * Specify the default style for your filtrable input ui
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultStyle: 'solid',
+            defaultStyle: '[theme.ui.default.defaultStyle]',
             /**
              * @name          depth
              * @namespace     config.themeUi.datetimePicker
@@ -97,6 +97,18 @@ export default (env, config) => {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             depth: 100,
+            /**
+             * @name          rhythmVertical
+             * @namespace     config.themeUi.datetimePicker
+             * @type          Object
+             * @default      [theme.ui.default.rhythmVertical]
+             *
+             * Specify the default vertical rhythm for your datetime picker ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            rhythmVertical: '[theme.ui.default.rhythmVertical]',
         },
     };
 };

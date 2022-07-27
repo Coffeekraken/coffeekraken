@@ -47,6 +47,7 @@ export default class SParallaxFeature extends __SFeature implements ISFeature {
             node,
             __deepMerge(
                 {
+                    name: 's-parallax',
                     interface: __SParallaxFeatureInterface,
                 },
                 settings ?? {},

@@ -38,9 +38,9 @@ export default class SSliderComponentInterface extends __SInterface {
             behavior: {
                 description:
                     'Specify which behavior your want to use for your slider. Behavior are like "presets" with different animations, etc...',
-                values: ['none', 'basic'],
+                values: ['none', 'default'],
                 type: 'String',
-                default: 'basic',
+                default: 'default',
                 physical: true,
             },
             nextIconClass: {

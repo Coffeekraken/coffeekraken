@@ -214,6 +214,7 @@ export default class SFormValidateFeature extends __SFeature {
             node,
             __deepMerge(
                 {
+                    name: 's-form-validate',
                     interface: __SFormValidateFeatureInterface,
                     style: __css,
                 },
@@ -310,8 +311,6 @@ export default class SFormValidateFeature extends __SFeature {
                 }
             });
         }
-
-        this.node.classList.add('s-form-validate');
     }
 
     mount() {

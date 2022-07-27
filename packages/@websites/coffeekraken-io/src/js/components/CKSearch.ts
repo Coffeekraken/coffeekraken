@@ -268,7 +268,7 @@ export default class CKSearch extends __SLitComponent {
     return html`
       <div class="ck-search">
         <div class="ck-search__background"></div>
-        <div class="ck-search__content s-color:accent">
+        <div class="ck-search__content">
           <ck-search-input id="ck-search-input">
             <input
               placeholder="Search ( Ctrl+F )..."
@@ -282,7 +282,7 @@ export default class CKSearch extends __SLitComponent {
                 <p class="s-mbe:20">
                   <span class="s-typo:p s-tc:current">Search tips</span>
                 </p>
-                <p class="s-typo:p">
+                <p class="s-typo:p s-color:accent">
                   <span class="s-badge:outline s-mie:10">/...</span>
                   Categories&nbsp;&nbsp;&nbsp;&nbsp;<span
                     class="s-badge:outline s-mie:10"

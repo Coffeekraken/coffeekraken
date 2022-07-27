@@ -41,8 +41,22 @@ export interface ISPageTransitionFeatureProps {
  * @support          safari
  * @support          edge
  *
- * @example         html            Simple click activation
- * <div s-page-transition></div>
+ * @example         html            Simple example
+ * <p class="s-typo:p">On your body tag, put the <span class="s-typo:code">s-page-transition</span> attribute</p>
+ * <!-- <body s-page-transition> -->
+ *   <p class="s-typo:p">This website is a perfect example of this feature behavior...</p>
+ *   <a class="s-typo:a" href="/package/@coffeekraken/s-page-transition-feature/styleguide/feature/s-page-transition-feature">This link will reload this same page using a page transition...</a>
+ * <!-- </body> -->
+ * 
+ * @example         html            Update only a part of the page
+ * <p class="s-typo:p">To update only a part of the UI, simply add the <span class="s-typo:code">s-page-transition-container="something"</span> on the part you want to be updated</p>
+ * <p class="s-typo:p">If this same container exists in the loaded page, only this part will be updated.</p>
+ * <!-- <body s-page-transition> -->
+ *   <div s-page-transition-container="my-container">
+ *      <p class="s-typo:p">This website is a perfect example of this feature behavior...</p>
+ *      <a class="s-typo:a" href="/package/@coffeekraken/s-page-transition-feature/styleguide/feature/s-page-transition-feature">This link will reload this same page using a page transition...</a>
+ *   </div>
+ * <!-- </body> -->
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -149,7 +163,6 @@ export default class SPageTransitionFeature extends __SFeature {
             })
 
             // add classes
-            document.body.classList.add('s-page-transition');
             document.body.classList.add('loading');
             document.body.setAttribute('loading', 'true');
             $source.classList.add('s-page-transition-source');
@@ -271,7 +284,6 @@ export default class SPageTransitionFeature extends __SFeature {
      */
     _onAfter($source: HTMLElement, code: number, url?:string; newState?: any) {
         // remove class on body
-        document.body.classList.remove('s-page-transition');
         document.body.classList.remove('loading');
         document.body.removeAttribute('loading');
         $source.classList.remove('s-page-transition-source');

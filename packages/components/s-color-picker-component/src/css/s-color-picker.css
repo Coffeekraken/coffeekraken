@@ -1,4 +1,4 @@
-s-color-picker {
+.s-color-picker {
     display: inline-block;
     position: relative;
 
@@ -19,7 +19,7 @@ s-color-picker {
         opacity: 0;
     }
 
-    .s-color-picker {
+    .s-color-picker__root {
         display: flex;
         width: 100%;
 

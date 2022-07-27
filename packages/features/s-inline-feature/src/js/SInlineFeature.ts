@@ -41,6 +41,7 @@ export default class SInlineFeature extends __SFeature implements ISFeature {
             node,
             __deepMerge(
                 {
+                    name: 's-inline',
                     interface: __SInlineFeatureInterface,
                 },
                 settings ?? {},
@@ -53,7 +54,6 @@ export default class SInlineFeature extends __SFeature implements ISFeature {
             const src = this.node.src;
             this._inlineImg(src);
         } else {
-            console.log(this.node);
             throw new Error(
                 `Sorry but your s-inline marked Element cannot be inlined. At least for now...`,
             );

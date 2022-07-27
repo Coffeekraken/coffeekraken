@@ -15,11 +15,13 @@ import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __spawn from '@coffeekraken/sugar/node/process/spawn';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __formatDuration from '@coffeekraken/sugar/shared/time/formatDuration';
+import __childProcess from 'child_process';
 import __fs from 'fs';
 import __path from 'path';
 
 import __SMonorepoDevParamsInterface from './interface/SMonorepoDevParamsInterface';
 import __SMonorepoListParamsInteface from './interface/SMonorepoListParamsInterface';
+import __SMonorepoPublishParamsInteface from './interface/SMonorepoPublishParamsInterface';
 import __SMonorepoRunParamsInterface from './interface/SMonorepoRunParamsInterface';
 import __SMonorepoSettingsInterface from './interface/SMonorepoSettingsInterface';
 import __SMonorepoUpgradeParamsInterface from './interface/SMonorepoUpgradeParamsInterface';
@@ -56,7 +58,6 @@ import __SMonorepoUpgradeParamsInterface from './interface/SMonorepoUpgradeParam
  */
 
 export interface ISMonorepoSettings {
-    rootDir: string;
     packagesGlob: string;
 }
 
@@ -81,6 +82,12 @@ export interface ISMonorepoListResult {
     relPath: string;
 }
 
+export interface ISMonorepoPublishParams {
+    packagesGlob: string;
+    yes: boolean;
+}
+export interface ISMonorepoPublishResult {}
+
 export interface ISMonorepoDevParams {
     packagesGlob: string;
     build: boolean;
@@ -101,18 +108,9 @@ export interface ISMonorepoUpgradeResult {}
 
 export default class SMonorepo extends __SClass {
     /**
-     * @name            monorepoSettings
-     * @type            ISMonorepoSettings
-     * @get
-     *
-     * Access the monorepo settings
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     * Store the monorepo root directory path
      */
-    get monorepoSettings(): ISMonorepoSettings {
-        return (<any>this).settings.monorepo;
-    }
+    private _rootDir: string;
 
     /**
      * @name            constructor
@@ -123,22 +121,73 @@ export default class SMonorepo extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: Partial<ISMonorepoCtorSettings>) {
+    constructor(
+        rootDir: string = __packageRoot(process.cwd(), {
+            highest: true,
+        }),
+        settings?: Partial<ISMonorepoCtorSettings>,
+    ) {
         super(
             __deepMerge(
-                {
-                    // @ts-ignore
-                    monorepo: __SMonorepoSettingsInterface.defaults(),
-                },
+                // @ts-ignore
+                __SMonorepoSettingsInterface.defaults(),
                 settings ?? {},
             ),
         );
-        // handle root dir if not set
-        if (!this.monorepoSettings.rootDir) {
-            this.monorepoSettings.rootDir = __packageRoot(process.cwd(), {
-                highest: true,
-            });
-        }
+        this._rootDir = rootDir;
+    }
+
+    /**
+     * @name            checkDependencies
+     * @type            Function
+     * @async
+     *
+     * This method allows you to check dependencies of each packages of the monorepo
+     *
+     * @param       {Partial<ISMonorepoRunParams>}          [params={}]         Some params for your run process
+     * @return      {SPromise}                                                          An SPromise instance that need to be resolved at the end of the process
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    checkDependencies(): Promise<boolean> {
+        return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+            // get all the packages
+            const packages = await this.list({});
+
+            for (let i = 0; i < packages.length; i++) {
+                const packageObj = packages[i];
+
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>[check]</yellow> Checking dependencies for the package "<cyan>${packageObj.name}</cyan>"...`,
+                });
+
+                const pack = new __SPackage(packageObj.path);
+
+                const result = await pack.checkDependencies();
+
+                if (result !== true) {
+                    emit('log', {
+                        type: __SLog.TYPE_ERROR,
+                        message: `<red>[check]</red> Your package has some dependencies issues`,
+                    });
+
+                    if (
+                        !(await emit('ask', {
+                            type: 'confirm',
+                            message: 'Would you like to continue anyway?',
+                            default: false,
+                        }))
+                    ) {
+                        return reject(false);
+                    }
+                }
+            }
+
+            // all seems ok
+            resolve(true);
+        });
     }
 
     /**
@@ -272,25 +321,20 @@ export default class SMonorepo extends __SClass {
                 const result: ISMonorepoListResult[] = [];
                 const jsonResult: Record<string, string> = {};
 
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>[list]</yellow> Searching for packages...`,
-                });
-
                 const rootPackageJson = __readJsonSync(
-                    `${this.monorepoSettings.rootDir}/package.json`,
+                    `${this._rootDir}/package.json`,
                 );
 
                 const files = __SGlob.resolve(
                     `${finalParams.packagesGlob}/package.json`,
                     {
-                        cwd: this.monorepoSettings.rootDir,
+                        cwd: this._rootDir,
                     },
                 );
 
                 emit('log', {
                     type: __SLog.TYPE_INFO,
-                    value: `<cyan>${files.length}</cyan> packages found:`,
+                    value: `<yellow>[list]</yellow> <cyan>${files.length}</cyan> packages found:`,
                 });
 
                 files.forEach((file) => {
@@ -350,6 +394,144 @@ export default class SMonorepo extends __SClass {
     }
 
     /**
+     * @name            publish
+     * @type            Function
+     * @async
+     *
+     * This method allows you to publish all the repo in the monorepo
+     *
+     * @param       {Partial<ISMonorepoListParams>}          [params={}]         Some params for your list process
+     * @return      {SPromise<ISMonorepoListResult>}                                                          An SPromise instance that need to be resolved at the end of the process
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    publish(
+        params: Partial<ISMonorepoPublishParams>,
+    ): Promise<ISMonorepoPublishResult[] | false> {
+        return new __SPromise(
+            async ({ resolve, reject, emit, pipe }) => {
+                // @ts-ignore
+                const finalParams: ISMonorepoPublishParams =
+                    __SMonorepoPublishParamsInteface.apply(params);
+
+                const result: ISMonorepoPublishResult[] = [];
+
+                const rootPackageJson = __readJsonSync(
+                    `${this._rootDir}/package.json`,
+                );
+
+                if (
+                    !finalParams.yes &&
+                    !(await emit('ask', {
+                        type: 'confirm',
+                        message: `Is <yellow>${rootPackageJson.version}</yellow> the version you want to publish?`,
+                        default: true,
+                    }))
+                ) {
+                    return reject(false);
+                }
+
+                // loop on all packages to publish them once at a time
+                const packages = await this.list({
+                    packagesGlob: finalParams.packagesGlob,
+                });
+
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>[publish]</yellow> <cyan>${packages.length}</cyan> packages found:`,
+                });
+
+                // upgrading monorepo
+                const upgradeResult = await pipe(this.upgrade());
+                if (upgradeResult !== true) {
+                    return reject(false);
+                }
+
+                if (
+                    !finalParams.yes &&
+                    !(await emit('ask', {
+                        type: 'confirm',
+                        message:
+                            'All seems ok with your packages versions. Would you like to continue?',
+                        default: true,
+                    }))
+                ) {
+                    return reject(false);
+                }
+
+                // check dependencies
+                const dependenciesResult = await pipe(this.checkDependencies());
+                if (dependenciesResult !== true) {
+                    return reject(false);
+                }
+
+                if (
+                    !finalParams.yes &&
+                    !(await emit('ask', {
+                        type: 'confirm',
+                        message:
+                            'All seems ok with your packages dependencies. Would you like to continue?',
+                        default: true,
+                    }))
+                ) {
+                    return reject(false);
+                }
+
+                for (let i = 0; i < packages.length; i++) {
+                    const packageObj = packages[i];
+                    let result = true;
+                    try {
+                        emit('log', {
+                            type: __SLog.TYPE_INFO,
+                            value: `<yellow>[publish]</yellow> Publishing your package "<cyan>${packageObj.name}</cyan>"...`,
+                        });
+                        __childProcess.execSync(`npm publish --access public`, {
+                            cwd: packageObj.path,
+                        });
+                        emit('log', {
+                            type: __SLog.TYPE_INFO,
+                            value: `<yellow>[publish]</yellow> <cyan>${
+                                packages.length - i - 1
+                            }</cyan> remaining package(s)`,
+                        });
+                        emit('log', {
+                            type: __SLog.TYPE_SUCCESS,
+                            value: `<green>[publish]</green> Your package "<cyan>${packageObj.name}</cyan>" has been published <green>successfully</green> in version <cyan>${rootPackageJson.version}</cyan>!`,
+                        });
+                    } catch (e) {
+                        result = false;
+                        emit('log', {
+                            type: __SLog.TYPE_ERROR,
+                            value: e.toString(),
+                        });
+                        emit('log', {
+                            type: __SLog.TYPE_WARNING,
+                            value: `<red>[publish]</red> Something goes wrong when publishing the "<cyan>${packageObj.name}</cyan>"`,
+                        });
+                        if (
+                            !finalParams.yes &&
+                            !(await emit('ask', {
+                                type: 'confirm',
+                                message: 'Would you like to continue anyway?',
+                            }))
+                        ) {
+                            return reject(false);
+                        }
+                    }
+                }
+
+                resolve(result);
+            },
+            {
+                metas: {
+                    id: this.constructor.name,
+                },
+            },
+        );
+    }
+
+    /**
      * @name            dev
      * @type            Function
      * @async
@@ -386,22 +568,17 @@ export default class SMonorepo extends __SClass {
                     packagesGlob: finalParams.packagesGlob,
                 });
                 const srcRelDir = __path.relative(
-                        this.monorepoSettings.rootDir,
+                        this._rootDir,
                         __SSugarConfig.get('typescriptBuilder.inDir'),
                     ),
                     distRelDir = __path.relative(
-                        this.monorepoSettings.rootDir,
+                        this._rootDir,
                         __SSugarConfig.get('typescriptBuilder.outDir'),
                     );
 
                 emit('log', {
                     type: __SLog.TYPE_INFO,
-                    value: `<yellow>[list]</yellow> Searching for packages...`,
-                });
-
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>[list]</yellow> Found <cyan>${packages.length}</cyan> package(s)`,
+                    value: `<yellow>[dev]</yellow> Found <cyan>${packages.length}</cyan> package(s)`,
                 });
 
                 // tests
@@ -462,11 +639,7 @@ export default class SMonorepo extends __SClass {
                         );
 
                         // exports
-                        const pack = new __SPackage({
-                            package: {
-                                rootDir: packageObj.path,
-                            },
-                        });
+                        const pack = new __SPackage(packageObj.path);
                         pipe(
                             pack.exports({
                                 watch: true,
@@ -498,28 +671,25 @@ export default class SMonorepo extends __SClass {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    upgrade(params: ISMonorepoUpgradeParams): Promise<ISMonorepoUpgradeResult> {
+    upgrade(
+        params?: ISMonorepoUpgradeParams,
+    ): Promise<ISMonorepoUpgradeResult | boolean> {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 // @ts-ignore
                 const finalParams: ISMonorepoUpgradeParams =
-                    __SMonorepoUpgradeParamsInterface.apply(params);
+                    __SMonorepoUpgradeParamsInterface.apply(params ?? {});
 
                 const result: Record<string, ISMonorepoUpgradeResult> = {};
 
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>[list]</yellow> Searching for packages...`,
-                });
-
                 const rootPackageJson = __readJsonSync(
-                    `${this.monorepoSettings.rootDir}/package.json`,
+                    `${this._rootDir}/package.json`,
                 );
 
                 const files = __SGlob.resolve(
                     `${finalParams.packagesGlob}/package.json`,
                     {
-                        cwd: this.monorepoSettings.rootDir,
+                        cwd: this._rootDir,
                     },
                 );
 
@@ -531,13 +701,15 @@ export default class SMonorepo extends __SClass {
 
                 emit('log', {
                     type: __SLog.TYPE_INFO,
-                    value: `Upgrading <cyan>${files.length}</cyan> packages with these informations:`,
+                    value: `<yellow>[upgrade]</yellow> Upgrading <cyan>${files.length}</cyan> packages with these informations:`,
                 });
 
                 finalParams.fields.forEach((field) => {
                     emit('log', {
                         type: __SLog.TYPE_INFO,
-                        marginBottom: 1,
+                        margin: {
+                            bottom: 1,
+                        },
                         value: [
                             `- <yellow>${field}</yellow>: <cyan>${rootPackageJson[field]}</cyan>`,
                         ].join('\n'),
@@ -625,7 +797,7 @@ export default class SMonorepo extends __SClass {
                     });
                 });
 
-                resolve(result);
+                resolve(true);
             },
             {
                 metas: {

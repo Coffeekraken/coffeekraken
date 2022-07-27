@@ -58,21 +58,26 @@ export default function ({
 
     const vars = new CssVars();
 
-    vars.code(
-        `
-        s-color-picker {
+    if (finalParams.scope.includes('bare')) {
+        vars.code(
+            `
+        .s-color-picker {
             @sugar.ui.colorPicker($scope: bare);
         }
     `,
-        {
-            type: 'CssClass',
-        },
-    );
+            {
+                type: 'CssClass',
+            },
+        );
+    }
 
-    if (finalParams.styles.includes(finalParams.defaultStyle)) {
+    if (
+        finalParams.styles.includes(finalParams.defaultStyle) &&
+        finalParams.scope.includes('lnf')
+    ) {
         vars.comment(
             `/**
-            * @name           s-color-picker[lnf="default"]
+            * @name           .s-color-picker[lnf="default"]
             * @namespace          sugar.style.ui.colorPicker
             * @type           CssClass
             * 
@@ -85,7 +90,7 @@ export default function ({
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
         ).code(
-            `[lnf="default"] > .s-color-picker {
+            `.s-color-picker[lnf="default"] {
                 @sugar.color(${finalParams.defaultColor});
                 @sugar.ui.colorPicker($style: ${finalParams.defaultStyle}, $scope: lnf);
             }`,
@@ -115,7 +120,7 @@ export default function ({
         */`,
         ).code(
             `@sugar.rhythm.vertical {
-                [inline] > .s-color-picker {
+                .s-color-picker[inline] {
                     ${__STheme.jsObjectToCssProperties(
                         __STheme.get('ui.colorPicker.rhythmVertical'),
                     )}

@@ -69,6 +69,7 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
             node,
             __deepMerge(
                 {
+                    name: 's-sugar',
                     interface: __SSugarFeatureInterface,
                 },
                 settings ?? {},

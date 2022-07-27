@@ -13,7 +13,7 @@ import __css from '../../../../src/css/s-appear-feature.css'; // relative to /di
 
 /**
  * @name            SAppearFeature
- * @as              Floating elements
+ * @as              Appear elements
  * @namespace       js
  * @type            Feature
  * @interface       ./interface/SAppearFeatureInterface.ts
@@ -78,15 +78,13 @@ export default class SAppearFeature extends __SFeature {
             node,
             __deepMerge(
                 {
+                    name: 's-appear',
                     interface: __SAppearFeatureInterface,
                     style: __css,
                 },
                 settings ?? {},
             ),
         );
-
-        // adding the s-appear class to the node
-        this.node.classList.add('s-appear');
 
         // add the s-appear attribute if not present
         if (!this.node.hasAttribute('s-appear')) {

@@ -1,26 +1,26 @@
 {
     "name": "@coffeekraken/s-postcss-sugar-plugin",
-    "version": "2.0.0",
+    "version": "2.0.0-alpha.0",
     "description": "",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-bench": "^2.0.0",
-        "@coffeekraken/s-color": "^2.0.0",
-        "@coffeekraken/s-docblock": "^2.0.0",
-        "@coffeekraken/s-duration": "^2.0.0",
-        "@coffeekraken/s-env": "^2.0.0",
-        "@coffeekraken/s-event-emitter": "^2.0.0",
-        "@coffeekraken/s-file": "^2.0.0",
-        "@coffeekraken/s-glob": "^2.0.0",
-        "@coffeekraken/s-interface": "^2.0.0",
-        "@coffeekraken/s-process": "^2.0.0",
-        "@coffeekraken/s-promise": "^2.0.0",
-        "@coffeekraken/s-sugar-config": "^2.0.0",
-        "@coffeekraken/s-sugar-json": "^2.0.0",
-        "@coffeekraken/s-theme": "^2.0.0",
-        "@coffeekraken/sugar": "^2.0.0",
+        "@coffeekraken/s-bench": "^2.0.0-alpha.0",
+        "@coffeekraken/s-color": "^2.0.0-alpha.0",
+        "@coffeekraken/s-docblock": "^2.0.0-alpha.0",
+        "@coffeekraken/s-duration": "^2.0.0-alpha.0",
+        "@coffeekraken/s-env": "^2.0.0-alpha.0",
+        "@coffeekraken/s-event-emitter": "^2.0.0-alpha.0",
+        "@coffeekraken/s-file": "^2.0.0-alpha.0",
+        "@coffeekraken/s-glob": "^2.0.0-alpha.0",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.0",
+        "@coffeekraken/s-process": "^2.0.0-alpha.0",
+        "@coffeekraken/s-promise": "^2.0.0-alpha.0",
+        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.0",
+        "@coffeekraken/s-sugar-json": "^2.0.0-alpha.0",
+        "@coffeekraken/s-theme": "^2.0.0-alpha.0",
+        "@coffeekraken/sugar": "^2.0.0-alpha.0",
         "cacache": "^15.3.0",
         "chokidar": "^3.5.2",
         "chroma-js": "^2.1.1",
@@ -46,6 +46,18 @@
         ".": {
             "require": "./dist/pkg/cjs/node/exports.js",
             "import": "./dist/pkg/esm/node/exports.js"
+        },
+        "./shared/*": {
+            "require": "./dist/pkg/cjs/shared/*.js",
+            "import": "./dist/pkg/esm/shared/*.js"
+        },
+        "./node/*": {
+            "require": "./dist/pkg/cjs/node/*.js",
+            "import": "./dist/pkg/esm/node/*.js"
+        },
+        "./js/*": {
+            "require": "./dist/pkg/cjs/js/*.js",
+            "import": "./dist/pkg/esm/js/*.js"
         }
     }
 }

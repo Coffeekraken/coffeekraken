@@ -1,6 +1,4 @@
-/* @sugar.highlightjs.theme; */
-
-s-code-example {
+.s-code-example {
     display: block;
 
     @sugar.rhythm.vertical (ui.codeExample.rhythmVertical);
@@ -41,7 +39,8 @@ s-code-example {
 
 .s-code-example__content {
     position: relative;
-    --paddingBlock: sugar.padding(ui.codeExample.paddingBlock);
+    /* this variable comes from the @sugar.codeExample mixin */
+    /* --paddingBlock: sugar.padding(ui.codeExample.paddingBlock); */
     overflow: hidden;
 
     .s-code-example[lines] & {
@@ -50,15 +49,6 @@ s-code-example {
     .s-code-example--more & {
         max-height: 99999px !important;
     }
-
-    @sugar.media (mobile) {
-        --paddingBlock: calc(var(--paddingBlock) * 0.5);
-    }
-}
-[lnf='default'] .s-code-example__content {
-    transition: sugar.theme(ui.codeExample.transition);
-    border-radius: sugar.border.radius(ui.codeExample.borderRadius);
-    @sugar.depth (ui.codeExample.depth);
 }
 
 .s-code-example__more-bar {
@@ -79,8 +69,6 @@ s-code-example {
 }
 .s-code-example__more-bar {
     text-align: center;
-    padding-inline: sugar.padding(ui.default.paddingInline);
-    padding-block: sugar.padding(ui.default.paddingBlock);
     justify-content: center;
 
     &:before {
@@ -90,9 +78,6 @@ s-code-example {
         left: 0;
         width: 100%;
         height: 100%;
-        transition: sugar.transition();
-
-        @sugar.gradient ($type: linear, $start: sugar.color(current, surface), $end: sugar.color(current, --alpha 0), $angle: 0);
     }
 }
 
@@ -134,5 +119,4 @@ s-code-example {
 [toolbar-position='nav'] .s-code-example__toolbar {
     right: sugar.margin(20);
     top: sugar.margin(20);
-    /* transform: translate(0, -50%); */
 }

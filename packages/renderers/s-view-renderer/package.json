@@ -1,23 +1,23 @@
 {
     "name": "@coffeekraken/s-view-renderer",
-    "version": "2.0.0",
+    "version": "2.0.0-alpha.0",
     "description": "",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0",
-        "@coffeekraken/s-data-file-generic": "^2.0.0",
-        "@coffeekraken/s-duration": "^2.0.0",
-        "@coffeekraken/s-file": "^2.0.0",
-        "@coffeekraken/s-interface": "^2.0.0",
-        "@coffeekraken/s-process": "^2.0.0",
-        "@coffeekraken/s-promise": "^2.0.0",
-        "@coffeekraken/s-sugar-config": "^2.0.0",
-        "@coffeekraken/s-view-renderer-engine-blade": "^2.0.0",
-        "@coffeekraken/s-view-renderer-engine-lit": "^2.0.0",
-        "@coffeekraken/s-view-renderer-engine-twig": "^2.0.0",
-        "@coffeekraken/sugar": "^2.0.0",
+        "@coffeekraken/s-class": "^2.0.0-alpha.0",
+        "@coffeekraken/s-data-file-generic": "^2.0.0-alpha.0",
+        "@coffeekraken/s-duration": "^2.0.0-alpha.0",
+        "@coffeekraken/s-file": "^2.0.0-alpha.0",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.0",
+        "@coffeekraken/s-process": "^2.0.0-alpha.0",
+        "@coffeekraken/s-promise": "^2.0.0-alpha.0",
+        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.0",
+        "@coffeekraken/s-view-renderer-engine-blade": "^2.0.0-alpha.0",
+        "@coffeekraken/s-view-renderer-engine-lit": "^2.0.0-alpha.0",
+        "@coffeekraken/s-view-renderer-engine-twig": "^2.0.0-alpha.0",
+        "@coffeekraken/sugar": "^2.0.0-alpha.0",
         "exec-php": "^0.0.5",
         "glob": "^8.0.3"
     },
@@ -27,6 +27,18 @@
         ".": {
             "require": "./dist/pkg/cjs/node/exports.js",
             "import": "./dist/pkg/esm/node/exports.js"
+        },
+        "./shared/*": {
+            "require": "./dist/pkg/cjs/shared/*.js",
+            "import": "./dist/pkg/esm/shared/*.js"
+        },
+        "./node/*": {
+            "require": "./dist/pkg/cjs/node/*.js",
+            "import": "./dist/pkg/esm/node/*.js"
+        },
+        "./js/*": {
+            "require": "./dist/pkg/cjs/js/*.js",
+            "import": "./dist/pkg/esm/js/*.js"
         }
     }
 }

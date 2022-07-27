@@ -20,11 +20,6 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 export default class SPackageSettingsInterface extends __SInterface {
     static get _definition() {
         return {
-            rootDir: {
-                description: 'Specify the root directory of your package',
-                type: 'string',
-                default: __SSugarConfig.get('package.rootDir'),
-            },
             manager: {
                 description: 'Specify th package manager to use',
                 type: 'String',

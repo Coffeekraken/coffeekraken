@@ -44,12 +44,6 @@ import __STheme from "@coffeekraken/s-theme";
 
 // import __SCssAnimation from '@coffeekraken/s-css-animation';
 
-interface HTMLElement {
-  classList: {
-    add(this: HTMLElement, cls: string): void;
-  };
-}
-
 // @ts-ignore
 const viewsRelated = import.meta.globEager("../views/**/*.ts");
 // @ts-ignore

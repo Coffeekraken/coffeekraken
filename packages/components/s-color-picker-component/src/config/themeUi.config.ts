@@ -72,7 +72,7 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultStyle: 'solid',
+            defaultStyle: '[theme.ui.default.defaultStyle]',
             /**
              * @name          depth
              * @namespace     config.themeUi.colorPicker
@@ -91,7 +91,7 @@ export default (env, config) => {
              * @type          Object
              * @default      [theme.ui.default.rhythmVertical]
              *
-             * Specify the default vertical rhythm for your filtrable input ui
+             * Specify the default vertical rhythm for your color picker ui
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

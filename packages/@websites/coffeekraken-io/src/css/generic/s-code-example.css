@@ -1,7 +1,6 @@
-s-code-example {
+.s-code-example {
   display: block;
   position: relative;
-  /* @sugar.theme (dark); */
 
   /* @sugar.shadow.gradient (0, 10px, 10px, 1, sugar.color(accent), sugar.color(complementary)) {
         width: calc(100% - 40px);

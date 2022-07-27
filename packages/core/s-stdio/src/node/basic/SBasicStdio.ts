@@ -313,6 +313,9 @@ class SBasicStdio extends __SStdio implements ISBasicStdio {
                 }
             }
 
+            // transform html in message
+            askObj.message = __parseHtml(askObj.message);
+
             const groupObj = this._getGroupObj(askObj.group);
 
             switch (askObj.type) {

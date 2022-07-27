@@ -101,7 +101,7 @@ export default class SThemeSwitcherComponent extends __SLitComponent {
             activeTheme = __STheme.theme;
 
         return html`
-            <div class="${this.componentUtils.className('')}">
+            <div class="${this.componentUtils.className('__root')}">
                 ${themesKeys.length === 1
                     ? html`
                           <input

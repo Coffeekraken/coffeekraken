@@ -234,7 +234,7 @@ export default class SCodeExample extends __SLitComponent {
         //     '.s-code-example__content',
         // );
         this._$pre = this.querySelector('.s-code-example__code');
-        this._$root = this.querySelector('.s-code-example');
+        this._$root = this.querySelector('.s-code-example__root');
         return true;
     }
     setActiveTabByTab(e) {
@@ -303,7 +303,8 @@ export default class SCodeExample extends __SLitComponent {
 
         return html`
             <div
-                class="${this.componentUtils.className()} ${this.props.more
+                class="${this.componentUtils.className('__root')} ${this.props
+                    .more
                     ? this.componentUtils.className('more')
                     : ''}"
                 ?lines="${

@@ -69,7 +69,7 @@
                     Our datetime picker support all <span class="s-tc:complementary">ISO formats</span>,<br />disabling weekends or <span class="s-tc:accent">specific dates</span> as well as min and max date...<br />All of this in a nice and clean package.
                 </p>
 
-                <s-datetime-picker input button calendar disable="weekend" class="s-color:main">
+                <s-datetime-picker input button calendar disable="weekend">
                 </s-datetime-picker>
 
                 <br />

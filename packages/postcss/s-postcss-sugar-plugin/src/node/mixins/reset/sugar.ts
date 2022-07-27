@@ -69,14 +69,14 @@ export default function ({
         * @feature     Set the \`box-sizing\` to \`border-box\` for all HTMLElement
         * @feature     Set the webkit highlight color to transparent color
         * @feature     Remove outline on every elements
-        * @feature     Set the \`max-width\` to \`100%\` for images     
+        * @feature     Set the \`max-width\` to \`100%\` for images
         * 
         * @support      chromium
         * @support      firefox
         * @support      safari
         * @support      edge
         * 
-        * @example        css
+        * @example        css       Simple usage
         * \@sugar.reset.sugar;
         * 
         * @since      2.0.0

@@ -7,36 +7,17 @@
         display: flex;
         align-items: center;
         cursor: pointer;
-    }
-}
-
-s-theme-switcher[lnf^='default'] {
-    .s-theme-switcher__dropdown-item {
-        gap: sugar.margin(30);
-
-        &.active {
-            @sugar.color (accent);
-
-            > .s-theme-switcher__theme-name {
-                color: sugar.color(accent, text);
-            }
-        }
 
         .s-theme-switcher__dark-mode {
             opacity: 0;
             pointer-events: none;
             display: flex;
             align-items: center;
-            gap: sugar.margin(10);
 
             &.visible {
                 opacity: 1;
                 pointer-events: all;
             }
-        }
-
-        .s-theme-switcher__switch {
-            @sugar.scale (0.7);
         }
     }
 }

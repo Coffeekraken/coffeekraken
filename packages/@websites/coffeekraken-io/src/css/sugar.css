@@ -13,8 +13,11 @@
 
 @sugar.ui.filtrableinput.classes;
 @sugar.ui.colorpicker.classes;
-@sugar.ui.datetimepicker;
-@sugar.highlightjs.theme;
+@sugar.ui.datetimepicker.classes;
+@sugar.ui.codeexample.classes;
+@sugar.ui.rating.classes;
+@sugar.ui.slider.classes;
+@sugar.ui.themeswitcher.classes;
 
 @sugar.platform.classes;
 

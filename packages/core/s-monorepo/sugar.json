@@ -24,6 +24,12 @@
                     "interface": "./dist/pkg/esm/node/interface/SMonorepoListParamsInterface.js",
                     "process": "./dist/pkg/esm/cli/list.cli.js"
                 },
+                "publish": {
+                    "scope": "global",
+                    "description": "Publish all the repositories that compose the current mono repo",
+                    "interface": "./dist/pkg/esm/node/interface/SMonorepoPublishParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/publish.cli.js"
+                },
                 "dev": {
                     "scope": "global",
                     "description": "Launch the monorepo dev stack. Principally transpiling the packages typescript files",

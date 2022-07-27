@@ -50,15 +50,13 @@ export default class SFloatingFeature extends __SFeature {
             node,
             __deepMerge(
                 {
+                    name: 's-floating',
                     interface: __SFloatingFeatureInterface,
                     style: __css,
                 },
                 settings ?? {},
             ),
         );
-
-        // adding the s-floating class to the node
-        this.node.classList.add('s-floating');
 
         // handle ref
         if (!this.props.ref) {

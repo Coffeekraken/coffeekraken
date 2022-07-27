@@ -100,7 +100,7 @@ export default class SRatingComponent extends __SLitComponent {
     render() {
         return html`
             <div
-                class="${this.componentUtils.className('')}"
+                class="${this.componentUtils.className('__root')}"
                 style="--s-rating-rate: ${this.state
                     .value}; --s-rating-min: ${this.props
                     .min}; --s-rating-max: ${this.props

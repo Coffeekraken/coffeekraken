@@ -144,7 +144,7 @@ export default class SClipboardCopy extends __SLitComponent {
         return html`
             <div
                 @click=${() => this._copyFromTarget()}
-                class="${this.componentUtils.className('')}"
+                class="${this.componentUtils.className('__root')}"
                 state="${this.state.state}"
             >
                 <svg

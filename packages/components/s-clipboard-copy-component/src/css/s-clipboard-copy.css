@@ -10,24 +10,24 @@
         pointer-events: none;
     }
 
-    &[state='pending'] {
+    .s-clipboard-copy__root[state='pending'] {
         .icon-copy {
             opacity: 1;
         }
     }
-    &[state='copy'] {
+    .s-clipboard-copy__root[state='copy'] {
         .icon-copy {
             opacity: 1;
         }
     }
-    &[state='success'] {
+    .s-clipboard-copy__root[state='success'] {
         color: sugar.color(success);
 
         .icon-success {
             opacity: 1;
         }
     }
-    &[state='error'] {
+    .s-clipboard-copy__root[state='error'] {
         color: sugar.color(error);
 
         .icon-error {

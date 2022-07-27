@@ -1,4 +1,3 @@
-import type { ISBuilderCtorSettings } from '@coffeekraken/s-builder';
 import __SClass from '@coffeekraken/s-class';
 import __SFile from '@coffeekraken/s-file';
 import __SLog from '@coffeekraken/s-log';
@@ -53,11 +52,6 @@ import __SPackageSettingsInterface from './interface/SPackageSettingsInterface';
 
 export interface ISPackageSettings {
     manager: 'yarn' | 'npm';
-    rootDir: string;
-}
-
-export interface ISPackageCtorSettings extends ISBuilderCtorSettings {
-    package: Partial<ISPackageSettings>;
 }
 
 export interface ISPackageInstallParams {
@@ -94,18 +88,9 @@ export interface ISPackageExportsResult {}
 
 export default class SPackage extends __SClass {
     /**
-     * @name            packageSettings
-     * @type            ISPackageSettings
-     * @get
-     *
-     * Access the package settings
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     * Store the root package directory
      */
-    get packageSettings(): ISPackageSettings {
-        return (<any>this).settings.package;
-    }
+    private _rootDir: string;
 
     /**
      * @name            constructor
@@ -116,16 +101,18 @@ export default class SPackage extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: Partial<ISPackageCtorSettings>) {
+    constructor(
+        rootDir: string = __packageRoot(),
+        settings?: Partial<ISPackageSettings>,
+    ) {
         super(
             __deepMerge(
-                {
-                    // @ts-ignore
-                    package: __SPackageSettingsInterface.defaults(),
-                },
+                // @ts-ignore
+                __SPackageSettingsInterface.defaults(),
                 settings ?? {},
             ),
         );
+        this._rootDir = rootDir;
     }
 
     _exportFiles(
@@ -223,9 +210,7 @@ export default class SPackage extends __SClass {
                 try {
                     currentPackageJson = JSON.parse(
                         __fs
-                            .readFileSync(
-                                `${this.packageSettings.rootDir}/package.json`,
-                            )
+                            .readFileSync(`${this._rootDir}/package.json`)
                             .toString(),
                     );
                 } catch (e) {}
@@ -251,7 +236,7 @@ export default class SPackage extends __SClass {
 
                 // writing new file
                 __fs.writeFileSync(
-                    `${this.packageSettings.rootDir}/package.json`,
+                    `${this._rootDir}/package.json`,
                     JSON.stringify(newPackageJson, null, 4),
                 );
 
@@ -291,7 +276,7 @@ export default class SPackage extends __SClass {
                 });
 
                 const files = __glob.sync(finalParams.glob[0], {
-                    cwd: this.packageSettings.rootDir,
+                    cwd: this._rootDir,
                 });
 
                 if (finalParams.watch) {
@@ -301,7 +286,7 @@ export default class SPackage extends __SClass {
                     });
 
                     const watcher = __chokidar.watch(finalParams.glob, {
-                        cwd: this.packageSettings.rootDir,
+                        cwd: this._rootDir,
                         ignoreInitial: true,
                     });
                     const watcherHandler = (filePath: string) => {
@@ -361,7 +346,7 @@ export default class SPackage extends __SClass {
                 const finalParams: ISPackageInstallParams =
                     __SPackageInstallParamsInterface.apply(params);
 
-                const packageRoot = this.packageSettings.rootDir;
+                const packageRoot = this._rootDir;
 
                 if (__fs.existsSync(`${packageRoot}/package.json`)) {
                     const json = JSON.parse(
@@ -453,18 +438,20 @@ export default class SPackage extends __SClass {
      */
     checkDependencies(
         params: Partial<ISPackageCheckDependenciesParams>,
-    ): Promise<ISPackageCheckDependenciesResult> {
+    ): Promise<boolean> {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 // @ts-ignore
                 const finalParams: ISPackageCheckDependenciesParams =
                     __SPackageCheckDependenciesParamsInterface.apply(params);
 
+                let result = true;
+
                 let needJsonWrite = false;
 
                 const missingModules: string[] = [];
 
-                const packageRoot = __packageRoot();
+                const packageRoot = this._rootDir;
 
                 if (!__fs.existsSync(`${packageRoot}/package.json`)) {
                     emit('log', {
@@ -613,6 +600,8 @@ export default class SPackage extends __SClass {
                                 dependencies: missingModules,
                             }),
                         );
+                    } else {
+                        result = false;
                     }
                 }
 
@@ -621,7 +610,7 @@ export default class SPackage extends __SClass {
                     value: `<green>[checkDependencies]</green> Dependencies have been checked <green>successfully</green>`,
                 });
 
-                resolve();
+                resolve(result);
             },
             {
                 eventEmitter: {

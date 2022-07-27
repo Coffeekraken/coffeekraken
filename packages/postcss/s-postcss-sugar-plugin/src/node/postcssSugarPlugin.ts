@@ -111,6 +111,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
     if (settings.cache === undefined && settings.target !== 'vite') {
         settings.cache = false;
     }
+    settings.cache = false;
 
     if (settings.excludeByTypes?.length) {
         __CssVars.excludeByTypes(settings.excludeByTypes);
@@ -265,9 +266,11 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
         });
         for (let i = 0; i < paths.length; i++) {
             const path = paths[i];
-            const { default: fn, interface: int, dependencies } = await import(
-                `${path}`
-            );
+            const {
+                default: fn,
+                interface: int,
+                dependencies,
+            } = await import(`${path}`);
             if (type === 'mixins') {
                 mixinsStack[
                     `${path

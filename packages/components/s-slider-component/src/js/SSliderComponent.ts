@@ -50,6 +50,7 @@ import __SSliderBehavior from './SSliderBehavior';
  * @feature         Swipe navigation built-in
  * @feature         Loop capability built-in
  * @feature         Timer capability built-in
+ * @feature         Mousewheel navigation
  * @feature         Custom behavior (extensions) capabilities built-in
  * @feature         Slideable behavior available
  *
@@ -255,7 +256,7 @@ import __SSliderBehavior from './SSliderBehavior';
 export interface ISSliderComponentProps extends ISLitComponentDefaultProps {
     direction: 'horizontal' | 'vertical';
     behaviors: __SSliderBehavior[];
-    behavior: __SSliderBehavior | string | 'none' | 'basic';
+    behavior: __SSliderBehavior | string | 'none' | 'default';
     controls: boolean;
     nav: boolean;
     mousewheel: boolean;
@@ -352,7 +353,7 @@ export default class SSlider extends __SLitComponent {
     async firstUpdated() {
         // bare elements
         this.$root = this.querySelector(
-            `.${this.componentUtils.className('')}`,
+            `.${this.componentUtils.className('__root')}`,
         );
 
         // slides
@@ -373,7 +374,7 @@ export default class SSlider extends __SLitComponent {
         if (
             this.props.behavior &&
             this.props.behavior !== 'none' &&
-            this.props.behavior !== 'basic'
+            this.props.behavior !== 'default'
         ) {
             if (typeof this.props.behavior === 'string') {
                 let behavior;
@@ -1227,7 +1228,7 @@ export default class SSlider extends __SLitComponent {
         let slide = this.getCurrentSlide();
         return html`
             <div
-                class="${this.componentUtils.className('')}"
+                class="${this.componentUtils.className('__root')}"
                 behavior="${this.props.behavior?.id}"
                 style="
                     --s-slider-slide: ${this.state.currentSlideIdx};

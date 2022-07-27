@@ -1,6 +1,6 @@
 {
     "name": "@coffeekraken/s-scroll-component",
-    "version": "2.0.0",
+    "version": "2.0.0-alpha.0",
     "description": "",
     "homepage": "https://coffeekraken.io",
     "type": "module",
@@ -12,11 +12,11 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-interface": "^2.0.0",
-        "@coffeekraken/s-lit-component": "^2.0.0",
-        "@coffeekraken/s-sugar-config": "^2.0.0",
-        "@coffeekraken/s-theme": "^2.0.0",
-        "@coffeekraken/sugar": "^2.0.0",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.0",
+        "@coffeekraken/s-lit-component": "^2.0.0-alpha.0",
+        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.0",
+        "@coffeekraken/s-theme": "^2.0.0-alpha.0",
+        "@coffeekraken/sugar": "^2.0.0-alpha.0",
         "lit": "^2.0.0-rc.3"
     },
     "main": "./dist/pkg/cjs/js/exports.js",
@@ -25,6 +25,18 @@
         ".": {
             "require": "./dist/pkg/cjs/js/exports.js",
             "import": "./dist/pkg/esm/js/exports.js"
+        },
+        "./shared/*": {
+            "require": "./dist/pkg/cjs/shared/*.js",
+            "import": "./dist/pkg/esm/shared/*.js"
+        },
+        "./node/*": {
+            "require": "./dist/pkg/cjs/node/*.js",
+            "import": "./dist/pkg/esm/node/*.js"
+        },
+        "./js/*": {
+            "require": "./dist/pkg/cjs/js/*.js",
+            "import": "./dist/pkg/esm/js/*.js"
         }
     }
 }

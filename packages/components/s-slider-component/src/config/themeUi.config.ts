@@ -1,4 +1,4 @@
-export default function(env, config) {
+export default function (env, config) {
     return {
         slider: {
             /**
@@ -13,6 +13,30 @@ export default function(env, config) {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderRadius: '[theme.ui.default.borderRadius]',
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.slider
+             * @type          String
+             * @default      [theme.ui.default.defaultColor]
+             *
+             * Specify the default color for datetime picker ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            defaultColor: '[theme.ui.default.defaultColor]',
+            /**
+             * @name          defaultStyle
+             * @namespace     config.themeUi.slider
+             * @type          Number
+             * @default      [theme.ui.default.defaultStyle]
+             *
+             * Specify the default style for your filtrable input ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            defaultStyle: '[theme.ui.default.defaultStyle]',
             /**
              * @name          transition
              * @namespace     config.themeUi.button
@@ -36,7 +60,19 @@ export default function(env, config) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            depth: '[theme.ui.default.depth]'
+            depth: '[theme.ui.default.depth]',
+            /**
+             * @name          rhythmVertical
+             * @namespace     config.themeUi.slider
+             * @type          Object
+             * @default      [theme.ui.default.rhythmVertical]
+             *
+             * Specify the default vertical rhythm for your datetime picker ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            rhythmVertical: '[theme.ui.default.rhythmVertical]',
         },
-    }
+    };
 }

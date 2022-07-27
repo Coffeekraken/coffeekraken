@@ -43,22 +43,28 @@ export interface IPostcssSugarPluginTransitionFunctionParams {
 
 export default function ({
     params,
+    themeValueProxy,
 }: {
     params: Partial<IPostcssSugarPluginTransitionFunctionParams>;
+    themeValueProxy: Function;
 }) {
     const finalParams: IPostcssSugarPluginTransitionFunctionParams = {
         name: 'default',
         ...params,
     };
 
-    if (__STheme.get('transition')[finalParams.name] === undefined)
-        return finalParams.name;
+    const transition = finalParams.name;
+    let val;
 
-    const transitions = finalParams.name.split(' ').map((t) => {
-        const transition = __STheme.get(`transition.${t}`);
-        if (!transition) return transition;
-        return `var(${`--s-theme-transition-${t}`}, ${transition})`;
-    });
+    // theme value
+    val = themeValueProxy(transition);
 
-    return transitions.join(' ');
+    // try to get the transition with the pased
+    const newVal = __STheme.getSafe(`transition.${val}`);
+    if (newVal !== undefined) {
+        val = newVal;
+    }
+
+    // default return simply his value
+    return `${val}`;
 }

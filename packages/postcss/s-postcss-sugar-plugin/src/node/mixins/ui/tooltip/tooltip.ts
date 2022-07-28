@@ -136,7 +136,7 @@ export default function ({
           transition-property: opacity;
           padding-inline: sugar.padding(ui.tooltip.paddingInline);
           padding-block: sugar.padding(ui.tooltip.paddingBlock);
-          @sugar.depth( theme.ui.tooltip.depth);
+          @sugar.depth(ui.tooltip.depth);
 
             &:not([s-floating]) {
                 &:after {

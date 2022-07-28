@@ -1,5 +1,6 @@
 import __SBench from '@coffeekraken/s-bench';
 import __SClass from '@coffeekraken/s-class';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
@@ -210,11 +211,14 @@ export default class SSugarJson extends __SClass {
                 : [];
 
         // get local node modules directory path
-        const localNodeModulesPath = `${__packageRoot()}/node_modules`;
+        const localNodeModulesPath = `${__packageRoot(
+            __dirname(),
+        )}/node_modules`;
 
         // get local node modules directory path
-        const topLocalNodeModulesPath = `${__packageRoot(process.cwd(), {
-            highest: true,
+        const topLocalNodeModulesPath = `${__packageRoot(__dirname(), {
+            // highest: true,
+            upCount: 2,
         })}/node_modules`;
 
         // build globs

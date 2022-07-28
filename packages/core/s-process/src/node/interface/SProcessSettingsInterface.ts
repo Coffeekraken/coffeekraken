@@ -1,5 +1,5 @@
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
  * @name                SProcessSettingsInterface
@@ -30,6 +30,18 @@ class SProcessSettingsInterface extends __SInterface {
                 type: 'String|SStdio|Boolean',
                 alias: 's',
                 default: __SSugarConfig.get('process.stdio'),
+            },
+            collectStdout: {
+                description:
+                    'Specify if you want to collect the stdout of the process',
+                type: 'Boolean',
+                default: false,
+            },
+            collectStderr: {
+                description:
+                    'Specify if you want to collect the stderr of the process',
+                type: 'Boolean',
+                default: true,
             },
             throw: {
                 description:

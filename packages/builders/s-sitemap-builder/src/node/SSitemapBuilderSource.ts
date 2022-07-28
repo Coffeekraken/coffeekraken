@@ -1,8 +1,7 @@
 import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import type { ISSitemapBuilderResultItem } from './SSitemapBuilder';
 import type { ISSitemapBuilderBuildParams } from './interface/SSitemapBuilderBuildParamsInterface';
-import type { ISSitemapBuilderDocmapSourceCtorSettings } from './sources/SSitemapBuilderDocmapSource';
+import type { ISSitemapBuilderResultItem } from './SSitemapBuilder';
 
 /**
  * @name            SSitemapBuilderSource
@@ -17,31 +16,11 @@ import type { ISSitemapBuilderDocmapSourceCtorSettings } from './sources/SSitema
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-
-export interface ISSitemapBuilderSourceCtorSettings
-    extends ISSitemapBuilderDocmapSourceCtorSettings {
-    source: Partial<ISSitemapBuilderSourceSettings>;
-}
-
 export interface ISSitemapBuilderSourceSettings {}
 
 export type ISSitemapBuilderSourceResult = ISSitemapBuilderResultItem[];
 
 export default class SSitemapBuilderSource extends __SClass {
-    /**
-     * @name            sitemapSourceSettings
-     * @type            ISSitemapBuilderSourceSettings
-     * @get
-     *
-     * Access the sitemap source settings
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get sitemapSourceSettings(): ISSitemapBuilderSourceSettings {
-        return (<any>this).settings.sitemapSource ?? {};
-    }
-
     /**
      * @name            constructor
      * @type            Function
@@ -52,15 +31,8 @@ export default class SSitemapBuilderSource extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: Partial<ISSitemapBuilderSourceCtorSettings>) {
-        super(
-            __deepMerge(
-                {
-                    sitemapSource: {},
-                },
-                settings ?? {},
-            ),
-        );
+    constructor(settings?: Partial<ISSitemapBuilderSourceSettings>) {
+        super(__deepMerge({}, settings ?? {}));
     }
 
     /**

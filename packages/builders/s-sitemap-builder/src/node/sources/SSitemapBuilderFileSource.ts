@@ -4,8 +4,6 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import type { ISSitemapBuilderBuildParams } from '../interface/SSitemapBuildIParamsInterface';
 import type { ISSitemapBuilderResultItem } from '../SSitemapBuilder';
 import __SSitemapBuilderSource from '../SSitemapBuilderSource';
-}
-
 
 /**
  * @name            SSitemapBuilderFileSource
@@ -20,10 +18,6 @@ import __SSitemapBuilderSource from '../SSitemapBuilderSource';
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-
-export interface ISSitemapBuilderFileSourceCtorSettings {
-    sitemapFileSource: Partial<ISSitemapBuilderFileSourceSettings>;
-}
 
 export interface ISSitemapBuilderFileSourceSettings {
     glob: string[] | string;
@@ -44,21 +38,6 @@ export default class SSitemapBuilderFileSource extends __SSitemapBuilderSource {
     static settingsId = 'sitemapFileSource';
 
     /**
-     * @name            sitemapSourceFileSettings
-     * @type            ISSitemapSourceSettings
-     * @get
-     *
-     * Access the sitemap source docmap settings
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get sitemapFileSourceSettings(): ISSitemapBuilderFileSourceSettings {
-        // @ts-ignore
-        return (<any>this).settings[this.constructor.settingsId] ?? {};
-    }
-
-    /**
      * @name            constructor
      * @type            Function
      * @constructor
@@ -68,15 +47,8 @@ export default class SSitemapBuilderFileSource extends __SSitemapBuilderSource {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: Partial<ISSitemapBuilderFileSourceCtorSettings>) {
-        super(
-            __deepMerge(
-                {
-                    sitemapFileSource: {},
-                },
-                settings ?? {},
-            ),
-        );
+    constructor(settings?: Partial<ISSitemapBuilderFileSourceSettings>) {
+        super(__deepMerge({}, settings ?? {}));
     }
 
     /**
@@ -95,34 +67,37 @@ export default class SSitemapBuilderFileSource extends __SSitemapBuilderSource {
     build(
         params: Partial<ISSitemapBuilderBuildParams> = {},
     ): Promise<ISSitemapBuilderResultItem[]> {
-        return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
-            const files = __SGlob.resolve(this.sitemapFileSourceSettings.glob, {
-                cwd: this.sitemapFileSourceSettings.inDir,
-            });
+        return new __SPromise(
+            async ({ resolve, reject, emit, pipe }) => {
+                const files = __SGlob.resolve(this.settings.glob, {
+                    cwd: this.settings.inDir,
+                });
 
-            let items: ISSitemapBuilderResultItem[] = [];
+                let items: ISSitemapBuilderResultItem[] = [];
 
-            for (let [key, file] of Object.entries(files)) {
-                // @ts-ignore
-                const fn = (await import(file.path)).default;
-                if (typeof fn === 'function') {
-                    const fileItems = await fn(params);
-                    items = [...items, ...fileItems];
-                } else if (Array.isArray(fn)) {
-                    items = [...items, ...fn];
-                } else {
-                    throw new Error(
-                        // @ts-ignore
-                        `Your sitemap file "<cyan>${file.relPath}</cyan>" MUST return either a function that returns an <yellow>ISSitemapBuilderResultItem</yellow> array, or just an <yellow>ISSitemapBuilderResultItem</yellow> array...`,
-                    );
+                for (let [key, file] of Object.entries(files)) {
+                    // @ts-ignore
+                    const fn = (await import(file.path)).default;
+                    if (typeof fn === 'function') {
+                        const fileItems = await fn(params);
+                        items = [...items, ...fileItems];
+                    } else if (Array.isArray(fn)) {
+                        items = [...items, ...fn];
+                    } else {
+                        throw new Error(
+                            // @ts-ignore
+                            `Your sitemap file "<cyan>${file.relPath}</cyan>" MUST return either a function that returns an <yellow>ISSitemapBuilderResultItem</yellow> array, or just an <yellow>ISSitemapBuilderResultItem</yellow> array...`,
+                        );
+                    }
                 }
-            }
 
-            resolve(items);
-        }, {
-            eventEmitter: {
-                bind: this
-            }
-        });
+                resolve(items);
+            },
+            {
+                eventEmitter: {
+                    bind: this,
+                },
+            },
+        );
     }
 }

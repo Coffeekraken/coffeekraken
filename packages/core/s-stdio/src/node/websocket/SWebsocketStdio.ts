@@ -1,16 +1,8 @@
 // import __inquirer from 'inquirer';
 import type { ISEventEmitter } from '@coffeekraken/s-event-emitter';
 import type { ISLog } from '@coffeekraken/s-log';
-import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
-import __countLines from '@coffeekraken/sugar/node/terminal/countLines';
-import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
-import __getColorFor from '@coffeekraken/sugar/shared/dev/color/getColorFor';
-import __clone from '@coffeekraken/sugar/shared/object/clone';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __stripAnsi from '@coffeekraken/sugar/shared/string/stripAnsi';
-import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
-import * as __Enquirer from 'enquirer';
 import __SStdio from '../../shared/SStdio';
 import __defaultWebsocketComponent from './components/defaultWebSocketComponent';
 
@@ -34,10 +26,6 @@ import __defaultWebsocketComponent from './components/defaultWebSocketComponent'
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISWebsocketStdioCtorSettings {
-    websocketStdio?: Partial<ISWebsocketStdioSettings>;
-}
-
 export interface ISWebsocketStdioLogsContainer {}
 
 export interface ISWebsocketStdioSettings {}
@@ -45,20 +33,6 @@ export interface ISWebsocketStdioSettings {}
 export interface ISWebsocketStdio {}
 
 class SWebsocketStdio extends __SStdio implements ISWebsocketStdio {
-    /**
-     * @name      websocketStdioSettings
-     * @type      ISWebsocketStdioSettings
-     * @get
-     *
-     * Access the stdio settings
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get websocketStdioSettings(): ISWebsocketStdioSettings {
-        return (<any>this).settings.websocketStdio;
-    }
-
     /**
      * @name            constructor
      * @type            Function
@@ -72,18 +46,9 @@ class SWebsocketStdio extends __SStdio implements ISWebsocketStdio {
     constructor(
         id: string,
         sources: ISEventEmitter | ISEventEmitter[],
-        settings?: ISWebsocketStdioCtorSettings,
+        settings?: ISWebsocketStdioSettings,
     ) {
-        super(
-            id,
-            sources,
-            __deepMerge(
-                {
-                    websocketStdio: {},
-                },
-                settings || {},
-            ),
-        );
+        super(id, sources, __deepMerge({}, settings || {}));
     }
 
     /**

@@ -33,6 +33,12 @@ export default class SMonorepoListParamsInterface extends __SInterface {
                 default: false,
                 alias: 'j',
             },
+            publish: {
+                description:
+                    'Specigy if you want the packages that will be published, not published or both by letting this undefined',
+                type: 'Boolean',
+                alias: 'p',
+            },
         };
     }
 }

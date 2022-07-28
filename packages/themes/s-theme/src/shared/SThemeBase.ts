@@ -398,6 +398,7 @@ export default class SThemeBase extends __SEventEmitter {
      */
     static hash(dotPath: string = ''): string {
         const config = this.get(dotPath);
+        console.log('con', typeof config);
         return __objectHash(config);
     }
 
@@ -1289,6 +1290,7 @@ export default class SThemeBase extends __SEventEmitter {
      */
     hash(dotPath: string = ''): string {
         const config = this.get(dotPath);
+        console.log('themeConfigInternal', config);
         return __objectHash(config);
     }
 

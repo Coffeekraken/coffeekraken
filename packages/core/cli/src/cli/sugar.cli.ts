@@ -304,7 +304,7 @@ export default class SSugarCli {
         if (process.env.NODE_ENV === 'test') return;
         // hooking the consoles methods to parse html at output
         const originalConsole = {};
-        ['log', 'warn', 'error', 'trace'].forEach((method) => {
+        ['log'].forEach((method) => {
             originalConsole[method] = console[method];
             console[method] = (...args) => {
                 args.forEach((value, i) => {

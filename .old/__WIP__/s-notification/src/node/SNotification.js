@@ -1,8 +1,0 @@
-import __SNotification from '../shared/SNotification';
-import __nodeSNotificationAdapter from './adapters/nodeSNotificationAdapter';
-// import __blessedSNotificationAdapter from './adapters/blessedSNotificationAdapter';
-__SNotification.registerAdapter(__nodeSNotificationAdapter);
-// __SNotification.registerAdapter(__blessedSNotificationAdapter);
-export * from '../shared/SNotification';
-export default __SNotification;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU05vdGlmaWNhdGlvbi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNOb3RpZmljYXRpb24udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxlQUFlLE1BQU0seUJBQXlCLENBQUM7QUFDdEQsT0FBTywwQkFBMEIsTUFBTSxxQ0FBcUMsQ0FBQztBQUM3RSxzRkFBc0Y7QUFFdEYsZUFBZSxDQUFDLGVBQWUsQ0FBQywwQkFBMEIsQ0FBQyxDQUFDO0FBQzVELGtFQUFrRTtBQUVsRSxjQUFjLHlCQUF5QixDQUFDO0FBQ3hDLGVBQWUsZUFBZSxDQUFDIn0=

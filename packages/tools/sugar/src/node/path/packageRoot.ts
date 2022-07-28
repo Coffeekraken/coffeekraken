@@ -15,6 +15,10 @@ import __isFile from '../is/file';
  * @feature         Support file path as input
  * @feature         Allows you to specify if you want the highest package.json founded using the ```highest``` parameter
  *
+ * @setting         {Boolean}           [highest=false]         Specify if you want the highest package possible
+ * @setting         {Number}            [upCount=undefined]         Specify a number of packages to go up. Cannot be used alongside the `highest` setting
+ * @setting         {String[]}          [requiredProperties=['name','version']]             Specify some required properties that MUST be present in the package.json to be considered as a valid package
+ *
  * @param           {String}              [from=process.cwd()]    Specify from where the research has to be done
  * @param           {Boolean}             [settings={}]         Some settings to configure the research
  * @return          {String}                                      The finded package path or false if not finded
@@ -29,6 +33,7 @@ import __isFile from '../is/file';
 
 export interface IPackageRootSettings {
     highest: boolean;
+    upCount: number;
     requiredProperties: string[];
 }
 
@@ -38,6 +43,7 @@ function packageRoot(
 ) {
     const finalSettings: IPackageRootSettings = {
         highest: false,
+        upCount: undefined,
         requiredProperties: ['name', 'version'],
         ...(settings ?? {}),
     };
@@ -47,15 +53,23 @@ function packageRoot(
     const f = __findPkgJson(from);
     let file = f.next();
 
-    let finalFile;
+    let finalFile,
+        upCountIdx = 0;
 
     // no file found
     if (!file || !file.filename) return false;
 
     while (!file.done) {
-        if (file.done) break;
+        if (file.done) {
+            break;
+        }
 
-        // treat the not highest case
+        if (finalSettings.upCount && !finalSettings.highest) {
+            if (upCountIdx >= finalSettings.upCount) {
+                break;
+            }
+        }
+
         if (!finalSettings.highest) {
             // required properties
             if (finalSettings.requiredProperties) {
@@ -65,12 +79,18 @@ function packageRoot(
                     if (file.value[prop] === undefined) allProps = false;
                 });
                 if (allProps) {
+                    upCountIdx++;
                     finalFile = file;
-                    break;
+                    if (!finalSettings.upCount) {
+                        break;
+                    }
                 }
             } else {
+                upCountIdx++;
                 finalFile = file;
-                break;
+                if (!finalSettings.upCount) {
+                    break;
+                }
             }
         } else {
             finalFile = file;

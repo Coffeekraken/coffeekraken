@@ -24,7 +24,7 @@ import __SFaviconBuilderBuildParamsInterface from './interface/SFaviconBuilderBu
  *
  * This class allows you to generate all the favicons you need for your website.
  *
- * @param           {ISFaviconBuilderCtorSettings}         [settings={}]           Some settings to configure your image compression process
+ * @param           {ISFaviconBuilderSettings}         [settings={}]           Some settings to configure your image compression process
  *
  * @example         js
  * import SFaviconBuilder from '@coffeekraken/s-favicon-builder';

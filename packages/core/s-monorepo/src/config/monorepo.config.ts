@@ -58,20 +58,5 @@ export default function (env, config) {
              */
             fields: ['version'],
         },
-
-        publish: {
-            /**
-             * @name        packagesGlob
-             * @namespace   config.monorepo.publish
-             * @type       string
-             * @default     packages/[!@]* /*
-             *
-             * Same as the config.monorepo.packagesGlob but exclusively for the publish method
-             *
-             * @since       2.0.0
-             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            packagesGlob: 'packages/[!@]*/*',
-        },
     };
 }

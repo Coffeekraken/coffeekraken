@@ -1,8 +1,5 @@
 import __SDuration from '@coffeekraken/s-duration';
-import __SEventEmitter, {
-    ISEventEmitter,
-    ISEventEmitterConstructorSettings,
-} from '@coffeekraken/s-event-emitter';
+import __SEventEmitter, { ISEventEmitter } from '@coffeekraken/s-event-emitter';
 import type { ISLog } from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SStdio from '@coffeekraken/s-stdio';
@@ -21,9 +18,8 @@ import __path from 'path';
 import __stackTrace from 'stack-trace';
 import __SProcessSettingsInterface from './interface/SProcessSettingsInterface';
 import {
-    ISCommandProcessCtorSettings,
     ISCommandProcessParams,
-    ISProcessCtorSettings,
+    ISCommandProcessSettings,
     ISProcessInternal,
     ISProcessParams,
     ISProcessProcessObj,
@@ -146,10 +142,6 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      */
     _processPromise?: __SPromise;
 
-    get processSettings(): ISProcessSettings {
-        return (<any>this).settings.process;
-    }
-
     /**
      * @name					from
      * @type 					Function
@@ -166,7 +158,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * execute your process
      *
      * @param         {string|function|SPromise|SProcess}       what      The value with which you want to get an SProcess based instance back
-     * @param         {Partial<ISProcessCtorSettings>}      [settings={}]     Some settings to configure your new SProcess based class instance
+     * @param         {Partial<ISProcessSettings>}      [settings={}]     Some settings to configure your new SProcess based class instance
      * @return        {SProcess}              An SProcess based class instance that you can use to execute your process
      *
      * @since
@@ -174,7 +166,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      */
     static async from(
         what: string | Function | Promise<any> | __SPromise | SProcess,
-        settings?: Partial<ISProcessCtorSettings>,
+        settings?: Partial<ISProcessSettings>,
     ): Promise<SProcess> {
         if (__isClass(what) && __extendsStack(what)['SProcess']) {
             // @ts-ignore
@@ -226,9 +218,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
                     const pro = await this.from(
                         requireValue,
                         __deepMerge(settings, {
-                            process: {
-                                processPath: potentialPath,
-                            },
+                            processPath: potentialPath,
                         }),
                     );
 
@@ -243,9 +233,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
                         command: what,
                     },
                     __deepMerge(settings, {
-                        process: {
-                            processPath: __path.resolve('./SCommandProcess.js'),
-                        },
+                        processPath: __path.resolve('./SCommandProcess.js'),
                     }),
                 );
                 return commandProcess;
@@ -273,7 +261,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * and execute a command by passing inside the params object the ```command``` prop.
      *
      * @param         {Partial<ISCommandProcessParams>}     [initialParams={}]    Some initial params for your command process instance
-     * @param         {Partial<ISCommandProcessCtorSettings>}     [settings={}]     Some settings to instanciate your command process as you want
+     * @param         {Partial<ISCommandProcessSettings>}     [settings={}]     Some settings to instanciate your command process as you want
      * @return       {SCommandProcess}               An instance of the SCommandProcess class
      *
      * @since 				2.0.0
@@ -281,7 +269,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      */
     static async fromCommand(
         initialParams: Partial<ISCommandProcessParams> = {},
-        settings?: Partial<ISCommandProcessCtorSettings>,
+        settings?: Partial<ISCommandProcessSettings>,
     ): Promise<SProcess> {
         const { default: __SCommandProcess } = await import(
             './SCommandProcess'
@@ -324,14 +312,12 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      */
     constructor(
         initialParams?: Partial<ISProcessParams>,
-        settings?: ISProcessCtorSettings,
+        settings?: Partial<ISProcessSettings>,
     ) {
         super(
-            <ISEventEmitterConstructorSettings>__deepMerge(
-                {
-                    // @ts-ignore
-                    process: __SProcessSettingsInterface.defaults(),
-                },
+            __deepMerge(
+                // @ts-ignore
+                __SProcessSettingsInterface.defaults(),
                 settings ?? {},
             ),
         );
@@ -340,7 +326,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
         this.initialParams = Object.assign({}, initialParams ?? {});
 
         // get the definition from interface or settings
-        // this.paramsInterface = this.processSettings.interface;
+        // this.paramsInterface = this.settings.interface;
         // if (!this.paramsInterface) {
         //     this.paramsInterface =
         //         (<any>this).constructor.interface ??
@@ -352,15 +338,15 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
             this.state(state);
         });
 
-        if (!this.processSettings.processPath) {
+        if (!this.settings.processPath) {
             for (const callSite of __stackTrace.get()) {
                 if (callSite.getFunctionName() === this.constructor.name) {
-                    this.processSettings.processPath = callSite.getFileName();
+                    this.settings.processPath = callSite.getFileName();
                     break;
                 }
             }
         }
-        if (!this.processSettings.processPath) {
+        if (!this.settings.processPath) {
             throw new Error(
                 `An SProcess instance MUST have a "<yellow>processPath</yellow>" property either populated automatically if possible, or specified in the "<cyan>settings.processPath</cyan>" property...`,
             );
@@ -434,7 +420,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
         settings: Partial<ISProcessSettings> = {},
     ) {
         const processSettings = <ISProcessSettings>(
-            __deepMerge(this.processSettings, settings)
+            __deepMerge(this.settings, settings)
         );
 
         if (this.currentExecutionObj !== undefined) {
@@ -572,25 +558,32 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
 
         // handle SPromise based processes
         if (this._processPromise instanceof __SPromise) {
+            // this._processPromise.on('*', (data, metas) => {
+            //     console.log('D', data, metas);
+            // });
+
             this.pipe(<ISEventEmitter>(<unknown>this._processPromise), {});
 
             // listen for "data" and "log" events
             this._processPromise &&
+                processSettings.collectStdout &&
                 this._processPromise.on('log', (data, metas) => {
                     if (this.currentExecutionObj) {
-                        this.currentExecutionObj.stdout.push(data);
+                        this.currentExecutionObj.stdout.push(
+                            data.value ?? data.toString(),
+                        );
                     }
                 });
             // listen for errors
             this._processPromise &&
+                processSettings.collectStderr &&
                 this._processPromise.on('error,reject', (data, metas) => {
                     if (this.currentExecutionObj) {
-                        this.currentExecutionObj.stderr.push(data);
+                        this.currentExecutionObj.stderr.push(
+                            data.value ?? data.toString(),
+                        );
                     }
-                    if (
-                        !this.processSettings.killOnError &&
-                        metas.event === 'error'
-                    )
+                    if (!this.settings.killOnError && metas.event === 'error')
                         return;
                 });
 
@@ -630,7 +623,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
             this._processPromise &&
                 this._processPromise.on('finally', () => {
                     // @ts-ignore
-                    if (this.processSettings.exitAtEnd === true) {
+                    if (this.settings.exitAtEnd === true) {
                         process.exit();
                     }
                     // after callback
@@ -898,7 +891,8 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      */
     log(...logs: ISLog[]) {
         logs.forEach((log) => {
-            if (this.currentExecutionObj) {
+            // @ts-ignore
+            if (this.currentExecutionObj && this.settings.collectStdout) {
                 this.currentExecutionObj.stdout.push(
                     log.value || log.toString(),
                 );
@@ -919,7 +913,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      */
     error(...errors: ISLog[]) {
         errors.forEach((error) => {
-            if (this.currentExecutionObj) {
+            if (this.currentExecutionObj && this.settings.collectStderr) {
                 this.currentExecutionObj.stderr.push(
                     error.value || error.toString(),
                 );

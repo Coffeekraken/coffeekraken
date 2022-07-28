@@ -34,9 +34,6 @@ import __SProcessManagerProcessWrapper, {
 export interface ISProcessManagerProcessSettings
     extends ISProcessManagerProcessWrapperSettings {}
 
-export interface ISProcessManagerCtorSettings {
-    processManager: Partial<ISProcessManagerSettings>;
-}
 export interface ISProcessManagerSettings {
     stdio: __SStdio | string;
     stdioSettings: ISStdioSettings;
@@ -82,20 +79,6 @@ class SProcessManager extends __SEventEmitter {
     _queuePromise: Promise;
 
     /**
-     * @name          processManageSettings
-     * @type          ISProcessManageSettings
-     * @get
-     *
-     * Access the process manager process settings
-     *
-     * @since         2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get processManagerSettings(): ISProcessManageSettings {
-        return (<any>this).settings.processManager;
-    }
-
-    /**
      * @name          constructor
      * @type          Function
      * @constructor
@@ -104,15 +87,13 @@ class SProcessManager extends __SEventEmitter {
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: Partial<ISProcessManagerCtorSettings>) {
+    constructor(settings?: Partial<ISProcessManagerSettings>) {
         super(
             __deepMerge(
                 {
-                    processManager: {
-                        stdio: 'terminal',
-                        stdioSettings: {},
-                        runInParallel: true,
-                    },
+                    stdio: 'terminal',
+                    stdioSettings: {},
+                    runInParallel: true,
                 },
                 settings ?? {},
             ),
@@ -126,13 +107,13 @@ class SProcessManager extends __SEventEmitter {
         //     });
         // });
 
-        // if (this.processManagerSettings.stdio) {
+        // if (this.settings.stdio) {
         //     (async () => {
         //         this._stdio = __SStdio.existingOrNew(
         //             'default',
         //             this,
-        //             this.processManagerSettings.stdio,
-        //             this.processManagerSettings.stdioSettings,
+        //             this.settings.stdio,
+        //             this.settings.stdioSettings,
         //         );
         //     })();
         // }
@@ -176,7 +157,7 @@ class SProcessManager extends __SEventEmitter {
                     }),
                     id: instanceId,
                 },
-                processManagerProcess: settings ?? {},
+                ...(settings ?? {}),
             },
         );
 
@@ -250,7 +231,7 @@ class SProcessManager extends __SEventEmitter {
         let promise;
 
         // if don't run in parallel, add this process to the queue
-        if (!this.processManagerSettings.runInParallel) {
+        if (!this.settings.runInParallel) {
             this._processesQueue[processId] = () => {
                 return this.pipe(
                     this._processesStack[processId].run(

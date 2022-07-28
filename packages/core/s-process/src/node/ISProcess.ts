@@ -1,15 +1,12 @@
 import type { ISClass } from '@coffeekraken/s-class';
-import type { ISLog } from '@coffeekraken/s-log';
-import type { ISpawnSettings } from '@coffeekraken/sugar/node/process/spawn';
-import type { ISInterface } from '@coffeekraken/s-interface';
-import type { ISStdio } from '@coffeekraken/s-stdio';
 import type { ISDurationObject } from '@coffeekraken/s-duration';
+import type { ISInterface } from '@coffeekraken/s-interface';
+import type { ISLog } from '@coffeekraken/s-log';
+import type { ISStdio } from '@coffeekraken/s-stdio';
+import type { ISpawnSettings } from '@coffeekraken/sugar/node/process/spawn';
 
-export interface ISCommandProcessSettings {
+export interface ISCommandProcessSettings extends ISProcessSettings {
     spawnSettings: Partial<ISpawnSettings>;
-}
-export interface ISCommandProcessCtorSettings extends ISProcessCtorSettings {
-    commandProcess: Partial<ISCommandProcessSettings>;
 }
 export interface ISCommandProcessParams extends ISProcessParams {
     command: string;
@@ -17,10 +14,6 @@ export interface ISCommandProcessParams extends ISProcessParams {
 
 export interface ISProcessNotificationSettings {
     enable: boolean;
-}
-
-export interface ISProcessCtorSettings {
-    process?: Partial<ISProcessSettings>;
 }
 
 export interface ISProcessProcessObj extends ISDurationObject {
@@ -39,6 +32,8 @@ export interface ISProcessSettings {
     emitErrorAsEvent: boolean;
     stdio: ISStdio;
     throw: boolean;
+    collectStdout: boolean;
+    collectStderr: boolean;
     runAsChild: boolean;
     interface: ISInterface;
     processPath: string;

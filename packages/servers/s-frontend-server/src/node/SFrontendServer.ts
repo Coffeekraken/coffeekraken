@@ -35,7 +35,7 @@ import __request from 'request';
  * This class represent a frontend server that handle features like documentation, views rendering,
  * frontspec reading middleware, packageJson middleware and more...
  *
- * @param       {ISFrontendCtorSettings}        [settings={}]           Some settings to configure your frontend server
+ * @param       {ISFrontendSettings}        [settings={}]           Some settings to configure your frontend server
  *
  * @example         js
  * import SFrontendServer from '@coffeekraken/s-frontend-server';

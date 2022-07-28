@@ -192,9 +192,8 @@ export default class SPostcssBuilder extends __SBuilder {
                         value: `<yellow>|------------</yellow> : ${pluginName}`,
                     });
                     if (pluginName === '@coffeekraken/s-postcss-sugar-plugin') {
-                        const postcssSugarPluginConfig = __SSugarConfig.get(
-                            'postcssSugarPlugin',
-                        );
+                        const postcssSugarPluginConfig =
+                            __SSugarConfig.get('postcssSugarPlugin');
                         emit('log', {
                             type: __SLog.TYPE_INFO,
                             value: `              <yellow>○</yellow> Cache                     : ${
@@ -386,9 +385,8 @@ export default class SPostcssBuilder extends __SBuilder {
                             packageJson.dependencies,
                         )) {
                             try {
-                                const packagePath = __resolvePackagePath(
-                                    packageName,
-                                );
+                                const packagePath =
+                                    __resolvePackagePath(packageName);
                                 if (!packagePath) continue;
                                 const specsFiles = __SGlob.resolve(
                                     `${packagePath}/**/*.spec.js`,

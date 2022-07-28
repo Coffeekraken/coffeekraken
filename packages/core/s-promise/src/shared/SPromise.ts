@@ -111,8 +111,10 @@ export interface ISPromise extends Promise, ISEventEmitter {
     finally(...args: any): ISPromise;
 }
 
-class SPromise extends __SClass.extends(Promise)
-    implements ISPromise, ISEventEmitter {
+class SPromise
+    extends __SClass.extends(Promise)
+    implements ISPromise, ISEventEmitter
+{
     /**
      * @name        queue
      * @type        Function
@@ -240,7 +242,7 @@ class SPromise extends __SClass.extends(Promise)
                     promise: {
                         treatCancelAs: 'resolve',
                         destroyTimeout: 1,
-                        preventRejectOnThrow: true,
+                        preventRejectOnThrow: false,
                         emitLogErrorEventOnThrow: true,
                         resolveAtResolveEvent: false,
                         rejectAtRejectEvent: false,

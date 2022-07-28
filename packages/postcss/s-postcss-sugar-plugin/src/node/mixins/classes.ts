@@ -1,6 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
-import __objectHash from '@coffeekraken/sugar/shared/object/objectHash';
 
 /**
  * @name           classes
@@ -105,11 +103,11 @@ export default async function ({
 
     return cssArray;
 
-    const hash = `@sugar.classes.${__objectHash({
-        finalParams,
-        css: cssArray,
-        theme: __STheme.hash(),
-    })}`;
-    const c = cache('@sugar.classes', hash, cssArray);
-    return c;
+    // const hash = `@sugar.classes.${__objectHash({
+    //     finalParams,
+    //     css: cssArray,
+    //     theme: __STheme.hash(),
+    // })}`;
+    // const c = cache('@sugar.classes', hash, cssArray);
+    // return c;
 }

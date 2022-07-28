@@ -148,6 +148,10 @@ export default function spawn(
                         type: __SLog.TYPE_CHILD_PROCESS,
                         value: data.toString(),
                     });
+                    emit('error', {
+                        type: __SLog.TYPE_CHILD_PROCESS,
+                        value: data.toString(),
+                    });
                 }
             });
         }
@@ -158,12 +162,7 @@ export default function spawn(
             isEnded = true;
 
             // build and parse the value if possible
-            let value =
-                resolveValue || rejectValue || stdout.length
-                    ? stdout.join('\n')
-                    : stderr.length
-                    ? stderr.join('\n')
-                    : '';
+            let value = resolveValue ?? rejectValue ?? undefined;
             try {
                 value = JSON.parse(value);
             } catch (e) {}
@@ -178,6 +177,9 @@ export default function spawn(
                 spawn: true,
                 ...duration.end(),
             };
+            if (resultObj.value === undefined) {
+                delete resultObj.value;
+            }
 
             // closed by this process
             childProcessExitPromiseResolve?.();

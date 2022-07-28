@@ -2,7 +2,6 @@ import __spawn from '@coffeekraken/sugar/node/process/spawn';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SCommandProcessInterface from './interface/SCommandProcessInterface';
 import {
-    ISCommandProcessCtorSettings,
     ISCommandProcessParams,
     ISCommandProcessSettings,
     ISProcessResultObject,
@@ -18,7 +17,7 @@ import __SProcess from './SProcess';
  *
  * This class represent an SProcess started with a simple bash command like "ls -la" or whatever
  *
- * @param       {ISCommandProcessCtorSettings}          [settings={}]           Some settings to configure your command process
+ * @param       {ISCommandProcessSettings}          [settings={}]           Some settings to configure your command process
  *
  * @example         js
  * import { SCommandProcess } from '@coffeekreken/s-process';
@@ -32,20 +31,6 @@ import __SProcess from './SProcess';
 // @ts-ignore
 export default class SCommandProcess extends __SProcess {
     /**
-     * @name        commandProcessSettings
-     * @type          ISCommandProcessSettings
-     * @get
-     *
-     * Access the command process settings
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get commandProcessSettings(): ISCommandProcessSettings {
-        return (<any>this).settings.commandProcess;
-    }
-
-    /**
      * @name        constructor
      * @type        Function
      * @constructor
@@ -57,21 +42,14 @@ export default class SCommandProcess extends __SProcess {
      */
     constructor(
         initialParams?: Partial<ISCommandProcessParams>,
-        settings?: Partial<ISCommandProcessCtorSettings>,
+        settings?: Partial<ISCommandProcessSettings>,
     ) {
         super(
             initialParams ?? {},
-            __deepMerge(
-                {
-                    commandProcess: {},
-                },
-                settings ?? {},
-                {
-                    process: {
-                        runAsChild: false,
-                    },
-                },
-            ),
+            __deepMerge(settings ?? {}, {
+                spawnSettings: {},
+                runAsChild: false,
+            }),
         );
     }
 
@@ -94,14 +72,13 @@ export default class SCommandProcess extends __SProcess {
         params: Partial<ISCommandProcessParams>,
         settings?: Partial<ISCommandProcessSettings>,
     ): Promise<ISProcessResultObject> {
-        const set = <ISCommandProcessSettings>(
-            __deepMerge(this.commandProcessSettings, settings ?? {})
-        );
+        const set = <
+            ISCommandProcessSettings // @ts-ignore
+        >__deepMerge(this.settings, settings ?? {});
 
         // @ts-ignore
-        const finalParams: ISCommandProcessParams = __SCommandProcessInterface.apply(
-            params,
-        );
+        const finalParams: ISCommandProcessParams =
+            __SCommandProcessInterface.apply(params);
 
         return __spawn(finalParams.command, [], {
             returnValueOnly: true,

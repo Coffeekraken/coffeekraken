@@ -1,9 +1,5 @@
 import __objectHash from 'object-hash';
 // import __objectHash from 'hash-obj';
-
-import __isPlainObject from '../is/plainObject';
-import __deepMap from '../object/deepMap';
-
 /**
  * @name            objectHash
  * @namespace       node.fs
@@ -36,5 +32,8 @@ export default function objectHash(
     settings = <IObjectHashSettings>{
         ...settings,
     };
+    // if (!__isPlainObject(obj)) {
+    //     console.trace('object hash', obj);
+    // }
     return __objectHash(obj);
 }

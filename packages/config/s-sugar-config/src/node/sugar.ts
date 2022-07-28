@@ -367,6 +367,7 @@ export default class SSugarConfig extends __SClass {
      */
     static hash(dotPath: string = ''): string {
         const config = this.get(dotPath);
+        console.log('hashConfig', config);
         return __objectHash(config);
     }
 
@@ -505,6 +506,7 @@ export default class SSugarConfig extends __SClass {
      */
     hash(dotPath: string = ''): string {
         const config = this.get(dotPath);
+        console.log('hashConfigInternal', config);
         return __objectHash(config);
     }
 

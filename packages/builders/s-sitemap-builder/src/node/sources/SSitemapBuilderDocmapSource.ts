@@ -23,10 +23,6 @@ import __SSitemapBuilderSource from '../SSitemapBuilderSource';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISSitemapBuilderDocmapSourceCtorSettings {
-    sitemapDocmapSource: Partial<ISSitemapBuilderDocmapSourceSettings>;
-}
-
 export interface ISSitemapBuilderDocmapSourceSettings {}
 
 export default class SSitemapBuilderDocmapSource extends __SSitemapBuilderSource {
@@ -43,21 +39,6 @@ export default class SSitemapBuilderDocmapSource extends __SSitemapBuilderSource
     static settingsId = 'sitemapDocmapSource';
 
     /**
-     * @name            sitemapSourceDocmapSettings
-     * @type            ISSitemapSourceSettings
-     * @get
-     *
-     * Access the sitemap source docmap settings
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get sitemapDocmapSourceSettings(): ISSitemapBuilderDocmapSourceSettings {
-        // @ts-ignore
-        return (<any>this).settings[this.constructor.settingsId] ?? {};
-    }
-
-    /**
      * @name            constructor
      * @type            Function
      * @constructor
@@ -67,15 +48,8 @@ export default class SSitemapBuilderDocmapSource extends __SSitemapBuilderSource
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: Partial<ISSitemapBuilderDocmapSourceCtorSettings>) {
-        super(
-            __deepMerge(
-                {
-                    sitemapDocmapSource: {},
-                },
-                settings ?? {},
-            ),
-        );
+    constructor(settings?: Partial<ISSitemapBuilderDocmapSourceSettings>) {
+        super(__deepMerge({}, settings ?? {}));
     }
 
     /**

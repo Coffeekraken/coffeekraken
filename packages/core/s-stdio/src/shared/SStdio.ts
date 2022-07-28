@@ -5,7 +5,6 @@ import type { ISLog, ISLogAsk } from '@coffeekraken/s-log';
 import __SLog from '@coffeekraken/s-log';
 import type { ISPromise } from '@coffeekraken/s-promise';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __objectHash from '@coffeekraken/sugar/shared/object/objectHash';
 import __SStdioSettingsInterface from './interface/SStdioSettingsInterface';
 
 export interface ISStdioSettings {
@@ -445,10 +444,10 @@ export default class SStdio extends __SClass implements ISStdio {
 
             if (!log.active) continue;
 
-            if (!log.hash) {
-                const hash = __objectHash({ value: log.value, type: log.type });
-                log.hash = hash;
-            }
+            // if (!log.hash) {
+            //     const hash = __objectHash({ value: log.value, type: log.type });
+            //     log.hash = hash;
+            // }
 
             // if (this._hashBuffer.includes(log.hash)) return;
             // this._hashBuffer.push(log.hash);

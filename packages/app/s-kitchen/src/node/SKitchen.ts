@@ -288,9 +288,7 @@ class SKitchen extends __SClass {
 
             // instanciate the process manager
             const processManager = new __SProcessManager({
-                // processManager: {
                 //     runInParallel: false
-                // }
             });
             pipe(processManager);
             // loop on each actions for this recipe
@@ -518,10 +516,8 @@ class SKitchen extends __SClass {
 
                 // instanciate the process manager
                 const processManager = new __SProcessManager({
-                    processManager: {
-                        // @ts-ignore
-                        runInParallel: finalParams.runInParallel,
-                    },
+                    // @ts-ignore
+                    runInParallel: finalParams.runInParallel,
                 });
                 pipe(processManager, {
                     overrideEmitter: true,

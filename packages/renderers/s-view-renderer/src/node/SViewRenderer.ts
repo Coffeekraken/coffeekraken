@@ -62,9 +62,6 @@ export interface ISViewRendererSettings {
     sharedDataFiles?: string[];
     sharedJsonDataFiles?: string[];
 }
-export interface ISViewCtorSettings {
-    viewRenderer?: Partial<ISViewRendererSettings>;
-}
 
 export interface ISViewViewMetas extends ISFileObject {}
 
@@ -170,7 +167,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
     static render(
         viewPath: string,
         data: any = null,
-        settings: Partial<ISViewCtorSettings>,
+        settings: Partial<ISViewSettings>,
     ) {
         return new __SPromise(async ({ resolve, reject, pipe }) => {
             const viewInstance = new SViewRenderer(__deepMerge(settings ?? {}));
@@ -368,7 +365,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
      * @since     2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: ISViewCtorSettings) {
+    constructor(settings?: ISViewSettings) {
         // save the settings
         super(
             __deepMerge(

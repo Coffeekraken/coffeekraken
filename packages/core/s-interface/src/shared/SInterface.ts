@@ -10,10 +10,6 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __getAvailableInterfaceTypes from './getAvailableInterfaceTypes';
 import type { ISInterfaceRendererSettings } from './renderers/ISInterfaceRenderer';
 
-export interface ISInterfaceCtorSettings {
-    interface: Partial<ISInterfaceSettings>;
-}
-
 export interface ISInterfaceSettings {
     descriptor?: Partial<ISDescriptorSettings>;
     baseObj?: any;
@@ -119,20 +115,6 @@ export default class SInterface extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static description = '';
-
-    /**
-     * @name      interfaceSettings
-     * @type      ISInterfaceSettings
-     * @get
-     *
-     * Access the interface settings
-     *
-     * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get interfaceSettings(): ISInterfaceSettings {
-        return (<any>this).settings.interface;
-    }
 
     /**
      * @name      registerRenderer
@@ -244,16 +226,14 @@ export default class SInterface extends __SClass {
             // @ts-ignore
             global._registeredInterfacesTypes[n] = this;
             // @ts-ignore
-            global._registeredInterfacesTypes[
-                n.replace('interface', '')
-            ] = this;
+            global._registeredInterfacesTypes[n.replace('interface', '')] =
+                this;
         } else if (window !== undefined) {
             // @ts-ignore
             window._registeredInterfacesTypes[n] = this;
             // @ts-ignore
-            window._registeredInterfacesTypes[
-                n.replace('interface', '')
-            ] = this;
+            window._registeredInterfacesTypes[n.replace('interface', '')] =
+                this;
         }
     }
 
@@ -401,14 +381,12 @@ export default class SInterface extends __SClass {
      * @since         2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: Partial<ISInterfaceCtorSettings>) {
+    constructor(settings?: Partial<ISInterfaceSettings>) {
         // @ts-ignore
         super(
             __deepMerge(
                 {
-                    interface: {
-                        stripUnkown: false,
-                    },
+                    stripUnkown: false,
                 },
                 settings ?? {},
             ),
@@ -435,7 +413,7 @@ export default class SInterface extends __SClass {
      */
     apply(objectOrString: any, settings?: Partial<ISInterfaceSettings>): any {
         const set = <ISInterfaceSettings>(
-            __deepMerge(this.interfaceSettings, settings ?? {})
+            __deepMerge(this.settings, settings ?? {})
         );
 
         let objectOnWhichToApplyInterface = objectOrString;

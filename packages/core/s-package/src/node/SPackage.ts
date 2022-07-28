@@ -34,7 +34,7 @@ import __SPackageSettingsInterface from './interface/SPackageSettingsInterface';
  * @feature             Export your packages files in the package.json easily depending on the `package.config.ts` configuration exported file(s)
  * @feature         Install your dependencies easily using the `config.package.manager` configuration
  *
- * @param           {ISPackageCtorSettings}          [settings={}]           Some settings to configure your builder instance
+ * @param           {ISPackageSettings}          [settings={}]           Some settings to configure your builder instance
  *
  * @example         js
  * import SPackage from '@coffeekraken/s-package';

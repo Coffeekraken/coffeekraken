@@ -1,18 +1,11 @@
 import __SDuration from '@coffeekraken/s-duration';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __fileName from '@coffeekraken/sugar/node/fs/filename';
-import __extension from '@coffeekraken/sugar/node/fs/extension';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __ensureDirSync from '@coffeekraken/sugar/node/fs/ensureDirSync';
+import __extension from '@coffeekraken/sugar/node/fs/extension';
 import __folderHash from '@coffeekraken/sugar/node/fs/folderHash';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __packageCacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __srcCssDir from '@coffeekraken/sugar/node/path/srcCssDir';
-import __distCssDir from '@coffeekraken/sugar/node/path/distCssDir';
-import __childProcess from 'child_process';
-import { generateFonts } from 'fantasticon';
-import __svgFixer from 'oslllo-svg-fixer';
 import __fs from 'fs';
 import __path from 'path';
 import __postcss from 'postcss';
@@ -84,21 +77,21 @@ export default async function ({ root, sharedData, settings }) {
 
     console.log(`<yellow>[fonticons]</yellow> Generate fonticons...`);
 
-    // fix svg's just to be sure
-    const fixResult = await __svgFixer(inputDir, inputDir).fix();
+    // // fix svg's just to be sure
+    // const fixResult = await __svgFixer(inputDir, inputDir).fix();
 
-    const result = await generateFonts({
-        inputDir,
-        outputDir: fantasticonConfig.outputDir,
-        fontsUrl: `/${__path.relative(
-            __packageRoot(),
-            fantasticonConfig.serveFontsDir,
-        )}`,
-        name: fantasticonConfig.name,
-        normalize: true,
-        selector: '.s-icon',
-        prefix: '--',
-    });
+    // const result = await generateFonts({
+    //     inputDir,
+    //     outputDir: fantasticonConfig.outputDir,
+    //     fontsUrl: `/${__path.relative(
+    //         __packageRoot(),
+    //         fantasticonConfig.serveFontsDir,
+    //     )}`,
+    //     name: fantasticonConfig.name,
+    //     normalize: true,
+    //     selector: '.s-icon',
+    //     prefix: '--',
+    // });
 
     // read folder icons
     const iconsFilenames = __fs.readdirSync(inputDir);

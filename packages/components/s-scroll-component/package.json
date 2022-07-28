@@ -1,6 +1,6 @@
 {
     "name": "@coffeekraken/s-scroll-component",
-    "version": "2.0.0-alpha.0",
+    "version": "2.0.0-alpha.5",
     "description": "",
     "homepage": "https://coffeekraken.io",
     "type": "module",
@@ -12,11 +12,11 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-interface": "^2.0.0-alpha.0",
-        "@coffeekraken/s-lit-component": "^2.0.0-alpha.0",
-        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.0",
-        "@coffeekraken/s-theme": "^2.0.0-alpha.0",
-        "@coffeekraken/sugar": "^2.0.0-alpha.0",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.5",
+        "@coffeekraken/s-lit-component": "^2.0.0-alpha.5",
+        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.5",
+        "@coffeekraken/s-theme": "^2.0.0-alpha.5",
+        "@coffeekraken/sugar": "^2.0.0-alpha.5",
         "lit": "^2.0.0-rc.3"
     },
     "main": "./dist/pkg/cjs/js/exports.js",

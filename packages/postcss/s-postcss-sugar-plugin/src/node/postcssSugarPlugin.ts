@@ -4,7 +4,6 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 import __STheme from '@coffeekraken/s-theme';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-import __fileHash from '@coffeekraken/sugar/node/fs/fileHash';
 import __folderHash from '@coffeekraken/sugar/node/fs/folderHash';
 import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
@@ -12,7 +11,6 @@ import __packageCacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __replaceTokens from '@coffeekraken/sugar/node/token/replaceTokens';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __objectHash from '@coffeekraken/sugar/shared/object/objectHash';
 import __unquote from '@coffeekraken/sugar/shared/string/unquote';
 import __fs from 'fs';
 import __glob from 'glob';
@@ -264,13 +262,14 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             // cwd: __dirname(),
             cwd: '',
         });
+
         for (let i = 0; i < paths.length; i++) {
             const path = paths[i];
             const {
                 default: fn,
                 interface: int,
                 dependencies,
-            } = await import(`${path}`);
+            } = await import(path);
             if (type === 'mixins') {
                 mixinsStack[
                     `${path
@@ -435,7 +434,6 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
 
             for (let i = 0; i < Object.keys(sugarJson).length; i++) {
                 const packageName = Object.keys(sugarJson)[i];
-
                 const packageSugarJson = sugarJson[packageName];
                 if (!packageSugarJson.postcss) continue;
 
@@ -493,15 +491,15 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                     rootDir = __folderPath(root.source.input.from);
                 }
 
-                const fileHash = __fileHash(root.source.input.from, {
-                    include: {
-                        ctime: true,
-                    },
-                });
-                const hash = __objectHash({
-                    fileHash,
-                    theme: __STheme.hash,
-                });
+                // const fileHash = __fileHash(root.source.input.from, {
+                //     include: {
+                //         ctime: true,
+                //     },
+                // });
+                // const hash = __objectHash({
+                //     fileHash,
+                //     theme: __STheme.hash,
+                // });
             }
         },
 
@@ -665,12 +663,15 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                     );
                 }
 
-                const dirName =
-                    typeof atRule.source.input.file === 'string'
-                        ? __path.dirname(atRule.source.input.file)
-                        : __dirname();
+                // const dirName =
+                //     typeof atRule.source.input.file === 'string'
+                //         ? __path.dirname(atRule.source.input.file)
+                //         : __dirname();
 
-                const path = __path.resolve(dirName, __unquote(atRule.params));
+                const path = __path.resolve(
+                    __packageRoot(),
+                    __unquote(atRule.params),
+                );
 
                 if (!__fs.existsSync(path)) {
                     throw new Error(

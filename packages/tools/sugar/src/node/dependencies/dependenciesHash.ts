@@ -1,8 +1,7 @@
 import __objectHash from 'object-hash';
-import __fileHash from '../fs/fileHash';
 import __sha256 from '../../shared/crypt/sha256';
 import __extension from '../fs/extension';
-import __callsites from 'callsites';
+import __fileHash from '../fs/fileHash';
 
 /**
  * @name            dependenciesHash

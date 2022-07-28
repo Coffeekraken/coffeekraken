@@ -67,9 +67,6 @@ export interface ISDocblockBlockSettings {
     markedOptions: any;
     tags: ISDocblockBlockTagsMap;
 }
-export interface ISDocblockBlockCtorSettings {
-    docblockBlock?: Partial<ISDocblockBlockSettings>;
-}
 
 // @ts-ignore
 class SDocblockBlock extends __SClass {

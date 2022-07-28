@@ -1,4 +1,0 @@
-import SNotification from './SNotification';
-export * from './SNotification';
-export default SNotification;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxhQUFhLE1BQU0saUJBQWlCLENBQUM7QUFFNUMsY0FBYyxpQkFBaUIsQ0FBQztBQUVoQyxlQUFlLGFBQWEsQ0FBQyJ9

@@ -25,7 +25,6 @@ import __SProcess from './SProcess';
  * @todo      doc
  * @todo      tests
  *
- * @see         https://www.npmjs.com/package/node-notifier
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
@@ -43,10 +42,6 @@ export interface ISProcessManagerProcessWrapperProcessRestartSettings {
 
 export interface ISProcessManagerProcessWrapperProcessLogSettings {
     filter: ISEventEmitterPipeSettingsFilterFn;
-}
-
-export interface ISProcessManagerProcessWrapperCtorSettings {
-    processManagerProcess: Partial<ISProcessManagerProcessWrapperSettings>;
 }
 
 export interface ISProcessManagerProcessWrapperSettings {
@@ -109,17 +104,15 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
      */
     constructor(
         processInstance,
-        settings?: Partial<ISProcessManagerProcessWrapperCtorSettings>,
+        settings?: Partial<ISProcessManagerProcessWrapperSettings>,
     ) {
         super(
             __deepMerge(
                 {
-                    processManagerProcess: {
-                        stdio: 'inherit',
-                        restart: false,
-                        log: {
-                            filter: undefined,
-                        },
+                    stdio: 'inherit',
+                    restart: false,
+                    log: {
+                        filter: undefined,
                     },
                 },
                 settings,
@@ -134,17 +127,15 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
             delay: 0,
             before: undefined,
         };
-        if (this.processManagerProcessSettings.restart === true) {
-            this.processManagerProcessSettings.restart = restartDefaultSettings;
-        } else if (
-            __isPlainObject(this.processManagerProcessSettings.restart)
-        ) {
-            this.processManagerProcessSettings.restart = {
+        if (this.settings.restart === true) {
+            this.settings.restart = restartDefaultSettings;
+        } else if (__isPlainObject(this.settings.restart)) {
+            this.settings.restart = {
                 ...restartDefaultSettings,
-                ...this.processManagerProcessSettings.restart,
+                ...this.settings.restart,
             };
         }
-        processInstance.processSettings.stdio = false;
+        processInstance.settings.stdio = false;
         this.processInstance = processInstance;
     }
 
@@ -166,16 +157,15 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
                 });
 
                 // maxEvery
-                if (this.processManagerProcessSettings.restart.maxEvery > 0) {
+                if (this.settings.restart.maxEvery > 0) {
                     if (
                         this.processInstance.lastExecutionObj.endTime +
-                            this.processManagerProcessSettings.restart
-                                .maxEvery >=
+                            this.settings.restart.maxEvery >=
                         Date.now()
                     ) {
                         this.emit('log', {
                             group: `s-process-manager-process-wrapper-${this.metas.id}`,
-                            value: `The process "<yellow>${this.metas.id}</yellow>" will not being restarted cause it has crashed before the <cyan>maxEvery</cyan> setting setted to <magenta>${this.processManagerProcessSettings.restart.maxEvery}ms</magenta>`,
+                            value: `The process "<yellow>${this.metas.id}</yellow>" will not being restarted cause it has crashed before the <cyan>maxEvery</cyan> setting setted to <magenta>${this.settings.restart.maxEvery}ms</magenta>`,
                         });
                         // resolving the global run promise
                         if (
@@ -191,14 +181,14 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
                 }
 
                 // maxTimes
-                if (this.processManagerProcessSettings.restart.maxTimes > 0) {
+                if (this.settings.restart.maxTimes > 0) {
                     if (
                         this.processInstance.executionsStack.length >=
-                        this.processManagerProcessSettings.restart.maxTimes
+                        this.settings.restart.maxTimes
                     ) {
                         this.emit('log', {
                             group: `s-process-manager-process-wrapper-${this.metas.id}`,
-                            value: `The process "<yellow>${this.metas.id}</yellow>" will not being restarted cause it has reached the <cyan>maxTimes</cyan> setting setted to <magenta>${this.processManagerProcessSettings.restart.maxTimes}</magenta>`,
+                            value: `The process "<yellow>${this.metas.id}</yellow>" will not being restarted cause it has reached the <cyan>maxTimes</cyan> setting setted to <magenta>${this.settings.restart.maxTimes}</magenta>`,
                         });
                         // resolving the global run promise
                         if (
@@ -220,11 +210,10 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
 
                 // tweak params if a function is passed through settings
                 if (
-                    this.processManagerProcessSettings.restart.before &&
-                    typeof this.processManagerProcessSettings.restart.before ===
-                        'function'
+                    this.settings.restart.before &&
+                    typeof this.settings.restart.before === 'function'
                 ) {
-                    newProcessArgs = await this.processManagerProcessSettings.restart.before(
+                    newProcessArgs = await this.settings.restart.before(
                         this.processInstance.lastExecutionObj,
                     );
                 }
@@ -246,15 +235,14 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
                     return;
                 }
 
-                if (this.processManagerProcessSettings.restart.delay)
+                if (this.settings.restart.delay)
                     this.emit(`log`, {
                         group: `s-process-manager-process-wrapper-${this.metas.id}`,
                         value: `Waiting <cyan>${
-                            this.processManagerProcessSettings.restart.delay /
-                            1000
+                            this.settings.restart.delay / 1000
                         }s</cyan> before restart...`,
                     });
-                await __wait(this.processManagerProcessSettings.restart.delay);
+                await __wait(this.settings.restart.delay);
 
                 this.emit('log', {
                     group: `s-process-manager-process-wrapper-${this.metas.id}`,
@@ -290,8 +278,7 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
         if (this._isDetached) return;
         const promise = this.processInstance.run(paramsOrStringArgs, settings);
         // handle restart
-        if (this.processManagerProcessSettings.restart)
-            this._handleRestartFor(promise);
+        if (this.settings.restart) this._handleRestartFor(promise);
         // promise.on('*', (e) => {
         //     console.log('_', e);
         // });
@@ -337,18 +324,17 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
                 const res = await resPromise;
 
                 // if restart is setted, do not resolve the promis
-                if (
-                    !this.processManagerProcessSettings.restart &&
-                    !this._isDetached
-                ) {
+                if (!this.settings.restart && !this._isDetached) {
                     // console.log('AAAAAAAAAAAA', res);
                     resolve(res);
                 }
             },
             {
-                id: 'plop',
                 metas: {
-                    id: 'coco',
+                    id:
+                        typeof paramsOrStringArgs === 'String'
+                            ? paramsOrStringArgs
+                            : this.constructor.name,
                 },
             },
         );

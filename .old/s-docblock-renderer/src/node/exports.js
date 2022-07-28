@@ -1,7 +1,0 @@
-import SDocblockRenderer from './SDocblockRenderer';
-import SDocblockHtmlRenderer from './SDocblockHtmlRenderer';
-export * from './SDocblockRenderer';
-export * from './SDocblockHtmlRenderer';
-export { SDocblockHtmlRenderer };
-export default SDocblockRenderer;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxpQkFBaUIsTUFBTSxxQkFBcUIsQ0FBQztBQUNwRCxPQUFPLHFCQUFxQixNQUFNLHlCQUF5QixDQUFDO0FBRTVELGNBQWMscUJBQXFCLENBQUM7QUFDcEMsY0FBYyx5QkFBeUIsQ0FBQztBQUV4QyxPQUFPLEVBQUUscUJBQXFCLEVBQUUsQ0FBQztBQUNqQyxlQUFlLGlCQUFpQixDQUFDIn0=

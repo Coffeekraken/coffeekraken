@@ -15,7 +15,7 @@ import __SDashboardSettingsInterface from './interface/SDashboardSettingsInterfa
  *
  * This class represent a monorepo with some features like executing a command on all packages, list all the packages, upgrade each package's package.json, etc...
  *
- * @param           {ISDashboardCtorSettings}          [settings={}]           Some settings to configure your monorepo instance
+ * @param           {ISDashboardSettings}          [settings={}]           Some settings to configure your monorepo instance
  *
  * @example         js
  * import SDashboard from '@coffeekraken/s-monorepo';

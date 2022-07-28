@@ -35,10 +35,6 @@ import __errorBasicStdioComponent from './components/errorBasicStdioComponent';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISBasicStdioCtorSettings {
-    basicStdio?: Partial<ISBasicStdioSettings>;
-}
-
 export interface ISBasicStdioLogsContainer {}
 
 export interface ISBasicStdioSettings {}
@@ -46,20 +42,6 @@ export interface ISBasicStdioSettings {}
 export interface ISBasicStdio {}
 
 class SBasicStdio extends __SStdio implements ISBasicStdio {
-    /**
-     * @name      basicStdioSettings
-     * @type      ISBasicStdioSettings
-     * @get
-     *
-     * Access the stdio settings
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get basicStdioSettings(): ISBasicStdioSettings {
-        return (<any>this).settings.basicStdio;
-    }
-
     /**
      * @name            constructor
      * @type            Function
@@ -73,18 +55,9 @@ class SBasicStdio extends __SStdio implements ISBasicStdio {
     constructor(
         id: string,
         sources: ISEventEmitter | ISEventEmitter[],
-        settings?: ISBasicStdioCtorSettings,
+        settings?: ISBasicStdioSettings,
     ) {
-        super(
-            id,
-            sources,
-            __deepMerge(
-                {
-                    basicStdio: {},
-                },
-                settings || {},
-            ),
-        );
+        super(id, sources, __deepMerge({}, settings || {}));
 
         this.display();
     }
@@ -194,7 +167,7 @@ class SBasicStdio extends __SStdio implements ISBasicStdio {
         }
 
         const log = `<${groupObj.color}>█</${groupObj.color}>   ${__parseHtml(
-            component.render(logObj, this.basicStdioSettings),
+            component.render(logObj, this.settings),
         )}`;
         logLinesCount += __countLines(log);
         console.log(log);

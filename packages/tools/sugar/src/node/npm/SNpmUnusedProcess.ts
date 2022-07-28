@@ -1,8 +1,5 @@
 import _SInterface from '@coffeekraken/s-interface';
-import __SProcess, {
-    ISProcessCtorSettings,
-    ISProcessSettings,
-} from '@coffeekraken/s-process';
+import __SProcess, { ISProcessSettings } from '@coffeekraken/s-process';
 import __SPromise from '@coffeekraken/s-promise';
 import __depCheck from 'depcheck';
 import __packageRootDir from '../path/packageRootDir';
@@ -25,7 +22,6 @@ import __packageJson from './packageJson';
  */
 
 interface ISNpmUnusedProcessSettings extends ISProcessSettings {}
-interface ISNpmUnusedProcessCtorSettings extends ISProcessCtorSettings {}
 interface ISNpmUnusedProcessParams {
     clean: boolean;
     skipMissing: boolean;
@@ -73,7 +69,7 @@ class SNpmUnusedProcess extends __SProcess implements ISNpmUnusedProcess {
      */
     constructor(
         initialParams = {},
-        settings?: Partial<ISNpmUnusedProcessCtorSettings>,
+        settings?: Partial<ISNpmUnusedProcessSettings>,
     ) {
         super(initialParams, settings ?? {});
     }

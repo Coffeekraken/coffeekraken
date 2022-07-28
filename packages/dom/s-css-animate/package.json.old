@@ -11,9 +11,6 @@
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0",
-        "@coffeekraken/s-interface": "^2.0.0",
-        "@coffeekraken/sugar": "^2.0.0",
         "animejs": "^3.2.1",
         "rematrix": "^0.7.2"
     },

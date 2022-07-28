@@ -1,8 +1,5 @@
 // import __SFileInterface from './interface/SFileInterface';
-import __SEventEmitter, {
-    ISEventEmitter,
-    ISEventEmitterConstructorSettings,
-} from '@coffeekraken/s-event-emitter';
+import __SEventEmitter, { ISEventEmitter } from '@coffeekraken/s-event-emitter';
 import __extension from '@coffeekraken/sugar/node/fs/extension';
 import __getFilename from '@coffeekraken/sugar/node/fs/filename';
 import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
@@ -57,10 +54,6 @@ import __path from 'path';
 
 export interface ISFileWatchSettings {
     pollingInterval: number;
-}
-
-export interface ISFileCtorSettings {
-    file?: Partial<ISFileSettings>;
 }
 
 export interface ISFileSettings {
@@ -153,7 +146,7 @@ export interface ISFileCtor {
 }
 
 export interface ISFile extends ISEventEmitter {
-    new (filepath: string, settings?: ISFileCtorSettings);
+    new (filepath: string, settings?: ISFileSettings);
     name: string;
     path: string;
     relPath: string;
@@ -239,7 +232,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static new(path: string, settings?: ISFileCtorSettings): SFile {
+    static new(path: string, settings?: ISFileSettings): SFile {
         const fileName = __getFilename(path);
         for (let i = 0; i < Object.keys(this._registeredClasses).length; i++) {
             const pattern = Object.keys(this._registeredClasses)[i],
@@ -315,10 +308,10 @@ class SFile extends __SEventEmitter implements ISFile {
 
         if (
             !__path.isAbsolute(path) &&
-            this.fileSettings.cwd &&
-            !path.includes(this.fileSettings.cwd)
+            this.settings.cwd &&
+            !path.includes(this.settings.cwd)
         ) {
-            path = __path.resolve(this.fileSettings.cwd, path);
+            path = __path.resolve(this.settings.cwd, path);
         }
 
         return path;
@@ -389,20 +382,6 @@ class SFile extends __SEventEmitter implements ISFile {
     extension;
 
     /**
-     * @name        fileSettings
-     * @type        ISFileSettings
-     * @get
-     *
-     * Access the file settings setted in the ```settings.file``` property
-     *
-     * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get fileSettings(): ISFileSettings {
-        return (<any>this).settings.file;
-    }
-
-    /**
      * @name        constructor
      * @type        Function
      * @constructor
@@ -412,31 +391,29 @@ class SFile extends __SEventEmitter implements ISFile {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(filepath: string, settings?: ISFileCtorSettings) {
+    constructor(filepath: string, settings?: ISFileSettings) {
         super(
-            <ISEventEmitterConstructorSettings>__deepMerge(
+            __deepMerge(
                 {
-                    file: {
-                        checkExistence: true,
-                        cwd: process.cwd(),
-                        shrinkSizesTo: 4,
-                        watch: false,
-                        writeSettings: {
-                            encoding: 'utf8',
-                            flag: undefined,
-                            mode: 0x666,
-                            cast: true,
-                            path: undefined,
-                        },
-                        readSettings: {
-                            encoding: 'utf8',
-                            flag: undefined,
-                            cast: true,
-                        },
-                        processors: {
-                            content: [],
-                            save: [],
-                        },
+                    checkExistence: true,
+                    cwd: process.cwd(),
+                    shrinkSizesTo: 4,
+                    watch: false,
+                    writeSettings: {
+                        encoding: 'utf8',
+                        flag: undefined,
+                        mode: 0x666,
+                        cast: true,
+                        path: undefined,
+                    },
+                    readSettings: {
+                        encoding: 'utf8',
+                        flag: undefined,
+                        cast: true,
+                    },
+                    processors: {
+                        content: [],
+                        save: [],
                     },
                 },
                 settings || {},
@@ -456,13 +433,13 @@ class SFile extends __SEventEmitter implements ISFile {
         this.exists = __fs.existsSync(filepath);
 
         // save the file path
-        this.cwd = this.fileSettings.cwd;
+        this.cwd = this.settings.cwd;
         this._name = __getFilename(filepath);
         this.extension = __extension(this.path).toLowerCase();
         this._nameWithoutExt = this.name.replace(`.${this.extension}`, '');
 
         // check if need to check for the file existence or not...
-        if (this.fileSettings.checkExistence && !this.exists) {
+        if (this.settings.checkExistence && !this.exists) {
             throw new Error(
                 `The passed filepath "<cyan>${this.path}</cyan>" does not exist and you have setted the "<yellow>checkExistence</yellow>" setting to <green>true</green>`,
             );
@@ -470,10 +447,10 @@ class SFile extends __SEventEmitter implements ISFile {
 
         // check if some sourcesExtensions have been specified
         if (
-            this.fileSettings.sourcesExtensions &&
-            this.fileSettings.sourcesExtensions.length
+            this.settings.sourcesExtensions &&
+            this.settings.sourcesExtensions.length
         ) {
-            this.fileSettings.sourcesExtensions.forEach((ext) => {
+            this.settings.sourcesExtensions.forEach((ext) => {
                 const replaceReg = new RegExp(`\.${this.extension}$`);
                 const potentialPath = this.path.replace(replaceReg, `.${ext}`);
                 if (__fs.existsSync(potentialPath)) {
@@ -482,7 +459,7 @@ class SFile extends __SEventEmitter implements ISFile {
             });
         }
 
-        if (this.fileSettings.watch) {
+        if (this.settings.watch) {
             this.watch();
         }
     }
@@ -548,10 +525,8 @@ class SFile extends __SEventEmitter implements ISFile {
     get content(): any {
         if (this._content) return this._content;
         this._content = this.readSync();
-        for (let i = 0; i < this.fileSettings.processors.content.length; i++) {
-            this._content = this.fileSettings.processors.content[i](
-                this._content,
-            );
+        for (let i = 0; i < this.settings.processors.content.length; i++) {
+            this._content = this.settings.processors.content[i](this._content);
         }
         return this._content;
     }
@@ -630,18 +605,18 @@ class SFile extends __SEventEmitter implements ISFile {
         this._stats.mbytes = stats.size * 0.000001;
         this._stats.kbytes = stats.size * 0.001;
 
-        if (this.fileSettings.shrinkSizesTo) {
+        if (this.settings.shrinkSizesTo) {
             this._stats.bytes = Number(
-                this._stats.bytes.toFixed(this.fileSettings.shrinkSizesTo),
+                this._stats.bytes.toFixed(this.settings.shrinkSizesTo),
             );
             this._stats.kbytes = Number(
-                this._stats.kbytes.toFixed(this.fileSettings.shrinkSizesTo),
+                this._stats.kbytes.toFixed(this.settings.shrinkSizesTo),
             );
             this._stats.mbytes = Number(
-                this._stats.mbytes.toFixed(this.fileSettings.shrinkSizesTo),
+                this._stats.mbytes.toFixed(this.settings.shrinkSizesTo),
             );
             this._stats.gbytes = Number(
-                this._stats.gbytes.toFixed(this.fileSettings.shrinkSizesTo),
+                this._stats.gbytes.toFixed(this.settings.shrinkSizesTo),
             );
         }
     }
@@ -820,9 +795,9 @@ class SFile extends __SEventEmitter implements ISFile {
         if (!this.commits.length) return this;
         // save the last commit
         let toSave = this.content;
-        if (this.fileSettings.processors.save.length) {
-            for (let i = 0; i < this.fileSettings.processors.save.length; i++) {
-                toSave = this.fileSettings.processors.save[i](toSave);
+        if (this.settings.processors.save.length) {
+            for (let i = 0; i < this.settings.processors.save.length; i++) {
+                toSave = this.settings.processors.save[i](toSave);
             }
         }
 
@@ -910,7 +885,7 @@ class SFile extends __SEventEmitter implements ISFile {
                 );
             }
             const set: ISFileReadSettings = {
-                ...this.fileSettings.readSettings,
+                ...this.settings.readSettings,
                 ...settings,
             };
             __fs.readFile(
@@ -950,7 +925,7 @@ class SFile extends __SEventEmitter implements ISFile {
             );
         }
         const set: ISFileReadSettings = {
-            ...this.fileSettings.readSettings,
+            ...this.settings.readSettings,
             ...settings,
         };
         let content: any;

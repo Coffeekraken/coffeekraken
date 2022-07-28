@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import __parseArgs from '@coffeekraken/sugar/shared/cli/parseArgs.js';
 import __SProcess from '@coffeekraken/s-process';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __parseArgs from '@coffeekraken/sugar/shared/cli/parseArgs.js';
 
 interface IProcessRunChildOptions {
     processPath: string;
@@ -34,20 +34,22 @@ interface IProcessRunChildOptions {
     delete args.settings;
 
     const pro = await __SProcess.from(processPath, {
-        process: {
-            ...settings,
-            runAsChild: false,
-        },
+        ...settings,
+        runAsChild: false,
     });
 
     if (pro && pro.run) {
         const proPromise = pro.run(args);
         const res = await proPromise;
 
+        let json;
+
         try {
-            console.log(JSON.stringify(res.value));
-        } catch (e) {
-            console.log(res.value?.toString?.() ?? res.value);
+            json = JSON.stringify(res.value);
+        } catch (e) {}
+
+        if (json) {
+            console.log(json);
         }
 
         process.exit(0);

@@ -1,13 +1,13 @@
 {
     "name": "@coffeekraken/s-config-adapter",
-    "version": "2.0.0-alpha.0",
+    "version": "2.0.0-alpha.5",
     "description": "",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.0",
-        "@coffeekraken/sugar": "^2.0.0-alpha.0"
+        "@coffeekraken/s-class": "^2.0.0-alpha.5",
+        "@coffeekraken/sugar": "^2.0.0-alpha.5"
     },
     "main": "./dist/pkg/cjs/shared/exports.js",
     "module": "./dist/pkg/esm/shared/exports.js",

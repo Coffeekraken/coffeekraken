@@ -24,7 +24,7 @@ export default class SMonorepoPublishParamsInterface extends __SInterface {
                 description:
                     'Specify some globs to search for packages relative to the monorepo root directory',
                 type: 'String',
-                default: __SSugarConfig.get('monorepo.publish.packagesGlob'),
+                default: __SSugarConfig.get('monorepo.packagesGlob'),
                 alias: 'g',
             },
             yes: {

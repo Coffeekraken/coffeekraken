@@ -1,6 +1,7 @@
 import __SClass from '@coffeekraken/s-class';
 import __SCodeFormatter from '@coffeekraken/s-code-formatter';
 import __SDuration from '@coffeekraken/s-duration';
+import __SFile from '@coffeekraken/s-file';
 import __SGlob from '@coffeekraken/s-glob';
 import __SLog from '@coffeekraken/s-log';
 import __SPackage from '@coffeekraken/s-package';
@@ -40,7 +41,7 @@ import __SMonorepoUpgradeParamsInterface from './interface/SMonorepoUpgradeParam
  * @feature         List all the packages of the monorepo
  * @feature         Upgrade each package's package.json depending on the monorepo's one
  *
- * @param           {ISMonorepoCtorSettings}          [settings={}]           Some settings to configure your monorepo instance
+ * @param           {ISMonorepoSettings}          [settings={}]           Some settings to configure your monorepo instance
  *
  * @example         js
  * import SMonorepo from '@coffeekraken/s-monorepo';
@@ -61,10 +62,6 @@ export interface ISMonorepoSettings {
     packagesGlob: string;
 }
 
-export interface ISMonorepoCtorSettings {
-    monorepo: Partial<ISMonorepoSettings>;
-}
-
 export interface ISMonorepoRunParams {
     command: string;
     packagesGlob: string;
@@ -74,6 +71,7 @@ export interface ISMonorepoRunResult {}
 export interface ISMonorepoListParams {
     packagesGlob: string;
     json: boolean;
+    publish: undefined | boolean;
 }
 export interface ISMonorepoListResult {
     name: string;
@@ -86,7 +84,10 @@ export interface ISMonorepoPublishParams {
     packagesGlob: string;
     yes: boolean;
 }
-export interface ISMonorepoPublishResult {}
+export interface ISMonorepoPublishResult {
+    published: boolean;
+    error?: Error;
+}
 
 export interface ISMonorepoDevParams {
     packagesGlob: string;
@@ -104,7 +105,9 @@ export interface ISMonorepoUpgradeParams {
     files: string[];
     fields: string[];
 }
-export interface ISMonorepoUpgradeResult {}
+export interface ISMonorepoUpgradeResult {
+    upgraded: boolean;
+}
 
 export default class SMonorepo extends __SClass {
     /**
@@ -125,7 +128,7 @@ export default class SMonorepo extends __SClass {
         rootDir: string = __packageRoot(process.cwd(), {
             highest: true,
         }),
-        settings?: Partial<ISMonorepoCtorSettings>,
+        settings?: Partial<ISMonorepoSettings>,
     ) {
         super(
             __deepMerge(
@@ -151,43 +154,50 @@ export default class SMonorepo extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     checkDependencies(): Promise<boolean> {
-        return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
-            // get all the packages
-            const packages = await this.list({});
+        return new __SPromise(
+            async ({ resolve, reject, emit, pipe }) => {
+                // get all the packages
+                const packages = await this.list({});
 
-            for (let i = 0; i < packages.length; i++) {
-                const packageObj = packages[i];
+                for (let i = 0; i < packages.length; i++) {
+                    const packageObj = packages[i];
 
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>[check]</yellow> Checking dependencies for the package "<cyan>${packageObj.name}</cyan>"...`,
-                });
-
-                const pack = new __SPackage(packageObj.path);
-
-                const result = await pack.checkDependencies();
-
-                if (result !== true) {
                     emit('log', {
-                        type: __SLog.TYPE_ERROR,
-                        message: `<red>[check]</red> Your package has some dependencies issues`,
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>[check]</yellow> Checking dependencies for the package "<cyan>${packageObj.name}</cyan>"...`,
                     });
 
-                    if (
-                        !(await emit('ask', {
-                            type: 'confirm',
-                            message: 'Would you like to continue anyway?',
-                            default: false,
-                        }))
-                    ) {
-                        return reject(false);
+                    const pack = new __SPackage(packageObj.path);
+
+                    const result = await pack.checkDependencies();
+
+                    if (result !== true) {
+                        emit('log', {
+                            type: __SLog.TYPE_ERROR,
+                            message: `<red>[check]</red> Your package has some dependencies issues`,
+                        });
+
+                        if (
+                            !(await emit('ask', {
+                                type: 'confirm',
+                                message: 'Would you like to continue anyway?',
+                                default: false,
+                            }))
+                        ) {
+                            return reject(false);
+                        }
                     }
                 }
-            }
 
-            // all seems ok
-            resolve(true);
-        });
+                // all seems ok
+                resolve(true);
+            },
+            {
+                metas: {
+                    id: this.constructor.name,
+                },
+            },
+        );
     }
 
     /**
@@ -332,19 +342,22 @@ export default class SMonorepo extends __SClass {
                     },
                 );
 
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>[list]</yellow> <cyan>${files.length}</cyan> packages found:`,
-                });
-
                 files.forEach((file) => {
                     let version = 'unknown',
                         name;
 
-                    if (file.relPath.match(/package\.json$/)) {
-                        const json = __readJsonSync(file.path);
-                        version = json.version;
-                        name = json.name;
+                    const json = __readJsonSync(file.path);
+                    version = json.version;
+                    name = json.name;
+
+                    // check if we want this package in the list
+                    if (finalParams.publish && json.publish === false) {
+                        return;
+                    } else if (
+                        finalParams.publish === false &&
+                        json.publish !== false
+                    ) {
+                        return;
                     }
 
                     result.push({
@@ -355,23 +368,28 @@ export default class SMonorepo extends __SClass {
                     });
 
                     jsonResult[name] = `^${version}`;
+                });
 
+                result.forEach((packageObj) => {
                     if (!finalParams.json) {
                         emit('log', {
                             type: __SLog.TYPE_INFO,
-                            value: `<yellow>${
-                                name ?? file.relPath.split('/').pop()
-                            }</yellow> (<${
-                                version === rootPackageJson.version
+                            value: `<yellow>${packageObj.name}</yellow> (<${
+                                packageObj.version === rootPackageJson.version
                                     ? 'green'
                                     : 'red'
-                            }>${version}</${
-                                version === rootPackageJson.version
+                            }>${packageObj.version}</${
+                                packageObj.version === rootPackageJson.version
                                     ? 'green'
                                     : 'red'
-                            }>) <cyan>${file.relPath}</cyan>`,
+                            }>) <cyan>${packageObj.relPath}</cyan>`,
                         });
                     }
+                });
+
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>[list]</yellow> <cyan>${result.length}</cyan> packages found`,
                 });
 
                 if (finalParams.json) {
@@ -415,7 +433,7 @@ export default class SMonorepo extends __SClass {
                 const finalParams: ISMonorepoPublishParams =
                     __SMonorepoPublishParamsInteface.apply(params);
 
-                const result: ISMonorepoPublishResult[] = [];
+                const result: Record<string, ISMonorepoPublishResult> = {};
 
                 const rootPackageJson = __readJsonSync(
                     `${this._rootDir}/package.json`,
@@ -425,7 +443,18 @@ export default class SMonorepo extends __SClass {
                     !finalParams.yes &&
                     !(await emit('ask', {
                         type: 'confirm',
-                        message: `Is <yellow>${rootPackageJson.version}</yellow> the version you want to publish?`,
+                        message: `Is <magenta>${rootPackageJson.version}</magenta> the version you want to publish?`,
+                        default: true,
+                    }))
+                ) {
+                    return reject(false);
+                }
+
+                if (
+                    !finalParams.yes &&
+                    !(await emit('ask', {
+                        type: 'confirm',
+                        message: `Are you sure your packages are ready? Don't forget about <yellow>docmap</yellow>, <yellow>builds</yellow> etc...? Just asking...`,
                         default: true,
                     }))
                 ) {
@@ -435,6 +464,7 @@ export default class SMonorepo extends __SClass {
                 // loop on all packages to publish them once at a time
                 const packages = await this.list({
                     packagesGlob: finalParams.packagesGlob,
+                    publish: true,
                 });
 
                 emit('log', {
@@ -443,9 +473,10 @@ export default class SMonorepo extends __SClass {
                 });
 
                 // upgrading monorepo
-                const upgradeResult = await pipe(this.upgrade());
-                if (upgradeResult !== true) {
-                    return reject(false);
+                try {
+                    await pipe(this.upgrade());
+                } catch (e) {
+                    return reject(e);
                 }
 
                 if (
@@ -461,9 +492,10 @@ export default class SMonorepo extends __SClass {
                 }
 
                 // check dependencies
-                const dependenciesResult = await pipe(this.checkDependencies());
-                if (dependenciesResult !== true) {
-                    return reject(false);
+                try {
+                    await pipe(this.checkDependencies());
+                } catch (e) {
+                    return reject(e);
                 }
 
                 if (
@@ -480,7 +512,6 @@ export default class SMonorepo extends __SClass {
 
                 for (let i = 0; i < packages.length; i++) {
                     const packageObj = packages[i];
-                    let result = true;
                     try {
                         emit('log', {
                             type: __SLog.TYPE_INFO,
@@ -489,26 +520,35 @@ export default class SMonorepo extends __SClass {
                         __childProcess.execSync(`npm publish --access public`, {
                             cwd: packageObj.path,
                         });
+                        // populate the result
+                        result[packageObj.name] = {
+                            published: true,
+                        };
                         emit('log', {
                             type: __SLog.TYPE_INFO,
                             value: `<yellow>[publish]</yellow> <cyan>${
                                 packages.length - i - 1
-                            }</cyan> remaining package(s)`,
+                            }</cyan> / ${packages.length} remaining package(s)`,
                         });
                         emit('log', {
                             type: __SLog.TYPE_SUCCESS,
-                            value: `<green>[publish]</green> Your package "<cyan>${packageObj.name}</cyan>" has been published <green>successfully</green> in version <cyan>${rootPackageJson.version}</cyan>!`,
+                            value: `<green>[publish]</green> Your package "<cyan>${packageObj.name}</cyan>" has been published <green>successfully</green> in version <magenta>${rootPackageJson.version}</magenta>!`,
                         });
                     } catch (e) {
-                        result = false;
                         emit('log', {
                             type: __SLog.TYPE_ERROR,
+                            // @ts-ignore
                             value: e.toString(),
                         });
                         emit('log', {
                             type: __SLog.TYPE_WARNING,
                             value: `<red>[publish]</red> Something goes wrong when publishing the "<cyan>${packageObj.name}</cyan>"`,
                         });
+                        // populate the result
+                        result[packageObj.name] = {
+                            published: false,
+                            error: <Error>e,
+                        };
                         if (
                             !finalParams.yes &&
                             !(await emit('ask', {
@@ -697,7 +737,13 @@ export default class SMonorepo extends __SClass {
                 const packagesListJson = await this.list({
                     packagesGlob: finalParams.packagesGlob,
                     json: true,
+                    publish: true,
                 });
+
+                // adding the root package
+                packagesListJson[rootPackageJson.name] =
+                    rootPackageJson.version;
+                files.push(__SFile.new(`${this._rootDir}/package.json`));
 
                 emit('log', {
                     type: __SLog.TYPE_INFO,
@@ -717,6 +763,10 @@ export default class SMonorepo extends __SClass {
                 });
 
                 files.forEach((file) => {
+                    let isUpgraded = false;
+
+                    const packageJson = __readJsonSync(file);
+
                     finalParams.files.forEach((fileName) => {
                         if (!fileName.match(/\.json$/)) {
                             throw new Error(
@@ -735,6 +785,7 @@ export default class SMonorepo extends __SClass {
                                 });
                                 return;
                             }
+                            isUpgraded = true;
                             json[field] = rootPackageJson[field];
                         });
 
@@ -759,6 +810,8 @@ export default class SMonorepo extends __SClass {
                             };
                             // delete current package name
                             delete json.dependencies[json.name];
+                            // delete mono repo root package name
+                            delete json.dependencies[rootPackageJson.name];
                         }
 
                         function updateDependencies(obj) {
@@ -774,8 +827,11 @@ export default class SMonorepo extends __SClass {
                                                 '/',
                                             )[0]
                                         }/`,
-                                    )
+                                    ) &&
+                                    obj[packageName] !==
+                                        `^${rootPackageJson.version}`
                                 ) {
+                                    isUpgraded = true;
                                     obj[
                                         packageName
                                     ] = `^${rootPackageJson.version}`;
@@ -795,9 +851,12 @@ export default class SMonorepo extends __SClass {
                             value: `<green>✓</green> <${packageNameColor}>${json.name}</${packageNameColor}> <cyan>${fileName}</cyan> upgraded <green>successfully</green>`,
                         });
                     });
+                    result[packageJson.name] = {
+                        upgraded: isUpgraded,
+                    };
                 });
 
-                resolve(true);
+                resolve(result);
             },
             {
                 metas: {

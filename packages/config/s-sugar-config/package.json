@@ -1,17 +1,17 @@
 {
     "name": "@coffeekraken/s-sugar-config",
-    "version": "2.0.0-alpha.0",
+    "version": "2.0.0-alpha.5",
     "description": "",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.0",
-        "@coffeekraken/s-config": "^2.0.0-alpha.0",
-        "@coffeekraken/s-config-folder-adapter": "^2.0.0-alpha.0",
-        "@coffeekraken/s-docblock": "^2.0.0-alpha.0",
-        "@coffeekraken/s-sugar-json": "^2.0.0-alpha.0",
-        "@coffeekraken/sugar": "^2.0.0-alpha.0"
+        "@coffeekraken/s-class": "^2.0.0-alpha.5",
+        "@coffeekraken/s-config": "^2.0.0-alpha.5",
+        "@coffeekraken/s-config-folder-adapter": "^2.0.0-alpha.5",
+        "@coffeekraken/s-docblock": "^2.0.0-alpha.5",
+        "@coffeekraken/s-sugar-json": "^2.0.0-alpha.5",
+        "@coffeekraken/sugar": "^2.0.0-alpha.5"
     },
     "main": "./dist/pkg/cjs/js/exports.js",
     "module": "./dist/pkg/esm/js/exports.js",

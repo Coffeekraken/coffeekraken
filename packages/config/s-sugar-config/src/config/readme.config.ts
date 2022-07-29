@@ -1,4 +1,4 @@
-export default function (env, config) {
+export default function ({ env, config }) {
     if (env.platform !== 'node') return;
 
     return {
@@ -13,7 +13,9 @@ export default function (env, config) {
          * @since           2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        input: '[config.storage.src.docDir]/README.md',
+        get input() {
+            return `${config.storage.src.docDir}/README.md`;
+        },
 
         /**
          * @name            output
@@ -26,7 +28,9 @@ export default function (env, config) {
          * @since           2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        output: '[config.storage.package.rootDir]/README.md',
+        get output() {
+            return `${config.storage.package.rootDir}/README.md`;
+        },
 
         layout: {
             /**
@@ -40,7 +44,9 @@ export default function (env, config) {
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            headerImageUrl: '[config.serve.img.url]/doc/readmeHeader.jpg',
+            get headerImageUrl() {
+                return `${config.serve.img.url}/doc/readmeHeader.jpg`;
+            },
         },
         /**
          * @name            shields
@@ -53,6 +59,8 @@ export default function (env, config) {
          * @since           2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        shields: '[config.shieldsio.shields]',
+        get shields() {
+            return config.shieldsio.shields;
+        },
     };
 }

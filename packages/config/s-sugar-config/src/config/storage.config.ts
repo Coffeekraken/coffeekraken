@@ -2,7 +2,7 @@ import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __systemTmpDir from '@coffeekraken/sugar/node/path/systemTmpDir';
 
-export default function (env) {
+export default function ({ env, thisConfig }) {
     if (env.platform !== 'node') return;
 
     return {
@@ -45,7 +45,9 @@ export default function (env) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            localDir: `[config.storage.package.rootDir]/.local`,
+            get localDir() {
+                return `${this.rootDir}/.local`;
+            },
 
             /**
              * @name            cacheDir
@@ -58,7 +60,9 @@ export default function (env) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            cacheDir: `[config.storage.package.localDir]/cache`,
+            get cacheDir() {
+                return `${this.localDir}/cache`;
+            },
 
             /**
              * @name            tmpDir
@@ -71,7 +75,9 @@ export default function (env) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            tmpDir: `[config.storage.package.localDir]/temp`,
+            get tmpDir() {
+                return `${this.localDir}/tmp`;
+            },
 
             /**
              * @name            nodeModulesDir
@@ -84,7 +90,9 @@ export default function (env) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            nodeModulesDir: `[config.storage.package.rootDir]/node_modules`,
+            get nodeModulesDir() {
+                return `${this.rootDir}/node_modules`;
+            },
         },
 
         sugar: {
@@ -114,7 +122,9 @@ export default function (env) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            rootDir: `[config.storage.package.rootDir]/src`,
+            get rootDir() {
+                return `${thisConfig.package.rootDir}/src`;
+            },
 
             /**
              * @name            jsDir
@@ -127,7 +137,9 @@ export default function (env) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            jsDir: `[config.storage.src.rootDir]/js`,
+            get jsDir() {
+                return `${this.rootDir}/js`;
+            },
 
             /**
              * @name            nodeDir
@@ -140,7 +152,9 @@ export default function (env) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            nodeDir: `[config.storage.src.rootDir]/node`,
+            get nodeDir() {
+                return `${this.rootDir}/node`;
+            },
 
             /**
              * @name            cssDir
@@ -153,7 +167,9 @@ export default function (env) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            cssDir: `[config.storage.src.rootDir]/css`,
+            get cssDir() {
+                return `${this.rootDir}/css`;
+            },
 
             /**
              * @name            configDir
@@ -166,7 +182,9 @@ export default function (env) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            configDir: `[config.storage.src.rootDir]/config`,
+            get configDir() {
+                return `${this.rootDir}/config`;
+            },
 
             /**
              * @name            docDir
@@ -179,7 +197,9 @@ export default function (env) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            docDir: `[config.storage.src.rootDir]/doc`,
+            get docDir() {
+                return `${this.rootDir}/doc`;
+            },
 
             /**
              * @name            fontsDir
@@ -192,7 +212,9 @@ export default function (env) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            fontsDir: `[config.storage.src.rootDir]/fonts`,
+            get fontsDir() {
+                return `${this.rootDir}/fonts`;
+            },
 
             /**
              * @name            iconsDir
@@ -205,7 +227,9 @@ export default function (env) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            iconsDir: `[config.storage.src.rootDir]/icons`,
+            get iconsDir() {
+                return `${this.rootDir}/icons`;
+            },
 
             /**
              * @name            imgDir
@@ -218,7 +242,9 @@ export default function (env) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            imgDir: `[config.storage.src.rootDir]/img`,
+            get imgDir() {
+                return `${this.rootDir}/img`;
+            },
 
             /**
              * @name            pagesDir
@@ -231,7 +257,9 @@ export default function (env) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            pagesDir: `[config.storage.src.rootDir]/pages`,
+            get pagesDir() {
+                return `${this.rootDir}/pages`;
+            },
 
             /**
              * @name            publicDir
@@ -244,7 +272,9 @@ export default function (env) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            publicDir: `[config.storage.src.rootDir]/public`,
+            get publicDir() {
+                return `${this.rootDir}/public`;
+            },
 
             /**
              * @name            viewsDir
@@ -257,7 +287,9 @@ export default function (env) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            viewsDir: `[config.storage.src.rootDir]/views`,
+            get viewsDir() {
+                return `${this.rootDir}/views`;
+            },
         },
 
         dist: {
@@ -272,7 +304,9 @@ export default function (env) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            rootDir: `[config.storage.package.rootDir]/dist`,
+            get rootDir() {
+                return `${thisConfig.package.rootDir}/dist`;
+            },
 
             /**
              * @name            jsDir
@@ -285,7 +319,9 @@ export default function (env) {
              * @since           2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            jsDir: `[config.storage.dist.rootDir]/js`,
+            get jsDir() {
+                return `${this.rootDir}/js`;
+            },
 
             /**
              * @name            nodeDir
@@ -298,7 +334,9 @@ export default function (env) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            nodeDir: `[config.storage.dist.rootDir]/node`,
+            get nodeDir() {
+                return `${this.rootDir}/node`;
+            },
 
             /**
              * @name            cssDir
@@ -311,7 +349,9 @@ export default function (env) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            cssDir: `[config.storage.dist.rootDir]/css`,
+            get cssDir() {
+                return `${this.rootDir}/css`;
+            },
 
             /**
              * @name            docDir
@@ -324,7 +364,9 @@ export default function (env) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            docDir: `[config.storage.dist.rootDir]/doc`,
+            get docDir() {
+                return `${this.rootDir}/doc`;
+            },
 
             /**
              * @name            fontsDir
@@ -337,7 +379,9 @@ export default function (env) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            fontsDir: `[config.storage.dist.rootDir]/fonts`,
+            get fontsDir() {
+                return `${this.rootDir}/fonts`;
+            },
 
             /**
              * @name            iconsDir
@@ -350,7 +394,9 @@ export default function (env) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            iconsDir: `[config.storage.dist.rootDir]/icons`,
+            get iconsDir() {
+                return `${this.rootDir}/icons`;
+            },
 
             /**
              * @name            imgDir
@@ -363,7 +409,9 @@ export default function (env) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            imgDir: `[config.storage.dist.rootDir]/img`,
+            get imgDir() {
+                return `${this.rootDir}/img`;
+            },
 
             /**
              * @name            pagesDir
@@ -376,7 +424,9 @@ export default function (env) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            pagesDir: `[config.storage.dist.rootDir]/views`,
+            get pagesDir() {
+                return `${this.rootDir}/pages`;
+            },
 
             /**
              * @name            viewsDir
@@ -389,7 +439,9 @@ export default function (env) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            viewsDir: `[config.storage.dist.rootDir]/views`,
+            get viewsDir() {
+                return `${this.rootDir}/views`;
+            },
         },
 
         /**

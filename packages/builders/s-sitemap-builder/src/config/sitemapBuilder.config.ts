@@ -1,7 +1,7 @@
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __path from 'path';
 
-export default (env, config) => {
+export default ({ env, config }) => {
     if (env.platform !== 'node') return;
     return {
         build: {
@@ -16,7 +16,9 @@ export default (env, config) => {
              * @since           2.0.0
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            output: `[config.storage.src.publicDir]/sitemap.xml`,
+            get output() {
+                return `${config.storage.src.publicDir}/sitemap.xml`;
+            },
         },
         sources: {
             file: {
@@ -67,7 +69,9 @@ export default (env, config) => {
                      * @since           2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    inDir: '[config.storage.src.rootDir]',
+                    get inDir() {
+                        return config.storage.src.rootDir;
+                    },
                 },
                 /**
                  * @name            path
@@ -81,9 +85,7 @@ export default (env, config) => {
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 path: __path.resolve(
-                    `${__dirname(
-                        import.meta,
-                    )}/../node/sources/SSitemapBuilderFileSource`,
+                    `${__dirname()}/../node/sources/SSitemapBuilderFileSource`,
                 ),
             },
             docmap: {
@@ -123,9 +125,7 @@ export default (env, config) => {
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 path: __path.resolve(
-                    `${__dirname(
-                        import.meta,
-                    )}/../node/sources/SSitemapBuilderDocmapSource`,
+                    `${__dirname()}/../node/sources/SSitemapBuilderDocmapSource`,
                 ),
             },
         },

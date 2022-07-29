@@ -1,10 +1,4 @@
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
-
-export function postprocess(env, serveConfig, config) {
-    return serveConfig;
-}
-
-export default (env, config) => {
+export default ({ env, config }) => {
     return {
         img: {
             /**

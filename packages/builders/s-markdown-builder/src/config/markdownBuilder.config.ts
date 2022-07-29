@@ -2,7 +2,7 @@ import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __path from 'path';
 
-export default function (env, config) {
+export default function ({ env, config }) {
     if (env.platform !== 'node') return;
 
     const packageRoot = __packageRoot(__dirname());
@@ -21,6 +21,7 @@ export default function (env, config) {
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             glob: '**/+(README|LICENSE|*.md)',
+
             /**
              * @name            inDir
              * @namespace       config.markdownBuilder.default
@@ -32,7 +33,10 @@ export default function (env, config) {
              * @since       2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            inDir: '[config.storage.src.rootDir]',
+            get inDir() {
+                return config.storage.src.rootDir;
+            },
+
             /**
              * @name            inPath
              * @namespace       config.markdownBuilder.default
@@ -68,7 +72,10 @@ export default function (env, config) {
              * @since       2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            outDir: '[config.storage.dist.rootDir]',
+            get outDir() {
+                return config.storage.dist.rootDir;
+            },
+
             /**
              * @name            outPath
              * @namespace       config.markdownBuilder.default
@@ -589,7 +596,9 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                data: '[config.shieldsio]',
+                get data() {
+                    return config.shieldsio;
+                },
             },
             interface: {
                 /**
@@ -871,7 +880,9 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                data: '[config.readme.layout]',
+                get data() {
+                    return config.readme.layout;
+                },
             },
             license: {
                 /**
@@ -915,7 +926,9 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                data: '[config.license.layout]',
+                get data() {
+                    return config.license.layout;
+                },
             },
         },
         sections: {

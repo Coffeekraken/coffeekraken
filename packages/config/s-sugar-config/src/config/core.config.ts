@@ -1,6 +1,6 @@
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 
-export default function (env) {
+export default function ({ env }) {
     if (env.platform !== 'node') return;
 
     return {

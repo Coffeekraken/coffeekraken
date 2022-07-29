@@ -1,4 +1,4 @@
-export default function (env, config) {
+export default function () {
     return {
         offset: {
             top: 100,

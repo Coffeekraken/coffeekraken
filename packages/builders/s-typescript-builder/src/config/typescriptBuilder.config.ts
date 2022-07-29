@@ -1,4 +1,4 @@
-export default function (env, config) {
+export default function ({ env, config }) {
     if (env.platform !== 'node') return;
 
     return {
@@ -26,7 +26,9 @@ export default function (env, config) {
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        inDir: '[config.storage.src.rootDir]',
+        get inDir() {
+            return config.storage.src.rootDir;
+        },
 
         /**
          * @name            outDir
@@ -40,7 +42,9 @@ export default function (env, config) {
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        outDir: '[config.storage.dist.rootDir]/pkg/%moduleSystem',
+        get outDir() {
+            return `${config.storage.dist.rootDir}/pkg/%moduleSystem`;
+        },
 
         /**
          * @name            formats
@@ -106,6 +110,8 @@ export default function (env, config) {
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        tsconfig: '[config.ts]',
+        get tsconfig() {
+            return config.ts ?? {};
+        },
     };
 }

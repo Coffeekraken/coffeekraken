@@ -41,6 +41,14 @@ export interface IGetFilesSettings {
     ignoreInitial: boolean;
     exclude: string[];
 }
+
+export interface IGetFilesResult {
+    cwd: string;
+    sFile: boolean;
+    exclude: string[];
+    files: (string | __SFile)[];
+}
+
 export default function getFiles(
     paths: string | string[],
     settings?: Partial<IGetFilesSettings>,
@@ -55,7 +63,7 @@ export default function getFiles(
             ...(settings ?? {}),
         };
 
-        let foundFiles: ISTypescriptBuilderResultFile[] = [],
+        let foundFiles: string[] = [],
             watchersReady: any[] = [],
             buildPromises: Promise<any>[] = [];
 
@@ -70,9 +78,14 @@ export default function getFiles(
                 // when all promises are resolved, resolve the promise
                 Promise.all(buildPromises).then(() => {
                     resolve(<ISTypescriptBuilderResult>{
-                        paths,
                         cwd: finalSettings.cwd,
-                        files: foundFiles,
+                        sFile: finalSettings.sFile,
+                        exclude: finalSettings.exclude,
+                        files: foundFiles.map((filePath) => {
+                            return finalSettings.sFile
+                                ? __SFile.new(filePath)
+                                : filePath;
+                        }),
                     });
                 });
             }

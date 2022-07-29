@@ -251,6 +251,9 @@ class SCodeFormatter extends __SClass {
                     watch: finalParams.watch,
                 });
 
+                // handle no watch
+                filesPromise.then(resolve);
+
                 // save all the file paths that has just been savec by the formatter
                 // to avoid process it over and over...
                 const savedStack: string[] = [];
@@ -273,7 +276,7 @@ class SCodeFormatter extends __SClass {
                     const extension = __path.extname(file).replace(/^\./, '');
                     // get the appropriate formatter for this extension
                     const formatter =
-                        this.constructor.getFormatterForExtension(extension);
+                        SCodeFormatter.getFormatterForExtension(extension);
                     if (!formatter) {
                         emit('log', {
                             type: __SLog.TYPE_WARN,
@@ -321,10 +324,6 @@ class SCodeFormatter extends __SClass {
                         }
                     }
                 });
-
-                if (!finalParams.watch) {
-                    resolve();
-                }
             },
             {
                 eventEmitter: {

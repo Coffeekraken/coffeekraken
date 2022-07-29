@@ -1,4 +1,4 @@
-export default function (env) {
+export default function ({ env, config }) {
     if (env.platform !== 'node') return;
 
     return {
@@ -13,7 +13,9 @@ export default function (env) {
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        input: '[config.storage.src.rootDir]/favicon/favicon.png',
+        get input() {
+            return `${config.storage.src.rootDir}/favicon/favicon.png`;
+        },
 
         /**
          * @name            outDir
@@ -26,7 +28,9 @@ export default function (env) {
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        outDir: '[config.storage.dist.rootDir]/favicon',
+        get outDir() {
+            return `${config.storage.dist.rootDir}/favicon`;
+        },
 
         /**
          * @name            settings

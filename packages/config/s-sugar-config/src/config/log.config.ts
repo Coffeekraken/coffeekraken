@@ -1,8 +1,6 @@
 // TODO: doc
 
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-
-export default function (env, config) {
+export default function ({ env, config }) {
     if (env.platform !== 'node') return;
 
     return {

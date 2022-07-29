@@ -1,6 +1,6 @@
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
-export default function (env, config) {
+export default function ({ env, config }) {
     if (env.platform !== 'node') return;
 
     return {
@@ -41,7 +41,9 @@ export default function (env, config) {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         requirements: {
-            commands: ['[config.package.manager]'],
+            get commands() {
+                return [config.package.manager];
+            },
         },
         /**
          * @name            defaultStack
@@ -80,17 +82,19 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    createApp: __deepMerge({
-                        title: 'Create the app',
-                        description:
-                            'Create the app using the create-next-app utility',
-                        command: `npx create-next-app next-js --typescript`,
-                        after() {
-                            process.chdir(`${process.cwd()}/next-js`);
-                        },
-                        params: {},
-                        settings: {},
-                    }),
+                    get createApp() {
+                        return __deepMerge({
+                            title: 'Create the app',
+                            description:
+                                'Create the app using the create-next-app utility',
+                            command: `npx create-next-app next-js --typescript`,
+                            after() {
+                                process.chdir(`${process.cwd()}/next-js`);
+                            },
+                            params: {},
+                            settings: {},
+                        });
+                    },
                     /**
                      * @name            rename
                      * @namespace       config.kitchenRecipeNextJs.stacks.new.actions
@@ -101,9 +105,11 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    rename: __deepMerge(config.kitchen.actions.rename, {
-                        params: {},
-                    }),
+                    get rename() {
+                        return __deepMerge(config.kitchen.actions.rename, {
+                            params: {},
+                        });
+                    },
                     /**
                      * @name            addSugarJson
                      * @namespace       config.kitchenRecipeNextJs.stacks.new.actions
@@ -114,14 +120,16 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    addSugarJson: __deepMerge(
-                        config.kitchen.actions.addSugarJson,
-                        {
-                            params: {
-                                recipe: 'nextJs',
+                    get addSugarJson() {
+                        return __deepMerge(
+                            config.kitchen.actions.addSugarJson,
+                            {
+                                params: {
+                                    recipe: 'nextJs',
+                                },
                             },
-                        },
-                    ),
+                        );
+                    },
                     /**
                      * @name            addManifestJson
                      * @namespace       config.kitchenRecipeNextJs.stacks.new.actions
@@ -132,12 +140,14 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    addManifestJson: __deepMerge(
-                        config.kitchen.actions.addManifestJson,
-                        {
-                            params: {},
-                        },
-                    ),
+                    get addManifestJson() {
+                        return __deepMerge(
+                            config.kitchen.actions.addManifestJson,
+                            {
+                                params: {},
+                            },
+                        );
+                    },
 
                     /**
                      * @name            addSugarPostcss
@@ -149,12 +159,14 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    addSugarPostcss: __deepMerge(
-                        config.kitchen.actions.addSugarPostcss,
-                        {
-                            params: {},
-                        },
-                    ),
+                    get addSugarPostcss() {
+                        return __deepMerge(
+                            config.kitchen.actions.addSugarPostcss,
+                            {
+                                params: {},
+                            },
+                        );
+                    },
 
                     // /**
                     //  * @name            installDependencies
@@ -197,7 +209,10 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    frontendServer: '[config.kitchen.actions.frontendServer]',
+                    get frontendServer() {
+                        return config.kitchen.actions.frontendServer;
+                    },
+
                     /**
                      * @name            vite
                      * @namespace       config.kitchenRecipeNextJs.stacks.dev.actions
@@ -209,7 +224,9 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    vite: '[config.kitchen.actions.vite]',
+                    get vite() {
+                        return config.kitchen.actions.vite;
+                    },
                 },
             },
             prod: {
@@ -251,7 +268,9 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    frontendServer: '[config.kitchen.actions.frontendServer]',
+                    get frontendServer() {
+                        return config.kitchen.actions.frontendServer;
+                    },
                 },
             },
             build: {
@@ -293,7 +312,10 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    postcssBuild: '[config.kitchen.actions.postcssBuild]',
+                    get postcssBuild() {
+                        return config.kitchen.actions.postcssBuild;
+                    },
+
                     /**
                      * @name            viteBuild
                      * @namespace       config.kitchenRecipeNextJs.stacks.build.actions
@@ -305,7 +327,10 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    viteBuild: '[config.kitchen.actions.viteBuild]',
+                    get viteBuild() {
+                        return config.kitchen.actions.viteBuild;
+                    },
+
                     /**
                      * @name            imagesBuild
                      * @namespace       config.kitchenRecipeNextJs.stacks.build.actions
@@ -317,7 +342,9 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    imagesBuild: '[config.kitchen.actions.imagesBuild]',
+                    get imagesBuild() {
+                        return config.kitchen.actions.imagesBuild;
+                    },
                 },
             },
         },

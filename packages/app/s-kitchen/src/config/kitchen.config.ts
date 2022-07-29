@@ -1,4 +1,4 @@
-export default function (env, config) {
+export default function ({ env, config }) {
     if (env.platform !== 'node') return;
     return {
         defaultRecipe: 'default',
@@ -17,7 +17,10 @@ export default function (env, config) {
              * @since       2.0.0
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            generic: '[config.kitchenRecipeGeneric]',
+            get generic() {
+                return config.kitchenRecipeGeneric;
+            },
+
             /**
              * @name            nextJs
              * @namespace       config.kitchen.recipes
@@ -29,7 +32,9 @@ export default function (env, config) {
              * @since       2.0.0
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            nextJs: '[config.kitchenRecipeNextJs]',
+            get nextJs() {
+                return config.kitchenRecipeNextJs;
+            },
         },
 
         actions: {

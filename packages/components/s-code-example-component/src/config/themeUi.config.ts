@@ -1,4 +1,4 @@
-export default function (env, config) {
+export default function ({ env, config, theme }) {
     return {
         codeExample: {
             /**
@@ -12,7 +12,10 @@ export default function (env, config) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingInline: '[theme.padding.50]',
+            get paddingInline() {
+                return theme.padding['50'];
+            },
+
             /**
              * @name          paddingBlock
              * @namespace     config.themeUi.codeExample
@@ -24,7 +27,10 @@ export default function (env, config) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingBlock: '[theme.padding.50]',
+            get paddingBlock() {
+                return theme.padding['50'];
+            },
+
             /**
              * @name          borderRadius
              * @namespace     config.themeUi.codeExample
@@ -36,7 +42,10 @@ export default function (env, config) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderRadius: '[theme.ui.default.borderRadius]',
+            get borderRadius() {
+                return theme.ui.default.borderRadius;
+            },
+
             /**
              * @name          borderWidth
              * @namespace     config.themeUi.codeExample
@@ -48,7 +57,10 @@ export default function (env, config) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderWidth: '[theme.ui.default.borderWidth]',
+            get borderWidth() {
+                return theme.ui.default.borderWidth;
+            },
+
             /**
              * @name          transition
              * @namespace     config.themeUi.codeExample
@@ -60,7 +72,10 @@ export default function (env, config) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            transition: '[theme.ui.default.transition]',
+            get transition() {
+                return theme.ui.default.transition;
+            },
+
             /**
              * @name          defaultColor
              * @namespace     config.themeUi.codeExample
@@ -72,7 +87,10 @@ export default function (env, config) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultColor: '[theme.ui.default.defaultColor]',
+            get defaultColor() {
+                return theme.ui.default.defaultColor;
+            },
+
             /**
              * @name          defaultStyle
              * @namespace     config.themeUi.codeExample
@@ -84,7 +102,10 @@ export default function (env, config) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultStyle: '[theme.ui.default.defaultStyle]',
+            get defaultStyle() {
+                return theme.ui.default.defaultStyle;
+            },
+
             /**
              * @name          depth
              * @namespace     config.themeUi.codeExample
@@ -96,7 +117,10 @@ export default function (env, config) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            depth: '[theme.ui.default.depth]',
+            get depth() {
+                return theme.ui.default.depth;
+            },
+
             /**
              * @name          rhythmVertical
              * @namespace     config.themeUi.codeExample
@@ -108,7 +132,9 @@ export default function (env, config) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            rhythmVertical: '[theme.ui.default.rhythmVertical]',
+            get rhythmVertical() {
+                return theme.ui.default.rhythmVertical;
+            },
         },
     };
 }

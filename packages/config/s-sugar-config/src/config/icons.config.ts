@@ -1,4 +1,4 @@
-export default function (env, config) {
+export default function ({ env, config }) {
     if (env.platform !== 'node') return;
 
     return {
@@ -18,8 +18,7 @@ export default function (env, config) {
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            url:
-                'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css',
+            url: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css',
         },
 
         fantasticon: {
@@ -47,7 +46,9 @@ export default function (env, config) {
              * @since       2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            outputDir: '[config.storage.src.fontsDir]/sugar-icons',
+            get outputDir() {
+                return `${config.storage.src.fontsDir}/sugar-icons`;
+            },
 
             /**
              * @name            serveFontsDir
@@ -60,7 +61,9 @@ export default function (env, config) {
              * @since       2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            serveFontsDir: `[config.storage.dist.fontsDir]/sugar-icons`,
+            get serveFontsDir() {
+                return `${config.storage.dist.fontsDir}/sugar-icons`;
+            },
         },
     };
 }

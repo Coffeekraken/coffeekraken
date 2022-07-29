@@ -1,12 +1,12 @@
 import __loadConfigFile from '@coffeekraken/sugar/node/config/loadConfigFile';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
-export async function preprocess(env, rawViteConfig, rawConfig) {
+export async function preprocess({ env, thisConfig }) {
     const config = (await __loadConfigFile('tsconfig.json')) ?? {};
-    return __deepMerge(rawViteConfig, config);
+    return __deepMerge(thisConfig, config);
 }
 
-export default function (env, config) {
+export default function ({ env, config }) {
     if (env.platform !== 'node') return;
 
     return {

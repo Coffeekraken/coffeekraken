@@ -1,4 +1,4 @@
-export default (env, config) => {
+export default (env, config, theme) => {
     return {
         colorPicker: {
             /**
@@ -12,7 +12,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingInline: '[theme.ui.default.paddingInline]',
+            get paddingInline() {
+                return theme.ui.default.paddingInline;
+            },
             /**
              * @name          paddingBlock
              * @namespace     config.themeUi.colorPicker
@@ -24,7 +26,10 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingBlock: '[theme.ui.default.paddingBlock]',
+            get paddingBlock() {
+                return theme.ui.default.paddingBlock;
+            },
+
             /**
              * @name          borderRadius
              * @namespace     config.themeUi.colorPicker
@@ -36,7 +41,10 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderRadius: '[theme.ui.default.borderRadius]',
+            get borderRadius() {
+                return theme.ui.default.borderRadius;
+            },
+
             /**
              * @name          transition
              * @namespace     config.themeUi.colorPicker
@@ -48,7 +56,10 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            transition: '[theme.ui.default.transition]',
+            get transition() {
+                return theme.ui.default.transition;
+            },
+
             /**
              * @name          defaultColor
              * @namespace     config.themeUi.colorPicker
@@ -60,7 +71,10 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultColor: '[theme.ui.default.defaultColor]',
+            get defaultColor() {
+                return theme.ui.default.defaultColor;
+            },
+
             /**
              * @name          defaultStyle
              * @namespace     config.themeUi.colorPicker
@@ -72,7 +86,10 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultStyle: '[theme.ui.default.defaultStyle]',
+            get defaultStyle() {
+                return theme.ui.default.defaultStack;
+            },
+
             /**
              * @name          depth
              * @namespace     config.themeUi.colorPicker
@@ -84,7 +101,10 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            depth: 100,
+            get depth() {
+                return 100;
+            },
+
             /**
              * @name          rhythmVertical
              * @namespace     config.themeUi.colorPicker
@@ -96,7 +116,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            rhythmVertical: '[theme.ui.default.rhythmVertical]',
+            get rhythmVertical() {
+                return theme.ui.default.rhythmVertical;
+            },
         },
     };
 };

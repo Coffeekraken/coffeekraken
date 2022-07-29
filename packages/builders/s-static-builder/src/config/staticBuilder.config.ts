@@ -1,4 +1,4 @@
-export default function (env, config) {
+export default function ({ env, config }) {
     if (env.platform !== 'node') return;
     return {
         /**
@@ -12,7 +12,10 @@ export default function (env, config) {
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        input: '[config.storage.src.publicDir]/sitemap.xml',
+        get input() {
+            return `${this.storage.src.publicDir}/sitemap.xml`;
+        },
+
         /**
          * @name            outDir
          * @namespace       config.staticBuilder
@@ -24,7 +27,10 @@ export default function (env, config) {
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        outDir: '[config.storage.package.rootDir]/static',
+        get outDir() {
+            return `${config.storage.package.rootDir}/static`;
+        },
+
         /**
          * @name            host
          * @namespace       config.staticBuilder
@@ -36,8 +42,10 @@ export default function (env, config) {
          * @since           2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        host:
-            'http://[config.frontendServer.hostname]:[config.frontendServer.port]',
+        get host() {
+            return `http://${config.frontendServer.hostname}:${config.frontendServer.port}`;
+        },
+
         /**
          * @name            failAfter
          * @namespace       config.staticBuilder
@@ -129,7 +137,10 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                from: '[config.staticBuilder.host]/docmap.json',
+                get from() {
+                    return `${config.staticBuilder.host}/docmap.json`;
+                },
+
                 /**
                  * @name            to
                  * @namespace       config.staticBuilder.assets.docmap
@@ -141,7 +152,9 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                to: '[config.staticBuilder.outDir]/docmap.json',
+                get to() {
+                    return `${config.staticBuilder.outDir}/docmap.json`;
+                },
             },
             public: {
                 /**
@@ -155,7 +168,10 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                from: '[config.storage.src.publicDir]',
+                get from() {
+                    return `${config.storage.src.publicDir}`;
+                },
+
                 /**
                  * @name            glob
                  * @namespace       config.staticBuilder.assets.public
@@ -179,7 +195,9 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                to: '[config.staticBuilder.outDir]',
+                get to() {
+                    return config.staticBuilder.outDir;
+                },
             },
             dist: {
                 /**
@@ -193,7 +211,10 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                from: '[config.storage.dist.rootDir]',
+                get from() {
+                    return config.storage.dist.rootDir;
+                },
+
                 /**
                  * @name            glob
                  * @namespace       config.staticBuilder.assets.dist
@@ -217,7 +238,9 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                to: '[config.staticBuilder.outDir]/dist',
+                get to() {
+                    return `${config.staticBuilder.outDir}/dist`;
+                },
             },
         },
     };

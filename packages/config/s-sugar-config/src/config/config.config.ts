@@ -1,4 +1,4 @@
-export default function (env, config) {
+export default function ({ env, config }) {
     if (env.platform !== 'node') return;
 
     return {
@@ -30,6 +30,8 @@ export default function (env, config) {
              */
             include: [],
         },
-        cacheDir: '[config.storage.package.cacheDir]/config',
+        get cacheDir() {
+            return `${config.storage.package.cacheDir}/views`;
+        },
     };
 }

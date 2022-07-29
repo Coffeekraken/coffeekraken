@@ -1,4 +1,4 @@
-export default function (env, config) {
+export default function ({ env, config }) {
     if (env.platform !== 'node') return;
     return {
         /**
@@ -12,7 +12,10 @@ export default function (env, config) {
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        input: '[config.storage.src.cssDir]/index.css',
+        get input() {
+            return `${config.storage.src.cssDir}/index.css`;
+        },
+
         /**
          * @name            output
          * @namespace       config.postcssBuilder
@@ -24,7 +27,10 @@ export default function (env, config) {
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        output: '[config.storage.dist.cssDir]/index.css',
+        get output() {
+            return `${config.storage.dist.cssDir}/index.css`;
+        },
+
         /**
          * @name            postcss
          * @namespace       config.postcssBuilder
@@ -36,7 +42,10 @@ export default function (env, config) {
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        postcss: '[config.postcss]',
+        get postcss() {
+            return config.postcss;
+        },
+
         /**
          * @name            purgecss
          * @namespace       config.postcssBuilder
@@ -48,6 +57,8 @@ export default function (env, config) {
          * @since       2.0.0
          * @author         Oli vier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        purgecss: '[config.purgecss]',
+        get purgecss() {
+            return config.purgecss;
+        },
     };
 }

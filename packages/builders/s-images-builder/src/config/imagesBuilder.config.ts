@@ -1,4 +1,4 @@
-export default function (env, config) {
+export default function ({ env, config }) {
     if (env.platform !== 'node') return;
 
     return {
@@ -39,7 +39,9 @@ export default function (env, config) {
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        inDir: '[config.storage.src.imgDir]',
+        get inDir() {
+            return config.storage.src.imgDir;
+        },
 
         /**
          * @name            outDir
@@ -52,7 +54,9 @@ export default function (env, config) {
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        outDir: '[config.storage.dist.imgDir]',
+        get outDir() {
+            return config.storage.dist.imgDir;
+        },
 
         /**
          * @name            quality

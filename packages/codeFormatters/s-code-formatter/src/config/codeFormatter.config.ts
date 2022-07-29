@@ -1,4 +1,4 @@
-export default (env, config) => {
+export default ({ env, config }) => {
     if (env.platform !== 'node') return;
 
     return {
@@ -26,6 +26,8 @@ export default (env, config) => {
          * @since           2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com>
          */
-        inDir: '[config.storage.src.rootDir]',
+        get inDir() {
+            return config.storage.src.rootDir;
+        },
     };
 };

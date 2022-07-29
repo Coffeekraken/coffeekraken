@@ -188,6 +188,10 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                 let file = paths[j],
                     filePath = `${path}/${file}`,
                     deleteAfterLoad = false;
+                const configId = filePath
+                    .split('/')
+                    .slice(-1)[0]
+                    .replace(/\.config\.(t|j)s(on)?$/, '');
 
                 if (!filePath.match(/\.(j|t)s(on)?$/)) continue;
 
@@ -224,6 +228,18 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                     importedConfig = await import(filePath);
                 }
 
+                // if (filePath.includes('storage')) {
+                //     console.log(
+                //         'SI',
+                //         Object.assign(
+                //             {},
+                //             importedConfig.default({
+                //                 platform: 'node',
+                //             }),
+                //         ),
+                //     );
+                // }
+
                 if (deleteAfterLoad) {
                     setTimeout(() => {
                         try {
@@ -234,7 +250,21 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
 
                 let configData = importedConfig.default;
                 if (typeof configData === 'function') {
-                    configData = configData(env, configObj ?? {});
+                    if (configId === 'storage') {
+                        configData = configData({
+                            env,
+                            config: configObj ?? {},
+                            get thisConfig() {
+                                return configObj[configId];
+                            },
+                            get theme() {
+                                const themeId = `${configObj.theme.theme}-${configObj.theme.variant}`;
+                                return configObj.theme.themes[themeId];
+                            },
+                        });
+                    } else {
+                        configData = configData(env, configObj ?? {});
+                    }
                 }
 
                 const configKey = __path.basename(

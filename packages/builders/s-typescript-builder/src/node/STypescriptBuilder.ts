@@ -6,10 +6,10 @@ import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import __getFiles from '@coffeekraken/sugar/node/fs/getFiles';
 import __monorepoToPackageAbsolutePathDeepMap from '@coffeekraken/sugar/node/monorepo/monorepoToPackageAbsolutePathDeepMap';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __chokidar from 'chokidar';
 import __fs from 'fs';
 import __path from 'path';
 import __ts from 'typescript';
@@ -73,6 +73,7 @@ export interface ISTypescriptBuilderResultFile {
         | 'esnext'
         | 'node12'
         | 'nodenext';
+    js: string;
     file: __SFile;
 }
 
@@ -211,16 +212,14 @@ export default class STypescriptBuilder extends __SBuilder {
     ): Promise<ISTypescriptBuilderResult> {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
-                let buildedFiles: ISTypescriptBuilderResultFile[] = [],
-                    watchersReady: any[] = [],
-                    buildPromises: Promise<any>[] = [];
-
                 const {
                     default: __STypescriptBuilderBuildParamsInterface,
                     // @ts-ignore
                 } = await import(
                     `${__dirname()}/interface/STypescriptBuilderBuildParamsInterface`
                 );
+
+                const buildedFiles: ISTypescriptBuilderResultFile[] = [];
 
                 // @ts-ignore
                 const finalParams: ISTypescriptBuilderBuildParams =
@@ -229,44 +228,36 @@ export default class STypescriptBuilder extends __SBuilder {
                         params.packageRoot ?? process.cwd(),
                     );
 
+                // console.log(
+                //     'FF',
+                //     // JSON.stringify(
+                //     //     __STypescriptBuilderBuildParamsInterface.defaults(),
+                //     //     null,
+                //     //     4,
+                //     // ),
+                //     JSON.stringify(__SSugarConfig.get('storage'), null, 4),
+                // );
+                return;
+
                 // this can be overrided by customSettings bellow
                 let formats = Array.isArray(finalParams.formats)
                     ? finalParams.formats
                     : [finalParams.formats];
-
-                // function used only when the finalParams.watch is false
-                // and keeping track on the watchers ready state.
-                // when all the watchers are in ready state, this mean that the
-                // buildPromises array is full of build promises and we can resolve
-                // this process when they are all resolved
-                function onWatcherReady(watcher: any) {
-                    watchersReady.push(watcher);
-                    if (watchersReady.length === finalParams.glob.length) {
-                        // when all promises are resolved, resolve the promise
-                        Promise.all(buildPromises).then(() => {
-                            resolve(<ISTypescriptBuilderResult>{
-                                glob: finalParams.glob,
-                                inDir: finalParams.inDir,
-                                outDir: finalParams.outDir,
-                                formats,
-                                platform: finalParams.platform,
-                                files: buildedFiles,
-                            });
-                        });
-                    }
-                }
 
                 const globs = Array.isArray(finalParams.glob)
                     ? finalParams.glob
                     : [finalParams.glob];
 
                 if (!finalParams.silent) {
+                    console.log(finalParams);
+
                     emit('log', {
                         type: __SLog.TYPE_INFO,
                         value: `<yellow>○</yellow> Globs              : <yellow>${globs.join(
                             ',',
                         )}</yellow>`,
                     });
+                    console.log(finalParams.inDir);
                     emit('log', {
                         type: __SLog.TYPE_INFO,
                         value: `<yellow>○</yellow> Input directory   : <cyan>${finalParams.inDir}</cyan>`,
@@ -303,105 +294,92 @@ export default class STypescriptBuilder extends __SBuilder {
                     });
                 }
 
-                // loop on each glob(s) and build the files
-                globs.forEach((glob) => {
-                    // listen for file update and add
-                    const watcher = __chokidar.watch(glob, {
-                        cwd: finalParams.inDir,
-                        ignored: finalParams.exclude,
-                        ignoreInitial:
-                            finalParams.watch && !finalParams.buildInitial,
-                    });
+                // watch using chokidar
+                const filesPromise = __getFiles(globs, {
+                    cwd: finalParams.inDir,
+                    ignoreInitial: !finalParams.buildInitial,
+                    watch: finalParams.watch,
+                });
 
-                    // keep track on the watchers ready state
-                    // to know when we can watch for all the buildPromises
-                    // state and resolve the process at them end...
-                    if (!finalParams.watch) {
-                        watcher.on('ready', () => {
-                            onWatcherReady(watcher);
-                        });
+                // handle no watch
+                filesPromise.then(() => {
+                    resolve({
+                        glob: finalParams.glob,
+                        inDir: finalParams.inDir,
+                        outDir: finalParams.outDir,
+                        format: finalParams.formats,
+                        platform: finalParams.platform,
+                        files: buildedFiles,
+                    });
+                });
+
+                // save all the file paths that has just been savec by the formatter
+                // to avoid process it over and over...
+                const buildedStack: string[] = [];
+
+                // listen for files change and add
+                filesPromise.on('add,change', async (filePath) => {
+                    console.log('CHANGE', filePath);
+
+                    // avoid to process in loop the same file saved over and over
+                    const savedFileIdx = buildedStack.indexOf(filePath);
+                    if (savedFileIdx !== -1) {
+                        return;
                     }
 
-                    ['add', 'change'].forEach((listener) => {
-                        watcher.on(listener, async (relPath) => {
-                            // @TODO     Implement local file settings
-                            // const localConfigFile = await __findUp(
-                            //     'typescriptBuilder.config.js',
-                            //     {
-                            //         cwd: `${finalParams.inDir}/${__path.dirname(
-                            //             relPath,
-                            //         )}`,
-                            //     },
-                            // );
+                    const relPath = __path.relative(
+                        finalParams.inDir,
+                        filePath,
+                    );
 
-                            // let localConfig = {};
-                            // if (localConfigFile?.length) {
-                            //     localConfig = (
-                            //         await import(localConfigFile[0].path)
-                            //     ).default;
-                            // }
+                    let buildParams = Object.assign({}, finalParams);
 
-                            let buildParams = Object.assign({}, finalParams);
+                    for (let [id, customSettings] of Object.entries(
+                        __SSugarConfig.get('typescriptBuilder.customSettings'),
+                    )) {
+                        if (__SGlob.match(filePath, customSettings.glob)) {
+                            formats =
+                                customSettings.settings?.formats ?? formats;
+                            buildParams = __deepMerge(
+                                buildParams,
+                                customSettings.settings ?? {},
+                            );
+                            break;
+                        }
+                    }
 
-                            for (let [id, customSettings] of Object.entries(
-                                __SSugarConfig.get(
-                                    'typescriptBuilder.customSettings',
-                                ),
-                            )) {
-                                if (
-                                    __SGlob.match(
-                                        `${finalParams.inDir}/${relPath}`,
-                                        customSettings.glob,
-                                    )
-                                ) {
-                                    formats =
-                                        customSettings.settings?.formats ??
-                                        formats;
-                                    buildParams = __deepMerge(
-                                        buildParams,
-                                        customSettings.settings ?? {},
-                                    );
-                                    break;
-                                }
-                            }
+                    // "localize" the file paths to the current package root
+                    buildParams = __monorepoToPackageAbsolutePathDeepMap(
+                        buildParams,
+                        finalParams.packageRoot ?? process.cwd(),
+                    );
 
-                            // "localize" the file paths to the current package root
-                            buildParams =
-                                __monorepoToPackageAbsolutePathDeepMap(
+                    // generate all the requested formats
+                    formats.forEach(async (format) => {
+                        const buildedFileRes = await pipe(
+                            this._buildFile(
+                                __deepMerge(
+                                    {
+                                        cwd: finalParams.inDir,
+                                        relPath,
+                                        path: filePath,
+                                        format,
+                                        platform: finalParams.platform,
+                                        outDir: finalParams.outDir,
+                                    },
                                     buildParams,
-                                    finalParams.packageRoot ?? process.cwd(),
-                                );
+                                    {
+                                        watch: false,
+                                    },
+                                ),
+                                finalParams,
+                            ),
+                        );
 
-                            // generate all the requested formats
-                            formats.forEach(async (format) => {
-                                const pro = pipe(
-                                    this._buildFile(
-                                        __deepMerge(
-                                            {
-                                                cwd: finalParams.inDir,
-                                                relPath,
-                                                path: `${finalParams.inDir}/${relPath}`,
-                                                format,
-                                                platform: finalParams.platform,
-                                                outDir: finalParams.outDir,
-                                            },
-                                            buildParams,
-                                            {
-                                                watch: false,
-                                            },
-                                        ),
-                                        finalParams,
-                                    ),
-                                );
-                                buildPromises.push(pro);
-                                const fileResult = await pro;
-                                buildedFiles.push(fileResult);
-                            });
-                        });
+                        if (!buildedFiles.includes(buildedFileRes)) {
+                            buildedFiles.push(buildedFileRes);
+                        }
                     });
-
-                    // store the watcher for later use
-                    this._watchersByGlob[glob] = watcher;
                 });
             },
             {

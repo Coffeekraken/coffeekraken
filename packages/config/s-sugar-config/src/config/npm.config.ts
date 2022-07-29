@@ -1,4 +1,4 @@
-export default function (env) {
+export default function ({ env, config }) {
     if (env.platform !== 'node') return;
 
     return {
@@ -13,6 +13,8 @@ export default function (env) {
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        rootDir: `[config.storage.package.rootDir]/node_modules`,
+        get rootDir() {
+            return `${config.storage.package.rootDir}/node_modules`;
+        },
     };
 }

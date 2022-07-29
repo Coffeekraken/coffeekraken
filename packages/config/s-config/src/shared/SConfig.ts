@@ -442,7 +442,15 @@ export default class SConfig {
                 this.config[configKey] =
                     await this.constructor._registeredPreprocesses[this.id][
                         configKey
-                    ](this.settings.env, this.config[configKey], this.config);
+                    ]({
+                        env: this.settings.env,
+                        config: this.config,
+                        thisConfig: this.config[configKey],
+                        get theme() {
+                            const themeId = `${this.config.theme.theme}-${this.config.theme.variant}`;
+                            return this.config.theme.themes[themeId];
+                        },
+                    });
             }
         }
 
@@ -488,7 +496,15 @@ export default class SConfig {
                 this.config[configKey] =
                     await this.constructor._registeredPostprocess[this.id][
                         configKey
-                    ](this.settings.env, this.config[configKey], this.config);
+                    ]({
+                        env: this.settings.env,
+                        config: this.config,
+                        thisConfig: this.config[configKey],
+                        get theme() {
+                            const themeId = `${this.config.theme.theme}-${this.config.theme.variant}`;
+                            return this.config.theme.themes[themeId];
+                        },
+                    });
             }
         }
 

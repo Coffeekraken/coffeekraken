@@ -1,7 +1,4 @@
-import __parseAuthorString from '@coffeekraken/sugar/shared/npm/utils/parseAuthorString';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
-
-export default function (env, config) {
+export default function ({ env, config }) {
     if (env.platform !== 'node') return;
 
     return {
@@ -17,7 +14,10 @@ export default function (env, config) {
              * @since       2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            url: '[config.discord.server.url]',
+            get url() {
+                return `${config.discord.server.url}`;
+            },
+
             /**
              * @name            url
              * @namespace       config.contact.discord
@@ -44,10 +44,10 @@ export default function (env, config) {
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get url() {
-                return `mailto:${(
+                return `mailto:${
                     config?.packageJson?.author?.email ??
                     config?.git?.user?.email
-                )}`;
+                }`;
             },
             /**
              * @name            shield

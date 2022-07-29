@@ -1,4 +1,4 @@
-export default function (env, config) {
+export default function ({ env, config }) {
     return {
         /**
          * @name            layout

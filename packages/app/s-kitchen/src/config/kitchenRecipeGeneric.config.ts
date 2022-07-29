@@ -1,7 +1,7 @@
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __path from 'path';
 
-export default function (env, config) {
+export default function ({ env, config }) {
     if (env.platform !== 'node') return;
 
     return {
@@ -53,7 +53,9 @@ export default function (env, config) {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         requirements: {
-            commands: ['[config.package.manager]', 'composer'],
+            get commands() {
+                return [config.package.manager, 'composer'];
+            },
         },
         /**
          * @name            defaultStack
@@ -306,7 +308,10 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    typescriptBuild: '[config.kitchen.actions.typescriptBuild]',
+                    get typescriptBuild() {
+                        return config.kitchen.actions.typescriptBuild;
+                    },
+
                     /**
                      * @name            frontendServer
                      * @namespace       config.kitchenRecipeDefault.stacks.dev.actions
@@ -318,7 +323,10 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    frontendServer: '[config.kitchen.actions.frontendServer]',
+                    get frontendServer() {
+                        return config.kitchen.actions.frontendServer;
+                    },
+
                     /**
                      * @name            corsProxy
                      * @namespace       config.kitchenRecipeDefault.stacks.dev.actions
@@ -330,7 +338,10 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    corsProxy: '[config.kitchen.actions.corsProxy]',
+                    get corsProxy() {
+                        return config.kitchen.actions.corsProxy;
+                    },
+
                     /**
                      * @name            vite
                      * @namespace       config.kitchenRecipeDefault.stacks.dev.actions
@@ -342,7 +353,10 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    vite: '[config.kitchen.actions.vite]',
+                    get vite() {
+                        return config.kitchen.actions.vite;
+                    },
+
                     /**
                      * @name            format
                      * @namespace       config.kitchenRecipeDefault.stacks.dev.actions
@@ -354,7 +368,9 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    format: '[config.kitchen.actions.format]',
+                    get format() {
+                        return config.kitchen.actions.format;
+                    },
                 },
             },
             prod: {
@@ -396,7 +412,10 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    frontendServer: '[config.kitchen.actions.frontendServer]',
+                    get frontendServer() {
+                        return config.kitchen.actions.frontendServer;
+                    },
+
                     /**
                      * @name            corsProxy
                      * @namespace       config.kitchenRecipeDefault.stacks.prod.actions
@@ -408,7 +427,9 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    corsProxy: '[config.kitchen.actions.corsProxy]',
+                    get corsProxy() {
+                        return config.kitchen.actions.corsProxy;
+                    },
                 },
             },
             build: {
@@ -450,7 +471,10 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    postcssBuild: '[config.kitchen.actions.postcssBuild]',
+                    get postcssBuild() {
+                        return config.kitchen.actions.postcssBuild;
+                    },
+
                     /**
                      * @name            viteBuild
                      * @namespace       config.kitchenRecipeDefault.stacks.build.actions
@@ -462,7 +486,10 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    viteBuild: '[config.kitchen.actions.viteBuild]',
+                    get viteBuild() {
+                        return config.kitchen.actions.viteBuild;
+                    },
+
                     /**
                      * @name            imagesBuild
                      * @namespace       config.kitchenRecipeDefault.stacks.build.actions
@@ -474,7 +501,10 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    imagesBuild: '[config.kitchen.actions.imagesBuild]',
+                    get imagesBuild() {
+                        return config.kitchen.actions.imagesBuild;
+                    },
+
                     /**
                      * @name            faviconBuild
                      * @namespace       config.kitchenRecipeDefault.stacks.build.actions
@@ -486,7 +516,10 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    faviconBuild: '[config.kitchen.actions.faviconBuild]',
+                    get faviconBuild() {
+                        return config.kitchen.actions.faviconBuild;
+                    },
+
                     /**
                      * @name            docmapBuild
                      * @namespace       config.kitchenRecipeDefault.stacks.build.actions
@@ -498,7 +531,10 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    docmapBuild: '[config.kitchen.actions.docmapBuild]',
+                    get docmapBuild() {
+                        return config.kitchen.actions.docmapBuild;
+                    },
+
                     /**
                      * @name            sitemapBuild
                      * @namespace       config.kitchenRecipeDefault.stacks.build.actions
@@ -510,7 +546,10 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    sitemapBuild: '[config.kitchen.actions.sitemapBuild]',
+                    get sitemapBuild() {
+                        return config.kitchen.actions.sitemapBuild;
+                    },
+
                     /**
                      * @name            copyAssets
                      * @namespace       config.kitchenRecipeDefault.stacks.build.actions

@@ -1,15 +1,15 @@
 import __loadConfigFile from '@coffeekraken/sugar/node/config/loadConfigFile';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
-export async function preprocess(env, rawPostcssConfig, rawConfig) {
+export async function preprocess({ env, thisConfig }) {
     return __deepMerge(
-        Object.assign({}, rawPostcssConfig),
+        Object.assign({}, thisConfig),
         (await __loadConfigFile('postcss.config.js')) ?? {},
         (await __loadConfigFile('.postcssrc.json')) ?? {},
     );
 }
 
-export default function (env, config) {
+export default function ({ env, config }) {
     if (env.platform !== 'node') return;
 
     return {

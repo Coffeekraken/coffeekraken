@@ -14,6 +14,11 @@
 <integrity>5ONv8Ke354Lzn4rFeiF8xXuVyicgx+gC62B9JYVcEi4=</integrity>
   </url>
   <url>
+<title>SRunCommandParamsInterface</title>
+<loc>/api/@coffeekraken.sugar.cli.interface.SRunCommandParamsInterface</loc>
+<integrity>HSGZB0GynLMnO4yHPAPD1VrVpPbohNZwAj3Qu8dlznA=</integrity>
+  </url>
+  <url>
 <title>DrawerWebcomponent</title>
 <loc>/api/@coffeekraken.sugar.drawer-webcomponent.DrawerWebcomponent</loc>
 <integrity>3iP/hqilCA2Wh6ZmAaIRJqqzNqyuu8JLC3yWlo8zqi8=</integrity>
@@ -224,9 +229,14 @@
 <integrity>WQd8kRIxkqjz3vpDEBMy6VKIj+GMB+CTh6+WY81YU6s=</integrity>
   </url>
   <url>
-<title>localStorage</title>
-<loc>/api/@coffeekraken.sugar.js.storage.localStorage</loc>
-<integrity>4xlyVdCOwPDZPSJfx+J7RN0dSUBrmOrXq4kQFLSt37k=</integrity>
+<title>indexDb</title>
+<loc>/api/@coffeekraken.sugar.js.storage.indexDb</loc>
+<integrity>in/AA3SYS2NGOr+3gh71NIb+eAuvfFobAvGyXYLpqJA=</integrity>
+  </url>
+  <url>
+<title>SIndexDb</title>
+<loc>/api/@coffeekraken.sugar.js.storage.SIndexDb</loc>
+<integrity>LZ2kGU8AyunhxDgiQFDA0996fSkk+aikpMnRi3VAXwM=</integrity>
   </url>
   <url>
 <title>replaceTokens</title>
@@ -256,12 +266,17 @@
   <url>
 <title>dependenciesHash</title>
 <loc>/api/@coffeekraken.sugar.node.dependencies.dependenciesHash</loc>
-<integrity>BOoTpp35RDuu59m5T84myvGvZLXwItXOrHJk3Jll1Tw=</integrity>
+<integrity>ksoCD7X9bAA+ZIsrXR99AENJPuwPCXgbHw/3GTsyDQY=</integrity>
   </url>
   <url>
 <title>handleError</title>
 <loc>/api/@coffeekraken.sugar.node.error.handleError</loc>
 <integrity>5qRkvjoeAZ4YVtYw9dSMJpNDyo9MKp4RTyMp2IgjUaQ=</integrity>
+  </url>
+  <url>
+<title>import</title>
+<loc>/api/@coffeekraken.sugar.node.esm.import</loc>
+<integrity>x7qoAewNo/kg+XBCGyV2JsYP/x2ExFZb2/AATZBnB90=</integrity>
   </url>
   <url>
 <title>require</title>
@@ -379,6 +394,11 @@
 <integrity>/DDBClkBlCr8pB2j7qANofq8uK6IEoKj/1Pi/cVJ4rs=</integrity>
   </url>
   <url>
+<title>getFiles</title>
+<loc>/api/@coffeekraken.sugar.node.fs.getFiles</loc>
+<integrity>8QTmYxZgqt1gPsElT9QymjlrNp5EKJSkjahY/XlUqMw=</integrity>
+  </url>
+  <url>
 <title>grabFirstExisting</title>
 <loc>/api/@coffeekraken.sugar.node.fs.grabFirstExisting</loc>
 <integrity>wG3gVg9rYn0mVbqNBAfOWHgvWVqf6piPHVpi7sAdpkI=</integrity>
@@ -486,7 +506,7 @@
   <url>
 <title>resolveGlob</title>
 <loc>/api/@coffeekraken.sugar.node.glob.resolveGlob</loc>
-<integrity>X6ml6PSVYtuuRDffGkhuwe3cGlzf49iP5AoGiXjMgPY=</integrity>
+<integrity>qKw/Xv+CvTvfqUGh+i3FK1bE5adosU5pZ+QdLuNHaU4=</integrity>
   </url>
   <url>
 <title>childProcess</title>
@@ -559,6 +579,11 @@
 <integrity>3I6ZvbNCdOrB/6lwBlJJr4nZBKXU7VEWQmRwPLRvtAI=</integrity>
   </url>
   <url>
+<title>globalNodeModulesPath</title>
+<loc>/api/@coffeekraken.sugar.node.npm.globalNodeModulesPath</loc>
+<integrity>S3nGhN3fpIpFG3EiLb/PAE3atnDG0BQ1gJStiKG5Lpw=</integrity>
+  </url>
+  <url>
 <title>install</title>
 <loc>/api/@coffeekraken.sugar.node.npm.install</loc>
 <integrity>Ni/3Pv/BOEQs0ohYJ85kdrx+uZBM4AWuAnp0xdpn2hg=</integrity>
@@ -576,7 +601,7 @@
   <url>
 <title>SNpmUnusedProcess</title>
 <loc>/api/@coffeekraken.sugar.node.npm.SNpmUnusedProcess</loc>
-<integrity>NHCeq/sciM9B9PKNmZ0aGWzmLDlReSuT1DREjW5ktA8=</integrity>
+<integrity>iHukY4thyErDMzfVZ2P4KPV3ArPttly9AaMBAFAZB6g=</integrity>
   </url>
   <url>
 <title>scrapeUrl</title>
@@ -691,7 +716,7 @@
   <url>
 <title>packageRoot</title>
 <loc>/api/@coffeekraken.sugar.node.path.packageRoot</loc>
-<integrity>LtXM1ADVoqEc8Jd6113hHkoq2ZQGcuVJCfMo3oar4Ko=</integrity>
+<integrity>OznTw8LtM4mdBKzLAGNXBrbqzGUYt/kIwSFwelIITcs=</integrity>
   </url>
   <url>
 <title>packageRootDir</title>
@@ -789,9 +814,14 @@
 <integrity>8soNzFRzIPhD9WEzA8n2AnIgENoR/BRTD3coohEgwF0=</integrity>
   </url>
   <url>
+<title>sharedContext</title>
+<loc>/api/@coffeekraken.sugar.node.process.sharedContext</loc>
+<integrity>xtbcg4kDG6Lxd7p3I/Y3FoI95LYFHe/hliS7ASKY3yw=</integrity>
+  </url>
+  <url>
 <title>spawn</title>
 <loc>/api/@coffeekraken.sugar.node.process.spawn</loc>
-<integrity>dikTPQawF4lvQ/j1PdaJhY9kQbB9EC+nUEMI3Ych9OI=</integrity>
+<integrity>RokoX3mdlX1gbYyXocfWvPIIesDnmP4aMfIGpQLiHK0=</integrity>
   </url>
   <url>
 <title>detectType</title>
@@ -827,6 +857,11 @@
 <title>pickRandom</title>
 <loc>/api/@coffeekraken.sugar.php.array.pickRandom</loc>
 <integrity>LccfaElWf4ElnQjsJHdwX29B1aPedLhHWhaQ48c81Rg=</integrity>
+  </url>
+  <url>
+<title>pre</title>
+<loc>/api/@coffeekraken.sugar.php.array.pre</loc>
+<integrity>wkcVjLtpPQCeDKvRpC+dsKhmW60HNC3gf4UhJETU0lk=</integrity>
   </url>
   <url>
 <title>assets</title>
@@ -926,7 +961,7 @@
   <url>
 <title>pickRandom</title>
 <loc>/api/@coffeekraken.sugar.shared.array.pickRandom</loc>
-<integrity>AnTey40uORtRiDHdfwCRiw2TUSaHHb8lFMvvgMlNYFs=</integrity>
+<integrity>VBKH7lyYZTZR4lptQdZeTgPyADi5NGNhqDhivZnoTq4=</integrity>
   </url>
   <url>
 <title>proxy</title>
@@ -1000,7 +1035,7 @@
   </url>
   <url>
 <title>parseArgs</title>
-<loc>/api/@coffeekraken.sugar.js.cli.parseArgs</loc>
+<loc>/api/@coffeekraken.sugar.shared.cli.parseArgs</loc>
 <integrity>Cf4J/gA5Fl4s17lbICzUzgInnMZfsIXjgVHrjbjT7MU=</integrity>
   </url>
   <url>
@@ -1339,8 +1374,8 @@
 <integrity>eKaVx0ncmIp/j05jwdWU1UVGX8CYn4L5EPK02Ob4hpA=</integrity>
   </url>
   <url>
-<title>replaceTags</title>
-<loc>/api/@coffeekraken.sugar.js.html.replaceTags</loc>
+<title>tags</title>
+<loc>/api/@coffeekraken.sugar.js.html.tags</loc>
 <integrity>kSJn2N2isxrAFX2v1gN9KTyDK8fgSJmQ3+okc7TJ5O0=</integrity>
   </url>
   <url>
@@ -1604,6 +1639,11 @@
 <integrity>SqBVGM4Vu9+nGxf/IMOJ8VbA8Q+uyh4M8J8qRYpKv5A=</integrity>
   </url>
   <url>
+<title>camelCaseProps</title>
+<loc>/api/@coffeekraken.sugar.shared.object.camelCaseProps</loc>
+<integrity>jzesD8+lTKksLKNkpXRXjC2TGgbglp5xOWkkZ2QQWQM=</integrity>
+  </url>
+  <url>
 <title>clone</title>
 <loc>/api/@coffeekraken.sugar.js.object.clone</loc>
 <integrity>gU+89D7NKGk9UUL12UjG8gpxuAGp8OjAM0nDEYg+rCQ=</integrity>
@@ -1701,7 +1741,7 @@
   <url>
 <title>objectHash</title>
 <loc>/api/@coffeekraken.sugar.node.fs.objectHash</loc>
-<integrity>gdDvMf8bkqfhnPJjWOikoODbjidOzncLqby3pZ81Iwc=</integrity>
+<integrity>blPvDOUgFb7uS0J+72HmDCRv8n6l3/Ox6txBSlkw4cU=</integrity>
   </url>
   <url>
 <title>propertyProxy</title>
@@ -2079,6 +2119,11 @@
 <integrity>R0Zhz2HiowMCvEUsa+FOTJUCITqLvk8sWLPqEPVTaFg=</integrity>
   </url>
   <url>
+<title>whenEntersViewport</title>
+<loc>/api/@coffeekraken.sugar.js.dom.detect.whenEntersViewport</loc>
+<integrity>f8Nxrx74MqKMsCkNONNFzqxamAaL1JjOcspY7BbiAio=</integrity>
+  </url>
+  <url>
 <title>whenInteract</title>
 <loc>/api/@coffeekraken.sugar.js.dom.detect.whenInteract</loc>
 <integrity>I3r437ssNTtUSmmbXmkjG1UinzwmCxuPx3faVemj5aU=</integrity>
@@ -2411,7 +2456,7 @@
   <url>
 <title>getRotateProperties</title>
 <loc>/api/@coffeekraken.sugar.js.dom.style.getRotateProperties</loc>
-<integrity>lGIZdXg0llM7pccM+D98+MKZHfqgKH1kKJHP+sU+0K0=</integrity>
+<integrity>NYwAEF2rHAf3TWHS8a9bddxbHMHsCmYnfAZF0H6HEqQ=</integrity>
   </url>
   <url>
 <title>getScaleProperty</title>
@@ -2506,7 +2551,7 @@
   <url>
 <title>makeFloat</title>
 <loc>/api/@coffeekraken.sugar.js.dom.ui.makeFloat</loc>
-<integrity>SzTYc4BvqvHASgvXDf0fOFZExpF/SKT5FZs/5MS/qpE=</integrity>
+<integrity>Hhajsnjt0hLxn5JIBS0bJZsEpPmAXSJqECQjMtA8kR4=</integrity>
   </url>
   <url>
 <title>canHaveChildren</title>
@@ -2679,9 +2724,29 @@
 <integrity>DWbpGOvqB52sZN4OS4jsuxvCqXJCyTRFXH6T7ZkzDwI=</integrity>
   </url>
   <url>
+<title>WhenInteractSettingsInterface</title>
+<loc>/api/@coffeekraken.sugar.js.dom.detect.interface.WhenInteractSettingsInterface</loc>
+<integrity>7qlj66v+0k9gx8icrPn/xD/F5lXBtBPAo2veNeVjHt4=</integrity>
+  </url>
+  <url>
 <title>README</title>
 <loc>/api/@coffeekraken.s-vite.doc.README</loc>
 <integrity>WJSoRnt0BpP/E7BLstmhDw5y9E1Jqik2ORx45cvd1IM=</integrity>
+  </url>
+  <url>
+<title>SViteBuildParamsInterface</title>
+<loc>/api/@coffeekraken.s-vite.node.interface.SViteBuildParamsInterface</loc>
+<integrity>xWA0DsOfsXNBzKEQAs8c77auNwDYHMcAF5RKtXtsx3A=</integrity>
+  </url>
+  <url>
+<title>SViteStartParamsInterface</title>
+<loc>/api/@coffeekraken.s-vite.node.interface.SViteStartParamsInterface</loc>
+<integrity>TGgV1d2ftrc3AJAndDIMYH0RfcNZ1fkoScQjr26jBm0=</integrity>
+  </url>
+  <url>
+<title>SViteTestParamsInterface</title>
+<loc>/api/@coffeekraken.s-vite.node.interface.SViteTestParamsInterface</loc>
+<integrity>VQiWRHg+UpBvfzGkjHTWL3fwPR1IF0jCEQ/yARXOjVQ=</integrity>
   </url>
   <url>
 <title>importCssPlugin</title>
@@ -2711,7 +2776,12 @@
   <url>
 <title>SViewRenderer</title>
 <loc>/api/@coffeekraken.s-view-renderer.node.SViewRenderer</loc>
-<integrity>0gVJgF+QsRm0bJbb2D80P408iK7v3UD4QGGG3heDOxQ=</integrity>
+<integrity>v7bu/TOFnQZaQmj5VVhkeH1Ra/4lxHTQTMRbPPW0MiQ=</integrity>
+  </url>
+  <url>
+<title>SViewRendererSettingsInterface</title>
+<loc>/api/@coffeekraken.s-view-renderer.node.interface.SViewRendererSettingsInterface</loc>
+<integrity>x3XaVds1QxCHkk7R62wwC0+ZJfqnG20bm45YLKAuKsU=</integrity>
   </url>
   <url>
 <title>404</title>
@@ -2729,14 +2799,29 @@
 <integrity>5LrF+szcHUOnGPcu2vMlV/NhosXquY/eHYgIPGAWGPQ=</integrity>
   </url>
   <url>
+<title>SViewRendererEngineTwigSettingsInterface</title>
+<loc>/api/@coffeekraken.s-view-renderer-engine-twig.node.interface.SViewRendererEngineTwigSettingsInterface</loc>
+<integrity>aVd8tMru4BTeKIGiXoE0RLnIxcCnYhTiwtBhFW97dSY=</integrity>
+  </url>
+  <url>
 <title>SViewRendererEngineLit</title>
 <loc>/api/@coffeekraken.s-view-renderer-engine-lit.node.SViewRendererEngineLit</loc>
 <integrity>LSIJh8EZgZIdTGxrlzOlH6cS10/p8gbvzwOocMVI6fQ=</integrity>
   </url>
   <url>
+<title>SViewRendererEngineLitSettingsInterface</title>
+<loc>/api/@coffeekraken.s-view-renderer-engine-lit.node.interface.SViewRendererEngineLitSettingsInterface</loc>
+<integrity>2c2FzWtoQbIhzHqlW+1OkLo+4atFSxfGn4LHloz4LYI=</integrity>
+  </url>
+  <url>
 <title>SViewRendererEngineBlade</title>
 <loc>/api/@coffeekraken.s-view-renderer-engine-blade.node.SViewRendererEngineBlade</loc>
 <integrity>a9EsO75Oha5HKjlhYoZpks/eIZUuvsT8Jmd6MbRwOxM=</integrity>
+  </url>
+  <url>
+<title>SViewRendererEngineBladeSettingsInterface</title>
+<loc>/api/@coffeekraken.s-view-renderer-engine-blade.node.interface.SViewRendererEngineBladeSettingsInterface</loc>
+<integrity>RWWun0ehBJuIWKGtJcT664NNsx0InaonOegx5BFfr1s=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -2752,6 +2837,16 @@
 <title>en</title>
 <loc>/api/@coffeekraken.s-validator.shared.i18n.en</loc>
 <integrity>iWlFdFE+xykO8kHUE6k5Oj9ujpVGt/vJaO9yJPJmlTU=</integrity>
+  </url>
+  <url>
+<title>SValidatorSettingsInterface</title>
+<loc>/api/@coffeekraken.s-validator.shared.interface.SValidatorSettingsInterface</loc>
+<integrity>qJmQJaUH9F6vN3xAO8r+mDo/NPfqHqR+rhe3G8UoeXc=</integrity>
+  </url>
+  <url>
+<title>SValidatorValidatorsInterface</title>
+<loc>/api/@coffeekraken.s-validator.shared.interface.SValidatorValidatorsInterface</loc>
+<integrity>XeRH8yBg7bRSxeZBvapBwARZEpEvw/WPFa65mFVH5So=</integrity>
   </url>
   <url>
 <title>alphanum</title>
@@ -2819,6 +2914,11 @@
 <integrity>fhQNrCQJtrNTxicH/O82Uqek5Kdk3OK6Z6evLBmxnmU=</integrity>
   </url>
   <url>
+<title>password</title>
+<loc>/api/@coffeekraken.s-validator.shared.validators.password</loc>
+<integrity>S8BPPZ7Cc3cBhludyfIYAWsQatZ+lloktme7aemv8Fs=</integrity>
+  </url>
+  <url>
 <title>pattern</title>
 <loc>/api/@coffeekraken.s-validator.shared.validators.pattern</loc>
 <integrity>8h+OnwBOxuEusCMh1JWGF0+gFfRMzuvIVJTb+/XBsOc=</integrity>
@@ -2831,7 +2931,7 @@
   <url>
 <title>required</title>
 <loc>/api/@coffeekraken.s-validator.shared.validators.required</loc>
-<integrity>JcdsYDcWb5UucOda3YThAUtBckekWa86DhbGXds5Lts=</integrity>
+<integrity>5Y1MbxSnWEXBbSAp/Y1Wh+Y5CMWCqSJrsHZ77ISnhVY=</integrity>
   </url>
   <url>
 <title>SUrl</title>
@@ -2847,6 +2947,16 @@
 <title>STypescriptBuilder</title>
 <loc>/api/@coffeekraken.s-typescript-builder.node.STypescriptBuilder</loc>
 <integrity>jQtyJadf044LjMlHIu1QoWntzMqfKM+YYuP/+w6RHCM=</integrity>
+  </url>
+  <url>
+<title>STypescriptBuilderBuildParamsInterface</title>
+<loc>/api/@coffeekraken.s-typescript-builder.node.interface.STypescriptBuilderBuildParamsInterface</loc>
+<integrity>S5ZRqiV+/eLDcdlWONN62SY+tHGT6Q53GZTtNYEyjjQ=</integrity>
+  </url>
+  <url>
+<title>STypescriptBuilderSettingsInterface</title>
+<loc>/api/@coffeekraken.s-typescript-builder.node.interface.STypescriptBuilderSettingsInterface</loc>
+<integrity>It1QM1Kds4F+zmpkSw3vtS2/pvZPiETaY7J5ymDzK2I=</integrity>
   </url>
   <url>
 <title>SType</title>
@@ -2944,6 +3054,36 @@
 <integrity>Ze5Rtz2d0m9KRh+OWEDOSOot/qIuu5X4UCZZ826QOMM=</integrity>
   </url>
   <url>
+<title>accent</title>
+<loc>/api/@coffeekraken.s-theme.theme.themeColor.accent</loc>
+<integrity>nsW5SmAxsL6OEECnFn0ehZj/CISgwrhf7DiVJap+P9I=</integrity>
+  </url>
+  <url>
+<title>complementary</title>
+<loc>/api/@coffeekraken.s-theme.theme.themeColor.complementary</loc>
+<integrity>nsW5SmAxsL6OEECnFn0ehZj/CISgwrhf7DiVJap+P9I=</integrity>
+  </url>
+  <url>
+<title>success</title>
+<loc>/api/@coffeekraken.s-theme.theme.themeColor.success</loc>
+<integrity>nsW5SmAxsL6OEECnFn0ehZj/CISgwrhf7DiVJap+P9I=</integrity>
+  </url>
+  <url>
+<title>warning</title>
+<loc>/api/@coffeekraken.s-theme.theme.themeColor.warning</loc>
+<integrity>nsW5SmAxsL6OEECnFn0ehZj/CISgwrhf7DiVJap+P9I=</integrity>
+  </url>
+  <url>
+<title>error</title>
+<loc>/api/@coffeekraken.s-theme.theme.themeColor.error</loc>
+<integrity>nsW5SmAxsL6OEECnFn0ehZj/CISgwrhf7DiVJap+P9I=</integrity>
+  </url>
+  <url>
+<title>info</title>
+<loc>/api/@coffeekraken.s-theme.theme.themeColor.info</loc>
+<integrity>nsW5SmAxsL6OEECnFn0ehZj/CISgwrhf7DiVJap+P9I=</integrity>
+  </url>
+  <url>
 <title>README</title>
 <loc>/api/@coffeekraken.s-theme.doc.README</loc>
 <integrity>RIe4RG6a2jqLBYC/cMcBZMmAO9y2wUsOA/ACOe3yH4I=</integrity>
@@ -2951,7 +3091,7 @@
   <url>
 <title>STheme</title>
 <loc>/api/@coffeekraken.s-theme.js.STheme</loc>
-<integrity>HKKFOEoSB95bxKuzVMWp0HN8lsVQjZF1PlCW6T954pE=</integrity>
+<integrity>aZ7TXoIKYG+AEEbBrMVD/zwP4Tv9if0sJ5VbJn63ptc=</integrity>
   </url>
   <url>
 <title>STheme</title>
@@ -2961,7 +3101,22 @@
   <url>
 <title>SThemeBase</title>
 <loc>/api/@coffeekraken.s-theme.shared.SThemeBase</loc>
-<integrity>UP1XoKKvexlS8ok/USiL3EuzfWWo7/EdDN2OUK1N5Cg=</integrity>
+<integrity>LlF0qhUo/i91xhXtGOby+jODYmIFKE8NfEXoHzbKQOU=</integrity>
+  </url>
+  <url>
+<title>README</title>
+<loc>/api/@coffeekraken.s-theme-switcher-component.doc.README</loc>
+<integrity>1g8iQoxm2KFzCN2k9Omk/vA4KdNSkw+7Zj6kTPk3yaM=</integrity>
+  </url>
+  <url>
+<title>SThemeSwitcherComponent</title>
+<loc>/api/@coffeekraken.s-theme-switcher-component.js.SThemeSwitcherComponent</loc>
+<integrity>oPvSgUb+Wy6yTJkncUdoMjtGv8jXjqvAltgCB2OYd1s=</integrity>
+  </url>
+  <url>
+<title>SThemeSwitcherComponentInterface</title>
+<loc>/api/@coffeekraken.s-theme-switcher-component.js.interface.SThemeSwitcherComponentInterface</loc>
+<integrity>fSJzcRauU8mATKLN8RRwbQ/3rDS/ch+21AKcZhZsB20=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -2969,9 +3124,29 @@
 <integrity>u2rWcZQNXlFjJGky9SlWGvz6c/w0cPIYOel8hYNx2KI=</integrity>
   </url>
   <url>
+<title>SSugarJsonAddParamsInterface</title>
+<loc>/api/@coffeekraken.s-sugar-json.node.interface.SSugarJsonAddParamsInterface</loc>
+<integrity>N2fvHeTvOdKM6Og1GEkux18FGp8cZt/7KkIDUOidKys=</integrity>
+  </url>
+  <url>
+<title>SSugarJsonListParamsInterface</title>
+<loc>/api/@coffeekraken.s-sugar-json.node.list.interface.SSugarJsonListParamsInterface</loc>
+<integrity>mbB1ukEiMGKWjGUyh54WEdaIVklNDWFHPLppBAagtBM=</integrity>
+  </url>
+  <url>
+<title>SSugarJsonSettingsInterface</title>
+<loc>/api/@coffeekraken.s-sugar-json.node.interface.SSugarJsonSettingsInterface</loc>
+<integrity>b8dPtWWxgfdyB+AegtPSFb81OWo1e7Lts4X4mUE4B7A=</integrity>
+  </url>
+  <url>
 <title>SSugarFeature</title>
 <loc>/api/@coffeekraken.s-sugar-feature.js.SSugarFeature</loc>
-<integrity>S+jkau1DaXr9ww+PclzsGy6W/XDv6EClrI9xeoEbODI=</integrity>
+<integrity>EJRunWTS6ZbfgxPNj2ndoAtSlFqy86KPDCeo633mTA4=</integrity>
+  </url>
+  <url>
+<title>SSugarFeatureInterface</title>
+<loc>/api/@coffeekraken.s-sugar-feature.js.interface.SSugarFeatureInterface</loc>
+<integrity>vo0HcVFBrqL95+Ny3+HruGTAcVIbxCtzaFvschZEOAA=</integrity>
   </url>
   <url>
 <title>default</title>
@@ -2986,7 +3161,7 @@
   <url>
 <title>SActivateFeature</title>
 <loc>/api/@coffeekraken.s-sugar-element.js.SActivateFeature</loc>
-<integrity>IQ/3acpMGxDzDstezxqAG/YXMytw+vgRxy2I/iLRSp0=</integrity>
+<integrity>eSU9oOOlb4/kuUg+nhIoKDiYK8SXQtFaXdivnOxSq6A=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -3001,12 +3176,17 @@
   <url>
 <title>SSugarConfig</title>
 <loc>/api/@coffeekraken.s-sugar-config.node.SSugarConfig</loc>
-<integrity>snyyI2CUP+vnJqiHwpxtvGlkUm9S9aupnqWoOJwzOYI=</integrity>
+<integrity>Dn32HOFJUtMEM7CZfgaKfxUYz5U0NmyYnrXemUDrR0Y=</integrity>
   </url>
   <url>
 <title>registerFolder</title>
 <loc>/api/@coffeekraken.s-sugar-config.shared.registerFolder</loc>
-<integrity>snyyI2CUP+vnJqiHwpxtvGlkUm9S9aupnqWoOJwzOYI=</integrity>
+<integrity>Dn32HOFJUtMEM7CZfgaKfxUYz5U0NmyYnrXemUDrR0Y=</integrity>
+  </url>
+  <url>
+<title>SCliConfigCacheParamsInterface</title>
+<loc>/api/@coffeekraken.s-sugar-config.node.mono.interface.SCliConfigCacheParamsInterface</loc>
+<integrity>igg1L+ibrMnQ0+avs6nH/5H5OkKgvFIxhoHgpwsCTtQ=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -3016,17 +3196,22 @@
   <url>
 <title>SStdio</title>
 <loc>/api/@coffeekraken.s-stdio.sugar.node.stdio.SStdio</loc>
-<integrity>HXz7/8eTnPT0WFd8cRo8DQWf/F/lsAobgX4Y/SO/d2Q=</integrity>
+<integrity>RDmIFN92p71U0ZVBnFb4myQpVO20eDNWE1Km+SZD/0A=</integrity>
   </url>
   <url>
 <title>SBasicStdio</title>
 <loc>/api/@coffeekraken.s-stdio.node.basic.SBasicStdio</loc>
-<integrity>788I71Hlt5Trgr9aAqXGybiZZ6JAXyDWRWwFj+Cj24o=</integrity>
+<integrity>55pmcOVCjoDOEIQLatUfYw6/2gpdOTZQhwlAZF+05yw=</integrity>
   </url>
   <url>
 <title>SWebsocketStdio</title>
 <loc>/api/@coffeekraken.s-stdio.node.basic.SWebsocketStdio</loc>
-<integrity>HmwWVK9uwRfkZNNFsHrf7f74Q+N9G8x3VYJMP5HCB+E=</integrity>
+<integrity>AJzry+L1HS7WCkGTL6dsx1yYlNJBSrSkqHp5lIy62vo=</integrity>
+  </url>
+  <url>
+<title>SStdioSettingsInterface</title>
+<loc>/api/@coffeekraken.s-stdio.shared.interface.SStdioSettingsInterface</loc>
+<integrity>3CeQUhj3NhQIyT/WS4DxxCRtE4Xn2tH1oCW3wxI2FsM=</integrity>
   </url>
   <url>
 <title>defaultBasicStdioComponent</title>
@@ -3054,6 +3239,36 @@
 <integrity>6cu2o4JpMLVPdLmpE7KYMrgn53Cr3jKAXQwnh0mkf+Y=</integrity>
   </url>
   <url>
+<title>SStaticBuilderBuildParamsInterface</title>
+<loc>/api/@coffeekraken.s-static-builder.node.interface.SStaticBuilderBuildParamsInterface</loc>
+<integrity>8mGbLCj4t9rSjDnsABYLI5HCPp5AhnWCDw8j3jZz2vw=</integrity>
+  </url>
+  <url>
+<title>SStaticBuilderSettingsInterface</title>
+<loc>/api/@coffeekraken.s-static-builder.node.interface.SStaticBuilderSettingsInterface</loc>
+<integrity>KAXelkYSP55C/1duQ7z/T+zfOI7mdGo/+W5CxXZX5EQ=</integrity>
+  </url>
+  <url>
+<title>SState</title>
+<loc>/api/@coffeekraken.s-state.node.SState</loc>
+<integrity>A50QUqt+DAg3PFY2s9KfHZEzqh086SzXdTXBZ+qY/bk=</integrity>
+  </url>
+  <url>
+<title>SStateManager</title>
+<loc>/api/@coffeekraken.s-state.node.SStateManager</loc>
+<integrity>XSP6eJ7+qPPZcRhfEYq8tPBfmIUZM+wSLCIwqmCUQmc=</integrity>
+  </url>
+  <url>
+<title>SStateLsAdapter</title>
+<loc>/api/@coffeekraken.s-state.js.adapters.SStateLsAdapter</loc>
+<integrity>M70dIUpoWIkdCfQXqd67VU7wmg7Kdu5mxTqlrVmDu0U=</integrity>
+  </url>
+  <url>
+<title>SStateFsAdapter</title>
+<loc>/api/@coffeekraken.s-state.js.adapters.SStateFsAdapter</loc>
+<integrity>Cy/2WGou8w6qSmUCGOFJ4FxXE3yrEj0xw0WZp5Bdu/A=</integrity>
+  </url>
+  <url>
 <title>README</title>
 <loc>/api/@coffeekraken.s-slider-component.doc.README</loc>
 <integrity>NO2anlil/RQtLZB2ZJ2diTX2G0cDqPF4pDAGYN07idg=</integrity>
@@ -3061,7 +3276,22 @@
   <url>
 <title>SSliderComponent</title>
 <loc>/api/@coffeekraken.s-slider-component.js.SSliderComponent</loc>
-<integrity>0lyGBByvf3Om0Fw3Ilxxxt4+5ShXPXZS3wgTGt+cNTw=</integrity>
+<integrity>T2aglieU3/jlxgevWaR6Ki1qWK8vl0/xkZta8R+cdJw=</integrity>
+  </url>
+  <url>
+<title>SSliderComponentInterface</title>
+<loc>/api/@coffeekraken.s-slider-component.js.interface.SSliderComponentInterface</loc>
+<integrity>VNS5HhuiHXkqD72TS8kmyE6M4shTCH4Y/raEuHU1zDo=</integrity>
+  </url>
+  <url>
+<title>SSliderCssAnimationBehaviorInterface</title>
+<loc>/api/@coffeekraken.s-slider-component.js.behaviors.interface.SSliderCssAnimationBehaviorInterface</loc>
+<integrity>I8cY9oE+A0lV/LHoyYyzMUJDQYCZK8m2EaCJ3NJT4gI=</integrity>
+  </url>
+  <url>
+<title>SSliderSlideableBehaviorInterface</title>
+<loc>/api/@coffeekraken.s-slider-component.js.behaviors.interface.SSliderSlideableBehaviorInterface</loc>
+<integrity>Lsu9QTXDxwnELNyxIGj84Ojs6atT2g8ATJ4AnEl3m/g=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -3071,22 +3301,32 @@
   <url>
 <title>SSitemapBuilder</title>
 <loc>/api/@coffeekraken.s-sitemap-builder.node.SSitemapBuilder</loc>
-<integrity>o5qkYtoQ4NvBZNFdVG7uNER4is67j1fwlwoYM2L3bfE=</integrity>
+<integrity>ZM4Zeh1q5iP3m9fb0vfPiALesjp7nkpXwdmawPumiDM=</integrity>
   </url>
   <url>
 <title>SSitemapBuilderSource</title>
 <loc>/api/@coffeekraken.s-sitemap-builder.node.SSitemapBuilderSource</loc>
-<integrity>cx7kZ++0C7vnxEniEMj4N3tmylYZ8Pga1VP/0zNN/6A=</integrity>
+<integrity>6S1eHgw/m3uo27/kzJEI22iww80AAzJlabn0bmeJtQ8=</integrity>
+  </url>
+  <url>
+<title>SSitemapBuilderBuildParamsInterface</title>
+<loc>/api/@coffeekraken.s-sitemap-builder.node.interface.SSitemapBuilderBuildParamsInterface</loc>
+<integrity>pOzAIzy8aTFof+wNpt/qhtID/9jpx+zBDUNIh72A4P4=</integrity>
+  </url>
+  <url>
+<title>SSitemapBuilderSettingsInterface</title>
+<loc>/api/@coffeekraken.s-sitemap-builder.node.interface.SSitemapBuilderSettingsInterface</loc>
+<integrity>DA4EEQ7nUkz1e6x/6cC7aFjNKdQMmZZIqzsy9FGu4AE=</integrity>
   </url>
   <url>
 <title>SSitemapBuilderDocmapSource</title>
 <loc>/api/@coffeekraken.s-sitemap-builder.node.SSitemapBuilderDocmapSource</loc>
-<integrity>8UdxZhGYRZzV74Fqm6WtsmPJXBgRfZaU3jXOS7XjLA0=</integrity>
+<integrity>//tQpbEgP1oPUhRXyZ03kUt6ZjkhhQpSxtkBzKQ31AQ=</integrity>
   </url>
   <url>
 <title>SSitemapBuilderFileSource</title>
 <loc>/api/@coffeekraken.s-sitemap-builder.node.SSitemapBuilderFileSource</loc>
-<integrity>cg/mZ7s/q3M1ZOnWbJ5UiJ1Pjl/XRfTVY0AJQOuvzqI=</integrity>
+<integrity>4m5dGHAvxv+d99n4lE6c5ulUgwljraLleWyYvysegNs=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -3099,6 +3339,11 @@
 <integrity>z7itpY5nKx3CULDgqDRfHpd1cOdC0VDVY+fvjs602AQ=</integrity>
   </url>
   <url>
+<title>SScrollComponentInterface</title>
+<loc>/api/@coffeekraken.s-scroll-component.js.interface.SScrollComponentInterface</loc>
+<integrity>vBKTZmj5EAYnDXIGlZMqe7/AN7p+Z/uzgGLIhSLMqR0=</integrity>
+  </url>
+  <url>
 <title>README</title>
 <loc>/api/@coffeekraken.s-request.doc.README</loc>
 <integrity>9URZta5jAjlrJACxcdzG45A5S0Kq2a9A7YU3bgKLAyc=</integrity>
@@ -3109,6 +3354,26 @@
 <integrity>qPslyjfz9a4g0b1qIDhseoGZFm5iHBMI++KqTEhRE5Q=</integrity>
   </url>
   <url>
+<title>SRequestParamsInterface</title>
+<loc>/api/@coffeekraken.s-request.shared.interface.SRequestParamsInterface</loc>
+<integrity>IsPkM8ICsayEug1nMdoUsRAPVi8f8LbqLN9N0C+BJ74=</integrity>
+  </url>
+  <url>
+<title>README</title>
+<loc>/api/@coffeekraken.s-rating-component.doc.README</loc>
+<integrity>1g8iQoxm2KFzCN2k9Omk/vA4KdNSkw+7Zj6kTPk3yaM=</integrity>
+  </url>
+  <url>
+<title>SRatingComponent</title>
+<loc>/api/@coffeekraken.s-rating-component.js.SRatingComponent</loc>
+<integrity>F0P1gp5/4i5rNSgIXQFtWiT1acwSV6icTsN2p8asEl8=</integrity>
+  </url>
+  <url>
+<title>SRatingComponentInterface</title>
+<loc>/api/@coffeekraken.s-rating-component.js.interface.SRatingComponentInterface</loc>
+<integrity>JaESUbgr8Bh2w+gR6jupNFeaiM9SGH5kBkNK7p8s7Ic=</integrity>
+  </url>
+  <url>
 <title>README</title>
 <loc>/api/@coffeekraken.s-refocus-feature.doc.README</loc>
 <integrity>+W/Qt5XUlJXKuXaz7Ltc2Doi3mOm4IP/f5WL6h6w3ig=</integrity>
@@ -3116,7 +3381,12 @@
   <url>
 <title>SRefocusFeature</title>
 <loc>/api/@coffeekraken.s-refocus-feature.js.SRefocusFeature</loc>
-<integrity>sIkBCn9f5pCjYghCYbLITcza2FBRf5HctMbub+jroo4=</integrity>
+<integrity>aPAGecGjmPjrmz5v+JZtwU5vIiLJIaUOUgKgHLWTs30=</integrity>
+  </url>
+  <url>
+<title>SRefocusFeatureInterface</title>
+<loc>/api/@coffeekraken.s-refocus-feature.js.interface.SRefocusFeatureInterface</loc>
+<integrity>fhexADQa26tFrv05JELhF41jjw0fKlmlXrL1vbB9qRY=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -3126,7 +3396,12 @@
   <url>
 <title>SRangeComponent</title>
 <loc>/api/@coffeekraken.s-range-component.js.SRangeComponent</loc>
-<integrity>vhBrErAzcgvdiquPM9YZdUqilqe4Bf8kf11UItJaIN0=</integrity>
+<integrity>BedKmN2vX3/jpflcqbhiL21SbpSIUQnDIfFATL9mjM0=</integrity>
+  </url>
+  <url>
+<title>SRangeComponentInterface</title>
+<loc>/api/@coffeekraken.s-range-component.js.interface.SRangeComponentInterface</loc>
+<integrity>qF8TH/BOQOijxqcISe6+BJAQpttB/O1HYwlOiwQ55N0=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -3136,12 +3411,17 @@
   <url>
 <title>SPromise</title>
 <loc>/api/@coffeekraken.s-promise.shared.SPromise</loc>
-<integrity>Uh/1fRkgCXANn3hkWzu8l3FNR2r+yOZTQbSzIweS2tE=</integrity>
+<integrity>undefined</integrity>
   </url>
   <url>
 <title>treatAsValue</title>
 <loc>/api/@coffeekraken.s-promise.SPromise.js.treatAsValue</loc>
 <integrity>/5KA8n9JnODmcQ5vFjX8OLVWlAiNo0dldX3+bBI1/qY=</integrity>
+  </url>
+  <url>
+<title>SPromiseSettingsInterface</title>
+<loc>/api/@coffeekraken.s-promise.shared.interface.SPromiseSettingsInterface</loc>
+<integrity>wHo4Rd0mEPlN2Tpe2uml2wE+/toDHXaHu/Oc6eb5PBk=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -3151,22 +3431,32 @@
   <url>
 <title>SCommandProcess</title>
 <loc>/api/@coffeekraken.s-process.s-process.SCommandProcess</loc>
-<integrity>s6PFHT5KSHEJn0iIuTqNQbhNaC97RYbvQvb32li55IA=</integrity>
+<integrity>osf4V+qBXZJl/akJAsSMRRBQlKtVpAy18ih4WY1YJro=</integrity>
   </url>
   <url>
 <title>SProcess</title>
 <loc>/api/@coffeekraken.s-process.sugar.node.process.SProcess</loc>
-<integrity>JDB+dg2s77KFIn325hFuw4GALrnmIXhRImvvxauWkcs=</integrity>
+<integrity>SY7n4amAeiyQb7YEBshjaLA5Oy5fwvlmxZZOsxzX7FU=</integrity>
   </url>
   <url>
 <title>SProcessManager</title>
 <loc>/api/@coffeekraken.s-process.s-process.SProcessManager</loc>
-<integrity>+K8TBWG/H0CeYqPE+jG/95yLsNcLGtQGKwprT5SGUeg=</integrity>
+<integrity>2+he2wq4ItTfBNYTa6zSgbJocMtUsIoq1Np+y5UGVlQ=</integrity>
   </url>
   <url>
 <title>SProcessManagerProcessWrapper</title>
 <loc>/api/@coffeekraken.s-process.s-process.SProcessManagerProcessWrapper</loc>
-<integrity>6zdgCLngx1PfNB6Sv5L5F4Q+6FAj7/b5GQKlRZjytiw=</integrity>
+<integrity>ibUpJZ/TnBPnFX5a3ouuchuUt7KsYLA7GVH6/5WVrWc=</integrity>
+  </url>
+  <url>
+<title>SCommandProcessInterface</title>
+<loc>/api/@coffeekraken.s-process.node.interface.SCommandProcessInterface</loc>
+<integrity>Fkb30iuhAKQEiKKIBPhxY8JK67ql/DL5bfdWwNx8kAY=</integrity>
+  </url>
+  <url>
+<title>SProcessSettingsInterface</title>
+<loc>/api/@coffeekraken.s-process.node.interface.SProcessSettingsInterface</loc>
+<integrity>jG7WrxHDvYd2oA8e5LKINjPdg7wtkHNNZdYc/DXEVyc=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -3176,7 +3466,7 @@
   <url>
 <title>classes</title>
 <loc>/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.classes.classes</loc>
-<integrity>FwuenxUaYyN7OKSFAO+tTUGIy36jw7cSTSkKbtE50I8=</integrity>
+<integrity>1lZvEY1onVo7CChFJfCpc38iosPXHQvjNeNsyGeUSqk=</integrity>
   </url>
   <url>
 <title>astNodesToString</title>
@@ -3266,7 +3556,7 @@
   <url>
 <title>transition</title>
 <loc>/api/@coffeekraken.s-postcss-sugar-plugin.node.function.border.transition</loc>
-<integrity>XgdrxXBRsl998xglwJU8+kWfCEoKH5CH/laFemW/nWI=</integrity>
+<integrity>iPkYo7VTpvjD7yZRmpPDzdN6nwr2YES57WGuCh51N2c=</integrity>
   </url>
   <url>
 <title>abs</title>
@@ -3299,6 +3589,11 @@
 <integrity>HcYbBRmgm44OLIDjPhLc6GhH0ANyfZ07jXVjAN02xCE=</integrity>
   </url>
   <url>
+<title>accent</title>
+<loc>/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.accent</loc>
+<integrity>K4QZiQeyx6uiEvT6L9jBcfBf+6R3G1VjSf9Qx1E/s0w=</integrity>
+  </url>
+  <url>
 <title>classes</title>
 <loc>/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.classes</loc>
 <integrity>ziPCbsJLWvqmThNb52YE2BfxlfsXGUYCjloe+Vtw150=</integrity>
@@ -3309,6 +3604,11 @@
 <integrity>PbbUXSnRbA43Xek/ETAzeVqT8LwQ9/zDzak5gAAPvi4=</integrity>
   </url>
   <url>
+<title>complementary</title>
+<loc>/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.complementary</loc>
+<integrity>g8I+CyZJU3CoJC4iM7noQrkoGNtVJG0koEV+rTUQoLc=</integrity>
+  </url>
+  <url>
 <title>current</title>
 <loc>/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.current</loc>
 <integrity>9TfYn4vmEbWC0oxXzfyw5OmmVtCfcgguOxx38SNo03c=</integrity>
@@ -3317,11 +3617,6 @@
 <title>docblocks</title>
 <loc>/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.docblocks</loc>
 <integrity>/a8sTHMivjGKsXyS8ujQTQduFvZXVaTrdkNDVzl8Bso=</integrity>
-  </url>
-  <url>
-<title>primary</title>
-<loc>/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.color.primary</loc>
-<integrity>undefined</integrity>
   </url>
   <url>
 <title>remap</title>
@@ -3341,7 +3636,7 @@
   <url>
 <title>container</title>
 <loc>/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.container.container</loc>
-<integrity>kVYze2oQ0xZoDH7jojO1F5Nvr6gnv5zqSmkdTyeSAEQ=</integrity>
+<integrity>8OgernXphSIVLEe2TzaJKONc8t1h94eXy/X3PCYkvk4=</integrity>
   </url>
   <url>
 <title>classes</title>
@@ -3456,7 +3751,7 @@
   <url>
 <title>classes</title>
 <loc>/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.group.classes</loc>
-<integrity>g9DUvec73YtvItFFY0GtMnaI0HNuu+6way5JNYiz62U=</integrity>
+<integrity>IsmnojYdVfMTAnrjrnk4tnlWqntJXClrsTlYcgzHCqE=</integrity>
   </url>
   <url>
 <title>classes</title>
@@ -3486,7 +3781,7 @@
   <url>
 <title>init</title>
 <loc>/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.init.init</loc>
-<integrity>C7cNqKVPT4cAjm43Sk+0TrY7TqI/FCkg0tD8i/PNaAk=</integrity>
+<integrity>/eTMpIoa94+RCoagusLLqUZlWYVdgI9XkV9WU/0YLNI=</integrity>
   </url>
   <url>
 <title>classes</title>
@@ -3511,12 +3806,12 @@
   <url>
 <title>base</title>
 <loc>/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.lnf.base</loc>
-<integrity>ZLdHz+hsTGMydC5BVIoWxeIrh9KnhRMCMAmQ20DJMJY=</integrity>
+<integrity>XRLhkz3wpnpgv8fiikW/kaBBjK+O4gACLIYzOEuL5hc=</integrity>
   </url>
   <url>
 <title>selection</title>
 <loc>/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.lnf.selection</loc>
-<integrity>3pTMEPE1Y0XgWdyQqfRQjcFy92Da28znXHdcYvdo+FI=</integrity>
+<integrity>9bkoXvpwwAz8f9APTGbWG4NapIch2oh4bb5iZ5EYqXE=</integrity>
   </url>
   <url>
 <title>classes</title>
@@ -3606,17 +3901,22 @@
   <url>
 <title>sugar</title>
 <loc>/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.reset.sugar</loc>
-<integrity>UoqvZvThlvworDHoupyJLXuhwcnOBVp/i1jZjPrfPp8=</integrity>
+<integrity>VBiN1CeBkY/nZie/Wck98CcYuAQTnxdscnAD8c0sWWk=</integrity>
   </url>
   <url>
 <title>vertical</title>
 <loc>/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.rhythm.vertical</loc>
-<integrity>/Ekx73kNPNPsu9+oqdmp6vCPCA3xRlRaj6/ql5u+lvg=</integrity>
+<integrity>q5NV3rN8v0O8UPaoD39iNRXpd8Ouwv0kGVWXnb5YOIY=</integrity>
   </url>
   <url>
 <title>classes</title>
 <loc>/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.scale.classes</loc>
 <integrity>55XkQ7IfnJWm6yhH8CCnwwWsBSZkXjYi33rPBE2SivA=</integrity>
+  </url>
+  <url>
+<title>scale</title>
+<loc>/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.scale.scale</loc>
+<integrity>IqscxjobgZHkzA975z5d8cV57SAR3eOe+HDsiTOTNvI=</integrity>
   </url>
   <url>
 <title>no</title>
@@ -3751,17 +4051,17 @@
   <url>
 <title>avatar</title>
 <loc>/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.avatar.avatar</loc>
-<integrity>LC2cY+jxHXnObm2LnkYI4sFOMQxWyMsLm36USq8ZwYM=</integrity>
+<integrity>ML27jnZg39ac4wJWBDfJEYaWLlt9UGlJYuLnxbOd7lM=</integrity>
   </url>
   <url>
 <title>classes</title>
 <loc>/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.avatar.classes</loc>
-<integrity>RzRIFIM38cg5sRXKrBI3oGfeUqJ/jtMzXqAvrcMWNn0=</integrity>
+<integrity>L5vBgcOcsHRc6KEbmzrtbnOVKhl6ua6FUrq17tNrx0M=</integrity>
   </url>
   <url>
 <title>backdrop</title>
 <loc>/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.backdrop.backdrop</loc>
-<integrity>9kGFYpTasCqZZT0PEki8WPo5omKQcEWUL60YP3wSKWQ=</integrity>
+<integrity>RxJArnFGDHFypil4mExUFtkTdkC7XILjQRp3uzqD3C8=</integrity>
   </url>
   <url>
 <title>classes</title>
@@ -3791,17 +4091,17 @@
   <url>
 <title>blockquote</title>
 <loc>/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.button.blockquote</loc>
-<integrity>BDkGFUqCeemdJXCajTnJ+RekV9KBWbG405CVpSfkDQM=</integrity>
+<integrity>6ZfsEyX/OJAOYD3zJd55BhPKStDbdptrtj1nQP+9zfk=</integrity>
   </url>
   <url>
 <title>button</title>
 <loc>/api/@coffeekraken.s-postcss-sugar-plugin.ui.button.button</loc>
-<integrity>BDkGFUqCeemdJXCajTnJ+RekV9KBWbG405CVpSfkDQM=</integrity>
+<integrity>6ZfsEyX/OJAOYD3zJd55BhPKStDbdptrtj1nQP+9zfk=</integrity>
   </url>
   <url>
 <title>classes</title>
 <loc>/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.button.classes</loc>
-<integrity>pWjk5ImTDiYqfEZ6zlnK59qfftNOwQgEMGY3oW5wqdk=</integrity>
+<integrity>LgVjABlTLRPumLJrvsWKvoJ32QoawOsNsdS9eHGbw6w=</integrity>
   </url>
   <url>
 <title>checkbox</title>
@@ -3821,7 +4121,7 @@
   <url>
 <title>dropdown</title>
 <loc>/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.dropdown.dropdown</loc>
-<integrity>SW71zxWuFIjNntX0B37LqdQZff9pK34vw11bkV+Fjfs=</integrity>
+<integrity>pHm2B/805ktodecCIR7ccm8gGMLTuuoVelkFYljWnk4=</integrity>
   </url>
   <url>
 <title>classes</title>
@@ -3861,7 +4161,7 @@
   <url>
 <title>label</title>
 <loc>/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.label.label</loc>
-<integrity>K+Ay605uRHTxcrAi8heA3FwTWzYz38FiIiwVZo9oSrI=</integrity>
+<integrity>wHbR1ss8gu3WCztsk+kxdhwMaHkBpgrnSuoKwP6+v74=</integrity>
   </url>
   <url>
 <title>classes</title>
@@ -3892,6 +4192,11 @@
 <title>spinner</title>
 <loc>/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.loader.spinner</loc>
 <integrity>vDCflNUOGHrbbmxIlPWXloj832EJwwxECuoQ/VB2Gmg=</integrity>
+  </url>
+  <url>
+<title>squareDots</title>
+<loc>/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.loader.squareDots</loc>
+<integrity>4QRzIKf7p+trdNLEoC0wHv8is/WsDDnomrcrFrL62eE=</integrity>
   </url>
   <url>
 <title>classes</title>
@@ -3956,12 +4261,12 @@
   <url>
 <title>classes</title>
 <loc>/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.tooltip.classes</loc>
-<integrity>5vLAUHwjg8Qr+QIHvBD+F/a0LdmaffYoR3UOwPzo2V4=</integrity>
+<integrity>RYpErg9YVphlfWlE/l2AY4Rr9DzNw+1q/j+NPQ17ipA=</integrity>
   </url>
   <url>
 <title>tooltip</title>
 <loc>/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.tooltip.tooltip</loc>
-<integrity>IxwyKb+wYme+DwJpdIIie2K8kJ+F4awpNgej7duWvsg=</integrity>
+<integrity>eT5bksM2zwd/IFmct2WwH7tDbTjOj3HpOW4AKusr2nM=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -3971,7 +4276,27 @@
   <url>
 <title>SPostcssBuilder</title>
 <loc>/api/@coffeekraken.s-postcss-builder.node.SPostcssBuilder</loc>
-<integrity>FiHfX2X3YddKIgDmpmLfcaamcRqTrN7jw/iCry/qCvw=</integrity>
+<integrity>cjk22VokD/bewFReaC5uEmecr0MxAFiprd/96yI51Y8=</integrity>
+  </url>
+  <url>
+<title>SPostcssBuilderBuildParamsInterface</title>
+<loc>/api/@coffeekraken.s-postcss-builder.node.interface.SPostcssBuilderBuildParamsInterface</loc>
+<integrity>7C8ipIt9cEN2y+zrITJK/mEYSiPSnTSTRX0Bsl4SnCo=</integrity>
+  </url>
+  <url>
+<title>SPostcssBuilderSettingsInterface</title>
+<loc>/api/@coffeekraken.s-postcss-builder.node.interface.SPostcssBuilderSettingsInterface</loc>
+<integrity>rtjwcKDVzQwfngmrtVnYKoli8uXvhNwG2eEb499uGLM=</integrity>
+  </url>
+  <url>
+<title>SParallaxFeature</title>
+<loc>/api/@coffeekraken.s-parallax-feature.js.SParallaxFeature</loc>
+<integrity>GHt5aI5nLrEy5nmkv8smhaQQzNuU7JgJ/bwh0eBbOZM=</integrity>
+  </url>
+  <url>
+<title>SParallaxFeatureInterface</title>
+<loc>/api/@coffeekraken.s-parallax-feature.js.interface.SParallaxFeatureInterface</loc>
+<integrity>yHrmxvzwLfCBqzJxrgFuNFK/o0XojkkWECUpMvb8teY=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -3981,12 +4306,22 @@
   <url>
 <title>SPanelComponent</title>
 <loc>/api/@coffeekraken.s-panel-component.js.SPanelComponent</loc>
-<integrity>GXS/AtX6Ui5hOzCn9/EGGhbXSW2t/ZDzOnlK1VFkjqM=</integrity>
+<integrity>+lJ8EFiLu0sSEmqPcQiZMQdEHTAAsgA7GqCVOkKVcso=</integrity>
+  </url>
+  <url>
+<title>SPanelComponentInterface</title>
+<loc>/api/@coffeekraken.s-panel-component.js.interface.SPanelComponentInterface</loc>
+<integrity>ZvhTjEIH5HIhxVzWlJXHZtZD5ul8ajDilkao8+cKnvQ=</integrity>
   </url>
   <url>
 <title>SPageTransitionFeature</title>
 <loc>/api/@coffeekraken.s-page-transition-feature.js.SPageTransitionFeature</loc>
-<integrity>aW10JUpJahmMERyt1gW29ljxjMAI9bKIn0wSF4sm7lM=</integrity>
+<integrity>qIIINevfUvrMk84O6w6Fnjwa1wCUiG3cn80ZkOXJg+Q=</integrity>
+  </url>
+  <url>
+<title>SPageTransitionFeatureInterface</title>
+<loc>/api/@coffeekraken.s-page-transition-feature.js.interface.SPageTransitionFeatureInterface</loc>
+<integrity>oy6x2lTfN9bZVfk8K3E3brdHUqr5Fgfvh2/W6Inj0XU=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -3996,7 +4331,42 @@
   <url>
 <title>SPackage</title>
 <loc>/api/@coffeekraken.s-package.node.SPackage</loc>
-<integrity>atJzDTaer6zIRx8eiW/WTD5cqKP69pq2hfEQ59vOWvw=</integrity>
+<integrity>esZn4Qow4mqbuT5zPEQ1+Ng9VBcpvUg889gyQewKKX4=</integrity>
+  </url>
+  <url>
+<title>SPackageAddReadmeParamsInterface</title>
+<loc>/api/@coffeekraken.s-package.node.interface.SPackageAddReadmeParamsInterface</loc>
+<integrity>AftwLUicoYZUzrLOxYkLX0zdVNxysNLSs6clPx5CsVM=</integrity>
+  </url>
+  <url>
+<title>SPackageApplyDefaultPackageJsonParamsInterface</title>
+<loc>/api/@coffeekraken.s-package.node.interface.SPackageApplyDefaultPackageJsonParamsInterface</loc>
+<integrity>P9d5XLDLBwfBxXin+lCjlD4TdokYYvTD80BBZoWdJqM=</integrity>
+  </url>
+  <url>
+<title>SPackageCheckDependenciesParamsInterface</title>
+<loc>/api/@coffeekraken.s-package.node.interface.SPackageCheckDependenciesParamsInterface</loc>
+<integrity>/aXbRVaOBeo9NY4f4L78tiLVXrjADtqAKMrAR0nwvro=</integrity>
+  </url>
+  <url>
+<title>SPackageExportsParamsInterface</title>
+<loc>/api/@coffeekraken.s-package.node.interface.SPackageExportsParamsInterface</loc>
+<integrity>lhhpNo+E2fusQBERBf/ixsWkoby4WkV9pC/khbnpTro=</integrity>
+  </url>
+  <url>
+<title>SPackageInstallParamsInterface</title>
+<loc>/api/@coffeekraken.s-package.node.interface.SPackageInstallParamsInterface</loc>
+<integrity>4Mge2LiVNzUZoTou9JHHVrP0doVQ6FxxcnIZY0Se4hc=</integrity>
+  </url>
+  <url>
+<title>SPackageRenameParamsInterface</title>
+<loc>/api/@coffeekraken.s-package.node.interface.SPackageRenameParamsInterface</loc>
+<integrity>Lx7X/ppP8TM+NWfNC+LCDS74ErVy4D9B92QC17/oN/I=</integrity>
+  </url>
+  <url>
+<title>SPackageSettingsInterface</title>
+<loc>/api/@coffeekraken.s-package.node.interface.SPackageSettingsInterface</loc>
+<integrity>y9nmuAyEEU963XOKCrvDCaeICRLgbXTIkcx6O6WZUtE=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -4006,7 +4376,32 @@
   <url>
 <title>SMonorepo</title>
 <loc>/api/@coffeekraken.s-monorepo.node.SMonorepo</loc>
-<integrity>u3X8z4/kut+RUm/lh9d/DpbVt4Na+1oulpW5De4j3Yo=</integrity>
+<integrity>H6BjlWuhgvJb3JDDl3DWIivaNLnHVhAKK/bytTmrPeA=</integrity>
+  </url>
+  <url>
+<title>SMonorepoDevParamsInterface</title>
+<loc>/api/@coffeekraken.s-monorepo.node.interface.SMonorepoDevParamsInterface</loc>
+<integrity>gt4WpF6gPeRDH2GH7ReArb0z51ZpFciVTA7rrnaAnTo=</integrity>
+  </url>
+  <url>
+<title>SMonorepoListParamsInterface</title>
+<loc>/api/@coffeekraken.s-monorepo.node.interface.SMonorepoListParamsInterface</loc>
+<integrity>fG8jvId1jRjVjz8gvNKQCxXod1WAY4Swx2shEMtzuw8=</integrity>
+  </url>
+  <url>
+<title>SMonorepoRunParamsInterface</title>
+<loc>/api/@coffeekraken.s-monorepo.node.interface.SMonorepoRunParamsInterface</loc>
+<integrity>U8Zmy+T4NR3zcri/belWvOXwHdjRm5GcglwqAXy/5Fg=</integrity>
+  </url>
+  <url>
+<title>SMonorepoSettingsInterface</title>
+<loc>/api/@coffeekraken.s-monorepo.node.interface.SMonorepoSettingsInterface</loc>
+<integrity>pGiNX2d2BuE2bi63CRU7h+bR39uw7+tChsonOZQQKLA=</integrity>
+  </url>
+  <url>
+<title>SMonorepoUpgradeParamsInterface</title>
+<loc>/api/@coffeekraken.s-monorepo.node.interface.SMonorepoUpgradeParamsInterface</loc>
+<integrity>ys0ouQ6dqK02ErcMgJKAOlPcDKMNOm3e0DyEv5FTJoY=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -4019,14 +4414,114 @@
 <integrity>hZnB7LheTOqqu9u0HHtsWEwN3sLockQ+oIbHhgz9hPA=</integrity>
   </url>
   <url>
+<title>SMarkdownBuilderBuildParamsInterface</title>
+<loc>/api/@coffeekraken.s-markdown-builder.node.interface.SMarkdownBuilderBuildParamsInterface</loc>
+<integrity>b1jXl/Y8UGuav4Wjbo6eC324IYhHhRQ20EOvE5CtWJo=</integrity>
+  </url>
+  <url>
 <title>README</title>
 <loc>/api/@coffeekraken.s-log.doc.README</loc>
 <integrity>gPg4HuBzhfdg5I/uSiGDmq7/dfE6QjIWRmmC46ukK6c=</integrity>
   </url>
   <url>
+<title>ISLog</title>
+<loc>/api/@coffeekraken.s-log.shared.ISLog</loc>
+<integrity>nGPXpUHgh28ptAlGha4MOoMWMKsxT4FLrPo1Za0AawQ=</integrity>
+  </url>
+  <url>
+<title>ISLogAsk</title>
+<loc>/api/@coffeekraken.s-log.shared.ISLogAsk</loc>
+<integrity>PoaCj29EHY6+NEiNXu4E/9gLiQN9wBfcfvQvhTb2OeM=</integrity>
+  </url>
+  <url>
 <title>SLog</title>
 <loc>/api/@coffeekraken.s-log.shared.SLog</loc>
 <integrity>aTOVh7E37MQStv4mVHpirCM9U7GKkJ1mz/oNP0r0Vb8=</integrity>
+  </url>
+  <url>
+<title>README</title>
+<loc>/api/@coffeekraken.s-kitchen.doc.README</loc>
+<integrity>/7AMEx7H2wGa5Id3y7vl1Y99LbJSi5CCm+mk3jnh+cc=</integrity>
+  </url>
+  <url>
+<title>SKitchenActionInterface</title>
+<loc>/api/@coffeekraken.s-kitchen.node.interface.SKitchenActionInterface</loc>
+<integrity>8H62DB3LMZi25bOX0sNG7cVODUBoiL+QNpxwuLOPcys=</integrity>
+  </url>
+  <url>
+<title>SKitchenAddParamsInterface</title>
+<loc>/api/@coffeekraken.s-kitchen.node.interface.SKitchenAddParamsInterface</loc>
+<integrity>SvbymQDls51w+p1wC+b/Blru8HilCmtR2ebctY3V5Kg=</integrity>
+  </url>
+  <url>
+<title>SKitchenListParamsInterface</title>
+<loc>/api/@coffeekraken.s-kitchen.node.interface.SKitchenListParamsInterface</loc>
+<integrity>LXbJLtJvynWhn2GWfJdPk1WdNWA8jXwKWgccsRmVyCY=</integrity>
+  </url>
+  <url>
+<title>SKitchenNewParamsInterface</title>
+<loc>/api/@coffeekraken.s-kitchen.node.interface.SKitchenNewParamsInterface</loc>
+<integrity>xX/J+ZS5DAH2wMRVHWH6jOijgOKPoubvWfKTkIstwas=</integrity>
+  </url>
+  <url>
+<title>SKitchenRecipeParamsInterface</title>
+<loc>/api/@coffeekraken.s-kitchen.node.interface.SKitchenRecipeParamsInterface</loc>
+<integrity>JFfsieDejmi1nE7VN88n7ho73aooLhm++RkpRmlTY/k=</integrity>
+  </url>
+  <url>
+<title>defaultPackageJsonIngredient</title>
+<loc>/api/@coffeekraken.s-kitchen.node.ingredients.defaultPackageJson.defaultPackageJsonIngredient</loc>
+<integrity>xir/Hof/P3zWAs07dyKSFJYH4nn82spdYaEEZ5qc1H4=</integrity>
+  </url>
+  <url>
+<title>defaultPagesIngredient</title>
+<loc>/api/@coffeekraken.s-kitchen.node.ingredients.defaultPages.defaultPagesIngredient</loc>
+<integrity>rkzTGucwXXxemFipaOD/4SPtG+FHA1QbaFC6lFGhLHY=</integrity>
+  </url>
+  <url>
+<title>defaultScriptsIngredient</title>
+<loc>/api/@coffeekraken.s-kitchen.node.ingredients.defaultScripts.defaultScriptsIngredient</loc>
+<integrity>kc8OhTwEfnwyToe37WkLVdmZkSmD9qpWPQP1rQfsSuc=</integrity>
+  </url>
+  <url>
+<title>faviconIngredient</title>
+<loc>/api/@coffeekraken.s-kitchen.node.ingredients.frontspec.faviconIngredient</loc>
+<integrity>8BUiZVvXxZ5UjRoip1mjV+k168TE1lSt8rkWYjrImNs=</integrity>
+  </url>
+  <url>
+<title>frontspecIngredient</title>
+<loc>/api/@coffeekraken.s-kitchen.node.ingredients.frontspec.frontspecIngredient</loc>
+<integrity>V5exqnpLdCyku0MlGDj7zs+frJZcZN9ZmOiHVV4bHs8=</integrity>
+  </url>
+  <url>
+<title>manifestIngredient</title>
+<loc>/api/@coffeekraken.s-kitchen.node.ingredients.manifest.manifestIngredient</loc>
+<integrity>wpk6eXkl2zJJ/Uufjx2gc8Mj2q5EN24YsBTdCV1CkKc=</integrity>
+  </url>
+  <url>
+<title>postcssIngredient</title>
+<loc>/api/@coffeekraken.s-kitchen.node.ingredients.manifest.postcssIngredient</loc>
+<integrity>mUoozRIxmWgwZTrxjvfqYAOry+jv9pJW+N0za3ZhYeA=</integrity>
+  </url>
+  <url>
+<title>readmeIngredient</title>
+<loc>/api/@coffeekraken.s-kitchen.node.ingredients.manifest.readmeIngredient</loc>
+<integrity>tHp/cjFEwoj9yXDwDDaNLJzzIJlb/zWFr3LMOuGb7gA=</integrity>
+  </url>
+  <url>
+<title>sugarIngredient</title>
+<loc>/api/@coffeekraken.s-kitchen.node.ingredients.manifest.sugarIngredient</loc>
+<integrity>nVo3wPMKnGYRTIWiUH6UfYDWocgapMugmd255sYpSzI=</integrity>
+  </url>
+  <url>
+<title>sugarJsonIngredient</title>
+<loc>/api/@coffeekraken.s-kitchen.node.ingredients.manifest.sugarJsonIngredient</loc>
+<integrity>94bPMv8F1YlXSqVBwVlRfb440TEeb9UcHMet92dsDf8=</integrity>
+  </url>
+  <url>
+<title>SKitchenCopyActionParamsInterface</title>
+<loc>/api/@coffeekraken.s-kitchen.node.actions.interface.SKitchenCopyActionParamsInterface</loc>
+<integrity>1WrBFXwWXtpquo148sd8deH7ptYd7iYZERNHRArIZJI=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -4041,7 +4536,7 @@
   <url>
 <title>SInterface</title>
 <loc>/api/@coffeekraken.s-interface.s-interface.shared.SInterface</loc>
-<integrity>EWBXUWFVxO8z0GXaNQ4hYTx5sdaO6I6cdwUis9GVC/o=</integrity>
+<integrity>g0oCQDBis0HtMyn8S8OAV7bSYAkZfec5d3CnU8veqeM=</integrity>
   </url>
   <url>
 <title>SInterfaceRenderer</title>
@@ -4076,7 +4571,12 @@
   <url>
 <title>SInlineFeature</title>
 <loc>/api/@coffeekraken.s-inline-feature.js.SInlineFeature</loc>
-<integrity>S1PmoDmq8MAkOsv6MPVkQah2v/ffVKrxU/0n7AqpTOg=</integrity>
+<integrity>UFwUQEBsn/3gX1hECxiTqX+soP53HgtausFvKW3c5QE=</integrity>
+  </url>
+  <url>
+<title>SInlineFeatureInterface</title>
+<loc>/api/@coffeekraken.s-inline-feature.js.interface.SInlineFeatureInterface</loc>
+<integrity>ZGXGMH5Ml/K8eCxTYNhaFlw23b4ce8wOD9vVukuSsh4=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -4086,7 +4586,17 @@
   <url>
 <title>SImagesBuilder</title>
 <loc>/api/@coffeekraken.s-images-builder.node.SImagesBuilder</loc>
-<integrity>tXMtKKXqfNIExxHN9QBB3s3HvuvZqhMb9zXkHzTaGx4=</integrity>
+<integrity>4GT9YP1ea6kdpdPZLQCNbuPn/aePZ4yTLkR3GuPUNJ8=</integrity>
+  </url>
+  <url>
+<title>SImagesBuilderBuildParamsInterface</title>
+<loc>/api/@coffeekraken.s-images-builder.node.interface.SImagesBuilderBuildParamsInterface</loc>
+<integrity>lTwhrP+fcy3fuYxuqkbKSjX4b8/7M+In7G/kwwiYx1U=</integrity>
+  </url>
+  <url>
+<title>SImagesBuilderSettingsInterface</title>
+<loc>/api/@coffeekraken.s-images-builder.node.interface.SImagesBuilderSettingsInterface</loc>
+<integrity>1CUIkf0tuZdUTiCb+TzrmfCpQMKjeMLCJ2XYHQ6kkLs=</integrity>
   </url>
   <url>
 <title>registerHelpers</title>
@@ -4199,9 +4709,9 @@
 <integrity>dUamSt2uCr4z9bmukBgboKGUCDt3TL32hlT1bZbq5ds=</integrity>
   </url>
   <url>
-<title>README</title>
-<loc>/api/@coffeekraken.s-kitchen.doc.README</loc>
-<integrity>/7AMEx7H2wGa5Id3y7vl1Y99LbJSi5CCm+mk3jnh+cc=</integrity>
+<title>SGlobSettingsInterface</title>
+<loc>/api/@coffeekraken.s-glob.node.interface.SGlobSettingsInterface</loc>
+<integrity>6uNEhTItl6ofBkH4qcZrCn2WEnUxcDj02f4UB4bun08=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -4212,6 +4722,16 @@
 <title>SFrontspec</title>
 <loc>/api/@coffeekraken.s-frontspec.node.SFrontspec</loc>
 <integrity>O9EfTadGkiGBT/xKQzTOV9RmeBFZPtN4WVmrVa9GPmQ=</integrity>
+  </url>
+  <url>
+<title>SFrontspecAddParamsInterface</title>
+<loc>/api/@coffeekraken.s-frontspec.node.interface.SFrontspecAddParamsInterface</loc>
+<integrity>1qqBjvt6ERc8VvMx3jNFKyyXC2XKs3I4cbxgghyeNL0=</integrity>
+  </url>
+  <url>
+<title>SFrontspecReadParamsInterface</title>
+<loc>/api/@coffeekraken.s-frontspec.node.interface.SFrontspecReadParamsInterface</loc>
+<integrity>YR6WSrrX/slZSWFeLKDoggyITLSMaf6sLSbYfSl3yhk=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -4226,7 +4746,7 @@
   <url>
 <title>SFrontendServer</title>
 <loc>/api/@coffeekraken.s-frontend-server.s-frontend-server.SFrontendServer</loc>
-<integrity>hFhNq477I75SHvK/NI1vgjYIFP3PkkvFJiorz5gAznk=</integrity>
+<integrity>l7epbF2yVu63yv10k0GVT6ehdit74RHwXtLoG+4UJEE=</integrity>
   </url>
   <url>
 <title>doc</title>
@@ -4247,6 +4767,21 @@
 <title>markdown</title>
 <loc>/api/@coffeekraken.s-frontend-server.sugar.node.server.frontend.handlers.markdown</loc>
 <integrity>HQ5SIZNXwcZsdTokctvCvcITIdWMd8n57dkbiIt+qUM=</integrity>
+  </url>
+  <url>
+<title>SFrontendServerAddDefaultPagesParamsInterface</title>
+<loc>/api/@coffeekraken.s-frontend-server.node.interface.SFrontendServerAddDefaultPagesParamsInterface</loc>
+<integrity>VE2+MY9iXsvxNK9VCygc8fXADoWLXb0W8aFSuqBInrY=</integrity>
+  </url>
+  <url>
+<title>SFrontendServerCorsProxyParamsInterface</title>
+<loc>/api/@coffeekraken.s-frontend-server.node.interface.SFrontendServerCorsProxyParamsInterface</loc>
+<integrity>LTzIJXCcmgRyTVo6/ms6sR6FZ968t4t3s0ksJqPRDx4=</integrity>
+  </url>
+  <url>
+<title>SFrontendServerStartParamsInterface</title>
+<loc>/api/@coffeekraken.s-frontend-server.node.interface.SFrontendServerStartParamsInterface</loc>
+<integrity>SAGhjwJY6K4fCyxA3DyspBdbksYKf3t8G6kZLNvjZ3w=</integrity>
   </url>
   <url>
 <title>benchEndMiddleware</title>
@@ -4301,7 +4836,7 @@
   <url>
 <title>genericHandler</title>
 <loc>/api/@coffeekraken.s-frontend-server.node.modules.docmap.genericHandler</loc>
-<integrity>z2Gl7CZgWY/7FvYA/60+xbuOR7xUAmG1cqeCMAHRNuA=</integrity>
+<integrity>BnBr3HkXudLwJaT/phFDf2Gbu05qkpD+4wi9oJBdZcw=</integrity>
   </url>
   <url>
 <title>redirectHandler</title>
@@ -4409,6 +4944,11 @@
 <integrity>jfCDpPl9JWUYTu0lxQTt9hVqxkdKzGBZ+vW1V84aaOI=</integrity>
   </url>
   <url>
+<title>SFrontendCheckerSettingsInterface</title>
+<loc>/api/@coffeekraken.s-frontend-checker.js.interface.SFrontendCheckerSettingsInterface</loc>
+<integrity>gBL+89XhcEUsZE+uJFwdkNoU4HXNPGOWHUKdn7t3Lco=</integrity>
+  </url>
+  <url>
 <title>README</title>
 <loc>/api/@coffeekraken.s-form-validate-feature.doc.README</loc>
 <integrity>iI4j2gZuARZ+zcacABH9eaKDKw4qogEnMZuXORgh09U=</integrity>
@@ -4416,12 +4956,22 @@
   <url>
 <title>SFormValidateFeature</title>
 <loc>/api/@coffeekraken.s-form-validate-feature.js.SFormValidateFeature</loc>
-<integrity>lNKDH3sy6KY2H+2VkWezacklYuE4yMpTARCt8dcmVy4=</integrity>
+<integrity>l2mBYttZostsuZ17nGNXaaKs5eTUgk4jLcumxfdT9i4=</integrity>
+  </url>
+  <url>
+<title>SFormValidateFeatureInterface</title>
+<loc>/api/@coffeekraken.s-form-validate-feature.js.interface.SFormValidateFeatureInterface</loc>
+<integrity>gbrVK1G11adkJQrNnaSFgCI0kU9ON5J+R/IiXn+mbJE=</integrity>
   </url>
   <url>
 <title>SFloatingFeature</title>
 <loc>/api/@coffeekraken.s-floating-feature.js.SFloatingFeature</loc>
-<integrity>NoSkchVUPg/3vI3R0K0he1NqbJ3AjDpBwtW8s9D1Xe8=</integrity>
+<integrity>WqSiYsqpTLGDVQe1cx8/K+br1Kkkpv0/q9u/KW9lxds=</integrity>
+  </url>
+  <url>
+<title>SFloatingFeatureInterface</title>
+<loc>/api/@coffeekraken.s-floating-feature.js.interface.SFloatingFeatureInterface</loc>
+<integrity>lj0fdiv+I63sir50VdCjtCgLH8/UCKIfViUPTSKLA4M=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -4431,7 +4981,12 @@
   <url>
 <title>SFiltrableInputComponent</title>
 <loc>/api/@coffeekraken.s-filtrable-input-component.js.SFiltrableInputComponent</loc>
-<integrity>uitPoI2vcMo94s1gYiqm9TafdCTZmSxk5afyqLoMhfU=</integrity>
+<integrity>jgRXTUtuon1ScdVNWhqL7gFfdCNS0kvnT8j99M/4EOc=</integrity>
+  </url>
+  <url>
+<title>SFiltrableInputComponentInterface</title>
+<loc>/api/@coffeekraken.s-filtrable-input-component.js.interface.SFiltrableInputComponentInterface</loc>
+<integrity>2VBoHJDBA9ZQnNvQ0FMtKvAH1SZbdmC+3diqGeSJykg=</integrity>
   </url>
   <url>
 <title>filtrableInput</title>
@@ -4446,7 +5001,12 @@
   <url>
 <title>SFile</title>
 <loc>/api/@coffeekraken.s-file.node.fs.SFile</loc>
-<integrity>5lTq6Y6TTQfJCKhMAa1ZohEHHw99krxwVJvczOMlkK0=</integrity>
+<integrity>w7fszn8h9w+zrP7Jq6pQmNX5H0HP8OILtO5g8EG9gJ4=</integrity>
+  </url>
+  <url>
+<title>SFileSettingsInterface</title>
+<loc>/api/@coffeekraken.s-file.node.interface.SFileSettingsInterface</loc>
+<integrity>QjnO0e9tZfhwP/gkvRjIM3aCqLtVaw3M5TLrn/wb/lY=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -4456,7 +5016,7 @@
   <url>
 <title>SFeature</title>
 <loc>/api/@coffeekraken.s-feature.shared.SFeature</loc>
-<integrity>6mltgpY1LKgigmjRdVojYsE4qQRcAtlOTWNaXjCYxT4=</integrity>
+<integrity>xajF1LY/wHsPzhaRCBc+ah+xoQ7yGlsZTq0bSlogt+M=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -4466,7 +5026,12 @@
   <url>
 <title>SFaviconBuilder</title>
 <loc>/api/@coffeekraken.s-favicon-builder.node.SFaviconBuilder</loc>
-<integrity>E/po1igBuNrqdhsxmOiTltVwSjubnSqtRQy+4x2DcSY=</integrity>
+<integrity>w7n2QhsgeRPocmVFlGNom3kco0xSgAeuXf4XwbQubB4=</integrity>
+  </url>
+  <url>
+<title>SFaviconBuilderBuildParamsInterface</title>
+<loc>/api/@coffeekraken.s-favicon-builder.node.interface.SFaviconBuilderBuildParamsInterface</loc>
+<integrity>3DFkKDxQMXG9bRD/3fMIKbwZCLIGCFFXlN4PE+kj440=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -4477,6 +5042,16 @@
 <title>SEventEmitter</title>
 <loc>/api/@coffeekraken.s-event-emitter.sugar.js.event.SEventEmitter</loc>
 <integrity>dMArbika3Q9Umkcbthjgrqx9P484O2b2xSbyG0l6d9w=</integrity>
+  </url>
+  <url>
+<title>SEventEmitterPipeSettingsInterface</title>
+<loc>/api/@coffeekraken.s-event-emitter.shared.interface.SEventEmitterPipeSettingsInterface</loc>
+<integrity>UsGUcioQH5GN66h2Mu12Kzw5uGZ+0BX5rAajomKFmGw=</integrity>
+  </url>
+  <url>
+<title>SEventEmitterSettingsInterface</title>
+<loc>/api/@coffeekraken.s-event-emitter.shared.interface.SEventEmitterSettingsInterface</loc>
+<integrity>sgBow8zSO08BEWgJfcCqDfyKS45ztPTS9/d3kmwYp5M=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -4514,6 +5089,31 @@
 <integrity>Jb6NdtonATwCp3DBlIOUJTqx5uuLv+H0wXOSBqurkPQ=</integrity>
   </url>
   <url>
+<title>SDocmapBuildParamsInterface</title>
+<loc>/api/@coffeekraken.s-docmap.node.interface.SDocmapBuildParamsInterface</loc>
+<integrity>4n0IvuS4ebeB+XmqIRJbrWFcvX/1vXFhCc2m42j7zY0=</integrity>
+  </url>
+  <url>
+<title>SDocmapInstallSnapshotParamsInterface</title>
+<loc>/api/@coffeekraken.s-docmap.node.interface.SDocmapInstallSnapshotParamsInterface</loc>
+<integrity>OCeonqo5xyW7yf0/vbpZTsNJAMpJ+1lk0Ftw6FjlvNg=</integrity>
+  </url>
+  <url>
+<title>SDocmapReadParamsInterface</title>
+<loc>/api/@coffeekraken.s-docmap.node.interface.SDocmapReadParamsInterface</loc>
+<integrity>pfH+Qqe3d1OweQCShn98J9TimB9jgfyJhVPGvLsrido=</integrity>
+  </url>
+  <url>
+<title>SDocmapSettingsInterface</title>
+<loc>/api/@coffeekraken.s-docmap.node.interface.SDocmapSettingsInterface</loc>
+<integrity>zXONH+cshvKozlorfuXcvX5/nCDD7ms9jvGQ4iKCKZI=</integrity>
+  </url>
+  <url>
+<title>SDocmapSnapshotParamsInterface</title>
+<loc>/api/@coffeekraken.s-docmap.node.interface.SDocmapSnapshotParamsInterface</loc>
+<integrity>Y7DtvCCbQHO+JMXidy+oigkK2o+w4uHcUmEZFEF5Qak=</integrity>
+  </url>
+  <url>
 <title>interfaceTagProxy</title>
 <loc>/api/@coffeekraken.s-docmap.node.tagsProxy.interfaceTagProxy</loc>
 <integrity>E7Obk4enM8BBkOtIOL8T9neEY8GBHsWnUbbDiYe1cpc=</integrity>
@@ -4531,12 +5131,17 @@
   <url>
 <title>SDocblockBlock</title>
 <loc>/api/@coffeekraken.s-docblock.shared.SDocblockBlock</loc>
-<integrity>AdvkOMB/H9OzE3aepH4HlAw+w8biDLaCKEgN4mScwX4=</integrity>
+<integrity>54aqVoBJJDLSoN7LzHvPIo+T4gtKCxEXpshS7m3AEvc=</integrity>
   </url>
   <url>
 <title>firstDocblockWithNamespaceInFolder</title>
 <loc>/api/@coffeekraken.s-docblock.sugar.node.docblock.firstDocblockWithNamespaceInFolder</loc>
 <integrity>hb923voGVQyvORYkNMB4fnemZfMLj4lz2VeX1D1UR54=</integrity>
+  </url>
+  <url>
+<title>SDocblockSettingsInterface</title>
+<loc>/api/@coffeekraken.s-docblock.shared.interface.SDocblockSettingsInterface</loc>
+<integrity>tkcvTkAQNkkH8Pm9rDbzN/jquyhtUZf89o/K30FOzik=</integrity>
   </url>
   <url>
 <title>author</title>
@@ -4557,6 +5162,11 @@
 <title>description</title>
 <loc>/api/@coffeekraken.s-docblock.shared.tags.description</loc>
 <integrity>/wK60OZzKyXGrBtF5aXxuKtWGh7+485Ha104lw8vZsw=</integrity>
+  </url>
+  <url>
+<title>eventTag</title>
+<loc>/api/@coffeekraken.s-docblock.shared.tags.eventTag</loc>
+<integrity>qecsRzvrbxGJTUVEnv1jDU/SXS3xOi9TLi1YBPXOQf4=</integrity>
   </url>
   <url>
 <title>example</title>
@@ -4671,7 +5281,12 @@
   <url>
 <title>SDatetimePickerComponent</title>
 <loc>/api/@coffeekraken.s-datetime-picker-component.js.SDatetimePickerComponent</loc>
-<integrity>o77nvG2LnUwTecPpku3KWM6P0VsMEfoiljp11vogc6s=</integrity>
+<integrity>MCyxGxuZld2HHwdXxbKFSIt9oPinLzVK7zwKq4lCrzc=</integrity>
+  </url>
+  <url>
+<title>SDatetimePickerComponentInterface</title>
+<loc>/api/@coffeekraken.s-datetime-picker-component.js.interface.SDatetimePickerComponentInterface</loc>
+<integrity>JBa/kvuZPh4+3tnsV8UM5hXHseje1VPtJhLaKt6xZoM=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -4701,7 +5316,7 @@
   <url>
 <title>SDataFileGeneric</title>
 <loc>/api/@coffeekraken.s-data-file-generic.node.SDataFileGeneric</loc>
-<integrity>CI2hOS6iy9rPa0knu0J6WKeC4xl3j7dgORJW6nxp5Bg=</integrity>
+<integrity>wI4V5EjhDSNA04YWzFYHd15fA3rtjgi/c2HILpu8tYI=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -4711,7 +5326,22 @@
   <url>
 <title>SDashboard</title>
 <loc>/api/@coffeekraken.s-dashboard.node.SDashboard</loc>
-<integrity>wWnF/nsQ7W1E/kWp3weiFmdqszFeDi2n629WrR89V6A=</integrity>
+<integrity>1PFYOvlBq1Oayoa1S27l7QnZK966LW6k1BZrm2rFAnw=</integrity>
+  </url>
+  <url>
+<title>SDashboardComponentInterface</title>
+<loc>/api/@coffeekraken.s-dashboard.js.interface.SDashboardComponentInterface</loc>
+<integrity>n2qiOkp+WKaPqhUDbCxnbAVEx5dETZR5fqExVLqO5MM=</integrity>
+  </url>
+  <url>
+<title>SDashboardSettingsInterface</title>
+<loc>/api/@coffeekraken.s-dashboard.js.interface.SDashboardSettingsInterface</loc>
+<integrity>LAIO0/wCp1/PRjog+djK9GD+4Dd8f4hw4egaKZ/W8X0=</integrity>
+  </url>
+  <url>
+<title>SDashboardPagesComponentAttrsInterface</title>
+<loc>/api/@coffeekraken.s-dashboard.js.partials.s-dashboard-pages-component.interface.SDashboardPagesComponentAttrsInterface</loc>
+<integrity>cIJwe/iapT3shmEkj1i+6rNKIvEiXpwkKeNdifqGUN8=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -4764,9 +5394,24 @@
 <integrity>80hrykcZGG3Ejx23vjmR7KSbwB87ePYODoCL4HbJ2CQ=</integrity>
   </url>
   <url>
+<title>SConductorSettingsInterface</title>
+<loc>/api/@coffeekraken.s-conductor.js.interface.SConductorSettingsInterface</loc>
+<integrity>lxqgsyNCVInI0/a/bby+QUSONv9oHDmIu1GkxlxO7uk=</integrity>
+  </url>
+  <url>
 <title>README</title>
 <loc>/api/@coffeekraken.s-component-utils.doc.README</loc>
 <integrity>JXFK+FQs9fNYnBcWAYBFv6tPDBKm2WNOnyKQBINxWBM=</integrity>
+  </url>
+  <url>
+<title>SComponentUtilsDefaultPropsInterface</title>
+<loc>/api/@coffeekraken.s-component-utils.js.interface.SComponentUtilsDefaultPropsInterface</loc>
+<integrity>Xb8eAGxeLC5clu+Lt52kjw7uyCXp/O2tuRMgbiZYIu0=</integrity>
+  </url>
+  <url>
+<title>SComponentUtilsSettingsInterface</title>
+<loc>/api/@coffeekraken.s-component-utils.js.interface.SComponentUtilsSettingsInterface</loc>
+<integrity>ctf6JaaRS7CRR6ZOcB4S03SIVyjynZpqSMBwIQYKc8w=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -4776,7 +5421,17 @@
   <url>
 <title>SColor</title>
 <loc>/api/@coffeekraken.s-color.shared.SColor</loc>
-<integrity>8n/3HIND24iHE6am413LQDVyr7MJoloQJBxUjFBJHRg=</integrity>
+<integrity>dDGksqVzEjw22Ytk6oT3qlN5oneW49n65UXb8SnFFnQ=</integrity>
+  </url>
+  <url>
+<title>SColorApplyParamsInterface</title>
+<loc>/api/@coffeekraken.s-color.shared.interface.SColorApplyParamsInterface</loc>
+<integrity>V9E2P5WXRYSjoIcZQJGlmqmvWD+7uWkxC6fopjteoq8=</integrity>
+  </url>
+  <url>
+<title>SColorSettingsInterface</title>
+<loc>/api/@coffeekraken.s-color.shared.interface.SColorSettingsInterface</loc>
+<integrity>7wT0QXazu5+eXJEcdOr5OqnD08htI9+rxRxQYGYDj/E=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -4786,7 +5441,32 @@
   <url>
 <title>SColorPickerComponent</title>
 <loc>/api/@coffeekraken.s-color-picker-component.js.SColorPickerComponent</loc>
-<integrity>BP7oCEMpOo0qzylzBpKVeRpN7z64xHjQPCVZC8b35RM=</integrity>
+<integrity>3cmGWGL1XT7aV50E+PBZUGz1JGkkgX8X+pLJx5bu57c=</integrity>
+  </url>
+  <url>
+<title>SColorPickerComponentInterface</title>
+<loc>/api/@coffeekraken.s-color-picker-component.js.interface.SColorPickerComponentInterface</loc>
+<integrity>8a5ElzSfYWd9R8eEZtTGijUjq0MBLl5u9avRkNTZJu8=</integrity>
+  </url>
+  <url>
+<title>README</title>
+<loc>/api/@coffeekraken.s-code-formatter.doc.README</loc>
+<integrity>k2XKDemVBzBOQaj83BLNC2p88nCuLYstzoDM6iBa4xQ=</integrity>
+  </url>
+  <url>
+<title>SCodeFormatter</title>
+<loc>/api/@coffeekraken.s-code-formatter.node.SCodeFormatter</loc>
+<integrity>oN910ZlYx5cD67Yy0IH+9FVVtBZMQBvJxk7ia5rcRRs=</integrity>
+  </url>
+  <url>
+<title>SCodeFormatterFormatParamsInterface</title>
+<loc>/api/@coffeekraken.s-code-formatter.js.interface.SCodeFormatterFormatParamsInterface</loc>
+<integrity>CSGnrLecfYSOCa2tlYUM9JCBasfrSQvDcCdXwdXRU6I=</integrity>
+  </url>
+  <url>
+<title>SCodeFormatterPrettier</title>
+<loc>/api/@coffeekraken.s-code-formatter-prettier.node.SCodeFormatterPrettier</loc>
+<integrity>nOczJaYBFOoIbELk0yF4F19ka4kz7yt0su0cDA4vzLs=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -4796,7 +5476,12 @@
   <url>
 <title>SCodeExampleComponent</title>
 <loc>/api/@coffeekraken.s-code-example-component.js.SCodeExampleComponent</loc>
-<integrity>1IyQzSyw66iH2oJ0/PqvXbTaty+peOJHl2d1LGN0k1I=</integrity>
+<integrity>9rGnMiohff7RkOvCeHHzlxifwO9kmJN1vfyIceTryEw=</integrity>
+  </url>
+  <url>
+<title>SCodeExampleComponentInterface</title>
+<loc>/api/@coffeekraken.s-code-example-component.js.interface.SCodeExampleComponentInterface</loc>
+<integrity>gqW/mDd2KS6ilmtYfZ01IOsfQoesKMTRYeO82D+Yan4=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -4806,7 +5491,12 @@
   <url>
 <title>SClipboardCopyComponent</title>
 <loc>/api/@coffeekraken.s-clipboard-copy-component.js.SClipboardCopyComponent</loc>
-<integrity>OZBQjJYK6BqkDzH4nAIhJ1CDOWs5HDZfl+ZAnipoiVk=</integrity>
+<integrity>zQlhE7dPyIZmRytO3wgxnxfWiSoDiemJmhzeabIbZCY=</integrity>
+  </url>
+  <url>
+<title>SClipboardCopyComponentInterface</title>
+<loc>/api/@coffeekraken.s-clipboard-copy-component.js.interface.SClipboardCopyComponentInterface</loc>
+<integrity>hD/5wfPHPxOmI5Tmr4+fQ0nSKOoaeHk9ysIw3cywx6c=</integrity>
   </url>
   <url>
 <title>README</title>
@@ -4839,6 +5529,21 @@
 <integrity>0kWX/ffZHW6kN5xRIiPxfXJW+KhfNMefXefuhf+fs64=</integrity>
   </url>
   <url>
+<title>SBenchSettingsInterface</title>
+<loc>/api/@coffeekraken.s-bench.shared.interface.SBenchSettingsInterface</loc>
+<integrity>rxyF3grOWWSuWxOrkCrJMcR23CveCa7TgQz/Is8vB3Q=</integrity>
+  </url>
+  <url>
+<title>SAppearFeature</title>
+<loc>/api/@coffeekraken.s-appear-feature.js.SAppearFeature</loc>
+<integrity>50dt6W6sdw137uS28BAaLDVB1DRntKQvVSkJTGEOgyI=</integrity>
+  </url>
+  <url>
+<title>SAppearFeatureInterface</title>
+<loc>/api/@coffeekraken.s-appear-feature.js.interface.SAppearFeatureInterface</loc>
+<integrity>ykxAhB7OyUEw/aUJ1BgFdP8Q+uNZD/9Ka0IJ4sTNadE=</integrity>
+  </url>
+  <url>
 <title>README</title>
 <loc>/api/@coffeekraken.s-activate-feature.doc.README</loc>
 <integrity>tJAKM2n/4agcxp8KEdBjFBpKCbuMhNo7C4wINihhDIA=</integrity>
@@ -4847,6 +5552,11 @@
 <title>SActivateFeature</title>
 <loc>/api/@coffeekraken.s-activate-feature.js.SActivateFeature</loc>
 <integrity>3UJb0AFwWsx4HfyQRMbDV/RiqjVEL1sAnodwhvJoj+0=</integrity>
+  </url>
+  <url>
+<title>SActivateFeatureInterface</title>
+<loc>/api/@coffeekraken.s-activate-feature.js.interface.SActivateFeatureInterface</loc>
+<integrity>ebJzTYR4lMhIlOHuQdGZyC28lo7TWYGe0Jr1gkb4klo=</integrity>
   </url>
   <url>
 <title>Overview</title>
@@ -4866,7 +5576,7 @@
   <url>
 <title>Overview</title>
 <loc>/api/@coffeekraken.coffeekraken-io.doc.config.Overview</loc>
-<integrity>GSsu87ubgc1u7/ZsRk1Q3X5J9WRv1tWzd9SmSacRHw8=</integrity>
+<integrity>cgttN1jscIQspoGgSwECIQJuL9/seqrQ9VKY0WuK2mo=</integrity>
   </url>
   <url>
 <title>Built-in configs</title>
@@ -4876,12 +5586,12 @@
   <url>
 <title>Override configs</title>
 <loc>/api/@coffeekraken.coffeekraken-io.doc.config.Override-configs</loc>
-<integrity>UcIK6uOmxTotdSSFIJFHTcqG1SpfdYe5/ZfGLBPPSKs=</integrity>
+<integrity>kzhWDfdk8CakxzxcnCEO5LYi2SQZTHzWDzRQ9CC/RoU=</integrity>
   </url>
   <url>
 <title>Register new config files</title>
 <loc>/api/@coffeekraken.coffeekraken-io.doc.config.Register-new-config-files</loc>
-<integrity>5uQqlUOD7tnnQsm84PDcGjzUTsgm/f7e5lUk3gOgox0=</integrity>
+<integrity>+3bC6ro6CqTren3pHDpQLMk5ODQTWjXlxoyOTmz5VYY=</integrity>
   </url>
   <url>
 <title>Configuration explorer</title>
@@ -4901,17 +5611,17 @@
   <url>
 <title>Create your recipe</title>
 <loc>/api/@coffeekraken.coffeekraken-io.doc.recipes.Create-your-recipe</loc>
-<integrity>SLYXmrAzZZ/NJLOP+xo0aK3vrzzmhyH1s325CuGsMtY=</integrity>
+<integrity>R3GWz7tk/4GhOAkHE6kXHB8wOHbGjj9whDJfDcxMovA=</integrity>
   </url>
   <url>
 <title>Built-in actions</title>
 <loc>/api/@coffeekraken.coffeekraken-io.doc.recipes.Built-in-actions</loc>
-<integrity>6xAT05zqxzf4W5lXE9deuWGIF5I2ZG2KsUy3Qxi6JCY=</integrity>
+<integrity>yFmJvbhj85xBXp6xJZOnNSLGkscL1RtEZ4tQgEag6GA=</integrity>
   </url>
   <url>
 <title>Languages</title>
 <loc>/api/@coffeekraken.coffeekraken-io.doc.css.Languages</loc>
-<integrity>OtDb+r7wwr8KbWHatJZ2yWoaOsGFvRAuaitiddNufQE=</integrity>
+<integrity>59Uq1VyqGouV382pD7dS6WkbkXiL+I+7Xw+0R/sjtQY=</integrity>
   </url>
   <url>
 <title>Pleasant syntax</title>
@@ -4966,7 +5676,7 @@
   <url>
 <title>Responsive</title>
 <loc>/api/@coffeekraken.coffeekraken-io.doc.css.Responsive</loc>
-<integrity>8xvFKdLbNI0z3aKebFuKV5r5uk/+m/VNnCX2jrAv5Rs=</integrity>
+<integrity>ufa8LCu5U2wZx6u0opL5aN6pfitgGGDP1maMOJOserU=</integrity>
   </url>
   <url>
 <title>Build</title>
@@ -4981,7 +5691,7 @@
   <url>
 <title>z-index</title>
 <loc>/api/@coffeekraken.coffeekraken-io.doc.css.z-index</loc>
-<integrity>a84iyv8cx5H/9WL4jSMFgiNia7Tqey2tceqS79FUsCE=</integrity>
+<integrity>bDYZBXhdlJ1uP9bJcUCWi/uc1ZA6+pZKvmT4rN1byuE=</integrity>
   </url>
   <url>
 <title>Supported languages</title>
@@ -4991,7 +5701,7 @@
   <url>
 <title>Sugar toolkit</title>
 <loc>/api/@coffeekraken.coffeekraken-io.doc.js.Sugar-toolkit</loc>
-<integrity>rAGvQXupqQLWrbksZWli833C1jg2eDmN/2ZtSiXVk6U=</integrity>
+<integrity>SzHhESeMWK0iZnEEFGne7BY194RscT1dgFBAcAM4f78=</integrity>
   </url>
   <url>
 <title>Packages</title>
@@ -5006,7 +5716,7 @@
   <url>
 <title>Overview</title>
 <loc>/api/@coffeekraken.coffeekraken-io.doc.components.Overview</loc>
-<integrity>6i0YQ16BF9yO1XxANeOOWFCqpftuSb3ZbLy+oaLBN9Q=</integrity>
+<integrity>le82iWSPeNXTelmWcjhTtcVYrl6TsKS7w2vePF3qCbw=</integrity>
   </url>
   <url>
 <title>Fully customizable</title>
@@ -5056,7 +5766,7 @@
   <url>
 <title>Overview</title>
 <loc>/api/@coffeekraken.coffeekraken-io.doc.routing.Overview</loc>
-<integrity>2/yubaA7FkgP9daUy3AfwVFt83thYtDXCOnjIA8rFYM=</integrity>
+<integrity>xW/uEK55NpU4NxNYq+3ml6Lt4l8lPRdBsCOBsn71s20=</integrity>
   </url>
   <url>
 <title>Views</title>
@@ -5066,12 +5776,12 @@
   <url>
 <title>Parameters</title>
 <loc>/api/@coffeekraken.coffeekraken-io.doc.routing.Parameters</loc>
-<integrity>Xn5iYszKsgefNNmtKJTjhNgQ9toEUSU+z3aTzhahVfE=</integrity>
+<integrity>0Ye519kJaCDL341nyubhnrIb8jNJ+JSqVtV4F7xfVbk=</integrity>
   </url>
   <url>
 <title>Data</title>
 <loc>/api/@coffeekraken.coffeekraken-io.doc.routing.Data</loc>
-<integrity>8brr2tqHNQqs/idVFQMPDRPD3pIjh1rwGTK5NTpQdWU=</integrity>
+<integrity>KrBoaeZbvBpZ99JDiNRYWA1dZuseTQXEh9FObI6CE08=</integrity>
   </url>
   <url>
 <title>Overview</title>
@@ -5241,297 +5951,297 @@
   <url>
 <title>Global reset</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.resets.Global-reset</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Destyle reset</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.resets.Destyle-reset</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Sugar reset</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.resets.Sugar-reset</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>default</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.font.default</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>title</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.font.title</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Avatar</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.ui.Avatar</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Backdrop</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.ui.Backdrop</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Badges</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.ui.Badges</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Blockquote</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.ui.Blockquote</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Buttons</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.ui.Buttons</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Checkbox</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.ui.Checkbox</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Dropdown</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.ui.Dropdown</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Fs Tree</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.ui.Fs-Tree</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Text Input</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.ui.input.Text-Input</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Input container</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.ui.inputContainer.Input-container</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Labels</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.ui.Labels</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Lists</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.ui.Lists</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Loaders</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.ui.Loaders</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Tabs</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.ui.Tabs</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Radio</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.ui.Radio</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Range</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.ui.Range</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Select</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.ui.Select</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Switch</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.ui.Switch</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Table</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.ui.Table</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Tooltips</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.ui.Tooltips</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Typography</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.ui.Typography</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Group</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.Group</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Clearfix</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.helpers.Clearfix</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Cursor</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.cursor.Cursor</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Colors</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.helpers.Colors</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Fit Sizes</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.helpers.Fit-Sizes</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Link</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.helpers.Link</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Gap</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.helpers.Gap</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Heights</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.helpers.Heights</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Text</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.helpers.Text</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Depth</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.helpers.Depth</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Disabled</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.helpers.Disabled</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Flexbox</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.helpers.Flexbox</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Float</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.helpers.Float</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Ratio</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.helpers.Ratio</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Radius</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.helpers.Radius</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Border width</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.helpers.Border-width</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Border color</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.helpers.Border-color</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Display</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.helpers.Display</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Positions</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.helpers.Positions</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Transitions</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.helpers.Transitions</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Margin</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.helpers.Margin</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Offsize</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.helpers.Offsize</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Order</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.helpers.Order</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Scale</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.tools.Scale</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Padding</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.helpers.Padding</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>User select</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.helpers.User-select</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Visibility</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.helpers.Visibility</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Visually</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.helpers.Visually</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Truncate</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.helpers.Truncate</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Scrollbar</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.tools.Scrollbar</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Widths</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.helpers.Widths</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>White space</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.helpers.White-space</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>Icons</title>
 <loc>/api/@coffeekraken.coffeekraken-io.sugar.style.ui.Icons</loc>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <title>sugar.cli</title>
@@ -5542,6 +6252,26 @@
 <title>README</title>
 <loc>/api/@coffeekraken.cli.doc.README</loc>
 <integrity>qFDpm8qDiz8jGSfv6iAlnoXX+HzN6u63iqyKH6NXT0E=</integrity>
+  </url>
+  <url>
+<title>SSugarCliParamsInterface</title>
+<loc>/api/@coffeekraken.cli.cli.interface.SSugarCliParamsInterface</loc>
+<integrity>2GsyKFHjqOHXmlzRwjc1mXVoUxD3zxn9QAmdgiWBm28=</integrity>
+  </url>
+  <url>
+<title>SSugarCliProcessKillParamsInterface</title>
+<loc>/api/@coffeekraken.cli.cli.process.interface.SSugarCliProcessKillParamsInterface</loc>
+<integrity>nWeBvi+Yza6tZ37X7Swhh6hieTtLJAC5sbGfdwtbXzU=</integrity>
+  </url>
+  <url>
+<title>SCliAddManifestJsonParamsInterface</title>
+<loc>/api/@coffeekraken.cli.node.add.interface.SCliAddManifestJsonParamsInterface</loc>
+<integrity>25gR216mMGbybMF/lLjnLucw+NWY4GfkNc00sRNbAQ4=</integrity>
+  </url>
+  <url>
+<title>SCliFsCopyParamsInterface</title>
+<loc>/api/@coffeekraken.cli.node.fs.interface.SCliFsCopyParamsInterface</loc>
+<integrity>1RVlrFlL4/mXxZMZ9ib2o74kWlGwRsyg8aZ5Nxan6Wg=</integrity>
   </url>
   <url>
 <loc>/config/explorer</loc>
@@ -5920,1052 +6650,1087 @@
   </url>
   <url>
 <loc>/doc/get-started/overview</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>l9HDcjzXhPanHHwPGW53hFP9N2Npul77fAAgz7hZvN4=</integrity>
   </url>
   <url>
 <loc>/doc/get-started/get-started</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>gE6LLNjtLQptxhtdmVkNQw6d8AmZ810d+g8CpLzrui8=</integrity>
   </url>
   <url>
 <loc>/doc/get-started/first-project</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>qdFE92jdadWcVEoxz+WS6KTImLOrS0ngeNWUjLRhmTU=</integrity>
   </url>
   <url>
 <loc>/doc/config/overview</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>GSsu87ubgc1u7/ZsRk1Q3X5J9WRv1tWzd9SmSacRHw8=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>cgttN1jscIQspoGgSwECIQJuL9/seqrQ9VKY0WuK2mo=</integrity>
   </url>
   <url>
 <loc>/doc/config/built-in</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>YFhAn6ts/ruQgxwTQEBMz7YjDlmqNixtQSnwZ5lNYM0=</integrity>
   </url>
   <url>
 <loc>/doc/config/override</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>UcIK6uOmxTotdSSFIJFHTcqG1SpfdYe5/ZfGLBPPSKs=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>kzhWDfdk8CakxzxcnCEO5LYi2SQZTHzWDzRQ9CC/RoU=</integrity>
   </url>
   <url>
 <loc>/doc/config/register</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>5uQqlUOD7tnnQsm84PDcGjzUTsgm/f7e5lUk3gOgox0=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>+3bC6ro6CqTren3pHDpQLMk5ODQTWjXlxoyOTmz5VYY=</integrity>
   </url>
   <url>
 <loc>/doc/config/explorer</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>3GOhS14hs1OpUg5lO69SsgkyIcVTrlo4zCmq82ZQu1I=</integrity>
   </url>
   <url>
 <loc>/doc/recipes/what-are-recipes</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>H5aXhxeVNMVTNx9VDkX20kzvF3nuDeWxLhLRp3/cKvU=</integrity>
   </url>
   <url>
 <loc>/doc/recipes/built-in-recipes</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>jolQsk7DlNaFe1r9dPYosrX6wII3LBVwEfxCZCT/sn0=</integrity>
   </url>
   <url>
 <loc>/doc/recipes/create-your-recipe</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>SLYXmrAzZZ/NJLOP+xo0aK3vrzzmhyH1s325CuGsMtY=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>R3GWz7tk/4GhOAkHE6kXHB8wOHbGjj9whDJfDcxMovA=</integrity>
   </url>
   <url>
 <loc>/doc/recipes/built-in-actions</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>6xAT05zqxzf4W5lXE9deuWGIF5I2ZG2KsUy3Qxi6JCY=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>yFmJvbhj85xBXp6xJZOnNSLGkscL1RtEZ4tQgEag6GA=</integrity>
   </url>
   <url>
 <loc>/doc/css/languages</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>OtDb+r7wwr8KbWHatJZ2yWoaOsGFvRAuaitiddNufQE=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>59Uq1VyqGouV382pD7dS6WkbkXiL+I+7Xw+0R/sjtQY=</integrity>
   </url>
   <url>
 <loc>/doc/css/pleasant-syntax</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>u0KJmwMU8URbPCITbY6/lIkOCKgDHsarFa8ZaZZPwNI=</integrity>
   </url>
   <url>
 <loc>/doc/css/classes</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>c7rGRrks1+fP+5MyPKV2iXesw5Dcbwk1sWPNsID6yx4=</integrity>
   </url>
   <url>
 <loc>/doc/css/mixins</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>7yd3sYVpeg116TNT19l16zTLTQqujuoqAkAUZeEL0Kg=</integrity>
   </url>
   <url>
 <loc>/doc/css/functions</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>ty11NscW8xmuhX4G1WWIAE0LC/XNf8kS1yx6MwWFsHs=</integrity>
   </url>
   <url>
 <loc>/doc/css/colors</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>qOTB2QO2L5kbHHqapCjed+FjztPqh8PWBak9hZV+lZc=</integrity>
   </url>
   <url>
 <loc>/doc/css/theming</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>x3E88gO2NoGitvNruqCnPxcWieZFSio5a70zYf2+p74=</integrity>
   </url>
   <url>
 <loc>/doc/css/typography</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>C3gJuyHbkvFtwUfzZkNXhmQ4rB72tRRLuvHGArm42xY=</integrity>
   </url>
   <url>
 <loc>/doc/css/icons</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>OQMR6siuE2HSQmmTHjaJvbjc19e8OAZEwiq2udsNiv4=</integrity>
   </url>
   <url>
 <loc>/doc/css/ui</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>IrLSPZL4xbILBWX9Y4BK7p/kZvGEhUYMVGEfINui5+M=</integrity>
   </url>
   <url>
 <loc>/doc/css/layout</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>fk4PPDtUjQKML8v9dDrP9qobmMHT/6orjL4DcmaKh7k=</integrity>
   </url>
   <url>
 <loc>/doc/css/responsive</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>8xvFKdLbNI0z3aKebFuKV5r5uk/+m/VNnCX2jrAv5Rs=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>ufa8LCu5U2wZx6u0opL5aN6pfitgGGDP1maMOJOserU=</integrity>
   </url>
   <url>
 <loc>/doc/css/build</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>h58OY0r3E0++KK5UkxuCFHye75043O++lWdntdJJXT4=</integrity>
   </url>
   <url>
 <loc>/doc/css/scopes</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>cR6XMszv1yY6WHtJ4Gs9z0+CPdvLujnzcFOkqNtVI00=</integrity>
   </url>
   <url>
 <loc>/doc/css/z-index</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>a84iyv8cx5H/9WL4jSMFgiNia7Tqey2tceqS79FUsCE=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>bDYZBXhdlJ1uP9bJcUCWi/uc1ZA6+pZKvmT4rN1byuE=</integrity>
   </url>
   <url>
 <loc>/doc/js/supported-languages</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>+MIuAQa4O9RKfB0rQp6gKL7Y7kA/oqrz33Jt7pQGvUU=</integrity>
   </url>
   <url>
 <loc>/doc/js/sugar</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>rAGvQXupqQLWrbksZWli833C1jg2eDmN/2ZtSiXVk6U=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>SzHhESeMWK0iZnEEFGne7BY194RscT1dgFBAcAM4f78=</integrity>
   </url>
   <url>
 <loc>/doc/js/packages</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>EUc5M7MPe2JqJYyrngqnrlRgFDpA/43oYdMs5KMrI2U=</integrity>
   </url>
   <url>
 <loc>/doc/js/build</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>DuMNHPGCsVJrjwjVv1FSs9QEiowPkPoNT4PlwczECyA=</integrity>
   </url>
   <url>
 <loc>/doc/components/overview</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>6i0YQ16BF9yO1XxANeOOWFCqpftuSb3ZbLy+oaLBN9Q=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>le82iWSPeNXTelmWcjhTtcVYrl6TsKS7w2vePF3qCbw=</integrity>
   </url>
   <url>
 <loc>/doc/components/customizable</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>gSi90rvasWSg9iJ+GqtAgJm0kxnIIyHFx+dorCwYXgk=</integrity>
   </url>
   <url>
 <loc>/doc/components/official</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>KpaDfLTX4G1MGV4DkSDYRmIqm5QhmXQ0/kSrdmqfoeU=</integrity>
   </url>
   <url>
 <loc>/doc/components/create-your-own</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>wFe/SefRlK/gcl+v8y0WRpBBkuEpZSv6cTtrd59p0XU=</integrity>
   </url>
   <url>
 <loc>/doc/components/responsive</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>e5DBIFEIdMT7FRahc/B1kgRey0xSrxRAWxxlt/OfKrc=</integrity>
   </url>
   <url>
 <loc>/doc/components/scopes</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>9gj/8Vl63asBs6YFD2FyaUesKHhanbKbCJgqg7caHUo=</integrity>
   </url>
   <url>
 <loc>/doc/images/overview</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>KyhLpKW0uCO6dDY5WFfQWRVZOUIZ+7TmybNEwLbsFYs=</integrity>
   </url>
   <url>
 <loc>/doc/images/formats</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>j1bend3nAuL2FMHowa3jM4IFVRGhlRwJ7NztzOQO+1Y=</integrity>
   </url>
   <url>
 <loc>/doc/images/build</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>sxs0sjCch4BmTPHVsFZpQ7yALJdDd/YwFlmS8Fe222U=</integrity>
   </url>
   <url>
 <loc>/doc/images/configuration</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>hTQngsJvvrG85fZiOaADNUYJ90jjfBwesZ0AmuJWMik=</integrity>
   </url>
   <url>
 <loc>/doc/routing/overview</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>2/yubaA7FkgP9daUy3AfwVFt83thYtDXCOnjIA8rFYM=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>xW/uEK55NpU4NxNYq+3ml6Lt4l8lPRdBsCOBsn71s20=</integrity>
   </url>
   <url>
 <loc>/doc/routing/views</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>sAsytcMuzBMcj3gjS2Qya/YsPyAlgU6cNS9SWP2KC/Q=</integrity>
   </url>
   <url>
 <loc>/doc/routing/parameters</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>Xn5iYszKsgefNNmtKJTjhNgQ9toEUSU+z3aTzhahVfE=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>0Ye519kJaCDL341nyubhnrIb8jNJ+JSqVtV4F7xfVbk=</integrity>
   </url>
   <url>
 <loc>/doc/routing/data</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>8brr2tqHNQqs/idVFQMPDRPD3pIjh1rwGTK5NTpQdWU=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>KrBoaeZbvBpZ99JDiNRYWA1dZuseTQXEh9FObI6CE08=</integrity>
   </url>
   <url>
 <loc>/doc/servers/overview</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>9BZx236P4b0DDSvn7AnMhrZPtQ/j1Dl1pIx+4cJ5G1M=</integrity>
   </url>
   <url>
 <loc>/doc/servers/modules</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>pdUUuhNRMbnJh1YwHBuiqWnuPR0S1i27L9Wq6PtUlrg=</integrity>
   </url>
   <url>
 <loc>/doc/servers/handlers</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>koewFTq+nO+Hs0DG+nNv31WGAj6qzIBY6s/jVApz0yw=</integrity>
   </url>
   <url>
 <loc>/doc/servers/middlewares</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>OpvXZJsG22rcnKtiu5YHVbU1E29Utyx9zNeRebClYuA=</integrity>
   </url>
   <url>
 <loc>/doc/servers/routes</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>xmslV6EfmC2sAVrOdMg2ptoHX107RwIw/nmZFbZ5+Ug=</integrity>
   </url>
   <url>
 <loc>/doc/servers/configuration</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>doSs3frQ26Ict33Zp9VIdVI1iJBsyWIad8hHid1TS88=</integrity>
   </url>
   <url>
 <loc>/doc/docmap/overview</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>S0gya9wA8W9Y1LXiHJ+V+spYWFaeU9O/ljtHoOmrdbU=</integrity>
   </url>
   <url>
 <loc>/doc/docmap/writing-documentation</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>eOJAh9OhZQOWXgYOzxgOyJSV3hIUPtpumEH/KXoScW8=</integrity>
   </url>
   <url>
 <loc>/doc/docmap/build</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>iLK+pjmMT5fANFfZuXLtekjX+S2NGy0UpukRtMRa2Oo=</integrity>
   </url>
   <url>
 <loc>/doc/docmap/api</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>uJHtDb2XoZJfl3b5XZ1IkMyB1jjEwJ8qiC8NUtmLiqo=</integrity>
   </url>
   <url>
 <loc>/doc/docmap/configuration</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>OirLMKIPTAzZWoW+Jj4OYDCOaGgeh1kAo/0T6DBsB0A=</integrity>
   </url>
   <url>
 <loc>/doc/specfiles/overview</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>Rwzpd7rw9wWpZilHCdLHvM5EVvRK2yV+TIf6Ecn5ZPI=</integrity>
   </url>
   <url>
 <loc>/doc/specfiles/frontspec</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>1354j90xnu88HY/QEFyVSRxRensyRCX6P30dLR8gB+4=</integrity>
   </url>
   <url>
 <loc>/doc/specfiles/viewspec</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>te7lCiDPg0wc5mvkoX/UjoShRFjfrTzd0XIc2rTSN3E=</integrity>
   </url>
   <url>
 <loc>/doc/cli/overview</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>gccoQ8W/FYwQhA+NDlFd9vNk8ygrfdoFklc5oL64tQk=</integrity>
   </url>
   <url>
 <loc>/doc/cli/extends</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>WQneXzbgb6QzMrXcR5H386zXp+XglmiVlWSOxN8ttR8=</integrity>
   </url>
   <url>
 <loc>/doc/dependencies/overview</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>c7A6h6OwyooiRQMlPomPc+GJPVHa+Liduuql9il4Qz4=</integrity>
   </url>
   <url>
 <loc>/doc/recipes/actions/addManifestJson</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>l0LksQkaMcb4QI4NfCGLi4ffooNw+/iKuYjs81FUMVc=</integrity>
   </url>
   <url>
 <loc>/doc/recipes/actions/addSugarJson</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>r2LA4cjZpoHdI3t23o5Qt7JbyhVR0Hv/AWTDNRnmHso=</integrity>
   </url>
   <url>
 <loc>/doc/recipes/actions/copy</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>H3TH/gL3J+iwvdEUNTR/4L7AgrLN/eEaCd7esT2hE8Q=</integrity>
   </url>
   <url>
 <loc>/doc/recipes/actions/frontendServer</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>bOw98QAaTw5kKwB8X1TO1l6MrMao2G5P2JN4l0nL8a8=</integrity>
   </url>
   <url>
 <loc>/doc/recipes/actions/imagesBuild</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>h44aYMN49rV6UP2c2wN81IZ5wu+TrrlRwDiQK3iGJJY=</integrity>
   </url>
   <url>
 <loc>/doc/recipes/actions/installDependencies</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>H9ePpTKut9UmMuv1Vc4YhMRANNM80KDHcn+ouSmtex4=</integrity>
   </url>
   <url>
 <loc>/doc/recipes/actions/postcssBuild</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>EvjkakHb/oY/5psFXT0OExQ9S2UVhWiQaZRPX8lyhFg=</integrity>
   </url>
   <url>
 <loc>/doc/recipes/actions/rename</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>bdV8y+pD+dE3uXIdHsdru1SBpEVkQ/oOQKDmf/vtEfA=</integrity>
   </url>
   <url>
 <loc>/doc/recipes/actions/vite</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>d9qmBuN5EaiNHYjz5c5VDnpwgR8ArYYKpA375tBNE+c=</integrity>
   </url>
   <url>
 <loc>/doc/recipes/actions/viteBuild</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>Un22MrtDFMicni0bhDB4n+mpkQuhdE3NTAScwGQBVMg=</integrity>
   </url>
   <url>
 <loc>/doc/recipes/built-in/generic</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>X6hKvjZCGEAH9Q5MHTSlZPgoZLjMSviQHlC/vO0clH0=</integrity>
   </url>
   <url>
 <loc>/doc/recipes/built-in/litElement</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>KjD03B/0wOf+twp4t7j4HhbnAiCowgFL7RyGMAhSWDM=</integrity>
   </url>
   <url>
 <loc>/doc/recipes/built-in/feature</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>CVbRLQDiUKP5YMzyDATkxhpB3xpQjb0rL36en87OTw0=</integrity>
   </url>
   <url>
 <loc>/doc/recipes/built-in/nextjs</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>L/nXocu6AT0551qaer0eszPV8FjmsJ5z0bL6rNU6kh0=</integrity>
   </url>
   <url>
 <loc>/styleguide/resets/global</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/resets/destyle</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/resets/sugar</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/ui/avatar</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/ui/backdrop</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/ui/badges</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/ui/blockquote</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/ui/button</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/forms/checkbox</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/ui/dropdown</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/ui/fs-tree</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/forms/text-input</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/forms/input-container</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/forms/labels</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/ui/lists</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/ui/loaders</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/ui/tabs</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/forms/radio</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/forms/range</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/forms/select</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/form/switch</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/ui/table</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/ui/tooltip</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/helpers/typography</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/ui/group</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/helpers/clearfix</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/helpers/cursor</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/helpers/colors</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/helpers/fit-sizes</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/helpers/link</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/helpers/gap</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/helpers/heights</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/helpers/text</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/helpers/depth</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/helpers/disabled</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/helpers/flexbox</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/helpers/float</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/helpers/ratio</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/helpers/radius</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/helpers/border-width</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/helpers/border-color</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/helpers/display</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/helpers/positions</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/helpers/transition</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/helpers/margin</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/helpers/offsize</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/helpers/order</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/tools/scale</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/helpers/padding</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/helpers/user-select</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/helpers/visibility</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/helpers/visually</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/helpers/truncate</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/ui/scrollbar</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/helpers/widths</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/helpers/white-space</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/styleguide/ui/icons</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>CKxIyinOZUikI1mT39S70sMeLUWPMiJtnbuMQFqIJ1A=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>eARj9lLKDsInoGFZNZgQaF4YH1pCO8USA158lxZ/nT4=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/cli/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>qFDpm8qDiz8jGSfv6iAlnoXX+HzN6u63iqyKH6NXT0E=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-activate-feature/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>tJAKM2n/4agcxp8KEdBjFBpKCbuMhNo7C4wINihhDIA=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-activate-feature/styleguide/feature/s-activate-feature</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>3UJb0AFwWsx4HfyQRMbDV/RiqjVEL1sAnodwhvJoj+0=</integrity>
   </url>
   <url>
+<loc>/package/@coffeekraken/s-appear-feature/styleguide/feature/s-appear-feature</loc>
+<lastmod>2022-06-29</lastmod>
+<integrity>50dt6W6sdw137uS28BAaLDVB1DRntKQvVSkJTGEOgyI=</integrity>
+  </url>
+  <url>
 <loc>/package/@coffeekraken/s-bench/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>gWHKmdPBJEdsnY7wZIHL8BwjC8Hv1kFfSGJCL91wbEA=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-builder/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>k2XKDemVBzBOQaj83BLNC2p88nCuLYstzoDM6iBa4xQ=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-class/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>iPXDaWUaF/RY2XH7QNREKvddqZoADpIV13QGqZeqBUM=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-clipboard-copy-component/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>1g8iQoxm2KFzCN2k9Omk/vA4KdNSkw+7Zj6kTPk3yaM=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-clipboard-copy-component/styleguide/ui/s-clipboard-copy</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>OZBQjJYK6BqkDzH4nAIhJ1CDOWs5HDZfl+ZAnipoiVk=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>zQlhE7dPyIZmRytO3wgxnxfWiSoDiemJmhzeabIbZCY=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-code-example-component/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>/QJRivHuBoH9ygiLs9d/lZCIXfi4sXV5YVILgfGBgSU=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-code-example-component/styleguide/ui/s-code-example</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>1IyQzSyw66iH2oJ0/PqvXbTaty+peOJHl2d1LGN0k1I=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>9rGnMiohff7RkOvCeHHzlxifwO9kmJN1vfyIceTryEw=</integrity>
+  </url>
+  <url>
+<loc>/package/@coffeekraken/s-code-formatter/doc/readme</loc>
+<lastmod>2022-06-29</lastmod>
+<integrity>k2XKDemVBzBOQaj83BLNC2p88nCuLYstzoDM6iBa4xQ=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-color/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>Hw+JTH4cBYT8xe3CXCsA/AQZ5Ec5T14wIckHF/Str7s=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-color-picker-component/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>HUwbCUYfXw5ZkusQVFzrq7kafapfbkYOsq2hUYZNLRM=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-color-picker-component/styleguide/form/s-color-picker</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>BP7oCEMpOo0qzylzBpKVeRpN7z64xHjQPCVZC8b35RM=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>3cmGWGL1XT7aV50E+PBZUGz1JGkkgX8X+pLJx5bu57c=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-component-utils/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>JXFK+FQs9fNYnBcWAYBFv6tPDBKm2WNOnyKQBINxWBM=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-conductor/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>YWN4aSz1ger14IkXZyIYrwmSQhVULtdTRz12rWP8IK0=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-config/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>8iGc+zS8uKF1puHv/83KCJycZW5mOQFki2dTxIKF83g=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-config-adapter/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>/+YZ+8+USHaq1NcTIPE0GF8yEQAXEFl4AVmDS4Eg9iE=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-config-folder-adapter/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>8ISRs/xCU27z7/fstmS2S7mgDl++/hnS3Ic7EmgyZ+I=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-config-inline-adapter/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>UvTulMTONk0rcqhM5UvUR2rfTi4v+rHakex2WyxdRss=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-dashboard/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>lC7lqRGngzkTMZfSEXbSAQw/nlgQTxm2ADzHSkrzPSA=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-data-file-generic/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>CH6dka1ju8Zw7cGPnhGInMuoORLz4PTJ2b2VTr2QZGs=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-data-file-js/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>SPCwuZTZSdfr5uKIVgUK3COfM+vD+AbDp2gj61ys8vM=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-data-file-php/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>MsO0iOPYsjKnBZ6Tf66dthVJbmFUEFAKbrYWl8U7rKo=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-datetime-picker-component/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>HUwbCUYfXw5ZkusQVFzrq7kafapfbkYOsq2hUYZNLRM=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-datetime-picker-component/styleguide/form/s-datetime-picker</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>o77nvG2LnUwTecPpku3KWM6P0VsMEfoiljp11vogc6s=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>MCyxGxuZld2HHwdXxbKFSIt9oPinLzVK7zwKq4lCrzc=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-docblock/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>bYko/rLTeUTw+C5Qd02a1gH+LDpUnD9AkzWMVRXQ66E=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-docmap/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>d/0Yzv4Y7cLJq1wvL0/+clF17ByDMJppRJUnQsVm/9c=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-duration/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>VFI66rWKw3dlFleNP/Gcx5CvjEQwpw2PYm0icUR4WBQ=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-env/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>EXBr8iVqv44vlAn1pVASJkp0Ex8ss6ru+X8lYhemqFk=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-event-emitter/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>2eQjq7JC5SyVITL90RIzoUNipdXzGXj4zP9xWkllf0s=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-favicon-builder/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>DZUwaCPufBljP64sHQ5niOYwT2vf5wmiE0e50gqyX5Q=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-feature/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>3R6oW5NMpfNIhttaatzMIR8pXobUc5mFYa0A7Y2GM3I=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-file/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>iNbCdgpXMtOJvgFcaDwYGXZM7UyVAGj0aCtZaHZmfKs=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-filtrable-input-component/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>l3Yv1Pu/GI4foDnn3hpBz9LoL5mwWCk0yFJtVgNhKck=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-filtrable-input-component/styleguide/ui/s-filtrable-einput</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>uitPoI2vcMo94s1gYiqm9TafdCTZmSxk5afyqLoMhfU=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>jgRXTUtuon1ScdVNWhqL7gFfdCNS0kvnT8j99M/4EOc=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-floating-feature/styleguide/feature/s-floating-feature</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>NoSkchVUPg/3vI3R0K0he1NqbJ3AjDpBwtW8s9D1Xe8=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>WqSiYsqpTLGDVQe1cx8/K+br1Kkkpv0/q9u/KW9lxds=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-form-validate-feature/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>iI4j2gZuARZ+zcacABH9eaKDKw4qogEnMZuXORgh09U=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-form-validate-feature/styleguide/form/s-form-validate-feature</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>lNKDH3sy6KY2H+2VkWezacklYuE4yMpTARCt8dcmVy4=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>l2mBYttZostsuZ17nGNXaaKs5eTUgk4jLcumxfdT9i4=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-frontend-server/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>X3opPs19KRADrY8V65RISTKBk5pxKLys7xHNB3q+tWg=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-frontspec/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>Ixqr8D5vZ9puN0Xi56CsV9FGGF2owFyPqJ7jtE2lw04=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-glob/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>qSaa6UGJCyvb+WPvu9BByOwS+ycI+3sykrYicIyMHT0=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-images-builder/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>3xX0F7P7+LlLuVBJQ6+fsOIYr/44Tp+WeZsC+p84tTM=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-inline-feature/styleguide/feature/s-sugar-feature</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>S1PmoDmq8MAkOsv6MPVkQah2v/ffVKrxU/0n7AqpTOg=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>UFwUQEBsn/3gX1hECxiTqX+soP53HgtausFvKW3c5QE=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-interface/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>RQ0y+hxPY6jwVr8A/tK8Iw8NDnJuLYzbWlzzlMPpzbM=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-kitchen/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>/7AMEx7H2wGa5Id3y7vl1Y99LbJSi5CCm+mk3jnh+cc=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-log/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>gPg4HuBzhfdg5I/uSiGDmq7/dfE6QjIWRmmC46ukK6c=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-markdown-builder/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>uRi1vKNlbfJPo/mEdeiMbtTLX1Km0aZ7E7FaNT5KSYQ=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-monorepo/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>Gcv1PKi8FRCGwdalr+Pdea+CntRM/FIj01G5oyG/kaw=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-package/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>t5NPKQoDm8ISo7C9plpLOFZRnc1BG5aLzPZ5QcYS+AI=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-page-transition-feature/styleguide/feature/s-page-transition-feature</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>aW10JUpJahmMERyt1gW29ljxjMAI9bKIn0wSF4sm7lM=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>qIIINevfUvrMk84O6w6Fnjwa1wCUiG3cn80ZkOXJg+Q=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-panel-component/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>isZYPZqddb/RlskymCg9LuKQUlvoGJc0gVyV62+lMjA=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-panel-component/styleguide/ui/s-panel</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>GXS/AtX6Ui5hOzCn9/EGGhbXSW2t/ZDzOnlK1VFkjqM=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>+lJ8EFiLu0sSEmqPcQiZMQdEHTAAsgA7GqCVOkKVcso=</integrity>
+  </url>
+  <url>
+<loc>/package/@coffeekraken/s-parallax-feature/styleguide/feature/s-parallax-feature</loc>
+<lastmod>2022-06-29</lastmod>
+<integrity>GHt5aI5nLrEy5nmkv8smhaQQzNuU7JgJ/bwh0eBbOZM=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-postcss-builder/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>g+es3QizszM9v1YGsGuGXOxPhcYXHHvqeY+xXqBUdqo=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-postcss-sugar-plugin/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>k/iwx1Yvu+WG+ud1/qMuO8jTtLAdu+QYE1Gbxks0hTs=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-process/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>Wwfg6uxeJNMgqIcQBylUL3nhlntbcPxExFLWLmfIxzw=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-promise/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>+f2ZfIPtL3CBCOaBIf4OlP5iZSROUZaCwfx4t0mEonI=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-range-component/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>zcJFE4IATPkwqpfo/vp+PbSXZF5t+t3YGpi8jvuB+tg=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-range-component/styleguide/form/s-range</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>vhBrErAzcgvdiquPM9YZdUqilqe4Bf8kf11UItJaIN0=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>BedKmN2vX3/jpflcqbhiL21SbpSIUQnDIfFATL9mjM0=</integrity>
+  </url>
+  <url>
+<loc>/package/@coffeekraken/s-rating-component/doc/readme</loc>
+<lastmod>2022-06-29</lastmod>
+<integrity>1g8iQoxm2KFzCN2k9Omk/vA4KdNSkw+7Zj6kTPk3yaM=</integrity>
+  </url>
+  <url>
+<loc>/package/@coffeekraken/s-rating-component/styleguide/ui/s-rating</loc>
+<lastmod>2022-06-29</lastmod>
+<integrity>F0P1gp5/4i5rNSgIXQFtWiT1acwSV6icTsN2p8asEl8=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-refocus-feature/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>+W/Qt5XUlJXKuXaz7Ltc2Doi3mOm4IP/f5WL6h6w3ig=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-refocus-feature/styleguide/feature/s-activate-feature</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>sIkBCn9f5pCjYghCYbLITcza2FBRf5HctMbub+jroo4=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>aPAGecGjmPjrmz5v+JZtwU5vIiLJIaUOUgKgHLWTs30=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-request/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>9URZta5jAjlrJACxcdzG45A5S0Kq2a9A7YU3bgKLAyc=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-scroll-component/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>lySz7WWmwzSwR9SHgVCGpuSazv/VQo/J6DxmZD9US5Q=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-scroll-component/styleguide/tool/s-scroll</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>z7itpY5nKx3CULDgqDRfHpd1cOdC0VDVY+fvjs602AQ=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-sitemap-builder/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>LPrGYbat8f6GGfrYNHMy/xLxiDhpguMi3yW4ydLaGwc=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-slider-component/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>NO2anlil/RQtLZB2ZJ2diTX2G0cDqPF4pDAGYN07idg=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-slider-component/styleguide/ui/s-slider</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>0lyGBByvf3Om0Fw3Ilxxxt4+5ShXPXZS3wgTGt+cNTw=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>T2aglieU3/jlxgevWaR6Ki1qWK8vl0/xkZta8R+cdJw=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-static-builder/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>MawmwZ3X11n0AM+KCgeP9r4cDZ2jkcDrb9uedckeNwo=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-stdio/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>BSMjPVORZuAAPaPW2ThmwHJKEFgX9TzxKKZ3qn7/RBs=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-sugar-config/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>e0jS/b3ZhJOmH75dcmbwxocRfN9Gf0/JQaHRyS5nhOY=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-sugar-feature/styleguide/feature/s-sugar-feature</loc>
-<lastmod>2022-06-19</lastmod>
-<integrity>S+jkau1DaXr9ww+PclzsGy6W/XDv6EClrI9xeoEbODI=</integrity>
+<lastmod>2022-06-29</lastmod>
+<integrity>EJRunWTS6ZbfgxPNj2ndoAtSlFqy86KPDCeo633mTA4=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-sugar-json/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>u2rWcZQNXlFjJGky9SlWGvz6c/w0cPIYOel8hYNx2KI=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-theme/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>RIe4RG6a2jqLBYC/cMcBZMmAO9y2wUsOA/ACOe3yH4I=</integrity>
   </url>
   <url>
+<loc>/package/@coffeekraken/s-theme-switcher-component/doc/readme</loc>
+<lastmod>2022-06-29</lastmod>
+<integrity>1g8iQoxm2KFzCN2k9Omk/vA4KdNSkw+7Zj6kTPk3yaM=</integrity>
+  </url>
+  <url>
+<loc>/package/@coffeekraken/s-theme-switcher-component/styleguide/ui/s-theme-switcher</loc>
+<lastmod>2022-06-29</lastmod>
+<integrity>oPvSgUb+Wy6yTJkncUdoMjtGv8jXjqvAltgCB2OYd1s=</integrity>
+  </url>
+  <url>
 <loc>/package/@coffeekraken/s-typescript-builder/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>XDM60YxyDpQiZqYTz9RREf21hlJaL2+NEs25DEjtZvw=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-validator/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>KToTNt7ZfWfKIhhiU9QMWnNb6YroweWpRMS6sM3ghYM=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-view-renderer/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>za0FHV6KyvJLOJtC+zlhByTZGS4jUDjIjwv8mxaPL5I=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/s-vite/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>WJSoRnt0BpP/E7BLstmhDw5y9E1Jqik2ORx45cvd1IM=</integrity>
   </url>
   <url>
 <loc>/package/@coffeekraken/sugar/doc/readme</loc>
-<lastmod>2022-06-19</lastmod>
+<lastmod>2022-06-29</lastmod>
 <integrity>vGb196TZ9yiQzBpO3bA65TBX9GWdgp0YnNqOuu7Ycnk=</integrity>
   </url>
 </urlset>

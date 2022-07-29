@@ -197,6 +197,8 @@ export default function (env, config) {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             outDir: '[config.storage.dist.jsDir]',
+
+            rollupOptions: {},
         },
         server: {
             // watch: {

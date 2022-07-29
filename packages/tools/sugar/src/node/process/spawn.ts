@@ -200,6 +200,7 @@ export default function spawn(
 
             // handle other cases
             if (stderr.length) {
+                console.log('ERROR?', stderr);
                 emit('close.error', resultObj);
                 if (settings.returnValueOnly) return reject(resultObj.value);
                 return reject(resultObj);

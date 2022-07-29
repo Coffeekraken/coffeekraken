@@ -349,7 +349,8 @@ class SDocMap extends __SClass implements ISDocmap {
                         );
 
                     if (__fs.existsSync(potentialPackageDocmapJsonPath)) {
-                        currentPathDocmapJsonPath = potentialPackageDocmapJsonPath;
+                        currentPathDocmapJsonPath =
+                            potentialPackageDocmapJsonPath;
                     } else if (
                         __fs.existsSync(`${packageNameOrPath}/docmap.json`)
                     ) {
@@ -357,7 +358,8 @@ class SDocMap extends __SClass implements ISDocmap {
                     } else if (
                         __fs.existsSync(potentialRootPackageDocmapJsonPath)
                     ) {
-                        currentPathDocmapJsonPath = potentialRootPackageDocmapJsonPath;
+                        currentPathDocmapJsonPath =
+                            potentialRootPackageDocmapJsonPath;
                     } else {
                         emit('log', {
                             type: __SLog.TYPE_WARN,
@@ -481,9 +483,8 @@ class SDocMap extends __SClass implements ISDocmap {
 
                 // cache it in memory
                 // @ts-ignore
-                this.constructor._cachedDocmapJson[
-                    docmapVersion
-                ] = finalDocmapJson;
+                this.constructor._cachedDocmapJson[docmapVersion] =
+                    finalDocmapJson;
 
                 // sorting
                 finalParams.sort.forEach((dotPath) => {
@@ -890,11 +891,10 @@ class SDocMap extends __SClass implements ISDocmap {
                             if (docblock[tag] === undefined) continue;
                             // props proxy
                             if (this.settings.tagsProxy[tag]) {
-                                docblockEntryObj[
-                                    tag
-                                ] = await this.settings.tagsProxy[tag](
-                                    docblock[tag],
-                                );
+                                docblockEntryObj[tag] =
+                                    await this.settings.tagsProxy[tag](
+                                        docblock[tag],
+                                    );
                             } else {
                                 docblockEntryObj[tag] = docblock[tag];
                             }
@@ -916,9 +916,8 @@ class SDocMap extends __SClass implements ISDocmap {
                             };
                             this._entries[dotPath] = docblockObj;
                         } else if (docblock.name) {
-                            children[
-                                __toLowerCase(docblock.name)
-                            ] = docblockEntryObj;
+                            children[__toLowerCase(docblock.name)] =
+                                docblockEntryObj;
                         }
                     }
                     docblockObj.children = children;
@@ -960,7 +959,7 @@ class SDocMap extends __SClass implements ISDocmap {
             },
             {
                 eventEmitter: {
-                    bind: this,
+                    id: this.constructor.name,
                 },
             },
         );

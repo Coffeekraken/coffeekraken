@@ -156,9 +156,8 @@ export default class SVite extends __SClass {
                 const duration = new __SDuration();
 
                 // @ts-ignore
-                const finalParams: ISViteBuildParams = __SViteBuildParamsInterface.apply(
-                    params,
-                );
+                const finalParams: ISViteBuildParams =
+                    __SViteBuildParamsInterface.apply(params);
 
                 // object to store results of each "type"
                 const results = {};
@@ -206,6 +205,37 @@ export default class SVite extends __SClass {
                                     manualChunks(id) {
                                         return 'index';
                                     },
+                                },
+                                onwarn(warning, warn) {
+                                    const onwarnRes =
+                                        viteConfig.build?.rollupOptions?.onwarn?.(
+                                            warning,
+                                            warn,
+                                        );
+
+                                    emit('log', {
+                                        margin: {
+                                            top: 1,
+                                        },
+                                        type: __SLog.TYPE_WARNING,
+                                        value: `<yellow>[warn]</yellow> (<magenta>${warning.code}</magenta>) ${warning.message}`,
+                                    });
+                                    emit('log', {
+                                        margin: {
+                                            bottom: 1,
+                                        },
+                                        type: __SLog.TYPE_WARNING,
+                                        value: `at <cyan>${warning.loc.file}</cyan>:<yellow>${warning.loc.column}:${warning.loc.line}</yellow>`,
+                                    });
+                                    // emit('log', {
+                                    //     margin: {
+                                    //         bottom: 2,
+                                    //     },
+                                    //     type: __SLog.TYPE_WARNING,
+                                    //     value: warning.frame,
+                                    // });
+
+                                    return onwarnRes;
                                 },
                             },
                         },
@@ -474,9 +504,8 @@ export default class SVite extends __SClass {
                 const duration = new __SDuration();
 
                 // @ts-ignore
-                const finalParams: ISViteTestParams = __SViteTestParamsInterface.apply(
-                    params,
-                );
+                const finalParams: ISViteTestParams =
+                    __SViteTestParamsInterface.apply(params);
 
                 const finalConfig = __deepMerge(viteConfig, {
                     test: finalParams,

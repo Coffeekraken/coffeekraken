@@ -184,7 +184,7 @@ export default class SFaviconBuilder extends __SBuilder {
 
                 emit('log', {
                     type: __SLog.TYPE_INFO,
-                    value: `<yellow>[favicon]</yellow> Start generating your favicon files...`,
+                    value: `<yellow>[build]</yellow> Start generating your favicon files...`,
                 });
 
                 // generate
@@ -196,7 +196,7 @@ export default class SFaviconBuilder extends __SBuilder {
                     response.images.forEach((imageObj) => {
                         emit('log', {
                             type: __SLog.TYPE_INFO,
-                            value: `<yellow>[favicon]</yellow> Saving file "<cyan>${__path.relative(
+                            value: `<yellow>[build]</yellow> Saving file "<cyan>${__path.relative(
                                 __packageRoot(),
                                 params.outDir,
                             )}/${imageObj.name}</cyan>"`,
@@ -210,7 +210,7 @@ export default class SFaviconBuilder extends __SBuilder {
                     response.files.forEach((fileObj) => {
                         emit('log', {
                             type: __SLog.TYPE_INFO,
-                            value: `<yellow>[favicon]</yellow> Saving file "<cyan>${__path.relative(
+                            value: `<yellow>[build]</yellow> Saving file "<cyan>${__path.relative(
                                 __packageRoot(),
                                 params.outDir,
                             )}/${fileObj.name}</cyan>"`,
@@ -223,7 +223,7 @@ export default class SFaviconBuilder extends __SBuilder {
 
                     emit('log', {
                         type: __SLog.TYPE_INFO,
-                        value: `<yellow>[favicon]</yellow> Saving file "<cyan>${__path.relative(
+                        value: `<yellow>[build]</yellow> Saving file "<cyan>${__path.relative(
                             __packageRoot(),
                             params.outDir,
                         )}/favicon.html</cyan>"`,

@@ -346,12 +346,7 @@ export default class SImagesBuilder extends __SBuilder {
                         // shared manipulations
                         const imageSize = __imageSize(file.path);
 
-                        const idealSize = <
-                            {
-                                width: number;
-                                height: number;
-                            }
-                        >imageSize;
+                        const idealSize = imageSize;
 
                         if (
                             imgParams.width &&

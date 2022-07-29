@@ -663,15 +663,12 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                     );
                 }
 
-                // const dirName =
-                //     typeof atRule.source.input.file === 'string'
-                //         ? __path.dirname(atRule.source.input.file)
-                //         : __dirname();
+                const dirName =
+                    typeof atRule.source.input.file === 'string'
+                        ? __path.dirname(atRule.source.input.file)
+                        : __dirname();
 
-                const path = __path.resolve(
-                    __packageRoot(),
-                    __unquote(atRule.params),
-                );
+                const path = __path.resolve(dirName, __unquote(atRule.params));
 
                 if (!__fs.existsSync(path)) {
                     throw new Error(

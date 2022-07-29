@@ -78,9 +78,7 @@ export default function resolveGlob(
         if (__fs.existsSync(glob)) {
             if (settings.SFile) {
                 const sFile = __SFile.new(glob, {
-                    file: {
-                        cwd,
-                    },
+                    cwd,
                 });
                 filesArray.push(sFile);
             } else {
@@ -147,9 +145,7 @@ export default function resolveGlob(
         pathes.forEach((path) => {
             if (settings.SFile) {
                 const sFile = __SFile.new(path, {
-                    file: {
-                        cwd,
-                    },
+                    cwd,
                 });
                 filesArray.push(sFile);
             } else {

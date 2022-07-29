@@ -8,7 +8,6 @@ import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __isClass from '@coffeekraken/sugar/shared/is/class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
 import __path from 'path';
 import __SSitemapBuilderBuildParamsInterface from './interface/SSitemapBuilderBuildParamsInterface';
 import __SSitemapBuilderSource from './SSitemapBuilderSource';
@@ -122,9 +121,8 @@ export default class SSitemapBuilder extends __SBuilder {
                 let sitemap: ISSitemapBuilderResultItem[] = [];
 
                 // @ts-ignore
-                const finalParams: ISSitemapBuilderBuildParams = __SSitemapBuilderBuildParamsInterface.apply(
-                    params,
-                );
+                const finalParams: ISSitemapBuilderBuildParams =
+                    __SSitemapBuilderBuildParamsInterface.apply(params);
 
                 const duration = new __SDuration();
 
@@ -153,16 +151,12 @@ export default class SSitemapBuilder extends __SBuilder {
                     const importedSource = (await import(sourceObj.path))
                         .default;
 
-                    let settingsId =
-                        importedSource.settingsId ??
-                        `sitemap${__upperFirst(sourceId)}Source`;
-
                     let buildFn;
 
                     if (__isClass(importedSource)) {
                         // instanciate new source
                         const sourceInstance = new importedSource({
-                            [settingsId]: __deepMerge(
+                            ...__deepMerge(
                                 sourceObj.settings ?? {},
                                 finalParams.sourcesSettings[sourceId] ?? {},
                             ),

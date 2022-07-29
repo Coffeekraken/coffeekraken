@@ -37,7 +37,7 @@ function imageLoaded(
 ): __SPromise<HTMLImageElement> {
     let imgLoadedHandler, imgErrorHandler;
 
-    return new __SPromise(
+    const pro = new __SPromise(
         ({ resolve, reject }) => {
             // check if image is already loaded
             if ($img.hasAttribute('src') && $img.complete) {
@@ -65,9 +65,11 @@ function imageLoaded(
         {
             id: 'imageLoaded',
         },
-    ).on('finally', () => {
+    );
+    pro.on('finally', () => {
         imgLoadedHandler && $img.removeEventListener('load', imgLoadedHandler);
         imgErrorHandler && $img.removeEventListener('error', imgErrorHandler);
     });
+    return pro;
 }
 export default imageLoaded;

@@ -1,5 +1,5 @@
-export default function ({ env, config }) {
-    if (env.platform !== 'node') return;
+export default function (api) {
+    if (api.env.platform !== 'node') return;
 
     return {
         /**
@@ -14,7 +14,7 @@ export default function ({ env, config }) {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get input() {
-            return `${config.storage.src.rootDir}/favicon/favicon.png`;
+            return `${api.config.storage.src.rootDir}/favicon/favicon.png`;
         },
 
         /**
@@ -29,7 +29,7 @@ export default function ({ env, config }) {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get outDir() {
-            return `${config.storage.dist.rootDir}/favicon`;
+            return `${api.config.storage.dist.rootDir}/favicon`;
         },
 
         /**

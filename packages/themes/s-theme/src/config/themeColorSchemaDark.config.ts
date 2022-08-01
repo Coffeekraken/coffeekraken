@@ -1,4 +1,4 @@
-export default (env, config) => {
+export default (api) => {
     return {
         text: {
             /**

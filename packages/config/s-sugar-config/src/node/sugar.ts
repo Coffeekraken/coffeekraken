@@ -1,6 +1,7 @@
 // @ts-nocheck
 
 import __SClass from '@coffeekraken/s-class';
+import type { ISConfigSettings } from '@coffeekraken/s-config';
 import __SConfig, { ISConfigEnvObj } from '@coffeekraken/s-config';
 import __SConfigFolderAdapter from '@coffeekraken/s-config-folder-adapter';
 import __SDocblock from '@coffeekraken/s-docblock';
@@ -8,7 +9,6 @@ import __SSugarJson from '@coffeekraken/s-sugar-json';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __get from '@coffeekraken/sugar/shared/object/get';
 import __objectHash from '@coffeekraken/sugar/shared/object/objectHash';
 import __replaceTokens from '@coffeekraken/sugar/shared/token/replaceTokens';
 import __fs from 'fs';
@@ -234,13 +234,14 @@ export default class SSugarConfig extends __SClass {
                     });
                 }
 
-                SSugarConfig._sSugarConfigInstances[finalSettings.id] =
-                    new SSugarConfig({
-                        metas: {
-                            id: finalSettings.id,
-                        },
-                        sugarConfig: finalSettings ?? {},
-                    });
+                SSugarConfig._sSugarConfigInstances[
+                    finalSettings.id
+                ] = new SSugarConfig({
+                    metas: {
+                        id: finalSettings.id,
+                    },
+                    sugarConfig: finalSettings ?? {},
+                });
                 const config = await SSugarConfig._sSugarConfigInstances[
                     finalSettings.id
                 ]._load(finalSettings);
@@ -367,7 +368,6 @@ export default class SSugarConfig extends __SClass {
      */
     static hash(dotPath: string = ''): string {
         const config = this.get(dotPath);
-        console.log('hashConfig', config);
         return __objectHash(config);
     }
 
@@ -395,7 +395,31 @@ export default class SSugarConfig extends __SClass {
         }
 
         // get the config
-        return this._sSugarConfigInstances[id].get(dotPath, undefined, {
+        return this._sSugarConfigInstances[id].get(dotPath, {
+            throwErrorOnUndefinedConfig: true,
+        });
+    }
+
+    /**
+     * @name            getSafe
+     * @type            Function
+     *
+     * Same as the "get" method but does not throw error if the config is not accessible...
+     *
+     * @param       {String}        dotpath         The dotpath that specify the configuration you want to get
+     * @param       {String}        [id="default"]      The configuration id you want to get the config from
+     * @return      {any}                           The getted configuration
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static getSafe(dotPath: string, id = 'default'): any {
+        if (!this._sSugarConfigInstances[id]) {
+            return;
+        }
+
+        // get the config
+        return this._sSugarConfigInstances[id].get(dotPath, {
             throwErrorOnUndefinedConfig: false,
         });
     }
@@ -506,7 +530,6 @@ export default class SSugarConfig extends __SClass {
      */
     hash(dotPath: string = ''): string {
         const config = this.get(dotPath);
-        console.log('hashConfigInternal', config);
         return __objectHash(config);
     }
 
@@ -522,8 +545,8 @@ export default class SSugarConfig extends __SClass {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    get(dotpath: string): any {
-        return this._configInstance.get(dotpath);
+    get(dotpath: string, settings?: Partial<ISConfigSettings>): any {
+        return this._configInstance.get(dotpath, settings);
     }
 
     /**
@@ -682,26 +705,26 @@ export default class SSugarConfig extends __SClass {
                 platform: settings.platform,
             },
             cache: settings.cache ?? true,
-            resolvers: [
-                {
-                    match: /\[theme.[a-zA-Z0-9.\-_:]+\]/gm,
-                    resolve(string, matches, config, path) {
-                        for (let i = 0; i < matches.length; i++) {
-                            const match = matches[i];
-                            const valuePath = match
-                                .replace('[theme.', '')
-                                .replace(']', '');
-                            const value = __get(
-                                config,
-                                `theme.themes.${config.theme.theme}-${config.theme.variant}.${valuePath}`,
-                            );
-                            if (string === match) return value;
-                            string = string.replace(match, value);
-                        }
-                        return string;
-                    },
-                },
-            ],
+            // resolvers: [
+            //     {
+            //         match: /\[theme.[a-zA-Z0-9.\-_:]+\]/gm,
+            //         resolve(string, matches, config, path) {
+            //             for (let i = 0; i < matches.length; i++) {
+            //                 const match = matches[i];
+            //                 const valuePath = match
+            //                     .replace('[theme.', '')
+            //                     .replace(']', '');
+            //                 const value = __get(
+            //                     config,
+            //                     `theme.themes.${config.theme.theme}-${config.theme.variant}.${valuePath}`,
+            //                 );
+            //                 if (string === match) return value;
+            //                 string = string.replace(match, value);
+            //             }
+            //             return string;
+            //         },
+            //     },
+            // ],
         });
 
         const res = await this._configInstance.load({

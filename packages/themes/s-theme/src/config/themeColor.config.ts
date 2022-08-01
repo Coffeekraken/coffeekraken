@@ -1,4 +1,4 @@
-export default (env, config) => {
+export default (api) => {
     return {
         /**
          * @name                accent
@@ -11,7 +11,9 @@ export default (env, config) => {
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        current: '[config.themeColor.main]',
+        get current() {
+            return api.config.themeColor.main;
+        },
 
         /**
          * @name                color

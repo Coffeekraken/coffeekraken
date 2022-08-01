@@ -1,8 +1,8 @@
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __path from 'path';
 
-export default function ({ env, config }) {
-    if (env.platform !== 'node') return;
+export default function (api) {
+    if (api.env.platform !== 'node') return;
 
     return {
         /**
@@ -54,7 +54,7 @@ export default function ({ env, config }) {
          */
         requirements: {
             get commands() {
-                return [config.package.manager, 'composer'];
+                return [api.config.package.manager, 'composer'];
             },
         },
         /**
@@ -309,7 +309,7 @@ export default function ({ env, config }) {
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     get typescriptBuild() {
-                        return config.kitchen.actions.typescriptBuild;
+                        return api.config.kitchen.actions.typescriptBuild;
                     },
 
                     /**
@@ -324,7 +324,7 @@ export default function ({ env, config }) {
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     get frontendServer() {
-                        return config.kitchen.actions.frontendServer;
+                        return api.config.kitchen.actions.frontendServer;
                     },
 
                     /**
@@ -339,7 +339,7 @@ export default function ({ env, config }) {
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     get corsProxy() {
-                        return config.kitchen.actions.corsProxy;
+                        return api.config.kitchen.actions.corsProxy;
                     },
 
                     /**
@@ -354,7 +354,7 @@ export default function ({ env, config }) {
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     get vite() {
-                        return config.kitchen.actions.vite;
+                        return api.config.kitchen.actions.vite;
                     },
 
                     /**
@@ -369,7 +369,7 @@ export default function ({ env, config }) {
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     get format() {
-                        return config.kitchen.actions.format;
+                        return api.config.kitchen.actions.format;
                     },
                 },
             },
@@ -413,7 +413,7 @@ export default function ({ env, config }) {
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     get frontendServer() {
-                        return config.kitchen.actions.frontendServer;
+                        return api.config.kitchen.actions.frontendServer;
                     },
 
                     /**
@@ -428,7 +428,7 @@ export default function ({ env, config }) {
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     get corsProxy() {
-                        return config.kitchen.actions.corsProxy;
+                        return api.config.kitchen.actions.corsProxy;
                     },
                 },
             },
@@ -472,7 +472,7 @@ export default function ({ env, config }) {
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     get postcssBuild() {
-                        return config.kitchen.actions.postcssBuild;
+                        return api.config.kitchen.actions.postcssBuild;
                     },
 
                     /**
@@ -487,7 +487,7 @@ export default function ({ env, config }) {
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     get viteBuild() {
-                        return config.kitchen.actions.viteBuild;
+                        return api.config.kitchen.actions.viteBuild;
                     },
 
                     /**
@@ -502,7 +502,7 @@ export default function ({ env, config }) {
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     get imagesBuild() {
-                        return config.kitchen.actions.imagesBuild;
+                        return api.config.kitchen.actions.imagesBuild;
                     },
 
                     /**
@@ -517,7 +517,7 @@ export default function ({ env, config }) {
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     get faviconBuild() {
-                        return config.kitchen.actions.faviconBuild;
+                        return api.config.kitchen.actions.faviconBuild;
                     },
 
                     /**
@@ -532,7 +532,7 @@ export default function ({ env, config }) {
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     get docmapBuild() {
-                        return config.kitchen.actions.docmapBuild;
+                        return api.config.kitchen.actions.docmapBuild;
                     },
 
                     /**
@@ -547,7 +547,7 @@ export default function ({ env, config }) {
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     get sitemapBuild() {
-                        return config.kitchen.actions.sitemapBuild;
+                        return api.config.kitchen.actions.sitemapBuild;
                     },
 
                     /**

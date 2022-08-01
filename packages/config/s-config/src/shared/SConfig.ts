@@ -4,7 +4,7 @@ import __SDuration from '@coffeekraken/s-duration';
 import __SEnv from '@coffeekraken/s-env';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
-import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
+import __decycle from '@coffeekraken/sugar/shared/object/decycle';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __filter from '@coffeekraken/sugar/shared/object/filter';
 import __get from '@coffeekraken/sugar/shared/object/get';
@@ -75,7 +75,7 @@ export interface ISConfigSettings {
     cache: boolean;
     updateTimeout: number;
     throwErrorOnUndefinedConfig: boolean;
-    resolvers: ISConfigResolverObj[];
+    // resolvers: ISConfigResolverObj[];
 }
 
 export default class SConfig {
@@ -230,7 +230,7 @@ export default class SConfig {
                 cache: true,
                 updateTimeout: 500,
                 throwErrorOnUndefinedConfig: true,
-                resolvers: [],
+                // resolvers: [],
             },
             settings,
         );
@@ -262,53 +262,6 @@ export default class SConfig {
 
             return string;
         }
-
-        // register the default resolver "[config...]"
-        this.settings.resolvers.unshift({
-            match: /\[config.[a-zA-Z0-9.\-_]+\]/gm,
-            resolveDotPath(match, config, path) {
-                if (!match.match(/^\[config\./)) return;
-                const dotPath = match.replace('[config.', '').replace(']', '');
-                return dotPath;
-            },
-            resolve: resolveConfig,
-        });
-
-        // register the default resolver "[extends...]"
-        this.settings.resolvers.unshift({
-            name: 'extends',
-            match: /\[extends.[a-zA-Z0-9\.\-_]+\]/gm,
-            resolveDotPath(match, config, path) {
-                const ext = __get(config, [path[0], '_extends']);
-                if (!ext) return;
-                const dotPath = `${ext}.${match
-                    .replace('[extends.', '')
-                    .replace(']', '')}`;
-
-                return dotPath;
-            },
-            resolve(string, matches, config, path) {
-                for (let i = 0; i < matches.length; i++) {
-                    const match = matches[i];
-
-                    const dotPath = this.resolveDotPath(match, config, path);
-
-                    let value = __get(config, dotPath);
-
-                    if (value === undefined) {
-                        throw new Error(
-                            `<red>[${this.constructor.name}]</red> Sorry but the referenced "<yellow>${match}</yellow>" extends config value does not exiats...`,
-                        );
-                    }
-
-                    if (string === match) {
-                        return value;
-                    }
-                    string = string.replace(match, value);
-                }
-                return string;
-            },
-        });
 
         let timeout;
         if (!this.adapter.settings.onUpdate) {
@@ -382,51 +335,51 @@ export default class SConfig {
             }
         });
 
-        const extendsConfigIfNeeded = (configToExtends, configName) => {
-            if (
-                configToExtends.extends &&
-                typeof configToExtends.extends === 'string'
-            ) {
-                const extend = configToExtends.extends;
+        // const extendsConfigIfNeeded = (configToExtends, configName) => {
+        //     if (
+        //         configToExtends.extends &&
+        //         typeof configToExtends.extends === 'string'
+        //     ) {
+        //         const extend = configToExtends.extends;
 
-                if (!this.config[extend]) {
-                    throw new Error(
-                        `<red>[SConfig]</red> You have set an "<yellow>extends</yellow>" property to "<magenta>${extend}</magenta>" inside the "<cyan>${configName}</cyan>" config but this configuration you want to extends does not exists...`,
-                    );
-                }
+        //         if (!this.config[extend]) {
+        //             throw new Error(
+        //                 `<red>[SConfig]</red> You have set an "<yellow>extends</yellow>" property to "<magenta>${extend}</magenta>" inside the "<cyan>${configName}</cyan>" config but this configuration you want to extends does not exists...`,
+        //             );
+        //         }
 
-                const extendsConfig = extendsConfigIfNeeded(
-                    Object.assign({}, this.config[extend]),
-                    extend,
-                );
+        //         const extendsConfig = extendsConfigIfNeeded(
+        //             Object.assign({}, this.config[extend]),
+        //             extend,
+        //         );
 
-                const newExtendedConfig = __deepMerge(
-                    extendsConfig,
-                    configToExtends,
-                );
-                Object.defineProperty(newExtendedConfig, '_extends', {
-                    enumerable: false,
-                    value: newExtendedConfig.extends,
-                });
-                delete newExtendedConfig.extends;
+        //         const newExtendedConfig = __deepMerge(
+        //             extendsConfig,
+        //             configToExtends,
+        //         );
+        //         Object.defineProperty(newExtendedConfig, '_extends', {
+        //             enumerable: false,
+        //             value: newExtendedConfig.extends,
+        //         });
+        //         delete newExtendedConfig.extends;
 
-                return newExtendedConfig;
-            } else {
-                return configToExtends;
-            }
-        };
+        //         return newExtendedConfig;
+        //     } else {
+        //         return configToExtends;
+        //     }
+        // };
 
-        // make a simple [] correspondance check
-        __deepMap(this.config, ({ prop, value, path }) => {
-            if (
-                typeof value === 'string' &&
-                value.split('[').length !== value.split(']').length
-            ) {
-                throw new Error(
-                    `<red>[${this.constructor.name}]</red> We think that you've made a mistake in your config file at path "<yellow>${path}</yellow>" with the value "<cyan>${value}</cyan>"`,
-                );
-            }
-        });
+        // // make a simple [] correspondance check
+        // __deepMap(this.config, ({ prop, value, path }) => {
+        //     if (
+        //         typeof value === 'string' &&
+        //         value.split('[').length !== value.split(']').length
+        //     ) {
+        //         throw new Error(
+        //             `<red>[${this.constructor.name}]</red> We think that you've made a mistake in your config file at path "<yellow>${path}</yellow>" with the value "<cyan>${value}</cyan>"`,
+        //         );
+        //     }
+        // });
 
         if (this.constructor._registeredPreprocesses[this.id]) {
             for (
@@ -439,48 +392,31 @@ export default class SConfig {
                 const configKey = Object.keys(
                     this.constructor._registeredPreprocesses[this.id],
                 )[k];
-                this.config[configKey] =
-                    await this.constructor._registeredPreprocesses[this.id][
-                        configKey
-                    ]({
-                        env: this.settings.env,
-                        config: this.config,
-                        thisConfig: this.config[configKey],
-                        get theme() {
-                            const themeId = `${this.config.theme.theme}-${this.config.theme.variant}`;
-                            return this.config.theme.themes[themeId];
-                        },
-                    });
+                this.config[
+                    configKey
+                ] = await this.constructor._registeredPreprocesses[this.id][
+                    configKey
+                ]({
+                    env: this.settings.env,
+                    config: this.config,
+                    get this() {
+                        return this.config[configKey];
+                    },
+                    get theme() {
+                        const themeId = `${this.config.theme.theme}-${this.config.theme.variant}`;
+                        return this.config.theme.themes[themeId];
+                    },
+                });
             }
         }
 
-        // handle the "extends" global property
-        Object.keys(this.config).forEach((configName) => {
-            this.config[configName] = extendsConfigIfNeeded(
-                this.config[configName],
-                configName,
-            );
-        });
-
-        // resolve environment properties like @dev
-        this._resolveEnvironments();
-
-        this.settings.resolvers.forEach((resolverObj) => {
-            this._resolveInternalReferences(resolverObj);
-        });
-
-        Object.keys(this._restPaths).forEach((dotPath) => {
-            const actualConfig = __get(this.config, dotPath),
-                extendsConfig = __get(this.config, this._restPaths[dotPath]);
-            __set(
-                this.config,
-                dotPath,
-                __deepMerge(
-                    Object.assign({}, extendsConfig),
-                    Object.assign({}, actualConfig),
-                ),
-            );
-        });
+        // // handle the "extends" global property
+        // Object.keys(this.config).forEach((configName) => {
+        //     this.config[configName] = extendsConfigIfNeeded(
+        //         this.config[configName],
+        //         configName,
+        //     );
+        // });
 
         if (this.constructor._registeredPostprocess[this.id]) {
             for (
@@ -493,18 +429,21 @@ export default class SConfig {
                 const configKey = Object.keys(
                     this.constructor._registeredPostprocess[this.id],
                 )[k];
-                this.config[configKey] =
-                    await this.constructor._registeredPostprocess[this.id][
-                        configKey
-                    ]({
-                        env: this.settings.env,
-                        config: this.config,
-                        thisConfig: this.config[configKey],
-                        get theme() {
-                            const themeId = `${this.config.theme.theme}-${this.config.theme.variant}`;
-                            return this.config.theme.themes[themeId];
-                        },
-                    });
+                this.config[
+                    configKey
+                ] = await this.constructor._registeredPostprocess[this.id][
+                    configKey
+                ]({
+                    env: this.settings.env,
+                    config: this.config,
+                    get this() {
+                        return this.config[configKey];
+                    },
+                    get theme() {
+                        const themeId = `${this.config.theme.theme}-${this.config.theme.variant}`;
+                        return this.config.theme.themes[themeId];
+                    },
+                });
             }
         }
 
@@ -521,28 +460,10 @@ export default class SConfig {
             );
         }
 
-        // @TODO        Support prop resolving
-        // __deepMap(this.config, ({ object, prop, value, path }) => {
-        //     if (path.match(/\[.*\]/)) {
-        //         this.settings.resolvers.forEach((resolverObj) => {
-        //             const matches = path.match(resolverObj.match);
-
-        //             if (matches && matches.length) {
-        //                 let resolvedValue = resolverObj.resolve(
-        //                     path,
-        //                     matches,
-        //                     this.config,
-        //                     path,
-        //                 );
-
-        //                 console.log('DDD', path, resolvedValue);
-        //             }
-        //         });
-        //     }
-        // });
-
         // cache for later
-        this.cache();
+        setTimeout(() => {
+            this.cache();
+        }, 2000);
 
         // filter the empty config
         if (finalSettings.clean) {
@@ -552,6 +473,8 @@ export default class SConfig {
                 return true;
             });
         }
+
+        // console.log(this.config);
 
         // return the config
         return this.config;
@@ -641,109 +564,6 @@ export default class SConfig {
         });
     }
 
-    _resolveEnvironments() {
-        // __applyScope(
-        //     this.config,
-        //     __SEnv.get('env') === 'production'
-        //         ? ['prod', 'production']
-        //         : ['dev', 'development'],
-        //     {
-        //         prefix: 'env:'
-        //     }
-        // );
-    }
-
-    _restPaths = {};
-
-    _resolveInternalReferences(resolverObj, path = [], iteration = 0) {
-        let originalValue = __get(this.config, path);
-
-        // if (path.includes('/.local')) {
-        //     console.log(path, originalValue);
-        // }
-
-        iteration++;
-
-        if (path.includes('...')) {
-            const p = path.slice(0, path.indexOf('...'));
-            const parentObj = __get(this.config, p);
-
-            for (let i = 0; i < this.settings.resolvers.length; i++) {
-                const resolver = this.settings.resolvers[i];
-                if (!resolver.resolveDotPath) continue;
-                const dotPath = resolver.resolveDotPath(
-                    parentObj['...'],
-                    this.config,
-                    path,
-                );
-                if (dotPath) {
-                    if (!this._restPaths[p.join('.')]) {
-                        this._restPaths[p.join('.')] = dotPath;
-                    }
-                    break;
-                }
-            }
-
-            return;
-
-            // console.log(path);
-        }
-
-        if (__isPlainObject(originalValue)) {
-            Object.keys(originalValue).forEach((key) => {
-                this._resolveInternalReferences(
-                    resolverObj,
-                    [...path, key],
-                    iteration,
-                );
-            });
-        } else if (Array.isArray(originalValue)) {
-            originalValue.forEach((v, i) => {
-                this._resolveInternalReferences(
-                    resolverObj,
-                    [...path, i],
-                    iteration,
-                );
-            });
-        } else if (typeof originalValue === 'string') {
-            const matches = originalValue.match(resolverObj.match);
-
-            if (matches && matches.length) {
-                let resolvedValue = resolverObj.resolve(
-                    originalValue,
-                    matches,
-                    this.config,
-                    path,
-                );
-
-                if (resolvedValue !== originalValue) {
-                    let parentObj = __get(this.config, path.slice(0, -1));
-
-                    if (path.slice(-1)[0] === '...') {
-                        __deepMap(
-                            Object.assign({}, resolvedValue),
-                            ({ object, prop, value, path: localPath }) => {
-                                __set(
-                                    this.config,
-                                    [...path.slice(0, -1), localPath],
-                                    value,
-                                );
-                            },
-                        );
-                        delete parentObj['...'];
-                    } else {
-                        __set(this.config, path, resolvedValue);
-                        this._resolveInternalReferences(
-                            resolverObj,
-                            path,
-                            iteration,
-                        );
-                    }
-                }
-            }
-        }
-    }
-
     /**
      * @name                                get
      * @type                                Function
@@ -759,7 +579,7 @@ export default class SConfig {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    get(path: string, settings = {}) {
+    get(path: string, settings: Partial<ISConfigSettings> = {}) {
         settings = __deepMerge(this.settings, settings);
 
         if (Object.keys(this.config).length === 0) {
@@ -837,6 +657,7 @@ export default class SConfig {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toJson() {
-        return JSON.parse(JSON.stringify(this.get('.')));
+        const decycledObj = Object.assign({}, __decycle(this.get('.')));
+        return JSON.parse(JSON.stringify(decycledObj));
     }
 }

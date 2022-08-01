@@ -154,7 +154,8 @@ export default class SSugarCli {
         const config = await __SSugarConfig.load({
             cache: true,
         });
-        // console.log(__SSugarConfig.get('storage.src.rootDir'));
+        // console.log('LOADED');
+        // console.log(__SSugarConfig.get('themeDefaultLight'));
         // return;
 
         // check the "sugar.lock" file in the tmp folder
@@ -343,8 +344,9 @@ export default class SSugarCli {
     }
 
     static _getCliObj() {
-        const defaultStackAction =
-            this._availableCli.defaultByStack[this.args.stack];
+        const defaultStackAction = this._availableCli.defaultByStack[
+            this.args.stack
+        ];
 
         if (
             !this._availableCli.endpoints[
@@ -354,10 +356,9 @@ export default class SSugarCli {
             this._displayHelpAfterError();
             process.exit(0);
         }
-        let cliObj =
-            this._availableCli.endpoints[
-                `${this.args.stack}.${this.args.action ?? defaultStackAction}`
-            ];
+        let cliObj = this._availableCli.endpoints[
+            `${this.args.stack}.${this.args.action ?? defaultStackAction}`
+        ];
 
         return cliObj;
     }
@@ -540,18 +541,20 @@ export default class SSugarCli {
                         cliObj.defaultAction &&
                         action === cliObj.defaultAction
                     ) {
-                        this._availableCli.defaultByStack[cliObj.stack] =
-                            action;
+                        this._availableCli.defaultByStack[
+                            cliObj.stack
+                        ] = action;
                     }
 
-                    this._availableCli.endpoints[`${cliObj.stack}.${action}`] =
-                        {
-                            packageJson,
-                            ...actionObj,
-                            processPath,
-                            command,
-                            interfacePath,
-                        };
+                    this._availableCli.endpoints[
+                        `${cliObj.stack}.${action}`
+                    ] = {
+                        packageJson,
+                        ...actionObj,
+                        processPath,
+                        command,
+                        interfacePath,
+                    };
                 });
             });
         }
@@ -665,10 +668,9 @@ export default class SSugarCli {
         this._newStep();
 
         if (this.args.stack && this.args.action) {
-            const commandObj =
-                this._availableCli.endpoints[
-                    `${this.args.stack}.${this.args.action}`
-                ];
+            const commandObj = this._availableCli.endpoints[
+                `${this.args.stack}.${this.args.action}`
+            ];
 
             this.log(``);
             this.log(
@@ -736,8 +738,9 @@ export default class SSugarCli {
 
             if (!sortedByStack[_stack]) sortedByStack[_stack] = {};
 
-            sortedByStack[_stack][_action] =
-                this._availableCli.endpoints[stackAction];
+            sortedByStack[_stack][_action] = this._availableCli.endpoints[
+                stackAction
+            ];
         });
 
         this.log(``);

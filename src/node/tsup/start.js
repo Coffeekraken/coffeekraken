@@ -1,9 +1,7 @@
-import __glob from 'glob';
-import __chokidar from 'chokidar';
-import __childProcess from 'child_process';
-import __path from 'path';
-import __fs from 'fs';
 import __chalk from 'chalk';
+import __chokidar from 'chokidar';
+import __fs from 'fs';
+import __path from 'path';
 import __ts from 'typescript';
 import { v4 as __uuid } from 'uuid';
 
@@ -75,6 +73,18 @@ function processPackage(packageRoot) {
                     require: './dist/pkg/cjs/js/exports.js',
                     import: './dist/pkg/esm/js/exports.js',
                 },
+                './shared/*': {
+                    require: './dist/pkg/cjs/shared/*.js',
+                    import: './dist/pkg/esm/shared/*.js',
+                },
+                './node/*': {
+                    require: './dist/pkg/cjs/node/*.js',
+                    import: './dist/pkg/esm/node/*.js',
+                },
+                './js/*': {
+                    require: './dist/pkg/cjs/js/*.js',
+                    import: './dist/pkg/esm/js/*.js',
+                },
             },
         };
     } else if (hasNode && !hasJs) {
@@ -85,6 +95,18 @@ function processPackage(packageRoot) {
                 '.': {
                     require: './dist/pkg/cjs/node/exports.js',
                     import: './dist/pkg/esm/node/exports.js',
+                },
+                './shared/*': {
+                    require: './dist/pkg/cjs/shared/*.js',
+                    import: './dist/pkg/esm/shared/*.js',
+                },
+                './node/*': {
+                    require: './dist/pkg/cjs/node/*.js',
+                    import: './dist/pkg/esm/node/*.js',
+                },
+                './js/*': {
+                    require: './dist/pkg/cjs/js/*.js',
+                    import: './dist/pkg/esm/js/*.js',
                 },
             },
         };
@@ -97,6 +119,18 @@ function processPackage(packageRoot) {
                     require: './dist/pkg/cjs/shared/exports.js',
                     import: './dist/pkg/esm/shared/exports.js',
                 },
+                './shared/*': {
+                    require: './dist/pkg/cjs/shared/*.js',
+                    import: './dist/pkg/esm/shared/*.js',
+                },
+                './node/*': {
+                    require: './dist/pkg/cjs/node/*.js',
+                    import: './dist/pkg/esm/node/*.js',
+                },
+                './js/*': {
+                    require: './dist/pkg/cjs/js/*.js',
+                    import: './dist/pkg/esm/js/*.js',
+                },
             },
         };
     } else if (hasCli) {
@@ -107,6 +141,18 @@ function processPackage(packageRoot) {
                 '.': {
                     require: './dist/pkg/cjs/cli/exports.js',
                     import: './dist/pkg/esm/cli/exports.js',
+                },
+                './shared/*': {
+                    require: './dist/pkg/cjs/shared/*.js',
+                    import: './dist/pkg/esm/shared/*.js',
+                },
+                './node/*': {
+                    require: './dist/pkg/cjs/node/*.js',
+                    import: './dist/pkg/esm/node/*.js',
+                },
+                './js/*': {
+                    require: './dist/pkg/cjs/js/*.js',
+                    import: './dist/pkg/esm/js/*.js',
                 },
             },
         };
@@ -297,8 +343,8 @@ function processPath(path, platform = 'node') {
 
 // js
 const chokidarJs = __chokidar.watch(
-    // 'packages/*/*/src/js/**/*.ts'
-    'packages/*/*/src/js/**/vite.config.ts',
+    'packages/*/*/src/js/**/*.ts',
+    // 'packages/*/*/src/js/**/vite.config.ts',
     {
         // ignoreInitial: true,
         ignored: ['**/node_modules'],
@@ -313,8 +359,8 @@ chokidarJs.on('change', chokidarJsCallback);
 
 // node, shared, etc...
 const chokidarNode = __chokidar.watch(
-    // 'packages/*/*/src/(node|shared|config|views|pages|cli)/**/*.ts',
-    'packages/*/*/src/(node|shared|config|views|pages|cli)/**/vite.config.ts',
+    'packages/*/*/src/(node|shared|config|views|pages|cli)/**/*.ts',
+    // 'packages/*/*/src/(node|shared|config|views|pages|cli)/**/vite.config.ts',
     {
         // ignoreInitial: true,
         ignored: ['**/node_modules'],

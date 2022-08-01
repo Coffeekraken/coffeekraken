@@ -1,4 +1,4 @@
-export default function (env, config) {
+export default function (api) {
     return {
         panel: {
             /**
@@ -12,7 +12,10 @@ export default function (env, config) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderRadius: '[theme.ui.default.borderRadius]',
+            get borderRadius() {
+                return api.theme.ui.default.borderRadius;
+            },
+
             /**
              * @name          transition
              * @namespace     config.themeUi.panel
@@ -24,7 +27,10 @@ export default function (env, config) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            transition: '[theme.transition.default]',
+            get transition() {
+                return api.theme.transition.default;
+            },
+
             /**
              * @name          depth
              * @namespace     config.themeUi.panel

@@ -6,7 +6,7 @@ export interface ISDatetimeConfigI18n {
     weekdaysShort: string[7];
 }
 
-export default function ({ env }) {
+export default function (api) {
     return {
         /**
          * @name                dateFormat

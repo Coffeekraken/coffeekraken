@@ -1,5 +1,5 @@
-export default ({ env, config }) => {
-    if (env.platform !== 'node') return;
+export default (api) => {
+    if (api.env.platform !== 'node') return;
 
     return {
         layout: {
@@ -15,7 +15,7 @@ export default ({ env, config }) => {
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get headerImageUrl() {
-                return `${config.serve.img.url}/doc/licenseHeader.jpg`;
+                return `${api.config.serve.img.url}/doc/licenseHeader.jpg`;
             },
         },
     };

@@ -1,4 +1,4 @@
-export default function (env, config) {
+export default function (api) {
     return {
         /**
          * @name                default
@@ -11,7 +11,10 @@ export default function (env, config) {
          * @since               2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        default: '[theme.depth.0]',
+        get default() {
+            return api.theme.depth['0'];
+        },
+
         /**
          * @name                0
          * @namespace           config.themeDepth

@@ -1,5 +1,5 @@
-export default function ({ env, config }) {
-    if (env.platform !== 'node') return;
+export default function (api) {
+    if (api.env.platform !== 'node') return;
 
     return {
         browser: {
@@ -31,7 +31,7 @@ export default function ({ env, config }) {
             include: [],
         },
         get cacheDir() {
-            return `${config.storage.package.cacheDir}/views`;
+            return `${api.config.storage.package.cacheDir}/views`;
         },
     };
 }

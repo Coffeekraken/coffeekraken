@@ -1,8 +1,8 @@
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __path from 'path';
 
-export default ({ env, config }) => {
-    if (env.platform !== 'node') return;
+export default (api) => {
+    if (api.env.platform !== 'node') return;
     return {
         build: {
             /**
@@ -17,7 +17,7 @@ export default ({ env, config }) => {
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get output() {
-                return `${config.storage.src.publicDir}/sitemap.xml`;
+                return `${api.config.storage.src.publicDir}/sitemap.xml`;
             },
         },
         sources: {
@@ -70,7 +70,7 @@ export default ({ env, config }) => {
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     get inDir() {
-                        return config.storage.src.rootDir;
+                        return api.config.storage.src.rootDir;
                     },
                 },
                 /**

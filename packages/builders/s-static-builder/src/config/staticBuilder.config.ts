@@ -1,5 +1,5 @@
-export default function ({ env, config }) {
-    if (env.platform !== 'node') return;
+export default function (api) {
+    if (api.env.platform !== 'node') return;
     return {
         /**
          * @name            input
@@ -13,7 +13,7 @@ export default function ({ env, config }) {
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get input() {
-            return `${this.storage.src.publicDir}/sitemap.xml`;
+            return `${api.config.storage.src.publicDir}/sitemap.xml`;
         },
 
         /**
@@ -28,7 +28,7 @@ export default function ({ env, config }) {
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get outDir() {
-            return `${config.storage.package.rootDir}/static`;
+            return `${api.config.storage.package.rootDir}/static`;
         },
 
         /**
@@ -43,7 +43,7 @@ export default function ({ env, config }) {
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get host() {
-            return `http://${config.frontendServer.hostname}:${config.frontendServer.port}`;
+            return `http://${api.config.frontendServer.hostname}:${api.config.frontendServer.port}`;
         },
 
         /**
@@ -138,7 +138,7 @@ export default function ({ env, config }) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 get from() {
-                    return `${config.staticBuilder.host}/docmap.json`;
+                    return `${api.config.staticBuilder.host}/docmap.json`;
                 },
 
                 /**
@@ -153,7 +153,7 @@ export default function ({ env, config }) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 get to() {
-                    return `${config.staticBuilder.outDir}/docmap.json`;
+                    return `${api.config.staticBuilder.outDir}/docmap.json`;
                 },
             },
             public: {
@@ -169,7 +169,7 @@ export default function ({ env, config }) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 get from() {
-                    return `${config.storage.src.publicDir}`;
+                    return `${api.config.storage.src.publicDir}`;
                 },
 
                 /**
@@ -196,7 +196,7 @@ export default function ({ env, config }) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 get to() {
-                    return config.staticBuilder.outDir;
+                    return api.config.staticBuilder.outDir;
                 },
             },
             dist: {
@@ -212,7 +212,7 @@ export default function ({ env, config }) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 get from() {
-                    return config.storage.dist.rootDir;
+                    return api.config.storage.dist.rootDir;
                 },
 
                 /**
@@ -239,7 +239,7 @@ export default function ({ env, config }) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 get to() {
-                    return `${config.staticBuilder.outDir}/dist`;
+                    return `${api.config.staticBuilder.outDir}/dist`;
                 },
             },
         },

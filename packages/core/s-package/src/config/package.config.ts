@@ -1,5 +1,5 @@
-export default function (env, config) {
-    if (env.platform !== 'node') return;
+export default function (api) {
+    if (api.env.platform !== 'node') return;
 
     return {
         /**
@@ -27,7 +27,9 @@ export default function (env, config) {
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        rootDir: '[config.storage.package.rootDir]',
+        get rootDir() {
+            return api.config.storage.package.rootDir;
+        },
 
         readme: {
             /**
@@ -41,7 +43,9 @@ export default function (env, config) {
              * @since       2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            path: '[config.storage.package.rootDir]/README.md',
+            get path() {
+                return `${api.this.rootDir}/README.md`;
+            },
         },
 
         /**
@@ -78,12 +82,14 @@ export default function (env, config) {
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            dirs: [
-                '[config.storage.src.jsDir]',
-                '[config.storage.src.nodeDir]',
-                '[config.storage.src.pagesDir]',
-                '[config.storage.src.configDir]',
-            ],
+            get dirs() {
+                return [
+                    api.config.storage.src.jsDir,
+                    api.config.storage.src.nodeDir,
+                    api.config.storage.src.pagesDir,
+                    api.config.storage.src.configDir,
+                ];
+            },
 
             /**
              * @name            packagesMap

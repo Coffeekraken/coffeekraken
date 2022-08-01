@@ -1,40 +1,40 @@
 {
-    "name": "@coffeekraken/s-rating-component",
-    "version": "2.0.0-alpha.5",
-    "description": "",
-    "type": "module",
-    "homepage": "https://coffeekraken.io",
-    "scripts": {
-        "dev": "sugar frontstack dev",
-        "build": "sugar frontstack build",
-        "test": "echo \"Error: no test specified\" && exit 1"
+  "name": "@coffeekraken/s-rating-component",
+  "version": "2.0.0-alpha.5",
+  "description": "",
+  "type": "module",
+  "homepage": "https://coffeekraken.io",
+  "scripts": {
+    "dev": "sugar frontstack dev",
+    "build": "sugar frontstack build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/s-interface": "^2.0.0-alpha.5",
+    "@coffeekraken/s-lit-component": "^2.0.0-alpha.5",
+    "@coffeekraken/sugar": "^2.0.0-alpha.5",
+    "lit": "^2.0.0-rc.3"
+  },
+  "main": "dist/pkg/cjs/js/exports.js",
+  "module": "dist/pkg/esm/js/exports.js",
+  "exports": {
+    ".": {
+      "require": "./dist/pkg/cjs/js/exports.js",
+      "import": "./dist/pkg/esm/js/exports.js"
     },
-    "author": "",
-    "license": "MIT",
-    "dependencies": {
-        "@coffeekraken/s-interface": "^2.0.0-alpha.5",
-        "@coffeekraken/s-lit-component": "^2.0.0-alpha.5",
-        "@coffeekraken/sugar": "^2.0.0-alpha.5",
-        "lit": "^2.0.0-rc.3"
+    "./shared/*": {
+      "require": "./dist/pkg/cjs/shared/*.js",
+      "import": "./dist/pkg/esm/shared/*.js"
     },
-    "main": "./dist/pkg/cjs/js/exports.js",
-    "module": "./dist/pkg/esm/js/exports.js",
-    "exports": {
-        ".": {
-            "require": "./dist/pkg/cjs/js/exports.js",
-            "import": "./dist/pkg/esm/js/exports.js"
-        },
-        "./shared/*": {
-            "require": "./dist/pkg/cjs/shared/*.js",
-            "import": "./dist/pkg/esm/shared/*.js"
-        },
-        "./node/*": {
-            "require": "./dist/pkg/cjs/node/*.js",
-            "import": "./dist/pkg/esm/node/*.js"
-        },
-        "./js/*": {
-            "require": "./dist/pkg/cjs/js/*.js",
-            "import": "./dist/pkg/esm/js/*.js"
-        }
+    "./node/*": {
+      "require": "./dist/pkg/cjs/node/*.js",
+      "import": "./dist/pkg/esm/node/*.js"
+    },
+    "./js/*": {
+      "require": "./dist/pkg/cjs/js/*.js",
+      "import": "./dist/pkg/esm/js/*.js"
     }
+  }
 }

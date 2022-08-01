@@ -1,13 +1,13 @@
 import __loadConfigFile from '@coffeekraken/sugar/node/config/loadConfigFile';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
-export async function preprocess({ env, thisConfig }) {
+export async function preprocess(api) {
     const config = (await __loadConfigFile('purgecss.config.js')) ?? {};
-    return __deepMerge(thisConfig, config);
+    return __deepMerge(api.this, config);
 }
 
-export default function ({ env, config }) {
-    if (env.platform !== 'node') return;
+export default function (api) {
+    if (api.env.platform !== 'node') return;
     return {
         /**
          * @name            content
@@ -20,16 +20,18 @@ export default function ({ env, config }) {
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        content: [
-            'index.html',
-            '[config.storage.src.rootDir]/ ** / *.js',
-            '[config.storage.src.rootDir]/ ** / *.jsx',
-            '[config.storage.src.rootDir]/ ** / *.html',
-            '[config.storage.src.rootDir]/ ** / *.vue',
-            '[config.storage.src.rootDir]/ ** / *.riot',
-            '[config.storage.src.rootDir]/ ** / *.svelte',
-            '[config.storage.src.rootDir]/**/*.blade.php',
-            '[config.storage.src.rootDir]/**/*.twig',
-        ],
+        get content() {
+            return [
+                'index.html',
+                `${api.config.storage.package.rootDir}/**/*.js`,
+                `${api.config.storage.package.rootDir}/**/*.jsx`,
+                `${api.config.storage.package.rootDir}/**/*.html`,
+                `${api.config.storage.package.rootDir}/**/*.vue`,
+                `${api.config.storage.package.rootDir}/**/*.riot`,
+                `${api.config.storage.package.rootDir}/**/*.svelte`,
+                `${api.config.storage.package.rootDir}/*/*.ladephp`,
+                `${api.config.storage.package.rootDir}/*/*.wi`,
+            ];
+        },
     };
 }

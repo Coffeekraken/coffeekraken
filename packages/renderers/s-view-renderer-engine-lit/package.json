@@ -1,36 +1,36 @@
 {
-    "name": "@coffeekraken/s-view-renderer-engine-lit",
-    "version": "2.0.0-alpha.5",
-    "description": "",
-    "type": "module",
-    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
-    "license": "MIT",
-    "dependencies": {
-        "@coffeekraken/s-interface": "^2.0.0-alpha.5",
-        "@coffeekraken/s-promise": "^2.0.0-alpha.5",
-        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.5",
-        "@coffeekraken/sugar": "^2.0.0-alpha.5",
-        "@lit-labs/ssr": "^2.2.0",
-        "exec-php": "^0.0.5"
+  "name": "@coffeekraken/s-view-renderer-engine-lit",
+  "version": "2.0.0-alpha.5",
+  "description": "",
+  "type": "module",
+  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/s-interface": "^2.0.0-alpha.5",
+    "@coffeekraken/s-promise": "^2.0.0-alpha.5",
+    "@coffeekraken/s-sugar-config": "^2.0.0-alpha.5",
+    "@coffeekraken/sugar": "^2.0.0-alpha.5",
+    "@lit-labs/ssr": "^2.2.0",
+    "exec-php": "^0.0.5"
+  },
+  "main": "dist/pkg/cjs/node/exports.js",
+  "module": "dist/pkg/esm/node/exports.js",
+  "exports": {
+    ".": {
+      "require": "./dist/pkg/cjs/node/exports.js",
+      "import": "./dist/pkg/esm/node/exports.js"
     },
-    "main": "./dist/pkg/cjs/node/exports.js",
-    "module": "./dist/pkg/esm/node/exports.js",
-    "exports": {
-        ".": {
-            "require": "./dist/pkg/cjs/node/exports.js",
-            "import": "./dist/pkg/esm/node/exports.js"
-        },
-        "./shared/*": {
-            "require": "./dist/pkg/cjs/shared/*.js",
-            "import": "./dist/pkg/esm/shared/*.js"
-        },
-        "./node/*": {
-            "require": "./dist/pkg/cjs/node/*.js",
-            "import": "./dist/pkg/esm/node/*.js"
-        },
-        "./js/*": {
-            "require": "./dist/pkg/cjs/js/*.js",
-            "import": "./dist/pkg/esm/js/*.js"
-        }
+    "./shared/*": {
+      "require": "./dist/pkg/cjs/shared/*.js",
+      "import": "./dist/pkg/esm/shared/*.js"
+    },
+    "./node/*": {
+      "require": "./dist/pkg/cjs/node/*.js",
+      "import": "./dist/pkg/esm/node/*.js"
+    },
+    "./js/*": {
+      "require": "./dist/pkg/cjs/js/*.js",
+      "import": "./dist/pkg/esm/js/*.js"
     }
+  }
 }

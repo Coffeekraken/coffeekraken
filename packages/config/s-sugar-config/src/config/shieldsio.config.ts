@@ -1,5 +1,5 @@
-export default function ({ env, config }) {
-    if (env.platform !== 'node') return;
+export default function (api) {
+    if (api.env.platform !== 'node') return;
 
     return {
         /**
@@ -28,7 +28,8 @@ export default function ({ env, config }) {
                  * @since           2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                url: 'https://shields.io/bundlephobia/min/[packageJson.name]?style=[config.shieldsio.style]',
+                url:
+                    'https://shields.io/bundlephobia/min/[packageJson.name]?style=[config.shieldsio.style]',
                 /**
                  * @name            href
                  * @namespace       config.shieldsio.shields.href
@@ -54,7 +55,8 @@ export default function ({ env, config }) {
                  * @since           2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                url: 'https://shields.io/npm/dm/[packageJson.name]?style=[config.shieldsio.style]',
+                url:
+                    'https://shields.io/npm/dm/[packageJson.name]?style=[config.shieldsio.style]',
                 /**
                  * @name            href
                  * @namespace       config.shieldsio.shields.download
@@ -80,7 +82,8 @@ export default function ({ env, config }) {
                  * @since           2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                url: 'https://shields.io/npm/l/[packageJson.name]?style=[config.shieldsio.style]',
+                url:
+                    'https://shields.io/npm/l/[packageJson.name]?style=[config.shieldsio.style]',
                 /**
                  * @name            href
                  * @namespace       config.shieldsio.shields.license
@@ -106,7 +109,8 @@ export default function ({ env, config }) {
                  * @since           2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                url: 'https://shields.io/discord/[config.discord.server.id]?style=[config.shieldsio.style]',
+                url:
+                    'https://shields.io/discord/[config.discord.server.id]?style=[config.shieldsio.style]',
                 /**
                  * @name            href
                  * @namespace       config.shieldsio.shields.license

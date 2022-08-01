@@ -1,3 +1,3 @@
-export default function (env, config) {
+export default function (api) {
     return {};
 }

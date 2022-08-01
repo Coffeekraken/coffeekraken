@@ -1,5 +1,5 @@
-export default function ({ env, config }) {
-    if (env.platform !== 'node') return;
+export default function (api) {
+    if (api.env.platform !== 'node') return;
 
     return {
         discord: {
@@ -15,7 +15,7 @@ export default function ({ env, config }) {
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get url() {
-                return `${config.discord.server.url}`;
+                return `${api.config.discord.server.url}`;
             },
 
             /**
@@ -29,7 +29,8 @@ export default function ({ env, config }) {
              * @since       2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            shield: 'https://img.shields.io/badge/Join%20us%20on%20discord-Join-blueviolet?style=[config.shieldsio.style]&logo=discord',
+            shield:
+                'https://img.shields.io/badge/Join%20us%20on%20discord-Join-blueviolet?style=[config.shieldsio.style]&logo=discord',
         },
         email: {
             /**
@@ -45,8 +46,8 @@ export default function ({ env, config }) {
              */
             get url() {
                 return `mailto:${
-                    config?.packageJson?.author?.email ??
-                    config?.git?.user?.email
+                    api.config?.packageJson?.author?.email ??
+                    api.config?.git?.user?.email
                 }`;
             },
             /**
@@ -60,7 +61,8 @@ export default function ({ env, config }) {
              * @since       2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            shield: 'https://img.shields.io/badge/Email%20us-Go-green?style=[config.shieldsio.style]&logo=Mail.Ru',
+            shield:
+                'https://img.shields.io/badge/Email%20us-Go-green?style=[config.shieldsio.style]&logo=Mail.Ru',
         },
     };
 }

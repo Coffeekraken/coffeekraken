@@ -1,4 +1,4 @@
-export default (env, config) => {
+export default (api) => {
     return {
         /**
          * @name          h1
@@ -193,7 +193,9 @@ export default (env, config) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         hr: {
-            color: '[theme.color.main.color]',
+            get color() {
+                return api.theme.color.main;
+            },
             opacity: 0.2,
             rhythmVertical: {
                 'margin-bottom': 50,
@@ -215,10 +217,18 @@ export default (env, config) => {
             color: ['main', 'text'],
             'background-color': ['main', 'surface'],
             'line-height': 1.5,
-            paddingInline: '[theme.ui.default.paddingInline]',
-            paddingBlock: '[theme.ui.default.paddingBlock]',
-            borderRadius: '[theme.ui.default.borderRadius]',
-            depth: '[theme.ui.default.depth]',
+            get paddingInline() {
+                return api.theme.ui.default.paddingInline;
+            },
+            get paddingBlock() {
+                return api.theme.ui.default.paddingBlock;
+            },
+            get borderRadius() {
+                return api.theme.ui.default.borderRadius;
+            },
+            get depth() {
+                return api.theme.ui.default.depth;
+            },
             rhythmVertical: {
                 'margin-bottom': 50,
             },
@@ -453,8 +463,14 @@ export default (env, config) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         mark: {
-            'background-color': '[theme.color.accent.color]',
-            color: '[theme.color.accent.foreground]',
+            get 'background-color'() {
+                return api.theme.color.accent;
+            },
+            // @TODO        check to enable this
+            // get color() {
+            //     return api.theme.color.accent.
+            // }
+            // color: '[theme.color.accent.foreground]',
         },
         /**
          * @name          del

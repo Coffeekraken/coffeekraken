@@ -1,42 +1,34 @@
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
-export function preprocess(env, rawThemeConfig, rawConfig) {
+export function preprocess(api) {
     // setting theme from sugar.json
     const sugarJsonInstance = new __SSugarJson();
     const sugarJson = sugarJsonInstance.current();
 
-    if (sugarJson.theme) rawThemeConfig.theme = sugarJson.theme;
-    if (sugarJson.variant) rawThemeConfig.variant = sugarJson.variant;
+    if (sugarJson.theme) api.this.theme = sugarJson.theme;
+    if (sugarJson.variant) api.this.variant = sugarJson.variant;
 
     // inject each available themes inside the "themes" property
-    Object.keys(rawConfig).forEach((configId) => {
-        const configObj = rawConfig[configId];
+    Object.keys(api.config).forEach((configId) => {
+        const configObj = api.config[configId];
         if (configObj.themeName && configObj.variants && configObj.metas) {
             Object.keys(configObj.variants).forEach((variantName) => {
                 const themeId = `${configObj.themeName}-${variantName}`;
-                if (!rawThemeConfig.themes[themeId]) {
-                    rawThemeConfig.themes[
-                        themeId
-                    ] = `[config.${configId}.variants.${variantName}]`;
+                if (!api.this.themes[themeId]) {
+                    api.this.themes[themeId] =
+                        api.config[configId].variants[variantName];
                 }
-                // if (!rawThemeConfig.themes[themeId].metas && configObj.metas) {
-                //     rawThemeConfig.themes[
-                //         themeId
-                //     ].metas = `[config.${configId}.metas]`;
-                // }
             });
         }
     });
-    return rawThemeConfig;
+    return api.this;
 }
 
-export function postprocess(env, themeConfig, config) {
-    for (let [key, value] of Object.entries(config)) {
+export function postprocess(api) {
+    for (let [key, value] of Object.entries(api.config)) {
         if (value.themeName && value.metas) {
-            for (let [themeName, themeObj] of Object.entries(
-                themeConfig.themes,
-            )) {
+            for (let [themeName, themeObj] of Object.entries(api.this.themes)) {
                 if (themeName.startsWith(`${value.themeName}-`)) {
                     if (!themeObj.metas) {
                         themeObj.metas = {};
@@ -46,10 +38,10 @@ export function postprocess(env, themeConfig, config) {
             }
         }
     }
-    return themeConfig;
+    return api.this;
 }
 
-export default function (env, config) {
+export default function (api) {
     return {
         /**
          * @name          theme

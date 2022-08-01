@@ -2,16 +2,15 @@ import __loadConfigFile from '@coffeekraken/sugar/node/config/loadConfigFile';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __path from 'path';
-
 import { configDefaults, defineConfig } from 'vitest/config';
 
-export async function preprocess(env, rawViteConfig, rawConfig) {
+export async function preprocess(api) {
     const config = (await __loadConfigFile('vite.config.js')) ?? {};
-    return __deepMerge(rawViteConfig, config);
+    return __deepMerge(api.this, config);
 }
 
-export default function (env, config) {
-    if (env.platform !== 'node') return;
+export default function (api) {
+    if (api.env.platform !== 'node') return;
 
     return defineConfig({
         /**
@@ -25,7 +24,10 @@ export default function (env, config) {
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        root: '[config.storage.package.rootDir]',
+        get root() {
+            return api.config.storage.package.rootDir;
+        },
+
         /**
          * @name          base
          * @namespace     config.vite
@@ -38,6 +40,7 @@ export default function (env, config) {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         base: '/',
+
         /**
          * @name          logLevel
          * @namespace     config.vite
@@ -113,7 +116,10 @@ export default function (env, config) {
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        publicDir: '[config.storage.src.rootDir]/public',
+        get publicDir() {
+            return api.config.storage.src.publicDir;
+        },
+
         /**
          * @name          cacheDir
          * @namespace     config.vite
@@ -125,7 +131,10 @@ export default function (env, config) {
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        cacheDir: '[config.storage.package.cacheDir]/vite',
+        get cacheDir() {
+            return `${api.config.storage.package.cacheDir}/vite`;
+        },
+
         /**
          * @name          clearScreen
          * @namespace     config.vite
@@ -164,14 +173,17 @@ export default function (env, config) {
                  * @name          entry
                  * @namespace     config.vite.build.lib
                  * @type          String
-                 * @default      [config.storage.src.rootDir]/js/index.ts
+                 * @default      [config.storage.src.jsDir]/index.ts
                  *
                  * Specify the entry file for a "lib" build
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                entry: '[config.storage.src.rootDir]/js/index.ts',
+                get entry() {
+                    return `${api.config.storage.src.jsDir}/index.ts`;
+                },
+
                 /**
                  * @name          name
                  * @namespace     config.vite.build.lib
@@ -196,7 +208,9 @@ export default function (env, config) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            outDir: '[config.storage.dist.jsDir]',
+            get outDir() {
+                return api.config.storage.dist.jsDir;
+            },
 
             rollupOptions: {},
         },
@@ -239,44 +253,48 @@ export default function (env, config) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            hostname:
-                'http://[config.vite.server.host]:[config.vite.server.port]',
+            get hostname() {
+                return `http://${api.config.vite.server.host}:${api.config.vite.server.port}`;
+            },
             proxy: {
                 // all files that match /dist/...css|ts|tsx|etc...
                 // have to target the "src" directory
-                '^\\/dist\\/.*(\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs)$':
-                    {
-                        target: `http://localhost:3000`,
-                        changeOrigin: true,
-                        rewrite: (path) => {
-                            return path.replace(/\/dist\//, '/src/');
-                        },
-                    },
-                '^.*\\.(js(?!on)|css)(?!.map)(?!\\?)(.+){1,99999}$': {
-                    target: `http://[config.frontendServer.hostname]:[config.frontendServer.port]`,
+                '^\\/dist\\/.*(\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs)$': {
+                    target: `http://localhost:3000`,
                     changeOrigin: true,
                     rewrite: (path) => {
-                        return path;
+                        return path.replace(/\/dist\//, '/src/');
                     },
+                },
+                get '^.*\\.(js(?!on)|css)(?!.map)(?!\\?)(.+){1,99999}$'() {
+                    return {
+                        target: `http://${api.config.frontendServer.hostname}:${api.config.frontendServer.port}`,
+                        changeOrigin: true,
+                        rewrite: (path) => {
+                            return path;
+                        },
+                    };
                 },
                 // all none css, js, ts, etc...
                 // have to go to frontend server
-                '^\\/dist\\/(?:(?!\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs).)*$':
-                    {
-                        target: `http://[config.frontendServer.hostname]:[config.frontendServer.port]`,
+                get '^\\/dist\\/(?:(?!\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs).)*$'() {
+                    return {
+                        target: `http://${api.config.frontendServer.hostname}:${api.config.frontendServer.port}`,
                         changeOrigin: true,
                         rewrite: (path) => {
                             return path;
                         },
-                    },
-                '^(?:(?!\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs|@vite|\\.local|\\@fs|\\@id|__vite_ping|index.html).)*$':
-                    {
-                        target: `http://[config.frontendServer.hostname]:[config.frontendServer.port]`,
+                    };
+                },
+                get '^(?:(?!\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs|@vite|\\.local|\\@fs|\\@id|__vite_ping|index.html).)*$'() {
+                    return {
+                        target: `http://${api.config.frontendServer.hostname}:${api.config.frontendServer.port}`,
                         changeOrigin: true,
                         rewrite: (path) => {
                             return path;
                         },
-                    },
+                    };
+                },
             },
         },
         rewrites: [
@@ -295,7 +313,9 @@ export default function (env, config) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            dir: '[config.storage.src.rootDir]',
+            get dir() {
+                return api.config.storage.src.rootDir;
+            },
 
             include: ['**/*.test.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
 

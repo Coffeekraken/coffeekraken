@@ -1,4 +1,4 @@
-export default (env, config, theme) => {
+export default (api) => {
     return {
         colorPicker: {
             /**
@@ -13,7 +13,7 @@ export default (env, config, theme) => {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get paddingInline() {
-                return theme.ui.default.paddingInline;
+                return api.theme.ui.default.paddingInline;
             },
             /**
              * @name          paddingBlock
@@ -27,7 +27,7 @@ export default (env, config, theme) => {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get paddingBlock() {
-                return theme.ui.default.paddingBlock;
+                return api.theme.ui.default.paddingBlock;
             },
 
             /**
@@ -42,7 +42,7 @@ export default (env, config, theme) => {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get borderRadius() {
-                return theme.ui.default.borderRadius;
+                return api.theme.ui.default.borderRadius;
             },
 
             /**
@@ -57,7 +57,7 @@ export default (env, config, theme) => {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get transition() {
-                return theme.ui.default.transition;
+                return api.theme.ui.default.transition;
             },
 
             /**
@@ -72,7 +72,7 @@ export default (env, config, theme) => {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get defaultColor() {
-                return theme.ui.default.defaultColor;
+                return api.theme.ui.default.defaultColor;
             },
 
             /**
@@ -87,7 +87,7 @@ export default (env, config, theme) => {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get defaultStyle() {
-                return theme.ui.default.defaultStack;
+                return api.theme.ui.default.defaultStack;
             },
 
             /**
@@ -117,7 +117,7 @@ export default (env, config, theme) => {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get rhythmVertical() {
-                return theme.ui.default.rhythmVertical;
+                return api.theme.ui.default.rhythmVertical;
             },
         },
     };

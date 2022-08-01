@@ -9,6 +9,7 @@ import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __getFiles from '@coffeekraken/sugar/node/fs/getFiles';
 import __monorepoToPackageAbsolutePathDeepMap from '@coffeekraken/sugar/node/monorepo/monorepoToPackageAbsolutePathDeepMap';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
 import __path from 'path';
@@ -139,28 +140,46 @@ export default class STypescriptBuilder extends __SBuilder {
     static buildTemporary(
         path: string,
         params?: Partial<ISTypescriptBuilderBuildParams>,
-        settings?: Partial<ISTypescriptBuilderSettings>,
+        settings: Partial<ISTypescriptBuilderSettings> = {},
     ): Promise<ISTypescriptBuildTemporaryResult> {
         return new Promise(async (resolve, reject) => {
             if (path.match(/\.ts$/)) {
                 const builder = new STypescriptBuilder(settings ?? {});
 
+                if (__fs.existsSync(path) && !path.match(/\.tsx?$/)) {
+                    try {
+                        __fs.unlinkSync(path.replace(/\.ts(x)?/, '.js$1'));
+                    } catch (e) {}
+                }
+
+                let res;
+
+                function remove() {
+                    try {
+                        __fs.unlinkSync(res.files[0].file.path);
+                    } catch (e) {}
+                }
+
+                // make sure the file does not stay when an error occured, etc...
+                __onProcessExit(() => {
+                    remove();
+                });
+
                 // @ts-ignore
-                const res = await builder.build({
+                res = await builder.build({
                     inDir: __path.dirname(path),
                     glob: __path.basename(path),
                     outDir: __path.dirname(path),
                     formats: ['esm'],
+                    buildInitial: true,
                     ...(params ?? {}),
                 });
 
+                // console.log('RESOLVE', path, res.files[0].path);
+
                 resolve({
-                    path: res.files[0].file.path,
-                    remove() {
-                        try {
-                            __fs.unlinkSync(res.files[0].file.path);
-                        } catch (e) {}
-                    },
+                    path: res.files[0]?.file.path,
+                    remove,
                 });
             }
             resolve({
@@ -222,22 +241,10 @@ export default class STypescriptBuilder extends __SBuilder {
                 const buildedFiles: ISTypescriptBuilderResultFile[] = [];
 
                 // @ts-ignore
-                const finalParams: ISTypescriptBuilderBuildParams =
-                    __monorepoToPackageAbsolutePathDeepMap(
-                        __STypescriptBuilderBuildParamsInterface.apply(params),
-                        params.packageRoot ?? process.cwd(),
-                    );
-
-                // console.log(
-                //     'FF',
-                //     // JSON.stringify(
-                //     //     __STypescriptBuilderBuildParamsInterface.defaults(),
-                //     //     null,
-                //     //     4,
-                //     // ),
-                //     JSON.stringify(__SSugarConfig.get('storage'), null, 4),
-                // );
-                return;
+                const finalParams: ISTypescriptBuilderBuildParams = __monorepoToPackageAbsolutePathDeepMap(
+                    __STypescriptBuilderBuildParamsInterface.apply(params),
+                    params.packageRoot ?? process.cwd(),
+                );
 
                 // this can be overrided by customSettings bellow
                 let formats = Array.isArray(finalParams.formats)
@@ -249,15 +256,12 @@ export default class STypescriptBuilder extends __SBuilder {
                     : [finalParams.glob];
 
                 if (!finalParams.silent) {
-                    console.log(finalParams);
-
                     emit('log', {
                         type: __SLog.TYPE_INFO,
                         value: `<yellow>○</yellow> Globs              : <yellow>${globs.join(
                             ',',
                         )}</yellow>`,
                     });
-                    console.log(finalParams.inDir);
                     emit('log', {
                         type: __SLog.TYPE_INFO,
                         value: `<yellow>○</yellow> Input directory   : <cyan>${finalParams.inDir}</cyan>`,
@@ -297,7 +301,8 @@ export default class STypescriptBuilder extends __SBuilder {
                 // watch using chokidar
                 const filesPromise = __getFiles(globs, {
                     cwd: finalParams.inDir,
-                    ignoreInitial: !finalParams.buildInitial,
+                    ignoreInitial:
+                        finalParams.watch && !finalParams.buildInitial,
                     watch: finalParams.watch,
                 });
 
@@ -319,9 +324,8 @@ export default class STypescriptBuilder extends __SBuilder {
 
                 // listen for files change and add
                 filesPromise.on('add,change', async (filePath) => {
-                    console.log('CHANGE', filePath);
-
                     // avoid to process in loop the same file saved over and over
+
                     const savedFileIdx = buildedStack.indexOf(filePath);
                     if (savedFileIdx !== -1) {
                         return;
@@ -335,7 +339,9 @@ export default class STypescriptBuilder extends __SBuilder {
                     let buildParams = Object.assign({}, finalParams);
 
                     for (let [id, customSettings] of Object.entries(
-                        __SSugarConfig.get('typescriptBuilder.customSettings'),
+                        __SSugarConfig.getSafe(
+                            'typescriptBuilder.customSettings',
+                        ) ?? {},
                     )) {
                         if (__SGlob.match(filePath, customSettings.glob)) {
                             formats =
@@ -355,7 +361,9 @@ export default class STypescriptBuilder extends __SBuilder {
                     );
 
                     // generate all the requested formats
-                    formats.forEach(async (format) => {
+
+                    for (let i = 0; i < formats.length; i++) {
+                        const format = formats[i];
                         const buildedFileRes = await pipe(
                             this._buildFile(
                                 __deepMerge(
@@ -379,7 +387,7 @@ export default class STypescriptBuilder extends __SBuilder {
                         if (!buildedFiles.includes(buildedFileRes)) {
                             buildedFiles.push(buildedFileRes);
                         }
-                    });
+                    }
                 });
             },
             {
@@ -410,10 +418,17 @@ export default class STypescriptBuilder extends __SBuilder {
                 .replace('%moduleSystem', file.format)
                 .replace(/\.ts$/, '.js');
 
+            // delete output file if exists and that a proper ts file exists also
+            if (__fs.existsSync(file.path) && __fs.existsSync(outFilePath)) {
+                try {
+                    __fs.unlinkSync(outFilePath);
+                } catch (e) {}
+            }
+
             const source = __fs.readFileSync(file.path).toString();
 
             const tsconfig =
-                __SSugarConfig.get('typescriptBuilder.tsconfig') ?? {};
+                __SSugarConfig.getSafe('typescriptBuilder.tsconfig') ?? {};
 
             let filePath = file.relPath;
             if (process.cwd() !== __packageRoot(file.path)) {
@@ -460,8 +475,9 @@ export default class STypescriptBuilder extends __SBuilder {
 
             // package.json
             if (params.save) {
-                const packageJsonOutFolderPath =
-                    __path.dirname(packageJsonOutPath);
+                const packageJsonOutFolderPath = __path.dirname(
+                    packageJsonOutPath,
+                );
                 if (!__fs.existsSync(packageJsonOutFolderPath)) {
                     __fs.mkdirSync(packageJsonOutFolderPath, {
                         recursive: true,

@@ -10,6 +10,7 @@ import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __sha256 from '@coffeekraken/sugar/shared/crypt/sha256';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __merge from '@coffeekraken/sugar/shared/object/merge';
 import __replaceTokens from '@coffeekraken/sugar/shared/token/replaceTokens';
 import __fs from 'fs';
 import __path from 'path';
@@ -202,16 +203,13 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                     continue;
                 }
 
+                let buildTemporaryRes;
+
                 if (filePath.match(/\.ts$/)) {
-                    const builder = new __STypescriptBuilder();
-                    const res = await builder.build({
-                        inDir: __path.dirname(filePath),
-                        glob: __path.basename(filePath),
-                        outDir: __path.dirname(filePath),
-                        formats: ['esm'],
-                    });
-                    deleteAfterLoad = true;
-                    filePath = res.files[0].file.path;
+                    buildTemporaryRes = await __STypescriptBuilder.buildTemporary(
+                        filePath,
+                    );
+                    filePath = buildTemporaryRes.path;
                 }
 
                 if (
@@ -219,6 +217,11 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                         this.settings.fileName.replace('%name', ''),
                     )
                 ) {
+                    if (buildTemporaryRes) {
+                        setTimeout(() => {
+                            buildTemporaryRes.remove();
+                        }, 100);
+                    }
                     continue;
                 }
 
@@ -228,43 +231,30 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                     importedConfig = await import(filePath);
                 }
 
-                // if (filePath.includes('storage')) {
-                //     console.log(
-                //         'SI',
-                //         Object.assign(
-                //             {},
-                //             importedConfig.default({
-                //                 platform: 'node',
-                //             }),
-                //         ),
-                //     );
-                // }
-
-                if (deleteAfterLoad) {
+                if (buildTemporaryRes) {
                     setTimeout(() => {
-                        try {
-                            __fs.unlinkSync(filePath);
-                        } catch (e) {}
-                    }, 200);
+                        buildTemporaryRes.remove();
+                    }, 100);
                 }
 
                 let configData = importedConfig.default;
                 if (typeof configData === 'function') {
-                    if (configId === 'storage') {
-                        configData = configData({
-                            env,
-                            config: configObj ?? {},
-                            get thisConfig() {
-                                return configObj[configId];
-                            },
-                            get theme() {
-                                const themeId = `${configObj.theme.theme}-${configObj.theme.variant}`;
-                                return configObj.theme.themes[themeId];
-                            },
-                        });
-                    } else {
-                        configData = configData(env, configObj ?? {});
-                    }
+                    configData = configData({
+                        env,
+                        config: configObj ?? {},
+                        get this() {
+                            return configObj[configId];
+                        },
+                        get theme() {
+                            if (!configObj.theme) return {};
+                            const themeId = `${configObj.theme.theme}-${configObj.theme.variant}`;
+                            return configObj.theme.themes[themeId];
+                        },
+                        extends: __merge,
+                        // extends(...objects) {
+                        //     return __merge.apply(null, ...objects.reverse());
+                        // },
+                    });
                 }
 
                 const configKey = __path.basename(
@@ -304,27 +294,22 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
     }
 
     async load({ clearCache, env, config }) {
-        try {
-            for (
-                let i = 0;
-                i < Object.keys(this._scopedFoldersPaths).length;
-                i++
-            ) {
-                const scope = Object.keys(this._scopedFoldersPaths)[i];
-
-                const scopedFoldersPaths = this._scopedFoldersPaths[scope];
-                if (scopedFoldersPaths && scopedFoldersPaths.length) {
-                    this._scopedSettings[scope] = await this._load(
-                        scopedFoldersPaths,
-                        clearCache,
-                        env,
-                        config,
-                    );
-                }
+        // try {
+        for (let i = 0; i < Object.keys(this._scopedFoldersPaths).length; i++) {
+            const scope = Object.keys(this._scopedFoldersPaths)[i];
+            const scopedFoldersPaths = this._scopedFoldersPaths[scope];
+            if (scopedFoldersPaths && scopedFoldersPaths.length) {
+                this._scopedSettings[scope] = await this._load(
+                    scopedFoldersPaths,
+                    clearCache,
+                    env,
+                    config,
+                );
             }
-        } catch (e) {
-            console.log('fffffffff', e);
         }
+        // } catch (e) {
+        //     console.log('fffffffff', e);
+        // }
 
         let resultSettings: any = {};
         Object.keys(this._scopedSettings).forEach((scope) => {

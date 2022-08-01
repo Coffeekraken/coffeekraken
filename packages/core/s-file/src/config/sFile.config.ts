@@ -1,8 +1,8 @@
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 
-export default function (env, config) {
-    if (env.platform !== 'node') return;
+export default function (api) {
+    if (api.env.platform !== 'node') return;
     return {
         /**
          * @name           classesMap

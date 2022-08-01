@@ -1,8 +1,5 @@
-import __path from 'path';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-
-export default function (env, config) {
-    if (env.platform !== 'node') return;
+export default function (api) {
+    if (api.env.platform !== 'node') return;
 
     return {
         /**
@@ -16,7 +13,9 @@ export default function (env, config) {
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        rootDirs: [`[config.storage.src.rootDir]/views`],
+        get rootDirs() {
+            return [`${api.config.storage.src.rootDir}/views`];
+        },
 
         /**
          * @name            cacheDir
@@ -29,7 +28,9 @@ export default function (env, config) {
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        cacheDir: `[config.storage.package.cacheDir]/views`,
+        get cacheDir() {
+            return `${api.config.storage.package.cacheDir}/views`;
+        },
 
         /**
          * @name          engines
@@ -59,7 +60,9 @@ export default function (env, config) {
          * @since       2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        sharedDataFiles: ['[config.storage.src.rootDir]/views/shared.data.js'],
+        get sharedDataFiles() {
+            return [`${api.config.storage.src.rootDir}/views/shared.data.js`];
+        },
 
         /**
          * @name          dataFiles

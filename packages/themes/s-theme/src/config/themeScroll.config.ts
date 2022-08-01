@@ -1,4 +1,4 @@
-export default function (env, config) {
+export default function (api) {
     return {
         /**
          * @name                duration
@@ -37,7 +37,9 @@ export default function (env, config) {
          * @since               2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        offsetX: `[theme.layout.offset.left]`,
+        get offsetX() {
+            return api.theme.layout.offset.left;
+        },
 
         /**
          * @name                offsetY
@@ -50,6 +52,8 @@ export default function (env, config) {
          * @since               2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        offsetY: `[theme.layout.offset.top]`,
+        get offsetY() {
+            return api.theme.layout.offset.top;
+        },
     };
 }

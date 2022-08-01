@@ -1,4 +1,4 @@
-export default function (env, config) {
+export default function (api) {
     return {
         /**
          * @name          themeName
@@ -52,7 +52,10 @@ export default function (env, config) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            light: '[config.themeDefaultLight]',
+            get light() {
+                return api.config.themeDefaultLight;
+            },
+
             /**
              * @name          dark
              * @namespace     config.themeDefault.variants
@@ -64,7 +67,9 @@ export default function (env, config) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            dark: '[config.themeDefaultDark]',
+            get dark() {
+                return api.config.themeDefaultDark;
+            },
         },
     };
 }

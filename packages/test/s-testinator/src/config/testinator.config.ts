@@ -1,5 +1,5 @@
-export default function (env, config) {
-    if (env.platform !== 'node') return;
+export default function (api) {
+    if (api.env.platform !== 'node') return;
 
     return {
         /**
@@ -26,7 +26,9 @@ export default function (env, config) {
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        inDir: '[config.storage.src.rootDir]',
+        get inDir() {
+            return api.config.storage.src.rootDir;
+        },
 
         /**
          * @name            exclude

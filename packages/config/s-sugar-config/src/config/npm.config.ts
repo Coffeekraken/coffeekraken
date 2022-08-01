@@ -1,5 +1,5 @@
-export default function ({ env, config }) {
-    if (env.platform !== 'node') return;
+export default function (api) {
+    if (api.env.platform !== 'node') return;
 
     return {
         /**
@@ -14,7 +14,7 @@ export default function ({ env, config }) {
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get rootDir() {
-            return `${config.storage.package.rootDir}/node_modules`;
+            return `${api.config.storage.package.rootDir}/node_modules`;
         },
     };
 }

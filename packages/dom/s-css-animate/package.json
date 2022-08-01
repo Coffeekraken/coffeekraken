@@ -1,6 +1,7 @@
 {
-  "name": "@coffeekraken/s-refocus-feature",
-  "version": "2.0.0-alpha.5",
+  "publish": false,
+  "name": "@coffeekraken/s-css-animation",
+  "version": "2.0.0-alpha.0",
   "description": "",
   "type": "module",
   "scripts": {
@@ -11,10 +12,8 @@
   "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
   "license": "MIT",
   "dependencies": {
-    "@coffeekraken/s-class": "^2.0.0-alpha.5",
-    "@coffeekraken/s-feature": "^2.0.0-alpha.5",
-    "@coffeekraken/s-interface": "^2.0.0-alpha.5",
-    "@coffeekraken/sugar": "^2.0.0-alpha.5"
+    "animejs": "^3.2.1",
+    "rematrix": "^0.7.2"
   },
   "main": "dist/pkg/cjs/js/exports.js",
   "module": "dist/pkg/esm/js/exports.js",

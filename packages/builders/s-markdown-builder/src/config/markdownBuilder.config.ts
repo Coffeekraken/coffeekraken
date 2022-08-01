@@ -2,8 +2,8 @@ import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __path from 'path';
 
-export default function ({ env, config }) {
-    if (env.platform !== 'node') return;
+export default function (api) {
+    if (api.env.platform !== 'node') return;
 
     const packageRoot = __packageRoot(__dirname());
 
@@ -34,7 +34,7 @@ export default function ({ env, config }) {
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get inDir() {
-                return config.storage.src.rootDir;
+                return api.config.storage.src.rootDir;
             },
 
             /**
@@ -73,7 +73,7 @@ export default function ({ env, config }) {
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get outDir() {
-                return config.storage.dist.rootDir;
+                return api.config.storage.dist.rootDir;
             },
 
             /**
@@ -597,7 +597,7 @@ export default function ({ env, config }) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 get data() {
-                    return config.shieldsio;
+                    return api.config.shieldsio;
                 },
             },
             interface: {
@@ -881,7 +881,7 @@ export default function ({ env, config }) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 get data() {
-                    return config.readme.layout;
+                    return api.config.readme.layout;
                 },
             },
             license: {
@@ -927,7 +927,7 @@ export default function ({ env, config }) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 get data() {
-                    return config.license.layout;
+                    return api.config.license.layout;
                 },
             },
         },

@@ -1,55 +1,55 @@
 {
-    "name": "@coffeekraken/s-postcss-builder",
-    "version": "2.0.0-alpha.5",
-    "description": "",
-    "type": "module",
-    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
-    "license": "MIT",
-    "dependencies": {
-        "@coffeekraken/s-builder": "^2.0.0-alpha.5",
-        "@coffeekraken/s-duration": "^2.0.0-alpha.5",
-        "@coffeekraken/s-event-emitter": "^2.0.0-alpha.5",
-        "@coffeekraken/s-file": "^2.0.0-alpha.5",
-        "@coffeekraken/s-glob": "^2.0.0-alpha.5",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.5",
-        "@coffeekraken/s-log": "^2.0.0-alpha.5",
-        "@coffeekraken/s-postcss-sugar-plugin": "^2.0.0-alpha.5",
-        "@coffeekraken/s-promise": "^2.0.0-alpha.5",
-        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.5",
-        "@coffeekraken/sugar": "^2.0.0-alpha.5",
-        "@fullhuman/postcss-purgecss": "^4.0.3",
-        "autoprefixer": "^10.2.6",
-        "cssnano": "^5.1.12",
-        "csso": "^4.2.0",
-        "postcss": "^8.3.5",
-        "postcss-atroot": "^0.2.3",
-        "postcss-easy-import": "^3.0.0",
-        "postcss-extend-rule": "^3.0.0",
-        "postcss-import": "^14.0.2",
-        "postcss-nested": "^5.0.5",
-        "postcss-property-lookup": "^3.0.0",
-        "purgecss": "^4.0.3",
-        "purgecss-from-html": "^4.1.1",
-        "shorter": "^0.3.1"
+  "name": "@coffeekraken/s-postcss-builder",
+  "version": "2.0.0-alpha.5",
+  "description": "",
+  "type": "module",
+  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/s-builder": "^2.0.0-alpha.5",
+    "@coffeekraken/s-duration": "^2.0.0-alpha.5",
+    "@coffeekraken/s-event-emitter": "^2.0.0-alpha.5",
+    "@coffeekraken/s-file": "^2.0.0-alpha.5",
+    "@coffeekraken/s-glob": "^2.0.0-alpha.5",
+    "@coffeekraken/s-interface": "^2.0.0-alpha.5",
+    "@coffeekraken/s-log": "^2.0.0-alpha.5",
+    "@coffeekraken/s-postcss-sugar-plugin": "^2.0.0-alpha.5",
+    "@coffeekraken/s-promise": "^2.0.0-alpha.5",
+    "@coffeekraken/s-sugar-config": "^2.0.0-alpha.5",
+    "@coffeekraken/sugar": "^2.0.0-alpha.5",
+    "@fullhuman/postcss-purgecss": "^4.0.3",
+    "autoprefixer": "^10.2.6",
+    "cssnano": "^5.1.12",
+    "csso": "^4.2.0",
+    "postcss": "^8.3.5",
+    "postcss-atroot": "^0.2.3",
+    "postcss-easy-import": "^3.0.0",
+    "postcss-extend-rule": "^3.0.0",
+    "postcss-import": "^14.0.2",
+    "postcss-nested": "^5.0.5",
+    "postcss-property-lookup": "^3.0.0",
+    "purgecss": "^4.0.3",
+    "purgecss-from-html": "^4.1.1",
+    "shorter": "^0.3.1"
+  },
+  "main": "dist/pkg/cjs/node/exports.js",
+  "module": "dist/pkg/esm/node/exports.js",
+  "exports": {
+    ".": {
+      "require": "./dist/pkg/cjs/node/exports.js",
+      "import": "./dist/pkg/esm/node/exports.js"
     },
-    "main": "./dist/pkg/cjs/node/exports.js",
-    "module": "./dist/pkg/esm/node/exports.js",
-    "exports": {
-        ".": {
-            "require": "./dist/pkg/cjs/node/exports.js",
-            "import": "./dist/pkg/esm/node/exports.js"
-        },
-        "./shared/*": {
-            "require": "./dist/pkg/cjs/shared/*.js",
-            "import": "./dist/pkg/esm/shared/*.js"
-        },
-        "./node/*": {
-            "require": "./dist/pkg/cjs/node/*.js",
-            "import": "./dist/pkg/esm/node/*.js"
-        },
-        "./js/*": {
-            "require": "./dist/pkg/cjs/js/*.js",
-            "import": "./dist/pkg/esm/js/*.js"
-        }
+    "./shared/*": {
+      "require": "./dist/pkg/cjs/shared/*.js",
+      "import": "./dist/pkg/esm/shared/*.js"
+    },
+    "./node/*": {
+      "require": "./dist/pkg/cjs/node/*.js",
+      "import": "./dist/pkg/esm/node/*.js"
+    },
+    "./js/*": {
+      "require": "./dist/pkg/cjs/js/*.js",
+      "import": "./dist/pkg/esm/js/*.js"
     }
+  }
 }

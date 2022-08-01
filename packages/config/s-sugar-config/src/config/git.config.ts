@@ -1,41 +1,41 @@
 import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
 import __childProcess from 'child_process';
 
-export function postprocess({ env, config }) {
+export function postprocess(api) {
     try {
-        if (!config.repo?.url) {
+        if (!api.config.repo?.url) {
             const packageJson = __packageJsonSync();
             if (packageJson.repository?.url) {
-                config.repo.url = packageJson.repository.url;
+                api.config.repo.url = packageJson.repository.url;
             } else {
                 const url = __childProcess
                     .execSync('git config --get remote.origin.url')
                     .toString()
                     .trim();
-                config.repo.url = url;
+                api.config.repo.url = url;
             }
         }
-        if (!config.user?.name) {
+        if (!api.config.user?.name) {
             const name = __childProcess
                 .execSync('git config --get user.name')
                 .toString()
                 .trim();
-            config.user.name = name;
+            api.config.user.name = name;
         }
-        if (!config.user?.email) {
+        if (!api.config.user?.email) {
             const email = __childProcess
                 .execSync('git config --get user.email')
                 .toString()
                 .trim();
-            config.user.email = email;
+            api.config.user.email = email;
         }
     } catch (e) {}
 
-    return config;
+    return api.config;
 }
 
-export default function ({ env }) {
-    if (env.platform !== 'node') return;
+export default function (api) {
+    if (api.env.platform !== 'node') return;
 
     return {
         user: {

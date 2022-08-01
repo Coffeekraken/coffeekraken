@@ -1,5 +1,5 @@
-export default (env, config) => {
-    if (env.platform !== 'node') return;
+export default (api) => {
+    if (api.env.platform !== 'node') return;
     return {
         default: {
             /**
@@ -49,7 +49,10 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderWidth: '[theme.border.width.default]',
+            get borderWidth() {
+                return api.theme.border.width.default;
+            },
+
             /**
              * @name          transition
              * @namespace     config.themeUi.default
@@ -61,7 +64,10 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            transition: '[theme.transition.fast]',
+            get transition() {
+                return api.theme.transition.fast;
+            },
+
             /**
              * @name          defaultColor
              * @namespace     config.themeUi.default
@@ -109,7 +115,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            depth: '[theme.depth.default]',
+            get depth() {
+                return api.theme.depth.default;
+            },
 
             rhythmVertical: {
                 /**
@@ -174,7 +182,10 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderWidth: '[theme.border.width.default]',
+            get borderWidth() {
+                return api.theme.border.width.default;
+            },
+
             /**
              * @name          transition
              * @namespace     config.themeUi.form
@@ -186,7 +197,10 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            transition: '[theme.transition.fast]',
+            get transition() {
+                return api.theme.transition.fast;
+            },
+
             /**
              * @name          outline
              * @namespace     config.themeUi.form
@@ -198,7 +212,10 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            outline: '[theme.ui.outline.active]',
+            get outline() {
+                return api.theme.ui.outline.active;
+            },
+
             /**
              * @name          defaultColor
              * @namespace     config.themeUi.form
@@ -246,7 +263,10 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            depth: '[theme.ui.default.depth]',
+            get depth() {
+                return api.theme.ui.default.depth;
+            },
+
             rhythmVertical: {
                 /**
                  * @name          margin-bottom
@@ -298,7 +318,10 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderRadius: '[theme.ui.default.borderRadius]',
+            get borderRadius() {
+                return api.theme.ui.default.borderRadius;
+            },
+
             /**
              * @name          transition
              * @namespace     config.themeUi.outline
@@ -350,7 +373,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingInline: '[theme.ui.default.paddingInline]',
+            get paddingInline() {
+                return api.theme.ui.default.paddingInline;
+            },
             /**
              * @name          paddingBlock
              * @namespace     config.themeUi.button
@@ -362,7 +387,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingBlock: '[theme.ui.default.paddingBlock]',
+            get paddingBlock() {
+                return api.theme.ui.default.paddingBlock;
+            },
             /**
              * @name          borderRadius
              * @namespace     config.themeUi.button
@@ -374,7 +401,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderRadius: '[theme.ui.default.borderRadius]',
+            get borderRadius() {
+                return api.theme.ui.default.borderRadius;
+            },
             /**
              * @name          borderWidth
              * @namespace     config.themeUi.button
@@ -386,7 +415,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderWidth: '[theme.ui.default.borderWidth]',
+            get borderWidth() {
+                return api.theme.ui.default.borderWidth;
+            },
             /**
              * @name          transition
              * @namespace     config.themeUi.button
@@ -398,7 +429,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            transition: '[theme.ui.default.transition]',
+            get transition() {
+                return api.theme.ui.default.transition;
+            },
             /**
              * @name          outline
              * @namespace     config.themeUi.button
@@ -410,7 +443,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            outline: '[theme.ui.outline.active]',
+            get outline() {
+                return api.theme.ui.outline.active;
+            },
             /**
              * @name          depth
              * @namespace     config.themeUi.button
@@ -422,7 +457,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            depth: '[theme.ui.default.depth]',
+            get depth() {
+                return api.theme.ui.default.depth;
+            },
             /**
              * @name          defaultStyle
              * @namespace     config.themeUi.button
@@ -434,7 +471,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultStyle: '[theme.ui.default.defaultStyle]',
+            get defaultStyle() {
+                return api.theme.ui.default.defaultStyle;
+            },
             /**
              * @name          defaultShape
              * @namespace     config.themeUi.button
@@ -446,7 +485,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultShape: '[theme.ui.default.defaultShape]',
+            get defaultShape() {
+                return api.theme.ui.default.defaultShape;
+            },
             /**
              * @name          rhythmVertical
              * @namespace     config.themeUi.button
@@ -458,7 +499,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            rhythmVertical: '[theme.ui.default.rhythmVertical]',
+            get rhythmVertical() {
+                return api.theme.ui.default.rhythmVertical;
+            },
         },
         backdrop: {
             /**
@@ -472,7 +515,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            transition: '[theme.ui.default.transition]',
+            get transition() {
+                return api.theme.ui.default.transition;
+            },
             /**
              * @name          defaultStyle
              * @namespace     config.themeUi.backdrop
@@ -487,7 +532,9 @@ export default (env, config) => {
             defaultStyle: 'solid',
         },
         avatar: {
-            borderRadius: '[theme.ui.default.borderRadius]',
+            get borderRadius() {
+                return api.theme.ui.default.borderRadius;
+            },
             /**
              * @name          borderWidth
              * @namespace     config.themeUi.avatar
@@ -511,7 +558,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            transition: '[theme.ui.default.transition]',
+            get transition() {
+                return api.theme.ui.default.transition;
+            },
             /**
              * @name          depth
              * @namespace     config.themeUi.avatar
@@ -523,7 +572,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            depth: '[theme.ui.default.depth]',
+            get depth() {
+                return api.theme.ui.default.depth;
+            },
             /**
              * @name          defaultStyle
              * @namespace     config.themeUi.avatar
@@ -535,7 +586,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultStyle: '[theme.ui.default.defaultStyle]',
+            get defaultStyle() {
+                return api.theme.ui.default.defaultStyle;
+            },
             /**
              * @name          defaultShape
              * @namespace     config.themeUi.avatar
@@ -559,7 +612,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            rhythmVertical: '[theme.ui.default.rhythmVertical]',
+            get rhythmVertical() {
+                return api.theme.ui.default.rhythmVertical;
+            },
         },
         input: {
             /**
@@ -573,7 +628,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingInline: '[theme.ui.form.paddingInline]',
+            get paddingInline() {
+                return api.theme.ui.form.paddingInline;
+            },
             /**
              * @name          paddingBlock
              * @namespace     config.themeUi.input
@@ -585,7 +642,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingBlock: '[theme.ui.form.paddingBlock]',
+            get paddingBlock() {
+                return api.theme.ui.form.paddingBlock;
+            },
             /**
              * @name          borderRadius
              * @namespace     config.themeUi.input
@@ -597,7 +656,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderRadius: '[theme.ui.form.borderRadius]',
+            get borderRadius() {
+                return api.theme.ui.form.borderRadius;
+            },
             /**
              * @name          borderWidth
              * @namespace     config.themeUi.input
@@ -609,7 +670,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderWidth: '[theme.ui.form.borderWidth]',
+            get borderWidth() {
+                return api.theme.ui.form.borderWidth;
+            },
             /**
              * @name          transition
              * @namespace     config.themeUi.input
@@ -621,7 +684,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            transition: '[theme.ui.form.transition]',
+            get transition() {
+                return api.theme.ui.form.transition;
+            },
             /**
              * @name          defaultStyle
              * @namespace     config.themeUi.input
@@ -645,7 +710,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultShape: '[theme.ui.form.defaultShape]',
+            get defaultShape() {
+                return api.theme.ui.form.defaultShape;
+            },
             /**
              * @name          depth
              * @namespace     config.themeUi.input
@@ -657,7 +724,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            depth: '[theme.ui.form.depth]',
+            get depth() {
+                return api.theme.ui.form.depth;
+            },
             /**
              * @name          outline
              * @namespace     config.themeUi.input
@@ -669,7 +738,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            outline: '[theme.ui.outline.active]',
+            get outline() {
+                return api.theme.ui.outline.active;
+            },
             /**
              * @name          rhythmVertical
              * @namespace     config.themeUi.input
@@ -681,7 +752,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            rhythmVertical: '[theme.ui.form.rhythmVertical]',
+            get rhythmVertical() {
+                return api.theme.ui.form.rhythmVertical;
+            },
         },
         radio: {
             /**
@@ -695,7 +768,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingInline: '[theme.ui.form.paddingInline]',
+            get paddingInline() {
+                return api.theme.ui.form.paddingInline;
+            },
             /**
              * @name          paddingBlock
              * @namespace     config.themeUi.radio
@@ -707,7 +782,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingBlock: '[theme.ui.form.paddingBlock]',
+            get paddingBlock() {
+                return api.theme.ui.form.paddingBlock;
+            },
             /**
              * @name          borderRadius
              * @namespace     config.themeUi.radio
@@ -731,7 +808,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderWidth: '[theme.ui.form.borderWidth]',
+            get borderWidth() {
+                return api.theme.ui.form.borderWidth;
+            },
             /**
              * @name          transition
              * @namespace     config.themeUi.radio
@@ -743,7 +822,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            transition: '[theme.ui.form.transition]',
+            get transition() {
+                return api.theme.ui.form.transition;
+            },
             /**
              * @name          depth
              * @namespace     config.themeUi.radio
@@ -755,7 +836,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            depth: '[theme.ui.form.depth]',
+            get depth() {
+                return api.theme.ui.form.depth;
+            },
             /**
              * @name          outline
              * @namespace     config.themeUi.radio
@@ -767,7 +850,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            outline: '[theme.ui.outline.active]',
+            get outline() {
+                return api.theme.ui.outline.active;
+            },
             /**
              * @name          defaultStyle
              * @namespace     config.themeUi.radio
@@ -779,7 +864,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultStyle: '[theme.ui.form.defaultStyle]',
+            get defaultStyle() {
+                return api.theme.ui.form.defaultStyle;
+            },
             /**
              * @name          defaultShape
              * @namespace     config.themeUi.radio
@@ -791,7 +878,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultShape: '[theme.ui.form.defaultShape]',
+            get defaultShape() {
+                return api.theme.ui.form.defaultShape;
+            },
             /**
              * @name          rhythmVertical
              * @namespace     config.themeUi.radio
@@ -803,7 +892,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            rhythmVertical: '[theme.ui.form.rhythmVertical]',
+            get rhythmVertical() {
+                return api.theme.ui.form.rhythmVertical;
+            },
         },
         checkbox: {
             /**
@@ -817,7 +908,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingInline: '[theme.ui.form.paddingInline]',
+            get paddingInline() {
+                return api.theme.ui.form.paddingInline;
+            },
             /**
              * @name          paddingBlock
              * @namespace     config.themeUi.checkbox
@@ -829,7 +922,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingBlock: '[theme.ui.form.paddingBlock]',
+            get paddingBlock() {
+                return api.theme.ui.form.paddingBlock;
+            },
             /**
              * @name          borderRadius
              * @namespace     config.themeUi.checkbox
@@ -853,7 +948,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderWidth: '[theme.ui.form.borderWidth]',
+            get borderWidth() {
+                return api.theme.ui.form.borderWidth;
+            },
             /**
              * @name          transition
              * @namespace     config.themeUi.checkbox
@@ -865,7 +962,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            transition: '[theme.ui.form.transition]',
+            get transition() {
+                return api.theme.ui.form.transition;
+            },
             /**
              * @name          depth
              * @namespace     config.themeUi.checkbox
@@ -877,7 +976,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            depth: '[theme.ui.form.depth]',
+            get depth() {
+                return api.theme.ui.form.depth;
+            },
             /**
              * @name          defaultStyle
              * @namespace     config.themeUi.checkbox
@@ -889,7 +990,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultStyle: '[theme.ui.default.defaultStyle]',
+            get defaultStyle() {
+                return api.theme.ui.default.defaultStyle;
+            },
             /**
              * @name          defaultShape
              * @namespace     config.themeUi.checkbox
@@ -901,7 +1004,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultShape: '[theme.ui.default.defaultShape]',
+            get defaultShape() {
+                return api.theme.ui.default.defaultShape;
+            },
             /**
              * @name          outline
              * @namespace     config.themeUi.checkbox
@@ -913,7 +1018,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            outline: '[theme.ui.outline.active]',
+            get outline() {
+                return api.theme.ui.outline.active;
+            },
             /**
              * @name          rhythmVertical
              * @namespace     config.themeUi.checkbox
@@ -925,7 +1032,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            rhythmVertical: '[theme.ui.form.rhythmVertical]',
+            get rhythmVertical() {
+                return api.theme.ui.form.rhythmVertical;
+            },
         },
         range: {
             /**
@@ -939,7 +1048,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingInline: '[theme.ui.form.paddingInline]',
+            get paddingInline() {
+                return api.theme.ui.form.paddingInline;
+            },
             /**
              * @name          paddingBlock
              * @namespace     config.themeUi.range
@@ -951,7 +1062,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingBlock: '[theme.ui.form.paddingBlock]',
+            get paddingBlock() {
+                return api.theme.ui.form.paddingBlock;
+            },
             /**
              * @name          borderRadius
              * @namespace     config.themeUi.range
@@ -963,7 +1076,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderRadius: '[theme.ui.form.borderRadius]',
+            get borderRadius() {
+                return api.theme.ui.form.borderRadius;
+            },
             /**
              * @name          borderWidth
              * @namespace     config.themeUi.range
@@ -975,7 +1090,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderWidth: '[theme.ui.form.borderWidth]',
+            get borderWidth() {
+                return api.theme.ui.form.borderWidth;
+            },
             /**
              * @name          transition
              * @namespace     config.themeUi.range
@@ -987,7 +1104,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            transition: '[theme.ui.form.transition]',
+            get transition() {
+                return api.theme.ui.form.transition;
+            },
             /**
              * @name          defaultStyle
              * @namespace     config.themeUi.range
@@ -999,7 +1118,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultStyle: '[theme.ui.form.defaultStyle]',
+            get defaultStyle() {
+                return api.theme.ui.form.defaultStyle;
+            },
             /**
              * @name          defaultShape
              * @namespace     config.themeUi.range
@@ -1011,7 +1132,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultShape: '[theme.ui.form.defaultShape]',
+            get defaultShape() {
+                return api.theme.ui.form.defaultShape;
+            },
             /**
              * @name          depth
              * @namespace     config.themeUi.range
@@ -1023,7 +1146,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            depth: '[theme.ui.form.depth]',
+            get depth() {
+                return api.theme.ui.form.depth;
+            },
             /**
              * @name          outline
              * @namespace     config.themeUi.range
@@ -1035,7 +1160,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            outline: '[theme.ui.outline.active]',
+            get outline() {
+                return api.theme.ui.outline.active;
+            },
             /**
              * @name          rhythmVertical
              * @namespace     config.themeUi.range
@@ -1047,7 +1174,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            rhythmVertical: '[theme.ui.form.rhythmVertical]',
+            get rhythmVertical() {
+                return api.theme.ui.form.rhythmVertical;
+            },
         },
         label: {
             /**
@@ -1061,7 +1190,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingInline: '[theme.ui.form.paddingInline]',
+            get paddingInline() {
+                return api.theme.ui.form.paddingInline;
+            },
             /**
              * @name          paddingBlock
              * @namespace     config.themeUi.label
@@ -1073,7 +1204,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingBlock: '[theme.ui.form.paddingBlock]',
+            get paddingBlock() {
+                return api.theme.ui.form.paddingBlock;
+            },
             /**
              * @name          borderRadius
              * @namespace     config.themeUi.label
@@ -1085,7 +1218,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderRadius: '[theme.ui.form.borderRadius]',
+            get borderRadius() {
+                return api.theme.ui.form.borderRadius;
+            },
             /**
              * @name          borderWidth
              * @namespace     config.themeUi.label
@@ -1097,7 +1232,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderWidth: '[theme.ui.form.borderWidth]',
+            get borderWidth() {
+                return api.theme.ui.form.borderWidth;
+            },
             /**
              * @name          transition
              * @namespace     config.themeUi.label
@@ -1109,7 +1246,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            transition: '[theme.ui.form.transition]',
+            get transition() {
+                return api.theme.ui.form.transition;
+            },
             /**
              * @name          defaultStyle
              * @namespace     config.themeUi.label
@@ -1133,7 +1272,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultShape: '[theme.ui.form.defaultShape]',
+            get defaultShape() {
+                return api.theme.ui.form.defaultShape;
+            },
             /**
              * @name          depth
              * @namespace     config.themeUi.label
@@ -1145,7 +1286,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            depth: '[theme.ui.form.depth]',
+            get depth() {
+                return api.theme.ui.form.depth;
+            },
             /**
              * @name          rhythmVertical
              * @namespace     config.themeUi.label
@@ -1157,7 +1300,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            rhythmVertical: '[theme.ui.form.rhythmVertical]',
+            get rhythmVertical() {
+                return api.theme.ui.form.rhythmVertical;
+            },
         },
         select: {
             /**
@@ -1171,7 +1316,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingInline: '[theme.ui.form.paddingInline]',
+            get paddingInline() {
+                return api.theme.ui.form.paddingInline;
+            },
             /**
              * @name          paddingBlock
              * @namespace     config.themeUi.select
@@ -1183,7 +1330,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingBlock: '[theme.ui.form.paddingBlock]',
+            get paddingBlock() {
+                return api.theme.ui.form.paddingBlock;
+            },
             /**
              * @name          borderRadius
              * @namespace     config.themeUi.select
@@ -1195,7 +1344,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderRadius: '[theme.ui.form.borderRadius]',
+            get borderRadius() {
+                return api.theme.ui.form.borderRadius;
+            },
             /**
              * @name          borderWidth
              * @namespace     config.themeUi.select
@@ -1207,7 +1358,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderWidth: '[theme.ui.form.borderWidth]',
+            get borderWidth() {
+                return api.theme.ui.form.borderWidth;
+            },
             /**
              * @name          transition
              * @namespace     config.themeUi.select
@@ -1219,7 +1372,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            transition: '[theme.ui.form.transition]',
+            get transition() {
+                return api.theme.ui.form.transition;
+            },
             /**
              * @name          depth
              * @namespace     config.themeUi.select
@@ -1231,7 +1386,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            depth: '[theme.ui.form.depth]',
+            get depth() {
+                return api.theme.ui.form.depth;
+            },
             /**
              * @name          defaultStyle
              * @namespace     config.themeUi.select
@@ -1243,7 +1400,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultStyle: '[theme.ui.form.defaultStyle]',
+            get defaultStyle() {
+                return api.theme.ui.form.defaultStyle;
+            },
             /**
              * @name          defaultShape
              * @namespace     config.themeUi.select
@@ -1255,7 +1414,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultShape: '[theme.ui.form.defaultShape]',
+            get defaultShape() {
+                return api.theme.ui.form.defaultShape;
+            },
             /**
              * @name          outline
              * @namespace     config.themeUi.select
@@ -1267,7 +1428,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            outline: '[theme.ui.outline.active]',
+            get outline() {
+                return api.theme.ui.outline.active;
+            },
             /**
              * @name          rhythmVertical
              * @namespace     config.themeUi.select
@@ -1279,7 +1442,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            rhythmVertical: '[theme.ui.form.rhythmVertical]',
+            get rhythmVertical() {
+                return api.theme.ui.form.rhythmVertical;
+            },
         },
         switch: {
             /**
@@ -1293,7 +1458,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderRadius: '[theme.ui.form.borderRadius]',
+            get borderRadius() {
+                return api.theme.ui.form.borderRadius;
+            },
             /**
              * @name          borderWidth
              * @namespace     config.themeUi.switch
@@ -1305,7 +1472,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderWidth: '[theme.ui.form.borderWidth]',
+            get borderWidth() {
+                return api.theme.ui.form.borderWidth;
+            },
             /**
              * @name          transition
              * @namespace     config.themeUi.switch
@@ -1317,7 +1486,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            transition: '[theme.ui.default.transition]',
+            get transition() {
+                return api.theme.ui.default.transition;
+            },
             /**
              * @name          depth
              * @namespace     config.themeUi.switch
@@ -1329,7 +1500,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            depth: '[theme.ui.form.depth]',
+            get depth() {
+                return api.theme.ui.form.depth;
+            },
             /**
              * @name          defaultStyle
              * @namespace     config.themeUi.switch
@@ -1341,7 +1514,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultStyle: '[theme.ui.form.defaultStyle]',
+            get defaultStyle() {
+                return api.theme.ui.form.defaultStyle;
+            },
             /**
              * @name          defaultShape
              * @namespace     config.themeUi.switch
@@ -1353,7 +1528,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultShape: '[theme.ui.form.defaultShape]',
+            get defaultShape() {
+                return api.theme.ui.form.defaultShape;
+            },
             /**
              * @name          outline
              * @namespace     config.themeUi.switch
@@ -1365,7 +1542,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            outline: '[theme.ui.outline.active]',
+            get outline() {
+                return api.theme.ui.outline.active;
+            },
             /**
              * @name          rhythmVertical
              * @namespace     config.themeUi.switch
@@ -1377,33 +1556,39 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            rhythmVertical: '[theme.ui.form.rhythmVertical]',
+            get rhythmVertical() {
+                return api.theme.ui.form.rhythmVertical;
+            },
         },
         dropdown: {
             /**
              * @name          paddingInline
              * @namespace     config.themeUi.dropdown
              * @type          String
-             * @default      '[theme.padding.10]'
+             * @default      '[theme.padding['10']]'
              *
              * Specify the default padding inline for dropdown ui
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingInline: '[theme.padding.10]',
+            get paddingInline() {
+                return api.theme.padding['10'];
+            },
             /**
              * @name          paddingBlock
              * @namespace     config.themeUi.dropdown
              * @type          String
-             * @default      '[theme.padding.10]'
+             * @default      '[theme.padding['10']]'
              *
              * Specify the default padding block for dropdown ui
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingBlock: '[theme.padding.10]',
+            get paddingBlock() {
+                return api.theme.padding['10'];
+            },
             /**
              * @name          itemPaddingInline
              * @namespace     config.themeUi.dropdown
@@ -1415,7 +1600,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            itemPaddingInline: '[theme.ui.default.paddingInline]',
+            get itemPaddingInline() {
+                return api.theme.ui.default.paddingInline;
+            },
             /**
              * @name          itemPaddingBlock
              * @namespace     config.themeUi.dropdown
@@ -1427,7 +1614,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            itemPaddingBlock: '[theme.ui.default.paddingBlock]',
+            get itemPaddingBlock() {
+                return api.theme.ui.default.paddingBlock;
+            },
             /**
              * @name          borderRadius
              * @namespace     config.themeUi.dropdown
@@ -1439,7 +1628,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderRadius: '[theme.ui.default.borderRadius]',
+            get borderRadius() {
+                return api.theme.ui.default.borderRadius;
+            },
             /**
              * @name          borderWidth
              * @namespace     config.themeUi.dropdown
@@ -1463,7 +1654,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            transition: '[theme.ui.default.transition]',
+            get transition() {
+                return api.theme.ui.default.transition;
+            },
             /**
              * @name          defaultStyle
              * @namespace     config.themeUi.dropdown
@@ -1475,7 +1668,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultStyle: '[theme.ui.default.defaultStyle]',
+            get defaultStyle() {
+                return api.theme.ui.default.defaultStyle;
+            },
             /**
              * @name          defaultShape
              * @namespace     config.themeUi.dropdown
@@ -1511,7 +1706,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            outline: '[theme.ui.outline.active]',
+            get outline() {
+                return api.theme.ui.outline.active;
+            },
         },
         list: {
             /**
@@ -1525,7 +1722,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingInline: '[theme.ui.default.paddingInline]',
+            get paddingInline() {
+                return api.theme.ui.default.paddingInline;
+            },
             /**
              * @name          paddingBlock
              * @namespace     config.themeUi.list
@@ -1537,7 +1736,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingBlock: '[theme.ui.default.paddingBlock]',
+            get paddingBlock() {
+                return api.theme.ui.default.paddingBlock;
+            },
             /**
              * @name          borderRadius
              * @namespace     config.themeUi.list
@@ -1549,7 +1750,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderRadius: '[theme.ui.default.borderRadius]',
+            get borderRadius() {
+                return api.theme.ui.default.borderRadius;
+            },
             /**
              * @name          borderWidth
              * @namespace     config.themeUi.list
@@ -1561,7 +1764,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderWidth: '[theme.ui.default.borderWidth]',
+            get borderWidth() {
+                return api.theme.ui.default.borderWidth;
+            },
             /**
              * @name          transition
              * @namespace     config.themeUi.list
@@ -1573,7 +1778,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            transition: '[theme.ui.default.transition]',
+            get transition() {
+                return api.theme.ui.default.transition;
+            },
             /**
              * @name          defaultStyle
              * @namespace     config.themeUi.list
@@ -1597,7 +1804,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            depth: '[theme.ui.default.depth]',
+            get depth() {
+                return api.theme.ui.default.depth;
+            },
             /**
              * @name          bulletChar
              * @namespace     config.themeUi.list
@@ -1621,7 +1830,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            rhythmVertical: '[theme.ui.default.rhythmVertical]',
+            get rhythmVertical() {
+                return api.theme.ui.default.rhythmVertical;
+            },
         },
         fsTree: {
             /**
@@ -1635,7 +1846,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingInline: '[theme.ui.default.paddingInline]',
+            get paddingInline() {
+                return api.theme.ui.default.paddingInline;
+            },
             /**
              * @name          paddingBlock
              * @namespace     config.themeUi.fsTree
@@ -1647,7 +1860,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingBlock: '[theme.ui.default.paddingBlock]',
+            get paddingBlock() {
+                return api.theme.ui.default.paddingBlock;
+            },
             /**
              * @name          borderRadius
              * @namespace     config.themeUi.fsTree
@@ -1659,7 +1874,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderRadius: '[theme.ui.default.borderRadius]',
+            get borderRadius() {
+                return api.theme.ui.default.borderRadius;
+            },
             /**
              * @name          borderWidth
              * @namespace     config.themeUi.fsTree
@@ -1671,7 +1888,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderWidth: '[theme.ui.default.borderWidth]',
+            get borderWidth() {
+                return api.theme.ui.default.borderWidth;
+            },
             /**
              * @name          transition
              * @namespace     config.themeUi.fsTree
@@ -1683,7 +1902,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            transition: '[theme.ui.default.transition]',
+            get transition() {
+                return api.theme.ui.default.transition;
+            },
             /**
              * @name          defaultStyle
              * @namespace     config.themeUi.fsTree
@@ -1695,7 +1916,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultStyle: '[theme.ui.default.defaultStyle]',
+            get defaultStyle() {
+                return api.theme.ui.default.defaultStyle;
+            },
             /**
              * @name          defaultShape
              * @namespace     config.themeUi.fsTree
@@ -1707,7 +1930,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultShape: '[theme.ui.default.defaultShape]',
+            get defaultShape() {
+                return api.theme.ui.default.defaultShape;
+            },
             /**
              * @name          depth
              * @namespace     config.themeUi.fsTree
@@ -1719,7 +1944,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            depth: '[theme.ui.default.depth]',
+            get depth() {
+                return api.theme.ui.default.depth;
+            },
             /**
              * @name          bulletChar
              * @namespace     config.themeUi.fsTree
@@ -1743,7 +1970,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            rhythmVertical: '[theme.ui.default.rhythmVertical]',
+            get rhythmVertical() {
+                return api.theme.ui.default.rhythmVertical;
+            },
         },
         tabs: {
             /**
@@ -1757,7 +1986,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingInline: '[theme.ui.default.paddingInline]',
+            get paddingInline() {
+                return api.theme.ui.default.paddingInline;
+            },
             /**
              * @name          paddingBlock
              * @namespace     config.themeUi.tabs
@@ -1769,7 +2000,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingBlock: '[theme.ui.default.paddingBlock]',
+            get paddingBlock() {
+                return api.theme.ui.default.paddingBlock;
+            },
             /**
              * @name          borderRadius
              * @namespace     config.themeUi.tabs
@@ -1781,7 +2014,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderRadius: '[theme.ui.default.borderRadius]',
+            get borderRadius() {
+                return api.theme.ui.default.borderRadius;
+            },
             /**
              * @name          borderWidth
              * @namespace     config.themeUi.tabs
@@ -1793,7 +2028,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderWidth: '[theme.ui.default.borderWidth]',
+            get borderWidth() {
+                return api.theme.ui.default.borderWidth;
+            },
             /**
              * @name          transition
              * @namespace     config.themeUi.tabs
@@ -1805,7 +2042,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            transition: '[theme.ui.default.transition]',
+            get transition() {
+                return api.theme.ui.default.transition;
+            },
             /**
              * @name          defaultStyle
              * @namespace     config.themeUi.tabs
@@ -1817,7 +2056,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultStyle: '[theme.ui.default.defaultStyle]',
+            get defaultStyle() {
+                return api.theme.ui.default.defaultStyle;
+            },
             /**
              * @name          defaultShape
              * @namespace     config.themeUi.tabs
@@ -1829,7 +2070,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultShape: '[theme.ui.default.defaultShape]',
+            get defaultShape() {
+                return api.theme.ui.default.defaultShape;
+            },
             /**
              * @name          depth
              * @namespace     config.themeUi.tabs
@@ -1841,7 +2084,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            depth: '[theme.ui.default.depth]',
+            get depth() {
+                return api.theme.ui.default.depth;
+            },
             /**
              * @name          outline
              * @namespace     config.themeUi.tabs
@@ -1853,7 +2098,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            outline: '[theme.ui.outline.active]',
+            get outline() {
+                return api.theme.ui.outline.active;
+            },
             /**
              * @name          rhythmVertical
              * @namespace     config.themeUi.tabe
@@ -1865,7 +2112,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            rhythmVertical: '[theme.ui.default.rhythmVertical]',
+            get rhythmVertical() {
+                return api.theme.ui.default.rhythmVertical;
+            },
         },
         terminal: {
             /**
@@ -1879,7 +2128,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingInline: '[theme.ui.default.paddingInline]',
+            get paddingInline() {
+                return api.theme.ui.default.paddingInline;
+            },
             /**
              * @name          paddingBlock
              * @namespace     config.themeUi.terminal
@@ -1891,7 +2142,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingBlock: '[theme.ui.default.paddingBlock]',
+            get paddingBlock() {
+                return api.theme.ui.default.paddingBlock;
+            },
             /**
              * @name          borderRadius
              * @namespace     config.themeUi.terminal
@@ -1903,7 +2156,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderRadius: '[theme.ui.default.borderRadius]',
+            get borderRadius() {
+                return api.theme.ui.default.borderRadius;
+            },
             /**
              * @name          borderWidth
              * @namespace     config.themeUi.terminal
@@ -1915,7 +2170,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderWidth: '[theme.ui.default.borderWidth]',
+            get borderWidth() {
+                return api.theme.ui.default.borderWidth;
+            },
             /**
              * @name          transition
              * @namespace     config.themeUi.terminal
@@ -1927,7 +2184,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            transition: '[theme.ui.default.transition]',
+            get transition() {
+                return api.theme.ui.default.transition;
+            },
             /**
              * @name          defaultColor
              * @namespace     config.themeUi.terminal
@@ -1939,7 +2198,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultColor: '[theme.ui.default.defaultColor]',
+            get defaultColor() {
+                return api.theme.ui.default.defaultColor;
+            },
             /**
              * @name          defaultStyle
              * @namespace     config.themeUi.terminal
@@ -1951,7 +2212,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultStyle: '[theme.ui.default.defaultStyle]',
+            get defaultStyle() {
+                return api.theme.ui.default.defaultStyle;
+            },
             /**
              * @name          depth
              * @namespace     config.themeUi.terminal
@@ -1963,7 +2226,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            depth: '[theme.ui.default.depth]',
+            get depth() {
+                return api.theme.ui.default.depth;
+            },
             /**
              * @name          rhythmVertical
              * @namespace     config.themeUi.terminal
@@ -1975,7 +2240,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            rhythmVertical: '[theme.ui.default.rhythmVertical]',
+            get rhythmVertical() {
+                return api.theme.ui.default.rhythmVertical;
+            },
         },
         tooltip: {
             /**
@@ -1989,7 +2256,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingInline: '[theme.ui.default.paddingBlock]',
+            get paddingInline() {
+                return api.theme.ui.default.paddingBlock;
+            },
             /**
              * @name          paddingBlock
              * @namespace     config.themeUi.tooltip
@@ -2001,7 +2270,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingBlock: '[theme.ui.default.paddingBlock]',
+            get paddingBlock() {
+                return api.theme.ui.default.paddingBlock;
+            },
             /**
              * @name          borderRadius
              * @namespace     config.themeUi.tooltip
@@ -2013,7 +2284,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderRadius: '[theme.ui.default.borderRadius]',
+            get borderRadius() {
+                return api.theme.ui.default.borderRadius;
+            },
             /**
              * @name          borderWidth
              * @namespace     config.themeUi.tooltip
@@ -2025,7 +2298,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderWidth: '[theme.ui.default.borderWidth]',
+            get borderWidth() {
+                return api.theme.ui.default.borderWidth;
+            },
             /**
              * @name          transition
              * @namespace     config.themeUi.tooltip
@@ -2037,7 +2312,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            transition: '[theme.ui.default.transition]',
+            get transition() {
+                return api.theme.ui.default.transition;
+            },
             /**
              * @name          defaultStyle
              * @namespace     config.themeUi.tooltip
@@ -2049,7 +2326,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultStyle: '[theme.ui.default.defaultStyle]',
+            get defaultStyle() {
+                return api.theme.ui.default.defaultStyle;
+            },
             /**
              * @name          defaultShape
              * @namespace     config.themeUi.tooltip
@@ -2061,7 +2340,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultShape: '[theme.ui.default.defaultShape]',
+            get defaultShape() {
+                return api.theme.ui.default.defaultShape;
+            },
             /**
              * @name          depth
              * @namespace     config.themeUi.tooltip
@@ -2073,7 +2354,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            depth: '[theme.ui.default.depth]',
+            get depth() {
+                return api.theme.ui.default.depth;
+            },
             /**
              * @name          arrowSize
              * @namespace     config.themeUi.tooltip
@@ -2092,26 +2375,30 @@ export default (env, config) => {
              * @name          paddingInline
              * @namespace     config.themeUi.code
              * @type          String
-             * @default      [theme.padding.50]
+             * @default      [theme.padding['50']]
              *
              * Specify the default padding inline for code ui
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingInline: '[theme.padding.50]',
+            get paddingInline() {
+                return api.theme.padding['50'];
+            },
             /**
              * @name          paddingBlock
              * @namespace     config.themeUi.code
              * @type          String
-             * @default      [theme.padding.50]
+             * @default      [theme.padding['50']]
              *
              * Specify the default padding block for code ui
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingBlock: '[theme.padding.50]',
+            get paddingBlock() {
+                return api.theme.padding['50'];
+            },
             /**
              * @name          borderRadius
              * @namespace     config.themeUi.code
@@ -2123,7 +2410,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderRadius: '[theme.ui.default.borderRadius]',
+            get borderRadius() {
+                return api.theme.ui.default.borderRadius;
+            },
             /**
              * @name          borderWidth
              * @namespace     config.themeUi.code
@@ -2135,7 +2424,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderWidth: '[theme.ui.default.borderWidth]',
+            get borderWidth() {
+                return api.theme.ui.default.borderWidth;
+            },
             /**
              * @name          transition
              * @namespace     config.themeUi.code
@@ -2147,7 +2438,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            transition: '[theme.ui.default.transition]',
+            get transition() {
+                return api.theme.ui.default.transition;
+            },
             /**
              * @name          defaultColor
              * @namespace     config.themeUi.code
@@ -2159,7 +2452,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultColor: '[theme.ui.default.defaultColor]',
+            get defaultColor() {
+                return api.theme.ui.default.defaultColor;
+            },
             /**
              * @name          defaultStyle
              * @namespace     config.themeUi.code
@@ -2171,7 +2466,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultStyle: '[theme.ui.default.defaultStyle]',
+            get defaultStyle() {
+                return api.theme.ui.default.defaultStyle;
+            },
             /**
              * @name          depth
              * @namespace     config.themeUi.code
@@ -2183,7 +2480,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            depth: '[theme.ui.default.depth]',
+            get depth() {
+                return api.theme.ui.default.depth;
+            },
             /**
              * @name          rhythmVertical
              * @namespace     config.themeUi.code
@@ -2195,7 +2494,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            rhythmVertical: '[theme.ui.default.rhythmVertical]',
+            get rhythmVertical() {
+                return api.theme.ui.default.rhythmVertical;
+            },
         },
         blockquote: {
             /**
@@ -2209,7 +2510,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingInline: '[theme.ui.default.paddingInline]',
+            get paddingInline() {
+                return api.theme.ui.default.paddingInline;
+            },
             /**
              * @name          paddingBlock
              * @namespace     config.themeUi.blockquote
@@ -2221,7 +2524,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingBlock: '[theme.ui.default.paddingBlock]',
+            get paddingBlock() {
+                return api.theme.ui.default.paddingBlock;
+            },
             /**
              * @name          borderRadius
              * @namespace     config.themeUi.blockquote
@@ -2233,7 +2538,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderRadius: '[theme.ui.default.borderRadius]',
+            get borderRadius() {
+                return api.theme.ui.default.borderRadius;
+            },
             /**
              * @name          borderWidth
              * @namespace     config.themeUi.blockquote
@@ -2245,7 +2552,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderWidth: '[theme.ui.default.borderWidth]',
+            get borderWidth() {
+                return api.theme.ui.default.borderWidth;
+            },
             /**
              * @name          transition
              * @namespace     config.themeUi.blockquote
@@ -2257,7 +2566,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            transition: '[theme.ui.default.transition]',
+            get transition() {
+                return api.theme.ui.default.transition;
+            },
             /**
              * @name          defaultStyle
              * @namespace     config.themeUi.blockquote
@@ -2269,7 +2580,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultStyle: '[theme.ui.default.defaultStyle]',
+            get defaultStyle() {
+                return api.theme.ui.default.defaultStyle;
+            },
             /**
              * @name          defaultShape
              * @namespace     config.themeUi.blockquote
@@ -2281,7 +2594,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultShape: '[theme.ui.default.defaultShape]',
+            get defaultShape() {
+                return api.theme.ui.default.defaultShape;
+            },
             /**
              * @name          defaultColor
              * @namespace     config.themeUi.blockquote
@@ -2305,7 +2620,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            depth: '[theme.ui.default.depth]',
+            get depth() {
+                return api.theme.ui.default.depth;
+            },
             /**
              * @name          rhythmVertical
              * @namespace     config.themeUi.blockquote
@@ -2317,7 +2634,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            rhythmVertical: '[theme.ui.default.rhythmVertical]',
+            get rhythmVertical() {
+                return api.theme.ui.default.rhythmVertical;
+            },
         },
         table: {
             /**
@@ -2331,7 +2650,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingInline: '[theme.ui.default.paddingInline]',
+            get paddingInline() {
+                return api.theme.ui.default.paddingInline;
+            },
             /**
              * @name          paddingBlock
              * @namespace     config.themeUi.table
@@ -2343,7 +2664,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingBlock: '[theme.ui.default.paddingBlock]',
+            get paddingBlock() {
+                return api.theme.ui.default.paddingBlock;
+            },
             /**
              * @name          borderRadius
              * @namespace     config.themeUi.table
@@ -2355,7 +2678,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderRadius: '[theme.ui.default.borderRadius]',
+            get borderRadius() {
+                return api.theme.ui.default.borderRadius;
+            },
             /**
              * @name          borderWidth
              * @namespace     config.themeUi.table
@@ -2367,7 +2692,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderWidth: '[theme.border.width.10]',
+            get borderWidth() {
+                return api.theme.border.width['10'];
+            },
             /**
              * @name          transition
              * @namespace     config.themeUi.table
@@ -2379,7 +2706,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            transition: '[theme.ui.default.transition]',
+            get transition() {
+                return api.theme.ui.default.transition;
+            },
             /**
              * @name          defaultStyle
              * @namespace     config.themeUi.table
@@ -2391,7 +2720,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultStyle: '[theme.ui.default.defaultStyle]',
+            get defaultStyle() {
+                return api.theme.ui.default.defaultStyle;
+            },
             /**
              * @name          defaultShape
              * @namespace     config.themeUi.table
@@ -2403,7 +2734,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultShape: '[theme.ui.default.defaultShape]',
+            get defaultShape() {
+                return api.theme.ui.default.defaultShape;
+            },
             /**
              * @name          depth
              * @namespace     config.themeUi.table
@@ -2415,7 +2748,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            depth: '[theme.ui.default.depth]',
+            get depth() {
+                return api.theme.ui.default.depth;
+            },
             /**
              * @name          rhythmVertical
              * @namespace     config.themeUi.table
@@ -2427,7 +2762,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            rhythmVertical: '[theme.ui.default.rhythmVertical]',
+            get rhythmVertical() {
+                return api.theme.ui.default.rhythmVertical;
+            },
         },
         badge: {
             /**
@@ -2465,7 +2802,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderRadius: '[theme.ui.default.borderRadius]',
+            get borderRadius() {
+                return api.theme.ui.default.borderRadius;
+            },
             /**
              * @name          borderWidth
              * @namespace     config.themeUi.badge
@@ -2477,7 +2816,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderWidth: '[theme.ui.default.borderWidth]',
+            get borderWidth() {
+                return api.theme.ui.default.borderWidth;
+            },
             /**
              * @name          transition
              * @namespace     config.themeUi.badge
@@ -2489,7 +2830,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            transition: '[theme.ui.default.transition]',
+            get transition() {
+                return api.theme.ui.default.transition;
+            },
             /**
              * @name          defaultStyle
              * @namespace     config.themeUi.badge
@@ -2501,7 +2844,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultStyle: '[theme.ui.default.defaultStyle]',
+            get defaultStyle() {
+                return api.theme.ui.default.defaultStyle;
+            },
             /**
              * @name          defaultShape
              * @namespace     config.themeUi.badge
@@ -2513,7 +2858,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultShape: '[theme.ui.default.defaultShape]',
+            get defaultShape() {
+                return api.theme.ui.default.defaultShape;
+            },
             /**
              * @name          depth
              * @namespace     config.themeUi.badge
@@ -2537,7 +2884,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            rhythmVertical: '[theme.ui.default.rhythmVertical]',
+            get rhythmVertical() {
+                return api.theme.ui.default.rhythmVertical;
+            },
         },
         loader: {
             /**
@@ -2577,7 +2926,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            duration: '[theme.ui.loader.duration]',
+            get duration() {
+                return api.theme.ui.loader.duration;
+            },
             /**
              * @name          duration
              * @namespace     config.themeUi.loaderSpinner
@@ -2589,7 +2940,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            easing: '[theme.ui.loader.easing]',
+            get easing() {
+                return api.theme.ui.loader.easing;
+            },
         },
         loaderSquareDots: {
             /**
@@ -2617,7 +2970,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            duration: '[theme.ui.loader.duration]',
+            get duration() {
+                return api.theme.ui.loader.duration;
+            },
             /**
              * @name          duration
              * @namespace     config.themeUi.loaderRound
@@ -2629,7 +2984,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            easing: '[theme.ui.loader.easing]',
+            get easing() {
+                return api.theme.ui.loader.easing;
+            },
         },
         loaderDrop: {
             /**
@@ -2643,7 +3000,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            duration: '[theme.ui.loader.duration]',
+            get duration() {
+                return api.theme.ui.loader.duration;
+            },
             /**
              * @name          duration
              * @namespace     config.themeUi.loaderDrop
@@ -2655,7 +3014,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            easing: '[theme.ui.loader.easing]',
+            get easing() {
+                return api.theme.ui.loader.easing;
+            },
         },
     };
 };

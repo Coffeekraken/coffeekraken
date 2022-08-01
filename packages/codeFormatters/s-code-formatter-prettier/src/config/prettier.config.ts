@@ -1,7 +1,7 @@
 import __loadConfigFile from '@coffeekraken/sugar/node/config/loadConfigFile';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
-export async function preprocess({ env, thisConfig }) {
+export async function preprocess(api) {
     const config =
         (await __loadConfigFile([
             '.prettierrc',
@@ -11,10 +11,10 @@ export async function preprocess({ env, thisConfig }) {
             '.prettierrc.js',
             'prettier.config.js',
         ])) ?? {};
-    return __deepMerge(thisConfig, config);
+    return __deepMerge(api.this, config);
 }
 
-export default function ({ env, config }) {
-    if (env.platform !== 'node') return;
+export default function (api) {
+    if (api.env.platform !== 'node') return;
     return {};
 }

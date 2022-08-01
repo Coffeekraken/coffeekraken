@@ -1,5 +1,5 @@
-export default function ({ env, config }) {
-    if (env.platform !== 'node') return;
+export default function (api) {
+    if (api.env.platform !== 'node') return;
     return {
         /**
          * @name            input
@@ -13,7 +13,7 @@ export default function ({ env, config }) {
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get input() {
-            return `${config.storage.src.cssDir}/index.css`;
+            return `${api.config.storage.src.cssDir}/index.css`;
         },
 
         /**
@@ -28,7 +28,7 @@ export default function ({ env, config }) {
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get output() {
-            return `${config.storage.dist.cssDir}/index.css`;
+            return `${api.config.storage.dist.cssDir}/index.css`;
         },
 
         /**
@@ -43,7 +43,7 @@ export default function ({ env, config }) {
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get postcss() {
-            return config.postcss;
+            return api.config.postcss;
         },
 
         /**
@@ -58,7 +58,7 @@ export default function ({ env, config }) {
          * @author         Oli vier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         get purgecss() {
-            return config.purgecss;
+            return api.config.purgecss;
         },
     };
 }

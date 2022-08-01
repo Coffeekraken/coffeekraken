@@ -24,21 +24,27 @@ export default class STypescriptBuilderBuildParamsInterface extends __SInterface
                 description:
                     'Sppecify some globs relative to the inDir to find the files you want to build',
                 type: 'Array<String>',
-                default: __SSugarConfig.get('typescriptBuilder.glob'),
+                get default() {
+                    return __SSugarConfig.getSafe('typescriptBuilder.glob');
+                },
                 alias: 'g',
             },
             inDir: {
                 description:
                     'Specify a directory from where to search for ts and js files to build',
                 type: 'String',
-                default: __SSugarConfig.get('typescriptBuilder.inDir'),
+                get default() {
+                    return __SSugarConfig.getSafe('typescriptBuilder.inDir');
+                },
                 alias: 'i',
             },
             outDir: {
                 description:
                     'Specify a directory where you want to put the builded files. Support the %moduleSystem and %platform token.',
                 type: 'String',
-                default: __SSugarConfig.get('typescriptBuilder.outDir'),
+                get default() {
+                    return __SSugarConfig.getSafe('typescriptBuilder.outDir');
+                },
                 alias: 'o',
             },
             packageRoot: {
@@ -50,7 +56,9 @@ export default class STypescriptBuilderBuildParamsInterface extends __SInterface
                     'Specify the formats you want to generate. Can be "esm" or/and "cjs"',
                 type: 'Array<String>',
                 values: ['esm', 'cjs'],
-                default: __SSugarConfig.get('typescriptBuilder.formats'),
+                get default() {
+                    return __SSugarConfig.getSafe('typescriptBuilder.formats');
+                },
                 alias: 'f',
             },
             platform: {
@@ -58,7 +66,9 @@ export default class STypescriptBuilderBuildParamsInterface extends __SInterface
                     'Specify for which platform you want to generate the typescript files. Can be "browser" or "node"',
                 type: 'String',
                 values: ['esm', 'cjs'],
-                default: __SSugarConfig.get('typescriptBuilder.platform'),
+                get default() {
+                    return __SSugarConfig.getSafe('typescriptBuilder.platform');
+                },
                 alias: 'p',
             },
             watch: {
@@ -79,14 +89,18 @@ export default class STypescriptBuilderBuildParamsInterface extends __SInterface
                 description:
                     'Specify some custom settings for the typescript builder by passing a glob pattern relative to the inDir, and some custom settings to use for these files',
                 type: 'Object',
-                default: __SSugarConfig.get('typescriptBuilder.customSettings'),
+                get default() {
+                    __SSugarConfig.getSafe('typescriptBuilder.customSettings');
+                },
                 alias: 'c',
             },
             exclude: {
                 description:
                     'Specify some glob patterns for files/folders you want to exclude of the build process',
                 type: 'Array<String>',
-                default: __SSugarConfig.get('typescriptBuilder.exclude'),
+                get default() {
+                    __SSugarConfig.getSafe('typescriptBuilder.exclude');
+                },
                 alias: 'e',
             },
             save: {

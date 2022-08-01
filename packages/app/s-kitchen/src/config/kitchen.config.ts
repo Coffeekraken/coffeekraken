@@ -1,5 +1,5 @@
-export default function ({ env, config }) {
-    if (env.platform !== 'node') return;
+export default function (api) {
+    if (api.env.platform !== 'node') return;
     return {
         defaultRecipe: 'default',
 
@@ -18,7 +18,7 @@ export default function ({ env, config }) {
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get generic() {
-                return config.kitchenRecipeGeneric;
+                return api.config.kitchenRecipeGeneric;
             },
 
             /**
@@ -33,7 +33,7 @@ export default function ({ env, config }) {
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get nextJs() {
-                return config.kitchenRecipeNextJs;
+                return api.config.kitchenRecipeNextJs;
             },
         },
 

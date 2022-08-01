@@ -1,5 +1,5 @@
-export default ({ env, config }) => {
-    if (env.platform !== 'node') return;
+export default (api) => {
+    if (api.env.platform !== 'node') return;
 
     return {
         layout: {

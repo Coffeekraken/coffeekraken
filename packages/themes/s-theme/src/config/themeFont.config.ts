@@ -1,4 +1,4 @@
-export default function (env, config) {
+export default function (api) {
     return {
         family: {
             default: {
@@ -222,7 +222,9 @@ export default function (env, config) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            default: '[theme.size.default]',
+            get default() {
+                return api.theme.size.default;
+            },
 
             /**
              * @name          0
@@ -250,7 +252,9 @@ export default function (env, config) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            5: '[theme.size.5]',
+            get 5() {
+                return api.theme.size['5'];
+            },
 
             /**
              * @name          10
@@ -264,7 +268,9 @@ export default function (env, config) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            10: '[theme.size.10]',
+            get 10() {
+                return api.theme.size['10'];
+            },
 
             /**
              * @name          20
@@ -278,7 +284,9 @@ export default function (env, config) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            20: '[theme.size.20]',
+            get 20() {
+                return api.theme.size['20'];
+            },
 
             /**
              * @name          30
@@ -292,7 +300,9 @@ export default function (env, config) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            30: '[theme.size.30]',
+            get 30() {
+                return api.theme.size['30'];
+            },
 
             /**
              * @name          40
@@ -306,7 +316,9 @@ export default function (env, config) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            40: '[theme.size.40]',
+            get 40() {
+                return api.theme.size['40'];
+            },
 
             /**
              * @name          50
@@ -320,7 +332,9 @@ export default function (env, config) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            50: '[theme.size.50]',
+            get 50() {
+                return api.theme.size['50'];
+            },
 
             /**
              * @name          60
@@ -334,7 +348,9 @@ export default function (env, config) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            60: '[theme.size.60]',
+            get 60() {
+                return api.theme.size['60'];
+            },
 
             /**
              * @name          70
@@ -348,7 +364,9 @@ export default function (env, config) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            70: '[theme.size.70]',
+            get 70() {
+                return api.theme.size['70'];
+            },
 
             /**
              * @name          80
@@ -362,7 +380,9 @@ export default function (env, config) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            80: '[theme.size.80]',
+            get 80() {
+                return api.theme.size['80'];
+            },
 
             /**
              * @name          90
@@ -376,7 +396,9 @@ export default function (env, config) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            90: '[theme.size.90]',
+            get 90() {
+                return api.theme.size['90'];
+            },
 
             /**
              * @name          100
@@ -390,7 +412,9 @@ export default function (env, config) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            100: '[theme.size.100]',
+            get 100() {
+                return api.theme.size['100'];
+            },
         },
     };
 }

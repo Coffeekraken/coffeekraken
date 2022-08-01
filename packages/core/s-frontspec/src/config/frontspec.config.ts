@@ -11,8 +11,8 @@ export async function prepare(config) {
     return __deepMerge(config, json);
 }
 
-export default function (env, config) {
-    if (env.platform !== 'node') return;
+export default function (api) {
+    if (api.env.platform !== 'node') return;
     return {
         assets: {
             /**
@@ -28,7 +28,7 @@ export default function (env, config) {
              */
             viteClient: {
                 src:
-                    env.env === 'development'
+                    api.env.env === 'development'
                         ? `
         <script>
           document.addEventListener("DOMContentLoaded", function() {

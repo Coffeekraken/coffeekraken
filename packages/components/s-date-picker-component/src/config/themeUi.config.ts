@@ -1,4 +1,4 @@
-export default (env, config) => {
+export default (api) => {
     return {
         datetimePicker: {
             /**
@@ -12,7 +12,10 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingInline: '[theme.ui.default.paddingInline]',
+            get paddingInline() {
+                return api.theme.ui.default.paddingInline;
+            },
+
             /**
              * @name          paddingBlock
              * @namespace     config.themeUi.datetimePicker
@@ -24,7 +27,10 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingBlock: '[theme.ui.default.paddingBlock]',
+            get paddingBlock() {
+                return api.theme.ui.default.paddingBlock;
+            },
+
             /**
              * @name          borderRadius
              * @namespace     config.themeUi.datetimePicker
@@ -36,7 +42,10 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderRadius: '[theme.ui.default.borderRadius]',
+            get borderRadius() {
+                return api.theme.ui.default.borderRadius;
+            },
+
             /**
              * @name          borderWidth
              * @namespace     config.themeUi.datetimePicker
@@ -48,7 +57,10 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderWidth: '[theme.ui.default.borderWidth]',
+            get borderWidth() {
+                return api.theme.ui.default.borderWidth;
+            },
+
             /**
              * @name          transition
              * @namespace     config.themeUi.datetimePicker
@@ -60,7 +72,10 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            transition: '[theme.ui.default.transition]',
+            get transition() {
+                return api.theme.ui.default.transition;
+            },
+
             /**
              * @name          defaultColor
              * @namespace     config.themeUi.datetimePicker
@@ -72,7 +87,10 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultColor: '[theme.ui.default.defaultColor]',
+            get defaultColor() {
+                return api.theme.ui.default.defaultColor;
+            },
+
             /**
              * @name          defaultStyle
              * @namespace     config.themeUi.datetimePicker
@@ -84,7 +102,10 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultStyle: '[theme.ui.default.defaultStyle]',
+            get defaultStyle() {
+                return api.theme.ui.default.defaultStyle;
+            },
+
             /**
              * @name          depth
              * @namespace     config.themeUi.datetimePicker
@@ -108,7 +129,9 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            rhythmVertical: '[theme.ui.default.rhythmVertical]',
+            get rhythmVertical() {
+                return api.theme.ui.default.rhythmVertical;
+            },
         },
     };
 };

@@ -1,4 +1,4 @@
-export default function (env, config) {
+export default function (api) {
     return {
         slider: {
             /**
@@ -12,7 +12,10 @@ export default function (env, config) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderRadius: '[theme.ui.default.borderRadius]',
+            get borderRadius() {
+                return api.theme.ui.default.borderRadius;
+            },
+
             /**
              * @name          defaultColor
              * @namespace     config.themeUi.slider
@@ -24,7 +27,10 @@ export default function (env, config) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultColor: '[theme.ui.default.defaultColor]',
+            get defaultColor() {
+                return api.theme.ui.default.defaultColor;
+            },
+
             /**
              * @name          defaultStyle
              * @namespace     config.themeUi.slider
@@ -36,7 +42,10 @@ export default function (env, config) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultStyle: '[theme.ui.default.defaultStyle]',
+            get defaultStyle() {
+                return api.theme.ui.default.defaultStyle;
+            },
+
             /**
              * @name          transition
              * @namespace     config.themeUi.button
@@ -60,7 +69,10 @@ export default function (env, config) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            depth: '[theme.ui.default.depth]',
+            get depth() {
+                return api.theme.ui.default.depth;
+            },
+
             /**
              * @name          rhythmVertical
              * @namespace     config.themeUi.slider
@@ -72,7 +84,9 @@ export default function (env, config) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            rhythmVertical: '[theme.ui.default.rhythmVertical]',
+            get rhythmVertical() {
+                return api.theme.ui.default.rhythmVertical;
+            },
         },
     };
 }

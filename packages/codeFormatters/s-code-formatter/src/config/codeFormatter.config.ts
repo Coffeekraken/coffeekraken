@@ -1,5 +1,5 @@
-export default ({ env, config }) => {
-    if (env.platform !== 'node') return;
+export default (api) => {
+    if (api.env.platform !== 'node') return;
 
     return {
         /**
@@ -27,7 +27,7 @@ export default ({ env, config }) => {
          * @author    Olivier Bossel <olivier.bossel@gmail.com>
          */
         get inDir() {
-            return config.storage.src.rootDir;
+            return api.config.storage.src.rootDir;
         },
     };
 };

@@ -1,4 +1,4 @@
-export default function (env, config) {
+export default function (api) {
     return {
         rating: {
             /**
@@ -12,7 +12,10 @@ export default function (env, config) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultColor: '[theme.ui.default.defaultColor]',
+            get defaultColor() {
+                return api.theme.ui.default.defaultColor;
+            },
+
             /**
              * @name          defaultStyle
              * @namespace     config.themeUi.rating
@@ -24,7 +27,10 @@ export default function (env, config) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultStyle: '[theme.ui.default.defaultStyle]',
+            get defaultStyle() {
+                return api.theme.ui.default.defaultStyle;
+            },
+
             /**
              * @name          rhythmVertical
              * @namespace     config.themeUi.datetimePicker
@@ -36,7 +42,9 @@ export default function (env, config) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            rhythmVertical: '[theme.ui.default.rhythmVertical]',
+            get rhythmVertical() {
+                return api.theme.ui.default.rhythmVertical;
+            },
         },
     };
 }

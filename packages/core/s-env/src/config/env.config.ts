@@ -1,8 +1,8 @@
 // @ts-ignore
 if (global && !global.document) global.document = {};
 
-export default (env, config) => {
-    if (env.platform !== 'node') return;
+export default (api) => {
+    if (api.env.platform !== 'node') return;
 
     return {
         /**

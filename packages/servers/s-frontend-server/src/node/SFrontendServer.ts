@@ -125,8 +125,9 @@ export default class SFrontendServer extends __SClass {
      * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     start(params: Partial<ISFrontendServerStartParams> | string): Promise<any> {
-        const finalParams: ISFrontendServerStartParams =
-            __SFrontendServerStartParamsInterface.apply(params);
+        const finalParams: ISFrontendServerStartParams = __SFrontendServerStartParamsInterface.apply(
+            params,
+        );
 
         return new __SPromise(
             async ({ resolve, reject, emit, pipe, on }) => {
@@ -145,8 +146,9 @@ export default class SFrontendServer extends __SClass {
                     'silly',
                 ].indexOf(finalParams.logLevel);
 
-                const frontendServerConfig =
-                    __SSugarConfig.get('frontendServer');
+                const frontendServerConfig = __SSugarConfig.get(
+                    'frontendServer',
+                );
 
                 this._express.use((req, res, next) => {
                     if (req.path.substr(-1) == '/' && req.path.length > 1) {
@@ -386,8 +388,9 @@ export default class SFrontendServer extends __SClass {
     corsProxy(
         params: Partial<ISFrontendServerCorsProxyParams> | string,
     ): Promise<any> {
-        const finalParams: ISFrontendServerCorsProxyParams =
-            __SFrontendServerCorsProxyParamsInterface.apply(params);
+        const finalParams: ISFrontendServerCorsProxyParams = __SFrontendServerCorsProxyParamsInterface.apply(
+            params,
+        );
 
         return new __SPromise(
             ({ resolve, reject, emit, pipe }) => {
@@ -533,11 +536,14 @@ export default class SFrontendServer extends __SClass {
                 let finalPagePath = pageFile.path,
                     buildedFileRes;
 
+                console.log('ifina', finalPagePath);
+
                 // compile typescript if needed
                 if (pageFile.extension === 'ts') {
                     buildedFileRes = await __STypescriptBuilder.buildTemporary(
                         finalPagePath,
                     );
+                    console.log('BUILDED', buildedFileRes);
                     finalPagePath = buildedFileRes.path;
                 }
 
@@ -552,10 +558,9 @@ export default class SFrontendServer extends __SClass {
                     final404PagePath = _404PageFile.path;
                 // compile typescript if needed
                 if (_404PageFile.extension === 'ts') {
-                    _404BuildedFileRes =
-                        await __STypescriptBuilder.buildTemporary(
-                            final404PagePath,
-                        );
+                    _404BuildedFileRes = await __STypescriptBuilder.buildTemporary(
+                        final404PagePath,
+                    );
                     final404PagePath = _404BuildedFileRes.path;
                 }
 
@@ -584,8 +589,9 @@ export default class SFrontendServer extends __SClass {
                     slug = '',
                     slugs: string[] = pageConfig.slugs ?? [];
 
-                const frontendServerConfig =
-                    __SSugarConfig.get('frontendServer');
+                const frontendServerConfig = __SSugarConfig.get(
+                    'frontendServer',
+                );
 
                 // generate path
                 if (pageFile && !pageConfig.slugs) {

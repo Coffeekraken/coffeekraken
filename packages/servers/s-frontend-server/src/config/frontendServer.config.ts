@@ -1,7 +1,7 @@
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
-export default function (env, config) {
-    if (env.platform !== 'node') return;
+export default function (api) {
+    if (api.env.platform !== 'node') return;
 
     return {
         /**
@@ -15,7 +15,7 @@ export default function (env, config) {
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        port: env.env === 'production' ? 9090 : 8080,
+        port: api.env.env === 'production' ? 9090 : 8080,
 
         /**
          * @name              hostname
@@ -42,7 +42,9 @@ export default function (env, config) {
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        rootDir: `[config.storage.package.rootDir]`,
+        get rootDir() {
+            return api.config.storage.package.rootDir;
+        },
 
         /**
          * @name              staticDirs
@@ -55,14 +57,13 @@ export default function (env, config) {
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        staticDirs: {
-            '/dist':
-                env.env === 'production'
-                    ? `[config.storage.dist.rootDir]`
-                    : `[config.storage.src.rootDir]`,
-            // '/.local': `[config.storage.package.localDir]`,
-            // '/cache': `[config.storage.package.cacheDir]`,
-            // '/src': `[config.storage.src.rootDir]`,
+        get staticDirs() {
+            return {
+                '/dist':
+                    api.env.env === 'production'
+                        ? api.config.storage.dist.rootDir
+                        : api.config.storage.src.rootDir,
+            };
         },
 
         /**
@@ -76,7 +77,9 @@ export default function (env, config) {
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        viewsDir: `[config.storage.src.viewsDir]`,
+        get viewsDir() {
+            return api.config.storage.src.viewsDir;
+        },
 
         /**
          * @name            pagesDir
@@ -89,7 +92,9 @@ export default function (env, config) {
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        pagesDir: `[config.storage.src.pagesDir]`,
+        get pagesDir() {
+            return api.config.storage.src.pagesDir;
+        },
 
         /**
          * @name          logLevel
@@ -123,14 +128,16 @@ export default function (env, config) {
              * @name              url
              * @namespace         config.frontendServer.corsProxy
              * @type              Number
-             * @default           http://127.0.0.1:[config.frontendServer.corsProxy.port]
+             * @default           `http://127.0.0.1:${this.port}`
              *
              * Specify the url to call to pass by the server cors proxy
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            url: 'http://127.0.0.1:[config.frontendServer.corsProxy.port]',
+            get url() {
+                return `http://127.0.0.1:${this.port}`;
+            },
 
             /**
              * @name              targetUrlHeaderName
@@ -159,94 +166,7 @@ export default function (env, config) {
             limit: '12mb',
         },
 
-        proxy: {
-            // vitePing: {
-            //     /**
-            //      * @name            route
-            //      * @namespace       config.frontendServer.proxy.vitePing
-            //      * @type            String
-            //      * @default         [config.storage.serve.rootDir]
-            //      *
-            //      * Specify which route to proxy for the vitePing
-            //      *
-            //      * @since           2.0.0
-            //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-            //      */
-            //     route: ['/__vite_ping'],
-            //     settings: {
-            //         /**
-            //          * @name        target
-            //          * @namespace   config.frontendServer.proxy.vitePing.settings
-            //          * @type         String
-            //          * @default         [config.vite.server.hostname]
-            //          *
-            //          * Specify where to redirect the vitePing requests
-            //          *
-            //          * @since           2.0.0
-            //          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-            //          */
-            //         target: '[config.vite.server.hostname]',
-            //         /**
-            //          * @name        changeOrigin
-            //          * @namespace       config.frontendServer.proxy.vitePing.settings
-            //          * @type        Boolean
-            //          * @default         true
-            //          *
-            //          * Specify if you want the redirection to change the origin or not
-            //          *
-            //          * @since           2.0.0
-            //          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-            //          */
-            //         changeOrigin: true,
-            //     },
-            // },
-            // vite: {
-            //     /**
-            //      * @name            route
-            //      * @namespace       config.frontendServer.proxy.vitePing
-            //      * @type            String
-            //      * @default         [config.storage.serve.rootDir]
-            //      *
-            //      * Specify which route to proxy for the vitePing
-            //      *
-            //      * @since           2.0.0
-            //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-            //      */
-            //     route: ['/@fs/**','/@vite/**','/.local/**/*','**/*.css','**/*.ts','**/*.js','**/*.tsx','**/*.jsx'],
-            //     settings: {
-            //         /**
-            //          * @name        target
-            //          * @namespace   config.frontendServer.proxy.vitePing.settings
-            //          * @type         String
-            //          * @default         [config.vite.server.hostname]
-            //          *
-            //          * Specify where to redirect the vitePing requests
-            //          *
-            //          * @since           2.0.0
-            //          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-            //          */
-            //         target: '[config.vite.server.hostname]',
-            //         /**
-            //          * @name        changeOrigin
-            //          * @namespace       config.frontendServer.proxy.vitePing.settings
-            //          * @type        Boolean
-            //          * @default         true
-            //          *
-            //          * Specify if you want the redirection to change the origin or not
-            //          *
-            //          * @since           2.0.0
-            //          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-            //          */
-            //         changeOrigin: true,
-            //         ws: true,
-            //         pathRewrite: function (path, req) {
-            //             const newPath = path.replace(/^\/dist/, '/src');
-            //             console.log('rewrite', path, newPath);
-            //             return newPath;
-            //         }
-            //     },
-            // },
-        },
+        proxy: {},
 
         middlewares: {
             bench: {
@@ -272,9 +192,7 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                path: `${__dirname(
-                    import.meta,
-                )}/../node/middleware/benchMiddleware`,
+                path: `${__dirname()}/../node/middleware/benchMiddleware`,
                 settings: {},
             },
             request: {
@@ -300,9 +218,7 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                path: `${__dirname(
-                    import.meta,
-                )}/../node/middleware/requestMiddleware`,
+                path: `${__dirname()}/../node/middleware/requestMiddleware`,
                 settings: {},
             },
             env: {
@@ -328,9 +244,7 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                path: `${__dirname(
-                    import.meta,
-                )}/../node/middleware/envMiddleware`,
+                path: `${__dirname()}/../node/middleware/envMiddleware`,
                 settings: {},
             },
             packageJson: {
@@ -356,9 +270,7 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                path: `${__dirname(
-                    import.meta,
-                )}/../node/middleware/packageJsonMiddleware`,
+                path: `${__dirname()}/../node/middleware/packageJsonMiddleware`,
                 settings: {},
             },
         },
@@ -390,9 +302,7 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                path: `${__dirname(
-                    import.meta,
-                )}/../node/modules/publicDir/publicDir`,
+                path: `${__dirname()}/../node/modules/publicDir/publicDir`,
                 settings: {},
             },
             generic: {
@@ -419,9 +329,7 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                path: `${__dirname(
-                    import.meta,
-                )}/../node/modules/generic/generic`,
+                path: `${__dirname()}/../node/modules/generic/generic`,
                 settings: {},
             },
             docmap: {
@@ -502,9 +410,7 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                path: `${__dirname(
-                    import.meta,
-                )}/../node/modules/redirect/redirect`,
+                path: `${__dirname()}/../node/modules/redirect/redirect`,
                 settings: {},
             },
             config: {
@@ -558,9 +464,7 @@ export default function (env, config) {
                  * @since           2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                path: `${__dirname(
-                    import.meta,
-                )}/../node/modules/frontspec/frontspec`,
+                path: `${__dirname()}/../node/modules/frontspec/frontspec`,
                 settings: {},
             },
             404: {

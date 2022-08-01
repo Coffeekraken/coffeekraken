@@ -1,4 +1,4 @@
-export default function (env, config) {
+export default function (api) {
     return {
         /**
          * @name            default
@@ -11,7 +11,9 @@ export default function (env, config) {
          * @since           1.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        default: '[theme.space.default]',
+        get default() {
+            return api.theme.space.default;
+        },
 
         /**
          * @name            0
@@ -25,7 +27,9 @@ export default function (env, config) {
          * @since           1.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        0: '[theme.space.0]',
+        get 0() {
+            return api.theme.space['0'];
+        },
 
         /**
          * @name            10
@@ -39,7 +43,9 @@ export default function (env, config) {
          * @since           1.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        10: '[theme.space.10]',
+        get 10() {
+            return api.theme.space['10'];
+        },
 
         /**
          * @name            20
@@ -53,7 +59,9 @@ export default function (env, config) {
          * @since           1.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        20: '[theme.space.20]',
+        get 20() {
+            return api.theme.space['20'];
+        },
 
         /**
          * @name            30
@@ -67,7 +75,9 @@ export default function (env, config) {
          * @since           1.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        30: '[theme.space.30]',
+        get 30() {
+            return api.theme.space['30'];
+        },
 
         /**
          * @name            40
@@ -81,7 +91,9 @@ export default function (env, config) {
          * @since           1.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        40: '[theme.space.40]',
+        get 40() {
+            return api.theme.space['40'];
+        },
 
         /**
          * @name            50
@@ -95,7 +107,9 @@ export default function (env, config) {
          * @since           1.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        50: '[theme.space.50]',
+        get 50() {
+            return api.theme.space['50'];
+        },
 
         /**
          * @name            60
@@ -109,7 +123,9 @@ export default function (env, config) {
          * @since           1.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        60: '[theme.space.60]',
+        get 60() {
+            return api.theme.space['60'];
+        },
 
         /**
          * @name            70
@@ -123,7 +139,9 @@ export default function (env, config) {
          * @since           1.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        70: '[theme.space.70]',
+        get 70() {
+            return api.theme.space['70'];
+        },
 
         /**
          * @name            80
@@ -137,7 +155,9 @@ export default function (env, config) {
          * @since           1.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        80: '[theme.space.80]',
+        get 80() {
+            return api.theme.space['80'];
+        },
 
         /**
          * @name            90
@@ -151,7 +171,9 @@ export default function (env, config) {
          * @since           1.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        90: '[theme.space.90]',
+        get 90() {
+            return api.theme.space['90'];
+        },
 
         /**
          * @name            100
@@ -165,6 +187,8 @@ export default function (env, config) {
          * @since           1.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        100: '[theme.space.100]',
+        get 100() {
+            return api.theme.space['100'];
+        },
     };
 }

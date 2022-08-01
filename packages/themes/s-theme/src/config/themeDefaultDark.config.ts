@@ -1,18 +1,5 @@
-export default function (env, config) {
-    return {
-        /**
-         * @name            extends
-         * @namespace        config.themeDefaultDark
-         * @type            String
-         * @default         themeBase
-         *
-         * Specify which theme this one extends from
-         *
-         * @since           2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-         */
-        extends: 'themeBase',
-
+export default function (api) {
+    return api.extends(api.config.themeBase, {
         /**
          * @name            colorSchema
          * @namespace        config.themeDefaultDark
@@ -24,6 +11,8 @@ export default function (env, config) {
          * @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        colorSchema: '[config.themeColorSchemaDark]',
-    };
+        get colorSchema() {
+            return api.config.themeColorSchemaDark;
+        },
+    });
 }

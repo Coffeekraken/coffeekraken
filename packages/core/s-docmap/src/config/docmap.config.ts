@@ -1,8 +1,8 @@
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __commonTextFileExtensions from '@coffeekraken/sugar/shared/extension/commonTextFileExtensions';
 
-export default function (env, config) {
-    if (env.platform !== 'node') return;
+export default function (api) {
+    if (api.env.platform !== 'node') return;
 
     return {
         read: {
@@ -60,7 +60,9 @@ export default function (env, config) {
              * @since       2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            outDir: `[config.storage.package.rootDir]/.docmap`,
+            get outDir() {
+                return `${api.config.storage.package.rootDir}/.docmap`;
+            },
         },
 
         installSnapshot: {
@@ -76,7 +78,9 @@ export default function (env, config) {
              * @since       2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            glob: `[config.storage.package.rootDir]/.docmap/*`,
+            get glob() {
+                return `${api.config.storage.package.rootDir}/.docmap/*`;
+            },
         },
 
         build: {
@@ -218,7 +222,9 @@ export default function (env, config) {
              * @since       2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            outPath: `[config.storage.package.rootDir]/docmap.json`,
+            get outPath() {
+                return `${api.config.storage.package.rootDir}/docmap.json`;
+            },
         },
     };
 }

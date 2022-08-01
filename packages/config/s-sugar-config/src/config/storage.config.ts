@@ -2,8 +2,8 @@ import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __systemTmpDir from '@coffeekraken/sugar/node/path/systemTmpDir';
 
-export default function ({ env, thisConfig }) {
-    if (env.platform !== 'node') return;
+export default function (api) {
+    if (api.env.platform !== 'node') return;
 
     return {
         system: {
@@ -123,7 +123,7 @@ export default function ({ env, thisConfig }) {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get rootDir() {
-                return `${thisConfig.package.rootDir}/src`;
+                return `${api.this.package.rootDir}/src`;
             },
 
             /**
@@ -305,7 +305,7 @@ export default function ({ env, thisConfig }) {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get rootDir() {
-                return `${thisConfig.package.rootDir}/dist`;
+                return `${api.this.package.rootDir}/dist`;
             },
 
             /**

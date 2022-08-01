@@ -1,7 +1,7 @@
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 
-export default function ({ env }) {
-    if (env.platform !== 'node') return;
+export default function (api) {
+    if (api.env.platform !== 'node') return;
 
     return {
         namespace: {

@@ -9,6 +9,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __filter from '@coffeekraken/sugar/shared/object/filter';
 import __get from '@coffeekraken/sugar/shared/object/get';
 import __set from '@coffeekraken/sugar/shared/object/set';
+import __toPlainObject from '@coffeekraken/sugar/shared/object/toPlainObject';
 import __SConfigAdapter from './adapters/SConfigAdapter';
 
 /**
@@ -461,9 +462,7 @@ export default class SConfig {
         }
 
         // cache for later
-        setTimeout(() => {
-            this.cache();
-        }, 2000);
+        this.cache();
 
         // filter the empty config
         if (finalSettings.clean) {
@@ -473,8 +472,6 @@ export default class SConfig {
                 return true;
             });
         }
-
-        // console.log(this.config);
 
         // return the config
         return this.config;
@@ -588,18 +585,21 @@ export default class SConfig {
             );
         }
 
-        const originalValue = __get(this.config, path);
+        let finalValue = __get(this.config, path);
 
-        if (
-            settings.throwErrorOnUndefinedConfig &&
-            originalValue === undefined
-        ) {
+        if (__isPlainObject(finalValue)) {
+            // finalValue = JSON.parse(JSON.stringify(finalValue));
+            finalValue = __toPlainObject(finalValue);
+            // finalValue = __derefSync(finalValue);
+        }
+
+        if (settings.throwErrorOnUndefinedConfig && finalValue === undefined) {
             throw new Error(
                 `You try to get the config "${path}" on the "${this.id}" SConfig instance but this config does not exists...`,
             );
         }
 
-        return originalValue;
+        return finalValue;
     }
 
     /**

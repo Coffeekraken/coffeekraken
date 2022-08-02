@@ -1598,345 +1598,333 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-0317e827-ff37-4c9f-b9e7-1eb391a2a252@workspace:packages/core/s-descriptor/dist/pkg/esm":
+"@coffeekraken/internal-00d6644f-882d-4532-8e6a-3c13f333ba33@workspace:packages/builders/s-favicon-builder/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-0317e827-ff37-4c9f-b9e7-1eb391a2a252@workspace:packages/core/s-descriptor/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-00d6644f-882d-4532-8e6a-3c13f333ba33@workspace:packages/builders/s-favicon-builder/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-03a48d06-2840-44a6-a1a1-85cc4b947b6f@workspace:packages/test/s-testinator/dist/pkg/esm":
+"@coffeekraken/internal-026e1fcc-4c9f-476d-8eb1-0a14d8bf54f4@workspace:packages/postcss/s-postcss-sugar-plugin/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-03a48d06-2840-44a6-a1a1-85cc4b947b6f@workspace:packages/test/s-testinator/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-026e1fcc-4c9f-476d-8eb1-0a14d8bf54f4@workspace:packages/postcss/s-postcss-sugar-plugin/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-03be5f38-f7fa-450e-b79e-d279f96c50e5@workspace:packages/features/s-floating-feature/dist/pkg/esm":
+"@coffeekraken/internal-031ab902-bd85-466f-ba47-d7f68ce54996@workspace:packages/components/s-rating-component/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-03be5f38-f7fa-450e-b79e-d279f96c50e5@workspace:packages/features/s-floating-feature/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-031ab902-bd85-466f-ba47-d7f68ce54996@workspace:packages/components/s-rating-component/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-051d0416-9121-4ac8-a005-2ac3316df1ac@workspace:packages/components/s-slider-component/dist/pkg/cjs":
+"@coffeekraken/internal-03b691eb-0574-4152-9299-98c25c2342d1@workspace:packages/features/s-parallax-feature/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-051d0416-9121-4ac8-a005-2ac3316df1ac@workspace:packages/components/s-slider-component/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-03b691eb-0574-4152-9299-98c25c2342d1@workspace:packages/features/s-parallax-feature/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-052885dc-11fe-43db-ad07-0d967a0cd9fd@workspace:packages/servers/s-frontend-server/dist/pkg/esm":
+"@coffeekraken/internal-09e1a342-cce1-4a8a-9478-71ff62a0d754@workspace:packages/vite/s-vite-postcss-plugin/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-052885dc-11fe-43db-ad07-0d967a0cd9fd@workspace:packages/servers/s-frontend-server/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-09e1a342-cce1-4a8a-9478-71ff62a0d754@workspace:packages/vite/s-vite-postcss-plugin/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-0555c090-bc07-48d1-a077-1a13cf376e35@workspace:packages/core/s-process/dist/pkg/cjs":
+"@coffeekraken/internal-0aa20f08-eebf-49a6-8ad2-ff183e214a3c@workspace:packages/core/s-process/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-0555c090-bc07-48d1-a077-1a13cf376e35@workspace:packages/core/s-process/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-0aa20f08-eebf-49a6-8ad2-ff183e214a3c@workspace:packages/core/s-process/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-09124cf5-2703-41a9-a6df-d10dcd0cc0ae@workspace:packages/builders/s-builder/dist/pkg/cjs":
+"@coffeekraken/internal-0beb3ff8-160e-47a9-be76-0e863948f1ff@workspace:packages/renderers/s-view-renderer/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-09124cf5-2703-41a9-a6df-d10dcd0cc0ae@workspace:packages/builders/s-builder/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-0beb3ff8-160e-47a9-be76-0e863948f1ff@workspace:packages/renderers/s-view-renderer/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-0d497775-dc82-4d97-9078-f496c48337a4@workspace:packages/core/s-env/dist/pkg/cjs":
+"@coffeekraken/internal-0c21a4e2-e9ae-4fd1-8b10-d1733370daf7@workspace:packages/test/s-testinator/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-0d497775-dc82-4d97-9078-f496c48337a4@workspace:packages/core/s-env/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-0c21a4e2-e9ae-4fd1-8b10-d1733370daf7@workspace:packages/test/s-testinator/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-0e2f0187-d5df-4bce-b388-9aae462dd265@workspace:packages/features/s-form-validate-feature/dist/pkg/esm":
+"@coffeekraken/internal-0d05d0cf-0ebd-4b44-a4e2-76dad5fd6299@workspace:packages/tools/s-validator/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-0e2f0187-d5df-4bce-b388-9aae462dd265@workspace:packages/features/s-form-validate-feature/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-0d05d0cf-0ebd-4b44-a4e2-76dad5fd6299@workspace:packages/tools/s-validator/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-0e933621-b898-4239-ae9e-c91c9ee68091@workspace:packages/core/s-frontspec/dist/pkg/esm":
+"@coffeekraken/internal-0dc7fdcc-54c9-45e4-90b6-e5182c8dd8e5@workspace:packages/postcss/s-postcss-sugar-plugin/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-0e933621-b898-4239-ae9e-c91c9ee68091@workspace:packages/core/s-frontspec/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-0dc7fdcc-54c9-45e4-90b6-e5182c8dd8e5@workspace:packages/postcss/s-postcss-sugar-plugin/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-0fedc970-888f-4b52-a02e-917ee105eb73@workspace:packages/core/s-monorepo/dist/pkg/esm":
+"@coffeekraken/internal-0f021e06-cd97-4caa-aeb5-91aaaebf73b9@workspace:packages/config/s-config-adapter/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-0fedc970-888f-4b52-a02e-917ee105eb73@workspace:packages/core/s-monorepo/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-0f021e06-cd97-4caa-aeb5-91aaaebf73b9@workspace:packages/config/s-config-adapter/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-101ee71b-2a14-425f-8ef2-ecb992af2585@workspace:packages/builders/s-sitemap-builder/dist/pkg/cjs":
+"@coffeekraken/internal-138144aa-3f41-49b7-8ff2-c6b6c57bb553@workspace:packages/components/s-color-picker-component/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-101ee71b-2a14-425f-8ef2-ecb992af2585@workspace:packages/builders/s-sitemap-builder/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-138144aa-3f41-49b7-8ff2-c6b6c57bb553@workspace:packages/components/s-color-picker-component/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-10277a04-8521-4e04-b1db-c6d2605741c5@workspace:packages/config/s-config-inline-adapter/dist/pkg/cjs":
+"@coffeekraken/internal-13ab538e-b667-4f30-bec7-f6e9437d37c4@workspace:packages/core/s-promise/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-10277a04-8521-4e04-b1db-c6d2605741c5@workspace:packages/config/s-config-inline-adapter/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-13ab538e-b667-4f30-bec7-f6e9437d37c4@workspace:packages/core/s-promise/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-11331184-985f-4258-a260-253fa4bf7f44@workspace:packages/vite/s-vite-postcss-plugin/dist/pkg/esm":
+"@coffeekraken/internal-13daa57e-37a0-4384-8bd8-1273c2fb0282@workspace:packages/vite/s-vite/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-11331184-985f-4258-a260-253fa4bf7f44@workspace:packages/vite/s-vite-postcss-plugin/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-13daa57e-37a0-4384-8bd8-1273c2fb0282@workspace:packages/vite/s-vite/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-150248a9-898d-4c76-9420-7dfa11dbf110@workspace:packages/renderers/s-view-renderer-engine-lit/dist/pkg/cjs":
+"@coffeekraken/internal-144bcbd5-38da-4232-b829-dbb9a049b781@workspace:packages/components/s-filtrable-input-component/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-150248a9-898d-4c76-9420-7dfa11dbf110@workspace:packages/renderers/s-view-renderer-engine-lit/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-144bcbd5-38da-4232-b829-dbb9a049b781@workspace:packages/components/s-filtrable-input-component/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-15bcd07b-ab08-47a7-a614-9f027fc76bc3@workspace:packages/app/s-dashboard/dist/pkg/cjs":
+"@coffeekraken/internal-16a5c47d-ca23-41d8-8cee-87d230b89b9a@workspace:packages/components/s-lit-component/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-15bcd07b-ab08-47a7-a614-9f027fc76bc3@workspace:packages/app/s-dashboard/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-16a5c47d-ca23-41d8-8cee-87d230b89b9a@workspace:packages/components/s-lit-component/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-168bef2e-1dc1-4b21-844b-698854f4a524@workspace:packages/renderers/s-view-renderer-engine-lit/dist/pkg/esm":
+"@coffeekraken/internal-1a7cd7d7-68bc-4764-b464-b711d0681491@workspace:packages/config/s-config-inline-adapter/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-168bef2e-1dc1-4b21-844b-698854f4a524@workspace:packages/renderers/s-view-renderer-engine-lit/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-1a7cd7d7-68bc-4764-b464-b711d0681491@workspace:packages/config/s-config-inline-adapter/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-1711225d-befc-472a-92f6-e9d7388a1550@workspace:packages/components/s-lit-component/dist/pkg/esm":
+"@coffeekraken/internal-1b318b0d-892e-4a3f-8825-77b5d6b1e6ac@workspace:packages/vite/s-vite-sugar-plugin/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-1711225d-befc-472a-92f6-e9d7388a1550@workspace:packages/components/s-lit-component/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-1b318b0d-892e-4a3f-8825-77b5d6b1e6ac@workspace:packages/vite/s-vite-sugar-plugin/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-1760257f-ea49-4f13-bf55-2b939e8bb286@workspace:packages/components/s-panel-component/dist/pkg/cjs":
+"@coffeekraken/internal-1e7d9778-8f84-4689-911d-038fe12e7d0a@workspace:packages/themes/s-theme/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-1760257f-ea49-4f13-bf55-2b939e8bb286@workspace:packages/components/s-panel-component/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-1e7d9778-8f84-4689-911d-038fe12e7d0a@workspace:packages/themes/s-theme/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-19346418-8170-4a49-a23b-8b3f6a6228ae@workspace:packages/core/s-docmap/dist/pkg/cjs":
+"@coffeekraken/internal-21aba707-e2db-4c99-82f2-dd477b098d16@workspace:packages/core/s-sugar-json/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-19346418-8170-4a49-a23b-8b3f6a6228ae@workspace:packages/core/s-docmap/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-21aba707-e2db-4c99-82f2-dd477b098d16@workspace:packages/core/s-sugar-json/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-1a9d90bb-394a-40fa-9d04-da203804c790@workspace:packages/tools/s-handlebars/dist/pkg/esm":
+"@coffeekraken/internal-21e26026-6380-4b97-a4b7-96ad589a4ba4@workspace:packages/codeFormatters/s-code-formatter-prettier/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-1a9d90bb-394a-40fa-9d04-da203804c790@workspace:packages/tools/s-handlebars/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-21e26026-6380-4b97-a4b7-96ad589a4ba4@workspace:packages/codeFormatters/s-code-formatter-prettier/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-1d6eb030-39ce-4946-947f-02bfb7fa1ce9@workspace:packages/components/s-panel-component/dist/pkg/esm":
+"@coffeekraken/internal-268701ce-86f5-42f7-9fae-2d1146796a9c@workspace:packages/builders/s-builder/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-1d6eb030-39ce-4946-947f-02bfb7fa1ce9@workspace:packages/components/s-panel-component/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-268701ce-86f5-42f7-9fae-2d1146796a9c@workspace:packages/builders/s-builder/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-1f1e4c81-ef75-4053-aeee-dd08f3bbfa84@workspace:packages/tools/sugar/dist/pkg/esm":
+"@coffeekraken/internal-26fda2a5-41b3-4406-9dbc-4216ecf35631@workspace:packages/dataFiles/s-data-file-generic/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-1f1e4c81-ef75-4053-aeee-dd08f3bbfa84@workspace:packages/tools/sugar/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-26fda2a5-41b3-4406-9dbc-4216ecf35631@workspace:packages/dataFiles/s-data-file-generic/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-213bb11e-2914-4278-b447-aa0e6aaca546@workspace:packages/core/s-event-emitter/dist/pkg/cjs":
+"@coffeekraken/internal-2826edec-6995-447a-8314-fecf782fec12@workspace:packages/core/s-class/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-213bb11e-2914-4278-b447-aa0e6aaca546@workspace:packages/core/s-event-emitter/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-2826edec-6995-447a-8314-fecf782fec12@workspace:packages/core/s-class/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-224adf61-57c5-4fbc-a9c0-ae8b48fdf27c@workspace:packages/app/s-kitchen/dist/pkg/esm":
+"@coffeekraken/internal-2830d2fa-fc81-427a-a6e1-ce1f68aa590f@workspace:packages/core/s-frontspec/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-224adf61-57c5-4fbc-a9c0-ae8b48fdf27c@workspace:packages/app/s-kitchen/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-2830d2fa-fc81-427a-a6e1-ce1f68aa590f@workspace:packages/core/s-frontspec/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-27e279b4-c840-4562-aa4b-6ca2dd351bb3@workspace:packages/themes/s-theme/dist/pkg/cjs":
+"@coffeekraken/internal-29c98d06-8658-4827-add5-fd86f7fe79f9@workspace:packages/tools/s-frontend-checker/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-27e279b4-c840-4562-aa4b-6ca2dd351bb3@workspace:packages/themes/s-theme/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-29c98d06-8658-4827-add5-fd86f7fe79f9@workspace:packages/tools/s-frontend-checker/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-2915391e-f09a-42ca-a0f6-226f745a1933@workspace:packages/core/s-stdio/dist/pkg/esm":
+"@coffeekraken/internal-2a0b65f9-4a71-4832-a2a5-c728c8d8dffb@workspace:packages/dom/s-sugar-element/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-2915391e-f09a-42ca-a0f6-226f745a1933@workspace:packages/core/s-stdio/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-2a0b65f9-4a71-4832-a2a5-c728c8d8dffb@workspace:packages/dom/s-sugar-element/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-29bd0df1-d6b0-41b0-9119-d263c4af759a@workspace:packages/dataFiles/s-data-file-generic/dist/pkg/cjs":
+"@coffeekraken/internal-2bb8eb16-3549-45a2-8213-975b69e5508e@workspace:packages/state/s-state/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-29bd0df1-d6b0-41b0-9119-d263c4af759a@workspace:packages/dataFiles/s-data-file-generic/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-2bb8eb16-3549-45a2-8213-975b69e5508e@workspace:packages/state/s-state/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-2c5bcbfb-bafa-445a-8d8f-e573b2e94bc8@workspace:packages/tools/s-handlebars/dist/pkg/cjs":
+"@coffeekraken/internal-2c5178db-9681-4547-b3ee-ff1a9c6e3eda@workspace:packages/tools/sugar/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-2c5bcbfb-bafa-445a-8d8f-e573b2e94bc8@workspace:packages/tools/s-handlebars/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-2c5178db-9681-4547-b3ee-ff1a9c6e3eda@workspace:packages/tools/sugar/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-2d2cceed-737f-4f97-a51f-b6ecc76381e9@workspace:packages/vite/s-vite/dist/pkg/esm":
+"@coffeekraken/internal-2ec41cf0-e52d-4740-a7c7-438bfbc4eccc@workspace:packages/http/s-request/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-2d2cceed-737f-4f97-a51f-b6ecc76381e9@workspace:packages/vite/s-vite/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-2ec41cf0-e52d-4740-a7c7-438bfbc4eccc@workspace:packages/http/s-request/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-2e357654-a994-448e-810d-56ef5ade43f8@workspace:packages/core/s-type/dist/pkg/cjs":
+"@coffeekraken/internal-37e25b0c-376d-4098-b4f0-6e2c3d4a1a5e@workspace:packages/servers/s-frontend-server/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-2e357654-a994-448e-810d-56ef5ade43f8@workspace:packages/core/s-type/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-37e25b0c-376d-4098-b4f0-6e2c3d4a1a5e@workspace:packages/servers/s-frontend-server/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-2ebb0aff-788d-4a77-aa32-b7e380c7d8e2@workspace:packages/core/s-docblock/dist/pkg/esm":
+"@coffeekraken/internal-382ec789-a2fe-4ec4-8f6a-5af7b2b36c10@workspace:packages/config/s-sugar-config/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-2ebb0aff-788d-4a77-aa32-b7e380c7d8e2@workspace:packages/core/s-docblock/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-382ec789-a2fe-4ec4-8f6a-5af7b2b36c10@workspace:packages/config/s-sugar-config/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-326f27f6-a64d-4af8-b6ab-4eae9ff9085f@workspace:packages/components/s-color-picker-component/dist/pkg/esm":
+"@coffeekraken/internal-39fc244c-60dc-414e-873d-651b54315a23@workspace:packages/tools/s-color/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-326f27f6-a64d-4af8-b6ab-4eae9ff9085f@workspace:packages/components/s-color-picker-component/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-39fc244c-60dc-414e-873d-651b54315a23@workspace:packages/tools/s-color/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-32bcc1c4-d35e-463f-a3c7-9ca4ff7ab33a@workspace:packages/tools/s-frontend-checker/dist/pkg/esm":
+"@coffeekraken/internal-3ac71d93-1857-490f-8c6d-e0e2e3af3113@workspace:packages/config/s-config-folder-adapter/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-32bcc1c4-d35e-463f-a3c7-9ca4ff7ab33a@workspace:packages/tools/s-frontend-checker/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-3ac71d93-1857-490f-8c6d-e0e2e3af3113@workspace:packages/config/s-config-folder-adapter/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-3356f1cc-5ad9-4720-9aba-9ab237b737fd@workspace:packages/builders/s-markdown-builder/dist/pkg/esm":
+"@coffeekraken/internal-3b94c764-8907-4ff7-9d60-9a2110c651a5@workspace:packages/builders/s-images-builder/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-3356f1cc-5ad9-4720-9aba-9ab237b737fd@workspace:packages/builders/s-markdown-builder/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-3b94c764-8907-4ff7-9d60-9a2110c651a5@workspace:packages/builders/s-images-builder/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-3371ea12-12a0-4c76-ba53-5f398f6957f4@workspace:packages/tools/s-component-utils/dist/pkg/esm":
+"@coffeekraken/internal-3ee2b459-6115-4e06-8bd6-7f07a3a999c5@workspace:packages/components/s-filtrable-input-component/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-3371ea12-12a0-4c76-ba53-5f398f6957f4@workspace:packages/tools/s-component-utils/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-3ee2b459-6115-4e06-8bd6-7f07a3a999c5@workspace:packages/components/s-filtrable-input-component/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-34cb7a42-dcc3-4953-ae5f-f0840a5f7420@workspace:packages/renderers/s-view-renderer-engine-blade/dist/pkg/esm":
+"@coffeekraken/internal-3fe11da2-0ac9-477f-aa35-d5b351306b8d@workspace:packages/vite/s-vite/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-34cb7a42-dcc3-4953-ae5f-f0840a5f7420@workspace:packages/renderers/s-view-renderer-engine-blade/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-3fe11da2-0ac9-477f-aa35-d5b351306b8d@workspace:packages/vite/s-vite/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-35c615c5-0963-449f-b377-805904cb0ffb@workspace:packages/core/s-event-emitter/dist/pkg/esm":
+"@coffeekraken/internal-40c6b6f1-2e36-43b4-9a96-2f0030e15580@workspace:packages/config/s-config/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-35c615c5-0963-449f-b377-805904cb0ffb@workspace:packages/core/s-event-emitter/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-40c6b6f1-2e36-43b4-9a96-2f0030e15580@workspace:packages/config/s-config/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-3713e141-62fb-4e2f-9454-70f4e47d2fa2@workspace:packages/renderers/s-view-renderer-engine-twig/dist/pkg/esm":
+"@coffeekraken/internal-492d44f9-2ae3-4af9-88a9-3b6698a6f29f@workspace:packages/builders/s-typescript-builder/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-3713e141-62fb-4e2f-9454-70f4e47d2fa2@workspace:packages/renderers/s-view-renderer-engine-twig/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-492d44f9-2ae3-4af9-88a9-3b6698a6f29f@workspace:packages/builders/s-typescript-builder/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-37ae08f4-9494-4e18-a54d-057404876d1c@workspace:packages/features/s-refocus-feature/dist/pkg/esm":
+"@coffeekraken/internal-496cbde8-836c-4fba-9748-f2714433d427@workspace:packages/core/s-file/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-37ae08f4-9494-4e18-a54d-057404876d1c@workspace:packages/features/s-refocus-feature/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-496cbde8-836c-4fba-9748-f2714433d427@workspace:packages/core/s-file/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-3a6d47c4-ef1c-4823-a42a-ec1a143dcdab@workspace:packages/tools/s-timer/dist/pkg/cjs":
+"@coffeekraken/internal-498e96bc-67d9-4558-a9c0-224ff3155ce4@workspace:packages/tools/s-url/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-3a6d47c4-ef1c-4823-a42a-ec1a143dcdab@workspace:packages/tools/s-timer/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-498e96bc-67d9-4558-a9c0-224ff3155ce4@workspace:packages/tools/s-url/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-3b876f6a-baae-454a-a0a6-cd0cf6f87121@workspace:packages/config/s-config-folder-adapter/dist/pkg/esm":
+"@coffeekraken/internal-499f2775-a9ac-46b6-8aaa-01a9e5c5db9d@workspace:packages/tools/s-duration/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-3b876f6a-baae-454a-a0a6-cd0cf6f87121@workspace:packages/config/s-config-folder-adapter/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-499f2775-a9ac-46b6-8aaa-01a9e5c5db9d@workspace:packages/tools/s-duration/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-3d5b97f2-80a9-4bb6-8b20-84a50c322a09@workspace:packages/builders/s-builder/dist/pkg/esm":
+"@coffeekraken/internal-4b223e7a-8a15-4bee-96bc-0f9709339f0f@workspace:packages/test/s-testinator/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-3d5b97f2-80a9-4bb6-8b20-84a50c322a09@workspace:packages/builders/s-builder/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-4b223e7a-8a15-4bee-96bc-0f9709339f0f@workspace:packages/test/s-testinator/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-3fc2191d-beb7-4082-90f1-583b5a33d2fd@workspace:packages/core/s-log/dist/pkg/esm":
+"@coffeekraken/internal-4b7b4008-00d4-4f49-b6e0-354347094d25@workspace:packages/builders/s-markdown-builder/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-3fc2191d-beb7-4082-90f1-583b5a33d2fd@workspace:packages/core/s-log/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-4b7b4008-00d4-4f49-b6e0-354347094d25@workspace:packages/builders/s-markdown-builder/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-434e30dc-deb5-448f-996a-fa74960993ec@workspace:packages/tools/sugar/dist/pkg/cjs":
+"@coffeekraken/internal-4cf235b6-0353-491d-a62c-fdb0ead54d52@workspace:packages/components/s-date-picker-component/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-434e30dc-deb5-448f-996a-fa74960993ec@workspace:packages/tools/sugar/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-4cf235b6-0353-491d-a62c-fdb0ead54d52@workspace:packages/components/s-date-picker-component/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-476f03a4-5493-49b1-b83c-25ce129be320@workspace:packages/vite/s-vite-sugar-plugin/dist/pkg/esm":
+"@coffeekraken/internal-4fd17d29-0d03-437e-8008-2cb4697d6254@workspace:packages/components/s-theme-switcher-component/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-476f03a4-5493-49b1-b83c-25ce129be320@workspace:packages/vite/s-vite-sugar-plugin/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-4fd17d29-0d03-437e-8008-2cb4697d6254@workspace:packages/components/s-theme-switcher-component/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-486d8b7b-1c3d-45fd-901d-21db6f7892e2@workspace:packages/builders/s-images-builder/dist/pkg/cjs":
+"@coffeekraken/internal-52839880-967a-40db-80d4-3533f6cee78e@workspace:packages/codeFormatters/s-code-formatter-prettier/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-486d8b7b-1c3d-45fd-901d-21db6f7892e2@workspace:packages/builders/s-images-builder/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-52839880-967a-40db-80d4-3533f6cee78e@workspace:packages/codeFormatters/s-code-formatter-prettier/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-49799a4c-5e50-415e-92af-ca11f2c760d3@workspace:packages/vite/s-vite-sugar-plugin/dist/pkg/cjs":
+"@coffeekraken/internal-5309a700-7ebd-497f-954c-f5ba375d6598@workspace:packages/builders/s-favicon-builder/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-49799a4c-5e50-415e-92af-ca11f2c760d3@workspace:packages/vite/s-vite-sugar-plugin/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-5309a700-7ebd-497f-954c-f5ba375d6598@workspace:packages/builders/s-favicon-builder/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-4b9c5c20-76fc-4a6e-83dc-db44f2ab39c8@workspace:packages/app/s-dashboard/dist/pkg/esm":
+"@coffeekraken/internal-5336a5f8-a0ee-46ae-9882-afffc5a9c0e1@workspace:packages/core/s-file/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-4b9c5c20-76fc-4a6e-83dc-db44f2ab39c8@workspace:packages/app/s-dashboard/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-5336a5f8-a0ee-46ae-9882-afffc5a9c0e1@workspace:packages/core/s-file/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-4ca72616-8385-457b-b4e8-7138274bc3e0@workspace:packages/dataFiles/s-data-file-php/dist/pkg/esm":
+"@coffeekraken/internal-5337076b-1ac5-4ba0-bcd5-db3e34197a3e@workspace:packages/codeFormatters/s-code-formatter/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-4ca72616-8385-457b-b4e8-7138274bc3e0@workspace:packages/dataFiles/s-data-file-php/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-5337076b-1ac5-4ba0-bcd5-db3e34197a3e@workspace:packages/codeFormatters/s-code-formatter/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-4e992b4a-be71-4902-bc26-5179e9b25796@workspace:packages/dataFiles/s-data-file-js/dist/pkg/esm":
+"@coffeekraken/internal-537ec38d-e666-4c20-8a80-181d1c4b7409@workspace:packages/tools/s-timer/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-4e992b4a-be71-4902-bc26-5179e9b25796@workspace:packages/dataFiles/s-data-file-js/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-537ec38d-e666-4c20-8a80-181d1c4b7409@workspace:packages/tools/s-timer/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-4fa47ae2-2217-45a9-8e6b-4e0e3980a359@workspace:packages/components/s-filtrable-input-component/dist/pkg/esm":
+"@coffeekraken/internal-540035a4-1d68-4773-a012-5d3f3e459b08@workspace:packages/renderers/s-view-renderer-engine-lit/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-4fa47ae2-2217-45a9-8e6b-4e0e3980a359@workspace:packages/components/s-filtrable-input-component/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-540035a4-1d68-4773-a012-5d3f3e459b08@workspace:packages/renderers/s-view-renderer-engine-lit/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-4fecd05c-4d14-4aed-8589-9b41d4636ed6@workspace:packages/tools/s-glob/dist/pkg/esm":
+"@coffeekraken/internal-54f8ff4e-11c8-48e3-80c1-f68199416e7b@workspace:packages/features/s-form-validate-feature/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-4fecd05c-4d14-4aed-8589-9b41d4636ed6@workspace:packages/tools/s-glob/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-54f8ff4e-11c8-48e3-80c1-f68199416e7b@workspace:packages/features/s-form-validate-feature/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-503d56e3-c129-4f4f-901c-741caa492609@workspace:packages/dom/s-sugar-element/dist/pkg/esm":
+"@coffeekraken/internal-553aa1c8-5f57-493c-94b7-6eca15570657@workspace:packages/core/s-class/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-503d56e3-c129-4f4f-901c-741caa492609@workspace:packages/dom/s-sugar-element/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-553aa1c8-5f57-493c-94b7-6eca15570657@workspace:packages/core/s-class/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-511a98bd-81e3-4a7c-a38d-08da44b4f2a8@workspace:packages/core/s-promise/dist/pkg/esm":
+"@coffeekraken/internal-576a8d4d-3889-4441-9cc7-55f7fa308f64@workspace:packages/tools/s-url/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-511a98bd-81e3-4a7c-a38d-08da44b4f2a8@workspace:packages/core/s-promise/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-5121de09-9c99-420f-aecf-cc068c8ed45d@workspace:packages/tools/s-color/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-5121de09-9c99-420f-aecf-cc068c8ed45d@workspace:packages/tools/s-color/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-53e7a7cc-3aa1-4975-98aa-b35814822a2c@workspace:packages/core/s-log/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-53e7a7cc-3aa1-4975-98aa-b35814822a2c@workspace:packages/core/s-log/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-576a8d4d-3889-4441-9cc7-55f7fa308f64@workspace:packages/tools/s-url/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
@@ -1946,477 +1934,615 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-57c5d03c-d8ba-4ed1-b605-8edf29ee4e6b@workspace:packages/tools/s-bench/dist/pkg/esm":
+"@coffeekraken/internal-596b1cdd-19b9-440f-8566-a7e7bbef1033@workspace:packages/components/s-color-picker-component/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-57c5d03c-d8ba-4ed1-b605-8edf29ee4e6b@workspace:packages/tools/s-bench/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-596b1cdd-19b9-440f-8566-a7e7bbef1033@workspace:packages/components/s-color-picker-component/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-5876d34b-13a5-484c-ac88-4ee6d7663d73@workspace:packages/core/s-process/dist/pkg/esm":
+"@coffeekraken/internal-5a80cd7b-da7b-46d3-9620-9f700f748683@workspace:packages/tools/s-conductor/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-5876d34b-13a5-484c-ac88-4ee6d7663d73@workspace:packages/core/s-process/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-5a80cd7b-da7b-46d3-9620-9f700f748683@workspace:packages/tools/s-conductor/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-5b3e84c6-f1e3-42a5-b41d-0fe53e84237c@workspace:packages/components/s-slider-component/dist/pkg/esm":
+"@coffeekraken/internal-5dcd926f-467c-4aa8-b79b-9280c1a9d6bc@workspace:packages/builders/s-sitemap-builder/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-5b3e84c6-f1e3-42a5-b41d-0fe53e84237c@workspace:packages/components/s-slider-component/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-5dcd926f-467c-4aa8-b79b-9280c1a9d6bc@workspace:packages/builders/s-sitemap-builder/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-5d050d40-b0e2-423f-9a21-6aa5deaf9441@workspace:packages/features/s-feature/dist/pkg/esm":
+"@coffeekraken/internal-61290264-f4ad-4ad2-a184-6eb513c8e17b@workspace:packages/core/s-type/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-5d050d40-b0e2-423f-9a21-6aa5deaf9441@workspace:packages/features/s-feature/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-61290264-f4ad-4ad2-a184-6eb513c8e17b@workspace:packages/core/s-type/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-5edc867e-e10c-45ad-ac98-edf29c355e48@workspace:packages/tools/s-glob/dist/pkg/cjs":
+"@coffeekraken/internal-61d3ccf2-62f7-491a-9087-7e9bcdcc1cce@workspace:packages/tools/s-component-utils/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-5edc867e-e10c-45ad-ac98-edf29c355e48@workspace:packages/tools/s-glob/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-61d3ccf2-62f7-491a-9087-7e9bcdcc1cce@workspace:packages/tools/s-component-utils/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-6175088b-2b21-4594-ad1e-46e228e210de@workspace:packages/core/s-docmap/dist/pkg/esm":
+"@coffeekraken/internal-6d02709a-03dc-4665-b62f-9903f5a2cb4f@workspace:packages/features/s-feature/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-6175088b-2b21-4594-ad1e-46e228e210de@workspace:packages/core/s-docmap/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-6d02709a-03dc-4665-b62f-9903f5a2cb4f@workspace:packages/features/s-feature/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-64531c35-3bae-4ae3-bb0d-56e3e665f1e1@workspace:packages/http/s-request/dist/pkg/cjs":
+"@coffeekraken/internal-6dd53870-5e24-487b-b5f7-546a9a198eae@workspace:packages/features/s-sugar-feature/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-64531c35-3bae-4ae3-bb0d-56e3e665f1e1@workspace:packages/http/s-request/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-6dd53870-5e24-487b-b5f7-546a9a198eae@workspace:packages/features/s-sugar-feature/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-650041ba-0868-4e7d-910f-6f6dcf7f7956@workspace:packages/config/s-config-folder-adapter/dist/pkg/cjs":
+"@coffeekraken/internal-6de4bf2e-6308-4709-975a-8534e453129e@workspace:packages/renderers/s-view-renderer-engine-blade/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-650041ba-0868-4e7d-910f-6f6dcf7f7956@workspace:packages/config/s-config-folder-adapter/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-6de4bf2e-6308-4709-975a-8534e453129e@workspace:packages/renderers/s-view-renderer-engine-blade/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-6536fa9e-b54b-48c5-9c71-892a01b0e2ff@workspace:packages/dataFiles/s-data-file-php/dist/pkg/cjs":
+"@coffeekraken/internal-6ebeef67-d8ab-4527-bd72-64c42d1edf9f@workspace:packages/components/s-panel-component/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-6536fa9e-b54b-48c5-9c71-892a01b0e2ff@workspace:packages/dataFiles/s-data-file-php/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-6ebeef67-d8ab-4527-bd72-64c42d1edf9f@workspace:packages/components/s-panel-component/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-65d001d7-6594-4e6c-9c5e-6bdae29dc5ca@workspace:packages/config/s-config-inline-adapter/dist/pkg/esm":
+"@coffeekraken/internal-70ae3e3d-a93c-44c4-8384-44c511d753ea@workspace:packages/builders/s-static-builder/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-65d001d7-6594-4e6c-9c5e-6bdae29dc5ca@workspace:packages/config/s-config-inline-adapter/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-70ae3e3d-a93c-44c4-8384-44c511d753ea@workspace:packages/builders/s-static-builder/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-674fdb62-7a43-44b8-a8eb-258e7591a241@workspace:packages/core/s-package/dist/pkg/esm":
+"@coffeekraken/internal-70c8e2ad-f7da-4c82-99ed-fcc0b3293368@workspace:packages/components/s-code-example-component/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-674fdb62-7a43-44b8-a8eb-258e7591a241@workspace:packages/core/s-package/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-70c8e2ad-f7da-4c82-99ed-fcc0b3293368@workspace:packages/components/s-code-example-component/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-67755206-551a-4b38-8500-4f41889e1754@workspace:packages/config/s-config-adapter/dist/pkg/cjs":
+"@coffeekraken/internal-71359e49-15ae-457a-8aa8-8b3fe33c3f31@workspace:packages/tools/s-bench/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-67755206-551a-4b38-8500-4f41889e1754@workspace:packages/config/s-config-adapter/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-71359e49-15ae-457a-8aa8-8b3fe33c3f31@workspace:packages/tools/s-bench/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-6afe18d1-4e43-4437-ac00-a0e9507a4ffe@workspace:packages/components/s-code-example-component/dist/pkg/cjs":
+"@coffeekraken/internal-738b754c-7f69-46bc-83f8-6e5d0a505ec7@workspace:packages/app/s-dashboard/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-6afe18d1-4e43-4437-ac00-a0e9507a4ffe@workspace:packages/components/s-code-example-component/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-738b754c-7f69-46bc-83f8-6e5d0a505ec7@workspace:packages/app/s-dashboard/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-6dc5b9db-a56b-4e42-a283-aeb63a23057d@workspace:packages/components/s-clipboard-copy-component/dist/pkg/esm":
+"@coffeekraken/internal-749e60ae-a25e-428c-bf3f-281800df85ea@workspace:packages/core/s-promise/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-6dc5b9db-a56b-4e42-a283-aeb63a23057d@workspace:packages/components/s-clipboard-copy-component/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-749e60ae-a25e-428c-bf3f-281800df85ea@workspace:packages/core/s-promise/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-6ecd738e-d7bc-4502-9da3-ba4d62b94839@workspace:packages/builders/s-typescript-builder/dist/pkg/cjs":
+"@coffeekraken/internal-74c904bc-d014-4854-b640-6972ce79352b@workspace:packages/tools/s-handlebars/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-6ecd738e-d7bc-4502-9da3-ba4d62b94839@workspace:packages/builders/s-typescript-builder/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-74c904bc-d014-4854-b640-6972ce79352b@workspace:packages/tools/s-handlebars/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-730494b1-65fd-44fa-a1d6-626598cb0c73@workspace:packages/core/s-package/dist/pkg/cjs":
+"@coffeekraken/internal-74cf13c5-fa0d-4a34-8708-396a2ab06711@workspace:packages/components/s-scroll-component/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-730494b1-65fd-44fa-a1d6-626598cb0c73@workspace:packages/core/s-package/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-74cf13c5-fa0d-4a34-8708-396a2ab06711@workspace:packages/components/s-scroll-component/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-73e55cbe-1ba7-4ca9-b32c-37b061018a4f@workspace:packages/core/s-sugar-json/dist/pkg/esm":
+"@coffeekraken/internal-74ec96d5-08d2-4f77-9c92-f670f7533709@workspace:packages/builders/s-images-builder/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-73e55cbe-1ba7-4ca9-b32c-37b061018a4f@workspace:packages/core/s-sugar-json/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-74ec96d5-08d2-4f77-9c92-f670f7533709@workspace:packages/builders/s-images-builder/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-74c41630-22b7-491f-9498-b03b9e5b9896@workspace:packages/builders/s-postcss-builder/dist/pkg/cjs":
+"@coffeekraken/internal-7533f7db-1614-4d33-82fa-aa732132e72c@workspace:packages/components/s-date-picker-component/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-74c41630-22b7-491f-9498-b03b9e5b9896@workspace:packages/builders/s-postcss-builder/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-7533f7db-1614-4d33-82fa-aa732132e72c@workspace:packages/components/s-date-picker-component/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-74f2cc25-15ea-4e2e-885a-c8436719a7b9@workspace:packages/postcss/s-postcss-sugar-plugin/dist/pkg/esm":
+"@coffeekraken/internal-753648a2-6492-4ae5-80e0-01623854583f@workspace:packages/tools/sugar/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-74f2cc25-15ea-4e2e-885a-c8436719a7b9@workspace:packages/postcss/s-postcss-sugar-plugin/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-753648a2-6492-4ae5-80e0-01623854583f@workspace:packages/tools/sugar/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-75cf013e-0769-4d84-8d8e-68b3544a5474@workspace:packages/features/s-activate-feature/dist/pkg/esm":
+"@coffeekraken/internal-7717e814-a26d-4067-b22b-a0c32569ff10@workspace:packages/core/cli/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-75cf013e-0769-4d84-8d8e-68b3544a5474@workspace:packages/features/s-activate-feature/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-7717e814-a26d-4067-b22b-a0c32569ff10@workspace:packages/core/cli/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-76e4ea45-06e8-42e4-93be-7787b2f11a1f@workspace:packages/builders/s-static-builder/dist/pkg/esm":
+"@coffeekraken/internal-779d3dd3-2236-4747-8632-02a9c73c4f50@workspace:packages/core/s-process/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-76e4ea45-06e8-42e4-93be-7787b2f11a1f@workspace:packages/builders/s-static-builder/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-779d3dd3-2236-4747-8632-02a9c73c4f50@workspace:packages/core/s-process/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-796d21de-711f-4d49-8546-535e2e256d9c@workspace:packages/renderers/s-view-renderer-engine-twig/dist/pkg/cjs":
+"@coffeekraken/internal-789a0532-6129-4b8c-a29f-945c98f2f9f3@workspace:packages/tools/s-validator/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-796d21de-711f-4d49-8546-535e2e256d9c@workspace:packages/renderers/s-view-renderer-engine-twig/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-789a0532-6129-4b8c-a29f-945c98f2f9f3@workspace:packages/tools/s-validator/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-7d128e47-7986-42a9-a87d-b2f4bf8a4e18@workspace:packages/core/s-docblock/dist/pkg/cjs":
+"@coffeekraken/internal-79d8c101-063f-4130-9de0-123f9993cdfe@workspace:packages/config/s-sugar-config/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-7d128e47-7986-42a9-a87d-b2f4bf8a4e18@workspace:packages/core/s-docblock/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-79d8c101-063f-4130-9de0-123f9993cdfe@workspace:packages/config/s-sugar-config/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-7f8692a7-a00b-4c27-9211-81ad1d8c7933@workspace:packages/core/s-sugar-json/dist/pkg/cjs":
+"@coffeekraken/internal-7ae1a8ce-ac95-4147-b5d2-2487d61934c7@workspace:packages/core/s-package/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-7f8692a7-a00b-4c27-9211-81ad1d8c7933@workspace:packages/core/s-sugar-json/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-7ae1a8ce-ac95-4147-b5d2-2487d61934c7@workspace:packages/core/s-package/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-81c64f12-c0d3-48bf-b6e2-18c2b8e8e7b7@workspace:packages/builders/s-static-builder/dist/pkg/cjs":
+"@coffeekraken/internal-7c0636a7-bd8d-4d11-bac9-93411bf6ef30@workspace:packages/core/s-stdio/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-81c64f12-c0d3-48bf-b6e2-18c2b8e8e7b7@workspace:packages/builders/s-static-builder/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-7c0636a7-bd8d-4d11-bac9-93411bf6ef30@workspace:packages/core/s-stdio/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-83b1a490-67c0-474b-9047-20664176e3c3@workspace:packages/components/s-range-component/dist/pkg/esm":
+"@coffeekraken/internal-7df2f7e6-0b4c-4a9a-92ea-c52ea2f8b9c6@workspace:packages/codeFormatters/s-code-formatter/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-83b1a490-67c0-474b-9047-20664176e3c3@workspace:packages/components/s-range-component/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-7df2f7e6-0b4c-4a9a-92ea-c52ea2f8b9c6@workspace:packages/codeFormatters/s-code-formatter/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-8537f89a-0918-4ee3-9aee-7f42f18e9d0a@workspace:packages/core/s-monorepo/dist/pkg/cjs":
+"@coffeekraken/internal-7fdf133d-7d4c-460d-b4c1-b4f56141d051@workspace:packages/core/s-sugar-json/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-8537f89a-0918-4ee3-9aee-7f42f18e9d0a@workspace:packages/core/s-monorepo/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-7fdf133d-7d4c-460d-b4c1-b4f56141d051@workspace:packages/core/s-sugar-json/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-85527562-8ff3-44f8-8908-6debed1c9c9d@workspace:packages/features/s-parallax-feature/dist/pkg/esm":
+"@coffeekraken/internal-810be590-b07a-46ca-b3a6-1c79eb349936@workspace:packages/builders/s-builder/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-85527562-8ff3-44f8-8908-6debed1c9c9d@workspace:packages/features/s-parallax-feature/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-810be590-b07a-46ca-b3a6-1c79eb349936@workspace:packages/builders/s-builder/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-87b566b2-d2c5-4259-adbb-7617146f7ad3@workspace:packages/tools/s-color/dist/pkg/cjs":
+"@coffeekraken/internal-82d92fb3-8797-4e34-a49d-0f07f5c5890e@workspace:packages/core/s-event-emitter/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-87b566b2-d2c5-4259-adbb-7617146f7ad3@workspace:packages/tools/s-color/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-82d92fb3-8797-4e34-a49d-0f07f5c5890e@workspace:packages/core/s-event-emitter/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-8960ec9e-6338-49ae-84d8-fa97f5dabbe2@workspace:packages/core/s-stdio/dist/pkg/cjs":
+"@coffeekraken/internal-84510d6b-e91d-4e21-8631-6970d993fba8@workspace:packages/@websites/coffeekraken-io/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-8960ec9e-6338-49ae-84d8-fa97f5dabbe2@workspace:packages/core/s-stdio/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-84510d6b-e91d-4e21-8631-6970d993fba8@workspace:packages/@websites/coffeekraken-io/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-8dcc661d-1d5d-481d-93e7-c664ca27b090@workspace:packages/components/s-filtrable-input-component/dist/pkg/cjs":
+"@coffeekraken/internal-84fa7bbf-d822-4edd-9860-2ef28b9ad742@workspace:packages/dataFiles/s-data-file-js/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-8dcc661d-1d5d-481d-93e7-c664ca27b090@workspace:packages/components/s-filtrable-input-component/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-84fa7bbf-d822-4edd-9860-2ef28b9ad742@workspace:packages/dataFiles/s-data-file-js/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-8e7704f7-4756-4719-a712-4d690249b861@workspace:packages/app/s-kitchen/dist/pkg/cjs":
+"@coffeekraken/internal-87576bb6-87a9-4799-8947-ff2261a580e4@workspace:packages/components/s-range-component/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-8e7704f7-4756-4719-a712-4d690249b861@workspace:packages/app/s-kitchen/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-87576bb6-87a9-4799-8947-ff2261a580e4@workspace:packages/components/s-range-component/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-91bae1f4-a369-4799-8fcc-41b8b6cb6677@workspace:packages/builders/s-markdown-builder/dist/pkg/cjs":
+"@coffeekraken/internal-881e48db-881b-4305-a0f4-59d52ebc939a@workspace:packages/core/s-interface/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-91bae1f4-a369-4799-8fcc-41b8b6cb6677@workspace:packages/builders/s-markdown-builder/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-881e48db-881b-4305-a0f4-59d52ebc939a@workspace:packages/core/s-interface/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-96759157-151d-44e2-834f-46c7b17f7a83@workspace:packages/builders/s-postcss-builder/dist/pkg/esm":
+"@coffeekraken/internal-88a179d7-a5e1-467c-9364-7923e8e7b5ec@workspace:packages/tools/s-bench/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-96759157-151d-44e2-834f-46c7b17f7a83@workspace:packages/builders/s-postcss-builder/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-88a179d7-a5e1-467c-9364-7923e8e7b5ec@workspace:packages/tools/s-bench/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-970db168-0d4f-46b8-8163-4a3bb572078e@workspace:packages/config/s-sugar-config/dist/pkg/cjs":
+"@coffeekraken/internal-892be463-69f6-449c-81aa-29e8a727475b@workspace:packages/builders/s-postcss-builder/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-970db168-0d4f-46b8-8163-4a3bb572078e@workspace:packages/config/s-sugar-config/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-892be463-69f6-449c-81aa-29e8a727475b@workspace:packages/builders/s-postcss-builder/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-98921fa7-1454-4756-9303-11edae77157d@workspace:packages/themes/s-theme/dist/pkg/esm":
+"@coffeekraken/internal-899354b4-cb77-4571-9939-9a545eb89d00@workspace:packages/state/s-state/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-98921fa7-1454-4756-9303-11edae77157d@workspace:packages/themes/s-theme/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-899354b4-cb77-4571-9939-9a545eb89d00@workspace:packages/state/s-state/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-9e0b792f-57c7-4aeb-aacf-c9156a5395c7@workspace:packages/vite/s-vite/dist/pkg/cjs":
+"@coffeekraken/internal-8dd9634f-8080-4bac-af24-53b43b897193@workspace:packages/vite/s-vite-postcss-plugin/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-9e0b792f-57c7-4aeb-aacf-c9156a5395c7@workspace:packages/vite/s-vite/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-8dd9634f-8080-4bac-af24-53b43b897193@workspace:packages/vite/s-vite-postcss-plugin/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-9e577ef8-7fcf-4ce0-851b-249d21fda78f@workspace:packages/components/s-code-example-component/dist/pkg/esm":
+"@coffeekraken/internal-8f55df54-83a7-4f74-a1d0-6cdab80d5de2@workspace:packages/features/s-refocus-feature/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-9e577ef8-7fcf-4ce0-851b-249d21fda78f@workspace:packages/components/s-code-example-component/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-8f55df54-83a7-4f74-a1d0-6cdab80d5de2@workspace:packages/features/s-refocus-feature/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-a22c261c-d512-417a-9a35-4b60b12cffa6@workspace:packages/config/s-config/dist/pkg/esm":
+"@coffeekraken/internal-91c195bc-9aae-4305-9585-2508ac29779f@workspace:packages/dataFiles/s-data-file-js/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-a22c261c-d512-417a-9a35-4b60b12cffa6@workspace:packages/config/s-config/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-91c195bc-9aae-4305-9585-2508ac29779f@workspace:packages/dataFiles/s-data-file-js/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-a2fbc1e3-16cd-4b9e-83a9-3cc1d0c7c16c@workspace:packages/core/s-file/dist/pkg/esm":
+"@coffeekraken/internal-924e09cb-3929-4e61-b7d0-7426799763f1@workspace:packages/core/s-log/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-a2fbc1e3-16cd-4b9e-83a9-3cc1d0c7c16c@workspace:packages/core/s-file/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-924e09cb-3929-4e61-b7d0-7426799763f1@workspace:packages/core/s-log/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-a9ae2305-afe8-4ecd-9a2a-ab0320323b7e@workspace:packages/components/s-scroll-component/dist/pkg/esm":
+"@coffeekraken/internal-932fba98-d64e-4205-82d9-986a38005fc0@workspace:packages/components/s-slider-component/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-a9ae2305-afe8-4ecd-9a2a-ab0320323b7e@workspace:packages/components/s-scroll-component/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-932fba98-d64e-4205-82d9-986a38005fc0@workspace:packages/components/s-slider-component/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-a9ee28e5-08f8-44df-acb1-4fa90747e7a8@workspace:packages/core/s-class/dist/pkg/esm":
+"@coffeekraken/internal-94ac6b3c-e3c7-4e98-8405-680aa111ca68@workspace:packages/dataFiles/s-data-file-php/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-a9ee28e5-08f8-44df-acb1-4fa90747e7a8@workspace:packages/core/s-class/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-94ac6b3c-e3c7-4e98-8405-680aa111ca68@workspace:packages/dataFiles/s-data-file-php/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-aa60b7ca-115f-4e8c-b982-a6521eeb425f@workspace:packages/tools/s-conductor/dist/pkg/esm":
+"@coffeekraken/internal-9642c81a-5568-4073-9cac-0b7d8aa5f3b6@workspace:packages/tools/s-color/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-aa60b7ca-115f-4e8c-b982-a6521eeb425f@workspace:packages/tools/s-conductor/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-9642c81a-5568-4073-9cac-0b7d8aa5f3b6@workspace:packages/tools/s-color/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-ad7b1117-d339-429e-aa27-73ab29a5c41d@workspace:packages/builders/s-images-builder/dist/pkg/esm":
+"@coffeekraken/internal-9a172c90-2979-41c6-91a1-50d4c55ae82b@workspace:packages/builders/s-sitemap-builder/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-ad7b1117-d339-429e-aa27-73ab29a5c41d@workspace:packages/builders/s-images-builder/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-9a172c90-2979-41c6-91a1-50d4c55ae82b@workspace:packages/builders/s-sitemap-builder/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-b13d1f1e-632e-40be-8d7b-b80d5e8d3d30@workspace:packages/core/s-file/dist/pkg/cjs":
+"@coffeekraken/internal-9b7a4e64-a55d-4514-8dc9-35f1313d67b1@workspace:packages/components/s-rating-component/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-b13d1f1e-632e-40be-8d7b-b80d5e8d3d30@workspace:packages/core/s-file/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-9b7a4e64-a55d-4514-8dc9-35f1313d67b1@workspace:packages/components/s-rating-component/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-b2332dc0-06ff-49a6-9207-10766336b85f@workspace:packages/features/s-page-transition-feature/dist/pkg/esm":
+"@coffeekraken/internal-9c4d1a8a-8c3f-4d38-8105-bfc665f2f3a7@workspace:packages/dataFiles/s-data-file-generic/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-b2332dc0-06ff-49a6-9207-10766336b85f@workspace:packages/features/s-page-transition-feature/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-9c4d1a8a-8c3f-4d38-8105-bfc665f2f3a7@workspace:packages/dataFiles/s-data-file-generic/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-b253fa01-e90c-445d-bc1e-fb94899ac23f@workspace:packages/tools/s-duration/dist/pkg/cjs":
+"@coffeekraken/internal-9e9116ec-0f7a-46d3-94da-89dec4503291@workspace:packages/features/s-page-transition-feature/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-b253fa01-e90c-445d-bc1e-fb94899ac23f@workspace:packages/tools/s-duration/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-9e9116ec-0f7a-46d3-94da-89dec4503291@workspace:packages/features/s-page-transition-feature/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-b7435b9a-2140-44d3-882f-38fdcd6566d1@workspace:packages/builders/s-sitemap-builder/dist/pkg/esm":
+"@coffeekraken/internal-a0883ae1-ca46-48fa-ae10-6462918acf8c@workspace:packages/config/s-config-adapter/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-b7435b9a-2140-44d3-882f-38fdcd6566d1@workspace:packages/builders/s-sitemap-builder/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-a0883ae1-ca46-48fa-ae10-6462918acf8c@workspace:packages/config/s-config-adapter/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-b8030b32-30f4-477d-b8f3-43af75fc8a54@workspace:packages/core/s-env/dist/pkg/esm":
+"@coffeekraken/internal-a1fb4ef0-a5a1-45ae-a4ab-a2471b51585c@workspace:packages/core/s-docmap/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-b8030b32-30f4-477d-b8f3-43af75fc8a54@workspace:packages/core/s-env/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-a1fb4ef0-a5a1-45ae-a4ab-a2471b51585c@workspace:packages/core/s-docmap/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-ba43f066-6f96-4d43-aa86-a7edc39f0609@workspace:packages/test/s-testinator/dist/pkg/cjs":
+"@coffeekraken/internal-a23a1cfe-4457-4e32-b135-b887ce4eab42@workspace:packages/app/s-kitchen/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-ba43f066-6f96-4d43-aa86-a7edc39f0609@workspace:packages/test/s-testinator/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-a23a1cfe-4457-4e32-b135-b887ce4eab42@workspace:packages/app/s-kitchen/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-ba4622cf-91fa-4b0c-abc1-c23d8509b4b1@workspace:packages/core/s-frontspec/dist/pkg/cjs":
+"@coffeekraken/internal-a9c4aac1-8549-4bd3-b928-c9ceac95eaa0@workspace:packages/builders/s-postcss-builder/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-ba4622cf-91fa-4b0c-abc1-c23d8509b4b1@workspace:packages/core/s-frontspec/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-a9c4aac1-8549-4bd3-b928-c9ceac95eaa0@workspace:packages/builders/s-postcss-builder/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-bc1cc852-185d-4702-8069-5ea716711ac4@workspace:packages/dom/s-css-animate/dist/pkg/esm":
+"@coffeekraken/internal-abd4dc91-9e9c-4564-87fe-1a0c5d9cdc69@workspace:packages/components/s-panel-component/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-bc1cc852-185d-4702-8069-5ea716711ac4@workspace:packages/dom/s-css-animate/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-abd4dc91-9e9c-4564-87fe-1a0c5d9cdc69@workspace:packages/components/s-panel-component/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-bcb1d6bd-c939-48af-91a6-35850a2b27a3@workspace:packages/tools/s-url/dist/pkg/cjs":
+"@coffeekraken/internal-ada9f550-6f82-4ff0-a859-12ea041bc86b@workspace:packages/components/s-theme-switcher-component/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-bcb1d6bd-c939-48af-91a6-35850a2b27a3@workspace:packages/tools/s-url/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-ada9f550-6f82-4ff0-a859-12ea041bc86b@workspace:packages/components/s-theme-switcher-component/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-c0273c38-e715-489f-b199-6bb4dcc0bf39@workspace:packages/core/s-interface/dist/pkg/cjs":
+"@coffeekraken/internal-adcc44ee-40bc-47e5-96bc-c40df35c442a@workspace:packages/app/s-dashboard/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-c0273c38-e715-489f-b199-6bb4dcc0bf39@workspace:packages/core/s-interface/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-adcc44ee-40bc-47e5-96bc-c40df35c442a@workspace:packages/app/s-dashboard/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-c31a3567-9406-414f-a3d8-aebce439ab77@workspace:packages/core/s-type/dist/pkg/esm":
+"@coffeekraken/internal-ade6d78a-daba-4810-ac6a-ca7fa7bfbe62@workspace:packages/core/cli/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-c31a3567-9406-414f-a3d8-aebce439ab77@workspace:packages/core/s-type/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-ade6d78a-daba-4810-ac6a-ca7fa7bfbe62@workspace:packages/core/cli/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-c3ee7c63-95b4-4e78-a21e-b1153a0b4f11@workspace:packages/config/s-sugar-config/dist/pkg/esm":
+"@coffeekraken/internal-ae3aff94-14d7-4a2c-aac8-716a4933c0af@workspace:packages/dataFiles/s-data-file-php/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-c3ee7c63-95b4-4e78-a21e-b1153a0b4f11@workspace:packages/config/s-sugar-config/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-ae3aff94-14d7-4a2c-aac8-716a4933c0af@workspace:packages/dataFiles/s-data-file-php/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-c67da81f-2d4a-46a2-bbe3-11fdca8520d3@workspace:packages/core/s-interface/dist/pkg/esm":
+"@coffeekraken/internal-afa30eed-c616-41b5-9506-3edcead69627@workspace:packages/http/s-request/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-c67da81f-2d4a-46a2-bbe3-11fdca8520d3@workspace:packages/core/s-interface/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-afa30eed-c616-41b5-9506-3edcead69627@workspace:packages/http/s-request/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-c86b7cdb-f11b-4776-a250-a99f23b9d59c@workspace:packages/builders/s-typescript-builder/dist/pkg/esm":
+"@coffeekraken/internal-afca2cb8-7f82-485d-9117-7321866ba99f@workspace:packages/vite/s-vite-sugar-plugin/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-c86b7cdb-f11b-4776-a250-a99f23b9d59c@workspace:packages/builders/s-typescript-builder/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-afca2cb8-7f82-485d-9117-7321866ba99f@workspace:packages/vite/s-vite-sugar-plugin/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-c8c7499a-868f-48e9-8ae9-9087b9caf877@workspace:packages/renderers/s-view-renderer/dist/pkg/cjs":
+"@coffeekraken/internal-b0acf3c8-a0ca-4bb9-96c1-59545fd21c45@workspace:packages/core/s-monorepo/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-c8c7499a-868f-48e9-8ae9-9087b9caf877@workspace:packages/renderers/s-view-renderer/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-b0acf3c8-a0ca-4bb9-96c1-59545fd21c45@workspace:packages/core/s-monorepo/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-ca223aa4-602d-496c-9cda-aa174cab8883@workspace:packages/builders/s-favicon-builder/dist/pkg/cjs":
+"@coffeekraken/internal-b37af61b-68eb-4aca-9aaa-141c1a983586@workspace:packages/components/s-clipboard-copy-component/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-ca223aa4-602d-496c-9cda-aa174cab8883@workspace:packages/builders/s-favicon-builder/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-b37af61b-68eb-4aca-9aaa-141c1a983586@workspace:packages/components/s-clipboard-copy-component/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-cbab7159-72de-4535-9791-068c14903d2a@workspace:packages/dataFiles/s-data-file-js/dist/pkg/cjs":
+"@coffeekraken/internal-b6e86219-b23c-4382-ba43-3e1e87260c1a@workspace:packages/dom/s-css-animate/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-cbab7159-72de-4535-9791-068c14903d2a@workspace:packages/dataFiles/s-data-file-js/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-b6e86219-b23c-4382-ba43-3e1e87260c1a@workspace:packages/dom/s-css-animate/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-cfa65538-22a5-433e-8cc4-725999c783ab@workspace:packages/tools/s-duration/dist/pkg/esm":
+"@coffeekraken/internal-b7bc873f-175f-49cf-a0bb-f202a8004ac5@workspace:packages/config/s-config-inline-adapter/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-cfa65538-22a5-433e-8cc4-725999c783ab@workspace:packages/tools/s-duration/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-b7bc873f-175f-49cf-a0bb-f202a8004ac5@workspace:packages/config/s-config-inline-adapter/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-d006556f-22ae-4421-a6de-14c8cbf61552-module@workspace:packages/tools/s-validator/dist/pkg/esm":
+"@coffeekraken/internal-b9131fc5-b7d7-4d71-aa95-027a2be8dea4@workspace:packages/renderers/s-view-renderer-engine-twig/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-d006556f-22ae-4421-a6de-14c8cbf61552-module@workspace:packages/tools/s-validator/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-b9131fc5-b7d7-4d71-aa95-027a2be8dea4@workspace:packages/renderers/s-view-renderer-engine-twig/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-d0929162-210a-4ee7-b1a4-e931f16a550e@workspace:packages/config/s-config-adapter/dist/pkg/esm":
+"@coffeekraken/internal-b915d9d7-316e-47de-b383-09d046caf44c@workspace:packages/features/s-inline-feature/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-d0929162-210a-4ee7-b1a4-e931f16a550e@workspace:packages/config/s-config-adapter/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-b915d9d7-316e-47de-b383-09d046caf44c@workspace:packages/features/s-inline-feature/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-d5e96ac5-1a14-4101-bc48-c3dec2b9f278@workspace:packages/vite/s-vite-postcss-plugin/dist/pkg/cjs":
+"@coffeekraken/internal-ba3cf91b-8a8f-4601-9f51-96c14acd1021@workspace:packages/components/s-slider-component/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-d5e96ac5-1a14-4101-bc48-c3dec2b9f278@workspace:packages/vite/s-vite-postcss-plugin/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-ba3cf91b-8a8f-4601-9f51-96c14acd1021@workspace:packages/components/s-slider-component/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-da104884-45a6-48c8-befa-3c5505490365@workspace:packages/config/s-config/dist/pkg/cjs":
+"@coffeekraken/internal-bb05908e-70e7-430e-9095-503de015b5aa@workspace:packages/core/s-monorepo/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-da104884-45a6-48c8-befa-3c5505490365@workspace:packages/config/s-config/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-bb05908e-70e7-430e-9095-503de015b5aa@workspace:packages/core/s-monorepo/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-da2a36bc-9731-4ce9-b4fb-2b02052f49ea@workspace:packages/renderers/s-view-renderer-engine-blade/dist/pkg/cjs":
+"@coffeekraken/internal-cbbf749f-ceae-4a7a-bc22-2dad214ee57b@workspace:packages/app/s-kitchen/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-da2a36bc-9731-4ce9-b4fb-2b02052f49ea@workspace:packages/renderers/s-view-renderer-engine-blade/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-cbbf749f-ceae-4a7a-bc22-2dad214ee57b@workspace:packages/app/s-kitchen/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-e224723c-a0d5-4306-a3b3-4ec3079a8d73@workspace:packages/builders/s-favicon-builder/dist/pkg/esm":
+"@coffeekraken/internal-cd1faa6e-91ad-4a95-911b-0fca483211e4@workspace:packages/core/s-event-emitter/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-e224723c-a0d5-4306-a3b3-4ec3079a8d73@workspace:packages/builders/s-favicon-builder/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-cd1faa6e-91ad-4a95-911b-0fca483211e4@workspace:packages/core/s-event-emitter/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-e5578cc0-48d7-44f8-a15d-a48a2630e736@workspace:packages/tools/s-bench/dist/pkg/cjs":
+"@coffeekraken/internal-ce4efabe-9ce8-4e4d-b80e-fec99b305d32@workspace:packages/themes/s-theme/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-e5578cc0-48d7-44f8-a15d-a48a2630e736@workspace:packages/tools/s-bench/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-ce4efabe-9ce8-4e4d-b80e-fec99b305d32@workspace:packages/themes/s-theme/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-e6aec5d3-a610-4539-a9da-782a8c44acc4@workspace:packages/postcss/s-postcss-sugar-plugin/dist/pkg/cjs":
+"@coffeekraken/internal-ce5c2813-3cfe-4684-a78d-e645891aeaaf@workspace:packages/features/s-activate-feature/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-e6aec5d3-a610-4539-a9da-782a8c44acc4@workspace:packages/postcss/s-postcss-sugar-plugin/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-ce5c2813-3cfe-4684-a78d-e645891aeaaf@workspace:packages/features/s-activate-feature/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-e75f52f7-b71f-42c3-8ca3-ddee407595a3@workspace:packages/core/s-promise/dist/pkg/cjs":
+"@coffeekraken/internal-d10e02f6-2a25-46d5-94a1-0e5d6984f359@workspace:packages/core/s-descriptor/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-e75f52f7-b71f-42c3-8ca3-ddee407595a3@workspace:packages/core/s-promise/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-d10e02f6-2a25-46d5-94a1-0e5d6984f359@workspace:packages/core/s-descriptor/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-eb648474-e956-488b-adf6-d4a3dca8f3bd@workspace:packages/tools/s-timer/dist/pkg/esm":
+"@coffeekraken/internal-d2e76114-eece-4435-bb43-e823ed1420e0@workspace:packages/components/s-code-example-component/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-eb648474-e956-488b-adf6-d4a3dca8f3bd@workspace:packages/tools/s-timer/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-d2e76114-eece-4435-bb43-e823ed1420e0@workspace:packages/components/s-code-example-component/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-ece8fe47-804a-48ac-943b-8ca38b729cc6@workspace:packages/renderers/s-view-renderer/dist/pkg/esm":
+"@coffeekraken/internal-d3dbbee5-f3c4-4f99-83ad-4cf197997ec9@workspace:packages/core/s-package/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-ece8fe47-804a-48ac-943b-8ca38b729cc6@workspace:packages/renderers/s-view-renderer/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-d3dbbee5-f3c4-4f99-83ad-4cf197997ec9@workspace:packages/core/s-package/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-f43b502d-4cc7-46e1-a3fd-d44ea1756ea1@workspace:packages/tools/s-url/dist/pkg/esm":
+"@coffeekraken/internal-d45c64d4-1a0c-47a2-8238-67ab56e55bdd@workspace:packages/@websites/coffeekraken-io/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-f43b502d-4cc7-46e1-a3fd-d44ea1756ea1@workspace:packages/tools/s-url/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-d45c64d4-1a0c-47a2-8238-67ab56e55bdd@workspace:packages/@websites/coffeekraken-io/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-f4c5d475-974a-4675-a56e-c87b82809cb7@workspace:packages/features/s-sugar-feature/dist/pkg/esm":
+"@coffeekraken/internal-d5ff3fb1-1062-467d-b22c-5860210b847e@workspace:packages/core/s-type/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-f4c5d475-974a-4675-a56e-c87b82809cb7@workspace:packages/features/s-sugar-feature/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-d5ff3fb1-1062-467d-b22c-5860210b847e@workspace:packages/core/s-type/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-fa19ba58-479f-44b2-82cb-69b76c17483d@workspace:packages/servers/s-frontend-server/dist/pkg/cjs":
+"@coffeekraken/internal-d63b9989-f13e-4ceb-bfa5-99dd2cf66c52@workspace:packages/renderers/s-view-renderer-engine-lit/dist/pkg/cjs":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-fa19ba58-479f-44b2-82cb-69b76c17483d@workspace:packages/servers/s-frontend-server/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-d63b9989-f13e-4ceb-bfa5-99dd2cf66c52@workspace:packages/renderers/s-view-renderer-engine-lit/dist/pkg/cjs"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-fc22bdbe-1e8b-4d84-bb5a-26883687542d@workspace:packages/http/s-request/dist/pkg/esm":
+"@coffeekraken/internal-d6575b88-8e3c-493d-bd10-50b3242a8c73@workspace:packages/tools/s-glob/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-fc22bdbe-1e8b-4d84-bb5a-26883687542d@workspace:packages/http/s-request/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-d6575b88-8e3c-493d-bd10-50b3242a8c73@workspace:packages/tools/s-glob/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-fc97084b-b27b-4997-b76a-41642008de85@workspace:packages/dataFiles/s-data-file-generic/dist/pkg/esm":
+"@coffeekraken/internal-d779beff-5e32-4d55-9dbb-2adafd82f7eb@workspace:packages/core/s-stdio/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-fc97084b-b27b-4997-b76a-41642008de85@workspace:packages/dataFiles/s-data-file-generic/dist/pkg/esm"
+  resolution: "@coffeekraken/internal-d779beff-5e32-4d55-9dbb-2adafd82f7eb@workspace:packages/core/s-stdio/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-feef680d-1409-47b0-8d5c-99b1cefb8b97@workspace:packages/core/s-descriptor/dist/pkg/cjs":
+"@coffeekraken/internal-d8736068-ffcc-492f-b4d5-4f0b2fa05bc4@workspace:packages/core/s-interface/dist/pkg/esm":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-feef680d-1409-47b0-8d5c-99b1cefb8b97@workspace:packages/core/s-descriptor/dist/pkg/cjs"
+  resolution: "@coffeekraken/internal-d8736068-ffcc-492f-b4d5-4f0b2fa05bc4@workspace:packages/core/s-interface/dist/pkg/esm"
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/internal-d9e79193-92f4-4fdd-a0db-502178c84c60@workspace:packages/core/s-log/dist/pkg/esm":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/internal-d9e79193-92f4-4fdd-a0db-502178c84c60@workspace:packages/core/s-log/dist/pkg/esm"
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/internal-da20d3c8-92a8-4ddf-a5ec-bb5569417159@workspace:packages/core/s-docblock/dist/pkg/cjs":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/internal-da20d3c8-92a8-4ddf-a5ec-bb5569417159@workspace:packages/core/s-docblock/dist/pkg/cjs"
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/internal-da58bc58-d004-413f-86c0-6bb0fb313bd7@workspace:packages/core/s-descriptor/dist/pkg/cjs":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/internal-da58bc58-d004-413f-86c0-6bb0fb313bd7@workspace:packages/core/s-descriptor/dist/pkg/cjs"
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/internal-db5ad6ed-1e97-4df6-8d0d-7c172c33ff53@workspace:packages/tools/s-duration/dist/pkg/esm":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/internal-db5ad6ed-1e97-4df6-8d0d-7c172c33ff53@workspace:packages/tools/s-duration/dist/pkg/esm"
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/internal-dbef66aa-d8d5-4165-a878-1e5804691581@workspace:packages/builders/s-markdown-builder/dist/pkg/cjs":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/internal-dbef66aa-d8d5-4165-a878-1e5804691581@workspace:packages/builders/s-markdown-builder/dist/pkg/cjs"
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/internal-de30b6b1-7bb6-4def-8d6f-19480206a492@workspace:packages/features/s-floating-feature/dist/pkg/esm":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/internal-de30b6b1-7bb6-4def-8d6f-19480206a492@workspace:packages/features/s-floating-feature/dist/pkg/esm"
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/internal-de4b5269-02ae-4af7-86e1-f7600e8e7347@workspace:packages/core/s-docblock/dist/pkg/esm":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/internal-de4b5269-02ae-4af7-86e1-f7600e8e7347@workspace:packages/core/s-docblock/dist/pkg/esm"
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/internal-dfd257ca-1278-4acd-afe0-51635f41c111@workspace:packages/core/s-env/dist/pkg/cjs":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/internal-dfd257ca-1278-4acd-afe0-51635f41c111@workspace:packages/core/s-env/dist/pkg/cjs"
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/internal-e157d7f9-b462-42ec-967c-53f584375cbe@workspace:packages/tools/s-glob/dist/pkg/cjs":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/internal-e157d7f9-b462-42ec-967c-53f584375cbe@workspace:packages/tools/s-glob/dist/pkg/cjs"
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/internal-e2da8ef1-4b72-4f5b-9bd4-0df5de4fb945@workspace:packages/builders/s-static-builder/dist/pkg/esm":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/internal-e2da8ef1-4b72-4f5b-9bd4-0df5de4fb945@workspace:packages/builders/s-static-builder/dist/pkg/esm"
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/internal-e40edc56-1ae3-4008-9226-6948781d9ea9@workspace:packages/features/s-appear-feature/dist/pkg/esm":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/internal-e40edc56-1ae3-4008-9226-6948781d9ea9@workspace:packages/features/s-appear-feature/dist/pkg/esm"
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/internal-e687b1ad-815b-455c-87fa-aede866f5dc1@workspace:packages/renderers/s-view-renderer-engine-blade/dist/pkg/esm":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/internal-e687b1ad-815b-455c-87fa-aede866f5dc1@workspace:packages/renderers/s-view-renderer-engine-blade/dist/pkg/esm"
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/internal-e998604b-6094-44e3-9f30-f8f8ab467af3@workspace:packages/core/s-frontspec/dist/pkg/cjs":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/internal-e998604b-6094-44e3-9f30-f8f8ab467af3@workspace:packages/core/s-frontspec/dist/pkg/cjs"
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/internal-f1892277-f593-40ef-8721-d622124b8b86@workspace:packages/builders/s-typescript-builder/dist/pkg/cjs":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/internal-f1892277-f593-40ef-8721-d622124b8b86@workspace:packages/builders/s-typescript-builder/dist/pkg/cjs"
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/internal-f1bb7b87-a21f-43d3-8c14-569a264b6a66@workspace:packages/renderers/s-view-renderer-engine-twig/dist/pkg/esm":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/internal-f1bb7b87-a21f-43d3-8c14-569a264b6a66@workspace:packages/renderers/s-view-renderer-engine-twig/dist/pkg/esm"
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/internal-f5718c80-4df5-498b-b618-35ccbd8ed045@workspace:packages/core/s-docmap/dist/pkg/esm":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/internal-f5718c80-4df5-498b-b618-35ccbd8ed045@workspace:packages/core/s-docmap/dist/pkg/esm"
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/internal-f5e4d863-0a45-4fa7-bd9f-b4419d0691d4@workspace:packages/tools/s-handlebars/dist/pkg/esm":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/internal-f5e4d863-0a45-4fa7-bd9f-b4419d0691d4@workspace:packages/tools/s-handlebars/dist/pkg/esm"
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/internal-f8fc4520-50af-4416-890f-6ed922eefb6c@workspace:packages/servers/s-frontend-server/dist/pkg/cjs":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/internal-f8fc4520-50af-4416-890f-6ed922eefb6c@workspace:packages/servers/s-frontend-server/dist/pkg/cjs"
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/internal-fa3f2ad7-1007-48fe-bd5e-ac43c710a050@workspace:packages/tools/s-timer/dist/pkg/cjs":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/internal-fa3f2ad7-1007-48fe-bd5e-ac43c710a050@workspace:packages/tools/s-timer/dist/pkg/cjs"
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/internal-faae8a1a-4dfa-4dcf-8fec-0d7b7720fcf1@workspace:packages/config/s-config/dist/pkg/cjs":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/internal-faae8a1a-4dfa-4dcf-8fec-0d7b7720fcf1@workspace:packages/config/s-config/dist/pkg/cjs"
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/internal-fc0fa69e-236f-46a5-9f63-05504ae4c9bb@workspace:packages/core/s-env/dist/pkg/esm":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/internal-fc0fa69e-236f-46a5-9f63-05504ae4c9bb@workspace:packages/core/s-env/dist/pkg/esm"
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/internal-fce180b1-cff6-4eac-85e5-5248d82e66d0@workspace:packages/config/s-config-folder-adapter/dist/pkg/cjs":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/internal-fce180b1-cff6-4eac-85e5-5248d82e66d0@workspace:packages/config/s-config-folder-adapter/dist/pkg/cjs"
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/internal-fce33b32-0a3f-4806-8c73-26521d66e312@workspace:packages/renderers/s-view-renderer/dist/pkg/esm":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/internal-fce33b32-0a3f-4806-8c73-26521d66e312@workspace:packages/renderers/s-view-renderer/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
@@ -2631,6 +2757,15 @@ __metadata:
     "@coffeekraken/s-env": ^2.0.0-alpha.5
     "@coffeekraken/s-typescript-builder": ^2.0.0-alpha.5
     "@coffeekraken/sugar": ^2.0.0-alpha.5
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/s-css-animation@workspace:packages/dom/s-css-animate":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/s-css-animation@workspace:packages/dom/s-css-animate"
+  dependencies:
+    animejs: ^3.2.1
+    rematrix: ^0.7.2
   languageName: unknown
   linkType: soft
 
@@ -3478,6 +3613,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@coffeekraken/s-testinator@workspace:packages/test/s-testinator":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/s-testinator@workspace:packages/test/s-testinator"
+  dependencies:
+    chokidar: ^3.5.3
+    typescript: ^4.6.3
+  languageName: unknown
+  linkType: soft
+
 "@coffeekraken/s-theme-switcher-component@^2.0.0-alpha.5, @coffeekraken/s-theme-switcher-component@workspace:packages/components/s-theme-switcher-component":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-theme-switcher-component@workspace:packages/components/s-theme-switcher-component"
@@ -3852,6 +3996,8 @@ __metadata:
     jest-useragent-mock: ^0.1.1
     js-string-compression: ^1.0.1
     json-cyclic: ^1.0.2
+    json-schema-deref-sync: ^0.14.0
+    jsonref: ^8.0.8
     keypress: ^0.2.1
     lodash: ^4.17.21
     lodash.clone: ^4.5.0
@@ -8487,6 +8633,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"charenc@npm:~0.0.1":
+  version: 0.0.2
+  resolution: "charenc@npm:0.0.2"
+  checksum: 81dcadbe57e861d527faf6dd3855dc857395a1c4d6781f4847288ab23cffb7b3ee80d57c15bba7252ffe3e5e8019db767757ee7975663ad2ca0939bb8fcaf2e5
+  languageName: node
+  linkType: hard
+
 "check-error@npm:^1.0.2":
   version: 1.0.2
   resolution: "check-error@npm:1.0.2"
@@ -8593,36 +8746,6 @@ __metadata:
   checksum: fd81f1edd2d3b0f6cb077b2e84365136d87b9db8c055928c1ad69da8a76c2c2f19cba8ea51b90238302157ca927f91f92b653e933f2398dde4867500f08d6e62
   languageName: node
   linkType: hard
-
-"cjs-2ec56c@workspace:packages/core/cli/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "cjs-2ec56c@workspace:packages/core/cli/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"cjs-509d32@workspace:packages/codeFormatters/s-code-formatter/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "cjs-509d32@workspace:packages/codeFormatters/s-code-formatter/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"cjs-64a27f@workspace:packages/components/s-date-picker-component/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "cjs-64a27f@workspace:packages/components/s-date-picker-component/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"cjs-7ebabe@workspace:packages/components/s-color-picker-component/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "cjs-7ebabe@workspace:packages/components/s-color-picker-component/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"cjs-be41bc@workspace:packages/core/s-class/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "cjs-be41bc@workspace:packages/core/s-class/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
 
 "cjs-module-lexer@npm:^1.0.0":
   version: 1.2.2
@@ -9431,6 +9554,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"crypt@npm:~0.0.1":
+  version: 0.0.2
+  resolution: "crypt@npm:0.0.2"
+  checksum: baf4c7bbe05df656ec230018af8cf7dbe8c14b36b98726939cef008d473f6fe7a4fad906cfea4062c93af516f1550a3f43ceb4d6615329612c6511378ed9fe34
+  languageName: node
+  linkType: hard
+
 "crypto-js@npm:^4.0.0":
   version: 4.1.1
   resolution: "crypto-js@npm:4.1.1"
@@ -9828,6 +9958,13 @@ __metadata:
     es5-ext: ^0.10.50
     type: ^1.0.1
   checksum: 49ca0639c7b822db670de93d4fbce44b4aa072cd848c76292c9978a8cd0fff1028763020ff4b0f147bd77bfe29b4c7f82e0f71ade76b2a06100543cdfd948d19
+  languageName: node
+  linkType: hard
+
+"dag-map@npm:~1.0.0":
+  version: 1.0.2
+  resolution: "dag-map@npm:1.0.2"
+  checksum: a46bee1adda1459abe778b0c3616ef8c4ec14c314d38c3daa6f6a695ceae7c4b76ea3efa78385c1f25bb4d600566b3e1edd40e9ec3e862bd8927edca828025ed
   languageName: node
   linkType: hard
 
@@ -11513,57 +11650,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esm-25ee22@workspace:packages/@websites/coffeekraken-io/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "esm-25ee22@workspace:packages/@websites/coffeekraken-io/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
 "esm-29d658@workspace:packages/@websites/coffeekraken-io/static/dist/pkg/esm":
   version: 0.0.0-use.local
   resolution: "esm-29d658@workspace:packages/@websites/coffeekraken-io/static/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"esm-2c9b60@workspace:packages/components/s-theme-switcher-component/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "esm-2c9b60@workspace:packages/components/s-theme-switcher-component/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"esm-3df21c@workspace:packages/core/cli/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "esm-3df21c@workspace:packages/core/cli/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"esm-4c84b6@workspace:packages/features/s-inline-feature/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "esm-4c84b6@workspace:packages/features/s-inline-feature/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"esm-8afde1@workspace:packages/codeFormatters/s-code-formatter/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "esm-8afde1@workspace:packages/codeFormatters/s-code-formatter/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"esm-a79906@workspace:packages/components/s-date-picker-component/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "esm-a79906@workspace:packages/components/s-date-picker-component/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"esm-b026f9@workspace:packages/features/s-appear-feature/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "esm-b026f9@workspace:packages/features/s-appear-feature/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"esm-e00f02@workspace:packages/components/s-rating-component/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "esm-e00f02@workspace:packages/components/s-rating-component/dist/pkg/esm"
   languageName: unknown
   linkType: soft
 
@@ -14432,7 +14521,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-buffer@npm:^1.0.2":
+"is-buffer@npm:^1.0.2, is-buffer@npm:~1.1.1":
   version: 1.1.6
   resolution: "is-buffer@npm:1.1.6"
   checksum: 4a186d995d8bbf9153b4bd9ff9fd04ae75068fe695d29025d25e592d9488911eeece84eefbd8fa41b8ddcc0711058a71d4c466dcf6f1f6e1d83830052d8ca707
@@ -15978,6 +16067,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"json-schema-deref-sync@npm:^0.14.0":
+  version: 0.14.0
+  resolution: "json-schema-deref-sync@npm:0.14.0"
+  dependencies:
+    clone: ^2.1.2
+    dag-map: ~1.0.0
+    is-valid-path: ^0.1.1
+    lodash: ^4.17.13
+    md5: ~2.2.0
+    memory-cache: ~0.2.0
+    traverse: ~0.6.6
+    valid-url: ~1.0.9
+  checksum: f737a064769000829329face3df8b0c63c564454faf33c367aac11a66e443a5ab4f0f2b16c581f0da992a31b5c6a308f665ef9eee9a4ef0cb71d5a96ef116cd5
+  languageName: node
+  linkType: hard
+
 "json-schema-traverse@npm:^0.4.1":
   version: 0.4.1
   resolution: "json-schema-traverse@npm:0.4.1"
@@ -16055,6 +16160,13 @@ __metadata:
     graceful-fs:
       optional: true
   checksum: 7af3b8e1ac8fe7f1eccc6263c6ca14e1966fcbc74b618d3c78a0a2075579487547b94f72b7a1114e844a1e15bb00d440e5d1720bfc4612d790a6f285d5ea8354
+  languageName: node
+  linkType: hard
+
+"jsonref@npm:^8.0.8":
+  version: 8.0.8
+  resolution: "jsonref@npm:8.0.8"
+  checksum: ffc907b0744ab6581ca377b2711def0fc5fca9f1c0084833021be2e230287cc4f40753d5d53fb7d857d5f8685158a3fcf8f007b0a20d009f820836f5fad072dd
   languageName: node
   linkType: hard
 
@@ -16522,7 +16634,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:, lodash@npm:4.17.21, lodash@npm:^4.14.0, lodash@npm:^4.15.0, lodash@npm:^4.17.10, lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.17.4, lodash@npm:^4.7.0, lodash@npm:^4.8.0":
+"lodash@npm:, lodash@npm:4.17.21, lodash@npm:^4.14.0, lodash@npm:^4.15.0, lodash@npm:^4.17.10, lodash@npm:^4.17.13, lodash@npm:^4.17.14, lodash@npm:^4.17.15, lodash@npm:^4.17.20, lodash@npm:^4.17.21, lodash@npm:^4.17.4, lodash@npm:^4.7.0, lodash@npm:^4.8.0":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
@@ -16887,6 +16999,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"md5@npm:~2.2.0":
+  version: 2.2.1
+  resolution: "md5@npm:2.2.1"
+  dependencies:
+    charenc: ~0.0.1
+    crypt: ~0.0.1
+    is-buffer: ~1.1.1
+  checksum: 2237e583f961d04d43c59c2f9383d1e47099427fa37f9dc50e8aec32e770f8b038ad9268c2523a7c8041ab6f4678a742ca533a7f670dbc2857c5b18388cf4d71
+  languageName: node
+  linkType: hard
+
 "mdn-data@npm:2.0.14":
   version: 2.0.14
   resolution: "mdn-data@npm:2.0.14"
@@ -16931,6 +17054,13 @@ __metadata:
     next-tick: ^1.1.0
     timers-ext: ^0.1.7
   checksum: 4065d94416dbadac56edf5947bf342beca0e9f051f33ad60d7c4baf3f6ca0f3c6fdb770c5caed5a89c0ceaf9121428582f396445d591785281383d60aa883418
+  languageName: node
+  linkType: hard
+
+"memory-cache@npm:~0.2.0":
+  version: 0.2.0
+  resolution: "memory-cache@npm:0.2.0"
+  checksum: 255c87fec360ce06818ca7aeb5850d798e14950a9fcea879d88e1f8d1f4a6cffb8ed16da54aa677f5ec8e47773fbe15775a1cdf837ac190e17e9fb4b71e87bee
   languageName: node
   linkType: hard
 
@@ -23435,7 +23565,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"traverse@npm:^0.6.6":
+"traverse@npm:^0.6.6, traverse@npm:~0.6.6":
   version: 0.6.6
   resolution: "traverse@npm:0.6.6"
   checksum: e2afa72f11efa9ba31ed763d2d9d2aa244612f22015d16c0ea3ba5f6ca8bf071de87f8108b721885cce06ea4a36ef4605d9228c67e431d9015ea4685cb364420
@@ -24189,6 +24319,13 @@ __metadata:
     convert-source-map: ^1.6.0
     source-map: ^0.7.3
   checksum: 54ce92bec2727879626f623d02c8d193f0c7e919941fa373ec135189a8382265117f5316ea317a1e12a5f9c13d84d8449052a731fe3306fa4beaafbfa4cab229
+  languageName: node
+  linkType: hard
+
+"valid-url@npm:~1.0.9":
+  version: 1.0.9
+  resolution: "valid-url@npm:1.0.9"
+  checksum: 3ecb030559404441c2cf104cbabab8770efb0f36d117db03d1081052ef133015a68806148ce954bb4dd0b5c42c14b709a88783c93d66b0916cb67ba771c98702
   languageName: node
   linkType: hard
 

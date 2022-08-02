@@ -191,14 +191,14 @@ class SEventEmitter extends SClass implements ISEventEmitter {
             !sourceSEventEmitter ||
             !sourceSEventEmitter.on ||
             typeof sourceSEventEmitter.on !== 'function'
-        )
+        ) {
             return sourceSEventEmitter;
+        }
 
         // listen for all on the source promise
-
         sourceSEventEmitter.on(set.events || '*', async (value, metas) => {
             // @TODO    check why this arrive...
-            if (!metas) {
+            if (!metas || !value) {
                 return;
             }
 
@@ -270,8 +270,19 @@ class SEventEmitter extends SClass implements ISEventEmitter {
                         value.value = __toString(value.value);
                     }
 
+                    if (!this._ipcInstance._pipedEventsUids) {
+                        this._ipcInstance._pipedEventsUids = [];
+                    }
+
                     // @ts-ignore
-                    if (this._ipcInstance) {
+                    if (
+                        this._ipcInstance &&
+                        !this._ipcInstance._pipedEventsUids.includes(
+                            emitMetas.uid,
+                        )
+                    ) {
+                        this._ipcInstance._pipedEventsUids.push(emitMetas.uid);
+
                         // @ts-ignore
                         this._ipcInstance.of[`ipc-${process.ppid}`].emit(
                             'message',
@@ -281,11 +292,6 @@ class SEventEmitter extends SClass implements ISEventEmitter {
                             },
                         );
                     }
-
-                    // process.send({
-                    //     value: value,
-                    //     metas: emitMetas,
-                    // });
                 } else {
                     (<SEventEmitter>destSEventEmitter).emit(
                         metas.event,
@@ -585,6 +591,9 @@ class SEventEmitter extends SClass implements ISEventEmitter {
         });
     }
     async _emit(logObj: ISEventEmitterEventObj) {
+        // assign a unique id to the log
+        logObj.metas.uid = __uniqid();
+
         // if is an ask event, set the askId in metas
         if (logObj.event === 'ask') {
             // @ts-ignore

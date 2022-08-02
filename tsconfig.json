@@ -7,8 +7,10 @@
         "packages/*/*/src/node/**/*.ts",
         "packages/*/*/src/shared/**/*.ts",
         "packages/*/*/.local/.sugar/**/*.ts",
-        "packages/*/*/.sugar/**/*.ts"
-, "packages/components/s-rating-component/src/js/SRatingComponentts"    ],
+        "packages/*/*/.sugar/**/*.ts",
+        "packages/components/s-rating-component/src/js/SRatingComponentts",
+        "packages/core/s-event-emitter/src/shared/__tests__/childProcess.js"
+    ],
     "exclude": [
         "/**/lib",
         "/node_modules/**",

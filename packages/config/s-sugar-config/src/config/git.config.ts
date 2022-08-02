@@ -3,35 +3,35 @@ import __childProcess from 'child_process';
 
 export function postprocess(api) {
     try {
-        if (!api.config.repo?.url) {
+        if (!api.this.repo?.url) {
             const packageJson = __packageJsonSync();
             if (packageJson.repository?.url) {
-                api.config.repo.url = packageJson.repository.url;
+                api.this.repo.url = packageJson.repository.url;
             } else {
                 const url = __childProcess
                     .execSync('git config --get remote.origin.url')
                     .toString()
                     .trim();
-                api.config.repo.url = url;
+                api.this.repo.url = url;
             }
         }
-        if (!api.config.user?.name) {
+        if (!api.this.user?.name) {
             const name = __childProcess
                 .execSync('git config --get user.name')
                 .toString()
                 .trim();
-            api.config.user.name = name;
+            api.this.user.name = name;
         }
-        if (!api.config.user?.email) {
+        if (!api.this.user?.email) {
             const email = __childProcess
                 .execSync('git config --get user.email')
                 .toString()
                 .trim();
-            api.config.user.email = email;
+            api.this.user.email = email;
         }
     } catch (e) {}
 
-    return api.config;
+    return api.this;
 }
 
 export default function (api) {

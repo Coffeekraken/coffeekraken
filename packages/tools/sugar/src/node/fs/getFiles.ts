@@ -26,8 +26,10 @@ import __onProcessExit from '../process/onProcessExit';
  * const watcher = getFiles('** /*.txt', {
  *  watch: true
  * });
- * watcher.on('add', (file) => {
+ * watcher.on('add', ({file, resolve}) => {
  *  // do something with your file
+ *  // mark the file as treated
+ *  resolve();
  * });
  *
  * @see             https://github.com/paulmillr/chokidar
@@ -126,8 +128,17 @@ export default function getFiles(
                         file = __SFile.new(filePath);
                     }
 
+                    let handleFilePromiseResolve;
+                    const handleFilePromise = new Promise((resolve) => {
+                        handleFilePromiseResolve = resolve;
+                    });
+                    buildPromises.push(handleFilePromise);
+
                     // emit an event
-                    emit(listener, file);
+                    emit(listener, {
+                        file,
+                        resolve: handleFilePromiseResolve,
+                    });
 
                     if (listener === 'add' && !foundFiles.includes(file)) {
                         foundFiles.push(file);

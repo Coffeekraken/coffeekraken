@@ -89,6 +89,18 @@
                     "process": "./dist/pkg/esm/cli/process/kill.cli.js"
                 }
             }
+        },
+        {
+            "stack": "nvm",
+            "description": "NVM related actions",
+            "actions": {
+                "autoSwitch": {
+                    "scope": "global",
+                    "description": "Add the necessary (zsh, bash) script to make your NVM automatically change the node version when detecting a .nvmrc file in your project",
+                    "interface": "./dist/pkg/esm/node/nvm/interface/SCliNvmAutoSwitchParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/nvm/autoSwitch.cli.js"
+                }
+            }
         }
     ]
 }

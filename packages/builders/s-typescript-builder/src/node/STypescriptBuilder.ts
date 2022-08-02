@@ -11,7 +11,7 @@ import __monorepoToPackageAbsolutePathDeepMap from '@coffeekraken/sugar/node/mon
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __fs from 'fs';
+import __fs, { promises as __fsPromise } from 'fs';
 import __path from 'path';
 import __ts from 'typescript';
 // import __STypescriptBuilderSettingsInterface from './interface/STypescriptBuilderSettingsInterface';
@@ -146,12 +146,6 @@ export default class STypescriptBuilder extends __SBuilder {
             if (path.match(/\.ts$/)) {
                 const builder = new STypescriptBuilder(settings ?? {});
 
-                if (__fs.existsSync(path) && !path.match(/\.tsx?$/)) {
-                    try {
-                        __fs.unlinkSync(path.replace(/\.ts(x)?/, '.js$1'));
-                    } catch (e) {}
-                }
-
                 let res;
 
                 function remove() {
@@ -175,7 +169,9 @@ export default class STypescriptBuilder extends __SBuilder {
                     ...(params ?? {}),
                 });
 
-                // console.log('RESOLVE', path, res.files[0].path);
+                setTimeout(() => {
+                    remove();
+                }, 10000);
 
                 resolve({
                     path: res.files[0]?.file.path,
@@ -323,72 +319,78 @@ export default class STypescriptBuilder extends __SBuilder {
                 const buildedStack: string[] = [];
 
                 // listen for files change and add
-                filesPromise.on('add,change', async (filePath) => {
-                    // avoid to process in loop the same file saved over and over
-
-                    const savedFileIdx = buildedStack.indexOf(filePath);
-                    if (savedFileIdx !== -1) {
-                        return;
-                    }
-
-                    const relPath = __path.relative(
-                        finalParams.inDir,
-                        filePath,
-                    );
-
-                    let buildParams = Object.assign({}, finalParams);
-
-                    for (let [id, customSettings] of Object.entries(
-                        __SSugarConfig.getSafe(
-                            'typescriptBuilder.customSettings',
-                        ) ?? {},
-                    )) {
-                        if (__SGlob.match(filePath, customSettings.glob)) {
-                            formats =
-                                customSettings.settings?.formats ?? formats;
-                            buildParams = __deepMerge(
-                                buildParams,
-                                customSettings.settings ?? {},
-                            );
-                            break;
+                filesPromise.on(
+                    'add,change',
+                    async ({ file: filePath, resolve: resolveFile }) => {
+                        // avoid to process in loop the same file saved over and over
+                        const savedFileIdx = buildedStack.indexOf(filePath);
+                        if (savedFileIdx !== -1) {
+                            return;
                         }
-                    }
 
-                    // "localize" the file paths to the current package root
-                    buildParams = __monorepoToPackageAbsolutePathDeepMap(
-                        buildParams,
-                        finalParams.packageRoot ?? process.cwd(),
-                    );
-
-                    // generate all the requested formats
-
-                    for (let i = 0; i < formats.length; i++) {
-                        const format = formats[i];
-                        const buildedFileRes = await pipe(
-                            this._buildFile(
-                                __deepMerge(
-                                    {
-                                        cwd: finalParams.inDir,
-                                        relPath,
-                                        path: filePath,
-                                        format,
-                                        platform: finalParams.platform,
-                                        outDir: finalParams.outDir,
-                                    },
-                                    buildParams,
-                                    {
-                                        watch: false,
-                                    },
-                                ),
-                                finalParams,
-                            ),
+                        const relPath = __path.relative(
+                            finalParams.inDir,
+                            filePath,
                         );
 
-                        if (!buildedFiles.includes(buildedFileRes)) {
-                            buildedFiles.push(buildedFileRes);
+                        let buildParams = Object.assign({}, finalParams);
+
+                        for (let [id, customSettings] of Object.entries(
+                            __SSugarConfig.getSafe(
+                                'typescriptBuilder.customSettings',
+                            ) ?? {},
+                        )) {
+                            if (__SGlob.match(filePath, customSettings.glob)) {
+                                formats =
+                                    customSettings.settings?.formats ?? formats;
+                                buildParams = __deepMerge(
+                                    buildParams,
+                                    customSettings.settings ?? {},
+                                );
+                                break;
+                            }
                         }
-                    }
-                });
+
+                        // "localize" the file paths to the current package root
+                        buildParams = __monorepoToPackageAbsolutePathDeepMap(
+                            buildParams,
+                            finalParams.packageRoot ?? process.cwd(),
+                        );
+
+                        // generate all the requested formats
+
+                        for (let i = 0; i < formats.length; i++) {
+                            const format = formats[i];
+                            const buildedFilePromise = pipe(
+                                this._buildFile(
+                                    __deepMerge(
+                                        {
+                                            cwd: finalParams.inDir,
+                                            relPath,
+                                            path: filePath,
+                                            format,
+                                            platform: finalParams.platform,
+                                            outDir: finalParams.outDir,
+                                        },
+                                        buildParams,
+                                        {
+                                            watch: false,
+                                        },
+                                    ),
+                                    finalParams,
+                                ),
+                            );
+                            const buildedFileRes = await buildedFilePromise;
+
+                            if (!buildedFiles.includes(buildedFileRes)) {
+                                buildedFiles.push(buildedFileRes);
+                            }
+                        }
+
+                        // set the file as resolved
+                        resolveFile();
+                    },
+                );
             },
             {
                 metas: {
@@ -419,11 +421,11 @@ export default class STypescriptBuilder extends __SBuilder {
                 .replace(/\.ts$/, '.js');
 
             // delete output file if exists and that a proper ts file exists also
-            if (__fs.existsSync(file.path) && __fs.existsSync(outFilePath)) {
-                try {
-                    __fs.unlinkSync(outFilePath);
-                } catch (e) {}
-            }
+            // if (__fs.existsSync(file.path) && __fs.existsSync(outFilePath)) {
+            //     try {
+            //         __fs.unlinkSync(outFilePath);
+            //     } catch (e) {}
+            // }
 
             const source = __fs.readFileSync(file.path).toString();
 
@@ -465,7 +467,8 @@ export default class STypescriptBuilder extends __SBuilder {
                 if (!__fs.existsSync(outPath)) {
                     __fs.mkdirSync(outPath, { recursive: true });
                 }
-                __fs.writeFileSync(outFilePath, result.outputText);
+
+                await __fsPromise.writeFile(outFilePath, result.outputText);
 
                 // dirty hash to make the bin file(s) executable
                 if (__path.basename(outFilePath) === 'sugar.cli.js') {

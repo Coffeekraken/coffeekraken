@@ -201,13 +201,13 @@ class SCodeFormatter extends __SClass {
                     this.settings,
                     settings,
                 );
-                const finalParams: ISCodeFormatterFormatParams =
-                    __SCodeFormatterFormatParamsInterface.apply(params);
+                const finalParams: ISCodeFormatterFormatParams = __SCodeFormatterFormatParamsInterface.apply(
+                    params,
+                );
 
                 let finalGlob = finalParams.glob;
 
-                const handledExtensions =
-                    this.constructor.getHandledExtensions();
+                const handledExtensions = this.constructor.getHandledExtensions();
                 if (finalParams.glob.match(/\/\*$/)) {
                     finalGlob += `.{${handledExtensions.join(',')}}`;
                 }
@@ -259,71 +259,88 @@ class SCodeFormatter extends __SClass {
                 const savedStack: string[] = [];
 
                 // listen for files change and add
-                filesPromise.on('add,change', async (file) => {
-                    // avoid to process in loop the same file saved over and over
-                    const savedFileIdx = savedStack.indexOf(file);
-                    if (savedFileIdx !== -1) {
-                        return;
-                    }
-
-                    const relFilePath = __path.relative(__packageRoot(), file);
-
-                    const duration = new __SDuration();
-
-                    // grab the file content
-                    const code = __fs.readFileSync(file, 'utf-8').toString();
-                    // get the file extension
-                    const extension = __path.extname(file).replace(/^\./, '');
-                    // get the appropriate formatter for this extension
-                    const formatter =
-                        SCodeFormatter.getFormatterForExtension(extension);
-                    if (!formatter) {
-                        emit('log', {
-                            type: __SLog.TYPE_WARN,
-                            value: `<yellow>[format]</yellow> No formatter registered for the "<magenta>.${extension}</magenta>" files`,
-                        });
-                    } else {
-                        emit('log', {
-                            type: __SLog.TYPE_INFO,
-                            value: `<yellow>[format]</yellow> Formatting file "<cyan>${relFilePath}</cyan>"`,
-                        });
-                        try {
-                            // apply the formatter on the file content
-                            const result = await formatter.format(code, {
-                                filePath: file,
-                                extension,
-                            });
-
-                            // avoid process the same file more than 1x by second
-                            // this is to avoid issues with multiple formatt process that might
-                            // save each in their corner and enter in a loop of formatting...
-                            savedStack.push(file);
-                            setTimeout(() => {
-                                const savedFileIdx = savedStack.indexOf(file);
-                                if (savedFileIdx !== -1) {
-                                    // remove the file for next process
-                                    savedStack.splice(savedFileIdx, 1);
-                                }
-                            }, finalSettings.timeoutBetweenSameFileProcess);
-
-                            // write file back with formatted code
-                            __fs.writeFileSync(file, result.code, 'utf-8');
-
-                            emit('log', {
-                                clear: 1,
-                                type: __SLog.TYPE_INFO,
-                                value: `<green>[format]</green> File "<cyan>${relFilePath}</cyan>" formatted <green>successfully</green> in <yellow>${
-                                    duration.end().formatedDuration
-                                }</yellow>`,
-                            });
-                        } catch (e) {
-                            emit('log', {
-                                type: __SLog.TYPE_ERROR,
-                                value: e.toString(),
-                            });
+                filesPromise.on(
+                    'add,change',
+                    async ({ file, resolve: resolveFile }) => {
+                        // avoid to process in loop the same file saved over and over
+                        const savedFileIdx = savedStack.indexOf(file);
+                        if (savedFileIdx !== -1) {
+                            return;
                         }
-                    }
-                });
+
+                        const relFilePath = __path.relative(
+                            __packageRoot(),
+                            file,
+                        );
+
+                        const duration = new __SDuration();
+
+                        // grab the file content
+                        const code = __fs
+                            .readFileSync(file, 'utf-8')
+                            .toString();
+                        // get the file extension
+                        const extension = __path
+                            .extname(file)
+                            .replace(/^\./, '');
+                        // get the appropriate formatter for this extension
+                        const formatter = SCodeFormatter.getFormatterForExtension(
+                            extension,
+                        );
+                        if (!formatter) {
+                            emit('log', {
+                                type: __SLog.TYPE_WARN,
+                                value: `<yellow>[format]</yellow> No formatter registered for the "<magenta>.${extension}</magenta>" files`,
+                            });
+                            // resole file
+                            resolveFile();
+                        } else {
+                            emit('log', {
+                                type: __SLog.TYPE_INFO,
+                                value: `<yellow>[format]</yellow> Formatting file "<cyan>${relFilePath}</cyan>"`,
+                            });
+                            try {
+                                // apply the formatter on the file content
+                                const result = await formatter.format(code, {
+                                    filePath: file,
+                                    extension,
+                                });
+
+                                // avoid process the same file more than 1x by second
+                                // this is to avoid issues with multiple formatt process that might
+                                // save each in their corner and enter in a loop of formatting...
+                                savedStack.push(file);
+                                setTimeout(() => {
+                                    const savedFileIdx = savedStack.indexOf(
+                                        file,
+                                    );
+                                    if (savedFileIdx !== -1) {
+                                        // remove the file for next process
+                                        savedStack.splice(savedFileIdx, 1);
+                                    }
+                                }, finalSettings.timeoutBetweenSameFileProcess);
+
+                                // write file back with formatted code
+                                __fs.writeFileSync(file, result.code, 'utf-8');
+
+                                emit('log', {
+                                    clear: 1,
+                                    type: __SLog.TYPE_INFO,
+                                    value: `<green>[format]</green> File "<cyan>${relFilePath}</cyan>" formatted <green>successfully</green> in <yellow>${
+                                        duration.end().formatedDuration
+                                    }</yellow>`,
+                                });
+                            } catch (e) {
+                                emit('log', {
+                                    type: __SLog.TYPE_ERROR,
+                                    value: e.toString(),
+                                });
+                            }
+                            // resole file
+                            resolveFile();
+                        }
+                    },
+                );
             },
             {
                 eventEmitter: {

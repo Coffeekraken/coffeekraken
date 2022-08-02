@@ -398,7 +398,6 @@ export default class SThemeBase extends __SEventEmitter {
      */
     static hash(dotPath: string = ''): string {
         const config = this.get(dotPath);
-        console.log('con', typeof config);
         return __objectHash(config);
     }
 
@@ -1216,15 +1215,20 @@ export default class SThemeBase extends __SEventEmitter {
      * @since         2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
+    _cachedConfig;
     get _config() {
+        if (this._cachedConfig) {
+            return this._cachedConfig;
+        }
         // @ts-ignore
-        return Object.assign(
+        this._cachedConfig = Object.assign(
             {},
             __deepMerge(
                 __SSugarConfig.get('theme.themes')[this.id],
                 this._overridedConfig,
             ),
         );
+        return this._cachedConfig;
     }
     get(dotPath, preventThrow: boolean = false): any {
         const value = __get(this._config, dotPath);
@@ -1290,7 +1294,6 @@ export default class SThemeBase extends __SEventEmitter {
      */
     hash(dotPath: string = ''): string {
         const config = this.get(dotPath);
-        console.log('themeConfigInternal', config);
         return __objectHash(config);
     }
 

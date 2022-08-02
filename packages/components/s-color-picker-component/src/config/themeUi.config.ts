@@ -87,7 +87,7 @@ export default (api) => {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get defaultStyle() {
-                return api.theme.ui.default.defaultStack;
+                return api.theme.ui.default.defaultStyle;
             },
 
             /**

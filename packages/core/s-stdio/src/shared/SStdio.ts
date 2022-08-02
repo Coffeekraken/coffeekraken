@@ -194,12 +194,13 @@ export default class SStdio extends __SClass implements ISStdio {
             this.registeredComponents[this.name] = {};
 
         // save the component inside the stack
-        this.registeredComponents[this.name][as || component.id || 'default'] =
-            {
-                component,
-                settings: settings || {},
-                as,
-            };
+        this.registeredComponents[this.name][
+            as || component.id || 'default'
+        ] = {
+            component,
+            settings: settings || {},
+            as,
+        };
     }
 
     /**
@@ -391,6 +392,7 @@ export default class SStdio extends __SClass implements ISStdio {
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
+    _tmpPrintedLogs: string[] = [];
     registerSource(source, settings?: Partial<ISStdioSettings>) {
         const set = (<ISStdioSettings>(
             __deepMerge(this.settings.stdio || {}, settings ?? {})
@@ -408,6 +410,18 @@ export default class SStdio extends __SClass implements ISStdio {
         source.on(
             'log',
             (data, metas) => {
+                // @TODO        find why some logs are printed x times... It seems that it's linked to number of actions theirs in a recipe in the SKitchen class...
+                if (this._tmpPrintedLogs.includes(data.value)) {
+                    return;
+                }
+                this._tmpPrintedLogs.push(data.value);
+                setTimeout(() => {
+                    this._tmpPrintedLogs.splice(
+                        this._tmpPrintedLogs.indexOf(data.value),
+                        1,
+                    );
+                }, 100);
+
                 if (data === undefined || data === null) return;
 
                 // save metas into logObj

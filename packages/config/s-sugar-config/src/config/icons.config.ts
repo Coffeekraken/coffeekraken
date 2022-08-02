@@ -1,5 +1,5 @@
 export default function (api) {
-    // if (api.env.platform !== 'node') return;
+    if (api.env.platform !== 'node') return;
 
     return {
         fontawesome: {

@@ -204,38 +204,32 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                 }
 
                 let buildTemporaryRes;
+                let importedConfig;
 
                 if (filePath.match(/\.ts$/)) {
                     buildTemporaryRes = await __STypescriptBuilder.buildTemporary(
                         filePath,
                     );
                     filePath = buildTemporaryRes.path;
-                }
-
-                if (
-                    !filePath.includes(
-                        this.settings.fileName.replace('%name', ''),
-                    )
-                ) {
-                    if (buildTemporaryRes) {
-                        setTimeout(() => {
-                            buildTemporaryRes.remove();
-                        }, 100);
-                    }
-                    continue;
-                }
-
-                // @TODO      check for delete cache with import
-                let importedConfig = {};
-                if (process.env.NODE_ENV !== 'test') {
+                    importedConfig = await import(filePath);
+                } else {
                     importedConfig = await import(filePath);
                 }
 
-                if (buildTemporaryRes) {
-                    setTimeout(() => {
-                        buildTemporaryRes.remove();
-                    }, 100);
-                }
+                // if (
+                //     !filePath.includes(
+                //         this.settings.fileName.replace('%name', ''),
+                //     )
+                // ) {
+                //     // if (buildTemporaryRes) {
+                //     //     buildTemporaryRes.remove();
+                //     // }
+                //     continue;
+                // }
+
+                // if (buildTemporaryRes) {
+                //     // buildTemporaryRes.remove();
+                // }
 
                 let configData = importedConfig.default;
                 if (typeof configData === 'function') {

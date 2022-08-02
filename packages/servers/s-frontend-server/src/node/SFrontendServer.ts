@@ -112,6 +112,8 @@ export default class SFrontendServer extends __SClass {
         __runMiddleware(this._express);
     }
 
+    _config: any = {};
+
     /**
      * @name        start
      * @type           Function
@@ -146,9 +148,7 @@ export default class SFrontendServer extends __SClass {
                     'silly',
                 ].indexOf(finalParams.logLevel);
 
-                const frontendServerConfig = __SSugarConfig.get(
-                    'frontendServer',
-                );
+                this._config = __SSugarConfig.get('frontendServer');
 
                 this._express.use((req, res, next) => {
                     if (req.path.substr(-1) == '/' && req.path.length > 1) {
@@ -159,17 +159,14 @@ export default class SFrontendServer extends __SClass {
                     }
                 });
 
-                if (frontendServerConfig.modules) {
+                if (this._config.modules) {
                     for (
                         let i = 0;
-                        i < Object.keys(frontendServerConfig.modules).length;
+                        i < Object.keys(this._config.modules).length;
                         i++
                     ) {
-                        const moduleId = Object.keys(
-                            frontendServerConfig.modules,
-                        )[i];
-                        const moduleObj =
-                            frontendServerConfig.modules[moduleId];
+                        const moduleId = Object.keys(this._config.modules)[i];
+                        const moduleObj = this._config.modules[moduleId];
                         let module;
 
                         try {
@@ -184,58 +181,53 @@ export default class SFrontendServer extends __SClass {
                             module.default(
                                 this._express,
                                 moduleObj.settings,
-                                frontendServerConfig,
+                                this._config,
                             ),
                         );
                     }
                 }
 
-                if (frontendServerConfig.proxy) {
-                    Object.keys(frontendServerConfig.proxy).forEach(
-                        (proxyId) => {
-                            const proxyObj =
-                                frontendServerConfig.proxy[proxyId];
-                            // @ts-ignore
-                            this._express.use(
-                                createProxyMiddleware(proxyObj.route, {
-                                    logLevel: 'silent',
-                                    ...(proxyObj.settings ?? {}),
-                                }),
-                            );
-                        },
-                    );
+                if (this._config.proxy) {
+                    Object.keys(this._config.proxy).forEach((proxyId) => {
+                        const proxyObj = this._config.proxy[proxyId];
+                        // @ts-ignore
+                        this._express.use(
+                            createProxyMiddleware(proxyObj.route, {
+                                logLevel: 'silent',
+                                ...(proxyObj.settings ?? {}),
+                            }),
+                        );
+                    });
                 }
 
-                if (frontendServerConfig.staticDirs) {
-                    Object.keys(frontendServerConfig.staticDirs).forEach(
-                        (dir) => {
-                            const fsPath = frontendServerConfig.staticDirs[dir];
-                            emit('log', {
-                                value: `<cyan>[static]</cyan> Exposing static folder "<cyan>${__path.relative(
-                                    process.cwd(),
-                                    fsPath,
-                                )}</cyan>" behind "<yellow>${dir}</yellow>" url`,
-                            });
-                            this._express.use(
-                                dir,
-                                __express.static(fsPath, { dotfiles: 'allow' }),
-                            );
-                        },
-                    );
+                if (this._config.staticDirs) {
+                    Object.keys(this._config.staticDirs).forEach((dir) => {
+                        const fsPath = this._config.staticDirs[dir];
+                        emit('log', {
+                            value: `<cyan>[static]</cyan> Exposing static folder "<cyan>${__path.relative(
+                                process.cwd(),
+                                fsPath,
+                            )}</cyan>" behind "<yellow>${dir}</yellow>" url`,
+                        });
+                        this._express.use(
+                            dir,
+                            __express.static(fsPath, { dotfiles: 'allow' }),
+                        );
+                    });
                 }
 
-                if (frontendServerConfig.middlewares) {
+                if (this._config.middlewares) {
                     for (
                         let i = 0;
-                        i <
-                        Object.keys(frontendServerConfig.middlewares).length;
+                        i < Object.keys(this._config.middlewares).length;
                         i++
                     ) {
                         const middlewareName = Object.keys(
-                            frontendServerConfig.middlewares,
+                            this._config.middlewares,
                         )[i];
-                        const middlewareObj =
-                            frontendServerConfig.middlewares[middlewareName];
+                        const middlewareObj = this._config.middlewares[
+                            middlewareName
+                        ];
 
                         if (
                             !middlewareObj.path ||
@@ -295,9 +287,9 @@ export default class SFrontendServer extends __SClass {
                 }
 
                 // routes pages from config
-                if (frontendServerConfig.pages) {
+                if (this._config.pages) {
                     for (let [id, pageConfig] of Object.entries(
-                        frontendServerConfig.pages,
+                        this._config.pages,
                     )) {
                         await pipe(
                             this._registerPageConfig(
@@ -312,33 +304,30 @@ export default class SFrontendServer extends __SClass {
                 // "pages" folder routes
                 pipe(this._registerPagesRoutes());
 
-                if (!(await __isPortFree(frontendServerConfig.port))) {
+                if (!(await __isPortFree(this._config.port))) {
                     emit('log', {
-                        value: `Port <yellow>${frontendServerConfig.port}</yellow> already in use. Try to kill it before continue...`,
+                        value: `Port <yellow>${this._config.port}</yellow> already in use. Try to kill it before continue...`,
                     });
-                    await __kill(`:${frontendServerConfig.port}`);
+                    await __kill(`:${this._config.port}`);
                 }
 
                 if (!finalParams.listen) {
                     // server started successfully
                     emit('log', {
-                        group: `s-frontend-server-${this.metas.id}`,
                         value: `<yellow>Frontend server</yellow> started <green>successfully</green>`,
                     });
                     // when no listen, we just resolve the promise to say that the server has started
                     resolve();
                 } else {
                     const server = this._express.listen(
-                        frontendServerConfig.port,
+                        this._config.port,
                         async () => {
                             await __wait(100);
                             // server started successfully
                             emit('log', {
-                                group: `s-frontend-server-${this.metas.id}`,
                                 value: `<yellow>Frontend server</yellow> started <green>successfully</green>`,
                             });
                             emit('log', {
-                                group: `s-frontend-server-${this.metas.id}`,
                                 value: `<yellow>http://${finalParams.hostname}</yellow>:<cyan>${finalParams.port}</cyan>`,
                             });
                             emit('log', {
@@ -481,9 +470,7 @@ export default class SFrontendServer extends __SClass {
             // @ts-ignore
             return (await import(pageConfig.handler)).default;
         } else {
-            const handlersInConfig = __SSugarConfig.get(
-                'frontendServer.handlers',
-            );
+            const handlersInConfig = this._config.handlers;
             if (!handlersInConfig[handlerNameOrPath]) {
                 throw new Error(
                     `[SFrontendServer] Sorry but the handler named "<yellow>${handlerNameOrPath}</yellow>" seems to not exists or is missconfigured...`,
@@ -536,14 +523,11 @@ export default class SFrontendServer extends __SClass {
                 let finalPagePath = pageFile.path,
                     buildedFileRes;
 
-                console.log('ifina', finalPagePath);
-
                 // compile typescript if needed
                 if (pageFile.extension === 'ts') {
                     buildedFileRes = await __STypescriptBuilder.buildTemporary(
                         finalPagePath,
                     );
-                    console.log('BUILDED', buildedFileRes);
                     finalPagePath = buildedFileRes.path;
                 }
 
@@ -588,10 +572,6 @@ export default class SFrontendServer extends __SClass {
                 let handlerFn,
                     slug = '',
                     slugs: string[] = pageConfig.slugs ?? [];
-
-                const frontendServerConfig = __SSugarConfig.get(
-                    'frontendServer',
-                );
 
                 // generate path
                 if (pageFile && !pageConfig.slugs) {
@@ -664,7 +644,7 @@ export default class SFrontendServer extends __SClass {
                             next,
                             pageConfig,
                             pageFile,
-                            frontendServerConfig,
+                            config: this._config,
                         });
                         pipe(handlerPro);
                     });

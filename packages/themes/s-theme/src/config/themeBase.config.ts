@@ -160,7 +160,7 @@ export default function (api) {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get scale() {
-            return api.config.themeScalable;
+            return api.config.themeScale;
         },
 
         /**

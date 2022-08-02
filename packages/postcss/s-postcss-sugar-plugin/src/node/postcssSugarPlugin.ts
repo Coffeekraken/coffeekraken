@@ -265,11 +265,9 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
 
         for (let i = 0; i < paths.length; i++) {
             const path = paths[i];
-            const {
-                default: fn,
-                interface: int,
-                dependencies,
-            } = await import(path);
+            const { default: fn, interface: int, dependencies } = await import(
+                path
+            );
             if (type === 'mixins') {
                 mixinsStack[
                     `${path
@@ -483,7 +481,6 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
         postcssPlugin: 'sugar',
         async Once(root) {
             __SBench.start('postcssSugarPlugin');
-
             await _load();
 
             if (root.source?.input?.from) {

@@ -3,20 +3,6 @@
     "description": "A little sugar in your codebase",
     "version": "2.0.0-alpha.9",
     "type": "module",
-    "exports": {
-        "./shared/*": {
-            "require": "./dist/pkg/cjs/shared/*.js",
-            "import": "./dist/pkg/esm/shared/*.js"
-        },
-        "./node/*": {
-            "require": "./dist/pkg/cjs/node/*.js",
-            "import": "./dist/pkg/esm/node/*.js"
-        },
-        "./js/*": {
-            "require": "./dist/pkg/cjs/js/*.js",
-            "import": "./dist/pkg/esm/js/*.js"
-        }
-    },
     "homepage": "http://coffeekraken.io",
     "author": "Coffeekraken <hello@coffeekraken.io> (https://coffeekraken.io)",
     "contributors": [
@@ -200,5 +186,6 @@
         "uuid": "^8.3.2",
         "yaml": "^1.10.2"
     },
-    "globalDependencies": {}
+    "globalDependencies": {},
+    "exports": {}
 }

@@ -9,8 +9,8 @@
         "@coffeekraken/s-sugar-config": "^2.0.0-alpha.9",
         "postcss": "^8.2.15"
     },
-    "main": "./dist/pkg/cjs/node/exports.js",
-    "module": "./dist/pkg/esm/node/exports.js",
+    "main": "dist/pkg/cjs/node/exports.js",
+    "module": "dist/pkg/esm/node/exports.js",
     "exports": {
         ".": {
             "require": "./dist/pkg/cjs/node/exports.js",

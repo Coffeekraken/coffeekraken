@@ -17,8 +17,8 @@
         "@prettier/plugin-php": "^0.18.9",
         "prettier": "^2.7.1"
     },
-    "main": "./dist/pkg/cjs/node/exports.js",
-    "module": "./dist/pkg/esm/node/exports.js",
+    "main": "dist/pkg/cjs/node/exports.js",
+    "module": "dist/pkg/esm/node/exports.js",
     "exports": {
         ".": {
             "require": "./dist/pkg/cjs/node/exports.js",

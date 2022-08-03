@@ -96,12 +96,12 @@
         "@coffeekraken/sugar": "^2.0.0-alpha.9",
         "dotenv": "^16.0.1"
     },
-    "main": "./dist/pkg/cjs/cli/exports.js",
-    "module": "./dist/pkg/esm/cli/exports.js",
+    "main": "dist/pkg/cjs/node/exports.js",
+    "module": "dist/pkg/esm/node/exports.js",
     "exports": {
         ".": {
-            "require": "./dist/pkg/cjs/cli/exports.js",
-            "import": "./dist/pkg/esm/cli/exports.js"
+            "require": "./dist/pkg/cjs/node/exports.js",
+            "import": "./dist/pkg/esm/node/exports.js"
         },
         "./shared/*": {
             "require": "./dist/pkg/cjs/shared/*.js",

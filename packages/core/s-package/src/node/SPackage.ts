@@ -161,67 +161,195 @@ export default class SPackage extends __SClass {
                     main: string;
                     module: string;
                     exports: Record<string, any>;
-                } = {};
+                } = {
+                    exports: {
+                        '.': {},
+                    },
+                };
 
-                if (Object.keys(mapedFiles).length === 1) {
-                    if (!exportsMap.exports) exportsMap.exports = {};
-                    exportsMap.exports['.'] =
-                        mapedFiles[Object.keys(mapedFiles)[0]];
-                }
-                if (mapedFiles.default) {
-                    if (mapedFiles.default.require) {
-                        exportsMap.main = mapedFiles.default.require;
-                    }
-                    if (mapedFiles.default.import) {
-                        exportsMap.module = mapedFiles.default.import;
-                    }
-                } else if (mapedFiles.node) {
-                    if (mapedFiles.node.require) {
-                        exportsMap.main = mapedFiles.node.require;
-                    }
-                    if (mapedFiles.node.import) {
-                        exportsMap.module = mapedFiles.node.import;
-                    }
-                } else if (mapedFiles.browser) {
-                    if (mapedFiles.browser.require) {
-                        exportsMap.main = mapedFiles.browser.require;
-                    }
-                    if (mapedFiles.browser.import) {
-                        exportsMap.module = mapedFiles.browser.import;
-                    }
+                let hasShared = mapedFiles.default !== undefined,
+                    hasNode = mapedFiles.node !== undefined,
+                    hasJs = mapedFiles.browser !== undefined,
+                    hasCli = false;
+
+                // if (Object.keys(mapedFiles).length === 1) {
+                //     exportsMap.exports['.'] =
+                //         mapedFiles[Object.keys(mapedFiles)[0]];
+                // }
+
+                let json;
+                if (hasJs && hasNode) {
+                    json = {
+                        main: 'dist/pkg/cjs/js/exports.js',
+                        module: 'dist/pkg/esm/js/exports.js',
+                        exports: {
+                            node: {
+                                require: './dist/pkg/cjs/node/exports.js',
+                                import: './dist/pkg/esm/node/exports.js',
+                            },
+                            default: {
+                                require: './dist/pkg/cjs/js/exports.js',
+                                import: './dist/pkg/esm/js/exports.js',
+                            },
+                        },
+                    };
+                } else if (hasJs && !hasNode) {
+                    json = {
+                        main: 'dist/pkg/cjs/js/exports.js',
+                        module: 'dist/pkg/esm/js/exports.js',
+                        exports: {
+                            '.': {
+                                require: './dist/pkg/cjs/js/exports.js',
+                                import: './dist/pkg/esm/js/exports.js',
+                            },
+                            './shared/*': {
+                                require: './dist/pkg/cjs/shared/*.js',
+                                import: './dist/pkg/esm/shared/*.js',
+                            },
+                            './node/*': {
+                                require: './dist/pkg/cjs/node/*.js',
+                                import: './dist/pkg/esm/node/*.js',
+                            },
+                            './js/*': {
+                                require: './dist/pkg/cjs/js/*.js',
+                                import: './dist/pkg/esm/js/*.js',
+                            },
+                        },
+                    };
+                } else if (hasNode && !hasJs) {
+                    json = {
+                        main: 'dist/pkg/cjs/node/exports.js',
+                        module: 'dist/pkg/esm/node/exports.js',
+                        exports: {
+                            '.': {
+                                require: './dist/pkg/cjs/node/exports.js',
+                                import: './dist/pkg/esm/node/exports.js',
+                            },
+                            './shared/*': {
+                                require: './dist/pkg/cjs/shared/*.js',
+                                import: './dist/pkg/esm/shared/*.js',
+                            },
+                            './node/*': {
+                                require: './dist/pkg/cjs/node/*.js',
+                                import: './dist/pkg/esm/node/*.js',
+                            },
+                            './js/*': {
+                                require: './dist/pkg/cjs/js/*.js',
+                                import: './dist/pkg/esm/js/*.js',
+                            },
+                        },
+                    };
+                } else if (hasShared) {
+                    json = {
+                        main: 'dist/pkg/cjs/shared/exports.js',
+                        module: 'dist/pkg/esm/shared/exports.js',
+                        exports: {
+                            '.': {
+                                require: './dist/pkg/cjs/shared/exports.js',
+                                import: './dist/pkg/esm/shared/exports.js',
+                            },
+                            './shared/*': {
+                                require: './dist/pkg/cjs/shared/*.js',
+                                import: './dist/pkg/esm/shared/*.js',
+                            },
+                            './node/*': {
+                                require: './dist/pkg/cjs/node/*.js',
+                                import: './dist/pkg/esm/node/*.js',
+                            },
+                            './js/*': {
+                                require: './dist/pkg/cjs/js/*.js',
+                                import: './dist/pkg/esm/js/*.js',
+                            },
+                        },
+                    };
+                } else if (hasCli) {
+                    json = {
+                        main: 'dist/pkg/cjs/cli/exports.js',
+                        module: 'dist/pkg/esm/cli/exports.js',
+                        exports: {
+                            '.': {
+                                require: './dist/pkg/cjs/cli/exports.js',
+                                import: './dist/pkg/esm/cli/exports.js',
+                            },
+                            './shared/*': {
+                                require: './dist/pkg/cjs/shared/*.js',
+                                import: './dist/pkg/esm/shared/*.js',
+                            },
+                            './node/*': {
+                                require: './dist/pkg/cjs/node/*.js',
+                                import: './dist/pkg/esm/node/*.js',
+                            },
+                            './js/*': {
+                                require: './dist/pkg/cjs/js/*.js',
+                                import: './dist/pkg/esm/js/*.js',
+                            },
+                        },
+                    };
                 }
 
-                // give access to all "src"
-                if (!exportsMap.exports) {
-                    exportsMap.exports = {};
-                }
-                exportsMap.exports['./shared/*'] = {
-                    require: './dist/pkg/cjs/shared/*.js',
-                    import: './dist/pkg/esm/shared/*.js',
-                };
-                exportsMap.exports['./node/*'] = {
-                    require: './dist/pkg/cjs/node/*.js',
-                    import: './dist/pkg/esm/node/*.js',
-                };
-                exportsMap.exports['./js/*'] = {
-                    require: './dist/pkg/cjs/js/*.js',
-                    import: './dist/pkg/esm/js/*.js',
-                };
+                // // both
+                // if (mapedFiles.node && mapedFiles.browser) {
+                //     // main / module
+                //     exportsMap.main = mapedFiles.node.require;
+                //     exportsMap.module = mapedFiles.node.import;
+                //     // exports
+                //     exportsMap.exports.node = {
+                //         require: mapedFiles.node.require,
+                //         import: mapedFiles.node.import,
+                //     };
+                //     exportsMap.exports.default = {
+                //         require: mapedFiles.browser.require,
+                //         import: mapedFiles.browser.import,
+                //     };
+                // }
+                // // only browser
+                // else if (mapedFiles.browser && !mapedFiles.node) {
+                //     // main / module
+                //     exportsMap.main = mapedFiles.browser.require;
+                //     exportsMap.module = mapedFiles.browser.import;
+                //     // exports
+                //     exportsMap.exports['.'].require =
+                //         mapedFiles.browser.require;
+                //     exportsMap.exports['.'].import = mapedFiles.browser.import;
+                // }
+                // // only node
+                // else if (mapedFiles.node && !mapedFiles.browser) {
+                //     // main / module
+                //     exportsMap.main = mapedFiles.node.require;
+                //     exportsMap.module = mapedFiles.node.import;
+                //     // exports
+                //     exportsMap.exports['.'].require = mapedFiles.node.require;
+                //     exportsMap.exports['.'].import = mapedFiles.node.import;
+                // }
+
+                // // give access to all "src"
+                // if (!mapedFiles.browser || !mapedFiles.node) {
+                //     exportsMap.exports['./shared/*'] = {
+                //         require: './dist/pkg/cjs/shared/*.js',
+                //         import: './dist/pkg/esm/shared/*.js',
+                //     };
+                //     exportsMap.exports['./node/*'] = {
+                //         require: './dist/pkg/cjs/node/*.js',
+                //         import: './dist/pkg/esm/node/*.js',
+                //     };
+                //     exportsMap.exports['./js/*'] = {
+                //         require: './dist/pkg/cjs/js/*.js',
+                //         import: './dist/pkg/esm/js/*.js',
+                //     };
+                // }
 
                 // updading package json
-                let currentPackageJson = {};
+                let currentPackageJson: any = {};
                 try {
                     currentPackageJson = JSON.parse(
                         __fs
                             .readFileSync(`${this._rootDir}/package.json`)
                             .toString(),
                     );
+                    currentPackageJson.exports = {};
                 } catch (e) {}
 
-                const newPackageJson = __deepMerge(
-                    currentPackageJson,
-                    exportsMap,
-                );
+                const newPackageJson = __deepMerge(currentPackageJson, json);
 
                 emit('log', {
                     type: __SLog.TYPE_INFO,

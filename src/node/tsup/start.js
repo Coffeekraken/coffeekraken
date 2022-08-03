@@ -156,6 +156,23 @@ function processPackage(packageRoot) {
                 },
             },
         };
+    } else {
+        json = {
+            exports: {
+                './shared/*': {
+                    require: './dist/pkg/cjs/shared/*.js',
+                    import: './dist/pkg/esm/shared/*.js',
+                },
+                './node/*': {
+                    require: './dist/pkg/cjs/node/*.js',
+                    import: './dist/pkg/esm/node/*.js',
+                },
+                './js/*': {
+                    require: './dist/pkg/cjs/js/*.js',
+                    import: './dist/pkg/esm/js/*.js',
+                },
+            },
+        };
     }
 
     // if no json, stop here

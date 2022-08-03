@@ -1,26 +1,22 @@
 {
     "name": "@coffeekraken/s-event-emitter",
-    "version": "2.0.0-alpha.9",
+    "version": "2.0.0-alpha.6",
     "description": "",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.9",
-        "@coffeekraken/s-log": "^2.0.0-alpha.9",
-        "@coffeekraken/sugar": "^2.0.0-alpha.9",
-        "node-ipc": "^10.1.0"
+        "@coffeekraken/s-class": "^2.0.0-alpha.6",
+        "@coffeekraken/s-log": "^2.0.0-alpha.6",
+        "@coffeekraken/sugar": "^2.0.0-alpha.6",
+        "minimatch": "^5.1.0"
     },
-    "main": "./dist/pkg/cjs/js/exports.js",
-    "module": "./dist/pkg/esm/shared/exports.js",
+    "main": "dist/pkg/cjs/node/exports.js",
+    "module": "dist/pkg/esm/node/exports.js",
     "exports": {
-        "node": {
+        ".": {
             "require": "./dist/pkg/cjs/node/exports.js",
             "import": "./dist/pkg/esm/node/exports.js"
-        },
-        "default": {
-            "require": "./dist/pkg/cjs/js/exports.js",
-            "import": "./dist/pkg/esm/js/exports.js"
         },
         "./shared/*": {
             "require": "./dist/pkg/cjs/shared/*.js",

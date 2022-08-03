@@ -2,7 +2,6 @@
     "name": "@coffeekraken/coffeekraken-io",
     "version": "2.0.0-alpha.9",
     "description": "wefuih owiehf owuhe fioquwh efiuh qweuihqweu qufouihw efuih woieuh wiuehuqwhe fiuhq efhwiuehfiwqhefuiqhw efjb wqfhjb oqweuhf euf huoqehbu",
-    "main": "./src/shared/exports.js",
     "type": "module",
     "publish": false,
     "scripts": {
@@ -96,18 +95,5 @@
     "devDependencies": {
         "esbuild": "^0.13.13"
     },
-    "exports": {
-        "./shared/*": {
-            "require": "./dist/pkg/cjs/shared/*.js",
-            "import": "./dist/pkg/esm/shared/*.js"
-        },
-        "./node/*": {
-            "require": "./dist/pkg/cjs/node/*.js",
-            "import": "./dist/pkg/esm/node/*.js"
-        },
-        "./js/*": {
-            "require": "./dist/pkg/cjs/js/*.js",
-            "import": "./dist/pkg/esm/js/*.js"
-        }
-    }
+    "exports": {}
 }

@@ -1,6 +1,6 @@
 {
     "name": "@coffeekraken/coffeekraken",
-    "version": "2.0.0-alpha.9",
+    "version": "2.0.0-alpha.10",
     "description": "We are a young collectve of front-end creative developers with one goal in mind. Build tools to make every team working day life better",
     "type": "module",
     "scripts": {

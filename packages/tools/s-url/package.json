@@ -10,8 +10,8 @@
         "@coffeekraken/sugar": "^2.0.0-alpha.9",
         "url-parse": "^1.5.1"
     },
-    "main": "dist/pkg/cjs/shared/exports.js",
-    "module": "dist/pkg/esm/shared/exports.js",
+    "main": "./dist/pkg/cjs/shared/exports.js",
+    "module": "./dist/pkg/esm/shared/exports.js",
     "exports": {
         ".": {
             "require": "./dist/pkg/cjs/shared/exports.js",

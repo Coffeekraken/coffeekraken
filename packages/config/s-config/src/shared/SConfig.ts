@@ -1,5 +1,6 @@
 // @ts-nocheck
 
+import __SConfigAdapter from '@coffeekraken/s-config-adapter';
 import __SDuration from '@coffeekraken/s-duration';
 import __SEnv from '@coffeekraken/s-env';
 import __isCyclic from '@coffeekraken/sugar/shared/is/cyclic';
@@ -11,7 +12,6 @@ import __filter from '@coffeekraken/sugar/shared/object/filter';
 import __get from '@coffeekraken/sugar/shared/object/get';
 import __set from '@coffeekraken/sugar/shared/object/set';
 import __toPlainObject from '@coffeekraken/sugar/shared/object/toPlainObject';
-import __SConfigAdapter from './adapters/SConfigAdapter';
 
 /**
  * @name                                            config

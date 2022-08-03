@@ -23,8 +23,8 @@
         "lit": "^2.0.0-rc.3",
         "prettier": "^2.4.1"
     },
-    "main": "dist/pkg/cjs/js/exports.js",
-    "module": "dist/pkg/esm/js/exports.js",
+    "main": "./dist/pkg/cjs/js/exports.js",
+    "module": "./dist/pkg/esm/js/exports.js",
     "exports": {
         ".": {
             "require": "./dist/pkg/cjs/js/exports.js",

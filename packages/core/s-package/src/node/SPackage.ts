@@ -192,6 +192,9 @@ export default class SPackage extends __SClass {
                 }
 
                 // give access to all "src"
+                if (!exportsMap.exports) {
+                    exportsMap.exports = {};
+                }
                 exportsMap.exports['./shared/*'] = {
                     require: './dist/pkg/cjs/shared/*.js',
                     import: './dist/pkg/esm/shared/*.js',
@@ -267,8 +270,9 @@ export default class SPackage extends __SClass {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 // @ts-ignore
-                const finalParams: ISPackageExportsParams =
-                    __SPackageExportsParamsInterface.apply(params);
+                const finalParams: ISPackageExportsParams = __SPackageExportsParamsInterface.apply(
+                    params,
+                );
 
                 emit('log', {
                     type: __SLog.TYPE_INFO,
@@ -343,8 +347,9 @@ export default class SPackage extends __SClass {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 // @ts-ignore
-                const finalParams: ISPackageInstallParams =
-                    __SPackageInstallParamsInterface.apply(params);
+                const finalParams: ISPackageInstallParams = __SPackageInstallParamsInterface.apply(
+                    params,
+                );
 
                 const packageRoot = this._rootDir;
 
@@ -442,8 +447,9 @@ export default class SPackage extends __SClass {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 // @ts-ignore
-                const finalParams: ISPackageCheckDependenciesParams =
-                    __SPackageCheckDependenciesParamsInterface.apply(params);
+                const finalParams: ISPackageCheckDependenciesParams = __SPackageCheckDependenciesParamsInterface.apply(
+                    params,
+                );
 
                 let result = true;
 
@@ -465,10 +471,9 @@ export default class SPackage extends __SClass {
                     __fs.readFileSync(`${packageRoot}/package.json`).toString(),
                 );
 
-                const ARRAY_OF_FILES_AND_DIRS_TO_CRUISE: string[] =
-                    finalParams.dirs.map((d) =>
-                        __path.relative(packageRoot, d),
-                    );
+                const ARRAY_OF_FILES_AND_DIRS_TO_CRUISE: string[] = finalParams.dirs.map(
+                    (d) => __path.relative(packageRoot, d),
+                );
 
                 emit('log', {
                     type: __SLog.TYPE_INFO,
@@ -529,19 +534,22 @@ export default class SPackage extends __SClass {
                                     pattern.match(/^\^/) &&
                                     moduleName.startsWith(pattern.slice(1))
                                 ) {
-                                    packageJson.dependencies[moduleName] =
-                                        version;
+                                    packageJson.dependencies[
+                                        moduleName
+                                    ] = version;
                                     addedFromPackagesMap = true;
                                 } else if (
                                     pattern.match(/\$$/) &&
                                     moduleName.endsWith(pattern.slice(0, -1))
                                 ) {
-                                    packageJson.dependencies[moduleName] =
-                                        version;
+                                    packageJson.dependencies[
+                                        moduleName
+                                    ] = version;
                                     addedFromPackagesMap = true;
                                 } else if (pattern === moduleName) {
-                                    packageJson.dependencies[moduleName] =
-                                        version;
+                                    packageJson.dependencies[
+                                        moduleName
+                                    ] = version;
                                     addedFromPackagesMap = true;
                                 }
                             }
@@ -639,8 +647,9 @@ export default class SPackage extends __SClass {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 // @ts-ignore
-                const finalParams: ISPackageRenameParams =
-                    __SPackageInstallParamsInterface.apply(params);
+                const finalParams: ISPackageRenameParams = __SPackageInstallParamsInterface.apply(
+                    params,
+                );
 
                 if (!finalParams.name) {
                     finalParams.name = await emit('ask', {
@@ -709,8 +718,9 @@ export default class SPackage extends __SClass {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 // @ts-ignore
-                const finalParams: ISPackageAddDefaultPackageJsonParams =
-                    __SPackageAddDefaultScriptsParamsInterface.apply(params);
+                const finalParams: ISPackageAddDefaultPackageJsonParams = __SPackageAddDefaultScriptsParamsInterface.apply(
+                    params,
+                );
 
                 const packageRoot = __packageRoot();
 

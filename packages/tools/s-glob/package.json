@@ -11,8 +11,8 @@
         "@coffeekraken/s-interface": "^2.0.0-alpha.9",
         "@coffeekraken/sugar": "^2.0.0-alpha.9"
     },
-    "main": "dist/pkg/cjs/node/exports.js",
-    "module": "dist/pkg/esm/node/exports.js",
+    "main": "./dist/pkg/cjs/node/exports.js",
+    "module": "./dist/pkg/esm/node/exports.js",
     "exports": {
         ".": {
             "require": "./dist/pkg/cjs/node/exports.js",

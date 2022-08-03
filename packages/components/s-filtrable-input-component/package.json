@@ -21,8 +21,8 @@
         "lit": "^2.2.5",
         "react": "^17.0.2"
     },
-    "main": "dist/pkg/cjs/js/exports.js",
-    "module": "dist/pkg/esm/js/exports.js",
+    "main": "./dist/pkg/cjs/js/exports.js",
+    "module": "./dist/pkg/esm/js/exports.js",
     "exports": {
         ".": {
             "require": "./dist/pkg/cjs/js/exports.js",

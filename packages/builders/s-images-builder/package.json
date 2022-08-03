@@ -23,8 +23,8 @@
         "minimatch": "^5.1.0",
         "sharp": "^0.30.3"
     },
-    "main": "dist/pkg/cjs/node/exports.js",
-    "module": "dist/pkg/esm/node/exports.js",
+    "main": "./dist/pkg/cjs/node/exports.js",
+    "module": "./dist/pkg/esm/node/exports.js",
     "exports": {
         ".": {
             "require": "./dist/pkg/cjs/node/exports.js",

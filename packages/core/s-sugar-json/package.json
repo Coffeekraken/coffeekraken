@@ -19,8 +19,8 @@
         "@coffeekraken/sugar": "^2.0.0-alpha.9",
         "glob-all": "^3.3.0"
     },
-    "main": "dist/pkg/cjs/node/exports.js",
-    "module": "dist/pkg/esm/node/exports.js",
+    "main": "./dist/pkg/cjs/node/exports.js",
+    "module": "./dist/pkg/esm/node/exports.js",
     "exports": {
         ".": {
             "require": "./dist/pkg/cjs/node/exports.js",

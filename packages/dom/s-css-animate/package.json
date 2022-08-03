@@ -14,8 +14,8 @@
     "dependencies": {
         "rematrix": "^0.7.2"
     },
-    "main": "dist/pkg/cjs/js/exports.js",
-    "module": "dist/pkg/esm/js/exports.js",
+    "main": "./dist/pkg/cjs/js/exports.js",
+    "module": "./dist/pkg/esm/js/exports.js",
     "exports": {
         ".": {
             "require": "./dist/pkg/cjs/js/exports.js",

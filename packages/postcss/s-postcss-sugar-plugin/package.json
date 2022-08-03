@@ -1,54 +1,54 @@
 {
-    "name": "@coffeekraken/s-postcss-sugar-plugin",
-    "version": "2.0.0-alpha.6",
-    "description": "",
-    "type": "module",
-    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
-    "license": "MIT",
-    "dependencies": {
-        "@coffeekraken/s-bench": "^2.0.0-alpha.6",
-        "@coffeekraken/s-color": "^2.0.0-alpha.6",
-        "@coffeekraken/s-docblock": "^2.0.0-alpha.6",
-        "@coffeekraken/s-duration": "^2.0.0-alpha.6",
-        "@coffeekraken/s-env": "^2.0.0-alpha.6",
-        "@coffeekraken/s-event-emitter": "^2.0.0-alpha.6",
-        "@coffeekraken/s-file": "^2.0.0-alpha.6",
-        "@coffeekraken/s-glob": "^2.0.0-alpha.6",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.6",
-        "@coffeekraken/s-process": "^2.0.0-alpha.6",
-        "@coffeekraken/s-promise": "^2.0.0-alpha.6",
-        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.6",
-        "@coffeekraken/s-sugar-json": "^2.0.0-alpha.6",
-        "@coffeekraken/s-theme": "^2.0.0-alpha.6",
-        "@coffeekraken/sugar": "^2.0.0-alpha.6",
-        "chokidar": "^3.5.2",
-        "faker": "^5.5.3",
-        "fantasticon": "1.2.2",
-        "glob": "^7.1.6",
-        "oslllo-svg-fixer": "^1.4.1",
-        "postcss": "^8.4.14"
+  "name": "@coffeekraken/s-postcss-sugar-plugin",
+  "version": "2.0.0-alpha.7",
+  "description": "",
+  "type": "module",
+  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/s-bench": "^2.0.0-alpha.7",
+    "@coffeekraken/s-color": "^2.0.0-alpha.7",
+    "@coffeekraken/s-docblock": "^2.0.0-alpha.7",
+    "@coffeekraken/s-duration": "^2.0.0-alpha.7",
+    "@coffeekraken/s-env": "^2.0.0-alpha.7",
+    "@coffeekraken/s-event-emitter": "^2.0.0-alpha.7",
+    "@coffeekraken/s-file": "^2.0.0-alpha.7",
+    "@coffeekraken/s-glob": "^2.0.0-alpha.7",
+    "@coffeekraken/s-interface": "^2.0.0-alpha.7",
+    "@coffeekraken/s-process": "^2.0.0-alpha.7",
+    "@coffeekraken/s-promise": "^2.0.0-alpha.7",
+    "@coffeekraken/s-sugar-config": "^2.0.0-alpha.7",
+    "@coffeekraken/s-sugar-json": "^2.0.0-alpha.7",
+    "@coffeekraken/s-theme": "^2.0.0-alpha.7",
+    "@coffeekraken/sugar": "^2.0.0-alpha.7",
+    "chokidar": "^3.5.2",
+    "faker": "^5.5.3",
+    "fantasticon": "1.2.2",
+    "glob": "^7.1.6",
+    "oslllo-svg-fixer": "^1.4.1",
+    "postcss": "^8.4.14"
+  },
+  "peerDependencies": {
+    "postcss": "^8"
+  },
+  "main": "dist/pkg/cjs/node/exports.js",
+  "module": "dist/pkg/esm/node/exports.js",
+  "exports": {
+    ".": {
+      "require": "./dist/pkg/cjs/node/exports.js",
+      "import": "./dist/pkg/esm/node/exports.js"
     },
-    "peerDependencies": {
-        "postcss": "^8"
+    "./shared/*": {
+      "require": "./dist/pkg/cjs/shared/*.js",
+      "import": "./dist/pkg/esm/shared/*.js"
     },
-    "main": "dist/pkg/cjs/node/exports.js",
-    "module": "dist/pkg/esm/node/exports.js",
-    "exports": {
-        ".": {
-            "require": "./dist/pkg/cjs/node/exports.js",
-            "import": "./dist/pkg/esm/node/exports.js"
-        },
-        "./shared/*": {
-            "require": "./dist/pkg/cjs/shared/*.js",
-            "import": "./dist/pkg/esm/shared/*.js"
-        },
-        "./node/*": {
-            "require": "./dist/pkg/cjs/node/*.js",
-            "import": "./dist/pkg/esm/node/*.js"
-        },
-        "./js/*": {
-            "require": "./dist/pkg/cjs/js/*.js",
-            "import": "./dist/pkg/esm/js/*.js"
-        }
+    "./node/*": {
+      "require": "./dist/pkg/cjs/node/*.js",
+      "import": "./dist/pkg/esm/node/*.js"
+    },
+    "./js/*": {
+      "require": "./dist/pkg/cjs/js/*.js",
+      "import": "./dist/pkg/esm/js/*.js"
     }
+  }
 }

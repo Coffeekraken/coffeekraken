@@ -1,4 +1,5 @@
 import __fs from 'fs';
+import __readJsonSync from './readJsonSync';
 
 /**
  * @name            readJson
@@ -26,14 +27,7 @@ export default function readJson(path: string): any {
         );
     }
     return new Promise(async (resolve, reject) => {
-        // const cachedValue = await __ipcCache(`readJson-${path}`);
-        // if (cachedValue) {
-        //     console.log('From cache', path);
-        //    return resolve(cachedValue);
-        // }
-
-        const json = (await import(path)).default;
+        const json = __readJsonSync(path);
         resolve(json);
-        // __ipcCache(`readJson-${path}`, json);
     });
 }

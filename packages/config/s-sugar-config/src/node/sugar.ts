@@ -456,9 +456,11 @@ export default class SSugarConfig extends __SClass {
         if (!this._rootSugarJson) {
             const rootSugarJsonPath = `${__packageRoot()}/sugar.json`;
             if (__fs.existsSync(rootSugarJsonPath)) {
-                this._rootSugarJson = sugarJson.sanitizeJson(
-                    await import(rootSugarJsonPath),
-                );
+                const json = await import(rootSugarJsonPath, {
+                    assert: { type: 'json' },
+                });
+
+                this._rootSugarJson = sugarJson.sanitizeJson(json.default);
                 if (
                     this._rootSugarJson.extends &&
                     !Array.isArray(this._rootSugarJson.extends)

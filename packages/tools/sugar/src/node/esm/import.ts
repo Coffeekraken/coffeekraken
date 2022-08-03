@@ -21,9 +21,16 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default async function _import(what: string | string[]) {
+    let settings = {};
     if (Array.isArray(what)) {
-        const imported = await import(what[0]);
+        if (what[0].match(/\.json$/)) {
+            settings = { assert: { type: 'json' } };
+        }
+        const imported = await import(what[0], settings);
         return imported[what[1]];
     }
-    return (await import(what)).default;
+    if (what.match(/\.json$/)) {
+        settings = { assert: { type: 'json' } };
+    }
+    return (await import(what, settings)).default;
 }

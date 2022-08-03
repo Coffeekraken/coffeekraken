@@ -46,7 +46,11 @@ export default class SDataHandlerJs {
      */
     static load(filePath) {
         return new __SPromise(async ({ resolve }) => {
-            let data = (await import(filePath)).default;
+            let settings = {};
+            if (filePath.match(/\.json$/)) {
+                settings = { assert: { type: 'json' } };
+            }
+            let data = (await import(filePath, settings)).default;
             if (typeof data === 'function') data = await data();
             resolve(data);
         });

@@ -1,4 +1,4 @@
-#!/usr/bin/env node --trace-warnings --trace-uncaught --no-warnings --es-module-specifier-resolution node
+#!/usr/bin/env -S node --experimental-json-modules --trace-warnings --trace-uncaught --no-warnings --es-module-specifier-resolution node
 // @ts-nocheck
 
 import __SBench from '@coffeekraken/s-bench';
@@ -443,7 +443,13 @@ export default class SSugarCli {
             const sugarJson = this._sugarJsons[packageName];
             const packageJson = (
                 await import(
-                    sugarJson.metas.path.replace('/sugar.json', '/package.json')
+                    sugarJson.metas.path.replace(
+                        '/sugar.json',
+                        '/package.json',
+                    ),
+                    {
+                        assert: { type: 'json' },
+                    }
                 )
             ).default;
             if (!sugarJson.cli) continue;

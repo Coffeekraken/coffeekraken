@@ -72,8 +72,18 @@ export default async function loadConfigFile(
     const extension = finalFilePath.split('.').pop();
     let str;
     switch (extension) {
-        case 'js':
         case 'json':
+            return (
+                // @ts-ignore
+                (
+                    await import(
+                        __path.resolve(finalSettings.rootDir, finalFilePath),
+                        { assert: { type: 'json' } }
+                    )
+                ).default
+            );
+            break;
+        case 'js':
             return (
                 // @ts-ignore
                 (

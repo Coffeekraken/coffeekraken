@@ -206,14 +206,20 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                 let buildTemporaryRes;
                 let importedConfig;
 
+                let importSettings = {};
+                if (filePath.match(/\.json$/)) {
+                    importSettings = {
+                        assert: { type: 'json' },
+                    };
+                }
+
                 if (filePath.match(/\.ts$/)) {
-                    buildTemporaryRes = await __STypescriptBuilder.buildTemporary(
-                        filePath,
-                    );
+                    buildTemporaryRes =
+                        await __STypescriptBuilder.buildTemporary(filePath);
                     filePath = buildTemporaryRes.path;
-                    importedConfig = await import(filePath);
+                    importedConfig = await import(filePath, importSettings);
                 } else {
-                    importedConfig = await import(filePath);
+                    importedConfig = await import(filePath, importSettings);
                 }
 
                 // if (

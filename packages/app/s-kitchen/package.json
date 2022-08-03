@@ -24,7 +24,8 @@
         "@coffeekraken/s-sugar-config": "^2.0.0-alpha.6",
         "@coffeekraken/s-sugar-json": "^2.0.0-alpha.6",
         "@coffeekraken/s-vite": "^2.0.0-alpha.6",
-        "@coffeekraken/sugar": "^2.0.0-alpha.6"
+        "@coffeekraken/sugar": "^2.0.0-alpha.6",
+        "recursive-copy": "^2.0.14"
     },
     "main": "dist/pkg/cjs/node/exports.js",
     "module": "dist/pkg/esm/node/exports.js",

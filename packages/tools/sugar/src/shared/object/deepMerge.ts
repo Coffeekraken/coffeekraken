@@ -1,13 +1,10 @@
 // @ts-nocheck
 
-import __copyTo from 'copy-to';
 import __isPlainObject from '../is/plainObject';
-import __unique from '../array/unique';
-import __deepMerge from 'deepmerge';
 
 /**
  * @name                deepMerge
- * @namespace            js.object
+ * @namespace            shared.object
  * @type                Function
  * @platform          js
  * @platform          node

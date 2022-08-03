@@ -6,11 +6,14 @@
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -39,17 +42,16 @@
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
-            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
-            "@coffeekraken/s-jest-tester",
+            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-monorepo",
-            "@coffeekraken/s-notification",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
@@ -59,22 +61,27 @@
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-rating-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-testinator",
+            "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
             "@coffeekraken/s-view-renderer-engine-blade",
             "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
@@ -93,7 +100,8 @@
                         {
                             "type": "Class"
                         }
-                    ]
+                    ],
+                    "raw": "Class"
                 },
                 "platform": [
                     {
@@ -125,14 +133,15 @@
                 "relPath": "src/js/SCssAnimation.ts",
                 "children": {
                     "$elm": {
-                        "id": "b054ccfebb933501b6a69251d2e28644b4f83269d6ef4d71806ee2c31e8a3d62",
+                        "id": "sb054ccfebb933501b6a69251d2e28644b4f83269d6ef4d71806ee2c31e8a3d62",
                         "name": "$elm",
                         "type": {
                             "types": [
                                 {
                                     "type": "HTMLElement"
                                 }
-                            ]
+                            ],
+                            "raw": "HTMLElement"
                         },
                         "description": "Store the HTMLElement reference",
                         "since": "2.0.0",
@@ -143,14 +152,15 @@
                         }
                     },
                     "matrix": {
-                        "id": "ef5c98bfb62bb40b4dc5d55fdea1fb84de3a055b93d88ebc181c6bb105c85ce5",
+                        "id": "sef5c98bfb62bb40b4dc5d55fdea1fb84de3a055b93d88ebc181c6bb105c85ce5",
                         "name": "matrix",
                         "type": {
                             "types": [
                                 {
                                     "type": "Array"
                                 }
-                            ]
+                            ],
+                            "raw": "Array"
                         },
                         "description": "Access the matrix array of the current element",
                         "since": "2.0.0",
@@ -161,14 +171,15 @@
                         }
                     },
                     "matrixstr": {
-                        "id": "1f700d2fdce021fb9956880e855eff2038d635adcffcd38642db9d1bd969a01b",
+                        "id": "s1f700d2fdce021fb9956880e855eff2038d635adcffcd38642db9d1bd969a01b",
                         "name": "matrixStr",
                         "type": {
                             "types": [
                                 {
                                     "type": "String"
                                 }
-                            ]
+                            ],
+                            "raw": "String"
                         },
                         "description": "Get the matrix string of the current element",
                         "since": "2.0.0",
@@ -178,33 +189,16 @@
                             "url": "https://coffeekraken.io"
                         }
                     },
-                    "cssanimationsettings": {
-                        "id": "cf9495e73348270b6440d78ad0aa0b3e922a5a3df0e3a4567eae904b75218ec1",
-                        "name": "cssAnimationSettings",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISCssAnimationSettings"
-                                }
-                            ]
-                        },
-                        "description": "Access the cssAnimation settings",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
                     "constructor": {
-                        "id": "1a89c514940eb0896265bdcc93868bccdc3432cd05e1b3d2b4f2ac7136029e96",
+                        "id": "s1a89c514940eb0896265bdcc93868bccdc3432cd05e1b3d2b4f2ac7136029e96",
                         "name": "constructor",
                         "type": {
                             "types": [
                                 {
                                     "type": "Function"
                                 }
-                            ]
+                            ],
+                            "raw": "Function"
                         },
                         "description": "Constructor",
                         "since": "2.0.0",
@@ -215,14 +209,15 @@
                         }
                     },
                     "play": {
-                        "id": "d391c2a7f3aacc8f639579f5c92ef55e8e60f87df973f027053af363ce0e90fc",
+                        "id": "sd391c2a7f3aacc8f639579f5c92ef55e8e60f87df973f027053af363ce0e90fc",
                         "name": "play",
                         "type": {
                             "types": [
                                 {
                                     "type": "Function"
                                 }
-                            ]
+                            ],
+                            "raw": "Function"
                         },
                         "description": "This method allows you to play the animation",
                         "since": "2.0.0",
@@ -233,14 +228,15 @@
                         }
                     },
                     "stop": {
-                        "id": "8b13256c8548aef7bb28efc0cd60ad513d5b99508d780245ea528e68f61f7a7e",
+                        "id": "s8b13256c8548aef7bb28efc0cd60ad513d5b99508d780245ea528e68f61f7a7e",
                         "name": "stop",
                         "type": {
                             "types": [
                                 {
                                     "type": "Function"
                                 }
-                            ]
+                            ],
+                            "raw": "Function"
                         },
                         "description": "This method allows you to stop the current animation if their's one and seek to 0.",
                         "since": "2.0.0",
@@ -251,14 +247,15 @@
                         }
                     },
                     "seekto": {
-                        "id": "a03d155b36e859a44520146f52000d888bff9fd9f0e47d794372711fc3192fb7",
+                        "id": "sa03d155b36e859a44520146f52000d888bff9fd9f0e47d794372711fc3192fb7",
                         "name": "seekTo",
                         "type": {
                             "types": [
                                 {
                                     "type": "Function"
                                 }
-                            ]
+                            ],
+                            "raw": "Function"
                         },
                         "description": "This method allows you to seek to a specific percentage of the animation",
                         "since": "2.0.0",
@@ -269,14 +266,15 @@
                         }
                     },
                     "getanimationbyname": {
-                        "id": "e3e57bdc44f19eb82544d5076bc1fbcad415f0df1db5aa36b1b39e6a1b03a407",
+                        "id": "se3e57bdc44f19eb82544d5076bc1fbcad415f0df1db5aa36b1b39e6a1b03a407",
                         "name": "getAnimationByName",
                         "type": {
                             "types": [
                                 {
                                     "type": "Function"
                                 }
-                            ]
+                            ],
+                            "raw": "Function"
                         },
                         "description": "This method allows you to get an animation object by it's name",
                         "since": "2.0.0",

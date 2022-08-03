@@ -2,7 +2,7 @@ import __objectHash from 'object-hash';
 // import __objectHash from 'hash-obj';
 /**
  * @name            objectHash
- * @namespace       node.fs
+ * @namespace       shared.object
  * @type            Function
  * @platform        js
  * @platform        node

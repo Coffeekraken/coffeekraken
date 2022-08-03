@@ -4,7 +4,7 @@ import __isPlain from '../is/plainObject';
 
 /**
  * @name                              flatten
- * @namespace            js.object
+ * @namespace            shared.object
  * @type                              Function
  * @platform          js
  * @platform          node

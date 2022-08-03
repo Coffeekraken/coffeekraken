@@ -1,14 +1,12 @@
 // @ts-nocheck
 
 import __minimatch from 'minimatch';
-import __flatten from './flatten';
 import __deepize from './deepize';
-import __get from './get';
-import __unquote from '../string/unquote';
+import __flatten from './flatten';
 
 /**
  * @name                          getGlob
- * @namespace            js.object
+ * @namespace            shared.object
  * @type                          Function
  * @platform          js
  * @platform          node

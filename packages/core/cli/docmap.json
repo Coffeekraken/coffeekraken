@@ -21,6 +21,7 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -73,6 +74,7 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-testinator",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -422,6 +424,55 @@
                 "filename": "SCliFsCopyParamsInterface.ts",
                 "extension": "ts",
                 "relPath": "src/node/fs/interface/SCliFsCopyParamsInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.cli.node.fs.interface.SCliNvmAutoSwitchParamsInterface": {
+                "id": "@coffeekraken.cli.node.fs.interface.SCliNvmAutoSwitchParamsInterface",
+                "name": "SCliNvmAutoSwitchParamsInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ],
+                    "raw": ".                      Class"
+                },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface specify the parameters needed to the `sugar nvm.autoSwitch` command.",
+                "namespace": "@coffeekraken.cli.node.fs.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SCliNvmAutoSwitchParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "install": {
+                            "description": "Specify if you would like to install this feature on your system",
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "i"
+                        },
+                        "uinstall": {
+                            "description": "Specify if you would like to uninstall this feature from your system",
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "u"
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SCliNvmAutoSwitchParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/nvm/interface/SCliNvmAutoSwitchParamsInterface.ts",
                 "children": {}
             }
         }

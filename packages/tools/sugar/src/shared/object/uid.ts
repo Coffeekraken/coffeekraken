@@ -1,8 +1,7 @@
 // @ts-nocheck
 
-import __encryptObject from '../crypt/object';
-import __filter from '../object/filter';
 import __crypto from 'crypto';
+import __encryptObject from '../crypt/object';
 
 /**
  * @name                            uid
@@ -19,7 +18,7 @@ import __crypto from 'crypto';
  * @param       {String}            [format='sha256']    The uid format that you want. Here's the available values:
  * - sha256: return a SHA256 64 characters formated string
  * - full: return the full length uid. The length can vary depending on the objects passed
- * @param       {String}            [key='sugar.js.object.uid']     The key used to encrypt the object
+ * @param       {String}            [key='sugar.shared.object.uid']     The key used to encrypt the object
  * @return      {String}                                The uniqid generate based on the objects passed
  *
  * @todo      interface
@@ -37,7 +36,7 @@ import __crypto from 'crypto';
 function uid(obj, settings = {}) {
     settings = {
         format: 'sha256',
-        key: 'sugar.js.object.uid',
+        key: 'sugar.shared.object.uid',
         ...settings,
     };
 

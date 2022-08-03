@@ -21,6 +21,7 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -73,6 +74,7 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-testinator",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -3469,7 +3471,7 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import getFiles from '@coffeekraken/node/fs/getFiles';\nawait getFiles('* /*.txt');\nconst watcher = getFiles('* /*.txt', {\n watch: true\n});\nwatcher.on('add', (file) => {\n // do something with your file\n});"
+                        "code": "import getFiles from '@coffeekraken/node/fs/getFiles';\nawait getFiles('* /*.txt');\nconst watcher = getFiles('* /*.txt', {\n watch: true\n});\nwatcher.on('add', ({file, resolve}) => {\n // do something with your file\n // mark the file as treated\n resolve();\n});"
                     }
                 ],
                 "async": "true",
@@ -11906,6 +11908,47 @@
                 "relPath": "src/shared/is/creditCard.ts",
                 "children": {}
             },
+            "@coffeekraken.sugar.shared.is.cyclic": {
+                "id": "@coffeekraken.sugar.shared.is.cyclic",
+                "name": "cyclic",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function check if the passed object has circular dependencies and if so, returns where it has been found in the object",
+                "namespace": "@coffeekraken.sugar.shared.is",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __isCyclic from '@coffeekraken/sugar/shared/is/cyclic';\nconst obj = { hello: 'world' };\nobj.cyclic = obj;\n__isCyclic(obj);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "cyclic.ts",
+                "extension": "ts",
+                "relPath": "src/shared/is/cyclic.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.shared.is.isDdmmyyyyDate": {
                 "id": "@coffeekraken.sugar.shared.is.isDdmmyyyyDate",
                 "name": "isDdmmyyyyDate",
@@ -13669,8 +13712,8 @@
                 "relPath": "src/shared/object/camelCaseProps.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.object.clone": {
-                "id": "@coffeekraken.sugar.js.object.clone",
+            "@coffeekraken.sugar.shared.object.clone": {
+                "id": "@coffeekraken.sugar.shared.object.clone",
                 "name": "clone",
                 "type": {
                     "types": [
@@ -13691,7 +13734,7 @@
                     }
                 ],
                 "description": "This function allows you to clone an object either at 1 level, or deeply.",
-                "namespace": "@coffeekraken.sugar.js.object",
+                "namespace": "@coffeekraken.sugar.shared.object",
                 "status": "beta",
                 "example": [
                     {
@@ -13710,8 +13753,8 @@
                 "relPath": "src/shared/object/clone.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.object.constructorName": {
-                "id": "@coffeekraken.sugar.js.object.constructorName",
+            "@coffeekraken.sugar.shared.object.constructorName": {
+                "id": "@coffeekraken.sugar.shared.object.constructorName",
                 "name": "constructorName",
                 "type": {
                     "types": [
@@ -13732,7 +13775,7 @@
                     }
                 ],
                 "description": "Return the constructor name of the passed object",
-                "namespace": "@coffeekraken.sugar.js.object",
+                "namespace": "@coffeekraken.sugar.shared.object",
                 "status": "beta",
                 "example": [
                     {
@@ -13751,8 +13794,8 @@
                 "relPath": "src/shared/object/constructorName.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.object.decycle": {
-                "id": "@coffeekraken.sugar.js.object.decycle",
+            "@coffeekraken.sugar.shared.object.decycle": {
+                "id": "@coffeekraken.sugar.shared.object.decycle",
                 "name": "decycle",
                 "type": {
                     "types": [
@@ -13773,7 +13816,7 @@
                     }
                 ],
                 "description": "This method simply remove the circular references in the passed object",
-                "namespace": "@coffeekraken.sugar.js.object",
+                "namespace": "@coffeekraken.sugar.shared.object",
                 "status": "beta",
                 "example": [
                     {
@@ -13792,8 +13835,8 @@
                 "relPath": "src/shared/object/decycle.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.object.deepAssign": {
-                "id": "@coffeekraken.sugar.js.object.deepAssign",
+            "@coffeekraken.sugar.shared.object.deepAssign": {
+                "id": "@coffeekraken.sugar.shared.object.deepAssign",
                 "name": "deepAssign",
                 "type": {
                     "types": [
@@ -13814,7 +13857,7 @@
                     }
                 ],
                 "description": "This function take as first parameter the object you want to assign others to,\nthen others objects you want to assign to the first.\nThe difference with the ```deepMerge``` function is that this one keep the first\npassed object as reference and update it directly. The ```deepMerge``` one create a new\nobject with the merging result",
-                "namespace": "@coffeekraken.sugar.js.object",
+                "namespace": "@coffeekraken.sugar.shared.object",
                 "status": "beta",
                 "example": [
                     {
@@ -13833,8 +13876,8 @@
                 "relPath": "src/shared/object/deepAssign.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.object.deepFilter": {
-                "id": "@coffeekraken.sugar.js.object.deepFilter",
+            "@coffeekraken.sugar.shared.object.deepFilter": {
+                "id": "@coffeekraken.sugar.shared.object.deepFilter",
                 "name": "deepFilter",
                 "type": {
                     "types": [
@@ -13855,7 +13898,7 @@
                     }
                 ],
                 "description": "Allow to filter an object using a function and this through all of the object structure. It works the same as the filter method on the Array object type.\nThe passed filter function will have as parameter each object properties and must return true or false depending if you want the\npassed property in the filtered object",
-                "namespace": "@coffeekraken.sugar.js.object",
+                "namespace": "@coffeekraken.sugar.shared.object",
                 "status": "beta",
                 "example": [
                     {
@@ -13874,8 +13917,8 @@
                 "relPath": "src/shared/object/deepFilter.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.object.deepize": {
-                "id": "@coffeekraken.sugar.js.object.deepize",
+            "@coffeekraken.sugar.shared.object.deepize": {
+                "id": "@coffeekraken.sugar.shared.object.deepize",
                 "name": "deepize",
                 "type": {
                     "types": [
@@ -13896,7 +13939,7 @@
                     }
                 ],
                 "description": "This function simply take an object like this one:\n{\n'something.cool': 'hello'\n}\nand convert it to something like this:\n{\nsomething: {\ncool: 'hello'\n}\n}",
-                "namespace": "@coffeekraken.sugar.js.object",
+                "namespace": "@coffeekraken.sugar.shared.object",
                 "status": "beta",
                 "example": [
                     {
@@ -13915,8 +13958,8 @@
                 "relPath": "src/shared/object/deepize.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.object.deepMap": {
-                "id": "@coffeekraken.sugar.js.object.deepMap",
+            "@coffeekraken.sugar.shared.object.deepMap": {
+                "id": "@coffeekraken.sugar.shared.object.deepMap",
                 "name": "deepMap",
                 "type": {
                     "types": [
@@ -13937,7 +13980,7 @@
                     }
                 ],
                 "description": "This function is the same as the \"map\" one. The only difference is that this one goes deep into the object",
-                "namespace": "@coffeekraken.sugar.js.object",
+                "namespace": "@coffeekraken.sugar.shared.object",
                 "status": "beta",
                 "example": [
                     {
@@ -13956,8 +13999,8 @@
                 "relPath": "src/shared/object/deepMap.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.object.deepMerge": {
-                "id": "@coffeekraken.sugar.js.object.deepMerge",
+            "@coffeekraken.sugar.shared.object.deepMerge": {
+                "id": "@coffeekraken.sugar.shared.object.deepMerge",
                 "name": "deepMerge",
                 "type": {
                     "types": [
@@ -13978,7 +14021,7 @@
                     }
                 ],
                 "description": "Deep merge one object with another and return the merged object result. This merging implementation support:\n- Merging object with getters/setters\n- n numbers of objects as arguments",
-                "namespace": "@coffeekraken.sugar.js.object",
+                "namespace": "@coffeekraken.sugar.shared.object",
                 "status": "beta",
                 "example": [
                     {
@@ -13997,8 +14040,8 @@
                 "relPath": "src/shared/object/deepMerge.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.object.deepProxy": {
-                "id": "@coffeekraken.sugar.js.object.deepProxy",
+            "@coffeekraken.sugar.shared.object.deepProxy": {
+                "id": "@coffeekraken.sugar.shared.object.deepProxy",
                 "name": "deepProxy",
                 "type": {
                     "types": [
@@ -14019,7 +14062,7 @@
                     }
                 ],
                 "description": "This function allows you to add Proxy to an object in deep fashion.\nNormally the Proxy process only the level on which it has been added. Here we add Proxy to all the\nobject levels and to new properties as well.\n\nOn the returned proxied object, you will have access to the ```revoke``` method that you can call to revoke the proxy applied.\nThis method will return you a shallow version of the proxied object that you can use as you want",
-                "namespace": "@coffeekraken.sugar.js.object",
+                "namespace": "@coffeekraken.sugar.shared.object",
                 "status": "wip",
                 "example": [
                     {
@@ -14038,8 +14081,8 @@
                 "relPath": "src/shared/object/deepProxy.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.object.delete": {
-                "id": "@coffeekraken.sugar.js.object.delete",
+            "@coffeekraken.sugar.shared.object.delete": {
+                "id": "@coffeekraken.sugar.shared.object.delete",
                 "name": "delete",
                 "type": {
                     "types": [
@@ -14060,7 +14103,7 @@
                     }
                 ],
                 "description": "Delete an object property using a dotPath like \"something.else\"",
-                "namespace": "@coffeekraken.sugar.js.object",
+                "namespace": "@coffeekraken.sugar.shared.object",
                 "status": "beta",
                 "example": [
                     {
@@ -14079,8 +14122,8 @@
                 "relPath": "src/shared/object/delete.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.object.diff": {
-                "id": "@coffeekraken.sugar.js.object.diff",
+            "@coffeekraken.sugar.shared.object.diff": {
+                "id": "@coffeekraken.sugar.shared.object.diff",
                 "name": "diff",
                 "type": {
                     "types": [
@@ -14101,7 +14144,7 @@
                     }
                 ],
                 "description": "This function take two objects and return an object that contains only what has been changed between the two.\nThis function is a simple wrapper around the nice object-diff package from Thomas Jensen that you can find here: https://www.npmjs.com/package/object-diff",
-                "namespace": "@coffeekraken.sugar.js.object",
+                "namespace": "@coffeekraken.sugar.shared.object",
                 "status": "beta",
                 "example": [
                     {
@@ -14120,8 +14163,8 @@
                 "relPath": "src/shared/object/diff.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.object.ensureExists": {
-                "id": "@coffeekraken.sugar.js.object.ensureExists",
+            "@coffeekraken.sugar.shared.object.ensureExists": {
+                "id": "@coffeekraken.sugar.shared.object.ensureExists",
                 "name": "ensureExists",
                 "type": {
                     "types": [
@@ -14142,7 +14185,7 @@
                     }
                 ],
                 "description": "Pass a string like \"my.cool.object\" and the value it has to be and this function will ensure that this deep object exist",
-                "namespace": "@coffeekraken.sugar.js.object",
+                "namespace": "@coffeekraken.sugar.shared.object",
                 "status": "beta",
                 "example": [
                     {
@@ -14161,8 +14204,8 @@
                 "relPath": "src/shared/object/ensureExists.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.object.extractValues": {
-                "id": "@coffeekraken.sugar.js.object.extractValues",
+            "@coffeekraken.sugar.shared.object.extractValues": {
+                "id": "@coffeekraken.sugar.shared.object.extractValues",
                 "name": "extractValues",
                 "type": {
                     "types": [
@@ -14183,7 +14226,7 @@
                     }
                 ],
                 "description": "This function take an array of objects and a key name as parameters and return an array containing\nonly the specified object key value.",
-                "namespace": "@coffeekraken.sugar.js.object",
+                "namespace": "@coffeekraken.sugar.shared.object",
                 "status": "beta",
                 "example": [
                     {
@@ -14202,8 +14245,8 @@
                 "relPath": "src/shared/object/extractValues.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.object.filter": {
-                "id": "@coffeekraken.sugar.js.object.filter",
+            "@coffeekraken.sugar.shared.object.filter": {
+                "id": "@coffeekraken.sugar.shared.object.filter",
                 "name": "filter",
                 "type": {
                     "types": [
@@ -14224,7 +14267,7 @@
                     }
                 ],
                 "description": "Allow to filter an object using a function. It works the same as the filter method on the Array object type.\nThe passed filter function will have as parameter each object properties and must return true or false depending if you want the\npassed property in the filtered object",
-                "namespace": "@coffeekraken.sugar.js.object",
+                "namespace": "@coffeekraken.sugar.shared.object",
                 "status": "beta",
                 "example": [
                     {
@@ -14243,8 +14286,8 @@
                 "relPath": "src/shared/object/filter.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.object.flatten": {
-                "id": "@coffeekraken.sugar.js.object.flatten",
+            "@coffeekraken.sugar.shared.object.flatten": {
+                "id": "@coffeekraken.sugar.shared.object.flatten",
                 "name": "flatten",
                 "type": {
                     "types": [
@@ -14265,7 +14308,7 @@
                     }
                 ],
                 "description": "Transform the passed multiple level object into a single level one",
-                "namespace": "@coffeekraken.sugar.js.object",
+                "namespace": "@coffeekraken.sugar.shared.object",
                 "status": "beta",
                 "example": [
                     {
@@ -14284,8 +14327,8 @@
                 "relPath": "src/shared/object/flatten.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.object.get": {
-                "id": "@coffeekraken.sugar.js.object.get",
+            "@coffeekraken.sugar.shared.object.get": {
+                "id": "@coffeekraken.sugar.shared.object.get",
                 "name": "get",
                 "type": {
                     "types": [
@@ -14306,7 +14349,7 @@
                     }
                 ],
                 "description": "Retreive an object value using a dotted path like \"myObject.myProperty.myValue\"",
-                "namespace": "@coffeekraken.sugar.js.object",
+                "namespace": "@coffeekraken.sugar.shared.object",
                 "status": "beta",
                 "example": [
                     {
@@ -14325,8 +14368,8 @@
                 "relPath": "src/shared/object/get.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.object.getGlob": {
-                "id": "@coffeekraken.sugar.js.object.getGlob",
+            "@coffeekraken.sugar.shared.object.getGlob": {
+                "id": "@coffeekraken.sugar.shared.object.getGlob",
                 "name": "getGlob",
                 "type": {
                     "types": [
@@ -14347,7 +14390,7 @@
                     }
                 ],
                 "description": "Retreive an object value using a dotted path like \"myObject.myProperty.myValue\".\nIt support glob patterns like \"something..id\" and returns you a new object containing\nall values with the path that matches the passed glob pattern.",
-                "namespace": "@coffeekraken.sugar.js.object",
+                "namespace": "@coffeekraken.sugar.shared.object",
                 "status": "beta",
                 "example": [
                     {
@@ -14366,8 +14409,8 @@
                 "relPath": "src/shared/object/getGlob.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.object.getKeyByValue": {
-                "id": "@coffeekraken.sugar.js.object.getKeyByValue",
+            "@coffeekraken.sugar.shared.object.getKeyByValue": {
+                "id": "@coffeekraken.sugar.shared.object.getKeyByValue",
                 "name": "getKeyByValue",
                 "type": {
                     "types": [
@@ -14388,7 +14431,7 @@
                     }
                 ],
                 "description": "Return the key that correspond to the passed value in the passed object",
-                "namespace": "@coffeekraken.sugar.js.object",
+                "namespace": "@coffeekraken.sugar.shared.object",
                 "status": "beta",
                 "example": [
                     {
@@ -14407,8 +14450,8 @@
                 "relPath": "src/shared/object/getKeyByValue.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.object.map": {
-                "id": "@coffeekraken.sugar.js.object.map",
+            "@coffeekraken.sugar.shared.object.map": {
+                "id": "@coffeekraken.sugar.shared.object.map",
                 "name": "map",
                 "type": {
                     "types": [
@@ -14429,7 +14472,7 @@
                     }
                 ],
                 "description": "This is the same function as the \"Array.map\" but for objects. It will iterate over all the properties\nof the passed object and pass the value to your process function. It will then save the property\nwith your processed value",
-                "namespace": "@coffeekraken.sugar.js.object",
+                "namespace": "@coffeekraken.sugar.shared.object",
                 "status": "beta",
                 "example": [
                     {
@@ -14449,8 +14492,49 @@
                 "relPath": "src/shared/object/map.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.node.fs.objectHash": {
-                "id": "@coffeekraken.sugar.node.fs.objectHash",
+            "@coffeekraken.sugar.shared.object.merge": {
+                "id": "@coffeekraken.sugar.shared.object.merge",
+                "name": "merge",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Merge one object with another and return the merged object result. This merging implementation support:\n- Merging object with getters/setters\n- n numbers of objects as arguments",
+                "namespace": "@coffeekraken.sugar.shared.object",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import merge from '@coffeekraken/sugar/node/object/merge';\nmerge({a: 'hello'}, {a: 'plop', hello: 'world');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "merge.ts",
+                "extension": "ts",
+                "relPath": "src/shared/object/merge.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.shared.object.objectHash": {
+                "id": "@coffeekraken.sugar.shared.object.objectHash",
                 "name": "objectHash",
                 "type": {
                     "types": [
@@ -14471,7 +14555,7 @@
                     }
                 ],
                 "description": "This function allows you to get back an integrity hash passed object.",
-                "namespace": "@coffeekraken.sugar.node.fs",
+                "namespace": "@coffeekraken.sugar.shared.object",
                 "status": "beta",
                 "example": [
                     {
@@ -14490,8 +14574,8 @@
                 "relPath": "src/shared/object/objectHash.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.object.propertyProxy": {
-                "id": "@coffeekraken.sugar.js.object.propertyProxy",
+            "@coffeekraken.sugar.shared.object.propertyProxy": {
+                "id": "@coffeekraken.sugar.shared.object.propertyProxy",
                 "name": "propertyProxy",
                 "type": {
                     "types": [
@@ -14512,7 +14596,7 @@
                     }
                 ],
                 "description": "Create a proxy for and object property.\nThis gives you the possibility to process the data of the property\nwhen it is getted or setted.",
-                "namespace": "@coffeekraken.sugar.js.object",
+                "namespace": "@coffeekraken.sugar.shared.object",
                 "status": "beta",
                 "example": [
                     {
@@ -14531,8 +14615,8 @@
                 "relPath": "src/shared/object/propertyProxy.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.object.resolveTokens": {
-                "id": "@coffeekraken.sugar.js.object.resolveTokens",
+            "@coffeekraken.sugar.shared.object.resolveTokens": {
+                "id": "@coffeekraken.sugar.shared.object.resolveTokens",
                 "name": "resolveTokens",
                 "type": {
                     "types": [
@@ -14553,7 +14637,7 @@
                     }
                 ],
                 "description": "This function take an object and propare it to accept tokens like:\n- '{this.something.else}'\n- etc...",
-                "namespace": "@coffeekraken.sugar.js.object",
+                "namespace": "@coffeekraken.sugar.shared.object",
                 "status": "beta",
                 "example": [
                     {
@@ -14572,8 +14656,8 @@
                 "relPath": "src/shared/object/resolveTokens.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.object.set": {
-                "id": "@coffeekraken.sugar.js.object.set",
+            "@coffeekraken.sugar.shared.object.set": {
+                "id": "@coffeekraken.sugar.shared.object.set",
                 "name": "set",
                 "type": {
                     "types": [
@@ -14594,7 +14678,7 @@
                     }
                 ],
                 "description": "Set an object value using a dotted object path like \"myObject.myProperty.myValue\" to set his position",
-                "namespace": "@coffeekraken.sugar.js.object",
+                "namespace": "@coffeekraken.sugar.shared.object",
                 "status": "beta",
                 "example": [
                     {
@@ -14613,8 +14697,8 @@
                 "relPath": "src/shared/object/set.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.object.sort": {
-                "id": "@coffeekraken.sugar.js.object.sort",
+            "@coffeekraken.sugar.shared.object.sort": {
+                "id": "@coffeekraken.sugar.shared.object.sort",
                 "name": "sort",
                 "type": {
                     "types": [
@@ -14635,7 +14719,7 @@
                     }
                 ],
                 "description": "Sort an object properties the same way as the Array.sort do it",
-                "namespace": "@coffeekraken.sugar.js.object",
+                "namespace": "@coffeekraken.sugar.shared.object",
                 "status": "beta",
                 "example": [
                     {
@@ -14654,8 +14738,8 @@
                 "relPath": "src/shared/object/sort.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.object.sortDeep": {
-                "id": "@coffeekraken.sugar.js.object.sortDeep",
+            "@coffeekraken.sugar.shared.object.sortDeep": {
+                "id": "@coffeekraken.sugar.shared.object.sortDeep",
                 "name": "sortDeep",
                 "type": {
                     "types": [
@@ -14676,7 +14760,7 @@
                     }
                 ],
                 "description": "Sort an object properties the same way as the Array.sort do it but will do it recusrively to sort the object deeply.",
-                "namespace": "@coffeekraken.sugar.js.object",
+                "namespace": "@coffeekraken.sugar.shared.object",
                 "status": "beta",
                 "example": [
                     {
@@ -14695,8 +14779,8 @@
                 "relPath": "src/shared/object/sortDeep.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.object.SWatch": {
-                "id": "@coffeekraken.sugar.js.object.SWatch",
+            "@coffeekraken.sugar.shared.object.SWatch": {
+                "id": "@coffeekraken.sugar.shared.object.SWatch",
                 "name": "SWatch",
                 "type": {
                     "types": [
@@ -14717,7 +14801,7 @@
                     }
                 ],
                 "description": "This class allows you to easily monitor some object properties and get the new and old value of it",
-                "namespace": "@coffeekraken.sugar.js.object",
+                "namespace": "@coffeekraken.sugar.shared.object",
                 "status": "wip",
                 "example": [
                     {
@@ -14796,8 +14880,49 @@
                 "relPath": "src/shared/object/toJson.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.object.toQueryString": {
-                "id": "@coffeekraken.sugar.js.object.toQueryString",
+            "@coffeekraken.sugar.shared.object.toPlainObject": {
+                "id": "@coffeekraken.sugar.shared.object.toPlainObject",
+                "name": "toPlainObject",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function take an object as parameter and return a new one that does not have getters, setters, etc...",
+                "namespace": "@coffeekraken.sugar.shared.object",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import toPlainObject from '@coffeekraken/sugar/node/object/toPlainObject';\ntoPlainObject({ something: 'cool' });"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "toPlainObject.ts",
+                "extension": "ts",
+                "relPath": "src/shared/object/toPlainObject.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.shared.object.toQueryString": {
+                "id": "@coffeekraken.sugar.shared.object.toQueryString",
                 "name": "toQueryString",
                 "type": {
                     "types": [
@@ -14818,7 +14943,7 @@
                     }
                 ],
                 "description": "Transform an object (key => pairs) to a query string like \"?var1=value1&var2\"",
-                "namespace": "@coffeekraken.sugar.js.object",
+                "namespace": "@coffeekraken.sugar.shared.object",
                 "status": "beta",
                 "example": [
                     {
@@ -14878,8 +15003,8 @@
                 "relPath": "src/shared/object/uid.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.object.watch": {
-                "id": "@coffeekraken.sugar.js.object.watch",
+            "@coffeekraken.sugar.shared.object.watch": {
+                "id": "@coffeekraken.sugar.shared.object.watch",
                 "name": "watch",
                 "type": {
                     "types": [
@@ -14900,7 +15025,7 @@
                     }
                 ],
                 "description": "This method is a simple wrapper around the SWatch class that allows you to watch some action on object and arrays",
-                "namespace": "@coffeekraken.sugar.js.object",
+                "namespace": "@coffeekraken.sugar.shared.object",
                 "status": "wip",
                 "example": [
                     {

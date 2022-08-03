@@ -4,7 +4,7 @@ import __set from './set';
 
 /**
  * @name                      delete
- * @namespace            js.object
+ * @namespace            shared.object
  * @type                      Function
  * @platform          js
  * @platform          node

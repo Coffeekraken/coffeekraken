@@ -1,24 +1,17 @@
 module.exports = (__uid) => {
+    describe('sugar.shared.object.uid', () => {
+        it('Should encrypt the same object twice the same', (done) => {
+            const obj = {
+                param1: 'hello',
+                param2: 'world coco',
+            };
 
-  describe('sugar.js.object.uid', () => {
+            const res1 = __uid(obj, 'somethingCool');
+            const res2 = __uid(obj, 'somethingCool');
 
-    it('Should encrypt the same object twice the same', done => {
+            expect(res1).toBe(res2);
 
-      const obj = {
-        param1: 'hello',
-        param2: 'world coco'
-      }
-
-      const res1 = __uid(obj, 'somethingCool');
-      const res2 = __uid(obj, 'somethingCool');
-
-      expect(res1).toBe(res2);
-
-      done();
-
+            done();
+        });
     });
-
-  });
-
-
-}
+};

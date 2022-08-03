@@ -22,6 +22,7 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -73,6 +74,8 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-testinator",
+            "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
@@ -103,6 +106,54 @@
                 "default": "[theme.ui.default.borderRadius]",
                 "description": "Specify the default border radius for button ui",
                 "namespace": "@coffeekraken.s-slider-component.config.themeUi.button",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.s-slider-component.config.themeUi.slider.defaultColor": {
+                "id": "@coffeekraken.s-slider-component.config.themeUi.slider.defaultColor",
+                "name": "defaultColor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.defaultColor]",
+                "description": "Specify the default color for datetime picker ui",
+                "namespace": "@coffeekraken.s-slider-component.config.themeUi.slider",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.s-slider-component.config.themeUi.slider.defaultStyle": {
+                "id": "@coffeekraken.s-slider-component.config.themeUi.slider.defaultStyle",
+                "name": "defaultStyle",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Number"
+                        }
+                    ],
+                    "raw": "Number"
+                },
+                "default": "[theme.ui.default.defaultStyle]",
+                "description": "Specify the default style for your filtrable input ui",
+                "namespace": "@coffeekraken.s-slider-component.config.themeUi.slider",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -151,6 +202,30 @@
                 "default": "[theme.ui.default.depth]",
                 "description": "Specify the default depth for your button ui",
                 "namespace": "@coffeekraken.s-slider-component.config.themeUi.button",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.s-slider-component.config.themeUi.slider.rhythmVertical": {
+                "id": "@coffeekraken.s-slider-component.config.themeUi.slider.rhythmVertical",
+                "name": "rhythmVertical",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Object"
+                        }
+                    ],
+                    "raw": "Object"
+                },
+                "default": "[theme.ui.default.rhythmVertical]",
+                "description": "Specify the default vertical rhythm for your datetime picker ui",
+                "namespace": "@coffeekraken.s-slider-component.config.themeUi.slider",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -295,10 +370,10 @@
                             "description": "Specify which behavior your want to use for your slider. Behavior are like \"presets\" with different animations, etc...",
                             "values": [
                                 "none",
-                                "basic"
+                                "default"
                             ],
                             "type": "String",
-                            "default": "basic",
+                            "default": "default",
                             "physical": true
                         },
                         "nextIconClass": {
@@ -1022,10 +1097,10 @@
                             "description": "Specify which behavior your want to use for your slider. Behavior are like \"presets\" with different animations, etc...",
                             "values": [
                                 "none",
-                                "basic"
+                                "default"
                             ],
                             "type": "String",
-                            "default": "basic",
+                            "default": "default",
                             "physical": true
                         },
                         "nextIconClass": {
@@ -1193,6 +1268,43 @@
                 "filename": "SSliderSlideableBehaviorInterface.ts",
                 "extension": "ts",
                 "relPath": "src/js/behaviors/interface/SSliderSlideableBehaviorInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-slider-component.ui.slider.slider": {
+                "id": "@coffeekraken.s-slider-component.ui.slider.slider",
+                "name": "slider",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ],
+                    "raw": "PostcssMixin"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "Apply the slider style to any s-slider element",
+                "namespace": "@coffeekraken.s-slider-component.ui.slider",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".s-slider {\n   @sugar.ui.slider;\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "slider.ts",
+                "extension": "ts",
+                "relPath": "src/node/postcss/mixins/ui/slider/slider.ts",
                 "children": {}
             }
         }

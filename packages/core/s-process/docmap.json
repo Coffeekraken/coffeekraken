@@ -22,6 +22,7 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -73,6 +74,7 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-testinator",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -156,25 +158,6 @@
                 "extension": "ts",
                 "relPath": "src/node/SCommandProcess.ts",
                 "children": {
-                    "commandprocesssettings": {
-                        "id": "sea481b8c82aba6294ebe5e562c00f24d78bb9968a9f1c8a9065ffb7c7e6bfcc4",
-                        "name": "commandProcessSettings",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISCommandProcessSettings"
-                                }
-                            ],
-                            "raw": "ISCommandProcessSettings"
-                        },
-                        "description": "Access the command process settings",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
                     "constructor": {
                         "id": "s1a89c514940eb0896265bdcc93868bccdc3432cd05e1b3d2b4f2ac7136029e96",
                         "name": "constructor",
@@ -358,7 +341,7 @@
                         }
                     },
                     "from": {
-                        "id": "sa42fbdfe8648d183e1b94c0e08b5d6289cbe1db2c61868d7182adac4099ac5d6",
+                        "id": "s3d7b12356cc891ced70227ad81fa3a2f6aa029c57d90949dac3a7bc0b440f699",
                         "name": "from",
                         "type": {
                             "types": [
@@ -379,7 +362,7 @@
                         }
                     },
                     "fromcommand": {
-                        "id": "s354388ab55aa939285286ad260a93845b2b43615da3070aa844fa7b4e68f13c2",
+                        "id": "s7f9312db0208d9530329540f05b55b3e6de8fb64cebd18baa9fe1c3db25c5fa2",
                         "name": "fromCommand",
                         "type": {
                             "types": [
@@ -704,25 +687,6 @@
                 "extension": "ts",
                 "relPath": "src/node/SProcessManager.ts",
                 "children": {
-                    "processmanagesettings": {
-                        "id": "s177e3d4ce9ea78ea99765941aee756e27b929360abba36fa7821e589f5531fe1",
-                        "name": "processManageSettings",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISProcessManageSettings"
-                                }
-                            ],
-                            "raw": "ISProcessManageSettings"
-                        },
-                        "description": "Access the process manager process settings",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
                     "constructor": {
                         "id": "s8607c05ad0cfc16ac056f86be76b5fa0f46231044e5b08b362c1da5b01c6fec6",
                         "name": "constructor",
@@ -1018,6 +982,16 @@
                             "type": "String|SStdio|Boolean",
                             "alias": "s",
                             "default": "inherit"
+                        },
+                        "collectStdout": {
+                            "description": "Specify if you want to collect the stdout of the process",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "collectStderr": {
+                            "description": "Specify if you want to collect the stderr of the process",
+                            "type": "Boolean",
+                            "default": true
                         },
                         "throw": {
                             "description": "Specify if you want to throw error when an error occurs",

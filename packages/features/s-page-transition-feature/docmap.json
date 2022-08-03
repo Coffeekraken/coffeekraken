@@ -22,6 +22,7 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -73,6 +74,7 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-testinator",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -121,8 +123,13 @@
                 "example": [
                     {
                         "language": "html",
-                        "title": "Simple click activation",
-                        "code": "<div s-page-transition></div>"
+                        "title": "Simple example",
+                        "code": "<p class=\"s-typo:p\">On your body tag, put the <span class=\"s-typo:code\">s-page-transition</span> attribute</p>\n<!-- <body s-page-transition> -->\n  <p class=\"s-typo:p\">This website is a perfect example of this feature behavior...</p>\n  <a class=\"s-typo:a\" href=\"/package/@coffeekraken/s-page-transition-feature/styleguide/feature/s-page-transition-feature\">This link will reload this same page using a page transition...</a>\n<!-- </body> -->"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Update only a part of the page",
+                        "code": "<p class=\"s-typo:p\">To update only a part of the UI, simply add the <span class=\"s-typo:code\">s-page-transition-container=\"something\"</span> on the part you want to be updated</p>\n<p class=\"s-typo:p\">If this same container exists in the loaded page, only this part will be updated.</p>\n<!-- <body s-page-transition> -->\n  <div s-page-transition-container=\"my-container\">\n     <p class=\"s-typo:p\">This website is a perfect example of this feature behavior...</p>\n     <a class=\"s-typo:a\" href=\"/package/@coffeekraken/s-page-transition-feature/styleguide/feature/s-page-transition-feature\">This link will reload this same page using a page transition...</a>\n  </div>\n<!-- </body> -->"
                     }
                 ],
                 "interface": {

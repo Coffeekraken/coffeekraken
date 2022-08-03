@@ -22,6 +22,7 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -73,6 +74,7 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-testinator",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -125,7 +127,7 @@
                     ],
                     "raw": "string"
                 },
-                "default": "packages/(!@)* /*",
+                "default": "packages/* /*",
                 "description": "Specify some globs to search for packages relative to the monorepo root directory.\n!!! target folders and not a package.json file, etc...\nThe \"packages/@...\" folders are excluded cause they have as goal to store the none-distributed\n\"projects\".",
                 "namespace": "@coffeekraken.s-monorepo.config.monorepo",
                 "since": "2.0.0",
@@ -265,25 +267,6 @@
                 "extension": "ts",
                 "relPath": "src/node/SMonorepo.ts",
                 "children": {
-                    "monoreposettings": {
-                        "id": "sedbe2de1fe91af150d92b0014a34476b59d53a2a81c35a07ced5f9439b8cb6b1",
-                        "name": "monorepoSettings",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISMonorepoSettings"
-                                }
-                            ],
-                            "raw": "ISMonorepoSettings"
-                        },
-                        "description": "Access the monorepo settings",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
                     "constructor": {
                         "id": "s25157e6a4133a99a095f14428f2e6cfbeaf0016f59b7d54942bf3c86ee65eec1",
                         "name": "constructor",
@@ -296,6 +279,26 @@
                             "raw": "Function"
                         },
                         "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "checkdependencies": {
+                        "id": "sc4131c46ca5860cd9a5986de0d60e807e6a50774ba4c1c0d9075f900f1b7d318",
+                        "name": "checkDependencies",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This method allows you to check dependencies of each packages of the monorepo",
+                        "async": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -335,6 +338,26 @@
                             "raw": "Function"
                         },
                         "description": "This method allows you to list all the repo in the monorepo",
+                        "async": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "publish": {
+                        "id": "s7ca9e74996381f3fe822e4df57f0a57c88d4bb152ed9f34ac2d9a6cea1a1e833",
+                        "name": "publish",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This method allows you to publish all the repo in the monorepo",
                         "async": "true",
                         "since": "2.0.0",
                         "author": {
@@ -476,6 +499,11 @@
                             "type": "Boolean",
                             "default": false,
                             "alias": "j"
+                        },
+                        "publish": {
+                            "description": "Specigy if you want the packages that will be published, not published or both by letting this undefined",
+                            "type": "Boolean",
+                            "alias": "p"
                         }
                     }
                 },
@@ -488,6 +516,55 @@
                 "filename": "SMonorepoListParamsInterface.ts",
                 "extension": "ts",
                 "relPath": "src/node/interface/SMonorepoListParamsInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-monorepo.node.interface.SMonorepoPublishParamsInterface": {
+                "id": "@coffeekraken.s-monorepo.node.interface.SMonorepoPublishParamsInterface",
+                "name": "SMonorepoPublishParamsInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ],
+                    "raw": ".                      Class"
+                },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface specify the parameters needed to the `sugar mono.publish` command.",
+                "namespace": "@coffeekraken.s-monorepo.node.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SMonorepoPublishParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "packagesGlob": {
+                            "description": "Specify some globs to search for packages relative to the monorepo root directory",
+                            "type": "String",
+                            "default": "packages/*/*",
+                            "alias": "g"
+                        },
+                        "yes": {
+                            "description": "Specify if you want to answer yes to all the questions of the process",
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "y"
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SMonorepoPublishParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SMonorepoPublishParamsInterface.ts",
                 "children": {}
             },
             "@coffeekraken.s-monorepo.node.interface.SMonorepoRunParamsInterface": {

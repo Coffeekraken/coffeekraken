@@ -22,6 +22,7 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -73,6 +74,7 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-testinator",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -219,25 +221,6 @@
                         },
                         "description": "Store the interface description",
                         "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
-                    "interfacesettings": {
-                        "id": "s9de15f327c9ccbfee2acba3ae485d2d9b3fd603ffbe2f5ceeab3c357188349ea",
-                        "name": "interfaceSettings",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISInterfaceSettings"
-                                }
-                            ],
-                            "raw": "ISInterfaceSettings"
-                        },
-                        "description": "Access the interface settings",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",

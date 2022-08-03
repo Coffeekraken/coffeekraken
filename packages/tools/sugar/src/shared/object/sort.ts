@@ -2,7 +2,7 @@
 
 /**
  * @name                                sort
- * @namespace            js.object
+ * @namespace            shared.object
  * @type                                Function
  * @platform          js
  * @platform          node

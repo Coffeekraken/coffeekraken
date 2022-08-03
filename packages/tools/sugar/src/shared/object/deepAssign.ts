@@ -3,7 +3,7 @@ import __isPlainObject from '../is/plainObject';
 import __clone from './clone';
 /**
  * @name            deepAssign
- * @namespace            js.object
+ * @namespace            shared.object
  * @type            Function
  * @platform          js
  * @platform          node

@@ -450,17 +450,6 @@ export default class SMonorepo extends __SClass {
                     return reject(false);
                 }
 
-                if (
-                    !finalParams.yes &&
-                    !(await emit('ask', {
-                        type: 'confirm',
-                        message: `Are you sure your packages are ready? Don't forget about <yellow>docmap</yellow>, <yellow>builds</yellow> etc...? Just asking...`,
-                        default: true,
-                    }))
-                ) {
-                    return reject(false);
-                }
-
                 // loop on all packages to publish them once at a time
                 const packages = await this.list({
                     packagesGlob: finalParams.packagesGlob,
@@ -471,6 +460,34 @@ export default class SMonorepo extends __SClass {
                     type: __SLog.TYPE_INFO,
                     value: `<yellow>[publish]</yellow> <cyan>${packages.length}</cyan> packages found:`,
                 });
+
+                packages.forEach((packageObj) => {
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>[publish]</yellow> - <cyan>${packageObj.name}</cyan>`,
+                    });
+                });
+
+                if (
+                    !(await emit('ask', {
+                        type: 'confirm',
+                        message: `Are these packages the ones you want to publish?`,
+                        default: true,
+                    }))
+                ) {
+                    return reject(false);
+                }
+
+                if (
+                    !finalParams.yes &&
+                    !(await emit('ask', {
+                        type: 'confirm',
+                        message: `Are you sure your packages are ready? Don't forget about <yellow>docmap</yellow>, <yellow>builds</yellow> etc...? Just asking...`,
+                        default: true,
+                    }))
+                ) {
+                    return reject(false);
+                }
 
                 // upgrading monorepo
                 try {

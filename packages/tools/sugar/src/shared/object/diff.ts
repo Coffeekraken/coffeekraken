@@ -1,11 +1,11 @@
 // @ts-nocheck
 
-import __isPlainObject from '../is/plainObject';
 import __isEqual from 'is-equal';
+import __isPlainObject from '../is/plainObject';
 
 /**
  * @name                      diff
- * @namespace            js.object
+ * @namespace            shared.object
  * @type                      Function
  * @platform          js
  * @platform          node

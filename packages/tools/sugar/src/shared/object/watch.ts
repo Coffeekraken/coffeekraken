@@ -1,11 +1,10 @@
 // @ts-nocheck
 
 import __SWatch from './SWatch';
-import __uniqid from '../string/uniqid';
 
 /**
  * @name                      watch
- * @namespace            js.object
+ * @namespace            shared.object
  * @type                      Function
  * @platform          js
  * @platform          node

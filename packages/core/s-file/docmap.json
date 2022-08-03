@@ -22,6 +22,7 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -73,6 +74,7 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-testinator",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -391,25 +393,6 @@
                             "raw": "String"
                         },
                         "description": "Store the file extension",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
-                    "filesettings": {
-                        "id": "sbab59e77674b95eb1798ded7c71d45ef09c9826ee1c369735458279ebb850484",
-                        "name": "fileSettings",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISFileSettings"
-                                }
-                            ],
-                            "raw": "ISFileSettings"
-                        },
-                        "description": "Access the file settings setted in the ```settings.file``` property",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",

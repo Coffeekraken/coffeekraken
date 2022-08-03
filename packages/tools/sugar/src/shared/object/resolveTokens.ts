@@ -5,7 +5,7 @@ import __get from './get';
 
 /**
  * @name                      resolveTokens
- * @namespace            js.object
+ * @namespace            shared.object
  * @type                      Function
  * @platform          js
  * @platform          node

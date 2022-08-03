@@ -3,7 +3,7 @@ import __isPlainObject from '../is/plainObject';
 
 /**
  * @name                        deepFilter
- * @namespace            js.object
+ * @namespace            shared.object
  * @type                        Function
  * @platform          js
  * @platform          node

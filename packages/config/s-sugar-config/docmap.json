@@ -22,6 +22,7 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -73,6 +74,7 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-testinator",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -1610,7 +1612,7 @@
                     ],
                     "raw": "String"
                 },
-                "default": "https://shields.io/discord/[config.discord.server.id]?style=[config.shieldsio.style]",
+                "default": "https://shields.io/discord/[config.discord.server.id]?style=[api.this.style]",
                 "description": "Specify the shieldsio url for the \"discord\" shield",
                 "namespace": "@coffeekraken.s-sugar-config.config.shieldsio.shields.discord",
                 "since": "2.0.0",
@@ -2770,6 +2772,25 @@
                             "url": "https://coffeekraken.io"
                         }
                     },
+                    "getsafe": {
+                        "id": "s055e0debbb236ad2569d45b407857290cdc0f410d3958debceea49b917df11da",
+                        "name": "getSafe",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "Same as the \"get\" method but does not throw error if the config is not accessible...",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
                     "set": {
                         "id": "s542dc1c8187462789212e5c58046e91c965d3b00afbfb89dc38d692301bde176",
                         "name": "set",
@@ -2867,7 +2888,7 @@
                         "cacheDir": {
                             "description": "Specify the cache directory where to store the configs",
                             "type": "string",
-                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/config/s-sugar-config/.local/cache/config"
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/config/s-sugar-config/.local/cache/views"
                         }
                     }
                 },

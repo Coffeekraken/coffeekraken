@@ -1,11 +1,11 @@
 // @ts-nocheck
 
-import __get from './get';
 import __unquote from '../string/unquote';
+import __get from './get';
 
 /**
  * @name                                        set
- * @namespace            js.object
+ * @namespace            shared.object
  * @type                                        Function
  * @platform          js
  * @platform          node

@@ -1,19 +1,12 @@
 // @ts-nocheck
 
-import __constructorName from './constructorName';
-import __get from './get';
-import __set from './set';
-import __deepProxy from './deepProxy';
-import __deepMerge from '../object/deepMerge';
-import __parseString from '../string/parse';
-import __uniqid from '../string/uniqid';
-import __micromatch from 'micromatch';
 import __SPromise from '@coffeekraken/s-promise';
-import __clone from '../object/clone';
+import __deepMerge from '../object/deepMerge';
+import __deepProxy from './deepProxy';
 
 /**
  * @name 		            SWatch
- * @namespace            js.object
+ * @namespace            shared.object
  * @type                Class
  * @platform          js
  * @platform          node

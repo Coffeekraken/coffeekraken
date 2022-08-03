@@ -2,7 +2,7 @@
 
 /**
  * @name                map
- * @namespace            js.object
+ * @namespace            shared.object
  * @type                Function
  * @async
  * @platform          js

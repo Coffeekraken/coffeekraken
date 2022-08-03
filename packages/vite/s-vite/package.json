@@ -1,74 +1,65 @@
 {
-  "name": "@coffeekraken/s-vite",
-  "version": "2.0.0-alpha.5",
-  "description": "ViteJS without the headaches",
-  "type": "module",
-  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
-  "license": "MIT",
-  "dependencies": {
-    "@babel/cli": "^7.13.16",
-    "@babel/core": "^7.14.0",
-    "@babel/preset-env": "^7.14.1",
-    "@coffeekraken/s-class": "^2.0.0-alpha.5",
-    "@coffeekraken/s-duration": "^2.0.0-alpha.5",
-    "@coffeekraken/s-event-emitter": "^2.0.0-alpha.5",
-    "@coffeekraken/s-file": "^2.0.0-alpha.5",
-    "@coffeekraken/s-form-validate-feature": "^2.0.0-alpha.5",
-    "@coffeekraken/s-interface": "^2.0.0-alpha.5",
-    "@coffeekraken/s-log": "^2.0.0-alpha.5",
-    "@coffeekraken/s-postcss-sugar-plugin": "^2.0.0-alpha.5",
-    "@coffeekraken/s-promise": "^2.0.0-alpha.5",
-    "@coffeekraken/s-sugar-config": "^2.0.0-alpha.5",
-    "@coffeekraken/s-vite-postcss-plugin": "^2.0.0-alpha.5",
-    "@coffeekraken/s-vite-sugar-plugin": "^2.0.0-alpha.5",
-    "@coffeekraken/sugar": "^2.0.0-alpha.5",
-    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.10",
-    "@vitejs/plugin-vue": "^1.2.5",
-    "@vitest/ui": "^0.15.1",
-    "chokidar": "^3.5.1",
-    "glob-all": "^3.2.1",
-    "happy-dom": "^5.3.1",
-    "picomatch": "^2.3.0",
-    "postcss-advanced-variables": "^3.0.1",
-    "postcss-atroot": "^0.1.3",
-    "postcss-extend-rule": "^3.0.0",
-    "postcss-import-ext-glob": "^2.0.1",
-    "postcss-nested": "^5.0.5",
-    "postcss-preset-env": "^6.7.0",
-    "postcss-property-lookup": "^2.0.0",
-    "precss": "^4.0.0",
-    "rollup-plugin-analyzer": "^4.0.0",
-    "rollup-plugin-import-css": "^3.0.0",
-    "rollup-plugin-uglify": "^6.0.4",
-    "rollup-plugin-vue": "^6.0.0",
-    "url-parse": "^1.5.1",
-    "vite": "^2.9.9",
-    "vite-plugin-imagemin": "^0.3.2",
-    "vite-plugin-singlefile": "^0.5.1",
-    "vite-plugin-virtual-plain-text": "^1.2.2",
-    "vitest": "^0.17.0"
-  },
-  "peerDependencies": {
-    "postcss": "^7 || ^8"
-  },
-  "main": "dist/pkg/cjs/node/exports.js",
-  "module": "dist/pkg/esm/node/exports.js",
-  "exports": {
-    ".": {
-      "require": "./dist/pkg/cjs/node/exports.js",
-      "import": "./dist/pkg/esm/node/exports.js"
+    "name": "@coffeekraken/s-vite",
+    "version": "2.0.0-alpha.6",
+    "description": "ViteJS without the headaches",
+    "type": "module",
+    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+    "license": "MIT",
+    "dependencies": {
+        "@coffeekraken/s-class": "^2.0.0-alpha.6",
+        "@coffeekraken/s-duration": "^2.0.0-alpha.6",
+        "@coffeekraken/s-event-emitter": "^2.0.0-alpha.6",
+        "@coffeekraken/s-file": "^2.0.0-alpha.6",
+        "@coffeekraken/s-form-validate-feature": "^2.0.0-alpha.6",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.6",
+        "@coffeekraken/s-log": "^2.0.0-alpha.6",
+        "@coffeekraken/s-postcss-sugar-plugin": "^2.0.0-alpha.6",
+        "@coffeekraken/s-promise": "^2.0.0-alpha.6",
+        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.6",
+        "@coffeekraken/s-vite-postcss-plugin": "^2.0.0-alpha.6",
+        "@coffeekraken/s-vite-sugar-plugin": "^2.0.0-alpha.6",
+        "@coffeekraken/sugar": "^2.0.0-alpha.6",
+        "@sveltejs/vite-plugin-svelte": "^1.0.0-next.10",
+        "@vitejs/plugin-vue": "^1.2.5",
+        "@vitest/ui": "^0.15.1",
+        "chokidar": "^3.5.1",
+        "happy-dom": "^5.3.1",
+        "picomatch": "^2.3.0",
+        "postcss-atroot": "^0.1.3",
+        "postcss-extend-rule": "^3.0.0",
+        "postcss-import-ext-glob": "^2.0.1",
+        "postcss-nested": "^5.0.5",
+        "postcss-preset-env": "^6.7.0",
+        "postcss-property-lookup": "^2.0.0",
+        "precss": "^4.0.0",
+        "rollup-plugin-analyzer": "^4.0.0",
+        "rollup-plugin-import-css": "^3.0.0",
+        "rollup-plugin-uglify": "^6.0.4",
+        "url-parse": "^1.5.1",
+        "vite": "^2.9.9",
+        "vitest": "^0.17.0"
     },
-    "./shared/*": {
-      "require": "./dist/pkg/cjs/shared/*.js",
-      "import": "./dist/pkg/esm/shared/*.js"
+    "peerDependencies": {
+        "postcss": "^7 || ^8"
     },
-    "./node/*": {
-      "require": "./dist/pkg/cjs/node/*.js",
-      "import": "./dist/pkg/esm/node/*.js"
-    },
-    "./js/*": {
-      "require": "./dist/pkg/cjs/js/*.js",
-      "import": "./dist/pkg/esm/js/*.js"
+    "main": "dist/pkg/cjs/node/exports.js",
+    "module": "dist/pkg/esm/node/exports.js",
+    "exports": {
+        ".": {
+            "require": "./dist/pkg/cjs/node/exports.js",
+            "import": "./dist/pkg/esm/node/exports.js"
+        },
+        "./shared/*": {
+            "require": "./dist/pkg/cjs/shared/*.js",
+            "import": "./dist/pkg/esm/shared/*.js"
+        },
+        "./node/*": {
+            "require": "./dist/pkg/cjs/node/*.js",
+            "import": "./dist/pkg/esm/node/*.js"
+        },
+        "./js/*": {
+            "require": "./dist/pkg/cjs/js/*.js",
+            "import": "./dist/pkg/esm/js/*.js"
+        }
     }
-  }
 }

@@ -2,7 +2,7 @@ import { decycle as __decycle } from 'json-cyclic';
 
 /**
  * @name          decycle
- * @namespace            js.object
+ * @namespace            shared.object
  * @type          Function
  * @platform          js
  * @platform          node

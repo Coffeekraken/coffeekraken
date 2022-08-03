@@ -7,7 +7,7 @@ import __deepMerge from '../object/deepMerge';
 
 /**
  * @name                            deepProxy
- * @namespace            js.object
+ * @namespace            shared.object
  * @type                            Function
  * @platform          js
  * @platform          node

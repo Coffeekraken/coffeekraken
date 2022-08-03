@@ -5,7 +5,7 @@ import __set from './set';
 
 /**
  * @name                        ensureExists
- * @namespace            js.object
+ * @namespace            shared.object
  * @type                        Function
  * @platform          js
  * @platform          node

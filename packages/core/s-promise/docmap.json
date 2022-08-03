@@ -22,6 +22,7 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -73,6 +74,7 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-testinator",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -151,9 +153,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "SPromise.old.ts",
-                "extension": "old",
-                "relPath": "src/shared/SPromise.old.ts",
+                "filename": "SPromise.ts",
+                "extension": "ts",
+                "relPath": "src/shared/SPromise.ts",
                 "children": {
                     "queue": {
                         "id": "sff567a761ffc0e7b41dbf47dc90045ed0d8ff1dac05dcfae4b5cf9fb6fcd5b8b",
@@ -560,7 +562,7 @@
                         "preventRejectOnThrow": {
                             "description": "Specify if you prefer your promise to be \"resolved\" when an underlying error is catched, or if is has to be rejected normally",
                             "type": "Boolean",
-                            "default": true
+                            "default": false
                         },
                         "emitLogErrorEventOnThrow": {
                             "description": "Specify if you want a \"log\" of type \"error\" to be emitted when an underlying error is catched",

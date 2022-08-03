@@ -22,6 +22,7 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -74,6 +75,7 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-testinator",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
@@ -2310,30 +2312,6 @@
                 "relPath": "src/config/themeDefault.config.ts",
                 "children": {}
             },
-            "@coffeekraken.s-theme.config.themeDefaultDark.extends": {
-                "id": "@coffeekraken.s-theme.config.themeDefaultDark.extends",
-                "name": "extends",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "themeBase",
-                "description": "Specify which theme this one extends from",
-                "namespace": "@coffeekraken.s-theme.config.themeDefaultDark",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeDefaultDark.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeDefaultDark.config.ts"
-            },
             "@coffeekraken.s-theme.config.themeDefaultDark.colorSchema": {
                 "id": "@coffeekraken.s-theme.config.themeDefaultDark.colorSchema",
                 "name": "colorSchema",
@@ -2358,53 +2336,6 @@
                 "extension": "config",
                 "relPath": "src/config/themeDefaultDark.config.ts",
                 "children": {}
-            },
-            "@coffeekraken.s-theme.config.themeDefaultLight.extends": {
-                "id": "@coffeekraken.s-theme.config.themeDefaultLight.extends",
-                "name": "extends",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "themeBase",
-                "description": "Specify which theme this one extends from",
-                "namespace": "@coffeekraken.s-theme.config.themeDefaultLight",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeDefaultLight.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeDefaultLight.config.ts",
-                "children": {
-                    "colorschema": {
-                        "id": "@coffeekraken.s-theme.config.themeDefaultDark.colorSchema",
-                        "name": "colorSchema",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "String"
-                                }
-                            ],
-                            "raw": "String"
-                        },
-                        "default": "[config.themeColorSchemaLight]",
-                        "description": "Specify the color schema to be used in the dark theme",
-                        "namespace": "@coffeekraken.s-theme.config.themeDefaultDark",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    }
-                }
             },
             "@coffeekraken.s-theme.config.themeDepth.default": {
                 "id": "@coffeekraken.s-theme.config.themeDepth.default",
@@ -8027,7 +7958,7 @@
                     ],
                     "raw": "String"
                 },
-                "default": "all [theme.timing.slow] [theme.easing.default]",
+                "default": "all [api.theme.timing.slow] [api.theme.easing.default]",
                 "description": "Specify the \"slow\" transition for your theme",
                 "namespace": "@coffeekraken.s-theme.config.themeTransition",
                 "since": "2.0.0",
@@ -8051,7 +7982,7 @@
                     ],
                     "raw": "String"
                 },
-                "default": "all [theme.timing.default] [theme.easing.default]",
+                "default": "all [api.theme.timing.default] [api.theme.easing.default]",
                 "description": "Specify the \"default\" transition for your theme",
                 "namespace": "@coffeekraken.s-theme.config.themeTransition",
                 "since": "2.0.0",
@@ -8075,7 +8006,7 @@
                     ],
                     "raw": "String"
                 },
-                "default": "all [theme.timing.fast] [theme.easing.default]",
+                "default": "all [api.theme.timing.fast] [api.theme.easing.default]",
                 "description": "Specify the \"fast\" transition for your theme",
                 "namespace": "@coffeekraken.s-theme.config.themeTransition",
                 "since": "2.0.0",
@@ -9890,486 +9821,6 @@
                 "extension": "config",
                 "relPath": "src/config/themeUi.config.ts"
             },
-            "@coffeekraken.s-theme.config.themeUi.colorPicker.paddingInline": {
-                "id": "@coffeekraken.s-theme.config.themeUi.colorPicker.paddingInline",
-                "name": "paddingInline",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.paddingInline]",
-                "description": "Specify the default padding inline for colorPicker ui",
-                "namespace": "@coffeekraken.s-theme.config.themeUi.colorPicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-theme.config.themeUi.colorPicker.paddingBlock": {
-                "id": "@coffeekraken.s-theme.config.themeUi.colorPicker.paddingBlock",
-                "name": "paddingBlock",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.form.paddingBlock]",
-                "description": "Specify the default padding block for colorPicker ui",
-                "namespace": "@coffeekraken.s-theme.config.themeUi.colorPicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-theme.config.themeUi.colorPicker.borderRadius": {
-                "id": "@coffeekraken.s-theme.config.themeUi.colorPicker.borderRadius",
-                "name": "borderRadius",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.form.borderRadius]",
-                "description": "Specify the default border radius for colorPicker ui",
-                "namespace": "@coffeekraken.s-theme.config.themeUi.colorPicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-theme.config.themeUi.colorPicker.borderWidth": {
-                "id": "@coffeekraken.s-theme.config.themeUi.colorPicker.borderWidth",
-                "name": "borderWidth",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.form.borderWidth]",
-                "description": "Specify the default border width for colorPicker ui",
-                "namespace": "@coffeekraken.s-theme.config.themeUi.colorPicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-theme.config.themeUi.colorPicker.transition": {
-                "id": "@coffeekraken.s-theme.config.themeUi.colorPicker.transition",
-                "name": "transition",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.form.transition]",
-                "description": "Specify the default transition for colorPicker ui",
-                "namespace": "@coffeekraken.s-theme.config.themeUi.colorPicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-theme.config.themeUi.colorPicker.defaultColor": {
-                "id": "@coffeekraken.s-theme.config.themeUi.colorPicker.defaultColor",
-                "name": "defaultColor",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.defaultColor]",
-                "description": "Specify the default color for colorPicker ui",
-                "namespace": "@coffeekraken.s-theme.config.themeUi.colorPicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-theme.config.themeUi.colorPicker.defaultStyle": {
-                "id": "@coffeekraken.s-theme.config.themeUi.colorPicker.defaultStyle",
-                "name": "defaultStyle",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Number"
-                        }
-                    ],
-                    "raw": "Number"
-                },
-                "default": "[theme.ui.form.defaultStyle]",
-                "description": "Specify the default style for your colorPicker ui",
-                "namespace": "@coffeekraken.s-theme.config.themeUi.colorPicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-theme.config.themeUi.colorPicker.depth": {
-                "id": "@coffeekraken.s-theme.config.themeUi.colorPicker.depth",
-                "name": "depth",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.form.depth]",
-                "description": "Specify the default depth for colorPicker items",
-                "namespace": "@coffeekraken.s-theme.config.themeUi.colorPicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-theme.config.themeUi.colorPicker.outline": {
-                "id": "@coffeekraken.s-theme.config.themeUi.colorPicker.outline",
-                "name": "outline",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Object"
-                        }
-                    ],
-                    "raw": "Object"
-                },
-                "default": "[theme.ui.outline.active]",
-                "description": "Specify if the focus outline is activated for this ui element",
-                "namespace": "@coffeekraken.s-theme.config.themeUi.colorPicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-theme.config.themeUi.colorPicker.rhythmVertical": {
-                "id": "@coffeekraken.s-theme.config.themeUi.colorPicker.rhythmVertical",
-                "name": "rhythmVertical",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Object"
-                        }
-                    ],
-                    "raw": "Object"
-                },
-                "default": "[theme.ui.form.rhythmVertical]",
-                "description": "Specify the default vertical rhythm for your colorPicker ui",
-                "namespace": "@coffeekraken.s-theme.config.themeUi.colorPicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-theme.config.themeUi.datePicker.paddingInline": {
-                "id": "@coffeekraken.s-theme.config.themeUi.datePicker.paddingInline",
-                "name": "paddingInline",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.paddingInline]",
-                "description": "Specify the default padding inline for datePicker ui",
-                "namespace": "@coffeekraken.s-theme.config.themeUi.datePicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-theme.config.themeUi.datePicker.paddingBlock": {
-                "id": "@coffeekraken.s-theme.config.themeUi.datePicker.paddingBlock",
-                "name": "paddingBlock",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.form.paddingBlock]",
-                "description": "Specify the default padding block for datePicker ui",
-                "namespace": "@coffeekraken.s-theme.config.themeUi.datePicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-theme.config.themeUi.datePicker.borderRadius": {
-                "id": "@coffeekraken.s-theme.config.themeUi.datePicker.borderRadius",
-                "name": "borderRadius",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.form.borderRadius]",
-                "description": "Specify the default border radius for datePicker ui",
-                "namespace": "@coffeekraken.s-theme.config.themeUi.datePicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-theme.config.themeUi.datePicker.borderWidth": {
-                "id": "@coffeekraken.s-theme.config.themeUi.datePicker.borderWidth",
-                "name": "borderWidth",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.form.borderWidth]",
-                "description": "Specify the default border width for datePicker ui",
-                "namespace": "@coffeekraken.s-theme.config.themeUi.datePicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-theme.config.themeUi.datePicker.transition": {
-                "id": "@coffeekraken.s-theme.config.themeUi.datePicker.transition",
-                "name": "transition",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.form.transition]",
-                "description": "Specify the default transition for datePicker ui",
-                "namespace": "@coffeekraken.s-theme.config.themeUi.datePicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-theme.config.themeUi.datePicker.defaultColor": {
-                "id": "@coffeekraken.s-theme.config.themeUi.datePicker.defaultColor",
-                "name": "defaultColor",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.defaultColor]",
-                "description": "Specify the default color for datePicker ui",
-                "namespace": "@coffeekraken.s-theme.config.themeUi.datePicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-theme.config.themeUi.datePicker.defaultStyle": {
-                "id": "@coffeekraken.s-theme.config.themeUi.datePicker.defaultStyle",
-                "name": "defaultStyle",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Number"
-                        }
-                    ],
-                    "raw": "Number"
-                },
-                "default": "[theme.ui.form.defaultStyle]",
-                "description": "Specify the default style for your datePicker ui",
-                "namespace": "@coffeekraken.s-theme.config.themeUi.datePicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-theme.config.themeUi.datePicker.depth": {
-                "id": "@coffeekraken.s-theme.config.themeUi.datePicker.depth",
-                "name": "depth",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.form.depth]",
-                "description": "Specify the default depth for datePicker items",
-                "namespace": "@coffeekraken.s-theme.config.themeUi.datePicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-theme.config.themeUi.datePicker.outline": {
-                "id": "@coffeekraken.s-theme.config.themeUi.datePicker.outline",
-                "name": "outline",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Object"
-                        }
-                    ],
-                    "raw": "Object"
-                },
-                "default": "[theme.ui.outline.active]",
-                "description": "Specify if the focus outline is activated for this ui element",
-                "namespace": "@coffeekraken.s-theme.config.themeUi.datePicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-theme.config.themeUi.datePicker.rhythmVertical": {
-                "id": "@coffeekraken.s-theme.config.themeUi.datePicker.rhythmVertical",
-                "name": "rhythmVertical",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Object"
-                        }
-                    ],
-                    "raw": "Object"
-                },
-                "default": "[theme.ui.form.rhythmVertical]",
-                "description": "Specify the default vertical rhythm for your datePicker ui",
-                "namespace": "@coffeekraken.s-theme.config.themeUi.datePicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
             "@coffeekraken.s-theme.config.themeUi.input.paddingInline": {
                 "id": "@coffeekraken.s-theme.config.themeUi.input.paddingInline",
                 "name": "paddingInline",
@@ -11989,7 +11440,7 @@
                     ],
                     "raw": "String"
                 },
-                "default": "'[theme.padding.10]'",
+                "default": "'[theme.padding['10']]'",
                 "description": "Specify the default padding inline for dropdown ui",
                 "namespace": "@coffeekraken.s-theme.config.themeUi.dropdown",
                 "since": "2.0.0",
@@ -12013,7 +11464,7 @@
                     ],
                     "raw": "String"
                 },
-                "default": "'[theme.padding.10]'",
+                "default": "'[theme.padding['10']]'",
                 "description": "Specify the default padding block for dropdown ui",
                 "namespace": "@coffeekraken.s-theme.config.themeUi.dropdown",
                 "since": "2.0.0",
@@ -13381,7 +12832,7 @@
                     ],
                     "raw": "String"
                 },
-                "default": "[theme.padding.50]",
+                "default": "[theme.padding['50']]",
                 "description": "Specify the default padding inline for code ui",
                 "namespace": "@coffeekraken.s-theme.config.themeUi.code",
                 "since": "2.0.0",
@@ -13405,7 +12856,7 @@
                     ],
                     "raw": "String"
                 },
-                "default": "[theme.padding.50]",
+                "default": "[theme.padding['50']]",
                 "description": "Specify the default padding block for code ui",
                 "namespace": "@coffeekraken.s-theme.config.themeUi.code",
                 "since": "2.0.0",

@@ -22,6 +22,7 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -61,6 +62,7 @@
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-rating-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-scroll-component",
@@ -72,6 +74,8 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-testinator",
+            "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
@@ -473,25 +477,6 @@
                 "extension": "ts",
                 "relPath": "src/node/SSitemapBuilderSource.ts",
                 "children": {
-                    "sitemapsourcesettings": {
-                        "id": "se501b3a7a712a534807da297c15d88f446848f6d83b8134e2f5b978110f269bb",
-                        "name": "sitemapSourceSettings",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISSitemapBuilderSourceSettings"
-                                }
-                            ],
-                            "raw": "ISSitemapBuilderSourceSettings"
-                        },
-                        "description": "Access the sitemap source settings",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
                     "constructor": {
                         "id": "s57c2ede804332c79d7556f5b9ab1a8e5245066fb344f1312a76148536c48c40a",
                         "name": "constructor",
@@ -686,25 +671,6 @@
                             "url": "https://coffeekraken.io"
                         }
                     },
-                    "sitemapsourcedocmapsettings": {
-                        "id": "s6273a109fd853cf13d8d6fe6363de5c0371d08c7aabb67cfbb4624304fcd4754",
-                        "name": "sitemapSourceDocmapSettings",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISSitemapSourceSettings"
-                                }
-                            ],
-                            "raw": "ISSitemapSourceSettings"
-                        },
-                        "description": "Access the sitemap source docmap settings",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
                     "constructor": {
                         "id": "s57c2ede804332c79d7556f5b9ab1a8e5245066fb344f1312a76148536c48c40a",
                         "name": "constructor",
@@ -793,25 +759,6 @@
                         },
                         "description": "Store the source settings id",
                         "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
-                    "sitemapsourcefilesettings": {
-                        "id": "s5bb35165332ea4e0086ada92b341b4b72fcdfc4dc0d460896dfafe2f8fa2b8f7",
-                        "name": "sitemapSourceFileSettings",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISSitemapSourceSettings"
-                                }
-                            ],
-                            "raw": "ISSitemapSourceSettings"
-                        },
-                        "description": "Access the sitemap source docmap settings",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",

@@ -1,4 +1,3 @@
-// import __inquirer from 'inquirer';
 import type { ISEventEmitter } from '@coffeekraken/s-event-emitter';
 import type { ISLog } from '@coffeekraken/s-log';
 import __SLog from '@coffeekraken/s-log';

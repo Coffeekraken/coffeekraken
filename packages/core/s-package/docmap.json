@@ -22,6 +22,7 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -73,6 +74,7 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-testinator",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -379,25 +381,6 @@
                 "extension": "ts",
                 "relPath": "src/node/SPackage.ts",
                 "children": {
-                    "packagesettings": {
-                        "id": "s2ea96b7857d81879c58a289e011d0eb795a7698f28b22b11b364a681d00572ff",
-                        "name": "packageSettings",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISPackageSettings"
-                                }
-                            ],
-                            "raw": "ISPackageSettings"
-                        },
-                        "description": "Access the package settings",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
                     "constructor": {
                         "id": "s25157e6a4133a99a095f14428f2e6cfbeaf0016f59b7d54942bf3c86ee65eec1",
                         "name": "constructor",
@@ -844,11 +827,6 @@
                     "name": "SPackageSettingsInterface",
                     "description": "",
                     "definition": {
-                        "rootDir": {
-                            "description": "Specify the root directory of your package",
-                            "type": "string",
-                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/core/s-package"
-                        },
                         "manager": {
                             "description": "Specify th package manager to use",
                             "type": "String",

@@ -3,7 +3,7 @@
 import __set from './set';
 /**
  * @name          deepize
- * @namespace            js.object
+ * @namespace            shared.object
  * @type          Function
  * @platform          js
  * @platform          node

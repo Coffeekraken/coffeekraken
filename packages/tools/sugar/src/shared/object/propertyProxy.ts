@@ -1,10 +1,8 @@
 // @ts-nocheck
 
-import ___get from './get';
-
 /**
  * @name        propertyProxy
- * @namespace            js.object
+ * @namespace            shared.object
  * @type      Function
  * @platform          js
  * @platform          node

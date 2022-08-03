@@ -6,11 +6,14 @@
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -40,16 +43,16 @@
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
-            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-monorepo",
-            "@coffeekraken/s-notification",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
@@ -59,22 +62,26 @@
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-rating-component",
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
             "@coffeekraken/s-typescript-builder",
             "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
             "@coffeekraken/s-view-renderer-engine-blade",
             "@coffeekraken/s-view-renderer-engine-lit",
             "@coffeekraken/s-view-renderer-engine-twig",
@@ -85,54 +92,56 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-jest-tester.config.jestTester.glob": {
-                "id": "@coffeekraken.s-jest-tester.config.jestTester.glob",
+            "@coffeekraken.s-testinator.config.testinator.glob": {
+                "id": "@coffeekraken.s-testinator.config.testinator.glob",
                 "name": "glob",
                 "type": {
                     "types": [
                         {
                             "type": "String"
                         }
-                    ]
+                    ],
+                    "raw": "String"
                 },
                 "default": "['** /*.{ts,js}']",
                 "description": "Specify a glob pattern relative to the \"inDir\" to specify files you want to compress",
-                "namespace": "@coffeekraken.s-jest-tester.config.jestTester",
+                "namespace": "@coffeekraken.s-testinator.config.testinator",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "jestTester.config.ts",
+                "filename": "testinator.config.ts",
                 "extension": "config",
-                "relPath": "src/config/jestTester.config.ts"
+                "relPath": "src/config/testinator.config.ts"
             },
-            "@coffeekraken.s-jest-tester.config.jestTester.inDir": {
-                "id": "@coffeekraken.s-jest-tester.config.jestTester.inDir",
+            "@coffeekraken.s-testinator.config.testinator.inDir": {
+                "id": "@coffeekraken.s-testinator.config.testinator.inDir",
                 "name": "inDir",
                 "type": {
                     "types": [
                         {
                             "type": "String"
                         }
-                    ]
+                    ],
+                    "raw": "String"
                 },
                 "default": "[config.storage.src.rootDir]",
                 "description": "Specify a directory from where to search for ts and js files to build",
-                "namespace": "@coffeekraken.s-jest-tester.config.jestTester",
+                "namespace": "@coffeekraken.s-testinator.config.testinator",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "jestTester.config.ts",
+                "filename": "testinator.config.ts",
                 "extension": "config",
-                "relPath": "src/config/jestTester.config.ts"
+                "relPath": "src/config/testinator.config.ts"
             },
-            "@coffeekraken.s-jest-tester.config.jestTester.exclude": {
-                "id": "@coffeekraken.s-jest-tester.config.jestTester.exclude",
+            "@coffeekraken.s-testinator.config.testinator.exclude": {
+                "id": "@coffeekraken.s-testinator.config.testinator.exclude",
                 "name": "exclude",
                 "type": {
                     "types": [
@@ -142,31 +151,33 @@
                                 "String"
                             ]
                         }
-                    ]
+                    ],
+                    "raw": "String[]"
                 },
                 "default": "['** /node_module']",
                 "description": "Specify some glob patterns for files/folders you want to exclude of the build process",
-                "namespace": "@coffeekraken.s-jest-tester.config.jestTester",
+                "namespace": "@coffeekraken.s-testinator.config.testinator",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "jestTester.config.ts",
+                "filename": "testinator.config.ts",
                 "extension": "config",
-                "relPath": "src/config/jestTester.config.ts",
+                "relPath": "src/config/testinator.config.ts",
                 "children": {}
             },
-            "@coffeekraken.s-jest-tester.node.SJestTester": {
-                "id": "@coffeekraken.s-jest-tester.node.SJestTester",
-                "name": "SJestTester",
+            "@coffeekraken.s-testinator.node.STestinator": {
+                "id": "@coffeekraken.s-testinator.node.STestinator",
+                "name": "STestinator",
                 "type": {
                     "types": [
                         {
                             "type": "Class"
                         }
-                    ]
+                    ],
+                    "raw": "Class"
                 },
                 "platform": [
                     {
@@ -175,12 +186,12 @@
                     }
                 ],
                 "description": "This class represent the jest tester that can run tests on your project with a simple and efficient API.",
-                "namespace": "@coffeekraken.s-jest-tester.node",
+                "namespace": "@coffeekraken.s-testinator.node",
                 "status": "beta",
                 "example": [
                     {
                         "language": "js",
-                        "code": "import SJestTester from '@coffeekraken/s-postcss-builder';\nconst builder = new SJestTester({\n     jestTester: {\n         // settings here...\n     }\n});\nawait builder.build({\n     input: 'my-cool-file.css',\n     output: 'my/cool/file-output.css'\n});"
+                        "code": "import STestinator from '@coffeekraken/s-testinator';\nconst tester = new STestinator({\n     // settings here...\n});\nawait tester.test('/my/cool/file.test.js');"
                     }
                 ],
                 "since": "2.0.0",
@@ -189,37 +200,20 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SJestTester.ts",
+                "filename": "STestinator.ts",
                 "extension": "ts",
-                "relPath": "src/node/SJestTester.ts",
+                "relPath": "src/node/STestinator.ts",
                 "children": {
-                    "jesttestersettings": {
-                        "id": "76ff6ea908994f399a18ff1d15f70a6f856272542c12c65184458d84668d6b2b",
-                        "name": "jestTesterSettings",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISJestTesterSettings"
-                                }
-                            ]
-                        },
-                        "description": "Access the jest tester settings",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
                     "constructor": {
-                        "id": "25157e6a4133a99a095f14428f2e6cfbeaf0016f59b7d54942bf3c86ee65eec1",
+                        "id": "s25157e6a4133a99a095f14428f2e6cfbeaf0016f59b7d54942bf3c86ee65eec1",
                         "name": "constructor",
                         "type": {
                             "types": [
                                 {
                                     "type": "Function"
                                 }
-                            ]
+                            ],
+                            "raw": "Function"
                         },
                         "description": "Constructor",
                         "since": "2.0.0",
@@ -230,16 +224,37 @@
                         }
                     },
                     "start": {
-                        "id": "b334981e0b8ddf8ecb8e57c082db191aa3c9a0f6c099d33996f21127b76fdaac",
+                        "id": "sa2b5430731057bd509bff6b72649d55fa78066d0e1e7fd42bcb5e9ece734c089",
                         "name": "start",
                         "type": {
                             "types": [
                                 {
                                     "type": "Function"
                                 }
-                            ]
+                            ],
+                            "raw": "Function"
                         },
                         "description": "This method is the internal builder start one.\nIt will be called by the SBuilder class with the final params\nfor the build",
+                        "async": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "test": {
+                        "id": "sed76f231f2aaff9b9588bde7988dbdbda27328f1eed63197d1afe5f78e8f3402",
+                        "name": "test",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This method allows you to run a test file",
                         "async": "true",
                         "since": "2.0.0",
                         "author": {
@@ -250,15 +265,16 @@
                     }
                 }
             },
-            "@coffeekraken.s-jest-tester.node.mono.interface.SJestTesterStartParamsInterface": {
-                "id": "@coffeekraken.s-jest-tester.node.mono.interface.SJestTesterStartParamsInterface",
-                "name": "SJestTesterStartParamsInterface",
+            "@coffeekraken.s-testinator.node.interface.STestinatorStartParamsInterface": {
+                "id": "@coffeekraken.s-testinator.node.interface.STestinatorStartParamsInterface",
+                "name": "STestinatorStartParamsInterface",
                 "type": {
                     "types": [
                         {
                             "type": ".                      Class"
                         }
-                    ]
+                    ],
+                    "raw": ".                      Class"
                 },
                 "platform": [
                     {
@@ -266,51 +282,49 @@
                         "description": ""
                     }
                 ],
-                "description": "This interface specify the parameters needed to the `sugar jest.start` command.",
-                "namespace": "@coffeekraken.s-jest-tester.node.mono.interface",
+                "description": "This interface specify the parameters needed to the `sugar testinator.start` command.",
+                "namespace": "@coffeekraken.s-testinator.node.interface",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "STestinatorStartParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/STestinatorStartParamsInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-testinator.node.interface.STestinatorTestParamsInterface": {
+                "id": "@coffeekraken.s-testinator.node.interface.STestinatorTestParamsInterface",
+                "name": "STestinatorTestParamsInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ],
+                    "raw": ".                      Class"
+                },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface specify the parameters needed to the `sugar testinator.test` command.",
+                "namespace": "@coffeekraken.s-testinator.node.interface",
                 "status": "beta",
                 "interface": {
-                    "name": "SJestTesterStartParamsInterface",
+                    "name": "STestinatorTestParamsInterface",
                     "description": "",
                     "definition": {
-                        "glob": {
-                            "description": "Sppecify some globs relative to the inDir to find the files you want to build",
-                            "type": "Array<String>",
-                            "default": [
-                                "**/*.ts"
-                            ],
-                            "alias": "g"
-                        },
-                        "inDir": {
-                            "description": "Specify a directory from where to search for ts and js files to build",
+                        "path": {
+                            "description": "Specify the path to the file you want to run tests from",
                             "type": "String",
-                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/test/s-jest-tester/src",
-                            "alias": "i"
-                        },
-                        "packageRoot": {
-                            "description": "Specify in which package the build is happening",
-                            "type": "String"
-                        },
-                        "watch": {
-                            "description": "Specify if the files have to be build again at each update",
-                            "type": "Boolean",
-                            "default": false,
-                            "alias": "w"
-                        },
-                        "testInitial": {
-                            "description": "Specify if you want to build the files at start when using the \"watch\" flag",
-                            "type": "Boolean",
-                            "default": false,
-                            "alias": "t"
-                        },
-                        "exclude": {
-                            "description": "Specify some glob patterns for files/folders you want to exclude of the build process",
-                            "type": "Array<String>",
-                            "default": [
-                                "**/node_modules",
-                                "**/__tests__"
-                            ],
-                            "alias": "e"
+                            "alias": "p",
+                            "required": true
                         }
                     }
                 },
@@ -320,9 +334,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SJestTesterStartParamsInterface.ts",
+                "filename": "STestinatorTestParamsInterface.ts",
                 "extension": "ts",
-                "relPath": "src/node/interface/SJestTesterStartParamsInterface.ts",
+                "relPath": "src/node/interface/STestinatorTestParamsInterface.ts",
                 "children": {}
             }
         }

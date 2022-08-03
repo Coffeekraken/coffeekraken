@@ -22,6 +22,7 @@
             "@coffeekraken/s-config-folder-adapter",
             "@coffeekraken/s-config-inline-adapter",
             "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
             "@coffeekraken/s-dashboard",
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
@@ -73,6 +74,7 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-testinator",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -465,25 +467,6 @@
                 "extension": "ts",
                 "relPath": "src/node/basic/SBasicStdio.ts",
                 "children": {
-                    "basicstdiosettings": {
-                        "id": "sfa5b521e6e899b94a1cdb8d49a6021fba6b3b0c3bb66fefad92fc0574e516bd9",
-                        "name": "basicStdioSettings",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISBasicStdioSettings"
-                                }
-                            ],
-                            "raw": "ISBasicStdioSettings"
-                        },
-                        "description": "Access the stdio settings",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
                     "constructor": {
                         "id": "sfa166a726e2f17bad10f0fa6a932646b6f0d93a5c18c2e6571524f4a269e2402",
                         "name": "constructor",
@@ -534,25 +517,6 @@
                 "extension": "ts",
                 "relPath": "src/node/websocket/SWebsocketStdio.ts",
                 "children": {
-                    "websocketstdiosettings": {
-                        "id": "s4216315c6534652ddb8710a207936260d21daf0f5133c3f490f6f42276e23997",
-                        "name": "websocketStdioSettings",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISWebsocketStdioSettings"
-                                }
-                            ],
-                            "raw": "ISWebsocketStdioSettings"
-                        },
-                        "description": "Access the stdio settings",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
                     "constructor": {
                         "id": "sfa166a726e2f17bad10f0fa6a932646b6f0d93a5c18c2e6571524f4a269e2402",
                         "name": "constructor",

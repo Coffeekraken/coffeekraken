@@ -28,8 +28,10 @@ export default function (api) {
                  * @since           2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                url:
-                    'https://shields.io/bundlephobia/min/[packageJson.name]?style=[config.shieldsio.style]',
+                get url() {
+                    return `https://shields.io/bundlephobia/min/${api.config.packageJson.name}?style=${api.this.style}`;
+                },
+
                 /**
                  * @name            href
                  * @namespace       config.shieldsio.shields.href
@@ -41,7 +43,9 @@ export default function (api) {
                  * @since           2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                href: 'https://www.npmjs.com/package/[packageJson.name]',
+                get href() {
+                    return `https://www.npmjs.com/package/${api.config.packageJson.name}`;
+                },
             },
             downloads: {
                 /**
@@ -55,8 +59,10 @@ export default function (api) {
                  * @since           2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                url:
-                    'https://shields.io/npm/dm/[packageJson.name]?style=[config.shieldsio.style]',
+                get url() {
+                    return `https://shields.io/npm/dm/${api.config.packageJson.name}?style=${api.this.style}`;
+                },
+
                 /**
                  * @name            href
                  * @namespace       config.shieldsio.shields.download
@@ -68,7 +74,9 @@ export default function (api) {
                  * @since           2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                href: 'https://www.npmjs.com/package/[packageJson.name]',
+                get href() {
+                    return `https://www.npmjs.com/package/${api.config.packageJson.name}`;
+                },
             },
             license: {
                 /**
@@ -82,8 +90,10 @@ export default function (api) {
                  * @since           2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                url:
-                    'https://shields.io/npm/l/[packageJson.name]?style=[config.shieldsio.style]',
+                get url() {
+                    return `https://shields.io/npm/l/${api.config.packageJson.name}?style=${api.this.style}`;
+                },
+
                 /**
                  * @name            href
                  * @namespace       config.shieldsio.shields.license
@@ -102,15 +112,17 @@ export default function (api) {
                  * @name            url
                  * @namespace       config.shieldsio.shields.discord
                  * @type            String
-                 * @default         https://shields.io/discord/[config.discord.server.id]?style=[config.shieldsio.style]
+                 * @default         https://shields.io/discord/[config.discord.server.id]?style=[api.this.style]
                  *
                  * Specify the shieldsio url for the "discord" shield
                  *
                  * @since           2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                url:
-                    'https://shields.io/discord/[config.discord.server.id]?style=[config.shieldsio.style]',
+                get url() {
+                    return `https://shields.io/discord/${api.config.discord.server.id}?style=${api.this.style}`;
+                },
+
                 /**
                  * @name            href
                  * @namespace       config.shieldsio.shields.license
@@ -122,7 +134,9 @@ export default function (api) {
                  * @since           2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                href: '[config.discord.server.url]',
+                get href() {
+                    return api.config.discord.server.url;
+                },
             },
         },
     };

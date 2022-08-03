@@ -1,11 +1,11 @@
 // @ts-nocheck
 
-import __sort from './sort';
 import __isPlainObject from '../is/plainObject';
+import __sort from './sort';
 
 /**
  * @name                                sortDeep
- * @namespace            js.object
+ * @namespace            shared.object
  * @type                                Function
  * @platform          js
  * @platform          node

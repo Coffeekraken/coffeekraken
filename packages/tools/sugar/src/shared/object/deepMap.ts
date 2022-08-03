@@ -1,12 +1,12 @@
 // @ts-nocheck
 
+import __isClassInstance from '../is/classInstance';
 import __isPlainObject from '../is/plainObject';
 import __deepMerge from '../object/deepMerge';
-import __isClassInstance from '../is/classInstance';
 
 /**
  * @name            deepMap
- * @namespace            js.object
+ * @namespace            shared.object
  * @type            Function
  * @platform          js
  * @platform          node

@@ -2,6 +2,7 @@
 
 import __SDuration from '@coffeekraken/s-duration';
 import __SEnv from '@coffeekraken/s-env';
+import __isCyclic from '@coffeekraken/sugar/shared/is/cyclic';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 import __decycle from '@coffeekraken/sugar/shared/object/decycle';
@@ -242,28 +243,6 @@ export default class SConfig {
             );
         }
 
-        function resolveConfig(string, matches, config, path) {
-            for (let i = 0; i < matches.length; i++) {
-                const match = matches[i];
-
-                const value = __get(
-                    config,
-                    this.resolveDotPath(match, config, path),
-                );
-
-                if (value === undefined) {
-                    throw new Error(
-                        `<red>[${this.constructor.name}]</red> Sorry but the referenced "<yellow>${match}</yellow>" config value does not exiats...`,
-                    );
-                }
-
-                if (string === match) return value;
-                string = string.replace(match, value);
-            }
-
-            return string;
-        }
-
         let timeout;
         if (!this.adapter.settings.onUpdate) {
             this.adapter.settings.onUpdate = () => {
@@ -336,52 +315,6 @@ export default class SConfig {
             }
         });
 
-        // const extendsConfigIfNeeded = (configToExtends, configName) => {
-        //     if (
-        //         configToExtends.extends &&
-        //         typeof configToExtends.extends === 'string'
-        //     ) {
-        //         const extend = configToExtends.extends;
-
-        //         if (!this.config[extend]) {
-        //             throw new Error(
-        //                 `<red>[SConfig]</red> You have set an "<yellow>extends</yellow>" property to "<magenta>${extend}</magenta>" inside the "<cyan>${configName}</cyan>" config but this configuration you want to extends does not exists...`,
-        //             );
-        //         }
-
-        //         const extendsConfig = extendsConfigIfNeeded(
-        //             Object.assign({}, this.config[extend]),
-        //             extend,
-        //         );
-
-        //         const newExtendedConfig = __deepMerge(
-        //             extendsConfig,
-        //             configToExtends,
-        //         );
-        //         Object.defineProperty(newExtendedConfig, '_extends', {
-        //             enumerable: false,
-        //             value: newExtendedConfig.extends,
-        //         });
-        //         delete newExtendedConfig.extends;
-
-        //         return newExtendedConfig;
-        //     } else {
-        //         return configToExtends;
-        //     }
-        // };
-
-        // // make a simple [] correspondance check
-        // __deepMap(this.config, ({ prop, value, path }) => {
-        //     if (
-        //         typeof value === 'string' &&
-        //         value.split('[').length !== value.split(']').length
-        //     ) {
-        //         throw new Error(
-        //             `<red>[${this.constructor.name}]</red> We think that you've made a mistake in your config file at path "<yellow>${path}</yellow>" with the value "<cyan>${value}</cyan>"`,
-        //         );
-        //     }
-        // });
-
         if (this.constructor._registeredPreprocesses[this.id]) {
             for (
                 let k = 0;
@@ -410,14 +343,6 @@ export default class SConfig {
                 });
             }
         }
-
-        // // handle the "extends" global property
-        // Object.keys(this.config).forEach((configName) => {
-        //     this.config[configName] = extendsConfigIfNeeded(
-        //         this.config[configName],
-        //         configName,
-        //     );
-        // });
 
         if (this.constructor._registeredPostprocess[this.id]) {
             for (
@@ -459,6 +384,12 @@ export default class SConfig {
                     this.config
                 }" which is of type "${typeof this.config}"...`,
             );
+        }
+
+        // make sure we don't have any cyclic references inside our config
+        const cyclic = __isCyclic(this.config);
+        if (cyclic) {
+            throw new Error(cyclic);
         }
 
         // cache for later

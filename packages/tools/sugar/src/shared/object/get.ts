@@ -1,11 +1,11 @@
 // @ts-nocheck
 
-import __unquote from '../string/unquote';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
+import __unquote from '../string/unquote';
 
 /**
  * @name                          get
- * @namespace            js.object
+ * @namespace            shared.object
  * @type                          Function
  * @platform          js
  * @platform          node

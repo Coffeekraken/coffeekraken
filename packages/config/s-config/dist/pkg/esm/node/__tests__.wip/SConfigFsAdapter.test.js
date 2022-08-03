@@ -1,4 +1,0 @@
-import __SConfigFsAdapter from '../adapters/SConfigFsAdapter';
-import __SConfig from '../SConfig';
-require('./SConfigFsAdapter')(__SConfig, __SConfigFsAdapter);
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sa0JBQWtCLE1BQU0sOEJBQThCLENBQUM7QUFDOUQsT0FBTyxTQUFTLE1BQU0sWUFBWSxDQUFDO0FBQ25DLE9BQU8sQ0FBQyxvQkFBb0IsQ0FBQyxDQUFDLFNBQVMsRUFBRSxrQkFBa0IsQ0FBQyxDQUFDIn0=

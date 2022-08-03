@@ -1,4 +1,0 @@
-import SEnv from './SEnv';
-export * from './SEnv';
-export default SEnv;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sSUFBSSxNQUFNLFFBQVEsQ0FBQztBQUUxQixjQUFjLFFBQVEsQ0FBQztBQUV2QixlQUFlLElBQUksQ0FBQyJ9

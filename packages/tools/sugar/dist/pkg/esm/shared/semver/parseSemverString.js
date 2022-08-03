@@ -1,6 +1,0 @@
-import __semverParser from 'semver/functions/parse';
-export default function parseSemverString(semverString) {
-    const obj = __semverParser(semverString);
-    return obj;
-}
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sY0FBYyxNQUFNLHdCQUF3QixDQUFDO0FBaURwRCxNQUFNLENBQUMsT0FBTyxVQUFVLGlCQUFpQixDQUFDLFlBQW9CO0lBQzFELE1BQU0sR0FBRyxHQUFHLGNBQWMsQ0FBQyxZQUFZLENBQUMsQ0FBQztJQUN6QyxPQUFPLEdBQUcsQ0FBQztBQUNmLENBQUMifQ==

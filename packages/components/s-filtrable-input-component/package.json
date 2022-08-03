@@ -1,44 +1,44 @@
 {
-  "name": "@coffeekraken/s-filtrable-input-component",
-  "version": "2.0.0-alpha.8",
-  "description": "",
-  "type": "module",
-  "homepage": "https://coffeekraken.io",
-  "scripts": {
-    "dev": "sugar frontstack",
-    "build": "sugar frontstack build",
-    "build.watch": "sugar vite.build --lib --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "MIT",
-  "dependencies": {
-    "@coffeekraken/s-interface": "^2.0.0-alpha.8",
-    "@coffeekraken/s-lit-component": "^2.0.0-alpha.8",
-    "@coffeekraken/s-theme": "^2.0.0-alpha.8",
-    "@coffeekraken/sugar": "^2.0.0-alpha.8",
-    "faker": "^5.5.3",
-    "lit": "^2.2.5",
-    "react": "^17.0.2"
-  },
-  "main": "dist/pkg/cjs/js/exports.js",
-  "module": "dist/pkg/esm/js/exports.js",
-  "exports": {
-    ".": {
-      "require": "./dist/pkg/cjs/js/exports.js",
-      "import": "./dist/pkg/esm/js/exports.js"
+    "name": "@coffeekraken/s-filtrable-input-component",
+    "version": "2.0.0-alpha.9",
+    "description": "",
+    "type": "module",
+    "homepage": "https://coffeekraken.io",
+    "scripts": {
+        "dev": "sugar frontstack",
+        "build": "sugar frontstack build",
+        "build.watch": "sugar vite.build --lib --watch",
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "./shared/*": {
-      "require": "./dist/pkg/cjs/shared/*.js",
-      "import": "./dist/pkg/esm/shared/*.js"
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "@coffeekraken/s-interface": "^2.0.0-alpha.9",
+        "@coffeekraken/s-lit-component": "^2.0.0-alpha.9",
+        "@coffeekraken/s-theme": "^2.0.0-alpha.9",
+        "@coffeekraken/sugar": "^2.0.0-alpha.9",
+        "faker": "^5.5.3",
+        "lit": "^2.2.5",
+        "react": "^17.0.2"
     },
-    "./node/*": {
-      "require": "./dist/pkg/cjs/node/*.js",
-      "import": "./dist/pkg/esm/node/*.js"
-    },
-    "./js/*": {
-      "require": "./dist/pkg/cjs/js/*.js",
-      "import": "./dist/pkg/esm/js/*.js"
+    "main": "dist/pkg/cjs/js/exports.js",
+    "module": "dist/pkg/esm/js/exports.js",
+    "exports": {
+        ".": {
+            "require": "./dist/pkg/cjs/js/exports.js",
+            "import": "./dist/pkg/esm/js/exports.js"
+        },
+        "./shared/*": {
+            "require": "./dist/pkg/cjs/shared/*.js",
+            "import": "./dist/pkg/esm/shared/*.js"
+        },
+        "./node/*": {
+            "require": "./dist/pkg/cjs/node/*.js",
+            "import": "./dist/pkg/esm/node/*.js"
+        },
+        "./js/*": {
+            "require": "./dist/pkg/cjs/js/*.js",
+            "import": "./dist/pkg/esm/js/*.js"
+        }
     }
-  }
 }

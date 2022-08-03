@@ -1,42 +1,42 @@
 {
-  "name": "@coffeekraken/s-sugar-json",
-  "version": "2.0.0-alpha.8",
-  "description": "",
-  "type": "module",
-  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
-  "license": "MIT",
-  "dependencies": {
-    "@coffeekraken/s-bench": "^2.0.0-alpha.8",
-    "@coffeekraken/s-class": "^2.0.0-alpha.8",
-    "@coffeekraken/s-duration": "^2.0.0-alpha.8",
-    "@coffeekraken/s-event-emitter": "^2.0.0-alpha.8",
-    "@coffeekraken/s-glob": "^2.0.0-alpha.8",
-    "@coffeekraken/s-interface": "^2.0.0-alpha.8",
-    "@coffeekraken/s-kitchen": "^2.0.0-alpha.8",
-    "@coffeekraken/s-log": "^2.0.0-alpha.8",
-    "@coffeekraken/s-promise": "^2.0.0-alpha.8",
-    "@coffeekraken/s-stdio": "^2.0.0-alpha.8",
-    "@coffeekraken/sugar": "^2.0.0-alpha.8",
-    "glob-all": "^3.3.0"
-  },
-  "main": "dist/pkg/cjs/node/exports.js",
-  "module": "dist/pkg/esm/node/exports.js",
-  "exports": {
-    ".": {
-      "require": "./dist/pkg/cjs/node/exports.js",
-      "import": "./dist/pkg/esm/node/exports.js"
+    "name": "@coffeekraken/s-sugar-json",
+    "version": "2.0.0-alpha.9",
+    "description": "",
+    "type": "module",
+    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+    "license": "MIT",
+    "dependencies": {
+        "@coffeekraken/s-bench": "^2.0.0-alpha.9",
+        "@coffeekraken/s-class": "^2.0.0-alpha.9",
+        "@coffeekraken/s-duration": "^2.0.0-alpha.9",
+        "@coffeekraken/s-event-emitter": "^2.0.0-alpha.9",
+        "@coffeekraken/s-glob": "^2.0.0-alpha.9",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.9",
+        "@coffeekraken/s-kitchen": "^2.0.0-alpha.9",
+        "@coffeekraken/s-log": "^2.0.0-alpha.9",
+        "@coffeekraken/s-promise": "^2.0.0-alpha.9",
+        "@coffeekraken/s-stdio": "^2.0.0-alpha.9",
+        "@coffeekraken/sugar": "^2.0.0-alpha.9",
+        "glob-all": "^3.3.0"
     },
-    "./shared/*": {
-      "require": "./dist/pkg/cjs/shared/*.js",
-      "import": "./dist/pkg/esm/shared/*.js"
-    },
-    "./node/*": {
-      "require": "./dist/pkg/cjs/node/*.js",
-      "import": "./dist/pkg/esm/node/*.js"
-    },
-    "./js/*": {
-      "require": "./dist/pkg/cjs/js/*.js",
-      "import": "./dist/pkg/esm/js/*.js"
+    "main": "dist/pkg/cjs/node/exports.js",
+    "module": "dist/pkg/esm/node/exports.js",
+    "exports": {
+        ".": {
+            "require": "./dist/pkg/cjs/node/exports.js",
+            "import": "./dist/pkg/esm/node/exports.js"
+        },
+        "./shared/*": {
+            "require": "./dist/pkg/cjs/shared/*.js",
+            "import": "./dist/pkg/esm/shared/*.js"
+        },
+        "./node/*": {
+            "require": "./dist/pkg/cjs/node/*.js",
+            "import": "./dist/pkg/esm/node/*.js"
+        },
+        "./js/*": {
+            "require": "./dist/pkg/cjs/js/*.js",
+            "import": "./dist/pkg/esm/js/*.js"
+        }
     }
-  }
 }

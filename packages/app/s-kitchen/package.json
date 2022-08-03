@@ -1,50 +1,50 @@
 {
-  "name": "@coffeekraken/s-kitchen",
-  "version": "2.0.0-alpha.8",
-  "description": "",
-  "type": "module",
-  "scripts": {
-    "dev": "sugar kitchen"
-  },
-  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
-  "license": "MIT",
-  "dependencies": {
-    "@coffeekraken/cli": "^2.0.0-alpha.8",
-    "@coffeekraken/s-class": "^2.0.0-alpha.8",
-    "@coffeekraken/s-duration": "^2.0.0-alpha.8",
-    "@coffeekraken/s-favicon-builder": "^2.0.0-alpha.8",
-    "@coffeekraken/s-frontspec": "^2.0.0-alpha.8",
-    "@coffeekraken/s-images-builder": "^2.0.0-alpha.8",
-    "@coffeekraken/s-interface": "^2.0.0-alpha.8",
-    "@coffeekraken/s-log": "^2.0.0-alpha.8",
-    "@coffeekraken/s-markdown-builder": "^2.0.0-alpha.8",
-    "@coffeekraken/s-postcss-builder": "^2.0.0-alpha.8",
-    "@coffeekraken/s-process": "^2.0.0-alpha.8",
-    "@coffeekraken/s-promise": "^2.0.0-alpha.8",
-    "@coffeekraken/s-sugar-config": "^2.0.0-alpha.8",
-    "@coffeekraken/s-sugar-json": "^2.0.0-alpha.8",
-    "@coffeekraken/s-vite": "^2.0.0-alpha.8",
-    "@coffeekraken/sugar": "^2.0.0-alpha.8",
-    "recursive-copy": "^2.0.14"
-  },
-  "main": "dist/pkg/cjs/node/exports.js",
-  "module": "dist/pkg/esm/node/exports.js",
-  "exports": {
-    ".": {
-      "require": "./dist/pkg/cjs/node/exports.js",
-      "import": "./dist/pkg/esm/node/exports.js"
+    "name": "@coffeekraken/s-kitchen",
+    "version": "2.0.0-alpha.9",
+    "description": "",
+    "type": "module",
+    "scripts": {
+        "dev": "sugar kitchen"
     },
-    "./shared/*": {
-      "require": "./dist/pkg/cjs/shared/*.js",
-      "import": "./dist/pkg/esm/shared/*.js"
+    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+    "license": "MIT",
+    "dependencies": {
+        "@coffeekraken/cli": "^2.0.0-alpha.9",
+        "@coffeekraken/s-class": "^2.0.0-alpha.9",
+        "@coffeekraken/s-duration": "^2.0.0-alpha.9",
+        "@coffeekraken/s-favicon-builder": "^2.0.0-alpha.9",
+        "@coffeekraken/s-frontspec": "^2.0.0-alpha.9",
+        "@coffeekraken/s-images-builder": "^2.0.0-alpha.9",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.9",
+        "@coffeekraken/s-log": "^2.0.0-alpha.9",
+        "@coffeekraken/s-markdown-builder": "^2.0.0-alpha.9",
+        "@coffeekraken/s-postcss-builder": "^2.0.0-alpha.9",
+        "@coffeekraken/s-process": "^2.0.0-alpha.9",
+        "@coffeekraken/s-promise": "^2.0.0-alpha.9",
+        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.9",
+        "@coffeekraken/s-sugar-json": "^2.0.0-alpha.9",
+        "@coffeekraken/s-vite": "^2.0.0-alpha.9",
+        "@coffeekraken/sugar": "^2.0.0-alpha.9",
+        "recursive-copy": "^2.0.14"
     },
-    "./node/*": {
-      "require": "./dist/pkg/cjs/node/*.js",
-      "import": "./dist/pkg/esm/node/*.js"
-    },
-    "./js/*": {
-      "require": "./dist/pkg/cjs/js/*.js",
-      "import": "./dist/pkg/esm/js/*.js"
+    "main": "dist/pkg/cjs/node/exports.js",
+    "module": "dist/pkg/esm/node/exports.js",
+    "exports": {
+        ".": {
+            "require": "./dist/pkg/cjs/node/exports.js",
+            "import": "./dist/pkg/esm/node/exports.js"
+        },
+        "./shared/*": {
+            "require": "./dist/pkg/cjs/shared/*.js",
+            "import": "./dist/pkg/esm/shared/*.js"
+        },
+        "./node/*": {
+            "require": "./dist/pkg/cjs/node/*.js",
+            "import": "./dist/pkg/esm/node/*.js"
+        },
+        "./js/*": {
+            "require": "./dist/pkg/cjs/js/*.js",
+            "import": "./dist/pkg/esm/js/*.js"
+        }
     }
-  }
 }

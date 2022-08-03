@@ -1,31 +1,31 @@
 {
-  "name": "@coffeekraken/s-theme",
-  "version": "2.0.0-alpha.8",
-  "description": "",
-  "type": "module",
-  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
-  "license": "MIT",
-  "dependencies": {
-    "@coffeekraken/s-class": "^2.0.0-alpha.8",
-    "@coffeekraken/s-color": "^2.0.0-alpha.8",
-    "@coffeekraken/s-event-emitter": "^2.0.0-alpha.8",
-    "@coffeekraken/s-sugar-config": "^2.0.0-alpha.8",
-    "@coffeekraken/s-sugar-json": "^2.0.0-alpha.8",
-    "@coffeekraken/sugar": "^2.0.0-alpha.8",
-    "known-css-properties": "^0.23.0",
-    "micromatch": "^4.0.4",
-    "object-hash": "^2.2.0"
-  },
-  "main": "dist/pkg/cjs/js/exports.js",
-  "module": "dist/pkg/esm/js/exports.js",
-  "exports": {
-    "node": {
-      "require": "./dist/pkg/cjs/node/exports.js",
-      "import": "./dist/pkg/esm/node/exports.js"
+    "name": "@coffeekraken/s-theme",
+    "version": "2.0.0-alpha.9",
+    "description": "",
+    "type": "module",
+    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+    "license": "MIT",
+    "dependencies": {
+        "@coffeekraken/s-class": "^2.0.0-alpha.9",
+        "@coffeekraken/s-color": "^2.0.0-alpha.9",
+        "@coffeekraken/s-event-emitter": "^2.0.0-alpha.9",
+        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.9",
+        "@coffeekraken/s-sugar-json": "^2.0.0-alpha.9",
+        "@coffeekraken/sugar": "^2.0.0-alpha.9",
+        "known-css-properties": "^0.23.0",
+        "micromatch": "^4.0.4",
+        "object-hash": "^2.2.0"
     },
-    "default": {
-      "require": "./dist/pkg/cjs/js/exports.js",
-      "import": "./dist/pkg/esm/js/exports.js"
+    "main": "dist/pkg/cjs/js/exports.js",
+    "module": "dist/pkg/esm/js/exports.js",
+    "exports": {
+        "node": {
+            "require": "./dist/pkg/cjs/node/exports.js",
+            "import": "./dist/pkg/esm/node/exports.js"
+        },
+        "default": {
+            "require": "./dist/pkg/cjs/js/exports.js",
+            "import": "./dist/pkg/esm/js/exports.js"
+        }
     }
-  }
 }

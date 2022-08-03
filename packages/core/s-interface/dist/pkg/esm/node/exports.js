@@ -1,9 +1,0 @@
-import SInterface from './SInterface';
-import SInterfaceRenderer from './renderers/SInterfaceRenderer';
-import SInterfaceTerminalRenderer from './renderers/SInterfaceTerminalRenderer';
-export * from './SInterface';
-export * from './renderers/SInterfaceRenderer';
-export * from './renderers/SInterfaceTerminalRenderer';
-export { SInterfaceRenderer, SInterfaceTerminalRenderer };
-export default SInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sVUFBVSxNQUFNLGNBQWMsQ0FBQztBQUN0QyxPQUFPLGtCQUFrQixNQUFNLGdDQUFnQyxDQUFDO0FBQ2hFLE9BQU8sMEJBQTBCLE1BQU0sd0NBQXdDLENBQUM7QUFDaEYsY0FBYyxjQUFjLENBQUM7QUFDN0IsY0FBYyxnQ0FBZ0MsQ0FBQztBQUMvQyxjQUFjLHdDQUF3QyxDQUFDO0FBQ3ZELE9BQU8sRUFBRSxrQkFBa0IsRUFBRSwwQkFBMEIsRUFBRSxDQUFDO0FBQzFELGVBQWUsVUFBVSxDQUFDIn0=

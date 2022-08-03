@@ -1,7 +1,0 @@
-import SInterface from '../shared/SInterface';
-import SInterfaceTerminalRenderer from './renderers/SInterfaceTerminalRenderer';
-// register renderers
-SInterface.registerRenderer(SInterfaceTerminalRenderer);
-export * from '../shared/SInterface';
-export default SInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sVUFBVSxNQUFNLHNCQUFzQixDQUFDO0FBQzlDLE9BQU8sMEJBQTBCLE1BQU0sd0NBQXdDLENBQUM7QUFFaEYscUJBQXFCO0FBQ3JCLFVBQVUsQ0FBQyxnQkFBZ0IsQ0FBQywwQkFBMEIsQ0FBQyxDQUFDO0FBRXhELGNBQWMsc0JBQXNCLENBQUM7QUFDckMsZUFBZSxVQUFVLENBQUMifQ==

@@ -1,6 +1,0 @@
-import SSugarCli from './sugar.cli.js';
-import replaceCommandTokens from './replaceCommandTokens';
-export * from './sugar.cli';
-export { replaceCommandTokens };
-export default SSugarCli;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sU0FBUyxNQUFNLGdCQUFnQixDQUFDO0FBQ3ZDLE9BQU8sb0JBQW9CLE1BQU0sd0JBQXdCLENBQUM7QUFDMUQsY0FBYyxhQUFhLENBQUM7QUFDNUIsT0FBTyxFQUFFLG9CQUFvQixFQUFFLENBQUM7QUFDaEMsZUFBZSxTQUFTLENBQUMifQ==

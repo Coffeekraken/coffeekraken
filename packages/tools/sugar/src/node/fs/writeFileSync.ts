@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import __folderPath from './folderPath';
-import __ensureDirSync from './ensureDirSync';
 import __fs from 'fs-extra';
+import __ensureDirSync from './ensureDirSync';
+import __folderPath from './folderPath';
 
 /**
  * @name        writeFileSync

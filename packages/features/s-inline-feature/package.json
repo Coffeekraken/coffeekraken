@@ -1,6 +1,6 @@
 {
   "name": "@coffeekraken/s-inline-feature",
-  "version": "2.0.0-alpha.7",
+  "version": "2.0.0-alpha.8",
   "description": "",
   "type": "module",
   "scripts": {
@@ -11,10 +11,10 @@
   "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
   "license": "MIT",
   "dependencies": {
-    "@coffeekraken/s-class": "^2.0.0-alpha.7",
-    "@coffeekraken/s-feature": "^2.0.0-alpha.7",
-    "@coffeekraken/s-interface": "^2.0.0-alpha.7",
-    "@coffeekraken/sugar": "^2.0.0-alpha.7"
+    "@coffeekraken/s-class": "^2.0.0-alpha.8",
+    "@coffeekraken/s-feature": "^2.0.0-alpha.8",
+    "@coffeekraken/s-interface": "^2.0.0-alpha.8",
+    "@coffeekraken/sugar": "^2.0.0-alpha.8"
   },
   "main": "dist/pkg/cjs/js/exports.js",
   "module": "dist/pkg/esm/js/exports.js",

@@ -1,0 +1,4 @@
+import __SFiltrableInputComponent from './SFiltrableInputComponent';
+export * from './SFiltrableInputComponent';
+export default __SFiltrableInputComponent;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sMEJBQTBCLE1BQU0sNEJBQTRCLENBQUM7QUFDcEUsY0FBYyw0QkFBNEIsQ0FBQztBQUMzQyxlQUFlLDBCQUEwQixDQUFDIn0=

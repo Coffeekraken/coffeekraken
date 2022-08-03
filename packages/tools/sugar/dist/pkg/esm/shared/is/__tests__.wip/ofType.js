@@ -1,0 +1,50 @@
+"use strict";
+const __SLog = require('../../../node/log/SLog');
+module.exports = (__isOfType) => {
+    describe('sugar.shared.is.ofType', () => {
+        it('Should detect the type of passed values correctly', () => {
+            expect(__isOfType(true, 'Boolean')).toBe(true);
+            expect(__isOfType(['item1'], 'Array')).toBe(true);
+            expect(__isOfType({ property1: 'hello' }, 'Object')).toBe(true);
+            expect(__isOfType(12, 'Number')).toBe(true);
+            expect(__isOfType(12.34, 'Number')).toBe(true);
+            expect(__isOfType(12, 'Integer')).toBe(true);
+            expect(__isOfType(12.34, 'Integer')).toEqual({
+                expected: { type: 'Integer' },
+                received: { type: 'Number', value: 12.34 },
+                issues: ['type'],
+            });
+            expect(__isOfType('Hello world', 'String')).toBe(true);
+            expect(__isOfType([10, 20, 45], 'Array<Number>')).toBe(true);
+            expect(__isOfType([10, '20', 45], 'Array<Number>')).toEqual({
+                expected: { type: 'Array<Number>' },
+                received: {
+                    type: 'Array<Integer|String>',
+                    value: [10, '20', 45],
+                },
+                issues: ['type'],
+            });
+            expect(__isOfType([
+                {
+                    something: 'cool',
+                },
+            ], 'Array<Object>')).toBe(true);
+            expect(__isOfType(__SLog, 'SLog')).toBe(true);
+            expect(__isOfType([__SLog], 'Array<SLog>')).toBe(true);
+            expect(__isOfType({
+                something: __SLog,
+            }, 'Object<SLog>')).toBe(true);
+            expect(__isOfType({
+                something: 'Hello world',
+            }, 'Object<SLog>')).toEqual({
+                expected: { type: 'Object<SLog>' },
+                received: {
+                    type: 'Object<String>',
+                    value: { something: 'Hello world' },
+                },
+                issues: ['type'],
+            });
+        });
+    });
+};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxNQUFNLE1BQU0sR0FBRyxPQUFPLENBQUMsd0JBQXdCLENBQUMsQ0FBQztBQUVqRCxNQUFNLENBQUMsT0FBTyxHQUFHLENBQUMsVUFBVSxFQUFFLEVBQUU7SUFDNUIsUUFBUSxDQUFDLHdCQUF3QixFQUFFLEdBQUcsRUFBRTtRQUNwQyxFQUFFLENBQUMsbURBQW1ELEVBQUUsR0FBRyxFQUFFO1lBQ3pELE1BQU0sQ0FBQyxVQUFVLENBQUMsSUFBSSxFQUFFLFNBQVMsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDO1lBQy9DLE1BQU0sQ0FBQyxVQUFVLENBQUMsQ0FBQyxPQUFPLENBQUMsRUFBRSxPQUFPLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQztZQUNsRCxNQUFNLENBQUMsVUFBVSxDQUFDLEVBQUUsU0FBUyxFQUFFLE9BQU8sRUFBRSxFQUFFLFFBQVEsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDO1lBQ2hFLE1BQU0sQ0FBQyxVQUFVLENBQUMsRUFBRSxFQUFFLFFBQVEsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDO1lBQzVDLE1BQU0sQ0FBQyxVQUFVLENBQUMsS0FBSyxFQUFFLFFBQVEsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDO1lBQy9DLE1BQU0sQ0FBQyxVQUFVLENBQUMsRUFBRSxFQUFFLFNBQVMsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDO1lBQzdDLE1BQU0sQ0FBQyxVQUFVLENBQUMsS0FBSyxFQUFFLFNBQVMsQ0FBQyxDQUFDLENBQUMsT0FBTyxDQUFDO2dCQUN6QyxRQUFRLEVBQUUsRUFBRSxJQUFJLEVBQUUsU0FBUyxFQUFFO2dCQUM3QixRQUFRLEVBQUUsRUFBRSxJQUFJLEVBQUUsUUFBUSxFQUFFLEtBQUssRUFBRSxLQUFLLEVBQUU7Z0JBQzFDLE1BQU0sRUFBRSxDQUFDLE1BQU0sQ0FBQzthQUNuQixDQUFDLENBQUM7WUFDSCxNQUFNLENBQUMsVUFBVSxDQUFDLGFBQWEsRUFBRSxRQUFRLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQztZQUV2RCxNQUFNLENBQUMsVUFBVSxDQUFDLENBQUMsRUFBRSxFQUFFLEVBQUUsRUFBRSxFQUFFLENBQUMsRUFBRSxlQUFlLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQztZQUM3RCxNQUFNLENBQUMsVUFBVSxDQUFDLENBQUMsRUFBRSxFQUFFLElBQUksRUFBRSxFQUFFLENBQUMsRUFBRSxlQUFlLENBQUMsQ0FBQyxDQUFDLE9BQU8sQ0FBQztnQkFDeEQsUUFBUSxFQUFFLEVBQUUsSUFBSSxFQUFFLGVBQWUsRUFBRTtnQkFDbkMsUUFBUSxFQUFFO29CQUNOLElBQUksRUFBRSx1QkFBdUI7b0JBQzdCLEtBQUssRUFBRSxDQUFDLEVBQUUsRUFBRSxJQUFJLEVBQUUsRUFBRSxDQUFDO2lCQUN4QjtnQkFDRCxNQUFNLEVBQUUsQ0FBQyxNQUFNLENBQUM7YUFDbkIsQ0FBQyxDQUFDO1lBRUgsTUFBTSxDQUNGLFVBQVUsQ0FDTjtnQkFDSTtvQkFDSSxTQUFTLEVBQUUsTUFBTTtpQkFDcEI7YUFDSixFQUNELGVBQWUsQ0FDbEIsQ0FDSixDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQztZQUViLE1BQU0sQ0FBQyxVQUFVLENBQUMsTUFBTSxFQUFFLE1BQU0sQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDO1lBRTlDLE1BQU0sQ0FBQyxVQUFVLENBQUMsQ0FBQyxNQUFNLENBQUMsRUFBRSxhQUFhLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQztZQUV2RCxNQUFNLENBQ0YsVUFBVSxDQUNOO2dCQUNJLFNBQVMsRUFBRSxNQUFNO2FBQ3BCLEVBQ0QsY0FBYyxDQUNqQixDQUNKLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDO1lBRWIsTUFBTSxDQUNGLFVBQVUsQ0FDTjtnQkFDSSxTQUFTLEVBQUUsYUFBYTthQUMzQixFQUNELGNBQWMsQ0FDakIsQ0FDSixDQUFDLE9BQU8sQ0FBQztnQkFDTixRQUFRLEVBQUUsRUFBRSxJQUFJLEVBQUUsY0FBYyxFQUFFO2dCQUNsQyxRQUFRLEVBQUU7b0JBQ04sSUFBSSxFQUFFLGdCQUFnQjtvQkFDdEIsS0FBSyxFQUFFLEVBQUUsU0FBUyxFQUFFLGFBQWEsRUFBRTtpQkFDdEM7Z0JBQ0QsTUFBTSxFQUFFLENBQUMsTUFBTSxDQUFDO2FBQ25CLENBQUMsQ0FBQztRQUNQLENBQUMsQ0FBQyxDQUFDO0lBQ1AsQ0FBQyxDQUFDLENBQUM7QUFDUCxDQUFDLENBQUMifQ==

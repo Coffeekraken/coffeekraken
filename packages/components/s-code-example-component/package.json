@@ -1,6 +1,6 @@
 {
   "name": "@coffeekraken/s-code-example-component",
-  "version": "2.0.0-alpha.7",
+  "version": "2.0.0-alpha.8",
   "description": "",
   "type": "module",
   "homepage": "https://coffeekraken.io",
@@ -12,10 +12,10 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@coffeekraken/s-clipboard-copy-component": "^2.0.0-alpha.7",
-    "@coffeekraken/s-interface": "^2.0.0-alpha.7",
-    "@coffeekraken/s-lit-component": "^2.0.0-alpha.7",
-    "@coffeekraken/sugar": "^2.0.0-alpha.7",
+    "@coffeekraken/s-clipboard-copy-component": "^2.0.0-alpha.8",
+    "@coffeekraken/s-interface": "^2.0.0-alpha.8",
+    "@coffeekraken/s-lit-component": "^2.0.0-alpha.8",
+    "@coffeekraken/sugar": "^2.0.0-alpha.8",
     "@prettier/plugin-php": "^0.17.6",
     "highlight.js": "^11.1.0",
     "html-tags": "^3.1.0",

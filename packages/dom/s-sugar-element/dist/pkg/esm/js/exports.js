@@ -1,0 +1,4 @@
+import __SSugarElement from './SSugarElement';
+export * from './SSugarElement';
+export default __SSugarElement;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sZUFBZSxNQUFNLGlCQUFpQixDQUFDO0FBQzlDLGNBQWMsaUJBQWlCLENBQUM7QUFDaEMsZUFBZSxlQUFlLENBQUMifQ==

@@ -1,6 +1,6 @@
 {
   "name": "@coffeekraken/s-theme-switcher-component",
-  "version": "2.0.0-alpha.7",
+  "version": "2.0.0-alpha.8",
   "description": "",
   "type": "module",
   "homepage": "https://coffeekraken.io",
@@ -12,10 +12,10 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@coffeekraken/s-interface": "^2.0.0-alpha.7",
-    "@coffeekraken/s-lit-component": "^2.0.0-alpha.7",
-    "@coffeekraken/s-theme": "^2.0.0-alpha.7",
-    "@coffeekraken/sugar": "^2.0.0-alpha.7",
+    "@coffeekraken/s-interface": "^2.0.0-alpha.8",
+    "@coffeekraken/s-lit-component": "^2.0.0-alpha.8",
+    "@coffeekraken/s-theme": "^2.0.0-alpha.8",
+    "@coffeekraken/sugar": "^2.0.0-alpha.8",
     "lit": "^2.0.0-rc.3"
   },
   "main": "dist/pkg/cjs/js/exports.js",

@@ -1,14 +1,14 @@
 {
   "name": "@coffeekraken/s-event-emitter",
-  "version": "2.0.0-alpha.7",
+  "version": "2.0.0-alpha.8",
   "description": "",
   "type": "module",
   "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
   "license": "MIT",
   "dependencies": {
-    "@coffeekraken/s-class": "^2.0.0-alpha.7",
-    "@coffeekraken/s-log": "^2.0.0-alpha.7",
-    "@coffeekraken/sugar": "^2.0.0-alpha.7",
+    "@coffeekraken/s-class": "^2.0.0-alpha.8",
+    "@coffeekraken/s-log": "^2.0.0-alpha.8",
+    "@coffeekraken/sugar": "^2.0.0-alpha.8",
     "node-ipc": "^10.1.0"
   },
   "main": "dist/pkg/cjs/js/exports.js",

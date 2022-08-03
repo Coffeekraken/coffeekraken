@@ -1,0 +1,4 @@
+"use strict";
+const __typeDefinitionArrayObjectToString = require('../typeDefinitionArrayObjectToString');
+require('./typeDefinitionArrayObjectToString')(__typeDefinitionArrayObjectToString);
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxNQUFNLG1DQUFtQyxHQUFHLE9BQU8sQ0FBQyxzQ0FBc0MsQ0FBQyxDQUFDO0FBQzVGLE9BQU8sQ0FBQyxxQ0FBcUMsQ0FBQyxDQUM1QyxtQ0FBbUMsQ0FDcEMsQ0FBQyJ9

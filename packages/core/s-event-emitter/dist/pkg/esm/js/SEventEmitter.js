@@ -1,0 +1,5 @@
+import __SEventEmitterBase from '../shared/SEventEmitter';
+export * from '../shared/SEventEmitter';
+export default class SEventEmitter extends __SEventEmitterBase {
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sbUJBQW1CLE1BQU0seUJBQXlCLENBQUM7QUFFMUQsY0FBYyx5QkFBeUIsQ0FBQztBQUV4QyxNQUFNLENBQUMsT0FBTyxPQUFPLGFBQWMsU0FBUSxtQkFBbUI7Q0FDN0QifQ==

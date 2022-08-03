@@ -1,15 +1,15 @@
 {
   "name": "@coffeekraken/s-view-renderer-engine-lit",
-  "version": "2.0.0-alpha.7",
+  "version": "2.0.0-alpha.8",
   "description": "",
   "type": "module",
   "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
   "license": "MIT",
   "dependencies": {
-    "@coffeekraken/s-interface": "^2.0.0-alpha.7",
-    "@coffeekraken/s-promise": "^2.0.0-alpha.7",
-    "@coffeekraken/s-sugar-config": "^2.0.0-alpha.7",
-    "@coffeekraken/sugar": "^2.0.0-alpha.7",
+    "@coffeekraken/s-interface": "^2.0.0-alpha.8",
+    "@coffeekraken/s-promise": "^2.0.0-alpha.8",
+    "@coffeekraken/s-sugar-config": "^2.0.0-alpha.8",
+    "@coffeekraken/sugar": "^2.0.0-alpha.8",
     "@lit-labs/ssr": "^2.2.0"
   },
   "main": "dist/pkg/cjs/node/exports.js",

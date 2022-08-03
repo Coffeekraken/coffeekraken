@@ -1,0 +1,95 @@
+"use strict";
+// @ts-nocheck
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const unique_1 = __importDefault(require("@coffeekraken/sugar/shared/array/unique"));
+const unquote_1 = __importDefault(require("../string/unquote"));
+/**
+ * @name                          get
+ * @namespace            shared.object
+ * @type                          Function
+ * @platform          js
+ * @platform          node
+ * @status        beta
+ *
+ * Retreive an object value using a dotted path like "myObject.myProperty.myValue"
+ *
+ * @feature       Support optional property in the doted path like "something.cool?.hello.world"
+ *
+ * @param               {Object}                 obj                The object in which to set the value
+ * @param               {String}                path                The dotted object path to get
+ * @return              {Mixed}                                     The getted value or "undefined" if nothing found...
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @example             js
+ * import get from '@coffeekraken/sugar/js/object/get';
+ * get('myObject.cool.value'); // => 'Hello world'
+ *
+ * @since     2.0.0
+ * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+function get(obj, path, settings = {}) {
+    settings = Object.assign({}, settings);
+    if (Array.isArray(path)) {
+        return __get(obj, path, settings);
+    }
+    if (obj[path] !== undefined)
+        return obj[path];
+    if (!path || path === '' || path === '.')
+        return obj;
+    path = path.replace(/\[(\w+)\]/g, '.$1');
+    path = path.replace(/\\\./g, '_dot_');
+    path = path.replace(/^\./, '');
+    let potentialPaths = [path.replace(/\?/gm, '')];
+    const parts = path.split('.');
+    for (let i = parts.length - 1; i >= 0; i--) {
+        const part = parts[i];
+        if (part.match(/\?$/)) {
+            const before = parts.slice(0, i);
+            const after = parts.slice(i + 1);
+            potentialPaths.push([...before, ...after].join('.'));
+            potentialPaths.push([...before, ...after.filter((a) => !a.match(/\?$/))].join('.'));
+        }
+    }
+    potentialPaths = (0, unique_1.default)(potentialPaths.map((s) => s.replace(/\?/gm, '')));
+    for (let i = 0; i < potentialPaths.length; i++) {
+        const path = potentialPaths[i];
+        const result = __get(obj, path, settings);
+        if (result !== undefined)
+            return result;
+    }
+}
+function __get(obj, path, settings = {}) {
+    settings = Object.assign({}, settings);
+    let o = obj, a;
+    if (typeof path === 'string') {
+        if (obj[path] !== undefined)
+            return obj[path];
+        if (!path || path === '' || path === '.')
+            return obj;
+        path = path.split(/(?!\B"[^"]*)\.(?![^"]*"\B)/gm);
+    }
+    a = [...path].map((p) => {
+        if (typeof p === 'string')
+            return (0, unquote_1.default)(p);
+        return p;
+    });
+    while (a.length) {
+        let n = a.shift();
+        if (typeof n === 'string') {
+            n = n.replace(/\?$/, '');
+        }
+        if (typeof o !== 'object' || !(n in o)) {
+            return;
+        }
+        o = o[n];
+    }
+    return o;
+}
+exports.default = get;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHFGQUErRDtBQUMvRCxnRUFBMEM7QUFFMUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMEJHO0FBQ0gsU0FBUyxHQUFHLENBQUMsR0FBRyxFQUFFLElBQUksRUFBRSxRQUFRLEdBQUcsRUFBRTtJQUNqQyxRQUFRLHFCQUNELFFBQVEsQ0FDZCxDQUFDO0lBRUYsSUFBSSxLQUFLLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxFQUFFO1FBQ3JCLE9BQU8sS0FBSyxDQUFDLEdBQUcsRUFBRSxJQUFJLEVBQUUsUUFBUSxDQUFDLENBQUM7S0FDckM7SUFFRCxJQUFJLEdBQUcsQ0FBQyxJQUFJLENBQUMsS0FBSyxTQUFTO1FBQUUsT0FBTyxHQUFHLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDOUMsSUFBSSxDQUFDLElBQUksSUFBSSxJQUFJLEtBQUssRUFBRSxJQUFJLElBQUksS0FBSyxHQUFHO1FBQUUsT0FBTyxHQUFHLENBQUM7SUFDckQsSUFBSSxHQUFHLElBQUksQ0FBQyxPQUFPLENBQUMsWUFBWSxFQUFFLEtBQUssQ0FBQyxDQUFDO0lBQ3pDLElBQUksR0FBRyxJQUFJLENBQUMsT0FBTyxDQUFDLE9BQU8sRUFBRSxPQUFPLENBQUMsQ0FBQztJQUN0QyxJQUFJLEdBQUcsSUFBSSxDQUFDLE9BQU8sQ0FBQyxLQUFLLEVBQUUsRUFBRSxDQUFDLENBQUM7SUFFL0IsSUFBSSxjQUFjLEdBQUcsQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDLE1BQU0sRUFBRSxFQUFFLENBQUMsQ0FBQyxDQUFDO0lBRWhELE1BQU0sS0FBSyxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUM7SUFDOUIsS0FBSyxJQUFJLENBQUMsR0FBRyxLQUFLLENBQUMsTUFBTSxHQUFHLENBQUMsRUFBRSxDQUFDLElB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

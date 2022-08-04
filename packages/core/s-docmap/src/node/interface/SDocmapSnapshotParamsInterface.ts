@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
  * @name                SDocmapSnapshotParamsInterface
@@ -18,7 +18,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-class SDocMapSnapshotParamsInterface extends __SInterface {
+class SDocmapSnapshotParamsInterface extends __SInterface {
     static get _definition() {
         return {
             outDir: {
@@ -34,4 +34,4 @@ class SDocMapSnapshotParamsInterface extends __SInterface {
         };
     }
 }
-export default SDocMapSnapshotParamsInterface;
+export default SDocmapSnapshotParamsInterface;

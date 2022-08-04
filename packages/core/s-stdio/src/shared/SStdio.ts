@@ -129,18 +129,6 @@ export default class SStdio extends __SClass implements ISStdio {
     static UI_BASIC: ISStdioUi = -1;
 
     /**
-     * @name      UI_WEBSOCKER
-     * @type      ISStdioUi
-     * @static
-     *
-     * Represent the "websocket" stdio
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static UI_WEBSOCKET: ISStdioUi = 'websocket';
-
-    /**
      * @name      _logsBuffer
      * @type      ISLog[]
      * @private

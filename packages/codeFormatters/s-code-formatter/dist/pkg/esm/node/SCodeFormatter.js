@@ -171,9 +171,15 @@ class SCodeFormatter extends __SClass {
                 const relFilePath = __path.relative(__packageRoot(), file);
                 const duration = new __SDuration();
                 // grab the file content
-                const code = __fs
+                let code;
+                try {
+                    code = __fs
                     .readFileSync(file, 'utf-8')
                     .toString();
+                } catch(e) {
+                    console.log('CCC', e);
+                    return;
+                }
                 // get the file extension
                 const extension = __path
                     .extname(file)

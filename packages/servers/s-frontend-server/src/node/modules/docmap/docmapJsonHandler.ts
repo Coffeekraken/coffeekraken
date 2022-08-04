@@ -1,5 +1,5 @@
 import __SBench from '@coffeekraken/s-bench';
-import __SDocMap from '@coffeekraken/s-docmap';
+import __SDocmap from '@coffeekraken/s-docmap';
 import __SPromise from '@coffeekraken/s-promise';
 
 export default function docmapJsonHandler({ req, res, pageConfig }) {
@@ -8,7 +8,7 @@ export default function docmapJsonHandler({ req, res, pageConfig }) {
 
         __SBench.step('data.docmapJsonData', 'beforeDocmapRead');
 
-        const docmap = new __SDocMap();
+        const docmap = new __SDocmap();
         const docmapJson = await docmap.read();
 
         __SBench.step('data.docmapJsonData', 'afterDocmapRead');

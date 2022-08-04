@@ -275,10 +275,17 @@ class SCodeFormatter extends __SClass {
 
                         const duration = new __SDuration();
 
+                        let code;
+
                         // grab the file content
-                        const code = __fs
+                        try {
+                            code = __fs
                             .readFileSync(file, 'utf-8')
                             .toString();
+                        } catch(e) {
+                            return resolveFile();
+                        }
+
                         // get the file extension
                         const extension = __path
                             .extname(file)

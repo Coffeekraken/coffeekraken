@@ -1,4 +1,4 @@
-import __SDocMap from '@coffeekraken/s-docmap';
+import __SDocmap from '@coffeekraken/s-docmap';
 import __SMarkdownBuilder from '@coffeekraken/s-markdown-builder';
 import __SPromise from '@coffeekraken/s-promise';
 
@@ -12,7 +12,7 @@ export default function docmapMarkdownData({ req, res, pageConfig }) {
             );
         }
 
-        const docmap = new __SDocMap();
+        const docmap = new __SDocmap();
         const docmapJson = await docmap.read();
 
         const builder = new __SMarkdownBuilder();

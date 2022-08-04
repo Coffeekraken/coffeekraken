@@ -9,17 +9,17 @@
  * interface with props etc...
  *
  * @param       {any}           data        The interface data to process
- * @return      {ISDocMapInterfaceField}            The full interface data
+ * @return      {ISDocmapInterfaceField}            The full interface data
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISDocMapInterfaceField {}
+export interface ISDocmapInterfaceField {}
 
 export default async function interfaceTagProxy(
     data: any,
-): Promise<ISDocMapInterfaceField> {
+): Promise<ISDocmapInterfaceField> {
     const int = (await import(data.path)).default;
     return int.toObject();
 }

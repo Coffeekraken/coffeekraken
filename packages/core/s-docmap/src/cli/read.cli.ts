@@ -1,15 +1,13 @@
 // @ts-nocheck
 
-import __SProcess from '@coffeekraken/s-process';
-import __SDocMap from '../node/SDocMap';
-import __SDocMapParamsReadInterface from '../node/interface/SDocmapReadParamsInterface';
+import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __copy from '@coffeekraken/sugar/node/clipboard/copy';
-import __SLog from '@coffeekraken/s-log';
+import __SDocmap from '../node/SDocmap';
 
 export default (stringArgs = '') => {
     return new __SPromise(async ({ resolve, pipe, emit }) => {
-        const docmap = new __SDocMap();
+        const docmap = new __SDocmap();
         const promise = docmap.read(stringArgs);
         pipe(promise);
         const res = await promise;

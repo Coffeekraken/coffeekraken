@@ -28,10 +28,10 @@ import __STypescriptBuilder from '@coffeekraken/s-typescript-builder';
 import __kill from '@coffeekraken/sugar/node/process/kill';
 import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
-import __runMiddleware from 'run-middleware';
-import __viewRendererMiddleware from './middleware/viewRendererMiddleware';
 import __bodyParser from 'body-parser';
 import __request from 'request';
+import __runMiddleware from 'run-middleware';
+import __viewRendererMiddleware from './middleware/viewRendererMiddleware';
 export default class SFrontendServer extends __SClass {
     /**
      * @name					constructor
@@ -344,7 +344,6 @@ export default class SFrontendServer extends __SClass {
                 }
                 // @ts-ignore
                 const { default: pageConfig } = yield import(finalPagePath);
-                (_a = buildedFileRes === null || buildedFileRes === void 0 ? void 0 : buildedFileRes.remove) === null || _a === void 0 ? void 0 : _a.call(buildedFileRes);
                 yield pipe(this._registerPageConfig(pageConfig, pageFile));
             }
             if (_404PageFile) {

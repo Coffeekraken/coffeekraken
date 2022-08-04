@@ -1,9 +1,8 @@
 import __SBench from '@coffeekraken/s-bench';
-import __SDocMap from '@coffeekraken/s-docmap';
 import __SPromise from '@coffeekraken/s-promise';
-import __readXmlSync from '@coffeekraken/sugar/node/fs/readXmlSync';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __grabFirstExisting from '@coffeekraken/sugar/node/fs/grabFirstExisting';
+import __readXmlSync from '@coffeekraken/sugar/node/fs/readXmlSync';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 
 export default function sitemapXmlHandler({ req, res, pageConfig }) {

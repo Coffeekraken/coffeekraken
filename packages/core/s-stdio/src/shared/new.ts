@@ -1,6 +1,5 @@
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __SBasicStdio from '../node/basic/SBasicStdio';
-import __SWebsocketStdio from '../node/websocket/SWebsocketStdio';
 import type { ISStdioUi } from './SStdio';
 import __SStdio from './SStdio';
 
@@ -43,9 +42,6 @@ export default async function _new(
 
     if (__isNode()) {
         switch (stdio) {
-            case __SStdio.UI_WEBSOCKET:
-                stdioInstance = new __SWebsocketStdio(id, sources, settings);
-                break;
             case __SStdio.UI_BASIC:
             default:
                 stdioInstance = new __SBasicStdio(id, sources, settings);

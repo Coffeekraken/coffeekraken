@@ -3,6 +3,9 @@
 $nodeModulesVendorsPath = realpath(__DIR__ . '/../../vendor/autoload.php');
 $monorepoVendorsPath = realpath(__DIR__ . '/../../../vendor/autoload.php');
 
+// error_reporting(E_ERROR | E_PARSE);
+// error_reporting(E_ALL & ~E_NOTICE);
+
 if ($nodeModulesVendorsPath) {
     require_once $nodeModulesVendorsPath;
 } elseif ($monorepoVendorsPath) {

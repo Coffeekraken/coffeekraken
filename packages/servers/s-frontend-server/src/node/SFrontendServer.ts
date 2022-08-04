@@ -533,7 +533,6 @@ export default class SFrontendServer extends __SClass {
 
                 // @ts-ignore
                 const { default: pageConfig } = await import(finalPagePath);
-                buildedFileRes?.remove?.();
                 await pipe(this._registerPageConfig(pageConfig, pageFile));
             }
 

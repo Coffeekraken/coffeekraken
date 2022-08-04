@@ -1,7 +1,7 @@
 // @ts-nocheck
 
+import __SDocmap from '@coffeekraken/s-docmap';
 import __SPromise from '@coffeekraken/s-promise';
-import __SDocMap from '@coffeekraken/s-docmap';
 
 /**
  * @name                docMap
@@ -24,7 +24,7 @@ import __SDocMap from '@coffeekraken/s-docmap';
  */
 export default async function docMap(req, res, settings = {}) {
     return new __SPromise(async ({ resolve, reject, pipe }) => {
-        const docMap = new __SDocMap();
+        const docMap = new __SDocmap();
 
         const json = await docMap.read({
             snapshot: req.query.v,

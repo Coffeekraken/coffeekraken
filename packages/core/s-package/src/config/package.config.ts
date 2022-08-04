@@ -7,14 +7,14 @@ export default function (api) {
          * @namespace       config.package
          * @type            String
          * @values          npm | yarn
-         * @default         yarn
+         * @default         npm
          *
          * Specify the package manager you want to use. Can be "npm" or "yarn"
          *
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        manager: 'yarn',
+        manager: 'npm',
 
         /**
          * @name            rootDir
@@ -151,9 +151,8 @@ export default function (api) {
              */
             folderPlatformMap: {
                 node: 'node',
-                shared: 'default',
-                js: 'default',
-                cli: 'node',
+                shared: 'shared',
+                js: 'js',
             },
         },
     };

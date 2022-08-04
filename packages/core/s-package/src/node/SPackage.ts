@@ -124,8 +124,8 @@ export default class SPackage extends __SClass {
                 // @ts-ignore
                 let mapedFiles: {
                     node: Record<string, string>;
-                    browser: Record<string, string>;
-                    default: Record<string, string>;
+                    js: Record<string, string>;
+                    shared: Record<string, string>;
                 } = {};
 
                 // process each exports
@@ -139,6 +139,7 @@ export default class SPackage extends __SClass {
                             finalParams.folderModuleMap,
                         )) {
                             if (
+                                !mapedFiles[platform]?.[module] &&
                                 `/${relPath}`.includes(`/${fold}/`) &&
                                 `/${relPath}`.includes(`/${folder}/`)
                             ) {
@@ -156,28 +157,18 @@ export default class SPackage extends __SClass {
                     value: `<yellow>[exports]</yellow> Generating new exports object map...`,
                 });
 
-                // @ts-ignore
-                const exportsMap: {
-                    main: string;
-                    module: string;
-                    exports: Record<string, any>;
-                } = {
-                    exports: {
-                        '.': {},
-                    },
-                };
+                // console.log(mapedFiles);
 
-                let hasShared = mapedFiles.default !== undefined,
+                let hasShared = mapedFiles.shared !== undefined,
                     hasNode = mapedFiles.node !== undefined,
-                    hasJs = mapedFiles.browser !== undefined,
-                    hasCli = false;
+                    hasJs = mapedFiles.js !== undefined;
 
                 // if (Object.keys(mapedFiles).length === 1) {
                 //     exportsMap.exports['.'] =
                 //         mapedFiles[Object.keys(mapedFiles)[0]];
                 // }
 
-                let json;
+                let json: any = {};
                 if (hasJs && hasNode) {
                     json = {
                         main: 'dist/pkg/cjs/js/exports.js',
@@ -193,7 +184,37 @@ export default class SPackage extends __SClass {
                             },
                         },
                     };
-                } else if (hasJs && !hasNode) {
+                } else if (hasJs && !hasNode && hasShared) {
+                    json = {
+                        main: 'dist/pkg/cjs/js/exports.js',
+                        module: 'dist/pkg/esm/js/exports.js',
+                        exports: {
+                            node: {
+                                require: './dist/pkg/cjs/shared/exports.js',
+                                import: './dist/pkg/esm/shared/exports.js',
+                            },
+                            default: {
+                                require: './dist/pkg/cjs/js/exports.js',
+                                import: './dist/pkg/esm/js/exports.js',
+                            },
+                        },
+                    };
+                } else if (!hasJs && hasNode && hasShared) {
+                    json = {
+                        main: 'dist/pkg/cjs/shared/exports.js',
+                        module: 'dist/pkg/esm/shared/exports.js',
+                        exports: {
+                            node: {
+                                require: './dist/pkg/cjs/node/exports.js',
+                                import: './dist/pkg/esm/node/exports.js',
+                            },
+                            default: {
+                                require: './dist/pkg/cjs/shared/exports.js',
+                                import: './dist/pkg/esm/shared/exports.js',
+                            },
+                        },
+                    };
+                } else if (hasJs && !hasNode && !hasShared) {
                     json = {
                         main: 'dist/pkg/cjs/js/exports.js',
                         module: 'dist/pkg/esm/js/exports.js',
@@ -202,21 +223,9 @@ export default class SPackage extends __SClass {
                                 require: './dist/pkg/cjs/js/exports.js',
                                 import: './dist/pkg/esm/js/exports.js',
                             },
-                            './shared/*': {
-                                require: './dist/pkg/cjs/shared/*.js',
-                                import: './dist/pkg/esm/shared/*.js',
-                            },
-                            './node/*': {
-                                require: './dist/pkg/cjs/node/*.js',
-                                import: './dist/pkg/esm/node/*.js',
-                            },
-                            './js/*': {
-                                require: './dist/pkg/cjs/js/*.js',
-                                import: './dist/pkg/esm/js/*.js',
-                            },
                         },
                     };
-                } else if (hasNode && !hasJs) {
+                } else if (!hasJs && hasNode && !hasShared) {
                     json = {
                         main: 'dist/pkg/cjs/node/exports.js',
                         module: 'dist/pkg/esm/node/exports.js',
@@ -224,18 +233,6 @@ export default class SPackage extends __SClass {
                             '.': {
                                 require: './dist/pkg/cjs/node/exports.js',
                                 import: './dist/pkg/esm/node/exports.js',
-                            },
-                            './shared/*': {
-                                require: './dist/pkg/cjs/shared/*.js',
-                                import: './dist/pkg/esm/shared/*.js',
-                            },
-                            './node/*': {
-                                require: './dist/pkg/cjs/node/*.js',
-                                import: './dist/pkg/esm/node/*.js',
-                            },
-                            './js/*': {
-                                require: './dist/pkg/cjs/js/*.js',
-                                import: './dist/pkg/esm/js/*.js',
                             },
                         },
                     };
@@ -248,95 +245,35 @@ export default class SPackage extends __SClass {
                                 require: './dist/pkg/cjs/shared/exports.js',
                                 import: './dist/pkg/esm/shared/exports.js',
                             },
-                            './shared/*': {
-                                require: './dist/pkg/cjs/shared/*.js',
-                                import: './dist/pkg/esm/shared/*.js',
-                            },
-                            './node/*': {
-                                require: './dist/pkg/cjs/node/*.js',
-                                import: './dist/pkg/esm/node/*.js',
-                            },
-                            './js/*': {
-                                require: './dist/pkg/cjs/js/*.js',
-                                import: './dist/pkg/esm/js/*.js',
-                            },
-                        },
-                    };
-                } else if (hasCli) {
-                    json = {
-                        main: 'dist/pkg/cjs/cli/exports.js',
-                        module: 'dist/pkg/esm/cli/exports.js',
-                        exports: {
-                            '.': {
-                                require: './dist/pkg/cjs/cli/exports.js',
-                                import: './dist/pkg/esm/cli/exports.js',
-                            },
-                            './shared/*': {
-                                require: './dist/pkg/cjs/shared/*.js',
-                                import: './dist/pkg/esm/shared/*.js',
-                            },
-                            './node/*': {
-                                require: './dist/pkg/cjs/node/*.js',
-                                import: './dist/pkg/esm/node/*.js',
-                            },
-                            './js/*': {
-                                require: './dist/pkg/cjs/js/*.js',
-                                import: './dist/pkg/esm/js/*.js',
-                            },
                         },
                     };
                 }
 
-                // // both
-                // if (mapedFiles.node && mapedFiles.browser) {
-                //     // main / module
-                //     exportsMap.main = mapedFiles.node.require;
-                //     exportsMap.module = mapedFiles.node.import;
-                //     // exports
-                //     exportsMap.exports.node = {
-                //         require: mapedFiles.node.require,
-                //         import: mapedFiles.node.import,
-                //     };
-                //     exportsMap.exports.default = {
-                //         require: mapedFiles.browser.require,
-                //         import: mapedFiles.browser.import,
-                //     };
-                // }
-                // // only browser
-                // else if (mapedFiles.browser && !mapedFiles.node) {
-                //     // main / module
-                //     exportsMap.main = mapedFiles.browser.require;
-                //     exportsMap.module = mapedFiles.browser.import;
-                //     // exports
-                //     exportsMap.exports['.'].require =
-                //         mapedFiles.browser.require;
-                //     exportsMap.exports['.'].import = mapedFiles.browser.import;
-                // }
-                // // only node
-                // else if (mapedFiles.node && !mapedFiles.browser) {
-                //     // main / module
-                //     exportsMap.main = mapedFiles.node.require;
-                //     exportsMap.module = mapedFiles.node.import;
-                //     // exports
-                //     exportsMap.exports['.'].require = mapedFiles.node.require;
-                //     exportsMap.exports['.'].import = mapedFiles.node.import;
-                // }
-
-                // // give access to all "src"
-                // if (!mapedFiles.browser || !mapedFiles.node) {
-                //     exportsMap.exports['./shared/*'] = {
-                //         require: './dist/pkg/cjs/shared/*.js',
-                //         import: './dist/pkg/esm/shared/*.js',
-                //     };
-                //     exportsMap.exports['./node/*'] = {
-                //         require: './dist/pkg/cjs/node/*.js',
-                //         import: './dist/pkg/esm/node/*.js',
-                //     };
-                //     exportsMap.exports['./js/*'] = {
-                //         require: './dist/pkg/cjs/js/*.js',
-                //         import: './dist/pkg/esm/js/*.js',
-                //     };
-                // }
+                // check if we can export the global folders js/node/shared
+                let canExportGlobal = true;
+                for (let [key, value] of Object.entries(json?.exports ?? {})) {
+                    if (!key.match(/^\./)) {
+                        canExportGlobal = false;
+                    }
+                }
+                if (canExportGlobal) {
+                    json = __deepMerge(json, {
+                        exports: {
+                            './shared/*': {
+                                require: './dist/pkg/cjs/shared/*.js',
+                                import: './dist/pkg/esm/shared/*.js',
+                            },
+                            './node/*': {
+                                require: './dist/pkg/cjs/node/*.js',
+                                import: './dist/pkg/esm/node/*.js',
+                            },
+                            './js/*': {
+                                require: './dist/pkg/cjs/js/*.js',
+                                import: './dist/pkg/esm/js/*.js',
+                            },
+                        },
+                    });
+                }
 
                 // updading package json
                 let currentPackageJson: any = {};
@@ -356,7 +293,7 @@ export default class SPackage extends __SClass {
                     value: `<yellow>[exports]</yellow> Updating <cyan>package.json</cyan> file with new exports`,
                 });
 
-                JSON.stringify(exportsMap, null, 2)
+                JSON.stringify(json, null, 4)
                     .split('\n')
                     .forEach((line) => {
                         emit('log', {
@@ -398,9 +335,8 @@ export default class SPackage extends __SClass {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 // @ts-ignore
-                const finalParams: ISPackageExportsParams = __SPackageExportsParamsInterface.apply(
-                    params,
-                );
+                const finalParams: ISPackageExportsParams =
+                    __SPackageExportsParamsInterface.apply(params);
 
                 emit('log', {
                     type: __SLog.TYPE_INFO,
@@ -475,9 +411,8 @@ export default class SPackage extends __SClass {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 // @ts-ignore
-                const finalParams: ISPackageInstallParams = __SPackageInstallParamsInterface.apply(
-                    params,
-                );
+                const finalParams: ISPackageInstallParams =
+                    __SPackageInstallParamsInterface.apply(params);
 
                 const packageRoot = this._rootDir;
 
@@ -575,9 +510,8 @@ export default class SPackage extends __SClass {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 // @ts-ignore
-                const finalParams: ISPackageCheckDependenciesParams = __SPackageCheckDependenciesParamsInterface.apply(
-                    params,
-                );
+                const finalParams: ISPackageCheckDependenciesParams =
+                    __SPackageCheckDependenciesParamsInterface.apply(params);
 
                 let result = true;
 
@@ -599,9 +533,10 @@ export default class SPackage extends __SClass {
                     __fs.readFileSync(`${packageRoot}/package.json`).toString(),
                 );
 
-                const ARRAY_OF_FILES_AND_DIRS_TO_CRUISE: string[] = finalParams.dirs.map(
-                    (d) => __path.relative(packageRoot, d),
-                );
+                const ARRAY_OF_FILES_AND_DIRS_TO_CRUISE: string[] =
+                    finalParams.dirs.map((d) =>
+                        __path.relative(packageRoot, d),
+                    );
 
                 emit('log', {
                     type: __SLog.TYPE_INFO,
@@ -662,22 +597,19 @@ export default class SPackage extends __SClass {
                                     pattern.match(/^\^/) &&
                                     moduleName.startsWith(pattern.slice(1))
                                 ) {
-                                    packageJson.dependencies[
-                                        moduleName
-                                    ] = version;
+                                    packageJson.dependencies[moduleName] =
+                                        version;
                                     addedFromPackagesMap = true;
                                 } else if (
                                     pattern.match(/\$$/) &&
                                     moduleName.endsWith(pattern.slice(0, -1))
                                 ) {
-                                    packageJson.dependencies[
-                                        moduleName
-                                    ] = version;
+                                    packageJson.dependencies[moduleName] =
+                                        version;
                                     addedFromPackagesMap = true;
                                 } else if (pattern === moduleName) {
-                                    packageJson.dependencies[
-                                        moduleName
-                                    ] = version;
+                                    packageJson.dependencies[moduleName] =
+                                        version;
                                     addedFromPackagesMap = true;
                                 }
                             }
@@ -775,9 +707,8 @@ export default class SPackage extends __SClass {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 // @ts-ignore
-                const finalParams: ISPackageRenameParams = __SPackageInstallParamsInterface.apply(
-                    params,
-                );
+                const finalParams: ISPackageRenameParams =
+                    __SPackageInstallParamsInterface.apply(params);
 
                 if (!finalParams.name) {
                     finalParams.name = await emit('ask', {
@@ -846,9 +777,8 @@ export default class SPackage extends __SClass {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 // @ts-ignore
-                const finalParams: ISPackageAddDefaultPackageJsonParams = __SPackageAddDefaultScriptsParamsInterface.apply(
-                    params,
-                );
+                const finalParams: ISPackageAddDefaultPackageJsonParams =
+                    __SPackageAddDefaultScriptsParamsInterface.apply(params);
 
                 const packageRoot = __packageRoot();
 

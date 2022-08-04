@@ -16,24 +16,16 @@
         "find-in-files": "^0.5.0",
         "minimatch": "^3.0.4"
     },
-    "main": "dist/pkg/cjs/node/exports.js",
-    "module": "dist/pkg/esm/node/exports.js",
+    "main": "dist/pkg/cjs/shared/exports.js",
+    "module": "dist/pkg/esm/shared/exports.js",
     "exports": {
-        ".": {
+        "node": {
             "require": "./dist/pkg/cjs/node/exports.js",
             "import": "./dist/pkg/esm/node/exports.js"
         },
-        "./shared/*": {
-            "require": "./dist/pkg/cjs/shared/*.js",
-            "import": "./dist/pkg/esm/shared/*.js"
-        },
-        "./node/*": {
-            "require": "./dist/pkg/cjs/node/*.js",
-            "import": "./dist/pkg/esm/node/*.js"
-        },
-        "./js/*": {
-            "require": "./dist/pkg/cjs/js/*.js",
-            "import": "./dist/pkg/esm/js/*.js"
+        "default": {
+            "require": "./dist/pkg/cjs/shared/exports.js",
+            "import": "./dist/pkg/esm/shared/exports.js"
         }
     }
 }

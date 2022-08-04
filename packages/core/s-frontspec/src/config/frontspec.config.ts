@@ -27,20 +27,23 @@ export default function (api) {
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             viteClient: {
-                src:
-                    api.env.env === 'development'
+                get src() {
+                    return api.env.env === 'development'
                         ? `
         <script>
           document.addEventListener("DOMContentLoaded", function() {
             var $script = document.createElement("script");
             var ip = "${__ipAddress()}";
             $script.setAttribute("type", "module");
-            $script.setAttribute("src", "[config.vite.server.hostname]/@vite/client");
+            $script.setAttribute("src", "${
+                api.config.vite.server.hostname
+            }/@vite/client");
             document.body.appendChild($script);
           });
         </script>
       `
-                        : '',
+                        : '';
+                },
             },
         },
     };

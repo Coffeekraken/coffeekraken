@@ -1,0 +1,3 @@
+import __sVitePluginVuejs from '@vitejs/plugin-vue';
+export default __sVitePluginVuejs({});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sa0JBQWtCLE1BQU0sb0JBQW9CLENBQUM7QUFFcEQsZUFBZSxrQkFBa0IsQ0FBQyxFQUFFLENBQUMsQ0FBQyJ9

@@ -7,4 +7,3 @@ views/tmp
 *.tmp
 .DS_Store
 yarn-error.log
-dist

@@ -1,0 +1,4 @@
+import SDataFileJs from './SDataFileJs';
+export * from './SDataFileJs';
+export default SDataFileJs;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sV0FBVyxNQUFNLGVBQWUsQ0FBQztBQUN4QyxjQUFjLGVBQWUsQ0FBQztBQUM5QixlQUFlLFdBQVcsQ0FBQyJ9

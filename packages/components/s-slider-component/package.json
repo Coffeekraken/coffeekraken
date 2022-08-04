@@ -20,12 +20,12 @@
         "lit": "^2.0.0-rc.3",
         "swiper": "^8.0.6"
     },
-    "main": "dist/pkg/cjs/shared/exports.js",
-    "module": "dist/pkg/esm/shared/exports.js",
+    "main": "dist/pkg/cjs/js/exports.js",
+    "module": "dist/pkg/esm/js/exports.js",
     "exports": {
         ".": {
-            "require": "./dist/pkg/cjs/shared/exports.js",
-            "import": "./dist/pkg/esm/shared/exports.js"
+            "require": "./dist/pkg/cjs/js/exports.js",
+            "import": "./dist/pkg/esm/js/exports.js"
         },
         "./shared/*": {
             "require": "./dist/pkg/cjs/shared/*.js",

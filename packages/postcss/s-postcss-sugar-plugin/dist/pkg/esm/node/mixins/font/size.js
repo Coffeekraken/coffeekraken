@@ -1,0 +1,41 @@
+import __SInterface from '@coffeekraken/s-interface';
+import __STheme from '@coffeekraken/s-theme';
+/**
+ * @name           size
+ * @namespace      node.mixin.font
+ * @type           PostcssMixin
+ * @platform      postcss
+ * @status        beta
+ *
+ * This mixin generate the css needed to apply a font-size depending on the font sizes
+ * defines in the config.theme.font.size stack
+ *
+ * @return        {Css}         The generated css
+ *
+ * @example        css
+ * .my-cool-element {
+ *    \@sugar.font.size(20);
+ * }
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+class postcssSugarPluginFontSizeInterface extends __SInterface {
+    static get _definition() {
+        return {
+            size: {
+                type: 'String|Number',
+                values: Object.keys(__STheme.get('font.size')),
+                required: true,
+            },
+        };
+    }
+}
+export { postcssSugarPluginFontSizeInterface as interface };
+export default function ({ params, atRule, replaceWith, }) {
+    const finalParams = Object.assign({ size: 50 }, params);
+    const vars = [];
+    vars.push(`font-size: sugar.font.size(${finalParams.size})`);
+    return vars;
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBRTdDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBbUJHO0FBRUgsTUFBTSxtQ0FBb0MsU0FBUSxZQUFZO0lBQzFELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxJQUFJLEVBQUU7Z0JBQ0YsSUFBSSxFQUFFLGVBQWU7Z0JBQ3JCLE1BQU0sRUFBRSxNQUFNLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxHQUFHLENBQUMsV0FBVyxDQUFDLENBQUM7Z0JBQzlDLFFBQVEsRUFBRSxJQUFJO2FBQ2pCO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQU1ELE9BQU8sRUFBRSxtQ0FBbUMsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUU1RCxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sV0FBVyxHQUtkO0lBQ0csTUFBTSxXQUFXLG1CQUNiLElBQUksRUFBRSxFQUFFLElBQ0wsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFDMUIsSUFBSSxDQUFDLElBQUksQ0FBQyw4QkFBOEIsV0FBVyxDQUFDLElBQUksR0FBRyxDQUFDLENBQUM7SUFFN0QsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQyJ9

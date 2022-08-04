@@ -1,15 +1,15 @@
 {
     "name": "@coffeekraken/s-data-file-php",
-    "version": "2.0.0-alpha.9",
+    "version": "2.0.0-alpha.10",
     "description": "",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-interface": "^2.0.0-alpha.9",
-        "@coffeekraken/s-promise": "^2.0.0-alpha.9",
-        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.9",
-        "@coffeekraken/sugar": "^2.0.0-alpha.9"
+        "@coffeekraken/s-interface": "^2.0.0-alpha.10",
+        "@coffeekraken/s-promise": "^2.0.0-alpha.10",
+        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.10",
+        "@coffeekraken/sugar": "^2.0.0-alpha.10"
     },
     "main": "dist/pkg/cjs/node/exports.js",
     "module": "dist/pkg/esm/node/exports.js",

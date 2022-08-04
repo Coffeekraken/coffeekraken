@@ -1,6 +1,6 @@
 {
     "name": "@coffeekraken/s-slider-component",
-    "version": "2.0.0-alpha.9",
+    "version": "2.0.0-alpha.10",
     "description": "",
     "type": "module",
     "homepage": "https://coffeekraken.io",
@@ -13,10 +13,10 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-component-utils": "^2.0.0-alpha.9",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.9",
-        "@coffeekraken/s-lit-component": "^2.0.0-alpha.9",
-        "@coffeekraken/sugar": "^2.0.0-alpha.9",
+        "@coffeekraken/s-component-utils": "^2.0.0-alpha.10",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.10",
+        "@coffeekraken/s-lit-component": "^2.0.0-alpha.10",
+        "@coffeekraken/sugar": "^2.0.0-alpha.10",
         "lit": "^2.0.0-rc.3",
         "swiper": "^8.0.6"
     },

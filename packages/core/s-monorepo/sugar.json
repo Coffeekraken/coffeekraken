@@ -39,7 +39,7 @@
                 "upgrade": {
                     "scope": "global",
                     "description": "Upgrade the repositories informations depending on the mono repo ones",
-                    "interface": "./dist/pkg/esm/node/interface/SCliMonoUpgradeParamsInterface.js",
+                    "interface": "./dist/pkg/esm/node/interface/SMonorepoUpgradeParamsInterface.js",
                     "process": "./dist/pkg/esm/cli/upgrade.cli.js"
                 }
             }

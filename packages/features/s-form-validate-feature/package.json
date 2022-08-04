@@ -1,6 +1,6 @@
 {
     "name": "@coffeekraken/s-form-validate-feature",
-    "version": "2.0.0-alpha.9",
+    "version": "2.0.0-alpha.10",
     "description": "",
     "type": "module",
     "scripts": {
@@ -11,12 +11,12 @@
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.9",
-        "@coffeekraken/s-component-utils": "^2.0.0-alpha.9",
-        "@coffeekraken/s-feature": "^2.0.0-alpha.9",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.9",
-        "@coffeekraken/s-validator": "^2.0.0-alpha.9",
-        "@coffeekraken/sugar": "^2.0.0-alpha.9",
+        "@coffeekraken/s-class": "^2.0.0-alpha.10",
+        "@coffeekraken/s-component-utils": "^2.0.0-alpha.10",
+        "@coffeekraken/s-feature": "^2.0.0-alpha.10",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.10",
+        "@coffeekraken/s-validator": "^2.0.0-alpha.10",
+        "@coffeekraken/sugar": "^2.0.0-alpha.10",
         "@sideway/address": "^4.1.2"
     },
     "main": "dist/pkg/cjs/js/exports.js",

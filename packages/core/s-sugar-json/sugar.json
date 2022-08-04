@@ -13,7 +13,7 @@
             "actions": {
                 "list": {
                     "description": "Search and list for sugar.json files",
-                    "interface": "./dist/pkg/esm/node/list/interface/SSugarJsonListParamsInterface.js",
+                    "interface": "./dist/pkg/esm/node/interface/SSugarJsonListParamsInterface.js",
                     "process": "./dist/pkg/esm/cli/list.cli.js"
                 }
             }

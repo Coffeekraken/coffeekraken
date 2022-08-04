@@ -224,40 +224,7 @@ export default class SSugarJson extends __SClass {
         // build globs
         const globs: string[] = [];
 
-        // local first
-        if (localNodeModulesPath && finalSettings.includeModules) {
-            // coffeekraken modules are always loaded
-            globs.push(`${localNodeModulesPath}/@coffeekraken/*/sugar.json`);
-
-            if (finalSettings.packages === '*') {
-                globs.push(`${localNodeModulesPath}/*/sugar.json`);
-                globs.push(`${localNodeModulesPath}/*/*/sugar.json`);
-            } else if (finalSettings.packages !== false) {
-                packagesArray.forEach((name) => {
-                    globs.push(`${localNodeModulesPath}/${name}/sugar.json`);
-                });
-            }
-        }
-
-        // top local
-        if (
-            localNodeModulesPath !== topLocalNodeModulesPath &&
-            finalSettings.includeModules &&
-            finalSettings.includeTop
-        ) {
-            // coffeekraken modules are always loaded
-            globs.push(`${topLocalNodeModulesPath}/@coffeekraken/*/sugar.json`);
-
-            if (finalSettings.packages === '*') {
-                globs.push(`${topLocalNodeModulesPath}/*/sugar.json`);
-                globs.push(`${topLocalNodeModulesPath}/*/*/sugar.json`);
-            } else {
-                packagesArray.forEach((name) => {
-                    globs.push(`${topLocalNodeModulesPath}/${name}/sugar.json`);
-                });
-            }
-        }
-        // then global
+        // global first
         if (
             globalNodeModulesPath &&
             finalSettings.includeModules &&
@@ -276,19 +243,52 @@ export default class SSugarJson extends __SClass {
             }
         }
 
-        if (finalSettings.includePackage) {
-            globs.push(`${__packageRoot(process.cwd())}/sugar.json`);
-        }
+        // top local (monorepo)
         if (
             localNodeModulesPath !== topLocalNodeModulesPath &&
-            finalSettings.includePackage &&
+            finalSettings.includeModules &&
             finalSettings.includeTop
         ) {
-            globs.push(
-                `${__packageRoot(process.cwd(), {
-                    highest: true,
-                })}/sugar.json`,
-            );
+            // coffeekraken modules are always loaded
+            globs.push(`${topLocalNodeModulesPath}/@coffeekraken/*/sugar.json`);
+
+            if (finalSettings.packages === '*') {
+                globs.push(`${topLocalNodeModulesPath}/*/sugar.json`);
+                globs.push(`${topLocalNodeModulesPath}/*/*/sugar.json`);
+            } else {
+                packagesArray.forEach((name) => {
+                    globs.push(`${topLocalNodeModulesPath}/${name}/sugar.json`);
+                });
+            }
+        }
+        // if (
+        //     localNodeModulesPath !== topLocalNodeModulesPath &&
+        //     finalSettings.includePackage &&
+        //     finalSettings.includeTop
+        // ) {
+        //     globs.push(
+        //         `${__packageRoot(process.cwd(), {
+        //             highest: true,
+        //         })}/sugar.json`,
+        //     );
+        // }
+
+        // local
+        if (localNodeModulesPath && finalSettings.includeModules) {
+            // coffeekraken modules are always loaded
+            globs.push(`${localNodeModulesPath}/@coffeekraken/*/sugar.json`);
+
+            if (finalSettings.packages === '*') {
+                globs.push(`${localNodeModulesPath}/*/sugar.json`);
+                globs.push(`${localNodeModulesPath}/*/*/sugar.json`);
+            } else if (finalSettings.packages !== false) {
+                packagesArray.forEach((name) => {
+                    globs.push(`${localNodeModulesPath}/${name}/sugar.json`);
+                });
+            }
+        }
+        if (finalSettings.includePackage) {
+            globs.push(`${__packageRoot(process.cwd())}/sugar.json`);
         }
 
         // search for "sugar.json" files

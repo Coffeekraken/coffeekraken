@@ -1,1 +1,5 @@
-{"name":"@coffeekraken/internal-512d8571-912e-45f3-9633-35d67f7b7e92","type":"module","private":true}
+{
+  "name": "@coffeekraken/internal-512d8571-912e-45f3-9633-35d67f7b7e92",
+  "type": "module",
+  "private": true
+}

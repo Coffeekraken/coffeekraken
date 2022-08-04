@@ -9,7 +9,8 @@
         "@coffeekraken/s-class": "^2.0.0-alpha.10",
         "@coffeekraken/s-log": "^2.0.0-alpha.10",
         "@coffeekraken/sugar": "^2.0.0-alpha.10",
-        "minimatch": "^5.1.0"
+        "minimatch": "^5.1.0",
+        "node-ipc": "^11.1.0"
     },
     "main": "dist/pkg/cjs/js/exports.js",
     "module": "dist/pkg/esm/js/exports.js",

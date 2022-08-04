@@ -5,7 +5,7 @@ import __sha256 from '@coffeekraken/sugar/shared/crypt/sha256';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __namespaceCompliant from '@coffeekraken/sugar/shared/string/namespaceCompliant';
-import __marked from 'marked';
+import { marked as __marked } from 'marked';
 
 import __authorTag from './tags/author';
 import __contributorTag from './tags/contributor';

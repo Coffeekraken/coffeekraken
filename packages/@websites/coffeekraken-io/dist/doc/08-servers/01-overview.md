@@ -1,0 +1,43 @@
+<!--
+/**
+ * @name            Overview
+ * @namespace       doc.servers
+ * @type            Markdown
+ * @platform        md
+ * @status          stable
+ * @menu            Documentation / Servers           /doc/servers/overview
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+-->
+
+<!-- image -->
+
+<!-- header -->
+##### @coffeekraken/coffeekraken-io
+
+
+
+# Servers overview
+
+The Coffeekraken stack take advantage of some servers that you don't have to take care of.
+You certainly can update their configurations to match you needs if wanted. Here's a quick overview of the servers usually used by our stack:
+
+## SFrontendServer
+
+This server if the one that handle the most of the requests made during development process. It handle:
+
+1. Views compilation (twig, blade, etc...).
+2. Easy to use routing system based on **folder structure**.
+3. Simple views data providing system.
+4. And more...
+
+> For more information on the SFrontendServer, please take a look at [this README](/@coffeekraken/s-frontend-server/README)
+
+## Vitejs
+
+Coffeekraken take advantage of the AMAZING [ViteJs](https://vitejs.dev/) package to serve and compile assets like CSS and JS/TS ones.
+
+> For more information on the ViteJs platform, please take a look at [the official website](https://vitejs.dev/)
+

@@ -18,7 +18,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __flatten from '@coffeekraken/sugar/shared/object/flatten';
 import __fs from 'fs';
 import __handlebars from 'handlebars';
-import __marked from 'marked';
+import { marked as __marked } from 'marked';
 import __path from 'path';
 import __SMarkdownBuilderBuildParamsInterface from './interface/SMarkdownBuilderBuildParamsInterface';
 

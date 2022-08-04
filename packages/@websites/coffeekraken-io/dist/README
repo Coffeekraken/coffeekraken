@@ -1,0 +1,66 @@
+<!-- 
+ * @name            README
+ * @namespace       doc
+ * @type            Markdown
+ * @platform        md
+ * @status          stable
+ * @menu            Documentation               /doc/readme
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+-->
+
+<!-- image -->
+
+<!-- 
+![@coffeekraken/coffeekraken-io](/dist/img/doc/readmeHeader.jpg)
+ -->
+
+<!-- header -->
+
+# @coffeekraken/coffeekraken-io
+###### MIT 2.0.0-alpha.10 - [Git repository]()
+
+[![size](https://shields.io/bundlephobia/min/undefined?style&#x3D;for-the-badge)](https://www.npmjs.com/package/undefined)
+[![downloads](https://shields.io/npm/dm/undefined?style&#x3D;for-the-badge)](https://www.npmjs.com/package/undefined)
+[![license](https://shields.io/npm/l/undefined?style&#x3D;for-the-badge)](./LICENSE)
+[![discord](https://shields.io/discord/Coffeekraken?style&#x3D;for-the-badge)](https://discord.gg/ERsX54UE)
+
+
+<!-- description -->
+
+wefuih owiehf owuhe fioquwh efiuh qweuihqweu qufouihw efuih woieuh wiuehuqwhe fiuhq efhwiuehfiwqhefuiqhw efjb wqfhjb oqweuhf euf huoqehbu
+
+<!-- install -->
+
+### Install
+
+```shell
+npm i @coffeekraken/coffeekraken-io
+
+```
+
+
+
+  PLop
+
+
+<!-- doc-menu -->
+
+
+
+<!-- License -->
+
+### License
+
+Distributed under the **MIT** License. See **[LICENSE](./license)** for more information.
+
+<!-- Contact -->
+
+### Contact
+
+Here's all the ways you can contact us listed:
+
+[![discord](https://img.shields.io/badge/Join%20us%20on%20discord-Join-blueviolet?style&#x3D;[config.shieldsio.style]&amp;logo&#x3D;discord)](https://discord.gg/ERsX54UE)
+[![email](https://img.shields.io/badge/Email%20us-Go-green?style&#x3D;[config.shieldsio.style]&amp;logo&#x3D;Mail.Ru)](mailto:olivier.bossel@gmail.com)
+

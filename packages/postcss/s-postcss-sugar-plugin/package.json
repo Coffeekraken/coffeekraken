@@ -28,9 +28,6 @@
         "oslllo-svg-fixer": "^1.4.1",
         "postcss": "^8.4.14"
     },
-    "peerDependencies": {
-        "postcss": "^8"
-    },
     "main": "dist/pkg/cjs/node/exports.js",
     "module": "dist/pkg/esm/node/exports.js",
     "exports": {

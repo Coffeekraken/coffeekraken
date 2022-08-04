@@ -25,7 +25,10 @@ const child_process_1 = __importDefault(require("child_process"));
  */
 function default_1() {
     // get global node modules directory path
-    return child_process_1.default.execSync(`npm root -g`).toString().trim();
+    return child_process_1.default
+        .execSync(`npm root --location=global`)
+        .toString()
+        .trim();
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsa0VBQTJDO0FBRTNDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FrQkc7QUFDSDtJQUNJLHlDQUF5QztJQUN6QyxPQUFPLHVCQUFjLENBQUMsUUFBUSxDQUFDLGFBQWEsQ0FBQyxDQUFDLFFBQVEsRUFBRSxDQUFDLElBQUksRUFBRSxDQUFDO0FBQ3BFLENBQUM7QUFIRCw0QkFHQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsa0VBQTJDO0FBRTNDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FrQkc7QUFDSDtJQUNJLHlDQUF5QztJQUN6QyxPQUFPLHVCQUFjO1NBQ2hCLFFBQVEsQ0FBQyw0QkFBNEIsQ0FBQztTQUN0QyxRQUFRLEVBQUU7U0FDVixJQUFJLEVBQUUsQ0FBQztBQUNoQixDQUFDO0FBTkQsNEJBTUMifQ==

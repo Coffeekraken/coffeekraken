@@ -133,6 +133,9 @@ export default class SSugarCli {
         if (global._sugarCli) return global._sugarCli;
         global._sugarCli = SSugarCli;
 
+        // hook base console functions
+        this._proxyConsole();
+
         __SBench.start('sugar.cli');
 
         if (process.env.TREAT_AS_MAIN) {
@@ -172,9 +175,6 @@ export default class SSugarCli {
                 }
             });
         }
-
-        // hook base console functions
-        this._proxyConsole();
 
         __SBench.step('sugar.cli', 'afterLoadConfig');
 
@@ -308,6 +308,16 @@ export default class SSugarCli {
         ['log'].forEach((method) => {
             originalConsole[method] = console[method];
             console[method] = (...args) => {
+                args = args.filter((log) => {
+                    // sorry node-ipc but I don't want a heart to be displayed at each launch
+                    // of the sugar CLI... Of course, war is bad!
+                    // https://www.npmjs.com/package/peacenotwar
+                    if (log === '♥') return false;
+                    return true;
+                });
+
+                if (!args.length) return;
+
                 args.forEach((value, i) => {
                     if (typeof value === 'string') {
                         args[i] = __parseHtml(args[i]);
@@ -319,23 +329,15 @@ export default class SSugarCli {
         });
     }
 
-    static _initStdio(def = true, websocket = true) {
+    static _initStdio(def = true) {
         if (this._isStdioNeeded()) {
             if (def) {
                 this._stdio = __SStdio.existingOrNew(
                     'default',
                     this._eventEmitter,
                     __SStdio.NO_UI,
-                    // sugarCliSettings?.stdio ?? null,
                 );
             }
-            // if (websocket) {
-            //     this._websocketStdio = __SStdio.existingOrNew(
-            //         'websocket',
-            //         this._eventEmitter,
-            //         __SStdio.UI_WEBSOCKET,
-            //     );
-            // }
         }
     }
 
@@ -344,9 +346,8 @@ export default class SSugarCli {
     }
 
     static _getCliObj() {
-        const defaultStackAction = this._availableCli.defaultByStack[
-            this.args.stack
-        ];
+        const defaultStackAction =
+            this._availableCli.defaultByStack[this.args.stack];
 
         if (
             !this._availableCli.endpoints[
@@ -356,9 +357,10 @@ export default class SSugarCli {
             this._displayHelpAfterError();
             process.exit(0);
         }
-        let cliObj = this._availableCli.endpoints[
-            `${this.args.stack}.${this.args.action ?? defaultStackAction}`
-        ];
+        let cliObj =
+            this._availableCli.endpoints[
+                `${this.args.stack}.${this.args.action ?? defaultStackAction}`
+            ];
 
         return cliObj;
     }
@@ -547,20 +549,18 @@ export default class SSugarCli {
                         cliObj.defaultAction &&
                         action === cliObj.defaultAction
                     ) {
-                        this._availableCli.defaultByStack[
-                            cliObj.stack
-                        ] = action;
+                        this._availableCli.defaultByStack[cliObj.stack] =
+                            action;
                     }
 
-                    this._availableCli.endpoints[
-                        `${cliObj.stack}.${action}`
-                    ] = {
-                        packageJson,
-                        ...actionObj,
-                        processPath,
-                        command,
-                        interfacePath,
-                    };
+                    this._availableCli.endpoints[`${cliObj.stack}.${action}`] =
+                        {
+                            packageJson,
+                            ...actionObj,
+                            processPath,
+                            command,
+                            interfacePath,
+                        };
                 });
             });
         }
@@ -674,9 +674,10 @@ export default class SSugarCli {
         this._newStep();
 
         if (this.args.stack && this.args.action) {
-            const commandObj = this._availableCli.endpoints[
-                `${this.args.stack}.${this.args.action}`
-            ];
+            const commandObj =
+                this._availableCli.endpoints[
+                    `${this.args.stack}.${this.args.action}`
+                ];
 
             this.log(``);
             this.log(
@@ -744,9 +745,8 @@ export default class SSugarCli {
 
             if (!sortedByStack[_stack]) sortedByStack[_stack] = {};
 
-            sortedByStack[_stack][_action] = this._availableCli.endpoints[
-                stackAction
-            ];
+            sortedByStack[_stack][_action] =
+                this._availableCli.endpoints[stackAction];
         });
 
         this.log(``);

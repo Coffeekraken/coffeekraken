@@ -20,6 +20,9 @@ import __childProcess from 'child_process';
  */
 export default function () {
     // get global node modules directory path
-    return __childProcess.execSync(`npm root -g`).toString().trim();
+    return __childProcess
+        .execSync(`npm root --location=global`)
+        .toString()
+        .trim();
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sY0FBYyxNQUFNLGVBQWUsQ0FBQztBQUUzQzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBa0JHO0FBQ0gsTUFBTSxDQUFDLE9BQU87SUFDVix5Q0FBeUM7SUFDekMsT0FBTyxjQUFjLENBQUMsUUFBUSxDQUFDLGFBQWEsQ0FBQyxDQUFDLFFBQVEsRUFBRSxDQUFDLElBQUksRUFBRSxDQUFDO0FBQ3BFLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sY0FBYyxNQUFNLGVBQWUsQ0FBQztBQUUzQzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBa0JHO0FBQ0gsTUFBTSxDQUFDLE9BQU87SUFDVix5Q0FBeUM7SUFDekMsT0FBTyxjQUFjO1NBQ2hCLFFBQVEsQ0FBQyw0QkFBNEIsQ0FBQztTQUN0QyxRQUFRLEVBQUU7U0FDVixJQUFJLEVBQUUsQ0FBQztBQUNoQixDQUFDIn0=

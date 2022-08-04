@@ -21,5 +21,8 @@ import __childProcess from 'child_process';
  */
 export default function (): string {
     // get global node modules directory path
-    return __childProcess.execSync(`npm root -g`).toString().trim();
+    return __childProcess
+        .execSync(`npm root --location=global`)
+        .toString()
+        .trim();
 }

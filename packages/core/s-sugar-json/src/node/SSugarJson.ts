@@ -2,10 +2,10 @@ import __SBench from '@coffeekraken/s-bench';
 import __SClass from '@coffeekraken/s-class';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
+import __globalNodeModulesPath from '@coffeekraken/sugar/node/npm/globalNodeModulesPath';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __childProcess from 'child_process';
 import __fs from 'fs';
 import __glob from 'glob-all';
 import type { ISKitchenAction } from '../../../../app/s-kitchen/dist/pkg/cjs/node/exports';
@@ -200,10 +200,7 @@ export default class SSugarJson extends __SClass {
         __SBench.start('SSugarJson.search');
 
         // get global node modules directory path
-        const globalNodeModulesPath = __childProcess
-            .execSync(`npm root -g`)
-            .toString()
-            .trim();
+        const globalNodeModulesPath = __globalNodeModulesPath();
 
         const packagesArray =
             typeof finalSettings.packages === 'string'

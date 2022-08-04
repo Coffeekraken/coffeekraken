@@ -76,6 +76,7 @@ export interface ISMonorepoListParams {
 export interface ISMonorepoListResult {
     name: string;
     version: string;
+    private: boolean;
     path: string;
     relPath: string;
 }
@@ -351,11 +352,11 @@ export default class SMonorepo extends __SClass {
                     name = json.name;
 
                     // check if we want this package in the list
-                    if (finalParams.publish && json.publish === false) {
+                    if (finalParams.publish && json.private) {
                         return;
                     } else if (
                         finalParams.publish === false &&
-                        json.publish !== false
+                        json.private !== true
                     ) {
                         return;
                     }
@@ -363,6 +364,7 @@ export default class SMonorepo extends __SClass {
                     result.push({
                         name,
                         version,
+                        private: json.private,
                         relPath: __path.dirname(file.relPath),
                         path: __path.dirname(file.path),
                     });
@@ -374,7 +376,11 @@ export default class SMonorepo extends __SClass {
                     if (!finalParams.json) {
                         emit('log', {
                             type: __SLog.TYPE_INFO,
-                            value: `<yellow>${packageObj.name}</yellow> (<${
+                            value: `${
+                                packageObj.private
+                                    ? '<magenta>[private]</magenta> '
+                                    : ''
+                            }<yellow>${packageObj.name}</yellow> (<${
                                 packageObj.version === rootPackageJson.version
                                     ? 'green'
                                     : 'red'

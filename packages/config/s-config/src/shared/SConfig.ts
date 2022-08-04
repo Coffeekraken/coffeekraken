@@ -326,21 +326,20 @@ export default class SConfig {
                 const configKey = Object.keys(
                     this.constructor._registeredPreprocesses[this.id],
                 )[k];
-                this.config[
-                    configKey
-                ] = await this.constructor._registeredPreprocesses[this.id][
-                    configKey
-                ]({
-                    env: this.settings.env,
-                    config: this.config,
-                    get this() {
-                        return this.config[configKey];
-                    },
-                    get theme() {
-                        const themeId = `${this.config.theme.theme}-${this.config.theme.variant}`;
-                        return this.config.theme.themes[themeId];
-                    },
-                });
+                this.config[configKey] =
+                    await this.constructor._registeredPreprocesses[this.id][
+                        configKey
+                    ]({
+                        env: this.settings.env,
+                        config: this.config,
+                        get this() {
+                            return this.config[configKey];
+                        },
+                        get theme() {
+                            const themeId = `${this.config.theme.theme}-${this.config.theme.variant}`;
+                            return this.config.theme.themes[themeId];
+                        },
+                    });
             }
         }
 
@@ -355,21 +354,20 @@ export default class SConfig {
                 const configKey = Object.keys(
                     this.constructor._registeredPostprocess[this.id],
                 )[k];
-                this.config[
-                    configKey
-                ] = await this.constructor._registeredPostprocess[this.id][
-                    configKey
-                ]({
-                    env: this.settings.env,
-                    config: this.config,
-                    get this() {
-                        return this.config[configKey];
-                    },
-                    get theme() {
-                        const themeId = `${this.config.theme.theme}-${this.config.theme.variant}`;
-                        return this.config.theme.themes[themeId];
-                    },
-                });
+                this.config[configKey] =
+                    await this.constructor._registeredPostprocess[this.id][
+                        configKey
+                    ]({
+                        env: this.settings.env,
+                        config: this.config,
+                        get this() {
+                            return this.config[configKey];
+                        },
+                        get theme() {
+                            const themeId = `${this.config.theme.theme}-${this.config.theme.variant}`;
+                            return this.config.theme.themes[themeId];
+                        },
+                    });
             }
         }
 

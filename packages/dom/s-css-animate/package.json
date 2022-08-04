@@ -1,7 +1,7 @@
 {
-    "publish": false,
+    "private": true,
     "name": "@coffeekraken/s-css-animation",
-    "version": "2.0.0-alpha.10",
+    "version": "2.0.0-alpha.11",
     "description": "",
     "type": "module",
     "scripts": {

@@ -234,14 +234,13 @@ export default class SSugarConfig extends __SClass {
                     });
                 }
 
-                SSugarConfig._sSugarConfigInstances[
-                    finalSettings.id
-                ] = new SSugarConfig({
-                    metas: {
-                        id: finalSettings.id,
-                    },
-                    sugarConfig: finalSettings ?? {},
-                });
+                SSugarConfig._sSugarConfigInstances[finalSettings.id] =
+                    new SSugarConfig({
+                        metas: {
+                            id: finalSettings.id,
+                        },
+                        sugarConfig: finalSettings ?? {},
+                    });
                 const config = await SSugarConfig._sSugarConfigInstances[
                     finalSettings.id
                 ]._load(finalSettings);

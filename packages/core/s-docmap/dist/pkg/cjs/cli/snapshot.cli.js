@@ -14,10 +14,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
-const SDocMap_1 = __importDefault(require("../node/SDocMap"));
+const SDocmap_1 = __importDefault(require("../node/SDocmap"));
 exports.default = (stringArgs = '') => {
     return new s_promise_1.default(({ resolve, pipe }) => __awaiter(void 0, void 0, void 0, function* () {
-        const docmap = new SDocMap_1.default();
+        const docmap = new SDocmap_1.default();
         const promise = docmap.snapshot(stringArgs);
         pipe(promise);
         resolve(yield promise);

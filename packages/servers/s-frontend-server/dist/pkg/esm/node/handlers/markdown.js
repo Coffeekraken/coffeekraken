@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import __SDocMap from '@coffeekraken/s-docmap';
+import __SDocmap from '@coffeekraken/s-docmap';
 import __SMarkdownBuilder from '@coffeekraken/s-markdown-builder';
 import __SPromise from '@coffeekraken/s-promise';
 import { page404 } from '@coffeekraken/s-view-renderer';
@@ -34,7 +34,7 @@ import { page404 } from '@coffeekraken/s-view-renderer';
 export default function markdown(req, res, settings = {}) {
     return new __SPromise(({ resolve, reject, pipe, pipeErrors }) => __awaiter(this, void 0, void 0, function* () {
         var _a;
-        const docmap = new __SDocMap();
+        const docmap = new __SDocmap();
         const docmapJson = yield docmap.read();
         const menu = docmapJson.menu;
         let html;

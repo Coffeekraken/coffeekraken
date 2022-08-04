@@ -23,8 +23,8 @@ import __dotenv from 'dotenv';
 import __fs from 'fs';
 import __fsExtra from 'fs-extra';
 import __path from 'path';
+import __replaceCommandTokens from '../node/replaceCommandTokens';
 import __SSugarCliParamsInterface from './interface/SSugarCliParamsInterface';
-import __replaceCommandTokens from './replaceCommandTokens';
 
 export interface ISSugarCliAvailableCliObj {
     packageJson: any;

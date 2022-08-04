@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import __SBench from '@coffeekraken/s-bench';
 import __SDocblock from '@coffeekraken/s-docblock';
-import __SDocMap from '@coffeekraken/s-docmap';
+import __SDocmap from '@coffeekraken/s-docmap';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __scrapeUrl from '@coffeekraken/sugar/node/og/scrapeUrl';
@@ -22,7 +22,7 @@ export default function docmapStyleguideData({ req, res, pageConfig }) {
         }
         __SBench.start('data.docmapStyleguideData');
         __SBench.step('data.docmapStyleguideData', 'beforeDocmapRead');
-        const docmap = new __SDocMap();
+        const docmap = new __SDocmap();
         const docmapJson = yield docmap.read();
         const styleguideMenu = docmapJson.menu.custom.styleguide;
         let styleguideObj = styleguideMenu.slug[`/styleguide/${req.params.path}`];

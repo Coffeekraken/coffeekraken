@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import __SDocMap from '@coffeekraken/s-docmap';
+import __SDocmap from '@coffeekraken/s-docmap';
 import __SMarkdownBuilder from '@coffeekraken/s-markdown-builder';
 import __SPromise from '@coffeekraken/s-promise';
 export default function docmapMarkdownData({ req, res, pageConfig }) {
@@ -16,7 +16,7 @@ export default function docmapMarkdownData({ req, res, pageConfig }) {
         if (!req.params.namespace) {
             throw new Error(`[SFrontendServer.docmapMarkdownData] Missing namespace parameter from the url...`);
         }
-        const docmap = new __SDocMap();
+        const docmap = new __SDocmap();
         const docmapJson = yield docmap.read();
         const builder = new __SMarkdownBuilder();
         const markdownRes = yield pipe(builder.build({

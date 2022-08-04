@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import __SBench from '@coffeekraken/s-bench';
-import __SDocMap from '@coffeekraken/s-docmap';
+import __SDocmap from '@coffeekraken/s-docmap';
 import __SMarkdownBuilder from '@coffeekraken/s-markdown-builder';
 import __SPromise from '@coffeekraken/s-promise';
 import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
@@ -21,7 +21,7 @@ export default function docmapDocumentationData({ req, res, pageConfig }) {
         }
         __SBench.start('data.docmapDocumentationData');
         __SBench.step('data.docmapDocumentationData', 'beforeDocmapRead');
-        const docmap = new __SDocMap();
+        const docmap = new __SDocmap();
         const docmapJson = yield docmap.read();
         let docObj = docmapJson.menu.slug[`/doc/${req.params.path}`];
         if (!docObj) {

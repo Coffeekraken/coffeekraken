@@ -13,7 +13,7 @@
             "defaultAction": "build",
             "actions": {
                 "build": {
-                    "scope": "global",
+                    "scope": "package",
                     "description": "Build the ts and js files found in the repository",
                     "interface": "./dist/pkg/esm/node/interface/STypescriptBuilderBuildParamsInterface.js",
                     "process": "./dist/pkg/esm/cli/build.cli.js"

@@ -47,6 +47,11 @@ export default async function loadConfigFile(
         ...(settings ?? {}),
     };
 
+    // protect if we are not in a package
+    if (!finalSettings.rootDir) {
+        return;
+    }
+
     const filePathArray = Array.isArray(filePath) ? filePath : [filePath];
     let finalFilePath;
 

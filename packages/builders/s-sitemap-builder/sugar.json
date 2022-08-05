@@ -12,6 +12,7 @@
             "description": "Sitemap related CLI",
             "actions": {
                 "build": {
+                    "scope": "package",
                     "description": "Build your sitemap depending ton configuration file 'sitemap.config.js'",
                     "process": "./dist/pkg/esm/cli/build.cli.js"
                 }

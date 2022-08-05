@@ -13,6 +13,7 @@
             "defaultAction": "format",
             "actions": {
                 "format": {
+                    "scope": "package",
                     "description": "Format your code using the SCodeFormatter class",
                     "interface": "./dist/pkg/esm/node/interface/SCodeFormatterFormatParamsInterface.js",
                     "process": "./dist/pkg/esm/cli/format.cli.js"

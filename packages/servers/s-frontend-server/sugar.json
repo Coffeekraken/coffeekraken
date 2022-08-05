@@ -13,10 +13,12 @@
       "defaultAction": "start",
       "actions": {
         "start": {
+          "scope": "package",
           "description": "Start a new frontend server process",
           "process": "./dist/pkg/esm/cli/start.cli.js"
         },
         "corsProxy": {
+          "scope": "package",
           "description": "Start a cors proxy server",
           "process": "./dist/pkg/esm/cli/corsProxy.cli.js"
         }

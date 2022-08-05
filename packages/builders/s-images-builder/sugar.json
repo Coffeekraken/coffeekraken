@@ -13,6 +13,7 @@
       "defaultAction": "build",
       "actions": {
         "build": {
+          "scope": "package",
           "description": "Compress your images and generate different resolutions as well as webp version of them",
           "process": "./dist/pkg/esm/cli/build.cli.js"
         }

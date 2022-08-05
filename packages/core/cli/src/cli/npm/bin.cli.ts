@@ -1,20 +1,19 @@
 // @ts-nocheck
 
-import _parseArgs from '../../node/cli/parseArgs';
-import _SNpmBinCliInterface from './interface/SNpmBinCliInterface';
 import _childProcess from 'child_process';
-import __packageRootDir from '../../node/path/packageRootDir';
-import _glob from 'glob';
 import _fs from 'fs';
 import _path from 'path';
+import _parseArgs from '../../node/cli/parseArgs';
 import _findPackages from '../../node/monorepo/findPackages';
+import __packageRootDir from '../../node/path/packageRootDir';
+import _SNpmBinCliInterface from './interface/SNpmBinCliInterface';
 
 export default async function bin(stringArgs = '') {
     const argsObj = _parseArgs(stringArgs, {
         definition: _SNpmBinCliInterface.definition,
     });
 
-    const binCommand = `npm bin ${argsObj.global ? '-g' : ''}`;
+    const binCommand = `npm bin ${argsObj.global ? '--location=global' : ''}`;
     const binFolderPath = _childProcess.execSync(binCommand).toString();
 
     let packagePath;

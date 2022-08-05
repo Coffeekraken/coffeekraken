@@ -1,15 +1,15 @@
 {
     "name": "@coffeekraken/s-config",
-    "version": "2.0.0-alpha.11",
+    "version": "2.0.0-alpha.13",
     "description": "",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-duration": "^2.0.0-alpha.11",
-        "@coffeekraken/s-env": "^2.0.0-alpha.11",
-        "@coffeekraken/s-typescript-builder": "^2.0.0-alpha.11",
-        "@coffeekraken/sugar": "^2.0.0-alpha.11"
+        "@coffeekraken/s-duration": "^2.0.0-alpha.13",
+        "@coffeekraken/s-env": "^2.0.0-alpha.13",
+        "@coffeekraken/s-typescript-builder": "^2.0.0-alpha.13",
+        "@coffeekraken/sugar": "^2.0.0-alpha.13"
     },
     "main": "dist/pkg/cjs/js/exports.js",
     "module": "dist/pkg/esm/js/exports.js",

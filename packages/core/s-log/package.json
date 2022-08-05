@@ -1,13 +1,13 @@
 {
     "name": "@coffeekraken/s-log",
-    "version": "2.0.0-alpha.11",
+    "version": "2.0.0-alpha.13",
     "description": "",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.11",
-        "@coffeekraken/sugar": "^2.0.0-alpha.11"
+        "@coffeekraken/s-class": "^2.0.0-alpha.13",
+        "@coffeekraken/sugar": "^2.0.0-alpha.13"
     },
     "main": "dist/pkg/cjs/shared/exports.js",
     "module": "dist/pkg/esm/shared/exports.js",

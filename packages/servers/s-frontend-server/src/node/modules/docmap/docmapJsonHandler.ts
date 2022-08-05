@@ -8,8 +8,12 @@ export default function docmapJsonHandler({ req, res, pageConfig }) {
 
         __SBench.step('data.docmapJsonData', 'beforeDocmapRead');
 
-        const docmap = new __SDocmap();
-        const docmapJson = await docmap.read();
+        let docmapJson = {};
+
+        try {
+            const docmap = new __SDocmap();
+            docmapJson = await docmap.read();
+        } catch (e) {}
 
         __SBench.step('data.docmapJsonData', 'afterDocmapRead');
 

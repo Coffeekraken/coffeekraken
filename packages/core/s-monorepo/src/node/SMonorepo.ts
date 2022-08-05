@@ -475,6 +475,7 @@ export default class SMonorepo extends __SClass {
                 });
 
                 if (
+                    !finalParams.yes &&
                     !(await emit('ask', {
                         type: 'confirm',
                         message: `Are these packages the ones you want to publish?`,

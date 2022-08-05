@@ -1,5 +1,8 @@
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 import __path from 'path';
+
+let newFolderName;
 
 export default function (api) {
     if (api.env.platform !== 'node') return;
@@ -97,9 +100,12 @@ export default function (api) {
                     createApp: {
                         title: 'Creating app directory',
                         description: 'Creating the app directory',
-                        command: `mkdir generic`,
+                        get command() {
+                            newFolderName = __uniqid();
+                            return `mkdir ${newFolderName}`;
+                        },
                         after() {
-                            process.chdir(`${process.cwd()}/generic`);
+                            process.chdir(`${process.cwd()}/${newFolderName}`);
                         },
                         params: {},
                         settings: {},

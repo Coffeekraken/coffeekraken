@@ -1,12 +1,7 @@
 // @ts-nocheck
 
 import __SBench from '@coffeekraken/s-bench';
-import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __fs from 'fs';
-import __path from 'path';
 
 /**
  * @name                genericHandler
@@ -63,60 +58,52 @@ export default function genericHandler({
 
         const renderedViews: string[] = [];
 
-        const viewsRootDir = __SSugarConfig.get('storage.src.viewsDir');
-
         for (let [idx, viewObj] of pageConfig.views.entries()) {
             let data = Object.assign({}, res.templateData ?? {}),
                 viewPath = viewObj.path;
 
-            let potentialDataFilePath;
-
             // remove the shared data
             delete data.shared;
-
-            if (typeof viewObj === 'string') {
-                viewPath = viewObj;
-
-                potentialDataFilePath = __path.resolve(
-                    viewsRootDir,
-                    `${viewPath.replace(/\./g, '/')}.data.js`,
-                );
-            }
 
             __SBench.step(
                 `handlers.generic`,
                 `beforeViewRendering.${viewPath}`,
             );
 
-            // data
-            if (viewObj.data) {
-                let dataFn = () => {};
-                if (__fs.existsSync(viewObj.data)) {
-                    dataFn = (await import(viewObj.data)).default;
-                } else if (frontendServerConfig.data[viewObj.data]) {
-                    dataFn = (
-                        await import(
-                            frontendServerConfig.data[viewObj.data].path
-                        )
-                    ).default;
-                }
-
-                const dataFnResult = await dataFn({
-                    req,
-                    res,
-                    pageConfig,
-                    pageFile,
-                    frontendServerConfig,
-                });
-                if (dataFnResult instanceof Error) {
-                    emit('log', {
-                        type: __SLog.TYPE_ERROR,
-                        value: dataFnResult,
-                    });
-                } else {
-                    data = __deepMerge(data ?? {}, dataFnResult ?? {});
-                }
+            if (typeof viewObj === 'string') {
+                viewPath = viewObj;
             }
+
+            // else if (viewObj.data) {
+            //     let dataFn = () => {};
+            //     if (__fs.existsSync(viewObj.data)) {
+            //         dataFn = (await import(viewObj.data)).default;
+            //     } else if (frontendServerConfig.data[viewObj.data]) {
+            //         dataFn = (
+            //             await import(
+            //                 frontendServerConfig.data[viewObj.data].path
+            //             )
+            //         ).default;
+            //     }
+
+            //     const dataFnResult = await dataFn({
+            //         req,
+            //         res,
+            //         pageConfig,
+            //         pageFile,
+            //         frontendServerConfig,
+            //     });
+            //     if (dataFnResult instanceof Error) {
+            //         emit('log', {
+            //             type: __SLog.TYPE_ERROR,
+            //             value: dataFnResult,
+            //         });
+            //     } else {
+            //         data = __deepMerge(data ?? {}, dataFnResult ?? {});
+            //     }
+            // }
+
+            console.log(data);
 
             // rendering view using data
             const viewResPro = res.viewRenderer.render(viewPath, data);
@@ -146,7 +133,7 @@ export default function genericHandler({
 
         let finalResult;
 
-        // rendering view using data
+        // rendering layout using data
         try {
             const layoutPromise = res.viewRenderer.render(layoutPath, {
                 ...layoutData,

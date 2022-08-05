@@ -208,9 +208,8 @@ class SKitchen extends __SClass {
                 },
             );
 
-            const finalParams: ISKitchenNewParams = __SFronstackNewParamsInterface.apply(
-                params,
-            );
+            const finalParams: ISKitchenNewParams =
+                __SFronstackNewParamsInterface.apply(params);
 
             const availableRecipes = Object.keys(recipesObj);
 
@@ -260,9 +259,8 @@ class SKitchen extends __SClass {
             const kitchenConfig = __SSugarConfig.get('kitchen');
             const actionsObj = kitchenConfig.actions;
 
-            const finalParams: ISKitchenActionParams = __SKitchenActionInterface.apply(
-                params,
-            );
+            const finalParams: ISKitchenActionParams =
+                __SKitchenActionInterface.apply(params);
 
             const availableActions = Object.keys(actionsObj);
 
@@ -618,10 +616,8 @@ class SKitchen extends __SClass {
                         });
 
                         const pro = await __SProcess.from(finalCommand, {
-                            process: {
-                                before: actionObj.before,
-                                after: actionObj.after,
-                            },
+                            before: actionObj.before,
+                            after: actionObj.after,
                         });
 
                         const finalProcessManagerParams = {
@@ -700,9 +696,8 @@ class SKitchen extends __SClass {
             ({ resolve, reject, emit }) => {
                 const recipes = this.listRecipes();
 
-                const finalParams: ISKitchenL = __SKitchenListParamsInterface.apply(
-                    params,
-                );
+                const finalParams: ISKitchenL =
+                    __SKitchenListParamsInterface.apply(params);
 
                 let recipe, stack;
                 if (finalParams.recipe) {
@@ -857,9 +852,8 @@ class SKitchen extends __SClass {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 // @ts-ignore
-                const finalParams: ISKitchenAddParams = __SKitchenAddParamsInterface.apply(
-                    params,
-                );
+                const finalParams: ISKitchenAddParams =
+                    __SKitchenAddParamsInterface.apply(params);
 
                 for (let i = 0; i < finalParams.ingredients.length; i++) {
                     const id = finalParams.ingredients[i];

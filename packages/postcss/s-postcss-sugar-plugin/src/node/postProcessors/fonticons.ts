@@ -9,7 +9,7 @@ import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __srcCssDir from '@coffeekraken/sugar/node/path/srcCssDir';
 import { generateFonts } from 'fantasticon';
 import __fs from 'fs';
-import __svgFixer from 'oslllo-svg-fixer';
+// import __svgFixer from 'oslllo-svg-fixer';
 import __path from 'path';
 import __postcss from 'postcss';
 
@@ -80,8 +80,18 @@ export default async function ({ root, sharedData, settings }) {
 
     console.log(`<yellow>[fonticons]</yellow> Generate fonticons...`);
 
-    // fix svg's just to be sure
-    const fixResult = await __svgFixer(inputDir, inputDir).fix();
+    // // fix svg's just to be sure
+    // const svgIcons = __fs.readdirSync(inputDir);
+    // for (let i = 0; i < svgIcons.length; i++) {
+    //     const fullSvgIconPath = `${inputDir}/${svgIcons[i]}`;
+    //     const svgIconStr = __fs
+    //         .readFileSync(fullSvgIconPath, 'utf-8')
+    //         .toString();
+    //     const outlinedSvgIconStr = await __svgOutlineStroke(svgIconStr);
+    //     __fs.writeFileSync(fullSvgIconPath, outlinedSvgIconStr);
+    // }
+
+    // const fixResult = await __svgFixer(inputDir, inputDir).fix();
 
     const result = await generateFonts({
         inputDir,

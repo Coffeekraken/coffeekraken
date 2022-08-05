@@ -1,6 +1,6 @@
 {
     "name": "@coffeekraken/s-filtrable-input-component",
-    "version": "2.0.0-alpha.11",
+    "version": "2.0.0-alpha.13",
     "description": "",
     "type": "module",
     "homepage": "https://coffeekraken.io",
@@ -13,10 +13,10 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-interface": "^2.0.0-alpha.11",
-        "@coffeekraken/s-lit-component": "^2.0.0-alpha.11",
-        "@coffeekraken/s-theme": "^2.0.0-alpha.11",
-        "@coffeekraken/sugar": "^2.0.0-alpha.11",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.13",
+        "@coffeekraken/s-lit-component": "^2.0.0-alpha.13",
+        "@coffeekraken/s-theme": "^2.0.0-alpha.13",
+        "@coffeekraken/sugar": "^2.0.0-alpha.13",
         "faker": "^5.5.3",
         "lit": "^2.2.8",
         "react": "^17.0.2"

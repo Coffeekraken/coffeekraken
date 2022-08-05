@@ -143,7 +143,7 @@ export interface ISDocmapMenuObj {
 }
 
 export interface ISDocmapMetasObj {
-    type: 'current' | 'snapshot';
+    type: 'current' | 'snapshot' | undefined;
     snapshot?: string;
 }
 
@@ -309,9 +309,17 @@ class SDocmap extends __SClass implements ISDocmap {
                 let docmapRootPath = __folderPath(finalParams.input);
 
                 if (!__fs.existsSync(finalParams.input)) {
-                    throw new Error(
-                        `<red>[${this.constructor.name}.${this.metas.id}]</red> Sorry but the file "<cyan>${finalParams.input}</cyan>" does not exists...`,
-                    );
+                    return resolve({
+                        metas: {
+                            type: undefined,
+                        },
+                        map: {},
+                        menu: {},
+                        snapshots: [],
+                    });
+                    // throw new Error(
+                    //     `<red>[${this.constructor.name}.${this.metas.id}]</red> Sorry but the file "<cyan>${finalParams.input}</cyan>" does not exists...`,
+                    // );
                 }
 
                 const packageMonoRoot = __packageRoot(process.cwd(), {

@@ -1,7 +1,7 @@
 {
     "private": true,
     "name": "@coffeekraken/s-testinator",
-    "version": "2.0.0-alpha.11",
+    "version": "2.0.0-alpha.13",
     "description": "",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",

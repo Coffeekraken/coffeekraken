@@ -13,22 +13,22 @@
             "defaultAction": "recipe",
             "actions": {
                 "new": {
-                    "scope": "package",
+                    "scope": "global",
                     "description": "Create a new project from a recipe (template) like the default one or for example the litElement one, etc...",
                     "process": "./dist/pkg/esm/cli/new.cli.js"
                 },
                 "action": {
-                    "scope": "package",
+                    "scope": "global",
                     "description": "Exec an action of the kitchen application into the current working directory",
                     "process": "./dist/pkg/esm/cli/action.cli.js"
                 },
                 "recipe": {
-                    "scope": "package",
+                    "scope": "global",
                     "description": "Exec a recipe of the kitchen application into the current working directory",
                     "process": "./dist/pkg/esm/cli/recipe.cli.js"
                 },
                 "list": {
-                    "scope": "package",
+                    "scope": "global",
                     "description": "List either all the recipes available or particular recipe actions stack",
                     "process": "./dist/pkg/esm/cli/list.cli.js"
                 },

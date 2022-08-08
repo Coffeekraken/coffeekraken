@@ -1,8 +1,8 @@
 node_modules
+.DS_Store
 .cache
 .dev
 .local
 .yarn/cache
-views/tmp
 *.tmp
 yarn-error.log

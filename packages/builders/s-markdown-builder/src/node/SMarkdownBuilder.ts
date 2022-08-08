@@ -607,6 +607,8 @@ export default class SMarkdownBuilder extends __SBuilder {
                             filePath,
                         );
 
+                        console.log('DSA', dataHandlerData);
+
                         const finalViewData = __deepMerge(
                             Object.assign({}, viewData),
                             dataHandlerData,
@@ -732,6 +734,8 @@ export default class SMarkdownBuilder extends __SBuilder {
                         });
 
                         if (finalParams.save) {
+                            console.log('WRITE', buildObj.output);
+
                             __writeFileSync(
                                 buildObj.output,
                                 currentTransformedString,

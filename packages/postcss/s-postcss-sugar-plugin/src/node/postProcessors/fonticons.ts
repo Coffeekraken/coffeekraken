@@ -9,7 +9,7 @@ import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __srcCssDir from '@coffeekraken/sugar/node/path/srcCssDir';
 import { generateFonts } from 'fantasticon';
 import __fs from 'fs';
-// import __svgFixer from 'oslllo-svg-fixer';
+import __svgFixer from 'oslllo-svg-fixer';
 import __path from 'path';
 import __postcss from 'postcss';
 
@@ -91,7 +91,7 @@ export default async function ({ root, sharedData, settings }) {
     //     __fs.writeFileSync(fullSvgIconPath, outlinedSvgIconStr);
     // }
 
-    // const fixResult = await __svgFixer(inputDir, inputDir).fix();
+    const fixResult = await __svgFixer(inputDir, inputDir).fix();
 
     const result = await generateFonts({
         inputDir,

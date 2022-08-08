@@ -1,43 +1,50 @@
+{{#if settings.layouts.readme.data.headerImageUrl }}
+
 <!-- image -->
 
-<!-- {{#if settings.layouts.readme.data.headerImageUrl }}
 ![{{ packageJson.name }}]({{ settings.layouts.readme.data.headerImageUrl }})
-{{/if}} -->
+{{/if}}
+
+{{#isSectionWanted 'readme-header'}}
 
 <!-- header -->
 
-{{#isSectionWanted 'readme-header'}}
 {{#> section-readme-header }}{{/ section-readme-header}}
 {{/isSectionWanted}}
 
+{{#isSectionWanted 'description'}}
+
 <!-- description -->
 
-{{#isSectionWanted 'description'}}
 {{#> section-description }}{{/ section-description}}
 {{/isSectionWanted}}
 
+{{#isSectionWanted 'install'}}
+
 <!-- install -->
 
-{{#isSectionWanted 'install'}}
 {{#> section-install}}{{/ section-install}}
 {{/isSectionWanted}}
 
 {{> @partial-block }}
 
+{{#isSectionWanted 'doc-menu'}}
+
 <!-- doc-menu -->
 
-{{#isSectionWanted 'doc-menu'}}
 {{#> section-doc-menu}}{{/ section-doc-menu}}
 {{/isSectionWanted}}
 
+{{#isSectionWanted 'license'}}
+
 <!-- License -->
 
-{{#isSectionWanted 'license'}}
 {{#> section-license}}{{/section-license}}
 {{/isSectionWanted}}
 
+{{#isSectionWanted 'contact'}}
+
 <!-- Contact -->
 
-{{#isSectionWanted 'contact'}}
 {{#> section-contact}}{{/section-contact}}
 {{/isSectionWanted}}

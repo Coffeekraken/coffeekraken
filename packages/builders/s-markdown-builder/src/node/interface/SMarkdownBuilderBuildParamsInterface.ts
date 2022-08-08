@@ -42,7 +42,6 @@ export default class SMarkdownBuilderBuildParamsInterface extends __SInterface {
                 description:
                     'Specify a direct path to a markdown file to build',
                 type: 'String',
-                alias: 'p',
                 default: __SSugarConfig.get('markdownBuilder.default.inPath'),
             },
             inRaw: {
@@ -67,7 +66,7 @@ export default class SMarkdownBuilderBuildParamsInterface extends __SInterface {
             data: {
                 description: 'Pass some data to be used in the view',
                 tyoe: 'Object',
-                default: {}
+                default: {},
             },
             save: {
                 description:
@@ -87,17 +86,23 @@ export default class SMarkdownBuilderBuildParamsInterface extends __SInterface {
             preset: {
                 description:
                     'Specify some preset(s) to use for your build. Presets are defined in the config.markdownBuilder.presets configuration path',
-                type: 'Array<String>',
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [','],
+                },
                 values: Object.keys(
                     __SSugarConfig.get('markdownBuilder.presets'),
                 ),
                 alias: 'p',
             },
             protectedTags: {
-                description: 'Specify some tags that should be protected from the markdown transformations like "template" or "code"...',
+                description:
+                    'Specify some tags that should be protected from the markdown transformations like "template" or "code"...',
                 type: 'Array<String>',
-                default: __SSugarConfig.get('markdownBuilder.default.protectedTags')
-            }
+                default: __SSugarConfig.get(
+                    'markdownBuilder.default.protectedTags',
+                ),
+            },
         };
     }
 }

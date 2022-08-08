@@ -1,91 +1,39 @@
-{{#> layout-readme }}
+{{#> layout-readme sections="readme-header,description,license,contact" }}
 
-## Coffeekraken
+## Start using our tools
 
+To start discovering our tools, development stack and so one, the easiest way is to go on [our website under the get started documentation](/doc/get-started/get-started).
 
+## Contribute to our effort
 
-## Usage
+To contribute to our project, make sure to follow [these instructions](/doc/contribute/get-started).
 
-Here's how to use this class:
+## Promote our community and work
 
-```js
-import __SValidator from '@coffeekraken/s-validator';
-const validator = new __SValidator();
-validator.validate('hello', {
-    min: 2,
-    max: 3,
-}); // => { valid: false, rules: {... }, messages: ['Must be at max 3 characters'] }
-```
+If you would like to promote our community efforts, don't hesitate to share our [website](https://coffeekraken.io), [repository](https://github.com/coffeekraken/coffeekraken), etc... using some tags like "**#coffeekraken #webdev #frontend**". We thank you already for that!
 
-## Built-in validators
+## Open source
 
-Here's the list of built-in validators:
+This project is fully open source and will stay like that until the end of times.
+This also means that we need your support/contribution. Don't hesitate to join us on our communication channels:
 
-{{#each validatorsDefinition}} - **{{ @key }}**: this.description
+- [Discord](https://discord.gg/ERsX54UE)
+- [Twitter](https://twitter.com/coffeekrakenio)
+- [Patreon](https://www.patreon.com/coffeekraken)
+- [Github](https://github.com/Coffeekraken/coffeekraken/issues)
+
+## Our packages
+
+Here's a list of all our packages:
+
+{{#each packages}}
+#### {{ this.name }}
+{{#if this.description}}
+{{ this.description}}
+{{/if}}
+
+[Access {{this.name}} documentation](/package/{{this.name}}/doc/readme)
+
 {{/each}}
-
-## Custom validator
-
-To create a custom validator, simply follow this example:
-
-```js
-import __SValidator from '@coffeekraken/s-validator';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-
-const definition = {
-    description: 'Validate some cool value that starts with "CK"',
-    type: 'String',
-};
-
-function myValidator(value, settings) {
-    let message, valid;
-
-    const finalSettings = __deepMerge(
-        {
-            i18n: {
-                string: 'Must start with "CK"',
-            },
-            trim: true,
-        },
-        settings ?? {},
-    );
-
-    if (finalSettings.trim) {
-        value = value.trim();
-    }
-
-    valid = value.match(/^CK.*/);
-    if (!valid) {
-        message = finalSettings.i18n.string;
-    }
-
-    return {
-        valid,
-        message,
-    };
-}
-
-// Register our new validator
-__SValidator.registerValidator('myValidator', myValidator, {
-    definition: definition,
-});
-```
-
-## I18n
-
-Here's the default `en` i18n translations.
-To translate your messages, simply translate the messages based on this structure and pass your new object to the `i18n` settings.
-
-```js
-{{ jsonStringify en }}
-```
-
-## Settings
-
-{{> interface namespace='@coffeekraken.s-validator.shared.interface.SValidatorSettingsInterface' }}
-
-## API
-
-For more information about the API of this class, please check [our API documentation](/api/@coffeekraken.s-validator.shared.SValidator)
 
 {{/ layout-readme }}

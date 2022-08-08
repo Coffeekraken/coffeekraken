@@ -37,7 +37,7 @@ export default function (api) {
              * @name            headerImageUrl
              * @namespace       config.readme.layout
              * @type            String
-             * @default         [config.serve.img.url]/img/doc/readmeHeader.jpg
+             * @default         https://cdnv2.coffeekraken.io/readme-header.jpg
              *
              * Specify the header image to use for displaying readme. This has to be relative to your project root directory
              *
@@ -45,7 +45,7 @@ export default function (api) {
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get headerImageUrl() {
-                return `${api.config.serve.img.url}/doc/readmeHeader.jpg`;
+                return `https://cdnv2.coffeekraken.io/readme-header.jpg`;
             },
         },
         /**

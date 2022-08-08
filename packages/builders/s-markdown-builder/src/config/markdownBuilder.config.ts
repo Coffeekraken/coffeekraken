@@ -127,7 +127,16 @@ export default function (api) {
             protectedTags: ['template', 'code'],
         },
 
-        presets: {},
+        presets: {
+            readme: {
+                get inPath() {
+                    return `${api.config.storage.src.docDir}/README.md`;
+                },
+                get outPath() {
+                    return `${api.config.storage.package.rootDir}/README.md`;
+                },
+            },
+        },
         transformers: {
             og: {
                 /**

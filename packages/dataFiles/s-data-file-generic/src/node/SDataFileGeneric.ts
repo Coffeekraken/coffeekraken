@@ -59,7 +59,10 @@ export default class SDataHandlerGeneric {
                 );
 
             let dataFilePath = filePath;
-            if (!__fs.existsSync(dataFilePath)) {
+            if (
+                !__fs.existsSync(dataFilePath) ||
+                !SDataHandlerGeneric.extensions.includes(extension)
+            ) {
                 dataFilePath = __checkPathWithMultipleExtensions(
                     `${filePathWithoutExtension}.data.${extension}`,
                     SDataHandlerGeneric.extensions,

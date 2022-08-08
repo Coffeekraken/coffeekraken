@@ -48,25 +48,25 @@ This also means that we need your support/contribution. Don't hesitate to join u
 
 Here's a small list of some of our packages (random):
 
-#### @coffeekraken/s-config-inline-adapter
+#### @coffeekraken/s-vite-sugar-plugin
 
-[Access @coffeekraken/s-config-inline-adapter documentation](/package/@coffeekraken/s-config-inline-adapter/doc/readme)
+[Access @coffeekraken/s-vite-sugar-plugin documentation](/package/@coffeekraken/s-vite-sugar-plugin/doc/readme)
 
-#### @coffeekraken/s-typescript-builder
+#### @coffeekraken/s-sugar-json
 
-[Access @coffeekraken/s-typescript-builder documentation](/package/@coffeekraken/s-typescript-builder/doc/readme)
+[Access @coffeekraken/s-sugar-json documentation](/package/@coffeekraken/s-sugar-json/doc/readme)
 
-#### @coffeekraken/s-postcss-builder
+#### @coffeekraken/s-request
 
-[Access @coffeekraken/s-postcss-builder documentation](/package/@coffeekraken/s-postcss-builder/doc/readme)
+[Access @coffeekraken/s-request documentation](/package/@coffeekraken/s-request/doc/readme)
 
-#### @coffeekraken/s-clipboard-copy-component
+#### @coffeekraken/s-state
 
-[Access @coffeekraken/s-clipboard-copy-component documentation](/package/@coffeekraken/s-clipboard-copy-component/doc/readme)
+[Access @coffeekraken/s-state documentation](/package/@coffeekraken/s-state/doc/readme)
 
-#### @coffeekraken/s-log
+#### @coffeekraken/s-favicon-builder
 
-[Access @coffeekraken/s-log documentation](/package/@coffeekraken/s-log/doc/readme)
+[Access @coffeekraken/s-favicon-builder documentation](/package/@coffeekraken/s-favicon-builder/doc/readme)
 
 
 

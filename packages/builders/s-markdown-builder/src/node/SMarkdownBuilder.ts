@@ -300,30 +300,41 @@ export default class SMarkdownBuilder extends __SBuilder {
         params: ISMarkdownBuilderBuildParams,
     ): Promise<ISMarkdownBuilderResult[]> {
         if (params.preset && params.preset.length) {
-            return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
-                const buildedPresets = {};
+            return new __SPromise(
+                async ({ resolve, reject, emit, pipe }) => {
+                    const buildedPresets = {};
 
-                for (let i = 0; i < params.preset.length; i++) {
-                    const preset = params.preset[i];
+                    for (let i = 0; i < params.preset.length; i++) {
+                        const preset = params.preset[i];
 
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `<cyan>[preset]</cyan> Start "<yellow>${preset}</yellow>" preset markdown build`,
-                    });
+                        emit('log', {
+                            type: __SLog.TYPE_INFO,
+                            value: `<cyan>[preset]</cyan> Start "<yellow>${preset}</yellow>" preset markdown build`,
+                        });
 
-                    const newParams = <ISMarkdownBuilderBuildParams>__deepMerge(
-                        // @ts-ignore
-                        __SMarkdownBuilderBuildParamsInterface.defaults(),
-                        __SSugarConfig.get(`markdownBuilder.presets.${preset}`),
-                    );
+                        const newParams = <ISMarkdownBuilderBuildParams>(
+                            __deepMerge(
+                                // @ts-ignore
+                                __SMarkdownBuilderBuildParamsInterface.defaults(),
+                                __SSugarConfig.get(
+                                    `markdownBuilder.presets.${preset}`,
+                                ),
+                            )
+                        );
 
-                    const buildPromise = this._build(newParams);
-                    pipe(buildPromise);
-                    buildedPresets[preset] = await buildPromise;
-                }
+                        const buildPromise = this._build(newParams);
+                        pipe(buildPromise);
+                        buildedPresets[preset] = await buildPromise;
+                    }
 
-                resolve(buildedPresets);
-            });
+                    resolve(buildedPresets);
+                },
+                {
+                    metas: {
+                        id: this.constructor.name,
+                    },
+                },
+            );
         } else {
             return new __SPromise(
                 async ({ resolve, reject, emit }) => {
@@ -607,8 +618,6 @@ export default class SMarkdownBuilder extends __SBuilder {
                             filePath,
                         );
 
-                        console.log('DSA', dataHandlerData);
-
                         const finalViewData = __deepMerge(
                             Object.assign({}, viewData),
                             dataHandlerData,
@@ -734,8 +743,6 @@ export default class SMarkdownBuilder extends __SBuilder {
                         });
 
                         if (finalParams.save) {
-                            console.log('WRITE', buildObj.output);
-
                             __writeFileSync(
                                 buildObj.output,
                                 currentTransformedString,

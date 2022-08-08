@@ -1,10 +1,10 @@
 @font-face {
   font-family: "sugar-fonticon";
-  src: url("/dist/fonts/sugar-icons/sugar-fonticon.eot?806a783f93fac524813834aab19a1424#iefix")
+  src: url("/dist/fonts/sugar-icons/sugar-fonticon.eot?9d08f536f9a313ab4490bbcfcb0b7e7f#iefix")
       format("embedded-opentype"),
-    url("/dist/fonts/sugar-icons/sugar-fonticon.woff2?806a783f93fac524813834aab19a1424")
+    url("/dist/fonts/sugar-icons/sugar-fonticon.woff2?9d08f536f9a313ab4490bbcfcb0b7e7f")
       format("woff2"),
-    url("/dist/fonts/sugar-icons/sugar-fonticon.woff?806a783f93fac524813834aab19a1424")
+    url("/dist/fonts/sugar-icons/sugar-fonticon.woff?9d08f536f9a313ab4490bbcfcb0b7e7f")
       format("woff");
 }
 

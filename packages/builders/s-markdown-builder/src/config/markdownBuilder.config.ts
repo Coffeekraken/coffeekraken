@@ -128,6 +128,7 @@ export default function (api) {
         },
 
         presets: {
+            default: {},
             readme: {
                 get inPath() {
                     return `${api.config.storage.src.docDir}/README.md`;

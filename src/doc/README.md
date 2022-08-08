@@ -24,7 +24,7 @@ This also means that we need your support/contribution. Don't hesitate to join u
 
 ## Our packages
 
-Here's a list of all our packages:
+Here's a small list of some of our packages (random):
 
 {{#each packages}}
 #### {{ this.name }}

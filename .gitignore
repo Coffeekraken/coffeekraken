@@ -5,5 +5,4 @@ node_modules
 .yarn/cache
 views/tmp
 *.tmp
-.DS_Store
 yarn-error.log

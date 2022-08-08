@@ -169,9 +169,9 @@ export default class STypescriptBuilder extends __SBuilder {
                     ...(params ?? {}),
                 });
 
-                setTimeout(() => {
-                    remove();
-                }, 10000);
+                // setTimeout(() => {
+                //     remove();
+                // }, 10000);
 
                 resolve({
                     path: res.files[0]?.file.path,
@@ -237,10 +237,11 @@ export default class STypescriptBuilder extends __SBuilder {
                 const buildedFiles: ISTypescriptBuilderResultFile[] = [];
 
                 // @ts-ignore
-                const finalParams: ISTypescriptBuilderBuildParams = __monorepoToPackageAbsolutePathDeepMap(
-                    __STypescriptBuilderBuildParamsInterface.apply(params),
-                    params.packageRoot ?? process.cwd(),
-                );
+                const finalParams: ISTypescriptBuilderBuildParams =
+                    __monorepoToPackageAbsolutePathDeepMap(
+                        __STypescriptBuilderBuildParamsInterface.apply(params),
+                        params.packageRoot ?? process.cwd(),
+                    );
 
                 // this can be overrided by customSettings bellow
                 let formats = Array.isArray(finalParams.formats)
@@ -478,9 +479,8 @@ export default class STypescriptBuilder extends __SBuilder {
 
             // package.json
             if (params.save) {
-                const packageJsonOutFolderPath = __path.dirname(
-                    packageJsonOutPath,
-                );
+                const packageJsonOutFolderPath =
+                    __path.dirname(packageJsonOutPath);
                 if (!__fs.existsSync(packageJsonOutFolderPath)) {
                     __fs.mkdirSync(packageJsonOutFolderPath, {
                         recursive: true,

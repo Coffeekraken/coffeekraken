@@ -1,7 +1,7 @@
 export default function (api) {
     if (api.env.platform !== 'node') return;
     return {
-        defaultRecipe: 'default',
+        defaultRecipe: 'generic',
 
         exclude: [],
 
@@ -1155,6 +1155,61 @@ export default function (api) {
                  */
                 interface:
                     '@coffeekraken/s-favicon-builder/node/interface/SFaviconBuilderBuildParamsInterface',
+                params: {},
+                settings: {
+                    processManager: {},
+                },
+            },
+            markdownBuild: {
+                /**
+                 * @name            title
+                 * @namespace       config.kitchen.actions.markdownBuild
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the markdown build action title
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                title: 'Docmap build action',
+                /**
+                 * @name            description
+                 * @namespace       config.kitchen.actions.markdownBuild
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the markdown build action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                description: 'Allow to build your markdown files',
+                /**
+                 * @name            command
+                 * @namespace       config.kitchen.actions.markdownBuild
+                 * @type            String
+                 * @default        sugar favicon.build [arguments]
+                 *
+                 * Specify the doc build action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                command: 'sugar markdown.build -p default,readme [arguments]',
+                /**
+                 * @name            interface
+                 * @namespace       config.kitchen.actions.markdownBuild
+                 * @type            String
+                 * @default        @coffeekraken/s-favicon-builder/node/interface/SFaviconBuilderBuildParamsInterface
+                 *
+                 * Specify the favicon build action interface
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                interface:
+                    '@coffeekraken/s-markdown-builder/node/interface/SMarkdownBuilderBuildParamsInterface',
                 params: {},
                 settings: {
                     processManager: {},

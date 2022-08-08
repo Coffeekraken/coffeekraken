@@ -1,3 +1,7 @@
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __fs from 'fs';
+
 export default function (api) {
     if (api.env.platform !== 'node') return;
 
@@ -66,7 +70,16 @@ export default function (api) {
                 build: 'sugar build',
             },
             dependencies: {
-                '@coffeekraken/sugar': '^2.0.0',
+                get '@coffeekraken/sugar'() {
+                    const json = JSON.parse(
+                        __fs
+                            .readFileSync(
+                                `${__packageRoot(__dirname())}/package.json`,
+                            )
+                            .toString(),
+                    );
+                    return `^${json.version}`;
+                },
             },
         },
 

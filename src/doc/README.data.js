@@ -1,4 +1,5 @@
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __pickRandom from '@coffeekraken/sugar/shared/array/pickRandom';
 import __fs from 'fs';
 import __glob from 'glob';
 
@@ -9,9 +10,12 @@ export default async function () {
   }).map(path => {
     const json = JSON.parse(__fs.readFileSync(path));
     return json;
-  });
+  }).filter(json => json.private !== true);
+
+  const nodeVersion = __fs.readFileSync(`${__packageRoot()}/.nvmrc`).toString();
 
   return {
-    packages,
+    packages: __pickRandom(packages, 5),
+    nodeVersion
   };
 }

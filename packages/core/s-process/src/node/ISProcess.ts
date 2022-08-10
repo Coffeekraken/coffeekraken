@@ -32,6 +32,7 @@ export interface ISProcessSettings {
     emitErrorAsEvent: boolean;
     stdio: ISStdio;
     throw: boolean;
+    silent: boolean;
     collectStdout: boolean;
     collectStderr: boolean;
     runAsChild: boolean;

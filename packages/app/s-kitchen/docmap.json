@@ -74,7 +74,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-testinator",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -418,6 +417,78 @@
                 "default": "sugar",
                 "description": "Specify the kitchen addSugarJson action command",
                 "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addSugarJson",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "kitchen.config.ts",
+                "extension": "config",
+                "relPath": "src/config/kitchen.config.ts"
+            },
+            "@coffeekraken.s-kitchen.config.kitchen.actions.addNvmrc.title": {
+                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addNvmrc.title",
+                "name": "title",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "Adding sugar.json file",
+                "description": "Add the .nvmrc file",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addNvmrc",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "kitchen.config.ts",
+                "extension": "config",
+                "relPath": "src/config/kitchen.config.ts"
+            },
+            "@coffeekraken.s-kitchen.config.kitchen.actions.addNvmrc.description": {
+                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addNvmrc.description",
+                "name": "description",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "...",
+                "description": "Specify the kitchen addNvmrc action description",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addNvmrc",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "kitchen.config.ts",
+                "extension": "config",
+                "relPath": "src/config/kitchen.config.ts"
+            },
+            "@coffeekraken.s-kitchen.config.kitchen.actions.addNvmrc.command": {
+                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addNvmrc.command",
+                "name": "command",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "sugar",
+                "description": "Specify the kitchen addNvmrc action command",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addNvmrc",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -2108,6 +2179,102 @@
                 "extension": "config",
                 "relPath": "src/config/kitchen.config.ts"
             },
+            "@coffeekraken.s-kitchen.config.kitchen.actions.markdownBuild.title": {
+                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.markdownBuild.title",
+                "name": "title",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "...",
+                "description": "Specify the markdown build action title",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.markdownBuild",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "kitchen.config.ts",
+                "extension": "config",
+                "relPath": "src/config/kitchen.config.ts"
+            },
+            "@coffeekraken.s-kitchen.config.kitchen.actions.markdownBuild.description": {
+                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.markdownBuild.description",
+                "name": "description",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "...",
+                "description": "Specify the markdown build action description",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.markdownBuild",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "kitchen.config.ts",
+                "extension": "config",
+                "relPath": "src/config/kitchen.config.ts"
+            },
+            "@coffeekraken.s-kitchen.config.kitchen.actions.markdownBuild.command": {
+                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.markdownBuild.command",
+                "name": "command",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "sugar favicon.build [arguments]",
+                "description": "Specify the doc build action command",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.markdownBuild",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "kitchen.config.ts",
+                "extension": "config",
+                "relPath": "src/config/kitchen.config.ts"
+            },
+            "@coffeekraken.s-kitchen.config.kitchen.actions.markdownBuild.interface": {
+                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.markdownBuild.interface",
+                "name": "interface",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "@coffeekraken/s-favicon-builder/node/interface/SFaviconBuilderBuildParamsInterface",
+                "description": "Specify the favicon build action interface",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.markdownBuild",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "kitchen.config.ts",
+                "extension": "config",
+                "relPath": "src/config/kitchen.config.ts"
+            },
             "@coffeekraken.s-kitchen.config.kitchen.actions.format.title": {
                 "id": "@coffeekraken.s-kitchen.config.kitchen.actions.format.title",
                 "name": "title",
@@ -2430,6 +2597,29 @@
                     "raw": "String"
                 },
                 "description": "Specify the recipe init stack addDefaultPackageJson action",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenRecipeDefault.stacks.new.actions",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "kitchenRecipeGeneric.config.ts",
+                "extension": "config",
+                "relPath": "src/config/kitchenRecipeGeneric.config.ts"
+            },
+            "@coffeekraken.s-kitchen.config.kitchenRecipeDefault.stacks.new.actions.addNvmrc": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenRecipeDefault.stacks.new.actions.addNvmrc",
+                "name": "addNvmrc",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "description": "Specify the recipe init stack addNvmrc action",
                 "namespace": "@coffeekraken.s-kitchen.config.kitchenRecipeDefault.stacks.new.actions",
                 "since": "2.0.0",
                 "author": {
@@ -3069,6 +3259,30 @@
                 },
                 "default": "[config.kitchen.actions.sitemapBuild]",
                 "description": "Specify the recipe build stack sitemapBuild action",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenRecipeDefault.stacks.build.actions",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "kitchenRecipeGeneric.config.ts",
+                "extension": "config",
+                "relPath": "src/config/kitchenRecipeGeneric.config.ts"
+            },
+            "@coffeekraken.s-kitchen.config.kitchenRecipeDefault.stacks.build.actions.markdownBuild": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenRecipeDefault.stacks.build.actions.markdownBuild",
+                "name": "markdownBuild",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[config.kitchen.actions.markdownBuild]",
+                "description": "Specify the recipe build stack markdownBuild action",
                 "namespace": "@coffeekraken.s-kitchen.config.kitchenRecipeDefault.stacks.build.actions",
                 "since": "2.0.0",
                 "author": {
@@ -4033,6 +4247,31 @@
                 "filename": "manifestIngredient.ts",
                 "extension": "ts",
                 "relPath": "src/node/ingredients/manifest/manifestIngredient.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-kitchen.node.ingredients.nvmrc.nvmrcIngredient": {
+                "id": "@coffeekraken.s-kitchen.node.ingredients.nvmrc.nvmrcIngredient",
+                "name": "nvmrcIngredient",
+                "type": {
+                    "types": [
+                        {
+                            "type": "ISKitchenIngredient"
+                        }
+                    ],
+                    "raw": "ISKitchenIngredient"
+                },
+                "description": "This ingredient represent the \".nvmrc\" file at the root of your project",
+                "namespace": "@coffeekraken.s-kitchen.node.ingredients.nvmrc",
+                "static": "true",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "nvmrcIngredient.ts",
+                "extension": "ts",
+                "relPath": "src/node/ingredients/nvmrc/nvmrcIngredient.ts",
                 "children": {}
             },
             "@coffeekraken.s-kitchen.node.ingredients.manifest.postcssIngredient": {

@@ -45,10 +45,10 @@ export default function (importMeta: any): string {
         break;
     }
 
-    const filePathMatch = pathLine.match(/(\(|file:\/\/)(.*)\:[0-9]+\:[0-9]+/);
-
+    const filePathMatch = pathLine.match(
+        /(at\s|\(|file\:\/\/)(\/[a-zA-Z0-9_-].*)\:[0-9]+\:[0-9]+/,
+    );
     const filePath = filePathMatch[2];
-
     const dirPath = __path.dirname(filePath).replace('file:', '');
     return dirPath;
 }

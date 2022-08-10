@@ -91,7 +91,6 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
         );
 
         // determine the running format (cjs|esm)
-        let format = 'esm';
         try {
             if (module !== undefined) format = 'cjs';
         } catch (e) {}

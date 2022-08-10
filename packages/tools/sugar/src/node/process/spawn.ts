@@ -49,6 +49,7 @@ import __onProcessExit from './onProcessExit';
 export interface ISpawnSettings extends SpawnOptions {
     pipeEvents: boolean;
     returnValueOnly: boolean;
+    silent: boolean;
     [key: string]: any;
 }
 
@@ -66,6 +67,8 @@ export default function spawn(
     settings?: Partial<ISpawnSettings>,
 ): __SPromise {
     let childProcess;
+
+    // console.log('spawn', command, settings);
 
     const promise = new __SPromise(async ({ resolve, reject, emit, pipe }) => {
         settings = __deepMerge(
@@ -200,7 +203,6 @@ export default function spawn(
 
             // handle other cases
             if (stderr.length) {
-                console.log('ERROR?', stderr);
                 emit('close.error', resultObj);
                 if (settings.returnValueOnly) return reject(resultObj.value);
                 return reject(resultObj);

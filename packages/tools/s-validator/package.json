@@ -1,14 +1,14 @@
 {
     "name": "@coffeekraken/s-validator",
-    "version": "2.0.0-alpha.13",
-    "description": "",
+    "version": "2.0.0-alpha.17",
+    "description": "Simple and powerfull class that let you pass a value with rules to validate it, and get back what's ok and what's not with messages for each errors.",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.13",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.13",
-        "@coffeekraken/sugar": "^2.0.0-alpha.13"
+        "@coffeekraken/s-class": "^2.0.0-alpha.17",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.17",
+        "@coffeekraken/sugar": "^2.0.0-alpha.17"
     },
     "main": "dist/pkg/cjs/shared/exports.js",
     "module": "dist/pkg/esm/shared/exports.js",
@@ -29,5 +29,6 @@
             "require": "./dist/pkg/cjs/js/*.js",
             "import": "./dist/pkg/esm/js/*.js"
         }
-    }
+    },
+    "homepage": "https://coffeekraken.io"
 }

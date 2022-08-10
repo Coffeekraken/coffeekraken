@@ -64,8 +64,8 @@ export default function jsonSync(
         const path = `${__packageRoot(
             fromOrName,
             {
-                highest: finalSettings,
-            }.highest,
+                highest: finalSettings.highest,
+            },
         )}/package.json`;
         if (!__fs.existsSync(path)) return false;
 

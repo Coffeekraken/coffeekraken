@@ -1,4 +1,4 @@
-@if ($block->see)
+@if (isset($block->see))
 
     <h4 id="related-{{ $block->name }}" class="s-typo:h4 s-mb:50">
         <i class="s-icon:box s-tc:accent"></i>&nbsp;&nbsp;Related resource(s)
@@ -8,8 +8,8 @@
 
         @foreach ($block->see as $see)
             <section class="s-bg:main-surface s-radius">
-                @if ($see->og)
-                    @if ($see->og->ogUrl)
+                @if (isset($see->og))
+                    @if (isset($see->og->ogUrl))
                         <a href="{{ $see->og->ogUrl }}" target="_blank">
                     @endif
                     <div class="s-layout:1_2 s-bg:main-surface s-radius s-overflow:hidden s-depth:10">
@@ -23,7 +23,7 @@
                             <a class="s-typo:a" href="{{ $see->og->ogUrl }}" target="_blank">Check out more...</a>
                         </div>
                     </div>
-                    @if ($see->og->ogUrl)
+                    @if (isset($see->og->ogUrl))
                         </a>
                     @endif
                 @endif

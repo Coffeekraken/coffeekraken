@@ -1,17 +1,17 @@
 {
     "name": "@coffeekraken/s-feature",
-    "version": "2.0.0-alpha.13",
-    "description": "",
+    "version": "2.0.0-alpha.17",
+    "description": "Base class to use to create features like @coffeekraken/s-activate-feature, etc... It handle properties as well as mounting at a certain point time, default properties and more...",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.13",
-        "@coffeekraken/s-component-utils": "^2.0.0-alpha.13",
-        "@coffeekraken/s-feature": "^2.0.0-alpha.13",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.13",
-        "@coffeekraken/s-state": "^2.0.0-alpha.13",
-        "@coffeekraken/sugar": "^2.0.0-alpha.13"
+        "@coffeekraken/s-class": "^2.0.0-alpha.17",
+        "@coffeekraken/s-component-utils": "^2.0.0-alpha.17",
+        "@coffeekraken/s-feature": "^2.0.0-alpha.17",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.17",
+        "@coffeekraken/s-state": "^2.0.0-alpha.17",
+        "@coffeekraken/sugar": "^2.0.0-alpha.17"
     },
     "main": "dist/pkg/cjs/js/exports.js",
     "module": "dist/pkg/esm/js/exports.js",
@@ -32,5 +32,6 @@
             "require": "./dist/pkg/cjs/js/*.js",
             "import": "./dist/pkg/esm/js/*.js"
         }
-    }
+    },
+    "homepage": "https://coffeekraken.io"
 }

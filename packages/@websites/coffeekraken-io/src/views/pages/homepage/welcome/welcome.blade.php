@@ -426,7 +426,7 @@ independantly of the source -->
                 <a class="s-btn s-color:accent" s-slider-previous title="Discover our components!">
                     <i class="s-icon:arrow-left s-mie:10"></i> Ranges
                 </a>
-                <a class="s-btn s-color:complementary s-mis:10" s-slider-next title="Discover our components!">
+                <a class="s-btn s-color:complementary s-mis:10" href="/doc/get-started/get-started" title="Get started!">
                     Back home <i class="s-icon:arrow-right s-mis:10"></i>
                 </a>
 

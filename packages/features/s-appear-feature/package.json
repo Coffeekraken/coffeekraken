@@ -1,7 +1,7 @@
 {
     "name": "@coffeekraken/s-appear-feature",
-    "version": "2.0.0-alpha.13",
-    "description": "",
+    "version": "2.0.0-alpha.17",
+    "description": "Nice and clean feature that let you make any HTMLElement appear from a certain direction when your element enters the viewport.",
     "type": "module",
     "scripts": {
         "dev": "sugar frontstack dev",
@@ -11,12 +11,12 @@
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.13",
-        "@coffeekraken/s-feature": "^2.0.0-alpha.13",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.13",
-        "@coffeekraken/s-sugar-element": "^2.0.0-alpha.13",
-        "@coffeekraken/s-theme": "^2.0.0-alpha.13",
-        "@coffeekraken/sugar": "^2.0.0-alpha.13"
+        "@coffeekraken/s-class": "^2.0.0-alpha.17",
+        "@coffeekraken/s-feature": "^2.0.0-alpha.17",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.17",
+        "@coffeekraken/s-sugar-element": "^2.0.0-alpha.17",
+        "@coffeekraken/s-theme": "^2.0.0-alpha.17",
+        "@coffeekraken/sugar": "^2.0.0-alpha.17"
     },
     "main": "dist/pkg/cjs/js/exports.js",
     "module": "dist/pkg/esm/js/exports.js",
@@ -37,5 +37,6 @@
             "require": "./dist/pkg/cjs/js/*.js",
             "import": "./dist/pkg/esm/js/*.js"
         }
-    }
+    },
+    "homepage": "https://coffeekraken.io"
 }

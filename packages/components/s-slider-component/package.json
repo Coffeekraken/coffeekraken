@@ -1,7 +1,7 @@
 {
     "name": "@coffeekraken/s-slider-component",
-    "version": "2.0.0-alpha.13",
-    "description": "",
+    "version": "2.0.0-alpha.17",
+    "description": "Powerful web component to create nice and fully customizable sliders. Support behaviors like slideable, horizontal|vertical, and more...",
     "type": "module",
     "homepage": "https://coffeekraken.io",
     "scripts": {
@@ -13,10 +13,10 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-component-utils": "^2.0.0-alpha.13",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.13",
-        "@coffeekraken/s-lit-component": "^2.0.0-alpha.13",
-        "@coffeekraken/sugar": "^2.0.0-alpha.13",
+        "@coffeekraken/s-component-utils": "^2.0.0-alpha.17",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.17",
+        "@coffeekraken/s-lit-component": "^2.0.0-alpha.17",
+        "@coffeekraken/sugar": "^2.0.0-alpha.17",
         "lit": "^2.2.8",
         "swiper": "^8.3.2"
     },

@@ -1,4 +1,4 @@
-@if ($block->see)
+@if (isset($block->see))
 
     <a href="#related-{{ $block->name }}" title="Related resource(s)"
         class="s-bg:complementary s-tc:complementary-foreground s-display:block s-p:30 s-radius s-mbs:50">

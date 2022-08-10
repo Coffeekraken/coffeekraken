@@ -74,7 +74,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-testinator",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -181,7 +180,7 @@
                     ],
                     "raw": "string[]"
                 },
-                "default": "['version']",
+                "default": "['version','homepage']",
                 "description": "Specify some fields to upgrade in each packages files",
                 "namespace": "@coffeekraken.s-monorepo.config.monorepo.upgrade",
                 "since": "2.0.0",
@@ -254,7 +253,7 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import SMonorepo from '@coffeekraken/s-monorepo';\nconst repo = new SMonorepo({\n     monorepo: {\n         // settings here...\n     }\n});\nawait repo.run({\n   command: 'ls -la'\n});"
+                        "code": "import SMonorepo from '@coffeekraken/s-monorepo';\nconst repo = new SMonorepo({\n     monorepo: {\n         // settings here...\n     }\n});\nawait repo.exec({\n   command: 'ls -la'\n});"
                     }
                 ],
                 "since": "2.0.0",
@@ -306,9 +305,9 @@
                             "url": "https://coffeekraken.io"
                         }
                     },
-                    "run": {
-                        "id": "sabd5208a6fa3f96cddc32891ce5324a1354cd63225778b73b3d3e331bcd8cc54",
-                        "name": "run",
+                    "exec": {
+                        "id": "sc9a98f7d398bb55a426f903bcc94cdbff3f8f64ae1d76ebb493ed83080b1f2c7",
+                        "name": "exec",
                         "type": {
                             "types": [
                                 {
@@ -464,6 +463,53 @@
                 "relPath": "src/node/interface/SMonorepoDevParamsInterface.ts",
                 "children": {}
             },
+            "@coffeekraken.s-monorepo.node.interface.SMonorepoExecParamsInterface": {
+                "id": "@coffeekraken.s-monorepo.node.interface.SMonorepoExecParamsInterface",
+                "name": "SMonorepoExecParamsInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": ".                      Class"
+                        }
+                    ],
+                    "raw": ".                      Class"
+                },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface specify the parameters needed to the `sugar monorepo.run` command.",
+                "namespace": "@coffeekraken.s-monorepo.node.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SMonorepoExecParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "command": {
+                            "description": "Specify the command you want to run on the monorepo",
+                            "type": "String",
+                            "required": true
+                        },
+                        "packagesGlob": {
+                            "description": "Specify some globs to search for packages relative to the monorepo root directory",
+                            "type": "String",
+                            "default": "packages/*/*"
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SMonorepoExecParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SMonorepoExecParamsInterface.ts",
+                "children": {}
+            },
             "@coffeekraken.s-monorepo.node.interface.SMonorepoListParamsInterface": {
                 "id": "@coffeekraken.s-monorepo.node.interface.SMonorepoListParamsInterface",
                 "name": "SMonorepoListParamsInterface",
@@ -567,53 +613,6 @@
                 "relPath": "src/node/interface/SMonorepoPublishParamsInterface.ts",
                 "children": {}
             },
-            "@coffeekraken.s-monorepo.node.interface.SMonorepoRunParamsInterface": {
-                "id": "@coffeekraken.s-monorepo.node.interface.SMonorepoRunParamsInterface",
-                "name": "SMonorepoRunParamsInterface",
-                "type": {
-                    "types": [
-                        {
-                            "type": ".                      Class"
-                        }
-                    ],
-                    "raw": ".                      Class"
-                },
-                "platform": [
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This interface specify the parameters needed to the `sugar monorepo.run` command.",
-                "namespace": "@coffeekraken.s-monorepo.node.interface",
-                "status": "beta",
-                "interface": {
-                    "name": "SMonorepoRunParamsInterface",
-                    "description": "",
-                    "definition": {
-                        "command": {
-                            "description": "Specify the command you want to run on the monorepo",
-                            "type": "String",
-                            "required": true
-                        },
-                        "packagesGlob": {
-                            "description": "Specify some globs to search for packages relative to the monorepo root directory",
-                            "type": "String",
-                            "default": "packages/*/*"
-                        }
-                    }
-                },
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "SMonorepoRunParamsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/node/interface/SMonorepoRunParamsInterface.ts",
-                "children": {}
-            },
             "@coffeekraken.s-monorepo.node.interface.SMonorepoSettingsInterface": {
                 "id": "@coffeekraken.s-monorepo.node.interface.SMonorepoSettingsInterface",
                 "name": "SMonorepoSettingsInterface",
@@ -701,7 +700,8 @@
                             "description": "Specify the fields to upgrade when doing a monorepo.upgrade call.",
                             "type": "String[]",
                             "default": [
-                                "version"
+                                "version",
+                                "homepage"
                             ]
                         }
                     }

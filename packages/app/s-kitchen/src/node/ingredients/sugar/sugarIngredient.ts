@@ -1,7 +1,10 @@
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __copySync from '@coffeekraken/sugar/node/fs/copySync';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __prependToFileSync from '@coffeekraken/sugar/node/fs/prependToFileSync';
 import __npmInstall from '@coffeekraken/sugar/node/npm/install';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
-import __fs from 'fs';
+import __path from 'path';
 import type { ISKitchenIngredient } from '../../SKitchen';
 
 /**
@@ -23,51 +26,66 @@ const sugarIngredient: ISKitchenIngredient = {
     id: 'sugar',
     description:
         'Add the <yellow>@coffeekraken/sugar</yellow> package to your project',
-    projectTypes: ['unknown', 'sugar'],
+    projectTypes: ['unknown', 'sugar', 'next'],
     async add({ ask, log, emit, pipe, context }) {
-        const rootPath = __packageRoot(process.cwd());
+        const rootPath = __packageRoot(process.cwd()),
+            thisPackageRootPath = __packageRoot(__dirname());
 
         // installing the actual package
         emit('log', {
-            value: `<yellow>sugar</yellow> Installing the actual <cyan>@coffeekraken/sugar</cyan>...`,
+            value: `<yellow>[sugar]</yellow> Installing the actual <cyan>@coffeekraken/sugar</cyan> and <cyan>@coffeekraken/s-sugar-feature</cyan> packages...`,
         });
         try {
-            await pipe(__npmInstall('@coffeekraken/sugar'));
+            await pipe(
+                __npmInstall([
+                    '@coffeekraken/sugar',
+                    '@coffeekraken/s-sugar-feature',
+                ]),
+            );
         } catch (e) {
             emit('log', {
-                value: `<red>sugar</red> Something went wrong when installing the @coffeekraken/sugar package. Please try to install it manually.`,
+                value: `<red>sugar</red> Something went wrong when installing the @coffeekraken packages. Please try to install it manually.`,
             });
         }
 
-        // pleasant css syntax
-        if (
-            await ask({
-                type: 'confirm',
-                message: `Add the <yellow>pleasant css syntax</yellow> support`,
-                default: true,
-            })
-        ) {
-            // @TODO            Finish next integration and add "generic" one
+        switch (context.projectType.type) {
+            case 'next':
+                // creating the file
+                __copySync(
+                    __path.resolve(
+                        thisPackageRootPath,
+                        'src/data/sugar/sugar.ts',
+                    ),
+                    __path.resolve(rootPath, 'pages/_sugar.ts'),
+                );
 
-            switch (context.projectType.type) {
-                case 'next':
-                    // adding the js needed
-                    __fs.writeFileSync(
-                        `${rootPath}/pages/_sugar.ts`,
-                        [
-                            `import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';`,
-                            `if (typeof window === 'object') {`,
-                            `   __expandPleasantCssClassnamesLive();`,
-                            `}`,
-                        ].join('\n'),
-                    );
-                    // adding the≤ import in the _app.tsx file
-                    __prependToFileSync(
-                        `${rootPath}/pages/_app.tsx`,
-                        ["import './_sugar';"].join('\n'),
-                    );
-                    break;
-            }
+                // adding the≤ import in the _app.tsx file
+                __prependToFileSync(
+                    `${rootPath}/pages/_app.tsx`,
+                    ["import './_sugar';"].join('\n'),
+                );
+                break;
+            case 'generic':
+            default:
+                // creating the file
+                __copySync(
+                    __path.resolve(
+                        thisPackageRootPath,
+                        'src/data/sugar/sugar.ts',
+                    ),
+                    __path.resolve(
+                        __SSugarConfig.get('storage.src.jsDir'),
+                        'sugar.ts',
+                    ),
+                );
+
+                // adding the≤ import in the _app.tsx file
+                __prependToFileSync(
+                    `${__SSugarConfig.get('storage.src.jsDir')}/index.ts`,
+                    ["import './sugar';"].join('\n'),
+                );
+
+                break;
         }
 
         emit('log', {

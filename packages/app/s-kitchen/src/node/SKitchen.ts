@@ -25,12 +25,15 @@ import __SKitchenListParamsInterface from './interface/SKitchenListParamsInterfa
 import __SFronstackNewParamsInterface from './interface/SKitchenNewParamsInterface';
 import __SKitchenRecipeParamsInterface from './interface/SKitchenRecipeParamsInterface';
 
+import __lowerFirst from '@coffeekraken/sugar/shared/string/lowerFirst';
+import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
 import __defaultPackageJsonIngredient from './ingredients/defaultPackageJson/defaultPackageJsonIngredient';
 import __defaultPagesIngredient from './ingredients/defaultPages/defaultPagesIngredient';
 import __defaultScriptsIngredient from './ingredients/defaultScripts/defaultScriptsIngredient';
 import __faviconIngredient from './ingredients/favicon/faviconIngredient';
 import __frontspecIngredient from './ingredients/frontspec/frontspecIngredient';
 import __manifestIngredient from './ingredients/manifest/manifestIngredient';
+import __nvmrcIngredient from './ingredients/nvmrc/nvmrcIngredient';
 import __postcssIngredient from './ingredients/postcss/postcssIngredient';
 import __readmeIngredient from './ingredients/readme/readmeIngredient';
 import __sugarIngredient from './ingredients/sugar/sugarIngredient';
@@ -199,49 +202,70 @@ class SKitchen extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     new(params: ISKitchenNewParams | string) {
-        return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
-            const kitchenConfig = __SSugarConfig.get('kitchen');
-            const recipesObj = __filter(
-                kitchenConfig.recipes,
-                (key, recipeObj) => {
-                    return recipeObj.stacks?.new !== undefined;
+        return new __SPromise(
+            async ({ resolve, reject, emit, pipe }) => {
+                const kitchenConfig = __SSugarConfig.get('kitchen');
+                const recipesObj = __filter(
+                    kitchenConfig.recipes,
+                    (key, recipeObj) => {
+                        return recipeObj.stacks?.new !== undefined;
+                    },
+                );
+
+                const finalParams: ISKitchenNewParams =
+                    __SFronstackNewParamsInterface.apply(params);
+
+                const availableRecipes = Object.keys(recipesObj).map(
+                    (recipeId) => {
+                        return `- ${__upperFirst(recipeId)}${' '.repeat(
+                            10 - recipeId.length,
+                        )}: ${recipesObj[recipeId].description}`;
+                    },
+                );
+
+                let recipe = await emit('ask', {
+                    type: 'autocomplete',
+                    message: 'Please select one of the available recipes',
+                    choices: availableRecipes,
+                });
+
+                if (!recipe) process.exit();
+
+                // process recipe to get only the id
+                recipe = __lowerFirst(
+                    recipe.split(':')[0].replace(/^-\s+/, '').trim(),
+                );
+
+                // set the shared context
+                __sharedContext({
+                    recipe,
+                });
+
+                const recipeObj = recipesObj[recipe];
+
+                emit('log', {
+                    margin: {
+                        bottom: 1,
+                    },
+                    type: __SLog.TYPE_INFO,
+                    value: `Starting project creation using the "<yellow>${recipe}</yellow>" recipe...`,
+                });
+
+                resolve(
+                    pipe(
+                        this.recipe({
+                            recipe,
+                            stack: 'new',
+                        }),
+                    ),
+                );
+            },
+            {
+                metas: {
+                    id: this.constructor.name,
                 },
-            );
-
-            const finalParams: ISKitchenNewParams =
-                __SFronstackNewParamsInterface.apply(params);
-
-            const availableRecipes = Object.keys(recipesObj);
-
-            const recipe = await emit('ask', {
-                type: 'autocomplete',
-                message: 'Please select one of the available recipes',
-                choices: availableRecipes,
-            });
-
-            if (!recipe) process.exit();
-
-            // set the shared context
-            __sharedContext({
-                recipe,
-            });
-
-            const recipeObj = recipesObj[recipe];
-
-            emit('log', {
-                type: __SLog.TYPE_INFO,
-                value: `Starting project creation using the "<yellow>${recipe}</yellow>" recipe...`,
-            });
-
-            resolve(
-                pipe(
-                    this.recipe({
-                        recipe,
-                        stack: 'new',
-                    }),
-                ),
-            );
-        }).bind(this);
+            },
+        );
     }
 
     /**
@@ -519,9 +543,6 @@ class SKitchen extends __SClass {
                     // @ts-ignore
                     runInParallel: finalParams.runInParallel,
                 });
-                pipe(processManager, {
-                    overrideEmitter: true,
-                });
 
                 // loop on each actions for this recipe
                 if (stackObj.actions) {
@@ -629,17 +650,28 @@ class SKitchen extends __SClass {
                         // @TODO    integrate log filter feature
                         processManager.attachProcess(actionId, pro, {});
 
-                        const processPro = processManager.run(
-                            actionId,
-                            finalProcessManagerParams,
-                            actionObj.settings?.process ?? {},
-                        );
-                        if (!processesPromises.includes(processPro)) {
-                            processesPromises.push(processPro);
-                        }
+                        try {
+                            const processPro = processManager.run(
+                                actionId,
+                                finalProcessManagerParams,
+                                {
+                                    ...(actionObj.settings?.process ?? {}),
+                                },
+                            );
 
-                        if (!finalParams.runInParallel) {
-                            await processPro;
+                            if (!actionObj.settings?.silent) {
+                                pipe(processPro);
+                            }
+
+                            if (!processesPromises.includes(processPro)) {
+                                processesPromises.push(processPro);
+                            }
+
+                            if (!finalParams.runInParallel) {
+                                await processPro;
+                            }
+                        } catch (e) {
+                            // console.log(e);
                         }
                     }
                 }
@@ -884,6 +916,7 @@ class SKitchen extends __SClass {
                             type: __SLog.TYPE_WARNING,
                             value: `<magenta>[${ingredientObj.id}]</magenta> The "<yellow>${ingredientObj.id}</yellow>" is not compatible with your project type "<cyan>${context.projectType.type}</cyan>"`,
                         });
+                        continue;
                     }
 
                     // check if the process is a "new" installation one or
@@ -921,7 +954,7 @@ class SKitchen extends __SClass {
 
                     emit('log', {
                         type: __SLog.TYPE_INFO,
-                        value: `<yellow>[${ingredientObj.id}]</yellow> Ingredient addedd <green>successfully</green>!`,
+                        value: `<yellow>[${ingredientObj.id}]</yellow> Ingredient added <green>successfully</green>!`,
                     });
                 }
 
@@ -947,5 +980,6 @@ SKitchen.registerIngredient(__readmeIngredient);
 SKitchen.registerIngredient(__defaultPagesIngredient);
 SKitchen.registerIngredient(__defaultPackageJsonIngredient);
 SKitchen.registerIngredient(__defaultScriptsIngredient);
+SKitchen.registerIngredient(__nvmrcIngredient);
 
 export default SKitchen;

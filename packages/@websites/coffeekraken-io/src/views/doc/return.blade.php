@@ -1,4 +1,4 @@
-@if ($block->return)
+@if (isset($block->return))
     <h4 id="return-{{ $block->name }}" class="s-typo:h4 s-mbs:80 s-mbe:50">
         <i class="s-icon:return s-tc:accent"></i>&nbsp;&nbsp;Return
     </h4>
@@ -12,14 +12,14 @@
             @include('doc.partials.paramType', ['type' => $block->return->type])
         </div>
     </header>
-    @if ($block->return->default != null)
+    @if (isset($block->return->default))
         <div class="s-pi:30 s-mbs:40 s-mbe:20">
             <div class="s-typo:code">
                 {{ \Sugar\string\toString($block->return->default) }}
             </div>
         </div>
     @endif
-    @if ($block->return->type->interface)
+    @if (isset($block->return->type->interface))
         <section class="__toggle-content">
             @include('doc.interfaceDefinition', ['interface' => $block->return->type->interface])
             </section>

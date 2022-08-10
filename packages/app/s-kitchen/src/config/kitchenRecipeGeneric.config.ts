@@ -1,4 +1,5 @@
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 import __path from 'path';
 
@@ -143,19 +144,6 @@ export default function (api) {
                         params: {},
                     },
                     /**
-                     * @name            addDefaultPackageJson
-                     * @namespace       config.kitchenRecipeDefault.stacks.new.actions
-                     * @type            String
-                     *
-                     * Specify the recipe init stack addDefaultPackageJson action
-                     *
-                     * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                     */
-                    addDefaultPackageJson: {
-                        extends: 'addDefaultPackageJson',
-                    },
-                    /**
                      * @name            addSugarJson
                      * @namespace       config.kitchenRecipeDefault.stacks.new.actions
                      * @type            String
@@ -169,6 +157,35 @@ export default function (api) {
                         extends: 'addSugarJson',
                         title: 'Add the sugar.json file',
                         description: 'Add the sugar.json file',
+                        params: {},
+                    },
+                    /**
+                     * @name            addDefaultPackageJson
+                     * @namespace       config.kitchenRecipeDefault.stacks.new.actions
+                     * @type            String
+                     *
+                     * Specify the recipe init stack addDefaultPackageJson action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    addDefaultPackageJson: {
+                        extends: 'addDefaultPackageJson',
+                    },
+                    /**
+                     * @name            addNvmrc
+                     * @namespace       config.kitchenRecipeDefault.stacks.new.actions
+                     * @type            String
+                     *
+                     * Specify the recipe init stack addNvmrc action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    addNvmrc: {
+                        extends: 'addNvmrc',
+                        title: 'Add the .nvmrc file',
+                        description: 'Add the .nvmrc file',
                         params: {},
                     },
                     /**
@@ -213,6 +230,20 @@ export default function (api) {
                      */
                     addDefaultScripts: {
                         extends: 'addDefaultScripts',
+                    },
+                    /**
+                     * @name            addSugar
+                     * @namespace       config.kitchenRecipeNextJs.stacks.new.actions
+                     * @type            String
+                     *
+                     * Specify the recipe init stack addSugar action
+                     * MUST be after the addDefaultScripts to avoid overriding the script
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    addSugar: {
+                        extends: 'addSugar',
                     },
                     /**
                      * @name            addManifestJson
@@ -279,13 +310,10 @@ export default function (api) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    installDependencies: {
-                        extends: 'installDependencies',
-                        title: 'Install the dependencies',
-                        description:
-                            'Install the package dependencies (npm,composer)',
-                        params: {},
-                    },
+                    installDependencies: __deepMerge(
+                        api.config.kitchen.actions.installDependencies,
+                        {},
+                    ),
                 },
             },
             dev: {

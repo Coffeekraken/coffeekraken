@@ -74,7 +74,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-testinator",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -190,26 +189,6 @@
                             "raw": "ISStdioUi"
                         },
                         "description": "Represent the \"basic\" stdio",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
-                    "ui_websocker": {
-                        "id": "s828924c2bb98cdffca91051ea1b6dc2e28bfd1329737a425da039ad3ecf43a27",
-                        "name": "UI_WEBSOCKER",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISStdioUi"
-                                }
-                            ],
-                            "raw": "ISStdioUi"
-                        },
-                        "description": "Represent the \"websocket\" stdio",
                         "static": "true",
                         "since": "2.0.0",
                         "author": {
@@ -488,56 +467,6 @@
                     }
                 }
             },
-            "@coffeekraken.s-stdio.node.basic.SWebsocketStdio": {
-                "id": "@coffeekraken.s-stdio.node.basic.SWebsocketStdio",
-                "name": "SWebsocketStdio",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Class"
-                        }
-                    ],
-                    "raw": "Class"
-                },
-                "description": "This class represent a \"websocket\" in out interface.",
-                "namespace": "@coffeekraken.s-stdio.node.basic",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import SWebsocketStdio from '@coffeekraken/s-stdio';\nconst websocket = new SWebsocketStdio(mySource);"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "SWebsocketStdio.ts",
-                "extension": "ts",
-                "relPath": "src/node/websocket/SWebsocketStdio.ts",
-                "children": {
-                    "constructor": {
-                        "id": "sfa166a726e2f17bad10f0fa6a932646b6f0d93a5c18c2e6571524f4a269e2402",
-                        "name": "constructor",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ],
-                            "raw": "Function"
-                        },
-                        "description": "Constructor",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    }
-                }
-            },
             "@coffeekraken.s-stdio.shared.interface.SStdioSettingsInterface": {
                 "id": "@coffeekraken.s-stdio.shared.interface.SStdioSettingsInterface",
                 "name": "SStdioSettingsInterface",
@@ -639,30 +568,6 @@
                 "filename": "errorBasicStdioComponent.ts",
                 "extension": "ts",
                 "relPath": "src/node/basic/components/errorBasicStdioComponent.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-stdio.shared.websocket.components.defaultWebsocketComponent": {
-                "id": "@coffeekraken.s-stdio.shared.websocket.components.defaultWebsocketComponent",
-                "name": "defaultWebsocketComponent",
-                "type": {
-                    "types": [
-                        {
-                            "type": "ISStdioComponent"
-                        }
-                    ],
-                    "raw": "ISStdioComponent"
-                },
-                "description": "Websocket default stdio component",
-                "namespace": "@coffeekraken.s-stdio.shared.websocket.components",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "defaultWebsocketComponent.ts",
-                "extension": "ts",
-                "relPath": "src/node/websocket/components/defaultWebsocketComponent.ts",
                 "children": {}
             }
         }

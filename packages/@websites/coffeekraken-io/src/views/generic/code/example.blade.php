@@ -1,4 +1,4 @@
-<s-code-example more-action="{{ $moreAction }}" @if ($lines)
+<s-code-example more-action="{{ $moreAction }}" @if (isset($lines))
     lines="{{ $lines }}"
     @endif
     >

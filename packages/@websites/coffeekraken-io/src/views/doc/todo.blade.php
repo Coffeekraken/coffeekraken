@@ -1,4 +1,4 @@
-@if ($block->todo)
+@if (isset($block->todo))
     <h4 id="todo-{{ $block->name }}" class="s-typo:h4 s-mbes:80 s-mb:50">
         <i class="s-icon:tasks s-tc:accent"></i>&nbsp;&nbsp;Todo
     </h4>

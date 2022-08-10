@@ -98,25 +98,6 @@ class SProcessManager extends __SEventEmitter {
                 settings ?? {},
             ),
         );
-
-        // __onProcessExit(() => {
-        //     return new Promise((resolve) => {
-        //         setTimeout(() => {
-        //             resolve();
-        //         }, 2000);
-        //     });
-        // });
-
-        // if (this.settings.stdio) {
-        //     (async () => {
-        //         this._stdio = __SStdio.existingOrNew(
-        //             'default',
-        //             this,
-        //             this.settings.stdio,
-        //             this.settings.stdioSettings,
-        //         );
-        //     })();
-        // }
     }
 
     /**
@@ -188,15 +169,15 @@ class SProcessManager extends __SEventEmitter {
             return this._queuePromise;
         }
 
-        this._queuePromise = new Promise((resolve) => {
+        this._queuePromise = new __SPromise(({ resolve, pipe }) => {
             clearTimeout(this._parallelRunTimeout);
             this._parallelRunTimeout = setTimeout(() => {
-                __SPromise
-                    .queue(this._processesQueue, (processId, promise) => {})
-                    .then((results) => {
-                        resolve(results);
-                        this._queuePromise = undefined;
-                    });
+                const queuePromise = __SPromise.queue(this._processesQueue);
+                queuePromise.then((results) => {
+                    resolve(results);
+                    this._queuePromise = undefined;
+                });
+                pipe(queuePromise);
             });
         });
         return this._queuePromise;
@@ -248,13 +229,6 @@ class SProcessManager extends __SEventEmitter {
                 paramsOrStringArgs,
                 settings,
             );
-
-            // this.emit('log', {
-            //     type: __SLog.TYPE_INFO,
-            //     value: `<bgYellow><black> Starting process ${processId} </black></bgYellow><yellow>${'-'.repeat(
-            //         process.stdout.columns - 19 - processId.length,
-            //     )}</yellow>`,
-            // });
 
             this.pipe(promise, {
                 overrideEmitter: true,

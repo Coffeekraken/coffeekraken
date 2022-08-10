@@ -21,8 +21,6 @@ import __getRoot from './utils/getRoot';
 import __compressVarName from '@coffeekraken/sugar/shared/css/compressVarName';
 import __CssVars from './CssVars';
 
-let _mixinsPaths;
-
 const mixinsStack = {},
     functionsStack = {};
 let pluginHash = __folderHash(__path.resolve(__dirname(), '../../..'), {
@@ -31,8 +29,7 @@ let pluginHash = __folderHash(__path.resolve(__dirname(), '../../..'), {
         },
     }),
     rootDir;
-let loadedPromise,
-    alreadyLoaded = false;
+let loadedPromise;
 
 const _cacheObjById = {};
 
@@ -57,7 +54,6 @@ export function getMixinsList() {
 export function getMixinsOrFunctionsList(what: 'mixins' | 'functions') {
     // process some tokens
     const folderPath = __replaceTokens(`${__dirname()}/${what}`);
-
     const paths = __glob
         .sync(`${folderPath}/**/*.js`, {
             cwd: '',
@@ -89,36 +85,53 @@ export function getMixinsOrFunctionsList(what: 'mixins' | 'functions') {
 const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
     settings = __deepMerge(
         {
-            excludeByTypes: __SSugarConfig.get(
-                'postcssSugarPlugin.excludeByTypes',
-            ),
-            excludeCommentByTypes: __SSugarConfig.get(
-                'postcssSugarPlugin.excludeCommentByTypes',
-            ),
-            excludeCodeByTypes: __SSugarConfig.get(
-                'postcssSugarPlugin.excludeCodeByTypes',
-            ),
+            excludeByTypes: [],
+            excludeCommentByTypes: [],
+            excludeCodeByTypes: [],
             target: 'production',
             inlineImport: true,
-            cache: __SSugarConfig.get('postcssSugarPlugin.cache'),
+            cache: false,
         },
         settings,
     );
 
-    // remove cache if not for vite target
-    if (settings.cache === undefined && settings.target !== 'vite') {
-        settings.cache = false;
-    }
-    settings.cache = false;
+    async function _loadConfig() {
+        await __SSugarConfig.load();
+        settings = __deepMerge(
+            {
+                excludeByTypes: __SSugarConfig.get(
+                    'postcssSugarPlugin.excludeByTypes',
+                ),
+                excludeCommentByTypes: __SSugarConfig.get(
+                    'postcssSugarPlugin.excludeCommentByTypes',
+                ),
+                excludeCodeByTypes: __SSugarConfig.get(
+                    'postcssSugarPlugin.excludeCodeByTypes',
+                ),
+                target: 'production',
+                inlineImport: true,
+                cache: __SSugarConfig.get('postcssSugarPlugin.cache'),
+            },
+            settings,
+        );
 
-    if (settings.excludeByTypes?.length) {
-        __CssVars.excludeByTypes(settings.excludeByTypes);
-    }
-    if (settings.excludeCommentByTypes?.length) {
-        __CssVars.excludeCommentByTypes(settings.excludeCommentByTypes);
-    }
-    if (settings.excludeCodeByTypes?.length) {
-        __CssVars.excludeCodeByTypes(settings.excludeCodeByTypes);
+        // remove cache if not for vite target
+        if (settings.cache === undefined && settings.target !== 'vite') {
+            settings.cache = false;
+        }
+        settings.cache = false;
+
+        if (settings.excludeByTypes?.length) {
+            __CssVars.excludeByTypes(settings.excludeByTypes);
+        }
+        if (settings.excludeCommentByTypes?.length) {
+            __CssVars.excludeCommentByTypes(settings.excludeCommentByTypes);
+        }
+        if (settings.excludeCodeByTypes?.length) {
+            __CssVars.excludeCodeByTypes(settings.excludeCodeByTypes);
+        }
+
+        return true;
     }
 
     function contentToArray(content) {
@@ -265,9 +278,11 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
 
         for (let i = 0; i < paths.length; i++) {
             const path = paths[i];
-            const { default: fn, interface: int, dependencies } = await import(
-                path
-            );
+            const {
+                default: fn,
+                interface: int,
+                dependencies,
+            } = await import(path);
             if (type === 'mixins') {
                 mixinsStack[
                     `${path
@@ -423,12 +438,15 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
     function _load() {
         if (loadedPromise) return loadedPromise;
         loadedPromise = new Promise(async (resolve, reject) => {
-            // sugar config
-            await __SSugarConfig.load();
+            // load config
+            await _loadConfig();
 
             // func sugar json
             const sugarJsonInstance = new __SSugarJson();
             const sugarJson = await sugarJsonInstance.read();
+
+            // sugar config
+            // await __SSugarConfig.load();
 
             for (let i = 0; i < Object.keys(sugarJson).length; i++) {
                 const packageName = Object.keys(sugarJson)[i];

@@ -1,4 +1,3 @@
-import __SCache from '@coffeekraken/s-cache';
 import __SFile from '@coffeekraken/s-file';
 import __SPromise from '@coffeekraken/s-promise';
 import __fs from 'fs';
@@ -83,7 +82,7 @@ export default function dependencyTree(
         }
 
         // init cache
-        const cache = new __SCache('dependency-tree');
+        // const cache = new __SCache('dependency-tree');
 
         // integrity
         const integrity = __md5.encrypt({
@@ -99,7 +98,8 @@ export default function dependencyTree(
             });
 
             // cache id
-            const cachedValue = await cache.get(filePath);
+            // const cachedValue = await cache.get(filePath);
+            const cachedValue;
             if (cachedValue) {
                 // check integrity
                 if (cachedValue.integrity === integrity) {

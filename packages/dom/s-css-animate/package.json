@@ -1,8 +1,8 @@
 {
     "private": true,
     "name": "@coffeekraken/s-css-animation",
-    "version": "2.0.0-alpha.13",
-    "description": "",
+    "version": "2.0.0-alpha.17",
+    "description": "Simple class that let you target an HTMLElement in your DOM and control his applied CSS animation using a simple api.",
     "type": "module",
     "scripts": {
         "dev": "sugar frontstack dev",
@@ -33,5 +33,6 @@
             "require": "./dist/pkg/cjs/js/*.js",
             "import": "./dist/pkg/esm/js/*.js"
         }
-    }
+    },
+    "homepage": "https://coffeekraken.io"
 }

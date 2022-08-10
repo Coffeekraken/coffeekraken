@@ -1,16 +1,16 @@
 {
     "name": "@coffeekraken/s-frontend-checker",
-    "version": "2.0.0-alpha.13",
-    "description": "",
+    "version": "2.0.0-alpha.17",
+    "description": "Powerful class that let you specify some (built-in) rules that your DOM has to respect and executing a check with these rules to get what is ok and what's not...",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.13",
-        "@coffeekraken/s-file": "^2.0.0-alpha.13",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.13",
-        "@coffeekraken/s-promise": "^2.0.0-alpha.13",
-        "@coffeekraken/sugar": "^2.0.0-alpha.13"
+        "@coffeekraken/s-class": "^2.0.0-alpha.17",
+        "@coffeekraken/s-file": "^2.0.0-alpha.17",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.17",
+        "@coffeekraken/s-promise": "^2.0.0-alpha.17",
+        "@coffeekraken/sugar": "^2.0.0-alpha.17"
     },
     "main": "dist/pkg/cjs/js/exports.js",
     "module": "dist/pkg/esm/js/exports.js",
@@ -31,5 +31,6 @@
             "require": "./dist/pkg/cjs/js/*.js",
             "import": "./dist/pkg/esm/js/*.js"
         }
-    }
+    },
+    "homepage": "https://coffeekraken.io"
 }

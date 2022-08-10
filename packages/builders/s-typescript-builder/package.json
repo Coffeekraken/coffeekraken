@@ -1,21 +1,21 @@
 {
     "name": "@coffeekraken/s-typescript-builder",
-    "version": "2.0.0-alpha.13",
-    "description": "",
+    "version": "2.0.0-alpha.17",
+    "description": "Typescript builder that let you transpile your .ts files with ease. It allows to generate multiple formats (esm,cjs) at once if needed.",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-builder": "^2.0.0-alpha.13",
-        "@coffeekraken/s-class": "^2.0.0-alpha.13",
-        "@coffeekraken/s-file": "^2.0.0-alpha.13",
-        "@coffeekraken/s-glob": "^2.0.0-alpha.13",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.13",
-        "@coffeekraken/s-log": "^2.0.0-alpha.13",
-        "@coffeekraken/s-monorepo": "^2.0.0-alpha.13",
-        "@coffeekraken/s-promise": "^2.0.0-alpha.13",
-        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.13",
-        "@coffeekraken/sugar": "^2.0.0-alpha.13",
+        "@coffeekraken/s-builder": "^2.0.0-alpha.17",
+        "@coffeekraken/s-class": "^2.0.0-alpha.17",
+        "@coffeekraken/s-file": "^2.0.0-alpha.17",
+        "@coffeekraken/s-glob": "^2.0.0-alpha.17",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.17",
+        "@coffeekraken/s-log": "^2.0.0-alpha.17",
+        "@coffeekraken/s-monorepo": "^2.0.0-alpha.17",
+        "@coffeekraken/s-promise": "^2.0.0-alpha.17",
+        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.17",
+        "@coffeekraken/sugar": "^2.0.0-alpha.17",
         "chokidar": "^3.5.3",
         "typescript": "^4.7.4"
     },
@@ -38,5 +38,6 @@
             "require": "./dist/pkg/cjs/js/*.js",
             "import": "./dist/pkg/esm/js/*.js"
         }
-    }
+    },
+    "homepage": "https://coffeekraken.io"
 }

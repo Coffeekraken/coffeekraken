@@ -1,7 +1,8 @@
 {
     "name": "coffeekraken/s-view-renderer-engine-twig",
-    "version": "2.0.0-alpha.13",
+    "version": "2.0.0-alpha.17",
     "require": {
         "twig/twig": "^3.0"
-    }
+    },
+    "homepage": "https://coffeekraken.io"
 }

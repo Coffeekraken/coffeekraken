@@ -222,21 +222,21 @@ sugar build'
                         </a>
                     </li>
                     <li>
-                        <a href="/doc/recipes/built-in/litElement" title="Coffeekraken LitElement recipe">
-                            <div class="icon-card s-color:complementary" style="--image: url(https://media.giphy.com/media/hPTZgtzfRIB5Nfb5rL/giphy-downsized-large.gif);">
+                        <a href="/doc/recipes/built-in/nextjs" title="Coffeekraken NextJs recipe">
+                            <div class="icon-card s-color:complementary" style="--image: url(https://media.giphy.com/media/vfyN4sCz1QBR6/giphy.gif);">
                                 <div class="icon-card__content">
-                                    <i class="s-icon:logo-lit"></i>
-                                    <p class="s-p">LitElement</p>
+                                    <i class="s-icon:logo-nextjs"></i>
+                                    <p class="s-p">NextJS</p>
                                 </div>
                             </div>
                         </a>
                     </li>
                     <li>
-                        <a href="/doc/recipes/built-in/nextjs" title="Coffeekraken NextJs recipe">
-                            <div class="icon-card s-color:accent" style="--image: url(https://media.giphy.com/media/vfyN4sCz1QBR6/giphy.gif);">
+                        <a href="https://discord.com/channels/940362961682333767/940362962223378494" target="_blank" title="Coffeekraken NextJs recipe">
+                            <div class="icon-card s-color:accent" style="--image: url(https://media0.giphy.com/media/3ohs7SYIm3yiUbL0yc/giphy.gif?cid=ecf05e476vhwqgevpq5exoat1ejppi1qk9xp4jgig9j38wck&rid=giphy.gif&ct=g);">
                                 <div class="icon-card__content">
-                                    <i class="s-icon:logo-nextjs"></i>
-                                    <p class="s-p">NextJS</p>
+                                    <i class="s-icon:misc-ring"></i>
+                                    <p class="s-p">Propose</p>
                                 </div>
                             </div>
                         </a>

@@ -2,7 +2,7 @@
     "config": {
         "folders": [
             {
-                "path": "./dist/pkg/esm/config"
+                "path": "./dist/pkg/%moduleSystem/config"
             }
         ]
     },

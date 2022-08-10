@@ -12,10 +12,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const s_sugar_config_1 = __importDefault(require("@coffeekraken/s-sugar-config"));
+const copySync_1 = __importDefault(require("@coffeekraken/sugar/node/fs/copySync"));
+const dirname_1 = __importDefault(require("@coffeekraken/sugar/node/fs/dirname"));
 const prependToFileSync_1 = __importDefault(require("@coffeekraken/sugar/node/fs/prependToFileSync"));
 const install_1 = __importDefault(require("@coffeekraken/sugar/node/npm/install"));
 const packageRoot_1 = __importDefault(require("@coffeekraken/sugar/node/path/packageRoot"));
-const fs_1 = __importDefault(require("fs"));
+const path_1 = __importDefault(require("path"));
 /**
  * @name        sugarIngredient
  * @namespace   node.ingredients.manifest
@@ -34,42 +37,39 @@ const fs_1 = __importDefault(require("fs"));
 const sugarIngredient = {
     id: 'sugar',
     description: 'Add the <yellow>@coffeekraken/sugar</yellow> package to your project',
-    projectTypes: ['unknown', 'sugar'],
+    projectTypes: ['unknown', 'sugar', 'next'],
     add({ ask, log, emit, pipe, context }) {
         return __awaiter(this, void 0, void 0, function* () {
-            const rootPath = (0, packageRoot_1.default)(process.cwd());
+            const rootPath = (0, packageRoot_1.default)(process.cwd()), thisPackageRootPath = (0, packageRoot_1.default)((0, dirname_1.default)());
             // installing the actual package
             emit('log', {
-                value: `<yellow>sugar</yellow> Installing the actual <cyan>@coffeekraken/sugar</cyan>...`,
+                value: `<yellow>[sugar]</yellow> Installing the actual <cyan>@coffeekraken/sugar</cyan> and <cyan>@coffeekraken/s-sugar-feature</cyan> packages...`,
             });
             try {
-                yield pipe((0, install_1.default)('@coffeekraken/sugar'));
+                yield pipe((0, install_1.default)([
+                    '@coffeekraken/sugar',
+                    '@coffeekraken/s-sugar-feature',
+                ]));
             }
             catch (e) {
                 emit('log', {
-                    value: `<red>sugar</red> Something went wrong when installing the @coffeekraken/sugar package. Please try to install it manually.`,
+                    value: `<red>sugar</red> Something went wrong when installing the @coffeekraken packages. Please try to install it manually.`,
                 });
             }
-            // pleasant css syntax
-            if (yield ask({
-                type: 'confirm',
-                message: `Add the <yellow>pleasant css syntax</yellow> support`,
-                default: true,
-            })) {
-                // @TODO            Finish next integration and add "generic" one
-                switch (context.projectType.type) {
-                    case 'next':
-                        // adding the js needed
-                        fs_1.default.writeFileSync(`${rootPath}/pages/_sugar.ts`, [
-                            `import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';`,
-                            `if (typeof window === 'object') {`,
-                            `   __expandPleasantCssClassnamesLive();`,
-                            `}`,
-                        ].join('\n'));
-                        // adding the≤ import in the _app.tsx file
-                        (0, prependToFileSync_1.default)(`${rootPath}/pages/_app.tsx`, ["import './_sugar';"].join('\n'));
-                        break;
-                }
+            switch (context.projectType.type) {
+                case 'next':
+                    // creating the file
+                    (0, copySync_1.default)(path_1.default.resolve(thisPackageRootPath, 'src/data/sugar/sugar.ts'), path_1.default.resolve(rootPath, 'pages/_sugar.ts'));
+                    // adding the≤ import in the _app.tsx file
+                    (0, prependToFileSync_1.default)(`${rootPath}/pages/_app.tsx`, ["import './_sugar';"].join('\n'));
+                    break;
+                case 'generic':
+                default:
+                    // creating the file
+                    (0, copySync_1.default)(path_1.default.resolve(thisPackageRootPath, 'src/data/sugar/sugar.ts'), path_1.default.resolve(s_sugar_config_1.default.get('storage.src.jsDir'), 'sugar.ts'));
+                    // adding the≤ import in the _app.tsx file
+                    (0, prependToFileSync_1.default)(`${s_sugar_config_1.default.get('storage.src.jsDir')}/index.ts`, ["import './sugar';"].join('\n'));
+                    break;
             }
             emit('log', {
                 value: `<yellow>[sugar]</yellow> Added <green>successfully</green> in your project. Have fun!`,
@@ -79,4 +79,4 @@ const sugarIngredient = {
     },
 };
 exports.default = sugarIngredient;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsc0dBQWdGO0FBQ2hGLG1GQUFnRTtBQUNoRSw0RkFBc0U7QUFDdEUsNENBQXNCO0FBR3RCOzs7Ozs7Ozs7Ozs7OztHQWNHO0FBQ0gsTUFBTSxlQUFlLEdBQXdCO0lBQ3pDLEVBQUUsRUFBRSxPQUFPO0lBQ1gsV0FBVyxFQUNQLHNFQUFzRTtJQUMxRSxZQUFZLEVBQUUsQ0FBQyxTQUFTLEVBQUUsT0FBTyxDQUFDO0lBQzVCLEdBQUcsQ0FBQyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsSUFBSSxFQUFFLElBQUksRUFBRSxPQUFPLEVBQUU7O1lBQ3ZDLE1BQU0sUUFBUSxHQUFHLElBQUEscUJBQWEsRUFBQyxPQUFPLENBQUMsR0FBRyxFQUFFLENBQUMsQ0FBQztZQUU5QyxnQ0FBZ0M7WUFDaEMsSUFBSSxDQUFDLEtBQUssRUFBRTtnQkFDUixLQUFLLEVBQUUsa0ZBQWtGO2FBQzVGLENBQUMsQ0FBQztZQUNILElBQUk7Z0JBQ0EsTUFBTSxJQUFJLENBQUMsSUFBQSxpQkFBWSxFQUFDLHFCQUFxQixDQUFDLENBQUMsQ0FBQzthQUNuRDtZQUFDLE9BQU8sQ0FBQyxFQUFFO2dCQUNSLElBQUksQ0FBQyxLQUFLLEVBQUU7b0JBQ1IsS0FBSyxFQUFFLDJIQUEySDtpQkFDckksQ0FBQyxDQUFDO2FBQ047WUFFRCxzQkFBc0I7WUFDdEIsSUFDSSxNQUFNLEdBQUcsQ0FBQztnQkFDTixJQUFJLEVBQUUsU0FBUztnQkFDZixPQUFPLEVBQUUsc0RBQXNEO2dCQUMvRCxPQUFPLEVBQUUsSUFBSTthQUNoQixDQUFDLEVBQ0o7Z0JBQ0UsaUVBQWlFO2dCQUVqRSxRQUFRLE9BQU8sQ0FBQyxXQUFXLENBQUMsSUFBSSxFQUFFO29CQUM5QixLQUFLLE1BQU07d0JBQ1AsdUJBQXVCO3dCQUN2QixZQUFJLENBQUMsYUFBYSxDQUNkLEdBQUcsUUFBUSxrQkFBa0IsRUFDN0I7NEJBQ0ksOEdBQThHOzRCQUM5RyxtQ0FBbUM7NEJBQ25DLHlDQUF5Qzs0QkFDekMsR0FBRzt5QkFDTixDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FDZixDQUFDO3dCQUNGLDBDQUEwQzt3QkFDMUMsSUFBQSwyQkFBbUIsRUFDZixHQUFHLFFBQVEsaUJBQWlCLEVBQzVCLENBQUMsb0JBQW9CLENBQUMsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQ3BDLENBQUM7d0JBQ0YsTUFBTTtpQkFDYjthQUNKO1lBRUQsSUFBSSxDQUFDLEtBQUssRUFBRTtnQkFDUixLQUFLLEVBQUUsdUZBQXVGO2FBQ2pHLENBQUMsQ0FBQztZQUVILE9BQU8sSUFBSSxDQUFDO1FBQ2hCLENBQUM7S0FBQTtDQUNKLENBQUM7QUFDRixrQkFBZSxlQUFlLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsa0ZBQTBEO0FBQzFELG9GQUE4RDtBQUM5RCxrRkFBNEQ7QUFDNUQsc0dBQWdGO0FBQ2hGLG1GQUFnRTtBQUNoRSw0RkFBc0U7QUFDdEUsZ0RBQTBCO0FBRzFCOzs7Ozs7Ozs7Ozs7OztHQWNHO0FBQ0gsTUFBTSxlQUFlLEdBQXdCO0lBQ3pDLEVBQUUsRUFBRSxPQUFPO0lBQ1gsV0FBVyxFQUNQLHNFQUFzRTtJQUMxRSxZQUFZLEVBQUUsQ0FBQyxTQUFTLEVBQUUsT0FBTyxFQUFFLE1BQU0sQ0FBQztJQUNwQyxHQUFHLENBQUMsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLElBQUksRUFBRSxJQUFJLEVBQUUsT0FBTyxFQUFFOztZQUN2QyxNQUFNLFFBQVEsR0FBRyxJQUFBLHFCQUFhLEVBQUMsT0FBTyxDQUFDLEdBQUcsRUFBRSxDQUFDLEVBQ3pDLG1CQUFtQixHQUFHLElBQUEscUJBQWEsRUFBQyxJQUFBLGlCQUFTLEdBQUUsQ0FBQyxDQUFDO1lBRXJELGdDQUFnQztZQUNoQyxJQUFJLENBQUMsS0FBSyxFQUFFO2dCQUNSLEtBQUssRUFBRSw0SUFBNEk7YUFDdEosQ0FBQyxDQUFDO1lBQ0gsSUFBSTtnQkFDQSxNQUFNLElBQUksQ0FDTixJQUFBLGlCQUFZLEVBQUM7b0JBQ1QscUJBQXFCO29CQUNyQiwrQkFBK0I7aUJBQ2xDLENBQUMsQ0FDTCxDQUFDO2FBQ0w7WUFBQyxPQUFPLENBQUMsRUFBRTtnQkFDUixJQUFJLENBQUMsS0FBSyxFQUFFO29CQUNSLEtBQUssRUFBRSxzSEFBc0g7aUJBQ2hJLENBQUMsQ0FBQzthQUNOO1lBRUQsUUFBUSxPQUFPLENBQUMsV0FBVyxDQUFDLElBQUksRUFBRTtnQkFDOUIsS0FBSyxNQUFNO29CQUNQLG9CQUFvQjtvQkFDcEIsSUFBQSxrQkFBVSxFQUNOLGNBQU0sQ0FBQyxPQUFPLENBQ1YsbUJBQW1CLEVBQ25CLHlCQUF5QixDQUM1QixFQUNELGNBQU0sQ0FBQyxPQUFPLENBQUMsUUFBUSxFQUFFLGlCQUFpQixDQUFDLENBQzlDLENBQUM7b0JBRUYsMENBQTBDO29CQUMxQyxJQUFBLDJCQUFtQixFQUNmLEdBQUcsUUFBUSxpQkFBaUIsRUFDNUIsQ0FBQyxvQkFBb0IsQ0FBQyxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FDcEMsQ0FBQztvQkFDRixNQUFNO2dCQUNWLEtBQUssU0FBUyxDQUFDO2dCQUNmO29CQUNJLG9CQUFvQjtvQkFDcEIsSUFBQSxrQkFBVSxFQUNOLGNBQU0sQ0FBQyxPQUFPLENBQ1YsbUJBQW1CLEVBQ25CLHlCQUF5QixDQUM1QixFQUNELGNBQU0sQ0FBQyxPQUFPLENBQ1Ysd0JBQWMsQ0FBQyxHQUFHLENBQUMsbUJBQW1CLENBQUMsRUFDdkMsVUFBVSxDQUNiLENBQ0osQ0FBQztvQkFFRiwwQ0FBMEM7b0JBQzFDLElBQUEsMkJBQW1CLEVBQ2YsR0FBRyx3QkFBYyxDQUFDLEdBQUcsQ0FBQyxtQkFBbUIsQ0FBQyxXQUFXLEVBQ3JELENBQUMsbUJBQW1CLENBQUMsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQ25DLENBQUM7b0JBRUYsTUFBTTthQUNiO1lBRUQsSUFBSSxDQUFDLEtBQUssRUFBRTtnQkFDUixLQUFLLEVBQUUsdUZBQXVGO2FBQ2pHLENBQUMsQ0FBQztZQUVILE9BQU8sSUFBSSxDQUFDO1FBQ2hCLENBQUM7S0FBQTtDQUNKLENBQUM7QUFDRixrQkFBZSxlQUFlLENBQUMifQ==

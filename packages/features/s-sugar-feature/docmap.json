@@ -74,7 +74,6 @@
             "@coffeekraken/s-sugar-config",
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-testinator",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -270,67 +269,6 @@
                 "filename": "SSugarFeatureInterface.ts",
                 "extension": "ts",
                 "relPath": "src/js/interface/SSugarFeatureInterface.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-sugar-feature.sugar.css.font.default": {
-                "id": "@coffeekraken.s-sugar-feature.sugar.css.font.default",
-                "name": "default",
-                "type": {
-                    "types": [
-                        {
-                            "type": "CssFontFace"
-                        }
-                    ],
-                    "raw": "CssFontFace"
-                },
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This declare the @font-face for the \"<yellow>default</yellow> font family\"",
-                "namespace": "@coffeekraken.s-sugar-feature.sugar.css.font",
-                "status": "beta",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css"
-            },
-            "@coffeekraken.s-sugar-feature.sugar.css.font.title": {
-                "id": "@coffeekraken.s-sugar-feature.sugar.css.font.title",
-                "name": "title",
-                "type": {
-                    "types": [
-                        {
-                            "type": "CssFontFace"
-                        }
-                    ],
-                    "raw": "CssFontFace"
-                },
-                "platform": [
-                    {
-                        "name": "css",
-                        "description": ""
-                    }
-                ],
-                "description": "This declare the @font-face for the \"<yellow>title</yellow> font family\"",
-                "namespace": "@coffeekraken.s-sugar-feature.sugar.css.font",
-                "status": "beta",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "index.css",
-                "extension": "css",
-                "relPath": "dist/css/index.css",
                 "children": {}
             }
         }

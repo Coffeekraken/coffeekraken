@@ -1,4 +1,4 @@
-@if ($block->event)
+@if (isset($block->event))
     <h4 id="events-{{ $block->name }}" class="s-typo:h4 s-mb:50">
         <i class="s-icon:misc-bubbles s-tc:accent"></i>&nbsp;&nbsp;Events
     </h4>

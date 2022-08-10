@@ -486,22 +486,6 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
             ? paramsOrStringArgs
             : {};
 
-        // if (this.paramsInterface) {
-        //     paramsObj = this.paramsInterface.apply(paramsOrStringArgs, {
-        //         baseObj: this.initialParams ?? {},
-        //     });
-        // }
-
-        // check if asking for the help
-        // if (paramsObj.help === true && this.paramsInterface !== undefined) {
-        //     const helpString = this.paramsInterface.render();
-        //     this.emit('log', {
-        //         group: `s-process-${this.metas.id}`,
-        //         value: helpString,
-        //     });
-        //     return;
-        // }
-
         // save current process params
         this._params = Object.assign(
             {},
@@ -536,6 +520,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
 
             // run child process
             this._processPromise = __spawn(commandToRun, [], {
+                silent: processSettings.silent,
                 ...(processSettings.spawnSettings || {}),
             });
         } else {
@@ -546,6 +531,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
             );
 
             if (
+                !processSettings.silent &&
                 __isChildProcess() &&
                 this._processPromise &&
                 this._processPromise.pipeTo
@@ -562,7 +548,9 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
             //     console.log('D', data, metas);
             // });
 
-            this.pipe(<ISEventEmitter>(<unknown>this._processPromise), {});
+            if (!processSettings.silent) {
+                this.pipe(<ISEventEmitter>(<unknown>this._processPromise), {});
+            }
 
             // listen for "data" and "log" events
             this._processPromise &&

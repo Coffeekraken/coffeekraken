@@ -49,14 +49,14 @@ export default function (api) {
              * @name        fields
              * @namespace   config.monorepo.upgrade
              * @type       string[]
-             * @default     ['version']
+             * @default     ['version','homepage']
              *
              * Specify some fields to upgrade in each packages files
              *
              * @since       2.0.0
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            fields: ['version'],
+            fields: ['version', 'homepage'],
         },
     };
 }

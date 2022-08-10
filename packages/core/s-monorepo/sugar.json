@@ -12,11 +12,11 @@
             "description": "Mono repository related actions",
             "defaultAction": "list",
             "actions": {
-                "run": {
+                "exec": {
                     "scope": "package",
-                    "description": "Run a command in all the packages of the monorepo",
-                    "interface": "./dist/pkg/esm/node/interface/SMonorepoRunParamsInterface.js",
-                    "process": "./dist/pkg/esm/cli/run.cli.js"
+                    "description": "Exec a command in all the packages of the monorepo",
+                    "interface": "./dist/pkg/esm/node/interface/SMonorepoExecParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/exec.cli.js"
                 },
                 "list": {
                     "scope": "package",

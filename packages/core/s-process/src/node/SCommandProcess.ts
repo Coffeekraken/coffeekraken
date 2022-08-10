@@ -77,9 +77,8 @@ export default class SCommandProcess extends __SProcess {
         >__deepMerge(this.settings, settings ?? {});
 
         // @ts-ignore
-        const finalParams: ISCommandProcessParams = __SCommandProcessInterface.apply(
-            params,
-        );
+        const finalParams: ISCommandProcessParams =
+            __SCommandProcessInterface.apply(params);
 
         return __spawn(finalParams.command, [], {
             returnValueOnly: true,

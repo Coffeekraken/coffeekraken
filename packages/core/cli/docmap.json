@@ -74,7 +74,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-testinator",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -110,32 +109,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "_save.txt",
-                "extension": "txt",
-                "relPath": "src/cli/_save.txt",
+                "filename": "sugar.cli.ts",
+                "extension": "cli",
+                "relPath": "src/cli/sugar.cli.ts",
                 "children": {
-                    "command": {
-                        "id": "s5b149a76592aad0818663b90731d0b9d7fd984a4048f0c587969069028644cbc",
-                        "name": "command",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "String"
-                                }
-                            ],
-                            "raw": "String"
-                        },
-                        "description": "Get the correct sugar or sugard commant depending on the environment in which the cli is running",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com"
-                        }
-                    },
-                    "replacetokens": {
-                        "id": "s4b45b4d201007578dd946447866057773083f8dbc88207dd3b38bf98b35dec75",
-                        "name": "replaceTokens",
+                    "init": {
+                        "id": "se546b1e0e31feb9e832736b97dd394aad8f99847265de59f3e136e7ca471d7f8",
+                        "name": "init",
                         "type": {
                             "types": [
                                 {
@@ -144,45 +124,8 @@
                             ],
                             "raw": "Function"
                         },
-                        "description": "Replace tokens in a passed command like:\n- %sugar: Replaced by either \"sugar\" or \"sugard\" depending on the environment\n- Support all the tokens supported by the \"replaceTokens\" function of the sugar package",
+                        "description": "Init cli",
                         "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com"
-                        }
-                    },
-                    "replacesugarcommandfordev": {
-                        "id": "s5b1a5c1d1361f7cdfffd959a0db8d642e8b8cd8e0ee6694a3ed26b3da9f7e65a",
-                        "name": "replaceSugarCommandForDev",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ],
-                            "raw": "Function"
-                        },
-                        "description": "Replace the starting \"sugar\" by \"sugard\" in the command line when needed",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com"
-                        }
-                    },
-                    "constructor": {
-                        "id": "s5d9a55a8985e7967210a2c844fa002e4aa3eb1d74dca4689797842fd7e6e230d",
-                        "name": "constructor",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ],
-                            "raw": "Function"
-                        },
-                        "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",

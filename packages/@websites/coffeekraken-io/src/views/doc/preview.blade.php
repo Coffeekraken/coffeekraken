@@ -1,4 +1,4 @@
-@if ($block->example)
+@if (isset($block->example))
 
     @php
         $htmlExamples = array_filter($block->example, function ($item) {
@@ -17,10 +17,10 @@
         
         <div class="s-format:none s-rhythm:none preview s-mbe:50">
             @foreach ($block->example as $example)
-                @if ($example->title)
+                @if (isset($example->title))
                     <h4 class="s-typo:h3 s-tc:accent s-mb:50">{!! ucfirst($example->title) !!}</h4>
                 @endif
-                @if ($example->description)
+                @if (isset($example->description))
                     <p class="s-typo:p s-format:text">{!! \Sugar\markdown\toHtml($example->description) !!}</p>
                 @endif
                 @if ($example->language == 'html')

@@ -24,6 +24,12 @@
                     <a href="https://github.com/Coffeekraken/coffeekraken" target="_blank" class="s-btn s-color:accent">
                         <i class="s-icon:github"></i> Join us on Github
                     </a>
+                    {{-- <a href="https://www.patreon.com/coffeekraken" target="_blank" class="s-btn s-color:error">
+                        <i class="s-icon:patreon"></i> Support us on Parteon
+                    </a> --}}
+
+
+                    
                 </div>
                 <div class="__illustration @mobile s-mbs:50">
                     {{-- <img class="__illustration" src="/dist/img/illustrations/opensource.png"

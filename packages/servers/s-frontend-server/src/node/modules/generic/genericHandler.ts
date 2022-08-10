@@ -126,7 +126,7 @@ export default function genericHandler({
 
         let layoutPath = pageConfig.layout ?? 'layouts.main';
 
-        const layoutData = Object.assign({}, res.templateData ?? {});
+        const layoutData = Object.assign(res.templateData ?? {});
         delete layoutData.shared;
 
         let finalResult;

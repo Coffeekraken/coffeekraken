@@ -22,5 +22,9 @@ namespace Sugar\path;
  */
 function extension($path)
 {
-    return pathinfo($path)['extension'];
+    $infos = pathinfo($path);
+    if (isset($infos['extension'])) {
+        return $infos['extension'];
+    }
+    return null;
 }

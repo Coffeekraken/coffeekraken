@@ -1,4 +1,7 @@
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
+
+let newFolderName;
 
 export default function (api) {
     if (api.env.platform !== 'node') return;
@@ -87,12 +90,19 @@ export default function (api) {
                             title: 'Create the app',
                             description:
                                 'Create the app using the create-next-app utility',
-                            command: `npx create-next-app next-js --typescript`,
+                            get command() {
+                                newFolderName = __uniqid();
+                                return `npx create-next-app ${newFolderName} --typescript`;
+                            },
                             after() {
-                                process.chdir(`${process.cwd()}/next-js`);
+                                process.chdir(
+                                    `${process.cwd()}/${newFolderName}`,
+                                );
                             },
                             params: {},
-                            settings: {},
+                            settings: {
+                                silent: true,
+                            },
                         });
                     },
                     /**
@@ -129,6 +139,35 @@ export default function (api) {
                                 },
                             },
                         );
+                    },
+                    /**
+                     * @name            addSugar
+                     * @namespace       config.kitchenRecipeNextJs.stacks.new.actions
+                     * @type            String
+                     *
+                     * Specify the recipe init stack addSugar action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    addSugar: {
+                        extends: 'addSugar',
+                    },
+                    /**
+                     * @name            addNvmrc
+                     * @namespace       config.kitchenRecipeDefault.stacks.new.actions
+                     * @type            String
+                     *
+                     * Specify the recipe init stack addNvmrc action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    addNvmrc: {
+                        extends: 'addNvmrc',
+                        title: 'Add the .nvmrc file',
+                        description: 'Add the .nvmrc file',
+                        params: {},
                     },
                     /**
                      * @name            addManifestJson
@@ -168,19 +207,22 @@ export default function (api) {
                         );
                     },
 
-                    // /**
-                    //  * @name            installDependencies
-                    //  * @namespace       config.kitchenRecipeNextJs.stacks.new.actions
-                    //  * @type            String
-                    //  *
-                    //  * Specify the recipe init stack installDependencies action
-                    //  *
-                    //  * @since       2.0.0
-                    //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                    //  */
-                    // installDependencies: __deepMerge(config.kitchen.actions.installDependencies, {
-                    //     params: {}
-                    // })
+                    /**
+                     * @name            installDependencies
+                     * @namespace       config.kitchenRecipeNextJs.stacks.new.actions
+                     * @type            String
+                     *
+                     * Specify the recipe init stack installDependencies action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    installDependencies: __deepMerge(
+                        api.config.kitchen.actions.installDependencies,
+                        {
+                            params: {},
+                        },
+                    ),
                 },
             },
             dev: {
@@ -199,33 +241,21 @@ export default function (api) {
                 runInParallel: true,
                 actions: {
                     /**
-                     * @name            frontendServer
+                     * @name            start
                      * @namespace       config.kitchenRecipeNextJs.stacks.dev.actions
-                     * @type            String
-                     * @default         [config.kitchen.actions.frontendServer]
+                     * @type            Object
                      *
-                     * Specify the recipe dev stack frontendServer action
+                     * Specify the recipe dev.start action
                      *
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    get frontendServer() {
-                        return api.config.kitchen.actions.frontendServer;
-                    },
-
-                    /**
-                     * @name            vite
-                     * @namespace       config.kitchenRecipeNextJs.stacks.dev.actions
-                     * @type            String
-                     * @default         [config.kitchen.actions.vite]
-                     *
-                     * Specify the recipe dev stack description
-                     *
-                     * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                     */
-                    get vite() {
-                        return api.config.kitchen.actions.vite;
+                    start: {
+                        title: 'Start development stack',
+                        description: 'Start the development stack',
+                        command: 'npm run dev',
+                        params: {},
+                        settings: {},
                     },
                 },
             },
@@ -258,18 +288,21 @@ export default function (api) {
                 },
                 actions: {
                     /**
-                     * @name            frontendServer
+                     * @name            start
                      * @namespace       config.kitchenRecipeNextJs.stacks.prod.actions
-                     * @type            String
-                     * @default         [config.kitchen.actions.frontendServer]
+                     * @type            Object
                      *
-                     * Specify the recipe prod stack frontendServer action
+                     * Specify the recipe dev.start action
                      *
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    get frontendServer() {
-                        return api.config.kitchen.actions.frontendServer;
+                    start: {
+                        title: 'Start production stack',
+                        description: 'Start the production stack',
+                        command: 'npm run start',
+                        params: {},
+                        settings: {},
                     },
                 },
             },
@@ -302,48 +335,21 @@ export default function (api) {
                 },
                 actions: {
                     /**
-                     * @name            postcssBuild
+                     * @name            start
                      * @namespace       config.kitchenRecipeNextJs.stacks.build.actions
-                     * @type            String
-                     * @default         [config.kitchen.actions.postcssBuild]
+                     * @type            Object
                      *
-                     * Specify the recipe build stack postcssBuild action
+                     * Specify the recipe dev.start action
                      *
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    get postcssBuild() {
-                        return api.config.kitchen.actions.postcssBuild;
-                    },
-
-                    /**
-                     * @name            viteBuild
-                     * @namespace       config.kitchenRecipeNextJs.stacks.build.actions
-                     * @type            String
-                     * @default         [config.kitchen.actions.viteBuild]
-                     *
-                     * Specify the recipe build stack viteBuild action
-                     *
-                     * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                     */
-                    get viteBuild() {
-                        return api.config.kitchen.actions.viteBuild;
-                    },
-
-                    /**
-                     * @name            imagesBuild
-                     * @namespace       config.kitchenRecipeNextJs.stacks.build.actions
-                     * @type            String
-                     * @default         [config.kitchen.actions.imagesBuild]
-                     *
-                     * Specify the recipe build stack imagesBuild action
-                     *
-                     * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                     */
-                    get imagesBuild() {
-                        return api.config.kitchen.actions.imagesBuild;
+                    start: {
+                        title: 'Start the build',
+                        description: 'Start the build',
+                        command: 'npm run build',
+                        params: {},
+                        settings: {},
                     },
                 },
             },

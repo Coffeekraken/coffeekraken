@@ -1,23 +1,23 @@
 {
     "name": "@coffeekraken/s-view-renderer",
-    "version": "2.0.0-alpha.13",
-    "description": "",
+    "version": "2.0.0-alpha.17",
+    "description": "Powerful and simple to use views rendering system that make uses of \"engines\" under the hood to let you compile blade, twig, and others to come, views using the same renderer class. Pretty convinient!",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.13",
-        "@coffeekraken/s-data-file-generic": "^2.0.0-alpha.13",
-        "@coffeekraken/s-duration": "^2.0.0-alpha.13",
-        "@coffeekraken/s-file": "^2.0.0-alpha.13",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.13",
-        "@coffeekraken/s-process": "^2.0.0-alpha.13",
-        "@coffeekraken/s-promise": "^2.0.0-alpha.13",
-        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.13",
-        "@coffeekraken/s-view-renderer-engine-blade": "^2.0.0-alpha.13",
-        "@coffeekraken/s-view-renderer-engine-lit": "^2.0.0-alpha.13",
-        "@coffeekraken/s-view-renderer-engine-twig": "^2.0.0-alpha.13",
-        "@coffeekraken/sugar": "^2.0.0-alpha.13",
+        "@coffeekraken/s-class": "^2.0.0-alpha.17",
+        "@coffeekraken/s-data-file-generic": "^2.0.0-alpha.17",
+        "@coffeekraken/s-duration": "^2.0.0-alpha.17",
+        "@coffeekraken/s-file": "^2.0.0-alpha.17",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.17",
+        "@coffeekraken/s-process": "^2.0.0-alpha.17",
+        "@coffeekraken/s-promise": "^2.0.0-alpha.17",
+        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.17",
+        "@coffeekraken/s-view-renderer-engine-blade": "^2.0.0-alpha.17",
+        "@coffeekraken/s-view-renderer-engine-lit": "^2.0.0-alpha.17",
+        "@coffeekraken/s-view-renderer-engine-twig": "^2.0.0-alpha.17",
+        "@coffeekraken/sugar": "^2.0.0-alpha.17",
         "glob": "^8.0.3"
     },
     "main": "dist/pkg/cjs/node/exports.js",
@@ -39,5 +39,6 @@
             "require": "./dist/pkg/cjs/js/*.js",
             "import": "./dist/pkg/esm/js/*.js"
         }
-    }
+    },
+    "homepage": "https://coffeekraken.io"
 }

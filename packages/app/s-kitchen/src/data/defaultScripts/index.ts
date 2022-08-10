@@ -6,7 +6,6 @@ import __STheme from '@coffeekraken/s-theme';
 // Coffeekraken features
 import { define as __sActivateFeature } from '@coffeekraken/s-activate-feature';
 import { define as __sAppearFeature } from '@coffeekraken/s-appear-feature';
-import { define as __sSugarFeature } from '@coffeekraken/s-sugar-feature';
 // import { define as __sFloatingFeature } from '@coffeekraken/s-floating-feature';
 // import { define as __sFormValidateFeature } from '@coffeekraken/s-form-validate-feature';
 // import { define as __sInlineFeature } from '@coffeekraken/s-inline-feature';
@@ -52,7 +51,6 @@ __SConductor.setup({
 
     // features
     __sActivateFeature();
-    __sSugarFeature();
     __sAppearFeature();
     // __sFloatingFeature();
     // __sRefocusFeature();

@@ -28,11 +28,12 @@ Here's a small list of some of our packages (random):
 
 {{#each packages}}
 #### {{ this.name }}
+
 {{#if this.description}}
 {{ this.description}}
 {{/if}}
 
-[Access {{this.name}} documentation](/package/{{this.name}}/doc/readme)
+[Access documentation](/package/{{this.name}}/doc/readme)
 
 {{/each}}
 

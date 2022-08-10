@@ -1,4 +1,4 @@
-@if ($index == 1)
+@if (isset($index) && $index == 1)
     <h4 id="doc-api" class="s-typo:h4 s-mb s-mb:50">
         <i class="s-icon:api s-tc:accent"></i>&nbsp;&nbsp;API
     </h4>
@@ -7,46 +7,44 @@
 <section class="docblock {{ $isFirst ? 'first' : '' }}"
     id="{{ \Sugar\string\idCompliant($block->id) }}">
 
-    @if ($isFirst)
+    @if (isset($isFirst))
         @include('doc.title', ['block' => $block])
     @else
 
-        @if ($block->name)
+        @if (isset($block->name))
             @include('doc.sectionTitle', ['block' => $block])
         @endif
     @endif
 
-    @if (!$isFirst)
+    @if (!isset($isFirst))
         <section class="__toggle-content">
     @endif
 
-    @if ($isFirst)
+    @if (isset($isFirst))
         @include('doc.see-banner', ['block' => $block])
     @endif
 
     @include('doc.description', ['block' => $block])
     
-    @if ($isFirst)
+    @if (isset($isFirst))
         @include('doc.status', ['block' => $block])
-        {{-- @if ($isStyleguide) --}}
             @include('doc.preview', ['block' => $block])
-        {{-- @endif --}}
         @include('doc.feature', ['block' => $block])
         @include('doc.import', ['block' => $block])
         @include('doc.install', ['block' => $block])
     @endif
     
-    @if (!$isStyleguide && $block->type->raw !== 'CssClass')
+    @if (!isset($isStyleguide) && $block->type->raw !== 'CssClass')
         @include('doc.example', ['block' => $block, 'lines' => 10])
     @endif
     
     @include('doc.cssClass', ['block' => $block])
     
-    @if ($block->event)
+    @if (isset($block->event))
         @include('doc.event', ['interface' => $block->event])
     @endif
 
-    @if ($block->interface)
+    @if (isset($block->interface))
         @include('doc.interface', ['interface' => $block->interface])
     @endif
     
@@ -57,7 +55,7 @@
     @include('doc.todo', ['block' => $block])
     @include('doc.see', ['block' => $block])
 
-    @if (!$isFirst)
+    @if (!isset($isFirst))
         </section>
     @endif
 

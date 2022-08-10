@@ -54,7 +54,7 @@ if ($firstBlock->status == 'wip') {
                 @else
 
                     @foreach ($docblocks as $docblock)
-                        @if (!$docblock->private)
+                        @if (!isset($docblock->private))
                             @include('generic.docblock.block', ['block' => $docblock, 'isStyleguide' => true, 'isFirst' =>
                             $loop->first])
                         @endif

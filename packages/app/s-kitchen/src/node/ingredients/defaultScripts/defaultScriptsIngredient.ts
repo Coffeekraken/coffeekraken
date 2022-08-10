@@ -41,14 +41,9 @@ const defaultScriptsIngredient: ISKitchenIngredient = {
         }
 
         // source views folder path
-        const sourceScriptsFolderPath = __path.resolve(
-            __path.resolve(__packageRoot(__dirname())),
-            `src/data/defaultScripts`,
-        );
-
         const jsDir = __SSugarConfig.get('storage.src.jsDir');
 
-        await __recursiveCopy(sourceScriptsFolderPath, jsDir, {
+        await __recursiveCopy(sourceFilePath, jsDir, {
             overwrite: true,
         });
 

@@ -1,4 +1,4 @@
-@if ($block->param)
+@if (isset($block->param))
     <h4 id="parameters-{{ $block->name }}" class="s-typo:h4 s-mb:50">
         <i class="s-icon:list-ul s-tc:accent"></i>&nbsp;&nbsp;Parameters
     </h4>
@@ -20,7 +20,7 @@
                     </div>
                 </header>
                 <p class="s-typo:p s-format:text s-pi:30 s-pb:20">{!! \Sugar\markdown\toHtml($param->description) !!}</p>
-                @if ($param->type->interface)
+                @if (isset($param->type->interface))
                     <section class="__toggle-content">
                         @include('doc.interfaceDefinition', ['interface' => $param->type->interface])
                         </section>

@@ -74,7 +74,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-testinator",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -91,42 +90,6 @@
             "@coffeekraken/s-vite"
         ],
         "map": {
-            "@coffeekraken.sugar.doc.README": {
-                "id": "@coffeekraken.sugar.doc.README",
-                "name": "README",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Markdown"
-                        }
-                    ],
-                    "raw": "Markdown"
-                },
-                "menu": {
-                    "tree": [
-                        "Documentation"
-                    ],
-                    "slug": "/doc/readme"
-                },
-                "platform": [
-                    {
-                        "name": "md",
-                        "description": ""
-                    }
-                ],
-                "namespace": "@coffeekraken.sugar.doc",
-                "status": "stable",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "README.md",
-                "extension": "md",
-                "relPath": "README.md",
-                "children": {}
-            },
             "@coffeekraken.sugar.node.index": {
                 "id": "@coffeekraken.sugar.node.index",
                 "name": "index",
@@ -4966,6 +4929,43 @@
                 "relPath": "src/node/npm/packageJson.ts",
                 "children": {}
             },
+            "@coffeekraken.sugar.node.npm.packagePath": {
+                "id": "@coffeekraken.sugar.node.npm.packagePath",
+                "name": "packagePath",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function simply take a package name as parameter, and return the corresponding\npackage path",
+                "namespace": "@coffeekraken.sugar.node.npm",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import packagePath from '@coffeekraken/sugar/node/npm/packagePath`;\npackagrJson('lodash');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "packagePath.ts",
+                "extension": "ts",
+                "relPath": "src/node/npm/packagePath.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.node.npm.SNpmUnusedProcess": {
                 "id": "@coffeekraken.sugar.node.npm.SNpmUnusedProcess",
                 "name": "SNpmUnusedProcess",
@@ -8540,9 +8540,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "hsla2Hexa.ts",
+                "filename": "hsla2hexa.ts",
                 "extension": "ts",
-                "relPath": "src/shared/color/hsla2Hexa.ts",
+                "relPath": "src/shared/color/hsla2hexa.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.js.color.hsl2rgba": {
@@ -8806,7 +8806,7 @@
                         "description": ""
                     }
                 ],
-                "description": "This function take a xml string as input and return a json object.\nUsed under the hood the AMAZING [xml2json](https://www.npmjs.com/package/xml2json) package.",
+                "description": "This function take a xml string as input and return a json object.",
                 "namespace": "@coffeekraken.sugar.js.convert",
                 "status": "beta",
                 "since": "1.0.0",
@@ -17314,43 +17314,6 @@
                 "relPath": "src/js/dom/css/stylesheetToString.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.dom.data.dataset": {
-                "id": "@coffeekraken.sugar.js.dom.data.dataset",
-                "name": "dataset",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    }
-                ],
-                "description": "Get or set a value on the passed element with the passed name",
-                "namespace": "@coffeekraken.sugar.js.dom.data",
-                "status": "wip",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import dataset from '@coffeekraken/sugar/js/dom/dataset';\ndataset(myCoolElement, 'hello', 'world'); // => 'world';"
-                    }
-                ],
-                "since": "1.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "dataset.ts",
-                "extension": "ts",
-                "relPath": "src/js/dom/data/dataset.ts",
-                "children": {}
-            },
             "@coffeekraken.sugar.js.dom.detection.detectInOutDirection": {
                 "id": "@coffeekraken.sugar.js.dom.detection.detectInOutDirection",
                 "name": "detectInOutDirection",
@@ -17577,6 +17540,44 @@
                 "filename": "when.ts",
                 "extension": "ts",
                 "relPath": "src/js/dom/detect/when.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.dom.detect.whenAnimationEnd": {
+                "id": "@coffeekraken.sugar.js.dom.detect.whenAnimationEnd",
+                "name": "whenAnimationEnd",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Detect when animation ends",
+                "namespace": "@coffeekraken.sugar.js.dom.detect",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import whenAnimationEnd from '@coffeekraken/sugar/js/dom/whenAnimationEnd'\nawait whenAnimationEnd(myCoolElm);"
+                    }
+                ],
+                "async": "true",
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "whenAnimationEnd.ts",
+                "extension": "ts",
+                "relPath": "src/js/dom/detect/whenAnimationEnd.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.detect.whenAttribute": {
@@ -18163,7 +18164,7 @@
                 ],
                 "description": "This function returns you an object with informations about the visible surface of the element like the `percentage`, `percentageX`, etc...",
                 "namespace": "@coffeekraken.sugar.js.dom.element",
-                "status": "betas",
+                "status": "beta",
                 "example": [
                     {
                         "language": "js",

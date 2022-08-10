@@ -39,29 +39,34 @@ export default class SComponentUtilsDefaultPropsInterface extends __SInterface {
                 default: 'nearViewport',
             },
             adoptStyle: {
-                description: 'Specify if your component adopt the style of the global DOM. This worts only if you are using a shadowRoot element',
+                description:
+                    'Specify if your component adopt the style of the global DOM. This worts only if you are using a shadowRoot element',
                 type: 'Boolean',
                 default: true,
                 // physical: true,
             },
             saveState: {
-                description: 'Specify if you want to save the state of your component',
+                description:
+                    'Specify if you want to save the state of your component',
                 type: 'Boolean',
                 default: false,
             },
             lnf: {
-                description: 'Specify the lnf (look-and-feel) of your component. This is used by the css to style your component',
+                description:
+                    'Specify the lnf (look-and-feel) of your component. This is used by the css to style your component',
                 type: 'String',
                 default: 'default',
                 physical: true,
             },
             responsive: {
-                description: 'Specify some responsive properties. A "media" property is required and has to be either a media query, or a media query name defined in the config.themeMedia.queries theme setting',
+                description:
+                    'Specify some responsive properties. A "media" property is required and has to be either a media query, or a media query name defined in the config.themeMedia.queries theme setting',
                 type: 'Object',
                 default: {},
             },
             prefixEvent: {
-                description: 'Specify if you want the emitted events to be prefixed by the name of the feature/component like "s-slider.change" or not',
+                description:
+                    'Specify if you want the emitted events to be prefixed by the name of the feature/component like "s-slider.change" or not',
                 type: 'Boolean',
                 default: true,
             },

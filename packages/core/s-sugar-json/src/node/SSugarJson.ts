@@ -219,7 +219,10 @@ export default class SSugarJson extends __SClass {
         })}/node_modules`;
 
         // build globs
-        const globs: string[] = [];
+        let globs: string[] = [
+            `${localNodeModulesPath.replace(/node_modules$/, 'sugar.json')}`,
+            `${topLocalNodeModulesPath.replace(/node_modules$/, 'sugar.json')}`,
+        ];
 
         // global first
         if (
@@ -270,6 +273,9 @@ export default class SSugarJson extends __SClass {
         //     );
         // }
 
+        // this package sugar json
+        globs.push(`${__packageRoot(__dirname())}/sugar.json`);
+
         // local
         if (localNodeModulesPath && finalSettings.includeModules) {
             // coffeekraken modules are always loaded
@@ -287,6 +293,9 @@ export default class SSugarJson extends __SClass {
         if (finalSettings.includePackage) {
             globs.push(`${__packageRoot(process.cwd())}/sugar.json`);
         }
+
+        // make sure we don't have duplicated
+        globs = __unique(globs);
 
         // search for "sugar.json" files
         const files = __glob.sync(globs, {}).filter((path) => {

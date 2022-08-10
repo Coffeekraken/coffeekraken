@@ -1,4 +1,4 @@
-@if ($block->cssClass)
+@if (isset($block->cssClass))
     <h4 id="cssClass-{{ $block->name }}" class="s-typo:h4 s-mb:50">
         <i class="s-icon:css s-tc:accent"></i>&nbsp;&nbsp;CSS Classes
     </h4>

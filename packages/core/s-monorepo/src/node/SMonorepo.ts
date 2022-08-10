@@ -21,9 +21,9 @@ import __fs from 'fs';
 import __path from 'path';
 
 import __SMonorepoDevParamsInterface from './interface/SMonorepoDevParamsInterface';
+import __SMonorepoExecParamsInterface from './interface/SMonorepoExecParamsInterface';
 import __SMonorepoListParamsInteface from './interface/SMonorepoListParamsInterface';
 import __SMonorepoPublishParamsInteface from './interface/SMonorepoPublishParamsInterface';
-import __SMonorepoRunParamsInterface from './interface/SMonorepoRunParamsInterface';
 import __SMonorepoSettingsInterface from './interface/SMonorepoSettingsInterface';
 import __SMonorepoUpgradeParamsInterface from './interface/SMonorepoUpgradeParamsInterface';
 
@@ -50,7 +50,7 @@ import __SMonorepoUpgradeParamsInterface from './interface/SMonorepoUpgradeParam
  *          // settings here...
  *      }
  * });
- * await repo.run({
+ * await repo.exec({
  *    command: 'ls -la'
  * });
  *
@@ -202,7 +202,7 @@ export default class SMonorepo extends __SClass {
     }
 
     /**
-     * @name            run
+     * @name            exec
      * @type            Function
      * @async
      *
@@ -214,18 +214,18 @@ export default class SMonorepo extends __SClass {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    run(params: Partial<ISMonorepoRunParams>): Promise<ISMonorepoRunResult> {
+    exec(params: Partial<ISMonorepoRunParams>): Promise<ISMonorepoRunResult> {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 // @ts-ignore
                 const finalParams: ISMonorepoRunParams =
-                    __SMonorepoRunParamsInterface.apply(params);
+                    __SMonorepoExecParamsInterface.apply(params);
 
                 const results: ISMonorepoRunResult[] = [];
 
                 emit('log', {
                     type: __SLog.TYPE_INFO,
-                    value: `<yellow>[run]</yellow> Searching for packages...`,
+                    value: `<yellow>[exec]</yellow> Searching for packages...`,
                 });
 
                 // get all the packages
@@ -235,7 +235,7 @@ export default class SMonorepo extends __SClass {
 
                 emit('log', {
                     type: __SLog.TYPE_INFO,
-                    value: `<yellow>[run]</yellow> Executing the command "<magenta>${finalParams.command}</magenta>" in these <cyan>${packages.length}</cyan> package(s)`,
+                    value: `<yellow>[exec]</yellow> Executing the command "<magenta>${finalParams.command}</magenta>" in these <cyan>${packages.length}</cyan> package(s)`,
                 });
 
                 const duration = new __SDuration();
@@ -246,10 +246,10 @@ export default class SMonorepo extends __SClass {
                     const pack = packages[i];
 
                     emit('log', {
-                        value: `<yellow>[run]</yellow> Executing command "<yellow>${finalParams.command}</yellow>" in folder:`,
+                        value: `<yellow>[exec]</yellow> Executing command "<yellow>${finalParams.command}</yellow>" in folder:`,
                     });
                     emit('log', {
-                        value: `<yellow>[run]</yellow> <cyan>${pack.relPath}</cyan>`,
+                        value: `<yellow>[exec]</yellow> <cyan>${pack.relPath}</cyan>`,
                     });
 
                     const start = Date.now();
@@ -271,11 +271,11 @@ export default class SMonorepo extends __SClass {
 
                     emit('log', {
                         type: __SLog.TYPE_INFO,
-                        value: `<green>[run]</green> Command executed <green>successfully</green> in <yellow>${commandResult.formatedDuration}</yellow>`,
+                        value: `<green>[exec]</green> Command executed <green>successfully</green> in <yellow>${commandResult.formatedDuration}</yellow>`,
                     });
                     emit('log', {
                         type: __SLog.TYPE_INFO,
-                        value: `<green>[run]</green> <magenta>${
+                        value: `<green>[exec]</green> <magenta>${
                             packages.length - (i + 1)
                         }</magenta> folder(s), <cyan>~${__formatDuration(
                             remaining,

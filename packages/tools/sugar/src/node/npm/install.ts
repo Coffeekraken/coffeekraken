@@ -1,8 +1,8 @@
 import __SPromise from '@coffeekraken/s-promise';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __argsToString from '../../shared/cli/argsToString';
 import __commandExists from '../command/commandExists';
 import __spawn from '../process/spawn';
-import __argsToString from '../../shared/cli/argsToString';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
  * @name            install
@@ -15,6 +15,7 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
  * This function allows you to install the node packages using npm or yarn depending
  * on your settings.
  *
+ * @param       {String|String[]}           [packageNames='']       The package(s) you want to install. If not specified, perform a simple `install` process
  * @param       {INpmInstallSettings}           [settings={}]           Some settings to configure your installation
  * @return      {Promise}               A promise resolved or rejected depending on the install command status...
  *
@@ -40,7 +41,7 @@ export interface INpmInstallSettings {
 export interface INpmInstallResult {}
 
 export default function install(
-    packageNames: string = '',
+    packageNames: string | string[] = '',
     settings: Partial<INpmInstallSettings>,
 ): Promise<INpmInstallResult> {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
@@ -54,33 +55,34 @@ export default function install(
         if (settings.manager === 'yarn') {
             if (await __commandExists('yarn')) {
                 command = 'yarn add';
-                emit('log', {
-                    value: `<yellow>[install]</yellow> Using to "<yellow>yarn</yellow>" to install dependencies`,
-                });
             } else {
                 emit('log', {
-                    value: `<yellow>[install]</yellow> Sorry but "<yellow>yarn</yellow>" is not available on this system`,
+                    value: `<yellow>[install]</yellow> Sorry but "<magenta>yarn</magenta>" is not available on this system`,
                 });
             }
         }
         if (!command) {
             if (await __commandExists('npm')) {
                 command = 'npm install';
-                emit('log', {
-                    value: `<yellow>[install]</yellow> Using to "<yellow>npm</yellow>" to install dependencies`,
-                });
             }
         }
         if (!command) {
             throw new Error(
-                `<red>[install]</red> Sorry but it seems that none of "<yellow>npm</yellow>" or "<yellow>yarn</yellow>" are available...`,
+                `<red>[install]</red> Sorry but it seems that none of "<magenta>npm</magenta>" or "<yellow>yarn</yellow>" are available...`,
             );
         }
 
-        command += ` ${packageNames} ${__argsToString(settings.args)}`.replace(
-            /\s{2,999}/,
-            ' ',
-        );
+        let packagesStr = packageNames;
+        if (packageNames) {
+            if (!Array.isArray(packagesStr)) {
+                packagesStr = [packagesStr];
+            }
+        }
+
+        // @ts-ignore
+        command += ` ${packagesStr.join(' ')} ${__argsToString(
+            settings.args,
+        )}`.replace(/\s{2,999}/, ' ');
 
         const result = await pipe(
             __spawn(command, [], {

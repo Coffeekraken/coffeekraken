@@ -74,7 +74,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-testinator",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -1250,7 +1249,7 @@
                     ],
                     "raw": "String"
                 },
-                "default": "[config.serve.img.url]/img/doc/readmeHeader.jpg",
+                "default": "https://cdnv2.coffeekraken.io/readme-header.jpg",
                 "description": "Specify the header image to use for displaying readme. This has to be relative to your project root directory",
                 "namespace": "@coffeekraken.s-sugar-config.config.readme.layout",
                 "since": "2.0.0",

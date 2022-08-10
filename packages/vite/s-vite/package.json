@@ -1,24 +1,24 @@
 {
     "name": "@coffeekraken/s-vite",
-    "version": "2.0.0-alpha.13",
-    "description": "ViteJS without the headaches",
+    "version": "2.0.0-alpha.17",
+    "description": "AMAZING ViteJs encapsulation to make it work flowlessly inside of the Coffeekraken toolchain.",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.13",
-        "@coffeekraken/s-duration": "^2.0.0-alpha.13",
-        "@coffeekraken/s-event-emitter": "^2.0.0-alpha.13",
-        "@coffeekraken/s-file": "^2.0.0-alpha.13",
-        "@coffeekraken/s-form-validate-feature": "^2.0.0-alpha.13",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.13",
-        "@coffeekraken/s-log": "^2.0.0-alpha.13",
-        "@coffeekraken/s-postcss-sugar-plugin": "^2.0.0-alpha.13",
-        "@coffeekraken/s-promise": "^2.0.0-alpha.13",
-        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.13",
-        "@coffeekraken/s-vite-postcss-plugin": "^2.0.0-alpha.13",
-        "@coffeekraken/s-vite-sugar-plugin": "^2.0.0-alpha.13",
-        "@coffeekraken/sugar": "^2.0.0-alpha.13",
+        "@coffeekraken/s-class": "^2.0.0-alpha.17",
+        "@coffeekraken/s-duration": "^2.0.0-alpha.17",
+        "@coffeekraken/s-event-emitter": "^2.0.0-alpha.17",
+        "@coffeekraken/s-file": "^2.0.0-alpha.17",
+        "@coffeekraken/s-form-validate-feature": "^2.0.0-alpha.17",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.17",
+        "@coffeekraken/s-log": "^2.0.0-alpha.17",
+        "@coffeekraken/s-postcss-sugar-plugin": "^2.0.0-alpha.17",
+        "@coffeekraken/s-promise": "^2.0.0-alpha.17",
+        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.17",
+        "@coffeekraken/s-vite-postcss-plugin": "^2.0.0-alpha.17",
+        "@coffeekraken/s-vite-sugar-plugin": "^2.0.0-alpha.17",
+        "@coffeekraken/sugar": "^2.0.0-alpha.17",
         "@sveltejs/vite-plugin-svelte": "^1.0.1",
         "@vitejs/plugin-vue": "^1.10.2",
         "@vitest/ui": "^0.15.2",
@@ -58,5 +58,6 @@
             "require": "./dist/pkg/cjs/js/*.js",
             "import": "./dist/pkg/esm/js/*.js"
         }
-    }
+    },
+    "homepage": "https://coffeekraken.io"
 }

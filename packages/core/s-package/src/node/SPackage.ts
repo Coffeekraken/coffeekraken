@@ -453,7 +453,9 @@ export default class SPackage extends __SClass {
                     });
                     __childProcess.execSync(
                         `${finalParams.manager} ${
-                            finalParams.manager === 'yarn' ? 'add' : 'install'
+                            finalParams.manager === 'yarn'
+                                ? 'add --quiet'
+                                : 'install --no-warnings'
                         } ${
                             Array.isArray(finalParams.dependencies)
                                 ? finalParams.dependencies.join(' ')

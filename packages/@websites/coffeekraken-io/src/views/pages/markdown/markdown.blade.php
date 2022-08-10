@@ -27,7 +27,7 @@
 
                         <ul class="s-fs-tree">
                             @foreach ((array) $docmap->menu->packages as $package)
-                                @if (!$package->tree->documentation)
+                                @if (!isset($package->tree->documentation))
                                     @continue
                                 @endif
 
@@ -54,7 +54,7 @@
 
             <div s-page-transition-container="markdown" class="__content s-pb:50 s-pis:50 s-rhythm:vertical s-format:text">
                 
-                @if (!$body)
+                @if (!isset($body))
 
                  <h1 class="s-typo:h1 s-mbe:30">
                     No documentation selected

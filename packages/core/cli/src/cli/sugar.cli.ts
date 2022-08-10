@@ -21,7 +21,6 @@ import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __dotenv from 'dotenv';
 import __fs from 'fs';
-import __fsExtra from 'fs-extra';
 import __path from 'path';
 import __replaceCommandTokens from '../node/replaceCommandTokens';
 import __SSugarCliParamsInterface from './interface/SSugarCliParamsInterface';
@@ -163,18 +162,21 @@ export default class SSugarCli {
         // return;
 
         // check the "sugar.lock" file in the tmp folder
-        this._lockFilePath = `${__SSugarConfig.get(
-            'storage.package.tmpDir',
-        )}/sugar.lock`;
-        if (!__fs.existsSync(this._lockFilePath)) {
-            __writeFileSync(this._lockFilePath, `${process.pid}`);
-            __onProcessExit(() => {
-                if (!this.isLocked()) {
-                    __fsExtra.emptyDirSync(
-                        __SSugarConfig.get('storage.package.tmpDir'),
-                    );
-                }
-            });
+        // only if we are in a package scope
+        if (this.packageJson) {
+            this._lockFilePath = `${__SSugarConfig.get(
+                'storage.package.tmpDir',
+            )}/sugar.lock`;
+            if (!__fs.existsSync(this._lockFilePath)) {
+                __writeFileSync(this._lockFilePath, `${process.pid}`);
+                __onProcessExit(() => {
+                    if (!this.isLocked()) {
+                        __fsExtra.emptyDirSync(
+                            __SSugarConfig.get('storage.package.tmpDir'),
+                        );
+                    }
+                });
+            }
         }
 
         __SBench.step('sugar.cli', 'afterLoadConfig');
@@ -629,7 +631,7 @@ export default class SSugarCli {
                     : '<yellow>development</yellow>'
             } environment`,
             `<cyan>ENV</cyan> variable(s) loaded using <magenta>dotenv</magenta>`,
-            '',
+            ' ',
         ]
             .filter((l) => l !== '')
             .forEach((l) => {

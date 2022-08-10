@@ -1,15 +1,15 @@
 {
     "name": "@coffeekraken/s-env",
-    "version": "2.0.0-alpha.13",
-    "description": "",
+    "version": "2.0.0-alpha.17",
+    "description": "Simple class that let you access your environment variables with ease in node as well as in the browser (window.env)",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.13",
-        "@coffeekraken/s-descriptor": "^2.0.0-alpha.13",
-        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.13",
-        "@coffeekraken/sugar": "^2.0.0-alpha.13"
+        "@coffeekraken/s-class": "^2.0.0-alpha.17",
+        "@coffeekraken/s-descriptor": "^2.0.0-alpha.17",
+        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.17",
+        "@coffeekraken/sugar": "^2.0.0-alpha.17"
     },
     "main": "dist/pkg/cjs/shared/exports.js",
     "module": "dist/pkg/esm/shared/exports.js",
@@ -22,5 +22,6 @@
             "require": "./dist/pkg/cjs/shared/exports.js",
             "import": "./dist/pkg/esm/shared/exports.js"
         }
-    }
+    },
+    "homepage": "https://coffeekraken.io"
 }

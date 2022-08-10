@@ -74,7 +74,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-testinator",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -311,6 +310,30 @@
                 "extension": "config",
                 "relPath": "src/config/markdownBuilder.config.ts"
             },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.websiteUrl": {
+                "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.websiteUrl",
+                "name": "websiteUrl",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "config.packageJson.homepage",
+                "description": "Specify the website url that will be used for things like \"absoluteLinks\" conversion, etc...",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "markdownBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.ts"
+            },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.og.match": {
                 "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.og.match",
                 "name": "match",
@@ -420,6 +443,54 @@
                 "default": "__path.resolve(packageRoot,'src/transformers/code/code.md')",
                 "description": "Specify the \"markdown\" template to transform this match",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.code",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "markdownBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.ts"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.absoluteLinks.match": {
+                "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.absoluteLinks.match",
+                "name": "match",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "/\\[(.*)\\]\\((\\/.*)\\)/gm",
+                "description": "Specify the regex to match \"absolute links\" string",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.absoluteLinks",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "markdownBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.ts"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.absoluteLinks.markdown": {
+                "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.absoluteLinks.markdown",
+                "name": "markdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "__path.resolve(packageRoot,'src/transformers/absoluteLinks/absoluteLinks.md')",
+                "description": "Specify the \"markdown\" template to transform this match",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.absoluteLinks",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -2028,7 +2099,6 @@
                         "inPath": {
                             "description": "Specify a direct path to a markdown file to build",
                             "type": "String",
-                            "alias": "p",
                             "default": null
                         },
                         "inRaw": {
@@ -2071,8 +2141,16 @@
                         },
                         "preset": {
                             "description": "Specify some preset(s) to use for your build. Presets are defined in the config.markdownBuilder.presets configuration path",
-                            "type": "Array<String>",
-                            "values": [],
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ","
+                                ]
+                            },
+                            "values": [
+                                "default",
+                                "readme"
+                            ],
                             "alias": "p"
                         },
                         "protectedTags": {

@@ -1,4 +1,4 @@
-@if ($block->status)
+@if (isset($block->status))
 
     @php
         $statusColor = 'complementary';
@@ -15,14 +15,14 @@
 
     <div class="s-bg:main-surface s-p:30 s-radius s-border:10 s-flex:align-center s-mbs:50 @mobile s-display:block">
         <div class="s-flex-item:grow">
-            @if ($block->platform)
+            @if (isset($block->platform))
                 <span class="@mobile s-mie:20">
                     Platform
                     &nbsp;
                     @include('generic.platforms.icons', ['platforms' => $block->platform])
                 </span>
             @endif
-            @if ($block->support)
+            @if (isset($block->support))
                 <span class="s-tc:base s-opacity:20 @mobile s-display:none">&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;</span>
                 Support
                 &nbsp;
@@ -39,12 +39,12 @@
             <div class="s-tooltip-container">
                 @php
                     $user = $block->author;
-                    if ($block->contributor && count($block->contributor)) {
+                    if (isset($block->contributor) && count($block->contributor)) {
                         $user = \Sugar\ar\pickRandom($block->contributor);
                     }
                 @endphp
 
-                @if (!$block->contributor)
+                @if (!isset($block->contributor))
                     <span class="s-avatar s-scale:20">
                         <a href="{{ $user->url }}" target="_blank">
                             <img src="{{ \Sugar\gravatar\url($user->email) }}" alt="{{ $user->name }}" />
@@ -60,7 +60,7 @@
                         </a>
                     </span>
                 @endif
-                @if ($block->contributor)
+                @if (isset($block->contributor))
                     <div class="s-tooltip:interactive s-color:base">
                         <div class="s-flex s-gap:column:10">
                             @foreach ($block->contributor as $contributor)
@@ -87,7 +87,7 @@
         </div>
         <div class="@mobile s-mbs:20">
             <span
-                class="s-badge:pill s-font:30 s-color:{{ $statusColor }}">{{ $block->status ? $block->status : 'beta' }}</span>
+                class="s-badge:pill s-font:30 s-color:{{ $statusColor }}">{{ isset($block->status) ? $block->status : 'beta' }}</span>
         </div>
     </div>
 @endif

@@ -57,8 +57,8 @@ function assets($assets)
                 break;
             case 'js':
             case 'ts':
-                $type = $asset->type ? $asset->type : 'text/javascript';
-                $nomodule = $asset->nomodule ? 'nomodule' : '';
+                $type = isset($asset->type) ? $asset->type : 'text/javascript';
+                $nomodule = isset($asset->nomodule) ? 'nomodule' : '';
 
                 if (
                     \Sugar\is\absolutePath($asset->src) ||

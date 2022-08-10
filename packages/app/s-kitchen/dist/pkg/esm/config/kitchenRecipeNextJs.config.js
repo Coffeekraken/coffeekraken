@@ -1,4 +1,6 @@
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
+let newFolderName;
 export default function (api) {
     if (api.env.platform !== 'node')
         return;
@@ -84,12 +86,17 @@ export default function (api) {
                         return __deepMerge({
                             title: 'Create the app',
                             description: 'Create the app using the create-next-app utility',
-                            command: `npx create-next-app next-js --typescript`,
+                            get command() {
+                                newFolderName = __uniqid();
+                                return `npx create-next-app ${newFolderName} --typescript`;
+                            },
                             after() {
-                                process.chdir(`${process.cwd()}/next-js`);
+                                process.chdir(`${process.cwd()}/${newFolderName}`);
                             },
                             params: {},
-                            settings: {},
+                            settings: {
+                                silent: true,
+                            },
                         });
                     },
                     /**
@@ -125,6 +132,35 @@ export default function (api) {
                         });
                     },
                     /**
+                     * @name            addSugar
+                     * @namespace       config.kitchenRecipeNextJs.stacks.new.actions
+                     * @type            String
+                     *
+                     * Specify the recipe init stack addSugar action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    addSugar: {
+                        extends: 'addSugar',
+                    },
+                    /**
+                     * @name            addNvmrc
+                     * @namespace       config.kitchenRecipeDefault.stacks.new.actions
+                     * @type            String
+                     *
+                     * Specify the recipe init stack addNvmrc action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    addNvmrc: {
+                        extends: 'addNvmrc',
+                        title: 'Add the .nvmrc file',
+                        description: 'Add the .nvmrc file',
+                        params: {},
+                    },
+                    /**
                      * @name            addManifestJson
                      * @namespace       config.kitchenRecipeNextJs.stacks.new.actions
                      * @type            String
@@ -154,19 +190,19 @@ export default function (api) {
                             params: {},
                         });
                     },
-                    // /**
-                    //  * @name            installDependencies
-                    //  * @namespace       config.kitchenRecipeNextJs.stacks.new.actions
-                    //  * @type            String
-                    //  *
-                    //  * Specify the recipe init stack installDependencies action
-                    //  *
-                    //  * @since       2.0.0
-                    //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                    //  */
-                    // installDependencies: __deepMerge(config.kitchen.actions.installDependencies, {
-                    //     params: {}
-                    // })
+                    /**
+                     * @name            installDependencies
+                     * @namespace       config.kitchenRecipeNextJs.stacks.new.actions
+                     * @type            String
+                     *
+                     * Specify the recipe init stack installDependencies action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    installDependencies: __deepMerge(api.config.kitchen.actions.installDependencies, {
+                        params: {},
+                    }),
                 },
             },
             dev: {
@@ -185,32 +221,21 @@ export default function (api) {
                 runInParallel: true,
                 actions: {
                     /**
-                     * @name            frontendServer
+                     * @name            start
                      * @namespace       config.kitchenRecipeNextJs.stacks.dev.actions
-                     * @type            String
-                     * @default         [config.kitchen.actions.frontendServer]
+                     * @type            Object
                      *
-                     * Specify the recipe dev stack frontendServer action
+                     * Specify the recipe dev.start action
                      *
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    get frontendServer() {
-                        return api.config.kitchen.actions.frontendServer;
-                    },
-                    /**
-                     * @name            vite
-                     * @namespace       config.kitchenRecipeNextJs.stacks.dev.actions
-                     * @type            String
-                     * @default         [config.kitchen.actions.vite]
-                     *
-                     * Specify the recipe dev stack description
-                     *
-                     * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                     */
-                    get vite() {
-                        return api.config.kitchen.actions.vite;
+                    start: {
+                        title: 'Start development stack',
+                        description: 'Start the development stack',
+                        command: 'npm run dev',
+                        params: {},
+                        settings: {},
                     },
                 },
             },
@@ -243,18 +268,21 @@ export default function (api) {
                 },
                 actions: {
                     /**
-                     * @name            frontendServer
+                     * @name            start
                      * @namespace       config.kitchenRecipeNextJs.stacks.prod.actions
-                     * @type            String
-                     * @default         [config.kitchen.actions.frontendServer]
+                     * @type            Object
                      *
-                     * Specify the recipe prod stack frontendServer action
+                     * Specify the recipe dev.start action
                      *
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    get frontendServer() {
-                        return api.config.kitchen.actions.frontendServer;
+                    start: {
+                        title: 'Start production stack',
+                        description: 'Start the production stack',
+                        command: 'npm run start',
+                        params: {},
+                        settings: {},
                     },
                 },
             },
@@ -287,50 +315,25 @@ export default function (api) {
                 },
                 actions: {
                     /**
-                     * @name            postcssBuild
+                     * @name            start
                      * @namespace       config.kitchenRecipeNextJs.stacks.build.actions
-                     * @type            String
-                     * @default         [config.kitchen.actions.postcssBuild]
+                     * @type            Object
                      *
-                     * Specify the recipe build stack postcssBuild action
+                     * Specify the recipe dev.start action
                      *
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    get postcssBuild() {
-                        return api.config.kitchen.actions.postcssBuild;
-                    },
-                    /**
-                     * @name            viteBuild
-                     * @namespace       config.kitchenRecipeNextJs.stacks.build.actions
-                     * @type            String
-                     * @default         [config.kitchen.actions.viteBuild]
-                     *
-                     * Specify the recipe build stack viteBuild action
-                     *
-                     * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                     */
-                    get viteBuild() {
-                        return api.config.kitchen.actions.viteBuild;
-                    },
-                    /**
-                     * @name            imagesBuild
-                     * @namespace       config.kitchenRecipeNextJs.stacks.build.actions
-                     * @type            String
-                     * @default         [config.kitchen.actions.imagesBuild]
-                     *
-                     * Specify the recipe build stack imagesBuild action
-                     *
-                     * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                     */
-                    get imagesBuild() {
-                        return api.config.kitchen.actions.imagesBuild;
+                    start: {
+                        title: 'Start the build',
+                        description: 'Start the build',
+                        command: 'npm run build',
+                        params: {},
+                        settings: {},
                     },
                 },
             },
         },
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sV0FBVyxNQUFNLDZDQUE2QyxDQUFDO0FBRXRFLE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRztJQUN4QixJQUFJLEdBQUcsQ0FBQyxHQUFHLENBQUMsUUFBUSxLQUFLLE1BQU07UUFBRSxPQUFPO0lBRXhDLE9BQU87UUFDSDs7Ozs7Ozs7OztXQVVHO1FBQ0gsS0FBSyxFQUFFLFFBQVE7UUFDZjs7Ozs7Ozs7OztXQVVHO1FBQ0gsV0FBVyxFQUNQLDZEQUE2RDtRQUNqRTs7Ozs7Ozs7OztXQVVHO1FBQ0gsWUFBWSxFQUFFO1lBQ1YsSUFBSSxRQUFRO2dCQUNSLE9BQU8sQ0FBQyxHQUFHLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUMsQ0FBQztZQUN4QyxDQUFDO1NBQ0o7UUFDRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsWUFBWSxFQUFFLEtBQUs7UUFDbkIsTUFBTSxFQUFFO1lBQ0osR0FBRyxFQUFFO2dCQUNEOzs7Ozs7Ozs7O21CQVVHO2dCQUNILFdBQVcsRUFBRSw0QkFBNEI7Z0JBQ3pDLE9BQU8sRUFBRTtvQkFDTDs7Ozs7Ozs7O3VCQVNHO29CQUNILElBQUksU0FBUzt3QkFDVCxPQUFPLFdBQVcsQ0FBQzs0QkFDZixLQUFLLEVBQUUsZ0JBQWdCOzRCQUN2QixXQUFXLEVBQ1Asa0RBQWtEOzRCQUN0RCxPQUFPLEVBQUUsMENBQTBDOzRCQUNuRCxLQUFLO2dDQUNELE9BQU8sQ0FBQyxLQUFLLENBQUMsR0FBRyxPQUFPLENBQUMsR0FBRyxFQUFFLFVBQVUsQ0FBQyxDQUFDOzRCQUM5QyxDQUFDOzRCQUNELE1BQU0sRUFBRSxFQUFFOzRCQUNWLFFBQVEsRUFBRSxFQUFFO3lCQUNmLENBQUMsQ0FBQztvQkFDUCxDQUFDO29CQUNEOzs7Ozs7Ozs7dUJBU0c7b0JBQ0gsSUFBSSxNQUFNO3dCQUNOLE9BQU8sV0FB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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sV0FBVyxNQUFNLDZDQUE2QyxDQUFDO0FBQ3RFLE9BQU8sUUFBUSxNQUFNLDBDQUEwQyxDQUFDO0FBRWhFLElBQUksYUFBYSxDQUFDO0FBRWxCLE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRztJQUN4QixJQUFJLEdBQUcsQ0FBQyxHQUFHLENBQUMsUUFBUSxLQUFLLE1BQU07UUFBRSxPQUFPO0lBRXhDLE9BQU87UUFDSDs7Ozs7Ozs7OztXQVVHO1FBQ0gsS0FBSyxFQUFFLFFBQVE7UUFDZjs7Ozs7Ozs7OztXQVVHO1FBQ0gsV0FBVyxFQUNQLDZEQUE2RDtRQUNqRTs7Ozs7Ozs7OztXQVVHO1FBQ0gsWUFBWSxFQUFFO1lBQ1YsSUFBSSxRQUFRO2dCQUNSLE9BQU8sQ0FBQyxHQUFHLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUMsQ0FBQztZQUN4QyxDQUFDO1NBQ0o7UUFDRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsWUFBWSxFQUFFLEtBQUs7UUFDbkIsTUFBTSxFQUFFO1lBQ0osR0FBRyxFQUFFO2dCQUNEOzs7Ozs7Ozs7O21CQVVHO2dCQUNILFdBQVcsRUFBRSw0QkFBNEI7Z0JBQ3pDLE9BQU8sRUFBRTtvQkFDTDs7Ozs7Ozs7O3VCQVNHO29CQUNILElBQUksU0FBUzt3QkFDVCxPQUFPLFdBQVcsQ0FBQzs0QkFDZixLQUFLLEVBQUUsZ0JBQWdCOzRCQUN2QixXQUFXLEVBQ1Asa0RBQWtEOzRCQUN0RCxJQUFJLE9BQU87Z0NBQ1AsYUFBYSxHQUFHLFFBQVEsRUFBRSxDQUFDO2dDQUMzQixPQUFPLHVCQUF1QixhQUFhLGVBQWUsQ0FBQzs0QkFDL0QsQ0FBQzs0QkFDRCxLQUFLO2dDQUNELE9BQU8sQ0FBQyxLQUFLLENBQ1QsR0FBRyxPQUFPLENBQUMsR0FBRyxFQUFFLElBQUksYUFBYSxFQUFFLENBQ3RDLENB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

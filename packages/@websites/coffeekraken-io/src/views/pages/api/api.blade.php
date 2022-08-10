@@ -3,14 +3,16 @@
 
 @php
 $statusColor = 'info';
-if ($firstBlock->status == 'alpha') {
-    $statusColor = 'error';
-}
-if ($firstBlock->status == 'stable') {
-    $statusColor = 'success';
-}
-if ($firstBlock->status == 'wip') {
-    $statusColor = 'error';
+if (isset($firstBlock->status)) {
+    if ($firstBlock->status == 'alpha') {
+        $statusColor = 'error';
+    }
+    if ($firstBlock->status == 'stable') {
+        $statusColor = 'success';
+    }
+    if ($firstBlock->status == 'wip') {
+        $statusColor = 'error';
+    }
 }
 @endphp
 
@@ -48,7 +50,7 @@ if ($firstBlock->status == 'wip') {
 
                 @else
                     @foreach ($docblocks as $docblock)
-                        @if (!$docblock->private)
+                        @if (!isset($docblock->private))
                             @include('generic.docblock.block', ['block' => $docblock, 'isFirst' => $loop->first, 'index' => $loop->index])
                         @endif
                     @endforeach

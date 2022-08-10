@@ -199,6 +199,87 @@ export default function (api) {
                 params: {},
                 settings: {},
             },
+            addSugar: {
+                /**
+                 * @name            title
+                 * @namespace       config.kitchen.actions.addSugar
+                 * @type            String
+                 * @default        Adding sugar.json file
+                 *
+                 * Add the sugar.json file
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                title: 'Adding sugar',
+                /**
+                 * @name            description
+                 * @namespace       config.kitchen.actions.addSugar
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the kitchen addSugar action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                description:
+                    'Adding the sugar toolkit and the s-sugar feature in your project',
+                /**
+                 * @name            command
+                 * @namespace       config.kitchen.actions.addSugar
+                 * @type            String
+                 * @default        sugar
+                 *
+                 * Specify the kitchen addSugar action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                command: `sugar kitchen.add sugar [arguments]`,
+                params: {},
+                settings: {},
+            },
+            addNvmrc: {
+                /**
+                 * @name            title
+                 * @namespace       config.kitchen.actions.addNvmrc
+                 * @type            String
+                 * @default        Adding sugar.json file
+                 *
+                 * Add the .nvmrc file
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                title: 'Adding .nvmrc file',
+                /**
+                 * @name            description
+                 * @namespace       config.kitchen.actions.addNvmrc
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the kitchen addNvmrc action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                description: 'Adding the .nvmrc file to the project',
+                /**
+                 * @name            command
+                 * @namespace       config.kitchen.actions.addNvmrc
+                 * @type            String
+                 * @default        sugar
+                 *
+                 * Specify the kitchen addNvmrc action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                command: `sugar kitchen.add nvmrc [arguments]`,
+                params: {},
+                settings: {},
+            },
             addFrontspecJson: {
                 /**
                  * @name            title
@@ -572,7 +653,9 @@ export default function (api) {
                 interface:
                     '@coffeekraken/s-package/node/interface/SPackageInstallParamsInterface',
                 params: {},
-                settings: {},
+                settings: {
+                    silent: true,
+                },
             },
             frontendServer: {
                 /**

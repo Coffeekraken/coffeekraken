@@ -10,10 +10,12 @@ import __getFiles from '@coffeekraken/sugar/node/fs/getFiles';
 import __monorepoToPackageAbsolutePathDeepMap from '@coffeekraken/sugar/node/monorepo/monorepoToPackageAbsolutePathDeepMap';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
+import __currentModuleSystem from '@coffeekraken/sugar/shared/module/currentModuleSystem';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs, { promises as __fsPromise } from 'fs';
 import __path from 'path';
 import __ts from 'typescript';
+
 // import __STypescriptBuilderSettingsInterface from './interface/STypescriptBuilderSettingsInterface';
 // import __STypescriptBuilderBuildParamsInterface from './interface/STypescriptBuilderBuildParamsInterface';
 
@@ -164,14 +166,10 @@ export default class STypescriptBuilder extends __SBuilder {
                     inDir: __path.dirname(path),
                     glob: __path.basename(path),
                     outDir: __path.dirname(path),
-                    formats: ['esm'],
+                    formats: [__currentModuleSystem()],
                     buildInitial: true,
                     ...(params ?? {}),
                 });
-
-                // setTimeout(() => {
-                //     remove();
-                // }, 10000);
 
                 resolve({
                     path: res.files[0]?.file.path,

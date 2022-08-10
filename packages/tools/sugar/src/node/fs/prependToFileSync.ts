@@ -1,4 +1,5 @@
 import __fs from 'fs';
+import __writeFileSync from './writeFileSync';
 
 /**
  * @name            prependToFileSync
@@ -22,6 +23,10 @@ import __fs from 'fs';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function prependToFileSync(path: string, content: string): void {
+    if (!__fs.existsSync(path)) {
+        __writeFileSync(path, content);
+        return;
+    }
     const currentContent = __fs.readFileSync(path).toString();
     const newContent = `${content}\n${currentContent}`;
     __fs.writeFileSync(path, newContent);

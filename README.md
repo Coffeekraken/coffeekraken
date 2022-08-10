@@ -9,9 +9,9 @@
 # @coffeekraken/coffeekraken
 ###### MIT 2.0.0-alpha.13 - [Git repository]()
 
-[![size](https://shields.io/bundlephobia/min/undefined?style&#x3D;for-the-badge)](https://www.npmjs.com/package/undefined)
-[![downloads](https://shields.io/npm/dm/undefined?style&#x3D;for-the-badge)](https://www.npmjs.com/package/undefined)
-[![license](https://shields.io/npm/l/undefined?style&#x3D;for-the-badge)](./LICENSE)
+[![size](https://shields.io/bundlephobia/min/@coffeekraken/coffeekraken?style&#x3D;for-the-badge)](https://www.npmjs.com/package/@coffeekraken/coffeekraken)
+[![downloads](https://shields.io/npm/dm/@coffeekraken/coffeekraken?style&#x3D;for-the-badge)](https://www.npmjs.com/package/@coffeekraken/coffeekraken)
+[![license](https://shields.io/npm/l/@coffeekraken/coffeekraken?style&#x3D;for-the-badge)](./LICENSE)
 [![discord](https://shields.io/discord/Coffeekraken?style&#x3D;for-the-badge)](https://discord.gg/ERsX54UE)
 
 
@@ -24,11 +24,13 @@ We are a young collectve of front-end creative developers with one goal in mind.
 
 ## Start using our tools
 
-To start discovering our tools, development stack and so one, the easiest way is to go on [our website under the get started documentation](/doc/get-started/get-started).
+To start discovering our tools, development stack and so one, the easiest way is to go on [our website under the get started documentation](https://coffeekraken.io/doc/get-started/get-started)
+.
 
 ## Contribute to our effort
 
-To contribute to our project, make sure to follow [these instructions](/doc/contribute/get-started).
+To contribute to our project, make sure to follow [these instructions](https://coffeekraken.io/doc/contribute/get-started)
+.
 
 ## Promote our community and work
 
@@ -48,25 +50,40 @@ This also means that we need your support/contribution. Don't hesitate to join u
 
 Here's a small list of some of our packages (random):
 
-#### @coffeekraken/s-config-inline-adapter
+#### @coffeekraken/cli
 
-[Access @coffeekraken/s-config-inline-adapter documentation](/package/@coffeekraken/s-config-inline-adapter/doc/readme)
+Main Coffeekraken toolchain entry point that expose the sugar CLI and let you release the Kraken!
 
-#### @coffeekraken/s-typescript-builder
+[Access documentation](https://coffeekraken.io/package/@coffeekraken/cli/doc/readme)
 
-[Access @coffeekraken/s-typescript-builder documentation](/package/@coffeekraken/s-typescript-builder/doc/readme)
 
-#### @coffeekraken/s-postcss-builder
+#### @coffeekraken/s-floating-feature
 
-[Access @coffeekraken/s-postcss-builder documentation](/package/@coffeekraken/s-postcss-builder/doc/readme)
+Simple feature that let you define an HTMLElement as floating element. Make use of the AMAZING floating-ui package under the hood.
 
-#### @coffeekraken/s-clipboard-copy-component
+[Access documentation](https://coffeekraken.io/package/@coffeekraken/s-floating-feature/doc/readme)
 
-[Access @coffeekraken/s-clipboard-copy-component documentation](/package/@coffeekraken/s-clipboard-copy-component/doc/readme)
 
-#### @coffeekraken/s-log
+#### @coffeekraken/s-sugar-config
 
-[Access @coffeekraken/s-log documentation](/package/@coffeekraken/s-log/doc/readme)
+Powerful config management class that let you access the .config.(j|t)s files stored either at (mono)repo, package (.sugar/*) or user (.local/.sugar/*) level.
+
+[Access documentation](https://coffeekraken.io/package/@coffeekraken/s-sugar-config/doc/readme)
+
+
+#### @coffeekraken/s-env
+
+Simple class that let you access your environment variables with ease in node as well as in the browser (window.env)
+
+[Access documentation](https://coffeekraken.io/package/@coffeekraken/s-env/doc/readme)
+
+
+#### @coffeekraken/s-slider-component
+
+Powerful web component to create nice and fully customizable sliders. Support behaviors like slideable, horizontal|vertical, and more...
+
+[Access documentation](https://coffeekraken.io/package/@coffeekraken/s-slider-component/doc/readme)
+
 
 
 

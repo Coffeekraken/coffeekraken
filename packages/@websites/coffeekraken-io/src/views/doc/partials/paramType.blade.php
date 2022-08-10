@@ -3,7 +3,7 @@
     $typeOfToString = function($of) {
         $types = [];
         foreach ($of as $type) {
-            if ($type->value) {
+            if (isset($type->value)) {
                 array_push($types, $type->value);
             } else {
                 array_push($types, $type->type);
@@ -20,7 +20,7 @@
 
         <div class="s-typo:bold s-tc:info s-white-space:nowrap">
             <span>{{ $type->types[0]->type }}</span>
-            @if ($type->types[0]->of and count($type->types[0]->of))
+            @if (isset($type->types[0]->of) and count($type->types[0]->of))
                 <span class="s-tc:accent">&lt;{{ $typeOfToString($type->types[0]->of) }}&gt;</span>
             @endif
             @if (count($type->types) > 1)

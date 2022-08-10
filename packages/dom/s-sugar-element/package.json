@@ -1,7 +1,7 @@
 {
     "name": "@coffeekraken/s-sugar-element",
-    "version": "2.0.0-alpha.13",
-    "description": "",
+    "version": "2.0.0-alpha.17",
+    "description": "Simple class that let you wrap any HTMLElement and manipulate them with ease with clean api methods like \"getTranslates\", \"translate\", and more...",
     "type": "module",
     "scripts": {
         "dev": "sugar frontstack dev",
@@ -11,9 +11,9 @@
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.13",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.13",
-        "@coffeekraken/sugar": "^2.0.0-alpha.13",
+        "@coffeekraken/s-class": "^2.0.0-alpha.17",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.17",
+        "@coffeekraken/sugar": "^2.0.0-alpha.17",
         "rematrix": "^0.7.2"
     },
     "main": "dist/pkg/cjs/js/exports.js",
@@ -35,5 +35,6 @@
             "require": "./dist/pkg/cjs/js/*.js",
             "import": "./dist/pkg/esm/js/*.js"
         }
-    }
+    },
+    "homepage": "https://coffeekraken.io"
 }

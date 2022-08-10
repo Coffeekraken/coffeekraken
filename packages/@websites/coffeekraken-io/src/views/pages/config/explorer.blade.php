@@ -38,7 +38,7 @@
 
         <div class="__content s-pb:50">
 
-            @if ($requestedConfig)
+            @if (isset($requestedConfig))
 
                 @php
                     $filename = end(explode('/', $requestedConfig[0]->path));

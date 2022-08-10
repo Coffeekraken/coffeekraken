@@ -127,6 +127,23 @@ export default function (api) {
             protectedTags: ['template', 'code'],
         },
 
+        metas: {
+            /**
+             * @name            websiteUrl
+             * @namespace       config.markdownBuilder
+             * @type            String
+             * @default         config.packageJson.homepage
+             *
+             * Specify the website url that will be used for things like "absoluteLinks" conversion, etc...
+             *
+             * @since       2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get websiteUrl() {
+                return api.config.packageJson.homepage;
+            },
+        },
+
         presets: {
             default: {},
             readme: {
@@ -239,6 +256,50 @@ export default function (api) {
                 html: __path.resolve(
                     packageRoot,
                     'src/transformers/code/code.html',
+                ),
+            },
+            absoluteLinks: {
+                /**
+                 * @name            match
+                 * @namespace       config.markdownBuilder.transformers.absoluteLinks
+                 * @type            String
+                 * @default         /\[(.*)\]\((\/.*)\)/gm
+                 *
+                 * Specify the regex to match "absolute links" string
+                 *
+                 * @since       2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                match: /\[(.*)\]\((\/.*)\)/gm,
+                /**
+                 * @name            markdown
+                 * @namespace       config.markdownBuilder.transformers.absoluteLinks
+                 * @type            String
+                 * @default         __path.resolve(packageRoot,'src/transformers/absoluteLinks/absoluteLinks.md')
+                 *
+                 * Specify the "markdown" template to transform this match
+                 *
+                 * @since       2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                markdown: __path.resolve(
+                    packageRoot,
+                    'src/transformers/absoluteLinks/absoluteLinks.md',
+                ),
+                /**
+                 * @name            markdown
+                 * @namespace       config.markdownBuilder.transformers.absoluteLinks
+                 * @type            String
+                 * @default         __path.resolve(packageRoot,'src/transformers/absoluteLinks/absoluteLinks.html')
+                 *
+                 * Specify the "html" template to transform this match
+                 *
+                 * @since       2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                html: __path.resolve(
+                    packageRoot,
+                    'src/transformers/absoluteLinks/absoluteLinks.html',
                 ),
             },
         },

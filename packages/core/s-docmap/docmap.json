@@ -74,7 +74,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-testinator",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -467,7 +466,7 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import SDocmap from '@coffeekraken/s-docmap';\nconst docmap = new SDocMap();\nawait docmap.read();"
+                        "code": "import SDocmap from '@coffeekraken/s-docmap';\nconst docmap = new SDocmap();\nawait docmap.read();"
                     }
                 ],
                 "since": "2.0.0",
@@ -476,12 +475,12 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SDocMap.ts",
+                "filename": "SDocmap.ts",
                 "extension": "ts",
-                "relPath": "src/node/SDocMap.ts",
+                "relPath": "src/node/SDocmap.ts",
                 "children": {
                     "registertagproxy": {
-                        "id": "s1c42cd6a705d89123d81485bebb789bf985b23306615ecabb1ef62d77cc13e9e",
+                        "id": "s826488768fede7900c2ebca4f29b8eb87131c8136d157d7e9f10d73412ec7aa3",
                         "name": "registerTagProxy",
                         "type": {
                             "types": [
@@ -491,7 +490,7 @@
                             ],
                             "raw": "Function"
                         },
-                        "description": "This static method allows you to register a tag proxy for all the SDocMap instances",
+                        "description": "This static method allows you to register a tag proxy for all the SDocmap instances",
                         "static": "true",
                         "since": "2.0.0",
                         "author": {
@@ -769,7 +768,7 @@
                 "namespace": "@coffeekraken.s-docmap.node.interface",
                 "status": "beta",
                 "interface": {
-                    "name": "SDocMapReadParamsInterface",
+                    "name": "SDocmapReadParamsInterface",
                     "description": "",
                     "definition": {
                         "input": {
@@ -873,7 +872,7 @@
                 "namespace": "@coffeekraken.s-docmap.node.interface",
                 "status": "beta",
                 "interface": {
-                    "name": "SDocMapSnapshotParamsInterface",
+                    "name": "SDocmapSnapshotParamsInterface",
                     "description": "",
                     "definition": {
                         "outDir": {

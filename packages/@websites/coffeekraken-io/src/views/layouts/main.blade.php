@@ -4,7 +4,7 @@
 's-sugar' => true
 ]
 ])
-@section('title', $title)
+@section('title', isset($title) ? $title : 'Coffeekraken')
 
 @section('body')
 

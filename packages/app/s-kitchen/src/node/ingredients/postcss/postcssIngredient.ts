@@ -1,8 +1,9 @@
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
-import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
+import __npmInstall from '@coffeekraken/sugar/node/npm/install';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __fs from 'fs';
 import type { ISKitchenIngredient } from '../../SKitchen';
 
@@ -34,7 +35,9 @@ const postcssIngredient: ISKitchenIngredient = {
             `${sKitchenPackageRoot}/package.json`,
         );
 
-        let currentConfig = {};
+        let currentConfig = {
+            plugins: [],
+        };
 
         let configFile = __pickOne(
             [
@@ -67,23 +70,6 @@ const postcssIngredient: ISKitchenIngredient = {
                 break;
         }
 
-        const pluginName = '@coffeekraken/s-postcss-sugar-plugin';
-        if (!currentConfig.plugins) {
-            currentConfig.plugins = {
-                [pluginName]: {},
-            };
-        } else if (
-            Array.isArray(currentConfig.plugins) &&
-            !currentConfig.plugins.contains(`${pluginName}`)
-        ) {
-            currentConfig.plugins.unshift(pluginName);
-        } else if (!currentConfig.plugins[pluginName]) {
-            currentConfig.plugins = {
-                [pluginName]: {},
-                ...currentConfig.plugins,
-            };
-        }
-
         // ask to override if needed
         if (configFile) {
             const res = await emit('ask', {
@@ -100,30 +86,43 @@ const postcssIngredient: ISKitchenIngredient = {
 
         // installing the actual plugin
         emit('log', {
-            value: `<yellow>[postcss]</yellow> Installing the actual <cyan>@coffeekraken/s-postcss-sugar-plugin</cyan>...`,
+            value: `<yellow>[postcss]</yellow> Installing the actual <cyan>@coffeekraken/s-postcss-sugar-plugin</cyan> and other useful ones...`,
         });
-        const packageJson = __readJsonSync(`${packageRoot}/package.json`);
-        packageJson.dependencies[
-            '@coffeekraken/s-postcss-sugar-plugin'
-        ] = `^${sKitchenPackageJson.version}`;
-        __writeJsonSync(`${packageRoot}/package.json`, packageJson);
-        // try {
-        //     await pipe(__npmInstall('@coffeekraken/s-postcss-sugar-plugin'));
-        // } catch (e) {
-        //     emit('log', {
-        //         value: `<red>[postcss]</red> Something went wrong when installing the @coffeekraken/s-postcss-sugar-plugin package. Please try to install it manually.`,
-        //     });
-        // }
+
+        const plugins = [
+            '@coffeekraken/s-postcss-sugar-plugin',
+            'postcss-import',
+            'postcss-nested',
+            'postcss-atroot',
+            'postcss-extend-rule',
+            'postcss-property-lookup',
+            'autoprefixer',
+        ];
+
+        // install dependencies
+        await __npmInstall(['postcss', ...plugins]);
 
         // saving new config
         emit('log', {
             value: `<yellow>[postcss]</yellow> Saving new configuration file under <cyan>${configFilePath}</cyan>.`,
         });
 
+        // add plugins in config
+        if (Array.isArray(currentConfig.plugins)) {
+            currentConfig.plugins = __unique([...currentConfig.plugins, ,]);
+        } else {
+            plugins.forEach((plugin) => {
+                if (currentConfig.plugins[plugin]) {
+                    return;
+                }
+                currentConfig.plugins[plugin] = {};
+            });
+        }
+
         let jsonStr;
         switch (configFile?.extension) {
             case 'js':
-                jsonStr = JSON.stringify(currentConfig, null, 2);
+                jsonStr = JSON.stringify(currentConfig, null, 4);
                 __fs.writeFileSync(
                     configFilePath,
                     `module.exports = ${jsonStr};`,
@@ -131,7 +130,7 @@ const postcssIngredient: ISKitchenIngredient = {
                 break;
             case 'json':
             default:
-                jsonStr = JSON.stringify(currentConfig, null, 2);
+                jsonStr = JSON.stringify(currentConfig, null, 4);
                 __fs.writeFileSync(configFilePath, jsonStr);
                 break;
         }
@@ -144,14 +143,13 @@ const postcssIngredient: ISKitchenIngredient = {
             .readFileSync(`${thisPackageRoot}/src/data/postcss/sugar.css`)
             .toString();
 
-        // detecting the package type (next, generic, etc...)
-
         let globalCss;
 
+        // detecting the package type (next, generic, etc...)
         switch (context.projectType.type) {
             case 'next':
                 emit('log', {
-                    value: '<yellow>postcss</yellow> <cyan>Nextjs</cyan> project detected. Adding sugar css files...',
+                    value: '<yellow>[postcss]</yellow> <cyan>Nextjs</cyan> project detected. Adding sugar css files...',
                 });
 
                 globalCss = __fs

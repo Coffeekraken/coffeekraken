@@ -119,6 +119,7 @@ class SPromise
      * @name        queue
      * @type        Function
      * @static
+     * @async
      *
      * This static method allows you to pass an array of promises that will be executed one after the other.
      * It will call the "callback" function if specified with the resolved promise as argument.
@@ -136,7 +137,7 @@ class SPromise
         before?: Function,
         after?: Function,
     ): Promise<Promise[]> {
-        return new SPromise(async ({ resolve, reject }) => {
+        return new SPromise(async ({ resolve, reject, pipe }) => {
             const results = {};
             let i = 0;
             async function next() {
@@ -146,6 +147,9 @@ class SPromise
                 try {
                     delete promises[firstKey];
                     if (before) await before(firstKey, promise);
+                    if (promise instanceof SPromise) {
+                        pipe(promise);
+                    }
                     let res = await promise;
                     results[firstKey] = res;
                     if (after) {

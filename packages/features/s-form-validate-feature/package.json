@@ -1,7 +1,7 @@
 {
     "name": "@coffeekraken/s-form-validate-feature",
-    "version": "2.0.0-alpha.13",
-    "description": "",
+    "version": "2.0.0-alpha.17",
+    "description": "Powerful feature that you can use to validate your form inputs using rules like \"password\", \"min\", \"email\", and a lot more...",
     "type": "module",
     "scripts": {
         "dev": "sugar frontstack dev",
@@ -11,12 +11,12 @@
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.13",
-        "@coffeekraken/s-component-utils": "^2.0.0-alpha.13",
-        "@coffeekraken/s-feature": "^2.0.0-alpha.13",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.13",
-        "@coffeekraken/s-validator": "^2.0.0-alpha.13",
-        "@coffeekraken/sugar": "^2.0.0-alpha.13",
+        "@coffeekraken/s-class": "^2.0.0-alpha.17",
+        "@coffeekraken/s-component-utils": "^2.0.0-alpha.17",
+        "@coffeekraken/s-feature": "^2.0.0-alpha.17",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.17",
+        "@coffeekraken/s-validator": "^2.0.0-alpha.17",
+        "@coffeekraken/sugar": "^2.0.0-alpha.17",
         "@sideway/address": "^4.1.4"
     },
     "main": "dist/pkg/cjs/js/exports.js",
@@ -38,5 +38,6 @@
             "require": "./dist/pkg/cjs/js/*.js",
             "import": "./dist/pkg/esm/js/*.js"
         }
-    }
+    },
+    "homepage": "https://coffeekraken.io"
 }

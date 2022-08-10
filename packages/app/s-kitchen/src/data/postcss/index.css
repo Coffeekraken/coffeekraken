@@ -39,10 +39,19 @@ body {
 .logo {
     width: 150px;
 
-    .main {
-        fill: sugar.color(base, --lighten 100);
+    svg [fill='white'] {
+        fill: sugar.color(main, --darken 10);
     }
-    .accent {
+    svg [fill='#FEBD0F'] {
         fill: sugar.color(accent);
+    }
+
+    @sugar.theme.when (dark) {
+        svg [fill='white'] {
+            fill: sugar.color(main, text);
+        }
+        svg [fill='#FEBD0F'] {
+            fill: sugar.color(accent);
+        }
     }
 }

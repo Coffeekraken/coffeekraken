@@ -389,7 +389,7 @@ export default class SSugarConfig extends __SClass {
     static get(dotPath: string, id = 'default'): any {
         if (!this._sSugarConfigInstances[id]) {
             throw new Error(
-                `<red>[${this.name}]</red> You MUST load the configuration before accessing them by calling the SSugarConfig.load() async instance function`,
+                `<red>[${this.name}]</red> You MUST load the configuration before accessing them by calling the SSugarConfig.load() async static method`,
             );
         }
 
@@ -441,7 +441,7 @@ export default class SSugarConfig extends __SClass {
     static set(dotPath: string, value: any, id = 'default'): any {
         if (!this._sSugarConfigInstances[id]) {
             throw new Error(
-                `<red>[${this.name}]</red> You MUST load the configuration before accessing them by calling the SSugarConfig.load() async instance function`,
+                `<red>[${this.name}]</red> You MUST load the configuration before accessing them by calling the SSugarConfig.load() async static method`,
             );
         }
 

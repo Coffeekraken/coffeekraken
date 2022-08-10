@@ -2,7 +2,7 @@
 
 import __SProcess from '@coffeekraken/s-process';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __parseArgs from '@coffeekraken/sugar/shared/cli/parseArgs.js';
+import __parseArgs from '@coffeekraken/sugar/shared/cli/parseArgs';
 
 interface IProcessRunChildOptions {
     processPath: string;

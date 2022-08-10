@@ -961,11 +961,6 @@ class SDocmap extends __SClass implements ISDocmap {
                 resolve(docmapJson);
             },
             {
-                metas: {
-                    id: `build`,
-                },
-            },
-            {
                 eventEmitter: {
                     id: this.constructor.name,
                 },
@@ -1137,8 +1132,8 @@ class SDocmap extends __SClass implements ISDocmap {
                 });
             },
             {
-                metas: {
-                    id: `installSnapshots`,
+                eventEmitter: {
+                    id: this.constructor.name,
                 },
             },
         );
@@ -1258,8 +1253,8 @@ class SDocmap extends __SClass implements ISDocmap {
                 resolve();
             },
             {
-                metas: {
-                    id: `snapshot`,
+                eventEmitter: {
+                    id: this.constructor.name,
                 },
             },
         );

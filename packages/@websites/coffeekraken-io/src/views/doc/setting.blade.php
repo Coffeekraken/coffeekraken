@@ -1,4 +1,4 @@
-@if ($block->setting)
+@if (isset($block->setting))
     <h4 id="settings-{{ $block->name }}" class="s-typo:h4 s-mbs:80 s-mbe:50">
         <i class="s-icon:setting s-tc:accent"></i>&nbsp;&nbsp;Settings
     </h4>
@@ -20,7 +20,7 @@
                     </div>
                 </header>
                 <p class="s-typo:p s-format:text s-pi:30 s-pb:20">{!! \Sugar\markdown\toHtml($setting->description) !!}</p>
-                @if ($setting->type->interface)
+                @if (isset($setting->type->interface))
                     <section class="__toggle-content">
                         @include('doc.interfaceDefinition', ['interface' => $setting->type->interface])
                         </section>

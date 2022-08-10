@@ -259,13 +259,14 @@ export default function (api) {
             proxy: {
                 // all files that match /dist/...css|ts|tsx|etc...
                 // have to target the "src" directory
-                '^\\/dist\\/.*(\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs)$': {
-                    target: `http://localhost:3000`,
-                    changeOrigin: true,
-                    rewrite: (path) => {
-                        return path.replace(/\/dist\//, '/src/');
+                '^\\/dist\\/.*(\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs)$':
+                    {
+                        target: `http://localhost:3000`,
+                        changeOrigin: true,
+                        rewrite: (path) => {
+                            return path.replace(/\/dist\//, '/src/');
+                        },
                     },
-                },
                 get '^.*\\.(js(?!on)|css)(?!.map)(?!\\?)(.+){1,99999}$'() {
                     return {
                         target: `http://${api.config.frontendServer.hostname}:${api.config.frontendServer.port}`,

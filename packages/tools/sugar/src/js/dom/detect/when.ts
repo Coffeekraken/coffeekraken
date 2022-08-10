@@ -24,6 +24,8 @@ import __whenVisible from './whenVisible';
 import type { IWhenStyleSheetsReadySettings } from './whenStylesheetsReady';
 import __whenStylesheetsReady from './whenStylesheetsReady';
 
+import __whenAnimationEnd from './whenAnimationEnd';
+
 /**
  * @name            when
  * @namespace       js.dom.detect
@@ -73,7 +75,8 @@ export type TWhenTrigger =
     | 'outOfViewport'
     | 'interact'
     | 'visible'
-    | 'stylesheetsReady';
+    | 'stylesheetsReady'
+    | 'animationEnd';
 
 export const triggers = [
     'direct',
@@ -85,6 +88,7 @@ export const triggers = [
     'interact',
     'visible',
     'stylesheetsReady',
+    'animationEnd',
 ];
 
 export default function when(
@@ -156,6 +160,9 @@ export default function when(
                     break;
                 case 'stylesheetsReady':
                     promises.push(__whenStylesheetsReady($elm ? [$elm] : null));
+                    break;
+                case 'animationEnd':
+                    promises.push(__whenAnimationEnd($elm));
                     break;
             }
         });

@@ -74,7 +74,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-testinator",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -130,6 +129,40 @@
                 "filename": "registerHelpers.ts",
                 "extension": "ts",
                 "relPath": "src/node/registerHelpers.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-handlebars.node.helpers.config": {
+                "id": "@coffeekraken.s-handlebars.node.helpers.config",
+                "name": "config",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This helper allows you to access a sugar configuration",
+                "namespace": "@coffeekraken.s-handlebars.node.helpers",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "config.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/config.ts",
                 "children": {}
             },
             "@coffeekraken.s-handlebars.node.helpers.configFileNameFromDocmapPath": {

@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import __addEventListenerOnce from './addEventListenerOnce';
 import __SPromise from '@coffeekraken/s-promise';
+import __whenAnimationEnd from '../detect/whenAnimationEnd';
 
 /**
  * @name      removeClassOnAnimationEnd
@@ -29,17 +29,17 @@ import __SPromise from '@coffeekraken/s-promise';
  */
 function removeClassOnAnimationEnd($elm, cls) {
     return new __SPromise(
-        ({ resolve }) => {
-            // listen for animation end on the element just once
-            __addEventListenerOnce($elm, 'animationend', (e) => {
-                if (!Array.isArray(cls)) cls = [cls];
-                // remove the cls
-                cls.forEach((_cls) => {
-                    $elm.classList.remove(_cls);
-                });
-                // resolve the process
-                resolve(e);
+        async ({ resolve }) => {
+            // wait end of animation
+            await __whenAnimationEnd($elm);
+            // remove class
+            if (!Array.isArray(cls)) cls = [cls];
+            // remove the cls
+            cls.forEach((_cls) => {
+                $elm.classList.remove(_cls);
             });
+            // resolve the process
+            resolve(e);
         },
         {
             id: 'removeClassOnAnimationEnd',

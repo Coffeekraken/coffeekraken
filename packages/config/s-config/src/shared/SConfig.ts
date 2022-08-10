@@ -391,7 +391,7 @@ export default class SConfig {
         }
 
         // cache for later
-        this.cache();
+        // this.cache();
 
         // filter the empty config
         if (finalSettings.clean) {
@@ -510,7 +510,7 @@ export default class SConfig {
 
         if (Object.keys(this.config).length === 0) {
             throw new Error(
-                `<red>[${this.constructor.name}]</red> You MUST load the configuration before accessing them by calling the SConfig.load() async instance function`,
+                `<red>[${this.constructor.name}]</red> You MUST load the configuration before accessing them by calling the SConfig.load() async static method`,
             );
         }
 
@@ -552,7 +552,7 @@ export default class SConfig {
 
         if (Object.keys(this.config).length === 0) {
             throw new Error(
-                `<red>[${this.constructor.name}]</red> You MUST load the configuration before accessing them by calling the SConfig.load() async instance function`,
+                `<red>[${this.constructor.name}]</red> You MUST load the configuration before accessing them by calling the SConfig.load() async static method`,
             );
         }
         __set(this.config, path, value);

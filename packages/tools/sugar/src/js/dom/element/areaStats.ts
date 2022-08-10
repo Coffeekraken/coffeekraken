@@ -1,15 +1,13 @@
-import __offset from '../offset/offset';
-import __querySelectorUp from '../query/querySelectorUp';
-import __traverseUp from '../traverse/up';
-import __scrollTop from '../scroll/scrollTop';
 import __scrollLeft from '../scroll/scrollLeft';
+import __scrollTop from '../scroll/scrollTop';
+import __traverseUp from '../traverse/up';
 
 /**
  * @name            areaStats
  * @namespace       js.dom.element
  * @type            Function
  * @platform          js
- * @status          betas
+ * @status          beta
  *
  * This function returns you an object with informations about the visible surface of the element like the `percentage`, `percentageX`, etc...
  *

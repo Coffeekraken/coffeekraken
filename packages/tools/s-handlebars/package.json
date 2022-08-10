@@ -1,15 +1,15 @@
 {
     "name": "@coffeekraken/s-handlebars",
-    "version": "2.0.0-alpha.17",
+    "version": "2.0.0-alpha.18",
     "description": "Handlebars utility package that export a \"registerHelpers\" function which will register helpers on your handlebars instance like \"length\", \"replace\", \"sort\", and a lot more...",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-file": "^2.0.0-alpha.17",
-        "@coffeekraken/s-promise": "^2.0.0-alpha.17",
-        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.17",
-        "@coffeekraken/sugar": "^2.0.0-alpha.17"
+        "@coffeekraken/s-file": "^2.0.0-alpha.18",
+        "@coffeekraken/s-promise": "^2.0.0-alpha.18",
+        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.18",
+        "@coffeekraken/sugar": "^2.0.0-alpha.18"
     },
     "main": "dist/pkg/cjs/node/exports.js",
     "module": "dist/pkg/esm/node/exports.js",

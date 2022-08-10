@@ -1,15 +1,15 @@
 {
     "name": "@coffeekraken/s-view-renderer-engine-lit",
-    "version": "2.0.0-alpha.17",
+    "version": "2.0.0-alpha.18",
     "description": "SViewRenderer lit engine that allows you to render \".js\" lit based files with ease.",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-interface": "^2.0.0-alpha.17",
-        "@coffeekraken/s-promise": "^2.0.0-alpha.17",
-        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.17",
-        "@coffeekraken/sugar": "^2.0.0-alpha.17",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.18",
+        "@coffeekraken/s-promise": "^2.0.0-alpha.18",
+        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.18",
+        "@coffeekraken/sugar": "^2.0.0-alpha.18",
         "@lit-labs/ssr": "^2.2.2"
     },
     "main": "dist/pkg/cjs/node/exports.js",

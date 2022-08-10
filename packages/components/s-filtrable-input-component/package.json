@@ -1,6 +1,6 @@
 {
     "name": "@coffeekraken/s-filtrable-input-component",
-    "version": "2.0.0-alpha.17",
+    "version": "2.0.0-alpha.18",
     "description": "Powerful web component that let you create simple and complexe filtrable input like search completion, etc...",
     "type": "module",
     "homepage": "https://coffeekraken.io",
@@ -13,10 +13,10 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-interface": "^2.0.0-alpha.17",
-        "@coffeekraken/s-lit-component": "^2.0.0-alpha.17",
-        "@coffeekraken/s-theme": "^2.0.0-alpha.17",
-        "@coffeekraken/sugar": "^2.0.0-alpha.17",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.18",
+        "@coffeekraken/s-lit-component": "^2.0.0-alpha.18",
+        "@coffeekraken/s-theme": "^2.0.0-alpha.18",
+        "@coffeekraken/sugar": "^2.0.0-alpha.18",
         "faker": "^5.5.3",
         "lit": "^2.2.8",
         "react": "^17.0.2"

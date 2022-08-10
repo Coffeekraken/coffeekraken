@@ -1,12 +1,12 @@
 {
     "name": "@coffeekraken/s-vite-postcss-plugin",
-    "version": "2.0.0-alpha.17",
+    "version": "2.0.0-alpha.18",
     "description": "Enable the Coffeekraken postcss toolchain in your Vite stack",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.17",
+        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.18",
         "postcss": "^8.4.14"
     },
     "main": "dist/pkg/cjs/node/exports.js",

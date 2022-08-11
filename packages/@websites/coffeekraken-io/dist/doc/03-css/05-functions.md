@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Function
 
@@ -29,4 +24,9 @@ It can be to access theme values like `padding`, `margin`, etc... as well as col
 
 > Note that each mixin has his own documentation accessible by clicking or it...
 
+{{#each functions}}
 
+- [`sugar.{{this.dotCall}}(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.function.{{this.dotPath}})
+  {{/each}}
+
+{{/layout-doc }}

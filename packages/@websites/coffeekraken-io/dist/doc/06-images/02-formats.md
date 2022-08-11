@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Supported formats
 
@@ -57,3 +52,4 @@ This format if perfect for website decoration images, composition images like la
 
 > This file format is more used and known for making small "crappy" animated images sent across our messaging apps like Whatapp, Telegram, etc...
 
+{{/layout-doc }}

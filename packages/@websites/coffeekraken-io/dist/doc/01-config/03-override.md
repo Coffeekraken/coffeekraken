@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Overriding existing configuration
 
@@ -38,9 +33,7 @@ export default (env, config) => {
         },
     };
 };
-
 ```
-
 
 ### User level overriding
 
@@ -55,9 +48,8 @@ export default (env, config) => {
         },
     };
 };
-
 ```
-
 
 > You'll see that the process is the same. The only difference is where are stored files. Note that the `.local` folder MUST be added in your **.gitignore file** if you're not using our development toolchain.
 
+{{/layout-doc }}

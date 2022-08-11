@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Action `rename`
 
@@ -57,14 +52,14 @@ export default function (env, config) {
     },
   };
 }
-
 ```
-
 
 ### Parameters
 
 Here's the parameters that you can pass to this action:
 
+{{> interface namespace='@coffeekraken.cli.node.package.interface.SCliPackageRenameParamsInterface' }}
 
 > If you don't specify some parameters in your recipe, the user will be prompted for them...
 
+{{/layout-doc }}

@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Servers routes
 
@@ -47,7 +42,6 @@ export default function myModule(express, settings, config) {
   };
   // etc...
 }
-
 ```
 
-
+{{/layout-doc }}

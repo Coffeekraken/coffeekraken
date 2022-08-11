@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # CLI overview
 
@@ -47,9 +42,7 @@ The main thing is to install it like so:
 
 ```shell
 npm i @coffeekraken/cli -g
-
 ```
-
 
 Then you will have access to the `sugar` command that you can use first like so:
 
@@ -63,6 +56,13 @@ These are the main entry points with the ones you can discover and try our featu
 
 Here's a list of the available commands:
 
+{{#each availableCli.endpoints}}
+
+- `sugar {{@key}} [arguments]`
+  - {{this.description}}
+
+{{/each}}
 
 > For more information about these commands, simply use the `sugar -h` command, or the `sugar docmap.build -h` to have more insights about a particular one...
 
+{{/layout-doc }}

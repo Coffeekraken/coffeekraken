@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # SDocmap API
 
@@ -36,9 +31,7 @@ import __SDocmap from "@coffeekraken/s-docmap";
   const docmap = await docmapInstance.read();
   // do something with your docmap...
 })();
-
 ```
-
 
 ## Read docmap structure
 
@@ -59,7 +52,6 @@ From the `read` method of the `SDocmap` class, you will get back an object that 
         custom: {} // custom menu. See the @coffeekraken/s-docmap package documentation for more infos
     }
 }
-
 ```
 
-
+{{/layout-doc }}

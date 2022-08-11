@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 > Make sure to be confortable with the [configuration systen](/doc/config/overview) before reading this.
 
@@ -50,9 +45,7 @@ export default function (env, config) {
         variant: 'light',
     };
 }
-
 ```
-
 
 This configuration assume that the theme `default` exists and has a `light` variant defined.
 
@@ -80,9 +73,7 @@ export default (env, config) => {
         error: '...',
     };
 };
-
 ```
-
 
 #### Updating the color schemas
 
@@ -99,9 +90,7 @@ export default (env, config) => {
         },
     };
 };
-
 ```
-
 
 ## Defining a new theme
 
@@ -131,9 +120,8 @@ export default function (env, config) {
         },
     };
 }
-
 ```
-
 
 > Note that the theming system is based on the [@coffeekraken/s-sugar-config](/package/@coffeekraken/s-sugar-config/doc/readme) package used across the entire echosystem...
 
+{{/layout-doc }}

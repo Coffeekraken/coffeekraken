@@ -12,14 +12,10 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Configuration explorer
 
 To fully understand how the configuration system works, the easier way is to take a look at current available configuration by going [to our configuration explorer](/config/explorer).
 
+{{/layout-doc }}

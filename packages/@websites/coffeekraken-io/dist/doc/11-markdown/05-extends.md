@@ -12,12 +12,8 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Extending markdown builder
 
+{{/layout-doc }}

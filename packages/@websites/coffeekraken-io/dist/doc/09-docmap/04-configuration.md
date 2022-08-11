@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Docmap configuration
 
@@ -27,5 +22,6 @@ All the available docmap configurations can be found in the `docmap.config.js` c
 
 ## `docmap.config.js`
 
-# Config partial
+{{> config namespace='@coffeekraken.s-docmap.config.docmap'}}
 
+{{/layout-doc }}

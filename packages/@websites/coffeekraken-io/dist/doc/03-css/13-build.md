@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # CSS build process
 
@@ -33,9 +28,7 @@ To compile your CSS, you can simply run one of these commands in your terminal a
 sugar postcss.build
 # Launch the development environment with local server, CSS compilation, JS compilation, etc...
 sugar dev
-
 ```
-
 
 > Note that you can make use of the [@coffeekraken/s-postcss-sugar-plugin](/package/@coffeekraken/s-postcss-sugar-plugin/doc/readme) postcss plugin to use all the Coffeekraken power in standelone mode...
 
@@ -54,3 +47,4 @@ The configuration used by the `SPostcssBuilder` are these ones:
 - `postcss.config.ts`: [PostCSS](https://postcss.org) under the hood configurations
 - `purgecss.config.ts`: [PurgeCSS](https://purgecss.com/) under the hood configurations
 
+{{/layout-doc }}

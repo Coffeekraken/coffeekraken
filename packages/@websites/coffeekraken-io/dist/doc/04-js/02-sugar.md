@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Sugar toolkit
 
@@ -64,3 +59,4 @@ Sugar provide the `sugar` CLI that expose some features like:
 -   `sugar process.kill -p 8888`: Kill process on port `8888`
 -   And many more to discover...
 
+{{/layout-doc }}

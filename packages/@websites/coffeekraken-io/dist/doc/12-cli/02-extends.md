@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Extends the CLI
 
@@ -61,9 +56,7 @@ Create the `sugar.jcon` file at your project root and fill it like so:
         }
     ]
 }
-
 ```
-
 
 > Note that you can make uses of the `%moduleSystem` token in your `process` property that will be replaced by either `esm`, or `cjs` depending on the environment you're in.
 
@@ -80,9 +73,7 @@ export default function prettyCommand(stringArgs = "") {
     resolve();
   });
 }
-
 ```
-
 
 This example will work fine and display `hello world` on the screen.
 
@@ -99,9 +90,7 @@ export default function prettyCommand(stringArgs = "") {
     resolve();
   });
 }
-
 ```
-
 
 This make use of the [@coffeekraken/s-promise](/package/@coffeekraken/s-promise/doc/readme) class that is an extension of the `Promise` one and works exactly the same with some additional feature.
 
@@ -119,17 +108,13 @@ Then, simply launch:
 
 ```bash
 sugar mySoCool.prettyCommand
-
 ```
-
 
 As your `prettyCommand` has been declared as the "defaultAction", you can also launch it like so:
 
 ```bash
 sugar mySoCool
-
 ```
-
 
 ## Going further
 
@@ -154,9 +139,7 @@ For that, simply add the `interface` property inside your `sugar.json` file like
         }
     ]
 }
-
 ```
-
 
 Then create the `src/node/prettyCommandInterface.ts` with this as content:
 
@@ -175,9 +158,7 @@ export default class SActivateFeatureInterface extends __SInterface {
     };
   }
 }
-
 ```
-
 
 This make use of the [@coffeekraken/s-interface](/package/@coffeekraken/s-interface/doc/readme) package that let you define interfaces to describe things like a parameter object, etc...
 
@@ -187,3 +168,4 @@ Note that this `SInterface` class can be used as well for other things and works
 
 Now when you launch your command with `sugar mySoCool.prettyCommand --help` you will have a nicely displayed documentation.
 
+{{/layout-doc }}

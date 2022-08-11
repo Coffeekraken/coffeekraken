@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Servers configuration
 
@@ -27,5 +22,6 @@ All the available server configurations can be found in the `frontendServer.conf
 
 ## `frontendServer.config.js`
 
-# Config partial
+{{> config namespace='@coffeekraken.s-frontend-server.config.frontendServer'}}
 
+{{/layout-doc }}

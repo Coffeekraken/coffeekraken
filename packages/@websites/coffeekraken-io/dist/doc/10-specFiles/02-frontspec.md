@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # `frontspec.json`
 
@@ -33,9 +28,7 @@ This file is separated by purpose in an global object like so:
     "assets": {},
     "head": {}
 }
-
 ```
-
 
 ## metas
 
@@ -63,9 +56,7 @@ Note that This is more a **specification** that the only way to implement it. Yo
         }
     }
 }
-
 ```
-
 
 > When using our base templates like the `coffeekraken.layouts.main` one, you can override these by passing a `$metas` object to the renderer
 
@@ -106,9 +97,8 @@ Each resource can specify the `env` for which it is suited. You can then specify
         "env": "production"
     }
 },
-
 ```
-
 
 > When using our base templates like the `coffeekraken.layouts.main` one, you can override these by passing a `$assets` object to the renderer
 
+{{/layout-doc }}

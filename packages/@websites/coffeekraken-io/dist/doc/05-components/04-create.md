@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Create your own component
 
@@ -46,9 +41,7 @@ To create a new component project, simply launch this command:
 
 ```shell
 sugar new litElement
-
 ```
-
 
 > You need to have the `sugar` CLI installed using `npm i @coffeekraken/cli -g`
 
@@ -58,15 +51,12 @@ Once that is finished, simple cd into your project directory and launch
 
 ```shell
 sugar dev
-
 ```
-
 
 This will start the **development environment** in which you can implement and test your component. Once your component is ready, launch this command to build it for production
 
 ```shell
 sugar build
-
 ```
 
-
+{{/layout-doc }}

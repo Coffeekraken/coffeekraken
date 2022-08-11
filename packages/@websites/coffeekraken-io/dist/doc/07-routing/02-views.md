@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Views
 
@@ -39,3 +34,4 @@ Blade is the simple, yet powerful templating engine that is included with Larave
 
 > For more information about the [@coffeekraken/s-view-renderer](/package/@coffeekraken/s-view-renderer/doc/readme), please check his own documentation.
 
+{{/layout-doc }}

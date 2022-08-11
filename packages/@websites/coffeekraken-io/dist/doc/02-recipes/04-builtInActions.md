@@ -12,65 +12,17 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Built-in actions
 
 Some common actions are already built-in so you can reference them inside your recipe to avoid duplication. Here's the available actions list:
 
+{{#each config.kitchen.actions}}
 
--   `copy`: Copy file/directory
-
--   `rename`: Rename project
-
--   `initNpm`: Init npm package
-
--   `addSugarJson`: Adding sugar.json file
-
--   `addFrontspecJson`: Adding frontspec.json file
-
--   `addManifestJson`: Adding manifest.json file
-
--   `addFavicon`: Adding source favicon file
-
--   `addReadme`: Adding source README.md file
-
--   `addDefaultPages`: Adding default pages/views file
-
--   `addDefaultScripts`: Adding default script files
-
--   `addDefaultPackageJson`: Adding default package.json file
-
--   `addSugarPostcss`: Adding sugar postcss plugin
-
--   `installDependencies`: Install dependencies
-
--   `frontendServer`: Frontend server
-
--   `corsProxy`: Cors Proxy
-
--   `postcssBuild`: PostCSS build action
-
--   `typescriptBuild`: Typescript builder build action
-
--   `imagesBuild`: Images build action
-
--   `vite`: Vite development stack
-
--   `viteBuild`: Vite build stack
-
--   `docmapBuild`: Docmap build action
-
--   `sitemapBuild`: Sitemap build action
-
--   `faviconBuild`: Docmap build action
-
--   `format`: SCodeFormatter format action
+-   `{{@key}}`: {{this.title}}
+    {{/each}}
 
 > You will find more documentation and examples in the `Actions` folder...
 
+{{/layout-doc }}

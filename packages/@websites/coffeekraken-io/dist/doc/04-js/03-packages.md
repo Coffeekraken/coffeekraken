@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Packages
 
@@ -54,3 +49,4 @@ Here's a none-exhaustive list of our packages:
 - `@coffeekraken/s-color`: Manipulate and convert colors with ease
 - And more...
 
+{{/layout-doc }}

@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # First project creation
 
@@ -25,9 +20,7 @@ To create a new project, simply enter this command:
 
 ```shell
 sugar new
-
 ```
-
 
 This will launch a quick and easy step by step creation process that will ask you for the project name, the [recipe](#recipes) to use, etc...
 
@@ -37,9 +30,7 @@ Once this process is done, you can start working on your project. If you choose 
 
 ```shell
 sugar dev
-
 ```
-
 
 ## Start developing
 
@@ -47,9 +38,7 @@ In order to start developing your newly created project, you just need to enter 
 
 ```shell
 sugar dev
-
 ```
-
 
 That will launch some processes like:
 
@@ -71,7 +60,6 @@ Each recipes comes with full production ready build stack. To build your project
 
 ```shell
 sugar build
-
 ```
 
-
+{{/layout-doc }}

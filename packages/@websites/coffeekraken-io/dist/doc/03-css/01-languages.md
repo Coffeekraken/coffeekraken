@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Supported languages
 
@@ -52,3 +47,4 @@ The sugar plugin for PostCss gives you a lot of features like:
 
 > More information on theming [here](/doc/css/theming).
 
+{{/layout-doc }}

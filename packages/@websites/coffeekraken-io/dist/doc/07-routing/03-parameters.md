@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Parameters
 
@@ -35,9 +30,7 @@ export default {
   },
   views: ["hello.hello"],
 };
-
 ```
-
 
 This will generate an [express route](https://expressjs.com/en/guide/routing.html) like `/:something/:else?`
 
@@ -50,11 +43,10 @@ export default {
   slugs: ["/:something/:else?"],
   views: ["hello.hello"],
 };
-
 ```
-
 
 This will also generate an [express route](https://expressjs.com/en/guide/routing.html) like `/:something/:else?`
 
 > Note that these parameter(s) will be passed to your `hello.data.js` file. Check the next chapter for more on data files.
 
+{{/layout-doc }}

@@ -20,9 +20,12 @@ import __childProcess from 'child_process';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function (): string {
-    // get global node modules directory path
     return __childProcess
-        .execSync(`npm root --location=global`)
+        .execSync(`npm root --global`, {
+            stdio: 'pipe',
+        })
         .toString()
-        .trim();
+        .trim()
+        .split('\n')
+        .slice(-1)[0];
 }

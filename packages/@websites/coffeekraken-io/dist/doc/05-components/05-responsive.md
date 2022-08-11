@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Responsive
 
@@ -39,9 +34,7 @@ Use with the `themeMedia.queries` configuration:
   title="hello"
   responsive='{"tablet":{"title":"world"}}'
 ></my-cool-component>
-
 ```
-
 
 You can also specify directly a media query like this:
 
@@ -49,7 +42,6 @@ You can also specify directly a media query like this:
 <my-cool-component title="hello">
   <responsive media="screen and (max-width:1280px)" title="world"></responsive>
 </my-cool-component>
-
 ```
 
-
+{{/layout-doc }}

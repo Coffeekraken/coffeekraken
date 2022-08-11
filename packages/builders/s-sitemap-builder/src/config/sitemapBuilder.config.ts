@@ -57,7 +57,7 @@ export default (api) => {
                      * @since           2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    glob: ['**/*.sitemap.js'],
+                    glob: ['**/*.sitemap.{js,ts}'],
                     /**
                      * @name            inDir
                      * @namespace       config.sitemapBuilder.sources.file.settings

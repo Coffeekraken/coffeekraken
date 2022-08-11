@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Create your own recipe
 
@@ -41,9 +36,7 @@ export default function (env, config) {
         },
     };
 }
-
 ```
-
 
 By doing this, we just registered a new recipe called `myCoolRecipe`.
 
@@ -53,9 +46,7 @@ We just need to tell the `@coffeekraken/cli` CLI that our project make use of ou
 {
     "recipe": "myCoolRecipe"
 }
-
 ```
-
 
 We need to understand a little bit more what a recipe is made of...
 
@@ -105,9 +96,7 @@ export default function (env, config) {
         },
     };
 }
-
 ```
-
 
 ### Register a new action
 
@@ -155,9 +144,7 @@ export default function (env, config) {
         },
     };
 }
-
 ```
-
 
 ### Testing your stack
 
@@ -167,9 +154,7 @@ To test our new recipe `dev` stack, simply type in your cmd
 
 ```shell
 sugar dev
-
 ```
-
 
 At this point, your recipe `dev` stack has to run and throw an error because we don't have created our node process action file...
 
@@ -186,9 +171,7 @@ export default function (params) {
         resolve();
     });
 }
-
 ```
-
 
 This function **MUST** return a `Promise`. Inside it, you can do whatever you need.
 
@@ -206,7 +189,6 @@ export default function (params) {
         resolve();
     });
 }
-
 ```
 
-
+{{/layout-doc }}

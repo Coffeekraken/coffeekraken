@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Images management overview
 
@@ -50,5 +45,6 @@ Don't worry, if our default configuration does not suits your needs, you can as 
 
 To do so, simply create a file `.sugar/imageBuilder.config.js` and override the settings you want.
 
-# Config partial
+{{> config namespace='@coffeekraken.s-images-builder.config.imagesBuilder'}}
 
+{{/layout-doc }}

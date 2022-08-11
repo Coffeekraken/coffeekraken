@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Colors
 
@@ -34,9 +29,7 @@ export default function (env, config) {
     accent: "#ffbb00",
   };
 }
-
 ```
-
 
 ## Syntax
 
@@ -68,9 +61,7 @@ export default function (env, config) {
     },
   };
 }
-
 ```
-
 
 You have the possibility to specify some color schema specificaly to a particular color like so:
 
@@ -98,9 +89,7 @@ export default function (env, config) {
     },
   };
 }
-
 ```
-
 
 These variants are the same color defined in the `color` property, but with some tweaks like:
 
@@ -142,18 +131,15 @@ Take an example when we want to create a button that uses this `current` color, 
 .my-button {
   @sugar.color (error);
 }
-
 ```
-
 
 ```html
 <div class="my-section">
   <a class="btn">Hello world</a>
 </div>
 <a class="my-button btn">Other button</a>
-
 ```
-
 
 > Note that behind the scene the colors are applied using variables. This mean that the CSS cascading feature works here as well.
 
+{{/layout-doc }}

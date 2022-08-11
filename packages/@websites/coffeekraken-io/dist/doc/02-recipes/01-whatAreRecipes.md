@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # What are recipes?
 
@@ -31,3 +26,4 @@ Each recipe comes with these built-in capabilities:
 4. **1 command production ready build stack** (minification, bundling, etc...)
 5. **Extensability** as a recipe is nothing more that a "template"
 
+{{/layout-doc }}

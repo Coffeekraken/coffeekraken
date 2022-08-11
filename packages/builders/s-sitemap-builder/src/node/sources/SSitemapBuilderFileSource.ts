@@ -1,5 +1,6 @@
 import __SGlob from '@coffeekraken/s-glob';
 import __SPromise from '@coffeekraken/s-promise';
+import __STypescriptBuilder from '@coffeekraken/s-typescript-builder';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import type { ISSitemapBuilderBuildParams } from '../interface/SSitemapBuildIParamsInterface';
 import type { ISSitemapBuilderResultItem } from '../SSitemapBuilder';
@@ -77,7 +78,19 @@ export default class SSitemapBuilderFileSource extends __SSitemapBuilderSource {
 
                 for (let [key, file] of Object.entries(files)) {
                     // @ts-ignore
-                    const fn = (await import(file.path)).default;
+                    let filePath = file.path;
+
+                    if (filePath.match(/\.ts$/)) {
+                        const buildedFile =
+                            await __STypescriptBuilder.buildTemporary(filePath);
+                        filePath = buildedFile.path;
+                        setTimeout(() => {
+                            buildedFile.remove();
+                        }, 500);
+                    }
+
+                    // @ts-ignore
+                    const fn = (await import(filePath)).default;
                     if (typeof fn === 'function') {
                         const fileItems = await fn(params);
                         items = [...items, ...fileItems];

@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Layout
 
@@ -70,9 +65,7 @@ First possibility to apply layouts using this technique is to use the `@sugar.la
 .my-layout {
   @sugar.layout ('1 2 _ 3 4');
 }
-
 ```
-
 
 ```html
 <div class="my-layout">
@@ -81,9 +74,7 @@ First possibility to apply layouts using this technique is to use the `@sugar.la
   <div>Area 3</div>
   <div>Area 4</div>
 </div>
-
 ```
-
 
 > Note that the order of `div` areas in your html is just linked to area "id" like `1`, `2`, etc... This mean that you can have the first area in the html that is displayed at the end, etc...
 
@@ -93,6 +84,10 @@ Second possibility is to use auto-generated layout classes. These layouts are de
 
 Here's the built-in layout classes:
 
+{{#each layouts}}
+
+- **s-layout:{{@key}}**
+  {{/each}}
 
 These classes are generated depending on your `theme.layout.layout` configuration.
 
@@ -107,9 +102,8 @@ These classes are generated depending on your `theme.layout.layout` configuratio
         }
     }
 }
-
 ```
-
 
 > Note that the `themeLayout.config.ts` configuration file provide already some generic layouts. To check more on that, take a look at our [configuration explorer](/doc/config/explorer)
 
+{{/layout-doc }}

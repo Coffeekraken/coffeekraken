@@ -12,18 +12,8 @@
  */
 -->
 
-<!-- image -->
+{{#> layout-doc }}
 
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
+{{> recipe config.frontstack.recipes.litElement id='litElement' }}
 
-
-
-#  recipe
-
-
-
-- Default stack: ``
-
-
-
+{{/layout-doc }}

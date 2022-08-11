@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # What is a docmap?
 
@@ -50,9 +45,7 @@ It may look like this:
 export default function (ar: any[]): any[] {
   // ...
 }
-
 ```
-
 
 ## What a `docmap.json` file looks like?
 
@@ -95,9 +88,7 @@ A `docmap.json` file will look like something like this:
         }
     }
 }
-
 ```
-
 
 You can see that we have a lot of informations about our documentation.
 
@@ -117,9 +108,7 @@ To build a `docmap.json` file, you can use either our [@coffeekraken/s-docmap](/
 
 ```shell
 sugar docmap.build
-
 ```
-
 
 This will search for files in your `src` folder as well as in your generated `dist/css/index.css` file for docblock that have a `@namespace` tag AND a `@name` one.
 All docblocks finded will be part of your `docmap.json` file.
@@ -128,3 +117,4 @@ The build process will also reference all the dependencies packages that have a 
 
 > Note that you must have the [@coffeekraken/cli](/package/@coffeekraken/cli/doc/readme) package installed.
 
+{{/layout-doc }}

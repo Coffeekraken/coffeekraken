@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Registering new config files
 
@@ -33,7 +28,6 @@ To register some new configuration files for your package, you just need to crea
     ]
   }
 }
-
 ```
 
-
+{{/layout-doc }}

@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Configuration overview
 
@@ -72,9 +67,7 @@ To access your configuration, simply install the `@coffeekraken/s-sugar-config` 
 npm i @coffeekraken/s-sugar-config
 # Using yarn
 yarn add @coffeekraken/s-sugar-config
-
 ```
-
 
 Then, here's an example to access the "storage" configurations. (more on built-in configurations on the [@coffeekraken/s-sugar-config](https:/www.npmjs.com/package/@coffeekraken/s-sugar-config) package page)
 
@@ -87,7 +80,6 @@ await __SSugarConfig.load();
 __SSugarConfig.get('storage.package.rootDir');
 __SSugarConfig.get('storage.src.jsDir');
 // etc...
-
 ```
 
-
+{{/layout-doc }}

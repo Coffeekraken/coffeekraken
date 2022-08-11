@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Images build process
 
@@ -34,9 +29,7 @@ You can easily launch your image processing using the sugar CLI like so:
 
 ```shell
 sugar images.build
-
 ```
-
 
 ## Under the hood
 
@@ -44,7 +37,7 @@ To compress, resize, etc... your images, we use the more than awesome [Sharp](ht
 
 ## Default configurations
 
-# Config partial
+{{> config namespace='@coffeekraken.s-images-builder.config.imagesBuilder'}}
 
 ## `@coffeekraken/s-images-builder` package
 
@@ -52,19 +45,10 @@ You can as well make use of our `@coffeekraken/s-images-builder` package that ex
 
 ```shell
 npm i @coffeekraken/s-images-builder --save-dev
-
 ```
-
 
 ```js
-import SImagesBuilder from &#x27;@coffeekraken/s-image-builder&#x27;;
-const builder &#x3D; new SImagesBuilder({
-     imagesBuilder: {
-         // some settings...
-     }
-});
-await builder.build(&#x27;src /.jpg&#x27;);
-
+{{get docmap.map '@coffeekraken.s-images-builder.node.SImagesBuilder' false 'example.0.code' }}
 ```
 
-
+{{/layout-doc }}

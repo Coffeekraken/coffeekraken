@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Pleasant syntax
 
@@ -34,9 +29,7 @@ Pleasant syntax is a way to write your classes into your HTML that let you apply
 >
   Hello world
 </div>
-
 ```
-
 
 ## Preprocessors
 
@@ -49,9 +42,7 @@ In order for this transformation to happen, you'll need to use one of these tran
 ```js
 import __expandPleasantCssClassnames from "@coffeekraken/sugar/shared/html/__expandPleasantCssClassnames";
 __expandPleasantCssClassnames("...");
-
 ```
-
 
 #### Js
 
@@ -60,9 +51,7 @@ __expandPleasantCssClassnames("...");
 ```js
 import __expandPleasantCssClassnamesLive from "@coffeekraken/sugar/js/html/__expandPleasantCssClassnamesLive";
 __expandPleasantCssClassnamesLive();
-
 ```
-
 
 > Note that this can be very useful but may occurs some "layout shift" at page display time
 
@@ -72,9 +61,7 @@ __expandPleasantCssClassnamesLive();
 
 ```js
 $processed = \Sugar\html\expandPleasantCssClassnames('...');
-
 ```
-
 
 #### Specifications
 
@@ -88,3 +75,4 @@ Here's the specification that a transformer MUST integrate in order to be consid
    - From: `s-font:bold @mobile s-font:italic`
    - To: `s-font s-font--bold s-font--italic___mobile`
 
+{{/layout-doc }}

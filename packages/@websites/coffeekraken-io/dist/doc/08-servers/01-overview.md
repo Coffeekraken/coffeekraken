@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Servers overview
 
@@ -41,3 +36,4 @@ Coffeekraken take advantage of the AMAZING [ViteJs](https://vitejs.dev/) package
 
 > For more information on the ViteJs platform, please take a look at [the official website](https://vitejs.dev/)
 
+{{/layout-doc }}

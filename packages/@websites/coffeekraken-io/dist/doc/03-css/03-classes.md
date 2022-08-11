@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Classes
 
@@ -33,9 +28,7 @@ To generate all these classes, you can simply add this to your css file:
 /* or generate only the classes you need */
 @sugar.position.classes();
 @sugar.ui.avatar.classes();
-
 ```
-
 
 Here's a small non-exhaustive list of classes that are available:
 
@@ -86,3 +79,4 @@ Here's a small non-exhaustive list of classes that are available:
 
 These are just a sneak peak of what the toolkit has to offer. For more please take a look at the [styleguide](/styleguide) documentation.
 
+{{/layout-doc }}

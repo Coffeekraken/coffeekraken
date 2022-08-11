@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Spec files
 
@@ -38,3 +33,4 @@ By describing the data that this view depends on, you can use that and build you
 - [More on `frontspec.json`](/doc/specfiles/frontspec)
 - [More on `viewspec.json`](/doc/specfiles/frontspec)
 
+{{/layout-doc }}

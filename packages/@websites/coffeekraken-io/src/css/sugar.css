@@ -1,25 +1,21 @@
-@sugar.init;
-@sugar.theme (dark, null, true);
+@sugar.cache ('sugar') {
+  @sugar.init;
+  @sugar.theme (dark, null, true);
 
-@sugar.classes;
-@sugar.media.classes ('mobile,tablet') {
   @sugar.classes;
-  /* @sugar.container.classes;
-    @sugar.grid.classes;
-    @sugar.layout.classes;
-    @sugar.margin.classes;
-    @sugar.display.classes; */
+  @sugar.media.classes ('mobile,tablet') {
+    @sugar.classes;
+  }
+
+  @sugar.ui.filtrableinput.classes;
+  @sugar.ui.colorpicker.classes;
+  @sugar.ui.datetimepicker.classes;
+  @sugar.ui.codeexample.classes;
+  @sugar.ui.rating.classes;
+  @sugar.ui.slider.classes;
+  @sugar.ui.themeswitcher.classes;
+  @sugar.platform.classes;
 }
-
-@sugar.ui.filtrableinput.classes;
-@sugar.ui.colorpicker.classes;
-@sugar.ui.datetimepicker.classes;
-@sugar.ui.codeexample.classes;
-@sugar.ui.rating.classes;
-@sugar.ui.slider.classes;
-@sugar.ui.themeswitcher.classes;
-
-@sugar.platform.classes;
 
 @sugar.icon.classes (
   fa:user:user

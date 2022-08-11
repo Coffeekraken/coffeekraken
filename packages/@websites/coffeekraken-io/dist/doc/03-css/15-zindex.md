@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # z-index
 
@@ -27,3 +22,4 @@ To avoid headaches, here's some z-index where you can find our UI elements:
 - `100`: Backdrop
 - `200`: Floating UI like datetime picker, color picker, etc...
 
+{{/layout-doc }}

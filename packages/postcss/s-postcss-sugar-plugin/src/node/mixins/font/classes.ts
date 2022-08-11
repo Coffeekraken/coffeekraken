@@ -172,10 +172,10 @@ export default function ({
         * @cssClass         s-font:oblique                   Apply the \`oblique\` font-style value
         *    
         * @example        html          Italic
-        *   <p class="s-font:italic s-mbe:20">${__faker.lorem.sentence()}</p>
+        * <p class="s-font:italic s-mbe:20">${__faker.lorem.sentence()}</p>
         * 
+        * @example          html        Oblique
         * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Oblique</h3>
         *   <p class="s-font:oblique s-mbe:20">${__faker.lorem.sentence()}</p>
         * </div>
         * 

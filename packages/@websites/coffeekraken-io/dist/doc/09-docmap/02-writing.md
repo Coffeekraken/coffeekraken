@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Writing documentation
 
@@ -83,7 +78,6 @@ This example is the documentation of the `querySelectorLive` DOM function
  * @since       1.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-
 ```
 
-
+{{/layout-doc }}

@@ -24,11 +24,14 @@ const child_process_1 = __importDefault(require("child_process"));
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function default_1() {
-    // get global node modules directory path
     return child_process_1.default
-        .execSync(`npm root --location=global`)
+        .execSync(`npm root --global`, {
+        stdio: 'pipe',
+    })
         .toString()
-        .trim();
+        .trim()
+        .split('\n')
+        .slice(-1)[0];
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsa0VBQTJDO0FBRTNDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FrQkc7QUFDSDtJQUNJLHlDQUF5QztJQUN6QyxPQUFPLHVCQUFjO1NBQ2hCLFFBQVEsQ0FBQyw0QkFBNEIsQ0FBQztTQUN0QyxRQUFRLEVBQUU7U0FDVixJQUFJLEVBQUUsQ0FBQztBQUNoQixDQUFDO0FBTkQsNEJBTUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsa0VBQTJDO0FBRTNDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FrQkc7QUFDSDtJQUNJLE9BQU8sdUJBQWM7U0FDaEIsUUFBUSxDQUFDLG1CQUFtQixFQUFFO1FBQzNCLEtBQUssRUFBRSxNQUFNO0tBQ2hCLENBQUM7U0FDRCxRQUFRLEVBQUU7U0FDVixJQUFJLEVBQUU7U0FDTixLQUFLLENBQUMsSUFBSSxDQUFDO1NBQ1gsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7QUFDdEIsQ0FBQztBQVRELDRCQVNDIn0=

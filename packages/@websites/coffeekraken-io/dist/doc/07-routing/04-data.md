@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Data
 
@@ -46,17 +41,13 @@ export default async function ({ req, res, pageConfig }) {
         hello: 'world',
     };
 }
-
 ```
-
 
 This will provide the `hello` variable to your view. You can use it like so:
 
 ```html
 <h1>&lcub;&lcub; $hello &rcub;&rcub;</h1>
-
 ```
-
 
 ## Passing parameters
 
@@ -70,9 +61,7 @@ export default {
     },
     views: ['hello.hello'],
 };
-
 ```
-
 
 Assume we access our page with this url: `/hello/coco/world`
 
@@ -87,9 +76,7 @@ export default async function ({ req, res, pageConfig }) {
         hello: req.params.something,
     };
 }
-
 ```
-
 
 From this point, you can handle pretty much all your data needs.
 
@@ -97,3 +84,4 @@ From this point, you can handle pretty much all your data needs.
 
 > Data files can be in `.data.js` as well as `.data.json` and `.data.php` formats.
 
+{{/layout-doc }}

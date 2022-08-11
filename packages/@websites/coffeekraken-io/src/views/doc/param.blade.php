@@ -12,7 +12,9 @@
                     </div>
                     <div>
                         <div class="s-typo:code">
-                            {{ str_replace($packageRoot.'/', '', \Sugar\string\toString($param->default)) }}
+                            @if (isset($param->defaul))
+                                {{ str_replace($packageRoot.'/', '', \Sugar\string\toString($param->default)) }}
+                            @endif
                         </div>
                     </div>
                     <div class="s-p:30">

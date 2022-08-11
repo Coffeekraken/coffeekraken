@@ -12,18 +12,8 @@
  */
 -->
 
-<!-- image -->
+{{#> layout-doc }}
 
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
+{{> recipe config.frontstack.recipes.nextJs id='nextJs' }}
 
-
-
-#  recipe
-
-
-
-- Default stack: ``
-
-
-
+{{/layout-doc }}

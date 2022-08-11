@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Action `viteBuild`
 
@@ -53,19 +48,12 @@ export default function (env, config) {
     },
   };
 }
-
 ```
-
 
 ### Parameters
 
 Here's the parameters that you can pass to this action:
 
+{{> interface namespace='@coffeekraken.s-vite.node.interface.SViteBuildParamsInterface' }}
 
-```js
-
-
-```
-
-
-
+{{/layout-doc }}

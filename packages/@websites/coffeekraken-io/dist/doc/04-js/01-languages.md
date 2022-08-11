@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Supported languages
 
@@ -31,3 +26,4 @@ This does mean that you can add all ViteJS plugins if you need to handle more th
 
 All of the typescript settings can be set using the standard [tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) file.
 
+{{/layout-doc }}

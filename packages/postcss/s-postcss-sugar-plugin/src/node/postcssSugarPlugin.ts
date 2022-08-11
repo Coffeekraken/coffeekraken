@@ -33,8 +33,6 @@ let loadedPromise;
 
 const _cacheObjById = {};
 
-pluginHash = 'hhh';
-
 export interface IPostcssSugarPluginSettings {
     cache?: boolean;
     excludeByTypes?: string[];
@@ -95,31 +93,33 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
         settings,
     );
 
+    let themeHash, cacheDir;
+
     async function _loadConfig() {
         await __SSugarConfig.load();
-        settings = __deepMerge(
-            {
-                excludeByTypes: __SSugarConfig.get(
-                    'postcssSugarPlugin.excludeByTypes',
-                ),
-                excludeCommentByTypes: __SSugarConfig.get(
-                    'postcssSugarPlugin.excludeCommentByTypes',
-                ),
-                excludeCodeByTypes: __SSugarConfig.get(
-                    'postcssSugarPlugin.excludeCodeByTypes',
-                ),
-                target: 'production',
-                inlineImport: true,
-                cache: __SSugarConfig.get('postcssSugarPlugin.cache'),
-            },
-            settings,
-        );
+        settings = __deepMerge(settings, {
+            excludeByTypes: __SSugarConfig.get(
+                'postcssSugarPlugin.excludeByTypes',
+            ),
+            excludeCommentByTypes: __SSugarConfig.get(
+                'postcssSugarPlugin.excludeCommentByTypes',
+            ),
+            excludeCodeByTypes: __SSugarConfig.get(
+                'postcssSugarPlugin.excludeCodeByTypes',
+            ),
+            cache: __SSugarConfig.get('postcssSugarPlugin.cache'),
+        });
+
+        // set theme hash
+        themeHash = __STheme.hash();
+
+        // set cache directory
+        cacheDir = `${__packageCacheDir()}/postcssSugarPlugin`;
 
         // remove cache if not for vite target
         if (settings.cache === undefined && settings.target !== 'vite') {
             settings.cache = false;
         }
-        settings.cache = false;
 
         if (settings.excludeByTypes?.length) {
             __CssVars.excludeByTypes(settings.excludeByTypes);
@@ -155,9 +155,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
     }
 
     const _cacheHashById = {};
-    function cache(id, hash, content: string | string[]): string | string[] {
-        if (!settings.cache) return content;
-
+    function saveCache(): string | string[] {
         // store the hash for the id
         if (!_cacheObjById[id]) _cacheObjById[id] = {};
         _cacheObjById[id].hash = hash;
@@ -425,6 +423,9 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                     params,
                     atRule,
                     settings,
+                    cacheDir,
+                    pluginHash,
+                    themeHash,
                     themeValueProxy,
                 });
                 value = value.replace(sugarStatement, result);
@@ -444,9 +445,6 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             // func sugar json
             const sugarJsonInstance = new __SSugarJson();
             const sugarJson = await sugarJsonInstance.read();
-
-            // sugar config
-            // await __SSugarConfig.load();
 
             for (let i = 0; i < Object.keys(sugarJson).length; i++) {
                 const packageName = Object.keys(sugarJson)[i];
@@ -505,16 +503,6 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                 if (!rootDir) {
                     rootDir = __folderPath(root.source.input.from);
                 }
-
-                // const fileHash = __fileHash(root.source.input.from, {
-                //     include: {
-                //         ctime: true,
-                //     },
-                // });
-                // const hash = __objectHash({
-                //     fileHash,
-                //     theme: __STheme.hash,
-                // });
             }
         },
 
@@ -537,6 +525,8 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                 await processorFn({
                     CssVars: __CssVars,
                     pluginHash,
+                    themeHash,
+                    cacheDir,
                     getRoot: __getRoot,
                     getCacheFilePath,
                     settings,
@@ -634,10 +624,11 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                     params,
                     atRule,
                     findUp,
-                    cache,
                     nodesToString,
                     CssVars: __CssVars,
                     pluginHash,
+                    themeHash,
+                    cacheDir,
                     getRoot: __getRoot,
                     getCacheFilePath,
                     replaceWith(nodes) {

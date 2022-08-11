@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Routing overview
 
@@ -38,9 +33,7 @@ export default {
   // works too:
   // views: ['hello.hello']
 };
-
 ```
-
 
 - Create your view `hello.blade.php` (twig is also supported) unto the `src/views/hello` folder
 - Your page will be available under `/hello` url!
@@ -62,9 +55,7 @@ export default {
   // works too:
   // views: ['hello.hello']
 };
-
 ```
-
 
 ## Views
 
@@ -78,3 +69,4 @@ These views are rendered using native PHP libraries through the `@coffeekraken/s
 
 > For more information about the `@coffeekraken/s-view-renderer`, please check his own documentation.
 
+{{/layout-doc }}

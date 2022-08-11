@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Scopes
 
@@ -42,3 +37,4 @@ Here's the base list of `scopes` that a component **MUST** use:
 
 > With these scopes defined, you can choose if you want integrate a component with all his CSS, only the `bare` scope and apply your own visual style to it, or take only the `lnf` scope which it less meaningful alone...
 
+{{/layout-doc }}

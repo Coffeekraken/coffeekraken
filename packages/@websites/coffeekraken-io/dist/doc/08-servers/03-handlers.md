@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # SFrontendServer handlers
 
@@ -41,9 +36,7 @@ export default function myModule(express, settings, config) {
     handler: "myHandler",
   };
 }
-
 ```
-
 
 ## Handler scaffold
 
@@ -61,7 +54,6 @@ export default function myHandler(req, res, settings = {}) {
     resolve(pageHtml.value);
   });
 }
-
 ```
 
-
+{{/layout-doc }}

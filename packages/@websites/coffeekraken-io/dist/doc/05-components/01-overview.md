@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Overview
 
@@ -33,61 +28,21 @@ Inside the component category, we also include `web`components. These are new cu
 
 Here's the list of currently official available components:
 
+{{#each docmap.menu.slug}}
+{{#ifMatch @key 'styleguide\/ui' }}
 
--   [`avatar`](/styleguide/ui/avatar)
-
--   [`backdrop`](/styleguide/ui/backdrop)
-
--   [`badges`](/styleguide/ui/badges)
-
--   [`blockquote`](/styleguide/ui/blockquote)
-
--   [`button`](/styleguide/ui/button)
-
--   [`dropdown`](/styleguide/ui/dropdown)
-
--   [`fs-tree`](/styleguide/ui/fs-tree)
-
--   [`lists`](/styleguide/ui/lists)
-
--   [`loaders`](/styleguide/ui/loaders)
-
--   [`tabs`](/styleguide/ui/tabs)
-
--   [`table`](/styleguide/ui/table)
-
--   [`tooltip`](/styleguide/ui/tooltip)
-
--   [`group`](/styleguide/ui/group)
-
--   [`scrollbar`](/styleguide/ui/scrollbar)
-
--   [`icons`](/styleguide/ui/icons)
+-   [`{{replace @key '/styleguide/ui/' ''}}`]({{@key}})
+    {{/ifMatch}}
+    {{/each}}
 
 And here's the list of our official `web`components:
 
+{{#each docmap.menu.packages }}
+{{#ifMatch @key '-component$' }}
 
--   [`s-clipboard-copy-component`](/package/@coffeekraken/s-clipboard-copy-component/doc/readme)
-
--   [`s-code-example-component`](/package/@coffeekraken/s-code-example-component/doc/readme)
-
--   [`s-color-picker-component`](/package/@coffeekraken/s-color-picker-component/doc/readme)
-
--   [`s-datetime-picker-component`](/package/@coffeekraken/s-datetime-picker-component/doc/readme)
-
--   [`s-filtrable-input-component`](/package/@coffeekraken/s-filtrable-input-component/doc/readme)
-
--   [`s-panel-component`](/package/@coffeekraken/s-panel-component/doc/readme)
-
--   [`s-range-component`](/package/@coffeekraken/s-range-component/doc/readme)
-
--   [`s-rating-component`](/package/@coffeekraken/s-rating-component/doc/readme)
-
--   [`s-scroll-component`](/package/@coffeekraken/s-scroll-component/doc/readme)
-
--   [`s-slider-component`](/package/@coffeekraken/s-slider-component/doc/readme)
-
--   [`s-theme-switcher-component`](/package/@coffeekraken/s-theme-switcher-component/doc/readme)
+-   [`{{replace @key '@coffeekraken/' ''}}`](/package/{{@key}}/doc/readme)
+    {{/ifMatch}}
+    {{/each}}
 
 ## Components MUST follow some simple rules
 
@@ -98,3 +53,4 @@ All the components that we provide follows these simple rules:
 3. A component **MUST** work out of the box without anything more to do
 4. A component **MUST** follow your `theme` specifications if the `lnf` (look and feel) `scope` is applied
 
+{{/layout-doc }}

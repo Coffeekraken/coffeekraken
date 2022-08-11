@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Scopes
 
@@ -49,9 +44,7 @@ These are some small features that need to tweak a little bit the css. It would 
   /* this would print again the all avatar css and we don't want that... */
   @sugar.ui.avatar (square);
 }
-
 ```
-
 
 Instead we can write this like so:
 
@@ -64,9 +57,8 @@ Instead we can write this like so:
   /* this will print only the css for the "shape" scope */
   @sugar.ui.avatar (square, $scope: shape);
 }
-
 ```
-
 
 > Each mixins API are documented either through the [styleguide](/styleguide) for more visual exploration, or through the [API](/api) for more technical specifications.
 
+{{/layout-doc }}

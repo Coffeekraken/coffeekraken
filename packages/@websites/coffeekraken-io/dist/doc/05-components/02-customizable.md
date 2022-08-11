@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Fully customizable
 
@@ -39,17 +34,13 @@ To integrate the `button` component inside your stylesheet with all his `scopes`
 .my-button {
   @sugar.ui.button;
 }
-
 ```
-
 
 ```html
 <a class="s-btn">Hello world</a>
 <br />
 <a class="my-button">Hello world</a>
-
 ```
-
 
 ## Example of custom styling `button` integration:
 
@@ -69,17 +60,13 @@ To integrate the `button` component inside your stylesheet with only the `bare` 
   background: red;
   color: white;
 }
-
 ```
-
 
 ```html
 <a class="s-btn">Hello world</a>
 <br />
 <a class="my-button">Hello world</a>
-
 ```
-
 
 ## Customize `web`components
 
@@ -98,16 +85,13 @@ define({
 });
 // registering our component with another tag name without the `bare` prop applied by default
 define({}, "my-cool-date-picker");
-
 ```
-
 
 ```html
 <!-- using our bare component -->
 <s-date-picker></s-date-picker>
 <!-- using our none bare component and apply it the bare prop -->
 <my-cool-date-picker bare></my-cool-date-picker>
-
 ```
 
-
+{{/layout-doc }}

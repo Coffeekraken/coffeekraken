@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Action `copy`
 
@@ -55,19 +50,12 @@ export default function (env, config) {
     },
   };
 }
-
 ```
-
 
 ### Parameters
 
 Here's the parameters that you can pass to this action:
 
+{{> interface namespace='@coffeekraken.cli.node.fs.interface.SCliFsCopyParamsInterface' }}
 
-```js
-
-
-```
-
-
-
+{{/layout-doc }}

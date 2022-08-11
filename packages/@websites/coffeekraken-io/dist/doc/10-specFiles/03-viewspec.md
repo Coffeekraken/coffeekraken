@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # `viewspec.json`
 
@@ -65,9 +60,7 @@ The `viewspec.json` files has to live in at the same place of the view he's desc
         }
     }
 }
-
 ```
-
 
 ## Data types
 
@@ -100,9 +93,7 @@ Here's a simple example
         }
     }
 }
-
 ```
-
 
 ## Resulting data
 
@@ -128,7 +119,6 @@ return [
     ],
   ],
 ];
-
 ```
 
-
+{{/layout-doc }}

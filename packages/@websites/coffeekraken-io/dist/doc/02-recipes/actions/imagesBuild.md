@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Action `imagesBuild`
 
@@ -50,19 +45,12 @@ export default function (env, config) {
     },
   };
 }
-
 ```
-
 
 ### Parameters
 
 Here's the parameters that you can pass to this action:
 
+{{> interface namespace='@coffeekraken.s-images-builder.node.interface.SImagesBuilderBuildParamsInterface' }}
 
-```js
-
-
-```
-
-
-
+{{/layout-doc }}

@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Get Started
 
@@ -25,9 +20,7 @@ To start using Coffeekraken tools, the easier way is to install the **@coffeekra
 
 ```shell
 npm install @coffeekraken/cli -g
-
 ```
-
 
 This will give you access to the **sugar** CLI and will give you the ability to generate new projects
 that directly integrate all access to your toolchain power like:
@@ -44,9 +37,7 @@ To start using and discover what the CLI can do for your, the easiest way it to 
 
 ```bash
 sugar
-
 ```
-
 
 > calling sugar this way will start a simple interactive process that will let you discover his features
 
@@ -54,7 +45,6 @@ You can as well access to the help by taping:
 
 ```bash
 sugar --help
-
 ```
 
-
+{{/layout-doc }}

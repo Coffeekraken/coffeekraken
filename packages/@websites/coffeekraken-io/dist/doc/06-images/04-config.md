@@ -12,14 +12,10 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Images configurations
 
-# Config partial
+{{> config namespace='@coffeekraken.s-images-builder.config.imagesBuilder'}}
 
+{{/layout-doc }}

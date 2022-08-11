@@ -9,7 +9,9 @@
         </div>
 
         <div class="s-p:30">
-            @include('doc.partials.paramType', ['type' => $block->return->type])
+            @if (isset($block->return->type))
+                @include('doc.partials.paramType', ['type' => $block->return->type])
+            @endif
         </div>
     </header>
     @if (isset($block->return->default))

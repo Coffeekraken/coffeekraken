@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # SFrontendServer middlewares
 
@@ -36,9 +31,7 @@ export default function myModule(express, settings, config) {
     settings: {},
   };
 }
-
 ```
-
 
 ## Middleware scaffold
 
@@ -54,7 +47,6 @@ export default function myMiddleware(settings = {}) {
     next();
   };
 }
-
 ```
 
-
+{{/layout-doc }}

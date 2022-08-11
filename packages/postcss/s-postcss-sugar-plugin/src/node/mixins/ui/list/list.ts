@@ -140,7 +140,7 @@ export default function ({
                         }
 
                         ${bulletSelector} {
-                            margin-top: 0.25em;
+                            margin-top: 0.55em;
                             font-size: 0.8em;
                         }
                     }

@@ -10,26 +10,28 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
 -->
 
+
 <!-- image -->
 
-<!-- 
-![@coffeekraken/coffeekraken-io](/dist/img/doc/readmeHeader.jpg)
- -->
+![@coffeekraken/coffeekraken-io](https://cdnv2.coffeekraken.io/readme-header.jpg)
+
 
 <!-- header -->
 
 # @coffeekraken/coffeekraken-io
-###### MIT 2.0.0-alpha.10 - [Git repository]()
+###### MIT 2.0.0-alpha.18 - [Git repository]()
 
-[![size](https://shields.io/bundlephobia/min/undefined?style&#x3D;for-the-badge)](https://www.npmjs.com/package/undefined)
-[![downloads](https://shields.io/npm/dm/undefined?style&#x3D;for-the-badge)](https://www.npmjs.com/package/undefined)
-[![license](https://shields.io/npm/l/undefined?style&#x3D;for-the-badge)](./LICENSE)
+[![size](https://shields.io/bundlephobia/min/@coffeekraken/coffeekraken-io?style&#x3D;for-the-badge)](https://www.npmjs.com/package/@coffeekraken/coffeekraken-io)
+[![downloads](https://shields.io/npm/dm/@coffeekraken/coffeekraken-io?style&#x3D;for-the-badge)](https://www.npmjs.com/package/@coffeekraken/coffeekraken-io)
+[![license](https://shields.io/npm/l/@coffeekraken/coffeekraken-io?style&#x3D;for-the-badge)](./LICENSE)
 [![discord](https://shields.io/discord/Coffeekraken?style&#x3D;for-the-badge)](https://discord.gg/ERsX54UE)
+
 
 
 <!-- description -->
 
-wefuih owiehf owuhe fioquwh efiuh qweuihqweu qufouihw efuih woieuh wiuehuqwhe fiuhq efhwiuehfiwqhefuiqhw efjb wqfhjb oqweuhf euf huoqehbu
+Official coffeekraken.io website
+
 
 <!-- install -->
 
@@ -45,7 +47,9 @@ npm i @coffeekraken/coffeekraken-io
   PLop
 
 
+
 <!-- doc-menu -->
+
 
 
 
@@ -54,6 +58,7 @@ npm i @coffeekraken/coffeekraken-io
 ### License
 
 Distributed under the **MIT** License. See **[LICENSE](./license)** for more information.
+
 
 <!-- Contact -->
 

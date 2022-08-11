@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # What is Coffeekraken
 
@@ -27,6 +22,14 @@ Coffeekraken is an "organisation" that publish packages around web development f
 
 First, Coffeekraken gives you access to a bunch of UI components ready to use like basic styling (h1, h2, p, blockquote, list, etc...) and some more advanced ones like **slider**, **form validation**, **panels (modal)**, **range inputs** and more...
 
+{{#each docmap.map}}
+{{#ifEqual (get this 'type') 'CustomElement'}}
+
+- [**{{this.name}}**]({{this.menu.slug}})
+  - {{this.description}}
+  - {{this.menu.tree}}
+    {{/ifEqual}}
+    {{/each}}
 
 > For a more visual discovery of our UI's components, please check out our **styleguide**
 
@@ -44,9 +47,7 @@ This plugin allows you to make use of mixins and functions like these:
   color: sugar.color(accent, foreground);
   /* and a lot more */
 }
-
 ```
-
 
 In addition to this, you will have access to a lot of helper classes for things like **paddings**, **margin**, **typography**, **flex** and more...
 
@@ -61,9 +62,7 @@ In addition to this, you will have access to a lot of helper classes for things 
 @sugar.margin.classes();
 @sugar.color.classes();
 /* etc... */
-
 ```
-
 
 > For more info about using the theming suite, please check out our [theming documentation](/doc/css/theming)
 
@@ -81,6 +80,7 @@ All the different project types like **generic**, **Nextjs**, **litElement**, et
 
 #### Built-in recipes
 
+{{> recipesList }}
 
 ## Sugar toolkit
 
@@ -102,9 +102,7 @@ Coffeekraken provides a CLI called `sugar` through which you will be able to sca
 npm install @coffeekraken/cli -g
 # Show the cli help
 sugar -h
-
 ```
-
 
 > For more info about how to use our CLI, check out our [@coffeekraken/cli](/package/@coffeekraken/cli/doc/README) package documentation.
 
@@ -134,3 +132,4 @@ These packages are the bones of our development suite but they can be used as st
 
 > For more info about our available packages, check out our [packages](/package/@coffeekraken/sugar/doc/readme) documentation.
 
+{{/layout-doc }}

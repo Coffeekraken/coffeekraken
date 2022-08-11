@@ -1,7 +1,5 @@
 // @ts-nocheck
 
-import __cliCursor from 'cli-cursor';
-import __consoleClear from 'console-clear';
 import __terminalKit from 'terminal-kit';
 
 /**

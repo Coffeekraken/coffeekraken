@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Icons
 
@@ -40,9 +35,7 @@ To register some icons, simply call the `@sugar.icon.classes` mixin with the lis
     fa:hammer:todo
     fs:src/icons/read-direction.svg:support-rtl
 );
-
 ```
-
 
 Each line define an icon using this syntax:
 
@@ -61,6 +54,7 @@ For now, we support 2 protocols that are:
 
 > These are the supported protocols that we have for now. We can as well add some depending on your needs and requests through our different communication channels.
 
+{{/layout-doc }}
 
 ## Usage
 
@@ -70,6 +64,4 @@ To use your registered icons, simply reference them inside your html like so:
 <i class="s-icon:vuejs"></i>
 <i class="s-icon:support-rtl"></i>
 <!-- etc... -->
-
 ```
-

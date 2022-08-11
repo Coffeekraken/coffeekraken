@@ -30,6 +30,9 @@ function assets($assets)
 
     foreach ($assets as $name => $asset) {
         $extension = \Sugar\path\extension($asset->src);
+        if (!$extension) {
+            continue;
+        }
         switch ($extension) {
             case 'css':
                 if (
@@ -92,6 +95,7 @@ function assets($assets)
                 }
                 break;
             default:
+                print 'EEE' . $extension;
                 if (file_exists(realpath($asset->src))) {
                     array_push(
                         $assetsStr,

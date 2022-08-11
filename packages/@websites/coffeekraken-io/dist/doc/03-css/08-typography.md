@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Typography
 
@@ -36,9 +31,7 @@ These elements styling are defined in your theme configuration file under the `t
         }
     }
 }
-
 ```
-
 
 Each typo elements like `h1`, `h2`, etc... are just simple javascript object that will be converted to css automatically behind the scene.
 
@@ -52,4 +45,9 @@ This behavior will happen to all properties supported by the [postcssSugarPlugin
 
 Some classes will be generated from your theme configuration like these:
 
+{{#each typos}}
 
+- **s-typo:{{@key}}**
+  {{/each}}
+
+{{/layout-doc }}

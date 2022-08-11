@@ -12,12 +12,7 @@
  */
 -->
 
-<!-- image -->
-
-<!-- header -->
-##### @coffeekraken/coffeekraken-io
-
-
+{{#> layout-doc }}
 
 # Built-in configurations
 
@@ -40,3 +35,4 @@ Here's some of the main available configurations just for the example:
 
 > All of these configurations are accessible from your JS as well as in your CSS through the [PostCss Sugar plugin](/package/@coffeekraken/s-postcss-sugar-plugin/doc/readme). This plugin is directly integrated into our development tools but can be installed manually as all standard [PostCss plugins](https://github.com/postcss/postcss)
 
+{{/layout-doc }}

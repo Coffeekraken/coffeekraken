@@ -121,10 +121,13 @@
                 "type": {
                     "types": [
                         {
-                            "type": "String"
+                            "type": "Array",
+                            "of": [
+                                "String"
+                            ]
                         }
                     ],
-                    "raw": "String"
+                    "raw": "Array<String>"
                 },
                 "default": "true",
                 "description": "Specify which of the docmap entries has to be sorted alphabetically.\nThese array values has to be a dotPath like 'menu.documentation'",
@@ -145,10 +148,13 @@
                 "type": {
                     "types": [
                         {
-                            "type": "String"
+                            "type": "Array",
+                            "of": [
+                                "String"
+                            ]
                         }
                     ],
-                    "raw": "String"
+                    "raw": "Array<String>"
                 },
                 "default": "true",
                 "description": "Specify which of the docmap entries has to be sorted alphabetically and deeply.\nThese array values has to be a dotPath like 'menu.documentation'",

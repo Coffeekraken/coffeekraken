@@ -3,7 +3,6 @@ import __chokidar from 'chokidar';
 import __fs from 'fs';
 import __path from 'path';
 import __ts from 'typescript';
-import { v4 as __uuid } from 'uuid';
 
 const _processedPkgs = [];
 
@@ -350,7 +349,6 @@ function processPath(path, platform = 'node') {
     __fs.writeFileSync(
         packageJsonOutPath,
         JSON.stringify({
-            name: `@coffeekraken/internal-${__uuid()}`,
             type: module === 'commonjs' ? 'commonjs' : 'module',
             private: true,
         }),

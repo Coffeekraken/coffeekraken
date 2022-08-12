@@ -40,7 +40,7 @@ validator.validate('hello', {
 
 Here's the list of built-in validators:
 
-{{#each validatorsDefinition}} - **{{ @key }}**: this.description
+{{#each validatorsDefinition}} - **{{ @key }}**: {{this.description}}
 {{/each}}
 
 ## Custom validator

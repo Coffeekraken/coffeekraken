@@ -2,6 +2,7 @@ import config from './config';
 import configFileNameFromDocmapPath from './configFileNameFromDocmapPath';
 import configFiles from './configFiles';
 import configFromDocmap from './configFromDocmap';
+import formatConfigValue from './formatConfigValue';
 import get from './get';
 import ifEqual from './ifEqual';
 import ifMatch from './ifMatch';
@@ -24,7 +25,7 @@ export {
     configFileNameFromDocmapPath,
     configFiles,
     configFromDocmap,
-    // configValue,
+    formatConfigValue,
     config,
     get,
     __import as import,

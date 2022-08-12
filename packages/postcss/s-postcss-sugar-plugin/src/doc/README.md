@@ -71,7 +71,7 @@ Here's the list of all the available mixins:
 
 {{#each mixins}}
 
--   [`@sugar.{{this.dotCall}}(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.{{this.dotPath}})
+-   [@sugar.{{this.dotCall}}(...);](/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.{{this.dotPath}})
     {{/each}}
 
 ## Functions
@@ -80,7 +80,7 @@ Here's the list of all the available functions:
 
 {{#each functions}}
 
--   [`sugar.{{this.dotCall}}(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.function.{{this.dotPath}})
+-   [sugar.{{this.dotCall}}(...);](/api/@coffeekraken.s-postcss-sugar-plugin.node.function.{{this.dotPath}})
     {{/each}}
 
 {{/ layout-readme }}

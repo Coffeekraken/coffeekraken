@@ -137,10 +137,11 @@
                 },
                 "filename": "kitchen.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchen.config.ts",
+                "children": {}
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.copy.title": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.copy.title",
+            "@coffeekraken.s-kitchen.config.kitchenActions.copy.title": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.copy.title",
                 "name": "title",
                 "type": {
                     "types": [
@@ -152,19 +153,19 @@
                 },
                 "default": "Frontend server",
                 "description": "Specify the frontend server action title",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.copy",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.copy",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.copy.description": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.copy.description",
+            "@coffeekraken.s-kitchen.config.kitchenActions.copy.description": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.copy.description",
                 "name": "description",
                 "type": {
                     "types": [
@@ -176,19 +177,19 @@
                 },
                 "default": "...",
                 "description": "Specify the frontend server action description",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.copy",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.copy",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.copy.command": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.copy.command",
+            "@coffeekraken.s-kitchen.config.kitchenActions.copy.command": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.copy.command",
                 "name": "command",
                 "type": {
                     "types": [
@@ -200,19 +201,19 @@
                 },
                 "default": "sugar",
                 "description": "Specify the frontend server action command",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.copy",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.copy",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.rename.title": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.rename.title",
+            "@coffeekraken.s-kitchen.config.kitchenActions.rename.title": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.rename.title",
                 "name": "title",
                 "type": {
                     "types": [
@@ -224,19 +225,19 @@
                 },
                 "default": "Frontend server",
                 "description": "Rename a project (folder, package.json, etc...)",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.rename",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.rename",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.rename.description": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.rename.description",
+            "@coffeekraken.s-kitchen.config.kitchenActions.rename.description": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.rename.description",
                 "name": "description",
                 "type": {
                     "types": [
@@ -248,19 +249,19 @@
                 },
                 "default": "...",
                 "description": "Specify the kitchen rename action description",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.rename",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.rename",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.rename.command": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.rename.command",
+            "@coffeekraken.s-kitchen.config.kitchenActions.rename.command": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.rename.command",
                 "name": "command",
                 "type": {
                     "types": [
@@ -272,19 +273,19 @@
                 },
                 "default": "sugar",
                 "description": "Specify the kitchen rename action command",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.rename",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.rename",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.initNpm.title": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.initNpm.title",
+            "@coffeekraken.s-kitchen.config.kitchenActions.initNpm.title": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.initNpm.title",
                 "name": "title",
                 "type": {
                     "types": [
@@ -296,19 +297,19 @@
                 },
                 "default": "Init npm package",
                 "description": "Init the npm package",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.initNpm",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.initNpm",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.initNpm.description": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.initNpm.description",
+            "@coffeekraken.s-kitchen.config.kitchenActions.initNpm.description": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.initNpm.description",
                 "name": "description",
                 "type": {
                     "types": [
@@ -320,19 +321,19 @@
                 },
                 "default": "...",
                 "description": "Specify the kitchen initNpm action description",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.initNpm",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.initNpm",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.initNpm.command": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.initNpm.command",
+            "@coffeekraken.s-kitchen.config.kitchenActions.initNpm.command": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.initNpm.command",
                 "name": "command",
                 "type": {
                     "types": [
@@ -344,19 +345,19 @@
                 },
                 "default": "sugar",
                 "description": "Specify the kitchen initNpm action command",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.initNpm",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.initNpm",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.addSugarJson.title": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addSugarJson.title",
+            "@coffeekraken.s-kitchen.config.kitchenActions.addSugarJson.title": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addSugarJson.title",
                 "name": "title",
                 "type": {
                     "types": [
@@ -368,19 +369,19 @@
                 },
                 "default": "Adding sugar.json file",
                 "description": "Add the sugar.json file",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addSugarJson",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addSugarJson",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.addSugarJson.description": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addSugarJson.description",
+            "@coffeekraken.s-kitchen.config.kitchenActions.addSugarJson.description": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addSugarJson.description",
                 "name": "description",
                 "type": {
                     "types": [
@@ -392,19 +393,19 @@
                 },
                 "default": "...",
                 "description": "Specify the kitchen addSugarJson action description",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addSugarJson",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addSugarJson",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.addSugarJson.command": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addSugarJson.command",
+            "@coffeekraken.s-kitchen.config.kitchenActions.addSugarJson.command": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addSugarJson.command",
                 "name": "command",
                 "type": {
                     "types": [
@@ -416,91 +417,19 @@
                 },
                 "default": "sugar",
                 "description": "Specify the kitchen addSugarJson action command",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addSugarJson",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addSugarJson",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.addNvmrc.title": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addNvmrc.title",
-                "name": "title",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "Adding sugar.json file",
-                "description": "Add the .nvmrc file",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addNvmrc",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "kitchen.config.ts",
-                "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
-            },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.addNvmrc.description": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addNvmrc.description",
-                "name": "description",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "...",
-                "description": "Specify the kitchen addNvmrc action description",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addNvmrc",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "kitchen.config.ts",
-                "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
-            },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.addNvmrc.command": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addNvmrc.command",
-                "name": "command",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "sugar",
-                "description": "Specify the kitchen addNvmrc action command",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addNvmrc",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "kitchen.config.ts",
-                "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
-            },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.addFrontspecJson.title": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addFrontspecJson.title",
+            "@coffeekraken.s-kitchen.config.kitchenActions.addSugar.title": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addSugar.title",
                 "name": "title",
                 "type": {
                     "types": [
@@ -512,19 +441,163 @@
                 },
                 "default": "Adding sugar.json file",
                 "description": "Add the sugar.json file",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addFrontspecJson",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addSugar",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.addFrontspecJson.description": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addFrontspecJson.description",
+            "@coffeekraken.s-kitchen.config.kitchenActions.addSugar.description": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addSugar.description",
+                "name": "description",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "...",
+                "description": "Specify the kitchen addSugar action description",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addSugar",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "kitchenActions.config.ts",
+                "extension": "config",
+                "relPath": "src/config/kitchenActions.config.ts"
+            },
+            "@coffeekraken.s-kitchen.config.kitchenActions.addSugar.command": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addSugar.command",
+                "name": "command",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "sugar",
+                "description": "Specify the kitchen addSugar action command",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addSugar",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "kitchenActions.config.ts",
+                "extension": "config",
+                "relPath": "src/config/kitchenActions.config.ts"
+            },
+            "@coffeekraken.s-kitchen.config.kitchenActions.addNvmrc.title": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addNvmrc.title",
+                "name": "title",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "Adding sugar.json file",
+                "description": "Add the .nvmrc file",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addNvmrc",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "kitchenActions.config.ts",
+                "extension": "config",
+                "relPath": "src/config/kitchenActions.config.ts"
+            },
+            "@coffeekraken.s-kitchen.config.kitchenActions.addNvmrc.description": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addNvmrc.description",
+                "name": "description",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "...",
+                "description": "Specify the kitchen addNvmrc action description",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addNvmrc",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "kitchenActions.config.ts",
+                "extension": "config",
+                "relPath": "src/config/kitchenActions.config.ts"
+            },
+            "@coffeekraken.s-kitchen.config.kitchenActions.addNvmrc.command": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addNvmrc.command",
+                "name": "command",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "sugar",
+                "description": "Specify the kitchen addNvmrc action command",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addNvmrc",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "kitchenActions.config.ts",
+                "extension": "config",
+                "relPath": "src/config/kitchenActions.config.ts"
+            },
+            "@coffeekraken.s-kitchen.config.kitchenActions.addFrontspecJson.title": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addFrontspecJson.title",
+                "name": "title",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "Adding sugar.json file",
+                "description": "Add the sugar.json file",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addFrontspecJson",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "kitchenActions.config.ts",
+                "extension": "config",
+                "relPath": "src/config/kitchenActions.config.ts"
+            },
+            "@coffeekraken.s-kitchen.config.kitchenActions.addFrontspecJson.description": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addFrontspecJson.description",
                 "name": "description",
                 "type": {
                     "types": [
@@ -536,19 +609,19 @@
                 },
                 "default": "...",
                 "description": "Specify the kitchen addFrontspecJson action description",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addFrontspecJson",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addFrontspecJson",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.addFrontspecJson.command": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addFrontspecJson.command",
+            "@coffeekraken.s-kitchen.config.kitchenActions.addFrontspecJson.command": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addFrontspecJson.command",
                 "name": "command",
                 "type": {
                     "types": [
@@ -560,19 +633,19 @@
                 },
                 "default": "sugar",
                 "description": "Specify the kitchen addFrontspecJson action command",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addFrontspecJson",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addFrontspecJson",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.addManifestJson.title": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addManifestJson.title",
+            "@coffeekraken.s-kitchen.config.kitchenActions.addManifestJson.title": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addManifestJson.title",
                 "name": "title",
                 "type": {
                     "types": [
@@ -584,19 +657,19 @@
                 },
                 "default": "Adding manifest.json file",
                 "description": "Add the manifest.json file",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addManifestJson",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addManifestJson",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.addManifestJson.description": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addManifestJson.description",
+            "@coffeekraken.s-kitchen.config.kitchenActions.addManifestJson.description": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addManifestJson.description",
                 "name": "description",
                 "type": {
                     "types": [
@@ -608,19 +681,19 @@
                 },
                 "default": "...",
                 "description": "Specify the kitchen addManifestJson action description",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addManifestJson",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addManifestJson",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.addManifestJson.command": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addManifestJson.command",
+            "@coffeekraken.s-kitchen.config.kitchenActions.addManifestJson.command": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addManifestJson.command",
                 "name": "command",
                 "type": {
                     "types": [
@@ -632,19 +705,19 @@
                 },
                 "default": "sugar",
                 "description": "Specify the kitchen addManifestJson action command",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addManifestJson",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addManifestJson",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.addFavicon.title": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addFavicon.title",
+            "@coffeekraken.s-kitchen.config.kitchenActions.addFavicon.title": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addFavicon.title",
                 "name": "title",
                 "type": {
                     "types": [
@@ -656,19 +729,19 @@
                 },
                 "default": "Adding manifest.json file",
                 "description": "Add the manifest.json file",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addFavicon",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addFavicon",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.addFavicon.description": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addFavicon.description",
+            "@coffeekraken.s-kitchen.config.kitchenActions.addFavicon.description": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addFavicon.description",
                 "name": "description",
                 "type": {
                     "types": [
@@ -680,19 +753,19 @@
                 },
                 "default": "...",
                 "description": "Specify the kitchen addFavicon action description",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addFavicon",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addFavicon",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.addFavicon.command": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addFavicon.command",
+            "@coffeekraken.s-kitchen.config.kitchenActions.addFavicon.command": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addFavicon.command",
                 "name": "command",
                 "type": {
                     "types": [
@@ -704,19 +777,19 @@
                 },
                 "default": "sugar",
                 "description": "Specify the kitchen addFavicon action command",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addFavicon",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addFavicon",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.addReadme.title": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addReadme.title",
+            "@coffeekraken.s-kitchen.config.kitchenActions.addReadme.title": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addReadme.title",
                 "name": "title",
                 "type": {
                     "types": [
@@ -728,19 +801,19 @@
                 },
                 "default": "Adding manifest.json file",
                 "description": "Add the README.md file into the src/doc folder.\nThis is a base file that can be builded using the `sugar markdown.build` command",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addReadme",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addReadme",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.addReadme.description": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addReadme.description",
+            "@coffeekraken.s-kitchen.config.kitchenActions.addReadme.description": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addReadme.description",
                 "name": "description",
                 "type": {
                     "types": [
@@ -752,19 +825,19 @@
                 },
                 "default": "...",
                 "description": "Specify the kitchen addReadme action description",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addReadme",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addReadme",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.addReadme.command": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addReadme.command",
+            "@coffeekraken.s-kitchen.config.kitchenActions.addReadme.command": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addReadme.command",
                 "name": "command",
                 "type": {
                     "types": [
@@ -776,19 +849,19 @@
                 },
                 "default": "sugar",
                 "description": "Specify the kitchen addReadme action command",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addReadme",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addReadme",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.addDefaultPages.title": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addDefaultPages.title",
+            "@coffeekraken.s-kitchen.config.kitchenActions.addDefaultPages.title": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addDefaultPages.title",
                 "name": "title",
                 "type": {
                     "types": [
@@ -800,19 +873,19 @@
                 },
                 "default": "Adding manifest.json file",
                 "description": "Add the manifest.json file",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addDefaultPages",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addDefaultPages",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.addDefaultPages.description": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addDefaultPages.description",
+            "@coffeekraken.s-kitchen.config.kitchenActions.addDefaultPages.description": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addDefaultPages.description",
                 "name": "description",
                 "type": {
                     "types": [
@@ -824,19 +897,19 @@
                 },
                 "default": "...",
                 "description": "Specify the kitchen addDefaultPages action description",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addDefaultPages",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addDefaultPages",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.addDefaultPages.command": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addDefaultPages.command",
+            "@coffeekraken.s-kitchen.config.kitchenActions.addDefaultPages.command": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addDefaultPages.command",
                 "name": "command",
                 "type": {
                     "types": [
@@ -848,19 +921,19 @@
                 },
                 "default": "sugar",
                 "description": "Specify the kitchen addDefaultPages action command",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addDefaultPages",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addDefaultPages",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.addDefaultScripts.title": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addDefaultScripts.title",
+            "@coffeekraken.s-kitchen.config.kitchenActions.addDefaultScripts.title": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addDefaultScripts.title",
                 "name": "title",
                 "type": {
                     "types": [
@@ -872,19 +945,19 @@
                 },
                 "default": "Adding manifest.json file",
                 "description": "Add the script files",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addDefaultScripts",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addDefaultScripts",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.addDefaultScripts.description": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addDefaultScripts.description",
+            "@coffeekraken.s-kitchen.config.kitchenActions.addDefaultScripts.description": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addDefaultScripts.description",
                 "name": "description",
                 "type": {
                     "types": [
@@ -896,19 +969,19 @@
                 },
                 "default": "...",
                 "description": "Specify the kitchen addDefaultScripts action description",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addDefaultScripts",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addDefaultScripts",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.addDefaultScripts.command": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addDefaultScripts.command",
+            "@coffeekraken.s-kitchen.config.kitchenActions.addDefaultScripts.command": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addDefaultScripts.command",
                 "name": "command",
                 "type": {
                     "types": [
@@ -920,19 +993,19 @@
                 },
                 "default": "sugar",
                 "description": "Specify the kitchen addDefaultScripts action command",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addDefaultScripts",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addDefaultScripts",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.addDefaultPackageJson.title": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addDefaultPackageJson.title",
+            "@coffeekraken.s-kitchen.config.kitchenActions.addDefaultPackageJson.title": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addDefaultPackageJson.title",
                 "name": "title",
                 "type": {
                     "types": [
@@ -944,19 +1017,19 @@
                 },
                 "default": "Adding manifest.json file",
                 "description": "Add/merge default package.json defined in config.package.defaultPackageJson",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addDefaultPackageJson",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addDefaultPackageJson",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.addDefaultPackageJson.description": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addDefaultPackageJson.description",
+            "@coffeekraken.s-kitchen.config.kitchenActions.addDefaultPackageJson.description": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addDefaultPackageJson.description",
                 "name": "description",
                 "type": {
                     "types": [
@@ -968,19 +1041,19 @@
                 },
                 "default": "...",
                 "description": "Specify the kitchen addDefaultPackageJson action description",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addDefaultPackageJson",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addDefaultPackageJson",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.addDefaultPackageJson.command": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addDefaultPackageJson.command",
+            "@coffeekraken.s-kitchen.config.kitchenActions.addDefaultPackageJson.command": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addDefaultPackageJson.command",
                 "name": "command",
                 "type": {
                     "types": [
@@ -992,19 +1065,19 @@
                 },
                 "default": "sugar",
                 "description": "Specify the kitchen addDefaultPackageJson action command",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addDefaultPackageJson",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addDefaultPackageJson",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.addSugarPostcss.title": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addSugarPostcss.title",
+            "@coffeekraken.s-kitchen.config.kitchenActions.addSugarPostcss.title": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addSugarPostcss.title",
                 "name": "title",
                 "type": {
                     "types": [
@@ -1016,19 +1089,19 @@
                 },
                 "default": "Adding manifest.json file",
                 "description": "Add the manifest.json file",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addSugarPostcss",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addSugarPostcss",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.addSugarPostcss.description": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addSugarPostcss.description",
+            "@coffeekraken.s-kitchen.config.kitchenActions.addSugarPostcss.description": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addSugarPostcss.description",
                 "name": "description",
                 "type": {
                     "types": [
@@ -1040,19 +1113,19 @@
                 },
                 "default": "...",
                 "description": "Specify the kitchen addSugarPostcss action description",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addSugarPostcss",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addSugarPostcss",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.addSugarPostcss.command": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.addSugarPostcss.command",
+            "@coffeekraken.s-kitchen.config.kitchenActions.addSugarPostcss.command": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.addSugarPostcss.command",
                 "name": "command",
                 "type": {
                     "types": [
@@ -1064,19 +1137,19 @@
                 },
                 "default": "sugar",
                 "description": "Specify the kitchen addSugarPostcss action command",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.addSugarPostcss",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.addSugarPostcss",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.installDependencies.title": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.installDependencies.title",
+            "@coffeekraken.s-kitchen.config.kitchenActions.installDependencies.title": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.installDependencies.title",
                 "name": "title",
                 "type": {
                     "types": [
@@ -1088,19 +1161,19 @@
                 },
                 "default": "Install dependencies",
                 "description": "Install dependencies like node_modules and composer if exists",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.installDependencies",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.installDependencies",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.installDependencies.description": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.installDependencies.description",
+            "@coffeekraken.s-kitchen.config.kitchenActions.installDependencies.description": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.installDependencies.description",
                 "name": "description",
                 "type": {
                     "types": [
@@ -1112,19 +1185,19 @@
                 },
                 "default": "...",
                 "description": "Specify the kitchen addManifestJson action description",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.installDependencies",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.installDependencies",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.installDependencies.command": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.installDependencies.command",
+            "@coffeekraken.s-kitchen.config.kitchenActions.installDependencies.command": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.installDependencies.command",
                 "name": "command",
                 "type": {
                     "types": [
@@ -1136,19 +1209,19 @@
                 },
                 "default": "sugar",
                 "description": "Specify the kitchen addManifestJson action command",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.installDependencies",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.installDependencies",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.installDependencies.interface": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.installDependencies.interface",
+            "@coffeekraken.s-kitchen.config.kitchenActions.installDependencies.interface": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.installDependencies.interface",
                 "name": "interface",
                 "type": {
                     "types": [
@@ -1160,19 +1233,19 @@
                 },
                 "default": "@coffeekraken/s-package/node/interface/SPackageInstallParamsInterface",
                 "description": "Specify the installDependencies install action interface",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.installDependencies",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.installDependencies",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.frontendServer.title": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.frontendServer.title",
+            "@coffeekraken.s-kitchen.config.kitchenActions.frontendServer.title": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.frontendServer.title",
                 "name": "title",
                 "type": {
                     "types": [
@@ -1184,19 +1257,19 @@
                 },
                 "default": "Frontend server",
                 "description": "Specify the frontend server action title",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.frontendServer",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.frontendServer",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.frontendServer.description": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.frontendServer.description",
+            "@coffeekraken.s-kitchen.config.kitchenActions.frontendServer.description": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.frontendServer.description",
                 "name": "description",
                 "type": {
                     "types": [
@@ -1208,19 +1281,19 @@
                 },
                 "default": "...",
                 "description": "Specify the frontend server action description",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.frontendServer",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.frontendServer",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.frontendServer.command": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.frontendServer.command",
+            "@coffeekraken.s-kitchen.config.kitchenActions.frontendServer.command": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.frontendServer.command",
                 "name": "command",
                 "type": {
                     "types": [
@@ -1232,19 +1305,19 @@
                 },
                 "default": "sugar frontendServer.start [arguments]",
                 "description": "Specify the frontend server action command",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.frontendServer",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.frontendServer",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.frontendServer.interface": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.frontendServer.interface",
+            "@coffeekraken.s-kitchen.config.kitchenActions.frontendServer.interface": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.frontendServer.interface",
                 "name": "interface",
                 "type": {
                     "types": [
@@ -1256,19 +1329,19 @@
                 },
                 "default": "@coffeekraken/s-frontend-server/node/interface/SFrontendServerStartParamsInterface",
                 "description": "Specify the frontendServerer start action interface",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.frontendServer",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.frontendServer",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.frontendServer.settings.processManager.restart": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.frontendServer.settings.processManager.restart",
+            "@coffeekraken.s-kitchen.config.kitchenActions.frontendServer.settings.processManager.restart": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.frontendServer.settings.processManager.restart",
                 "name": "restart",
                 "type": {
                     "types": [
@@ -1280,19 +1353,19 @@
                 },
                 "default": "true",
                 "description": "Specify the frontend server action restart behavior",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.frontendServer.settings.processManager",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.frontendServer.settings.processManager",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.corsProxy.title": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.corsProxy.title",
+            "@coffeekraken.s-kitchen.config.kitchenActions.corsProxy.title": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.corsProxy.title",
                 "name": "title",
                 "type": {
                     "types": [
@@ -1304,19 +1377,19 @@
                 },
                 "default": "Frontend server",
                 "description": "Specify the cors proxy server action title",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.corsProxy",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.corsProxy",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.corsProxy.description": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.corsProxy.description",
+            "@coffeekraken.s-kitchen.config.kitchenActions.corsProxy.description": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.corsProxy.description",
                 "name": "description",
                 "type": {
                     "types": [
@@ -1328,19 +1401,19 @@
                 },
                 "default": "...",
                 "description": "Specify the cors proxy server action description",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.corsProxy",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.corsProxy",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.corsProxy.command": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.corsProxy.command",
+            "@coffeekraken.s-kitchen.config.kitchenActions.corsProxy.command": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.corsProxy.command",
                 "name": "command",
                 "type": {
                     "types": [
@@ -1352,19 +1425,19 @@
                 },
                 "default": "sugar corsProxy.start [arguments]",
                 "description": "Specify the frontend server action command",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.corsProxy",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.corsProxy",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.corsProxy.interface": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.corsProxy.interface",
+            "@coffeekraken.s-kitchen.config.kitchenActions.corsProxy.interface": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.corsProxy.interface",
                 "name": "interface",
                 "type": {
                     "types": [
@@ -1376,19 +1449,19 @@
                 },
                 "default": "@coffeekraken/s-frontend-server/node/interface/SFrontendServerCorsProxyParamsInterface",
                 "description": "Specify the corsProxy install action interface",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.corsProxy",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.corsProxy",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.corsProxy.settings.processManager.restart": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.corsProxy.settings.processManager.restart",
+            "@coffeekraken.s-kitchen.config.kitchenActions.corsProxy.settings.processManager.restart": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.corsProxy.settings.processManager.restart",
                 "name": "restart",
                 "type": {
                     "types": [
@@ -1400,19 +1473,19 @@
                 },
                 "default": "true",
                 "description": "Specify the frontend server action restart behavior",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.corsProxy.settings.processManager",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.corsProxy.settings.processManager",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.postcssBuild.title": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.postcssBuild.title",
+            "@coffeekraken.s-kitchen.config.kitchenActions.postcssBuild.title": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.postcssBuild.title",
                 "name": "title",
                 "type": {
                     "types": [
@@ -1424,19 +1497,19 @@
                 },
                 "default": "Frontend server",
                 "description": "Specify the postcss build action title",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.postcssBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.postcssBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.postcssBuild.description": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.postcssBuild.description",
+            "@coffeekraken.s-kitchen.config.kitchenActions.postcssBuild.description": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.postcssBuild.description",
                 "name": "description",
                 "type": {
                     "types": [
@@ -1448,19 +1521,19 @@
                 },
                 "default": "...",
                 "description": "Specify the postcss build action description",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.postcssBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.postcssBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.postcssBuild.command": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.postcssBuild.command",
+            "@coffeekraken.s-kitchen.config.kitchenActions.postcssBuild.command": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.postcssBuild.command",
                 "name": "command",
                 "type": {
                     "types": [
@@ -1472,19 +1545,19 @@
                 },
                 "default": "sugar postcss.build [arguments]",
                 "description": "Specify the postcss build action command",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.postcssBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.postcssBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.postcssBuild.interface": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.postcssBuild.interface",
+            "@coffeekraken.s-kitchen.config.kitchenActions.postcssBuild.interface": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.postcssBuild.interface",
                 "name": "interface",
                 "type": {
                     "types": [
@@ -1496,19 +1569,19 @@
                 },
                 "default": "@coffeekraken/s-postcss-builder/node/interface/SPostcssBuilderBuildParamsInterface",
                 "description": "Specify the postcssBuild build action interface",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.postcssBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.postcssBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.typescriptBuild.title": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.typescriptBuild.title",
+            "@coffeekraken.s-kitchen.config.kitchenActions.typescriptBuild.title": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.typescriptBuild.title",
                 "name": "title",
                 "type": {
                     "types": [
@@ -1520,19 +1593,19 @@
                 },
                 "default": "Frontend server",
                 "description": "Specify the typescriptBuilder build action title",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.typescriptBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.typescriptBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.typescriptBuild.description": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.typescriptBuild.description",
+            "@coffeekraken.s-kitchen.config.kitchenActions.typescriptBuild.description": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.typescriptBuild.description",
                 "name": "description",
                 "type": {
                     "types": [
@@ -1544,19 +1617,19 @@
                 },
                 "default": "...",
                 "description": "Specify the typescriptBuilder build action description",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.typescriptBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.typescriptBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.typescriptBuild.command": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.typescriptBuild.command",
+            "@coffeekraken.s-kitchen.config.kitchenActions.typescriptBuild.command": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.typescriptBuild.command",
                 "name": "command",
                 "type": {
                     "types": [
@@ -1568,19 +1641,19 @@
                 },
                 "default": "sugar typescriptBuilder.build [arguments]",
                 "description": "Specify the typescriptBuilder build action command",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.typescriptBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.typescriptBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.typescriptBuild.interface": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.typescriptBuild.interface",
+            "@coffeekraken.s-kitchen.config.kitchenActions.typescriptBuild.interface": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.typescriptBuild.interface",
                 "name": "interface",
                 "type": {
                     "types": [
@@ -1592,19 +1665,19 @@
                 },
                 "default": "@coffeekraken/s-typescript-builder/node/interface/STypescriptBuilderBuildParamsInterface",
                 "description": "Specify the typescriptBuilder build action interface",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.typescriptBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.typescriptBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.imagesBuild.title": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.imagesBuild.title",
+            "@coffeekraken.s-kitchen.config.kitchenActions.imagesBuild.title": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.imagesBuild.title",
                 "name": "title",
                 "type": {
                     "types": [
@@ -1616,19 +1689,19 @@
                 },
                 "default": "Frontend server",
                 "description": "Specify the images build action title",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.imagesBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.imagesBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.imagesBuild.description": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.imagesBuild.description",
+            "@coffeekraken.s-kitchen.config.kitchenActions.imagesBuild.description": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.imagesBuild.description",
                 "name": "description",
                 "type": {
                     "types": [
@@ -1640,19 +1713,19 @@
                 },
                 "default": "...",
                 "description": "Specify the images build action description",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.imagesBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.imagesBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.imagesBuild.command": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.imagesBuild.command",
+            "@coffeekraken.s-kitchen.config.kitchenActions.imagesBuild.command": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.imagesBuild.command",
                 "name": "command",
                 "type": {
                     "types": [
@@ -1664,19 +1737,19 @@
                 },
                 "default": "sugar images.build [arguments]",
                 "description": "Specify the images build action command",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.imagesBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.imagesBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.imagesBuild.interface": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.imagesBuild.interface",
+            "@coffeekraken.s-kitchen.config.kitchenActions.imagesBuild.interface": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.imagesBuild.interface",
                 "name": "interface",
                 "type": {
                     "types": [
@@ -1688,19 +1761,19 @@
                 },
                 "default": "@coffeekraken/s-images-builder/node/interface/SImagesBuilderBuildParamsInterface",
                 "description": "Specify the imagesBuild build action interface",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.imagesBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.imagesBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.vite.title": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.vite.title",
+            "@coffeekraken.s-kitchen.config.kitchenActions.vite.title": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.vite.title",
                 "name": "title",
                 "type": {
                     "types": [
@@ -1712,19 +1785,19 @@
                 },
                 "default": "Vite development stack",
                 "description": "Specify the vite action title",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.vite",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.vite",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.vite.description": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.vite.description",
+            "@coffeekraken.s-kitchen.config.kitchenActions.vite.description": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.vite.description",
                 "name": "description",
                 "type": {
                     "types": [
@@ -1736,19 +1809,19 @@
                 },
                 "default": "...",
                 "description": "Specify the vite action description",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.vite",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.vite",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.vite.command": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.vite.command",
+            "@coffeekraken.s-kitchen.config.kitchenActions.vite.command": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.vite.command",
                 "name": "command",
                 "type": {
                     "types": [
@@ -1760,19 +1833,19 @@
                 },
                 "default": "sugar vite [arguments]",
                 "description": "Specify the vite action command",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.vite",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.vite",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.vite.interface": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.vite.interface",
+            "@coffeekraken.s-kitchen.config.kitchenActions.vite.interface": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.vite.interface",
                 "name": "interface",
                 "type": {
                     "types": [
@@ -1784,19 +1857,19 @@
                 },
                 "default": "@coffeekraken/s-vite/node/interface/SViteStartParamsInterface",
                 "description": "Specify the vite start action interface",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.vite",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.vite",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.viteBuild.title": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.viteBuild.title",
+            "@coffeekraken.s-kitchen.config.kitchenActions.viteBuild.title": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.viteBuild.title",
                 "name": "title",
                 "type": {
                     "types": [
@@ -1808,19 +1881,19 @@
                 },
                 "default": "Vite build stasck",
                 "description": "Specify the vite build action title",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.viteBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.viteBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.viteBuild.description": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.viteBuild.description",
+            "@coffeekraken.s-kitchen.config.kitchenActions.viteBuild.description": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.viteBuild.description",
                 "name": "description",
                 "type": {
                     "types": [
@@ -1832,19 +1905,19 @@
                 },
                 "default": "...",
                 "description": "Specify the vite build action description",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.viteBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.viteBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.viteBuild.command": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.viteBuild.command",
+            "@coffeekraken.s-kitchen.config.kitchenActions.viteBuild.command": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.viteBuild.command",
                 "name": "command",
                 "type": {
                     "types": [
@@ -1856,19 +1929,19 @@
                 },
                 "default": "sugar vite.build [arguments]",
                 "description": "Specify the vite build action command",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.viteBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.viteBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.viteBuild.interface": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.viteBuild.interface",
+            "@coffeekraken.s-kitchen.config.kitchenActions.viteBuild.interface": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.viteBuild.interface",
                 "name": "interface",
                 "type": {
                     "types": [
@@ -1880,19 +1953,19 @@
                 },
                 "default": "@coffeekraken/s-vite/node/interface/SViteBuildParamsInterface",
                 "description": "Specify the vite build action interface",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.viteBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.viteBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.docmapBuild.title": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.docmapBuild.title",
+            "@coffeekraken.s-kitchen.config.kitchenActions.docmapBuild.title": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.docmapBuild.title",
                 "name": "title",
                 "type": {
                     "types": [
@@ -1904,19 +1977,19 @@
                 },
                 "default": "...",
                 "description": "Specify the doc build action title",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.docmapBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.docmapBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.docmapBuild.description": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.docmapBuild.description",
+            "@coffeekraken.s-kitchen.config.kitchenActions.docmapBuild.description": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.docmapBuild.description",
                 "name": "description",
                 "type": {
                     "types": [
@@ -1928,19 +2001,19 @@
                 },
                 "default": "...",
                 "description": "Specify the doc build action description",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.docmapBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.docmapBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.docmapBuild.command": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.docmapBuild.command",
+            "@coffeekraken.s-kitchen.config.kitchenActions.docmapBuild.command": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.docmapBuild.command",
                 "name": "command",
                 "type": {
                     "types": [
@@ -1952,19 +2025,19 @@
                 },
                 "default": "sugar docmap.build [arguments]",
                 "description": "Specify the doc build action command",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.docmapBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.docmapBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.docmapBuild.interface": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.docmapBuild.interface",
+            "@coffeekraken.s-kitchen.config.kitchenActions.docmapBuild.interface": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.docmapBuild.interface",
                 "name": "interface",
                 "type": {
                     "types": [
@@ -1976,19 +2049,19 @@
                 },
                 "default": "@coffeekraken/s-docmap/node/interface/SDocmapBuildParamsInterface",
                 "description": "Specify the docmap build action interface",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.docmapBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.docmapBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.sitemapBuild.title": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.sitemapBuild.title",
+            "@coffeekraken.s-kitchen.config.kitchenActions.sitemapBuild.title": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.sitemapBuild.title",
                 "name": "title",
                 "type": {
                     "types": [
@@ -2000,19 +2073,19 @@
                 },
                 "default": "...",
                 "description": "Specify the doc build action title",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.sitemapBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.sitemapBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.sitemapBuild.description": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.sitemapBuild.description",
+            "@coffeekraken.s-kitchen.config.kitchenActions.sitemapBuild.description": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.sitemapBuild.description",
                 "name": "description",
                 "type": {
                     "types": [
@@ -2024,19 +2097,19 @@
                 },
                 "default": "...",
                 "description": "Specify the doc build action description",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.sitemapBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.sitemapBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.sitemapBuild.command": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.sitemapBuild.command",
+            "@coffeekraken.s-kitchen.config.kitchenActions.sitemapBuild.command": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.sitemapBuild.command",
                 "name": "command",
                 "type": {
                     "types": [
@@ -2048,19 +2121,19 @@
                 },
                 "default": "sugar sitemap.build [arguments]",
                 "description": "Specify the doc build action command",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.sitemapBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.sitemapBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.sitemapBuild.interface": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.sitemapBuild.interface",
+            "@coffeekraken.s-kitchen.config.kitchenActions.sitemapBuild.interface": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.sitemapBuild.interface",
                 "name": "interface",
                 "type": {
                     "types": [
@@ -2072,19 +2145,19 @@
                 },
                 "default": "@coffeekraken/s-sitemap-builder/node/interface/SSitemapBuilderBuildParamsInterface",
                 "description": "Specify the sitemap build action interface",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.sitemapBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.sitemapBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.faviconBuild.title": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.faviconBuild.title",
+            "@coffeekraken.s-kitchen.config.kitchenActions.faviconBuild.title": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.faviconBuild.title",
                 "name": "title",
                 "type": {
                     "types": [
@@ -2096,19 +2169,19 @@
                 },
                 "default": "...",
                 "description": "Specify the doc build action title",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.faviconBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.faviconBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.faviconBuild.description": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.faviconBuild.description",
+            "@coffeekraken.s-kitchen.config.kitchenActions.faviconBuild.description": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.faviconBuild.description",
                 "name": "description",
                 "type": {
                     "types": [
@@ -2120,19 +2193,19 @@
                 },
                 "default": "...",
                 "description": "Specify the favicon build action description",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.faviconBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.faviconBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.faviconBuild.command": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.faviconBuild.command",
+            "@coffeekraken.s-kitchen.config.kitchenActions.faviconBuild.command": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.faviconBuild.command",
                 "name": "command",
                 "type": {
                     "types": [
@@ -2144,19 +2217,19 @@
                 },
                 "default": "sugar favicon.build [arguments]",
                 "description": "Specify the doc build action command",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.faviconBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.faviconBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.faviconBuild.interface": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.faviconBuild.interface",
+            "@coffeekraken.s-kitchen.config.kitchenActions.faviconBuild.interface": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.faviconBuild.interface",
                 "name": "interface",
                 "type": {
                     "types": [
@@ -2168,19 +2241,19 @@
                 },
                 "default": "@coffeekraken/s-favicon-builder/node/interface/SFaviconBuilderBuildParamsInterface",
                 "description": "Specify the favicon build action interface",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.faviconBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.faviconBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.markdownBuild.title": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.markdownBuild.title",
+            "@coffeekraken.s-kitchen.config.kitchenActions.markdownBuild.title": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.markdownBuild.title",
                 "name": "title",
                 "type": {
                     "types": [
@@ -2192,19 +2265,19 @@
                 },
                 "default": "...",
                 "description": "Specify the markdown build action title",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.markdownBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.markdownBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.markdownBuild.description": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.markdownBuild.description",
+            "@coffeekraken.s-kitchen.config.kitchenActions.markdownBuild.description": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.markdownBuild.description",
                 "name": "description",
                 "type": {
                     "types": [
@@ -2216,19 +2289,19 @@
                 },
                 "default": "...",
                 "description": "Specify the markdown build action description",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.markdownBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.markdownBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.markdownBuild.command": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.markdownBuild.command",
+            "@coffeekraken.s-kitchen.config.kitchenActions.markdownBuild.command": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.markdownBuild.command",
                 "name": "command",
                 "type": {
                     "types": [
@@ -2240,19 +2313,19 @@
                 },
                 "default": "sugar favicon.build [arguments]",
                 "description": "Specify the doc build action command",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.markdownBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.markdownBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.markdownBuild.interface": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.markdownBuild.interface",
+            "@coffeekraken.s-kitchen.config.kitchenActions.markdownBuild.interface": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.markdownBuild.interface",
                 "name": "interface",
                 "type": {
                     "types": [
@@ -2264,19 +2337,19 @@
                 },
                 "default": "@coffeekraken/s-favicon-builder/node/interface/SFaviconBuilderBuildParamsInterface",
                 "description": "Specify the favicon build action interface",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.markdownBuild",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.markdownBuild",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.format.title": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.format.title",
+            "@coffeekraken.s-kitchen.config.kitchenActions.format.title": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.format.title",
                 "name": "title",
                 "type": {
                     "types": [
@@ -2288,19 +2361,19 @@
                 },
                 "default": "SCodeFormatter format action",
                 "description": "Specify the format action title",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.format",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.format",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.format.description": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.format.description",
+            "@coffeekraken.s-kitchen.config.kitchenActions.format.description": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.format.description",
                 "name": "description",
                 "type": {
                     "types": [
@@ -2312,19 +2385,19 @@
                 },
                 "default": "...",
                 "description": "Specify the format build action description",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.format",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.format",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.format.command": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.format.command",
+            "@coffeekraken.s-kitchen.config.kitchenActions.format.command": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.format.command",
                 "name": "command",
                 "type": {
                     "types": [
@@ -2336,19 +2409,19 @@
                 },
                 "default": "sugar formatter.format [arguments]",
                 "description": "Specify the format action command",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.format",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.format",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts"
+                "relPath": "src/config/kitchenActions.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchen.actions.format.interface": {
-                "id": "@coffeekraken.s-kitchen.config.kitchen.actions.format.interface",
+            "@coffeekraken.s-kitchen.config.kitchenActions.format.interface": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenActions.format.interface",
                 "name": "interface",
                 "type": {
                     "types": [
@@ -2360,16 +2433,16 @@
                 },
                 "default": "@coffeekraken/s-typescript-builder/node/interface/STypescriptBuilderBuildParamsInterface",
                 "description": "Specify the format build action interface",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchen.actions.format",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenActions.format",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "kitchen.config.ts",
+                "filename": "kitchenActions.config.ts",
                 "extension": "config",
-                "relPath": "src/config/kitchen.config.ts",
+                "relPath": "src/config/kitchenActions.config.ts",
                 "children": {}
             },
             "@coffeekraken.s-kitchen.config.kitchenRecipeDefault.title": {
@@ -2585,6 +2658,29 @@
                 "extension": "config",
                 "relPath": "src/config/kitchenRecipeGeneric.config.ts"
             },
+            "@coffeekraken.s-kitchen.config.kitchenRecipeDefault.stacks.new.actions.addSugarJson": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenRecipeDefault.stacks.new.actions.addSugarJson",
+                "name": "addSugarJson",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "description": "Specify the recipe init stack addSugarJson action",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenRecipeDefault.stacks.new.actions",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "kitchenRecipeGeneric.config.ts",
+                "extension": "config",
+                "relPath": "src/config/kitchenRecipeGeneric.config.ts"
+            },
             "@coffeekraken.s-kitchen.config.kitchenRecipeDefault.stacks.new.actions.addDefaultPackageJson": {
                 "id": "@coffeekraken.s-kitchen.config.kitchenRecipeDefault.stacks.new.actions.addDefaultPackageJson",
                 "name": "addDefaultPackageJson",
@@ -2620,29 +2716,6 @@
                     "raw": "String"
                 },
                 "description": "Specify the recipe init stack addNvmrc action",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchenRecipeDefault.stacks.new.actions",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "kitchenRecipeGeneric.config.ts",
-                "extension": "config",
-                "relPath": "src/config/kitchenRecipeGeneric.config.ts"
-            },
-            "@coffeekraken.s-kitchen.config.kitchenRecipeDefault.stacks.new.actions.addSugarJson": {
-                "id": "@coffeekraken.s-kitchen.config.kitchenRecipeDefault.stacks.new.actions.addSugarJson",
-                "name": "addSugarJson",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "description": "Specify the recipe init stack addSugarJson action",
                 "namespace": "@coffeekraken.s-kitchen.config.kitchenRecipeDefault.stacks.new.actions",
                 "since": "2.0.0",
                 "author": {
@@ -2712,6 +2785,29 @@
                     "raw": "String"
                 },
                 "description": "Specify the recipe init stack addDefaultScripts action",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.new.actions",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "kitchenRecipeGeneric.config.ts",
+                "extension": "config",
+                "relPath": "src/config/kitchenRecipeGeneric.config.ts"
+            },
+            "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.new.actions.addSugar": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.new.actions.addSugar",
+                "name": "addSugar",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "description": "Specify the recipe init stack addSugar action\nMUST be after the addDefaultScripts to avoid overriding the script",
                 "namespace": "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.new.actions",
                 "since": "2.0.0",
                 "author": {
@@ -3533,6 +3629,29 @@
                 "extension": "config",
                 "relPath": "src/config/kitchenRecipeNextJs.config.ts"
             },
+            "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.new.actions.installDependencies": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.new.actions.installDependencies",
+                "name": "installDependencies",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "description": "Specify the recipe init stack installDependencies action",
+                "namespace": "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.new.actions",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "kitchenRecipeNextJs.config.ts",
+                "extension": "config",
+                "relPath": "src/config/kitchenRecipeNextJs.config.ts"
+            },
             "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.dev.description": {
                 "id": "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.dev.description",
                 "name": "description",
@@ -3557,43 +3676,18 @@
                 "extension": "config",
                 "relPath": "src/config/kitchenRecipeNextJs.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.dev.actions.frontendServer": {
-                "id": "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.dev.actions.frontendServer",
-                "name": "frontendServer",
+            "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.dev.actions.start": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.dev.actions.start",
+                "name": "start",
                 "type": {
                     "types": [
                         {
-                            "type": "String"
+                            "type": "Object"
                         }
                     ],
-                    "raw": "String"
+                    "raw": "Object"
                 },
-                "default": "[config.kitchen.actions.frontendServer]",
-                "description": "Specify the recipe dev stack frontendServer action",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.dev.actions",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "kitchenRecipeNextJs.config.ts",
-                "extension": "config",
-                "relPath": "src/config/kitchenRecipeNextJs.config.ts"
-            },
-            "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.dev.actions.vite": {
-                "id": "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.dev.actions.vite",
-                "name": "vite",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.kitchen.actions.vite]",
-                "description": "Specify the recipe dev stack description",
+                "description": "Specify the recipe dev.start action",
                 "namespace": "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.dev.actions",
                 "since": "2.0.0",
                 "author": {
@@ -3653,19 +3747,18 @@
                 "extension": "config",
                 "relPath": "src/config/kitchenRecipeNextJs.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.prod.actions.frontendServer": {
-                "id": "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.prod.actions.frontendServer",
-                "name": "frontendServer",
+            "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.prod.actions.start": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.prod.actions.start",
+                "name": "start",
                 "type": {
                     "types": [
                         {
-                            "type": "String"
+                            "type": "Object"
                         }
                     ],
-                    "raw": "String"
+                    "raw": "Object"
                 },
-                "default": "[config.kitchen.actions.frontendServer]",
-                "description": "Specify the recipe prod stack frontendServer action",
+                "description": "Specify the recipe dev.start action",
                 "namespace": "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.prod.actions",
                 "since": "2.0.0",
                 "author": {
@@ -3725,67 +3818,18 @@
                 "extension": "config",
                 "relPath": "src/config/kitchenRecipeNextJs.config.ts"
             },
-            "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.build.actions.postcssBuild": {
-                "id": "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.build.actions.postcssBuild",
-                "name": "postcssBuild",
+            "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.build.actions.start": {
+                "id": "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.build.actions.start",
+                "name": "start",
                 "type": {
                     "types": [
                         {
-                            "type": "String"
+                            "type": "Object"
                         }
                     ],
-                    "raw": "String"
+                    "raw": "Object"
                 },
-                "default": "[config.kitchen.actions.postcssBuild]",
-                "description": "Specify the recipe build stack postcssBuild action",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.build.actions",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "kitchenRecipeNextJs.config.ts",
-                "extension": "config",
-                "relPath": "src/config/kitchenRecipeNextJs.config.ts"
-            },
-            "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.build.actions.viteBuild": {
-                "id": "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.build.actions.viteBuild",
-                "name": "viteBuild",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.kitchen.actions.viteBuild]",
-                "description": "Specify the recipe build stack viteBuild action",
-                "namespace": "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.build.actions",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "kitchenRecipeNextJs.config.ts",
-                "extension": "config",
-                "relPath": "src/config/kitchenRecipeNextJs.config.ts"
-            },
-            "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.build.actions.imagesBuild": {
-                "id": "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.build.actions.imagesBuild",
-                "name": "imagesBuild",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.kitchen.actions.imagesBuild]",
-                "description": "Specify the recipe build stack imagesBuild action",
+                "description": "Specify the recipe dev.start action",
                 "namespace": "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.build.actions",
                 "since": "2.0.0",
                 "author": {
@@ -3797,6 +3841,46 @@
                 "extension": "config",
                 "relPath": "src/config/kitchenRecipeNextJs.config.ts",
                 "children": {
+                    "addsugar": {
+                        "id": "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.new.actions.addSugar",
+                        "name": "addSugar",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "Specify the recipe init stack addSugar action",
+                        "namespace": "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.new.actions",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "addnvmrc": {
+                        "id": "@coffeekraken.s-kitchen.config.kitchenRecipeDefault.stacks.new.actions.addNvmrc",
+                        "name": "addNvmrc",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "Specify the recipe init stack addNvmrc action",
+                        "namespace": "@coffeekraken.s-kitchen.config.kitchenRecipeDefault.stacks.new.actions",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
                     "addsugarpostcss": {
                         "id": "@coffeekraken.s-kitchen.config.kitchenRecipeNextJs.stacks.new.actions.addSugarPostcss",
                         "name": "addSugarPostcss",

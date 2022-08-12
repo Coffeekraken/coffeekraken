@@ -1,4 +1,4 @@
-<!-- 
+<!--
 /**
  * @name            README
  * @namespace       doc
@@ -32,9 +32,7 @@ await sVite.start({
 });
 
 // build for production
-await sVite.build({
-
-});
+await sVite.build({});
 ```
 
 ## Build

@@ -38,51 +38,51 @@
 
         <div class="__content s-pb:50">
 
-            @if (isset($requestedConfig))
-
+            @if (isset($shared->requestedConfig))
                 @php
-                    $filename = end(explode('/', $requestedConfig[0]->path));
+                    $path = $shared->requestedConfig[0]->path;
+                    $parts = explode('/', $path);
+                    $filename = $parts[count($parts)-1];
                     $configId = str_replace('.config.js', '', $filename);
                 @endphp
 
-                <h1 class="s-typo:h1 s-mbe:20">
+                <h1 class="s-typo:h1 s-mbe:40">
                     {{ $configId }}
                 </h1>
                 <h3 class="s-typo:code s-font:40 s-p:10 s-mbe:50">
                     <i class="s-icon:file"></i> {{ $filename }}
                 </h3>
 
-                @foreach ($requestedConfig as $configObj)
+                @foreach ($shared->requestedConfig as $configObj)
                     <ol>
-                        {{-- <pre>
-                        @php
-                        print_r($configObj);
-                        @endphp
-                        </pre> --}}
-                        
                         @foreach ($configObj->docblocks as $docblock)
-                            <li class="s-font:40 s-mbe:30">
-                                <header class="s-flex s-bg:main-surface s-radius">
-                                    <div class="s-flex-item:grow s-tc:accent s-p:30 s-color:complementary">
 
-                                        @php
-                                            $dotpath = end(explode($configId . '.', $docblock->namespace . '.' . $docblock->name));
-                                        @endphp
-                                        <span class="s-font:code">
-                                            {{ $dotpath }}
-                                        </span>
-                                    </div>
-                                    <div class="s-p:30">
-                                        <div class="s-typo:code">
-                                            {{ str_replace($packageRoot.'/', '', \Sugar\string\toString($docblock->default)) }}
+                            @if (isset($docblock->namespace))
+
+                                <li class="s-font:40 s-mbe:30">
+                                    <header class="s-flex s-bg:main-surface s-radius">
+                                        <div class="s-flex-item:grow s-tc:accent s-p:30 s-color:complementary">
+
+                                            @php
+                                                $parts = explode('config.', $docblock->namespace);
+                                                $dotpath = $parts[count($parts)-1] . '.' . $docblock->name;
+                                            @endphp
+                                            <span class="s-font:code">
+                                                {{ $dotpath }}
+                                            </span>
                                         </div>
-                                    </div>
-                                    <div class="s-p:30">
-                                        @include('doc.partials.paramType', ['type' => $docblock->type])
-                                    </div>
-                                </header>
-                                <p class="s-typo:p s-p:30">{!! $docblock->description !!}</p>
-                            </li>
+                                        <div class="s-p:30">
+                                            <div class="s-typo:code">
+                                                {{ str_replace($shared->config->storage->package->rootDir.'/', '', \Sugar\string\toString($docblock->default)) }}
+                                            </div>
+                                        </div>
+                                        <div class="s-p:30">
+                                            @include('doc.partials.paramType', ['type' => $docblock->type])
+                                        </div>
+                                    </header>
+                                    <p class="s-typo:p s-p:30">{!! $docblock->description !!}</p>
+                                </li>
+                            @endif
                         @endforeach
                     </ol>
                 @endforeach

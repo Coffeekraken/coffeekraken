@@ -80,6 +80,8 @@ export function getMixinsOrFunctionsList(what: 'mixins' | 'functions') {
     return paths;
 }
 
+let _configLoaded = false;
+
 const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
     settings = __deepMerge(
         {
@@ -92,11 +94,13 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
         },
         settings,
     );
+    if (_configLoaded) {
+        updateConfig();
+    }
 
     let themeHash, cacheDir;
 
-    async function _loadConfig() {
-        await __SSugarConfig.load();
+    function updateConfig() {
         settings = __deepMerge(settings, {
             excludeByTypes: __SSugarConfig.get(
                 'postcssSugarPlugin.excludeByTypes',
@@ -110,16 +114,24 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             cache: __SSugarConfig.get('postcssSugarPlugin.cache'),
         });
 
+        // remove cache if not for vite target
+        if (settings.cache === undefined && settings.target !== 'vite') {
+            settings.cache = false;
+        }
+    }
+
+    async function _loadConfig() {
+        await __SSugarConfig.load();
+        _configLoaded = true;
+
+        // update config
+        updateConfig();
+
         // set theme hash
         themeHash = __STheme.hash();
 
         // set cache directory
         cacheDir = `${__packageCacheDir()}/postcssSugarPlugin`;
-
-        // remove cache if not for vite target
-        if (settings.cache === undefined && settings.target !== 'vite') {
-            settings.cache = false;
-        }
 
         if (settings.excludeByTypes?.length) {
             __CssVars.excludeByTypes(settings.excludeByTypes);

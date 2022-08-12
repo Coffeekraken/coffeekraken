@@ -23,6 +23,4 @@ Some common actions are already built-in so you can reference them inside your r
 -   `{{@key}}`: {{this.title}}
     {{/each}}
 
-> You will find more documentation and examples in the `Actions` folder...
-
 {{/layout-doc }}

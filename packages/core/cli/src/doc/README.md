@@ -52,8 +52,8 @@ npm i @coffeekraken/cli -g
 
 Then you will have access to the `sugar` command that you can use first like so:
 
-1. `sugar`: Will launch a **simple interactive process** to guide you
-2. `sugar --help`: Display the complete sugar CLI commands list
+1. `sugar` or `sugar --help`: Display the complete sugar CLI commands list
+2. `sugar {stack} --help`: Display the list of **available actions in the passed stack**
 3. `sugar {stack}.{action} --help`: Display a **particular stack/action help** with detailed arguments list, etc...
 
 These are the main entry points with the ones you can discover and try our features

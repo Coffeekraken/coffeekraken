@@ -157,7 +157,7 @@
                 "relPath": "src/shared/SPromise.ts",
                 "children": {
                     "queue": {
-                        "id": "sff567a761ffc0e7b41dbf47dc90045ed0d8ff1dac05dcfae4b5cf9fb6fcd5b8b",
+                        "id": "se937488e513503490e4f6b133287f87a8006324943d8a53a4e5a828dc88fefad",
                         "name": "queue",
                         "type": {
                             "types": [
@@ -168,6 +168,7 @@
                             "raw": "Function"
                         },
                         "description": "This static method allows you to pass an array of promises that will be executed one after the other.\nIt will call the \"callback\" function if specified with the resolved promise as argument.",
+                        "async": "true",
                         "static": "true",
                         "since": "2.0.0",
                         "author": {

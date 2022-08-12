@@ -172,45 +172,17 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
         return new __SPromise(async ({ resolve, reject, pipe }) => {
             const viewInstance = new SViewRenderer(__deepMerge(settings ?? {}));
 
+            const finalData = __deepMerge(data ?? {}, {});
+
             let resPromise;
 
             resPromise = await viewInstance.render(
                 viewPath,
-                data,
+                finalData,
                 settings?.viewRenderer ?? {},
             );
 
             pipe(resPromise);
-
-            // resPromise.catch(async (e) => {
-            //     console.log('SOMEHTING', 'va');
-
-            //     const errorViewInstance = new SViewRenderer({
-            //         ...settings,
-            //     });
-
-            //     console.log('ERROR', e);
-
-            //     const errorRes = await pipe(
-            //         errorViewInstance.render(
-            //             'pages.501',
-            //             {
-            //                 ...data,
-            //                 error: e,
-            //             },
-            //             settings?.viewRenderer ?? {},
-            //         ),
-            //     );
-            //     errorRes.status = 501;
-            //     console.log('E', errorRes);
-            //     reject(errorRes);
-            // });
-
-            // resPromise.then((res) => {
-            //     res.status = 200;
-            //     console.log('RES', res);
-            //     resolve(res);
-            // });
         });
     }
 

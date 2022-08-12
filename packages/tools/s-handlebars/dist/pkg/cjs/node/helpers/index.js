@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sort = exports.shieldsioHandlebarsHelper = exports.sfile = exports.sanitizeValue = exports.rootRelative = exports.toString = exports.join = exports.length = exports.jsonStringify = exports.isSectionWanted = exports.isLicense = exports.ifMatch = exports.ifEqual = exports.replace = exports.includes = exports.import = exports.get = exports.config = exports.configFromDocmap = exports.configFiles = exports.configFileNameFromDocmapPath = void 0;
+exports.sort = exports.shieldsioHandlebarsHelper = exports.sfile = exports.sanitizeValue = exports.rootRelative = exports.toString = exports.join = exports.length = exports.jsonStringify = exports.isSectionWanted = exports.isLicense = exports.ifMatch = exports.ifEqual = exports.replace = exports.includes = exports.import = exports.get = exports.config = exports.formatConfigValue = exports.configFromDocmap = exports.configFiles = exports.configFileNameFromDocmapPath = void 0;
 const config_1 = __importDefault(require("./config"));
 exports.config = config_1.default;
 const configFileNameFromDocmapPath_1 = __importDefault(require("./configFileNameFromDocmapPath"));
@@ -12,6 +12,8 @@ const configFiles_1 = __importDefault(require("./configFiles"));
 exports.configFiles = configFiles_1.default;
 const configFromDocmap_1 = __importDefault(require("./configFromDocmap"));
 exports.configFromDocmap = configFromDocmap_1.default;
+const formatConfigValue_1 = __importDefault(require("./formatConfigValue"));
+exports.formatConfigValue = formatConfigValue_1.default;
 const get_1 = __importDefault(require("./get"));
 exports.get = get_1.default;
 const ifEqual_1 = __importDefault(require("./ifEqual"));
@@ -46,4 +48,4 @@ const sort_1 = __importDefault(require("./sort"));
 exports.sort = sort_1.default;
 const toString_1 = __importDefault(require("./toString"));
 exports.toString = toString_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLHNEQUE4QjtBQTJCMUIsaUJBM0JHLGdCQUFNLENBMkJIO0FBMUJWLGtHQUEwRTtBQXNCdEUsdUNBdEJHLHNDQUE0QixDQXNCSDtBQXJCaEMsZ0VBQXdDO0FBc0JwQyxzQkF0QkcscUJBQVcsQ0FzQkg7QUFyQmYsMEVBQWtEO0FBc0I5QywyQkF0QkcsMEJBQWdCLENBc0JIO0FBckJwQixnREFBd0I7QUF3QnBCLGNBeEJHLGFBQUcsQ0F3Qkg7QUF2QlAsd0RBQWdDO0FBMkI1QixrQkEzQkcsaUJBQU8sQ0EyQkg7QUExQlgsd0RBQWdDO0FBMkI1QixrQkEzQkcsaUJBQU8sQ0EyQkg7QUExQlgsc0RBQWdDO0FBc0JoQixpQkF0QlQsZ0JBQVEsQ0FzQk87QUFyQnRCLDBEQUFvQztBQXNCbEIsbUJBdEJYLGtCQUFVLENBc0JTO0FBckIxQiw0REFBb0M7QUF5QmhDLG9CQXpCRyxtQkFBUyxDQXlCSDtBQXhCYix3RUFBZ0Q7QUF5QjVDLDBCQXpCRyx5QkFBZSxDQXlCSDtBQXhCbkIsa0RBQTBCO0FBMkJ0QixlQTNCRyxjQUFJLENBMkJIO0FBMUJSLG9FQUE0QztBQXdCeEMsd0JBeEJHLHVCQUFhLENBd0JIO0FBdkJqQixzREFBOEI7QUF3QjFCLGlCQXhCRyxnQkFBTSxDQXdCSDtBQXZCVix3REFBa0M7QUFpQmpCLGtCQWpCVixpQkFBUyxDQWlCUTtBQWhCeEIsa0VBQTBDO0FBeUJ0Qyx1QkF6Qkcsc0JBQVksQ0F5Qkg7QUF4QmhCLG9FQUE0QztBQXlCeEMsd0JBekJHLHVCQUFhLENBeUJIO0FBeEJqQixvREFBNEI7QUF5QnhCLGdCQXpCRyxlQUFLLENBeUJIO0FBeEJULDRGQUFvRTtBQXlCaEUsb0NBekJHLG1DQUF5QixDQXlCSDtBQXhCN0Isa0RBQTBCO0FBeUJ0QixlQXpCRyxjQUFJLENBeUJIO0FBeEJSLDBEQUFrQztBQW1COUIsbUJBbkJHLGtCQUFRLENBbUJIIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLHNEQUE4QjtBQTRCMUIsaUJBNUJHLGdCQUFNLENBNEJIO0FBM0JWLGtHQUEwRTtBQXVCdEUsdUNBdkJHLHNDQUE0QixDQXVCSDtBQXRCaEMsZ0VBQXdDO0FBdUJwQyxzQkF2QkcscUJBQVcsQ0F1Qkg7QUF0QmYsMEVBQWtEO0FBdUI5QywyQkF2QkcsMEJBQWdCLENBdUJIO0FBdEJwQiw0RUFBb0Q7QUF1QmhELDRCQXZCRywyQkFBaUIsQ0F1Qkg7QUF0QnJCLGdEQUF3QjtBQXdCcEIsY0F4QkcsYUFBRyxDQXdCSDtBQXZCUCx3REFBZ0M7QUEyQjVCLGtCQTNCRyxpQkFBTyxDQTJCSDtBQTFCWCx3REFBZ0M7QUEyQjVCLGtCQTNCRyxpQkFBTyxDQTJCSDtBQTFCWCxzREFBZ0M7QUFzQmhCLGlCQXRCVCxnQkFBUSxDQXNCTztBQXJCdEIsMERBQW9DO0FBc0JsQixtQkF0Qlgsa0JBQVUsQ0FzQlM7QUFyQjFCLDREQUFvQztBQXlCaEMsb0JBekJHLG1CQUFTLENBeUJIO0FBeEJiLHdFQUFnRDtBQXlCNUMsMEJBekJHLHlCQUFlLENBeUJIO0FBeEJuQixrREFBMEI7QUEyQnRCLGVBM0JHLGNBQUksQ0EyQkg7QUExQlIsb0VBQTRDO0FBd0J4Qyx3QkF4QkcsdUJBQWEsQ0F3Qkg7QUF2QmpCLHNEQUE4QjtBQXdCMUIsaUJBeEJHLGdCQUFNLENBd0JIO0FBdkJWLHdEQUFrQztBQWlCakIsa0JBakJWLGlCQUFTLENBaUJRO0FBaEJ4QixrRUFBMEM7QUF5QnRDLHVCQXpCRyxzQkFBWSxDQXlCSDtBQXhCaEIsb0VBQTRDO0FBeUJ4Qyx3QkF6QkcsdUJBQWEsQ0F5Qkg7QUF4QmpCLG9EQUE0QjtBQXlCeEIsZ0JBekJHLGVBQUssQ0F5Qkg7QUF4QlQsNEZBQW9FO0FBeUJoRSxvQ0F6QkcsbUNBQXlCLENBeUJIO0FBeEI3QixrREFBMEI7QUF5QnRCLGVBekJHLGNBQUksQ0F5Qkg7QUF4QlIsMERBQWtDO0FBbUI5QixtQkFuQkcsa0JBQVEsQ0FtQkgifQ==

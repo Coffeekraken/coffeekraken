@@ -64,9 +64,6 @@ export default function genericHandler({
             let data = Object.assign({}, res.templateData ?? {}),
                 viewPath = viewObj.path;
 
-            // remove the shared data
-            delete data.shared;
-
             __SBench.step(
                 `handlers.generic`,
                 `beforeViewRendering.${viewPath}`,

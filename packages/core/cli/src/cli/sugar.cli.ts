@@ -21,6 +21,7 @@ import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __dotenv from 'dotenv';
 import __fs from 'fs';
+import __fsExtra from 'fs-extra';
 import __path from 'path';
 import __replaceCommandTokens from '../node/replaceCommandTokens';
 import __SSugarCliParamsInterface from './interface/SSugarCliParamsInterface';
@@ -104,11 +105,14 @@ export default class SSugarCli {
     }
 
     static isLocked() {
+        console.log('is locked', this._lockFilePath);
+
         try {
             const processId = parseInt(
                 __fs.readFileSync(this._lockFilePath).toString(),
             );
             if (processId !== process.pid) {
+                console.log('lockec!!!');
                 return true;
             }
             return false;

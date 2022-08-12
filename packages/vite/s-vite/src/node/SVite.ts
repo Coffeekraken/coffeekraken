@@ -8,7 +8,6 @@ import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __isPortFree from '@coffeekraken/sugar/node/network/utils/isPortFree';
 import __listNodeModulesPackages from '@coffeekraken/sugar/node/npm/listNodeModulesPackages';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
-import __kill from '@coffeekraken/sugar/node/process/kill';
 import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __childProcess from 'child_process';
@@ -103,10 +102,10 @@ export default class SVite extends __SClass {
 
                 if (!(await __isPortFree(config.server.port))) {
                     emit('log', {
-                        type: __SLog.TYPE_WARN,
-                        value: `Port <yellow>${config.server.port}</yellow> already in use. Try to kill it before continue...`,
+                        type: __SLog.TYPE_ERROR,
+                        value: `Port <yellow>${config.server.port}</yellow> already in use. Please make sure to make it free before retrying...`,
                     });
-                    await __kill(`:${config.server.port}`);
+                    process.exit(1);
                 }
 
                 const server = await __viteServer(config);
@@ -117,18 +116,29 @@ export default class SVite extends __SClass {
                     console.log('ERRROR', e);
                 }
 
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: [
-                        `<yellow>Vite</yellow> server started <green>successfully</green>`,
-                    ].join('\n'),
+                __onProcessExit(async () => {
+                    emit('log', {
+                        value: `<red>[kill]</red> Gracefully killing the <cyan>vite server</cyan>...`,
+                    });
+                    await server.close();
+                    return true;
                 });
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: [
-                        `<yellow>http://${config.server.host}</yellow>:<cyan>${config.server.port}</cyan>`,
-                    ].join('\n'),
-                });
+
+                // make sure it's the last emitted log for user convinience...
+                setTimeout(() => {
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: [
+                            `<yellow>Vite</yellow> server started <green>successfully</green> and is available at:`,
+                        ].join('\n'),
+                    });
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: [
+                            `<yellow>http://${config.server.host}</yellow>:<cyan>${config.server.port}</cyan>`,
+                        ].join('\n'),
+                    });
+                }, 1000);
             },
             {
                 metas: {
@@ -537,9 +547,9 @@ export default class SVite extends __SClass {
                         resolve();
                     }
                 });
-                __onProcessExit(() => {
-                    console.log('EXIT');
+                __onProcessExit(async () => {
                     pro.kill();
+                    return true;
                 });
 
                 // cancel

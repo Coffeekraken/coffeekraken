@@ -15,7 +15,7 @@
                 <div>
                     <div class="{{ $param->values ? 's-dropdown-container' : '' }}" tabindex="-1">
                         <div class="s-typo:code">
-                            {{ str_replace($packageRoot.'/', '', \Sugar\string\toString($param->default)) }}
+                            {{ str_replace($shared->config->storage->package->rootDir.'/', '', \Sugar\string\toString($param->default)) }}
                             @if (isset($param->values))
                                 <i class="s-icon:arrow-down"></i>
                             @endif

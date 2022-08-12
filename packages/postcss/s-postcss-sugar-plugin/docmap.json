@@ -1435,6 +1435,38 @@
                 "relPath": "src/node/mixins/border/width.ts",
                 "children": {}
             },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.cache.cache": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.cache.cache",
+                "name": "cache",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ],
+                    "raw": "PostcssMixin"
+                },
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to cache some generated css to avoid generating it when it's not absolutely necessary.\nThis cache depends on the config.theme configuration as well as on the @coffeekraken/s-postcss-sugar-plugin integrity.\nYou can always clear the cache manually using the command `sugar postcss.clearCache`",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.cache",
+                "status": "beta",
+                "example": [],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "cache.ts",
+                "extension": "ts",
+                "relPath": "src/node/mixins/cache/cache.ts",
+                "children": {}
+            },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.clearfix.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.clearfix.classes",
                 "name": "classes",
@@ -8033,9 +8065,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "classes.js",
-                "extension": "js",
-                "relPath": "src/node/mixins/ui/switch/classes.js",
+                "filename": "classes.ts",
+                "extension": "ts",
+                "relPath": "src/node/mixins/ui/switch/classes.ts",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.switch.switch": {

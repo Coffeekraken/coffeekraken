@@ -16,7 +16,6 @@ import __SFrontendServerStartParamsInterface from './interface/SFrontendServerSt
 import __SDuration from '@coffeekraken/s-duration';
 import __SGlob from '@coffeekraken/s-glob';
 import __STypescriptBuilder from '@coffeekraken/s-typescript-builder';
-import __kill from '@coffeekraken/sugar/node/process/kill';
 import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
 import __runMiddleware from 'run-middleware';
@@ -260,12 +259,6 @@ export default class SFrontendServer extends __SClass {
                 // logging requests
                 if (logLevelInt >= 4) {
                     this._express.use((req, res, next) => {
-                        // emit('log', {
-                        //     type: 'detail',
-                        //     group: `s-frontend-server-${this.metas.id}`,
-                        //     value: `Request on "<cyan>${req.url}</cyan>"`,
-                        // });
-
                         const duration = new __SDuration();
 
                         function afterResponse() {
@@ -304,9 +297,10 @@ export default class SFrontendServer extends __SClass {
 
                 if (!(await __isPortFree(this._config.port))) {
                     emit('log', {
-                        value: `Port <yellow>${this._config.port}</yellow> already in use. Try to kill it before continue...`,
+                        type: __SLog.TYPE_ERROR,
+                        value: `Port <yellow>${this._config.port}</yellow> already in use. Please make sure to make it free before retrying...`,
                     });
-                    await __kill(`:${this._config.port}`);
+                    process.kill(1);
                 }
 
                 if (!finalParams.listen) {
@@ -343,7 +337,7 @@ export default class SFrontendServer extends __SClass {
 
                     __onProcessExit(() => {
                         emit('log', {
-                            value: `<red>[kill]</red> Gracefully killing the frontend server...`,
+                            value: `<red>[kill]</red> Gracefully killing the <cyan>frontend server</cyan>...`,
                         });
                         return new Promise((resolve) => {
                             server.close(() => {

@@ -67,7 +67,7 @@ export default function ({
     };
 
     if (!settings.cache) {
-        return atRule;
+        return nodesToString(atRule.nodes);
     }
 
     const vars = new CssVars();

@@ -13,7 +13,7 @@
                     <div>
                         <div class="s-typo:code">
                             @if (isset($param->defaul))
-                                {{ str_replace($packageRoot.'/', '', \Sugar\string\toString($param->default)) }}
+                                {{ str_replace($shared->config->storage->package->rootDir.'/', '', \Sugar\string\toString($param->default)) }}
                             @endif
                         </div>
                     </div>

@@ -1,3 +1,3 @@
 {{#each config.readme.shields}}
-[![{{ @key }}]({{ this.url }})]({{ this.href }})
+[![{{ @key }}]({{ replace this.url '%packageName' ../packageJson.name }})]({{ replace this.href '%packageName' ../packageJson.name }})
 {{/each}}

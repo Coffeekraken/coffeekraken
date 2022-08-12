@@ -8,7 +8,7 @@
             } else {
                 if (isset($type->value)) {
                     array_push($types, $type->value);
-                } else {
+                } else if (isset($type->type)) {
                     array_push($types, $type->type);
                 }
             }
@@ -20,7 +20,7 @@
 
 @if (is_string($type))
 
-@elseif (count($type->types) > 0)
+@elseif (isset($type->types) && count($type->types) > 0)
     
     <div class="s-dropdown-container" tabindex="-1">
 
@@ -42,7 +42,15 @@
         @if (count($type->types) > 1)
             <ul class="s-dropdown">
                 @foreach($type->types as $subType)
-                    <li class="s-dropdown-item">{{ isset($subType->value) ? $subType->value : $subType->type }}</li>
+                    @php
+                        $type = '';
+                        if (isset($subType->value)) {
+                            $type = $subType->value;
+                        } else if (isset($subType->type)) {
+                            $type = $subType->type;
+                        }
+                    @endphp 
+                    <li class="s-dropdown-item">{{ $type }}</li>
                 @endforeach
             </ul>
         @endif
@@ -50,7 +58,15 @@
         @if (count($type->types) == 1 && isset($type->types[0]->of) && count($type->types[0]->of) > 0)
             <ul class="s-dropdown">
                 @foreach($type->types[0]->of as $subType)
-                    <li class="s-dropdown-item">{{ $subType->value ? $subType->value : $subType->type }}</li>
+                    @php
+                        $type = '';
+                        if (isset($subType->value)) {
+                            $type = $subType->value;
+                        } else if (isset($subType->type)) {
+                            $type = $subType->type;
+                        }
+                    @endphp 
+                    <li class="s-dropdown-item">{{ $type }}</li>
                 @endforeach
             </ul>
         @endif

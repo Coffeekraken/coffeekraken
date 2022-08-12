@@ -22,7 +22,7 @@ export default function (api) {
             /**
              * @name          sort
              * @namespace     config.docmap.read
-             * @type          String
+             * @type          Array<String>
              * @default
              *
              * Specify which of the docmap entries has to be sorted alphabetically.
@@ -36,7 +36,7 @@ export default function (api) {
             /**
              * @name          sortDeep
              * @namespace     config.docmap.read
-             * @type          String
+             * @type          Array<String>
              * @default
              *
              * Specify which of the docmap entries has to be sorted alphabetically and deeply.

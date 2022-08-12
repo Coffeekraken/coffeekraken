@@ -1,5 +1,6 @@
 <span class="s-file s-mb:30">
-    <i class="s-icon:file"></i>&nbsp;&nbsp;{{configFileNameFromDocmapPath namespace}}
+    <i class="s-icon:file"></i>&nbsp;&nbsp;{{configFileNameFromDocmapPath
+    namespace}}
 </span>
 
 <dl>
@@ -13,7 +14,7 @@
         </header>
         {{#if this.default}}
         <div class="s-pi:30 s-mbs:40">
-            <div class="s-typo:code">{{ configValue this.default }}</div>
+            <div class="s-typo:code">{{ formatConfigValue this.default }}</div>
         </div>
         {{/if}}
         <p class="s-typo:p s-p:30">{{{ this.description }}}</p>

@@ -119,7 +119,7 @@ export default function spawn(
             new Promise((resolve) => {
                 childProcessExitPromiseResolve = resolve;
                 emit('log', {
-                    value: `<red>[kill]</red> Gracefully killing child process "<yellow>${command}</yellow>"`,
+                    value: `<red>[kill]</red> Gracefully killing child process "<cyan>${command}</cyan>"`,
                 });
                 childProcess.kill('SIGINT');
             });

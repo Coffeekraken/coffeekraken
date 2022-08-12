@@ -759,7 +759,7 @@
                     ],
                     "raw": "String"
                 },
-                "default": "Coffeekraken",
+                "default": "940362961682333767",
                 "description": "Specify the discord server id",
                 "namespace": "@coffeekraken.s-sugar-config.config.discord.server",
                 "since": "2.0.0",
@@ -783,7 +783,7 @@
                     ],
                     "raw": "String"
                 },
-                "default": "https://discord.gg/ERsX54UE",
+                "default": "https://discord.gg/HzycksDJ",
                 "description": "Specify the discord server url",
                 "namespace": "@coffeekraken.s-sugar-config.config.discord.server",
                 "since": "2.0.0",
@@ -868,6 +868,31 @@
                 "filename": "git.config.ts",
                 "extension": "config",
                 "relPath": "src/config/git.config.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-sugar-config.config.google.gtm": {
+                "id": "@coffeekraken.s-sugar-config.config.google.gtm",
+                "name": "gtm",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "GTM-N4WKFFR",
+                "description": "Specigy the google tag manager you want to use across your project",
+                "namespace": "@coffeekraken.s-sugar-config.config.google",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "google.config.ts",
+                "extension": "config",
+                "relPath": "src/config/google.config.ts",
                 "children": {}
             },
             "@coffeekraken.s-sugar-config.config.icons.fontawesome.url": {

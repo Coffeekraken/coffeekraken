@@ -1,11 +1,9 @@
 // @ts-nocheck
 
 import __SBench from '@coffeekraken/s-bench';
-import __SFrontspec from '@coffeekraken/s-frontspec';
-import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
-import __fs from 'fs';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SFile from '@coffeekraken/s-file';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __filter from '@coffeekraken/sugar/shared/object/filter';
 
 /**
  * @name            configMiddleware
@@ -39,12 +37,20 @@ function configMiddleware(settings = {}) {
 
         if (!res.templateData) res.templateData = {};
         if (!res.templateData.shared) res.templateData.shared = {};
-        res.templateData.shared.config = configJson;
+        res.templateData.shared.config = __filter(configJson, (key, value) => {
+            return Object.keys(value).length > 0;
+        });
 
         res.templateData.shared.configFiles = __SSugarConfig.filesPaths
             .map((path) => __SFile.new(path).toObject(false))
             .sort((a, b) => {
                 return a.name.localeCompare(b.name);
+            })
+            .filter((file) => {
+                const configId = file.name.replace(/\.config.(j|t)s$/, '');
+                if (!configJson[configId]) return false;
+                if (!Object.keys(configJson[configId]).length) return false;
+                return true;
             });
 
         // get the last item of the request
@@ -56,13 +62,13 @@ function configMiddleware(settings = {}) {
             },
         );
 
-        res.templateData.requestedConfig = [];
+        res.templateData.shared.requestedConfig = [];
         if (requestedConfig.length) {
             const data = await __SSugarConfig.toDocblocks(
                 `${lastPath}.config.js`,
             );
-            res.templateData.requestedConfig = [
-                ...res.templateData.requestedConfig,
+            res.templateData.shared.requestedConfig = [
+                ...res.templateData.shared.requestedConfig,
                 ...data,
             ];
         }

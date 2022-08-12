@@ -1,7 +1,9 @@
 <!--
 /**
  * @name            rename
- * @namespace       doc.recipes.actions
+ *
+ * @TODO            namespace       doc.recipes.actions
+ *
  * @type            Markdown
  * @platform        md
  * @status          stable
@@ -27,30 +29,30 @@ Here's an example of usage in a fictive recipe config file:
 
 ```js
 export default function (env, config) {
-  return {
-    title: "My cool recipe",
-    description: "...",
-    defaultStack: "dev",
-    stacks: {
-      new: {
-        description: "Create a new project",
-        actions: {
-          rename: {
-            extends: "rename",
-            params: {
-              name: undefined, // the user will be prompted for it...
-              folder: true,
+    return {
+        title: 'My cool recipe',
+        description: '...',
+        defaultStack: 'dev',
+        stacks: {
+            new: {
+                description: 'Create a new project',
+                actions: {
+                    rename: {
+                        extends: 'rename',
+                        params: {
+                            name: undefined, // the user will be prompted for it...
+                            folder: true,
+                        },
+                    },
+                    // etc...
+                },
             },
-          },
-          // etc...
+            dev: {
+                // etc...
+            },
+            // etc...
         },
-      },
-      dev: {
-        // etc...
-      },
-      // etc...
-    },
-  };
+    };
 }
 ```
 

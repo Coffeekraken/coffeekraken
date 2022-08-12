@@ -29,7 +29,7 @@ export default function (api) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 get url() {
-                    return `https://shields.io/bundlephobia/min/${api.config.packageJson.name}?style=${api.this.style}`;
+                    return `https://shields.io/bundlephobia/min/%packageName?style=${api.this.style}`;
                 },
 
                 /**
@@ -44,7 +44,7 @@ export default function (api) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 get href() {
-                    return `https://www.npmjs.com/package/${api.config.packageJson.name}`;
+                    return `https://www.npmjs.com/package/%packageName`;
                 },
             },
             downloads: {
@@ -60,7 +60,7 @@ export default function (api) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 get url() {
-                    return `https://shields.io/npm/dm/${api.config.packageJson.name}?style=${api.this.style}`;
+                    return `https://shields.io/npm/dm/%packageName?style=${api.this.style}`;
                 },
 
                 /**
@@ -75,7 +75,7 @@ export default function (api) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 get href() {
-                    return `https://www.npmjs.com/package/${api.config.packageJson.name}`;
+                    return `https://www.npmjs.com/package/%packageName`;
                 },
             },
             license: {
@@ -91,7 +91,7 @@ export default function (api) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 get url() {
-                    return `https://shields.io/npm/l/${api.config.packageJson.name}?style=${api.this.style}`;
+                    return `https://shields.io/npm/l/%packageName?style=${api.this.style}`;
                 },
 
                 /**
@@ -120,7 +120,7 @@ export default function (api) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 get url() {
-                    return `https://shields.io/discord/${api.config.discord.server.id}?style=${api.this.style}`;
+                    return `https://img.shields.io/discord/${api.config.discord.server.id}?color=5100FF&label=Join%20us%20on%20Discord&style=${api.this.style}`;
                 },
 
                 /**

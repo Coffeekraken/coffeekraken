@@ -9,7 +9,6 @@
         "@coffeekraken/s-builder": "^2.0.0-alpha.18",
         "@coffeekraken/s-class": "^2.0.0-alpha.18",
         "@coffeekraken/s-docmap": "^2.0.0-alpha.18",
-        "@coffeekraken/s-typescript-builder": "^2.0.0-alpha.18",
         "@coffeekraken/s-duration": "^2.0.0-alpha.18",
         "@coffeekraken/s-event-emitter": "^2.0.0-alpha.18",
         "@coffeekraken/s-glob": "^2.0.0-alpha.18",
@@ -18,6 +17,7 @@
         "@coffeekraken/s-promise": "^2.0.0-alpha.18",
         "@coffeekraken/s-stdio": "^2.0.0-alpha.18",
         "@coffeekraken/s-sugar-config": "^2.0.0-alpha.18",
+        "@coffeekraken/s-typescript-builder": "^2.0.0-alpha.18",
         "@coffeekraken/sugar": "^2.0.0-alpha.18"
     },
     "main": "dist/pkg/cjs/node/exports.js",

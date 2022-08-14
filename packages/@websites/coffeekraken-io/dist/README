@@ -19,12 +19,14 @@
 <!-- header -->
 
 # @coffeekraken/coffeekraken-io
-###### MIT 2.0.0-alpha.18 - [Git repository]()
+
+###### [MIT](./license) 2.0.0-alpha.18 - [Git repository]()
 
 [![size](https://shields.io/bundlephobia/min/@coffeekraken/coffeekraken-io?style&#x3D;for-the-badge)](https://www.npmjs.com/package/@coffeekraken/coffeekraken-io)
 [![downloads](https://shields.io/npm/dm/@coffeekraken/coffeekraken-io?style&#x3D;for-the-badge)](https://www.npmjs.com/package/@coffeekraken/coffeekraken-io)
 [![license](https://shields.io/npm/l/@coffeekraken/coffeekraken-io?style&#x3D;for-the-badge)](./LICENSE)
-[![discord](https://shields.io/discord/Coffeekraken?style&#x3D;for-the-badge)](https://discord.gg/ERsX54UE)
+[![discord](https://img.shields.io/discord/940362961682333767?color&#x3D;5100FF&amp;label&#x3D;Join%20us%20on%20Discord&amp;style&#x3D;for-the-badge)](https://discord.gg/HzycksDJ)
+
 
 
 
@@ -66,6 +68,6 @@ Distributed under the **MIT** License. See **[LICENSE](./license)** for more inf
 
 Here's all the ways you can contact us listed:
 
-[![discord](https://img.shields.io/badge/Join%20us%20on%20discord-Join-blueviolet?style&#x3D;[config.shieldsio.style]&amp;logo&#x3D;discord)](https://discord.gg/ERsX54UE)
+[![discord](https://img.shields.io/badge/Join%20us%20on%20discord-Join-blueviolet?style&#x3D;[config.shieldsio.style]&amp;logo&#x3D;discord)](https://discord.gg/HzycksDJ)
 [![email](https://img.shields.io/badge/Email%20us-Go-green?style&#x3D;[config.shieldsio.style]&amp;logo&#x3D;Mail.Ru)](mailto:olivier.bossel@gmail.com)
 

@@ -36,7 +36,7 @@
                     you <span class="s-tc:accent">start as soom as possible</span> with production grade ready
                     capabilities.
                 </p>
-                <a class="s-btn s-color:accent" href="/doc/cli/overview" title="Discover more about the Coffeekraken Sugar CLI">
+                <a class="s-btn s-color:accent @mobile s-btn:block" href="/doc/cli/overview" title="Discover more about the Coffeekraken Sugar CLI">
                     More on Sugar CLI
                 </a>
             </div>
@@ -66,7 +66,7 @@
                     experience as well as our powerfull <span class="s-typo:code">postcss</span> plugin to write nice
                     and maintainable css!
                 </p>
-                <a class="s-btn s-color:complementary" href="/package/@coffeekraken/sugar/doc/readme" title="More on Coffeekraken Sugar">
+                <a class="s-btn s-color:complementary @mobile s-btn:block" href="/package/@coffeekraken/sugar/doc/readme" title="More on Coffeekraken Sugar">
                     Discover more on Sugar
                 </a>
             </div>
@@ -103,7 +103,7 @@
                     like <span class="s-typo:code">blade</span>, <span class="s-typo:code">twig</span>, and even
                     more to come...
                 </p>
-                <a class="s-btn s-color:accent" href="/doc/servers/overview"
+                <a class="s-btn s-color:accent @mobile s-btn:block" href="/doc/servers/overview"
                     title="More on the Coffeekraken frontend server">
                     More on our servers
                 </a>
@@ -270,7 +270,7 @@ sugar new'
                 you can take from it only what you need and <span class="s-tc:accent">learn
                     the rest step by step</span>.
             </p>
-            <a class="s-btn s-color:complementary" href="/doc/recipes/what-are-recipes"
+            <a class="s-btn s-color:complementary @mobile s-btn:block" href="/doc/recipes/what-are-recipes"
                 title="More on what Coffeekraken recipes are">
                 Discover more on recipes!
             </a>

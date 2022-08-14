@@ -17,10 +17,6 @@
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 export default function replace(str: string, repl: string, w: string): string {
-    console.log('str', str);
-    console.log('repl', repl);
-    console.log('w', w);
     const res = str.replace(repl, w);
-    console.log('res', res);
     return res;
 }

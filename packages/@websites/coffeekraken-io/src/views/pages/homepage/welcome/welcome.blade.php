@@ -32,9 +32,9 @@
 
              <div class="__content">
 
-                <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5">Our <span class="s-tc:complementary">clean</span><br /><span class="s-tc:accent">Theme Switcher</span></h1>
+                <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5 s-mbe:30">Our <span class="s-tc:complementary">clean</span><br /><span class="s-tc:accent">Theme Switcher</span></h1>
 
-                <p class="s-typo:lead s-mbe:50 @mobile s-typo:p">
+                <p class="s-typo:lead s-mbe:50 @mobile s-hide">
                     Our theme switcher allows you to easily <span class="s-tc:accent">change from one theme to another</span> with a nice dropdown, or like in this example, just the <span class="s-tc:complementary">light/dark mode switcher</span>...
                 </p>
 
@@ -48,12 +48,14 @@
 
                 <br />
 
-                <a class="s-btn s-color:accent" s-slider-previous title="Discover our components!">
-                    <i class="s-icon:arrow-left s-mie:10"></i> Welcome
-                </a>
-                <a class="s-btn s-color:complementary s-mis:10" s-slider-next title="Discover our components!">
-                    Datetime picker <i class="s-icon:arrow-right s-mis:10"></i>
-                </a>
+                <div class="s-flex:justify-center s-gap:20 @mobile s-flex:column">
+                    <a class="s-btn s-color:accent" s-slider-previous title="Discover our components!">
+                        <i class="s-icon:arrow-left s-mie:10"></i> Welcome
+                    </a>
+                    <a class="s-btn s-color:complementary" s-slider-next title="Discover our components!">
+                        Datetime picker <i class="s-icon:arrow-right s-mis:10"></i>
+                    </a>
+                </div>
 
             </div>
 
@@ -63,9 +65,9 @@
 
              <div class="__content">
 
-                <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5">Our <span class="s-tc:complementary">clean</span><br /><span class="s-tc:accent">Datetime picker</span></h1>
+                <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5 s-mbe:30">Our <span class="s-tc:complementary">clean</span><br /><span class="s-tc:accent">Datetime picker</span></h1>
 
-                <p class="s-typo:lead s-mbe:50 @mobile s-typo:p">
+                <p class="s-typo:lead s-mbe:50 @mobile s-hide">
                     Our datetime picker support all <span class="s-tc:complementary">ISO formats</span>,<br />disabling weekends or <span class="s-tc:accent">specific dates</span> as well as min and max date...<br />All of this in a nice and clean package.
                 </p>
 
@@ -80,12 +82,14 @@
 
                 <br />
 
-                <a class="s-btn s-color:accent" s-slider-previous title="Discover our components!">
-                    <i class="s-icon:arrow-left s-mie:10"></i> Theme switcher
-                </a>
-                <a class="s-btn s-color:complementary s-mis:10" s-slider-next title="Discover our components!">
-                    Color picker <i class="s-icon:arrow-right s-mis:10"></i>
-                </a>
+                <div class="s-flex:justify-center s-gap:20 @mobile s-flex:column">
+                    <a class="s-btn s-color:accent" s-slider-previous title="Discover our components!">
+                        <i class="s-icon:arrow-left s-mie:10"></i> Theme switcher
+                    </a>
+                    <a class="s-btn s-color:complementary" s-slider-next title="Discover our components!">
+                        Color picker <i class="s-icon:arrow-right s-mis:10"></i>
+                    </a>
+                </div>
 
             </div>
 
@@ -95,9 +99,9 @@
 
              <div class="__content">
 
-                <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5">Our <span class="s-tc:complementary">clean</span><br /><span class="s-tc:accent">Color picker</span></h1>
+                <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5 s-mbe:30">Our <span class="s-tc:complementary">clean</span><br /><span class="s-tc:accent">Color picker</span></h1>
 
-                <p class="s-typo:lead s-mbe:50 @mobile s-typo:p">
+                <p class="s-typo:lead s-mbe:50 @mobile s-hide">
                     Out color picker support multiple color format like <span class="s-tc:accent">HSL(A)</span>, <span class="s-tc:complementary">RGB(A)</span> and <span class="s-tc:accent">HEX(A)</span>. All of this with a lot more control options.
                 </p>
 
@@ -112,12 +116,14 @@
 
                 <br />
 
-                <a class="s-btn s-color:accent" s-slider-previous title="Discover our components!">
-                    <i class="s-icon:arrow-left s-mie:10"></i> Datetime picker
-                </a>
-                <a class="s-btn s-color:complementary s-mis:10" s-slider-next title="Discover our components!">
-                    Slider <i class="s-icon:arrow-right s-mis:10"></i>
-                </a>
+                <div class="s-flex:justify-center s-gap:20 @mobile s-flex:column">
+                    <a class="s-btn s-color:accent" s-slider-previous title="Discover our components!">
+                        <i class="s-icon:arrow-left s-mie:10"></i> Datetime picker
+                    </a>
+                    <a class="s-btn s-color:complementary" s-slider-next title="Discover our components!">
+                        Icons management<i class="s-icon:arrow-right s-mis:10"></i>
+                    </a>
+                </div>
 
             </div>
 
@@ -127,69 +133,65 @@
 
              <div class="__content">
 
-                <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5">Our <span class="s-tc:complementary">clean</span><br /><span class="s-tc:accent">Icons management</span></h1>
+                <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5 s-mbe:30">Our <span class="s-tc:complementary">clean</span><br /><span class="s-tc:accent">Icons management</span></h1>
 
-                <p class="s-typo:lead s-mbe:50 @mobile s-typo:p">
+                <p class="s-typo:lead s-mbe:50 @mobile s-hide">
                     Icons are often a pain to manage. Here's our clean solution to make use of <span class="s-tc:complementary">Fontawesome</span> icons, as well as <span class="s-tc:accent">SVG</span> files. More sources can be added depending on the community needs...
                 </p>
 
-                <div class="s-display:inline-flex s-gap:30 s-width:60 s-mbe:20">
-                    <div class="s-text:left s-width:50">
-                        <s-code-example>
-                            <template lang="css">
+                <div class="s-text:left s-width:50 @mobile s-width:100 s-mbe:30">
+                    <s-code-example>
+                        <template lang="css">
 @sugar.icon.classes {
 &nbsp;&nbsp;fa:calendar-alt:calendar
 &nbsp;&nbsp;fab:npm
 &nbsp;&nbsp;fa:search
 &nbsp;&nbsp;fs:icons/chrome.svg:chromium
 }
-                            </template>
-                        </s-code-example>
-                    </div>
-                    <div class="s-text:left s-width:50">
-                        <s-code-example>
-                            <template lang="html">
-                                <i class="s-icon:calendar"></i>
-                                <i class="s-icon:npm"></i>
-                                <i class="s-icon:search"></i>
-                                <i class="s-icon:chromium"></i>
+                        </template>
+                        <template lang="html">
+                            <i class="s-icon:calendar"></i>
+                            <i class="s-icon:npm"></i>
+                            <i class="s-icon:search"></i>
+                            <i class="s-icon:chromium"></i>
 <!-- Use your icons the same way
 independantly of the source -->
-                            </template>
-                        </s-code-example>
-                    </div>
+                        </template>
+                    </s-code-example>
                 </div>
 
                 <br />
 
-                <a class="s-font:20 s-display:block s-mbs:30 s-mbe:50" href="/styleguide/ui/icons" title="Coffeekraken icons management">
+                <a class="s-font:20 s-display:block s-mbs:20 s-mbe:30" href="/styleguide/ui/icons" title="Coffeekraken icons management">
                     <i class="s-icon:documentation s-mie:10"></i> Read the doc
                 </a>
 
                 <br />
 
-                <a class="s-btn s-color:accent" s-slider-previous title="Discover our components!">
-                    <i class="s-icon:arrow-left s-mie:10"></i> Color picker
-                </a>
-                <a class="s-btn s-color:complementary s-mis:10" s-slider-next title="Discover our components!">
-                    Slider <i class="s-icon:arrow-right s-mis:10"></i>
-                </a>
+                <div class="s-flex:justify-center s-gap:20 @mobile s-flex:column">
+                    <a class="s-btn s-color:accent" s-slider-previous title="Discover our components!">
+                        <i class="s-icon:arrow-left s-mie:10"></i> Icons management
+                    </a>
+                    <a class="s-btn s-color:complementary" s-slider-next title="Discover our components!">
+                         Forms <i class="s-icon:arrow-right s-mis:10"></i>
+                    </a>
+                </div>
 
             </div>
 
         </div>
 
-        <div s-slider-slide>
+        {{-- <div s-slider-slide>
 
              <div class="__content">
 
-                <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5">Our <span class="s-tc:complementary">clean</span><br /><span class="s-tc:accent">Slider</span></h1>
+                <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5 s-mbe:30">Our <span class="s-tc:complementary">clean</span><br /><span class="s-tc:accent">Slider</span></h1>
 
-                <p class="s-typo:lead s-mbe:50 @mobile s-typo:p">
+                <p class="s-typo:lead s-mbe:50 @mobile s-hide">
                     Our slider has built-in support for <span class="s-tc:accent">horizontal/vertical</span> directions, as well as touch capabilities, <span class="s-tc:complementary">extreme customization</span>, and more...
                 </p>
 
-                <s-slider class="s-width:40 s-display:inline-block s-mbe:50" behavior="slideable" mousewheel controls nav>
+                <s-slider class="s-width:40 s-display:inline-block s-mbe:50 @mobile s-width:100" behavior="slideable" mousewheel controls nav>
                     <div s-slider-slide class="s-bg--accent">
                         <h1 class="s-typo:h1">Slide #1</h1>
                         <p class="s-typo:lead">Click and drag</p>
@@ -216,32 +218,34 @@ independantly of the source -->
 
                 <br />
 
-                <a class="s-btn s-color:accent" s-slider-previous title="Discover our components!">
-                    <i class="s-icon:arrow-left s-mie:10"></i> Color picker
-                </a>
-                <a class="s-btn s-color:complementary s-mis:10" s-slider-next title="Discover our components!">
-                    Forms <i class="s-icon:arrow-right s-mis:10"></i>
-                </a>
+                <div class="s-flex:justify-center s-gap:20 @mobile s-flex:column">
+                    <a class="s-btn s-color:accent" s-slider-previous title="Discover our components!">
+                        <i class="s-icon:arrow-left s-mie:10"></i> Icons management
+                    </a>
+                    <a class="s-btn s-color:complementary" s-slider-next title="Discover our components!">
+                        Forms <i class="s-icon:arrow-right s-mis:10"></i>
+                    </a>
+                </div>
 
             </div>
 
-        </div>
+        </div> --}}
 
         <div s-slider-slide>
 
              <div class="__content">
 
-                <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5">Our <span class="s-tc:complementary">clean</span><br /><span class="s-tc:accent">Forms</span></h1>
+                <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5 s-mbe:30">Our <span class="s-tc:complementary">clean</span><br /><span class="s-tc:accent">Forms</span></h1>
 
-                <p class="s-typo:lead s-mbe:50 @mobile s-typo:p">
+                <p class="s-typo:lead s-mbe:50 @mobile s-hide">
                     We have a lot of form components for your to discover but here's a simple example of a login/signin form <span class="s-tc:accent">with validations</span> and responsive labels.
                 </p>
 
-                <form class="s-display:inline-block s-width:50">
+                <form class="s-display:inline-block s-width:50 @mobile s-width:100">
 
                     <label class="s-label:responsive" s-form-validate email required>
                         <span>Email</span>
-                        <div class="s-width:60">
+                        <div>
                             <input
                                 type="text"
                                 class="s-input"
@@ -252,7 +256,7 @@ independantly of the source -->
 
                     <label class="s-label:responsive s-mbs:30" s-form-validate="" password="strong">
                         <span>Password</span>
-                        <div class="s-width:60">
+                        <div>
                             <div class="s-input-container:addon">
                                 <input
                                     type="text"
@@ -269,7 +273,7 @@ independantly of the source -->
                         </div>
                     </label>
 
-                    <label class="s-label:responsive s-mbs:30">
+                    <label class="s-label s-mbs:30">
                         <span>Remember me?</span>
                         <div>
                             <input
@@ -298,12 +302,15 @@ independantly of the source -->
 
                 <br />
 
-                <a class="s-btn s-color:accent" s-slider-previous title="Discover our components!">
-                    <i class="s-icon:arrow-left s-mie:10"></i> Slider
-                </a>
-                <a class="s-btn s-color:complementary s-mis:10" s-slider-next title="Discover our components!">
-                    Ranges <i class="s-icon:arrow-right s-mis:10"></i>
-                </a>
+
+                <div class="s-flex:justify-center s-gap:20 @mobile s-flex:column">
+                    <a class="s-btn s-color:accent" s-slider-previous title="Discover our components!">
+                        <i class="s-icon:arrow-left s-mie:10"></i> Icons management
+                    </a>
+                    <a class="s-btn s-color:complementary" s-slider-next title="Discover our components!">
+                        Ranges <i class="s-icon:arrow-right s-mis:10"></i>
+                    </a>
+                </div>
 
             </div>
 
@@ -313,13 +320,13 @@ independantly of the source -->
 
              <div class="__content">
 
-                <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5">Our <span class="s-tc:complementary">clean</span><br /><span class="s-tc:accent">Ranges</span></h1>
+                <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5 s-mbe:30">Our <span class="s-tc:complementary">clean</span><br /><span class="s-tc:accent">Ranges</span></h1>
 
-                <p class="s-typo:lead s-mbe:50 @mobile s-typo:p">
+                <p class="s-typo:lead s-mbe:50 @mobile s-hide">
                     Ranges can be used for a lot of purposes. However, <span class="s-tc:accent">it often lacks of clear information about the value you are selecting</span>. Here's our ranges that handle that problem:
                 </p>
 
-                <div class="s-display:inline-block s-width:50">
+                <div class="s-display:inline-block s-width:50 @mobile s-width:100">
                     <s-range name="myCoolRange" value="90" class="s-color:accent s-mbe:30"></s-range>
                     <s-range name="myOtherRanfe" class="s-mbe:30 s-color:complementary" tooltip></s-range>
                     <s-range name="myOtherRanfe" class="s-mbe:30 s-color:accent" tooltip step="10"></s-range>
@@ -337,12 +344,14 @@ independantly of the source -->
 
                 <br />
 
-                <a class="s-btn s-color:accent" s-slider-previous title="Discover our components!">
-                    <i class="s-icon:arrow-left s-mie:10"></i> Forms
-                </a>
-                <a class="s-btn s-color:complementary s-mis:10" s-slider-next title="Discover our components!">
-                    And helpers... <i class="s-icon:arrow-right s-mis:10"></i>
-                </a>
+                <div class="s-flex:justify-center s-gap:20 @mobile s-flex:column">
+                    <a class="s-btn s-color:accent" s-slider-previous title="Discover our components!">
+                        <i class="s-icon:arrow-left s-mie:10"></i> Forms
+                    </a>
+                    <a class="s-btn s-color:complementary" s-slider-next title="Discover our components!">
+                        And helpers... <i class="s-icon:arrow-right s-mis:10"></i>
+                    </a>
+                </div>
 
             </div>
 
@@ -352,9 +361,9 @@ independantly of the source -->
 
              <div class="__content">
 
-                <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5">A lot<br />of <span class="s-tc:accent">Helpers</span></h1>
+                <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5 s-mbe:30">A lot<br />of <span class="s-tc:accent">Helpers</span></h1>
 
-                <p class="s-typo:lead s-mbe:50 @mobile s-typo:p">
+                <p class="s-typo:lead s-mbe:50 @mobile s-hide">
                     Using Coffeekraken, you have access to a lot of helpers like:
                 </p>
 
@@ -376,26 +385,29 @@ independantly of the source -->
 
                 <br />
 
-                <h3 class="s-typo:h5 s-mbe:20 s-display:inline-block">
-                    Node JS
-                </h3>
-                <p class="s-font:50 s-mbe:50 s-color:accent">
-                    <span class="s-badge:outline s-mie:10">getFreePort</span> <span class="s-badge:outline s-mie:10">isChildProcess</span> <span class="s-badge:outline s-mie:10">hotkey</span> <span class="s-badge:outline s-mie:10">packageRoot</span> <span class="s-badge:outline s-mie:10">onProcessExit</span> <span class="s-badge:outline s-mie:10">And more...</span>
-                </p>
+                <div class="@mobile s-hide">
+                    <h3 class="s-typo:h5 s-mbe:20 s-display:inline-block">
+                        Node JS
+                    </h3>
+                    <p class="s-font:50 s-mbe:50 s-color:accent">
+                        <span class="s-badge:outline s-mie:10">getFreePort</span> <span class="s-badge:outline s-mie:10">isChildProcess</span> <span class="s-badge:outline s-mie:10">hotkey</span> <span class="s-badge:outline s-mie:10">packageRoot</span> <span class="s-badge:outline s-mie:10">onProcessExit</span> <span class="s-badge:outline s-mie:10">And more...</span>
+                    </p>
 
-                <br />
+                    <br />
+                </div>
 
                 <p class="s-font:30 s-mbe:50">
                     And a lot more...
                 </p>
 
-
-                <a class="s-btn s-color:accent" s-slider-previous title="Discover our components!">
-                    <i class="s-icon:arrow-left s-mie:10"></i> Ranges
-                </a>
-                <a class="s-btn s-color:complementary s-mis:10" s-slider-next title="Discover our components!">
-                    And more... <i class="s-icon:arrow-right s-mis:10"></i>
-                </a>
+                <div class="s-flex:justify-center s-gap:20 @mobile s-flex:column">
+                    <a class="s-btn s-color:accent" s-slider-previous title="Discover our components!">
+                        <i class="s-icon:arrow-left s-mie:10"></i> Ranges
+                    </a>
+                    <a class="s-btn s-color:complementary" s-slider-next title="Discover our components!">
+                        And more... <i class="s-icon:arrow-right s-mis:10"></i>
+                    </a>
+                </div>
 
             </div>
 
@@ -405,9 +417,9 @@ independantly of the source -->
 
              <div class="__content">
 
-                <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5">And<br /><span class="s-tc:accent">Many more!</span></h1>
+                <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5 s-mbe:30">And<br /><span class="s-tc:accent">Many more!</span></h1>
 
-                <p class="s-typo:lead s-mbe:50 @mobile s-typo:p">
+                <p class="s-typo:lead s-mbe:50 @mobile s-hide">
                     Coffeekraken is a <span class="s-tc:accent">modular exosystem</span> from which you can take <span class="s-tc:complementary">the elements you need and leave the rest aside</span>. Here's some of our available packages to discover:
                 </p>
 
@@ -416,19 +428,25 @@ independantly of the source -->
                 <div class="s-display:inline-block s-width:70 s-mbe:50">
                     <div class="s-flex:wrap:justify-center s-font:50 s-gap:30">
                         @foreach($packages as $packageName => $packageObj)
-                            <a href="{{ $packageObj->url }}" class="s-badge:outline s-color:accent">{{ $packageName }}</a>
+                            @if ($loop->index > 4)
+                                <a href="{{ $packageObj->url }}" class="s-badge:outline s-color:accent @mobile s-hide">{{ $packageName }}</a>
+                            @else
+                                <a href="{{ $packageObj->url }}" class="s-badge:outline s-color:accent">{{ $packageName }}</a>
+                            @endif
                         @endforeach
                     </div>
                 </div>
 
                 <br />
 
-                <a class="s-btn s-color:accent" s-slider-previous title="Discover our components!">
-                    <i class="s-icon:arrow-left s-mie:10"></i> Ranges
-                </a>
-                <a class="s-btn s-color:complementary s-mis:10" href="/doc/get-started/get-started" title="Get started!">
-                    Back home <i class="s-icon:arrow-right s-mis:10"></i>
-                </a>
+                <div class="s-flex:justify-center s-gap:20 @mobile s-flex:column">
+                    <a class="s-btn s-color:accent" s-slider-previous title="Discover our components!">
+                        <i class="s-icon:arrow-left s-mie:10"></i> Helpers
+                    </a>
+                    <a class="s-btn s-color:complementary" href="/doc/get-started/get-started"  title="Discover our components!">
+                        Get started!</i>
+                    </a>
+                </div>
 
             </div>
 

@@ -55,7 +55,7 @@
             </ul>
         @endif
 
-        @if (count($type->types) == 1 && isset($type->types[0]->of) && count($type->types[0]->of) > 0)
+        @if (isset($type->types) && count($type->types) == 1 && isset($type->types[0]->of) && count($type->types[0]->of) > 0)
             <ul class="s-dropdown">
                 @foreach($type->types[0]->of as $subType)
                     @php

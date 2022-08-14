@@ -125,7 +125,7 @@ export default function ({
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
         font-size: sugar.scalable(1rem);
-        display: flex;
+        display: inline-flex;
         align-items: center;
         flex-wrap: nowrap;
     `);
@@ -136,9 +136,11 @@ export default function ({
       ${
           finalParams.grow && finalParams.scope.indexOf('grow') !== -1
               ? `
-        & > * {
-          flex-grow: 1;
-        }
+              display: flex;
+              
+              & > * {
+                flex-grow: 1;
+              }
       `
               : ''
       }

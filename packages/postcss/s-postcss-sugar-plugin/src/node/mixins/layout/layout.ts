@@ -238,31 +238,22 @@ export default function ({
               grid-column-end: ${colsEndByArea[areaId] + 1};
               grid-row-start: ${rowsStartByArea[areaId]};
               grid-row-end: ${rowsEndByArea[areaId] + 1};
-              ${
-                  finalParams.gap
-                      ? `padding: sugar.margin(${finalParams.gap})`
-                      : ''
-              }
           }
         `);
         });
     }
 
     if (finalParams.scope.indexOf('gap') !== -1 && finalParams.gap) {
-        areas.forEach((areaId) => {
-            vars.push(`
-          .area-${areaId}, & > *:nth-child(${areaId}) {
-            padding: sugar.margin(${finalParams.gap});
-          }
+        vars.push(`
+            gap: sugar.margin(${finalParams.gap});
       `);
-        });
 
-        if (finalParams.gapBetween) {
-            vars.push(`
-        width: calc(100% + sugar.margin(${finalParams.gap}) * 2);
-        margin-left: calc(sugar.margin(${finalParams.gap}) * -1);
-      `);
-        }
+        //     if (finalParams.gapBetween) {
+        //         vars.push(`
+        //     width: calc(100% + sugar.margin(${finalParams.gap}) * 2);
+        //     margin-left: calc(sugar.margin(${finalParams.gap}) * -1);
+        //   `);
+        //     }
     }
 
     return vars;

@@ -23,6 +23,8 @@ export default async function ({ root, sharedData, settings, cacheDir }) {
             }</cyan>"`,
         );
 
+        console.log('CACHE', cacheDir, cacheId);
+
         __writeFileSync(`${cacheDir}/${cacheId}.css`, cacheContent);
     });
 

@@ -58,11 +58,45 @@
     position: relative;
   }
 
+  .__code-example-left {
+    @sugar.layout (
+      2 2 1
+      2 2 3
+      , $gap: 50, $gapBetween: true
+    );
+
+    @sugar.media mobile {
+      @sugar.layout (
+        1
+        2
+        3
+        , $gap: 50, $gapBetween: true
+      );
+    }
+  }
+
+  .__code-example-right {
+    @sugar.layout (
+      1 2 2
+      3 2 2
+      , $gap: 50, $gapBetween: true
+    );
+
+    @sugar.media mobile {
+      @sugar.layout (
+        1
+        2
+        3
+        , $gap: 50, $gapBetween: true
+      );
+    }
+  }
+
   .__recipes-grid {
     @sugar.layout (
       1 2 3 4
       5 6 7 8
-    , $gap: 30, $gapBetween: true);
+    , $gap: 50, $gapBetween: true);
 
     @sugar.media mobile {
       @sugar.layout (
@@ -70,7 +104,7 @@
             3 4
             5 6
             7 8
-            , $gap: 20, $gapBetween: true);
+            , $gap: 30, $gapBetween: true);
     }
   }
 
@@ -78,14 +112,14 @@
     @sugar.layout (
       1 2 3 4 5
       6 7 8 9 10
-    , $gap: 30, $gapBetween: true);
+    , $gap: 50, $gapBetween: true);
 
     @sugar.media mobile {
       @sugar.layout (
-        1 2 
-        3 4
+        1 2
+        4 3 
         5 6
-        7 8
+        8 7
         9 10
         , $gap: 30, $gapBetween: true);
     }

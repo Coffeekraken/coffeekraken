@@ -64,6 +64,7 @@ export default async function ({
         '@sugar.link.classes;',
         '@sugar.gap.classes;',
         '@sugar.height.classes;',
+        '@sugar.hide.classes;',
         '@sugar.text.classes;',
         '@sugar.font.classes;',
         '@sugar.depth.classes;',

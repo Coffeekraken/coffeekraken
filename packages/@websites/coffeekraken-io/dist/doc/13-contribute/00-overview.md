@@ -20,7 +20,7 @@ Happy to see you here! This mean that you have the interest and motivation to he
 
 ## Where is Coffeekraken stored
 
-Our toolchain is stored in a monorepository that you can find [HERE](https://github.com/coffeekraken/coffeekraken). The first step will be to fork it and clone your fork locally using this command:
+Our toolchain is stored in a monorepository that you can find [HERE](https://github.com/coffeekraken/coffeekraken). The first step will be to **fork it and clone your fork locally** using this command:
 
 ```bash
 git clone ...

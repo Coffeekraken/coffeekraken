@@ -2,13 +2,13 @@
         class="s-tc:accent">everyone</span>.<br />Experts, <span class="s-tc:complementary">professionals</span> and
     new-comers<br /></h1>
 
-<p class="s-typo:lead s-mbe:60 @mobile s-typo:p">Everything you need like full <span class="s-tc:accent">UI components
+<p class="s-typo:lead s-mbe:60 @mobile s-hide">Everything you need like full <span class="s-tc:accent">UI components
         library</span>,<br />strong theming support as well as <span class="s-tc:complementary">full development
         stack</span> based<br />on <a href="https://vitejs.dev" class="s-tc:complementary" title="Vite js"
         target="_blank">Vite JS</a>. All of this with <span class="s-tc:accent">extreme customization</span>
     capabilities!</p>
 
-<a class="s-btn s-color:accent s-scale:14" href="/doc/get-started/get-started" title="Coffeekraken get started!">
+<a class="s-btn s-color:accent s-scale:14 @mobile s-btn:block" href="/doc/get-started/get-started" title="Coffeekraken get started!">
     <i class="s-icon:fire s-mie:10"></i> Get started!
 </a>
 
@@ -16,7 +16,7 @@
     Still not convinced?
 </p>
 
-<a class="s-btn s-color:complementary" s-slider-next title="Discover our components!">
+<a class="s-btn s-color:complementary @mobile s-btn:block" s-slider-next title="Discover our components!">
     Take a quick features tour <i class="s-icon:arrow-right s-mis:10"></i>
 </a>
 

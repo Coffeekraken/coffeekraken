@@ -135,7 +135,7 @@
                 that
                 you can work with the things you like and <span class="s-tc:complementary">let the rest aside</span>...
             </p>
-            <a class="s-btn s-color:complementary" href="/doc/get-started/get-started"
+            <a class="s-btn s-color:complementary @mobile s-btn:block" href="/doc/get-started/get-started"
                 title="Get started with Coffeekraken!">
                 Get started!
             </a>

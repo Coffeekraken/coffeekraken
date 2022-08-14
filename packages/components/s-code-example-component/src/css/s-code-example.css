@@ -31,7 +31,6 @@
 }
 
 .s-code-example__tabs {
-    display: flex;
     list-style: none;
 }
 .s-code-example__tab {

@@ -236,6 +236,7 @@ export default function ({
     ).code(
         `
         .s-label--responsive {
+            text-align: initial;
 
             > * {
                 max-width: 66.6%;

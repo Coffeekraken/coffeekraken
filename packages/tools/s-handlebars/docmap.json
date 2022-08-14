@@ -267,9 +267,9 @@
                 "relPath": "src/node/helpers/configFromDocmap.ts",
                 "children": {}
             },
-            "@coffeekraken.s-handlebars.node.helpers.configValue": {
-                "id": "@coffeekraken.s-handlebars.node.helpers.configValue",
-                "name": "configValue",
+            "@coffeekraken.s-handlebars.node.helpers.formatConfigValue": {
+                "id": "@coffeekraken.s-handlebars.node.helpers.formatConfigValue",
+                "name": "formatConfigValue",
                 "type": {
                     "types": [
                         {
@@ -288,7 +288,7 @@
                         "description": ""
                     }
                 ],
-                "description": "This helper allows you to \"sanitize\" some configuration values makes absolute paths to relative, etc...",
+                "description": "This helper allows you to \"format\" some configuration values makes absolute paths to relative, etc...",
                 "namespace": "@coffeekraken.s-handlebars.node.helpers",
                 "status": "beta",
                 "since": "2.0.0",
@@ -296,9 +296,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "configValue.ts",
+                "filename": "formatConfigValue.ts",
                 "extension": "ts",
-                "relPath": "src/node/helpers/configValue.ts",
+                "relPath": "src/node/helpers/formatConfigValue.ts",
                 "children": {}
             },
             "@coffeekraken.s-handlebars.node.helpers.get": {

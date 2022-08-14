@@ -64,7 +64,7 @@ class CKDiscoverTabed extends s_lit_component_1.default {
     render() {
         return (0, lit_1.html) `
       <div class="ck-discover-tabed">
-        <ul class="s-tabs s-color:accent s-mbe:50">
+        <ul class="s-tabs s-color:accent s-mbe:50 @mobile s-tabs:grow">
           ${this._tabs.map((tab) => (0, lit_1.html) `
               <li
                 class="${this.state.activeTabId === tab.id ? "active" : ""}"

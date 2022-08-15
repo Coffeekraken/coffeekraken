@@ -300,7 +300,6 @@ export default class SCodeExample extends __SLitComponent {
     }
     render() {
         const currentItem = this.currentItem;
-
         return html`
             <div
                 class="${this.componentUtils.className('__root')} ${this.props

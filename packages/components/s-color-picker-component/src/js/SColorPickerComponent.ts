@@ -9,6 +9,7 @@ import type {
     IFloatSettings,
 } from '@coffeekraken/sugar/js/dom/ui/makeFloat';
 import __makeFloat from '@coffeekraken/sugar/js/dom/ui/makeFloat';
+import __isMobile from '@coffeekraken/sugar/js/is/mobile';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import { css, html, unsafeCSS } from 'lit';
 import __SColorPickerComponentInterface from './interface/SColorPickerComponentInterface';
@@ -309,7 +310,7 @@ export default class SColorPicker extends __SLitComponent {
         this._updateInput('init');
 
         // make the panel float
-        if (!this.props.inline) {
+        if (!this.props.inline && !__isMobile()) {
             this._floatApi = __makeFloat(
                 this._$picker,
                 this._$root,

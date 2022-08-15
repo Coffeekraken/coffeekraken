@@ -1,4 +1,4 @@
-<section id="features-why" class="s-pb:100 @mobile s-pi:30" s-appear in="bottom">
+<section id="features-why" class="section" s-appear in="bottom">
 
     <div class="s-container">
 
@@ -21,7 +21,7 @@
                         class="s-typo:a" href="/doc/dependencies/overview">on our dependencies page</a>.
                     This mean that all of the configurations for these packages are well known and easy to override.
                 </p>
-                <a class="s-btn s-color:accent" href="/doc/dependencies/overview">
+                <a class="s-btn s-color:accent @mobile s-btn:block" href="/doc/dependencies/overview">
                     <i class="s-icon:box"></i> Check our dependencies
                 </a>
             </div>
@@ -36,13 +36,13 @@
                         to this amazing team effort</span>. Don't
                     hesitate to join us in this story!
                 </p>
-                <a class="s-btn s-color:complementary" href="https://github.com/Coffeekraken/coffeekraken"
+                <a class="s-btn s-color:complementary @mobile s-btn:block" href="https://github.com/Coffeekraken/coffeekraken"
                     target="_blank">
                     <i class="s-icon:github"></i> Browse our codebase
                 </a>
             </div>
-            <div class="__illustration">
-                <img class="illustration" s-inline src="/dist/img/illustrations/opensource.svg" />
+            <div class="__illustration @mobile s-hide">
+                <img class="adaptive-color" s-inline src="/dist/img/illustrations/opensource.svg" />
             </div>
         </div>
 

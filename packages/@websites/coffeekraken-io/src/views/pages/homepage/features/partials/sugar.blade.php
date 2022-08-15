@@ -1,8 +1,8 @@
-<section id="features-sugar" class="s-pb:100 @mobile s-pi:30" s-appear in="bottom">
+<section id="features-sugar" class="section" s-appear in="bottom">
 
     <div class="s-container">
 
-        <div class="s-layout:21 s-gap:column:50 s-mbe:80 @mobile s-layout:1_2">
+        <div class="s-layout:21 s-gap:column:50 @mobile s-layout:1_2">
             <div>
                 <img s-inline class="illustration @mobile s-hide" src="/dist/img/illustrations/packages.svg" />
                 {{-- <img class="__illustration s-when:light" src="/dist/img/illustrations/toolkit.png" alt="Sugar toolkit"
@@ -10,7 +10,7 @@
                 <img class="__illustration s-when:dark" src="/dist/img/illustrations/toolkit-dark.png"
                     alt="Sugar toolkit" title="Sugar toolkit" /> --}}
             </div>
-            <div>
+            <div class="s-mbe:80">
                 <h3 class="s-typo:h3 s-mbe:30">
                     Sugar toolkit
                     <br>to <span class="s-tc:accent">serve you</span>
@@ -28,12 +28,12 @@
                     it and import your own tools.
                 </p>
                 <a class="s-btn s-color:accent @mobile s-btn:block" href="/package/@coffeekraken/sugar/doc/readme" title="Get started with Sugar!">
-                    Discover that Sugar has to offer
+                    Discover what Sugar has to offer
                 </a>
             </div>
         </div>
 
-        <div class="__code-example-left s-mbe:80">
+        <div class="code-example">
             <div>
                 <h5 class="s-typo:h4 s-mbe:30 @mobile s-typo:h5">
                     A coherant <span class="s-tc:accent">CLI</span><br />with some cool features
@@ -66,7 +66,7 @@
             </div>
         </div>
 
-        <div class="__code-example-right s-mbe:80">
+        <div class="code-example:right">
             <div>
                 <h5 class="s-typo:h4 s-mbe:30 @mobile s-typo:h5">
                     querySelector<span class="s-tc:accent">Live</span>
@@ -101,7 +101,7 @@
             </div>
         </div>
 
-        <div class="__code-example-left s-mbe:80">
+        <div class="code-example">
             <div>
                 <h5 class="s-typo:h4 s-mbe:30 @mobile s-typo:h5">
                     sha256,<span class="s-tc:accent">base64</span>/etc...
@@ -128,7 +128,7 @@
             </div>
         </div>
 
-        <div class="__code-example-right s-mbe:80"> 
+        <div class="code-example:right"> 
             <div>
                 <h5 class="s-typo:h4 s-mbe:30 @mobile s-typo:h5">
                     is(<span class="s-tc:accent">Mobile</span>,<span class="s-tc:accent">Color</span>,<span

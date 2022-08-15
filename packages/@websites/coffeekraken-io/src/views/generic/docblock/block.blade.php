@@ -35,7 +35,7 @@
     @endif
     
     @if (!isset($isStyleguide) && $block->type->raw !== 'CssClass')
-        @include('doc.example', ['block' => $block, 'lines' => 10])
+        @include('doc.example', ['block' => $block])
     @endif
     
     @include('doc.cssClass', ['block' => $block])

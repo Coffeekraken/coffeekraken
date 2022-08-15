@@ -1,0 +1,21 @@
+.adaptive-color {
+  [fill="white"],
+  .main {
+    fill: sugar.color(base, --darken 55);
+  }
+  [fill="#FEBD0F"],
+  .accent {
+    fill: sugar.color(accent);
+  }
+
+  @sugar.theme.when (dark) {
+    [fill="white"],
+    .main {
+      fill: sugar.color(main, text);
+    }
+    [fill="#FEBD0F"],
+    .accent {
+      fill: sugar.color(accent);
+    }
+  }
+}

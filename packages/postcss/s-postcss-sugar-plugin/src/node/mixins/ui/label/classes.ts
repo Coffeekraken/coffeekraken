@@ -238,16 +238,27 @@ export default function ({
         .s-label--responsive {
             text-align: initial;
 
-            > * {
-                max-width: 66.6%;
+            > span {
+                width: clamp(100px, 50%, 50%);
+            }   
+            > input:not([type="radio"][type="checkbox"]),
+            > textarea,
+            > div {
+                width: clamp(250px, 50%, 50%);
             }
 
             @sugar.media(<=mobile) {
                 @sugar.ui.label($style: block, $scope: bare);
 
-                > * {
-                    max-width: 100%;
-                }    
+                > span,
+                > input:not([type="radio"][type="checkbox"]),
+                > textarea,
+                > div {
+                    width: 100%;
+                }   
+                > span {
+                    padding-block-start: 0;
+                } 
             }
         }
         `,

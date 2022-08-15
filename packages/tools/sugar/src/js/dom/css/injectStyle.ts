@@ -27,14 +27,26 @@ import __uniqid from '../../../shared/string/uniqid';
 function injectStyle(
     style: string,
     id: string = `injected-style-${__uniqid()}`,
-    node = document.head,
+    node,
 ) {
     if (document.querySelector(`#${id}`)) return;
     const $tag = document.createElement('style');
     $tag.type = 'text/css';
     $tag.setAttribute('id', `injected-style-${id.toLowerCase()}`);
     $tag.innerHTML = style;
-    node.appendChild($tag);
+
+    if (node) {
+        node.appendChild($tag);
+    } else {
+        const $firstLink = document.querySelector(
+            'head link[rel="stylesheet"]',
+        );
+        if ($firstLink) {
+            $firstLink.parentElement?.insertBefore($tag, $firstLink);
+        } else {
+            document.head.appendChild($tag);
+        }
+    }
     return $tag;
 }
 export default injectStyle;

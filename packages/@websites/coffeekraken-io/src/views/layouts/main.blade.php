@@ -42,7 +42,7 @@
             Welcome on
         </p>
         <div class="__logo">
-            @include ('layouts.header.partials.logo')
+            @include ('generic.logo')
         </div>
         <div class="__spinner"></div>
     </div>

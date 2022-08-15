@@ -1,3 +1,7 @@
+<div class="s-mbe:50 __logo">
+    @include ('generic.logo')
+</div>
+
 <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5">The frontend toolkit<br>that works for <span
         class="s-tc:accent">everyone</span>.<br />Experts, <span class="s-tc:complementary">professionals</span> and
     new-comers<br /></h1>

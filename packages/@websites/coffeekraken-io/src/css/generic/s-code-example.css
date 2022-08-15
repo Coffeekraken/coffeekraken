@@ -24,6 +24,12 @@
   }
 }
 
+.s-code-example__content .hljs {
+  @sugar.theme.when light {
+    background-color: sugar.color(main, surface, --darken 2);
+  }
+}
+
 .s-code-example-loader {
   background: sugar.color(main, --lighten 46);
   border-radius: sugar.border.radius();

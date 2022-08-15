@@ -12,7 +12,7 @@
             <div class="__subnav-content" id="subnav-mobile-{{ \Sugar\string\idCompliant($item->name) }}">
                 @if (isset($item->content))
                     {!! $item->content !!}
-                @elseif ($item->include)
+                @elseif (isset($item->include))
                     @include($item->include)
                 @else
                     <ul>

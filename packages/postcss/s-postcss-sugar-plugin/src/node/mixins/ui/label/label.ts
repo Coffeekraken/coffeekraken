@@ -76,9 +76,6 @@ export default function ({
 
           > span {
             order: -1;
-          }
-
-          > * {
             cursor: pointer;
           }
     `);

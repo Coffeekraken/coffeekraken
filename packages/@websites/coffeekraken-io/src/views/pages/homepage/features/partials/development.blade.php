@@ -1,14 +1,10 @@
-<section id="features-development" class="diagonal-section s-pbe:100 @mobile s-pi:30" s-appear in="bottom">
+<section id="features-development" class="section:diagonal" s-appear in="bottom">
     <div class="s-container">
         <div class="s-layout:21 s-gap:column:50 @mobile s-layout:1_2">
             <div>
-                <div class="illustration">
+                <div class="adaptive-color">
                     <img s-inline src="/dist/img/illustrations/stack.svg" />
                 </div>
-                {{-- <img class="__illustration s-when:light" src="/dist/img/illustrations/stack.png" alt="Sugar stack"
-                    title="Sugar stack" />
-                <img class="__illustration s-when:dark" src="/dist/img/illustrations/stack.png" alt="Sugar stack"
-                    title="Sugar stack" /> --}}
             </div>
             <div class="s-pb:100">
                 <h3 class="s-typo:h2 s-mbe:30">Built-in<br /><span class="s-tc:accent">development<br>stack</span></h3>
@@ -17,7 +13,7 @@
                         class="s-tc:accent">development stack environment</span> make to simplify and speed up your
                     process.
                 </p>
-                <p class="s-typo:p">
+                <p class="s-typo:p @mobile s-hide">
                     Our development stack take care of a lot of things for your like the assets compilation, images
                     optimisation/generation, template engines implementation (blade, twig) as well as full production
                     ready build process so <span class="s-tc:accent">you can concentrate on your code</span>. <span
@@ -26,8 +22,9 @@
             </div>
         </div>
 
-        <div class="s-layout:122 s-gap:column:50 s-pb:80 @mobile s-layout:1_2">
-            <div class="@mobile s-mbe:50">
+
+        <div class="code-example">
+            <div>
                 <h5 class="s-typo:h4 s-mbe:30">
                     <span class="s-tc:accent">Speed up</span><br />your process
                 </h5>
@@ -36,27 +33,27 @@
                     you <span class="s-tc:accent">start as soom as possible</span> with production grade ready
                     capabilities.
                 </p>
+            </div>
+            <div>
+                @include('generic.code.example', ['examples' => [
+                'bash' => '# Install cli globally
+                npm i @coffeekraken/cli -g
+                # Init your project using with an interactive wizard
+                sugar new
+                # Launch your development environment
+                sugar dev
+                # ...start working... I know I know...'
+                ]])
+            </div>
+            <div>
                 <a class="s-btn s-color:accent @mobile s-btn:block" href="/doc/cli/overview" title="Discover more about the Coffeekraken Sugar CLI">
                     More on Sugar CLI
                 </a>
             </div>
-            <div>
-                <div class="s-mie:-50 @mobile s-mie:0">
-                    @include('generic.code.example', ['examples' => [
-                    'bash' => '# Install cli globally
-                    npm i @coffeekraken/cli -g
-                    # Init your project using with an interactive wizard
-                    sugar new
-                    # Launch your development environment
-                    sugar dev
-                    # ...start working... I know I know...'
-                    ]])
-                </div>
-            </div>
         </div>
 
-        <div class="s-layout:221 s-gap:column:50 s-pb:80 @mobile s-layout:1_2">
-            <div class="@mobile s-mbe:50">
+        <div class="code-example:right">   
+            <div>
                 <h5 class="s-typo:h4 s-mbe:30">
                     All the <span class="s-tc:accent">sugar</span> power<br />ready to go!
                 </h5>
@@ -66,33 +63,33 @@
                     experience as well as our powerfull <span class="s-typo:code">postcss</span> plugin to write nice
                     and maintainable css!
                 </p>
+            </div>
+            <div>
+                @include('generic.code.example', ['examples' => [
+                'css' => '.my-element {
+                background: sugar.color(accent);
+
+                @sugar.media(mobile) {
+                background: sugar.color(complementary);
+                }
+                }',
+                'js' => '
+                import __querySelectorLive from \'@coffeekraken/sugar/js/dom/query/querySelectorLive\';
+                __querySelectorLive(\'.my-element\', ($elm) => {
+                // do something with your element
+                });
+                '
+                ]])
+            </div>
+            <div>
                 <a class="s-btn s-color:complementary @mobile s-btn:block" href="/package/@coffeekraken/sugar/doc/readme" title="More on Coffeekraken Sugar">
                     Discover more on Sugar
                 </a>
             </div>
-            <div>
-                <div class="s-mis:-50 @mobile s-mis:0">
-                    @include('generic.code.example', ['examples' => [
-                    'css' => '.my-element {
-                    background: sugar.color(accent);
-
-                    @sugar.media(mobile) {
-                    background: sugar.color(complementary);
-                    }
-                    }',
-                    'js' => '
-                    import __querySelectorLive from \'@coffeekraken/sugar/js/dom/query/querySelectorLive\';
-                    __querySelectorLive(\'.my-element\', ($elm) => {
-                    // do something with your element
-                    });
-                    '
-                    ]])
-                </div>
-            </div>
         </div>
 
-        <div class="s-layout:122 s-gap:column:50 s-pb:80 @mobile s-layout:1_2">
-            <div class="@mobile s-mbe:50">
+        <div class="code-example">
+            <div>
                 <h5 class="s-typo:h4 s-mbe:30">
                     Development<br /><span class="s-tc:accent">server</span>
                 </h5>
@@ -103,25 +100,25 @@
                     like <span class="s-typo:code">blade</span>, <span class="s-typo:code">twig</span>, and even
                     more to come...
                 </p>
+            </div>
+            <div>
+                @include('generic.code.example', ['examples' => [
+                'bash' => '# launch the development stack
+sugar dev'
+                ]])
+            </div>
+            <div>
                 <a class="s-btn s-color:accent @mobile s-btn:block" href="/doc/servers/overview"
                     title="More on the Coffeekraken frontend server">
                     More on our servers
                 </a>
             </div>
-            <div>
-                <div>
-                    @include('generic.code.example', ['examples' => [
-                    'bash' => '# launch the development stack
-sugar dev'
-                    ]])
-                </div>
-            </div>
         </div>
 
         <div
-            class="s-layout:123 s-gap:column:50 s-p:80 s-mbe:100 s-bg:main-surface s-radius s-depth @mobile s-layout:1_2_3 s-depth:0">
-            <div class="@mobile s-mbe:50">
-                <div class="s-flex s-gap:30">
+            class="s-layout:123 s-gap:50 s-p:80 s-mbe:100 s-bg:main-surface s-radius s-depth @mobile s-layout:1_2_3 s-depth:0 s-osi:30 s-p:50">
+            <div>
+                <div class="s-flex s-gap:30 s-mbe:30">
                     <div>
                         <i class="s-icon:computer s-font:90 s-opacity:30"></i>
                     </div>
@@ -130,14 +127,14 @@ sugar dev'
                         <span class="s-tc:complementary">the hood</span>
                     </h5>
                 </div>
-                <p class="s-typo:p ">
+                <p class="s-typo:p">
                     Our development server strategy is to make use of <span class="s-typo:code">two different
                         servers</span>. See aside the explaination
                     of this...
                 </p>
             </div>
-            <div class="@mobile s-mbe:50">
-                <div class="s-flex s-gap:30">
+            <div>
+                <div class="s-flex s-gap:30 s-mbe:30">
                     <div>
                         <i class="s-icon:logo-vite-solid s-font:90 s-opacity:30"></i>
                     </div>
@@ -152,8 +149,8 @@ sugar dev'
                     This gives us the power of live compilation and speed up considerably our workflow.
                 </p>
             </div>
-            <div class="@mobile s-mbe:50">
-                <div class="s-flex s-gap:30">
+            <div>
+                <div class="s-flex s-gap:30 s-mbe:30">
                     <div>
                         <i class="s-icon:server s-font:90 s-opacity:30"></i>
                     </div>
@@ -169,8 +166,8 @@ sugar dev'
             </div>
         </div>
 
-        <div class="s-layout:221 s-gap:column:50 s-pb:80 @mobile s-layout:1_2">
-            <div class="@mobile s-mbe:50">
+        <div class="code-example:right"> 
+            <div>
                 <h5 class="s-typo:h4 s-mbe:30">
                     <span class="s-tc:accent">Build</span><br />for production
                 </h5>
@@ -202,7 +199,7 @@ sugar build'
                     <span class="s-tc:accent">Recipe</span> is our term to define <span
                         class="s-tc:complementary">project template</span>.
                 </p>
-                <p class="s-typo:p s-mbe:30">
+                <p class="s-typo:p s-mbe:30 @mobile s-hide">
                     You can check bellow the build-in and official Coffeekraken recipes available and ready to use. Each
                     recipe comes with the <span class="s-tc:accent">development environment</span>, <span
                         class="s-tc:complementary">the production testing environment</span> and <span
@@ -210,7 +207,7 @@ sugar build'
                 </p>
             </div>
             <div>
-                <ul class="__recipes-grid s-mbe:30">
+                <ul class="__recipes-grid s-mbe:50">
                     <li>
                         <a href="/doc/recipes/built-in/default" title="Coffeekraken generic recipe">
                             <div class="icon-card s-color:accent" style="--image: url(https://media.giphy.com/media/eIm624c8nnNbiG0V3g/giphy.gif);">

@@ -2,7 +2,7 @@
 
     <section class="s-container markdown">
 
-        <div class="s-layout:1222 s-gap:column:50 @mobile s-layout:1_2 s-mi:30">
+        <div class="s-layout:1222 s-gap:column:50 @mobile s-layout:1_2 s-mi:30 s-gap:0">
 
             <nav class="sidemenu @mobile s-display:none">
 
@@ -52,7 +52,7 @@
 
             </nav>
 
-            <div s-page-transition-container="markdown" class="__content s-pb:50 s-pis:50 s-rhythm:vertical s-format:text">
+            <div s-page-transition-container="markdown" class="__content s-pb:50 s-pis:50 s-rhythm:vertical s-format:text @mobile s-pis:0">
                 
                 @if (!isset($body))
 

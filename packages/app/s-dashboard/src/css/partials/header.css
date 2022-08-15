@@ -37,21 +37,5 @@
                 top: 0;
             }
         }
-
-        svg .main {
-            fill: sugar.color(base, --darken 55);
-        }
-        svg .accent {
-            fill: sugar.color(accent);
-        }
-
-        @sugar.theme.when (dark) {
-            svg .main {
-                fill: sugar.color(main, text);
-            }
-            svg .accent {
-                fill: sugar.color(accent);
-            }
-        }
     }
 }

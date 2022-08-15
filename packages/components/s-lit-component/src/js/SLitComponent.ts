@@ -6,6 +6,7 @@ import __SComponentUtils, {
     SComponentUtilsDefaultPropsInterface,
 } from '@coffeekraken/s-component-utils';
 import __SInterface from '@coffeekraken/s-interface';
+import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
@@ -29,6 +30,8 @@ export interface ISLitComponentDefaultProps {
 }
 
 export default class SLitComponent extends LitElement {
+    static _keepInjectedCssBeforeStylesheetLinksInited = false;
+
     /**
      * @name            settings
      * @type            Object
@@ -185,6 +188,29 @@ export default class SLitComponent extends LitElement {
             };
         }
 
+        // make sure the injected styles stays BEFORE the link[rel="stylesheet"]
+        // to avoid style override
+        if (!SLitComponent._keepInjectedCssBeforeStylesheetLinksInited) {
+            const $firstStylesheetLink = document.head.querySelector(
+                'link[rel="stylesheet"]',
+            );
+            __querySelectorLive(
+                'style',
+                ($style) => {
+                    if ($firstStylesheetLink) {
+                        document.head.insertBefore(
+                            $style,
+                            $firstStylesheetLink,
+                        );
+                    }
+                },
+                {
+                    rootNode: document.head,
+                },
+            );
+            SLitComponent._keepInjectedCssBeforeStylesheetLinksInited = true;
+        }
+
         // @ts-ignore
         const nodeFirstUpdated = this.firstUpdated?.bind(this);
         // @ts-ignore
@@ -314,10 +340,10 @@ export default class SLitComponent extends LitElement {
         // @ts-ignore
         this.requestUpdate();
         await this.updateComplete;
-        this.componentUtils.injectStyle(
-            this.constructor.styles?.cssText ?? '',
-            this.tagName,
-        );
+        // this.componentUtils.injectStyle(
+        //     this.constructor.styles?.cssText ?? '',
+        //     this.tagName,
+        // );
         await __wait();
         if (this.props.adoptStyle && this.shadowRoot) {
             await this.componentUtils.adoptStyleInShadowRoot(this.shadowRoot);

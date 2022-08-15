@@ -24,17 +24,16 @@ To register a new recipe, you have to create a new file called `kitchen.config.t
 
 ```js
 export default function (env, config) {
-    return {
-        recipes: {
-            myCoolRecipe: {
-                title: 'My cool recipe',
-                description:
-                    'A recipe that will beat the dark side of the force',
-                defaultStack: 'dev',
-                stacks: {},
-            },
-        },
-    };
+  return {
+    recipes: {
+      myCoolRecipe: {
+        title: "My cool recipe",
+        description: "A recipe that will beat the dark side of the force",
+        defaultStack: "dev",
+        stacks: {},
+      },
+    },
+  };
 }
 ```
 
@@ -76,25 +75,24 @@ Back to our recipe. Here's how to register a new `dev` stack into our recipe:
 
 ```js
 export default function (env, config) {
-    return {
-        recipes: {
-            myCoolRecipe: {
-                title: 'My cool recipe',
-                description:
-                    'A recipe that will beat the dark side of the force',
-                defaultStack: 'dev',
-                stacks: {
-                    dev: {
-                        title: 'Development stack',
-                        description: 'Start our development environment',
-                        runInParallel: false,
-                        sharedParams: {},
-                        actions: {},
-                    },
-                },
-            },
+  return {
+    recipes: {
+      myCoolRecipe: {
+        title: "My cool recipe",
+        description: "A recipe that will beat the dark side of the force",
+        defaultStack: "dev",
+        stacks: {
+          dev: {
+            title: "Development stack",
+            description: "Start our development environment",
+            runInParallel: false,
+            sharedParams: {},
+            actions: {},
+          },
         },
-    };
+      },
+    },
+  };
 }
 ```
 
@@ -102,47 +100,45 @@ export default function (env, config) {
 
 **Actions** are the smaller piece of our recipe. Actions can be things like:
 
--   Command line
--   Nodejs process represented by a `.js` file that exports a function to execute
+- Command line
+- Nodejs process represented by a `.js` file that exports a function to execute
 
 Back to our recipe. We will integrate `2` actions which will be a simple command line one, and a node process one which will be detailed bellow.
 
 ```js
 export default function (env, config) {
-    return {
-        recipes: {
-            myCoolRecipe: {
-                title: 'My cool recipe',
-                description:
-                    'A recipe that will beat the dark side of the force',
-                defaultStack: 'dev',
-                stacks: {
-                    dev: {
-                        title: 'Development stack',
-                        description: 'Start our development environment',
-                        runInParallel: false,
-                        sharedParams: {},
-                        actions: {
-                            installDeps: {
-                                title: 'Install dependencies',
-                                description:
-                                    'Install our node dependencies using npm',
-                                command: 'npm install',
-                            },
-                            customProcess: {
-                                title: 'Custom process',
-                                description: 'My cool custom process',
-                                process: '/absolute/path/to/myProcess.js',
-                                params: {
-                                    something: 'cool',
-                                },
-                            },
-                        },
-                    },
+  return {
+    recipes: {
+      myCoolRecipe: {
+        title: "My cool recipe",
+        description: "A recipe that will beat the dark side of the force",
+        defaultStack: "dev",
+        stacks: {
+          dev: {
+            title: "Development stack",
+            description: "Start our development environment",
+            runInParallel: false,
+            sharedParams: {},
+            actions: {
+              installDeps: {
+                title: "Install dependencies",
+                description: "Install our node dependencies using npm",
+                command: "npm install",
+              },
+              customProcess: {
+                title: "Custom process",
+                description: "My cool custom process",
+                process: "/absolute/path/to/myProcess.js",
+                params: {
+                  something: "cool",
                 },
+              },
             },
+          },
         },
-    };
+      },
+    },
+  };
 }
 ```
 
@@ -164,12 +160,12 @@ A node process file is a simply nodejs file that exports a function that will be
 
 ```js
 export default function (params) {
-    return new Promise((resolve, reject) => {
-        console.log('Hello world');
-        console.log(params); // { something: 'cool' }
-        // do something...
-        resolve();
-    });
+  return new Promise((resolve, reject) => {
+    console.log("Hello world");
+    console.log(params); // { something: 'cool' }
+    // do something...
+    resolve();
+  });
 }
 ```
 
@@ -178,16 +174,16 @@ This function **MUST** return a `Promise`. Inside it, you can do whatever you ne
 > We encourage you to make use of our [@coffeekraken/s-promise](/@coffeekraken/s-promise/doc/readme) extended promise package to make use of his `emit` capabilities in order to log your messages with more control...
 
 ```js
-import __SPromise from '@coffeekraken/s-promise';
+import __SPromise from "@coffeekraken/s-promise";
 
 export default function (params) {
-    return new __SPromise(({ resolve, reject, emit }) => {
-        emit('log', {
-            value: 'Hello world',
-        });
-        // do something...
-        resolve();
+  return new __SPromise(({ resolve, reject, emit }) => {
+    emit("log", {
+      value: "Hello world",
     });
+    // do something...
+    resolve();
+  });
 }
 ```
 

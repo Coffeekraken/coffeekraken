@@ -11,8 +11,4 @@
   @sugar.media mobile {
     min-width: 80%;
   }
-
-  .s-label > *:last-child {
-    max-width: 50%;
-  }
 }

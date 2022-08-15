@@ -394,43 +394,44 @@ export default class SComponentUtils extends __SClass {
         // ensure we have a responsive object
         props.responsive = __deepMerge(
             {
-                original: Object.assign({}, props),
+                toResetProps: {},
+                // original: Object.assign({}, props),
             },
             props.responsive ?? {},
         );
         // check for "<responsive>" tags
-        const $responsives = Array.from(this.node.children).filter(
-            ($child) => $child.tagName === 'RESPONSIVE',
-        );
-        if ($responsives.length) {
-            $responsives.forEach(($responsive) => {
-                const attrs = $responsive.attributes,
-                    responsiveProps = {};
-                let media;
+        // const $responsives = Array.from(this.node.children).filter(
+        //     ($child) => $child.tagName === 'RESPONSIVE',
+        // );
+        // if ($responsives.length) {
+        //     $responsives.forEach(($responsive) => {
+        //         const attrs = $responsive.attributes,
+        //             responsiveProps = {};
+        //         let media;
 
-                Object.keys(attrs).forEach((key) => {
-                    let value;
-                    if (attrs[key]?.nodeValue !== undefined) {
-                        if (attrs[key].nodeValue === '') value = true;
-                        else value = attrs[key].nodeValue;
-                    }
-                    if (!value) return;
+        //         Object.keys(attrs).forEach((key) => {
+        //             let value;
+        //             if (attrs[key]?.nodeValue !== undefined) {
+        //                 if (attrs[key].nodeValue === '') value = true;
+        //                 else value = attrs[key].nodeValue;
+        //             }
+        //             if (!value) return;
 
-                    const propName = attrs[key]?.name ?? key;
-                    if (propName === 'media') {
-                        media = value;
-                    } else {
-                        responsiveProps[propName] = value;
-                    }
-                });
-                if (media) {
-                    if (!props.responsive[media]) {
-                        props.responsive[media] = {};
-                    }
-                    props.responsive[media] = responsiveProps;
-                }
-            });
-        }
+        //             const propName = attrs[key]?.name ?? key;
+        //             if (propName === 'media') {
+        //                 media = value;
+        //             } else {
+        //                 responsiveProps[propName] = value;
+        //             }
+        //         });
+        //         if (media) {
+        //             if (!props.responsive[media]) {
+        //                 props.responsive[media] = {};
+        //             }
+        //             props.responsive[media] = responsiveProps;
+        //         }
+        //     });
+        // }
 
         if (
             Object.keys(props.responsive).length === 1 &&
@@ -451,7 +452,7 @@ export default class SComponentUtils extends __SClass {
         this._applyResponsiveProps(props);
     }
     _mediaQueries = {};
-    _applyResponsiveProps(props: any) {
+    _applyResponsiveProps(props: any = {}) {
         let matchedMedia = [],
             newProps = {};
 
@@ -463,8 +464,17 @@ export default class SComponentUtils extends __SClass {
             const queries = __STheme.get(`media.queries`),
                 nudeMedia = media.replace(/(<|>|=|\|)/gm, '');
 
-            if (media === 'original') {
+            if (media === 'toResetProps') {
                 continue;
+            }
+
+            function applyProps() {
+                for (let [key, value] of Object.entries(responsiveProps)) {
+                    // save the props to reset later
+                    props.toResetProps[key] = props[key];
+                    // assign new value
+                    props[key] = value;
+                }
             }
 
             if (media.match(/[a-zA-Z0-9<>=]/) && queries[media]) {
@@ -477,12 +487,12 @@ export default class SComponentUtils extends __SClass {
                     window.matchMedia(mediaQuery.replace(/^@media\s/, ''))
                         .matches
                 ) {
-                    Object.assign(newProps, responsiveProps);
+                    applyProps();
                     matchedMedia.push(media);
                 }
             } else {
                 if (window.matchMedia(media).matches) {
-                    Object.assign(newProps, responsiveProps);
+                    applyProps();
                     matchedMedia.push(media);
                 }
             }
@@ -490,9 +500,11 @@ export default class SComponentUtils extends __SClass {
 
         // reset props if needed
         if (!matchedMedia.length) {
-            Object.assign(props, props.responsive?.original ?? {});
-        } else {
-            Object.assign(props, newProps);
+            // console.log(props, props.responsive?.original);
+            for (let [key, value] of Object.entries(props.toResetProps ?? {})) {
+                props[key] = value;
+            }
+            props.toResetProps = {};
         }
 
         // ensure we keep the responsive object intact

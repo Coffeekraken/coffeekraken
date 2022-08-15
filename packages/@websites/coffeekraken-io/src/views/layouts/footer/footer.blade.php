@@ -7,7 +7,7 @@
             <div>
 
                 <a href="/" title="Coffeekraken.io">
-                    @include ('layouts.header.partials.logo')
+                    @include ('generic.logo')
                 </a>
 
                 <p class="s-typo:p:small s-mbe:30">

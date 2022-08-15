@@ -1,5 +1,6 @@
 .s-code-example {
     display: block;
+    text-align: initial;
 
     @sugar.rhythm.vertical (ui.codeExample.rhythmVertical);
 }

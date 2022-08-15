@@ -82,6 +82,9 @@ export default function ({
                 right: auto;
                 width: 100vw;
                 transform: translate(0, 100%);
+
+                transform: translate(0, 0);
+                opacity: 1 !important;
             }
         }
 
@@ -92,58 +95,63 @@ export default function ({
                 }
             }
         }
+        
 
-        .s-color-picker__shade-wrapper {
-            @sugar.media <=mobile {
-                position: relative;
-                aspect-ratio: unset;
-            }
-        }
+        .s-color-picker__picker {
 
-        .s-color-picker__selectors {
-            gap: sugar.margin(20);
-        }
-
-        .s-color-picker__btn,
-        .s-color-picker__color-input {
-            padding: sugar.padding(20) sugar.padding(30);
-        }
-
-        @sugar.media <=mobile {
-            .s-color-picker__metas {
-                flex-wrap: wrap;
-            }
-
-            .s-color-picker__color {
-                margin-block-start: sugar.margin(20);
-            }
-
-            .s-color-picker__formats,
-            .s-color-picker__color {
-                width: 100%;
-
-                .s-color-picker__btn {
-                    text-align: center;
-                    flex-grow: 1 !important;
+            .s-color-picker__shade-wrapper {
+                @sugar.media <=mobile {
+                    position: relative;
+                    aspect-ratio: unset;
                 }
             }
-        }
 
-        .s-color-picker__metas,
-        .s-color-picker__actions {
-            padding-block-start: sugar.padding(20);
+            .s-color-picker__selectors {
+                gap: sugar.margin(20);
+            }
+
+            .s-color-picker__btn,
+            .s-color-picker__color-input {
+                padding: sugar.padding(20) sugar.padding(30);
+            }
 
             @sugar.media <=mobile {
-                padding-block-start: sugar.padding(30);
+                .s-color-picker__metas {
+                    flex-wrap: wrap;
+                }
+
+                .s-color-picker__color {
+                    margin-block-start: sugar.margin(20);
+                }
+
+                .s-color-picker__formats,
+                .s-color-picker__color {
+                    width: 100%;
+
+                    .s-color-picker__btn {
+                        text-align: center;
+                        flex-grow: 1 !important;
+                    }
+                }
             }
-        }
 
-        .s-color-picker__eye-dropper {
-            color: sugar.color(main, text);
-        }
+            .s-color-picker__metas,
+            .s-color-picker__actions {
+                padding-block-start: sugar.padding(20);
 
-        .s-color-picker__actions {
-            gap: sugar.margin(20);
+                @sugar.media <=mobile {
+                    padding-block-start: sugar.padding(30);
+                }
+            }
+
+            .s-color-picker__eye-dropper {
+                color: sugar.color(main, text);
+            }
+
+            .s-color-picker__actions {
+                gap: sugar.margin(20);
+            }
+        
         }
 
     `);

@@ -1,4 +1,4 @@
-<section id="features-opensource" class="diagonal-section s-pb:50">
+<section id="features-opensource" class="section:diagonal" style="padding-inline: 0 !important;">
     <div class="s-container">
 
         <div class="__box s-radius s-p:50 s-mi:-50 @mobile s-mi:0">
@@ -29,15 +29,7 @@
                     
                 </div>
                 <div class="__illustration">
-                    {{-- <img class="__illustration" src="/dist/img/illustrations/opensource.png"
-                        alt="Coffeekraken open source" title="Coffeekraken believe in open source" />
-
-                         --}}
-
-                    <img class="illustration" s-inline src="/dist/img/illustrations/opensource.svg" />
-
-                    {{-- <input type="range" class="s-range s-color:accent" min="0" max="100" value="0" /> --}}
-
+                    <img class="adaptive-color" s-inline src="/dist/img/illustrations/opensource.svg" />
                 </div>
             </div>
 

@@ -1,4 +1,4 @@
-<section id="features-frontend" class="s-pb:100 @mobile s-pi:30" s-appear in="bottom">
+<section id="features-frontend" class="section" s-appear in="bottom">
     <div class="s-container">
 
         <h3 class="s-typo:h2 s-mbe:30 @mobile s-typo:h4">Frontend<br><span class="s-tc:accent">Sugar</span></h3>
@@ -8,7 +8,7 @@
             with a <span class="s-tc:accent">production ready quality grade</span>. Here's some areas where we can
             help you: </p>
 
-        <div class="__code-example-left s-mbe:50">
+        <div class="code-example">
             <div>
                 <h4 class="s-typo:h4 s-mbe:30 s-pbs:30">
                     CSS made<br>
@@ -84,7 +84,7 @@
 
 
 
-        <div class="__code-example-right s-mbe:50">
+        <div class="code-example:right">
             <div>
                 <h4 class="s-typo:h4 s-mbe:30 s-pbs:30">
                     <span class="s-tc:accent">Theming</span> made<br>
@@ -128,7 +128,7 @@
 
         </div>
 
-        <div class="__code-example-left">
+        <div class="code-example">
             <div>
                 <h4 class="s-typo:h4 s-mbe:30 s-pbs:30">
                     <span class="s-tc:accent">Layout</span> finally<br>

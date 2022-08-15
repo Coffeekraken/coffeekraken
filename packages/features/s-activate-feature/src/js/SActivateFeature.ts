@@ -223,10 +223,23 @@ export default class SActivateFeature extends __SFeature {
 
         // handle `unactivateOn` events
         if (this.props.unactivateOn) {
-            this.props.unactivateOn.forEach((event) => {
-                document.body.addEventListener(event, (e) => {
-                    this.unactivate();
-                });
+            this.props.unactivateOn.forEach((what) => {
+                if (what.match(/^event:/)) {
+                    document.body.addEventListener(
+                        what.replace(/^event:/, ''),
+                        (e) => {
+                            this.unactivate();
+                        },
+                    );
+                } else {
+                    switch (what) {
+                        case 'click':
+                            document.addEventListener('click', (e) => {
+                                this.unactivate();
+                            });
+                            break;
+                    }
+                }
             });
         }
 

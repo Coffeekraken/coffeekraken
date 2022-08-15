@@ -1,7 +1,4 @@
-<s-code-example more-action="{{ $moreAction }}" @if (isset($lines))
-    lines="{{ $lines }}"
-    @endif
-    >
+<s-code-example more-action="{{ $moreAction }}">
     @foreach ($examples as $k => $example)
         <template lang="{{ $example->language or $k }}">
             {!! $example->code or $example !!}

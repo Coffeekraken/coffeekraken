@@ -59,9 +59,9 @@ export default class CkSettings extends __SLitComponent {
   render() {
     return html`
       <div class="ck-settings">
-        <div class="s-p:100 s-mbe:40">
-          <h1 class="s-typo:h3 s-mbe:40">Settings</h1>
-          <p class="s-typo:p">
+        <div class="s-p:100 s-mbe:40 @mobile s-p:40 s-mbe:10">
+          <h1 class="s-typo:h3 s-mbe:40 @mobile s-mbe:0">Settings</h1>
+          <p class="s-typo:p @mobile s-hide">
             These settings allows you to customize your Coffeekraken experience
             as well as feature some of the capabilities that our toolkit has to
             offer.
@@ -71,13 +71,16 @@ export default class CkSettings extends __SLitComponent {
         <form>
           <ul class="__settings s-bg:odd">
             <li class="s-bg:main-surface">
-              <label class="s-label s-pi:100 s-pb:30">
+              <label class="s-label s-pi:100 s-pb:30 @mobile s-pi:40">
                 <span> Dark mode </span>
                 <s-theme-switcher class="s-color:accent"></s-theme-switcher>
               </label>
             </li>
             <li class="s-bg:main-surface">
-              <label class="s-label s-pi:100 s-pb:30" for="setting-base-color">
+              <label
+                class="s-label:responsive s-pi:100 s-pb:30 @mobile s-pi:40"
+                for="setting-base-color"
+              >
                 <span> Base color </span>
                 <s-color-picker id="setting-base-color">
                   <div class="s-group">
@@ -94,7 +97,10 @@ export default class CkSettings extends __SLitComponent {
               </label>
             </li>
             <li class="s-bg:main-surface">
-              <label class="s-label s-pi:100 s-pb:30" for="setting-main-color">
+              <label
+                class="s-label:responsive s-pi:100 s-pb:30 @mobile s-pi:40"
+                for="setting-main-color"
+              >
                 <span> Main color </span>
                 <s-color-picker id="setting-main-color">
                   <div class="s-group">
@@ -112,7 +118,7 @@ export default class CkSettings extends __SLitComponent {
             </li>
             <li class="s-bg:main-surface">
               <label
-                class="s-label s-pi:100 s-pb:30"
+                class="s-label:responsive s-pi:100 s-pb:30 @mobile s-pi:40"
                 for="setting-accent-color"
               >
                 <span> Accent color </span>
@@ -135,7 +141,7 @@ export default class CkSettings extends __SLitComponent {
             </li>
             <li class="s-bg:main-surface">
               <label
-                class="s-label s-pi:100 s-pb:30"
+                class="s-label:responsive s-pi:100 s-pb:30 @mobile s-pi:40"
                 for="setting-complementary-color"
               >
                 <span> Complementary color </span>
@@ -154,8 +160,11 @@ export default class CkSettings extends __SLitComponent {
               </label>
             </li>
             <li class="s-bg:main-surface">
-              <label class="s-label s-pi:100 s-pb:30" for="setting-font-size">
-                Document scale
+              <label
+                class="s-label:responsive s-pi:100 s-pb:30 @mobile s-pi:40"
+                for="setting-font-size"
+              >
+                <span>Document scale</span>
                 <s-range
                   class="s-color:accent"
                   id="setting-font-size"
@@ -170,7 +179,7 @@ export default class CkSettings extends __SLitComponent {
             </li>
             <li class="s-bg:main-surface">
               <label
-                class="s-label s-pi:100 s-pb:30"
+                class="s-label s-pi:100 s-pb:30 @mobile s-pi:40"
                 for="setting-complementary-color"
               >
                 Restore default settings!

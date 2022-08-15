@@ -99,7 +99,7 @@ Coffeekraken provides a CLI called `sugar` through which you will be able to sca
 
 ```shell
 # Install the cli globally
-npm install @coffeekraken/cli -g
+npm i @coffeekraken/cli -g
 # Show the cli help
 sugar -h
 ```

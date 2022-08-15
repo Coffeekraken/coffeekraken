@@ -5,7 +5,7 @@
         <div class="s-flex:align-center" style="position: relative">
             <div class="__actions s-display:none @mobile s-display:inline-block">
                 <div class="s-mis:30">
-                    <a s-activate class="__menu-icon" href="#nav-mobile" toggle unactivate-on="page-transition-end">
+                    <a s-activate class="__menu-icon" href="#nav-mobile" toggle unactivate-on="event:s-page-transition.start">
                         <i class="s-icon:menu __open"></i>
                         <i class="s-icon:cross __close"></i>
                     </a>
@@ -13,7 +13,7 @@
             </div>
             <div class="__logo">
                 <a href="/" title="Coffeekraken.io" class="s-text:center">
-                    @include ('layouts.header.partials.logo')
+                    @include ('generic.logo')
                 </a>
             </div>
             <div class="__version">

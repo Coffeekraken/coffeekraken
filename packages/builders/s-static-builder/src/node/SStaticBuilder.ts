@@ -188,7 +188,7 @@ export default class SStaticBuilder extends __SBuilder {
                 if (params.clean) {
                     emit('log', {
                         type: __SLog.TYPE_INFO,
-                        value: `<yellow>[build]</yellow> Cleaning the static builder internal cache (incremental, etc...))`,
+                        value: `<yellow>[build]</yellow> Cleaning the static builder internal cache (incremental, etc...)`,
                     });
 
                     // reset errors

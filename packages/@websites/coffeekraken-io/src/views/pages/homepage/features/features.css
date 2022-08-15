@@ -58,40 +58,6 @@
     position: relative;
   }
 
-  .__code-example-left {
-    @sugar.layout (
-      2 2 1
-      2 2 3
-      , $gap: 50, $gapBetween: true
-    );
-
-    @sugar.media mobile {
-      @sugar.layout (
-        1
-        2
-        3
-        , $gap: 50, $gapBetween: true
-      );
-    }
-  }
-
-  .__code-example-right {
-    @sugar.layout (
-      1 2 2
-      3 2 2
-      , $gap: 50, $gapBetween: true
-    );
-
-    @sugar.media mobile {
-      @sugar.layout (
-        1
-        2
-        3
-        , $gap: 50, $gapBetween: true
-      );
-    }
-  }
-
   .__recipes-grid {
     @sugar.layout (
       1 2 3 4
@@ -101,9 +67,9 @@
     @sugar.media mobile {
       @sugar.layout (
             1 2
-            3 4
+            4 3
             5 6
-            7 8
+            8 7
             , $gap: 30, $gapBetween: true);
     }
   }

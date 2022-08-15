@@ -139,7 +139,7 @@
                     Icons are often a pain to manage. Here's our clean solution to make use of <span class="s-tc:complementary">Fontawesome</span> icons, as well as <span class="s-tc:accent">SVG</span> files. More sources can be added depending on the community needs...
                 </p>
 
-                <div class="s-text:left s-width:50 @mobile s-width:100 s-mbe:30">
+                <div class="s-mi:auto s-width:50 @mobile s-width:100 s-mbe:30">
                     <s-code-example>
                         <template lang="css">
 @sugar.icon.classes {

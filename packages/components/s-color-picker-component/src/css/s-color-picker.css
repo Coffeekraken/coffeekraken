@@ -32,6 +32,7 @@
 
     .s-color-picker__injected {
         display: flex;
+        width: 100%;
 
         input {
             flex-grow: 1;

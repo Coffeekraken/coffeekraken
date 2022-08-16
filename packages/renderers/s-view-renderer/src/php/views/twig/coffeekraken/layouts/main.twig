@@ -52,7 +52,7 @@
     {# {!! \Sugar\frontspec\metas($frontspec->metas, $env) !!} #}
     
     <!-- og -->
-    {{ frontspecOg(ogObj)|raw }}
+    {{ frontspecOg(ogObj|toObject)|raw }}
     
     <!-- assets -->
     {% set cacheBuster = '' %}

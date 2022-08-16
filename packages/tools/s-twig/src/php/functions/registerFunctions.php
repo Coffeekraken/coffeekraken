@@ -25,6 +25,9 @@ function registerFunctions($twig)
     $toArray = require_once 'cast/toArray.php';
     $twig->addFunction($toArray);
 
+    $toObject = require_once 'cast/toObject.php';
+    $twig->addFunction($toObject);
+
     $frontspecAssets = require_once 'frontspec/assets.php';
     $twig->addFunction($frontspecAssets);
 

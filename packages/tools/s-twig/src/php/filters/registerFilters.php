@@ -25,5 +25,8 @@ function registerFilters($twig)
     $toArray = require_once 'cast/toArray.php';
     $twig->addFilter($toArray);
 
+    $toObject = require_once 'cast/toObject.php';
+    $twig->addFilter($toObject);
+
     return $twig;
 }

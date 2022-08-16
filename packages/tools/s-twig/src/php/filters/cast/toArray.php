@@ -10,7 +10,7 @@
  * This twig filter allows you to convert an object to an array
  *
  * @param       {Object}            $value          The value you want to cast to array
- * @return      {Areray}                        The casted array value
+ * @return      {Array}                        The casted array value
  *
  * @example       twig
  * {% set obj = {'something':true} %}

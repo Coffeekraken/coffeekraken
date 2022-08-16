@@ -1,5 +1,4 @@
 import __isNode from '@coffeekraken/sugar/shared/is/node';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
 // @ts-ignore
 if (!__isNode() && !document.env) {
@@ -7,7 +6,7 @@ if (!__isNode() && !document.env) {
     document.env = {
         SUGAR: {},
     };
-} else process.env.SUGAR = JSON.stringify({});
+}
 
 /**
  * @name            SEnv
@@ -48,30 +47,18 @@ export default class SEnv {
      * @since     2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static _env;
     static get env() {
-        if (this._env) return this._env;
         if (__isNode()) {
-            this._env = {
-                ENVIRONMENT: process.env.NODE_ENV ?? 'development',
-                ENV: process.env.NODE_ENV ?? 'development',
-                PLATFORM: 'node',
-            };
+            process.env.ENVIRONMENT = process.env.NODE_ENV ?? 'development';
+            process.env.ENV = process.env.ENVIRONMENT;
+            process.env.PLATFORM = 'node';
+            return process.env;
         } else {
-            // @ts-ignore
-            const inDocumentEnv = document.env ?? {};
-            this._env = __deepMerge(
-                {
-                    // @ts-ignore
-                    ENVIRONMENT: document?.env?.ENV ?? 'development',
-                    // @ts-ignore
-                    ENV: document?.env?.ENV ?? 'development',
-                    PLATFORM: 'browser',
-                },
-                inDocumentEnv,
-            );
+            document.env.ENVIRONMENT = document?.env?.ENV ?? 'development';
+            document.env.ENV = document.env.ENVIRONMENT;
+            document.env.PLATFORM = 'browser';
+            return document.env;
         }
-        return this._env;
     }
 
     /**
@@ -91,13 +78,13 @@ export default class SEnv {
     static is(env: string): boolean {
         env = env.toLowerCase();
         if (env === 'dev' || env === 'development') {
-            if (this.get('env') === 'dev' || this.get('env') === 'development')
+            if (SEnv.get('env') === 'dev' || SEnv.get('env') === 'development')
                 return true;
         } else if (env === 'prod' || env === 'production') {
-            if (this.get('env') === 'prod' || this.get('env') === 'production')
+            if (SEnv.get('env') === 'prod' || SEnv.get('env') === 'production')
                 return true;
         } else {
-            return this.get('env') === env;
+            return SEnv.get('env') === env;
         }
         return false;
     }
@@ -118,7 +105,7 @@ export default class SEnv {
      */
     static get(name: string): any {
         // @ts-ignore
-        return this.env[name.toUpperCase()];
+        return SEnv.env[name.toUpperCase()];
     }
 
     /**

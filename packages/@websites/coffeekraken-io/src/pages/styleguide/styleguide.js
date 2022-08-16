@@ -1,12 +1,12 @@
 export default {
-    slugs: ["/styleguide/*", "/package/:organisation/:package/styleguide/*"],
+    slugs: ['/styleguide/*', '/package/:organisation/:package/styleguide/*'],
     params: {
-        path: "*",
+        path: '*',
     },
     views: [
         {
-            data: "docmapStyleguide",
-            path: "pages.styleguide.styleguide",
+            data: 'docmapStyleguide',
+            path: 'pages.styleguide.styleguide',
         },
     ],
 };

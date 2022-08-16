@@ -1,2 +1,5 @@
 .s-tooltip {
+  @sugar.media mobile {
+    display: none;
+  }
 }

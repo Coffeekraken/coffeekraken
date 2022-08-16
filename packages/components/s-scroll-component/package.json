@@ -1,6 +1,6 @@
 {
     "name": "@coffeekraken/s-scroll-component",
-    "version": "2.0.0-alpha.18",
+    "version": "2.0.0-alpha.19",
     "description": "Simple web component to create elements that, on click, scroll to a certain element in the DOM, or at top or bottom...",
     "homepage": "https://coffeekraken.io",
     "type": "module",
@@ -12,11 +12,11 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-interface": "^2.0.0-alpha.18",
-        "@coffeekraken/s-lit-component": "^2.0.0-alpha.18",
-        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.18",
-        "@coffeekraken/s-theme": "^2.0.0-alpha.18",
-        "@coffeekraken/sugar": "^2.0.0-alpha.18",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.19",
+        "@coffeekraken/s-lit-component": "^2.0.0-alpha.19",
+        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.19",
+        "@coffeekraken/s-theme": "^2.0.0-alpha.19",
+        "@coffeekraken/sugar": "^2.0.0-alpha.19",
         "lit": "^2.2.8"
     },
     "main": "dist/pkg/cjs/js/exports.js",

@@ -64,8 +64,6 @@ export default function genericHandler({
             let data = Object.assign({}, res.templateData ?? {}),
                 viewPath = viewObj.path;
 
-            // delete data.shared.docmap;
-
             __SBench.step(
                 `handlers.generic`,
                 `beforeViewRendering.${viewPath}`,
@@ -125,8 +123,7 @@ export default function genericHandler({
 
         let layoutPath = pageConfig.layout ?? 'layouts.main';
 
-        const layoutData = Object.assign(res.templateData ?? {});
-        delete layoutData.shared;
+        const layoutData = Object.assign({}, res.templateData ?? {});
 
         let finalResult;
 
@@ -147,7 +144,9 @@ export default function genericHandler({
             } else {
                 finalResult = layoutRes.value;
             }
-        } catch (e) {}
+        } catch (e) {
+            console.log(e);
+        }
 
         if (errors.views.length || errors.layout) {
             finalResult = JSON.stringify(errors, null, 4);

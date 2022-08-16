@@ -82,9 +82,6 @@ export default function ({
                 right: auto;
                 width: 100vw;
                 transform: translate(0, 100%);
-
-                transform: translate(0, 0);
-                opacity: 1 !important;
             }
         }
 
@@ -207,6 +204,13 @@ export default function ({
                         transition-property: border-width, width, height, transform;
                         @sugar.depth (10);
                     }
+
+                    @sugar.media <=mobile {
+                        &:after {
+                            transition: none !important;
+                        }
+                    }
+
                 }
 
                 .s-color-picker__alpha-wrapper {
@@ -219,7 +223,7 @@ export default function ({
                         );
                     }
                 }
-                .s-color-picker.is-alpha-interacting {
+                .s-color-picker__root.is-alpha-interacting {
                     .s-color-picker__alpha-wrapper {
                         &:after {
                             border-width: 3px;
@@ -246,7 +250,7 @@ export default function ({
                     }
                 }
 
-                .s-color-picker.is-shade-interacting {
+                .s-color-picker__root.is-shade-interacting {
                     .s-color-picker__shade-wrapper {
                         &:after {
                             border-width: 3px;
@@ -267,7 +271,7 @@ export default function ({
                         background: hsla(var(--s-color-picker-h), 100%, 50%, 1);
                     }
                 }
-                .s-color-picker.is-hue-interacting {
+                .s-color-picker__root.is-hue-interacting {
                     .s-color-picker__hue-wrapper {
                         &:after {
                             border-width: 3px;

@@ -1,8 +1,20 @@
 {
     "name": "coffeekraken/s-view-renderer-engine-twig",
-    "version": "2.0.0-alpha.18",
+    "version": "2.0.0-alpha.19",
     "require": {
-        "twig/twig": "^3.0"
+        "twig/twig": "^3.0",
+        "coffeekraken/s-twig": "dev-develop"
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../tools/s-twig"
+        },
+        {
+            "type": "path",
+            "url": "../../tools/sugar-php"
+        }
+    ],
+    "minimum-stability": "dev",
     "homepage": "https://coffeekraken.io"
 }

@@ -1,6 +1,6 @@
 {
     "name": "@coffeekraken/s-form-validate-feature",
-    "version": "2.0.0-alpha.18",
+    "version": "2.0.0-alpha.19",
     "description": "Powerful feature that you can use to validate your form inputs using rules like \"password\", \"min\", \"email\", and a lot more...",
     "type": "module",
     "scripts": {
@@ -11,12 +11,12 @@
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.18",
-        "@coffeekraken/s-component-utils": "^2.0.0-alpha.18",
-        "@coffeekraken/s-feature": "^2.0.0-alpha.18",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.18",
-        "@coffeekraken/s-validator": "^2.0.0-alpha.18",
-        "@coffeekraken/sugar": "^2.0.0-alpha.18",
+        "@coffeekraken/s-class": "^2.0.0-alpha.19",
+        "@coffeekraken/s-component-utils": "^2.0.0-alpha.19",
+        "@coffeekraken/s-feature": "^2.0.0-alpha.19",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.19",
+        "@coffeekraken/s-validator": "^2.0.0-alpha.19",
+        "@coffeekraken/sugar": "^2.0.0-alpha.19",
         "@sideway/address": "^4.1.4"
     },
     "main": "dist/pkg/cjs/js/exports.js",

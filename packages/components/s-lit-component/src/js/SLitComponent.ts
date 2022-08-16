@@ -20,6 +20,8 @@ export interface ISLitComponentSettings extends ISComponentUtilsSettings {
     componentUtils: Partial<ISComponentUtilsSettings>;
 }
 
+let _debug = false;
+
 export interface ISLitComponentDefaultProps {
     id: string;
     lnf: string;
@@ -275,11 +277,21 @@ export default class SLitComponent extends LitElement {
      * @since           2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
+
     async _mount() {
         const _this = this,
             defaultProps = __SComponentUtils.getDefaultProps(
                 this.tagName.toLowerCase(),
             );
+
+        // if (!_debug) {
+        //     _debug = 1;
+        //     setTimeout(() => {
+        //         alert(`Debugs: ${_debug}`);
+        //     }, 5000);
+        // } else {
+        //     _debug++;
+        // }
 
         let properties = this.constructor.properties;
         if (!properties) {
@@ -340,10 +352,10 @@ export default class SLitComponent extends LitElement {
         // @ts-ignore
         this.requestUpdate();
         await this.updateComplete;
-        // this.componentUtils.injectStyle(
-        //     this.constructor.styles?.cssText ?? '',
-        //     this.tagName,
-        // );
+        this.componentUtils.injectStyle(
+            this.constructor.styles?.cssText ?? '',
+            this.tagName,
+        );
         await __wait();
         if (this.props.adoptStyle && this.shadowRoot) {
             await this.componentUtils.adoptStyleInShadowRoot(this.shadowRoot);

@@ -1,25 +1,9 @@
 <?php
 // require the vendors
 $nodeModulesVendorsPath = realpath(__DIR__ . '/../../vendor/autoload.php');
-$monorepoVendorsPath = realpath(__DIR__ . '/../../../vendor/autoload.php');
 
 if ($nodeModulesVendorsPath) {
     require_once $nodeModulesVendorsPath;
-} elseif ($monorepoVendorsPath) {
-    require_once $monorepoVendorsPath;
-}
-
-// require the sugar toolkit
-$nodeModulesSugarPath = realpath(
-    __DIR__ . '/../../../sugar/src/php/autoload.php'
-);
-$monorepoSugarPath = realpath(
-    __DIR__ . '/../../../../tools/sugar/src/php/autoload.php'
-);
-if ($nodeModulesSugarPath) {
-    require_once $nodeModulesSugarPath;
-} elseif ($monorepoSugarPath) {
-    require_once $monorepoSugarPath;
 }
 
 $params = [];
@@ -42,12 +26,18 @@ $viewName = str_replace('.twig', '', $params->viewDotPath);
 
 $loader = new \Twig\Loader\FilesystemLoader($params->rootDirs);
 $twig = new \Twig\Environment($loader, [
-    'cache' => $params->cacheDir . '/twig',
+    // 'cache' => $params->cacheDir . '/twig',
+    'debug' => true,
+    'cache' => false,
 ]);
+$twig->addExtension(new \Twig\Extension\DebugExtension());
+
+\STwig\registerFilters($twig);
+\STwig\registerFunctions($twig);
 
 try {
     print \Sugar\html\expandPleasantCssClassnames(
-        $twig->render($params->viewPath, (array) $data)
+        $twig->render(str_replace('.', '/', $viewName) . '.twig', (array) $data)
     );
 } catch (Exception $e) {
     print $e;

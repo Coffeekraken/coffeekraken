@@ -76,7 +76,9 @@ __SConductor.setup({
   });
 
   // init theme
-  __STheme.init();
+  __STheme.init({
+    variant: "dark",
+  });
 
   // features
   __sActivateFeature();

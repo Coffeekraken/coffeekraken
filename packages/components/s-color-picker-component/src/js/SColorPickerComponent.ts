@@ -207,7 +207,7 @@ export default class SColorPicker extends __SLitComponent {
         this._$input = this.querySelector('input');
         this._hasInput = this._$input !== null;
         this._$button = this.querySelector('button');
-        this._$button?.addEventListener('click', (e) => e.preventDefault());
+        this._$button?.addEventListener('pointerup', (e) => e.preventDefault());
         this._hasButton = this._$button !== null;
     }
     async mount() {
@@ -900,7 +900,7 @@ export default class SColorPicker extends __SLitComponent {
                                 )} ${this.state.metasFormat === 'hex'
                                     ? 'active'
                                     : ''}"
-                                @click=${(e) => {
+                                @pointerup=${(e) => {
                                     e.preventDefault();
                                     this._setMetasFormat('hex');
                                 }}
@@ -915,7 +915,7 @@ export default class SColorPicker extends __SLitComponent {
                                 )} ${this.state.metasFormat === 'rgb'
                                     ? 'active'
                                     : ''}"
-                                @click=${(e) => {
+                                @pointerup=${(e) => {
                                     e.preventDefault();
                                     this._setMetasFormat('rgb');
                                 }}
@@ -930,7 +930,7 @@ export default class SColorPicker extends __SLitComponent {
                                 )} ${this.state.metasFormat === 'hsl'
                                     ? 'active'
                                     : ''}"
-                                @click=${(e) => {
+                                @pointerup=${(e) => {
                                     e.preventDefault();
                                     this._setMetasFormat('hsl');
                                 }}
@@ -963,7 +963,7 @@ export default class SColorPicker extends __SLitComponent {
                                 class="${this.componentUtils.className(
                                     '__preview',
                                 )} "
-                                @click=${() => this._copy()}
+                                @pointerup=${() => this._copy()}
                             >
                                 ${this.props.copyIconClass
                                     ? html`
@@ -974,13 +974,13 @@ export default class SColorPicker extends __SLitComponent {
                                       `
                                     : ''}
                             </div>
-                            ${this.props.eyeDropper
+                            ${this.props.eyeDropper && window.EyeDropper
                                 ? html`
                                       <div
                                           class="${this.componentUtils.className(
                                               '__eye-dropper',
                                           )} "
-                                          @click=${() => this._eyeDropper()}
+                                          @pointerup=${() => this._eyeDropper()}
                                       >
                                           ${this.props.eyeDropperIconClass
                                               ? html`
@@ -1009,7 +1009,7 @@ export default class SColorPicker extends __SLitComponent {
                                                     '__clear',
                                                     's-btn s-color--error',
                                                 )}"
-                                                @click=${(e) => {
+                                                @pointerup=${(e) => {
                                                     e.preventDefault();
                                                     this._clear();
                                                 }}
@@ -1026,7 +1026,7 @@ export default class SColorPicker extends __SLitComponent {
                                                     '__reset',
                                                     's-btn s-color--complementary',
                                                 )}"
-                                                @click=${(e) => {
+                                                @pointerup=${(e) => {
                                                     e.preventDefault();
                                                     this._reset();
                                                 }}
@@ -1043,7 +1043,7 @@ export default class SColorPicker extends __SLitComponent {
                                                     '__validate',
                                                     's-btn s-color--accent',
                                                 )}"
-                                                @click=${(e) => {
+                                                @pointerup=${(e) => {
                                                     e.preventDefault();
                                                     this._validate();
                                                 }}

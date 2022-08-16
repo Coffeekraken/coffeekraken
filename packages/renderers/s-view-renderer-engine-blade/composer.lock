@@ -4,20 +4,39 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "01d5aeb92b88142c2a05b8b501d14b83",
+    "content-hash": "c10dd5728544457ffe57aca991137d2d",
     "packages": [
         {
+            "name": "coffeekraken/sugar",
+            "version": "2.0.0-alpha.19",
+            "dist": {
+                "type": "path",
+                "url": "../../tools/sugar-php",
+                "reference": "f53f235f8bb5188a0a410d32c75422263a603e8d"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/php/autoload.php"
+                ]
+            },
+            "homepage": "https://coffeekraken.io",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
             "name": "eftec/bladeone",
-            "version": "4.5",
+            "version": "4.5.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/EFTEC/BladeOne.git",
-                "reference": "e267c948239fb61da5f692a4dd7e9411d1fa2a8f"
+                "reference": "3d83f5d527a5582f9937ad648705ec3223f39dba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/EFTEC/BladeOne/zipball/e267c948239fb61da5f692a4dd7e9411d1fa2a8f",
-                "reference": "e267c948239fb61da5f692a4dd7e9411d1fa2a8f",
+                "url": "https://api.github.com/repos/EFTEC/BladeOne/zipball/3d83f5d527a5582f9937ad648705ec3223f39dba",
+                "reference": "3d83f5d527a5582f9937ad648705ec3223f39dba",
                 "shasum": ""
             },
             "require": {
@@ -58,15 +77,17 @@
             ],
             "support": {
                 "issues": "https://github.com/EFTEC/BladeOne/issues",
-                "source": "https://github.com/EFTEC/BladeOne/tree/4.5"
+                "source": "https://github.com/EFTEC/BladeOne/tree/4.5.5"
             },
-            "time": "2022-03-11T20:50:03+00:00"
+            "time": "2022-07-16T14:05:23+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
-    "minimum-stability": "stable",
-    "stability-flags": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "coffeekraken/sugar": 15
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

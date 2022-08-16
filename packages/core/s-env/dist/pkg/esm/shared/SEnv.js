@@ -1,5 +1,4 @@
 import __isNode from '@coffeekraken/sugar/shared/is/node';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 // @ts-ignore
 if (!__isNode() && !document.env) {
     // @ts-ignore
@@ -7,8 +6,6 @@ if (!__isNode() && !document.env) {
         SUGAR: {},
     };
 }
-else
-    process.env.SUGAR = JSON.stringify({});
 /**
  * @name            SEnv
  * @namespace       s-env.shared
@@ -36,29 +33,31 @@ else
  */
 // @ts-ignore
 export default class SEnv {
+    /**
+     * @name        env
+     * @type        Object
+     * @static
+     *
+     * Store the actual environment variables object. In node it will be process.env, in the browser,
+     * document.env
+     *
+     * @since     2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
     static get env() {
-        var _a, _b, _c, _d, _e, _f, _g;
-        if (this._env)
-            return this._env;
+        var _a, _b, _c;
         if (__isNode()) {
-            this._env = {
-                ENVIRONMENT: (_a = process.env.NODE_ENV) !== null && _a !== void 0 ? _a : 'development',
-                ENV: (_b = process.env.NODE_ENV) !== null && _b !== void 0 ? _b : 'development',
-                PLATFORM: 'node',
-            };
+            process.env.ENVIRONMENT = (_a = process.env.NODE_ENV) !== null && _a !== void 0 ? _a : 'development';
+            process.env.ENV = process.env.ENVIRONMENT;
+            process.env.PLATFORM = 'node';
+            return process.env;
         }
         else {
-            // @ts-ignore
-            const inDocumentEnv = (_c = document.env) !== null && _c !== void 0 ? _c : {};
-            this._env = __deepMerge({
-                // @ts-ignore
-                ENVIRONMENT: (_e = (_d = document === null || document === void 0 ? void 0 : document.env) === null || _d === void 0 ? void 0 : _d.ENV) !== null && _e !== void 0 ? _e : 'development',
-                // @ts-ignore
-                ENV: (_g = (_f = document === null || document === void 0 ? void 0 : document.env) === null || _f === void 0 ? void 0 : _f.ENV) !== null && _g !== void 0 ? _g : 'development',
-                PLATFORM: 'browser',
-            }, inDocumentEnv);
+            document.env.ENVIRONMENT = (_c = (_b = document === null || document === void 0 ? void 0 : document.env) === null || _b === void 0 ? void 0 : _b.ENV) !== null && _c !== void 0 ? _c : 'development';
+            document.env.ENV = document.env.ENVIRONMENT;
+            document.env.PLATFORM = 'browser';
+            return document.env;
         }
-        return this._env;
     }
     /**
      * @name        is
@@ -77,15 +76,15 @@ export default class SEnv {
     static is(env) {
         env = env.toLowerCase();
         if (env === 'dev' || env === 'development') {
-            if (this.get('env') === 'dev' || this.get('env') === 'development')
+            if (SEnv.get('env') === 'dev' || SEnv.get('env') === 'development')
                 return true;
         }
         else if (env === 'prod' || env === 'production') {
-            if (this.get('env') === 'prod' || this.get('env') === 'production')
+            if (SEnv.get('env') === 'prod' || SEnv.get('env') === 'production')
                 return true;
         }
         else {
-            return this.get('env') === env;
+            return SEnv.get('env') === env;
         }
         return false;
     }
@@ -105,7 +104,7 @@ export default class SEnv {
      */
     static get(name) {
         // @ts-ignore
-        return this.env[name.toUpperCase()];
+        return SEnv.env[name.toUpperCase()];
     }
     /**
      * @name        set
@@ -145,4 +144,4 @@ export default class SEnv {
         delete SEnv.env[name.toUpperCase()];
     }
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sUUFBUSxNQUFNLG9DQUFvQyxDQUFDO0FBQzFELE9BQU8sV0FBVyxNQUFNLDZDQUE2QyxDQUFDO0FBRXRFLGFBQWE7QUFDYixJQUFJLENBQUMsUUFBUSxFQUFFLElBQUksQ0FBQyxRQUFRLENBQUMsR0FBRyxFQUFFO0lBQzlCLGFBQWE7SUFDYixRQUFRLENBQUMsR0FBRyxHQUFHO1FBQ1gsS0FBSyxFQUFFLEVBQUU7S0FDWixDQUFDO0NBQ0w7O0lBQU0sT0FBTyxDQUFDLEdBQUcsQ0FBQyxLQUFLLEdBQUcsSUFBSSxDQUFDLFNBQVMsQ0FBQyxFQUFFLENBQUMsQ0FBQztBQUU5Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBRUgsYUFBYTtBQUNiLE1BQU0sQ0FBQyxPQUFPLE9BQU8sSUFBSTtJQWFyQixNQUFNLEtBQUssR0FBRzs7UUFDVixJQUFJLElBQUksQ0FBQyxJQUFJO1lBQUUsT0FBTyxJQUFJLENBQUMsSUFBSSxDQUFDO1FBQ2hDLElBQUksUUFBUSxFQUFFLEVBQUU7WUFDWixJQUFJLENBQUMsSUFBSSxHQUFHO2dCQUNSLFdBQVcsRUFBRSxNQUFBLE9BQU8sQ0FBQyxHQUFHLENBQUMsUUFBUSxtQ0FBSSxhQUFhO2dCQUNsRCxHQUFHLEVBQUUsTUFBQSxPQUFPLENBQUMsR0FBRyxDQUFDLFFBQVEsbUNBQUksYUFBYTtnQkFDMUMsUUFBUSxFQUFFLE1BQU07YUFDbkIsQ0FBQztTQUNMO2FBQU07WUFDSCxhQUFhO1lBQ2IsTUFBTSxhQUFhLEdBQUcsTUFBQSxRQUFRLENBQUMsR0FBRyxtQ0FBSSxFQUFFLENBQUM7WUFDekMsSUFBSSxDQUFDLElBQUksR0FBRyxXQUFXLENBQ25CO2dCQUNJLGFBQWE7Z0JBQ2IsV0FBVyxFQUFFLE1BQUEsTUFBQSxRQUFRLGFBQVIsUUFBUSx1QkFBUixRQUFRLENBQUUsR0FBRywwQ0FBRSxHQUFHLG1DQUFJLGFBQWE7Z0JBQ2hELGFBQWE7Z0JBQ2IsR0FBRyxFQUFFLE1BQUEsTUFBQSxRQUFRLGFBQVIsUUFBUSx1QkFBUixRQUFRLENBQUUsR0FBRywwQ0FBRSxHQUFHLG1DQUFJLGFBQWE7Z0JBQ3hDLFFBQVEsRUFBRSxTQUFTO2FBQ3RCLEVBQ0QsYUFBYSxDQUNoQixDQUFDO1NBQ0w7UUFDRCxPQUFPLElBQUksQ0FBQyxJQUFJLENBQUM7SUFDckIsQ0FBQztJQUVEOzs7Ozs7Ozs7Ozs7O09BYUc7SUFDSCxNQUFNLENBQUMsRUFBRSxDQUFDLEdBQVc7UUFDakIsR0FBRyxHQUFHLEdBQUcsQ0FBQyxXQUFXLEVBQUUsQ0FBQztRQUN4QixJQUFJLEdBQUcsS0FBSyxLQUFLLElBQUksR0FBRyxLQUFLLGFBQWEsRUFBRTtZQUN4QyxJQUFJLElBQUksQ0FBQyxHQUFHLENBQUMsS0FBSyxDQUFDLEtBQUssS0FBSyxJQUFJLElBQUksQ0FBQyxHQUFHLENBQUMsS0FBSyxDQUFDLEtBQUssYUFBYTtnQkFDOUQsT0FBTyxJQUFJLENBQUM7U0FDbkI7YUFBTSxJQUFJLEdBQUcsS0FBSyxNQUFNLElBQUksR0FBRyxLQUFLLFlBQVksRUFBRTtZQUMvQyxJQUFJLElBQUksQ0FBQyxHQUFHLENBQUMsS0FBSyxDQUFDLEtBQUssTUFBTSxJQUFJLElBQUksQ0FBQyxHQUFHLENBQUMsS0FBSyxDQUFDLEtBQUssWUFBWTtnQkFDOUQsT0FBTyxJQUFJLENBQUM7U0FDbkI7YUFBTTtZQUNILE9BQU8sSUFBSSxDQUFDLEdBQUcsQ0FBQyxLQUFLLENBQUMsS0FBSyxHQUFHLENBQUM7U0FDbEM7UUFDRCxPQUFPLEtBQUssQ0FBQztJQUNqQixDQUFDO0lBRUQ7Ozs7Ozs7Ozs7Ozs7T0FhRztJQUNILE1BQU0sQ0FBQyxHQUFHLENBQUMsSUFBWTtRQUNuQixhQUFhO1FBQ2IsT0FBTyxJQUFJLENBQUMsR0FBRyxDQUFDLElBQUksQ0FBQyxXQUFXLEVBQUUsQ0FBQyxDQUFDO0lBQ3hDLENBQUM7SUFFRDs7Ozs7Ozs7Ozs7Ozs7T0FjRztJQUNILE1BQU0sQ0FBQyxHQUFHLENBQUMsSUFBWSxFQUFFLEtBQVU7UUFDL0IsSUFBSSxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsV0FBVyxFQUFFLENBQUMsR0FBRyxLQUFLLENBQUM7UUFDckMsT0FBTyxLQUFLLENBQUM7SUFDakIsQ0FBQztJQUVEOzs7Ozs7Ozs7Ozs7OztPQWNHO0lBQ0gsTUFBTSxDQUFDLE1BQU0sQ0FBQyxJQUFZO1FBQ3RCLE9BQU8sSUFBSSxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsV0FBVyxFQUFFLENBQUMsQ0FBQztJQUN4QyxDQUFDO0NBQ0oifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sUUFBUSxNQUFNLG9DQUFvQyxDQUFDO0FBRTFELGFBQWE7QUFDYixJQUFJLENBQUMsUUFBUSxFQUFFLElBQUksQ0FBQyxRQUFRLENBQUMsR0FBRyxFQUFFO0lBQzlCLGFBQWE7SUFDYixRQUFRLENBQUMsR0FBRyxHQUFHO1FBQ1gsS0FBSyxFQUFFLEVBQUU7S0FDWixDQUFDO0NBQ0w7QUFFRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBRUgsYUFBYTtBQUNiLE1BQU0sQ0FBQyxPQUFPLE9BQU8sSUFBSTtJQUNyQjs7Ozs7Ozs7OztPQVVHO0lBQ0gsTUFBTSxLQUFLLEdBQUc7O1FBQ1YsSUFBSSxRQUFRLEVBQUUsRUFBRTtZQUNaLE9BQU8sQ0FBQyxHQUFHLENBQUMsV0FBVyxHQUFHLE1BQUEsT0FBTyxDQUFDLEdBQUcsQ0FBQyxRQUFRLG1DQUFJLGFBQWEsQ0FBQztZQUNoRSxPQUFPLENBQUMsR0FBRyxDQUFDLEdBQUcsR0FBRyxPQUFPLENBQUMsR0FBRyxDQUFDLFdBQVcsQ0FBQztZQUMxQyxPQUFPLENBQUMsR0FBRyxDQUFDLFFBQVEsR0FBRyxNQUFNLENBQUM7WUFDOUIsT0FBTyxPQUFPLENBQUMsR0FBRyxDQUFDO1NBQ3RCO2FBQU07WUFDSCxRQUFRLENBQUMsR0FBRyxDQUFDLFdBQVcsR0FBRyxNQUFBLE1BQUEsUUFBUSxhQUFSLFFBQVEsdUJBQVIsUUFBUSxDQUFFLEdBQUcsMENBQUUsR0FBRyxtQ0FBSSxhQUFhLENBQUM7WUFDL0QsUUFBUSxDQUFDLEdBQUcsQ0FBQyxHQUFHLEdBQUcsUUFBUSxDQUFDLEdBQUcsQ0FBQyxXQUFXLENBQUM7WUFDNUMsUUFBUSxDQUFDLEdBQUcsQ0FBQyxRQUFRLEdBQUcsU0FBUyxDQUFDO1lBQ2xDLE9BQU8sUUFBUSxDQUFDLEdBQUcsQ0FBQztTQUN2QjtJQUNMLENBQUM7SUFFRDs7Ozs7Ozs7Ozs7OztPQWFHO0lBQ0gsTUFBTSxDQUFDLEVBQUUsQ0FBQyxHQUFXO1FBQ2pCLEdBQUcsR0FBRyxHQUFHLENBQUMsV0FBVyxFQUFFLENBQUM7UUFDeEIsSUFBSSxHQUFHLEtBQUssS0FBSyxJQUFJLEdBQUcsS0FBSyxhQUFhLEVBQUU7WUFDeEMsSUFBSSxJQUFJLENBQUMsR0FBRyxDQUFDLEtBQUssQ0FBQyxLQUFLLEtBQUssSUFBSSxJQUFJLENBQUMsR0FBRyxDQUFDLEtBQUssQ0FBQyxLQUFLLGFBQWE7Z0JBQzlELE9BQU8sSUFBSSxDQUFDO1NBQ25CO2FBQU0sSUFBSSxHQUFHLEtBQUssTUFBTSxJQUFJLEdBQUcsS0FBSyxZQUFZLEVBQUU7WUFDL0MsSUFBSSxJQUFJLENBQUMsR0FBRyxDQUFDLEtBQUssQ0FBQyxLQUFLLE1BQU0sSUFBSSxJQUFJLENBQUMsR0FBRyxDQUFDLEtBQUssQ0FBQyxLQUFLLFlBQVk7Z0JBQzlELE9BQU8sSUFBSSxDQUFDO1NBQ25CO2FBQU07WUFDSCxPQUFPLElBQUksQ0FBQyxHQUFHLENBQUMsS0FBSyxDQUFDLEtBQUssR0FBRyxDQUFDO1NBQ2xDO1FBQ0QsT0FBTyxLQUFLLENBQUM7SUFDakIsQ0FBQztJQUVEOzs7Ozs7Ozs7Ozs7O09BYUc7SUFDSCxNQUFNLENBQUMsR0FBRyxDQUFDLElBQVk7UUFDbkIsYUFBYTtRQUNiLE9BQU8sSUFBSSxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsV0FBVyxFQUFFLENBQUMsQ0FBQztJQUN4QyxDQUFDO0lBRUQ7Ozs7Ozs7Ozs7Ozs7O09BY0c7SUFDSCxNQUFNLENBQUMsR0FBRyxDQUFDLElBQVksRUFBRSxLQUFVO1FBQy9CLElBQUksQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLFdBQVcsRUFBRSxDQUFDLEdBQUcsS0FBSyxDQUFDO1FBQ3JDLE9BQU8sS0FBSyxDQUFDO0lBQ2pCLENBQUM7SUFFRDs7Ozs7Ozs7Ozs7Ozs7T0FjRztJQUNILE1BQU0sQ0FBQyxNQUFNLENBQUMsSUFBWTtRQUN0QixPQUFPLElBQUksQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLFdBQVcsRUFBRSxDQUFDLENBQUM7SUFDeEMsQ0FBQztDQUNKIn0=

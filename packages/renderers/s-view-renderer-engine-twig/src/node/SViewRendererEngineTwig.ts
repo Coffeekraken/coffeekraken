@@ -26,7 +26,7 @@ export interface ISViewRendererEngineTwigSettings {}
 
 export default class SViewRendererEngineTwig {
     static id = 'twig';
-    static extensions = ['.twig'];
+    static extensions = ['twig'];
     static settingsInterface = __SViewRendererTwigEngineSettingsInterface;
     settings: ISViewRendererEngineTwigSettings = {};
 
@@ -54,9 +54,14 @@ export default class SViewRendererEngineTwig {
                     });
                 }
 
+                let viewDotPath = viewPath;
                 __unique([...viewRendererSettings.rootDirs]).forEach((path) => {
-                    viewPath = viewPath.replace(`${path}/`, '');
+                    viewDotPath = viewDotPath.replace(`${path}/`, '');
                 });
+                viewDotPath = viewDotPath
+                    .split('/')
+                    .join('.')
+                    .replace('.blade.php', '');
 
                 // pass the shared data file path through the data
                 data._sharedDataFilePath = sharedDataFilePath;
@@ -68,7 +73,7 @@ export default class SViewRendererEngineTwig {
                     ),
                     {
                         rootDirs: __unique([...viewRendererSettings.rootDirs]),
-                        viewPath,
+                        viewDotPath,
                         data,
                         cacheDir: viewRendererSettings.cacheDir,
                     },
@@ -84,17 +89,18 @@ export default class SViewRendererEngineTwig {
 
                 resPro.catch((e) => {
                     // @TODO            make the 'log' event displayed on the terminal
-                    console.log(e, {
-                        viewPath,
-                        data,
-                    });
                     emit('log', {
                         type: __SLog.TYPE_ERROR,
                         value: e,
                     });
+                    resolve({
+                        error: e,
+                    });
                 });
                 const res = await resPro;
-                resolve(res);
+                resolve({
+                    value: res,
+                });
             },
             {
                 eventEmitter: {

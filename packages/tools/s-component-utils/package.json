@@ -1,6 +1,6 @@
 {
     "name": "@coffeekraken/s-component-utils",
-    "version": "2.0.0-alpha.18",
+    "version": "2.0.0-alpha.19",
     "description": "Utility class that expose things like defining default properties, handle state, responsive properties, and more... More an internal class at the end...",
     "type": "module",
     "homepage": "https://coffeekraken.io",
@@ -10,13 +10,13 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.18",
-        "@coffeekraken/s-conductor": "^2.0.0-alpha.18",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.18",
-        "@coffeekraken/s-promise": "^2.0.0-alpha.18",
-        "@coffeekraken/s-state": "^2.0.0-alpha.18",
-        "@coffeekraken/s-theme": "^2.0.0-alpha.18",
-        "@coffeekraken/sugar": "^2.0.0-alpha.18"
+        "@coffeekraken/s-class": "^2.0.0-alpha.19",
+        "@coffeekraken/s-conductor": "^2.0.0-alpha.19",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.19",
+        "@coffeekraken/s-promise": "^2.0.0-alpha.19",
+        "@coffeekraken/s-state": "^2.0.0-alpha.19",
+        "@coffeekraken/s-theme": "^2.0.0-alpha.19",
+        "@coffeekraken/sugar": "^2.0.0-alpha.19"
     },
     "main": "dist/pkg/cjs/js/exports.js",
     "module": "dist/pkg/esm/js/exports.js",

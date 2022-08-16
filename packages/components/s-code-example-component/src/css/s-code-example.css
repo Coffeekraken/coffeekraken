@@ -40,11 +40,12 @@
 .s-code-example__content {
     position: relative;
     /* this variable comes from the @sugar.codeExample mixin */
-    /* --paddingBlock: sugar.padding(ui.codeExample.paddingBlock); */
     overflow: hidden;
 
     .s-code-example[lines] & {
-        max-height: calc(1.5em * var(--max-lines) + (var(--paddingBlock) * 2));
+        max-height: calc(
+            1.5em * var(--max-lines) + (var(--paddingBlock, 1em) * 2)
+        );
     }
     .s-code-example--more & {
         max-height: 99999px !important;

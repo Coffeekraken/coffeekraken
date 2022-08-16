@@ -394,11 +394,17 @@ export default class SComponentUtils extends __SClass {
         // ensure we have a responsive object
         props.responsive = __deepMerge(
             {
-                toResetProps: {},
                 // original: Object.assign({}, props),
             },
             props.responsive ?? {},
         );
+
+        Object.defineProperty(props, 'toResetResponsiveProps', {
+            enumerable: false,
+            writable: true,
+            value: {},
+        });
+
         // check for "<responsive>" tags
         // const $responsives = Array.from(this.node.children).filter(
         //     ($child) => $child.tagName === 'RESPONSIVE',
@@ -464,14 +470,14 @@ export default class SComponentUtils extends __SClass {
             const queries = __STheme.get(`media.queries`),
                 nudeMedia = media.replace(/(<|>|=|\|)/gm, '');
 
-            if (media === 'toResetProps') {
+            if (media === 'toResetResponsiveProps') {
                 continue;
             }
 
             function applyProps() {
                 for (let [key, value] of Object.entries(responsiveProps)) {
                     // save the props to reset later
-                    props.toResetProps[key] = props[key];
+                    props.toResetResponsiveProps[key] = props[key];
                     // assign new value
                     props[key] = value;
                 }
@@ -501,10 +507,12 @@ export default class SComponentUtils extends __SClass {
         // reset props if needed
         if (!matchedMedia.length) {
             // console.log(props, props.responsive?.original);
-            for (let [key, value] of Object.entries(props.toResetProps ?? {})) {
+            for (let [key, value] of Object.entries(
+                props.toResetResponsiveProps ?? {},
+            )) {
                 props[key] = value;
+                delete props.toResetResponsiveProps[key];
             }
-            props.toResetProps = {};
         }
 
         // ensure we keep the responsive object intact

@@ -28,7 +28,16 @@ import __SThemeBase from '../shared/SThemeBase';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
+
+export interface ISThemeInitSettings {
+    $context: HTMLElement;
+    theme: string;
+    variant: string;
+}
+
 export default class STheme extends __SThemeBase {
+    static defaultThemeMetas = {};
+
     /**
      * @name      theme
      * @type      String
@@ -133,7 +142,7 @@ export default class STheme extends __SThemeBase {
     static applyTheme(
         theme?: string,
         variant?: string,
-        $context = document.querySelector('html'),
+        $context: HTMLElement = <HTMLElement>document.querySelector('html'),
     ): void {
         __clearTransmations(document.querySelector('html'), {
             timeout: 100,
@@ -224,15 +233,32 @@ export default class STheme extends __SThemeBase {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static init($context = document.querySelector('html')): STheme {
+    static init(settings?: Partial<ISThemeInitSettings>): STheme {
+        const finalSettings = <ISThemeInitSettings>{
+            $context: document.querySelector('html'),
+            theme: undefined,
+            variant: undefined,
+            ...(settings ?? {}),
+        };
+
+        // save default theme metas
+        STheme.defaultThemeMetas = {
+            theme: finalSettings.theme,
+            variant: finalSettings.variant,
+        };
+
         // set the current theme in the env.SUGAR.theme property
-        const themeInstance = this.getCurrentTheme($context);
+        const themeInstance = this.getCurrentTheme(finalSettings.$context);
         if (!document.env) document.env = {};
         if (!document.env.SUGAR) document.env.SUGAR = {};
         document.env.SUGAR.theme = themeInstance;
 
         // apply the theme
-        STheme.applyTheme(themeInstance.theme, themeInstance.variant, $context);
+        STheme.applyTheme(
+            themeInstance.theme,
+            themeInstance.variant,
+            finalSettings.$context,
+        );
 
         // return the current theme
         return themeInstance;
@@ -254,8 +280,12 @@ export default class STheme extends __SThemeBase {
     static getThemeMetas(
         $context: HTMLElement = document.querySelector('html'),
     ): any {
-        let defaultTheme = __SSugarConfig.get('theme.theme'),
-            defaultVariant = __SSugarConfig.get('theme.variant');
+        let defaultTheme =
+                STheme.defaultThemeMetas.theme ??
+                __SSugarConfig.get('theme.theme'),
+            defaultVariant =
+                STheme.defaultThemeMetas.variant ??
+                __SSugarConfig.get('theme.variant');
 
         let theme = defaultTheme,
             variant = defaultVariant;

@@ -1,5 +1,6 @@
 #homepage-welcome {
     height: calc(100vh - 200px);
+    min-height: 800px;
     text-align: left;
     position: relative;
     z-index: 10;
@@ -7,6 +8,7 @@
     @sugar.media mobile {
         height: auto;
         height: calc(100vh - 100px);
+
         text-align: center;
         position: relative;
         top: 100px;
@@ -147,6 +149,7 @@
 
         @sugar.media mobile {
             height: auto;
+            min-height: 600px;
             height: calc(100vh - 100px);
             /* align-items: start; */
         }

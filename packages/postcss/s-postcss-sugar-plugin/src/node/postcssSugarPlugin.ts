@@ -10,6 +10,7 @@ import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __packageCacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __replaceTokens from '@coffeekraken/sugar/node/token/replaceTokens';
+import __sha256 from '@coffeekraken/sugar/shared/crypt/sha256';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __unquote from '@coffeekraken/sugar/shared/string/unquote';
 import __fs from 'fs';
@@ -94,11 +95,11 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
         },
         settings,
     );
+    let themeHash, cacheDir;
+
     if (_configLoaded) {
         updateConfig();
     }
-
-    let themeHash, cacheDir;
 
     function updateConfig() {
         settings = __deepMerge(settings, {
@@ -118,14 +119,6 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
         if (settings.cache === undefined && settings.target !== 'vite') {
             settings.cache = false;
         }
-    }
-
-    async function _loadConfig() {
-        await __SSugarConfig.load();
-        _configLoaded = true;
-
-        // update config
-        updateConfig();
 
         // set theme hash
         themeHash = __STheme.hash();
@@ -142,6 +135,14 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
         if (settings.excludeCodeByTypes?.length) {
             __CssVars.excludeCodeByTypes(settings.excludeCodeByTypes);
         }
+    }
+
+    async function _loadConfig() {
+        await __SSugarConfig.load();
+        _configLoaded = true;
+
+        // update config
+        updateConfig();
 
         return true;
     }
@@ -280,6 +281,17 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
     async function _loadFolder(folderPath, type: 'mixins' | 'functions') {
         // process some tokens
         folderPath = __replaceTokens(folderPath);
+
+        // update plugin hash with these new folders hash
+        const hashes = [
+            pluginHash,
+            __folderHash(folderPath, {
+                include: {
+                    ctime: true,
+                },
+            }),
+        ];
+        pluginHash = __sha256.encrypt(hashes.join('-'));
 
         const paths = __glob.sync(`${folderPath}/**/*.js`, {
             // cwd: __dirname(),

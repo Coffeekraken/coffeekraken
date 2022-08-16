@@ -2,20 +2,27 @@
 @sugar.import ('../views/**/*.css');
 @sugar.import ('./generic/**/*.css');
 
-html {
+html,
+body {
   overflow-x: hidden;
 }
 body {
+  width: 100vw;
+
   display: block;
   @sugar.theme.when (dark) {
     background-color: sugar.color(main, --darken 30);
 
-    background: radial-gradient(
+    background-image: radial-gradient(
       ellipse at top left,
       sugar.color(main, --darken 25),
       sugar.color(main, --darken 35)
     );
     background-attachment: fixed;
+  }
+
+  @sugar.media mobile {
+    background-image: none !important;
   }
 }
 

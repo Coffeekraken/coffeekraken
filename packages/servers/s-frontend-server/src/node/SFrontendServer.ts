@@ -79,6 +79,12 @@ export interface ISFrontendServerPageConfig {
     handler?: string;
 }
 
+export interface ISFrontendServerMetas {
+    hostname: string;
+    port: number;
+    sessionId: string;
+}
+
 export default class SFrontendServer extends __SClass {
     /**
      * @name            _express
@@ -91,6 +97,17 @@ export default class SFrontendServer extends __SClass {
      * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     private _express;
+
+    /**
+     * @name                    serverMetas
+     * @type                    ISFrontendServerMetas
+     *
+     * Store some information about the current server like the host, port, etc...
+     *
+     * @since               2.0.0
+     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    serverMetas: ISFrontendServerMetas;
 
     /**
      * @name					constructor
@@ -135,6 +152,22 @@ export default class SFrontendServer extends __SClass {
                 if (finalParams.prod || __SEnv.is('production')) {
                     this._express.use(__compression());
                 }
+
+                // save metas
+                this.serverMetas = {
+                    hostname: finalParams.hostname,
+                    port: finalParams.port,
+                    sessionId: `${(Math.random() + 1)
+                        .toString(36)
+                        .substring(2)}`,
+                };
+
+                this._express.use((req, res, next) => {
+                    if (!res.templateData) res.templateData = {};
+                    if (!res.templateData.shared) res.templateData.shared = {};
+                    res.templateData.shared.server = this.serverMetas;
+                    next();
+                });
 
                 const logLevelInt = [
                     'silent',
@@ -350,7 +383,7 @@ export default class SFrontendServer extends __SClass {
             },
             {
                 eventEmitter: {
-                    bind: this,
+                    id: this.constructor.name,
                 },
             },
         );

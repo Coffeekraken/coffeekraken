@@ -471,7 +471,7 @@ export default class SSlider extends __SLitComponent {
      * This function listen for click on slides and navigate to it
      */
     _handleClickOnSlide() {
-        this.$slidesContainer.addEventListener('click', (e) => {
+        this.$slidesContainer.addEventListener('pointerup', (e) => {
             for (let [i, $slide] of this.$slides.entries()) {
                 if ($slide.contains(e.target) || $slide === e.target) {
                     if (this.currentSlide !== $slide) {
@@ -539,7 +539,7 @@ export default class SSlider extends __SLitComponent {
             __querySelectorLive(
                 `[s-slider-${action}]:not(s-slider#${this.id} s-slider [s-slider-${action}])`,
                 ($elm) => {
-                    $elm.addEventListener('click', (e) => {
+                    $elm.addEventListener('pointerup', (e) => {
                         e.preventDefault();
                         this[action](true);
                     });
@@ -553,7 +553,7 @@ export default class SSlider extends __SLitComponent {
         __querySelectorLive(
             '[s-slider-goto]',
             ($elm) => {
-                $elm.addEventListener('click', (e) => {
+                $elm.addEventListener('pointerup', (e) => {
                     const slideIdx =
                         parseInt($elm.getAttribute('s-slider-goto')) ?? 0;
                     this.goTo(slideIdx, true);
@@ -1273,7 +1273,7 @@ export default class SSlider extends __SLitComponent {
                                 class="${this.componentUtils.className(
                                     '__nav-item',
                                 )} ${idx === currentSlide.idx ? 'active' : ''}"
-                                @click=${() => this.goTo(idx)}
+                                @pointerup=${() => this.goTo(idx)}
                             ></div>
                         `;
                     })}
@@ -1291,7 +1291,7 @@ export default class SSlider extends __SLitComponent {
                                   )} ${this.isFirst() && !this.props.loop
                                       ? ''
                                       : 'active'}"
-                                  @click=${() => this.previous()}
+                                  @pointerup=${() => this.previous()}
                               >
                                   ${this.props.previousIconClass
                                       ? html`
@@ -1312,7 +1312,7 @@ export default class SSlider extends __SLitComponent {
                                   )} ${this.isLast() && !this.props.loop
                                       ? ''
                                       : 'active'}"
-                                  @click=${() => this.next()}
+                                  @pointerup=${() => this.next()}
                               >
                                   ${this.props.nextIconClass
                                       ? html`

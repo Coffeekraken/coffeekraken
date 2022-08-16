@@ -53,7 +53,13 @@ if (isset($frontspec->metas)) {
     {!! \Sugar\frontspec\og($ogObj) !!}
 
     <!-- assets -->
-    {!! \Sugar\frontspec\assets($frontspec->assets) !!}
+    @php
+        $cacheBuster = '';
+        if (isset($shared->server->sessionId)) {
+            $cacheBuster = $shared->server->sessionId;
+        }
+    @endphp
+    {!! \Sugar\frontspec\assets($frontspec->assets, $cacheBuster) !!}
 
     @yield('head')
 

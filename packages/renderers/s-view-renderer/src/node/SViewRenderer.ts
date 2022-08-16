@@ -130,6 +130,8 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
             ...__SSugarConfig.get('viewRenderer.rootDirs'),
             // @ts-ignore
             __path.resolve(__packageRoot(__dirname()), 'src/php/views/blade'),
+            // @ts-ignore
+            __path.resolve(__packageRoot(__dirname()), 'src/php/views/twig'),
         ];
     }
 
@@ -459,6 +461,10 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
     _getFinalViewPath(viewDotPath: string): string {
         let finalViewPath: string;
 
+        const handledViewsExtensions: string[] = Object.keys(
+            SViewRenderer.engines,
+        );
+
         // remove all the engines extensions from the viewPath
         Object.keys(SViewRenderer.engines).forEach((ext) => {
             viewDotPath = viewDotPath.replace(`.${ext}`, '');
@@ -483,11 +489,30 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
                     const rootDir = this.settings.rootDirs[i];
                     const potentialViewPath = `${rootDir}/${viewDotPath
                         .split('.')
-                        .join('/')}.!(data)*`;
+                        .join('/')}.!(data)@(${handledViewsExtensions.join(
+                        '|',
+                    )})`;
                     const matches = __glob.sync(potentialViewPath);
                     if (matches && matches.length) {
                         finalViewPath = matches[0];
+                        console.log('FINAL', finalViewPath);
                         break;
+                        // for (let j = 0; i < matches.length; i++) {
+                        //     for (
+                        //         let k = 0;
+                        //         k < handledViewsExtensions.length;
+                        //         k++
+                        //     ) {
+                        //         if (
+                        //             matches[j].endsWith(
+                        //                 handledViewsExtensions[k],
+                        //             )
+                        //         ) {
+                        //             finalViewPath = matches[j];
+                        //             break;
+                        //         }
+                        //     }
+                        // }
                     }
                 }
             }

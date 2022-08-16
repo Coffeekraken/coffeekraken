@@ -1,0 +1,28 @@
+{
+    "name": "coffeekraken/s-twig",
+    "description": "Some additional feature for the twig template renderer.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+       {
+           "name": "Olivier Bossel",
+           "email": "olivier.bossel@gmail.com"
+       }
+    ],
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../sugar-php"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "src/php/autoload.php"
+        ]
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "coffeekraken/sugar": "^2.0@alpha",
+        "twig/twig": "3.x-dev"
+    }
+}

@@ -111,7 +111,7 @@
     .__subnav-content {
       display: none;
       position: relative;
-      padding: sugar.padding(30) 0;
+      padding: 0 0 sugar.padding(30) 0;
 
       li {
         padding: sugar.padding(20) sugar.padding(30);

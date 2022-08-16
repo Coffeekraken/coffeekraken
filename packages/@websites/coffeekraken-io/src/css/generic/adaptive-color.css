@@ -1,7 +1,7 @@
 .adaptive-color {
   [fill="white"],
   .main {
-    fill: sugar.color(base, --darken 55);
+    fill: sugar.color(base);
   }
   [fill="#FEBD0F"],
   .accent {

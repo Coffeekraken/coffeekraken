@@ -1,14 +1,14 @@
 {
     "name": "@coffeekraken/s-color",
-    "version": "2.0.0-alpha.18",
+    "version": "2.0.0-alpha.19",
     "description": "Clean and powerful class to handle colors. You can convert your color in and formats, manipulate it by desaturate it or whatever as well as access each properties of the color like \"h\", \"s\", \"l\", etc...",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.18",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.18",
-        "@coffeekraken/sugar": "^2.0.0-alpha.18"
+        "@coffeekraken/s-class": "^2.0.0-alpha.19",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.19",
+        "@coffeekraken/sugar": "^2.0.0-alpha.19"
     },
     "main": "dist/pkg/cjs/shared/exports.js",
     "module": "dist/pkg/esm/shared/exports.js",

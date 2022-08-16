@@ -1,8 +1,0 @@
-{
-    "name": "coffeekraken/s-view-renderer",
-    "require": {
-        "eftec/bladeone": "^3.52"
-    },
-    "version": "2.0.0-alpha.18",
-    "homepage": "https://coffeekraken.io"
-}

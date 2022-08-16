@@ -36,13 +36,13 @@ use InvalidArgumentException;
  * @copyright Copyright (c) 2016-2022 Jorge Patricio Castro Castillo MIT License.
  *            Don't delete this comment, its part of the license.
  *            Part of this code is based in the work of Laravel PHP Components.
- * @version   4.5
+ * @version   4.5.5
  * @link      https://github.com/EFTEC/BladeOne
  */
 class BladeOne
 {
     //<editor-fold desc="fields">
-    public const VERSION = '4.5';
+    public const VERSION = '4.5.5';
     /** @var int BladeOne reads if the compiled file has changed. If it has changed,then the file is replaced. */
     public const MODE_AUTO = 0;
     /** @var int Then compiled file is always replaced. It's slow and it's useful for development. */
@@ -329,7 +329,7 @@ class BladeOne
     /**
      * Escape HTML entities in a string.
      *
-     * @param string|null $value
+     * @param int|string|null $value
      * @return string
      */
     public static function e($value): string
@@ -338,11 +338,12 @@ class BladeOne
         if (\is_null($value)) {
             return '';
         }
-
         if (\is_array($value) || \is_object($value)) {
             return \htmlentities(\print_r($value, true), ENT_QUOTES, 'UTF-8', false);
         }
-
+        if (\is_numeric($value)) {
+            $value=(string)$value;
+        }
         return \htmlentities($value, ENT_QUOTES, 'UTF-8', false);
     }
 
@@ -1569,7 +1570,7 @@ class BladeOne
     {
         if (
             isset($_SERVER['HTTP_X_FORWARDED_FOR'])
-            && \preg_match('/^([d]{1,3}).([d]{1,3}).([d]{1,3}).([d]{1,3})$/', $_SERVER['HTTP_X_FORWARDED_FOR'])
+            && \preg_match('/^(d{1,3}).(d{1,3}).(d{1,3}).(d{1,3})$/', $_SERVER['HTTP_X_FORWARDED_FOR'])
         ) {
             return $_SERVER['HTTP_X_FORWARDED_FOR'];
         }
@@ -2518,7 +2519,7 @@ class BladeOne
         $r = $this->_e($phrase);
         $argv[0] = $r; // replace the first argument with the translation.
         $result = @sprintf(...$argv);
-        return ($result == false) ? $r : $result;
+        return !$result ? $r : $result;
     }
 
     /**
@@ -2703,7 +2704,7 @@ class BladeOne
     {
         $ex = $this->stripParentheses($expression);
         $p0 = \strpos($ex, ',');
-        if ($p0 == false) {
+        if (!$p0) {
             $var = $this->stripQuotes($ex);
             $namespace = '';
         } else {
@@ -2764,6 +2765,7 @@ class BladeOne
      *
      * @param string $value
      * @return string
+     * @throws Exception
      */
     protected function compileEchos($value): string
     {
@@ -2840,7 +2842,7 @@ class BladeOne
                     return $this->compileStatementClass($match);
                 }
                 if (isset($this->customDirectivesRT[$match[1]])) {
-                    if ($this->customDirectivesRT[$match[1]] == true) {
+                    if ($this->customDirectivesRT[$match[1]]) {
                         $match[0] = $this->compileStatementCustom($match);
                     } else {
                         $match[0] = \call_user_func(
@@ -3035,7 +3037,7 @@ class BladeOne
             } else {
                 $nextpart .= $char;
             }
-            if ($char === $separator && $insidePar == false) {
+            if ($char === $separator && !$insidePar) {
                 $parts[] = substr($nextpart, 0, -1);
                 $nextpart = '';
             }
@@ -3174,9 +3176,8 @@ class BladeOne
         if ($c === 0) {
             return $result;
         }
-
         $prev = '';
-        for ($i = $c; $i >= 1; $i--) {
+        for ($i = 1; $i <=$c; $i++) {
             $r = @explode(':', $array[$i], 2);
             $fnName = trim($r[0]);
             $fnNameF = $fnName[0]; // first character
@@ -3187,22 +3188,23 @@ class BladeOne
             } elseif (method_exists($this, $fnName)) {
                 $fnName = '$this->' . $fnName;
             }
+            $hasArgument=count($r) === 2;
             if ($i === 1) {
                 $prev = $fnName . '(' . $array[0];
-                if (count($r) === 2) {
+                if ($hasArgument) {
                     $prev .= ',' . $r[1];
                 }
                 $prev .= ')';
             } else {
                 $prev = $fnName . '(' . $prev;
-                if (count($r) === 2) {
-                    if ($i === 2) {
-                        $prev .= ',';
-                    }
-                    $prev .= $r[1] . ')';
+                if ($hasArgument) {
+                    $prev .=','. $r[1] . ')';
+                } else {
+                    $prev.=')';
                 }
             }
         }
+
         return $prev;
     }
 
@@ -3585,6 +3587,9 @@ class BladeOne
     protected function compileForeach($expression): string
     {
         //\preg_match('/\( *(.*) * as *([^\)]*)/', $expression, $matches);
+        if($expression===null) {
+            return '@foreach';
+        }
         \preg_match('/\( *(.*) * as *([^)]*)/', $expression, $matches);
         $iteratee = \trim($matches[1]);
         $iteration = \trim($matches[2]);

@@ -5,10 +5,6 @@
         <div class="s-layout:21 s-gap:column:50 @mobile s-layout:1_2">
             <div>
                 <img s-inline class="illustration @mobile s-hide" src="/dist/img/illustrations/packages.svg" />
-                {{-- <img class="__illustration s-when:light" src="/dist/img/illustrations/toolkit.png" alt="Sugar toolkit"
-                    title="Sugar toolkit" />
-                <img class="__illustration s-when:dark" src="/dist/img/illustrations/toolkit-dark.png"
-                    alt="Sugar toolkit" title="Sugar toolkit" /> --}}
             </div>
             <div class="s-mbe:80">
                 <h3 class="s-typo:h3 s-mbe:30">

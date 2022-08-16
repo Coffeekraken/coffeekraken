@@ -147,12 +147,6 @@ export default class CKRatings extends __SLitComponent {
               >
                 <i class="s-icon:google s-mie:10"></i> Sign in with Google
               </button>
-              <button
-                class="s-btn:outline s-color:accent"
-                @click=${() => this._signInWithGoogle()}
-              >
-                <i class="s-icon:github s-mie:10"></i> Sign in with Github
-              </button>
               <div class="s-flex-item:grow">
                 ${this.state.user.pictureUrl
                   ? html`

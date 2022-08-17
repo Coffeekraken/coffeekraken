@@ -6,16 +6,18 @@ import __uniqid from '../../../shared/string/uniqid';
  * @namespace            js.css
  * @type            Function
  * @platform          js
- * @status              beta
+ * @status              stable
  *
  * Inject a passed style string in the DOM
  *
  * @param         {String}          style         The style to inject in DOM
- * @param         {HTMLElement}     [node=document.head]    The node in which to inject the new style tag
+ * @param           {Partial<IInjectStyleSettings>}     [settings=null]         Some settings to configure your injection
  * @return                          {HTMLStyleElement}      The injected HTMLStyleElement node
  *
- * @todo        interface
- * @todo        doc
+ * @setting         {String}        id          An id for the injected style tag
+ * @setting         {HTMLElement}   [rootNode=undefined]        A node in which to inject the style
+ *
+ * @todo        tests
  *
  * @example       js
  * import injectStyle from '@coffeekraken/sugar/js/dom/css/injectStyle';
@@ -24,19 +26,30 @@ import __uniqid from '../../../shared/string/uniqid';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function injectStyle(
+
+export interface IInjectStyleSettings {
+    id: string;
+    rootNode: HTMLElement;
+}
+
+export default function injectStyle(
     style: string,
-    id: string = `injected-style-${__uniqid()}`,
-    node,
+    settings?: Partial<IInjectStyleSettings>,
 ) {
-    if (document.querySelector(`#${id}`)) return;
+    const finalSettings = <IInjectStyleSettings>{
+        id: `injected-style-${__uniqid()}`,
+        rootNode: undefined,
+        ...(settings ?? {}),
+    };
+
+    if (document.querySelector(`#${finalSettings.id}`)) return;
     const $tag = document.createElement('style');
     $tag.type = 'text/css';
-    $tag.setAttribute('id', `injected-style-${id.toLowerCase()}`);
+    $tag.setAttribute('id', finalSettings.id);
     $tag.innerHTML = style;
 
-    if (node) {
-        node.appendChild($tag);
+    if (finalSettings.rootNode) {
+        finalSettings.rootNode.appendChild($tag);
     } else {
         const $firstLink = document.querySelector(
             'head link[rel="stylesheet"]',
@@ -49,4 +62,3 @@ function injectStyle(
     }
     return $tag;
 }
-export default injectStyle;

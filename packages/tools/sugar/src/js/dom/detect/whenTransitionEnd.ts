@@ -6,9 +6,9 @@ import __getTransitionProperties from './style/getTransitionProperties';
  * @name      whenTransitionEnd
  * @namespace            js.dom.detect
  * @type      Function
- * @async
  * @platform          js
- * @status        beta
+ * @status        stable
+ * @async
  *
  * Monitor an HTMLElement to be notified when his transition has ended
  *
@@ -17,28 +17,26 @@ import __getTransitionProperties from './style/getTransitionProperties';
  *
  * @param 		{HTMLElement} 				elm 		The element to monitor
  * @param 		{Function} 					[cb=null] 	An optional callback to call when the element transition has ended
- * @return 		(Promise) 								The promise that will be resolved when the element transition has ended
+ * @return 		(Promise<HTMLElement>) 								The promise that will be resolved when the element transition has ended
  *
- * @todo      interface
- * @todo      doc
  * @todo      tests
  *
  * @example 	js
- * import whenTransitionEnd from '@coffeekraken/sugar/js/dom/whenTransitionEnd'
- * whenTransitionEnd(myCoolHTMLElement).then((elm) => {
- * 		// do something with your element transition has ended...
- * });
+ * import __whenTransitionEnd from '@coffeekraken/sugar/js/dom/whenTransitionEnd'
+ * await __whenTransitionEnd(myCoolHTMLElement);
  *
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function whenTransitionEnd(elm: HTMLElement, cb = null) {
+export default function whenTransitionEnd(
+    elm: HTMLElement,
+    cb: Function = null,
+): Promise<HTMLElement> {
     return new Promise((resolve, reject) => {
         const transition = __getTransitionProperties(elm);
         setTimeout(() => {
-            resolve();
-            cb && cb();
+            resolve($elm);
+            cb && cb($elm);
         }, transition.totalDuration);
     });
 }
-export default whenTransitionEnd;

@@ -11,12 +11,21 @@
     ),
     'versions' => array(
         'coffeekraken/s-twig' => array(
-            'pretty_version' => 'dev-develop',
-            'version' => 'dev-develop',
+            'pretty_version' => '2.0.0-alpha.19',
+            'version' => '2.0.0.0-alpha19',
             'type' => 'library',
             'install_path' => __DIR__ . '/../coffeekraken/s-twig',
             'aliases' => array(),
-            'reference' => 'b6b29a2006922a3eb861dc5a736052e0ab0bd333',
+            'reference' => 'e5aff5b09cc95548c68bb41ea4e1dc8b4d39f424',
+            'dev_requirement' => false,
+        ),
+        'coffeekraken/s-view-renderer' => array(
+            'pretty_version' => '2.0.0-alpha.19',
+            'version' => '2.0.0.0-alpha19',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../coffeekraken/s-view-renderer',
+            'aliases' => array(),
+            'reference' => 'df05b55ffb98d436aeebed336c208ab9020aa570',
             'dev_requirement' => false,
         ),
         'coffeekraken/s-view-renderer-engine-twig' => array(

@@ -17,19 +17,17 @@ import __closest from '../query/closest';
  * @feature       Promise based API
  * @feature       Some settings to tweak the detection behavior
  *
+ * @param 		{HTMLElement} 				elm 				The element to monitor
+ * @param 		{Partial<IWhenOutOfViewportSettings>} 					[settings={}]       Some settings to tweak the detection behavior
+ * @return 		(Promise<HTMLElement>) 										The promise that will be resolved when the element exit the viewport
+ *
  * @setting       {String}      [offset=10px]     An offset to detect sooner or later the element exits the viewport
  *
- * @param 		{HTMLElement} 				elm 				The element to monitor
- * @param 		{IWhenOutOfViewportSettings} 					[settings={}]       Some settings to tweak the detection behavior
- * @return 		(Promise) 										The promise that will be resolved when the element exit the viewport
- *
- * @todo      interface
- * @todo      doc
  * @todo      tests
  *
  * @example 	js
- * import whenOutOfViewport from '@coffeekraken/sugar/js/dom/whenOutOfViewport'
- * whenOutOfViewport(myCoolHTMLElement).then((elm) => {
+ * import __whenOutOfViewport from '@coffeekraken/sugar/js/dom/whenOutOfViewport'
+ * __whenOutOfViewport(myCoolHTMLElement).then((elm) => {
  * 		// do something with your element that has exit the viewport...
  * });
  *
@@ -41,7 +39,7 @@ export interface IWhenOutOfViewportSettings {
     offset: number;
 }
 
-function whenOutOfViewport(
+export default function whenOutOfViewport(
     elm: HTMLElement,
     settings: Partial<IWhenOutOfViewportSettings> = {},
 ) {
@@ -80,4 +78,3 @@ function whenOutOfViewport(
         observer.observe(elm);
     });
 }
-export default whenOutOfViewport;

@@ -4,15 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a68491bdba7c1ce784386f6f2adb9412",
+    "content-hash": "2516f4dafb22285b91174ad4c387fa1a",
     "packages": [
         {
             "name": "coffeekraken/s-twig",
-            "version": "dev-develop",
+            "version": "2.0.0-alpha.19",
             "dist": {
                 "type": "path",
                 "url": "../../tools/s-twig",
-                "reference": "b6b29a2006922a3eb861dc5a736052e0ab0bd333"
+                "reference": "e5aff5b09cc95548c68bb41ea4e1dc8b4d39f424"
             },
             "require": {
                 "coffeekraken/sugar": "^2.0@alpha",
@@ -39,11 +39,34 @@
             }
         },
         {
+            "name": "coffeekraken/s-view-renderer",
+            "version": "2.0.0-alpha.19",
+            "dist": {
+                "type": "path",
+                "url": "../s-view-renderer",
+                "reference": "df05b55ffb98d436aeebed336c208ab9020aa570"
+            },
+            "require": {
+                "coffeekraken/s-twig": "^2.0@alpha",
+                "coffeekraken/sugar": "^2.0@alpha"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/php/autoload.php"
+                ]
+            },
+            "homepage": "https://coffeekraken.io",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
             "name": "coffeekraken/sugar",
             "version": "2.0.0-alpha.19",
             "dist": {
                 "type": "path",
-                "url": "../../tools/sugar-php",
+                "url": "../../tools/sugar",
                 "reference": "f53f235f8bb5188a0a410d32c75422263a603e8d"
             },
             "type": "library",
@@ -306,7 +329,9 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "coffeekraken/s-twig": 20
+        "coffeekraken/s-twig": 15,
+        "coffeekraken/sugar": 15,
+        "coffeekraken/s-view-renderer": 15
     },
     "prefer-stable": false,
     "prefer-lowest": false,

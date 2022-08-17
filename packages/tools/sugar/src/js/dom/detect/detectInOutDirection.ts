@@ -6,68 +6,50 @@ import __SPromise from '@coffeekraken/s-promise';
  * @name      detectInOutDirection
  * @namespace            js.dom.detection
  * @type      Function
- * @async
  * @platform          js
- * @status              wip
+ * @status              beta
+ * @async
  *
  * Detect the mouse direction when entered on the passed element. The direction can be up, down, left or right and will be passed to the two callbacks available.
- * The first one is the `onIn` callback, and the second one is the `onOut`.
  *
  * @param    {HTMLElement}    $elm    The element to listen for mouseover and mouseout on
- * @param    {Function}    onIn    The onIn callback. The direction and the $elm will be passed to it
- * @param    {Function}    onOut    The onOut callback. The direction and the $elm will be passed to it
  * @return    {HTMLElement}    The $elm to maintain chainability
  *
- * @todo      interface
- * @todo      doc
+ * @event       in          Emitted when the pointer enters the element
+ * @event       out         Emitted when the pointer leaves the element
+ *
  * @todo      tests
  *
  * @example     js
- * import detectInOutDirection from '@coffeekraken/sugar/js/dom/detectInOutDirection'
- * const detect = detectInOutDirection(myElm).in(direction => {
- *    // do something...
- * }).out(direction => {
- *    // do something...
- * }).then(value => {
- *    // do something
- *    console.log(value); // => { action: 'in', direction: 'up' };
+ * import __detectInOutDirection from '@coffeekraken/sugar/js/dom/detectInOutDirection';
+ * const detector = __detectInOutDirection($myElm).on('in', (direction) => {
+ *    // direction can be "up", "down", "left" or "right"
+ * }).on('out', (direction) => {
+ *    // direction can be "up", "down", "left" or "right"
  * });
  *
  * // cancel the detection process
- * detect.cancel();
+ * detector.cancel();
  *
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function detectInOutDirection($elm) {
-    let mouseEnterHandler, mouseLeaveHandler;
+function detectInOutDirection($elm: HTMLElement): __SPromise {
+    let pointerEnterHandler, pointerLeaveHandler;
 
-    const promise = new __SPromise(
-        ({ resolve, reject, emit }) => {
-            mouseEnterHandler = (e) => {
-                emit('in', direction);
-                emit('then', {
-                    action: 'in',
-                    direction,
-                });
-            };
-            mouseLeaveHandler = (e) => {
-                emit('out', direction);
-                emit('then', {
-                    action: 'out',
-                    direction,
-                });
-            };
-            // detect when mouseenter/leave the element
-            $elm.addEventListener('mouseenter', mouseEnterHandler);
-            $elm.addEventListener('mouseleave', mouseLeaveHandler);
-        },
-        {
-            id: 'detectInOutDirection',
-        },
-    ).on('finally', () => {
-        $elm.removeEventListener('mouseenter', mouseEnterHandler);
-        $elm.removeEventListener('mouseleave', mouseLeaveHandler);
+    const promise = new __SPromise(({ resolve, reject, emit }) => {
+        pointerEnterHandler = (e) => {
+            emit('in', direction);
+        };
+        pointerLeaveHandler = (e) => {
+            emit('out', direction);
+        };
+        // detect when pointerenter/leave the element
+        $elm.addEventListener('pointerenter', pointerEnterHandler);
+        $elm.addEventListener('pointerleave', pointerLeaveHandler);
+    }).on('finally', () => {
+        $elm.removeEventListener('pointerenter', pointerEnterHandler);
+        $elm.removeEventListener('pointerleave', pointerLeaveHandler);
     });
     return promise;
 }
@@ -76,10 +58,10 @@ let oldX = 0,
     oldY = 0,
     direction = null;
 const threshold = 0;
-document.addEventListener('mousemove', (e) => {
+document.addEventListener('pointermove', (e) => {
     calculateDirection(e);
 });
-document.addEventListener('touchstart', (e) => {
+document.addEventListener('pointerdown', (e) => {
     calculateDirection(e);
 });
 function calculateDirection(e) {

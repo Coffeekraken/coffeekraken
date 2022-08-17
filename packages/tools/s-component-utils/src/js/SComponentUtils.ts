@@ -702,7 +702,9 @@ export default class SComponentUtils extends __SClass {
         if (this.constructor._injectedStyles.indexOf(id) !== -1) return;
         // @ts-ignore
         this.constructor._injectedStyles.push(id);
-        __injectStyle(css, id);
+        __injectStyle(css, {
+            id,
+        });
     }
 
     /**

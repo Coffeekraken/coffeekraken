@@ -61,6 +61,12 @@ export default class SPageTransitionFeatureInterface extends __SInterface {
                 default:
                     '<i class="s-icon:link-broken-solid" alt="Broken link"></i>',
             },
+            ga: {
+                description:
+                    'Specify if you want to track pages change using google analytics of not. If true, will use the config.google.ga configuration as target, otherwise you can specify the gtag universal id here...',
+                type: 'Boolean|String',
+                default: true,
+            },
         };
     }
 }

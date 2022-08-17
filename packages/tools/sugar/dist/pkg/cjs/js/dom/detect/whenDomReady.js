@@ -7,20 +7,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @type      Function
  * @async
  * @platform          js
- * @status      beta
+ * @status      stable
  *
  * Wait that the dom is ready before resolving the promise
  *
- * @return 		{Promise} 					A promise that will be resolved when the dom is ready
+ * @return 		{Promise<void>} 					A promise that will be resolved when the dom is ready
  *
- * @todo      interface
- * @todo      doc
  * @todo      tests
  *
  * @example  	js
- * import whenDomReady from '@coffeekraken/sugar/js/dom/detect/whenDomReady'
+ * import __whenDomReady from '@coffeekraken/sugar/js/dom/detect/whenDomReady'
  * // using promise
- * whenDomReady().then(() => {
+ * __whenDomReady().then(() => {
  * 		// do something
  * });
  *
@@ -43,4 +41,4 @@ function whenDomReady() {
     });
 }
 exports.default = whenDomReady;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTBCRztBQUNILFNBQXdCLFlBQVk7SUFDaEMsT0FBTyxJQUFJLE9BQU8sQ0FBQyxDQUFDLE9BQU8sRUFBRSxFQUFFO1FBQzNCLElBQUksUUFBUSxDQUFDLFVBQVUsS0FBSyxVQUFVLEVBQUU7WUFDcEMsT0FBTyxFQUFFLENBQUM7U0FDYjthQUFNO1lBQ0gsUUFBUSxDQUFDLGtCQUFrQixHQUFHLEdBQUcsRUFBRTtnQkFDL0IsSUFBSSxRQUFRLENBQUMsVUFBVSxLQUFLLFVBQVUsRUFBRTtvQkFDcEMsT0FBTyxFQUFFLENBQUM7aUJBQ2I7WUFDTCxDQUFDLENBQUM7U0FDTDtJQUNMLENBQUMsQ0FBQyxDQUFDO0FBQ1AsQ0FBQztBQVpELCtCQVlDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxTQUF3QixZQUFZO0lBQ2hDLE9BQU8sSUFBSSxPQUFPLENBQUMsQ0FBQyxPQUFPLEVBQUUsRUFBRTtRQUMzQixJQUFJLFFBQVEsQ0FBQyxVQUFVLEtBQUssVUFBVSxFQUFFO1lBQ3BDLE9BQU8sRUFBRSxDQUFDO1NBQ2I7YUFBTTtZQUNILFFBQVEsQ0FBQyxrQkFBa0IsR0FBRyxHQUFHLEVBQUU7Z0JBQy9CLElBQUksUUFBUSxDQUFDLFVBQVUsS0FBSyxVQUFVLEVBQUU7b0JBQ3BDLE9BQU8sRUFBRSxDQUFDO2lCQUNiO1lBQ0wsQ0FBQyxDQUFDO1NBQ0w7SUFDTCxDQUFDLENBQUMsQ0FBQztBQUNQLENBQUM7QUFaRCwrQkFZQyJ9

@@ -13,7 +13,7 @@ const emptyNode_1 = __importDefault(require("../manipulate/emptyNode"));
  * @namespace            js.dom.animation
  * @type            Function
  * @platform          js
- * @status          beta
+ * @status          stable
  *
  * Change the content of a Node with the possibility to animate the change using one of these animations:
  * - fade

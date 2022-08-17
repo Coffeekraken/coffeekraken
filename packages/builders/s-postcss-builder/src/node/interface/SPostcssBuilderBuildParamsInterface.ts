@@ -1,5 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __SEnv from '@coffeekraken/s-env';
 
 /**
  * @name                SPostcssBuilderBuildParamsInterface
@@ -40,7 +41,7 @@ export default class SPostcssBuilderBuildParamsInterface extends __SInterface {
             prod: {
                 description: 'Shorthand to set a production ready build',
                 type: 'Boolean',
-                default: false,
+                default: __SEnv.is('production'),
                 alias: 'p',
             },
             minify: {

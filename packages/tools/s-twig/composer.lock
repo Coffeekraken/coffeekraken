@@ -4,15 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d4b89c489164325d9992f69bc29b3b34",
+    "content-hash": "f948ce70916321f4e7e59ae2cda0363d",
     "packages": [
         {
             "name": "coffeekraken/sugar",
             "version": "2.0.0-alpha.19",
             "dist": {
                 "type": "path",
-                "url": "../sugar-php",
-                "reference": "f53f235f8bb5188a0a410d32c75422263a603e8d"
+                "url": "../../tools/sugar",
+                "reference": "5ac139d17965c2937616f5748455aaee8bd8e978"
             },
             "type": "library",
             "autoload": {

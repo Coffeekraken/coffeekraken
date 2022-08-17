@@ -3,7 +3,9 @@
     "version": "2.0.0-alpha.19",
     "require": {
         "twig/twig": "^3.0",
-        "coffeekraken/s-twig": "dev-develop"
+        "coffeekraken/s-twig": "^2.0@alpha",
+        "coffeekraken/sugar": "^2.0@alpha",
+        "coffeekraken/s-view-renderer": "^2.0@alpha"
     },
     "repositories": [
         {
@@ -12,7 +14,11 @@
         },
         {
             "type": "path",
-            "url": "../../tools/sugar-php"
+            "url": "../../tools/sugar"
+        },
+        {
+            "type": "path",
+            "url": "../s-view-renderer"
         }
     ],
     "minimum-stability": "dev",

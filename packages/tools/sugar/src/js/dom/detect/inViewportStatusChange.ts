@@ -9,27 +9,30 @@ import __whenOutOfViewport from './whenOutOfViewport';
  * @name      inViewportStatusChange
  * @namespace            js.dom.detect
  * @type      Function
- * @async
  * @platform          js
  * @status        beta
+ * @async
  *
  * Monitor when the passed element enter or exit the viewport
  *
- * @param 		{HTMLElement} 						elm  		The element to monitor
- * @return 		{SPromise} 		                    The SPromise on wich you can register your callbacks. Available callbacks registration function are "enter" and "exit"
+ * @param 		{HTMLElement} 						$elm  		The element to monitor
+ * @param       {Partial<IInViewportStatusChangeSettings>}      [$settings={}]      Some settings to configure your detector
+ * @return 		{SPromise} 		                    The SPromise on wich you can register your callbacks.
+ *
+ * @setting         {String}        [offset='10px']             An offset to detect the in/out earlier or later
  *
  * @event       enter               Dispatched when the passed element enters the viewport
  * @event       leave               Dispatched when the passed element leave the viewport
  *
- * @todo      interface
- * @todo      doc
  * @todo      tests
  *
  * @example  	js
- * import inViewportStatusChange from '@coffeekraken/sugar/js/dom/inViewportStatusChange';
- * inViewportStatusChange(myElm).on('enter', $elm => {
+ * import __inViewportStatusChange from '@coffeekraken/sugar/js/dom/inViewportStatusChange';
+ * __inViewportStatusChange(myElm).on('enter', $elm => {
  *    // do something...
- * }).on('exit', $elm => {
+ * }).on('enter', $elm => {
+ *    // do something...
+ * }).on('leave', $elm => {
  *    // do something...
  * });
  *
@@ -40,10 +43,10 @@ export interface IInViewportStatusChangeSettings {
     offset: string;
 }
 
-function inViewportStatusChange(
-    $elm,
+export default function inViewportStatusChange(
+    $elm: HTMLElement,
     settings?: Partial<IInViewportStatusChangeSettings>,
-) {
+): __SPromise {
     let status = 'out',
         observer,
         isInViewport = false;
@@ -94,4 +97,3 @@ function inViewportStatusChange(
         observer.disconnect?.();
     });
 }
-export default inViewportStatusChange;

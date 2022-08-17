@@ -4,9 +4,9 @@
  * @name      onSwipe
  * @namespace            js.dom.detect
  * @type      Function
- * @async
  * @platform          js
- * @status          beta
+ * @status          stable
+ * @async
  *
  * Detect swipes gestures on touch devices.
  *
@@ -17,15 +17,15 @@
  *
  * @param       {HTMLElement}         elm         The HTMLElement on which to detect the swipe
  * @param       {Function}            cb          The function to call on swipe. The callback function has as parameter an object that containthe swipe direction like left, right, up and down
- * @param       {Number}              [threshold=100]       The swipe threshold
+ * @param       {Partial<IOnSwipeSettings>}     [settings={}]           Some settings to configure your swipe detection
  *
- * @todo      interface
- * @todo      doc
+ * @setting       {Number}              [threshold=100]       The swipe threshold
+ *
  * @todo      tests
  *
  * @example 	js
- * import onSwipe from '@coffeekraken/sugar/js/dom/onSwipe'
- * onSwipe(myCoolElm, (swipe) => {
+ * import __onSwipe from '@coffeekraken/sugar/js/dom/onSwipe'
+ * __onSwipe(myCoolElm, (swipe) => {
  * 	// check the swipe direction
  * 	if (swipe.left) {
  * 		// do something...
@@ -45,7 +45,11 @@ export interface IOnSwipeSettings {
     threshold: number;
 }
 
-function onSwipe(elm, cb, settings: Partial<IOnSwipeSettings> = {}) {
+export default function onSwipe(
+    elm: HTMLElement,
+    cb: Function,
+    settings: Partial<IOnSwipeSettings> = {},
+): void {
     settings = {
         threshold: 100,
         ...settings,
@@ -97,4 +101,3 @@ function onSwipe(elm, cb, settings: Partial<IOnSwipeSettings> = {}) {
         }
     }
 }
-export default onSwipe;

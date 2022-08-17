@@ -2,12 +2,12 @@
     "packages": [
         {
             "name": "coffeekraken/s-twig",
-            "version": "dev-develop",
-            "version_normalized": "dev-develop",
+            "version": "2.0.0-alpha.19",
+            "version_normalized": "2.0.0.0-alpha19",
             "dist": {
                 "type": "path",
                 "url": "../../tools/s-twig",
-                "reference": "b6b29a2006922a3eb861dc5a736052e0ab0bd333"
+                "reference": "e5aff5b09cc95548c68bb41ea4e1dc8b4d39f424"
             },
             "require": {
                 "coffeekraken/sugar": "^2.0@alpha",
@@ -36,12 +36,38 @@
             "install-path": "../coffeekraken/s-twig"
         },
         {
+            "name": "coffeekraken/s-view-renderer",
+            "version": "2.0.0-alpha.19",
+            "version_normalized": "2.0.0.0-alpha19",
+            "dist": {
+                "type": "path",
+                "url": "../s-view-renderer",
+                "reference": "df05b55ffb98d436aeebed336c208ab9020aa570"
+            },
+            "require": {
+                "coffeekraken/s-twig": "^2.0@alpha",
+                "coffeekraken/sugar": "^2.0@alpha"
+            },
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "src/php/autoload.php"
+                ]
+            },
+            "homepage": "https://coffeekraken.io",
+            "transport-options": {
+                "relative": true
+            },
+            "install-path": "../coffeekraken/s-view-renderer"
+        },
+        {
             "name": "coffeekraken/sugar",
             "version": "2.0.0-alpha.19",
             "version_normalized": "2.0.0.0-alpha19",
             "dist": {
                 "type": "path",
-                "url": "../../tools/sugar-php",
+                "url": "../../tools/sugar",
                 "reference": "f53f235f8bb5188a0a410d32c75422263a603e8d"
             },
             "type": "library",

@@ -26,7 +26,7 @@ export default function sVitePluginSugar(settings: any = {}) {
         const c = await __SSugarConfig.load({
             id: 'browser',
             platform: 'browser',
-            env: __SEnv.env.env,
+            env: __SEnv.get('env'),
             clean: true,
         });
         const browserConfig = await c.instance.toObject();
@@ -34,8 +34,8 @@ export default function sVitePluginSugar(settings: any = {}) {
         let envJsonStr = JSON.stringify({
             // @ts-ignore
             PLATFORM: 'browser',
-            ENV: 'development',
-            ENVIRONMENT: 'development',
+            ENV: __SEnv.get('env'),
+            ENVIRONMENT: __SEnv.get('env'),
             SUGAR: {
                 config: browserConfig,
             },

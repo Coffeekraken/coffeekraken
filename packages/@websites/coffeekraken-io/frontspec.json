@@ -2,19 +2,19 @@
     "metas": {
         "lang": "en",
         "title": "Coffeekraken",
-        "description": "Hello world",
+        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
         "themeColor": "#FFBB00",
         "author": {
             "name": "Olivier Bossel",
             "email": "olivier.bossel@gmail.com",
-            "url": "https://olivierbossel.com"
+            "url": "https://coffeekraken.io"
         },
         "og": {
             "title": "Coffeekraken",
-            "description": "wiufhweiufh wiuehfiuwehf",
+            "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
             "type": "website",
-            "url": "https://olivierbossel.com",
-            "image": "/cool-image.jpg"
+            "url": "https://coffeekraken.io",
+            "image": "https://cdnv2.coffeekraken.io/coffeekraken-og.png"
         }
     },
     "assets": {

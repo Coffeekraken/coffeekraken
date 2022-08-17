@@ -4,9 +4,9 @@
  * @name      whenNearViewport
  * @namespace            js.dom.detect
  * @type      Function
- * @async
  * @platform          js
  * @status        beta
+ * @async
  *
  * Monitor an HTMLElement to be notified when it is near (100vh before or after) the viewport, or in the viewport
  *
@@ -14,16 +14,16 @@
  * @feature       Some settings available to tweak the behavior
  *
  * @param 		{HTMLElement} 				elm 					The element to monitor
- * @param 		{IWhenNearViewportSettings} 					[settings={}] 		Some settings to tweak the detection behavior
- * @return 		(Promise) 											The promise that will be resolved when the element is in the viewport
+ * @param 		{Partial<IWhenNearViewportSettings>} 					[settings={}] 		Some settings to tweak the detection behavior
+ * @return 		(Promise<HTMLElement>) 											The promise that will be resolved when the element is in the viewport
  *
- * @todo      interface
- * @todo      doc
+ * @setting         {String}            [offset=`${window.innerHeight}px ${window.innerWidth}px`]           Some offset
+ *
  * @todo      tests
  *
  * @example 	js
- * import whenNearViewport from '@coffeekraken/sugar/js/dom/whenNearViewport'
- * whenNearViewport(myCoolHTMLElement).then((elm) => {
+ * import __whenNearViewport from '@coffeekraken/sugar/js/dom/whenNearViewport'
+ * __whenNearViewport(myCoolHTMLElement).then((elm) => {
  * 		// do something with your element that has entered the viewport...
  * });
  *
@@ -35,10 +35,10 @@ export interface IWhenNearViewportSettings {
     offset: string;
 }
 
-function whenNearViewport(
+export default function whenNearViewport(
     elm: HTMLElement,
     settings: Partials<IWhenNearViewportSettings> = {},
-) {
+): Promise<HTMLElement> {
     settings = {
         offset: `${window.innerHeight}px ${window.innerWidth}px`,
         ...settings,
@@ -76,4 +76,3 @@ function whenNearViewport(
         });
     });
 }
-export default whenNearViewport;

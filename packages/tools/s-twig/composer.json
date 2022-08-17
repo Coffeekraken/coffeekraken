@@ -1,6 +1,7 @@
 {
     "name": "coffeekraken/s-twig",
     "description": "Some additional feature for the twig template renderer.",
+    "version": "2.0.0-alpha.19",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -12,7 +13,7 @@
     "repositories": [
         {
             "type": "path",
-            "url": "../sugar-php"
+            "url": "../../tools/sugar"
         }
     ],
     "autoload": {

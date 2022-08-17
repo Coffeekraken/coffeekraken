@@ -1,10 +1,7 @@
 <?php
 // require the vendors
 $nodeModulesVendorsPath = realpath(__DIR__ . '/../../vendor/autoload.php');
-
-if ($nodeModulesVendorsPath) {
-    require_once $nodeModulesVendorsPath;
-}
+require_once $nodeModulesVendorsPath;
 
 $params = [];
 
@@ -32,8 +29,8 @@ $twig = new \Twig\Environment($loader, [
 ]);
 $twig->addExtension(new \Twig\Extension\DebugExtension());
 
-\STwig\registerFilters($twig);
-\STwig\registerFunctions($twig);
+// init twig with STwig power
+$twig = \SViewRenderer\initTwig($twig, $loader);
 
 try {
     print \Sugar\html\expandPleasantCssClassnames(

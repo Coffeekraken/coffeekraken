@@ -495,24 +495,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
                     const matches = __glob.sync(potentialViewPath);
                     if (matches && matches.length) {
                         finalViewPath = matches[0];
-                        console.log('FINAL', finalViewPath);
                         break;
-                        // for (let j = 0; i < matches.length; i++) {
-                        //     for (
-                        //         let k = 0;
-                        //         k < handledViewsExtensions.length;
-                        //         k++
-                        //     ) {
-                        //         if (
-                        //             matches[j].endsWith(
-                        //                 handledViewsExtensions[k],
-                        //             )
-                        //         ) {
-                        //             finalViewPath = matches[j];
-                        //             break;
-                        //         }
-                        //     }
-                        // }
                     }
                 }
             }

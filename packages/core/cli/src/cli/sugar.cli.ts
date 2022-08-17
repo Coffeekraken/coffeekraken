@@ -245,6 +245,7 @@ export default class SSugarCli {
     static _setNodeEnv() {
         // do not touch if is jest
         if (process.env.JEST_WORKER_ID) return;
+
         if (this.args.params.env) {
             switch (this.args.params.env) {
                 case 'dev':

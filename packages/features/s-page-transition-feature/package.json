@@ -15,7 +15,9 @@
         "@coffeekraken/s-feature": "^2.0.0-alpha.19",
         "@coffeekraken/s-interface": "^2.0.0-alpha.19",
         "@coffeekraken/s-request": "^2.0.0-alpha.19",
-        "@coffeekraken/sugar": "^2.0.0-alpha.19"
+        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.19",
+        "@coffeekraken/sugar": "^2.0.0-alpha.19",
+        "@coffeekraken/s-env": "2.0.0-alpha.19"
     },
     "main": "dist/pkg/cjs/js/exports.js",
     "module": "dist/pkg/esm/js/exports.js",

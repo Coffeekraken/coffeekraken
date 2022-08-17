@@ -4,24 +4,25 @@ import __getPositionFromEvent from '../position/getPositionFromEvent';
  * @name      onDrag
  * @namespace            js.dom.detect
  * @type      Function
- * @async
  * @platform          js
  * @status          beta
+ * @async
  *
  * Detect drag "gesture" with the mouse or touch
- *
- * @setting     {Number}      [threshold=100]       The minimum distance the user has to swipe before detection
  *
  * @param       {HTMLElement}         elm         The HTMLElement on which to detect the swipe
  * @param       {Function}            cb          The function to call on swipe. The callback function has as parameter an object that containthe swipe direction like left, right, up and down
  * @param       {Number}              [threshold=100]       The swipe threshold
  *
- * @todo      interface
- * @todo      doc
+ * @setting     {Number}      [maxSpeed=0.01]       The maximum speed
+ *
  * @todo      tests
  *
  * @example 	js
- * import onSwipe from '@coffeekraken/sugar/js/dom/onSwipe'
+ * import __onDrag from '@coffeekraken/sugar/js/dom/onDrag'
+ * __onDrag($myElement, (drag) => {
+ *    // do something...
+ * });
  *
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

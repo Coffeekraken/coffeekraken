@@ -1,8 +1,8 @@
 // @ts-nocheck
 
 import __fs from 'fs';
-import __standardizeJson from '../../shared/npm/utils/standardizeJson';
 import __objectHash from '../../shared/object/objectHash';
+import __formatPackageJson from '../../shared/package/formatPackageJson';
 import __readJsonSync from '../fs/readJsonSync';
 import __packageJson from '../npm/packageJson';
 import __packageRoot from './rootPath';
@@ -61,17 +61,14 @@ export default function jsonSync(
     // if the "fromOrName" starts with a "/"
     // means that it's not a package name
     if (fromOrName.match(/^\//)) {
-        const path = `${__packageRoot(
-            fromOrName,
-            {
-                highest: finalSettings.highest,
-            },
-        )}/package.json`;
+        const path = `${__packageRoot(fromOrName, {
+            highest: finalSettings.highest,
+        })}/package.json`;
         if (!__fs.existsSync(path)) return false;
 
         json = __readJsonSync(path);
         if (finalSettings.standardize) {
-            json = __standardizeJson(json);
+            json = __formatPackageJson(json);
         }
     } else {
         json = __packageJson(fromOrName);

@@ -9,7 +9,7 @@ import __closestNotVisible from '../query/closestNotVisible';
  * @type      Function
  * @async
  * @platform          js
- * @status          beta
+ * @status          stable
  *
  * Monitor an HTMLElement to be notified when it is visible
  *
@@ -18,22 +18,23 @@ import __closestNotVisible from '../query/closestNotVisible';
  *
  * @param 		{HTMLElement} 				elm 		The element to monitor
  * @param 		{Function} 					[cb=null] 	An optional callback to call when the element is visible
- * @return 		(Promise) 								The promise that will be resolved when the element is visible
+ * @return 		(Promise<HTMLElement>) 								The promise that will be resolved when the element is visible
  *
- * @todo      interface
- * @todo      doc
  * @todo      tests
  *
  * @example 	js
- * import whenVisible from '@coffeekraken/sugar/js/dom/whenVisible'
- * whenVisible(myCoolHTMLElement).then((elm) => {
+ * import __whenVisible from '@coffeekraken/sugar/js/dom/whenVisible'
+ * __whenVisible(myCoolHTMLElement).then((elm) => {
  * 		// do something with your element that is now visible
  * });
  *
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function whenVisible(elm: HTMLElement, cb = null) {
+export default function whenVisible(
+    elm: HTMLElement,
+    cb: Function = null,
+): Promise<HTMLElement> {
     return new Promise((resolve, reject) => {
         // variables
         let isSelfVisible = false,
@@ -106,7 +107,7 @@ function whenVisible(elm: HTMLElement, cb = null) {
                     }
                 }
                 // callback
-                _cb();
+                _cb($elm);
             });
         };
 
@@ -124,7 +125,7 @@ function whenVisible(elm: HTMLElement, cb = null) {
                             // update
                             isSelfVisible = true;
                             // callback
-                            _cb();
+                            _cb($elm);
                             // stop observe
                             selfObserver.disconnect();
                         }
@@ -157,7 +158,7 @@ function whenVisible(elm: HTMLElement, cb = null) {
                             // update
                             areParentsVisible = true;
                             // callback
-                            _cb();
+                            _cb($elm);
                             // stop observe
                             parentObserver.disconnect();
                         }
@@ -175,7 +176,6 @@ function whenVisible(elm: HTMLElement, cb = null) {
         }
 
         // callback
-        _cb();
+        _cb($elm);
     });
 }
-export default whenVisible;

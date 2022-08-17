@@ -1,5 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __SEnv from '@coffeekraken/s-env';
 
 /**
  * @name                SViteBuildParamsInterface
@@ -87,7 +88,7 @@ class SViteBuildParamsInterface extends __SInterface {
                 description:
                     'Specify if your build is made for production environment or not. This will automatically minify and optimize your build',
                 type: 'Boolean',
-                default: false,
+                default: __SEnv.is('production'),
                 alias: 'p',
             },
             chunks: {

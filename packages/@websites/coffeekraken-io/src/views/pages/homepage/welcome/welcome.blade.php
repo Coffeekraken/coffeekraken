@@ -296,7 +296,7 @@ independantly of the source -->
 
                 <br />
 
-                <a class="s-font:20 s-display:block s-mbs:30 s-mbe:50" href="/package/@coffeekraken/s-theme-switcher-component/doc/readme" title="Coffeekraken s-theme-switcher component">
+                <a class="s-font:20 s-display:block s-mbs:30 s-mbe:50" href="/package/@coffeekraken/s-form-validate-feature/doc/readme" title="Coffeekraken s-theme-switcher component">
                     <i class="s-icon:documentation s-mie:10"></i> Read the doc
                 </a>
 
@@ -338,7 +338,7 @@ independantly of the source -->
 
                 <br />
 
-                <a class="s-font:20 s-display:block s-mbs:30 s-mbe:30" href="/package/@coffeekraken/s-slider-component/doc/readme" title="Coffeekraken s-slider component">
+                <a class="s-font:20 s-display:block s-mbs:30 s-mbe:30" href="/package/@coffeekraken/s-range-component/doc/readme" title="Coffeekraken s-slider component">
                     <i class="s-icon:documentation s-mie:10"></i> Read the doc
                 </a>
 

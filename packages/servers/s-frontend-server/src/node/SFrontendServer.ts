@@ -157,9 +157,10 @@ export default class SFrontendServer extends __SClass {
                 this.serverMetas = {
                     hostname: finalParams.hostname,
                     port: finalParams.port,
-                    sessionId: `${(Math.random() + 1)
-                        .toString(36)
-                        .substring(2)}`,
+                    sessionId:
+                        finalParams.prod || __SEnv.is('production')
+                            ? `${(Math.random() + 1).toString(36).substring(2)}`
+                            : '',
                 };
 
                 this._express.use((req, res, next) => {

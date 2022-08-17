@@ -1,9 +1,0 @@
-node_modules
-.DS_Store
-.cache
-.dev
-.local
-.yarn/cache
-*.tmp
-vendor
-yarn-error.log

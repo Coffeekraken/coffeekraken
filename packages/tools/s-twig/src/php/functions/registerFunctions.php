@@ -34,5 +34,11 @@ function registerFunctions($twig)
     $frontspecOg = require_once 'frontspec/og.php';
     $twig->addFunction($frontspecOg);
 
+    $frontspecMetas = require_once 'frontspec/metas.php';
+    $twig->addFunction($frontspecMetas);
+
+    $idCompliant = require_once 'string/idCompliant.php';
+    $twig->addFunction($idCompliant);
+
     return $twig;
 }

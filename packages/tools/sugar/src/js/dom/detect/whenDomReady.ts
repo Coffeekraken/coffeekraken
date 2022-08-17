@@ -6,20 +6,18 @@
  * @type      Function
  * @async
  * @platform          js
- * @status      beta
+ * @status      stable
  *
  * Wait that the dom is ready before resolving the promise
  *
- * @return 		{Promise} 					A promise that will be resolved when the dom is ready
+ * @return 		{Promise<void>} 					A promise that will be resolved when the dom is ready
  *
- * @todo      interface
- * @todo      doc
  * @todo      tests
  *
  * @example  	js
- * import whenDomReady from '@coffeekraken/sugar/js/dom/detect/whenDomReady'
+ * import __whenDomReady from '@coffeekraken/sugar/js/dom/detect/whenDomReady'
  * // using promise
- * whenDomReady().then(() => {
+ * __whenDomReady().then(() => {
  * 		// do something
  * });
  *
@@ -27,7 +25,7 @@
  * @since           1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function whenDomReady() {
+export default function whenDomReady(): Promise<void> {
     return new Promise((resolve) => {
         if (document.readyState === 'complete') {
             resolve();

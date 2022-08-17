@@ -5,16 +5,14 @@ import __removeClassesOnAnimationEnd from './removeClassOnAnimationEnd';
  * @namespace            js.dom.class
  * @type      Function
  * @platform          js
- * @status        beta
+ * @status        stable
  *
  * Add a class that trigger an animation and remove it at the end
  *
  * @param    {HTMLElement}    $elm    The element to take care of
  * @param    {String|Array}    cls    The class or classes (Array) to apply
- * @return    {Promise}               A promise that will be resolved once the class have been removed and the animation finished
+ * @return    {Promise<HTMLElement>}               A promise that will be resolved once the class have been removed and the animation finished
  *
- * @todo        interface
- * @todo        doc
  * @todo        tests
  *
  * @example    js
@@ -38,4 +36,4 @@ function addAnimationClass($elm, cls) {
     return __removeClassesOnAnimationEnd($elm, cls);
 }
 export default addAnimationClass;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLDZCQUE2QixNQUFNLDZCQUE2QixDQUFDO0FBQ3hFOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBeUJHO0FBQ0gsU0FBUyxpQkFBaUIsQ0FBQyxJQUFJLEVBQUUsR0FBRztJQUNoQyx5Q0FBeUM7SUFDekMsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDO1FBQUUsR0FBRyxHQUFHLENBQUMsR0FBRyxDQUFDLENBQUM7SUFDckMsK0JBQStCO0lBQy9CLEdBQUcsQ0FBQyxPQUFPLENBQUMsQ0FBQyxJQUFJLEVBQUUsRUFBRTtRQUNqQixJQUFJLENBQUMsU0FBUyxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUM3QixDQUFDLENBQUMsQ0FBQztJQUNILCtDQUErQztJQUMvQyxPQUFPLDZCQUE2QixDQUFDLElBQUksRUFBRSxHQUFHLENBQUMsQ0FBQztBQUNwRCxDQUFDO0FBQ0QsZUFBZSxpQkFBaUIsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLDZCQUE2QixNQUFNLDZCQUE2QixDQUFDO0FBQ3hFOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILFNBQVMsaUJBQWlCLENBQ3RCLElBQWlCLEVBQ2pCLEdBQXNCO0lBRXRCLHlDQUF5QztJQUN6QyxJQUFJLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxHQUFHLENBQUM7UUFBRSxHQUFHLEdBQUcsQ0FBQyxHQUFHLENBQUMsQ0FBQztJQUNyQywrQkFBK0I7SUFDL0IsR0FBRyxDQUFDLE9BQU8sQ0FBQyxDQUFDLElBQUksRUFBRSxFQUFFO1FBQ2pCLElBQUksQ0FBQyxTQUFTLENBQUMsR0FBRyxDQUFDLElBQUksQ0FBQyxDQUFDO0lBQzdCLENBQUMsQ0FBQyxDQUFDO0lBQ0gsK0NBQStDO0lBQy9DLE9BQU8sNkJBQTZCLENBQUMsSUFBSSxFQUFFLEdBQUcsQ0FBQyxDQUFDO0FBQ3BELENBQUM7QUFDRCxlQUFlLGlCQUFpQixDQUFDIn0=

@@ -3,7 +3,7 @@
  * @namespace       js.css
  * @type            Function
  * @platform        js
- * @status          beta
+ * @status          stable
  *
  * This function allows you to make a shadowRoot element adopt his host context styles
  *

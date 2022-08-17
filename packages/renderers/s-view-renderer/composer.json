@@ -1,0 +1,25 @@
+{
+    "name": "coffeekraken/s-view-renderer",
+    "require": {
+        "coffeekraken/sugar": "^2.0@alpha",
+        "coffeekraken/s-twig": "^2.0@alpha"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../tools/s-twig"
+        },
+        {
+            "type": "path",
+            "url": "../../tools/sugar"
+        }
+    ],
+    "autoload": {
+        "files": [
+            "src/php/autoload.php"
+        ]
+    },
+    "version": "2.0.0-alpha.19",
+    "minimum-stability": "dev",
+    "homepage": "https://coffeekraken.io"
+}

@@ -16,6 +16,7 @@
         "@coffeekraken/s-postcss-sugar-plugin": "^2.0.0-alpha.19",
         "@coffeekraken/s-promise": "^2.0.0-alpha.19",
         "@coffeekraken/s-request": "^2.0.0-alpha.19",
+        "@coffeekraken/s-env": "^2.0.0-alpha.19",
         "@coffeekraken/s-sugar-config": "^2.0.0-alpha.19",
         "@coffeekraken/sugar": "^2.0.0-alpha.19",
         "@fullhuman/postcss-purgecss": "^4.1.3",

@@ -145,10 +145,14 @@ export default function genericHandler({
                 finalResult = layoutRes.value;
             }
         } catch (e) {
-            console.log(e);
+            // console.log(e);
         }
 
         if (errors.views.length || errors.layout) {
+            errors.views = errors.views.map((viewObj) => {
+                delete viewObj.data;
+                return viewObj;
+            });
             finalResult = JSON.stringify(errors, null, 4);
         }
 

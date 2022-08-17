@@ -4,6 +4,8 @@ import __querySelectorUp from '@coffeekraken/sugar/js/dom/query/querySelectorUp'
 import __scrollTo from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SPageTransitionFeatureInterface from './interface/SPageTransitionFeatureInterface';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __SEnv from '@coffeekraken/s-env';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-page-transition.css'; // relative to /dist/pkg/esm/js
@@ -100,7 +102,9 @@ export default class SPageTransitionFeature extends __SFeature {
                 const $elm = document.querySelector(
                     `[s-page-transition-container="${e.state.containerId}"]`,
                 );
-                if (!$elm) return;
+                if (!$elm) {
+                    return;
+                }
                 $elm.innerHTML = e.state.html;
                 __scrollTo(<HTMLElement>$elm);
             } else {
@@ -273,6 +277,19 @@ export default class SPageTransitionFeature extends __SFeature {
 
             // after process with success
             this._onAfter($source, 200, url, newState);
+
+            // track pageView if gtag is present in the page
+            if (this.props.ga && __SEnv.is('production')) {
+                const gaUid = typeof this.props.ga === 'string' ? this.props.ga : __SSugarConfig.get('google.ga');
+                if (gaUid) {
+                    gtag('event', 'page_view', {
+                        page_title: document.title,
+                        page_location: document.location.href,
+                        page_path: document.location.pathname,
+                        send_to: gaUid
+                      });
+                }
+            }
 
             // resolve transition
             resolve();

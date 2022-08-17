@@ -5,9 +5,9 @@ import __linkLoaded from '../load/linkLoaded';
  * @name      whenStylesheetsReady
  * @namespace            js.dom.detect
  * @type      Function
- * @async
  * @platform          js
- * @status        beta
+ * @status        stable
+ * @async
  *
  * Wait until all the HTMLLinkElement's are properly loaded
  *
@@ -17,25 +17,24 @@ import __linkLoaded from '../load/linkLoaded';
  *
  * @param 		{Array}<HTMLLinkElement> 		[links=null] 			The HTMLLinkElement tags to process. If not passed, take the local stylesheets links
  * @param 		{Function} 						[cb=null] 		An optional callback function to call when all the links are loaded
- * @return 		{Promise} 										The promise that will be resolved when all the links are loaded
+ * @return 		{Promise<void>} 										The promise that will be resolved when all the links are loaded
  *
- * @todo      interface
- * @todo      docindex.ts
  * @todo      tests
  *
  * @example 	js
- * import whenStylesheetsReady from '@coffeekraken/sugar/js/dom/whenStylesheetsReady'
- * whenStylesheetsReady([
+ * import __whenStylesheetsReady from '@coffeekraken/sugar/js/dom/whenStylesheetsReady'
+ * await __whenStylesheetsReady([
  * 		myHTMLLinkElement1,
  * 		myHTMLLinkElement2
- * ]).then(() => {
- * 		// do something when all the links are loaded
- * });
+ * ]);
  *
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function whenStylesheetsReady(links: HTMLLinkElement[] = null, cb: Function = null) {
+export default function whenStylesheetsReady(
+    links: HTMLLinkElement[] = null,
+    cb: Function = null,
+): Promise<void> {
     if (!links) {
         links = Array.from(document.querySelectorAll('link[rel="stylesheet"]'));
     }

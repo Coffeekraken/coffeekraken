@@ -34,7 +34,7 @@
         @include('doc.install', ['block' => $block])
     @endif
     
-    @if (!isset($isStyleguide) && $block->type->raw !== 'CssClass')
+    @if (!isset($isStyleguide) && @$block->type->raw !== 'CssClass')
         @include('doc.example', ['block' => $block])
     @endif
     

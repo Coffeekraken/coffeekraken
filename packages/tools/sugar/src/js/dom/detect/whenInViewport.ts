@@ -4,9 +4,9 @@
  * @name      whenInViewport
  * @namespace            js.dom.detect
  * @type      Function
- * @async
  * @platform          js
  * @status        beta
+ * @async
  *
  * Monitor an HTMLElement to be notified when it is in the viewport
  *
@@ -16,16 +16,14 @@
  * @setting     {String}      [offset='10px']         An offset to detect sooner or later the element entering in the viewport
  *
  * @param 		{HTMLElement} 				elm 					The element to monitor
- * @param 		{IWhenInViewportSettings} 					[settings={}] 		Some settings to tweak the detection behavior
- * @return 		(Promise) 											The promise that will be resolved when the element is in the viewport
+ * @param 		{Partial<IWhenInViewportSettings>} 					[settings={}] 		Some settings to tweak the detection behavior
+ * @return 		(Promise<HTMLElement>) 											The promise that will be resolved when the element is in the viewport
  *
- * @todo      interface
- * @todo      doc
  * @todo      tests
  *
  * @example 	js
- * import whenInViewport from '@coffeekraken/sugar/js/dom/whenInViewport'
- * whenInViewport(myCoolHTMLElement).then((elm) => {
+ * import __whenInViewport from '@coffeekraken/sugar/js/dom/whenInViewport'
+ * __whenInViewport(myCoolHTMLElement).then((elm) => {
  * 		// do something with your element that has entered the viewport...
  * });
  *
@@ -37,10 +35,10 @@ export interface IWhenInViewportSettings {
     offset: string;
 }
 
-function whenInViewport(
+export default function whenInViewport(
     elm: HTMLElement,
     settings: Partials<IWhenInViewportSettings> = {},
-) {
+): Promise<HTMLElement> {
     settings = {
         offset: '10px',
         ...settings,
@@ -68,4 +66,3 @@ function whenInViewport(
         observer.observe(elm);
     });
 }
-export default whenInViewport;

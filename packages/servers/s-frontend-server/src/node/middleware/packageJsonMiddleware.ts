@@ -1,10 +1,10 @@
 // @ts-nocheck
 
-import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
-import __fs from 'fs';
-import __standardizeJson from '@coffeekraken/sugar/shared/npm/utils/standardizeJson';
 import __SBench from '@coffeekraken/s-bench';
 import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
+import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
+import __formatPackageJson from '@coffeekraken/sugar/shared/package/formatPackageJson';
+import __fs from 'fs';
 
 /**
  * @name            packageJsonMiddleware
@@ -43,7 +43,7 @@ function packageJsonMiddleware(settings = {}) {
             if (!res.templateData) res.templateData = {};
             if (!res.templateData.shared) res.templateData.shared = {};
             res.templateData.shared.packageJson = {
-                ...__standardizeJson(pkg),
+                ...__formatPackageJson(pkg),
             };
         }
 

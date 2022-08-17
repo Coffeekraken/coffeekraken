@@ -6,16 +6,14 @@ import __removeClassesOnAnimationEnd from './removeClassOnAnimationEnd';
  * @namespace            js.dom.class
  * @type      Function
  * @platform          js
- * @status        beta
+ * @status        stable
  *
  * Add a class that trigger an animation and remove it at the end
  *
  * @param    {HTMLElement}    $elm    The element to take care of
  * @param    {String|Array}    cls    The class or classes (Array) to apply
- * @return    {Promise}               A promise that will be resolved once the class have been removed and the animation finished
+ * @return    {Promise<HTMLElement>}               A promise that will be resolved once the class have been removed and the animation finished
  *
- * @todo        interface
- * @todo        doc
  * @todo        tests
  *
  * @example    js
@@ -27,7 +25,10 @@ import __removeClassesOnAnimationEnd from './removeClassOnAnimationEnd';
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function addAnimationClass($elm, cls) {
+function addAnimationClass(
+    $elm: HTMLElement,
+    cls: string | string[],
+): Promise<HTMLElement> {
     // make sure the cls argument is an Array
     if (!Array.isArray(cls)) cls = [cls];
     // add the class to the element

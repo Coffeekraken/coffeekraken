@@ -4,9 +4,9 @@
  * @name      whenRemoved
  * @namespace            js.dom.detect
  * @type      Function
- * @async
  * @platform          js
- * @status        beta
+ * @status        stable
+ * @async
  *
  * Resolve a promise when the passed node has been removed from the dom
  *
@@ -15,15 +15,13 @@
  * @feature       Promise based API
  *
  * @param 		{HTMLElement} 				$elm 				The HTMLElement on which to monitor
- * @return 		(Promise) 										The promise that will be resolved when the attribute exist on the element (and that it passes the checkFn)
+ * @return 		(Promise<HTMLElement>) 										The promise that will be resolved when the attribute exist on the element (and that it passes the checkFn)
  *
- * @todo      interface
- * @todo      doc
  * @todo      tests
  *
  * @example 	js
- * import whenRemoved from '@coffeekraken/sugar/js/dom/whenRemoved'
- * whenRemoved(myCoolHTMLElement).then((value) => {
+ * import __whenRemoved from '@coffeekraken/sugar/js/dom/whenRemoved'
+ * __whenRemoved(myCoolHTMLElement).then((value) => {
  * 		// the element has been removed
  * });
  *

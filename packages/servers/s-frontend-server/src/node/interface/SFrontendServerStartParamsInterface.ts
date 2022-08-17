@@ -2,6 +2,7 @@
 
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
+import __SEnv from '@coffeekraken/s-env';
 
 /**
  * @name                SFrontendServerStartParamsInterface
@@ -81,7 +82,7 @@ export default class SFrontendServerStartParamsInterface extends __SInterface {
                 description:
                     'Specify that we want the server to act "like" a production one with compression etc...',
                 type: 'Boolean',
-                default: false,
+                default: __SEnv.is('production'),
             },
         };
     }

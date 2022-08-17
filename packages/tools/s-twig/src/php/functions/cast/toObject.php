@@ -3,7 +3,7 @@
 /**
  * @name        toObject
  * @namespace   php.functions.cast
- * @type        TwigFilter
+ * @type        TwigFunction
  * @status      beta
  * @platform    php
  *

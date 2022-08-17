@@ -43,7 +43,7 @@ export default function (api) {
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get headerImageUrl() {
-                return `https://cdnv2.coffeekraken.io/readme-header.jpg`;
+                return `https://cdnv2.coffeekraken.io/readme-header.png`;
             },
         },
         /**

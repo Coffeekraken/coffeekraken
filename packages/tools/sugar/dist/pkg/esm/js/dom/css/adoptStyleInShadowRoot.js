@@ -12,7 +12,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
  * @namespace       js.css
  * @type            Function
  * @platform        js
- * @status          beta
+ * @status          stable
  *
  * This function allows you to make a shadowRoot element adopt his host context styles
  *

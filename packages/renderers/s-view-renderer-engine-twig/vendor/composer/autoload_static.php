@@ -7,10 +7,11 @@ namespace Composer\Autoload;
 class ComposerStaticInit2721aa943321803b7937f604b254cd1d
 {
     public static $files = array (
+        '78db8c28b14c7bfed69e96ff3e40df7b' => __DIR__ . '/..' . '/coffeekraken/sugar/src/php/autoload.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        '78db8c28b14c7bfed69e96ff3e40df7b' => __DIR__ . '/..' . '/coffeekraken/sugar/src/php/autoload.php',
         'f2253d8f8098dc4b1a55127954feb7dc' => __DIR__ . '/..' . '/coffeekraken/s-twig/src/php/autoload.php',
+        '9e86a0626ae3e8e1c4b53c10ab94510d' => __DIR__ . '/..' . '/coffeekraken/s-view-renderer/src/php/autoload.php',
     );
 
     public static $prefixLengthsPsr4 = array (

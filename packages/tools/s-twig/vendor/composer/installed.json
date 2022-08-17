@@ -6,8 +6,8 @@
             "version_normalized": "2.0.0.0-alpha19",
             "dist": {
                 "type": "path",
-                "url": "../sugar-php",
-                "reference": "f53f235f8bb5188a0a410d32c75422263a603e8d"
+                "url": "../../tools/sugar",
+                "reference": "5ac139d17965c2937616f5748455aaee8bd8e978"
             },
             "type": "library",
             "installation-source": "dist",

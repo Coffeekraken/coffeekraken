@@ -1,22 +1,22 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => 'dev-develop',
-        'version' => 'dev-develop',
+        'pretty_version' => '2.0.0-alpha.19',
+        'version' => '2.0.0.0-alpha19',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'a25b3393a3fbb6a6ca107de369cc63dafdfa9aaa',
+        'reference' => NULL,
         'name' => 'coffeekraken/s-twig',
         'dev' => true,
     ),
     'versions' => array(
         'coffeekraken/s-twig' => array(
-            'pretty_version' => 'dev-develop',
-            'version' => 'dev-develop',
+            'pretty_version' => '2.0.0-alpha.19',
+            'version' => '2.0.0.0-alpha19',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'a25b3393a3fbb6a6ca107de369cc63dafdfa9aaa',
+            'reference' => NULL,
             'dev_requirement' => false,
         ),
         'coffeekraken/sugar' => array(
@@ -25,7 +25,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../coffeekraken/sugar',
             'aliases' => array(),
-            'reference' => 'f53f235f8bb5188a0a410d32c75422263a603e8d',
+            'reference' => '5ac139d17965c2937616f5748455aaee8bd8e978',
             'dev_requirement' => false,
         ),
         'symfony/polyfill-ctype' => array(

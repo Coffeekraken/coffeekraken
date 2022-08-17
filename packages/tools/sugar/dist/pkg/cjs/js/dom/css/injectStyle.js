@@ -5,39 +5,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 // @ts-nocheck
 const uniqid_1 = __importDefault(require("../../../shared/string/uniqid"));
-/**
- * @name            injectStyle
- * @namespace            js.css
- * @type            Function
- * @platform          js
- * @status              beta
- *
- * Inject a passed style string in the DOM
- *
- * @param         {String}          style         The style to inject in DOM
- * @param         {HTMLElement}     [node=document.head]    The node in which to inject the new style tag
- * @return                          {HTMLStyleElement}      The injected HTMLStyleElement node
- *
- * @todo        interface
- * @todo        doc
- *
- * @example       js
- * import injectStyle from '@coffeekraken/sugar/js/dom/css/injectStyle';
- * injectStyle('a { color: red; }');
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-function injectStyle(style, id = `injected-style-${(0, uniqid_1.default)()}`, node) {
+function injectStyle(style, settings) {
     var _a;
-    if (document.querySelector(`#${id}`))
+    const finalSettings = Object.assign({ id: `injected-style-${(0, uniqid_1.default)()}`, rootNode: undefined }, (settings !== null && settings !== void 0 ? settings : {}));
+    if (document.querySelector(`#${finalSettings.id}`))
         return;
     const $tag = document.createElement('style');
     $tag.type = 'text/css';
-    $tag.setAttribute('id', `injected-style-${id.toLowerCase()}`);
+    $tag.setAttribute('id', finalSettings.id);
     $tag.innerHTML = style;
-    if (node) {
-        node.appendChild($tag);
+    if (finalSettings.rootNode) {
+        finalSettings.rootNode.appendChild($tag);
     }
     else {
         const $firstLink = document.querySelector('head link[rel="stylesheet"]');
@@ -51,4 +29,4 @@ function injectStyle(style, id = `injected-style-${(0, uniqid_1.default)()}`, no
     return $tag;
 }
 exports.default = injectStyle;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsY0FBYztBQUNkLDJFQUFxRDtBQUVyRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILFNBQVMsV0FBVyxDQUNoQixLQUFhLEVBQ2IsS0FBYSxrQkFBa0IsSUFBQSxnQkFBUSxHQUFFLEVBQUUsRUFDM0MsSUFBSTs7SUFFSixJQUFJLFFBQVEsQ0FBQyxhQUFhLENBQUMsSUFBSSxFQUFFLEVBQUUsQ0FBQztRQUFFLE9BQU87SUFDN0MsTUFBTSxJQUFJLEdBQUcsUUFBUSxDQUFDLGFBQWEsQ0FBQyxPQUFPLENBQUMsQ0FBQztJQUM3QyxJQUFJLENBQUMsSUFBSSxHQUFHLFVBQVUsQ0FBQztJQUN2QixJQUFJLENBQUMsWUFBWSxDQUFDLElBQUksRUFBRSxrQkFBa0IsRUFBRSxDQUFDLFdBQVcsRUFBRSxFQUFFLENBQUMsQ0FBQztJQUM5RCxJQUFJLENBQUMsU0FBUyxHQUFHLEtBQUssQ0FBQztJQUV2QixJQUFJLElBQUksRUFBRTtRQUNOLElBQUksQ0FBQyxXQUFXLENBQUMsSUFBSSxDQUFDLENBQUM7S0FDMUI7U0FBTTtRQUNILE1BQU0sVUFBVSxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQ3JDLDZCQUE2QixDQUNoQyxDQUFDO1FBQ0YsSUFBSSxVQUFVLEVBQUU7WUFDWixNQUFBLFVBQVUsQ0FBQyxhQUFhLDBDQUFFLFlBQVksQ0FBQyxJQUFJLEVBQUUsVUFBVSxDQUFDLENBQUM7U0FDNUQ7YUFBTTtZQUNILFFBQVEsQ0FBQyxJQUFJLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQyxDQUFDO1NBQ25DO0tBQ0o7SUFDRCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDO0FBQ0Qsa0JBQWUsV0FBVyxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsY0FBYztBQUNkLDJFQUFxRDtBQWlDckQsU0FBd0IsV0FBVyxDQUMvQixLQUFhLEVBQ2IsUUFBd0M7O0lBRXhDLE1BQU0sYUFBYSxHQUFHLGdCQUNsQixFQUFFLEVBQUUsa0JBQWtCLElBQUEsZ0JBQVEsR0FBRSxFQUFFLEVBQ2xDLFFBQVEsRUFBRSxTQUFTLElBQ2hCLENBQUMsUUFBUSxhQUFSLFFBQVEsY0FBUixRQUFRLEdBQUksRUFBRSxDQUFDLENBQ3RCLENBQUM7SUFFRixJQUFJLFFBQVEsQ0FBQyxhQUFhLENBQUMsSUFBSSxhQUFhLENBQUMsRUFBRSxFQUFFLENBQUM7UUFBRSxPQUFPO0lBQzNELE1BQU0sSUFBSSxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQUMsT0FBTyxDQUFDLENBQUM7SUFDN0MsSUFBSSxDQUFDLElBQUksR0FBRyxVQUFVLENBQUM7SUFDdkIsSUFBSSxDQUFDLFlBQVksQ0FBQyxJQUFJLEVBQUUsYUFBYSxDQUFDLEVBQUUsQ0FBQyxDQUFDO0lBQzFDLElBQUksQ0FBQyxTQUFTLEdBQUcsS0FBSyxDQUFDO0lBRXZCLElBQUksYUFBYSxDQUFDLFFBQVEsRUFBRTtRQUN4QixhQUFhLENBQUMsUUFBUSxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsQ0FBQztLQUM1QztTQUFNO1FBQ0gsTUFBTSxVQUFVLEdBQUcsUUFBUSxDQUFDLGFBQWEsQ0FDckMsNkJBQTZCLENBQ2hDLENBQUM7UUFDRixJQUFJLFVBQVUsRUFBRTtZQUNaLE1BQUEsVUFBVSxDQUFDLGFBQWEsMENBQUUsWUFBWSxDQUFDLElBQUksRUFBRSxVQUFVLENBQUMsQ0FBQztTQUM1RDthQUFNO1lBQ0gsUUFBUSxDQUFDLElBQUksQ0FBQyxXQUFXLENBQUMsSUFBSSxDQUFDLENBQUM7U0FDbkM7S0FDSjtJQUNELE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUM7QUE3QkQsOEJBNkJDIn0=

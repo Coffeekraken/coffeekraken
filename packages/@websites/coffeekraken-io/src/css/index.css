@@ -2,14 +2,14 @@
 @sugar.import ('../views/**/*.css');
 @sugar.import ('./generic/**/*.css');
 
-html,
-body {
+html {
   overflow-x: hidden;
 }
+
 body {
   width: 100vw;
-
   display: block;
+
   @sugar.theme.when (dark) {
     background-color: sugar.color(main, --darken 30);
 

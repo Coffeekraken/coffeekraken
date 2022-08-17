@@ -20,16 +20,14 @@ const whenAnimationEnd_1 = __importDefault(require("../detect/whenAnimationEnd")
  * @namespace            js.dom.class
  * @type      Function
  * @platform          js
- * @status      beta
+ * @status      stable
  *
  * Remove some class on animation end
  *
- * @param    {HTMLElement}    elm    The element to take care of
- * @param    {String|Array}    class    The class or classes (Array) to remove
- * @return   {Promise}                  A promise that will be resolved once the class has been removed and the animation finished
+ * @param    {HTMLElement}    $elm    The element to take care of
+ * @param    {String|String[]}    cls    The class or classes (Array) to remove
+ * @return   {Promise<HTMLElement>}                  A promise that will be resolved once the class has been removed and the animation finished
  *
- * @todo      interface
- * @todo      doc
  * @todo      tests
  *
  * @example    js
@@ -51,10 +49,8 @@ function removeClassOnAnimationEnd($elm, cls) {
             $elm.classList.remove(_cls);
         });
         // resolve the process
-        resolve(e);
-    }), {
-        id: 'removeClassOnAnimationEnd',
-    });
+        resolve($elm);
+    }));
 }
 exports.default = removeClassOnAnimationEnd;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7OztBQUVkLHdFQUFpRDtBQUNqRCxrRkFBNEQ7QUFFNUQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBdUJHO0FBQ0gsU0FBUyx5QkFBeUIsQ0FBQyxJQUFJLEVBQUUsR0FBRztJQUN4QyxPQUFPLElBQUksbUJBQVUsQ0FDakIsQ0FBTyxFQUFFLE9BQU8sRUFBRSxFQUFFLEVBQUU7UUFDbEIsd0JBQXdCO1FBQ3hCLE1BQU0sSUFBQSwwQkFBa0IsRUFBQyxJQUFJLENBQUMsQ0FBQztRQUMvQixlQUFlO1FBQ2YsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDO1lBQUUsR0FBRyxHQUFHLENBQUMsR0FBRyxDQUFDLENBQUM7UUFDckMsaUJBQWlCO1FBQ2pCLEdBQUcsQ0FBQyxPQUFPLENBQUMsQ0FBQyxJQUFJLEVBQUUsRUFBRTtZQUNqQixJQUFJLENBQUMsU0FBUyxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUNoQyxDQUFDLENBQUMsQ0FBQztRQUNILHNCQUFzQjtRQUN0QixPQUFPLENBQUMsQ0FBQyxDQUFDLENBQUM7SUFDZixDQUFDLENBQUEsRUFDRDtRQUNJLEVBQUUsRUFBRSwyQkFBMkI7S0FDbEMsQ0FDSixDQUFDO0FBQ04sQ0FBQztBQUNELGtCQUFlLHlCQUF5QixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7OztBQUVkLHdFQUFpRDtBQUNqRCxrRkFBNEQ7QUFFNUQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXFCRztBQUNILFNBQVMseUJBQXlCLENBQzlCLElBQWlCLEVBQ2pCLEdBQXNCO0lBRXRCLE9BQU8sSUFBSSxtQkFBVSxDQUFDLENBQU8sRUFBRSxPQUFPLEVBQUUsRUFBRSxFQUFFO1FBQ3hDLHdCQUF3QjtRQUN4QixNQUFNLElBQUEsMEJBQWtCLEVBQUMsSUFBSSxDQUFDLENBQUM7UUFDL0IsZUFBZTtRQUNmLElBQUksQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLEdBQUcsQ0FBQztZQUFFLEdBQUcsR0FBRyxDQUFDLEdBQUcsQ0FBQyxDQUFDO1FBQ3JDLGlCQUFpQjtRQUNqQixHQUFHLENBQUMsT0FBTyxDQUFDLENBQUMsSUFBSSxFQUFFLEVBQUU7WUFDakIsSUFBSSxDQUFDLFNBQVMsQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDaEMsQ0FBQyxDQUFDLENBQUM7UUFDSCxzQkFBc0I7UUFDdEIsT0FBTyxDQUFDLElBQUksQ0FBQyxDQUFDO0lBQ2xCLENBQUMsQ0FBQSxDQUFDLENBQUM7QUFDUCxDQUFDO0FBQ0Qsa0JBQWUseUJBQXlCLENBQUMifQ==

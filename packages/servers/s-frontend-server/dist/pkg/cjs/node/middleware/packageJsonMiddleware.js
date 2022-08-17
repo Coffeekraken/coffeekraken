@@ -4,11 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const packageRootDir_1 = __importDefault(require("@coffeekraken/sugar/node/path/packageRootDir"));
-const fs_1 = __importDefault(require("fs"));
-const standardizeJson_1 = __importDefault(require("@coffeekraken/sugar/shared/npm/utils/standardizeJson"));
 const s_bench_1 = __importDefault(require("@coffeekraken/s-bench"));
 const readJsonSync_1 = __importDefault(require("@coffeekraken/sugar/node/fs/readJsonSync"));
+const packageRootDir_1 = __importDefault(require("@coffeekraken/sugar/node/path/packageRootDir"));
+const formatPackageJson_1 = __importDefault(require("@coffeekraken/sugar/shared/package/formatPackageJson"));
+const fs_1 = __importDefault(require("fs"));
 /**
  * @name            packageJsonMiddleware
  * @namespace       sugar.node.server.frontend.middleware
@@ -48,11 +48,11 @@ function packageJsonMiddleware(settings = {}) {
                 res.templateData = {};
             if (!res.templateData.shared)
                 res.templateData.shared = {};
-            res.templateData.shared.packageJson = Object.assign({}, (0, standardizeJson_1.default)(pkg));
+            res.templateData.shared.packageJson = Object.assign({}, (0, formatPackageJson_1.default)(pkg));
         }
         s_bench_1.default.step('request', 'packageJsonMiddleware');
         return next();
     };
 }
 exports.default = packageJsonMiddleware;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLGtHQUE0RTtBQUM1RSw0Q0FBc0I7QUFDdEIsMkdBQXFGO0FBQ3JGLG9FQUE2QztBQUM3Qyw0RkFBc0U7QUFFdEU7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMEJHO0FBQ0gsU0FBUyxxQkFBcUIsQ0FBQyxRQUFRLEdBQUcsRUFBRTtJQUN4QyxPQUFPLFVBQVUsR0FBRyxFQUFFLEdBQUcsRUFBRSxJQUFJO1FBQzNCLE1BQU0sZUFBZSxHQUFHLEdBQUcsSUFBQSx3QkFBZ0IsR0FBRSxlQUFlLENBQUM7UUFDN0QsSUFBSSxHQUFHLENBQUM7UUFDUixJQUFJLENBQUMsWUFBSSxDQUFDLFVBQVUsQ0FBQyxlQUFlLENBQUMsRUFBRTtTQUN0QzthQUFNO1lBQ0gsR0FBRyxHQUFHLElBQUEsc0JBQWMsRUFBQyxlQUFlLENBQUMsQ0FBQztZQUN0QyxJQUFJLENBQUMsR0FBRyxDQUFDLFlBQVk7Z0JBQUUsR0FBRyxDQUFDLFlBQVksR0FBRyxFQUFFLENBQUM7WUFDN0MsSUFBSSxDQUFDLEdBQUcsQ0FBQyxZQUFZLENBQUMsTUFBTTtnQkFBRSxHQUFHLENBQUMsWUFBWSxDQUFDLE1BQU0sR0FBRyxFQUFFLENBQUM7WUFDM0QsR0FBRyxDQUFDLFlBQVksQ0FBQyxNQUFNLENBQUMsV0FBVyxxQkFDNUIsSUFBQSx5QkFBaUIsRUFBQyxHQUFHLENBQUMsQ0FDNUIsQ0FBQztTQUNMO1FBRUQsaUJBQVEsQ0FBQyxJQUFJLENBQUMsU0FBUyxFQUFFLHVCQUF1QixDQUFDLENBQUM7UUFFbEQsT0FBTyxJQUFJLEVBQUUsQ0FBQztJQUNsQixDQUFDLENBQUM7QUFDTixDQUFDO0FBQ0Qsa0JBQWUscUJBQXFCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLG9FQUE2QztBQUM3Qyw0RkFBc0U7QUFDdEUsa0dBQTRFO0FBQzVFLDZHQUF1RjtBQUN2Riw0Q0FBc0I7QUFFdEI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMEJHO0FBQ0gsU0FBUyxxQkFBcUIsQ0FBQyxRQUFRLEdBQUcsRUFBRTtJQUN4QyxPQUFPLFVBQVUsR0FBRyxFQUFFLEdBQUcsRUFBRSxJQUFJO1FBQzNCLE1BQU0sZUFBZSxHQUFHLEdBQUcsSUFBQSx3QkFBZ0IsR0FBRSxlQUFlLENBQUM7UUFDN0QsSUFBSSxHQUFHLENBQUM7UUFDUixJQUFJLENBQUMsWUFBSSxDQUFDLFVBQVUsQ0FBQyxlQUFlLENBQUMsRUFBRTtTQUN0QzthQUFNO1lBQ0gsR0FBRyxHQUFHLElBQUEsc0JBQWMsRUFBQyxlQUFlLENBQUMsQ0FBQztZQUN0QyxJQUFJLENBQUMsR0FBRyxDQUFDLFlBQVk7Z0JBQUUsR0FBRyxDQUFDLFlBQVksR0FBRyxFQUFFLENBQUM7WUFDN0MsSUFBSSxDQUFDLEdBQUcsQ0FBQyxZQUFZLENBQUMsTUFBTTtnQkFBRSxHQUFHLENBQUMsWUFBWSxDQUFDLE1BQU0sR0FBRyxFQUFFLENBQUM7WUFDM0QsR0FBRyxDQUFDLFlBQVksQ0FBQyxNQUFNLENBQUMsV0FBVyxxQkFDNUIsSUFBQSwyQkFBbUIsRUFBQyxHQUFHLENBQUMsQ0FDOUIsQ0FBQztTQUNMO1FBRUQsaUJBQVEsQ0FBQyxJQUFJLENBQUMsU0FBUyxFQUFFLHVCQUF1QixDQUFDLENBQUM7UUFFbEQsT0FBTyxJQUFJLEVBQUUsQ0FBQztJQUNsQixDQUFDLENBQUM7QUFDTixDQUFDO0FBQ0Qsa0JBQWUscUJBQXFCLENBQUMifQ==

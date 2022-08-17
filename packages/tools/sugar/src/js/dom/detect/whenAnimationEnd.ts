@@ -8,34 +8,29 @@ import __addEventListenerOnce from '../event/addEventListenerOnce';
  * @namespace            js.dom.detect
  * @type      Function
  * @platform          js
- * @status      beta
+ * @status      stable
  * @async
  *
  * Detect when animation ends
  *
  * @param    {HTMLElement}    elm    The element to listen on
- * @return   {Promise}                  A promise that will be resolved once the animation has ended
+ * @return   {SPromise<HTMLElement>}                  A promise that will be resolved once the animation has ended
  *
- * @todo      interface
- * @todo      doc
  * @todo      tests
  *
  * @example    js
- * import whenAnimationEnd from '@coffeekraken/sugar/js/dom/whenAnimationEnd'
- * await whenAnimationEnd(myCoolElm);
+ * import __whenAnimationEnd from '@coffeekraken/sugar/js/dom/whenAnimationEnd'
+ * await __whenAnimationEnd(myCoolElm);
  *
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function whenAnimationEnd($elm, cls) {
-    return new __SPromise(
-        ({ resolve }) => {
-            __addEventListenerOnce($elm, 'animationend', (e) => {
-                resolve(e);
-            });
-        },
-        {
-            id: 'whenAnimationEnd',
-        },
-    );
+export default function whenAnimationEnd(
+    $elm: HTMLElement,
+): __SPromise<HTMLElement> {
+    return new __SPromise(({ resolve }) => {
+        __addEventListenerOnce($elm, 'animationend', (e) => {
+            resolve($elm);
+        });
+    });
 }

@@ -142,7 +142,7 @@ export default class SPostcssBuilder extends __SBuilder {
                 });
                 emit('log', {
                     type: __SLog.TYPE_INFO,
-                    value: `<yellow>○</yellow> Environment : ${
+                    value: `<yellow>○</yellow> Target      : ${
                         params.prod
                             ? '<green>production</green>'
                             : '<yellow>development</yellow>'

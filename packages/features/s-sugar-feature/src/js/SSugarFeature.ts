@@ -1,3 +1,4 @@
+import __SEnv from '@coffeekraken/s-env';
 import type { ISFeature } from '@coffeekraken/s-feature';
 import __SFeature from '@coffeekraken/s-feature';
 import __preventScrollRestoration from '@coffeekraken/sugar/js/dom/scroll/preventScrollRestoration';
@@ -17,6 +18,7 @@ export interface ISSugarFeatureProps {
     preventScrollRestoration: boolean;
     containerQuery: boolean;
     pleasantCss: boolean;
+    env: boolean;
 }
 
 /**
@@ -85,6 +87,11 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
         //     // @ts-ignore
         //     import('https://cdn.skypack.dev/container-query-polyfill');
         // }
+        // env
+        if (this.props.env) {
+            // access env to display current environment
+            const env = __SEnv.env;
+        }
         // pleasant css
         if (this.props.pleasantCss) this._pleasantCss();
         // scrolled

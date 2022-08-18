@@ -318,7 +318,7 @@ class SVite extends s_class_1.default {
                 });
                 emit('log', {
                     type: s_log_1.default.TYPE_INFO,
-                    value: `<yellow>○</yellow> Environment : ${buildParams.prod
+                    value: `<yellow>○</yellow> Target      : ${buildParams.prod
                         ? '<green>production</green>'
                         : '<yellow>development</yellow>'}`,
                 });

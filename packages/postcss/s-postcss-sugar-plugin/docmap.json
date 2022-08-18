@@ -2803,6 +2803,43 @@
                 "relPath": "src/node/mixins/height/classes.ts",
                 "children": {}
             },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.hide.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.hide.classes",
+                "name": "classes",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ],
+                    "raw": "PostcssMixin"
+                },
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the hide helper classes like ```.s-hide```, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.hide",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": "@sugar.hide.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.ts",
+                "extension": "ts",
+                "relPath": "src/node/mixins/hide/classes.ts",
+                "children": {}
+            },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.highlightjs.theme": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.highlightjs.theme",
                 "name": "theme",

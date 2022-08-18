@@ -76,6 +76,12 @@ export default class SSugarFeatureInterface extends __SInterface {
                 type: 'Boolean',
                 default: true,
             },
+            env: {
+                description:
+                    'Specify if you want to display the current environment at start',
+                type: 'Boolean',
+                default: true,
+            },
         };
     }
 }

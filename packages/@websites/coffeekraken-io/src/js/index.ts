@@ -57,9 +57,11 @@ __SConductor.setup({
 (async () => {
   __SFeature.setDefaultProps("*", {
     mountWhen: "nearViewport",
+    verbose: true,
   });
   __SLitComponent.setDefaultProps("*", {
     mountWhen: "nearViewport",
+    verbose: true,
   });
   __SLitComponent.setDefaultProps(["s-panel", "ck-settings"], {
     mountWhen: "direct",

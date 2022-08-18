@@ -1,17 +1,17 @@
 {
     "name": "@coffeekraken/s-data-file-generic",
-    "version": "2.0.0-alpha.19",
+    "version": "2.0.0-alpha.20",
     "description": "Nice and easy to use class to load data from different file types like \"JSON\", \"JS\" or even \"PHP\".",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-data-file-js": "^2.0.0-alpha.19",
-        "@coffeekraken/s-data-file-php": "^2.0.0-alpha.19",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.19",
-        "@coffeekraken/s-promise": "^2.0.0-alpha.19",
-        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.19",
-        "@coffeekraken/sugar": "^2.0.0-alpha.19"
+        "@coffeekraken/s-data-file-js": "^2.0.0-alpha.20",
+        "@coffeekraken/s-data-file-php": "^2.0.0-alpha.20",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.20",
+        "@coffeekraken/s-promise": "^2.0.0-alpha.20",
+        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.20",
+        "@coffeekraken/sugar": "^2.0.0-alpha.20"
     },
     "main": "dist/pkg/cjs/node/exports.js",
     "module": "dist/pkg/esm/node/exports.js",

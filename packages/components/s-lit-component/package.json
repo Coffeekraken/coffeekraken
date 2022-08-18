@@ -1,6 +1,6 @@
 {
     "name": "@coffeekraken/s-lit-component",
-    "version": "2.0.0-alpha.19",
+    "version": "2.0.0-alpha.20",
     "description": "Base class to create web components using the AMAZING lit-element package under the hood, with more features like mounting your component only at a certain point in time, etc...",
     "type": "module",
     "homepage": "https://coffeekraken.io",
@@ -10,9 +10,9 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-component-utils": "^2.0.0-alpha.19",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.19",
-        "@coffeekraken/sugar": "^2.0.0-alpha.19",
+        "@coffeekraken/s-component-utils": "^2.0.0-alpha.20",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.20",
+        "@coffeekraken/sugar": "^2.0.0-alpha.20",
         "lit": "^2.2.8"
     },
     "main": "dist/pkg/cjs/js/exports.js",

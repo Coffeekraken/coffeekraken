@@ -102,9 +102,81 @@
                     ],
                     "raw": "String"
                 },
-                "default": "process.env.NODE_ENV ?? document.env.ENV ?? 'dev`",
-                "description": "Specify the environment env. This is usually \"production\" or \"dev\" as value.",
+                "default": "undefined",
+                "description": "Specify the environment env. This is usually \"production\" or \"dev\" as value.\nIf undefined, will be determined depending on the platform.\nFor node, it will take the process.env.NODE_ENV variable\nFor browser, if not specified manually, it will depends on the \"env.envFromLocation\" configuration to determine the correct environment using regex check",
                 "namespace": "@coffeekraken.s-env.config.env",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "env.config.ts",
+                "extension": "config",
+                "relPath": "src/config/env.config.ts"
+            },
+            "@coffeekraken.s-env.config.env.envFromLocation.development": {
+                "id": "@coffeekraken.s-env.config.env.envFromLocation.development",
+                "name": "development",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Regex"
+                        }
+                    ],
+                    "raw": "Regex"
+                },
+                "default": "https?://(localhost|127.0.0.1|0.0.0.0|192.168.[0-9]{1,3}.[0-9]{1,3}|.*.local)",
+                "description": "Specify the regex to detect the \"development\" environment from the document.location.href variable",
+                "namespace": "@coffeekraken.s-env.config.env.envFromLocation",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "env.config.ts",
+                "extension": "config",
+                "relPath": "src/config/env.config.ts"
+            },
+            "@coffeekraken.s-env.config.env.envFromLocation.staging": {
+                "id": "@coffeekraken.s-env.config.env.envFromLocation.staging",
+                "name": "staging",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Regex"
+                        }
+                    ],
+                    "raw": "Regex"
+                },
+                "default": "https?://([a-zA-Z0-9.-]+)?staging([a-zA-Z0-9.-]+)?",
+                "description": "Specify the regex to detect the \"staging\" environment from the document.location.href variable",
+                "namespace": "@coffeekraken.s-env.config.env.envFromLocation",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "env.config.ts",
+                "extension": "config",
+                "relPath": "src/config/env.config.ts"
+            },
+            "@coffeekraken.s-env.config.env.envFromLocation.production": {
+                "id": "@coffeekraken.s-env.config.env.envFromLocation.production",
+                "name": "production",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Regex"
+                        }
+                    ],
+                    "raw": "Regex"
+                },
+                "default": "https://.*",
+                "description": "Specify the regex to detect the \"production\" environment from the document.location.href variable",
+                "namespace": "@coffeekraken.s-env.config.env.envFromLocation",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -152,8 +224,8 @@
                 "relPath": "src/doc/README.md",
                 "children": {}
             },
-            "@coffeekraken.s-env.s-env.node.SEnv": {
-                "id": "@coffeekraken.s-env.s-env.node.SEnv",
+            "@coffeekraken.s-env.js.SEnv": {
+                "id": "@coffeekraken.s-env.js.SEnv",
                 "name": "SEnv",
                 "type": {
                     "types": [
@@ -163,12 +235,12 @@
                     ],
                     "raw": "Class"
                 },
-                "description": "This class allows you to access, set and update environment variables seemlessly on node\nand browser env.\nYou can also check if the environment is a dev one or a production using the\nhelpfull ```is``` function like so: ```sEnv.is('prod')```",
-                "namespace": "@coffeekraken.s-env.s-env.node",
+                "description": "This class allows you to access, set and update environment variables seemlessly on node\nand browser env.\nYou can also check if the environment is a dev one or a production using the\nhelpfull ```is``` function like so: ```SEnv.is('prod')```",
+                "namespace": "@coffeekraken.s-env.js",
                 "example": [
                     {
                         "language": "js",
-                        "code": "import SEnv from '@coffeekraken/s-env';\nthis.get('something');\nSEnv.is('prod');\nSEnv.is('production');\nSEnv.is('development');\n// etc..."
+                        "code": "import __SEnv from '@coffeekraken/s-env';\nthis.get('something');\n__SEnv.is('prod');\n__SEnv.is('production');\n__SEnv.is('development');\n// etc..."
                     }
                 ],
                 "since": "2.0.0",
@@ -179,37 +251,7 @@
                 },
                 "filename": "SEnv.ts",
                 "extension": "ts",
-                "relPath": "src/node/SEnv.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-env.s-env.shared.SEnv": {
-                "id": "@coffeekraken.s-env.s-env.shared.SEnv",
-                "name": "SEnv",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Class"
-                        }
-                    ],
-                    "raw": "Class"
-                },
-                "description": "This class allows you to access, set and update environment variables seemlessly on node\nand browser env.\nYou can also check if the environment is a dev one or a production using the\nhelpfull ```is``` function like so: ```sEnv.is('prod')```",
-                "namespace": "@coffeekraken.s-env.s-env.shared",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import SEnv from '@coffeekraken/s-env';\nthis.get('something');\nSEnv.is('prod');\nSEnv.is('production');\nSEnv.is('development');\n// etc..."
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "SEnv.ts",
-                "extension": "ts",
-                "relPath": "src/shared/SEnv.ts",
+                "relPath": "src/js/SEnv.ts",
                 "children": {
                     "env": {
                         "id": "s3c882527536778ebe3cda2c893232e50953fd4db23e2eafe4b5eca1b2cf49ecb",
@@ -230,7 +272,89 @@
                             "email": "olivier.bossel@gmail.com",
                             "url": "https://coffeekraken.io"
                         }
-                    },
+                    }
+                }
+            },
+            "@coffeekraken.s-env.node.SEnv": {
+                "id": "@coffeekraken.s-env.node.SEnv",
+                "name": "SEnv",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "description": "This class allows you to access, set and update environment variables seemlessly on node\nand browser env.\nYou can also check if the environment is a dev one or a production using the\nhelpfull ```is``` function like so: ```sEnv.is('prod')```",
+                "namespace": "@coffeekraken.s-env.node",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SEnv from '@coffeekraken/s-env';\nthis.get('something');\nSEnv.is('prod');\nSEnv.is('production');\nSEnv.is('development');\n// etc..."
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SEnv.ts",
+                "extension": "ts",
+                "relPath": "src/node/SEnv.ts",
+                "children": {
+                    "env": {
+                        "id": "s3c882527536778ebe3cda2c893232e50953fd4db23e2eafe4b5eca1b2cf49ecb",
+                        "name": "env",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "Store the actual environment variables object. In node it will be process.env, in the browser,\ndocument.env",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-env.shared.SEnv": {
+                "id": "@coffeekraken.s-env.shared.SEnv",
+                "name": "SEnv",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "description": "This class allows you to access, set and update environment variables seemlessly on node\nand browser env.\nYou can also check if the environment is a dev one or a production using the\nhelpfull ```is``` function like so: ```sEnv.is('prod')```",
+                "namespace": "@coffeekraken.s-env.shared",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SEnv from '@coffeekraken/s-env';\nthis.get('something');\nthis.is('prod');\nthis.is('production');\nthis.is('development');\n// etc..."
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SEnv.ts",
+                "extension": "ts",
+                "relPath": "src/shared/SEnv.ts",
+                "children": {
                     "is": {
                         "id": "sc357a00a09108492292733809ec56df14e55c2978e2c9a558fda1dfc19f11441",
                         "name": "is",

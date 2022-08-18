@@ -43,10 +43,10 @@ import __css from '../../../../src/css/s-range.css'; // relative to /dist/pkg/es
  * @example         html        Simple range
  * <s-range name="myCoolRange" value="90" class="s-color:accent s-mbe:30"></s-range>
  *
- * @example         html        With tooltop
+ * @example         html        With tooltip
  * <s-range name="myOtherRanfe" class="s-mbe:30" tooltip></s-range>
  *
- * @example         html        With tooltop and colored
+ * @example         html        With tooltip and colored
  * <s-range name="myOtherRanfe" class="s-mbe:30 s-color:accent" tooltip></s-range>
  *
  * @example         html        With steps

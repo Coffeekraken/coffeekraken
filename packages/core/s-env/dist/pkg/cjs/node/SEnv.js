@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const SEnv_1 = __importDefault(require("../shared/SEnv"));
 /**
  * @name            SEnv
- * @namespace       s-env.node
+ * @namespace       node
  * @type            Class
  *
  * This class allows you to access, set and update environment variables seemlessly on node
@@ -31,6 +31,23 @@ const SEnv_1 = __importDefault(require("../shared/SEnv"));
  */
 // @ts-ignore
 class SEnv extends SEnv_1.default {
+    /**
+     * @name        env
+     * @type        Object
+     * @static
+     *
+     * Store the actual environment variables object. In node it will be process.env, in the browser,
+     * document.env
+     *
+     * @since     2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static get env() {
+        process.env.ENVIRONMENT = process.env.NODE_ENV;
+        process.env.ENV = process.env.ENVIRONMENT;
+        process.env.PLATFORM = 'node';
+        return process.env;
+    }
 }
 exports.default = SEnv;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsMERBQW9DO0FBRXBDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFFSCxhQUFhO0FBQ2IsTUFBcUIsSUFBSyxTQUFRLGNBQU07Q0FBRztBQUEzQyx1QkFBMkMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsMERBQW9DO0FBRXBDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFFSCxhQUFhO0FBQ2IsTUFBcUIsSUFBSyxTQUFRLGNBQU07SUFDcEM7Ozs7Ozs7Ozs7T0FVRztJQUNILE1BQU0sS0FBSyxHQUFHO1FBQ1YsT0FBTyxDQUFDLEdBQUcsQ0FBQyxXQUFXLEdBQUcsT0FBTyxDQUFDLEdBQUcsQ0FBQyxRQUFRLENBQUM7UUFDL0MsT0FBTyxDQUFDLEdBQUcsQ0FBQyxHQUFHLEdBQUcsT0FBTyxDQUFDLEdBQUcsQ0FBQyxXQUFXLENBQUM7UUFDMUMsT0FBTyxDQUFDLEdBQUcsQ0FBQyxRQUFRLEdBQUcsTUFBTSxDQUFDO1FBQzlCLE9BQU8sT0FBTyxDQUFDLEdBQUcsQ0FBQztJQUN2QixDQUFDO0NBQ0o7QUFsQkQsdUJBa0JDIn0=

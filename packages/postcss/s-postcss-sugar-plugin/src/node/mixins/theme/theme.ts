@@ -1,5 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __STheme from '@coffeekraken/s-theme';
 
 /**

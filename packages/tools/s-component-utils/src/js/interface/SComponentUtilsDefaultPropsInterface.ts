@@ -72,6 +72,12 @@ export default class SComponentUtilsDefaultPropsInterface extends __SInterface {
                 type: 'Boolean',
                 default: true,
             },
+            verbose: {
+                description:
+                    'Specify if you want this component/feature to log informations about activity or not',
+                type: 'Boolean',
+                default: false,
+            },
         };
     }
 }

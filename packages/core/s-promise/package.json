@@ -1,16 +1,16 @@
 {
     "name": "@coffeekraken/s-promise",
-    "version": "2.0.0-alpha.19",
+    "version": "2.0.0-alpha.20",
     "description": "As simple as a native Promise, this package extends it with events capabilities using the @coffeekraken/s-event-emitter one.",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.19",
-        "@coffeekraken/s-event-emitter": "^2.0.0-alpha.19",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.19",
-        "@coffeekraken/s-log": "^2.0.0-alpha.19",
-        "@coffeekraken/sugar": "^2.0.0-alpha.19"
+        "@coffeekraken/s-class": "^2.0.0-alpha.20",
+        "@coffeekraken/s-event-emitter": "^2.0.0-alpha.20",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.20",
+        "@coffeekraken/s-log": "^2.0.0-alpha.20",
+        "@coffeekraken/sugar": "^2.0.0-alpha.20"
     },
     "main": "dist/pkg/cjs/shared/exports.js",
     "module": "dist/pkg/esm/shared/exports.js",

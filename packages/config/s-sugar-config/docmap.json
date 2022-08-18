@@ -881,8 +881,30 @@
                     ],
                     "raw": "String"
                 },
-                "default": "GTM-N4WKFFR",
                 "description": "Specigy the google tag manager you want to use across your project",
+                "namespace": "@coffeekraken.s-sugar-config.config.google",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "google.config.ts",
+                "extension": "config",
+                "relPath": "src/config/google.config.ts"
+            },
+            "@coffeekraken.s-sugar-config.config.google.ga": {
+                "id": "@coffeekraken.s-sugar-config.config.google.ga",
+                "name": "ga",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "description": "Specigy the google analytics id you want to use across your project",
                 "namespace": "@coffeekraken.s-sugar-config.config.google",
                 "since": "2.0.0",
                 "author": {

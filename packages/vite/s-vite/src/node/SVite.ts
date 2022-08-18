@@ -355,7 +355,7 @@ export default class SVite extends __SClass {
                     });
                     emit('log', {
                         type: __SLog.TYPE_INFO,
-                        value: `<yellow>○</yellow> Environment : ${
+                        value: `<yellow>○</yellow> Target      : ${
                             buildParams.prod
                                 ? '<green>production</green>'
                                 : '<yellow>development</yellow>'

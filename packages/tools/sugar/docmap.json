@@ -159,97 +159,6 @@
                 "relPath": "src/cli/interface/SRunCommandParamsInterface.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.drawer-webcomponent.DrawerWebcomponent": {
-                "id": "@coffeekraken.sugar.drawer-webcomponent.DrawerWebcomponent",
-                "name": "DrawerWebcomponent",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Class"
-                        }
-                    ],
-                    "raw": "Class"
-                },
-                "description": "Simple webcomponent to create fully customizable drawers.\nFeatures:\n1. Fully customizable\n2. Support all sides (top, right, bottom and left)\n3. Support 3 animation types (push, slide and reveal)",
-                "namespace": "@coffeekraken.sugar.drawer-webcomponent",
-                "example": [
-                    {
-                        "language": "scss",
-                        "code": "@use 'node_modules/@coffeekraken/drawer-webcomponent/index' as drawer-webcomponent;\n\\@include drawer-webcomponent.classes(\n\t$name : menu,\n\t$side : right\n);\n\\@include drawer-webcomponent.element(drawer) {\n\tbackground-color: black;\n\tpadding: 20px;\n}\n\\@include drawer-webcomponent.element(overlay) {\n\tbackground-color: rgba(0,0,0,.5);\n}"
-                    }
-                ],
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com"
-                },
-                "filename": "testing.ts",
-                "extension": "ts",
-                "relPath": "src/data/tests/testing.ts"
-            },
-            "@coffeekraken.sugar.drawer-webcomponent.open": {
-                "id": "@coffeekraken.sugar.drawer-webcomponent.open",
-                "name": "open",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "description": "Open the drawer",
-                "namespace": "@coffeekraken.sugar.drawer-webcomponent",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com"
-                },
-                "filename": "testing.ts",
-                "extension": "ts",
-                "relPath": "src/data/tests/testing.ts"
-            },
-            "@coffeekraken.sugar.drawer-webcomponent.close": {
-                "id": "@coffeekraken.sugar.drawer-webcomponent.close",
-                "name": "close",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "description": "Close the drawer",
-                "namespace": "@coffeekraken.sugar.drawer-webcomponent",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com"
-                },
-                "filename": "testing.ts",
-                "extension": "ts",
-                "relPath": "src/data/tests/testing.ts"
-            },
-            "@coffeekraken.sugar.drawer-webcomponent.isOpen": {
-                "id": "@coffeekraken.sugar.drawer-webcomponent.isOpen",
-                "name": "isOpen",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "description": "Check if is opened",
-                "namespace": "@coffeekraken.sugar.drawer-webcomponent",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com"
-                },
-                "filename": "testing.ts",
-                "extension": "ts",
-                "relPath": "src/data/tests/testing.ts",
-                "children": {}
-            },
             "@coffeekraken.sugar.js.clipboard.copy": {
                 "id": "@coffeekraken.sugar.js.clipboard.copy",
                 "name": "copy",
@@ -15044,6 +14953,88 @@
                 "relPath": "src/shared/object/watch.ts",
                 "children": {}
             },
+            "@coffeekraken.sugar.shared.package.formatPackageJson": {
+                "id": "@coffeekraken.sugar.shared.package.formatPackageJson",
+                "name": "formatPackageJson",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function simply take a package.json JSON formatted object and standardize\nsome fields like the \"author\" one to be sure it is an object at the end,\nthe \"contributors\" array the same way as the \"author\" one, etc... Here's the list\nof processed actions:\n1. Transform the string version of the \"author\" field into an object with the properties \"name\", \"email\" and \"url\"\n2. Transform the string version of the \"contributors\" field into an object with the properties \"name\", \"email\" and \"url\"",
+                "namespace": "@coffeekraken.sugar.shared.package",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import formatPackageJson from '@coffeekraken/sugar/shared/package/formatPackageJson';\nformatPackageJson({\n   \"author\": \"Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\"\n}); // => {\n   \"author\": {\n     \"name\": \"Olivier Bossel\",\n     \"email\": \"olivier.bossel@gmail.com\",\n     \"url\": \"https://olivierbossel.com\"\n   }\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "formatPackageJson.ts",
+                "extension": "ts",
+                "relPath": "src/shared/package/formatPackageJson.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.shared.package.parseAuthorString": {
+                "id": "@coffeekraken.sugar.shared.package.parseAuthorString",
+                "name": "parseAuthorString",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function simply take an author string like \"Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\" and\ntransform it into a plain object with these properties: name, email and url",
+                "namespace": "@coffeekraken.sugar.shared.package",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import parseAuthorString from '@coffeekraken/sugar/shared/package/parseAuthorString';\nparseAuthorString(\"Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\")\n// => {\n  \"name\": \"Olivier Bossel\",\n  \"email\": \"olivier.bossel@gmail.com\",\n  \"url\": \"https://olivierbossel.com\"\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "parseAuthorString.ts",
+                "extension": "ts",
+                "relPath": "src/shared/package/parseAuthorString.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.js.semver.parseSemverString": {
                 "id": "@coffeekraken.sugar.js.semver.parseSemverString",
                 "name": "parseSemverString",
@@ -17112,7 +17103,7 @@
                 ],
                 "description": "Change the content of a Node with the possibility to animate the change using one of these animations:\n- fade\n- fadeUp\n- fadeDown\n- fadeLeft\n- fadeRight\nYou can also choose between 3 actions which are: replace, append and prepend",
                 "namespace": "@coffeekraken.sugar.js.dom.animation",
-                "status": "beta",
+                "status": "stable",
                 "example": [
                     {
                         "language": "js",
@@ -17149,7 +17140,7 @@
                 ],
                 "description": "Add a class that trigger an animation and remove it at the end",
                 "namespace": "@coffeekraken.sugar.js.dom.class",
-                "status": "beta",
+                "status": "stable",
                 "example": [
                     {
                         "language": "js",
@@ -17186,7 +17177,7 @@
                 ],
                 "description": "Remove some class on animation end",
                 "namespace": "@coffeekraken.sugar.js.dom.class",
-                "status": "beta",
+                "status": "stable",
                 "example": [
                     {
                         "language": "js",
@@ -17223,7 +17214,7 @@
                 ],
                 "description": "This function allows you to make a shadowRoot element adopt his host context styles",
                 "namespace": "@coffeekraken.sugar.js.css",
-                "status": "beta",
+                "status": "stable",
                 "example": [
                     {
                         "language": "js",
@@ -17259,7 +17250,7 @@
                 ],
                 "description": "Inject a passed style string in the DOM",
                 "namespace": "@coffeekraken.sugar.js.css",
-                "status": "beta",
+                "status": "stable",
                 "example": [
                     {
                         "language": "js",
@@ -17331,13 +17322,13 @@
                         "description": ""
                     }
                 ],
-                "description": "Detect the mouse direction when entered on the passed element. The direction can be up, down, left or right and will be passed to the two callbacks available.\nThe first one is the `onIn` callback, and the second one is the `onOut`.",
+                "description": "Detect the mouse direction when entered on the passed element. The direction can be up, down, left or right and will be passed to the two callbacks available.",
                 "namespace": "@coffeekraken.sugar.js.dom.detection",
-                "status": "wip",
+                "status": "beta",
                 "example": [
                     {
                         "language": "js",
-                        "code": "import detectInOutDirection from '@coffeekraken/sugar/js/dom/detectInOutDirection'\nconst detect = detectInOutDirection(myElm).in(direction => {\n   // do something...\n}).out(direction => {\n   // do something...\n}).then(value => {\n   // do something\n   console.log(value); // => { action: 'in', direction: 'up' };\n});\n\n// cancel the detection process\ndetect.cancel();"
+                        "code": "import __detectInOutDirection from '@coffeekraken/sugar/js/dom/detectInOutDirection';\nconst detector = __detectInOutDirection($myElm).on('in', (direction) => {\n   // direction can be \"up\", \"down\", \"left\" or \"right\"\n}).on('out', (direction) => {\n   // direction can be \"up\", \"down\", \"left\" or \"right\"\n});\n\n// cancel the detection process\ndetector.cancel();"
                     }
                 ],
                 "async": "true",
@@ -17375,7 +17366,7 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import inViewportStatusChange from '@coffeekraken/sugar/js/dom/inViewportStatusChange';\ninViewportStatusChange(myElm).on('enter', $elm => {\n   // do something...\n}).on('exit', $elm => {\n   // do something...\n});"
+                        "code": "import __inViewportStatusChange from '@coffeekraken/sugar/js/dom/inViewportStatusChange';\n__inViewportStatusChange(myElm).on('enter', $elm => {\n   // do something...\n}).on('enter', $elm => {\n   // do something...\n}).on('leave', $elm => {\n   // do something...\n});"
                     }
                 ],
                 "async": "true",
@@ -17413,7 +17404,7 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import onSwipe from '@coffeekraken/sugar/js/dom/onSwipe'"
+                        "code": "import __onDrag from '@coffeekraken/sugar/js/dom/onDrag'\n__onDrag($myElement, (drag) => {\n   // do something...\n});"
                     }
                 ],
                 "async": "true",
@@ -17447,11 +17438,11 @@
                 ],
                 "description": "This function simply listen for scroll on the passed element and call the passed callback\nwhen reaching the end of it.",
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
-                "status": "beta",
+                "status": "stable",
                 "example": [
                     {
                         "language": "js",
-                        "code": "import onScrollEnd from '@coffeekraken/sugar/js/dom/detect/onScrollEnd';\nonScrollEnd($elm, () => {\n     // do something\n}, {\n   offset: 50\n});"
+                        "code": "import __onScrollEnd from '@coffeekraken/sugar/js/dom/detect/onScrollEnd';\n__onScrollEnd($elm, () => {\n     // do something\n}, {\n   offset: 50\n});"
                     }
                 ],
                 "async": "true",
@@ -17485,11 +17476,11 @@
                 ],
                 "description": "Detect swipes gestures on touch devices.",
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
-                "status": "beta",
+                "status": "stable",
                 "example": [
                     {
                         "language": "js",
-                        "code": "import onSwipe from '@coffeekraken/sugar/js/dom/onSwipe'\nonSwipe(myCoolElm, (swipe) => {\n\t// check the swipe direction\n\tif (swipe.left) {\n\t\t// do something...\n\t}\n\t// support : left, right, up, down\n\t// etc...\n}, {\n\tthreshold : 50\n});"
+                        "code": "import __onSwipe from '@coffeekraken/sugar/js/dom/onSwipe'\n__onSwipe(myCoolElm, (swipe) => {\n\t// check the swipe direction\n\tif (swipe.left) {\n\t\t// do something...\n\t}\n\t// support : left, right, up, down\n\t// etc...\n}, {\n\tthreshold : 50\n});"
                     }
                 ],
                 "async": "true",
@@ -17523,11 +17514,11 @@
                 ],
                 "description": "This function listen for passed `trigger(s)` on the passed `HTMLElement` and resolve the promise once one of them has reached his state.",
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
-                "status": "beta",
+                "status": "stable",
                 "example": [
                     {
                         "language": "js",
-                        "code": "import when from '@coffeekraken/sugar/js/dom/detect/when';\nwhen($elm, 'inViewport', () => {\n     // do something\n}, {\n   whenInViewport: {\n      offset: 50\n   }\n});"
+                        "code": "import __when from '@coffeekraken/sugar/js/dom/detect/when';\n__when($elm, 'inViewport', () => {\n     // do something\n}, {\n   whenInViewport: {\n      offset: 50\n   }\n});"
                     }
                 ],
                 "async": "true",
@@ -17561,11 +17552,11 @@
                 ],
                 "description": "Detect when animation ends",
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
-                "status": "beta",
+                "status": "stable",
                 "example": [
                     {
                         "language": "js",
-                        "code": "import whenAnimationEnd from '@coffeekraken/sugar/js/dom/whenAnimationEnd'\nawait whenAnimationEnd(myCoolElm);"
+                        "code": "import __whenAnimationEnd from '@coffeekraken/sugar/js/dom/whenAnimationEnd'\nawait __whenAnimationEnd(myCoolElm);"
                     }
                 ],
                 "async": "true",
@@ -17599,11 +17590,11 @@
                 ],
                 "description": "Resolve a promise when the wanted attribute on the passed HTMLElement exist or pass the check function provided",
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
-                "status": "beta",
+                "status": "stable",
                 "example": [
                     {
                         "language": "js",
-                        "code": "import whenAttribute from '@coffeekraken/sugar/js/dom/whenAttribute'\nwhenAttribute(myCoolHTMLElement, 'value').then((value) => {\n\t\t// the value attribute exist on the element\n});\n// with a checkFn\nwhenAttribute(myCoolHTMLElement, 'value', (newVal, oldVal) => {\n\t\t// make sure the value is a number\n\t\treturn typeof(newVal) === 'number';\n}).then((value) => {\n\t\t// do something with your number value...\n});"
+                        "code": "import __whenAttribute from '@coffeekraken/sugar/js/dom/whenAttribute'\n__whenAttribute(myCoolHTMLElement, 'value').then((value) => {\n\t\t// the value attribute exist on the element\n});\n// with a checkFn\n__whenAttribute(myCoolHTMLElement, 'value', (newVal, oldVal) => {\n\t\t// make sure the value is a number\n\t\treturn typeof(newVal) === 'number';\n}).then((value) => {\n\t\t// do something with your number value...\n});"
                     }
                 ],
                 "async": "true",
@@ -17637,11 +17628,11 @@
                 ],
                 "description": "Wait that the dom is ready before resolving the promise",
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
-                "status": "beta",
+                "status": "stable",
                 "example": [
                     {
                         "language": "js",
-                        "code": "import whenDomReady from '@coffeekraken/sugar/js/dom/detect/whenDomReady'\n// using promise\nwhenDomReady().then(() => {\n\t\t// do something\n});"
+                        "code": "import __whenDomReady from '@coffeekraken/sugar/js/dom/detect/whenDomReady'\n// using promise\n__whenDomReady().then(() => {\n\t\t// do something\n});"
                     }
                 ],
                 "async": "true",
@@ -17675,11 +17666,11 @@
                 ],
                 "description": "Monitor an HTMLElement to be notified when it is enters in the viewport (1/3vh in the viewport), or in the viewport",
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
-                "status": "beta",
+                "status": "stable",
                 "example": [
                     {
                         "language": "js",
-                        "code": "import whenEntersViewport from '@coffeekraken/sugar/js/dom/whenEntersViewport'\nwhenEntersViewport(myCoolHTMLElement).then((elm) => {\n\t\t// do something with your element that has entered the viewport...\n});"
+                        "code": "import __whenEntersViewport from '@coffeekraken/sugar/js/dom/whenEntersViewport'\n__whenEntersViewport(myCoolHTMLElement).then((elm) => {\n\t\t// do something with your element that has entered the viewport...\n});"
                     }
                 ],
                 "async": "true",
@@ -17711,13 +17702,13 @@
                         "description": ""
                     }
                 ],
-                "description": "Wait that an interaction is made with the passed element like \"focus\", \"focusIn\", \"mouseover\", etc...",
+                "description": "Wait that an interaction is made with the passed element like \"focus\", \"focusIn\", \"pointerover\", etc...",
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
                 "status": "beta",
                 "example": [
                     {
                         "language": "js",
-                        "code": "import whenInteract from '@coffeekraken/sugar/js/dom/detect/whenInteract'\nawait whenInteract(myCoolElement, {});"
+                        "code": "import __whenInteract from '@coffeekraken/sugar/js/dom/detect/whenInteract'\nawait __whenInteract(myCoolElement);"
                     }
                 ],
                 "interface": {
@@ -17791,7 +17782,7 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import whenInViewport from '@coffeekraken/sugar/js/dom/whenInViewport'\nwhenInViewport(myCoolHTMLElement).then((elm) => {\n\t\t// do something with your element that has entered the viewport...\n});"
+                        "code": "import __whenInViewport from '@coffeekraken/sugar/js/dom/whenInViewport'\n__whenInViewport(myCoolHTMLElement).then((elm) => {\n\t\t// do something with your element that has entered the viewport...\n});"
                     }
                 ],
                 "async": "true",
@@ -17829,7 +17820,7 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import whenNearViewport from '@coffeekraken/sugar/js/dom/whenNearViewport'\nwhenNearViewport(myCoolHTMLElement).then((elm) => {\n\t\t// do something with your element that has entered the viewport...\n});"
+                        "code": "import __whenNearViewport from '@coffeekraken/sugar/js/dom/whenNearViewport'\n__whenNearViewport(myCoolHTMLElement).then((elm) => {\n\t\t// do something with your element that has entered the viewport...\n});"
                     }
                 ],
                 "async": "true",
@@ -17867,7 +17858,7 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import whenOutOfViewport from '@coffeekraken/sugar/js/dom/whenOutOfViewport'\nwhenOutOfViewport(myCoolHTMLElement).then((elm) => {\n\t\t// do something with your element that has exit the viewport...\n});"
+                        "code": "import __whenOutOfViewport from '@coffeekraken/sugar/js/dom/whenOutOfViewport'\n__whenOutOfViewport(myCoolHTMLElement).then((elm) => {\n\t\t// do something with your element that has exit the viewport...\n});"
                     }
                 ],
                 "async": "true",
@@ -17901,11 +17892,11 @@
                 ],
                 "description": "Resolve a promise when the passed node has been removed from the dom",
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
-                "status": "beta",
+                "status": "stable",
                 "example": [
                     {
                         "language": "js",
-                        "code": "import whenRemoved from '@coffeekraken/sugar/js/dom/whenRemoved'\nwhenRemoved(myCoolHTMLElement).then((value) => {\n\t\t// the element has been removed\n});"
+                        "code": "import __whenRemoved from '@coffeekraken/sugar/js/dom/whenRemoved'\n__whenRemoved(myCoolHTMLElement).then((value) => {\n\t\t// the element has been removed\n});"
                     }
                 ],
                 "async": "true",
@@ -17939,11 +17930,11 @@
                 ],
                 "description": "Wait until all the HTMLLinkElement's are properly loaded",
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
-                "status": "beta",
+                "status": "stable",
                 "example": [
                     {
                         "language": "js",
-                        "code": "import whenStylesheetsReady from '@coffeekraken/sugar/js/dom/whenStylesheetsReady'\nwhenStylesheetsReady([\n\t\tmyHTMLLinkElement1,\n\t\tmyHTMLLinkElement2\n]).then(() => {\n\t\t// do something when all the links are loaded\n});"
+                        "code": "import __whenStylesheetsReady from '@coffeekraken/sugar/js/dom/whenStylesheetsReady'\nawait __whenStylesheetsReady([\n\t\tmyHTMLLinkElement1,\n\t\tmyHTMLLinkElement2\n]);"
                     }
                 ],
                 "async": "true",
@@ -17977,11 +17968,11 @@
                 ],
                 "description": "Monitor an HTMLElement to be notified when his transition has ended",
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
-                "status": "beta",
+                "status": "stable",
                 "example": [
                     {
                         "language": "js",
-                        "code": "import whenTransitionEnd from '@coffeekraken/sugar/js/dom/whenTransitionEnd'\nwhenTransitionEnd(myCoolHTMLElement).then((elm) => {\n\t\t// do something with your element transition has ended...\n});"
+                        "code": "import __whenTransitionEnd from '@coffeekraken/sugar/js/dom/whenTransitionEnd'\nawait __whenTransitionEnd(myCoolHTMLElement);"
                     }
                 ],
                 "async": "true",
@@ -18015,11 +18006,11 @@
                 ],
                 "description": "Monitor an HTMLElement to be notified when it is visible",
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
-                "status": "beta",
+                "status": "stable",
                 "example": [
                     {
                         "language": "js",
-                        "code": "import whenVisible from '@coffeekraken/sugar/js/dom/whenVisible'\nwhenVisible(myCoolHTMLElement).then((elm) => {\n\t\t// do something with your element that is now visible\n});"
+                        "code": "import __whenVisible from '@coffeekraken/sugar/js/dom/whenVisible'\n__whenVisible(myCoolHTMLElement).then((elm) => {\n\t\t// do something with your element that is now visible\n});"
                     }
                 ],
                 "async": "true",
@@ -21988,88 +21979,6 @@
                 "filename": "dataTypesArray.ts",
                 "extension": "ts",
                 "relPath": "src/shared/dev/types/dataTypesArray.ts",
-                "children": {}
-            },
-            "@coffeekraken.sugar.js.npm.parseAuthorString": {
-                "id": "@coffeekraken.sugar.js.npm.parseAuthorString",
-                "name": "parseAuthorString",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    },
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This function simply take an author string like \"Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\" and\ntransform it into a plain object with these properties: name, email and url",
-                "namespace": "@coffeekraken.sugar.js.npm",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import parseAuthorString from '@coffeekraken/sugar/js/npm/utils/parseAuthorString';\nparseAuthorString(\"Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\")\n// => {\n  \"name\": \"Olivier Bossel\",\n  \"email\": \"olivier.bossel@gmail.com\",\n  \"url\": \"https://olivierbossel.com\"\n}"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "parseAuthorString.ts",
-                "extension": "ts",
-                "relPath": "src/shared/npm/utils/parseAuthorString.ts",
-                "children": {}
-            },
-            "@coffeekraken.sugar.js.npm.standardizeJson": {
-                "id": "@coffeekraken.sugar.js.npm.standardizeJson",
-                "name": "standardizeJson",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    },
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This function simply take a package.json JSON formatted object and standardize\nsome fields like the \"author\" one to be sure it is an object at the end,\nthe \"contributors\" array the same way as the \"author\" one, etc... Here's the list\nof processed actions:\n1. Transform the string version of the \"author\" field into an object with the properties \"name\", \"email\" and \"url\"\n2. Transform the string version of the \"contributors\" field into an object with the properties \"name\", \"email\" and \"url\"",
-                "namespace": "@coffeekraken.sugar.js.npm",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import standardizeJson from '@coffeekraken/sugar/js/npm/utils/standardizeJson';\nstandardizeJson({\n   \"author\": \"Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\"\n}); // => {\n   \"author\": {\n     \"name\": \"Olivier Bossel\",\n     \"email\": \"olivier.bossel@gmail.com\",\n     \"url\": \"https://olivierbossel.com\"\n   }\n}"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "standardizeJson.ts",
-                "extension": "ts",
-                "relPath": "src/shared/npm/utils/standardizeJson.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.detect.interface.WhenInteractSettingsInterface": {

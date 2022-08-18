@@ -421,7 +421,9 @@
                         },
                         "lines": {
                             "description": "Specify how many lines to display at max",
-                            "type": "Number"
+                            "type": "Number",
+                            "default": 15,
+                            "physical": true
                         },
                         "moreLabel": {
                             "description": "Specify the \"show more\" button label",
@@ -528,7 +530,9 @@
                         },
                         "lines": {
                             "description": "Specify how many lines to display at max",
-                            "type": "Number"
+                            "type": "Number",
+                            "default": 15,
+                            "physical": true
                         },
                         "moreLabel": {
                             "description": "Specify the \"show more\" button label",

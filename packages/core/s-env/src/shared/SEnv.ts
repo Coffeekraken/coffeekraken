@@ -10,7 +10,7 @@ if (!__isNode() && !document.env) {
 
 /**
  * @name            SEnv
- * @namespace       s-env.shared
+ * @namespace       shared
  * @type            Class
  *
  * This class allows you to access, set and update environment variables seemlessly on node
@@ -25,9 +25,9 @@ if (!__isNode() && !document.env) {
  * @example         js
  * import SEnv from '@coffeekraken/s-env';
  * this.get('something');
- * SEnv.is('prod');
- * SEnv.is('production');
- * SEnv.is('development');
+ * this.is('prod');
+ * this.is('production');
+ * this.is('development');
  * // etc...
  *
  * @since           2.0.0
@@ -36,31 +36,6 @@ if (!__isNode() && !document.env) {
 
 // @ts-ignore
 export default class SEnv {
-    /**
-     * @name        env
-     * @type        Object
-     * @static
-     *
-     * Store the actual environment variables object. In node it will be process.env, in the browser,
-     * document.env
-     *
-     * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static get env() {
-        if (__isNode()) {
-            process.env.ENVIRONMENT = process.env.NODE_ENV ?? 'development';
-            process.env.ENV = process.env.ENVIRONMENT;
-            process.env.PLATFORM = 'node';
-            return process.env;
-        } else {
-            document.env.ENVIRONMENT = document?.env?.ENV ?? 'development';
-            document.env.ENV = document.env.ENVIRONMENT;
-            document.env.PLATFORM = 'browser';
-            return document.env;
-        }
-    }
-
     /**
      * @name        is
      * @type        Function
@@ -78,13 +53,13 @@ export default class SEnv {
     static is(env: string): boolean {
         env = env.toLowerCase();
         if (env === 'dev' || env === 'development') {
-            if (SEnv.get('env') === 'dev' || SEnv.get('env') === 'development')
+            if (this.get('env') === 'dev' || this.get('env') === 'development')
                 return true;
         } else if (env === 'prod' || env === 'production') {
-            if (SEnv.get('env') === 'prod' || SEnv.get('env') === 'production')
+            if (this.get('env') === 'prod' || this.get('env') === 'production')
                 return true;
         } else {
-            return SEnv.get('env') === env;
+            return this.get('env') === env;
         }
         return false;
     }
@@ -105,7 +80,7 @@ export default class SEnv {
      */
     static get(name: string): any {
         // @ts-ignore
-        return SEnv.env[name.toUpperCase()];
+        return this.env[name.toUpperCase()];
     }
 
     /**
@@ -124,7 +99,7 @@ export default class SEnv {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static set(name: string, value: any): any {
-        SEnv.env[name.toUpperCase()] = value;
+        this.env[name.toUpperCase()] = value;
         return value;
     }
 
@@ -144,6 +119,6 @@ export default class SEnv {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static delete(name: string): void {
-        delete SEnv.env[name.toUpperCase()];
+        delete this.env[name.toUpperCase()];
     }
 }

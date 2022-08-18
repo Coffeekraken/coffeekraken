@@ -966,6 +966,25 @@
                 "extension": "ts",
                 "relPath": "src/node/SFrontendServer.ts",
                 "children": {
+                    "servermetas": {
+                        "id": "sb7bda7a6793294ff8a01beaa0f9cef05a06564ec5f6036caf2d08f4c830ebcd5",
+                        "name": "serverMetas",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISFrontendServerMetas"
+                                }
+                            ],
+                            "raw": "ISFrontendServerMetas"
+                        },
+                        "description": "Store some information about the current server like the host, port, etc...",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
                     "constructor": {
                         "id": "sb726d20e6a7b725793ce78a74478dfdba9c2fdb48e57024f815089b2368d3432",
                         "name": "constructor",
@@ -1486,37 +1505,6 @@
                 "filename": "viewRendererMiddleware.ts",
                 "extension": "ts",
                 "relPath": "src/node/middleware/viewRendererMiddleware.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-frontend-server.sugar.node.server.frontend.pages.error": {
-                "id": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.pages.error",
-                "name": "error",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "description": "This function simply return the 404 page content to send to the user\nwith the passed data object described here:",
-                "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.pages",
-                "status": "wip",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import 404 from '@coffeekraken/sugar/node/server/frontend/pages/404';\nconst content = await 404('Error', 'Something wrong happened', null, [{\n   text: 'Go to Google',\n   href: 'https://google.com'\n}]);"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "error.js",
-                "extension": "js",
-                "relPath": "src/node/pages/error.js",
                 "children": {}
             },
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.configMiddleware": {

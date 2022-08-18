@@ -63,13 +63,13 @@ if (isset($frontspec->metas)) {
 
     @yield('head')
 
-    <!-- GTM -->
     @if (isset($config->google->gtm))
-        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','{{ $config->google->gtm }}');</script>
+    <!-- GTM -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','{{ $config->google->gtm }}');</script>
     @endif
 
 </head>
@@ -82,9 +82,9 @@ if (isset($frontspec->metas)) {
     @endif
 
     @if (isset($SUGAR))
-        <script id="sugar-override">
-            document.SUGAR = {!! json_encode($SUGAR) !!};
-        </script>
+    <script id="sugar-override">
+        document.SUGAR = {!! json_encode($SUGAR) !!};
+    </script>
     @endif
 
     @yield('body')
@@ -93,11 +93,17 @@ if (isset($frontspec->metas)) {
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ $config->google->ga }}"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
-        
-        gtag('js', new Date());
-        gtag('config', '{{ $config->google->ga }}');
+        document.addEventListener('DOMContentLoaded', () => {
+            if ((document.env && document.env.ENV && document.env.ENV === 'production')
+                || (!document.env && !document.env.ENV)) {
+                window.dataLayer = window.dataLayer || [];
+                gtag('js', new Date());
+                gtag('config', '{{ $config->google->ga }}');
+            } else {
+                console.log(`%c[GA] Google analytics installed with the id "{{ $config->google->ga }}" but does not track anything in this environment...`, 'color: orange');
+            }
+        });
     </script>
     @endif
 

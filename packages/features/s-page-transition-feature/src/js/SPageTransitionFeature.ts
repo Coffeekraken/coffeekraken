@@ -1,11 +1,11 @@
+import __SEnv from '@coffeekraken/s-env';
 import __SFeature from '@coffeekraken/s-feature';
 import __SRequest from '@coffeekraken/s-request';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __querySelectorUp from '@coffeekraken/sugar/js/dom/query/querySelectorUp';
 import __scrollTo from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SPageTransitionFeatureInterface from './interface/SPageTransitionFeatureInterface';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __SEnv from '@coffeekraken/s-env';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-page-transition.css'; // relative to /dist/pkg/esm/js
@@ -279,16 +279,18 @@ export default class SPageTransitionFeature extends __SFeature {
             this._onAfter($source, 200, url, newState);
 
             // track pageView if gtag is present in the page
-            if (this.props.ga && __SEnv.is('production')) {
+            if (window.gtag && __SEnv.is('production')) {
                 const gaUid = typeof this.props.ga === 'string' ? this.props.ga : __SSugarConfig.get('google.ga');
                 if (gaUid) {
-                    gtag('event', 'page_view', {
+                    window.gtag('event', 'page_view', {
                         page_title: document.title,
                         page_location: document.location.href,
                         page_path: document.location.pathname,
                         send_to: gaUid
                       });
                 }
+            } else if (window.gtag && this.props.verbose) {
+                console.log(`%c[SPageTransitionFeature] Google analytics is activate and this transition to "${document.location.pathname}" will be correctly tracked in production environment`, 'color: lightGreen');
             }
 
             // resolve transition

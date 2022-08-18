@@ -568,6 +568,80 @@
                 "relPath": "src/node/pages/404.ts",
                 "children": {}
             },
+            "@coffeekraken.s-view-renderer.php.core.getDefaultViewDirs": {
+                "id": "@coffeekraken.s-view-renderer.php.core.getDefaultViewDirs",
+                "name": "getDefaultViewDirs",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This function gives you the default root directories where to search for views.\nYou will need to add these if you want to use the \"@coffeekraken\" layouts, etc...",
+                "namespace": "@coffeekraken.s-view-renderer.php.core",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "$viewDirs = \\SViewRenderer\\getDefaultViewDirs();"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "getDefaultViewDirs.php",
+                "extension": "php",
+                "relPath": "src/php/core/getDefaultViewDirs.php",
+                "children": {}
+            },
+            "@coffeekraken.s-view-renderer.php.twig.initTwig": {
+                "id": "@coffeekraken.s-view-renderer.php.twig.initTwig",
+                "name": "initTwig",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This function init your twig to have access to helpers delivered from the \"coffeekraken/s-twig\" package like \"toArray\", \"idCompliant\", and many more...\nThese helpers/functions are used inside the @coffeekraken layouts, views, etc... so you will need to init your twig using this function.",
+                "namespace": "@coffeekraken.s-view-renderer.php.twig",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "$twig = \\SViewRenderer\\initTwig($twig, $loader);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "initTwig.php",
+                "extension": "php",
+                "relPath": "src/php/twig/initTwig.php",
+                "children": {}
+            },
             "@coffeekraken.s-view-renderer.php.views.layouts.main": {
                 "id": "@coffeekraken.s-view-renderer.php.views.layouts.main",
                 "name": "main",
@@ -589,7 +663,7 @@
                 },
                 "filename": "main.blade.php",
                 "extension": "blade",
-                "relPath": "src/php/views/blade/coffeekraken/layouts/main.blade.php",
+                "relPath": "src/php/views/blade/@coffeekraken/layouts/main.blade.php",
                 "children": {}
             }
         }

@@ -49,6 +49,7 @@ export interface ISComponentUtilsDefaultProps {
     mountWhen: 'directly' | 'direct' | 'inViewport';
     adoptStyle: boolean;
     responsive: any;
+    verbose: boolean;
 }
 
 export default class SComponentUtils extends __SClass {

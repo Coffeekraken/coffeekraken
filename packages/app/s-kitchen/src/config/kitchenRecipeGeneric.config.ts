@@ -491,7 +491,7 @@ export default function (api) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    env: 'production',
+                    prod: true,
                 },
                 actions: {
                     /**

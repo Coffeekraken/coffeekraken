@@ -2,23 +2,60 @@
 if (global && !global.document)
     global.document = {};
 export default (api) => {
-    var _a, _b, _c, _d;
-    if (api.env.platform !== 'node')
-        return;
     return {
         /**
          * @name            env
          * @type            String
          * @namespace       config.env
-         * @default         process.env.NODE_ENV ?? document.env.ENV ?? 'dev`
+         * @default         undefined
          *
          * Specify the environment env. This is usually "production" or "dev" as value.
+         * If undefined, will be determined depending on the platform.
+         * For node, it will take the process.env.NODE_ENV variable
+         * For browser, if not specified manually, it will depends on the "env.envFromLocation" configuration to determine the correct environment using regex check
          *
          * @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        // @ts-ignore
-        env: (_d = (_b = (_a = process === null || process === void 0 ? void 0 : process.env) === null || _a === void 0 ? void 0 : _a.NODE_ENV) !== null && _b !== void 0 ? _b : (_c = document === null || document === void 0 ? void 0 : document.env) === null || _c === void 0 ? void 0 : _c.ENV) !== null && _d !== void 0 ? _d : 'development',
+        env: undefined,
+        envFromLocation: {
+            /**
+             * @name            development
+             * @type            Regex
+             * @namespace       config.env.envFromLocation
+             * @default         https?://(localhost|127.0.0.1|0.0.0.0|192.168.[0-9]{1,3}.[0-9]{1,3}|.*.local)
+             *
+             * Specify the regex to detect the "development" environment from the document.location.href variable
+             *
+             * @since           2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            development: 'https?://(localhost|127.0.0.1|0.0.0.0|192.168.[0-9]{1,3}.[0-9]{1,3}|.*.local)',
+            /**
+             * @name            staging
+             * @type            Regex
+             * @namespace       config.env.envFromLocation
+             * @default         https?://([a-zA-Z0-9.-]+)?staging([a-zA-Z0-9.-]+)?
+             *
+             * Specify the regex to detect the "staging" environment from the document.location.href variable
+             *
+             * @since           2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            staging: 'https?://([a-zA-Z0-9.-]+)?staging([a-zA-Z0-9.-]+)?',
+            /**
+             * @name            production
+             * @type            Regex
+             * @namespace       config.env.envFromLocation
+             * @default         https://.*
+             *
+             * Specify the regex to detect the "production" environment from the document.location.href variable
+             *
+             * @since           2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            production: 'https://.*',
+        },
         git: {
             template: {
                 name: 'Template',
@@ -30,4 +67,4 @@ export default (api) => {
         },
     };
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGFBQWE7QUFDYixJQUFJLE1BQU0sSUFBSSxDQUFDLE1BQU0sQ0FBQyxRQUFRO0lBQUUsTUFBTSxDQUFDLFFBQVEsR0FBRyxFQUFFLENBQUM7QUFFckQsZUFBZSxDQUFDLEdBQUcsRUFBRSxFQUFFOztJQUNuQixJQUFJLEdBQUcsQ0FBQyxHQUFHLENBQUMsUUFBUSxLQUFLLE1BQU07UUFBRSxPQUFPO0lBRXhDLE9BQU87UUFDSDs7Ozs7Ozs7OztXQVVHO1FBQ0gsYUFBYTtRQUNiLEdBQUcsRUFBRSxNQUFBLE1BQUEsTUFBQSxPQUFPLGFBQVAsT0FBTyx1QkFBUCxPQUFPLENBQUUsR0FBRywwQ0FBRSxRQUFRLG1DQUFJLE1BQUEsUUFBUSxhQUFSLFFBQVEsdUJBQVIsUUFBUSxDQUFFLEdBQUcsMENBQUUsR0FBRyxtQ0FBSSxhQUFhO1FBRWxFLEdBQUcsRUFBRTtZQUNELFFBQVEsRUFBRTtnQkFDTixJQUFJLEVBQUUsVUFBVTtnQkFDaEIsTUFBTSxFQUFFO29CQUNKLEVBQUUsRUFBRSxTQUFTO29CQUNiLElBQUksRUFBRSxTQUFTO2lCQUNsQjthQUNKO1NBQ0o7S0FDSixDQUFDO0FBQ04sQ0FBQyxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGFBQWE7QUFDYixJQUFJLE1BQU0sSUFBSSxDQUFDLE1BQU0sQ0FBQyxRQUFRO0lBQUUsTUFBTSxDQUFDLFFBQVEsR0FBRyxFQUFFLENBQUM7QUFFckQsZUFBZSxDQUFDLEdBQUcsRUFBRSxFQUFFO0lBQ25CLE9BQU87UUFDSDs7Ozs7Ozs7Ozs7OztXQWFHO1FBQ0gsR0FBRyxFQUFFLFNBQVM7UUFFZCxlQUFlLEVBQUU7WUFDYjs7Ozs7Ozs7OztlQVVHO1lBQ0gsV0FBVyxFQUNQLCtFQUErRTtZQUVuRjs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFLG9EQUFvRDtZQUU3RDs7Ozs7Ozs7OztlQVVHO1lBQ0gsVUFBVSxFQUFFLFlBQVk7U0FDM0I7UUFFRCxHQUFHLEVBQUU7WUFDRCxRQUFRLEVBQUU7Z0JBQ04sSUFBSSxFQUFFLFVBQVU7Z0JBQ2hCLE1BQU0sRUFBRTtvQkFDSixFQUFFLEVBQUUsU0FBUztvQkFDYixJQUFJLEVBQUUsU0FBUztpQkFDbEI7YUFDSjtTQUNKO0tBQ0osQ0FBQztBQUNOLENBQUMsQ0FBQyJ9

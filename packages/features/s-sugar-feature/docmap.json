@@ -175,6 +175,11 @@
                             "description": "Specify if you want to prevent the scroll restoration behavior on chrome that can usually be anoying",
                             "type": "Boolean",
                             "default": true
+                        },
+                        "env": {
+                            "description": "Specify if you want to display the current environment at start",
+                            "type": "Boolean",
+                            "default": true
                         }
                     }
                 },
@@ -255,6 +260,11 @@
                         },
                         "preventScrollRestoration": {
                             "description": "Specify if you want to prevent the scroll restoration behavior on chrome that can usually be anoying",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "env": {
+                            "description": "Specify if you want to display the current environment at start",
                             "type": "Boolean",
                             "default": true
                         }

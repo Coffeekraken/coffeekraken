@@ -793,7 +793,7 @@ export default function (api) {
              * @since       2.0.0
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            command: 'sugar postcss.build --prod [arguments]',
+            command: 'sugar postcss.build [arguments]',
             /**
              * @name            interface
              * @namespace       config.kitchenActions.postcssBuild
@@ -1018,7 +1018,7 @@ export default function (api) {
              * @since       2.0.0
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            command: 'sugar vite.build --prod [arguments]',
+            command: 'sugar vite.build [arguments]',
             /**
              * @name            interface
              * @namespace       config.kitchenActions.viteBuild

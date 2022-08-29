@@ -15,6 +15,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {('default'|'square'|'rounded')[]}                 [shape=['default'|'square','pill','rounded']]         The shape(s) you want to generate
  * @param       {'solid''}                                                  [defaultStyle='theme.ui.avatar.defaultStyle']           The default style you want
  * @param       {'default'|'square'|'rounded'}                                     [defaultShape='theme.ui.avatar.defaultShape']           The default shape you want
+ * @param       {String}                            [defaultColor=theme.ui.avatar.defaultColor]
  * @param       {('bare'|'lnf'|'shape'|'interactive'|'notifications')[]}        [scope=['bare','lnf','shape','interactive','notifications']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
@@ -48,6 +49,11 @@ class postcssSugarPluginUiAvatarClassesInterface extends __SInterface {
                 values: ['default', 'square', 'rounded'],
                 default: __STheme.get('ui.avatar.defaultShape'),
             },
+            defaultColor: {
+                type: 'String',
+                values: Object.keys(__STheme.get('color')),
+                default: __STheme.get('ui.avatar.defaultColor'),
+            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -77,6 +83,7 @@ export interface IPostcssSugarPluginUiAvatarClassesParams {
     shapes: ('default' | 'square' | 'rounded')[];
     defaultStyle: 'solid';
     defaultShape: 'default' | 'square' | 'rounded';
+    defaultColor: string;
     scope: ('bare' | 'lnf' | 'shape' | 'interactive' | 'notifications')[];
 }
 
@@ -105,6 +112,7 @@ export default function ({
         shapes: [],
         defaultStyle: 'solid',
         defaultShape: 'default',
+        defaultColor: 'main',
         scope: [],
         ...params,
     };
@@ -400,6 +408,18 @@ export default function ({
                 { type: 'CssClass' },
             );
         });
+    }
+
+    // default color
+    if (finalParams.scope.includes('lnf')) {
+        vars.code(
+            () => `
+            .s-avatar:not(.s-color) {
+                @sugar.color(${finalParams.defaultColor});
+            }
+        `,
+            { type: 'CssClass' },
+        );
     }
 
     vars.comment(

@@ -16,6 +16,7 @@ class postcssUiRatingClassesInterface extends __SInterface {
             },
             defaultColor: {
                 type: 'String',
+                values: Object.keys(__STheme.get('color')),
                 default: __STheme.get('ui.rating.defaultColor'),
             },
             scope: {
@@ -99,6 +100,18 @@ export default function ({
             {
                 type: 'CssClass',
             },
+        );
+    }
+
+    // default color
+    if (finalParams.scope.includes('lnf')) {
+        vars.code(
+            () => `
+            .s-rating:not(.s-color) {
+                @sugar.color(${finalParams.defaultColor});
+            }
+        `,
+            { type: 'CssClass' },
         );
     }
 

@@ -105,9 +105,9 @@ export default function ({
         }</cyan>". <magenta>Please wait</magenta>...`,
     );
     vars.code(`
-        /* SCACHE:${cacheId} */
+        /*! SCACHE:${cacheId} */
         ${nodesToString(atRule.nodes)}
-        /* SENDCACHE:${cacheId} */
+        /*! SENDCACHE:${cacheId} */
     `);
 
     return vars;

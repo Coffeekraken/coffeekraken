@@ -128,6 +128,17 @@ export default class SPostcssBuilder extends __SBuilder {
                 //     this.settings.postcss.plugins.push('cssnano');
                 // }
 
+                // postcss-sugar-export-plugin
+                // if (
+                //     !this.settings.postcss.plugins.includes(
+                //         '@coffeekraken/s-postcss-sugar-export-plugin',
+                //     )
+                // ) {
+                //     this.settings.postcss.plugins.push(
+                //         '@coffeekraken/s-postcss-sugar-export-pluging',
+                //     );
+                // }
+
                 // handle input
                 let src = params.input,
                     from: any = undefined;
@@ -477,7 +488,7 @@ export default class SPostcssBuilder extends __SBuilder {
 
                     finalCss = __csso.default.minify(finalCss, {
                         restructure: false,
-                        comments: false,
+                        comments: true, // leave all exlamation comments /*! ... */
                     }).css;
 
                     emit('log', {

@@ -16,6 +16,7 @@ import __faker from 'faker';
  * @param       {('default'|'square'|'pill')[]}             [shape=['default','square','pill']]         The shape(s) you want to generate
  * @param       {'solid'}                [defaultStyle='theme.ui.select.defaultStyle']           The default style you want
  * @param       {'default'|'square'|'pill'}        [defaultShape='theme.ui.select.defaultShape']           The default shape you want
+ * @param       {String}                            [defaultColor=theme.ui.select.defaultColor]            The default color you want
  * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
@@ -48,6 +49,11 @@ class postcssSugarPluginUiFormSelectClassesInterface extends __SInterface {
                 values: ['default', 'square', 'pill'],
                 default: __STheme.get('ui.select.defaultShape'),
             },
+            defaultColor: {
+                type: 'String',
+                values: Object.keys(__STheme.get('color')),
+                default: __STheme.get('ui.select.defaultColor'),
+            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -65,6 +71,7 @@ export interface IPostcssSugarPluginUiFormSelectClassesParams {
     shapes: ('default' | 'square' | 'pill')[];
     defaultStyle: 'solid';
     defaultShape: 'default' | 'square' | 'pill';
+    defaultColor: string;
     scope: ('bare' | 'lnf' | 'shape' | 'tf' | 'vr')[];
 }
 
@@ -93,6 +100,7 @@ export default function ({
         shapes: [],
         defaultStyle: 'solid',
         defaultShape: 'default',
+        defaultColor: 'main',
         scope: [],
         ...params,
     };
@@ -410,6 +418,18 @@ export default function ({
                 select {
                     @sugar.ui.select($scope: '${finalParams.scope.join(',')}');
                 } 
+            }
+        `,
+            { type: 'CssClass' },
+        );
+    }
+
+    // default color
+    if (finalParams.scope.includes('lnf')) {
+        vars.code(
+            () => `
+            .s-select:not(.s-color) {
+                @sugar.color(${finalParams.defaultColor});
             }
         `,
             { type: 'CssClass' },

@@ -37,6 +37,7 @@ export interface ISInterfaceCtor {
     new (settings?: Partial<ISInterfaceSettings>): ISInterface;
     definition: ISInterfaceDefinitionMap;
     defaults(): any;
+    isDefault(prop: string, value: any): boolean;
 }
 export interface ISInterface {
     _definition: ISInterfaceDefinitionMap;
@@ -79,7 +80,7 @@ else window._registeredInterfacesTypes = {};
  */
 
 // @ts-ignore
-export default class SInterface extends __SClass {
+export default class SInterface extends __SClass implements ISInterfaceCtor {
     /**
      * @name              definition
      * @type              ISDescriptorRules
@@ -188,6 +189,31 @@ export default class SInterface extends __SClass {
             static definition = __deepMerge(_this.definition, definition);
         }
         return SInterfaceOverrided;
+    }
+
+    /**
+     * @name            isDefault
+     * @type            Function
+     * @static
+     *
+     * This static method allows you to check if a certain value is the default of a certain property or not.
+     *
+     * @param           {String}            prop        The property to check if it's the default of or not
+     * @param           {Any}               value       The value to check with
+     * @return          {Boolean}                       true if is the default value, false if not
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static isDefault(prop: string, value: any): boolean {
+        const defaults = this.defaults();
+        if (defaults[prop] === undefined) {
+            return false;
+        }
+        if (defaults[prop] === value) {
+            return true;
+        }
+        return false;
     }
 
     /**

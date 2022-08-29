@@ -8,7 +8,7 @@ export default async function ({ root, sharedData, settings, cacheDir }) {
 
     const cacheMatches = [
         ...css.matchAll(
-            /\/\*\sSCACHE:([a-zA-Z0-9_=-]+)\s\*\/([\s\S]*)\/\*\sSENDCACHE:[a-zA-Z0-9_=-]+\s\*\//g,
+            /\/\*\!\sSCACHE:([a-zA-Z0-9_=-]+)\s\*\/([\s\S]*)\/\*\!\sSENDCACHE:[a-zA-Z0-9_=-]+\s\*\//g,
         ),
     ];
 

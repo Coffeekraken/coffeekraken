@@ -17,6 +17,7 @@ import __faker from 'faker';
  * @param       {('default'|'square'|'pill')[]}             [shape=['default','square','pill']]         The shape(s) you want to generate
  * @param       {'solid'}                [defaultStyle='theme.ui.input.defaultStyle']           The default style you want
  * @param       {'default'|'square'|'pill'}        [defaultShape='theme.ui.input.defaultShape']           The default shape you want
+ * @param       {String}                            [defaultColor=theme.ui.input.defaultColor]            The default color you want
  * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
@@ -47,6 +48,11 @@ class postcssSugarPluginUiFormClassesInterface extends __SInterface {
                 type: 'String',
                 default: __STheme.get('ui.input.defaultShape'),
             },
+            defaultColor: {
+                type: 'String',
+                values: Object.keys(__STheme.get('color')),
+                default: __STheme.get('ui.input.defaultColor'),
+            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -64,6 +70,7 @@ export interface IPostcssSugarPluginUiFormClassesParams {
     shapes: ('default' | 'square' | 'pill')[];
     defaultStyle: 'solid';
     defaultShape: 'default' | 'square' | 'pill';
+    defaultColor: string;
     scope: ('bare' | 'lnf' | 'shape' | 'vr' | 'tf')[];
 }
 
@@ -92,6 +99,7 @@ export default function ({
         shapes: [],
         defaultStyle: 'solid',
         defaultShape: 'default',
+        defaultColor: 'main',
         scope: [],
         ...params,
     };
@@ -284,6 +292,18 @@ export default function ({
                 },
             );
         });
+    }
+
+    // default color
+    if (finalParams.scope.includes('lnf')) {
+        vars.code(
+            () => `
+            .s-input:not(.s-color) {
+                @sugar.color(${finalParams.defaultColor});
+            }
+        `,
+            { type: 'CssClass' },
+        );
     }
 
     return vars;

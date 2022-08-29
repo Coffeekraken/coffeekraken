@@ -1,4 +1,4 @@
-<section id="homepage-welcome" s-appear in="bottom">
+<section id="homepage-welcome" css="welcome" s-appear in="bottom">
 
     <s-slider lnf="welcome-header" loop>
 

@@ -1,4 +1,4 @@
-<div id="homepage-features">
+<div id="homepage-features" css="features">
     <div class="__contents">
         @include('pages.homepage.features.partials.openSource')
         @include('pages.homepage.features.partials.ui')

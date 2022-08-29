@@ -13,9 +13,9 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @param       {('solid')[]}                           [styles=['solid']]         The style(s) you want to generate
  * @param       {('default'|'square'|'pill')[]}             [shape=['default','square','pill']]         The shape(s) you want to generate
- * @param       {'solid'|'outline'}                [defaultStyle='theme.ui.bolckquote.defaultStyle']           The default style you want
- * @param       {'default'|'square'|'pill'}        [defaultShape='theme.ui.bolckquote.defaultShape']           The default shape you want
- * @param       {String}                       [defaultColor='theme.ui.bolckquote.defaultColor']           The default color you want
+ * @param       {'solid'|'outline'}                [defaultStyle='theme.ui.backdrop.defaultStyle']           The default style you want
+ * @param       {'default'|'square'|'pill'}        [defaultShape='theme.ui.backdrop.defaultShape']           The default shape you want
+ * @param       {String}                            [defaultColor=theme.ui.backdrop.defaultColor]            The default color you want
  * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
@@ -26,7 +26,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-class postcssSugarPluginUiBackdropClassesInterface extends __SInterface {
+class PostcssSugarPluginUiBackdropClassesInterface extends __SInterface {
     static get _definition() {
         return {
             styles: {
@@ -38,6 +38,11 @@ class postcssSugarPluginUiBackdropClassesInterface extends __SInterface {
                 type: 'String',
                 values: ['solid'],
                 default: __STheme.get('ui.backdrop.defaultStyle'),
+            },
+            defaultColor: {
+                type: 'String',
+                values: Object.keys(__STheme.get('color')),
+                default: __STheme.get('ui.backdrop.defaultColor'),
             },
             scope: {
                 type: {
@@ -54,10 +59,11 @@ class postcssSugarPluginUiBackdropClassesInterface extends __SInterface {
 export interface IPostcssSugarPluginUiBackdropClassesParams {
     styles: ('solid' | 'blured')[];
     defaultStyle: 'solid';
+    defaultColor: string;
     scope: ('bare' | 'lnf')[];
 }
 
-export { postcssSugarPluginUiBackdropClassesInterface as interface };
+export { PostcssSugarPluginUiBackdropClassesInterface as interface };
 
 export default function ({
     params,
@@ -73,6 +79,7 @@ export default function ({
     const finalParams: IPostcssSugarPluginUiBackdropClassesParams = {
         styles: [],
         defaultStyle: 'solid',
+        defaultColor: 'main',
         scope: [],
         ...params,
     };
@@ -176,6 +183,18 @@ export default function ({
                 { type: 'CssClass' },
             );
         });
+    }
+
+    // default color
+    if (finalParams.scope.includes('lnf')) {
+        vars.code(
+            () => `
+            .s-backdrop:not(.s-color) {
+                @sugar.color(${finalParams.defaultColor});
+            }
+        `,
+            { type: 'CssClass' },
+        );
     }
 
     return vars;

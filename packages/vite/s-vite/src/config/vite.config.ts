@@ -257,6 +257,15 @@ export default function (api) {
                 return `http://${api.config.vite.server.host}:${api.config.vite.server.port}`;
             },
             proxy: {
+                // all exported css in the /css/exports folder
+                // @TODO            find a better way...
+                '^\\/dist\\/css\\/exports\\/.*\\.css$': {
+                    target: `http://${api.config.frontendServer.hostname}:${api.config.frontendServer.port}`,
+                    changeOrigin: true,
+                    rewrite: (path) => {
+                        return path;
+                    },
+                },
                 // all files that match /dist/...css|ts|tsx|etc...
                 // have to target the "src" directory
                 '^\\/dist\\/.*(\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs)$':

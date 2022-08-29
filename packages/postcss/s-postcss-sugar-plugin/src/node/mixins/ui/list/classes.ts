@@ -14,6 +14,7 @@ import __faker from 'faker';
  *
  * @param       {('dl'|'ul'|'ol'|'icon')[]}                           [styles=['dl','ul','ol','icon']]         The style(s) you want to generate
  * @param       {'dl'|'ul'|'ol'|'icon'}                [defaultStyle='theme.ui.list.defaultStyle']           The default style you want
+ * @param       {String}                            [defaultColor=theme.ui.list.defaultColor]            The default color you want
  * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
@@ -37,6 +38,11 @@ class postcssSugarPluginUiListClassesInterface extends __SInterface {
                 values: ['dl', 'ul', 'ol', 'icon'],
                 default: __STheme.get('ui.list.defaultStyle') ?? 'dl',
             },
+            defaultColor: {
+                type: 'String',
+                values: Object.keys(__STheme.get('color')),
+                default: __STheme.get('ui.list.defaultColor'),
+            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -52,6 +58,7 @@ class postcssSugarPluginUiListClassesInterface extends __SInterface {
 export interface IPostcssSugarPluginUiListClassesParams {
     styles: ('dl' | 'ul' | 'ol' | 'icon')[];
     defaultStyle: 'dl' | 'ul' | 'ol' | 'icon';
+    defaultColor: string;
     scope: ('bare' | 'lnf' | 'tf' | 'vr')[];
 }
 
@@ -71,6 +78,7 @@ export default function ({
     const finalParams: IPostcssSugarPluginUiListClassesParams = {
         styles: [],
         defaultStyle: 'dl',
+        defaultColor: 'main',
         scope: [],
         ...params,
     };
@@ -234,6 +242,18 @@ export default function ({
                 },
             );
         });
+    }
+
+    // default color
+    if (finalParams.scope.includes('lnf')) {
+        vars.code(
+            () => `
+            .s-list:not(.s-color) {
+                @sugar.color(${finalParams.defaultColor});
+            }
+        `,
+            { type: 'CssClass' },
+        );
     }
 
     // ul

@@ -14,9 +14,9 @@ import __faker from 'faker';
  *
  * @param       {('solid')[]}                           [styles=['solid']]         The style(s) you want to generate
  * @param       {('default'|'square'|'pill')[]}             [shape=['default','square','pill']]         The shape(s) you want to generate
- * @param       {'solid'|'outline'}                [defaultStyle='theme.ui.bolckquote.defaultStyle']           The default style you want
- * @param       {'default'|'square'|'pill'}        [defaultShape='theme.ui.bolckquote.defaultShape']           The default shape you want
- * @param       {String}                       [defaultColor='theme.ui.bolckquote.defaultColor']           The default color you want
+ * @param       {'solid'|'outline'}                [defaultStyle='theme.ui.blockquote.defaultStyle']           The default style you want
+ * @param       {'default'|'square'|'pill'}        [defaultShape='theme.ui.blockquote.defaultShape']           The default shape you want
+ * @param       {String}                            [defaultColor=theme.ui.blockquote.defaultColor]            The default color you want
  * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
@@ -101,6 +101,7 @@ export default function ({
         shapes: [],
         defaultStyle: 'solid',
         defaultShape: 'default',
+        defaultColor: 'main',
         scope: [],
         ...params,
     };

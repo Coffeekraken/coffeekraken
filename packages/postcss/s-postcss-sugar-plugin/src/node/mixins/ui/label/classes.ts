@@ -14,6 +14,7 @@ import __faker from 'faker';
  *
  * @param       {('inline'|'block'|'float')[]}                           [styles=['inline','block','float']]         The style(s) you want to generate
  * @param       {'inline'|'block'|'float'}                [defaultStyle='theme.ui.label.defaultStyle']           The default style you want
+ * @param       {String}                            [defaultColor=theme.ui.label.defaultColor]            The default color you want
  * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
@@ -37,6 +38,11 @@ class postcssSugarPluginUiLabelClassesInterface extends __SInterface {
                 values: ['inline', 'block', 'float'],
                 default: __STheme.get('ui.label.defaultStyle'),
             },
+            defaultColor: {
+                type: 'String',
+                values: Object.keys(__STheme.get('color')),
+                default: __STheme.get('ui.label.defaultColor'),
+            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -53,6 +59,7 @@ export interface IPostcssSugarPluginUiLabelClassesParams {
     styles: ('inline' | 'float')[];
     // shapes: ('default' | 'square' | 'pill')[];
     defaultStyle: 'inline' | 'float';
+    defaultColor: string;
     scope: ('bare' | 'lnf' | 'shape' | 'vr' | 'tf')[];
 }
 
@@ -80,6 +87,7 @@ export default function ({
         styles: [],
         // shapes: [],
         defaultStyle: 'inline',
+        defaultColor: 'main',
         scope: [],
         ...params,
     };
@@ -213,6 +221,18 @@ export default function ({
             );
         }
     });
+
+    // default color
+    if (finalParams.scope.includes('lnf')) {
+        vars.code(
+            () => `
+            .s-label:not(.s-color) {
+                @sugar.color(${finalParams.defaultColor});
+            }
+        `,
+            { type: 'CssClass' },
+        );
+    }
 
     vars.comment(
         () => `/**

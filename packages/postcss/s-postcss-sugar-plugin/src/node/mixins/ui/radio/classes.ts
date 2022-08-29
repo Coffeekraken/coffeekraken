@@ -16,6 +16,7 @@ import __faker from 'faker';
  * @param       {('default'|'square'|'circle')[]}             [shape=['default','square','circle']]         The shape(s) you want to generate
  * @param       {'solid'}                [defaultStyle='theme.ui.radio.defaultStyle']           The default style you want
  * @param       {'default'|'square'|'circle'}        [defaultShape='theme.ui.radio.defaultShape']           The default shape you want
+ * @param       {String}                            [defaultColor=theme.ui.radio.defaultColor]            The default color you want
  * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
@@ -49,6 +50,11 @@ class postcssSugarPluginUiRadioClassesInterface extends __SInterface {
                 values: ['default', 'square', 'circle'],
                 default: __STheme.get('ui.radio.defaultShape'),
             },
+            defaultColor: {
+                type: 'String',
+                values: Object.keys(__STheme.get('color')),
+                default: __STheme.get('ui.radio.defaultColor'),
+            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -66,6 +72,7 @@ export interface IPostcssSugarPluginUiRangeClassesParams {
     shapes: ('default' | 'square' | 'circle')[];
     defaultStyle: 'solid';
     defaultShape: 'default' | 'square' | 'circle';
+    defaultColor: string;
     scope: ('bare' | 'lnf' | 'shape' | 'vr' | 'tf')[];
 }
 
@@ -94,6 +101,7 @@ export default function ({
         shapes: [],
         defaultStyle: 'solid',
         defaultShape: 'default',
+        defaultColor: 'main',
         scope: [],
         ...params,
     };
@@ -366,6 +374,18 @@ export default function ({
             {
                 type: 'CssClass',
             },
+        );
+    }
+
+    // default color
+    if (finalParams.scope.includes('lnf')) {
+        vars.code(
+            () => `
+            .s-radio:not(.s-color) {
+                @sugar.color(${finalParams.defaultColor});
+            }
+        `,
+            { type: 'CssClass' },
         );
     }
 

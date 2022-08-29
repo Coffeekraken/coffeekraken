@@ -1,6 +1,23 @@
+import __path from 'path';
+
 export default function (api) {
     if (api.env.platform !== 'node') return;
     return {
+        /**
+         * @name            outDir
+         * @namespace       config.postcssSugarPlugin
+         * @type            String
+         * @default        __path.dirname(config.postcssBuilder.output)
+         *
+         * Specify a directory in which to save relatively exported css, etc...
+         *
+         * @since           2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        get outDir() {
+            return __path.dirname(api.config.postcssBuilder.output);
+        },
+
         /**
          * @name            cache
          * @namespace       config.postcssSugarPlugin

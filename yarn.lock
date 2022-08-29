@@ -1343,94 +1343,94 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@coffeekraken/cli@^2.0.0-alpha.18, @coffeekraken/cli@workspace:packages/core/cli":
+"@coffeekraken/cli@^2.0.0-alpha.20, @coffeekraken/cli@workspace:packages/core/cli":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/cli@workspace:packages/core/cli"
   dependencies:
-    "@coffeekraken/s-activate-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-appear-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-bench": ^2.0.0-alpha.18
-    "@coffeekraken/s-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-clipboard-copy-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-code-example-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-code-formatter": ^2.0.0-alpha.18
-    "@coffeekraken/s-code-formatter-prettier": ^2.0.0-alpha.18
-    "@coffeekraken/s-color": ^2.0.0-alpha.18
-    "@coffeekraken/s-color-picker-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-component-utils": ^2.0.0-alpha.18
-    "@coffeekraken/s-conductor": ^2.0.0-alpha.18
-    "@coffeekraken/s-config": ^2.0.0-alpha.18
-    "@coffeekraken/s-config-adapter": ^2.0.0-alpha.18
-    "@coffeekraken/s-config-folder-adapter": ^2.0.0-alpha.18
-    "@coffeekraken/s-config-inline-adapter": ^2.0.0-alpha.18
-    "@coffeekraken/s-dashboard": ^2.0.0-alpha.18
-    "@coffeekraken/s-data-file-generic": ^2.0.0-alpha.18
-    "@coffeekraken/s-data-file-js": ^2.0.0-alpha.18
-    "@coffeekraken/s-data-file-php": ^2.0.0-alpha.18
-    "@coffeekraken/s-datetime-picker-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-descriptor": ^2.0.0-alpha.18
-    "@coffeekraken/s-docblock": ^2.0.0-alpha.18
-    "@coffeekraken/s-docmap": ^2.0.0-alpha.18
-    "@coffeekraken/s-duration": ^2.0.0-alpha.18
-    "@coffeekraken/s-env": ^2.0.0-alpha.18
-    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.18
-    "@coffeekraken/s-favicon-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-file": ^2.0.0-alpha.18
-    "@coffeekraken/s-filtrable-input-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-floating-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-form-validate-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-frontend-checker": ^2.0.0-alpha.18
-    "@coffeekraken/s-frontend-server": ^2.0.0-alpha.18
-    "@coffeekraken/s-frontspec": ^2.0.0-alpha.18
-    "@coffeekraken/s-glob": ^2.0.0-alpha.18
-    "@coffeekraken/s-handlebars": ^2.0.0-alpha.18
-    "@coffeekraken/s-images-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-inline-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-kitchen": ^2.0.0-alpha.18
-    "@coffeekraken/s-lit-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-log": ^2.0.0-alpha.18
-    "@coffeekraken/s-markdown-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-monorepo": ^2.0.0-alpha.18
-    "@coffeekraken/s-package": ^2.0.0-alpha.18
-    "@coffeekraken/s-page-transition-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-panel-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-parallax-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-postcss-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-postcss-sugar-plugin": ^2.0.0-alpha.18
-    "@coffeekraken/s-process": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-range-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-rating-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-refocus-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-request": ^2.0.0-alpha.18
-    "@coffeekraken/s-scroll-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-sitemap-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-slider-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-state": ^2.0.0-alpha.18
-    "@coffeekraken/s-static-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-stdio": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-element": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-json": ^2.0.0-alpha.18
-    "@coffeekraken/s-theme": ^2.0.0-alpha.18
-    "@coffeekraken/s-theme-switcher-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-timer": ^2.0.0-alpha.18
-    "@coffeekraken/s-type": ^2.0.0-alpha.18
-    "@coffeekraken/s-typescript-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-url": ^2.0.0-alpha.18
-    "@coffeekraken/s-validator": ^2.0.0-alpha.18
-    "@coffeekraken/s-view-renderer": ^2.0.0-alpha.18
-    "@coffeekraken/s-view-renderer-engine-blade": ^2.0.0-alpha.18
-    "@coffeekraken/s-view-renderer-engine-lit": ^2.0.0-alpha.18
-    "@coffeekraken/s-view-renderer-engine-twig": ^2.0.0-alpha.18
-    "@coffeekraken/s-vite": ^2.0.0-alpha.18
-    "@coffeekraken/s-vite-postcss-plugin": ^2.0.0-alpha.18
-    "@coffeekraken/s-vite-sugar-plugin": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-activate-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-appear-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-bench": ^2.0.0-alpha.20
+    "@coffeekraken/s-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-clipboard-copy-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-code-example-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-code-formatter": ^2.0.0-alpha.20
+    "@coffeekraken/s-code-formatter-prettier": ^2.0.0-alpha.20
+    "@coffeekraken/s-color": ^2.0.0-alpha.20
+    "@coffeekraken/s-color-picker-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-component-utils": ^2.0.0-alpha.20
+    "@coffeekraken/s-conductor": ^2.0.0-alpha.20
+    "@coffeekraken/s-config": ^2.0.0-alpha.20
+    "@coffeekraken/s-config-adapter": ^2.0.0-alpha.20
+    "@coffeekraken/s-config-folder-adapter": ^2.0.0-alpha.20
+    "@coffeekraken/s-config-inline-adapter": ^2.0.0-alpha.20
+    "@coffeekraken/s-dashboard": ^2.0.0-alpha.20
+    "@coffeekraken/s-data-file-generic": ^2.0.0-alpha.20
+    "@coffeekraken/s-data-file-js": ^2.0.0-alpha.20
+    "@coffeekraken/s-data-file-php": ^2.0.0-alpha.20
+    "@coffeekraken/s-datetime-picker-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-descriptor": ^2.0.0-alpha.20
+    "@coffeekraken/s-docblock": ^2.0.0-alpha.20
+    "@coffeekraken/s-docmap": ^2.0.0-alpha.20
+    "@coffeekraken/s-duration": ^2.0.0-alpha.20
+    "@coffeekraken/s-env": ^2.0.0-alpha.20
+    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.20
+    "@coffeekraken/s-favicon-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-file": ^2.0.0-alpha.20
+    "@coffeekraken/s-filtrable-input-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-floating-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-form-validate-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-frontend-checker": ^2.0.0-alpha.20
+    "@coffeekraken/s-frontend-server": ^2.0.0-alpha.20
+    "@coffeekraken/s-frontspec": ^2.0.0-alpha.20
+    "@coffeekraken/s-glob": ^2.0.0-alpha.20
+    "@coffeekraken/s-handlebars": ^2.0.0-alpha.20
+    "@coffeekraken/s-images-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-inline-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-kitchen": ^2.0.0-alpha.20
+    "@coffeekraken/s-lit-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/s-markdown-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-monorepo": ^2.0.0-alpha.20
+    "@coffeekraken/s-package": ^2.0.0-alpha.20
+    "@coffeekraken/s-page-transition-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-panel-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-parallax-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-postcss-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-postcss-sugar-plugin": ^2.0.0-alpha.20
+    "@coffeekraken/s-process": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-range-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-rating-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-refocus-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-request": ^2.0.0-alpha.20
+    "@coffeekraken/s-scroll-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-sitemap-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-slider-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-state": ^2.0.0-alpha.20
+    "@coffeekraken/s-static-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-stdio": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-element": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-json": ^2.0.0-alpha.20
+    "@coffeekraken/s-theme": ^2.0.0-alpha.20
+    "@coffeekraken/s-theme-switcher-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-timer": ^2.0.0-alpha.20
+    "@coffeekraken/s-type": ^2.0.0-alpha.20
+    "@coffeekraken/s-typescript-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-url": ^2.0.0-alpha.20
+    "@coffeekraken/s-validator": ^2.0.0-alpha.20
+    "@coffeekraken/s-view-renderer": ^2.0.0-alpha.20
+    "@coffeekraken/s-view-renderer-engine-blade": ^2.0.0-alpha.20
+    "@coffeekraken/s-view-renderer-engine-lit": ^2.0.0-alpha.20
+    "@coffeekraken/s-view-renderer-engine-twig": ^2.0.0-alpha.20
+    "@coffeekraken/s-vite": ^2.0.0-alpha.20
+    "@coffeekraken/s-vite-postcss-plugin": ^2.0.0-alpha.20
+    "@coffeekraken/s-vite-sugar-plugin": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     dotenv: ^16.0.1
     fs-extra: ^10.1.0
   bin:
@@ -1443,74 +1443,74 @@ __metadata:
   resolution: "@coffeekraken/coffeekraken-io@workspace:packages/@websites/coffeekraken-io"
   dependencies:
     "@builder.io/html-to-figma": ^0.0.3
-    "@coffeekraken/cli": ^2.0.0-alpha.18
-    "@coffeekraken/s-activate-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-appear-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-bench": ^2.0.0-alpha.18
-    "@coffeekraken/s-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-clipboard-copy-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-code-example-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-color": ^2.0.0-alpha.18
-    "@coffeekraken/s-color-picker-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-component-utils": ^2.0.0-alpha.18
-    "@coffeekraken/s-conductor": ^2.0.0-alpha.18
-    "@coffeekraken/s-config": ^2.0.0-alpha.18
-    "@coffeekraken/s-dashboard": ^2.0.0-alpha.18
-    "@coffeekraken/s-datetime-picker-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-descriptor": ^2.0.0-alpha.18
-    "@coffeekraken/s-docblock": ^2.0.0-alpha.18
-    "@coffeekraken/s-docmap": ^2.0.0-alpha.18
-    "@coffeekraken/s-duration": ^2.0.0-alpha.18
-    "@coffeekraken/s-env": ^2.0.0-alpha.18
-    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.18
-    "@coffeekraken/s-favicon-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-file": ^2.0.0-alpha.18
-    "@coffeekraken/s-filtrable-input-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-floating-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-form-validate-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-frontend-server": ^2.0.0-alpha.18
-    "@coffeekraken/s-frontspec": ^2.0.0-alpha.18
-    "@coffeekraken/s-glob": ^2.0.0-alpha.18
-    "@coffeekraken/s-handlebars": ^2.0.0-alpha.18
-    "@coffeekraken/s-images-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-inline-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-kitchen": ^2.0.0-alpha.18
-    "@coffeekraken/s-lit-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-log": ^2.0.0-alpha.18
-    "@coffeekraken/s-markdown-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-page-transition-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-panel-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-parallax-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-postcss-sugar-plugin": ^2.0.0-alpha.18
-    "@coffeekraken/s-process": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-range-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-rating-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-refocus-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-request": ^2.0.0-alpha.18
-    "@coffeekraken/s-scroll-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-sitemap-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-slider-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-state": ^2.0.0-alpha.18
-    "@coffeekraken/s-static-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-stdio": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-json": ^2.0.0-alpha.18
-    "@coffeekraken/s-theme": ^2.0.0-alpha.18
-    "@coffeekraken/s-theme-switcher-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-timer": ^2.0.0-alpha.18
-    "@coffeekraken/s-type": ^2.0.0-alpha.18
-    "@coffeekraken/s-typescript-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-url": ^2.0.0-alpha.18
-    "@coffeekraken/s-view-renderer": ^2.0.0-alpha.18
-    "@coffeekraken/s-vite": ^2.0.0-alpha.18
-    "@coffeekraken/s-vite-postcss-plugin": ^2.0.0-alpha.18
-    "@coffeekraken/s-vite-sugar-plugin": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/cli": ^2.0.0-alpha.20
+    "@coffeekraken/s-activate-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-appear-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-bench": ^2.0.0-alpha.20
+    "@coffeekraken/s-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-clipboard-copy-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-code-example-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-color": ^2.0.0-alpha.20
+    "@coffeekraken/s-color-picker-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-component-utils": ^2.0.0-alpha.20
+    "@coffeekraken/s-conductor": ^2.0.0-alpha.20
+    "@coffeekraken/s-config": ^2.0.0-alpha.20
+    "@coffeekraken/s-dashboard": ^2.0.0-alpha.20
+    "@coffeekraken/s-datetime-picker-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-descriptor": ^2.0.0-alpha.20
+    "@coffeekraken/s-docblock": ^2.0.0-alpha.20
+    "@coffeekraken/s-docmap": ^2.0.0-alpha.20
+    "@coffeekraken/s-duration": ^2.0.0-alpha.20
+    "@coffeekraken/s-env": ^2.0.0-alpha.20
+    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.20
+    "@coffeekraken/s-favicon-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-file": ^2.0.0-alpha.20
+    "@coffeekraken/s-filtrable-input-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-floating-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-form-validate-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-frontend-server": ^2.0.0-alpha.20
+    "@coffeekraken/s-frontspec": ^2.0.0-alpha.20
+    "@coffeekraken/s-glob": ^2.0.0-alpha.20
+    "@coffeekraken/s-handlebars": ^2.0.0-alpha.20
+    "@coffeekraken/s-images-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-inline-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-kitchen": ^2.0.0-alpha.20
+    "@coffeekraken/s-lit-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/s-markdown-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-page-transition-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-panel-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-parallax-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-postcss-sugar-plugin": ^2.0.0-alpha.20
+    "@coffeekraken/s-process": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-range-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-rating-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-refocus-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-request": ^2.0.0-alpha.20
+    "@coffeekraken/s-scroll-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-sitemap-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-slider-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-state": ^2.0.0-alpha.20
+    "@coffeekraken/s-static-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-stdio": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-json": ^2.0.0-alpha.20
+    "@coffeekraken/s-theme": ^2.0.0-alpha.20
+    "@coffeekraken/s-theme-switcher-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-timer": ^2.0.0-alpha.20
+    "@coffeekraken/s-type": ^2.0.0-alpha.20
+    "@coffeekraken/s-typescript-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-url": ^2.0.0-alpha.20
+    "@coffeekraken/s-view-renderer": ^2.0.0-alpha.20
+    "@coffeekraken/s-vite": ^2.0.0-alpha.20
+    "@coffeekraken/s-vite-postcss-plugin": ^2.0.0-alpha.20
+    "@coffeekraken/s-vite-sugar-plugin": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     esbuild: ^0.14.53
     firebase: ^9.9.1
     lit: ^2.2.8
@@ -1528,25 +1528,25 @@ __metadata:
     "@babel/plugin-syntax-dynamic-import": ^7.8.3
     "@babel/preset-env": ^7.18.10
     "@babel/preset-typescript": ^7.18.6
-    "@coffeekraken/s-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-code-formatter": ^2.0.0-alpha.18
-    "@coffeekraken/s-code-formatter-prettier": ^2.0.0-alpha.18
-    "@coffeekraken/s-descriptor": ^2.0.0-alpha.18
-    "@coffeekraken/s-duration": ^2.0.0-alpha.18
-    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.18
-    "@coffeekraken/s-file": ^2.0.0-alpha.18
-    "@coffeekraken/s-glob": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-log": ^2.0.0-alpha.18
-    "@coffeekraken/s-monorepo": ^2.0.0-alpha.18
-    "@coffeekraken/s-package": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/s-type": ^2.0.0-alpha.18
-    "@coffeekraken/s-typescript-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-vite": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-code-formatter": ^2.0.0-alpha.20
+    "@coffeekraken/s-code-formatter-prettier": ^2.0.0-alpha.20
+    "@coffeekraken/s-descriptor": ^2.0.0-alpha.20
+    "@coffeekraken/s-duration": ^2.0.0-alpha.20
+    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.20
+    "@coffeekraken/s-file": ^2.0.0-alpha.20
+    "@coffeekraken/s-glob": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/s-monorepo": ^2.0.0-alpha.20
+    "@coffeekraken/s-package": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/s-type": ^2.0.0-alpha.20
+    "@coffeekraken/s-typescript-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-vite": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     "@types/jest": ^26.0.24
     "@types/node": ^14.18.23
     "@typescript-eslint/eslint-plugin": ^4.33.0
@@ -1569,1013 +1569,83 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/internal-036f5f75-2a61-45b3-a791-0b507045e3d0@workspace:packages/dom/s-css-animate/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-036f5f75-2a61-45b3-a791-0b507045e3d0@workspace:packages/dom/s-css-animate/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-03a9c10e-f3d0-45ab-9335-4ea9b5933f1b@workspace:packages/tools/s-color/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-03a9c10e-f3d0-45ab-9335-4ea9b5933f1b@workspace:packages/tools/s-color/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-077a5ab5-6175-4fa2-9f27-74f1c974265f@workspace:packages/tools/s-glob/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-077a5ab5-6175-4fa2-9f27-74f1c974265f@workspace:packages/tools/s-glob/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-07e83bd6-39d6-4200-90c5-490832d201ca@workspace:packages/components/s-lit-component/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-07e83bd6-39d6-4200-90c5-490832d201ca@workspace:packages/components/s-lit-component/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-097b1ddb-1cbe-420d-99b2-de9dc97059f6@workspace:packages/features/s-page-transition-feature/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-097b1ddb-1cbe-420d-99b2-de9dc97059f6@workspace:packages/features/s-page-transition-feature/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-09fdb736-ad2c-496b-bec7-7a3ffc5cf517@workspace:packages/core/s-package/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-09fdb736-ad2c-496b-bec7-7a3ffc5cf517@workspace:packages/core/s-package/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-0a901c92-84e3-4272-b6da-6ea85ef5336e@workspace:packages/core/s-type/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-0a901c92-84e3-4272-b6da-6ea85ef5336e@workspace:packages/core/s-type/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-0b3d9f93-c3dd-4030-af57-27d5d3c19291@workspace:packages/components/s-panel-component/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-0b3d9f93-c3dd-4030-af57-27d5d3c19291@workspace:packages/components/s-panel-component/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-0f0c86f2-4e55-4932-90b9-bd8953088d29@workspace:packages/vite/s-vite-postcss-plugin/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-0f0c86f2-4e55-4932-90b9-bd8953088d29@workspace:packages/vite/s-vite-postcss-plugin/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-11067a51-8d8e-4710-8232-91449fdb5976@workspace:packages/components/s-date-picker-component/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-11067a51-8d8e-4710-8232-91449fdb5976@workspace:packages/components/s-date-picker-component/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-12869489-1e36-4a1c-9632-4ff2897f9904@workspace:packages/config/s-config/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-12869489-1e36-4a1c-9632-4ff2897f9904@workspace:packages/config/s-config/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-185be753-91a7-4bf7-9945-a8496860456a@workspace:packages/tools/s-url/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-185be753-91a7-4bf7-9945-a8496860456a@workspace:packages/tools/s-url/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-188133e5-eb32-462b-8b55-f80e7e0c866d@workspace:packages/core/s-sugar-json/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-188133e5-eb32-462b-8b55-f80e7e0c866d@workspace:packages/core/s-sugar-json/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-1883cf44-1a37-4190-b66b-18b7a6f3b1ba@workspace:packages/components/s-scroll-component/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-1883cf44-1a37-4190-b66b-18b7a6f3b1ba@workspace:packages/components/s-scroll-component/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-1c21db40-6f35-4df9-8543-a18ea92e8037@workspace:packages/tools/s-timer/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-1c21db40-6f35-4df9-8543-a18ea92e8037@workspace:packages/tools/s-timer/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-1c856f3c-2c2b-44c2-855c-be8780bb7fdd@workspace:packages/config/s-config/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-1c856f3c-2c2b-44c2-855c-be8780bb7fdd@workspace:packages/config/s-config/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-1d4941bb-5571-4879-84c6-bb3fcef1d9f9@workspace:packages/components/s-rating-component/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-1d4941bb-5571-4879-84c6-bb3fcef1d9f9@workspace:packages/components/s-rating-component/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-1fe91759-09bf-4ec0-b15d-98b248136d1f@workspace:packages/renderers/s-view-renderer-engine-lit/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-1fe91759-09bf-4ec0-b15d-98b248136d1f@workspace:packages/renderers/s-view-renderer-engine-lit/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-20907752-d826-4939-ace3-00860c7f20b1@workspace:packages/components/s-clipboard-copy-component/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-20907752-d826-4939-ace3-00860c7f20b1@workspace:packages/components/s-clipboard-copy-component/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-22bc708c-482a-4d61-bc44-e06bf44ea5ac@workspace:packages/builders/s-images-builder/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-22bc708c-482a-4d61-bc44-e06bf44ea5ac@workspace:packages/builders/s-images-builder/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-23e78ec0-29cb-4cba-a4c0-de6d13ace94d@workspace:packages/@websites/coffeekraken-io/static/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-23e78ec0-29cb-4cba-a4c0-de6d13ace94d@workspace:packages/@websites/coffeekraken-io/static/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-25cac921-8e88-4103-8585-2f1da1175e7e@workspace:packages/features/s-feature/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-25cac921-8e88-4103-8585-2f1da1175e7e@workspace:packages/features/s-feature/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-274c912d-6051-4b77-bbdb-8d01514e18bd@workspace:packages/vite/s-vite/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-274c912d-6051-4b77-bbdb-8d01514e18bd@workspace:packages/vite/s-vite/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-276d16be-3283-4c7c-956c-6fcaeac9ca22@workspace:packages/features/s-appear-feature/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-276d16be-3283-4c7c-956c-6fcaeac9ca22@workspace:packages/features/s-appear-feature/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-294762cb-2972-4832-905c-a9d4bbcf3680@workspace:packages/http/s-request/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-294762cb-2972-4832-905c-a9d4bbcf3680@workspace:packages/http/s-request/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-2a47c218-e6f8-4a09-b781-fe065a64f38d@workspace:packages/postcss/s-postcss-sugar-plugin/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-2a47c218-e6f8-4a09-b781-fe065a64f38d@workspace:packages/postcss/s-postcss-sugar-plugin/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-2b8594d3-6df4-465c-8280-86987182e6b9@workspace:packages/state/s-state/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-2b8594d3-6df4-465c-8280-86987182e6b9@workspace:packages/state/s-state/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-2b89829b-8486-4882-ba4a-7a0c9b9a3110@workspace:packages/core/s-descriptor/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-2b89829b-8486-4882-ba4a-7a0c9b9a3110@workspace:packages/core/s-descriptor/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-2d15a590-e909-4938-a9ba-5bb1f0908eaa@workspace:packages/config/s-sugar-config/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-2d15a590-e909-4938-a9ba-5bb1f0908eaa@workspace:packages/config/s-sugar-config/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-2d41b020-a168-4743-beb1-90e64218670b@workspace:packages/tools/s-component-utils/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-2d41b020-a168-4743-beb1-90e64218670b@workspace:packages/tools/s-component-utils/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-2ed5d176-f16b-4d77-bfec-7570cf4ed113@workspace:packages/builders/s-sitemap-builder/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-2ed5d176-f16b-4d77-bfec-7570cf4ed113@workspace:packages/builders/s-sitemap-builder/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-3367429a-2857-4715-a864-3b16694f0eef@workspace:packages/servers/s-frontend-server/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-3367429a-2857-4715-a864-3b16694f0eef@workspace:packages/servers/s-frontend-server/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-38ba1234-4401-49c8-a6da-f109d147e98b@workspace:packages/config/s-config-folder-adapter/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-38ba1234-4401-49c8-a6da-f109d147e98b@workspace:packages/config/s-config-folder-adapter/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-3e05c5cd-665f-41a6-ac3a-90485bbe340e@workspace:packages/core/cli/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-3e05c5cd-665f-41a6-ac3a-90485bbe340e@workspace:packages/core/cli/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-415b9fdf-56d7-4dae-8737-147d6971bbeb@workspace:packages/features/s-sugar-feature/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-415b9fdf-56d7-4dae-8737-147d6971bbeb@workspace:packages/features/s-sugar-feature/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-41dbfbcd-3c1a-4a9a-9adf-7e0aa22222c8@workspace:packages/components/s-code-example-component/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-41dbfbcd-3c1a-4a9a-9adf-7e0aa22222c8@workspace:packages/components/s-code-example-component/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-43cf3ff1-4d2e-4116-a732-d28c9e707287@workspace:packages/renderers/s-view-renderer-engine-lit/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-43cf3ff1-4d2e-4116-a732-d28c9e707287@workspace:packages/renderers/s-view-renderer-engine-lit/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-442660a1-3fa4-4773-b09b-e78117514b0d@workspace:packages/components/s-filtrable-input-component/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-442660a1-3fa4-4773-b09b-e78117514b0d@workspace:packages/components/s-filtrable-input-component/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-4476d113-1aa4-4b8c-b82a-366289b57a0d@workspace:packages/core/s-frontspec/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-4476d113-1aa4-4b8c-b82a-366289b57a0d@workspace:packages/core/s-frontspec/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-48a86c35-2722-4e8f-b2d1-cd62845b5876@workspace:packages/app/s-kitchen/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-48a86c35-2722-4e8f-b2d1-cd62845b5876@workspace:packages/app/s-kitchen/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-4911c430-c749-4ce3-a649-338169a4a07a@workspace:packages/components/s-slider-component/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-4911c430-c749-4ce3-a649-338169a4a07a@workspace:packages/components/s-slider-component/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-4fc8af9e-e91f-449c-9a7d-20e7dec358dc@workspace:packages/builders/s-static-builder/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-4fc8af9e-e91f-449c-9a7d-20e7dec358dc@workspace:packages/builders/s-static-builder/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-50b4ba4d-636d-47aa-8622-43f3cd873c04@workspace:packages/tools/s-validator/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-50b4ba4d-636d-47aa-8622-43f3cd873c04@workspace:packages/tools/s-validator/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-512d8571-912e-45f3-9633-35d67f7b7e92@workspace:packages/tools/s-bench/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-512d8571-912e-45f3-9633-35d67f7b7e92@workspace:packages/tools/s-bench/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-526f58ea-afe6-4335-a793-b96435e30c2f@workspace:packages/core/s-event-emitter/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-526f58ea-afe6-4335-a793-b96435e30c2f@workspace:packages/core/s-event-emitter/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-528bd645-e71e-4637-a30b-36991612f415@workspace:packages/components/s-rating-component/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-528bd645-e71e-4637-a30b-36991612f415@workspace:packages/components/s-rating-component/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-55812539-6250-47e9-bb67-e865a38e01ac@workspace:packages/tools/s-timer/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-55812539-6250-47e9-bb67-e865a38e01ac@workspace:packages/tools/s-timer/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-585d6b90-fc7a-451d-bb63-2850e6e6a1f4@workspace:packages/app/s-dashboard/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-585d6b90-fc7a-451d-bb63-2850e6e6a1f4@workspace:packages/app/s-dashboard/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-59833aeb-70e6-44d7-b2f7-48ed7e1f2f70@workspace:packages/http/s-request/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-59833aeb-70e6-44d7-b2f7-48ed7e1f2f70@workspace:packages/http/s-request/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-5c3dbeef-f939-47ed-96db-794bcf0fff2e@workspace:packages/tools/s-frontend-checker/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-5c3dbeef-f939-47ed-96db-794bcf0fff2e@workspace:packages/tools/s-frontend-checker/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-6097394a-e25d-4c18-8d91-d9eb275f71bc@workspace:packages/core/cli/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-6097394a-e25d-4c18-8d91-d9eb275f71bc@workspace:packages/core/cli/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-63177df5-4b3d-4320-b5a8-657fc4d258f3@workspace:packages/builders/s-builder/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-63177df5-4b3d-4320-b5a8-657fc4d258f3@workspace:packages/builders/s-builder/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-632cc187-c47a-4598-ac15-8e103929941b@workspace:packages/components/s-panel-component/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-632cc187-c47a-4598-ac15-8e103929941b@workspace:packages/components/s-panel-component/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-63e1d850-2a78-476b-a4f0-aa7bd37997a9@workspace:packages/core/s-file/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-63e1d850-2a78-476b-a4f0-aa7bd37997a9@workspace:packages/core/s-file/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-64b53f78-8e56-4c8f-9d84-a07a3cc3cee6@workspace:packages/dataFiles/s-data-file-js/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-64b53f78-8e56-4c8f-9d84-a07a3cc3cee6@workspace:packages/dataFiles/s-data-file-js/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-65257af7-6b80-4ddc-ac3e-346e6b22c7de@workspace:packages/core/s-package/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-65257af7-6b80-4ddc-ac3e-346e6b22c7de@workspace:packages/core/s-package/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-664e4a75-0b1f-4250-a65b-f2d0a04ad4ee@workspace:packages/@websites/coffeekraken-io/static/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-664e4a75-0b1f-4250-a65b-f2d0a04ad4ee@workspace:packages/@websites/coffeekraken-io/static/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-66db6810-5581-4284-bb89-ef2a539cd50c@workspace:packages/dom/s-sugar-element/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-66db6810-5581-4284-bb89-ef2a539cd50c@workspace:packages/dom/s-sugar-element/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-67637b4b-5b85-4600-bbac-6867baa90885@workspace:packages/features/s-inline-feature/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-67637b4b-5b85-4600-bbac-6867baa90885@workspace:packages/features/s-inline-feature/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-6809134d-a021-4350-9796-66bd0caa69cd@workspace:packages/components/s-range-component/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-6809134d-a021-4350-9796-66bd0caa69cd@workspace:packages/components/s-range-component/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-68c151b1-fe0d-4f3b-99c8-5562c3d37416@workspace:packages/tools/s-duration/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-68c151b1-fe0d-4f3b-99c8-5562c3d37416@workspace:packages/tools/s-duration/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-6de940fc-f282-4fab-8973-ec5a7bfacb08@workspace:packages/features/s-activate-feature/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-6de940fc-f282-4fab-8973-ec5a7bfacb08@workspace:packages/features/s-activate-feature/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-6f04a125-5850-47a8-83f2-8d77f96dcca9@workspace:packages/renderers/s-view-renderer/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-6f04a125-5850-47a8-83f2-8d77f96dcca9@workspace:packages/renderers/s-view-renderer/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-6f0f04ec-ea96-4233-942a-d98c0910fa93@workspace:packages/core/s-env/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-6f0f04ec-ea96-4233-942a-d98c0910fa93@workspace:packages/core/s-env/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-70c05162-9229-4cf6-838c-9c342b674293@workspace:packages/config/s-sugar-config/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-70c05162-9229-4cf6-838c-9c342b674293@workspace:packages/config/s-sugar-config/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-72c12faf-b83c-449d-bb2d-1aeda8a18db8@workspace:packages/components/s-filtrable-input-component/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-72c12faf-b83c-449d-bb2d-1aeda8a18db8@workspace:packages/components/s-filtrable-input-component/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-741552a7-5b80-47ec-b4c4-3b065a36c19d@workspace:packages/core/s-frontspec/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-741552a7-5b80-47ec-b4c4-3b065a36c19d@workspace:packages/core/s-frontspec/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-7450eb28-f3da-4755-9a9c-e34f70716553@workspace:packages/tools/s-conductor/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-7450eb28-f3da-4755-9a9c-e34f70716553@workspace:packages/tools/s-conductor/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-75558769-28a4-4067-a06c-8359fd43f35a@workspace:packages/components/s-slider-component/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-75558769-28a4-4067-a06c-8359fd43f35a@workspace:packages/components/s-slider-component/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-7723d188-3392-41af-990b-b095511b3f05@workspace:packages/vite/s-vite-sugar-plugin/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-7723d188-3392-41af-990b-b095511b3f05@workspace:packages/vite/s-vite-sugar-plugin/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-77c2d094-a4e1-4bf6-aa3e-2a8a29a6dce6@workspace:packages/tools/s-bench/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-77c2d094-a4e1-4bf6-aa3e-2a8a29a6dce6@workspace:packages/tools/s-bench/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-77f9b57a-9050-43a6-97a8-908f7e44d237@workspace:packages/servers/s-frontend-server/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-77f9b57a-9050-43a6-97a8-908f7e44d237@workspace:packages/servers/s-frontend-server/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-7824e190-3b63-4bd1-9d22-754ca2c17495@workspace:packages/vite/s-vite-postcss-plugin/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-7824e190-3b63-4bd1-9d22-754ca2c17495@workspace:packages/vite/s-vite-postcss-plugin/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-79a3ae52-3bc0-4b4d-8089-5892564778e5@workspace:packages/dataFiles/s-data-file-php/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-79a3ae52-3bc0-4b4d-8089-5892564778e5@workspace:packages/dataFiles/s-data-file-php/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-7cdeded8-97b3-4177-8dcd-415319687860@workspace:packages/core/s-file/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-7cdeded8-97b3-4177-8dcd-415319687860@workspace:packages/core/s-file/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-7d7c6b05-8418-46a5-95b6-234e29285fc2@workspace:packages/state/s-state/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-7d7c6b05-8418-46a5-95b6-234e29285fc2@workspace:packages/state/s-state/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-7e2e9737-2001-40e0-9555-f945271556b0@workspace:packages/config/s-config-folder-adapter/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-7e2e9737-2001-40e0-9555-f945271556b0@workspace:packages/config/s-config-folder-adapter/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-807350e8-9e2c-4a82-8087-fcfa953a6aa8@workspace:packages/core/s-class/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-807350e8-9e2c-4a82-8087-fcfa953a6aa8@workspace:packages/core/s-class/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-8073d634-07c7-48ce-9ac8-6bdae497387b@workspace:packages/core/s-docmap/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-8073d634-07c7-48ce-9ac8-6bdae497387b@workspace:packages/core/s-docmap/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-80c80d4f-4c49-4928-8f0b-ab5951b96d40@workspace:packages/themes/s-theme/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-80c80d4f-4c49-4928-8f0b-ab5951b96d40@workspace:packages/themes/s-theme/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-8330ffe3-b7ed-4459-98dc-6c1b8863aef7@workspace:packages/builders/s-postcss-builder/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-8330ffe3-b7ed-4459-98dc-6c1b8863aef7@workspace:packages/builders/s-postcss-builder/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-846e674c-9ef8-4a22-a4e1-e90c60e38d95@workspace:packages/core/s-docblock/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-846e674c-9ef8-4a22-a4e1-e90c60e38d95@workspace:packages/core/s-docblock/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-873d5fe4-692c-46bd-b1f4-7652862b719e@workspace:packages/dataFiles/s-data-file-php/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-873d5fe4-692c-46bd-b1f4-7652862b719e@workspace:packages/dataFiles/s-data-file-php/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-89332376-fa13-41ce-bff7-38829d9cc21b@workspace:packages/config/s-config-inline-adapter/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-89332376-fa13-41ce-bff7-38829d9cc21b@workspace:packages/config/s-config-inline-adapter/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-89d4db16-6a37-48b0-8817-6309d6daa27f@workspace:packages/tools/s-validator/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-89d4db16-6a37-48b0-8817-6309d6daa27f@workspace:packages/tools/s-validator/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-89fe1da5-ab85-49e6-b318-9bb86db24ab1@workspace:packages/core/s-docmap/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-89fe1da5-ab85-49e6-b318-9bb86db24ab1@workspace:packages/core/s-docmap/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-8a3c9bf8-45e2-401c-85e8-42a3d000c8bd@workspace:packages/components/s-color-picker-component/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-8a3c9bf8-45e2-401c-85e8-42a3d000c8bd@workspace:packages/components/s-color-picker-component/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-8d89ebde-8bfe-4e48-853c-43f2d21a6888@workspace:packages/builders/s-sitemap-builder/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-8d89ebde-8bfe-4e48-853c-43f2d21a6888@workspace:packages/builders/s-sitemap-builder/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-8df73525-7779-490e-a20f-c9bfba8581e5@workspace:packages/config/s-config-adapter/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-8df73525-7779-490e-a20f-c9bfba8581e5@workspace:packages/config/s-config-adapter/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-939475f6-d7ff-48c6-ae21-7b7b7c03f5ee@workspace:packages/builders/s-postcss-builder/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-939475f6-d7ff-48c6-ae21-7b7b7c03f5ee@workspace:packages/builders/s-postcss-builder/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-94f67639-d491-42b3-a5df-c39a1e6d2dca@workspace:packages/builders/s-favicon-builder/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-94f67639-d491-42b3-a5df-c39a1e6d2dca@workspace:packages/builders/s-favicon-builder/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-95b2095f-894f-40f6-b7cb-3e81538cd2f9@workspace:packages/core/s-descriptor/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-95b2095f-894f-40f6-b7cb-3e81538cd2f9@workspace:packages/core/s-descriptor/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-9600520f-3fed-4629-ab4e-d7fdcb92fabd@workspace:packages/core/s-interface/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-9600520f-3fed-4629-ab4e-d7fdcb92fabd@workspace:packages/core/s-interface/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-9e1e44e7-5c4f-4533-87d7-352c18e1f587@workspace:packages/builders/s-favicon-builder/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-9e1e44e7-5c4f-4533-87d7-352c18e1f587@workspace:packages/builders/s-favicon-builder/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-9f638b61-be01-490e-9e45-4b035881f88e@workspace:packages/core/s-event-emitter/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-9f638b61-be01-490e-9e45-4b035881f88e@workspace:packages/core/s-event-emitter/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-a150a813-0b58-400a-a5fb-7d2c5893e6a3@workspace:packages/core/s-interface/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-a150a813-0b58-400a-a5fb-7d2c5893e6a3@workspace:packages/core/s-interface/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-a43ecca5-dd97-44db-9a53-ed921a732a00@workspace:packages/core/s-env/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-a43ecca5-dd97-44db-9a53-ed921a732a00@workspace:packages/core/s-env/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-a531e0f4-d39c-4953-970d-6d57215ef43e@workspace:packages/tools/s-duration/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-a531e0f4-d39c-4953-970d-6d57215ef43e@workspace:packages/tools/s-duration/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-a568cce0-3e82-4c5f-87d7-0cd30f8b42a1@workspace:packages/renderers/s-view-renderer-engine-twig/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-a568cce0-3e82-4c5f-87d7-0cd30f8b42a1@workspace:packages/renderers/s-view-renderer-engine-twig/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-a589a6e7-a125-4b96-9ada-46c19628b637@workspace:packages/core/s-promise/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-a589a6e7-a125-4b96-9ada-46c19628b637@workspace:packages/core/s-promise/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-a6e28c43-25a4-4ed0-a4d7-c09bea4adf0a@workspace:packages/renderers/s-view-renderer-engine-blade/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-a6e28c43-25a4-4ed0-a4d7-c09bea4adf0a@workspace:packages/renderers/s-view-renderer-engine-blade/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-aa3c0265-72c2-4c62-ab41-383265822a75@workspace:packages/tools/s-handlebars/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-aa3c0265-72c2-4c62-ab41-383265822a75@workspace:packages/tools/s-handlebars/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-ab437448-0fa8-4e02-92e5-8c9f334d2268@workspace:packages/core/s-type/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-ab437448-0fa8-4e02-92e5-8c9f334d2268@workspace:packages/core/s-type/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-acadd7b0-0728-42e8-a162-1c147b0874a2@workspace:packages/components/s-color-picker-component/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-acadd7b0-0728-42e8-a162-1c147b0874a2@workspace:packages/components/s-color-picker-component/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-adb137d2-23bf-4a85-a761-23ce9c59a577@workspace:packages/core/s-class/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-adb137d2-23bf-4a85-a761-23ce9c59a577@workspace:packages/core/s-class/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-b507f165-1fff-4fdb-8a41-bddadb6b0c6c@workspace:packages/core/s-log/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-b507f165-1fff-4fdb-8a41-bddadb6b0c6c@workspace:packages/core/s-log/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-b73b75a2-e49f-445a-a138-029a717e17da@workspace:packages/features/s-parallax-feature/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-b73b75a2-e49f-445a-a138-029a717e17da@workspace:packages/features/s-parallax-feature/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-bc688705-2ad0-4d13-a0b1-aae22eefdd56@workspace:packages/core/s-promise/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-bc688705-2ad0-4d13-a0b1-aae22eefdd56@workspace:packages/core/s-promise/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-c044717e-bcc1-414d-b5dc-3fb07dece0bb@workspace:packages/codeFormatters/s-code-formatter/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-c044717e-bcc1-414d-b5dc-3fb07dece0bb@workspace:packages/codeFormatters/s-code-formatter/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-c07bac79-5307-4362-b903-bbc88625e0a6@workspace:packages/core/s-process/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-c07bac79-5307-4362-b903-bbc88625e0a6@workspace:packages/core/s-process/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-c17f957d-4b8b-4d6b-a899-45d8eba1c3a7@workspace:packages/builders/s-typescript-builder/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-c17f957d-4b8b-4d6b-a899-45d8eba1c3a7@workspace:packages/builders/s-typescript-builder/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-c3c0dd0b-fc36-4371-b86c-11be66ae751a@workspace:packages/tools/s-url/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-c3c0dd0b-fc36-4371-b86c-11be66ae751a@workspace:packages/tools/s-url/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-c6bafbd8-eebe-43c0-a6d4-b01d465a8f3e@workspace:packages/codeFormatters/s-code-formatter-prettier/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-c6bafbd8-eebe-43c0-a6d4-b01d465a8f3e@workspace:packages/codeFormatters/s-code-formatter-prettier/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-c6eb6c39-1c52-4ae5-8ca5-c9a77b01a9b8@workspace:packages/codeFormatters/s-code-formatter/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-c6eb6c39-1c52-4ae5-8ca5-c9a77b01a9b8@workspace:packages/codeFormatters/s-code-formatter/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-c9f2bf03-d08d-44e7-abcc-a7425ee63478@workspace:packages/renderers/s-view-renderer/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-c9f2bf03-d08d-44e7-abcc-a7425ee63478@workspace:packages/renderers/s-view-renderer/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-cbb39529-96e9-4df7-9eae-5aa6d0591d65@workspace:packages/core/s-log/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-cbb39529-96e9-4df7-9eae-5aa6d0591d65@workspace:packages/core/s-log/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-cbc23239-a339-41ee-bb6d-8519c1cd306c@workspace:packages/dataFiles/s-data-file-js/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-cbc23239-a339-41ee-bb6d-8519c1cd306c@workspace:packages/dataFiles/s-data-file-js/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-cdef7d4c-7b11-46bc-8feb-e24e20493284@workspace:packages/vite/s-vite/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-cdef7d4c-7b11-46bc-8feb-e24e20493284@workspace:packages/vite/s-vite/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-cdf0d032-bce7-48e7-b17b-780bb7c31683@workspace:packages/tools/s-glob/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-cdf0d032-bce7-48e7-b17b-780bb7c31683@workspace:packages/tools/s-glob/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-d1a5b2eb-ad6f-4b59-80d4-5b3bd2a0bf9a@workspace:packages/tools/s-handlebars/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-d1a5b2eb-ad6f-4b59-80d4-5b3bd2a0bf9a@workspace:packages/tools/s-handlebars/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-d1a9790d-164f-4d34-84b4-89286552b120@workspace:packages/themes/s-theme/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-d1a9790d-164f-4d34-84b4-89286552b120@workspace:packages/themes/s-theme/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-d1e2f6d8-015d-4114-931b-803f5b789bad@workspace:packages/config/s-config-adapter/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-d1e2f6d8-015d-4114-931b-803f5b789bad@workspace:packages/config/s-config-adapter/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-d251984d-5d71-49b1-ae52-7cb65e282069@workspace:packages/builders/s-images-builder/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-d251984d-5d71-49b1-ae52-7cb65e282069@workspace:packages/builders/s-images-builder/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-d292867c-c062-4c5b-964c-4b582744d504@workspace:packages/core/s-sugar-json/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-d292867c-c062-4c5b-964c-4b582744d504@workspace:packages/core/s-sugar-json/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-d3f7e68b-61ea-4316-8199-3b2ec0fd2323@workspace:packages/builders/s-markdown-builder/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-d3f7e68b-61ea-4316-8199-3b2ec0fd2323@workspace:packages/builders/s-markdown-builder/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-d776a064-9205-407a-bbe9-1ca256eb9c79@workspace:packages/core/s-docblock/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-d776a064-9205-407a-bbe9-1ca256eb9c79@workspace:packages/core/s-docblock/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-d86d2593-711d-4a12-b580-3393405db6a7@workspace:packages/features/s-form-validate-feature/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-d86d2593-711d-4a12-b580-3393405db6a7@workspace:packages/features/s-form-validate-feature/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-d98ae7ae-e40e-4eb4-b8be-eac59a1dd7a7@workspace:packages/features/s-refocus-feature/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-d98ae7ae-e40e-4eb4-b8be-eac59a1dd7a7@workspace:packages/features/s-refocus-feature/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-db317d31-a27a-4925-bfad-607132f59fbb@workspace:packages/builders/s-static-builder/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-db317d31-a27a-4925-bfad-607132f59fbb@workspace:packages/builders/s-static-builder/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-ddd186e8-526c-4675-afcf-7b1deccb107a@workspace:packages/renderers/s-view-renderer-engine-twig/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-ddd186e8-526c-4675-afcf-7b1deccb107a@workspace:packages/renderers/s-view-renderer-engine-twig/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-df713bb6-b3a8-4c64-a9fa-a7b49adf5dbc@workspace:packages/components/s-code-example-component/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-df713bb6-b3a8-4c64-a9fa-a7b49adf5dbc@workspace:packages/components/s-code-example-component/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-e0497b47-f222-49cd-b50a-3e4be78d0111@workspace:packages/dataFiles/s-data-file-generic/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-e0497b47-f222-49cd-b50a-3e4be78d0111@workspace:packages/dataFiles/s-data-file-generic/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-e421b2e3-9502-4cd0-9c3c-cfc2df7b5b1e@workspace:packages/app/s-kitchen/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-e421b2e3-9502-4cd0-9c3c-cfc2df7b5b1e@workspace:packages/app/s-kitchen/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-e58d8831-30bc-4735-a967-8202625daa20@workspace:packages/vite/s-vite-sugar-plugin/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-e58d8831-30bc-4735-a967-8202625daa20@workspace:packages/vite/s-vite-sugar-plugin/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-e647db38-0327-47a4-b5c9-8e119dd966c8@workspace:packages/core/s-stdio/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-e647db38-0327-47a4-b5c9-8e119dd966c8@workspace:packages/core/s-stdio/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-e7515005-3a51-44c9-bbc6-9c2cd47b7a31@workspace:packages/components/s-date-picker-component/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-e7515005-3a51-44c9-bbc6-9c2cd47b7a31@workspace:packages/components/s-date-picker-component/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-e7a2194d-d799-436c-b29e-dca5d0549365@workspace:packages/core/s-monorepo/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-e7a2194d-d799-436c-b29e-dca5d0549365@workspace:packages/core/s-monorepo/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-e85b18cb-0e2e-4111-9676-292292be70c0@workspace:packages/core/s-process/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-e85b18cb-0e2e-4111-9676-292292be70c0@workspace:packages/core/s-process/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-e8e0e7ff-c3ee-41cf-95b7-8733d48b53ed@workspace:packages/tools/s-color/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-e8e0e7ff-c3ee-41cf-95b7-8733d48b53ed@workspace:packages/tools/s-color/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-e966eab1-f52c-419b-983d-098ee6b4f7d7@workspace:packages/components/s-theme-switcher-component/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-e966eab1-f52c-419b-983d-098ee6b4f7d7@workspace:packages/components/s-theme-switcher-component/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-ea7cbd48-dd96-4028-9753-eeefac58c856@workspace:packages/core/s-stdio/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-ea7cbd48-dd96-4028-9753-eeefac58c856@workspace:packages/core/s-stdio/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-ece80187-70f6-4c3f-b648-97ecd4b48ff6@workspace:packages/renderers/s-view-renderer-engine-blade/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-ece80187-70f6-4c3f-b648-97ecd4b48ff6@workspace:packages/renderers/s-view-renderer-engine-blade/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-ededeec8-72e4-4037-ba54-23ca1f9cdb10@workspace:packages/features/s-floating-feature/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-ededeec8-72e4-4037-ba54-23ca1f9cdb10@workspace:packages/features/s-floating-feature/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-f2be4e09-f6b3-4abe-9115-0913cbc819f1@workspace:packages/config/s-config-inline-adapter/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-f2be4e09-f6b3-4abe-9115-0913cbc819f1@workspace:packages/config/s-config-inline-adapter/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-f2e1ae44-58fd-45b3-b97a-3abd38ac0eed@workspace:packages/postcss/s-postcss-sugar-plugin/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-f2e1ae44-58fd-45b3-b97a-3abd38ac0eed@workspace:packages/postcss/s-postcss-sugar-plugin/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-f3d9366d-f451-4def-8220-57f22d92a650@workspace:packages/builders/s-typescript-builder/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-f3d9366d-f451-4def-8220-57f22d92a650@workspace:packages/builders/s-typescript-builder/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-f729e1e0-ad2d-4f47-84a1-4fcc28adfaa8@workspace:packages/core/s-monorepo/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-f729e1e0-ad2d-4f47-84a1-4fcc28adfaa8@workspace:packages/core/s-monorepo/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-f8abf64a-7d55-40c8-a156-cbf0f5f48819@workspace:packages/tools/sugar/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-f8abf64a-7d55-40c8-a156-cbf0f5f48819@workspace:packages/tools/sugar/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-f9bfe862-406c-435b-9971-fd82116e81b5@workspace:packages/components/s-theme-switcher-component/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-f9bfe862-406c-435b-9971-fd82116e81b5@workspace:packages/components/s-theme-switcher-component/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-fa3428a9-ddb5-4c5b-ac71-f99c0e53a9b8@workspace:packages/builders/s-markdown-builder/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-fa3428a9-ddb5-4c5b-ac71-f99c0e53a9b8@workspace:packages/builders/s-markdown-builder/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-fa3e757c-2922-4198-b3d6-b7f76aaaab73@workspace:packages/builders/s-builder/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-fa3e757c-2922-4198-b3d6-b7f76aaaab73@workspace:packages/builders/s-builder/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-fc0b2f31-a5e0-48be-a4a8-75705acf4d6a@workspace:packages/tools/sugar/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-fc0b2f31-a5e0-48be-a4a8-75705acf4d6a@workspace:packages/tools/sugar/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-fd23b5ed-7bf3-4649-b6c6-429c288d4ddd@workspace:packages/app/s-dashboard/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-fd23b5ed-7bf3-4649-b6c6-429c288d4ddd@workspace:packages/app/s-dashboard/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-ff1e1db0-f49d-4f70-a32c-467b5b2103a1@workspace:packages/codeFormatters/s-code-formatter-prettier/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-ff1e1db0-f49d-4f70-a32c-467b5b2103a1@workspace:packages/codeFormatters/s-code-formatter-prettier/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/internal-ff8e829e-4c63-4986-bbfe-663c5787f467@workspace:packages/dataFiles/s-data-file-generic/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/internal-ff8e829e-4c63-4986-bbfe-663c5787f467@workspace:packages/dataFiles/s-data-file-generic/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/s-activate-feature@^2.0.0-alpha.18, @coffeekraken/s-activate-feature@workspace:packages/features/s-activate-feature":
+"@coffeekraken/s-activate-feature@^2.0.0-alpha.20, @coffeekraken/s-activate-feature@workspace:packages/features/s-activate-feature":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-activate-feature@workspace:packages/features/s-activate-feature"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-appear-feature@^2.0.0-alpha.18, @coffeekraken/s-appear-feature@workspace:packages/features/s-appear-feature":
+"@coffeekraken/s-appear-feature@^2.0.0-alpha.20, @coffeekraken/s-appear-feature@workspace:packages/features/s-appear-feature":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-appear-feature@workspace:packages/features/s-appear-feature"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-element": ^2.0.0-alpha.18
-    "@coffeekraken/s-theme": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-element": ^2.0.0-alpha.20
+    "@coffeekraken/s-theme": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-bench@^2.0.0-alpha.18, @coffeekraken/s-bench@workspace:packages/tools/s-bench":
+"@coffeekraken/s-bench@^2.0.0-alpha.20, @coffeekraken/s-bench@workspace:packages/tools/s-bench":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-bench@workspace:packages/tools/s-bench"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-builder@^2.0.0-alpha.18, @coffeekraken/s-builder@workspace:packages/builders/s-builder":
+"@coffeekraken/s-builder@^2.0.0-alpha.20, @coffeekraken/s-builder@workspace:packages/builders/s-builder":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-builder@workspace:packages/builders/s-builder"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-duration": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-log": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-duration": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-class@^2.0.0-alpha.18, @coffeekraken/s-class@workspace:packages/core/s-class":
+"@coffeekraken/s-class@^2.0.0-alpha.20, @coffeekraken/s-class@workspace:packages/core/s-class":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-class@workspace:packages/core/s-class"
   dependencies:
-    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-clipboard-copy-component@^2.0.0-alpha.18, @coffeekraken/s-clipboard-copy-component@workspace:packages/components/s-clipboard-copy-component":
+"@coffeekraken/s-clipboard-copy-component@^2.0.0-alpha.20, @coffeekraken/s-clipboard-copy-component@workspace:packages/components/s-clipboard-copy-component":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-clipboard-copy-component@workspace:packages/components/s-clipboard-copy-component"
   dependencies:
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-lit-component": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-lit-component": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     lit: ^2.2.8
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-code-example-component@^2.0.0-alpha.18, @coffeekraken/s-code-example-component@workspace:packages/components/s-code-example-component":
+"@coffeekraken/s-code-example-component@^2.0.0-alpha.20, @coffeekraken/s-code-example-component@workspace:packages/components/s-code-example-component":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-code-example-component@workspace:packages/components/s-code-example-component"
   dependencies:
-    "@coffeekraken/s-clipboard-copy-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-lit-component": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-clipboard-copy-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-lit-component": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     "@prettier/plugin-php": ^0.18.9
     highlight.js: ^11.6.0
     html-tags: ^3.2.0
@@ -2585,127 +1655,127 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-code-formatter-prettier@^2.0.0-alpha.18, @coffeekraken/s-code-formatter-prettier@workspace:packages/codeFormatters/s-code-formatter-prettier":
+"@coffeekraken/s-code-formatter-prettier@^2.0.0-alpha.20, @coffeekraken/s-code-formatter-prettier@workspace:packages/codeFormatters/s-code-formatter-prettier":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-code-formatter-prettier@workspace:packages/codeFormatters/s-code-formatter-prettier"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-code-formatter": ^2.0.0-alpha.18
-    "@coffeekraken/s-duration": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-log": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-code-formatter": ^2.0.0-alpha.20
+    "@coffeekraken/s-duration": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     "@prettier/plugin-php": ^0.18.9
     prettier: ^2.7.1
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-code-formatter@^2.0.0-alpha.18, @coffeekraken/s-code-formatter@workspace:packages/codeFormatters/s-code-formatter":
+"@coffeekraken/s-code-formatter@^2.0.0-alpha.20, @coffeekraken/s-code-formatter@workspace:packages/codeFormatters/s-code-formatter":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-code-formatter@workspace:packages/codeFormatters/s-code-formatter"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-code-formatter-prettier": ^2.0.0-alpha.18
-    "@coffeekraken/s-duration": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-log": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-code-formatter-prettier": ^2.0.0-alpha.20
+    "@coffeekraken/s-duration": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     chokidar: ^3.5.3
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-color-picker-component@^2.0.0-alpha.18, @coffeekraken/s-color-picker-component@workspace:packages/components/s-color-picker-component":
+"@coffeekraken/s-color-picker-component@^2.0.0-alpha.20, @coffeekraken/s-color-picker-component@workspace:packages/components/s-color-picker-component":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-color-picker-component@workspace:packages/components/s-color-picker-component"
   dependencies:
-    "@coffeekraken/s-color": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-lit-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-postcss-sugar-plugin": ^2.0.0-alpha.18
-    "@coffeekraken/s-theme": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-color": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-lit-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-postcss-sugar-plugin": ^2.0.0-alpha.20
+    "@coffeekraken/s-theme": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     lit: ^2.2.8
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-color@^2.0.0-alpha.18, @coffeekraken/s-color@workspace:packages/tools/s-color":
+"@coffeekraken/s-color@^2.0.0-alpha.20, @coffeekraken/s-color@workspace:packages/tools/s-color":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-color@workspace:packages/tools/s-color"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-component-utils@^2.0.0-alpha.18, @coffeekraken/s-component-utils@workspace:packages/tools/s-component-utils":
+"@coffeekraken/s-component-utils@^2.0.0-alpha.20, @coffeekraken/s-component-utils@workspace:packages/tools/s-component-utils":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-component-utils@workspace:packages/tools/s-component-utils"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-conductor": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-state": ^2.0.0-alpha.18
-    "@coffeekraken/s-theme": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-conductor": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-state": ^2.0.0-alpha.20
+    "@coffeekraken/s-theme": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-conductor@^2.0.0-alpha.18, @coffeekraken/s-conductor@workspace:packages/tools/s-conductor":
+"@coffeekraken/s-conductor@^2.0.0-alpha.20, @coffeekraken/s-conductor@workspace:packages/tools/s-conductor":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-conductor@workspace:packages/tools/s-conductor"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-duration": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-duration": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-config-adapter@^2.0.0-alpha.18, @coffeekraken/s-config-adapter@workspace:packages/config/s-config-adapter":
+"@coffeekraken/s-config-adapter@^2.0.0-alpha.20, @coffeekraken/s-config-adapter@workspace:packages/config/s-config-adapter":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-config-adapter@workspace:packages/config/s-config-adapter"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-config-folder-adapter@^2.0.0-alpha.18, @coffeekraken/s-config-folder-adapter@workspace:packages/config/s-config-folder-adapter":
+"@coffeekraken/s-config-folder-adapter@^2.0.0-alpha.20, @coffeekraken/s-config-folder-adapter@workspace:packages/config/s-config-folder-adapter":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-config-folder-adapter@workspace:packages/config/s-config-folder-adapter"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-config": ^2.0.0-alpha.18
-    "@coffeekraken/s-config-adapter": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-config": ^2.0.0-alpha.20
+    "@coffeekraken/s-config-adapter": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-config-inline-adapter@^2.0.0-alpha.18, @coffeekraken/s-config-inline-adapter@workspace:packages/config/s-config-inline-adapter":
+"@coffeekraken/s-config-inline-adapter@^2.0.0-alpha.20, @coffeekraken/s-config-inline-adapter@workspace:packages/config/s-config-inline-adapter":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-config-inline-adapter@workspace:packages/config/s-config-inline-adapter"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-config": ^2.0.0-alpha.18
-    "@coffeekraken/s-config-adapter": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-config": ^2.0.0-alpha.20
+    "@coffeekraken/s-config-adapter": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-config@^2.0.0-alpha.18, @coffeekraken/s-config@workspace:packages/config/s-config":
+"@coffeekraken/s-config@^2.0.0-alpha.20, @coffeekraken/s-config@workspace:packages/config/s-config":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-config@workspace:packages/config/s-config"
   dependencies:
-    "@coffeekraken/s-duration": ^2.0.0-alpha.18
-    "@coffeekraken/s-env": ^2.0.0-alpha.18
-    "@coffeekraken/s-typescript-builder": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-duration": ^2.0.0-alpha.20
+    "@coffeekraken/s-env": ^2.0.0-alpha.20
+    "@coffeekraken/s-typescript-builder": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
@@ -2717,269 +1787,269 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-dashboard@^2.0.0-alpha.18, @coffeekraken/s-dashboard@workspace:packages/app/s-dashboard":
+"@coffeekraken/s-dashboard@^2.0.0-alpha.20, @coffeekraken/s-dashboard@workspace:packages/app/s-dashboard":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-dashboard@workspace:packages/app/s-dashboard"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-filtrable-input-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-frontend-checker": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-lit-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-request": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-filtrable-input-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-frontend-checker": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-lit-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-request": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     lit: ^2.2.8
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-data-file-generic@^2.0.0-alpha.18, @coffeekraken/s-data-file-generic@workspace:packages/dataFiles/s-data-file-generic":
+"@coffeekraken/s-data-file-generic@^2.0.0-alpha.20, @coffeekraken/s-data-file-generic@workspace:packages/dataFiles/s-data-file-generic":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-data-file-generic@workspace:packages/dataFiles/s-data-file-generic"
   dependencies:
-    "@coffeekraken/s-data-file-js": ^2.0.0-alpha.18
-    "@coffeekraken/s-data-file-php": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-data-file-js": ^2.0.0-alpha.20
+    "@coffeekraken/s-data-file-php": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-data-file-js@^2.0.0-alpha.18, @coffeekraken/s-data-file-js@workspace:packages/dataFiles/s-data-file-js":
+"@coffeekraken/s-data-file-js@^2.0.0-alpha.20, @coffeekraken/s-data-file-js@workspace:packages/dataFiles/s-data-file-js":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-data-file-js@workspace:packages/dataFiles/s-data-file-js"
   dependencies:
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-data-file-php@^2.0.0-alpha.18, @coffeekraken/s-data-file-php@workspace:packages/dataFiles/s-data-file-php":
+"@coffeekraken/s-data-file-php@^2.0.0-alpha.20, @coffeekraken/s-data-file-php@workspace:packages/dataFiles/s-data-file-php":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-data-file-php@workspace:packages/dataFiles/s-data-file-php"
   dependencies:
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-datetime-picker-component@^2.0.0-alpha.18, @coffeekraken/s-datetime-picker-component@workspace:packages/components/s-date-picker-component":
+"@coffeekraken/s-datetime-picker-component@^2.0.0-alpha.20, @coffeekraken/s-datetime-picker-component@workspace:packages/components/s-date-picker-component":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-datetime-picker-component@workspace:packages/components/s-date-picker-component"
   dependencies:
-    "@coffeekraken/s-color": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-lit-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-theme": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-color": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-lit-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-theme": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     dateformat: ^5.0.3
     lit: ^2.2.8
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-descriptor@^2.0.0-alpha.18, @coffeekraken/s-descriptor@workspace:packages/core/s-descriptor":
+"@coffeekraken/s-descriptor@^2.0.0-alpha.20, @coffeekraken/s-descriptor@workspace:packages/core/s-descriptor":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-descriptor@workspace:packages/core/s-descriptor"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-glob": ^2.0.0-alpha.18
-    "@coffeekraken/s-type": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-glob": ^2.0.0-alpha.20
+    "@coffeekraken/s-type": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-docblock@^2.0.0-alpha.18, @coffeekraken/s-docblock@workspace:packages/core/s-docblock":
+"@coffeekraken/s-docblock@^2.0.0-alpha.20, @coffeekraken/s-docblock@workspace:packages/core/s-docblock":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-docblock@workspace:packages/core/s-docblock"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-log": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/s-typescript-builder": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/s-typescript-builder": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     find-in-files: ^0.5.0
     minimatch: ^3.1.2
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-docmap@^2.0.0-alpha.18, @coffeekraken/s-docmap@workspace:packages/core/s-docmap":
+"@coffeekraken/s-docmap@^2.0.0-alpha.20, @coffeekraken/s-docmap@workspace:packages/core/s-docmap":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-docmap@workspace:packages/core/s-docmap"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-docblock": ^2.0.0-alpha.18
-    "@coffeekraken/s-duration": ^2.0.0-alpha.18
-    "@coffeekraken/s-file": ^2.0.0-alpha.18
-    "@coffeekraken/s-glob": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-log": ^2.0.0-alpha.18
-    "@coffeekraken/s-process": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-stdio": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-docblock": ^2.0.0-alpha.20
+    "@coffeekraken/s-duration": ^2.0.0-alpha.20
+    "@coffeekraken/s-file": ^2.0.0-alpha.20
+    "@coffeekraken/s-glob": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/s-process": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-stdio": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     chokidar: ^3.5.3
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-duration@^2.0.0-alpha.18, @coffeekraken/s-duration@workspace:packages/tools/s-duration":
+"@coffeekraken/s-duration@^2.0.0-alpha.20, @coffeekraken/s-duration@workspace:packages/tools/s-duration":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-duration@workspace:packages/tools/s-duration"
   dependencies:
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-env@^2.0.0-alpha.18, @coffeekraken/s-env@workspace:packages/core/s-env":
+"@coffeekraken/s-env@^2.0.0-alpha.20, @coffeekraken/s-env@workspace:packages/core/s-env":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-env@workspace:packages/core/s-env"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-descriptor": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-descriptor": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-event-emitter@^2.0.0-alpha.18, @coffeekraken/s-event-emitter@workspace:packages/core/s-event-emitter":
+"@coffeekraken/s-event-emitter@^2.0.0-alpha.20, @coffeekraken/s-event-emitter@workspace:packages/core/s-event-emitter":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-event-emitter@workspace:packages/core/s-event-emitter"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-log": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     minimatch: ^5.1.0
     node-ipc: ^11.1.0
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-favicon-builder@^2.0.0-alpha.18, @coffeekraken/s-favicon-builder@workspace:packages/builders/s-favicon-builder":
+"@coffeekraken/s-favicon-builder@^2.0.0-alpha.20, @coffeekraken/s-favicon-builder@workspace:packages/builders/s-favicon-builder":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-favicon-builder@workspace:packages/builders/s-favicon-builder"
   dependencies:
-    "@coffeekraken/s-bench": ^2.0.0-alpha.18
-    "@coffeekraken/s-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-config": ^2.0.0-alpha.18
-    "@coffeekraken/s-duration": ^2.0.0-alpha.18
-    "@coffeekraken/s-file": ^2.0.0-alpha.18
-    "@coffeekraken/s-glob": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-log": ^2.0.0-alpha.18
-    "@coffeekraken/s-process": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-bench": ^2.0.0-alpha.20
+    "@coffeekraken/s-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-config": ^2.0.0-alpha.20
+    "@coffeekraken/s-duration": ^2.0.0-alpha.20
+    "@coffeekraken/s-file": ^2.0.0-alpha.20
+    "@coffeekraken/s-glob": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/s-process": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     favicons: ^6.2.2
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-feature@^2.0.0-alpha.18, @coffeekraken/s-feature@workspace:packages/features/s-feature":
+"@coffeekraken/s-feature@^2.0.0-alpha.20, @coffeekraken/s-feature@workspace:packages/features/s-feature":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-feature@workspace:packages/features/s-feature"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-component-utils": ^2.0.0-alpha.18
-    "@coffeekraken/s-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-state": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-component-utils": ^2.0.0-alpha.20
+    "@coffeekraken/s-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-state": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-file@^2.0.0-alpha.18, @coffeekraken/s-file@workspace:packages/core/s-file":
+"@coffeekraken/s-file@^2.0.0-alpha.20, @coffeekraken/s-file@workspace:packages/core/s-file":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-file@workspace:packages/core/s-file"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-descriptor": ^2.0.0-alpha.18
-    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-descriptor": ^2.0.0-alpha.20
+    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-filtrable-input-component@^2.0.0-alpha.18, @coffeekraken/s-filtrable-input-component@workspace:packages/components/s-filtrable-input-component":
+"@coffeekraken/s-filtrable-input-component@^2.0.0-alpha.20, @coffeekraken/s-filtrable-input-component@workspace:packages/components/s-filtrable-input-component":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-filtrable-input-component@workspace:packages/components/s-filtrable-input-component"
   dependencies:
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-lit-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-theme": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-lit-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-theme": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     faker: ^5.5.3
     lit: ^2.2.8
     react: ^17.0.2
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-floating-feature@^2.0.0-alpha.18, @coffeekraken/s-floating-feature@workspace:packages/features/s-floating-feature":
+"@coffeekraken/s-floating-feature@^2.0.0-alpha.20, @coffeekraken/s-floating-feature@workspace:packages/features/s-floating-feature":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-floating-feature@workspace:packages/features/s-floating-feature"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-form-validate-feature@^2.0.0-alpha.18, @coffeekraken/s-form-validate-feature@workspace:packages/features/s-form-validate-feature":
+"@coffeekraken/s-form-validate-feature@^2.0.0-alpha.20, @coffeekraken/s-form-validate-feature@workspace:packages/features/s-form-validate-feature":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-form-validate-feature@workspace:packages/features/s-form-validate-feature"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-component-utils": ^2.0.0-alpha.18
-    "@coffeekraken/s-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-validator": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-component-utils": ^2.0.0-alpha.20
+    "@coffeekraken/s-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-validator": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     "@sideway/address": ^4.1.4
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-frontend-checker@^2.0.0-alpha.18, @coffeekraken/s-frontend-checker@workspace:packages/tools/s-frontend-checker":
+"@coffeekraken/s-frontend-checker@^2.0.0-alpha.20, @coffeekraken/s-frontend-checker@workspace:packages/tools/s-frontend-checker":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-frontend-checker@workspace:packages/tools/s-frontend-checker"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-file": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-file": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-frontend-server@^2.0.0-alpha.18, @coffeekraken/s-frontend-server@workspace:packages/servers/s-frontend-server":
+"@coffeekraken/s-frontend-server@^2.0.0-alpha.20, @coffeekraken/s-frontend-server@workspace:packages/servers/s-frontend-server":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-frontend-server@workspace:packages/servers/s-frontend-server"
   dependencies:
-    "@coffeekraken/s-bench": ^2.0.0-alpha.18
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-docblock": ^2.0.0-alpha.18
-    "@coffeekraken/s-docmap": ^2.0.0-alpha.18
-    "@coffeekraken/s-duration": ^2.0.0-alpha.18
-    "@coffeekraken/s-env": ^2.0.0-alpha.18
-    "@coffeekraken/s-file": ^2.0.0-alpha.18
-    "@coffeekraken/s-frontspec": ^2.0.0-alpha.18
-    "@coffeekraken/s-glob": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-log": ^2.0.0-alpha.18
-    "@coffeekraken/s-markdown-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-process": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/s-typescript-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-view-renderer": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-bench": ^2.0.0-alpha.20
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-docblock": ^2.0.0-alpha.20
+    "@coffeekraken/s-docmap": ^2.0.0-alpha.20
+    "@coffeekraken/s-duration": ^2.0.0-alpha.20
+    "@coffeekraken/s-env": ^2.0.0-alpha.20
+    "@coffeekraken/s-file": ^2.0.0-alpha.20
+    "@coffeekraken/s-frontspec": ^2.0.0-alpha.20
+    "@coffeekraken/s-glob": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/s-markdown-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-process": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/s-typescript-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-view-renderer": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     body-parser: ^1.20.0
     compression: ^1.7.4
     express: ^4.18.1
@@ -2991,245 +2061,249 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-frontspec@^2.0.0-alpha.18, @coffeekraken/s-frontspec@workspace:packages/core/s-frontspec":
+"@coffeekraken/s-frontspec@^2.0.0-alpha.20, @coffeekraken/s-frontspec@workspace:packages/core/s-frontspec":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-frontspec@workspace:packages/core/s-frontspec"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-env": ^2.0.0-alpha.18
-    "@coffeekraken/s-file": ^2.0.0-alpha.18
-    "@coffeekraken/s-glob": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-log": ^2.0.0-alpha.18
-    "@coffeekraken/s-process": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-stdio": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-env": ^2.0.0-alpha.20
+    "@coffeekraken/s-file": ^2.0.0-alpha.20
+    "@coffeekraken/s-glob": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/s-process": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-stdio": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     glob: ^7.2.3
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-glob@^2.0.0-alpha.18, @coffeekraken/s-glob@workspace:packages/tools/s-glob":
+"@coffeekraken/s-glob@^2.0.0-alpha.20, @coffeekraken/s-glob@workspace:packages/tools/s-glob":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-glob@workspace:packages/tools/s-glob"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-file": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-file": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-handlebars@^2.0.0-alpha.18, @coffeekraken/s-handlebars@workspace:packages/tools/s-handlebars":
+"@coffeekraken/s-handlebars@^2.0.0-alpha.20, @coffeekraken/s-handlebars@workspace:packages/tools/s-handlebars":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-handlebars@workspace:packages/tools/s-handlebars"
   dependencies:
-    "@coffeekraken/s-file": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-file": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-images-builder@^2.0.0-alpha.18, @coffeekraken/s-images-builder@workspace:packages/builders/s-images-builder":
+"@coffeekraken/s-images-builder@^2.0.0-alpha.20, @coffeekraken/s-images-builder@workspace:packages/builders/s-images-builder":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-images-builder@workspace:packages/builders/s-images-builder"
   dependencies:
-    "@coffeekraken/s-bench": ^2.0.0-alpha.18
-    "@coffeekraken/s-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-config": ^2.0.0-alpha.18
-    "@coffeekraken/s-duration": ^2.0.0-alpha.18
-    "@coffeekraken/s-file": ^2.0.0-alpha.18
-    "@coffeekraken/s-glob": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-log": ^2.0.0-alpha.18
-    "@coffeekraken/s-process": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-bench": ^2.0.0-alpha.20
+    "@coffeekraken/s-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-config": ^2.0.0-alpha.20
+    "@coffeekraken/s-duration": ^2.0.0-alpha.20
+    "@coffeekraken/s-file": ^2.0.0-alpha.20
+    "@coffeekraken/s-glob": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/s-process": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     image-size: ^1.0.2
     minimatch: ^5.1.0
     sharp: ^0.30.7
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-inline-feature@^2.0.0-alpha.18, @coffeekraken/s-inline-feature@workspace:packages/features/s-inline-feature":
+"@coffeekraken/s-inline-feature@^2.0.0-alpha.20, @coffeekraken/s-inline-feature@workspace:packages/features/s-inline-feature":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-inline-feature@workspace:packages/features/s-inline-feature"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-interface@^2.0.0-alpha.18, @coffeekraken/s-interface@workspace:packages/core/s-interface":
+"@coffeekraken/s-interface@^2.0.0-alpha.20, @coffeekraken/s-interface@workspace:packages/core/s-interface":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-interface@workspace:packages/core/s-interface"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-descriptor": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-descriptor": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-kitchen@^2.0.0-alpha.18, @coffeekraken/s-kitchen@workspace:packages/app/s-kitchen":
+"@coffeekraken/s-kitchen@^2.0.0-alpha.20, @coffeekraken/s-kitchen@workspace:packages/app/s-kitchen":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-kitchen@workspace:packages/app/s-kitchen"
   dependencies:
-    "@coffeekraken/cli": ^2.0.0-alpha.18
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-duration": ^2.0.0-alpha.18
-    "@coffeekraken/s-favicon-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-frontspec": ^2.0.0-alpha.18
-    "@coffeekraken/s-images-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-log": ^2.0.0-alpha.18
-    "@coffeekraken/s-markdown-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-postcss-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-process": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-json": ^2.0.0-alpha.18
-    "@coffeekraken/s-vite": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/cli": ^2.0.0-alpha.20
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-duration": ^2.0.0-alpha.20
+    "@coffeekraken/s-env": ^2.0.0-alpha.20
+    "@coffeekraken/s-favicon-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-frontspec": ^2.0.0-alpha.20
+    "@coffeekraken/s-images-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/s-markdown-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-postcss-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-process": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-json": ^2.0.0-alpha.20
+    "@coffeekraken/s-vite": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     recursive-copy: ^2.0.14
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-lit-component@^2.0.0-alpha.18, @coffeekraken/s-lit-component@workspace:packages/components/s-lit-component":
+"@coffeekraken/s-lit-component@^2.0.0-alpha.20, @coffeekraken/s-lit-component@workspace:packages/components/s-lit-component":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-lit-component@workspace:packages/components/s-lit-component"
   dependencies:
-    "@coffeekraken/s-component-utils": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-component-utils": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     lit: ^2.2.8
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-log@^2.0.0-alpha.18, @coffeekraken/s-log@workspace:packages/core/s-log":
+"@coffeekraken/s-log@^2.0.0-alpha.20, @coffeekraken/s-log@workspace:packages/core/s-log":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-log@workspace:packages/core/s-log"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-markdown-builder@^2.0.0-alpha.18, @coffeekraken/s-markdown-builder@workspace:packages/builders/s-markdown-builder":
+"@coffeekraken/s-markdown-builder@^2.0.0-alpha.20, @coffeekraken/s-markdown-builder@workspace:packages/builders/s-markdown-builder":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-markdown-builder@workspace:packages/builders/s-markdown-builder"
   dependencies:
-    "@coffeekraken/s-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-data-file-generic": ^2.0.0-alpha.18
-    "@coffeekraken/s-docmap": ^2.0.0-alpha.18
-    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.18
-    "@coffeekraken/s-file": ^2.0.0-alpha.18
-    "@coffeekraken/s-glob": ^2.0.0-alpha.18
-    "@coffeekraken/s-handlebars": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-log": ^2.0.0-alpha.18
-    "@coffeekraken/s-postcss-sugar-plugin": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-data-file-generic": ^2.0.0-alpha.20
+    "@coffeekraken/s-docmap": ^2.0.0-alpha.20
+    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.20
+    "@coffeekraken/s-file": ^2.0.0-alpha.20
+    "@coffeekraken/s-glob": ^2.0.0-alpha.20
+    "@coffeekraken/s-handlebars": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/s-postcss-sugar-plugin": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     marked: ^4.0.18
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-monorepo@^2.0.0-alpha.18, @coffeekraken/s-monorepo@workspace:packages/core/s-monorepo":
+"@coffeekraken/s-monorepo@^2.0.0-alpha.20, @coffeekraken/s-monorepo@workspace:packages/core/s-monorepo":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-monorepo@workspace:packages/core/s-monorepo"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-code-formatter": ^2.0.0-alpha.18
-    "@coffeekraken/s-duration": ^2.0.0-alpha.18
-    "@coffeekraken/s-file": ^2.0.0-alpha.18
-    "@coffeekraken/s-glob": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-log": ^2.0.0-alpha.18
-    "@coffeekraken/s-package": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/s-typescript-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-vite": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-code-formatter": ^2.0.0-alpha.20
+    "@coffeekraken/s-duration": ^2.0.0-alpha.20
+    "@coffeekraken/s-file": ^2.0.0-alpha.20
+    "@coffeekraken/s-glob": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/s-package": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/s-typescript-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-vite": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-package@^2.0.0-alpha.18, @coffeekraken/s-package@workspace:packages/core/s-package":
+"@coffeekraken/s-package@^2.0.0-alpha.20, @coffeekraken/s-package@workspace:packages/core/s-package":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-package@workspace:packages/core/s-package"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-file": ^2.0.0-alpha.18
-    "@coffeekraken/s-glob": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-log": ^2.0.0-alpha.18
-    "@coffeekraken/s-markdown-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-file": ^2.0.0-alpha.20
+    "@coffeekraken/s-glob": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/s-markdown-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     chokidar: ^3.5.3
     dependency-cruiser: ^11.14.1
     glob: ^8.0.3
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-page-transition-feature@^2.0.0-alpha.18, @coffeekraken/s-page-transition-feature@workspace:packages/features/s-page-transition-feature":
+"@coffeekraken/s-page-transition-feature@^2.0.0-alpha.20, @coffeekraken/s-page-transition-feature@workspace:packages/features/s-page-transition-feature":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-page-transition-feature@workspace:packages/features/s-page-transition-feature"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-request": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-env": ^2.0.0-alpha.20
+    "@coffeekraken/s-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-request": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-panel-component@^2.0.0-alpha.18, @coffeekraken/s-panel-component@workspace:packages/components/s-panel-component":
+"@coffeekraken/s-panel-component@^2.0.0-alpha.20, @coffeekraken/s-panel-component@workspace:packages/components/s-panel-component":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-panel-component@workspace:packages/components/s-panel-component"
   dependencies:
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-lit-component": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-lit-component": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     lit: ^2.2.8
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-parallax-feature@^2.0.0-alpha.18, @coffeekraken/s-parallax-feature@workspace:packages/features/s-parallax-feature":
+"@coffeekraken/s-parallax-feature@^2.0.0-alpha.20, @coffeekraken/s-parallax-feature@workspace:packages/features/s-parallax-feature":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-parallax-feature@workspace:packages/features/s-parallax-feature"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     rematrix: ^0.7.2
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-postcss-builder@^2.0.0-alpha.18, @coffeekraken/s-postcss-builder@workspace:packages/builders/s-postcss-builder":
+"@coffeekraken/s-postcss-builder@^2.0.0-alpha.20, @coffeekraken/s-postcss-builder@workspace:packages/builders/s-postcss-builder":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-postcss-builder@workspace:packages/builders/s-postcss-builder"
   dependencies:
-    "@coffeekraken/s-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-duration": ^2.0.0-alpha.18
-    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.18
-    "@coffeekraken/s-file": ^2.0.0-alpha.18
-    "@coffeekraken/s-glob": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-log": ^2.0.0-alpha.18
-    "@coffeekraken/s-postcss-sugar-plugin": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-duration": ^2.0.0-alpha.20
+    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.20
+    "@coffeekraken/s-file": ^2.0.0-alpha.20
+    "@coffeekraken/s-glob": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/s-postcss-sugar-export-plugin": ^2.0.0-alpha.20
+    "@coffeekraken/s-postcss-sugar-plugin": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     "@fullhuman/postcss-purgecss": ^4.1.3
     autoprefixer: ^10.4.8
     cssnano: ^5.1.12
@@ -3246,25 +2320,25 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-postcss-sugar-plugin@^2.0.0-alpha.18, @coffeekraken/s-postcss-sugar-plugin@workspace:packages/postcss/s-postcss-sugar-plugin":
+"@coffeekraken/s-postcss-sugar-export-plugin@^2.0.0-alpha.20, @coffeekraken/s-postcss-sugar-export-plugin@workspace:packages/postcss/s-postcss-sugar-export-plugin":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/s-postcss-sugar-plugin@workspace:packages/postcss/s-postcss-sugar-plugin"
+  resolution: "@coffeekraken/s-postcss-sugar-export-plugin@workspace:packages/postcss/s-postcss-sugar-export-plugin"
   dependencies:
-    "@coffeekraken/s-bench": ^2.0.0-alpha.18
-    "@coffeekraken/s-color": ^2.0.0-alpha.18
-    "@coffeekraken/s-docblock": ^2.0.0-alpha.18
-    "@coffeekraken/s-duration": ^2.0.0-alpha.18
-    "@coffeekraken/s-env": ^2.0.0-alpha.18
-    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.18
-    "@coffeekraken/s-file": ^2.0.0-alpha.18
-    "@coffeekraken/s-glob": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-process": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-json": ^2.0.0-alpha.18
-    "@coffeekraken/s-theme": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-bench": ^2.0.0-alpha.20
+    "@coffeekraken/s-color": ^2.0.0-alpha.20
+    "@coffeekraken/s-docblock": ^2.0.0-alpha.20
+    "@coffeekraken/s-duration": ^2.0.0-alpha.20
+    "@coffeekraken/s-env": ^2.0.0-alpha.20
+    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.20
+    "@coffeekraken/s-file": ^2.0.0-alpha.20
+    "@coffeekraken/s-glob": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-process": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-json": ^2.0.0-alpha.20
+    "@coffeekraken/s-theme": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     chokidar: ^3.5.3
     faker: ^5.5.3
     fantasticon: 1.2.3
@@ -3275,156 +2349,187 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-process@^2.0.0-alpha.18, @coffeekraken/s-process@workspace:packages/core/s-process":
+"@coffeekraken/s-postcss-sugar-plugin@^2.0.0-alpha.20, @coffeekraken/s-postcss-sugar-plugin@workspace:packages/postcss/s-postcss-sugar-plugin":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/s-postcss-sugar-plugin@workspace:packages/postcss/s-postcss-sugar-plugin"
+  dependencies:
+    "@coffeekraken/s-bench": ^2.0.0-alpha.20
+    "@coffeekraken/s-color": ^2.0.0-alpha.20
+    "@coffeekraken/s-docblock": ^2.0.0-alpha.20
+    "@coffeekraken/s-duration": ^2.0.0-alpha.20
+    "@coffeekraken/s-env": ^2.0.0-alpha.20
+    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.20
+    "@coffeekraken/s-file": ^2.0.0-alpha.20
+    "@coffeekraken/s-glob": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-process": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-json": ^2.0.0-alpha.20
+    "@coffeekraken/s-theme": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
+    chokidar: ^3.5.3
+    csso: ^5.0.5
+    faker: ^5.5.3
+    fantasticon: 1.2.3
+    glob: ^7.2.3
+    oslllo-svg-fixer: ^1.4.1
+    postcss: ^8.4.14
+    svg-outline-stroke: ^1.3.1
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/s-process@^2.0.0-alpha.20, @coffeekraken/s-process@workspace:packages/core/s-process":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-process@workspace:packages/core/s-process"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-duration": ^2.0.0-alpha.18
-    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-log": ^2.0.0-alpha.18
-    "@coffeekraken/s-process": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-stdio": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-duration": ^2.0.0-alpha.20
+    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/s-process": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-stdio": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     stack-trace: 0.0.10
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-promise@^2.0.0-alpha.18, @coffeekraken/s-promise@workspace:packages/core/s-promise":
+"@coffeekraken/s-promise@^2.0.0-alpha.20, @coffeekraken/s-promise@workspace:packages/core/s-promise":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-promise@workspace:packages/core/s-promise"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-log": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-range-component@^2.0.0-alpha.18, @coffeekraken/s-range-component@workspace:packages/components/s-range-component":
+"@coffeekraken/s-range-component@^2.0.0-alpha.20, @coffeekraken/s-range-component@workspace:packages/components/s-range-component":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-range-component@workspace:packages/components/s-range-component"
   dependencies:
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-lit-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-lit-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     lit: ^2.2.8
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-rating-component@^2.0.0-alpha.18, @coffeekraken/s-rating-component@workspace:packages/components/s-rating-component":
+"@coffeekraken/s-rating-component@^2.0.0-alpha.20, @coffeekraken/s-rating-component@workspace:packages/components/s-rating-component":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-rating-component@workspace:packages/components/s-rating-component"
   dependencies:
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-lit-component": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-lit-component": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     lit: ^2.2.8
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-refocus-feature@^2.0.0-alpha.18, @coffeekraken/s-refocus-feature@workspace:packages/features/s-refocus-feature":
+"@coffeekraken/s-refocus-feature@^2.0.0-alpha.20, @coffeekraken/s-refocus-feature@workspace:packages/features/s-refocus-feature":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-refocus-feature@workspace:packages/features/s-refocus-feature"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-request@^2.0.0-alpha.18, @coffeekraken/s-request@workspace:packages/http/s-request":
+"@coffeekraken/s-request@^2.0.0-alpha.20, @coffeekraken/s-request@workspace:packages/http/s-request":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-request@workspace:packages/http/s-request"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     axios: ^0.27.2
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-scroll-component@^2.0.0-alpha.18, @coffeekraken/s-scroll-component@workspace:packages/components/s-scroll-component":
+"@coffeekraken/s-scroll-component@^2.0.0-alpha.20, @coffeekraken/s-scroll-component@workspace:packages/components/s-scroll-component":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-scroll-component@workspace:packages/components/s-scroll-component"
   dependencies:
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-lit-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/s-theme": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-lit-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/s-theme": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     lit: ^2.2.8
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-sitemap-builder@^2.0.0-alpha.18, @coffeekraken/s-sitemap-builder@workspace:packages/builders/s-sitemap-builder":
+"@coffeekraken/s-sitemap-builder@^2.0.0-alpha.20, @coffeekraken/s-sitemap-builder@workspace:packages/builders/s-sitemap-builder":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-sitemap-builder@workspace:packages/builders/s-sitemap-builder"
   dependencies:
-    "@coffeekraken/s-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-docmap": ^2.0.0-alpha.18
-    "@coffeekraken/s-duration": ^2.0.0-alpha.18
-    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.18
-    "@coffeekraken/s-glob": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-log": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-stdio": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/s-typescript-builder": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-docmap": ^2.0.0-alpha.20
+    "@coffeekraken/s-duration": ^2.0.0-alpha.20
+    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.20
+    "@coffeekraken/s-glob": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-stdio": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/s-typescript-builder": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-slider-component@^2.0.0-alpha.18, @coffeekraken/s-slider-component@workspace:packages/components/s-slider-component":
+"@coffeekraken/s-slider-component@^2.0.0-alpha.20, @coffeekraken/s-slider-component@workspace:packages/components/s-slider-component":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-slider-component@workspace:packages/components/s-slider-component"
   dependencies:
-    "@coffeekraken/s-component-utils": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-lit-component": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-component-utils": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-lit-component": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     lit: ^2.2.8
     swiper: ^8.3.2
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-state@^2.0.0-alpha.18, @coffeekraken/s-state@workspace:packages/state/s-state":
+"@coffeekraken/s-state@^2.0.0-alpha.20, @coffeekraken/s-state@workspace:packages/state/s-state":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-state@workspace:packages/state/s-state"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-log": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-static-builder@^2.0.0-alpha.18, @coffeekraken/s-static-builder@workspace:packages/builders/s-static-builder":
+"@coffeekraken/s-static-builder@^2.0.0-alpha.20, @coffeekraken/s-static-builder@workspace:packages/builders/s-static-builder":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-static-builder@workspace:packages/builders/s-static-builder"
   dependencies:
-    "@coffeekraken/s-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.18
-    "@coffeekraken/s-file": ^2.0.0-alpha.18
-    "@coffeekraken/s-frontend-server": ^2.0.0-alpha.18
-    "@coffeekraken/s-glob": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-log": ^2.0.0-alpha.18
-    "@coffeekraken/s-postcss-sugar-plugin": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-request": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-env": ^2.0.0-alpha.20
+    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.20
+    "@coffeekraken/s-file": ^2.0.0-alpha.20
+    "@coffeekraken/s-frontend-server": ^2.0.0-alpha.20
+    "@coffeekraken/s-glob": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/s-postcss-sugar-plugin": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-request": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     "@fullhuman/postcss-purgecss": ^4.1.3
     csso: ^4.2.0
     postcss: ^8.4.14
@@ -3437,256 +2542,259 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-stdio@^2.0.0-alpha.18, @coffeekraken/s-stdio@workspace:packages/core/s-stdio":
+"@coffeekraken/s-stdio@^2.0.0-alpha.20, @coffeekraken/s-stdio@workspace:packages/core/s-stdio":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-stdio@workspace:packages/core/s-stdio"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-duration": ^2.0.0-alpha.18
-    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-log": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-duration": ^2.0.0-alpha.20
+    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     enquirer: ^2.3.6
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-sugar-config@^2.0.0-alpha.18, @coffeekraken/s-sugar-config@workspace:packages/config/s-sugar-config":
+"@coffeekraken/s-sugar-config@^2.0.0-alpha.20, @coffeekraken/s-sugar-config@workspace:packages/config/s-sugar-config":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-sugar-config@workspace:packages/config/s-sugar-config"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-config": ^2.0.0-alpha.18
-    "@coffeekraken/s-config-folder-adapter": ^2.0.0-alpha.18
-    "@coffeekraken/s-docblock": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-json": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-config": ^2.0.0-alpha.20
+    "@coffeekraken/s-config-folder-adapter": ^2.0.0-alpha.20
+    "@coffeekraken/s-docblock": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-json": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-sugar-element@^2.0.0-alpha.18, @coffeekraken/s-sugar-element@workspace:packages/dom/s-sugar-element":
+"@coffeekraken/s-sugar-element@^2.0.0-alpha.20, @coffeekraken/s-sugar-element@workspace:packages/dom/s-sugar-element":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-sugar-element@workspace:packages/dom/s-sugar-element"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     rematrix: ^0.7.2
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-sugar-feature@^2.0.0-alpha.18, @coffeekraken/s-sugar-feature@workspace:packages/features/s-sugar-feature":
+"@coffeekraken/s-sugar-feature@^2.0.0-alpha.20, @coffeekraken/s-sugar-feature@workspace:packages/features/s-sugar-feature":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-sugar-feature@workspace:packages/features/s-sugar-feature"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-env": ^2.0.0-alpha.20
+    "@coffeekraken/s-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-sugar-json@^2.0.0-alpha.18, @coffeekraken/s-sugar-json@workspace:packages/core/s-sugar-json":
+"@coffeekraken/s-sugar-json@^2.0.0-alpha.20, @coffeekraken/s-sugar-json@workspace:packages/core/s-sugar-json":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-sugar-json@workspace:packages/core/s-sugar-json"
   dependencies:
-    "@coffeekraken/s-bench": ^2.0.0-alpha.18
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-duration": ^2.0.0-alpha.18
-    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.18
-    "@coffeekraken/s-glob": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-kitchen": ^2.0.0-alpha.18
-    "@coffeekraken/s-log": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-stdio": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-bench": ^2.0.0-alpha.20
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-duration": ^2.0.0-alpha.20
+    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.20
+    "@coffeekraken/s-glob": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-kitchen": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-stdio": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     glob-all: ^3.3.0
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-theme-switcher-component@^2.0.0-alpha.18, @coffeekraken/s-theme-switcher-component@workspace:packages/components/s-theme-switcher-component":
+"@coffeekraken/s-theme-switcher-component@^2.0.0-alpha.20, @coffeekraken/s-theme-switcher-component@workspace:packages/components/s-theme-switcher-component":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-theme-switcher-component@workspace:packages/components/s-theme-switcher-component"
   dependencies:
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-lit-component": ^2.0.0-alpha.18
-    "@coffeekraken/s-theme": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-lit-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-theme": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     lit: ^2.2.8
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-theme@^2.0.0-alpha.18, @coffeekraken/s-theme@workspace:packages/themes/s-theme":
+"@coffeekraken/s-theme@^2.0.0-alpha.20, @coffeekraken/s-theme@workspace:packages/themes/s-theme":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-theme@workspace:packages/themes/s-theme"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-color": ^2.0.0-alpha.18
-    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-json": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-color": ^2.0.0-alpha.20
+    "@coffeekraken/s-env": ^2.0.0-alpha.20
+    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-json": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     known-css-properties: ^0.25.0
     micromatch: ^4.0.5
     object-hash: ^2.2.0
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-timer@^2.0.0-alpha.18, @coffeekraken/s-timer@workspace:packages/tools/s-timer":
+"@coffeekraken/s-timer@^2.0.0-alpha.20, @coffeekraken/s-timer@workspace:packages/tools/s-timer":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-timer@workspace:packages/tools/s-timer"
   dependencies:
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-type@^2.0.0-alpha.18, @coffeekraken/s-type@workspace:packages/core/s-type":
+"@coffeekraken/s-type@^2.0.0-alpha.20, @coffeekraken/s-type@workspace:packages/core/s-type":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-type@workspace:packages/core/s-type"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-descriptor": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-descriptor": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-typescript-builder@^2.0.0-alpha.18, @coffeekraken/s-typescript-builder@workspace:packages/builders/s-typescript-builder":
+"@coffeekraken/s-typescript-builder@^2.0.0-alpha.20, @coffeekraken/s-typescript-builder@workspace:packages/builders/s-typescript-builder":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-typescript-builder@workspace:packages/builders/s-typescript-builder"
   dependencies:
-    "@coffeekraken/s-builder": ^2.0.0-alpha.18
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-file": ^2.0.0-alpha.18
-    "@coffeekraken/s-glob": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-log": ^2.0.0-alpha.18
-    "@coffeekraken/s-monorepo": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-file": ^2.0.0-alpha.20
+    "@coffeekraken/s-glob": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/s-monorepo": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     chokidar: ^3.5.3
     typescript: ^4.7.4
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-url@^2.0.0-alpha.18, @coffeekraken/s-url@workspace:packages/tools/s-url":
+"@coffeekraken/s-url@^2.0.0-alpha.20, @coffeekraken/s-url@workspace:packages/tools/s-url":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-url@workspace:packages/tools/s-url"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     url-parse: ^1.5.10
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-validator@^2.0.0-alpha.18, @coffeekraken/s-validator@workspace:packages/tools/s-validator":
+"@coffeekraken/s-validator@^2.0.0-alpha.20, @coffeekraken/s-validator@workspace:packages/tools/s-validator":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-validator@workspace:packages/tools/s-validator"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-view-renderer-engine-blade@^2.0.0-alpha.18, @coffeekraken/s-view-renderer-engine-blade@workspace:packages/renderers/s-view-renderer-engine-blade":
+"@coffeekraken/s-view-renderer-engine-blade@^2.0.0-alpha.20, @coffeekraken/s-view-renderer-engine-blade@workspace:packages/renderers/s-view-renderer-engine-blade":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-view-renderer-engine-blade@workspace:packages/renderers/s-view-renderer-engine-blade"
   dependencies:
-    "@coffeekraken/s-bench": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-log": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-bench": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-view-renderer-engine-lit@^2.0.0-alpha.18, @coffeekraken/s-view-renderer-engine-lit@workspace:packages/renderers/s-view-renderer-engine-lit":
+"@coffeekraken/s-view-renderer-engine-lit@^2.0.0-alpha.20, @coffeekraken/s-view-renderer-engine-lit@workspace:packages/renderers/s-view-renderer-engine-lit":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-view-renderer-engine-lit@workspace:packages/renderers/s-view-renderer-engine-lit"
   dependencies:
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     "@lit-labs/ssr": ^2.2.2
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-view-renderer-engine-twig@^2.0.0-alpha.18, @coffeekraken/s-view-renderer-engine-twig@workspace:packages/renderers/s-view-renderer-engine-twig":
+"@coffeekraken/s-view-renderer-engine-twig@^2.0.0-alpha.20, @coffeekraken/s-view-renderer-engine-twig@workspace:packages/renderers/s-view-renderer-engine-twig":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-view-renderer-engine-twig@workspace:packages/renderers/s-view-renderer-engine-twig"
   dependencies:
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-log": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-view-renderer@^2.0.0-alpha.18, @coffeekraken/s-view-renderer@workspace:packages/renderers/s-view-renderer":
+"@coffeekraken/s-view-renderer@^2.0.0-alpha.20, @coffeekraken/s-view-renderer@workspace:packages/renderers/s-view-renderer":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-view-renderer@workspace:packages/renderers/s-view-renderer"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-data-file-generic": ^2.0.0-alpha.18
-    "@coffeekraken/s-duration": ^2.0.0-alpha.18
-    "@coffeekraken/s-file": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-process": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/s-view-renderer-engine-blade": ^2.0.0-alpha.18
-    "@coffeekraken/s-view-renderer-engine-lit": ^2.0.0-alpha.18
-    "@coffeekraken/s-view-renderer-engine-twig": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-data-file-generic": ^2.0.0-alpha.20
+    "@coffeekraken/s-duration": ^2.0.0-alpha.20
+    "@coffeekraken/s-file": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-process": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/s-view-renderer-engine-blade": ^2.0.0-alpha.20
+    "@coffeekraken/s-view-renderer-engine-lit": ^2.0.0-alpha.20
+    "@coffeekraken/s-view-renderer-engine-twig": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     glob: ^8.0.3
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-vite-postcss-plugin@^2.0.0-alpha.18, @coffeekraken/s-vite-postcss-plugin@workspace:packages/vite/s-vite-postcss-plugin":
+"@coffeekraken/s-vite-postcss-plugin@^2.0.0-alpha.20, @coffeekraken/s-vite-postcss-plugin@workspace:packages/vite/s-vite-postcss-plugin":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-vite-postcss-plugin@workspace:packages/vite/s-vite-postcss-plugin"
   dependencies:
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
     postcss: ^8.4.14
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-vite-sugar-plugin@^2.0.0-alpha.18, @coffeekraken/s-vite-sugar-plugin@workspace:packages/vite/s-vite-sugar-plugin":
+"@coffeekraken/s-vite-sugar-plugin@^2.0.0-alpha.20, @coffeekraken/s-vite-sugar-plugin@workspace:packages/vite/s-vite-sugar-plugin":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-vite-sugar-plugin@workspace:packages/vite/s-vite-sugar-plugin"
   dependencies:
-    "@coffeekraken/s-env": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-env": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-vite@^2.0.0-alpha.18, @coffeekraken/s-vite@workspace:packages/vite/s-vite":
+"@coffeekraken/s-vite@^2.0.0-alpha.20, @coffeekraken/s-vite@workspace:packages/vite/s-vite":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-vite@workspace:packages/vite/s-vite"
   dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.18
-    "@coffeekraken/s-duration": ^2.0.0-alpha.18
-    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.18
-    "@coffeekraken/s-file": ^2.0.0-alpha.18
-    "@coffeekraken/s-form-validate-feature": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-log": ^2.0.0-alpha.18
-    "@coffeekraken/s-postcss-sugar-plugin": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/s-vite-postcss-plugin": ^2.0.0-alpha.18
-    "@coffeekraken/s-vite-sugar-plugin": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-duration": ^2.0.0-alpha.20
+    "@coffeekraken/s-env": ^2.0.0-alpha.20
+    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.20
+    "@coffeekraken/s-file": ^2.0.0-alpha.20
+    "@coffeekraken/s-form-validate-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/s-postcss-sugar-plugin": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/s-vite-postcss-plugin": ^2.0.0-alpha.20
+    "@coffeekraken/s-vite-sugar-plugin": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     "@sveltejs/vite-plugin-svelte": ^1.0.1
     "@vitejs/plugin-vue": ^1.10.2
     "@vitest/ui": ^0.15.2
@@ -3709,20 +2817,20 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/sugar@^2.0.0-alpha.18, @coffeekraken/sugar@workspace:packages/tools/sugar":
+"@coffeekraken/sugar@^2.0.0-alpha.20, @coffeekraken/sugar@workspace:packages/tools/sugar":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/sugar@workspace:packages/tools/sugar"
   dependencies:
-    "@coffeekraken/s-duration": ^2.0.0-alpha.18
-    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.18
-    "@coffeekraken/s-file": ^2.0.0-alpha.18
-    "@coffeekraken/s-interface": ^2.0.0-alpha.18
-    "@coffeekraken/s-log": ^2.0.0-alpha.18
-    "@coffeekraken/s-process": ^2.0.0-alpha.18
-    "@coffeekraken/s-promise": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.18
-    "@coffeekraken/s-sugar-element": ^2.0.0-alpha.18
-    "@coffeekraken/sugar": ^2.0.0-alpha.18
+    "@coffeekraken/s-duration": ^2.0.0-alpha.20
+    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.20
+    "@coffeekraken/s-file": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/s-process": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-element": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
     "@floating-ui/dom": ^0.5.4
     "@types/blessed": ^0.1.19
     abstract-syntax-tree: ^2.20.6
@@ -8062,12 +7170,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cjs-8faa53@workspace:packages/@websites/coffeekraken-io/dist/pkg/cjs":
-  version: 0.0.0-use.local
-  resolution: "cjs-8faa53@workspace:packages/@websites/coffeekraken-io/dist/pkg/cjs"
-  languageName: unknown
-  linkType: soft
-
 "cjs-module-lexer@npm:^1.0.0":
   version: 1.2.2
   resolution: "cjs-module-lexer@npm:1.2.2"
@@ -8773,6 +7875,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"css-tree@npm:~2.2.0":
+  version: 2.2.1
+  resolution: "css-tree@npm:2.2.1"
+  dependencies:
+    mdn-data: 2.0.28
+    source-map-js: ^1.0.1
+  checksum: b94aa8cc2f09e6f66c91548411fcf74badcbad3e150345074715012d16333ce573596ff5dfca03c2a87edf1924716db765120f94247e919d72753628ba3aba27
+  languageName: node
+  linkType: hard
+
 "css-what@npm:2.1":
   version: 2.1.3
   resolution: "css-what@npm:2.1.3"
@@ -8897,6 +8009,15 @@ __metadata:
   dependencies:
     css-tree: ^1.1.2
   checksum: 380ba9663da3bcea58dee358a0d8c4468bb6539be3c439dc266ac41c047217f52fd698fb7e4b6b6ccdfb8cf53ef4ceed8cc8ceccb8dfca2aa628319826b5b998
+  languageName: node
+  linkType: hard
+
+"csso@npm:^5.0.5":
+  version: 5.0.5
+  resolution: "csso@npm:5.0.5"
+  dependencies:
+    css-tree: ~2.2.0
+  checksum: 0ad858d36bf5012ed243e9ec69962a867509061986d2ee07cc040a4b26e4d062c00d4c07e5ba8d430706ceb02dd87edd30a52b5937fd45b1b6f2119c4993d59a
   languageName: node
   linkType: hard
 
@@ -10216,12 +9337,6 @@ __metadata:
   checksum: e3081d7dd2611a35f0388bbdc2f5da60b3a3c5b8b6e928daffff7391146b434d691577aa95064c8b7faad0b8a680266bcda0a42439c18c717b80e6718d7e267d
   languageName: node
   linkType: hard
-
-"esm-25ee22@workspace:packages/@websites/coffeekraken-io/dist/pkg/esm":
-  version: 0.0.0-use.local
-  resolution: "esm-25ee22@workspace:packages/@websites/coffeekraken-io/dist/pkg/esm"
-  languageName: unknown
-  linkType: soft
 
 "esm@npm:^3.2.25":
   version: 3.2.25
@@ -14280,6 +13395,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mdn-data@npm:2.0.28":
+  version: 2.0.28
+  resolution: "mdn-data@npm:2.0.28"
+  checksum: f51d587a6ebe8e426c3376c74ea6df3e19ec8241ed8e2466c9c8a3904d5d04397199ea4f15b8d34d14524b5de926d8724ae85207984be47e165817c26e49e0aa
+  languageName: node
+  linkType: hard
+
 "media-typer@npm:0.3.0":
   version: 0.3.0
   resolution: "media-typer@npm:0.3.0"
@@ -15758,12 +14880,6 @@ __metadata:
   checksum: 5bac346b7c7c903613c057ae3ab722f320716199d753f4a7d053d38f2b5955460f3e6ab73b4762c62fd3e947f58e04f1343e92089e7bb6091c90877406fcd8c8
   languageName: node
   linkType: hard
-
-"pkg@workspace:packages/tools/sugar/src/node/module/__tests__/pkg":
-  version: 0.0.0-use.local
-  resolution: "pkg@workspace:packages/tools/sugar/src/node/module/__tests__/pkg"
-  languageName: unknown
-  linkType: soft
 
 "please-upgrade-node@npm:^3.2.0":
   version: 3.2.0
@@ -18164,7 +17280,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"source-map-js@npm:>=0.6.2 <2.0.0, source-map-js@npm:^1.0.2":
+"source-map-js@npm:>=0.6.2 <2.0.0, source-map-js@npm:^1.0.1, source-map-js@npm:^1.0.2":
   version: 1.0.2
   resolution: "source-map-js@npm:1.0.2"
   checksum: c049a7fc4deb9a7e9b481ae3d424cc793cb4845daa690bc5a05d428bf41bf231ced49b4cf0c9e77f9d42fdb3d20d6187619fc586605f5eabe995a316da8d377c

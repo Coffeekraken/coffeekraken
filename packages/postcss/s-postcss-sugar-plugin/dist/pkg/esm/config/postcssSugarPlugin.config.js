@@ -1,7 +1,22 @@
+import __path from 'path';
 export default function (api) {
     if (api.env.platform !== 'node')
         return;
     return {
+        /**
+         * @name            outDir
+         * @namespace       config.postcssSugarPlugin
+         * @type            String
+         * @default        __path.dirname(config.postcssBuilder.output)
+         *
+         * Specify a directory in which to save relatively exported css, etc...
+         *
+         * @since           2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        get outDir() {
+            return __path.dirname(api.config.postcssBuilder.output);
+        },
         /**
          * @name            cache
          * @namespace       config.postcssSugarPlugin
@@ -52,4 +67,4 @@ export default function (api) {
         excludeCodeByTypes: [],
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRztJQUN4QixJQUFJLEdBQUcsQ0FBQyxHQUFHLENBQUMsUUFBUSxLQUFLLE1BQU07UUFBRSxPQUFPO0lBQ3hDLE9BQU87UUFDSDs7Ozs7Ozs7OztXQVVHO1FBQ0gsS0FBSyxFQUFFLElBQUk7UUFFWDs7Ozs7Ozs7OztXQVVHO1FBQ0gsY0FBYyxFQUFFLEVBQUU7UUFFbEI7Ozs7Ozs7Ozs7V0FVRztRQUNILHFCQUFxQixFQUFFLENBQUMsVUFBVSxDQUFDO1FBRW5DOzs7Ozs7Ozs7O1dBVUc7UUFDSCxrQkFBa0IsRUFBRSxFQUFFO0tBQ3pCLENBQUM7QUFDTixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sTUFBTSxNQUFNLE1BQU0sQ0FBQztBQUUxQixNQUFNLENBQUMsT0FBTyxXQUFXLEdBQUc7SUFDeEIsSUFBSSxHQUFHLENBQUMsR0FBRyxDQUFDLFFBQVEsS0FBSyxNQUFNO1FBQUUsT0FBTztJQUN4QyxPQUFPO1FBQ0g7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksTUFBTTtZQUNOLE9BQU8sTUFBTSxDQUFDLE9BQU8sQ0FBQyxHQUFHLENBQUMsTUFBTSxDQUFDLGNBQWMsQ0FBQyxNQUFNLENBQUMsQ0FBQztRQUM1RCxDQUFDO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRSxJQUFJO1FBRVg7Ozs7Ozs7Ozs7V0FVRztRQUNILGNBQWMsRUFBRSxFQUFFO1FBRWxCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxxQkFBcUIsRUFBRSxDQUFDLFVBQVUsQ0FBQztRQUVuQzs7Ozs7Ozs7OztXQVVHO1FBQ0gsa0JBQWtCLEVBQUUsRUFBRTtLQUN6QixDQUFDO0FBQ04sQ0FBQyJ9

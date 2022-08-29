@@ -49,6 +49,11 @@ class postcssSugarPluginUiButtonClassesInterface extends __SInterface {
                 values: ['default', 'square', 'pill'],
                 default: __STheme.get('ui.button.defaultShape'),
             },
+            defaultColor: {
+                type: 'String',
+                values: Object.keys(__STheme.get('color')),
+                default: __STheme.get('ui.button.defaultColor'),
+            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -66,6 +71,7 @@ export interface IPostcssSugarPluginUiButtonClassesParams {
     shapes: ('default' | 'square' | 'pill')[];
     defaultStyle: 'solid' | 'gradient' | 'outline' | 'text';
     defaultShape: 'default' | 'square' | 'pill';
+    defaultColor: string;
     scope: ('bare' | 'lnf' | 'bare' | 'shape' | 'tf' | 'vr')[];
 }
 
@@ -94,6 +100,7 @@ export default function ({
         shapes: [],
         defaultStyle: 'solid',
         defaultShape: 'default',
+        defaultColor: 'main',
         scope: ['bare', 'lnf', 'shape', 'tf', 'vr'],
         ...params,
     };
@@ -365,6 +372,18 @@ export default function ({
             {
                 type: 'CssClass',
             },
+        );
+    }
+
+    // default color
+    if (finalParams.scope.includes('lnf')) {
+        vars.code(
+            () => `
+            .s-btn:not(.s-color) {
+                @sugar.color(${finalParams.defaultColor});
+            }
+        `,
+            { type: 'CssClass' },
         );
     }
 

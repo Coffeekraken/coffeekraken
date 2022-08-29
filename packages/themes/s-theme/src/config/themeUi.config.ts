@@ -488,6 +488,20 @@ export default (api) => {
                 return api.theme.ui.default.defaultShape;
             },
             /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.button
+             * @type          String
+             * @default      [theme.ui.default.defaultColor]
+             *
+             * Specify the default style for your button ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get defaultColor() {
+                return api.theme.ui.default.defaultColor;
+            },
+            /**
              * @name          rhythmVertical
              * @namespace     config.themeUi.button
              * @type          Object
@@ -529,6 +543,20 @@ export default (api) => {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultStyle: 'solid',
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.backdrop
+             * @type          Number
+             * @default      solid
+             *
+             * Specify the default color for your backdrop ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get defaultColor() {
+                return api.theme.ui.default.defaultColor;
+            },
         },
         avatar: {
             get borderRadius() {
@@ -600,6 +628,20 @@ export default (api) => {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultShape: 'rounded',
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.avatar
+             * @type          Number
+             * @default      solid
+             *
+             * Specify the default color for your avatar ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get defaultColor() {
+                return api.theme.ui.default.defaultColor;
+            },
             /**
              * @name          rhythmVertical
              * @namespace     config.themeUi.avatar
@@ -711,6 +753,20 @@ export default (api) => {
              */
             get defaultShape() {
                 return api.theme.ui.form.defaultShape;
+            },
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.input
+             * @type          String
+             * @default      [theme.ui.default.defaultColor]
+             *
+             * Specify the default style for your input ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get defaultColor() {
+                return api.theme.ui.form.defaultColor;
             },
             /**
              * @name          depth
@@ -881,6 +937,20 @@ export default (api) => {
                 return api.theme.ui.form.defaultShape;
             },
             /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.radio
+             * @type          String
+             * @default      [theme.ui.form.defaultColor]
+             *
+             * Specify the default style for your radio ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get defaultColor() {
+                return api.theme.ui.form.defaultColor;
+            },
+            /**
              * @name          rhythmVertical
              * @namespace     config.themeUi.radio
              * @type          Object
@@ -1005,6 +1075,20 @@ export default (api) => {
              */
             get defaultShape() {
                 return api.theme.ui.default.defaultShape;
+            },
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.checkbox
+             * @type          String
+             * @default      [theme.ui.default.defaultColor]
+             *
+             * Specify the default style for your checkbox ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get defaultColor() {
+                return api.theme.ui.form.defaultColor;
             },
             /**
              * @name          outline
@@ -1133,6 +1217,20 @@ export default (api) => {
              */
             get defaultShape() {
                 return api.theme.ui.form.defaultShape;
+            },
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.range
+             * @type          String
+             * @default      [theme.ui.form.defaultColor]
+             *
+             * Specify the default style for your range ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get defaultColor() {
+                return api.theme.ui.form.defaultColor;
             },
             /**
              * @name          depth
@@ -1273,6 +1371,20 @@ export default (api) => {
              */
             get defaultShape() {
                 return api.theme.ui.form.defaultShape;
+            },
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.label
+             * @type          String
+             * @default      [theme.ui.default.defaultColor]
+             *
+             * Specify the default style for your label ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get defaultColor() {
+                return api.theme.ui.default.defaultColor;
             },
             /**
              * @name          depth
@@ -1417,6 +1529,20 @@ export default (api) => {
                 return api.theme.ui.form.defaultShape;
             },
             /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.select
+             * @type          String
+             * @default      [theme.ui.form.defaultColor]
+             *
+             * Specify the default style for your select ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get defaultColor() {
+                return api.theme.ui.form.defaultColor;
+            },
+            /**
              * @name          outline
              * @namespace     config.themeUi.select
              * @type          Object
@@ -1529,6 +1655,20 @@ export default (api) => {
              */
             get defaultShape() {
                 return api.theme.ui.form.defaultShape;
+            },
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.switch
+             * @type          String
+             * @default      [theme.ui.form.defaultColor]
+             *
+             * Specify the default style for your switch ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get defaultColor() {
+                return api.theme.ui.form.defaultColor;
             },
             /**
              * @name          outline
@@ -1683,6 +1823,20 @@ export default (api) => {
              */
             defaultShape: 'default',
             /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.dropdown
+             * @type          String
+             * @default      [theme.ui.default.defaultColor]
+             *
+             * Specify the default style for your dropdown ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get defaultColor() {
+                return api.theme.ui.default.defaultColor;
+            },
+            /**
              * @name          depth
              * @namespace     config.themeUi.dropdown
              * @type          String
@@ -1792,6 +1946,20 @@ export default (api) => {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultStyle: 'dl',
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.label
+             * @type          String
+             * @default      [theme.ui.default.defaultColor]
+             *
+             * Specify the default style for your label ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get defaultColor() {
+                return api.theme.ui.default.defaultColor;
+            },
             /**
              * @name          depth
              * @namespace     config.themeUi.list
@@ -1931,6 +2099,20 @@ export default (api) => {
              */
             get defaultShape() {
                 return api.theme.ui.default.defaultShape;
+            },
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.fsTree
+             * @type          String
+             * @default      [theme.ui.default.defaultColor]
+             *
+             * Specify the default style for your fsTree ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get defaultColor() {
+                return api.theme.ui.default.defaultColor;
             },
             /**
              * @name          depth
@@ -2073,6 +2255,20 @@ export default (api) => {
                 return api.theme.ui.default.defaultShape;
             },
             /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.tabs
+             * @type          String
+             * @default      [theme.ui.default.defaultColor]
+             *
+             * Specify the default style for your tabs ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get defaultColor() {
+                return api.theme.ui.default.defaultColor;
+            },
+            /**
              * @name          depth
              * @namespace     config.themeUi.tabs
              * @type          String
@@ -2107,134 +2303,6 @@ export default (api) => {
              * @default      [theme.ui.default.rhythmVertical]
              *
              * Specify the default vertical rhythm for your tabe ui
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            get rhythmVertical() {
-                return api.theme.ui.default.rhythmVertical;
-            },
-        },
-        terminal: {
-            /**
-             * @name          paddingInline
-             * @namespace     config.themeUi.terminal
-             * @type          String
-             * @default      [theme.ui.default.paddingInline]
-             *
-             * Specify the default padding inline for terminal ui
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            get paddingInline() {
-                return api.theme.ui.default.paddingInline;
-            },
-            /**
-             * @name          paddingBlock
-             * @namespace     config.themeUi.terminal
-             * @type          String
-             * @default      [theme.ui.default.paddingBlock]
-             *
-             * Specify the default padding block for terminal ui
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            get paddingBlock() {
-                return api.theme.ui.default.paddingBlock;
-            },
-            /**
-             * @name          borderRadius
-             * @namespace     config.themeUi.terminal
-             * @type          String
-             * @default      [theme.ui.default.borderRadius]
-             *
-             * Specify the default border radius for terminal ui
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            get borderRadius() {
-                return api.theme.ui.default.borderRadius;
-            },
-            /**
-             * @name          borderWidth
-             * @namespace     config.themeUi.terminal
-             * @type          String
-             * @default      [theme.ui.default.borderWidth]
-             *
-             * Specify the default border width for terminal ui
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            get borderWidth() {
-                return api.theme.ui.default.borderWidth;
-            },
-            /**
-             * @name          transition
-             * @namespace     config.themeUi.terminal
-             * @type          String
-             * @default      [theme.ui.default.transition]
-             *
-             * Specify the default transition for terminal ui
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            get transition() {
-                return api.theme.ui.default.transition;
-            },
-            /**
-             * @name          defaultColor
-             * @namespace     config.themeUi.terminal
-             * @type          String
-             * @default      [theme.ui.default.defaultColor]
-             *
-             * Specify the default color for terminal ui
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            get defaultColor() {
-                return api.theme.ui.default.defaultColor;
-            },
-            /**
-             * @name          defaultStyle
-             * @namespace     config.themeUi.terminal
-             * @type          Number
-             * @default      [theme.ui.default.defaultStyle]
-             *
-             * Specify the default style for your terminal ui
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            get defaultStyle() {
-                return api.theme.ui.default.defaultStyle;
-            },
-            /**
-             * @name          depth
-             * @namespace     config.themeUi.terminal
-             * @type          String
-             * @default      [theme.ui.default.depth]
-             *
-             * Specify the default depth for terminal items
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            get depth() {
-                return api.theme.ui.default.depth;
-            },
-            /**
-             * @name          rhythmVertical
-             * @namespace     config.themeUi.terminal
-             * @type          Object
-             * @default      [theme.ui.default.rhythmVertical]
-             *
-             * Specify the default vertical rhythm for your terminal ui
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -2343,6 +2411,20 @@ export default (api) => {
                 return api.theme.ui.default.defaultShape;
             },
             /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.tooltip
+             * @type          String
+             * @default      [theme.ui.default.defaultColor]
+             *
+             * Specify the default style for your tooltip ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get defaultColor() {
+                return api.theme.ui.default.defaultColor;
+            },
+            /**
              * @name          depth
              * @namespace     config.themeUi.tooltip
              * @type          String
@@ -2439,20 +2521,6 @@ export default (api) => {
              */
             get transition() {
                 return api.theme.ui.default.transition;
-            },
-            /**
-             * @name          defaultColor
-             * @namespace     config.themeUi.code
-             * @type          String
-             * @default      [theme.ui.default.defaultColor]
-             *
-             * Specify the default color for code ui
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            get defaultColor() {
-                return api.theme.ui.default.defaultColor;
             },
             /**
              * @name          defaultStyle
@@ -2600,14 +2668,16 @@ export default (api) => {
              * @name          defaultColor
              * @namespace     config.themeUi.blockquote
              * @type          String
-             * @default      accent
+             * @default      [theme.ui.default.defaultColor]
              *
-             * Specify the default color for your blockquote ui
+             * Specify the default style for your blockquote ui
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultColor: 'accent',
+            get defaultColor() {
+                return api.theme.ui.default.defaultColor;
+            },
             /**
              * @name          depth
              * @namespace     config.themeUi.blockquote
@@ -2735,6 +2805,20 @@ export default (api) => {
              */
             get defaultShape() {
                 return api.theme.ui.default.defaultShape;
+            },
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.switch
+             * @type          String
+             * @default      [theme.ui.default.defaultColor]
+             *
+             * Specify the default style for your switch ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get defaultColor() {
+                return api.theme.ui.default.defaultColor;
             },
             /**
              * @name          depth
@@ -2912,6 +2996,20 @@ export default (api) => {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             easing: 'linear',
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.loader
+             * @type          String
+             * @default      [theme.ui.default.defaultColor]
+             *
+             * Specify the default style for your loader ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get defaultColor() {
+                return api.theme.ui.default.defaultColor;
+            },
         },
         loaderSpinner: {
             /**

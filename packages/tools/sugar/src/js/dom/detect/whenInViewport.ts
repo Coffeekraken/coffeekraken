@@ -48,7 +48,7 @@ export default function whenInViewport(
         const options = {
             root: null, // relative to document viewport
             rootMargin: settings.offset, // margin around root. Values are similar to css property. Unitless values not allowed
-            threshold: 1.0, // visible amount of item shown in relation to root
+            threshold: 0, // visible amount of item shown in relation to root
         };
 
         function onChange(changes, observer) {

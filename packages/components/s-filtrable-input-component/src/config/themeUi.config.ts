@@ -77,21 +77,6 @@ export default (api) => {
             },
 
             /**
-             * @name          defaultColor
-             * @namespace     config.themeUi.filtrableInput
-             * @type          String
-             * @default      [theme.ui.default.defaultColor]
-             *
-             * Specify the default color for filtrable input ui
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            get defaultColor() {
-                return api.theme.ui.default.defaultColor;
-            },
-
-            /**
              * @name          defaultStyle
              * @namespace     config.themeUi.filtrableInput
              * @type          Number
@@ -104,6 +89,21 @@ export default (api) => {
              */
             get defaultStyle() {
                 return api.theme.ui.default.defaultStyle;
+            },
+
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.filtrableInput
+             * @type          String
+             * @default      [theme.ui.form.defaultColor]
+             *
+             * Specify the default style for your filtrableInput ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get defaultColor() {
+                return api.theme.ui.form.defaultColor;
             },
 
             /**

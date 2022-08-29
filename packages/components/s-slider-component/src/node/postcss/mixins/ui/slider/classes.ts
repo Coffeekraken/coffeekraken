@@ -16,6 +16,7 @@ class postcssUiSliderClassesInterface extends __SInterface {
             },
             defaultColor: {
                 type: 'String',
+                values: Object.keys(__STheme.get('color')),
                 default: __STheme.get('ui.slider.defaultColor'),
             },
             scope: {

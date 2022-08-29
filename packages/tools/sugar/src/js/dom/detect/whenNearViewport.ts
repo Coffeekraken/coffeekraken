@@ -40,7 +40,12 @@ export default function whenNearViewport(
     settings: Partials<IWhenNearViewportSettings> = {},
 ): Promise<HTMLElement> {
     settings = {
-        offset: `${window.innerHeight}px ${window.innerWidth}px`,
+        offset: [
+            `${Math.round(window.innerHeight * 0.5) * -1}px`,
+            `${Math.round(window.innerWidth * 0.5) * -1}px`,
+            `${Math.round(window.innerHeight * 0.5)}px`,
+            `${Math.round(window.innerHeight * 0.5)}px`,
+        ].join(' '),
         ...settings,
     };
 
@@ -50,7 +55,7 @@ export default function whenNearViewport(
         const options = {
             root: null, // relative to document viewport
             rootMargin: settings.offset, // margin around root. Values are similar to css property. Unitless values not allowed
-            threshold: 1.0, // visible amount of item shown in relation to root
+            threshold: 0, // visible amount of item shown in relation to root
         };
 
         function onChange(changes, observer) {
@@ -69,7 +74,12 @@ export default function whenNearViewport(
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
                 observer.disconnect?.();
-                options.rootMargin = `${window.innerHeight}px ${window.innerWidth}px`;
+                options.rootMargin = [
+                    `${Math.round(window.innerHeight * 0.5) * -1}px`,
+                    `${Math.round(window.innerWidth * 0.5) * -1}px`,
+                    `${Math.round(window.innerHeight * 0.5)}px`,
+                    `${Math.round(window.innerHeight * 0.5)}px`,
+                ].join(' ');
                 observer = new IntersectionObserver(onChange, options);
                 observer.observe(elm);
             }, 500);

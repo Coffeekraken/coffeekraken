@@ -22,6 +22,7 @@
         "@coffeekraken/s-theme": "^2.0.0-alpha.20",
         "@coffeekraken/sugar": "^2.0.0-alpha.20",
         "chokidar": "^3.5.3",
+        "csso": "^5.0.5",
         "faker": "^5.5.3",
         "fantasticon": "1.2.3",
         "glob": "^7.2.3",

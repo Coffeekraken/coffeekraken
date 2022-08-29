@@ -7,6 +7,7 @@
     "license": "MIT",
     "dependencies": {
         "@coffeekraken/s-builder": "^2.0.0-alpha.20",
+        "@coffeekraken/s-env": "^2.0.0-alpha.20",
         "@coffeekraken/s-event-emitter": "^2.0.0-alpha.20",
         "@coffeekraken/s-file": "^2.0.0-alpha.20",
         "@coffeekraken/s-frontend-server": "^2.0.0-alpha.20",
@@ -16,7 +17,6 @@
         "@coffeekraken/s-postcss-sugar-plugin": "^2.0.0-alpha.20",
         "@coffeekraken/s-promise": "^2.0.0-alpha.20",
         "@coffeekraken/s-request": "^2.0.0-alpha.20",
-        "@coffeekraken/s-env": "^2.0.0-alpha.20",
         "@coffeekraken/s-sugar-config": "^2.0.0-alpha.20",
         "@coffeekraken/sugar": "^2.0.0-alpha.20",
         "@fullhuman/postcss-purgecss": "^4.1.3",

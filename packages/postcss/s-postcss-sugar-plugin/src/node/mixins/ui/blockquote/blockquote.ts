@@ -13,7 +13,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @param       {'solid'}                           [style'theme.ui.blockquote.defaultStyle']         The style you want to generate
  * @param       {'default'|'square'|'pill'}             [shape='theme.ui.blockquote.defaultShape']         The shape you want to generate
- * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape']]      The scope you want to generate
+ * @param       {('bare'|'lnf'|'color'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'col0r^'shape']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
  * @example       css
@@ -28,6 +28,10 @@ import __STheme from '@coffeekraken/s-theme';
 class postcssSugarPluginUiBlockquoteInterface extends __SInterface {
     static get _definition() {
         return {
+            color: {
+                type: 'String',
+                default: __STheme.get('ui.blockquote.defaultColor'),
+            },
             style: {
                 type: 'String',
                 values: ['solid'],
@@ -43,17 +47,18 @@ class postcssSugarPluginUiBlockquoteInterface extends __SInterface {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'shape'],
-                default: ['bare', 'lnf', 'shape'],
+                values: ['bare', 'lnf', 'shape', 'color'],
+                default: ['bare', 'lnf', 'shape', 'color'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiBlockquoteParams {
+    color: string;
     style: 'solid';
     shape: 'default' | 'square';
-    scope: ('bare' | 'lnf' | 'shape' | 'vr')[];
+    scope: ('bare' | 'lnf' | 'shape' | 'color' | 'vr')[];
 }
 
 export { postcssSugarPluginUiBlockquoteInterface as interface };
@@ -68,9 +73,10 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiBlockquoteParams = {
+        color: 'main',
         style: 'solid',
         shape: 'default',
-        scope: ['bare', 'lnf', 'shape'],
+        scope: ['bare', 'lnf', 'shape', 'color'],
         ...params,
     };
 
@@ -79,6 +85,12 @@ export default function ({
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
             font-size: sugar.scalable(1rem);
+        `);
+    }
+
+    if (finalParams.scope.includes('color')) {
+        vars.push(`
+            @sugar.color(${finalParams.color});
         `);
     }
 

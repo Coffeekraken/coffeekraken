@@ -59,6 +59,7 @@ export default function (api) {
          */
         get staticDirs() {
             return {
+                '/dist/css/exports': `${api.config.storage.dist.cssDir}/exports`,
                 '/dist':
                     api.env.env === 'production'
                         ? api.config.storage.dist.rootDir

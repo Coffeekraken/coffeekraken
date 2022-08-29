@@ -16,6 +16,7 @@ import __faker from 'faker';
  * @param       {('default'|'square'|'circle')[]}             [shape=['default','square','circle']]         The shape(s) you want to generate
  * @param       {'solid'}                [defaultStyle='theme.ui.button.defaultStyle']           The default style you want
  * @param       {'default'|'square'|'circle'}        [defaultShape='theme.ui.button.defaultShape']           The default shape you want
+ * @param       {String}                            [defaultColor=theme.ui.button.defaultColor]            The default color you want
  * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
@@ -49,6 +50,11 @@ class postcssSugarPluginUiCheckboxClassesInterface extends __SInterface {
                 values: ['default', 'square', 'circle'],
                 default: __STheme.get('ui.checkbox.defaultShape'),
             },
+            defaultColor: {
+                type: 'String',
+                values: Object.keys(__STheme.get('color')),
+                default: __STheme.get('ui.checkbox.defaultColor'),
+            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -66,6 +72,7 @@ export interface IPostcssSugarPluginUiCheckboxClassesParams {
     shapes: ('default' | 'square' | 'circle')[];
     defaultStyle: 'solid';
     defaultShape: 'default' | 'square' | 'circle';
+    defaultColor: string;
     scope: ('bare' | 'lnf' | 'shape' | 'tf' | 'vr')[];
 }
 
@@ -94,6 +101,7 @@ export default function ({
         shapes: ['default', 'square', 'circle'],
         defaultStyle: 'solid',
         defaultShape: 'default',
+        defaultColor: 'main',
         scope: [],
         ...params,
     };
@@ -328,6 +336,18 @@ export default function ({
                 },
             );
         });
+    }
+
+    // default color
+    if (finalParams.scope.includes('lnf')) {
+        vars.code(
+            () => `
+            .s-checkbox:not(.s-color) {
+                @sugar.color(${finalParams.defaultColor});
+            }
+        `,
+            { type: 'CssClass' },
+        );
     }
 
     if (finalParams.scope.indexOf('tf') !== -1) {

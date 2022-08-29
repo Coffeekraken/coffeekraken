@@ -9,15 +9,16 @@ class postcssUiFiltrableInputClassesInterface extends __SInterface {
                 values: ['solid'],
                 default: ['solid'],
             },
-            defaultColor: {
-                type: 'String',
-                default: __STheme.get('ui.filtrableInput.defaultColor'),
-            },
             defaultStyle: {
                 type: 'String',
                 values: ['solid'],
                 default:
                     __STheme.get('ui.filtrableInput.defaultStyle') ?? 'solid',
+            },
+            defaultColor: {
+                type: 'String',
+                values: Object.keys(__STheme.get('color')),
+                default: __STheme.get('ui.filtrableInput.defaultColor'),
             },
             scope: {
                 type: {
@@ -91,12 +92,23 @@ export default function ({
         ).code(
             `
                 [lnf="default"] > .s-filtrable-input {
-                    @sugar.color(${finalParams.defaultColor});
                     @sugar.ui.filtrableInput($style: solid, $scope: lnf);
                 }`,
             {
                 type: 'CssClass',
             },
+        );
+    }
+
+    // default color
+    if (finalParams.scope.includes('lnf')) {
+        vars.code(
+            () => `
+            .s-filtrable-input:not(.s-color) {
+                @sugar.color(${finalParams.defaultColor});
+            }
+        `,
+            { type: 'CssClass' },
         );
     }
 

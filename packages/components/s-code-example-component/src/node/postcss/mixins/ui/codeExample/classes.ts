@@ -16,6 +16,7 @@ class postcssUiCodeExampleClassesInterface extends __SInterface {
             },
             defaultColor: {
                 type: 'String',
+                values: Object.keys(__STheme.get('color')),
                 default: __STheme.get('ui.codeExample.defaultColor'),
             },
             scope: {
@@ -97,7 +98,6 @@ export default function ({
         */`,
         ).code(
             `.s-code-example[lnf="default"] {
-                @sugar.color(${finalParams.defaultColor});
                 @sugar.ui.codeExample($style: ${finalParams.defaultStyle}, $scope: lnf);
             }`,
             {
@@ -116,6 +116,18 @@ export default function ({
             {
                 type: 'CssClass',
             },
+        );
+    }
+
+    // default color
+    if (finalParams.scope.includes('lnf')) {
+        vars.code(
+            () => `
+            .s-code-example:not(.s-color) {
+                @sugar.color(${finalParams.defaultColor});
+            }
+        `,
+            { type: 'CssClass' },
         );
     }
 

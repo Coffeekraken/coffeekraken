@@ -15,6 +15,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {('default'|'square'|'pill')[]}             [shape=['default','square','pill']]         The shape(s) you want to generate
  * @param       {'solid'|'outline'}                [defaultStyle='theme.ui.badge.defaultStyle']           The default style you want
  * @param       {'default'|'square'|'pill'}        [defaultShape='theme.ui.badge.defaultShape']           The default shape you want
+ * @param       {String}                            [defaultColor=theme.ui.badge.defaultColor]            The default color you want
  * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
@@ -47,6 +48,11 @@ class postcssSugarPluginUiBadgeClassesInterface extends __SInterface {
                 type: 'String',
                 values: ['default', 'square', 'pill'],
                 default: __STheme.get('ui.badge.defaultShape'),
+            },
+            defaultColor: {
+                type: 'String',
+                values: Object.keys(__STheme.get('color')),
+                default: __STheme.get('ui.badgr.defaultColor'),
             },
             scope: {
                 type: {

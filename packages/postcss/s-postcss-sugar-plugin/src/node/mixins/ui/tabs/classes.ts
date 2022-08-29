@@ -16,6 +16,7 @@ import __faker from 'faker';
  * @param       {('default'|'square'|'pill')[]}             [shape=['default','square','pill']]         The shape(s) you want to generate
  * @param       {'solid'}                [defaultStyle='theme.ui.tabs.defaultStyle']           The default style you want
  * @param       {'default'|'square'|'pill'}        [defaultShape='theme.ui.tabs.defaultShape']           The default shape you want
+ * @param       {String}                            [defaultColor=theme.ui.tabs.defaultColor]            The default color you want
  * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
@@ -49,6 +50,11 @@ class postcssSugarPluginUiListClassesInterface extends __SInterface {
                 values: ['default', 'square', 'pill'],
                 default: __STheme.get('ui.tabs.defaultShape'),
             },
+            defaultColor: {
+                type: 'String',
+                values: Object.keys(__STheme.get('color')),
+                default: __STheme.get('ui.tabs.defaultColor'),
+            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -66,6 +72,7 @@ export interface IPostcssSugarPluginUiListClassesParams {
     shapes: ('default' | 'square' | 'pill')[];
     defaultStyle: 'solid';
     defaultShape: 'default' | 'square' | 'pill';
+    defaultColor: string;
     scope: ('bare' | 'lnf' | 'shape' | 'vr' | 'tf')[];
 }
 
@@ -94,6 +101,7 @@ export default function ({
         shapes: [],
         defaultStyle: 'solid',
         defaultShape: 'default',
+        defaultColor: 'main',
         scope: [],
         ...params,
     };
@@ -304,6 +312,18 @@ export default function ({
                 { type: 'CssClass' },
             );
         });
+    }
+
+    // default color
+    if (finalParams.scope.includes('lnf')) {
+        vars.code(
+            () => `
+            .s-tabs:not(.s-color) {
+                @sugar.color(${finalParams.defaultColor});
+            }
+        `,
+            { type: 'CssClass' },
+        );
     }
 
     vars.comment(

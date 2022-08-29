@@ -6,7 +6,6 @@ import __STheme from '@coffeekraken/s-theme';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __folderHash from '@coffeekraken/sugar/node/fs/folderHash';
 import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
-import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __packageCacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __replaceTokens from '@coffeekraken/sugar/node/token/replaceTokens';
@@ -35,12 +34,14 @@ let loadedPromise;
 const _cacheObjById = {};
 
 export interface IPostcssSugarPluginSettings {
+    outDir: string;
     cache?: boolean;
     excludeByTypes?: string[];
     excludeCommentByTypes?: string[];
     excludeCodeByTypes?: string[];
     inlineImport?: boolean;
     target?: 'development' | 'production' | 'vite';
+    exports: boolean;
 }
 
 export function getFunctionsList() {
@@ -86,15 +87,21 @@ let _configLoaded = false;
 const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
     settings = __deepMerge(
         {
+            outDir: '',
             excludeByTypes: [],
             excludeCommentByTypes: [],
             excludeCodeByTypes: [],
             target: 'production',
             inlineImport: true,
             cache: false,
+            // @ts-ignore
         },
         settings,
     );
+    if (settings.exports === undefined) {
+        settings.exports = settings.target === 'production';
+    }
+
     let themeHash, cacheDir;
 
     if (_configLoaded) {
@@ -103,6 +110,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
 
     function updateConfig() {
         settings = __deepMerge(settings, {
+            outDir: __SSugarConfig.get('postcssSugarPlugin.outDir'),
             excludeByTypes: __SSugarConfig.get(
                 'postcssSugarPlugin.excludeByTypes',
             ),
@@ -114,6 +122,9 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             ),
             cache: __SSugarConfig.get('postcssSugarPlugin.cache'),
         });
+        if (settings.exports === undefined) {
+            settings.exports = settings.target === 'production';
+        }
 
         // remove cache if not for vite target
         if (settings.cache === undefined && settings.target !== 'vite') {
@@ -203,27 +214,6 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
         return `${__packageCacheDir()}/postcssSugarPlugin/${pluginHash}/${fileName}`;
     }
 
-    // function applyNoScopes(scopes: string[], fromNode): string[] {
-    //     const noScopeRule = findUp(fromNode, (node) => {
-    //         if (node?.name === 'sugar.scope.no') return node;
-    //         return;
-    //     });
-    //     if (noScopeRule && noScopeRule.params) {
-    //         const noScopes = noScopeRule.params
-    //             .trim()
-    //             .replace(/^\(/, '')
-    //             .replace(/\)$/, '')
-    //             .split(/[,\s]/)
-    //             .map((l) => l.trim());
-
-    //         const newScopes = scopes.filter((scope) => {
-    //             return noScopes.indexOf(scope) === -1;
-    //         });
-    //         return newScopes;
-    //     }
-    //     return scopes;
-    // }
-
     function nodesToString(nodes) {
         return nodes
             .map((node) => node.toString())
@@ -237,17 +227,6 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
 
     function replaceWith(atRule, nodes) {
         nodes = contentToArray(nodes);
-
-        // atRule.walkComments((comment) => {
-        //     comment.remove();
-        // });
-
-        // let isAllText = true;
-        // nodes.forEach((n) => {
-        //     if (!isAllText) return;
-        //     if (typeof n !== 'string') isAllText = false;
-        // });
-        // if (isAllText) nodes = [nodes.join('\n')];
 
         if (atRule.parent) {
             let finalNodes: any[] = [];
@@ -421,21 +400,6 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             const params = functionInterface.apply(paramsStatement, {});
             delete params.help;
 
-            // for (let [key, value] of Object.entries(params)) {
-            //     if (key === 'dotPath') continue;
-            //     if (
-            //         typeof value === 'string' &&
-            //         value.match(/^theme\.[a-zA-Z0-9_-]+/)
-            //     ) {
-            //         const themeValue = __STheme.getSafe(
-            //             value.replace(/^theme\./, ''),
-            //         );
-            //         if (themeValue === undefined) continue;
-            //         params[key] = themeValue;
-            //         console.log('THEME', params[key], key);
-            //     }
-            // }
-
             function themeValueProxy(dotPathOrValue: string): any {
                 const value = __STheme.getSafe(dotPathOrValue);
                 if (value !== undefined) return value;
@@ -558,33 +522,6 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                     sharedData,
                 });
             }
-
-            let cssStr = root.toString();
-
-            // CACHE
-            const cacheMatches = cssStr.match(
-                /\/\*\sCACHE:[a-zA-Z0-9@\._-]+\s\*\//gm,
-            );
-            cacheMatches?.forEach((cacheStr) => {
-                const cacheId = cacheStr
-                    .replace('/* CACHE:', '')
-                    .replace(' */', '')
-                    .trim();
-                const toCache = cssStr.match(
-                    new RegExp(
-                        `\\/\\*\\sCACHE:${cacheId}\\s\\*\\/(.|\\r|\\t|\\n)*\\/\\*\\sENDCACHE:${cacheId}\\s\\*\\/`,
-                        'g',
-                    ),
-                );
-                if (!toCache) return;
-
-                const cachePath = getCacheFilePath(cacheId);
-
-                const toCacheStr = toCache[0]
-                    .replace(`/* CACHE:${cacheId} */`, '')
-                    .replace(`/* ENDCACHE:${cacheId} */`, '');
-                __writeFileSync(cachePath, toCacheStr);
-            });
 
             // compress --s-theme-... variables
             root.walkDecls((node) => {

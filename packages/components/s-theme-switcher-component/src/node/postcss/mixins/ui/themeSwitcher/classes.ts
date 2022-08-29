@@ -17,6 +17,7 @@ class postcssUiThemeSwitcherClassesInterface extends __SInterface {
             },
             defaultColor: {
                 type: 'String',
+                values: Object.keys(__STheme.get('color')),
                 default: __STheme.get('ui.themeSwitcher.defaultColor'),
             },
             scope: {
@@ -100,6 +101,18 @@ export default function ({
             {
                 type: 'CssClass',
             },
+        );
+    }
+
+    // default color
+    if (finalParams.scope.includes('lnf')) {
+        vars.code(
+            () => `
+            .s-theme-switcher:not(.s-color) {
+                @sugar.color(${finalParams.defaultColor});
+            }
+        `,
+            { type: 'CssClass' },
         );
     }
 

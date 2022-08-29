@@ -46,6 +46,84 @@ export default function ({
     const vars = new CssVars();
 
     vars.comment(
+        () => `
+      /**
+        * @name          Overflow
+        * @namespace          sugar.style.helpers
+        * @type               Styleguide
+        * @menu           Styleguide / Helpers        /styleguide/helpers/overflow
+        * @platform       css
+        * @status       beta
+        * 
+        * These classes allows you to apply some overflow attributes on any HTMLElement.
+        * 
+        * @support      chromium
+        * @support      firefox
+        * @support      safari
+        * @support      edge
+        * 
+        * @cssClass         s-overflow:auto             Apply the "auto" overflow attribute
+        * @cssClass         s-overflow:hidden             Apply the "hidden" overflow attribute
+        * @cssClass         s-overflow:inherit             Apply the "inherit" overflow attribute
+        * @cssClass         s-overflow:initial             Apply the "initial" overflow attribute
+        * @cssClass         s-overflow:overlay             Apply the "overlay" overflow attribute
+        * @cssClass         s-overflow:revert             Apply the "revert" overflow attribute
+        * @cssClass         s-overflow:scroll             Apply the "scroll" overflow attribute
+        * @cssClass         s-overflow:visible             Apply the "visible" overflow attribute
+        * @cssClass         s-overflow:unset             Apply the "unset" overflow attribute
+        * 
+        * @example        html          Auto
+        * <div class="s-overflow:auto">
+        *   I'm in an "auto" overflow container
+        * </div>
+        * 
+        * @example        html          Hidden
+       * <div class="s-overflow:hidden">
+       *   I'm in an "hidden" overflow container
+       * </div>
+       * 
+       * @example        html          Inherit
+       * <div class="s-overflow:inherit">
+       *   I'm in an "inherit" overflow container
+       * </div>
+       * 
+       * @example        html          Initial
+       * <div class="s-overflow:initial">
+       *   I'm in an "initial" overflow container
+       * </div>
+       * 
+       * @example        html          Overlay
+       * <div class="s-overflow:overlay">
+       *   I'm in an "overlay" overflow container
+       * </div>
+       * 
+       * @example        html          Revert
+       * <div class="s-overflow:revert">
+       *   I'm in an "revert" overflow container
+       * </div>
+       * 
+       * @example        html          Scroll
+       * <div class="s-overflow:scroll">
+       *   I'm in an "scroll" overflow container
+       * </div>
+       * 
+       * @example        html          Visible
+       * <div class="s-overflow:visible">
+       *   I'm in an "visible" overflow container
+       * </div>
+       * 
+       * @example        html          Unset
+       * <div class="s-overflow:unset">
+       *   I'm in an "unset" overflow container
+       * </div>
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+        */
+    `,
+    );
+
+    vars.comment(
         () => `/**
     * @name          s-overflow:auto
     * @namespace          sugar.style.overflow

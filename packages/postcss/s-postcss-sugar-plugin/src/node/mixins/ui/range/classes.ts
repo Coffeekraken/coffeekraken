@@ -16,6 +16,7 @@ import __faker from 'faker';
  * @param       {('default'|'square'|'pill'|'circle')[]}             [shape=['default','square','pill','circle']]         The shape(s) you want to generate
  * @param       {'solid'}                [defaultStyle='theme.ui.range.defaultStyle']           The default style you want
  * @param       {'default'|'square'|'pill'|'circle'}        [defaultShape='theme.ui.range.defaultShape']           The default shape you want
+ * @param       {String}                            [defaultColor=theme.ui.range.defaultColor]            The default color you want
  * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
@@ -49,6 +50,11 @@ class postcssSugarPluginUiRangeClassesInterface extends __SInterface {
                 values: ['default', 'square', 'pill', 'circle'],
                 default: __STheme.get('ui.range.defaultShape'),
             },
+            defaultColor: {
+                type: 'String',
+                values: Object.keys(__STheme.get('color')),
+                default: __STheme.get('ui.range.defaultColor'),
+            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -66,6 +72,7 @@ export interface IPostcssSugarPluginUiRangeClassesParams {
     shapes: ('default' | 'square' | 'pill' | 'circle')[];
     defaultStyle: 'solid';
     defaultShape: 'default' | 'square' | 'pill' | 'circle';
+    defaultColor: string;
     scope: ('bare' | 'lnf' | 'shape' | 'vr' | 'tf')[];
 }
 
@@ -87,6 +94,7 @@ export default function ({
         shapes: [],
         defaultStyle: 'solid',
         defaultShape: 'default',
+        defaultColor: 'main',
         scope: [],
         ...params,
     };
@@ -350,6 +358,18 @@ export default function ({
                 { type: 'CssClass' },
             );
         });
+    }
+
+    // default color
+    if (finalParams.scope.includes('lnf')) {
+        vars.code(
+            () => `
+            .s-range:not(.s-color) {
+                @sugar.color(${finalParams.defaultColor});
+            }
+        `,
+            { type: 'CssClass' },
+        );
     }
 
     return vars;

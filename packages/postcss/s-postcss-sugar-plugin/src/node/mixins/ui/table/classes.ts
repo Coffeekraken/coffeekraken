@@ -16,6 +16,7 @@ import __faker from 'faker';
  * @param       {('default'|'square')[]}             [shape=['default','square']]         The shape(s) you want to generate
  * @param       {'solid'}                [defaultStyle='theme.ui.table.defaultStyle']           The default style you want
  * @param       {'default'|'square'}        [defaultShape='theme.ui.table.defaultShape']           The default shape you want
+ * @param       {String}                            [defaultColor=theme.ui.table.defaultColor]            The default color you want
  * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
@@ -48,6 +49,11 @@ class postcssSugarPluginUiTableClassesInterface extends __SInterface {
                 values: ['default', 'square'],
                 default: __STheme.get('ui.table.defaultShape'),
             },
+            defaultColor: {
+                type: 'String',
+                values: Object.keys(__STheme.get('color')),
+                default: __STheme.get('ui.table.defaultColor'),
+            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -65,6 +71,7 @@ export interface IPostcssSugarPluginUiTableClassesParams {
     shapes: ('default' | 'square')[];
     defaultStyle: 'solid';
     defaultShape: 'default' | 'square';
+    defaultColor: string;
     scope: ('bare' | 'lnf' | 'shape' | 'vr' | 'tf')[];
 }
 
@@ -93,6 +100,7 @@ export default function ({
         shapes: [],
         defaultStyle: 'solid',
         defaultShape: 'default',
+        defaultColor: 'main',
         scope: [],
         ...params,
     };
@@ -397,6 +405,18 @@ export default function ({
                 { type: 'CssClass' },
             );
         });
+    }
+
+    // default color
+    if (finalParams.scope.includes('lnf')) {
+        vars.code(
+            () => `
+            .s-table:not(.s-color) {
+                @sugar.color(${finalParams.defaultColor});
+            }
+        `,
+            { type: 'CssClass' },
+        );
     }
 
     vars.comment(

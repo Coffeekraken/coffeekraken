@@ -16,6 +16,7 @@ class postcssUiColorPickerClassesInterface extends __SInterface {
             },
             defaultColor: {
                 type: 'String',
+                values: Object.keys(__STheme.get('color')),
                 default: __STheme.get('ui.colorPicker.defaultColor'),
             },
             scope: {
@@ -51,8 +52,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiColorPickerClassesParams = {
-        defaultColor: 'main',
         scope: ['bare', 'lnf'],
+        defaultColor: 'main',
         ...params,
     };
 
@@ -91,12 +92,23 @@ export default function ({
         */`,
         ).code(
             `.s-color-picker[lnf="default"] {
-                @sugar.color(${finalParams.defaultColor});
                 @sugar.ui.colorPicker($style: ${finalParams.defaultStyle}, $scope: lnf);
             }`,
             {
                 type: 'CssClass',
             },
+        );
+    }
+
+    // default color
+    if (finalParams.scope.includes('lnf')) {
+        vars.code(
+            () => `
+            .s-color-picker:not(.s-color) {
+                @sugar.color(${finalParams.defaultColor});
+            }
+        `,
+            { type: 'CssClass' },
         );
     }
 

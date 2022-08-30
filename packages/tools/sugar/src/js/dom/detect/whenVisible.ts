@@ -16,7 +16,7 @@ import __closestNotVisible from '../query/closestNotVisible';
  * @feature       Promise based API
  * @feature       Callback support
  *
- * @param 		{HTMLElement} 				elm 		The element to monitor
+ * @param 		{HTMLElement} 				$elm 		The element to monitor
  * @param 		{Function} 					[cb=null] 	An optional callback to call when the element is visible
  * @return 		(Promise<HTMLElement>) 								The promise that will be resolved when the element is visible
  *
@@ -32,7 +32,7 @@ import __closestNotVisible from '../query/closestNotVisible';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function whenVisible(
-    elm: HTMLElement,
+    $elm: HTMLElement,
     cb: Function = null,
 ): Promise<HTMLElement> {
     return new Promise((resolve, reject) => {
@@ -44,14 +44,16 @@ export default function whenVisible(
             parentObserver = null;
 
         const _cb = () => {
-            if (isSelfVisible && areParentsVisible) {
-                // process callbacks
-                if (cb) cb(elm);
-                resolve(elm);
+            if (isSelfVisible) {
+                selfObserver?.disconnect?.();
                 // remove the event listeners
-                elm.removeEventListener('transitionend', _eventCb);
-                elm.removeEventListener('animationstart', _eventCb);
-                elm.removeEventListener('animationend', _eventCb);
+                $elm.removeEventListener('transitionend', _eventCb);
+                $elm.removeEventListener('animationstart', _eventCb);
+                $elm.removeEventListener('animationend', _eventCb);
+            }
+
+            if (areParentsVisible) {
+                parentObserver?.disconnect?.();
                 // remove the event listeners
                 if (closestNotVisible) {
                     closestNotVisible.removeEventListener(
@@ -68,51 +70,32 @@ export default function whenVisible(
                     );
                 }
             }
+
+            if (isSelfVisible && areParentsVisible) {
+                // process callbacks
+                cb?.($elm);
+                resolve($elm);
+                // remove the event listeners
+                $elm.removeEventListener('transitionend', _eventCb);
+                $elm.removeEventListener('animationstart', _eventCb);
+                $elm.removeEventListener('animationend', _eventCb);
+            }
         };
 
         // function called on each transitionend, start, etc...
         const _eventCb = (e) => {
-            // wait just a little time to check again
-            setTimeout(() => {
-                if (e.target === elm) {
-                    if (__isVisible(elm)) {
-                        isSelfVisible = true;
-                        if (selfObserver && selfObserver.disconnect) {
-                            selfObserver.disconnect();
-                        }
-                        // remove the event listeners
-                        elm.removeEventListener('transitionend', _eventCb);
-                        elm.removeEventListener('animationstart', _eventCb);
-                        elm.removeEventListener('animationend', _eventCb);
-                    }
-                } else if (e.target === closestNotVisible) {
-                    if (__isVisible(closestNotVisible)) {
-                        areParentsVisible = true;
-                        if (parentObserver && parentObserver.disconnect) {
-                            parentObserver.disconnect();
-                        }
-                        // remove the event listeners
-                        closestNotVisible.removeEventListener(
-                            'transitionend',
-                            _eventCb,
-                        );
-                        closestNotVisible.removeEventListener(
-                            'animationstart',
-                            _eventCb,
-                        );
-                        closestNotVisible.removeEventListener(
-                            'animationend',
-                            _eventCb,
-                        );
-                    }
-                }
-                // callback
-                _cb($elm);
-            });
+            // update status
+            isSelfVisible = __isVisible($elm);
+            if (closestNotVisible) {
+                areParentsVisible = __isVisible(closestNotVisible);
+            }
+
+            // callback
+            _cb($elm);
         };
 
         // check if element itself is not visible
-        if (!__isVisible(elm)) {
+        if (!__isVisible($elm)) {
             selfObserver = new MutationObserver((mutations) => {
                 mutations.forEach((mutation) => {
                     // check that is the style whos changed
@@ -132,19 +115,19 @@ export default function whenVisible(
                     }
                 });
             });
-            selfObserver.observe(elm, { attributes: true });
+            selfObserver.observe($elm, { attributes: true });
 
             // listen for animationstart to check if the element is visible
-            elm.addEventListener('animationstart', _eventCb);
-            elm.addEventListener('animationend', _eventCb);
-            elm.addEventListener('transitionend', _eventCb);
+            $elm.addEventListener('animationstart', _eventCb);
+            $elm.addEventListener('animationend', _eventCb);
+            $elm.addEventListener('transitionend', _eventCb);
         } else {
             isSelfVisible = true;
         }
 
         // get the closest not visible element
         // if found, we monitor it to check when it is visible
-        closestNotVisible = __closestNotVisible(elm);
+        closestNotVisible = __closestNotVisible($elm);
         if (closestNotVisible) {
             parentObserver = new MutationObserver((mutations) => {
                 mutations.forEach((mutation) => {

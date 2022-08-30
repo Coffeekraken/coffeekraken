@@ -87,6 +87,7 @@ export default function ({
             .s-rating__base {
                 color: sugar.color(main);
             }
+            
             .s-rating__rate {
                 color: sugar.color(current);
             }

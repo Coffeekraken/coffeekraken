@@ -12,7 +12,7 @@
         <ul class="__webcomponents-grid s-mbe:50">
             <li>
                 <a href="/styleguide/ui/button" title="Coffeekraken buttons">
-                    <div class="icon-card s-color:accent"
+                    <div class="icon-card s-color:accent" 
                         >
                         <div class="icon-card__content">
                             <i class="s-icon:ui-button"></i>
@@ -23,7 +23,7 @@
             </li>
             <li>
                 <a href="/styleguide/ui/dropdown" title="Coffeekraken dropdowns">
-                    <div class="icon-card s-color:complementary"
+                    <div class="icon-card s-color:complementary" 
                         >
                         <div class="icon-card__content">
                             <i class="s-icon:ui-dropdown"></i>
@@ -34,7 +34,7 @@
             </li>
             <li>
                 <a href="/styleguide/ui/tooltip" title="Coffeekraken tooltips">
-                    <div class="icon-card s-color:accent"
+                    <div class="icon-card s-color:accent" 
                         >
                         <div class="icon-card__content">
                             <i class="s-icon:ui-tooltip"></i>
@@ -45,7 +45,7 @@
             </li>
             <li>
                 <a href="/styleguide/form/switch" title="Coffeekraken switch">
-                    <div class="icon-card s-color:complementary"
+                    <div class="icon-card s-color:complementary" 
                         >
                         <div class="icon-card__content">
                             <i class="s-icon:ui-switch"></i>
@@ -57,7 +57,7 @@
             <li>
                 <a href="/package/@coffeekraken/s-datetime-picker-component/styleguide/form/s-datetime-picker"
                     title="Coffeekraken date picker">
-                    <div class="icon-card s-color:accent"
+                    <div class="icon-card s-color:accent" 
                         >
                         <div class="icon-card__content">
                             <i class="s-icon:ui-datepicker"></i>
@@ -69,7 +69,7 @@
             <li>
                 <a href="/package/@coffeekraken/s-filtrable-input-component/styleguide/ui/s-filtrable-einput"
                     title="Coffeekraken filtrable input">
-                    <div class="icon-card s-color:complementary"
+                    <div class="icon-card s-color:complementary" 
                         >
                         <div class="icon-card__content">
                             <i class="s-icon:ui-autocomplete"></i>
@@ -80,7 +80,7 @@
             </li>
             <li>
                 <a href="/styleguide/ui/loaders" title="Coffeekraken loaders">
-                    <div class="icon-card s-color:accent"
+                    <div class="icon-card s-color:accent" 
                         >
                         <div class="icon-card__content">
                             <i class="s-icon:ui-loader"></i>
@@ -91,7 +91,7 @@
             </li>
             <li>
                 <a href="/package/@coffeekraken/s-range-component/styleguide/form/s-range" title="Coffeekraken range input">
-                    <div class="icon-card s-color:complementary"
+                    <div class="icon-card s-color:complementary" 
                         >
                         <div class="icon-card__content">
                             <i class="s-icon:ui-range"></i>
@@ -103,7 +103,7 @@
             <li>
                 <a href="/package/@coffeekraken/s-code-example-component/styleguide/ui/s-code-example"
                     title="Coffeekraken code example">
-                    <div class="icon-card s-color:accent"
+                    <div class="icon-card s-color:accent" 
                         >
                         <div class="icon-card__content">
                             <i class="s-icon:ui-code"></i>
@@ -114,7 +114,7 @@
             </li>
             <li>
                 <a href="/styleguide/ui/avatar" title="Coffeekraken avatar">
-                    <div class="icon-card s-color:complementary"
+                    <div class="icon-card s-color:complementary" 
                         >
                         <div class="icon-card__content">
                             <i class="s-icon:ui-avatar"></i>

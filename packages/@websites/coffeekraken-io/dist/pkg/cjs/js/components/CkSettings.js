@@ -31,7 +31,7 @@ class CkSettings extends s_lit_component_1.default {
             },
         };
         this._theme = s_theme_1.default.getCurrentTheme();
-        this.state = state_1.default.define("ck-settings", {
+        this.state = state_1.default.define('ck-settings', {
             darkMode: false,
         });
     }
@@ -40,31 +40,31 @@ class CkSettings extends s_lit_component_1.default {
     }
     firstUpdated() {
         return __awaiter(this, void 0, void 0, function* () {
-            const $baseColorPicker = this.querySelector("#setting-base-color");
-            const $mainColorPicker = this.querySelector("#setting-main-color");
-            const $accentColorPicker = this.querySelector("#setting-accent-color");
-            const $complementaryColorPicker = this.querySelector("#setting-complementary-color");
-            const $fontSizeRange = this.querySelector("#setting-font-size");
-            $baseColorPicker.addEventListener("s-color-picker.change", (e) => {
-                this._theme.setColor("base", e.detail.hex);
+            const $baseColorPicker = this.querySelector('#setting-base-color');
+            const $mainColorPicker = this.querySelector('#setting-main-color');
+            const $accentColorPicker = this.querySelector('#setting-accent-color');
+            const $complementaryColorPicker = this.querySelector('#setting-complementary-color');
+            const $fontSizeRange = this.querySelector('#setting-font-size');
+            $baseColorPicker.addEventListener('s-color-picker.change', (e) => {
+                this._theme.setColor('base', e.detail.hex);
             });
-            $mainColorPicker.addEventListener("s-color-picker.change", (e) => {
-                this._theme.setColor("main", e.detail.hex);
+            $mainColorPicker.addEventListener('s-color-picker.change', (e) => {
+                this._theme.setColor('main', e.detail.hex);
             });
-            $accentColorPicker.addEventListener("s-color-picker.change", (e) => {
-                this._theme.setColor("accent", e.detail.hex);
+            $accentColorPicker.addEventListener('s-color-picker.change', (e) => {
+                this._theme.setColor('accent', e.detail.hex);
             });
-            $complementaryColorPicker.addEventListener("s-color-picker.change", (e) => {
-                this._theme.setColor("complementary", e.detail.hex);
+            $complementaryColorPicker.addEventListener('s-color-picker.change', (e) => {
+                this._theme.setColor('complementary', e.detail.hex);
             });
-            $fontSizeRange.addEventListener("change", (e) => {
-                this._theme.set("scale.default", `${e.target.value}`);
+            $fontSizeRange.addEventListener('change', (e) => {
+                this._theme.set('scale.default', `${e.target.value}`);
             });
         });
     }
     render() {
         return (0, lit_1.html) `
-      <div class="ck-settings">
+      <div class="ck-settings" s-deps css="ckSettings">
         <div class="s-p:100 s-mbe:40 @mobile s-p:40 s-mbe:10">
           <h1 class="s-typo:h3 s-mbe:40 @mobile s-mbe:0">Settings</h1>
           <p class="s-typo:p @mobile s-hide">
@@ -93,7 +93,7 @@ class CkSettings extends s_lit_component_1.default {
                     <input
                       type="text"
                       class="s-input"
-                      value="${this._theme.getColor("base").toHex()}"
+                      value="${this._theme.getColor('base').toHex()}"
                     />
                     <button class="s-btn s-color:base">
                       <i class="s-icon:color"></i>
@@ -113,7 +113,7 @@ class CkSettings extends s_lit_component_1.default {
                     <input
                       type="text"
                       class="s-input"
-                      value="${this._theme.getColor("main").toHex()}"
+                      value="${this._theme.getColor('main').toHex()}"
                     />
                     <button class="s-btn s-color:main">
                       <i class="s-icon:color"></i>
@@ -136,7 +136,7 @@ class CkSettings extends s_lit_component_1.default {
                     <input
                       type="text"
                       class="s-input"
-                      value="${this._theme.getColor("accent").toHex()}"
+                      value="${this._theme.getColor('accent').toHex()}"
                     />
                     <button class="s-btn s-color:accent">
                       <i class="s-icon:color"></i>
@@ -156,7 +156,7 @@ class CkSettings extends s_lit_component_1.default {
                     <input
                       type="text"
                       class="s-input"
-                      value="${this._theme.getColor("complementary").toHex()}"
+                      value="${this._theme.getColor('complementary').toHex()}"
                     />
                     <button class="s-btn s-color:complementary">
                       <i class="s-icon:color"></i>
@@ -207,7 +207,7 @@ class CkSettings extends s_lit_component_1.default {
     }
 }
 exports.default = CkSettings;
-function define(props = {}, tagName = "ck-settings") {
+function define(props = {}, tagName = 'ck-settings') {
     s_lit_component_1.default.setDefaultProps(tagName, props);
     customElements.define(tagName, CkSettings);
 }

@@ -1,54 +1,56 @@
-.rating {
-  display: flex;
-  gap: sugar.margin(30);
-  margin-block-end: sugar.margin(50);
+@sugar.partial (rating) {
+    .rating {
+        display: flex;
+        gap: sugar.margin(30);
+        margin-block-end: sugar.margin(50);
 
-  &:nth-child(odd) {
-    .rating__comment {
-      order: 1;
+        &:nth-child(odd) {
+            .rating__comment {
+                order: 1;
 
-      &:after {
-        left: auto;
-        right: 100%;
-        transform: rotate(90deg);
-      }
+                &:after {
+                    left: auto;
+                    right: 100%;
+                    transform: rotate(90deg);
+                }
+            }
+        }
+
+        .rating__comment {
+            position: relative;
+            flex-grow: 1;
+            background: sugar.color(main, surface);
+            border-radius: sugar.border.radius();
+            padding: sugar.padding(30);
+            @sugar.depth (30);
+
+            &:after {
+                content: ' ';
+                position: absolute;
+                top: sugar.margin(20);
+                left: 100%;
+                border-style: solid;
+                border-width: 15px;
+                border-color: sugar.color(main, surface) transparent transparent
+                    transparent;
+                transform: rotate(-90deg);
+            }
+
+            .rating__header {
+                display: flex;
+                padding-block-end: sugar.margin(10);
+                margin-block-end: sugar.margin(30);
+                border-bottom: 1px solid sugar.color(main, border);
+
+                p {
+                    flex-grow: 1;
+                }
+            }
+        }
+        .rating__picture {
+            position: relative;
+            top: sugar.margin(10);
+            font-size: sugar.font.size(70);
+        }
     }
-  }
-
-  .rating__comment {
-    position: relative;
-    flex-grow: 1;
-    background: sugar.color(main, surface);
-    border-radius: sugar.border.radius();
-    padding: sugar.padding(30);
-    @sugar.depth (30);
-
-    &:after {
-      content: " ";
-      position: absolute;
-      top: sugar.margin(20);
-      left: 100%;
-      border-style: solid;
-      border-width: 15px;
-      border-color: sugar.color(main, surface) transparent transparent
-        transparent;
-      transform: rotate(-90deg);
-    }
-
-    .rating__header {
-      display: flex;
-      padding-block-end: sugar.margin(10);
-      margin-block-end: sugar.margin(30);
-      border-bottom: 1px solid sugar.color(main, border);
-
-      p {
-        flex-grow: 1;
-      }
-    }
-  }
-  .rating__picture {
-    position: relative;
-    top: sugar.margin(10);
-    font-size: sugar.font.size(70);
-  }
 }

@@ -1,22 +1,24 @@
-.sidemenu {
-  position: sticky;
-  top: 80px;
-  max-height: calc(100vh - 80px);
-  display: flex;
-  flex-direction: column;
+@sugar.partial (sidemenu) {
+  .sidemenu {
+    position: sticky;
+    top: 80px;
+    max-height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
 
-  .sidemenu-main {
-    flex-grow: 1;
-    overflow: auto;
-    padding: sugar.padding(30);
-    @sugar.scrollbar();
-  }
+    .sidemenu-main {
+      flex-grow: 1;
+      overflow: auto;
+      padding: sugar.padding(30);
+      @sugar.scrollbar();
+    }
 
-  .sidemenu-sub {
-  }
+    .sidemenu-sub {
+    }
 
-  [actual] {
-    font-weight: bold;
-    color: sugar.color(accent);
+    [actual] {
+      font-weight: bold;
+      color: sugar.color(accent);
+    }
   }
 }

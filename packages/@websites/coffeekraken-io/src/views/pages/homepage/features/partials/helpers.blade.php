@@ -15,7 +15,7 @@
         <ul class="__webcomponents-grid s-mbe:50">
             <li>
                 <a href="/styleguide/helpers/text" title="Coffeekraken text align helpers">
-                    <div class="icon-card s-color:accent"
+                    <div class="icon-card s-color:accent" 
                        >
                         <div class="icon-card__content">
                             <i class="s-icon:ui-align"></i>
@@ -26,7 +26,7 @@
             </li>
             <li>
                 <a href="/styleguide/helpers/typography" title="Coffeekraken typography helpers">
-                    <div class="icon-card s-color:complementary"
+                    <div class="icon-card s-color:complementary" 
                        >
                         <div class="icon-card__content">
                             <i class="s-icon:ui-typography"></i>
@@ -37,7 +37,7 @@
             </li>
             <li>
                 <a href="/styleguide/helpers/colors" title="Coffeekraken color helpers">
-                    <div class="icon-card s-color:accent"
+                    <div class="icon-card s-color:accent" 
                        >
                         <div class="icon-card__content">
                             <i class="s-icon:theme-colors"></i>
@@ -48,7 +48,7 @@
             </li>
             <li>
                 <a href="/styleguide/helpers/flexbox" title="Coffeekraken flexbox helpers">
-                    <div class="icon-card s-color:complementary"
+                    <div class="icon-card s-color:complementary" 
                        >
                         <div class="icon-card__content">
                             <i class="s-icon:css-flex"></i>
@@ -59,7 +59,7 @@
             </li>
             <li>
                 <a href="/styleguide/helpers/ratio" title="Coffeekraken ratio helpers">
-                    <div class="icon-card s-color:accent"
+                    <div class="icon-card s-color:accent" 
                        >
                         <div class="icon-card__content">
                             <i class="s-icon:layout-ratio"></i>
@@ -70,7 +70,7 @@
             </li>
             <li>
                 <a href="/styleguide/helpers/radius" title="Coffeekraken radius helpers">
-                    <div class="icon-card s-color:complementary"
+                    <div class="icon-card s-color:complementary" 
                        >
                         <div class="icon-card__content">
                             <i class="s-icon:css-radius"></i>
@@ -81,7 +81,7 @@
             </li>
             <li>
                 <a href="/styleguide/helpers/transition" title="Coffeekraken transition helpers">
-                    <div class="icon-card s-color:accent"
+                    <div class="icon-card s-color:accent" 
                        >
                         <div class="icon-card__content">
                             <i class="s-icon:animation-easing"></i>
@@ -92,7 +92,7 @@
             </li>
             <li>
                 <a href="/styleguide/helpers/margin" title="Coffeekraken space helpers">
-                    <div class="icon-card s-color:complementary"
+                    <div class="icon-card s-color:complementary" 
                        >
                         <div class="icon-card__content">
                             <i class="s-icon:layout-space"></i>
@@ -103,7 +103,7 @@
             </li>
             <li>
                 <a href="/styleguide/helpers/visibility" title="Coffeekraken visibility helpers">
-                    <div class="icon-card s-color:accent"
+                    <div class="icon-card s-color:accent" 
                        >
                         <div class="icon-card__content">
                             <i class="s-icon:misc-eye"></i>
@@ -114,7 +114,7 @@
             </li>
             <li>
                 <a href="/styleguide/tools/scale" title="Coffeekraken scale helpers">
-                    <div class="icon-card s-color:complementary"
+                    <div class="icon-card s-color:complementary" 
                        >
                         <div class="icon-card__content">
                             <i class="s-icon:layout-scale"></i>

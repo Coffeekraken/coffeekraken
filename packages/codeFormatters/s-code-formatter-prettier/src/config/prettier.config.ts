@@ -16,5 +16,10 @@ export async function preprocess(api) {
 
 export default function (api) {
     if (api.env.platform !== 'node') return;
-    return {};
+    return __deepMerge(
+        {
+            singleQuote: true,
+        },
+        api.config.prettier ?? {},
+    );
 }

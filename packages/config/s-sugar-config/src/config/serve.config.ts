@@ -2,7 +2,7 @@ export default (api) => {
     return {
         img: {
             /**
-             * @name            url
+             * @name            imgPath
              * @namespace       config.serve.img
              * @type            String
              * @default         /dist/img
@@ -12,11 +12,11 @@ export default (api) => {
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            url: '/dist/img',
+            imgPath: '/dist/img',
         },
         js: {
             /**
-             * @name            url
+             * @name            path
              * @namespace       config.serve.js
              * @type            String
              * @default         /dist/js
@@ -26,11 +26,11 @@ export default (api) => {
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            url: '/dist/js',
+            path: '/dist/js',
         },
         css: {
             /**
-             * @name            url
+             * @name            path
              * @namespace       config.serve.css
              * @type            String
              * @default         /dist/css
@@ -40,11 +40,11 @@ export default (api) => {
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            url: '/dist/css',
+            path: '/dist/css',
         },
         icons: {
             /**
-             * @name            url
+             * @name            path
              * @namespace       config.serve.icons
              * @type            String
              * @default         /dist/icons
@@ -54,11 +54,11 @@ export default (api) => {
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            url: '/dist/icons',
+            path: '/dist/icons',
         },
         fonts: {
             /**
-             * @name            url
+             * @name            path
              * @namespace       config.serve.fonts
              * @type            String
              * @default         /dist/fonts
@@ -68,11 +68,11 @@ export default (api) => {
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            url: '/dist/fonts',
+            path: '/dist/fonts',
         },
         cache: {
             /**
-             * @name            url
+             * @name            path
              * @namespace       config.serve.cache
              * @type            String
              * @default         /cache
@@ -82,7 +82,7 @@ export default (api) => {
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            url: '/cache',
+            path: '/cache',
         },
     };
 };

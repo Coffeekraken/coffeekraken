@@ -1,8 +1,11 @@
 import { define as __sActivateFeature } from '@coffeekraken/s-activate-feature';
-// import { define as __sAppearFeature } from "@coffeekraken/s-appear-feature";
+import { define as __sAppearFeature } from '@coffeekraken/s-appear-feature';
 import { define as __SCodeExampleWebcomponent } from '@coffeekraken/s-code-example-component';
 import { define as __SColorPickerComponent } from '@coffeekraken/s-color-picker-component';
 import { define as __SDatetimePickerComponent } from '@coffeekraken/s-datetime-picker-component';
+import __SDepsFeature, {
+  define as __sDepsFeatureDefine,
+} from '@coffeekraken/s-deps-feature';
 import __SFeature from '@coffeekraken/s-feature';
 import { define as __SFiltrableInputComponent } from '@coffeekraken/s-filtrable-input-component';
 import { define as __sFloatingFeature } from '@coffeekraken/s-floating-feature';
@@ -13,8 +16,8 @@ import { define as __SRatingComponent } from '@coffeekraken/s-rating-component';
 import { define as __sRefocusFeature } from '@coffeekraken/s-refocus-feature';
 import { define as __SScrollComponent } from '@coffeekraken/s-scroll-component';
 import {
-    define as __SSliderComponent,
-    SSliderSlideableBehavior,
+  define as __SSliderComponent,
+  SSliderSlideableBehavior,
 } from '@coffeekraken/s-slider-component';
 import { define as __sSugarFeature } from '@coffeekraken/s-sugar-feature';
 import { define as __SThemeSwitcherComponent } from '@coffeekraken/s-theme-switcher-component';
@@ -35,11 +38,6 @@ import { define as __CKSearchComponent } from './components/CKSearch';
 import { define as __CKSettingsComponent } from './components/CkSettings';
 import { define as __CKWelcomeRatingsComponent } from './components/CKWelcomeRatings';
 
-import __whenNearViewport from '@coffeekraken/sugar/js/dom/detect/whenNearViewport';
-import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
-
-import __SEnv from '@coffeekraken/s-env';
-
 // import { define as __VersionSelector } from './components/VersionSelector';
 
 // others
@@ -56,118 +54,145 @@ const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
 
 // setup conductor
 __SConductor.setup({
-    log: true,
+  log: true,
 });
 
 (async () => {
-    __SFeature.setDefaultProps('*', {
-        mountWhen: 'nearViewport',
-        verbose: true,
-    });
-    __SLitComponent.setDefaultProps('*', {
-        mountWhen: 'nearViewport',
-        verbose: true,
-    });
-    __SLitComponent.setDefaultProps(['s-panel', 'ck-settings'], {
-        mountWhen: 'direct',
-    });
-    __SLitComponent.setDefaultProps(['s-code-example'], {
-        scrollToSettings: {
-            offset: 100,
-        },
-        responsive: {
-            mobile: {
-                lines: 5,
-            },
-        },
-    });
+  __SFeature.setDefaultProps('*', {
+    mountWhen: 'nearViewport',
+    verbose: true,
+  });
+  __SLitComponent.setDefaultProps('*', {
+    mountWhen: 'nearViewport',
+    verbose: true,
+  });
+  __SLitComponent.setDefaultProps(['s-panel', 'ck-settings'], {
+    mountWhen: 'direct',
+  });
+  __SLitComponent.setDefaultProps(['s-code-example'], {
+    scrollToSettings: {
+      offset: 100,
+    },
+    responsive: {
+      mobile: {
+        lines: 5,
+      },
+    },
+  });
 
-    // init theme
-    __STheme.init({
-        variant: 'dark',
-    });
+  // init theme
+  __STheme.init({
+    variant: 'dark',
+  });
 
-    // exported css
-    if (__SEnv.is('production')) {
-        __querySelectorLive('[css]', async ($elm) => {
-            await __whenNearViewport($elm);
-            const path = $elm.getAttribute('css');
-            const $link = document.createElement('link');
-            $link.setAttribute('rel', 'stylesheet');
-            $link.setAttribute('id', path);
-            $link.setAttribute('href', `/dist/css/exports/${path}.css`);
-            document.head.appendChild($link);
-        });
-    }
+  // // exported css
+  // // if (__SEnv.is('production')) {
+  // __querySelectorLive("[css]", async ($elm) => {
+  //   await __whenNearViewport($elm);
+  //   const path = $elm.getAttribute("css");
+  //   const $link = document.createElement("link");
+  //   $link.setAttribute("rel", "stylesheet");
+  //   $link.setAttribute("id", path);
+  //   $link.setAttribute("href", `/dist/css/partials/${path}.css`);
+  //   document.head.appendChild($link);
+  // });
+  // // }
 
-    // features
-    __sActivateFeature();
-    __sPageTransitionFeature();
+  // dependencies
+  __SDepsFeature.registerDeps('.icon-card', {
+    css: 'iconCard',
+  });
+  __SDepsFeature.registerDeps('s-code-example', {
+    css: 'sCodeExample',
+  });
+  __SDepsFeature.registerDeps('.sidemenu', {
+    css: 'sidemenu',
+  });
+  __SDepsFeature.registerDeps('.code-example-section', {
+    css: 'codeExampleSection',
+  });
+  __SDepsFeature.registerDeps('.s-filtrable-input', {
+    css: 'sFiltrableInput',
+  });
+  __SDepsFeature.registerDeps('.s-color-picker', {
+    css: 'sColorPicker',
+  });
+  __SDepsFeature.registerDeps('.s-rating', {
+    css: 'sRating',
+  });
+  __SDepsFeature.registerDeps('.s-slider', {
+    css: 'sSlider',
+  });
+  __SDepsFeature.registerDeps('.s-theme-switcher', {
+    css: 'sThemeSwitcher',
+  });
+  __SDepsFeature.registerDeps('.s-platform', {
+    css: 'sPlatform',
+  });
 
-    // internal components
-    // __VersionSelector();
-    __CKSearchComponent();
-    __CkFallingStarsComponent();
-    __CKWelcomeRatingsComponent();
+  // features
+  __sDepsFeatureDefine();
+  __sActivateFeature();
+  __sPageTransitionFeature();
 
-    // components
-    __CKDiscoverComponent();
-    __CKDiscoverTabedComponent();
-    __CKSettingsComponent();
-    __CKRatingsComponent();
-    __CKDocSubNavComponent();
-    __SCodeExampleWebcomponent();
-    __SFiltrableInputComponent();
-    __SSidePanelWebcomponent();
-    __SRatingComponent();
-    __SColorPickerComponent();
-    __SDatetimePickerComponent();
-    __SScrollComponent();
-    __SRangeWebcomponent();
-    __SThemeSwitcherComponent();
-    __SSliderComponent({
-        behaviors: {
-            slideable: {
-                class: SSliderSlideableBehavior,
-                settings: {},
-            },
-            // cssAnimation: {
-            //     class: SSliderCssAnimationBehavior,
-            //     settings: {},
-            // },
-        },
-    });
+  // internal components
+  // __VersionSelector();
+  __CKSearchComponent();
+  __CkFallingStarsComponent();
+  __CKWelcomeRatingsComponent();
 
-    // features
-    __sSugarFeature();
-    __sFloatingFeature();
-    // __sAppearFeature();
-    __sRefocusFeature();
-    __sInlineFeature();
-    // __sParallaxFeature();
-    __sFormValidateFeature({
-        customValidations: {
-            coffeekraken: (value, helpers) => {
-                if (value === 'coffeekraken') {
-                    return helpers.message(
-                        'Are you sure? Krakens are dangerous...',
-                    );
-                }
-                return value;
-            },
-        },
-    });
+  // components
+  __CKDiscoverComponent();
+  __CKDiscoverTabedComponent();
+  __CKSettingsComponent();
+  __CKRatingsComponent();
+  __CKDocSubNavComponent();
+  __SCodeExampleWebcomponent();
+  __SFiltrableInputComponent();
+  __SSidePanelWebcomponent();
+  __SRatingComponent();
+  __SColorPickerComponent();
+  __SDatetimePickerComponent();
+  __SScrollComponent();
+  __SRangeWebcomponent();
+  __SThemeSwitcherComponent();
+  __SSliderComponent({
+    behaviors: {
+      slideable: {
+        class: SSliderSlideableBehavior,
+        settings: {},
+      },
+    },
+  });
 
-    // dashboard
-    // new __SDashboard({
-    //     dashboard: {
-    //         components: {
-    //             's-dashboard-pages': {
-    //                 onSelect: (page) => {
-    //                     document.location.href = page.item.loc;
-    //                 },
-    //             },
-    //         },
-    //     },
-    // });
+  // features
+  __sSugarFeature();
+  __sFloatingFeature();
+  __sAppearFeature();
+  __sRefocusFeature();
+  __sInlineFeature();
+  // __sParallaxFeature();
+  __sFormValidateFeature({
+    customValidations: {
+      coffeekraken: (value, helpers) => {
+        if (value === 'coffeekraken') {
+          return helpers.message('Are you sure? Krakens are dangerous...');
+        }
+        return value;
+      },
+    },
+  });
+
+  // dashboard
+  // new __SDashboard({
+  //     dashboard: {
+  //         components: {
+  //             's-dashboard-pages': {
+  //                 onSelect: (page) => {
+  //                     document.location.href = page.item.loc;
+  //                 },
+  //             },
+  //         },
+  //     },
+  // });
 })();

@@ -284,15 +284,6 @@ export default class SLitComponent extends LitElement {
                 this.tagName.toLowerCase(),
             );
 
-        // if (!_debug) {
-        //     _debug = 1;
-        //     setTimeout(() => {
-        //         alert(`Debugs: ${_debug}`);
-        //     }, 5000);
-        // } else {
-        //     _debug++;
-        // }
-
         let properties = this.constructor.properties;
         if (!properties) {
             properties = this.constructor.createProperties();

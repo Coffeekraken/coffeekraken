@@ -68,6 +68,7 @@ export default function ({
     getCacheFilePath,
     getRoot,
     postcssApi,
+    postcss,
     registerPostProcessor,
     nodesToString,
     replaceWith,
@@ -77,6 +78,7 @@ export default function ({
     getCacheFilePath: Function;
     getRoot: Function;
     postcssApi: any;
+    postcss: any;
     registerPostProcessor: Function;
     nodesToString: Function;
     replaceWith: Function;
@@ -92,71 +94,86 @@ export default function ({
         ? finalParams.query.split(/[\s,\,]/gm).map((l) => l.trim())
         : Object.keys(mediaConfig.queries);
 
-    medias.forEach((media) => {
-        if (!_mediasObj[media]) {
-            _mediasObj[media] = [];
-        }
-        if (!atRule._sMedia) {
-            atRule._sMedia = [];
-        }
-        if (atRule._sMedia.includes(media)) {
-            return;
-        }
-        atRule._sMedia.push(media);
-        _mediasObj[media].push(atRule);
-        // _mediasObj[media].push(node);
-    });
-    // getRoot(atRule).insertBefore(atRule, node);
-
-    // atRule.replaceWith(`
-    //     /* S-MEDIA-CLASSES:${medias.join(',')} */
-    //     ${nodesToString(atRule.nodes)}
-    //     /* S-MEDIA-CLASSES-END:${medias.join(',')} */
-    // `);
-
     if (!_postProcessorRegistered) {
         _postProcessorRegistered = true;
 
         registerPostProcessor((root) => {
-            for (let [media, atRules] of Object.entries(_mediasObj)) {
-                const mediaRule = new postcssApi.AtRule({
-                    name: 'media',
-                    params: __STheme
-                        .buildMediaQuery(media)
-                        .replace('@media ', ''),
-                });
-                // @ts-ignore
-                atRules.forEach((atRule) => {
-                    atRule.nodes.forEach((node) => {
-                        node = node.clone();
-                        if (node.type === 'comment') return;
-                        if (node.selector === ':root') return;
-                        if (!node.selector) {
-                            mediaRule.append(node);
-                        } else {
-                            let sels = node.selector
-                                .split(',')
-                                .map((l) => l.trim());
-                            sels = sels.map((sel) => {
-                                const selectors = sel.match(
-                                    /\.[a-zA-Z0-9_-]+/gm,
-                                );
-                                if (!selectors) return sel;
-                                selectors.forEach((selector) => {
-                                    sel = sel.replace(
-                                        selector,
-                                        `${selector}___${media}`,
-                                    );
-                                });
-                                return sel;
-                            });
-                            node.selector = sels.join(',');
-                            mediaRule.append(node);
-                        }
+            let inMedia, mediaRule;
+
+            const rootNodes = [...root.nodes];
+
+            rootNodes.forEach((node) => {
+                if (
+                    node.type === 'comment' &&
+                    node.text.trim().match(/^\!\sSMEDIA:[a-zA-Z0-9]+$/)
+                ) {
+                    inMedia = node.text.split(':')[1];
+                    mediaRule = new postcssApi.AtRule({
+                        name: 'media',
+                        params: __STheme
+                            .buildMediaQuery(inMedia)
+                            .replace('@media ', ''),
                     });
-                });
-                root.append(mediaRule);
-            }
+                    node.replaceWith(mediaRule);
+                    return;
+                }
+                if (
+                    node.type === 'comment' &&
+                    node.text.trim().match(/^\!\sSENDMEDIA:[a-zA-Z0-9]+$/)
+                ) {
+                    inMedia = null;
+                    mediaRule = null;
+                    node.remove();
+                    return;
+                }
+                if (inMedia) {
+                    if (node.type === 'comment') return;
+                    if (node.selector === ':root') return;
+
+                    if (!node.selector) {
+                        mediaRule.append(node);
+                    } else {
+                        let sels = node.selector
+                            .split(',')
+                            .map((l) => l.trim());
+                        sels = sels.map((sel) => {
+                            const selectors = sel.match(/\.[a-zA-Z0-9_-]+/gm);
+                            if (!selectors) return sel;
+                            selectors.forEach((selector) => {
+                                sel = sel.replace(
+                                    selector,
+                                    `${selector}___${inMedia}`,
+                                );
+                            });
+                            return sel;
+                        });
+                        node.selector = sels.join(',');
+                        mediaRule.append(node);
+                    }
+                }
+            });
         });
     }
+
+    let refChildNode = atRule;
+
+    medias.forEach((media) => {
+        refChildNode.parent.insertBefore(
+            refChildNode,
+            postcss.parse(`/*! SMEDIA:${media} */`),
+        );
+
+        atRule.nodes.forEach((node) => {
+            const clonedNode = node.clone();
+            refChildNode.parent.insertAfter(refChildNode, clonedNode);
+            refChildNode = clonedNode;
+        });
+
+        refChildNode.parent.insertAfter(
+            refChildNode,
+            postcss.parse(`/*! SENDMEDIA:${media} */`),
+        );
+    });
+
+    atRule.remove();
 }

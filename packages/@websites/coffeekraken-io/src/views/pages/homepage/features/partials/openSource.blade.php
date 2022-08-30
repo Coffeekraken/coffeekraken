@@ -1,4 +1,4 @@
-<section id="features-opensource" class="section:diagonal" style="padding-inline: 0 !important;">
+<section id="features-opensource" class="section:diagonal" style="padding-inline: 0 !important;" s-deps css="opensource">
     <div class="s-container">
 
         <div class="__box s-radius s-p:50 s-mi:-50 @mobile s-mi:0">

@@ -4,7 +4,7 @@
         <i class="s-icon:install s-tc:accent"></i>&nbsp;&nbsp;Install
     </h4>
 
-    <s-code-example class="">
+    <s-code-example class="" >
         @foreach ($block->install as $install)
             <template lang="{{ $install->language }}">
                 {{ $install->code }}

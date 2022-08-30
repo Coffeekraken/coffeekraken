@@ -29,7 +29,7 @@
             </div>
         </div>
 
-        <div class="code-example">
+        <div class="code-example-section" ">
             <div>
                 <h5 class="s-typo:h4 s-mbe:30 @mobile s-typo:h5">
                     A coherant <span class="s-tc:accent">CLI</span><br />with some cool features
@@ -62,7 +62,7 @@
             </div>
         </div>
 
-        <div class="code-example:right">
+        <div class="code-example-section:right" ">
             <div>
                 <h5 class="s-typo:h4 s-mbe:30 @mobile s-typo:h5">
                     querySelector<span class="s-tc:accent">Live</span>
@@ -97,7 +97,7 @@
             </div>
         </div>
 
-        <div class="code-example">
+        <div class="code-example-section" ">
             <div>
                 <h5 class="s-typo:h4 s-mbe:30 @mobile s-typo:h5">
                     sha256,<span class="s-tc:accent">base64</span>/etc...
@@ -124,7 +124,7 @@
             </div>
         </div>
 
-        <div class="code-example:right"> 
+        <div class="code-example-section:right" "> 
             <div>
                 <h5 class="s-typo:h4 s-mbe:30 @mobile s-typo:h5">
                     is(<span class="s-tc:accent">Mobile</span>,<span class="s-tc:accent">Color</span>,<span

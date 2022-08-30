@@ -19,7 +19,7 @@ if ($firstBlock->status == 'wip') {
 
         <div class="s-layout:12222 s-gap:column:50 @mobile s-layout:1_2 s-mi:30">
 
-            <nav class="sidemenu @mobile s-display:none">
+            <nav class="sidemenu @mobile s-display:none" >
 
                 <div class="sidemenu-sub">
                     <ck-doc-sub-nav source=".__content"></ck-doc-sub-nav>

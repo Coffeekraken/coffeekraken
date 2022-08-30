@@ -34,6 +34,7 @@
         "@coffeekraken/s-config": "^2.0.0-alpha.20",
         "@coffeekraken/s-dashboard": "^2.0.0-alpha.20",
         "@coffeekraken/s-datetime-picker-component": "^2.0.0-alpha.20",
+        "@coffeekraken/s-deps-feature": "^2.0.0-alpha.20",
         "@coffeekraken/s-descriptor": "^2.0.0-alpha.20",
         "@coffeekraken/s-docblock": "^2.0.0-alpha.20",
         "@coffeekraken/s-docmap": "^2.0.0-alpha.20",

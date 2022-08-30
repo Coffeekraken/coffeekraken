@@ -14,9 +14,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import __SLitComponent from "@coffeekraken/s-lit-component";
-import { html } from "lit";
-import { property } from "lit/decorators.js";
+import __SLitComponent from '@coffeekraken/s-lit-component';
+import { html } from 'lit';
+import { property } from 'lit/decorators.js';
 export default class CKDocSubNav extends __SLitComponent {
     constructor() {
         super({
@@ -25,7 +25,7 @@ export default class CKDocSubNav extends __SLitComponent {
             },
         });
         this._$items = [];
-        document.addEventListener("s-page-transition.end", (e) => {
+        document.addEventListener('s-page-transition.end', (e) => {
             this._$items = [];
             this.requestUpdate();
             setTimeout(() => {
@@ -42,21 +42,21 @@ export default class CKDocSubNav extends __SLitComponent {
         return __awaiter(this, void 0, void 0, function* () {
             const $source = document.querySelector(this.source);
             if (!$source) {
-                this.classList.remove("active");
+                this.classList.remove('active');
                 return;
             }
-            this._$items = Array.from($source.querySelectorAll("section.docblock.first [id]:not(code [id]):not(template [id]):not(.preview-html [id]), h4#doc-api")).filter(($item) => {
+            this._$items = Array.from($source.querySelectorAll('section.docblock.first [id]:not(code [id]):not(template [id]):not(.preview-html [id]), h4#doc-api')).filter(($item) => {
                 if (!$item.id)
                     return false;
                 if ($item.innerText.match(/@/))
                     return false;
                 switch ($item.tagName.toLowerCase()) {
                     // case 'h1':
-                    case "h2":
-                    case "h3":
-                    case "h4":
-                    case "h5":
-                    case "p":
+                    case 'h2':
+                    case 'h3':
+                    case 'h4':
+                    case 'h5':
+                    case 'p':
                         // case 'h6':
                         return true;
                         break;
@@ -64,17 +64,17 @@ export default class CKDocSubNav extends __SLitComponent {
                 return false;
             });
             if (this._$items.length) {
-                this.classList.add("active");
+                this.classList.add('active');
             }
             else {
-                this.classList.remove("active");
+                this.classList.remove('active');
             }
             this.requestUpdate();
         });
     }
     render() {
         return html `
-      <div class="ck-doc-sub-nav">
+      <div class="ck-doc-sub-nav" s-deps css="ckDocSubNav">
         <div class="__list">
           ${this._$items.map(($item, i) => html `
                             <s-scroll class="__list-item" to="#${$item.id}">
@@ -96,7 +96,7 @@ export default class CKDocSubNav extends __SLitComponent {
 __decorate([
     property({ type: String })
 ], CKDocSubNav.prototype, "source", void 0);
-export function define(props = {}, tagName = "ck-doc-sub-nav") {
+export function define(props = {}, tagName = 'ck-doc-sub-nav') {
     __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, CKDocSubNav);
 }

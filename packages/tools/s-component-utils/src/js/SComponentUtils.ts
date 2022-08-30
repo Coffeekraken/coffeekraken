@@ -305,6 +305,17 @@ export default class SComponentUtils extends __SClass {
         return finalProps;
     }
 
+    // /**
+    //  * Init the cssPartial feature
+    //  */
+    // handleCssPartial() {
+    //     // css partial if needed
+    //     if (this.props.cssPartial) {
+    //         this.node.setAttribute('partial', this.props.cssPartial);
+    //         this.node.setAttribute('s-css', true);
+    //     }
+    // }
+
     /**
      * This method handle the passed props object and apply some behaviors
      * like the responsive props, etc...

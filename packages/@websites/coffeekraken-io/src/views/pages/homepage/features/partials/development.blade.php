@@ -23,7 +23,7 @@
         </div>
 
 
-        <div class="code-example">
+        <div class="code-example-section" ">
             <div>
                 <h5 class="s-typo:h4 s-mbe:30">
                     <span class="s-tc:accent">Speed up</span><br />your process
@@ -52,7 +52,7 @@
             </div>
         </div>
 
-        <div class="code-example:right">   
+        <div class="code-example-section-section:right" ">   
             <div>
                 <h5 class="s-typo:h4 s-mbe:30">
                     All the <span class="s-tc:accent">sugar</span> power<br />ready to go!
@@ -88,7 +88,7 @@
             </div>
         </div>
 
-        <div class="code-example">
+        <div class="code-example-section" ">
             <div>
                 <h5 class="s-typo:h4 s-mbe:30">
                     Development<br /><span class="s-tc:accent">server</span>
@@ -166,7 +166,7 @@ sugar dev'
             </div>
         </div>
 
-        <div class="code-example:right"> 
+        <div class="code-example-section-section:right" "> 
             <div>
                 <h5 class="s-typo:h4 s-mbe:30">
                     <span class="s-tc:accent">Build</span><br />for production

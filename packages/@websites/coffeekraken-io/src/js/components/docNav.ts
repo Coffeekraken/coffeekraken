@@ -1,15 +1,15 @@
 // @ts-nocheck
 
-import __SLitComponent from "@coffeekraken/s-lit-component";
-import __onScrollEnd from "@coffeekraken/sugar/js/dom/detect/onScrollEnd";
-import __sameItems from "@coffeekraken/sugar/shared/array/sameItems";
-import __striptags from "@coffeekraken/sugar/shared/html/striptags";
-import __wait from "@coffeekraken/sugar/shared/time/wait";
-import __queryStringToObject from "@coffeekraken/sugar/shared/url/queryStringToObject";
-import { html } from "lit";
-import { property } from "lit/decorators.js";
-import __miniSearch from "minisearch";
-import { getState, loadDocmap } from "../state/state";
+import __SLitComponent from '@coffeekraken/s-lit-component';
+import __onScrollEnd from '@coffeekraken/sugar/js/dom/detect/onScrollEnd';
+import __sameItems from '@coffeekraken/sugar/shared/array/sameItems';
+import __striptags from '@coffeekraken/sugar/shared/html/striptags';
+import __wait from '@coffeekraken/sugar/shared/time/wait';
+import __queryStringToObject from '@coffeekraken/sugar/shared/url/queryStringToObject';
+import { html } from 'lit';
+import { property } from 'lit/decorators.js';
+import __miniSearch from 'minisearch';
+import { getState, loadDocmap } from '../state/state';
 
 export default class DocNav extends __SLitComponent {
   maxItems = 10;
@@ -25,7 +25,7 @@ export default class DocNav extends __SLitComponent {
 
   @property()
   _saved = {
-    search: "",
+    search: '',
     platforms: [],
     types: [],
     statuses: [],
@@ -119,7 +119,7 @@ export default class DocNav extends __SLitComponent {
 
     if (this._saved.search) {
       let miniSearch = new __miniSearch({
-        fields: ["name", "namespace", "description", "since", "type", "status"],
+        fields: ['name', 'namespace', 'description', 'since', 'type', 'status'],
         storeFields: Object.keys(items[0]),
       });
       miniSearch.addAll(items);
@@ -423,6 +423,8 @@ export default class DocNav extends __SLitComponent {
                                 <s-code-example
                                   style="max-width:100%;"
                                   class="s-depth:50 s-flex-item:grow:shrink"
+                                  s-deps
+                                  css="codeExample"
                                 >
                                   <textarea
                                     lang="${(<any>item).example[0].language}"
@@ -442,10 +444,10 @@ export default class DocNav extends __SLitComponent {
                                   </p>
                                 </div>
                               `
-                            : ""}
+                            : ''}
                         </div>
                       `
-                    : ""}
+                    : ''}
                 </div>
               </div>
             `
@@ -457,10 +459,10 @@ export default class DocNav extends __SLitComponent {
   }
 }
 
-export function define(props: any = {}, tagName = "doc-nav") {
+export function define(props: any = {}, tagName = 'doc-nav') {
   __SLitComponent.setDefaultProps({
     ...props,
-    mountWhen: "directly",
+    mountWhen: 'directly',
   });
   customElements.define(tagName, DocNav);
 }

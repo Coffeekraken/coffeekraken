@@ -41,7 +41,7 @@ export interface IPostcssSugarPluginSettings {
     excludeCodeByTypes?: string[];
     inlineImport?: boolean;
     target?: 'development' | 'production' | 'vite';
-    exports: boolean;
+    partials: boolean;
 }
 
 export function getFunctionsList() {
@@ -94,13 +94,14 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             target: 'production',
             inlineImport: true,
             cache: false,
+            partials: true,
             // @ts-ignore
         },
         settings,
     );
-    if (settings.exports === undefined) {
-        settings.exports = settings.target === 'production';
-    }
+    // if (settings.partials === undefined) {
+    //     settings.partials = settings.target !== 'vite';
+    // }
 
     let themeHash, cacheDir;
 
@@ -122,9 +123,9 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             ),
             cache: __SSugarConfig.get('postcssSugarPlugin.cache'),
         });
-        if (settings.exports === undefined) {
-            settings.exports = settings.target === 'production';
-        }
+        // if (settings.partials === undefined) {
+        //     settings.partials = settings.target !== 'vite';
+        // }
 
         // remove cache if not for vite target
         if (settings.cache === undefined && settings.target !== 'vite') {
@@ -481,7 +482,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
         return loadedPromise;
     }
 
-    return {
+    const pluginObj = {
         postcssPlugin: 'sugar',
         async Once(root) {
             __SBench.start('postcssSugarPlugin');
@@ -655,6 +656,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             decl.value = await _processDeclaration(decl.value);
         },
     };
+    return pluginObj;
 };
 plugin.postcss = true;
 export const postcss = true;

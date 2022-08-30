@@ -57,7 +57,7 @@ class postcssSugarPluginUiBadgeClassesInterface extends s_interface_1.default {
             defaultColor: {
                 type: 'String',
                 values: Object.keys(s_theme_1.default.get('color')),
-                default: s_theme_1.default.get('ui.badgr.defaultColor'),
+                default: s_theme_1.default.get('ui.badge.defaultColor'),
             },
             scope: {
                 type: {

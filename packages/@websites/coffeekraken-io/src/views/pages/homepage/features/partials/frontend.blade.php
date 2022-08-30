@@ -8,7 +8,7 @@
             with a <span class="s-tc:accent">production ready quality grade</span>. Here's some areas where we can
             help you: </p>
 
-        <div class="code-example">
+        <div class="code-example-section" ">
             <div>
                 <h4 class="s-typo:h4 s-mbe:30 s-pbs:30">
                     CSS made<br>
@@ -84,7 +84,7 @@
 
 
 
-        <div class="code-example:right">
+        <div class="code-example-section:right" ">
             <div>
                 <h4 class="s-typo:h4 s-mbe:30 s-pbs:30">
                     <span class="s-tc:accent">Theming</span> made<br>
@@ -128,7 +128,7 @@
 
         </div>
 
-        <div class="code-example">
+        <div class="code-example-section" ">
             <div>
                 <h4 class="s-typo:h4 s-mbe:30 s-pbs:30">
                     <span class="s-tc:accent">Layout</span> finally<br>

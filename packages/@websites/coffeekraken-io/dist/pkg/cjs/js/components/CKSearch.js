@@ -21,7 +21,7 @@ const cursorToEnd_1 = __importDefault(require("@coffeekraken/sugar/js/dom/input/
 const hotkey_1 = __importDefault(require("@coffeekraken/sugar/js/keyboard/hotkey"));
 const lit_1 = require("lit");
 (0, s_filtrable_input_component_1.define)({
-    value: "name",
+    value: 'name',
     label: (item) => {
         return `${item.type} ${item.namespace}`;
     },
@@ -29,31 +29,31 @@ const lit_1 = require("lit");
     resetOnSelect: false,
     showKeywords: true,
     saveState: true,
-    filtrable: ["namespace", "name", "type"],
+    filtrable: ['namespace', 'name', 'type'],
     searchValuePreprocess: (value) => {
         // "@" searches
         if (value.match(/^@[a-z_-]+\s.*/)) {
-            return value.replace(/^@[a-z_-]+\s/, "").trim();
+            return value.replace(/^@[a-z_-]+\s/, '').trim();
         }
         if (value.match(/^@[a-z_-]+/)) {
-            return value.replace(/^@/, "").trim();
+            return value.replace(/^@/, '').trim();
         }
         // "/" searches
         if (value.match(/^\/[a-z]+\s.*/)) {
-            return value.replace(/^\/[a-z]+\s/, "").trim();
+            return value.replace(/^\/[a-z]+\s/, '').trim();
         }
         if (value.match(/^\/[a-z]+/)) {
-            return value.replace(/^\//, "").trim();
+            return value.replace(/^\//, '').trim();
         }
         // default
         return value;
     },
     templates: ({ type, item, html, unsafeHTML }) => {
         var _a, _b, _c, _d, _e, _f, _g;
-        if (type === "item") {
+        if (type === 'item') {
             switch (item.type) {
-                case "category":
-                case "package":
+                case 'category':
+                case 'package':
                     return html `
               <div class="ck-search__list-item">
                 <div class="s-flex s-mbe:10">
@@ -64,7 +64,7 @@ const lit_1 = require("lit");
                   </h4>
                 </div>
                 <p class="__description s-typo:p s-truncate:2">
-                  ${unsafeHTML((_a = item.description) !== null && _a !== void 0 ? _a : "")}
+                  ${unsafeHTML((_a = item.description) !== null && _a !== void 0 ? _a : '')}
                 </p>
               </div>
             `;
@@ -84,15 +84,15 @@ const lit_1 = require("lit");
                       `)}
                     &nbsp;
                     <span class="s-badge s-color:main"
-                      >${unsafeHTML((_e = (_d = (_c = item.type) === null || _c === void 0 ? void 0 : _c.types) === null || _d === void 0 ? void 0 : _d[0].type) !== null && _e !== void 0 ? _e : "")}</span
+                      >${unsafeHTML((_e = (_d = (_c = item.type) === null || _c === void 0 ? void 0 : _c.types) === null || _d === void 0 ? void 0 : _d[0].type) !== null && _e !== void 0 ? _e : '')}</span
                     >
                   </div>
                 </div>
                 <p class="__namespace s-opacity:50 s-font:20 s-mbe:20">
-                  ${unsafeHTML((_f = item.namespace) !== null && _f !== void 0 ? _f : "")}
+                  ${unsafeHTML((_f = item.namespace) !== null && _f !== void 0 ? _f : '')}
                 </p>
                 <p class="__description s-typo:p s-truncate:2">
-                  ${unsafeHTML((_g = item.description) !== null && _g !== void 0 ? _g : "")}
+                  ${unsafeHTML((_g = item.description) !== null && _g !== void 0 ? _g : '')}
                 </p>
               </div>
             `;
@@ -104,7 +104,7 @@ const lit_1 = require("lit");
         function fetchItems() {
             return __awaiter(this, void 0, void 0, function* () {
                 const request = new s_request_1.default({
-                    url: "/docmap.json",
+                    url: '/docmap.json',
                 });
                 const result = yield request.send();
                 const items = [];
@@ -119,20 +119,20 @@ const lit_1 = require("lit");
         }
         let items = yield fetchItems();
         if (value.match(/^@([a-z_-]+)?$/)) {
-            let packageName = value.replace(/^@/, "");
+            let packageName = value.replace(/^@/, '');
             let packages = {};
             items.forEach((item) => {
                 if (item.package.name.includes(`@coffeekraken/${packageName}`)) {
                     if (!packages[item.package.name]) {
                         packages[item.package.name] = {
-                            value: `@${item.package.name.replace("@coffeekraken/", "")}`,
+                            value: `@${item.package.name.replace('@coffeekraken/', '')}`,
                             namespace: item.package.name,
-                            type: "package",
+                            type: 'package',
                             name: item.package.name,
                             description: item.package.description,
                             preventClose: true,
                             props: {
-                                value: "value",
+                                value: 'value',
                             },
                         };
                     }
@@ -143,69 +143,69 @@ const lit_1 = require("lit");
         if (value.match(/^\/([a-z]+)?$/)) {
             return [
                 {
-                    value: "/doc",
-                    namespace: "/doc",
-                    type: "category",
-                    name: "Documentation",
-                    description: "Search through the documentation",
+                    value: '/doc',
+                    namespace: '/doc',
+                    type: 'category',
+                    name: 'Documentation',
+                    description: 'Search through the documentation',
                     preventClose: true,
                     props: {
-                        value: "value",
+                        value: 'value',
                     },
                 },
                 {
-                    value: "/styleguide",
-                    namespace: "/styleguide",
-                    type: "category",
-                    name: "Styleguide",
-                    description: "Search through the styleguide",
+                    value: '/styleguide',
+                    namespace: '/styleguide',
+                    type: 'category',
+                    name: 'Styleguide',
+                    description: 'Search through the styleguide',
                     preventClose: true,
                     props: {
-                        value: "value",
+                        value: 'value',
                     },
                 },
                 {
-                    value: "/api",
-                    namespace: "/api",
-                    type: "category",
-                    name: "API",
-                    description: "Search through the API",
+                    value: '/api',
+                    namespace: '/api',
+                    type: 'category',
+                    name: 'API',
+                    description: 'Search through the API',
                     preventClose: true,
                     props: {
-                        value: "value",
+                        value: 'value',
                     },
                 },
             ];
         }
         if (value.match(/^@[a-z_-]+\s.*?/)) {
             const packageName = `@coffeekraken/${value
-                .replace(/^@/, "")
-                .split(" ")[0]
+                .replace(/^@/, '')
+                .split(' ')[0]
                 .trim()}`;
             return items.filter((item) => {
                 return item.package.name.startsWith(packageName);
             });
         }
         if (value.match(/^\/[a-z]+.*?/)) {
-            if (value.startsWith("/doc")) {
+            if (value.startsWith('/doc')) {
                 return items.filter((item) => {
-                    return item.type === "Markdown";
+                    return item.type === 'Markdown';
                 });
             }
-            if (value.startsWith("/styleguide")) {
+            if (value.startsWith('/styleguide')) {
                 return items.filter((item) => {
-                    return item.type === "Styleguide";
+                    return item.type === 'Styleguide';
                 });
             }
-            if (value.startsWith("/api")) {
+            if (value.startsWith('/api')) {
                 return items.filter((item) => {
-                    return item.type !== "Markdown" && item.type !== "Styleguide";
+                    return item.type !== 'Markdown' && item.type !== 'Styleguide';
                 });
             }
         }
         return items;
     }),
-}, "ck-search-input");
+}, 'ck-search-input');
 class CKSearch extends s_lit_component_1.default {
     constructor() {
         super({
@@ -216,37 +216,37 @@ class CKSearch extends s_lit_component_1.default {
         return s_lit_component_1.default.createProperties();
     }
     firstUpdated() {
-        this.$input = this.querySelector("input");
+        this.$input = this.querySelector('input');
         // if (document.location.hash) {
         //     this._handleAnchor(document.location.hash.replace('#', ''));
         // }
-        (0, hotkey_1.default)("ctrl+f").on("press", () => {
+        (0, hotkey_1.default)('ctrl+f').on('press', () => {
             (0, cursorToEnd_1.default)(this.$input);
         });
-        this.addEventListener("s-filtrable-input.select", (e) => {
+        this.addEventListener('s-filtrable-input.select', (e) => {
             var _a;
             const { item, $elm } = e.detail;
-            if (item.type === "category" || item.type === "package") {
-                this.$input.value = item.value + " ";
+            if (item.type === 'category' || item.type === 'package') {
+                this.$input.value = item.value + ' ';
                 (0, cursorToEnd_1.default)(this.$input);
             }
             else {
                 if ((_a = item.menu) === null || _a === void 0 ? void 0 : _a.slug) {
                     if (item.package.name !== __SEnv.env.PACKAGE.name) {
-                        $elm.dispatchEvent(new CustomEvent("location.href", {
+                        $elm.dispatchEvent(new CustomEvent('location.href', {
                             detail: `/package/${item.package.name}${item.menu.slug}`,
                             bubbles: true,
                         }));
                     }
                     else {
-                        $elm.dispatchEvent(new CustomEvent("location.href", {
+                        $elm.dispatchEvent(new CustomEvent('location.href', {
                             detail: `${item.menu.slug}`,
                             bubbles: true,
                         }));
                     }
                 }
                 else {
-                    $elm.dispatchEvent(new CustomEvent("location.href", {
+                    $elm.dispatchEvent(new CustomEvent('location.href', {
                         detail: `/api/${item.fullNamespace}`,
                         bubbles: true,
                     }));
@@ -256,7 +256,7 @@ class CKSearch extends s_lit_component_1.default {
     }
     render() {
         return (0, lit_1.html) `
-      <div class="ck-search">
+      <div class="ck-search" s-deps css="ckSearch">
         <div class="ck-search__background"></div>
         <div class="ck-search__content">
           <ck-search-input id="ck-search-input">
@@ -293,7 +293,7 @@ class CKSearch extends s_lit_component_1.default {
     }
 }
 exports.default = CKSearch;
-function define(props = {}, tagName = "ck-search") {
+function define(props = {}, tagName = 'ck-search') {
     s_lit_component_1.default.setDefaultProps(tagName, props);
     customElements.define(tagName, CKSearch);
 }

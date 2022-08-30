@@ -5,7 +5,8 @@
 @endif
 
 <section class="docblock {{ $isFirst ? 'first' : '' }}"
-    id="{{ \Sugar\string\idCompliant($block->id) }}">
+    id="{{ \Sugar\string\idCompliant($block->id) }}"
+    s-deps css="docblock">
 
     @if (isset($isFirst))
         @include('doc.title', ['block' => $block])

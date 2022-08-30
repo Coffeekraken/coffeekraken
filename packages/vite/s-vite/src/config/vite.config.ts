@@ -259,7 +259,7 @@ export default function (api) {
             proxy: {
                 // all exported css in the /css/exports folder
                 // @TODO            find a better way...
-                '^\\/dist\\/css\\/exports\\/.*\\.css$': {
+                '^\\/dist\\/css\\/partials\\/.*\\.css$': {
                     target: `http://${api.config.frontendServer.hostname}:${api.config.frontendServer.port}`,
                     changeOrigin: true,
                     rewrite: (path) => {

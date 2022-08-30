@@ -3,7 +3,7 @@
 
     <div class="s-layout:1222 s-gap:column:50 @mobile s-layout:1_2 s-mi:30">
 
-        <nav class="sidemenu @mobile s-display:none">
+        <nav class="sidemenu @mobile s-display:none" >
 
             <div class="sidemenu-main">
 

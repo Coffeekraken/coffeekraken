@@ -2945,6 +2945,20 @@ export default (api) => {
                 return api.theme.ui.default.defaultShape;
             },
             /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.badge
+             * @type          String
+             * @default      [theme.ui.default.defaultColor]
+             *
+             * Specify the default style for your badge ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get defaultColor() {
+                return api.theme.ui.default.defaultColor;
+            },
+            /**
              * @name          depth
              * @namespace     config.themeUi.badge
              * @type          String

@@ -485,7 +485,7 @@ export default class CKBlob extends __SLitComponent {
   //     return new Promise((resolve) => {
   //         let envmaploader = new THREE.PMREMGenerator(this._renderer);
   //         new RGBELoader()
-  //             .setPath(`${__SSugarConfig.get('serve.img.url')}/3d/`)
+  //             .setPath(`${__SSugarConfig.get('serve.img.path')}/3d/`)
   //             .load('HDRI_STUDIO_vol2_030.hdr', function (hdrmap) {
   //                 let envmap = envmaploader.fromCubemap(hdrmap);
   //                 resolve(envmap);

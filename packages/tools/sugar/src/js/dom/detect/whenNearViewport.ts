@@ -1,4 +1,5 @@
 // @ts-nocheck
+import __isInViewport from '../is/inViewport';
 
 /**
  * @name      whenNearViewport
@@ -57,6 +58,10 @@ export default function whenNearViewport(
             rootMargin: settings.offset, // margin around root. Values are similar to css property. Unitless values not allowed
             threshold: 0, // visible amount of item shown in relation to root
         };
+
+        if (await __isInViewport(elm)) {
+            return resolve(elm);
+        }
 
         function onChange(changes, observer) {
             changes.forEach((change) => {

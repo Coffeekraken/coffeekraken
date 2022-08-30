@@ -1,11 +1,11 @@
 @font-face {
-  font-family: "sugar-fonticon";
-  src: url("/dist/fonts/sugar-icons/sugar-fonticon.eot?1722ee8f4b8ad07ef7f7af5d7dbde88b#iefix")
-      format("embedded-opentype"),
-    url("/dist/fonts/sugar-icons/sugar-fonticon.woff2?1722ee8f4b8ad07ef7f7af5d7dbde88b")
-      format("woff2"),
-    url("/dist/fonts/sugar-icons/sugar-fonticon.woff?1722ee8f4b8ad07ef7f7af5d7dbde88b")
-      format("woff");
+  font-family: 'sugar-fonticon';
+  src: url('/dist/fonts/sugar-icons/sugar-fonticon.eot?1722ee8f4b8ad07ef7f7af5d7dbde88b#iefix')
+      format('embedded-opentype'),
+    url('/dist/fonts/sugar-icons/sugar-fonticon.woff2?1722ee8f4b8ad07ef7f7af5d7dbde88b')
+      format('woff2'),
+    url('/dist/fonts/sugar-icons/sugar-fonticon.woff?1722ee8f4b8ad07ef7f7af5d7dbde88b')
+      format('woff');
 }
 
 .s-icon--animation-easing:before,
@@ -95,226 +95,226 @@
 }
 
 .s-icon--animation-easing:before {
-  content: "\f101";
+  content: '\f101';
 }
 .s-icon--css-flex:before {
-  content: "\f102";
+  content: '\f102';
 }
 .s-icon--css-radius:before {
-  content: "\f103";
+  content: '\f103';
 }
 .s-icon--file-css:before {
-  content: "\f104";
+  content: '\f104';
 }
 .s-icon--file-html:before {
-  content: "\f105";
+  content: '\f105';
 }
 .s-icon--file-js:before {
-  content: "\f106";
+  content: '\f106';
 }
 .s-icon--file-md:before {
-  content: "\f107";
+  content: '\f107';
 }
 .s-icon--file-php:before {
-  content: "\f108";
+  content: '\f108';
 }
 .s-icon--file-ts:before {
-  content: "\f109";
+  content: '\f109';
 }
 .s-icon--folder-add:before {
-  content: "\f10a";
+  content: '\f10a';
 }
 .s-icon--folder-opened:before {
-  content: "\f10b";
+  content: '\f10b';
 }
 .s-icon--folder-remove:before {
-  content: "\f10c";
+  content: '\f10c';
 }
 .s-icon--folder:before {
-  content: "\f10d";
+  content: '\f10d';
 }
 .s-icon--lang-css-1:before {
-  content: "\f10e";
+  content: '\f10e';
 }
 .s-icon--lang-css:before {
-  content: "\f10f";
+  content: '\f10f';
 }
 .s-icon--lang-html-1:before {
-  content: "\f110";
+  content: '\f110';
 }
 .s-icon--lang-html:before {
-  content: "\f111";
+  content: '\f111';
 }
 .s-icon--lang-js-1:before {
-  content: "\f112";
+  content: '\f112';
 }
 .s-icon--lang-js:before {
-  content: "\f113";
+  content: '\f113';
 }
 .s-icon--lang-md-1:before {
-  content: "\f114";
+  content: '\f114';
 }
 .s-icon--lang-md:before {
-  content: "\f115";
+  content: '\f115';
 }
 .s-icon--lang-node:before {
-  content: "\f116";
+  content: '\f116';
 }
 .s-icon--lang-php-1:before {
-  content: "\f117";
+  content: '\f117';
 }
 .s-icon--lang-php:before {
-  content: "\f118";
+  content: '\f118';
 }
 .s-icon--lang-ts-1:before {
-  content: "\f119";
+  content: '\f119';
 }
 .s-icon--lang-ts:before {
-  content: "\f11a";
+  content: '\f11a';
 }
 .s-icon--layout-ratio:before {
-  content: "\f11b";
+  content: '\f11b';
 }
 .s-icon--layout-scale:before {
-  content: "\f11c";
+  content: '\f11c';
 }
 .s-icon--layout-space:before {
-  content: "\f11d";
+  content: '\f11d';
 }
 .s-icon--layout:before {
-  content: "\f11e";
+  content: '\f11e';
 }
 .s-icon--link-broken-solid:before {
-  content: "\f11f";
+  content: '\f11f';
 }
 .s-icon--link-broken:before {
-  content: "\f120";
+  content: '\f120';
 }
 .s-icon--logo-coffeekraken:before {
-  content: "\f121";
+  content: '\f121';
 }
 .s-icon--logo-lit-solid:before {
-  content: "\f122";
+  content: '\f122';
 }
 .s-icon--logo-lit:before {
-  content: "\f123";
+  content: '\f123';
 }
 .s-icon--logo-nextjs-solid:before {
-  content: "\f124";
+  content: '\f124';
 }
 .s-icon--logo-nextjs:before {
-  content: "\f125";
+  content: '\f125';
 }
 .s-icon--logo-opensource:before {
-  content: "\f126";
+  content: '\f126';
 }
 .s-icon--logo-vite-solid:before {
-  content: "\f127";
+  content: '\f127';
 }
 .s-icon--logo-vite:before {
-  content: "\f128";
+  content: '\f128';
 }
 .s-icon--misc-bubbles:before {
-  content: "\f129";
+  content: '\f129';
 }
 .s-icon--misc-build-solid:before {
-  content: "\f12a";
+  content: '\f12a';
 }
 .s-icon--misc-build:before {
-  content: "\f12b";
+  content: '\f12b';
 }
 .s-icon--misc-eye:before {
-  content: "\f12c";
+  content: '\f12c';
 }
 .s-icon--misc-ring:before {
-  content: "\f12d";
+  content: '\f12d';
 }
 .s-icon--misc-tools:before {
-  content: "\f12e";
+  content: '\f12e';
 }
 .s-icon--support-chromium:before {
-  content: "\f12f";
+  content: '\f12f';
 }
 .s-icon--support-edge:before {
-  content: "\f130";
+  content: '\f130';
 }
 .s-icon--support-firefox:before {
-  content: "\f131";
+  content: '\f131';
 }
 .s-icon--support-rtl:before {
-  content: "\f132";
+  content: '\f132';
 }
 .s-icon--support-safari:before {
-  content: "\f133";
+  content: '\f133';
 }
 .s-icon--theme-colors:before {
-  content: "\f134";
+  content: '\f134';
 }
 .s-icon--theme:before {
-  content: "\f135";
+  content: '\f135';
 }
 .s-icon--ui-align:before {
-  content: "\f136";
+  content: '\f136';
 }
 .s-icon--ui-autocomplete:before {
-  content: "\f137";
+  content: '\f137';
 }
 .s-icon--ui-avatar:before {
-  content: "\f138";
+  content: '\f138';
 }
 .s-icon--ui-button:before {
-  content: "\f139";
+  content: '\f139';
 }
 .s-icon--ui-code:before {
-  content: "\f13a";
+  content: '\f13a';
 }
 .s-icon--ui-copy:before {
-  content: "\f13b";
+  content: '\f13b';
 }
 .s-icon--ui-datepicker:before {
-  content: "\f13c";
+  content: '\f13c';
 }
 .s-icon--ui-display-preview:before {
-  content: "\f13d";
+  content: '\f13d';
 }
 .s-icon--ui-dropdown:before {
-  content: "\f13e";
+  content: '\f13e';
 }
 .s-icon--ui-link-broken-solid:before {
-  content: "\f13f";
+  content: '\f13f';
 }
 .s-icon--ui-link-broken:before {
-  content: "\f140";
+  content: '\f140';
 }
 .s-icon--ui-loader-solid:before {
-  content: "\f141";
+  content: '\f141';
 }
 .s-icon--ui-loader:before {
-  content: "\f142";
+  content: '\f142';
 }
 .s-icon--ui-more-solid:before {
-  content: "\f143";
+  content: '\f143';
 }
 .s-icon--ui-more:before {
-  content: "\f144";
+  content: '\f144';
 }
 .s-icon--ui-range:before {
-  content: "\f145";
+  content: '\f145';
 }
 .s-icon--ui-refresh:before {
-  content: "\f146";
+  content: '\f146';
 }
 .s-icon--ui-switch:before {
-  content: "\f147";
+  content: '\f147';
 }
 .s-icon--ui-tooltip:before {
-  content: "\f148";
+  content: '\f148';
 }
 .s-icon--ui-typography:before {
-  content: "\f149";
+  content: '\f149';
 }
 .s-icon--vue:before {
-  content: "\f14a";
+  content: '\f14a';
 }
 .s-icon--animation-easing,
 .s-icon--css-flex,

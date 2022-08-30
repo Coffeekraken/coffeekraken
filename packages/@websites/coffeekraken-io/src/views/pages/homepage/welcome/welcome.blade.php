@@ -1,4 +1,4 @@
-<section id="homepage-welcome" css="welcome" s-appear in="bottom">
+<section id="homepage-welcome" s-deps css="welcome" s-appear in="bottom">
 
     <s-slider lnf="welcome-header" loop>
 
@@ -140,7 +140,7 @@
                 </p>
 
                 <div class="s-mi:auto s-width:50 @mobile s-width:100 s-mbe:30">
-                    <s-code-example>
+                    <s-code-example s-deps css="codeExample">
                         <template lang="css">
 @sugar.icon.classes {
 &nbsp;&nbsp;fa:calendar-alt:calendar

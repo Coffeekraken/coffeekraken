@@ -2,7 +2,7 @@ export default (api) => {
     return {
         img: {
             /**
-             * @name            url
+             * @name            imgPath
              * @namespace       config.serve.img
              * @type            String
              * @default         /dist/img
@@ -12,11 +12,11 @@ export default (api) => {
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            url: '/dist/img',
+            imgPath: '/dist/img',
         },
         js: {
             /**
-             * @name            url
+             * @name            path
              * @namespace       config.serve.js
              * @type            String
              * @default         /dist/js
@@ -26,11 +26,11 @@ export default (api) => {
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            url: '/dist/js',
+            path: '/dist/js',
         },
         css: {
             /**
-             * @name            url
+             * @name            path
              * @namespace       config.serve.css
              * @type            String
              * @default         /dist/css
@@ -40,11 +40,11 @@ export default (api) => {
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            url: '/dist/css',
+            path: '/dist/css',
         },
         icons: {
             /**
-             * @name            url
+             * @name            path
              * @namespace       config.serve.icons
              * @type            String
              * @default         /dist/icons
@@ -54,11 +54,11 @@ export default (api) => {
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            url: '/dist/icons',
+            path: '/dist/icons',
         },
         fonts: {
             /**
-             * @name            url
+             * @name            path
              * @namespace       config.serve.fonts
              * @type            String
              * @default         /dist/fonts
@@ -68,11 +68,11 @@ export default (api) => {
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            url: '/dist/fonts',
+            path: '/dist/fonts',
         },
         cache: {
             /**
-             * @name            url
+             * @name            path
              * @namespace       config.serve.cache
              * @type            String
              * @default         /cache
@@ -82,8 +82,8 @@ export default (api) => {
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            url: '/cache',
+            path: '/cache',
         },
     };
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGVBQWUsQ0FBQyxHQUFHLEVBQUUsRUFBRTtJQUNuQixPQUFPO1FBQ0gsR0FBRyxFQUFFO1lBQ0Q7Ozs7Ozs7Ozs7ZUFVRztZQUNILEdBQUcsRUFBRSxXQUFXO1NBQ25CO1FBQ0QsRUFBRSxFQUFFO1lBQ0E7Ozs7Ozs7Ozs7ZUFVRztZQUNILEdBQUcsRUFBRSxVQUFVO1NBQ2xCO1FBQ0QsR0FBRyxFQUFFO1lBQ0Q7Ozs7Ozs7Ozs7ZUFVRztZQUNILEdBQUcsRUFBRSxXQUFXO1NBQ25CO1FBQ0QsS0FBSyxFQUFFO1lBQ0g7Ozs7Ozs7Ozs7ZUFVRztZQUNILEdBQUcsRUFBRSxhQUFhO1NBQ3JCO1FBQ0QsS0FBSyxFQUFFO1lBQ0g7Ozs7Ozs7Ozs7ZUFVRztZQUNILEdBQUcsRUFBRSxhQUFhO1NBQ3JCO1FBQ0QsS0FBSyxFQUFFO1lBQ0g7Ozs7Ozs7Ozs7ZUFVRztZQUNILEdBQUcsRUFBRSxRQUFRO1NBQ2hCO0tBQ0osQ0FBQztBQUNOLENBQUMsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGVBQWUsQ0FBQyxHQUFHLEVBQUUsRUFBRTtJQUNuQixPQUFPO1FBQ0gsR0FBRyxFQUFFO1lBQ0Q7Ozs7Ozs7Ozs7ZUFVRztZQUNILE9BQU8sRUFBRSxXQUFXO1NBQ3ZCO1FBQ0QsRUFBRSxFQUFFO1lBQ0E7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxVQUFVO1NBQ25CO1FBQ0QsR0FBRyxFQUFFO1lBQ0Q7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxXQUFXO1NBQ3BCO1FBQ0QsS0FBSyxFQUFFO1lBQ0g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxhQUFhO1NBQ3RCO1FBQ0QsS0FBSyxFQUFFO1lBQ0g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxhQUFhO1NBQ3RCO1FBQ0QsS0FBSyxFQUFFO1lBQ0g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxRQUFRO1NBQ2pCO0tBQ0osQ0FBQztBQUNOLENBQUMsQ0FBQyJ9

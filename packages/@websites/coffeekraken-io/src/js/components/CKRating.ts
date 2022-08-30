@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import __SLitComponent from "@coffeekraken/s-lit-component";
-import { html } from "lit";
-import __ratingsApi from "../generic/ratingsApi";
+import __SLitComponent from '@coffeekraken/s-lit-component';
+import { html } from 'lit';
+import __ratingsApi from '../generic/ratingsApi';
 
 export default class CKRatings extends __SLitComponent {
   _settings = {};
@@ -17,14 +17,14 @@ export default class CKRatings extends __SLitComponent {
 
   state = {
     already: false,
-    state: "idle",
+    state: 'idle',
     user: {
       email: undefined,
       name: undefined,
       pictureUrl: undefined,
     },
     rating: 5,
-    comment: "",
+    comment: '',
     ratings: [],
   };
 
@@ -40,7 +40,7 @@ export default class CKRatings extends __SLitComponent {
 
   async firstUpdated() {
     // listen for rating update
-    this.addEventListener("s-rating.change", (e) => {
+    this.addEventListener('s-rating.change', (e) => {
       this.state.rating = e.detail.value;
     });
   }
@@ -57,25 +57,25 @@ export default class CKRatings extends __SLitComponent {
       };
       this.state.rating = ratingObj.rating;
       this.state.comment = ratingObj.comment;
-      this.state.state = "already";
+      this.state.state = 'already';
       this.state.already = true;
     }
   }
 
   async _submit() {
-    this.state.state = "sending";
+    this.state.state = 'sending';
 
     await __ratingsApi.create({
       rating: this.state.rating,
       comment: this.state.comment,
     });
 
-    this.state.state = "success";
+    this.state.state = 'success';
   }
 
   renderRating(ratingObj) {
     return html`
-      <div class="rating" s-appear in="bottom">
+      <div class="rating" s-deps css="rating" s-appear in="bottom">
         <div class="rating__comment">
           <div class="rating__header">
             <p class="s-font:bold">${ratingObj.name}</p>
@@ -102,12 +102,12 @@ export default class CKRatings extends __SLitComponent {
         <div class="s-flex-item:grow">
           <i
             @click=${() => {
-              this.state.state = "idle";
+              this.state.state = 'idle';
             }}
             class="s-icon:ui-tooltip s-tc:complementary s-font:80 s-mbe:30"
           ></i>
         </div>
-        ${this.state.state !== "write" && !this.state.already
+        ${this.state.state !== 'write' && !this.state.already
           ? html`
               <div>
                 <a
@@ -117,7 +117,7 @@ export default class CKRatings extends __SLitComponent {
                   @click=${(e) => {
                     e.stopPropagation();
                     e.preventDefault();
-                    this.state.state = "write";
+                    this.state.state = 'write';
                   }}
                 >
                   <i class="s-icon:write s-mie:10"></i>
@@ -125,7 +125,7 @@ export default class CKRatings extends __SLitComponent {
                 </a>
               </div>
             `
-          : ""}
+          : ''}
       </div>
 
       <h2 class="s-typo:h4 s-flex-item:grow s-mbe:30">
@@ -138,7 +138,7 @@ export default class CKRatings extends __SLitComponent {
         on your experience using Coffeekraken. We are very grateful for that!
       </p>
 
-      ${this.state.state === "write"
+      ${this.state.state === 'write'
         ? html`
             <div class="s-flex s-gap:20 s-mbe:50" s-appear in="bottom">
               <button
@@ -164,7 +164,7 @@ export default class CKRatings extends __SLitComponent {
                         </div>
                       </div>
                     `
-                  : ""}
+                  : ''}
               </div>
             </div>
             <form
@@ -213,7 +213,7 @@ export default class CKRatings extends __SLitComponent {
               </div>
             </form>
           `
-        : this.state.state === "already" || this.state.state === "success"
+        : this.state.state === 'already' || this.state.state === 'success'
         ? html`
             <i
               s-appear
@@ -222,7 +222,7 @@ export default class CKRatings extends __SLitComponent {
             ></i>
 
             <h3 class="s-typo:h5 s-mbe:30" s-appear in="bottom">
-              ${this.state.state === "success"
+              ${this.state.state === 'success'
                 ? html`
                     Thanks a lot<br />
                     for your
@@ -248,11 +248,11 @@ export default class CKRatings extends __SLitComponent {
               comment: this.state.comment,
             })}
           `
-        : this.state.state === "sending"
+        : this.state.state === 'sending'
         ? html` Sending `
-        : this.state.state === "success"
+        : this.state.state === 'success'
         ? html` Tgabjs!!! `
-        : this.state.state === "idle"
+        : this.state.state === 'idle'
         ? html`
             <h4 class="s-typo:h5 s-mbe:50" s-appear in="bottom">
               Here's what people think about Coffeekraken...
@@ -264,12 +264,12 @@ export default class CKRatings extends __SLitComponent {
               )}
             </div>
           `
-        : ""}
+        : ''}
     `;
   }
 }
 
-export function define(props: any = {}, tagName = "ck-ratings") {
+export function define(props: any = {}, tagName = 'ck-ratings') {
   __SLitComponent.setDefaultProps(tagName, props);
   customElements.define(tagName, CKRatings);
 }

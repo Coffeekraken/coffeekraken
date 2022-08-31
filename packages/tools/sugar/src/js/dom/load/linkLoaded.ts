@@ -56,7 +56,7 @@ function linkLoaded(
             // resolve promise
             resolve(link);
             // call the cb if exist
-            cb != null && cb(link);
+            cb?.(link);
         } else {
             const img = document.createElement('img');
 
@@ -69,7 +69,7 @@ function linkLoaded(
                 // resolve the promise
                 resolve(link);
                 // cb if exist
-                cb != null && cb(link);
+                cb?.(link);
             });
             // listen for error
             // img.addEventListener('error', (e) => {

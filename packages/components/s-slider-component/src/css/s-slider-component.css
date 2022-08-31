@@ -12,9 +12,13 @@
 .s-slider[behavior='default'] {
     > .s-slider__root {
         > .s-slider__slides-wrapper {
-            > .s-slider__slides {
+            overflow-x: auto;
+
+            /* > .s-slider__slides {
+                position: relative;
+                left: calc(var(--s-slider-slide) * 100% * -1);
                 transform: translateX(calc(var(--s-slider-slide) * 100% * -1));
-            }
+            } */
         }
     }
 }

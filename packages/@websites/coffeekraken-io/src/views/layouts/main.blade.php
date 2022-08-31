@@ -37,7 +37,7 @@
         <i class="s-icon:angle-up"></i>
     </s-scroll>
 
-    <div class="loader">
+    {{-- <div class="loader">
         <p class="s-typo--p">
             Welcome on
         </p>
@@ -46,6 +46,6 @@
         </div>
         <div class="__spinner"></div>
     </div>
-    <div class="top-loader"></div>
+    <div class="top-loader"></div> --}}
 
 @endsection

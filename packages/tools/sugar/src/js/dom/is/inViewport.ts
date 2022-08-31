@@ -28,61 +28,128 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface IInViewport {
-    offset: number | Record<string, number>;
-}
+export interface IInViewport {}
 
-function inViewport(
+export default function inViewport(
     elm: HTMLElement,
     settings: Partial<IInViewport> = {},
 ): boolean {
-    return new Promise((resolve) => {
-        settings = {
-            offset: '10px',
-            ...settings,
-        };
+    settings = {
+        ...settings,
+    };
 
-        // // handle offset
-        // let offsetTop = settings.offset;
-        // let offsetRight = settings.offset;
-        // let offsetBottom = settings.offset;
-        // let offsetLeft = settings.offset;
-        // if (typeof settings.offset === 'object') {
-        //   offsetTop = settings.offset.top || 0;
-        //   offsetRight = settings.offset.right || 0;
-        //   offsetBottom = settings.offset.bottom || 0;
-        //   offsetLeft = settings.offset.left || 0;
+    const scrollTop =
+            document.documentElement.scrollTop || document.body.scrollTop,
+        scrollLeft =
+            document.documentElement.scrollLeft || document.body.scrollLeft;
+
+    const containerHeight =
+            window.innerHeight || document.documentElement.clientHeight,
+        containerWidth =
+            window.innerWidth || document.documentElement.clientWidth,
+        rect = elm.getBoundingClientRect();
+
+    const top = rect.top - scrollTop,
+        left = rect.left - scrollLeft,
+        right = rect.right - scrollLeft,
+        bottom = rect.bottom - scrollTop;
+
+    const isTopIn = top - containerHeight <= 0,
+        isBottomIn = bottom <= containerHeight,
+        isLeftIn = left >= 0 && left <= containerWidth,
+        isRightIn = right >= 0 && right <= containerWidth;
+
+    // if at least top|bottom AND left|right
+    if ((isTopIn || isBottomIn) && (isLeftIn || isRightIn)) {
+        // if (elm.id === 'coco') {
+        //     console.log('IN 1', rect, isTopIn, isRightIn, isBottomIn, isLeftIn);
         // }
-        // const containerHeight =
-        //   window.innerHeight || document.documentElement.clientHeight;
-        // const containerWidth =
-        //   window.innerWidth || document.documentElement.clientWidth;
-        // const rect = elm.getBoundingClientRect();
-        // const isTopIn = rect.top - containerHeight - offsetBottom <= 0;
-        // const isBottomIn = rect.bottom - offsetTop >= 0;
-        // const isLeftIn = rect.left - containerWidth - offsetRight <= 0;
-        // const isRightIn = rect.right - offsetLeft >= 0;
-        // return isTopIn && isBottomIn && isLeftIn && isRightIn;
+        return true;
+    }
 
-        const observer = new IntersectionObserver(
-            (entries, observer) => {
-                if (!entries.length) return;
-                const entry = entries[0];
-                if (entry.intersectionRatio > 0) {
-                    resolve(true);
-                } else {
-                    resolve(false);
-                }
-                observer.disconnect();
-            },
-            {
-                root: null, // viewport
-                rootMargin: settings.offset,
-                threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
-            },
-        );
+    // is rect is bigger than viewport in all directions
+    if (
+        top <= 0 &&
+        bottom >= containerHeight &&
+        left <= 0 &&
+        right >= containerWidth
+    ) {
+        // if (elm.id === 'coco') {
+        //     console.log('IN 2');
+        // }
+        return true;
+    }
 
-        observer.observe(elm);
-    });
+    if (top <= 0 && bottom >= containerHeight && left <= 0 && isRightIn) {
+        // if (elm.id === 'coco') {
+        //     console.log('IN 3');
+        // }
+        return true;
+    }
+
+    if (
+        top <= 0 &&
+        bottom >= containerHeight &&
+        right >= containerWidth &&
+        isLeftIn
+    ) {
+        // if (elm.id === 'coco') {
+        //     console.log('IN 4');
+        // }
+        return true;
+    }
+
+    if (left <= 0 && right >= containerWidth && top <= 0 && isBottomIn) {
+        // if (elm.id === 'coco') {
+        //     console.log('IN 5');
+        // }
+        return true;
+    }
+
+    if (
+        left <= 0 &&
+        right >= containerWidth &&
+        bottom >= containerHeight &&
+        isTopIn
+    ) {
+        // if (elm.id === 'coco') {
+        //     console.log('IN 6');
+        // }
+        return true;
+    }
+
+    return false;
+
+    // const observer = new IntersectionObserver(
+    //     (entries, observer) => {
+    //         if (!entries.length) return;
+
+    //         const entry = entries[0];
+
+    // const isTopIn = entry.boundingClientRect.top - entry.rootBounds.height <= 0;
+    // const isBottomIn = entry.boundingClientRect.bottom >= 0;
+    // const isLeftIn = rect.left - containerWidth - offsetRight <= 0;
+    // const isRightIn = rect.right - offsetLeft >= 0;
+
+    //         if (entry.boundingClientRect.left >= entry.rootBounds.top && entry.boundingClientRect.left <= entry.rootBounds.right)
+
+    //         if (
+    //             entry.intersectionRatio > 0 &&
+    //             (entry.intersectionRect.width ||
+    //                 entry.intersectionRect.height)
+    //         ) {
+    //             resolve(true);
+    //         } else {
+    //             resolve(false);
+    //         }
+    //         observer.disconnect();
+    //     },
+    //     {
+    //         root: null, // viewport
+    //         rootMargin: settings.offset,
+    //         threshold: 0,
+    //     },
+    // );
+
+    // observer.observe(elm);
 }
-export default inViewport;

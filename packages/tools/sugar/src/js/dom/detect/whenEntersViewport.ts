@@ -56,7 +56,7 @@ export default function whenEntersViewport(
             threshold: 0, // visible amount of item shown in relation to root
         };
 
-        if (await __isInViewport(elm)) {
+        if (__isInViewport(elm)) {
             return resolve(elm);
         }
 

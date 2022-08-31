@@ -1,6 +1,6 @@
 import __SFeature from '@coffeekraken/s-feature';
-import __when from '@coffeekraken/sugar/js/dom/detect/when';
 import __whenNearViewport from '@coffeekraken/sugar/js/dom/detect/whenNearViewport';
+import __whenStylesheetsReady from '@coffeekraken/sugar/js/dom/detect/whenStylesheetsReady';
 import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SDepsFeatureInterface from './interface/SDepsFeatureInterface';
@@ -62,9 +62,26 @@ export default class SDepsFeature extends __SFeature {
     }
 
     /**
+     * Check if all is loaded and add the "ready" class and attribute
+     */
+    static _checkAndApplyReadyStateForElement(
+        $elm,
+        props: Partial<ISDepsFeatureProps> = {},
+    ) {
+        // css
+        if (props.css && !$elm._sDepsCssLoaded) {
+            return;
+        }
+
+        // apply class and attribute
+        $elm.setAttribute('ready', 'true');
+        $elm.classList.add('ready');
+    }
+
+    /**
      * Handle css dependencies for the passed element
      */
-    static _handleCssDepsForElement(
+    static async _handleCssDepsForElement(
         $elm: HTMLElement,
         props: Partial<ISDepsFeatureProps> = {},
     ): void {
@@ -73,7 +90,11 @@ export default class SDepsFeature extends __SFeature {
             `link[s-deps-css="${props.css}"]`,
         );
         if ($existing) {
-            return;
+            // mark the element css as loaded
+            $elm._sDepsCssLoaded = true;
+
+            // check and apply ready state
+            this._checkAndApplyReadyStateForElement($elm, props);
         }
 
         // create a new link to add in the head
@@ -93,6 +114,15 @@ export default class SDepsFeature extends __SFeature {
 
         // add the link in the head section
         document.head.appendChild($link);
+
+        // wait for stylesheet to be ready
+        await __whenStylesheetsReady($link);
+
+        // mark the element css as loaded
+        $elm._sDepsCssLoaded = true;
+
+        // check and apply ready state
+        this._checkAndApplyReadyStateForElement($elm, props);
     }
 
     /**
@@ -124,9 +154,6 @@ export default class SDepsFeature extends __SFeature {
     }
 
     async mount() {
-        // wait until visible
-        await __when(this.node, ['visible', 'nearViewport']);
-
         // handle partial stylesheet loading
         // @ts-ignore
         SDepsFeature._handleDepsForElement(this.node, this.props);

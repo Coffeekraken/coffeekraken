@@ -39,7 +39,7 @@ export default function whenStylesheetsReady(
         links = Array.from(document.querySelectorAll('link[rel="stylesheet"]'));
     }
     const promises = [];
-    [].forEach.call(neededStylesheetsStack, ($link) => {
+    [].forEach.call(links, ($link) => {
         promises.push(__linkLoaded($link));
     });
     const allPromises = Promise.all(promises);

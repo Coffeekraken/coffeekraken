@@ -1,6 +1,6 @@
 // @ts-nocheck
-import __traverseUp from '../traverse/up';
 import __isScrollable from '../is/scrollable';
+import __traverseUp from '../traverse/up';
 
 /**
  * @name        closestScrollable
@@ -25,6 +25,10 @@ import __isScrollable from '../is/scrollable';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function closestScrollable($elm: HTMLElement, selector: string | Function): HTMLElement {
-    return __traverseUp($elm, ($e) => __isScrollable($e));
+export default function closestScrollable(
+    $elm: HTMLElement,
+    selector: string | Function,
+): HTMLElement {
+    const res = __traverseUp($elm, ($e) => __isScrollable($e));
+    return res;
 }

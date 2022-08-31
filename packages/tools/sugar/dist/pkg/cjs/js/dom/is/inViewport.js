@@ -2,47 +2,86 @@
 // @ts-nocheck
 Object.defineProperty(exports, "__esModule", { value: true });
 function inViewport(elm, settings = {}) {
-    return new Promise((resolve) => {
-        settings = Object.assign({ offset: '10px' }, settings);
-        // // handle offset
-        // let offsetTop = settings.offset;
-        // let offsetRight = settings.offset;
-        // let offsetBottom = settings.offset;
-        // let offsetLeft = settings.offset;
-        // if (typeof settings.offset === 'object') {
-        //   offsetTop = settings.offset.top || 0;
-        //   offsetRight = settings.offset.right || 0;
-        //   offsetBottom = settings.offset.bottom || 0;
-        //   offsetLeft = settings.offset.left || 0;
+    settings = Object.assign({}, settings);
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop, scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
+    const containerHeight = window.innerHeight || document.documentElement.clientHeight, containerWidth = window.innerWidth || document.documentElement.clientWidth, rect = elm.getBoundingClientRect();
+    const top = rect.top - scrollTop, left = rect.left - scrollLeft, right = rect.right - scrollLeft, bottom = rect.bottom - scrollTop;
+    const isTopIn = top - containerHeight <= 0, isBottomIn = bottom <= containerHeight, isLeftIn = left >= 0 && left <= containerWidth, isRightIn = right >= 0 && right <= containerWidth;
+    // if at least top|bottom AND left|right
+    if ((isTopIn || isBottomIn) && (isLeftIn || isRightIn)) {
+        // if (elm.id === 'coco') {
+        //     console.log('IN 1', rect, isTopIn, isRightIn, isBottomIn, isLeftIn);
         // }
-        // const containerHeight =
-        //   window.innerHeight || document.documentElement.clientHeight;
-        // const containerWidth =
-        //   window.innerWidth || document.documentElement.clientWidth;
-        // const rect = elm.getBoundingClientRect();
-        // const isTopIn = rect.top - containerHeight - offsetBottom <= 0;
-        // const isBottomIn = rect.bottom - offsetTop >= 0;
-        // const isLeftIn = rect.left - containerWidth - offsetRight <= 0;
-        // const isRightIn = rect.right - offsetLeft >= 0;
-        // return isTopIn && isBottomIn && isLeftIn && isRightIn;
-        const observer = new IntersectionObserver((entries, observer) => {
-            if (!entries.length)
-                return;
-            const entry = entries[0];
-            if (entry.intersectionRatio > 0) {
-                resolve(true);
-            }
-            else {
-                resolve(false);
-            }
-            observer.disconnect();
-        }, {
-            root: null,
-            rootMargin: settings.offset,
-            threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
-        });
-        observer.observe(elm);
-    });
+        return true;
+    }
+    // is rect is bigger than viewport in all directions
+    if (top <= 0 &&
+        bottom >= containerHeight &&
+        left <= 0 &&
+        right >= containerWidth) {
+        // if (elm.id === 'coco') {
+        //     console.log('IN 2');
+        // }
+        return true;
+    }
+    if (top <= 0 && bottom >= containerHeight && left <= 0 && isRightIn) {
+        // if (elm.id === 'coco') {
+        //     console.log('IN 3');
+        // }
+        return true;
+    }
+    if (top <= 0 &&
+        bottom >= containerHeight &&
+        right >= containerWidth &&
+        isLeftIn) {
+        // if (elm.id === 'coco') {
+        //     console.log('IN 4');
+        // }
+        return true;
+    }
+    if (left <= 0 && right >= containerWidth && top <= 0 && isBottomIn) {
+        // if (elm.id === 'coco') {
+        //     console.log('IN 5');
+        // }
+        return true;
+    }
+    if (left <= 0 &&
+        right >= containerWidth &&
+        bottom >= containerHeight &&
+        isTopIn) {
+        // if (elm.id === 'coco') {
+        //     console.log('IN 6');
+        // }
+        return true;
+    }
+    return false;
+    // const observer = new IntersectionObserver(
+    //     (entries, observer) => {
+    //         if (!entries.length) return;
+    //         const entry = entries[0];
+    // const isTopIn = entry.boundingClientRect.top - entry.rootBounds.height <= 0;
+    // const isBottomIn = entry.boundingClientRect.bottom >= 0;
+    // const isLeftIn = rect.left - containerWidth - offsetRight <= 0;
+    // const isRightIn = rect.right - offsetLeft >= 0;
+    //         if (entry.boundingClientRect.left >= entry.rootBounds.top && entry.boundingClientRect.left <= entry.rootBounds.right)
+    //         if (
+    //             entry.intersectionRatio > 0 &&
+    //             (entry.intersectionRect.width ||
+    //                 entry.intersectionRect.height)
+    //         ) {
+    //             resolve(true);
+    //         } else {
+    //             resolve(false);
+    //         }
+    //         observer.disconnect();
+    //     },
+    //     {
+    //         root: null, // viewport
+    //         rootMargin: settings.offset,
+    //         threshold: 0,
+    //     },
+    // );
+    // observer.observe(elm);
 }
 exports.default = inViewport;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQWtDZCxTQUFTLFVBQVUsQ0FDZixHQUFnQixFQUNoQixXQUFpQyxFQUFFO0lBRW5DLE9BQU8sSUFBSSxPQUFPLENBQUMsQ0FBQyxPQUFPLEVBQUUsRUFBRTtRQUMzQixRQUFRLG1CQUNKLE1BQU0sRUFBRSxNQUFNLElBQ1gsUUFBUSxDQUNkLENBQUM7UUFFRixtQkFBbUI7UUFDbkIsbUNBQW1DO1FBQ25DLHFDQUFxQztRQUNyQyxzQ0FBc0M7UUFDdEMsb0NBQW9DO1FBQ3BDLDZDQUE2QztRQUM3QywwQ0FBMEM7UUFDMUMsOENBQThDO1FBQzlDLGdEQUFnRDtRQUNoRCw0Q0FBNEM7UUFDNUMsSUFBSTtRQUNKLDBCQUEwQjtRQUMxQixpRUFBaUU7UUFDakUseUJBQXlCO1FBQ3pCLCtEQUErRDtRQUMvRCw0Q0FBNEM7UUFDNUMsa0VBQWtFO1FBQ2xFLG1EQUFtRDtRQUNuRCxrRUFBa0U7UUFDbEUsa0RBQWtEO1FBQ2xELHlEQUF5RDtRQUV6RCxNQUFNLFFBQVEsR0FBRyxJQUFJLG9CQUFvQixDQUNyQyxDQUFDLE9BQU8sRUFBRSxRQUFRLEVBQUUsRUFBRTtZQUNsQixJQUFJLENBQUMsT0FBTyxDQUFDLE1BQU07Z0JBQUUsT0FBTztZQUM1QixNQUFNLEtBQUssR0FBRyxPQUFPLENBQUMsQ0FBQyxDQUFDLENBQUM7WUFDekIsSUFBSSxLQUFLLENBQUMsaUJBQWlCLEdBQUcsQ0FBQyxFQUFFO2dCQUM3QixPQUFPLENBQUMsSUFBSSxDQUFDLENBQUM7YUFDakI7aUJBQU07Z0JBQ0gsT0FBTyxDQUFDLEtBQUssQ0FBQyxDQUFDO2FBQ2xCO1lBQ0QsUUFBUSxDQUFDLFVBQVUsRUFBRSxDQUFDO1FBQzFCLENBQUMsRUFDRDtZQUNJLElBQUksRUFBRSxJQUFJO1lBQ1YsVUFBVSxFQUFFLFFBQVEsQ0FBQyxNQUFNO1lBQzNCLFNBQVMsRUFBRSxDQUFDLENBQUMsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxDQUFDLENBQUM7U0FDakUsQ0FDSixDQUFDO1FBRUYsUUFBUSxDQUFDLE9BQU8sQ0FBQyxHQUFHLENBQUMsQ0FBQztJQUMxQixDQUFDLENBQUMsQ0FBQztBQUNQLENBQUM7QUFDRCxrQkFBZSxVQUFVLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQWdDZCxTQUF3QixVQUFVLENBQzlCLEdBQWdCLEVBQ2hCLFdBQWlDLEVBQUU7SUFFbkMsUUFBUSxxQkFDRCxRQUFRLENBQ2QsQ0FBQztJQUVGLE1BQU0sU0FBUyxHQUNQLFFBQVEsQ0FBQyxlQUFlLENBQUMsU0FBUyxJQUFJLFFBQVEsQ0FBQyxJQUFJLENBQUMsU0FBUyxFQUNqRSxVQUFVLEdBQ04sUUFBUSxDQUFDLGVBQWUsQ0FBQyxVQUFVLElBQUksUUFBUSxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUM7SUFFeEUsTUFBTSxlQUFlLEdBQ2IsTUFBTSxDQUFDLFdBQVcsSUFBSSxRQUFRLENBQUMsZUFBZSxDQUFDLFlBQVksRUFDL0QsY0FBYyxHQUNWLE1BQU0sQ0FBQyxVQUFVLElBQUksUUFBUSxDQUFDLGVBQWUsQ0FBQyxXQUFXLEVBQzdELElBQUksR0FBRyxHQUFHLENBQUMscUJBQXFCLEVBQUUsQ0FBQztJQUV2QyxNQUFNLEdBQUcsR0FBRyxJQUFJLENBQUMsR0FBRyxHQUFHLFNBQVMsRUFDNUIsSUFBSSxHQUFHLElBQUksQ0FBQyxJQUFJLEdBQUcsVUFBVSxFQUM3QixLQUFLLEdBQUcsSUFBSSxDQUFDLEtBQUssR0FBRyxVQUFVLEVBQy9CLE1BQU0sR0FBRyxJQUFJLENBQUMsTUFBTSxHQUFHLFNBQVMsQ0FBQztJQUVyQyxNQUFNLE9BQU8sR0FBRyxHQUFHLEdBQUcsZUFBZSxJQUFJLENBQUMsRUFDdEMsVUFBVSxHQUFHLE1BQU0sSUFBSSxlQUFlLEVBQ3RDLFFBQVEsR0FBRyxJQUFJLElBQUksQ0FBQyxJQUFJLElBQUksSUFBSSxjQUFjLEVBQzlDLFNBQVMsR0FBRyxLQUFLLElBQUksQ0FBQyxJQUFJLEtBQUssSUFBSSxjQUFjLENBQUM7SUFFdEQsd0NBQXdDO0lBQ3hDLElBQUksQ0FBQyxPQUFPLElBQUksVUFBVSxDQUFDLElBQUksQ0FBQyxRQUFRLElBQUksU0FBUyxDQUFDLEVBQUU7UUFDcEQsMkJBQTJCO1FBQzNCLDJFQUEyRTtRQUMzRSxJQUFJO1FBQ0osT0FBTyxJQUFJLENBQUM7S0FDZjtJQUVELG9EQUFvRDtJQUNwRCxJQUNJLEdBQUcsSUFBSSxDQUFDO1FBQ1IsTUFBTSxJQUFJLGVBQWU7UUFDekIsSUFBSSxJQUFJLENBQUM7UUFDVCxLQUFLLElBQUksY0FBYyxFQUN6QjtRQUNFLDJCQUEyQjtRQUMzQiwyQkFBMkI7UUFDM0IsSUFBSTtRQUNKLE9BQU8sSUFBSSxDQUFDO0tBQ2Y7SUFFRCxJQUFJLEdBQUcsSUFBSSxDQUFDLElBQUksTUFBTSxJQUFJLGVBQWUsSUFBSSxJQUFJLElBQUksQ0FBQyxJQUFJLFNBQVMsRUFBRTtRQUNqRSwyQkFBMkI7UUFDM0IsMkJBQTJCO1FBQzNCLElBQUk7UUFDSixPQUFPLElBQUksQ0FBQztLQUNmO0lBRUQsSUFDSSxHQUFHLElBQUksQ0FBQztRQUNSLE1BQU0sSUFBSSxlQUFlO1FBQ3pCLEtBQUssSUFBSSxjQUFjO1FBQ3ZCLFFBQVEsRUFDVjtRQUNFLDJCQUEyQjtRQUMzQiwyQkFBMkI7UUFDM0IsSUFBSTtRQUNKLE9BQU8sSUFBSSxDQUFDO0tBQ2Y7SUFFRCxJQUFJLElBQUksSUFBSSxDQUFDLElBQUksS0FBSyxJQUFJLGNBQWMsSUFBSSxHQUFHLElBQUksQ0FBQyxJQUFJLFVBQVUsRUFBRTtRQUNoRSwyQkFBMkI7UUFDM0IsMkJBQTJCO1FBQzNCLElBQUk7UUFDSixPQUFPLElBQUksQ0FBQztLQUNmO0lBRUQsSUFDSSxJQUFJLElBQUksQ0FBQztRQUNULEtBQUssSUFBSSxjQUFjO1FBQ3ZCLE1BQU0sSUFBSSxlQUFlO1FBQ3pCLE9BQU8sRUFDVDtRQUNFLDJCQUEyQjtRQUMzQiwyQkFBMkI7UUFDM0IsSUFBSTtRQUNKLE9BQU8sSUFBSSxDQUFDO0tBQ2Y7SUFFRCxPQUFPLEtBQUssQ0FBQztJQUViLDZDQUE2QztJQUM3QywrQkFBK0I7SUFDL0IsdUNBQXVDO0lBRXZDLG9DQUFvQztJQUVwQywrRUFBK0U7SUFDL0UsMkRBQTJEO0lBQzNELGtFQUFrRTtJQUNsRSxrREFBa0Q7SUFFbEQsZ0lBQWdJO0lBRWhJLGVBQWU7SUFDZiw2Q0FBNkM7SUFDN0MsK0NBQStDO0lBQy9DLGlEQUFpRDtJQUNqRCxjQUFjO0lBQ2QsNkJBQTZCO0lBQzdCLG1CQUFtQjtJQUNuQiw4QkFBOEI7SUFDOUIsWUFBWTtJQUNaLGlDQUFpQztJQUNqQyxTQUFTO0lBQ1QsUUFBUTtJQUNSLGtDQUFrQztJQUNsQyx1Q0FBdUM7SUFDdkMsd0JBQXdCO0lBQ3hCLFNBQVM7SUFDVCxLQUFLO0lBRUwseUJBQXlCO0FBQzdCLENBQUM7QUExSEQsNkJBMEhDIn0=

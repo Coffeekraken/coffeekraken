@@ -1198,6 +1198,12 @@ export default class SSlider extends __SLitComponent {
             return;
         }
 
+        const dist = $to.getBoundingClientRect().x;
+
+        console.log(dist);
+
+        this.$slidesWrapper.scroll(dist, 0);
+
         // const nextBounds = $to.getBoundingClientRect();
         // const sliderBounds = this.$slidesWrapper.getBoundingClientRect();
 

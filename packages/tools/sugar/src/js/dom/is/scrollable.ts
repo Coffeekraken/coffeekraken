@@ -28,14 +28,24 @@ export interface IIsScrollableSettings {
     y: boolean;
 }
 
-export default function isScrollable($elm: HTMLElement, settings?: Partial<IIsScrollableSettings>): boolean {
+export default function isScrollable(
+    $elm: HTMLElement,
+    settings?: Partial<IIsScrollableSettings>,
+): boolean {
     settings = <IIsScrollableSettings>{
         x: true,
         y: true,
-        ...settings ?? {}
+        ...(settings ?? {}),
     };
-    var overflowY = window.getComputedStyle($elm)['overflow-y'];
-    var overflowX = window.getComputedStyle($elm)['overflow-x'];
+
+    const style = window.getComputedStyle($elm);
+    var overflowY = style.overflowY.trim();
+    var overflowX = style.overflowX.trim();
+
+    if ($elm.classList.contains('s-slider__slides-wrapper')) {
+        console.log('COCOCOC', overflowX, overflowY);
+    }
+
     const dir = {
         vertical:
             (overflowY === 'scroll' || overflowY === 'auto') &&
@@ -44,6 +54,15 @@ export default function isScrollable($elm: HTMLElement, settings?: Partial<IIsSc
             (overflowX === 'scroll' || overflowX === 'auto') &&
             $elm.scrollWidth > $elm.clientWidth,
     };
+
+    if ($elm.classList.contains('s-slider__slides-wrapper')) {
+        console.log('COCOCOCffefef', dir);
+
+        if (settings.x && dir.horizontal) {
+            console.log('HORIGIN');
+        }
+    }
+
     if (settings.x && dir.horizontal) return true;
     if (settings.y && dir.vertical) return true;
     return false;

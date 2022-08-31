@@ -8,8 +8,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import __SFeature from '@coffeekraken/s-feature';
-import __when from '@coffeekraken/sugar/js/dom/detect/when';
 import __whenNearViewport from '@coffeekraken/sugar/js/dom/detect/whenNearViewport';
+import __whenStylesheetsReady from '@coffeekraken/sugar/js/dom/detect/whenStylesheetsReady';
 import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SDepsFeatureInterface from './interface/SDepsFeatureInterface';
@@ -25,27 +25,50 @@ export default class SDepsFeature extends __SFeature {
         }));
     }
     /**
+     * Check if all is loaded and add the "ready" class and attribute
+     */
+    static _checkAndApplyReadyStateForElement($elm, props = {}) {
+        // css
+        if (props.css && !$elm._sDepsCssLoaded) {
+            return;
+        }
+        // apply class and attribute
+        $elm.setAttribute('ready', 'true');
+        $elm.classList.add('ready');
+    }
+    /**
      * Handle css dependencies for the passed element
      */
     static _handleCssDepsForElement($elm, props = {}) {
-        // check if a partial already exists for this
-        const $existing = document.querySelector(`link[s-deps-css="${props.css}"]`);
-        if ($existing) {
-            return;
-        }
-        // create a new link to add in the head
-        let finalPartialPath = props.css;
-        // @ts-ignore
-        if (!finalPartialPath.match(/\.css$/)) {
-            finalPartialPath += '.css';
-        }
-        const $link = document.createElement('link');
-        $link.setAttribute('rel', 'stylesheet');
-        // @ts-ignore
-        $link.setAttribute('s-deps-css', props.css);
-        $link.setAttribute('href', `${props.cssPartialsPath}/${finalPartialPath}`);
-        // add the link in the head section
-        document.head.appendChild($link);
+        return __awaiter(this, void 0, void 0, function* () {
+            // check if a partial already exists for this
+            const $existing = document.querySelector(`link[s-deps-css="${props.css}"]`);
+            if ($existing) {
+                // mark the element css as loaded
+                $elm._sDepsCssLoaded = true;
+                // check and apply ready state
+                this._checkAndApplyReadyStateForElement($elm, props);
+            }
+            // create a new link to add in the head
+            let finalPartialPath = props.css;
+            // @ts-ignore
+            if (!finalPartialPath.match(/\.css$/)) {
+                finalPartialPath += '.css';
+            }
+            const $link = document.createElement('link');
+            $link.setAttribute('rel', 'stylesheet');
+            // @ts-ignore
+            $link.setAttribute('s-deps-css', props.css);
+            $link.setAttribute('href', `${props.cssPartialsPath}/${finalPartialPath}`);
+            // add the link in the head section
+            document.head.appendChild($link);
+            // wait for stylesheet to be ready
+            yield __whenStylesheetsReady($link);
+            // mark the element css as loaded
+            $elm._sDepsCssLoaded = true;
+            // check and apply ready state
+            this._checkAndApplyReadyStateForElement($elm, props);
+        });
     }
     /**
      * Load a partial if needed
@@ -65,8 +88,6 @@ export default class SDepsFeature extends __SFeature {
     }
     mount() {
         return __awaiter(this, void 0, void 0, function* () {
-            // wait until visible
-            yield __when(this.node, ['visible', 'nearViewport']);
             // handle partial stylesheet loading
             // @ts-ignore
             SDepsFeature._handleDepsForElement(this.node, this.props);
@@ -76,4 +97,4 @@ export default class SDepsFeature extends __SFeature {
 export function define(props = {}, name = 's-deps') {
     __SFeature.defineFeature(name, SDepsFeature, Object.assign({ mountWhen: 'nearViewport' }, props));
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sVUFBVSxNQUFNLHlCQUF5QixDQUFDO0FBQ2pELE9BQU8sTUFBTSxNQUFNLHdDQUF3QyxDQUFDO0FBQzVELE9BQU8sa0JBQWtCLE1BQU0sb0RBQW9ELENBQUM7QUFDcEYsT0FBTyxtQkFBbUIsTUFBTSxvREFBb0QsQ0FBQztBQUNyRixPQUFPLFdBQVcsTUFBTSw2Q0FBNkMsQ0FBQztBQUN0RSxPQUFPLHVCQUF1QixNQUFNLG1DQUFtQyxDQUFDO0FBeUN4RSxNQUFNLENBQUMsT0FBTyxPQUFPLFlBQWEsU0FBUSxVQUFVO0lBQ2hELE1BQU0sQ0FBQyxZQUFZLENBQ2YsUUFBZ0IsRUFDaEIsUUFBcUMsRUFBRTtRQUV2QyxtQkFBbUIsQ0FBQyxRQUFRLEVBQUUsQ0FBTyxJQUFJLEVBQUUsRUFBRTtZQUN6QywyQ0FBMkM7WUFDM0MsTUFBTSxrQkFBa0IsQ0FBQyxJQUFJLENBQUMsQ0FBQztZQUUvQix1QkFBdUI7WUFDdkIsS0FBSyxHQUFHLHVCQUF1QixDQUFDLEtBQUssQ0FBQyxLQUFLLGFBQUwsS0FBSyxjQUFMLEtBQUssR0FBSSxFQUFFLENBQUMsQ0FBQztZQUVuRCxzQkFBc0I7WUFDdEIsSUFBSSxDQUFDLHFCQUFxQixDQUFDLElBQUksRUFBRSxLQUFLLENBQUMsQ0FBQztRQUM1QyxDQUFDLENBQUEsQ0FBQyxDQUFDO0lBQ1AsQ0FBQztJQUVEOztPQUVHO0lBQ0gsTUFBTSxDQUFDLHdCQUF3QixDQUMzQixJQUFpQixFQUNqQixRQUFxQyxFQUFFO1FBRXZDLDZDQUE2QztRQUM3QyxNQUFNLFNBQVMsR0FBRyxRQUFRLENBQUMsYUFBYSxDQUNwQyxvQkFBb0IsS0FBSyxDQUFDLEdBQUcsSUFBSSxDQUNwQyxDQUFDO1FBQ0YsSUFBSSxTQUFTLEVBQUU7WUFDWCxPQUFPO1NBQ1Y7UUFFRCx1Q0FBdUM7UUFDdkMsSUFBSSxnQkFBZ0IsR0FBRyxLQUFLLENBQUMsR0FBRyxDQUFDO1FBQ2pDLGFBQWE7UUFDYixJQUFJLENBQUMsZ0JBQWdCLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxFQUFFO1lBQ25DLGdCQUFnQixJQUFJLE1BQU0sQ0FBQztTQUM5QjtRQUNELE1BQU0sS0FBSyxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQUMsTUFBTSxDQUFDLENBQUM7UUFDN0MsS0FBSyxDQUFDLFlBQVksQ0FBQyxLQUFLLEVBQUUsWUFBWSxDQUFDLENBQUM7UUFDeEMsYUFBYTtRQUNiLEtBQUssQ0FBQyxZQUFZLENBQUMsWUFBWSxFQUFFLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQztRQUM1QyxLQUFLLENBQUMsWUFBWSxDQUNkLE1BQU0sRUFDTixHQUFHLEtBQUssQ0FBQyxlQUFlLElBQUksZ0JBQWdCLEVBQUUsQ0FDakQsQ0FBQztRQUVGLG1DQUFtQztRQUNuQyxRQUFRLENBQUMsSUFBSSxDQUFDLFdBQVcsQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUNyQyxDQUFDO0lBRUQ7O09BRUc7SUFDSCxNQUFNLENBQUMscUJBQXFCLENBQ3hCLElBQWlCLEVBQ2pCLFFBQXFDLEVBQUU7UUFFdkMsSUFBSSxLQUFLLENBQUMsR0FBRyxFQUFFO1lBQ1gsSUFBSSxDQUFDLHdCQUF3QixDQUFDLElBQUksRUFBRSxLQUFLLENBQUMsQ0FBQztTQUM5QztJQUNMLENBQUM7SUFFRCxhQUFhO0lBQ2IsWUFBWSxJQUFZLEVBQUUsSUFBaUIsRUFBRSxRQUFhO1FBQ3RELEtBQUssQ0FDRCxJQUFJLEVBQ0osSUFBSSxFQUNKLFdBQVcsQ0FDUDtZQUNJLElBQUksRUFBRSxRQUFRO1lBQ2QsU0FBUyxFQUFFLHVCQUF1QjtZQUNsQyxnQkFBZ0I7U0FDbkIsRUFDRCxRQUFRLGFBQVIsUUFBUSxjQUFSLFFBQVEsR0FBSSxFQUFFLENBQ2pCLENBQ0osQ0FBQztJQUNOLENBQUM7SUFFSyxLQUFLOztZQUNQLHFCQUFxQjtZQUNyQixNQUFNLE1BQU0sQ0FBQyxJQUFJLENBQUMsSUFBSSxFQUFFLENBQUMsU0FBUyxFQUFFLGNBQWMsQ0FBQyxDQUFDLENBQUM7WUFFckQsb0NBQW9DO1lBQ3BDLGFBQWE7WUFDYixZQUFZLENBQUMscUJBQXFCLENBQUMsSUFBSSxDQUFDLElBQUksRUFBRSxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUM7UUFDOUQsQ0FBQztLQUFBO0NBQ0o7QUFFRCxNQUFNLFVBQVUsTUFBTSxDQUNsQixRQUFxQyxFQUFFLEVBQ3ZDLElBQUksR0FBRyxRQUFRO0lBRWYsVUFBVSxDQUFDLGFBQWEsQ0FBQyxJQUFJLEVBQUUsWUFBWSxrQkFDdkMsU0FBUyxFQUFFLGNBQWMsSUFDdEIsS0FBSyxFQUNWLENBQUM7QUFDUCxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sVUFBVSxNQUFNLHlCQUF5QixDQUFDO0FBQ2pELE9BQU8sa0JBQWtCLE1BQU0sb0RBQW9ELENBQUM7QUFDcEYsT0FBTyxzQkFBc0IsTUFBTSx3REFBd0QsQ0FBQztBQUM1RixPQUFPLG1CQUFtQixNQUFNLG9EQUFvRCxDQUFDO0FBQ3JGLE9BQU8sV0FBVyxNQUFNLDZDQUE2QyxDQUFDO0FBQ3RFLE9BQU8sdUJBQXVCLE1BQU0sbUNBQW1DLENBQUM7QUF5Q3hFLE1BQU0sQ0FBQyxPQUFPLE9BQU8sWUFBYSxTQUFRLFVBQVU7SUFDaEQsTUFBTSxDQUFDLFlBQVksQ0FDZixRQUFnQixFQUNoQixRQUFxQyxFQUFFO1FBRXZDLG1CQUFtQixDQUFDLFFBQVEsRUFBRSxDQUFPLElBQUksRUFBRSxFQUFFO1lBQ3pDLDJDQUEyQztZQUMzQyxNQUFNLGtCQUFrQixDQUFDLElBQUksQ0FBQyxDQUFDO1lBRS9CLHVCQUF1QjtZQUN2QixLQUFLLEdBQUcsdUJBQXVCLENBQUMsS0FBSyxDQUFDLEtBQUssYUFBTCxLQUFLLGNBQUwsS0FBSyxHQUFJLEVBQUUsQ0FBQyxDQUFDO1lBRW5ELHNCQUFzQjtZQUN0QixJQUFJLENBQUMscUJBQXFCLENBQUMsSUFBSSxFQUFFLEtBQUssQ0FBQyxDQUFDO1FBQzVDLENBQUMsQ0FBQSxDQUFDLENBQUM7SUFDUCxDQUFDO0lBRUQ7O09BRUc7SUFDSCxNQUFNLENBQUMsa0NBQWtDLENBQ3JDLElBQUksRUFDSixRQUFxQyxFQUFFO1FBRXZDLE1BQU07UUFDTixJQUFJLEtBQUssQ0FBQyxHQUFHLElBQUksQ0FBQyxJQUFJLENBQUMsZUFBZSxFQUFFO1lBQ3BDLE9BQU87U0FDVjtRQUVELDRCQUE0QjtRQUM1QixJQUFJLENBQUMsWUFBWSxDQUFDLE9BQU8sRUFBRSxNQUFNLENBQUMsQ0FB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

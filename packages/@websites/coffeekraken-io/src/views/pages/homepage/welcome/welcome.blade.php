@@ -1,4 +1,4 @@
-<section id="homepage-welcome" s-deps css="welcome" s-appear in="bottom">
+<section id="homepage-welcome" s-appear in="bottom">
 
     <s-slider lnf="welcome-header" loop>
 
@@ -105,7 +105,7 @@
                     Out color picker support multiple color format like <span class="s-tc:accent">HSL(A)</span>, <span class="s-tc:complementary">RGB(A)</span> and <span class="s-tc:accent">HEX(A)</span>. All of this with a lot more control options.
                 </p>
 
-                <s-color-picker input button class="s-color:main" value="hsla(30,100,50,1)" format="hsla">
+                <s-color-picker id="coco" input button class="s-color:main" value="hsla(30,100,50,1)" format="hsla">
                 </s-color-picker>
 
                 <br />

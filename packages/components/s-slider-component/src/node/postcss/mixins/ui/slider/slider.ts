@@ -75,11 +75,17 @@ export default function ({
     // behavior
     if (finalParams.scope.indexOf('behavior') !== -1) {
         vars.push(`
-            &[behavior='default'] > .s-slider__root > .s-slider__slides-wrapper > .s-slider__slides {
-                @sugar.transition();
+            &[behavior='default'] > .s-slider__root > .s-slider__slides-wrapper {
+                &::-webkit-scrollbar {
+                    display: none;
+                }
             }
         `);
     }
+
+    // &[behavior='default'] > .s-slider__root > .s-slider__slides-wrapper > .s-slider__slides {
+    //     @sugar.transition();
+    // }
 
     // lnf
     if (finalParams.scope.indexOf('lnf') !== -1) {

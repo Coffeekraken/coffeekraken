@@ -1,5 +1,5 @@
 // @ts-nocheck
-import __isInViewport from '../is/inViewport';
+import __closestScrollable from '../query/closestScrollable';
 
 /**
  * @name      whenNearViewport
@@ -40,31 +40,42 @@ export default function whenNearViewport(
     elm: HTMLElement,
     settings: Partials<IWhenNearViewportSettings> = {},
 ): Promise<HTMLElement> {
+    function getRootMargin() {
+        return [
+            `${Math.round(window.innerHeight * 0.5)}px`,
+            `${Math.round(window.innerWidth * 0.5)}px`,
+            `${Math.round(window.innerHeight * 0.5)}px`,
+            `${Math.round(window.innerWidth * 0.5)}px`,
+        ].join(' ');
+    }
+
     settings = {
-        offset: [
-            `${Math.round(window.innerHeight * 0.5) * -1}px`,
-            `${Math.round(window.innerWidth * 0.5) * -1}px`,
-            `${Math.round(window.innerHeight * 0.5)}px`,
-            `${Math.round(window.innerHeight * 0.5)}px`,
-        ].join(' '),
+        offset: getRootMargin(),
         ...settings,
     };
 
     let observer: IntersectionObserver, resizeTimeout: number;
 
+    const $closest = __closestScrollable(elm);
+
+    if (elm.id === 'coco') {
+        console.log('CLOSEST', $closest);
+    }
+
     return new Promise(async (resolve) => {
         const options = {
-            root: null, // relative to document viewport
+            root: $closest, // relative to document viewport
             rootMargin: settings.offset, // margin around root. Values are similar to css property. Unitless values not allowed
             threshold: 0, // visible amount of item shown in relation to root
         };
 
-        if (await __isInViewport(elm)) {
-            return resolve(elm);
-        }
+        async function onChange(changes, observer) {
+            // if (!__isInViewport(elm)) return;
 
-        function onChange(changes, observer) {
             changes.forEach((change) => {
+                if (elm.id === 'coco') {
+                    console.log(change);
+                }
                 if (change.intersectionRatio > 0) {
                     observer.disconnect?.();
                     resolve(elm);
@@ -79,12 +90,7 @@ export default function whenNearViewport(
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
                 observer.disconnect?.();
-                options.rootMargin = [
-                    `${Math.round(window.innerHeight * 0.5) * -1}px`,
-                    `${Math.round(window.innerWidth * 0.5) * -1}px`,
-                    `${Math.round(window.innerHeight * 0.5)}px`,
-                    `${Math.round(window.innerHeight * 0.5)}px`,
-                ].join(' ');
+                options.rootMargin = getRootMargin();
                 observer = new IntersectionObserver(onChange, options);
                 observer.observe(elm);
             }, 500);

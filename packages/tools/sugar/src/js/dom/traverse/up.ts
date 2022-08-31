@@ -30,7 +30,9 @@ export default function up($elm: HTMLElement, callback: Function): HTMLElement {
     const originalElm = $elm;
     $elm = $elm.parentNode;
     while ($elm && $elm != originalElm.ownerDocument) {
-        if (callback($elm)) return $elm;
+        if (callback($elm)) {
+            return $elm;
+        }
         $elm = $elm.parentNode;
     }
     return null;

@@ -156,8 +156,9 @@
                 .s-slider[lnf="default"] > .s-slider__root > .s-slider__controls .s-slider__controls-previous-arrow:after {
                     background: hsla(calc(var(--s-theme-color-current-h, 0) + var(--s-theme-color-current-spin ,0)),calc((var(--s-theme-color-current-s, 0)) * 1%),calc((var(--s-theme-color-current-l, 0)) * 1%),var(--s-theme-color-current-a, 1));
                 }
-.s-slider[behavior="default"][behavior='default'] > .s-slider__root > .s-slider__slides-wrapper > .s-slider__slides {transition: all .3s cubic-bezier(0.700, 0.000, 0.305, 0.995);
-            }
+.s-slider[behavior="default"][behavior='default'] > .s-slider__root > .s-slider__slides-wrapper::-webkit-scrollbar {
+                    display: none;
+                }
 .s-rhythm--vertical > .s-slider {
                     margin-bottom: calc(var(--s-theme-margin-default, 1rem) * 3.75);
                 }

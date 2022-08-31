@@ -98,36 +98,51 @@ __SConductor.setup({
   // });
   // // }
 
-  // dependencies
-  __SDepsFeature.registerDeps('.icon-card', {
-    css: 'iconCard',
-  });
-  __SDepsFeature.registerDeps('s-code-example', {
-    css: 'sCodeExample',
-  });
-  __SDepsFeature.registerDeps('.sidemenu', {
-    css: 'sidemenu',
-  });
-  __SDepsFeature.registerDeps('.code-example-section', {
-    css: 'codeExampleSection',
-  });
-  __SDepsFeature.registerDeps('.s-filtrable-input', {
-    css: 'sFiltrableInput',
-  });
-  __SDepsFeature.registerDeps('.s-color-picker', {
-    css: 'sColorPicker',
-  });
-  __SDepsFeature.registerDeps('.s-rating', {
-    css: 'sRating',
-  });
-  __SDepsFeature.registerDeps('.s-slider', {
-    css: 'sSlider',
-  });
-  __SDepsFeature.registerDeps('.s-theme-switcher', {
-    css: 'sThemeSwitcher',
-  });
-  __SDepsFeature.registerDeps('.s-platform', {
-    css: 'sPlatform',
+  [
+    {
+      sel: '.icon-card',
+      css: 'iconCard',
+    },
+    {
+      sel: 's-code-example',
+      css: 'sCodeExample',
+    },
+    {
+      sel: '.sidemenu',
+      css: 'sidemenu',
+    },
+    {
+      sel: '.code-example-section',
+      css: 'codeExampleSection',
+    },
+    {
+      sel: '.s-filtrable-input',
+      css: 'sFiltrableInput',
+    },
+    {
+      sel: 's-color-picker',
+      css: 'sColorPicker',
+    },
+    {
+      sel: 's-rating',
+      css: 'sRating',
+    },
+    {
+      sel: 's-slider',
+      css: 'sSlider',
+    },
+    {
+      sel: 's-theme-switcher',
+      css: 'sThemeSwitcher',
+    },
+    {
+      sel: '.s-plaform',
+      css: 'sPlatform',
+    },
+  ].forEach((dep) => {
+    __SDepsFeature.registerDeps(dep.sel, {
+      css: dep.css,
+    });
   });
 
   // features

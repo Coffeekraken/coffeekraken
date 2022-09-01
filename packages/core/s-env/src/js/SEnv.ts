@@ -1,4 +1,5 @@
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __queryStringToObject from '@coffeekraken/sugar/shared/url/queryStringToObject';
 import __SEnv from '../shared/SEnv';
 
 /**
@@ -44,6 +45,8 @@ export default class SEnv extends __SEnv {
 
         const envConfig = __SSugarConfig.get('env');
 
+        const queryStringObj = __queryStringToObject(document.location.search);
+
         let finalEnv = 'development'; // fallback
         if (envConfig.env) {
             finalEnv = envConfig.env;
@@ -67,7 +70,9 @@ export default class SEnv extends __SEnv {
         }
 
         console.log(
-            `%c[SEnv] Current environment is "${finalEnv}"`,
+            `%c[SEnv] Current environment is "${finalEnv}"${
+                queryStringObj.devsCut ? " developer's cut (devsCut)" : ''
+            }`,
             `color: ${
                 finalEnv === 'production'
                     ? 'red'
@@ -80,6 +85,7 @@ export default class SEnv extends __SEnv {
         document.env.ENVIRONMENT = finalEnv;
         document.env.ENV = finalEnv;
         document.env.PLATFORM = 'browser';
+        document.env.DEVS_CUT = queryStringObj.devsCut !== undefined;
         this._env = document.env;
         return document.env;
     }

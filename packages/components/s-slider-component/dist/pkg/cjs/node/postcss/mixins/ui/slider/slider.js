@@ -55,7 +55,7 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
     // behavior
     if (finalParams.scope.indexOf('behavior') !== -1) {
         vars.push(`
-            &[behavior='default'] > .s-slider__root > .s-slider__slides-wrapper {
+            &[behavior='default'] > .s-slider__root > .s-slider__slides-wrapper {                
                 &::-webkit-scrollbar {
                     display: none;
                 }

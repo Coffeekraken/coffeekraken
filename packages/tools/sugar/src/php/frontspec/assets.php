@@ -52,7 +52,7 @@ function assets($assets, $cacheBuster = '')
                             $name .
                             '" href="' .
                             \Sugar\string\replaceTokens($finalSrc) .
-                            '" />'
+                            '" rel="preload" as="style" />'
                     );
                 } else {
                     array_push(
@@ -61,7 +61,7 @@ function assets($assets, $cacheBuster = '')
                             $name .
                             '" href="/' .
                             \Sugar\string\replaceTokens($finalSrc) .
-                            '" />'
+                            '" rel="preload" as="style" />'
                     );
                 }
                 break;

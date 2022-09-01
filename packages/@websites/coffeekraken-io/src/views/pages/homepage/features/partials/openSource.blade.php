@@ -29,7 +29,7 @@
                     
                 </div>
                 <div class="__illustration">
-                    <img class="adaptive-color" s-inline src="/dist/img/illustrations/opensource.svg" />
+                    <img class="adaptive-color" s-inline src="/dist/img/illustrations/opensource.svg" loading="lazy" />
                 </div>
             </div>
 

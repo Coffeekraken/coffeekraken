@@ -1,5 +1,5 @@
-import __easeInOutQuart from '../easing/easeInOutQuart';
 import __SPromise from '@coffeekraken/s-promise';
+import __easeInOutQuart from '../easing/easeInOutQuart';
 
 /**
  * @name                easeInterval

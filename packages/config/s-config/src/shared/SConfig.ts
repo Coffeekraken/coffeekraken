@@ -228,11 +228,11 @@ export default class SConfig {
                         __SEnv.get('platform') ?? __isNode()
                             ? 'node'
                             : 'browser',
+                    devsCut: __SEnv.get('devsCut'),
                 },
                 cache: true,
                 updateTimeout: 500,
                 throwErrorOnUndefinedConfig: true,
-                // resolvers: [],
             },
             settings,
         );

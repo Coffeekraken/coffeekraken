@@ -3,7 +3,7 @@
 @sugar.import ('./generic/**/*.css');
 
 html {
-    overflow-x: auto;
+    overflow-x: hidden;
 }
 
 body {
@@ -28,6 +28,11 @@ body {
 
 .hljs > * {
     display: inline-block !important;
+}
+
+template[s-template]:not([mounted]) {
+    display: block;
+    height: 100vh;
 }
 
 /* [class*='s-btn']:not(s-date-picker [class*='s-btn']):not(.preview

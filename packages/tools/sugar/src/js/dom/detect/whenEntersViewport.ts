@@ -40,10 +40,16 @@ export default function whenEntersViewport(
     elm: HTMLElement,
     settings: Partials<IWhenEntersViewportSettings> = {},
 ): Promise<HTMLElement> {
-    const offset = `0px 0px -25% 0px`;
+    function getRootMargin() {
+        return [
+            `${Math.round(window.innerHeight * 0.15 * -1)}px`,
+            `${Math.round(window.innerWidth * 0.15 * -1)}px`,
+            `${Math.round(window.innerHeight * 0.15 * -1)}px`,
+            `${Math.round(window.innerWidth * 0.15 * -1)}px`,
+        ].join(' ');
+    }
 
     settings = {
-        offset,
         ...settings,
     };
 
@@ -52,7 +58,7 @@ export default function whenEntersViewport(
     return new Promise(async (resolve) => {
         const options = {
             root: null, // relative to document viewport
-            rootMargin: settings.offset, // margin around root. Values are similar to css property. Unitless values not allowed
+            rootMargin: settings.offset ?? getRootMargin(), // margin around root. Values are similar to css property. Unitless values not allowed
             threshold: 0, // visible amount of item shown in relation to root
         };
 
@@ -76,7 +82,7 @@ export default function whenEntersViewport(
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
                 observer.disconnect?.();
-                options.rootMargin = settings.offset;
+                options.rootMargin = settings.offset ?? getRootMargin();
                 observer = new IntersectionObserver(onChange, options);
                 observer.observe(elm);
             }, 500);

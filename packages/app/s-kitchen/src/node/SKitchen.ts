@@ -616,6 +616,8 @@ class SKitchen extends __SClass {
                                 actionParams,
                                 (key, value) => {
                                     if (key === 'env') return true;
+                                    if (key.toLowerCase() === 'devscut')
+                                        return true;
                                     return (
                                         InterfaceClass.definition[key] !==
                                         undefined

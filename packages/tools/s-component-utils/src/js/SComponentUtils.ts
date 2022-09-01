@@ -46,7 +46,13 @@ export interface ISComponentUtilsDispatchSettings {
 export interface ISComponentUtilsDefaultProps {
     id: string;
     mounted: boolean;
-    mountWhen: 'directly' | 'direct' | 'inViewport';
+    mountWhen:
+        | 'directly'
+        | 'direct'
+        | 'inViewport'
+        | 'nearViewport'
+        | 'interact';
+    mountDelay: number;
     adoptStyle: boolean;
     responsive: any;
     verbose: boolean;
@@ -571,7 +577,22 @@ export default class SComponentUtils extends __SClass {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     waitAndExecute(when: string, callback: Function): Promise<any> {
-        return __SConductor.when(this.node, when, callback);
+        return new Promise(async (resolve, reject) => {
+            // // check if we are in a custom element
+            // const $closestCustomElement = __traverseUp(this.node, ($elm) => {
+            //     const customElementClass = window.customElements.get(
+            //         $elm.tagName.toLowerCase(),
+            //     );
+            //     if (customElementClass) {
+            //         return $elm;
+            //     }
+            // });
+            // if ($closestCustomElement) {
+            //     await __whenAttribute($closestCustomElement, 'mounted');
+            // }
+            await __SConductor.when(this.node, when, callback);
+            resolve(this.node);
+        });
     }
 
     /**

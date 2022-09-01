@@ -50,32 +50,23 @@ export default function whenNearViewport(
     }
 
     settings = {
-        offset: getRootMargin(),
         ...settings,
     };
 
     let observer: IntersectionObserver, resizeTimeout: number;
 
-    const $closest = __closestScrollable(elm);
-
-    if (elm.id === 'coco') {
-        console.log('CLOSEST', $closest);
-    }
+    let $closest = __closestScrollable(elm);
+    if ($closest?.tagName === 'HTML') $closest = null;
 
     return new Promise(async (resolve) => {
         const options = {
             root: $closest, // relative to document viewport
-            rootMargin: settings.offset, // margin around root. Values are similar to css property. Unitless values not allowed
+            rootMargin: settings.offset ?? getRootMargin(), // margin around root. Values are similar to css property. Unitless values not allowed
             threshold: 0, // visible amount of item shown in relation to root
         };
 
-        async function onChange(changes, observer) {
-            // if (!__isInViewport(elm)) return;
-
+        function onChange(changes, observer) {
             changes.forEach((change) => {
-                if (elm.id === 'coco') {
-                    console.log(change);
-                }
                 if (change.intersectionRatio > 0) {
                     observer.disconnect?.();
                     resolve(elm);
@@ -90,7 +81,7 @@ export default function whenNearViewport(
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
                 observer.disconnect?.();
-                options.rootMargin = getRootMargin();
+                options.rootMargin = settings.offset ?? getRootMargin();
                 observer = new IntersectionObserver(onChange, options);
                 observer.observe(elm);
             }, 500);

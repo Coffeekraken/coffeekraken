@@ -10,6 +10,7 @@ import { css, html, unsafeCSS } from 'lit';
 // @ts-ignore
 import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
 import __querySelectorUp from '@coffeekraken/sugar/js/dom/query/querySelectorUp';
+import __easeInterval from '@coffeekraken/sugar/shared/function/easeInterval';
 import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 import __css from '../../../../src/css/s-slider-component.css'; // relative to /dist/pkg/esm/js
 import __SSliderComponentInterface from './interface/SSliderComponentInterface';
@@ -270,7 +271,7 @@ export interface ISSliderComponentProps extends ISLitComponentDefaultProps {
     nextIconClass: string;
     previousIconClass: string;
     transitionDuration: number;
-    transitionEasing: number;
+    transitionEasing: Function | String;
     transitionHandler: Function;
 }
 
@@ -411,6 +412,9 @@ export default class SSlider extends __SLitComponent {
             this.behavior.firstUpdated?.();
         }
 
+        // prevent user scroll for default behavior
+        this._preventUserScrollForDefaultBehavior();
+
         // listen for intersections
         this.props.intersectionClasses && this._handleIntersections();
 
@@ -451,6 +455,36 @@ export default class SSlider extends __SLitComponent {
                 }
             }
         });
+    }
+
+    /**
+     * This function prevent user scroll when using the "default" behavior
+     */
+    _preventUserScrollForDefaultBehavior() {
+        return;
+        // default
+        if (this.props.behavior === 'default') {
+            // prevent scroll and touchmove events
+            let pastScrollLeft = this.$slidesWrapper.scrollLeft,
+                pastScrollTop = this.$slidesWrapper.scrollTop;
+            ['mousewheel', 'touchmove'].forEach((eventName) => {
+                this.$slidesWrapper.addEventListener(eventName, (e) => {
+                    if (this.props.direction === 'vertical') {
+                        const currentScrollTop = e.currentTarget.scrollTop;
+                    } else {
+                        const currentScrollLeft = e.currentTarget.scrollLeft;
+
+                        console.log('c', currentScrollLeft, pastScrollLeft);
+
+                        if (currentScrollLeft !== pastScrollLeft) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                        }
+                        pastScrollLeft = currentScrollLeft;
+                    }
+                });
+            });
+        }
     }
 
     /**
@@ -1003,7 +1037,7 @@ export default class SSlider extends __SLitComponent {
             nextSlide,
         });
 
-        await this._transitionHandler(currentSlide.$side, nextSlide.$slide);
+        await this._transitionHandler(currentSlide.$slide, nextSlide.$slide);
 
         this._dispatch('goto-end', {
             currentSlide,
@@ -1198,35 +1232,36 @@ export default class SSlider extends __SLitComponent {
             return;
         }
 
-        const dist = $to.getBoundingClientRect().x;
+        // default
+        if (this.props.behavior === 'default') {
+            this.$slidesWrapper.style.overflowX = 'auto';
 
-        console.log(dist);
+            const $slidesWrapper = this.$slidesWrapper;
 
-        this.$slidesWrapper.scroll(dist, 0);
-
-        // const nextBounds = $to.getBoundingClientRect();
-        // const sliderBounds = this.$slidesWrapper.getBoundingClientRect();
-
-        // const deltaX = nextBounds.left - sliderBounds.left,
-        //     deltaY = nextBounds.top - sliderBounds.top;
-
-        // __easeInterval(
-        //     this.props.transitionDuration,
-        //     (percent) => {
-        //         if (this.props.direction === 'horizontal') {
-        //             const computedDelta =
-        //                 translates.x + (deltaX / 100) * percent * -1;
-        //             $slideableItem.style.transform = `translateX(${computedDelta}px)`;
-        //         } else {
-        //             const computedDelta =
-        //                 translates.y + (deltaY / 100) * percent * -1;
-        //             $slideableItem.style.transform = `translateY(${computedDelta}px)`;
-        //         }
-        //     },
-        //     {
-        //         easing: this.props.transitionEasing,
-        //     },
-        // );
+            const toRect = $to.getBoundingClientRect();
+            let startX = this.$slidesWrapper.scrollLeft,
+                startY = this.$slidesWrapper.scrollTop;
+            const dist =
+                this.props.direction === 'vertical' ? toRect.y : toRect.x;
+            __easeInterval(
+                this.props.transitionDuration,
+                (percentage) => {
+                    const offset = (dist / 100) * percentage;
+                    // console.log(offset);
+                    if (this.props.direction === 'vertical') {
+                        this.$slidesWrapper.scroll(0, startY + offset);
+                    } else {
+                        this.$slidesWrapper.scroll(startX + offset, 0);
+                    }
+                },
+                {
+                    easing: this.props.transitionEasing,
+                    onEnd() {
+                        $slidesWrapper.style.overflowX = 'hidden';
+                    },
+                },
+            );
+        }
     }
     render() {
         if (!this.$slides.length) return;

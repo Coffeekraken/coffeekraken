@@ -41,7 +41,7 @@ import __observeAttribute from '../observe/observeAttributes';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function whenAttribute(elm, attrName, checkFn = null) {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         if (elm.hasAttribute(attrName)) {
             const value = __autoCast(elm.getAttribute(attrName));
             if (checkFn && checkFn(value, value)) {
@@ -53,7 +53,9 @@ export default function whenAttribute(elm, attrName, checkFn = null) {
             }
         }
 
-        const obs = __observeAttribute(elm).then((mutation) => {
+        const obs = __observeAttribute(elm);
+
+        obs.on('attribute', (mutation) => {
             if (mutation.attributeName === attrName) {
                 const value = __autoCast(
                     mutation.target.getAttribute(mutation.attributeName),

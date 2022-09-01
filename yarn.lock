@@ -1501,6 +1501,7 @@ __metadata:
     "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
     "@coffeekraken/s-sugar-feature": ^2.0.0-alpha.20
     "@coffeekraken/s-sugar-json": ^2.0.0-alpha.20
+    "@coffeekraken/s-template-feature": ^2.0.0-alpha.20
     "@coffeekraken/s-theme": ^2.0.0-alpha.20
     "@coffeekraken/s-theme-switcher-component": ^2.0.0-alpha.20
     "@coffeekraken/s-timer": ^2.0.0-alpha.20
@@ -2624,6 +2625,18 @@ __metadata:
     "@coffeekraken/s-stdio": ^2.0.0-alpha.20
     "@coffeekraken/sugar": ^2.0.0-alpha.20
     glob-all: ^3.3.0
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/s-template-feature@^2.0.0-alpha.20, @coffeekraken/s-template-feature@workspace:packages/features/s-template-feature":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/s-template-feature@workspace:packages/features/s-template-feature"
+  dependencies:
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-env": ^2.0.0-alpha.20
+    "@coffeekraken/s-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 

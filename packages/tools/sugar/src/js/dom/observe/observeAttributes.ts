@@ -36,33 +36,31 @@ function observeAttributes(
     target: HTMLElement,
     settings: any = {},
 ): __SPromise<any> {
-    return new __SPromise(
-        ({ emit }) => {
-            // create a new observer
-            const mutationObserver = new MutationObserver((mutations) => {
-                let mutedAttrs = {};
-                // loop on mutations
-                mutations.forEach((mutation) => {
-                    // push mutation
-                    if (!mutedAttrs[mutation.attributeName]) {
-                        emit('then', mutation);
-                        mutedAttrs[mutation.attributeName] = true;
-                    }
-                });
-                mutedAttrs = {};
+    let mutationObserver;
+
+    const pro = new __SPromise(({ resolve, emit }) => {
+        // create a new observer
+        mutationObserver = new MutationObserver((mutations) => {
+            let mutedAttrs = {};
+            // loop on mutations
+            mutations.forEach((mutation) => {
+                // push mutation
+                if (!mutedAttrs[mutation.attributeName]) {
+                    emit('attribute', mutation);
+                    mutedAttrs[mutation.attributeName] = true;
+                }
             });
-            mutationObserver.observe(target, {
-                attributes: true,
-                // characterData : true,
-                ...settings,
-            });
-        },
-        {
-            id: 'observeAttributes',
-        },
-    ).on('finally', () => {
+            mutedAttrs = {};
+        });
+        mutationObserver.observe(target, {
+            attributes: true,
+            ...settings,
+        });
+    });
+    pro.on('finally', () => {
         mutationObserver.disconnect();
     });
+    return pro;
 }
 
 /**

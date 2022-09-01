@@ -1,4 +1,6 @@
 import __isNode from '@coffeekraken/sugar/shared/is/node';
+import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
+import __snakeCase from '@coffeekraken/sugar/shared/string/snakeCase';
 
 // @ts-ignore
 if (!__isNode() && !document.env) {
@@ -52,6 +54,15 @@ export default class SEnv {
      */
     static is(env: string): boolean {
         env = env.toLowerCase();
+
+        // developers cut
+        if (env === 'devscut') {
+            if (this.get('devsCut')) {
+                return true;
+            }
+        }
+
+        // aliases
         if (env === 'dev' || env === 'development') {
             if (this.get('env') === 'dev' || this.get('env') === 'development')
                 return true;
@@ -61,6 +72,8 @@ export default class SEnv {
         } else {
             return this.get('env') === env;
         }
+
+        // default
         return false;
     }
 
@@ -80,7 +93,7 @@ export default class SEnv {
      */
     static get(name: string): any {
         // @ts-ignore
-        return this.env[name.toUpperCase()];
+        return __autoCast(this.env[__snakeCase(name).toUpperCase()]);
     }
 
     /**
@@ -99,7 +112,7 @@ export default class SEnv {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static set(name: string, value: any): any {
-        this.env[name.toUpperCase()] = value;
+        this.env[__snakeCase(name).toUpperCase()] = value;
         return value;
     }
 
@@ -119,6 +132,6 @@ export default class SEnv {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static delete(name: string): void {
-        delete this.env[name.toUpperCase()];
+        delete this.env[__snakeCase(name).toUpperCase()];
     }
 }

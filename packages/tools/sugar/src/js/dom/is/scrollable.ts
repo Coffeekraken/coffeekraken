@@ -42,10 +42,6 @@ export default function isScrollable(
     var overflowY = style.overflowY.trim();
     var overflowX = style.overflowX.trim();
 
-    if ($elm.classList.contains('s-slider__slides-wrapper')) {
-        console.log('COCOCOC', overflowX, overflowY);
-    }
-
     const dir = {
         vertical:
             (overflowY === 'scroll' || overflowY === 'auto') &&
@@ -54,14 +50,6 @@ export default function isScrollable(
             (overflowX === 'scroll' || overflowX === 'auto') &&
             $elm.scrollWidth > $elm.clientWidth,
     };
-
-    if ($elm.classList.contains('s-slider__slides-wrapper')) {
-        console.log('COCOCOCffefef', dir);
-
-        if (settings.x && dir.horizontal) {
-            console.log('HORIGIN');
-        }
-    }
 
     if (settings.x && dir.horizontal) return true;
     if (settings.y && dir.vertical) return true;

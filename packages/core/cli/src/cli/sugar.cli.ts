@@ -246,6 +246,11 @@ export default class SSugarCli {
         // do not touch if is jest
         if (process.env.JEST_WORKER_ID) return;
 
+        if (!process.env.DEVS_CUT && this.args.params.devsCut) {
+            console.log('SET');
+            process.env.DEVS_CUT = true;
+        }
+
         if (this.args.params.env) {
             switch (this.args.params.env) {
                 case 'dev':

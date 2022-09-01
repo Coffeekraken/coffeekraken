@@ -107,6 +107,8 @@ export default class SDepsFeature extends __SFeature {
         $link.setAttribute('rel', 'stylesheet');
         // @ts-ignore
         $link.setAttribute('s-deps-css', props.css);
+        $link.setAttribute('rel', 'preload');
+        $link.setAttribute('as', 'style');
         $link.setAttribute(
             'href',
             `${props.cssPartialsPath}/${finalPartialPath}`,
@@ -117,6 +119,9 @@ export default class SDepsFeature extends __SFeature {
 
         // wait for stylesheet to be ready
         await __whenStylesheetsReady($link);
+
+        // put link in stylesheet again
+        $link.setAttribute('rel', 'stylesheet');
 
         // mark the element css as loaded
         $elm._sDepsCssLoaded = true;

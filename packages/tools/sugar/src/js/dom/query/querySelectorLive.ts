@@ -55,8 +55,7 @@ function querySelectorLive(
 ): __SPromise<HTMLElement> {
     let _emit;
 
-    const observerId = `s${_idx}s`;
-    _idx++;
+    const selectedNodes: HTMLElement = [];
 
     // extend settings
     settings = Object.assign(
@@ -69,121 +68,179 @@ function querySelectorLive(
         settings,
     );
 
-    function _isNodeAlreadyHandledWhenSettingsOnceIsSet(node, stackItem) {
-        if (stackItem.settings.once) {
-            if (
-                node.hasAttribute('s-qsl') &&
-                node.getAttribute('s-qsl').includes(stackItem.observerId)
-            ) {
-                return true;
-            }
-            const currentIds = `${node.getAttribute('s-qsl') ?? ''}`
-                .split(',')
-                .filter((l) => l !== '');
-            currentIds.push(stackItem.observerId);
-            node.setAttribute('s-qsl', currentIds.join(','));
-        }
-        return false;
-    }
-
-    function _nodeMatches(node, stackItem) {
-        const isAlreadyGetted = _isNodeAlreadyHandledWhenSettingsOnceIsSet(
-                node,
-                stackItem,
-            ),
-            matchSelector = node.matches(stackItem.selector);
-        return !isAlreadyGetted && matchSelector;
-    }
-
-    function _processNode(node, mutation, stackItem) {
-        if (!node.matches) return;
-
-        // prevent from attributes that does not have really changed
-        if (
-            mutation &&
-            mutation.attribute &&
-            node.getAttribute(mutation.attributeName) === mutation.oldValue
-        ) {
-            return;
-        }
-        if (!_nodeMatches(node, stackItem)) {
-            return;
-        }
-
-        stackItem.cb(node);
-        _emit?.('node', node);
-    }
-
-    function _findAndProcessNodes(stackItem) {
-        const finalSelector = stackItem.selector
-            .split(',')
-            .map((sel) => {
-                if (stackItem.settings.once) {
-                    return `${sel}:not([s-qsl*="${stackItem.observerId}"])`;
-                }
-                return sel;
-            })
-            .join(',');
-
-        [].forEach.call(
-            stackItem.settings.rootNode.querySelectorAll(finalSelector),
-            (node) => {
-                _processNode(node, null, stackItem);
-            },
-        );
-    }
-
-    // listen for updates in document
-    if (!_observer) {
-        let newSeachTimeout;
-        _observer = new MutationObserver((mutations) => {
-            let needNewSearch = false;
-
-            mutations.forEach((mutation) => {
-                if (mutation.addedNodes && mutation.addedNodes.length) {
-                    needNewSearch = true;
-                } else if (mutation.attributeName) {
-                    needNewSearch = true;
-                }
-            });
-
-            if (needNewSearch) {
-                clearTimeout(newSeachTimeout);
-                // newSeachTimeout = setTimeout(() => {
-                for (let [cb, stackItem] of _stack) {
-                    _findAndProcessNodes(stackItem);
-                }
-                // });
-            }
-        });
-        _observer.observe(document, {
-            childList: true,
-            subtree: true,
-            attributes: true,
-            attributeOldValue: true,
-            attributeFilter: ['class', 'id'],
-        });
-    }
-
-    const mapItem = {
-        observerId,
-        selector,
-        cb,
-        settings,
-    };
-    if (!_stack.has(cb)) {
-        _stack.set(cb, mapItem);
-    }
-
-    // first query
-    _findAndProcessNodes(mapItem);
-
-    // after first callback
-    settings.afterFirst?.();
-
     const pro = new __SPromise(({ resolve, reject, emit }) => {
         _emit = emit;
     });
+
+    function processNode(node: HTMLElement): void {
+        if (!node.querySelectorAll) {
+            return;
+        }
+
+        // if the node match and has not already been emitted
+        if (
+            node.matches(selector) &&
+            (!settings.once || !selectedNodes.includes(node))
+        ) {
+            // emit our node
+            _emit?.('node', node);
+
+            // callback with our node
+            cb?.(node);
+
+            // mark our node as selected at least 1 time
+            if (!selectedNodes.includes(node)) {
+                selectedNodes.push(node);
+            }
+        }
+
+        // search inside our node
+        findAndProcess(node);
+    }
+
+    function findAndProcess($root) {
+        const nodes = Array.from($root?.querySelectorAll(selector));
+        nodes.forEach((node) => {
+            processNode(node);
+        });
+    }
+
+    const observer = new MutationObserver((mutations, obs) => {
+        mutations.forEach((mutation) => {
+            if (mutation.attributeName) {
+                processNode(node);
+            }
+            if (mutation.addedNodes) {
+                mutation.addedNodes.forEach((node) => {
+                    processNode(node);
+                });
+            }
+        });
+    });
+
+    observer.observe(settings.rootNode, {
+        childList: true,
+        subtree: true,
+    });
+
+    // first query
+    setTimeout(() => {
+        findAndProcess(settings.rootNode);
+        // after first callback
+        settings.afterFirst?.();
+    });
+
+    // function _isNodeAlreadyHandledWhenSettingsOnceIsSet(node, stackItem) {
+    //     if (stackItem.settings.once) {
+    //         if (
+    //             node.hasAttribute('s-qsl') &&
+    //             node.getAttribute('s-qsl').includes(stackItem.observerId)
+    //         ) {
+    //             return true;
+    //         }
+    //         const currentIds = `${node.getAttribute('s-qsl') ?? ''}`
+    //             .split(',')
+    //             .filter((l) => l !== '');
+    //         currentIds.push(stackItem.observerId);
+    //         node.setAttribute('s-qsl', currentIds.join(','));
+    //     }
+    //     return false;
+    // }
+
+    // function _nodeMatches(node, stackItem) {
+    //     const isAlreadyGetted = _isNodeAlreadyHandledWhenSettingsOnceIsSet(
+    //             node,
+    //             stackItem,
+    //         ),
+    //         matchSelector = node.matches(stackItem.selector);
+    //     return !isAlreadyGetted && matchSelector;
+    // }
+
+    // function _processNode(node, mutation, stackItem) {
+    //     if (!node.matches) return;
+
+    //     // prevent from attributes that does not have really changed
+    //     if (
+    //         mutation &&
+    //         mutation.attribute &&
+    //         node.getAttribute(mutation.attributeName) === mutation.oldValue
+    //     ) {
+    //         return;
+    //     }
+    //     if (!_nodeMatches(node, stackItem)) {
+    //         return;
+    //     }
+
+    //     stackItem.cb(node);
+    //     _emit?.('node', node);
+    // }
+
+    // function _findAndProcessNodes(stackItem) {
+    //     const finalSelector = stackItem.selector
+    //         .split(',')
+    //         .map((sel) => {
+    //             if (stackItem.settings.once) {
+    //                 return `${sel}:not([s-qsl*="${stackItem.observerId}"])`;
+    //             }
+    //             return sel;
+    //         })
+    //         .join(',');
+
+    //     [].forEach.call(
+    //         stackItem.settings.rootNode.querySelectorAll(finalSelector),
+    //         (node) => {
+    //             _processNode(node, null, stackItem);
+    //         },
+    //     );
+    // }
+
+    // // listen for updates in document
+    // if (!_observer) {
+    //     let newSeachTimeout;
+    //     _observer = new MutationObserver((mutations) => {
+    //         let needNewSearch = false;
+
+    //         mutations.forEach((mutation) => {
+    //             if (mutation.addedNodes && mutation.addedNodes.length) {
+    //                 needNewSearch = true;
+    //             } else if (mutation.attributeName) {
+    //                 needNewSearch = true;
+    //             }
+    //         });
+
+    //         if (needNewSearch) {
+    //             clearTimeout(newSeachTimeout);
+    //             // newSeachTimeout = setTimeout(() => {
+    //             for (let [cb, stackItem] of _stack) {
+    //                 _findAndProcessNodes(stackItem);
+    //             }
+    //             // });
+    //         }
+    //     });
+    //     _observer.observe(document, {
+    //         childList: true,
+    //         subtree: true,
+    //         attributes: true,
+    //         attributeOldValue: true,
+    //         attributeFilter: ['class', 'id'],
+    //     });
+    // }
+
+    // const mapItem = {
+    //     observerId,
+    //     selector,
+    //     cb,
+    //     settings,
+    // };
+    // if (!_stack.has(cb)) {
+    //     _stack.set(cb, mapItem);
+    // }
+
+    // // first query
+    // _findAndProcessNodes(mapItem);
+
+    // // after first callback
+    // settings.afterFirst?.();
 
     return pro;
 }

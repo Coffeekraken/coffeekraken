@@ -258,11 +258,14 @@ export default class SLitComponent extends LitElement {
                 this.getAttribute('mount-when') ??
                 defaultProps.mountWhen ??
                 'direct';
-            // wait until mount
-            await this.componentUtils.waitAndExecute(
-                mountWhen,
-                this._mount.bind(this),
-            );
+
+            setTimeout(async () => {
+                // wait until mount
+                await this.componentUtils.waitAndExecute(
+                    mountWhen,
+                    this._mount.bind(this),
+                );
+            });
         })();
     }
 
@@ -331,6 +334,15 @@ export default class SLitComponent extends LitElement {
             this.state.$set('*', () => {
                 this.requestUpdate();
             });
+        }
+
+        // verbose
+        if (this.props.verbose) {
+            console.log(
+                `[${this.tagName.toLowerCase()}]${
+                    this.id ? ` #${this.id} ` : ' '
+                }mounting`,
+            );
         }
 
         // custom mount function

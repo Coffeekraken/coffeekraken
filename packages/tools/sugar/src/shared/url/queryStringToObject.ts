@@ -41,7 +41,11 @@ function queryStringToObject(str) {
     });
     for (let c = 0; c < chunks.length; c++) {
         const split = chunks[c].split('=', 2);
-        obj[split[0]] = split[1];
+        if (split[1] !== undefined) {
+            obj[split[0]] = split[1];
+        } else {
+            obj[split[0]] = true;
+        }
     }
     return obj;
 }

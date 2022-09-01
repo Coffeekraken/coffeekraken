@@ -12,7 +12,7 @@
 .s-slider[behavior='default'] {
     > .s-slider__root {
         > .s-slider__slides-wrapper {
-            overflow-x: auto;
+            overflow-x: hidden;
 
             /* > .s-slider__slides {
                 position: relative;

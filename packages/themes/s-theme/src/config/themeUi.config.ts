@@ -2668,7 +2668,7 @@ export default (api) => {
              * @name          defaultColor
              * @namespace     config.themeUi.blockquote
              * @type          String
-             * @default      [theme.ui.default.defaultColor]
+             * @default      accent
              *
              * Specify the default style for your blockquote ui
              *
@@ -2676,7 +2676,7 @@ export default (api) => {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get defaultColor() {
-                return api.theme.ui.default.defaultColor;
+                return 'accent';
             },
             /**
              * @name          depth

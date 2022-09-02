@@ -92,6 +92,8 @@ __sFiltrableInputDefine(
       }
     },
     items: async ({ value }) => {
+      return [];
+
       async function fetchItems() {
         const request = new __SRequest({
           url: '/docmap.json',

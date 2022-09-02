@@ -1,4 +1,4 @@
-<section id="features-helpers" class="section:diagonal" s-appear in="bottom">
+<section id="features-helpers" class="section:diagonal">
     <div class="s-container">
 
         <div class="section-top-background"></div>

@@ -23,7 +23,7 @@
 
     @include('generic.tools.tools')
 
-    <s-panel id="settings" position="right" backdrop>
+    <s-panel id="settings" position="right" backdrop s-scope>
         <ck-settings mount-when="inViewport"></ck-settings>
     </s-panel>
 

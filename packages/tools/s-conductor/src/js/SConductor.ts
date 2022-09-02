@@ -393,7 +393,9 @@ export default class SConductor extends __SClass {
             this._tasksStack[taskObj.id] = taskObj;
 
             // listen for at least 1 promise resolved
-            await __when($elm, trigger, {});
+            if (trigger !== 'direct' && trigger !== 'directly') {
+                await __when($elm, trigger, {});
+            }
 
             // execute the task
             this._executeTask(taskObj);

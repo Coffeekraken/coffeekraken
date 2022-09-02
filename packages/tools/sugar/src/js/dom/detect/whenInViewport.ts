@@ -1,4 +1,5 @@
 // @ts-nocheck
+import __SPromise from '@coffeekraken/s-promise';
 
 /**
  * @name      whenInViewport
@@ -17,15 +18,17 @@
  *
  * @param 		{HTMLElement} 				elm 					The element to monitor
  * @param 		{Partial<IWhenInViewportSettings>} 					[settings={}] 		Some settings to tweak the detection behavior
- * @return 		(Promise<HTMLElement>) 											The promise that will be resolved when the element is in the viewport
+ * @return 		(SPromise<HTMLElement>) 											The promise that will be resolved when the element is in the viewport
  *
  * @todo      tests
  *
  * @example 	js
  * import __whenInViewport from '@coffeekraken/sugar/js/dom/whenInViewport'
- * __whenInViewport(myCoolHTMLElement).then((elm) => {
+ * const promise = __whenInViewport(myCoolHTMLElement).then((elm) => {
  * 		// do something with your element that has entered the viewport...
  * });
+ * // when you want to stop listening
+ * promise.cancel();
  *
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -44,14 +47,16 @@ export default function whenInViewport(
         ...settings,
     };
 
-    return new Promise((resolve) => {
+    let observer;
+
+    const pro = new __SPromise(({ resolve }) => {
         const options = {
             root: null, // relative to document viewport
             rootMargin: settings.offset, // margin around root. Values are similar to css property. Unitless values not allowed
             threshold: 0, // visible amount of item shown in relation to root
         };
 
-        function onChange(changes, observer) {
+        function onChange(changes) {
             changes.forEach((change) => {
                 if (change.intersectionRatio > 0) {
                     // your observer logic
@@ -61,8 +66,13 @@ export default function whenInViewport(
             });
         }
 
-        const observer = new IntersectionObserver(onChange, options);
-
+        observer = new IntersectionObserver(onChange, options);
         observer.observe(elm);
     });
+
+    pro.on('cancel', () => {
+        observer?.disconnect();
+    });
+
+    return pro;
 }

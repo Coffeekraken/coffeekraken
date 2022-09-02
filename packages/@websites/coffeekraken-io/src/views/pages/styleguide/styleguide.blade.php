@@ -19,12 +19,12 @@ if ($firstBlock->status == 'wip') {
 
         <div class="s-layout:12222 s-gap:column:50 @mobile s-layout:1_2 s-mi:30">
 
-            <nav class="sidemenu @mobile s-display:none" >
+            <nav s-scope class="sidemenu @mobile s-display:none" >
 
-                <div class="sidemenu-sub">
+                {{-- <div class="sidemenu-sub">
                     <ck-doc-sub-nav source=".__content"></ck-doc-sub-nav>
                     <div class="s-loader:square-dots s-color:accent s-until:sibling:active"></div>
-                </div>
+                </div> --}}
 
                 <div class="sidemenu-main" s-refocus offset-y="100" trigger="event:actual">
 
@@ -39,30 +39,34 @@ if ($firstBlock->status == 'wip') {
 
             </nav>
 
-            <div s-page-transition-container="styleguide" class="__content s-pb:50">
+            <div s-page-transition-container="styleguide">
 
-                @if (!count((array) $docblocks))
+                <div s-scope class="__content s-pb:50">
 
-                    <h1 class="s-typo:h1 s-mbe:30">
-                        No styleguide selected
-                    </h1>
+                    @if (!count((array) $docblocks))
 
-                    <p class="s-typo:lead s-mbe:30">
-                        Please select a styleguide from the sidemenu
-                    </p>
-                    
-                @else
+                        <h1 class="s-typo:h1 s-mbe:30">
+                            No styleguide selected
+                        </h1>
 
-                    @foreach ($docblocks as $docblock)
-                        @if (!isset($docblock->private))
-                            @include('generic.docblock.block', ['block' => $docblock, 'isStyleguide' => true, 'isFirst' =>
-                            $loop->first])
-                        @endif
-                    @endforeach
+                        <p class="s-typo:lead s-mbe:30">
+                            Please select a styleguide from the sidemenu
+                        </p>
+                        
+                    @else
 
-                    <ck-doc-sub-nav></ck-doc-sub-nav>
+                        @foreach ($docblocks as $docblock)
+                            @if (!isset($docblock->private))
+                                @include('generic.docblock.block', ['block' => $docblock, 'isStyleguide' => true, 'isFirst' =>
+                                $loop->first])
+                            @endif
+                        @endforeach
 
-                @endif
+                        <ck-doc-sub-nav></ck-doc-sub-nav>
+
+                    @endif
+
+                </div>
 
             </div>
 

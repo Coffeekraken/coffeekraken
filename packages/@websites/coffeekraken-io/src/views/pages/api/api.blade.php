@@ -22,7 +22,7 @@ if (isset($firstBlock->status)) {
 
         <div class="s-layout:1222 s-gap:column:50 @mobile s-layout:1_2 s-mi:30">
 
-            <nav class="sidemenu @mobile s-display:none" 
+            <nav s-scope class="sidemenu @mobile s-display:none" >
 
                 <div class="sidemenu-sub">
                     <ck-doc-sub-nav source=".__content"></ck-doc-sub-nav>
@@ -40,24 +40,27 @@ if (isset($firstBlock->status)) {
 
             </nav>
 
-            <div s-page-transition-container="api" class="__content s-pb:50">
+            <div s-page-transition-container="api">
 
-                @if (!count((array) $docblocks))
+                <div s-scope class="__content s-pb:50">
 
-                    <div class="s-typo:h1 s-mbs:50 s-mbe:30 s-tc:primary">
-                        No API documentation found
-                    </div>
+                    @if (!count((array) $docblocks))
 
-                @else
-                    @foreach ($docblocks as $docblock)
-                        @if (!isset($docblock->private))
-                            @include('generic.docblock.block', ['block' => $docblock, 'isFirst' => $loop->first, 'index' => $loop->index])
-                        @endif
-                    @endforeach
+                        <div class="s-typo:h1 s-mbs:50 s-mbe:30 s-tc:primary">
+                            No API documentation found
+                        </div>
 
-                    <ck-doc-sub-nav></ck-doc-sub-nav>
+                    @else
+                        @foreach ($docblocks as $docblock)
+                            @if (!isset($docblock->private))
+                                @include('generic.docblock.block', ['block' => $docblock, 'isFirst' => $loop->first, 'index' => $loop->index])
+                            @endif
+                        @endforeach
 
-                @endif
+                        <ck-doc-sub-nav></ck-doc-sub-nav>
+
+                    @endif
+                </div>
 
             </div>
 

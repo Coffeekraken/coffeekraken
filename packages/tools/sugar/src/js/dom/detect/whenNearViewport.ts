@@ -1,4 +1,5 @@
 // @ts-nocheck
+import __SPromise from '@coffeekraken/s-promise';
 import __closestScrollable from '../query/closestScrollable';
 
 /**
@@ -58,7 +59,7 @@ export default function whenNearViewport(
     let $closest = __closestScrollable(elm);
     if ($closest?.tagName === 'HTML') $closest = null;
 
-    return new Promise(async (resolve) => {
+    return new __SPromise(async ({ resolve }) => {
         const options = {
             root: $closest, // relative to document viewport
             rootMargin: settings.offset ?? getRootMargin(), // margin around root. Values are similar to css property. Unitless values not allowed

@@ -45,13 +45,48 @@ export interface ISDepsFeatureRegisterDepsObj {
 }
 
 export default class SDepsFeature extends __SFeature {
+    static resolvedSelectors: string[] = [];
     static registerDeps(
         selector: string,
         props: Partial<ISDepsFeatureProps> = {},
     ): void {
-        __querySelectorLive(selector, async ($elm) => {
+        __querySelectorLive(selector, async ($elm, { cancel }) => {
             // wait for element to be near the viewport
-            await __whenNearViewport($elm);
+            const whenNearViewportPromise = __whenNearViewport($elm);
+
+            // listen when an element has come near the viewport
+            document.addEventListener('s-deps.resolved', (e) => {
+                // @ts-ignore
+                if (e.detail.selector === selector) {
+                    whenNearViewportPromise.cancel();
+                }
+            });
+
+            // wait for the node to comes near the viewport
+            await whenNearViewportPromise;
+
+            // check if the selector has already been resolved
+            // to avoid handling same selector multiple times
+            if (this.resolvedSelectors.includes(selector)) {
+                return;
+            }
+
+            // add the selector in the resolved stack to track them
+            this.resolvedSelectors.push(selector);
+
+            // when the first item is in the viewport, emit an event through the document
+            // to let the others to stop listening
+            document.dispatchEvent(
+                new CustomEvent('s-deps.resolved', {
+                    detail: {
+                        selector,
+                        $elm,
+                    },
+                }),
+            );
+
+            // stop listening this selector
+            cancel();
 
             // process passed props
             props = __SDepsFeatureInterface.apply(props ?? {});

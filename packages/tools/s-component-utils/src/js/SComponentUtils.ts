@@ -2,7 +2,6 @@
 // @TODO            check how to override private static methods
 
 import __SClass from '@coffeekraken/s-class';
-import __SConductor from '@coffeekraken/s-conductor';
 import __SInterface from '@coffeekraken/s-interface';
 import __SPromise from '@coffeekraken/s-promise';
 import __SState from '@coffeekraken/s-state';
@@ -10,10 +9,12 @@ import __STheme from '@coffeekraken/s-theme';
 import __adoptStyleInShadowRoot from '@coffeekraken/sugar/js/dom/css/adoptStyleInShadowRoot';
 import __injectStyle from '@coffeekraken/sugar/js/dom/css/injectStyle';
 import __inViewportStatusChange from '@coffeekraken/sugar/js/dom/detect/inViewportStatusChange';
+import __when from '@coffeekraken/sugar/js/dom/detect/when';
 import __debounce from '@coffeekraken/sugar/shared/function/debounce';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
+import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __SComponentUtilsDefaultPropsInterface from './interface/SComponentUtilsDefaultPropsInterface';
 import __SComponentUtilsSettingsInterface from './interface/SComponentUtilsSettingsInterface';
 
@@ -590,7 +591,14 @@ export default class SComponentUtils extends __SClass {
             // if ($closestCustomElement) {
             //     await __whenAttribute($closestCustomElement, 'mounted');
             // }
-            await __SConductor.when(this.node, when, callback);
+
+            if (!when || when === 'direct' || when === 'directly') {
+                await __wait();
+            } else {
+                await __when(this.node, when);
+            }
+
+            callback?.(this.node);
             resolve(this.node);
         });
     }

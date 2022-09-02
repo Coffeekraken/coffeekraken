@@ -127,9 +127,7 @@ export default class SFeature extends __SClass implements ISFeature {
         defaultProps: any = {},
     ) {
         this.setDefaultProps(name, defaultProps);
-        console.log('query', name);
         __querySelectorLive(`[${name}]`, ($elm) => {
-            console.log('LIVE', name, $elm);
             new feature(name, $elm, __SComponentUtils.getDefaultProps(name));
         });
     }
@@ -178,13 +176,12 @@ export default class SFeature extends __SClass implements ISFeature {
             },
         );
 
-        // @ts-ignore
-
         this.componentUtils.waitAndExecute(
             this.props.mountWhen,
             // @ts-ignore
             async () => {
-                await this.mount?.(this);
+                // @ts-ignore
+                await this.mount?.();
                 this.props.mounted = true;
             },
         );

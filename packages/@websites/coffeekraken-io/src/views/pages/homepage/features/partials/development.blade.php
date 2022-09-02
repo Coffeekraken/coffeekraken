@@ -1,4 +1,4 @@
-<section id="features-development" class="section:diagonal" s-appear in="bottom">
+<section id="features-development" class="section:diagonal">
     <div class="s-container">
         <div class="s-layout:21 s-gap:column:50 @mobile s-layout:1_2">
             <div>
@@ -52,7 +52,7 @@
             </div>
         </div>
 
-        <div class="code-example-section-section:right" ">   
+        <div class="code-example-section:right" ">   
             <div>
                 <h5 class="s-typo:h4 s-mbe:30">
                     All the <span class="s-tc:accent">sugar</span> power<br />ready to go!
@@ -166,7 +166,7 @@ sugar dev'
             </div>
         </div>
 
-        <div class="code-example-section-section:right" "> 
+        <div class="code-example-section:right" "> 
             <div>
                 <h5 class="s-typo:h4 s-mbe:30">
                     <span class="s-tc:accent">Build</span><br />for production

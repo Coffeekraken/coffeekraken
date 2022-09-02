@@ -1,42 +1,43 @@
 .content {
-  padding-top: 80px;
-  position: relative;
-  z-index: 1;
+    padding-top: 80px;
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
 }
 #homepage .content {
-  padding-top: 0;
+    padding-top: 0;
 }
 
 .bkg {
-  position: absolute;
-  z-index: -1;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  opacity: 0.6;
-  transition: opacity 0.5s ease-out;
-  background-image: url("/dist/img/welcome/welcome-bg-light-01.jpg");
-  background-position: 50% bottom;
-  background-size: cover;
-  border-bottom-left-radius: 50%;
-  border-bottom-right-radius: 50%;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    opacity: 0.6;
+    transition: opacity 0.5s ease-out;
+    background-image: url('/dist/img/welcome/welcome-bg-light-01.jpg');
+    background-position: 50% bottom;
+    background-size: cover;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
 
-  @sugar.theme.when dark {
-    background-image: url("/dist/img/welcome/welcome-bg-dark-01.jpg");
-    opacity: 0.16;
-  }
+    @sugar.theme.when dark {
+        background-image: url('/dist/img/welcome/welcome-bg-dark-01.jpg');
+        opacity: 0.16;
+    }
 }
 [s-sugar]:not(#homepage) .bkg,
 .scrolled .bkg {
-  opacity: 0.4;
+    opacity: 0.4;
 }
 [s-sugar]:not(#homepage),
 .scrolled {
-  @sugar.theme.when dark {
-    .bkg {
-      opacity: 0.05;
+    @sugar.theme.when dark {
+        .bkg {
+            opacity: 0.05;
+        }
     }
-  }
 }

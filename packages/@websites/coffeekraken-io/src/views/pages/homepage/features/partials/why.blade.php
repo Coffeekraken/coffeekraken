@@ -1,4 +1,4 @@
-<section id="features-why" class="section" s-appear in="bottom">
+<section id="features-why" class="section">
 
     <div class="s-container">
 

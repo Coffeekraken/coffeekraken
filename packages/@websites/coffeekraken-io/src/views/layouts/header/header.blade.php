@@ -151,7 +151,7 @@
 
     </div>
 
-    <nav id="nav-mobile" class="__nav-mobile s-when:media:mobile">
+    {{-- <nav id="nav-mobile" class="__nav-mobile s-when:media:mobile">
         @php
             $documentationMenu = array_merge((array) $docmap->menu->tree->documentation, []);
             $packagesMenu = (object) [
@@ -179,25 +179,18 @@
 
 
         <nav class="__links">
-
-            {{-- Documentation --}}
             <a class="s-typo:bold __main-link" id="menu-mobile-doc" s-activate active href="#menu-mobile-doc" save-state
                 group="menu-mobile" title="Documentation">
                 <span>Documentation</span>
             </a>
-
-            {{-- Styleguide --}}
             <a class="s-typo:bold __main-link" id="menu-mobile-styleguide" s-activate href="#menu-mobile-styleguide"
                 save-state group="menu-mobile" title="Styleguide">
                 <span>Styleguide</span>
             </a>
-
-            {{-- API --}}
             <a class="s-typo:bold __main-link" id="menu-mobile-api" s-activate href="#menu-mobile-api" save-state
                 group="menu-mobile" title="Api">
                 <span>Api</span>
             </a>
-
         </nav>
 
         <div class="__subnav" id="menu-mobile-doc">
@@ -214,6 +207,6 @@
             <api-nav></api-nav>
         </div>
 
-    </nav>
+    </nav> --}}
 
 </header>

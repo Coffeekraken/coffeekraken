@@ -1,4 +1,4 @@
-<section id="features-sugar" class="section" s-appear in="bottom">
+<section id="features-sugar" class="section">
 
     <div class="s-container">
 

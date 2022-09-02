@@ -1,25 +1,48 @@
 "use strict";
 // @ts-nocheck
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
+const whenNearViewport_1 = __importDefault(require("@coffeekraken/sugar/js/dom/detect/whenNearViewport"));
+const uniqid_1 = __importDefault(require("@coffeekraken/sugar/shared/string/uniqid"));
 let _observer, _idx = 0, _stack = new Map();
 function querySelectorLive(selector, cb = null, settings = {}) {
-    let _emit;
+    var _a, _b, _c;
+    let _emit, _pipe, noScopeSelector, observer;
     const selectedNodes = [];
     // extend settings
     settings = Object.assign({}, {
         rootNode: document,
         once: true,
         afterFirst: null,
+        scopes: true,
     }, settings);
-    const pro = new s_promise_1.default(({ resolve, reject, emit }) => {
+    // process selectors when scopes are true
+    if (settings.scopes) {
+        noScopeSelector = selector
+            .split(',')
+            .map((sel) => {
+            return `${sel.trim()}:not([s-scope] ${sel.trim()})`;
+        })
+            .join(',');
+    }
+    const pro = new s_promise_1.default(({ resolve, reject, emit, pipe }) => {
         _emit = emit;
+        _pipe = pipe;
     });
-    function processNode(node) {
-        if (!node.querySelectorAll) {
+    function processNode(node, sel) {
+        if (!node.matches) {
             return;
         }
         // if the node match and has not already been emitted
@@ -28,144 +51,91 @@ function querySelectorLive(selector, cb = null, settings = {}) {
             // emit our node
             _emit === null || _emit === void 0 ? void 0 : _emit('node', node);
             // callback with our node
-            cb === null || cb === void 0 ? void 0 : cb(node);
+            cb === null || cb === void 0 ? void 0 : cb(node, {
+                cancel: pro.cancel.bind(pro),
+            });
             // mark our node as selected at least 1 time
             if (!selectedNodes.includes(node)) {
                 selectedNodes.push(node);
             }
         }
         // search inside our node
-        findAndProcess(node);
+        findAndProcess(node, sel);
     }
-    function findAndProcess($root) {
-        const nodes = Array.from($root === null || $root === void 0 ? void 0 : $root.querySelectorAll(selector));
+    function findAndProcess($root, sel) {
+        if (!$root.querySelectorAll) {
+            return;
+        }
+        const nodes = Array.from($root === null || $root === void 0 ? void 0 : $root.querySelectorAll(sel));
         nodes.forEach((node) => {
-            processNode(node);
+            processNode(node, sel);
         });
     }
-    const observer = new MutationObserver((mutations, obs) => {
-        mutations.forEach((mutation) => {
-            if (mutation.attributeName) {
-                processNode(node);
+    if (settings.scopes &&
+        (settings.rootNode === document ||
+            !((_a = settings.rootNode) === null || _a === void 0 ? void 0 : _a.hasAttribute('s-scope')))) {
+        let isAfterCalledByScopeId = {};
+        // search for scopes and handle nested nodes
+        querySelectorLive('[s-scope]', ($scope) => __awaiter(this, void 0, void 0, function* () {
+            // get or generate a new id
+            const scopeId = $scope.id || `s-scope-${(0, uniqid_1.default)()}`;
+            if ($scope.id !== scopeId) {
+                $scope.setAttribute('id', scopeId);
             }
-            if (mutation.addedNodes) {
-                mutation.addedNodes.forEach((node) => {
-                    processNode(node);
-                });
-            }
-        });
-    });
-    observer.observe(settings.rootNode, {
-        childList: true,
-        subtree: true,
-    });
-    // first query
-    setTimeout(() => {
-        var _a;
-        findAndProcess(settings.rootNode);
+            yield (0, whenNearViewport_1.default)($scope);
+            querySelectorLive(selector, ($elm) => {
+                // findAndProcess($scope, selector);
+                processNode($elm, selector);
+            }, Object.assign(Object.assign({}, settings), { rootNode: $scope, scopes: false, afterFirst() {
+                    if (isAfterCalledByScopeId[scopeId] &&
+                        $scope._sQuerySelectorLiveScopeDirty) {
+                        return;
+                    }
+                    $scope._sQuerySelectorLiveScopeDirty = true;
+                    isAfterCalledByScopeId[scopeId] = true;
+                    $scope.classList.add('ready');
+                    $scope.setAttribute('ready', 'true');
+                } }));
+        }), Object.assign(Object.assign({}, settings), { scopes: false }));
+        // handle things not in a scope
+        querySelectorLive(noScopeSelector, ($elm) => {
+            // findAndProcess($scope, selector);
+            processNode($elm, selector);
+        }, Object.assign(Object.assign({}, settings), { scopes: false }));
+        // setTimeout(() => {
         // after first callback
-        (_a = settings.afterFirst) === null || _a === void 0 ? void 0 : _a.call(settings);
+        (_b = settings.afterFirst) === null || _b === void 0 ? void 0 : _b.call(settings);
+        // });
+    }
+    else {
+        observer = new MutationObserver((mutations, obs) => {
+            mutations.forEach((mutation) => {
+                if (mutation.attributeName) {
+                    processNode(node, selector);
+                }
+                if (mutation.addedNodes) {
+                    mutation.addedNodes.forEach((node) => {
+                        processNode(node, selector);
+                    });
+                }
+            });
+        });
+        observer.observe(settings.rootNode, {
+            childList: true,
+            subtree: true,
+        });
+        // first query
+        // setTimeout(() => {
+        findAndProcess(settings.rootNode, selector);
+        // after first callback
+        (_c = settings.afterFirst) === null || _c === void 0 ? void 0 : _c.call(settings);
+        // });
+    }
+    // handle cancel
+    pro.on('cancel', () => {
+        observer === null || observer === void 0 ? void 0 : observer.disconnect();
     });
-    // function _isNodeAlreadyHandledWhenSettingsOnceIsSet(node, stackItem) {
-    //     if (stackItem.settings.once) {
-    //         if (
-    //             node.hasAttribute('s-qsl') &&
-    //             node.getAttribute('s-qsl').includes(stackItem.observerId)
-    //         ) {
-    //             return true;
-    //         }
-    //         const currentIds = `${node.getAttribute('s-qsl') ?? ''}`
-    //             .split(',')
-    //             .filter((l) => l !== '');
-    //         currentIds.push(stackItem.observerId);
-    //         node.setAttribute('s-qsl', currentIds.join(','));
-    //     }
-    //     return false;
-    // }
-    // function _nodeMatches(node, stackItem) {
-    //     const isAlreadyGetted = _isNodeAlreadyHandledWhenSettingsOnceIsSet(
-    //             node,
-    //             stackItem,
-    //         ),
-    //         matchSelector = node.matches(stackItem.selector);
-    //     return !isAlreadyGetted && matchSelector;
-    // }
-    // function _processNode(node, mutation, stackItem) {
-    //     if (!node.matches) return;
-    //     // prevent from attributes that does not have really changed
-    //     if (
-    //         mutation &&
-    //         mutation.attribute &&
-    //         node.getAttribute(mutation.attributeName) === mutation.oldValue
-    //     ) {
-    //         return;
-    //     }
-    //     if (!_nodeMatches(node, stackItem)) {
-    //         return;
-    //     }
-    //     stackItem.cb(node);
-    //     _emit?.('node', node);
-    // }
-    // function _findAndProcessNodes(stackItem) {
-    //     const finalSelector = stackItem.selector
-    //         .split(',')
-    //         .map((sel) => {
-    //             if (stackItem.settings.once) {
-    //                 return `${sel}:not([s-qsl*="${stackItem.observerId}"])`;
-    //             }
-    //             return sel;
-    //         })
-    //         .join(',');
-    //     [].forEach.call(
-    //         stackItem.settings.rootNode.querySelectorAll(finalSelector),
-    //         (node) => {
-    //             _processNode(node, null, stackItem);
-    //         },
-    //     );
-    // }
-    // // listen for updates in document
-    // if (!_observer) {
-    //     let newSeachTimeout;
-    //     _observer = new MutationObserver((mutations) => {
-    //         let needNewSearch = false;
-    //         mutations.forEach((mutation) => {
-    //             if (mutation.addedNodes && mutation.addedNodes.length) {
-    //                 needNewSearch = true;
-    //             } else if (mutation.attributeName) {
-    //                 needNewSearch = true;
-    //             }
-    //         });
-    //         if (needNewSearch) {
-    //             clearTimeout(newSeachTimeout);
-    //             // newSeachTimeout = setTimeout(() => {
-    //             for (let [cb, stackItem] of _stack) {
-    //                 _findAndProcessNodes(stackItem);
-    //             }
-    //             // });
-    //         }
-    //     });
-    //     _observer.observe(document, {
-    //         childList: true,
-    //         subtree: true,
-    //         attributes: true,
-    //         attributeOldValue: true,
-    //         attributeFilter: ['class', 'id'],
-    //     });
-    // }
-    // const mapItem = {
-    //     observerId,
-    //     selector,
-    //     cb,
-    //     settings,
-    // };
-    // if (!_stack.has(cb)) {
-    //     _stack.set(cb, mapItem);
-    // }
-    // // first query
-    // _findAndProcessNodes(mapItem);
-    // // after first callback
-    // settings.afterFirst?.();
     return pro;
 }
 exports.default = querySelectorLive;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdFQUFpRDtBQTRDakQsSUFBSSxTQUFTLEVBQ1QsSUFBSSxHQUFHLENBQUMsRUFDUixNQUFNLEdBQUcsSUFBSSxHQUFHLEVBQUUsQ0FBQztBQUV2QixTQUFTLGlCQUFpQixDQUN0QixRQUFnQixFQUNoQixLQUE0QixJQUFJLEVBQ2hDLFdBQWdELEVBQUU7SUFFbEQsSUFBSSxLQUFLLENBQUM7SUFFVixNQUFNLGFBQWEsR0FBZ0IsRUFBRSxDQUFDO0lBRXRDLGtCQUFrQjtJQUNsQixRQUFRLEdBQUcsTUFBTSxDQUFDLE1BQU0sQ0FDcEIsRUFBRSxFQUNGO1FBQ0ksUUFBUSxFQUFFLFFBQVE7UUFDbEIsSUFBSSxFQUFFLElBQUk7UUFDVixVQUFVLEVBQUUsSUFBSTtLQUNuQixFQUNELFFBQVEsQ0FDWCxDQUFDO0lBRUYsTUFBTSxHQUFHLEdBQUcsSUFBSSxtQkFBVSxDQUFDLENBQUMsRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRSxFQUFFLEVBQUU7UUFDckQsS0FBSyxHQUFHLElBQUksQ0FBQztJQUNqQixDQUFDLENBQUMsQ0FBQztJQUVILFNBQVMsV0FBVyxDQUFDLElBQWlCO1FBQ2xDLElBQUksQ0FBQyxJQUFJLENBQUMsZ0JBQWdCLEVBQUU7WUFDeEIsT0FBTztTQUNWO1FBRUQscURBQXFEO1FBQ3JELElBQ0ksSUFBSSxDQUFDLE9BQU8sQ0FBQyxRQUFRLENBQUM7WUFDdEIsQ0FBQyxDQUFDLFFBQVEsQ0FBQyxJQUFJLElBQUksQ0FBQyxhQUFhLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxDQUFDLEVBQ25EO1lBQ0UsZ0JBQWdCO1lBQ2hCLEtBQUssYUFBTCxLQUFLLHVCQUFMLEtBQUssQ0FBRyxNQUFNLEVBQUUsSUFBSSxDQUFDLENBQUM7WUFFdEIseUJBQXlCO1lBQ3pCLEVB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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7OztBQUVkLHdFQUFpRDtBQUNqRCwwR0FBb0Y7QUFDcEYsc0ZBQWdFO0FBNkNoRSxJQUFJLFNBQVMsRUFDVCxJQUFJLEdBQUcsQ0FBQyxFQUNSLE1BQU0sR0FBRyxJQUFJLEdBQUcsRUFBRSxDQUFDO0FBRXZCLFNBQVMsaUJBQWlCLENBQ3RCLFFBQWdCLEVBQ2hCLEtBQTRCLElBQUksRUFDaEMsV0FBZ0QsRUFBRTs7SUFFbEQsSUFBSSxLQUFLLEVBQUUsS0FBSyxFQUFFLGVBQWUsRUFBRSxRQUFRLENBQUM7SUFFNUMsTUFBTSxhQUFhLEdBQWdCLEVBQUUsQ0FBQztJQUV0QyxrQkFBa0I7SUFDbEIsUUFBUSxHQUFHLE1BQU0sQ0FBQyxNQUFNLENBQ3BCLEVBQUUsRUFDRjtRQUNJLFFBQVEsRUFBRSxRQUFRO1FBQ2xCLElBQUksRUFBRSxJQUFJO1FBQ1YsVUFBVSxFQUFFLElBQUk7UUFDaEIsTUFBTSxFQUFFLElBQUk7S0FDZixFQUNELFFBQVEsQ0FDWCxDQUFDO0lBRUYseUNBQXlDO0lBQ3pDLElBQUksUUFBUSxDQUFDLE1BQU0sRUFBRTtRQUNqQixlQUFlLEdBQUcsUUFBUTthQUNyQixLQUFLLENBQUMsR0FBRyxDQUFDO2FBQ1YsR0FBRyxDQUFDLENBQUMsR0FBRyxFQUFFLEVBQUU7WUFDVCxPQUFPLEdBQUcsR0FBRyxDQUFDLElBQUksRUFBRSxrQkFBa0IsR0FBRyxDQUFDLElBQUksRUFBRSxHQUFHLENBQUM7UUFDeEQsQ0FBQyxDQUFDO2FBQ0QsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0tBQ2xCO0lBRUQsTUFBTSxHQUFHLEdBQUcsSUFBSSxtQkFBVSxDQUFDLENBQUMsRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRSxJQUFJLEVBQUUsRUFBRSxFQUFFO1FBQzNELEtBQUss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

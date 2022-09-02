@@ -1,6 +1,8 @@
 // @ts-nocheck
 
 import __SPromise from '@coffeekraken/s-promise';
+import __whenNearViewport from '@coffeekraken/sugar/js/dom/detect/whenNearViewport';
+import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 
 /**
  * @name            querySelectorLive
@@ -42,6 +44,7 @@ export interface IQuerySelectorLiveSettings {
     rootNode: HTMLElement;
     once: boolean;
     afterFirst: Function;
+    scopes: boolean;
 }
 
 let _observer,
@@ -53,7 +56,7 @@ function querySelectorLive(
     cb: Function<HTMLElement> = null,
     settings: Partial<IQuerySelectorLiveSettings> = {},
 ): __SPromise<HTMLElement> {
-    let _emit;
+    let _emit, _pipe, noScopeSelector, observer;
 
     const selectedNodes: HTMLElement = [];
 
@@ -64,16 +67,28 @@ function querySelectorLive(
             rootNode: document,
             once: true,
             afterFirst: null,
+            scopes: true,
         },
         settings,
     );
 
-    const pro = new __SPromise(({ resolve, reject, emit }) => {
+    // process selectors when scopes are true
+    if (settings.scopes) {
+        noScopeSelector = selector
+            .split(',')
+            .map((sel) => {
+                return `${sel.trim()}:not([s-scope] ${sel.trim()})`;
+            })
+            .join(',');
+    }
+
+    const pro = new __SPromise(({ resolve, reject, emit, pipe }) => {
         _emit = emit;
+        _pipe = pipe;
     });
 
-    function processNode(node: HTMLElement): void {
-        if (!node.querySelectorAll) {
+    function processNode(node: HTMLElement, sel: string): void {
+        if (!node.matches) {
             return;
         }
 
@@ -86,7 +101,9 @@ function querySelectorLive(
             _emit?.('node', node);
 
             // callback with our node
-            cb?.(node);
+            cb?.(node, {
+                cancel: pro.cancel.bind(pro),
+            });
 
             // mark our node as selected at least 1 time
             if (!selectedNodes.includes(node)) {
@@ -95,152 +112,116 @@ function querySelectorLive(
         }
 
         // search inside our node
-        findAndProcess(node);
+        findAndProcess(node, sel);
     }
 
-    function findAndProcess($root) {
-        const nodes = Array.from($root?.querySelectorAll(selector));
+    function findAndProcess($root: HTMLElement, sel: string) {
+        if (!$root.querySelectorAll) {
+            return;
+        }
+
+        const nodes = Array.from($root?.querySelectorAll(sel));
+
         nodes.forEach((node) => {
-            processNode(node);
+            processNode(node, sel);
         });
     }
 
-    const observer = new MutationObserver((mutations, obs) => {
-        mutations.forEach((mutation) => {
-            if (mutation.attributeName) {
-                processNode(node);
-            }
-            if (mutation.addedNodes) {
-                mutation.addedNodes.forEach((node) => {
-                    processNode(node);
-                });
-            }
-        });
-    });
+    if (
+        settings.scopes &&
+        (settings.rootNode === document ||
+            !settings.rootNode?.hasAttribute('s-scope'))
+    ) {
+        let isAfterCalledByScopeId = {};
 
-    observer.observe(settings.rootNode, {
-        childList: true,
-        subtree: true,
-    });
+        // search for scopes and handle nested nodes
+        querySelectorLive(
+            '[s-scope]',
+            async ($scope) => {
+                // get or generate a new id
+                const scopeId = $scope.id || `s-scope-${__uniqid()}`;
+                if ($scope.id !== scopeId) {
+                    $scope.setAttribute('id', scopeId);
+                }
 
-    // first query
-    setTimeout(() => {
-        findAndProcess(settings.rootNode);
+                await __whenNearViewport($scope);
+                querySelectorLive(
+                    selector,
+                    ($elm) => {
+                        // findAndProcess($scope, selector);
+                        processNode($elm, selector);
+                    },
+                    {
+                        ...settings,
+                        rootNode: $scope,
+                        scopes: false,
+                        afterFirst() {
+                            if (
+                                isAfterCalledByScopeId[scopeId] &&
+                                $scope._sQuerySelectorLiveScopeDirty
+                            ) {
+                                return;
+                            }
+                            $scope._sQuerySelectorLiveScopeDirty = true;
+                            isAfterCalledByScopeId[scopeId] = true;
+                            $scope.classList.add('ready');
+                            $scope.setAttribute('ready', 'true');
+                        },
+                    },
+                );
+            },
+            {
+                ...settings,
+                scopes: false,
+            },
+        );
+        // handle things not in a scope
+        querySelectorLive(
+            noScopeSelector,
+            ($elm) => {
+                // findAndProcess($scope, selector);
+                processNode($elm, selector);
+            },
+            {
+                ...settings,
+                scopes: false,
+            },
+        );
+        // setTimeout(() => {
         // after first callback
         settings.afterFirst?.();
+        // });
+    } else {
+        observer = new MutationObserver((mutations, obs) => {
+            mutations.forEach((mutation) => {
+                if (mutation.attributeName) {
+                    processNode(node, selector);
+                }
+                if (mutation.addedNodes) {
+                    mutation.addedNodes.forEach((node) => {
+                        processNode(node, selector);
+                    });
+                }
+            });
+        });
+
+        observer.observe(settings.rootNode, {
+            childList: true,
+            subtree: true,
+        });
+
+        // first query
+        // setTimeout(() => {
+        findAndProcess(settings.rootNode, selector);
+        // after first callback
+        settings.afterFirst?.();
+        // });
+    }
+
+    // handle cancel
+    pro.on('cancel', () => {
+        observer?.disconnect();
     });
-
-    // function _isNodeAlreadyHandledWhenSettingsOnceIsSet(node, stackItem) {
-    //     if (stackItem.settings.once) {
-    //         if (
-    //             node.hasAttribute('s-qsl') &&
-    //             node.getAttribute('s-qsl').includes(stackItem.observerId)
-    //         ) {
-    //             return true;
-    //         }
-    //         const currentIds = `${node.getAttribute('s-qsl') ?? ''}`
-    //             .split(',')
-    //             .filter((l) => l !== '');
-    //         currentIds.push(stackItem.observerId);
-    //         node.setAttribute('s-qsl', currentIds.join(','));
-    //     }
-    //     return false;
-    // }
-
-    // function _nodeMatches(node, stackItem) {
-    //     const isAlreadyGetted = _isNodeAlreadyHandledWhenSettingsOnceIsSet(
-    //             node,
-    //             stackItem,
-    //         ),
-    //         matchSelector = node.matches(stackItem.selector);
-    //     return !isAlreadyGetted && matchSelector;
-    // }
-
-    // function _processNode(node, mutation, stackItem) {
-    //     if (!node.matches) return;
-
-    //     // prevent from attributes that does not have really changed
-    //     if (
-    //         mutation &&
-    //         mutation.attribute &&
-    //         node.getAttribute(mutation.attributeName) === mutation.oldValue
-    //     ) {
-    //         return;
-    //     }
-    //     if (!_nodeMatches(node, stackItem)) {
-    //         return;
-    //     }
-
-    //     stackItem.cb(node);
-    //     _emit?.('node', node);
-    // }
-
-    // function _findAndProcessNodes(stackItem) {
-    //     const finalSelector = stackItem.selector
-    //         .split(',')
-    //         .map((sel) => {
-    //             if (stackItem.settings.once) {
-    //                 return `${sel}:not([s-qsl*="${stackItem.observerId}"])`;
-    //             }
-    //             return sel;
-    //         })
-    //         .join(',');
-
-    //     [].forEach.call(
-    //         stackItem.settings.rootNode.querySelectorAll(finalSelector),
-    //         (node) => {
-    //             _processNode(node, null, stackItem);
-    //         },
-    //     );
-    // }
-
-    // // listen for updates in document
-    // if (!_observer) {
-    //     let newSeachTimeout;
-    //     _observer = new MutationObserver((mutations) => {
-    //         let needNewSearch = false;
-
-    //         mutations.forEach((mutation) => {
-    //             if (mutation.addedNodes && mutation.addedNodes.length) {
-    //                 needNewSearch = true;
-    //             } else if (mutation.attributeName) {
-    //                 needNewSearch = true;
-    //             }
-    //         });
-
-    //         if (needNewSearch) {
-    //             clearTimeout(newSeachTimeout);
-    //             // newSeachTimeout = setTimeout(() => {
-    //             for (let [cb, stackItem] of _stack) {
-    //                 _findAndProcessNodes(stackItem);
-    //             }
-    //             // });
-    //         }
-    //     });
-    //     _observer.observe(document, {
-    //         childList: true,
-    //         subtree: true,
-    //         attributes: true,
-    //         attributeOldValue: true,
-    //         attributeFilter: ['class', 'id'],
-    //     });
-    // }
-
-    // const mapItem = {
-    //     observerId,
-    //     selector,
-    //     cb,
-    //     settings,
-    // };
-    // if (!_stack.has(cb)) {
-    //     _stack.set(cb, mapItem);
-    // }
-
-    // // first query
-    // _findAndProcessNodes(mapItem);
-
-    // // after first callback
-    // settings.afterFirst?.();
 
     return pro;
 }

@@ -1,4 +1,4 @@
-<section id="features-frontend" class="section" s-appear in="bottom">
+<section id="features-frontend" class="section">
     <div class="s-container">
 
         <h3 class="s-typo:h2 s-mbe:30 @mobile s-typo:h4">Frontend<br><span class="s-tc:accent">Sugar</span></h3>

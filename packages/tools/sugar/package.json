@@ -111,7 +111,30 @@
         "yaml": "^1.10.2"
     },
     "globalDependencies": {},
+    "autoExports": false,
     "exports": {
+        "./clipboard": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/clipboard/_exports.js",
+                "import": "./dist/pkg/esm/node/clipboard/_exports.js"
+            },
+            "default": {
+                "require": "./dist/pkg/cjs/js/clipboard/_exports.js",
+                "import": "./dist/pkg/esm/js/clipboard/_exports.js"
+            }
+        },
+        "./coffeekraken": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/coffeekraken/_exports.js",
+                "import": "./dist/pkg/esm/node/coffeekraken/_exports.js"
+            }
+        },
+        "./dom": {
+            "default": {
+                "require": "./dist/pkg/cjs/js/dom/_exports.js",
+                "import": "./dist/pkg/esm/js/dom/_exports.js"
+            }
+        },
         "./shared/*": {
             "require": "./dist/pkg/cjs/shared/*.js",
             "import": "./dist/pkg/esm/shared/*.js"

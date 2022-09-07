@@ -1,8 +1,7 @@
 import __SFeature from '@coffeekraken/s-feature';
 import __SSugarElement from '@coffeekraken/s-sugar-element';
 import __STheme from '@coffeekraken/s-theme';
-import __imageLoaded from '@coffeekraken/sugar/js/dom/load/imageLoaded';
-import __imagesLoaded from '@coffeekraken/sugar/js/dom/load/imagesLoaded';
+import { __whenImageLoaded, __whenImagesLoaded } from '@coffeekraken/sugar/dom';
 import __appendStyleTag from '@coffeekraken/sugar/js/dom/tag/appendStyleTag';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
@@ -96,14 +95,14 @@ export default class SAppearFeature extends __SFeature {
         // check if the element is fully loaded (for images)
         switch (this.node.tagName.toLowerCase()) {
             case 'img':
-                await __imageLoaded(this.node);
+                await __whenImageLoaded(this.node);
                 this.appear();
                 break;
             default:
                 // get the images in the node
                 const $imgs = this.node.querySelectorAll('img');
                 if ($imgs.length) {
-                    await __imagesLoaded($imgs);
+                    await __whenImagesLoaded($imgs);
                 }
                 this.appear();
                 break;

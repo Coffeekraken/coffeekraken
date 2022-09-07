@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __autoCast from '../../../shared/string/autoCast';
-import __observeAttribute from '../observe/observeAttributes';
+import { __observeAttributes } from '@coffeekraken/sugar/dom';
 
 /**
  * @name      whenAttribute
@@ -25,7 +25,7 @@ import __observeAttribute from '../observe/observeAttributes';
  * @todo      tests
  *
  * @example 	js
- * import __whenAttribute from '@coffeekraken/sugar/js/dom/whenAttribute'
+ * import { __whenAttribute } from '@coffeekraken/sugar/dom'
  * __whenAttribute(myCoolHTMLElement, 'value').then((value) => {
  * 		// the value attribute exist on the element
  * });
@@ -40,7 +40,7 @@ import __observeAttribute from '../observe/observeAttributes';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function whenAttribute(elm, attrName, checkFn = null) {
+export default function __whenAttribute(elm, attrName, checkFn = null) {
     return new Promise(async (resolve, reject) => {
         if (elm.hasAttribute(attrName)) {
             const value = __autoCast(elm.getAttribute(attrName));
@@ -53,7 +53,7 @@ export default function whenAttribute(elm, attrName, checkFn = null) {
             }
         }
 
-        const obs = __observeAttribute(elm);
+        const obs = __observeAttributes(elm);
 
         obs.on('attribute', (mutation) => {
             if (mutation.attributeName === attrName) {

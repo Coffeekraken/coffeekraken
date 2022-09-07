@@ -17,16 +17,15 @@
  * @todo      tests
  *
  * @example       js
- * @import emptyNode from '@coffeekraken/sugar/js/dom/emptyNode';
- * emptyNode(myCoolNode);
+ * @import { __emptyNode } from '@coffeekraken/sugar/dom';
+ * __emptyNode (myCoolNode);
  *
  * @since       1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function emptyNode(node: HTMLElement): HTMLElement {
+export default function __emptyNode(node: HTMLElement): HTMLElement {
     while (node.firstChild) {
         node.removeChild(node.firstChild);
     }
     return node;
 }
-export default emptyNode;

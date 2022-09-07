@@ -1,10 +1,7 @@
 "use strict";
 // @ts-nocheck
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const matches_1 = __importDefault(require("./matches"));
+const dom_1 = require("@coffeekraken/sugar/dom");
 /**
  * @name      previous
  * @namespace            js.dom.query
@@ -23,8 +20,8 @@ const matches_1 = __importDefault(require("./matches"));
  * @todo      tests
  *
  * @example  	js
- * import previous from '@coffeekraken/sugar/js/dom/query/previous'
- * const previousElm = previous(myCoolElement, '.my-cool-class');
+ * import { __previous } from '@coffeekraken/sugar/dom'
+ * const previousElm = __previous(myCoolElement, '.my-cool-class');
  * if (previousElm) {
  * 		// we have found en element that matches the selector
  * }
@@ -32,15 +29,15 @@ const matches_1 = __importDefault(require("./matches"));
  * @since       1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function previous(elm, selector) {
+function __previous(elm, selector) {
     elm = elm.previousSibling;
     while (elm) {
-        if ((0, matches_1.default)(elm, selector)) {
+        if ((0, dom_1.__matches)(elm, selector)) {
             return elm;
         }
         elm = elm.previousSibling;
     }
     return false;
 }
-exports.default = previous;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUFrQztBQUVsQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EwQkc7QUFDSCxTQUFTLFFBQVEsQ0FBQyxHQUFnQixFQUFFLFFBQWdCO0lBQ2hELEdBQUcsR0FBRyxHQUFHLENBQUMsZUFBZSxDQUFDO0lBQzFCLE9BQU8sR0FBRyxFQUFFO1FBQ1IsSUFBSSxJQUFBLGlCQUFTLEVBQUMsR0FBRyxFQUFFLFFBQVEsQ0FBQyxFQUFFO1lBQzFCLE9BQU8sR0FBRyxDQUFDO1NBQ2Q7UUFDRCxHQUFHLEdBQUcsR0FBRyxDQUFDLGVBQWUsQ0FBQztLQUM3QjtJQUNELE9BQU8sS0FBSyxDQUFDO0FBQ2pCLENBQUM7QUFDRCxrQkFBZSxRQUFRLENBQUMifQ==
+exports.default = __previous;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkLGlEQUFvRDtBQUVwRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EwQkc7QUFDSCxTQUF3QixVQUFVLENBQzlCLEdBQWdCLEVBQ2hCLFFBQWdCO0lBRWhCLEdBQUcsR0FBRyxHQUFHLENBQUMsZUFBZSxDQUFDO0lBQzFCLE9BQU8sR0FBRyxFQUFFO1FBQ1IsSUFBSSxJQUFBLGVBQVMsRUFBQyxHQUFHLEVBQUUsUUFBUSxDQUFDLEVBQUU7WUFDMUIsT0FBTyxHQUFHLENBQUM7U0FDZDtRQUNELEdBQUcsR0FBRyxHQUFHLENBQUMsZUFBZSxDQUFDO0tBQzdCO0lBQ0QsT0FBTyxLQUFLLENBQUM7QUFDakIsQ0FBQztBQVpELDZCQVlDIn0=

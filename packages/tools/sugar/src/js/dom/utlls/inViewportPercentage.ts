@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __isVisible from '../isVisible';
+import { __isVisible } from '@coffeekraken/sugar/dom';
 
 /**
  * @name      inViewportPercentage

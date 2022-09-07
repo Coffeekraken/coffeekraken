@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import whenInViewport from '../dom/whenInViewport';
-import querySelectorLive from '../dom/querySelectorLive';
+import { __querySelectorLive } from '@coffeekraken/sugar/dom';
 import deepMerge from '../../shared/object/deepMerge';
 
 /**
@@ -46,7 +46,7 @@ function imagesLazySrcAttribute(
         },
         settings,
     );
-    querySelectorLive('img[lazy-src]:not([is])', ($imgElm) => {
+    __querySelectorLive('img[lazy-src]:not([is])', ($imgElm) => {
         whenInViewport($imgElm, settings.offset).then(() => {
             $imgElm.setAttribute('src', $imgElm.getAttribute('lazy-src'));
         });

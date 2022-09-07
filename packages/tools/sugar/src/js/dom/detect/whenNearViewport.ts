@@ -1,6 +1,6 @@
 // @ts-nocheck
 import __SPromise from '@coffeekraken/s-promise';
-import __closestScrollable from '../query/closestScrollable';
+import { __closestScrollable } from '@coffeekraken/sugar/dom';
 
 /**
  * @name      whenNearViewport
@@ -24,7 +24,7 @@ import __closestScrollable from '../query/closestScrollable';
  * @todo      tests
  *
  * @example 	js
- * import __whenNearViewport from '@coffeekraken/sugar/js/dom/whenNearViewport'
+ * import { __whenNearViewport } from '@coffeekraken/sugar/dom'
  * __whenNearViewport(myCoolHTMLElement).then((elm) => {
  * 		// do something with your element that has entered the viewport...
  * });
@@ -37,7 +37,7 @@ export interface IWhenNearViewportSettings {
     offset: string;
 }
 
-export default function whenNearViewport(
+export default function __whenNearViewport(
     elm: HTMLElement,
     settings: Partials<IWhenNearViewportSettings> = {},
 ): Promise<HTMLElement> {

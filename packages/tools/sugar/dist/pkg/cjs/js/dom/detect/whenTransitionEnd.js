@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const getTransitionProperties_1 = __importDefault(require("./style/getTransitionProperties"));
+const getTransitionProperties_1 = __importDefault(require("../style/getTransitionProperties"));
 /**
  * @name      whenTransitionEnd
  * @namespace            js.dom.detect
@@ -25,13 +25,13 @@ const getTransitionProperties_1 = __importDefault(require("./style/getTransition
  * @todo      tests
  *
  * @example 	js
- * import __whenTransitionEnd from '@coffeekraken/sugar/js/dom/whenTransitionEnd'
+ * import { __whenTransitionEnd } from '@coffeekraken/sugar/dom'
  * await __whenTransitionEnd(myCoolHTMLElement);
  *
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function whenTransitionEnd(elm, cb = null) {
+function __whenTransitionEnd(elm, cb = null) {
     return new Promise((resolve, reject) => {
         const transition = (0, getTransitionProperties_1.default)(elm);
         setTimeout(() => {
@@ -40,5 +40,5 @@ function whenTransitionEnd(elm, cb = null) {
         }, transition.totalDuration);
     });
 }
-exports.default = whenTransitionEnd;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDhGQUF3RTtBQUV4RTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXlCRztBQUNILFNBQXdCLGlCQUFpQixDQUNyQyxHQUFnQixFQUNoQixLQUFlLElBQUk7SUFFbkIsT0FBTyxJQUFJLE9BQU8sQ0FBQyxDQUFDLE9BQU8sRUFBRSxNQUFNLEVBQUUsRUFBRTtRQUNuQyxNQUFNLFVBQVUsR0FBRyxJQUFBLGlDQUF5QixFQUFDLEdBQUcsQ0FBQyxDQUFDO1FBQ2xELFVBQVUsQ0FBQyxHQUFHLEVBQUU7WUFDWixPQUFPLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDZCxFQUFFLElBQUksRUFBRSxDQUFDLElBQUksQ0FBQyxDQUFDO1FBQ25CLENBQUMsRUFBRSxVQUFVLENBQUMsYUFBYSxDQUFDLENBQUM7SUFDakMsQ0FBQyxDQUFDLENBQUM7QUFDUCxDQUFDO0FBWEQsb0NBV0MifQ==
+exports.default = __whenTransitionEnd;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLCtGQUF5RTtBQUV6RTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXlCRztBQUNILFNBQXdCLG1CQUFtQixDQUN2QyxHQUFnQixFQUNoQixLQUFlLElBQUk7SUFFbkIsT0FBTyxJQUFJLE9BQU8sQ0FBQyxDQUFDLE9BQU8sRUFBRSxNQUFNLEVBQUUsRUFBRTtRQUNuQyxNQUFNLFVBQVUsR0FBRyxJQUFBLGlDQUF5QixFQUFDLEdBQUcsQ0FBQyxDQUFDO1FBQ2xELFVBQVUsQ0FBQyxHQUFHLEVBQUU7WUFDWixPQUFPLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDZCxFQUFFLElBQUksRUFBRSxDQUFDLElBQUksQ0FBQyxDQUFDO1FBQ25CLENBQUMsRUFBRSxVQUFVLENBQUMsYUFBYSxDQUFDLENBQUM7SUFDakMsQ0FBQyxDQUFDLENBQUM7QUFDUCxDQUFDO0FBWEQsc0NBV0MifQ==

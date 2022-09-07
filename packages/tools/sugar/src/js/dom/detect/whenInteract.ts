@@ -30,7 +30,7 @@ import __WhenInteractSettingsInterface from './interface/WhenInteractSettingsInt
  * @todo      tests
  *
  * @example  	js
- * import __whenInteract from '@coffeekraken/sugar/js/dom/detect/whenInteract'
+ * import { __whenInteract } from '@coffeekraken/sugar/js/dom/detect/whenInteract'
  * await __whenInteract(myCoolElement);
  *
  * @since           1.0.0
@@ -46,7 +46,7 @@ export interface IWhenInteractSettings {
     focus: boolean;
 }
 
-export default function whenInteract(
+export default function __whenInteract(
     elm: HTMLElement,
     settings?: Partial<IWhenInteractSettings>,
 ): Promise<any> {

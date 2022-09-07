@@ -16,7 +16,7 @@ import __copy from 'clipboard-copy';
  * @todo        tests
  *
  * @example         js
- * import __copy from '@coffeekraken/sugar/js/clipboard/copy';
+ * import { __copy } from '@coffeekraken/sugar/clipboard';
  * __copy('Hello world');
  *
  * @see             https://www.npmjs.com/package/clipboard-copy

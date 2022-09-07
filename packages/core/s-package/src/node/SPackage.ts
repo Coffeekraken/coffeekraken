@@ -4,6 +4,7 @@ import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
+import __packageJson from '@coffeekraken/sugar/node/package/jsonSync';
 import __renamePackage from '@coffeekraken/sugar/node/package/renamePackage';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
@@ -337,6 +338,17 @@ export default class SPackage extends __SClass {
                 // @ts-ignore
                 const finalParams: ISPackageExportsParams =
                     __SPackageExportsParamsInterface.apply(params);
+
+                const packageJson = __packageJson(this._rootDir);
+
+                // check if the "autoExports" exists and is at "false" to avoid exporting
+                if (packageJson.autoExports === false) {
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<magenta>[exports]</magenta> This package "<yellow>${packageJson.name}</yellow>" is marked as "<cyan>autoExports</cyan>:<yellow>false</yellow> and will not generate the exports property automatically`,
+                    });
+                    return resolve();
+                }
 
                 emit('log', {
                     type: __SLog.TYPE_INFO,

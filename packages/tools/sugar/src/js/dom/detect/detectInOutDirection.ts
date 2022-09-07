@@ -21,7 +21,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * @todo      tests
  *
  * @example     js
- * import __detectInOutDirection from '@coffeekraken/sugar/js/dom/detectInOutDirection';
+ * import { __detectInOutDirection } from '@coffeekraken/sugar/dom';
  * const detector = __detectInOutDirection($myElm).on('in', (direction) => {
  *    // direction can be "up", "down", "left" or "right"
  * }).on('out', (direction) => {
@@ -34,7 +34,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function detectInOutDirection($elm: HTMLElement): __SPromise {
+export default function __detectInOutDirection($elm: HTMLElement): __SPromise {
     let pointerEnterHandler, pointerLeaveHandler;
 
     const promise = new __SPromise(({ resolve, reject, emit }) => {
@@ -97,4 +97,3 @@ function calculateDirection(e) {
         direction = null;
     }
 }
-export default detectInOutDirection;

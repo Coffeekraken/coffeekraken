@@ -17,13 +17,13 @@
  * @todo      tests
  *
  * @example  	js
- * import insertAfter from '@coffeekraken/sugar/js/dom/insertAfter'
- * insertAfter(myElementToInsert, theReferenceElement);
+ * import { __insertAfter } from '@coffeekraken/sugar/dom'
+ * __insertAfter(myElementToInsert, theReferenceElement);
  *
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function insertAfter(elm, refElm) {
+export default function __insertAfter(elm, refElm) {
     // next sibling of ref elm
     const nextSibling = refElm.nextSibling;
     if (!nextSibling) {
@@ -34,5 +34,4 @@ function insertAfter(elm, refElm) {
     }
     return elm;
 }
-export default insertAfter;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxTQUFTLFdBQVcsQ0FBQyxHQUFnQixFQUFFLE1BQW1CO0lBQ3RELDBCQUEwQjtJQUMxQixNQUFNLFdBQVcsR0FBRyxNQUFNLENBQUMsV0FBVyxDQUFDO0lBQ3ZDLElBQUksQ0FBQyxXQUFXLEVBQUU7UUFDZCxNQUFNLENBQUMsVUFBVSxDQUFDLFdBQVcsQ0FBQyxHQUFHLENBQUMsQ0FBQztLQUN0QztTQUFNO1FBQ0gsTUFBTSxDQUFDLFVBQVUsQ0FBQyxZQUFZLENBQUMsR0FBRyxFQUFFLFdBQVcsQ0FBQyxDQUFDO0tBQ3BEO0lBQ0QsT0FBTyxHQUFHLENBQUM7QUFDZixDQUFDO0FBQ0QsZUFBZSxXQUFXLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxNQUFNLENBQUMsT0FBTyxVQUFVLGFBQWEsQ0FDakMsR0FBZ0IsRUFDaEIsTUFBbUI7SUFFbkIsMEJBQTBCO0lBQzFCLE1BQU0sV0FBVyxHQUFHLE1BQU0sQ0FBQyxXQUFXLENBQUM7SUFDdkMsSUFBSSxDQUFDLFdBQVcsRUFBRTtRQUNkLE1BQU0sQ0FBQyxVQUFVLENBQUMsV0FBVyxDQUFDLEdBQUcsQ0FBQyxDQUFDO0tBQ3RDO1NBQU07UUFDSCxNQUFNLENBQUMsVUFBVSxDQUFDLFlBQVksQ0FBQyxHQUFHLEVBQUUsV0FBVyxDQUFDLENBQUM7S0FDcEQ7SUFDRCxPQUFPLEdBQUcsQ0FBQztBQUNmLENBQUMifQ==

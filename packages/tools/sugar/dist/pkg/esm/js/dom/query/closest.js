@@ -1,5 +1,5 @@
 // @ts-nocheck
-import __querySelectorUp from './querySelectorUp';
+import { __querySelectorUp } from '@coffeekraken/sugar/dom';
 /**
  * @name        closest
  * @namespace            js.dom.query
@@ -18,8 +18,8 @@ import __querySelectorUp from './querySelectorUp';
  * @todo      tests
  *
  * @example  	js
- * import closest from '@coffeekraken/sugar/js/dom/query/closest'
- * const closestElm = closest(myCoolElement, '.my-cool-class');
+ * import { __closest } from '@coffeekraken/sugar/dom'
+ * const closestElm =  __closest(myCoolElement, '.my-cool-class');
  * if (closestElm) {
  * 		// we have found en element that matches the selector
  * }
@@ -32,4 +32,4 @@ import __querySelectorUp from './querySelectorUp';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default __querySelectorUp;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxPQUFPLGlCQUFpQixNQUFNLG1CQUFtQixDQUFDO0FBRWxEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0E4Qkc7QUFDSCxlQUFlLGlCQUFpQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxPQUFPLEVBQUUsaUJBQWlCLEVBQUUsTUFBTSx5QkFBeUIsQ0FBQztBQUU1RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBOEJHO0FBQ0gsZUFBZSxpQkFBaUIsQ0FBQyJ9

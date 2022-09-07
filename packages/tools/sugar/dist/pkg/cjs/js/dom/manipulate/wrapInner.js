@@ -19,13 +19,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @todo      tests
  *
  * @example    js
- * import wrapInner from '@coffeekraken/sugar/js/dom/wrapInner'
+ * import { __wrapInner } from '@coffeekraken/sugar/dom'
  * const $myWrapper = document.createElement('div')
  * // assuming
  * // <div class="container">
  * //   <span>Hello World</span>
  * // </div>
- * wrapInner(document.querySelector('.container'), $myWrapper)
+ * __wrapInner(document.querySelector('.container'), $myWrapper)
  * // return
  * // <div class="container">
  * //   <div>
@@ -36,7 +36,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel@gmail.com)
  */
-function wrapInner($parent, $wrapper) {
+function __wrapInner($parent, $wrapper) {
     if (typeof $wrapper === 'string') {
         $wrapper = document.createElement($wrapper);
     }
@@ -46,5 +46,5 @@ function wrapInner($parent, $wrapper) {
     }
     return $parent;
 }
-exports.default = wrapInner;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBa0NHO0FBQ0gsU0FBUyxTQUFTLENBQUMsT0FBb0IsRUFBRSxRQUFxQjtJQUMxRCxJQUFJLE9BQU8sUUFBUSxLQUFLLFFBQVEsRUFBRTtRQUM5QixRQUFRLEdBQUcsUUFBUSxDQUFDLGFBQWEsQ0FBQyxRQUFRLENBQUMsQ0FBQztLQUMvQztJQUNELE9BQU8sQ0FBQyxXQUFXLENBQUMsUUFBUSxDQUFDLENBQUM7SUFDOUIsT0FBTyxPQUFPLENBQUMsVUFBVSxLQUFLLFFBQVEsRUFBRTtRQUNwQyxRQUFRLENBQUMsV0FBVyxDQUFDLE9BQU8sQ0FBQyxVQUFVLENBQUMsQ0FBQztLQUM1QztJQUNELE9BQU8sT0FBTyxDQUFDO0FBQ25CLENBQUM7QUFDRCxrQkFBZSxTQUFTLENBQUMifQ==
+exports.default = __wrapInner;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBa0NHO0FBQ0gsU0FBd0IsV0FBVyxDQUMvQixPQUFvQixFQUNwQixRQUFxQjtJQUVyQixJQUFJLE9BQU8sUUFBUSxLQUFLLFFBQVEsRUFBRTtRQUM5QixRQUFRLEdBQUcsUUFBUSxDQUFDLGFBQWEsQ0FBQyxRQUFRLENBQUMsQ0FBQztLQUMvQztJQUNELE9BQU8sQ0FBQyxXQUFXLENBQUMsUUFBUSxDQUFDLENBQUM7SUFDOUIsT0FBTyxPQUFPLENBQUMsVUFBVSxLQUFLLFFBQVEsRUFBRTtRQUNwQyxRQUFRLENBQUMsV0FBVyxDQUFDLE9BQU8sQ0FBQyxVQUFVLENBQUMsQ0FBQztLQUM1QztJQUNELE9BQU8sT0FBTyxDQUFDO0FBQ25CLENBQUM7QUFaRCw4QkFZQyJ9

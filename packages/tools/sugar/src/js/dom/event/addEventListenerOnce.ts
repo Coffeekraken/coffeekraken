@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __SPromise from '@coffeekraken/s-promise';
-import __addEventListener from './addEventListener';
+import { __addEventListener } from '@coffeekraken/sugar/dom';
 
 /**
  * @name        addEventListenerOnce
@@ -26,18 +26,18 @@ import __addEventListener from './addEventListener';
  * @todo      tests
  *
  * @example    js
- * import addEventListenerOnce from '@coffeekraken/sugar/js/dom/addEventListenerOnce'
- * addEventListenerOnce(myElm, 'click', (e) => {
+ * import { __addEventListenerOnce } from '@coffeekraken/sugar/dom'
+ *  __addEventListenerOnce(myElm, 'click', (e) => {
  *     // do something on click
  * });
- * addEventListenerOnce(myElm, 'click').on('click', (e) => {
+ *  __addEventListenerOnce(myElm, 'click').on('click', (e) => {
  *
  * });
  *
  * @since     1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function addEventListenerOnce(
+export default function __addEventListenerOnce(
     $elm: HTMLElement,
     eventNames: string | string[],
     callback = null,
@@ -75,4 +75,3 @@ function addEventListenerOnce(
 
     return globalPromise;
 }
-export default addEventListenerOnce;

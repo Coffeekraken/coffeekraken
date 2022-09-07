@@ -17,15 +17,14 @@
  * @todo      tests
  *
  * @example    js
- * import stripTags from '@coffeekraken/sugar/js/dom/stripTags'
- * stripTags('<h1>Hello World</h1>') // => Hello World
+ * import { __stripTags } from '@coffeekraken/sugar/dom'
+ * __stripTags('<h1>Hello World</h1>') // => Hello World
  *
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function stripTags(html: string): string {
+export default function __stripTags(html: string): string {
     const tmp = document.createElement('div');
     tmp.innerHTML = html;
     return tmp.textContent || tmp.innerText || '';
 }
-export default stripTags;

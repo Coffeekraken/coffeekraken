@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __isVisible from '../is/visible';
+import { __isVisible } from '@coffeekraken/sugar/dom';
 
 /**
  * @name        closestNotVisible
@@ -20,8 +20,8 @@ import __isVisible from '../is/visible';
  * @todo      tests
  *
  * @example  	js
- * import closestNotVisible from '@coffeekraken/sugar/js/dom/query/closestNotVisible'
- * const closestElm = closestNotVisible(myCoolElement);
+ * import { __closestNotVisible } from '@coffeekraken/sugar/dom'
+ * const closestElm =  __closestNotVisible(myCoolElement);
  * if (closestElm) {
  * 		// we have found en element that is not visible
  * }
@@ -29,7 +29,7 @@ import __isVisible from '../is/visible';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function closestNotVisible(elm: HTMLElement): HTMLElement {
+export default function __closestNotVisible(elm: HTMLElement): HTMLElement {
     const originalElm = elm;
     elm = elm.parentNode;
     while (elm && elm != originalElm.ownerDocument) {
@@ -40,4 +40,3 @@ function closestNotVisible(elm: HTMLElement): HTMLElement {
     }
     return null;
 }
-export default closestNotVisible;

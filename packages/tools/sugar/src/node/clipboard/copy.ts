@@ -1,8 +1,8 @@
 // @ts-nocheck
 
 import __clipboardy from 'clipboardy';
-import __toString from '../../shared/string/toString';
 import __ncp from 'copy-paste';
+import __toString from '../../shared/string/toString';
 
 /**
  * @name            copy
@@ -21,8 +21,8 @@ import __ncp from 'copy-paste';
  * @todo      tests
  *
  * @example       js
- * import copy from '@coffeekraken/sugar/node/clipboard/copy';
- * copy('Hello world');
+ * import { __copy } from '@coffeekraken/sugar/clipboard';
+ * __copy('Hello world');
  *
  * @since       2.0.0
  * @see         https://www.npmjs.com/package/clipboardy

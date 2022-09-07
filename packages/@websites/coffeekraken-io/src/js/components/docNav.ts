@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
-import __onScrollEnd from '@coffeekraken/sugar/js/dom/detect/onScrollEnd';
+import { __onScrollEnd } from '@coffeekraken/sugar/dom';
 import __sameItems from '@coffeekraken/sugar/shared/array/sameItems';
 import __striptags from '@coffeekraken/sugar/shared/html/striptags';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
@@ -58,7 +58,7 @@ export default class DocNav extends __SLitComponent {
 
       // scroll end
       await __wait();
-      __onScrollEnd(document.body, () => {
+      { __onScrollEnd }(document.'@coffeekraken/sugar/dom';
         this._maxItemsToDisplay += this.maxItems;
         this._filterItems({
           reset: false,

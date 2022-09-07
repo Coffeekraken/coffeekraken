@@ -13,13 +13,13 @@
  * @return      {String}                            The css string
  *
  * @example         js
- * import stylesheetToString from '@coffeekraken/sugar/js/dom/css/stylesheetToString';
- * stylesheetToString(document.stylesheets); // => body { ... }
+ * import { __stylesheetToString } from '@coffeekraken/sugar/dom';
+ * __stylesheetToString(document.stylesheets); // => body { ... }
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function stylesheetToString(
+export default function __stylesheetToString(
     // @ts-ignore
     stylesheet: StyleSheet | StyleSheetList,
 ): string {

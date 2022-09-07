@@ -1,4 +1,4 @@
-import __querySelectorLive from "@coffeekraken/sugar/js/dom/query/querySelectorLive";
+import { __querySelectorLive } from '@coffeekraken/sugar/dom';
 
 export default function () {
   const maxOffset = 6;
@@ -7,10 +7,10 @@ export default function () {
     let isHover = false,
       hoverTimeout;
 
-    const $squareItems = $elm.querySelectorAll(".kraken-logo > path");
+    const $squareItems = $elm.querySelectorAll('.kraken-logo > path');
     $squareItems.forEach(($item) => {
       $item.style.transition =
-        "transform 0.1s cubic-bezier(0.700, 0.000, 0.305, 0.995)";
+        'transform 0.1s cubic-bezier(0.700, 0.000, 0.305, 0.995)';
     });
 
     function anim() {
@@ -38,9 +38,9 @@ export default function () {
       });
     }
 
-    $elm.addEventListener("mouseover", hover);
-    $elm.addEventListener("mouseout", out);
+    $elm.addEventListener('mouseover', hover);
+    $elm.addEventListener('mouseout', out);
   }
 
-  __querySelectorLive("[s-kraken-logo]", krakenLogo);
+  __querySelectorLive('[s-kraken-logo]', krakenLogo);
 }

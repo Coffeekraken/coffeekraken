@@ -1,10 +1,7 @@
 "use strict";
 // @ts-nocheck
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const linkLoaded_1 = __importDefault(require("../load/linkLoaded"));
+const dom_1 = require("@coffeekraken/sugar/dom");
 /**
  * @name      whenStylesheetsReady
  * @namespace            js.dom.detect
@@ -26,7 +23,7 @@ const linkLoaded_1 = __importDefault(require("../load/linkLoaded"));
  * @todo      tests
  *
  * @example 	js
- * import __whenStylesheetsReady from '@coffeekraken/sugar/js/dom/whenStylesheetsReady'
+ * import { __whenStylesheetsReady } from '@coffeekraken/sugar/dom'
  * await __whenStylesheetsReady([
  * 		myHTMLLinkElement1,
  * 		myHTMLLinkElement2
@@ -35,13 +32,13 @@ const linkLoaded_1 = __importDefault(require("../load/linkLoaded"));
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function whenStylesheetsReady(links = null, cb = null) {
+function __whenStylesheetsReady(links = null, cb = null) {
     if (!links) {
         links = Array.from(document.querySelectorAll('link[rel="stylesheet"]'));
     }
     const promises = [];
     [].forEach.call(links, ($link) => {
-        promises.push((0, linkLoaded_1.default)($link));
+        promises.push((0, dom_1.__whenLinkLoaded)($link));
     });
     const allPromises = Promise.all(promises);
     allPromises.then(() => {
@@ -49,5 +46,5 @@ function whenStylesheetsReady(links = null, cb = null) {
     });
     return allPromises;
 }
-exports.default = whenStylesheetsReady;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLG9FQUE4QztBQUM5Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0E2Qkc7QUFDSCxTQUF3QixvQkFBb0IsQ0FDeEMsUUFBMkIsSUFBSSxFQUMvQixLQUFlLElBQUk7SUFFbkIsSUFBSSxDQUFDLEtBQUssRUFBRTtRQUNSLEtBQUssR0FBRyxLQUFLLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxnQkFBZ0IsQ0FBQyx3QkFBd0IsQ0FBQyxDQUFDLENBQUM7S0FDM0U7SUFDRCxNQUFNLFFBQVEsR0FBRyxFQUFFLENBQUM7SUFDcEIsRUFBRSxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsS0FBSyxFQUFFLENBQUMsS0FBSyxFQUFFLEVBQUU7UUFDN0IsUUFBUSxDQUFDLElBQUksQ0FBQyxJQUFBLG9CQUFZLEVBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQztJQUN2QyxDQUFDLENBQUMsQ0FBQztJQUNILE1BQU0sV0FBVyxHQUFHLE9BQU8sQ0FBQyxHQUFHLENBQUMsUUFBUSxDQUFDLENBQUM7SUFDMUMsV0FBVyxDQUFDLElBQUksQ0FBQyxHQUFHLEVBQUU7UUFDbEIsRUFBRSxhQUFGLEVBQUUsdUJBQUYsRUFBRSxFQUFJLENBQUM7SUFDWCxDQUFDLENBQUMsQ0FBQztJQUNILE9BQU8sV0FBVyxDQUFDO0FBQ3ZCLENBQUM7QUFoQkQsdUNBZ0JDIn0=
+exports.default = __whenStylesheetsReady;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkLGlEQUEyRDtBQUMzRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0E2Qkc7QUFDSCxTQUF3QixzQkFBc0IsQ0FDMUMsUUFBMkIsSUFBSSxFQUMvQixLQUFlLElBQUk7SUFFbkIsSUFBSSxDQUFDLEtBQUssRUFBRTtRQUNSLEtBQUssR0FBRyxLQUFLLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxnQkFBZ0IsQ0FBQyx3QkFBd0IsQ0FBQyxDQUFDLENBQUM7S0FDM0U7SUFDRCxNQUFNLFFBQVEsR0FBRyxFQUFFLENBQUM7SUFDcEIsRUFBRSxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsS0FBSyxFQUFFLENBQUMsS0FBSyxFQUFFLEVBQUU7UUFDN0IsUUFBUSxDQUFDLElBQUksQ0FBQyxJQUFBLHNCQUFnQixFQUFDLEtBQUssQ0FBQyxDQUFDLENBQUM7SUFDM0MsQ0FBQyxDQUFDLENBQUM7SUFDSCxNQUFNLFdBQVcsR0FBRyxPQUFPLENBQUMsR0FBRyxDQUFDLFFBQVEsQ0FBQyxDQUFDO0lBQzFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsR0FBRyxFQUFFO1FBQ2xCLEVBQUUsYUFBRixFQUFFLHVCQUFGLEVBQUUsRUFBSSxDQUFDO0lBQ1gsQ0FBQyxDQUFDLENBQUM7SUFDSCxPQUFPLFdBQVcsQ0FBQztBQUN2QixDQUFDO0FBaEJELHlDQWdCQyJ9

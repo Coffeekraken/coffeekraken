@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __strToHtml from '../../shared/string/strToHtml';
+import __strToHtml from '../../html/strToHtml';
 
 function processString(string) {
     return string
@@ -43,13 +43,15 @@ function processNodeElm(elm) {
  * @todo      tests
  *
  * @example     js
- * import toDomNodes from '@coffeekraken/sugar/js/dom/toDomNodes';
- * toDomNodes('<span>Hello World</span>');
+ * import { __toDomNodes } from '@coffeekraken/sugar/dom';
+ * __toDomNodes('<span>Hello World</span>');
  *
  * @since         1.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function toDomNodes(source: string | HTMLElement): HTMLElement {
+export default function __toDomNodes(
+    source: string | HTMLElement,
+): HTMLElement {
     // if the source is an HTMLElement
     if (source.tagName) {
         return processNodeElm(source);
@@ -77,4 +79,3 @@ function toDomNodes(source: string | HTMLElement): HTMLElement {
         return processNodeElm(tpl);
     }
 }
-export default toDomNodes;

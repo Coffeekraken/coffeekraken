@@ -6,7 +6,7 @@ import __SComponentUtils, {
     SComponentUtilsDefaultPropsInterface,
 } from '@coffeekraken/s-component-utils';
 import __SInterface from '@coffeekraken/s-interface';
-import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
+import { __querySelectorLive } from '@coffeekraken/sugar/dom';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
 import __wait from '@coffeekraken/sugar/shared/time/wait';

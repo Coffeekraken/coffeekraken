@@ -28,7 +28,7 @@ body {
 
 [s-scope] {
   opacity: 0;
-  transition: all 0.15s ease-out 0.5s;
+  transition: all 0.15s ease-out 0.15s;
   transform: translateY(25px);
 
   &[ready] {

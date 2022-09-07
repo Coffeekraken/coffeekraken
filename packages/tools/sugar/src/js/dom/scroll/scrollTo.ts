@@ -2,7 +2,7 @@
 
 import easeInOutQuad from '../../../shared/easing/easeInOutQuad';
 import requestAnimationFrame from '../utlls/requestAnimationFrame';
-import __isUserScrolling from '../is/userScrolling';
+import { __isUserScrolling } from '@coffeekraken/sugar/dom';
 
 /**
  * @name      scrollTo

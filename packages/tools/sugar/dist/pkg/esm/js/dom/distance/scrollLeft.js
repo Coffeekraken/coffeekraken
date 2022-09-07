@@ -13,14 +13,13 @@
  * @todo      tests
  *
  * @example    js
- * import scrollLeft from '@coffeekraken/sugar/js/dom/scrollLeft'
- * scrollLeft() // 40
+ * import { __scrollLeft } from '@coffeekraken/sugar/dom'
+ * __scrollLeft() // 40
  *
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivier.bossel@gmail.com)
  */
-function scrollLeft() {
+export default function __scrollLeft() {
     return (window.pageXOffset || document.scrollLeft || document.body.scrollLeft);
 }
-export default scrollLeft;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW1CRztBQUNILFNBQVMsVUFBVTtJQUNmLE9BQU8sQ0FDSCxNQUFNLENBQUMsV0FBVyxJQUFJLFFBQVEsQ0FBQyxVQUFVLElBQUksUUFBUSxDQUFDLElBQUksQ0FBQyxVQUFVLENBQ3hFLENBQUM7QUFDTixDQUFDO0FBQ0QsZUFBZSxVQUFVLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW1CRztBQUNILE1BQU0sQ0FBQyxPQUFPLFVBQVUsWUFBWTtJQUNoQyxPQUFPLENBQ0gsTUFBTSxDQUFDLFdBQVcsSUFBSSxRQUFRLENBQUMsVUFBVSxJQUFJLFFBQVEsQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUN4RSxDQUFDO0FBQ04sQ0FBQyJ9

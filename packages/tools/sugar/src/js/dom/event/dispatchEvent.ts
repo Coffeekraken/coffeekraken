@@ -1,7 +1,4 @@
 // @ts-nocheck
-
-import __SEvent from '../../event/SEvent';
-
 /**
  * @name      dispatchEvent
  * @namespace            js.dom.event
@@ -20,25 +17,24 @@ import __SEvent from '../../event/SEvent';
  * @todo      tests
  *
  * @example  	js
- * import dispatchEvent from '@coffeekraken/sugar/js/dom/dispatchEvent'
- * dispatchEvent(myCoolHTMLElement, 'myCoolEventName', {
+ * import { __dispatchEvent } from '@coffeekraken/sugar/js/dom/dispatchEvent'
+ *  __dispatchEvent(myCoolHTMLElement, 'myCoolEventName', {
  * 		var1 : 'value1'
  * });
  *
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function dispatchEvent(
+export default function __dispatchEvent(
     $target: HTMLElement,
     name: string,
     data: any = null,
 ): void {
     // create new event
-    const e = new __SEvent(name, {
+    const e = new CustomEvent(name, {
         detail: data,
         bubbles: true,
         cancelable: true,
     });
     $target.dispatchEvent(e);
 }
-export default dispatchEvent;

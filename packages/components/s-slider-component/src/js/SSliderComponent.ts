@@ -3,13 +3,13 @@
 import __SLitComponent, {
     ISLitComponentDefaultProps,
 } from '@coffeekraken/s-lit-component';
-import __onSwipe from '@coffeekraken/sugar/js/dom/detect/onSwipe';
+import { __onSwipe } from '@coffeekraken/sugar/dom';
 import __isClass from '@coffeekraken/sugar/shared/is/class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import { css, html, unsafeCSS } from 'lit';
 // @ts-ignore
-import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
-import __querySelectorUp from '@coffeekraken/sugar/js/dom/query/querySelectorUp';
+import { __querySelectorLive } from '@coffeekraken/sugar/dom';
+import { __querySelectorUp } from '@coffeekraken/sugar/dom';
 import __easeInterval from '@coffeekraken/sugar/shared/function/easeInterval';
 import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 import __css from '../../../../src/css/s-slider-component.css'; // relative to /dist/pkg/esm/js

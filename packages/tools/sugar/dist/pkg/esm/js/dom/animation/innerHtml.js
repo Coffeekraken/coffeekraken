@@ -4,7 +4,7 @@ import __convert from '../../../shared/time/convert';
 import __injectStyle from '../../dom/css/injectStyle';
 import __emptyNode from '../manipulate/emptyNode';
 /**
- * @name            innerHtml
+ * @name            animatedInnerHtml
  * @namespace            js.dom.animation
  * @type            Function
  * @platform          js

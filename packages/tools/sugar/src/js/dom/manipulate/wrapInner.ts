@@ -18,13 +18,13 @@
  * @todo      tests
  *
  * @example    js
- * import wrapInner from '@coffeekraken/sugar/js/dom/wrapInner'
+ * import { __wrapInner } from '@coffeekraken/sugar/dom'
  * const $myWrapper = document.createElement('div')
  * // assuming
  * // <div class="container">
  * //   <span>Hello World</span>
  * // </div>
- * wrapInner(document.querySelector('.container'), $myWrapper)
+ * __wrapInner(document.querySelector('.container'), $myWrapper)
  * // return
  * // <div class="container">
  * //   <div>
@@ -35,7 +35,10 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel@gmail.com)
  */
-function wrapInner($parent: HTMLElement, $wrapper: HTMLElement): HTMLElement {
+export default function __wrapInner(
+    $parent: HTMLElement,
+    $wrapper: HTMLElement,
+): HTMLElement {
     if (typeof $wrapper === 'string') {
         $wrapper = document.createElement($wrapper);
     }
@@ -45,4 +48,3 @@ function wrapInner($parent: HTMLElement, $wrapper: HTMLElement): HTMLElement {
     }
     return $parent;
 }
-export default wrapInner;

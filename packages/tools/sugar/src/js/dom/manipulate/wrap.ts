@@ -18,13 +18,13 @@
  * @todo      tests
  *
  * @example    js
- * import wrap from '@coffeekraken/sugar/js/dom/wrap'
+ * import { __wrap } from '@coffeekraken/sugar/dom'
  * const $wrapper = document.createElement('div')
  * // assuming:
  * // <div>
  * //   <span class="wrap">Hello World</span>
  * // </div>
- * wrap(document.querySelector('.wrap'), $wrapper)
+ * __wrap(document.querySelector('.wrap'), $wrapper)
  * // output:
  * // <div>
  * //   <div>
@@ -35,7 +35,10 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function wrap($elm: HTMLElement, $wrapper: HTMLElement): HTMLElement {
+export default function __wrap(
+    $elm: HTMLElement,
+    $wrapper: HTMLElement,
+): HTMLElement {
     if (typeof $wrapper === 'string') {
         $wrapper = document.createElement($wrapper);
     }
@@ -48,4 +51,3 @@ function wrap($elm: HTMLElement, $wrapper: HTMLElement): HTMLElement {
     }
     return $wrapper.appendChild($elm);
 }
-export default wrap;

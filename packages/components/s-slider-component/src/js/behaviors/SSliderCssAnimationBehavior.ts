@@ -1,8 +1,5 @@
-import __slideable from '@coffeekraken/sugar/js/dom/slide/slideable';
 import __SSliderBehavior from '../SSliderBehavior';
 import __SSliderCssAnimationBehaviorInterface from './interface/SSliderCssAnimationBehaviorInterface';
-import __SCssAnimation from '@coffeekraken/s-css-animation';
-import __onDrag from '@coffeekraken/sugar/js/dom/detect/onDrag';
 
 // @ts-ignore
 import __css from '../../../../../src/css/s-slider-slideable-behavior.css'; // relative to /dist/pkg/esm/js/behaviors

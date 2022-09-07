@@ -1,10 +1,7 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 // @ts-nocheck
-const querySelectorUp_1 = __importDefault(require("./querySelectorUp"));
+const dom_1 = require("@coffeekraken/sugar/dom");
 /**
  * @name        closest
  * @namespace            js.dom.query
@@ -23,8 +20,8 @@ const querySelectorUp_1 = __importDefault(require("./querySelectorUp"));
  * @todo      tests
  *
  * @example  	js
- * import closest from '@coffeekraken/sugar/js/dom/query/closest'
- * const closestElm = closest(myCoolElement, '.my-cool-class');
+ * import { __closest } from '@coffeekraken/sugar/dom'
+ * const closestElm =  __closest(myCoolElement, '.my-cool-class');
  * if (closestElm) {
  * 		// we have found en element that matches the selector
  * }
@@ -36,5 +33,5 @@ const querySelectorUp_1 = __importDefault(require("./querySelectorUp"));
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-exports.default = querySelectorUp_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsY0FBYztBQUNkLHdFQUFrRDtBQUVsRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBOEJHO0FBQ0gsa0JBQWUseUJBQWlCLENBQUMifQ==
+exports.default = dom_1.__querySelectorUp;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsY0FBYztBQUNkLGlEQUE0RDtBQUU1RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBOEJHO0FBQ0gsa0JBQWUsdUJBQWlCLENBQUMifQ==

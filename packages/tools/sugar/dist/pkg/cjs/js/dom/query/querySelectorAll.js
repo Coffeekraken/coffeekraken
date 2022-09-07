@@ -1,13 +1,8 @@
 "use strict";
 // @ts-nocheck
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const isVisible_1 = __importDefault(require("./isVisible"));
-const isInViewport_1 = __importDefault(require("./isInViewport"));
-const closestNotVisible_1 = __importDefault(require("./query/closestNotVisible"));
-function querySelectorAll(selector, settings = {}) {
+const dom_1 = require("@coffeekraken/sugar/dom");
+function __querySelectorAll(selector, settings = {}) {
     // extend settings
     settings = Object.assign({ visible: null, inViewport: null, rootNode: document.body }, settings);
     // results array
@@ -18,19 +13,19 @@ function querySelectorAll(selector, settings = {}) {
     [].forEach.call(elms, (elm) => {
         // check settings
         if (settings.visible === false) {
-            if ((0, isVisible_1.default)(elm) || (0, closestNotVisible_1.default)(elm))
+            if ((0, dom_1.__isVisible)(elm) || (0, dom_1.__closestNotVisible)(elm))
                 return;
         }
         else if (settings.visible === true) {
-            if (!(0, isVisible_1.default)(elm) || !(0, closestNotVisible_1.default)(elm))
+            if (!(0, dom_1.__isVisible)(elm) || !(0, dom_1.__closestNotVisible)(elm))
                 return;
         }
         if (settings.inViewport === false) {
-            if ((0, isInViewport_1.default)(elm))
+            if ((0, dom_1.__isInViewport)(elm))
                 return;
         }
         else if (settings.inViewport === true) {
-            if (!(0, isInViewport_1.default)(elm))
+            if (!(0, dom_1.__isInViewport)(elm))
                 return;
         }
         // add the element to the result array
@@ -39,5 +34,5 @@ function querySelectorAll(selector, settings = {}) {
     // return the elements
     return results;
 }
-exports.default = querySelectorAll;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDREQUFzQztBQUN0QyxrRUFBNEM7QUFDNUMsa0ZBQTREO0FBK0M1RCxTQUFTLGdCQUFnQixDQUNyQixRQUFnQixFQUNoQixXQUErQyxFQUFFO0lBRWpELGtCQUFrQjtJQUNsQixRQUFRLG1CQUNKLE9BQU8sRUFBRSxJQUFJLEVBQ2IsVUFBVSxFQUFFLElBQUksRUFDaEIsUUFBUSxFQUFFLFFBQVEsQ0FBQyxJQUFJLElBQ3BCLFFBQVEsQ0FDZCxDQUFDO0lBRUYsZ0JBQWdCO0lBQ2hCLE1BQU0sT0FBTyxHQUFHLEVBQUUsQ0FBQztJQUVuQixnQ0FBZ0M7SUFDaEMsTUFBTSxJQUFJLEdBQUcsUUFBUSxDQUFDLFFBQVEsQ0FBQyxnQkFBZ0IsQ0FBQyxRQUFRLENBQUMsQ0FBQztJQUUxRCw2QkFBNkI7SUFDN0IsRUFBRSxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsSUFBSSxFQUFFLENBQUMsR0FBRyxFQUFFLEVBQUU7UUFDMUIsaUJBQWlCO1FBQ2pCLElBQUksUUFBUSxDQUFDLE9BQU8sS0FBSyxLQUFLLEVBQUU7WUFDNUIsSUFBSSxJQUFBLG1CQUFXLEVBQUMsR0FBRyxDQUFDLElBQUksSUFBQSwyQkFBbUIsRUFBQyxHQUFHLENBQUM7Z0JBQUUsT0FBTztTQUM1RDthQUFNLElBQUksUUFBUSxDQUFDLE9BQU8sS0FBSyxJQUFJLEVBQUU7WUFDbEMsSUFBSSxDQUFDLElBQUEsbUJBQVcsRUFBQyxHQUFHLENBQUMsSUFBSSxDQUFDLElBQUEsMkJBQW1CLEVBQUMsR0FBRyxDQUFDO2dCQUFFLE9BQU87U0FDOUQ7UUFDRCxJQUFJLFFBQVEsQ0FBQyxVQUFVLEtBQUssS0FBSyxFQUFFO1lBQy9CLElBQUksSUFBQSxzQkFBYyxFQUFDLEdBQUcsQ0FBQztnQkFBRSxPQUFPO1NBQ25DO2FBQU0sSUFBSSxRQUFRLENBQUMsVUFBVSxLQUFLLElBQUksRUFBRTtZQUNyQyxJQUFJLENBQUMsSUFBQSxzQkFBYyxFQUFDLEdBQUcsQ0FBQztnQkFBRSxPQUFPO1NBQ3BDO1FBRUQsc0NBQXNDO1FBQ3RDLE9BQU8sQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUM7SUFDdEIsQ0FBQyxDQUFDLENBQUM7SUFFSCxzQkFBc0I7SUFDdEIsT0FBTyxPQUFPLENBQUM7QUFDbkIsQ0FBQztBQUNELGtCQUFlLGdCQUFnQixDQUFDIn0=
+exports.default = __querySelectorAll;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkLGlEQUlpQztBQStDakMsU0FBd0Isa0JBQWtCLENBQ3RDLFFBQWdCLEVBQ2hCLFdBQStDLEVBQUU7SUFFakQsa0JBQWtCO0lBQ2xCLFFBQVEsbUJBQ0osT0FBTyxFQUFFLElBQUksRUFDYixVQUFVLEVBQUUsSUFBSSxFQUNoQixRQUFRLEVBQUUsUUFBUSxDQUFDLElBQUksSUFDcEIsUUFBUSxDQUNkLENBQUM7SUFFRixnQkFBZ0I7SUFDaEIsTUFBTSxPQUFPLEdBQUcsRUFBRSxDQUFDO0lBRW5CLGdDQUFnQztJQUNoQyxNQUFNLElBQUksR0FBRyxRQUFRLENBQUMsUUFBUSxDQUFDLGdCQUFnQixDQUFDLFFBQVEsQ0FBQyxDQUFDO0lBRTFELDZCQUE2QjtJQUM3QixFQUFFLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxJQUFJLEVBQUUsQ0FBQyxHQUFHLEVBQUUsRUFBRTtRQUMxQixpQkFBaUI7UUFDakIsSUFBSSxRQUFRLENBQUMsT0FBTyxLQUFLLEtBQUssRUFBRTtZQUM1QixJQUFJLElBQUEsaUJBQVcsRUFBQyxHQUFHLENBQUMsSUFBSSxJQUFBLHlCQUFtQixFQUFDLEdBQUcsQ0FBQztnQkFBRSxPQUFPO1NBQzVEO2FBQU0sSUFBSSxRQUFRLENBQUMsT0FBTyxLQUFLLElBQUksRUFBRTtZQUNsQyxJQUFJLENBQUMsSUFBQSxpQkFBVyxFQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsSUFBQSx5QkFBbUIsRUFBQyxHQUFHLENBQUM7Z0JBQUUsT0FBTztTQUM5RDtRQUNELElBQUksUUFBUSxDQUFDLFVBQVUsS0FBSyxLQUFLLEVBQUU7WUFDL0IsSUFBSSxJQUFBLG9CQUFjLEVBQUMsR0FBRyxDQUFDO2dCQUFFLE9BQU87U0FDbkM7YUFBTSxJQUFJLFFBQVEsQ0FBQyxVQUFVLEtBQUssSUFBSSxFQUFFO1lBQ3JDLElBQUksQ0FBQyxJQUFBLG9CQUFjLEVBQUMsR0FBRyxDQUFDO2dCQUFFLE9BQU87U0FDcEM7UUFFRCxzQ0FBc0M7UUFDdEMsT0FBTyxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsQ0FBQztJQUN0QixDQUFDLENBQUMsQ0FBQztJQUVILHNCQUFzQjtJQUN0QixPQUFPLE9BQU8sQ0FBQztBQUNuQixDQUFDO0FBdENELHFDQXNDQyJ9

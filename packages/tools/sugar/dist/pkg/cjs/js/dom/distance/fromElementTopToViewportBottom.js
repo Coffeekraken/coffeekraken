@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const scrollTop_1 = __importDefault(require("../scroll/scrollTop"));
 const offset_1 = __importDefault(require("../offset/offset"));
 /**
- * @name            fromElementTopToViewportBottom
+ * @name            distanceFromElementTopToViewportBottom
  * @namespace       js.dom.distance
  * @type            Function
  * @platform          js
@@ -19,13 +19,13 @@ const offset_1 = __importDefault(require("../offset/offset"));
  * @return      {Number}                            The calculated distance
  *
  * @example         js
- * import distanceFromElementTopToViewportBottom from '@coffeekraken/sugar/js/dom/distance/fromElementTopToViewportBottom';
- * distanceFromElementTopViewportBottom(myElement); // => 23
+ * import { __distanceFromElementTopToViewportBottom } from '@coffeekraken/sugar/dom';
+ * __distanceFromElementTopToViewportBottom(myElement); // => 23
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function fromElementTopToViewportBottom(elm) {
+function __distanceFromElementTopToViewportBottom(elm) {
     const offsets = (0, offset_1.default)(elm);
     const scrollTop = (0, scrollTop_1.default)();
     // @ts-ignore
@@ -33,5 +33,5 @@ function fromElementTopToViewportBottom(elm) {
     const distance = viewportHeight - offsets.top + scrollTop;
     return distance;
 }
-exports.default = fromElementTopToViewportBottom;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsb0VBQThDO0FBQzlDLDhEQUF3QztBQUV4Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW1CRztBQUNILFNBQXdCLDhCQUE4QixDQUNsRCxHQUFnQjtJQUVoQixNQUFNLE9BQU8sR0FBRyxJQUFBLGdCQUFRLEVBQUMsR0FBRyxDQUFDLENBQUM7SUFDOUIsTUFBTSxTQUFTLEdBQUcsSUFBQSxtQkFBVyxHQUFFLENBQUM7SUFDaEMsYUFBYTtJQUNiLE1BQU0sY0FBYyxHQUFHLE1BQU0sQ0FBQyxXQUFXLENBQUM7SUFDMUMsTUFBTSxRQUFRLEdBQUcsY0FBYyxHQUFHLE9BQU8sQ0FBQyxHQUFHLEdBQUcsU0FBUyxDQUFDO0lBQzFELE9BQU8sUUFBUSxDQUFDO0FBQ3BCLENBQUM7QUFURCxpREFTQyJ9
+exports.default = __distanceFromElementTopToViewportBottom;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsb0VBQThDO0FBQzlDLDhEQUF3QztBQUV4Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW1CRztBQUNILFNBQXdCLHdDQUF3QyxDQUM1RCxHQUFnQjtJQUVoQixNQUFNLE9BQU8sR0FBRyxJQUFBLGdCQUFRLEVBQUMsR0FBRyxDQUFDLENBQUM7SUFDOUIsTUFBTSxTQUFTLEdBQUcsSUFBQSxtQkFBVyxHQUFFLENBQUM7SUFDaEMsYUFBYTtJQUNiLE1BQU0sY0FBYyxHQUFHLE1BQU0sQ0FBQyxXQUFXLENBQUM7SUFDMUMsTUFBTSxRQUFRLEdBQUcsY0FBYyxHQUFHLE9BQU8sQ0FBQyxHQUFHLEdBQUcsU0FBUyxDQUFDO0lBQzFELE9BQU8sUUFBUSxDQUFDO0FBQ3BCLENBQUM7QUFURCwyREFTQyJ9

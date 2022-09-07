@@ -1,5 +1,5 @@
 // @ts-nocheck
-import __querySelectorUp from './querySelectorUp';
+import { __querySelectorUp } from '@coffeekraken/sugar/dom';
 
 /**
  * @name        closest
@@ -19,8 +19,8 @@ import __querySelectorUp from './querySelectorUp';
  * @todo      tests
  *
  * @example  	js
- * import closest from '@coffeekraken/sugar/js/dom/query/closest'
- * const closestElm = closest(myCoolElement, '.my-cool-class');
+ * import { __closest } from '@coffeekraken/sugar/dom'
+ * const closestElm =  __closest(myCoolElement, '.my-cool-class');
  * if (closestElm) {
  * 		// we have found en element that matches the selector
  * }

@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
-import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
+import { __querySelectorLive } from '@coffeekraken/sugar/dom';
 import __getTransitionProperties from '@coffeekraken/sugar/js/dom/style/getTransitionProperties';
 import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';

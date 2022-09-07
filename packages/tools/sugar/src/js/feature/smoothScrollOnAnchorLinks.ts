@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __easing from '../../shared/easing/easeInOutQuint';
-import querySelectorLive from '../dom/query/querySelectorLive';
+import { __querySelectorLive } from '@coffeekraken/sugar/dom';
 import urlParse from 'url-parse';
 import type { IScrollToSettings } from '../dom/scroll/scrollTo';
 import scrollTo from '../dom/scroll/scrollTo';
@@ -48,7 +48,7 @@ function smoothScrollOnAnchorLinks(
         settings,
     );
 
-    querySelectorLive('a:not([is])[href*="#"]', ($link) => {
+    __querySelectorLive('a:not([is])[href*="#"]', ($link) => {
         // listen for click
         $link.addEventListener('click', (e) => {
             // get the hash

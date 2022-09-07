@@ -1,6 +1,6 @@
 import __fastdom from 'fastdom';
 import __expandPleasantCssClassname from '../../shared/html/expandPleasantCssClassname';
-import __querySelectorLive from '../dom/query/querySelectorLive';
+import { __querySelectorLive } from '@coffeekraken/sugar/dom';
 
 /**
  * @name            expandPleasantCssClassnamesLive

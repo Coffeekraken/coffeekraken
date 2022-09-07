@@ -1,10 +1,10 @@
 import __SComponentUtils from '@coffeekraken/s-component-utils';
 import __SFeature from '@coffeekraken/s-feature';
-import __querySelectorUp from '@coffeekraken/sugar/js/dom/query/querySelectorUp';
+import { __querySelectorUp } from '@coffeekraken/sugar/dom';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 // @ts-ignore
 import __SValidator from '@coffeekraken/s-validator';
-import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
+import { __querySelectorLive } from '@coffeekraken/sugar/dom';
 import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
 import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 import __css from '../../../../src/css/s-form-validate.css'; // relative to /dist/pkg/esm/js

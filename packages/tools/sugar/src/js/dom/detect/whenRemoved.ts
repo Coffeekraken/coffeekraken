@@ -20,7 +20,7 @@
  * @todo      tests
  *
  * @example 	js
- * import __whenRemoved from '@coffeekraken/sugar/js/dom/whenRemoved'
+ * import { __whenRemoved } from '@coffeekraken/sugar/dom'
  * __whenRemoved(myCoolHTMLElement).then((value) => {
  * 		// the element has been removed
  * });
@@ -28,7 +28,7 @@
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function whenRemoved($elm) {
+export default function __whenRemoved($elm) {
     return new Promise((resolve, reject) => {
         const observer = new MutationObserver(function (mutations) {
             mutations.forEach(function (mutation) {

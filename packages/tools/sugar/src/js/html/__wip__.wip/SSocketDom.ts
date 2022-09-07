@@ -1,7 +1,7 @@
 // @ts-nocheck
 
+import { __animatedInnerHtml } from '@coffeekrakem/sugar/dom';
 import __appendScriptTag from '../dom/appendScriptTag';
-import __innerHtml from '../dom/innerHtml';
 
 /**
  * @name            syncDom
@@ -130,16 +130,16 @@ class SSocketDom {
         // switch on the action to execute
         switch (settings.action) {
             case 'append':
-                __innerHtml($node, data, {
+                __animatedInnerHtml($node, data, {
                     ...(settings.innerHtml || {}),
                     action: 'append',
                 });
                 break;
             case 'replace':
-                __innerHtml($node, data, settings.innerHtml);
+                __animatedInnerHtml($node, data, settings.innerHtml);
                 break;
             case 'prepend':
-                __innerHtml($node, data, {
+                __animatedInnerHtml($node, data, {
                     ...(settings.innerHtml || {}),
                     action: 'prepend',
                 });
@@ -156,7 +156,7 @@ class SSocketDom {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     _eventBody(data, settings) {
-        __innerHtml(document.body, data, settings.innerHtml || {});
+        __animatedInnerHtml(document.body, data, settings.innerHtml || {});
     }
 
     /**
@@ -172,7 +172,7 @@ class SSocketDom {
             document.getElementById('content') ||
             document.querySelector('[content]');
         if (!$content) return;
-        __innerHtml($content, data, settings.innerHtml || {});
+        __animatedInnerHtml($content, data, settings.innerHtml || {});
     }
 
     /**

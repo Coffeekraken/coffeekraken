@@ -8,7 +8,7 @@ import { registerHelpers } from '@coffeekraken/s-handlebars';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __getCoffeekrakenMetas from '@coffeekraken/sugar/node/coffeekraken/getCoffeekrakenMetas';
+import { __getCoffeekrakenMetas } from '@coffeekraken/sugar/coffeekraken';
 import __extension from '@coffeekraken/sugar/node/fs/extension';
 import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';

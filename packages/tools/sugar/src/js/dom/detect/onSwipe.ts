@@ -24,7 +24,7 @@
  * @todo      tests
  *
  * @example 	js
- * import __onSwipe from '@coffeekraken/sugar/js/dom/onSwipe'
+ * import { __onSwipe } from '@coffeekraken/sugar/dom'
  * __onSwipe(myCoolElm, (swipe) => {
  * 	// check the swipe direction
  * 	if (swipe.left) {
@@ -45,7 +45,7 @@ export interface IOnSwipeSettings {
     threshold: number;
 }
 
-export default function onSwipe(
+export default function __onSwipe(
     elm: HTMLElement,
     cb: Function,
     settings: Partial<IOnSwipeSettings> = {},

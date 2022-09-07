@@ -1,10 +1,7 @@
 "use strict";
-// @ts-nocheck
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const matches_1 = __importDefault(require("./matches"));
+// @ts-nocheck
+const dom_1 = require("@coffeekraken/sugar/dom");
 /**
  * @name        querySelectorUp
  * @namespace            js.dom.query
@@ -23,20 +20,20 @@ const matches_1 = __importDefault(require("./matches"));
  * @todo      tests
  *
  * @example  	js
- * import querySelectorUp from '@coffeekraken/sugar/js/dom/query/querySelectorUp'
- * const closestElm = querySelectorUp(myCoolElement, '.my-cool-class');
+ * import { __querySelectorUp } from '@coffeekraken/sugar/dom'
+ * const closestElm =  __querySelectorUp(myCoolElement, '.my-cool-class');
  * if (closestElm) {
  * 		// we have found en element that matches the selector
  * }
  * // the selector param can be a function that need to return either true or false like so:
- * querySelectorUp(myCoolElement, (elm) => {
+ *  __querySelectorUp(myCoolElement, (elm) => {
  *   return elm.hasAttribute('my-cool-attribute')
  * })
  *
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function querySelectorUp($elm, selector) {
+function __querySelectorUp($elm, selector) {
     const originalElm = $elm;
     $elm = $elm.parentNode;
     while ($elm && $elm != originalElm.ownerDocument) {
@@ -44,12 +41,12 @@ function querySelectorUp($elm, selector) {
             if (selector($elm))
                 return $elm;
         }
-        else if (typeof selector === 'string' && (0, matches_1.default)($elm, selector)) {
+        else if (typeof selector === 'string' && (0, dom_1.__matches)($elm, selector)) {
             return $elm;
         }
         $elm = $elm.parentNode;
     }
     return null;
 }
-exports.default = querySelectorUp;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUFrQztBQUVsQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBOEJHO0FBQ0gsU0FBUyxlQUFlLENBQUMsSUFBaUIsRUFBRSxRQUEyQjtJQUNuRSxNQUFNLFdBQVcsR0FBRyxJQUFJLENBQUM7SUFDekIsSUFBSSxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUM7SUFDdkIsT0FBTyxJQUFJLElBQUksSUFBSSxJQUFJLFdBQVcsQ0FBQyxhQUFhLEVBQUU7UUFDOUMsSUFBSSxPQUFPLFFBQVEsS0FBSyxVQUFVLEVBQUU7WUFDaEMsSUFBSSxRQUFRLENBQUMsSUFBSSxDQUFDO2dCQUFFLE9BQU8sSUFBSSxDQUFDO1NBQ25DO2FBQU0sSUFBSSxPQUFPLFFBQVEsS0FBSyxRQUFRLElBQUksSUFBQSxpQkFBUyxFQUFDLElBQUksRUFBRSxRQUFRLENBQUMsRUFBRTtZQUNsRSxPQUFPLElBQUksQ0FBQztTQUNmO1FBQ0QsSUFBSSxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUM7S0FDMUI7SUFDRCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDO0FBQ0Qsa0JBQWUsZUFBZSxDQUFDIn0=
+exports.default = __querySelectorUp;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsY0FBYztBQUNkLGlEQUFvRDtBQUVwRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBOEJHO0FBQ0gsU0FBd0IsaUJBQWlCLENBQ3JDLElBQWlCLEVBQ2pCLFFBQTJCO0lBRTNCLE1BQU0sV0FBVyxHQUFHLElBQUksQ0FBQztJQUN6QixJQUFJLEdBQUcsSUFBSSxDQUFDLFVBQVUsQ0FBQztJQUN2QixPQUFPLElBQUksSUFBSSxJQUFJLElBQUksV0FBVyxDQUFDLGFBQWEsRUFBRTtRQUM5QyxJQUFJLE9BQU8sUUFBUSxLQUFLLFVBQVUsRUFBRTtZQUNoQyxJQUFJLFFBQVEsQ0FBQyxJQUFJLENBQUM7Z0JBQUUsT0FBTyxJQUFJLENBQUM7U0FDbkM7YUFBTSxJQUFJLE9BQU8sUUFBUSxLQUFLLFFBQVEsSUFBSSxJQUFBLGVBQVMsRUFBQyxJQUFJLEVBQUUsUUFBUSxDQUFDLEVBQUU7WUFDbEUsT0FBTyxJQUFJLENBQUM7U0FDZjtRQUNELElBQUksR0FBRyxJQUFJLENBQUMsVUFBVSxDQUFDO0tBQzFCO0lBQ0QsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQztBQWZELG9DQWVDIn0=

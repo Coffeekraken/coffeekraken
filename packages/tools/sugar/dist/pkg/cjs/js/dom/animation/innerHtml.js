@@ -9,7 +9,7 @@ const convert_1 = __importDefault(require("../../../shared/time/convert"));
 const injectStyle_1 = __importDefault(require("../../dom/css/injectStyle"));
 const emptyNode_1 = __importDefault(require("../manipulate/emptyNode"));
 /**
- * @name            innerHtml
+ * @name            animatedInnerHtml
  * @namespace            js.dom.animation
  * @type            Function
  * @platform          js

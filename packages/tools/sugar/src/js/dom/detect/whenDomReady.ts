@@ -15,7 +15,7 @@
  * @todo      tests
  *
  * @example  	js
- * import __whenDomReady from '@coffeekraken/sugar/js/dom/detect/whenDomReady'
+ * import { __whenDomReady } from '@coffeekraken/sugar/dom'
  * // using promise
  * __whenDomReady().then(() => {
  * 		// do something
@@ -25,7 +25,7 @@
  * @since           1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function whenDomReady(): Promise<void> {
+export default function __whenDomReady(): Promise<void> {
     return new Promise((resolve) => {
         if (document.readyState === 'complete') {
             resolve();

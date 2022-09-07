@@ -18,13 +18,16 @@
  * @todo      tests
  *
  * @example  	js
- * import insertAfter from '@coffeekraken/sugar/js/dom/insertAfter'
- * insertAfter(myElementToInsert, theReferenceElement);
+ * import { __insertAfter } from '@coffeekraken/sugar/dom'
+ * __insertAfter(myElementToInsert, theReferenceElement);
  *
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function insertAfter(elm: HTMLElement, refElm: HTMLElement): HTMLElement {
+export default function __insertAfter(
+    elm: HTMLElement,
+    refElm: HTMLElement,
+): HTMLElement {
     // next sibling of ref elm
     const nextSibling = refElm.nextSibling;
     if (!nextSibling) {
@@ -34,4 +37,3 @@ function insertAfter(elm: HTMLElement, refElm: HTMLElement): HTMLElement {
     }
     return elm;
 }
-export default insertAfter;

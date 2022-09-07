@@ -14,14 +14,14 @@
  * @todo        tests
  *
  * @example         js
- * import __adoptStyleInShadowRoot from '@coffeekraken/sugar/js/dom/css/adoptStyleInShadowRoot';
+ * import { __adoptStyleInShadowRoot } from '@coffeekraken/sugar/dom';
  * const myShadowRoot = $myElement.shadowRoot;
  * await __adoptStyleInShadowRoot(myShadowRoot);
  *
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-export default async function adoptStyleInShadowRoot(
+export default async function __adoptStyleInShadowRoot(
     $shadowRoot: HTMLElement,
     $context: HTMLElement | typeof document = document,
 ): Promise<any> {

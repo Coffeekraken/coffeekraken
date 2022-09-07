@@ -1,8 +1,10 @@
 // @ts-nocheck
 
-import __isVisible from './isVisible';
-import __isInViewport from './isInViewport';
-import __closestNotVisible from './query/closestNotVisible';
+import {
+    __isInViewport,
+    __isVisible,
+    __closestNotVisible,
+} from '@coffeekraken/sugar/dom';
 
 /**
  * @name      querySelectorAll
@@ -30,12 +32,12 @@ import __closestNotVisible from './query/closestNotVisible';
  * @todo      tests
  *
  * @example 	js
- * import querySelectorAll from '@coffeekraken/sugar/js/dom/query/querySelectorAll';
+ * import { __querySelectorAll } from '@coffeekraken/sugar/dom';
  * // simple query
- * const elms = querySelectorAll('.a-cool-css-selector');
+ * const elms = __querySelectorAll('.a-cool-css-selector');
  *
  * // get elements that are in the viewport
- * const elms = querySelectorAll('.a-cool-css-selector', {
+ * const elms = __querySelectorAll('.a-cool-css-selector', {
  * 		inViewport : true
  * });
  *
@@ -49,7 +51,7 @@ export interface IQuerySelectorAllSettings {
     rootNode: HTMLElement;
 }
 
-function querySelectorAll(
+export default function __querySelectorAll(
     selector: string,
     settings: Partial<IQuerySelectorAllSettings> = {},
 ): HTMLElement[] {
@@ -88,4 +90,3 @@ function querySelectorAll(
     // return the elements
     return results;
 }
-export default querySelectorAll;

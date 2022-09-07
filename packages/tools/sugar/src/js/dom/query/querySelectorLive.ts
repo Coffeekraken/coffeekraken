@@ -29,11 +29,11 @@ import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
  * @setting         {Boolean}              [once=true]                If true, each observed nodes will be handled only once even if they are removed and reinjected in the dom
  *
  * @example 	js
- * import querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive'
- * querySelectorLive('.my-cool-item', (node, clearFn) => {
+ * import { __querySelectorLive } from '@coffeekraken/sugar/dom'
+ * __querySelectorLive('.my-cool-item', (node, api) => {
  * 	    // do something here with the detected node
- *      // call clearFn if you want to stop listening for this selector
- *      clearFn();
+ *      // call api.cancel if you want to stop listening for this selector
+ *      api.cancel();
  * });
  *
  * @since       1.0.0
@@ -51,7 +51,7 @@ let _observer,
     _idx = 0,
     _stack = new Map();
 
-function querySelectorLive(
+export default function __querySelectorLive(
     selector: string,
     cb: Function<HTMLElement> = null,
     settings: Partial<IQuerySelectorLiveSettings> = {},
@@ -135,7 +135,7 @@ function querySelectorLive(
         let isAfterCalledByScopeId = {};
 
         // search for scopes and handle nested nodes
-        querySelectorLive(
+        __querySelectorLive(
             '[s-scope]',
             async ($scope) => {
                 // get or generate a new id
@@ -145,7 +145,7 @@ function querySelectorLive(
                 }
 
                 await __whenNearViewport($scope);
-                querySelectorLive(
+                __querySelectorLive(
                     selector,
                     ($elm) => {
                         // findAndProcess($scope, selector);
@@ -176,7 +176,7 @@ function querySelectorLive(
             },
         );
         // handle things not in a scope
-        querySelectorLive(
+        __querySelectorLive(
             noScopeSelector,
             ($elm) => {
                 // findAndProcess($scope, selector);
@@ -225,5 +225,3 @@ function querySelectorLive(
 
     return pro;
 }
-
-export default querySelectorLive;

@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import whenInViewport from '../dom/whenInViewport';
-import querySelectorLive from '../dom/querySelectorLive';
+import { __querySelectorLive } from '@coffeekraken/sugar/dom';
 
 /**
  * @name 		videoLazySrcAttribute
@@ -42,7 +42,7 @@ function videoLazySrcAttribute(
         offset: 50,
         ...settings,
     };
-    querySelectorLive('video[lazy-src]:not([is])', ($videoElm) => {
+    __querySelectorLive('video[lazy-src]:not([is])', ($videoElm) => {
         whenInViewport($videoElm, settings.offset).then(() => {
             $videoElm.setAttribute('src', $videoElm.getAttribute('lazy-src'));
         });

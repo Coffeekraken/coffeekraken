@@ -21,8 +21,8 @@ import __SPromise from '@coffeekraken/s-promise';
  * @todo      tests
  *
  * @example  	js
- * import observeAttributes from '@coffeekraken/sugar/js/dom/observeAttributes'
- * const observer = observeAttributes(myCoolHTMLElement).then(mutation => {
+ * import { __observeAttributes } from '@coffeekraken/sugar/dom'
+ * const observer =  __observeAttributes(myCoolHTMLElement).then(mutation => {
  * 		// do something with the mutation
  * });
  * / the observer
@@ -32,7 +32,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * @since       1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function observeAttributes(
+export default function __observeAttributes(
     target: HTMLElement,
     settings: any = {},
 ): __SPromise<any> {
@@ -62,12 +62,3 @@ function observeAttributes(
     });
     return pro;
 }
-
-/**
- * List of attributes to observe
- * @setting
- * @name 		attributes
- * @type 		{Array}
- * @default 	null
- */
-export default observeAttributes;

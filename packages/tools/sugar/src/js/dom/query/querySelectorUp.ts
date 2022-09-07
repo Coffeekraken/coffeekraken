@@ -1,6 +1,5 @@
 // @ts-nocheck
-
-import __matches from './matches';
+import { __matches } from '@coffeekraken/sugar/dom';
 
 /**
  * @name        querySelectorUp
@@ -20,20 +19,23 @@ import __matches from './matches';
  * @todo      tests
  *
  * @example  	js
- * import querySelectorUp from '@coffeekraken/sugar/js/dom/query/querySelectorUp'
- * const closestElm = querySelectorUp(myCoolElement, '.my-cool-class');
+ * import { __querySelectorUp } from '@coffeekraken/sugar/dom'
+ * const closestElm =  __querySelectorUp(myCoolElement, '.my-cool-class');
  * if (closestElm) {
  * 		// we have found en element that matches the selector
  * }
  * // the selector param can be a function that need to return either true or false like so:
- * querySelectorUp(myCoolElement, (elm) => {
+ *  __querySelectorUp(myCoolElement, (elm) => {
  *   return elm.hasAttribute('my-cool-attribute')
  * })
  *
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function querySelectorUp($elm: HTMLElement, selector: string | Function): HTMLElement {
+export default function __querySelectorUp(
+    $elm: HTMLElement,
+    selector: string | Function,
+): HTMLElement {
     const originalElm = $elm;
     $elm = $elm.parentNode;
     while ($elm && $elm != originalElm.ownerDocument) {
@@ -46,4 +48,3 @@ function querySelectorUp($elm: HTMLElement, selector: string | Function): HTMLEl
     }
     return null;
 }
-export default querySelectorUp;

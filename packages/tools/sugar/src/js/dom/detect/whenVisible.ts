@@ -1,7 +1,6 @@
 // @ts-nocheck
 
-import __isVisible from '../is/visible';
-import __closestNotVisible from '../query/closestNotVisible';
+import { __isVisible, __closestNotVisible } from '@coffeekraken/sugar/dom';
 
 /**
  * @name      whenVisible
@@ -23,7 +22,7 @@ import __closestNotVisible from '../query/closestNotVisible';
  * @todo      tests
  *
  * @example 	js
- * import __whenVisible from '@coffeekraken/sugar/js/dom/whenVisible'
+ * import { __whenVisible } from '@coffeekraken/sugar/js/dom/whenVisible'
  * __whenVisible(myCoolHTMLElement).then((elm) => {
  * 		// do something with your element that is now visible
  * });
@@ -31,7 +30,7 @@ import __closestNotVisible from '../query/closestNotVisible';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function whenVisible(
+export default function __whenVisible(
     $elm: HTMLElement,
     cb: Function = null,
 ): Promise<HTMLElement> {

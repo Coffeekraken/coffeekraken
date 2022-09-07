@@ -23,7 +23,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * @todo      tests
  *
  * @example 	js
- * import __whenInViewport from '@coffeekraken/sugar/js/dom/whenInViewport'
+ * import { __whenInViewport } from '@coffeekraken/sugar/dom'
  * const promise = __whenInViewport(myCoolHTMLElement).then((elm) => {
  * 		// do something with your element that has entered the viewport...
  * });
@@ -38,7 +38,7 @@ export interface IWhenInViewportSettings {
     offset: string;
 }
 
-export default function whenInViewport(
+export default function __whenInViewport(
     elm: HTMLElement,
     settings: Partials<IWhenInViewportSettings> = {},
 ): Promise<HTMLElement> {

@@ -6,10 +6,12 @@ import __SInterface from '@coffeekraken/s-interface';
 import __SPromise from '@coffeekraken/s-promise';
 import __SState from '@coffeekraken/s-state';
 import __STheme from '@coffeekraken/s-theme';
-import __adoptStyleInShadowRoot from '@coffeekraken/sugar/js/dom/css/adoptStyleInShadowRoot';
+
+import { __adoptStyleInShadowRoot } from '@coffeekraken/sugar/dom';
+
 import __injectStyle from '@coffeekraken/sugar/js/dom/css/injectStyle';
 import __inViewportStatusChange from '@coffeekraken/sugar/js/dom/detect/inViewportStatusChange';
-import __when from '@coffeekraken/sugar/js/dom/detect/when';
+import { __when } from '@coffeekraken/sugar/dom';
 import __debounce from '@coffeekraken/sugar/shared/function/debounce';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';

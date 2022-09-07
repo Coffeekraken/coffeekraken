@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __querySelectorLive from '../dom/query/querySelectorLive';
+import { __querySelectorLive } from '@coffeekraken/sugar/dom';
 
 /**
  * @name 		handleInputAttributes

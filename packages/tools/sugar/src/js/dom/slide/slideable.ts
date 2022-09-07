@@ -1,13 +1,13 @@
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarElement from '@coffeekraken/s-sugar-element';
+import { __onDrag } from '@coffeekraken/sugar/dom';
 import __easeOut from '../../../shared/easing/easeOutQuad';
 import __easeInterval from '../../../shared/function/easeInterval';
 import __clamp from '../../../shared/math/clamp';
 import __easeClamp from '../../../shared/math/easeClamp';
 import __uniqid from '../../../shared/string/uniqid';
 import __injectStyle from '../css/injectStyle';
-import __onDrag from '../detect/onDrag';
-import __areaStats from '../element/areaStats';
+import { __elementAreaStats } from '@coffeekraken/sugar/dom';
 
 /**
  * @name      slideable
@@ -55,7 +55,7 @@ function _getMostDisplayedItem($items: HTMLElement[]): HTMLElement {
 
     for (let i = 0; i < $items.length; i++) {
         const $item = $items[i];
-        const areaStats = __areaStats($item, {
+        const areaStats = __elementAreaStats($item, {
             relativeTo: <HTMLElement>$item.parentNode?.parentNode,
         });
         if (areaStats.percentage > higherSurface) {

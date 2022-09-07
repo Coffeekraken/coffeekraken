@@ -21,7 +21,7 @@ import __packageRoot from '../path/packageRoot';
  * @return          {ICoffeekrakenMetas}                The coffeekraken metas object
  *
  * @example         js
- * import __getCoffeekrakenMetas from '@coffeekraken/sugar/node/coffeekraken/getCoffeekrakenMetas';
+ * import { __getCoffeekrakenMetas } from '@coffeekraken/sugar/coffeekraken';
  * await __getCoffeekrakenMetas();
  *
  * @since       2.0.0

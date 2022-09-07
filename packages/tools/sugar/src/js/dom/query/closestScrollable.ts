@@ -1,5 +1,5 @@
 // @ts-nocheck
-import __isScrollable from '../is/scrollable';
+import { __isScrollable } from '@coffeekraken/sugar/dom';
 import __traverseUp from '../traverse/up';
 
 /**
@@ -19,13 +19,13 @@ import __traverseUp from '../traverse/up';
  * @todo      tests
  *
  * @example  	js
- * import __closestScrollable from '@coffeekraken/sugar/js/node/query/closestScrollable';
+ * import { __closestScrollable } from '@coffeekraken/sugar/dom';
  * __closestScrollable($myElement);
  *
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function closestScrollable(
+export default function __closestScrollable(
     $elm: HTMLElement,
     selector: string | Function,
 ): HTMLElement {

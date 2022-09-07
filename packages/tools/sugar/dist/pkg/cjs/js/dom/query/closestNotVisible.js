@@ -1,10 +1,7 @@
 "use strict";
 // @ts-nocheck
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const visible_1 = __importDefault(require("../is/visible"));
+const dom_1 = require("@coffeekraken/sugar/dom");
 /**
  * @name        closestNotVisible
  * @namespace            js.dom.query
@@ -23,8 +20,8 @@ const visible_1 = __importDefault(require("../is/visible"));
  * @todo      tests
  *
  * @example  	js
- * import closestNotVisible from '@coffeekraken/sugar/js/dom/query/closestNotVisible'
- * const closestElm = closestNotVisible(myCoolElement);
+ * import { __closestNotVisible } from '@coffeekraken/sugar/dom'
+ * const closestElm =  __closestNotVisible(myCoolElement);
  * if (closestElm) {
  * 		// we have found en element that is not visible
  * }
@@ -32,16 +29,16 @@ const visible_1 = __importDefault(require("../is/visible"));
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function closestNotVisible(elm) {
+function __closestNotVisible(elm) {
     const originalElm = elm;
     elm = elm.parentNode;
     while (elm && elm != originalElm.ownerDocument) {
-        if (!(0, visible_1.default)(elm)) {
+        if (!(0, dom_1.__isVisible)(elm)) {
             return elm;
         }
         elm = elm.parentNode;
     }
     return null;
 }
-exports.default = closestNotVisible;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDREQUF3QztBQUV4Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EwQkc7QUFDSCxTQUFTLGlCQUFpQixDQUFDLEdBQWdCO0lBQ3ZDLE1BQU0sV0FBVyxHQUFHLEdBQUcsQ0FBQztJQUN4QixHQUFHLEdBQUcsR0FBRyxDQUFDLFVBQVUsQ0FBQztJQUNyQixPQUFPLEdBQUcsSUFBSSxHQUFHLElBQUksV0FBVyxDQUFDLGFBQWEsRUFBRTtRQUM1QyxJQUFJLENBQUMsSUFBQSxpQkFBVyxFQUFDLEdBQUcsQ0FBQyxFQUFFO1lBQ25CLE9BQU8sR0FBRyxDQUFDO1NBQ2Q7UUFDRCxHQUFHLEdBQUcsR0FBRyxDQUFDLFVBQVUsQ0FBQztLQUN4QjtJQUNELE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUM7QUFDRCxrQkFBZSxpQkFBaUIsQ0FBQyJ9
+exports.default = __closestNotVisible;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkLGlEQUFzRDtBQUV0RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EwQkc7QUFDSCxTQUF3QixtQkFBbUIsQ0FBQyxHQUFnQjtJQUN4RCxNQUFNLFdBQVcsR0FBRyxHQUFHLENBQUM7SUFDeEIsR0FBRyxHQUFHLEdBQUcsQ0FBQyxVQUFVLENBQUM7SUFDckIsT0FBTyxHQUFHLElBQUksR0FBRyxJQUFJLFdBQVcsQ0FBQyxhQUFhLEVBQUU7UUFDNUMsSUFBSSxDQUFDLElBQUEsaUJBQVcsRUFBQyxHQUFHLENBQUMsRUFBRTtZQUNuQixPQUFPLEdBQUcsQ0FBQztTQUNkO1FBQ0QsR0FBRyxHQUFHLEdBQUcsQ0FBQyxVQUFVLENBQUM7S0FDeEI7SUFDRCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDO0FBVkQsc0NBVUMifQ==

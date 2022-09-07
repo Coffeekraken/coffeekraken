@@ -1,8 +1,7 @@
 // @ts-nocheck
 
-import __isInViewport from '../is/inViewport';
+import { __isInViewport, __closest } from '@coffeekraken/sugar/dom';
 import __throttle from '../../../shared/function/throttle';
-import __closest from '../query/closest';
 
 /**
  * @name      whenOutOfViewport
@@ -26,7 +25,7 @@ import __closest from '../query/closest';
  * @todo      tests
  *
  * @example 	js
- * import __whenOutOfViewport from '@coffeekraken/sugar/js/dom/whenOutOfViewport'
+ * import { __whenOutOfViewport } from '@coffeekraken/sugar/dom'
  * __whenOutOfViewport(myCoolHTMLElement).then((elm) => {
  * 		// do something with your element that has exit the viewport...
  * });
@@ -39,7 +38,7 @@ export interface IWhenOutOfViewportSettings {
     offset: number;
 }
 
-export default function whenOutOfViewport(
+export default function __whenOutOfViewport(
     elm: HTMLElement,
     settings: Partial<IWhenOutOfViewportSettings> = {},
 ) {

@@ -18,8 +18,8 @@
  * @todo      tests
  *
  * @example  	js
- * import matches from '@coffeekraken/sugar/js/dom/query/matches'
- * if (matches(myCoolHTMLElement, '.my-cool-css-selector')) {
+ * import { __matches } from '@coffeekraken/sugar/dom'
+ * if (__matches(myCoolHTMLElement, '.my-cool-css-selector')) {
  * 		// the element match the selector
  * }
  *
@@ -27,7 +27,7 @@
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function matches(el: HTMLElement, selector: string): boolean {
+export default function __matches(el: HTMLElement, selector: string): boolean {
     if (el.nodeName == '#comment' || el.nodeName == '#text') {
         return false;
     }
@@ -42,4 +42,3 @@ function matches(el: HTMLElement, selector: string): boolean {
         };
     return f.call(el, selector);
 }
-export default matches;

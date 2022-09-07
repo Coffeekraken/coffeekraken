@@ -14,24 +14,24 @@
  * @todo      tests
  *
  * @example 	js
- * import cursorToEnd from '@coffeekraken/sugar/js/dom/input/cursorToEnd';
- * cursorToEnd($input);
+ * import { __cursorToEnd } from '@coffeekraken/sugar/dom';
+ * __cursorToEnd($input);
  *
  * @see             https://stackoverflow.com/a/56416714
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierboss$input.com)
  */
-export default function cursorToEnd($input) {
+export default function __cursorToEnd($input) {
     $input.focus();
     setTimeout(() => {
-        if (typeof $input.selectionStart == "number") {
+        if (typeof $input.selectionStart == 'number') {
             $input.selectionStart = $input.selectionEnd = $input.value.length;
         }
-        else if (typeof $input.createTextRange != "undefined") {
+        else if (typeof $input.createTextRange != 'undefined') {
             var range = $input.createTextRange();
             range.collapse(false);
             range.select();
         }
     });
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSxXQUFXLENBQUMsTUFBTTtJQUN4QyxNQUFNLENBQUMsS0FBSyxFQUFFLENBQUM7SUFDZixVQUFVLENBQUMsR0FBRyxFQUFFO1FBQ2QsSUFBSSxPQUFPLE1BQU0sQ0FBQyxjQUFjLElBQUksUUFBUSxFQUFFO1lBQzFDLE1BQU0sQ0FBQyxjQUFjLEdBQUcsTUFBTSxDQUFDLFlBQVksR0FBRyxNQUFNLENBQUMsS0FBSyxDQUFDLE1BQU0sQ0FBQztTQUNyRTthQUFNLElBQUksT0FBTyxNQUFNLENBQUMsZUFBZSxJQUFJLFdBQVcsRUFBRTtZQUNyRCxJQUFJLEtBQUssR0FBRyxNQUFNLENBQUMsZUFBZSxFQUFFLENBQUM7WUFDckMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxLQUFLLENBQUMsQ0FBQztZQUN0QixLQUFLLENBQUMsTUFBTSxFQUFFLENBQUM7U0FDbEI7SUFDSCxDQUFDLENBQUMsQ0FBQztBQUNMLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSxhQUFhLENBQUMsTUFBTTtJQUN4QyxNQUFNLENBQUMsS0FBSyxFQUFFLENBQUM7SUFDZixVQUFVLENBQUMsR0FBRyxFQUFFO1FBQ1osSUFBSSxPQUFPLE1BQU0sQ0FBQyxjQUFjLElBQUksUUFBUSxFQUFFO1lBQzFDLE1BQU0sQ0FBQyxjQUFjLEdBQUcsTUFBTSxDQUFDLFlBQVksR0FBRyxNQUFNLENBQUMsS0FBSyxDQUFDLE1BQU0sQ0FBQztTQUNyRTthQUFNLElBQUksT0FBTyxNQUFNLENBQUMsZUFBZSxJQUFJLFdBQVcsRUFBRTtZQUNyRCxJQUFJLEtBQUssR0FBRyxNQUFNLENBQUMsZUFBZSxFQUFFLENBQUM7WUFDckMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxLQUFLLENBQUMsQ0FBQztZQUN0QixLQUFLLENBQUMsTUFBTSxFQUFFLENBQUM7U0FDbEI7SUFDTCxDQUFDLENBQUMsQ0FBQztBQUNQLENBQUMifQ==

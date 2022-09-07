@@ -22,10 +22,9 @@ const clipboardy_1 = __importDefault(require("clipboardy"));
  * @todo      tests
  *
  * @example       js
- * import read from '@coffeekraken/sugar/node/clipboard/read';
- * import copy from '@coffeekraken/sugar/node/clipboard/copy';
- * copy('Hello world');
- * read(); // => Hello world
+ * import { __copy, __read } from '@coffeekraken/sugar/clipboard';
+ * __copy('Hello world');
+ * __read(); // => Hello world
  *
  * @since       2.0.0
  * @see         https://www.npmjs.com/package/clipboardy
@@ -35,4 +34,4 @@ function read() {
     return clipboardy_1.default.readSync();
 }
 exports.default = read;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDREQUFzQztBQUV0Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXlCRztBQUNILFNBQVMsSUFBSTtJQUNULE9BQU8sb0JBQVksQ0FBQyxRQUFRLEVBQUUsQ0FBQztBQUNuQyxDQUFDO0FBQ0Qsa0JBQWUsSUFBSSxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDREQUFzQztBQUV0Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBUyxJQUFJO0lBQ1QsT0FBTyxvQkFBWSxDQUFDLFFBQVEsRUFBRSxDQUFDO0FBQ25DLENBQUM7QUFDRCxrQkFBZSxJQUFJLENBQUMifQ==

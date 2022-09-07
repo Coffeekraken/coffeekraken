@@ -25,15 +25,15 @@ import __SPromise from '@coffeekraken/s-promise';
  * @todo      tests
  *
  * @example    js
- * import addEventListener from '@coffeekraken/sugar/js/dom/addEventListener'
- * const listener = addEventListener($myCoolElm, 'click', (event) => {
+ * import { __addEventListener } from '@coffeekraken/sugar/dom'
+ * const listener = __addEventListener($myCoolElm, 'click', (event) => {
  *    // event.type; // => click
  * });
  * // remove the event listener
  * listener.cancel();
  *
  * // listen for more than one event at a time
- * addEventListener($myCoolElm, 'click,mouseover,mouseout', (event) => {
+ * __addEventListener($myCoolElm, 'click,mouseover,mouseout', (event) => {
  *    // do something depending on the event.type property
  * }).on('mouseover', (event) => {
  *    // do something when the event is the mouseover one
@@ -42,7 +42,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function addEventListener(
+function __addEventListener(
     $elm,
     eventNames,
     callback = null,

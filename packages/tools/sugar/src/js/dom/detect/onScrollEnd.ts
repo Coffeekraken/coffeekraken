@@ -22,7 +22,7 @@
  * @todo      tests
  *
  * @example         js
- * import __onScrollEnd from '@coffeekraken/sugar/js/dom/detect/onScrollEnd';
+ * import { __onScrollEnd } from '@coffeekraken/sugar/dom';
  * __onScrollEnd($elm, () => {
  *      // do something
  * }, {
@@ -38,7 +38,7 @@ export interface IOnScrollEndSettings {
     times: number;
 }
 
-export default function onScrollEnd(
+export default function __onScrollEnd(
     $elm: HTMLElement,
     callback: Function,
     settings?: IOnScrollEndSettings,

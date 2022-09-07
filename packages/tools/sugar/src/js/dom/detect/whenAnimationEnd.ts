@@ -1,7 +1,8 @@
 // @ts-nocheck
 
 import __SPromise from '@coffeekraken/s-promise';
-import __addEventListenerOnce from '../event/addEventListenerOnce';
+
+import { __addEventListenerOnce } from '@coffeekraken/sugar/dom';
 
 /**
  * @name      whenAnimationEnd
@@ -19,13 +20,13 @@ import __addEventListenerOnce from '../event/addEventListenerOnce';
  * @todo      tests
  *
  * @example    js
- * import __whenAnimationEnd from '@coffeekraken/sugar/js/dom/whenAnimationEnd'
+ * import { __whenAnimationEnd } from '@coffeekraken/sugar/dom'
  * await __whenAnimationEnd(myCoolElm);
  *
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function whenAnimationEnd(
+export default function __whenAnimationEnd(
     $elm: HTMLElement,
 ): __SPromise<HTMLElement> {
     return new __SPromise(({ resolve }) => {

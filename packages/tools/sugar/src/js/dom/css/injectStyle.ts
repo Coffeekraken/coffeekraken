@@ -20,8 +20,8 @@ import __uniqid from '../../../shared/string/uniqid';
  * @todo        tests
  *
  * @example       js
- * import injectStyle from '@coffeekraken/sugar/js/dom/css/injectStyle';
- * injectStyle('a { color: red; }');
+ * import { __injectStyle } from '@coffeekraken/sugar/dom';
+ *  __injectStyle('a { color: red; }');
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -32,7 +32,7 @@ export interface IInjectStyleSettings {
     rootNode: HTMLElement;
 }
 
-export default function injectStyle(
+export default function __injectStyle(
     style: string,
     settings?: Partial<IInjectStyleSettings>,
 ) {

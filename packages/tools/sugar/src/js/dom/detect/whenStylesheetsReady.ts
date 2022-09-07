@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __linkLoaded from '../load/linkLoaded';
+import { __whenLinkLoaded } from '@coffeekraken/sugar/dom';
 /**
  * @name      whenStylesheetsReady
  * @namespace            js.dom.detect
@@ -22,7 +22,7 @@ import __linkLoaded from '../load/linkLoaded';
  * @todo      tests
  *
  * @example 	js
- * import __whenStylesheetsReady from '@coffeekraken/sugar/js/dom/whenStylesheetsReady'
+ * import { __whenStylesheetsReady } from '@coffeekraken/sugar/dom'
  * await __whenStylesheetsReady([
  * 		myHTMLLinkElement1,
  * 		myHTMLLinkElement2
@@ -31,7 +31,7 @@ import __linkLoaded from '../load/linkLoaded';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function whenStylesheetsReady(
+export default function __whenStylesheetsReady(
     links: HTMLLinkElement[] = null,
     cb: Function = null,
 ): Promise<void> {
@@ -40,7 +40,7 @@ export default function whenStylesheetsReady(
     }
     const promises = [];
     [].forEach.call(links, ($link) => {
-        promises.push(__linkLoaded($link));
+        promises.push(__whenLinkLoaded($link));
     });
     const allPromises = Promise.all(promises);
     allPromises.then(() => {

@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import deepMerge from '../../shared/object/deepMerge';
-import querySelectorLive from '../dom/query/querySelectorLive';
+import { __querySelectorLive } from '@coffeekraken/sugar/dom';
 
 /**
  * @name 		linksStateAttributes
@@ -123,7 +123,7 @@ function linksStateAttributes(
         }
     }
 
-    querySelectorLive(`[href]`, ($linkElm) => {
+    __querySelectorLive(`[href]`, ($linkElm) => {
         handleLink($linkElm);
         setTimeout(() => {
             handleLink($linkElm);

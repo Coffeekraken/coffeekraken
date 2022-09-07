@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
-import __isUserScrolling from '@coffeekraken/sugar/js/dom/is/userScrolling';
+import { __isUserScrolling } from '@coffeekraken/sugar/dom';
 import type {
     IFloatApi,
     IFloatSettings,

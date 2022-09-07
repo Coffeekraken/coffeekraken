@@ -8,9 +8,11 @@ import __SFiltrableInputComponentInterface from './interface/SFiltrableInputComp
 
 import __cursorToEnd from '@coffeekraken/sugar/js/dom/input/cursorToEnd';
 
-import __onScrollEnd from '@coffeekraken/sugar/js/dom/detect/onScrollEnd';
-import __distanceFromElementTopToViewportBottom from '@coffeekraken/sugar/js/dom/distance/fromElementTopToViewportBottom';
-import __distanceFromElementTopToViewportTop from '@coffeekraken/sugar/js/dom/distance/fromElementTopToViewportTop';
+import { __onScrollEnd } from '@coffeekraken/sugar/dom';
+import {
+    __distanceFromElementTopToViewportBottom,
+    __distanceFromElementTopToViewportTop,
+} from '@coffeekraken/sugar/dom';
 import __stripTags from '@coffeekraken/sugar/js/dom/manipulate/stripTags';
 import __getStyleProperty from '@coffeekraken/sugar/js/dom/style/getStyleProperty';
 import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';

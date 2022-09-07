@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __imageLoaded from '../dom/load/imageLoaded';
+import { __whenImageLoaded } from '@coffeekraken/sugar/dom';
 import __deepMerge from '../../shared/object/deepMerge';
 
 /**
@@ -38,7 +38,7 @@ function imagesLoadedAttribute(): void {
         true,
     );
     [].forEach.call(document.querySelectorAll('img'), (img) => {
-        __imageLoaded(img).then((img) => {
+        __whenImageLoaded(img).then((img) => {
             if (img.hasAttribute('loaded')) return;
             img.setAttribute('loaded', true);
         });

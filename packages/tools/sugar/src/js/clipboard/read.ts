@@ -11,7 +11,7 @@
  * @return      {Promise}                          A promise fullfilled when the content has been read correctly
  *
  * @example         js
- * import __read from '@coffeekraken/sugar/js/clipboard/read';
+ * import { __copy, __read } from '@coffeekraken/sugar/clipboard';
  * await __read();
  *
  * @since           2.0.0

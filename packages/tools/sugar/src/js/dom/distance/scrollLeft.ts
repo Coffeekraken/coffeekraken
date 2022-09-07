@@ -14,15 +14,14 @@
  * @todo      tests
  *
  * @example    js
- * import scrollLeft from '@coffeekraken/sugar/js/dom/scrollLeft'
- * scrollLeft() // 40
+ * import { __scrollLeft } from '@coffeekraken/sugar/dom'
+ * __scrollLeft() // 40
  *
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivier.bossel@gmail.com)
  */
-function scrollLeft(): number {
+export default function __scrollLeft(): number {
     return (
         window.pageXOffset || document.scrollLeft || document.body.scrollLeft
     );
 }
-export default scrollLeft;

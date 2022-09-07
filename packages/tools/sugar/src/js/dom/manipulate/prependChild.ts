@@ -18,13 +18,16 @@
  * @todo      tests
  *
  * @example  	js
- * import prependChild from '@coffeekraken/sugar/js/dom/prependChild'
- * prependChild(myElementToInsert, theReferenceElement);
+ * import { __prependChild } from '@coffeekraken/sugar/dom'
+ * __prependChild(myElementToInsert, theReferenceElement);
  *
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function prependChild(elm: HTMLElement, refElm: HTMLElement): HTMLElement {
+export default function __prependChild(
+    elm: HTMLElement,
+    refElm: HTMLElement,
+): HTMLElement {
     if (!refElm.firstChild) {
         refElm.appendChild(elm);
     } else {
@@ -32,4 +35,3 @@ function prependChild(elm: HTMLElement, refElm: HTMLElement): HTMLElement {
     }
     return elm;
 }
-export default prependChild;

@@ -2,29 +2,24 @@
 import __SPromise from '@coffeekraken/s-promise';
 
 import type { IWhenInViewportSettings } from './whenInViewport';
-import __whenInViewport from './whenInViewport';
-
 import type { IWhenNearViewportSettings } from './whenNearViewport';
-import __whenNearViewport from './whenNearViewport';
-
 import type { IWhenEntersViewportSettings } from './whenEntersViewport';
-import __whenEntersViewport from './whenEntersViewport';
-
 import type { IWhenOutOfViewportSettings } from './whenOutOfViewport';
-import __whenOutOfViewport from './whenOutOfViewport';
-
 import type { IWhenInteractSettings } from './whenInteract';
-import __whenInteract from './whenInteract';
-
-import __whenDomReady from './whenDomReady';
-
 import type { IWhenVisibleSettings } from './whenVisible';
-import __whenVisible from './whenVisible';
-
 import type { IWhenStyleSheetsReadySettings } from './whenStylesheetsReady';
-import __whenStylesheetsReady from './whenStylesheetsReady';
 
-import __whenAnimationEnd from './whenAnimationEnd';
+import {
+    __whenAnimationEnd,
+    __whenDomReady,
+    __whenEntersViewport,
+    __whenInteract,
+    __whenInViewport,
+    __whenNearViewport,
+    __whenOutOfViewport,
+    __whenStylesheetsReady,
+    __whenVisible,
+} from '@coffeekraken/sugar/dom';
 
 /**
  * @name            when
@@ -52,7 +47,7 @@ import __whenAnimationEnd from './whenAnimationEnd';
  * @todo      tests
  *
  * @example         js
- * import __when from '@coffeekraken/sugar/js/dom/detect/when';
+ * import { __when } from '@coffeekraken/sugar/dom';
  * __when($elm, 'inViewport', () => {
  *      // do something
  * }, {
@@ -101,7 +96,7 @@ export const triggers = [
     'animationEnd',
 ];
 
-export default function when(
+export default function __when(
     $elm: HTMLElement,
     trigger: TWhenTrigger[],
     settings?: IwhenSettings,

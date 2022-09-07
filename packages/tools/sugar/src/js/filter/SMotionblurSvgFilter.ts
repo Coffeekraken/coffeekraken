@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __offset from '../dom/offset/offset';
+import { __offsetFromViewport } from '@coffeekraken/sugar/dom';
 import forceRedraw from '../dom/utlls/forceRedraw';
 import SSvgFilter from './SSvgFilter';
 
@@ -106,7 +106,7 @@ export default class SMotionblurSvgFilter extends SSvgFilter {
         elm.addEventListener('transitionend', this._onMotionStopFn);
         elm.addEventListener('animationend', this._onMotionStopFn);
         elm.addEventListener('dragend', this._onMotionStopFn);
-        this._lastPos = __offset(this.elms[0]);
+        this._lastPos = __offsetFromViewport(this.elms[0]);
     }
 
     /**
@@ -205,7 +205,7 @@ export default class SMotionblurSvgFilter extends SSvgFilter {
      * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _setMotionBlur() {
-        this._currentPos = __offset(this.elms[0]);
+        this._currentPos = __offsetFromViewport(this.elms[0]);
         const xDiff =
             Math.abs(this._currentPos.left - this._lastPos.left) * this.amount;
         const yDiff =
@@ -215,7 +215,7 @@ export default class SMotionblurSvgFilter extends SSvgFilter {
         this._blur.setAttribute('stdDeviation', xDiff + ',' + yDiff);
 
         // update lastPos
-        this._lastPos = __offset(this.elms[0]);
+        this._lastPos = __offsetFromViewport(this.elms[0]);
 
         // return the diff
         return {

@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __matches from './matches';
+import { __matches } from '@coffeekraken/sugar/dom';
 
 /**
  * @name      previous
@@ -20,8 +20,8 @@ import __matches from './matches';
  * @todo      tests
  *
  * @example  	js
- * import previous from '@coffeekraken/sugar/js/dom/query/previous'
- * const previousElm = previous(myCoolElement, '.my-cool-class');
+ * import { __previous } from '@coffeekraken/sugar/dom'
+ * const previousElm = __previous(myCoolElement, '.my-cool-class');
  * if (previousElm) {
  * 		// we have found en element that matches the selector
  * }
@@ -29,7 +29,10 @@ import __matches from './matches';
  * @since       1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function previous(elm: HTMLElement, selector: string): HTMLElement {
+export default function __previous(
+    elm: HTMLElement,
+    selector: string,
+): HTMLElement {
     elm = elm.previousSibling;
     while (elm) {
         if (__matches(elm, selector)) {
@@ -39,4 +42,3 @@ function previous(elm: HTMLElement, selector: string): HTMLElement {
     }
     return false;
 }
-export default previous;

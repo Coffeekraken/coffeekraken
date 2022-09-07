@@ -9,7 +9,10 @@ import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __STypescriptBuilder from '@coffeekraken/s-typescript-builder';
 import __SVite from '@coffeekraken/s-vite';
-import __copy from '@coffeekraken/sugar/node/clipboard/copy';
+
+import { __copy } from '@coffeekraken/sugar/clipboard';
+
+// import __copy from '@coffeekraken/sugar/node/clipboard/copy';
 import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
 import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';

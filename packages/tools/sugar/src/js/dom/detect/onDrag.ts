@@ -1,4 +1,4 @@
-import __getPositionFromEvent from '../position/getPositionFromEvent';
+import { __positionFromEvent } from '@coffeekraken/sugar/dom';
 
 /**
  * @name      onDrag
@@ -19,7 +19,7 @@ import __getPositionFromEvent from '../position/getPositionFromEvent';
  * @todo      tests
  *
  * @example 	js
- * import __onDrag from '@coffeekraken/sugar/js/dom/onDrag'
+ * import { __onDrag } from '@coffeekraken/sugar/dom'
  * __onDrag($myElement, (drag) => {
  *    // do something...
  * });
@@ -41,7 +41,7 @@ export interface IOnDragSettings {
     maxSpeed: number;
 }
 
-export default function onDrag(
+export default function __onDrag(
     $elm: HTMLElement,
     cb: Function,
     settings?: Partial<IOnDragSettings>,
@@ -60,7 +60,7 @@ export default function onDrag(
     let lastCapturedTime;
 
     function buildTrackPoint(e) {
-        const { x, y } = __getPositionFromEvent(e);
+        const { x, y } = __positionFromEvent(e);
         const deltaX = x - startPos.x,
             deltaY = y - startPos.y,
             time = Date.now() - lastCapturedTime;
@@ -98,7 +98,7 @@ export default function onDrag(
 
         $target = e.target;
 
-        const { x, y } = __getPositionFromEvent(e);
+        const { x, y } = __positionFromEvent(e);
 
         // set the start position
         startPos = {

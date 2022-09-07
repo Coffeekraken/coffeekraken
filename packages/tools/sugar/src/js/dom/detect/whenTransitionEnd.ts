@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __getTransitionProperties from './style/getTransitionProperties';
+import __getTransitionProperties from '../style/getTransitionProperties';
 
 /**
  * @name      whenTransitionEnd
@@ -22,13 +22,13 @@ import __getTransitionProperties from './style/getTransitionProperties';
  * @todo      tests
  *
  * @example 	js
- * import __whenTransitionEnd from '@coffeekraken/sugar/js/dom/whenTransitionEnd'
+ * import { __whenTransitionEnd } from '@coffeekraken/sugar/dom'
  * await __whenTransitionEnd(myCoolHTMLElement);
  *
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function whenTransitionEnd(
+export default function __whenTransitionEnd(
     elm: HTMLElement,
     cb: Function = null,
 ): Promise<HTMLElement> {

@@ -17,15 +17,15 @@ import __removeClassesOnAnimationEnd from './removeClassOnAnimationEnd';
  * @todo        tests
  *
  * @example    js
- * import addAnimationClass from '@coffeekraken/sugar/js/dom/addAnimationClass'
- * addAnimationClass(myElm, 'my-cool-class').then($elm => {
+ * import { __addAnimationClass } from '@coffeekraken/sugar/dom';
+ *  __addAnimationClass(myElm, 'my-cool-class').then($elm => {
  *    // do something at the animation end...
  * });
  *
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function addAnimationClass(
+export default function __addAnimationClass(
     $elm: HTMLElement,
     cls: string | string[],
 ): Promise<HTMLElement> {
@@ -38,4 +38,3 @@ function addAnimationClass(
     // remove the class at the end of the animation
     return __removeClassesOnAnimationEnd($elm, cls);
 }
-export default addAnimationClass;

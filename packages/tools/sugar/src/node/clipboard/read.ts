@@ -19,10 +19,9 @@ import __clipboardy from 'clipboardy';
  * @todo      tests
  *
  * @example       js
- * import read from '@coffeekraken/sugar/node/clipboard/read';
- * import copy from '@coffeekraken/sugar/node/clipboard/copy';
- * copy('Hello world');
- * read(); // => Hello world
+ * import { __copy, __read } from '@coffeekraken/sugar/clipboard';
+ * __copy('Hello world');
+ * __read(); // => Hello world
  *
  * @since       2.0.0
  * @see         https://www.npmjs.com/package/clipboardy

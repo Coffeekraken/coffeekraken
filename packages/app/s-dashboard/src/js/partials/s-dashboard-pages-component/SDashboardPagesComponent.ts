@@ -8,7 +8,7 @@ import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expan
 import { define as __sFiltrableInputDefine } from '@coffeekraken/s-filtrable-input-component';
 import __queryStringToObject from '@coffeekraken/sugar/shared/url/queryStringToObject';
 import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
-import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
+import { __querySelectorLive } from '@coffeekraken/sugar/dom';
 import __cursorToEnd from '@coffeekraken/sugar/js/dom/input/cursorToEnd';
 import __xmlToJson from '@coffeekraken/sugar/shared/convert/xmlToJson';
 import __localStorage from '@coffeekraken/sugar/js/storage/localStorage';

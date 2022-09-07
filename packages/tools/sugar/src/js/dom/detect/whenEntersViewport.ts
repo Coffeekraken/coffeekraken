@@ -1,5 +1,5 @@
 // @ts-nocheck
-import __isInViewport from '../is/inViewport';
+import { __isInViewport } from '@coffeekraken/sugar/dom';
 
 /**
  * @name      whenEntersViewport
@@ -23,7 +23,7 @@ import __isInViewport from '../is/inViewport';
  * @todo      tests
  *
  * @example 	js
- * import __whenEntersViewport from '@coffeekraken/sugar/js/dom/whenEntersViewport'
+ * import { __whenEntersViewport } from '@coffeekraken/sugar/dom'
  * __whenEntersViewport(myCoolHTMLElement).then((elm) => {
  * 		// do something with your element that has entered the viewport...
  * });
@@ -36,7 +36,7 @@ export interface IWhenEntersViewportSettings {
     offset: string;
 }
 
-export default function whenEntersViewport(
+export default function __whenEntersViewport(
     elm: HTMLElement,
     settings: Partials<IWhenEntersViewportSettings> = {},
 ): Promise<HTMLElement> {

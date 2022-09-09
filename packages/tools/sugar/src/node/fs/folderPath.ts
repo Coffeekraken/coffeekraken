@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __isPath from './isPath';
+import { __isPath } from '@coffeekraken/sugar/fs';
 
 /**
  * @name                folderPath
@@ -18,13 +18,13 @@ import __isPath from './isPath';
  * @return          {String|Boolean}                    The folder path or false if not exists
  *
  * @example         js
- * import folderPath from '@coffeekraken/sugar/node/fs/folderPath';
- * folderPath('my/cool/path.js'); // => true
+ * import { __folderPath } from '@coffeekraken/sugar/fs';
+ * __folderPath('my/cool/path.js'); // => true
  *
  * @since           2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function folderPath(path, checkExistence = false) {
+export default function __folderPath(path, checkExistence = false) {
     if (checkExistence) {
         if (!__isPath(path, true)) return false;
     }
@@ -34,4 +34,3 @@ function folderPath(path, checkExistence = false) {
     }
     return parts.slice(0, -1).join('/');
 }
-export default folderPath;

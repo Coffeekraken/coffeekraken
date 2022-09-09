@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import { __dirname } from '@coffeekraken/sugar/fs';
 export default function frontspec(express, settings, config) {
     return __awaiter(this, void 0, void 0, function* () {
         config.middlewares.frontspec = {
@@ -18,4 +18,4 @@ export default function frontspec(express, settings, config) {
         return true;
     });
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sU0FBUyxNQUFNLHFDQUFxQyxDQUFDO0FBRTVELE1BQU0sQ0FBQyxPQUFPLFVBQWdCLFNBQVMsQ0FBQyxPQUFPLEVBQUUsUUFBUSxFQUFFLE1BQU07O1FBQzdELE1BQU0sQ0FBQyxXQUFXLENBQUMsU0FBUyxHQUFHO1lBQzNCLFdBQVcsRUFDUCx1RkFBdUY7WUFDM0YsSUFBSSxFQUFFLEdBQUcsU0FBUyxFQUFFLHNCQUFzQjtZQUMxQyxRQUFRLEVBQUUsRUFBRTtTQUNmLENBQUM7UUFFRixPQUFPLElBQUksQ0FBQztJQUNoQixDQUFDO0NBQUEifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sRUFBRSxTQUFTLEVBQUUsTUFBTSx3QkFBd0IsQ0FBQztBQUVuRCxNQUFNLENBQUMsT0FBTyxVQUFnQixTQUFTLENBQUMsT0FBTyxFQUFFLFFBQVEsRUFBRSxNQUFNOztRQUM3RCxNQUFNLENBQUMsV0FBVyxDQUFDLFNBQVMsR0FBRztZQUMzQixXQUFXLEVBQ1AsdUZBQXVGO1lBQzNGLElBQUksRUFBRSxHQUFHLFNBQVMsRUFBRSxzQkFBc0I7WUFDMUMsUUFBUSxFQUFFLEVBQUU7U0FDZixDQUFDO1FBRUYsT0FBTyxJQUFJLENBQUM7SUFDaEIsQ0FBQztDQUFBIn0=

@@ -1,5 +1,5 @@
 import __SFeature from '@coffeekraken/s-feature';
-import __makeFloat from '@coffeekraken/sugar/js/dom/ui/makeFloat';
+import { __makeFloat } from '@coffeekraken/sugar/dom';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SFloatingFeatureInterface from './interface/SFloatingFeatureInterface';
 

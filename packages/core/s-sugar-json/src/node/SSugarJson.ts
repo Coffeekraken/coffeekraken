@@ -1,7 +1,6 @@
 import __SBench from '@coffeekraken/s-bench';
 import __SClass from '@coffeekraken/s-class';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
+import { __dirname, __readJsonSync } from '@coffeekraken/sugar/fs';
 import __globalNodeModulesPath from '@coffeekraken/sugar/node/npm/globalNodeModulesPath';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __unique from '@coffeekraken/sugar/shared/array/unique';

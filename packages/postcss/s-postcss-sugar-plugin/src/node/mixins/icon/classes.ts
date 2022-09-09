@@ -1,6 +1,6 @@
 import __SGlob from '@coffeekraken/s-glob';
 import __SInterface from '@coffeekraken/s-interface';
-import __fileName from '@coffeekraken/sugar/node/fs/filename';
+import { __fileName } from '@coffeekraken/sugar/fs';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __isGlob from '@coffeekraken/sugar/shared/is/glob';
 import __unquote from '@coffeekraken/sugar/shared/string/unquote';

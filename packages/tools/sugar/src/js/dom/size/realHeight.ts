@@ -17,13 +17,13 @@
  * @todo      tests
  *
  * @example     js
- * import realHeight from '@coffeekraken/sugar/js/dom/realHeight';
- * realHeight(myCoolHtmlElement);
+ * import { __realHeight } from '@coffeekraken/sugar/dom';
+ * __realHeight(myCoolHtmlElement);
  *
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function realHeight(elm: HTMLElement): number {
+export default function __realHeight(elm: HTMLElement): number {
     // apply an overflow-y to the element
     elm.style.transition = 'none';
     elm.style.overflowY = 'scroll';
@@ -35,4 +35,3 @@ function realHeight(elm: HTMLElement): number {
     // return the height
     return height;
 }
-export default realHeight;

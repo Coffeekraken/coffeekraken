@@ -1,7 +1,6 @@
 // @ts-nocheck
 
-import whenInViewport from '../dom/whenInViewport';
-import { __querySelectorLive } from '@coffeekraken/sugar/dom';
+import { __querySelectorLive, __whenInViewport } from '@coffeekraken/sugar/dom';
 import deepMerge from '../../shared/object/deepMerge';
 
 /**
@@ -23,8 +22,8 @@ import deepMerge from '../../shared/object/deepMerge';
  * @todo            tests
  *
  * @example       js
- * import imagesLazySrcAttribute from '@coffeekraken/sugar/js/feature/imagesLazySrcAttribute';
- * imagesLazySrcAttribute();
+ * import { __imagesLazySrcAttribute } from '@coffeekraken/sugar/feature';
+ * __imagesLazySrcAttribute();
  *
  * @example    html
  * <img lazy-src="my-cool-image.jpg" />
@@ -37,7 +36,7 @@ export interface IImagesLazySrcAttributeSettings {
     offset: number;
 }
 
-function imagesLazySrcAttribute(
+export default function __imagesLazySrcAttribute(
     settings: Partial<IImagesLazySrcAttributeSettings> = {},
 ): void {
     settings = deepMerge(
@@ -47,9 +46,8 @@ function imagesLazySrcAttribute(
         settings,
     );
     __querySelectorLive('img[lazy-src]:not([is])', ($imgElm) => {
-        whenInViewport($imgElm, settings.offset).then(() => {
+        __whenInViewport($imgElm, settings.offset).then(() => {
             $imgElm.setAttribute('src', $imgElm.getAttribute('lazy-src'));
         });
     });
 }
-export default imagesLazySrcAttribute;

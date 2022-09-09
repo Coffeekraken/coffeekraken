@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import SSvgFilter from './SSvgFilter';
+import { __SSvgFilter } from '@coffeekraken/sugar/filter';
 
 /**
  * @name 		        SOutlineSvgFilter
@@ -13,7 +13,8 @@ import SSvgFilter from './SSvgFilter';
  * This class represent an outline filter that can be applied on any HTMLElement.
  *
  * @example 		js
- * const filter = new SOutlineSvgFilter();
+ * import {__SOutlineSvgFilter } from '@coffeekraken/sugar/filter';
+ * const filter = new __SOutlineSvgFilter();
  * filter.applyTo(myCoolHTMLElement);
  *
  * @todo      interface
@@ -23,7 +24,7 @@ import SSvgFilter from './SSvgFilter';
  * @since         1.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-class SOutlineSvgFilter extends SSvgFilter {
+export default class __SOutlineSvgFilter extends __SSvgFilter {
     /**
      * @name            constructor
      * @type            Function
@@ -58,6 +59,3 @@ class SOutlineSvgFilter extends SSvgFilter {
         return parseFloat(this._$morphology.getAttribute('radius'));
     }
 }
-
-// export modules
-export default SOutlineSvgFilter;

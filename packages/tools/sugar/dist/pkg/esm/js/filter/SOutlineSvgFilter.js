@@ -1,5 +1,5 @@
 // @ts-nocheck
-import SSvgFilter from './SSvgFilter';
+import { __SSvgFilter } from '@coffeekraken/sugar/filter';
 /**
  * @name 		        SOutlineSvgFilter
  * @namespace            js.filter
@@ -11,7 +11,8 @@ import SSvgFilter from './SSvgFilter';
  * This class represent an outline filter that can be applied on any HTMLElement.
  *
  * @example 		js
- * const filter = new SOutlineSvgFilter();
+ * import {__SOutlineSvgFilter } from '@coffeekraken/sugar/filter';
+ * const filter = new __SOutlineSvgFilter();
  * filter.applyTo(myCoolHTMLElement);
  *
  * @todo      interface
@@ -21,7 +22,7 @@ import SSvgFilter from './SSvgFilter';
  * @since         1.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-class SOutlineSvgFilter extends SSvgFilter {
+export default class __SOutlineSvgFilter extends __SSvgFilter {
     /**
      * @name            constructor
      * @type            Function
@@ -55,6 +56,4 @@ class SOutlineSvgFilter extends SSvgFilter {
         return parseFloat(this._$morphology.getAttribute('radius'));
     }
 }
-// export modules
-export default SOutlineSvgFilter;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFVBQVUsTUFBTSxjQUFjLENBQUM7QUFFdEM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBb0JHO0FBQ0gsTUFBTSxpQkFBa0IsU0FBUSxVQUFVO0lBQ3RDOzs7Ozs7Ozs7T0FTRztJQUNILFlBQVksTUFBTSxHQUFHLENBQUM7UUFDbEIsS0FBSyxDQUFDOzZDQUMrQixNQUFNOzs7R0FHaEQsQ0FBQyxDQUFDO1FBQ0csSUFBSSxDQUFDLFlBQVksR0FBRyxJQUFJLENBQUMsTUFBTSxDQUFDLGFBQWEsQ0FBQyxjQUFjLENBQUMsQ0FBQztJQUNsRSxDQUFDO0lBRUQ7Ozs7Ozs7T0FPRztJQUNILElBQUksTUFBTSxDQUFDLEtBQUs7UUFDWixJQUFJLENBQUMsWUFBWSxDQUFDLFlBQVksQ0FBQyxRQUFRLEVBQUUsS0FBSyxDQUFDLENBQUM7SUFDcEQsQ0FBQztJQUNELElBQUksTUFBTTtRQUNOLE9BQU8sVUFBVSxDQUFDLElBQUksQ0FBQyxZQUFZLENBQUMsWUFBWSxDQUFDLFFBQVEsQ0FBQyxDQUFDLENBQUM7SUFDaEUsQ0FBQztDQUNKO0FBRUQsaUJBQWlCO0FBQ2pCLGVBQWUsaUJBQWlCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLEVBQUUsWUFBWSxFQUFFLE1BQU0sNEJBQTRCLENBQUM7QUFFMUQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXFCRztBQUNILE1BQU0sQ0FBQyxPQUFPLE9BQU8sbUJBQW9CLFNBQVEsWUFBWTtJQUN6RDs7Ozs7Ozs7O09BU0c7SUFDSCxZQUFZLE1BQU0sR0FBRyxDQUFDO1FBQ2xCLEtBQUssQ0FBQzs2Q0FDK0IsTUFBTTs7O0dBR2hELENBQUMsQ0FBQztRQUNHLElBQUksQ0FBQyxZQUFZLEdBQUcsSUFBSSxDQUFDLE1BQU0sQ0FBQyxhQUFhLENBQUMsY0FBYyxDQUFDLENBQUM7SUFDbEUsQ0FBQztJQUVEOzs7Ozs7O09BT0c7SUFDSCxJQUFJLE1BQU0sQ0FBQyxLQUFLO1FBQ1osSUFBSSxDQUFDLFlBQVksQ0FBQyxZQUFZLENBQUMsUUFBUSxFQUFFLEtBQUssQ0FBQyxDQUFDO0lBQ3BELENBQUM7SUFDRCxJQUFJLE1BQU07UUFDTixPQUFPLFVBQVUsQ0FBQyxJQUFJLENBQUMsWUFBWSxDQUFDLFlBQVksQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDO0lBQ2hFLENBQUM7Q0FDSiJ9

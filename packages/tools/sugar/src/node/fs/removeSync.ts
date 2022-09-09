@@ -18,16 +18,13 @@ import __fs from 'fs-extra';
  * @todo      tests
  *
  * @example       js
- * import removeSync from '@coffeekraken/node/fs/removeSync';
- * try {
- *    removeSync('my/cool/file.json');
- * } catch(e) {}
+ * import { __removeSync } from '@coffeekraken/sugar/fs';
+ *  __removeSync('my/cool/file.json');
  *
  * @see             https://github.com/jprichardson/node-fs-extra
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function removeSync(path) {
+export default function __removeSync(path) {
     return __fs.removeSync(path);
 }
-export default removeSync;

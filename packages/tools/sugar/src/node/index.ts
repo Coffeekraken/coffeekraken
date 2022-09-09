@@ -1,9 +1,8 @@
 // @ts-nocheck
 
-import __handleError from './error/handleError';
+import { __handleErrors } from '@coffeekraken/sugar/error';
 import __exitCleanup from './process/exitCleanup';
 import __onProcessExit from './process/onProcessExit';
-// import __registerSFileClasses from './fs/registerSFileClasses';
 
 /**
  * @name                    index
@@ -18,7 +17,7 @@ import __onProcessExit from './process/onProcessExit';
  */
 
 // handle the errors
-__handleError();
+__handleErrors();
 
 // exit cleanup
 __onProcessExit(() => {

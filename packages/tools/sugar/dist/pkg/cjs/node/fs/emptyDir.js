@@ -19,8 +19,8 @@ const fs_extra_1 = __importDefault(require("fs-extra"));
  * @return      {Promise}                           A promise that will be resolved once the directory has been cleaned
  *
  * @example       js
- * import emptyDir from '@coffeekraken/node/fs/emptyDir';
- * emptyDir('my/cool/directory').then(() => {
+ * import { __emptyDir } from '@coffeekraken/sugar/fs';
+ * await __emptyDir('my/cool/directory').then(() => {
  *    // do something...
  * });
  *
@@ -28,8 +28,8 @@ const fs_extra_1 = __importDefault(require("fs-extra"));
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function emptyDir(dir) {
+function __emptyDir(dir) {
     return fs_extra_1.default.emptyDir(dir);
 }
-exports.default = emptyDir;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUE0QjtBQUU1Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILFNBQVMsUUFBUSxDQUFDLEdBQUc7SUFDakIsT0FBTyxrQkFBSSxDQUFDLFFBQVEsQ0FBQyxHQUFHLENBQUMsQ0FBQztBQUM5QixDQUFDO0FBQ0Qsa0JBQWUsUUFBUSxDQUFDIn0=
+exports.default = __emptyDir;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUE0QjtBQUU1Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILFNBQXdCLFVBQVUsQ0FBQyxHQUFHO0lBQ2xDLE9BQU8sa0JBQUksQ0FBQyxRQUFRLENBQUMsR0FBRyxDQUFDLENBQUM7QUFDOUIsQ0FBQztBQUZELDZCQUVDIn0=

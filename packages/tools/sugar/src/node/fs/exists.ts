@@ -20,8 +20,8 @@ import __fs from 'fs';
  * @setting         {Boolean}       [symlink=true]      Specify if you want to take care of symlinks
  *
  * @example         js
- * import exists from '@coffeekraken/sugar/fs/exists';
- * exists('/something/cool.txt'); // => true
+ * import { __exists } from '@coffeekraken/sugar/fs';
+ *  __exists('/something/cool.txt'); // => true
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -31,7 +31,7 @@ export interface IExistsSettings {
     file: boolean;
     symlink: boolean;
 }
-export default async function exists(
+export default async function __exists(
     path: string,
     settings?: Partial<IExistsSettings>,
 ): Promise<boolean> {

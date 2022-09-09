@@ -1,7 +1,6 @@
 // @ts-nocheck
 
-// import _ensureDirSync from '../fs/ensureDirSync';
-import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
+import { __readJsonSync } from '@coffeekraken/sugar/fs';
 import __chalk from 'chalk';
 import _childProcess from 'child_process';
 import __fs from 'fs';

@@ -8,20 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const dirname_1 = __importDefault(require("@coffeekraken/sugar/node/fs/dirname"));
+const fs_1 = require("@coffeekraken/sugar/fs");
 function generic(express, settings, config) {
     return __awaiter(this, void 0, void 0, function* () {
         // register handler
         config.handlers.generic = {
             description: 'Generic handler that make use of the "views" property of your page config to render them using the SViewRenderer',
-            path: `${(0, dirname_1.default)()}/genericHandler`,
+            path: `${(0, fs_1.__dirname)()}/genericHandler`,
         };
         return true;
     });
 }
 exports.default = generic;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsa0ZBQTREO0FBRTVELFNBQThCLE9BQU8sQ0FBQyxPQUFPLEVBQUUsUUFBUSxFQUFFLE1BQU07O1FBQzNELG1CQUFtQjtRQUNuQixNQUFNLENBQUMsUUFBUSxDQUFDLE9BQU8sR0FBRztZQUN0QixXQUFXLEVBQ1Asa0hBQWtIO1lBQ3RILElBQUksRUFBRSxHQUFHLElBQUEsaUJBQVMsR0FBRSxpQkFBaUI7U0FDeEMsQ0FBQztRQUVGLE9BQU8sSUFBSSxDQUFDO0lBQ2hCLENBQUM7Q0FBQTtBQVRELDBCQVNDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7O0FBQUEsK0NBQW1EO0FBRW5ELFNBQThCLE9BQU8sQ0FBQyxPQUFPLEVBQUUsUUFBUSxFQUFFLE1BQU07O1FBQzNELG1CQUFtQjtRQUNuQixNQUFNLENBQUMsUUFBUSxDQUFDLE9BQU8sR0FBRztZQUN0QixXQUFXLEVBQ1Asa0hBQWtIO1lBQ3RILElBQUksRUFBRSxHQUFHLElBQUEsY0FBUyxHQUFFLGlCQUFpQjtTQUN4QyxDQUFDO1FBRUYsT0FBTyxJQUFJLENBQUM7SUFDaEIsQ0FBQztDQUFBO0FBVEQsMEJBU0MifQ==

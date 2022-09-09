@@ -4,8 +4,7 @@ import __minimatch from 'minimatch';
 import __path from 'path';
 import __isNode from '../../shared/is/node';
 import __isPlainObject from '../../shared/is/plainObject';
-import __checkPathWithMultipleExtensions from '../fs/checkPathWithMultipleExtensions';
-import __extension from '../fs/extension';
+import { __checkPathWithMultipleExtensions, __extension } from '@coffeekraken/sugar/fs';
 
 /**
  * @name        exportsMatch

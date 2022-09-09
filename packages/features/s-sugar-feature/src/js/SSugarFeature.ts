@@ -1,10 +1,14 @@
 import type { ISFeature } from '@coffeekraken/s-feature';
 import __SFeature from '@coffeekraken/s-feature';
-import __preventScrollRestoration from '@coffeekraken/sugar/js/dom/scroll/preventScrollRestoration';
-import __clearTransmations from '@coffeekraken/sugar/js/dom/transmation/clearTransmations';
-import __inputAdditionalAttributes from '@coffeekraken/sugar/js/feature/inputAdditionalAttributes';
-import __linksStateAttributes from '@coffeekraken/sugar/js/feature/linksStateAttributes';
-import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
+import {
+    __preventScrollRestoration,
+    __clearTransmations,
+    __expandPleasantCssClassnamesLive,
+} from '@coffeekraken/sugar/dom';
+import {
+    __inputAdditionalAttributes,
+    __linksStateAttributes,
+} from '@coffeekraken/sugar/feature';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SSugarFeatureInterface from './interface/SSugarFeatureInterface';
 

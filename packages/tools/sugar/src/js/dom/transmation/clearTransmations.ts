@@ -14,19 +14,19 @@ import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
  * @param    {HTMLElement}      $elm        The dom element to clear the animations/transitions from
  * @param       {IClearTransmationsSettings}    [settings={}]    The settings to use
  * @return      {Function}              A function to reset the styles
- * 
+ *
  * @setting         {Number}        [timeout=0]    The timeout in ms to wait before removing the animations/transitions clearing
- * 
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
  *
  * @example    js
- * import clearTransmations from '@coffeekraken/sugar/js/dom/clearTransmations'
- * clearTransmations($myElement, {
+ * import { __clearTransmations } from '@coffeekraken/sugar/dom'
+ *  __clearTransmations($myElement, {
  *  timeout: 1000
  * });
- * const reset = clearTransmations($myElement);
+ * const reset =  __clearTransmations($myElement);
  * setTimeout(() => reset(), 2000);
  *
  * @since     1.0.0
@@ -37,11 +37,10 @@ export interface IClearTransmationsSettings {
     timeout: number;
 }
 
-export default function clearTransmations(
+export default function __clearTransmations(
     $elm: HTMLElement = document.body,
-    settings?: Partial<IClearTransmationsSettings>
+    settings?: Partial<IClearTransmationsSettings>,
 ): HTMLStyleElement {
-
     const cls = `s-clear-transmations-${__uniqid()}`;
     $elm.classList.add(cls);
 

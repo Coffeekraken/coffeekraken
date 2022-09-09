@@ -1,11 +1,10 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
+import {__readJsonSync} from '@coffeekraken/sugar/fs';
 import __fs from 'fs';
 import __path from 'path';
 import __deepMerge from '../../shared/object/deepMerge';
-import __checkPathWithMultipleExtensions from '../fs/checkPathWithMultipleExtensions';
-import __existsSync from '../fs/existsSync';
+import { __checkPathWithMultipleExtensions, __existsSync } from '@coffeekraken/sugar/fs';
 import __isFile from '../is/file';
 import __packageRootDir from '../path/packageRootDir';
 import __builtInNodeModules from './buildInNodeModules';

@@ -1,8 +1,10 @@
 import __SLog from '@coffeekraken/s-log';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
-import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
+import {
+    __dirname,
+    __readJsonSync,
+    __writeJsonSync,
+} from '@coffeekraken/sugar/fs';
 import __packageJson from '@coffeekraken/sugar/node/package/jsonSync';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __fs from 'fs';

@@ -37,8 +37,8 @@ hotkeys.filter = function () {
  * @todo      tests
  *
  * @example    js
- * import hotkey from '@coffeekraken/sugar/js/keyboard/hotkey'
- * const promise = hotkey('ctrl+a');
+ * import { __hotkey } from '@coffeekraken/sugar/keyboard'
+ * const promise = __hotkey('ctrl+a');
  * promise.on('press', (e) => {
  *    // do something...
  * });
@@ -57,7 +57,7 @@ export interface IHotkeySettings {
     splitKey: string;
 }
 
-function hotkey(
+export default function __hotkey(
     hotkey: string,
     settings: Partial<IHotkeySettings> = {},
 ): __SPromise<any> {
@@ -88,4 +88,3 @@ function hotkey(
         hotkeys.unbind(hotkey);
     });
 }
-export default hotkey;

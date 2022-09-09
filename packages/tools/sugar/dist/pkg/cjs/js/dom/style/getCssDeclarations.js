@@ -20,7 +20,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @todo      tests
  *
  * @example  	js
- * import __getCssDeclarations from '@coffeekraken/sugar/js/dom/style/getCssDeclarations';
+ * import { __getCssDeclarations } from '@coffeekraken/sugar/dom';
  * __getCssDeclarations('style', [myCoolCssRules]);
  *
  * @see             https://github.com/marionebl/jogwheel/blob/master/source/library/get-declarations.js

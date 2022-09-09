@@ -16,8 +16,8 @@ import __fs from 'fs-extra';
  * @return      {Promise}                           A promise that will be resolved once the file has been created if needed...
  *
  * @example       js
- * import ensureFile from '@coffeekraken/node/fs/ensureFile';
- * ensureFile('my/cool/file.jpg').then(() => {
+ * import { __ensureFile } from '@coffeekraken/sugar/fs';
+ * await __ensureFile('my/cool/file.jpg').then(() => {
  *    // do something...
  * });
  *
@@ -25,7 +25,6 @@ import __fs from 'fs-extra';
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function ensureFile(file) {
+export default function __ensureFile(file) {
     return __fs.ensureFile(file);
 }
-export default ensureFile;

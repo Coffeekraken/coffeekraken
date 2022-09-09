@@ -10,11 +10,12 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __STypescriptBuilder from '@coffeekraken/s-typescript-builder';
 import __SVite from '@coffeekraken/s-vite';
 
-import { __copy } from '@coffeekraken/sugar/clipboard';
+import {
+    __copy,
+    __readJsonSync,
+    __writeJsonSync,
+} from '@coffeekraken/sugar/clipboard';
 
-// import __copy from '@coffeekraken/sugar/node/clipboard/copy';
-import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
-import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __spawn from '@coffeekraken/sugar/node/process/spawn';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';

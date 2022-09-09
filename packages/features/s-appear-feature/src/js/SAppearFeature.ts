@@ -1,8 +1,11 @@
 import __SFeature from '@coffeekraken/s-feature';
 import __SSugarElement from '@coffeekraken/s-sugar-element';
 import __STheme from '@coffeekraken/s-theme';
-import { __whenImageLoaded, __whenImagesLoaded } from '@coffeekraken/sugar/dom';
-import __appendStyleTag from '@coffeekraken/sugar/js/dom/tag/appendStyleTag';
+import {
+    __whenImageLoaded,
+    __whenImagesLoaded,
+    __injectStyle,
+} from '@coffeekraken/sugar/dom';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 import __SAppearFeatureInterface from './interface/SAppearFeatureInterface';
@@ -184,7 +187,7 @@ export default class SAppearFeature extends __SFeature {
             `;
 
             // add style into the page and assign the animation to the node element
-            const $style = __appendStyleTag(animationStr);
+            const $style = __injectStyle(animationStr);
             this.node.setAttribute('s-appear-id', appearId);
 
             // after animation, remove the animation totally

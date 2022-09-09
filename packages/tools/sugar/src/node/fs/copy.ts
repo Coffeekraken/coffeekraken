@@ -17,8 +17,8 @@ import __fs from 'fs-extra';
  * @return      {Promise}                           A promise that will be resolved when the copy is completed
  *
  * @example       js
- * import copy from '@coffeekraken/node/fs/copy';
- * copy('my/cool/file.jpg', 'my/new/file.jpg').then(() => {
+ * import { __copy } from '@coffeekraken/sugar/fs';
+ * await __copy('my/cool/file.jpg', 'my/new/file.jpg').then(() => {
  *    // do something on complete...
  * });
  *
@@ -26,7 +26,6 @@ import __fs from 'fs-extra';
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function copy(src, dest) {
+export default function __copy(src, dest) {
     return __fs.copy(src, dest);
 }
-export default copy;

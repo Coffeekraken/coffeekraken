@@ -1,8 +1,7 @@
 // @ts-nocheck
-import __handleError from './error/handleError';
+import { __handleErrors } from '@coffeekraken/sugar/error';
 import __exitCleanup from './process/exitCleanup';
 import __onProcessExit from './process/onProcessExit';
-// import __registerSFileClasses from './fs/registerSFileClasses';
 /**
  * @name                    index
  * @namespace           node
@@ -15,9 +14,9 @@ import __onProcessExit from './process/onProcessExit';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 // handle the errors
-__handleError();
+__handleErrors();
 // exit cleanup
 __onProcessExit(() => {
     return __exitCleanup;
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLGFBQWEsTUFBTSxxQkFBcUIsQ0FBQztBQUNoRCxPQUFPLGFBQWEsTUFBTSx1QkFBdUIsQ0FBQztBQUNsRCxPQUFPLGVBQWUsTUFBTSx5QkFBeUIsQ0FBQztBQUN0RCxrRUFBa0U7QUFFbEU7Ozs7Ozs7Ozs7R0FVRztBQUVILG9CQUFvQjtBQUNwQixhQUFhLEVBQUUsQ0FBQztBQUVoQixlQUFlO0FBQ2YsZUFBZSxDQUFDLEdBQUcsRUFBRTtJQUNqQixPQUFPLGFBQWEsQ0FBQztBQUN6QixDQUFDLENBQUMsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLEVBQUUsY0FBYyxFQUFFLE1BQU0sMkJBQTJCLENBQUM7QUFDM0QsT0FBTyxhQUFhLE1BQU0sdUJBQXVCLENBQUM7QUFDbEQsT0FBTyxlQUFlLE1BQU0seUJBQXlCLENBQUM7QUFFdEQ7Ozs7Ozs7Ozs7R0FVRztBQUVILG9CQUFvQjtBQUNwQixjQUFjLEVBQUUsQ0FBQztBQUVqQixlQUFlO0FBQ2YsZUFBZSxDQUFDLEdBQUcsRUFBRTtJQUNqQixPQUFPLGFBQWEsQ0FBQztBQUN6QixDQUFDLENBQUMsQ0FBQyJ9

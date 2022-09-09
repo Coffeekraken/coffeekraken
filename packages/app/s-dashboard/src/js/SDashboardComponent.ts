@@ -4,7 +4,7 @@ import { css, html, unsafeCSS } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 // @ts-ignore
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
+import { __hotkey } from '@coffeekraken/sugar/keyboard';
 import __css from '../css/s-dashboard.css'; // relative to /dist/pkg/esm/js
 import __SDashboardComponentInterface from './interface/SDashboardComponentInterface';
 
@@ -115,9 +115,7 @@ export default class SDashboardComponent extends __SLitComponent {
                 <header class="header">
                     <div class="s-container:wide">
                         <div class="__toolbar">
-                            <div class="__logo">
-                                ${unsafeHTML(__logoSvg)}
-                            </div>
+                            <div class="__logo">${unsafeHTML(__logoSvg)}</div>
                             <h1 class="s-typo:h5">Dashboard</h1>
                             <div class="__grow"></div>
                         </div>

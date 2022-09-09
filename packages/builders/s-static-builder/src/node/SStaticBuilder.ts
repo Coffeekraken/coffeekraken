@@ -8,11 +8,13 @@ import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SRequest from '@coffeekraken/s-request';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __copySync from '@coffeekraken/sugar/node/fs/copySync';
-import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
-import __removeSync from '@coffeekraken/sugar/node/fs/removeSync';
-import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
-import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
+import {
+    __copySync,
+    __readJsonSync,
+    __removeSync,
+    __writeFileSync,
+    __writeJsonSync,
+} from '@coffeekraken/sugar/fs';
 import __packageCacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';

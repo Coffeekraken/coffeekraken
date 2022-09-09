@@ -1,6 +1,5 @@
 // @ts-nocheck
-
-import __getStyleProperty from './getStyleProperty';
+import { __getStyleProperty } from '@coffeekraken/sugar/dom';
 import __convert from '../../../shared/time/convert';
 
 /**
@@ -21,8 +20,8 @@ import __convert from '../../../shared/time/convert';
  * @todo      tests
  *
  * @example  	js
- * import getAnimationProperties from '@coffeekraken/sugar/js/dom/getAnimationProperties'
- * const props = getAnimationProperties(myCoolHTMLElement);
+ * import { __getAnimationProperties } from '@coffeekraken/sugar/dom'
+ * const props = __getAnimationProperties(myCoolHTMLElement);
  * // output format
  * // {
  * // 	name : ['animation1'],
@@ -48,7 +47,7 @@ import __convert from '../../../shared/time/convert';
 //   totalDuration : 200
 // }
 
-function getAnimationProperties(elm: HTMLElement) {
+export default function __getAnimationProperties(elm: HTMLElement) {
     // get the animation properties
     const name = __getStyleProperty(elm, 'animation-name') || '';
     const duration = __getStyleProperty(elm, 'animation-duration') || '0s';
@@ -88,4 +87,3 @@ function getAnimationProperties(elm: HTMLElement) {
     props.totalDuration = totalDuration;
     return props;
 }
-export default getAnimationProperties;

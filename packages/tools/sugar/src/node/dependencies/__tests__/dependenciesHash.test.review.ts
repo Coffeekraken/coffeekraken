@@ -1,4 +1,4 @@
-import __dirname from '../../fs/dirname';
+import { __dirname } from '@coffeekraken/sugar/fs';
 import __dependenciesHash from '../dependenciesHash';
 
 describe('sugar.node.dependencies.dependenciesHash', () => {

@@ -1,7 +1,9 @@
 // @ts-nocheck
 
-import __getTranslateProperties from './getTranslateProperties';
-import __getRotateProperties from './getRotateProperties';
+import {
+    __getRotateProperties,
+    __getTranslateProperties,
+} from '@coffeekraken/sugar/dom';
 
 /**
  * @name      getTransformProperties
@@ -35,9 +37,7 @@ import __getRotateProperties from './getRotateProperties';
  * @since           1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function getTransformProperties(
-    $elm: HTMLElement,
-): {
+function getTransformProperties($elm: HTMLElement): {
     translateX: number;
     translateY: number;
     translateZ: number;
@@ -52,6 +52,6 @@ function getTransformProperties(
         rotateX: rotates.x,
         rotateY: rotates.y,
         rotateZ: rotates.z,
-    }
+    };
 }
 export default getTransformProperties;

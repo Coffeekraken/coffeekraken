@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import type { IScrollToSettings } from './scrollTo';
-import __scrollTo from './scrollTo';
+import { __scrollTo } from '@coffeekraken/sugar/dom';
 import __easing from '../../../shared/easing/easeInOutQuint';
 import __deepMerge from '../../../shared/object/deepMerge';
 
@@ -25,7 +25,7 @@ import __deepMerge from '../../../shared/object/deepMerge';
  * @todo      tests
  *
  * @example 	js
- * import __scrollToLocationHash from '@coffeekraken/sugar/js/dom/scroll/scrollToLocationHash'
+ * import { __scrollToLocationHash } from '@coffeekraken/sugar/dom'
  * __scrollToLocationHash(500, 0)
  *
  * @since       1.0.0
@@ -36,7 +36,7 @@ export interface IScrollToLocationHashSettings {
     scroll: Partial<IScrollToSettings>;
 }
 
-function scrollToLocationHash(
+export default function __scrollToLocationHash(
     settings: Partial<IScrollToLocationHashSettings> = {},
 ): Promise<any> {
     settings = __deepMerge(
@@ -66,4 +66,3 @@ function scrollToLocationHash(
     // scroll to target
     return __scrollTo(targetElm, settings.scroll);
 }
-export default scrollToLocationHash;

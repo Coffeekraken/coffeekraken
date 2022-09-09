@@ -21,9 +21,9 @@ import __onProcessExit from '../process/onProcessExit';
  * @return      {SPromise}                           A promise that will be resolved when the getFiles is completed, or that will diaptch some events to let you know of new files, etc...
  *
  * @example       js
- * import getFiles from '@coffeekraken/node/fs/getFiles';
- * await getFiles('** /*.txt');
- * const watcher = getFiles('** /*.txt', {
+ * import { __getFiles } from '@coffeekraken/sugar/fs';
+ * await __getFiles('** /*.txt');
+ * const watcher = __getFiles('** /*.txt', {
  *  watch: true
  * });
  * watcher.on('add', ({file, resolve}) => {
@@ -51,7 +51,7 @@ export interface IGetFilesResult {
     files: (string | __SFile)[];
 }
 
-export default function getFiles(
+export default function __getFiles(
     paths: string | string[],
     settings?: Partial<IGetFilesSettings>,
 ) {

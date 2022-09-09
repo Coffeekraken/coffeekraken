@@ -14,7 +14,7 @@ import __fs from 'fs';
  * @return          {String}                            The first existing path
  *
  * @example       js
- * import __grabFirstExisting from '@coffeekraken/sugar/node/fs/grabFirstExisting';
+ * import { __grabFirstExisting } from '@coffeekraken/sugar/fs';
  * __grabFirstExisting([
  *  'file/1.txt',
  *  'file/2.txt
@@ -23,9 +23,8 @@ import __fs from 'fs';
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function grabFirstExisting(paths: string[]): string {
+export default function __grabFirstExisting(paths: string[]): string {
     for (let [idx, path] of Object.entries(paths)) {
         if (__fs.existsSync(path)) return path;
     }
 }
-export default grabFirstExisting;

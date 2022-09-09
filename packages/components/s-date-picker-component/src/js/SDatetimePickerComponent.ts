@@ -1,12 +1,11 @@
 // @ts-nocheck
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
-import { __isUserScrolling } from '@coffeekraken/sugar/dom';
+import { __isUserScrolling, __makeFloat } from '@coffeekraken/sugar/dom';
 import type {
     IFloatApi,
     IFloatSettings,
 } from '@coffeekraken/sugar/js/dom/ui/makeFloat';
-import __makeFloat from '@coffeekraken/sugar/js/dom/ui/makeFloat';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __dateFormat from 'dateformat';
 import { css, html, unsafeCSS } from 'lit';

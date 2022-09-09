@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __fileName from '@coffeekraken/sugar/node/fs/filename';
+import { __fileName } from '@coffeekraken/sugar/fs';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __fs from 'fs';
 import __path from 'path';

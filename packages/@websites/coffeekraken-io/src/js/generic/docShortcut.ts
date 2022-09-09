@@ -1,8 +1,8 @@
-import __hotkey from "@coffeekraken/sugar/js/keyboard/hotkey";
-import __scrollTo from "@coffeekraken/sugar/js/dom/scroll/scrollTo";
+import { __hotkey } from '@coffeekraken/sugar/keyboard';
+import { __scrollTo } from '@coffeekraken/sugar/dom';
 
 // search shortcut
-__hotkey("cmd+p").on("press", (e) => {
+__hotkey('cmd+p').on('press', (e) => {
   // prevent behavior
   e.cancelBubble = true;
   e.preventDefault();
@@ -11,5 +11,5 @@ __hotkey("cmd+p").on("press", (e) => {
   // __scrollTo(document.body);
   // focus in search input
   // @ts-ignore
-  document.querySelector("#search-input > input").focus();
+  document.querySelector('#search-input > input').focus();
 });

@@ -1,7 +1,9 @@
 import __camelCase from '../../../shared/string/camelCase';
-import __getDefinedStyles from './getDefinedStyles';
-import __parseKeyframeKey from './parseKeyframeKey';
-import __removeVendorPrefix from './removeVendorPrefix';
+import { __getDefinedStyles } from '@coffeekraken/sugar/dom';
+import {
+    __parseKeyframeKey,
+    __removeVendorPrefix,
+} from '@coffeekraken/sugar/css';
 
 /**
  * @name      transformKeyframesDeclarations

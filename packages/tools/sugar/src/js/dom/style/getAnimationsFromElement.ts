@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __getAnimationProperties from './getAnimationProperties';
+import { __getAnimationProperties } from '@coffeekraken/sugar/dom';
 
 /**
  * @name      getAnimationsFromElement
@@ -20,8 +20,8 @@ import __getAnimationProperties from './getAnimationProperties';
  * @todo      tests
  *
  * @example  	js
- * import getAnimationsFromElement from '@coffeekraken/sugar/js/dom/getAnimationsFromElement'
- * const props = getAnimationsFromElement(myCoolHTMLElement);
+ * import { __getAnimationsFromElement } from '@coffeekraken/sugar/dom'
+ * const props = __getAnimationsFromElement(myCoolHTMLElement);
  * // output format
  * // [{
  * //   name : 'animation1',
@@ -49,9 +49,10 @@ export interface IGetAnimationsFromElementAnimationObject {
     fillMode: string;
 }
 
-export type IGetAnimationsFromElementResult = IGetAnimationsFromElementAnimationObject[];
+export type IGetAnimationsFromElementResult =
+    IGetAnimationsFromElementAnimationObject[];
 
-function getAnimationsFromElement($elm: HTMLElement) {
+export default function __getAnimationsFromElement($elm: HTMLElement) {
     const properties = __getAnimationProperties($elm);
     const animations: IGetAnimationsFromElementAnimationObject[] = [];
 
@@ -70,4 +71,3 @@ function getAnimationsFromElement($elm: HTMLElement) {
 
     return animations;
 }
-export default getAnimationsFromElement;

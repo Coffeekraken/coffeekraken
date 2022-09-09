@@ -15,16 +15,13 @@ import __fs from 'fs-extra';
  * @param       {String}              dest          The destination path
  *
  * @example       js
- * import moveSync from '@coffeekraken/node/fs/moveSync';
- * try {
- *    moveSync('my/cool/dir', 'another/place/for/directory');
- * } catch(e) {}
+ * import { __moveSync } from '@coffeekraken/sugar/fs';
+ * __moveSync('my/cool/dir', 'another/place/for/directory');
  *
  * @see             https://github.com/jprichardson/node-fs-extra
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function moveSync(src, dest) {
+export default function __moveSync(src, dest) {
     _fs.moveSync(src, dest);
 }
-export default moveSync;

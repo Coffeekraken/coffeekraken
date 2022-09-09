@@ -18,17 +18,15 @@ const fs_extra_1 = __importDefault(require("fs-extra"));
  * @return      {Promise}                           A promise that will be resolved once the directory has been created if needed...
  *
  * @example       js
- * import ensureDirSync from '@coffeekraken/node/fs/ensureDirSync';
- * try {
- *    ensureDirSync('my/cool/dir');
- * } catch(e) {}
+ * import { __ensureDirSync } from '@coffeekraken/sugar/fs';
+ * __ensureDirSync('my/cool/dir');
  *
  * @see             https://github.com/jprichardson/node-fs-extra
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function ensureDirSync(dir) {
+function __ensureDirSync(dir) {
     fs_extra_1.default.ensureDirSync(dir);
 }
-exports.default = ensureDirSync;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUE0QjtBQUU1Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBQ0gsU0FBUyxhQUFhLENBQUMsR0FBRztJQUN0QixrQkFBSSxDQUFDLGFBQWEsQ0FBQyxHQUFHLENBQUMsQ0FBQztBQUM1QixDQUFDO0FBQ0Qsa0JBQWUsYUFBYSxDQUFDIn0=
+exports.default = __ensureDirSync;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUE0QjtBQUU1Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW1CRztBQUNILFNBQXdCLGVBQWUsQ0FBQyxHQUFHO0lBQ3ZDLGtCQUFJLENBQUMsYUFBYSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0FBQzVCLENBQUM7QUFGRCxrQ0FFQyJ9

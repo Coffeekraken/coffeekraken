@@ -20,8 +20,8 @@ import { __querySelectorLive } from '@coffeekraken/sugar/dom';
  * @todo            tests
  *
  * @example       js
- * import linksStateAttributes from '@coffeekraken/sugar/js/feature/linksStateAttributes';
- * linksStateAttributes();
+ * import { __linksStateAttributes } from '@coffeekraken/sugar/feature';
+ * __linksStateAttributes();
  *
  * @example    html
  * <!-- page url: /something -->
@@ -91,7 +91,7 @@ document.addEventListener(
     !0,
 );
 
-function linksStateAttributes(
+export default function __linksStateAttributes(
     settings: Partial<IlinksStateAttributesSettings> = {},
 ): void {
     settings = deepMerge({}, settings);
@@ -145,4 +145,3 @@ function linksStateAttributes(
         });
     });
 }
-export default linksStateAttributes;

@@ -23,8 +23,8 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
  * @setting         {BinaryToTextEncoding}      [digest='base64']       How to digest the hash
  *
  * @example         js
- * import fileHash from '@coffeekraken/sugar/node/fs/fileHash';
- * fileHash('my/cool/folder'); // => YZOrKDx9LCLd8X39PoFTflXGpRU=,
+ * import { __fileHash } from '@coffeekraken/sugar/fs';
+ * __fileHash('my/cool/folder'); // => YZOrKDx9LCLd8X39PoFTflXGpRU=,
  *
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -40,7 +40,7 @@ export interface IFileHashSettings {
     include: Partial<IFileHashIncludeSettings>;
 }
 
-export default function fileHash(
+export default function __fileHash(
     filePath: string,
     settings: Partial<IFileHashSettings> = {},
 ): string {

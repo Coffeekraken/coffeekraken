@@ -2,7 +2,7 @@
 import __SGlob from '@coffeekraken/s-glob';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
-import __copySync from '@coffeekraken/sugar/node/fs/copySync';
+import { __copySync } from '@coffeekraken/sugar/fs';
 import __isDirectory from '@coffeekraken/sugar/node/is/directory';
 import __SCliFsCopyParamsInterface from '../../node/fs/interface/SCliFsCopyParamsInterface';
 

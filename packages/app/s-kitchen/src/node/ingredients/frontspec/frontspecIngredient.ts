@@ -1,6 +1,6 @@
 import __SLog from '@coffeekraken/s-log';
-import __copySync from '@coffeekraken/sugar/node/fs/copySync';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import { __copySync } from '@coffeekraken/sugar/fs';
+import { __dirname } from '@coffeekraken/sugar/fs';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __path from 'path';
 import type { ISKitchenIngredient } from '../../SKitchen';

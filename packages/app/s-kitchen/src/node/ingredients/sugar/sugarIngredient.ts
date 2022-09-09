@@ -1,7 +1,9 @@
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __copySync from '@coffeekraken/sugar/node/fs/copySync';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-import __prependToFileSync from '@coffeekraken/sugar/node/fs/prependToFileSync';
+import {
+    __copySync,
+    __dirname,
+    __prependToFileSync,
+} from '@coffeekraken/sugar/fs';
 import __npmInstall from '@coffeekraken/sugar/node/npm/install';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __path from 'path';

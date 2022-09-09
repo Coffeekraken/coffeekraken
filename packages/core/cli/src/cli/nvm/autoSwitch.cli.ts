@@ -1,7 +1,7 @@
 // @ts-nocheck
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import { __dirname } from '@coffeekraken/sugar/fs';
 import __fs from 'fs';
 import __os from 'os';
 import __SCliNvmAutoSwitchParamsInterface from '../../node/nvm/interface/SCliNvmAutoSwitchParamsInterface';
@@ -9,9 +9,8 @@ import __SCliNvmAutoSwitchParamsInterface from '../../node/nvm/interface/SCliNvm
 export default (stringArgs = '') => {
     return new __SPromise(
         async ({ resolve, reject, emit, pipe }) => {
-            const finalParams = __SCliNvmAutoSwitchParamsInterface.apply(
-                stringArgs,
-            );
+            const finalParams =
+                __SCliNvmAutoSwitchParamsInterface.apply(stringArgs);
 
             function appendToFile(filePath, text) {
                 const content = __fs.readFileSync(filePath, 'utf-8').toString();

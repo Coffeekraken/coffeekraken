@@ -17,14 +17,14 @@ import __fs from 'fs';
  * @return        {Boolean}                             true if the path is valide, false if not
  *
  * @example       js
- * import isPath from '@coffeekraken/sugar/node/fs/isPath';
- * isPath('hello/world'); // => true
+ * import { __isPath } from '@coffeekraken/sugar/fs';
+ * __isPath('hello/world'); // => true
  *
  * @see       https://www.npmjs.com/package/is-valid-path
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function isPath(path, checkExistence = false) {
+export default function __isPath(path, checkExistence = false) {
     if (typeof path !== 'string') return false;
 
     // empty string
@@ -49,4 +49,3 @@ function isPath(path, checkExistence = false) {
     // otherwise, all is ok
     return true;
 }
-export default isPath;

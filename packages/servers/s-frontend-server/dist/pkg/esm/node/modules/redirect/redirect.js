@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import { __dirname } from '@coffeekraken/sugar/fs';
 export default function redirect(express, settings, config) {
     return __awaiter(this, void 0, void 0, function* () {
         // register handler
@@ -17,4 +17,4 @@ export default function redirect(express, settings, config) {
         return true;
     });
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sU0FBUyxNQUFNLHFDQUFxQyxDQUFDO0FBRTVELE1BQU0sQ0FBQyxPQUFPLFVBQWdCLFFBQVEsQ0FBQyxPQUFPLEVBQUUsUUFBUSxFQUFFLE1BQU07O1FBQzVELG1CQUFtQjtRQUNuQixNQUFNLENBQUMsUUFBUSxDQUFDLFFBQVEsR0FBRztZQUN2QixJQUFJLEVBQUUsR0FBRyxTQUFTLEVBQUUsa0JBQWtCO1NBQ3pDLENBQUM7UUFFRixPQUFPLElBQUksQ0FBQztJQUNoQixDQUFDO0NBQUEifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sRUFBRSxTQUFTLEVBQUUsTUFBTSx3QkFBd0IsQ0FBQztBQUVuRCxNQUFNLENBQUMsT0FBTyxVQUFnQixRQUFRLENBQUMsT0FBTyxFQUFFLFFBQVEsRUFBRSxNQUFNOztRQUM1RCxtQkFBbUI7UUFDbkIsTUFBTSxDQUFDLFFBQVEsQ0FBQyxRQUFRLEdBQUc7WUFDdkIsSUFBSSxFQUFFLEdBQUcsU0FBUyxFQUFFLGtCQUFrQjtTQUN6QyxDQUFDO1FBRUYsT0FBTyxJQUFJLENBQUM7SUFDaEIsQ0FBQztDQUFBIn0=

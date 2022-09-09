@@ -1,10 +1,9 @@
 // @ts-nocheck
 
 import __easing from '../../shared/easing/easeInOutQuint';
-import { __querySelectorLive } from '@coffeekraken/sugar/dom';
+import { __querySelectorLive, __scrollTo } from '@coffeekraken/sugar/dom';
 import urlParse from 'url-parse';
 import type { IScrollToSettings } from '../dom/scroll/scrollTo';
-import scrollTo from '../dom/scroll/scrollTo';
 import __deepMerge from '../../shared/object/deepMerge';
 
 /**
@@ -25,8 +24,8 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @todo            tests
  *
  * @example    js
- * import smoothScrollOnAnchorLinks from '@coffeekraken/sugar/js/smoothScrollOnAnchorLinks'
- * smoothScrollOnAnchorLinks();
+ * import { __smoothScrollOnAnchorLinks } from '@coffeekraken/sugar/feature'
+ * __smoothScrollOnAnchorLinks();
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -37,7 +36,7 @@ export interface ISmoothScrollOnAnchorLinksSettings {
     checkPathNames: boolean;
 }
 
-function smoothScrollOnAnchorLinks(
+export default function __smoothScrollOnAnchorLinks(
     settings: Partial<ISmoothScrollOnAnchorLinksSettings> = {},
 ): void {
     settings = __deepMerge(
@@ -79,8 +78,7 @@ function smoothScrollOnAnchorLinks(
             history.pushState({}, null, linkUrl.hash);
 
             // all seems to be good, we can scroll to the target
-            scrollTo($target, settings.scroll);
+            __scrollTo($target, settings.scroll);
         });
     });
 }
-export default smoothScrollOnAnchorLinks;

@@ -21,16 +21,16 @@ const filesize_1 = __importDefault(require("filesize"));
  * @return            {Promise}                                           A promise that will be resolved once the folder size has been calculated
  *
  * @example           js
- * import folderSize from '@coffeekraken/sugar/node/fs/folderSize';
- * await folderSize('my/cool/folder');
- * await folderSize('my/cool/folder', false); // no formatting
+ * import { __folderSize } from '@coffeekraken/sugar/fs';
+ * await __folderSize('my/cool/folder');
+ * await __folderSize('my/cool/folder', false); // no formatting
  *
  *
  * @see             https://www.npmjs.com/package/filesize
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function folderSize(folderPath, format = {}) {
+function __folderSize(folderPath, format = {}) {
     return new Promise((resolve, reject) => {
         (0, get_folder_size_1.default)(folderPath, (error, size) => {
             if (error)
@@ -39,5 +39,5 @@ function folderSize(folderPath, format = {}) {
         });
     });
 }
-exports.default = folderSize;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHNFQUF3QztBQUN4Qyx3REFBa0M7QUFFbEM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBdUJHO0FBQ0gsU0FBUyxVQUFVLENBQUMsVUFBa0IsRUFBRSxNQUFNLEdBQUcsRUFBRTtJQUMvQyxPQUFPLElBQUksT0FBTyxDQUFDLENBQUMsT0FBTyxFQUFFLE1BQU0sRUFBRSxFQUFFO1FBQ25DLElBQUEseUJBQVMsRUFBQyxVQUFVLEVBQUUsQ0FBQyxLQUFLLEVBQUUsSUFBSSxFQUFFLEVBQUU7WUFDbEMsSUFBSSxLQUFLO2dCQUFFLE1BQU0sS0FBSyxDQUFDO1lBQ3ZCLE9BQU8sQ0FBQyxNQUFNLEtBQUssS0FBSyxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLElBQUEsa0JBQVUsRUFBQyxJQUFJLEVBQUUsTUFBTSxDQUFDLENBQUMsQ0FBQztRQUNoRSxDQUFDLENBQUMsQ0FBQztJQUNQLENBQUMsQ0FBQyxDQUFDO0FBQ1AsQ0FBQztBQUNELGtCQUFlLFVBQVUsQ0FBQyJ9
+exports.default = __folderSize;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHNFQUF3QztBQUN4Qyx3REFBa0M7QUFFbEM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBdUJHO0FBQ0gsU0FBd0IsWUFBWSxDQUFDLFVBQWtCLEVBQUUsTUFBTSxHQUFHLEVBQUU7SUFDaEUsT0FBTyxJQUFJLE9BQU8sQ0FBQyxDQUFDLE9BQU8sRUFBRSxNQUFNLEVBQUUsRUFBRTtRQUNuQyxJQUFBLHlCQUFTLEVBQUMsVUFBVSxFQUFFLENBQUMsS0FBSyxFQUFFLElBQUksRUFBRSxFQUFFO1lBQ2xDLElBQUksS0FBSztnQkFBRSxNQUFNLEtBQUssQ0FBQztZQUN2QixPQUFPLENBQUMsTUFBTSxLQUFLLEtBQUssQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQyxJQUFBLGtCQUFVLEVBQUMsSUFBSSxFQUFFLE1BQU0sQ0FBQyxDQUFDLENBQUM7UUFDaEUsQ0FBQyxDQUFDLENBQUM7SUFDUCxDQUFDLENBQUMsQ0FBQztBQUNQLENBQUM7QUFQRCwrQkFPQyJ9

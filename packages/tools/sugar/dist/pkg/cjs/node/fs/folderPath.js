@@ -1,10 +1,7 @@
 "use strict";
 // @ts-nocheck
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const isPath_1 = __importDefault(require("./isPath"));
+const fs_1 = require("@coffeekraken/sugar/fs");
 /**
  * @name                folderPath
  * @namespace            node.fs
@@ -21,15 +18,15 @@ const isPath_1 = __importDefault(require("./isPath"));
  * @return          {String|Boolean}                    The folder path or false if not exists
  *
  * @example         js
- * import folderPath from '@coffeekraken/sugar/node/fs/folderPath';
- * folderPath('my/cool/path.js'); // => true
+ * import { __folderPath } from '@coffeekraken/sugar/fs';
+ * __folderPath('my/cool/path.js'); // => true
  *
  * @since           2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function folderPath(path, checkExistence = false) {
+function __folderPath(path, checkExistence = false) {
     if (checkExistence) {
-        if (!(0, isPath_1.default)(path, true))
+        if (!(0, fs_1.__isPath)(path, true))
             return false;
     }
     const parts = path.split('/');
@@ -38,5 +35,5 @@ function folderPath(path, checkExistence = false) {
     }
     return parts.slice(0, -1).join('/');
 }
-exports.default = folderPath;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHNEQUFnQztBQUVoQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBQ0gsU0FBUyxVQUFVLENBQUMsSUFBSSxFQUFFLGNBQWMsR0FBRyxLQUFLO0lBQzVDLElBQUksY0FBYyxFQUFFO1FBQ2hCLElBQUksQ0FBQyxJQUFBLGdCQUFRLEVBQUMsSUFBSSxFQUFFLElBQUksQ0FBQztZQUFFLE9BQU8sS0FBSyxDQUFDO0tBQzNDO0lBQ0QsTUFBTSxLQUFLLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQztJQUM5QixJQUFJLEtBQUssQ0FBQyxNQUFNLElBQUksQ0FBQyxFQUFFO1FBQ25CLE9BQU8sRUFBRSxDQUFDO0tBQ2I7SUFDRCxPQUFPLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0FBQ3hDLENBQUM7QUFDRCxrQkFBZSxVQUFVLENBQUMifQ==
+exports.default = __folderPath;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkLCtDQUFrRDtBQUVsRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBQ0gsU0FBd0IsWUFBWSxDQUFDLElBQUksRUFBRSxjQUFjLEdBQUcsS0FBSztJQUM3RCxJQUFJLGNBQWMsRUFBRTtRQUNoQixJQUFJLENBQUMsSUFBQSxhQUFRLEVBQUMsSUFBSSxFQUFFLElBQUksQ0FBQztZQUFFLE9BQU8sS0FBSyxDQUFDO0tBQzNDO0lBQ0QsTUFBTSxLQUFLLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQztJQUM5QixJQUFJLEtBQUssQ0FBQyxNQUFNLElBQUksQ0FBQyxFQUFFO1FBQ25CLE9BQU8sRUFBRSxDQUFDO0tBQ2I7SUFDRCxPQUFPLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0FBQ3hDLENBQUM7QUFURCwrQkFTQyJ9

@@ -27,8 +27,8 @@ import { __querySelectorLive } from '@coffeekraken/sugar/dom';
  * @todo        add setting to specify on which elements you want to enable the feature
  *
  * @example 	js
- * import inputAdditionalAttributes from '@coffeekraken/sugar/js/feature/inputAdditionalAttributes';
- * inputAdditionalAttributes();
+ * import { __inputAdditionalAttributes } from '@coffeekraken/sugar/feature';
+ *  __inputAdditionalAttributes();
  *
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -40,7 +40,7 @@ export interface IInputAdditionalAttributesSettings {
     hasValue: boolean;
 }
 
-function inputAdditionalAttributes(
+export default function __inputAdditionalAttributes(
     settings: Partial<IInputAdditionalAttributesSettings> = {},
 ): void {
     settings = {
@@ -117,4 +117,3 @@ function inputAdditionalAttributes(
     document.addEventListener('reset', handleFormSubmitOrReset);
     document.addEventListener('submit', handleFormSubmitOrReset);
 }
-export default inputAdditionalAttributes;

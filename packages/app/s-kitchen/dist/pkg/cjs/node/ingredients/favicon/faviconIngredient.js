@@ -13,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const s_sugar_config_1 = __importDefault(require("@coffeekraken/s-sugar-config"));
-const copySync_1 = __importDefault(require("@coffeekraken/sugar/node/fs/copySync"));
-const dirname_1 = __importDefault(require("@coffeekraken/sugar/node/fs/dirname"));
+const fs_1 = require("@coffeekraken/sugar/fs");
+const fs_2 = require("@coffeekraken/sugar/fs");
 const packageRoot_1 = __importDefault(require("@coffeekraken/sugar/node/path/packageRoot"));
 const path_1 = __importDefault(require("path"));
 /**
@@ -35,13 +35,13 @@ const faviconIngredient = {
     add({ ask, log, emit }) {
         return __awaiter(this, void 0, void 0, function* () {
             // source file path
-            const sourceFilePath = path_1.default.resolve((0, packageRoot_1.default)((0, dirname_1.default)()), `src/data/favicon/favicon.png`);
+            const sourceFilePath = path_1.default.resolve((0, packageRoot_1.default)((0, fs_2.__dirname)()), `src/data/favicon/favicon.png`);
             const output = s_sugar_config_1.default.get('faviconBuilder.input');
             // copy the file to his destination
-            (0, copySync_1.default)(sourceFilePath, output);
+            (0, fs_1.__copySync)(sourceFilePath, output);
             return true;
         });
     },
 };
 exports.default = faviconIngredient;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsa0ZBQTBEO0FBQzFELG9GQUE4RDtBQUM5RCxrRkFBNEQ7QUFDNUQsNEZBQXNFO0FBQ3RFLGdEQUEwQjtBQUcxQjs7Ozs7Ozs7OztHQVVHO0FBQ0gsTUFBTSxpQkFBaUIsR0FBd0I7SUFDM0MsRUFBRSxFQUFFLFNBQVM7SUFDYixXQUFXLEVBQ1AsdUZBQXVGO0lBQzNGLFlBQVksRUFBRSxDQUFDLFNBQVMsRUFBRSxPQUFPLENBQUM7SUFDNUIsR0FBRyxDQUFDLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxJQUFJLEVBQUU7O1lBQ3hCLG1CQUFtQjtZQUNuQixNQUFNLGNBQWMsR0FBRyxjQUFNLENBQUMsT0FBTyxDQUNqQyxJQUFBLHFCQUFhLEVBQUMsSUFBQSxpQkFBUyxHQUFFLENBQUMsRUFDMUIsOEJBQThCLENBQ2pDLENBQUM7WUFFRixNQUFNLE1BQU0sR0FBRyx3QkFBYyxDQUFDLEdBQUcsQ0FBQyxzQkFBc0IsQ0FBQyxDQUFDO1lBRTFELG1DQUFtQztZQUNuQyxJQUFBLGtCQUFVLEVBQUMsY0FBYyxFQUFFLE1BQU0sQ0FBQyxDQUFDO1lBRW5DLE9BQU8sSUFBSSxDQUFDO1FBQ2hCLENBQUM7S0FBQTtDQUNKLENBQUM7QUFDRixrQkFBZSxpQkFBaUIsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsa0ZBQTBEO0FBQzFELCtDQUFvRDtBQUNwRCwrQ0FBbUQ7QUFDbkQsNEZBQXNFO0FBQ3RFLGdEQUEwQjtBQUcxQjs7Ozs7Ozs7OztHQVVHO0FBQ0gsTUFBTSxpQkFBaUIsR0FBd0I7SUFDM0MsRUFBRSxFQUFFLFNBQVM7SUFDYixXQUFXLEVBQ1AsdUZBQXVGO0lBQzNGLFlBQVksRUFBRSxDQUFDLFNBQVMsRUFBRSxPQUFPLENBQUM7SUFDNUIsR0FBRyxDQUFDLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxJQUFJLEVBQUU7O1lBQ3hCLG1CQUFtQjtZQUNuQixNQUFNLGNBQWMsR0FBRyxjQUFNLENBQUMsT0FBTyxDQUNqQyxJQUFBLHFCQUFhLEVBQUMsSUFBQSxjQUFTLEdBQUUsQ0FBQyxFQUMxQiw4QkFBOEIsQ0FDakMsQ0FBQztZQUVGLE1BQU0sTUFBTSxHQUFHLHdCQUFjLENBQUMsR0FBRyxDQUFDLHNCQUFzQixDQUFDLENBQUM7WUFFMUQsbUNBQW1DO1lBQ25DLElBQUEsZUFBVSxFQUFDLGNBQWMsRUFBRSxNQUFNLENBQUMsQ0FBQztZQUVuQyxPQUFPLElBQUksQ0FBQztRQUNoQixDQUFDO0tBQUE7Q0FDSixDQUFDO0FBQ0Ysa0JBQWUsaUJBQWlCLENBQUMifQ==

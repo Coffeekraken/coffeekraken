@@ -18,14 +18,17 @@ import { __dispatchEvent } from '@coffeekraken/sugar/dom';
  * @setting       {Boolean}       [enter=true]        Specify if you want to "enter" keyboard event
  * @setting       {Boolean}       [escape=true]        Specify if you want to "escape" keyboard event
  *
+ * @event       enter           Dispatched when the user tap the enter key in an input/textarea
+ * @event       escape          Dispatches when the user tap the escape key in an input/textarea
+ *
  * @todo        interface
  * @todo        doc
  * @todo        tests
  * @todo        add setting to specify on which elements you want to enable the feature
  *
  * @example 	js
- * import inputAdditionalEvents from '@coffeekraken/sugar/js/feature/inputAdditionalEvents';
- * inputAdditionalEvents();
+ * import { __inputAdditionalEvents } from '@coffeekraken/sugar/feature';
+ * __inputAdditionalEvents();
  *
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -36,7 +39,7 @@ export interface IInputAdditionalEventsSettings {
     escape: boolean;
 }
 
-function inputAdditionalEvents(
+export default function __inputAdditionalEvents(
     settings: Partial<IInputAdditionalEventsSettings> = {},
 ): void {
     settings = {
@@ -54,20 +57,12 @@ function inputAdditionalEvents(
                 if (e.keyCode) {
                     switch (e.keyCode) {
                         case 13: // enter
-                            if (
-                                settings.enter &&
-                                field.hasAttribute('onenter')
-                            ) {
-                                eval(field.getAttribute('onenter'));
+                            if (settings.enter) {
                                 __dispatchEvent(field, 'enter');
                             }
                             break;
                         case 27: // escape
-                            if (
-                                settings.escape &&
-                                field.hasAttribute('onescape')
-                            ) {
-                                eval(field.getAttribute('onescape'));
+                            if (settings.escape) {
                                 __dispatchEvent(field, 'escape');
                             }
                             break;
@@ -80,4 +75,3 @@ function inputAdditionalEvents(
     document.addEventListener('change', handleInputAttributes);
     document.addEventListener('keyup', handleInputAttributes);
 }
-export default inputAdditionalEvents;

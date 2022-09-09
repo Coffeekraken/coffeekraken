@@ -1,15 +1,16 @@
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
 import __npmInstall from '@coffeekraken/sugar/node/npm/install';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __fs from 'fs';
 import type { ISKitchenIngredient } from '../../SKitchen';
 
-import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
-
-import __pickOne from '@coffeekraken/sugar/node/fs/pickOne';
+import {
+    __pickOne,
+    __writeFileSync,
+    __dirname,
+    __readJsonSync,
+} from '@coffeekraken/sugar/fs';
 
 /**
  * @name        postcssIngredient

@@ -6,7 +6,7 @@ import __SConfig, { ISConfigEnvObj } from '@coffeekraken/s-config';
 import __SConfigFolderAdapter from '@coffeekraken/s-config-folder-adapter';
 import __SDocblock from '@coffeekraken/s-docblock';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import { __dirname } from '@coffeekraken/sugar/fs';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __objectHash from '@coffeekraken/sugar/shared/object/objectHash';

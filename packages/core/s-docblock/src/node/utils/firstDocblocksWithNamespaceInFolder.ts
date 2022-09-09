@@ -1,7 +1,6 @@
 // @ts-nocheck
 
-import __extension from '@coffeekraken/sugar/node/fs/extension';
-import __getFilename from '@coffeekraken/sugar/node/fs/filename';
+import { __extension, __fileName } from '@coffeekraken/sugar/fs';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __findInFiles from 'find-in-files';
 import __fs from 'fs';
@@ -68,7 +67,7 @@ export default async function firstDocblockWithNamespaceInFolder(
 
         const name =
             docblock.object.name ||
-            __getFilename(path).replace(`.${__extension(path)}`, '');
+            __fileName(path).replace(`.${__extension(path)}`, '');
 
         namespaceObj[docblock.object.namespace + '.' + name] = {
             ...docblock.object,

@@ -1,5 +1,5 @@
 import __fs from 'fs';
-import __writeFileSync from './writeFileSync';
+import { __writeFileSync } from '@coffeekraken/sugar/fs';
 
 /**
  * @name            prependToFileSync
@@ -16,13 +16,16 @@ import __writeFileSync from './writeFileSync';
  * @param       {String}            content             The content to add to the file
  *
  * @example         js
- * import prependToFileSync from '@coffeekraken/sugar/node/fs/prependToFileSync';
- * prependToFileSync('/my/cool/file.txt', 'Hello world');
+ * import { __prependToFileSync } from '@coffeekraken/sugar/fs';
+ * __prependToFileSync('/my/cool/file.txt', 'Hello world');
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function prependToFileSync(path: string, content: string): void {
+export default function __prependToFileSync(
+    path: string,
+    content: string,
+): void {
     if (!__fs.existsSync(path)) {
         __writeFileSync(path, content);
         return;

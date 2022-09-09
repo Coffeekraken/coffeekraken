@@ -3,8 +3,10 @@
 import __SDataFileJs from '@coffeekraken/s-data-file-js';
 import __SDataFilePhp from '@coffeekraken/s-data-file-php';
 import __SPromise from '@coffeekraken/s-promise';
-import __checkPathWithMultipleExtensions from '@coffeekraken/sugar/node/fs/checkPathWithMultipleExtensions';
-import __extension from '@coffeekraken/sugar/node/fs/extension';
+import {
+    __checkPathWithMultipleExtensions,
+    __extension,
+} from '@coffeekraken/sugar/fs';
 import __fs from 'fs';
 
 /**

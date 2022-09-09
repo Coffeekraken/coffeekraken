@@ -1,5 +1,5 @@
 import __SDuration from '@coffeekraken/s-duration';
-import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
+import { __writeFileSync } from '@coffeekraken/sugar/fs';
 import { minify as __minify } from 'csso';
 
 export default async function ({ root, sharedData, settings, cacheDir }) {

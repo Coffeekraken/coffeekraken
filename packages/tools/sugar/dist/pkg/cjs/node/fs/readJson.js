@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
-const readJsonSync_1 = __importDefault(require("./readJsonSync"));
+const fs_2 = require("@coffeekraken/sugar/fs");
 /**
  * @name            readJson
  * @namespace       node.fs
@@ -27,20 +27,20 @@ const readJsonSync_1 = __importDefault(require("./readJsonSync"));
  * @return      {Object}                            The readed json
  *
  * @example         js
- * import readJson from '@coffeekraken/sugar/node/fs/readJson';
- * await readJson('my-cool-json/file.json');
+ * import { __readJson } from '@coffeekraken/sugar/fs';
+ * await __readJson('my-cool-json/file.json');
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function readJson(path) {
+function __readJson(path) {
     if (!fs_1.default.existsSync(path)) {
         throw new Error(`<red>[readJson]</red> Sorry but the passed file path "<cyan>${path}</cyan>" does not exists...`);
     }
     return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-        const json = (0, readJsonSync_1.default)(path);
+        const json = (0, fs_2.__readJsonSync)(path);
         resolve(json);
     }));
 }
-exports.default = readJson;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsNENBQXNCO0FBQ3RCLGtFQUE0QztBQUU1Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBa0JHO0FBQ0gsU0FBd0IsUUFBUSxDQUFDLElBQVk7SUFDekMsSUFBSSxDQUFDLFlBQUksQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLEVBQUU7UUFDeEIsTUFBTSxJQUFJLEtBQUssQ0FDWCwrREFBK0QsSUFBSSw2QkFBNkIsQ0FDbkcsQ0FBQztLQUNMO0lBQ0QsT0FBTyxJQUFJLE9BQU8sQ0FBQyxDQUFPLE9BQU8sRUFBRSxNQUFNLEVBQUUsRUFBRTtRQUN6QyxNQUFNLElBQUksR0FBRyxJQUFBLHNCQUFjLEVBQUMsSUFBSSxDQUFDLENBQUM7UUFDbEMsT0FBTyxDQUFDLElBQUksQ0FBQyxDQUFDO0lBQ2xCLENBQUMsQ0FBQSxDQUFDLENBQUM7QUFDUCxDQUFDO0FBVkQsMkJBVUMifQ==
+exports.default = __readJson;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsNENBQXNCO0FBQ3RCLCtDQUF3RDtBQUV4RDs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBa0JHO0FBQ0gsU0FBd0IsVUFBVSxDQUFDLElBQVk7SUFDM0MsSUFBSSxDQUFDLFlBQUksQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLEVBQUU7UUFDeEIsTUFBTSxJQUFJLEtBQUssQ0FDWCwrREFBK0QsSUFBSSw2QkFBNkIsQ0FDbkcsQ0FBQztLQUNMO0lBQ0QsT0FBTyxJQUFJLE9BQU8sQ0FBQyxDQUFPLE9BQU8sRUFBRSxNQUFNLEVBQUUsRUFBRTtRQUN6QyxNQUFNLElBQUksR0FBRyxJQUFBLG1CQUFjLEVBQUMsSUFBSSxDQUFDLENBQUM7UUFDbEMsT0FBTyxDQUFDLElBQUksQ0FBQyxDQUFDO0lBQ2xCLENBQUMsQ0FBQSxDQUFDLENBQUM7QUFDUCxDQUFDO0FBVkQsNkJBVUMifQ==

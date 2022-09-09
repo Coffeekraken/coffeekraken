@@ -2,7 +2,7 @@
 
 import __json from './json';
 import __deepMerge from '../../shared/object/deepMerge';
-import __getFilename from '../fs/filename';
+import { __fileName } from '@coffeekraken/sugar/fs';
 import __SugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
@@ -43,7 +43,7 @@ function namespace(path, settings = {}) {
 
     // sanitize the passed path
     let sanitizedPath = path;
-    const filename = __getFilename(path);
+    const filename = __fileName(path);
     if (filename && sanitizedPath.split('/').length > 1) {
         sanitizedPath = sanitizedPath
             .replace('/' + filename, '')

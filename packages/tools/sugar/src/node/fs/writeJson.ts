@@ -1,7 +1,6 @@
 // @ts-nocheck
 
-import __folderPath from './folderPath';
-import __ensureDirSync from './ensureDirSync';
+import { __ensureDirSync, __folderPath } from '@coffeekraken/sugar/fs';
 import __fs from 'fs';
 import __stringify from '../../shared/json/stringify';
 
@@ -21,18 +20,17 @@ import __stringify from '../../shared/json/stringify';
  * @return      {Promise}                           A promise that will be resolved when the writeJson is completed
  *
  * @example       js
- * import writeJson from '@coffeekraken/node/fs/writeJson';
- * writeJson('my/cool/file.json', { hello: 'world' }).then(() => {
+ * import { __writeJson } from '@coffeekraken/sugar/fs';
+ * __writeJson('my/cool/file.json', { hello: 'world' }).then(() => {
  *    // do something on complete...
  * });
  *
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function writeJson(path, data, options = {}) {
+export default function __writeJson(path, data, options = {}) {
     const folderPath = __folderPath(path);
     __ensureDirSync(folderPath);
     const jsonStr = __stringify(data, null, 4);
     return __fs.writeFile(path, jsonStr);
 }
-export default writeJson;

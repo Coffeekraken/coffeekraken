@@ -3,7 +3,7 @@ import __SFile from '@coffeekraken/s-file';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
+import { __writeJsonSync } from '@coffeekraken/sugar/fs';
 import __packageJson from '@coffeekraken/sugar/node/package/jsonSync';
 import __renamePackage from '@coffeekraken/sugar/node/package/renamePackage';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';

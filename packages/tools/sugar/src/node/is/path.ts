@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __isPath from '../fs/isPath';
+import { __isPath } from '@coffeekraken/sugar/fs';
 
 /**
  * @name                            path

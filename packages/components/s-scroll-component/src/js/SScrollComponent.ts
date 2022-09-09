@@ -4,7 +4,7 @@ import __SLitComponent, {
     ISLitComponentDefaultProps,
 } from '@coffeekraken/s-lit-component';
 import __STheme from '@coffeekraken/s-theme';
-import __scrollTo from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
+import { __scrollTo } from '@coffeekraken/sugar/dom';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import { css, html, unsafeCSS } from 'lit';
 import __SScrollComponentInterface from './interface/SScrollComponentInterface';

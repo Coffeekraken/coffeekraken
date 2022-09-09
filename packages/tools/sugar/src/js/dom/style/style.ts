@@ -1,8 +1,10 @@
 // @ts-nocheck
 
 import __uncamelize from '../../../shared/string/uncamelize';
-import __styleString2Object from '../styleString2Object';
-import __styleObject2String from '../styleObject2String';
+import {
+    __styleObject2String,
+    __styleString2Object,
+} from '@coffeekraken/sugar/css';
 
 /**
  * @name      style
@@ -22,8 +24,8 @@ import __styleObject2String from '../styleObject2String';
  * @todo      tests
  *
  * @example 	js
- * import style from '@coffeekraken/sugar/js/dom/style'
- * style(myCoolHTMLElement, {
+ * import { __style } from '@coffeekraken/sugar/dom'
+ * __style(myCoolHTMLElement, {
  * 		paddingLeft : 20,
  * 		display : null
  * });
@@ -31,7 +33,7 @@ import __styleObject2String from '../styleObject2String';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function style(elm: HTMLElement, styleObj: any): any {
+export default function __style(elm: HTMLElement, styleObj: any): any {
     // convert style string to object
     const styleAttr = elm.getAttribute('style');
 
@@ -49,4 +51,3 @@ function style(elm: HTMLElement, styleObj: any): any {
     // return the style
     return elm.style;
 }
-export default style;

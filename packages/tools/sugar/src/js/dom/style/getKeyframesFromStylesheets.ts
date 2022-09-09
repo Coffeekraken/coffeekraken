@@ -1,4 +1,4 @@
-import __getCssRulesFromStylesheet from './getCssRulesFromStylesheet';
+import { __getCssRulesFromStylesheet } from '@coffeekraken/sugar/dom';
 import __getKeyframesDeclarations from './getKeyframesDeclarations';
 import __transformKeyframeDeclaration, {
     ITransformedKeyframeDeclaration,

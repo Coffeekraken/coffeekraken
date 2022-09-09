@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __SBench from '@coffeekraken/s-bench';
-import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
+import { __readJsonSync } from '@coffeekraken/sugar/fs';
 import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __formatPackageJson from '@coffeekraken/sugar/shared/package/formatPackageJson';
 import __fs from 'fs';

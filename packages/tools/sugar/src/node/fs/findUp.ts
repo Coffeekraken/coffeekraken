@@ -22,8 +22,8 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
  * @return      {SFile|null}                                 An SFile instance or null if nothings founded
  *
  * @example         js
- * import findUp from '@coffeekraken/sugar/node/fs/findUp';
- * const file = await findUp('myCoolFile.json', {});
+ * import { __findUp } from '@coffeekraken/sugar/fs';
+ * const file = await __findUp('myCoolFile.json', {});
  * console.log(file.path);
  *
  * @since       2.0.0
@@ -37,7 +37,7 @@ export interface IFindUpSettings {
     SFile?: boolean;
 }
 
-export default function findUp(
+export default function __findUp(
     search: string,
     settings: IFindUpSettings,
 ): Promise<string[] | SFile[]> {

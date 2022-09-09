@@ -1,4 +1,4 @@
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import { __dirname } from '@coffeekraken/sugar/fs';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __systemTmpDir from '@coffeekraken/sugar/node/path/systemTmpDir';
 

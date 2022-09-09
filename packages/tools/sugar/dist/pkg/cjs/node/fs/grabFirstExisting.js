@@ -18,7 +18,7 @@ const fs_1 = __importDefault(require("fs"));
  * @return          {String}                            The first existing path
  *
  * @example       js
- * import __grabFirstExisting from '@coffeekraken/sugar/node/fs/grabFirstExisting';
+ * import { __grabFirstExisting } from '@coffeekraken/sugar/fs';
  * __grabFirstExisting([
  *  'file/1.txt',
  *  'file/2.txt
@@ -27,11 +27,11 @@ const fs_1 = __importDefault(require("fs"));
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function grabFirstExisting(paths) {
+function __grabFirstExisting(paths) {
     for (let [idx, path] of Object.entries(paths)) {
         if (fs_1.default.existsSync(path))
             return path;
     }
 }
-exports.default = grabFirstExisting;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsY0FBYztBQUNkLDRDQUFzQjtBQUV0Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBQ0gsU0FBUyxpQkFBaUIsQ0FBQyxLQUFlO0lBQ3RDLEtBQUssSUFBSSxDQUFDLEdBQUcsRUFBRSxJQUFJLENBQUMsSUFBSSxNQUFNLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxFQUFFO1FBQzNDLElBQUksWUFBSSxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUM7WUFBRSxPQUFPLElBQUksQ0FBQztLQUMxQztBQUNMLENBQUM7QUFDRCxrQkFBZSxpQkFBaUIsQ0FBQyJ9
+exports.default = __grabFirstExisting;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsY0FBYztBQUNkLDRDQUFzQjtBQUV0Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBQ0gsU0FBd0IsbUJBQW1CLENBQUMsS0FBZTtJQUN2RCxLQUFLLElBQUksQ0FBQyxHQUFHLEVBQUUsSUFBSSxDQUFDLElBQUksTUFBTSxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsRUFBRTtRQUMzQyxJQUFJLFlBQUksQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDO1lBQUUsT0FBTyxJQUFJLENBQUM7S0FDMUM7QUFDTCxDQUFDO0FBSkQsc0NBSUMifQ==

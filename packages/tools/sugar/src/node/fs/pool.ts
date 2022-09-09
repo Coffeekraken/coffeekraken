@@ -37,18 +37,18 @@ import __matchGlob from '../glob/matchGlob';
  * @setting             {IChokidarSettings}     [chokidar={}]       Specify some settings to pass to chokidar in order to watch files
  *
  * @example         js
- * import pool from '@coffeekraken/sugar/node/fs/pool';
- * const myPool = pool('/something/cool/** /*', {
+ * import { __pool } from '@coffeekraken/sugar/fs';
+ * const myPool = __pool('/something/cool/** /*', {
  *  watch: true
  * }):
- * pool.on('file', file => {
+ * __pool.on('file', file => {
  *      // do something with each files
  * })
- * pool.on('update', (file) => {
+ * __pool.on('update', (file) => {
  *      // do something with updated files
  * });
  * // when you want to stop your pool watching process
- * pool.cancel();
+ * __pool.cancel();
  *
  * @see             https://www.npmjs.com/package/chokidar
  * @since       2.0.0
@@ -80,7 +80,7 @@ export interface IChokidarSettings {
     atomic: boolean;
 }
 
-function pool(input, settings?: Partial<IPoolSettings>) {
+export default function __pool(input, settings?: Partial<IPoolSettings>) {
     const filesStack: Record<string, string | __SFile> = {};
 
     return new __SPromise(
@@ -212,5 +212,3 @@ function pool(input, settings?: Partial<IPoolSettings>) {
         },
     );
 }
-
-export default pool;

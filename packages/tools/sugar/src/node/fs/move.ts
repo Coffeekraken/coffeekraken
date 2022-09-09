@@ -16,8 +16,8 @@ import __fs from 'fs-extra';
  * @return      {Promise}                           A promise that will be resolved once the file/directory has been moved...
  *
  * @example       js
- * import move from '@coffeekraken/node/fs/move';
- * move('my/cool/dir', 'another/place/for/directory').then(() => {
+ * import { __move } from '@coffeekraken/sugar/fs';
+ * await __move('my/cool/dir', 'another/place/for/directory').then(() => {
  *    // do something...
  * });
  *
@@ -25,7 +25,6 @@ import __fs from 'fs-extra';
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function move(src, dest) {
+export default function __move(src, dest) {
     return __fs.move(src, dest);
 }
-export default move;

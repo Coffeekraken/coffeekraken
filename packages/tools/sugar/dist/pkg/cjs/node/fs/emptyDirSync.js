@@ -17,17 +17,15 @@ const fs_extra_1 = __importDefault(require("fs-extra"));
  * @param       {String}              dir           The directory path to empty
  *
  * @example       js
- * import emptyDirSync from '@coffeekraken/node/fs/emptyDirSync';
- * try {
- *    emptyDirSync('my/cool/directory');
- * } catch(e) {}
+ * import { __emptyDirSync } from '@coffeekraken/sugar/fs';
+ * __emptyDirSync('my/cool/directory');
  *
  * @see             https://github.com/jprichardson/node-fs-extra
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function emptyDirSync(dir) {
+function __emptyDirSync(dir) {
     fs_extra_1.default.emptyDirSync(dir);
 }
-exports.default = emptyDirSync;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUE0QjtBQUU1Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FvQkc7QUFDSCxTQUFTLFlBQVksQ0FBQyxHQUFHO0lBQ3JCLGtCQUFJLENBQUMsWUFBWSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0FBQzNCLENBQUM7QUFDRCxrQkFBZSxZQUFZLENBQUMifQ==
+exports.default = __emptyDirSync;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUE0QjtBQUU1Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBa0JHO0FBQ0gsU0FBd0IsY0FBYyxDQUFDLEdBQUc7SUFDdEMsa0JBQUksQ0FBQyxZQUFZLENBQUMsR0FBRyxDQUFDLENBQUM7QUFDM0IsQ0FBQztBQUZELGlDQUVDIn0=

@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __strToHtml from '../../html/strToHtml';
+import { __stringToNode } from '@coffeekraken/sugar/dom';
 
 function processString(string) {
     return string
@@ -14,7 +14,7 @@ function processNodeElm(elm) {
     switch (elm.tagName.toLowerCase()) {
         case 'script':
             // grab the script content and convert it to html if needed
-            return __strToHtml(elm.innerHTML);
+            return __stringToNode(elm.innerHTML);
             break;
         case 'template':
             // get the template content
@@ -66,7 +66,7 @@ export default function __toDomNodes(
         source.substr(-1) === '>'
     ) {
         // The source is an html string source
-        return __strToHtml(source);
+        return __stringToNode(source);
     }
 
     // string selector

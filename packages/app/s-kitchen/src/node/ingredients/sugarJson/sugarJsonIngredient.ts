@@ -1,6 +1,5 @@
 import __SLog from '@coffeekraken/s-log';
-import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
-import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
+import { __readJsonSync, __writeJsonSync } from '@coffeekraken/sugar/fs';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __fs from 'fs';
 import type { ISKitchenIngredient } from '../../SKitchen';

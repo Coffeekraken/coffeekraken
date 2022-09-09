@@ -19,8 +19,8 @@ import * as rematrix from 'rematrix';
  * @todo      tests
  *
  * @example  	js
- * import getRotateProperties from '@coffeekraken/sugar/js/dom/getRotateProperties'
- * const props = getRotateProperties(myCoolHTMLElement);
+ * import { __getRotateProperties } from '@coffeekraken/sugar/dom'
+ * const props = __getRotateProperties(myCoolHTMLElement);
  * // output format
  * // {
  * // 	x : 100,
@@ -31,9 +31,7 @@ import * as rematrix from 'rematrix';
  * @since           1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function getRotateProperties(
-    $elm: HTMLElement
-): {
+export default function __getRotateProperties($elm: HTMLElement): {
     x: number;
     y: number;
     z: number;
@@ -56,18 +54,16 @@ function getRotateProperties(
     var values = matrix.split(','),
         pi = Math.PI,
         sinB = parseFloat(values[8]),
-        b = Math.round(Math.asin(sinB) * 180 / pi),
-        cosB = Math.cos(b * pi / 180),
+        b = Math.round((Math.asin(sinB) * 180) / pi),
+        cosB = Math.cos((b * pi) / 180),
         matrixVal10 = parseFloat(values[9]),
-        a = Math.round(Math.asin(-matrixVal10 / cosB) * 180 / pi),
+        a = Math.round((Math.asin(-matrixVal10 / cosB) * 180) / pi),
         matrixVal1 = parseFloat(values[0]),
-        c = Math.round(Math.acos(matrixVal1 / cosB) * 180 / pi) * -1;
+        c = Math.round((Math.acos(matrixVal1 / cosB) * 180) / pi) * -1;
 
     return {
         x: a,
         y: b,
         z: c,
     };
-
 }
-export default getRotateProperties;

@@ -1,7 +1,6 @@
 // @ts-nocheck
 
-import __folderPath from './folderPath';
-import __ensureDirSync from './ensureDirSync';
+import { __folderPath, __ensureDirSync } from '@coffeekraken/sugar/fs';
 import __fs from 'fs-extra';
 
 /**
@@ -20,8 +19,8 @@ import __fs from 'fs-extra';
  * @return      {Promise}                           A promise that will be resolved when the writeFile is completed
  *
  * @example       js
- * import writeFile from '@coffeekraken/node/fs/writeFile';
- * writeFile('my/cool/file.txt', 'Hello World').then(() => {
+ * import { __writeFile } from '@coffeekraken/sugar/fs';
+ * __writeFile('my/cool/file.txt', 'Hello World').then(() => {
  *    // do something on complete...
  * });
  *
@@ -29,7 +28,7 @@ import __fs from 'fs-extra';
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function writeFile(path, data, options = {}) {
+export default function __writeFile(path, data, options = {}) {
     return new Promise(async (resolve) => {
         const folderPath = __folderPath(path);
         __ensureDirSync(folderPath);
@@ -37,4 +36,3 @@ function writeFile(path, data, options = {}) {
         resolve(path);
     });
 }
-export default writeFile;

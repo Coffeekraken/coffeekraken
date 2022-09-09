@@ -12,10 +12,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const copySync_1 = __importDefault(require("@coffeekraken/sugar/node/fs/copySync"));
-const dirname_1 = __importDefault(require("@coffeekraken/sugar/node/fs/dirname"));
+const fs_1 = require("@coffeekraken/sugar/fs");
+const fs_2 = require("@coffeekraken/sugar/fs");
 const packageRoot_1 = __importDefault(require("@coffeekraken/sugar/node/path/packageRoot"));
-const fs_1 = __importDefault(require("fs"));
+const fs_3 = __importDefault(require("fs"));
 const s_sugar_config_1 = __importDefault(require("@coffeekraken/s-sugar-config"));
 const path_1 = __importDefault(require("path"));
 /**
@@ -36,7 +36,7 @@ const readmeIngredient = {
     add({ ask, log, emit }) {
         return __awaiter(this, void 0, void 0, function* () {
             const input = s_sugar_config_1.default.get('readme.input'), output = s_sugar_config_1.default.get('readme.output');
-            if (fs_1.default.existsSync(input) &&
+            if (fs_3.default.existsSync(input) &&
                 !(yield ask({
                     type: 'confirm',
                     message: 'A README file already exists. Would you like to override it?',
@@ -44,9 +44,9 @@ const readmeIngredient = {
                 }))) {
                 return false;
             }
-            const sourceReadmePath = path_1.default.resolve((0, packageRoot_1.default)((0, dirname_1.default)()), 'src/data/readme/README.md');
+            const sourceReadmePath = path_1.default.resolve((0, packageRoot_1.default)((0, fs_2.__dirname)()), 'src/data/readme/README.md');
             // copy the file to the project root
-            (0, copySync_1.default)(sourceReadmePath, input);
+            (0, fs_1.__copySync)(sourceReadmePath, input);
             // @TODO            Add the build phase
             // // build source README.md file
             // const builder = new __SMarkdownBuilder();
@@ -65,4 +65,4 @@ const readmeIngredient = {
     },
 };
 exports.default = readmeIngredient;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsb0ZBQThEO0FBQzlELGtGQUE0RDtBQUM1RCw0RkFBc0U7QUFDdEUsNENBQXNCO0FBR3RCLGtGQUEwRDtBQUMxRCxnREFBMEI7QUFFMUI7Ozs7Ozs7Ozs7R0FVRztBQUNILE1BQU0sZ0JBQWdCLEdBQXdCO0lBQzFDLEVBQUUsRUFBRSxRQUFRO0lBQ1osV0FBVyxFQUNQLCtEQUErRDtJQUNuRSxZQUFZLEVBQUUsQ0FBQyxTQUFTLEVBQUUsT0FBTyxDQUFDO0lBQzVCLEdBQUcsQ0FBQyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsSUFBSSxFQUFFOztZQUN4QixNQUFNLEtBQUssR0FBRyx3QkFBYyxDQUFDLEdBQUcsQ0FBQyxjQUFjLENBQUMsRUFDNUMsTUFBTSxHQUFHLHdCQUFjLENBQUMsR0FBRyxDQUFDLGVBQWUsQ0FBQyxDQUFDO1lBRWpELElBQ0ksWUFBSSxDQUFDLFVBQVUsQ0FBQyxLQUFLLENBQUM7Z0JBQ3RCLENBQUMsQ0FBQyxNQUFNLEdBQUcsQ0FBQztvQkFDUixJQUFJLEVBQUUsU0FBUztvQkFDZixPQUFPLEVBQ0gsOERBQThEO29CQUNsRSxPQUFPLEVBQUUsSUFBSTtpQkFDaEIsQ0FBQyxDQUFDLEVBQ0w7Z0JBQ0UsT0FBTyxLQUFLLENBQUM7YUFDaEI7WUFFRCxNQUFNLGdCQUFnQixHQUFHLGNBQU0sQ0FBQyxPQUFPLENBQ25DLElBQUEscUJBQWEsRUFBQyxJQUFBLGlCQUFTLEdBQUUsQ0FBQyxFQUMxQiwyQkFBMkIsQ0FDOUIsQ0FBQztZQUVGLG9DQUFvQztZQUNwQyxJQUFBLGtCQUFVLEVBQUMsZ0JBQWdCLEVBQUUsS0FBSyxDQUFDLENBQUM7WUFFcEMsdUNBQXVDO1lBRXZDLGlDQUFpQztZQUNqQyw0Q0FBNEM7WUFDNUMsdUNBQXVDO1lBQ3ZDLDhCQUE4QjtZQUM5QixzQ0FBc0M7WUFDdEMsOEJBQThCO1lBQzlCLFNBQVM7WUFDVCxpQ0FBaUM7WUFDakMsTUFBTTtZQUVOLElBQUksQ0FBQyxLQUFLLEVBQUU7Z0JBQ1IsS0FBSyxFQUFFLGlDQUFpQyxjQUFNLENBQUMsUUFBUSxDQUNuRCxJQUFBLHFCQUFhLEdBQUUsRUFDZixLQUFLLENBQ1IsMkNBQTJDO2FBQy9DLENBQUMsQ0FBQztZQUVILE9BQU8sSUFBSSxDQUFDO1FBQ2hCLENBQUM7S0FBQTtDQUNKLENBQUM7QUFDRixrQkFBZSxnQkFBZ0IsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsK0NBQW9EO0FBQ3BELCtDQUFtRDtBQUNuRCw0RkFBc0U7QUFDdEUsNENBQXNCO0FBR3RCLGtGQUEwRDtBQUMxRCxnREFBMEI7QUFFMUI7Ozs7Ozs7Ozs7R0FVRztBQUNILE1BQU0sZ0JBQWdCLEdBQXdCO0lBQzFDLEVBQUUsRUFBRSxRQUFRO0lBQ1osV0FBVyxFQUNQLCtEQUErRDtJQUNuRSxZQUFZLEVBQUUsQ0FBQyxTQUFTLEVBQUUsT0FBTyxDQUFDO0lBQzVCLEdBQUcsQ0FBQyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsSUFBSSxFQUFFOztZQUN4QixNQUFNLEtBQUssR0FBRyx3QkFBYyxDQUFDLEdBQUcsQ0FBQyxjQUFjLENBQUMsRUFDNUMsTUFBTSxHQUFHLHdCQUFjLENBQUMsR0FBRyxDQUFDLGVBQWUsQ0FBQyxDQUFDO1lBRWpELElBQ0ksWUFBSSxDQUFDLFVBQVUsQ0FBQyxLQUFLLENBQUM7Z0JBQ3RCLENBQUMsQ0FBQyxNQUFNLEdBQUcsQ0FBQztvQkFDUixJQUFJLEVBQUUsU0FBUztvQkFDZixPQUFPLEVBQ0gsOERBQThEO29CQUNsRSxPQUFPLEVBQUUsSUFBSTtpQkFDaEIsQ0FBQyxDQUFDLEVBQ0w7Z0JBQ0UsT0FBTyxLQUFLLENBQUM7YUFDaEI7WUFFRCxNQUFNLGdCQUFnQixHQUFHLGNBQU0sQ0FBQyxPQUFPLENBQ25DLElBQUEscUJBQWEsRUFBQyxJQUFBLGNBQVMsR0FBRSxDQUFDLEVBQzFCLDJCQUEyQixDQUM5QixDQUFDO1lBRUYsb0NBQW9DO1lBQ3BDLElBQUEsZUFBVSxFQUFDLGdCQUFnQixFQUFFLEtBQUssQ0FBQyxDQUFDO1lBRXBDLHVDQUF1QztZQUV2QyxpQ0FBaUM7WUFDakMsNENBQTRDO1lBQzVDLHVDQUF1QztZQUN2Qyw4QkFBOEI7WUFDOUIsc0NBQXNDO1lBQ3RDLDhCQUE4QjtZQUM5QixTQUFTO1lBQ1QsaUNBQWlDO1lBQ2pDLE1BQU07WUFFTixJQUFJLENBQUMsS0FBSyxFQUFFO2dCQUNSLEtBQUssRUFBRSxpQ0FBaUMsY0FBTSxDQUFDLFFBQVEsQ0FDbkQsSUFBQSxxQkFBYSxHQUFFLEVBQ2YsS0FBSyxDQUNSLDJDQUEyQzthQUMvQyxDQUFDLENBQUM7WUFFSCxPQUFPLElBQUksQ0FBQztRQUNoQixDQUFDO0tBQUE7Q0FDSixDQUFDO0FBQ0Ysa0JBQWUsZ0JBQWdCLENBQUMifQ==

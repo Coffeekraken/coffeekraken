@@ -1,4 +1,4 @@
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import { __dirname } from '@coffeekraken/sugar/fs';
 
 export default async function dynamic(express, settings, config) {
     // register handler

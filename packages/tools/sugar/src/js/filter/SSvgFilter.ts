@@ -3,7 +3,7 @@
 import uniqid from '../../shared/string/uniqid';
 
 /**
- * @name 		          SGooeySvgFilter
+ * @name 		           __SSvgFilter
  * @namespace            js.filter
  * @type             Class
  * @platform          js
@@ -17,7 +17,8 @@ import uniqid from '../../shared/string/uniqid';
  * @todo      tests
  *
  * @example 		js
- * class MyBlurFilter extends SSvgFilter {
+ * import { __SSvgFilter } from '@coffeekraken/sugar/filter';
+ * class MyBlurFilter extends  __SSvgFilter {
  *
  * 		constructor(amount = 8) {
  * 			super(`
@@ -33,7 +34,7 @@ import uniqid from '../../shared/string/uniqid';
  * @since           1.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default class SSvgFilter {
+export default class __SSvgFilter {
     /**
      * @name          constructor
      * @type          Function

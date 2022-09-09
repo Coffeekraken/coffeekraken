@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const dirname_1 = __importDefault(require("@coffeekraken/sugar/node/fs/dirname"));
+const fs_1 = require("@coffeekraken/sugar/fs");
 const path_1 = __importDefault(require("path"));
 exports.default = (api) => {
     if (api.env.platform !== 'node')
@@ -89,7 +89,7 @@ exports.default = (api) => {
                  * @since           2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                path: path_1.default.resolve(`${(0, dirname_1.default)()}/../node/sources/SSitemapBuilderFileSource`),
+                path: path_1.default.resolve(`${(0, fs_1.__dirname)()}/../node/sources/SSitemapBuilderFileSource`),
             },
             docmap: {
                 /**
@@ -127,9 +127,9 @@ exports.default = (api) => {
                  * @since           2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                path: path_1.default.resolve(`${(0, dirname_1.default)()}/../node/sources/SSitemapBuilderDocmapSource`),
+                path: path_1.default.resolve(`${(0, fs_1.__dirname)()}/../node/sources/SSitemapBuilderDocmapSource`),
             },
         },
     };
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsa0ZBQTREO0FBQzVELGdEQUEwQjtBQUUxQixrQkFBZSxDQUFDLEdBQUcsRUFBRSxFQUFFO0lBQ25CLElBQUksR0FBRyxDQUFDLEdBQUcsQ0FBQyxRQUFRLEtBQUssTUFBTTtRQUFFLE9BQU87SUFDeEMsT0FBTztRQUNILEtBQUssRUFBRTtZQUNIOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLE1BQU07Z0JBQ04sT0FBTyxHQUFHLEdBQUcsQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLEdBQUcsQ0FBQyxTQUFTLGNBQWMsQ0FBQztZQUM3RCxDQUFDO1NBQ0o7UUFDRCxPQUFPLEVBQUU7WUFDTCxJQUFJLEVBQUU7Z0JBQ0Y7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsTUFBTSxFQUFFLElBQUk7Z0JBQ1o7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsUUFBUSxFQUFFO29CQUNOOzs7Ozs7Ozs7O3VCQVVHO29CQUNILElBQUksRUFBRSxDQUFDLHNCQUFzQixDQUFDO29CQUM5Qjs7Ozs7Ozs7Ozt1QkFVRztvQkFDSCxJQUFJLEtBQUs7d0JBQ0wsT0FBTyxHQUFHLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxHQUFHLENBQUMsT0FBTyxDQUFDO29CQUMxQyxDQUFDO2lCQUNKO2dCQUNEOzs7Ozs7Ozs7O21CQVVHO2dCQUNILElBQUksRUFBRSxjQUFNLENBQUMsT0FBTyxDQUNoQixHQUFHLElBQUEsaUJBQVMsR0FBRSw0Q0FBNEMsQ0FDN0Q7YUFDSjtZQUNELE1BQU0sRUFBRTtnQkFDSjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxNQUFNLEVBQUUsSUFBSTtnQkFDWjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxRQUFRLEVBQUUsRUFBRTtnQkFDWjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxJQUFJLEVBQUUsY0FBTSxDQUFDLE9BQU8sQ0FDaEIsR0FBRyxJQUFBLGlCQUFTLEdBQUUsOENBQThDLENBQy9EO2FBQ0o7U0FDSjtLQUNKLENBQUM7QUFDTixDQUFDLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsK0NBQW1EO0FBQ25ELGdEQUEwQjtBQUUxQixrQkFBZSxDQUFDLEdBQUcsRUFBRSxFQUFFO0lBQ25CLElBQUksR0FBRyxDQUFDLEdBQUcsQ0FBQyxRQUFRLEtBQUssTUFBTTtRQUFFLE9BQU87SUFDeEMsT0FBTztRQUNILEtBQUssRUFBRTtZQUNIOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLE1BQU07Z0JBQ04sT0FBTyxHQUFHLEdBQUcsQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLEdBQUcsQ0FBQyxTQUFTLGNBQWMsQ0FBQztZQUM3RCxDQUFDO1NBQ0o7UUFDRCxPQUFPLEVBQUU7WUFDTCxJQUFJLEVBQUU7Z0JBQ0Y7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsTUFBTSxFQUFFLElBQUk7Z0JBQ1o7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsUUFBUSxFQUFFO29CQUNOOzs7Ozs7Ozs7O3VCQVVHO29CQUNILElBQUksRUFBRSxDQUFDLHNCQUFzQixDQUFDO29CQUM5Qjs7Ozs7Ozs7Ozt1QkFVRztvQkFDSCxJQUFJLEtBQUs7d0JBQ0wsT0FBTyxHQUFHLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxHQUFHLENBQUMsT0FBTyxDQUFDO29CQUMxQyxDQUFDO2lCQUNKO2dCQUNEOzs7Ozs7Ozs7O21CQVVHO2dCQUNILElBQUksRUFBRSxjQUFNLENBQUMsT0FBTyxDQUNoQixHQUFHLElBQUEsY0FBUyxHQUFFLDRDQUE0QyxDQUM3RDthQUNKO1lBQ0QsTUFBTSxFQUFFO2dCQUNKOzs7Ozs7Ozs7O21CQVVHO2dCQUNILE1BQU0sRUFBRSxJQUFJO2dCQUNaOzs7Ozs7Ozs7O21CQVVHO2dCQUNILFFBQVEsRUFBRSxFQUFFO2dCQUNaOzs7Ozs7Ozs7O21CQVVHO2dCQUNILElBQUksRUFBRSxjQUFNLENBQUMsT0FBTyxDQUNoQixHQUFHLElBQUEsY0FBUyxHQUFFLDhDQUE4QyxDQUMvRDthQUNKO1NBQ0o7S0FDSixDQUFDO0FBQ04sQ0FBQyxDQUFDIn0=

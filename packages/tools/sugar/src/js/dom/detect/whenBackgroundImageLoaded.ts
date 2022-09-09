@@ -2,8 +2,7 @@
 
 import __SPromise from '@coffeekraken/s-promise';
 import __unquote from '../../../shared/string/unquote';
-import __getStyleProperty from '../style/getStyleProperty';
-import { __whenImageLoaded } from '@coffeekraken/sugar/dom';
+import { __whenImageLoaded, __getStyleProperty } from '@coffeekraken/sugar/dom';
 
 /**
  * @name        whenBackgroundImageLoaded

@@ -18,8 +18,8 @@ const fs_extra_1 = __importDefault(require("fs-extra"));
  * @return      {Promise}                           A promise that will be resolved when the remove is completed
  *
  * @example       js
- * import remove from '@coffeekraken/node/fs/remove';
- * remove('my/cool/file.json').then(() => {
+ * import { __remove } from '@coffeekraken/sugar/fs';
+ * await __remove('my/cool/file.json').then(() => {
  *    // do something on complete...
  * });
  *
@@ -27,8 +27,8 @@ const fs_extra_1 = __importDefault(require("fs-extra"));
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function remove(path) {
+function __remove(path) {
     return fs_extra_1.default.remove(path);
 }
-exports.default = remove;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUE0QjtBQUU1Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBQ0gsU0FBUyxNQUFNLENBQUMsSUFBSTtJQUNoQixPQUFPLGtCQUFJLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxDQUFDO0FBQzdCLENBQUM7QUFDRCxrQkFBZSxNQUFNLENBQUMifQ==
+exports.default = __remove;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUE0QjtBQUU1Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBQ0gsU0FBd0IsUUFBUSxDQUFDLElBQUk7SUFDakMsT0FBTyxrQkFBSSxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUM3QixDQUFDO0FBRkQsMkJBRUMifQ==

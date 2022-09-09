@@ -11,8 +11,8 @@ import __SProcess, {
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
-import __commandExists from '@coffeekraken/sugar/node/command/commandExists';
-import __import from '@coffeekraken/sugar/node/esm/import';
+import { __isCommandExists } from '@coffeekraken/sugar/is';
+import { __import } from '@coffeekraken/sugar/module';
 import __sharedContext from '@coffeekraken/sugar/node/process/sharedContext';
 import type { IDetectTypeResult } from '@coffeekraken/sugar/node/project/detectType';
 import __detectProjectType from '@coffeekraken/sugar/node/project/detectType';
@@ -484,7 +484,7 @@ class SKitchen extends __SClass {
                                 type: __SLog.TYPE_VERBOSE,
                                 value: `<yellow>[requirements]</yellow> Checking for the "<magenta>${recipeObj.requirements.commands[i]}</magenta>" command to exists...`,
                             });
-                            const version = await __commandExists(
+                            const version = await __isCommandExists(
                                 recipeObj.requirements.commands[i],
                             );
                             if (!version) {

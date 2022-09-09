@@ -1,8 +1,7 @@
 // @ts-nocheck
 
 import __fs from 'fs-extra';
-import __ensureDirSync from './ensureDirSync';
-import __folderPath from './folderPath';
+import { __ensureDirSync, __folderPath } from '@coffeekraken/sugar/fs';
 
 /**
  * @name        writeFileSync
@@ -18,18 +17,15 @@ import __folderPath from './folderPath';
  * @param       {Object}              [options={}]  options are what you'd pass to [fs.writeFileSync()](https://nodejs.org/api/fs.html#fs_fs_writefile_file_data_options_callback)
  *
  * @example       js
- * import writeFileSync from '@coffeekraken/node/fs/writeFileSync';
- * try {
- *    writeFileSync('my/cool/file.txt', 'Hello World');
- * } catch(e) {}
+ * import { __writeFileSync } from '@coffeekraken/sugar/fs';
+ * __writeFileSync('my/cool/file.txt', 'Hello World');
  *
  * @see             https://github.com/jprichardson/node-fs-extra
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function writeFileSync(path, data, options = {}) {
+export default function __writeFileSync(path, data, options = {}) {
     const folderPath = __folderPath(path);
     __ensureDirSync(folderPath);
     return __fs.outputFileSync(path, data, options);
 }
-export default writeFileSync;

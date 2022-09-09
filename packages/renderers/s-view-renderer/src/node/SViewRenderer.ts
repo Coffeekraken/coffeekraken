@@ -7,9 +7,11 @@ import __SFile from '@coffeekraken/s-file';
 import type { ISPromise } from '@coffeekraken/s-promise';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-import __extension from '@coffeekraken/sugar/node/fs/extension';
-import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
+import {
+    __dirname,
+    __extension,
+    __writeJsonSync,
+} from '@coffeekraken/sugar/fs';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __packageTmpDir from '@coffeekraken/sugar/node/path/packageTmpDir';
 import __unique from '@coffeekraken/sugar/shared/array/unique';

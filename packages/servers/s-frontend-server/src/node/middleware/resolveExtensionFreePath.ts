@@ -2,7 +2,7 @@
 
 import __fs from 'fs';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __extension from '@coffeekraken/sugar/node/fs/extension';
+import { __extension } from '@coffeekraken/sugar/fs';
 import __SBench from '@coffeekraken/s-bench';
 
 /**
@@ -32,41 +32,41 @@ import __SBench from '@coffeekraken/s-bench';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function resolveExtensionFreePath(settings = {}) {
-  settings = __deepMerge(
-    {
-      rootDir: undefined,
-      extensions: [],
-      exclude: []
-    },
-    settings
-  );
+    settings = __deepMerge(
+        {
+            rootDir: undefined,
+            extensions: [],
+            exclude: [],
+        },
+        settings,
+    );
 
-  return function (req, res, next) {
-    if (settings.exclude.indexOf(req.path) !== -1) {
-      return next();
-    }
-    const pathExtension = __extension(req.path).trim();
-    if (pathExtension) return next();
+    return function (req, res, next) {
+        if (settings.exclude.indexOf(req.path) !== -1) {
+            return next();
+        }
+        const pathExtension = __extension(req.path).trim();
+        if (pathExtension) return next();
 
-    const rootDir = settings.rootDir;
-    const filePath =
-      req.path.slice(0, 1) === '/' ? req.path.slice(1) : req.path;
+        const rootDir = settings.rootDir;
+        const filePath =
+            req.path.slice(0, 1) === '/' ? req.path.slice(1) : req.path;
 
-    // check if the file is on filesystem using the extensions listed in the frontend.config.js file
-    for (let i = 0; i < settings.extensions.length; i++) {
-      const ext = settings.extensions[i];
-      const potentialFilePath = `${rootDir}/${filePath}.${ext}`;
-      if (__fs.existsSync(potentialFilePath)) {
-        // req.path = `/${filePath}.${ext}`;
-        // req.url = `/${filePath}.${ext}`;
-        res.redirect(`/${filePath}.${ext}`);
-        break;
-      }
-    }
+        // check if the file is on filesystem using the extensions listed in the frontend.config.js file
+        for (let i = 0; i < settings.extensions.length; i++) {
+            const ext = settings.extensions[i];
+            const potentialFilePath = `${rootDir}/${filePath}.${ext}`;
+            if (__fs.existsSync(potentialFilePath)) {
+                // req.path = `/${filePath}.${ext}`;
+                // req.url = `/${filePath}.${ext}`;
+                res.redirect(`/${filePath}.${ext}`);
+                break;
+            }
+        }
 
-    __SBench.step('request', 'resolveExtensionFreePathMiddleware');
+        __SBench.step('request', 'resolveExtensionFreePathMiddleware');
 
-    return next();
-  };
+        return next();
+    };
 }
 export default resolveExtensionFreePath;

@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import SSvgFilter from './SSvgFilter';
+import { __SSvgFilter } from '@coffeekraken/sugar/filter';
 
 /**
  * @name 		        SGooeySvgFilter
@@ -22,13 +22,14 @@ import SSvgFilter from './SSvgFilter';
  * @todo      tests
  *
  * @example 		js
- * const filter = new SGooeySvgFilter();
+ * import { __SGooeySvgFilter } from '@coffeekraken/sugar/filter';
+ * const filter = new __SGooeySvgFilter();
  * filter.applyTo(myCoolHTMLElement);
  *
  * @since         1.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-class SGooeySvgFilter extends SSvgFilter {
+export default class __SGooeySvgFilter extends __SSvgFilter {
     /**
      * @name              constructor
      * @type              Function
@@ -118,6 +119,3 @@ class SGooeySvgFilter extends SSvgFilter {
         );
     }
 }
-
-// export modules
-export default SGooeySvgFilter;

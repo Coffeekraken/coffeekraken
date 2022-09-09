@@ -4,9 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const folderPath_1 = __importDefault(require("./folderPath"));
-const ensureDirSync_1 = __importDefault(require("./ensureDirSync"));
-const fs_1 = __importDefault(require("fs"));
+const fs_1 = require("@coffeekraken/sugar/fs");
+const fs_2 = __importDefault(require("fs"));
 const stringify_1 = __importDefault(require("../../shared/json/stringify"));
 /**
  * @name        writeJson
@@ -24,19 +23,19 @@ const stringify_1 = __importDefault(require("../../shared/json/stringify"));
  * @return      {Promise}                           A promise that will be resolved when the writeJson is completed
  *
  * @example       js
- * import writeJson from '@coffeekraken/node/fs/writeJson';
- * writeJson('my/cool/file.json', { hello: 'world' }).then(() => {
+ * import { __writeJson } from '@coffeekraken/sugar/fs';
+ * __writeJson('my/cool/file.json', { hello: 'world' }).then(() => {
  *    // do something on complete...
  * });
  *
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function writeJson(path, data, options = {}) {
-    const folderPath = (0, folderPath_1.default)(path);
-    (0, ensureDirSync_1.default)(folderPath);
+function __writeJson(path, data, options = {}) {
+    const folderPath = (0, fs_1.__folderPath)(path);
+    (0, fs_1.__ensureDirSync)(folderPath);
     const jsonStr = (0, stringify_1.default)(data, null, 4);
-    return fs_1.default.writeFile(path, jsonStr);
+    return fs_2.default.writeFile(path, jsonStr);
 }
-exports.default = writeJson;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDhEQUF3QztBQUN4QyxvRUFBOEM7QUFDOUMsNENBQXNCO0FBQ3RCLDRFQUFzRDtBQUV0RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxTQUFTLFNBQVMsQ0FBQyxJQUFJLEVBQUUsSUFBSSxFQUFFLE9BQU8sR0FBRyxFQUFFO0lBQ3ZDLE1BQU0sVUFBVSxHQUFHLElBQUEsb0JBQVksRUFBQyxJQUFJLENBQUMsQ0FBQztJQUN0QyxJQUFBLHVCQUFlLEVBQUMsVUFBVSxDQUFDLENBQUM7SUFDNUIsTUFBTSxPQUFPLEdBQUcsSUFBQSxtQkFBVyxFQUFDLElBQUksRUFBRSxJQUFJLEVBQUUsQ0FBQyxDQUFDLENBQUM7SUFDM0MsT0FBTyxZQUFJLENBQUMsU0FBUyxDQUFDLElBQUksRUFBRSxPQUFPLENBQUMsQ0FBQztBQUN6QyxDQUFDO0FBQ0Qsa0JBQWUsU0FBUyxDQUFDIn0=
+exports.default = __writeJson;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLCtDQUF1RTtBQUN2RSw0Q0FBc0I7QUFDdEIsNEVBQXNEO0FBRXREOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILFNBQXdCLFdBQVcsQ0FBQyxJQUFJLEVBQUUsSUFBSSxFQUFFLE9BQU8sR0FBRyxFQUFFO0lBQ3hELE1BQU0sVUFBVSxHQUFHLElBQUEsaUJBQVksRUFBQyxJQUFJLENBQUMsQ0FBQztJQUN0QyxJQUFBLG9CQUFlLEVBQUMsVUFBVSxDQUFDLENBQUM7SUFDNUIsTUFBTSxPQUFPLEdBQUcsSUFBQSxtQkFBVyxFQUFDLElBQUksRUFBRSxJQUFJLEVBQUUsQ0FBQyxDQUFDLENBQUM7SUFDM0MsT0FBTyxZQUFJLENBQUMsU0FBUyxDQUFDLElBQUksRUFBRSxPQUFPLENBQUMsQ0FBQztBQUN6QyxDQUFDO0FBTEQsOEJBS0MifQ==

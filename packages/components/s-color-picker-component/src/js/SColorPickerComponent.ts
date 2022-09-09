@@ -2,14 +2,16 @@
 
 import __SColor from '@coffeekraken/s-color';
 import __SLitComponent from '@coffeekraken/s-lit-component';
-import __copy from '@coffeekraken/sugar/js/clipboard/copy';
-import __preventViewportMovement from '@coffeekraken/sugar/js/dom/touch/preventViewportMovement';
+import { __copy } from '@coffeekraken/sugar/clipboard';
+import {
+    __preventViewportMovement,
+    __makeFloat,
+} from '@coffeekraken/sugar/dom';
 import type {
     IFloatApi,
     IFloatSettings,
 } from '@coffeekraken/sugar/js/dom/ui/makeFloat';
-import __makeFloat from '@coffeekraken/sugar/js/dom/ui/makeFloat';
-import __isMobile from '@coffeekraken/sugar/js/is/mobile';
+import { __isMobile } from '@coffeekraken/sugar/is';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import { css, html, unsafeCSS } from 'lit';
 import __SColorPickerComponentInterface from './interface/SColorPickerComponentInterface';

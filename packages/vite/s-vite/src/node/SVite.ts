@@ -4,7 +4,7 @@ import __SFile from '@coffeekraken/s-file';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SugarConfig from '@coffeekraken/s-sugar-config';
-import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
+import { __writeFileSync, __writeTmpFileSync } from '@coffeekraken/sugar/fs';
 import __isPortFree from '@coffeekraken/sugar/node/network/utils/isPortFree';
 import __listNodeModulesPackages from '@coffeekraken/sugar/node/npm/listNodeModulesPackages';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
@@ -20,8 +20,6 @@ import __SViteStartParamsInterface from './interface/SViteStartParamsInterface';
 import __SViteTestParamsInterface from './interface/SViteTestParamsInterface';
 import __sInternalWatcherReloadVitePlugin from './plugins/internalWatcherReloadPlugin';
 import __rewritesPlugin from './plugins/rewritesPlugin';
-
-import __writeTmpFileSync from '@coffeekraken/sugar/node/fs/writeTmpFileSync';
 
 export interface ISViteSettings {}
 

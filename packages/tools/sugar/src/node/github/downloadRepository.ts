@@ -3,8 +3,7 @@ import __https from 'https';
 import __tmpDir from '../path/systemTmpDir';
 import __unzip from '../zip/unzip';
 import __fsExtra from 'fs-extra';
-import __fileName from '../fs/filename';
-import __folderPath from '../fs/folderPath';
+import { __fileName, __folderPath } from '@coffeekraken/sugar/fs';
 
 /**
  * @name            downloadRepository

@@ -23,13 +23,13 @@
  * @todo      tests
  *
  * @example  	js
- * import __getDefinedStyles from '@coffeekraken/sugar/js/dom/style/getDefinedStyles';
+ * import { __getDefinedStyles } from '@coffeekraken/sugar/dom';
  *
  * @see             https://github.com/marionebl/jogwheel/blob/master/source/library/get-defined-styles.js
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function getDefinedStyles(properties) {
+export default function __getDefinedStyles(properties) {
     const styles = {};
 
     for (let i = properties.length - 1; i >= 0; i -= 1) {

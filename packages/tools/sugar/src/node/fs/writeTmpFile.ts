@@ -3,7 +3,7 @@
 import __path from 'path';
 import __uniqid from '../../shared/string/uniqid';
 import __packageTmpDir from '../path/packageTmpDir';
-import __writeFileSync from './writeFileSync';
+import { __writeFileSync } from '@coffeekraken/sugar/fs';
 
 /**
  * @name        writeTmpFile
@@ -25,8 +25,8 @@ import __writeFileSync from './writeFileSync';
  * @todo      tests
  *
  * @example       js
- * import writeTmpFile from '@coffeekraken/node/fs/writeTmpFile';
- * writeTmpFile('Hello World').then((path) => {
+ * import { __writeTmpFile } from '@coffeekraken/sugar/fs';
+ * __writeTmpFile('Hello World').then((path) => {
  *    // do something on complete...
  * });
  *
@@ -38,7 +38,7 @@ export interface IWriteTmpFileSettings {
     path: string;
 }
 
-function writeTmpFile(
+export default function __writeTmpFile(
     data,
     settings: Partial<IWriteTmpFileSettings> = {},
 ): Promise<String> {
@@ -54,4 +54,3 @@ function writeTmpFile(
     __writeFileSync(path, data);
     return path;
 }
-export default writeTmpFile;

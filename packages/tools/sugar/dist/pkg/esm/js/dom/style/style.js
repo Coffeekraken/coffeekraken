@@ -1,6 +1,5 @@
 // @ts-nocheck
-import __styleString2Object from '../styleString2Object';
-import __styleObject2String from '../styleObject2String';
+import { __styleObject2String, __styleString2Object, } from '@coffeekraken/sugar/css';
 /**
  * @name      style
  * @namespace            js.dom.style
@@ -19,8 +18,8 @@ import __styleObject2String from '../styleObject2String';
  * @todo      tests
  *
  * @example 	js
- * import style from '@coffeekraken/sugar/js/dom/style'
- * style(myCoolHTMLElement, {
+ * import { __style } from '@coffeekraken/sugar/dom'
+ * __style(myCoolHTMLElement, {
  * 		paddingLeft : 20,
  * 		display : null
  * });
@@ -28,7 +27,7 @@ import __styleObject2String from '../styleObject2String';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function style(elm, styleObj) {
+export default function __style(elm, styleObj) {
     // convert style string to object
     const styleAttr = elm.getAttribute('style');
     if (styleAttr) {
@@ -40,5 +39,4 @@ function style(elm, styleObj) {
     // return the style
     return elm.style;
 }
-export default style;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFHZCxPQUFPLG9CQUFvQixNQUFNLHVCQUF1QixDQUFDO0FBQ3pELE9BQU8sb0JBQW9CLE1BQU0sdUJBQXVCLENBQUM7QUFFekQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMEJHO0FBQ0gsU0FBUyxLQUFLLENBQUMsR0FBZ0IsRUFBRSxRQUFhO0lBQzFDLGlDQUFpQztJQUNqQyxNQUFNLFNBQVMsR0FBRyxHQUFHLENBQUMsWUFBWSxDQUFDLE9BQU8sQ0FBQyxDQUFDO0lBRTVDLElBQUksU0FBUyxFQUFFO1FBQ1gsUUFBUSxtQ0FDRCxvQkFBb0IsQ0FBQyxTQUFTLENBQUMsR0FDL0IsUUFBUSxDQUNkLENBQUM7S0FDTDtJQUVELGlDQUFpQztJQUNqQyxxRUFBcUU7SUFDckUsR0FBRyxDQUFDLEtBQUssQ0FBQyxPQUFPLEdBQUcsb0JBQW9CLENBQUMsUUFBUSxDQUFDLENBQUM7SUFFbkQsbUJBQW1CO0lBQ25CLE9BQU8sR0FBRyxDQUFDLEtBQUssQ0FBQztBQUNyQixDQUFDO0FBQ0QsZUFBZSxLQUFLLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFHZCxPQUFPLEVBQ0gsb0JBQW9CLEVBQ3BCLG9CQUFvQixHQUN2QixNQUFNLHlCQUF5QixDQUFDO0FBRWpDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTBCRztBQUNILE1BQU0sQ0FBQyxPQUFPLFVBQVUsT0FBTyxDQUFDLEdBQWdCLEVBQUUsUUFBYTtJQUMzRCxpQ0FBaUM7SUFDakMsTUFBTSxTQUFTLEdBQUcsR0FBRyxDQUFDLFlBQVksQ0FBQyxPQUFPLENBQUMsQ0FBQztJQUU1QyxJQUFJLFNBQVMsRUFBRTtRQUNYLFFBQVEsbUNBQ0Qsb0JBQW9CLENBQUMsU0FBUyxDQUFDLEdBQy9CLFFBQVEsQ0FDZCxDQUFDO0tBQ0w7SUFFRCxpQ0FBaUM7SUFDakMscUVBQXFFO0lBQ3JFLEdBQUcsQ0FBQyxLQUFLLENBQUMsT0FBTyxHQUFHLG9CQUFvQixDQUFDLFFBQVEsQ0FBQyxDQUFDO0lBRW5ELG1CQUFtQjtJQUNuQixPQUFPLEdBQUcsQ0FBQyxLQUFLLENBQUM7QUFDckIsQ0FBQyJ9

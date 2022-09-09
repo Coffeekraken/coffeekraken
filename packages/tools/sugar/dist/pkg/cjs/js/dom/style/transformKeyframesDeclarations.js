@@ -4,16 +4,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const camelCase_1 = __importDefault(require("../../../shared/string/camelCase"));
-const getDefinedStyles_1 = __importDefault(require("./getDefinedStyles"));
-const parseKeyframeKey_1 = __importDefault(require("./parseKeyframeKey"));
-const removeVendorPrefix_1 = __importDefault(require("./removeVendorPrefix"));
+const dom_1 = require("@coffeekraken/sugar/dom");
+const css_1 = require("@coffeekraken/sugar/css");
 function normalizePropertyName(propertyName) {
-    return (0, camelCase_1.default)((0, removeVendorPrefix_1.default)(propertyName));
+    return (0, camelCase_1.default)((0, css_1.__removeVendorPrefix)(propertyName));
 }
 function transformKeyframeDeclaration(keyFrameRule) {
     // Convert keyFrame.keyText to integers holding percentage of keyframe
-    const percentages = (0, parseKeyframeKey_1.default)(keyFrameRule.keyText);
-    const style = (0, getDefinedStyles_1.default)(keyFrameRule.style);
+    const percentages = (0, css_1.__parseKeyframeKey)(keyFrameRule.keyText);
+    const style = (0, dom_1.__getDefinedStyles)(keyFrameRule.style);
     // Normalize to unprefixed styles
     const normalizedStyles = Object.keys(style).reduce((result, propertyName) => {
         const name = normalizePropertyName(propertyName);
@@ -31,4 +30,4 @@ function transformKeyframeDeclaration(keyFrameRule) {
     });
 }
 exports.default = transformKeyframeDeclaration;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsaUZBQTJEO0FBQzNELDBFQUFvRDtBQUNwRCwwRUFBb0Q7QUFDcEQsOEVBQXdEO0FBaUN4RCxTQUFTLHFCQUFxQixDQUFDLFlBQVk7SUFDdkMsT0FBTyxJQUFBLG1CQUFXLEVBQUMsSUFBQSw0QkFBb0IsRUFBQyxZQUFZLENBQUMsQ0FBQyxDQUFDO0FBQzNELENBQUM7QUFFRCxTQUF3Qiw0QkFBNEIsQ0FDaEQsWUFBWTtJQUVaLHNFQUFzRTtJQUN0RSxNQUFNLFdBQVcsR0FBRyxJQUFBLDBCQUFrQixFQUFDLFlBQVksQ0FBQyxPQUFPLENBQUMsQ0FBQztJQUM3RCxNQUFNLEtBQUssR0FBRyxJQUFBLDBCQUFrQixFQUFDLFlBQVksQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUVyRCxpQ0FBaUM7SUFDakMsTUFBTSxnQkFBZ0IsR0FBRyxNQUFNLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxDQUFDLE1BQU0sQ0FDOUMsQ0FBQyxNQUFNLEVBQUUsWUFBWSxFQUFFLEVBQUU7UUFDckIsTUFBTSxJQUFJLEdBQUcscUJBQXFCLENBQUMsWUFBWSxDQUFDLENBQUM7UUFDakQsTUFBTSxDQUFDLElBQUksQ0FBQyxHQUFHLEtBQUssQ0FBQyxZQUFZLENBQUMsQ0FBQztRQUNuQyxPQUFPLE1BQU0sQ0FBQztJQUNsQixDQUFDLEVBQ0QsRUFBRSxDQUNMLENBQUM7SUFFRixPQUFPLFdBQVcsQ0FBQyxHQUFHLENBQUMsQ0FBQyxVQUFVLEVBQUUsRUFBRTtRQUNsQyxPQUFPO1lBQ0gsVUFBVTtZQUNWLDhEQUE4RDtZQUM5RCxNQUFNLEVBQUUsVUFBVSxHQUFHLEdBQUc7WUFDeEIsd0NBQXdDO1lBQ3hDLEtBQUssRUFBRSxnQkFBZ0I7U0FDMUIsQ0FBQztJQUNOLENBQUMsQ0FBQyxDQUFDO0FBQ1AsQ0FBQztBQTFCRCwrQ0EwQkMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsaUZBQTJEO0FBQzNELGlEQUE2RDtBQUM3RCxpREFHaUM7QUFpQ2pDLFNBQVMscUJBQXFCLENBQUMsWUFBWTtJQUN2QyxPQUFPLElBQUEsbUJBQVcsRUFBQyxJQUFBLDBCQUFvQixFQUFDLFlBQVksQ0FBQyxDQUFDLENBQUM7QUFDM0QsQ0FBQztBQUVELFNBQXdCLDRCQUE0QixDQUNoRCxZQUFZO0lBRVosc0VBQXNFO0lBQ3RFLE1BQU0sV0FBVyxHQUFHLElBQUEsd0JBQWtCLEVBQUMsWUFBWSxDQUFDLE9BQU8sQ0FBQyxDQUFDO0lBQzdELE1BQU0sS0FBSyxHQUFHLElBQUEsd0JBQWtCLEVBQUMsWUFBWSxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBRXJELGlDQUFpQztJQUNqQyxNQUFNLGdCQUFnQixHQUFHLE1BQU0sQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUMsTUFBTSxDQUM5QyxDQUFDLE1BQU0sRUFBRSxZQUFZLEVBQUUsRUFBRTtRQUNyQixNQUFNLElBQUksR0FBRyxxQkFBcUIsQ0FBQyxZQUFZLENBQUMsQ0FBQztRQUNqRCxNQUFNLENBQUMsSUFBSSxDQUFDLEdBQUcsS0FBSyxDQUFDLFlBQVksQ0FBQyxDQUFDO1FBQ25DLE9BQU8sTUFBTSxDQUFDO0lBQ2xCLENBQUMsRUFDRCxFQUFFLENBQ0wsQ0FBQztJQUVGLE9BQU8sV0FBVyxDQUFDLEdBQUcsQ0FBQyxDQUFDLFVBQVUsRUFBRSxFQUFFO1FBQ2xDLE9BQU87WUFDSCxVQUFVO1lBQ1YsOERBQThEO1lBQzlELE1BQU0sRUFBRSxVQUFVLEdBQUcsR0FBRztZQUN4Qix3Q0FBd0M7WUFDeEMsS0FBSyxFQUFFLGdCQUFnQjtTQUMxQixDQUFDO0lBQ04sQ0FBQyxDQUFDLENBQUM7QUFDUCxDQUFDO0FBMUJELCtDQTBCQyJ9

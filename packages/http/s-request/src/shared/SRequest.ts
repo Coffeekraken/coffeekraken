@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __SClass from '@coffeekraken/s-class';
-import __strToHtml from '@coffeekraken/sugar/js/html/strToHtml';
+import { __stringToNode } from '@coffeekraken/sugar/dom';
 import __htmlToString from '@coffeekraken/sugar/js/html/toString';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __axios from 'axios';
@@ -158,7 +158,7 @@ export default class SRequest extends __SClass {
             document !== undefined &&
             document.querySelector !== undefined
         ) {
-            const $html = __strToHtml(response.data);
+            const $html = __stringToNode(response.data);
             if ($html.id === hash) {
                 finalResponse = __htmlToString($html);
             } else {

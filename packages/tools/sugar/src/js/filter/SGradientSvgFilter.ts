@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import SSvgFilter from './SSvgFilter';
+import { __SSvgFilter } from '@coffeekraken/sugar/filter';
 
 /**
  * @name 		SGradientSvgFilter
@@ -20,14 +20,15 @@ import SSvgFilter from './SSvgFilter';
  * @todo      tests
  *
  * @example 		js
- * const filter = new SGradientSvgFilter();
+ * import { __SGradientSvgFilter } from '@coffeekraken/sugar/filter';
+ * const filter = new  __SGradientSvgFilter();
  * filter.linear(['red','blue','green']);
  * filter.applyTo(myCoolHTMLElement);
  *
  * @since           1.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-class SGradientSvgFilter extends SSvgFilter {
+export default class __SGradientSvgFilter extends __SSvgFilter {
     /**
      * @name          constructor
      * @type          Function
@@ -195,6 +196,3 @@ class SGradientSvgFilter extends SSvgFilter {
         // this._image.setAttribute('height', height);
     }
 }
-
-// export modules
-export default SGradientSvgFilter;

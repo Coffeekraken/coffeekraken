@@ -1,9 +1,11 @@
 import __SDuration from '@coffeekraken/s-duration';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __ensureDirSync from '@coffeekraken/sugar/node/fs/ensureDirSync';
-import __extension from '@coffeekraken/sugar/node/fs/extension';
-import __folderHash from '@coffeekraken/sugar/node/fs/folderHash';
-import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
+import {
+    __ensureDirSync,
+    __extension,
+    __folderHash,
+    __writeFileSync,
+} from '@coffeekraken/sugar/fs';
 import __packageCacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __srcCssDir from '@coffeekraken/sugar/node/path/srcCssDir';

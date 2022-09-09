@@ -3,7 +3,7 @@ import __SCodeFormatterPrettier from '@coffeekraken/s-code-formatter-prettier';
 import __SDuration from '@coffeekraken/s-duration';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
-import __getFiles from '@coffeekraken/sugar/node/fs/getFiles';
+import { __getFiles } from '@coffeekraken/sugar/fs';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
@@ -201,13 +201,13 @@ class SCodeFormatter extends __SClass {
                     this.settings,
                     settings,
                 );
-                const finalParams: ISCodeFormatterFormatParams = __SCodeFormatterFormatParamsInterface.apply(
-                    params,
-                );
+                const finalParams: ISCodeFormatterFormatParams =
+                    __SCodeFormatterFormatParamsInterface.apply(params);
 
                 let finalGlob = finalParams.glob;
 
-                const handledExtensions = this.constructor.getHandledExtensions();
+                const handledExtensions =
+                    this.constructor.getHandledExtensions();
                 if (finalParams.glob.match(/\/\*$/)) {
                     finalGlob += `.{${handledExtensions.join(',')}}`;
                 }
@@ -279,10 +279,8 @@ class SCodeFormatter extends __SClass {
 
                         // grab the file content
                         try {
-                            code = __fs
-                            .readFileSync(file, 'utf-8')
-                            .toString();
-                        } catch(e) {
+                            code = __fs.readFileSync(file, 'utf-8').toString();
+                        } catch (e) {
                             return resolveFile();
                         }
 
@@ -291,9 +289,8 @@ class SCodeFormatter extends __SClass {
                             .extname(file)
                             .replace(/^\./, '');
                         // get the appropriate formatter for this extension
-                        const formatter = SCodeFormatter.getFormatterForExtension(
-                            extension,
-                        );
+                        const formatter =
+                            SCodeFormatter.getFormatterForExtension(extension);
                         if (!formatter) {
                             emit('log', {
                                 type: __SLog.TYPE_WARN,
@@ -318,9 +315,8 @@ class SCodeFormatter extends __SClass {
                                 // save each in their corner and enter in a loop of formatting...
                                 savedStack.push(file);
                                 setTimeout(() => {
-                                    const savedFileIdx = savedStack.indexOf(
-                                        file,
-                                    );
+                                    const savedFileIdx =
+                                        savedStack.indexOf(file);
                                     if (savedFileIdx !== -1) {
                                         // remove the file for next process
                                         savedStack.splice(savedFileIdx, 1);

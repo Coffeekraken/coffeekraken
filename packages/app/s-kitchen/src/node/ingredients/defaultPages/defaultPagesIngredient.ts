@@ -1,5 +1,5 @@
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import { __dirname } from '@coffeekraken/sugar/fs';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __path from 'path';
 import __recursiveCopy from 'recursive-copy';

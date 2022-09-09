@@ -8,20 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const dirname_1 = __importDefault(require("@coffeekraken/sugar/node/fs/dirname"));
+const fs_1 = require("@coffeekraken/sugar/fs");
 function config(express, settings, config) {
     return __awaiter(this, void 0, void 0, function* () {
         config.middlewares.config = {
             description: 'Middleware that inject a "config" and a "configFiles" object for the views',
-            path: `${(0, dirname_1.default)()}/configMiddleware`,
+            path: `${(0, fs_1.__dirname)()}/configMiddleware`,
             settings: {},
         };
         return true;
     });
 }
 exports.default = config;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsa0ZBQTREO0FBRTVELFNBQThCLE1BQU0sQ0FBQyxPQUFPLEVBQUUsUUFBUSxFQUFFLE1BQU07O1FBQzFELE1BQU0sQ0FBQyxXQUFXLENBQUMsTUFBTSxHQUFHO1lBQ3hCLFdBQVcsRUFDUCw0RUFBNEU7WUFDaEYsSUFBSSxFQUFFLEdBQUcsSUFBQSxpQkFBUyxHQUFFLG1CQUFtQjtZQUN2QyxRQUFRLEVBQUUsRUFBRTtTQUNmLENBQUM7UUFFRixPQUFPLElBQUksQ0FBQztJQUNoQixDQUFDO0NBQUE7QUFURCx5QkFTQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7O0FBQUEsK0NBQW1EO0FBRW5ELFNBQThCLE1BQU0sQ0FBQyxPQUFPLEVBQUUsUUFBUSxFQUFFLE1BQU07O1FBQzFELE1BQU0sQ0FBQyxXQUFXLENBQUMsTUFBTSxHQUFHO1lBQ3hCLFdBQVcsRUFDUCw0RUFBNEU7WUFDaEYsSUFBSSxFQUFFLEdBQUcsSUFBQSxjQUFTLEdBQUUsbUJBQW1CO1lBQ3ZDLFFBQVEsRUFBRSxFQUFFO1NBQ2YsQ0FBQztRQUVGLE9BQU8sSUFBSSxDQUFDO0lBQ2hCLENBQUM7Q0FBQTtBQVRELHlCQVNDIn0=

@@ -16,13 +16,13 @@
  * @todo      tests
  *
  * @example    js
- * import preventViewportMovement from '@coffeekraken/sugar/js/touch/preventViewportMovement'
- * preventViewportMovement($elm)
+ * import { __preventViewportMovement } from '@coffeekraken/sugar/dom'
+ * __preventViewportMovement($elm)
  *
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function preventViewportMovement($elm: HTMLElement): any {
+export default function __preventViewportMovement($elm: HTMLElement): any {
     function cb(e) {
         e.preventDefault();
     }

@@ -3,7 +3,7 @@ import __SEventEmitter, { ISEventEmitter } from '@coffeekraken/s-event-emitter';
 import type { ISLog } from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SStdio from '@coffeekraken/s-stdio';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import { __dirname } from '@coffeekraken/sugar/fs';
 import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
 import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 import __spawn from '@coffeekraken/sugar/node/process/spawn';

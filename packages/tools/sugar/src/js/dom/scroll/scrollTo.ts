@@ -31,9 +31,9 @@ import { __isUserScrolling } from '@coffeekraken/sugar/dom';
  * @todo      tests
  *
  * @example 	js
- * import scrollTop from '@coffeekraken/sugar/js/dom/scroll/scrollTo'
+ * import { __scrollTop } from '@coffeekraken/sugar/dom'
  * import easeInOutQuad from '@coffeekraken/sugar/js/easings/easeInOutQuad'
- * scrollTo(myCoolHTMLElement);
+ * __scrollTo(myCoolHTMLElement);
  *
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -50,7 +50,7 @@ export interface IScrollToSettings {
     onFinish: Function;
 }
 
-function scrollTo(
+export default function __scrollTo(
     target: HTMLElement | 'top' | 'bottom' | 'left' | 'right',
     settings: Partial<IScrollToSettings> = {},
 ): Promise<any> {
@@ -235,5 +235,3 @@ scrollTo.step = function () {
         if (this.onFinish) this.onFinish();
     }
 };
-
-export default scrollTo;

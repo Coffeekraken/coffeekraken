@@ -6,15 +6,17 @@ import __SGlob from '@coffeekraken/s-glob';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __checkPathWithMultipleExtensions from '@coffeekraken/sugar/node/fs/checkPathWithMultipleExtensions';
-import __copySync from '@coffeekraken/sugar/node/fs/copySync';
-import __ensureDirSync from '@coffeekraken/sugar/node/fs/ensureDirSync';
-import __getFilename from '@coffeekraken/sugar/node/fs/filename';
-import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
-import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
-import __removeSync from '@coffeekraken/sugar/node/fs/removeSync';
-import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
-import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
+import {
+    __checkPathWithMultipleExtensions,
+    __copySync,
+    __ensureDirSync,
+    __fileName,
+    __folderPath,
+    __readJsonSync,
+    __removeSync,
+    __writeFileSync,
+    __writeJsonSync,
+} from '@coffeekraken/sugar/fs';
 import __npmInstall from '@coffeekraken/sugar/node/npm/install';
 import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
@@ -890,7 +892,7 @@ class SDocmap extends __SClass implements ISDocmap {
                         if (docblock.private) continue;
 
                         // const path = __path.relative(outputDir, filepath);
-                        const filename = __getFilename((<__SFile>file).path);
+                        const filename = __fileName((<__SFile>file).path);
 
                         const docblockEntryObj: ISDocmapEntry = {};
 

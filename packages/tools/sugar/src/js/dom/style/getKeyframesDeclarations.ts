@@ -1,4 +1,4 @@
-import __getCssDeclarations from './getCssDeclarations';
+import { __getCssDeclarations } from '@coffeekraken/sugar/dom';
 
 /**
  * @name      getKeyframesDeclarations

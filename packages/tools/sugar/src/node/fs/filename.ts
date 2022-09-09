@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __extension from './extension';
+import { __extension } from '@coffeekraken/sugar/fs';
 
 /**
  * @name                       filename
@@ -16,17 +16,16 @@ import __extension from './extension';
  * @return          {String}                                  The requested filename
  *
  * @example       js
- * import filename from '@coffeekraken/sugar/node/fs/filename';
- * filename('hello/world.js'); // => world.js
+ * import { __filename } from '@coffeekraken/sugar/fs';
+ * __filename('hello/world.js'); // => world.js
  *
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function filename(path, withExtension = true) {
+export default function __filename(path, withExtension = true) {
     let filename = path.split('/').pop();
     if (!withExtension) {
         filename = filename.replace(`.${__extension(filename)}`, '');
     }
     return filename;
 }
-export default filename;

@@ -14,8 +14,8 @@ import {
     __distanceFromElementTopToViewportTop,
 } from '@coffeekraken/sugar/dom';
 import __stripTags from '@coffeekraken/sugar/js/dom/manipulate/stripTags';
-import __getStyleProperty from '@coffeekraken/sugar/js/dom/style/getStyleProperty';
-import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
+import { __getStyleProperty } from '@coffeekraken/sugar/dom';
+import { __hotkey } from '@coffeekraken/sugar/keyboard';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-filtrable-input.css'; // relative to /dist/pkg/esm/js

@@ -1,10 +1,7 @@
 "use strict";
 // @ts-nocheck
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const SSvgFilter_1 = __importDefault(require("./SSvgFilter"));
+const filter_1 = require("@coffeekraken/sugar/filter");
 /**
  * @name 		        SOutlineSvgFilter
  * @namespace            js.filter
@@ -16,7 +13,8 @@ const SSvgFilter_1 = __importDefault(require("./SSvgFilter"));
  * This class represent an outline filter that can be applied on any HTMLElement.
  *
  * @example 		js
- * const filter = new SOutlineSvgFilter();
+ * import {__SOutlineSvgFilter } from '@coffeekraken/sugar/filter';
+ * const filter = new __SOutlineSvgFilter();
  * filter.applyTo(myCoolHTMLElement);
  *
  * @todo      interface
@@ -26,7 +24,7 @@ const SSvgFilter_1 = __importDefault(require("./SSvgFilter"));
  * @since         1.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-class SOutlineSvgFilter extends SSvgFilter_1.default {
+class __SOutlineSvgFilter extends filter_1.__SSvgFilter {
     /**
      * @name            constructor
      * @type            Function
@@ -60,6 +58,5 @@ class SOutlineSvgFilter extends SSvgFilter_1.default {
         return parseFloat(this._$morphology.getAttribute('radius'));
     }
 }
-// export modules
-exports.default = SOutlineSvgFilter;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDhEQUFzQztBQUV0Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FvQkc7QUFDSCxNQUFNLGlCQUFrQixTQUFRLG9CQUFVO0lBQ3RDOzs7Ozs7Ozs7T0FTRztJQUNILFlBQVksTUFBTSxHQUFHLENBQUM7UUFDbEIsS0FBSyxDQUFDOzZDQUMrQixNQUFNOzs7R0FHaEQsQ0FBQyxDQUFDO1FBQ0csSUFBSSxDQUFDLFlBQVksR0FBRyxJQUFJLENBQUMsTUFBTSxDQUFDLGFBQWEsQ0FBQyxjQUFjLENBQUMsQ0FBQztJQUNsRSxDQUFDO0lBRUQ7Ozs7Ozs7T0FPRztJQUNILElBQUksTUFBTSxDQUFDLEtBQUs7UUFDWixJQUFJLENBQUMsWUFBWSxDQUFDLFlBQVksQ0FBQyxRQUFRLEVBQUUsS0FBSyxDQUFDLENBQUM7SUFDcEQsQ0FBQztJQUNELElBQUksTUFBTTtRQUNOLE9BQU8sVUFBVSxDQUFDLElBQUksQ0FBQyxZQUFZLENBQUMsWUFBWSxDQUFDLFFBQVEsQ0FBQyxDQUFDLENBQUM7SUFDaEUsQ0FBQztDQUNKO0FBRUQsaUJBQWlCO0FBQ2pCLGtCQUFlLGlCQUFpQixDQUFDIn0=
+exports.default = __SOutlineSvgFilter;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkLHVEQUEwRDtBQUUxRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBQ0gsTUFBcUIsbUJBQW9CLFNBQVEscUJBQVk7SUFDekQ7Ozs7Ozs7OztPQVNHO0lBQ0gsWUFBWSxNQUFNLEdBQUcsQ0FBQztRQUNsQixLQUFLLENBQUM7NkNBQytCLE1BQU07OztHQUdoRCxDQUFDLENBQUM7UUFDRyxJQUFJLENBQUMsWUFBWSxHQUFHLElBQUksQ0FBQyxNQUFNLENBQUMsYUFBYSxDQUFDLGNBQWMsQ0FBQyxDQUFDO0lBQ2xFLENBQUM7SUFFRDs7Ozs7OztPQU9HO0lBQ0gsSUFBSSxNQUFNLENBQUMsS0FBSztRQUNaLElBQUksQ0FBQyxZQUFZLENBQUMsWUFBWSxDQUFDLFFBQVEsRUFBRSxLQUFLLENBQUMsQ0FBQztJQUNwRCxDQUFDO0lBQ0QsSUFBSSxNQUFNO1FBQ04sT0FBTyxVQUFVLENBQUMsSUFBSSxDQUFDLFlBQVksQ0FBQyxZQUFZLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQztJQUNoRSxDQUFDO0NBQ0o7QUFsQ0Qsc0NBa0NDIn0=

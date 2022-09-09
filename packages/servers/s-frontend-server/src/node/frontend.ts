@@ -7,7 +7,7 @@ import __path from 'path';
 import __SPromise from '@coffeekraken/s-promise';
 import __express from 'express';
 import __trimLines from '../../../shared/string/trimLines';
-import __extension from '../../fs/extension';
+import { __extension } from '@coffeekraken/sugar/fs';
 import __packageRootDir from '../../path/packageRootDir';
 
 /**

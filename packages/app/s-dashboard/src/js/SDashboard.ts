@@ -1,5 +1,5 @@
 import __SClass from '@coffeekraken/s-class';
-import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
+import { __hotkey } from '@coffeekraken/sugar/keyboard';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
 import '../../../../src/css/index.css';

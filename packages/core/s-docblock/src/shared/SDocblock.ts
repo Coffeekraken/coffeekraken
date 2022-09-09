@@ -1,6 +1,6 @@
 import __SClass from '@coffeekraken/s-class';
 import __SPromise from '@coffeekraken/s-promise';
-import __isPath from '@coffeekraken/sugar/node/fs/isPath';
+import { __isPath } from '@coffeekraken/sugar/fs';
 import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
 import __fs from 'fs';
 // import __markdown from './markdown/index';
@@ -245,9 +245,8 @@ class SDocblock extends __SClass implements ISDocblock {
                             const tagName = Object.keys(
                                 this.settings.filterByTag,
                             )[i];
-                            const tagFilter = this.settings.filterByTag[
-                                tagName
-                            ];
+                            const tagFilter =
+                                this.settings.filterByTag[tagName];
                             const tagValueReg = new RegExp(
                                 `@${tagName}([^\n]+)`,
                             );

@@ -12,7 +12,7 @@
  * You can also use it through his static methods that are exacly the same as the instance ones.
  *
  * @example    js
- * import __SIndexDb from '@coffeekraken/sugar/js/storage/SIndexDb';
+ * import { __SIndexDb } from '@coffeekraken/sugar/storage';
  * const db = new __SIndexDb({
  *    db: 'my-cool-db', // default: sugar.js.storage.SIndexDb
  *    table: 'my-table' // default: default

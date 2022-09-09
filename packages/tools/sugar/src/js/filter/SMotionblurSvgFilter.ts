@@ -1,8 +1,7 @@
 // @ts-nocheck
 
-import { __offsetFromViewport } from '@coffeekraken/sugar/dom';
-import forceRedraw from '../dom/utlls/forceRedraw';
-import SSvgFilter from './SSvgFilter';
+import { __offsetFromViewport, __forceRedraw } from '@coffeekraken/sugar/dom';
+import { __SSvgFilter } from '@coffeekraken/sugar/filter';
 
 /**
  * @name 		SMotionblurSvgFilter
@@ -19,14 +18,15 @@ import SSvgFilter from './SSvgFilter';
  * @todo      tests
  *
  * @example 		js
- * const filter = new SMotionblurSvgFilter();
+ * import { __SMotionblurSvgFilter } from '@coffeekraken/sugar/filter';
+ * const filter = new  __SMotionblurSvgFilter();
  * filter.applyTo(myCoolHTMLElement);
  * // now when your element will move, it will be blured accordingly
  *
  * @since         1.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default class SMotionblurSvgFilter extends SSvgFilter {
+export default class __SMotionblurSvgFilter extends __SSvgFilter {
     /**
      * @name        amount
      * @type        Number
@@ -168,7 +168,7 @@ export default class SMotionblurSvgFilter extends SSvgFilter {
         // set the blur
         this._blur.setAttribute('stdDeviation', 0 + ',' + 0);
         // redraw the element to ensure proper display
-        forceRedraw(this.elms[0]);
+        __forceRedraw(this.elms[0]);
     }
 
     /**

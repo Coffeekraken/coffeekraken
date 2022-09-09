@@ -1,7 +1,7 @@
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __argsToString from '../../shared/cli/argsToString';
-import __commandExists from '../command/commandExists';
+import { __isCommandExists } from '@coffeekraken/sugar/is';
 import __spawn from '../process/spawn';
 
 /**
@@ -53,7 +53,7 @@ export default function install(
         };
         let command;
         if (settings.manager === 'yarn') {
-            if (await __commandExists('yarn')) {
+            if (await __isCommandExists('yarn')) {
                 command = 'yarn add';
             } else {
                 emit('log', {
@@ -62,7 +62,7 @@ export default function install(
             }
         }
         if (!command) {
-            if (await __commandExists('npm')) {
+            if (await __isCommandExists('npm')) {
                 command = 'npm install';
             }
         }

@@ -1,12 +1,12 @@
 import __SClass from '@coffeekraken/s-class';
-import __cssEasingStrToJsFunction from '@coffeekraken/sugar/js/dom/style/cssEasingStrToJsFunction';
+import { __cssEasingStrToJsFunction } from '@coffeekraken/sugar/css';
 import __getAnimationsFromElement, {
     IGetAnimationsFromElementResult,
 } from '@coffeekraken/sugar/js/dom/style/getAnimationsFromElement';
 import __getKeyframesFromStylesheets, {
     IKeyframe,
 } from '@coffeekraken/sugar/js/dom/style/getKeyframesFromStylesheets';
-import __parseTransformRule from '@coffeekraken/sugar/js/dom/style/parseTransformRule';
+import { __parseTransformRule } from '@coffeekraken/sugar/css';
 import __easeInterval from '@coffeekraken/sugar/shared/function/easeInterval';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __flatten from '@coffeekraken/sugar/shared/object/flatten';
@@ -315,11 +315,12 @@ export default class SCssAnimation extends __SClass {
             animationObj.animatedProperties,
         )) {
             // get the nearest frame(s) with the current animated property
-            const nearestKeyframes = this._getNearestKeyframesAtPercentageWithProperty(
-                percentage,
-                animatedProperty,
-                animationName,
-            );
+            const nearestKeyframes =
+                this._getNearestKeyframesAtPercentageWithProperty(
+                    percentage,
+                    animatedProperty,
+                    animationName,
+                );
 
             // if (animatedProperty.match(/translateX$/)) {
             //     console.log('-------');

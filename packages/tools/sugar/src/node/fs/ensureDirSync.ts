@@ -15,16 +15,13 @@ import __fs from 'fs-extra';
  * @return      {Promise}                           A promise that will be resolved once the directory has been created if needed...
  *
  * @example       js
- * import ensureDirSync from '@coffeekraken/node/fs/ensureDirSync';
- * try {
- *    ensureDirSync('my/cool/dir');
- * } catch(e) {}
+ * import { __ensureDirSync } from '@coffeekraken/sugar/fs';
+ * __ensureDirSync('my/cool/dir');
  *
  * @see             https://github.com/jprichardson/node-fs-extra
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function ensureDirSync(dir) {
+export default function __ensureDirSync(dir) {
     __fs.ensureDirSync(dir);
 }
-export default ensureDirSync;

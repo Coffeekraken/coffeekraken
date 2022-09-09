@@ -13,15 +13,14 @@
  * @return          {String}                                The file extension
  *
  * @example         js
- * import extension from '@coffeekraken/sugar/node/fs/extension';
- * extension('hello/world.jpg'); // => jpg
+ * import { __extension } from '@coffeekraken/sugar/fs';
+ * __extension('hello/world.jpg'); // => jpg
  *
  * @since         2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function extension(path) {
+export default function __extension(path) {
     const lastPart = path.split('/').pop();
     if (!lastPart.includes('.')) return '';
     return path.split('.').pop();
 }
-export default extension;

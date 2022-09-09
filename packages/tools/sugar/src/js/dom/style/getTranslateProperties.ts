@@ -19,8 +19,8 @@ import * as __rematrix from 'rematrix';
  * @todo      tests
  *
  * @example  	js
- * import getTranslateProperties from '@coffeekraken/sugar/js/dom/getTranslateProperties'
- * const props = getTranslateProperties(myCoolHTMLElement);
+ * import { __getTranslateProperties } from '@coffeekraken/sugar/dom'
+ * const props = __getTranslateProperties(myCoolHTMLElement);
  * // output format
  * // {
  * // 	x : 100,
@@ -31,18 +31,17 @@ import * as __rematrix from 'rematrix';
  * @since           1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function getTranslateProperties(
-    $elm: HTMLElement,
-): {
+export default function __getTranslateProperties($elm: HTMLElement): {
     x: number;
     y: number;
     z: number;
 } {
-    if (!window.getComputedStyle) return {
-        x: 0,
-        y: 0,
-        z: 0
-    };
+    if (!window.getComputedStyle)
+        return {
+            x: 0,
+            y: 0,
+            z: 0,
+        };
     const style = getComputedStyle($elm);
     const transform =
         style.transform ||
@@ -63,4 +62,3 @@ function getTranslateProperties(
         z: matrix3d[14],
     };
 }
-export default getTranslateProperties;

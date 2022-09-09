@@ -9,10 +9,12 @@ import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __getCoffeekrakenMetas } from '@coffeekraken/sugar/coffeekraken';
-import __extension from '@coffeekraken/sugar/node/fs/extension';
-import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
-import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
-import __writeTmpFileSync from '@coffeekraken/sugar/node/fs/writeTmpFileSync';
+import {
+    __extension,
+    __folderPath,
+    __writeFileSync,
+    __writeTmpFileSync,
+} from '@coffeekraken/sugar/fs';
 import __packageJson from '@coffeekraken/sugar/node/package/jsonSync';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __flatten from '@coffeekraken/sugar/shared/object/flatten';

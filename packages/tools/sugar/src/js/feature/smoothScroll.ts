@@ -1,9 +1,12 @@
 // @ts-nocheck
 import type { IScrollToSettings } from '../dom/scroll/scrollTo';
-import __smoothScrollOnAnchorLinks from './smoothScrollOnAnchorLinks';
-import __smoothScrollOnPageLoad from './smoothScrollOnPageLoad';
-import __smoothScrollOnHashChange from './smoothScrollOnHashChange';
 import __deepMerge from '../../shared/object/deepMerge';
+
+import {
+    __smoothScrollOnAnchorLinks,
+    __smoothScrollOnPageLoad,
+    __smoothScrollOnHashChange,
+} from '@coffeekraken/sugar/feature';
 
 /**
  * @name        smoothScroll
@@ -27,8 +30,8 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @todo            tests
  *
  * @example    js
- * import smoothScroll from '@coffeekraken/sugar/js/smoothScroll'
- * smoothScroll()
+ * import { __smoothScroll } from '@coffeekraken/sugar/feature'
+ * __smoothScroll()
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -38,7 +41,9 @@ export interface IsmoothScrollSettings {
     scroll: Partial<IScrollToSettings>;
 }
 
-function smoothScroll(settings: Partial<IsmoothScrollSettings> = {}): void {
+export default function __smoothScroll(
+    settings: Partial<IsmoothScrollSettings> = {},
+): void {
     settings = __deepMerge(
         {
             scroll: {},
@@ -50,4 +55,3 @@ function smoothScroll(settings: Partial<IsmoothScrollSettings> = {}): void {
     __smoothScrollOnAnchorLinks(settings);
     __smoothScrollOnHashChange(settings);
 }
-export default smoothScroll;

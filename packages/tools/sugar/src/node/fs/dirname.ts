@@ -15,13 +15,13 @@ import __path from 'path';
  * @return      {String}                            The dirname path
  *
  * @example             js
- * import dirname from '@coffeekraken/sugar/node/fs/dirname';
- * dirname(import);
+ * import { __dirname } from '@coffeekraken/sugar/fs';
+ * __dirname(import);
  *
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function (importMeta: any): string {
+export default function __dirname(importMeta: any): string {
     const error = new Error();
 
     // @ts-ignore

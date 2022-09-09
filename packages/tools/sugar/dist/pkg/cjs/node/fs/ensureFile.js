@@ -19,8 +19,8 @@ const fs_extra_1 = __importDefault(require("fs-extra"));
  * @return      {Promise}                           A promise that will be resolved once the file has been created if needed...
  *
  * @example       js
- * import ensureFile from '@coffeekraken/node/fs/ensureFile';
- * ensureFile('my/cool/file.jpg').then(() => {
+ * import { __ensureFile } from '@coffeekraken/sugar/fs';
+ * await __ensureFile('my/cool/file.jpg').then(() => {
  *    // do something...
  * });
  *
@@ -28,8 +28,8 @@ const fs_extra_1 = __importDefault(require("fs-extra"));
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function ensureFile(file) {
+function __ensureFile(file) {
     return fs_extra_1.default.ensureFile(file);
 }
-exports.default = ensureFile;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUE0QjtBQUU1Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILFNBQVMsVUFBVSxDQUFDLElBQUk7SUFDcEIsT0FBTyxrQkFBSSxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUNqQyxDQUFDO0FBQ0Qsa0JBQWUsVUFBVSxDQUFDIn0=
+exports.default = __ensureFile;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUE0QjtBQUU1Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILFNBQXdCLFlBQVksQ0FBQyxJQUFJO0lBQ3JDLE9BQU8sa0JBQUksQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLENBQUM7QUFDakMsQ0FBQztBQUZELCtCQUVDIn0=

@@ -1,11 +1,12 @@
 // import __SFileInterface from './interface/SFileInterface';
 import __SEventEmitter, { ISEventEmitter } from '@coffeekraken/s-event-emitter';
-import __extension from '@coffeekraken/sugar/node/fs/extension';
-import __getFilename from '@coffeekraken/sugar/node/fs/filename';
-import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
-import __writeFile from '@coffeekraken/sugar/node/fs/writeFile';
-import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
-// import __replacePathTokens from '@coffeekraken/sugar/node/path/replacePathTokens';
+import {
+    __extension,
+    __fileName,
+    __readJsonSync,
+    __writeFile,
+    __writeFileSync,
+} from '@coffeekraken/sugar/fs';
 import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __toString from '@coffeekraken/sugar/shared/string/toString';
@@ -233,7 +234,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static new(path: string, settings?: ISFileSettings): SFile {
-        const fileName = __getFilename(path);
+        const fileName = __fileName(path);
         for (let i = 0; i < Object.keys(this._registeredClasses).length; i++) {
             const pattern = Object.keys(this._registeredClasses)[i],
                 cls = this._registeredClasses[pattern];
@@ -434,7 +435,7 @@ class SFile extends __SEventEmitter implements ISFile {
 
         // save the file path
         this.cwd = this.settings.cwd;
-        this._name = __getFilename(filepath);
+        this._name = __fileName(filepath);
         this.extension = __extension(this.path).toLowerCase();
         this._nameWithoutExt = this.name.replace(`.${this.extension}`, '');
 

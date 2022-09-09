@@ -2,7 +2,7 @@ import { BinaryToTextEncoding } from 'crypto';
 import __fs from 'fs';
 import __sha256 from '../../shared/crypt/sha256';
 import __isDirectory from '../is/directory';
-import __fileHash from './fileHash';
+import { __fileHash } from '@coffeekraken/sugar/fs';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
 /**
@@ -26,8 +26,8 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
  * @setting         {BinaryToTextEncoding}      [digest='base64']       How to digest the hash
  *
  * @example         js
- * import folderHash from '@coffeekraken/sugar/node/fs/folderHash';
- * folderHash('my/cool/folder'); // => YZOrKDx9LCLd8X39PoFTflXGpRU=,
+ * import { __folderHash } from '@coffeekraken/sugar/fs';
+ * __folderHash('my/cool/folder'); // => YZOrKDx9LCLd8X39PoFTflXGpRU=,
  *
  * @see             https://www.npmjs.com/package/folder-hash
  * @since           2.0.0
@@ -44,7 +44,7 @@ export interface IFolderHashSettings {
     include: Partial<IFolderHashIncludeSettings>;
 }
 
-export default function folderHash(
+export default function __folderHash(
     folderPath: string,
     settings: Partial<IFolderHashSettings> = {},
 ): string {

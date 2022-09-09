@@ -1,5 +1,5 @@
-import __loadConfigFile from '@coffeekraken/sugar/node/config/loadConfigFile';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import { __loadConfigFile } from '@coffeekraken/sugar/load';
+import { __dirname } from '@coffeekraken/sugar/fs';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __path from 'path';
 import { configDefaults, defineConfig } from 'vitest/config';

@@ -14,15 +14,15 @@ import __xmlToJson from '@coffeekraken/sugar/shared/convert/xmlToJson';
  * @return      {Object}                            The readed json
  *
  * @example         js
- * import readXmlSync from '@coffeekraken/sugar/node/fs/readXmlSync';
- * readXmlSync('my-cool-xml/file.xml');
+ * import { __readXmlSync } from '@coffeekraken/sugar/fs';
+ * __readXmlSync('my-cool-xml/file.xml');
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 const _cache = {};
-export default function readXmlSync(path: string): any {
+export default function __readXmlSync(path: string): any {
     if (_cache[path]) return _cache[path];
 
     if (!__fs.existsSync(path)) {

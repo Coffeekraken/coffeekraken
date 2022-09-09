@@ -30,7 +30,8 @@ import { __elementAreaStats } from '@coffeekraken/sugar/dom';
  * @todo      tests
  *
  * @example 	js
- * import slideable from '@coffeekraken/sugar/js/drag/slideable';
+ * import { __slideable } from '@coffeekraken/sugar/dom';
+ * __slideable($myElement);
  *
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

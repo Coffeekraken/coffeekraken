@@ -14,16 +14,13 @@ import __fs from 'fs-extra';
  * @param       {String}              dir           The directory path to empty
  *
  * @example       js
- * import emptyDirSync from '@coffeekraken/node/fs/emptyDirSync';
- * try {
- *    emptyDirSync('my/cool/directory');
- * } catch(e) {}
+ * import { __emptyDirSync } from '@coffeekraken/sugar/fs';
+ * __emptyDirSync('my/cool/directory');
  *
  * @see             https://github.com/jprichardson/node-fs-extra
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function emptyDirSync(dir) {
+export default function __emptyDirSync(dir) {
     __fs.emptyDirSync(dir);
 }
-export default emptyDirSync;

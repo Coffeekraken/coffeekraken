@@ -13,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const s_log_1 = __importDefault(require("@coffeekraken/s-log"));
-const copySync_1 = __importDefault(require("@coffeekraken/sugar/node/fs/copySync"));
-const dirname_1 = __importDefault(require("@coffeekraken/sugar/node/fs/dirname"));
+const fs_1 = require("@coffeekraken/sugar/fs");
+const fs_2 = require("@coffeekraken/sugar/fs");
 const packageRoot_1 = __importDefault(require("@coffeekraken/sugar/node/path/packageRoot"));
 const path_1 = __importDefault(require("path"));
 /**
@@ -35,9 +35,9 @@ const frontspecIngredient = {
     add({ ask, log, emit }) {
         return __awaiter(this, void 0, void 0, function* () {
             const frontspecPath = `${(0, packageRoot_1.default)()}/frontspec.json`;
-            const sourceJsonPath = path_1.default.resolve((0, packageRoot_1.default)((0, dirname_1.default)()), 'src/data/frontspec/frontspec.json');
+            const sourceJsonPath = path_1.default.resolve((0, packageRoot_1.default)((0, fs_2.__dirname)()), 'src/data/frontspec/frontspec.json');
             // copy the file to the project root
-            (0, copySync_1.default)(sourceJsonPath, frontspecPath);
+            (0, fs_1.__copySync)(sourceJsonPath, frontspecPath);
             emit('log', {
                 type: s_log_1.default.TYPE_INFO,
                 value: `<green>[frontspec]</green> Default <cyan>frontspec.json</cyan> file addedd <green>successfully</green>`,
@@ -47,4 +47,4 @@ const frontspecIngredient = {
     },
 };
 exports.default = frontspecIngredient;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsZ0VBQXlDO0FBQ3pDLG9GQUE4RDtBQUM5RCxrRkFBNEQ7QUFDNUQsNEZBQXNFO0FBQ3RFLGdEQUEwQjtBQUcxQjs7Ozs7Ozs7OztHQVVHO0FBQ0gsTUFBTSxtQkFBbUIsR0FBd0I7SUFDN0MsRUFBRSxFQUFFLFdBQVc7SUFDZixXQUFXLEVBQ1AsNkZBQTZGO0lBQ2pHLFlBQVksRUFBRSxDQUFDLFNBQVMsRUFBRSxPQUFPLENBQUM7SUFDNUIsR0FBRyxDQUFDLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxJQUFJLEVBQUU7O1lBQ3hCLE1BQU0sYUFBYSxHQUFHLEdBQUcsSUFBQSxxQkFBYSxHQUFFLGlCQUFpQixDQUFDO1lBQzFELE1BQU0sY0FBYyxHQUFHLGNBQU0sQ0FBQyxPQUFPLENBQ2pDLElBQUEscUJBQWEsRUFBQyxJQUFBLGlCQUFTLEdBQUUsQ0FBQyxFQUMxQixtQ0FBbUMsQ0FDdEMsQ0FBQztZQUVGLG9DQUFvQztZQUNwQyxJQUFBLGtCQUFVLEVBQUMsY0FBYyxFQUFFLGFBQWEsQ0FBQyxDQUFDO1lBRTFDLElBQUksQ0FBQyxLQUFLLEVBQUU7Z0JBQ1IsSUFBSSxFQUFFLGVBQU0sQ0FBQyxTQUFTO2dCQUN0QixLQUFLLEVBQUUsd0dBQXdHO2FBQ2xILENBQUMsQ0FBQztZQUVILE9BQU8sSUFBSSxDQUFDO1FBQ2hCLENBQUM7S0FBQTtDQUNKLENBQUM7QUFDRixrQkFBZSxtQkFBbUIsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsZ0VBQXlDO0FBQ3pDLCtDQUFvRDtBQUNwRCwrQ0FBbUQ7QUFDbkQsNEZBQXNFO0FBQ3RFLGdEQUEwQjtBQUcxQjs7Ozs7Ozs7OztHQVVHO0FBQ0gsTUFBTSxtQkFBbUIsR0FBd0I7SUFDN0MsRUFBRSxFQUFFLFdBQVc7SUFDZixXQUFXLEVBQ1AsNkZBQTZGO0lBQ2pHLFlBQVksRUFBRSxDQUFDLFNBQVMsRUFBRSxPQUFPLENBQUM7SUFDNUIsR0FBRyxDQUFDLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxJQUFJLEVBQUU7O1lBQ3hCLE1BQU0sYUFBYSxHQUFHLEdBQUcsSUFBQSxxQkFBYSxHQUFFLGlCQUFpQixDQUFDO1lBQzFELE1BQU0sY0FBYyxHQUFHLGNBQU0sQ0FBQyxPQUFPLENBQ2pDLElBQUEscUJBQWEsRUFBQyxJQUFBLGNBQVMsR0FBRSxDQUFDLEVBQzFCLG1DQUFtQyxDQUN0QyxDQUFDO1lBRUYsb0NBQW9DO1lBQ3BDLElBQUEsZUFBVSxFQUFDLGNBQWMsRUFBRSxhQUFhLENBQUMsQ0FBQztZQUUxQyxJQUFJLENBQUMsS0FBSyxFQUFFO2dCQUNSLElBQUksRUFBRSxlQUFNLENBQUMsU0FBUztnQkFDdEIsS0FBSyxFQUFFLHdHQUF3RzthQUNsSCxDQUFDLENBQUM7WUFFSCxPQUFPLElBQUksQ0FBQztRQUNoQixDQUFDO0tBQUE7Q0FDSixDQUFDO0FBQ0Ysa0JBQWUsbUJBQW1CLENBQUMifQ==

@@ -8,15 +8,15 @@
  * Function that set the `history.scrollRestoration` property to `manual`
  *
  * @example 	js
- * import __preventScrolLRestoration from '@coffeekraken/sugar/js/dom/scroll/preventScrollRestoration'
+ * import { __preventScrolLRestoration } from '@coffeekraken/sugar/dom'
  * __preventScrollRestoration();
  *
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function() {
+export default function () {
     if ('scrollRestoration' in history) {
-      // Back off, browser, I got this...
-      history.scrollRestoration = 'manual';
+        // Back off, browser, I got this...
+        history.scrollRestoration = 'manual';
     }
 }

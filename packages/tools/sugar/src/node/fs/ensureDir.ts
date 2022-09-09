@@ -16,8 +16,8 @@ import __fs from 'fs-extra';
  * @return      {Promise}                           A promise that will be resolved once the directory has been created if needed...
  *
  * @example       js
- * import ensureDir from '@coffeekraken/node/fs/ensureDir';
- * ensureDir('my/cool/dir').then(() => {
+ * import { __ensureDir } from '@coffeekraken/sugar/fs';
+ *  __ensureDir('my/cool/dir').then(() => {
  *    // do something...
  * });
  *
@@ -25,7 +25,6 @@ import __fs from 'fs-extra';
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function ensureDir(dir) {
+export default function __ensureDir(dir) {
     return __fs.ensureDir(dir);
 }
-export default ensureDir;

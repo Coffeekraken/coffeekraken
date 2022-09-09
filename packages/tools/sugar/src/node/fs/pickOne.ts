@@ -19,7 +19,7 @@ import __micromatch from 'micromatch';
  * @setting         {Boolean}         [SFile=true]          Return an SFile instance if true, otherwise just a simple path string
  *
  * @example         js
- * import __pickOne from '@coffeekraken/sugar/node/fs/pickOne';
+ * import { __pickOne } from '@coffeekraken/sugar/fs';
  * __pickOne(['myCoolFile.json', 'myCoolFile2.json'], {});
  *
  * @since       2.0.0
@@ -31,7 +31,7 @@ export interface IPickOneSettings {
     SFile: boolean;
 }
 
-export default function pickOne(
+export default function __pickOne(
     filesNames: string[],
     settings?: Partial<IPickOneSettings>,
 ): __SFile | string {

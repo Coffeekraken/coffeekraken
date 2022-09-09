@@ -13,8 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const folderPath_1 = __importDefault(require("./folderPath"));
-const ensureDirSync_1 = __importDefault(require("./ensureDirSync"));
+const fs_1 = require("@coffeekraken/sugar/fs");
 const fs_extra_1 = __importDefault(require("fs-extra"));
 /**
  * @name        writeFile
@@ -32,8 +31,8 @@ const fs_extra_1 = __importDefault(require("fs-extra"));
  * @return      {Promise}                           A promise that will be resolved when the writeFile is completed
  *
  * @example       js
- * import writeFile from '@coffeekraken/node/fs/writeFile';
- * writeFile('my/cool/file.txt', 'Hello World').then(() => {
+ * import { __writeFile } from '@coffeekraken/sugar/fs';
+ * __writeFile('my/cool/file.txt', 'Hello World').then(() => {
  *    // do something on complete...
  * });
  *
@@ -41,13 +40,13 @@ const fs_extra_1 = __importDefault(require("fs-extra"));
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function writeFile(path, data, options = {}) {
+function __writeFile(path, data, options = {}) {
     return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
-        const folderPath = (0, folderPath_1.default)(path);
-        (0, ensureDirSync_1.default)(folderPath);
+        const folderPath = (0, fs_1.__folderPath)(path);
+        (0, fs_1.__ensureDirSync)(folderPath);
         yield fs_extra_1.default.outputFile(path, data, options);
         resolve(path);
     }));
 }
-exports.default = writeFile;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7OztBQUVkLDhEQUF3QztBQUN4QyxvRUFBOEM7QUFDOUMsd0RBQTRCO0FBRTVCOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxTQUFTLFNBQVMsQ0FBQyxJQUFJLEVBQUUsSUFBSSxFQUFFLE9BQU8sR0FBRyxFQUFFO0lBQ3ZDLE9BQU8sSUFBSSxPQUFPLENBQUMsQ0FBTyxPQUFPLEVBQUUsRUFBRTtRQUNqQyxNQUFNLFVBQVUsR0FBRyxJQUFBLG9CQUFZLEVBQUMsSUFBSSxDQUFDLENBQUM7UUFDdEMsSUFBQSx1QkFBZSxFQUFDLFVBQVUsQ0FBQyxDQUFDO1FBQzVCLE1BQU0sa0JBQUksQ0FBQyxVQUFVLENBQUMsSUFBSSxFQUFFLElBQUksRUFBRSxPQUFPLENBQUMsQ0FBQztRQUMzQyxPQUFPLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDbEIsQ0FBQyxDQUFBLENBQUMsQ0FBQztBQUNQLENBQUM7QUFDRCxrQkFBZSxTQUFTLENBQUMifQ==
+exports.default = __writeFile;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7OztBQUVkLCtDQUF1RTtBQUN2RSx3REFBNEI7QUFFNUI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUNILFNBQXdCLFdBQVcsQ0FBQyxJQUFJLEVBQUUsSUFBSSxFQUFFLE9BQU8sR0FBRyxFQUFFO0lBQ3hELE9BQU8sSUFBSSxPQUFPLENBQUMsQ0FBTyxPQUFPLEVBQUUsRUFBRTtRQUNqQyxNQUFNLFVBQVUsR0FBRyxJQUFBLGlCQUFZLEVBQUMsSUFBSSxDQUFDLENBQUM7UUFDdEMsSUFBQSxvQkFBZSxFQUFDLFVBQVUsQ0FBQyxDQUFDO1FBQzVCLE1BQU0sa0JBQUksQ0FBQyxVQUFVLENBQUMsSUFBSSxFQUFFLElBQUksRUFBRSxPQUFPLENBQUMsQ0FBQztRQUMzQyxPQUFPLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDbEIsQ0FBQyxDQUFBLENBQUMsQ0FBQztBQUNQLENBQUM7QUFQRCw4QkFPQyJ9

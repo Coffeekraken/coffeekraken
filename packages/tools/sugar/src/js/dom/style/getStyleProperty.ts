@@ -23,14 +23,17 @@ import autoCast from '../../../shared/string/autoCast';
  * @todo      tests
  *
  * @example  	js
- * import getStyleProperty from '@coffeekraken/sugar/js/dom/getStyleProperty'
- * const opacity = getStyleProperty(myCoolHTMLElement, 'opacity');
+ * import { __getStyleProperty } from '@coffeekraken/sugar/dom'
+ * const opacity = __getStyleProperty(myCoolHTMLElement, 'opacity');
  *
  * @see 		https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function getStyleProperty(elm: HTMLElement, property: string): any {
+export default function __getStyleProperty(
+    elm: HTMLElement,
+    property: string,
+): any {
     // caching mecanisme
     setTimeout(() => {
         elm._sComputedStyle = null;
@@ -47,4 +50,3 @@ function getStyleProperty(elm: HTMLElement, property: string): any {
     }
     return null;
 }
-export default getStyleProperty;

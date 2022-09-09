@@ -1,6 +1,6 @@
 import { define as __SDashboardComponent } from './SDashboardComponent';
 
-import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
+import { __expandPleasantCssClassnamesLive } from '@coffeekraken/sugar/dom';
 
 __SDashboardComponent();
 

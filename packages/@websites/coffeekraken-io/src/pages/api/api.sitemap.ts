@@ -2,7 +2,7 @@ import __SDocmap from '@coffeekraken/s-docmap';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import { ISSitemapBuilderResultItem } from '@coffeekraken/s-sitemap-builder';
-import __fileHash from '@coffeekraken/sugar/node/fs/fileHash';
+import { __fileHash } from '@coffeekraken/sugar/fs';
 import __fs from 'fs';
 
 export default function apiSitemap() {

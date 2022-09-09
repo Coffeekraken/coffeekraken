@@ -1,7 +1,7 @@
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import __SGlob from '@coffeekraken/s-glob';
 import __SInterface from '@coffeekraken/s-interface';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import { __dirname } from '@coffeekraken/sugar/fs';
 import __chokidar from 'chokidar';
 import __path from 'path';
 

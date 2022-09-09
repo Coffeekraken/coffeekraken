@@ -1,4 +1,4 @@
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import { __dirname } from '@coffeekraken/sugar/fs';
 import __path from 'path';
 
 export default (api) => {

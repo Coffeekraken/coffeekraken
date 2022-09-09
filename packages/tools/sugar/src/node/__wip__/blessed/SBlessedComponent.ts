@@ -2,7 +2,6 @@
 // import __SPromise from '@coffeekraken/s-promise';
 // import __deepMerge from '../../shared/object/deepMerge';
 // import __SColor from '@coffeekraken/s-color';
-// import __hotkey from '../keyboard/hotkey';
 // import __isChildProcess from '../../node/is/childProcess';
 // import __innerWidth from './utils/innerWidth';
 // import __blessed from 'blessed';

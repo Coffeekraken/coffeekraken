@@ -1,7 +1,6 @@
 // @ts-nocheck
 
-import whenInViewport from '../dom/whenInViewport';
-import { __querySelectorLive } from '@coffeekraken/sugar/dom';
+import { __querySelectorLive, __whenInViewport } from '@coffeekraken/sugar/dom';
 
 /**
  * @name 		videoLazySrcAttribute
@@ -22,8 +21,8 @@ import { __querySelectorLive } from '@coffeekraken/sugar/dom';
  * @todo            tests
  *
  * @example     js
- * import videoLazySrcAttribute from '@coffeekraken/sugar/js/feature/videoLazySrcAttribute';
- * videoLazySrcAttribute();
+ * import { __videoLazySrcAttribute } from '@coffeekraken/sugar/feature';
+ * __videoLazySrcAttribute();
  *
  * @example    html
  * <video lazy-src="my-cool-video.mp4"></video>
@@ -35,7 +34,7 @@ export interface IVideoLazySrcAttributeSettings {
     offset: number;
 }
 
-function videoLazySrcAttribute(
+export default function __videoLazySrcAttribute(
     settings: Partial<IVideoLazySrcAttributeSettings> = {},
 ): void {
     settings = {
@@ -43,9 +42,8 @@ function videoLazySrcAttribute(
         ...settings,
     };
     __querySelectorLive('video[lazy-src]:not([is])', ($videoElm) => {
-        whenInViewport($videoElm, settings.offset).then(() => {
+        __whenInViewport($videoElm, settings.offset).then(() => {
             $videoElm.setAttribute('src', $videoElm.getAttribute('lazy-src'));
         });
     });
 }
-export default videoLazySrcAttribute;

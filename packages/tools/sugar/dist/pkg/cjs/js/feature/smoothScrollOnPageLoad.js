@@ -3,13 +3,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const scrollToLocationHash_1 = __importDefault(require("../dom/scroll/scrollToLocationHash"));
+const dom_1 = require("@coffeekraken/sugar/dom");
 const deepMerge_1 = __importDefault(require("../../shared/object/deepMerge"));
-function smoothScrollOnPageLoad(settings = {}) {
+function __smoothScrollOnPageLoad(settings = {}) {
     settings = (0, deepMerge_1.default)({
         scroll: {},
     }, settings);
-    (0, scrollToLocationHash_1.default)(settings);
+    (0, dom_1.__scrollToLocationHash)(settings);
 }
-exports.default = smoothScrollOnPageLoad;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBRUEsOEZBQXdFO0FBQ3hFLDhFQUF3RDtBQStCeEQsU0FBUyxzQkFBc0IsQ0FDM0IsV0FBcUQsRUFBRTtJQUV2RCxRQUFRLEdBQUcsSUFBQSxtQkFBVyxFQUNsQjtRQUNJLE1BQU0sRUFBRSxFQUFFO0tBQ2IsRUFDRCxRQUFRLENBQ1gsQ0FBQztJQUVGLElBQUEsOEJBQXNCLEVBQUMsUUFBUSxDQUFDLENBQUM7QUFDckMsQ0FBQztBQUNELGtCQUFlLHNCQUFzQixDQUFDIn0=
+exports.default = __smoothScrollOnPageLoad;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBRUEsaURBQWlFO0FBQ2pFLDhFQUF3RDtBQStCeEQsU0FBd0Isd0JBQXdCLENBQzVDLFdBQXFELEVBQUU7SUFFdkQsUUFBUSxHQUFHLElBQUEsbUJBQVcsRUFDbEI7UUFDSSxNQUFNLEVBQUUsRUFBRTtLQUNiLEVBQ0QsUUFBUSxDQUNYLENBQUM7SUFFRixJQUFBLDRCQUFzQixFQUFDLFFBQVEsQ0FBQyxDQUFDO0FBQ3JDLENBQUM7QUFYRCwyQ0FXQyJ9

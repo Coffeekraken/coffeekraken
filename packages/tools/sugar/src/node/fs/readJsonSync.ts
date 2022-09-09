@@ -13,15 +13,15 @@ import __fs from 'fs';
  * @return      {Object}                            The readed json
  *
  * @example         js
- * import readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
- * await readJsonSync('my-cool-json/file.json');
+ * import { __readJsonSync } from '@coffeekraken/sugar/fs';
+ * __readJsonSync('my-cool-json/file.json');
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 const _cache = {};
-export default function readJsonSync(path: string): any {
+export default function __readJsonSync(path: string): any {
     if (_cache[path]) return _cache[path];
 
     if (!__fs.existsSync(path)) {

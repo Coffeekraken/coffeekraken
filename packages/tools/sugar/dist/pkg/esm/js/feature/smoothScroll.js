@@ -1,8 +1,6 @@
-import __smoothScrollOnAnchorLinks from './smoothScrollOnAnchorLinks';
-import __smoothScrollOnPageLoad from './smoothScrollOnPageLoad';
-import __smoothScrollOnHashChange from './smoothScrollOnHashChange';
 import __deepMerge from '../../shared/object/deepMerge';
-function smoothScroll(settings = {}) {
+import { __smoothScrollOnAnchorLinks, __smoothScrollOnPageLoad, __smoothScrollOnHashChange, } from '@coffeekraken/sugar/feature';
+export default function __smoothScroll(settings = {}) {
     settings = __deepMerge({
         scroll: {},
     }, settings);
@@ -10,5 +8,4 @@ function smoothScroll(settings = {}) {
     __smoothScrollOnAnchorLinks(settings);
     __smoothScrollOnHashChange(settings);
 }
-export default smoothScroll;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUVBLE9BQU8sMkJBQTJCLE1BQU0sNkJBQTZCLENBQUM7QUFDdEUsT0FBTyx3QkFBd0IsTUFBTSwwQkFBMEIsQ0FBQztBQUNoRSxPQUFPLDBCQUEwQixNQUFNLDRCQUE0QixDQUFDO0FBQ3BFLE9BQU8sV0FBVyxNQUFNLCtCQUErQixDQUFDO0FBbUN4RCxTQUFTLFlBQVksQ0FBQyxXQUEyQyxFQUFFO0lBQy9ELFFBQVEsR0FBRyxXQUFXLENBQ2xCO1FBQ0ksTUFBTSxFQUFFLEVBQUU7S0FDYixFQUNELFFBQVEsQ0FDWCxDQUFDO0lBRUYsd0JBQXdCLENBQUMsUUFBUSxDQUFDLENBQUM7SUFDbkMsMkJBQTJCLENBQUMsUUFBUSxDQUFDLENBQUM7SUFDdEMsMEJBQTBCLENBQUMsUUFBUSxDQUFDLENBQUM7QUFDekMsQ0FBQztBQUNELGVBQWUsWUFBWSxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUVBLE9BQU8sV0FBVyxNQUFNLCtCQUErQixDQUFDO0FBRXhELE9BQU8sRUFDSCwyQkFBMkIsRUFDM0Isd0JBQXdCLEVBQ3hCLDBCQUEwQixHQUM3QixNQUFNLDZCQUE2QixDQUFDO0FBbUNyQyxNQUFNLENBQUMsT0FBTyxVQUFVLGNBQWMsQ0FDbEMsV0FBMkMsRUFBRTtJQUU3QyxRQUFRLEdBQUcsV0FBVyxDQUNsQjtRQUNJLE1BQU0sRUFBRSxFQUFFO0tBQ2IsRUFDRCxRQUFRLENBQ1gsQ0FBQztJQUVGLHdCQUF3QixDQUFDLFFBQVEsQ0FBQyxDQUFDO0lBQ25DLDJCQUEyQixDQUFDLFFBQVEsQ0FBQyxDQUFDO0lBQ3RDLDBCQUEwQixDQUFDLFFBQVEsQ0FBQyxDQUFDO0FBQ3pDLENBQUMifQ==

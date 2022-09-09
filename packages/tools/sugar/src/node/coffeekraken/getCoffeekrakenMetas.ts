@@ -3,8 +3,7 @@ import __path from 'path';
 import __parseSemverString, {
     ISemverObject,
 } from '../../shared/semver/parseSemverString';
-import __dirname from '../fs/dirname';
-import __readJsonSync from '../fs/readJsonSync';
+import { __dirname, __readJsonSync } from '@coffeekraken/sugar/fs';
 import __packageRoot from '../path/packageRoot';
 
 /**

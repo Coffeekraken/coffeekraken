@@ -14,16 +14,13 @@ import __fs from 'fs-extra';
  * @param       {String}              file           The file to ensure that it exists...
  *
  * @example       js
- * import ensureFileSync from '@coffeekraken/node/fs/ensureFileSync';
- * try {
- *    ensureFileSync('my/cool/file.jpg');
- * } catch(e) {}
+ * import { __ensureFileSync } from '@coffeekraken/sugar/fs';
+ * __ensureFileSync('my/cool/file.jpg');
  *
  * @see             https://github.com/jprichardson/node-fs-extra
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function ensureFileSync(file) {
+export default function __ensureFileSync(file) {
     __fs.ensureFileSync(file);
 }
-export default ensureFileSync;

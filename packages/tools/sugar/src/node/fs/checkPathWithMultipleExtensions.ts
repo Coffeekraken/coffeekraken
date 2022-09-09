@@ -1,4 +1,4 @@
-import __extension from './extension';
+import { __extension } from '@coffeekraken/sugar/fs';
 import __fs from 'fs';
 import __path from 'path';
 
@@ -20,13 +20,13 @@ import __path from 'path';
  * @return      {String|undefined}                  The first valid path founded, or undefined
  *
  * @example         js
- * import checkPathWithMultipleExtensions from '@coffeekraken/sugar/node/fs/checkPathWithMultipleExtensions';
- * checkPathWithMultipleExtensions('/my/cool/file.txt', ['txt','js','css']);
+ * import { __checkPathWithMultipleExtensions } from '@coffeekraken/sugar/fs';
+ * __checkPathWithMultipleExtensions('/my/cool/file.txt', ['txt','js','css']);
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function checkPathWithMultipleExtensions(
+export default function __checkPathWithMultipleExtensions(
     path: string,
     exts: string[],
 ): string | undefined {

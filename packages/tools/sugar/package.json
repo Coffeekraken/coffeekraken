@@ -135,6 +135,76 @@
                 "import": "./dist/pkg/esm/js/dom/_exports.js"
             }
         },
+        "./css": {
+            "default": {
+                "require": "./dist/pkg/cjs/js/css/_exports.js",
+                "import": "./dist/pkg/esm/js/css/_exports.js"
+            }
+        },
+        "./error": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/error/_exports.js",
+                "import": "./dist/pkg/esm/node/error/_exports.js"
+            }
+        },
+        "./feature": {
+            "default": {
+                "require": "./dist/pkg/cjs/js/feature/_exports.js",
+                "import": "./dist/pkg/esm/js/feature/_exports.js"
+            }
+        },
+        "./filter": {
+            "default": {
+                "require": "./dist/pkg/cjs/js/filter/_exports.js",
+                "import": "./dist/pkg/esm/js/filter/_exports.js"
+            }
+        },
+        "./fs": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/fs/_exports.js",
+                "import": "./dist/pkg/esm/node/fs/_exports.js"
+            }
+        },
+        "./is": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/is/_exports.js",
+                "import": "./dist/pkg/esm/node/is/_exports.js"
+            },
+            "default": {
+                "require": "./dist/pkg/cjs/js/is/_exports.js",
+                "import": "./dist/pkg/esm/js/is/_exports.js"
+            }
+        },
+        "./keyboard": {
+            "default": {
+                "require": "./dist/pkg/cjs/js/keyboard/_exports.js",
+                "import": "./dist/pkg/esm/js/keyboard/_exports.js"
+            }
+        },
+        "./load": {
+            "default": {
+                "require": "./dist/pkg/cjs/node/load/_exports.js",
+                "import": "./dist/pkg/esm/node/load/_exports.js"
+            }
+        },
+        "./module": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/module/_exports.js",
+                "import": "./dist/pkg/esm/node/module/_exports.js"
+            }
+        },
+        "./storage": {
+            "default": {
+                "require": "./dist/pkg/cjs/js/storage/_exports.js",
+                "import": "./dist/pkg/esm/js/storage/_exports.js"
+            }
+        },
+        "./string": {
+            "default": {
+                "require": "./dist/pkg/cjs/js/string/_exports.js",
+                "import": "./dist/pkg/esm/js/string/_exports.js"
+            }
+        },
         "./shared/*": {
             "require": "./dist/pkg/cjs/shared/*.js",
             "import": "./dist/pkg/esm/shared/*.js"

@@ -5,8 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_extra_1 = __importDefault(require("fs-extra"));
-const ensureDirSync_1 = __importDefault(require("./ensureDirSync"));
-const folderPath_1 = __importDefault(require("./folderPath"));
+const fs_1 = require("@coffeekraken/sugar/fs");
 /**
  * @name        writeFileSync
  * @namespace            node.fs
@@ -21,19 +20,17 @@ const folderPath_1 = __importDefault(require("./folderPath"));
  * @param       {Object}              [options={}]  options are what you'd pass to [fs.writeFileSync()](https://nodejs.org/api/fs.html#fs_fs_writefile_file_data_options_callback)
  *
  * @example       js
- * import writeFileSync from '@coffeekraken/node/fs/writeFileSync';
- * try {
- *    writeFileSync('my/cool/file.txt', 'Hello World');
- * } catch(e) {}
+ * import { __writeFileSync } from '@coffeekraken/sugar/fs';
+ * __writeFileSync('my/cool/file.txt', 'Hello World');
  *
  * @see             https://github.com/jprichardson/node-fs-extra
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function writeFileSync(path, data, options = {}) {
-    const folderPath = (0, folderPath_1.default)(path);
-    (0, ensureDirSync_1.default)(folderPath);
+function __writeFileSync(path, data, options = {}) {
+    const folderPath = (0, fs_1.__folderPath)(path);
+    (0, fs_1.__ensureDirSync)(folderPath);
     return fs_extra_1.default.outputFileSync(path, data, options);
 }
-exports.default = writeFileSync;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUE0QjtBQUM1QixvRUFBOEM7QUFDOUMsOERBQXdDO0FBRXhDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBQ0gsU0FBUyxhQUFhLENBQUMsSUFBSSxFQUFFLElBQUksRUFBRSxPQUFPLEdBQUcsRUFBRTtJQUMzQyxNQUFNLFVBQVUsR0FBRyxJQUFBLG9CQUFZLEVBQUMsSUFBSSxDQUFDLENBQUM7SUFDdEMsSUFBQSx1QkFBZSxFQUFDLFVBQVUsQ0FBQyxDQUFDO0lBQzVCLE9BQU8sa0JBQUksQ0FBQyxjQUFjLENBQUMsSUFBSSxFQUFFLElBQUksRUFBRSxPQUFPLENBQUMsQ0FBQztBQUNwRCxDQUFDO0FBQ0Qsa0JBQWUsYUFBYSxDQUFDIn0=
+exports.default = __writeFileSync;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUE0QjtBQUM1QiwrQ0FBdUU7QUFFdkU7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBb0JHO0FBQ0gsU0FBd0IsZUFBZSxDQUFDLElBQUksRUFBRSxJQUFJLEVBQUUsT0FBTyxHQUFHLEVBQUU7SUFDNUQsTUFBTSxVQUFVLEdBQUcsSUFBQSxpQkFBWSxFQUFDLElBQUksQ0FBQyxDQUFDO0lBQ3RDLElBQUEsb0JBQWUsRUFBQyxVQUFVLENBQUMsQ0FBQztJQUM1QixPQUFPLGtCQUFJLENBQUMsY0FBYyxDQUFDLElBQUksRUFBRSxJQUFJLEVBQUUsT0FBTyxDQUFDLENBQUM7QUFDcEQsQ0FBQztBQUpELGtDQUlDIn0=

@@ -4,7 +4,7 @@ import __SFile from '@coffeekraken/s-file';
 import type { IResolveGlobSettings } from '@coffeekraken/s-glob';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
-import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
+import { __writeFileSync } from '@coffeekraken/sugar/fs';
 import __packageSyncJson from '@coffeekraken/sugar/node/package/jsonSync';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';

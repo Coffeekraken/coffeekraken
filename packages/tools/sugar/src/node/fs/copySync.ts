@@ -15,16 +15,13 @@ import __fs from 'fs-extra';
  * @param       {String}              dest          The destination path
  *
  * @example       js
- * import copySync from '@coffeekraken/node/fs/copySync';
- * try {
- *    copySync('my/cool/file.jpg', 'my/new/file.jpg');
- * } catch(e) {}
+ * import { __copySync } from '@coffeekraken/sugar/fs';
+ *  __copySync('my/cool/file.jpg', 'my/new/file.jpg');
  *
  * @see             https://github.com/jprichardson/node-fs-extra
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function copySync(src, dest) {
+export default function __copySync(src, dest) {
     __fs.copySync(src, dest);
 }
-export default copySync;

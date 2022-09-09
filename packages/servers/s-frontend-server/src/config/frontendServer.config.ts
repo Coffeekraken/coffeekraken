@@ -1,4 +1,4 @@
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import { __dirname } from '@coffeekraken/sugar/fs';
 
 export default function (api) {
     if (api.env.platform !== 'node') return;

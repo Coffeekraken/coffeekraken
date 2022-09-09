@@ -18,16 +18,16 @@ import __filesize from 'filesize';
  * @return            {Promise}                                           A promise that will be resolved once the folder size has been calculated
  *
  * @example           js
- * import folderSize from '@coffeekraken/sugar/node/fs/folderSize';
- * await folderSize('my/cool/folder');
- * await folderSize('my/cool/folder', false); // no formatting
+ * import { __folderSize } from '@coffeekraken/sugar/fs';
+ * await __folderSize('my/cool/folder');
+ * await __folderSize('my/cool/folder', false); // no formatting
  *
  *
  * @see             https://www.npmjs.com/package/filesize
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function folderSize(folderPath: string, format = {}) {
+export default function __folderSize(folderPath: string, format = {}) {
     return new Promise((resolve, reject) => {
         __getSize(folderPath, (error, size) => {
             if (error) throw error;
@@ -35,4 +35,3 @@ function folderSize(folderPath: string, format = {}) {
         });
     });
 }
-export default folderSize;

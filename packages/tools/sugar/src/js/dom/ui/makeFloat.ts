@@ -32,10 +32,8 @@ import { __whenRemoved } from '@coffeekraken/sugar/dom';
  * @todo      tests
  *
  * @example  	js
- * import up from '@coffeekraken/sugar/js/dom/traverse/up'
- * const $elm = up($myElement, elm => {
- *      return elm.classList.contains('my-class')
- * });
+ * import { __makeFloat } from '@coffeekraken/sugar/dom'
+ * __makeFloat($myElement, $dependingOn);
  *
  * @see         https://floating-ui.com
  * @since         1.0.0
@@ -69,7 +67,7 @@ export interface IMakeFloatApi {
     cleanup: Function;
 }
 
-export default function makeFloat(
+export default function __makeFloat(
     $elm: HTMLElement,
     $depending: HTMLElement,
     settings?: Partial<IMakeFloatSettings>,

@@ -16,9 +16,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const s_data_file_js_1 = __importDefault(require("@coffeekraken/s-data-file-js"));
 const s_data_file_php_1 = __importDefault(require("@coffeekraken/s-data-file-php"));
 const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
-const checkPathWithMultipleExtensions_1 = __importDefault(require("@coffeekraken/sugar/node/fs/checkPathWithMultipleExtensions"));
-const extension_1 = __importDefault(require("@coffeekraken/sugar/node/fs/extension"));
-const fs_1 = __importDefault(require("fs"));
+const fs_1 = require("@coffeekraken/sugar/fs");
+const fs_2 = __importDefault(require("fs"));
 /**
  * @name          SDataFileGeneric
  * @namespace     node
@@ -51,16 +50,16 @@ class SDataHandlerGeneric {
      */
     static load(filePath) {
         return new s_promise_1.default(({ resolve, reject }) => __awaiter(this, void 0, void 0, function* () {
-            const extension = (0, extension_1.default)(filePath), filePathWithoutExtension = filePath.replace(`.${extension}`, '');
+            const extension = (0, fs_1.__extension)(filePath), filePathWithoutExtension = filePath.replace(`.${extension}`, '');
             let dataFilePath = filePath;
-            if (!fs_1.default.existsSync(dataFilePath) ||
+            if (!fs_2.default.existsSync(dataFilePath) ||
                 !SDataHandlerGeneric.extensions.includes(extension)) {
-                dataFilePath = (0, checkPathWithMultipleExtensions_1.default)(`${filePathWithoutExtension}.data.${extension}`, SDataHandlerGeneric.extensions);
+                dataFilePath = (0, fs_1.__checkPathWithMultipleExtensions)(`${filePathWithoutExtension}.data.${extension}`, SDataHandlerGeneric.extensions);
             }
             if (!dataFilePath) {
                 return resolve({});
             }
-            switch ((0, extension_1.default)(dataFilePath)) {
+            switch ((0, fs_1.__extension)(dataFilePath)) {
                 case 'php':
                     return resolve(yield s_data_file_php_1.default.load(dataFilePath));
                     break;
@@ -86,4 +85,4 @@ exports.default = SDataHandlerGeneric;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 SDataHandlerGeneric.extensions = ['php', 'js', 'json'];
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7OztBQUVkLGtGQUF5RDtBQUN6RCxvRkFBMkQ7QUFDM0Qsd0VBQWlEO0FBQ2pELGtJQUE0RztBQUM1RyxzRkFBZ0U7QUFDaEUsNENBQXNCO0FBRXRCOzs7Ozs7Ozs7Ozs7Ozs7R0FlRztBQUNILE1BQXFCLG1CQUFtQjtJQWNwQzs7Ozs7Ozs7Ozs7O09BWUc7SUFDSCxNQUFNLENBQUMsSUFBSSxDQUFDLFFBQVE7UUFDaEIsT0FBTyxJQUFJLG1CQUFVLENBQUMsQ0FBTyxFQUFFLE9BQU8sRUFBRSxNQUFNLEVBQUUsRUFBRSxFQUFFO1lBQ2hELE1BQU0sU0FBUyxHQUFHLElBQUEsbUJBQVcsRUFBQyxRQUFRLENBQUMsRUFDbkMsd0JBQXdCLEdBQUcsUUFBUSxDQUFDLE9BQU8sQ0FDdkMsSUFBSSxTQUFTLEVBQUUsRUFDZixFQUFFLENBQ0wsQ0FBQztZQUVOLElBQUksWUFBWSxHQUFHLFFBQVEsQ0FBQztZQUM1QixJQUNJLENBQUMsWUFBSSxDQUFDLFVBQVUsQ0FBQyxZQUFZLENBQUM7Z0JBQzlCLENBQUMsbUJBQW1CLENBQUMsVUFBVSxDQUFDLFFBQVEsQ0FBQyxTQUFTLENBQUMsRUFDckQ7Z0JBQ0UsWUFBWSxHQUFHLElBQUEseUNBQWlDLEVBQzVDLEdBQUcsd0JBQXdCLFNBQVMsU0FBUyxFQUFFLEVBQy9DLG1CQUFtQixDQUFDLFVBQVUsQ0FDakMsQ0FBQzthQUNMO1lBRUQsSUFBSSxDQUFDLFlBQVksRUFBRTtnQkFDZixPQUFPLE9BQU8sQ0FBQyxFQUFFLENBQUMsQ0FBQzthQUN0QjtZQUVELFFBQVEsSUFBQSxtQkFBVyxFQUFDLFlBQVksQ0FBQyxFQUFFO2dCQUMvQixLQUFLLEtBQUs7b0JBQ04sT0FBTyxPQUFPLENBQUMsTUFBTSx5QkFBYyxDQUFDLElBQUksQ0FBQyxZQUFZLENBQUMsQ0FBQyxDQUFDO29CQUN4RCxNQUFNO2dCQUNWLEtBQUssSUFBSSxDQUFDO2dCQUNWLEtBQUssTUFBTTtvQkFDUCxPQUFPLE9BQU8sQ0FBQyxNQUFNLHdCQUFhLENBQUMsSUFBSSxDQUFDLFlBQVksQ0FBQyxDQUFDLENBQUM7b0JBQ3ZELE1BQU07YUFDYjtZQUVELE9BQU8sQ0FBQyxFQUFFLENBQUMsQ0FBQztRQUNoQixDQUFDLENBQUEsQ0FBQyxDQUFDO0lBQ1AsQ0FBQzs7QUE5REwsc0NBK0RDO0FBOURHOzs7Ozs7Ozs7O0dBVUc7QUFDSSw4QkFBVSxHQUFHLENBQUMsS0FBSyxFQUFFLElBQUksRUFBRSxNQUFNLENBQUMsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7OztBQUVkLGtGQUF5RDtBQUN6RCxvRkFBMkQ7QUFDM0Qsd0VBQWlEO0FBQ2pELCtDQUdnQztBQUNoQyw0Q0FBc0I7QUFFdEI7Ozs7Ozs7Ozs7Ozs7OztHQWVHO0FBQ0gsTUFBcUIsbUJBQW1CO0lBY3BDOzs7Ozs7Ozs7Ozs7T0FZRztJQUNILE1BQU0sQ0FBQyxJQUFJLENBQUMsUUFBUTtRQUNoQixPQUFPLElBQUksbUJBQVUsQ0FBQyxDQUFPLEVBQUUsT0FBTyxFQUFFLE1BQU0sRUFBRSxFQUFFLEVBQUU7WUFDaEQsTUFBTSxTQUFTLEdBQUcsSUFBQSxnQkFBVyxFQUFDLFFBQVEsQ0FBQyxFQUNuQyx3QkFBd0IsR0FBRyxRQUFRLENBQUMsT0FBTyxDQUN2QyxJQUFJLFNBQVMsRUFBRSxFQUNmLEVBQUUsQ0FDTCxDQUFDO1lBRU4sSUFBSSxZQUFZLEdBQUcsUUFBUSxDQUFDO1lBQzVCLElBQ0ksQ0FBQyxZQUFJLENBQUMsVUFBVSxDQUFDLFlBQVksQ0FBQztnQkFDOUIsQ0FBQyxtQkFBbUIsQ0FBQyxVQUFVLENBQUMsUUFBUSxDQUFDLFNBQVMsQ0FBQyxFQUNyRDtnQkFDRSxZQUFZLEdBQUcsSUFBQSxzQ0FBaUMsRUFDNUMsR0FBRyx3QkFBd0IsU0FBUyxTQUFTLEVBQUUsRUFDL0MsbUJBQW1CLENBQUMsVUFBVSxDQUNqQyxDQUFDO2FBQ0w7WUFFRCxJQUFJLENBQUMsWUFBWSxFQUFFO2dCQUNmLE9BQU8sT0FBTyxDQUFDLEVBQUUsQ0FBQyxDQUFDO2FBQ3RCO1lBRUQsUUFBUSxJQUFBLGdCQUFXLEVBQUMsWUFBWSxDQUFDLEVBQUU7Z0JBQy9CLEtBQUssS0FBSztvQkFDTixPQUFPLE9BQU8sQ0FBQyxNQUFNLHlCQUFjLENBQUMsSUFBSSxDQUFDLFlBQVksQ0FBQyxDQUFDLENBQUM7b0JBQ3hELE1BQU07Z0JBQ1YsS0FBSyxJQUFJLENBQUM7Z0JBQ1YsS0FBSyxNQUFNO29CQUNQLE9BQU8sT0FBTyxDQUFDLE1BQU0sd0JBQWEsQ0FBQyxJQUFJLENBQUMsWUFBWSxDQUFDLENBQUMsQ0FBQztvQkFDdkQsTUFBTTthQUNiO1lBRUQsT0FBTyxDQUFDLEVBQUUsQ0FBQyxDQUFDO1FBQ2hCLENBQUMsQ0FBQSxDQUFDLENBQUM7SUFDUCxDQUFDOztBQTlETCxzQ0ErREM7QUE5REc7Ozs7Ozs7Ozs7R0FVRztBQUNJLDhCQUFVLEdBQUcsQ0FBQyxLQUFLLEVBQUUsSUFBSSxFQUFFLE1BQU0sQ0FBQyxDQUFDIn0=

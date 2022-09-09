@@ -2,12 +2,11 @@
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SCliAddSugarJsonParamsInterface from '../../node/add/interface/SCliAddSugarJsonParamsInterface';
-import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
-import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
+import { __readJsonSync, __writeJsonSync } from '@coffeekraken/sugar/fs';
 import __fs from 'fs';
 
 export default (stringArgs = '') => {
-    return new __SPromise(async ({resolve, reject, emit, pipe}) => {
+    return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
         const finalParams = __SCliAddSugarJsonParamsInterface.apply(stringArgs);
 
         emit('log', {
@@ -21,7 +20,7 @@ export default (stringArgs = '') => {
             __writeJsonSync(`${process.cwd()}/sugar.json`, json);
         } else {
             __writeJsonSync(`${process.cwd()}/sugar.json`, {
-                recipe: finalParams.recipe
+                recipe: finalParams.recipe,
             });
         }
 

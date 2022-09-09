@@ -76,7 +76,7 @@ export interface IPostcssSugarPluginUiFormClassesParams {
 
 export { postcssSugarPluginUiFormClassesInterface as interface };
 
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import { __dirname } from '@coffeekraken/sugar/fs';
 export function dependencies() {
     return {
         files: [`${__dirname()}/text.js`],

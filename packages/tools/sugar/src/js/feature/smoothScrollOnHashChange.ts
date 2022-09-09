@@ -1,6 +1,6 @@
 // @ts-nocheck
 import type { IScrollToSettings } from '../dom/scroll/scrollTo';
-import __scrollToLocationHash from '../dom/scroll/scrollToLocationHash';
+import { __scrollToLocationHash } from '@coffeekraken/sugar/dom';
 import __deepMerge from '../../shared/object/deepMerge';
 
 /**
@@ -21,8 +21,8 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @todo            tests
  *
  * @example    js
- * import smoothScrollOnHashChange from '@coffeekraken/sugar/js/smoothScrollOnHashChange'
- * smoothScrollOnHashChange();
+ * import { __smoothScrollOnHashChange } from '@coffeekraken/sugar/feature'
+ * __smoothScrollOnHashChange();
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -32,7 +32,7 @@ export interface ISmoothScrollOnHashChangeSettings {
     scroll: Partial<IScrollToSettings>;
 }
 
-function smoothScrollOnHashChange(
+export default function __smoothScrollOnHashChange(
     settings: Partial<ISmoothScrollOnHashChangeSettings> = {},
 ): void {
     settings = __deepMerge(
@@ -46,4 +46,3 @@ function smoothScrollOnHashChange(
         __scrollToLocationHash(settings);
     });
 }
-export default smoothScrollOnHashChange;

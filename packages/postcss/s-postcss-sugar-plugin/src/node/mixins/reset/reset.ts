@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import { __dirname } from '@coffeekraken/sugar/fs';
 
 /**
  * @name           reset

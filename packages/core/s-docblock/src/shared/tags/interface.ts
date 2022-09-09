@@ -1,9 +1,11 @@
 // // @ts-nocheck
 
 import __STypescriptBuilder from '@coffeekraken/s-typescript-builder';
-import __checkPathWithMultipleExtensions from '@coffeekraken/sugar/node/fs/checkPathWithMultipleExtensions';
-import __fileName from '@coffeekraken/sugar/node/fs/filename';
-import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
+import {
+    __checkPathWithMultipleExtensions,
+    __fileName,
+    __folderPath,
+} from '@coffeekraken/sugar/fs';
 import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
 import __fs from 'fs';
 import __path from 'path';

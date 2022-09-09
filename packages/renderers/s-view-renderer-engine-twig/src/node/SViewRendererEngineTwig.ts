@@ -1,7 +1,7 @@
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import { ISViewRendererSettings } from '@coffeekraken/s-view-renderer';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import { __dirname } from '@coffeekraken/sugar/fs';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __execPhp from '@coffeekraken/sugar/node/php/execPhp';
 import __unique from '@coffeekraken/sugar/shared/array/unique';

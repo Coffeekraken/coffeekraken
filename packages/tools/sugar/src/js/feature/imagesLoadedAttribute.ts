@@ -20,13 +20,13 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @todo            tests
  *
  * @example 	js
- * import imagesLoadedAttribute from '@coffeekraken/sugar/js/feature/imagesLoadedAttribute';
- * imagesLoadedAttribute();
+ * import { __imagesLoadedAttribute } from '@coffeekraken/sugar/feature';
+ *  __imagesLoadedAttribute();
  *
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function imagesLoadedAttribute(): void {
+export default function __imagesLoadedAttribute(): void {
     document.addEventListener(
         'load',
         (e) => {
@@ -44,4 +44,3 @@ function imagesLoadedAttribute(): void {
         });
     });
 }
-export default imagesLoadedAttribute;

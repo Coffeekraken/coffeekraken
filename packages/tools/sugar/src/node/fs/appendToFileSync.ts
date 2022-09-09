@@ -15,13 +15,16 @@ import __fs from 'fs';
  * @param       {String}            content             The content to add to the file
  *
  * @example         js
- * import appendToFileSync from '@coffeekraken/sugar/node/fs/appendToFileSync';
- * appendToFileSync('/my/cool/file.txt', 'Hello world');
+ * import { __appendToFileSync } from '@coffeekraken/sugar/fs';
+ * __appendToFileSync('/my/cool/file.txt', 'Hello world');
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function appendToFileSync(path: string, content: string): void {
+export default function __appendToFileSync(
+    path: string,
+    content: string,
+): void {
     const currentContent = __fs.readFileSync(path).toString();
     const newContent = `${currentContent}\n${content}`;
     __fs.writeFileSync(path, newContent);

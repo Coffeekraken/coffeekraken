@@ -1,4 +1,4 @@
-import __loadConfigFile from '@coffeekraken/sugar/node/config/loadConfigFile';
+import { __loadConfigFile } from '@coffeekraken/sugar/load';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
 export async function preprocess(api) {

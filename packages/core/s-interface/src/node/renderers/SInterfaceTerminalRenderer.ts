@@ -3,7 +3,7 @@ import __SInterfaceRenderer from './SInterfaceRenderer';
 
 import type { ISInterfaceRendererSettings } from '../../shared/renderers/ISInterfaceRenderer';
 
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import { __dirname } from '@coffeekraken/sugar/fs';
 
 /**
  * @name            SInterfaceTerminalRenderer

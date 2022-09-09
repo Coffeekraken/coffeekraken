@@ -1,6 +1,8 @@
-import { __scrollLeft } from '@coffeekraken/sugar/dom';
-import __scrollTop from '../scroll/scrollTop';
-import __traverseUp from '../traverse/up';
+import {
+    __scrollLeft,
+    __scrollTop,
+    __traverseUp,
+} from '@coffeekraken/sugar/dom';
 
 /**
  * @name            elementAreaStats

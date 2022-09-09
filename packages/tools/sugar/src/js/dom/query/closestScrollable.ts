@@ -1,6 +1,5 @@
 // @ts-nocheck
-import { __isScrollable } from '@coffeekraken/sugar/dom';
-import __traverseUp from '../traverse/up';
+import { __isScrollable, __traverseUp } from '@coffeekraken/sugar/dom';
 
 /**
  * @name        closestScrollable

@@ -4,7 +4,7 @@ import __fs from 'fs';
 import __systemTmpDir from '@coffeekraken/sugar/node/path/systemTmpDir';
 import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 import __packageTmpDir from '@coffeekraken/sugar/node/path/packageTmpDir';
-import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
+import { __writeJsonSync } from '@coffeekraken/sugar/fs';
 
 import __zlib from 'zlib';
 

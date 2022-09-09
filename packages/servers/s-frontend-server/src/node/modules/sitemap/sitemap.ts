@@ -1,5 +1,5 @@
 import __SPromise from '@coffeekraken/s-promise';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import { __dirname } from '@coffeekraken/sugar/fs';
 
 export default function sitemap(express, settings, config) {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {

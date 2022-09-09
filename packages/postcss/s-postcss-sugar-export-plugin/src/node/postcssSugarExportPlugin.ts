@@ -1,9 +1,11 @@
 // import __postcss from 'postcss';
 import __SBench from '@coffeekraken/s-bench';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-import __folderHash from '@coffeekraken/sugar/node/fs/folderHash';
-import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
+import {
+    __dirname,
+    __folderHash,
+    __writeFileSync,
+} from '@coffeekraken/sugar/fs';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
 import __path from 'path';

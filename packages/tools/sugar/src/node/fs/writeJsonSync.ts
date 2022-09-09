@@ -1,7 +1,6 @@
 // @ts-nocheck
 
-import __folderPath from './folderPath';
-import __ensureDirSync from './ensureDirSync';
+import { __ensureDirSync, __folderPath } from '@coffeekraken/sugar/fs';
 import __fs from 'fs';
 import __stringify from '../../shared/json/stringify';
 
@@ -19,18 +18,15 @@ import __stringify from '../../shared/json/stringify';
  * @param       {Object}              [options={}]  options are what you'd pass to [fs.writeJsonSync()](https://nodejs.org/api/fs.html#fs_fs_writefile_file_data_options_callback)
  *
  * @example       js
- * import writeJsonSync from '@coffeekraken/node/fs/writeJsonSync';
- * try {
- *    writeJsonSync('my/cool/file.json', { hello: 'world' });
- * } catch(e) {}
+ * import { __writeJsonSync } from '@coffeekraken/sugar/fs';
+ * __writeJsonSync('my/cool/file.json', { hello: 'world' });
  *
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function writeJsonSync(path, data, options = {}) {
+export default function __writeJsonSync(path, data, options = {}) {
     const folderPath = __folderPath(path);
     __ensureDirSync(folderPath);
     const jsonStr = __stringify(data, null, 4);
     __fs.writeFileSync(path, jsonStr);
 }
-export default writeJsonSync;

@@ -1,4 +1,4 @@
-import __readJson from '@coffeekraken/sugar/node/fs/readJson';
+import { __readJson } from '@coffeekraken/sugar/fs';
 import __ipAddress from '@coffeekraken/sugar/node/network/utils/ipAddress';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';

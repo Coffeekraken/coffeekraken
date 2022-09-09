@@ -17,14 +17,13 @@ import __filesize from 'filesize';
  * @return              {String}                                      The human readable version of the passed size
  *
  * @example             js
- * import formatFilesize from '@coffeekraken/sugar/node/fs/formatFileSize';
- * formatFileSize(163931); // => 326.86 KB
+ * import { __formatFilesize } from '@coffeekraken/sugar/fs';
+ * __formatFilesize(163931); // => 326.86 KB
  *
  * @see             https://www.npmjs.com/package/filesize
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function formatFileSize(size, settings = {}) {
+export default function __formatFilesize(size, settings = {}) {
     return __filesize(size, settings);
 }
-export default formatFileSize;

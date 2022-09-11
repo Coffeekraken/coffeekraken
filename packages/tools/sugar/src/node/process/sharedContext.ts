@@ -1,7 +1,7 @@
 // @ts-nocheck
 import __fs from 'fs';
 import { __readJsonSync, __writeJsonSync } from '@coffeekraken/sugar/fs';
-import __isChildProcess from '../is/childProcess';
+import { __isChildProcess } from '@coffeekraken/sugar/is';
 import __systemTmpDir from '../path/systemTmpDir';
 
 /**

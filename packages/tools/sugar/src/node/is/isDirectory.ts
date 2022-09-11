@@ -4,7 +4,7 @@ import __fs from 'fs';
 import __deepMerge from '../../shared/object/deepMerge';
 
 /**
- * @name            directory
+ * @name            isDirectory
  * @namespace            node.is
  * @type            Function
  * @platform        node
@@ -20,13 +20,13 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @todo      tests
  *
  * @example     js
- * import isDirectory from '@coffeekraken/sugar/node/is/directory';
- * isDirectory('something/cool');
+ * import { __isDirectory } from '@coffeekraken/sugar/is';
+ * __isDirectory('something/cool');
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function isDirectory(path, settings = {}) {
+export default function __isDirectory(path, settings = {}) {
     settings = __deepMerge(
         {
             symlink: true,
@@ -44,4 +44,3 @@ function isDirectory(path, settings = {}) {
     }
     return isMatching;
 }
-export default isDirectory;

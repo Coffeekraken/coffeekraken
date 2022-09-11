@@ -1,7 +1,7 @@
 import type { ISClass } from '@coffeekraken/s-class';
 import SClass from '@coffeekraken/s-class';
 import __SLog from '@coffeekraken/s-log';
-import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
+import { __isChildProcess } from '@coffeekraken/sugar/is';
 import __getColorFor from '@coffeekraken/sugar/shared/dev/color/getColorFor';
 import __isClass from '@coffeekraken/sugar/shared/is/class';
 import __isNode from '@coffeekraken/sugar/shared/is/node';

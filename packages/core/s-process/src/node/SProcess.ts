@@ -4,7 +4,7 @@ import type { ISLog } from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SStdio from '@coffeekraken/s-stdio';
 import { __dirname } from '@coffeekraken/sugar/fs';
-import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
+import { __isChildProcess } from '@coffeekraken/sugar/is';
 import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 import __spawn from '@coffeekraken/sugar/node/process/spawn';
 import __extendsStack from '@coffeekraken/sugar/shared/class/getExtendsStack';

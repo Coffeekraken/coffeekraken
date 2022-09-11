@@ -1,7 +1,7 @@
 import __SProcess from '../SProcess';
 import __SPromise from '@coffeekraken/s-promise';
 import __SInterface from '@coffeekraken/s-interface';
-import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
+import { __isChildProcess } from '@coffeekraken/sugar/is';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 

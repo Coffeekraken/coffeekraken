@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __parseHtml from '../../shared/console/parseHtml';
-import __isChildProcess from '../../node/is/childProcess';
+import { __isChildProcess } from '@coffeekraken/sugar/is';
 import __toString from '../../shared/string/toString';
 
 /**

@@ -1,4 +1,4 @@
-import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
+import { __isChildProcess } from '@coffeekraken/sugar/is';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SEventEmitterBase, {
     ISEventEmitterSettings,

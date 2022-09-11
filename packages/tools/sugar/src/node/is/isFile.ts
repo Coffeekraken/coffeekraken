@@ -4,7 +4,7 @@ import __fs from 'fs';
 import __deepMerge from '../../shared/object/deepMerge';
 
 /**
- * @name            file
+ * @name            isFile
  * @namespace            node.is
  * @type            Function
  * @platform        node
@@ -20,13 +20,13 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @todo      tests
  *
  * @example     js
- * import isFile from '@coffeekraken/sugar/node/is/file';
- * isFile('something/cool');
+ * import { __isFile } from '@coffeekraken/sugar/is';
+ * __isFile('something/cool');
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function isFile(path, settings = {}) {
+export default function __isFile(path, settings = {}) {
     settings = __deepMerge(
         {
             symlink: true,
@@ -44,4 +44,3 @@ function isFile(path, settings = {}) {
     }
     return isMatching;
 }
-export default isFile;

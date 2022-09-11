@@ -2,7 +2,7 @@
 import __isTestEnv from '../../shared/is/testEnv';
 
 /**
- * @name                            childProcess
+ * @name                            isChildProcess
  * @namespace            node.is
  * @type                            Function
  * @platform        node
@@ -17,15 +17,14 @@ import __isTestEnv from '../../shared/is/testEnv';
  * @todo      tests
  *
  * @example       js
- * import isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
- * isChildProcess(); // => false
+ * import { __isChildProcess } from '@coffeekraken/sugar/is';
+ * __isChildProcess(); // => false
  *
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function isChildProcess() {
+export default function __isChildProcess() {
     return (
         process.send !== undefined || process.env.IS_CHILD_PROCESS !== undefined
     );
 }
-export default isChildProcess;

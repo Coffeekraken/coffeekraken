@@ -1,6 +1,6 @@
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __fs from 'fs';
-import __isDirectory from '@coffeekraken/sugar/node/is/directory';
+import { __isDirectory } from '@coffeekraken/sugar/is';
 import __express from 'express';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';

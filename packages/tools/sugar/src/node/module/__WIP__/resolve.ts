@@ -5,7 +5,7 @@ import __fs from 'fs';
 import __path from 'path';
 import __deepMerge from '../../shared/object/deepMerge';
 import { __checkPathWithMultipleExtensions, __existsSync } from '@coffeekraken/sugar/fs';
-import __isFile from '../is/file';
+import { __isFile } from '@coffeekraken/sugar/is';
 import __packageRootDir from '../path/packageRootDir';
 import __builtInNodeModules from './buildInNodeModules';
 import __exportsMatch from './exportsMatch';

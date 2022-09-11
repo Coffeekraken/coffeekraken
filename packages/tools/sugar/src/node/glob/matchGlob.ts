@@ -3,7 +3,7 @@ import __fs from 'fs';
 import __toRegex from 'to-regex';
 import __minimatch from 'minimatch';
 import __deepMerge from '../../shared/object/deepMerge';
-import __isDirectory from '../is/directory';
+import { __isDirectory } from '@coffeekraken/sugar/is';
 import __expandGlob from '../../shared/glob/expandGlob';
 import __path from 'path';
 

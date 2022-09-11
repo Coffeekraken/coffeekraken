@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __isPath from '@coffeekraken/sugar/shared/is/path';
+import { __isPath } from '@coffeekraken/sugar/shared/is/path';
 import __isGlob from '@coffeekraken/sugar/shared/is/glob';
 import type { ISDescriptorResultObj } from '../SDescriptorResult';
 import type { ISDescriptorRule, ISDescriptorSettings } from '../_SDescriptor';

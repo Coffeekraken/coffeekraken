@@ -1,9 +1,7 @@
 // @ts-nocheck
-
 import { __isPath } from '@coffeekraken/sugar/fs';
-
 /**
- * @name                            path
+ * @name                            isPath
  * @namespace            node.is
  * @type                            Function
  * @platform        node
@@ -20,13 +18,13 @@ import { __isPath } from '@coffeekraken/sugar/fs';
  * @todo      tests
  *
  * @example       js
- * import isPath from '@coffeekraken/sugar/node/is/path';
- * isPath('hello/world'); // => true
+ * import { __isPath } from '@coffeekraken/sugar/is';
+ * __isPath('hello/world'); // => true
  *
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function path(path, checkExistence = false) {
+export default function (path, checkExistence = false) {
     return __isPath(path, checkExistence);
 }
-export default path;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLEVBQUUsUUFBUSxFQUFFLE1BQU0sd0JBQXdCLENBQUM7QUFFbEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBdUJHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sV0FBVSxJQUFJLEVBQUUsY0FBYyxHQUFHLEtBQUs7SUFDaEQsT0FBTyxRQUFRLENBQUMsSUFBSSxFQUFFLGNBQWMsQ0FBQyxDQUFDO0FBQzFDLENBQUMifQ==

@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __findPkgJson from 'find-package-json';
-import __isFile from '../is/file';
+import { __isFile } from '@coffeekraken/sugar/is';
 
 /**
  * @name                    packageRoot

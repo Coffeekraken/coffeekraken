@@ -188,6 +188,10 @@
             }
         },
         "./keyboard": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/keyboard/_exports.js",
+                "import": "./dist/pkg/esm/node/keyboard/_exports.js"
+            },
             "default": {
                 "require": "./dist/pkg/cjs/js/keyboard/_exports.js",
                 "import": "./dist/pkg/esm/js/keyboard/_exports.js"

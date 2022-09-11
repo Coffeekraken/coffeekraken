@@ -28,8 +28,8 @@ import { __isChildProcess } from '@coffeekraken/sugar/is';
  * @todo      {Feature}       Add the system wide support
  *
  * @example         js
- * import hotkey from '@coffeekraken/sugar/node/keyboard/hotkey';
- * const promise = hotkey('ctrl+a').on('press', (e) => {
+ * import { __hotkey } from '@coffeekraken/sugar/keyboard';
+ * const promise = __hotkey('ctrl+a').on('press', (e) => {
  *    // do something...
  * });
  * promise.cancel();
@@ -111,7 +111,9 @@ function _handleKeypress(ch, keyObj) {
     });
 }
 
-function hotkey(key, settings?: Partial<IHotkeySettings>) {
+export { HotkeySettingsInterface as SettingsInterface };
+
+export default function __hotkey(key, settings?: Partial<IHotkeySettings>) {
     const set: IHotkeySettings = HotkeySettingsInterface.apply(settings);
 
     const promise = new __SPromise({
@@ -151,6 +153,3 @@ function hotkey(key, settings?: Partial<IHotkeySettings>) {
     // return the promise
     return promise;
 }
-
-export { HotkeySettingsInterface as SettingsInterface };
-export default hotkey;

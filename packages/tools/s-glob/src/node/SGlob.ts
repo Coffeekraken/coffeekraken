@@ -4,7 +4,7 @@ import __SClass from '@coffeekraken/s-class';
 import SFile from '@coffeekraken/s-file';
 import { __copySync } from '@coffeekraken/sugar/fs';
 import type { IResolveGlobSettings } from '@coffeekraken/sugar/node/glob/resolveGlob';
-import __resolveGlob from '@coffeekraken/sugar/node/glob/resolveGlob';
+import { __resolveGlob } from '@coffeekraken/sugar/glob';
 import __extractGlob from '@coffeekraken/sugar/shared/glob/extractGlob';
 import __extractNoneGlob from '@coffeekraken/sugar/shared/glob/extractNoneGlob';
 import __isGlob from '@coffeekraken/sugar/shared/is/glob';

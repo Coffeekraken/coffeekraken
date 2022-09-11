@@ -165,6 +165,18 @@
                 "import": "./dist/pkg/esm/node/fs/_exports.js"
             }
         },
+        "./github": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/github/_exports.js",
+                "import": "./dist/pkg/esm/node/github/_exports.js"
+            }
+        },
+        "./glob": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/glob/_exports.js",
+                "import": "./dist/pkg/esm/node/glob/_exports.js"
+            }
+        },
         "./is": {
             "node": {
                 "require": "./dist/pkg/cjs/node/is/_exports.js",

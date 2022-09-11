@@ -196,13 +196,13 @@ function processPackage(packageRoot) {
     const newJson = { ...currentJson, ...json };
 
     // write the new json
-    console.log(
-        `Writing new package.json for ${__chalk.yellow(packageRoot)}...`,
-    );
-    __fs.writeFileSync(
-        `${packageRoot}/package.json`,
-        JSON.stringify(newJson, null, 2),
-    );
+    // console.log(
+    //     `Writing new package.json for ${__chalk.yellow(packageRoot)}...`,
+    // );
+    // __fs.writeFileSync(
+    //     `${packageRoot}/package.json`,
+    //     JSON.stringify(newJson, null, 2),
+    // );
 
     console.log(
         `Package ${__chalk.yellow(packageRoot)} processed ${__chalk.green(

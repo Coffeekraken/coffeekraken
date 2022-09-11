@@ -5,7 +5,7 @@ import __chokidar from 'chokidar';
 import __fs from 'fs';
 import __expandGlob from '../../shared/glob/expandGlob';
 import __deepMerge from '../../shared/object/deepMerge';
-import __matchGlob from '../glob/matchGlob';
+import { __matchGlob } from '@coffeekraken/sugar/glob';
 
 /**
  * @name                pool

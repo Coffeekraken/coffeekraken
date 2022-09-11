@@ -8,7 +8,7 @@ import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __fs from 'fs';
 import __path from 'path';
 import __replaceTokens from '@coffeekraken/sugar/node/token/replaceTokens';
-import __resolveGlob from '@coffeekraken/sugar/node/glob/resolveGlob';
+import { __resolveGlob } from '@coffeekraken/sugar/glob';
 
 /**
  * @name          pathRule

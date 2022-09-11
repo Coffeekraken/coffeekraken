@@ -25,8 +25,8 @@ import __path from 'path';
  * @return      {Boolean}               true if match, false if not
  *
  * @example         js
- * import matchGlob from '@coffeekraken/sugar/node/glob/matchGlob';
- * matchGlob('/something/cool.txt', '*\/cool.txt'); // => true
+ * import { __matchGlob } from '@coffeekraken/sugar/glob';
+ * __matchGlob('/something/cool.txt', '*\/cool.txt'); // => true
  *
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -37,7 +37,7 @@ export interface IMatchGlobSettings {
     nodir: boolean;
 }
 
-export default function matchGlob(
+export default function __matchGlob(
     input,
     glob,
     settings?: Partial<IMatchGlobSettings>,

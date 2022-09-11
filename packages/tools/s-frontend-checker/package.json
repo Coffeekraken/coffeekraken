@@ -1,36 +1,36 @@
 {
-    "name": "@coffeekraken/s-frontend-checker",
-    "version": "2.0.0-alpha.20",
-    "description": "Powerful class that let you specify some (built-in) rules that your DOM has to respect and executing a check with these rules to get what is ok and what's not...",
-    "type": "module",
-    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
-    "license": "MIT",
-    "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.20",
-        "@coffeekraken/s-file": "^2.0.0-alpha.20",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.20",
-        "@coffeekraken/s-promise": "^2.0.0-alpha.20",
-        "@coffeekraken/sugar": "^2.0.0-alpha.20"
+  "name": "@coffeekraken/s-frontend-checker",
+  "version": "2.0.0-alpha.20",
+  "description": "Powerful class that let you specify some (built-in) rules that your DOM has to respect and executing a check with these rules to get what is ok and what's not...",
+  "type": "module",
+  "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+  "license": "MIT",
+  "dependencies": {
+    "@coffeekraken/s-class": "^2.0.0-alpha.20",
+    "@coffeekraken/s-file": "^2.0.0-alpha.20",
+    "@coffeekraken/s-interface": "^2.0.0-alpha.20",
+    "@coffeekraken/s-promise": "^2.0.0-alpha.20",
+    "@coffeekraken/sugar": "^2.0.0-alpha.20"
+  },
+  "homepage": "https://coffeekraken.io",
+  "main": "dist/pkg/cjs/js/exports.js",
+  "module": "dist/pkg/esm/js/exports.js",
+  "exports": {
+    ".": {
+      "require": "./dist/pkg/cjs/js/exports.js",
+      "import": "./dist/pkg/esm/js/exports.js"
     },
-    "main": "dist/pkg/cjs/js/exports.js",
-    "module": "dist/pkg/esm/js/exports.js",
-    "exports": {
-        ".": {
-            "require": "./dist/pkg/cjs/js/exports.js",
-            "import": "./dist/pkg/esm/js/exports.js"
-        },
-        "./shared/*": {
-            "require": "./dist/pkg/cjs/shared/*.js",
-            "import": "./dist/pkg/esm/shared/*.js"
-        },
-        "./node/*": {
-            "require": "./dist/pkg/cjs/node/*.js",
-            "import": "./dist/pkg/esm/node/*.js"
-        },
-        "./js/*": {
-            "require": "./dist/pkg/cjs/js/*.js",
-            "import": "./dist/pkg/esm/js/*.js"
-        }
+    "./shared/*": {
+      "require": "./dist/pkg/cjs/shared/*.js",
+      "import": "./dist/pkg/esm/shared/*.js"
     },
-    "homepage": "https://coffeekraken.io"
+    "./node/*": {
+      "require": "./dist/pkg/cjs/node/*.js",
+      "import": "./dist/pkg/esm/node/*.js"
+    },
+    "./js/*": {
+      "require": "./dist/pkg/cjs/js/*.js",
+      "import": "./dist/pkg/esm/js/*.js"
+    }
+  }
 }

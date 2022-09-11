@@ -11,9 +11,11 @@ import __STypescriptBuilder from '@coffeekraken/s-typescript-builder';
 import __SVite from '@coffeekraken/s-vite';
 
 import {
-    __copy,
     __readJsonSync,
     __writeJsonSync,
+} from '@coffeekraken/sugar/fs';
+import {
+    __copy
 } from '@coffeekraken/sugar/clipboard';
 
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';

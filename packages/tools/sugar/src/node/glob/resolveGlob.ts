@@ -28,8 +28,8 @@ import __excludeGlobs from '../path/excludeGlobs';
  * @todo          document the special ":" syntax available
  *
  * @example         js
- * import resolveGlob from '@coffeekraken/sugar/node/glob/resolveGlob';
- * resolveGlob('/my/cool/pattern/*.js');
+ * import { __resolveGlob } from '@coffeekraken/sugar/glob';
+ * __resolveGlob('/my/cool/pattern/*.js');
  *
  * @see         https://www.npmjs.com/package/glob
  * @since       2.0.0
@@ -46,7 +46,7 @@ export interface IResolveGlobSettings {
     defaultExcludes: boolean;
 }
 
-export default function resolveGlob(
+export default function __resolveGlob(
     globs: string | string[],
     settings: Partial<IResolveGlobSettings> = {},
 ): __SFile[] | string[] {

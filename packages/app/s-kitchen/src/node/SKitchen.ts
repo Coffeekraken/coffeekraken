@@ -14,8 +14,8 @@ import __SSugarJson from '@coffeekraken/s-sugar-json';
 import { __isCommandExists } from '@coffeekraken/sugar/is';
 import { __import } from '@coffeekraken/sugar/module';
 import { __sharedContext } from '@coffeekraken/sugar/process';
-import type { IDetectTypeResult } from '@coffeekraken/sugar/node/project/detectType';
-import __detectProjectType from '@coffeekraken/sugar/node/project/detectType';
+import type { IDetectProjectTypeResult } from '@coffeekraken/sugar/project';
+import { __detectProjectType } from '@coffeekraken/sugar/project';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __filter from '@coffeekraken/sugar/shared/object/filter';
 import __stripAnsi from '@coffeekraken/sugar/shared/string/stripAnsi';
@@ -50,7 +50,7 @@ export interface ISKitchenRecipesettings {
 
 export interface ISKitchenIngredientContext {
     recipe?: string;
-    projectType: IDetectTypeResult;
+    projectType: IDetectProjectTypeResult;
     new: boolean;
 }
 

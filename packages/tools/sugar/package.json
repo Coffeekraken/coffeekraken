@@ -245,6 +245,12 @@
                 "import": "./dist/pkg/esm/node/process/_exports.js"
             }
         },
+        "./project": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/project/_exports.js",
+                "import": "./dist/pkg/esm/node/project/_exports.js"
+            }
+        },
         "./storage": {
             "default": {
                 "require": "./dist/pkg/cjs/js/storage/_exports.js",

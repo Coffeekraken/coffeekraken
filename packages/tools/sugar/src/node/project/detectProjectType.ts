@@ -1,8 +1,8 @@
 import __fs from 'fs';
 
 /**
- * @name            detectType
- * @namespace       node.php
+ * @name            detectProjectType
+ * @namespace       node.project
  * @type            Function
  * @platform        node
  * @status          beta
@@ -10,14 +10,18 @@ import __fs from 'fs';
  * This function allows you to detect the project type like "next", "nuxt", etc...
  * If the project type is not detected, it will return "generic" for the type and "1.0.0" for the version.
  *
- * @return          {}
+ * @param       {String}            [cwd=process.cwd()]         The root project directory to detect the type from
+ * @return      {IDetectProjectTypeResult}                      An object that describe the detected project type
  *
+ * @example         js
+ * import { __detectProjectType } from '@coffeekraken/sugar/project';
+ * __detectProjectType();
  *
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface IDetectTypeResult {
+export interface IDetectProjectTypeResult {
     type: string;
     version: string;
     rawVersion: string;
@@ -26,7 +30,9 @@ export interface IDetectTypeResult {
     fix: number;
 }
 
-export default function detectType(cwd = process.cwd()): IDetectTypeResult {
+export default function detectProjectType(
+    cwd = process.cwd(),
+): IDetectProjectTypeResult {
     const packageJson = JSON.parse(
         __fs.readFileSync(`${cwd}/package.json`, 'utf8').toString(),
     );

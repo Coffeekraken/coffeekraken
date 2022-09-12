@@ -23,8 +23,8 @@ import __terminalKit from 'terminal-kit';
  * @todo      tests
  *
  * @example         js
- * import onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
- * onProcessExit(() => {
+ * import { __onProcessExit } from '@coffeekraken/sugar/process';
+ * __onProcessExit(() => {
  *      // do something
  * });
  *
@@ -33,7 +33,7 @@ import __terminalKit from 'terminal-kit';
  */
 const __onProcessExitCallbacks = [];
 
-function onProcessExit(callback) {
+export default function __onProcessExit(callback) {
     if (!__onProcessExitCallbacks.length) {
         process.stdin.resume();
         process.env.HAS_ON_PROCESS_EXIT_HANDLERS = true;
@@ -66,4 +66,3 @@ function onProcessExit(callback) {
     if (__onProcessExitCallbacks.indexOf(callback) !== -1) return;
     __onProcessExitCallbacks.push(callback);
 }
-export default onProcessExit;

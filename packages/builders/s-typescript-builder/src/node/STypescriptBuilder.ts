@@ -8,7 +8,7 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __dirname, __getFiles } from '@coffeekraken/sugar/fs';
 import { __monorepoToPackageAbsolutePathDeepMap } from '@coffeekraken/sugar/monorepo';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
-import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
+import { __onProcessExit } from '@coffeekraken/sugar/process';
 import __currentModuleSystem from '@coffeekraken/sugar/shared/module/currentModuleSystem';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs, { promises as __fsPromise } from 'fs';

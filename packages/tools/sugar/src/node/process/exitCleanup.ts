@@ -21,13 +21,13 @@ import __minimatch from 'minimatch';
  * @todo      tests
  *
  * @example         js
- * import exitCleanup from '@coffeekraken/sugar/node/process/exitCleanup';
- * await exitCleanup();
+ * import { __exitCleanup } from '@coffeekraken/sugar/process';
+ * await __exitCleanup();
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function exitCleanup(settings = {}) {
+export default function __exitCleanup(settings = {}) {
     return new Promise(({ resolve, reject }) => {
         settings = __deepMerge(
             {
@@ -60,4 +60,3 @@ function exitCleanup(settings = {}) {
         })();
     });
 }
-export default exitCleanup;

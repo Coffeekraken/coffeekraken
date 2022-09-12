@@ -8,7 +8,7 @@ import { __writeFileSync, __writeTmpFileSync } from '@coffeekraken/sugar/fs';
 import { __isPortFree } from '@coffeekraken/sugar/network';
 import __listNodeModulesPackages from '@coffeekraken/sugar/node/npm/listNodeModulesPackages';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
-import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
+import { __onProcessExit } from '@coffeekraken/sugar/process';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __childProcess from 'child_process';
 import __path from 'path';

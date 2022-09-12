@@ -28,18 +28,18 @@ const fkill_1 = __importDefault(require("fkill"));
  * @return      {Promise}                           A promise resolved if the process has been killed, rejected if not
  *
  * @example         js
- * import kill from '@coffeekraken/sugar/node/process/kill';
- * await kill(':8888'); // port
- * await kill(8765); // id
+ * import { __kill } from '@coffeekraken/sugar/process';
+ * await __kill(':8888'); // port
+ * await __kill(8765); // id
  *
  * @see             https://www.npmjs.com/package/fkill
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function kill(portOrId) {
+function __kill(portOrId) {
     return __awaiter(this, void 0, void 0, function* () {
         return (0, fkill_1.default)(portOrId);
     });
 }
-exports.default = kill;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsa0RBQTRCO0FBRTVCOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBQ0gsU0FBOEIsSUFBSSxDQUFDLFFBQXlCOztRQUN4RCxPQUFPLElBQUEsZUFBTyxFQUFDLFFBQVEsQ0FBQyxDQUFDO0lBQzdCLENBQUM7Q0FBQTtBQUZELHVCQUVDIn0=
+exports.default = __kill;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsa0RBQTRCO0FBRTVCOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBQ0gsU0FBOEIsTUFBTSxDQUFDLFFBQXlCOztRQUMxRCxPQUFPLElBQUEsZUFBTyxFQUFDLFFBQVEsQ0FBQyxDQUFDO0lBQzdCLENBQUM7Q0FBQTtBQUZELHlCQUVDIn0=

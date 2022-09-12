@@ -3,7 +3,7 @@ import __SFile from '@coffeekraken/s-file';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __chokidar from 'chokidar';
-import __onProcessExit from '../process/onProcessExit';
+import { __onProcessExit } from '@coffeekraken/sugar/process';
 
 /**
  * @name        getFiles

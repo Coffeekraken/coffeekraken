@@ -16,7 +16,7 @@ import __SFrontendServerStartParamsInterface from './interface/SFrontendServerSt
 import __SDuration from '@coffeekraken/s-duration';
 import __SGlob from '@coffeekraken/s-glob';
 import __STypescriptBuilder from '@coffeekraken/s-typescript-builder';
-import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
+import { __onProcessExit } from '@coffeekraken/sugar/process';
 import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
 import __runMiddleware from 'run-middleware';
 

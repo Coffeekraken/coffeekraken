@@ -13,7 +13,7 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 import { __isCommandExists } from '@coffeekraken/sugar/is';
 import { __import } from '@coffeekraken/sugar/module';
-import __sharedContext from '@coffeekraken/sugar/node/process/sharedContext';
+import { __sharedContext } from '@coffeekraken/sugar/process';
 import type { IDetectTypeResult } from '@coffeekraken/sugar/node/project/detectType';
 import __detectProjectType from '@coffeekraken/sugar/node/project/detectType';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';

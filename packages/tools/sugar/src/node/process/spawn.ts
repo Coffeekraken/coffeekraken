@@ -7,7 +7,7 @@ import type { ISPromise } from '@coffeekraken/s-promise';
 import __SPromise from '@coffeekraken/s-promise';
 import { spawn as __spawn, SpawnOptions } from 'child_process';
 import __deepMerge from '../../shared/object/deepMerge';
-import __onProcessExit from './onProcessExit';
+import { __onProcessExit } from '@coffeekraken/sugar/process';
 
 /**
  * @name            spawn
@@ -36,8 +36,8 @@ import __onProcessExit from './onProcessExit';
  * @event       close.success   emited when the child process has been closed after a successfull execution
  *
  * @example       js
- * import spawn from '@coffeekraken/sugar/node/process/spawn';
- * const pro = spawn('echo "hello world");
+ * import { __spawn } from '@coffeekraken/sugar/process';
+ * const pro = __spawn('echo "hello world");
  * pro.on('close', () => {
  *   console.log('closed');
  * });
@@ -67,9 +67,6 @@ export default function spawn(
     settings?: Partial<ISpawnSettings>,
 ): __SPromise {
     let childProcess;
-
-    // console.log('spawn', command, settings);
-
     const promise = new __SPromise(async ({ resolve, reject, emit, pipe }) => {
         settings = __deepMerge(
             {

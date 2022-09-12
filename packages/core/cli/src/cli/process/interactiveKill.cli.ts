@@ -1,5 +1,5 @@
 import __SPromise from '@coffeekraken/s-promise';
-import __spawn from '@coffeekraken/sugar/node/process/spawn';
+import { __spawn } from '@coffeekraken/sugar/process';
 import __SSugarCli from '@coffeekraken/cli';
 import __replaceCommandTokens from '../replaceCommandTokens';
 

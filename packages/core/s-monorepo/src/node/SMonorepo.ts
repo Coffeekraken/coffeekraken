@@ -14,7 +14,7 @@ import { __readJsonSync, __writeJsonSync } from '@coffeekraken/sugar/fs';
 import { __copy } from '@coffeekraken/sugar/clipboard';
 
 import { __packageRootDir } from '@coffeekraken/sugar/path';
-import __spawn from '@coffeekraken/sugar/node/process/spawn';
+import { __spawn } from '@coffeekraken/sugar/process';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __formatDuration from '@coffeekraken/sugar/shared/time/formatDuration';
 import __childProcess from 'child_process';

@@ -22,20 +22,20 @@ import { __systemTmpDir } from '@coffeekraken/sugar/path';
  * @todo      tests
  *
  * @example         js
- * import sharedContext from '@coffeekraken/sugar/node/process/sharedContext';
+ * import { __sharedContext } from '@coffeekraken/sugar/process';
  *
  * // in the main process
- * sharedContext({
+ * __sharedContext({
  *  something: 'cool'
  * });
  *
  * // in a child process
- * sharedContet(); // => { something: 'cool' }
+ * __sharedContext(); // => { something: 'cool' }
  *
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-function sharedContext(data: any): any {
+export default function __sharedContext(data: any): any {
     // get the context id. Either the pid, or the ppid
     const contextId = __isChildProcess() ? process.ppid : process.pid,
         contextPath = `${__systemTmpDir()}/shared-context-${contextId}.json`;
@@ -55,4 +55,3 @@ function sharedContext(data: any): any {
     // otherwise, return an empty context
     return {};
 }
-export default sharedContext;

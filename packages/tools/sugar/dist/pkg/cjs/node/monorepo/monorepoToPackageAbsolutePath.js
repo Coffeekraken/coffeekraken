@@ -20,7 +20,7 @@ const packageRoot_1 = __importDefault(require("../path/packageRoot"));
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function monorepoToPackageAbsolutePath(path, packageRootPath = (0, packageRoot_1.default)()) {
+function __monorepoToPackageAbsolutePath(path, packageRootPath = (0, packageRoot_1.default)()) {
     if (path.startsWith(packageRootPath))
         return path;
     if (!path.match(/^\//))
@@ -30,5 +30,5 @@ function monorepoToPackageAbsolutePath(path, packageRootPath = (0, packageRoot_1
     });
     return path.replace(monorepoRootPath, packageRootPath);
 }
-exports.default = monorepoToPackageAbsolutePath;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsc0VBQWdEO0FBRWhEOzs7Ozs7Ozs7Ozs7Ozs7R0FlRztBQUNILFNBQXdCLDZCQUE2QixDQUNqRCxJQUFZLEVBQ1osa0JBQTBCLElBQUEscUJBQWEsR0FBRTtJQUV6QyxJQUFJLElBQUksQ0FBQyxVQUFVLENBQUMsZUFBZSxDQUFDO1FBQUUsT0FBTyxJQUFJLENBQUM7SUFDbEQsSUFBSSxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDO1FBQUUsT0FBTyxJQUFJLENBQUM7SUFDcEMsTUFBTSxnQkFBZ0IsR0FBRyxJQUFBLHFCQUFhLEVBQUMsT0FBTyxDQUFDLEdBQUcsRUFBRSxFQUFFO1FBQ2xELE9BQU8sRUFBRSxJQUFJO0tBQ2hCLENBQUMsQ0FBQztJQUNILE9BQU8sSUFBSSxDQUFDLE9BQU8sQ0FBQyxnQkFBZ0IsRUFBRSxlQUFlLENBQUMsQ0FBQztBQUMzRCxDQUFDO0FBVkQsZ0RBVUMifQ==
+exports.default = __monorepoToPackageAbsolutePath;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsc0VBQWdEO0FBRWhEOzs7Ozs7Ozs7Ozs7Ozs7R0FlRztBQUNILFNBQXdCLCtCQUErQixDQUNuRCxJQUFZLEVBQ1osa0JBQTBCLElBQUEscUJBQWEsR0FBRTtJQUV6QyxJQUFJLElBQUksQ0FBQyxVQUFVLENBQUMsZUFBZSxDQUFDO1FBQUUsT0FBTyxJQUFJLENBQUM7SUFDbEQsSUFBSSxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDO1FBQUUsT0FBTyxJQUFJLENBQUM7SUFDcEMsTUFBTSxnQkFBZ0IsR0FBRyxJQUFBLHFCQUFhLEVBQUMsT0FBTyxDQUFDLEdBQUcsRUFBRSxFQUFFO1FBQ2xELE9BQU8sRUFBRSxJQUFJO0tBQ2hCLENBQUMsQ0FBQztJQUNILE9BQU8sSUFBSSxDQUFDLE9BQU8sQ0FBQyxnQkFBZ0IsRUFBRSxlQUFlLENBQUMsQ0FBQztBQUMzRCxDQUFDO0FBVkQsa0RBVUMifQ==

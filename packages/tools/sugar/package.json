@@ -209,6 +209,12 @@
                 "import": "./dist/pkg/esm/node/module/_exports.js"
             }
         },
+        "./monorepo": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/monorepo/_exports.js",
+                "import": "./dist/pkg/esm/node/monorepo/_exports.js"
+            }
+        },
         "./storage": {
             "default": {
                 "require": "./dist/pkg/cjs/js/storage/_exports.js",

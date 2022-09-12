@@ -6,7 +6,7 @@ import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __dirname, __getFiles } from '@coffeekraken/sugar/fs';
-import __monorepoToPackageAbsolutePathDeepMap from '@coffeekraken/sugar/node/monorepo/monorepoToPackageAbsolutePathDeepMap';
+import { __monorepoToPackageAbsolutePathDeepMap } from '@coffeekraken/sugar/monorepo';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 import __currentModuleSystem from '@coffeekraken/sugar/shared/module/currentModuleSystem';

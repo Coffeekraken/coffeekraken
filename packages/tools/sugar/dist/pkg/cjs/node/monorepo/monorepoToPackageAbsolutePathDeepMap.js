@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const deepMap_1 = __importDefault(require("../../shared/object/deepMap"));
 const packageRoot_1 = __importDefault(require("../path/packageRoot"));
-const monorepoToPackageAbsolutePath_1 = __importDefault(require("./monorepoToPackageAbsolutePath"));
+const monorepo_1 = require("@coffeekraken/sugar/monorepo");
 /**
  * @name            monorepoToPackageAbsolutePathDeepMap
  * @type            Function
@@ -22,13 +22,13 @@ const monorepoToPackageAbsolutePath_1 = __importDefault(require("./monorepoToPac
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function monorepoToPackageAbsolutePathDeepMap(obj, packageRootPath = (0, packageRoot_1.default)()) {
+function __monorepoToPackageAbsolutePathDeepMap(obj, packageRootPath = (0, packageRoot_1.default)()) {
     return (0, deepMap_1.default)(obj, ({ object, path, value, prop }) => {
         if (typeof value === 'string') {
-            value = (0, monorepoToPackageAbsolutePath_1.default)(value, packageRootPath);
+            value = (0, monorepo_1.__monorepoToPackageAbsolutePath)(value, packageRootPath);
         }
         return value;
     });
 }
-exports.default = monorepoToPackageAbsolutePathDeepMap;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsMEVBQW9EO0FBQ3BELHNFQUFnRDtBQUNoRCxvR0FBOEU7QUFFOUU7Ozs7Ozs7Ozs7Ozs7OztHQWVHO0FBQ0gsU0FBd0Isb0NBQW9DLENBQ3hELEdBQVEsRUFDUixrQkFBMEIsSUFBQSxxQkFBYSxHQUFFO0lBRXpDLE9BQU8sSUFBQSxpQkFBUyxFQUFDLEdBQUcsRUFBRSxDQUFDLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRSxLQUFLLEVBQUUsSUFBSSxFQUFFLEVBQUUsRUFBRTtRQUNwRCxJQUFJLE9BQU8sS0FBSyxLQUFLLFFBQVEsRUFBRTtZQUMzQixLQUFLLEdBQUcsSUFBQSx1Q0FBK0IsRUFBQyxLQUFLLEVBQUUsZUFBZSxDQUFDLENBQUM7U0FDbkU7UUFDRCxPQUFPLEtBQUssQ0FBQztJQUNqQixDQUFDLENBQUMsQ0FBQztBQUNQLENBQUM7QUFWRCx1REFVQyJ9
+exports.default = __monorepoToPackageAbsolutePathDeepMap;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsMEVBQW9EO0FBQ3BELHNFQUFnRDtBQUNoRCwyREFBK0U7QUFFL0U7Ozs7Ozs7Ozs7Ozs7OztHQWVHO0FBQ0gsU0FBd0Isc0NBQXNDLENBQzFELEdBQVEsRUFDUixrQkFBMEIsSUFBQSxxQkFBYSxHQUFFO0lBRXpDLE9BQU8sSUFBQSxpQkFBUyxFQUFDLEdBQUcsRUFBRSxDQUFDLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRSxLQUFLLEVBQUUsSUFBSSxFQUFFLEVBQUUsRUFBRTtRQUNwRCxJQUFJLE9BQU8sS0FBSyxLQUFLLFFBQVEsRUFBRTtZQUMzQixLQUFLLEdBQUcsSUFBQSwwQ0FBK0IsRUFBQyxLQUFLLEVBQUUsZUFBZSxDQUFDLENBQUM7U0FDbkU7UUFDRCxPQUFPLEtBQUssQ0FBQztJQUNqQixDQUFDLENBQUMsQ0FBQztBQUNQLENBQUM7QUFWRCx5REFVQyJ9

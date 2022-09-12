@@ -1,6 +1,6 @@
 import __deepMap from '../../shared/object/deepMap';
 import __packageRoot from '../path/packageRoot';
-import __monorepoToPackageAbsolutePath from './monorepoToPackageAbsolutePath';
+import { __monorepoToPackageAbsolutePath } from '@coffeekraken/sugar/monorepo';
 
 /**
  * @name            monorepoToPackageAbsolutePathDeepMap
@@ -18,7 +18,7 @@ import __monorepoToPackageAbsolutePath from './monorepoToPackageAbsolutePath';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function monorepoToPackageAbsolutePathDeepMap(
+export default function __monorepoToPackageAbsolutePathDeepMap(
     obj: any,
     packageRootPath: string = __packageRoot(),
 ): string {

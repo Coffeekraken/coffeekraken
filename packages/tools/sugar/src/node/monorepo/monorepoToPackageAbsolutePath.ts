@@ -16,7 +16,7 @@ import __packageRoot from '../path/packageRoot';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function monorepoToPackageAbsolutePath(
+export default function __monorepoToPackageAbsolutePath(
     path: string,
     packageRootPath: string = __packageRoot(),
 ): string {

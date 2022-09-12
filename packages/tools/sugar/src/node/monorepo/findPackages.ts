@@ -23,13 +23,13 @@ import _glob from 'glob';
  * @todo      tests
  *
  * @example       js
- * import findPackages from '@coffeekraken/sugar/node/monorepo/findPackages';
- * const packages = await findPackages();
+ * import { __findPackages } from '@coffeekraken/sugar/monorepo';
+ * const packages = await __findPackages();
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default async function findPackages(
+export default async function __findPackages(
     rootDir = process.cwd(),
 ): Promise<object> {
     interface IPackagesObj {

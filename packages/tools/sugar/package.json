@@ -263,6 +263,14 @@
                 "import": "./dist/pkg/esm/js/string/_exports.js"
             }
         },
+        "./terminal": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/terminal/_exports.js",
+                "import": "./dist/pkg/esm/node/terminal/_exports.js"
+            }
+        },
+
+
         "./shared/*": {
             "require": "./dist/pkg/cjs/shared/*.js",
             "import": "./dist/pkg/esm/shared/*.js"

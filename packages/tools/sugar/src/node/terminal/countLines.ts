@@ -21,13 +21,13 @@ import __countLine from '../../shared/string/countLine';
  * @todo      tests
  *
  * @example         js
- * import countLines from '@coffeekraken/sugar/node//countLine';
- * countLines('Hello <red>World</red>'); // 11
+ * import { __countLines } from '@coffeekraken/sugar/terminal';
+ * __countLines('Hello <red>World</red>'); // 11
  *
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function countLines(string) {
+export default function __countLines(string) {
     let currentCount = 0;
     let lines = string.split('\n');
     lines.forEach((line) => {
@@ -36,4 +36,3 @@ function countLines(string) {
     });
     return currentCount;
 }
-export default countLines;

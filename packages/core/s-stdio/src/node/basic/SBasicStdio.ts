@@ -2,7 +2,7 @@ import type { ISEventEmitter } from '@coffeekraken/s-event-emitter';
 import type { ISLog } from '@coffeekraken/s-log';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
-import __countLines from '@coffeekraken/sugar/node/terminal/countLines';
+import { __countLines } from '@coffeekraken/sugar/terminal';
 import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
 import __getColorFor from '@coffeekraken/sugar/shared/dev/color/getColorFor';
 import __clone from '@coffeekraken/sugar/shared/object/clone';

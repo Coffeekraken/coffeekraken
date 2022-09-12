@@ -9,7 +9,7 @@ import __SStdio from '@coffeekraken/s-stdio';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 import { __dirname, __writeFileSync } from '@coffeekraken/sugar/fs';
-import '@coffeekraken/sugar/node/index';
+import { __processSugar } from '@coffeekraken/sugar/process';
 import { __isChildProcess } from '@coffeekraken/sugar/is';
 import { __packageJsonSync } from '@coffeekraken/sugar/package';
 import { __onProcessExit } from '@coffeekraken/sugar/process';
@@ -47,6 +47,9 @@ export interface ISSugarCliAvailableCli {
  *
  * @author                 Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
+
+// process sugar
+__processSugar();
 
 const cliParams = __SSugarCliParamsInterface.apply(
     process.argv.slice(2).join(' '),

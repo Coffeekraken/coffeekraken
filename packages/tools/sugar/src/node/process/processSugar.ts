@@ -10,16 +10,22 @@ import { __onProcessExit } from '@coffeekraken/sugar/process';
  *
  * This file is the "initialisation" one for the sugar node toolkit.
  * It's optional to include it but if you do, you will get these features "for free":
- * - Logging: Get the powerfull options of the SLog class without any change in your codebase
+ * - Display errors
+ * - Process exit cleanup
  *
+ * @example         js
+ * import { __processSugar } from '@coffeekraken/sugar/process';
+ * __processSugar();
+ * 
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
+export default function __processSugar() {
+    // handle the errors
+    __handleErrors();
 
-// handle the errors
-__handleErrors();
-
-// exit cleanup
-__onProcessExit(() => {
-    return __exitCleanup;
-});
+    // exit cleanup
+    __onProcessExit(() => {
+        return __exitCleanup;
+    });
+}

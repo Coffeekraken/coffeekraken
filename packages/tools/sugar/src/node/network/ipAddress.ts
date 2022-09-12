@@ -18,14 +18,13 @@ import __ip from 'ip';
  * @todo      tests
  *
  * @example           js
- * import ipAddress from '@coffeekraken/sugar/node/network/utils/ipAddress';
- * ipAddress(); // => 192.168.10.45
+ * import { __ipAddress } from '@coffeekraken/sugar/network';
+ * __ipAddress(); // => 192.168.1.45
  *
  * @see             https://www.npmjs.com/package/ip
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-function ipAddress() {
+export default function __ipAddress() {
     return __ip.address();
 }
-export default ipAddress;

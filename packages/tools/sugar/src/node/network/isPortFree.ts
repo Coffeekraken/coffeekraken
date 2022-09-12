@@ -3,7 +3,7 @@ import __tcpPortUsed from 'tcp-port-used';
 
 /**
  * @name            isPortFree
- * @namespace            node.http
+ * @namespace            node.network
  * @type            Function
  * @async
  * @platform        node
@@ -19,14 +19,14 @@ import __tcpPortUsed from 'tcp-port-used';
  * @todo      tests
  *
  * @example         js
- * import isPortFree from '@coffeekraken/sugar/node/network/utils/isPortFree';
- * await isPortFree(22000); // => true
+ * import { __isPortFree } from '@coffeekraken/sugar/network';
+ * await __isPortFree(22000); // => true
  *
  * @see             https://www.npmjs.com/package/tcp-port-used
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-function isPortFree(port) {
+export default function __isPortFree(port) {
     return new Promise((resolve) => {
         __tcpPortUsed.check(port, '127.0.0.1').then(
             function (inUse) {
@@ -38,4 +38,3 @@ function isPortFree(port) {
         );
     });
 }
-export default isPortFree;

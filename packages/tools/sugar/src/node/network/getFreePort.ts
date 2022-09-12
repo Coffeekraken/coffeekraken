@@ -1,10 +1,10 @@
 // @ts-nocheck
 
-import __isPortFree from './isPortFree';
+import { __isPortFree } from '@coffeekraken/sugar/network';
 
 /**
  * @name            getFreePort
- * @namespace            node.http
+ * @namespace            node.network
  * @type            Function
  * @async
  * @platform        node
@@ -21,13 +21,13 @@ import __isPortFree from './isPortFree';
  * @todo      tests
  *
  * @example         js
- * import getFreePort from '@coffeekraken/sugar/node/network/utils/getFreePort';
- * await getFreePort(); // => 22343
+ * import { __getFreePort } from '@coffeekraken/sugar/network';
+ * await __getFreePort(); // => 22343
  *
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-function getFreePort(port = null) {
+export default function __getFreePort(port = null) {
     return new Promise(async (resolve) => {
         if (!port) port = Math.round(Math.random() * 65535);
         let isFree = await __isPortFree(port);
@@ -38,4 +38,3 @@ function getFreePort(port = null) {
         resolve(port);
     });
 }
-export default getFreePort;

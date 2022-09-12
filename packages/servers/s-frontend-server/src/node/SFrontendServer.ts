@@ -3,7 +3,7 @@ import __SEnv from '@coffeekraken/s-env';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __isPortFree from '@coffeekraken/sugar/node/network/utils/isPortFree';
+import { __isPortFree } from '@coffeekraken/sugar/network';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __compression from 'compression';
 import __express from 'express';

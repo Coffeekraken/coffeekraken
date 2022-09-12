@@ -5,7 +5,7 @@ import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SugarConfig from '@coffeekraken/s-sugar-config';
 import { __writeFileSync, __writeTmpFileSync } from '@coffeekraken/sugar/fs';
-import __isPortFree from '@coffeekraken/sugar/node/network/utils/isPortFree';
+import { __isPortFree } from '@coffeekraken/sugar/network';
 import __listNodeModulesPackages from '@coffeekraken/sugar/node/npm/listNodeModulesPackages';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';

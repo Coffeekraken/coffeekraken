@@ -23,7 +23,7 @@ import __SDuration from '@coffeekraken/s-duration';
  * @todo            documentation
  *
  * @example         js
- * import __unzip from '@coffeekraken/sugar/node/zip/unzip';
+ * import { __unzip } from '@coffeekraken/sugar/compression';
  * await __unzip('my/cool/file.zip');
  *
  * @since       2.0.0
@@ -37,7 +37,7 @@ export interface IUnzipResult extends ISDurationObject {
     dest: string;
 }
 
-export default function unzip(
+export default function __unzip(
     zipFilePath: string,
     settings?: Partial<IUnzipSettings>,
 ): Promise<IUnzipResult> {

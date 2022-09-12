@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const clone_class_1 = require("clone-class");
 /**
  * @name            cloneClass
- * @namespace            js.class
+ * @namespace            shared.class
  * @type            Function
  * @platform          js
  * @platform          node
@@ -19,8 +19,8 @@ const clone_class_1 = require("clone-class");
  * @todo      tests
  *
  * @example         js
- * import __cloneClass from '@coffeekraken/sugar/js/class/cloneClass';
- * const NewClass = __closeClass(class MyClass() {});
+ * import { __cloneClass } from '@coffeekraken/sugar/class';
+ * const NewClass = __cloneClass(class MyClass() {});
  *
  * @see             https://www.npmjs.com/package/clone-class
  * @since           2.0.0

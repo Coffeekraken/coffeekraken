@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const func_to_classes_1 = __importDefault(require("func-to-classes"));
 /**
  * @name            functionToClass
- * @namespace            js.class
+ * @namespace            shared.class
  * @type            Function
  * @platform          js
  * @platform          node
@@ -23,8 +23,8 @@ const func_to_classes_1 = __importDefault(require("func-to-classes"));
  * @todo      tests
  *
  * @example         js
- * import functionToClass from '@coffeekraken/sugar/js/class/functionToClass';
- * functionToClass(function coco() {});
+ * import { __functionToClass } from '@coffeekraken/sugar/class';
+ * __functionToClass(function coco() {});
  *
  * @see             https://www.npmjs.com/package/func-to-classes
  * @since           2.0.0

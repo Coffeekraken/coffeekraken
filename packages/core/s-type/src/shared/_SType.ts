@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __SInterface from '@coffeekraken/s-interface';
-import __getExtendsStack from '@coffeekraken/sugar/shared/class/getExtendsStack';
+import { __getExtendsStack } from '@coffeekraken/sugar/class';
 import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
 import __map from '@coffeekraken/sugar/shared/iterable/map';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
@@ -407,7 +407,8 @@ class SType implements ISType {
             this.constructor._registeredTypes[type.toLowerCase()] === undefined
         ) {
             if (settings.interfaces === true) {
-                const availableInterfaceTypes = __SInterface.getAvailableTypes();
+                const availableInterfaceTypes =
+                    __SInterface.getAvailableTypes();
                 if (availableInterfaceTypes[type] !== undefined) {
                     const res = availableInterfaceTypes[type].apply(value, {});
                     return res;
@@ -416,9 +417,9 @@ class SType implements ISType {
             // handle custom types
             if (settings.customTypes === true) {
                 const typeOf = __typeOf(value).toLowerCase();
-                const extendsStack = Object.keys(
-                    __getExtendsStack(value),
-                ).map((s) => s.toLowerCase());
+                const extendsStack = Object.keys(__getExtendsStack(value)).map(
+                    (s) => s.toLowerCase(),
+                );
                 if (type === typeOf || extendsStack.indexOf(type) !== -1)
                     return true;
             }
@@ -469,9 +470,8 @@ class SType implements ISType {
                 typeId = typeObj.type;
 
             // get the descriptor object
-            const descriptorObj = this.constructor._registeredTypes[
-                typeId.toLowerCase()
-            ];
+            const descriptorObj =
+                this.constructor._registeredTypes[typeId.toLowerCase()];
 
             // check that we have a descriptor for this type
             if (descriptorObj === undefined) {

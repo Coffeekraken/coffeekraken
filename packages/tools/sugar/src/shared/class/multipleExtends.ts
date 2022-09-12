@@ -19,8 +19,8 @@ import __aggregation from 'aggregation/es5';
  * @todo      tests
  *
  * @example         js
- * import multipleExtends from '@coffeekraken/sugar/shared/class/multipleExtends';
- * class MyCoolClass extends multipleExtends(Another, AnotherOne) {
+ * import { __multipleExtends } from '@coffeekraken/sugar/class';
+ * class MyCoolClass extends __multipleExtends(Another, AnotherOne) {
  * }
  *
  * @see       https://www.npmjs.com/package/aggregation

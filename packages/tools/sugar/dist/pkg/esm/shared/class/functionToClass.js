@@ -2,7 +2,7 @@
 import __funcToClass from 'func-to-classes';
 /**
  * @name            functionToClass
- * @namespace            js.class
+ * @namespace            shared.class
  * @type            Function
  * @platform          js
  * @platform          node
@@ -18,8 +18,8 @@ import __funcToClass from 'func-to-classes';
  * @todo      tests
  *
  * @example         js
- * import functionToClass from '@coffeekraken/sugar/js/class/functionToClass';
- * functionToClass(function coco() {});
+ * import { __functionToClass } from '@coffeekraken/sugar/class';
+ * __functionToClass(function coco() {});
  *
  * @see             https://www.npmjs.com/package/func-to-classes
  * @since           2.0.0

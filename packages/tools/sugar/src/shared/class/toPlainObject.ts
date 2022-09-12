@@ -18,18 +18,18 @@
  * @todo      tests
  *
  * @example             js
- * import toPlainObject from '@coffeekraken/sugar/shared/class/toPlainObject';
+ * import { __toPlainObject } from '@coffeekraken/sugar/class';
  * class Coco {
  *    constructor() {
  *      this.hello = 'world';
  *    }
  * }
- * toPlainObject(new Coco()); // => { hello: 'world' }
+ * __toPlainObject(new Coco()); // => { hello: 'world' }
  *
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-function toPlainObject(theClass) {
+export default function __toPlainObject(theClass) {
     const originalClass = theClass || {};
     const keys = Object.getOwnPropertyNames(originalClass);
     return keys.reduce((classAsObj, key) => {
@@ -37,4 +37,3 @@ function toPlainObject(theClass) {
         return classAsObj;
     }, {});
 }
-export default toPlainObject;

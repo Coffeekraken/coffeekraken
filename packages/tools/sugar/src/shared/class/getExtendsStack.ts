@@ -21,10 +21,10 @@ import __isClass from '../is/class';
  * @todo      tests
  *
  * @example         js
- * import getExtendsStack from '@coffeekraken/sugar/shared/class/getExtendsStack';
+ * import { __getExtendsStack } from '@coffeekraken/sugar/class';
  * class Coco extends Error {}
  * class Plop extends Coco {}
- * getExtendsStack(Plop); // => {Coco: [class ...], Error: [class ...]};
+ * __getExtendsStack(Plop); // => {Coco: [class ...], Error: [class ...]};
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

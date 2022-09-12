@@ -2,7 +2,7 @@
 
 /**
  * @name              getMethods
- * @namespace            js.class
+ * @namespace            shared.class
  * @type              Function
  * @platform          js
  * @platform          node
@@ -18,19 +18,19 @@
  * @todo      tests
  *
  * @example         js
- * import getMethods from '@coffeekraken/sugar/js/class/getMethods';
+ * import { __getMethods } from '@coffeekraken/sugar/class';
  * myClass {
  *  constructor() {}
  *  hello() {}
  *  world() {}
  * }
  * const myInstance = new myClass();
- * getMethods(myInstance); // => ['hello','world']
+ * __getMethods(myInstance); // => ['hello','world']
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function getMethods(toCheck) {
+export default function __getMethods(toCheck) {
     let props = [];
     let obj = toCheck;
     do {
@@ -43,4 +43,3 @@ function getMethods(toCheck) {
         if (e != arr[i + 1] && typeof toCheck[e] == 'function') return true;
     });
 }
-export default getMethods;

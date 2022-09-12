@@ -2,7 +2,7 @@
 
 /**
  * @name                                    methodExists
- * @namespace            js.class
+ * @namespace            shared.class
  * @type                                    Function
  * @platform          js
  * @platform          node
@@ -22,14 +22,18 @@
  * class Coco {
  *    hello() {}
  * }
- * import methodExists from '@coffeekraken/sugar/node/class/methodExists';
+ * import { __methodExists } from '@coffeekraken/sugar/class';
  * const myInstance = new Coco();
- * methodExists(myInstance, 'hello', 'world'); // => ['world'];
+ * __methodExists(myInstance, 'hello', 'world'); // => ['world'];
+ * __methodExists(myInstance, 'hello'); // => true
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function methodExists(instance, ...methods) {
+export default function __methodExists(
+    instance,
+    ...methods
+): boolean | string[] {
     const missingMethodsArray = [];
     if (!Array.isArray(methods)) methods = [methods];
     methods.forEach((method) => {
@@ -38,4 +42,3 @@ function methodExists(instance, ...methods) {
     });
     return !missingMethodsArray.length ? true : missingMethodsArray;
 }
-export default methodExists;

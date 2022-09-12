@@ -121,6 +121,10 @@
             "require": "./dist/pkg/cjs/shared/ascii/_exports.js",
             "import": "./dist/pkg/esm/shared/ascii/_exports.js"
         },
+        "./class": {
+            "require": "./dist/pkg/cjs/shared/class/_exports.js",
+            "import": "./dist/pkg/esm/shared/class/_exports.js"
+        },
         "./clipboard": {
             "node": {
                 "require": "./dist/pkg/cjs/node/clipboard/_exports.js",

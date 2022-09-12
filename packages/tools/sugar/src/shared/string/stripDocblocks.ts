@@ -12,12 +12,12 @@
  * @return      {String}                        The processed string
  *
  * @example         js
- * import __stripDocblocks from '@coffeekraken/sugar/shared/string/stripDocblocks';
+ * import { __stripDocblocks } from '@coffeekraken/sugar/string';
  * __stripDocblocks('...');
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function stripDocblocks(str: string): string {
+export default function __stripDocblocks(str: string): string {
     return str.replace(/(\/\*{2})([\s\S]+?)(\*\/)/gm, '');
 }

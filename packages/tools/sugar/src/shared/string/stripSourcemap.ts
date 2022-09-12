@@ -14,13 +14,13 @@
  * @return      {String}                        The processed string
  *
  * @example         js
- * import __stripSourcemap from '@coffeekraken/sugar/shared/string/stripSourcemap';
+ * import { __stripSourcemap } from '@coffeekraken/sugar/string';
  * __stripSourcemap('...');
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function stripSourcemap(str: string): string {
+export default function __stripSourcemap(str: string): string {
     str = str.replace(/\/\/#\s?sourceMappingURL=[\w\W]+/gm, '');
     return str;
 }

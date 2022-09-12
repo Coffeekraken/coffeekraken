@@ -15,7 +15,7 @@ import __simplifySpecialChars from './simplifySpecialChars';
  * @return      {String}                        The processed string
  *
  * @example         php
- * import __namespaceCompliant from '@coffeekraken/sugar/shared/string/namespaceCompliant';
+ * import { __namespaceCompliant } from '@coffeekraken/sugar/string';
  * __namespaceCompliant('Hello world'); // => hello-world
  *
  * @since       2.0.0
@@ -26,7 +26,7 @@ export interface InamespaceCompliantSettings {
     exclude: string[];
 }
 
-export default function namespaceCompliant(
+export default function __namespaceCompliant(
     str: string,
     settings?: InamespaceCompliantSettings,
 ): string {

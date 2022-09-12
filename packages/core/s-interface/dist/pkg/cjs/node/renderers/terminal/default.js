@@ -1,9 +1,6 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const toString_1 = __importDefault(require("@coffeekraken/sugar/shared/string/toString"));
+const string_1 = require("@coffeekraken/sugar/string");
 /**
  * @name                default
  * @namespace           sugar.js.interface.renderers.terminal
@@ -18,7 +15,7 @@ const toString_1 = __importDefault(require("@coffeekraken/sugar/shared/string/to
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function default_1({ value, interfaceClass }) {
-    return `<green>${(0, toString_1.default)(value, {})}</green>`;
+    return `<green>${(0, string_1.__toString)(value, {})}</green>`;
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsMEZBQW9FO0FBRXBFOzs7Ozs7Ozs7Ozs7R0FZRztBQUNILG1CQUF5QixFQUFFLEtBQUssRUFBRSxjQUFjLEVBQUU7SUFDaEQsT0FBTyxVQUFVLElBQUEsa0JBQVUsRUFBQyxLQUFLLEVBQUUsRUFBRSxDQUFDLFVBQVUsQ0FBQztBQUNuRCxDQUFDO0FBRkQsNEJBRUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsdURBQXdEO0FBRXhEOzs7Ozs7Ozs7Ozs7R0FZRztBQUNILG1CQUF5QixFQUFFLEtBQUssRUFBRSxjQUFjLEVBQUU7SUFDOUMsT0FBTyxVQUFVLElBQUEsbUJBQVUsRUFBQyxLQUFLLEVBQUUsRUFBRSxDQUFDLFVBQVUsQ0FBQztBQUNyRCxDQUFDO0FBRkQsNEJBRUMifQ==

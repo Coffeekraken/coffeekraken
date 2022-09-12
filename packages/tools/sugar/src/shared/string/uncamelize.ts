@@ -2,7 +2,7 @@
 
 /**
  * @name        uncamelize
- * @namespace            js.string
+ * @namespace            shared.string
  * @type      Function
  * @platform          js
  * @platform          node
@@ -19,13 +19,13 @@
  * @todo      tests
  *
  * @example    js
- * import uncamelize from '@coffeekraken/sugar/js/string/uncamelize'
- * uncamelize('helloWorldAndUniverse') // hello-world-and-universe
+ * import { __uncamelize } from '@coffeekraken/sugar/string'
+ * __uncamelize('helloWorldAndUniverse') // hello-world-and-universe
  *
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function uncamelize(text, separator = '-') {
+export default function __uncamelize(text, separator = '-') {
     // Replace all capital letters by separator followed by lowercase one
     let res = '';
     res = text.replace(/[A-Z]/g, function (letter) {
@@ -37,4 +37,3 @@ function uncamelize(text, separator = '-') {
 
     return res;
 }
-export default uncamelize;

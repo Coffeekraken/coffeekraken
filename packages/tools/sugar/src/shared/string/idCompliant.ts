@@ -16,7 +16,7 @@ import __simplifySpecialChars from './simplifySpecialChars';
  * @return      {String}                        The processed string
  *
  * @example         php
- * import __idCompliant from '@coffeekraken/sugar/shared/string/idCompliant';
+ * import { __idCompliant } from '@coffeekraken/sugar/string';
  * __idCompliant('Hello world'); // => hello-world
  *
  * @since       2.0.0
@@ -27,7 +27,7 @@ export interface IIdCompliantSettings {
     exclude: string[];
 }
 
-export default function idCompliant(
+export default function __idCompliant(
     str: string,
     settings?: IIdCompliantSettings,
 ): string {

@@ -1,5 +1,5 @@
 // @ts-nocheck
-import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
+import { __uniqid } from '@coffeekraken/sugar/string';
 
 /**
  * @name        clearTransmations

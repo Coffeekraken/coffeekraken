@@ -12,7 +12,7 @@ import __buildCommandLine from '@coffeekraken/sugar/shared/cli/buildCommandLine'
 import __isClass from '@coffeekraken/sugar/shared/is/class';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __toString from '@coffeekraken/sugar/shared/string/toString';
+import { __toString } from '@coffeekraken/sugar/string';
 import __fs from 'fs';
 import __path from 'path';
 import __stackTrace from 'stack-trace';

@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const sprintf_js_1 = __importDefault(require("sprintf-js"));
 /**
  * @name        printf
- * @namespace            js.string
+ * @namespace            shared.string
  * @type      Function
  * @platform          js
  * @platform          node
@@ -24,17 +24,17 @@ const sprintf_js_1 = __importDefault(require("sprintf-js"));
  * @todo      tests
  *
  * @example     js
- * import printf from '@coffeekraken/sugar/js/string/printf';
- * printf('Hello %s', 'world'); // => Hello world
- * printf('Hello %s, I\'m %s', 'world', 'John Doe'); // Hello world, I'm John Doe
- * printf('Hello %(first)s, I\'m %(name)s', { first : 'world', name : 'John Doe'}); // Hello world, I'm John Doe
+ * import { __printf } from '@coffeekraken/sugar/string';
+ * __printf('Hello %s', 'world'); // => Hello world
+ * __printf('Hello %s, I\'m %s', 'world', 'John Doe'); // Hello world, I'm John Doe
+ * __printf('Hello %(first)s, I\'m %(name)s', { first : 'world', name : 'John Doe'}); // Hello world, I'm John Doe
  *
  * @see 				https://www.npmjs.com/package/sprintf-js
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function _printf(...args) {
+function __printf(...args) {
     return sprintf_js_1.default.sprintf.apply(null, args);
 }
-exports.default = _printf;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDREQUFtQztBQUVuQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMkJHO0FBQ0gsU0FBUyxPQUFPLENBQUMsR0FBRyxJQUFJO0lBQ3BCLE9BQU8sb0JBQVMsQ0FBQyxPQUFPLENBQUMsS0FBSyxDQUFDLElBQUksRUFBRSxJQUFJLENBQUMsQ0FBQztBQUMvQyxDQUFDO0FBQ0Qsa0JBQWUsT0FBTyxDQUFDIn0=
+exports.default = __printf;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDREQUFtQztBQUVuQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMkJHO0FBQ0gsU0FBd0IsUUFBUSxDQUFDLEdBQUcsSUFBSTtJQUNwQyxPQUFPLG9CQUFTLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxJQUFJLEVBQUUsSUFBSSxDQUFDLENBQUM7QUFDL0MsQ0FBQztBQUZELDJCQUVDIn0=

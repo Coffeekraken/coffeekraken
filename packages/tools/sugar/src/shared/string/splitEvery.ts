@@ -4,7 +4,7 @@ import __countLine from './countLine';
 
 /**
  * @name                          splitEvery
- * @namespace            js.string
+ * @namespace            shared.string
  * @type                          Function
  * @platform          js
  * @platform          node
@@ -24,8 +24,8 @@ import __countLine from './countLine';
  * @todo      tests
  *
  * @example           js
- * import splitEvery from '@coffeekraken/node/string/splitEvery';
- * splitEvery('Hello World', 2, {
+ * import { __splitEvery } from '@coffeekraken/sugar/string';
+ * __splitEvery('Hello World', 2, {
  *    splitWords: true
  * }); // => ['He','ll','o ','Wo','rl','d']
  *
@@ -39,7 +39,11 @@ export interface ISplitEverySettings {
     splitWords: boolean;
 }
 
-function splitEvery(text, every, settings: Partial<ISplitEverySettings> = {}) {
+export default function __splitEvery(
+    text,
+    every,
+    settings: Partial<ISplitEverySettings> = {},
+) {
     const finalSettings: ISplitEverySettings = {
         splitWords: true,
         ...settings,
@@ -105,4 +109,3 @@ function splitEvery(text, every, settings: Partial<ISplitEverySettings> = {}) {
         return finalLines;
     }
 }
-export default splitEvery;

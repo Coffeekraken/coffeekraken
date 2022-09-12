@@ -4,7 +4,7 @@ import __deepMerge from '../object/deepMerge';
 
 /**
  * @name          simply
- * @namespace            js.string
+ * @namespace            shared.string
  * @type          Function
  * @platform          js
  * @platform          node
@@ -25,13 +25,13 @@ import __deepMerge from '../object/deepMerge';
  * @todo      tests
  *
  * @example       js
- * import simplify from '@coffeekraken/sugar/js/string/simplify';
- * simplify('éàddö'); // => eaddo
+ * import { __simplify } from '@coffeekraken/sugar/string';
+ * __simplify('éàddö'); // => eaddo
  *
  * @since     2.0.0
  * @author    João Filipe Ventura Coelho <joaoventura93@outlook.com>
  */
-function simplify(string, settings = {}) {
+export default function __simplify(string, settings = {}) {
     settings = __deepMerge(
         {
             specialChars: true,
@@ -78,4 +78,3 @@ function simplify(string, settings = {}) {
 
     return string;
 }
-export default simplify;

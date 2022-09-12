@@ -2,7 +2,7 @@
 
 /**
  * @name        ltrim
- * @namespace            js.string
+ * @namespace            shared.string
  * @type      Function
  * @platform          js
  * @platform          node
@@ -20,13 +20,13 @@
  * @todo      tests
  *
  * @example    js
- * import ltrim from '@coffeekraken/sugar/js/string/ltrim'
- * ltrim('Hello World', 'Hello') // World
+ * import { __ltrim } from '@coffeekraken/sugar/string'
+ *  __ltrim('Hello World', 'Hello') // World
  *
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function ltrim(string, needle, trimResult = true) {
+export default function __ltrim(string, needle, trimResult = true) {
     if (string.substr(0, needle.length) === needle) {
         return trimResult
             ? string.substr(needle.length).trim()
@@ -35,4 +35,3 @@ function ltrim(string, needle, trimResult = true) {
     // nothing to trim
     return string;
 }
-export default ltrim;

@@ -9,7 +9,7 @@ import {
 } from '@coffeekraken/sugar/fs';
 import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __toString from '@coffeekraken/sugar/shared/string/toString';
+import { __toString } from '@coffeekraken/sugar/string';
 import __fs from 'fs';
 import __minimatch from 'minimatch';
 import __path from 'path';

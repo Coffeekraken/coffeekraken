@@ -5,7 +5,7 @@ import __stripAnsi from 'strip-ansi';
 
 /**
  * @name                                  countLine
- * @namespace            js.string
+ * @namespace            shared.string
  * @type                                  Function
  * @platform          js
  * @platform          node
@@ -26,13 +26,13 @@ import __stripAnsi from 'strip-ansi';
  * @todo      tests
  *
  * @example         js
- * import countLine from '@coffeekraken/sugar/js/string/countLine';
- * countLine('Hello <red>World</red>'); // 11
+ * import { __countLine } from '@coffeekraken/sugar/string';
+ *  __countLine('Hello <red>World</red>'); // 11
  *
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function countLine(line, count = {}) {
+export default function __countLine(line, count = {}) {
     count = __deepMerge(
         {
             htmlTags: false,
@@ -55,4 +55,3 @@ function countLine(line, count = {}) {
 
     return newLine.length;
 }
-export default countLine;

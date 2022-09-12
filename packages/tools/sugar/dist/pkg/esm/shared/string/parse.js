@@ -1,7 +1,7 @@
 // @ts-nocheck
 /**
  * @name                                  parse
- * @namespace            js.string
+ * @namespace            shared.string
  * @type                                  Function
  * @platform          js
  * @platform          node
@@ -17,8 +17,8 @@
  * @todo      tests
  *
  * @example           js
- * import parse from '@coffeekraken/sugar/js/string/parse';
- * parse('10'); // => 10
+ * import { __parse } from '@coffeekraken/sugar/string';
+ *  __parse('10'); // => 10
  *
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

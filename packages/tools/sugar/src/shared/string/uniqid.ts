@@ -3,7 +3,7 @@
 import { v4 as __uuidv4 } from 'uuid';
 /**
  * @name          uniqid
- * @namespace            js.string
+ * @namespace            shared.string
  * @type          Function
  * @platform          js
  * @platform          node
@@ -18,14 +18,13 @@ import { v4 as __uuidv4 } from 'uuid';
  * @todo      tests
  *
  * @example       js
- * import uniqid from '@coffeekraken/sugar/js/string/uniqid';
- * console.log(uniqid()); // => 1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed
+ * import { __uniqid } from '@coffeekraken/sugar/string';
+ * console.log(__uniqid()); // => 1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed
  *
  * @see       https://www.npmjs.com/package/uuid
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function uniqid() {
+export default function __uniqid() {
     return __uuidv4();
 }
-export default uniqid;

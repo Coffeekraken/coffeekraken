@@ -258,6 +258,10 @@
             }
         },
         "./string": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/string/_exports.js",
+                "import": "./dist/pkg/esm/node/string/_exports.js"
+            },
             "default": {
                 "require": "./dist/pkg/cjs/js/string/_exports.js",
                 "import": "./dist/pkg/esm/js/string/_exports.js"
@@ -267,6 +271,12 @@
             "node": {
                 "require": "./dist/pkg/cjs/node/terminal/_exports.js",
                 "import": "./dist/pkg/esm/node/terminal/_exports.js"
+            }
+        },
+        "./type": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/type/_exports.js",
+                "import": "./dist/pkg/esm/node/type/_exports.js"
             }
         },
 

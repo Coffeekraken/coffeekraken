@@ -8,7 +8,7 @@ const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const strip_ansi_1 = __importDefault(require("strip-ansi"));
 /**
  * @name                                  countLine
- * @namespace            js.string
+ * @namespace            shared.string
  * @type                                  Function
  * @platform          js
  * @platform          node
@@ -29,13 +29,13 @@ const strip_ansi_1 = __importDefault(require("strip-ansi"));
  * @todo      tests
  *
  * @example         js
- * import countLine from '@coffeekraken/sugar/js/string/countLine';
- * countLine('Hello <red>World</red>'); // 11
+ * import { __countLine } from '@coffeekraken/sugar/string';
+ *  __countLine('Hello <red>World</red>'); // 11
  *
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function countLine(line, count = {}) {
+function __countLine(line, count = {}) {
     count = (0, deepMerge_1.default)({
         htmlTags: false,
         terminalSpecialChars: false,
@@ -53,5 +53,5 @@ function countLine(line, count = {}) {
     }
     return newLine.length;
 }
-exports.default = countLine;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLG9FQUE4QztBQUM5Qyw0REFBcUM7QUFFckM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0E0Qkc7QUFDSCxTQUFTLFNBQVMsQ0FBQyxJQUFJLEVBQUUsS0FBSyxHQUFHLEVBQUU7SUFDL0IsS0FBSyxHQUFHLElBQUEsbUJBQVcsRUFDZjtRQUNJLFFBQVEsRUFBRSxLQUFLO1FBQ2Ysb0JBQW9CLEVBQUUsS0FBSztRQUMzQixZQUFZLEVBQUUsS0FBSztLQUN0QixFQUNELEtBQUssQ0FDUixDQUFDO0lBRUYsSUFBSSxPQUFPLEdBQUcsSUFBSSxDQUFDO0lBQ25CLElBQUksS0FBSyxDQUFDLG9CQUFvQixLQUFLLEtBQUssRUFBRTtRQUN0QyxPQUFPLEdBQUcsSUFBQSxvQkFBVyxFQUFDLE9BQU8sQ0FBQyxDQUFDO0tBQ2xDO0lBQ0QsSUFBSSxLQUFLLENBQUMsUUFBUSxLQUFLLEtBQUssRUFBRTtRQUMxQixPQUFPLEdBQUcsT0FBTyxDQUFDLE9BQU8sQ0FBQywwQkFBMEIsRUFBRSxFQUFFLENBQUMsQ0FBQztLQUM3RDtJQUNELElBQUksS0FBSyxDQUFDLFlBQVksS0FBSyxLQUFLLEVBQUU7UUFDOUIsT0FBTyxHQUFHLE9BQU8sQ0FBQyxPQUFPLENBQUMsSUFBSSxFQUFFLEVBQUUsQ0FBQyxDQUFDO0tBQ3ZDO0lBRUQsT0FBTyxPQUFPLENBQUMsTUFBTSxDQUFDO0FBQzFCLENBQUM7QUFDRCxrQkFBZSxTQUFTLENBQUMifQ==
+exports.default = __countLine;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLG9FQUE4QztBQUM5Qyw0REFBcUM7QUFFckM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0E0Qkc7QUFDSCxTQUF3QixXQUFXLENBQUMsSUFBSSxFQUFFLEtBQUssR0FBRyxFQUFFO0lBQ2hELEtBQUssR0FBRyxJQUFBLG1CQUFXLEVBQ2Y7UUFDSSxRQUFRLEVBQUUsS0FBSztRQUNmLG9CQUFvQixFQUFFLEtBQUs7UUFDM0IsWUFBWSxFQUFFLEtBQUs7S0FDdEIsRUFDRCxLQUFLLENBQ1IsQ0FBQztJQUVGLElBQUksT0FBTyxHQUFHLElBQUksQ0FBQztJQUNuQixJQUFJLEtBQUssQ0FBQyxvQkFBb0IsS0FBSyxLQUFLLEVBQUU7UUFDdEMsT0FBTyxHQUFHLElBQUEsb0JBQVcsRUFBQyxPQUFPLENBQUMsQ0FBQztLQUNsQztJQUNELElBQUksS0FBSyxDQUFDLFFBQVEsS0FBSyxLQUFLLEVBQUU7UUFDMUIsT0FBTyxHQUFHLE9BQU8sQ0FBQyxPQUFPLENBQUMsMEJBQTBCLEVBQUUsRUFBRSxDQUFDLENBQUM7S0FDN0Q7SUFDRCxJQUFJLEtBQUssQ0FBQyxZQUFZLEtBQUssS0FBSyxFQUFFO1FBQzlCLE9BQU8sR0FBRyxPQUFPLENBQUMsT0FBTyxDQUFDLElBQUksRUFBRSxFQUFFLENBQUMsQ0FBQztLQUN2QztJQUVELE9BQU8sT0FBTyxDQUFDLE1BQU0sQ0FBQztBQUMxQixDQUFDO0FBdEJELDhCQXNCQyJ9

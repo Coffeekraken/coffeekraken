@@ -9,7 +9,7 @@ import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __replaceTokens from '@coffeekraken/sugar/node/token/replaceTokens';
 import __sha256 from '@coffeekraken/sugar/shared/crypt/sha256';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __unquote from '@coffeekraken/sugar/shared/string/unquote';
+import { __unquote } from '@coffeekraken/sugar/string';
 import __fs from 'fs';
 import __glob from 'glob';
 import __path from 'path';

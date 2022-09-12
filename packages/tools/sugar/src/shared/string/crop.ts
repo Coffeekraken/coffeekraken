@@ -5,7 +5,7 @@ import __countLine from './countLine';
 
 /**
  * @name                                        crop
- * @namespace            js.string
+ * @namespace            shared.string
  * @type                                        Function
  * @platform          js
  * @platform          node
@@ -25,13 +25,13 @@ import __countLine from './countLine';
  * @todo      tests
  *
  * @example         js
- * import crop from '@coffeekraken/sugar/js/string/crop';
- * crop('Hello World', 10); // => Hello w...
+ * import { __crop } from '@coffeekraken/sugar/string';
+ * __crop('Hello World', 10); // => Hello w...
  *
  * @since       2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function crop(text, length, settings = {}) {
+export default function __crop(text, length, settings = {}) {
     settings = __deepMerge(
         {
             chars: '...',
@@ -151,4 +151,3 @@ function crop(text, length, settings = {}) {
 
     return result;
 }
-export default crop;

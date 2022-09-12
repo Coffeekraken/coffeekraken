@@ -4,7 +4,7 @@ import __toRegex from 'to-regex';
 
 /**
  * @name        dedupe
- * @namespace            js.string
+ * @namespace            shared.string
  * @type        Function
  * @platform          js
  * @platform          node
@@ -21,13 +21,13 @@ import __toRegex from 'to-regex';
  * @todo      tests
  *
  * @example       js
- * import dedupe from '@coffeekraken/sugar/js/string/dedupe';
- * dedupe('hello world hello your', 'hello'); // => hello world your
+ * import { __dedupe } from '@coffeekraken/sugar/string';
+ * __dedupe('hello world hello your', 'hello'); // => hello world your
  *
  * @since       2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function dedupe(str, statement) {
+export default function __dedupe(str, statement) {
     const reg = __toRegex(`(${statement})`, {
         contains: true,
         flags: 'g',
@@ -41,4 +41,3 @@ function dedupe(str, statement) {
         .reverse()
         .join('');
 }
-export default dedupe;

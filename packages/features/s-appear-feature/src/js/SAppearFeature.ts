@@ -7,7 +7,7 @@ import {
     __injectStyle,
 } from '@coffeekraken/sugar/dom';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
+import { __uniqid } from '@coffeekraken/sugar/string';
 import __SAppearFeatureInterface from './interface/SAppearFeatureInterface';
 
 // @ts-ignore

@@ -2,7 +2,7 @@
 
 /**
  * @name        unquote
- * @namespace            js.string
+ * @namespace            shared.string
  * @type      Function
  * @platform          js
  * @platform          node
@@ -21,13 +21,16 @@
  * @todo      tests
  *
  * @example    js
- * import unquote from '@coffeekraken/sugar/js/string/unquote'
- * unquote("'Hello world'") // "Hello world"
+ * import { __unquote } from '@coffeekraken/sugar/string'
+ * __unquote("'Hello world'") // "Hello world"
  *
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function unquote(string, quotesToRemove = ['"', "'", '”', '`']) {
+export default function __unquote(
+    string,
+    quotesToRemove = ['"', "'", '”', '`'],
+) {
     // trim the string just in case
     string = string.trim();
     // loop on each quotes to remove
@@ -42,4 +45,3 @@ function unquote(string, quotesToRemove = ['"', "'", '”', '`']) {
     // return the processed string
     return string;
 }
-export default unquote;

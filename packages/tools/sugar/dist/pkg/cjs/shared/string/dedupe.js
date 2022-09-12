@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const to_regex_1 = __importDefault(require("to-regex"));
 /**
  * @name        dedupe
- * @namespace            js.string
+ * @namespace            shared.string
  * @type        Function
  * @platform          js
  * @platform          node
@@ -24,13 +24,13 @@ const to_regex_1 = __importDefault(require("to-regex"));
  * @todo      tests
  *
  * @example       js
- * import dedupe from '@coffeekraken/sugar/js/string/dedupe';
- * dedupe('hello world hello your', 'hello'); // => hello world your
+ * import { __dedupe } from '@coffeekraken/sugar/string';
+ * __dedupe('hello world hello your', 'hello'); // => hello world your
  *
  * @since       2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function dedupe(str, statement) {
+function __dedupe(str, statement) {
     const reg = (0, to_regex_1.default)(`(${statement})`, {
         contains: true,
         flags: 'g',
@@ -44,5 +44,5 @@ function dedupe(str, statement) {
         .reverse()
         .join('');
 }
-exports.default = dedupe;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUFpQztBQUVqQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBUyxNQUFNLENBQUMsR0FBRyxFQUFFLFNBQVM7SUFDMUIsTUFBTSxHQUFHLEdBQUcsSUFBQSxrQkFBUyxFQUFDLElBQUksU0FBUyxHQUFHLEVBQUU7UUFDcEMsUUFBUSxFQUFFLElBQUk7UUFDZCxLQUFLLEVBQUUsR0FBRztLQUNiLENBQUMsQ0FBQztJQUNILE9BQU8sR0FBRztTQUNMLEtBQUssQ0FBQyxHQUFHLENBQUM7U0FDVixPQUFPLEVBQUU7U0FDVCxNQUFNLENBQUMsVUFBVSxDQUFDLEVBQUUsQ0FBQyxFQUFFLEdBQUc7UUFDdkIsT0FBTyxHQUFHLENBQUMsT0FBTyxDQUFDLENBQUMsRUFBRSxDQUFDLEdBQUcsQ0FBQyxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUM7SUFDeEMsQ0FBQyxDQUFDO1NBQ0QsT0FBTyxFQUFFO1NBQ1QsSUFBSSxDQUFDLEVBQUUsQ0FBQyxDQUFDO0FBQ2xCLENBQUM7QUFDRCxrQkFBZSxNQUFNLENBQUMifQ==
+exports.default = __dedupe;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUFpQztBQUVqQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBd0IsUUFBUSxDQUFDLEdBQUcsRUFBRSxTQUFTO0lBQzNDLE1BQU0sR0FBRyxHQUFHLElBQUEsa0JBQVMsRUFBQyxJQUFJLFNBQVMsR0FBRyxFQUFFO1FBQ3BDLFFBQVEsRUFBRSxJQUFJO1FBQ2QsS0FBSyxFQUFFLEdBQUc7S0FDYixDQUFDLENBQUM7SUFDSCxPQUFPLEdBQUc7U0FDTCxLQUFLLENBQUMsR0FBRyxDQUFDO1NBQ1YsT0FBTyxFQUFFO1NBQ1QsTUFBTSxDQUFDLFVBQVUsQ0FBQyxFQUFFLENBQUMsRUFBRSxHQUFHO1FBQ3ZCLE9BQU8sR0FBRyxDQUFDLE9BQU8sQ0FBQyxDQUFDLEVBQUUsQ0FBQyxHQUFHLENBQUMsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDO0lBQ3hDLENBQUMsQ0FBQztTQUNELE9BQU8sRUFBRTtTQUNULElBQUksQ0FBQyxFQUFFLENBQUMsQ0FBQztBQUNsQixDQUFDO0FBYkQsMkJBYUMifQ==

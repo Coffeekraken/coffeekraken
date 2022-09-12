@@ -2,7 +2,7 @@
 
 /**
  * @name        lowerFirst
- * @namespace            js.string
+ * @namespace            shared.string
  * @type      Function
  * @platform          js
  * @platform          node
@@ -18,13 +18,12 @@
  * @todo      tests
  *
  * @example    js
- * import lowerFirst from '@coffeekraken/sugar/js/string/lowerFirst'
- * lowerFirst('Hello world') // hello world
+ * import { __lowerFirst } from '@coffeekraken/sugar/string'
+ * __lowerFirst('Hello world') // hello world
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function lowerFirst(string) {
+export default function __lowerFirst(string) {
     return string.charAt(0).toLowerCase() + string.slice(1);
 }
-export default lowerFirst;

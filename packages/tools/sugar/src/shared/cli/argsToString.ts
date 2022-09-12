@@ -53,10 +53,10 @@ function argsToString(args, settings = {}) {
         if (value === true) return `${finalKey}`;
         if (value === false && settings.keepFalsy) return `${finalKey} false`;
         if (!value) return '';
-        let valueStr = value.toString !== undefined &&
-                        typeof value.toString === 'function'
-                            ? value.toString()
-                            : __toString(value);
+        let valueStr =
+            value.toString !== undefined && typeof value.toString === 'function'
+                ? value.toString()
+                : __toString(value);
 
         if (settings.valueQuote === '"')
             valueStr = valueStr.replace(/"/g, '\\"');
@@ -74,7 +74,7 @@ function argsToString(args, settings = {}) {
         let str = '';
 
         if (Array.isArray(argValue)) {
-            argValue.forEach((value) => {  
+            argValue.forEach((value) => {
                 string += ` ${processParam(key, value)}`;
             });
         } else if (__isPlainObject(argValue)) {

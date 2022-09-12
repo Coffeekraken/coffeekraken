@@ -2,7 +2,7 @@
 
 /**
  * @name        upperFirst
- * @namespace            js.string
+ * @namespace            shared.string
  * @type      Function
  * @platform          js
  * @platform          node
@@ -18,13 +18,12 @@
  * @todo      tests
  *
  * @example    js
- * import upperFirst from '@coffeekraken/sugar/js/string/upperFirst'
- * upperFirst('hello world') // Hello world
+ * import { __upperFirst } from '@coffeekraken/sugar/string'
+ * __upperFirst('hello world') // Hello world
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function upperFirst(string) {
+export default function __upperFirst(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
-export default upperFirst;

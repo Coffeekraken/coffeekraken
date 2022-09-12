@@ -4,7 +4,7 @@ import __deepMerge from '../object/deepMerge';
 
 /**
  * @name          trimLines
- * @namespace            js.string
+ * @namespace            shared.string
  * @type          Function
  * @platform          js
  * @platform          node
@@ -23,8 +23,8 @@ import __deepMerge from '../object/deepMerge';
  * @todo      tests
  *
  * @example         js
- * import trimLines from '@coffeekraken/sugar/js/string/trimLines';
- * trimLines(`my cool lines
+ * import { __trimLines } from '@coffeekraken/sugar/string';
+ * __trimLines(`my cool lines
  *      that have some lines to trim
  * and some not...`);
  * // my cool lines
@@ -34,7 +34,7 @@ import __deepMerge from '../object/deepMerge';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function trimLines(string, settings = {}) {
+export default function __trimLines(string, settings = {}) {
     settings = __deepMerge(
         {
             leftPadding: 0,
@@ -62,4 +62,3 @@ function trimLines(string, settings = {}) {
 
     return string;
 }
-export default trimLines;

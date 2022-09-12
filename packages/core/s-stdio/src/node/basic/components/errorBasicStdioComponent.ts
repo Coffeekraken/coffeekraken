@@ -1,5 +1,5 @@
 import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
-import __toString from '@coffeekraken/sugar/shared/string/toString';
+import { __toString } from '@coffeekraken/sugar/string';
 
 /**
  * @name        errorBasicStdioComponent

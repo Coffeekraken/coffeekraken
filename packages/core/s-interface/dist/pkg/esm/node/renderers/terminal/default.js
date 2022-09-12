@@ -1,4 +1,4 @@
-import __toString from '@coffeekraken/sugar/shared/string/toString';
+import { __toString } from '@coffeekraken/sugar/string';
 /**
  * @name                default
  * @namespace           sugar.js.interface.renderers.terminal
@@ -15,4 +15,4 @@ import __toString from '@coffeekraken/sugar/shared/string/toString';
 export default function ({ value, interfaceClass }) {
     return `<green>${__toString(value, {})}</green>`;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sVUFBVSxNQUFNLDRDQUE0QyxDQUFDO0FBRXBFOzs7Ozs7Ozs7Ozs7R0FZRztBQUNILE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFBRSxLQUFLLEVBQUUsY0FBYyxFQUFFO0lBQ2hELE9BQU8sVUFBVSxVQUFVLENBQUMsS0FBSyxFQUFFLEVBQUUsQ0FBQyxVQUFVLENBQUM7QUFDbkQsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSxVQUFVLEVBQUUsTUFBTSw0QkFBNEIsQ0FBQztBQUV4RDs7Ozs7Ozs7Ozs7O0dBWUc7QUFDSCxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQUUsS0FBSyxFQUFFLGNBQWMsRUFBRTtJQUM5QyxPQUFPLFVBQVUsVUFBVSxDQUFDLEtBQUssRUFBRSxFQUFFLENBQUMsVUFBVSxDQUFDO0FBQ3JELENBQUMifQ==

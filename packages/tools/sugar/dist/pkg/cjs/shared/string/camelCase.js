@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const camelize_1 = __importDefault(require("./camelize"));
 /**
  * @name        camelCase
- * @namespace            js.string
+ * @namespace            shared.string
  * @type      Function
  * @platform          js
  * @platform          node
@@ -23,14 +23,14 @@ const camelize_1 = __importDefault(require("./camelize"));
  * @todo      tests
  *
  * @example     js
- * import camelCase from '@coffeekraken/sugar/js/string/camelCase';
- * camelCase('hello world'); // => helloWorld
+ * import { __camelCase } from '@coffeekraken/sugar/string';
+ * __camelCase('hello world'); // => helloWorld
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function camelCase(text) {
+function __camelCase(text) {
     return (0, camelize_1.default)(text);
 }
-exports.default = camelCase;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDBEQUFvQztBQUVwQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxTQUFTLFNBQVMsQ0FBQyxJQUFJO0lBQ25CLE9BQU8sSUFBQSxrQkFBVSxFQUFDLElBQUksQ0FBQyxDQUFDO0FBQzVCLENBQUM7QUFDRCxrQkFBZSxTQUFTLENBQUMifQ==
+exports.default = __camelCase;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDBEQUFvQztBQUVwQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxTQUF3QixXQUFXLENBQUMsSUFBSTtJQUNwQyxPQUFPLElBQUEsa0JBQVUsRUFBQyxJQUFJLENBQUMsQ0FBQztBQUM1QixDQUFDO0FBRkQsOEJBRUMifQ==

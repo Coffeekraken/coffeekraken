@@ -3,7 +3,7 @@ import __SInterface from '@coffeekraken/s-interface';
 import { __fileName } from '@coffeekraken/sugar/fs';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __isGlob from '@coffeekraken/sugar/shared/is/glob';
-import __unquote from '@coffeekraken/sugar/shared/string/unquote';
+import { __unquote } from '@coffeekraken/sugar/string';
 
 /**
  * @name           classes

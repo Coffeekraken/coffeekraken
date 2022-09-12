@@ -2,7 +2,7 @@
 
 /**
  * @name        rtrim
- * @namespace            js.string
+ * @namespace            shared.string
  * @type      Function
  * @platform          js
  * @platform          node
@@ -20,13 +20,13 @@
  * @todo      tests
  *
  * @example    js
- * import rtrim from '@coffeekraken/sugar/js/string/rtrim'
- * rtrim('Hello World', 'ld') // Hello Wor
+ * import { __rtrim } from '@coffeekraken/sugar/string'
+ * __rtrim('Hello World', 'ld') // Hello Wor
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function rtrim(string, needle, trimResult = true) {
+export default function __rtrim(string, needle, trimResult = true) {
     if (string.substr(needle.length * -1) === needle) {
         if (trimResult) {
             return string.substr(0, string.length - needle.length).trim();
@@ -37,4 +37,3 @@ function rtrim(string, needle, trimResult = true) {
     // nothing to trim
     return string;
 }
-export default rtrim;

@@ -4,7 +4,7 @@ import __camelize from './camelize';
 
 /**
  * @name        camelCase
- * @namespace            js.string
+ * @namespace            shared.string
  * @type      Function
  * @platform          js
  * @platform          node
@@ -20,13 +20,12 @@ import __camelize from './camelize';
  * @todo      tests
  *
  * @example     js
- * import camelCase from '@coffeekraken/sugar/js/string/camelCase';
- * camelCase('hello world'); // => helloWorld
+ * import { __camelCase } from '@coffeekraken/sugar/string';
+ * __camelCase('hello world'); // => helloWorld
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function camelCase(text) {
+export default function __camelCase(text) {
     return __camelize(text);
 }
-export default camelCase;

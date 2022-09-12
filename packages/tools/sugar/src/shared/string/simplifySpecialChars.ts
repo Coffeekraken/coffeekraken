@@ -13,13 +13,14 @@
  * @return      {String}                        The processed string
  *
  * @example         php
- * Sugar\string\simplifySpecialChars('Hellô world'); // => Hello world
+ * import { __simplifySpecialChars } from '@coffeekraken/sugar/string';
+ * __simplifySpecialChars('É'); // E
  *
  * @see             https://stackoverflow.com/questions/14114411/remove-all-special-characters-from-a-string/14114443
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function simplifySpecialChars(str) {
+export default function __simplifySpecialChars(str) {
     const utf8 = {
         a: /[áàâãªä]/gm,
         A: /[ÁÀÂÃÄ]/gm,

@@ -3,7 +3,7 @@
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __diff from '@coffeekraken/sugar/shared/object/diff';
 import __parse from '@coffeekraken/sugar/shared/string/parse';
-import __toString from '@coffeekraken/sugar/shared/string/toString';
+import { __toString } from '@coffeekraken/sugar/string';
 import type { ISConfigAdapterSettings } from '../../shared/adapters/SConfigAdapter';
 import __SConfigAdapter from '../../shared/adapters/SConfigAdapter';
 

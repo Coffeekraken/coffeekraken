@@ -1,5 +1,5 @@
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
+import { __uniqid } from '@coffeekraken/sugar/string';
 
 let newFolderName;
 

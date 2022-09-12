@@ -5,7 +5,7 @@ import ISDescriptor from './SDescriptor';
 import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __clone from '@coffeekraken/sugar/shared/object/clone';
-import __toString from '@coffeekraken/sugar/shared/string/toString';
+import { __toString } from '@coffeekraken/sugar/string';
 
 /**
  * @name                SDescriptorResult

@@ -7,7 +7,7 @@ const dashCase_1 = __importDefault(require("./dashCase"));
 // @ts-nocheck
 /**
  * @name        snakeCase
- * @namespace            js.string
+ * @namespace            shared.string
  * @type      Function
  * @platform          js
  * @platform          node
@@ -23,16 +23,16 @@ const dashCase_1 = __importDefault(require("./dashCase"));
  * @todo      tests
  *
  * @example     js
- * import snakeCase from '@coffeekraken/sugar/js/string/snakeCase';
- * snakeCase('hello world'); // => hello_world
+ * import { __snakeCase } from '@coffeekraken/sugar/string';
+ * __snakeCase('hello world'); // => hello_world
  *
  * @see             https://www.npmjs.com/package/param-case
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function snakeCase(text) {
+function __snakeCase(text) {
     const dashCase = (0, dashCase_1.default)(text);
     return dashCase.replace(/\-/g, '_');
 }
-exports.default = snakeCase;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsMERBQW9DO0FBRXBDLGNBQWM7QUFDZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBUyxTQUFTLENBQUMsSUFBSTtJQUNuQixNQUFNLFFBQVEsR0FBRyxJQUFBLGtCQUFVLEVBQUMsSUFBSSxDQUFDLENBQUM7SUFDbEMsT0FBTyxRQUFRLENBQUMsT0FBTyxDQUFDLEtBQUssRUFBRSxHQUFHLENBQUMsQ0FBQztBQUN4QyxDQUFDO0FBQ0Qsa0JBQWUsU0FBUyxDQUFDIn0=
+exports.default = __snakeCase;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsMERBQW9DO0FBRXBDLGNBQWM7QUFDZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBd0IsV0FBVyxDQUFDLElBQUk7SUFDcEMsTUFBTSxRQUFRLEdBQUcsSUFBQSxrQkFBVSxFQUFDLElBQUksQ0FBQyxDQUFDO0lBQ2xDLE9BQU8sUUFBUSxDQUFDLE9BQU8sQ0FBQyxLQUFLLEVBQUUsR0FBRyxDQUFDLENBQUM7QUFDeEMsQ0FBQztBQUhELDhCQUdDIn0=

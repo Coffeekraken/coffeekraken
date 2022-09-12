@@ -1,7 +1,6 @@
 import __SFile from '@coffeekraken/s-file';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __stripDocblocks from '@coffeekraken/sugar/shared/string/stripDocblocks';
-import __stripSourcemap from '@coffeekraken/sugar/shared/string/stripSourcemap';
+import { __stripDocblocks, __stripSourcemap } from '@coffeekraken/sugar/string';
 
 /**
  * @name            configFiles

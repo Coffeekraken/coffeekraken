@@ -1,7 +1,7 @@
 // shared
 
 import __isObject from '@coffeekraken/sugar/shared/is/object';
-import __toString from '@coffeekraken/sugar/shared/string/toString';
+import { __toString } from '@coffeekraken/sugar/string';
 import type { ISTypeDescriptor } from '../SType';
 import __SType from '../_SType';
 

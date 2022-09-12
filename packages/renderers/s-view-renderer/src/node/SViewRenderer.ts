@@ -15,7 +15,7 @@ import {
 import { __packageRootDir, __packageTmpDir } from '@coffeekraken/sugar/path';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
+import { __uniqid } from '@coffeekraken/sugar/string';
 import __fs from 'fs';
 import __glob from 'glob';
 import __path from 'path';

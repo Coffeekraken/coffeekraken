@@ -5,7 +5,7 @@ import ISInterfaceRenderer, {
     ISInterfaceRendererSettings,
 } from '../../shared/renderers/ISInterfaceRenderer';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
+import { __upperFirst } from '@coffeekraken/sugar/string';
 import type { ISInterfaceDefinitionProperty } from '../SInterface';
 import __SInterface from '../SInterface';
 
@@ -137,17 +137,15 @@ class SInterfaceRenderer extends __SClass implements ISInterfaceRenderer {
                             `${set.templatesDir}/${propKey}.js`
                         );
                         // execute the template function
-                        renderedProperties[key][propKey] = templateFunction(
-                            toRenderObj,
-                        );
+                        renderedProperties[key][propKey] =
+                            templateFunction(toRenderObj);
                     } else if (
                         this[`render${__upperFirst(propKey)}`] &&
                         typeof this[`render${__upperFirst(propKey)}`] ===
                             'function'
                     ) {
-                        renderedProperties[key][propKey] = this[
-                            `render${__upperFirst(propKey)}`
-                        ](toRenderObj);
+                        renderedProperties[key][propKey] =
+                            this[`render${__upperFirst(propKey)}`](toRenderObj);
                     }
                 }
             }

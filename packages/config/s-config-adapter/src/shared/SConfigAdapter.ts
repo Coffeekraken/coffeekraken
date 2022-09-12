@@ -1,6 +1,6 @@
 import type { ISConfigEnvObj } from '@coffeekraken/s-config';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
+import {__uniqid} from '@coffeekraken/sugar/string';
 
 /**
  * @name                                SConfigAdapter

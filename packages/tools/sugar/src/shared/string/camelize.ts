@@ -2,7 +2,7 @@
 
 /**
  * @name        camelize
- * @namespace            js.string
+ * @namespace            shared.string
  * @type      Function
  * @platform          js
  * @platform          node
@@ -18,13 +18,13 @@
  * @todo      tests
  *
  * @example     js
- * import camelize from '@coffeekraken/sugar/js/string/camelize';
- * camelize('hello world'); // => helloWorld
+ * import { __camelize } from '@coffeekraken/sugar/string';
+ * __camelize('hello world'); // => helloWorld
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function camelize(text) {
+export default function __camelize(text) {
     if (!text) text = '';
     let res = '';
     const reg = /(?:^|[_-\s])(\w)/g;
@@ -34,4 +34,3 @@ function camelize(text) {
     res = res.substr(0, 1).toLowerCase() + res.slice(1);
     return res.trim();
 }
-export default camelize;

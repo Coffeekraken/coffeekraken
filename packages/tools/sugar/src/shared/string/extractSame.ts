@@ -2,7 +2,7 @@
 
 /**
  * @name              extractSame
- * @namespace            js.string
+ * @namespace            shared.string
  * @type              Function
  * @platform          js
  * @platform          node
@@ -21,13 +21,13 @@
  * @todo      tests
  *
  * @example       js
- * import extractSame from '@coffeekraken/sugar/js/string/extractSame';
- * extractSame('Hello world', 'Hello plop'); // => 'Hello '
+ * import { __extractSame } from '@coffeekraken/sugar/string';
+ * __extractSame('Hello world', 'Hello plop'); // => 'Hello '
  *
  * @since       2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function extractSame(string1, string2, multiple = false) {
+export default function __extractSame(string1, string2, multiple = false) {
     // compare letter by letter
     const extractedArray = [''];
     const chars = string1.split('');
@@ -47,4 +47,3 @@ function extractSame(string1, string2, multiple = false) {
     }
     return multiple ? extractedArray : extractedArray[0];
 }
-export default extractSame;

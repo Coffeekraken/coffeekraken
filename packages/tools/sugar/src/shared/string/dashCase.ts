@@ -4,7 +4,7 @@ import { paramCase } from 'param-case';
 
 /**
  * @name        dashCase
- * @namespace            js.string
+ * @namespace            shared.string
  * @type      Function
  * @platform          js
  * @platform          node
@@ -20,14 +20,13 @@ import { paramCase } from 'param-case';
  * @todo      tests
  *
  * @example     js
- * import dashCase from '@coffeekraken/sugar/js/string/dashCase';
- * dashCase('hello world'); // => hello-world
+ * import { __dashCase } from '@coffeekraken/sugar/string';
+ * __dashCase('hello world'); // => hello-world
  *
  * @see             https://www.npmjs.com/package/param-case
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function dashCase(text) {
+export default function __dashCase(text) {
     return paramCase(text);
 }
-export default dashCase;

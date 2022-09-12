@@ -1,5 +1,4 @@
-import __stripDocblocks from '@coffeekraken/sugar/shared/string/stripDocblocks';
-import __stripSourcemap from '@coffeekraken/sugar/shared/string/stripSourcemap';
+import { __stripDocblocks, __stripSourcemap } from '@coffeekraken/sugar/string';
 
 /**
  * @name            configFromDocmap

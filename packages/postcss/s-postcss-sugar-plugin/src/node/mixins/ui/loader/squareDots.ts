@@ -1,6 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
-import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
+import { __uniqid } from '@coffeekraken/sugar/string';
 
 /**
  * @name          squareDots

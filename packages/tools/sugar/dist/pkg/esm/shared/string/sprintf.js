@@ -2,7 +2,7 @@
 import { sprintf as _sprintf } from 'sprintf-js';
 /**
  * @name        sprintf
- * @namespace            js.string
+ * @namespace            shared.string
  * @type      Function
  * @platform          js
  * @platform          node
@@ -20,17 +20,16 @@ import { sprintf as _sprintf } from 'sprintf-js';
  * @todo      tests
  *
  * @example    js
- * import sprintf from '@coffeekraken/sugar/js/string/sprintf'
- * sprintf('Hello %s', 'world') // Hello World
+ * import { __sprintf } from '@coffeekraken/sugar/string'
+ * __sprintf('Hello %s', 'world') // Hello World
  * const user = { name: 'Dolly' }
- * sprintf('Hello %(name)s', user) // Hello Dolly
+ * __sprintf('Hello %(name)s', user) // Hello Dolly
  *
  * @see    https://github.com/alexei/sprintf.js
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function sprintf() {
+export default function __sprintf() {
     return _sprintf.apply(this, arguments);
 }
-export default sprintf;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLEVBQUUsT0FBTyxJQUFJLFFBQVEsRUFBRSxNQUFNLFlBQVksQ0FBQztBQUVqRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTRCRztBQUNILFNBQVMsT0FBTztJQUNaLE9BQU8sUUFBUSxDQUFDLEtBQUssQ0FBQyxJQUFJLEVBQUUsU0FBUyxDQUFDLENBQUM7QUFDM0MsQ0FBQztBQUNELGVBQWUsT0FBTyxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLEVBQUUsT0FBTyxJQUFJLFFBQVEsRUFBRSxNQUFNLFlBQVksQ0FBQztBQUVqRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTRCRztBQUNILE1BQU0sQ0FBQyxPQUFPLFVBQVUsU0FBUztJQUM3QixPQUFPLFFBQVEsQ0FBQyxLQUFLLENBQUMsSUFBSSxFQUFFLFNBQVMsQ0FBQyxDQUFDO0FBQzNDLENBQUMifQ==

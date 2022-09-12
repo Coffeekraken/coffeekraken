@@ -1,4 +1,4 @@
-import __toString from '@coffeekraken/sugar/shared/string/toString';
+import { __toString } from '@coffeekraken/sugar/string';
 
 /**
  * @name                default
@@ -14,5 +14,5 @@ import __toString from '@coffeekraken/sugar/shared/string/toString';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function ({ value, interfaceClass }) {
-  return `<green>${__toString(value, {})}</green>`;
+    return `<green>${__toString(value, {})}</green>`;
 }

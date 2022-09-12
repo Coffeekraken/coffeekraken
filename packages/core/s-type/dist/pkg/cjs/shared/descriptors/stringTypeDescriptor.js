@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const string_1 = __importDefault(require("@coffeekraken/sugar/shared/is/string"));
-const toString_1 = __importDefault(require("@coffeekraken/sugar/shared/string/toString"));
+const string_2 = require("@coffeekraken/sugar/string");
 /**
  * @name              stringTypeDescriptor
  * @namespace         sugar.js.type.descriptor
@@ -29,9 +29,9 @@ const descriptor = {
     name: 'String',
     id: 'string',
     is: (value) => (0, string_1.default)(value),
-    cast: (value) => (0, toString_1.default)(value, {
+    cast: (value) => (0, string_2.__toString)(value, {
         beautify: true,
     }),
 };
 exports.default = descriptor;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxTQUFTOzs7OztBQUVULGtGQUE4RDtBQUM5RCwwRkFBb0U7QUFJcEU7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQWtCRztBQUNILE1BQU0sVUFBVSxHQUFxQjtJQUNqQyxJQUFJLEVBQUUsUUFBUTtJQUNkLEVBQUUsRUFBRSxRQUFRO0lBQ1osRUFBRSxFQUFFLENBQUMsS0FBVSxFQUFFLEVBQUUsQ0FBQyxJQUFBLGdCQUFVLEVBQUMsS0FBSyxDQUFDO0lBQ3JDLElBQUksRUFBRSxDQUFDLEtBQVUsRUFBRSxFQUFFLENBQ2pCLElBQUEsa0JBQVUsRUFBQyxLQUFLLEVBQUU7UUFDZCxRQUFRLEVBQUUsSUFBSTtLQUNqQixDQUFDO0NBQ1QsQ0FBQztBQUVGLGtCQUFlLFVBQVUsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxTQUFTOzs7OztBQUVULGtGQUE4RDtBQUM5RCx1REFBd0Q7QUFJeEQ7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQWtCRztBQUNILE1BQU0sVUFBVSxHQUFxQjtJQUNqQyxJQUFJLEVBQUUsUUFBUTtJQUNkLEVBQUUsRUFBRSxRQUFRO0lBQ1osRUFBRSxFQUFFLENBQUMsS0FBVSxFQUFFLEVBQUUsQ0FBQyxJQUFBLGdCQUFVLEVBQUMsS0FBSyxDQUFDO0lBQ3JDLElBQUksRUFBRSxDQUFDLEtBQVUsRUFBRSxFQUFFLENBQ2pCLElBQUEsbUJBQVUsRUFBQyxLQUFLLEVBQUU7UUFDZCxRQUFRLEVBQUUsSUFBSTtLQUNqQixDQUFDO0NBQ1QsQ0FBQztBQUVGLGtCQUFlLFVBQVUsQ0FBQyJ9

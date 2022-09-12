@@ -2,7 +2,7 @@
 
 import __SPromise from '@coffeekraken/s-promise';
 import __whenNearViewport from '@coffeekraken/sugar/js/dom/detect/whenNearViewport';
-import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
+import { __uniqid } from '@coffeekraken/sugar/string';
 
 /**
  * @name            querySelectorLive

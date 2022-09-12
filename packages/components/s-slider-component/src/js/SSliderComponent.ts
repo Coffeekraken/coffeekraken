@@ -11,7 +11,7 @@ import { css, html, unsafeCSS } from 'lit';
 import { __querySelectorLive } from '@coffeekraken/sugar/dom';
 import { __querySelectorUp } from '@coffeekraken/sugar/dom';
 import __easeInterval from '@coffeekraken/sugar/shared/function/easeInterval';
-import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
+import { __uniqid } from '@coffeekraken/sugar/string';
 import __css from '../../../../src/css/s-slider-component.css'; // relative to /dist/pkg/esm/js
 import __SSliderComponentInterface from './interface/SSliderComponentInterface';
 import __SSliderBehavior from './SSliderBehavior';

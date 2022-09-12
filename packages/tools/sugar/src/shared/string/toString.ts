@@ -20,7 +20,7 @@ import { decycle } from 'json-cyclic';
 
 /**
  * @name        toString
- * @namespace            js.string
+ * @namespace            shared.string
  * @type      Function
  * @platform          js
  * @platform          node
@@ -40,8 +40,8 @@ import { decycle } from 'json-cyclic';
  * @todo      tests
  *
  * @example    js
- * import toString from '@coffeekraken/sugar/js/string/toString'
- * toString({
+ * import { __toString } from '@coffeekraken/sugar/string'
+ * __toString({
  * 	id:'hello'
  * }) // '{"id":"hello"}'
  *

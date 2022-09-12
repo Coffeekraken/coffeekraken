@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __resolveTypeString from '@coffeekraken/sugar/node/type/resolveTypeString';
+import {__resolveTypeString} from '@coffeekraken/sugar/type';
 
 /**
  * @name              type

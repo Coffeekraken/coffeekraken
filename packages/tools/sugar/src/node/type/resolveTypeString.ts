@@ -25,15 +25,15 @@ import { __packageRootDir } from '@coffeekraken/sugar/path';
  * @setting         {String}       [cwd=process.cwd()]          The cwd to use to resolve the type string when they are path
  *
  * @example       js
- * import __resolveTypeString from '@coffeekraken/sugar/shared/type/resolveTypeString';
- * resolveTypeString('string');
+ * import { __resolveTypeString } from '@coffeekraken/sugar/type';
+ * __resolveTypeString('string');
  * // {
  * //    types: [{
  * //       type: 'string',
  * //       of: undefined,
  * //       value: undefined
  * //    }],
- * //    interface: undefine
+ * //    interface: undefined
  * // }
  *
  * @since       2.0.0
@@ -50,7 +50,7 @@ export interface IResolveTypeStringSettings {
     cwd: string;
 }
 
-export default async function resolveTypeString(
+export default async function __resolveTypeString(
     typeString: string,
     settings: Partial<IResolveTypeStringSettings> = {},
 ): Promise<IResolveTypeStringResult> {

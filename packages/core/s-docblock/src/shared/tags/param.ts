@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __resolveTypeString from '@coffeekraken/sugar/node/type/resolveTypeString';
+import { __resolveTypeString } from '@coffeekraken/sugar/type';
 import __parse from '@coffeekraken/sugar/shared/string/parse';
 
 /**

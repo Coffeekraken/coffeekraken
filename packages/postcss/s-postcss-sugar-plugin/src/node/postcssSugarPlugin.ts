@@ -6,7 +6,7 @@ import __STheme from '@coffeekraken/s-theme';
 import { __dirname, __folderHash, __folderPath } from '@coffeekraken/sugar/fs';
 import { __packageCacheDir } from '@coffeekraken/sugar/path';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
-import __replaceTokens from '@coffeekraken/sugar/node/token/replaceTokens';
+import { __replaceTokens } from '@coffeekraken/sugar/string';
 import __sha256 from '@coffeekraken/sugar/shared/crypt/sha256';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import { __unquote } from '@coffeekraken/sugar/string';

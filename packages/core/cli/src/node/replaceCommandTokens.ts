@@ -1,4 +1,4 @@
-import __replaceTokens from '@coffeekraken/sugar/node/token/replaceTokens';
+import { __replaceTokens } from '@coffeekraken/sugar/string';
 import __argsToString from '@coffeekraken/sugar/shared/cli/argsToString';
 
 /**

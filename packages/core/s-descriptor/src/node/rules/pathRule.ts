@@ -7,7 +7,7 @@ import type { ISDescriptorRule, ISDescriptorSettings } from '../_SDescriptor';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __fs from 'fs';
 import __path from 'path';
-import __replaceTokens from '@coffeekraken/sugar/node/token/replaceTokens';
+import { __replaceTokens } from '@coffeekraken/sugar/string';
 import { __resolveGlob } from '@coffeekraken/sugar/glob';
 
 /**

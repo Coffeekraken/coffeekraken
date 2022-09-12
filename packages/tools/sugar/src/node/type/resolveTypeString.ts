@@ -1,7 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __fs from 'fs';
 import __path from 'path';
-import __replaceTokens from '../../shared/token/replaceTokens';
+import {__replaceTokens} from '@coffeekraken/sugar/string';
 import __parseTypeString, {
     ITypeStringObject,
 } from '../../shared/type/parseTypeString';

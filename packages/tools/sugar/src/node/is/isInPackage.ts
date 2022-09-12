@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import { __readJsonSync } from '@coffeekraken/sugar/fs';
+import __readJsonSync from '../fs/readJsonSync';
 import __fs from 'fs';
-import __packageRootDir from './packageRootDir';
+import __packageRootDir from '../path/packageRootDir';
 
 /**
  * @name                    isInPackage
@@ -19,13 +19,17 @@ import __packageRootDir from './packageRootDir';
  * @return          {String}                                      The finded package path or false if not finded
  *
  * @example         js
- * import isInPackage from '@coffeekraken/sugar/node/path/isInPackage';
- * const root = isInPackage();
+ * import { __isInPackage } from '@coffeekraken/sugar/is';
+ * const root = __isInPackage();
  *
  * @see       https://www.npmjs.com/package/find-package-json
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function isInPackage(name, from = process.cwd(), highest = false) {
+export default function __isInPackage(
+    name,
+    from = process.cwd(),
+    highest = false,
+) {
     const packageRootDir = __packageRootDir(from);
     if (!packageRootDir) return false;
 
@@ -54,4 +58,3 @@ function isInPackage(name, from = process.cwd(), highest = false) {
 
     return false;
 }
-export default isInPackage;

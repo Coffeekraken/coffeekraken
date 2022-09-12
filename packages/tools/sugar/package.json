@@ -147,6 +147,12 @@
                 "import": "./dist/pkg/esm/node/error/_exports.js"
             }
         },
+        "./exec": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/exec/_exports.js",
+                "import": "./dist/pkg/esm/node/exec/_exports.js"
+            }
+        },
         "./feature": {
             "default": {
                 "require": "./dist/pkg/cjs/js/feature/_exports.js",
@@ -219,6 +225,18 @@
             "node": {
                 "require": "./dist/pkg/cjs/node/network/_exports.js",
                 "import": "./dist/pkg/esm/node/network/_exports.js"
+            }
+        },
+        "./package": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/package/_exports.js",
+                "import": "./dist/pkg/esm/node/package/_exports.js"
+            }
+        },
+        "./path": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/path/_exports.js",
+                "import": "./dist/pkg/esm/node/path/_exports.js"
             }
         },
         "./storage": {

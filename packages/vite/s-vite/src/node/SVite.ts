@@ -7,7 +7,7 @@ import __SugarConfig from '@coffeekraken/s-sugar-config';
 import { __writeFileSync, __writeTmpFileSync } from '@coffeekraken/sugar/fs';
 import { __isPortFree } from '@coffeekraken/sugar/network';
 import __listNodeModulesPackages from '@coffeekraken/sugar/node/npm/listNodeModulesPackages';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __childProcess from 'child_process';
@@ -527,9 +527,9 @@ export default class SVite extends __SClass {
                 );
 
                 const command = `npx vitest --dir "${__path.relative(
-                    __packageRoot(),
+                    __packageRootDir(),
                     finalParams.dir,
-                )}" --config ${configPath} --root ${__packageRoot()} --passWithNoTests --dom --globals ${
+                )}" --config ${configPath} --root ${__packageRootDir()} --passWithNoTests --dom --globals ${
                     finalParams.watch ? '--watch' : '--run'
                 }`;
 
@@ -538,7 +538,7 @@ export default class SVite extends __SClass {
                     stdio: ['ignore', 1, 2],
                     shell: true,
                     detached: true,
-                    cwd: __packageRoot(),
+                    cwd: __packageRootDir(),
                 });
                 pro.on('close', (e) => {
                     if (!finalParams.watch) {

@@ -11,7 +11,7 @@ import __SSugarJson from '@coffeekraken/s-sugar-json';
 import { __dirname, __writeFileSync } from '@coffeekraken/sugar/fs';
 import '@coffeekraken/sugar/node/index';
 import { __isChildProcess } from '@coffeekraken/sugar/is';
-import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
+import { __packageJsonSync } from '@coffeekraken/sugar/package';
 import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 import __spawn from '@coffeekraken/sugar/node/process/spawn';
 import __sugarBanner from '@coffeekraken/sugar/shared/ascii/sugarBanner';

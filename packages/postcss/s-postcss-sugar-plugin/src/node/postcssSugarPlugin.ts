@@ -3,9 +3,9 @@ import __SBench from '@coffeekraken/s-bench';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 import __STheme from '@coffeekraken/s-theme';
-import { __dirname, __folderHash. __folderPath } from '@coffeekraken/sugar/fs';
-import __packageCacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __dirname, __folderHash, __folderPath } from '@coffeekraken/sugar/fs';
+import { __packageCacheDir } from '@coffeekraken/sugar/path';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __replaceTokens from '@coffeekraken/sugar/node/token/replaceTokens';
 import __sha256 from '@coffeekraken/sugar/shared/crypt/sha256';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
@@ -544,7 +544,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
 
             __SBench.end('postcssSugarPlugin').log({
                 body: `File: <cyan>${__path.relative(
-                    __packageRoot(),
+                    __packageRootDir(),
                     root.source?.input?.from,
                 )}</cyan>`,
             });

@@ -1,5 +1,5 @@
 import __deepMap from '../../shared/object/deepMap';
-import __packageRoot from '../path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import { __monorepoToPackageAbsolutePath } from '@coffeekraken/sugar/monorepo';
 
 /**
@@ -12,7 +12,7 @@ import { __monorepoToPackageAbsolutePath } from '@coffeekraken/sugar/monorepo';
  * absolute to the package root path.
  *
  * @param      {Object}           obj      The object in which to make all the paths absolute to the current package root path
- * @param       {String}           [packageRootPath=__packageRoot()]  The package root path
+ * @param       {String}           [packageRootPath=__packageRootDir()]  The package root path
  * @return     {Object}}       The absolute path object to the passed package root path
  *
  * @since       2.0.0
@@ -20,7 +20,7 @@ import { __monorepoToPackageAbsolutePath } from '@coffeekraken/sugar/monorepo';
  */
 export default function __monorepoToPackageAbsolutePathDeepMap(
     obj: any,
-    packageRootPath: string = __packageRoot(),
+    packageRootPath: string = __packageRootDir(),
 ): string {
     return __deepMap(obj, ({ object, path, value, prop }) => {
         if (typeof value === 'string') {

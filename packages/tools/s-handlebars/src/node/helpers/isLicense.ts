@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
+import { __packageJsonSync } from '@coffeekraken/sugar/package';
 
 const packageJson = __packageJsonSync();
 

@@ -38,8 +38,8 @@ import __distViewsDir from './distViewsDir';
  * @return      {String|Array<String>}                          If passed a string, get back a string, if passed an array, get back an array
  *
  * @example         js
- * import replacePathTokens from '@coffeekraken/sugar/node/path/replacePathTokens';
- * replacePathTokens('%packageCacheDir/something.txt'); // => /path/to/cache/directory/something.txt'
+ * import { __replacePathTokens } from '@coffeekraken/sugar/path';
+ * __replacePathTokens('%packageCacheDir/something.txt'); // => /path/to/cache/directory/something.txt'
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -68,7 +68,7 @@ export interface IReplacePathTokensSettings {
     distNodeDir: boolean;
     distViewsDir: boolean;
 }
-export default function replacePathTokens(
+export default function __replacePathTokens(
     paths,
     settings?: Partial<IReplacePathTokensSettings>,
 ): string | string[] {

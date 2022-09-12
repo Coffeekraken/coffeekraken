@@ -18,8 +18,8 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
  * @todo      tests
  *
  * @example             js
- * import packageCacheDir from '@coffeekraken/node/fs/packageCacheDir';
- * packageCacheDir(); // => '/private/var/folders/3x/jf5977fn79jbglr7rk0tq4d00000gn/T'
+ * import { __packageCacheDir } from '@coffeekraken/sugar/path';
+ * __packageCacheDir(); // => '/private/var/folders/3x/jf5977fn79jbglr7rk0tq4d00000gn/T'
  *
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -31,14 +31,11 @@ export default interface IPackageCacheDir {
     (settings?: IPackageCacheDirSettings): string;
 }
 
-export default function (settings: IPackageCacheDirSettings = {}) {
+export default function __packageCacheDir(
+    settings: IPackageCacheDirSettings = {},
+) {
     settings = {
         ...settings,
     };
-    const packageCacheDir = __SSugarConfig.get('storage.package.cacheDir');
-    if (packageCacheDir !== undefined) {
-        // __fs.ensureDirSync(packageCacheDir);
-        return packageCacheDir;
-    }
-    return undefined;
+    return __SSugarConfig.get('storage.package.cacheDir');
 }

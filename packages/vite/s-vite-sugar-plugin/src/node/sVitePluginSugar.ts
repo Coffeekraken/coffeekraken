@@ -1,6 +1,6 @@
 import __SEnv from '@coffeekraken/s-env';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __packageJson from '@coffeekraken/sugar/node/package/jsonSync';
+import { __packageJsonSync } from '@coffeekraken/sugar/package';
 import __sanitizeJsonString from '@coffeekraken/sugar/shared/json/sanitizeJsonString';
 
 /**
@@ -39,7 +39,7 @@ export default function sVitePluginSugar(settings: any = {}) {
             SUGAR: {
                 config: browserConfig,
             },
-            PACKAGE: __packageJson(),
+            PACKAGE: __packageJsonSync(),
         });
 
         envJsonStr = __sanitizeJsonString(envJsonStr);

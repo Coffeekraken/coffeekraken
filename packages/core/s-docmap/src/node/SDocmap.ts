@@ -18,9 +18,8 @@ import {
     __writeJsonSync,
 } from '@coffeekraken/sugar/fs';
 import __npmInstall from '@coffeekraken/sugar/node/npm/install';
-import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
-import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
+import { __packageJsonSync } from '@coffeekraken/sugar/package';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __deepFilter from '@coffeekraken/sugar/shared/object/deepFilter';
 import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
@@ -324,7 +323,7 @@ class SDocmap extends __SClass implements ISDocmap {
                     // );
                 }
 
-                const packageMonoRoot = __packageRoot(process.cwd(), {
+                const packageMonoRoot = __packageRootDir(process.cwd(), {
                     highest: true,
                 });
 
@@ -735,7 +734,7 @@ class SDocmap extends __SClass implements ISDocmap {
                 };
 
                 const packageRoot = __packageRootDir();
-                const packageMonoRoot = __packageRoot(process.cwd(), {
+                const packageMonoRoot = __packageRootDir(process.cwd(), {
                     highest: true,
                 });
 
@@ -1020,14 +1019,17 @@ class SDocmap extends __SClass implements ISDocmap {
                     });
 
                     const packageJson = __packageJsonSync();
-                    const packageMonoRootPath = __packageRoot(process.cwd(), {
-                        highest: true,
-                    });
+                    const packageMonoRootPath = __packageRootDir(
+                        process.cwd(),
+                        {
+                            highest: true,
+                        },
+                    );
 
                     // symlink repos from monorepo
                     const removedDependencies = {},
                         removedDevDependencies = {};
-                    if (packageMonoRootPath !== __packageRoot()) {
+                    if (packageMonoRootPath !== __packageRootDir()) {
                         const packageJsonFiles = __SGlob.resolve(
                             `${packageMonoRootPath}/**/package.json`,
                         );

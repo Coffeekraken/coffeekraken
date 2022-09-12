@@ -1,6 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 import { __dirname } from '@coffeekraken/sugar/fs';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __base64 from '@coffeekraken/sugar/shared/crypt/base64';
 import __fs from 'fs';
 
@@ -60,7 +60,7 @@ export default function ({
 
     const vars: string[] = [];
 
-    const svgPath = `${__packageRoot(__dirname())}/src/img/platforms/${
+    const svgPath = `${__packageRootDir(__dirname())}/src/img/platforms/${
         finalParams.platform
     }.svg`;
 

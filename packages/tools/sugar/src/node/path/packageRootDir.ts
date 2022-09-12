@@ -1,45 +1,117 @@
 // @ts-nocheck
 
-import type { IPackageRootSettings } from './packageRoot';
-import __packageRoot from './packageRoot';
+import __findPkgJson from 'find-package-json';
+import { __isFile } from '@coffeekraken/sugar/is';
+import __objectHash from '../../shared/object/objectHash';
 
 /**
- * @name                            packageRootDir
+ * @name                    packageRootDir
  * @namespace            node.path
- * @type                            Function
+ * @type                    Function
  * @platform        node
  * @status          beta
  *
- * Return the package root directory path
+ * Return the path to either the first finded package root going up the folders, or the highest package root finded
  *
- * @param       {IPackageRootDirSettings}       [settings={}]   Some settings to configure your temp directory process
- * @return                {String}                      The real os temp directory path
+ * @feature         Support file path as input
+ * @feature         Allows you to specify if you want the highest package.json founded using the ```highest``` parameter
  *
- * @setting     {String}        [scope='local']         Specify the scope in which you want your packageRootDir to be returned. Can be "local" or "global"
+ * @setting         {Boolean}           [highest=false]         Specify if you want the highest package possible
+ * @setting         {Number}            [upCount=undefined]         Specify a number of packages to go up. Cannot be used alongside the `highest` setting
+ * @setting         {String[]}          [requiredProperties=['name','version']]             Specify some required properties that MUST be present in the package.json to be considered as a valid package
  *
- * @todo      interface
- * @todo      doc
- * @todo      tests
+ * @param           {String}              [from=process.cwd()]    Specify from where the research has to be done
+ * @param           {Boolean}             [settings={}]         Some settings to configure the research
+ * @return          {String}                                      The finded package path or false if not finded
  *
- * @example             js
- * import packageRootDir from '@coffeekraken/node/fs/packageRootDir';
- * packageRootDir(); // => '/private/var/folders/3x/jf5977fn79jbglr7rk0tq4d00000gn/T'
+ * @example         js
+ * import { __packageRootDir } from '@coffeekraken/sugar/path';
+ * const root = __packageRootDir();
  *
- * @since         2.0.0
+ * @see       https://www.npmjs.com/package/find-package-json
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-global.packageRootDirs = {};
-export default function (
-    from: string = process.cwd(),
-    settings: Partial<IPackageRootSettings> = {},
-): string {
-    const storageKey = `${from}-${settings.highest ? 'highest' : ''}`;
 
-    if (!from && global.packageRootDirs[storageKey])
-        return global.packageRootDirs[storageKey];
+export interface IPackageRootSettings {
+    highest: boolean;
+    upCount: number;
+    requiredProperties: string[];
+}
 
-    const path = __packageRoot(from, settings);
-    global.packageRootDirs[storageKey] = path;
+const __packageRootDirsCache = {};
+export default function __packageRootDir(
+    from = process.cwd(),
+    settings?: Partial<IPackageRootSettings>,
+) {
+    const finalSettings: IPackageRootSettings = {
+        highest: false,
+        upCount: undefined,
+        requiredProperties: ['name', 'version'],
+        ...(settings ?? {}),
+    };
 
-    return path;
+    // cache
+    const storageKey = __objectHash({
+        from,
+        ...finalSettings,
+    });
+    if (!from && __packageRootDirsCache[storageKey]) {
+        return __packageRootDirsCache[storageKey];
+    }
+
+    if (__isFile(from)) from = from.split('/').slice(0, -1).join('/');
+
+    const f = __findPkgJson(from);
+    let file = f.next();
+
+    let finalFile,
+        upCountIdx = 0;
+
+    // no file found
+    if (!file || !file.filename) return false;
+
+    while (!file.done) {
+        if (file.done) {
+            break;
+        }
+
+        if (finalSettings.upCount && !finalSettings.highest) {
+            if (upCountIdx >= finalSettings.upCount) {
+                break;
+            }
+        }
+
+        if (!finalSettings.highest) {
+            // required properties
+            if (finalSettings.requiredProperties) {
+                let allProps = true;
+                finalSettings.requiredProperties.forEach((prop) => {
+                    if (!allProps) return;
+                    if (file.value[prop] === undefined) allProps = false;
+                });
+                if (allProps) {
+                    upCountIdx++;
+                    finalFile = file;
+                    if (!finalSettings.upCount) {
+                        break;
+                    }
+                }
+            } else {
+                upCountIdx++;
+                finalFile = file;
+                if (!finalSettings.upCount) {
+                    break;
+                }
+            }
+        } else {
+            finalFile = file;
+        }
+        file = f.next();
+    }
+
+    if (!finalFile) return false;
+
+    const finalPath = finalFile.filename.split('/').slice(0, -1).join('/');
+    __packageRootDirsCache[storageKey] = finalPath;
+    return finalPath;
 }

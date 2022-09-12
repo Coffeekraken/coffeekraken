@@ -2,7 +2,7 @@
 
 import { __readJsonSync, __writeJsonSync } from '@coffeekraken/sugar/fs';
 import __fs from 'fs';
-import __packageRoot from '../path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 
 /**
  * @name          renamePackage
@@ -15,22 +15,22 @@ import __packageRoot from '../path/packageRoot';
  * - Rename the package.json "name" property
  *
  * @param      {String}           newName               The new name for your package
- * @param       {String}        [packagePath=__packageRoot()]  The path to the package
+ * @param       {String}        [packagePath=__packageRootDir()]  The path to the package
  *
  * @todo      interface
  * @todo      doc
  * @todo      tests
  *
  * @example     js
- * import __renamePackage from '@coffeekraken/sugar/node/package/renamePackage';
+ * import { __renamePackage } from '@coffeekraken/sugar/package';
  * __renamePackage('my-new-package');
  *
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-export default function renamePackage(
+export default function __renamePackage(
     newName: string,
-    packagePath: string = __packageRoot(),
+    packagePath: string = __packageRootDir(),
 ): void {
     if (!newName.match(/^[a-zA-Z0-9\/\@_-]+$/)) {
         throw new Error(

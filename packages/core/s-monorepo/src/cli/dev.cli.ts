@@ -2,7 +2,7 @@
 import __SPromise from '@coffeekraken/s-promise';
 import __SMonorepoDevParamsInterface from '../node/interface/SMonorepoDevParamsInterface';
 import __SGlob from '@coffeekraken/s-glob';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import { __readJsonSync } from '@coffeekraken/sugar/fs';
 import __SMonorepo from '../node/SMonorepo';
 

@@ -1,9 +1,6 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const packageRoot_1 = __importDefault(require("@coffeekraken/sugar/node/path/packageRoot"));
+const path_1 = require("@coffeekraken/sugar/path");
 /**
  * @name            rootRelative
  * @namespace       node.helpers
@@ -21,7 +18,7 @@ const packageRoot_1 = __importDefault(require("@coffeekraken/sugar/node/path/pac
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 function rootRelative(path) {
-    return path.replace(`${(0, packageRoot_1.default)()}/`, '');
+    return path.replace(`${(0, path_1.__packageRootDir)()}/`, '');
 }
 exports.default = rootRelative;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsNEZBQXNFO0FBRXRFOzs7Ozs7Ozs7Ozs7Ozs7R0FlRztBQUNILFNBQXdCLFlBQVksQ0FBQyxJQUFZO0lBQzdDLE9BQU8sSUFBSSxDQUFDLE9BQU8sQ0FBQyxHQUFHLElBQUEscUJBQWEsR0FBRSxHQUFHLEVBQUUsRUFBRSxDQUFDLENBQUM7QUFDbkQsQ0FBQztBQUZELCtCQUVDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsbURBQTREO0FBRTVEOzs7Ozs7Ozs7Ozs7Ozs7R0FlRztBQUNILFNBQXdCLFlBQVksQ0FBQyxJQUFZO0lBQzdDLE9BQU8sSUFBSSxDQUFDLE9BQU8sQ0FBQyxHQUFHLElBQUEsdUJBQWdCLEdBQUUsR0FBRyxFQUFFLEVBQUUsQ0FBQyxDQUFDO0FBQ3RELENBQUM7QUFGRCwrQkFFQyJ9

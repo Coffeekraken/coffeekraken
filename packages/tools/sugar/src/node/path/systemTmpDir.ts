@@ -18,14 +18,13 @@ import __tmpDir from 'temp-dir';
  * @todo      tests
  *
  * @example             js
- * import systemTmpDir from '@coffeekraken/node/fs/systemTmpDir';
- * systemTmpDir(); // => '/private/var/folders/3x/jf5977fn79jbglr7rk0tq4d00000gn/T'
+ * import { __systemTmpDir } from '@coffeekraken/sugar/path';
+ * __systemTmpDir(); // => '/private/var/folders/3x/jf5977fn79jbglr7rk0tq4d00000gn/T'
  *
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export default function () {
-    const tmpDir = __tmpDir;
-    return tmpDir;
+export default function __systemTmpDir() {
+    return __tmpDir;
 }

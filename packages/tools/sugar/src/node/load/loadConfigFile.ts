@@ -1,7 +1,7 @@
 import __fs from 'fs';
 import __path from 'path';
 import __yaml from 'yaml';
-import __packageRoot from '../path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 
 /**
  * @name            loadConfigFile
@@ -42,7 +42,7 @@ export default async function __loadConfigFile(
     settings?: Partial<ILoadConfigFileSettings>,
 ): Promise<any> {
     const finalSettings: ILoadConfigFileSettings = {
-        rootDir: __packageRoot(),
+        rootDir: __packageRootDir(),
         throw: false,
         ...(settings ?? {}),
     };

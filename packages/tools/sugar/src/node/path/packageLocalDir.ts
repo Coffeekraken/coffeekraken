@@ -17,15 +17,12 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
  * @todo      tests
  *
  * @example             js
- * import packageLocalDir from '@coffeekraken/node/path/packageLocalDir';
- * packageLocalDir(); // => '/my/cool/path/.local'
+ * import { __packageLocalDir } from '@coffeekraken/sugar/path';
+ * __packageLocalDir(); // => '/my/cool/path/.local'
  *
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-const fn: IpackageLocalDir = function () {
-    const path = __SSugarConfig.get('storage.package.localDir');
-    // __fs.ensureDirSync(path);
-    return path;
-};
-export default fn;
+export default function __packageLocalDir() {
+    return __SSugarConfig.get('storage.package.localDir');
+}

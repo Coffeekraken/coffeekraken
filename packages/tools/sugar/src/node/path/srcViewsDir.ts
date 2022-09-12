@@ -18,8 +18,8 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
  * @todo      tests
  *
  * @example             js
- * import srcViewsDir from '@coffeekraken/node/fs/srcViewsDir';
- * srcViewsDir(); // => '/private/var/folders/3x/jf5977fn79jbglr7rk0tq4d00000gn/T'
+ * import { __srcViewsDir } from '@coffeekraken/sugar/path';
+ * __srcViewsDir(); // => '/private/var/folders/3x/jf5977fn79jbglr7rk0tq4d00000gn/T'
  *
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -31,14 +31,9 @@ export default interface ISrcViewsDir {
     (settings?: ISrcViewsDirSettings): string;
 }
 
-export default function (settings: ISrcViewsDirSettings = {}) {
+export default function __srcViewsDir(settings: ISrcViewsDirSettings = {}) {
     settings = {
         ...settings,
     };
-    const srcViewsDir = __SSugarConfig.get('storage.src.viewsDir');
-    if (srcViewsDir !== undefined) {
-        // __fs.ensureDirSync(srcViewsDir);
-        return srcViewsDir;
-    }
-    return undefined;
+    return __SSugarConfig.get('storage.src.viewsDir');
 }

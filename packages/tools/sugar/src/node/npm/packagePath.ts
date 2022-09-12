@@ -1,7 +1,7 @@
 import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __fs from 'fs';
 import __deepMerge from '../../shared/object/deepMerge';
-import __packageRoot from '../path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __globalNodeModulesPath from './globalNodeModulesPath';
 
 /**
@@ -45,7 +45,7 @@ export default function packagePath(
 
     let monoDir, globalDir;
 
-    monoDir = `${__packageRoot(process.cwd(), {
+    monoDir = `${__packageRootDir(process.cwd(), {
         highest: true,
     })}/node_modules`;
 

@@ -15,8 +15,8 @@ import {
     __writeFileSync,
     __writeJsonSync,
 } from '@coffeekraken/sugar/fs';
-import __packageCacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageCacheDir } from '@coffeekraken/sugar/path';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __formatDuration from '@coffeekraken/sugar/shared/time/formatDuration';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
@@ -264,7 +264,7 @@ export default class SStaticBuilder extends __SBuilder {
                     emit('log', {
                         type: __SLog.TYPE_INFO,
                         value: `<yellow>[build]</yellow> Scraping pages using the <cyan>${__path.relative(
-                            __packageRoot(),
+                            __packageRootDir(),
                             errorFilePath,
                         )}</cyan>...`,
                     });
@@ -272,7 +272,7 @@ export default class SStaticBuilder extends __SBuilder {
                     emit('log', {
                         type: __SLog.TYPE_INFO,
                         value: `<yellow>[build]</yellow> Scraping pages using the <cyan>${__path.relative(
-                            __packageRoot(),
+                            __packageRootDir(),
                             params.input,
                         )}</cyan>...`,
                     });
@@ -473,12 +473,12 @@ export default class SStaticBuilder extends __SBuilder {
                         emit('log', {
                             type: __SLog.TYPE_INFO,
                             value: `<yellow>[build]</yellow> - <cyan>${__path.relative(
-                                __packageRoot(),
+                                __packageRootDir(),
                                 assetObj.from,
                             )}${
                                 assetObj.glob ? `/${assetObj.glob}` : ''
                             }</cyan> to <magenta>${__path.relative(
-                                __packageRoot(),
+                                __packageRootDir(),
                                 assetObj.to,
                             )}</magenta>`,
                         });
@@ -497,10 +497,10 @@ export default class SStaticBuilder extends __SBuilder {
                             emit('log', {
                                 type: __SLog.TYPE_INFO,
                                 value: `<yellow>[assets]</yellow> Getting asset "<yellow>${__path.relative(
-                                    __packageRoot(),
+                                    __packageRootDir(),
                                     assetObj.from,
                                 )}</yellow>" to "<cyan>${__path.relative(
-                                    __packageRoot(),
+                                    __packageRootDir(),
                                     assetObj.to,
                                 )}</cyan>"`,
                             });

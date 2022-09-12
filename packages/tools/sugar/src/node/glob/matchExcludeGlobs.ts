@@ -1,11 +1,11 @@
 // @ts-nocheck
 
 import __minimatch from 'minimatch';
-import __excludeGlobs from './excludeGlobs';
+import __excludeGlobs from './excludedGlobs';
 
 /**
  * @name                    matchExcludeGlobs
- * @namespace            node.path
+ * @namespace            node.glob
  * @type                    Function
  * @platform        node
  * @status          beta
@@ -16,8 +16,8 @@ import __excludeGlobs from './excludeGlobs';
  * @return          {Boolean}                           true if the path match at least 1 exclude glob, false if not
  *
  * @example         js
- * import matchExcludeGlobs from '@coffeekraken/sugar/node/path/matchExcludeGlobs';
- * if (matchExcludeGlobs('something/cool.js')) {
+ * import { __matchExcludeGlobs } from '@coffeekraken/sugar/glob';
+ * if (__matchExcludeGlobs('something/cool.js')) {
  *      // ...
  * }
  *
@@ -25,8 +25,8 @@ import __excludeGlobs from './excludeGlobs';
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function matchExcludeGlobs(path: string): boolean {
-    const excludeGlobs = __excludeGlobs();
+export default function __matchExcludeGlobs(path: string): boolean {
+    const excludeGlobs = __excludedGlobs();
     for (let i = 0; i < excludeGlobs.length; i++) {
         if (__minimatch(excludeGlobs[i], path)) return true;
     }

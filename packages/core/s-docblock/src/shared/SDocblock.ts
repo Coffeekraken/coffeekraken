@@ -1,7 +1,7 @@
 import __SClass from '@coffeekraken/s-class';
 import __SPromise from '@coffeekraken/s-promise';
 import { __isPath } from '@coffeekraken/sugar/fs';
-import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
+import { __packageJsonSync } from '@coffeekraken/sugar/package';
 import __fs from 'fs';
 // import __markdown from './markdown/index';
 import __isNode from '@coffeekraken/sugar/shared/is/node';

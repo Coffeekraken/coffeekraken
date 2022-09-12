@@ -8,7 +8,7 @@ import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __resolvePackagePath } from '@coffeekraken/sugar/module';
 import { __writeFileSync } from '@coffeekraken/sugar/fs';
-import __packageJson from '@coffeekraken/sugar/node/package/jsonSync';
+import { __packageJsonSync } from '@coffeekraken/sugar/package';
 import __expandPleasantCssClassnames from '@coffeekraken/sugar/shared/html/expandPleasantCssClassnames';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import * as __csso from 'csso';
@@ -390,7 +390,7 @@ export default class SPostcssBuilder extends __SBuilder {
                         }
                     }
 
-                    const packageJson = __packageJson();
+                    const packageJson = __packageJsonSync();
                     if (packageJson.dependencies) {
                         for (let packageName of Object.keys(
                             packageJson.dependencies,

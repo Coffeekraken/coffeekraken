@@ -19,19 +19,13 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
  * @todo      tests
  *
  * @example             js
- * import packageTmpDir from '@coffeekraken/node/fs/packageTmpDir';
- * packageTmpDir(); // => '/private/var/folders/3x/jf5977fn79jbglr7rk0tq4d00000gn/T'
+ * import { __packageTmpDir } from '@coffeekraken/sugar/path';
+ * __packageTmpDir(); // => '/private/var/folders/3x/jf5977fn79jbglr7rk0tq4d00000gn/T'
  *
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function () {
-    const tmpDir = __SSugarConfig.get('storage.package.tmpDir');
-    if (tmpDir !== undefined) {
-        // __fs.ensureDirSync(tmpDir);
-        return tmpDir;
-    }
-    // __fs.ensureDirSync(__tmpDir);
-    return __tmpDir;
+export default function __packageTmpDir() {
+    return __SSugarConfig.get('storage.package.tmpDir');
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxPQUFPLGNBQWMsTUFBTSw4QkFBOEIsQ0FBQztBQUUxRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBRUgsTUFBTSxDQUFDLE9BQU87SUFDVixNQUFNLE1BQU0sR0FBRyxjQUFjLENBQUMsR0FBRyxDQUFDLHdCQUF3QixDQUFDLENBQUM7SUFDNUQsSUFBSSxNQUFNLEtBQUssU0FBUyxFQUFFO1FBQ3RCLDhCQUE4QjtRQUM5QixPQUFPLE1BQU0sQ0FBQztLQUNqQjtJQUNELGdDQUFnQztJQUNoQyxPQUFPLFFBQVEsQ0FBQztBQUNwQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxPQUFPLGNBQWMsTUFBTSw4QkFBOEIsQ0FBQztBQUUxRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBRUgsTUFBTSxDQUFDLE9BQU8sVUFBVSxlQUFlO0lBQ25DLE9BQU8sY0FBYyxDQUFDLEdBQUcsQ0FBQyx3QkFBd0IsQ0FBQyxDQUFDO0FBQ3hELENBQUMifQ==

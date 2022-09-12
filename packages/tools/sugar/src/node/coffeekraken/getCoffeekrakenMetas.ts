@@ -4,7 +4,7 @@ import __parseSemverString, {
     ISemverObject,
 } from '../../shared/semver/parseSemverString';
 import { __dirname, __readJsonSync } from '@coffeekraken/sugar/fs';
-import __packageRoot from '../path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 
 /**
  * @name            getCoffeekrakenMetas
@@ -32,7 +32,7 @@ export interface ICoffeekrakenMetas {
 
 export default function getCoffeekrakenMetas(): ICoffeekrakenMetas {
     const packageJsonPath = __path.resolve(
-        __packageRoot(__dirname()),
+        __packageRootDir(__dirname()),
         'package.json',
     );
     if (!__fs.existsSync(packageJsonPath)) {

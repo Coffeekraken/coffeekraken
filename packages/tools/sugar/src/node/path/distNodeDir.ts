@@ -18,8 +18,8 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
  * @todo      tests
  *
  * @example             js
- * import distNodeDir from '@coffeekraken/node/fs/distNodeDir';
- * distNodeDir(); // => '/private/var/folders/3x/jf5977fn79jbglr7rk0tq4d00000gn/T'
+ * import { __distNodeDir } from '@coffeekraken/sugar/path';
+ * __distNodeDir(); // => '/private/var/folders/3x/jf5977fn79jbglr7rk0tq4d00000gn/T'
  *
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -31,14 +31,9 @@ export default interface IDistNodeDir {
     (settings?: IDistNodeDirSettings): string;
 }
 
-export default function (settings: IDistNodeDirSettings = {}) {
+export default function __distNodeDir(settings: IDistNodeDirSettings = {}) {
     settings = {
         ...settings,
     };
-    const distNodeDir = __SSugarConfig.get('storage.dist.nodeDir');
-    if (distNodeDir !== undefined) {
-        // __fs.ensureDirSync(distNodeDir);
-        return distNodeDir;
-    }
-    return undefined;
+    return __SSugarConfig.get('storage.dist.nodeDir');
 }

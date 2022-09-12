@@ -4,12 +4,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = require("@coffeekraken/sugar/fs");
-const packageRoot_1 = __importDefault(require("@coffeekraken/sugar/node/path/packageRoot"));
-const path_1 = __importDefault(require("path"));
+const path_1 = require("@coffeekraken/sugar/path");
+const path_2 = __importDefault(require("path"));
 function default_1(api) {
     if (api.env.platform !== 'node')
         return;
-    const packageRoot = (0, packageRoot_1.default)((0, fs_1.__dirname)());
+    const packageRoot = (0, path_1.__packageRootDir)((0, fs_1.__dirname)());
     return {
         default: {
             /**
@@ -177,7 +177,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                preprocessor: path_1.default.resolve(packageRoot, 'dist/pkg/esm/node/transformers/og'),
+                preprocessor: path_2.default.resolve(packageRoot, 'dist/pkg/esm/node/transformers/og'),
                 /**
                  * @name            markdown
                  * @namespace       config.markdownBuilder.transformers.og
@@ -189,7 +189,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                markdown: path_1.default.resolve(packageRoot, 'src/transformers/og/og.md'),
+                markdown: path_2.default.resolve(packageRoot, 'src/transformers/og/og.md'),
                 /**
                  * @name            markdown
                  * @namespace       config.markdownBuilder.transformers.og
@@ -201,7 +201,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                html: path_1.default.resolve(packageRoot, 'src/transformers/og/og.html'),
+                html: path_2.default.resolve(packageRoot, 'src/transformers/og/og.html'),
             },
             code: {
                 /**
@@ -227,7 +227,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                markdown: path_1.default.resolve(packageRoot, 'src/transformers/code/code.md'),
+                markdown: path_2.default.resolve(packageRoot, 'src/transformers/code/code.md'),
                 /**
                  * @name            markdown
                  * @namespace       config.markdownBuilder.transformers.code
@@ -239,7 +239,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                html: path_1.default.resolve(packageRoot, 'src/transformers/code/code.html'),
+                html: path_2.default.resolve(packageRoot, 'src/transformers/code/code.html'),
             },
             absoluteLinks: {
                 /**
@@ -265,7 +265,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                markdown: path_1.default.resolve(packageRoot, 'src/transformers/absoluteLinks/absoluteLinks.md'),
+                markdown: path_2.default.resolve(packageRoot, 'src/transformers/absoluteLinks/absoluteLinks.md'),
                 /**
                  * @name            markdown
                  * @namespace       config.markdownBuilder.transformers.absoluteLinks
@@ -277,7 +277,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                html: path_1.default.resolve(packageRoot, 'src/transformers/absoluteLinks/absoluteLinks.html'),
+                html: path_2.default.resolve(packageRoot, 'src/transformers/absoluteLinks/absoluteLinks.html'),
             },
         },
         helpers: {},
@@ -294,7 +294,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                markdown: path_1.default.resolve(packageRoot, 'src/partials/license/license.md'),
+                markdown: path_2.default.resolve(packageRoot, 'src/partials/license/license.md'),
                 /**
                  * @name            markdown
                  * @namespace       config.markdownBuilder.partials.license
@@ -306,7 +306,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                html: path_1.default.resolve(packageRoot, 'src/partials/license/license.md'),
+                html: path_2.default.resolve(packageRoot, 'src/partials/license/license.md'),
             },
             'license-mit': {
                 /**
@@ -320,7 +320,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                markdown: path_1.default.resolve(packageRoot, 'src/partials/licenseMit/licenseMit.md'),
+                markdown: path_2.default.resolve(packageRoot, 'src/partials/licenseMit/licenseMit.md'),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.license-mit
@@ -332,7 +332,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                html: path_1.default.resolve(packageRoot, 'src/partials/licenseMit/licenseMit.md'),
+                html: path_2.default.resolve(packageRoot, 'src/partials/licenseMit/licenseMit.md'),
             },
             'license-gpl': {
                 /**
@@ -346,7 +346,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                markdown: path_1.default.resolve(packageRoot, 'src/partials/licenseGpl/licenseGpl.md'),
+                markdown: path_2.default.resolve(packageRoot, 'src/partials/licenseGpl/licenseGpl.md'),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.license-gpl
@@ -358,7 +358,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                html: path_1.default.resolve(packageRoot, 'src/partials/licenseGpl/licenseGpl.md'),
+                html: path_2.default.resolve(packageRoot, 'src/partials/licenseGpl/licenseGpl.md'),
             },
             'license-lgpl': {
                 /**
@@ -372,7 +372,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                markdown: path_1.default.resolve(packageRoot, 'src/partials/licenseLgpl/licenseLgpl.md'),
+                markdown: path_2.default.resolve(packageRoot, 'src/partials/licenseLgpl/licenseLgpl.md'),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.license-lgpl
@@ -384,7 +384,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                html: path_1.default.resolve(packageRoot, 'src/partials/licenseLgpl/licenseLgpl.md'),
+                html: path_2.default.resolve(packageRoot, 'src/partials/licenseLgpl/licenseLgpl.md'),
             },
             'license-epl-20': {
                 /**
@@ -398,7 +398,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                markdown: path_1.default.resolve(packageRoot, 'src/partials/licenseEpl20/licenseEpl20.md'),
+                markdown: path_2.default.resolve(packageRoot, 'src/partials/licenseEpl20/licenseEpl20.md'),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.license-epl-20
@@ -410,7 +410,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                html: path_1.default.resolve(packageRoot, 'src/partials/licenseEpl20/licenseEpl20.md'),
+                html: path_2.default.resolve(packageRoot, 'src/partials/licenseEpl20/licenseEpl20.md'),
             },
             'license-mpl-20': {
                 /**
@@ -424,7 +424,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                markdown: path_1.default.resolve(packageRoot, 'src/partials/licenseMpl20/licenseMpl20.md'),
+                markdown: path_2.default.resolve(packageRoot, 'src/partials/licenseMpl20/licenseMpl20.md'),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.license-mpl-20
@@ -436,7 +436,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                html: path_1.default.resolve(packageRoot, 'src/partials/licenseMpl20/licenseMpl20.md'),
+                html: path_2.default.resolve(packageRoot, 'src/partials/licenseMpl20/licenseMpl20.md'),
             },
             'license-cddl-10': {
                 /**
@@ -450,7 +450,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                markdown: path_1.default.resolve(packageRoot, 'src/partials/licenseCddl10/licenseCddl10.md'),
+                markdown: path_2.default.resolve(packageRoot, 'src/partials/licenseCddl10/licenseCddl10.md'),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.license-cddl-10
@@ -462,7 +462,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                html: path_1.default.resolve(packageRoot, 'src/partials/licenseCddl10/licenseCddl10.md'),
+                html: path_2.default.resolve(packageRoot, 'src/partials/licenseCddl10/licenseCddl10.md'),
             },
             'license-apache-20': {
                 /**
@@ -476,7 +476,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                markdown: path_1.default.resolve(packageRoot, 'src/partials/licenseApache20/licenseApache20.md'),
+                markdown: path_2.default.resolve(packageRoot, 'src/partials/licenseApache20/licenseApache20.md'),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.license-apache-20
@@ -488,7 +488,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                html: path_1.default.resolve(packageRoot, 'src/partials/licenseApache20/licenseApache20.md'),
+                html: path_2.default.resolve(packageRoot, 'src/partials/licenseApache20/licenseApache20.md'),
             },
             'license-bsd-2-clause': {
                 /**
@@ -502,7 +502,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                markdown: path_1.default.resolve(packageRoot, 'src/partials/licenseBsd2Clause/licenseBsd2Clause.md'),
+                markdown: path_2.default.resolve(packageRoot, 'src/partials/licenseBsd2Clause/licenseBsd2Clause.md'),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.license-bsd-2-clause
@@ -514,7 +514,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                html: path_1.default.resolve(packageRoot, 'src/partials/licenseBsd2Clause/licenseBsd2Clause.md'),
+                html: path_2.default.resolve(packageRoot, 'src/partials/licenseBsd2Clause/licenseBsd2Clause.md'),
             },
             'license-bsd-3-clause': {
                 /**
@@ -528,7 +528,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                markdown: path_1.default.resolve(packageRoot, 'src/partials/licenseBsd3Clause/licenseBsd3Clause.md'),
+                markdown: path_2.default.resolve(packageRoot, 'src/partials/licenseBsd3Clause/licenseBsd3Clause.md'),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.license-bsd-3-clause
@@ -540,7 +540,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                html: path_1.default.resolve(packageRoot, 'src/partials/licenseBsd3Clause/licenseBsd3Clause.md'),
+                html: path_2.default.resolve(packageRoot, 'src/partials/licenseBsd3Clause/licenseBsd3Clause.md'),
             },
             shields: {
                 /**
@@ -554,7 +554,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                markdown: path_1.default.resolve(packageRoot, 'src/partials/shields/shields.md'),
+                markdown: path_2.default.resolve(packageRoot, 'src/partials/shields/shields.md'),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.shields
@@ -566,7 +566,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                html: path_1.default.resolve(packageRoot, 'src/partials/shields/shields.md'),
+                html: path_2.default.resolve(packageRoot, 'src/partials/shields/shields.md'),
                 /**
                  * @name            data
                  * @namespace       config.markdownBuilder.partials.shields
@@ -594,7 +594,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                markdown: path_1.default.resolve(packageRoot, 'src/partials/interface/interface.md'),
+                markdown: path_2.default.resolve(packageRoot, 'src/partials/interface/interface.md'),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.interface
@@ -606,7 +606,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                html: path_1.default.resolve(packageRoot, 'src/partials/interface/interface.html'),
+                html: path_2.default.resolve(packageRoot, 'src/partials/interface/interface.html'),
             },
             configFiles: {
                 /**
@@ -620,7 +620,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                markdown: path_1.default.resolve(packageRoot, 'src/partials/configFiles/configFiles.md'),
+                markdown: path_2.default.resolve(packageRoot, 'src/partials/configFiles/configFiles.md'),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.configFiles
@@ -632,7 +632,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                html: path_1.default.resolve(packageRoot, 'src/partials/configFiles/configFiles.md'),
+                html: path_2.default.resolve(packageRoot, 'src/partials/configFiles/configFiles.md'),
             },
             config: {
                 /**
@@ -646,7 +646,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                markdown: path_1.default.resolve(packageRoot, 'src/partials/config/config.md'),
+                markdown: path_2.default.resolve(packageRoot, 'src/partials/config/config.md'),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.config
@@ -658,7 +658,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                html: path_1.default.resolve(packageRoot, 'src/partials/config/config.html'),
+                html: path_2.default.resolve(packageRoot, 'src/partials/config/config.html'),
             },
             recipesList: {
                 /**
@@ -672,7 +672,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                markdown: path_1.default.resolve(packageRoot, 'src/partials/recipesList/recipesList.md'),
+                markdown: path_2.default.resolve(packageRoot, 'src/partials/recipesList/recipesList.md'),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.recipesList
@@ -684,7 +684,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                html: path_1.default.resolve(packageRoot, 'src/partials/recipesList/recipesList.md'),
+                html: path_2.default.resolve(packageRoot, 'src/partials/recipesList/recipesList.md'),
             },
             recipe: {
                 /**
@@ -698,7 +698,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                markdown: path_1.default.resolve(packageRoot, 'src/partials/recipe/recipe.md'),
+                markdown: path_2.default.resolve(packageRoot, 'src/partials/recipe/recipe.md'),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.recipe
@@ -710,7 +710,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                html: path_1.default.resolve(packageRoot, 'src/partials/recipe/recipe.md'),
+                html: path_2.default.resolve(packageRoot, 'src/partials/recipe/recipe.md'),
             },
             docMenu: {
                 /**
@@ -724,7 +724,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                markdown: path_1.default.resolve(packageRoot, 'src/partials/docMenu/docMenu.md'),
+                markdown: path_2.default.resolve(packageRoot, 'src/partials/docMenu/docMenu.md'),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.partials.docMenu
@@ -736,7 +736,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                html: path_1.default.resolve(packageRoot, 'src/partials/docMenu/docMenu.md'),
+                html: path_2.default.resolve(packageRoot, 'src/partials/docMenu/docMenu.md'),
             },
         },
         layouts: {
@@ -752,7 +752,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                markdown: path_1.default.resolve(packageRoot, 'src/layouts/doc/docLayout.md'),
+                markdown: path_2.default.resolve(packageRoot, 'src/layouts/doc/docLayout.md'),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.layouts.doc
@@ -764,7 +764,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                html: path_1.default.resolve(packageRoot, 'src/layouts/doc/docLayout.md'),
+                html: path_2.default.resolve(packageRoot, 'src/layouts/doc/docLayout.md'),
                 /**
                  * @name            data
                  * @namespace       config.markdownBuilder.layouts.readme
@@ -790,7 +790,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                markdown: path_1.default.resolve(packageRoot, 'src/layouts/readme/readmeLayout.md'),
+                markdown: path_2.default.resolve(packageRoot, 'src/layouts/readme/readmeLayout.md'),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.layouts.readme
@@ -802,7 +802,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                html: path_1.default.resolve(packageRoot, 'src/layouts/readme/readmeLayout.md'),
+                html: path_2.default.resolve(packageRoot, 'src/layouts/readme/readmeLayout.md'),
                 /**
                  * @name            data
                  * @namespace       config.markdownBuilder.layouts.readme
@@ -830,7 +830,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                markdown: path_1.default.resolve(packageRoot, 'src/layouts/license/licenseLayout.md'),
+                markdown: path_2.default.resolve(packageRoot, 'src/layouts/license/licenseLayout.md'),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.layouts.license
@@ -842,7 +842,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                html: path_1.default.resolve(packageRoot, 'src/layouts/license/licenseLayout.md'),
+                html: path_2.default.resolve(packageRoot, 'src/layouts/license/licenseLayout.md'),
                 /**
                  * @name            markdown
                  * @namespace       config.markdownBuilder.layouts.license
@@ -872,7 +872,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                markdown: path_1.default.resolve(packageRoot, 'src/sections/readmeHeader/readmeHeaderSection.md'),
+                markdown: path_2.default.resolve(packageRoot, 'src/sections/readmeHeader/readmeHeaderSection.md'),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.sections.readme-header
@@ -884,7 +884,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                html: path_1.default.resolve(packageRoot, 'src/sections/readmeHeader/readmeHeaderSection.md'),
+                html: path_2.default.resolve(packageRoot, 'src/sections/readmeHeader/readmeHeaderSection.md'),
             },
             'doc-header': {
                 /**
@@ -898,7 +898,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                markdown: path_1.default.resolve(packageRoot, 'src/sections/docHeader/docHeaderSection.md'),
+                markdown: path_2.default.resolve(packageRoot, 'src/sections/docHeader/docHeaderSection.md'),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.sections.doc-header
@@ -910,7 +910,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                html: path_1.default.resolve(packageRoot, 'src/sections/docHeader/docHeaderSection.md'),
+                html: path_2.default.resolve(packageRoot, 'src/sections/docHeader/docHeaderSection.md'),
             },
             'doc-menu': {
                 /**
@@ -924,7 +924,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                markdown: path_1.default.resolve(packageRoot, 'src/sections/docMenu/docMenuSection.md'),
+                markdown: path_2.default.resolve(packageRoot, 'src/sections/docMenu/docMenuSection.md'),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.sections.doc-menu
@@ -936,7 +936,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                html: path_1.default.resolve(packageRoot, 'src/sections/docMenu/docMenuSection.md'),
+                html: path_2.default.resolve(packageRoot, 'src/sections/docMenu/docMenuSection.md'),
             },
             description: {
                 /**
@@ -950,7 +950,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                markdown: path_1.default.resolve(packageRoot, 'src/sections/description/descriptionSection.md'),
+                markdown: path_2.default.resolve(packageRoot, 'src/sections/description/descriptionSection.md'),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.sections.description
@@ -962,7 +962,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                html: path_1.default.resolve(packageRoot, 'src/sections/description/descriptionSection.md'),
+                html: path_2.default.resolve(packageRoot, 'src/sections/description/descriptionSection.md'),
             },
             install: {
                 /**
@@ -976,7 +976,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                markdown: path_1.default.resolve(packageRoot, 'src/sections/install/installSection.md'),
+                markdown: path_2.default.resolve(packageRoot, 'src/sections/install/installSection.md'),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.sections.install
@@ -988,7 +988,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                html: path_1.default.resolve(packageRoot, 'src/sections/install/installSection.md'),
+                html: path_2.default.resolve(packageRoot, 'src/sections/install/installSection.md'),
             },
             license: {
                 /**
@@ -1002,7 +1002,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                markdown: path_1.default.resolve(packageRoot, 'src/sections/license/licenseSection.md'),
+                markdown: path_2.default.resolve(packageRoot, 'src/sections/license/licenseSection.md'),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.sections.license
@@ -1014,7 +1014,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                html: path_1.default.resolve(packageRoot, 'src/sections/license/licenseSection.md'),
+                html: path_2.default.resolve(packageRoot, 'src/sections/license/licenseSection.md'),
             },
             contact: {
                 /**
@@ -1028,7 +1028,7 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                markdown: path_1.default.resolve(packageRoot, 'src/sections/contact/contactSection.md'),
+                markdown: path_2.default.resolve(packageRoot, 'src/sections/contact/contactSection.md'),
                 /**
                  * @name            html
                  * @namespace       config.markdownBuilder.sections.contact
@@ -1040,10 +1040,10 @@ function default_1(api) {
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                html: path_1.default.resolve(packageRoot, 'src/sections/contact/contactSection.md'),
+                html: path_2.default.resolve(packageRoot, 'src/sections/contact/contactSection.md'),
             },
         },
     };
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsK0NBQW1EO0FBQ25ELDRGQUFzRTtBQUN0RSxnREFBMEI7QUFFMUIsbUJBQXlCLEdBQUc7SUFDeEIsSUFBSSxHQUFHLENBQUMsR0FBRyxDQUFDLFFBQVEsS0FBSyxNQUFNO1FBQUUsT0FBTztJQUV4QyxNQUFNLFdBQVcsR0FBRyxJQUFBLHFCQUFhLEVBQUMsSUFBQSxjQUFTLEdBQUUsQ0FBQyxDQUFDO0lBRS9DLE9BQU87UUFDSCxPQUFPLEVBQUU7WUFDTDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLDJCQUEyQjtZQUVqQzs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxLQUFLO2dCQUNMLE9BQU8sR0FBRyxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDLE9BQU8sQ0FBQztZQUMxQyxDQUFDO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILE1BQU0sRUFBRSxJQUFJO1lBQ1o7Ozs7Ozs7Ozs7ZUFVRztZQUNILEtBQUssRUFBRSxJQUFJO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksTUFBTTtnQkFDTixPQUFPLEdBQUcsQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUM7WUFDM0MsQ0FBQztZQUVEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxPQUFPLEVBQUUsSUFBSTtZQUNiOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsSUFBSTtZQUNWOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsTUFBTSxFQUFFLFVBQVU7WUFDbEI7Ozs7Ozs7Ozs7ZUFVRztZQUNILGFBQWEsRUFBRSxDQUFDLFVBQVUsRUFBRSxNQUFNLENBQUM7U0FDdEM7UUFFRCxLQUFLLEVBQUU7WUFDSDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxVQUFVO2dCQUNWLE9BQU8sR0FBRyxDQUFDLE1BQU0sQ0FBQyxXQUFX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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsK0NBQW1EO0FBQ25ELG1EQUE0RDtBQUM1RCxnREFBMEI7QUFFMUIsbUJBQXlCLEdBQUc7SUFDeEIsSUFBSSxHQUFHLENBQUMsR0FBRyxDQUFDLFFBQVEsS0FBSyxNQUFNO1FBQUUsT0FBTztJQUV4QyxNQUFNLFdBQVcsR0FBRyxJQUFBLHVCQUFnQixFQUFDLElBQUEsY0FBUyxHQUFFLENBQUMsQ0FBQztJQUVsRCxPQUFPO1FBQ0gsT0FBTyxFQUFFO1lBQ0w7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSwyQkFBMkI7WUFFakM7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksS0FBSztnQkFDTCxPQUFPLEdBQUcsQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLEdBQUcsQ0FBQyxPQUFPLENBQUM7WUFDMUMsQ0FBQztZQUVEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxNQUFNLEVBQUUsSUFBSTtZQUNaOzs7Ozs7Ozs7O2VBVUc7WUFDSCxLQUFLLEVBQUUsSUFBSTtZQUNYOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLE1BQU07Z0JBQ04sT0FBTyxHQUFHLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDO1lBQzNDLENBQUM7WUFFRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFLElBQUk7WUFDYjs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLElBQUk7WUFDVjs7Ozs7Ozs7Ozs7ZUFXRztZQUNILE1BQU0sRUFBRSxVQUFVO1lBQ2xCOzs7Ozs7Ozs7O2VBVUc7WUFDSCxhQUFhLEVBQUUsQ0FBQyxVQUFVLEVBQUUsTUFBTSxDQUFDO1NBQ3RDO1FBRUQsS0FBSyxFQUFFO1lBQ0g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksVUFBVTtnQkFDVixPQUFPLEdBQUcsQ0FBQyxNQUFNLENBQUMsV0FB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

@@ -1,4 +1,4 @@
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 export default function (api) {
     if (api.env.platform !== 'node')
         return;
@@ -23,7 +23,7 @@ export default function (api) {
              * @name            context
              * @namespace       config.core.namespace
              * @type            String
-             * @default         __packageRoot()
+             * @default         __packageRootDir()
              *
              * Specify the context in which to generate the namespace.
              * The context is simply a root folder from which to search for the package.json
@@ -32,8 +32,8 @@ export default function (api) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            context: __packageRoot(),
+            context: __packageRootDir(),
         },
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sYUFBYSxNQUFNLDJDQUEyQyxDQUFDO0FBRXRFLE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRztJQUN4QixJQUFJLEdBQUcsQ0FBQyxHQUFHLENBQUMsUUFBUSxLQUFLLE1BQU07UUFBRSxPQUFPO0lBRXhDLE9BQU87UUFDSCxTQUFTLEVBQUU7WUFDUDs7Ozs7Ozs7Ozs7OztlQWFHO1lBQ0gsT0FBTyxFQUFFLFFBQVE7WUFFakI7Ozs7Ozs7Ozs7OztlQVlHO1lBQ0gsT0FBTyxFQUFFLGFBQWEsRUFBRTtTQUMzQjtLQUNKLENBQUM7QUFDTixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSxnQkFBZ0IsRUFBRSxNQUFNLDBCQUEwQixDQUFDO0FBRTVELE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRztJQUN4QixJQUFJLEdBQUcsQ0FBQyxHQUFHLENBQUMsUUFBUSxLQUFLLE1BQU07UUFBRSxPQUFPO0lBRXhDLE9BQU87UUFDSCxTQUFTLEVBQUU7WUFDUDs7Ozs7Ozs7Ozs7OztlQWFHO1lBQ0gsT0FBTyxFQUFFLFFBQVE7WUFFakI7Ozs7Ozs7Ozs7OztlQVlHO1lBQ0gsT0FBTyxFQUFFLGdCQUFnQixFQUFFO1NBQzlCO0tBQ0osQ0FBQztBQUNOLENBQUMifQ==

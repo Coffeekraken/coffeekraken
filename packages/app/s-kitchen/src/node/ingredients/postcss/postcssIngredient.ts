@@ -1,6 +1,6 @@
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __npmInstall from '@coffeekraken/sugar/node/npm/install';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __fs from 'fs';
 import type { ISKitchenIngredient } from '../../SKitchen';
@@ -29,9 +29,9 @@ const postcssIngredient: ISKitchenIngredient = {
         'Add support for <yellow>postcss</yellow> and the <yellow>@coffeekraken/s-postcss-sugar-plugin</yellow> into your project',
     projectTypes: ['unknown', 'sugar', 'next'],
     async add({ ask, log, emit, pipe, context }) {
-        const packageRoot = __packageRoot();
+        const packageRoot = __packageRootDir();
 
-        const sKitchenPackageRoot = __packageRoot(__dirname());
+        const sKitchenPackageRoot = __packageRootDir(__dirname());
         const sKitchenPackageJson = __readJsonSync(
             `${sKitchenPackageRoot}/package.json`,
         );
@@ -135,7 +135,7 @@ const postcssIngredient: ISKitchenIngredient = {
                 __fs.writeFileSync(configFilePath, jsonStr);
                 break;
         }
-        const thisPackageRoot = __packageRoot(__dirname());
+        const thisPackageRoot = __packageRootDir(__dirname());
         const globalCssToAdd = __fs
             .readFileSync(`${thisPackageRoot}/src/data/postcss/index.css`)
             .toString();

@@ -1,6 +1,6 @@
 import __SLog from '@coffeekraken/s-log';
 import __packagePath from '@coffeekraken/sugar/node/npm/packagePath';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
 import type { ISKitchenIngredient } from '../../SKitchen';
 
@@ -20,7 +20,7 @@ const nvmrcIngredient: ISKitchenIngredient = {
     description: 'Add the default <cyan>.nvmrc</cyan> file into your project',
     projectTypes: ['unknown', 'sugar', 'next'],
     async add({ ask, log, emit }) {
-        const packageRoot = __packageRoot();
+        const packageRoot = __packageRootDir();
 
         const cliPackagePath = __packagePath('@coffeekraken/cli');
         if (!cliPackagePath) return false;

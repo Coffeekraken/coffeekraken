@@ -21,15 +21,14 @@ const temp_dir_1 = __importDefault(require("temp-dir"));
  * @todo      tests
  *
  * @example             js
- * import systemTmpDir from '@coffeekraken/node/fs/systemTmpDir';
- * systemTmpDir(); // => '/private/var/folders/3x/jf5977fn79jbglr7rk0tq4d00000gn/T'
+ * import { __systemTmpDir } from '@coffeekraken/sugar/path';
+ * __systemTmpDir(); // => '/private/var/folders/3x/jf5977fn79jbglr7rk0tq4d00000gn/T'
  *
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function default_1() {
-    const tmpDir = temp_dir_1.default;
-    return tmpDir;
+function __systemTmpDir() {
+    return temp_dir_1.default;
 }
-exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUFnQztBQUVoQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBRUg7SUFDSSxNQUFNLE1BQU0sR0FBRyxrQkFBUSxDQUFDO0lBQ3hCLE9BQU8sTUFBTSxDQUFDO0FBQ2xCLENBQUM7QUFIRCw0QkFHQyJ9
+exports.default = __systemTmpDir;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUFnQztBQUVoQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBRUgsU0FBd0IsY0FBYztJQUNsQyxPQUFPLGtCQUFRLENBQUM7QUFDcEIsQ0FBQztBQUZELGlDQUVDIn0=

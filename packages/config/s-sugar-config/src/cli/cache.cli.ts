@@ -1,7 +1,7 @@
 // @ts-nocheck
 import __SPromise from '@coffeekraken/s-promise';
 import __SCliConfigCacheParamsInterface from './interface/SCliConfigCacheParamsInterface';
-import __packageCacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
+import { __packageCacheDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 

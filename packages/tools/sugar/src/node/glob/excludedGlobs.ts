@@ -3,8 +3,8 @@
 import __SugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
- * @name                            excludeGlobs
- * @namespace            node.path
+ * @name                            excludedGlobs
+ * @namespace            node.glob
  * @type                            Function
  * @platform        node
  * @status          beta
@@ -18,14 +18,14 @@ import __SugarConfig from '@coffeekraken/s-sugar-config';
  * @todo      tests
  *
  * @example             js
- * import excludeGlobs from '@coffeekraken/node/fs/excludeGlobs';
- * excludeGlobs();
+ * import { __excludedGlobs } from '@coffeekraken/sugar/glob';
+ * __excludedGlobs();
  *
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export default function (): string[] {
+export default function __excludedGlobs(): string[] {
     if (__SugarConfig.isLoaded()) {
         return __SugarConfig.get('storage.exclude');
     }

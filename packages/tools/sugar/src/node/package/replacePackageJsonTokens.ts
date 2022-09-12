@@ -1,4 +1,4 @@
-import __packageJson from './jsonSync';
+import __packageJsonSync from './packageJsonSync';
 import __flatten from '../../shared/object/flatten';
 
 /**
@@ -16,14 +16,14 @@ import __flatten from '../../shared/object/flatten';
  * @return      {String}                                        The resulting string
  *
  * @example         js
- * import replacePackageJsonTokens from '@coffeekraken/sugar/node/path/replacePackageJsonTokens';
- * replacePackageJsonTokens('Hello %packageJson.name'); // => Hello @coffeekraken/sugar
+ * import { __replacePackageJsonTokens } from '@coffeekraken/sugar/package';
+ * __replacePackageJsonTokens('Hello %packageJson.name'); // => Hello @coffeekraken/sugar
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export interface IReplacePackageJsonTokensSettings {}
-export default function replacePackageJsonTokens(
+export default function __replacePackageJsonTokens(
     string: string,
     settings?: Partial<IReplacePackageJsonTokensSettings>,
 ): string {
@@ -36,7 +36,7 @@ export default function replacePackageJsonTokens(
 
     if (!tokensMatches) return string;
 
-    const packageJson = __packageJson();
+    const packageJson = __packageJsonSync();
     const flatPackageJson = __flatten(packageJson, {
         array: true,
     });

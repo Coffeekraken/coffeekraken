@@ -6,7 +6,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = require("@coffeekraken/sugar/fs");
 const fs_2 = __importDefault(require("fs"));
-const packageRoot_1 = __importDefault(require("../path/packageRoot"));
+const path_1 = require("@coffeekraken/sugar/path");
 /**
  * @name          renamePackage
  * @namespace            node.package
@@ -18,20 +18,20 @@ const packageRoot_1 = __importDefault(require("../path/packageRoot"));
  * - Rename the package.json "name" property
  *
  * @param      {String}           newName               The new name for your package
- * @param       {String}        [packagePath=__packageRoot()]  The path to the package
+ * @param       {String}        [packagePath=__packageRootDir()]  The path to the package
  *
  * @todo      interface
  * @todo      doc
  * @todo      tests
  *
  * @example     js
- * import __renamePackage from '@coffeekraken/sugar/node/package/renamePackage';
+ * import { __renamePackage } from '@coffeekraken/sugar/package';
  * __renamePackage('my-new-package');
  *
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-function renamePackage(newName, packagePath = (0, packageRoot_1.default)()) {
+function __renamePackage(newName, packagePath = (0, path_1.__packageRootDir)()) {
     if (!newName.match(/^[a-zA-Z0-9\/\@_-]+$/)) {
         throw new Error(`The passed name "<yellow>${newName}</yellow>" is not a valid package name. It has to follow this pattern: <cyan>/^[a-zA-Z0-9\/\@_-]+$/</cyan>`);
     }
@@ -43,5 +43,5 @@ function renamePackage(newName, packagePath = (0, packageRoot_1.default)()) {
     json.name = newName;
     (0, fs_1.__writeJsonSync)(packageJsonPath, json);
 }
-exports.default = renamePackage;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLCtDQUF5RTtBQUN6RSw0Q0FBc0I7QUFDdEIsc0VBQWdEO0FBRWhEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILFNBQXdCLGFBQWEsQ0FDakMsT0FBZSxFQUNmLGNBQXNCLElBQUEscUJBQWEsR0FBRTtJQUVyQyxJQUFJLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxzQkFBc0IsQ0FBQyxFQUFFO1FBQ3hDLE1BQU0sSUFBSSxLQUFLLENBQ1gsNEJBQTRCLE9BQU8sNEdBQTRHLENBQ2xKLENBQUM7S0FDTDtJQUNELE1BQU0sZUFBZSxHQUFHLEdBQUcsV0FBVyxlQUFlLENBQUM7SUFDdEQsSUFBSSxDQUFDLFlBQUksQ0FBQyxVQUFVLENBQUMsZUFBZSxDQUFDLEVBQUU7UUFDbkMsTUFBTSxJQUFJLEtBQUssQ0FDWCxnREFBZ0QsZUFBZSxFQUFFLENBQ3BFLENBQUM7S0FDTDtJQUNELE1BQU0sSUFBSSxHQUFHLElBQUEsbUJBQWMsRUFBQyxlQUFlLENBQUMsQ0FBQztJQUM3QyxJQUFJLENBQUMsSUFBSSxHQUFHLE9BQU8sQ0FBQztJQUNwQixJQUFBLG9CQUFlLEVBQUMsZUFBZSxFQUFFLElBQUksQ0FBQyxDQUFDO0FBQzNDLENBQUM7QUFsQkQsZ0NBa0JDIn0=
+exports.default = __renamePackage;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLCtDQUF5RTtBQUN6RSw0Q0FBc0I7QUFDdEIsbURBQTREO0FBRTVEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILFNBQXdCLGVBQWUsQ0FDbkMsT0FBZSxFQUNmLGNBQXNCLElBQUEsdUJBQWdCLEdBQUU7SUFFeEMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsc0JBQXNCLENBQUMsRUFBRTtRQUN4QyxNQUFNLElBQUksS0FBSyxDQUNYLDRCQUE0QixPQUFPLDRHQUE0RyxDQUNsSixDQUFDO0tBQ0w7SUFDRCxNQUFNLGVBQWUsR0FBRyxHQUFHLFdBQVcsZUFBZSxDQUFDO0lBQ3RELElBQUksQ0FBQyxZQUFJLENBQUMsVUFBVSxDQUFDLGVBQWUsQ0FBQyxFQUFFO1FBQ25DLE1BQU0sSUFBSSxLQUFLLENBQ1gsZ0RBQWdELGVBQWUsRUFBRSxDQUNwRSxDQUFDO0tBQ0w7SUFDRCxNQUFNLElBQUksR0FBRyxJQUFBLG1CQUFjLEVBQUMsZUFBZSxDQUFDLENBQUM7SUFDN0MsSUFBSSxDQUFDLElBQUksR0FBRyxPQUFPLENBQUM7SUFDcEIsSUFBQSxvQkFBZSxFQUFDLGVBQWUsRUFBRSxJQUFJLENBQUMsQ0FBQztBQUMzQyxDQUFDO0FBbEJELGtDQWtCQyJ9

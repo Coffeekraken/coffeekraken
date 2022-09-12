@@ -7,7 +7,7 @@ import __SConfigFolderAdapter from '@coffeekraken/s-config-folder-adapter';
 import __SDocblock from '@coffeekraken/s-docblock';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 import { __dirname } from '@coffeekraken/sugar/fs';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __objectHash from '@coffeekraken/sugar/shared/object/objectHash';
 import __replaceTokens from '@coffeekraken/sugar/shared/token/replaceTokens';
@@ -453,7 +453,7 @@ export default class SSugarConfig extends __SClass {
         const sugarJson = new __SSugarJson();
 
         if (!this._rootSugarJson) {
-            const rootSugarJsonPath = `${__packageRoot()}/sugar.json`;
+            const rootSugarJsonPath = `${__packageRootDir()}/sugar.json`;
             if (__fs.existsSync(rootSugarJsonPath)) {
                 const json = await import(rootSugarJsonPath, {
                     assert: { type: 'json' },
@@ -675,7 +675,7 @@ export default class SSugarConfig extends __SClass {
                         .map((obj) => obj.path),
                 ],
                 repo: [
-                    `${__packageRoot(process.cwd(), {
+                    `${__packageRootDir(process.cwd(), {
                         highest: true,
                     })}/%folderName`,
                     // @ts-ignore
@@ -684,14 +684,14 @@ export default class SSugarConfig extends __SClass {
                         .map((obj) => obj.path),
                 ],
                 package: [
-                    `${__packageRoot(process.cwd())}/%folderName`,
+                    `${__packageRootDir(process.cwd())}/%folderName`,
                     // @ts-ignore
                     ...this.constructor._registeredConfigFolderPaths
                         .filter((obj) => obj.scope === 'package')
                         .map((obj) => obj.path),
                 ],
                 user: [
-                    `${__packageRoot(process.cwd())}/.local/%folderName`,
+                    `${__packageRootDir(process.cwd())}/.local/%folderName`,
                     // @ts-ignore
                     ...this.constructor._registeredConfigFolderPaths
                         .filter((obj) => obj.scope === 'user')

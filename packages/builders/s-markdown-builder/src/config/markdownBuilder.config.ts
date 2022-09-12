@@ -1,11 +1,11 @@
 import { __dirname } from '@coffeekraken/sugar/fs';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __path from 'path';
 
 export default function (api) {
     if (api.env.platform !== 'node') return;
 
-    const packageRoot = __packageRoot(__dirname());
+    const packageRoot = __packageRootDir(__dirname());
 
     return {
         default: {

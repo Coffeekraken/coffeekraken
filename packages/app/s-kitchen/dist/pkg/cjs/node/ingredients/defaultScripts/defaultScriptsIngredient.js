@@ -14,8 +14,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const s_sugar_config_1 = __importDefault(require("@coffeekraken/s-sugar-config"));
 const fs_1 = require("@coffeekraken/sugar/fs");
-const packageRoot_1 = __importDefault(require("@coffeekraken/sugar/node/path/packageRoot"));
-const path_1 = __importDefault(require("path"));
+const path_1 = require("@coffeekraken/sugar/path");
+const path_2 = __importDefault(require("path"));
 const recursive_copy_1 = __importDefault(require("recursive-copy"));
 /**
  * @name        defaultScriptsIngredient
@@ -35,7 +35,7 @@ const defaultScriptsIngredient = {
     add({ ask, log, emit, context }) {
         return __awaiter(this, void 0, void 0, function* () {
             // source file path
-            const sourceFilePath = path_1.default.resolve((0, packageRoot_1.default)((0, fs_1.__dirname)()), `src/data/defaultScripts`);
+            const sourceFilePath = path_2.default.resolve((0, path_1.__packageRootDir)((0, fs_1.__dirname)()), `src/data/defaultScripts`);
             if (!context.new &&
                 !(yield ask({
                     type: 'confirm',
@@ -54,4 +54,4 @@ const defaultScriptsIngredient = {
     },
 };
 exports.default = defaultScriptsIngredient;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsa0ZBQTBEO0FBQzFELCtDQUFtRDtBQUNuRCw0RkFBc0U7QUFDdEUsZ0RBQTBCO0FBQzFCLG9FQUE2QztBQUc3Qzs7Ozs7Ozs7OztHQVVHO0FBQ0gsTUFBTSx3QkFBd0IsR0FBd0I7SUFDbEQsRUFBRSxFQUFFLGdCQUFnQjtJQUNwQixXQUFXLEVBQ1AsdUZBQXVGO0lBQzNGLFlBQVksRUFBRSxDQUFDLE9BQU8sRUFBRSxTQUFTLENBQUM7SUFDNUIsR0FBRyxDQUFDLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxJQUFJLEVBQUUsT0FBTyxFQUFFOztZQUNqQyxtQkFBbUI7WUFDbkIsTUFBTSxjQUFjLEdBQUcsY0FBTSxDQUFDLE9BQU8sQ0FDakMsSUFBQSxxQkFBYSxFQUFDLElBQUEsY0FBUyxHQUFFLENBQUMsRUFDMUIseUJBQXlCLENBQzVCLENBQUM7WUFFRixJQUNJLENBQUMsT0FBTyxDQUFDLEdBQUc7Z0JBQ1osQ0FBQyxDQUFDLE1BQU0sR0FBRyxDQUFDO29CQUNSLElBQUksRUFBRSxTQUFTO29CQUNmLE9BQU8sRUFDSCxxR0FBcUc7b0JBQ3pHLE9BQU8sRUFBRSxJQUFJO2lCQUNoQixDQUFDLENBQUMsRUFDTDtnQkFDRSxPQUFPLEtBQUssQ0FBQzthQUNoQjtZQUVELDJCQUEyQjtZQUMzQixNQUFNLEtBQUssR0FBRyx3QkFBYyxDQUFDLEdBQUcsQ0FBQyxtQkFBbUIsQ0FBQyxDQUFDO1lBRXRELE1BQU0sSUFBQSx3QkFBZSxFQUFDLGNBQWMsRUFBRSxLQUFLLEVBQUU7Z0JBQ3pDLFNBQVMsRUFBRSxJQUFJO2FBQ2xCLENBQUMsQ0FBQztZQUVILE9BQU8sSUFBSSxDQUFDO1FBQ2hCLENBQUM7S0FBQTtDQUNKLENBQUM7QUFDRixrQkFBZSx3QkFBd0IsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsa0ZBQTBEO0FBQzFELCtDQUFtRDtBQUNuRCxtREFBNEQ7QUFDNUQsZ0RBQTBCO0FBQzFCLG9FQUE2QztBQUc3Qzs7Ozs7Ozs7OztHQVVHO0FBQ0gsTUFBTSx3QkFBd0IsR0FBd0I7SUFDbEQsRUFBRSxFQUFFLGdCQUFnQjtJQUNwQixXQUFXLEVBQ1AsdUZBQXVGO0lBQzNGLFlBQVksRUFBRSxDQUFDLE9BQU8sRUFBRSxTQUFTLENBQUM7SUFDNUIsR0FBRyxDQUFDLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxJQUFJLEVBQUUsT0FBTyxFQUFFOztZQUNqQyxtQkFBbUI7WUFDbkIsTUFBTSxjQUFjLEdBQUcsY0FBTSxDQUFDLE9BQU8sQ0FDakMsSUFBQSx1QkFBZ0IsRUFBQyxJQUFBLGNBQVMsR0FBRSxDQUFDLEVBQzdCLHlCQUF5QixDQUM1QixDQUFDO1lBRUYsSUFDSSxDQUFDLE9BQU8sQ0FBQyxHQUFHO2dCQUNaLENBQUMsQ0FBQyxNQUFNLEdBQUcsQ0FBQztvQkFDUixJQUFJLEVBQUUsU0FBUztvQkFDZixPQUFPLEVBQ0gscUdBQXFHO29CQUN6RyxPQUFPLEVBQUUsSUFBSTtpQkFDaEIsQ0FBQyxDQUFDLEVBQ0w7Z0JBQ0UsT0FBTyxLQUFLLENBQUM7YUFDaEI7WUFFRCwyQkFBMkI7WUFDM0IsTUFBTSxLQUFLLEdBQUcsd0JBQWMsQ0FBQyxHQUFHLENBQUMsbUJBQW1CLENBQUMsQ0FBQztZQUV0RCxNQUFNLElBQUEsd0JBQWUsRUFBQyxjQUFjLEVBQUUsS0FBSyxFQUFFO2dCQUN6QyxTQUFTLEVBQUUsSUFBSTthQUNsQixDQUFDLENBQUM7WUFFSCxPQUFPLElBQUksQ0FBQztRQUNoQixDQUFDO0tBQUE7Q0FDSixDQUFDO0FBQ0Ysa0JBQWUsd0JBQXdCLENBQUMifQ==

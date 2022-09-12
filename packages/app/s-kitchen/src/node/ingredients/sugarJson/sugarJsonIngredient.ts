@@ -1,6 +1,6 @@
 import __SLog from '@coffeekraken/s-log';
 import { __readJsonSync, __writeJsonSync } from '@coffeekraken/sugar/fs';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
 import type { ISKitchenIngredient } from '../../SKitchen';
 
@@ -20,7 +20,7 @@ const sugarJsonIngredient: ISKitchenIngredient = {
     description: 'Add the default <cyan>sugar.json</cyan> in your project',
     projectTypes: ['*'],
     async add({ ask, log, emit, context }) {
-        const packageRoot = __packageRoot();
+        const packageRoot = __packageRootDir();
 
         if (__fs.existsSync(`${packageRoot}/sugar.json`)) {
             const json = __readJsonSync(`${packageRoot}/sugar.json`);

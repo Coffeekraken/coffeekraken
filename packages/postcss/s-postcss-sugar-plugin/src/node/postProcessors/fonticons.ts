@@ -6,9 +6,9 @@ import {
     __folderHash,
     __writeFileSync,
 } from '@coffeekraken/sugar/fs';
-import __packageCacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
-import __srcCssDir from '@coffeekraken/sugar/node/path/srcCssDir';
+import { __packageCacheDir } from '@coffeekraken/sugar/path';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
+import { __srcCssDir } from '@coffeekraken/sugar/path';
 import { generateFonts } from 'fantasticon';
 import __fs from 'fs';
 import __svgFixer from 'oslllo-svg-fixer';
@@ -99,7 +99,7 @@ export default async function ({ root, sharedData, settings }) {
         inputDir,
         outputDir: fantasticonConfig.outputDir,
         fontsUrl: `/${__path.relative(
-            __packageRoot(),
+            __packageRootDir(),
             fantasticonConfig.serveFontsDir,
         )}`,
         name: fantasticonConfig.name,

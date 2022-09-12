@@ -1,6 +1,6 @@
 import __sharedReplaceTokens from '../../shared/token/replaceTokens';
-import __replacePackageJsonTokens from '../package/replacePackageJsonTokens';
-import __replacePathTokens from '../path/replacePathTokens';
+import { __replacePackageJsonTokens } from '@coffeekraken/sugar/package';
+import { __replacePathTokens } from '@coffeekraken/sugar/path';
 
 /**
  * @name            replaceTokens

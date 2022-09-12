@@ -5,7 +5,7 @@ import __replaceTokens from '../../shared/token/replaceTokens';
 import __parseTypeString, {
     ITypeStringObject,
 } from '../../shared/type/parseTypeString';
-import __packageRoot from '../path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 
 /**
  * @name            resolveTypeString
@@ -71,7 +71,7 @@ export default async function resolveTypeString(
             potentialTypeFilePath = __path.resolve(finalSettings.cwd, path);
         } else {
             potentialTypeFilePath = __path.resolve(
-                __packageRoot(finalSettings.cwd),
+                __packageRootDir(finalSettings.cwd),
                 path,
             );
         }

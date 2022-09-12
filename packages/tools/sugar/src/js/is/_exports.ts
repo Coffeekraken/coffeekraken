@@ -10,6 +10,8 @@ import __isSamsungBrowser from './isSamsungBrowser';
 import __isTablet from './isTablet';
 import __isUcBrowser from './isUcBrowser';
 
+export * from '../../shared/is/_exports';
+
 export {
     __isChrome,
     __isEdge,

@@ -1,5 +1,5 @@
 import { __dirname } from '@coffeekraken/sugar/fs';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 
 export default function (api) {
     if (api.env.platform !== 'node') return;
@@ -12,21 +12,23 @@ export default function (api) {
          *
          * Map some SFile classes path using minimatch patterns like so:
          * {
-         *   '*.scss,*.sass': `${__packageRoot(__dirname)}/src/node/scss/SScssFile`
+         *   '*.scss,*.sass': `${__packageRootDir(__dirname)}/src/node/scss/SScssFile`
          * }
          *
          * @since           2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         classesMap: {
-            'tsconfig.*': `${__packageRoot(
+            'tsconfig.*': `${__packageRootDir(
                 __dirname(),
             )}/src/node/ts/STsconfigFile`,
-            '*.js,*.jsx': `${__packageRoot(__dirname())}/src/node/js/SJsFile`,
-            '*.ts,*.tsx': `${__packageRoot(
+            '*.js,*.jsx': `${__packageRootDir(
+                __dirname(),
+            )}/src/node/js/SJsFile`,
+            '*.ts,*.tsx': `${__packageRootDir(
                 __dirname(),
             )}/src/node/typescript/STsFile`,
-            '*.scss,*.sass': `${__packageRoot(
+            '*.scss,*.sass': `${__packageRootDir(
                 __dirname(),
             )}/src/node/scss/SScssFile`,
         },

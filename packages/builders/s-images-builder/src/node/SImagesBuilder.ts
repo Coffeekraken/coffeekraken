@@ -12,7 +12,7 @@ import {
     __folderPath,
     __removeSync,
 } from '@coffeekraken/sugar/fs';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
 import __imageSize from 'image-size';
@@ -282,10 +282,10 @@ export default class SImagesBuilder extends __SBuilder {
                                 : true,
                             type: __SLog.TYPE_INFO,
                             value: `<cyan>[copy]</cyan> Copying file "<cyan>${__path.relative(
-                                __packageRoot(),
+                                __packageRootDir(),
                                 file.path,
                             )}</cyan>" under "<magenta>${__path.relative(
-                                __packageRoot(),
+                                __packageRootDir(),
                                 outPath,
                             )}</magenta>"`,
                         });
@@ -305,10 +305,10 @@ export default class SImagesBuilder extends __SBuilder {
                                 : true,
                             type: __SLog.TYPE_INFO,
                             value: `<green>[copy]</green> File "<cyan>${__path.relative(
-                                __packageRoot(),
+                                __packageRootDir(),
                                 file.path,
                             )}</cyan>" copied <green>successfully</green> under "<magenta>${__path.relative(
-                                __packageRoot(),
+                                __packageRootDir(),
                                 outPath,
                             )}</magenta>" in <yellow>${
                                 duration.end().formatedDuration
@@ -414,10 +414,10 @@ export default class SImagesBuilder extends __SBuilder {
                                 type: __SLog.TYPE_INFO,
                                 // @ts-ignore
                                 value: `<yellow>[compress]</yellow> Compressing file "<cyan>${__path.relative(
-                                    __packageRoot(),
+                                    __packageRootDir(),
                                     file.path,
                                 )}</cyan>" under "<magenta>${__path.relative(
-                                    __packageRoot(),
+                                    __packageRootDir(),
                                     imgObj.outPath,
                                 )}</magenta>" ${
                                     imgParams.specific
@@ -453,10 +453,10 @@ export default class SImagesBuilder extends __SBuilder {
                                     : true,
                                 type: __SLog.TYPE_INFO,
                                 value: `<green>[compress]</green> File "<cyan>${__path.relative(
-                                    __packageRoot(),
+                                    __packageRootDir(),
                                     file.path,
                                 )}</cyan>" compressed <green>successfully</green> under "<magenta>${__path.relative(
-                                    __packageRoot(),
+                                    __packageRootDir(),
                                     imgObj.outPath,
                                 )}</magenta>" in <yellow>${
                                     duration.end().formatedDuration
@@ -474,7 +474,7 @@ export default class SImagesBuilder extends __SBuilder {
                                 emit('log', {
                                     type: __SLog.TYPE_VERBOSER,
                                     value: `<yellow>[webp]</yellow> Generatating webp version of file "<cyan>${__path.relative(
-                                        __packageRoot(),
+                                        __packageRootDir(),
                                         imgObj.outPath,
                                     )}</cyan>"`,
                                 });
@@ -492,7 +492,7 @@ export default class SImagesBuilder extends __SBuilder {
                                 emit('log', {
                                     type: __SLog.TYPE_VERBOSER,
                                     value: `<green>[webp]</green> Webp generation of file "<cyan>${__path.relative(
-                                        __packageRoot(),
+                                        __packageRootDir(),
                                         imgObj.outPath,
                                     )}</cyan>" finished <green>successfully</green> in <yellow>${
                                         webpDuration.end().formatedDuration

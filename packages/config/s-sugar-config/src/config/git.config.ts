@@ -1,4 +1,4 @@
-import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
+import { __packageJsonSync } from '@coffeekraken/sugar/package';
 import __childProcess from 'child_process';
 
 export function postprocess(api) {

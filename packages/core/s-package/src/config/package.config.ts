@@ -1,5 +1,5 @@
 import { __dirname } from '@coffeekraken/sugar/fs';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
 
 export default function (api) {
@@ -74,7 +74,7 @@ export default function (api) {
                     const json = JSON.parse(
                         __fs
                             .readFileSync(
-                                `${__packageRoot(__dirname())}/package.json`,
+                                `${__packageRootDir(__dirname())}/package.json`,
                             )
                             .toString(),
                     );

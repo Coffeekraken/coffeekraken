@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const deepMap_1 = __importDefault(require("../../shared/object/deepMap"));
-const packageRoot_1 = __importDefault(require("../path/packageRoot"));
+const path_1 = require("@coffeekraken/sugar/path");
 const monorepo_1 = require("@coffeekraken/sugar/monorepo");
 /**
  * @name            monorepoToPackageAbsolutePathDeepMap
@@ -16,13 +16,13 @@ const monorepo_1 = require("@coffeekraken/sugar/monorepo");
  * absolute to the package root path.
  *
  * @param      {Object}           obj      The object in which to make all the paths absolute to the current package root path
- * @param       {String}           [packageRootPath=__packageRoot()]  The package root path
+ * @param       {String}           [packageRootPath=__packageRootDir()]  The package root path
  * @return     {Object}}       The absolute path object to the passed package root path
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function __monorepoToPackageAbsolutePathDeepMap(obj, packageRootPath = (0, packageRoot_1.default)()) {
+function __monorepoToPackageAbsolutePathDeepMap(obj, packageRootPath = (0, path_1.__packageRootDir)()) {
     return (0, deepMap_1.default)(obj, ({ object, path, value, prop }) => {
         if (typeof value === 'string') {
             value = (0, monorepo_1.__monorepoToPackageAbsolutePath)(value, packageRootPath);
@@ -31,4 +31,4 @@ function __monorepoToPackageAbsolutePathDeepMap(obj, packageRootPath = (0, packa
     });
 }
 exports.default = __monorepoToPackageAbsolutePathDeepMap;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsMEVBQW9EO0FBQ3BELHNFQUFnRDtBQUNoRCwyREFBK0U7QUFFL0U7Ozs7Ozs7Ozs7Ozs7OztHQWVHO0FBQ0gsU0FBd0Isc0NBQXNDLENBQzFELEdBQVEsRUFDUixrQkFBMEIsSUFBQSxxQkFBYSxHQUFFO0lBRXpDLE9BQU8sSUFBQSxpQkFBUyxFQUFDLEdBQUcsRUFBRSxDQUFDLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRSxLQUFLLEVBQUUsSUFBSSxFQUFFLEVBQUUsRUFBRTtRQUNwRCxJQUFJLE9BQU8sS0FBSyxLQUFLLFFBQVEsRUFBRTtZQUMzQixLQUFLLEdBQUcsSUFBQSwwQ0FBK0IsRUFBQyxLQUFLLEVBQUUsZUFBZSxDQUFDLENBQUM7U0FDbkU7UUFDRCxPQUFPLEtBQUssQ0FBQztJQUNqQixDQUFDLENBQUMsQ0FBQztBQUNQLENBQUM7QUFWRCx5REFVQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsMEVBQW9EO0FBQ3BELG1EQUE0RDtBQUM1RCwyREFBK0U7QUFFL0U7Ozs7Ozs7Ozs7Ozs7OztHQWVHO0FBQ0gsU0FBd0Isc0NBQXNDLENBQzFELEdBQVEsRUFDUixrQkFBMEIsSUFBQSx1QkFBZ0IsR0FBRTtJQUU1QyxPQUFPLElBQUEsaUJBQVMsRUFBQyxHQUFHLEVBQUUsQ0FBQyxFQUFFLE1BQU0sRUFBRSxJQUFJLEVBQUUsS0FBSyxFQUFFLElBQUksRUFBRSxFQUFFLEVBQUU7UUFDcEQsSUFBSSxPQUFPLEtBQUssS0FBSyxRQUFRLEVBQUU7WUFDM0IsS0FBSyxHQUFHLElBQUEsMENBQStCLEVBQUMsS0FBSyxFQUFFLGVBQWUsQ0FBQyxDQUFDO1NBQ25FO1FBQ0QsT0FBTyxLQUFLLENBQUM7SUFDakIsQ0FBQyxDQUFDLENBQUM7QUFDUCxDQUFDO0FBVkQseURBVUMifQ==

@@ -3,7 +3,7 @@ import __isTestEnv from '../../shared/is/testEnv';
 
 /**
  * @name                            isChildProcess
- * @namespace            node.is
+ * @namespace            shared.is
  * @type                            Function
  * @platform        node
  * @status          beta

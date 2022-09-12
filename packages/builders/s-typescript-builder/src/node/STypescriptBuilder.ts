@@ -7,7 +7,7 @@ import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __dirname, __getFiles } from '@coffeekraken/sugar/fs';
 import { __monorepoToPackageAbsolutePathDeepMap } from '@coffeekraken/sugar/monorepo';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 import __currentModuleSystem from '@coffeekraken/sugar/shared/module/currentModuleSystem';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
@@ -403,7 +403,7 @@ export default class STypescriptBuilder extends __SBuilder {
         params: ISTypescriptBuilderBuildParams,
     ): Promise<ISTypescriptBuilderResultFile> {
         return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
-            const packageRoot = __packageRoot();
+            const packageRoot = __packageRootDir();
             const module = file.format === 'cjs' ? 'commonjs' : 'es6';
             const outPath = __path.dirname(
                 `${file.outDir}/${file.relPath}`
@@ -431,7 +431,7 @@ export default class STypescriptBuilder extends __SBuilder {
                 __SSugarConfig.getSafe('typescriptBuilder.tsconfig') ?? {};
 
             let filePath = file.relPath;
-            if (process.cwd() !== __packageRoot(file.path)) {
+            if (process.cwd() !== __packageRootDir(file.path)) {
                 filePath = __path.relative(packageRoot, file.path);
             }
 

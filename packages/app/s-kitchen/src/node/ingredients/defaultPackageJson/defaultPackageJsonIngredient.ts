@@ -1,7 +1,7 @@
 import type { ISKitchenIngredient } from '../../SKitchen';
 
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
 
@@ -22,7 +22,7 @@ const defaultPackageJsonIngredient: ISKitchenIngredient = {
         'Apply the <yellow>config.package.defaultPackageJson</yellow> object on your <cyan>package.json</cyan> file',
     projectTypes: ['unknown', 'sugar'],
     async add({ ask, log, emit, context }) {
-        const packageRoot = __packageRoot();
+        const packageRoot = __packageRootDir();
 
         let json = {};
         if (__fs.existsSync(`${packageRoot}/package.json`)) {

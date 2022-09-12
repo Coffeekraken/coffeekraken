@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const fs_2 = require("@coffeekraken/sugar/fs");
 const is_1 = require("@coffeekraken/sugar/is");
-const systemTmpDir_1 = __importDefault(require("../path/systemTmpDir"));
+const path_1 = require("@coffeekraken/sugar/path");
 /**
  * @name            sharedContext
  * @namespace            node.process
@@ -41,7 +41,7 @@ const systemTmpDir_1 = __importDefault(require("../path/systemTmpDir"));
  */
 function sharedContext(data) {
     // get the context id. Either the pid, or the ppid
-    const contextId = (0, is_1.__isChildProcess)() ? process.ppid : process.pid, contextPath = `${(0, systemTmpDir_1.default)()}/shared-context-${contextId}.json`;
+    const contextId = (0, is_1.__isChildProcess)() ? process.ppid : process.pid, contextPath = `${(0, path_1.__systemTmpDir)()}/shared-context-${contextId}.json`;
     // check if we have some data
     if (data) {
         (0, fs_2.__writeJsonSync)(contextPath, data);
@@ -56,4 +56,4 @@ function sharedContext(data) {
     return {};
 }
 exports.default = sharedContext;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsY0FBYztBQUNkLDRDQUFzQjtBQUN0QiwrQ0FBeUU7QUFDekUsK0NBQTBEO0FBQzFELHdFQUFrRDtBQUVsRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBOEJHO0FBQ0gsU0FBUyxhQUFhLENBQUMsSUFBUztJQUM1QixrREFBa0Q7SUFDbEQsTUFBTSxTQUFTLEdBQUcsSUFBQSxxQkFBZ0IsR0FBRSxDQUFDLENBQUMsQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQyxPQUFPLENBQUMsR0FBRyxFQUM3RCxXQUFXLEdBQUcsR0FBRyxJQUFBLHNCQUFjLEdBQUUsbUJBQW1CLFNBQVMsT0FBTyxDQUFDO0lBRXpFLDZCQUE2QjtJQUM3QixJQUFJLElBQUksRUFBRTtRQUNOLElBQUEsb0JBQWUsRUFBQyxXQUFXLEVBQUUsSUFBSSxDQUFDLENBQUM7UUFDbkMsT0FBTyxJQUFJLENBQUM7S0FDZjtJQUVELHVEQUF1RDtJQUN2RCxJQUFJLFlBQUksQ0FBQyxVQUFVLENBQUMsV0FBVyxDQUFDLEVBQUU7UUFDOUIsTUFBTSxJQUFJLEdBQUcsSUFBQSxtQkFBYyxFQUFDLFdBQVcsQ0FBQyxDQUFDO1FBQ3pDLE9BQU8sSUFBSSxDQUFDO0tBQ2Y7SUFFRCxxQ0FBcUM7SUFDckMsT0FBTyxFQUFFLENBQUM7QUFDZCxDQUFDO0FBQ0Qsa0JBQWUsYUFBYSxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsY0FBYztBQUNkLDRDQUFzQjtBQUN0QiwrQ0FBeUU7QUFDekUsK0NBQTBEO0FBQzFELG1EQUEwRDtBQUUxRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBOEJHO0FBQ0gsU0FBUyxhQUFhLENBQUMsSUFBUztJQUM1QixrREFBa0Q7SUFDbEQsTUFBTSxTQUFTLEdBQUcsSUFBQSxxQkFBZ0IsR0FBRSxDQUFDLENBQUMsQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQyxPQUFPLENBQUMsR0FBRyxFQUM3RCxXQUFXLEdBQUcsR0FBRyxJQUFBLHFCQUFjLEdBQUUsbUJBQW1CLFNBQVMsT0FBTyxDQUFDO0lBRXpFLDZCQUE2QjtJQUM3QixJQUFJLElBQUksRUFBRTtRQUNOLElBQUEsb0JBQWUsRUFBQyxXQUFXLEVBQUUsSUFBSSxDQUFDLENBQUM7UUFDbkMsT0FBTyxJQUFJLENBQUM7S0FDZjtJQUVELHVEQUF1RDtJQUN2RCxJQUFJLFlBQUksQ0FBQyxVQUFVLENBQUMsV0FBVyxDQUFDLEVBQUU7UUFDOUIsTUFBTSxJQUFJLEdBQUcsSUFBQSxtQkFBYyxFQUFDLFdBQVcsQ0FBQyxDQUFDO1FBQ3pDLE9BQU8sSUFBSSxDQUFDO0tBQ2Y7SUFFRCxxQ0FBcUM7SUFDckMsT0FBTyxFQUFFLENBQUM7QUFDZCxDQUFDO0FBQ0Qsa0JBQWUsYUFBYSxDQUFDIn0=

@@ -4,7 +4,7 @@ import __SDuration from '@coffeekraken/s-duration';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import { __getFiles } from '@coffeekraken/sugar/fs';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
@@ -269,7 +269,7 @@ class SCodeFormatter extends __SClass {
                         }
 
                         const relFilePath = __path.relative(
-                            __packageRoot(),
+                            __packageRootDir(),
                             file,
                         );
 

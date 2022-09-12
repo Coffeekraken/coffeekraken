@@ -1,6 +1,5 @@
 import { __dirname } from '@coffeekraken/sugar/fs';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
-import __systemTmpDir from '@coffeekraken/sugar/node/path/systemTmpDir';
+import { __packageRootDir, __systemTmpDir } from '@coffeekraken/sugar/path';
 
 export default function (api) {
     if (api.env.platform !== 'node') return;
@@ -25,14 +24,14 @@ export default function (api) {
              * @name            rootDir
              * @namespace       config.storage
              * @type            String
-             * @default         ${__packageRoot()}
+             * @default         ${__packageRootDir()}
              *
              * Configure the root directory. Usually the package root dir
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            rootDir: `${__packageRoot(process.cwd())}`,
+            rootDir: `${__packageRootDir(process.cwd())}`,
 
             /**
              * @name            localDir
@@ -100,14 +99,14 @@ export default function (api) {
              * @name            rootDir
              * @namespace       config.storage
              * @type            String
-             * @default         ${__packageRoot(__dirname())}
+             * @default         ${__packageRootDir(__dirname())}
              *
              * Configure where is located sugar package directory. Usually in the node_modules/@coffeekraken/sugar folder
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            rootDir: `${__packageRoot(__dirname())}`,
+            rootDir: `${__packageRootDir(__dirname())}`,
         },
 
         src: {

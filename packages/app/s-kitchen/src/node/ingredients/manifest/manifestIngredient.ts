@@ -5,8 +5,8 @@ import {
     __readJsonSync,
     __writeJsonSync,
 } from '@coffeekraken/sugar/fs';
-import __packageJson from '@coffeekraken/sugar/node/package/jsonSync';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageJsonSync } from '@coffeekraken/sugar/package';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
 import type { ISKitchenIngredient } from '../../SKitchen';
 
@@ -27,7 +27,7 @@ const manifestIngredient: ISKitchenIngredient = {
         'Add the default <cyan>manifest.json</cyan> into your <magenta>sugar</magenta> project',
     projectTypes: ['unknown', 'sugar', 'next'],
     async add({ ask, log, emit }) {
-        const packageJson = __packageJson();
+        const packageJson = __packageJsonSync();
 
         const publicDir = __SSugarConfig.get('storage.src.publicDir');
 
@@ -38,7 +38,9 @@ const manifestIngredient: ISKitchenIngredient = {
             __writeJsonSync(`${publicDir}/manifest.json`, json);
         } else {
             const json = __readJsonSync(
-                `${__packageRoot(__dirname())}/src/data/manifest/manifest.json`,
+                `${__packageRootDir(
+                    __dirname(),
+                )}/src/data/manifest/manifest.json`,
             );
             json.short_name = packageJson.name;
             json.name = packageJson.description;

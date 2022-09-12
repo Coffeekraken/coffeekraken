@@ -2,7 +2,7 @@ import __SBench from '@coffeekraken/s-bench';
 import __SClass from '@coffeekraken/s-class';
 import { __dirname, __readJsonSync } from '@coffeekraken/sugar/fs';
 import __globalNodeModulesPath from '@coffeekraken/sugar/node/npm/globalNodeModulesPath';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
@@ -169,7 +169,7 @@ export default class SSugarJson extends __SClass {
     current(): ISSugarJsonFile {
         try {
             return this.sanitizeJson(
-                __readJsonSync(`${__packageRoot()}/sugar.json`),
+                __readJsonSync(`${__packageRootDir()}/sugar.json`),
             );
         } catch (e) {
             return {};
@@ -207,12 +207,12 @@ export default class SSugarJson extends __SClass {
                 : [];
 
         // get local node modules directory path
-        const localNodeModulesPath = `${__packageRoot(
+        const localNodeModulesPath = `${__packageRootDir(
             __dirname(),
         )}/node_modules`;
 
         // get local node modules directory path
-        const topLocalNodeModulesPath = `${__packageRoot(__dirname(), {
+        const topLocalNodeModulesPath = `${__packageRootDir(__dirname(), {
             // highest: true,
             upCount: 2,
         })}/node_modules`;
@@ -266,14 +266,14 @@ export default class SSugarJson extends __SClass {
         //     finalSettings.includeTop
         // ) {
         //     globs.push(
-        //         `${__packageRoot(process.cwd(), {
+        //         `${__packageRootDir(process.cwd(), {
         //             highest: true,
         //         })}/sugar.json`,
         //     );
         // }
 
         // this package sugar json
-        globs.push(`${__packageRoot(__dirname())}/sugar.json`);
+        globs.push(`${__packageRootDir(__dirname())}/sugar.json`);
 
         // local
         if (localNodeModulesPath && finalSettings.includeModules) {
@@ -290,7 +290,7 @@ export default class SSugarJson extends __SClass {
             }
         }
         if (finalSettings.includePackage) {
-            globs.push(`${__packageRoot(process.cwd())}/sugar.json`);
+            globs.push(`${__packageRootDir(process.cwd())}/sugar.json`);
         }
 
         // make sure we don't have duplicated

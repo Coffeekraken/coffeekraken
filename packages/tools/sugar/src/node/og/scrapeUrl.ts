@@ -1,6 +1,6 @@
 import __deepMerge from '../../shared/object/deepMerge';
 import __openGraphScraper from 'open-graph-scraper';
-import __packageCacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
+import { __packageCacheDir } from '@coffeekraken/sugar/path';
 import { __readJsonSync, __writeJsonSync } from '@coffeekraken/sugar/fs';
 import __fs from 'fs';
 

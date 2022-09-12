@@ -1,4 +1,4 @@
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 
 export default function (api) {
     if (api.env.platform !== 'node') return;
@@ -25,7 +25,7 @@ export default function (api) {
              * @name            context
              * @namespace       config.core.namespace
              * @type            String
-             * @default         __packageRoot()
+             * @default         __packageRootDir()
              *
              * Specify the context in which to generate the namespace.
              * The context is simply a root folder from which to search for the package.json
@@ -34,7 +34,7 @@ export default function (api) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            context: __packageRoot(),
+            context: __packageRootDir(),
         },
     };
 }

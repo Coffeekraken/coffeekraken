@@ -2,7 +2,7 @@
 
 import __SPromise from '@coffeekraken/s-promise';
 import { __dirname } from '@coffeekraken/sugar/fs';
-import __execPhp from '@coffeekraken/sugar/node/php/execPhp';
+import { __execPhp } from '@coffeekraken/sugar/exec';
 import __path from 'path';
 
 /**

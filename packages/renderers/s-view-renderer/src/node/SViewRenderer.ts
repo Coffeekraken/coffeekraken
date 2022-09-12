@@ -12,8 +12,7 @@ import {
     __extension,
     __writeJsonSync,
 } from '@coffeekraken/sugar/fs';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
-import __packageTmpDir from '@coffeekraken/sugar/node/path/packageTmpDir';
+import { __packageRootDir, __packageTmpDir } from '@coffeekraken/sugar/path';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
@@ -131,9 +130,12 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
         return [
             ...__SSugarConfig.get('viewRenderer.rootDirs'),
             // @ts-ignore
-            __path.resolve(__packageRoot(__dirname()), 'src/php/views/blade'),
+            __path.resolve(
+                __packageRootDir(__dirname()),
+                'src/php/views/blade',
+            ),
             // @ts-ignore
-            __path.resolve(__packageRoot(__dirname()), 'src/php/views/twig'),
+            __path.resolve(__packageRootDir(__dirname()), 'src/php/views/twig'),
         ];
     }
 

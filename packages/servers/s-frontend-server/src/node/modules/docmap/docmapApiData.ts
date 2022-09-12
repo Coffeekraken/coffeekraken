@@ -5,8 +5,8 @@ import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __scrapeUrl from '@coffeekraken/sugar/node/og/scrapeUrl';
 import __namespaceCompliant from '@coffeekraken/sugar/shared/string/namespaceCompliant';
-import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageJsonSync } from '@coffeekraken/sugar/package';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 
 export default function docmapApiData({ req, res, pageConfig }) {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
@@ -83,7 +83,7 @@ export default function docmapApiData({ req, res, pageConfig }) {
         resolve({
             docblocks,
             packageJson: __packageJsonSync(),
-            packageRoot: __packageRoot(),
+            packageRoot: __packageRootDir(),
         });
     });
 }

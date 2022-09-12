@@ -1,6 +1,6 @@
 import { __copySync } from '@coffeekraken/sugar/fs';
 import { __dirname } from '@coffeekraken/sugar/fs';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
 import type { ISKitchenIngredient } from '../../SKitchen';
 
@@ -40,7 +40,7 @@ const readmeIngredient: ISKitchenIngredient = {
         }
 
         const sourceReadmePath = __path.resolve(
-            __packageRoot(__dirname()),
+            __packageRootDir(__dirname()),
             'src/data/readme/README.md',
         );
 
@@ -53,7 +53,7 @@ const readmeIngredient: ISKitchenIngredient = {
         // const builder = new __SMarkdownBuilder();
         // const result = await builder.build({
         //     inPath: __path.resolve(
-        //         __packageRoot(__dirname()),
+        //         __packageRootDir(__dirname()),
         //         'src/md/README.md',
         //     ),
         //     outPath: finalParams.path,
@@ -61,7 +61,7 @@ const readmeIngredient: ISKitchenIngredient = {
 
         emit('log', {
             value: `<green>[readme]</green> <cyan>${__path.relative(
-                __packageRoot(),
+                __packageRootDir(),
                 input,
             )}</cyan> added <green>successfully</green>`,
         });

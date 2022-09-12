@@ -1,11 +1,11 @@
 import { __readJson } from '@coffeekraken/sugar/fs';
 import { __ipAddress } from '@coffeekraken/sugar/network';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
 
 export async function prepare(config) {
-    const potentialFrontspecJsonFilePath = `${__packageRoot()}/frontspec.json`;
+    const potentialFrontspecJsonFilePath = `${__packageRootDir()}/frontspec.json`;
     if (!__fs.existsSync(potentialFrontspecJsonFilePath)) return config;
     const json = await __readJson(potentialFrontspecJsonFilePath);
     return __deepMerge(config, json);

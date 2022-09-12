@@ -1,4 +1,4 @@
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
 import { __isDirectory } from '@coffeekraken/sugar/is';
 import __express from 'express';
@@ -9,7 +9,7 @@ import __SGlob from '@coffeekraken/s-glob';
 export default function rootFiles(express, settings, config) {
     return new __SPromise(
         async ({ resolve, reject, emit, pipe }) => {
-            const packageRoot = __packageRoot(),
+            const packageRoot = __packageRootDir(),
                 publicDir = __SSugarConfig.get('storage.src.publicDir');
             const files = __SGlob.resolve('**/*', {
                 cwd: publicDir,

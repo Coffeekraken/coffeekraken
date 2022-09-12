@@ -18,8 +18,8 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
  * @todo      tests
  *
  * @example             js
- * import distFontsDir from '@coffeekraken/node/fs/distFontsDir';
- * distFontsDir(); // => '/private/var/folders/3x/jf5977fn79jbglr7rk0tq4d00000gn/T'
+ * import { __distFontsDir } from '@coffeekraken/sugar/path';
+ * __distFontsDir(); // => '/private/var/folders/3x/jf5977fn79jbglr7rk0tq4d00000gn/T'
  *
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -31,14 +31,9 @@ export default interface IDistFontsDir {
     (settings?: IDistFontsDirSettings): string;
 }
 
-export default function (settings: IDistFontsDirSettings = {}) {
+export default function __distFontsDir(settings: IDistFontsDirSettings = {}) {
     settings = {
         ...settings,
     };
-    const distFontsDir = __SSugarConfig.get('storage.dist.fontsDir');
-    if (distFontsDir !== undefined) {
-        // __fs.ensureDirSync(distFontsDir);
-        return distFontsDir;
-    }
-    return undefined;
+    return __SSugarConfig.get('storage.dist.fontsDir');
 }

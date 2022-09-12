@@ -1,4 +1,4 @@
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 
 /**
  * @name            formatConfigValue
@@ -18,5 +18,5 @@ import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
  */
 export default function formatConfigValue(value: string): string {
     if (typeof value !== 'string') return value;
-    return value.replace(`${__packageRoot()}/`, '');
+    return value.replace(`${__packageRootDir()}/`, '');
 }

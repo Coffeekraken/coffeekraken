@@ -8,7 +8,7 @@ import __packageJson from '../npm/packageJson';
 import __packageRoot from './rootPath';
 
 /**
- * @name          jsonSync
+ * @name          packageJsonSync
  * @namespace            node.package
  * @type          Function
  * @platform        node
@@ -24,8 +24,8 @@ import __packageRoot from './rootPath';
  * @todo      tests
  *
  * @example     js
- * import json from '@coffeekraken/sugar/node/package/json';
- * json();
+ * import { __packageJsonSync } from '@coffeekraken/sugar/package';
+ * __packageJsonSync();
  *
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
@@ -37,7 +37,7 @@ export interface IPackageJsonSyncSettings {
 }
 
 let __packageJsonCache = {};
-export default function jsonSync(
+export default function __packageJsonSync(
     fromOrName = process.cwd(),
     settings?: Partial<IPackageJsonSyncSettings>,
 ): any {

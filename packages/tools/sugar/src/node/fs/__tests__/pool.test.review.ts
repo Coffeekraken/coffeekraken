@@ -2,7 +2,7 @@ import __path from 'path';
 import __pool from '../pool';
 import __SFile from '@coffeekraken/s-file';
 import __removeSync from '../removeSync';
-import __packageTmpDir from '../../path/packageTmpDir';
+import { __packageTmpDir } from '@coffeekraken/sugar/path';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __wait from '../../../shared/time/wait';
 

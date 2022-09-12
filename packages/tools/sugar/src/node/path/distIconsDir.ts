@@ -18,8 +18,8 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
  * @todo      tests
  *
  * @example             js
- * import distIconsDir from '@coffeekraken/node/fs/distIconsDir';
- * distIconsDir(); // => '/private/var/folders/3x/jf5977fn79jbglr7rk0tq4d00000gn/T'
+ * import { __distIconsDir } from '@coffeekraken/sugar/path';
+ * __distIconsDir(); // => '/private/var/folders/3x/jf5977fn79jbglr7rk0tq4d00000gn/T'
  *
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -31,14 +31,9 @@ export default interface IDistIconsDir {
     (settings?: IDistIconsDirSettings): string;
 }
 
-export default function (settings: IDistIconsDirSettings = {}) {
+export default function __distIconsDir(settings: IDistIconsDirSettings = {}) {
     settings = {
         ...settings,
     };
-    const distIconsDir = __SSugarConfig.get('storage.dist.iconsDir');
-    if (distIconsDir !== undefined) {
-        // __fs.ensureDirSync(distIconsDir);
-        return distIconsDir;
-    }
-    return undefined;
+    return __SSugarConfig.get('storage.dist.iconsDir');
 }

@@ -19,8 +19,8 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
  * @todo      tests
  *
  * @example             js
- * import sugarRootDir from '@coffeekraken/node/fs/sugarRootDir';
- * sugarRootDir(); // => '/something/node_modules/@coffeekraken/sugar'
+ * import { __sugarRootDir } from '@coffeekraken/sugar/path';
+ * __sugarRootDir(); // => '/something/node_modules/@coffeekraken/sugar'
  *
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -32,13 +32,9 @@ export interface ISugarRootDir {
     (settings?: ISugarRootDirSettings): string;
 }
 
-export default function (settings: ISugarRootDirSettings = {}) {
+export default function __sugarRootDir(settings: ISugarRootDirSettings = {}) {
     settings = {
         ...settings,
     };
-    const sugarRootDir = __SSugarConfig.get('storage.sugar.rootDir');
-    if (sugarRootDir !== undefined) {
-        // __fs.ensureDirSync(sugarRootDir);
-        return sugarRootDir;
-    }
+    return __SSugarConfig.get('storage.sugar.rootDir');
 }

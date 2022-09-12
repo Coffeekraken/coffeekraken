@@ -1,9 +1,6 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const packageRoot_1 = __importDefault(require("@coffeekraken/sugar/node/path/packageRoot"));
+const path_1 = require("@coffeekraken/sugar/path");
 function default_1(api) {
     if (api.env.platform !== 'node')
         return;
@@ -28,7 +25,7 @@ function default_1(api) {
              * @name            context
              * @namespace       config.core.namespace
              * @type            String
-             * @default         __packageRoot()
+             * @default         __packageRootDir()
              *
              * Specify the context in which to generate the namespace.
              * The context is simply a root folder from which to search for the package.json
@@ -37,9 +34,9 @@ function default_1(api) {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            context: (0, packageRoot_1.default)(),
+            context: (0, path_1.__packageRootDir)(),
         },
     };
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsNEZBQXNFO0FBRXRFLG1CQUF5QixHQUFHO0lBQ3hCLElBQUksR0FBRyxDQUFDLEdBQUcsQ0FBQyxRQUFRLEtBQUssTUFBTTtRQUFFLE9BQU87SUFFeEMsT0FBTztRQUNILFNBQVMsRUFBRTtZQUNQOzs7Ozs7Ozs7Ozs7O2VBYUc7WUFDSCxPQUFPLEVBQUUsUUFBUTtZQUVqQjs7Ozs7Ozs7Ozs7O2VBWUc7WUFDSCxPQUFPLEVBQUUsSUFBQSxxQkFBYSxHQUFFO1NBQzNCO0tBQ0osQ0FBQztBQUNOLENBQUM7QUFyQ0QsNEJBcUNDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsbURBQTREO0FBRTVELG1CQUF5QixHQUFHO0lBQ3hCLElBQUksR0FBRyxDQUFDLEdBQUcsQ0FBQyxRQUFRLEtBQUssTUFBTTtRQUFFLE9BQU87SUFFeEMsT0FBTztRQUNILFNBQVMsRUFBRTtZQUNQOzs7Ozs7Ozs7Ozs7O2VBYUc7WUFDSCxPQUFPLEVBQUUsUUFBUTtZQUVqQjs7Ozs7Ozs7Ozs7O2VBWUc7WUFDSCxPQUFPLEVBQUUsSUFBQSx1QkFBZ0IsR0FBRTtTQUM5QjtLQUNKLENBQUM7QUFDTixDQUFDO0FBckNELDRCQXFDQyJ9

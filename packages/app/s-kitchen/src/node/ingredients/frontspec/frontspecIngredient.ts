@@ -1,7 +1,7 @@
 import __SLog from '@coffeekraken/s-log';
 import { __copySync } from '@coffeekraken/sugar/fs';
 import { __dirname } from '@coffeekraken/sugar/fs';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __path from 'path';
 import type { ISKitchenIngredient } from '../../SKitchen';
 
@@ -22,9 +22,9 @@ const frontspecIngredient: ISKitchenIngredient = {
         'Add the default <cyan>frontspec.json</cyan> file into your <magenta>sugar</magenta> project',
     projectTypes: ['unknown', 'sugar'],
     async add({ ask, log, emit }) {
-        const frontspecPath = `${__packageRoot()}/frontspec.json`;
+        const frontspecPath = `${__packageRootDir()}/frontspec.json`;
         const sourceJsonPath = __path.resolve(
-            __packageRoot(__dirname()),
+            __packageRootDir(__dirname()),
             'src/data/frontspec/frontspec.json',
         );
 

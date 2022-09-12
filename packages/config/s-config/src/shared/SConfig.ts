@@ -424,10 +424,10 @@ export default class SConfig {
             // different caching method for node or browser
             if (__isNode()) {
                 const __fs = await import('fs');
-                const __packageRoot = await import(
-                    '@coffeekraken/sugar/node/path/packageRoot'
+                const { __packageRootDir } = await import(
+                    '@coffeekraken/sugar/path'
                 );
-                const folderPath = `${__packageRoot.default()}/.local/cache/config`;
+                const folderPath = `${__packageRootDir()}/.local/cache/config`;
                 if (!__fs.existsSync(folderPath)) return resolve();
                 const jsonStr = __fs
                     .readFileSync(
@@ -463,10 +463,10 @@ export default class SConfig {
             // different caching method for node or browser
             if (__isNode()) {
                 const __fs = await import('fs');
-                const __packageRoot = await import(
-                    '@coffeekraken/sugar/node/path/packageRoot'
+                const { __packageRootDir } = await import(
+                    '@coffeekraken/sugar/path'
                 );
-                const folderPath = `${__packageRoot.default()}/.local/cache/config`;
+                const folderPath = `${__packageRootDir()}/.local/cache/config`;
                 __fs.mkdirSync(folderPath, { recursive: true });
                 __fs.writeFileSync(
                     `${folderPath}/${this.id}.${this.settings.env.env}.${this.settings.env.platform}.json`,

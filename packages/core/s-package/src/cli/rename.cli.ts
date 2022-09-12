@@ -2,7 +2,7 @@
 import __SPackageRenameParamsInterface from '../node/interface/SPackageRenameParamsInterface';
 import __SPromise from '@coffeekraken/s-promise';
 import __SPackage from '../node/SPackage';
-import __renamePackage from '@coffeekraken/sugar/node/package/renamePackage';
+import { __renamePackage } from '@coffeekraken/sugar/package';
 import __fs from 'fs';
 
 export default (stringArgs = '') => {

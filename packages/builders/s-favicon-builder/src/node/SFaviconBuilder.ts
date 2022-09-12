@@ -5,8 +5,8 @@ import type { IResolveGlobSettings } from '@coffeekraken/s-glob';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import { __writeFileSync } from '@coffeekraken/sugar/fs';
-import __packageSyncJson from '@coffeekraken/sugar/node/package/jsonSync';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageJsonSync } from '@coffeekraken/sugar/package';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __favicons from 'favicons';
 import __fs from 'fs';
@@ -121,14 +121,14 @@ export default class SFaviconBuilder extends __SBuilder {
                     params ?? {},
                 );
 
-                const packageJson = __packageSyncJson(process.cwd(), {
+                const packageJson = __packageJsonSync(process.cwd(), {
                     standardize: true,
                 });
 
                 const finalSettings = <ISFaviconBuilderSettings>__deepMerge(
                     {
                         path: `/${__path.relative(
-                            __packageRoot(),
+                            __packageRootDir(),
                             params.outDir,
                         )}`, // Path for overriding default icons path. `string`
                         appName: packageJson.name, // Your application's name. `string`
@@ -197,7 +197,7 @@ export default class SFaviconBuilder extends __SBuilder {
                         emit('log', {
                             type: __SLog.TYPE_INFO,
                             value: `<yellow>[build]</yellow> Saving file "<cyan>${__path.relative(
-                                __packageRoot(),
+                                __packageRootDir(),
                                 params.outDir,
                             )}/${imageObj.name}</cyan>"`,
                         });
@@ -211,7 +211,7 @@ export default class SFaviconBuilder extends __SBuilder {
                         emit('log', {
                             type: __SLog.TYPE_INFO,
                             value: `<yellow>[build]</yellow> Saving file "<cyan>${__path.relative(
-                                __packageRoot(),
+                                __packageRootDir(),
                                 params.outDir,
                             )}/${fileObj.name}</cyan>"`,
                         });
@@ -224,7 +224,7 @@ export default class SFaviconBuilder extends __SBuilder {
                     emit('log', {
                         type: __SLog.TYPE_INFO,
                         value: `<yellow>[build]</yellow> Saving file "<cyan>${__path.relative(
-                            __packageRoot(),
+                            __packageRootDir(),
                             params.outDir,
                         )}/favicon.html</cyan>"`,
                     });

@@ -18,8 +18,8 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
  * @todo      tests
  *
  * @example             js
- * import srcDocDir from '@coffeekraken/node/fs/srcDocDir';
- * srcDocDir(); // => '/somethign/src/doc'
+ * import { __srcDocDir } from '@coffeekraken/sugar/path';
+ * __srcDocDir(); // => '/somethign/src/doc'
  *
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -31,14 +31,9 @@ export default interface ISrcDocDir {
     (settings?: ISrcDocDirSettings): string;
 }
 
-export default function (settings: ISrcDocDirSettings = {}) {
+export default function __srcDocDir(settings: ISrcDocDirSettings = {}) {
     settings = {
         ...settings,
     };
-    const srcDocDir = __SSugarConfig.get('storage.src.docDir');
-    if (srcDocDir !== undefined) {
-        // __fs.ensureDirSync(srcDocDir);
-        return srcDocDir;
-    }
-    return undefined;
+    return __SSugarConfig.get('storage.src.docDir');
 }

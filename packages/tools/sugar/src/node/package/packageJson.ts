@@ -3,7 +3,7 @@
 import __jsonSync from './jsonSync';
 
 /**
- * @name          json
+ * @name          packageJson
  * @namespace            node.package
  * @async
  * @type          Function
@@ -20,8 +20,8 @@ import __jsonSync from './jsonSync';
  * @todo      tests
  *
  * @example     js
- * import json from '@coffeekraken/sugar/node/package/json';
- * json();
+ * import { __packageJson } from '@coffeekraken/sugar/package;
+ * __packageJson();
  *
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
@@ -32,7 +32,7 @@ export interface IPackageJsonSyncSettings {
     standardize: boolean;
 }
 
-function json(
+export default function __packageJson(
     fromOrName = process.cwd(),
     settings?: Partial<IPackageJsonSyncSettings>,
 ) {
@@ -41,4 +41,3 @@ function json(
         resolve(json);
     });
 }
-export default json;

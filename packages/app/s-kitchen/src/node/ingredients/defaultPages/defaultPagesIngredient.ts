@@ -1,6 +1,6 @@
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __dirname } from '@coffeekraken/sugar/fs';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __path from 'path';
 import __recursiveCopy from 'recursive-copy';
 import type { ISKitchenIngredient } from '../../SKitchen';
@@ -24,7 +24,7 @@ const defaultPagesIngredient: ISKitchenIngredient = {
     async add({ ask, log, emit, context }) {
         // source file path
         const sourceFilePath = __path.resolve(
-            __packageRoot(__dirname()),
+            __packageRootDir(__dirname()),
             `src/data/defaultPages`,
         );
 
@@ -49,12 +49,12 @@ const defaultPagesIngredient: ISKitchenIngredient = {
 
         // source views folder path
         const sourceViewsFolderPath = __path.resolve(
-            __path.resolve(__packageRoot(__dirname())),
+            __path.resolve(__packageRootDir(__dirname())),
             `src/data/defaultPages/${engine}/views`,
         );
         // source pages folder path
         const sourcePagesFolderPath = __path.resolve(
-            __path.resolve(__packageRoot(__dirname())),
+            __path.resolve(__packageRootDir(__dirname())),
             `src/data/defaultPages/${engine}/pages`,
         );
 

@@ -1,4 +1,4 @@
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __commonTextFileExtensions from '@coffeekraken/sugar/shared/extension/commonTextFileExtensions';
 
 export default function (api) {
@@ -10,14 +10,14 @@ export default function (api) {
              * @name          input
              * @namespace     config.docmap.read
              * @type          String
-             * @default         ${__packageRoot()}/docmap.json
+             * @default         ${__packageRootDir()}/docmap.json
              *
              * Specify the path of the docmap.json source file to read
              *
              * @since       2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            input: `${__packageRoot()}/docmap.json`,
+            input: `${__packageRootDir()}/docmap.json`,
 
             /**
              * @name          sort

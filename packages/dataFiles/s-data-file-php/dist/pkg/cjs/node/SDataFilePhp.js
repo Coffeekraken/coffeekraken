@@ -15,7 +15,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
 const fs_1 = require("@coffeekraken/sugar/fs");
-const execPhp_1 = __importDefault(require("@coffeekraken/sugar/node/php/execPhp"));
+const exec_1 = require("@coffeekraken/sugar/exec");
 const path_1 = __importDefault(require("path"));
 /**
  * @name          SDataFilePhp
@@ -48,7 +48,7 @@ class SDataFilePhp {
      */
     static load(filePath) {
         return new s_promise_1.default(({ resolve }) => __awaiter(this, void 0, void 0, function* () {
-            const data = yield (0, execPhp_1.default)(path_1.default.resolve(__packageRoot((0, fs_1.__dirname)()), 'src/php/data.php'), {
+            const data = yield (0, exec_1.__execPhp)(path_1.default.resolve(__packageRoot((0, fs_1.__dirname)()), 'src/php/data.php'), {
                 filePath,
             }, {});
             resolve(JSON.parse(data));
@@ -68,4 +68,4 @@ exports.default = SDataFilePhp;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 SDataFilePhp.extensions = ['php'];
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7OztBQUVkLHdFQUFpRDtBQUNqRCwrQ0FBbUQ7QUFDbkQsbUZBQTZEO0FBQzdELGdEQUEwQjtBQUUxQjs7Ozs7Ozs7Ozs7Ozs7R0FjRztBQUNILE1BQXFCLFlBQVk7SUFjN0I7Ozs7Ozs7Ozs7OztPQVlHO0lBQ0gsTUFBTSxDQUFDLElBQUksQ0FBQyxRQUFRO1FBQ2hCLE9BQU8sSUFBSSxtQkFBVSxDQUFDLENBQU8sRUFBRSxPQUFPLEVBQUUsRUFBRSxFQUFFO1lBQ3hDLE1BQU0sSUFBSSxHQUFHLE1BQU0sSUFBQSxpQkFBUyxFQUN4QixjQUFNLENBQUMsT0FBTyxDQUFDLGFBQWEsQ0FBQyxJQUFBLGNBQVMsR0FBRSxDQUFDLEVBQUUsa0JBQWtCLENBQUMsRUFDOUQ7Z0JBQ0ksUUFBUTthQUNYLEVBQ0QsRUFBRSxDQUNMLENBQUM7WUFDRixPQUFPLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDO1FBQzlCLENBQUMsQ0FBQSxDQUFDLENBQUM7SUFDUCxDQUFDOztBQXRDTCwrQkF1Q0M7QUF0Q0c7Ozs7Ozs7Ozs7R0FVRztBQUNJLHVCQUFVLEdBQUcsQ0FBQyxLQUFLLENBQUMsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7OztBQUVkLHdFQUFpRDtBQUNqRCwrQ0FBbUQ7QUFDbkQsbURBQXFEO0FBQ3JELGdEQUEwQjtBQUUxQjs7Ozs7Ozs7Ozs7Ozs7R0FjRztBQUNILE1BQXFCLFlBQVk7SUFjN0I7Ozs7Ozs7Ozs7OztPQVlHO0lBQ0gsTUFBTSxDQUFDLElBQUksQ0FBQyxRQUFRO1FBQ2hCLE9BQU8sSUFBSSxtQkFBVSxDQUFDLENBQU8sRUFBRSxPQUFPLEVBQUUsRUFBRSxFQUFFO1lBQ3hDLE1BQU0sSUFBSSxHQUFHLE1BQU0sSUFBQSxnQkFBUyxFQUN4QixjQUFNLENBQUMsT0FBTyxDQUFDLGFBQWEsQ0FBQyxJQUFBLGNBQVMsR0FBRSxDQUFDLEVBQUUsa0JBQWtCLENBQUMsRUFDOUQ7Z0JBQ0ksUUFBUTthQUNYLEVBQ0QsRUFBRSxDQUNMLENBQUM7WUFDRixPQUFPLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDO1FBQzlCLENBQUMsQ0FBQSxDQUFDLENBQUM7SUFDUCxDQUFDOztBQXRDTCwrQkF1Q0M7QUF0Q0c7Ozs7Ozs7Ozs7R0FVRztBQUNJLHVCQUFVLEdBQUcsQ0FBQyxLQUFLLENBQUMsQ0FBQyJ9

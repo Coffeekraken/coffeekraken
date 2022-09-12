@@ -2,7 +2,7 @@
 
 import __path from 'path';
 import __uniqid from '../../shared/string/uniqid';
-import __packageTmpDir from '../path/packageTmpDir';
+import { __packageTmpDir } from '@coffeekraken/sugar/path';
 import { __writeFileSync } from '@coffeekraken/sugar/fs';
 
 /**

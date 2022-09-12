@@ -6,7 +6,7 @@ import __glob from 'glob';
 import __path from 'path';
 import __expandGlob from '../../shared/glob/expandGlob';
 import __deepMerge from '../../shared/object/deepMerge';
-import __excludeGlobs from '../path/excludeGlobs';
+import { __excludedGlobs } from '@coffeekraken/sugar/glob';
 
 /**
  * @name            resolveGlob
@@ -117,7 +117,7 @@ export default function __resolveGlob(
                     follow: settings.symlinks,
                     ignore: [
                         ...(settings.exclude ?? []),
-                        ...(settings.defaultExcludes ? __excludeGlobs() : []),
+                        ...(settings.defaultExcludes ? __excludedGlobs() : []),
                     ],
                     ...settings,
                 }),

@@ -4,7 +4,7 @@ import __SDuration from '@coffeekraken/s-duration';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __extension, __writeFileSync } from '@coffeekraken/sugar/fs';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __isClass from '@coffeekraken/sugar/shared/is/class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __path from 'path';
@@ -185,7 +185,7 @@ export default class SSitemapBuilder extends __SBuilder {
                 if (finalParams.save) {
                     emit('log', {
                         value: `<yellow>[save]</yellow> Saving your sitemap under "<cyan>${__path.relative(
-                            __packageRoot(),
+                            __packageRootDir(),
                             finalParams.output,
                         )}</cyan>"`,
                     });

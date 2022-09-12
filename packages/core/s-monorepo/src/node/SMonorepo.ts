@@ -10,15 +10,10 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __STypescriptBuilder from '@coffeekraken/s-typescript-builder';
 import __SVite from '@coffeekraken/s-vite';
 
-import {
-    __readJsonSync,
-    __writeJsonSync,
-} from '@coffeekraken/sugar/fs';
-import {
-    __copy
-} from '@coffeekraken/sugar/clipboard';
+import { __readJsonSync, __writeJsonSync } from '@coffeekraken/sugar/fs';
+import { __copy } from '@coffeekraken/sugar/clipboard';
 
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __spawn from '@coffeekraken/sugar/node/process/spawn';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __formatDuration from '@coffeekraken/sugar/shared/time/formatDuration';
@@ -132,7 +127,7 @@ export default class SMonorepo extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(
-        rootDir: string = __packageRoot(process.cwd(), {
+        rootDir: string = __packageRootDir(process.cwd(), {
             highest: true,
         }),
         settings?: Partial<ISMonorepoSettings>,
@@ -657,7 +652,7 @@ export default class SMonorepo extends __SClass {
                     pipe(
                         vite.test({
                             watch: true,
-                            dir: __packageRoot(),
+                            dir: __packageRootDir(),
                         }),
                     );
                 }
@@ -670,7 +665,7 @@ export default class SMonorepo extends __SClass {
                             glob: `${__SSugarConfig.get(
                                 'monorepo.packagesGlob',
                             )}/src/**/*`,
-                            inDir: __packageRoot(),
+                            inDir: __packageRootDir(),
                             watch: true,
                             formatInitial: finalParams.formatInitial,
                         }),

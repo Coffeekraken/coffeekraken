@@ -2,7 +2,7 @@ import __SBench from '@coffeekraken/s-bench';
 import __SDocmap from '@coffeekraken/s-docmap';
 import __SMarkdownBuilder from '@coffeekraken/s-markdown-builder';
 import __SPromise from '@coffeekraken/s-promise';
-import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
+import { __packageJsonSync } from '@coffeekraken/sugar/package';
 
 export default function docmapDocumentationData({ req, res, pageConfig }) {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {

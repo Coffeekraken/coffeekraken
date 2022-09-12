@@ -15,8 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const s_log_1 = __importDefault(require("@coffeekraken/s-log"));
 const s_sugar_config_1 = __importDefault(require("@coffeekraken/s-sugar-config"));
 const fs_1 = require("@coffeekraken/sugar/fs");
-const jsonSync_1 = __importDefault(require("@coffeekraken/sugar/node/package/jsonSync"));
-const packageRoot_1 = __importDefault(require("@coffeekraken/sugar/node/path/packageRoot"));
+const package_1 = require("@coffeekraken/sugar/package");
+const path_1 = require("@coffeekraken/sugar/path");
 const fs_2 = __importDefault(require("fs"));
 /**
  * @name        manifestIngredient
@@ -35,7 +35,7 @@ const manifestIngredient = {
     projectTypes: ['unknown', 'sugar', 'next'],
     add({ ask, log, emit }) {
         return __awaiter(this, void 0, void 0, function* () {
-            const packageJson = (0, jsonSync_1.default)();
+            const packageJson = (0, package_1.__packageJsonSync)();
             const publicDir = s_sugar_config_1.default.get('storage.src.publicDir');
             if (fs_2.default.existsSync(`${publicDir}/manifest.json`)) {
                 const json = (0, fs_1.__readJsonSync)(`${publicDir}/manifest.json`);
@@ -44,7 +44,7 @@ const manifestIngredient = {
                 (0, fs_1.__writeJsonSync)(`${publicDir}/manifest.json`, json);
             }
             else {
-                const json = (0, fs_1.__readJsonSync)(`${(0, packageRoot_1.default)((0, fs_1.__dirname)())}/src/data/manifest/manifest.json`);
+                const json = (0, fs_1.__readJsonSync)(`${(0, path_1.__packageRootDir)((0, fs_1.__dirname)())}/src/data/manifest/manifest.json`);
                 json.short_name = packageJson.name;
                 json.name = packageJson.description;
                 (0, fs_1.__writeJsonSync)(`${publicDir}/manifest.json`, json);
@@ -58,4 +58,4 @@ const manifestIngredient = {
     },
 };
 exports.default = manifestIngredient;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsZ0VBQXlDO0FBQ3pDLGtGQUEwRDtBQUMxRCwrQ0FJZ0M7QUFDaEMseUZBQXNFO0FBQ3RFLDRGQUFzRTtBQUN0RSw0Q0FBc0I7QUFHdEI7Ozs7Ozs7Ozs7R0FVRztBQUNILE1BQU0sa0JBQWtCLEdBQXdCO0lBQzVDLEVBQUUsRUFBRSxVQUFVO0lBQ2QsV0FBVyxFQUNQLHVGQUF1RjtJQUMzRixZQUFZLEVBQUUsQ0FBQyxTQUFTLEVBQUUsT0FBTyxFQUFFLE1BQU0sQ0FBQztJQUNwQyxHQUFHLENBQUMsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLElBQUksRUFBRTs7WUFDeEIsTUFBTSxXQUFXLEdBQUcsSUFBQSxrQkFBYSxHQUFFLENBQUM7WUFFcEMsTUFBTSxTQUFTLEdBQUcsd0JBQWMsQ0FBQyxHQUFHLENBQUMsdUJBQXVCLENBQUMsQ0FBQztZQUU5RCxJQUFJLFlBQUksQ0FBQyxVQUFVLENBQUMsR0FBRyxTQUFTLGdCQUFnQixDQUFDLEVBQUU7Z0JBQy9DLE1BQU0sSUFBSSxHQUFHLElBQUEsbUJBQWMsRUFBQyxHQUFHLFNBQVMsZ0JBQWdCLENBQUMsQ0FBQztnQkFDMUQsSUFBSSxDQUFDLFVBQVUsR0FBRyxXQUFXLENBQUMsSUFBSSxDQUFDO2dCQUNuQyxJQUFJLENBQUMsSUFBSSxHQUFHLFdBQVcsQ0FBQyxXQUFXLENBQUM7Z0JBQ3BDLElBQUEsb0JBQWUsRUFBQyxHQUFHLFNBQVMsZ0JBQWdCLEVBQUUsSUFBSSxDQUFDLENBQUM7YUFDdkQ7aUJBQU07Z0JBQ0gsTUFBTSxJQUFJLEdBQUcsSUFBQSxtQkFBYyxFQUN2QixHQUFHLElBQUEscUJBQWEsRUFBQyxJQUFBLGNBQVMsR0FBRSxDQUFDLGtDQUFrQyxDQUNsRSxDQUFDO2dCQUNGLElBQUksQ0FBQyxVQUFVLEdBQUcsV0FBVyxDQUFDLElBQUksQ0FBQztnQkFDbkMsSUFBSSxDQUFDLElBQUksR0FBRyxXQUFXLENBQUMsV0FBVyxDQUFDO2dCQUNwQyxJQUFBLG9CQUFlLEVBQUMsR0FBRyxTQUFTLGdCQUFnQixFQUFFLElBQUksQ0FBQyxDQUFDO2FBQ3ZEO1lBRUQsSUFBSSxDQUFDLEtBQUssRUFBRTtnQkFDUixJQUFJLEVBQUUsZUFBTSxDQUFDLFNBQVM7Z0JBQ3RCLEtBQUssRUFBRSxzR0FBc0c7YUFDaEgsQ0FBQyxDQUFDO1lBRUgsT0FBTyxJQUFJLENBQUM7UUFDaEIsQ0FBQztLQUFBO0NBQ0osQ0FBQztBQUNGLGtCQUFlLGtCQUFrQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsZ0VBQXlDO0FBQ3pDLGtGQUEwRDtBQUMxRCwrQ0FJZ0M7QUFDaEMseURBQWdFO0FBQ2hFLG1EQUE0RDtBQUM1RCw0Q0FBc0I7QUFHdEI7Ozs7Ozs7Ozs7R0FVRztBQUNILE1BQU0sa0JBQWtCLEdBQXdCO0lBQzVDLEVBQUUsRUFBRSxVQUFVO0lBQ2QsV0FBVyxFQUNQLHVGQUF1RjtJQUMzRixZQUFZLEVBQUUsQ0FBQyxTQUFTLEVBQUUsT0FBTyxFQUFFLE1BQU0sQ0FBQztJQUNwQyxHQUFHLENBQUMsRUFBRSxHQUFHLEVBQUUsR0FBRyxFQUFFLElBQUksRUFBRTs7WUFDeEIsTUFBTSxXQUFXLEdBQUcsSUFBQSwyQkFBaUIsR0FBRSxDQUFDO1lBRXhDLE1BQU0sU0FBUyxHQUFHLHdCQUFjLENBQUMsR0FBRyxDQUFDLHVCQUF1QixDQUFDLENBQUM7WUFFOUQsSUFBSSxZQUFJLENBQUMsVUFBVSxDQUFDLEdBQUcsU0FBUyxnQkFBZ0IsQ0FBQyxFQUFFO2dCQUMvQyxNQUFNLElBQUksR0FBRyxJQUFBLG1CQUFjLEVBQUMsR0FBRyxTQUFTLGdCQUFnQixDQUFDLENBQUM7Z0JBQzFELElBQUksQ0FBQyxVQUFVLEdBQUcsV0FBVyxDQUFDLElBQUksQ0FBQztnQkFDbkMsSUFBSSxDQUFDLElBQUksR0FBRyxXQUFXLENBQUMsV0FBVyxDQUFDO2dCQUNwQyxJQUFBLG9CQUFlLEVBQUMsR0FBRyxTQUFTLGdCQUFnQixFQUFFLElBQUksQ0FBQyxDQUFDO2FBQ3ZEO2lCQUFNO2dCQUNILE1BQU0sSUFBSSxHQUFHLElBQUEsbUJBQWMsRUFDdkIsR0FBRyxJQUFBLHVCQUFnQixFQUNmLElBQUEsY0FBUyxHQUFFLENBQ2Qsa0NBQWtDLENBQ3RDLENBQUM7Z0JBQ0YsSUFBSSxDQUFDLFVBQVUsR0FBRyxXQUFXLENBQUMsSUFBSSxDQUFDO2dCQUNuQyxJQUFJLENBQUMsSUFBSSxHQUFHLFdBQVcsQ0FBQyxXQUFXLENBQUM7Z0JBQ3BDLElBQUEsb0JBQWUsRUFBQyxHQUFHLFNBQVMsZ0JBQWdCLEVBQUUsSUFBSSxDQUFDLENBQUM7YUFDdkQ7WUFFRCxJQUFJLENBQUMsS0FBSyxFQUFFO2dCQUNSLElBQUksRUFBRSxlQUFNLENBQUMsU0FBUztnQkFDdEIsS0FBSyxFQUFFLHNHQUFzRzthQUNoSCxDQUFDLENBQUM7WUFFSCxPQUFPLElBQUksQ0FBQztRQUNoQixDQUFDO0tBQUE7Q0FDSixDQUFDO0FBQ0Ysa0JBQWUsa0JBQWtCLENBQUMifQ==

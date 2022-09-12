@@ -1,16 +1,15 @@
 import __childProcess from 'child_process';
 import __base64 from '@coffeekraken/sugar/shared/crypt/base64';
 import __fs from 'fs';
-import __systemTmpDir from '@coffeekraken/sugar/node/path/systemTmpDir';
 import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
-import __packageTmpDir from '@coffeekraken/sugar/node/path/packageTmpDir';
+import { __packageTmpDir, __systemTmpDir } from '@coffeekraken/sugar/path';
 import { __writeJsonSync } from '@coffeekraken/sugar/fs';
 
 import __zlib from 'zlib';
 
 /**
  * @name            execPhp
- * @namespace       node.php
+ * @namespace       node.exec
  * @type            Function
  * @platform        node
  * @status          beta
@@ -29,7 +28,7 @@ export interface IExecPhpSettings {
     paramsThroughFile: boolean;
 }
 
-export default function execPhp(
+export default function __execPhp(
     scriptPath: string,
     params: any,
     settings?: Partial<IExecPhpSettings>,

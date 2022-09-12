@@ -4,9 +4,11 @@ import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __writeJsonSync } from '@coffeekraken/sugar/fs';
-import __packageJson from '@coffeekraken/sugar/node/package/jsonSync';
-import __renamePackage from '@coffeekraken/sugar/node/package/renamePackage';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import {
+    __packageJsonSync,
+    __renamePackage,
+} from '@coffeekraken/sugar/package';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __childProcess from 'child_process';
 import __chokidar from 'chokidar';
@@ -103,7 +105,7 @@ export default class SPackage extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(
-        rootDir: string = __packageRoot(),
+        rootDir: string = __packageRootDir(),
         settings?: Partial<ISPackageSettings>,
     ) {
         super(
@@ -339,7 +341,7 @@ export default class SPackage extends __SClass {
                 const finalParams: ISPackageExportsParams =
                     __SPackageExportsParamsInterface.apply(params);
 
-                const packageJson = __packageJson(this._rootDir);
+                const packageJson = __packageJsonSync(this._rootDir);
 
                 // check if the "autoExports" exists and is at "false" to avoid exporting
                 if (packageJson.autoExports === false) {
@@ -794,7 +796,7 @@ export default class SPackage extends __SClass {
                 const finalParams: ISPackageAddDefaultPackageJsonParams =
                     __SPackageAddDefaultScriptsParamsInterface.apply(params);
 
-                const packageRoot = __packageRoot();
+                const packageRoot = __packageRootDir();
 
                 if (!__fs.existsSync(`${packageRoot}/package.json`)) {
                     throw new Error(

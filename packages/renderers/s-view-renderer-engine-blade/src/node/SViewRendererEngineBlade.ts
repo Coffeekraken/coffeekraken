@@ -3,8 +3,8 @@ import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import { ISViewRendererSettings } from '@coffeekraken/s-view-renderer';
 import { __dirname } from '@coffeekraken/sugar/fs';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
-import __execPhp from '@coffeekraken/sugar/node/php/execPhp';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
+import { __execPhp } from '@coffeekraken/sugar/exec';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __fs from 'fs';
 import __path from 'path';
@@ -75,7 +75,7 @@ export default class SViewRendererEngineBlade {
 
                 const resPro = __execPhp(
                     __path.resolve(
-                        __packageRoot(__dirname()),
+                        __packageRootDir(__dirname()),
                         'src/php/compile.php',
                     ),
                     {

@@ -5,7 +5,7 @@ import {
     __prependToFileSync,
 } from '@coffeekraken/sugar/fs';
 import __npmInstall from '@coffeekraken/sugar/node/npm/install';
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __path from 'path';
 import type { ISKitchenIngredient } from '../../SKitchen';
 
@@ -30,8 +30,8 @@ const sugarIngredient: ISKitchenIngredient = {
         'Add the <yellow>@coffeekraken/sugar</yellow> package to your project',
     projectTypes: ['unknown', 'sugar', 'next'],
     async add({ ask, log, emit, pipe, context }) {
-        const rootPath = __packageRoot(process.cwd()),
-            thisPackageRootPath = __packageRoot(__dirname());
+        const rootPath = __packageRootDir(process.cwd()),
+            thisPackageRootPath = __packageRootDir(__dirname());
 
         // installing the actual package
         emit('log', {

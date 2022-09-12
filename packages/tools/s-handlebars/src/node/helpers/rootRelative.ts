@@ -1,4 +1,4 @@
-import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 
 /**
  * @name            rootRelative
@@ -17,5 +17,5 @@ import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 export default function rootRelative(path: string): string {
-    return path.replace(`${__packageRoot()}/`, '');
+    return path.replace(`${__packageRootDir()}/`, '');
 }

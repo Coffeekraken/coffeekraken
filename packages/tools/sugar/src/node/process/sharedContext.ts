@@ -2,7 +2,7 @@
 import __fs from 'fs';
 import { __readJsonSync, __writeJsonSync } from '@coffeekraken/sugar/fs';
 import { __isChildProcess } from '@coffeekraken/sugar/is';
-import __systemTmpDir from '../path/systemTmpDir';
+import { __systemTmpDir } from '@coffeekraken/sugar/path';
 
 /**
  * @name            sharedContext

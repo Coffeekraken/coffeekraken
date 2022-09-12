@@ -1,6 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
-import __keysFirst from '@coffeekraken/sugar/shared/array/keysFirst';
+import { __keysFirst } from '@coffeekraken/sugar/array';
 
 class postcssSugarPluginBorderRadiusClassesMixinInterface extends __SInterface {
     static get _definition() {

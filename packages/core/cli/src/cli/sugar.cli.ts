@@ -14,7 +14,7 @@ import { __isChildProcess } from '@coffeekraken/sugar/is';
 import { __packageJsonSync } from '@coffeekraken/sugar/package';
 import { __onProcessExit } from '@coffeekraken/sugar/process';
 import { __spawn } from '@coffeekraken/sugar/process';
-import __sugarBanner from '@coffeekraken/sugar/shared/ascii/sugarBanner';
+import { __sugarBanner } from '@coffeekraken/sugar/ascii';
 import __parseArgs from '@coffeekraken/sugar/shared/cli/parseArgs';
 import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
 import __wait from '@coffeekraken/sugar/shared/time/wait';

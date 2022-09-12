@@ -3,7 +3,7 @@ import __unique from './unique';
 
 /**
  * @name        keysFirst
- * @namespace            js.array
+ * @namespace            shared.array
  * @type      Function
  * @platform          js
  * @platform          node
@@ -16,13 +16,13 @@ import __unique from './unique';
  * @return    {Array}    The processed array
  *
  * @example    js
- * import keysFirst from '@coffeekraken/sugar/js/array/keysFirst'
- * keysFirst(['a','b','d','g','c'], ['d','g'])
+ * import { __keysFirst } from '@coffeekraken/sugar/array'
+ * __keysFirst(['a','b','d','g','c'], ['d','g'])
  * // ['d','g','a','b','c']
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function keysFirst(array: any[], keys: any[]): any[] {
+export default function __keysFirst(array: any[], keys: any[]): any[] {
     // all the keys has to exist in the array stack
     // otherwise we filter it out
     keys = keys.filter((key) => {
@@ -36,5 +36,3 @@ function keysFirst(array: any[], keys: any[]): any[] {
     // return the result
     return res;
 }
-
-export default keysFirst;

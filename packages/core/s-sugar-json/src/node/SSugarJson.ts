@@ -3,7 +3,7 @@ import __SClass from '@coffeekraken/s-class';
 import { __dirname, __readJsonSync } from '@coffeekraken/sugar/fs';
 import __globalNodeModulesPath from '@coffeekraken/sugar/node/npm/globalNodeModulesPath';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
-import __unique from '@coffeekraken/sugar/shared/array/unique';
+import { __unique } from '@coffeekraken/sugar/array';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
 import __glob from 'glob-all';

@@ -2,7 +2,7 @@
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { __onScrollEnd } from '@coffeekraken/sugar/dom';
-import __sameItems from '@coffeekraken/sugar/shared/array/sameItems';
+import { __sameItems } from '@coffeekraken/sugar/array';
 import __striptags from '@coffeekraken/sugar/shared/html/striptags';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __queryStringToObject from '@coffeekraken/sugar/shared/url/queryStringToObject';

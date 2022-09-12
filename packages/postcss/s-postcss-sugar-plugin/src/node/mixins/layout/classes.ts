@@ -1,6 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
-import __unique from '@coffeekraken/sugar/shared/array/unique';
+import { __unique } from '@coffeekraken/sugar/array';
 
 /**
  * @name           classes

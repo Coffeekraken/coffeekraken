@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const unique_1 = __importDefault(require("./unique"));
 /**
  * @name        keysLast
- * @namespace            js.array
+ * @namespace            shared.array
  * @type      Function
  * @platform          js
  * @platform          node
@@ -19,13 +19,13 @@ const unique_1 = __importDefault(require("./unique"));
  * @return    {Array}    The processed array
  *
  * @example    js
- * import keysLast from '@coffeekraken/sugar/js/array/keysLast'
- * keysLast(['a','b','d','g','c'], ['d','g'])
+ * import { __keysLast } from '@coffeekraken/sugar/array'
+ * __keysLast(['a','b','d','g','c'], ['d','g'])
  * // ['a','b','c','d','g']
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function keysLast(array, keys) {
+function __keysLast(array, keys) {
     // all the keys has to exist in the array stack
     // otherwise we filter it out
     keys = keys.filter((key) => {
@@ -42,5 +42,5 @@ function keysLast(array, keys) {
     // return the result
     return res;
 }
-exports.default = keysLast;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsY0FBYztBQUNkLHNEQUFnQztBQUVoQzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW1CRztBQUNILFNBQVMsUUFBUSxDQUFDLEtBQUssRUFBRSxJQUFJO0lBQ3pCLCtDQUErQztJQUMvQyw2QkFBNkI7SUFDN0IsSUFBSSxHQUFHLElBQUksQ0FBQyxNQUFNLENBQUMsQ0FBQyxHQUFHLEVBQUUsRUFBRTtRQUN2QixPQUFPLEtBQUssQ0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUM7SUFDckMsQ0FBQyxDQUFDLENBQUM7SUFDSCx3QkFBd0I7SUFDeEIsSUFBSSxHQUFHLEdBQUcsRUFBRSxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDeEMsb0JBQW9CO0lBQ3BCLEdBQUcsR0FBRyxHQUFHLENBQUMsT0FBTyxFQUFFLENBQUM7SUFDcEIsc0JBQXNCO0lBQ3RCLEdBQUcsR0FBRyxJQUFBLGdCQUFRLEVBQUMsR0FBRyxDQUFDLENBQUM7SUFDcEIseUJBQXlCO0lBQ3pCLEdBQUcsR0FBRyxHQUFHLENBQUMsT0FBTyxFQUFFLENBQUM7SUFDcEIsb0JBQW9CO0lBQ3BCLE9BQU8sR0FBRyxDQUFDO0FBQ2YsQ0FBQztBQUVELGtCQUFlLFFBQVEsQ0FBQyJ9
+exports.default = __keysLast;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsY0FBYztBQUNkLHNEQUFnQztBQUVoQzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW1CRztBQUNILFNBQXdCLFVBQVUsQ0FBQyxLQUFLLEVBQUUsSUFBSTtJQUMxQywrQ0FBK0M7SUFDL0MsNkJBQTZCO0lBQzdCLElBQUksR0FBRyxJQUFJLENBQUMsTUFBTSxDQUFDLENBQUMsR0FBRyxFQUFFLEVBQUU7UUFDdkIsT0FBTyxLQUFLLENBQUMsT0FBTyxDQUFDLEdBQUcsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDO0lBQ3JDLENBQUMsQ0FBQyxDQUFDO0lBQ0gsd0JBQXdCO0lBQ3hCLElBQUksR0FBRyxHQUFHLEVBQUUsQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxDQUFDO0lBQ3hDLG9CQUFvQjtJQUNwQixHQUFHLEdBQUcsR0FBRyxDQUFDLE9BQU8sRUFBRSxDQUFDO0lBQ3BCLHNCQUFzQjtJQUN0QixHQUFHLEdBQUcsSUFBQSxnQkFBUSxFQUFDLEdBQUcsQ0FBQyxDQUFDO0lBQ3BCLHlCQUF5QjtJQUN6QixHQUFHLEdBQUcsR0FBRyxDQUFDLE9BQU8sRUFBRSxDQUFDO0lBQ3BCLG9CQUFvQjtJQUNwQixPQUFPLEdBQUcsQ0FBQztBQUNmLENBQUM7QUFoQkQsNkJBZ0JDIn0=

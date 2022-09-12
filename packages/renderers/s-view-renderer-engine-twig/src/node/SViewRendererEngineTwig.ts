@@ -4,7 +4,7 @@ import { ISViewRendererSettings } from '@coffeekraken/s-view-renderer';
 import { __dirname } from '@coffeekraken/sugar/fs';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import { __execPhp } from '@coffeekraken/sugar/exec';
-import __unique from '@coffeekraken/sugar/shared/array/unique';
+import { __unique } from '@coffeekraken/sugar/array';
 import __fs from 'fs';
 import __path from 'path';
 import __SViewRendererTwigEngineSettingsInterface from './interface/SViewRendererEngineTwigSettingsInterface';

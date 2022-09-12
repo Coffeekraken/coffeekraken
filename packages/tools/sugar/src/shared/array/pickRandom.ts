@@ -14,14 +14,14 @@ import __unique from './unique';
  * @return      {Any}                       A random array item
  *
  * @example         js
- * import pickRandom from '@coffeekraken/sugar/shared/array/pickRandom';
+ * import { __pickRandom } from '@coffeekraken/sugar/array';
  * const array = ['hello','world'];
- * pickRandom(array); // => 'world'
+ * __pickRandom(array); // => 'world'
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function pickRandom(array: any[], count: number = 1): any {
+export default function __pickRandom(array: any[], count: number = 1): any {
     // make the array unique
     array = __unique(array);
 

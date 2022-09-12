@@ -2,7 +2,7 @@
 
 /**
  * @name              unique
- * @namespace            js.array
+ * @namespace            shared.array
  * @type                  Function
  * @platform          js
  * @platform          node
@@ -15,13 +15,13 @@
  * @return        {Array}                             The deduplicated array
  *
  * @example         js
- * import unique from '@coffeekraken/sugar/js/array/unique';
- * unique(['hello','world','hello','world']); // => ['hello','world']
+ * import { __unique } from '@coffeekraken/sugar/array';
+ * __unique(['hello','world','hello','world']); // => ['hello','world']
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function unique(array) {
+export default function __unique(array) {
     const a = array.concat();
     for (let i = 0; i < a.length; ++i) {
         for (let j = i + 1; j < a.length; ++j) {
@@ -30,4 +30,3 @@ function unique(array) {
     }
     return a;
 }
-export default unique;

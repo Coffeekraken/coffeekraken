@@ -113,6 +113,14 @@
     "globalDependencies": {},
     "autoExports": false,
     "exports": {
+        "./array": {
+            "require": "./dist/pkg/cjs/shared/array/_exports.js",
+            "import": "./dist/pkg/esm/shared/array/_exports.js"
+        },
+        "./ascii": {
+            "require": "./dist/pkg/cjs/shared/ascii/_exports.js",
+            "import": "./dist/pkg/esm/shared/ascii/_exports.js"
+        },
         "./clipboard": {
             "node": {
                 "require": "./dist/pkg/cjs/node/clipboard/_exports.js",

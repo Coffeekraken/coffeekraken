@@ -2,7 +2,7 @@
 
 /**
  * @name                                splitEvery
- * @namespace            js.array
+ * @namespace            shared.array
  * @type                                Function
  * @platform          js
  * @platform          node
@@ -15,13 +15,13 @@
  * @return          {Array}                               An array of arrays splited
  *
  * @example           js
- * import splitEvery from '@coffeekraken/sugar/js/array/splitEvery';
- * splitEvery([1,2,3,4,5,6,7,8,9], 3);
+ * import { __splitEvery } from '@coffeekraken/sugar/array';
+ * __splitEvery([1,2,3,4,5,6,7,8,9], 3);
  * // [[1,2,3],[4,5,6],[7,8,9]]
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function splitEvery(array: any[], every: number): any[] {
+export default function __splitEvery(array: any[], every: number): any[] {
     let i: number, j: number;
     const finalArray: any[] = [];
     for (i = 0, j = array.length; i < j; i += every) {
@@ -29,4 +29,3 @@ function splitEvery(array: any[], every: number): any[] {
     }
     return finalArray;
 }
-export default splitEvery;

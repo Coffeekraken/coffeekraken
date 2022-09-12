@@ -2,7 +2,7 @@
 
 /**
  * @name                              asyncForEach
- * @namespace            js.array
+ * @namespace            shared.array
  * @type                              Function
  * @platform          js
  * @platform          node
@@ -14,9 +14,9 @@
  * @param         {Function}          asyncFn           The async function to call on each items
  *
  * @example         js
- * import asyncForEach from '@coffeekraken/sugar/js/array/asyncForEach';
+ * import { __asyncForEach } from '@coffeekraken/sugar/array';
  * const waitFor = (ms) => new Promise(r => setTimeout(r, ms));
- * asyncForEach([0,1,2,3], async (item) => {
+ * __asyncForEach([0,1,2,3], async (item) => {
  *    await waitWor(50);
  *    console.log(item);
  * });
@@ -30,7 +30,7 @@
 interface IAsyncForEach {
     (value: any, index: number, array: any[]): void;
 }
-export default async function asyncForEach(
+export default async function __asyncForEach(
     array: any[],
     asyncFn: IAsyncForEach,
 ): Promise<any> {

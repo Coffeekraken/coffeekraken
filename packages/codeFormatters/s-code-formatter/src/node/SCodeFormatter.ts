@@ -5,7 +5,7 @@ import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import { __getFiles } from '@coffeekraken/sugar/fs';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
-import __unique from '@coffeekraken/sugar/shared/array/unique';
+import { __unique } from '@coffeekraken/sugar/array';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
 import __path from 'path';

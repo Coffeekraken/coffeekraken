@@ -7,7 +7,7 @@ import __SConfigAdapter from '@coffeekraken/s-config-adapter';
 import __STypescriptBuilder from '@coffeekraken/s-typescript-builder';
 import { __dirname } from '@coffeekraken/sugar/fs';
 import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
-import __unique from '@coffeekraken/sugar/shared/array/unique';
+import { __unique } from '@coffeekraken/sugar/array';
 import __sha256 from '@coffeekraken/sugar/shared/crypt/sha256';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __merge from '@coffeekraken/sugar/shared/object/merge';

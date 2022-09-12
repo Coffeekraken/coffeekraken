@@ -21,8 +21,8 @@ import __deepMerge from '../object/deepMerge';
  * @todo      tests
  *
  * @example     js
- * import sugarBanner from '@coffeekraken/sugar/js/ascii/sugarBanner';
- * sugarBanner();
+ * import { __sugarBanner } from '@coffeekraken/sugar/ascii';
+ * __sugarBanner();
  *
  * @since     2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -34,7 +34,9 @@ interface ISugarBannerSettings {
     paddingTop: number;
     paddingBottom: number;
 }
-function sugarBanner(settings: Partial<ISugarBannerSettings> = {}): string {
+export default function __sugarBanner(
+    settings: Partial<ISugarBannerSettings> = {},
+): string {
     settings = __deepMerge(
         {
             version: '',
@@ -90,5 +92,3 @@ function sugarBanner(settings: Partial<ISugarBannerSettings> = {}): string {
 
     return value.join('\n');
 }
-
-export default sugarBanner;

@@ -13,7 +13,7 @@ import {
     __writeJsonSync,
 } from '@coffeekraken/sugar/fs';
 import { __packageRootDir, __packageTmpDir } from '@coffeekraken/sugar/path';
-import __unique from '@coffeekraken/sugar/shared/array/unique';
+import { __unique } from '@coffeekraken/sugar/array';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import { __uniqid } from '@coffeekraken/sugar/string';
 import __fs from 'fs';

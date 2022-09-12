@@ -1,6 +1,6 @@
 import __SPromise from '@coffeekraken/s-promise';
 import { ISViewRendererSettings } from '@coffeekraken/s-view-renderer';
-import __unique from '@coffeekraken/sugar/shared/array/unique';
+import { __unique } from '@coffeekraken/sugar/array';
 import { render } from '@lit-labs/ssr/lib/render-with-global-dom-shim.js';
 import __fs from 'fs';
 import { Readable } from 'stream';

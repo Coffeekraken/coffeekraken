@@ -1,7 +1,7 @@
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __npmInstall from '@coffeekraken/sugar/node/npm/install';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
-import __unique from '@coffeekraken/sugar/shared/array/unique';
+import { __unique } from '@coffeekraken/sugar/array';
 import __fs from 'fs';
 import type { ISKitchenIngredient } from '../../SKitchen';
 

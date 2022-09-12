@@ -1,10 +1,8 @@
 // @ts-nocheck
-
 import __uniqid from '../string/uniqid';
-
 /**
- * @name                  proxy
- * @namespace            js.array
+ * @name                  proxyArray
+ * @namespace            shared.array
  * @type                  Function
  * @platform          js
  * @platform          node
@@ -16,8 +14,8 @@ import __uniqid from '../string/uniqid';
  * @return        {Array}                           The same array with his prototype proxied
  *
  * @example       js
- * import proxy from '@coffeekraken/sugar/js/array/proxy';
- * const myArray = proxy([1,2,3]);
+ * import { __proxyArray } from '@coffeekraken/sugar/array';
+ * const myArray = __proxyArray([1,2,3]);
  * myArray.watch(['push','pop'], (watchObj) => {
  *    // check the watchObj action
  *    switch (watchObj.action) {
@@ -29,23 +27,22 @@ import __uniqid from '../string/uniqid';
  *
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function proxy(array) {
-    if (array.__$proxied) return array;
-
+export default function __proxyArray(array) {
+    if (array.__$proxied)
+        return array;
     const watchStack = {};
-
     // mark that this array has already been proxied
     Object.defineProperty(array, '__$proxied', {
         value: true,
         enumerable: false,
         writable: false,
     });
-
     function _proxyMethod(name, ...args) {
         const handlersStack = [];
         Object.keys(watchStack).forEach((watchId) => {
             const watch = watchStack[watchId];
-            if (watch.methods.indexOf(name) === -1) return;
+            if (watch.methods.indexOf(name) === -1)
+                return;
             handlersStack.push({
                 handlerFn: watch.handlerFn,
                 watchObj: {
@@ -56,24 +53,17 @@ function proxy(array) {
                 },
             });
         });
-
         const returnValue = Array.prototype[name].call(array, ...args);
-
         handlersStack.forEach((handlerObj) => {
-            handlerObj.watchObj = {
-                ...handlerObj.watchObj,
-                value: array,
-                returnedValue: returnValue,
-            };
+            handlerObj.watchObj = Object.assign(Object.assign({}, handlerObj.watchObj), { value: array, returnedValue: returnValue });
             handlerObj.handlerFn(handlerObj.watchObj);
         });
-
         return returnValue;
     }
-
     Object.getOwnPropertyNames(Array.prototype).forEach((methodName) => {
         const unProxyMethods = ['length', 'constructor'];
-        if (unProxyMethods.indexOf(methodName) !== -1) return;
+        if (unProxyMethods.indexOf(methodName) !== -1)
+            return;
         Object.defineProperty(array, methodName, {
             writable: false,
             configurable: false,
@@ -83,7 +73,6 @@ function proxy(array) {
             },
         });
     });
-
     /**
      * @name                    watch
      * @type                    Function
@@ -123,7 +112,6 @@ function proxy(array) {
             return watchId;
         },
     });
-
     /**
      * @name                  unwatch
      * @type                  Function
@@ -148,8 +136,7 @@ function proxy(array) {
             delete watchStack[watchId];
         },
     });
-
     // return the processed array
     return array;
 }
-export default proxy;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFFBQVEsTUFBTSxrQkFBa0IsQ0FBQztBQUV4Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EwQkc7QUFDSCxNQUFNLENBQUMsT0FBTyxVQUFVLFlBQVksQ0FBQyxLQUFLO0lBQ3RDLElBQUksS0FBSyxDQUFDLFVBQVU7UUFBRSxPQUFPLEtBQUssQ0FBQztJQUVuQyxNQUFNLFVBQVUsR0FBRyxFQUFFLENBQUM7SUFFdEIsZ0RBQWdEO0lBQ2hELE1BQU0sQ0FBQyxjQUFjLENBQUMsS0FBSyxFQUFFLFlBQVksRUFBRTtRQUN2QyxLQUFLLEVBQUUsSUFBSTtRQUNYLFVBQVUsRUFBRSxLQUFLO1FBQ2pCLFFBQVEsRUFBRSxLQUFLO0tBQ2xCLENBQUMsQ0FBQztJQUVILFNBQVMsWUFBWSxDQUFDLElBQUksRUFBRSxHQUFHLElBQUk7UUFDL0IsTUFBTSxhQUFhLEdBQUcsRUFBRSxDQUFDO1FBQ3pCLE1BQU0sQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUMsT0FBTyxDQUFDLENBQUMsT0FBTyxFQUFFLEVBQUU7WUFDeEMsTUFBTSxLQUFLLEdBQUcsVUFBVSxDQUFDLE9BQU8sQ0FBQyxDQUFDO1lBQ2xDLElBQUksS0FBSyxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxDQUFDO2dCQUFFLE9BQU87WUFDL0MsYUFBYSxDQUFDLElBQUksQ0FBQztnQkFDZixTQUFTLEVBQUUsS0FBSyxDQUFDLFNBQVM7Z0JBQzFCLFFBQVEsRUFBRTtvQkFDTixRQUFRLEVBQUUsQ0FBQyxHQUFHLEtBQUssQ0FBQztvQkFDcEIsTUFBTSxFQUFFLEdBQUcsSUFBSSxFQUFFO29CQUNqQixVQUFVLEVBQUUsU0FBUyxJQUFJLEVBQUU7b0JBQzNCLElBQUk7aUJBQ1A7YUFDSixDQUFDLENBQUM7UUFDUCxDQUFDLENBQUMsQ0FBQztRQUVILE1BQU0sV0FBVyxHQUFHLEtBQUssQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLENBQUMsSUFBSSxDQUFDLEtBQUssRUFBRSxHQUFHLElBQUksQ0FBQyxDQUFDO1FBRS9ELGFBQWEsQ0FBQyxPQUFPLENBQUMsQ0FBQyxVQUFVLEVBQUUsRUFBRTtZQUNqQyxVQUFVLENBQUMsUUFBUSxtQ0FDWixVQUFVLENBQUMsUUFBUSxLQUN0QixLQUFLLEVBQUUsS0FBSyxFQUNaLGFBQWEsRUFBRSxXQUFXLEdBQzdCLENBQUM7WUFDRixVQUFVLENBQUMsU0FBUyxDQUFDLFVBQVUsQ0FBQyxRQUFRLENBQUMsQ0FBQztRQUM5QyxDQUFDLENBQUMsQ0FBQztRQUVILE9BQU8sV0FBVyxDQUFDO0lBQ3ZCLENBQUM7SUFFRCxNQUFNLENBQUMsbUJBQW1CLENBQUMsS0FBSyxDQUFDLFNBQVMsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLFVBQVUsRUFBRSxFQUFFO1FBQy9ELE1BQU0sY0FBYyxHQUFHLENBQUMsUUFBUSxFQUFFLGFBQWEsQ0FBQyxDQUFDO1FBQ2pELElBQUksY0FBYyxDQUFDLE9BQU8sQ0FBQyxVQUFVLENBQUMsS0FBSyxDQUFDLENBQUM7WUFBRSxPQUFPO1FBQ3RELE1BQU0sQ0FBQyxjQUFjLENBQUMsS0FBSyxFQUFFLFVBQVUsRUFBRTtZQUNyQyxRQUFRLEVBQUUsS0FBSztZQUNmLFlBQVksRUFBRSxLQUFLO1lBQ25CLFVBQVUsRUFBRSxLQUFLO1lBQ2pCLEtBQUssRUFBRSxDQUFDLEdBQUcsSUFBSSxFQUFFLEVBQUU7Z0JBQ2YsT0FBTyxZQUFZLENBQUMsVUFBVSxFQUFFLEdBQUcsSUFBSSxDQUFDLENBQUM7WUFDN0MsQ0FBQztTQUNKLENBQUMsQ0FBQztJQUNQLENBQUMsQ0FBQyxDQUFDO0lBRUg7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7T0FzQkc7SUFDSCxNQUFNLENBQUMsY0FBYyxDQUFDLEtBQUssRUFBRSxPQUFPLEVBQUU7UUFDbEMsUUFBUSxFQUFFLEtBQUs7UUFDZixZQUFZLEVBQUUsS0FBSztRQUNuQixVQUFVLEVBQUUsS0FBSztRQUNqQixLQUFLLEVBQUUsQ0FBQyxPQUFPLEVBQUUsU0FBUyxFQUFFLEVBQUU7WUFDMUIsb0RBQW9EO1lBQ3BELE1BQU0sT0FBTyxHQUFHLFFBQVEsRUFBRSxDQUFDO1lBQzNCLDRCQUE0QjtZQUM1QixVQUFVLENBQUMsT0FBTyxDQUFDLEdBQUc7Z0JBQ2xCLE9BQU87Z0JBQ1AsU0FBUzthQUNaLENBQUM7WUFDRiw4REFBOEQ7WUFDOUQsT0FBTyxPQUFPLENBQUM7UUFDbkIsQ0FBQztLQUNKLENBQUMsQ0FBQztJQUVIOzs7Ozs7Ozs7Ozs7OztPQWNHO0lBQ0gsTUFBTSxDQUFDLGNBQWMsQ0FBQyxLQUFLLEVBQUUsU0FBUyxFQUFFO1FBQ3BDLFFBQVEsRUFBRSxLQUFLO1FBQ2YsWUFBWSxFQUFFLEtBQUs7UUFDbkIsVUFBVSxFQUFFLEtBQUs7UUFDakIsS0FBSyxFQUFFLENBQUMsT0FBTyxFQUFFLEVBQUU7WUFDZiwyQkFBMkI7WUFDM0IsT0FBTyxVQUFVLENBQUMsT0FBTyxDQUFDLENBQUM7UUFDL0IsQ0FBQztLQUNKLENBQUMsQ0FBQztJQUVILDZCQUE2QjtJQUM3QixPQUFPLEtBQUssQ0FBQztBQUNqQixDQUFDIn0=

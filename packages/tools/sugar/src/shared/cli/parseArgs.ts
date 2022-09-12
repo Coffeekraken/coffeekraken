@@ -33,8 +33,8 @@ import __unquote from '../string/unquote';
  * @todo      tests
  *
  * @example         js
- * import parseArgs from '@coffeekraken/sugar/shared/cli/parseArgs';
- * parseArgs('hello -w 10 yop "hello world" -b --hello.world Nelson --help "coco yep" #blop', {
+ * import { __parseArgs } from '@coffeekraken/sugar/cli';
+ * __parseArgs('hello -w 10 yop "hello world" -b --hello.world Nelson --help "coco yep" #blop', {
  *    param1: { type: 'String', alias: 'p' },
  *    world: { type: 'Array', alias: 'w', validator: value => {
  *      return Array.isArray(value);
@@ -65,7 +65,7 @@ export interface IParseArgsSettings {
     camelCase: boolean;
 }
 
-export default function parseArgs(
+export default function __parseArgs(
     string,
     settings?: Partial<IParseArgsSettings>,
 ) {

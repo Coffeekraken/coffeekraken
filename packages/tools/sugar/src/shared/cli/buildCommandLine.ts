@@ -29,8 +29,8 @@ import __argsToString from './argsToString';
  * @todo      tests
  *
  * @example       js
- * import buildCommandLine from '@coffeekraken/sugar/js/cli/buildCommandLine';
- * buildCommandLine('php [hostname]:[port] [rootDir] [arguments]', {
+ * import { __buildCommandLine } from '@coffeekraken/sugar/cli';
+ * __buildCommandLine('php [hostname]:[port] [rootDir] [arguments]', {
  *    hostname: {
  *      type: 'String',
  *      description: 'Server hostname',
@@ -65,7 +65,7 @@ export interface IBuildCommandLineSettings {
     keepFalsy: boolean;
 }
 
-export default function buildCommandLine(
+export default function __buildCommandLine(
     command: string,
     args: Record<string, unknown> = {},
     settings?: Partial<IBuildCommandLineSettings>,

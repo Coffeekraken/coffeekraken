@@ -4,7 +4,7 @@ import __SDescriptor, {
     ISDescriptorRules,
     ISDescriptorSettings,
 } from '@coffeekraken/s-descriptor';
-import __parseArgs from '@coffeekraken/sugar/shared/cli/parseArgs';
+import { __parseArgs } from '@coffeekraken/sugar/cli';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __getAvailableInterfaceTypes from './getAvailableInterfaceTypes';

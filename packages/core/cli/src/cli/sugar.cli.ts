@@ -8,14 +8,16 @@ import type { ISStdio } from '@coffeekraken/s-stdio';
 import __SStdio from '@coffeekraken/s-stdio';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
+import { __sugarBanner } from '@coffeekraken/sugar/ascii';
+import { __parseArgs } from '@coffeekraken/sugar/cli';
 import { __dirname, __writeFileSync } from '@coffeekraken/sugar/fs';
-import { __processSugar } from '@coffeekraken/sugar/process';
 import { __isChildProcess } from '@coffeekraken/sugar/is';
 import { __packageJsonSync } from '@coffeekraken/sugar/package';
-import { __onProcessExit } from '@coffeekraken/sugar/process';
-import { __spawn } from '@coffeekraken/sugar/process';
-import { __sugarBanner } from '@coffeekraken/sugar/ascii';
-import __parseArgs from '@coffeekraken/sugar/shared/cli/parseArgs';
+import {
+    __onProcessExit,
+    __processSugar,
+    __spawn,
+} from '@coffeekraken/sugar/process';
 import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __dotenv from 'dotenv';

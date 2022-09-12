@@ -1,13 +1,12 @@
 // @ts-nocheck
 
-import __toString from '../string/toString';
-import __deepMerge from '../object/deepMerge';
-import __parse from '../string/parse';
 import __isPlainObject from '../is/plainObject';
+import __deepMerge from '../object/deepMerge';
+import __toString from '../string/toString';
 
 /**
  * @name                  argsToString
- * @namespace            js.cli
+ * @namespace            shared.cli
  * @type                  Function
  * @platform          js
  * @platform          node
@@ -25,8 +24,8 @@ import __isPlainObject from '../is/plainObject';
  * @todo      {Test}      Testing when no definition is passed
  *
  * @example       js
- * import argsToString from '@coffeekraken/sugar/shared/cli/argsToString';
- * argsToString({
+ * import { __argsToString } from '@coffeekraken/sugar/cli';
+ * __argsToString({
  *    arg1: 'Hello',
  *    myOtherArg: 'World'
  * });
@@ -39,7 +38,7 @@ import __isPlainObject from '../is/plainObject';
 // TODO: support deep object structure
 // TODO: support required args
 
-function argsToString(args, settings = {}) {
+export default function __argsToString(args, settings = {}) {
     settings = __deepMerge(
         {
             valueQuote: '"',
@@ -86,4 +85,3 @@ function argsToString(args, settings = {}) {
     });
     return string.replace(/(\s){2,999999}/gm, ' ').trim();
 }
-export default argsToString;

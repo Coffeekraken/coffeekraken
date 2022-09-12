@@ -16,7 +16,7 @@
  * @todo      tests
  *
  * @example             js
- * import builtInNodeModules from '@coffeekraken/sugar/node/module/builtInNodeModules';
+ * import { __builtInNodeModules } from '@coffeekraken/sugar/module';
  * // {
  * //   os: {
  * //     polyfill: {

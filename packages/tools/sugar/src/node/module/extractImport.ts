@@ -1,4 +1,4 @@
-import { find as __find } from 'abstract-syntax-tree';
+import * as __ast from 'abstract-syntax-tree';
 import * as __acorn from 'acorn-loose';
 import { generate as __astring } from 'astring';
 import __fs from 'fs';
@@ -24,8 +24,8 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @todo        Tests
  *
  * @example         js
- * import extractImports from '@coffeekraken/sugar/node/module/extractImport';
- * extractImport('/something/cool.js');
+ * import { __extractImports } from '@coffeekraken/sugar/module';
+ * __extractImports('/something/cool.js');
  *
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -41,7 +41,7 @@ export interface IExtractImportItem {
     local: string | undefined;
 }
 
-export default function extractImport(
+export default function __extractImports(
     stringOrFilePath,
     settings?: Partial<IExtractImportSettings>,
 ): IExtractImportItem[] {
@@ -67,7 +67,7 @@ export default function extractImport(
 
     // imports
     if (set.import) {
-        const importsAst = __find(ast, 'ImportDeclaration');
+        const importsAst = __ast.find(ast, 'ImportDeclaration');
 
         importsAst.forEach((importAst) => {
             const raw = __astring(importAst).replace(/await;\n/, 'await ');
@@ -106,7 +106,7 @@ export default function extractImport(
             }
         });
 
-        const importExpressions = __find(ast, 'ImportExpression');
+        const importExpressions = __ast.find(ast, 'ImportExpression');
         importExpressions.forEach((callObj) => {
             if (!callObj.source.value) return;
 
@@ -129,7 +129,7 @@ export default function extractImport(
     }
 
     // if (set.require) {
-    //     const variablesDeclarations = __find(ast, 'VariableDeclarator');
+    //     const variablesDeclarations = __ast.find(ast, 'VariableDeclarator');
 
     //     variablesDeclarations.forEach((varObj) => {
     //         if (!varObj.init || varObj.init.type !== 'require') return;

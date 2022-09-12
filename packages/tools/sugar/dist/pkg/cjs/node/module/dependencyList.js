@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
 const deepMap_1 = __importDefault(require("../../shared/object/deepMap"));
-const dependencyTree_1 = __importDefault(require("./dependencyTree"));
+const module_1 = require("@coffeekraken/sugar/module");
 /**
  * @name                dependencyList
  * @namespace            node.module
@@ -30,8 +30,8 @@ const dependencyTree_1 = __importDefault(require("./dependencyTree"));
  * @return      {SPromise}                               An SPromise instance through which you can get logs, and that will be resolved once the process is over
  *
  * @example         js
- * import dependencyList from '@coffeekraken/sugar/node/module/dependencyList';
- * await dependencyList('/something/cool.js', {
+ * import { __dependencyList } from '@coffeekraken/sugar/module';
+ * await __dependencyList('/something/cool.js', {
  *      cache: true,
  *      // etc...
  * });
@@ -40,9 +40,9 @@ const dependencyTree_1 = __importDefault(require("./dependencyTree"));
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function dependencyList(filePath, settings) {
+function __dependencyList(filePath, settings) {
     return new s_promise_1.default(({ resolve, pipe }) => __awaiter(this, void 0, void 0, function* () {
-        const tree = yield pipe((0, dependencyTree_1.default)(filePath, settings));
+        const tree = yield pipe((0, module_1.__dependencyTree)(filePath, settings));
         const list = [];
         (0, deepMap_1.default)(tree, ({ prop, value }) => {
             if (list.indexOf(prop) === -1)
@@ -54,5 +54,5 @@ function dependencyList(filePath, settings) {
         resolve(list);
     }));
 }
-exports.default = dependencyList;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsd0VBQWlEO0FBQ2pELDBFQUFvRDtBQUNwRCxzRUFFMEI7QUFFMUI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUVILFNBQXdCLGNBQWMsQ0FDbEMsUUFBZ0IsRUFDaEIsUUFBbUQ7SUFFbkQsT0FBTyxJQUFJLG1CQUFVLENBQUMsQ0FBTyxFQUFFLE9BQU8sRUFBRSxJQUFJLEVBQUUsRUFBRSxFQUFFO1FBQzlDLE1BQU0sSUFBSSxHQUFHLE1BQU0sSUFBSSxDQUFDLElBQUEsd0JBQWdCLEVBQUMsUUFBUSxFQUFFLFFBQVEsQ0FBQyxDQUFDLENBQUM7UUFDOUQsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO1FBQzFCLElBQUEsaUJBQVMsRUFDTCxJQUFJLEVBQ0osQ0FBQyxFQUFFLElBQUksRUFBRSxLQUFLLEVBQUUsRUFBRSxFQUFFO1lBQ2hCLElBQUksSUFBSSxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUM7Z0JBQUUsSUFBSSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQztZQUMvQyxPQUFPLEtBQUssQ0FBQztRQUNqQixDQUFDLEVBQ0Q7WUFDSSxjQUFjLEVBQUUsSUFBSTtTQUN2QixDQUNKLENBQUM7UUFDRixPQUFPLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDbEIsQ0FBQyxDQUFBLENBQUMsQ0FBQztBQUNQLENBQUM7QUFuQkQsaUNBbUJDIn0=
+exports.default = __dependencyList;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsd0VBQWlEO0FBQ2pELDBFQUFvRDtBQUNwRCx1REFBOEQ7QUFHOUQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUVILFNBQXdCLGdCQUFnQixDQUNwQyxRQUFnQixFQUNoQixRQUFtRDtJQUVuRCxPQUFPLElBQUksbUJBQVUsQ0FBQyxDQUFPLEVBQUUsT0FBTyxFQUFFLElBQUksRUFBRSxFQUFFLEVBQUU7UUFDOUMsTUFBTSxJQUFJLEdBQUcsTUFBTSxJQUFJLENBQUMsSUFBQSx5QkFBZ0IsRUFBQyxRQUFRLEVBQUUsUUFBUSxDQUFDLENBQUMsQ0FBQztRQUM5RCxNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7UUFDMUIsSUFBQSxpQkFBUyxFQUNMLElBQUksRUFDSixDQUFDLEVBQUUsSUFBSSxFQUFFLEtBQUssRUFBRSxFQUFFLEVBQUU7WUFDaEIsSUFBSSxJQUFJLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQztnQkFBRSxJQUFJLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDO1lBQy9DLE9BQU8sS0FBSyxDQUFDO1FBQ2pCLENBQUMsRUFDRDtZQUNJLGNBQWMsRUFBRSxJQUFJO1NBQ3ZCLENBQ0osQ0FBQztRQUNGLE9BQU8sQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUNsQixDQUFDLENBQUEsQ0FBQyxDQUFDO0FBQ1AsQ0FBQztBQW5CRCxtQ0FtQkMifQ==

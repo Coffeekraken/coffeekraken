@@ -23,8 +23,8 @@ import __extractImport from './extractImport';
  * @return      {SPromise}                               An SPromise instance through which you can get logs, and that will be resolved once the process is over
  *
  * @example         js
- * import dependencyTree from '@coffeekraken/sugar/node/module/dependencyTree';
- * await dependencyTree('/something/cool.js', {
+ * import { __dependencyTree } from '@coffeekraken/sugar/module';
+ * await __dependencyTree('/something/cool.js', {
  *      cache: true,
  *      // etc...
  * });
@@ -48,7 +48,7 @@ export interface IDependencyTreeExtendedSettings {
     deep?: boolean;
 }
 
-export default function dependencyTree(
+export default function __dependencyTree(
     filePath: string,
     settings?: Partial<IDependencyTreeExtendedSettings>,
 ): any {
@@ -99,7 +99,7 @@ export default function dependencyTree(
 
             // cache id
             // const cachedValue = await cache.get(filePath);
-            const cachedValue;
+            let cachedValue;
             if (cachedValue) {
                 // check integrity
                 if (cachedValue.integrity === integrity) {

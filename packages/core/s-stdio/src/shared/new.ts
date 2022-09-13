@@ -1,4 +1,4 @@
-import __isNode from '@coffeekraken/sugar/shared/is/node';
+import { __isNode } from '@coffeekraken/sugar/is';
 import __SBasicStdio from '../node/basic/SBasicStdio';
 import type { ISStdioUi } from './SStdio';
 import __SStdio from './SStdio';

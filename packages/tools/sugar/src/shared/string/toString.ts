@@ -1,16 +1,15 @@
 // @ts-nocheck
 
-import __isNode from '../is/node';
 import __chalk from 'chalk';
+import __mapToObj from '../convert/mapToObject';
+import __isArray from '../is/isArray';
+import __isBoolean from '../is/isBoolean';
+import __isFunction from '../is/isFunction';
+import __isJson from '../is/isJson';
+import __isMap from '../is/isMap';
+import __isObject from '../is/isObject';
 import __deepMap from '../object/deepMap';
-import __isMap from '../is/map';
-import __isArray from '../is/array';
-import __isBoolean from '../is/boolean';
-import __isFunction from '../is/function';
-import __isJson from '../is/json';
-import __isObject from '../is/object';
 import __deepMerge from '../object/deepMerge';
-import __mapToObj from '../map/mapToObject';
 // import { highlight as __cliHighlight } from 'cli-highlight';
 import { decycle } from 'json-cyclic';
 

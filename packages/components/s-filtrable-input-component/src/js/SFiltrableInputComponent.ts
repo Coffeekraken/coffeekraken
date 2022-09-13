@@ -1,5 +1,5 @@
 import __SLitComponent from '@coffeekraken/s-lit-component';
-import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
+import { __isPlainObject } from '@coffeekraken/sugar/is';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import { css, html, unsafeCSS } from 'lit';
@@ -8,13 +8,13 @@ import __SFiltrableInputComponentInterface from './interface/SFiltrableInputComp
 
 import __cursorToEnd from '@coffeekraken/sugar/js/dom/input/cursorToEnd';
 
-import { __onScrollEnd } from '@coffeekraken/sugar/dom';
 import {
     __distanceFromElementTopToViewportBottom,
     __distanceFromElementTopToViewportTop,
+    __getStyleProperty,
+    __onScrollEnd,
 } from '@coffeekraken/sugar/dom';
 import __stripTags from '@coffeekraken/sugar/js/dom/manipulate/stripTags';
-import { __getStyleProperty } from '@coffeekraken/sugar/dom';
 import { __hotkey } from '@coffeekraken/sugar/keyboard';
 
 // @ts-ignore

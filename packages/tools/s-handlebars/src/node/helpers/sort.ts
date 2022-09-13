@@ -1,4 +1,4 @@
-import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
+import { __isPlainObject } from '@coffeekraken/sugar/is';
 import __sortObject from '@coffeekraken/sugar/shared/object/sort';
 
 /**

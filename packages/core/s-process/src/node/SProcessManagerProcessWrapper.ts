@@ -5,7 +5,7 @@ import __SEventEmitter, {
     ISEventEmitterPipeSettingsFilterFn,
 } from '@coffeekraken/s-event-emitter';
 import __SPromise from '@coffeekraken/s-promise';
-import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
+import { __isPlainObject } from '@coffeekraken/sugar/is';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __SProcess from './SProcess';

@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const glob_parent_1 = __importDefault(require("glob-parent"));
 /**
  * @name                extractNoneGlob
- * @namespace            js.glob
+ * @namespace            shared.glob
  * @type                Function
  * @platform          js
  * @platform          node
@@ -23,16 +23,16 @@ const glob_parent_1 = __importDefault(require("glob-parent"));
  * @todo      tests
  *
  * @example         js
- * import extractNoneGlob from '@coffeekraken/sugar/js/glob/extractNoneGlob';
- * extractNoneGlob('/coco/hello/*.js'); // => '*.js'
+ * import { __extractNoneGlob } from '@coffeekraken/sugar/glob';
+ * __extractNoneGlob('/coco/hello/*.js'); // => '*.js'
  *
  * @see             https://www.npmjs.com/package/glob-parent
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function extractNoneGlob(string) {
+function __extractNoneGlob(string) {
     const parent = (0, glob_parent_1.default)(string);
     return parent;
 }
-exports.default = extractNoneGlob;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDhEQUF1QztBQUV2Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBUyxlQUFlLENBQUMsTUFBTTtJQUMzQixNQUFNLE1BQU0sR0FBRyxJQUFBLHFCQUFZLEVBQUMsTUFBTSxDQUFDLENBQUM7SUFDcEMsT0FBTyxNQUFNLENBQUM7QUFDbEIsQ0FBQztBQUNELGtCQUFlLGVBQWUsQ0FBQyJ9
+exports.default = __extractNoneGlob;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDhEQUF1QztBQUV2Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBd0IsaUJBQWlCLENBQUMsTUFBTTtJQUM1QyxNQUFNLE1BQU0sR0FBRyxJQUFBLHFCQUFZLEVBQUMsTUFBTSxDQUFDLENBQUM7SUFDcEMsT0FBTyxNQUFNLENBQUM7QUFDbEIsQ0FBQztBQUhELG9DQUdDIn0=

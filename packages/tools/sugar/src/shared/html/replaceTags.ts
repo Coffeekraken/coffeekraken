@@ -4,7 +4,7 @@ import __toString from '../string/toString';
 
 /**
  * @name                            replaceTags
- * @namespace            js.html
+ * @namespace            shared.html
  * @type                            Function
  * @platform          js
  * @platform          node
@@ -21,15 +21,15 @@ import __toString from '../string/toString';
  * @todo      tests
  *
  * @example             js
- * import replaceTags from '@coffeekraken/sugar/js/html/replaceTags';
- * replaceTags('<span>Hello</span> world', {
+ * import { __replaceTags } from '@coffeekraken/sugar/html';
+ *  __replaceTags('<span>Hello</span> world', {
  *    span: (tag, content) => `<div>${content}</div>`; // => <div>Hello</div> world
  * });
  *
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function replaceTags(text, tags) {
+export default function __replaceTags(text, tags) {
     if (!text) text = '';
     text = __toString(text);
     let oneLineText = text.replace(/\r\n/g, '|rn|');
@@ -89,4 +89,3 @@ function replaceTags(text, tags) {
 
     return oneLineText;
 }
-export default replaceTags;

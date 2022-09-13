@@ -1,12 +1,10 @@
 // @ts-nocheck
-
-import __deepMerge from '../object/deepMerge';
 // import { decycle } from 'json-cyclic';
 import __stringify from 'fast-safe-stringify';
 
 /**
  * @name            stringify
- * @namespace            js.json
+ * @namespace            shared.json
  * @type            Function
  * @platform          js
  * @platform          node
@@ -25,8 +23,8 @@ import __stringify from 'fast-safe-stringify';
  * @todo      tests
  *
  * @example         js
- * import stringify from '@coffeekraken/sugar/js/json/stringify';
- * stringify({
+ * import { __stringify } from '@coffeekraken/sugar/json';
+ * __stringify({
  *    hello: 'world'
  * }); // => {"hello":"world"}
  *
@@ -34,7 +32,6 @@ import __stringify from 'fast-safe-stringify';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function stringify(obj, replacer = null, space = null) {
+export default function stringify(obj, replacer = null, space = null) {
     return __stringify(obj, replacer, space);
 }
-export default stringify;

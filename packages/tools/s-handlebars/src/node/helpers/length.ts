@@ -1,4 +1,4 @@
-import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
+import { __isPlainObject } from '@coffeekraken/sugar/is';
 
 /**
  * @name            length

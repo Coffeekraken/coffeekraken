@@ -1,6 +1,6 @@
 import { __dirname } from '@coffeekraken/sugar/fs';
+import { __isNode } from '@coffeekraken/sugar/is';
 import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
-import __isNode from '@coffeekraken/sugar/shared/is/node';
 
 export default function (env, config) {
     if (env.platform !== 'node') return;

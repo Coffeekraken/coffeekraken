@@ -1,6 +1,6 @@
 /**
  * @name            expandGlob
- * @namespace            js.glob
+ * @namespace            shared.glob
  * @type            Function
  * @platform          js
  * @platform          node
@@ -14,14 +14,14 @@
  * @return      {Array<String>}                             An array of expanded globs
  *
  * @example         js
- * import expandGlob from '@coffeekraken/sugar/js/glob/expandGlob';
- * expandGlob('/something/*{2,4}/*.ts');
+ * import { __expandGlob } from '@coffeekraken/sugar/glob';
+ * __expandGlob('/something/*{2,4}/*.ts');
  * // ['/something/* /* /*.ts','/something/* /* /* /*.ts', '/something/* /* /* /* /*.ts']
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function expandGlob(globs) {
+export default function __expandGlob(globs) {
     if (!Array.isArray(globs)) globs = [globs];
 
     const finalPatterns: string[] = [];
@@ -72,4 +72,3 @@ function expandGlob(globs) {
 
     return finalPatterns;
 }
-export default expandGlob;

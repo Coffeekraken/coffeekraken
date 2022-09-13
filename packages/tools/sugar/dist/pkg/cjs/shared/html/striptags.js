@@ -6,8 +6,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const striptags_1 = __importDefault(require("striptags"));
 /**
- * @name        striptags
- * @namespace            js.html
+ * @name        stripTags
+ * @namespace            shared.html
  * @type      Function
  * @platform          js
  * @platform          node
@@ -26,15 +26,15 @@ const striptags_1 = __importDefault(require("striptags"));
  * @todo      tests
  *
  * @example    js
- * import striptags from '@coffeekraken/sugar/js/string/striptags'
- * striptags('<p><span>Hello</span> world</p>', '<span>') // <span>Hello</span> world
+ * import { __stripTags } from '@coffeekraken/sugar/html'
+ * __stripTags('<p><span>Hello</span> world</p>', '<span>') // <span>Hello</span> world
  *
  * @see       https://www.npmjs.com/package/striptags
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function striptags(html, allowedTags = '', tagReplacement = '') {
+function stripTags(html, allowedTags = '', tagReplacement = '') {
     return (0, striptags_1.default)(html, allowedTags, tagReplacement);
 }
-exports.default = striptags;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDBEQUFvQztBQUVwQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMkJHO0FBQ0gsU0FBUyxTQUFTLENBQUMsSUFBSSxFQUFFLFdBQVcsR0FBRyxFQUFFLEVBQUUsY0FBYyxHQUFHLEVBQUU7SUFDMUQsT0FBTyxJQUFBLG1CQUFXLEVBQUMsSUFBSSxFQUFFLFdBQVcsRUFBRSxjQUFjLENBQUMsQ0FBQztBQUMxRCxDQUFDO0FBQ0Qsa0JBQWUsU0FBUyxDQUFDIn0=
+exports.default = stripTags;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDBEQUFvQztBQUVwQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMkJHO0FBQ0gsU0FBd0IsU0FBUyxDQUFDLElBQUksRUFBRSxXQUFXLEdBQUcsRUFBRSxFQUFFLGNBQWMsR0FBRyxFQUFFO0lBQ3pFLE9BQU8sSUFBQSxtQkFBVyxFQUFDLElBQUksRUFBRSxXQUFXLEVBQUUsY0FBYyxDQUFDLENBQUM7QUFDMUQsQ0FBQztBQUZELDRCQUVDIn0=

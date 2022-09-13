@@ -1,7 +1,7 @@
 import __SEnv from '@coffeekraken/s-env';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import { __sanitizeJsonString } from '@coffeekraken/sugar/json';
 import { __packageJsonSync } from '@coffeekraken/sugar/package';
-import __sanitizeJsonString from '@coffeekraken/sugar/shared/json/sanitizeJsonString';
 
 /**
  * @name            sVitePluginSugar

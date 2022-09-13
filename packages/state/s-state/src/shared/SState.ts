@@ -1,6 +1,6 @@
 import __SClass from '@coffeekraken/s-class';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
-import __isNode from '@coffeekraken/sugar/shared/is/node';
+import { __isNode } from '@coffeekraken/sugar/is';
 import __deepAssign from '@coffeekraken/sugar/shared/object/deepAssign';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __deepProxy from '@coffeekraken/sugar/shared/object/deepProxy';

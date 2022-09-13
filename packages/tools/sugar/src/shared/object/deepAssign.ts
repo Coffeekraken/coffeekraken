@@ -1,5 +1,5 @@
 import __unique from '../array/unique';
-import __isPlainObject from '../is/plainObject';
+import __isPlainObject from '../is/isPlainObject';
 import __clone from './clone';
 /**
  * @name            deepAssign

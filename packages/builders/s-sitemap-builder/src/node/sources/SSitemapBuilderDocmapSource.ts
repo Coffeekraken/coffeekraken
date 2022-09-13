@@ -2,7 +2,7 @@ import __SDocmap from '@coffeekraken/s-docmap';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import { __fileHash } from '@coffeekraken/sugar/fs';
-import __pad from '@coffeekraken/sugar/shared/number/pad';
+import { __pad } from '@coffeekraken/sugar/number';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
 import type { ISSitemapBuilderBuildParams } from '../interface/SSitemapBuildIParamsInterface';

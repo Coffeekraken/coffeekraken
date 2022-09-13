@@ -4,7 +4,7 @@ import __SLitComponent, {
     ISLitComponentDefaultProps,
 } from '@coffeekraken/s-lit-component';
 import { __onSwipe } from '@coffeekraken/sugar/dom';
-import __isClass from '@coffeekraken/sugar/shared/is/class';
+import { __isClass } from '@coffeekraken/sugar/is';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import { css, html, unsafeCSS } from 'lit';
 // @ts-ignore

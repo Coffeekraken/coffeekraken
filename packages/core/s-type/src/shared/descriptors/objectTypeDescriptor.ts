@@ -1,9 +1,7 @@
 // shared
 
-import __isObject from '@coffeekraken/sugar/shared/is/object';
-import { __toString } from '@coffeekraken/sugar/string';
+import { __isObject } from '@coffeekraken/sugar/is';
 import type { ISTypeDescriptor } from '../SType';
-import __SType from '../_SType';
 
 /**
  * @name              objectTypeDescriptor

@@ -4,7 +4,7 @@ import { __isPath } from '@coffeekraken/sugar/fs';
 import { __packageJsonSync } from '@coffeekraken/sugar/package';
 import __fs from 'fs';
 // import __markdown from './markdown/index';
-import __isNode from '@coffeekraken/sugar/shared/is/node';
+import { __isNode } from '@coffeekraken/sugar/is';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import type { ISDocblockBlock } from './SDocblockBlock';
 import __SDocblockBlock from './SDocblockBlock';

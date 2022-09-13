@@ -1,4 +1,4 @@
-import __isNode from '@coffeekraken/sugar/shared/is/node';
+import { __isNode } from '@coffeekraken/sugar/is';
 
 export default function (env) {
     if (env.platform !== 'node') return;

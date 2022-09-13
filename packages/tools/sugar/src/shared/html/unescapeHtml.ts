@@ -14,13 +14,14 @@ import __unescape from 'unescape';
  * @return      {String}                            The unescaped html
  *
  * @example         js
- * import unescapeHtml from '@coffeekraken/sugar/shared/html/unescapeHtml';
- * unescapeHtml('&lt;s-code-example&gt;'); // => <s-code-example>
+ * import { __unescapeHtml } from '@coffeekraken/sugar/html';
+ * __unescapeHtml('&lt;s-code-example&gt;'); // => <s-code-example>
  *
  * @see             https://www.npmjs.com/package/unescape
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function unescapeHtml(html): string {
+export default function __unescapeHtml(html): string {
+    // @ts-ignore
     return __unescape(html);
 }

@@ -2,7 +2,7 @@
 
 /**
  * @name        pad
- * @namespace            js.number
+ * @namespace            shared.number
  * @type      Function
  * @platform          js
  * @platform          node
@@ -19,16 +19,15 @@
  * @todo      tests
  *
  * @example    js
- * import pad from '@coffeekraken/sugar/js/numbers/pad'
- * pad(123, 4) // 0123
+ * import { __pad } from '@coffeekraken/sugar/number'
+ * __pad(123, 4) // 0123
  *
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function pad(number, width, character = '0') {
+export default function __pad(number, width, character = '0') {
     number = number + '';
     return number.length >= width
         ? number
         : new Array(width - number.length + 1).join(character) + number;
 }
-export default pad;

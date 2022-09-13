@@ -18,15 +18,16 @@ const unescape_1 = __importDefault(require("unescape"));
  * @return      {String}                            The unescaped html
  *
  * @example         js
- * import unescapeHtml from '@coffeekraken/sugar/shared/html/unescapeHtml';
- * unescapeHtml('&lt;s-code-example&gt;'); // => <s-code-example>
+ * import { __unescapeHtml } from '@coffeekraken/sugar/html';
+ * __unescapeHtml('&lt;s-code-example&gt;'); // => <s-code-example>
  *
  * @see             https://www.npmjs.com/package/unescape
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function unescapeHtml(html) {
+function __unescapeHtml(html) {
+    // @ts-ignore
     return (0, unescape_1.default)(html);
 }
-exports.default = unescapeHtml;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsd0RBQWtDO0FBRWxDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW9CRztBQUNILFNBQXdCLFlBQVksQ0FBQyxJQUFJO0lBQ3JDLE9BQU8sSUFBQSxrQkFBVSxFQUFDLElBQUksQ0FBQyxDQUFDO0FBQzVCLENBQUM7QUFGRCwrQkFFQyJ9
+exports.default = __unescapeHtml;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsd0RBQWtDO0FBRWxDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW9CRztBQUNILFNBQXdCLGNBQWMsQ0FBQyxJQUFJO0lBQ3ZDLGFBQWE7SUFDYixPQUFPLElBQUEsa0JBQVUsRUFBQyxJQUFJLENBQUMsQ0FBQztBQUM1QixDQUFDO0FBSEQsaUNBR0MifQ==

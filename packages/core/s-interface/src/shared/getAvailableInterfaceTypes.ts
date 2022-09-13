@@ -1,4 +1,4 @@
-import __isNode from '@coffeekraken/sugar/shared/is/node';
+import { __isNode } from '@coffeekraken/sugar/is';
 
 /**
  * @name                getAvailableInterfaceTypes
@@ -21,10 +21,11 @@ import __isNode from '@coffeekraken/sugar/shared/is/node';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function getAvailableInterfaceTypes() {
-  // @ts-ignore
-  if (__isNode()) return global._registeredInterfacesTypes || {};
-  // @ts-ignore
-  else if (window !== undefined) return window._registeredInterfacesTypes || {};
-  else return {};
+    // @ts-ignore
+    if (__isNode()) return global._registeredInterfacesTypes || {};
+    // @ts-ignore
+    else if (window !== undefined)
+        return window._registeredInterfacesTypes || {};
+    else return {};
 }
 export default getAvailableInterfaceTypes;

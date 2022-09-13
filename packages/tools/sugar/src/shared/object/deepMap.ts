@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import __isClassInstance from '../is/classInstance';
-import __isPlainObject from '../is/plainObject';
+import __isClassInstance from '../is/isClassInstance';
+import __isPlainObject from '../is/isPlainObject';
 import __deepMerge from '../object/deepMerge';
 
 /**

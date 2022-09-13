@@ -1,6 +1,5 @@
 import __SClass from '@coffeekraken/s-class';
-import __isGlob from '@coffeekraken/sugar/shared/is/glob';
-import __isOfType from '@coffeekraken/sugar/shared/is/ofType';
+import { __isGlob, __isOfType } from '@coffeekraken/sugar/is';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __get from '@coffeekraken/sugar/shared/object/get';
 import __set from '@coffeekraken/sugar/shared/object/set';

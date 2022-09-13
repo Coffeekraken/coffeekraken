@@ -1,6 +1,6 @@
 // shared
 
-import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
+import { __isPlainObject } from '@coffeekraken/sugar/is';
 import type { ISTypeDescriptor } from '../SType';
 
 /**

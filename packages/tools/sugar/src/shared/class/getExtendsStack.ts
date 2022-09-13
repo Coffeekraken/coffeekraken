@@ -1,4 +1,4 @@
-import __isClass from '../is/class';
+import __isClass from '../is/isClass';
 
 /**
  * @name            getExtendsStack

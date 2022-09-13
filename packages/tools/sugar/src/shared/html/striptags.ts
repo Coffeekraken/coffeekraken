@@ -1,10 +1,10 @@
 // @ts-nocheck
 
-import __striptags from 'striptags';
+import __stripTags from 'striptags';
 
 /**
- * @name        striptags
- * @namespace            js.html
+ * @name        stripTags
+ * @namespace            shared.html
  * @type      Function
  * @platform          js
  * @platform          node
@@ -23,14 +23,13 @@ import __striptags from 'striptags';
  * @todo      tests
  *
  * @example    js
- * import striptags from '@coffeekraken/sugar/js/string/striptags'
- * striptags('<p><span>Hello</span> world</p>', '<span>') // <span>Hello</span> world
+ * import { __stripTags } from '@coffeekraken/sugar/html'
+ * __stripTags('<p><span>Hello</span> world</p>', '<span>') // <span>Hello</span> world
  *
  * @see       https://www.npmjs.com/package/striptags
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function striptags(html, allowedTags = '', tagReplacement = '') {
-    return __striptags(html, allowedTags, tagReplacement);
+export default function stripTags(html, allowedTags = '', tagReplacement = '') {
+    return __stripTags(html, allowedTags, tagReplacement);
 }
-export default striptags;

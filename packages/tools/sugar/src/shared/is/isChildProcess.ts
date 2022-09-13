@@ -1,5 +1,4 @@
 // @ts-nocheck
-import __isTestEnv from '../../shared/is/testEnv';
 
 /**
  * @name                            isChildProcess

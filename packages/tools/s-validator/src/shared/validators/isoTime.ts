@@ -1,11 +1,11 @@
 // @ts-nocheck
+import { __isIsoTime } from '@coffeekraken/sugar/is';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __en from '../i18n/en';
 import type {
     ISValidatorResult,
     ISValidatorValidatorSettings,
 } from '../SValidator';
-import __en from '../i18n/en';
-import __isIsoTime from '@coffeekraken/sugar/shared/is/isoTime';
 
 /**
  * @name            isoTime

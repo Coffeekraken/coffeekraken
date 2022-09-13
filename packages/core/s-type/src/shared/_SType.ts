@@ -3,7 +3,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 import { __getExtendsStack } from '@coffeekraken/sugar/class';
 import { __parseHtml } from '@coffeekraken/sugar/console';
-import __map from '@coffeekraken/sugar/shared/iterable/map';
+import { __map } from '@coffeekraken/sugar/iterable';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __parseTypeString, {
     IParseTypeStringResultObj,

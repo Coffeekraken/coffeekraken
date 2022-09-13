@@ -2,7 +2,7 @@
 import __globParent from 'glob-parent';
 /**
  * @name                extractNoneGlob
- * @namespace            js.glob
+ * @namespace            shared.glob
  * @type                Function
  * @platform          js
  * @platform          node
@@ -18,16 +18,15 @@ import __globParent from 'glob-parent';
  * @todo      tests
  *
  * @example         js
- * import extractNoneGlob from '@coffeekraken/sugar/js/glob/extractNoneGlob';
- * extractNoneGlob('/coco/hello/*.js'); // => '*.js'
+ * import { __extractNoneGlob } from '@coffeekraken/sugar/glob';
+ * __extractNoneGlob('/coco/hello/*.js'); // => '*.js'
  *
  * @see             https://www.npmjs.com/package/glob-parent
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function extractNoneGlob(string) {
+export default function __extractNoneGlob(string) {
     const parent = __globParent(string);
     return parent;
 }
-export default extractNoneGlob;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFlBQVksTUFBTSxhQUFhLENBQUM7QUFFdkM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUNILFNBQVMsZUFBZSxDQUFDLE1BQU07SUFDM0IsTUFBTSxNQUFNLEdBQUcsWUFBWSxDQUFDLE1BQU0sQ0FBQyxDQUFDO0lBQ3BDLE9BQU8sTUFBTSxDQUFDO0FBQ2xCLENBQUM7QUFDRCxlQUFlLGVBQWUsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFlBQVksTUFBTSxhQUFhLENBQUM7QUFFdkM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUNILE1BQU0sQ0FBQyxPQUFPLFVBQVUsaUJBQWlCLENBQUMsTUFBTTtJQUM1QyxNQUFNLE1BQU0sR0FBRyxZQUFZLENBQUMsTUFBTSxDQUFDLENBQUM7SUFDcEMsT0FBTyxNQUFNLENBQUM7QUFDbEIsQ0FBQyJ9

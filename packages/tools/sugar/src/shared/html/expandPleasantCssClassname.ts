@@ -13,13 +13,15 @@
  * @return    {String}                      The processed string with converted classnames
  *
  * @example         js
- * import expandPleasantCssClassname from '@coffeekraken/sugar/shared/html/expandPleasantCssClassname';
- * expandPleasantCssClassname('...');
+ * import { __expandPleasantCssClassname } from '@coffeekraken/sugar/html';
+ * __expandPleasantCssClassname('...');
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function expandPleasantCssClassname(classesStr: string): string {
+export default function __expandPleasantCssClassname(
+    classesStr: string,
+): string {
     const classesArray: string[] = [];
 
     const classNames = classesStr.split(/\s+/);

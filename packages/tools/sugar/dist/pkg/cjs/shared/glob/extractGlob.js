@@ -7,7 +7,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const glob_parent_1 = __importDefault(require("glob-parent"));
 /**
  * @name                extractGlob
- * @namespace            js.glob
+ * @namespace            shared.glob
  * @type                Function
  * @platform          js
  * @platform          node
@@ -23,19 +23,19 @@ const glob_parent_1 = __importDefault(require("glob-parent"));
  * @todo      tests
  *
  * @example         js
- * import extractGlob from '@coffeekraken/sugar/js/glob/extractGlob';
- * extractGlob('/coco/hello/*.js'); // => '*.js'
+ * import { __extractGlob } from '@coffeekraken/sugar/glob';
+ * __extractGlob('/coco/hello/*.js'); // => '*.js'
  *
  * @see             https://www.npmjs.com/package/glob-parent
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function extractGlob(string) {
+function __extractGlob(string) {
     const parent = (0, glob_parent_1.default)(string);
     let final = string.replace(parent, '');
     if (final.slice(0, 1) === '/')
         final = final.slice(1);
     return final;
 }
-exports.default = extractGlob;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDhEQUF1QztBQUV2Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBRUgsU0FBUyxXQUFXLENBQUMsTUFBTTtJQUN2QixNQUFNLE1BQU0sR0FBRyxJQUFBLHFCQUFZLEVBQUMsTUFBTSxDQUFDLENBQUM7SUFDcEMsSUFBSSxLQUFLLEdBQUcsTUFBTSxDQUFDLE9BQU8sQ0FBQyxNQUFNLEVBQUUsRUFBRSxDQUFDLENBQUM7SUFDdkMsSUFBSSxLQUFLLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsS0FBSyxHQUFHO1FBQUUsS0FBSyxHQUFHLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUM7SUFDdEQsT0FBTyxLQUFLLENBQUM7QUFDakIsQ0FBQztBQUNELGtCQUFlLFdBQVcsQ0FBQyJ9
+exports.default = __extractGlob;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDhEQUF1QztBQUV2Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBRUgsU0FBd0IsYUFBYSxDQUFDLE1BQU07SUFDeEMsTUFBTSxNQUFNLEdBQUcsSUFBQSxxQkFBWSxFQUFDLE1BQU0sQ0FBQyxDQUFDO0lBQ3BDLElBQUksS0FBSyxHQUFHLE1BQU0sQ0FBQyxPQUFPLENBQUMsTUFBTSxFQUFFLEVBQUUsQ0FBQyxDQUFDO0lBQ3ZDLElBQUksS0FBSyxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLEtBQUssR0FBRztRQUFFLEtBQUssR0FBRyxLQUFLLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDO0lBQ3RELE9BQU8sS0FBSyxDQUFDO0FBQ2pCLENBQUM7QUFMRCxnQ0FLQyJ9

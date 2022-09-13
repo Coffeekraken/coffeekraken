@@ -2,7 +2,7 @@
 
 import __SColor from '@coffeekraken/s-color';
 import __SInterface from '@coffeekraken/s-interface';
-import __isColor from '@coffeekraken/sugar/shared/is/color';
+import { __isColor } from '@coffeekraken/sugar/is';
 
 /**
  * @name          color

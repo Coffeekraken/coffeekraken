@@ -241,7 +241,15 @@
             "node": {
                 "require": "./dist/pkg/cjs/node/glob/_exports.js",
                 "import": "./dist/pkg/esm/node/glob/_exports.js"
+            },
+            "default": {
+                "require": "./dist/pkg/cjs/js/glob/_exports.js",
+                "import": "./dist/pkg/esm/js/glob/_exports.js"
             }
+        },
+        "./html": {
+            "require": "./dist/pkg/cjs/shared/html/_exports.js",
+            "import": "./dist/pkg/esm/shared/html/_exports.js"
         },
         "./is": {
             "node": {
@@ -252,6 +260,14 @@
                 "require": "./dist/pkg/cjs/js/is/_exports.js",
                 "import": "./dist/pkg/esm/js/is/_exports.js"
             }
+        },
+        "./iterable": {
+            "require": "./dist/pkg/cjs/shared/iterable/_exports.js",
+            "import": "./dist/pkg/esm/shared/iterable/_exports.js"
+        },
+        "./json": {
+            "require": "./dist/pkg/cjs/shared/json/_exports.js",
+            "import": "./dist/pkg/esm/shared/json/_exports.js"
         },
         "./keyboard": {
             "node": {
@@ -269,10 +285,18 @@
                 "import": "./dist/pkg/esm/node/load/_exports.js"
             }
         },
+        "./math": {
+            "require": "./dist/pkg/cjs/shared/math/_exports.js",
+            "import": "./dist/pkg/esm/shared/math/_exports.js"
+        },
         "./module": {
             "node": {
                 "require": "./dist/pkg/cjs/node/module/_exports.js",
                 "import": "./dist/pkg/esm/node/module/_exports.js"
+            },
+            "default": {
+                "require": "./dist/pkg/cjs/js/module/_exports.js",
+                "import": "./dist/pkg/esm/js/module/_exports.js"
             }
         },
         "./monorepo": {
@@ -286,6 +310,10 @@
                 "require": "./dist/pkg/cjs/node/network/_exports.js",
                 "import": "./dist/pkg/esm/node/network/_exports.js"
             }
+        },
+        "./number": {
+            "require": "./dist/pkg/cjs/shared/number/_exports.js",
+            "import": "./dist/pkg/esm/shared/number/_exports.js"
         },
         "./package": {
             "node": {

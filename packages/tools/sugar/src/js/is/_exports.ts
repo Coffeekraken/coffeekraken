@@ -11,7 +11,6 @@ import __isTablet from './isTablet';
 import __isUcBrowser from './isUcBrowser';
 
 export * from '../../shared/is/_exports';
-
 export {
     __isChrome,
     __isEdge,
@@ -25,3 +24,4 @@ export {
     __isTablet,
     __isUcBrowser,
 };
+

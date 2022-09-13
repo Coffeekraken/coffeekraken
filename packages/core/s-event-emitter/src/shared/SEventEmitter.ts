@@ -1,11 +1,13 @@
 import type { ISClass } from '@coffeekraken/s-class';
 import SClass from '@coffeekraken/s-class';
 import __SLog from '@coffeekraken/s-log';
-import { __isChildProcess } from '@coffeekraken/sugar/is';
+import {
+    __isChildProcess,
+    __isClass,
+    __isNode,
+    __isPlainObject,
+} from '@coffeekraken/sugar/is';
 import __getColorFor from '@coffeekraken/sugar/shared/dev/color/getColorFor';
-import __isClass from '@coffeekraken/sugar/shared/is/class';
-import __isNode from '@coffeekraken/sugar/shared/is/node';
-import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __toString from '@coffeekraken/sugar/shared/string/toString';
 import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';

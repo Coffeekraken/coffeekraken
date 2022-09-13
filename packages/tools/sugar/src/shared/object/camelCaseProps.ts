@@ -1,4 +1,4 @@
-import __isPlainObject from '../is/plainObject';
+import __isPlainObject from '../is/isPlainObject';
 import __camelCase from '../string/camelCase';
 
 /**
@@ -17,7 +17,7 @@ import __camelCase from '../string/camelCase';
  * @setting         {Boolean}           [deep=true]             Specify if you want to apply the treatment deep in the object or just in the first level
  *
  * @example         js
- * import __camelCaseProps from '@coffeekraken/sugar/shared/object/camelCaseProps';
+ * import { __camelCaseProps from '@coffeekraken/sugar/shared/object/camelCaseProps';
  * __camelCaseProps({
  *    'hello-world': true
  * });

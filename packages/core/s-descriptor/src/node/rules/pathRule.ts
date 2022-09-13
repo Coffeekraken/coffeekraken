@@ -1,14 +1,12 @@
 // @ts-nocheck
 
-import __isPath from '@coffeekraken/sugar/shared/is/path';
-import __isGlob from '@coffeekraken/sugar/shared/is/glob';
-import type { ISDescriptorResultObj } from '../SDescriptorResult';
-import type { ISDescriptorRule, ISDescriptorSettings } from '../_SDescriptor';
-import __isNode from '@coffeekraken/sugar/shared/is/node';
+import { __resolveGlob } from '@coffeekraken/sugar/glob';
+import { __isGlob, __isNode, __isPath } from '@coffeekraken/sugar/is';
+import { __replaceTokens } from '@coffeekraken/sugar/string';
 import __fs from 'fs';
 import __path from 'path';
-import { __replaceTokens } from '@coffeekraken/sugar/string';
-import { __resolveGlob } from '@coffeekraken/sugar/glob';
+import type { ISDescriptorResultObj } from '../SDescriptorResult';
+import type { ISDescriptorRule, ISDescriptorSettings } from '../_SDescriptor';
 
 /**
  * @name          pathRule

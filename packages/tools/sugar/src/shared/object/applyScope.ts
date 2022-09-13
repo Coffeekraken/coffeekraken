@@ -1,5 +1,4 @@
-import __flatten from './flatten';
-import __isPlainObject from '../is/plainObject';
+import __isPlainObject from '../is/isPlainObject';
 
 /**
  * @name            applyScope
@@ -23,7 +22,7 @@ import __isPlainObject from '../is/plainObject';
  * @setting          {Boolean}          [clone=false]           Specify if you want to clone the object before applying scope or not
  *
  * @example         js
- * import applyScope from '@coffeekraken/sugar/shared/object/applyScope';
+ * import { __applyScope } from '@coffeekraken/sugar/object';
  * const myObject = {
  *      myValue: 'Hello',
  *      '@dev': {
@@ -35,13 +34,13 @@ import __isPlainObject from '../is/plainObject';
  * };
  *
  * // apply the "env" scope with the value of "dev"
- * applyScope(myObject, ['dev']);
+ * __applyScope(myObject, ['dev']);
  * // {
  * //   myValue: 'World'
  * // }
  *
  * // apply two scopes
- * applyScope(myObject, ['prod']);
+ * __applyScope(myObject, ['prod']);
  * // {
  * //   myValue: 'Hello',
  * //   something: {
@@ -50,7 +49,7 @@ import __isPlainObject from '../is/plainObject';
  * // }
  *
  * // apply a scope with multiple values
- * applyScope(myObject, ['dev','prod']);
+ * __applyScope(myObject, ['dev','prod']);
  * // {
  * //   myValue: 'World',
  * //   something: {
@@ -66,7 +65,7 @@ export interface IApplyScopeSettings {
     clone: boolean;
 }
 
-export default function applyScope(
+export default function __applyScope(
     object: Record<string, any>,
     scopes: string[],
     settings?: Partial<IApplyScopeSettings>,

@@ -1,5 +1,5 @@
 import { __parseHtml } from '@coffeekraken/sugar/console';
-import __isNode from '@coffeekraken/sugar/shared/is/node';
+import { __isNode } from '@coffeekraken/sugar/is';
 import { __toString } from '@coffeekraken/sugar/string';
 
 /**

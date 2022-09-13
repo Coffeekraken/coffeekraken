@@ -1,5 +1,5 @@
 // @ts-nocheck
-import __isPlainObject from '../is/plainObject';
+import __isPlainObject from '../is/isPlainObject';
 
 /**
  * @name                        deepFilter

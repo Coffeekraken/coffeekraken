@@ -16,14 +16,14 @@
  * @todo            tests
  *
  * @example         js
- * import __sanitizeJsonString from '@coffeekraken/sugar/shared/json/sanitizeJsonString';
+ * import { __sanitizeJsonString } from '@coffeekraken/sugar/json';
  * __sanitizeJsonString('{"something": ""cool""}'); // => '{"something":"\"cool\""}'
  *
  * @see             https://gist.github.com/jamischarles/1046671
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function sanitizeJsonString(jsonString: string): string {
+export default function __sanitizeJsonString(jsonString: string): string {
     return jsonString
         .replace(/\\/g, '\\\\')
         .replace(/\n/g, '\\n')

@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __isPlainObject from '../is/plainObject';
+import __isPlainObject from '../is/isPlainObject';
 import __deepMerge from '../object/deepMerge';
 import __toString from '../string/toString';
 

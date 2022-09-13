@@ -15,14 +15,14 @@ import __expandPleasantCssClassname from './expandPleasantCssClassname';
  * @return    {String}                      The processed string with converted classnames
  *
  * @example         js
- * import expandPleasantCssClassnames from '@coffeekraken/sugar/shared/html/expandPleasantCssClassnames';
- * expandPleasantCssClassnames('...');
+ * import { __expandPleasantCssClassnames } from '@coffeekraken/sugar/html';
+ * __expandPleasantCssClassnames('...');
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export default function expandPleasantCssClassnames(html: string): string {
+export default function __expandPleasantCssClassnames(html: string): string {
     const reg = /class="[a-zA-Z0-9_\-:@\s]+"/gm;
 
     const matches = html.match(reg);

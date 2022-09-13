@@ -1,5 +1,5 @@
-import __isEsm from './isEsm';
-import __isCjs from './isCjs';
+import __isCjs from '../is/isCjs';
+import __isEsm from '../is/isEsm';
 
 /**
  * @name          currentModuleSystem
@@ -14,15 +14,15 @@ import __isCjs from './isCjs';
  * @return      {('esm'|'cjs')}           The module system the code is running on
  *
  * @example       js
- * import __currentSystem from '@coffeekraken/sugar/shared/module/currentModuleSystem';
- * __currentSystem(); // => 'cjs'
+ * import { __currentModuleSystem } from '@coffeekraken/sugar/module';
+ * __currentModuleSystem(); // => 'cjs'
  *
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export type TCurrentSystem = 'esm' | 'cjs';
 
-export default function currentModuleSystem(): TCurrentSystem {
+export default function __currentModuleSystem(): TCurrentSystem {
     if (__isEsm()) return 'esm';
     if (__isCjs()) return 'cjs';
 }

@@ -5,7 +5,7 @@ import __set from '@coffeekraken/sugar/shared/object/set';
 // import __micromatch from 'micromatch';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import { __compressVarName } from '@coffeekraken/sugar/css';
-import __isColor from '@coffeekraken/sugar/shared/is/color';
+import { __isColor } from '@coffeekraken/sugar/is';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __flatten from '@coffeekraken/sugar/shared/object/flatten';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';

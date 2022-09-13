@@ -1,11 +1,8 @@
 "use strict";
 // shared
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const string_1 = __importDefault(require("@coffeekraken/sugar/shared/is/string"));
-const string_2 = require("@coffeekraken/sugar/string");
+const is_1 = require("@coffeekraken/sugar/is");
+const string_1 = require("@coffeekraken/sugar/string");
 /**
  * @name              stringTypeDescriptor
  * @namespace         sugar.js.type.descriptor
@@ -28,10 +25,10 @@ const string_2 = require("@coffeekraken/sugar/string");
 const descriptor = {
     name: 'String',
     id: 'string',
-    is: (value) => (0, string_1.default)(value),
-    cast: (value) => (0, string_2.__toString)(value, {
+    is: (value) => (0, is_1.__isString)(value),
+    cast: (value) => (0, string_1.__toString)(value, {
         beautify: true,
     }),
 };
 exports.default = descriptor;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxTQUFTOzs7OztBQUVULGtGQUE4RDtBQUM5RCx1REFBd0Q7QUFJeEQ7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQWtCRztBQUNILE1BQU0sVUFBVSxHQUFxQjtJQUNqQyxJQUFJLEVBQUUsUUFBUTtJQUNkLEVBQUUsRUFBRSxRQUFRO0lBQ1osRUFBRSxFQUFFLENBQUMsS0FBVSxFQUFFLEVBQUUsQ0FBQyxJQUFBLGdCQUFVLEVBQUMsS0FBSyxDQUFDO0lBQ3JDLElBQUksRUFBRSxDQUFDLEtBQVUsRUFBRSxFQUFFLENBQ2pCLElBQUEsbUJBQVUsRUFBQyxLQUFLLEVBQUU7UUFDZCxRQUFRLEVBQUUsSUFBSTtLQUNqQixDQUFDO0NBQ1QsQ0FBQztBQUVGLGtCQUFlLFVBQVUsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxTQUFTOztBQUVULCtDQUFvRDtBQUNwRCx1REFBd0Q7QUFHeEQ7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQWtCRztBQUNILE1BQU0sVUFBVSxHQUFxQjtJQUNqQyxJQUFJLEVBQUUsUUFBUTtJQUNkLEVBQUUsRUFBRSxRQUFRO0lBQ1osRUFBRSxFQUFFLENBQUMsS0FBVSxFQUFFLEVBQUUsQ0FBQyxJQUFBLGVBQVUsRUFBQyxLQUFLLENBQUM7SUFDckMsSUFBSSxFQUFFLENBQUMsS0FBVSxFQUFFLEVBQUUsQ0FDakIsSUFBQSxtQkFBVSxFQUFDLEtBQUssRUFBRTtRQUNkLFFBQVEsRUFBRSxJQUFJO0tBQ2pCLENBQUM7Q0FDVCxDQUFDO0FBRUYsa0JBQWUsVUFBVSxDQUFDIn0=

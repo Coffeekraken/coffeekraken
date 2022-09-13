@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __isPlain from '../is/plainObject';
+import __isPlain from '../is/isPlainObject';
 
 /**
  * @name                              flatten

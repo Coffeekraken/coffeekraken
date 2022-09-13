@@ -2,23 +2,23 @@ import __typeOf from '../value/typeof';
 
 /**
  * @name            map
- * @namespace            js.iterable
+ * @namespace            shared.iterable
  * @type            Function
  * @platform          js
  * @platform          node
  * @status        beta
  *
  * This function take an iterable value like an Array, an Object, a Map, a String, an Integer, a Set, etc... and
- * simply iterate over like a forEach.
+ * simply iterate over like the "map" array function.
  *
  * @param       {Iterable}      stack       The stack on which to iterate
  * @param       {IIterableCallbackFn}                     A callback called on each stack items with parameters "key" and "value". You must return either a new value for the stack item to be set, either nothing to pass to the next item
  * @return      {Promise}               A promise resolved with the new stack
  *
  * @example       js
- * import map from '@coffeekraken/sugar/js/iterable/map';
+ * import { __map } from '@coffeekraken/sugar/iterable';
  * const myStack = ['hello', 'world'];
- * map(myStack, ({key, value}) => {
+ * __map(myStack, ({key, value}) => {
  *    return `${value} coco`;
  * });
  * // ['hello coco', 'world coco']

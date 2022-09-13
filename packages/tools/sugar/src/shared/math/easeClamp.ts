@@ -1,10 +1,9 @@
-import __easeInQuad from '../easing/easeInQuad';
 import __easeOutQuad from '../easing/easeOutQuad';
 import __clamp from './clamp';
 
 /**
  * @name          easeClamp
- * @namespace            js.math
+ * @namespace            shared.math
  * @type          Function
  * @platform          js
  * @platform          node
@@ -18,16 +17,13 @@ import __clamp from './clamp';
  * @return      {Number}                The clamped number
  *
  * @example       js
- * import clamp from '@coffeekraken/sugar/js/math/clamp';
- * clamp(10, 0, 100); // => 10
- * clamp(0, 0, 100); // => 0
- * clamp(100, 0, 100); // => 100
- * clamp(101, 0, 100); // => 100
+ * import { __easeClamp } from '@coffeekraken/sugar/math';
+ * __easeClamp(-20, -10, 0, 100, 110); // => -10
  *
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function easeClamp(
+export default function __easeClamp(
     num: number,
     minEnd: number,
     minStart: number,

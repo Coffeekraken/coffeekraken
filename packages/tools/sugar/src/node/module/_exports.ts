@@ -5,6 +5,7 @@ import __extractImport from './extractImport';
 import __import from './import';
 import __resolvePackagePath from './resolvePackagePath';
 
+export * from '../../shared/module/_exports';
 export {
     __builtInNodeModules,
     __dependencyList,

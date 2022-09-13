@@ -3,9 +3,7 @@
 import __SConfigAdapter from '@coffeekraken/s-config-adapter';
 import __SDuration from '@coffeekraken/s-duration';
 import __SEnv from '@coffeekraken/s-env';
-import __isCyclic from '@coffeekraken/sugar/shared/is/cyclic';
-import __isNode from '@coffeekraken/sugar/shared/is/node';
-import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
+import { __isCyclic, __isNode, __isPlainObject } from '@coffeekraken/sugar/is';
 import __decycle from '@coffeekraken/sugar/shared/object/decycle';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __filter from '@coffeekraken/sugar/shared/object/filter';

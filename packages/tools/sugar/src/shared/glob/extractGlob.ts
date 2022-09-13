@@ -4,7 +4,7 @@ import __globParent from 'glob-parent';
 
 /**
  * @name                extractGlob
- * @namespace            js.glob
+ * @namespace            shared.glob
  * @type                Function
  * @platform          js
  * @platform          node
@@ -20,18 +20,17 @@ import __globParent from 'glob-parent';
  * @todo      tests
  *
  * @example         js
- * import extractGlob from '@coffeekraken/sugar/js/glob/extractGlob';
- * extractGlob('/coco/hello/*.js'); // => '*.js'
+ * import { __extractGlob } from '@coffeekraken/sugar/glob';
+ * __extractGlob('/coco/hello/*.js'); // => '*.js'
  *
  * @see             https://www.npmjs.com/package/glob-parent
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-function extractGlob(string) {
+export default function __extractGlob(string) {
     const parent = __globParent(string);
     let final = string.replace(parent, '');
     if (final.slice(0, 1) === '/') final = final.slice(1);
     return final;
 }
-export default extractGlob;

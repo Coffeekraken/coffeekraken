@@ -5,11 +5,13 @@ import __SPromise from '@coffeekraken/s-promise';
 import __SStdio from '@coffeekraken/s-stdio';
 import { __buildCommandLine } from '@coffeekraken/sugar/cli';
 import { __dirname } from '@coffeekraken/sugar/fs';
-import { __isChildProcess } from '@coffeekraken/sugar/is';
+import {
+    __isChildProcess,
+    __isClass,
+    __isPlainObject,
+} from '@coffeekraken/sugar/is';
 import { __onProcessExit, __spawn } from '@coffeekraken/sugar/process';
 import __extendsStack from '@coffeekraken/sugar/shared/class/getExtendsStack';
-import __isClass from '@coffeekraken/sugar/shared/is/class';
-import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import { __toString } from '@coffeekraken/sugar/string';
 import __fs from 'fs';

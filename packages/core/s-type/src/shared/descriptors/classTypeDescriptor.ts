@@ -1,7 +1,7 @@
 // shared
 
+import { __isClass } from '@coffeekraken/sugar/is';
 import type { ISTypeDescriptor } from '../SType';
-import __isClass from '@coffeekraken/sugar/shared/is/class';
 
 /**
  * @name              classTypeDescriptor

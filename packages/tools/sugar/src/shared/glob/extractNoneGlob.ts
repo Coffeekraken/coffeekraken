@@ -4,7 +4,7 @@ import __globParent from 'glob-parent';
 
 /**
  * @name                extractNoneGlob
- * @namespace            js.glob
+ * @namespace            shared.glob
  * @type                Function
  * @platform          js
  * @platform          node
@@ -20,15 +20,14 @@ import __globParent from 'glob-parent';
  * @todo      tests
  *
  * @example         js
- * import extractNoneGlob from '@coffeekraken/sugar/js/glob/extractNoneGlob';
- * extractNoneGlob('/coco/hello/*.js'); // => '*.js'
+ * import { __extractNoneGlob } from '@coffeekraken/sugar/glob';
+ * __extractNoneGlob('/coco/hello/*.js'); // => '*.js'
  *
  * @see             https://www.npmjs.com/package/glob-parent
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function extractNoneGlob(string) {
+export default function __extractNoneGlob(string) {
     const parent = __globParent(string);
     return parent;
 }
-export default extractNoneGlob;

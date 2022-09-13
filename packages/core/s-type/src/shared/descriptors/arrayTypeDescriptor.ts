@@ -1,8 +1,6 @@
 // shared
 
-import __isMap from '@coffeekraken/sugar/shared/is/map';
 import type { ISTypeDescriptor } from '../SType';
-import __SType from '../_SType';
 
 /**
  * @name              arrayTypeDescriptor

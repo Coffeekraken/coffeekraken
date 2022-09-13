@@ -1,8 +1,7 @@
 // shared
 
-import __isMap from '@coffeekraken/sugar/shared/is/map';
+import { __isMap } from '@coffeekraken/sugar/is';
 import type { ISTypeDescriptor } from '../SType';
-import __SType from '../_SType';
 
 /**
  * @name              mapTypeDescriptor

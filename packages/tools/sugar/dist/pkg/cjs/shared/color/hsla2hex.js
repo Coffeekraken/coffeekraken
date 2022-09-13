@@ -27,7 +27,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const __convertColors = __importStar(require("colors-convert"));
 /**
  * @name              hsla2hex
- * @namespace            js.color
+ * @namespace            shared.color
  * @type              Function
  * @platform          js
  * @platform          node
@@ -46,13 +46,14 @@ const __convertColors = __importStar(require("colors-convert"));
  * @todo      tests
  *
  * @example         js
- * import hsla2hex from '@coffeekraken/sugar/js/color/hsla2hex';
- * hsla2hex(10,20,30);
+ * import { __hsla2hex } from '@coffeekraken/sugar/color';
+ * __hsla2hex(10,20,30);
  *
+ * @see         https://www.npmjs.com/package/colors-convert
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function hsla2hex(h, s, l, a = 1) {
+function __hsla2hex(h, s, l, a = 1) {
     const hex = __convertColors.hslaToHex({
         h,
         s,
@@ -61,5 +62,5 @@ function hsla2hex(h, s, l, a = 1) {
     });
     return hex.slice(0, -2);
 }
-exports.default = hsla2hex;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxjQUFjO0FBQ2QsZ0VBQWtEO0FBRWxEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTBCRztBQUNILFNBQXdCLFFBQVEsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxFQUFFLENBQUMsRUFBRSxDQUFDLEdBQUcsQ0FBQztJQUMzQyxNQUFNLEdBQUcsR0FBRyxlQUFlLENBQUMsU0FBUyxDQUFDO1FBQ2xDLENBQUM7UUFDRCxDQUFDO1FBQ0QsQ0FBQztRQUNELENBQUM7S0FDSixDQUFDLENBQUM7SUFDSCxPQUFPLEdBQUcsQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLENBQUM7QUFDNUIsQ0FBQztBQVJELDJCQVFDIn0=
+exports.default = __hsla2hex;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxjQUFjO0FBQ2QsZ0VBQWtEO0FBRWxEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EyQkc7QUFDSCxTQUF3QixVQUFVLENBQUMsQ0FBQyxFQUFFLENBQUMsRUFBRSxDQUFDLEVBQUUsQ0FBQyxHQUFHLENBQUM7SUFDN0MsTUFBTSxHQUFHLEdBQUcsZUFBZSxDQUFDLFNBQVMsQ0FBQztRQUNsQyxDQUFDO1FBQ0QsQ0FBQztRQUNELENBQUM7UUFDRCxDQUFDO0tBQ0osQ0FBQyxDQUFDO0lBQ0gsT0FBTyxHQUFHLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDO0FBQzVCLENBQUM7QUFSRCw2QkFRQyJ9

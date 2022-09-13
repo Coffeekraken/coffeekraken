@@ -2,7 +2,7 @@ import { XMLParser } from 'fast-xml-parser';
 
 /**
  * @name            xmlToJson
- * @namespace            js.convert
+ * @namespace            shared.convert
  * @type            Function
  * @platform          js
  * @platform          node
@@ -13,6 +13,10 @@ import { XMLParser } from 'fast-xml-parser';
  * @param       {String}            xml             The xml string to convert
  * @return      {Object}                            The corresponding json object
  *
+ * @example         js
+ * import ( __xmlToJson ) from '@coffeekraken/sugar/convert';
+ * __xmlToJson('...');
+ *
  * @todo        interface
  * @todo        doc
  *
@@ -20,7 +24,7 @@ import { XMLParser } from 'fast-xml-parser';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function xmlToJson(xml: string): any {
+export default function __xmlToJson(xml: string): any {
     const parser = new XMLParser();
     return parser.parse(xml);
 }

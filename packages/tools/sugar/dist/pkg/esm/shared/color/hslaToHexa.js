@@ -1,9 +1,8 @@
 // @ts-nocheck
 import * as __convertColors from 'colors-convert';
-
 /**
- * @name              hsla2hexa
- * @namespace            js.color
+ * @name              hslaToHexa
+ * @namespace            shared.color
  * @type              Function
  * @platform          js
  * @platform          node
@@ -22,13 +21,14 @@ import * as __convertColors from 'colors-convert';
  * @todo      tests
  *
  * @example         js
- * import hsla2hexa from '@coffeekraken/sugar/js/color/hsla2hexa';
- * hsla2hexa(10,20,30,1);
+ * import { __hslaToHexa } from '@coffeekraken/sugar/color';
+ * __hslaToHexa(10,20,30,1);
  *
+ * @see         https://www.npmjs.com/package/colors-convert
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function hsla2hexa(h, s, l, a = 1) {
+export default function __hslaToHexa(h, s, l, a = 1) {
     const hex = __convertColors.hslaToHex({
         h,
         s,
@@ -37,3 +37,4 @@ export default function hsla2hexa(h, s, l, a = 1) {
     });
     return hex;
 }
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxPQUFPLEtBQUssZUFBZSxNQUFNLGdCQUFnQixDQUFDO0FBRWxEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EyQkc7QUFDSCxNQUFNLENBQUMsT0FBTyxVQUFVLFlBQVksQ0FBQyxDQUFDLEVBQUUsQ0FBQyxFQUFFLENBQUMsRUFBRSxDQUFDLEdBQUcsQ0FBQztJQUMvQyxNQUFNLEdBQUcsR0FBRyxlQUFlLENBQUMsU0FBUyxDQUFDO1FBQ2xDLENBQUM7UUFDRCxDQUFDO1FBQ0QsQ0FBQztRQUNELENBQUM7S0FDSixDQUFDLENBQUM7SUFDSCxPQUFPLEdBQUcsQ0FBQztBQUNmLENBQUMifQ==

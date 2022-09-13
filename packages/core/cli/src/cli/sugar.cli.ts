@@ -10,6 +10,7 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 import { __sugarBanner } from '@coffeekraken/sugar/ascii';
 import { __parseArgs } from '@coffeekraken/sugar/cli';
+import { __parseHtml } from '@coffeekraken/sugar/console';
 import { __dirname, __writeFileSync } from '@coffeekraken/sugar/fs';
 import { __isChildProcess } from '@coffeekraken/sugar/is';
 import { __packageJsonSync } from '@coffeekraken/sugar/package';
@@ -18,7 +19,6 @@ import {
     __processSugar,
     __spawn,
 } from '@coffeekraken/sugar/process';
-import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __dotenv from 'dotenv';
 import __fs from 'fs';

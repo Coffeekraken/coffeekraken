@@ -3,7 +3,7 @@ import * as __convertColors from 'colors-convert';
 
 /**
  * @name                  rgba2hsla
- * @namespace            js.color
+ * @namespace            shared.color
  * @type                  Function
  * @platform          js
  * @platform          node
@@ -22,13 +22,14 @@ import * as __convertColors from 'colors-convert';
  * @todo      tests
  *
  * @example         js
- * import rgba2hsla from '@coffeekraken/sugar/js/color/rgba2hsla';
- * rgba2hsla(10,20,50,10);
+ * import { __rgbaToHsla } from '@coffeekraken/sugar/color';
+ * __rgbaToHsla(10,20,50,10);
  *
+ * @see         https://www.npmjs.com/package/colors-convert
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function rgba2hsla(r, g, b, a = 1) {
+export default function __rgbaToHsla(r, g, b, a = 1) {
     if (typeof r === 'object') {
         g = r.g;
         b = r.b;
@@ -42,4 +43,3 @@ function rgba2hsla(r, g, b, a = 1) {
         a,
     });
 }
-export default rgba2hsla;

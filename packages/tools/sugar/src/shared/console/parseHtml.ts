@@ -1,12 +1,11 @@
 // @ts-nocheck
 
-import __tagsMap from './html/tagsMap';
-import __isTerminal from '../is/terminal';
 import __replaceTags from '../html/replaceTags';
+import __tagsMap from './html/tagsMap';
 
 /**
  * @name                                parseHtml
- * @namespace            js.console
+ * @namespace            shared.console
  * @type                                Function
  * @platform          js
  * @platform          node
@@ -23,7 +22,7 @@ import __replaceTags from '../html/replaceTags';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function parseHtml(message) {
+export default function __parseHtml(message) {
     let isArray = false;
     if (Array.isArray(message)) {
         isArray = true;
@@ -38,4 +37,3 @@ function parseHtml(message) {
     if (isArray) return message;
     return message[0];
 }
-export default parseHtml;

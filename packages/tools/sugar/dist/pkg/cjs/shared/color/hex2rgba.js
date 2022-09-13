@@ -27,7 +27,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const __convertColors = __importStar(require("colors-convert"));
 /**
  * @name                  hex2rgba
- * @namespace            js.color
+ * @namespace            shared.color
  * @type                  Function
  * @platform          js
  * @platform          node
@@ -43,14 +43,15 @@ const __convertColors = __importStar(require("colors-convert"));
  * @todo      tests
  *
  * @example         js
- * import hex2rgba from '@coffeekraken/sugar/js/color/hex2rgba';
- * hex2rgba('#ff00ff');
+ * import { __hex2rgba } from '@coffeekraken/sugar/color';
+ * __hex2rgba('#ff00ff');
  *
+ * @see         https://www.npmjs.com/package/colors-convert
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function hex2rgba(hex) {
+function __hex2rgba(hex) {
     return __convertColors.hexToRgba(hex, 1);
 }
-exports.default = hex2rgba;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxjQUFjO0FBQ2QsZ0VBQWtEO0FBRWxEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILFNBQVMsUUFBUSxDQUFDLEdBQUc7SUFDakIsT0FBTyxlQUFlLENBQUMsU0FBUyxDQUFDLEdBQUcsRUFBRSxDQUFDLENBQUMsQ0FBQztBQUM3QyxDQUFDO0FBQ0Qsa0JBQWUsUUFBUSxDQUFDIn0=
+exports.default = __hex2rgba;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxjQUFjO0FBQ2QsZ0VBQWtEO0FBRWxEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxTQUF3QixVQUFVLENBQUMsR0FBRztJQUNsQyxPQUFPLGVBQWUsQ0FBQyxTQUFTLENBQUMsR0FBRyxFQUFFLENBQUMsQ0FBQyxDQUFDO0FBQzdDLENBQUM7QUFGRCw2QkFFQyJ9

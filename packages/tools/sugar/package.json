@@ -145,6 +145,18 @@
                 "import": "./dist/pkg/esm/node/coffeekraken/_exports.js"
             }
         },
+        "./color": {
+            "require": "./dist/pkg/cjs/shared/color/_exports.js",
+            "import": "./dist/pkg/esm/shared/color/_exports.js"
+        },
+        "./console": {
+            "require": "./dist/pkg/cjs/shared/console/_exports.js",
+            "import": "./dist/pkg/esm/shared/console/_exports.js"
+        },
+        "./convert": {
+            "require": "./dist/pkg/cjs/shared/convert/_exports.js",
+            "import": "./dist/pkg/esm/shared/convert/_exports.js"
+        },
         "./dom": {
             "default": {
                 "require": "./dist/pkg/cjs/js/dom/_exports.js",

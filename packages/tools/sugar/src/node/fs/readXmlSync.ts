@@ -1,5 +1,5 @@
+import { __xmlToJson } from '@coffeekraken/sugar/convert';
 import __fs from 'fs';
-import __xmlToJson from '@coffeekraken/sugar/shared/convert/xmlToJson';
 
 /**
  * @name            readXmlSync

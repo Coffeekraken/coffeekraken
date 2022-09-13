@@ -2,7 +2,7 @@
 
 /**
  * @name                        parseRgba
- * @namespace            js.color
+ * @namespace            shared.color
  * @type                        Function
  * @platform          js
  * @platform          node
@@ -18,13 +18,13 @@
  * @todo      tests
  *
  * @example           js
- * import parseRgba from '@coffeekraken/sugar/js/color/parseRgba';
- * parseRgba('rgba(20,10,100,20)');
+ * import { __parseRgba } from '@coffeekraken/sugar/color';
+ * __parseRgba('rgba(20,10,100,20)');
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function parseRgba(rgbaString) {
+export default function __parseRgba(rgbaString) {
     rgbaString = rgbaString.toLowerCase();
     const string = rgbaString
         .replace('rgba(', '')
@@ -39,4 +39,3 @@ function parseRgba(rgbaString) {
         a: array[3] ? parseInt(array[3]) : 1,
     };
 }
-export default parseRgba;

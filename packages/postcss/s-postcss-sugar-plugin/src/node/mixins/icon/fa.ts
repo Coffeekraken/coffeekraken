@@ -1,10 +1,9 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
+import { __parseHtml } from '@coffeekraken/sugar/console';
+import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 import { __upperFirst } from '@coffeekraken/sugar/string';
 import __fab from './fa/brands';
 import __fas from './fa/solid';
-import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 
 class postcssSugarPluginIconFaInterface extends __SInterface {
     static get _definition() {

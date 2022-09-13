@@ -1,13 +1,13 @@
 // @ts-nocheck
 
-import __hsla2rgba from './hsla2rgba';
+import __hslaToRgba from './hslaToRgba';
 import __parse from './parse';
-import __rgba2hex from './rgba2hex';
-import __rgba2hsla from './rgba2hsla';
+import __rgbaToHsla from './rgbaToHsla';
+import __rgbaToHex from './rgbaToHex';
 
 /**
  * @name                  convert
- * @namespace            js.color
+ * @namespace            shared.color
  * @type                  Function
  * @platform          js
  * @platform          node
@@ -25,13 +25,13 @@ import __rgba2hsla from './rgba2hsla';
  * @todo      tests
  *
  * @example         js
- * import convert from '@coffeekraken/sugar/js/color/convert';
- * convert('rgba(10,20,30,100)', 'rgba'); // => { r: 10, g: 20, b: 30, a: 100 }
+ * import { __convert } from '@coffeekraken/sugar/color';
+ * __convert('rgba(10,20,30,100)', 'rgba'); // => { r: 10, g: 20, b: 30, a: 100 }
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function convert(input, format = 'rgba') {
+export default function __convert(input, format = 'rgba') {
     // transforming the input into rgba object
     let rgbaObj = {};
     if (typeof input === 'string') {
@@ -48,7 +48,7 @@ function convert(input, format = 'rgba') {
             input.s !== undefined &&
             input.l !== undefined
         ) {
-            rgbaObj = __hsla2rgba(input);
+            rgbaObj = __hslaToRgba(input);
         }
     }
 
@@ -57,10 +57,10 @@ function convert(input, format = 'rgba') {
             return rgbaObj;
         case 'hsl':
         case 'hsla':
-            return __rgba2hsla(rgbaObj);
+            return __rgbaToHsla(rgbaObj);
         case 'hex':
         case 'hexString':
-            return __rgba2hex(rgbaObj);
+            return __rgbaToHex(rgbaObj);
         case 'rgbString':
             return `rgb(${rgbaObj.r},${rgbaObj.g},${rgbaObj.b})`;
         case 'rgbaString':
@@ -76,4 +76,3 @@ function convert(input, format = 'rgba') {
     // if nothing supported
     return undefined;
 }
-export default convert;

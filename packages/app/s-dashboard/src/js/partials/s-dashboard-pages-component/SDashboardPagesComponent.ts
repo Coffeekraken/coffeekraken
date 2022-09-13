@@ -1,19 +1,10 @@
 // @ts-nocheck
 
-import __SRequest from '@coffeekraken/s-request';
-import { html } from 'lit';
-import { property } from 'lit/decorators.js';
-import __SLitComponent from '@coffeekraken/s-lit-component';
 import { define as __sFiltrableInputDefine } from '@coffeekraken/s-filtrable-input-component';
-import __queryStringToObject from '@coffeekraken/sugar/shared/url/queryStringToObject';
-import { __hotkey } from '@coffeekraken/sugar/keyboard';
-import {
-    __querySelectorLive,
-    __expandPleasantCssClassnamesLive,
-} from '@coffeekraken/sugar/dom';
-import __cursorToEnd from '@coffeekraken/sugar/js/dom/input/cursorToEnd';
-import __xmlToJson from '@coffeekraken/sugar/shared/convert/xmlToJson';
-import __localStorage from '@coffeekraken/sugar/js/storage/localStorage';
+import __SLitComponent from '@coffeekraken/s-lit-component';
+import __SRequest from '@coffeekraken/s-request';
+import { __xmlToJson } from '@coffeekraken/sugar/convert';
+import { html } from 'lit';
 
 import __SDashboardPagesComponentAttrsInterface from './interface/SDashboardPagesComponentAttrsInterface';
 

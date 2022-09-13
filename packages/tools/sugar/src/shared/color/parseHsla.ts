@@ -2,7 +2,7 @@
 
 /**
  * @name                    parseHsla
- * @namespace            js.color
+ * @namespace            shared.color
  * @type                    Function
  * @platform          js
  * @platform          node
@@ -18,13 +18,13 @@
  * @todo      tests
  *
  * @example         js
- * import parseHsl from '@coffeekraken/sugar/color/parseHsl';
- * parseHsl('hsl(20,20,20)');
+ * import { __parseHsla } from '@coffeekraken/sugar/color';
+ * __parseHsla('hsl(20,20,20)');
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function parseHsl(hslaString) {
+export default function __parseHsla(hslaString) {
     hslaString = hslaString.toLowerCase();
     const string = hslaString
         .replace('hsla(', '')
@@ -40,4 +40,3 @@ function parseHsl(hslaString) {
         a: array[3] ? parseFloat(array[3]) : 1,
     };
 }
-export default parseHsl;

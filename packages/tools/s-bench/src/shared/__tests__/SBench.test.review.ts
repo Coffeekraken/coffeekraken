@@ -1,6 +1,4 @@
 import __SBench from '../exports';
-import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
-import __wait from '@coffeekraken/sugar/shared/time/wait';
 
 describe('s-bench', () => {
     it('Should handle a basic time benchmark correctly', () => {

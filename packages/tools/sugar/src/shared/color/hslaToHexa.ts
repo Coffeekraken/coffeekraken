@@ -2,8 +2,8 @@
 import * as __convertColors from 'colors-convert';
 
 /**
- * @name              hsla2hex
- * @namespace            js.color
+ * @name              hslaToHexa
+ * @namespace            shared.color
  * @type              Function
  * @platform          js
  * @platform          node
@@ -22,18 +22,19 @@ import * as __convertColors from 'colors-convert';
  * @todo      tests
  *
  * @example         js
- * import hsla2hex from '@coffeekraken/sugar/js/color/hsla2hex';
- * hsla2hex(10,20,30);
+ * import { __hslaToHexa } from '@coffeekraken/sugar/color';
+ * __hslaToHexa(10,20,30,1);
  *
+ * @see         https://www.npmjs.com/package/colors-convert
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function hsla2hex(h, s, l, a = 1) {
+export default function __hslaToHexa(h, s, l, a = 1) {
     const hex = __convertColors.hslaToHex({
         h,
         s,
         l,
         a,
     });
-    return hex.slice(0, -2);
+    return hex;
 }

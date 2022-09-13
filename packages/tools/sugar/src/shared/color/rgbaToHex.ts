@@ -3,7 +3,7 @@ import * as __convertColors from 'colors-convert';
 
 /**
  * @name                rgba2hex
- * @namespace            js.color
+ * @namespace            shared.color
  * @type                Function
  * @platform          js
  * @platform          node
@@ -22,13 +22,14 @@ import * as __convertColors from 'colors-convert';
  * @todo      tests
  *
  * @example         js
- * import rgba2hex from '@coffeekraken/sugar/js/color/rgba2hex';
- * rgba2hex(10,20,30,10);
+ * import { __rgbaToHex } from '@coffeekraken/sugar/color';
+ * __rgbaToHex(10,20,30,10);
  *
+ * @see         https://www.npmjs.com/package/colors-convert
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function rgba2hex(r, g, b, a = 1) {
+export default function __rgbaToHex(r, g, b, a = 1) {
     if (typeof r === 'object') {
         g = r.g;
         b = r.b;
@@ -49,4 +50,3 @@ function rgba2hex(r, g, b, a = 1) {
 
     return res;
 }
-export default rgba2hex;

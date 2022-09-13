@@ -1,14 +1,14 @@
 // @ts-nocheck
 
-import __hex2rgba from './hex2rgba';
-import __hsla2rgba from './hsla2rgba';
+import __hexToRgba from './hexToRgba';
+import __hslaToRgba from './hslaToRgba';
 import __parseHsla from './parseHsla';
 import __parseRgba from './parseRgba';
-import __rgba2hsla from './rgba2hsla';
+import __rgbaToHsla from './rgbaToHsla';
 
 /**
  * @name            parse
- * @namespace            js.color
+ * @namespace            shared.color
  * @type            Function
  * @platform          js
  * @platform          node
@@ -26,27 +26,27 @@ import __rgba2hsla from './rgba2hsla';
  * @todo      tests
  *
  * @example         js
- * import parse from '@coffeekraken/sugar/js/color/parse';
- * parse('rgba(10,20,30,100)'); // => { r: 10, b: 20, b: 30, a: 100 }
+ * import { __parse } from '@coffeekraken/sugar/color';
+ * __parse('rgba(10,20,30,100)'); // => { r: 10, b: 20, b: 30, a: 100 }
  *
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function parse(color, format = 'rgba') {
+export default function __parse(color, format = 'rgba') {
     color = color.replace(/\s/g, '');
     if (color.indexOf('rgb') != -1) {
         color = __parseRgba(color);
     } else if (color.indexOf('hsl') != -1) {
         color = __parseHsla(color);
-        color = __hsla2rgba(color.h, color.s, color.l);
+        color = __hslaToRgba(color.h, color.s, color.l);
     } else if (color.substring(0, 1) == '#') {
-        color = __hex2rgba(color);
+        color = __hexToRgba(color);
     }
 
     switch (format) {
         case 'hsla':
         case 'hsl':
-            return __rgba2hsla(color);
+            return __rgbaToHsla(color);
             break;
         case 'rgba':
         case 'rgb':
@@ -55,4 +55,3 @@ function parse(color, format = 'rgba') {
             break;
     }
 }
-export default parse;

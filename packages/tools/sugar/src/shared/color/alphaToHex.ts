@@ -1,8 +1,8 @@
 // @ts-nocheck
 
 /**
- * @name              alpha2Hex
- * @namespace            js.color
+ * @name              alphaToHex
+ * @namespace            shared.color
  * @type              Function
  * @platform          js
  * @platform          node
@@ -18,13 +18,13 @@
  * @todo      tests
  *
  * @example         js
- * import alpha2Hex from '@coffeekraken/sugar/js/color/alpha2Hex';
- * alpha2Hex(1); // FF
+ * import { __alphaToHex } from '@coffeekraken/sugar/color';
+ * __alphaToHex(1); // FF
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function alpha2Hex(alpha: number): string {
+export default function __alphaToHex(alpha: number): string {
     const _opacity = Math.round(Math.min(Math.max(alpha || 1, 0), 1) * 255);
     return _opacity.toString(16);
 }

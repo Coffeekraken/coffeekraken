@@ -1,11 +1,13 @@
 // @ts-nocheck
 
 import __SClass from '@coffeekraken/s-class';
-import __convert from '@coffeekraken/sugar/shared/color/convert';
-import __hsla2hex from '@coffeekraken/sugar/shared/color/hsla2hex';
-import __hsla2hexa from '@coffeekraken/sugar/shared/color/hsla2hexa';
-import __hsla2rgba from '@coffeekraken/sugar/shared/color/hsla2rgba';
-import __rgba2hsla from '@coffeekraken/sugar/shared/color/rgba2hsla';
+import {
+    __convert,
+    __hslaToHex,
+    __hslaToHexa,
+    __hslaToRgba,
+    __rgbaToHsla,
+} from '@coffeekraken/sugar/color';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SColorApplyParamsInterface from './interface/SColorApplyParamsInterface';
 import __SColorSettingsInterface from './interface/SColorSettingsInterface';
@@ -365,7 +367,7 @@ class SColor extends __SClass {
                 color.g !== undefined &&
                 color.b !== undefined
             ) {
-                const converted = __rgba2hsla(
+                const converted = __rgbaToHsla(
                     color.r,
                     color.g,
                     color.b,
@@ -447,7 +449,7 @@ class SColor extends __SClass {
         switch (format) {
             case 'rgba':
             case 'rgb':
-                return __hsla2rgba(this._h, this._s, this._l, this._a);
+                return __hslaToRgba(this._h, this._s, this._l, this._a);
                 break;
             case 'hsla':
             case 'hsl':
@@ -459,10 +461,10 @@ class SColor extends __SClass {
                 };
                 break;
             case 'hexa':
-                return __hsla2hexa(this._h, this._s, this._l, this._a);
+                return __hslaToHexa(this._h, this._s, this._l, this._a);
                 break;
             case 'hex':
-                return __hsla2hex(this._h, this._s, this._l);
+                return __hslaToHex(this._h, this._s, this._l);
                 break;
         }
     }
@@ -773,7 +775,7 @@ class SColor extends __SClass {
 
     _applyFromHslaUpdate() {
         // convert
-        const rgba = __hsla2rgba(this._h, this._s, this._l, this._a);
+        const rgba = __hslaToRgba(this._h, this._s, this._l, this._a);
         this._r = rgba.r;
         this._g = rgba.g;
         this._b = rgba.b;
@@ -781,7 +783,7 @@ class SColor extends __SClass {
     }
     _applyFromRgbaUpdate() {
         // convert
-        const hsla = __rgba2hsla(this._r, this._g, this._b, this._a);
+        const hsla = __rgbaToHsla(this._r, this._g, this._b, this._a);
         this._h = hsla.h;
         this._s = hsla.s;
         this._l = hsla.l;

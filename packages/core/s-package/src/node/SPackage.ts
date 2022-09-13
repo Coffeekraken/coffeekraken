@@ -347,7 +347,7 @@ export default class SPackage extends __SClass {
                 if (packageJson.autoExports === false) {
                     emit('log', {
                         type: __SLog.TYPE_INFO,
-                        value: `<magenta>[exports]</magenta> This package "<yellow>${packageJson.name}</yellow>" is marked as "<cyan>autoExports</cyan>:<yellow>false</yellow> and will not generate the exports property automatically`,
+                        value: `<magenta>[exports]</magenta> The package "<yellow>${packageJson.name}</yellow>" is marked as "<cyan>autoExports</cyan>:<yellow>false</yellow>" and will not generate the exports property automatically`,
                     });
                     return resolve();
                 }

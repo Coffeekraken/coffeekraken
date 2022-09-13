@@ -2,8 +2,8 @@
 import * as __convertColors from 'colors-convert';
 
 /**
- * @name                  hex2rgba
- * @namespace            js.color
+ * @name                  hexToRgba
+ * @namespace            shared.color
  * @type                  Function
  * @platform          js
  * @platform          node
@@ -19,13 +19,13 @@ import * as __convertColors from 'colors-convert';
  * @todo      tests
  *
  * @example         js
- * import hex2rgba from '@coffeekraken/sugar/js/color/hex2rgba';
- * hex2rgba('#ff00ff');
+ * import { __hexToRgba } from '@coffeekraken/sugar/color';
+ * __hexToRgba('#ff00ff');
  *
+ * @see         https://www.npmjs.com/package/colors-convert
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function hex2rgba(hex) {
+export default function __hexToRgba(hex) {
     return __convertColors.hexToRgba(hex, 1);
 }
-export default hex2rgba;

@@ -3,7 +3,7 @@ import __convert from './convert';
 import __hexToRgba from './hexToRgba';
 import __hslaToHex from './hslaToHex';
 import __hslaToHexa from './hslaToHexa';
-import __hsl2rgba from './hslaToRgba';
+import __hslaToRgba from './hslaToRgba';
 import __parse from './parse';
 import __parseHsla from './parseHsla';
 import __parseRgba from './parseRgba';
@@ -16,7 +16,7 @@ export {
     __hexToRgba,
     __hslaToHex,
     __hslaToHexa,
-    __hsl2rgba,
+    __hslaToRgba,
     __parse,
     __parseHsla,
     __parseRgba,

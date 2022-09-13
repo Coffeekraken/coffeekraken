@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __easeOutQuad from '@coffeekraken/sugar/shared/easing/easeOutQuad';
+import { __easeOutQuad } from '@coffeekraken/sugar/easing';
 
 /**
  * @name                SSliderComponentInterface

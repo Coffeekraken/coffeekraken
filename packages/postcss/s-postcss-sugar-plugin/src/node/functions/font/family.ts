@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __isValidUnitValue from '@coffeekraken/sugar/shared/css/isValidUnitValue';
+import { __isValidUnitValue } from '@coffeekraken/sugar/css';
 
 /**
  * @name          family

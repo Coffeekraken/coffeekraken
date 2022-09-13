@@ -12,13 +12,13 @@
  * @return      {String}                The compressed variable name
  *
  * @example         js
- * import compressVarName from '@coffeekraken/sugar/shared/css/compressVarName';
- * compressVarName('--something-long-that-you-want-to-compress');
+ * import { __compressVarName } from '@coffeekraken/sugar/css';
+ * __compressVarName('--something-long-that-you-want-to-compress');
  *
  * @since       2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function compressVarName(name) {
+export default function __compressVarName(name) {
     // @TODO            implement correctly this optimization
     return name;
     // if (!__SEnv.is('production')) {
@@ -35,4 +35,4 @@ export default function compressVarName(name) {
     //     .join('');
     // return `--s${sum}${compressed}`;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBbUJHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSxlQUFlLENBQUMsSUFBSTtJQUN4Qyx5REFBeUQ7SUFDekQsT0FBTyxJQUFJLENBQUM7SUFFWixrQ0FBa0M7SUFDbEMsbUJBQW1CO0lBQ25CLElBQUk7SUFFSixtQ0FBbUM7SUFDbkMsdURBQXVEO0lBQ3ZELCtDQUErQztJQUMvQyxrQ0FBa0M7SUFDbEMsU0FBUztJQUNULHlCQUF5QjtJQUN6QixpQkFBaUI7SUFDakIscUNBQXFDO0lBQ3JDLGlCQUFpQjtJQUNqQixtQ0FBbUM7QUFDdkMsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBbUJHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSxpQkFBaUIsQ0FBQyxJQUFJO0lBQzFDLHlEQUF5RDtJQUN6RCxPQUFPLElBQUksQ0FBQztJQUVaLGtDQUFrQztJQUNsQyxtQkFBbUI7SUFDbkIsSUFBSTtJQUVKLG1DQUFtQztJQUNuQyx1REFBdUQ7SUFDdkQsK0NBQStDO0lBQy9DLGtDQUFrQztJQUNsQyxTQUFTO0lBQ1QseUJBQXlCO0lBQ3pCLGlCQUFpQjtJQUNqQixxQ0FBcUM7SUFDckMsaUJBQWlCO0lBQ2pCLG1DQUFtQztBQUN2QyxDQUFDIn0=

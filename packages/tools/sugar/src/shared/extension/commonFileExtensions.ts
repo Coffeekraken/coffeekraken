@@ -42,7 +42,7 @@ import __unique from '../array/unique';
  * @return     {Array<String>}                           The array of extensions
  *
  * @example         js
- * import __commonFileExtensions from '@coffeekraken/sugar/shared/extension/commonFileExtensions';
+ * import { __commonFileExtensions } from '@coffeekraken/sugar/extension';
  * const extensions = __commonFileExtensions(); // => ['avi','mp3',...]
  *
  * @since       2.0.0
@@ -70,7 +70,7 @@ export interface ICommonFileExtensionsSettings {
     exclude: string[];
 }
 
-export default function commonFileExtensions(
+export default function __commonFileExtensions(
     types: Types = [
         'audio',
         'compressed',

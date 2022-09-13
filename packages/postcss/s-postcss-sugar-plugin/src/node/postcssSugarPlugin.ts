@@ -3,20 +3,18 @@ import __SBench from '@coffeekraken/s-bench';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 import __STheme from '@coffeekraken/s-theme';
+import { __sha256 } from '@coffeekraken/sugar/crypto';
 import { __dirname, __folderHash, __folderPath } from '@coffeekraken/sugar/fs';
-import { __packageCacheDir } from '@coffeekraken/sugar/path';
-import { __packageRootDir } from '@coffeekraken/sugar/path';
-import { __replaceTokens } from '@coffeekraken/sugar/string';
-import __sha256 from '@coffeekraken/sugar/shared/crypt/sha256';
+import { __packageCacheDir, __packageRootDir } from '@coffeekraken/sugar/path';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import { __unquote } from '@coffeekraken/sugar/string';
+import { __replaceTokens, __unquote } from '@coffeekraken/sugar/string';
 import __fs from 'fs';
 import __glob from 'glob';
 import __path from 'path';
 import __postcss from 'postcss';
 import __getRoot from './utils/getRoot';
 
-import __compressVarName from '@coffeekraken/sugar/shared/css/compressVarName';
+import { __compressVarName } from '@coffeekraken/sugar/css';
 import __CssVars from './CssVars';
 
 const mixinsStack = {},

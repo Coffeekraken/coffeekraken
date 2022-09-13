@@ -14,13 +14,13 @@ import { ICommonFileExtensionsSettings } from './commonFileExtensions';
  * @return     {Array<String>}                           The array of extensions
  *
  * @example         js
- * import __commonProgrammingFileExtensions from '@coffeekraken/sugar/shared/extension/commonProgrammingFileExtensions';
- * const extensions = __commonProgrammingFileExtensions();
+ * import { __commonVideoFileExtensions } from '@coffeekraken/sugar/extension';
+ * const extensions = __commonVideoFileExtensions();
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function commonProgrammingFileExtensions(
+export default function __commonVideoFileExtensions(
     settings: Partial<ICommonFileExtensionsSettings> = {},
 ): string[] {
     const finalSettings: ICommonFileExtensionsSettings = {

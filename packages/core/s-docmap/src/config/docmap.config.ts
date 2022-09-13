@@ -1,5 +1,5 @@
+import { __commonTextFileExtensions } from '@coffeekraken/sugar/extension';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
-import __commonTextFileExtensions from '@coffeekraken/sugar/shared/extension/commonTextFileExtensions';
 
 export default function (api) {
     if (api.env.platform !== 'node') return;

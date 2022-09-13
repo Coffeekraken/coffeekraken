@@ -2,7 +2,7 @@ import __SFile from '@coffeekraken/s-file';
 import __SPromise from '@coffeekraken/s-promise';
 import __fs from 'fs';
 import __path from 'path';
-import __md5 from '../../shared/crypt/md5';
+import __md5 from '../../shared/crypto/md5';
 import __deepMerge from '../../shared/object/deepMerge';
 import __packageRootDir from '../path/packageRootDir';
 import __extractImport from './extractImport';

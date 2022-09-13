@@ -2,7 +2,7 @@
 import __parseEs6Imports from 'parse-es6-imports';
 /**
  * @name            SEs6Import
- * @namespace            js.es6
+ * @namespace            shared.es6
  * @type            Class
  * @platform          js
  * @platform          node
@@ -22,8 +22,8 @@ import __parseEs6Imports from 'parse-es6-imports';
  * @todo      tests
  *
  * @example             js
- * import SEs6Import from '@coffeekraken/sugar/js/es6/SEs6Import';
- * const import = new SEs6Import('import coco from "something";');
+ * import { __SEs6Import } from '@coffeekraken/sugar/es6';
+ * const import = new __SEs6Import('import coco from "something";');
  *
  * @since           2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>

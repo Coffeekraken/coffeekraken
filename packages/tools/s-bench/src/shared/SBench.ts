@@ -1,6 +1,6 @@
 import __SClass from '@coffeekraken/s-class';
-import __utcTime from '@coffeekraken/sugar/shared/date/utcTime';
-import __env from '@coffeekraken/sugar/shared/env/env';
+import __SEnv from '@coffeekraken/s-env';
+import { __utcTime } from '@coffeekraken/sugar/datetime';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __minimatch from 'minimatch';
 
@@ -96,9 +96,9 @@ export default class SBench extends __SClass {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static filter(benchId: string | string[]): void {
-        let currentBenchs = __env('s-bench-filtered-ids') ?? [];
+        let currentBenchs = __SEnv.get('s-bench-filtered-ids') ?? [];
         currentBenchs = [...currentBenchs, ...Array.from(benchId)];
-        __env('s-bench-filtered-ids', currentBenchs);
+        __SEnv.set('s-bench-filtered-ids', currentBenchs);
     }
 
     /**
@@ -114,7 +114,7 @@ export default class SBench extends __SClass {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static filtered(): string[] {
-        return __env('s-bench-filtered-ids') ?? [];
+        return __SEnv.get('s-bench-filtered-ids') ?? [];
     }
 
     /**

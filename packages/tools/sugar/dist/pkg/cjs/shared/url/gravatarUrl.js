@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const md5_1 = __importDefault(require("../crypt/md5"));
+const md5_1 = __importDefault(require("../crypto/md5"));
 /**
  * @name            gravatarUrl
  * @namespace            js.url
@@ -35,4 +35,4 @@ function gravatarUrl(email, size = 200) {
     return `https://www.gravatar.com/avatar/${md5_1.default.encrypt(email)}?s=${size}`;
 }
 exports.default = gravatarUrl;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHVEQUFpQztBQUVqQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXlCRztBQUNILFNBQVMsV0FBVyxDQUFDLEtBQUssRUFBRSxJQUFJLEdBQUcsR0FBRztJQUNsQyxPQUFPLG1DQUFtQyxhQUFLLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxNQUFNLElBQUksRUFBRSxDQUFDO0FBQy9FLENBQUM7QUFDRCxrQkFBZSxXQUFXLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUFrQztBQUVsQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXlCRztBQUNILFNBQVMsV0FBVyxDQUFDLEtBQUssRUFBRSxJQUFJLEdBQUcsR0FBRztJQUNsQyxPQUFPLG1DQUFtQyxhQUFLLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxNQUFNLElBQUksRUFBRSxDQUFDO0FBQy9FLENBQUM7QUFDRCxrQkFBZSxXQUFXLENBQUMifQ==

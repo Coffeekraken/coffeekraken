@@ -2,7 +2,7 @@
 
 /**
  * @name            availableEasingsArray
- * @namespace            js.easing
+ * @namespace            shared.easing
  * @type            Function
  * @platform          js
  * @platform          node
@@ -12,6 +12,10 @@
  *
  * @return      {Array}             An array of all the easing functions available
  *
+ * @example         js
+ * import { __availableEasingsArray } from '@coffeekraken/sugar/easing';
+ * __availableEasingsArray();
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -19,7 +23,7 @@
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function availableEasingsArray() {
+export default function __availableEasingsArray() {
     return [
         'easeInOutCubic',
         'easeInOutQuad',
@@ -35,4 +39,3 @@ function availableEasingsArray() {
         'easeOutQuint',
     ];
 }
-export default availableEasingsArray;

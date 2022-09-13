@@ -1,7 +1,7 @@
 import __SClass from '@coffeekraken/s-class';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
-import __sha256 from '@coffeekraken/sugar/shared/crypt/sha256';
+import { __sha256 } from '@coffeekraken/sugar/crypto';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __namespaceCompliant from '@coffeekraken/sugar/shared/string/namespaceCompliant';

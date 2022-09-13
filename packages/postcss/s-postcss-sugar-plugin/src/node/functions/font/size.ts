@@ -1,6 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
-import __isValidUnitValue from '@coffeekraken/sugar/shared/css/isValidUnitValue';
 
 /**
  * @name          radius

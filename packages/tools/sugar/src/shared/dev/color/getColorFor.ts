@@ -1,8 +1,8 @@
-import __md5 from '../../crypt/md5';
+import __pickRandom from '../../array/pickRandom';
+import __md5 from '../../crypto/md5';
+import __deepMerge from '../../object/deepMerge';
 import type { IAvailableColorsSettings } from './availableColors';
 import __availableColors from './availableColors';
-import __pickRandom from '../../array/pickRandom';
-import __deepMerge from '../../object/deepMerge';
 
 /**
  * @name            getColorFor

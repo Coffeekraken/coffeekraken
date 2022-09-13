@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __sha256 from '@coffeekraken/sugar/shared/crypt/sha256';
+import { __sha256 } from '@coffeekraken/sugar/crypto';
 import __fs from 'fs';
 
 /**

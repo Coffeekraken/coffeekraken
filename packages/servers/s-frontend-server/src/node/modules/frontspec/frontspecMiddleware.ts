@@ -2,8 +2,6 @@
 
 import __SBench from '@coffeekraken/s-bench';
 import __SFrontspec from '@coffeekraken/s-frontspec';
-import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
-import __fs from 'fs';
 
 /**
  * @name            frontspecMiddleware

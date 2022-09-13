@@ -29,7 +29,7 @@ import * as __convertColors from 'colors-convert';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function __hslToRgba(h, s, l, a = 1) {
+export default function __hslaToRgba(h, s, l, a = 1) {
     if (typeof h === 'object') {
         h = h.h;
         s = h.s;

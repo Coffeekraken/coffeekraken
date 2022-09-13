@@ -14,13 +14,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @return      {String}                The compressed variable name
  *
  * @example         js
- * import compressVarName from '@coffeekraken/sugar/shared/css/compressVarName';
- * compressVarName('--something-long-that-you-want-to-compress');
+ * import { __compressVarName } from '@coffeekraken/sugar/css';
+ * __compressVarName('--something-long-that-you-want-to-compress');
  *
  * @since       2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function compressVarName(name) {
+function __compressVarName(name) {
     // @TODO            implement correctly this optimization
     return name;
     // if (!__SEnv.is('production')) {
@@ -37,5 +37,5 @@ function compressVarName(name) {
     //     .join('');
     // return `--s${sum}${compressed}`;
 }
-exports.default = compressVarName;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUE7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FtQkc7QUFDSCxTQUF3QixlQUFlLENBQUMsSUFBSTtJQUN4Qyx5REFBeUQ7SUFDekQsT0FBTyxJQUFJLENBQUM7SUFFWixrQ0FBa0M7SUFDbEMsbUJBQW1CO0lBQ25CLElBQUk7SUFFSixtQ0FBbUM7SUFDbkMsdURBQXVEO0lBQ3ZELCtDQUErQztJQUMvQyxrQ0FBa0M7SUFDbEMsU0FBUztJQUNULHlCQUF5QjtJQUN6QixpQkFBaUI7SUFDakIscUNBQXFDO0lBQ3JDLGlCQUFpQjtJQUNqQixtQ0FBbUM7QUFDdkMsQ0FBQztBQWxCRCxrQ0FrQkMifQ==
+exports.default = __compressVarName;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUE7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FtQkc7QUFDSCxTQUF3QixpQkFBaUIsQ0FBQyxJQUFJO0lBQzFDLHlEQUF5RDtJQUN6RCxPQUFPLElBQUksQ0FBQztJQUVaLGtDQUFrQztJQUNsQyxtQkFBbUI7SUFDbkIsSUFBSTtJQUVKLG1DQUFtQztJQUNuQyx1REFBdUQ7SUFDdkQsK0NBQStDO0lBQy9DLGtDQUFrQztJQUNsQyxTQUFTO0lBQ1QseUJBQXlCO0lBQ3pCLGlCQUFpQjtJQUNqQixxQ0FBcUM7SUFDckMsaUJBQWlCO0lBQ2pCLG1DQUFtQztBQUN2QyxDQUFDO0FBbEJELG9DQWtCQyJ9

@@ -20,13 +20,13 @@ import __unique from '../array/unique';
  * @return     {Array<String>}                           The array of extensions
  *
  * @example         js
- * import __commonMediaFileExtensions from '@coffeekraken/sugar/shared/extension/commonMediaFileExtensions';
+ * import { __commonMediaFileExtensions } from '@coffeekraken/sugar/extension';
  * const extensions = __commonMediaFileExtensions(); // => ['avi','mp3',...]
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function commonMediaFileExtensions(
+export default function __commonMediaFileExtensions(
     settings: Partial<ICommonFileExtensionsSettings> = {},
 ): string[] {
     const finalSettings: ICommonFileExtensionsSettings = {

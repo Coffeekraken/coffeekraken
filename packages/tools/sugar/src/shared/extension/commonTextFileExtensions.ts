@@ -15,14 +15,14 @@ import __commonProgrammingFileExtensions from './commonProgrammingFileExtensions
  * @return     {Array<String>}                           The array of extensions
  *
  * @example         js
- * import __commonTextFileExtensions from '@coffeekraken/sugar/shared/extension/commonTextFileExtensions';
+ * import { __commonTextFileExtensions } from '@coffeekraken/sugar/extension';
  * const extensions = __commonTextFileExtensions();
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export default function commonTextFileExtensions(
+export default function __commonTextFileExtensions(
     settings: Partial<ICommonFileExtensionsSettings> = {},
 ): string[] {
     const finalSettings: ICommonFileExtensionsSettings = {

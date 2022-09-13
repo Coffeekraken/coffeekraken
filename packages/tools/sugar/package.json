@@ -157,6 +157,10 @@
             "require": "./dist/pkg/cjs/shared/convert/_exports.js",
             "import": "./dist/pkg/esm/shared/convert/_exports.js"
         },
+        "./crypto": {
+            "require": "./dist/pkg/cjs/shared/crypto/_exports.js",
+            "import": "./dist/pkg/esm/shared/crypto/_exports.js"
+        },
         "./dom": {
             "default": {
                 "require": "./dist/pkg/cjs/js/dom/_exports.js",
@@ -164,10 +168,34 @@
             }
         },
         "./css": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/css/_exports.js",
+                "import": "./dist/pkg/esm/node/css/_exports.js"
+            },
             "default": {
                 "require": "./dist/pkg/cjs/js/css/_exports.js",
                 "import": "./dist/pkg/esm/js/css/_exports.js"
             }
+        },
+        "./datetime": {
+            "require": "./dist/pkg/cjs/shared/datetime/_exports.js",
+            "import": "./dist/pkg/esm/shared/datetime/_exports.js"
+        },
+        "./dev": {
+            "require": "./dist/pkg/cjs/shared/dev/_exports.js",
+            "import": "./dist/pkg/esm/shared/dev/_exports.js"
+        },
+        "./easing": {
+            "require": "./dist/pkg/cjs/shared/easing/_exports.js",
+            "import": "./dist/pkg/esm/shared/easing/_exports.js"
+        },
+        "./es6": {
+            "require": "./dist/pkg/cjs/shared/es6/_exports.js",
+            "import": "./dist/pkg/esm/shared/es6/_exports.js"
+        },
+        "./extension": {
+            "require": "./dist/pkg/cjs/shared/extension/_exports.js",
+            "import": "./dist/pkg/esm/shared/extension/_exports.js"
         },
         "./error": {
             "node": {

@@ -14,13 +14,13 @@ import { ICommonFileExtensionsSettings } from './commonFileExtensions';
  * @return     {Array<String>}                           The array of extensions
  *
  * @example         js
- * import __commonAudioFileExtensions from '@coffeekraken/sugar/shared/extension/commonAudioFileExtensions';
+ * import { __commonAudioFileExtensions } from '@coffeekraken/sugar/extension';
  * const extensions = __commonAudioFileExtensions();
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function commonAudioFileExtensions(
+export default function __commonAudioFileExtensions(
     settings: Partial<ICommonFileExtensionsSettings> = {},
 ): string[] {
     const finalSettings: ICommonFileExtensionsSettings = {

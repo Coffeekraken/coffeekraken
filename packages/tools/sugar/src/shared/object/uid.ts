@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __crypto from 'crypto';
-import __encryptObject from '../crypt/object';
+import __encryptObject from '../crypto/object';
 
 /**
  * @name                            uid

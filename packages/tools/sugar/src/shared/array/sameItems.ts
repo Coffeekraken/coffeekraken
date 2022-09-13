@@ -1,4 +1,4 @@
-import __md5 from '../crypt/md5';
+import __md5 from '../crypto/md5';
 import __isPlainObject from '../is/plainObject';
 import __unique from './unique';
 

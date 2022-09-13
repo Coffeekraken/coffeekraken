@@ -1,7 +1,7 @@
 // @ts-nocheck
 /**
  * @name      linear
- * @namespace            js.easing
+ * @namespace            shared.easing
  * @type      Function
  * @platform          js
  * @platform          node
@@ -12,6 +12,9 @@
  * @param 		{Number} 		t 		The current time
  * @return 		{Number} 				The value depending on time
  *
+ * import { __linear } from '@coffeekraken/sugar/easing';
+ * __linear(0.4);
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -19,8 +22,7 @@
  * @since           1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function ease(t) {
+export default function __linear(t) {
     return t;
 }
-export default ease;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW1CRztBQUNILFNBQVMsSUFBSSxDQUFDLENBQUM7SUFDWCxPQUFPLENBQUMsQ0FBQztBQUNiLENBQUM7QUFDRCxlQUFlLElBQUksQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILE1BQU0sQ0FBQyxPQUFPLFVBQVUsUUFBUSxDQUFDLENBQUM7SUFDOUIsT0FBTyxDQUFDLENBQUM7QUFDYixDQUFDIn0=

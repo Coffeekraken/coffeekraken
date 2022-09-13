@@ -1,5 +1,5 @@
-import __SDocmap from "@coffeekraken/s-docmap";
-import __pickRandom from "@coffeekraken/sugar/shared/array/pickRandom";
+import __SDocmap from '@coffeekraken/s-docmap';
+import { __pickRandom } from '@coffeekraken/sugar/array';
 
 export default async function () {
   const docmap = new __SDocmap();

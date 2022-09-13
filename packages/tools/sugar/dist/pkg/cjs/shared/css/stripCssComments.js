@@ -4,11 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 const strip_css_comments_1 = __importDefault(require("strip-css-comments"));
+const deepMerge_1 = __importDefault(require("../object/deepMerge"));
 /**
  * @name          stripCssComments
- * @namespace            js.css
+ * @namespace            shared.css
  * @type          Function
  * @platform          js
  * @platform          node
@@ -30,8 +30,8 @@ const strip_css_comments_1 = __importDefault(require("strip-css-comments"));
  * @todo        doc
  *
  * @example       js
- * import stripCssComments from '@coffeekraken/sugar/js/css/stripCssComments';
- * stripCssComments(`
+ * import { __stripCssComments } from '@coffeekraken/sugar/css';
+ * __stripCssComments(`
  * // something cool
  * body { background-color: red; }
  * `);
@@ -58,4 +58,4 @@ function stripCssComments(css, settings = {}) {
     return css;
 }
 exports.default = stripCssComments;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLG9FQUE4QztBQUM5Qyw0RUFBb0Q7QUFFcEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FrQ0c7QUFDSCxTQUFTLGdCQUFnQixDQUFDLEdBQUcsRUFBRSxRQUFRLEdBQUcsRUFBRTtJQUN4QyxRQUFRLEdBQUcsSUFBQSxtQkFBVyxFQUNsQjtRQUNJLEtBQUssRUFBRSxJQUFJO1FBQ1gsSUFBSSxFQUFFLElBQUk7S0FDYixFQUNELFFBQVEsQ0FDWCxDQUFDO0lBQ0YsSUFBSSxRQUFRLENBQUMsS0FBSyxFQUFFO1FBQ2hCLG1EQUFtRDtRQUNuRCxHQUFHLEdBQUcsSUFBQSw0QkFBa0IsRUFBQyxHQUFHLEVBQUU7WUFDMUIsUUFBUSxFQUFFLEtBQUs7U0FDbEIsQ0FBQyxDQUFDO0tBQ047SUFDRCxJQUFJLFFBQVEsQ0FBQyxJQUFJLEVBQUU7UUFDZixHQUFHLEdBQUcsR0FBRyxDQUFDLE9BQU8sQ0FBQyw0QkFBNEIsRUFBRSxFQUFFLENBQUMsQ0FBQztLQUN2RDtJQUNELE9BQU8sR0FBRyxDQUFDO0FBQ2YsQ0FBQztBQUNELGtCQUFlLGdCQUFnQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDRFQUFvRDtBQUNwRCxvRUFBOEM7QUFFOUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FrQ0c7QUFDSCxTQUF3QixnQkFBZ0IsQ0FBQyxHQUFHLEVBQUUsUUFBUSxHQUFHLEVBQUU7SUFDdkQsUUFBUSxHQUFHLElBQUEsbUJBQVcsRUFDbEI7UUFDSSxLQUFLLEVBQUUsSUFBSTtRQUNYLElBQUksRUFBRSxJQUFJO0tBQ2IsRUFDRCxRQUFRLENBQ1gsQ0FBQztJQUNGLElBQUksUUFBUSxDQUFDLEtBQUssRUFBRTtRQUNoQixtREFBbUQ7UUFDbkQsR0FBRyxHQUFHLElBQUEsNEJBQWtCLEVBQUMsR0FBRyxFQUFFO1lBQzFCLFFBQVEsRUFBRSxLQUFLO1NBQ2xCLENBQUMsQ0FBQztLQUNOO0lBQ0QsSUFBSSxRQUFRLENBQUMsSUFBSSxFQUFFO1FBQ2YsR0FBRyxHQUFHLEdBQUcsQ0FBQyxPQUFPLENBQUMsNEJBQTRCLEVBQUUsRUFBRSxDQUFDLENBQUM7S0FDdkQ7SUFDRCxPQUFPLEdBQUcsQ0FBQztBQUNmLENBQUM7QUFsQkQsbUNBa0JDIn0=

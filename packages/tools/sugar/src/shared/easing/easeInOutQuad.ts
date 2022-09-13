@@ -2,7 +2,7 @@
 
 /**
  * @name      easeInOutQuad
- * @namespace            js.easing
+ * @namespace            shared.easing
  * @type      Function
  * @platform          js
  * @platform          node
@@ -13,6 +13,9 @@
  * @param 		{Number} 		t 		The current time
  * @return 		{Number} 				The value depending on time
  *
+ * import { __easeInOutQuad } from '@coffeekraken/sugar/easing';
+ * __easeInOutQuad(0.4);
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -20,7 +23,6 @@
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function ease(t) {
+export default function __easeInOutQuad(t) {
     return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
 }
-export default ease;

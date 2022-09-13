@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name            availableEasingsArray
- * @namespace            js.easing
+ * @namespace            shared.easing
  * @type            Function
  * @platform          js
  * @platform          node
@@ -13,6 +13,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
  *
  * @return      {Array}             An array of all the easing functions available
  *
+ * @example         js
+ * import { __availableEasingsArray } from '@coffeekraken/sugar/easing';
+ * __availableEasingsArray();
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -20,7 +24,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function availableEasingsArray() {
+function __availableEasingsArray() {
     return [
         'easeInOutCubic',
         'easeInOutQuad',
@@ -36,5 +40,5 @@ function availableEasingsArray() {
         'easeOutQuint',
     ];
 }
-exports.default = availableEasingsArray;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FrQkc7QUFDSCxTQUFTLHFCQUFxQjtJQUMxQixPQUFPO1FBQ0gsZ0JBQWdCO1FBQ2hCLGVBQWU7UUFDZixnQkFBZ0I7UUFDaEIsZ0JBQWdCO1FBQ2hCLGFBQWE7UUFDYixZQUFZO1FBQ1osYUFBYTtRQUNiLGFBQWE7UUFDYixjQUFjO1FBQ2QsYUFBYTtRQUNiLGNBQWM7UUFDZCxjQUFjO0tBQ2pCLENBQUM7QUFDTixDQUFDO0FBQ0Qsa0JBQWUscUJBQXFCLENBQUMifQ==
+exports.default = __availableEasingsArray;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBQ0gsU0FBd0IsdUJBQXVCO0lBQzNDLE9BQU87UUFDSCxnQkFBZ0I7UUFDaEIsZUFBZTtRQUNmLGdCQUFnQjtRQUNoQixnQkFBZ0I7UUFDaEIsYUFBYTtRQUNiLFlBQVk7UUFDWixhQUFhO1FBQ2IsYUFBYTtRQUNiLGNBQWM7UUFDZCxhQUFhO1FBQ2IsY0FBYztRQUNkLGNBQWM7S0FDakIsQ0FBQztBQUNOLENBQUM7QUFmRCwwQ0FlQyJ9

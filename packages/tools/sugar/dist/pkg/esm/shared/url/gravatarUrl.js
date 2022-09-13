@@ -1,5 +1,5 @@
 // @ts-nocheck
-import __md5 from '../crypt/md5';
+import __md5 from '../crypto/md5';
 /**
  * @name            gravatarUrl
  * @namespace            js.url
@@ -30,4 +30,4 @@ function gravatarUrl(email, size = 200) {
     return `https://www.gravatar.com/avatar/${__md5.encrypt(email)}?s=${size}`;
 }
 export default gravatarUrl;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLEtBQUssTUFBTSxjQUFjLENBQUM7QUFFakM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F5Qkc7QUFDSCxTQUFTLFdBQVcsQ0FBQyxLQUFLLEVBQUUsSUFBSSxHQUFHLEdBQUc7SUFDbEMsT0FBTyxtQ0FBbUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsTUFBTSxJQUFJLEVBQUUsQ0FBQztBQUMvRSxDQUFDO0FBQ0QsZUFBZSxXQUFXLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLEtBQUssTUFBTSxlQUFlLENBQUM7QUFFbEM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F5Qkc7QUFDSCxTQUFTLFdBQVcsQ0FBQyxLQUFLLEVBQUUsSUFBSSxHQUFHLEdBQUc7SUFDbEMsT0FBTyxtQ0FBbUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsTUFBTSxJQUFJLEVBQUUsQ0FBQztBQUMvRSxDQUFDO0FBQ0QsZUFBZSxXQUFXLENBQUMifQ==

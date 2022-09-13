@@ -1,6 +1,6 @@
-import __objectHash from 'object-hash';
-import __sha256 from '../../shared/crypt/sha256';
 import { __extension, __fileHash } from '@coffeekraken/sugar/fs';
+import __objectHash from 'object-hash';
+import __sha256 from '../../shared/crypto/sha256';
 
 /**
  * @name            dependenciesHash

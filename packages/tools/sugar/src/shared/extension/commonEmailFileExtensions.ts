@@ -14,13 +14,13 @@ import { ICommonFileExtensionsSettings } from './commonFileExtensions';
  * @return     {Array<String>}                           The array of extensions
  *
  * @example         js
- * import __commonEmailFileExtensions from '@coffeekraken/sugar/shared/extension/commonEmailFileExtensions';
+ * import { __commonEmailFileExtensions } from '@coffeekraken/sugar/extension';
  * const extensions = __commonEmailFileExtensions();
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function commonEmailFileExtensions(
+export default function __commonEmailFileExtensions(
     settings: Partial<ICommonFileExtensionsSettings> = {},
 ): string[] {
     const finalSettings: ICommonFileExtensionsSettings = {

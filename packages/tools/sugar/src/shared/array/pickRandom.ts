@@ -31,9 +31,9 @@ export default function __pickRandom(array: any[], count: number = 1): any {
             return array;
         }
         for (let i = 0; i < count; i++) {
-            let item = pickRandom(array, 1);
+            let item = __pickRandom(array, 1);
             while (items.includes(item)) {
-                item = pickRandom(array, 1);
+                item = __pickRandom(array, 1);
             }
             items.push(item);
         }

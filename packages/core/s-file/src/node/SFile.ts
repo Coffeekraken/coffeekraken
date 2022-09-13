@@ -1,5 +1,6 @@
 // import __SFileInterface from './interface/SFileInterface';
 import __SEventEmitter, { ISEventEmitter } from '@coffeekraken/s-event-emitter';
+import { __md5 } from '@coffeekraken/sugar/crypto';
 import {
     __extension,
     __fileName,
@@ -7,7 +8,6 @@ import {
     __writeFile,
     __writeFileSync,
 } from '@coffeekraken/sugar/fs';
-import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import { __toString } from '@coffeekraken/sugar/string';
 import __fs from 'fs';

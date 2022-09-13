@@ -12,14 +12,14 @@
  * @return      {Boolean}                           true if is a valid unit based value, false if not
  *
  * @example         js
- * import isValidUnitValue from '@coffeekraken/sugar/shared/css/isValidUnitValue';
- * isValidUnitValue('10px'); // => true
- * isValidUnitValue('default'); // => false
+ * import { __isValidUnitValue } from '@coffeekraken/sugar/css';
+ * __isValidUnitValue('10px'); // => true
+ * __isValidUnitValue('default'); // => false
  *
  * @since       2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function isValidUnitValue(value: string | number): boolean {
+export default function __isValidUnitValue(value: string | number): boolean {
     if (typeof value === 'number') return true;
     if (typeof value !== 'string') return false;
 

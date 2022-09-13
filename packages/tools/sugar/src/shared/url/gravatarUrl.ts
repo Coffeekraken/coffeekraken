@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __md5 from '../crypt/md5';
+import __md5 from '../crypto/md5';
 
 /**
  * @name            gravatarUrl

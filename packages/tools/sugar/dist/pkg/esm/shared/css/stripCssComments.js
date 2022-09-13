@@ -1,9 +1,9 @@
 // @ts-nocheck
-import __deepMerge from '../object/deepMerge';
 import __stripCssComments from 'strip-css-comments';
+import __deepMerge from '../object/deepMerge';
 /**
  * @name          stripCssComments
- * @namespace            js.css
+ * @namespace            shared.css
  * @type          Function
  * @platform          js
  * @platform          node
@@ -25,8 +25,8 @@ import __stripCssComments from 'strip-css-comments';
  * @todo        doc
  *
  * @example       js
- * import stripCssComments from '@coffeekraken/sugar/js/css/stripCssComments';
- * stripCssComments(`
+ * import { __stripCssComments } from '@coffeekraken/sugar/css';
+ * __stripCssComments(`
  * // something cool
  * body { background-color: red; }
  * `);
@@ -36,7 +36,7 @@ import __stripCssComments from 'strip-css-comments';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function stripCssComments(css, settings = {}) {
+export default function stripCssComments(css, settings = {}) {
     settings = __deepMerge({
         block: true,
         line: true,
@@ -52,5 +52,4 @@ function stripCssComments(css, settings = {}) {
     }
     return css;
 }
-export default stripCssComments;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFdBQVcsTUFBTSxxQkFBcUIsQ0FBQztBQUM5QyxPQUFPLGtCQUFrQixNQUFNLG9CQUFvQixDQUFDO0FBRXBEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBa0NHO0FBQ0gsU0FBUyxnQkFBZ0IsQ0FBQyxHQUFHLEVBQUUsUUFBUSxHQUFHLEVBQUU7SUFDeEMsUUFBUSxHQUFHLFdBQVcsQ0FDbEI7UUFDSSxLQUFLLEVBQUUsSUFBSTtRQUNYLElBQUksRUFBRSxJQUFJO0tBQ2IsRUFDRCxRQUFRLENBQ1gsQ0FBQztJQUNGLElBQUksUUFBUSxDQUFDLEtBQUssRUFBRTtRQUNoQixtREFBbUQ7UUFDbkQsR0FBRyxHQUFHLGtCQUFrQixDQUFDLEdBQUcsRUFBRTtZQUMxQixRQUFRLEVBQUUsS0FBSztTQUNsQixDQUFDLENBQUM7S0FDTjtJQUNELElBQUksUUFBUSxDQUFDLElBQUksRUFBRTtRQUNmLEdBQUcsR0FBRyxHQUFHLENBQUMsT0FBTyxDQUFDLDRCQUE0QixFQUFFLEVBQUUsQ0FBQyxDQUFDO0tBQ3ZEO0lBQ0QsT0FBTyxHQUFHLENBQUM7QUFDZixDQUFDO0FBQ0QsZUFBZSxnQkFBZ0IsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLGtCQUFrQixNQUFNLG9CQUFvQixDQUFDO0FBQ3BELE9BQU8sV0FBVyxNQUFNLHFCQUFxQixDQUFDO0FBRTlDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBa0NHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSxnQkFBZ0IsQ0FBQyxHQUFHLEVBQUUsUUFBUSxHQUFHLEVBQUU7SUFDdkQsUUFBUSxHQUFHLFdBQVcsQ0FDbEI7UUFDSSxLQUFLLEVBQUUsSUFBSTtRQUNYLElBQUksRUFBRSxJQUFJO0tBQ2IsRUFDRCxRQUFRLENBQ1gsQ0FBQztJQUNGLElBQUksUUFBUSxDQUFDLEtBQUssRUFBRTtRQUNoQixtREFBbUQ7UUFDbkQsR0FBRyxHQUFHLGtCQUFrQixDQUFDLEdBQUcsRUFBRTtZQUMxQixRQUFRLEVBQUUsS0FBSztTQUNsQixDQUFDLENBQUM7S0FDTjtJQUNELElBQUksUUFBUSxDQUFDLElBQUksRUFBRTtRQUNmLEdBQUcsR0FBRyxHQUFHLENBQUMsT0FBTyxDQUFDLDRCQUE0QixFQUFFLEVBQUUsQ0FBQyxDQUFDO0tBQ3ZEO0lBQ0QsT0FBTyxHQUFHLENBQUM7QUFDZixDQUFDIn0=

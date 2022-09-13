@@ -12,13 +12,13 @@
  * @return      {String}                The compressed variable name
  *
  * @example         js
- * import compressVarName from '@coffeekraken/sugar/shared/css/compressVarName';
- * compressVarName('--something-long-that-you-want-to-compress');
+ * import { __compressVarName } from '@coffeekraken/sugar/css';
+ * __compressVarName('--something-long-that-you-want-to-compress');
  *
  * @since       2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function compressVarName(name) {
+export default function __compressVarName(name) {
     // @TODO            implement correctly this optimization
     return name;
 

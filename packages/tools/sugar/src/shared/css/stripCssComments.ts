@@ -1,11 +1,11 @@
 // @ts-nocheck
 
-import __deepMerge from '../object/deepMerge';
 import __stripCssComments from 'strip-css-comments';
+import __deepMerge from '../object/deepMerge';
 
 /**
  * @name          stripCssComments
- * @namespace            js.css
+ * @namespace            shared.css
  * @type          Function
  * @platform          js
  * @platform          node
@@ -27,8 +27,8 @@ import __stripCssComments from 'strip-css-comments';
  * @todo        doc
  *
  * @example       js
- * import stripCssComments from '@coffeekraken/sugar/js/css/stripCssComments';
- * stripCssComments(`
+ * import { __stripCssComments } from '@coffeekraken/sugar/css';
+ * __stripCssComments(`
  * // something cool
  * body { background-color: red; }
  * `);
@@ -38,7 +38,7 @@ import __stripCssComments from 'strip-css-comments';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function stripCssComments(css, settings = {}) {
+export default function stripCssComments(css, settings = {}) {
     settings = __deepMerge(
         {
             block: true,
@@ -57,4 +57,3 @@ function stripCssComments(css, settings = {}) {
     }
     return css;
 }
-export default stripCssComments;

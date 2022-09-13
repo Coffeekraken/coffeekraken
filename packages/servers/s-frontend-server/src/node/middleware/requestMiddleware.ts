@@ -1,9 +1,6 @@
 // @ts-nocheck
 
 import __SBench from '@coffeekraken/s-bench';
-import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
-import __fs from 'fs';
-import __SDocmap from '@coffeekraken/s-docmap';
 
 /**
  * @name            requestMiddleware

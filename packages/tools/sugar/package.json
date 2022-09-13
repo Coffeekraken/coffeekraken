@@ -197,6 +197,10 @@
             "require": "./dist/pkg/cjs/shared/extension/_exports.js",
             "import": "./dist/pkg/esm/shared/extension/_exports.js"
         },
+        "./function": {
+            "require": "./dist/pkg/cjs/shared/function/_exports.js",
+            "import": "./dist/pkg/esm/shared/function/_exports.js"
+        },
         "./error": {
             "node": {
                 "require": "./dist/pkg/cjs/node/error/_exports.js",

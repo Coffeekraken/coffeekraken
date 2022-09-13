@@ -11,8 +11,8 @@ import __memoizee from 'memoizee';
  * This is just a "proxy" of the "memoizee" package.
  *
  * @example         js
- * import memoize from '@coffeekraken/sugar/shared/function/memoize';
- * const fn = memoize(function(text) => {
+ * import { __memoize } from '@coffeekraken/sugar/function';
+ * const fn =  __memoize(function(text) => {
  *    return `Hello ${text}`;
  * });
  * const result = fn('world'); // first execution. no cache
@@ -23,5 +23,7 @@ import __memoizee from 'memoizee';
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default __memoizee;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sVUFBVSxNQUFNLFVBQVUsQ0FBQztBQUVsQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxlQUFlLFVBQVUsQ0FBQyJ9
+export default function __memoize(...args) {
+    return __memoizee(...args);
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sVUFBVSxNQUFNLFVBQVUsQ0FBQztBQUVsQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxNQUFNLENBQUMsT0FBTyxVQUFVLFNBQVMsQ0FBQyxHQUFHLElBQUk7SUFDckMsT0FBTyxVQUFVLENBQUMsR0FBRyxJQUFJLENBQUMsQ0FBQztBQUMvQixDQUFDIn0=

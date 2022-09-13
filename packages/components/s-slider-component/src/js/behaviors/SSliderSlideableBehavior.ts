@@ -1,5 +1,5 @@
-import { __slideable, __getTranslateProperties } from '@coffeekraken/sugar/dom';
-import __easeInterval from '@coffeekraken/sugar/shared/function/easeInterval';
+import { __getTranslateProperties, __slideable } from '@coffeekraken/sugar/dom';
+import { __easeInterval } from '@coffeekraken/sugar/function';
 import __SSliderBehavior from '../SSliderBehavior';
 import __SSliderSlideableBehaviorInterface from './interface/SSliderSlideableBehaviorInterface';
 

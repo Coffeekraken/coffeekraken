@@ -9,10 +9,10 @@ import __STheme from '@coffeekraken/s-theme';
 
 import { __adoptStyleInShadowRoot } from '@coffeekraken/sugar/dom';
 
+import { __when } from '@coffeekraken/sugar/dom';
+import { __debounce } from '@coffeekraken/sugar/function';
 import __injectStyle from '@coffeekraken/sugar/js/dom/css/injectStyle';
 import __inViewportStatusChange from '@coffeekraken/sugar/js/dom/detect/inViewportStatusChange';
-import { __when } from '@coffeekraken/sugar/dom';
-import __debounce from '@coffeekraken/sugar/shared/function/debounce';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';

@@ -18,14 +18,14 @@
  * @todo        move this into the "function" folder
  *
  * @example         js
- * import getArgsNames from '@coffeekraken/sugar/shared/function/getArgsNames';
+ * import { __getArgsNames } from '@coffeekraken/sugar/function';
  * function hello(world, coco, plop) { }
- * getArgsNames(hello); // => ['world', 'coco', 'plop']
+ * __getArgsNames(hello); // => ['world', 'coco', 'plop']
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function getArgsNames(func) {
+export default function __getArgsNames(func) {
     // String representaation of the function code
     let str = func.toString();
     // Remove comments of the form /* ... */
@@ -58,4 +58,3 @@ function getArgsNames(func) {
 
     return params;
 }
-export default getArgsNames;

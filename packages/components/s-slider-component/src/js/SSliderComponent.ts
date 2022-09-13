@@ -8,9 +8,11 @@ import __isClass from '@coffeekraken/sugar/shared/is/class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import { css, html, unsafeCSS } from 'lit';
 // @ts-ignore
-import { __querySelectorLive } from '@coffeekraken/sugar/dom';
-import { __querySelectorUp } from '@coffeekraken/sugar/dom';
-import __easeInterval from '@coffeekraken/sugar/shared/function/easeInterval';
+import {
+    __querySelectorLive,
+    __querySelectorUp,
+} from '@coffeekraken/sugar/dom';
+import { __easeInterval } from '@coffeekraken/sugar/function';
 import { __uniqid } from '@coffeekraken/sugar/string';
 import __css from '../../../../src/css/s-slider-component.css'; // relative to /dist/pkg/esm/js
 import __SSliderComponentInterface from './interface/SSliderComponentInterface';

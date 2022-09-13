@@ -2,7 +2,7 @@
 
 /**
  * @name        debounce
- * @namespace            js.function
+ * @namespace            shared.function
  * @type      Function
  * @platform          js
  * @platform          node
@@ -17,8 +17,8 @@
  * @todo      tests
  *
  * @example 		js
- * import debounce from '@coffeekraken/sugar/js/function/debounce';
- * const myDebouncedFn = debounce(() => {
+ * import { __debounce } from '@coffeekraken/sugar/function';
+ * const myDebouncedFn = __debounce(() => {
  * 		// my function content that will be
  * 		// executed only once after the 1 second delay
  * }, 1000);
@@ -31,8 +31,7 @@
  * @since           2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-/*eslint-disable */
-function debounce(fn, delay) {
+export default function __debounce(fn, delay) {
     let timer = null;
     return function () {
         const context = this,
@@ -43,5 +42,3 @@ function debounce(fn, delay) {
         }, delay);
     };
 }
-/*eslint-enable */
-export default debounce;

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name        debounce
- * @namespace            js.function
+ * @namespace            shared.function
  * @type      Function
  * @platform          js
  * @platform          node
@@ -18,8 +18,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @todo      tests
  *
  * @example 		js
- * import debounce from '@coffeekraken/sugar/js/function/debounce';
- * const myDebouncedFn = debounce(() => {
+ * import { __debounce } from '@coffeekraken/sugar/function';
+ * const myDebouncedFn = __debounce(() => {
  * 		// my function content that will be
  * 		// executed only once after the 1 second delay
  * }, 1000);
@@ -32,8 +32,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @since           2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-/*eslint-disable */
-function debounce(fn, delay) {
+function __debounce(fn, delay) {
     let timer = null;
     return function () {
         const context = this, args = arguments;
@@ -43,6 +42,5 @@ function debounce(fn, delay) {
         }, delay);
     };
 }
-/*eslint-enable */
-exports.default = debounce;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0E4Qkc7QUFDSCxtQkFBbUI7QUFDbkIsU0FBUyxRQUFRLENBQUMsRUFBRSxFQUFFLEtBQUs7SUFDdkIsSUFBSSxLQUFLLEdBQUcsSUFBSSxDQUFDO0lBQ2pCLE9BQU87UUFDSCxNQUFNLE9BQU8sR0FBRyxJQUFJLEVBQ2hCLElBQUksR0FBRyxTQUFTLENBQUM7UUFDckIsWUFBWSxDQUFDLEtBQUssQ0FBQyxDQUFDO1FBQ3BCLEtBQUssR0FBRyxVQUFVLENBQUM7WUFDZixFQUFFLENBQUMsS0FBSyxDQUFDLE9BQU8sRUFBRSxJQUFJLENBQUMsQ0FBQztRQUM1QixDQUFDLEVBQUUsS0FBSyxDQUFDLENBQUM7SUFDZCxDQUFDLENBQUM7QUFDTixDQUFDO0FBQ0Qsa0JBQWtCO0FBQ2xCLGtCQUFlLFFBQVEsQ0FBQyJ9
+exports.default = __debounce;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0E4Qkc7QUFDSCxTQUF3QixVQUFVLENBQUMsRUFBRSxFQUFFLEtBQUs7SUFDeEMsSUFBSSxLQUFLLEdBQUcsSUFBSSxDQUFDO0lBQ2pCLE9BQU87UUFDSCxNQUFNLE9BQU8sR0FBRyxJQUFJLEVBQ2hCLElBQUksR0FBRyxTQUFTLENBQUM7UUFDckIsWUFBWSxDQUFDLEtBQUssQ0FBQyxDQUFDO1FBQ3BCLEtBQUssR0FBRyxVQUFVLENBQUM7WUFDZixFQUFFLENBQUMsS0FBSyxDQUFDLE9BQU8sRUFBRSxJQUFJLENBQUMsQ0FBQztRQUM1QixDQUFDLEVBQUUsS0FBSyxDQUFDLENBQUM7SUFDZCxDQUFDLENBQUM7QUFDTixDQUFDO0FBVkQsNkJBVUMifQ==

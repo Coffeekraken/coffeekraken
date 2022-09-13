@@ -25,7 +25,7 @@ import __easeInOutQuart from '../easing/easeInOutQuart';
  * @setting         {Number}        [to=100]                    The value to end with
  *
  * @example         js
- * import __easeInterval from '@coffeekraken/sugar/shared/function/easeInterval';
+ * import { __easeInterval } from '@coffeekraken/sugar/function';
  * await __easeInterval(2000, (easedPercent) => {
  *      // do something...
  * }, {
@@ -44,7 +44,7 @@ export interface IEaseIntervalSettings {
     onEnd?: Function;
 }
 
-export default function (
+export default function __easeInterval(
     duration: number,
     cb: Function,
     settings: Partial<IEaseIntervalSettings> = {},

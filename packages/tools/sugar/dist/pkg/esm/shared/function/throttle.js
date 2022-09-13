@@ -1,7 +1,7 @@
 // @ts-nocheck
 /**
  * @name        throttle
- * @namespace            js.function
+ * @namespace            shared.function
  * @type      Function
  * @platform          js
  * @platform          node
@@ -15,8 +15,8 @@
  * @todo      tests
  *
  * @example 		js
- * import throttle from '@coffeekraken/sugar/js/function/throttle';
- * const myThrottledFn = throttle(() => {
+ * import { __throttle } from '@coffeekraken/sugar/function';
+ * const myThrottledFn = __throttle(() => {
  * 		// my function content that will be
  * 		// executed only once each second
  * }, 1000);
@@ -29,8 +29,7 @@
  * @since         2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-/*eslint-disable */
-function throttle(fn, threshhold) {
+export default function __throttle(fn, threshhold) {
     threshhold || (threshhold = 250);
     let last;
     return function () {
@@ -42,6 +41,4 @@ function throttle(fn, threshhold) {
         }
     };
 }
-/*eslint-enable */
-export default throttle;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0E2Qkc7QUFDSCxtQkFBbUI7QUFDbkIsU0FBUyxRQUFRLENBQUMsRUFBRSxFQUFFLFVBQVU7SUFDNUIsVUFBVSxJQUFJLENBQUMsVUFBVSxHQUFHLEdBQUcsQ0FBQyxDQUFDO0lBQ2pDLElBQUksSUFBSSxDQUFDO0lBQ1QsT0FBTztRQUNILE1BQU0sT0FBTyxHQUFHLElBQUksQ0FBQztRQUNyQixNQUFNLEdBQUcsR0FBRyxJQUFJLElBQUksRUFBRSxFQUNsQixJQUFJLEdBQUcsU0FBUyxDQUFDO1FBQ3JCLElBQUksQ0FBQyxJQUFJLElBQUksSUFBSSxJQUFJLEdBQUcsR0FBRyxVQUFVLEVBQUU7WUFDbkMsSUFBSSxHQUFHLEdBQUcsQ0FBQztZQUNYLEVBQUUsQ0FBQyxLQUFLLENBQUMsT0FBTyxFQUFFLElBQUksQ0FBQyxDQUFDO1NBQzNCO0lBQ0wsQ0FBQyxDQUFDO0FBQ04sQ0FBQztBQUNELGtCQUFrQjtBQUNsQixlQUFlLFFBQVEsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0E2Qkc7QUFDSCxNQUFNLENBQUMsT0FBTyxVQUFVLFVBQVUsQ0FBQyxFQUFFLEVBQUUsVUFBVTtJQUM3QyxVQUFVLElBQUksQ0FBQyxVQUFVLEdBQUcsR0FBRyxDQUFDLENBQUM7SUFDakMsSUFBSSxJQUFJLENBQUM7SUFDVCxPQUFPO1FBQ0gsTUFBTSxPQUFPLEdBQUcsSUFBSSxDQUFDO1FBQ3JCLE1BQU0sR0FBRyxHQUFHLElBQUksSUFBSSxFQUFFLEVBQ2xCLElBQUksR0FBRyxTQUFTLENBQUM7UUFDckIsSUFBSSxDQUFDLElBQUksSUFBSSxJQUFJLElBQUksR0FBRyxHQUFHLFVBQVUsRUFBRTtZQUNuQyxJQUFJLEdBQUcsR0FBRyxDQUFDO1lBQ1gsRUFBRSxDQUFDLEtBQUssQ0FBQyxPQUFPLEVBQUUsSUFBSSxDQUFDLENBQUM7U0FDM0I7SUFDTCxDQUFDLENBQUM7QUFDTixDQUFDIn0=

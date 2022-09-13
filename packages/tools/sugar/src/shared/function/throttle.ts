@@ -2,7 +2,7 @@
 
 /**
  * @name        throttle
- * @namespace            js.function
+ * @namespace            shared.function
  * @type      Function
  * @platform          js
  * @platform          node
@@ -16,8 +16,8 @@
  * @todo      tests
  *
  * @example 		js
- * import throttle from '@coffeekraken/sugar/js/function/throttle';
- * const myThrottledFn = throttle(() => {
+ * import { __throttle } from '@coffeekraken/sugar/function';
+ * const myThrottledFn = __throttle(() => {
  * 		// my function content that will be
  * 		// executed only once each second
  * }, 1000);
@@ -30,8 +30,7 @@
  * @since         2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-/*eslint-disable */
-function throttle(fn, threshhold) {
+export default function __throttle(fn, threshhold) {
     threshhold || (threshhold = 250);
     let last;
     return function () {
@@ -44,5 +43,3 @@ function throttle(fn, threshhold) {
         }
     };
 }
-/*eslint-enable */
-export default throttle;

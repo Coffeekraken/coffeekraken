@@ -1,13 +1,15 @@
 import __SClass from '@coffeekraken/s-class';
-import { __cssEasingStrToJsFunction } from '@coffeekraken/sugar/css';
+import {
+    __cssEasingStrToJsFunction,
+    __parseTransformRule,
+} from '@coffeekraken/sugar/css';
+import { __easeInterval } from '@coffeekraken/sugar/function';
 import __getAnimationsFromElement, {
     IGetAnimationsFromElementResult,
 } from '@coffeekraken/sugar/js/dom/style/getAnimationsFromElement';
 import __getKeyframesFromStylesheets, {
     IKeyframe,
 } from '@coffeekraken/sugar/js/dom/style/getKeyframesFromStylesheets';
-import { __parseTransformRule } from '@coffeekraken/sugar/css';
-import __easeInterval from '@coffeekraken/sugar/shared/function/easeInterval';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __flatten from '@coffeekraken/sugar/shared/object/flatten';
 import __get from '@coffeekraken/sugar/shared/object/get';

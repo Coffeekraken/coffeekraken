@@ -21,8 +21,8 @@ import __isPlainObject from '../is/isPlainObject';
  * @todo      tests
  *
  * @example           js
- * import toPlainObject from '@coffeekraken/sugar/node/object/toPlainObject';
- * toPlainObject({ something: 'cool' });
+ * import { __toPlainObject } from '@coffeekraken/sugar/object';
+ * __toPlainObject({ something: 'cool' });
  *
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -30,7 +30,7 @@ import __isPlainObject from '../is/isPlainObject';
 export interface IToPlainObjectSettings {
     deep: boolean;
 }
-export default function (
+export default function __toPlainObject(
     object: any,
     settings?: Partial<IToPlainObjectSettings>,
 ): any {

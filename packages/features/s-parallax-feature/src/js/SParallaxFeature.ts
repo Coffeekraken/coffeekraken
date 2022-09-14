@@ -1,6 +1,6 @@
 import type { ISFeature } from '@coffeekraken/s-feature';
 import __SFeature from '@coffeekraken/s-feature';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import * as __rematrix from 'rematrix';
 import __SParallaxFeatureInterface from './interface/SParallaxFeatureInterface';
 

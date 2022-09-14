@@ -19,8 +19,8 @@
  * @todo      tests
  *
  * @example               js
- * import sortObject from '@coffeekraken/sugar/js/object/sort';
- * sortObject({
+ * import { __sort } from '@coffeekraken/sugar/object';
+ * __sort({
  *    coco: { weight: 10 },
  *    lolo: { weight: 2 },
  *    plop: { weight: 5 }
@@ -36,7 +36,7 @@
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function sort(object, sort) {
+export default function __sort(object, sort) {
     // get the object keys
     const keys = Object.keys(object);
 
@@ -57,4 +57,3 @@ function sort(object, sort) {
     // return the result sorted object
     return resultObj;
 }
-export default sort;

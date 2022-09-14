@@ -26,8 +26,8 @@ import __deepMerge from '../object/deepMerge';
  * @todo      tests
  *
  * @example       js
- * import deepMap from '@coffeekraken/sugar/js/object/deepMap';
- * deepMap({
+ * import { __deepMap } from '@coffeekraken/sugar/object';
+ * __deepMap({
  *    hello: 'world'
  * }, ({object, prop, value, path}) => {
  *    return '~ ' + value;
@@ -36,7 +36,12 @@ import __deepMerge from '../object/deepMerge';
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function deepMap(objectOrArray, processor, settings = {}, _path = []) {
+export default function __deepMap(
+    objectOrArray,
+    processor,
+    settings = {},
+    _path = [],
+) {
     settings = __deepMerge(
         {
             classInstances: false,
@@ -64,7 +69,7 @@ function deepMap(objectOrArray, processor, settings = {}, _path = []) {
                 settings.classInstances) ||
             (Array.isArray(objectOrArray[prop]) && settings.array)
         ) {
-            const res = deepMap(objectOrArray[prop], processor, settings, [
+            const res = __deepMap(objectOrArray[prop], processor, settings, [
                 ..._path,
                 prop,
             ]);
@@ -109,4 +114,3 @@ function deepMap(objectOrArray, processor, settings = {}, _path = []) {
     });
     return newObject;
 }
-export default deepMap;

@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __SPromise from '@coffeekraken/s-promise';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import __convert from '@coffeekraken/sugar/shared/time/convert';
 
 /**

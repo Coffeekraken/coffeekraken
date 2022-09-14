@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const s_class_1 = __importDefault(require("@coffeekraken/s-class"));
-const deepMerge_1 = __importDefault(require("@coffeekraken/sugar/shared/object/deepMerge"));
+const object_1 = require("@coffeekraken/sugar/object");
 class SSitemapBuilderSource extends s_class_1.default {
     /**
      * @name            constructor
@@ -17,7 +17,7 @@ class SSitemapBuilderSource extends s_class_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings) {
-        super((0, deepMerge_1.default)({}, settings !== null && settings !== void 0 ? settings : {}));
+        super((0, object_1.__deepMerge)({}, settings !== null && settings !== void 0 ? settings : {}));
     }
     /**
      * @name            build
@@ -38,4 +38,4 @@ class SSitemapBuilderSource extends s_class_1.default {
     }
 }
 exports.default = SSitemapBuilderSource;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsb0VBQTZDO0FBQzdDLDRGQUFzRTtBQXFCdEUsTUFBcUIscUJBQXNCLFNBQVEsaUJBQVE7SUFDdkQ7Ozs7Ozs7OztPQVNHO0lBQ0gsWUFBWSxRQUFrRDtRQUMxRCxLQUFLLENBQUMsSUFBQSxtQkFBVyxFQUFDLEVBQUUsRUFBRSxRQUFRLGFBQVIsUUFBUSxjQUFSLFFBQVEsR0FBSSxFQUFFLENBQUMsQ0FBQyxDQUFDO0lBQzNDLENBQUM7SUFFRDs7Ozs7Ozs7Ozs7OztPQWFHO0lBQ0gsS0FBSyxDQUNELFNBQStDLEVBQUU7UUFFakQsTUFBTSxJQUFJLEtBQUssQ0FDWCxzR0FBc0csQ0FDekcsQ0FBQztJQUNOLENBQUM7Q0FDSjtBQXBDRCx3Q0FvQ0MifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsb0VBQTZDO0FBQzdDLHVEQUF5RDtBQXFCekQsTUFBcUIscUJBQXNCLFNBQVEsaUJBQVE7SUFDdkQ7Ozs7Ozs7OztPQVNHO0lBQ0gsWUFBWSxRQUFrRDtRQUMxRCxLQUFLLENBQUMsSUFBQSxvQkFBVyxFQUFDLEVBQUUsRUFBRSxRQUFRLGFBQVIsUUFBUSxjQUFSLFFBQVEsR0FBSSxFQUFFLENBQUMsQ0FBQyxDQUFDO0lBQzNDLENBQUM7SUFFRDs7Ozs7Ozs7Ozs7OztPQWFHO0lBQ0gsS0FBSyxDQUNELFNBQStDLEVBQUU7UUFFakQsTUFBTSxJQUFJLEtBQUssQ0FDWCxzR0FBc0csQ0FDekcsQ0FBQztJQUNOLENBQUM7Q0FDSjtBQXBDRCx3Q0FvQ0MifQ==

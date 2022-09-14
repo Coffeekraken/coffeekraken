@@ -24,8 +24,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @todo      tests
  *
  * @example           js
- * import merge from '@coffeekraken/sugar/node/object/merge';
- * merge({a: 'hello'}, {a: 'plop', hello: 'world');
+ * import { __merge } from '@coffeekraken/sugar/object';
+ * __merge({a: 'hello'}, {a: 'plop', hello: 'world');
  *
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

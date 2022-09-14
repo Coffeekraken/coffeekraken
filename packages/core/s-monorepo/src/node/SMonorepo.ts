@@ -10,12 +10,12 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __STypescriptBuilder from '@coffeekraken/s-typescript-builder';
 import __SVite from '@coffeekraken/s-vite';
 
-import { __readJsonSync, __writeJsonSync } from '@coffeekraken/sugar/fs';
 import { __copy } from '@coffeekraken/sugar/clipboard';
+import { __readJsonSync, __writeJsonSync } from '@coffeekraken/sugar/fs';
 
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import { __spawn } from '@coffeekraken/sugar/process';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __formatDuration from '@coffeekraken/sugar/shared/time/formatDuration';
 import __childProcess from 'child_process';
 import __fs from 'fs';

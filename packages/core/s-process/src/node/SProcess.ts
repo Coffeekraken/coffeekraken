@@ -10,9 +10,9 @@ import {
     __isClass,
     __isPlainObject,
 } from '@coffeekraken/sugar/is';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __onProcessExit, __spawn } from '@coffeekraken/sugar/process';
 import __extendsStack from '@coffeekraken/sugar/shared/class/getExtendsStack';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import { __toString } from '@coffeekraken/sugar/string';
 import __fs from 'fs';
 import __path from 'path';

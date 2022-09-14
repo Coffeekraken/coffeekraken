@@ -22,12 +22,12 @@
  * @todo      tests
  *
  * @example         js
- * import map from '@coffeekraken/sugar/js/object/map';
+ * import { __map } from '@coffeekraken/sugar/object';
  * const myObject = {
  *    hello: 'world',
  *    cat: 'Nelson'
  * };
- * map(myObject, ({value, prop}) => {
+ * __map(myObject, ({value, prop}) => {
  *    return prop === 'hello' ? 'universe' : value;
  * });
  * {
@@ -38,7 +38,7 @@
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function map(object, processor) {
+export default function __map(object, processor) {
     for (let i = 0; i < Object.keys(object).length; i++) {
         const prop = Object.keys(object)[i];
         const res = processor({
@@ -53,4 +53,3 @@ function map(object, processor) {
     }
     return object;
 }
-export default map;

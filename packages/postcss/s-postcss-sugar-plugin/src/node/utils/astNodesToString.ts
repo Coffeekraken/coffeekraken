@@ -1,5 +1,3 @@
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-
 /**
  * @name                astNodesToString
  * @namespace           node.utils

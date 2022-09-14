@@ -1,7 +1,6 @@
 // @ts-nocheck
 
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __diff from '@coffeekraken/sugar/shared/object/diff';
+import { __deepMerge, __diff } from '@coffeekraken/sugar/object';
 import __parse from '@coffeekraken/sugar/shared/string/parse';
 import { __toString } from '@coffeekraken/sugar/string';
 import type { ISConfigAdapterSettings } from '../../shared/adapters/SConfigAdapter';

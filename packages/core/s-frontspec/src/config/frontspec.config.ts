@@ -1,7 +1,7 @@
 import { __readJson } from '@coffeekraken/sugar/fs';
 import { __ipAddress } from '@coffeekraken/sugar/network';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
 
 export async function prepare(config) {

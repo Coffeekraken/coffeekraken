@@ -1,5 +1,5 @@
 import { __isChildProcess } from '@coffeekraken/sugar/is';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SEventEmitterBase, {
     ISEventEmitterSettings,
 } from '../shared/SEventEmitter';
@@ -17,9 +17,10 @@ import __SEventEmitterBase, {
         __SEventEmitterBase._ipcInstance.connectTo(
             `ipc-${process.ppid}`,
             () => {
-                __SEventEmitterBase._ipcInstance.of[
-                    `ipc-${process.ppid}`
-                ].on('connect', () => {});
+                __SEventEmitterBase._ipcInstance.of[`ipc-${process.ppid}`].on(
+                    'connect',
+                    () => {},
+                );
                 __SEventEmitterBase._ipcInstance.of[`ipc-${process.ppid}`].on(
                     'answer',
                     (data) => {

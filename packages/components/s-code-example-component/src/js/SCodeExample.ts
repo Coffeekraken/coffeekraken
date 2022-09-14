@@ -1,13 +1,13 @@
 import { define as __SClipboardCopy } from '@coffeekraken/s-clipboard-copy-component';
 import __SLitComponent from '@coffeekraken/s-lit-component';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __hljs from 'highlight.js/lib/core';
 import __langBash from 'highlight.js/lib/languages/bash';
 import __langCss from './languages/css';
 // import __langCss from 'highlight.js/lib/languages/css';
-import type { IScrollToSettings } from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
 import { __scrollTo } from '@coffeekraken/sugar/dom';
+import type { IScrollToSettings } from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
 import { __decodeHtmlEntities } from '@coffeekraken/sugar/string';
 import __langJavascript from 'highlight.js/lib/languages/javascript';
 import __langPhp from 'highlight.js/lib/languages/php';

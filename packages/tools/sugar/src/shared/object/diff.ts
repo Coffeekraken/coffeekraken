@@ -30,7 +30,7 @@ import __isPlainObject from '../is/isPlainObject';
  * @todo      tests
  *
  * @example         js
- * import diff from '@coffeekraken/sugar/js/object/diff';
+ * import { __diff } from '@coffeekraken/sugar/object';
  * const myObject1 = {
  *    hello: 'world',
  *    plop: 'yop'
@@ -40,7 +40,7 @@ import __isPlainObject from '../is/isPlainObject';
  *    hello: 'hey!',
  *    plop: 'yop'
  * };
- * diff(myObject1, myObject2);
+ * __diff(myObject1, myObject2);
  * {
  *    coco: 'plop',
  *    hello: 'hey!'
@@ -50,7 +50,7 @@ import __isPlainObject from '../is/isPlainObject';
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function diff(object1, object2, settings = {}) {
+export default function __diff(object1, object2, settings = {}) {
     settings = {
         deep: true,
         added: true,
@@ -131,4 +131,3 @@ function diff(object1, object2, settings = {}) {
 
     return finalObj;
 }
-export default diff;

@@ -3,7 +3,7 @@ import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import { __sha256 } from '@coffeekraken/sugar/crypto';
 import { __isPlainObject } from '@coffeekraken/sugar/is';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import __namespaceCompliant from '@coffeekraken/sugar/shared/string/namespaceCompliant';
 import { marked as __marked } from 'marked';
 

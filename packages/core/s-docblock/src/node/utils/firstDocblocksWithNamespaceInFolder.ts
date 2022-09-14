@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import { __extension, __fileName } from '@coffeekraken/sugar/fs';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import __findInFiles from 'find-in-files';
 import __fs from 'fs';
 import __minimatch from 'minimatch';

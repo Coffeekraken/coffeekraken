@@ -1,11 +1,11 @@
-import __fs from 'fs';
 import __SClass from '@coffeekraken/s-class';
+import { __deepMerge } from '@coffeekraken/sugar/object';
+import { __upperFirst } from '@coffeekraken/sugar/string';
+import __fs from 'fs';
 import ISInterfaceRenderer, {
     ISInterfaceRendererRenderPropertyObj,
     ISInterfaceRendererSettings,
 } from '../../shared/renderers/ISInterfaceRenderer';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import { __upperFirst } from '@coffeekraken/sugar/string';
 import type { ISInterfaceDefinitionProperty } from '../SInterface';
 import __SInterface from '../SInterface';
 

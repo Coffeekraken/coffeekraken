@@ -5,7 +5,7 @@ import __SLitComponent, {
 } from '@coffeekraken/s-lit-component';
 import __STheme from '@coffeekraken/s-theme';
 import { __scrollTo } from '@coffeekraken/sugar/dom';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
 import __SScrollComponentInterface from './interface/SScrollComponentInterface';
 

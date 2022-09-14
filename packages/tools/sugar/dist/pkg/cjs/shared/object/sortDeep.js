@@ -25,8 +25,8 @@ const sort_1 = __importDefault(require("./sort"));
  * @todo      tests
  *
  * @example               js
- * import sortObject from '@coffeekraken/sugar/js/object/sort';
- * sortObject({
+ * import { __sortDeep } from '@coffeekraken/sugar/object';
+ * __sortDeep({
  *    lolo: { weight: 2 },
  *    coco: { weight: 10 },
  *    plop: { weight: 5 },
@@ -50,7 +50,7 @@ const sort_1 = __importDefault(require("./sort"));
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function sortDeep(object, sort) {
+function __sortDeep(object, sort) {
     // sort passed object
     const sortedObject = (0, sort_1.default)(object, sort);
     // go deep to sort lower levels
@@ -61,5 +61,5 @@ function sortDeep(object, sort) {
     }
     return sortedObject;
 }
-exports.default = sortDeep;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdFQUFrRDtBQUNsRCxrREFBNEI7QUFFNUI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EyQ0c7QUFDSCxTQUFTLFFBQVEsQ0FBQyxNQUFNLEVBQUUsSUFBSTtJQUMxQixxQkFBcUI7SUFDckIsTUFBTSxZQUFZLEdBQUcsSUFBQSxjQUFNLEVBQUMsTUFBTSxFQUFFLElBQUksQ0FBQyxDQUFDO0lBQzFDLCtCQUErQjtJQUMvQixLQUFLLElBQUksQ0FBQyxHQUFHLEVBQUUsS0FBSyxDQUFDLElBQUksTUFBTSxDQUFDLE9BQU8sQ0FBQyxZQUFZLENBQUMsRUFBRTtRQUNuRCxJQUFJLElBQUEsdUJBQWUsRUFBQyxLQUFLLENBQUMsRUFBRTtZQUN4QixZQUFZLENBQUMsR0FBRyxDQUFDLEdBQUcsUUFBUSxDQUFDLFlBQVksQ0FBQyxHQUFHLENBQUMsRUFBRSxJQUFJLENBQUMsQ0FBQztTQUN6RDtLQUNKO0lBQ0QsT0FBTyxZQUFZLENBQUM7QUFDeEIsQ0FBQztBQUNELGtCQUFlLFFBQVEsQ0FBQyJ9
+exports.default = __sortDeep;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdFQUFrRDtBQUNsRCxrREFBNEI7QUFFNUI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EyQ0c7QUFDSCxTQUF3QixVQUFVLENBQUMsTUFBTSxFQUFFLElBQUk7SUFDM0MscUJBQXFCO0lBQ3JCLE1BQU0sWUFBWSxHQUFHLElBQUEsY0FBTSxFQUFDLE1BQU0sRUFBRSxJQUFJLENBQUMsQ0FBQztJQUMxQywrQkFBK0I7SUFDL0IsS0FBSyxJQUFJLENBQUMsR0FBRyxFQUFFLEtBQUssQ0FBQyxJQUFJLE1BQU0sQ0FBQyxPQUFPLENBQUMsWUFBWSxDQUFDLEVBQUU7UUFDbkQsSUFBSSxJQUFBLHVCQUFlLEVBQUMsS0FBSyxDQUFDLEVBQUU7WUFDeEIsWUFBWSxDQUFDLEdBQUcsQ0FBQyxHQUFHLFFBQVEsQ0FBQyxZQUFZLENBQUMsR0FBRyxDQUFDLEVBQUUsSUFBSSxDQUFDLENBQUM7U0FDekQ7S0FDSjtJQUNELE9BQU8sWUFBWSxDQUFDO0FBQ3hCLENBQUM7QUFWRCw2QkFVQyJ9

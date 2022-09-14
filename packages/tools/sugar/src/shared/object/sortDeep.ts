@@ -22,8 +22,8 @@ import __sort from './sort';
  * @todo      tests
  *
  * @example               js
- * import sortObject from '@coffeekraken/sugar/js/object/sort';
- * sortObject({
+ * import { __sortDeep } from '@coffeekraken/sugar/object';
+ * __sortDeep({
  *    lolo: { weight: 2 },
  *    coco: { weight: 10 },
  *    plop: { weight: 5 },
@@ -47,7 +47,7 @@ import __sort from './sort';
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function sortDeep(object, sort) {
+export default function __sortDeep(object, sort) {
     // sort passed object
     const sortedObject = __sort(object, sort);
     // go deep to sort lower levels
@@ -58,4 +58,3 @@ function sortDeep(object, sort) {
     }
     return sortedObject;
 }
-export default sortDeep;

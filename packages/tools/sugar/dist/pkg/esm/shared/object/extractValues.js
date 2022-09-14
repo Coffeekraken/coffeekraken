@@ -19,8 +19,8 @@
  * @todo      tests
  *
  * @example         js
- * import extractValues from '@coffeekraken/sugar/js/object/extractValues';
- * extractValues([{
+ * import { __extractValues } from '@coffeekraken/sugar/object';
+ * __extractValues ([{
  *    hello: 'world',
  *    plop: 'Yes'
  * }, {
@@ -31,7 +31,7 @@
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function extractValues(arrayOfObjects, keyName) {
+export default function __extractValues(arrayOfObjects, keyName) {
     const finalArray = [];
     arrayOfObjects.forEach((object) => {
         if (object[keyName] === undefined)
@@ -40,5 +40,4 @@ function extractValues(arrayOfObjects, keyName) {
     });
     return finalArray;
 }
-export default extractValues;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQStCRztBQUNILFNBQVMsYUFBYSxDQUFDLGNBQWMsRUFBRSxPQUFPO0lBQzFDLE1BQU0sVUFBVSxHQUFHLEVBQUUsQ0FBQztJQUN0QixjQUFjLENBQUMsT0FBTyxDQUFDLENBQUMsTUFBTSxFQUFFLEVBQUU7UUFDOUIsSUFBSSxNQUFNLENBQUMsT0FBTyxDQUFDLEtBQUssU0FBUztZQUFFLE9BQU87UUFDMUMsVUFBVSxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQztJQUNyQyxDQUFDLENBQUMsQ0FBQztJQUNILE9BQU8sVUFBVSxDQUFDO0FBQ3RCLENBQUM7QUFDRCxlQUFlLGFBQWEsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQStCRztBQUNILE1BQU0sQ0FBQyxPQUFPLFVBQVUsZUFBZSxDQUFDLGNBQWMsRUFBRSxPQUFPO0lBQzNELE1BQU0sVUFBVSxHQUFHLEVBQUUsQ0FBQztJQUN0QixjQUFjLENBQUMsT0FBTyxDQUFDLENBQUMsTUFBTSxFQUFFLEVBQUU7UUFDOUIsSUFBSSxNQUFNLENBQUMsT0FBTyxDQUFDLEtBQUssU0FBUztZQUFFLE9BQU87UUFDMUMsVUFBVSxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQztJQUNyQyxDQUFDLENBQUMsQ0FBQztJQUNILE9BQU8sVUFBVSxDQUFDO0FBQ3RCLENBQUMifQ==

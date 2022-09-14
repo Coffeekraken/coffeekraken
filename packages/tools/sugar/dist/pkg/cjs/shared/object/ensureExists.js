@@ -25,18 +25,19 @@ const set_1 = __importDefault(require("./set"));
  * @todo      tests
  *
  * @example           js
- * import ensureExists from '@coffeekraken/sugar/js/object/ensureExists';
+ * import { __ensureExists } from '@coffeekraken/sugar/object';
  * const myObj = { hello: 'world' }«
- * ensureExists(myObj, 'cool.object', {});
+ * __ensureExists(myObj, 'cool.object', {});
  * // { hello: 'world', cool: { object: {} } }
  *
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-exports.default = (obj, path, value = {}) => {
+function __ensureExists(obj, path, value = {}) {
     const v = (0, get_1.default)(obj, path);
     if (v === undefined) {
         (0, set_1.default)(obj, path, value);
     }
-};
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLGdEQUEwQjtBQUMxQixnREFBMEI7QUFFMUI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMEJHO0FBQ0gsa0JBQWUsQ0FBQyxHQUFHLEVBQUUsSUFBSSxFQUFFLEtBQUssR0FBRyxFQUFFLEVBQUUsRUFBRTtJQUNyQyxNQUFNLENBQUMsR0FBRyxJQUFBLGFBQUssRUFBQyxHQUFHLEVBQUUsSUFBSSxDQUFDLENBQUM7SUFDM0IsSUFBSSxDQUFDLEtBQUssU0FBUyxFQUFFO1FBQ2pCLElBQUEsYUFBSyxFQUFDLEdBQUcsRUFBRSxJQUFJLEVBQUUsS0FBSyxDQUFDLENBQUM7S0FDM0I7QUFDTCxDQUFDLENBQUMifQ==
+}
+exports.default = __ensureExists;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLGdEQUEwQjtBQUMxQixnREFBMEI7QUFFMUI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMEJHO0FBQ0gsU0FBd0IsY0FBYyxDQUFDLEdBQUcsRUFBRSxJQUFJLEVBQUUsS0FBSyxHQUFHLEVBQUU7SUFDeEQsTUFBTSxDQUFDLEdBQUcsSUFBQSxhQUFLLEVBQUMsR0FBRyxFQUFFLElBQUksQ0FBQyxDQUFDO0lBQzNCLElBQUksQ0FBQyxLQUFLLFNBQVMsRUFBRTtRQUNqQixJQUFBLGFBQUssRUFBQyxHQUFHLEVBQUUsSUFBSSxFQUFFLEtBQUssQ0FBQyxDQUFDO0tBQzNCO0FBQ0wsQ0FBQztBQUxELGlDQUtDIn0=

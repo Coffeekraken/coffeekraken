@@ -1,5 +1,5 @@
 import { __loadConfigFile } from '@coffeekraken/sugar/load';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 
 export async function preprocess(api) {
     const config =

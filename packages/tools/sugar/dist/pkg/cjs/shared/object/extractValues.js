@@ -21,8 +21,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @todo      tests
  *
  * @example         js
- * import extractValues from '@coffeekraken/sugar/js/object/extractValues';
- * extractValues([{
+ * import { __extractValues } from '@coffeekraken/sugar/object';
+ * __extractValues ([{
  *    hello: 'world',
  *    plop: 'Yes'
  * }, {
@@ -33,7 +33,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function extractValues(arrayOfObjects, keyName) {
+function __extractValues(arrayOfObjects, keyName) {
     const finalArray = [];
     arrayOfObjects.forEach((object) => {
         if (object[keyName] === undefined)
@@ -42,5 +42,5 @@ function extractValues(arrayOfObjects, keyName) {
     });
     return finalArray;
 }
-exports.default = extractValues;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBK0JHO0FBQ0gsU0FBUyxhQUFhLENBQUMsY0FBYyxFQUFFLE9BQU87SUFDMUMsTUFBTSxVQUFVLEdBQUcsRUFBRSxDQUFDO0lBQ3RCLGNBQWMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxNQUFNLEVBQUUsRUFBRTtRQUM5QixJQUFJLE1BQU0sQ0FBQyxPQUFPLENBQUMsS0FBSyxTQUFTO1lBQUUsT0FBTztRQUMxQyxVQUFVLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDO0lBQ3JDLENBQUMsQ0FBQyxDQUFDO0lBQ0gsT0FBTyxVQUFVLENBQUM7QUFDdEIsQ0FBQztBQUNELGtCQUFlLGFBQWEsQ0FBQyJ9
+exports.default = __extractValues;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBK0JHO0FBQ0gsU0FBd0IsZUFBZSxDQUFDLGNBQWMsRUFBRSxPQUFPO0lBQzNELE1BQU0sVUFBVSxHQUFHLEVBQUUsQ0FBQztJQUN0QixjQUFjLENBQUMsT0FBTyxDQUFDLENBQUMsTUFBTSxFQUFFLEVBQUU7UUFDOUIsSUFBSSxNQUFNLENBQUMsT0FBTyxDQUFDLEtBQUssU0FBUztZQUFFLE9BQU87UUFDMUMsVUFBVSxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLENBQUMsQ0FBQztJQUNyQyxDQUFDLENBQUMsQ0FBQztJQUNILE9BQU8sVUFBVSxDQUFDO0FBQ3RCLENBQUM7QUFQRCxrQ0FPQyJ9

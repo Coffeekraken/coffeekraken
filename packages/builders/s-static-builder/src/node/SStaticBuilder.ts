@@ -15,9 +15,8 @@ import {
     __writeFileSync,
     __writeJsonSync,
 } from '@coffeekraken/sugar/fs';
-import { __packageCacheDir } from '@coffeekraken/sugar/path';
-import { __packageRootDir } from '@coffeekraken/sugar/path';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
+import { __packageCacheDir, __packageRootDir } from '@coffeekraken/sugar/path';
 import __formatDuration from '@coffeekraken/sugar/shared/time/formatDuration';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __fs from 'fs';

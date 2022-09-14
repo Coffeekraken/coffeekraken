@@ -20,8 +20,8 @@
  * @todo      tests
  *
  * @example           js
- * import filter from '@coffeekraken/sugar/js/object/filter';
- * filter({
+ * import { __filter } from '@coffeekraken/sugar/object';
+ * __filter({
  *    coco: 'hello',
  *    plop: true
  * }, (key, item) => typeof item === 'string');
@@ -30,7 +30,7 @@
  * @since         2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function filter(object, filter) {
+export default function __filter(object, filter) {
     // init the new object to return
     const result = {};
     // loop on the object keys
@@ -44,5 +44,4 @@ function filter(object, filter) {
     // return the filtered object
     return result;
 }
-export default filter;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBOEJHO0FBQ0gsU0FBUyxNQUFNLENBQUMsTUFBTSxFQUFFLE1BQU07SUFDMUIsZ0NBQWdDO0lBQ2hDLE1BQU0sTUFBTSxHQUFHLEVBQUUsQ0FBQztJQUVsQiwwQkFBMEI7SUFDMUIsTUFBTSxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxZQUFZLEVBQUUsRUFBRTtRQUN6QywyQ0FBMkM7UUFDM0MsSUFBSSxNQUFNLENBQUMsWUFBWSxFQUFFLE1BQU0sQ0FBQyxZQUFZLENBQUMsQ0FBQyxFQUFFO1lBQzVDLHFDQUFxQztZQUNyQyxNQUFNLENBQUMsWUFBWSxDQUFDLEdBQUcsTUFBTSxDQUFDLFlBQVksQ0FBQyxDQUFDO1NBQy9DO0lBQ0wsQ0FBQyxDQUFDLENBQUM7SUFFSCw2QkFBNkI7SUFDN0IsT0FBTyxNQUFNLENBQUM7QUFDbEIsQ0FBQztBQUNELGVBQWUsTUFBTSxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBOEJHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSxRQUFRLENBQUMsTUFBTSxFQUFFLE1BQU07SUFDM0MsZ0NBQWdDO0lBQ2hDLE1BQU0sTUFBTSxHQUFHLEVBQUUsQ0FBQztJQUVsQiwwQkFBMEI7SUFDMUIsTUFBTSxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxZQUFZLEVBQUUsRUFBRTtRQUN6QywyQ0FBMkM7UUFDM0MsSUFBSSxNQUFNLENBQUMsWUFBWSxFQUFFLE1BQU0sQ0FBQyxZQUFZLENBQUMsQ0FBQyxFQUFFO1lBQzVDLHFDQUFxQztZQUNyQyxNQUFNLENBQUMsWUFBWSxDQUFDLEdBQUcsTUFBTSxDQUFDLFlBQVksQ0FBQyxDQUFDO1NBQy9DO0lBQ0wsQ0FBQyxDQUFDLENBQUM7SUFFSCw2QkFBNkI7SUFDN0IsT0FBTyxNQUFNLENBQUM7QUFDbEIsQ0FBQyJ9

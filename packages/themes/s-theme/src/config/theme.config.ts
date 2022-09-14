@@ -1,5 +1,5 @@
 import __SSugarJson from '@coffeekraken/s-sugar-json';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 
 export function preprocess(api) {
     // setting theme from sugar.json

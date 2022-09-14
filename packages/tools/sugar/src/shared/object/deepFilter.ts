@@ -22,8 +22,8 @@ import __isPlainObject from '../is/isPlainObject';
  * @todo      tests
  *
  * @example           js
- * import deepFilter from '@coffeekraken/sugar/js/object/deepFilter';
- * deepFilter({
+ * import { __deepFilter } from '@coffeekraken/sugar/object';
+ * __deepFilter ({
  *    coco: 'hello',
  *    plop: true,
  *    sub: {
@@ -95,7 +95,7 @@ function processObj(object: any, filter: IDeepFilterFilter, settings): any {
     return newObj;
 }
 
-function deepFilter(
+export default function __deepFilter(
     object: any,
     filter: IDeepFilterFilter,
     settings?: Partial<IDeepFilterSettings>,
@@ -110,4 +110,3 @@ function deepFilter(
         settings,
     );
 }
-export default deepFilter;

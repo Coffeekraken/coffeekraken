@@ -1,5 +1,4 @@
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __get from '@coffeekraken/sugar/shared/object/get';
+import { __deepMerge, __get } from '@coffeekraken/sugar/object';
 import __set from '@coffeekraken/sugar/shared/object/set';
 
 /**

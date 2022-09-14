@@ -20,8 +20,8 @@
  * @todo      tests
  *
  * @example         js
- * import extractValues from '@coffeekraken/sugar/js/object/extractValues';
- * extractValues([{
+ * import { __extractValues } from '@coffeekraken/sugar/object';
+ * __extractValues ([{
  *    hello: 'world',
  *    plop: 'Yes'
  * }, {
@@ -32,7 +32,7 @@
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function extractValues(arrayOfObjects, keyName) {
+export default function __extractValues(arrayOfObjects, keyName) {
     const finalArray = [];
     arrayOfObjects.forEach((object) => {
         if (object[keyName] === undefined) return;
@@ -40,4 +40,3 @@ function extractValues(arrayOfObjects, keyName) {
     });
     return finalArray;
 }
-export default extractValues;

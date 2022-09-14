@@ -8,7 +8,7 @@ import {
     __writeFile,
     __writeFileSync,
 } from '@coffeekraken/sugar/fs';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __toString } from '@coffeekraken/sugar/string';
 import __fs from 'fs';
 import __minimatch from 'minimatch';

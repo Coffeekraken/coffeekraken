@@ -7,14 +7,14 @@ import __SFile from '@coffeekraken/s-file';
 import type { ISPromise } from '@coffeekraken/s-promise';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import { __unique } from '@coffeekraken/sugar/array';
 import {
     __dirname,
     __extension,
     __writeJsonSync,
 } from '@coffeekraken/sugar/fs';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __packageRootDir, __packageTmpDir } from '@coffeekraken/sugar/path';
-import { __unique } from '@coffeekraken/sugar/array';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import { __uniqid } from '@coffeekraken/sugar/string';
 import __fs from 'fs';
 import __glob from 'glob';

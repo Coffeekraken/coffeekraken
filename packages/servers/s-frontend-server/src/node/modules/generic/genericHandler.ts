@@ -2,7 +2,7 @@
 
 import __SBench from '@coffeekraken/s-bench';
 import __SPromise from '@coffeekraken/s-promise';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import __fs from 'fs';
 
 /**

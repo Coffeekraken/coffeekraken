@@ -6,7 +6,7 @@ import { __copySync } from '@coffeekraken/sugar/fs';
 import { __extractGlob, __extractNoneGlob, __resolveGlob } from '@coffeekraken/sugar/glob';
 import { __isGlob } from '@coffeekraken/sugar/is';
 import type { IResolveGlobSettings } from '@coffeekraken/sugar/node/glob/resolveGlob';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import __micromatch from 'micromatch';
 
 /**

@@ -4,8 +4,8 @@ import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import __SPromise from '@coffeekraken/s-promise';
 import type { ISStdioSettings } from '@coffeekraken/s-stdio';
 import __SStdio from '@coffeekraken/s-stdio';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import __getColorFor from '@coffeekraken/sugar/shared/dev/color/getColorFor';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SProcess from './SProcess';
 import __SProcessManagerProcessWrapper, {
     ISProcessManagerProcessWrapperSettings,

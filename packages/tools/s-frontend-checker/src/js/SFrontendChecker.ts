@@ -2,7 +2,7 @@
 
 import __SClass from '@coffeekraken/s-class';
 import __SPromise from '@coffeekraken/s-promise';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SFrontendCheckerSettingsInterface from './interface/SFrontendCheckerSettingsInterface';
 
 import __author from './checks/author';

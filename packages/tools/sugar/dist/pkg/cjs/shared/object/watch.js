@@ -24,8 +24,8 @@ const SWatch_1 = __importDefault(require("./SWatch"));
  * @todo      tests
  *
  * @example       js
- * import watch from '@coffeekraken/sugar/js/object/watch';
- * let myObj = watch({
+ * import { __watch } from '@coffeekraken/sugar/object';
+ * let myObj = __watch({
  *    hello: 'world'
  * }).on('*', watchResult => {
  *    // do something...
@@ -35,9 +35,9 @@ const SWatch_1 = __importDefault(require("./SWatch"));
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function watch(target, settings = {}) {
+function __watch(target, settings = {}) {
     const watchedObj = new SWatch_1.default(target, settings);
     return watchedObj;
 }
-exports.default = watch;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHNEQUFnQztBQUVoQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0E2Qkc7QUFDSCxTQUFTLEtBQUssQ0FBQyxNQUFNLEVBQUUsUUFBUSxHQUFHLEVBQUU7SUFDaEMsTUFBTSxVQUFVLEdBQUcsSUFBSSxnQkFBUSxDQUFDLE1BQU0sRUFBRSxRQUFRLENBQUMsQ0FBQztJQUNsRCxPQUFPLFVBQVUsQ0FBQztBQUN0QixDQUFDO0FBQ0Qsa0JBQWUsS0FBSyxDQUFDIn0=
+exports.default = __watch;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHNEQUFnQztBQUVoQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0E2Qkc7QUFDSCxTQUF3QixPQUFPLENBQUMsTUFBTSxFQUFFLFFBQVEsR0FBRyxFQUFFO0lBQ2pELE1BQU0sVUFBVSxHQUFHLElBQUksZ0JBQVEsQ0FBQyxNQUFNLEVBQUUsUUFBUSxDQUFDLENBQUM7SUFDbEQsT0FBTyxVQUFVLENBQUM7QUFDdEIsQ0FBQztBQUhELDBCQUdDIn0=

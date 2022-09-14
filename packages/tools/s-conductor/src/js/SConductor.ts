@@ -5,9 +5,9 @@ import type { ISDurationObject } from '@coffeekraken/s-duration';
 import __SDuration from '@coffeekraken/s-duration';
 import __SPromise from '@coffeekraken/s-promise';
 import __when, { TWhenTrigger } from '@coffeekraken/sugar/js/dom/detect/when';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import { __uniqid } from '@coffeekraken/sugar/string';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import __formatDuration from '@coffeekraken/sugar/shared/time/formatDuration';
+import { __uniqid } from '@coffeekraken/sugar/string';
 import __SConductorSettingsInterface from './interface/SConductorSettingsInterface';
 
 /**

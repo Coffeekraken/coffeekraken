@@ -6,7 +6,7 @@ import {
     __fileName,
     __folderPath,
 } from '@coffeekraken/sugar/fs';
-import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
+import { __deepMap } from '@coffeekraken/sugar/object';
 import __fs from 'fs';
 import __path from 'path';
 

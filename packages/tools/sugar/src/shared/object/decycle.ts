@@ -14,8 +14,8 @@ import { decycle as __decycle } from 'json-cyclic';
  * @return    {Object}                  The new object circular references free
  *
  * @example     js
- * import decycle from '@coffeekraken/sugar/js/object/decycle';
- * decycle({
+ * import { __decycle } from '@coffeekraken/sugar/object';
+ * __decycle({
  *    something: 'cool',
  *    with: 'circular references',
  *    //..
@@ -25,7 +25,6 @@ import { decycle as __decycle } from 'json-cyclic';
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function decycle(obj) {
+export default function decycle(obj) {
     return __decycle(obj);
 }
-export default decycle;

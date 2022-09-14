@@ -1,5 +1,5 @@
 import __SClass from '@coffeekraken/s-class';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import type { ISSitemapBuilderBuildParams } from './interface/SSitemapBuilderBuildParamsInterface';
 import type { ISSitemapBuilderResultItem } from './SSitemapBuilder';
 

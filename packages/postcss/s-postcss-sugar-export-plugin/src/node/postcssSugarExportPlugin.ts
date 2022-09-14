@@ -6,7 +6,7 @@ import {
     __folderHash,
     __writeFileSync,
 } from '@coffeekraken/sugar/fs';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import __fs from 'fs';
 import __path from 'path';
 

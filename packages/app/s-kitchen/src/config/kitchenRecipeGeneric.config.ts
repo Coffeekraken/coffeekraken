@@ -1,5 +1,5 @@
 import { __dirname } from '@coffeekraken/sugar/fs';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __uniqid } from '@coffeekraken/sugar/string';
 import __path from 'path';
 

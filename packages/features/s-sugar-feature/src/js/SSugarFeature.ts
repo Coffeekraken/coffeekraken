@@ -1,15 +1,15 @@
 import type { ISFeature } from '@coffeekraken/s-feature';
 import __SFeature from '@coffeekraken/s-feature';
 import {
-    __preventScrollRestoration,
     __clearTransmations,
     __expandPleasantCssClassnamesLive,
+    __preventScrollRestoration,
 } from '@coffeekraken/sugar/dom';
 import {
     __inputAdditionalAttributes,
     __linksStateAttributes,
 } from '@coffeekraken/sugar/feature';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SSugarFeatureInterface from './interface/SSugarFeatureInterface';
 
 export interface ISSugarFeatureProps {

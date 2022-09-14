@@ -1,5 +1,5 @@
 import __SClass from '@coffeekraken/s-class';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import type { ISStateSettings } from './SState';
 import __SState from './SState';
 

@@ -18,8 +18,8 @@
  * @todo      tests
  *
  * @example 	js
- * import toQueryString from '@coffeekraken/sugar/js/object/toQueryString'
- * console.log(toQueryString({
+ * import { __toQueryString } from '@coffeekraken/sugar/object'
+ * console.log(__toQueryString({
  * 	value1 : 'coco',
  * 	value1 : 'plop'
  * }));
@@ -28,7 +28,7 @@
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function toQueryString(obj) {
+export default function __toQueryString(obj) {
     return (
         '?' +
         Object.keys(obj)
@@ -39,4 +39,3 @@ function toQueryString(obj) {
             .join('&')
     );
 }
-export default toQueryString;

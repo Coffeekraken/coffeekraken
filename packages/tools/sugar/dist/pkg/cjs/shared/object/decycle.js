@@ -15,8 +15,8 @@ const json_cyclic_1 = require("json-cyclic");
  * @return    {Object}                  The new object circular references free
  *
  * @example     js
- * import decycle from '@coffeekraken/sugar/js/object/decycle';
- * decycle({
+ * import { __decycle } from '@coffeekraken/sugar/object';
+ * __decycle({
  *    something: 'cool',
  *    with: 'circular references',
  *    //..
@@ -30,4 +30,4 @@ function decycle(obj) {
     return (0, json_cyclic_1.decycle)(obj);
 }
 exports.default = decycle;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQW1EO0FBRW5EOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxTQUFTLE9BQU8sQ0FBQyxHQUFHO0lBQ2hCLE9BQU8sSUFBQSxxQkFBUyxFQUFDLEdBQUcsQ0FBQyxDQUFDO0FBQzFCLENBQUM7QUFDRCxrQkFBZSxPQUFPLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQW1EO0FBRW5EOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxTQUF3QixPQUFPLENBQUMsR0FBRztJQUMvQixPQUFPLElBQUEscUJBQVMsRUFBQyxHQUFHLENBQUMsQ0FBQztBQUMxQixDQUFDO0FBRkQsMEJBRUMifQ==

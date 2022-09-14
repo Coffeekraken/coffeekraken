@@ -28,13 +28,17 @@ import __flatten from './flatten';
  * @todo      tests
  *
  * @example             js
- * import get from '@coffeekraken/sugar/js/object/get';
- * get('myObject.cool.value'); // => 'Hello world'
+ * import { __getGlob } from '@coffeekraken/sugar/object';
+ * __getGlob({
+ *  hello: {
+ *     world: true,
+ *     plop: false
+ * }, 'hello.*');
  *
  * @since     2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function getGlob(obj, glob, settings = {}) {
+export default function __getGlob(obj, glob, settings = {}) {
     settings = {
         deepize: true,
         ...settings,
@@ -50,27 +54,6 @@ export default function getGlob(obj, glob, settings = {}) {
         }
     });
 
-    // if (glob === 'watch') {
-    //   console.log('GLOB', resultObj);
-    // }
-
     if (settings.deepize === true) return __deepize(resultObj);
     return resultObj;
 }
-
-// console.log(
-//   getGlob(
-//     {
-//       someting: {
-//         cool: 'hello'
-//       },
-//       coco: ['hello', 'world'],
-//       world: {
-//         'coco.plop': {
-//           yep: 'dsojiofj'
-//         }
-//       }
-//     },
-//     'world.*'
-//   )
-// );

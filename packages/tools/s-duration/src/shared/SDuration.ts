@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import __formatDuration from '@coffeekraken/sugar/shared/time/formatDuration';
 
 /**

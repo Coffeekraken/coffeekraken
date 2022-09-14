@@ -21,8 +21,8 @@ import __SWatch from './SWatch';
  * @todo      tests
  *
  * @example       js
- * import watch from '@coffeekraken/sugar/js/object/watch';
- * let myObj = watch({
+ * import { __watch } from '@coffeekraken/sugar/object';
+ * let myObj = __watch({
  *    hello: 'world'
  * }).on('*', watchResult => {
  *    // do something...
@@ -32,8 +32,7 @@ import __SWatch from './SWatch';
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function watch(target, settings = {}) {
+export default function __watch(target, settings = {}) {
     const watchedObj = new __SWatch(target, settings);
     return watchedObj;
 }
-export default watch;

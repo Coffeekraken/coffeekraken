@@ -1,7 +1,7 @@
 import __SComponentUtils from '@coffeekraken/s-component-utils';
 import __SFeature from '@coffeekraken/s-feature';
 import { __querySelectorUp } from '@coffeekraken/sugar/dom';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 // @ts-ignore
 import __SValidator from '@coffeekraken/s-validator';
 import { __querySelectorLive } from '@coffeekraken/sugar/dom';

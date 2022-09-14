@@ -25,14 +25,14 @@ import __isPlainObject from '../is/isPlainObject';
  * @todo      tests
  *
  * @example           js
- * import deepMerge from '@coffeekraken/sugar/node/object/deepMerge';
- * deepMerge({a: {b: {c: 'c', d: 'd'}}}, {a: {b: {e: 'e', f: 'f'}}});
+ * import { __deepMerge } from '@coffeekraken/sugar/object';
+ * __deepMerge({a: {b: {c: 'c', d: 'd'}}}, {a: {b: {e: 'e', f: 'f'}}});
  * // => { a: { b: { c: 'c', d: 'd', e: 'e', f: 'f' } } }
  *
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function (...args) {
+export default function __deepMerge(...args) {
     function merge(firstObj, secondObj) {
         const newObj = {};
         if (!firstObj && secondObj) return secondObj;

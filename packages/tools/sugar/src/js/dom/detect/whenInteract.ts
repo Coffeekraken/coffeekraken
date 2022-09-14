@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __WhenInteractSettingsInterface from './interface/WhenInteractSettingsInterface';
 
 /**

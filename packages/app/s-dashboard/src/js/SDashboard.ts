@@ -1,6 +1,6 @@
 import __SClass from '@coffeekraken/s-class';
 import { __hotkey } from '@coffeekraken/sugar/keyboard';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 
 import '../../../../src/css/index.css';
 import __SDashboardSettingsInterface from './interface/SDashboardSettingsInterface';

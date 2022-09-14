@@ -28,13 +28,13 @@ import __set from './set';
  * @todo      tests
  *
  * @example       js
- * import deepize from '@coffeekraken/sugar/js/object/deepize';
- * deepize({ 'something.cool': 'hello' }); // => { something: { cool: 'hello' } }
+ * import { __deepize } from '@coffeekraken/sugar/object';
+ * __deepize ({ 'something.cool': 'hello' }); // => { something: { cool: 'hello' } }
  *
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function deepize(object) {
+export default function __deepize(object) {
     const finalObject = {};
     for (const key in object) {
         __set(finalObject, key, object[key]);
@@ -50,5 +50,3 @@ function deepize(object) {
 //     'world."coco.plop".yep': 'dsojiofj'
 //   })
 // );
-
-export default deepize;

@@ -17,7 +17,7 @@ import __camelCase from '../string/camelCase';
  * @setting         {Boolean}           [deep=true]             Specify if you want to apply the treatment deep in the object or just in the first level
  *
  * @example         js
- * import { __camelCaseProps from '@coffeekraken/sugar/shared/object/camelCaseProps';
+ * import { __camelCaseProps } from '@coffeekraken/sugar/object';
  * __camelCaseProps({
  *    'hello-world': true
  * });
@@ -31,7 +31,7 @@ import __camelCase from '../string/camelCase';
 export interface ICamelCasePropsSettings {
     deep: boolean;
 }
-export default function camelCaseProps(
+export default function __camelCaseProps(
     object: any,
     settings?: Partial<ICamelCasePropsSettings>,
 ): any {
@@ -45,7 +45,7 @@ export default function camelCaseProps(
 
         // treat deep
         if (__isPlainObject(value) && finalSettings.deep) {
-            object[newKey] = camelCaseProps(object[key], finalSettings);
+            object[newKey] = __camelCaseProps(object[key], finalSettings);
         } else {
             object[newKey] = value;
         }

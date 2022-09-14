@@ -20,17 +20,17 @@ import __clone from './clone';
  * @return      {Object}                                Return the reference to the first passed object
  *
  * @example         js
- * import deepAssign from '@coffeekraken/sugar/js/object/deepAssign';
+ * import { __deepAssign } from '@coffeekraken/sugar/object';
  * const obj1 = { something: 'cool' };
  * const obj2 = { other: true };
- * const obj3 = deepAssign(obj1, obj2);
+ * const obj3 = __deepAssign(obj1, obj2);
  * obj1 === obj3 // => true
  *
  * @see         https://www.npmjs.com/package/assign-deep
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function deepAssign(referenceObj, ...objects) {
+export default function __deepAssign(referenceObj, ...objects) {
     // objects.forEach((obj) => {
     //   __deepAssign(referenceObj, obj);
     // });

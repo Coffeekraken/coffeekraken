@@ -19,17 +19,17 @@ const set_1 = __importDefault(require("./set"));
  * @return      {Any}                       The converted object
  *
  * @example         js
- * import toJson from '@coffeekraken/sugar/shared/object/toJson';
+ * import { __toJson } from '@coffeekraken/sugar/object';
  * class MyClass {
  *      hello = 'world';
  *      something() {}
  * }
- * toJson(new MyClass()); // => { hello: 'world' }
+ * __toJson(new MyClass()); // => { hello: 'world' }
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function toJson(object) {
+function __toJson(object) {
     const newObj = {};
     (0, deepMap_1.default)(object, ({ value, path }) => {
         (0, set_1.default)(newObj, path, value);
@@ -40,5 +40,5 @@ function toJson(object) {
     });
     return newObj;
 }
-exports.default = toJson;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsd0RBQWtDO0FBQ2xDLGdEQUEwQjtBQUUxQjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxTQUF3QixNQUFNLENBQUMsTUFBVztJQUN0QyxNQUFNLE1BQU0sR0FBRyxFQUFFLENBQUM7SUFDbEIsSUFBQSxpQkFBUyxFQUNMLE1BQU0sRUFDTixDQUFDLEVBQUUsS0FBSyxFQUFFLElBQUksRUFBRSxFQUFFLEVBQUU7UUFDaEIsSUFBQSxhQUFLLEVBQUMsTUFBTSxFQUFFLElBQUksRUFBRSxLQUFLLENBQUMsQ0FBQztRQUMzQixPQUFPLEtBQUssQ0FBQztJQUNqQixDQUFDLEVBQ0Q7UUFDSSxZQUFZLEVBQUUsS0FBSztRQUNuQixjQUFjLEVBQUUsSUFBSTtLQUN2QixDQUNKLENBQUM7SUFDRixPQUFPLE1BQU0sQ0FBQztBQUNsQixDQUFDO0FBZEQseUJBY0MifQ==
+exports.default = __toJson;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsd0RBQWtDO0FBQ2xDLGdEQUEwQjtBQUUxQjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxTQUF3QixRQUFRLENBQUMsTUFBVztJQUN4QyxNQUFNLE1BQU0sR0FBRyxFQUFFLENBQUM7SUFDbEIsSUFBQSxpQkFBUyxFQUNMLE1BQU0sRUFDTixDQUFDLEVBQUUsS0FBSyxFQUFFLElBQUksRUFBRSxFQUFFLEVBQUU7UUFDaEIsSUFBQSxhQUFLLEVBQUMsTUFBTSxFQUFFLElBQUksRUFBRSxLQUFLLENBQUMsQ0FBQztRQUMzQixPQUFPLEtBQUssQ0FBQztJQUNqQixDQUFDLEVBQ0Q7UUFDSSxZQUFZLEVBQUUsS0FBSztRQUNuQixjQUFjLEVBQUUsSUFBSTtLQUN2QixDQUNKLENBQUM7SUFDRixPQUFPLE1BQU0sQ0FBQztBQUNsQixDQUFDO0FBZEQsMkJBY0MifQ==

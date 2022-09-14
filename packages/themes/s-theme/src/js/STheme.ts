@@ -1,7 +1,7 @@
 import __SColor from '@coffeekraken/s-color';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __clearTransmations } from '@coffeekraken/sugar/dom';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SThemeBase from '../shared/SThemeBase';
 
 /**

@@ -4,7 +4,7 @@ import type { ISConfigEnvObj } from '@coffeekraken/s-config';
 import type { ISConfigAdapterSettings } from '@coffeekraken/s-config-adapter';
 import __SConfigAdapter from '@coffeekraken/s-config-adapter';
 import { __sha256 } from '@coffeekraken/sugar/crypto';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 
 /**
  * @name                  SConfigInlineAdapter

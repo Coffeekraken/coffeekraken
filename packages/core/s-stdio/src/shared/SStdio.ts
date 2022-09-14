@@ -4,7 +4,7 @@ import type { ISEventEmitter } from '@coffeekraken/s-event-emitter';
 import type { ISLog, ISLogAsk } from '@coffeekraken/s-log';
 import __SLog from '@coffeekraken/s-log';
 import type { ISPromise } from '@coffeekraken/s-promise';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SStdioSettingsInterface from './interface/SStdioSettingsInterface';
 
 export interface ISStdioSettings {
@@ -182,13 +182,12 @@ export default class SStdio extends __SClass implements ISStdio {
             this.registeredComponents[this.name] = {};
 
         // save the component inside the stack
-        this.registeredComponents[this.name][
-            as || component.id || 'default'
-        ] = {
-            component,
-            settings: settings || {},
-            as,
-        };
+        this.registeredComponents[this.name][as || component.id || 'default'] =
+            {
+                component,
+                settings: settings || {},
+                as,
+            };
     }
 
     /**

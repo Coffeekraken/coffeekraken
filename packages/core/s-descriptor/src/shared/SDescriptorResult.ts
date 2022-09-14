@@ -4,7 +4,7 @@ import ISDescriptor from './SDescriptor';
 
 import { __parseHtml } from '@coffeekraken/sugar/console';
 import { __isNode } from '@coffeekraken/sugar/is';
-import __clone from '@coffeekraken/sugar/shared/object/clone';
+import { __clone } from '@coffeekraken/sugar/object';
 import { __toString } from '@coffeekraken/sugar/string';
 
 /**

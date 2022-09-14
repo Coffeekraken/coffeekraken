@@ -20,14 +20,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @todo      tests
  *
  * @example       js
- * import getKeyByValue from '@coffeekraken/sugar/js/object/getKeyByValue';
- * console.log(getKeyByValue({ hello: 'world' }, 'world')); // => hello
+ * import { __getKeyByValue } from '@coffeekraken/sugar/object';
+ * __getKeyByValue({ hello: 'world' }, 'world'); // => hello
  *
  * @since     2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function getKeyByValue(object, value) {
+function __getKeyByValue(object, value) {
     return Object.keys(object).find((key) => object[key] === value);
 }
-exports.default = getKeyByValue;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxTQUFTLGFBQWEsQ0FBQyxNQUFNLEVBQUUsS0FBSztJQUNoQyxPQUFPLE1BQU0sQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLENBQUMsSUFBSSxDQUFDLENBQUMsR0FBRyxFQUFFLEVBQUUsQ0FBQyxNQUFNLENBQUMsR0FBRyxDQUFDLEtBQUssS0FBSyxDQUFDLENBQUM7QUFDcEUsQ0FBQztBQUNELGtCQUFlLGFBQWEsQ0FBQyJ9
+exports.default = __getKeyByValue;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxTQUF3QixlQUFlLENBQUMsTUFBTSxFQUFFLEtBQUs7SUFDakQsT0FBTyxNQUFNLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxDQUFDLElBQUksQ0FBQyxDQUFDLEdBQUcsRUFBRSxFQUFFLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxLQUFLLEtBQUssQ0FBQyxDQUFDO0FBQ3BFLENBQUM7QUFGRCxrQ0FFQyJ9

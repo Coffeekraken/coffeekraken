@@ -1,9 +1,9 @@
 // @ts-nocheck
 
-import __fs from 'fs';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import { __extension } from '@coffeekraken/sugar/fs';
 import __SBench from '@coffeekraken/s-bench';
+import { __extension } from '@coffeekraken/sugar/fs';
+import { __deepMerge } from '@coffeekraken/sugar/object';
+import __fs from 'fs';
 
 /**
  * @name            resolveExtensionFreePath

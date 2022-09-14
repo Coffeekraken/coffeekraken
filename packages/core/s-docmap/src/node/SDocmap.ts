@@ -18,12 +18,10 @@ import {
     __writeJsonSync,
 } from '@coffeekraken/sugar/fs';
 import __npmInstall from '@coffeekraken/sugar/node/npm/install';
+import { __deepMap, __deepMerge, __get } from '@coffeekraken/sugar/object';
 import { __packageJsonSync } from '@coffeekraken/sugar/package';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __deepFilter from '@coffeekraken/sugar/shared/object/deepFilter';
-import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __get from '@coffeekraken/sugar/shared/object/get';
 import __set from '@coffeekraken/sugar/shared/object/set';
 import __sortObject from '@coffeekraken/sugar/shared/object/sort';
 import __sortObjectDeep from '@coffeekraken/sugar/shared/object/sortDeep';

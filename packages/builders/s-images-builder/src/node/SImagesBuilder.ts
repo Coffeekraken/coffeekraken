@@ -12,8 +12,8 @@ import {
     __folderPath,
     __removeSync,
 } from '@coffeekraken/sugar/fs';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
 import __imageSize from 'image-size';
 import __minimatch from 'minimatch';

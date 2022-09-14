@@ -23,8 +23,10 @@ import __deepProxy from './deepProxy';
  * @todo      tests
  *
  * @example 	js
+ * import { __SWatch } from '@coffeekraken/sugar/object';
+ *
  * // create the watcher instance
- * const watchedObj = new SWatch({
+ * const watchedObj = new  __SWatch({
  * 		title : 'Hello World'
  * });
  *

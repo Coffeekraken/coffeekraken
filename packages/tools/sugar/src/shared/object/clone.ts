@@ -24,8 +24,8 @@ import __deepClone from 'lodash.clonedeep';
  * @todo      tests
  *
  * @example       js
- * import clone from '@coffeekraken/sugar/js/object/clone';
- * clone({
+ * import { __clone } from '@coffeekraken/sugar/object';
+ * __clone({
  *    hello: 'world'
  * });
  *
@@ -33,7 +33,7 @@ import __deepClone from 'lodash.clonedeep';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function clone(object, settings = {}) {
+export default function clone(object, settings = {}) {
     settings = {
         deep: false,
         ...settings,
@@ -43,4 +43,3 @@ function clone(object, settings = {}) {
     }
     return __clone(object);
 }
-export default clone;

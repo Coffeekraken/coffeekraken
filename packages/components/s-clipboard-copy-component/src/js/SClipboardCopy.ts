@@ -1,7 +1,7 @@
 import __SLitComponent from '@coffeekraken/s-lit-component';
 
 import { __copy } from '@coffeekraken/sugar/clipboard';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
 import __SClipboardCopyComponentInterface from './interface/SClipboardCopyComponentInterface';
 

@@ -27,8 +27,8 @@ const lodash_clonedeep_1 = __importDefault(require("lodash.clonedeep"));
  * @todo      tests
  *
  * @example       js
- * import clone from '@coffeekraken/sugar/js/object/clone';
- * clone({
+ * import { __clone } from '@coffeekraken/sugar/object';
+ * __clone({
  *    hello: 'world'
  * });
  *
@@ -44,4 +44,4 @@ function clone(object, settings = {}) {
     return (0, lodash_clone_1.default)(object);
 }
 exports.default = clone;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLGdFQUFtQztBQUNuQyx3RUFBMkM7QUFFM0M7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBNkJHO0FBQ0gsU0FBUyxLQUFLLENBQUMsTUFBTSxFQUFFLFFBQVEsR0FBRyxFQUFFO0lBQ2hDLFFBQVEsbUJBQ0osSUFBSSxFQUFFLEtBQUssSUFDUixRQUFRLENBQ2QsQ0FBQztJQUNGLElBQUksUUFBUSxDQUFDLElBQUksRUFBRTtRQUNmLE9BQU8sSUFBQSwwQkFBVyxFQUFDLE1BQU0sQ0FBQyxDQUFDO0tBQzlCO0lBQ0QsT0FBTyxJQUFBLHNCQUFPLEVBQUMsTUFBTSxDQUFDLENBQUM7QUFDM0IsQ0FBQztBQUNELGtCQUFlLEtBQUssQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLGdFQUFtQztBQUNuQyx3RUFBMkM7QUFFM0M7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBNkJHO0FBQ0gsU0FBd0IsS0FBSyxDQUFDLE1BQU0sRUFBRSxRQUFRLEdBQUcsRUFBRTtJQUMvQyxRQUFRLG1CQUNKLElBQUksRUFBRSxLQUFLLElBQ1IsUUFBUSxDQUNkLENBQUM7SUFDRixJQUFJLFFBQVEsQ0FBQyxJQUFJLEVBQUU7UUFDZixPQUFPLElBQUEsMEJBQVcsRUFBQyxNQUFNLENBQUMsQ0FBQztLQUM5QjtJQUNELE9BQU8sSUFBQSxzQkFBTyxFQUFDLE1BQU0sQ0FBQyxDQUFDO0FBQzNCLENBQUM7QUFURCx3QkFTQyJ9

@@ -31,13 +31,17 @@ const flatten_1 = __importDefault(require("./flatten"));
  * @todo      tests
  *
  * @example             js
- * import get from '@coffeekraken/sugar/js/object/get';
- * get('myObject.cool.value'); // => 'Hello world'
+ * import { __getGlob } from '@coffeekraken/sugar/object';
+ * __getGlob({
+ *  hello: {
+ *     world: true,
+ *     plop: false
+ * }, 'hello.*');
  *
  * @since     2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function getGlob(obj, glob, settings = {}) {
+function __getGlob(obj, glob, settings = {}) {
     settings = Object.assign({ deepize: true }, settings);
     const flat = (0, flatten_1.default)(obj);
     const resultObj = {};
@@ -46,28 +50,9 @@ function getGlob(obj, glob, settings = {}) {
             resultObj[path] = flat[path];
         }
     });
-    // if (glob === 'watch') {
-    //   console.log('GLOB', resultObj);
-    // }
     if (settings.deepize === true)
         return (0, deepize_1.default)(resultObj);
     return resultObj;
 }
-exports.default = getGlob;
-// console.log(
-//   getGlob(
-//     {
-//       someting: {
-//         cool: 'hello'
-//       },
-//       coco: ['hello', 'world'],
-//       world: {
-//         'coco.plop': {
-//           yep: 'dsojiofj'
-//         }
-//       }
-//     },
-//     'world.*'
-//   )
-// );
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDBEQUFvQztBQUNwQyx3REFBa0M7QUFDbEMsd0RBQWtDO0FBRWxDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTZCRztBQUNILFNBQXdCLE9BQU8sQ0FBQyxHQUFHLEVBQUUsSUFBSSxFQUFFLFFBQVEsR0FBRyxFQUFFO0lBQ3BELFFBQVEsbUJBQ0osT0FBTyxFQUFFLElBQUksSUFDVixRQUFRLENBQ2QsQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFHLElBQUEsaUJBQVMsRUFBQyxHQUFHLENBQUMsQ0FBQztJQUU1QixNQUFNLFNBQVMsR0FBRyxFQUFFLENBQUM7SUFFckIsTUFBTSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxJQUFJLEVBQUUsRUFBRTtRQUMvQixJQUFJLElBQUEsbUJBQVcsRUFBQyxJQUFJLEVBQUUsSUFBSSxDQUFDLEVBQUU7WUFDekIsU0FBUyxDQUFDLElBQUksQ0FBQyxHQUFHLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQztTQUNoQztJQUNMLENBQUMsQ0FBQyxDQUFDO0lBRUgsMEJBQTBCO0lBQzFCLG9DQUFvQztJQUNwQyxJQUFJO0lBRUosSUFBSSxRQUFRLENBQUMsT0FBTyxLQUFLLElBQUk7UUFBRSxPQUFPLElBQUEsaUJBQVMsRUFBQyxTQUFTLENBQUMsQ0FBQztJQUMzRCxPQUFPLFNBQVMsQ0FBQztBQUNyQixDQUFDO0FBdEJELDBCQXNCQztBQUVELGVBQWU7QUFDZixhQUFhO0FBQ2IsUUFBUTtBQUNSLG9CQUFvQjtBQUNwQix3QkFBd0I7QUFDeEIsV0FBVztBQUNYLGtDQUFrQztBQUNsQyxpQkFBaUI7QUFDakIseUJBQXlCO0FBQ3pCLDRCQUE0QjtBQUM1QixZQUFZO0FBQ1osVUFBVTtBQUNWLFNBQVM7QUFDVCxnQkFBZ0I7QUFDaEIsTUFBTTtBQUNOLEtBQUsifQ==
+exports.default = __getGlob;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDBEQUFvQztBQUNwQyx3REFBa0M7QUFDbEMsd0RBQWtDO0FBRWxDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FpQ0c7QUFDSCxTQUF3QixTQUFTLENBQUMsR0FBRyxFQUFFLElBQUksRUFBRSxRQUFRLEdBQUcsRUFBRTtJQUN0RCxRQUFRLG1CQUNKLE9BQU8sRUFBRSxJQUFJLElBQ1YsUUFBUSxDQUNkLENBQUM7SUFFRixNQUFNLElBQUksR0FBRyxJQUFBLGlCQUFTLEVBQUMsR0FBRyxDQUFDLENBQUM7SUFFNUIsTUFBTSxTQUFTLEdBQUcsRUFBRSxDQUFDO0lBRXJCLE1BQU0sQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUMsT0FBTyxDQUFDLENBQUMsSUFBSSxFQUFFLEVBQUU7UUFDL0IsSUFBSSxJQUFBLG1CQUFXLEVBQUMsSUFBSSxFQUFFLElBQUksQ0FBQyxFQUFFO1lBQ3pCLFNBQVMsQ0FBQyxJQUFJLENBQUMsR0FBRyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7U0FDaEM7SUFDTCxDQUFDLENBQUMsQ0FBQztJQUVILElBQUksUUFBUSxDQUFDLE9BQU8sS0FBSyxJQUFJO1FBQUUsT0FBTyxJQUFBLGlCQUFTLEVBQUMsU0FBUyxDQUFDLENBQUM7SUFDM0QsT0FBTyxTQUFTLENBQUM7QUFDckIsQ0FBQztBQWxCRCw0QkFrQkMifQ==

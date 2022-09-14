@@ -3,7 +3,7 @@ import __SFeature from '@coffeekraken/s-feature';
 import __SRequest from '@coffeekraken/s-request';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __querySelectorUp, __scrollTo } from '@coffeekraken/sugar/dom';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SPageTransitionFeatureInterface from './interface/SPageTransitionFeatureInterface';
 
 // @ts-ignore

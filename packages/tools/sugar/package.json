@@ -315,6 +315,10 @@
             "require": "./dist/pkg/cjs/shared/number/_exports.js",
             "import": "./dist/pkg/esm/shared/number/_exports.js"
         },
+        "./object": {
+            "require": "./dist/pkg/cjs/shared/object/_exports.js",
+            "import": "./dist/pkg/esm/shared/object/_exports.js"
+        },
         "./package": {
             "node": {
                 "require": "./dist/pkg/cjs/node/package/_exports.js",

@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __SClass from '@coffeekraken/s-class';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import __parseSchema from '@coffeekraken/sugar/shared/url/parseSchema';
 import __urlParse from 'url-parse';
 

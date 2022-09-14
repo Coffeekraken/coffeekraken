@@ -22,17 +22,17 @@ import __set from './set';
  * @todo      tests
  *
  * @example           js
- * import ensureExists from '@coffeekraken/sugar/js/object/ensureExists';
+ * import { __ensureExists } from '@coffeekraken/sugar/object';
  * const myObj = { hello: 'world' }«
- * ensureExists(myObj, 'cool.object', {});
+ * __ensureExists(myObj, 'cool.object', {});
  * // { hello: 'world', cool: { object: {} } }
  *
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default (obj, path, value = {}) => {
+export default function __ensureExists(obj, path, value = {}) {
     const v = __get(obj, path);
     if (v === undefined) {
         __set(obj, path, value);
     }
-};
+}

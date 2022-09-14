@@ -22,8 +22,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @todo      tests
  *
  * @example           js
- * import filter from '@coffeekraken/sugar/js/object/filter';
- * filter({
+ * import { __filter } from '@coffeekraken/sugar/object';
+ * __filter({
  *    coco: 'hello',
  *    plop: true
  * }, (key, item) => typeof item === 'string');
@@ -32,7 +32,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @since         2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function filter(object, filter) {
+function __filter(object, filter) {
     // init the new object to return
     const result = {};
     // loop on the object keys
@@ -46,5 +46,5 @@ function filter(object, filter) {
     // return the filtered object
     return result;
 }
-exports.default = filter;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0E4Qkc7QUFDSCxTQUFTLE1BQU0sQ0FBQyxNQUFNLEVBQUUsTUFBTTtJQUMxQixnQ0FBZ0M7SUFDaEMsTUFBTSxNQUFNLEdBQUcsRUFBRSxDQUFDO0lBRWxCLDBCQUEwQjtJQUMxQixNQUFNLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLFlBQVksRUFBRSxFQUFFO1FBQ3pDLDJDQUEyQztRQUMzQyxJQUFJLE1BQU0sQ0FBQyxZQUFZLEVBQUUsTUFBTSxDQUFDLFlBQVksQ0FBQyxDQUFDLEVBQUU7WUFDNUMscUNBQXFDO1lBQ3JDLE1BQU0sQ0FBQyxZQUFZLENBQUMsR0FBRyxNQUFNLENBQUMsWUFBWSxDQUFDLENBQUM7U0FDL0M7SUFDTCxDQUFDLENBQUMsQ0FBQztJQUVILDZCQUE2QjtJQUM3QixPQUFPLE1BQU0sQ0FBQztBQUNsQixDQUFDO0FBQ0Qsa0JBQWUsTUFBTSxDQUFDIn0=
+exports.default = __filter;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0E4Qkc7QUFDSCxTQUF3QixRQUFRLENBQUMsTUFBTSxFQUFFLE1BQU07SUFDM0MsZ0NBQWdDO0lBQ2hDLE1BQU0sTUFBTSxHQUFHLEVBQUUsQ0FBQztJQUVsQiwwQkFBMEI7SUFDMUIsTUFBTSxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxZQUFZLEVBQUUsRUFBRTtRQUN6QywyQ0FBMkM7UUFDM0MsSUFBSSxNQUFNLENBQUMsWUFBWSxFQUFFLE1BQU0sQ0FBQyxZQUFZLENBQUMsQ0FBQyxFQUFFO1lBQzVDLHFDQUFxQztZQUNyQyxNQUFNLENBQUMsWUFBWSxDQUFDLEdBQUcsTUFBTSxDQUFDLFlBQVksQ0FBQyxDQUFDO1NBQy9DO0lBQ0wsQ0FBQyxDQUFDLENBQUM7SUFFSCw2QkFBNkI7SUFDN0IsT0FBTyxNQUFNLENBQUM7QUFDbEIsQ0FBQztBQWZELDJCQWVDIn0=

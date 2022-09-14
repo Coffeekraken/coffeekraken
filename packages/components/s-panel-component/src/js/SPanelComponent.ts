@@ -4,7 +4,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 import { __querySelectorLive } from '@coffeekraken/sugar/dom';
 import __getTransitionProperties from '@coffeekraken/sugar/js/dom/style/getTransitionProperties';
 import { __hotkey } from '@coffeekraken/sugar/keyboard';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
 import __SPanelComponentInterface from './interface/SPanelComponentInterface';
 

@@ -22,12 +22,12 @@
  * @todo      tests
  *
  * @example 	js
- * import propertyProxy from '@coffeekraken/sugar/js/object/propertyProxy';
+ * import { __propertyProxy } from '@coffeekraken/sugar/object';
  * const myObject = {
  * 		title : 'World'
  * };
  * // create the proxy
- * propertyProxy(myObject, 'title', {
+ * __propertyProxy(myObject, 'title', {
  * 		get : (value) => {
  * 			return `Hello ${value}`;
  * 		},
@@ -42,7 +42,12 @@
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function propertyProxy(obj, property, descriptor, applySetterAtStart = false) {
+export default function __propertyProxy(
+    obj,
+    property,
+    descriptor,
+    applySetterAtStart = false,
+) {
     // handle property like "something.cool"
     const objPath = property.split('.').slice(0, -1).join('.');
     if (objPath) {
@@ -119,4 +124,3 @@ function propertyProxy(obj, property, descriptor, applySetterAtStart = false) {
     // return the value
     return val;
 }
-export default propertyProxy;

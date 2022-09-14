@@ -1,7 +1,7 @@
+import { __deepMerge } from '@coffeekraken/sugar/object';
+import { Buffer } from 'buffer';
 import __crypto, { BinaryToTextEncoding } from 'crypto';
 import __fs from 'fs';
-import { Buffer } from 'buffer';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
 /**
  * @name            fileHash

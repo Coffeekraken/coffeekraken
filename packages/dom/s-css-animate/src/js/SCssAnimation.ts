@@ -10,9 +10,7 @@ import __getAnimationsFromElement, {
 import __getKeyframesFromStylesheets, {
     IKeyframe,
 } from '@coffeekraken/sugar/js/dom/style/getKeyframesFromStylesheets';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __flatten from '@coffeekraken/sugar/shared/object/flatten';
-import __get from '@coffeekraken/sugar/shared/object/get';
+import { __deepMerge, __flatten, __get } from '@coffeekraken/sugar/object';
 import __set from '@coffeekraken/sugar/shared/object/set';
 import * as __rematrix from 'rematrix';
 

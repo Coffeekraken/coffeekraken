@@ -15,8 +15,8 @@ import __objectHash from 'object-hash';
  * @return          {String}                            The calculated folder hash
  *
  * @example         js
- * import objectHash from '@coffeekraken/sugar/node/object/objectHash';
- * objectHash('my/cool/folder'); // => YZOrKDx9LCLd8X39PoFTflXGpRU=,
+ * import { __objectHash } from '@coffeekraken/sugar/object';
+ * __objectHash('my/cool/folder'); // => YZOrKDx9LCLd8X39PoFTflXGpRU=,
  *
  * @see             https://www.npmjs.com/package/object-hash
  * @since           2.0.0

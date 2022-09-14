@@ -15,9 +15,8 @@ import {
     __writeFileSync,
     __writeTmpFileSync,
 } from '@coffeekraken/sugar/fs';
+import { __deepMerge, __flatten } from '@coffeekraken/sugar/object';
 import { __packageJsonSync } from '@coffeekraken/sugar/package';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __flatten from '@coffeekraken/sugar/shared/object/flatten';
 import __fs from 'fs';
 import __handlebars from 'handlebars';
 import { marked as __marked } from 'marked';

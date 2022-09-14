@@ -27,8 +27,8 @@ import __isPlain from '../is/isPlainObject';
  * @todo      tests
  *
  * @example             js
- * import flatten from '@coffeekraken/sugar/js/object/flatten';
- * flatten({
+ * import { __flatten } from '@coffeekraken/sugar/object';
+ * __flatten({
  *    hello: {
  *      world: 'Coco'
  *    }
@@ -37,7 +37,7 @@ import __isPlain from '../is/isPlainObject';
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function flatten(object, settings = {}) {
+export default function __flatten(object, settings = {}) {
     const toReturn = {};
 
     // make sure the passed object is not null, undefined
@@ -106,5 +106,3 @@ function flatten(object, settings = {}) {
 
     return toReturn;
 }
-
-export default flatten;

@@ -2,11 +2,11 @@ import __SFeature from '@coffeekraken/s-feature';
 import __SSugarElement from '@coffeekraken/s-sugar-element';
 import __STheme from '@coffeekraken/s-theme';
 import {
+    __injectStyle,
     __whenImageLoaded,
     __whenImagesLoaded,
-    __injectStyle,
 } from '@coffeekraken/sugar/dom';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __uniqid } from '@coffeekraken/sugar/string';
 import __SAppearFeatureInterface from './interface/SAppearFeatureInterface';
 

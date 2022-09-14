@@ -7,8 +7,8 @@ import {
     __isNode,
     __isPlainObject,
 } from '@coffeekraken/sugar/is';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import __getColorFor from '@coffeekraken/sugar/shared/dev/color/getColorFor';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __toString from '@coffeekraken/sugar/shared/string/toString';
 import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 import __minimatch from 'minimatch';

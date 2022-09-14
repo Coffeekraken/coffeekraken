@@ -1,12 +1,11 @@
 // @ts-nocheck
 
-import __picomatch from 'picomatch';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SugarConfig from '@coffeekraken/s-sugar-config';
-import type { PluginOption, ViteDevServer } from 'vite';
-import __fs from 'fs';
-import __chokidar from 'chokidar';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
+import __SugarConfig from '@coffeekraken/s-sugar-config';
+import { __deepMerge } from '@coffeekraken/sugar/object';
+import __chokidar from 'chokidar';
+import __picomatch from 'picomatch';
+import type { PluginOption, ViteDevServer } from 'vite';
 
 /**
  * Configuration for the watched paths.

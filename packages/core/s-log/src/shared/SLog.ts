@@ -1,4 +1,4 @@
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 
 import type { ISLogMargin, ISLogType } from './ISLog';
 import ISLog from './ISLog';

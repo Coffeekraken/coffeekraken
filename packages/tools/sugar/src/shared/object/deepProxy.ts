@@ -38,8 +38,8 @@ import __deepMerge from '../object/deepMerge';
  * @todo      tests
  *
  * @example           js
- * import deepProxy from '@coffeekraken/sugar/js/object/deepProxy';
- * const a = deepProxy({
+ * import { __deepProxy } from '@coffeekraken/sugar/object';
+ * const a = __deepProxy({
  *    hello: 'world'
  * }, (actionObj) => {
  *    // do something with the actionObj...
@@ -49,7 +49,7 @@ import __deepMerge from '../object/deepMerge';
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function deepProxy(object, handlerFn, settings = {}) {
+export default function __deepProxy(object, handlerFn, settings = {}) {
     const preproxy = new WeakMap();
     let isRevoked = false;
     settings = __deepMerge(
@@ -208,4 +208,3 @@ function deepProxy(object, handlerFn, settings = {}) {
     }
     return proxify(object, []);
 }
-export default deepProxy;

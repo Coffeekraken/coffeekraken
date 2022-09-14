@@ -1,8 +1,10 @@
 import __SFeature from '@coffeekraken/s-feature';
+import {
+    __querySelectorLive,
+    __whenStylesheetsReady,
+} from '@coffeekraken/sugar/dom';
 import __whenNearViewport from '@coffeekraken/sugar/js/dom/detect/whenNearViewport';
-import { __whenStylesheetsReady } from '@coffeekraken/sugar/dom';
-import { __querySelectorLive } from '@coffeekraken/sugar/dom';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SDepsFeatureInterface from './interface/SDepsFeatureInterface';
 
 // @ts-ignore

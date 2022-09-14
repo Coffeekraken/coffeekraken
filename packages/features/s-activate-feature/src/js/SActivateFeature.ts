@@ -1,7 +1,7 @@
 import __SFeature from '@coffeekraken/s-feature';
-import { __querySelectorLive } from '@coffeekraken/sugar/dom';
 import { __unique } from '@coffeekraken/sugar/array';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __querySelectorLive } from '@coffeekraken/sugar/dom';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SActivateFeatureInterface from './interface/SActivateFeatureInterface';
 
 export interface ISActivateFeatureProps {

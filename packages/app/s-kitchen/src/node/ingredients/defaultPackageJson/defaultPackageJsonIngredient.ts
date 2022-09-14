@@ -1,8 +1,8 @@
 import type { ISKitchenIngredient } from '../../SKitchen';
 
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
 
 /**

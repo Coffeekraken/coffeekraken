@@ -21,8 +21,8 @@
  * @todo      tests
  *
  * @example           js
- * import filter from '@coffeekraken/sugar/js/object/filter';
- * filter({
+ * import { __filter } from '@coffeekraken/sugar/object';
+ * __filter({
  *    coco: 'hello',
  *    plop: true
  * }, (key, item) => typeof item === 'string');
@@ -31,7 +31,7 @@
  * @since         2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function filter(object, filter) {
+export default function __filter(object, filter) {
     // init the new object to return
     const result = {};
 
@@ -47,4 +47,3 @@ function filter(object, filter) {
     // return the filtered object
     return result;
 }
-export default filter;

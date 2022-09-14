@@ -1,7 +1,7 @@
 import __SClass from '@coffeekraken/s-class';
 import __SEnv from '@coffeekraken/s-env';
 import { __utcTime } from '@coffeekraken/sugar/datetime';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import __minimatch from 'minimatch';
 
 // import __SBenchSettingsInterface from './interface/SBenchSettingsInterface';

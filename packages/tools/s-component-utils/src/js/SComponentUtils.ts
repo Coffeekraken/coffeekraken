@@ -13,7 +13,7 @@ import { __when } from '@coffeekraken/sugar/dom';
 import { __debounce } from '@coffeekraken/sugar/function';
 import __injectStyle from '@coffeekraken/sugar/js/dom/css/injectStyle';
 import __inViewportStatusChange from '@coffeekraken/sugar/js/dom/detect/inViewportStatusChange';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
 import __wait from '@coffeekraken/sugar/shared/time/wait';

@@ -8,7 +8,7 @@ import {
     __hslaToRgba,
     __rgbaToHsla,
 } from '@coffeekraken/sugar/color';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SColorApplyParamsInterface from './interface/SColorApplyParamsInterface';
 import __SColorSettingsInterface from './interface/SColorSettingsInterface';
 

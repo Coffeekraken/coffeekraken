@@ -9,7 +9,7 @@ import type {
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import __SLog from '@coffeekraken/s-log';
 import { __getMethods } from '@coffeekraken/sugar/class';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 // import __SPromiseSettingsInterface from './interface/SPromiseSettingsInterface';
 import __treatAsValue, {

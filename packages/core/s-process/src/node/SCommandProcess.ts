@@ -1,5 +1,5 @@
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __spawn } from '@coffeekraken/sugar/process';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SCommandProcessInterface from './interface/SCommandProcessInterface';
 import {
     ISCommandProcessParams,

@@ -1,5 +1,5 @@
 // @ts-nocheck
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import __en from '../i18n/en';
 import type {
     ISValidatorResult,

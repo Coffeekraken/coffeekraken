@@ -23,13 +23,13 @@ import __get from './get';
  * @todo      tests
  *
  * @example               js
- * import set from '@coffeekraken/sugar/js/object/set';
- * set('myObject.cool.value', 'Hello world'); // => Hello world
+ * import { __set } from '@coffeekraken/sugar/object';
+ *  __set('myObject.cool.value', 'Hello world'); // => Hello world
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default (obj, path, value, settings = {}) => {
+export default function __set(obj, path, value, settings = {}) {
     settings = {
         ...settings,
     };
@@ -72,4 +72,4 @@ export default (obj, path, value, settings = {}) => {
         o[a[0]] = value;
     }
     return __get(obj, path);
-};
+}

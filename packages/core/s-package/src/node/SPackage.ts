@@ -4,12 +4,12 @@ import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __writeJsonSync } from '@coffeekraken/sugar/fs';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import {
     __packageJsonSync,
     __renamePackage,
 } from '@coffeekraken/sugar/package';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __childProcess from 'child_process';
 import __chokidar from 'chokidar';
 import { cruise } from 'dependency-cruiser';

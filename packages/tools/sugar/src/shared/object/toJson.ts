@@ -15,17 +15,17 @@ import __set from './set';
  * @return      {Any}                       The converted object
  *
  * @example         js
- * import toJson from '@coffeekraken/sugar/shared/object/toJson';
+ * import { __toJson } from '@coffeekraken/sugar/object';
  * class MyClass {
  *      hello = 'world';
  *      something() {}
  * }
- * toJson(new MyClass()); // => { hello: 'world' }
+ * __toJson(new MyClass()); // => { hello: 'world' }
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function toJson(object: any): any {
+export default function __toJson(object: any): any {
     const newObj = {};
     __deepMap(
         object,

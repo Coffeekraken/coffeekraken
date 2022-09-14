@@ -20,17 +20,17 @@ import __set from './set';
  * @todo      tests
  *
  * @example         js
- * import delete from '@coffeekraken/sugar/js/object/delete';
+ * import { __delete } from '@coffeekraken/sugar/object';
  * const myObject = {
  *    hello: 'world',
  *    plop: 'yop'
  * };
- * delete(myObject, 'plop');
+ * __delete(myObject, 'plop');
  *
  * @since     2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function del(object, dotPath) {
+export default function del(object, dotPath) {
     const parentDotPath = dotPath.split('.').slice(0, -1).join('.');
 
     if (!dotPath || dotPath === '' || dotPath === '.') return object;
@@ -56,4 +56,3 @@ function del(object, dotPath) {
     }
     return object;
 }
-export default del;

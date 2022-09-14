@@ -1,44 +1,44 @@
 <div id="homepage-features" s-deps css="features">
     <div class="__contents">
-        {{-- <template s-template> --}}
-        <div s-scope>
+        <template s-template>
+        {{-- <div s-scope> --}}
             @include('pages.homepage.features.partials.openSource')
-        </div>
-        {{-- </template> --}}
-        {{-- <template s-template> --}}
-        <div s-scope>
+        {{-- </div> --}}
+        </template>
+        <template s-template>
+        {{-- <div s-scope> --}}
             @include('pages.homepage.features.partials.ui')
-        </div>
-        {{-- </template> --}}
-        {{-- <template s-template> --}}
-        <div s-scope>
+        {{-- </div> --}}
+        </template>
+        <template s-template>
+        {{-- <div s-scope> --}}
             @include('pages.homepage.features.partials.helpers')
-        </div>
-        {{-- </template> --}}
-        {{-- <template s-template> --}}
-        <div s-scope>
+        {{-- </div> --}}
+        </template>
+        <template s-template>
+        {{-- <div s-scope> --}}
             @include('pages.homepage.features.partials.frontend')
-        </div>
-        {{-- </template> --}}
-        {{-- <template s-template> --}}
-        <div s-scope>
+        {{-- </div> --}}
+        </template>
+        <template s-template>
+        {{-- <div s-scope> --}}
             @include('pages.homepage.features.partials.discover')
-        </div>
-        {{-- </template> --}}
-        {{-- <template s-template> --}}
-        <div s-scope>
+        {{-- </div> --}}
+        </template>
+        <template s-template>
+        {{-- <div s-scope> --}}
             @include('pages.homepage.features.partials.sugar')
-        </div>
-        {{-- </template> --}}
-        {{-- <template s-template> --}}
-        <div s-scope>
+        {{-- </div> --}}
+        </template>
+        <template s-template>
+        {{-- <div s-scope> --}}
             @include('pages.homepage.features.partials.development')
-        </div>
-        {{-- </template> --}}
-        {{-- <template s-template> --}}
-        <div s-scope>
+        {{-- </div> --}}
+        </template>
+        <template s-template>
+        {{-- <div s-scope> --}}
             @include('pages.homepage.features.partials.why')
-        </div>
-        {{-- </template> --}}
+        {{-- </div> --}}
+        </template>
     </div>
 </div>

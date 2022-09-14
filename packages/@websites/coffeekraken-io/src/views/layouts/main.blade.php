@@ -24,11 +24,15 @@
     @include('generic.tools.tools')
 
     <s-panel id="settings" position="right" backdrop s-scope>
-        <ck-settings mount-when="inViewport"></ck-settings>
+        <template>
+            <ck-settings mount-when="inViewport"></ck-settings>
+        </template>
     </s-panel>
 
-    <s-panel id="ratings" position="right" backdrop>
-        <ck-ratings></ck-ratings>
+    <s-panel id="ratings" position="right" backdrop s-scope>
+        <template>
+            <ck-ratings></ck-ratings>
+        </template>
     </s-panel>
 
     @include('layouts.footer.footer')

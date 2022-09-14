@@ -149,7 +149,7 @@ export interface ISColorPickerComponentProps {
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default class SColorPicker extends __SLitComponent {
+export default class SColorPickerComponent extends __SLitComponent {
     static get properties() {
         return __SLitComponent.createProperties(
             {},
@@ -165,14 +165,7 @@ export default class SColorPicker extends __SLitComponent {
         `;
     }
 
-    state = {
-        h: 0,
-        s: 0,
-        l: 0,
-        a: 1,
-        metasFormat: 'hex',
-        value: undefined,
-    };
+    state = {};
     _originalState = {};
 
     _floatApi: IFloatApi;
@@ -206,6 +199,16 @@ export default class SColorPicker extends __SLitComponent {
                 interface: __SColorPickerComponentInterface,
             }),
         );
+
+        this.state = {
+            h: 0,
+            s: 0,
+            l: 0,
+            a: 1,
+            metasFormat: 'hex',
+            value: undefined,
+        };
+
         this._$input = this.querySelector('input');
         this._hasInput = this._$input !== null;
         this._$button = this.querySelector('button');
@@ -215,39 +218,39 @@ export default class SColorPicker extends __SLitComponent {
     async mount() {
         this._hueColor = new __SColor('#000');
         this._color = new __SColor('#000');
-
-        // save the original state
-        Object.assign(this._originalState, this.state);
     }
     async firstUpdated() {
+        // save the original state
+        Object.assign(this._originalState, this.state);
+
         this._$root = this.querySelector(
-            `.${this.componentUtils.className('__root')}`,
+            `.${this.componentUtils.uniqueClassName('__root')}`,
         );
 
         this._$picker = this.querySelector(
-            `.${this.componentUtils.className('__picker')}`,
+            `.${this.componentUtils.uniqueClassName('__picker')}`,
         );
 
         // metas input
         this._$colorInput = this.querySelector(
-            `.${this.componentUtils.className('__color-input')}`,
+            `.${this.componentUtils.uniqueClassName('__color-input')}`,
         );
 
         // shade
         this._$shade = this.querySelector(
-            `.${this.componentUtils.className(`__shade`)}`,
+            `.${this.componentUtils.uniqueClassName(`__shade`)}`,
         );
         this._shadeCtx = this._$shade.getContext('2d');
 
         // hue
         this._$hue = this.querySelector(
-            `.${this.componentUtils.className(`__hue`)}`,
+            `.${this.componentUtils.uniqueClassName(`__hue`)}`,
         );
         this._hueCtx = this._$hue.getContext('2d');
 
         // alpha
         this._$alpha = this.querySelector(
-            `.${this.componentUtils.className(`__alpha`)}`,
+            `.${this.componentUtils.uniqueClassName(`__alpha`)}`,
         );
         this._alphaCtx = this._$alpha.getContext('2d');
 
@@ -1077,6 +1080,8 @@ export function define(
     props: Partial<ISColorPickerComponentProps> = {},
     tagName = 's-color-picker',
 ) {
-    __SLitComponent.setDefaultProps(tagName, props);
-    customElements.define(tagName, SColorPicker);
+    __SLitComponent.define(SColorPickerComponent, props, tagName);
+
+    // __SLitComponent.setDefaultProps(tagName, props);
+    // customElements.define(tagName, SColorPicker);
 }

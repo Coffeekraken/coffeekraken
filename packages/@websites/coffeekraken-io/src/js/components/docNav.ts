@@ -2,10 +2,10 @@
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { __sameItems } from '@coffeekraken/sugar/array';
+import { __wait } from '@coffeekraken/sugar/datetime';
 import { __onScrollEnd } from '@coffeekraken/sugar/dom';
 import { __stripTags } from '@coffeekraken/sugar/html';
-import __wait from '@coffeekraken/sugar/shared/time/wait';
-import __queryStringToObject from '@coffeekraken/sugar/shared/url/queryStringToObject';
+import { __queryStringToObject } from '@coffeekraken/sugar/url';
 import { html } from 'lit';
 import { property } from 'lit/decorators.js';
 import __miniSearch from 'minisearch';
@@ -58,7 +58,7 @@ export default class DocNav extends __SLitComponent {
 
       // scroll end
       await __wait();
-      { __onScrollEnd }(document.'@coffeekraken/sugar/dom';
+      __onScrollEnd(() => {
         this._maxItemsToDisplay += this.maxItems;
         this._filterItems({
           reset: false,
@@ -434,15 +434,6 @@ export default class DocNav extends __SLitComponent {
                                             </textarea
                                   >
                                 </s-code-example>
-                                <div class="s-until:sibling:mounted">
-                                  <i
-                                    class="s-loader:spinner s-color:accent"
-                                  ></i>
-                                  &nbsp;
-                                  <p class="s-typo:p s-display:inline-block">
-                                    Loading code example. Please wait...
-                                  </p>
-                                </div>
                               `
                             : ''}
                         </div>

@@ -53,7 +53,7 @@ export default function __sortDeep(object, sort) {
     // go deep to sort lower levels
     for (let [key, value] of Object.entries(sortedObject)) {
         if (__isPlainObject(value)) {
-            sortedObject[key] = sortDeep(sortedObject[key], sort);
+            sortedObject[key] = __sortDeep(sortedObject[key], sort);
         }
     }
     return sortedObject;

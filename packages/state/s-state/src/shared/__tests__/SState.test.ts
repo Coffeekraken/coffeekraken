@@ -1,4 +1,4 @@
-import __wait from '@coffeekraken/sugar/shared/time/wait';
+import { __wait } from '@coffeekraken/sugar/datetime';
 import __SState from '../SState';
 
 describe('@coffeekraken.s-state', () => {

@@ -6,8 +6,8 @@
     @endforeach
 </s-code-example>
 
-<div class="s-until:sibling:mounted s-code-example-loader">
+{{-- <div class="s-until:sibling:mounted s-code-example-loader">
     <i class="s-loader:square-dots s-color:accent"></i>
     &nbsp;
     <p class="s-typo:p s-display:inline-block">Loading code example. Please wait...</p>
-</div>
+</div> --}}

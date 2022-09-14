@@ -163,12 +163,12 @@
                     },
                     {
                         "language": "html",
-                        "title": "With tooltop",
+                        "title": "With tooltip",
                         "code": "<s-range name=\"myOtherRanfe\" class=\"s-mbe:30\" tooltip></s-range>"
                     },
                     {
                         "language": "html",
-                        "title": "With tooltop and colored",
+                        "title": "With tooltip and colored",
                         "code": "<s-range name=\"myOtherRanfe\" class=\"s-mbe:30 s-color:accent\" tooltip></s-range>"
                     },
                     {

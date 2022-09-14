@@ -202,6 +202,8 @@ export default class CkSettings extends __SLitComponent {
 }
 
 export function define(props: any = {}, tagName = 'ck-settings') {
-  __SLitComponent.setDefaultProps(tagName, props);
-  customElements.define(tagName, CkSettings);
+  __SLitComponent.define(CkSettings, props, tagName);
+
+  // __SLitComponent.setDefaultProps(tagName, props);
+  // customElements.define(tagName, CkSettings);
 }

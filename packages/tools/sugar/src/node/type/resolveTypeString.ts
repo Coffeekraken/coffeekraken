@@ -1,11 +1,11 @@
 import __SInterface from '@coffeekraken/s-interface';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
+import { __replaceTokens } from '@coffeekraken/sugar/token';
 import __fs from 'fs';
 import __path from 'path';
-import {__replaceTokens} from '@coffeekraken/sugar/string';
 import __parseTypeString, {
     ITypeStringObject,
 } from '../../shared/type/parseTypeString';
-import { __packageRootDir } from '@coffeekraken/sugar/path';
 
 /**
  * @name            resolveTypeString

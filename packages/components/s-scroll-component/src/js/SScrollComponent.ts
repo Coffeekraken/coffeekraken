@@ -151,6 +151,8 @@ export function define(
     props: Partial<ISScrollComponentProps> = {},
     tagName = 's-scroll',
 ) {
-    __SLitComponent.setDefaultProps(tagName, props);
-    customElements.define(tagName, SScrollComponent);
+    __SLitComponent.define(SScrollComponent, props, tagName);
+
+    // __SLitComponent.setDefaultProps(tagName, props);
+    // customElements.define(tagName, SScrollComponent);
 }

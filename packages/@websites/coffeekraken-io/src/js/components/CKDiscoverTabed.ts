@@ -1,14 +1,14 @@
 // @ts-nocheck
 
-import __SInterface from "@coffeekraken/s-interface";
-import __SLitComponent from "@coffeekraken/s-lit-component";
-import { html } from "lit";
+import __SInterface from '@coffeekraken/s-interface';
+import __SLitComponent from '@coffeekraken/s-lit-component';
+import { html } from 'lit';
 
 class SCKDiscoverTabedPropsInterface extends __SInterface {
   static get _definition() {
     return {
       platform: {
-        type: "String",
+        type: 'String',
       },
     };
   }
@@ -27,31 +27,31 @@ export default class CKDiscoverTabed extends __SLitComponent {
 
   _tabs = [
     {
-      id: "js",
-      title: "JS",
+      id: 'js',
+      title: 'JS',
     },
     {
-      id: "css",
-      title: "CSS",
+      id: 'css',
+      title: 'CSS',
     },
     {
-      id: "node",
-      title: "NodeJS",
+      id: 'node',
+      title: 'NodeJS',
     },
     {
-      id: "php",
-      title: "PHP",
+      id: 'php',
+      title: 'PHP',
     },
   ];
 
   state = {
-    activeTabId: "js",
+    activeTabId: 'js',
   };
 
   _$discover;
 
   async firstUpdated() {
-    this._$discover = this.querySelector("ck-discover");
+    this._$discover = this.querySelector('ck-discover');
   }
 
   render() {
@@ -61,7 +61,7 @@ export default class CKDiscoverTabed extends __SLitComponent {
           ${this._tabs.map(
             (tab) => html`
               <li
-                class="${this.state.activeTabId === tab.id ? "active" : ""}"
+                class="${this.state.activeTabId === tab.id ? 'active' : ''}"
                 @click=${() => {
                   this.state.activeTabId = tab.id;
                   this._$discover.grabItem();
@@ -78,7 +78,9 @@ export default class CKDiscoverTabed extends __SLitComponent {
   }
 }
 
-export function define(props: any = {}, tagName = "ck-discover-tabed") {
-  __SLitComponent.setDefaultProps(tagName, props);
-  customElements.define(tagName, CKDiscoverTabed);
+export function define(props: any = {}, tagName = 'ck-discover-tabed') {
+  __SLitComponent.define(CKDiscoverTabed, props, tagName);
+
+  // __SLitComponent.setDefaultProps(tagName, props);
+  // customElements.define(tagName, CKDiscoverTabed);
 }

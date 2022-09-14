@@ -8,6 +8,7 @@ import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SRequest from '@coffeekraken/s-request';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import { __formatDuration, __wait } from '@coffeekraken/sugar/datetime';
 import {
     __copySync,
     __readJsonSync,
@@ -17,8 +18,6 @@ import {
 } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __packageCacheDir, __packageRootDir } from '@coffeekraken/sugar/path';
-import __formatDuration from '@coffeekraken/sugar/shared/time/formatDuration';
-import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __fs from 'fs';
 import __path from 'path';
 import { parseStringPromise } from 'xml2js';

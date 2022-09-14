@@ -1,7 +1,7 @@
 import __SLitComponent from '@coffeekraken/s-lit-component';
+import { __wait } from '@coffeekraken/sugar/datetime';
 import { __isPlainObject } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __wait from '@coffeekraken/sugar/shared/time/wait';
 import { css, html, unsafeCSS } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import __SFiltrableInputComponentInterface from './interface/SFiltrableInputComponentInterface';
@@ -137,7 +137,7 @@ export interface ISFiltrableInputState {
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default class SFiltrableInput extends __SLitComponent {
+export default class SFiltrableInputComponent extends __SLitComponent {
     static get styles() {
         return css`
             ${unsafeCSS(__css)}
@@ -150,6 +150,15 @@ export default class SFiltrableInput extends __SLitComponent {
         );
     }
 
+    static get state() {
+        return {
+            displayedMaxItems: 0,
+            value: '',
+            isActive: false,
+            isLoading: false,
+        };
+    }
+
     // @ts-ignore
     $container: HTMLElement;
     // @ts-ignore
@@ -160,23 +169,15 @@ export default class SFiltrableInput extends __SLitComponent {
     $input: HTMLInputElement;
     // @ts-ignore
     $form: HTMLFormElement;
-    // state
-    state: ISFiltrableInputState = {
-        displayedMaxItems: 0,
-        value: '',
-        isActive: false,
-        isLoading: false,
-    };
-
     // public properties
-    preselectedItems = [];
-    selectedItems = [];
-    filteredItems = [];
+    preselectedItems;
+    selectedItems;
+    filteredItems;
 
     // private properties
-    _templatesFromHtml: any = {};
-    _baseTemplates = {};
-    _items = [];
+    _templatesFromHtml;
+    _baseTemplates;
+    _items;
 
     constructor() {
         super(
@@ -185,6 +186,12 @@ export default class SFiltrableInput extends __SLitComponent {
                 interface: __SFiltrableInputComponentInterface,
             }),
         );
+        this.preselectedItems = [];
+        this.selectedItems = [];
+        this.filteredItems = [];
+        this._templatesFromHtml = {};
+        this._baseTemplates = {};
+        this._items = [];
     }
     async mount() {
         this.state.displayedMaxItems = this.props.maxItems;
@@ -868,10 +875,12 @@ export function define(
     props: Partial<ISFiltrableInputComponentProps> = {},
     tagName = 's-filtrable-input',
 ) {
-    __SLitComponent.setDefaultProps(tagName, props);
-    if (!customElements.get(tagName)) {
-        class SFiltrableInputComponent extends SFiltrableInput {}
-        // @ts-ignore
-        customElements.define(tagName, SFiltrableInputComponent);
-    }
+    __SLitComponent.define(SFiltrableInputComponent, props, tagName);
+
+    // __SLitComponent.setDefaultProps(tagName, props);
+    // if (!customElements.get(tagName)) {
+    //     class SFiltrableInputComponent extends SFiltrableInput {}
+    //     // @ts-ignore
+    //     customElements.define(tagName, SFiltrableInputComponent);
+    // }
 }

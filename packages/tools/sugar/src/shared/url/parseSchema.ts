@@ -4,7 +4,7 @@ import __parseString from '../string/parse';
 
 /**
  * @name                                parseSchema
- * @namespace            js.url
+ * @namespace            shared.url
  * @type                                Function
  * @platform          js
  * @platform          node
@@ -32,8 +32,8 @@ import __parseString from '../string/parse';
  * @todo      tests
  *
  * @example       js
- * import parseSchema from '@coffeekraken/sugar/js/url/parseSchema';
- * parseSchema('https://github.com/myApp/master/3', '{project:string}/{?branch:string}/{?idx:number}');
+ * import { __parseSchema } from '@coffeekraken/sugar/url';
+ * __parseSchema('https://github.com/myApp/master/3', '{project:string}/{?branch:string}/{?idx:number}');
  * // {
  * //   url: 'https://github.com/myApp/master/3',
  * //   schema: '{project:string}/{?branch:string}/{?idx:number}',
@@ -64,7 +64,7 @@ import __parseString from '../string/parse';
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
-function parseSchema(url, schema) {
+export default function __parseSchema(url, schema) {
     const rawSchemaString = schema;
     const rawUrlString = url;
 
@@ -196,4 +196,3 @@ function parseSchema(url, schema) {
         url: rawUrlString,
     };
 }
-export default parseSchema;

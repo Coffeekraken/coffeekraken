@@ -1,7 +1,7 @@
 import { define as __SClipboardCopy } from '@coffeekraken/s-clipboard-copy-component';
 import __SLitComponent from '@coffeekraken/s-lit-component';
+import { __wait } from '@coffeekraken/sugar/datetime';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __hljs from 'highlight.js/lib/core';
 import __langBash from 'highlight.js/lib/languages/bash';
 import __langCss from './languages/css';
@@ -157,8 +157,7 @@ export default class SCodeExample extends __SLitComponent {
         Object.keys(languages).forEach((lang) => {
             __hljs.registerLanguage(lang, languages[lang]);
         });
-    }
-    async firstUpdated() {
+
         // @ts-ignore
         this.$templates = this.querySelectorAll('template,code');
 
@@ -219,7 +218,8 @@ export default class SCodeExample extends __SLitComponent {
             ];
             $template.remove();
         });
-
+    }
+    async firstUpdated() {
         // active idx
         if (this.props.active) {
             this.setActiveTab(this.props.active);
@@ -484,6 +484,5 @@ export function define(
     props: Partial<ISCodeExampleComponentProps> = {},
     tagName = 's-code-example',
 ) {
-    __SLitComponent.setDefaultProps(tagName, props);
-    customElements.define(tagName, SCodeExample);
+    __SLitComponent.define(SCodeExample, props, tagName);
 }

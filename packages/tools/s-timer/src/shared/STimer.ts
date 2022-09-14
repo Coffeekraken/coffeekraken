@@ -1,8 +1,8 @@
 // @ts-nocheck
 
 import __SPromise from '@coffeekraken/s-promise';
+import { __convertTime } from '@coffeekraken/sugar/datetime';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __convert from '@coffeekraken/sugar/shared/time/convert';
 
 /**
  * @name 		            STimer
@@ -167,7 +167,7 @@ export default class STimer extends __SPromise {
                     this._tickCount = this.settings.tickCount;
                     this._tickInterval = this._duration / this._tickCount; // remove 1 cause the first tick is always the start time
                 } else {
-                    this._tickInterval = __convert(
+                    this._tickInterval = __convertTime(
                         this.settings.tickInterval,
                         'ms',
                     );
@@ -248,7 +248,7 @@ export default class STimer extends __SPromise {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     set duration(duration) {
-        duration = __convert(duration, 'ms');
+        duration = __convertTime(duration, 'ms');
         this._duration = duration;
         if (this._tickCount) {
             this._tickInterval = this._duration / this._tickCount; // remove 1 cause the first tick is always the start time

@@ -9,7 +9,7 @@
     background-position: 0px 0%;
   }
 }
-
+/* 
 s-code-example:not([mounted]) {
   position: relative;
   display: block;
@@ -39,7 +39,7 @@ s-code-example:not([mounted]) {
     background: sugar.color(main);
     @sugar.border.radius();
   }
-}
+} */
 
 .s-code-example {
   display: block;

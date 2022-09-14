@@ -1,23 +1,19 @@
 // import __postcss from 'postcss';
 import __SBench from '@coffeekraken/s-bench';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import {
-    __dirname,
-    __folderHash,
-    __writeFileSync,
-} from '@coffeekraken/sugar/fs';
+import { __writeFileSync } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __fs from 'fs';
 import __path from 'path';
 
-const mixinsStack = {},
-    functionsStack = {};
-let pluginHash = __folderHash(__path.resolve(__dirname(), '../../..'), {
-        include: {
-            ctime: true,
-        },
-    }),
-    rootDir;
+// const mixinsStack = {},
+//     functionsStack = {};
+// let pluginHash = __folderHash(__path.resolve(__dirname(), '../../..'), {
+//         include: {
+//             ctime: true,
+//         },
+//     }),
+//     rootDir;
 let loadedPromise;
 
 const _cacheObjById = {};

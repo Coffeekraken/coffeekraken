@@ -24,7 +24,7 @@
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default (value) => {
+export default function (value) {
     if (typeof value !== 'string') return value;
     value = value.split('⠀').join('').trim();
     try {
@@ -35,4 +35,4 @@ export default (value) => {
     } catch (e) {
         return value;
     }
-};
+}

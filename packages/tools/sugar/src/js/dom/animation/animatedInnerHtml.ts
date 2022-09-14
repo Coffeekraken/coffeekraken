@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import __uniqid from '../../../shared/string/uniqid';
-import __convert from '../../../shared/time/convert';
 import { __emptyNode, __injectStyle } from '@coffeekraken/sugar/dom';
+import __convertTime from '../../../shared/datetime/convertTime';
+import __uniqid from '../../../shared/string/uniqid';
 
 /**
  * @name            animatedInnerHtml
@@ -62,8 +62,11 @@ export default function __animatedInnerHtml(node, content, settings = {}) {
             animOutEasing: 'ease-in-out',
             ...settings,
         };
-        settings.animInDuration = __convert(settings.animInDuration, 'ms');
-        settings.animOutDuration = __convert(settings.animOutDuration, 'ms');
+        settings.animInDuration = __convertTime(settings.animInDuration, 'ms');
+        settings.animOutDuration = __convertTime(
+            settings.animOutDuration,
+            'ms',
+        );
 
         // generate a uniqid for this process
         const _uniqid = __uniqid();

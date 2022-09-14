@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { __getStyleProperty } from '@coffeekraken/sugar/dom';
-import __convert from '../../../shared/time/convert';
+import __convertTime from '../../../shared/datetime/convertTime';
 
 /**
  * @name      getAnimationProperties
@@ -65,8 +65,10 @@ export default function __getAnimationProperties(elm: HTMLElement) {
     // return the animation object
     const props = {
         name: name.split(','),
-        duration: duration.split(',').map((value) => __convert(value, 'ms')),
-        delay: `${delay}`.split(',').map((value) => __convert(value, 'ms')),
+        duration: duration
+            .split(',')
+            .map((value) => __convertTime(value, 'ms')),
+        delay: `${delay}`.split(',').map((value) => __convertTime(value, 'ms')),
         timingFunction:
             timingFunction.split?.(',') ?? timingFunction.name
                 ? [timingFunction.name]

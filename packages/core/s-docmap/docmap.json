@@ -102,7 +102,7 @@
                     ],
                     "raw": "String"
                 },
-                "default": "${__packageRoot()}/docmap.json",
+                "default": "${__packageRootDir()}/docmap.json",
                 "description": "Specify the path of the docmap.json source file to read",
                 "namespace": "@coffeekraken.s-docmap.config.docmap.read",
                 "since": "2.0.0",

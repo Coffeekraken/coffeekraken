@@ -106,7 +106,7 @@
                     "raw": "Record<string, string>"
                 },
                 "default": "{}",
-                "description": "Map some SFile classes path using minimatch patterns like so:\n{\n'.scss,*.sass': `${__packageRoot(__dirname)}/src/node/scss/SScssFile`\n}",
+                "description": "Map some SFile classes path using minimatch patterns like so:\n{\n'.scss,*.sass': `${__packageRootDir(__dirname)}/src/node/scss/SScssFile`\n}",
                 "namespace": "@coffeekraken.s-file.config.sFile",
                 "since": "2.0.0",
                 "author": {

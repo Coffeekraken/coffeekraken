@@ -276,7 +276,7 @@
                     ],
                     "raw": "String"
                 },
-                "default": "__packageRoot()",
+                "default": "__packageRootDir()",
                 "description": "Specify the context in which to generate the namespace.\nThe context is simply a root folder from which to search for the package.json\nfile to get the name that serve to the namespace generation",
                 "namespace": "@coffeekraken.s-sugar-config.config.core.namespace",
                 "since": "2.0.0",
@@ -1334,9 +1334,9 @@
                 "relPath": "src/config/readme.config.ts",
                 "children": {}
             },
-            "@coffeekraken.s-sugar-config.config.serve.img.url": {
-                "id": "@coffeekraken.s-sugar-config.config.serve.img.url",
-                "name": "url",
+            "@coffeekraken.s-sugar-config.config.serve.img.imgPath": {
+                "id": "@coffeekraken.s-sugar-config.config.serve.img.imgPath",
+                "name": "imgPath",
                 "type": {
                     "types": [
                         {
@@ -1358,9 +1358,9 @@
                 "extension": "config",
                 "relPath": "src/config/serve.config.ts"
             },
-            "@coffeekraken.s-sugar-config.config.serve.js.url": {
-                "id": "@coffeekraken.s-sugar-config.config.serve.js.url",
-                "name": "url",
+            "@coffeekraken.s-sugar-config.config.serve.js.path": {
+                "id": "@coffeekraken.s-sugar-config.config.serve.js.path",
+                "name": "path",
                 "type": {
                     "types": [
                         {
@@ -1382,9 +1382,9 @@
                 "extension": "config",
                 "relPath": "src/config/serve.config.ts"
             },
-            "@coffeekraken.s-sugar-config.config.serve.css.url": {
-                "id": "@coffeekraken.s-sugar-config.config.serve.css.url",
-                "name": "url",
+            "@coffeekraken.s-sugar-config.config.serve.css.path": {
+                "id": "@coffeekraken.s-sugar-config.config.serve.css.path",
+                "name": "path",
                 "type": {
                     "types": [
                         {
@@ -1406,9 +1406,9 @@
                 "extension": "config",
                 "relPath": "src/config/serve.config.ts"
             },
-            "@coffeekraken.s-sugar-config.config.serve.icons.url": {
-                "id": "@coffeekraken.s-sugar-config.config.serve.icons.url",
-                "name": "url",
+            "@coffeekraken.s-sugar-config.config.serve.icons.path": {
+                "id": "@coffeekraken.s-sugar-config.config.serve.icons.path",
+                "name": "path",
                 "type": {
                     "types": [
                         {
@@ -1430,9 +1430,9 @@
                 "extension": "config",
                 "relPath": "src/config/serve.config.ts"
             },
-            "@coffeekraken.s-sugar-config.config.serve.fonts.url": {
-                "id": "@coffeekraken.s-sugar-config.config.serve.fonts.url",
-                "name": "url",
+            "@coffeekraken.s-sugar-config.config.serve.fonts.path": {
+                "id": "@coffeekraken.s-sugar-config.config.serve.fonts.path",
+                "name": "path",
                 "type": {
                     "types": [
                         {
@@ -1454,9 +1454,9 @@
                 "extension": "config",
                 "relPath": "src/config/serve.config.ts"
             },
-            "@coffeekraken.s-sugar-config.config.serve.cache.url": {
-                "id": "@coffeekraken.s-sugar-config.config.serve.cache.url",
-                "name": "url",
+            "@coffeekraken.s-sugar-config.config.serve.cache.path": {
+                "id": "@coffeekraken.s-sugar-config.config.serve.cache.path",
+                "name": "path",
                 "type": {
                     "types": [
                         {
@@ -1729,7 +1729,7 @@
                     ],
                     "raw": "String"
                 },
-                "default": "${__packageRoot()}",
+                "default": "${__packageRootDir()}",
                 "description": "Configure the root directory. Usually the package root dir",
                 "namespace": "@coffeekraken.s-sugar-config.config.storage",
                 "since": "2.0.0",
@@ -2403,7 +2403,7 @@
                             ],
                             "raw": "String"
                         },
-                        "default": "${__packageRoot(__dirname())}",
+                        "default": "${__packageRootDir(__dirname())}",
                         "description": "Configure where is located sugar package directory. Usually in the node_modules/@coffeekraken/sugar folder",
                         "namespace": "@coffeekraken.s-sugar-config.config.storage",
                         "since": "2.0.0",

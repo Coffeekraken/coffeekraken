@@ -140,8 +140,8 @@ export interface SPanelComponentProps {
  * @since           2.0.0
  * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default class SPanel extends __SLitComponent {
-    static _activePanels: SPanel[] = [];
+export default class SPanelComponent extends __SLitComponent {
+    static _activePanels: SPanelComponent[] = [];
 
     static get properties() {
         return __SLitComponent.createProperties({}, __SPanelComponentInterface);
@@ -158,6 +158,7 @@ export default class SPanel extends __SLitComponent {
     _containerTransitionProps;
     _$backdrop;
     _backdropTransitionProps;
+    _template;
 
     constructor() {
         super(
@@ -174,12 +175,18 @@ export default class SPanel extends __SLitComponent {
         }
 
         // get the initial nodes inside the panel tag
-        this._$nodes = Array.from(this.children);
+        // this._$nodes = Array.from(this.children);
     }
     async mount() {
         // handle active state at start
         if (this.props.active) {
             this.constructor._activePanels.push(this);
+        }
+
+        const $tpl = this.querySelector('template');
+        if ($tpl) {
+            this._template = $tpl.content;
+            // $tpl.remove();
         }
     }
     isTopPanel() {
@@ -199,15 +206,11 @@ export default class SPanel extends __SLitComponent {
     }
     firstUpdated() {
         this._$container = this.querySelector(
-            `.${this.componentUtils.className('__container')}`,
+            `.${this.componentUtils.uniqueClassName('__container')}`,
         );
         this._$backdrop = this.querySelector(
-            `.${this.componentUtils.className('__backdrop')}`,
+            `.${this.componentUtils.uniqueClassName('__backdrop')}`,
         );
-        this._$nodes.forEach(($node) => {
-            this._$container?.appendChild($node);
-        });
-
         this._containerTransitionProps = __getTransitionProperties(
             this._$container,
         );
@@ -360,9 +363,9 @@ export default class SPanel extends __SLitComponent {
                           ></div>
                       `
                     : ''}
-                <div
-                    class="${this.componentUtils.className('__container')}"
-                ></div>
+                <div class="${this.componentUtils.className('__container')}">
+                    ${this._template ?? ''}
+                </div>
             </div>
         `;
     }
@@ -372,6 +375,8 @@ export function define(
     props: Partial<SPanelComponentProps> = {},
     tagName = 's-panel',
 ) {
-    __SLitComponent.setDefaultProps(tagName, props);
-    customElements.define(tagName, SPanel);
+    __SLitComponent.define(SPanelComponent, props, tagName);
+
+    // __SLitComponent.setDefaultProps(tagName, props);
+    // customElements.define(tagName, SPanel);
 }

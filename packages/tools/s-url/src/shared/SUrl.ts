@@ -2,7 +2,7 @@
 
 import __SClass from '@coffeekraken/s-class';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __parseSchema from '@coffeekraken/sugar/shared/url/parseSchema';
+import { __parseSchema } from '@coffeekraken/sugar/url';
 import __urlParse from 'url-parse';
 
 /**

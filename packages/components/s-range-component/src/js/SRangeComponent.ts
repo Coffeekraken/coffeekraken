@@ -82,7 +82,7 @@ export interface ISRangeComponentProps extends ISLitComponentDefaultProps {
     disabled: boolean;
 }
 
-export default class SRange extends __SLitComponent {
+export default class SRangeComponent extends __SLitComponent {
     static get properties() {
         return __SLitComponent.createProperties({}, __SRangeComponentInterface);
     }
@@ -206,6 +206,8 @@ export function define(
     props: Partial<ISRangeComponentProps> = {},
     tagName = 's-range',
 ) {
-    __SLitComponent.setDefaultProps(tagName, props);
-    customElements.define(tagName, SRange);
+    __SLitComponent.define(SRangeComponent, props, tagName);
+
+    // __SLitComponent.setDefaultProps(tagName, props);
+    // customElements.define(tagName, SRange);
 }

@@ -1,5 +1,5 @@
 import { __argsToString } from '@coffeekraken/sugar/cli';
-import { __replaceTokens } from '@coffeekraken/sugar/string';
+import { __replaceTokens } from '@coffeekraken/sugar/token';
 
 /**
  * @name           replaceTokens

@@ -2,7 +2,7 @@ import __SClass from '@coffeekraken/s-class';
 import { __isGlob, __isOfType } from '@coffeekraken/sugar/is';
 import { __deepMerge, __get } from '@coffeekraken/sugar/object';
 import __set from '@coffeekraken/sugar/shared/object/set';
-import __typeof from '@coffeekraken/sugar/shared/value/typeof';
+import { __typeof } from '@coffeekraken/sugar/type';
 import __SDescriptorResult, {
     ISDescriptorResult,
     ISDescriptorResultObj,

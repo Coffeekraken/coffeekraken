@@ -28,6 +28,7 @@
             "@coffeekraken/s-data-file-js",
             "@coffeekraken/s-data-file-php",
             "@coffeekraken/s-datetime-picker-component",
+            "@coffeekraken/s-deps-feature",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
@@ -58,6 +59,7 @@
             "@coffeekraken/s-panel-component",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-export-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
@@ -74,6 +76,7 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-template-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -91,6 +94,30 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin.outDir": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin.outDir",
+                "name": "outDir",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "__path.dirname(config.postcssBuilder.output)",
+                "description": "Specify a directory in which to save relatively exported css, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "postcssSugarPlugin.config.ts",
+                "extension": "config",
+                "relPath": "src/config/postcssSugarPlugin.config.ts"
+            },
             "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin.cache": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin.cache",
                 "name": "cache",
@@ -3576,6 +3603,38 @@
                 "relPath": "src/node/mixins/padding/classes.ts",
                 "children": {}
             },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.export.partial": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.export.partial",
+                "name": "partial",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ],
+                    "raw": "PostcssMixin"
+                },
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to mark some css to be exported as separated file.\nYou can specify the name of your partial",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.export",
+                "status": "beta",
+                "example": [],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "partial.ts",
+                "extension": "ts",
+                "relPath": "src/node/mixins/partial/partial.ts",
+                "children": {}
+            },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.platform.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.platform.classes",
                 "name": "classes",
@@ -4075,6 +4134,43 @@
                 "filename": "no.ts",
                 "extension": "ts",
                 "relPath": "src/node/mixins/scope/no.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scrollbar.hide": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scrollbar.hide",
+                "name": "hide",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ],
+                    "raw": "PostcssMixin"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to hide your scrollbar",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scrollbar",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": "body {\n   @sugar.scrollbar.hide();\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "hide.ts",
+                "extension": "ts",
+                "relPath": "src/node/mixins/scrollbar/hide.ts",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scrollbar.scrollbar": {
@@ -5274,6 +5370,21 @@
                             ],
                             "default": "rounded"
                         },
+                        "defaultColor": {
+                            "type": "String",
+                            "values": [
+                                "current",
+                                "base",
+                                "main",
+                                "accent",
+                                "complementary",
+                                "success",
+                                "warning",
+                                "error",
+                                "info"
+                            ],
+                            "default": "main"
+                        },
                         "scope": {
                             "type": {
                                 "type": "Array<String>",
@@ -5374,7 +5485,7 @@
                     }
                 ],
                 "interface": {
-                    "name": "postcssSugarPluginUiBackdropClassesInterface",
+                    "name": "PostcssSugarPluginUiBackdropClassesInterface",
                     "description": "",
                     "definition": {
                         "styles": {
@@ -5392,6 +5503,21 @@
                                 "solid"
                             ],
                             "default": "solid"
+                        },
+                        "defaultColor": {
+                            "type": "String",
+                            "values": [
+                                "current",
+                                "base",
+                                "main",
+                                "accent",
+                                "complementary",
+                                "success",
+                                "warning",
+                                "error",
+                                "info"
+                            ],
+                            "default": "main"
                         },
                         "scope": {
                             "type": {
@@ -5573,6 +5699,21 @@
                             ],
                             "default": "default"
                         },
+                        "defaultColor": {
+                            "type": "String",
+                            "values": [
+                                "current",
+                                "base",
+                                "main",
+                                "accent",
+                                "complementary",
+                                "success",
+                                "warning",
+                                "error",
+                                "info"
+                            ],
+                            "default": "main"
+                        },
                         "scope": {
                             "type": {
                                 "type": "Array<String>",
@@ -5639,6 +5780,10 @@
                     "name": "postcssSugarPluginUiBlockquoteInterface",
                     "description": "",
                     "definition": {
+                        "color": {
+                            "type": "String",
+                            "default": "accent"
+                        },
                         "style": {
                             "type": "String",
                             "values": [
@@ -5665,12 +5810,14 @@
                             "values": [
                                 "bare",
                                 "lnf",
-                                "shape"
+                                "shape",
+                                "color"
                             ],
                             "default": [
                                 "bare",
                                 "lnf",
-                                "shape"
+                                "shape",
+                                "color"
                             ]
                         }
                     }
@@ -6043,6 +6190,21 @@
                             ],
                             "default": "default"
                         },
+                        "defaultColor": {
+                            "type": "String",
+                            "values": [
+                                "current",
+                                "base",
+                                "main",
+                                "accent",
+                                "complementary",
+                                "success",
+                                "warning",
+                                "error",
+                                "info"
+                            ],
+                            "default": "main"
+                        },
                         "scope": {
                             "type": {
                                 "type": "Array<String>",
@@ -6225,6 +6387,21 @@
                             ],
                             "default": "default"
                         },
+                        "defaultColor": {
+                            "type": "String",
+                            "values": [
+                                "current",
+                                "base",
+                                "main",
+                                "accent",
+                                "complementary",
+                                "success",
+                                "warning",
+                                "error",
+                                "info"
+                            ],
+                            "default": "accent"
+                        },
                         "scope": {
                             "type": {
                                 "type": "Array<String>",
@@ -6320,6 +6497,21 @@
                                 "pill"
                             ],
                             "default": "default"
+                        },
+                        "defaultColor": {
+                            "type": "String",
+                            "values": [
+                                "current",
+                                "base",
+                                "main",
+                                "accent",
+                                "complementary",
+                                "success",
+                                "warning",
+                                "error",
+                                "info"
+                            ],
+                            "default": "main"
                         },
                         "scope": {
                             "type": {
@@ -6503,6 +6695,21 @@
                             ],
                             "default": "solid"
                         },
+                        "defaultColor": {
+                            "type": "String",
+                            "values": [
+                                "current",
+                                "base",
+                                "main",
+                                "accent",
+                                "complementary",
+                                "success",
+                                "warning",
+                                "error",
+                                "info"
+                            ],
+                            "default": "main"
+                        },
                         "scope": {
                             "type": {
                                 "type": "Array<String>",
@@ -6668,6 +6875,21 @@
                         "defaultShape": {
                             "type": "String",
                             "default": "default"
+                        },
+                        "defaultColor": {
+                            "type": "String",
+                            "values": [
+                                "current",
+                                "base",
+                                "main",
+                                "accent",
+                                "complementary",
+                                "success",
+                                "warning",
+                                "error",
+                                "info"
+                            ],
+                            "default": "accent"
                         },
                         "scope": {
                             "type": {
@@ -6941,6 +7163,21 @@
                             ],
                             "default": "inline"
                         },
+                        "defaultColor": {
+                            "type": "String",
+                            "values": [
+                                "current",
+                                "base",
+                                "main",
+                                "accent",
+                                "complementary",
+                                "success",
+                                "warning",
+                                "error",
+                                "info"
+                            ],
+                            "default": "main"
+                        },
                         "scope": {
                             "type": {
                                 "type": "Array<String>",
@@ -7095,6 +7332,21 @@
                             ],
                             "default": "dl"
                         },
+                        "defaultColor": {
+                            "type": "String",
+                            "values": [
+                                "current",
+                                "base",
+                                "main",
+                                "accent",
+                                "complementary",
+                                "success",
+                                "warning",
+                                "error",
+                                "info"
+                            ],
+                            "default": "main"
+                        },
                         "scope": {
                             "type": {
                                 "type": "Array<String>",
@@ -7245,6 +7497,21 @@
                                 "drop",
                                 "square-dots"
                             ]
+                        },
+                        "defaultColor": {
+                            "type": "String",
+                            "values": [
+                                "current",
+                                "base",
+                                "main",
+                                "accent",
+                                "complementary",
+                                "success",
+                                "warning",
+                                "error",
+                                "info"
+                            ],
+                            "default": "main"
                         }
                     }
                 },
@@ -7538,6 +7805,21 @@
                             ],
                             "default": "default"
                         },
+                        "defaultColor": {
+                            "type": "String",
+                            "values": [
+                                "current",
+                                "base",
+                                "main",
+                                "accent",
+                                "complementary",
+                                "success",
+                                "warning",
+                                "error",
+                                "info"
+                            ],
+                            "default": "accent"
+                        },
                         "scope": {
                             "type": {
                                 "type": "Array<String>",
@@ -7721,6 +8003,21 @@
                             ],
                             "default": "default"
                         },
+                        "defaultColor": {
+                            "type": "String",
+                            "values": [
+                                "current",
+                                "base",
+                                "main",
+                                "accent",
+                                "complementary",
+                                "success",
+                                "warning",
+                                "error",
+                                "info"
+                            ],
+                            "default": "accent"
+                        },
                         "scope": {
                             "type": {
                                 "type": "Array<String>",
@@ -7895,6 +8192,21 @@
                                 "pill"
                             ],
                             "default": "default"
+                        },
+                        "defaultColor": {
+                            "type": "String",
+                            "values": [
+                                "current",
+                                "base",
+                                "main",
+                                "accent",
+                                "complementary",
+                                "success",
+                                "warning",
+                                "error",
+                                "info"
+                            ],
+                            "default": "accent"
                         },
                         "scope": {
                             "type": {
@@ -8073,6 +8385,21 @@
                             ],
                             "default": "default"
                         },
+                        "defaultColor": {
+                            "type": "String",
+                            "values": [
+                                "current",
+                                "base",
+                                "main",
+                                "accent",
+                                "complementary",
+                                "success",
+                                "warning",
+                                "error",
+                                "info"
+                            ],
+                            "default": "accent"
+                        },
                         "scope": {
                             "type": {
                                 "type": "Array<String>",
@@ -8241,6 +8568,21 @@
                                 "square"
                             ],
                             "default": "default"
+                        },
+                        "defaultColor": {
+                            "type": "String",
+                            "values": [
+                                "current",
+                                "base",
+                                "main",
+                                "accent",
+                                "complementary",
+                                "success",
+                                "warning",
+                                "error",
+                                "info"
+                            ],
+                            "default": "main"
                         },
                         "scope": {
                             "type": {
@@ -8419,6 +8761,21 @@
                                 "pill"
                             ],
                             "default": "default"
+                        },
+                        "defaultColor": {
+                            "type": "String",
+                            "values": [
+                                "current",
+                                "base",
+                                "main",
+                                "accent",
+                                "complementary",
+                                "success",
+                                "warning",
+                                "error",
+                                "info"
+                            ],
+                            "default": "main"
                         },
                         "scope": {
                             "type": {
@@ -8629,6 +8986,21 @@
                                 "pill"
                             ],
                             "default": "default"
+                        },
+                        "defaultColor": {
+                            "type": "String",
+                            "values": [
+                                "current",
+                                "base",
+                                "main",
+                                "accent",
+                                "complementary",
+                                "success",
+                                "warning",
+                                "error",
+                                "info"
+                            ],
+                            "default": "main"
                         },
                         "scope": {
                             "type": {

@@ -9,6 +9,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 import { __adoptStyleInShadowRoot } from '@coffeekraken/sugar/dom';
 
+import { __wait } from '@coffeekraken/sugar/datetime';
 import { __when } from '@coffeekraken/sugar/dom';
 import { __debounce } from '@coffeekraken/sugar/function';
 import __injectStyle from '@coffeekraken/sugar/js/dom/css/injectStyle';
@@ -16,7 +17,6 @@ import __inViewportStatusChange from '@coffeekraken/sugar/js/dom/detect/inViewpo
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
-import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __SComponentUtilsDefaultPropsInterface from './interface/SComponentUtilsDefaultPropsInterface';
 import __SComponentUtilsSettingsInterface from './interface/SComponentUtilsSettingsInterface';
 
@@ -813,6 +813,47 @@ export default class SComponentUtils extends __SClass {
         if (style) {
             clsString += ` ${style}`;
         }
+
+        return clsString;
+    }
+
+    /**
+     * @name          uniqueClassName
+     * @type          Function
+     *
+     * This method returns you only 1 class that is based on the passed "name" and not on the "tagName".
+     *
+     * @param         {String}        cls         The class you want to process. Can be multiple classes separated by a space
+     * @return        {String}                    The generated class that you can apply
+     *
+     * @since         2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    uniqueClassName(cls = '', style = '') {
+        let clsString = cls
+            .split(' ')
+            .map((clsName) => {
+                const clses: string[] = [];
+                // class from the passed "name" in the settings
+                if (
+                    this.settings.name &&
+                    this.node.tagName.toLowerCase() !== this.settings.name
+                ) {
+                    clses.push(
+                        `${this.settings.name.toLowerCase()}${
+                            clsName && !clsName.match(/^__/) ? '-' : ''
+                        }${clsName}`,
+                    );
+                } else {
+                    clses.push(
+                        `${this.node.tagName.toLowerCase()}${
+                            clsName && !clsName.match(/^__/) ? '-' : ''
+                        }${clsName}`,
+                    );
+                }
+                return clses.join(' ');
+            })
+            .join('');
 
         return clsString;
     }

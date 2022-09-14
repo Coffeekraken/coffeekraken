@@ -15,8 +15,8 @@ import __autoCast from '../string/autoCast';
  * @return    {ITypeStringObject[]}             An array of object(s) describing the type string passed
  *
  * @example       js
- * import __parseTypeString from '@coffeekraken/sugar/shared/type/parseTypeString';
- * parseTypeString('string|number');
+ * import { __parseTypeString } from '@coffeekraken/sugar/type';
+ * __parseTypeString('string|number');
  * //[{
  * //   type: 'string',
  * //   of: undefined,
@@ -97,7 +97,7 @@ function parseSingleTypeString(typeString: string): ITypeStringObject {
     });
     return result;
 }
-export default function parseTypeString(
+export default function __parseTypeString(
     typeString: string,
 ): ITypeStringObject[] {
     const originalTypeString = typeString;
@@ -151,7 +151,7 @@ export default function parseTypeString(
     let finalTypes: IParseTypeStringSingleResultObj[] = [];
     firstTypes.forEach((type) => {
         if (type.areSubLevels) {
-            finalTypes = [...finalTypes, ...parseTypeString(type.type)];
+            finalTypes = [...finalTypes, ...__parseTypeString(type.type)];
         } else {
             finalTypes.push(
                 parseSingleTypeString(

@@ -1,9 +1,8 @@
-import __SProcess from '../SProcess';
-import __SPromise from '@coffeekraken/s-promise';
 import __SInterface from '@coffeekraken/s-interface';
+import __SPromise from '@coffeekraken/s-promise';
+import { __wait } from '@coffeekraken/sugar/datetime';
 import { __isChildProcess } from '@coffeekraken/sugar/is';
-import __wait from '@coffeekraken/sugar/shared/time/wait';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __SProcess from '../SProcess';
 
 class MyInterface extends __SInterface {
     static get _definition() {

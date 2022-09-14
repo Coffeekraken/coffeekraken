@@ -13,10 +13,10 @@ import __SVite from '@coffeekraken/s-vite';
 import { __copy } from '@coffeekraken/sugar/clipboard';
 import { __readJsonSync, __writeJsonSync } from '@coffeekraken/sugar/fs';
 
+import { __formatDuration } from '@coffeekraken/sugar/datetime';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import { __spawn } from '@coffeekraken/sugar/process';
-import __formatDuration from '@coffeekraken/sugar/shared/time/formatDuration';
 import __childProcess from 'child_process';
 import __fs from 'fs';
 import __path from 'path';

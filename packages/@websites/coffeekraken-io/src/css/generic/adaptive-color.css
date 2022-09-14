@@ -1,21 +1,31 @@
 .adaptive-color {
-  [fill="white"],
-  .main {
-    fill: sugar.color(base);
-  }
-  [fill="#FEBD0F"],
-  .accent {
-    fill: sugar.color(accent);
-  }
-
-  @sugar.theme.when (dark) {
-    [fill="white"],
+    [fill='white'],
     .main {
-      fill: sugar.color(main, text);
+        fill: sugar.color(base);
     }
-    [fill="#FEBD0F"],
+    [fill='#FFBB01'],
+    [fill='#FEBD0F'],
     .accent {
-      fill: sugar.color(accent);
+        fill: sugar.color(accent);
     }
-  }
+    [stroke='#FFBB01'],
+    [stroke='#FEBD0F'] {
+        stroke: sugar.color(accent);
+    }
+
+    @sugar.theme.when (dark) {
+        [fill='white'],
+        .main {
+            fill: sugar.color(main, text);
+        }
+        [fill='#FFBB01'],
+        [fill='#FEBD0F'],
+        .accent {
+            fill: sugar.color(accent);
+        }
+        [stroke='#FFBB01'],
+        [stroke='#FEBD0F'] {
+            stroke: sugar.color(accent);
+        }
+    }
 }

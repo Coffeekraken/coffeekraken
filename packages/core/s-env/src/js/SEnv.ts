@@ -1,5 +1,5 @@
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __queryStringToObject from '@coffeekraken/sugar/shared/url/queryStringToObject';
+import { __queryStringToObject } from '@coffeekraken/sugar/url';
 import __SEnv from '../shared/SEnv';
 
 /**

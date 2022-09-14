@@ -1,7 +1,7 @@
 import __SDuration from '@coffeekraken/s-duration';
 import __SGlob from '@coffeekraken/s-glob';
 import __SPromise from '@coffeekraken/s-promise';
-import __formatDuration from '@coffeekraken/sugar/shared/time/formatDuration';
+import { __formatDuration } from '@coffeekraken/sugar/datetime';
 import __path from 'path';
 import __spawn from '../node/process/spawn';
 import __SRunCommandParamsInterface from './interface/SRunCommandParamsInterface';

@@ -152,7 +152,7 @@ export interface ISDatetimePickerComponentProps {
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default class SDatetimePicker extends __SLitComponent {
+export default class SDatetimePickerComponent extends __SLitComponent {
     static get properties() {
         return __SLitComponent.createProperties(
             {},
@@ -214,17 +214,17 @@ export default class SDatetimePicker extends __SLitComponent {
         // restore state
         this._restoreState();
     }
-    async mount() {
+    async mount() {}
+    async firstUpdated() {
         // save the original state
         Object.assign(this._originalState, this.state);
-    }
-    async firstUpdated() {
+
         this._$root = this.querySelector(
-            `.${this.componentUtils.className('__root')}`,
+            `.${this.componentUtils.uniqueClassName('__root')}`,
         );
 
         this._$picker = this.querySelector(
-            `.${this.componentUtils.className('__picker')}`,
+            `.${this.componentUtils.uniqueClassName('__picker')}`,
         );
 
         // input
@@ -1130,6 +1130,8 @@ export function define(
     props: Partial<ISDatetimePickerComponentProps> = {},
     tagName = 's-datetime-picker',
 ) {
-    __SLitComponent.setDefaultProps(tagName, props);
-    customElements.define(tagName, SDatetimePicker);
+    __SLitComponent.define(SDatetimePickerComponent, props, tagName);
+
+    // __SLitComponent.setDefaultProps(tagName, props);
+    // customElements.define(tagName, SDatetimePicker);
 }

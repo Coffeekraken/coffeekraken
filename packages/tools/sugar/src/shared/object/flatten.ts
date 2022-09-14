@@ -72,7 +72,7 @@ export default function __flatten(object, settings = {}) {
         ) {
             const isArray = Array.isArray(object[key]);
 
-            const flatObject = flatten(object[key], {
+            const flatObject = __flatten(object[key], {
                 ...settings,
                 keepLastIntact: false,
             });

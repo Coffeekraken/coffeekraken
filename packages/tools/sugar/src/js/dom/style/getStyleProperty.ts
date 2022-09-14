@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import camelize from '../../../shared/string/camelize';
 import autoCast from '../../../shared/string/autoCast';
+import camelize from '../../../shared/string/camelize';
 
 /**
  * @name      getStyleProperty
@@ -38,7 +38,6 @@ export default function __getStyleProperty(
     setTimeout(() => {
         elm._sComputedStyle = null;
     });
-
     const computed = elm._sComputedStyle || window.getComputedStyle(elm);
     elm._sComputedStyle = computed;
 

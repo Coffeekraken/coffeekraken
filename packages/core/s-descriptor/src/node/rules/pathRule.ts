@@ -2,7 +2,7 @@
 
 import { __resolveGlob } from '@coffeekraken/sugar/glob';
 import { __isGlob, __isNode, __isPath } from '@coffeekraken/sugar/is';
-import { __replaceTokens } from '@coffeekraken/sugar/string';
+import { __replaceTokens } from '@coffeekraken/sugar/token';
 import __fs from 'fs';
 import __path from 'path';
 import type { ISDescriptorResultObj } from '../SDescriptorResult';

@@ -69,7 +69,7 @@ export interface ISClipboardCopyComponentProps {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export default class SClipboardCopy extends __SLitComponent {
+export default class SClipboardCopyComponent extends __SLitComponent {
     static get properties() {
         return __SLitComponent.createProperties(
             {},
@@ -219,7 +219,8 @@ export function define(
     props: Partial<ISClipboardCopyComponentProps> = {},
     tagName = 's-clipboard-copy',
 ) {
-    __SLitComponent.setDefaultProps(tagName, props);
-    // @ts-ignore
-    customElements.define(tagName, SClipboardCopy);
+    __SLitComponent.define(SClipboardCopyComponent, props, tagName);
+    // __SLitComponent.setDefaultProps(tagName, props);
+    // // @ts-ignore
+    // customElements.define(tagName, SClipboardCopy);
 }

@@ -287,6 +287,26 @@
                             "url": "https://coffeekraken.io"
                         }
                     },
+                    "isdefault": {
+                        "id": "sa1fef97f9c79d7d0929dcaf79d7073e3b4f91ec2138632efbdad13f2bd4c7761",
+                        "name": "isDefault",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This static method allows you to check if a certain value is the default of a certain property or not.",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
                     "getavailabletypes": {
                         "id": "s7b4b6d6ebb14444123869591c4b69f1f1af80c6c56ff5cb9ec4ef1c53ffd6861",
                         "name": "getAvailableTypes",

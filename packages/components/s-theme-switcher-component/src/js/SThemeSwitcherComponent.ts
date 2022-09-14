@@ -205,7 +205,9 @@ export function define(
     props: Partial<ISThemeSwitcherComponentProps> = {},
     tagName = 's-theme-switcher',
 ) {
-    __SLitComponent.setDefaultProps(tagName, props);
-    // @ts-ignore
-    customElements.define(tagName, SThemeSwitcherComponent);
+    __SLitComponent.define(SThemeSwitcherComponent, props, tagName);
+
+    // __SLitComponent.setDefaultProps(tagName, props);
+    // // @ts-ignore
+    // customElements.define(tagName, SThemeSwitcherComponent);
 }

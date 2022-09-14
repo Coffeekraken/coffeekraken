@@ -211,30 +211,6 @@
                 "extension": "config",
                 "relPath": "src/config/themeUi.config.ts"
             },
-            "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker.defaultColor": {
-                "id": "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker.defaultColor",
-                "name": "defaultColor",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.defaultColor]",
-                "description": "Specify the default color for datetime picker ui",
-                "namespace": "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
             "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker.defaultStyle": {
                 "id": "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker.defaultStyle",
                 "name": "defaultStyle",
@@ -248,6 +224,30 @@
                 },
                 "default": "[theme.ui.default.defaultStyle]",
                 "description": "Specify the default style for your filtrable input ui",
+                "namespace": "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker.defaultColor": {
+                "id": "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker.defaultColor",
+                "name": "defaultColor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.form.defaultColor]",
+                "description": "Specify the default style for your datetimePicker ui",
                 "namespace": "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker",
                 "since": "2.0.0",
                 "author": {

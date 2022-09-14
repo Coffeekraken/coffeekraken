@@ -6,10 +6,10 @@ import __SComponentUtils, {
     SComponentUtilsDefaultPropsInterface,
 } from '@coffeekraken/s-component-utils';
 import __SInterface from '@coffeekraken/s-interface';
+import { __wait } from '@coffeekraken/sugar/datetime';
 import { __querySelectorLive } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
-import __wait from '@coffeekraken/sugar/shared/time/wait';
 import { LitElement } from 'lit';
 
 export interface ISLitComponentSettings extends ISComponentUtilsSettings {
@@ -58,6 +58,66 @@ export default class SLitComponent extends LitElement {
     props: any = {};
     componentUtils: __SComponentUtils;
     _shouldUpdate = false;
+
+    _state = {};
+    get state() {
+        return this._state;
+    }
+    set state(state) {
+        Object.assign(this._state, state);
+    }
+
+    /**
+     * @name            define
+     * @type            Function
+     * @static
+     *
+     * This static method allows you to define a custom element just like the `customElement.define` does.
+     * The trick is that this define method will not initialize the component directly. It will
+     * wait until it is near the viewport before actually creating a new element names "%tagName-up".
+     * This will be the custom element that is registered and that will replace your "%tagName" HTMLElement.
+     *
+     * @param
+     * @param       {Any}           props          The initial props to apply to your custom element
+     * @param       {String}        tagName         The tagname you want to search in the DOM
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    static define(Cls: SLitComponent, props: any, tagName: string) {
+        if (customElements.get(tagName.toLowerCase())) {
+            return;
+        }
+
+        // set the default props
+        SLitComponent.setDefaultProps(tagName, props);
+        customElements.define(tagName.toLowerCase(), class extends Cls {});
+
+        // // register the custom element with the suffix "-up"
+        // try {
+        //     customElements.define(`${tagName}-up`, Cls);
+        // } catch (e) {}
+
+        // function copyAttributes($source, $target) {
+        //     return Array.from($source.attributes).forEach((attribute) => {
+        //         // if ($target[attribute.name] !== undefined) {
+        //         //     $target[attribute.name] = attribute.nodeValue;
+        //         // }
+        //         $target.setAttribute(attribute.name, attribute.nodeValue);
+        //     });
+        // }
+
+        // __querySelectorLive(tagName, ($elm) => {
+        //     const $node = document.createElement(`${tagName}-up`);
+        //     $node.classList.add($elm.tagName.toLowerCase().replace(/-up$/, ''));
+        //     copyAttributes($elm, $node);
+        //     while ($elm.childNodes.length > 0) {
+        //         $node.appendChild($elm.childNodes[0]);
+        //     }
+        //     $elm.parentNode.insertBefore($node, $elm.nextSibling);
+        //     $elm.remove();
+        // });
+    }
 
     /**
      * @name            setDefaultProps
@@ -183,6 +243,11 @@ export default class SLitComponent extends LitElement {
             settings,
         );
 
+        // init default state
+        if (this.constructor.state) {
+            this.state = Object.assign({}, this.constructor.state);
+        }
+
         // shadow handler
         if (this.settings.shadowDom === false) {
             this.createRenderRoot = () => {
@@ -247,9 +312,6 @@ export default class SLitComponent extends LitElement {
                 '',
         });
 
-        // component class
-        this.classList.add(...this.componentUtils.className('').split(' '));
-
         (async () => {
             const defaultProps = __SComponentUtils.getDefaultProps(
                 this.tagName.toLowerCase(),
@@ -259,13 +321,19 @@ export default class SLitComponent extends LitElement {
                 defaultProps.mountWhen ??
                 'direct';
 
-            setTimeout(async () => {
+            // component class
+            this.classList.add(...this.componentUtils.className('').split(' '));
+
+            await __wait();
+            await __wait();
+            if (!mountWhen.match(/^direct(ly)?$/)) {
                 // wait until mount
-                await this.componentUtils.waitAndExecute(
-                    mountWhen,
-                    this._mount.bind(this),
-                );
-            });
+                await this.componentUtils.waitAndExecute(mountWhen, () => {
+                    this._mount();
+                });
+            } else {
+                this._mount();
+            }
         })();
     }
 
@@ -320,8 +388,8 @@ export default class SLitComponent extends LitElement {
 
         if (this.settings.interface) {
             finalProps = this.settings.interface.apply(finalProps);
-            Object.assign(this.props, finalProps);
         }
+        Object.assign(this.props, finalProps);
 
         // make props responsive
         this.componentUtils.makePropsResponsive(this.props);

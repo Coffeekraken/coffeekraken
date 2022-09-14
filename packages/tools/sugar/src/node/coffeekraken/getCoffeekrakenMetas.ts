@@ -1,10 +1,10 @@
+import { __dirname, __readJsonSync } from '@coffeekraken/sugar/fs';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
 import __path from 'path';
 import __parseSemverString, {
     ISemverObject,
-} from '../../shared/semver/parseSemverString';
-import { __dirname, __readJsonSync } from '@coffeekraken/sugar/fs';
-import { __packageRootDir } from '@coffeekraken/sugar/path';
+} from '../../shared/version/parseSemverString';
 
 /**
  * @name            getCoffeekrakenMetas

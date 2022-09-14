@@ -290,7 +290,7 @@ export interface ISSliderComponentTimer {
     percentage: number;
 }
 
-export default class SSlider extends __SLitComponent {
+export default class SSliderComponent extends __SLitComponent {
     static get properties() {
         return __SLitComponent.createProperties(
             {},
@@ -306,16 +306,19 @@ export default class SSlider extends __SLitComponent {
         `;
     }
 
+    static get state() {
+        return {
+            currentSlideIdx: 0,
+            playing: true,
+        };
+    }
+
     $root: HTMLElement;
-    $slides: HTMLElement[] = [];
-    $navs: HTMLElement[] = [];
+    $slides: HTMLElement[];
+    $navs: HTMLElement[];
     $slidesContainer: HTMLElement;
     $slidesWrapper: HTMLElement;
 
-    state = {
-        currentSlideIdx: 0,
-        playing: true,
-    };
     _timer = {
         total: 0,
         current: 0,
@@ -329,48 +332,48 @@ export default class SSlider extends __SLitComponent {
                 interface: __SSliderComponentInterface,
             }),
         );
-
+    }
+    async mount() {
         // assign a uniqid if not already setted
         if (!this.id) {
-            this.setAttribute('sid', `s-slider-${__uniqid()}`);
+            this.setAttribute('id', `s-slider-${__uniqid()}`);
         }
-
         this.$slides = Array.from(
-            document.querySelectorAll(`[s-slider-slide]`),
+            this.querySelectorAll(`[s-slider-slide]`),
         ).filter(($slide) => {
-            const $parentSlider = __querySelectorUp($slide, 's-slider');
-            if (!$parentSlider) return true;
-            if ($parentSlider === this) return true;
+            const $parentSlider = __querySelectorUp($slide, '.s-slider');
+            if (!$parentSlider || $parentSlider === this) {
+                $slide.classList.add(
+                    ...this.componentUtils.className('__slide').split(' '),
+                );
+                return true;
+            }
             return false;
         });
 
-        this.$slides.forEach(($item) => {
-            // add the item class
-            $item.classList.add(this.componentUtils.className('__slide'));
-        });
-    }
-    async mount() {
         // set the initial slide idx from properties
         this.state.currentSlideIdx = this.props.slide;
     }
     async firstUpdated() {
         // bare elements
         this.$root = this.querySelector(
-            `.${this.componentUtils.className('__root')}`,
+            `.${this.componentUtils.uniqueClassName('__root')}`,
         );
 
         // slides
         this.$slidesWrapper = this.querySelector(
-            `.${this.componentUtils.className(
+            `.${this.componentUtils.uniqueClassName(
                 '__slides-wrapper',
             )}:not(s-slider#${
                 this.id
-            } s-slider .${this.componentUtils.className('__slides-wrapper')})`,
+            } s-slider .${this.componentUtils.uniqueClassName(
+                '__slides-wrapper',
+            )})`,
         );
         this.$slidesContainer = this.querySelector(
-            `.${this.componentUtils.className('__slides')}:not(s-slider#${
+            `.${this.componentUtils.uniqueClassName('__slides')}:not(s-slider#${
                 this.id
-            } s-slider .${this.componentUtils.className('__slides')})`,
+            } s-slider .${this.componentUtils.uniqueClassName('__slides')})`,
         );
 
         // default behavior
@@ -1394,6 +1397,8 @@ export function define(
     props: Partial<ISSliderComponentProps> = {},
     tagName = 's-slider',
 ) {
-    __SLitComponent.setDefaultProps(tagName, props);
-    customElements.define(tagName, SSlider);
+    __SLitComponent.define(SSliderComponent, props, tagName);
+
+    // __SLitComponent.setDefaultProps(tagName, props);
+    // customElements.define(tagName, SSlider);
 }

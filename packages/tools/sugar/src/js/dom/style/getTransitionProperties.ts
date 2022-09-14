@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import { __getStyleProperty } from '@coffeekraken/sugar/dom';
-import __convert from '../../../shared/time/convert';
+import __convertTime from '../../../shared/datetime/convertTime';
 
 /**
  * @name      getTransitionProperties
@@ -57,9 +57,11 @@ function getTransitionProperties(elm: HTMLElement) {
     const props = {
         property: splitIfNeeded(property, ','),
         duration: splitIfNeeded(duration, ',').map((value) =>
-            __convert(value, 'ms'),
+            __convertTime(value, 'ms'),
         ),
-        delay: splitIfNeeded(delay, ',').map((value) => __convert(value, 'ms')),
+        delay: splitIfNeeded(delay, ',').map((value) =>
+            __convertTime(value, 'ms'),
+        ),
         timingFunction: splitIfNeeded(timingFunction, ','),
     };
     let totalDuration = 0;

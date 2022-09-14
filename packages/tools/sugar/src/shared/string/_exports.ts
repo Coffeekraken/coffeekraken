@@ -13,7 +13,7 @@ import __namespaceCompliant from './namespaceCompliant';
 import __paramCase from './paramCase';
 import __parse from './parse';
 import __printf from './printf';
-import __replaceTokensWith from './replaceTokensWith';
+import __replaceTokens from './replaceTokens';
 import __rtrim from './rtrim';
 import __simplify from './simplify';
 import __simplifySpecialChars from './simplifySpecialChars';
@@ -47,7 +47,7 @@ export {
     __paramCase,
     __parse,
     __printf,
-    __replaceTokensWith,
+    __replaceTokens,
     __rtrim,
     __simplify,
     __simplifySpecialChars,

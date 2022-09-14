@@ -4,7 +4,7 @@ import ltrim from '../string/ltrim';
 
 /**
  * @name        queryStringToObject
- * @namespace            js.url
+ * @namespace            shared.url
  * @type      Function
  * @platform          js
  * @platform          node
@@ -20,17 +20,14 @@ import ltrim from '../string/ltrim';
  * @todo      tests
  *
  * @example    js
- * import queryStringToObject from '@coffeekraken/sugar/js/string/queryStringToObject'
- * queryStringToObject('?var1=value1&var2=value2') // { var1: 'value1', var2: 'value2' }
- *
- * @snippet     js
- * Sugar.js.url.queryStringToObject($1)
+ * import { __queryStringToObject } from '@coffeekraken/sugar/url'
+ * __queryStringToObject('?var1=value1&var2=value2') // { var1: 'value1', var2: 'value2' }
  *
  * @see  	http://stackoverflow.com/questions/8648892/convert-url-parameters-to-a-javascript-object
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function queryStringToObject(str) {
+export default function __queryStringToObject(str) {
     str = ltrim(str, '?');
     str = str.replace(/%20/gm, ' ');
     str = decodeURIComponent(str);
@@ -49,4 +46,3 @@ function queryStringToObject(str) {
     }
     return obj;
 }
-export default queryStringToObject;

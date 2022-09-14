@@ -154,8 +154,14 @@
             "import": "./dist/pkg/esm/shared/console/_exports.js"
         },
         "./convert": {
-            "require": "./dist/pkg/cjs/shared/convert/_exports.js",
-            "import": "./dist/pkg/esm/shared/convert/_exports.js"
+            "node": {
+                "require": "./dist/pkg/cjs/node/convert/_exports.js",
+                "import": "./dist/pkg/esm/node/convert/_exports.js"
+            },
+            "js": {
+                "require": "./dist/pkg/cjs/js/convert/_exports.js",
+                "import": "./dist/pkg/esm/js/convert/_exports.js"
+            }
         },
         "./crypto": {
             "require": "./dist/pkg/cjs/shared/crypto/_exports.js",
@@ -369,11 +375,33 @@
                 "import": "./dist/pkg/esm/node/terminal/_exports.js"
             }
         },
+        "./token": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/token/_exports.js",
+                "import": "./dist/pkg/esm/node/token/_exports.js"
+            },
+            "default": {
+                "require": "./dist/pkg/cjs/js/token/_exports.js",
+                "import": "./dist/pkg/esm/js/token/_exports.js"
+            }
+        },
         "./type": {
             "node": {
                 "require": "./dist/pkg/cjs/node/type/_exports.js",
                 "import": "./dist/pkg/esm/node/type/_exports.js"
+            },
+            "default": {
+                "require": "./dist/pkg/cjs/js/type/_exports.js",
+                "import": "./dist/pkg/esm/js/type/_exports.js"
             }
+        },
+        "./url": {
+            "require": "./dist/pkg/cjs/shared/url/_exports.js",
+            "import": "./dist/pkg/esm/shared/url/_exports.js"
+        },
+        "./version": {
+            "require": "./dist/pkg/cjs/shared/version/_exports.js",
+            "import": "./dist/pkg/esm/shared/version/_exports.js"
         },
 
 

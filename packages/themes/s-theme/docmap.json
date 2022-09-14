@@ -28,6 +28,7 @@
             "@coffeekraken/s-data-file-js",
             "@coffeekraken/s-data-file-php",
             "@coffeekraken/s-datetime-picker-component",
+            "@coffeekraken/s-deps-feature",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
@@ -58,6 +59,7 @@
             "@coffeekraken/s-panel-component",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-export-plugin",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
@@ -75,6 +77,7 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-template-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
@@ -9604,6 +9607,30 @@
                 "extension": "config",
                 "relPath": "src/config/themeUi.config.ts"
             },
+            "@coffeekraken.s-theme.config.themeUi.button.defaultColor": {
+                "id": "@coffeekraken.s-theme.config.themeUi.button.defaultColor",
+                "name": "defaultColor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.defaultColor]",
+                "description": "Specify the default style for your button ui",
+                "namespace": "@coffeekraken.s-theme.config.themeUi.button",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
             "@coffeekraken.s-theme.config.themeUi.button.rhythmVertical": {
                 "id": "@coffeekraken.s-theme.config.themeUi.button.rhythmVertical",
                 "name": "rhythmVertical",
@@ -9665,6 +9692,30 @@
                 },
                 "default": "solid",
                 "description": "Specify the default style for your backdrop ui",
+                "namespace": "@coffeekraken.s-theme.config.themeUi.backdrop",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.s-theme.config.themeUi.backdrop.defaultColor": {
+                "id": "@coffeekraken.s-theme.config.themeUi.backdrop.defaultColor",
+                "name": "defaultColor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Number"
+                        }
+                    ],
+                    "raw": "Number"
+                },
+                "default": "solid",
+                "description": "Specify the default color for your backdrop ui",
                 "namespace": "@coffeekraken.s-theme.config.themeUi.backdrop",
                 "since": "2.0.0",
                 "author": {
@@ -9785,6 +9836,30 @@
                 },
                 "default": "rounded",
                 "description": "Specify the default shape for your avatar ui",
+                "namespace": "@coffeekraken.s-theme.config.themeUi.avatar",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.s-theme.config.themeUi.avatar.defaultColor": {
+                "id": "@coffeekraken.s-theme.config.themeUi.avatar.defaultColor",
+                "name": "defaultColor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Number"
+                        }
+                    ],
+                    "raw": "Number"
+                },
+                "default": "solid",
+                "description": "Specify the default color for your avatar ui",
                 "namespace": "@coffeekraken.s-theme.config.themeUi.avatar",
                 "since": "2.0.0",
                 "author": {
@@ -9977,6 +10052,30 @@
                 },
                 "default": "[theme.ui.form.defaultShape]",
                 "description": "Specify the default shape for your input ui",
+                "namespace": "@coffeekraken.s-theme.config.themeUi.input",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.s-theme.config.themeUi.input.defaultColor": {
+                "id": "@coffeekraken.s-theme.config.themeUi.input.defaultColor",
+                "name": "defaultColor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.defaultColor]",
+                "description": "Specify the default style for your input ui",
                 "namespace": "@coffeekraken.s-theme.config.themeUi.input",
                 "since": "2.0.0",
                 "author": {
@@ -10276,6 +10375,30 @@
                 "extension": "config",
                 "relPath": "src/config/themeUi.config.ts"
             },
+            "@coffeekraken.s-theme.config.themeUi.radio.defaultColor": {
+                "id": "@coffeekraken.s-theme.config.themeUi.radio.defaultColor",
+                "name": "defaultColor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.form.defaultColor]",
+                "description": "Specify the default style for your radio ui",
+                "namespace": "@coffeekraken.s-theme.config.themeUi.radio",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
             "@coffeekraken.s-theme.config.themeUi.radio.rhythmVertical": {
                 "id": "@coffeekraken.s-theme.config.themeUi.radio.rhythmVertical",
                 "name": "rhythmVertical",
@@ -10492,6 +10615,30 @@
                 "extension": "config",
                 "relPath": "src/config/themeUi.config.ts"
             },
+            "@coffeekraken.s-theme.config.themeUi.checkbox.defaultColor": {
+                "id": "@coffeekraken.s-theme.config.themeUi.checkbox.defaultColor",
+                "name": "defaultColor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.defaultColor]",
+                "description": "Specify the default style for your checkbox ui",
+                "namespace": "@coffeekraken.s-theme.config.themeUi.checkbox",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
             "@coffeekraken.s-theme.config.themeUi.checkbox.outline": {
                 "id": "@coffeekraken.s-theme.config.themeUi.checkbox.outline",
                 "name": "outline",
@@ -10696,6 +10843,30 @@
                     "raw": "Number"
                 },
                 "default": "[theme.ui.form.defaultShape]",
+                "description": "Specify the default style for your range ui",
+                "namespace": "@coffeekraken.s-theme.config.themeUi.range",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.s-theme.config.themeUi.range.defaultColor": {
+                "id": "@coffeekraken.s-theme.config.themeUi.range.defaultColor",
+                "name": "defaultColor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.form.defaultColor]",
                 "description": "Specify the default style for your range ui",
                 "namespace": "@coffeekraken.s-theme.config.themeUi.range",
                 "since": "2.0.0",
@@ -10948,6 +11119,30 @@
                 "extension": "config",
                 "relPath": "src/config/themeUi.config.ts"
             },
+            "@coffeekraken.s-theme.config.themeUi.label.defaultColor": {
+                "id": "@coffeekraken.s-theme.config.themeUi.label.defaultColor",
+                "name": "defaultColor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.defaultColor]",
+                "description": "Specify the default style for your label ui",
+                "namespace": "@coffeekraken.s-theme.config.themeUi.label",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
             "@coffeekraken.s-theme.config.themeUi.label.depth": {
                 "id": "@coffeekraken.s-theme.config.themeUi.label.depth",
                 "name": "depth",
@@ -11188,6 +11383,30 @@
                 "extension": "config",
                 "relPath": "src/config/themeUi.config.ts"
             },
+            "@coffeekraken.s-theme.config.themeUi.select.defaultColor": {
+                "id": "@coffeekraken.s-theme.config.themeUi.select.defaultColor",
+                "name": "defaultColor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.form.defaultColor]",
+                "description": "Specify the default style for your select ui",
+                "namespace": "@coffeekraken.s-theme.config.themeUi.select",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
             "@coffeekraken.s-theme.config.themeUi.select.outline": {
                 "id": "@coffeekraken.s-theme.config.themeUi.select.outline",
                 "name": "outline",
@@ -11369,6 +11588,30 @@
                 },
                 "default": "[theme.ui.form.defaultShape]",
                 "description": "Specify the default shape for your switch ui",
+                "namespace": "@coffeekraken.s-theme.config.themeUi.switch",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.s-theme.config.themeUi.switch.defaultColor": {
+                "id": "@coffeekraken.s-theme.config.themeUi.switch.defaultColor",
+                "name": "defaultColor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.form.defaultColor]",
+                "description": "Specify the default style for your switch ui",
                 "namespace": "@coffeekraken.s-theme.config.themeUi.switch",
                 "since": "2.0.0",
                 "author": {
@@ -11633,6 +11876,30 @@
                 },
                 "default": "default",
                 "description": "Specify the default shape for your dropdown ui",
+                "namespace": "@coffeekraken.s-theme.config.themeUi.dropdown",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.s-theme.config.themeUi.dropdown.defaultColor": {
+                "id": "@coffeekraken.s-theme.config.themeUi.dropdown.defaultColor",
+                "name": "defaultColor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.defaultColor]",
+                "description": "Specify the default style for your dropdown ui",
                 "namespace": "@coffeekraken.s-theme.config.themeUi.dropdown",
                 "since": "2.0.0",
                 "author": {
@@ -12076,6 +12343,30 @@
                 "extension": "config",
                 "relPath": "src/config/themeUi.config.ts"
             },
+            "@coffeekraken.s-theme.config.themeUi.fsTree.defaultColor": {
+                "id": "@coffeekraken.s-theme.config.themeUi.fsTree.defaultColor",
+                "name": "defaultColor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.defaultColor]",
+                "description": "Specify the default style for your fsTree ui",
+                "namespace": "@coffeekraken.s-theme.config.themeUi.fsTree",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
             "@coffeekraken.s-theme.config.themeUi.fsTree.depth": {
                 "id": "@coffeekraken.s-theme.config.themeUi.fsTree.depth",
                 "name": "depth",
@@ -12316,6 +12607,30 @@
                 "extension": "config",
                 "relPath": "src/config/themeUi.config.ts"
             },
+            "@coffeekraken.s-theme.config.themeUi.tabs.defaultColor": {
+                "id": "@coffeekraken.s-theme.config.themeUi.tabs.defaultColor",
+                "name": "defaultColor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.defaultColor]",
+                "description": "Specify the default style for your tabs ui",
+                "namespace": "@coffeekraken.s-theme.config.themeUi.tabs",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
             "@coffeekraken.s-theme.config.themeUi.tabs.depth": {
                 "id": "@coffeekraken.s-theme.config.themeUi.tabs.depth",
                 "name": "depth",
@@ -12378,222 +12693,6 @@
                 "default": "[theme.ui.default.rhythmVertical]",
                 "description": "Specify the default vertical rhythm for your tabe ui",
                 "namespace": "@coffeekraken.s-theme.config.themeUi.tabe",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-theme.config.themeUi.terminal.paddingInline": {
-                "id": "@coffeekraken.s-theme.config.themeUi.terminal.paddingInline",
-                "name": "paddingInline",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.paddingInline]",
-                "description": "Specify the default padding inline for terminal ui",
-                "namespace": "@coffeekraken.s-theme.config.themeUi.terminal",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-theme.config.themeUi.terminal.paddingBlock": {
-                "id": "@coffeekraken.s-theme.config.themeUi.terminal.paddingBlock",
-                "name": "paddingBlock",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.paddingBlock]",
-                "description": "Specify the default padding block for terminal ui",
-                "namespace": "@coffeekraken.s-theme.config.themeUi.terminal",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-theme.config.themeUi.terminal.borderRadius": {
-                "id": "@coffeekraken.s-theme.config.themeUi.terminal.borderRadius",
-                "name": "borderRadius",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.borderRadius]",
-                "description": "Specify the default border radius for terminal ui",
-                "namespace": "@coffeekraken.s-theme.config.themeUi.terminal",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-theme.config.themeUi.terminal.borderWidth": {
-                "id": "@coffeekraken.s-theme.config.themeUi.terminal.borderWidth",
-                "name": "borderWidth",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.borderWidth]",
-                "description": "Specify the default border width for terminal ui",
-                "namespace": "@coffeekraken.s-theme.config.themeUi.terminal",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-theme.config.themeUi.terminal.transition": {
-                "id": "@coffeekraken.s-theme.config.themeUi.terminal.transition",
-                "name": "transition",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.transition]",
-                "description": "Specify the default transition for terminal ui",
-                "namespace": "@coffeekraken.s-theme.config.themeUi.terminal",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-theme.config.themeUi.terminal.defaultColor": {
-                "id": "@coffeekraken.s-theme.config.themeUi.terminal.defaultColor",
-                "name": "defaultColor",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.defaultColor]",
-                "description": "Specify the default color for terminal ui",
-                "namespace": "@coffeekraken.s-theme.config.themeUi.terminal",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-theme.config.themeUi.terminal.defaultStyle": {
-                "id": "@coffeekraken.s-theme.config.themeUi.terminal.defaultStyle",
-                "name": "defaultStyle",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Number"
-                        }
-                    ],
-                    "raw": "Number"
-                },
-                "default": "[theme.ui.default.defaultStyle]",
-                "description": "Specify the default style for your terminal ui",
-                "namespace": "@coffeekraken.s-theme.config.themeUi.terminal",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-theme.config.themeUi.terminal.depth": {
-                "id": "@coffeekraken.s-theme.config.themeUi.terminal.depth",
-                "name": "depth",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.depth]",
-                "description": "Specify the default depth for terminal items",
-                "namespace": "@coffeekraken.s-theme.config.themeUi.terminal",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-theme.config.themeUi.terminal.rhythmVertical": {
-                "id": "@coffeekraken.s-theme.config.themeUi.terminal.rhythmVertical",
-                "name": "rhythmVertical",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Object"
-                        }
-                    ],
-                    "raw": "Object"
-                },
-                "default": "[theme.ui.default.rhythmVertical]",
-                "description": "Specify the default vertical rhythm for your terminal ui",
-                "namespace": "@coffeekraken.s-theme.config.themeUi.terminal",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -12772,6 +12871,30 @@
                 "extension": "config",
                 "relPath": "src/config/themeUi.config.ts"
             },
+            "@coffeekraken.s-theme.config.themeUi.tooltip.defaultColor": {
+                "id": "@coffeekraken.s-theme.config.themeUi.tooltip.defaultColor",
+                "name": "defaultColor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.defaultColor]",
+                "description": "Specify the default style for your tooltip ui",
+                "namespace": "@coffeekraken.s-theme.config.themeUi.tooltip",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
             "@coffeekraken.s-theme.config.themeUi.tooltip.depth": {
                 "id": "@coffeekraken.s-theme.config.themeUi.tooltip.depth",
                 "name": "depth",
@@ -12929,30 +13052,6 @@
                 },
                 "default": "[theme.ui.default.transition]",
                 "description": "Specify the default transition for code ui",
-                "namespace": "@coffeekraken.s-theme.config.themeUi.code",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-theme.config.themeUi.code.defaultColor": {
-                "id": "@coffeekraken.s-theme.config.themeUi.code.defaultColor",
-                "name": "defaultColor",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.defaultColor]",
-                "description": "Specify the default color for code ui",
                 "namespace": "@coffeekraken.s-theme.config.themeUi.code",
                 "since": "2.0.0",
                 "author": {
@@ -13216,7 +13315,7 @@
                     "raw": "String"
                 },
                 "default": "accent",
-                "description": "Specify the default color for your blockquote ui",
+                "description": "Specify the default style for your blockquote ui",
                 "namespace": "@coffeekraken.s-theme.config.themeUi.blockquote",
                 "since": "2.0.0",
                 "author": {
@@ -13660,6 +13759,30 @@
                 "extension": "config",
                 "relPath": "src/config/themeUi.config.ts"
             },
+            "@coffeekraken.s-theme.config.themeUi.badge.defaultColor": {
+                "id": "@coffeekraken.s-theme.config.themeUi.badge.defaultColor",
+                "name": "defaultColor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.defaultColor]",
+                "description": "Specify the default style for your badge ui",
+                "namespace": "@coffeekraken.s-theme.config.themeUi.badge",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
             "@coffeekraken.s-theme.config.themeUi.badge.depth": {
                 "id": "@coffeekraken.s-theme.config.themeUi.badge.depth",
                 "name": "depth",
@@ -13745,6 +13868,30 @@
                 },
                 "default": "linear",
                 "description": "Specify the easing of a loader",
+                "namespace": "@coffeekraken.s-theme.config.themeUi.loader",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.s-theme.config.themeUi.loader.defaultColor": {
+                "id": "@coffeekraken.s-theme.config.themeUi.loader.defaultColor",
+                "name": "defaultColor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.defaultColor]",
+                "description": "Specify the default style for your loader ui",
                 "namespace": "@coffeekraken.s-theme.config.themeUi.loader",
                 "since": "2.0.0",
                 "author": {
@@ -13852,6 +13999,27 @@
                 "extension": "config",
                 "relPath": "src/config/themeUi.config.ts",
                 "children": {
+                    "defaultcolor": {
+                        "id": "@coffeekraken.s-theme.config.themeUi.switch.defaultColor",
+                        "name": "defaultColor",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "default": "[theme.ui.default.defaultColor]",
+                        "description": "Specify the default style for your switch ui",
+                        "namespace": "@coffeekraken.s-theme.config.themeUi.switch",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
                     "duration": {
                         "id": "@coffeekraken.s-theme.config.themeUi.loaderDrop.duration",
                         "name": "duration",

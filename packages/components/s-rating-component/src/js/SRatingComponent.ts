@@ -152,7 +152,9 @@ export function define(
     props: Partial<ISRatingComponentProps> = {},
     tagName = 's-rating',
 ) {
-    __SLitComponent.setDefaultProps(tagName, props);
-    // @ts-ignore
-    customElements.define(tagName, SRatingComponent);
+    __SLitComponent.define(SRatingComponent, props, tagName);
+
+    // __SLitComponent.setDefaultProps(tagName, props);
+    // // @ts-ignore
+    // customElements.define(tagName, SRatingComponent);
 }

@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __deepMerge from '../../node/object/deepMerge';
+import __deepMerge from '../object/deepMerge';
 
 /**
  * @name            replaceTokens

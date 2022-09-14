@@ -7,7 +7,8 @@ import { __sha256 } from '@coffeekraken/sugar/crypto';
 import { __dirname, __folderHash, __folderPath } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __packageCacheDir, __packageRootDir } from '@coffeekraken/sugar/path';
-import { __replaceTokens, __unquote } from '@coffeekraken/sugar/string';
+import { __unquote } from '@coffeekraken/sugar/string';
+import { __replaceTokens } from '@coffeekraken/sugar/token';
 import __fs from 'fs';
 import __glob from 'glob';
 import __path from 'path';
@@ -443,9 +444,11 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                     const folderObj = mixinsFolders[j];
 
                     if (!folderObj.path) continue;
-                    const finalPath = __path.resolve(
-                        packageSugarJson.metas.folderPath,
-                        folderObj.path,
+                    const finalPath = __replaceTokens(
+                        __path.resolve(
+                            packageSugarJson.metas.folderPath,
+                            folderObj.path,
+                        ),
                     );
 
                     await _loadFolder(finalPath, 'mixins');
@@ -458,9 +461,11 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                     const folderObj = functionsFolders[j];
 
                     if (!folderObj.path) continue;
-                    const finalPath = __path.resolve(
-                        packageSugarJson.metas.folderPath,
-                        folderObj.path,
+                    const finalPath = __replaceTokens(
+                        __path.resolve(
+                            packageSugarJson.metas.folderPath,
+                            folderObj.path,
+                        ),
                     );
 
                     await _loadFolder(finalPath, 'functions');

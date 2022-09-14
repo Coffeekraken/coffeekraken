@@ -25,8 +25,8 @@ import __parseAuthorString from './parseAuthorString';
  * @todo      tests
  *
  * @example       js
- * import formatPackageJson from '@coffeekraken/sugar/shared/package/formatPackageJson';
- * formatPackageJson({
+ * import { __formatPackageJson } from '@coffeekraken/sugar/package';
+ * __formatPackageJson({
  *    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)"
  * }); // => {
  *    "author": {
@@ -39,7 +39,7 @@ import __parseAuthorString from './parseAuthorString';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function formatPackageJson(json) {
+export default function __formatPackageJson(json) {
     // author
     if (json.author && typeof json.author === 'string') {
         json.author = __parseAuthorString(json.author);
@@ -66,4 +66,3 @@ function formatPackageJson(json) {
 
     return json;
 }
-export default formatPackageJson;

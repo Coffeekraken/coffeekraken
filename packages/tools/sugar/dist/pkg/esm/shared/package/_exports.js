@@ -1,0 +1,4 @@
+import __formatPackageJson from './formatPackageJson';
+import __parseAuthorString from './parseAuthorString';
+export { __formatPackageJson, __parseAuthorString };
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sbUJBQW1CLE1BQU0scUJBQXFCLENBQUM7QUFDdEQsT0FBTyxtQkFBbUIsTUFBTSxxQkFBcUIsQ0FBQztBQUV0RCxPQUFPLEVBQUUsbUJBQW1CLEVBQUUsbUJBQW1CLEVBQUUsQ0FBQyJ9

@@ -1,9 +1,9 @@
 // @ts-nocheck
 
+import { __readJsonSync } from '@coffeekraken/sugar/fs';
 import __fs from 'fs';
 import __objectHash from '../../shared/object/objectHash';
 import __formatPackageJson from '../../shared/package/formatPackageJson';
-import { __readJsonSync } from '@coffeekraken/sugar/fs';
 import __packageJson from '../npm/packageJson';
 import __packageRoot from './rootPath';
 

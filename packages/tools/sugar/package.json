@@ -323,6 +323,10 @@
             "node": {
                 "require": "./dist/pkg/cjs/node/package/_exports.js",
                 "import": "./dist/pkg/esm/node/package/_exports.js"
+            },
+            "default": {
+                "require": "./dist/pkg/cjs/js/package/_exports.js",
+                "import": "./dist/pkg/esm/js/package/_exports.js"
             }
         },
         "./path": {

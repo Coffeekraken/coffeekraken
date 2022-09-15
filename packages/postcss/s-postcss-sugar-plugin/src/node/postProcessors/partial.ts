@@ -62,17 +62,17 @@ export default async function ({ root, sharedData, settings, cacheDir }) {
                 node.text.trim().match(/SPARTIAL:/)
             ) {
                 inPartial = true;
-                node.remove();
+                // node.remove();
                 return false;
             } else if (
                 node.type === 'comment' &&
                 node.text.trim().match(/SENDPARTIAL:/)
             ) {
                 inPartial = false;
-                node.remove();
+                // node.remove();
                 return false;
             } else if (inPartial) {
-                node.remove();
+                // node.remove();
                 return false;
             }
             return true;

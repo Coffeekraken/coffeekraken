@@ -32,9 +32,17 @@ export default function __preventViewportMovement($elm: HTMLElement): any {
         $elm.removeEventListener('touchend', cb);
         $elm.removeEventListener('touchcancel', cb);
     }
-    $elm.addEventListener('touchstart', cb);
-    $elm.addEventListener('touchmove', cb);
-    $elm.addEventListener('touchend', cb);
-    $elm.addEventListener('touchcancel', cb);
+    $elm.addEventListener('touchstart', cb, {
+        passive: true,
+    });
+    $elm.addEventListener('touchmove', cb, {
+        passive: true,
+    });
+    $elm.addEventListener('touchend', cb, {
+        passive: true,
+    });
+    $elm.addEventListener('touchcancel', cb, {
+        passive: true,
+    });
     return cancel;
 }

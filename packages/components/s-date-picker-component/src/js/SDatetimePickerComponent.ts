@@ -8,6 +8,10 @@ import type {
 } from '@coffeekraken/sugar/js/dom/ui/makeFloat';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __dateFormat from 'dateformat';
+import {
+    parse as __parseDate,
+    format as __formatDate,
+} from 'date-format-parse';
 import { css, html, unsafeCSS } from 'lit';
 import __SDatetimePickerComponentInterface from './interface/SDatetimePickerComponentInterface';
 
@@ -55,7 +59,8 @@ export interface ISDatetimePickerComponentProps {
  * @platform            html
  * @status              beta
  *
- * This component specify a datetime picker.
+ * This component specify a datetime picker. It make uses of (this package)[https://www.npmjs.com/package/date-format-parse] behind the scene to
+ * parse and format dates.
  *
  * @feature           Full support for sugar theming system for easy integration
  *
@@ -149,6 +154,7 @@ export interface ISDatetimePickerComponentProps {
  *      <s-datetime-picker placeholder="Choose a date" input button dir="rtl"></s-datetime-picker>
  * </label>
  *
+ * @see         https://www.npmjs.com/package/date-format-parse
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
@@ -168,16 +174,19 @@ export default class SDatetimePickerComponent extends __SLitComponent {
         `;
     }
 
-    state = {
-        year: 0,
-        month: 0,
-        day: 0,
-        hour: 12,
-        minutes: 0,
-        displayedYear: 0,
-        displayedMonth: 0,
-        format: undefined,
-    };
+    static get state() {
+        return {
+            year: 0,
+            month: 0,
+            day: 0,
+            hour: 12,
+            minutes: 0,
+            displayedYear: 0,
+            displayedMonth: 0,
+            format: undefined,
+        };
+    }
+
     _originalState = {};
 
     _floatApi: IFloatApi;
@@ -210,11 +219,11 @@ export default class SDatetimePickerComponent extends __SLitComponent {
         this._$button = this.querySelector('button');
         this._$button?.addEventListener('click', (e) => e.preventDefault());
         this._hasButton = this._$button !== null;
-
+    }
+    async mount() {
         // restore state
         this._restoreState();
     }
-    async mount() {}
     async firstUpdated() {
         // save the original state
         Object.assign(this._originalState, this.state);
@@ -274,10 +283,10 @@ export default class SDatetimePickerComponent extends __SLitComponent {
     }
 
     _isDateNeeded(): boolean {
-        return this.props.format.match(/(d{1,4}|D{3,4}|m{1,4}|yy|yyyy)/);
+        return this.props.format.match(/(d{1,4}|D{1,2}|M{1,4}|Y{2,4})/);
     }
     _isTimeNeeded(): boolean {
-        return this.props.format.match(/(h{1,2}|H{1,2}|M{1,2})/);
+        return this.props.format.match(/(h{1,2}|H{1,2}|m{1,2}|s{1,2}|S{1,3})/);
     }
 
     _isSelectedDatetimeValid(): boolean {
@@ -549,7 +558,7 @@ export default class SDatetimePickerComponent extends __SLitComponent {
             return;
         }
 
-        this._$input.value = __dateFormat(
+        this._$input.value = __formatDate(
             new Date(
                 this.state.year,
                 this.state.month,
@@ -588,7 +597,9 @@ export default class SDatetimePickerComponent extends __SLitComponent {
 
             let date = new Date();
             if (this._$input?.value) {
-                date = new Date(this._$input.valud);
+                date = __parseDate(this._$input.value, this.props.format, {
+                    backupDate: new Date(),
+                });
             }
 
             this.state.year = date.getFullYear();

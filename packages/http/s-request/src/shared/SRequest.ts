@@ -145,30 +145,7 @@ export default class SRequest extends __SClass {
         // get the response content-type header
         const contentType = response.headers['content-type'] || 'text/plain';
 
-        // try to get an hash in the settings url
-        const hash =
-            this._currentRequestSettings.url.indexOf('#') !== -1
-                ? this._currentRequestSettings.url.split('#')[1]
-                : false;
-
-        // if a hash exist, check that we are in the browser to have access to the document and querySelector method
-        if (
-            contentType === 'text/html' &&
-            hash !== false &&
-            document !== undefined &&
-            document.querySelector !== undefined
-        ) {
-            const $html = __stringToNode(response.data);
-            if ($html.id === hash) {
-                finalResponse = __htmlToString($html);
-            } else {
-                const $part = $html.querySelector(`#${hash}`);
-                if ($part) {
-                    finalResponse = __htmlToString($part);
-                }
-            }
-        }
-
+        // try to parse json
         try {
             finalResponse = JSON.parse(response.data);
         } catch (e) {}

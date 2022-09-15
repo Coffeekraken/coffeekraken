@@ -5,6 +5,7 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import __SFiltrableInputComponentInterface from './interface/SFiltrableInputComponentInterface';
+import { __isFocusWithin } from '@coffeekraken/sugar/dom';
 
 import __cursorToEnd from '@coffeekraken/sugar/js/dom/input/cursorToEnd';
 
@@ -250,13 +251,20 @@ export default class SFiltrableInputComponent extends __SLitComponent {
                     break;
             }
         };
+
+         // if we have the focus in the
+         if (__isFocusWithin(this)) {
+            setTimeout(() => {
+                this.$input.focus();
+            });
+        }
     }
 
     async firstUpdated() {
         // input
         this.$input = <any>this.querySelector('input');
         this.$input.setAttribute('autocomplete', 'off');
-
+        
         // @ts-ignore
         this.$form = this.$input.form;
         // prevent from sending form if search is opened
@@ -276,6 +284,9 @@ export default class SFiltrableInputComponent extends __SLitComponent {
 
         // @ts-ignore
         this.$input.addEventListener('keyup', (e) => {
+            if (this.state.isActive) {
+                return;
+            }
             this.state.isActive = true;
             // @ts-ignore
             const value = e.target.value;
@@ -284,6 +295,9 @@ export default class SFiltrableInputComponent extends __SLitComponent {
             this.filterItems();
         });
         this.$input.addEventListener('focus', (e) => {
+            if (this.state.isActive) {
+                return;
+            }
             // @ts-ignore
             const value = e.target.value;
             this.state.value = value;
@@ -316,9 +330,13 @@ export default class SFiltrableInputComponent extends __SLitComponent {
         this.prepend(this.$input);
         this.filterItems();
 
-        document.addEventListener('scroll', () => {
-            this._updateListSizeAndPosition();
-        });
+        document.addEventListener(
+            'scroll',
+            () => {
+                this._updateListSizeAndPosition();
+            },
+            ,
+        );
         this._updateListSizeAndPosition();
 
         __onScrollEnd(this.$list, () => {

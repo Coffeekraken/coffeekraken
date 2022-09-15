@@ -584,13 +584,14 @@ export default class SSliderComponent extends __SLitComponent {
                     });
                 },
                 {
+                    scopes: false,
                     rootNode: this,
                 },
             );
         });
         // goto
         __querySelectorLive(
-            '[s-slider-goto]',
+            `[s-slider-goto]:not(s-slider#${this.id} .s-slider [s-slider-goto])`,
             ($elm) => {
                 $elm.addEventListener('pointerup', (e) => {
                     const slideIdx =
@@ -599,6 +600,7 @@ export default class SSliderComponent extends __SLitComponent {
                 });
             },
             {
+                scopes: false,
                 rootNode: this,
             },
         );

@@ -16739,13 +16739,13 @@
                     "name": "WhenInteractSettingsInterface",
                     "description": "",
                     "definition": {
-                        "mouseover": {
-                            "description": "Specify if the mouseover event has to be used",
+                        "pointerover": {
+                            "description": "Specify if the pointerover event has to be used",
                             "type": "Boolean",
                             "default": true
                         },
-                        "mouseout": {
-                            "description": "Specify if the mouseout event has to be used",
+                        "pointerout": {
+                            "description": "Specify if the pointerout event has to be used",
                             "type": "Boolean",
                             "default": true
                         },
@@ -20330,13 +20330,13 @@
                     "name": "WhenInteractSettingsInterface",
                     "description": "",
                     "definition": {
-                        "mouseover": {
-                            "description": "Specify if the mouseover event has to be used",
+                        "pointerover": {
+                            "description": "Specify if the pointerover event has to be used",
                             "type": "Boolean",
                             "default": true
                         },
-                        "mouseout": {
-                            "description": "Specify if the mouseout event has to be used",
+                        "pointerout": {
+                            "description": "Specify if the pointerout event has to be used",
                             "type": "Boolean",
                             "default": true
                         },

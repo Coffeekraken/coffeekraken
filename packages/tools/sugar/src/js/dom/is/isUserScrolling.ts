@@ -28,7 +28,7 @@
  */
 let _isUserScrolling = false,
     _isUserScrollingTimeout;
-document.addEventListener('wheel', (e) => {
+document?.addEventListener?.('wheel', (e) => {
     _isUserScrolling = true;
     clearTimeout(_isUserScrollingTimeout);
     _isUserScrollingTimeout = setTimeout(() => {
@@ -36,7 +36,7 @@ document.addEventListener('wheel', (e) => {
     }, 200);
 });
 
-document.addEventListener('touchmove', (e) => {
+document?.addEventListener?.('touchmove', (e) => {
     _isUserScrolling = true;
     clearTimeout(_isUserScrollingTimeout);
     _isUserScrollingTimeout = setTimeout(() => {

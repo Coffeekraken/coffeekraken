@@ -71,7 +71,8 @@
                     Our datetime picker support all <span class="s-tc:complementary">ISO formats</span>,<br />disabling weekends or <span class="s-tc:accent">specific dates</span> as well as min and max date...<br />All of this in a nice and clean package.
                 </p>
 
-                <s-datetime-picker input button calendar disable="weekend">
+                <s-datetime-picker calendar disable="weekend">
+                    <input type="text" class="s-input" placeholder="YYYY-MM-DD" value="2022-09-10" />
                 </s-datetime-picker>
 
                 <br />
@@ -105,7 +106,8 @@
                     Out color picker support multiple color format like <span class="s-tc:accent">HSL(A)</span>, <span class="s-tc:complementary">RGB(A)</span> and <span class="s-tc:accent">HEX(A)</span>. All of this with a lot more control options.
                 </p>
 
-                <s-color-picker id="coco" input button class="s-color:main" value="hsla(30,100,50,1)" format="hsla">
+                <s-color-picker class="s-color:main" format="hsla">
+                    <input type="text" class="s-input" placeholder="hsla(30,100,50,1)" value="hsla(30,100,50,1)" />
                 </s-color-picker>
 
                 <br />

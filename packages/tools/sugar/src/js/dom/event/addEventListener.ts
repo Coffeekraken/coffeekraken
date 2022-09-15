@@ -42,7 +42,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function __addEventListener(
+export default function __addEventListener(
     $elm,
     eventNames,
     callback = null,
@@ -85,4 +85,3 @@ function __addEventListener(
 
     return promise;
 }
-export default addEventListener;

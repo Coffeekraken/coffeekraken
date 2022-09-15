@@ -1,4 +1,6 @@
 @font-face {
+  font-display: swap;
+
   font-family: 'sugar-fonticon';
   src: url('/dist/fonts/sugar-icons/sugar-fonticon.eot?1722ee8f4b8ad07ef7f7af5d7dbde88b#iefix')
       format('embedded-opentype'),

@@ -2,10 +2,6 @@
     display: inline-block;
     position: relative;
 
-    &:not([mounted]) > * {
-        display: none;
-    }
-
     &[disabled] {
         pointer-events: none;
     }

@@ -68,7 +68,8 @@ function assets($assets, $cacheBuster = '')
             case 'js':
             case 'ts':
                 $type = isset($asset->type) ? $asset->type : 'text/javascript';
-                $nomodule = isset($asset->nomodule) ? 'nomodule' : '';
+                $nomodule = isset($asset->nomodule) ? 'nomodule ' : '';
+                $defer = $asset->defer ? 'defer ' : '';
 
                 if (
                     \Sugar\is\absolutePath($finalSrc) ||
@@ -82,6 +83,7 @@ function assets($assets, $cacheBuster = '')
                             $name .
                             '" ' .
                             $nomodule .
+                            $defer .
                             ' src="' .
                             \Sugar\string\replaceTokens($finalSrc) .
                             '"></script>'
@@ -95,6 +97,7 @@ function assets($assets, $cacheBuster = '')
                             $name .
                             '" ' .
                             $nomodule .
+                            $defer .
                             ' src="/' .
                             \Sugar\string\replaceTokens($finalSrc) .
                             '"></script>'

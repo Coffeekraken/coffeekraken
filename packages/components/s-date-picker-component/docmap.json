@@ -27,6 +27,7 @@
             "@coffeekraken/s-data-file-generic",
             "@coffeekraken/s-data-file-js",
             "@coffeekraken/s-data-file-php",
+            "@coffeekraken/s-deps-feature",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
@@ -57,6 +58,7 @@
             "@coffeekraken/s-panel-component",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-export-plugin",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
@@ -74,6 +76,7 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-template-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -369,7 +372,7 @@
                         "description": ""
                     }
                 ],
-                "description": "This component specify a datetime picker.",
+                "description": "This component specify a datetime picker. It make uses of (this package)[https://www.npmjs.com/package/date-format-parse] behind the scene to\nparse and format dates.",
                 "namespace": "@coffeekraken.s-datetime-picker-component.js",
                 "status": "beta",
                 "example": [
@@ -468,7 +471,7 @@
                         "format": {
                             "description": "Specify the format of the color you want as end in the input value. Can be \"hex\", \"hexa\", \"rgb\", \"rgba\", \"hsl\" or \"hsla\"",
                             "type": "String",
-                            "default": "yyyy-mm-dd"
+                            "default": "YYYY-MM-DD"
                         },
                         "inline": {
                             "description": "Specify if you want to initalize the color picker inline or if you want it to be displayed only when the focus is in the input",
@@ -716,7 +719,7 @@
                         "format": {
                             "description": "Specify the format of the color you want as end in the input value. Can be \"hex\", \"hexa\", \"rgb\", \"rgba\", \"hsl\" or \"hsla\"",
                             "type": "String",
-                            "default": "yyyy-mm-dd"
+                            "default": "YYYY-MM-DD"
                         },
                         "inline": {
                             "description": "Specify if you want to initalize the color picker inline or if you want it to be displayed only when the focus is in the input",

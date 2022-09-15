@@ -403,8 +403,6 @@
             "require": "./dist/pkg/cjs/shared/version/_exports.js",
             "import": "./dist/pkg/esm/shared/version/_exports.js"
         },
-
-
         "./shared/*": {
             "require": "./dist/pkg/cjs/shared/*.js",
             "import": "./dist/pkg/esm/shared/*.js"

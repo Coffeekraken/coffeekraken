@@ -126,6 +126,12 @@ export default async function ({ root, sharedData, settings }) {
     const cssPath = `${fantasticonConfig.outputDir}/${fantasticonConfig.name}.css`;
     let cssStr = __fs.readFileSync(cssPath, 'utf8').toString();
 
+    // adding font-display: swap;
+    cssStr = cssStr.replace(
+        /@font-face\s?\{/,
+        '@font-face {\nfont-display: swap;\n',
+    );
+
     // replace some parts in the output css
     cssStr = cssStr.replace(/\.s-icon\.--/gm, '.s-icon-');
     cssStr = cssStr.replace(

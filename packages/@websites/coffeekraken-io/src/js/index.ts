@@ -4,7 +4,7 @@ import { define as __SCodeExampleWebcomponent } from '@coffeekraken/s-code-examp
 import { define as __SColorPickerComponent } from '@coffeekraken/s-color-picker-component';
 import { define as __SDatetimePickerComponent } from '@coffeekraken/s-datetime-picker-component';
 import __SDepsFeature, {
-    define as __sDepsFeatureDefine,
+  define as __sDepsFeatureDefine,
 } from '@coffeekraken/s-deps-feature';
 import __SFeature from '@coffeekraken/s-feature';
 import { define as __SFiltrableInputComponent } from '@coffeekraken/s-filtrable-input-component';
@@ -16,8 +16,8 @@ import { define as __SRatingComponent } from '@coffeekraken/s-rating-component';
 import { define as __sRefocusFeature } from '@coffeekraken/s-refocus-feature';
 import { define as __SScrollComponent } from '@coffeekraken/s-scroll-component';
 import {
-    define as __SSliderComponent,
-    SSliderSlideableBehavior,
+  define as __SSliderComponent,
+  SSliderSlideableBehavior,
 } from '@coffeekraken/s-slider-component';
 import { define as __sSugarFeature } from '@coffeekraken/s-sugar-feature';
 import { define as __SThemeSwitcherComponent } from '@coffeekraken/s-theme-switcher-component';
@@ -41,8 +41,8 @@ import { define as __CKSettingsComponent } from './components/CkSettings';
 import __STheme from '@coffeekraken/s-theme';
 
 import {
-    __querySelectorLive,
-    __whenNearViewport,
+  __querySelectorLive,
+  __whenNearViewport,
 } from '@coffeekraken/sugar/dom';
 
 // import __SCssAnimation from '@coffeekraken/s-css-animation';
@@ -58,158 +58,167 @@ const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
 // });
 
 (async () => {
-    __SFeature.setDefaultProps('*', {
-        mountWhen: 'nearViewport',
-        // verbose: !__SEnv.is('devsCut'),
-    });
-    __SLitComponent.setDefaultProps('*', {
-        mountWhen: 'nearViewport',
-        // verbose: !__SEnv.is('devsCut'),
-    });
-    __SLitComponent.setDefaultProps(['s-panel', 'ck-settings'], {
-        mountWhen: 'direct',
-    });
-    __SLitComponent.setDefaultProps(['s-code-example'], {
-        scrollToSettings: {
-            offset: 100,
-        },
-        responsive: {
-            mobile: {
-                lines: 5,
-            },
-        },
-    });
+  __SFeature.setDefaultProps('*', {
+    mountWhen: 'nearViewport',
+    // verbose: !__SEnv.is('devsCut'),
+  });
+  __SLitComponent.setDefaultProps('*', {
+    mountWhen: 'nearViewport',
+    // verbose: !__SEnv.is('devsCut'),
+  });
+  __SLitComponent.setDefaultProps(
+    ['ck-search-input', 's-color-picker', 's-datetime-picker', 's-range'],
+    {
+      mountWhen: 'interact',
+      // verbose: !__SEnv.is('devsCut'),
+    }
+  );
+  __SLitComponent.setDefaultProps(['s-panel', 'ck-settings'], {
+    mountWhen: 'direct',
+  });
+  __SLitComponent.setDefaultProps(['s-code-example'], {
+    scrollToSettings: {
+      offset: 100,
+    },
+    responsive: {
+      mobile: {
+        lines: 5,
+      },
+    },
+  });
 
-    __querySelectorLive('[s-template]', async ($template) => {
-        await __whenNearViewport($template);
-        const $content = $template.content;
-        const $container = $content.children[0];
+  __querySelectorLive('[s-template]', async ($template) => {
+    await __whenNearViewport($template);
+    const $content = $template.content;
+    const $container = $content.children[0];
 
-        $template.parentNode.insertBefore($content, $template);
-        $container?.classList.add('s-template');
-        $container?.classList.add('ready');
-        $container?.setAttribute('ready', 'true');
-        $template.remove();
+    $template.parentNode.insertBefore($content, $template);
+    $container?.classList.add('s-template');
+    $container?.classList.add('ready');
+    $container?.setAttribute('ready', 'true');
+    $template.remove();
+  });
+
+  // init theme
+  __STheme.init({
+    variant: 'dark',
+  });
+
+  [
+    {
+      sel: '.icon-card',
+      css: 'iconCard',
+    },
+    {
+      sel: 's-code-example',
+      css: 'sCodeExample',
+    },
+    {
+      sel: '.sidemenu',
+      css: 'sidemenu',
+    },
+    {
+      sel: '.code-example-section',
+      css: 'codeExampleSection',
+    },
+    {
+      sel: '.s-filtrable-input',
+      css: 'sFiltrableInput',
+    },
+    {
+      sel: 's-color-picker',
+      css: 'sColorPicker',
+    },
+    {
+      sel: 's-datetime-picker',
+      css: 'sDatetimePicker',
+    },
+    {
+      sel: 's-rating',
+      css: 'sRating',
+    },
+    {
+      sel: 's-slider',
+      css: 'sSlider',
+    },
+    {
+      sel: 's-theme-switcher',
+      css: 'sThemeSwitcher',
+    },
+    {
+      sel: '.s-plaform',
+      css: 'sPlatform',
+    },
+  ].forEach((dep) => {
+    __SDepsFeature.registerDeps(dep.sel, {
+      css: dep.css,
     });
+  });
 
-    // init theme
-    __STheme.init({
-        variant: 'dark',
-    });
+  // features
+  __sDepsFeatureDefine();
+  __sActivateFeature();
+  __sPageTransitionFeature();
+  // __STemplateFeature();
 
-    [
-        {
-            sel: '.icon-card',
-            css: 'iconCard',
-        },
-        {
-            sel: 's-code-example',
-            css: 'sCodeExample',
-        },
-        {
-            sel: '.sidemenu',
-            css: 'sidemenu',
-        },
-        {
-            sel: '.code-example-section',
-            css: 'codeExampleSection',
-        },
-        {
-            sel: '.s-filtrable-input',
-            css: 'sFiltrableInput',
-        },
-        {
-            sel: 's-color-picker',
-            css: 'sColorPicker',
-        },
-        {
-            sel: 's-rating',
-            css: 'sRating',
-        },
-        {
-            sel: 's-slider',
-            css: 'sSlider',
-        },
-        {
-            sel: 's-theme-switcher',
-            css: 'sThemeSwitcher',
-        },
-        {
-            sel: '.s-plaform',
-            css: 'sPlatform',
-        },
-    ].forEach((dep) => {
-        __SDepsFeature.registerDeps(dep.sel, {
-            css: dep.css,
-        });
-    });
+  // components
+  // __CKRatingsComponent();
+  __SCodeExampleWebcomponent();
+  __SFiltrableInputComponent();
+  __SSidePanelWebcomponent();
+  __SRatingComponent();
+  __SColorPickerComponent();
+  __SDatetimePickerComponent();
+  __SScrollComponent();
+  __SRangeWebcomponent();
+  __SThemeSwitcherComponent();
+  __SSliderComponent({
+    behaviors: {
+      slideable: {
+        class: SSliderSlideableBehavior,
+        settings: {},
+      },
+    },
+  });
 
-    // features
-    __sDepsFeatureDefine();
-    __sActivateFeature();
-    __sPageTransitionFeature();
-    // __STemplateFeature();
+  // features
+  __sSugarFeature();
+  __sFloatingFeature();
+  __sAppearFeature();
+  __sRefocusFeature();
+  __sInlineFeature();
+  // __sParallaxFeature();
+  __sFormValidateFeature({
+    customValidations: {
+      coffeekraken: (value, helpers) => {
+        if (value === 'coffeekraken') {
+          return helpers.message('Are you sure? Krakens are dangerous...');
+        }
+        return value;
+      },
+    },
+  });
 
-    // components
-    // __CKRatingsComponent();
-    __SCodeExampleWebcomponent();
-    __SFiltrableInputComponent();
-    __SSidePanelWebcomponent();
-    __SRatingComponent();
-    __SColorPickerComponent();
-    __SDatetimePickerComponent();
-    __SScrollComponent();
-    __SRangeWebcomponent();
-    __SThemeSwitcherComponent();
-    __SSliderComponent({
-        behaviors: {
-            slideable: {
-                class: SSliderSlideableBehavior,
-                settings: {},
-            },
-        },
-    });
+  // internal components
+  // __VersionSelector();
+  __CKSearchComponent();
+  __CKDiscoverComponent();
+  __CKDiscoverTabedComponent();
+  __CKSettingsComponent();
+  __CKDocSubNavComponent();
+  // __CkFallingStarsComponent();
+  // __CKWelcomeRatingsComponent();
 
-    // features
-    __sSugarFeature();
-    __sFloatingFeature();
-    __sAppearFeature();
-    __sRefocusFeature();
-    __sInlineFeature();
-    // __sParallaxFeature();
-    __sFormValidateFeature({
-        customValidations: {
-            coffeekraken: (value, helpers) => {
-                if (value === 'coffeekraken') {
-                    return helpers.message(
-                        'Are you sure? Krakens are dangerous...',
-                    );
-                }
-                return value;
-            },
-        },
-    });
-
-    // internal components
-    // __VersionSelector();
-    __CKSearchComponent();
-    __CKDiscoverComponent();
-    __CKDiscoverTabedComponent();
-    __CKSettingsComponent();
-    __CKDocSubNavComponent();
-    // __CkFallingStarsComponent();
-    // __CKWelcomeRatingsComponent();
-
-    // dashboard
-    // new __SDashboard({
-    //     dashboard: {
-    //         components: {
-    //             's-dashboard-pages': {
-    //                 onSelect: (page) => {
-    //                     document.location.href = page.item.loc;
-    //                 },
-    //             },
-    //         },
-    //     },
-    // });
+  // dashboard
+  // new __SDashboard({
+  //     dashboard: {
+  //         components: {
+  //             's-dashboard-pages': {
+  //                 onSelect: (page) => {
+  //                     document.location.href = page.item.loc;
+  //                 },
+  //             },
+  //         },
+  //     },
+  // });
 })();

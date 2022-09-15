@@ -19,36 +19,36 @@ import __SInterface from '@coffeekraken/s-interface';
 export default class WhenInteractSettingsInterface extends __SInterface {
     static get _definition() {
         return {
-            mouseover: {
-                description: 'Specify if the mouseover event has to be used',
+            pointerover: {
+                description: 'Specify if the pointerover event has to be used',
                 type: 'Boolean',
-                default: true
+                default: true,
             },
-            mouseout: {
-                description: 'Specify if the mouseout event has to be used',
+            pointerout: {
+                description: 'Specify if the pointerout event has to be used',
                 type: 'Boolean',
-                default: true
+                default: true,
             },
             click: {
                 description: 'Specify if the click event has to be used',
                 type: 'Boolean',
-                default: true
+                default: true,
             },
             touchstart: {
                 description: 'Specify if the touchstart event has to be used',
                 type: 'Boolean',
-                default: true
+                default: true,
             },
             touchend: {
                 description: 'Specify if the touchend event has to be used',
                 type: 'Boolean',
-                default: true
+                default: true,
             },
             focus: {
                 description: 'Specify if the focus event has to be used',
                 type: 'Boolean',
-                default: true
-            }
+                default: true,
+            },
         };
     }
 }

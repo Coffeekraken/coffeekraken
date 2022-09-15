@@ -55,6 +55,8 @@ export default function __whenInteract(
         );
 
         function interacted(interaction) {
+            console.log('interacted', interaction);
+
             // resolving the promise
             resolve(interaction);
 
@@ -92,7 +94,9 @@ export default function __whenInteract(
             interacted('touchstart');
         }
         if (settings.touchstart) {
-            elm.addEventListener('touchstart', touchstart);
+            elm.addEventListener('touchstart', touchstart, {
+                passive: true,
+            });
         }
 
         function touchend(e) {

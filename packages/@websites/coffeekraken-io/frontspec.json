@@ -33,7 +33,7 @@
         "main": {
             "nomodule": true,
             "defer": true,
-            "src": "/dist/js/index.iife.js",
+            "src": "/dist/js/index.amd.js",
             "env": "production"
         },
         "style": {

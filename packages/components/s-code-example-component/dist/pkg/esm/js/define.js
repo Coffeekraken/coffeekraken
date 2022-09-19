@@ -1,0 +1,5 @@
+import __SCodeExampleWebcomponent from './SCodeExample';
+export default function define(props = {}, tagName = 's-code-example') {
+    __SCodeExampleWebcomponent.define(__SCodeExampleWebcomponent, props, tagName);
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sMEJBQTBCLE1BQU0sZ0JBQWdCLENBQUM7QUFHeEQsTUFBTSxDQUFDLE9BQU8sVUFBVSxNQUFNLENBQzFCLFFBQThDLEVBQUUsRUFDaEQsT0FBTyxHQUFHLGdCQUFnQjtJQUUxQiwwQkFBMEIsQ0FBQyxNQUFNLENBQzdCLDBCQUEwQixFQUMxQixLQUFLLEVBQ0wsT0FBTyxDQUNWLENBQUM7QUFDTixDQUFDIn0=

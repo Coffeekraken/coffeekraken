@@ -8,6 +8,8 @@ import __SClipboardCopyComponentInterface from './interface/SClipboardCopyCompon
 // @ts-ignore
 import __css from '../../../../src/css/s-clipboard-copy.css'; // relative to /dist/pkg/esm/js
 
+import __define from './define';
+
 export interface ISClipboardCopyComponentProps {
     from: string;
     successTimeout: number;
@@ -215,12 +217,4 @@ export default class SClipboardCopyComponent extends __SLitComponent {
     }
 }
 
-export function define(
-    props: Partial<ISClipboardCopyComponentProps> = {},
-    tagName = 's-clipboard-copy',
-) {
-    __SLitComponent.define(SClipboardCopyComponent, props, tagName);
-    // __SLitComponent.setDefaultProps(tagName, props);
-    // // @ts-ignore
-    // customElements.define(tagName, SClipboardCopy);
-}
+export { __define as define };

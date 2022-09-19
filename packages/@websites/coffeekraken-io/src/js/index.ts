@@ -1,31 +1,31 @@
 import { define as __sActivateFeature } from '@coffeekraken/s-activate-feature';
-import { define as __sAppearFeature } from '@coffeekraken/s-appear-feature';
-import { define as __SCodeExampleWebcomponent } from '@coffeekraken/s-code-example-component';
-import { define as __SColorPickerComponent } from '@coffeekraken/s-color-picker-component';
-import { define as __SDatetimePickerComponent } from '@coffeekraken/s-datetime-picker-component';
+// import { define as __sAppearFeature } from '@coffeekraken/s-appear-feature';
+// import { define as __SCodeExampleWebcomponent } from '@coffeekraken/s-code-example-component';
+// import { define as __SColorPickerComponent } from '@coffeekraken/s-color-picker-component';
+// import { define as __SDatetimePickerComponent } from '@coffeekraken/s-datetime-picker-component';
 import __SDepsFeature, {
   define as __sDepsFeatureDefine,
 } from '@coffeekraken/s-deps-feature';
 import __SFeature from '@coffeekraken/s-feature';
-import { define as __SFiltrableInputComponent } from '@coffeekraken/s-filtrable-input-component';
+// import { define as __SFiltrableInputComponent } from '@coffeekraken/s-filtrable-input-component';
 import { define as __sFloatingFeature } from '@coffeekraken/s-floating-feature';
 import { define as __sFormValidateFeature } from '@coffeekraken/s-form-validate-feature';
 import { define as __sInlineFeature } from '@coffeekraken/s-inline-feature';
 import { define as __sPageTransitionFeature } from '@coffeekraken/s-page-transition-feature';
-import { define as __SRatingComponent } from '@coffeekraken/s-rating-component';
+// import { define as __SRatingComponent } from '@coffeekraken/s-rating-component';
 import { define as __sRefocusFeature } from '@coffeekraken/s-refocus-feature';
-import { define as __SScrollComponent } from '@coffeekraken/s-scroll-component';
+// import { define as __SScrollComponent } from '@coffeekraken/s-scroll-component';
 import {
   define as __SSliderComponent,
   SSliderSlideableBehavior,
 } from '@coffeekraken/s-slider-component';
 import { define as __sSugarFeature } from '@coffeekraken/s-sugar-feature';
-import { define as __SThemeSwitcherComponent } from '@coffeekraken/s-theme-switcher-component';
+// import { define as __SThemeSwitcherComponent } from '@coffeekraken/s-theme-switcher-component';
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
-import { define as __SSidePanelWebcomponent } from '@coffeekraken/s-panel-component';
+// import { define as __SSidePanelWebcomponent } from '@coffeekraken/s-panel-component';
 // import { define as __sParallaxFeature } from '@coffeekraken/s-parallax-feature';
-import { define as __SRangeWebcomponent } from '@coffeekraken/s-range-component';
+// import { define as __SRangeWebcomponent } from '@coffeekraken/s-range-component';
 
 // Components
 // import { define as __CKBlobComponent } from './components/CkBlob';
@@ -57,6 +57,74 @@ const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
 //     log: true,
 // });
 
+async function asyncComponents() {
+  // Code example
+  const { define: __lazyDefineSCodeExample } = await import(
+    '@coffeekraken/s-code-example-component/lazy'
+  );
+  __lazyDefineSCodeExample();
+
+  // Clipboard copy
+  const { define: __lazyDefineSClipboardCopy } = await import(
+    '@coffeekraken/s-clipboard-copy-component/lazy'
+  );
+  __lazyDefineSClipboardCopy();
+
+  // // Slider
+  // const { define: __lazyDefineSSliderCopy } = await import(
+  //     '@coffeekraken/s-slider-component/lazy'
+  // );
+  // __lazyDefineSSliderCopy();
+
+  // Color picker
+  const { define: __lazyDefineSColorPicker } = await import(
+    '@coffeekraken/s-color-picker-component/lazy'
+  );
+  __lazyDefineSColorPicker();
+
+  // Datetime picker
+  const { define: __lazyDefineSDatetimePicker } = await import(
+    '@coffeekraken/s-datetime-picker-component/lazy'
+  );
+  __lazyDefineSDatetimePicker();
+
+  // Filtrable input
+  const { define: __lazyDefineSFiltrableInput } = await import(
+    '@coffeekraken/s-filtrable-input-component/lazy'
+  );
+  __lazyDefineSFiltrableInput();
+
+  // Panel
+  const { define: __lazyDefineSPanel } = await import(
+    '@coffeekraken/s-panel-component/lazy'
+  );
+  __lazyDefineSPanel();
+
+  // Range
+  const { define: __lazyDefineSRange } = await import(
+    '@coffeekraken/s-range-component/lazy'
+  );
+  __lazyDefineSRange();
+
+  // Rating
+  const { define: __lazyDefineSRating } = await import(
+    '@coffeekraken/s-rating-component/lazy'
+  );
+  __lazyDefineSRating();
+
+  // Scroll
+  const { define: __lazyDefineSScroll } = await import(
+    '@coffeekraken/s-scroll-component/lazy'
+  );
+  __lazyDefineSScroll();
+
+  // Theme switcher
+  const { define: __lazyDefineSThemeSwitcher } = await import(
+    '@coffeekraken/s-theme-switcher-component/lazy'
+  );
+  __lazyDefineSThemeSwitcher();
+}
+
 (async () => {
   __SFeature.setDefaultProps('*', {
     mountWhen: 'nearViewport',
@@ -67,7 +135,7 @@ const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
     // verbose: !__SEnv.is('devsCut'),
   });
   __SLitComponent.setDefaultProps(
-    ['ck-search-input', 's-color-picker', 's-datetime-picker', 's-range'],
+    ['ck-search-input', 's-color-picker', 's-datetime-picker'],
     {
       mountWhen: 'interact',
       // verbose: !__SEnv.is('devsCut'),
@@ -86,6 +154,9 @@ const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
       },
     },
   });
+
+  // assync components
+  asyncComponents();
 
   __querySelectorLive('[s-template]', async ($template) => {
     await __whenNearViewport($template);
@@ -163,15 +234,15 @@ const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
 
   // components
   // __CKRatingsComponent();
-  __SCodeExampleWebcomponent();
-  __SFiltrableInputComponent();
-  __SSidePanelWebcomponent();
-  __SRatingComponent();
-  __SColorPickerComponent();
-  __SDatetimePickerComponent();
-  __SScrollComponent();
-  __SRangeWebcomponent();
-  __SThemeSwitcherComponent();
+  // __SCodeExampleWebcomponent();
+  // __SFiltrableInputComponent();
+  // __SSidePanelWebcomponent();
+  // __SRatingComponent();
+  // __SColorPickerComponent();
+  // __SDatetimePickerComponent();
+  // __SScrollComponent();
+  // __SRangeWebcomponent();
+  // __SThemeSwitcherComponent();
   __SSliderComponent({
     behaviors: {
       slideable: {
@@ -184,7 +255,7 @@ const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
   // features
   __sSugarFeature();
   __sFloatingFeature();
-  __sAppearFeature();
+  // __sAppearFeature();
   __sRefocusFeature();
   __sInlineFeature();
   // __sParallaxFeature();

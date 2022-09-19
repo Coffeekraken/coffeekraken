@@ -11,7 +11,7 @@ namespace Sugar\frontspec;
  *
  * Print the passed "og" from the frontspec
  *
- * @param     {Object}      The "og" object of the frontspec
+ * @param     {Object}     $frontspec        The frontspec object containing the "og" property
  * @return    {String}    The HTML code of the og
  *
  * @example    php
@@ -20,8 +20,13 @@ namespace Sugar\frontspec;
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function og($og)
+function og($frontspec)
 {
+    if (!isset($frontspec->og)) {
+        return '';
+    }
+
+    $og = $frontspec->og;
     $ogStr = [];
     $props = array_keys((array) $og);
     foreach ($props as $prop) {

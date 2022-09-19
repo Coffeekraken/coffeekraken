@@ -1,0 +1,5 @@
+import __SClipboardCopyWebcomponent from './SClipboardCopy';
+export default function define(props = {}, tagName = 's-clipboard-copy') {
+    __SClipboardCopyWebcomponent.define(__SClipboardCopyWebcomponent, props, tagName);
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sNEJBQTRCLE1BQU0sa0JBQWtCLENBQUM7QUFHNUQsTUFBTSxDQUFDLE9BQU8sVUFBVSxNQUFNLENBQzFCLFFBQWdELEVBQUUsRUFDbEQsT0FBTyxHQUFHLGtCQUFrQjtJQUU1Qiw0QkFBNEIsQ0FBQyxNQUFNLENBQy9CLDRCQUE0QixFQUM1QixLQUFLLEVBQ0wsT0FBTyxDQUNWLENBQUM7QUFDTixDQUFDIn0=

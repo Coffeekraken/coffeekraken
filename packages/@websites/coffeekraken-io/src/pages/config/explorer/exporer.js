@@ -1,11 +1,11 @@
 export default {
-    slugs: ['/config/explorer', '/config/explorer/*'],
+    slugs: ["/config/explorer", "/config/explorer/*"],
     params: {
-        path: '*',
+        path: "*",
     },
     views: [
         {
-            path: 'pages.config.explorer',
+            path: "pages.config.explorer",
         },
     ],
 };

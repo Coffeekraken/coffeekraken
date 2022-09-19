@@ -1,0 +1,5 @@
+import __SFiltrableInputComponent from './SFiltrableInputComponent';
+export default function define(props = {}, tagName = 's-filtrable-input') {
+    __SFiltrableInputComponent.define(__SFiltrableInputComponent, props, tagName);
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sMEJBQTBCLE1BQU0sNEJBQTRCLENBQUM7QUFHcEUsTUFBTSxDQUFDLE9BQU8sVUFBVSxNQUFNLENBQzFCLFFBQWlELEVBQUUsRUFDbkQsT0FBTyxHQUFHLG1CQUFtQjtJQUU3QiwwQkFBMEIsQ0FBQyxNQUFNLENBQzdCLDBCQUEwQixFQUMxQixLQUFLLEVBQ0wsT0FBTyxDQUNWLENBQUM7QUFDTixDQUFDIn0=

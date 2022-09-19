@@ -349,7 +349,12 @@ class SColor extends __SClass {
         if (typeof color === 'string') {
             // parse the input color to
             // split into rgba values
-            this._parse(color);
+            try {
+                this._parse(color);
+            } catch (e) {
+                // console.log('ERROR', e);
+                // console.log(this);
+            }
         } else {
             // we assume that the passed color is an object of type ISColorObject
             // so we construct our color from this

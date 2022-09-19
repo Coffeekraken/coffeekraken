@@ -28,6 +28,8 @@ $metasObj = $metas;
 if (isset($frontspec->metas)) {
     $metasObj = (object) array_merge((array) $frontspec->metas, (array) $metas);
 }
+$frontspec->metas = $metasObj;
+$frontspec->metas->og = $ogObj;
 ?>
 <!DOCTYPE html>
 @php
@@ -47,10 +49,10 @@ if (isset($frontspec->metas)) {
 <html lang="{{ $lang }}" dir="{{ $dir }}">
 <head>
     <!-- metas -->
-    {!! \Sugar\frontspec\metas($frontspec->metas, $env) !!}
+    {!! \Sugar\frontspec\metas($frontspec, $env) !!}
 
     <!-- og -->
-    {!! \Sugar\frontspec\og($ogObj) !!}
+    {!! \Sugar\frontspec\og($frontspec) !!}
 
     <!-- assets -->
     @php
@@ -59,7 +61,7 @@ if (isset($frontspec->metas)) {
             $cacheBuster = $shared->server->sessionId;
         }
     @endphp
-    {!! \Sugar\frontspec\assets($frontspec->assets, $cacheBuster) !!}
+    {!! \Sugar\frontspec\assets($frontspec, $cacheBuster) !!}
 
     @yield('head')
 

@@ -14,6 +14,13 @@ export async function prepare(config) {
 export default function (api) {
     if (api.env.platform !== 'node') return;
     return {
+        get storage() {
+            return api.config.storage ?? {};
+        },
+        get serve() {
+            return api.config.serve ?? {};
+        },
+
         assets: {
             /**
              * @name      viteClient

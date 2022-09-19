@@ -29,6 +29,10 @@
             "require": "./dist/pkg/cjs/js/exports.js",
             "import": "./dist/pkg/esm/js/exports.js"
         },
+        "./lazy": {
+            "require": "./dist/pkg/cjs/js/lazy.js",
+            "import": "./dist/pkg/esm/js/lazy.js"
+        },
         "./shared/*": {
             "require": "./dist/pkg/cjs/shared/*.js",
             "import": "./dist/pkg/esm/shared/*.js"

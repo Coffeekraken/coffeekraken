@@ -1,0 +1,5 @@
+import __SThemeSwitcherComponent from './SThemeSwitcherComponent';
+export default function define(props = {}, tagName = 's-theme-switcher') {
+    __SThemeSwitcherComponent.define(__SThemeSwitcherComponent, props, tagName);
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8seUJBQXlCLE1BQU0sMkJBQTJCLENBQUM7QUFHbEUsTUFBTSxDQUFDLE9BQU8sVUFBVSxNQUFNLENBQzFCLFFBQWdELEVBQUUsRUFDbEQsT0FBTyxHQUFHLGtCQUFrQjtJQUU1Qix5QkFBeUIsQ0FBQyxNQUFNLENBQUMseUJBQXlCLEVBQUUsS0FBSyxFQUFFLE9BQU8sQ0FBQyxDQUFDO0FBQ2hGLENBQUMifQ==

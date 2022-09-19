@@ -1,8 +1,10 @@
 // @ts-nocheck
 
 import __SPromise from '@coffeekraken/s-promise';
-import __whenNearViewport from '@coffeekraken/sugar/js/dom/detect/whenNearViewport';
+import { __when } from '@coffeekraken/sugar/dom';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __uniqid } from '@coffeekraken/sugar/string';
+import type { TWhenTrigger } from '../detect/when';
 
 /**
  * @name            querySelectorLive
@@ -45,32 +47,40 @@ export interface IQuerySelectorLiveSettings {
     once: boolean;
     afterFirst: Function;
     scopes: boolean;
+    firstOnly: boolean;
+    when: TWhenTrigger;
 }
-
-let _observer,
-    _idx = 0,
-    _stack = new Map();
 
 export default function __querySelectorLive(
     selector: string,
     cb: Function<HTMLElement> = null,
     settings: Partial<IQuerySelectorLiveSettings> = {},
+    _isFirstLevel = true
 ): __SPromise<HTMLElement> {
-    let _emit, _pipe, noScopeSelector, observer;
+    let _emit,
+        _pipe,
+        noScopeSelector,
+        observer,
+        firstSelected = false,
+        canceled = false,
+        uid = __uniqid();
 
     const selectedNodes: HTMLElement = [];
 
     // extend settings
-    settings = Object.assign(
-        {},
+    settings = __deepMerge(
         {
             rootNode: document,
             once: true,
             afterFirst: null,
             scopes: true,
+            firstOnly: false,
+            when: undefined,
         },
         settings,
     );
+
+    const innerPromises = [];
 
     // process selectors when scopes are true
     if (settings.scopes) {
@@ -87,8 +97,47 @@ export default function __querySelectorLive(
         _pipe = pipe;
     });
 
-    function processNode(node: HTMLElement, sel: string): void {
-        if (!node.matches) {
+    function isCanceled() {
+        return selectedNodes.length && canceled && _isFirstLevel;
+    }
+
+    if (isCanceled()) {
+        return;
+    }
+
+    function handleNode(node: HTMLElement, sel: string): void {
+        if (isCanceled()) {
+            return;
+        }
+
+        // emit our node
+        _emit?.('node', {
+            node
+            cancel() {
+                pro.cancel();
+            }
+        });
+
+        // callback with our node
+        cb?.(node, {
+            cancel() {
+                pro.cancel();
+            },
+        });
+
+        // handle firstOnly setting
+        if (settings.firstOnly) {
+            pro.cancel();
+        }
+
+        // mark our node as selected at least 1 time
+        if (!selectedNodes.includes(node)) {
+            selectedNodes.push(node);
+        }
+    }
+
+    async function processNode(node: HTMLElement, sel: string): void {
+        if (!node.matches || isCanceled()) {
             return;
         }
 
@@ -97,17 +146,15 @@ export default function __querySelectorLive(
             node.matches(selector) &&
             (!settings.once || !selectedNodes.includes(node))
         ) {
-            // emit our node
-            _emit?.('node', node);
-
-            // callback with our node
-            cb?.(node, {
-                cancel: pro.cancel.bind(pro),
-            });
-
-            // mark our node as selected at least 1 time
-            if (!selectedNodes.includes(node)) {
-                selectedNodes.push(node);
+            // handle the "when" setting
+            if (settings.when) {
+                await __when(node, settings.when);
+                if (isCanceled()) {
+                    return;
+                }
+                handleNode(node, sel);
+            } else {
+                handleNode(node, sel);
             }
         }
 
@@ -116,12 +163,11 @@ export default function __querySelectorLive(
     }
 
     function findAndProcess($root: HTMLElement, sel: string) {
-        if (!$root.querySelectorAll) {
+        if (!$root.querySelectorAll || isCanceled()) {
             return;
         }
 
         const nodes = Array.from($root?.querySelectorAll(sel));
-
         nodes.forEach((node) => {
             processNode(node, sel);
         });
@@ -135,62 +181,76 @@ export default function __querySelectorLive(
         let isAfterCalledByScopeId = {};
 
         // search for scopes and handle nested nodes
-        __querySelectorLive(
-            '[s-scope]',
-            async ($scope) => {
-                // get or generate a new id
-                const scopeId = $scope.id || `s-scope-${__uniqid()}`;
-                if ($scope.id !== scopeId) {
-                    $scope.setAttribute('id', scopeId);
-                }
+        innerPromises.push(
+            __querySelectorLive(
+                '[s-scope]',
+                async ($scope) => {
+                    // get or generate a new id
+                    const scopeId = $scope.id || `s-scope-${__uniqid()}`;
+                    if ($scope.id !== scopeId) {
+                        $scope.setAttribute('id', scopeId);
+                    }
 
-                await __whenNearViewport($scope);
-                __querySelectorLive(
-                    selector,
-                    ($elm) => {
-                        // findAndProcess($scope, selector);
-                        processNode($elm, selector);
-                    },
-                    {
-                        ...settings,
-                        rootNode: $scope,
-                        scopes: false,
-                        afterFirst() {
-                            if (
-                                isAfterCalledByScopeId[scopeId] &&
-                                $scope._sQuerySelectorLiveScopeDirty
-                            ) {
-                                return;
-                            }
-                            $scope._sQuerySelectorLiveScopeDirty = true;
-                            isAfterCalledByScopeId[scopeId] = true;
-                            $scope.classList.add('ready');
-                            $scope.setAttribute('ready', 'true');
-                        },
-                    },
-                );
-            },
-            {
-                ...settings,
-                scopes: false,
-            },
+                    if (isCanceled()) {
+                        return;
+                    }
+
+                    await __when($scope, 'nearViewport');
+
+                    if (isCanceled()) {
+                        return;
+                    }
+
+                    innerPromises.push(
+                        __querySelectorLive(
+                            selector,
+                            ($elm) => {
+                                // findAndProcess($scope, selector);
+                                processNode($elm, selector);
+                            },
+                            Object.assign({}, settings, {
+                                rootNode: $scope,
+                                scopes: false,
+                                afterFirst() {
+                                    if (
+                                        isAfterCalledByScopeId[scopeId] &&
+                                        $scope._sQuerySelectorLiveScopeDirty
+                                    ) {
+                                        return;
+                                    }
+                                    $scope._sQuerySelectorLiveScopeDirty = true;
+                                    isAfterCalledByScopeId[scopeId] = true;
+                                    $scope.classList.add('ready');
+                                    $scope.setAttribute('ready', 'true');
+                                },
+                            }),
+                            true
+                        ),
+                    );
+                },
+                Object.assign({}, settings, {
+                    firstOnly: false,
+                    scopes: false,
+                }),
+                false
+            ),
         );
         // handle things not in a scope
-        __querySelectorLive(
-            noScopeSelector,
-            ($elm) => {
-                // findAndProcess($scope, selector);
-                processNode($elm, selector);
-            },
-            {
-                ...settings,
-                scopes: false,
-            },
+        innerPromises.push(
+            __querySelectorLive(
+                noScopeSelector,
+                ($elm) => {
+                    // findAndProcess($scope, selector);
+                    processNode($elm, selector);
+                },
+                Object.assign({}, settings, {
+                    scopes: false,
+                }),
+                false
+            ),
         );
-        // setTimeout(() => {
         // after first callback
         settings.afterFirst?.();
-        // });
     } else {
         observer = new MutationObserver((mutations, obs) => {
             mutations.forEach((mutation) => {
@@ -211,15 +271,17 @@ export default function __querySelectorLive(
         });
 
         // first query
-        // setTimeout(() => {
         findAndProcess(settings.rootNode, selector);
         // after first callback
         settings.afterFirst?.();
-        // });
     }
 
     // handle cancel
     pro.on('cancel', () => {
+        canceled = true;
+        innerPromises.forEach((promise) => {
+            promise.cancel();
+        });
         observer?.disconnect();
     });
 

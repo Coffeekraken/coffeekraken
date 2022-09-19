@@ -6,6 +6,8 @@ import __SThemeSwitcherComponentInterface from './interface/SThemeSwitcherCompon
 // @ts-ignore
 import __css from '../../../../src/css/s-theme-switcher.css'; // relative to /dist/pkg/esm/js
 
+import __define from './define';
+
 export interface ISThemeSwitcherComponentProps {
     darkModeIcon: boolean;
     darkModeIconClass: string;
@@ -201,13 +203,4 @@ export default class SThemeSwitcherComponent extends __SLitComponent {
     }
 }
 
-export function define(
-    props: Partial<ISThemeSwitcherComponentProps> = {},
-    tagName = 's-theme-switcher',
-) {
-    __SLitComponent.define(SThemeSwitcherComponent, props, tagName);
-
-    // __SLitComponent.setDefaultProps(tagName, props);
-    // // @ts-ignore
-    // customElements.define(tagName, SThemeSwitcherComponent);
-}
+export { __define as define };

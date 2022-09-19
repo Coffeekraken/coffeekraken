@@ -12,6 +12,7 @@ import { __packageRootDir } from '@coffeekraken/sugar/path';
 import { __onProcessExit } from '@coffeekraken/sugar/process';
 import __childProcess from 'child_process';
 import __path from 'path';
+import __fs from 'fs';
 import __rollupAnalyzerPlugin from 'rollup-plugin-analyzer';
 import { uglify as __uglifyPlugin } from 'rollup-plugin-uglify';
 import { build as __viteBuild, createServer as __viteServer } from 'vite';
@@ -20,6 +21,7 @@ import __SViteStartParamsInterface from './interface/SViteStartParamsInterface';
 import __SViteTestParamsInterface from './interface/SViteTestParamsInterface';
 import __sInternalWatcherReloadVitePlugin from './plugins/internalWatcherReloadPlugin';
 import __rewritesPlugin from './plugins/rewritesPlugin';
+import { __removeSync } from '@coffeekraken/sugar/fs';
 
 export interface ISViteSettings {}
 
@@ -35,7 +37,7 @@ export interface ISViteBuildParams {
     watch: boolean;
     verbose: boolean;
     target: string;
-    format: ('esm' | 'umd' | 'cjs' | 'iife')[];
+    format: ('esm' | 'amd' | 'umd' | 'cjs' | 'iife')[];
     type: ('module' | 'modules' | 'lib' | 'bundle')[];
     chunks: boolean;
     bundle: boolean;
@@ -160,8 +162,13 @@ export default class SVite extends __SClass {
     build(params: ISViteBuildParams | String) {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
-                const viteConfig = __SugarConfig.get('vite');
+                const viteConfig = __SugarConfig.get('vite'),
+                    outputDir = viteConfig.build.outDir,
+                    outputAssetsDir = `${outputDir}/${viteConfig.build.assetsDir}`;
                 const duration = new __SDuration();
+
+                // clean previous build
+                __removeSync(outputAssetsDir);
 
                 // @ts-ignore
                 const finalParams: ISViteBuildParams =
@@ -209,10 +216,10 @@ export default class SVite extends __SClass {
                                 external: [],
                                 plugins: [],
                                 output: {
-                                    compact: true,
-                                    manualChunks(id) {
-                                        return 'index';
-                                    },
+                                    // compact: true,
+                                    // manualChunks(id) {
+                                    //     return 'index';
+                                    // },
                                 },
                                 onwarn(warning, warn) {
                                     const onwarnRes =
@@ -324,7 +331,7 @@ export default class SVite extends __SClass {
                     if (!buildParams.format.length) {
                         switch (buildType) {
                             case 'bundle':
-                                finalFormats = ['iife'];
+                                finalFormats = ['amd'];
                                 break;
                             case 'module':
                             case 'lib':
@@ -390,6 +397,7 @@ export default class SVite extends __SClass {
 
                     // process to bundle
                     const res = await __viteBuild(config);
+                    // console.log(res[0].output);
 
                     if (res.constructor?.name === 'WatchEmitter') {
                         // @ts-ignore
@@ -453,25 +461,46 @@ export default class SVite extends __SClass {
 
                     // handle generated bundles
                     if (!buildParams.noWrite) {
+                        let entryFileName, entryFinalFileName;
+
                         // @ts-ignore
                         res.forEach((bundleObj, i) => {
                             const output = bundleObj.output[0];
 
-                            const baseOutputConfig = outputs[i],
-                                baseOutputFilenames = outputsFilenames[i];
+                            bundleObj.output.forEach((outputObj) => {
+                                if (outputObj.fileName.match(/\.css$/)) {
+                                    return;
+                                }
 
-                            __writeFileSync(
-                                `${baseOutputConfig.dir}/${baseOutputFilenames}`,
-                                output.code,
-                            );
+                                let finalCode = outputObj.code;
 
-                            const file = new __SFile(
-                                `${baseOutputConfig.dir}/${baseOutputFilenames}`,
-                            );
+                                let finalFileName = outputObj.fileName;
+                                if (outputObj.isEntry) {
+                                    entryFileName = finalFileName;
+                                    finalFileName = finalFileName
+                                        .replace(
+                                            /^index\./,
+                                            `index.${finalFormats[0]}.`,
+                                        )
+                                        .replace(/\.[a-zA-Z0-9]+\.js/, '.js');
+                                    entryFinalFileName = finalFileName;
+                                } else if (entryFileName) {
+                                    finalCode = finalCode
+                                        .split(`/${entryFileName}`)
+                                        .join(`/${entryFinalFileName}`);
+                                }
 
-                            emit('log', {
-                                type: __SLog.TYPE_INFO,
-                                value: `<green>[save]</green> File "<yellow>${file.relPath}</yellow>" <yellow>${file.stats.kbytes}kb</yellow> saved <green>successfully</green>`,
+                                __writeFileSync(
+                                    `${outputAssetsDir}/${finalFileName}`,
+                                    finalCode,
+                                );
+                                const file = new __SFile(
+                                    `${outputAssetsDir}/${finalFileName}`,
+                                );
+                                emit('log', {
+                                    type: __SLog.TYPE_INFO,
+                                    value: `<green>[save]</green> File "<yellow>${file.relPath}</yellow>" <yellow>${file.stats.kbytes}kb</yellow> saved <green>successfully</green>`,
+                                });
                             });
                         });
                     }

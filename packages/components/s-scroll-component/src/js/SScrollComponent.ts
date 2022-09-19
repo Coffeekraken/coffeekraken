@@ -9,6 +9,8 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
 import __SScrollComponentInterface from './interface/SScrollComponentInterface';
 
+import __define from './define';
+
 // @ts-ignore
 import __css from '../../../../src/css/s-scroll.css'; // relative to /dist/pkg/esm/js
 
@@ -147,12 +149,4 @@ export default class SScrollComponent extends __SLitComponent {
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export function define(
-    props: Partial<ISScrollComponentProps> = {},
-    tagName = 's-scroll',
-) {
-    __SLitComponent.define(SScrollComponent, props, tagName);
-
-    // __SLitComponent.setDefaultProps(tagName, props);
-    // customElements.define(tagName, SScrollComponent);
-}
+export { __define as define };

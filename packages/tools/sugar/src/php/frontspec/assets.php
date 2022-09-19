@@ -21,8 +21,9 @@ namespace Sugar\frontspec;
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function assets($assets, $cacheBuster = '')
+function assets($frontspec, $cacheBuster = '')
 {
+    $assets = $frontspec->assets;
     $assetsStr = [];
 
     if (!$assets) {

@@ -27,6 +27,8 @@ import __prettierHtml from 'prettier/esm/parser-html.mjs';
 import __prettierPhp from '@prettier/plugin-php/standalone';
 import __prettierCss from 'prettier/esm/parser-postcss.mjs';
 
+import __define from './define';
+
 // @ts-ignore
 import __css from '../../../../src/css/s-code-example.css'; // relative to /dist/pkg/esm/js
 
@@ -480,9 +482,4 @@ export default class SCodeExample extends __SLitComponent {
     }
 }
 
-export function define(
-    props: Partial<ISCodeExampleComponentProps> = {},
-    tagName = 's-code-example',
-) {
-    __SLitComponent.define(SCodeExample, props, tagName);
-}
+export { __define as define };

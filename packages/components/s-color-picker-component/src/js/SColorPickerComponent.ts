@@ -16,6 +16,8 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
 import __SColorPickerComponentInterface from './interface/SColorPickerComponentInterface';
 
+import __define from './define';
+
 // @ts-ignore
 import __css from '../../../../src/css/s-color-picker.css'; // relative to /dist/pkg/esm/js
 // import __css from "../css/s-color-picker.css"; // for dev
@@ -1076,12 +1078,4 @@ export default class SColorPickerComponent extends __SLitComponent {
     }
 }
 
-export function define(
-    props: Partial<ISColorPickerComponentProps> = {},
-    tagName = 's-color-picker',
-) {
-    __SLitComponent.define(SColorPickerComponent, props, tagName);
-
-    // __SLitComponent.setDefaultProps(tagName, props);
-    // customElements.define(tagName, SColorPicker);
-}
+export { __define as define };

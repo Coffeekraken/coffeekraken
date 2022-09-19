@@ -286,7 +286,9 @@ export default class SPackage extends __SClass {
                             .readFileSync(`${this._rootDir}/package.json`)
                             .toString(),
                     );
-                    currentPackageJson.exports = {};
+                    if (!currentPackageJson.exports) {
+                        currentPackageJson.exports = {};
+                    }
                 } catch (e) {}
 
                 const newPackageJson = __deepMerge(currentPackageJson, json);

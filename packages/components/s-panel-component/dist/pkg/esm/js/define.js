@@ -1,0 +1,5 @@
+import __SPanelComponent from './SPanelComponent';
+export default function define(props = {}, tagName = 's-panel') {
+    __SPanelComponent.define(__SPanelComponent, props, tagName);
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8saUJBQWlCLE1BQU0sbUJBQW1CLENBQUM7QUFHbEQsTUFBTSxDQUFDLE9BQU8sVUFBVSxNQUFNLENBQzFCLFFBQXdDLEVBQUUsRUFDMUMsT0FBTyxHQUFHLFNBQVM7SUFFbkIsaUJBQWlCLENBQUMsTUFBTSxDQUFDLGlCQUFpQixFQUFFLEtBQUssRUFBRSxPQUFPLENBQUMsQ0FBQztBQUNoRSxDQUFDIn0=

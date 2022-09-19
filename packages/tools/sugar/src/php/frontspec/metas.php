@@ -11,8 +11,8 @@ namespace Sugar\frontspec;
  *
  * Print the passed "metas" from the frontspec
  *
- * @param     {Object}      The "metas" object of the frontspec
- * @param     {Object}      The "env" string that can be "development" or "production"
+ * @param     {Object}      $frontspec                  The frontspec object containing the "metas" property
+ * @param     {Object}      [$env='development']        The "env" string that can be "development" or "production"
  * @return    {String}    The HTML code of the metas
  *
  * @example    php
@@ -21,8 +21,13 @@ namespace Sugar\frontspec;
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function metas($metas, $env = 'development')
+function metas($frontspec, $env = 'development')
 {
+    $metas = [];
+    if (isset($frontspec->metas)) {
+        $metas = $frontspec->metas;
+    }
+
     $defaultMetas = [
         'charset' => 'UTF-8',
         'http-equiv' => 'X-UA-Compatible',

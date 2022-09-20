@@ -1,5 +1,5 @@
 // @ts-nocheck
-import * as __convertColors from 'colors-convert';
+import { rgbaToHex } from 'colors-convert';
 
 /**
  * @name                rgba2hex
@@ -37,7 +37,7 @@ export default function __rgbaToHex(r, g, b, a = 1) {
         r = r.r;
     }
 
-    let res = __convertColors.rgbaToHex({
+    let res = rgbaToHex({
         r,
         g,
         b,

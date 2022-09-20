@@ -1,4 +1,6 @@
 export default function (api) {
+    if (api.env.platform !== 'node') return;
+
     return {
         family: {
             default: {
@@ -37,8 +39,7 @@ export default function (api) {
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                import:
-                    'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap',
+                import: 'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap',
             },
 
             title: {
@@ -77,8 +78,7 @@ export default function (api) {
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                import:
-                    'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap',
+                import: 'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap',
             },
 
             quote: {

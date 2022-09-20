@@ -1,5 +1,5 @@
 // @ts-nocheck
-import * as __convertColors from 'colors-convert';
+import { hslaToHex } from 'colors-convert';
 
 /**
  * @name              hslaToHex
@@ -30,7 +30,7 @@ import * as __convertColors from 'colors-convert';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __hslaToHex(h, s, l, a = 1) {
-    const hex = __convertColors.hslaToHex({
+    const hex = hslaToHex({
         h,
         s,
         l,

@@ -1,5 +1,5 @@
 // @ts-nocheck
-import * as __convertColors from 'colors-convert';
+import { rgbaToHsla } from 'colors-convert';
 
 /**
  * @name                  rgba2hsla
@@ -36,7 +36,7 @@ export default function __rgbaToHsla(r, g, b, a = 1) {
         a = r.a;
         r = r.r;
     }
-    return __convertColors.rgbaToHsla({
+    return rgbaToHsla({
         r,
         g,
         b,

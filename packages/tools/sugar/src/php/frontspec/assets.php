@@ -49,20 +49,20 @@ function assets($frontspec, $cacheBuster = '')
                 ) {
                     array_push(
                         $assetsStr,
-                        '<link rel="stylesheet" id="' .
+                        '<link id="' .
                             $name .
                             '" href="' .
                             \Sugar\string\replaceTokens($finalSrc) .
-                            '" rel="preload" as="style" />'
+                            '" rel="stylesheet" />'
                     );
                 } else {
                     array_push(
                         $assetsStr,
-                        '<link rel="stylesheet" id="' .
+                        '<link id="' .
                             $name .
                             '" href="/' .
                             \Sugar\string\replaceTokens($finalSrc) .
-                            '" rel="preload" as="style" />'
+                            '" rel="stylesheet" />'
                     );
                 }
                 break;
@@ -106,7 +106,6 @@ function assets($frontspec, $cacheBuster = '')
                 }
                 break;
             default:
-                print 'EEE' . $extension;
                 if (file_exists(realpath($finalSrc))) {
                     array_push(
                         $assetsStr,

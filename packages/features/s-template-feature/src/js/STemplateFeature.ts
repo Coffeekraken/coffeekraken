@@ -48,8 +48,19 @@ export default class STemplateFeature extends __SFeature implements ISFeature {
         );
     }
     async mount() {
-        const $content = this.node.content;
-        const $container = $content.children[0];
+        let $container, $content;
+
+        if (this.node.tagName === 'TEXTAREA') {
+            const parser = new DOMParser();
+            const html = this.node.value;
+            const $dom = parser.parseFromString(html, 'text/html');
+            $content = $dom.body.children[0];
+            $container = $dom.body.children[0];
+        } else {
+            $content = this.node.content;
+            $container = $content.children[0];
+        }
+
         this.componentUtils.fastdom.mutate(() => {
             this.node.parentNode.insertBefore($content, this.node);
             $container?.classList.add('s-template');

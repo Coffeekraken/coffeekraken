@@ -30,7 +30,6 @@ import __sha256 from '../../shared/crypto/sha256';
  * import { __folderHash } from '@coffeekraken/sugar/fs';
  * __folderHash('my/cool/folder'); // => YZOrKDx9LCLd8X39PoFTflXGpRU=,
  *
- * @see             https://www.npmjs.com/package/folder-hash
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */

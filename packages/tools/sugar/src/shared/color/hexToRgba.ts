@@ -1,5 +1,5 @@
 // @ts-nocheck
-import * as __convertColors from 'colors-convert';
+import { hexToRgba } from 'colors-convert';
 
 /**
  * @name                  hexToRgba
@@ -27,5 +27,5 @@ import * as __convertColors from 'colors-convert';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __hexToRgba(hex) {
-    return __convertColors.hexToRgba(hex, 1);
+    return hexToRgba(hex, 1);
 }

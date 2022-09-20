@@ -15775,228 +15775,6 @@
                 "relPath": "src/shared/version/parseSemverString.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.css.cssEasingStrToJsFunction": {
-                "id": "@coffeekraken.sugar.js.css.cssEasingStrToJsFunction",
-                "name": "cssEasingStrToJsFunction",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    }
-                ],
-                "description": "Convert a css easing string line \"cubic-bezier(.17,.67,.83,.67)\" to a js easing function",
-                "namespace": "@coffeekraken.sugar.js.css",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import { __cssEasingStrToJsFunction } from '@coffeekraken/sugar/css'\nconst fn = __cssEasingStrToJsFunction('cubic-bezier(.17,.67,.83,.67)');\nfn(0.5);\nfn(0.34);"
-                    }
-                ],
-                "since": "1.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "cssEasingStrToJsFunction.ts",
-                "extension": "ts",
-                "relPath": "src/js/css/easing/cssEasingStrToJsFunction.ts",
-                "children": {}
-            },
-            "@coffeekraken.sugar.js.css.parse.parseKeyframeKey": {
-                "id": "@coffeekraken.sugar.js.css.parse.parseKeyframeKey",
-                "name": "parseKeyframeKey",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    }
-                ],
-                "description": "Parses KeyFrameRule.keyText to an array of integers holding keyframe percentages",
-                "namespace": "@coffeekraken.sugar.js.css.parse",
-                "status": "wip",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import { __parseKeyframeKey } from '@coffeekraken/sugar/css';\n__parseKeyframeKey('from');"
-                    }
-                ],
-                "since": "1.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "parseKeyframeKey.ts",
-                "extension": "ts",
-                "relPath": "src/js/css/parse/parseKeyframeKey.ts",
-                "children": {}
-            },
-            "@coffeekraken.sugar.js.css.parse.parseTransformRule": {
-                "id": "@coffeekraken.sugar.js.css.parse.parseTransformRule",
-                "name": "parseTransformRule",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    }
-                ],
-                "description": "Parse the transform rule of an element and returns a simple object with each properties separated.",
-                "namespace": "@coffeekraken.sugar.js.css.parse",
-                "status": "wip",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import { __parseTransformRule } from '@coffeekraken/sugar/css';\n__parseTransformRule('translate(-100px, 200rem));"
-                    }
-                ],
-                "since": "1.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "parseTransformRule.ts",
-                "extension": "ts",
-                "relPath": "src/js/css/parse/parseTransformRule.ts",
-                "children": {}
-            },
-            "@coffeekraken.sugar.js.css.rule.removeVendorPrefix": {
-                "id": "@coffeekraken.sugar.js.css.rule.removeVendorPrefix",
-                "name": "removeVendorPrefix",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    }
-                ],
-                "description": "Remove vendor prefixes from CSSPropertyNames",
-                "namespace": "@coffeekraken.sugar.js.css.rule",
-                "status": "wip",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import { __removeVendorPrefix } from '@coffeekraken/sugar/css';\n__removeVendorPrefix('moz-something'); // 'something'"
-                    }
-                ],
-                "since": "1.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "removeVendorPrefix.ts",
-                "extension": "ts",
-                "relPath": "src/js/css/rule/removeVendorPrefix.ts",
-                "children": {}
-            },
-            "@coffeekraken.sugar.js.css.transform.styleObject2String": {
-                "id": "@coffeekraken.sugar.js.css.transform.styleObject2String",
-                "name": "styleObject2String",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    }
-                ],
-                "description": "Transform a style object to inline string separated by ;",
-                "namespace": "@coffeekraken.sugar.js.css.transform",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import { __styleObject2String } from '@coffeekraken/sugar/css'\nconst styleString =  __styleObject2String({\n\t\tpaddingLeft : '20px',\n\t\tdisplay : 'block'\n});\n// output => padding-left:20px; display:block;"
-                    }
-                ],
-                "since": "1.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "styleObject2String.ts",
-                "extension": "ts",
-                "relPath": "src/js/css/transform/styleObject2String.ts",
-                "children": {}
-            },
-            "@coffeekraken.sugar.js.css.transform.styleString2Object": {
-                "id": "@coffeekraken.sugar.js.css.transform.styleString2Object",
-                "name": "styleString2Object",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    }
-                ],
-                "description": "Transform a style string to an object representation",
-                "namespace": "@coffeekraken.sugar.js.css.transform",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import { __styleString2Object } from '@coffeekraken/sugar/css'\nconst styleString =  __styleString2Object('padding-left:20px; display:block;');\n// output => {\n//\t\tpaddingLeft : '20px',\n// \t\tdisplay : 'block'\n// }"
-                    }
-                ],
-                "since": "1.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "styleString2Object.ts",
-                "extension": "ts",
-                "relPath": "src/js/css/transform/styleString2Object.ts",
-                "children": {}
-            },
             "@coffeekraken.sugar.js.dom.animation.animatedInnerHtml": {
                 "id": "@coffeekraken.sugar.js.dom.animation.animatedInnerHtml",
                 "name": "animatedInnerHtml",
@@ -20146,6 +19924,228 @@
                 "filename": "tagsMap.ts",
                 "extension": "ts",
                 "relPath": "src/shared/console/html/tagsMap.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.css.cssEasingStrToJsFunction": {
+                "id": "@coffeekraken.sugar.js.css.cssEasingStrToJsFunction",
+                "name": "cssEasingStrToJsFunction",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Convert a css easing string line \"cubic-bezier(.17,.67,.83,.67)\" to a js easing function",
+                "namespace": "@coffeekraken.sugar.js.css",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { __cssEasingStrToJsFunction } from '@coffeekraken/sugar/css'\nconst fn = __cssEasingStrToJsFunction('cubic-bezier(.17,.67,.83,.67)');\nfn(0.5);\nfn(0.34);"
+                    }
+                ],
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "cssEasingStrToJsFunction.ts",
+                "extension": "ts",
+                "relPath": "src/shared/css/easing/cssEasingStrToJsFunction.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.css.parse.parseKeyframeKey": {
+                "id": "@coffeekraken.sugar.js.css.parse.parseKeyframeKey",
+                "name": "parseKeyframeKey",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Parses KeyFrameRule.keyText to an array of integers holding keyframe percentages",
+                "namespace": "@coffeekraken.sugar.js.css.parse",
+                "status": "wip",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { __parseKeyframeKey } from '@coffeekraken/sugar/css';\n__parseKeyframeKey('from');"
+                    }
+                ],
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "parseKeyframeKey.ts",
+                "extension": "ts",
+                "relPath": "src/shared/css/parse/parseKeyframeKey.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.css.parse.parseTransformRule": {
+                "id": "@coffeekraken.sugar.js.css.parse.parseTransformRule",
+                "name": "parseTransformRule",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Parse the transform rule of an element and returns a simple object with each properties separated.",
+                "namespace": "@coffeekraken.sugar.js.css.parse",
+                "status": "wip",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { __parseTransformRule } from '@coffeekraken/sugar/css';\n__parseTransformRule('translate(-100px, 200rem));"
+                    }
+                ],
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "parseTransformRule.ts",
+                "extension": "ts",
+                "relPath": "src/shared/css/parse/parseTransformRule.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.css.rule.removeVendorPrefix": {
+                "id": "@coffeekraken.sugar.js.css.rule.removeVendorPrefix",
+                "name": "removeVendorPrefix",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Remove vendor prefixes from CSSPropertyNames",
+                "namespace": "@coffeekraken.sugar.js.css.rule",
+                "status": "wip",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { __removeVendorPrefix } from '@coffeekraken/sugar/css';\n__removeVendorPrefix('moz-something'); // 'something'"
+                    }
+                ],
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "removeVendorPrefix.ts",
+                "extension": "ts",
+                "relPath": "src/shared/css/rule/removeVendorPrefix.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.css.transform.styleObject2String": {
+                "id": "@coffeekraken.sugar.js.css.transform.styleObject2String",
+                "name": "styleObject2String",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Transform a style object to inline string separated by ;",
+                "namespace": "@coffeekraken.sugar.js.css.transform",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { __styleObject2String } from '@coffeekraken/sugar/css'\nconst styleString =  __styleObject2String({\n\t\tpaddingLeft : '20px',\n\t\tdisplay : 'block'\n});\n// output => padding-left:20px; display:block;"
+                    }
+                ],
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "styleObject2String.ts",
+                "extension": "ts",
+                "relPath": "src/shared/css/transform/styleObject2String.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.css.transform.styleString2Object": {
+                "id": "@coffeekraken.sugar.js.css.transform.styleString2Object",
+                "name": "styleString2Object",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Transform a style string to an object representation",
+                "namespace": "@coffeekraken.sugar.js.css.transform",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { __styleString2Object } from '@coffeekraken/sugar/css'\nconst styleString =  __styleString2Object('padding-left:20px; display:block;');\n// output => {\n//\t\tpaddingLeft : '20px',\n// \t\tdisplay : 'block'\n// }"
+                    }
+                ],
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "styleString2Object.ts",
+                "extension": "ts",
+                "relPath": "src/shared/css/transform/styleString2Object.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.shared.dev.colors.availableColors": {

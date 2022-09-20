@@ -1,30 +1,48 @@
-import { define as __sActivateFeature } from '@coffeekraken/s-activate-feature';
+// import { define as __sAppearFeature } from '@coffeekraken/s-appear-feature';
+import { define as __SClipboardCopyComponent } from '@coffeekraken/s-clipboard-copy-component';
 import { define as __SCodeExampleComponent } from '@coffeekraken/s-code-example-component/lazy';
-import __SDepsFeature, {
-    define as __sDepsFeatureDefine,
-} from '@coffeekraken/s-deps-feature';
-import __SFeature from '@coffeekraken/s-feature';
+import { define as __SColorPickerComponent } from '@coffeekraken/s-color-picker-component';
+import { define as __SDatetimePickerComponent } from '@coffeekraken/s-datetime-picker-component';
 import { define as __SFiltrableInputComponent } from '@coffeekraken/s-filtrable-input-component';
-
-import { define as __sInlineFeature } from '@coffeekraken/s-inline-feature';
 import __SLitComponent from '@coffeekraken/s-lit-component';
-import { define as __sPageTransitionFeature } from '@coffeekraken/s-page-transition-feature';
 import { define as __SSidePanelComponent } from '@coffeekraken/s-panel-component';
-import { define as __sRefocusFeature } from '@coffeekraken/s-refocus-feature';
+import { define as __SRangeComponent } from '@coffeekraken/s-range-component';
+import { define as __SRatingComponent } from '@coffeekraken/s-rating-component';
+import { define as __SScrollComponent } from '@coffeekraken/s-scroll-component';
 import {
     define as __SSliderComponent,
     SSliderSlideableBehavior,
 } from '@coffeekraken/s-slider-component';
+import { define as __SThemeSwitcherComponent } from '@coffeekraken/s-theme-switcher-component';
+
+import { define as __sActivateFeature } from '@coffeekraken/s-activate-feature';
+import __SDepsFeature, {
+    define as __sDepsFeatureDefine,
+} from '@coffeekraken/s-deps-feature';
+import __SFeature from '@coffeekraken/s-feature';
+import { define as __sFloatingFeature } from '@coffeekraken/s-floating-feature';
+import { define as __sFormValidateFeature } from '@coffeekraken/s-form-validate-feature';
+import { define as __sInlineFeature } from '@coffeekraken/s-inline-feature';
+import { define as __sPageTransitionFeature } from '@coffeekraken/s-page-transition-feature';
+import { define as __sRefocusFeature } from '@coffeekraken/s-refocus-feature';
 import { define as __sSugarFeature } from '@coffeekraken/s-sugar-feature';
 import { define as __sTemplateFeature } from '@coffeekraken/s-template-feature';
+// import { define as __sParallaxFeature } from '@coffeekraken/s-parallax-feature';
 
 // Website specific
 import { define as __CKSearchComponent } from './components/CKSearch';
 import { define as __CKSettingsComponent } from './components/CkSettings';
+// import { define as __CKBlobComponent } from './components/CkBlob';
+import { define as __CKDiscoverComponent } from './components/CKDiscover';
+import { define as __CKDiscoverTabedComponent } from './components/CKDiscoverTabed';
+// import { define as __CKDocSubNavComponent } from './components/CKDocSubNav/CKDocSubNav';
+// import { define as __CkFallingStarsComponent } from './components/CkFallingStars';
+// import { define as __CKRatingsComponent } from './components/CKRating';
+// import { define as __CKWelcomeRatingsComponent } from './components/CKWelcomeRatings';
+// import __SDashboard from '@coffeekraken/s-dashboard';
 
 // Libs
 import __STheme from '@coffeekraken/s-theme';
-import { __wait } from '@coffeekraken/sugar/datetime';
 
 // Views specific
 // @ts-ignore
@@ -126,6 +144,24 @@ const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
     __sActivateFeature();
     __sPageTransitionFeature();
     __sTemplateFeature();
+    __sFloatingFeature();
+    __sInlineFeature();
+    // __sAppearFeature();
+    // __sParallaxFeature();
+    __sFormValidateFeature({
+        customValidations: {
+            coffeekraken: (value, helpers) => {
+                if (value === 'coffeekraken') {
+                    return helpers.message(
+                        'Are you sure? Krakens are dangerous...',
+                    );
+                }
+                return value;
+            },
+        },
+    });
+    __sSugarFeature();
+    __sRefocusFeature();
 
     // components
     // __CKRatingsComponent();
@@ -140,15 +176,22 @@ const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
             },
         },
     });
+    // __CKRatingsComponent();
+    __SClipboardCopyComponent();
+    __SRatingComponent();
+    __SColorPickerComponent();
+    __SDatetimePickerComponent();
+    __SScrollComponent();
+    __SRangeComponent();
+    __SThemeSwitcherComponent();
 
-    // features
-    __sSugarFeature();
-    __sRefocusFeature();
-    __sInlineFeature();
-
-    // internal components
+    // Website specific
     __CKSearchComponent();
     __CKSettingsComponent();
+    __CKDiscoverComponent();
+    __CKDiscoverTabedComponent();
+    // __CkFallingStarsComponent();
+    // __CKWelcomeRatingsComponent();
 
     // dashboard
     // new __SDashboard({
@@ -162,18 +205,4 @@ const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
     //         },
     //     },
     // });
-
-    // Load delayed features
-    // 2s after
-
-    let delayedLoaded = false;
-    async function load() {
-        if (delayedLoaded) return;
-        delayedLoaded = true;
-        console.log('MOVED');
-        document.removeEventListener('pointermove', load);
-        await __wait(1000);
-        import('./delayed');
-    }
-    document.addEventListener('pointermove', load);
 })();

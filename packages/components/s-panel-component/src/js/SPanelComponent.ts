@@ -375,8 +375,5 @@ export function define(
     props: Partial<SPanelComponentProps> = {},
     tagName = 's-panel',
 ) {
-    __SLitComponent.define(SPanelComponent, props, tagName);
-
-    // __SLitComponent.setDefaultProps(tagName, props);
-    // customElements.define(tagName, SPanel);
+    __SLitComponent.define(tagName, SPanelComponent, props);
 }

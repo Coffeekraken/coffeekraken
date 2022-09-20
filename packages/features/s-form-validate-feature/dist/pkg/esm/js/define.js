@@ -1,0 +1,5 @@
+import __SFormValidateFeature from './SFormValidateFeature';
+export default function define(props = {}, name = 's-form-validate') {
+    __SFormValidateFeature.define(name, __SFormValidateFeature, Object.assign({ mountWhen: 'interact' }, props));
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBLE9BQU8sc0JBQXNCLE1BQU0sd0JBQXdCLENBQUM7QUFFNUQsTUFBTSxDQUFDLE9BQU8sVUFBVSxNQUFNLENBQzFCLFFBQTZDLEVBQUUsRUFDL0MsSUFBSSxHQUFHLGlCQUFpQjtJQUV4QixzQkFBc0IsQ0FBQyxNQUFNLENBQUMsSUFBSSxFQUFFLHNCQUFzQixrQkFDdEQsU0FBUyxFQUFFLFVBQVUsSUFDbEIsS0FBSyxFQUNWLENBQUM7QUFDUCxDQUFDIn0=

@@ -7,6 +7,8 @@ import __SPromise from '@coffeekraken/s-promise';
 import __SState from '@coffeekraken/s-state';
 import __STheme from '@coffeekraken/s-theme';
 
+import __fastdom from 'fastdom';
+
 import { __adoptStyleInShadowRoot } from '@coffeekraken/sugar/dom';
 
 import { __wait } from '@coffeekraken/sugar/datetime';
@@ -63,6 +65,21 @@ export interface ISComponentUtilsDefaultProps {
 
 export default class SComponentUtils extends __SClass {
     /**
+     * @name            fastdom
+     * @type            Object
+     * @static
+     *
+     * Access the fastdom api
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    static fastdom: {
+        mutate: Function;
+        measure: Function;
+    } = __fastdom;
+
+    /**
      * @name            props
      * @type            Object
      *
@@ -90,6 +107,20 @@ export default class SComponentUtils extends __SClass {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     node: HTMLElement;
+
+    /**
+     * @name            fastdom
+     * @type            Object
+     *
+     * Access the fastdom api
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    fastdom: {
+        mutate: Function;
+        measure: Function;
+    } = __fastdom;
 
     /**
      * @name            name
@@ -291,18 +322,22 @@ export default class SComponentUtils extends __SClass {
                     if (settings.reflectAttributes) {
                         const propDef = PropsInterface.definition[prop];
                         if (propDef?.physical) {
-                            if (
-                                value === false ||
-                                value === undefined ||
-                                value === null
-                            ) {
-                                _this.node.removeAttribute(__dashCase(prop));
-                            } else {
-                                _this.node.setAttribute(
-                                    __dashCase(prop),
-                                    String(value),
-                                );
-                            }
+                            __fastdom.mutate(() => {
+                                if (
+                                    value === false ||
+                                    value === undefined ||
+                                    value === null
+                                ) {
+                                    _this.node.removeAttribute(
+                                        __dashCase(prop),
+                                    );
+                                } else {
+                                    _this.node.setAttribute(
+                                        __dashCase(prop),
+                                        String(value),
+                                    );
+                                }
+                            });
                         }
                     }
                     _props[prop] = value;

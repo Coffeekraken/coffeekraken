@@ -4,7 +4,11 @@ import __SFile from '@coffeekraken/s-file';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SugarConfig from '@coffeekraken/s-sugar-config';
-import { __writeFileSync, __writeTmpFileSync } from '@coffeekraken/sugar/fs';
+import {
+    __removeSync,
+    __writeFileSync,
+    __writeTmpFileSync,
+} from '@coffeekraken/sugar/fs';
 import { __isPortFree } from '@coffeekraken/sugar/network';
 import __listNodeModulesPackages from '@coffeekraken/sugar/node/npm/listNodeModulesPackages';
 import { __deepMerge } from '@coffeekraken/sugar/object';
@@ -12,7 +16,6 @@ import { __packageRootDir } from '@coffeekraken/sugar/path';
 import { __onProcessExit } from '@coffeekraken/sugar/process';
 import __childProcess from 'child_process';
 import __path from 'path';
-import __fs from 'fs';
 import __rollupAnalyzerPlugin from 'rollup-plugin-analyzer';
 import { uglify as __uglifyPlugin } from 'rollup-plugin-uglify';
 import { build as __viteBuild, createServer as __viteServer } from 'vite';
@@ -21,7 +24,6 @@ import __SViteStartParamsInterface from './interface/SViteStartParamsInterface';
 import __SViteTestParamsInterface from './interface/SViteTestParamsInterface';
 import __sInternalWatcherReloadVitePlugin from './plugins/internalWatcherReloadPlugin';
 import __rewritesPlugin from './plugins/rewritesPlugin';
-import { __removeSync } from '@coffeekraken/sugar/fs';
 
 export interface ISViteSettings {}
 
@@ -42,7 +44,7 @@ export interface ISViteBuildParams {
     chunks: boolean;
     bundle: boolean;
     lib: boolean;
-    minify: boolean;
+    minify: boolean | 'esbuild' | 'terser';
     analyze: boolean;
 }
 
@@ -197,10 +199,10 @@ export default class SVite extends __SClass {
 
                     // shortcuts
                     if (buildType === 'lib') {
-                        buildParams.minify = true;
+                        buildParams.minify = 'esbuild';
                     }
                     if (buildParams.prod) {
-                        buildParams.minify = true;
+                        buildParams.minify = 'esbuild';
                     }
 
                     const config: any = __deepMerge(viteConfig, {
@@ -390,6 +392,16 @@ export default class SVite extends __SClass {
                         value: `<yellow>○</yellow> Format      : ${finalFormats.join(
                             ',',
                         )}`,
+                    });
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>○</yellow> Minify      : ${
+                            typeof buildParams.minify === 'string'
+                                ? `<green>${buildParams.minify}</green>`
+                                : buildParams.minify === false
+                                ? '<red>false</red>'
+                                : '<green>esbuild</green>'
+                        }`,
                     });
 
                     // set the outputs

@@ -1,0 +1,5 @@
+import __SFloatingFeature from './SFloatingFeature';
+export default function define(props = {}, name = 's-floating') {
+    __SFloatingFeature.define(name, __SFloatingFeature, Object.assign({}, props));
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBLE9BQU8sa0JBQWtCLE1BQU0sb0JBQW9CLENBQUM7QUFFcEQsTUFBTSxDQUFDLE9BQU8sVUFBVSxNQUFNLENBQzFCLFFBQXlDLEVBQUUsRUFDM0MsSUFBSSxHQUFHLFlBQVk7SUFFbkIsa0JBQWtCLENBQUMsTUFBTSxDQUFDLElBQUksRUFBRSxrQkFBa0Isb0JBQzNDLEtBQUssRUFDVixDQUFDO0FBQ1AsQ0FBQyJ9

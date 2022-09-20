@@ -6,6 +6,8 @@ import { __querySelectorUp, __scrollTo } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SPageTransitionFeatureInterface from './interface/SPageTransitionFeatureInterface';
 
+import __define from './define';
+
 // @ts-ignore
 import __css from '../../../../src/css/s-page-transition.css'; // relative to /dist/pkg/esm/js
 
@@ -166,11 +168,13 @@ export default class SPageTransitionFeature extends __SFeature {
             })
 
             // add classes
-            document.body.classList.add('loading');
-            document.body.setAttribute('loading', 'true');
-            $source.classList.add('s-page-transition-source');
-            $source.classList.add('loading');
-            $source.setAttribute('loading', true);
+            this.componentUtils.fastdom.mutate(() => {
+                document.body.classList.add('loading');
+                document.body.setAttribute('loading', 'true');
+                $source.classList.add('s-page-transition-source');
+                $source.classList.add('loading');
+                $source.setAttribute('loading', true);
+            });
 
             // before callback
             // @ts-ignore
@@ -362,9 +366,4 @@ export default class SPageTransitionFeature extends __SFeature {
     }
 }
 
-export function define(
-    props: Partial<ISPageTransitionFeatureProps> = {},
-    name = 's-page-transition',
-) {
-    __SFeature.defineFeature(name, SPageTransitionFeature, props);
-}
+export { __define as define };

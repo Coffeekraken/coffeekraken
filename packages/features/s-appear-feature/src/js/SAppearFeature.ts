@@ -10,6 +10,8 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __uniqid } from '@coffeekraken/sugar/string';
 import __SAppearFeatureInterface from './interface/SAppearFeatureInterface';
 
+import __define from './define';
+
 // @ts-ignore
 import __css from '../../../../src/css/s-appear-feature.css'; // relative to /dist/pkg/esm/js
 
@@ -89,9 +91,11 @@ export default class SAppearFeature extends __SFeature {
         );
 
         // add the s-appear attribute if not present
-        if (!this.node.hasAttribute('s-appear')) {
-            this.node.setAttribute('s-appear', true);
-        }
+        this.componentUtils.fastdom.mutate(() => {
+            if (!this.node.hasAttribute('s-appear')) {
+                this.node.setAttribute('s-appear', true);
+            }
+        });
     }
 
     async mount() {
@@ -199,12 +203,4 @@ export default class SAppearFeature extends __SFeature {
     }
 }
 
-export function define(
-    props: Partial<ISAppearFeatureProps> = {},
-    name = 's-appear',
-) {
-    __SFeature.defineFeature(name, SAppearFeature, {
-        mountWhen: 'entersViewport',
-        ...props,
-    });
-}
+export { __define as define };

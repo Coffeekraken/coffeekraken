@@ -3,6 +3,8 @@ import { __makeFloat } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SFloatingFeatureInterface from './interface/SFloatingFeatureInterface';
 
+import __define from './define';
+
 // @ts-ignore
 import __css from '../../../../src/css/s-floating-feature.css'; // relative to /dist/pkg/esm/js
 
@@ -75,9 +77,4 @@ export default class SFloatingFeature extends __SFeature {
     }
 }
 
-export function define(
-    props: Partial<ISFloatingFeatureProps> = {},
-    name = 's-floating',
-) {
-    __SFeature.defineFeature(name, SFloatingFeature, props);
-}
+export { __define as define };

@@ -2,6 +2,7 @@ import __SColor from '@coffeekraken/s-color';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __clearTransmations } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
+import __fastdom from 'fastdom';
 import __SThemeBase from '../shared/SThemeBase';
 
 /**
@@ -144,23 +145,25 @@ export default class STheme extends __SThemeBase {
         variant?: string,
         $context: HTMLElement = <HTMLElement>document.querySelector('html'),
     ): void {
-        __clearTransmations(document.querySelector('html'), {
-            timeout: 100,
-        });
+        __fastdom.mutate(() => {
+            __clearTransmations(document.querySelector('html'), {
+                timeout: 100,
+            });
 
-        if (theme && variant) {
-            $context.setAttribute('theme', `${theme}-${variant}`);
-        } else if (theme) {
-            $context.setAttribute(
-                'theme',
-                `${theme}-${__SSugarConfig.get('theme.variant')}`,
-            );
-        } else if (variant) {
-            $context.setAttribute(
-                'theme',
-                `${__SSugarConfig.get('theme.theme')}-${variant}`,
-            );
-        }
+            if (theme && variant) {
+                $context.setAttribute('theme', `${theme}-${variant}`);
+            } else if (theme) {
+                $context.setAttribute(
+                    'theme',
+                    `${theme}-${__SSugarConfig.get('theme.variant')}`,
+                );
+            } else if (variant) {
+                $context.setAttribute(
+                    'theme',
+                    `${__SSugarConfig.get('theme.theme')}-${variant}`,
+                );
+            }
+        });
     }
 
     /**
@@ -446,6 +449,7 @@ export default class STheme extends __SThemeBase {
         $wrapper.setAttribute('theme', this.theme);
         $wrapper.setAttribute('variant', this.variant);
         $wrapper.appendChild($elm);
+        // @ts-ignore
         $context.appendChild($wrapper);
         const style = getComputedStyle($elm);
         const color = new __SColor(style.backgroundColor);

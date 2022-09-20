@@ -206,8 +206,5 @@ export function define(
     props: Partial<ISRangeComponentProps> = {},
     tagName = 's-range',
 ) {
-    __SLitComponent.define(SRangeComponent, props, tagName);
-
-    // __SLitComponent.setDefaultProps(tagName, props);
-    // customElements.define(tagName, SRange);
+    __SLitComponent.define(tagName, SRangeComponent, props);
 }

@@ -79,7 +79,7 @@ export default class CKDiscoverTabed extends __SLitComponent {
 }
 
 export function define(props: any = {}, tagName = 'ck-discover-tabed') {
-  __SLitComponent.define(CKDiscoverTabed, props, tagName);
+  __SLitComponent.define(tagName, CKDiscoverTabed, props);
 
   // __SLitComponent.setDefaultProps(tagName, props);
   // customElements.define(tagName, CKDiscoverTabed);

@@ -4,6 +4,7 @@ import __SPromise from '@coffeekraken/s-promise';
 import { __when } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __uniqid } from '@coffeekraken/sugar/string';
+import __fastdom from 'fastdom';
 import type { TWhenTrigger } from '../detect/when';
 
 /**
@@ -55,7 +56,7 @@ export default function __querySelectorLive(
     selector: string,
     cb: Function<HTMLElement> = null,
     settings: Partial<IQuerySelectorLiveSettings> = {},
-    _isFirstLevel = true
+    _isFirstLevel = true,
 ): __SPromise<HTMLElement> {
     let _emit,
         _pipe,
@@ -112,10 +113,10 @@ export default function __querySelectorLive(
 
         // emit our node
         _emit?.('node', {
-            node
+            node,
             cancel() {
                 pro.cancel();
-            }
+            },
         });
 
         // callback with our node
@@ -137,7 +138,7 @@ export default function __querySelectorLive(
     }
 
     async function processNode(node: HTMLElement, sel: string): void {
-        if (!node.matches || isCanceled()) {
+        if (!node.matches || isCanceled()) {
             return;
         }
 
@@ -163,7 +164,7 @@ export default function __querySelectorLive(
     }
 
     function findAndProcess($root: HTMLElement, sel: string) {
-        if (!$root.querySelectorAll || isCanceled()) {
+        if (!$root.querySelectorAll || isCanceled()) {
             return;
         }
 
@@ -220,11 +221,13 @@ export default function __querySelectorLive(
                                     }
                                     $scope._sQuerySelectorLiveScopeDirty = true;
                                     isAfterCalledByScopeId[scopeId] = true;
-                                    $scope.classList.add('ready');
-                                    $scope.setAttribute('ready', 'true');
+                                    __fastdom.mutate(() => {
+                                        $scope.classList.add('ready');
+                                        $scope.setAttribute('ready', 'true');
+                                    });
                                 },
                             }),
-                            true
+                            true,
                         ),
                     );
                 },
@@ -232,7 +235,7 @@ export default function __querySelectorLive(
                     firstOnly: false,
                     scopes: false,
                 }),
-                false
+                false,
             ),
         );
         // handle things not in a scope
@@ -246,7 +249,7 @@ export default function __querySelectorLive(
                 Object.assign({}, settings, {
                     scopes: false,
                 }),
-                false
+                false,
             ),
         );
         // after first callback

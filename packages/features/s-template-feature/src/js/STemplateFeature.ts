@@ -3,6 +3,8 @@ import __SFeature from '@coffeekraken/s-feature';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __STemplateFeatureInterface from './interface/STemplateFeatureInterface';
 
+import __define from './define';
+
 export interface ISTemplateFeatureProps {}
 
 /**
@@ -46,13 +48,16 @@ export default class STemplateFeature extends __SFeature implements ISFeature {
         );
     }
     async mount() {
-        this.node.after(this.node.content);
+        const $content = this.node.content;
+        const $container = $content.children[0];
+        this.componentUtils.fastdom.mutate(() => {
+            this.node.parentNode.insertBefore($content, this.node);
+            $container?.classList.add('s-template');
+            $container?.classList.add('ready');
+            $container?.setAttribute('ready', 'true');
+            this.node.remove();
+        });
     }
 }
 
-export function define(
-    props: Partial<ISTemplateFeatureProps> = {},
-    name = 's-template',
-) {
-    __SFeature.defineFeature(name, STemplateFeature, props);
-}
+export { __define as define };

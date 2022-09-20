@@ -7,10 +7,9 @@ import type {
     IFloatSettings,
 } from '@coffeekraken/sugar/js/dom/ui/makeFloat';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __dateFormat from 'dateformat';
 import {
-    parse as __parseDate,
     format as __formatDate,
+    parse as __parseDate,
 } from 'date-format-parse';
 import { css, html, unsafeCSS } from 'lit';
 import __SDatetimePickerComponentInterface from './interface/SDatetimePickerComponentInterface';
@@ -242,16 +241,23 @@ export default class SDatetimePickerComponent extends __SLitComponent {
         } else {
             // this._$root.append(this._$input);
         }
-        if (!this._$input?.hasAttribute('name')) {
-            this._$input?.setAttribute('name', this.props.name);
-        }
-        if (!this._$input?.hasAttribute('placeholder')) {
-            this._$input?.setAttribute('placeholder', this.props.placeholder);
-        }
-        if (!this._$input?.hasAttribute('autocomplete')) {
-            this._$input?.setAttribute('autocomplete', 'off');
-        }
-        this._$input.setAttribute('readonly', true);
+
+        // some dom mutation
+        this.componentUtils.fastdom.mutate(() => {
+            if (!this._$input?.hasAttribute('name')) {
+                this._$input?.setAttribute('name', this.props.name);
+            }
+            if (!this._$input?.hasAttribute('placeholder')) {
+                this._$input?.setAttribute(
+                    'placeholder',
+                    this.props.placeholder,
+                );
+            }
+            if (!this._$input?.hasAttribute('autocomplete')) {
+                this._$input?.setAttribute('autocomplete', 'off');
+            }
+            this._$input.setAttribute('readonly', true);
+        });
 
         // selectors
         this._$days = this.querySelector('.s-datetime-picker__days');
@@ -1141,7 +1147,7 @@ export function define(
     props: Partial<ISDatetimePickerComponentProps> = {},
     tagName = 's-datetime-picker',
 ) {
-    __SLitComponent.define(SDatetimePickerComponent, props, tagName);
+    __SLitComponent.define(tagName, SDatetimePickerComponent, props);
 
     // __SLitComponent.setDefaultProps(tagName, props);
     // customElements.define(tagName, SDatetimePicker);

@@ -1,0 +1,1 @@
+define(["exports","./index.f0efa065"],function(e,t){"use strict";e.default=function(){return t.SSugarConfig.get("storage.package.tmpDir")},Object.defineProperty(e,Symbol.toStringTag,{value:"Module"})});

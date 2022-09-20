@@ -3,6 +3,8 @@ import __SFeature from '@coffeekraken/s-feature';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SInlineFeatureInterface from './interface/SInlineFeatureInterface';
 
+import __define from './define';
+
 // @ts-ignore
 import '../../../../src/css/s-inline-feature.css'; // relative to /dist/pkg/esm/js
 // import '../css/s-inline-feature.css'; // for dev
@@ -80,9 +82,4 @@ export default class SInlineFeature extends __SFeature implements ISFeature {
     }
 }
 
-export function define(
-    props: Partial<IInlineFeatureProps> = {},
-    name = 's-inline',
-) {
-    __SFeature.defineFeature(name, SInlineFeature, props);
-}
+export { __define as define };

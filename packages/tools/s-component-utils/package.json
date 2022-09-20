@@ -16,7 +16,8 @@
         "@coffeekraken/s-promise": "^2.0.0-alpha.20",
         "@coffeekraken/s-state": "^2.0.0-alpha.20",
         "@coffeekraken/s-theme": "^2.0.0-alpha.20",
-        "@coffeekraken/sugar": "^2.0.0-alpha.20"
+        "@coffeekraken/sugar": "^2.0.0-alpha.20",
+        "fastdom": "^1.0.11"
     },
     "main": "dist/pkg/cjs/js/exports.js",
     "module": "dist/pkg/esm/js/exports.js",

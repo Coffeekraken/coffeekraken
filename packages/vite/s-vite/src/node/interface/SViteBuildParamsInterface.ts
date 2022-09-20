@@ -99,7 +99,7 @@ class SViteBuildParamsInterface extends __SInterface {
             },
             minify: {
                 description: 'Specify if you want to minify your build or not',
-                type: 'Boolean',
+                type: 'Boolean|String',
                 default: false,
                 alias: 'm',
             },

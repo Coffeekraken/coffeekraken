@@ -1,7 +1,8 @@
 // @ts-nocheck
 
-import deepMerge from '../../shared/object/deepMerge';
 import { __querySelectorLive } from '@coffeekraken/sugar/dom';
+import __fastdom from 'fastdom';
+import deepMerge from '../../shared/object/deepMerge';
 
 /**
  * @name 		linksStateAttributes
@@ -97,30 +98,34 @@ export default function __linksStateAttributes(
     settings = deepMerge({}, settings);
 
     function handleLink($linkElm) {
-        if ($linkElm.getAttribute('href') === document.location.pathname) {
-            $linkElm.setAttribute('actual', true);
-            $linkElm.parentNode.setAttribute('actual-parent', true);
-            $linkElm.dispatchEvent(
-                new CustomEvent('actual', {
-                    bubbles: true,
-                }),
-            );
-        } else if (
-            document.location.pathname !== '/' &&
-            $linkElm.getAttribute('href').startsWith(document.location.pathname)
-        ) {
-            $linkElm.removeAttribute('actual');
-            $linkElm.setAttribute('actual-child', true);
-            $linkElm.dispatchEvent(
-                new CustomEvent('actual', {
-                    bubbles: true,
-                }),
-            );
-        } else {
-            $linkElm.removeAttribute('actual');
-            $linkElm.removeAttribute('actual-child');
-            $linkElm.parentNode.removeAttribute('actual-parent');
-        }
+        __fastdom.mutate(() => {
+            if ($linkElm.getAttribute('href') === document.location.pathname) {
+                $linkElm.setAttribute('actual', true);
+                $linkElm.parentNode.setAttribute('actual-parent', true);
+                $linkElm.dispatchEvent(
+                    new CustomEvent('actual', {
+                        bubbles: true,
+                    }),
+                );
+            } else if (
+                document.location.pathname !== '/' &&
+                $linkElm
+                    .getAttribute('href')
+                    .startsWith(document.location.pathname)
+            ) {
+                $linkElm.removeAttribute('actual');
+                $linkElm.setAttribute('actual-child', true);
+                $linkElm.dispatchEvent(
+                    new CustomEvent('actual', {
+                        bubbles: true,
+                    }),
+                );
+            } else {
+                $linkElm.removeAttribute('actual');
+                $linkElm.removeAttribute('actual-child');
+                $linkElm.parentNode.removeAttribute('actual-parent');
+            }
+        });
     }
 
     __querySelectorLive(`[href]`, ($linkElm) => {

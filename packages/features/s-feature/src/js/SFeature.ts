@@ -107,7 +107,7 @@ export default class SFeature extends __SClass implements ISFeature {
     }
 
     /**
-     * @name              defineFeature
+     * @name              define
      * @type            Function
      * @static
      *
@@ -121,14 +121,14 @@ export default class SFeature extends __SClass implements ISFeature {
      * @since           2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    static defineFeature(
+    static define(
         name: string,
-        feature: typeof SFeature,
+        featureCls: typeof SFeature,
         defaultProps: any = {},
     ) {
         this.setDefaultProps(name, defaultProps);
         __querySelectorLive(`[${name}]`, ($elm) => {
-            new feature(name, $elm, __SComponentUtils.getDefaultProps(name));
+            new featureCls(name, $elm, __SComponentUtils.getDefaultProps(name));
         });
     }
 

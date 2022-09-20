@@ -251,7 +251,6 @@ export default class SSugarCli {
         if (process.env.JEST_WORKER_ID) return;
 
         if (!process.env.DEVS_CUT && this.args.params.devsCut) {
-            console.log('SET');
             process.env.DEVS_CUT = true;
         }
 
@@ -645,6 +644,9 @@ export default class SSugarCli {
                     : '<yellow>development</yellow>'
             } environment`,
             `<cyan>ENV</cyan> variable(s) loaded using <magenta>dotenv</magenta>`,
+            process.env.DEVS_CUT
+                ? `This process is running in <green>devsCut</green> mode`
+                : '',
             ' ',
         ]
             .filter((l) => l !== '')

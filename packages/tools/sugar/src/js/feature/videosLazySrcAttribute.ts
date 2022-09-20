@@ -1,6 +1,7 @@
 // @ts-nocheck
 
 import { __querySelectorLive, __whenInViewport } from '@coffeekraken/sugar/dom';
+import __fastdom from 'fastdom';
 
 /**
  * @name 		videoLazySrcAttribute
@@ -43,7 +44,12 @@ export default function __videoLazySrcAttribute(
     };
     __querySelectorLive('video[lazy-src]:not([is])', ($videoElm) => {
         __whenInViewport($videoElm, settings.offset).then(() => {
-            $videoElm.setAttribute('src', $videoElm.getAttribute('lazy-src'));
+            __fastdom.mutate(() => {
+                $videoElm.setAttribute(
+                    'src',
+                    $videoElm.getAttribute('lazy-src'),
+                );
+            });
         });
     });
 }

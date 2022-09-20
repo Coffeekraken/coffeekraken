@@ -4,6 +4,8 @@ import type { IScrollToSettings } from '@coffeekraken/sugar/js/dom/scroll/scroll
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SRefocusFeatureInterface from './interface/SRefocusFeatureInterface';
 
+import __define from './define';
+
 export interface ISRefocusFeatureProps {
     trigger: string[];
     scrollToSettings: Partial<IScrollToSettings>;
@@ -130,9 +132,4 @@ export default class SRefocusFeature extends __SFeature {
     }
 }
 
-export function define(
-    props: Partial<ISRefocusFeatureProps> = {},
-    name = 's-refocus',
-) {
-    __SFeature.defineFeature(name, SRefocusFeature, props);
-}
+export { __define as define };

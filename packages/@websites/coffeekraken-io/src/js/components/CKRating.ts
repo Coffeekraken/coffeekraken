@@ -272,8 +272,5 @@ export default class CKRatings extends __SLitComponent {
 }
 
 export function define(props: any = {}, tagName = 'ck-ratings') {
-  __SLitComponent.define(CKRatings, props, tagName);
-
-  // __SLitComponent.setDefaultProps(tagName, props);
-  // customElements.define(tagName, CKRatings);
+  __SLitComponent.define(tagName, CKRatings, props);
 }

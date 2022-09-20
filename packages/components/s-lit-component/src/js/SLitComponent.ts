@@ -84,7 +84,7 @@ export default class SLitComponent extends LitElement {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    static define(Cls: SLitComponent, props: any, tagName: string) {
+    static define(tagName: string, Cls: SLitComponent, props: any = {}) {
         if (customElements.get(tagName.toLowerCase())) {
             return;
         }

@@ -1,1 +1,0 @@
-define(["exports","./index.d9d97e89"],function(e,n){"use strict";e.define=function(t={},i="s-filtrable-input"){n.SFiltrableInputComponent.define(n.SFiltrableInputComponent,t,i)},Object.defineProperty(e,Symbol.toStringTag,{value:"Module"})});

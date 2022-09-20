@@ -1,3 +1,4 @@
+import __SComponentUtils from '@coffeekraken/s-component-utils';
 import __SFeature from '@coffeekraken/s-feature';
 import {
     __querySelectorLive,
@@ -6,6 +7,8 @@ import {
 import __whenNearViewport from '@coffeekraken/sugar/js/dom/detect/whenNearViewport';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SDepsFeatureInterface from './interface/SDepsFeatureInterface';
+
+import __define from './define';
 
 // @ts-ignore
 // import __css from '../../../../src/css/s-appear-feature.css'; // relative to /dist/pkg/esm/js
@@ -111,8 +114,10 @@ export default class SDepsFeature extends __SFeature {
         }
 
         // apply class and attribute
-        $elm.setAttribute('ready', 'true');
-        $elm.classList.add('ready');
+        __SComponentUtils.fastdom.mutate(() => {
+            $elm.setAttribute('ready', 'true');
+            $elm.classList.add('ready');
+        });
     }
 
     /**
@@ -202,12 +207,4 @@ export default class SDepsFeature extends __SFeature {
     }
 }
 
-export function define(
-    props: Partial<ISDepsFeatureProps> = {},
-    name = 's-deps',
-) {
-    __SFeature.defineFeature(name, SDepsFeature, {
-        mountWhen: 'nearViewport',
-        ...props,
-    });
-}
+export { __define as define };

@@ -1,6 +1,7 @@
 // @ts-nocheck
 
 import { __querySelectorLive } from '@coffeekraken/sugar/dom';
+import __fastdom from 'fastdom';
 
 /**
  * @name 		handleInputAttributes
@@ -60,35 +61,39 @@ export default function __inputAdditionalAttributes(
                 if (
                     field.type &&
                     (field.type === 'checkbox' || field.type === 'radio')
-                )
-                    return;
-                if (field.value && !field.hasAttribute('has-value')) {
-                    if (settings.hasValue) {
-                        field.setAttribute('has-value', true);
-                    }
-                    if (settings.empty) {
-                        field.removeAttribute('empty');
-                    }
-                } else if (
-                    field.value === undefined ||
-                    field.value === null ||
-                    field.value === ''
                 ) {
-                    if (settings.hasValue) {
-                        field.removeAttribute('has-value');
-                    }
-                    field.removeAttribute('value');
-                    if (settings.empty) {
-                        if (!field.hasAttribute('empty')) {
-                            field.setAttribute('empty', true);
+                    return;
+                }
+
+                __fastdom.mutate(() => {
+                    if (field.value && !field.hasAttribute('has-value')) {
+                        if (settings.hasValue) {
+                            field.setAttribute('has-value', true);
+                        }
+                        if (settings.empty) {
+                            field.removeAttribute('empty');
+                        }
+                    } else if (
+                        field.value === undefined ||
+                        field.value === null ||
+                        field.value === ''
+                    ) {
+                        if (settings.hasValue) {
+                            field.removeAttribute('has-value');
+                        }
+                        field.removeAttribute('value');
+                        if (settings.empty) {
+                            if (!field.hasAttribute('empty')) {
+                                field.setAttribute('empty', true);
+                            }
                         }
                     }
-                }
-                if (settings.dirty) {
-                    if (!field.hasAttribute('dirty') && field.value) {
-                        field.setAttribute('dirty', true);
+                    if (settings.dirty) {
+                        if (!field.hasAttribute('dirty') && field.value) {
+                            field.setAttribute('dirty', true);
+                        }
                     }
-                }
+                });
                 break;
         }
     }

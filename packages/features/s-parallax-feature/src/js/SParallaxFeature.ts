@@ -4,6 +4,8 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 import * as __rematrix from 'rematrix';
 import __SParallaxFeatureInterface from './interface/SParallaxFeatureInterface';
 
+import __define from './define';
+
 export interface ISParallaxFeatureProps {
     amount: number;
 }
@@ -131,9 +133,4 @@ export default class SParallaxFeature extends __SFeature implements ISFeature {
     }
 }
 
-export function define(
-    props: Partial<ISParallaxFeatureProps> = {},
-    name = 's-parallax',
-) {
-    __SFeature.defineFeature(name, SParallaxFeature, props);
-}
+export { __define as define };

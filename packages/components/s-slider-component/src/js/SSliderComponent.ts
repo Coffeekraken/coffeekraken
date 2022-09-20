@@ -1399,8 +1399,5 @@ export function define(
     props: Partial<ISSliderComponentProps> = {},
     tagName = 's-slider',
 ) {
-    __SLitComponent.define(SSliderComponent, props, tagName);
-
-    // __SLitComponent.setDefaultProps(tagName, props);
-    // customElements.define(tagName, SSlider);
+    __SLitComponent.define(tagName, SSliderComponent, props);
 }

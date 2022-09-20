@@ -304,5 +304,5 @@ export default class CKSearch extends __SLitComponent {
 }
 
 export function define(props: any = {}, tagName = 'ck-search') {
-  __SLitComponent.define(CKSearch, props, tagName);
+  __SLitComponent.define(tagName, CKSearch, props);
 }

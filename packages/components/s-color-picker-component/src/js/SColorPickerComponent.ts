@@ -262,16 +262,23 @@ export default class SColorPickerComponent extends __SLitComponent {
         } else {
             // this._$root.append(this._$input);
         }
-        if (!this._$input?.hasAttribute('name')) {
-            this._$input?.setAttribute('name', this.props.name);
-        }
-        if (!this._$input?.hasAttribute('placeholder')) {
-            this._$input?.setAttribute('placeholder', this.props.placeholder);
-        }
-        if (!this._$input?.hasAttribute('autocomplete')) {
-            this._$input?.setAttribute('autocomplete', 'off');
-        }
-        this._$input.setAttribute('readonly', true);
+
+        // some mutations
+        this.componentUtils.fastdom.mutate(() => {
+            if (!this._$input?.hasAttribute('name')) {
+                this._$input?.setAttribute('name', this.props.name);
+            }
+            if (!this._$input?.hasAttribute('placeholder')) {
+                this._$input?.setAttribute(
+                    'placeholder',
+                    this.props.placeholder,
+                );
+            }
+            if (!this._$input?.hasAttribute('autocomplete')) {
+                this._$input?.setAttribute('autocomplete', 'off');
+            }
+            this._$input.setAttribute('readonly', true);
+        });
 
         // update float on focus
         this.addEventListener('focusin', (e) => {

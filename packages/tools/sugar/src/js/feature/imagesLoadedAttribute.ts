@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import { __whenImageLoaded } from '@coffeekraken/sugar/dom';
-import __deepMerge from '../../shared/object/deepMerge';
+import __fastdom from 'fastdom';
 
 /**
  * @name 		imagesLoadedAttribute
@@ -39,8 +39,10 @@ export default function __imagesLoadedAttribute(): void {
     );
     [].forEach.call(document.querySelectorAll('img'), (img) => {
         __whenImageLoaded(img).then((img) => {
-            if (img.hasAttribute('loaded')) return;
-            img.setAttribute('loaded', true);
+            __fastdom.mutate(() => {
+                if (img.hasAttribute('loaded')) return;
+                img.setAttribute('loaded', true);
+            });
         });
     });
 }

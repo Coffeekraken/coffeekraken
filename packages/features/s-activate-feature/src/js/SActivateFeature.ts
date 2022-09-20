@@ -4,6 +4,8 @@ import { __querySelectorLive } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SActivateFeatureInterface from './interface/SActivateFeatureInterface';
 
+import __define from './define';
+
 export interface ISActivateFeatureProps {
     href: string;
     group: string;
@@ -360,10 +362,12 @@ export default class SActivateFeature extends __SFeature {
                         $target.classList.add(this.props.activeClass);
                     }
                     if (this.props.activeAttribute) {
-                        $target.setAttribute(
-                            this.props.activeAttribute,
-                            'true',
-                        );
+                        this.componentUtils.fastdom.mutate(() => {
+                            $target.setAttribute(
+                                this.props.activeAttribute,
+                                'true',
+                            );
+                        });
                     }
                 });
             }
@@ -410,9 +414,4 @@ export default class SActivateFeature extends __SFeature {
     }
 }
 
-export function define(
-    props: Partial<ISActivateFeatureProps> = {},
-    name = 's-activate',
-) {
-    __SFeature.defineFeature(name, SActivateFeature, props);
-}
+export { __define as define };

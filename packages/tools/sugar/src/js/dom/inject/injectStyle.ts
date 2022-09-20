@@ -43,6 +43,7 @@ export default function __injectStyle(
     };
 
     if (document.querySelector(`#${finalSettings.id}`)) return;
+
     const $tag = document.createElement('style');
     $tag.type = 'text/css';
     $tag.setAttribute('id', finalSettings.id);

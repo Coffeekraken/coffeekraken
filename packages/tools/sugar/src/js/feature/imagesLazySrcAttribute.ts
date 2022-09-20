@@ -1,6 +1,7 @@
 // @ts-nocheck
 
 import { __querySelectorLive, __whenInViewport } from '@coffeekraken/sugar/dom';
+import __fastdom from 'fastdom';
 import deepMerge from '../../shared/object/deepMerge';
 
 /**
@@ -47,7 +48,9 @@ export default function __imagesLazySrcAttribute(
     );
     __querySelectorLive('img[lazy-src]:not([is])', ($imgElm) => {
         __whenInViewport($imgElm, settings.offset).then(() => {
-            $imgElm.setAttribute('src', $imgElm.getAttribute('lazy-src'));
+            __fastdom.mutate(() => {
+                $imgElm.setAttribute('src', $imgElm.getAttribute('lazy-src'));
+            });
         });
     });
 }

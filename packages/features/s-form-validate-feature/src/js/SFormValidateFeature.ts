@@ -10,6 +10,8 @@ import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 import __css from '../../../../src/css/s-form-validate.css'; // relative to /dist/pkg/esm/js
 import __SFormValidateFeatureInterface from './interface/SFormValidateFeatureInterface';
 
+import __define from './define';
+
 /**
  * @name            SFormValidateFeature
  * @as              Form validate feature
@@ -323,6 +325,7 @@ export default class SFormValidateFeature extends __SFeature {
             },
             {
                 rootNode: this.node,
+                scopes: false,
             },
         );
 
@@ -357,11 +360,18 @@ export default class SFormValidateFeature extends __SFeature {
         if ($insideField) this._$field = $insideField;
 
         // add the "novalidate" attribute on the field cause we take care
-        this._$field.setAttribute('novalidate', 'true');
+        this.componentUtils.fastdom.mutate(() => {
+            this._$field.setAttribute('novalidate', 'true');
 
-        // get some validations directly from the $field
-        ['required', 'maxlength', 'minlength', 'max', 'min', 'pattern'].forEach(
-            (type) => {
+            // get some validations directly from the $field
+            [
+                'required',
+                'maxlength',
+                'minlength',
+                'max',
+                'min',
+                'pattern',
+            ].forEach((type) => {
                 if (this._$field.hasAttribute(type)) {
                     if (this.props[type]) return;
                     this.props[type] = this._$field.getAttribute(type);
@@ -369,8 +379,8 @@ export default class SFormValidateFeature extends __SFeature {
                         this._$field.removeAttribute(type);
                     }
                 }
-            },
-        );
+            });
+        });
 
         // listen for events
         this.props.on.forEach((on) => {
@@ -641,9 +651,4 @@ export default class SFormValidateFeature extends __SFeature {
     }
 }
 
-export function define(
-    props: Partial<ISFormValidateFeatureProps> = {},
-    name = 's-form-validate',
-) {
-    __SFeature.defineFeature(name, SFormValidateFeature, props);
-}
+export { __define as define };

@@ -1,11 +1,11 @@
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { __wait } from '@coffeekraken/sugar/datetime';
+import { __isFocusWithin } from '@coffeekraken/sugar/dom';
 import { __isPlainObject } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import __SFiltrableInputComponentInterface from './interface/SFiltrableInputComponentInterface';
-import { __isFocusWithin } from '@coffeekraken/sugar/dom';
 
 import __cursorToEnd from '@coffeekraken/sugar/js/dom/input/cursorToEnd';
 
@@ -13,7 +13,7 @@ import {
     __distanceFromElementTopToViewportBottom,
     __distanceFromElementTopToViewportTop,
     __getStyleProperty,
-    __onScrollEnd,
+    __onScrollEnd
 } from '@coffeekraken/sugar/dom';
 import __stripTags from '@coffeekraken/sugar/js/dom/manipulate/stripTags';
 import { __hotkey } from '@coffeekraken/sugar/keyboard';
@@ -263,7 +263,9 @@ export default class SFiltrableInputComponent extends __SLitComponent {
     async firstUpdated() {
         // input
         this.$input = <any>this.querySelector('input');
-        this.$input.setAttribute('autocomplete', 'off');
+        this.componentUtils.fastdom.mutate(() => {
+            this.$input.setAttribute('autocomplete', 'off');
+        });
         
         // @ts-ignore
         this.$form = this.$input.form;
@@ -893,12 +895,5 @@ export function define(
     props: Partial<ISFiltrableInputComponentProps> = {},
     tagName = 's-filtrable-input',
 ) {
-    __SLitComponent.define(SFiltrableInputComponent, props, tagName);
-
-    // __SLitComponent.setDefaultProps(tagName, props);
-    // if (!customElements.get(tagName)) {
-    //     class SFiltrableInputComponent extends SFiltrableInput {}
-    //     // @ts-ignore
-    //     customElements.define(tagName, SFiltrableInputComponent);
-    // }
+    __SLitComponent.define(tagName, SFiltrableInputComponent, props);
 }

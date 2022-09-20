@@ -12,6 +12,8 @@ import {
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SSugarFeatureInterface from './interface/SSugarFeatureInterface';
 
+import __define from './define';
+
 export interface ISSugarFeatureProps {
     scrolled: boolean;
     scrolledDelta: number;
@@ -163,12 +165,4 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
     }
 }
 
-export function define(
-    props: Partial<ISSugarFeatureProps> = {},
-    name = 's-sugar',
-) {
-    __SFeature.setDefaultProps('s-sugar', {
-        mountWhen: 'direct',
-    });
-    __SFeature.defineFeature(name, SSugarFeature, props);
-}
+export { __define as define };

@@ -125,7 +125,5 @@ export default class CKDiscover extends __SLitComponent {
 }
 
 export function define(props: any = {}, tagName = 'ck-discover') {
-  __SLitComponent.define(CKDiscover, props, tagName);
-  // __SLitComponent.setDefaultProps(tagName, props);
-  // customElements.define(tagName, CKDiscover);
+  __SLitComponent.define(tagName, CKDiscover, props);
 }

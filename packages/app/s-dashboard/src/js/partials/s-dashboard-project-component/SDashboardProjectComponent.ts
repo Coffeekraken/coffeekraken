@@ -2,7 +2,7 @@
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { html } from 'lit';
-import './s-dashboard-project-component.css';
+import '../../../../../../src/js/partials/s-dashboard-project-component/s-dashboard-project-component.css';
 
 export default class SDashboardProjectComponent extends __SLitComponent {
     /**
@@ -53,26 +53,23 @@ export default class SDashboardProjectComponent extends __SLitComponent {
                 </div>
 
                 <div class="ck-panel">
-                    <div class="__list">
+                    <div class="ck-tabs">
                         ${Object.entries(this._project.environments ?? {}).map(
                             ([name, obj]) => html`
                                 <div
-                                    class="__list-item s-tooltip-container ${name ===
+                                    class="ck-tabs__item s-tooltip-container ${name ===
                                     this._activeEnvironmentId
                                         ? 'active'
                                         : ''}"
                                     @click=${() => {
                                         this._activeEnvironmentId = name;
-                                        this._activeEnvironment = this._project.environments[
-                                            name
-                                        ];
+                                        this._activeEnvironment =
+                                            this._project.environments[name];
                                         this.requestUpdate();
                                     }}
                                 >
                                     <i class="s-icon:${name}"></i>
-                                    <div class="s-tooltip">
-                                        ${name}
-                                    </div>
+                                    <div class="s-tooltip">${name}</div>
                                 </div>
                             `,
                         )}
@@ -97,7 +94,7 @@ export default class SDashboardProjectComponent extends __SLitComponent {
                                   `
                                 : ''}
                         </span>
-                        <div class="__list __list-urls">
+                        <div class="s-flex s-gap:10">
                             ${Object.entries(
                                 this._project.environments[
                                     this._activeEnvironmentId
@@ -108,7 +105,7 @@ export default class SDashboardProjectComponent extends __SLitComponent {
                                         href="${urlObj.url}"
                                         target="_blank"
                                         rel="noopener"
-                                        class="__list-item s-tooltip-container"
+                                        class="ck-action s-tooltip-container"
                                     >
                                         <i class="s-icon:${name}"></i>
                                         <div class="s-tooltip">

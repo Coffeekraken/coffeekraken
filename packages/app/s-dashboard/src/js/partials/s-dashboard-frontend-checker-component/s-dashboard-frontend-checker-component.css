@@ -15,35 +15,16 @@ s-dashboard-frontend-checker {
         @sugar.border.radius (10);
     }
 
-    .__levels {
-        display: flex;
-        @sugar.border.radius (10);
-        margin-block-end: sugar.margin(20);
-    }
-    .__level {
-        padding: sugar.padding(20) sugar.padding(20);
-        flex-grow: 1;
-        width: 33.3%;
-        cursor: pointer;
-        text-align: center;
-        @sugar.border.radius (10);
-
-        .s-icon {
-            margin-inline-end: sugar.margin(10);
-        }
-
-        &:hover {
-            background-color: sugar.color(accent, background);
-        }
-        &.active {
-            background: sugar.color(accent);
-        }
-    }
-
     .__filters {
         display: flex;
         @sugar.border.radius (10);
+        margin-block-start: sugar.margin(20);
         margin-block-end: sugar.margin(20);
+        background: sugar.color(main, --alpha 0.05);
+
+        @sugar.theme.when dark {
+            background: sugar.color(main, --alpha 0.1);
+        }
     }
     .__filter {
         padding: sugar.padding(20) sugar.padding(20);
@@ -59,20 +40,20 @@ s-dashboard-frontend-checker {
         }
 
         &:hover {
-            background-color: sugar.color(accent, background);
+            background-color: sugar.color(accent, --alpha 0.3);
         }
         &.active {
             opacity: 1;
         }
     }
 
-    .ck-list {
-        flex-grow: 1;
-        overflow-y: auto;
-        @sugar.scrollbar();
+    .ck-list__item:focus-within {
+        background: sugar.color(main, --alpha 0.1);
+        color: sugar.color(main, text);
     }
 
     .__details {
+        @sugar.border.radius();
         display: none;
     }
     .ck-list__item:focus-within .__details {
@@ -84,6 +65,8 @@ s-dashboard-frontend-checker {
         width: 100%;
         padding: sugar.padding(20);
         user-select: all;
+        background: sugar.color(main, background);
+        @sugar.border.radius();
     }
 
     .s-icon--success {
@@ -96,7 +79,7 @@ s-dashboard-frontend-checker {
     }
 
     .__more-link {
-        color: sugar.color(accent, background);
+        color: sugar.color(main, text);
         text-decoration: underline;
     }
 

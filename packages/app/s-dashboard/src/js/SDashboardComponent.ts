@@ -5,7 +5,7 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 // @ts-ignore
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __hotkey } from '@coffeekraken/sugar/keyboard';
-import __css from '../css/s-dashboard.css'; // relative to /dist/pkg/esm/js
+import __css from '../../../../src/css/s-dashboard.css'; // relative to /dist/pkg/esm/js
 import __SDashboardComponentInterface from './interface/SDashboardComponentInterface';
 
 import { define as __SDashboardBrowserstackComponent } from './partials/s-dashboard-browserstack-component/SDashboardBrowserstackComponent';
@@ -19,7 +19,7 @@ import { define as __SDashboardProjectComponent } from './partials/s-dashboard-p
 import { define as __SDashboardResponsiveComponent } from './partials/s-dashboard-responsive-component/SDashboardResponsiveComponent';
 import { define as __SDashboardWebVitalsComponent } from './partials/s-dashboard-web-vitals-component/SDashboardWebVitalsComponent';
 
-import __logoSvg from './partials/logo';
+import __logoSvg from '../../../../src/js/partials/logo';
 
 // external components
 __SDashboardPagesComponent();
@@ -63,6 +63,7 @@ export default class SDashboardComponent extends __SLitComponent {
     constructor() {
         super(
             __deepMerge({
+                name: 's-dashboard',
                 interface: __SDashboardComponentInterface,
                 shadowDom: false,
             }),
@@ -93,19 +94,27 @@ export default class SDashboardComponent extends __SLitComponent {
         });
     }
 
+    open() {
+        // @ts-ignore
+        this.document.dashboard?.open();
+    }
+
+    close() {
+        // @ts-ignore
+        this.document.dashboard?.close();
+    }
+
     /**
      * Listen shortcuts
      */
     _listenShortcuts() {
         // ctrl+s
         __hotkey('ctrl+s').on('press', () => {
-            // @ts-ignore
-            this.document.dashboard?.open();
+            this.open();
         });
         // escape
         __hotkey('escape').on('press', () => {
-            // @ts-ignore
-            this.document.dashboard?.close();
+            this.close();
         });
     }
 
@@ -115,7 +124,9 @@ export default class SDashboardComponent extends __SLitComponent {
                 <header class="header">
                     <div class="s-container:wide">
                         <div class="__toolbar">
-                            <div class="__logo">${unsafeHTML(__logoSvg)}</div>
+                            <div class="__logo" @click=${() => this.close()}>
+                                ${unsafeHTML(__logoSvg)}
+                            </div>
                             <h1 class="s-typo:h5">Dashboard</h1>
                             <div class="__grow"></div>
                         </div>
@@ -175,7 +186,5 @@ export function define(
     props: Partial<ISDashboardComponentProps> = {},
     tagName = 's-dashboard',
 ) {
-    __SLitComponent.setDefaultProps(tagName, props);
-    // @ts-ignore
-    customElements.define(tagName, SDashboardComponent);
+    __SLitComponent.define(tagName, SDashboardComponent, props, {});
 }

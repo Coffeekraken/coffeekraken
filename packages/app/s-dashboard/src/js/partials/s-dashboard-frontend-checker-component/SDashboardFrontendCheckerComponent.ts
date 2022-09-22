@@ -2,7 +2,8 @@
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { html } from 'lit';
-import './s-dashboard-frontend-checker-component.css';
+
+import '../../../../../../src/js/partials/s-dashboard-frontend-checker-component/s-dashboard-frontend-checker-component.css';
 
 import __SFrontendChecker, {
     ISFrontendCheckerCheckResult,
@@ -63,24 +64,30 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                 <h2 class="s-typo:h6 s-mbe:20">Frontend checker</h2>
 
                 <div class="ck-panel">
-                    <div class="__levels">
+                    <div class="ck-tabs">
                         <div
-                            class="__level ${this._level === 0 ? 'active' : ''}"
+                            class=" ck-tabs__item ${this._level === 0
+                                ? 'active'
+                                : ''}"
                             @click=${() => this._chooseLevel(0)}
                         >
-                            <i class="s-icon:low"></i> Low
+                            <i class="s-icon:low"></i> <span>Low</span>
                         </div>
                         <div
-                            class="__level ${this._level === 1 ? 'active' : ''}"
+                            class=" ck-tabs__item ${this._level === 1
+                                ? 'active'
+                                : ''}"
                             @click=${() => this._chooseLevel(1)}
                         >
-                            <i class="s-icon:medium"></i> Medium
+                            <i class="s-icon:medium"></i> <span>Medium</span>
                         </div>
                         <div
-                            class="__level ${this._level === 2 ? 'active' : ''}"
+                            class=" ck-tabs__item ${this._level === 2
+                                ? 'active'
+                                : ''}"
                             @click=${() => this._chooseLevel(2)}
                         >
-                            <i class="s-icon:high"></i> High
+                            <i class="s-icon:high"></i> <span>High</span>
                         </div>
                     </div>
                     <div class="__filters">
@@ -170,10 +177,7 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                                                 ${check.name}
                                             </span>
                                             <span
-                                                class="s-badge:outline s-scale:08 s-color:${check.level ==
-                                                0
-                                                    ? 'main'
-                                                    : 'main'}"
+                                                class="s-badge:outline s-scale:08 s-color:main"
                                             >
                                                 ${check.level === 0
                                                     ? 'LOW'

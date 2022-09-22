@@ -3,4 +3,5 @@
     border-radius: 999px;
     padding: sugar.padding(20) sugar.padding(30);
     font-family: sugar.font.family(code);
+    color: sugar.color(complementary, foreground);
 }

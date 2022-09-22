@@ -1,7 +1,7 @@
-// import { define as __sAppearFeature } from '@coffeekraken/s-appear-feature';
 import { define as __SClipboardCopyComponent } from '@coffeekraken/s-clipboard-copy-component';
 import { define as __SCodeExampleComponent } from '@coffeekraken/s-code-example-component/lazy';
 import { define as __SColorPickerComponent } from '@coffeekraken/s-color-picker-component';
+import __SDashboard from '@coffeekraken/s-dashboard';
 import { define as __SDatetimePickerComponent } from '@coffeekraken/s-datetime-picker-component';
 import { define as __SFiltrableInputComponent } from '@coffeekraken/s-filtrable-input-component';
 import __SLitComponent from '@coffeekraken/s-lit-component';
@@ -27,19 +27,14 @@ import { define as __sPageTransitionFeature } from '@coffeekraken/s-page-transit
 import { define as __sRefocusFeature } from '@coffeekraken/s-refocus-feature';
 import { define as __sSugarFeature } from '@coffeekraken/s-sugar-feature';
 import { define as __sTemplateFeature } from '@coffeekraken/s-template-feature';
-// import { define as __sParallaxFeature } from '@coffeekraken/s-parallax-feature';
 
 // Website specific
-import { define as __CKSearchComponent } from './components/CKSearch';
-import { define as __CKSettingsComponent } from './components/CkSettings';
-// import { define as __CKBlobComponent } from './components/CkBlob';
 import { define as __CKDiscoverComponent } from './components/CKDiscover';
 import { define as __CKDiscoverTabedComponent } from './components/CKDiscoverTabed';
-// import { define as __CKDocSubNavComponent } from './components/CKDocSubNav/CKDocSubNav';
-// import { define as __CkFallingStarsComponent } from './components/CkFallingStars';
+import { define as __CKSearchComponent } from './components/CKSearch';
+import { define as __CKSettingsComponent } from './components/CkSettings';
 // import { define as __CKRatingsComponent } from './components/CKRating';
 // import { define as __CKWelcomeRatingsComponent } from './components/CKWelcomeRatings';
-// import __SDashboard from '@coffeekraken/s-dashboard';
 
 // Libs
 import __STheme from '@coffeekraken/s-theme';
@@ -146,8 +141,6 @@ const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
     __sTemplateFeature();
     __sFloatingFeature();
     __sInlineFeature();
-    // __sAppearFeature();
-    // __sParallaxFeature();
     __sFormValidateFeature({
         customValidations: {
             coffeekraken: (value, helpers) => {
@@ -164,7 +157,6 @@ const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
     __sRefocusFeature();
 
     // components
-    // __CKRatingsComponent();
     __SCodeExampleComponent();
     __SFiltrableInputComponent();
     __SSidePanelComponent();
@@ -176,7 +168,6 @@ const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
             },
         },
     });
-    // __CKRatingsComponent();
     __SClipboardCopyComponent();
     __SRatingComponent();
     __SColorPickerComponent();
@@ -186,23 +177,29 @@ const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
     __SThemeSwitcherComponent();
 
     // Website specific
+    // __CKRatingsComponent();
+    // __CKWelcomeRatingsComponent();
     __CKSearchComponent();
     __CKSettingsComponent();
     __CKDiscoverComponent();
     __CKDiscoverTabedComponent();
-    // __CkFallingStarsComponent();
-    // __CKWelcomeRatingsComponent();
 
     // dashboard
-    // new __SDashboard({
-    //     dashboard: {
-    //         components: {
-    //             's-dashboard-pages': {
-    //                 onSelect: (page) => {
-    //                     document.location.href = page.item.loc;
-    //                 },
-    //             },
-    //         },
-    //     },
-    // });
+    const dashboard = new __SDashboard({
+        dashboard: {
+            components: {
+                's-dashboard-pages': {
+                    onSelect: (page) => {
+                        dashboard.close();
+                        document.dispatchEvent(
+                            new CustomEvent('location.href', {
+                                detail: page.item.loc,
+                                bubbles: true,
+                            }),
+                        );
+                    },
+                },
+            },
+        },
+    });
 })();

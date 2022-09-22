@@ -3,8 +3,10 @@ s-dashboard-pages {
 }
 
 .s-dashboard-pages {
+    height: calc(100vh - 150px - sugar.margin(20) * 3);
+
     .s-filtrable-input {
-        height: calc(100% - 80px);
+        height: calc(100% - sugar.margin(20) * 4);
 
         &__dropdown {
             margin-block-start: sugar.margin(20);

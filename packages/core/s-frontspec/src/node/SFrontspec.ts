@@ -9,6 +9,7 @@ import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __fs from 'fs';
 import __path from 'path';
+import __SFrontspecBuildParamsInterface from './interface/SFrontspecBuildParamsInterface';
 
 /**
  * @name                SFrontspec
@@ -35,6 +36,24 @@ import __path from 'path';
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
+
+export interface ISFrontspecSourceConfigObj {
+    config: String;
+}
+
+export interface ISFrontspecSourceObjectObj {
+    value: any;
+}
+
+export interface ISFrontspecSourceObj {
+    type: 'config' | 'object';
+    process?: Function;
+    [key: string]: ISFrontspecSourceConfigObj | ISFrontspecSourceObjectObj;
+}
+
+export interface ISFrontspecBuildParams {
+    sources: Record<string, ISFrontspecSourceObj>;
+}
 
 export interface ISFrontspecAddParams {}
 
@@ -96,7 +115,7 @@ export default class SFrontspec extends __SPromise {
             }
 
             let res = __deepMerge(
-                __SSugarConfig.get('frontspec') ?? {},
+                __SSugarConfig.get('frontspec')?.default ?? {},
                 frontspecJson,
             );
 
@@ -115,6 +134,82 @@ export default class SFrontspec extends __SPromise {
             }
 
             resolve(res);
+        });
+    }
+
+    /**
+     * @name          build
+     * @type          Function
+     *
+     * This static method allows you to build the frontspec.json file from the configs specifies in the config.frontspec.build.sources stack.
+     *
+     * @param         {Partial<ISFrontspecBuildParams>}          params        The params to use to build your frontspec
+     * @return        {SPromise}                                     A promise resolved once the scan process has been finished
+     *
+     * @since         2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    build(params: Partial<ISFrontspecBuildParams>): Promise<any> {
+        const finalParams = <ISFrontspecBuildParams>(
+            __deepMerge(__SFrontspecBuildParamsInterface.defaults(), params)
+        );
+        return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+            const frontspecPath = `${__packageRootDir()}/frontspec.json`;
+
+            let finalFrontspecJson = {};
+
+            let frontspecJson = {};
+            try {
+                frontspecJson = __readJsonSync(frontspecPath);
+            } catch (e) {
+                console.log(e);
+            }
+
+            for (let [configId, sourceObj] of Object.entries(
+                finalParams.sources,
+            )) {
+                console.log(sourceObj);
+                switch (sourceObj.type) {
+                    case 'config':
+                        finalFrontspecJson[configId] =
+                            __SSugarConfig.get(configId);
+                        break;
+                    case 'object':
+                        finalFrontspecJson[configId] = sourceObj.value;
+                        break;
+                    default:
+                        throw new Error(
+                            `[SFrontspec.build] Sorry but the "${sourceObj.type}" source type does not exists...`,
+                        );
+                        break;
+                }
+
+                // process if specified
+                if (sourceObj.process) {
+                    finalFrontspecJson[configId] = sourceObj.process(
+                        finalFrontspecJson[configId],
+                    );
+                }
+            }
+
+            if (frontspecJson.$custom) {
+                finalFrontspecJson = __deepMerge(
+                    {
+                        $custom: frontspecJson.$custom,
+                    },
+                    finalFrontspecJson,
+                    frontspecJson.$custom,
+                );
+            }
+
+            // write the file onto fs
+            __fs.writeFileSync(
+                frontspecPath,
+                JSON.stringify(finalFrontspecJson, null, 4),
+            );
+
+            // resolve the process
+            resolve();
         });
     }
 

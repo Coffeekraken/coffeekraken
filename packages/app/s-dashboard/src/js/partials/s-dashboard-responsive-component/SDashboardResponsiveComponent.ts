@@ -2,7 +2,7 @@
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { html } from 'lit';
-import './s-dashboard-responsive-component.css';
+import '../../../../../../src/js/partials/s-dashboard-responsive-component/s-dashboard-responsive-component.css';
 
 export default class SDashboardResponsiveComponent extends __SLitComponent {
     /**
@@ -52,11 +52,11 @@ export default class SDashboardResponsiveComponent extends __SLitComponent {
                 </div>
 
                 <div class="ck-panel">
-                    <div class="__list">
+                    <div class="ck-tabs">
                         ${Object.entries(this._mediaConfig?.queries ?? {}).map(
                             ([name, obj]) => html`
                                 <div
-                                    class="__list-item s-tooltip-container ${name ===
+                                    class="ck-tabs__item s-tooltip-container ${name ===
                                     this._activeQuery
                                         ? 'active'
                                         : ''}"
@@ -66,30 +66,26 @@ export default class SDashboardResponsiveComponent extends __SLitComponent {
                                     }}
                                 >
                                     <i class="s-icon:${name}"></i>
-                                    <div class="s-tooltip">
-                                        ${name}
-                                    </div>
+                                    <div class="s-tooltip">${name}</div>
                                 </div>
                             `,
                         )}
                     </div>
                     <div class="__details">
-                        ${this._displayType !== 'sugar'
-                            ? html`
-                                  <p class="s-typo:code">
+                        <p>
+                            ${this._displayType !== 'sugar'
+                                ? html`
                                       ${this._theme.constructor.buildMediaQuery(
                                           this._activeQuery,
                                       )}
                                       {...}
-                                  </p>
-                              `
-                            : html`
-                                  <p class="s-typo:code">
+                                  `
+                                : html`
                                       @sugar.media ${this._activeQuery} {...}
-                                  </p>
-                              `}
+                                  `}
+                        </p>
                         <button
-                            class="__switch"
+                            class="__switch ck-action"
                             @click=${() => {
                                 if (this._displayType === 'sugar') {
                                     this._displayType = '';

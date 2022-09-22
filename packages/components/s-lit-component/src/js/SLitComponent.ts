@@ -20,6 +20,10 @@ export interface ISLitComponentSettings extends ISComponentUtilsSettings {
     componentUtils: Partial<ISComponentUtilsSettings>;
 }
 
+export interface ISLitComponentDefineSettings {
+    window: any;
+}
+
 let _debug = false;
 
 export interface ISLitComponentDefaultProps {
@@ -84,14 +88,21 @@ export default class SLitComponent extends LitElement {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    static define(tagName: string, Cls: SLitComponent, props: any = {}) {
-        if (customElements.get(tagName.toLowerCase())) {
+    static define(
+        tagName: string,
+        Cls: SLitComponent,
+        props: any = {},
+        settings: Partial<ISLitComponentDefineSettings> = {},
+    ) {
+        const win = settings.window ?? window;
+
+        if (win.customElements.get(tagName.toLowerCase())) {
             return;
         }
 
         // set the default props
         SLitComponent.setDefaultProps(tagName, props);
-        customElements.define(tagName.toLowerCase(), class extends Cls {});
+        win.customElements.define(tagName.toLowerCase(), class extends Cls {});
 
         // // register the custom element with the suffix "-up"
         // try {

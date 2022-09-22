@@ -1,53 +1,15 @@
 .s-dashboard-project {
-    .__list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: sugar.margin(10);
-        justify-content: space-between;
-
-        &-urls {
-            .__list-item {
-                flex-grow: 0;
-                padding: 0 sugar.padding(30);
-
-                &:hover {
-                    background: sugar.color(accent);
-                }
-
-                i {
-                    font-size: 16px;
-                }
-            }
-        }
-    }
-    .__list-item {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-grow: 1;
-        height: 60px;
-        background: sugar.color(base, background);
-        cursor: pointer;
-        @sugar.border.radius (10);
-
-        &:hover {
-            background: sugar.color(accent, background);
-        }
-        &.active {
-            background: sugar.color(accent);
-        }
-
-        i {
-            font-size: 30px;
-        }
-    }
-
     .__details {
         display: flex;
         align-items: center;
         margin-block-start: sugar.margin(20);
-        background: sugar.color(accent, background);
         padding: sugar.padding(20);
+
+        background: sugar.color(main, background, --darken 2);
+
+        @sugar.theme.when dark {
+            background: sugar.color(main, background, --lighten 5);
+        }
     }
 
     .__commit-time {

@@ -2,7 +2,7 @@
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { html } from 'lit';
-import './s-dashboard-web-vitals-component.css';
+import '../../../../../../src/js/partials/s-dashboard-web-vitals-component/s-dashboard-web-vitals-component.css';
 
 export default class SDashboardWebVitalsComponent extends __SLitComponent {
     _webVitals: any = null;
@@ -28,13 +28,10 @@ export default class SDashboardWebVitalsComponent extends __SLitComponent {
         });
 
         this.document.addEventListener('webVitals', (e) => {
-            console.log('Vitals', e.detail);
             this._webVitals = e.detail;
             this.requestUpdate();
         });
         this._webVitals = this.document.webVitals;
-
-        console.log(this._webVitals);
     }
 
     firstUpdated() {}
@@ -47,9 +44,7 @@ export default class SDashboardWebVitalsComponent extends __SLitComponent {
                 <div class="ck-panel">
                     <div class="__stats">
                         <div class="ck-stat">
-                            <h3 class="ck-stat__label">
-                                LCP
-                            </h3>
+                            <h3 class="ck-stat__label">LCP</h3>
                             ${this._webVitals.lcp
                                 ? html`
                                       <p class="ck-stat__value">
@@ -84,9 +79,7 @@ export default class SDashboardWebVitalsComponent extends __SLitComponent {
                         </div>
 
                         <div class="ck-stat">
-                            <h3 class="ck-stat__label">
-                                FID
-                            </h3>
+                            <h3 class="ck-stat__label">FID</h3>
                             ${this._webVitals.fid
                                 ? html`
                                       <p class="ck-stat__value">
@@ -120,9 +113,7 @@ export default class SDashboardWebVitalsComponent extends __SLitComponent {
                         </div>
 
                         <div class="ck-stat">
-                            <h3 class="ck-stat__label">
-                                CLS
-                            </h3>
+                            <h3 class="ck-stat__label">CLS</h3>
                             ${this._webVitals.cls
                                 ? html`
                                       <p class="ck-stat__value">
@@ -157,9 +148,7 @@ export default class SDashboardWebVitalsComponent extends __SLitComponent {
                         </div>
 
                         <div class="ck-stat">
-                            <h3 class="ck-stat__label">
-                                FCP
-                            </h3>
+                            <h3 class="ck-stat__label">FCP</h3>
                             ${this._webVitals.fcp
                                 ? html`
                                       <p class="ck-stat__value">
@@ -193,9 +182,7 @@ export default class SDashboardWebVitalsComponent extends __SLitComponent {
                         </div>
 
                         <div class="ck-stat">
-                            <h3 class="ck-stat__label">
-                                TTFB
-                            </h3>
+                            <h3 class="ck-stat__label">TTFB</h3>
                             ${this._webVitals.ttfb
                                 ? html`
                                       <p class="ck-stat__value">

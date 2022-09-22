@@ -1,6 +1,9 @@
 import __SClass from '@coffeekraken/s-class';
+import { __isInIframe } from '@coffeekraken/sugar/dom';
 import { __hotkey } from '@coffeekraken/sugar/keyboard';
 import { __deepMerge } from '@coffeekraken/sugar/object';
+
+import __SDashboardComponent from './SDashboardComponent';
 
 import '../../../../src/css/index.css';
 import __SDashboardSettingsInterface from './interface/SDashboardSettingsInterface';
@@ -36,6 +39,22 @@ export interface ISDashboardSettings {
 }
 
 export default class SDashboard extends __SClass {
+    /**
+     * @name            iframe
+     * @type            HTMLIframeElement
+     * @get
+     *
+     * Access the dashboard iframe
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static get iframe(): HTMLIFrameElement {
+        return <HTMLIFrameElement>(
+            document.querySelector('iframe.s-dashboard-iframe')
+        );
+    }
+
     /**
      * Store the iframe of the dashboard
      */
@@ -74,6 +93,12 @@ export default class SDashboard extends __SClass {
                 settings ?? {},
             ),
         );
+
+        // if in iframe, register custom element
+        if (__isInIframe()) {
+            this.define();
+            return;
+        }
 
         // expose the dashboard on document to be able to access it from the iframe
         // @ts-ignore
@@ -207,7 +232,7 @@ export default class SDashboard extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    open() {
+    async open() {
         if (!this._$iframe.parentElement) {
             document.body.appendChild(this._$iframe);
             this._$iframe.contentWindow.document.open();
@@ -215,23 +240,34 @@ export default class SDashboard extends __SClass {
                 <html>
                 <head>
                 <script>
-                var $document = document;
-                if (window.parent) {
-                    $document = window.parent.document;
-                }
-                var $html = $document.querySelector('html');
-                var $dashboardHtml = document.querySelector('html');
-                var theme = $html.getAttribute('theme');
-                var isDark = theme.match(/dark$/);
-                if (isDark && window.parent) {
-                    $dashboardHtml.setAttribute('theme', 'default-dark');
-                }
+                    var $document = document;
+                    if (window.parent) {
+                        $document = window.parent.document;
+                    }
+                    var $html = $document.querySelector('html');
+                    var $dashboardHtml = document.querySelector('html');
+                    var theme = $html.getAttribute('theme');
+                    var isDark = theme.match(/dark$/);
+                    if (isDark && window.parent) {
+                        $dashboardHtml.setAttribute('theme', 'default-dark');
+                    } else {
+                        $dashboardHtml.setAttribute('theme', 'default-light');
+                    }
+                    $document.addEventListener('s-theme.change', function(e) {
+                        $dashboardHtml.setAttribute('theme', 'default-' + e.detail.variant);
+                    });
+                    var $originalScript = window.parent.document.querySelector('script');
+                    var $script = document.createElement('script');
+                    $script.setAttribute('src', $originalScript.getAttribute('src'));
+                    $script.setAttribute('type', 'module');
+                    document.addEventListener('DOMContentLoaded', function() {
+                        document.querySelector('head').appendChild($script);
+                    });
                 </script>
-                <script src="${'http://localhost:3000/@fs/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/app/s-dashboard/src/js/index.ts'}" type="module" defer"></script>
                 </head>
-                <body>
-                        <s-dashboard></s-dashboard>
-                    </body>
+                <body s-sugar>
+                    <s-dashboard></s-dashboard>
+                </body>
                 </html>
             `);
             this._$iframe.contentWindow.document.close();
@@ -242,5 +278,20 @@ export default class SDashboard extends __SClass {
 
         // overflow
         this.document.querySelector('html').style.overflow = 'hidden';
+
+        // // init the dashboard
+        // const SDashboardComponent = await import('./SDashboardComponent');
+        // SDashboardComponent.define();
+    }
+
+    define(props = {}, tagName = 's-dashboard', win = window) {
+        __SDashboardComponent.define(
+            's-dashboard',
+            __SDashboardComponent,
+            {},
+            {
+                window: win,
+            },
+        );
     }
 }

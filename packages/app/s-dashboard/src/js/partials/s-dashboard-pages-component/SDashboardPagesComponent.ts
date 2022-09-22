@@ -8,7 +8,7 @@ import { html } from 'lit';
 
 import __SDashboardPagesComponentAttrsInterface from './interface/SDashboardPagesComponentAttrsInterface';
 
-import './s-dashboard-pages-component.css';
+import '../../../../../../src/js/partials/s-dashboard-pages-component/s-dashboard-pages-component.css';
 
 __sFiltrableInputDefine(
     {
@@ -122,7 +122,7 @@ export default class SDashboardPages extends __SLitComponent {
             }, 200);
         });
 
-        this.addEventListener('selectItem', (e) => {
+        this.addEventListener('s-filtrable-input.select', (e) => {
             const { item, $elm } = e.detail;
 
             this.dispatchEvent(
@@ -157,7 +157,7 @@ export default class SDashboardPages extends __SLitComponent {
                 <h2 class="s-typo:h6 s-mbe:20">
                     Pages
                     <span class="ck-count"
-                        >${this._$filtrableInput?.state.items.length}</span
+                        >${this._$filtrableInput?.state?.items?.length}</span
                     >
                 </h2>
 

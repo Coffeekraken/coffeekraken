@@ -2,10 +2,12 @@
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { html } from 'lit';
-import './s-dashboard-google-component.css';
+
+import '../../../../../../src/js/partials/s-dashboard-google-component/s-dashboard-google-component.css';
 
 export default class SDashboardGoogleComponent extends __SLitComponent {
     _gtm: string;
+    _ga: string;
 
     /**
      * @name            document
@@ -35,6 +37,12 @@ export default class SDashboardGoogleComponent extends __SLitComponent {
         );
         this._gtm = $gtm?.src.match(/id=([a-zA-Z0-9_-]+)/)[1];
 
+        // GA
+        const $ga = this.document.querySelector(
+            'script[src^="https://www.googletagmanager.com/gtag/js?id="]',
+        );
+        this._ga = $ga?.src.match(/id=([a-zA-Z0-9_-]+)/)[1];
+
         this.requestUpdate();
     }
 
@@ -54,6 +62,26 @@ export default class SDashboardGoogleComponent extends __SLitComponent {
                                       ${this._gtm ?? 'Undefined'}
                                   </p>
                               </div>
+                          `
+                        : ''}
+                    ${this._ga
+                        ? html`
+                              <div class="ck-stat">
+                                  <h3 class="ck-stat__label">
+                                      Google Analytics
+                                  </h3>
+                                  <p class="ck-stat__value ck-stat__value-code">
+                                      ${this._ga ?? 'Undefined'}
+                                  </p>
+                              </div>
+                          `
+                        : ''}
+                    ${!this._gtm && !this._ga
+                        ? html`
+                              <p class="s-typo:p">
+                                  No google analytics or tag manager
+                                  installed...
+                              </p>
                           `
                         : ''}
                 </div>

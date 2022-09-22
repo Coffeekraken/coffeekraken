@@ -121,7 +121,6 @@ export default function ({
                 vars.push(`
                      color: sugar.color(current, foreground);
                      background-color: sugar.color(current);
-                    text-shadow: 0px 0px 10px sugar.color(current, --darken 20 --alpha 0.8);
                 `);
                 break;
         }

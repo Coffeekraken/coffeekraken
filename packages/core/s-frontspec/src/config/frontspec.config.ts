@@ -21,35 +21,89 @@ export default function (api) {
             return api.config.serve ?? {};
         },
 
-        assets: {
-            /**
-             * @name      viteClient
-             * @namespace     config.frontspec.assets
-             * @type      Object
-             * @default     vite client script
-             *
-             * Specify some items you want to integrate to the head tag. It can be everything you want
-             *
-             * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            viteClient: {
-                get src() {
-                    return api.env.env === 'development'
-                        ? `
-        <script>
-          document.addEventListener("DOMContentLoaded", function() {
-            var $script = document.createElement("script");
-            var ip = "${__ipAddress()}";
-            $script.setAttribute("type", "module");
-            $script.setAttribute("src", "${
-                api.config.vite.server.hostname
-            }/@vite/client");
-            document.body.appendChild($script);
-          });
-        </script>
-      `
-                        : '';
+        build: {
+            sources: {
+                metas: {
+                    type: 'config',
+                    config: 'metas',
+                },
+                assets: {
+                    type: 'config',
+                    config: 'assets',
+                },
+                media: {
+                    type: 'object',
+                    get value() {
+                        return api.theme.media;
+                    },
+                },
+                margin: {
+                    type: 'object',
+                    get value() {
+                        return api.theme.margin;
+                    },
+                },
+                padding: {
+                    type: 'object',
+                    get value() {
+                        return api.theme.padding;
+                    },
+                },
+                font: {
+                    type: 'object',
+                    get value() {
+                        return api.theme.font;
+                    },
+                },
+                typo: {
+                    type: 'object',
+                    get value() {
+                        const finalObj = {};
+                        for (let [key, value] of Object.entries(
+                            api.theme.typo,
+                        )) {
+                            const finalKey = key.split(':')[0];
+                            finalObj[finalKey] = {
+                                class: `s-typo:${finalKey}`,
+                            };
+                        }
+                        return finalObj;
+                    },
+                },
+            },
+        },
+
+        default: {
+            assets: {
+                /**
+                 * @name      viteClient
+                 * @namespace     config.frontspec.default.assets
+                 * @type      Object
+                 * @default     vite client script
+                 *
+                 * Specify some items you want to integrate to the head tag. It can be everything you want
+                 *
+                 * @since       2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                viteClient: {
+                    get src() {
+                        return api.env.env === 'development'
+                            ? `
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var $script = document.createElement("script");
+                var ip = "${__ipAddress()}";
+                $script.setAttribute("type", "module");
+                $script.setAttribute("src", "${
+                    api.config.vite.server.hostname
+                }/@vite/client");
+                document.body.appendChild($script);
+            });
+            </script>
+        `
+                            : '';
+                    },
                 },
             },
         },

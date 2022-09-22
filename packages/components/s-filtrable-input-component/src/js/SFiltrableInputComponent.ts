@@ -157,6 +157,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
             value: '',
             isActive: false,
             isLoading: false,
+            items: []
         };
     }
 
@@ -192,25 +193,24 @@ export default class SFiltrableInputComponent extends __SLitComponent {
         this.filteredItems = [];
         this._templatesFromHtml = {};
         this._baseTemplates = {};
-        this._items = [];
     }
     async mount() {
         this.state.displayedMaxItems = this.props.maxItems;
 
         if (this.props.items && typeof this.props.items === 'string') {
             try {
-                this._items = JSON.parse(this.props.items);
+                this.state.items = JSON.parse(this.props.items);
             } catch (e) {
                 const $itemsElm = document.querySelector(this.props.items);
                 if ($itemsElm) {
-                    this._items = JSON.parse($itemsElm.innerHTML.trim());
+                    this.state.items = JSON.parse($itemsElm.innerHTML.trim());
                 }
             }
 
             this.requestUpdate();
             this.componentUtils.dispatchEvent('items', {
                 detail: {
-                    items: this._items,
+                    items: this.state.items,
                 },
             });
         }
@@ -559,10 +559,10 @@ export default class SFiltrableInputComponent extends __SLitComponent {
                 value: (<HTMLInputElement>this.$input).value,
             });
             if (__isPlainObject(items)) {
-                this._items = Object.values(items);
+                this.state.items = Object.values(items);
             } else if (Array.isArray(items)) {
                 // @ts-ignore
-                this._items = items;
+                this.state.items = items;
             } else {
                 throw new Error(`Sorry but the "items" MUST be an Array...`);
             }
@@ -570,7 +570,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
             // @ts-ignore
             this.componentUtils.dispatchEvent('items', {
                 detail: {
-                    items: this._items,
+                    items: this.state.items,
                 },
             });
         }
@@ -581,7 +581,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
         // reset selected
         this.resetSelected();
 
-        let items = this._items;
+        let items = this.state.items;
 
         let searchValue = this.state.value;
         if (this.props.searchValuePreprocess) {

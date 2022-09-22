@@ -50,13 +50,13 @@
                     <i class="s-icon:facebook s-font:50 s-mi:10"></i> Share on Facebook!
                 </a>
                 <a href="https://twitter.com/intent/tweet?url=https://coffeekraken.io"
-                    class="s-btn:block s-color:complementary s-mbe:20" title="Share the love on twitter" target="_blank">
+                    class="s-btn:block s-color:complementary" title="Share the love on twitter" target="_blank">
                     <i class="s-icon:twitter s-font:50 s-mi:10"></i> Make a tweet!
                 </a>
-                <a href="#ratings"
+                {{-- <a href="#ratings"
                     class="s-btn:block s-color:main" title="Give us a note!" target="_blank">
                     <i class="s-icon:star s-font:50 s-mi:10"></i> Give Coffeekraken a note!
-                </a>
+                </a> --}}
                 {{-- <input type="text" value="" class="s-input s-color:accent s-p:20" id="share-input" />
                 <script>
                     document.querySelector('#share-input').value = document.location;

@@ -150,7 +150,7 @@
                 "require": "./dist/pkg/cjs/node/convert/_exports.js",
                 "import": "./dist/pkg/esm/node/convert/_exports.js"
             },
-            "js": {
+            "default": {
                 "require": "./dist/pkg/cjs/js/convert/_exports.js",
                 "import": "./dist/pkg/esm/js/convert/_exports.js"
             }

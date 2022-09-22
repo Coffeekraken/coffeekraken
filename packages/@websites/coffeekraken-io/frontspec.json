@@ -2,8 +2,9 @@
     "metas": {
         "lang": "en",
         "title": "Coffeekraken",
+        "homepage": "https://coffeekraken.io",
         "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
-        "themeColor": "#FFBB00",
+        "themeColor": "#ffbb00",
         "author": {
             "name": "Olivier Bossel",
             "email": "olivier.bossel@gmail.com",
@@ -30,7 +31,7 @@
             "src": "/dist/js/index.esm.js",
             "env": "production"
         },
-        "main": {
+        "nomodule": {
             "nomodule": true,
             "defer": true,
             "src": "/dist/js/index.amd.js",
@@ -39,6 +40,195 @@
         "style": {
             "defer": true,
             "src": "/dist/css/index.css"
+        }
+    },
+    "media": {
+        "defaultAction": "<=",
+        "defaultQuery": "screen",
+        "queries": {
+            "mobile": {
+                "min-width": 0,
+                "max-width": 639
+            },
+            "tablet": {
+                "min-width": 640,
+                "max-width": 1279
+            },
+            "desktop": {
+                "min-width": 1280,
+                "max-width": 2047
+            },
+            "wide": {
+                "min-width": 2048,
+                "max-width": null
+            },
+            "dwarf": {
+                "min-height": null,
+                "max-height": 700
+            }
+        }
+    },
+    "margin": {
+        "0": 0,
+        "10": 0.375,
+        "20": 0.75,
+        "30": 1.5,
+        "40": 2.25,
+        "50": 3,
+        "60": 3.75,
+        "70": 4.5,
+        "80": 5.25,
+        "90": 6,
+        "100": 6.75,
+        "default": "1rem"
+    },
+    "padding": {
+        "0": 0,
+        "10": 0.375,
+        "20": 0.75,
+        "30": 1.5,
+        "40": 2.25,
+        "50": 3,
+        "60": 3.75,
+        "70": 4.5,
+        "80": 5.25,
+        "90": 6,
+        "100": 6.75,
+        "default": "1rem"
+    },
+    "font": {
+        "family": {
+            "default": {
+                "font-family": "\"Titillium Web\"",
+                "font-weight": 400,
+                "import": "https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap"
+            },
+            "title": {
+                "font-family": "\"Titillium Web\"",
+                "font-weight": 600,
+                "import": "https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap"
+            },
+            "quote": {
+                "font-family": "\"Palatino, Times, Georgia, serif\"",
+                "font-weight": "normal",
+                "font-style": "normal",
+                "font-display": "auto",
+                "cap-height": 0.65
+            },
+            "code": {
+                "font-family": "Menlo, Monaco, Consolas, Courier New, monospace",
+                "font-weight": "normal",
+                "font-style": "normal",
+                "font-display": "auto",
+                "cap-height": 0.65
+            }
+        },
+        "size": {
+            "0": 0,
+            "5": "0.5",
+            "10": 0.65,
+            "20": 0.75,
+            "30": 1.1,
+            "40": 1.25,
+            "50": 1.5,
+            "60": 2,
+            "70": 2.5,
+            "80": 3,
+            "90": 4,
+            "100": 5,
+            "default": "16px"
+        }
+    },
+    "typo": {
+        "h1": {
+            "class": "s-typo:h1"
+        },
+        "h2": {
+            "class": "s-typo:h2"
+        },
+        "h3": {
+            "class": "s-typo:h3"
+        },
+        "h4": {
+            "class": "s-typo:h4"
+        },
+        "h5": {
+            "class": "s-typo:h5"
+        },
+        "h6": {
+            "class": "s-typo:h6"
+        },
+        "p": {
+            "class": "s-typo:p"
+        },
+        "lead": {
+            "class": "s-typo:lead"
+        },
+        "hr": {
+            "class": "s-typo:hr"
+        },
+        "pre": {
+            "class": "s-typo:pre"
+        },
+        "code": {
+            "class": "s-typo:code"
+        },
+        "a": {
+            "class": "s-typo:a"
+        },
+        "quote": {
+            "class": "s-typo:quote"
+        },
+        "b": {
+            "class": "s-typo:b"
+        },
+        "bold": {
+            "class": "s-typo:bold"
+        },
+        "strong": {
+            "class": "s-typo:strong"
+        },
+        "i": {
+            "class": "s-typo:i"
+        },
+        "italic": {
+            "class": "s-typo:italic"
+        },
+        "em": {
+            "class": "s-typo:em"
+        },
+        "large": {
+            "class": "s-typo:large"
+        },
+        "larger": {
+            "class": "s-typo:larger"
+        },
+        "largest": {
+            "class": "s-typo:largest"
+        },
+        "small": {
+            "class": "s-typo:small"
+        },
+        "smaller": {
+            "class": "s-typo:smaller"
+        },
+        "smallest": {
+            "class": "s-typo:smallest"
+        },
+        "mark": {
+            "class": "s-typo:mark"
+        },
+        "del": {
+            "class": "s-typo:del"
+        },
+        "ins": {
+            "class": "s-typo:ins"
+        },
+        "sub": {
+            "class": "s-typo:sub"
+        },
+        "sup": {
+            "class": "s-typo:sup"
         }
     }
 }

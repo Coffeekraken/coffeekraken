@@ -3,15 +3,16 @@
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { html } from 'lit';
-import './s-dashboard-browserstack-component.css';
 
-import __chromeSvg from './svg/chrome.svg';
-import __edgeSvg from './svg/edge.svg';
-import __firefoxSvg from './svg/firefox.svg';
-import __operaSvg from './svg/opera.svg';
-import __safariSvg from './svg/safari.svg';
-import __samsumgSvg from './svg/samsung.svg';
-import __yandexSvg from './svg/yandex.svg';
+import '../../../../../../src/js/partials/s-dashboard-browserstack-component/s-dashboard-browserstack-component.css';
+
+import __chromeSvg from '../../../../../../src/js/partials/s-dashboard-browserstack-component/svg/chrome.svg';
+import __edgeSvg from '../../../../../../src/js/partials/s-dashboard-browserstack-component/svg/edge.svg';
+import __firefoxSvg from '../../../../../../src/js/partials/s-dashboard-browserstack-component/svg/firefox.svg';
+import __operaSvg from '../../../../../../src/js/partials/s-dashboard-browserstack-component/svg/opera.svg';
+import __safariSvg from '../../../../../../src/js/partials/s-dashboard-browserstack-component/svg/safari.svg';
+import __samsumgSvg from '../../../../../../src/js/partials/s-dashboard-browserstack-component/svg/samsung.svg';
+import __yandexSvg from '../../../../../../src/js/partials/s-dashboard-browserstack-component/svg/yandex.svg';
 
 export default class SDashboardBrowserstackComponent extends __SLitComponent {
     _maxVersions = 10;
@@ -64,8 +65,6 @@ export default class SDashboardBrowserstackComponent extends __SLitComponent {
             .then((response) => response.text())
             .then((result) => {
                 const browsers = {};
-
-                console.log(JSON.parse(result));
 
                 for (let [os, osData] of Object.entries(JSON.parse(result))) {
                     for (let [osVersion, osVersionData] of Object.entries(
@@ -125,10 +124,14 @@ export default class SDashboardBrowserstackComponent extends __SLitComponent {
                             break;
                         }
                     }
+                    for (let [key, value] of Object.entries(finalBrowsers)) {
+                        if (!value.length) {
+                            delete finalBrowsers[key];
+                        }
+                    }
                 }
 
                 this._browsers = finalBrowsers;
-                console.log(this._browsers);
                 this.requestUpdate();
             })
             .catch((error) => console.log('error', error));
@@ -150,13 +153,18 @@ export default class SDashboardBrowserstackComponent extends __SLitComponent {
                                           class="s-dropdown-container"
                                           tabindex="-1"
                                       >
-                                          <img
-                                              class="__browser-svg"
-                                              alt="${browser}"
-                                              src="${this._browserSvgs[
-                                                  browser
-                                              ]}"
-                                          />
+                                          <div class="s-tooltip-container">
+                                              <img
+                                                  class="__browser-svg"
+                                                  alt="${browser}"
+                                                  src="${this._browserSvgs[
+                                                      browser
+                                                  ]}"
+                                              />
+                                              <div class="s-tooltip">
+                                                  ${browser}
+                                              </div>
+                                          </div>
                                           <div class="s-dropdown">
                                               <ol class="ck-list">
                                                   ${Object.entries(
@@ -170,7 +178,8 @@ export default class SDashboardBrowserstackComponent extends __SLitComponent {
                                                                   href="https://live.browserstack.com/dashboard#os=${obj.os}&os_version=${obj.os_version}&browser=${obj.browser}&browser_version=${obj.browser_version}&zoom_to_fit=true&full_screen=true&url=https://google.com"
                                                                   target="_blank"
                                                               >
-                                                                  ${obj.browser_version}
+                                                                  ${obj.browser_version ??
+                                                                  obj.browser}
                                                               </a>
                                                           </li>
                                                       `,

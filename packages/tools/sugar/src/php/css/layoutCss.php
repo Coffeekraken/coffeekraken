@@ -22,6 +22,7 @@ namespace Sugar\css;
  * @setting         {String}        [align='stretch']           The "align-items" value for your grid layout
  * @setting         {String}        [justify='stretch']         The "justify-items" value for your grid layout
  * @setting         {String}        [media=null]                A media to pass to the \Sugar\css\buildMediaQuery function to scope the generated css in the correct media query
+ * @setting         {Array}         [mediaSettings=[]]          Specify the \Sugar\css\buildMediaQuery $settings parameter if you specify a "media" setting
  * @setting         {Boolean}       [minify=true]             Minify the output css or not
  * @setting         {Array}         [$scope=['bare','lnf','gap','align','justify']]             The scope(s) you want to generate
  *
@@ -43,6 +44,7 @@ function layoutCss($layout, $settings = [])
             'align' => 'stretch',
             'justify' => 'stretch',
             'media' => null,
+            'mediaSettings' => [],
             'minify' => true,
             'scope' => ['bare', 'lnf', 'gap', 'align', 'justify'],
         ],
@@ -209,7 +211,10 @@ function layoutCss($layout, $settings = [])
     }
 
     if ($finalParams->media) {
-        $query = buildMediaQuery($finalParams->media);
+        $query = buildMediaQuery(
+            $finalParams->media,
+            $finalParams->mediaSettings
+        );
         array_unshift($vars, $query . ' {');
         array_push($vars, '}');
     }

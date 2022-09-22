@@ -153,64 +153,84 @@ export default class SFrontspec extends __SPromise {
         const finalParams = <ISFrontspecBuildParams>(
             __deepMerge(__SFrontspecBuildParamsInterface.defaults(), params)
         );
-        return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
-            const frontspecPath = `${__packageRootDir()}/frontspec.json`;
+        return new __SPromise(
+            async ({ resolve, reject, emit, pipe }) => {
+                const frontspecPath = `${__packageRootDir()}/frontspec.json`;
 
-            let finalFrontspecJson = {};
+                emit('log', {
+                    value: `<yellow>[build]</yellow> Building <cyan>frontspec.json</cyan>...`,
+                });
 
-            let frontspecJson = {};
-            try {
-                frontspecJson = __readJsonSync(frontspecPath);
-            } catch (e) {
-                console.log(e);
-            }
+                let finalFrontspecJson = {};
 
-            for (let [configId, sourceObj] of Object.entries(
-                finalParams.sources,
-            )) {
-                console.log(sourceObj);
-                switch (sourceObj.type) {
-                    case 'config':
-                        finalFrontspecJson[configId] =
-                            __SSugarConfig.get(configId);
-                        break;
-                    case 'object':
-                        finalFrontspecJson[configId] = sourceObj.value;
-                        break;
-                    default:
-                        throw new Error(
-                            `[SFrontspec.build] Sorry but the "${sourceObj.type}" source type does not exists...`,
-                        );
-                        break;
+                let frontspecJson = {};
+                try {
+                    frontspecJson = __readJsonSync(frontspecPath);
+                } catch (e) {
+                    console.log(e);
                 }
 
-                // process if specified
-                if (sourceObj.process) {
-                    finalFrontspecJson[configId] = sourceObj.process(
-                        finalFrontspecJson[configId],
+                for (let [prop, sourceObj] of Object.entries(
+                    finalParams.sources,
+                )) {
+                    emit('log', {
+                        value: `<yellow>[build]</yellow> Gathering frontspec property "<yellow>${prop}</yellow>" of type "<magenta>${sourceObj.type}</magenta>"`,
+                    });
+
+                    switch (sourceObj.type) {
+                        case 'config':
+                            finalFrontspecJson[prop] = __SSugarConfig.get(prop);
+                            break;
+                        case 'object':
+                            finalFrontspecJson[prop] = sourceObj.value;
+                            break;
+                        default:
+                            throw new Error(
+                                `[SFrontspec.build] Sorry but the "${sourceObj.type}" source type does not exists...`,
+                            );
+                            break;
+                    }
+
+                    // process if specified
+                    if (sourceObj.process) {
+                        finalFrontspecJson[prop] = sourceObj.process(
+                            finalFrontspecJson[prop],
+                        );
+                    }
+                }
+
+                if (frontspecJson.$custom) {
+                    finalFrontspecJson = __deepMerge(
+                        {
+                            $custom: frontspecJson.$custom,
+                        },
+                        finalFrontspecJson,
+                        frontspecJson.$custom,
                     );
                 }
-            }
 
-            if (frontspecJson.$custom) {
-                finalFrontspecJson = __deepMerge(
-                    {
-                        $custom: frontspecJson.$custom,
-                    },
-                    finalFrontspecJson,
-                    frontspecJson.$custom,
+                // write the file onto fs
+                __fs.writeFileSync(
+                    frontspecPath,
+                    JSON.stringify(finalFrontspecJson, null, 4),
                 );
-            }
 
-            // write the file onto fs
-            __fs.writeFileSync(
-                frontspecPath,
-                JSON.stringify(finalFrontspecJson, null, 4),
-            );
+                emit('log', {
+                    value: `<green>[save]</green> File saved <green>successfully</green> under "<cyan>${frontspecPath.replace(
+                        __packageRootDir() + '/',
+                        '',
+                    )}</cyan>"`,
+                });
 
-            // resolve the process
-            resolve();
-        });
+                // resolve the process
+                resolve();
+            },
+            {
+                metas: {
+                    id: this.constructor.name,
+                },
+            },
+        );
     }
 
     /**

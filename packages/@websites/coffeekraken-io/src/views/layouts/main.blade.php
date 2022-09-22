@@ -8,10 +8,6 @@
 
 @section('body')
 
-    {!! \Sugar\css\layoutCss('1 2 _ 3 2', [
-        'media' => 'desktop'
-    ]) !!}
-
     <script>
         document.body.classList.add('initial-loading');
         document.body.classList.add('loading');

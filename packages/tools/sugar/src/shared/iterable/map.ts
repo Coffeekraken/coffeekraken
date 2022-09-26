@@ -1,4 +1,4 @@
-import __typeOf from '../value/typeof';
+import __typeOf from '../type/typeof';
 
 /**
  * @name            map

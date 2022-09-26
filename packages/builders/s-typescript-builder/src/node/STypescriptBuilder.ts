@@ -403,7 +403,7 @@ export default class STypescriptBuilder extends __SBuilder {
         params: ISTypescriptBuilderBuildParams,
     ): Promise<ISTypescriptBuilderResultFile> {
         return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
-            const packageRoot = __packageRootDir();
+            const packageRoot = params.packageRoot;
             const module = file.format === 'cjs' ? 'commonjs' : 'es6';
             const outPath = __path.dirname(
                 `${file.outDir}/${file.relPath}`
@@ -483,6 +483,7 @@ export default class STypescriptBuilder extends __SBuilder {
                         recursive: true,
                     });
                 }
+
                 if (!__fs.existsSync(packageJsonOutPath)) {
                     __fs.writeFileSync(
                         packageJsonOutPath,

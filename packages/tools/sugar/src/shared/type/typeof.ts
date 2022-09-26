@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import _isClass from '../is/class';
-import _isInt from '../is/integer';
+import _isClass from '../is/isClass';
+import _isInt from '../is/isInteger';
 import _deepMerge from '../object/deepMerge';
 import _upperFirst from '../string/upperFirst';
 

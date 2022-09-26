@@ -1,14 +1,15 @@
-import { __isNode } from '@coffeekraken/sugar/is';
 import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
 import __snakeCase from '@coffeekraken/sugar/shared/string/snakeCase';
 
 // @ts-ignore
-if (!__isNode() && !document.env) {
-    // @ts-ignore
-    document.env = {
-        SUGAR: {},
-    };
-}
+try {
+    if (document && !document.env) {
+        // @ts-ignore
+        document.env = {
+            SUGAR: {},
+        };
+    }
+} catch (e) {}
 
 /**
  * @name            SEnv

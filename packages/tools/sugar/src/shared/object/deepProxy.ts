@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __proxy from '../array/proxy';
+import __proxyArray from '../array/proxyArray';
 import __clone from '../object/clone';
 import __deepMap from '../object/deepMap';
 import __deepMerge from '../object/deepMerge';
@@ -141,7 +141,7 @@ export default function __deepProxy(object, handlerFn, settings = {}) {
         if (settings.deep) {
             for (const key of Object.keys(obj)) {
                 if (Array.isArray(obj[key])) {
-                    obj[key] = __proxy(obj[key]);
+                    obj[key] = __proxyArray(obj[key]);
                     obj[key].watch(
                         Object.getOwnPropertyNames(Array.prototype),
                         (watchObj) => {

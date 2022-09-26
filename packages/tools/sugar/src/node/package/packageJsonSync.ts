@@ -5,7 +5,7 @@ import __fs from 'fs';
 import __objectHash from '../../shared/object/objectHash';
 import __formatPackageJson from '../../shared/package/formatPackageJson';
 import __packageJson from '../npm/packageJson';
-import __packageRoot from './rootPath';
+import __packageRootDir from '../path/packageRootDir';
 
 /**
  * @name          packageJsonSync
@@ -61,7 +61,7 @@ export default function __packageJsonSync(
     // if the "fromOrName" starts with a "/"
     // means that it's not a package name
     if (fromOrName.match(/^\//)) {
-        const path = `${__packageRoot(fromOrName, {
+        const path = `${__packageRootDir(fromOrName, {
             highest: finalSettings.highest,
         })}/package.json`;
         if (!__fs.existsSync(path)) return false;

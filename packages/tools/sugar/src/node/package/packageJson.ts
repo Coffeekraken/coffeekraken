@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __jsonSync from './jsonSync';
+import __packageJsonSync from './packageJsonSync';
 
 /**
  * @name          packageJson
@@ -37,7 +37,7 @@ export default function __packageJson(
     settings?: Partial<IPackageJsonSyncSettings>,
 ) {
     return new Promise(async (resolve) => {
-        const json = __jsonSync(fromOrName, settings);
+        const json = __packageJsonSync(fromOrName, settings);
         resolve(json);
     });
 }

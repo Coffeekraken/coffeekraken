@@ -2,10 +2,9 @@ import __SClass from '@coffeekraken/s-class';
 import __SDescriptor, {
     ISDescriptorResult,
     ISDescriptorRules,
-    ISDescriptorSettings,
+    ISDescriptorSettings
 } from '@coffeekraken/s-descriptor';
 import { __parseArgs } from '@coffeekraken/sugar/cli';
-import { __isNode } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __getAvailableInterfaceTypes from './getAvailableInterfaceTypes';
 import type { ISInterfaceRendererSettings } from './renderers/ISInterfaceRenderer';
@@ -44,9 +43,11 @@ export interface ISInterface {
 }
 
 // @ts-ignore
-if (__isNode()) global._registeredInterfacesTypes = {};
-// @ts-ignore
-else window._registeredInterfacesTypes = {};
+try {
+    if (global) global._registeredInterfacesTypes = {};
+    // @ts-ignore
+    else window._registeredInterfacesTypes = {};
+} catch(e) {}
 
 /**
  * @name            SInterface

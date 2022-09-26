@@ -50,6 +50,7 @@ export default class STypescriptBuilderBuildParamsInterface extends __SInterface
             packageRoot: {
                 description: 'Specify in which package the build is happening',
                 type: 'String',
+                default: process.cwd(),
             },
             formats: {
                 description:

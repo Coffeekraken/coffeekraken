@@ -1,0 +1,38 @@
+{
+    "name": "@coffeekraken/s-mitosis",
+    "version": "2.0.0-alpha.20",
+    "description": "Some utils plugins and more around the AMAZING @builer.io/mitosis tool!",
+    "homepage": "https://coffeekraken.io",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "@coffeekraken/s-interface": "^2.0.0-alpha.20",
+        "@coffeekraken/s-log": "^2.0.0-alpha.20",
+        "@coffeekraken/s-promise": "^2.0.0-alpha.20",
+        "@coffeekraken/sugar": "^2.0.0-alpha.20",
+        "chokidar": "^3.5.3"
+    },
+    "main": "dist/pkg/cjs/node/exports.js",
+    "module": "dist/pkg/esm/node/exports.js",
+    "exports": {
+        ".": {
+            "require": "./dist/pkg/cjs/node/exports.js",
+            "import": "./dist/pkg/esm/node/exports.js"
+        },
+        "./shared/*": {
+            "require": "./dist/pkg/cjs/shared/*.js",
+            "import": "./dist/pkg/esm/shared/*.js"
+        },
+        "./node/*": {
+            "require": "./dist/pkg/cjs/node/*.js",
+            "import": "./dist/pkg/esm/node/*.js"
+        },
+        "./js/*": {
+            "require": "./dist/pkg/cjs/js/*.js",
+            "import": "./dist/pkg/esm/js/*.js"
+        }
+    }
+}

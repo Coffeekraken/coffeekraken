@@ -325,7 +325,7 @@ export default function (api) {
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            '12_3': '1 2 _ 3',
+            '12_33': '1 2 _ 3 3',
             /**
              * @name                1_23
              * @namespace           config.themeLayout.layout

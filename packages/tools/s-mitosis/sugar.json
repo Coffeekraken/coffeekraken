@@ -1,0 +1,17 @@
+{
+    "cli": [
+        {
+            "stack": "mitosis",
+            "description": "SMitosis CLI",
+            "defaultAction": "build",
+            "actions": {
+                "build": {
+                    "scope": "package",
+                    "description": "Build the your mitosis components using the mitosis.config.js file at the root of your package. Add the ability to watch for files changes and rebuild automatically your components.",
+                    "process": "./dist/pkg/esm/cli/build.cli.js",
+                    "interface": "./dist/pkg/esm/node/interface/SMitosisBuildParamsInterface.js"
+                }
+            }
+        }
+    ]
+}

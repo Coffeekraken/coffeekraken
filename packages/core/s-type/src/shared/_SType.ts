@@ -6,9 +6,9 @@ import { __parseHtml } from '@coffeekraken/sugar/console';
 import { __map } from '@coffeekraken/sugar/iterable';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __parseTypeString, {
-    IParseTypeStringResultObj,
+    IParseTypeStringResultObj
 } from '@coffeekraken/sugar/shared/type/parseTypeString';
-import __typeOf from '@coffeekraken/sugar/shared/value/typeof';
+import __typeOf from '@coffeekraken/sugar/shared/type/typeof';
 import __STypeResult from './STypeResult';
 
 /**

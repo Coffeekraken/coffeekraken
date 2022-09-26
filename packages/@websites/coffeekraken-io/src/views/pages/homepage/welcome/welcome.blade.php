@@ -10,6 +10,10 @@
                     @include('pages.homepage.welcome.partials.content')
                 </div>
 
+                <textarea id="hello">Hello world</textarea>
+
+                <s-clipboard-copy-mito from="#hello"></s-clipboard-copy-mito>
+
                 <i class="s-icon:file-js __icon-1"></i>
                 <i class="s-icon:file-ts __icon-2"></i>
                 <i class="s-icon:file-css __icon-3"></i>
@@ -22,7 +26,7 @@
                 <i class="__icon-5 s-icon:user s-tc:accent s-font:80"></i>
                 <i class="__icon-6 s-icon:npm s-font:80"></i> --}}
 
-                <ck-welcome-ratings></ck-welcome-ratings>
+                {{-- <ck-welcome-ratings></ck-welcome-ratings> --}}
 
             </div>
 

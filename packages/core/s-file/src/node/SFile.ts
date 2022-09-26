@@ -1,4 +1,5 @@
 // import __SFileInterface from './interface/SFileInterface';
+import __SClass from '@coffeekraken/s-class';
 import __SEventEmitter, { ISEventEmitter } from '@coffeekraken/s-event-emitter';
 import { __md5 } from '@coffeekraken/sugar/crypto';
 import {
@@ -6,7 +7,7 @@ import {
     __fileName,
     __readJsonSync,
     __writeFile,
-    __writeFileSync,
+    __writeFileSync
 } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __toString } from '@coffeekraken/sugar/string';
@@ -167,7 +168,7 @@ export interface ISFile extends ISEventEmitter {
 }
 
 // @ts-ignore
-class SFile extends __SEventEmitter implements ISFile {
+class SFile extends __SClass implements ISFile {
     /**
      * @name        _registeredClasses
      * @type        Record<string, SFile>
@@ -343,6 +344,17 @@ class SFile extends __SEventEmitter implements ISFile {
     exists;
 
     /**
+     * @name      events
+     * @type      SEventEmitter
+     *
+     * Store the SEventEmitter instance through which you can listen for events like "update", etc...
+     *
+     * @since     2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    events;
+
+    /**
      * @name        relPath
      * @type        String
      * @get
@@ -422,6 +434,9 @@ class SFile extends __SEventEmitter implements ISFile {
         );
 
         this._path = filepath;
+
+        // events
+        this.events = new __SEventEmitter();
 
         Object.defineProperty(this, '_stats', {
             enumerable: false,
@@ -644,12 +659,13 @@ class SFile extends __SEventEmitter implements ISFile {
             (event) => {
                 this.update();
                 callback?.(this);
-                (<any>this).emit('update', this);
+                (<any>this).events.emit('update', this);
+                (<any>this).events.emit('change', this);
             },
         );
         setTimeout(() => {
             // @weird:ts-compilation-issue
-            (<any>this).emit('watch', this);
+            (<any>this).events.emit('watch', this);
         });
     }
 
@@ -667,7 +683,7 @@ class SFile extends __SEventEmitter implements ISFile {
         this._watcher.close();
         this._watcher = undefined;
         // @weird:ts-compilation-issue
-        (<any>this).emit('unwatch', this);
+        (<any>this).events.emit('unwatch', this);
     }
 
     /**

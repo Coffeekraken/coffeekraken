@@ -5,7 +5,7 @@ import {
     __isChildProcess,
     __isClass,
     __isNode,
-    __isPlainObject,
+    __isPlainObject
 } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __getColorFor from '@coffeekraken/sugar/shared/dev/color/getColorFor';

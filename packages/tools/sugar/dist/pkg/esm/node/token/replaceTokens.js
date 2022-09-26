@@ -3,7 +3,7 @@ import { __replacePackageJsonTokens } from '@coffeekraken/sugar/package';
 import { __replacePathTokens } from '@coffeekraken/sugar/path';
 /**
  * @name            replaceTokens
- * @namespace       node.token
+ * @namespace       node.string
  * @type            Function
  * @platform        node
  * @status          beta
@@ -17,8 +17,8 @@ import { __replacePathTokens } from '@coffeekraken/sugar/path';
  * @return      {String}                            The processed string
  *
  * @example         js
- * import replaceTokens from '@coffeekraken/sugar/node/token/replaceTokens';
- * replaceTokens('Hello %packageJson.name, hope you are doing well (%packageRootDir)');
+ * import { __replaceTokens } from '@coffeekraken/sugar/string';
+ * __replaceTokens('Hello %packageJson.name, hope you are doing well (%packageRootDir)');
  *
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

@@ -115,7 +115,7 @@ function layoutCss($layout, $settings = [])
                 $current = isset($rowsCountByArea[$areaId])
                     ? $rowsCountByArea[$areaId]
                     : 0;
-                $colsCountByArea[$areaId] = $current + 1;
+                $rowsCountByArea[$areaId] = $current + 1;
             }
         }
     }
@@ -197,13 +197,15 @@ function layoutCss($layout, $settings = [])
                     $colsStartByArea[$areaId] .
                     ';
                     grid-column-end: ' .
-                    $colsEndByArea[$areaId] .
+                    $colsEndByArea[$areaId] +
+                    1 .
                     ';
                     grid-row-start: ' .
                     $rowsStartByArea[$areaId] .
                     ';
                     grid-row-end: ' .
-                    $rowsEndByArea[$areaId] .
+                    $rowsEndByArea[$areaId] +
+                    1 .
                     ';
                 }'
             );

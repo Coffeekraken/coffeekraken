@@ -1810,7 +1810,6 @@ __metadata:
     "@coffeekraken/s-builder": ^2.0.0-alpha.20
     "@coffeekraken/s-class": ^2.0.0-alpha.20
     "@coffeekraken/s-clipboard-copy-component": ^2.0.0-alpha.20
-    "@coffeekraken/s-clipboard-copy-mito-component": ^2.0.0-alpha.20
     "@coffeekraken/s-code-example-component": ^2.0.0-alpha.20
     "@coffeekraken/s-color": ^2.0.0-alpha.20
     "@coffeekraken/s-color-picker-component": ^2.0.0-alpha.20
@@ -1837,6 +1836,7 @@ __metadata:
     "@coffeekraken/s-glob": ^2.0.0-alpha.20
     "@coffeekraken/s-handlebars": ^2.0.0-alpha.20
     "@coffeekraken/s-images-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-inline-component": ^2.0.0-alpha.20
     "@coffeekraken/s-inline-feature": ^2.0.0-alpha.20
     "@coffeekraken/s-interface": ^2.0.0-alpha.20
     "@coffeekraken/s-kitchen": ^2.0.0-alpha.20
@@ -1995,19 +1995,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-clipboard-copy-component@workspace:packages/components/s-clipboard-copy-component"
   dependencies:
-    "@coffeekraken/s-interface": ^2.0.0-alpha.20
-    "@coffeekraken/s-lit-component": ^2.0.0-alpha.20
-    "@coffeekraken/sugar": ^2.0.0-alpha.20
-    lit: ^2.2.8
-  languageName: unknown
-  linkType: soft
-
-"@coffeekraken/s-clipboard-copy-mito-component@^2.0.0-alpha.20, @coffeekraken/s-clipboard-copy-mito-component@workspace:packages/components/s-clipboard-copy-mito-component":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/s-clipboard-copy-mito-component@workspace:packages/components/s-clipboard-copy-mito-component"
-  dependencies:
     "@builder.io/mitosis": ^0.0.61
     "@builder.io/mitosis-cli": ^0.0.22
+    "@coffeekraken/s-component": ^2.0.0-alpha.20
     "@coffeekraken/s-interface": ^2.0.0-alpha.20
     "@coffeekraken/s-mitosis": ^2.0.0-alpha.20
   languageName: unknown
@@ -2017,15 +2007,17 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-code-example-component@workspace:packages/components/s-code-example-component"
   dependencies:
+    "@builder.io/mitosis": ^0.0.61
+    "@builder.io/mitosis-cli": ^0.0.22
     "@coffeekraken/s-clipboard-copy-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-component": ^2.0.0-alpha.20
     "@coffeekraken/s-interface": ^2.0.0-alpha.20
-    "@coffeekraken/s-lit-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-mitosis": ^2.0.0-alpha.20
     "@coffeekraken/sugar": ^2.0.0-alpha.20
     "@prettier/plugin-php": ^0.18.9
     highlight.js: ^11.6.0
     html-tags: ^3.2.0
     known-css-properties: ^0.25.0
-    lit: ^2.2.8
     prettier: ^2.7.1
   languageName: unknown
   linkType: soft
@@ -2089,6 +2081,21 @@ __metadata:
 "@coffeekraken/s-component-utils@^2.0.0-alpha.20, @coffeekraken/s-component-utils@workspace:packages/tools/s-component-utils":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-component-utils@workspace:packages/tools/s-component-utils"
+  dependencies:
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-conductor": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-state": ^2.0.0-alpha.20
+    "@coffeekraken/s-theme": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
+    fastdom: ^1.0.11
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/s-component@^2.0.0-alpha.20, @coffeekraken/s-component@workspace:packages/tools/s-component":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/s-component@workspace:packages/tools/s-component"
   dependencies:
     "@coffeekraken/s-class": ^2.0.0-alpha.20
     "@coffeekraken/s-conductor": ^2.0.0-alpha.20
@@ -2517,16 +2524,29 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-inline-feature@^2.0.0-alpha.20, @coffeekraken/s-inline-feature@workspace:packages/features/s-inline-feature":
+"@coffeekraken/s-inline-component@^2.0.0-alpha.20, @coffeekraken/s-inline-component@workspace:packages/components/s-inline-component":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/s-inline-feature@workspace:packages/features/s-inline-feature"
+  resolution: "@coffeekraken/s-inline-component@workspace:packages/components/s-inline-component"
+  dependencies:
+    "@builder.io/mitosis": ^0.0.61
+    "@builder.io/mitosis-cli": ^0.0.22
+    "@coffeekraken/s-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-mitosis": ^2.0.0-alpha.20
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/s-inline-feature@npm:^2.0.0-alpha.20":
+  version: 2.0.0-alpha.20
+  resolution: "@coffeekraken/s-inline-feature@npm:2.0.0-alpha.20"
   dependencies:
     "@coffeekraken/s-class": ^2.0.0-alpha.20
     "@coffeekraken/s-feature": ^2.0.0-alpha.20
     "@coffeekraken/s-interface": ^2.0.0-alpha.20
     "@coffeekraken/sugar": ^2.0.0-alpha.20
-  languageName: unknown
-  linkType: soft
+  checksum: 78379d29d76a9805632a9cd21314cfa65ffac69d2fb940fc9d162c3d042bcafee62aa4ddce8183a444d534456a9f0e8d5c53347d21ff75254b7bdd48dbd034e8
+  languageName: node
+  linkType: hard
 
 "@coffeekraken/s-interface@^2.0.0-alpha.20, @coffeekraken/s-interface@workspace:packages/core/s-interface":
   version: 0.0.0-use.local
@@ -2609,6 +2629,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-mitosis@workspace:packages/tools/s-mitosis"
   dependencies:
+    "@coffeekraken/s-component": ^2.0.0-alpha.20
     "@coffeekraken/s-interface": ^2.0.0-alpha.20
     "@coffeekraken/s-log": ^2.0.0-alpha.20
     "@coffeekraken/s-promise": ^2.0.0-alpha.20

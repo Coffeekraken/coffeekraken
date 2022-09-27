@@ -66,6 +66,7 @@ export default function (api) {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         style: {
+            id: 'global',
             defer: true,
             src: '/dist/css/index.css',
         },

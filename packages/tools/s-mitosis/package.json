@@ -9,6 +9,7 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
+        "@coffeekraken/s-component": "^2.0.0-alpha.20",
         "@coffeekraken/s-interface": "^2.0.0-alpha.20",
         "@coffeekraken/s-log": "^2.0.0-alpha.20",
         "@coffeekraken/s-promise": "^2.0.0-alpha.20",

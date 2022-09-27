@@ -128,6 +128,10 @@ export default function ({
         display: inline-flex;
         align-items: center;
         flex-wrap: nowrap;
+
+        & > template {
+          display: none;
+        }
     `);
     }
 
@@ -244,7 +248,8 @@ export default function ({
 
                 border-radius: 9999px;
 
-                & > *:first-child {
+                & > *:first-child,
+                & > template + * {
                   border-top-left-radius: 9999px;
                   border-bottom-left-radius: 9999px;
                   border-top-right-radius: 0;
@@ -258,7 +263,9 @@ export default function ({
                 }
 
                 [dir="rtl"] & > *:first-child,
-                &[dir="rtl"] > *:first-child {
+                &[dir="rtl"] > *:first-child,
+                [dir="rtl"] & > template + *,
+                &[dir="rtl"] > template + * {
                   border-top-left-radius: 0;
                   border-bottom-left-radius: 0;
                   border-top-right-radius: 9999px;
@@ -272,7 +279,8 @@ export default function ({
                   border-bottom-right-radius: 0;
                 }
 
-                & > *:first-child:last-child {
+                & > *:first-child:last-child,
+                & > template + *:last-child {
                   border-top-left-radius: 9999px !important;
                   border-bottom-left-radius: 9999px !important;
                   border-top-right-radius: 9999px !important;
@@ -283,7 +291,8 @@ export default function ({
 
                 if (finalParams.direction === 'vertical') {
                     vars.push(`
-                    & > *:first-child {
+                    & > *:first-child,
+                    & > template + * {
                       border-top-left-radius: 9999px !important;
                       border-bottom-left-radius: 0 !important;
                       border-top-right-radius: 9999px !important;
@@ -304,7 +313,8 @@ export default function ({
 
                 border-radius: sugar.border.radius(ui.tabs.borderRadius);
 
-                & > *:first-child {
+                & > *:first-child,
+                & > template + * {
                   border-top-left-radius: sugar.border.radius(ui.tabs.borderRadius);
                   border-bottom-left-radius: sugar.border.radius(ui.tabs.borderRadius);
                   border-top-right-radius: 0;
@@ -318,7 +328,9 @@ export default function ({
                 }
 
                 [dir="rtl"] & > *:first-child,
-                &[dir="rtl"] > *:first-child {
+                &[dir="rtl"] > *:first-child,
+                [dir="rtl"] & > template + *,
+                &[dir="rtl"] > template + * {
                   border-top-left-radius: 0;
                   border-bottom-left-radius: 0;
                   border-top-right-radius: sugar.border.radius(ui.tabs.borderRadius);
@@ -332,7 +344,8 @@ export default function ({
                   border-bottom-right-radius: 0;
                 }
 
-                & > *:first-child:last-child {
+                & > *:first-child:last-child,
+                & > template + *:last-child {
                   border-top-left-radius: sugar.border.radius(ui.tabs.borderRadius) !important;
                   border-bottom-left-radius: sugar.border.radius(ui.tabs.borderRadius) !important;
                   border-top-right-radius: sugar.border.radius(ui.tabs.borderRadius) !important;
@@ -342,7 +355,8 @@ export default function ({
 
                 if (finalParams.direction === 'vertical') {
                     vars.push(`
-                    & > *:first-child {
+                    & > *:first-child,
+                    & > template + * {
                       border-top-left-radius: sugar.border.radius(ui.tabs.borderRadius) !important;
                       border-bottom-left-radius: 0 !important;
                       border-top-right-radius: sugar.border.radius(ui.tabs.borderRadius) !important;

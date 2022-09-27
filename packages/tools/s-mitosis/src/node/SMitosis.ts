@@ -162,9 +162,9 @@ class SMitosis extends __SClass {
 
                 const pro = __spawn('npm exec mitosis build');
 
-                // pro.on('log', (data) => {
-                //     console.log('data', data._logObj.value);
-                // });
+                pro.on('log', (data) => {
+                    console.log(data._logObj.value);
+                });
                 await pro;
 
                 emit('log', {

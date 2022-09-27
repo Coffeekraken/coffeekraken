@@ -58,13 +58,14 @@ let oldX = 0,
     oldY = 0,
     direction = null;
 const threshold = 0;
-
-document?.addEventListener?.('pointermove', (e) => {
-    calculateDirection(e);
-});
-document?.addEventListener?.('pointerdown', (e) => {
-    calculateDirection(e);
-});
+try {
+    document?.addEventListener?.('pointermove', (e) => {
+        calculateDirection(e);
+    });
+    document?.addEventListener?.('pointerdown', (e) => {
+        calculateDirection(e);
+    });
+} catch (e) {}
 function calculateDirection(e) {
     let directionX = 0,
         directionY = 0,

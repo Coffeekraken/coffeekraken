@@ -30,7 +30,7 @@
                         
                     </div>
                     <div class="__illustration adaptive-color">
-                        <img class="adaptive-color" s-inline src="/dist/img/illustrations/opensource.svg" loading="lazy" />
+                        <s-inline src="/dist/img/illustrations/opensource.svg"></s-inline>
                     </div>
                 </div>
 

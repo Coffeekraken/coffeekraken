@@ -19,6 +19,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.__parseKeyframeKey = void 0;
 __exportStar(require("../../shared/css/_exports"), exports);
-const parseKeyframeKey_1 = __importDefault(require("../../js/css/parse/parseKeyframeKey"));
+const parseKeyframeKey_1 = __importDefault(require("../../shared/css/parse/parseKeyframeKey"));
 exports.__parseKeyframeKey = parseKeyframeKey_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsNERBQTBDO0FBQzFDLDJGQUFxRTtBQUM1RCw2QkFERiwwQkFBa0IsQ0FDRSJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsNERBQTBDO0FBRTFDLCtGQUF5RTtBQURoRSw2QkFDRiwwQkFBa0IsQ0FERSJ9

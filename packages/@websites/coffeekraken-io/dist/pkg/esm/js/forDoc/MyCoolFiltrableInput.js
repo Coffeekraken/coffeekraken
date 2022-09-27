@@ -7,30 +7,36 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { define } from "@coffeekraken/s-filtrable-input-component";
-import __wait from "@coffeekraken/sugar/shared/time/wait";
+import { define } from '@coffeekraken/s-filtrable-input-component';
+import __wait from '@coffeekraken/sugar/shared/datetime/wait';
 (() => {
     define({
         items: () => __awaiter(void 0, void 0, void 0, function* () {
             yield __wait(1000);
             return [
-                { title: "Hello", value: "World" },
-                { title: "Plop", value: "Yop" },
+                { title: 'Hello', value: 'World' },
+                { title: 'Plop', value: 'Yop' },
             ];
         }),
         templates: ({ type, item, html }) => {
             switch (type) {
-                case "item":
-                    return html ` <li class="__item">My title: ${item.title}</li> `;
+                case 'item':
+                    return html `
+                            <li class="__item">My title: ${item.title}</li>
+                        `;
                     break;
-                case "loading":
-                    return html ` <li class="__loading">Loading, please wait...</li> `;
+                case 'loading':
+                    return html `
+                            <li class="__loading">Loading, please wait...</li>
+                        `;
                     break;
-                case "empty":
-                    return html ` <li class="__empty">No items found...</li> `;
+                case 'empty':
+                    return html `
+                            <li class="__empty">No items found...</li>
+                        `;
                     break;
             }
         },
-    }, "my-cool-filtrable-input");
+    }, 'my-cool-filtrable-input');
 })();
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sRUFBRSxNQUFNLEVBQUUsTUFBTSwyQ0FBMkMsQ0FBQztBQUNuRSxPQUFPLE1BQU0sTUFBTSxzQ0FBc0MsQ0FBQztBQUUxRCxDQUFDLEdBQUcsRUFBRTtJQUNKLE1BQU0sQ0FDSjtRQUNFLEtBQUssRUFBRSxHQUFTLEVBQUU7WUFDaEIsTUFBTSxNQUFNLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDbkIsT0FBTztnQkFDTCxFQUFFLEtBQUssRUFBRSxPQUFPLEVBQUUsS0FBSyxFQUFFLE9BQU8sRUFBRTtnQkFDbEMsRUFBRSxLQUFLLEVBQUUsTUFBTSxFQUFFLEtBQUssRUFBRSxLQUFLLEVBQUU7YUFDaEMsQ0FBQztRQUNKLENBQUMsQ0FBQTtRQUNELFNBQVMsRUFBRSxDQUFDLEVBQUUsSUFBSSxFQUFFLElBQUksRUFBRSxJQUFJLEVBQUUsRUFBRSxFQUFFO1lBQ2xDLFFBQVEsSUFBSSxFQUFFO2dCQUNaLEtBQUssTUFBTTtvQkFDVCxPQUFPLElBQUksQ0FBQSxpQ0FBaUMsSUFBSSxDQUFDLEtBQUssUUFBUSxDQUFDO29CQUMvRCxNQUFNO2dCQUNSLEtBQUssU0FBUztvQkFDWixPQUFPLElBQUksQ0FBQSxzREFBc0QsQ0FBQztvQkFDbEUsTUFBTTtnQkFDUixLQUFLLE9BQU87b0JBQ1YsT0FBTyxJQUFJLENBQUEsOENBQThDLENBQUM7b0JBQzFELE1BQU07YUFDVDtRQUNILENBQUM7S0FDRixFQUNELHlCQUF5QixDQUMxQixDQUFDO0FBQ0osQ0FBQyxDQUFDLEVBQUUsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sRUFBRSxNQUFNLEVBQUUsTUFBTSwyQ0FBMkMsQ0FBQztBQUNuRSxPQUFPLE1BQU0sTUFBTSwwQ0FBMEMsQ0FBQztBQUU5RCxDQUFDLEdBQUcsRUFBRTtJQUNGLE1BQU0sQ0FDRjtRQUNJLEtBQUssRUFBRSxHQUFTLEVBQUU7WUFDZCxNQUFNLE1BQU0sQ0FBQyxJQUFJLENBQUMsQ0FBQztZQUNuQixPQUFPO2dCQUNILEVBQUUsS0FBSyxFQUFFLE9BQU8sRUFBRSxLQUFLLEVBQUUsT0FBTyxFQUFFO2dCQUNsQyxFQUFFLEtBQUssRUFBRSxNQUFNLEVBQUUsS0FBSyxFQUFFLEtBQUssRUFBRTthQUNsQyxDQUFDO1FBQ04sQ0FBQyxDQUFBO1FBQ0QsU0FBUyxFQUFFLENBQUMsRUFBRSxJQUFJLEVBQUUsSUFBSSxFQUFFLElBQUksRUFBRSxFQUFFLEVBQUU7WUFDaEMsUUFBUSxJQUFJLEVBQUU7Z0JBQ1YsS0FBSyxNQUFNO29CQUNQLE9BQU8sSUFBSSxDQUFBOzJEQUN3QixJQUFJLENBQUMsS0FBSzt5QkFDNUMsQ0FBQztvQkFDRixNQUFNO2dCQUNWLEtBQUssU0FBUztvQkFDVixPQUFPLElBQUksQ0FBQTs7eUJBRVYsQ0FBQztvQkFDRixNQUFNO2dCQUNWLEtBQUssT0FBTztvQkFDUixPQUFPLElBQUksQ0FBQTs7eUJBRVYsQ0FBQztvQkFDRixNQUFNO2FBQ2I7UUFDTCxDQUFDO0tBQ0osRUFDRCx5QkFBeUIsQ0FDNUIsQ0FBQztBQUNOLENBQUMsQ0FBQyxFQUFFLENBQUMifQ==

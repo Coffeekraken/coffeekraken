@@ -1,13 +1,13 @@
 // @ts-nocheck
 import __SPromise from '@coffeekraken/s-promise';
 
+import type { IWhenEntersViewportSettings } from './whenEntersViewport';
+import type { IWhenInteractSettings } from './whenInteract';
 import type { IWhenInViewportSettings } from './whenInViewport';
 import type { IWhenNearViewportSettings } from './whenNearViewport';
-import type { IWhenEntersViewportSettings } from './whenEntersViewport';
 import type { IWhenOutOfViewportSettings } from './whenOutOfViewport';
-import type { IWhenInteractSettings } from './whenInteract';
-import type { IWhenVisibleSettings } from './whenVisible';
 import type { IWhenStyleSheetsReadySettings } from './whenStylesheetsReady';
+import type { IWhenVisibleSettings } from './whenVisible';
 
 import {
     __whenAnimationEnd,

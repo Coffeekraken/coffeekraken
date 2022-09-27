@@ -104,8 +104,7 @@ export default class CKDiscover extends __SLitComponent {
               ${!this.timeout
                 ? html`
                     <s-code-example lines="8" s-deps css="codeExample">
-                      <code
-                        hidden
+                      <template
                         lang="${this.props.platform === 'ts' ||
                         this.props.platform === 'node'
                           ? 'js'
@@ -114,7 +113,7 @@ export default class CKDiscover extends __SLitComponent {
                           : this.props.platform}"
                       >
                         ${this.item.example[0].code}
-                      </code>
+                      </template>
                     </s-code-example>
                   `
                 : ''}

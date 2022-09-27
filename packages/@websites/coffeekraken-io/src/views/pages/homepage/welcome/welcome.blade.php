@@ -10,14 +10,15 @@
                     @include('pages.homepage.welcome.partials.content')
                 </div>
 
-                <textarea id="hello">Hello world</textarea>
-
-                <s-clipboard-copy-mito from="#hello"></s-clipboard-copy-mito>
 
                 <i class="s-icon:file-js __icon-1"></i>
                 <i class="s-icon:file-ts __icon-2"></i>
                 <i class="s-icon:file-css __icon-3"></i>
                 <i class="s-icon:file-md __icon-4"></i>
+
+     <textarea id="hello">Hello world</textarea>
+
+                <s-clipboard-copy style="display:inline-block; min-height: 1px;" from="#hello"></s-clipboard-copy>
 
                 {{-- <i class="__icon-1 s-icon:calendar s-tc:complementary s-font:80"></i>
                 <i class="__icon-2 s-icon:color s-tc:accent s-font:80"></i>

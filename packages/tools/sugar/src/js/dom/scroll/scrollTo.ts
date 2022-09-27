@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import easeInOutQuad from '../../../shared/easing/easeInOutQuad';
-import requestAnimationFrame from '../utlls/requestAnimationFrame';
 import { __isUserScrolling } from '@coffeekraken/sugar/dom';
+import easeInOutQuad from '../../../shared/easing/easeInOutQuad';
+import requestAnimationFrame from '../utilities/requestAnimationFrame';
 
 /**
  * @name      scrollTo
@@ -204,14 +204,14 @@ export default function __scrollTo(
                 resolve();
             },
             startTime: Date.now(),
-            step: scrollTo.step,
+            step: __scrollTo.step,
         };
 
         requestAnimationFrame(obj.step.bind(obj));
     });
 }
 
-scrollTo.step = function () {
+__scrollTo.step = function () {
     // Calculate how much time has passed
     const t = Math.min((Date.now() - this.startTime) / this.duration, 1);
 

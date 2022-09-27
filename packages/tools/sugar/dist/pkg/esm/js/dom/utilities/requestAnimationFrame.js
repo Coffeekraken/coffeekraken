@@ -24,9 +24,15 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default window.requestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
-    window.mozRequestAnimationFrame ||
-    window.oRequestAnimationFrame ||
-    window.msRequestAnimationFrame;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsZUFBZSxNQUFNLENBQUMscUJBQXFCO0lBQ3ZDLE1BQU0sQ0FBQywyQkFBMkI7SUFDbEMsTUFBTSxDQUFDLHdCQUF3QjtJQUMvQixNQUFNLENBQUMsc0JBQXNCO0lBQzdCLE1BQU0sQ0FBQyx1QkFBdUIsQ0FBQyJ9
+let requestAnimationFrame;
+try {
+    requestAnimationFrame =
+        window.requestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            window.oRequestAnimationFrame ||
+            window.msRequestAnimationFrame;
+}
+catch (e) { }
+export default requestAnimationFrame;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBRUgsSUFBSSxxQkFBcUIsQ0FBQztBQUMxQixJQUFJO0lBQ0EscUJBQXFCO1FBQ2pCLE1BQU0sQ0FBQyxxQkFBcUI7WUFDNUIsTUFBTSxDQUFDLDJCQUEyQjtZQUNsQyxNQUFNLENBQUMsd0JBQXdCO1lBQy9CLE1BQU0sQ0FBQyxzQkFBc0I7WUFDN0IsTUFBTSxDQUFDLHVCQUF1QixDQUFDO0NBQ3RDO0FBQUMsT0FBTyxDQUFDLEVBQUUsR0FBRTtBQUVkLGVBQWUscUJBQXFCLENBQUMifQ==

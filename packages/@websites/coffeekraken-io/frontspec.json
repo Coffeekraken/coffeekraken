@@ -38,6 +38,7 @@
             "env": "production"
         },
         "style": {
+            "id": "global",
             "defer": true,
             "src": "/dist/css/index.css"
         }

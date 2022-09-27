@@ -1,5 +1,7 @@
-import { define as __SClipboardCopyComponent } from '@coffeekraken/s-clipboard-copy-component';
-import { define as __SCodeExampleComponent } from '@coffeekraken/s-code-example-component/lazy';
+import { define as __SClipboardCopyComponent } from '@coffeekraken/s-clipboard-copy-component/webcomponent';
+import { define as __SInlineComponent } from '@coffeekraken/s-inline-component/webcomponent';
+
+import { define as __SCodeExampleComponent } from '@coffeekraken/s-code-example-component/webcomponent';
 import { define as __SColorPickerComponent } from '@coffeekraken/s-color-picker-component';
 import __SDashboard from '@coffeekraken/s-dashboard';
 import { define as __SDatetimePickerComponent } from '@coffeekraken/s-datetime-picker-component';
@@ -22,7 +24,6 @@ import __SDepsFeature, {
 import __SFeature from '@coffeekraken/s-feature';
 import { define as __sFloatingFeature } from '@coffeekraken/s-floating-feature';
 import { define as __sFormValidateFeature } from '@coffeekraken/s-form-validate-feature';
-import { define as __sInlineFeature } from '@coffeekraken/s-inline-feature';
 import { define as __sPageTransitionFeature } from '@coffeekraken/s-page-transition-feature';
 import { define as __sRefocusFeature } from '@coffeekraken/s-refocus-feature';
 import { define as __sSugarFeature } from '@coffeekraken/s-sugar-feature';
@@ -35,8 +36,6 @@ import { define as __CKSearchComponent } from './components/CKSearch';
 import { define as __CKSettingsComponent } from './components/CkSettings';
 // import { define as __CKRatingsComponent } from './components/CKRating';
 // import { define as __CKWelcomeRatingsComponent } from './components/CKWelcomeRatings';
-
-import '@coffeekraken/s-clipboard-copy-mito-component/webcomponent';
 
 // Libs
 import __STheme from '@coffeekraken/s-theme';
@@ -142,7 +141,6 @@ const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
   __sPageTransitionFeature();
   __sTemplateFeature();
   __sFloatingFeature();
-  __sInlineFeature();
   __sFormValidateFeature({
     customValidations: {
       coffeekraken: (value, helpers) => {
@@ -157,7 +155,9 @@ const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
   __sRefocusFeature();
 
   // components
-  __SCodeExampleComponent();
+  __SCodeExampleComponent({
+    cssDeps: ['global', '/dist/css/partials/sCodeExample.css'],
+  });
   __SFiltrableInputComponent();
   __SSidePanelComponent();
   __SSliderComponent({
@@ -169,6 +169,7 @@ const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
     },
   });
   __SClipboardCopyComponent();
+  __SInlineComponent();
   __SRatingComponent();
   __SColorPickerComponent();
   __SDatetimePickerComponent();

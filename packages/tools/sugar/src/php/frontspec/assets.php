@@ -41,6 +41,11 @@ function assets($frontspec, $cacheBuster = '')
             $finalSrc = $finalSrc . '?' . $cacheBuster;
         }
 
+        $id = $name;
+        if (isset($asset->id)) {
+            $id = $asset->id;
+        }
+
         switch ($extension) {
             case 'css':
                 if (
@@ -50,7 +55,7 @@ function assets($frontspec, $cacheBuster = '')
                     array_push(
                         $assetsStr,
                         '<link id="' .
-                            $name .
+                            $id .
                             '" href="' .
                             \Sugar\string\replaceTokens($finalSrc) .
                             '" rel="stylesheet" />'
@@ -59,7 +64,7 @@ function assets($frontspec, $cacheBuster = '')
                     array_push(
                         $assetsStr,
                         '<link id="' .
-                            $name .
+                            $id .
                             '" href="/' .
                             \Sugar\string\replaceTokens($finalSrc) .
                             '" rel="stylesheet" />'
@@ -81,7 +86,7 @@ function assets($frontspec, $cacheBuster = '')
                         '<script type="' .
                             $type .
                             '" id="' .
-                            $name .
+                            $id .
                             '" ' .
                             $nomodule .
                             $defer .
@@ -95,7 +100,7 @@ function assets($frontspec, $cacheBuster = '')
                         '<script type="' .
                             $type .
                             '" id="' .
-                            $name .
+                            $id .
                             '" ' .
                             $nomodule .
                             $defer .

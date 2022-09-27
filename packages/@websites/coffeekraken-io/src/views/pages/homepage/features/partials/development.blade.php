@@ -3,7 +3,7 @@
         <div class="s-layout:21 s-gap:column:50 @mobile s-layout:1_2">
             <div>
                 <div class="adaptive-color">
-                    <img s-inline src="/dist/img/illustrations/stack.svg" loading="lazy" />
+                    <s-inline src="/dist/img/illustrations/stack.svg" />
                 </div>
             </div>
             <div class="s-pb:100">

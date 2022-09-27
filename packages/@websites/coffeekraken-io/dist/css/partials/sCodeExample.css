@@ -20,22 +20,22 @@
                 right: calc(var(--s-theme-margin-default, 1rem) * 0.75);
                 top: calc(var(--s-theme-margin-default, 1rem) * 0.75);
             }
-.s-code-example[lnf="default"] .s-code-example__content {
+.s-code-example:not(.bare) .s-code-example__content {
                     transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);
                     border-radius: calc(calc(var(--s-theme-border-radius-default, 5px) * var(--s-scale, 1)) * 1);box-shadow: var(--s-theme-depth-0, 0);
                 }
-.s-code-example[lnf="default"] .s-code-example__more-bar:before {
+.s-code-example:not(.bare) .s-code-example__more-bar:before {
                         transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995);background: linear-gradient(0deg, hsla(calc(var(--s-theme-color-current-h, 0) + var(--s-theme-color-current-surface-spin ,0)),calc((var(--s-theme-color-current-s, 0) + var(--s-theme-color-current-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-current-l, 0) + var(--s-theme-color-current-surface-lightness-offset, 0)) * 1%),var(--s-theme-color-current-surface-a, 1)) 0%, hsla(calc(var(--s-theme-color-current-h, 0) + var(--s-theme-color-current-spin ,0)),calc((var(--s-theme-color-current-s, 0)) * 1%),calc((var(--s-theme-color-current-l, 0)) * 1%),0) 100%);
                     }
-.s-code-example[lnf="default"] .s-code-example__toolbar > * {
+.s-code-example:not(.bare) .s-code-example__toolbar > * {
                         color: hsla(calc(var(--s-theme-color-current-h, 0) + var(--s-theme-color-current-spin ,0)),calc((var(--s-theme-color-current-s, 0)) * 1%),calc((var(--s-theme-color-current-l, 0)) * 1%),var(--s-theme-color-current-a, 1));
                         font-size: 20px;
                         opacity: 0.4;
                     }
-.s-code-example[lnf="default"] .s-code-example__toolbar > *:hover {
+.s-code-example:not(.bare) .s-code-example__toolbar > *:hover {
                             opacity: 0.8;
                         }
-.s-code-example .hljs {--s-theme-color-current-h: var(--s-theme-color-main-h);
+.s-code-example:not(.bare) .hljs {--s-theme-color-current-h: var(--s-theme-color-main-h);
 --s-theme-color-current-s: var(--s-theme-color-main-s);
 --s-theme-color-current-l: var(--s-theme-color-main-l);
 --s-theme-color-current-text-saturation-offset: var(--s-theme-color-main-text-saturation-offset, 0);
@@ -90,289 +90,289 @@
     line-height: 1.5 !important;
     color: hsla(calc(var(--s-theme-color-current-h, 0) + var(--s-theme-color-current-text-spin ,0)),calc((var(--s-theme-color-current-s, 0) + var(--s-theme-color-current-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-current-l, 0) + var(--s-theme-color-current-text-lightness-offset, 0)) * 1%),var(--s-theme-color-current-text-a, 1));
 }
-[theme$="dark"] .s-code-example .hljs, .s-code-example .hljs[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs, .s-code-example:not(.bare) .hljs[theme$="dark"] {
         color: hsla(calc(var(--s-theme-color-current-h, 0) + var(--s-theme-color-current-text-spin ,0)),calc((var(--s-theme-color-current-s, 0) + var(--s-theme-color-current-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-current-l, 0) + var(--s-theme-color-current-text-lightness-offset, 0)) * 1%),var(--s-theme-color-current-text-a, 1));
 }
 @media screen and (max-width: 639px) {
-.s-code-example .hljs {
+.s-code-example:not(.bare) .hljs {
         padding: clamp(10px, calc(calc(calc(var(--s-theme-padding-default, 1rem) * var(--s-scale, 1)) * 3) * 0.5), 100px) clamp(10px, calc(calc(calc(var(--s-theme-padding-default, 1rem) * var(--s-scale, 1)) * 3) * 0.5), 100px);
         overflow: auto !important;
         white-space: pre !important;
-}.s-code-example .hljs::-webkit-scrollbar {
+}.s-code-example:not(.bare) .hljs::-webkit-scrollbar {
           width: 2px;
           height: 2px;
       }
-      .s-code-example .hljs::-webkit-scrollbar-track {
+      .s-code-example:not(.bare) .hljs::-webkit-scrollbar-track {
             
                 background-color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),0.1);
             
 
       }
-      .s-code-example .hljs::-webkit-scrollbar-thumb {
+      .s-code-example:not(.bare) .hljs::-webkit-scrollbar-thumb {
           
             background-color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),var(--s-theme-color-accent-a, 1));
           
       }
 }
-.s-code-example .hljs .hljs-sugar-function {
+.s-code-example:not(.bare) .hljs .hljs-sugar-function {
         color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),var(--s-theme-color-accent-a, 1));
         border-bottom: 1px solid hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),var(--s-theme-color-accent-a, 1));
         display: inline-block;
     }
-[theme$="dark"] .s-code-example .hljs .hljs-sugar-function, .s-code-example .hljs .hljs-sugar-function[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-sugar-function, .s-code-example:not(.bare) .hljs .hljs-sugar-function[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + 20) * 1%),1);
             border-color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + 20) * 1%),1);
 }
-.s-code-example .hljs .hljs-sugar-mixin {
+.s-code-example:not(.bare) .hljs .hljs-sugar-mixin {
         color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0)) * 1%),calc((var(--s-theme-color-error-l, 0)) * 1%),var(--s-theme-color-error-a, 1));
         border-bottom: 1px solid hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0)) * 1%),calc((var(--s-theme-color-error-l, 0)) * 1%),var(--s-theme-color-error-a, 1));
         display: inline-block;
 
     }
-[theme$="dark"] .s-code-example .hljs .hljs-sugar-mixin, .s-code-example .hljs .hljs-sugar-mixin[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-sugar-mixin, .s-code-example:not(.bare) .hljs .hljs-sugar-mixin[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0)) * 1%),calc((var(--s-theme-color-error-l, 0) + 20) * 1%),1);
             border-color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0)) * 1%),calc((var(--s-theme-color-error-l, 0) + 20) * 1%),1);
 }
-.s-code-example .hljs .hljs-selector-tag {
+.s-code-example:not(.bare) .hljs .hljs-selector-tag {
         color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0)) * 1%),calc((var(--s-theme-color-error-l, 0)) * 1%),var(--s-theme-color-error-a, 1));
     }
-[theme$="dark"] .s-code-example .hljs .hljs-selector-tag, .s-code-example .hljs .hljs-selector-tag[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-selector-tag, .s-code-example:not(.bare) .hljs .hljs-selector-tag[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0)) * 1%),calc((var(--s-theme-color-error-l, 0) + 20) * 1%),1);
 }
-.s-code-example .hljs .hljs-selector-id {
+.s-code-example:not(.bare) .hljs .hljs-selector-id {
         color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + -20) * 1%),1);
         font-weight: bold;
     }
-[theme$="dark"] .s-code-example .hljs .hljs-selector-id, .s-code-example .hljs .hljs-selector-id[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-selector-id, .s-code-example:not(.bare) .hljs .hljs-selector-id[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + 20) * 1%),1);
 }
-.s-code-example .hljs .hljs-selector-class {
+.s-code-example:not(.bare) .hljs .hljs-selector-class {
         color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + -20) * 1%),1);
 
     }
-[theme$="dark"] .s-code-example .hljs .hljs-selector-class, .s-code-example .hljs .hljs-selector-class[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-selector-class, .s-code-example:not(.bare) .hljs .hljs-selector-class[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + 20) * 1%),1);
 }
-.s-code-example .hljs .hljs-selector-attr {
+.s-code-example:not(.bare) .hljs .hljs-selector-attr {
         color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + -20) * 1%),1);
     }
-[theme$="dark"] .s-code-example .hljs .hljs-selector-attr, .s-code-example .hljs .hljs-selector-attr[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-selector-attr, .s-code-example:not(.bare) .hljs .hljs-selector-attr[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + 20) * 1%),1);
 }
-.s-code-example .hljs .hljs-selector-pseudo {
+.s-code-example:not(.bare) .hljs .hljs-selector-pseudo {
         color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + -20) * 1%),1);
 
     }
-[theme$="dark"] .s-code-example .hljs .hljs-selector-pseudo, .s-code-example .hljs .hljs-selector-pseudo[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-selector-pseudo, .s-code-example:not(.bare) .hljs .hljs-selector-pseudo[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + 20) * 1%),0.6);
 }
-.s-code-example .hljs .hljs-addition {
+.s-code-example:not(.bare) .hljs .hljs-addition {
         background-color: rgba(163, 190, 140, 0.5);
     }
-.s-code-example .hljs .hljs-deletion {
+.s-code-example:not(.bare) .hljs .hljs-deletion {
         background-color: rgba(191, 97, 106, 0.5);
     }
-.s-code-example .hljs .hljs-built_in,
-    .s-code-example .hljs .hljs-type {
+.s-code-example:not(.bare) .hljs .hljs-built_in,
+    .s-code-example:not(.bare) .hljs .hljs-type {
         color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + -20) * 1%),1);
     }
-[theme$="dark"] .s-code-example .hljs .hljs-built_in, .s-code-example .hljs .hljs-built_in[theme$="dark"], [theme$="dark"] .s-code-example .hljs .hljs-type, .s-code-example .hljs .hljs-type[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-built_in, .s-code-example:not(.bare) .hljs .hljs-built_in[theme$="dark"], [theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-type, .s-code-example:not(.bare) .hljs .hljs-type[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + 20) * 1%),1);
 }
-.s-code-example .hljs .hljs-class {
+.s-code-example:not(.bare) .hljs .hljs-class {
         color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + -20) * 1%),1);
     }
-[theme$="dark"] .s-code-example .hljs .hljs-class, .s-code-example .hljs .hljs-class[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-class, .s-code-example:not(.bare) .hljs .hljs-class[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + 20) * 1%),1);
 }
-.s-code-example .hljs .hljs-function {
-        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + -20) * 1%),1);
-
-    }
-[theme$="dark"] .s-code-example .hljs .hljs-function, .s-code-example .hljs .hljs-function[theme$="dark"] {
-            color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + 20) * 1%),1);
-}
-.s-code-example .hljs .hljs-function > .hljs-title {
+.s-code-example:not(.bare) .hljs .hljs-function {
         color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + -20) * 1%),1);
 
     }
-[theme$="dark"] .s-code-example .hljs .hljs-function > .hljs-title, .s-code-example .hljs .hljs-function > .hljs-title[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-function, .s-code-example:not(.bare) .hljs .hljs-function[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + 20) * 1%),1);
 }
-.s-code-example .hljs .hljs-keyword,
-    .s-code-example .hljs .hljs-literal,
-    .s-code-example .hljs .hljs-symbol {
+.s-code-example:not(.bare) .hljs .hljs-function > .hljs-title {
+        color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + -20) * 1%),1);
+
+    }
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-function > .hljs-title, .s-code-example:not(.bare) .hljs .hljs-function > .hljs-title[theme$="dark"] {
+            color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + 20) * 1%),1);
+}
+.s-code-example:not(.bare) .hljs .hljs-keyword,
+    .s-code-example:not(.bare) .hljs .hljs-literal,
+    .s-code-example:not(.bare) .hljs .hljs-symbol {
         color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0)) * 1%),calc((var(--s-theme-color-error-l, 0)) * 1%),var(--s-theme-color-error-a, 1));
     }
-[theme$="dark"] .s-code-example .hljs .hljs-keyword, .s-code-example .hljs .hljs-keyword[theme$="dark"], [theme$="dark"] .s-code-example .hljs .hljs-literal, .s-code-example .hljs .hljs-literal[theme$="dark"], [theme$="dark"] .s-code-example .hljs .hljs-symbol, .s-code-example .hljs .hljs-symbol[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-keyword, .s-code-example:not(.bare) .hljs .hljs-keyword[theme$="dark"], [theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-literal, .s-code-example:not(.bare) .hljs .hljs-literal[theme$="dark"], [theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-symbol, .s-code-example:not(.bare) .hljs .hljs-symbol[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0)) * 1%),calc((var(--s-theme-color-error-l, 0) + 20) * 1%),1);
 }
-.s-code-example .hljs .hljs-number {
+.s-code-example:not(.bare) .hljs .hljs-number {
         color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),var(--s-theme-color-accent-a, 1));
     }
-[theme$="dark"] .s-code-example .hljs .hljs-number, .s-code-example .hljs .hljs-number[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-number, .s-code-example:not(.bare) .hljs .hljs-number[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + 20) * 1%),1);
 }
-.s-code-example .hljs .hljs-regexp {
+.s-code-example:not(.bare) .hljs .hljs-regexp {
         color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + -20) * 1%),1);
     }
-[theme$="dark"] .s-code-example .hljs .hljs-regexp, .s-code-example .hljs .hljs-regexp[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-regexp, .s-code-example:not(.bare) .hljs .hljs-regexp[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + 20) * 1%),1);
 }
-.s-code-example .hljs .hljs-string {
+.s-code-example:not(.bare) .hljs .hljs-string {
         color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),var(--s-theme-color-accent-a, 1));
 
     }
-[theme$="dark"] .s-code-example .hljs .hljs-string, .s-code-example .hljs .hljs-string[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-string, .s-code-example:not(.bare) .hljs .hljs-string[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + 20) * 1%),1);
 }
-.s-code-example .hljs .hljs-title {
+.s-code-example:not(.bare) .hljs .hljs-title {
         color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + -20) * 1%),1);
 
     }
-[theme$="dark"] .s-code-example .hljs .hljs-title, .s-code-example .hljs .hljs-title[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-title, .s-code-example:not(.bare) .hljs .hljs-title[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + 20) * 1%),1);
 }
-.s-code-example .hljs .hljs-params {
+.s-code-example:not(.bare) .hljs .hljs-params {
         color: hsla(calc(var(--s-theme-color-text-h, 0) + var(--s-theme-color-text-spin ,0)),calc((var(--s-theme-color-text-s, 0)) * 1%),calc((var(--s-theme-color-text-l, 0)) * 1%),var(--s-theme-color-text-a, 1));
     }
-.s-code-example .hljs .hljs-bullet {
+.s-code-example:not(.bare) .hljs .hljs-bullet {
         color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),var(--s-theme-color-accent-a, 1));
     }
-[theme$="dark"] .s-code-example .hljs .hljs-bullet, .s-code-example .hljs .hljs-bullet[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-bullet, .s-code-example:not(.bare) .hljs .hljs-bullet[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + 20) * 1%),1);
 }
-.s-code-example .hljs .hljs-code {
+.s-code-example:not(.bare) .hljs .hljs-code {
         color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + -20) * 1%),1);
 
     }
-[theme$="dark"] .s-code-example .hljs .hljs-code, .s-code-example .hljs .hljs-code[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-code, .s-code-example:not(.bare) .hljs .hljs-code[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + 20) * 1%),1);
 }
-.s-code-example .hljs .hljs-emphasis {
+.s-code-example:not(.bare) .hljs .hljs-emphasis {
         font-style: italic;
     }
-.s-code-example .hljs .hljs-formula {
+.s-code-example:not(.bare) .hljs .hljs-formula {
         color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + -20) * 1%),1);
     }
-[theme$="dark"] .s-code-example .hljs .hljs-formula, .s-code-example .hljs .hljs-formula[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-formula, .s-code-example:not(.bare) .hljs .hljs-formula[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + 20) * 1%),1);
 }
-.s-code-example .hljs .hljs-strong {
+.s-code-example:not(.bare) .hljs .hljs-strong {
         font-weight: bold;
     }
-.s-code-example .hljs .hljs-link:hover {
+.s-code-example:not(.bare) .hljs .hljs-link:hover {
         text-decoration: underline;
     }
-.s-code-example .hljs .hljs-quote {
+.s-code-example:not(.bare) .hljs .hljs-quote {
         color: hsla(calc(var(--s-theme-color-current-h, 0) + var(--s-theme-color-current-spin ,0)),calc((var(--s-theme-color-current-s, 0)) * 1%),calc((var(--s-theme-color-current-l, 0)) * 1%),var(--s-theme-color-current-a, 1));
 
     }
-[theme$="dark"] .s-code-example .hljs .hljs-quote, .s-code-example .hljs .hljs-quote[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-quote, .s-code-example:not(.bare) .hljs .hljs-quote[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-current-h, 0) + var(--s-theme-color-current-spin ,0)),calc((var(--s-theme-color-current-s, 0)) * 1%),calc((var(--s-theme-color-current-l, 0) + 20) * 1%),1);
 }
-.s-code-example .hljs .hljs-comment {
+.s-code-example:not(.bare) .hljs .hljs-comment {
         color: hsla(calc(var(--s-theme-color-current-h, 0) + var(--s-theme-color-current-spin ,0)),calc((var(--s-theme-color-current-s, 0)) * 1%),calc((var(--s-theme-color-current-l, 0)) * 1%),0.5);
     }
-[theme$="dark"] .s-code-example .hljs .hljs-comment, .s-code-example .hljs .hljs-comment[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-comment, .s-code-example:not(.bare) .hljs .hljs-comment[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-current-h, 0) + var(--s-theme-color-current-spin ,0)),calc((var(--s-theme-color-current-s, 0)) * 1%),calc((var(--s-theme-color-current-l, 0) + 30) * 1%),0.6);
 }
-.s-code-example .hljs .hljs-doctag {
+.s-code-example:not(.bare) .hljs .hljs-doctag {
         color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + -20) * 1%),1);
     }
-[theme$="dark"] .s-code-example .hljs .hljs-doctag, .s-code-example .hljs .hljs-doctag[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-doctag, .s-code-example:not(.bare) .hljs .hljs-doctag[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + 20) * 1%),1);
 }
-.s-code-example .hljs .hljs-meta,
-    .s-code-example .hljs .hljs-meta-keyword {
+.s-code-example:not(.bare) .hljs .hljs-meta,
+    .s-code-example:not(.bare) .hljs .hljs-meta-keyword {
         color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0) + -40) * 1%),calc((var(--s-theme-color-error-l, 0)) * 1%),1);
 
     }
-[theme$="dark"] .s-code-example .hljs .hljs-meta, .s-code-example .hljs .hljs-meta[theme$="dark"], [theme$="dark"] .s-code-example .hljs .hljs-meta-keyword, .s-code-example .hljs .hljs-meta-keyword[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-meta, .s-code-example:not(.bare) .hljs .hljs-meta[theme$="dark"], [theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-meta-keyword, .s-code-example:not(.bare) .hljs .hljs-meta-keyword[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0) + -40) * 1%),calc((var(--s-theme-color-error-l, 0) + 10) * 1%),1);
 }
-.s-code-example .hljs .hljs-meta-string {
+.s-code-example:not(.bare) .hljs .hljs-meta-string {
         color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),var(--s-theme-color-accent-a, 1));
     }
-.s-code-example .hljs .hljs-attr {
+.s-code-example:not(.bare) .hljs .hljs-attr {
         color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + -20) * 1%),1);
 
     }
-[theme$="dark"] .s-code-example .hljs .hljs-attr, .s-code-example .hljs .hljs-attr[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-attr, .s-code-example:not(.bare) .hljs .hljs-attr[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + 20) * 1%),1);
 }
-.s-code-example .hljs .hljs-attribute {
+.s-code-example:not(.bare) .hljs .hljs-attribute {
         color: hsla(calc(var(--s-theme-color-complementary-h, 0) + var(--s-theme-color-complementary-spin ,0)),calc((var(--s-theme-color-complementary-s, 0)) * 1%),calc((var(--s-theme-color-complementary-l, 0)) * 1%),var(--s-theme-color-complementary-a, 1));
     }
-[theme$="dark"] .s-code-example .hljs .hljs-attribute, .s-code-example .hljs .hljs-attribute[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-attribute, .s-code-example:not(.bare) .hljs .hljs-attribute[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-complementary-h, 0) + var(--s-theme-color-complementary-spin ,0)),calc((var(--s-theme-color-complementary-s, 0)) * 1%),calc((var(--s-theme-color-complementary-l, 0) + 20) * 1%),1);
 }
-.s-code-example .hljs .hljs-builtin-name {
+.s-code-example:not(.bare) .hljs .hljs-builtin-name {
         color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0)) * 1%),calc((var(--s-theme-color-error-l, 0)) * 1%),var(--s-theme-color-error-a, 1));
 
     }
-[theme$="dark"] .s-code-example .hljs .hljs-builtin-name, .s-code-example .hljs .hljs-builtin-name[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-builtin-name, .s-code-example:not(.bare) .hljs .hljs-builtin-name[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0)) * 1%),calc((var(--s-theme-color-error-l, 0) + 20) * 1%),1);
 }
-.s-code-example .hljs .hljs-name {
+.s-code-example:not(.bare) .hljs .hljs-name {
         color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0)) * 1%),calc((var(--s-theme-color-error-l, 0)) * 1%),var(--s-theme-color-error-a, 1));
     }
-[theme$="dark"] .s-code-example .hljs .hljs-name, .s-code-example .hljs .hljs-name[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-name, .s-code-example:not(.bare) .hljs .hljs-name[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0)) * 1%),calc((var(--s-theme-color-error-l, 0) + 20) * 1%),1);
 }
-.s-code-example .hljs .hljs-section {
+.s-code-example:not(.bare) .hljs .hljs-section {
         color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + -20) * 1%),1);
     }
-[theme$="dark"] .s-code-example .hljs .hljs-section, .s-code-example .hljs .hljs-section[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-section, .s-code-example:not(.bare) .hljs .hljs-section[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + 20) * 1%),1);
 }
-.s-code-example .hljs .hljs-tag {
+.s-code-example:not(.bare) .hljs .hljs-tag {
         color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0)) * 1%),calc((var(--s-theme-color-error-l, 0)) * 1%),var(--s-theme-color-error-a, 1));
     }
-[theme$="dark"] .s-code-example .hljs .hljs-tag, .s-code-example .hljs .hljs-tag[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-tag, .s-code-example:not(.bare) .hljs .hljs-tag[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0)) * 1%),calc((var(--s-theme-color-error-l, 0) + 20) * 1%),1);
 }
-.s-code-example .hljs .hljs-variable {
+.s-code-example:not(.bare) .hljs .hljs-variable {
         color: hsla(calc(var(--s-theme-color-complementary-h, 0) + var(--s-theme-color-complementary-spin ,0)),calc((var(--s-theme-color-complementary-s, 0)) * 1%),calc((var(--s-theme-color-complementary-l, 0)) * 1%),var(--s-theme-color-complementary-a, 1));
     }
-[theme$="dark"] .s-code-example .hljs .hljs-variable, .s-code-example .hljs .hljs-variable[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-variable, .s-code-example:not(.bare) .hljs .hljs-variable[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-complementary-h, 0) + var(--s-theme-color-complementary-spin ,0)),calc((var(--s-theme-color-complementary-s, 0)) * 1%),calc((var(--s-theme-color-complementary-l, 0) + 20) * 1%),1);
 }
-.s-code-example .hljs .hljs-template-variable {
+.s-code-example:not(.bare) .hljs .hljs-template-variable {
         color: hsla(calc(var(--s-theme-color-complementary-h, 0) + var(--s-theme-color-complementary-spin ,0)),calc((var(--s-theme-color-complementary-s, 0)) * 1%),calc((var(--s-theme-color-complementary-l, 0)) * 1%),var(--s-theme-color-complementary-a, 1));
 
     }
-[theme$="dark"] .s-code-example .hljs .hljs-template-variable, .s-code-example .hljs .hljs-template-variable[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-template-variable, .s-code-example:not(.bare) .hljs .hljs-template-variable[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-complementary-h, 0) + var(--s-theme-color-complementary-spin ,0)),calc((var(--s-theme-color-complementary-s, 0)) * 1%),calc((var(--s-theme-color-complementary-l, 0) + 20) * 1%),1);
 }
-.s-code-example .hljs .hljs-template-tag {
+.s-code-example:not(.bare) .hljs .hljs-template-tag {
         color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0) + -20) * 1%),calc((var(--s-theme-color-error-l, 0)) * 1%),1);
 
     }
-[theme$="dark"] .s-code-example .hljs .hljs-template-tag, .s-code-example .hljs .hljs-template-tag[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs .hljs-template-tag, .s-code-example:not(.bare) .hljs .hljs-template-tag[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0) + -20) * 1%),calc((var(--s-theme-color-error-l, 0) + -10) * 1%),1);
 }
-.s-code-example .hljs.css .hljs-built_in {
+.s-code-example:not(.bare) .hljs.css .hljs-built_in {
         color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + -20) * 1%),1);
     }
-[theme$="dark"] .s-code-example .hljs.css .hljs-built_in, .s-code-example .hljs.css .hljs-built_in[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs.css .hljs-built_in, .s-code-example:not(.bare) .hljs.css .hljs-built_in[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-info-h, 0) + var(--s-theme-color-info-spin ,0)),calc((var(--s-theme-color-info-s, 0)) * 1%),calc((var(--s-theme-color-info-l, 0) + 20) * 1%),1);
 }
-.s-code-example .hljs.css .hljs-keyword {
+.s-code-example:not(.bare) .hljs.css .hljs-keyword {
         color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0)) * 1%),calc((var(--s-theme-color-error-l, 0)) * 1%),var(--s-theme-color-error-a, 1));
 
     }
-[theme$="dark"] .s-code-example .hljs.css .hljs-keyword, .s-code-example .hljs.css .hljs-keyword[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs.css .hljs-keyword, .s-code-example:not(.bare) .hljs.css .hljs-keyword[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0)) * 1%),calc((var(--s-theme-color-error-l, 0) + 20) * 1%),1);
 }
-.s-code-example .hljs.scss .hljs-keyword {
+.s-code-example:not(.bare) .hljs.scss .hljs-keyword {
         color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0)) * 1%),calc((var(--s-theme-color-error-l, 0)) * 1%),var(--s-theme-color-error-a, 1));
 
     }
-[theme$="dark"] .s-code-example .hljs.scss .hljs-keyword, .s-code-example .hljs.scss .hljs-keyword[theme$="dark"] {
+[theme$="dark"] .s-code-example:not(.bare) .hljs.scss .hljs-keyword, .s-code-example:not(.bare) .hljs.scss .hljs-keyword[theme$="dark"] {
             color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0)) * 1%),calc((var(--s-theme-color-error-l, 0) + 20) * 1%),1);
 }
-.s-code-example:not(.s-color) {--s-theme-color-current-h: var(--s-theme-color-main-h);
+.s-code-example:not(.bare):not(.s-color) {--s-theme-color-current-h: var(--s-theme-color-main-h);
 --s-theme-color-current-s: var(--s-theme-color-main-s);
 --s-theme-color-current-l: var(--s-theme-color-main-l);
 --s-theme-color-current-text-saturation-offset: var(--s-theme-color-main-text-saturation-offset, 0);

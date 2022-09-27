@@ -28,21 +28,23 @@
  */
 let _isUserScrolling = false,
     _isUserScrollingTimeout;
-document?.addEventListener?.('wheel', (e) => {
-    _isUserScrolling = true;
-    clearTimeout(_isUserScrollingTimeout);
-    _isUserScrollingTimeout = setTimeout(() => {
-        _isUserScrolling = false;
-    }, 200);
-});
+try {
+    document?.addEventListener?.('wheel', (e) => {
+        _isUserScrolling = true;
+        clearTimeout(_isUserScrollingTimeout);
+        _isUserScrollingTimeout = setTimeout(() => {
+            _isUserScrolling = false;
+        }, 200);
+    });
 
-document?.addEventListener?.('touchmove', (e) => {
-    _isUserScrolling = true;
-    clearTimeout(_isUserScrollingTimeout);
-    _isUserScrollingTimeout = setTimeout(() => {
-        _isUserScrolling = false;
-    }, 200);
-});
+    document?.addEventListener?.('touchmove', (e) => {
+        _isUserScrolling = true;
+        clearTimeout(_isUserScrollingTimeout);
+        _isUserScrollingTimeout = setTimeout(() => {
+            _isUserScrolling = false;
+        }, 200);
+    });
+} catch (e) {}
 
 export default function __isUserScrolling($elm) {
     $elm.addEventListener('mouseover', (e) => {

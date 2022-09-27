@@ -1,13 +1,12 @@
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarElement from '@coffeekraken/s-sugar-element';
-import { __onDrag } from '@coffeekraken/sugar/dom';
+import { __elementAreaStats, __onDrag } from '@coffeekraken/sugar/dom';
 import __easeOut from '../../../shared/easing/easeOutQuad';
 import __easeInterval from '../../../shared/function/easeInterval';
 import __clamp from '../../../shared/math/clamp';
 import __easeClamp from '../../../shared/math/easeClamp';
 import __uniqid from '../../../shared/string/uniqid';
-import __injectStyle from '../css/injectStyle';
-import { __elementAreaStats } from '@coffeekraken/sugar/dom';
+import __injectStyle from '../inject/injectStyle';
 
 /**
  * @name      slideable

@@ -1,0 +1,50 @@
+.s-clipboard-copy {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    position: relative;
+    cursor: pointer;
+
+    &:not([mounted]) > * {
+        opacity: 0.001;
+        pointer-events: none;
+    }
+
+    .s-clipboard-copy__root[state='pending'] {
+        .icon-copy {
+            opacity: 1;
+        }
+    }
+    .s-clipboard-copy__root[state='copy'] {
+        .icon-copy {
+            opacity: 1;
+        }
+    }
+    .s-clipboard-copy__root[state='success'] {
+        color: sugar.color(success);
+
+        .icon-success {
+            opacity: 1;
+        }
+    }
+    .s-clipboard-copy__root[state='error'] {
+        color: sugar.color(error);
+
+        .icon-error {
+            opacity: 1;
+        }
+    }
+
+    svg {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: block;
+        width: 1em;
+        height: 1em;
+        background-size: contain;
+        opacity: 0;
+        pointer-events: none;
+    }
+}

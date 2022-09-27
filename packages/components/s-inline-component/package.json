@@ -1,0 +1,43 @@
+{
+    "name": "@coffeekraken/s-inline-component",
+    "version": "2.0.0-alpha.20",
+    "description": "",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@builder.io/mitosis": "^0.0.61",
+        "@builder.io/mitosis-cli": "^0.0.22",
+        "@coffeekraken/s-component": "^2.0.0-alpha.20",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.20",
+        "@coffeekraken/s-mitosis": "^2.0.0-alpha.20"
+    },
+    "exports": {
+        ".": {
+            "require": "./dist/pkg/cjs/js/lazy.js",
+            "import": "./dist/pkg/esm/js/lazy.js"
+        },
+        "./lazy": {
+            "require": "./dist/pkg/cjs/js/lazy.js",
+            "import": "./dist/pkg/esm/js/lazy.js"
+        },
+        "./webcomponent": {
+            "require": "./dist/js/webcomponent/src/js/SInlineComponent.ts",
+            "import": "./dist/js/webcomponent/src/js/SInlineComponent.ts"
+        },
+        "./shared/*": {
+            "require": "./dist/pkg/cjs/shared/*.js",
+            "import": "./dist/pkg/esm/shared/*.js"
+        },
+        "./node/*": {
+            "require": "./dist/pkg/cjs/node/*.js",
+            "import": "./dist/pkg/esm/node/*.js"
+        },
+        "./js/*": {
+            "require": "./dist/pkg/cjs/js/*.js",
+            "import": "./dist/pkg/esm/js/*.js"
+        }
+    }
+}

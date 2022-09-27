@@ -81,6 +81,10 @@ export default function __querySelectorLive(
         settings,
     );
 
+    if (selector === 's-clipboard-copy') {
+        console.log('SE', settings);
+    }
+
     const innerPromises = [];
 
     // process selectors when scopes are true
@@ -272,6 +276,10 @@ export default function __querySelectorLive(
             childList: true,
             subtree: true,
         });
+
+        if (selector === 's-clipboard-copy') {
+            console.log('SE', settings);
+        }
 
         // first query
         findAndProcess(settings.rootNode, selector);

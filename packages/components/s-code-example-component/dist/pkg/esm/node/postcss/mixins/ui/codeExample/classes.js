@@ -46,7 +46,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     if (finalParams.styles.includes(finalParams.defaultStyle) &&
         finalParams.scope.includes('lnf')) {
         vars.comment(`/**
-            * @name           .s-code-example[lnf="default"]
+            * @name           .s-code-example:not(.bare)
             * @namespace          sugar.style.ui.codeExample
             * @type           CssClass
             * 
@@ -61,7 +61,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * 
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */`).code(`.s-code-example[lnf="default"] {
+        */`).code(`.s-code-example:not(.bare) {
                 @sugar.ui.codeExample($style: ${finalParams.defaultStyle}, $scope: lnf);
             }`, {
             type: 'CssClass',
@@ -69,7 +69,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     }
     if (finalParams.scope.includes('theme')) {
         vars.code(`
-            .s-code-example {
+            .s-code-example:not(.bare) {
                 @sugar.highlightjs.theme;
             }
         `, {
@@ -79,7 +79,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     // default color
     if (finalParams.scope.includes('lnf')) {
         vars.code(() => `
-            .s-code-example:not(.s-color) {
+            .s-code-example:not(.bare):not(.s-color) {
                 @sugar.color(${finalParams.defaultColor});
             }
         `, { type: 'CssClass' });

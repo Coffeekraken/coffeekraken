@@ -1,0 +1,18 @@
+{
+    "type": "viewspec",
+    "title": "Container",
+    "description": "Display a simple container that will center your content on the page with a certain max-width",
+    "props": {
+        "type": {
+            "description": "Specify the container type you want. Usually \"default\", \"wide\" or \"full\"",
+            "type": "String",
+            "values": ["default", "wide", "full"],
+            "default": "default"
+        },
+        "attributes": "@sugar.views.props.attributes",
+        "content": {
+            "type": "String",
+            "required": true
+        }
+    }
+}

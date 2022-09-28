@@ -1,0 +1,6 @@
+{
+    "type": "prop",
+    "description": "Specify the media on which to apply this new layout",
+    "type": "String",
+    "required": true
+}

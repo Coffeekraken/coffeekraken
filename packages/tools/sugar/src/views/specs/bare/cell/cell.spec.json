@@ -1,0 +1,13 @@
+{
+    "type": "view",
+    "title": "Cell",
+    "description": "Simple cell that can be used inside a layout, etc...",
+    "props": {
+        "attributes": "@sugar.views.props.attributes",
+        "content": {
+            "description": "The content to print in the cell",
+            "type": "String",
+            "default": ""
+        }
+    }
+}

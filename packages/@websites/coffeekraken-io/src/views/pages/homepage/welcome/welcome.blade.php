@@ -16,10 +16,6 @@
                 <i class="s-icon:file-css __icon-3"></i>
                 <i class="s-icon:file-md __icon-4"></i>
 
-     <textarea id="hello">Hello world</textarea>
-
-                <s-clipboard-copy style="display:inline-block; min-height: 1px;" from="#hello"></s-clipboard-copy>
-
                 {{-- <i class="__icon-1 s-icon:calendar s-tc:complementary s-font:80"></i>
                 <i class="__icon-2 s-icon:color s-tc:accent s-font:80"></i>
                 <i class="__icon-3 s-icon:github s-font:80"></i>
@@ -464,3 +460,22 @@ independantly of the source -->
 
 
 </section>
+
+@php
+    $spec = \Sugar\specs\readSpec('sugar.blade.bare.cell');
+    print '<pre>';
+    print_r($spec);
+@endphp
+
+ @include('@sugar.bare.layout.layout', [
+    'id' => 'coco',
+    'layout' => '1 1 2 _ 3 3 2',
+    'attributes' => [
+        'plop' => 'world'
+    ],
+    'content' => '<div>Helo</div><div>world</div><div>plop</div>',
+    'medias' => [[
+        'media' => 'tablet',
+        'layout' => '1 _ 2 _ 3'
+    ]]
+])

@@ -7,10 +7,6 @@
     "repositories": [
         {
             "type": "path",
-            "url": "../../tools/s-twig"
-        },
-        {
-            "type": "path",
             "url": "../../tools/sugar"
         }
     ],

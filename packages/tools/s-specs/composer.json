@@ -1,0 +1,18 @@
+{
+    "name": "coffeekraken/s-specs",
+    "autoload": {
+        "files": [
+            "src/php/autoload.php"
+        ]
+    },
+    "require": {
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../sugar"
+        }
+    ],
+    "version": "2.0.0-alpha.20",
+    "homepage": "https://coffeekraken.io"
+}

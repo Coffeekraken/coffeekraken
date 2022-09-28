@@ -5,7 +5,17 @@
             "src/php/autoload.php"
         ]
     },
-    "require": {},
+    "require": {
+        "twig/twig": "^3.4",
+        "coffeekraken/s-specs": "^2.0@alpha"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../s-specs"
+        }
+    ],
+    "minimum-stability": "alpha",
     "version": "2.0.0-alpha.20",
     "homepage": "https://coffeekraken.io"
 }

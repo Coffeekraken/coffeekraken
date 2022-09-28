@@ -29,8 +29,8 @@ $twig = new \Twig\Environment($loader, [
 ]);
 $twig->addExtension(new \Twig\Extension\DebugExtension());
 
-// init twig with STwig power
-$twig = \SViewRenderer\initTwig($twig, $loader);
+// init twig with Sugar power
+$twig = \Sugar\twig\initTwig($twig, $loader);
 
 try {
     print \Sugar\html\expandPleasantCssClassnames(

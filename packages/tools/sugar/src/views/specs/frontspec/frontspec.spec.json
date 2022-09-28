@@ -1,0 +1,27 @@
+{
+    "type": "frontspec",
+    "title": "Frontspec",
+    "description": "Describe the frontspec.json properties",
+    "props": {
+        "assets": {
+            "type": "Object{}",
+            "props": {
+                "type": {
+                    "type": "String"
+                },
+                "defer": {
+                    "type": "Boolean",
+                    "default": false
+                },
+                "src": {
+                    "type": "String",
+                    "required": true
+                },
+                "env": {
+                    "type": "String",
+                    "default": "production"
+                }
+            }
+        }
+    }
+}

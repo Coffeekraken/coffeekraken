@@ -1,0 +1,31 @@
+{
+    "type": "viewspec",
+    "title": "Layout",
+    "description": "Allows you to display a layout section driven by the layout string notaiton like \"1 1 2 _ 3 3 2\"",
+    "props": {
+        "id": {
+            "description": "Specify a uniqid to apply to the layout",
+            "type": "String"
+        },
+        "layout": {
+            "description": "Specify the layout you want in layout string notation",
+            "type": "String",
+            "required": true
+        },
+        "attributes": "@sugar.views.props.attributes",
+        "content": {
+            "description": "The grid content to print. Must have the same count of div(s) as your layout cells",
+            "type": "String",
+            "required": true
+        },
+        "medias": {
+            "description": "Specify different layout depending on the media",
+            "type": "Object[]",
+            "default": {},
+            "props": {
+                "media": "@sugar.views.props.media",
+                "layout": "@this.props.layout"
+            }
+        }
+    }
+}

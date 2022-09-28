@@ -1,7 +1,7 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '2.0.0-alpha.19',
-        'version' => '2.0.0.0-alpha19',
+        'pretty_version' => '2.0.0-alpha.20',
+        'version' => '2.0.0.0-alpha20',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,8 +11,8 @@
     ),
     'versions' => array(
         'coffeekraken/s-view-renderer-engine-blade' => array(
-            'pretty_version' => '2.0.0-alpha.19',
-            'version' => '2.0.0.0-alpha19',
+            'pretty_version' => '2.0.0-alpha.20',
+            'version' => '2.0.0.0-alpha20',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

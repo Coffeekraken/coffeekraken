@@ -1,0 +1,6 @@
+{
+    "type": "prop",
+    "description": "Specify some attributes to be applied on the layout itself in key=>pairs format",
+    "type": "Object",
+    "default": {}
+}

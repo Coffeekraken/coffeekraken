@@ -1,6 +1,7 @@
 <?php
 
-require_once dirname(__FILE__) . '/../array/deepMerge.php';
+require_once __DIR__ . '/../array/deepMerge.php';
+require_once __DIR__ . '/../../../vendor/autoload.php';
 
 /**
  * @class

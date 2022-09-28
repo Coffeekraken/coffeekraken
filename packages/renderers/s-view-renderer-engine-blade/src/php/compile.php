@@ -11,19 +11,6 @@ if ($nodeModulesVendorsPath) {
 // use Jenssegers\Blade\Blade;
 use eftec\bladeone\BladeOne;
 
-// require the sugar toolkit
-$nodeModulesSugarPath = realpath(
-    __DIR__ . '/../../../sugar/src/php/autoload.php'
-);
-$monorepoSugarPath = realpath(
-    __DIR__ . '/../../../../tools/sugar/src/php/autoload.php'
-);
-if ($nodeModulesSugarPath) {
-    require_once $nodeModulesSugarPath;
-} elseif ($monorepoSugarPath) {
-    require_once $monorepoSugarPath;
-}
-
 $params = [];
 
 if (file_exists($argv[1])) {
@@ -43,6 +30,12 @@ if ($data->_sharedDataFilePath) {
 $viewName = str_replace('.blade.php', '', $params->viewDotPath);
 
 // print $params->cacheDir;
+
+// add the default sugar views path
+$params->rootDirs = array_merge(
+    $params->rootDirs,
+    \Sugar\blade\getDefaultViewDirs()
+);
 
 $blade = new BladeOne(
     $params->rootDirs,

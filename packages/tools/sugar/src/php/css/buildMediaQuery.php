@@ -44,37 +44,41 @@ namespace Sugar\css;
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function buildMediaQuery($media, $params = [])
+function buildMediaQuery($media, $params = null)
 {
-    $finalParams = (object) array_merge_recursive(
-        [
-            'defaultAction' => '>=',
-            'defaultQuery' => 'screen',
-            'queries' => [
-                'mobile' => [
-                    'min-width' => 0,
-                    'max-width' => 639,
-                ],
-                'tablet' => [
-                    'min-width' => 640,
-                    'max-width' => 1279,
-                ],
-                'desktop' => [
-                    'min-width' => 1280,
-                    'max-width' => 2047,
-                ],
-                'wide' => [
-                    'min-width' => 2048,
-                    'max-width' => null,
-                ],
-                'dwarf' => [
-                    'min-height' => null,
-                    'max-height' => 700,
-                ],
+    $finalParams = (object) [
+        'defaultAction' => '>=',
+        'defaultQuery' => 'screen',
+        'queries' => [
+            'mobile' => [
+                'min-width' => 0,
+                'max-width' => 639,
+            ],
+            'tablet' => [
+                'min-width' => 640,
+                'max-width' => 1279,
+            ],
+            'desktop' => [
+                'min-width' => 1280,
+                'max-width' => 2047,
+            ],
+            'wide' => [
+                'min-width' => 2048,
+                'max-width' => null,
+            ],
+            'dwarf' => [
+                'min-height' => null,
+                'max-height' => 700,
             ],
         ],
-        (array) $params
-    );
+    ];
+
+    // if (isset($params)) {
+    //     var_dump($params);
+    // }
+
+    $finalParams = (object) $params;
+    $finalParams = (object) \Sugar\convert\objectToArray($finalParams);
 
     $queries = [];
 
@@ -119,7 +123,7 @@ function buildMediaQuery($media, $params = [])
         $mediaQueryConfig = $finalParams->queries[$mediaName];
 
         if (!$mediaQueryConfig) {
-            throw new Exception(
+            throw new \Exception(
                 '[buildMediaQuery] Sorry but the requested media "' .
                     $mediaName .
                     '" does not exists in the config'
@@ -127,8 +131,7 @@ function buildMediaQuery($media, $params = [])
         }
 
         $queryList = [];
-
-        foreach (array_keys($mediaQueryConfig) as $prop) {
+        foreach (array_keys((array) $mediaQueryConfig) as $prop) {
             $value = $mediaQueryConfig[$prop];
 
             if (!$value) {

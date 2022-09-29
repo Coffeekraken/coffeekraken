@@ -5,25 +5,25 @@
         $finalId = 's-layout-' . uniqid();
     }
 
-    $defaultCss = \Sugar\css\layoutCss($layout, [
+    $defaultCss = \Sugar\css\layoutCss($layout->default, [
         'selector' => '#' . $finalId,
     ]);
 
     $mediasCss = [];
     if (isset($medias)) {
-        foreach ($medias as $key => $mediaObj) {
-            $mediaObj = (object) $mediaObj;
-            $css = \Sugar\css\layoutCss($mediaObj->layout, [
-                'selector' => '#' . $finalId,
-                'media' => $mediaObj->media,
-                'mediaSettings' => $frontspec->media
-            ]);
-            array_push($mediasCss, $css);
+        foreach ($layout as $media => $lay) {
+            if ($media != 'default') {
+                $css = \Sugar\css\layoutCss($lay, [
+                    'selector' => '#' . $finalId,
+                    'media' => $media,
+                    'mediaSettings' => $frontspec->media
+                ]);
+                array_push($mediasCss, $css);
+            }
         }
     }
 
 @endphp
-
 <style>
     {!! $defaultCss !!}
     {!! implode('\n', $mediasCss) !!}

@@ -831,6 +831,35 @@ export default function (api) {
                     'src/partials/recipe/recipe.md',
                 ),
             },
+            spec: {
+                /**
+                 * @name            markdown
+                 * @namespace       config.markdownBuilder.partials.spec
+                 * @type            String
+                 * @default         __path.resolve(packageRoot,'src/partials/spec/spec.md')
+                 *
+                 * Specify the "markdown" template for the "spec" partial
+                 *
+                 * @since       2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                markdown: __path.resolve(
+                    packageRoot,
+                    'src/partials/spec/spec.md',
+                ),
+                /**
+                 * @name            html
+                 * @namespace       config.markdownBuilder.partials.spec
+                 * @type            String
+                 * @default         __path.resolve(packageRoot,'src/partials/spec/spec.md')
+                 *
+                 * Specify the "html" template for the "spec" partial
+                 *
+                 * @since       2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                html: __path.resolve(packageRoot, 'src/partials/spec/spec.md'),
+            },
             docMenu: {
                 /**
                  * @name            markdown

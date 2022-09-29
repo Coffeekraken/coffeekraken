@@ -9,7 +9,7 @@ const s_sugar_config_1 = __importDefault(require("@coffeekraken/s-sugar-config")
 /**
  * @name                SCliConfigCacheParamsInterface
  * @namespace           node.mono.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta

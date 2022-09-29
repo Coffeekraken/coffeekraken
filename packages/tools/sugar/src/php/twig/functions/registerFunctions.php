@@ -22,12 +22,19 @@ namespace Sugar\twig;
  */
 function registerFunctions($twig)
 {
+    // Array
     $toArray = require_once 'cast/toArray.php';
     $twig->addFunction($toArray);
 
+    // Cast
     $toObject = require_once 'cast/toObject.php';
     $twig->addFunction($toObject);
 
+    // Css
+    $layoutCss = require_once 'string/layoutCss.php';
+    $twig->addFunction($layoutCss);
+
+    // Frontspec
     $frontspecAssets = require_once 'frontspec/assets.php';
     $twig->addFunction($frontspecAssets);
 
@@ -37,8 +44,16 @@ function registerFunctions($twig)
     $frontspecMetas = require_once 'frontspec/metas.php';
     $twig->addFunction($frontspecMetas);
 
+    // Html
+    $attrs = require_once 'html/attrs.php';
+    $twig->addFunction($attrs);
+
+    // String
     $idCompliant = require_once 'string/idCompliant.php';
     $twig->addFunction($idCompliant);
+
+    $uniqid = require_once 'string/uniqid.php';
+    $twig->addFunction($uniqid);
 
     return $twig;
 }

@@ -3,7 +3,7 @@ import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name                SRunCommandParamsInterface
  * @namespace           cli.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta

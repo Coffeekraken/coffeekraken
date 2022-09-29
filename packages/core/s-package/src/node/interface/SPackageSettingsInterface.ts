@@ -6,7 +6,7 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 /**
  * @name                SPackageSettingsInterface
  * @namespace           node.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta

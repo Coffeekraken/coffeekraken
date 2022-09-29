@@ -3,7 +3,7 @@
 /**
  * @name                    ISLogAsk
  * @namespace           shared
- * @type.                      Class
+ * @type                      Class
  * @platform            js
  * @platform            node
  * @platform             ts

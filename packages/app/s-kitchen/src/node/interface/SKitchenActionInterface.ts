@@ -3,7 +3,7 @@ import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name                SKitchenActionInterface
  * @namespace           node.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @status              beta
  * @platform             node

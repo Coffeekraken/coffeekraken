@@ -1,10 +1,8 @@
-import __SLog from './SLog';
-
 // @ts-nocheck
 /**
  * @name                    ISLog
  * @namespace           shared
- * @type.                      Class
+ * @type                      Class
  * @platform            js
  * @platform            node
  * @platform             ts

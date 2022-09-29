@@ -1,0 +1,23 @@
+{
+    "type": "prop",
+    "description": "Specify the paddings you want around your layout by media (mobile, etc...). Default values must be stored under the \"default\" media",
+    "type": "Object{}",
+    "props": {
+        "top": {
+            "description": "Specify the padding top",
+            "type": "String"
+        },
+        "right": {
+            "description": "Specify the padding right",
+            "type": "String"
+        },
+        "bottom": {
+            "description": "Specify the padding bottom",
+            "type": "String"
+        },
+        "left": {
+            "description": "Specify the padding left",
+            "type": "String"
+        }
+    }
+}

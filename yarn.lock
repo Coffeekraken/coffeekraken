@@ -2296,6 +2296,7 @@ __metadata:
     "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
     "@coffeekraken/sugar": ^2.0.0-alpha.20
     chokidar: ^3.5.3
+    micromatch: ^4.0.5
   languageName: unknown
   linkType: soft
 
@@ -2496,6 +2497,7 @@ __metadata:
   dependencies:
     "@coffeekraken/s-file": ^2.0.0-alpha.20
     "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-specs": ^2.0.0-alpha.20
     "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
     "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
@@ -2923,6 +2925,18 @@ __metadata:
     "@coffeekraken/sugar": ^2.0.0-alpha.20
     lit: ^2.2.8
     swiper: ^8.3.2
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/s-specs@^2.0.0-alpha.20, @coffeekraken/s-specs@workspace:packages/tools/s-specs":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/s-specs@workspace:packages/tools/s-specs"
+  dependencies:
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-file": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
 

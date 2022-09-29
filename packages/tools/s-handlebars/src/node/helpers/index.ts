@@ -19,6 +19,7 @@ import sanitizeValue from './sanitizeValue';
 import sfile from './sfile';
 import shieldsioHandlebarsHelper from './shieldsioHandlebarsHelper';
 import sort from './sort';
+import spec from './spec';
 import toString from './toString';
 
 export {
@@ -43,5 +44,6 @@ export {
     sanitizeValue,
     sfile,
     shieldsioHandlebarsHelper,
+    spec,
     sort,
 };

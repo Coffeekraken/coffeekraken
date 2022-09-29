@@ -7,7 +7,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 /**
  * @name                SViewRendererEngineBladeSettingsInterface
  * @namespace           node.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta
@@ -28,4 +28,4 @@ class SViewRendererEngineBladeSettingsInterface extends s_interface_1.default {
     }
 }
 exports.default = SViewRendererEngineBladeSettingsInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsNEVBQXFEO0FBRXJEOzs7Ozs7Ozs7Ozs7Ozs7OztHQWlCRztBQUVILE1BQXFCLHlDQUEwQyxTQUFRLHFCQUFZO0lBQy9FLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU8sRUFDTixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBTEQsNERBS0MifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsNEVBQXFEO0FBRXJEOzs7Ozs7Ozs7Ozs7Ozs7OztHQWlCRztBQUVILE1BQXFCLHlDQUEwQyxTQUFRLHFCQUFZO0lBQy9FLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU8sRUFBRSxDQUFDO0lBQ2QsQ0FBQztDQUNKO0FBSkQsNERBSUMifQ==

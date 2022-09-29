@@ -1,12 +1,11 @@
 // @ts-nocheck
 
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name                SPackageApplyDefaultPackageJsonParamsInterface
  * @namespace           node.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta

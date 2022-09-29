@@ -3,7 +3,7 @@ import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name                SCliAddManifestJsonParamsInterface
  * @namespace           node.add.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta

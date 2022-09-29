@@ -1,0 +1,23 @@
+{
+    "type": "view",
+    "title": "Container",
+    "description": "Display a simple container that will center your content on the page with a certain max-width",
+    "props": {
+        "frontspec": {
+            "description": "The frontspec.json that you must have at your project root",
+            "type": "Object",
+            "required": true
+        },
+        "type": {
+            "description": "Specify the container type you want. Usually \"default\", \"wide\" or \"full\"",
+            "type": "String"
+        },
+        "attributes": "@sugar.views.props.attributes",
+        "content": {
+            "type": "String",
+            "required": true
+        },
+        "margin": "@sugar.views.props.margin",
+        "padding": "@sugar.views.props.padding"
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "type": "prop",
+    "description": "Specify the margins you want around your layout by media (mobile, etc...). Default values must be stored under the \"default\" media",
+    "type": "Object{}",
+    "props": {
+        "top": {
+            "description": "Specify the margin top",
+            "type": "String"
+        },
+        "right": {
+            "description": "Specify the margin right",
+            "type": "String"
+        },
+        "bottom": {
+            "description": "Specify the margin bottom",
+            "type": "String"
+        },
+        "left": {
+            "description": "Specify the margin left",
+            "type": "String"
+        }
+    }
+}

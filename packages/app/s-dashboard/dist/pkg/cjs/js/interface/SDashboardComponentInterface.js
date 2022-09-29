@@ -7,7 +7,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 /**
  * @name                SDashboardComponentInterface
  * @namespace           js.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @status              beta
  * @platform             node

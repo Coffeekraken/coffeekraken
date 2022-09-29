@@ -8,7 +8,7 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
 /**
  * @name                SScrollComponentInterface
  * @namespace           js.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta

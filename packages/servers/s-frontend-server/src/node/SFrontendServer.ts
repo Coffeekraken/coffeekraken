@@ -653,8 +653,9 @@ export default class SFrontendServer extends __SClass {
                                 req.params,
                             )) {
                                 // do not process non "number" keys
-                                if (typeof __autoCast(key) !== 'number')
+                                if (typeof __autoCast(key) !== 'number') {
                                     continue;
+                                }
                                 const paramKey = Object.keys(pageConfig.params)[
                                     parseInt(key)
                                 ];

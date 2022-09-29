@@ -8,7 +8,7 @@ const s_sugar_config_1 = __importDefault(require("@coffeekraken/s-sugar-config")
 /**
  * @name                SStaticBuilderBuildParamsInterface
  * @namespace           node.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta

@@ -4,7 +4,7 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 /**
  * @name                SImagesBuilderBuildParamsInterface
  * @namespace           node.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta
@@ -31,11 +31,10 @@ export default class SImagesBuilderBuildParamsInterface extends __SInterface {
                 alias: 'g',
             },
             compressExts: {
-                description:
-                    'Specify the file extensions you want to compress',
+                description: 'Specify the file extensions you want to compress',
                 type: 'String[]',
                 required: true,
-                default: __SSugarConfig.get('imagesBuilder.compressExts')
+                default: __SSugarConfig.get('imagesBuilder.compressExts'),
             },
             inDir: {
                 description:

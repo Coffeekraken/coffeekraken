@@ -37,6 +37,10 @@ export default function (api) {
                         return api.theme.media;
                     },
                 },
+                google: {
+                    type: 'config',
+                    config: 'google',
+                },
                 margin: {
                     type: 'object',
                     get value() {
@@ -68,6 +72,12 @@ export default function (api) {
                             };
                         }
                         return finalObj;
+                    },
+                },
+                layout: {
+                    type: 'object',
+                    get value() {
+                        return api.theme.layout;
                     },
                 },
             },

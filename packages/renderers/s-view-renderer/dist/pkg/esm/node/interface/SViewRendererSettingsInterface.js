@@ -3,7 +3,7 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 /**
  * @name                SViewRendererSettingsInterface
  * @namespace           node.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta

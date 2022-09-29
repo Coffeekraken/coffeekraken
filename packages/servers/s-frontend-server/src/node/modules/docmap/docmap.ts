@@ -26,8 +26,8 @@ export default function docmap(express, settings, config) {
         };
 
         // data
-        config.data.docmapJson = {
-            path: `${__dirname()}/docmapJsonData`,
+        config.data.docmap = {
+            path: `${__dirname()}/docmapData`,
             settings: {},
         };
         config.data.docmapMarkdown = {

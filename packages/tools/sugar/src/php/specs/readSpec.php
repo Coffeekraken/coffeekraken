@@ -26,7 +26,7 @@ function readSpec(string $specDotPath, $settings = [])
 {
     $settings = array_merge_recursive((array) $settings, [
         'namespaces' => [
-            'sugar.views' => [realpath(__DIR__ . '/../../views/specs')],
+            'sugar.views' => [realpath(__DIR__ . '/../../views/_specs')],
             'sugar.blade' => [realpath(__DIR__ . '/../../views/blade/@sugar')],
             'sugar.twig' => [realpath(__DIR__ . '/../../views/twig')],
         ],

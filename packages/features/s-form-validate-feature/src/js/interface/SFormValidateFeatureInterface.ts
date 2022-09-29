@@ -4,7 +4,7 @@ import __SValidator from '@coffeekraken/s-validator';
 /**
  * @name                SFormValidateFeatureInterface
  * @namespace           js.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta

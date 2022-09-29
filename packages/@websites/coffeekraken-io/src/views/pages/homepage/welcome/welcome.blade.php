@@ -461,7 +461,7 @@ independantly of the source -->
 
 </section>
 
-@php
+{{-- @php
     $spec = \Sugar\specs\readSpec('sugar.blade.bare.cell');
     print '<pre>';
     print_r($spec);
@@ -478,4 +478,4 @@ independantly of the source -->
         'media' => 'tablet',
         'layout' => '1 _ 2 _ 3'
     ]]
-])
+]) --}}

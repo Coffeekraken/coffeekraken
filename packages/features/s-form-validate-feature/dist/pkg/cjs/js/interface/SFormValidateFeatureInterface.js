@@ -8,7 +8,7 @@ const s_validator_1 = __importDefault(require("@coffeekraken/s-validator"));
 /**
  * @name                SFormValidateFeatureInterface
  * @namespace           js.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta

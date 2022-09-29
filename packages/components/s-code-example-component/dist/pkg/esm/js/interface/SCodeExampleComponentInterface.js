@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name                SCodeExampleComponentInterface
  * @namespace           js.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta

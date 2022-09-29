@@ -3,7 +3,7 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 /**
  * @name                SDashboardSettingsInterface
  * @namespace           js.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @status              beta
  * @platform             node

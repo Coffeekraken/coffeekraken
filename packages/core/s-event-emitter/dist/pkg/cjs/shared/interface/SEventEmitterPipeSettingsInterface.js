@@ -7,7 +7,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 /**
  * @name                SEventEmitterPipeSettingsInterface
  * @namespace           shared.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta
@@ -28,28 +28,28 @@ class SEventEmitterPipeSettingsInterface extends s_interface_1.default {
             events: {
                 description: 'Specify some events to pipe. Default it pipe everything using `*`',
                 type: 'String',
-                default: '*'
+                default: '*',
             },
             overrideEmitter: {
                 description: 'Specify if the emitter of the event that will be piped has to be overrided by the instance that pipe the event',
                 type: 'Boolean',
-                default: false
+                default: false,
             },
             processor: {
                 description: 'Specify a function that will be called before piping the event value. If you return only 1 value, it will set the value only, otherwise you can return an object with `value` and `metas` property to update also the metas',
-                type: 'Function'
+                type: 'Function',
             },
             exclude: {
                 description: 'Specify some event(s) to not pipe at all like `resolve`, `reject`, etc...',
                 type: 'Array<String>',
-                default: ['finally', 'resolve', 'reject', 'cancel', 'catch']
+                default: ['finally', 'resolve', 'reject', 'cancel', 'catch'],
             },
             filter: {
                 description: 'Specify a function that will receive the value and the metas object and MUST return `true` or `false` to tell if you want to pipe this current event',
-                type: 'Function'
-            }
+                type: 'Function',
+            },
         };
     }
 }
 exports.default = SEventEmitterPipeSettingsInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsNEVBQXFEO0FBR3JEOzs7Ozs7Ozs7Ozs7Ozs7OztHQWlCRztBQUNILE1BQXFCLGtDQUFtQyxTQUFRLHFCQUFZO0lBQ3hFLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxNQUFNLEVBQUU7Z0JBQ0osV0FBVyxFQUFFLG1FQUFtRTtnQkFDaEYsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsT0FBTyxFQUFFLEdBQUc7YUFDZjtZQUNELGVBQWUsRUFBRTtnQkFDYixXQUFXLEVBQUUsZ0hBQWdIO2dCQUM3SCxJQUFJLEVBQUUsU0FBUztnQkFDZixPQUFPLEVBQUUsS0FBSzthQUNqQjtZQUNELFNBQVMsRUFBRTtnQkFDUCxXQUFXLEVBQUUsNk5BQTZOO2dCQUMxTyxJQUFJLEVBQUUsVUFBVTthQUNuQjtZQUNELE9BQU8sRUFBRTtnQkFDTCxXQUFXLEVBQUUsMkVBQTJFO2dCQUN4RixJQUFJLEVBQUUsZUFBZTtnQkFDckIsT0FBTyxFQUFFLENBQUMsU0FBUyxFQUFFLFNBQVMsRUFBRSxRQUFRLEVBQUUsUUFBUSxFQUFFLE9BQU8sQ0FBQzthQUMvRDtZQUNELE1BQU0sRUFBRTtnQkFDSixXQUFXLEVBQUUsc0pBQXNKO2dCQUNuSyxJQUFJLEVBQUUsVUFBVTthQUNuQjtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUE1QkQscURBNEJDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsNEVBQXFEO0FBRXJEOzs7Ozs7Ozs7Ozs7Ozs7OztHQWlCRztBQUNILE1BQXFCLGtDQUFtQyxTQUFRLHFCQUFZO0lBQ3hFLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxNQUFNLEVBQUU7Z0JBQ0osV0FBVyxFQUNQLG1FQUFtRTtnQkFDdkUsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsT0FBTyxFQUFFLEdBQUc7YUFDZjtZQUNELGVBQWUsRUFBRTtnQkFDYixXQUFXLEVBQ1AsZ0hBQWdIO2dCQUNwSCxJQUFJLEVBQUUsU0FBUztnQkFDZixPQUFPLEVBQUUsS0FBSzthQUNqQjtZQUNELFNBQVMsRUFBRTtnQkFDUCxXQUFXLEVBQ1AsNk5BQTZOO2dCQUNqTyxJQUFJLEVBQUUsVUFBVTthQUNuQjtZQUNELE9BQU8sRUFBRTtnQkFDTCxXQUFXLEVBQ1AsMkVBQTJFO2dCQUMvRSxJQUFJLEVBQUUsZUFBZTtnQkFDckIsT0FBTyxFQUFFLENBQUMsU0FBUyxFQUFFLFNBQVMsRUFBRSxRQUFRLEVBQUUsUUFBUSxFQUFFLE9BQU8sQ0FBQzthQUMvRDtZQUNELE1BQU0sRUFBRTtnQkFDSixXQUFXLEVBQ1Asc0pBQXNKO2dCQUMxSixJQUFJLEVBQUUsVUFBVTthQUNuQjtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFqQ0QscURBaUNDIn0=

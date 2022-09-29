@@ -8,7 +8,7 @@ const when_1 = require("@coffeekraken/sugar/js/dom/detect/when");
 /**
  * @name                SComponentUtilsDefaultPropsInterface
  * @namespace           js.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta

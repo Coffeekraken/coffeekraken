@@ -1,13 +1,11 @@
 // @ts-nocheck
 
-import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
-import __SEnv from '@coffeekraken/s-env';
 
 /**
  * @name                SFrontspecReadParamsInterface
  * @namespace           node.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta

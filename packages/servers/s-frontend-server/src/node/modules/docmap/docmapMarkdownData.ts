@@ -6,6 +6,22 @@ export default function docmapMarkdownData({ req, res, pageConfig }) {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
         let html;
 
+        console.log(req);
+
+        let namespace = req.params.namespace;
+        if (!namespace) {
+            namespace = '';
+            if (req.params.organisation) {
+                namespace += `${req.params.organisation}`;
+            }
+            if (req.params.package) {
+                namespace += `${req.params.package}`;
+            }
+            if (req.params.path) {
+                namespace += `${req.params.path}`;
+            }
+        }
+
         if (!req.params.namespace) {
             throw new Error(
                 `[SFrontendServer.docmapMarkdownData] Missing namespace parameter from the url...`,

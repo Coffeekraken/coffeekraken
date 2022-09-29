@@ -3,7 +3,7 @@ import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name                SAppearFeatureInterface
  * @namespace           js.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta
@@ -40,27 +40,27 @@ export default class SAppearFeatureInterface extends __SInterface {
                     'Specify a delay before animation in or out your element. Can be an array of two number that define the min delay and the max delay. The real delay will be random between these two numbers',
                 type: {
                     type: 'Array<Number>',
-                    splitChars: [',']
+                    splitChars: [','],
                 },
-                default: [0]
+                default: [0],
             },
             duration: {
                 description:
                     'Specify the duration of the animation in ms. Can be an array of two number that define the min delay and the max duration. The real duration will be random between these two numbers',
                 type: {
                     type: 'Array<Number>',
-                    splitChars: [',']
+                    splitChars: [','],
                 },
-                default: [500]
+                default: [500],
             },
             distance: {
                 description:
                     'Specify the distance that your element will move if you have set an "in" direction. Can be an array of two number that define the min delay and the max distance. The real duration will be random between these two numbers',
                 type: {
                     type: 'Array<Number>',
-                    splitChars: [',']
+                    splitChars: [','],
                 },
-                default: [100,120]
+                default: [100, 120],
             },
             appear: {
                 description:

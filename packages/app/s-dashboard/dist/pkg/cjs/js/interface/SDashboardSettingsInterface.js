@@ -8,7 +8,7 @@ const s_sugar_config_1 = __importDefault(require("@coffeekraken/s-sugar-config")
 /**
  * @name                SDashboardSettingsInterface
  * @namespace           js.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @status              beta
  * @platform             node

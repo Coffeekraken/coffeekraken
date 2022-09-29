@@ -1,10 +1,10 @@
-import __SValidator from '../SValidator';
 import __SInterface from '@coffeekraken/s-interface';
+import __SValidator from '../SValidator';
 
 /**
  * @name                SValidatorValidatorsInterface
  * @namespace           shared.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta

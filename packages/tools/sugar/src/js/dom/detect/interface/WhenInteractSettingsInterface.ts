@@ -5,7 +5,7 @@ import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name                WhenInteractSettingsInterface
  * @namespace           js.dom.detect.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta

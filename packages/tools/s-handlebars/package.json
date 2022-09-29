@@ -8,6 +8,7 @@
     "dependencies": {
         "@coffeekraken/s-file": "^2.0.0-alpha.20",
         "@coffeekraken/s-promise": "^2.0.0-alpha.20",
+        "@coffeekraken/s-specs": "^2.0.0-alpha.20",
         "@coffeekraken/s-sugar-config": "^2.0.0-alpha.20",
         "@coffeekraken/sugar": "^2.0.0-alpha.20"
     },

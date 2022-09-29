@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name                SSugarJsonListParamsInterface
  * @namespace           node.list.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta

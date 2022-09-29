@@ -9,13 +9,12 @@
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
-            "@coffeekraken/s-clipboard-copy-component",
-            "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-code-formatter-prettier",
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config-adapter",
             "@coffeekraken/s-config-folder-adapter",
@@ -99,10 +98,10 @@
                 "type": {
                     "types": [
                         {
-                            "type": ".                      Class"
+                            "type": "Class"
                         }
                     ],
-                    "raw": ".                      Class"
+                    "raw": "Class"
                 },
                 "platform": [
                     {
@@ -6208,8 +6207,45 @@
                 "relPath": "src/node/type/resolveTypeString.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.php.array.deepMerge": {
-                "id": "@coffeekraken.sugar.php.array.deepMerge",
+            "@coffeekraken.sugar.php.ar.deepMap": {
+                "id": "@coffeekraken.sugar.php.ar.deepMap",
+                "name": "deepMap",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to map deeply on an array (object)",
+                "namespace": "@coffeekraken.sugar.php.ar",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "\\Sugar\\ar\\deepMap([\n   'prop1' => 'Hello',\n   'prop2' => 'World'\n], function($value) {\n     return 'Hello ' . $value;\n});\n// [\n//   'prop1' => 'Hello Plop',\n//   'prop2' => 'Hello World'\n// ]"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "deepMap.php",
+                "extension": "php",
+                "relPath": "src/php/array/deepMap.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.ar.deepMerge": {
+                "id": "@coffeekraken.sugar.php.ar.deepMerge",
                 "name": "deepMerge",
                 "type": {
                     "types": [
@@ -6226,7 +6262,7 @@
                     }
                 ],
                 "description": "This function take two arrays and merge them deeply by keeping distinct\nproperty keys.",
-                "namespace": "@coffeekraken.sugar.php.array",
+                "namespace": "@coffeekraken.sugar.php.ar",
                 "status": "beta",
                 "example": [
                     {
@@ -6245,8 +6281,8 @@
                 "relPath": "src/php/array/deepMerge.php",
                 "children": {}
             },
-            "@coffeekraken.sugar.php.array.pickRandom": {
-                "id": "@coffeekraken.sugar.php.array.pickRandom",
+            "@coffeekraken.sugar.php.ar.pickRandom": {
+                "id": "@coffeekraken.sugar.php.ar.pickRandom",
                 "name": "pickRandom",
                 "type": {
                     "types": [
@@ -6263,7 +6299,7 @@
                     }
                 ],
                 "description": "This returns you a random item of the passed array",
-                "namespace": "@coffeekraken.sugar.php.array",
+                "namespace": "@coffeekraken.sugar.php.ar",
                 "status": "beta",
                 "example": [
                     {
@@ -6280,6 +6316,191 @@
                 "filename": "pickRandom.php",
                 "extension": "php",
                 "relPath": "src/php/array/pickRandom.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.blade.getDefaultViewDirs": {
+                "id": "@coffeekraken.sugar.php.blade.getDefaultViewDirs",
+                "name": "getDefaultViewDirs",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This function gives you the default root directories where to search for views.\nYou will need to add these if you want to use the \"@sugar\" layouts, etc...",
+                "namespace": "@coffeekraken.sugar.php.blade",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "$viewDirs = \\Sugar\\blade\\getDefaultViewDirs();"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "getDefaultViewDirs.php",
+                "extension": "php",
+                "relPath": "src/php/blade/getDefaultViewDirs.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.convert.arrayToObject": {
+                "id": "@coffeekraken.sugar.php.convert.arrayToObject",
+                "name": "arrayToObject",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to convert recursively an associative array to an object",
+                "namespace": "@coffeekraken.sugar.php.convert",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "\\Sugar\\convert\\arrayToObject([\n   'prop1' => 'Hello',\n   'prop2' => 'World'\n]);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "arrayToObject.php",
+                "extension": "php",
+                "relPath": "src/php/convert/arrayToObject.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.convert.objectToArray": {
+                "id": "@coffeekraken.sugar.php.convert.objectToArray",
+                "name": "objectToArray",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to convert recursively an object to an associative array",
+                "namespace": "@coffeekraken.sugar.php.convert",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "\\Sugar\\convert\\objectToArray((object) [\n   'prop1' => 'Hello',\n   'prop2' => 'World'\n]);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "objectToArray.php",
+                "extension": "php",
+                "relPath": "src/php/convert/objectToArray.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.css.buildMediaQuery": {
+                "id": "@coffeekraken.sugar.php.css.buildMediaQuery",
+                "name": "buildMediaQuery",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This function takes a media query definition like \"mobile\", \">mobile\", \"=tablet\", etc... and\nreturns you the corresponding css media query string.\nThis is based on the passed settings that you can pass as a second parameter.\n\nHere's the default medias availables:\n- mobile: 0-639px\n- tablet: 640px-1279px\n- desktop: 1280px-2047px\n- wide: 2048px-...\n- dwarf: 0-700px (height)\nYou can as well override these in the $settings parameter.",
+                "namespace": "@coffeekraken.sugar.php.css",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "\\Sugar\\css\\buildMediaQuery('desktop');\n\\Sugar\\css\\buildMediaQuery('>desktop');\n\\Sugar\\css\\buildMediaQuery('<tablet');\n\\Sugar\\css\\buildMediaQuery('desktop', [\n  'queries' => [\n     'desktop' => [\n         'min-width': 1000,\n         'max-width': null\n     ]\n  ]\n]);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "buildMediaQuery.php",
+                "extension": "php",
+                "relPath": "src/php/css/buildMediaQuery.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.css.layoutCss": {
+                "id": "@coffeekraken.sugar.php.css.layoutCss",
+                "name": "layoutCss",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This function takes a layout definition like \"1 2 _ 3 3\" and generate the css that will handle this layout.\nYou can as well pass some informations the gap wanted, the alignement, etc...",
+                "namespace": "@coffeekraken.sugar.php.css",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "\\Sugar\\css\\layoutCss('1 2 _ 3 3', [\n   'selector' => '.my-layout'\n]);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "layoutCss.php",
+                "extension": "php",
+                "relPath": "src/php/css/layoutCss.php",
                 "children": {}
             },
             "@coffeekraken.sugar.php.array.pre": {
@@ -6652,6 +6873,80 @@
                 "relPath": "src/php/network/ipAddress.php",
                 "children": {}
             },
+            "@coffeekraken.sugar.php.object.deepMap": {
+                "id": "@coffeekraken.sugar.php.object.deepMap",
+                "name": "deepMap",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to map deeply on an object (array)",
+                "namespace": "@coffeekraken.sugar.php.object",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "\\Sugar\\object\\deepMap((object) [\n   'prop1' => 'Hello',\n   'prop2' => 'World'\n], function($value) {\n     return 'Hello ' . $value;\n});\n// [\n//   'prop1' => 'Hello Plop',\n//   'prop2' => 'Hello World'\n// ]"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "deepMap.php",
+                "extension": "php",
+                "relPath": "src/php/object/deepMap.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.object.deepMerge": {
+                "id": "@coffeekraken.sugar.php.object.deepMerge",
+                "name": "deepMerge",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to merge deeply two objects",
+                "namespace": "@coffeekraken.sugar.php.object",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "\\Sugar\\object\\deepMerge((object) [\n 'hello' => 'world'\n], (object) [\n 'plop' => true\n]);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "deepMerge.php",
+                "extension": "php",
+                "relPath": "src/php/object/deepMerge.php",
+                "children": {}
+            },
             "@coffeekraken.sugar.php.path.extension": {
                 "id": "@coffeekraken.sugar.php.path.extension",
                 "name": "extension",
@@ -6687,6 +6982,43 @@
                 "filename": "extension.php",
                 "extension": "php",
                 "relPath": "src/php/path/extension.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.specs.readSpec": {
+                "id": "@coffeekraken.sugar.php.specs.readSpec",
+                "name": "readSpec",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to read a spec file like the \"viewspec.json\", \"frontspec\", etc... using the SSpecs class\nthat gives you the ability to reference other json and json props.",
+                "namespace": "@coffeekraken.sugar.php.specs",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "$value = \\Sugar\\specs\\readSpec('my.cool.viewspec);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "readSpec.php",
+                "extension": "php",
+                "relPath": "src/php/specs/readSpec.php",
                 "children": {}
             },
             "@coffeekraken.sugar.php.string.generateRandomString": {
@@ -6872,6 +7204,80 @@
                 "filename": "toString.php",
                 "extension": "php",
                 "relPath": "src/php/string/toString.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.twig.getDefaultViewDirs": {
+                "id": "@coffeekraken.sugar.php.twig.getDefaultViewDirs",
+                "name": "getDefaultViewDirs",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This function gives you the default root directories where to search for views.\nYou will need to add these if you want to use the \"@coffeekraken\" layouts, etc...",
+                "namespace": "@coffeekraken.sugar.php.twig",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "$viewDirs = \\Sugar\\twig\\getDefaultViewDirs();"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "getDefaultViewDirs.php",
+                "extension": "php",
+                "relPath": "src/php/twig/getDefaultViewDirs.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.twig.initTwig": {
+                "id": "@coffeekraken.sugar.php.twig.initTwig",
+                "name": "initTwig",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This function init your twig to have access to helpers delivered from the \"coffeekraken/sugar\" package like \"toArray\", \"idCompliant\", and many more...\nThese helpers/functions are used inside the @coffeekraken layouts, views, etc... so you will need to init your twig using this function.",
+                "namespace": "@coffeekraken.sugar.php.twig",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "$twig = \\Sugar\\twig\\initTwig($twig);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "initTwig.php",
+                "extension": "php",
+                "relPath": "src/php/twig/initTwig.php",
                 "children": {}
             },
             "@coffeekraken.sugar.php.url.currentUrl": {
@@ -10673,9 +11079,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "stripTags.ts",
+                "filename": "striptags.ts",
                 "extension": "ts",
-                "relPath": "src/shared/html/stripTags.ts",
+                "relPath": "src/shared/html/striptags.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.shared.html.unescapeHtml": {
@@ -19891,6 +20297,80 @@
                 "relPath": "src/js/dom/utilities/toggleFullscreen.ts",
                 "children": {}
             },
+            "@coffeekraken.sugar.php.filters.registerFilter": {
+                "id": "@coffeekraken.sugar.php.filters.registerFilter",
+                "name": "registerFilter",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to register only the filters on your twig instance",
+                "namespace": "@coffeekraken.sugar.php.filters",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "\\STwig\\registerFilters($twig);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "registerFilters.php",
+                "extension": "php",
+                "relPath": "src/php/twig/filters/registerFilters.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.twig.functions.registerFunctions": {
+                "id": "@coffeekraken.sugar.php.twig.functions.registerFunctions",
+                "name": "registerFunctions",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to register only the functions on your twig instance",
+                "namespace": "@coffeekraken.sugar.php.twig.functions",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "\\Sugar\\twig\\registerFunctions($twig);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "registerFunctions.php",
+                "extension": "php",
+                "relPath": "src/php/twig/functions/registerFunctions.php",
+                "children": {}
+            },
             "@coffeekraken.sugar.js.console.html.tagsMap": {
                 "id": "@coffeekraken.sugar.js.console.html.tagsMap",
                 "name": "tagsMap",
@@ -20312,10 +20792,10 @@
                 "type": {
                     "types": [
                         {
-                            "type": ".                      Class"
+                            "type": "Class"
                         }
                     ],
-                    "raw": ".                      Class"
+                    "raw": "Class"
                 },
                 "platform": [
                     {
@@ -20371,6 +20851,638 @@
                 "filename": "WhenInteractSettingsInterface.ts",
                 "extension": "ts",
                 "relPath": "src/js/dom/detect/interface/WhenInteractSettingsInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.twig.filters.cast.toArray": {
+                "id": "@coffeekraken.sugar.php.twig.filters.cast.toArray",
+                "name": "toArray",
+                "type": {
+                    "types": [
+                        {
+                            "type": "TwigFilter"
+                        }
+                    ],
+                    "raw": "TwigFilter"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This twig filter allows you to convert an object to an array",
+                "namespace": "@coffeekraken.sugar.php.twig.filters.cast",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "{% set obj = {'something':true} %}\n{% set ar = obj|toArray %}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "toArray.php",
+                "extension": "php",
+                "relPath": "src/php/twig/filters/cast/toArray.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.twig.filters.cast.toObject": {
+                "id": "@coffeekraken.sugar.php.twig.filters.cast.toObject",
+                "name": "toObject",
+                "type": {
+                    "types": [
+                        {
+                            "type": "TwigFilter"
+                        }
+                    ],
+                    "raw": "TwigFilter"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This twig filter allows you to convert an array to an object",
+                "namespace": "@coffeekraken.sugar.php.twig.filters.cast",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "{% set obj = {'something':true} %}\n{% set ar = obj|toObject %}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "toObject.php",
+                "extension": "php",
+                "relPath": "src/php/twig/filters/cast/toObject.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.twig.filters.string.idCompliant": {
+                "id": "@coffeekraken.sugar.php.twig.filters.string.idCompliant",
+                "name": "idCompliant",
+                "type": {
+                    "types": [
+                        {
+                            "type": "TwigFilter"
+                        }
+                    ],
+                    "raw": "TwigFilter"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This twig filter allows you to ensure a string is \"html\" id compliant",
+                "namespace": "@coffeekraken.sugar.php.twig.filters.string",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "{% set id = 'something cool'|idCompliant %}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "idCompliant.php",
+                "extension": "php",
+                "relPath": "src/php/twig/filters/string/idCompliant.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.twig.functions.cast.toArray": {
+                "id": "@coffeekraken.sugar.php.twig.functions.cast.toArray",
+                "name": "toArray",
+                "type": {
+                    "types": [
+                        {
+                            "type": "TwigFunction"
+                        }
+                    ],
+                    "raw": "TwigFunction"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This twig function allows you to convert an object to an array",
+                "namespace": "@coffeekraken.sugar.php.twig.functions.cast",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "{% set obj = {'something':true} %}\n{% set ar = toArray(obj) %}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "toArray.php",
+                "extension": "php",
+                "relPath": "src/php/twig/functions/cast/toArray.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.twig.functions.cast.toObject": {
+                "id": "@coffeekraken.sugar.php.twig.functions.cast.toObject",
+                "name": "toObject",
+                "type": {
+                    "types": [
+                        {
+                            "type": "TwigFunction"
+                        }
+                    ],
+                    "raw": "TwigFunction"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This twig function allows you to convert an array to an object",
+                "namespace": "@coffeekraken.sugar.php.twig.functions.cast",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "{% set obj = {'something':true} %}\n{% set ar = toObject(obj) %}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "toObject.php",
+                "extension": "php",
+                "relPath": "src/php/twig/functions/cast/toObject.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.twig.functions.layoutCss": {
+                "id": "@coffeekraken.sugar.php.twig.functions.layoutCss",
+                "name": "layoutCss",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "twig",
+                        "description": ""
+                    }
+                ],
+                "description": "This function takes a layout definition like \"1 2 _ 3 3\" and generate the css that will handle this layout.\nYou can as well pass some informations the gap wanted, the alignement, etc...",
+                "namespace": "@coffeekraken.sugar.php.twig.functions",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "{% set css = layoutCss('1 2 _ 3 3', {\n     selector: '#my-layout'\n}) %}\n<style>\n     {{ css }}\n</style>\n<div id=\"my-layout\">\n     <div>Cell #1</div>\n     <div>Cell #2</div>\n     <div>Cell #3</div>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "layoutCss.php",
+                "extension": "php",
+                "relPath": "src/php/twig/functions/css/layoutCss.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.twig.functions.frontspec.assets": {
+                "id": "@coffeekraken.sugar.php.twig.functions.frontspec.assets",
+                "name": "assets",
+                "type": {
+                    "types": [
+                        {
+                            "type": "TwigFunction"
+                        }
+                    ],
+                    "raw": "TwigFunction"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This twig function allows you to print out the frontspec.json \"assets\" property",
+                "namespace": "@coffeekraken.sugar.php.twig.functions.frontspec",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "{% frontspecAssets(fronspec.assets) %}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "assetsHtml.php",
+                "extension": "php",
+                "relPath": "src/php/twig/functions/frontspec/assetsHtml.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.twig.functions.frontspec.metas": {
+                "id": "@coffeekraken.sugar.php.twig.functions.frontspec.metas",
+                "name": "metas",
+                "type": {
+                    "types": [
+                        {
+                            "type": "TwigFunction"
+                        }
+                    ],
+                    "raw": "TwigFunction"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This twig function allows you to print out the frontspec.json \"metas\" property",
+                "namespace": "@coffeekraken.sugar.php.twig.functions.frontspec",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "{% frontspecMetas(fronspec.metas) %}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "metas.php",
+                "extension": "php",
+                "relPath": "src/php/twig/functions/frontspec/metas.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.twig.functions.frontspec.og": {
+                "id": "@coffeekraken.sugar.php.twig.functions.frontspec.og",
+                "name": "og",
+                "type": {
+                    "types": [
+                        {
+                            "type": "TwigFunction"
+                        }
+                    ],
+                    "raw": "TwigFunction"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This twig function allows you to print out the frontspec.json \"og\" property",
+                "namespace": "@coffeekraken.sugar.php.twig.functions.frontspec",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "{% frontspecOg(fronspec.og) %}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "og.php",
+                "extension": "php",
+                "relPath": "src/php/twig/functions/frontspec/og.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.twig.functions.html.attrs": {
+                "id": "@coffeekraken.sugar.php.twig.functions.html.attrs",
+                "name": "attrs",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "twig",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to generate an html attributes string from a key=>pair object",
+                "namespace": "@coffeekraken.sugar.php.twig.functions.html",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "<div {{ attrs(attributes) }}></div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "attrs.php",
+                "extension": "php",
+                "relPath": "src/php/twig/functions/html/attrs.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.twig.functions.string.idCompliant": {
+                "id": "@coffeekraken.sugar.php.twig.functions.string.idCompliant",
+                "name": "idCompliant",
+                "type": {
+                    "types": [
+                        {
+                            "type": "TwigFunction"
+                        }
+                    ],
+                    "raw": "TwigFunction"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This twig function allows you to ensure that a string is \"html\" id compliant",
+                "namespace": "@coffeekraken.sugar.php.twig.functions.string",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "{% set id = idCompliant('something cool) %}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "idCompliant.php",
+                "extension": "php",
+                "relPath": "src/php/twig/functions/string/idCompliant.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.twig.functions.string.uniqid": {
+                "id": "@coffeekraken.sugar.php.twig.functions.string.uniqid",
+                "name": "uniqid",
+                "type": {
+                    "types": [
+                        {
+                            "type": "TwigFunction"
+                        }
+                    ],
+                    "raw": "TwigFunction"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This twig function allows you to generate a uniqid",
+                "namespace": "@coffeekraken.sugar.php.twig.functions.string",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "{% set id = uniqid() %}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "uniqid.php",
+                "extension": "php",
+                "relPath": "src/php/twig/functions/string/uniqid.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.views.bare.cell.Cell": {
+                "id": "@coffeekraken.sugar.views.bare.cell.Cell",
+                "name": "Cell",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Views",
+                        "Bare"
+                    ],
+                    "slug": "/views/bare/cell"
+                },
+                "platform": [
+                    {
+                        "name": "blade",
+                        "description": ""
+                    },
+                    {
+                        "name": "twig",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.sugar.views.bare.cell",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "cell.md",
+                "extension": "md",
+                "relPath": "src/views/specs/bare/cell/cell.md",
+                "children": {}
+            },
+            "@coffeekraken.sugar.views.bare.container.Container": {
+                "id": "@coffeekraken.sugar.views.bare.container.Container",
+                "name": "Container",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Views",
+                        "Bare"
+                    ],
+                    "slug": "/views/bare/container"
+                },
+                "platform": [
+                    {
+                        "name": "blade",
+                        "description": ""
+                    },
+                    {
+                        "name": "twig",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.sugar.views.bare.container",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "container.md",
+                "extension": "md",
+                "relPath": "src/views/specs/bare/container/container.md",
+                "children": {}
+            },
+            "@coffeekraken.sugar.views.bare.layout.Layout": {
+                "id": "@coffeekraken.sugar.views.bare.layout.Layout",
+                "name": "Layout",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Views",
+                        "Bare"
+                    ],
+                    "slug": "/views/bare/layout"
+                },
+                "platform": [
+                    {
+                        "name": "blade",
+                        "description": ""
+                    },
+                    {
+                        "name": "twig",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.sugar.views.bare.layout",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "layout.md",
+                "extension": "md",
+                "relPath": "src/views/specs/bare/layout/layout.md",
+                "children": {}
+            },
+            "@coffeekraken.sugar.views.layout.Main": {
+                "id": "@coffeekraken.sugar.views.layout.Main",
+                "name": "Main",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Views",
+                        "Layout"
+                    ],
+                    "slug": "/views/layout/main"
+                },
+                "platform": [
+                    {
+                        "name": "blade",
+                        "description": ""
+                    },
+                    {
+                        "name": "twig",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.sugar.views.layout",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "main.md",
+                "extension": "md",
+                "relPath": "src/views/specs/layouts/main/main.md",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.views.layouts.main": {
+                "id": "@coffeekraken.sugar.php.views.layouts.main",
+                "name": "main",
+                "type": {
+                    "types": [
+                        {
+                            "type": "blade"
+                        }
+                    ],
+                    "raw": "blade"
+                },
+                "description": "Main layout that handle things like scripts import, stylesheets import, etc...",
+                "namespace": "@coffeekraken.sugar.php.views.layouts",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "main.blade.php",
+                "extension": "blade",
+                "relPath": "src/views/blade/@sugar/layouts/main/main.blade.php",
                 "children": {}
             }
         }

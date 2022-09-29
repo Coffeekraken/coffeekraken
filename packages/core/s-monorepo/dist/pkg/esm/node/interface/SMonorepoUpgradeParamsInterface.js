@@ -4,7 +4,7 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 /**
  * @name                SMonorepoUpgradeParamsInterface
  * @namespace           node.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta

@@ -28,10 +28,12 @@ import __sortObjectDeep from '@coffeekraken/sugar/shared/object/sortDeep';
 import __namespaceCompliant from '@coffeekraken/sugar/shared/string/namespaceCompliant';
 import __chokidar from 'chokidar';
 import __fs from 'fs';
+import __micromatch from 'micromatch';
 import __path from 'path';
 import __SDocmapBuildParamsInterface from './interface/SDocmapBuildParamsInterface';
 import __SDocmapInstallSnapshotParamsInterface from './interface/SDocmapInstallSnapshotParamsInterface';
 import __SDocmapReadParamsInterface from './interface/SDocmapReadParamsInterface';
+import __SDocmapSearchParamsInterface from './interface/SDocmapSearchParamsInterface';
 import __SDocmapSettingsInterface from './interface/SDocmapSettingsInterface';
 import __SDocmapSnapshotParamsInterface from './interface/SDocmapSnapshotParamsInterface';
 
@@ -146,6 +148,16 @@ export interface ISDocmapMetasObj {
     snapshot?: string;
 }
 
+export interface ISDocmapSearchParams {
+    slug: string;
+    namespace: string;
+}
+
+export interface ISDocmapSearchResult {
+    search: Partial<ISDocmapSearchParams>;
+    items: ISDocmapEntries;
+}
+
 export interface ISDocmapObj {
     metas: ISDocmapMetasObj;
     map: ISDocmapEntries;
@@ -230,6 +242,15 @@ class SDocmap extends __SClass implements ISDocmap {
                             )
                                 return true;
                             if (key === 'styleguide') return true;
+                            return false;
+                        },
+                        views({ key, value, isObject }) {
+                            if (
+                                key.split('/').length > 1 &&
+                                key.match(/^([a-zA-Z0-9-_@\/]+)?\/views\//)
+                            )
+                                return true;
+                            if (key === 'views') return true;
                             return false;
                         },
                     },
@@ -528,6 +549,82 @@ class SDocmap extends __SClass implements ISDocmap {
             {
                 eventEmitter: {
                     bind: this,
+                },
+            },
+        );
+    }
+
+    /**
+     * @name          search
+     * @type          Function
+     *
+     * This methodallows you to search for an docmap item by it's slug.
+     * You can specify if you want to search also in the "packages" section or not
+     *
+     * @param           {ISDocmapSearchParams}      params          Some params to configure your search
+     * @return        {ISDocmapSearchResult}                        The result of your search
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    search(
+        params?: Partial<ISDocmapSearchParams>,
+    ): Promise<ISDocmapSearchResult> {
+        return new __SPromise(
+            async ({ resolve, pipe, emit }) => {
+                const finalParams = <ISDocmapSearchParams>(
+                    __deepMerge(
+                        __SDocmapSearchParamsInterface.defaults(),
+                        params ?? {},
+                    )
+                );
+
+                const docmapJson = await this.read(finalParams);
+
+                const result: ISDocmapSearchResult = {
+                    search: finalParams,
+                    items: {},
+                };
+
+                for (let [key, item] of Object.entries(docmapJson.map)) {
+                    let itemMatch = true;
+
+                    // slug
+                    if (finalParams.slug) {
+                        if (!item.menu) {
+                            itemMatch = false;
+                        } else if (
+                            !__micromatch.isMatch(
+                                item.menu.slug,
+                                finalParams.slug,
+                            )
+                        ) {
+                            itemMatch = false;
+                        }
+                    }
+
+                    // namespace
+                    if (finalParams.namespace) {
+                        if (
+                            !__micromatch.isMatch(
+                                item.namespace,
+                                finalParams.namespace,
+                            )
+                        ) {
+                            itemMatch = false;
+                        }
+                    }
+
+                    if (itemMatch) {
+                        result.items[item.namespace] = item;
+                    }
+                }
+
+                resolve(result);
+            },
+            {
+                eventEmitter: {
+                    id: this.constructor.name,
                 },
             },
         );

@@ -8,7 +8,7 @@ const s_log_1 = __importDefault(require("@coffeekraken/s-log"));
 /**
  * @name                SSugarCliParamsInterface
  * @namespace           cli.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta

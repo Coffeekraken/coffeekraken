@@ -1,0 +1,33 @@
+{
+    "type": "view",
+    "title": "Layout",
+    "description": "Allows you to display a layout section driven by the layout string notaiton like \"1 1 2 _ 3 3 2\"",
+    "props": {
+        "frontspec": {
+            "description": "The frontspec.json that you must have at your project root",
+            "type": "Object",
+            "required": true
+        },
+        "id": {
+            "description": "Specify a uniqid to apply to the layout",
+            "type": "String"
+        },
+        "attributes": "@sugar.views.props.attributes",
+        "layout": {
+            "description": "Specify the layout you want in layout string notation by media (mobile, etc...). Default layout must be stored under the \"default\" media",
+            "type": "String{}",
+            "required": true
+        },
+        "content": {
+            "description": "The grid content to print. Must have the same count of div(s) as your layout cells",
+            "type": "String",
+            "required": true
+        },
+        "gap": {
+            "description": "Specify the gap between your cells by media (mobile, etc...). Default gap must be stored under the \"default\" media",
+            "type": "String{}"
+        },
+        "margin": "@sugar.views.props.margin",
+        "padding": "@sugar.views.props.padding"
+    }
+}

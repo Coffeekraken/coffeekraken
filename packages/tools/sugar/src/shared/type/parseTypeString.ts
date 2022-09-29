@@ -1,3 +1,4 @@
+import __deepMap from '../object/deepMap';
 import __autoCast from '../string/autoCast';
 
 /**
@@ -103,7 +104,6 @@ export default function __parseTypeString(
     const originalTypeString = typeString;
 
     typeString = typeString.trim();
-
     // remove starting { and ending }
     typeString = typeString.replace(/^\{/, '').replace(/\}$/, '');
 
@@ -173,6 +173,14 @@ export default function __parseTypeString(
         // @ts-ignore
         return result;
     }
+
+    finalTypes = __deepMap(finalTypes, ({ object, prop, value, path }) => {
+        if (typeof value === 'string') {
+            value = value.replace(/^\./, '').trim();
+        }
+        return value;
+    });
+
     // @ts-ignore
     Object.defineProperty(finalTypes, 'toString', {
         get() {

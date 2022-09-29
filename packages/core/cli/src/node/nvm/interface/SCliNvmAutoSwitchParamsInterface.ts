@@ -5,7 +5,7 @@ import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name                SCliNvmAutoSwitchParamsInterface
  * @namespace           node.fs.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta

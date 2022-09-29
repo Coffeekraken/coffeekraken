@@ -5,7 +5,7 @@ import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name                SCliFsCopyParamsInterface
  * @namespace           node.fs.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta
@@ -22,22 +22,24 @@ export default class SCliFsCopyParamsInterface extends __SInterface {
             src: {
                 description: 'Specify the file/folder to copy',
                 type: 'String',
-                required: true
+                required: true,
             },
             glob: {
-                description: 'Specify a glob pattern to search for files inside the specified src"',
+                description:
+                    'Specify a glob pattern to search for files inside the specified src"',
                 type: 'String',
             },
             dest: {
                 description: 'Specify the destination file/folder',
                 type: 'String',
-                required: true
+                required: true,
             },
             chdir: {
-                description: 'Specify if you want the process to change directory inside the destination one or not',
+                description:
+                    'Specify if you want the process to change directory inside the destination one or not',
                 type: 'Boolean',
-                default: false
-            }
+                default: false,
+            },
         };
     }
 }

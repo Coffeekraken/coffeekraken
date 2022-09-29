@@ -4,7 +4,7 @@ import __STheme from '@coffeekraken/s-theme';
 /**
  * @name                SScrollComponentInterface
  * @namespace           js.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta

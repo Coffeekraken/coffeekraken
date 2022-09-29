@@ -3,7 +3,7 @@ import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name                SViewRendererEngineBladeSettingsInterface
  * @namespace           node.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta
@@ -21,7 +21,6 @@ import __SInterface from '@coffeekraken/s-interface';
 
 export default class SViewRendererEngineBladeSettingsInterface extends __SInterface {
     static get _definition() {
-        return {
-        };
+        return {};
     }
 }

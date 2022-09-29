@@ -1,12 +1,11 @@
 // @ts-nocheck
 
 import __SInterface from '@coffeekraken/s-interface';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
  * @name                SSitemapBuilderSettingsInterface
  * @namespace           node.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta
@@ -25,7 +24,7 @@ export default class SSitemapBuilderSettingsInterface extends __SInterface {
                     'Specify the sources to use to build the sitemap. A source is a objet with the properties "active", "settings" and "path"',
                 type: 'Object',
                 default: {},
-            }
+            },
         };
     }
 }

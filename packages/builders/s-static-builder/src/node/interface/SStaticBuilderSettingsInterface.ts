@@ -4,7 +4,7 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 /**
  * @name                SStaticBuilderSettingsInterface
  * @namespace           node.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta

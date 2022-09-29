@@ -1,10 +1,9 @@
-import __SValidator from '../SValidator';
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name                SValidatorSettingsInterface
  * @namespace           shared.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta

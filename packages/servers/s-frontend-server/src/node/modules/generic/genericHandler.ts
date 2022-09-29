@@ -72,20 +72,64 @@ export default function genericHandler({
             if (typeof viewObj === 'string') {
                 viewPath = viewObj;
             } else if (viewObj?.data) {
-                let dataFn = () => {};
-                if (__fs.existsSync(viewObj.data)) {
-                    dataFn = (await import(viewObj.data)).default;
-                } else if (frontendServerConfig.data[viewObj.data]) {
-                    dataFn = (
-                        await import(
-                            frontendServerConfig.data[viewObj.data].path
-                        )
-                    ).default;
+                let dataHandlerStr;
+
+                let dataSettings = viewObj.data?.settings ?? {},
+                    dataParams = viewObj.data?.params ?? {},
+                    dataFn;
+
+                // directly passed function
+                if (typeof viewObj.data === 'function') {
+                    dataFn = viewObj.data;
+                } else if (
+                    viewObj.data.handler &&
+                    typeof viewObj.data.handler === 'function'
+                ) {
+                    dataFn = viewObj.data.handler;
+                }
+
+                // if the passed data is a string
+                if (!dataFn) {
+                    if (typeof viewObj.data === 'string') {
+                        dataHandlerStr = viewObj.data;
+                    } else if (viewObj.data.handler) {
+                        dataHandlerStr = viewObj.data.handler;
+                    } else {
+                        throw new Error(
+                            `<red>[SFrontendServer.genericHandler]</red> One of the view data handler for the requested page "<cyan>${req.url}</cyan>" is not valid...`,
+                        );
+                    }
+
+                    // load the data handler if needed
+                    if (__fs.existsSync(dataHandlerStr)) {
+                        dataFn = (await import(dataHandlerStr)).default;
+                    } else if (frontendServerConfig.data[dataHandlerStr]) {
+                        dataFn = (
+                            await import(
+                                frontendServerConfig.data[dataHandlerStr].path
+                            )
+                        ).default;
+                    }
+                }
+
+                for (let [param, value] of Object.entries(dataParams)) {
+                    if (typeof value === 'function') {
+                        req.params[param] = value({
+                            req,
+                            res,
+                            settings: dataSettings,
+                            frontendServerConfig,
+                        });
+                    } else {
+                        req.params[param] = value;
+                    }
                 }
 
                 const dataFnResult = await dataFn({
                     req,
                     res,
+                    params: dataParams,
+                    settings: dataSettings,
                     pageConfig,
                     pageFile,
                     frontendServerConfig,

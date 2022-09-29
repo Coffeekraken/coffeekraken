@@ -5,7 +5,7 @@ import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name                SBenchSettingsInterface
  * @namespace           shared.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta
@@ -21,13 +21,15 @@ export default class SBenchSettingsInterface extends __SInterface {
     static get _definition() {
         return {
             title: {
-                description: 'Specify a title for your bench that will be used in the log',
-                type: 'String'
+                description:
+                    'Specify a title for your bench that will be used in the log',
+                type: 'String',
             },
             body: {
-                description: 'Specify a body for your bench that will be used in the log',
-                type: 'String'
-            }
+                description:
+                    'Specify a body for your bench that will be used in the log',
+                type: 'String',
+            },
         };
     }
 }

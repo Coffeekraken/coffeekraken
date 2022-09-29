@@ -4,7 +4,7 @@ import __SLog from '@coffeekraken/s-log';
 /**
  * @name                SSugarCliParamsInterface
  * @namespace           cli.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta

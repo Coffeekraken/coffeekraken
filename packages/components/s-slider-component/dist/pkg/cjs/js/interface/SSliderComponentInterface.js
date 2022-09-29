@@ -8,7 +8,7 @@ const easing_1 = require("@coffeekraken/sugar/easing");
 /**
  * @name                SSliderComponentInterface
  * @namespace           js.interface
- * @type.                      Class
+ * @type                      Class
  * @extends             SInterface
  * @interface
  * @status              beta

@@ -1,0 +1,24 @@
+
+{% set finalId = id %}
+{% if not id  %}
+    {% set finalId = 's-layout-' ~ uniqid() %}
+{% endif %}
+
+<style>
+{% set defaultCss = layoutCss(layout.default, {
+    selector: '#' ~ id    
+}) %}
+{{ defaultCss|raw }}
+{% for media, layout in layout %}
+    {% if media != 'default' %}
+        {{ layoutCss(layout, {
+            selector: '#' ~ id,
+            media: media,
+            mediaSettings: frontspec.mediaSettings
+        }) }}
+    {% endif %}
+{% endfor %}
+</style>
+<div id="{{ finalId }}" {{ attrs(attributes)|raw }}>
+    {{ content|raw }}
+</div>

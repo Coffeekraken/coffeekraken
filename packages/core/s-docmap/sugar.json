@@ -18,6 +18,12 @@
                     "process": "./dist/pkg/esm/cli/build.cli.js",
                     "interface": "./dist/pkg/esm/node/interface/SDocmapBuildParamsInterface.js"
                 },
+                "search": {
+                    "scope": "package",
+                    "description": "Search the document for a specific item.",
+                    "process": "./dist/pkg/esm/cli/search.cli.js",
+                    "interface": "./dist/pkg/esm/node/interface/SDocmapSearchParamsInterface.js"
+                },
                 "read": {
                     "scope": "package",
                     "description": "Get a special docmap entry",

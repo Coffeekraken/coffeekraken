@@ -22,10 +22,10 @@ namespace Sugar\twig;
  */
 function registerFilters($twig)
 {
-    $toArray = require_once 'cast/toArray.php';
+    $toArray = require __DIR__ . '/cast/toArray.php';
     $twig->addFilter($toArray);
 
-    $toObject = require_once 'cast/toObject.php';
+    $toObject = require __DIR__ . '/cast/toObject.php';
     $twig->addFilter($toObject);
 
     return $twig;

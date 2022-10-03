@@ -1,74 +1,16 @@
 {
     "packages": [
         {
-            "name": "coffeekraken/s-twig",
-            "version": "2.0.0-alpha.19",
-            "version_normalized": "2.0.0.0-alpha19",
-            "dist": {
-                "type": "path",
-                "url": "../../tools/s-twig",
-                "reference": "e5aff5b09cc95548c68bb41ea4e1dc8b4d39f424"
-            },
-            "require": {
-                "coffeekraken/sugar": "^2.0@alpha",
-                "twig/twig": "3.x-dev"
-            },
-            "type": "library",
-            "installation-source": "dist",
-            "autoload": {
-                "files": [
-                    "src/php/autoload.php"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com"
-                }
-            ],
-            "description": "Some additional feature for the twig template renderer.",
-            "transport-options": {
-                "relative": true
-            },
-            "install-path": "../coffeekraken/s-twig"
-        },
-        {
-            "name": "coffeekraken/s-view-renderer",
-            "version": "2.0.0-alpha.19",
-            "version_normalized": "2.0.0.0-alpha19",
-            "dist": {
-                "type": "path",
-                "url": "../s-view-renderer",
-                "reference": "df05b55ffb98d436aeebed336c208ab9020aa570"
-            },
-            "require": {
-                "coffeekraken/s-twig": "^2.0@alpha",
-                "coffeekraken/sugar": "^2.0@alpha"
-            },
-            "type": "library",
-            "installation-source": "dist",
-            "autoload": {
-                "files": [
-                    "src/php/autoload.php"
-                ]
-            },
-            "homepage": "https://coffeekraken.io",
-            "transport-options": {
-                "relative": true
-            },
-            "install-path": "../coffeekraken/s-view-renderer"
-        },
-        {
             "name": "coffeekraken/sugar",
-            "version": "2.0.0-alpha.19",
-            "version_normalized": "2.0.0.0-alpha19",
+            "version": "2.0.0-alpha.20",
+            "version_normalized": "2.0.0.0-alpha20",
             "dist": {
                 "type": "path",
                 "url": "../../tools/sugar",
-                "reference": "f53f235f8bb5188a0a410d32c75422263a603e8d"
+                "reference": "00ce153729c145a0c4552dcd730000642226c592"
+            },
+            "require": {
+                "twig/twig": "^3.4"
             },
             "type": "library",
             "installation-source": "dist",
@@ -263,12 +205,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "40b6f59430cc17999406a5557c9e178704e92fa8"
+                "reference": "7a2e23ce17c048d2c393a55d76d72eb0dbbf356b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/40b6f59430cc17999406a5557c9e178704e92fa8",
-                "reference": "40b6f59430cc17999406a5557c9e178704e92fa8",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/7a2e23ce17c048d2c393a55d76d72eb0dbbf356b",
+                "reference": "7a2e23ce17c048d2c393a55d76d72eb0dbbf356b",
                 "shasum": ""
             },
             "require": {
@@ -280,7 +222,7 @@
                 "psr/container": "^1.0",
                 "symfony/phpunit-bridge": "^4.4.9|^5.0.9|^6.0"
             },
-            "time": "2022-08-14T13:29:42+00:00",
+            "time": "2022-09-28T08:43:25+00:00",
             "default-branch": true,
             "type": "library",
             "extra": {

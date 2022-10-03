@@ -11,14 +11,14 @@ export default function (api) {
          * @namespace       config.package
          * @type            String
          * @values          npm | yarn
-         * @default         npm
+         * @default         yarn
          *
          * Specify the package manager you want to use. Can be "npm" or "yarn"
          *
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        manager: 'npm',
+        manager: 'yarn',
 
         /**
          * @name            rootDir

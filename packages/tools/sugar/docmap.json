@@ -21335,7 +21335,7 @@
                 },
                 "filename": "cell.md",
                 "extension": "md",
-                "relPath": "src/views/specs/bare/cell/cell.md",
+                "relPath": "src/views/_specs/bare/cell/cell.md",
                 "children": {}
             },
             "@coffeekraken.sugar.views.bare.container.Container": {
@@ -21376,7 +21376,7 @@
                 },
                 "filename": "container.md",
                 "extension": "md",
-                "relPath": "src/views/specs/bare/container/container.md",
+                "relPath": "src/views/_specs/bare/container/container.md",
                 "children": {}
             },
             "@coffeekraken.sugar.views.bare.layout.Layout": {
@@ -21417,7 +21417,7 @@
                 },
                 "filename": "layout.md",
                 "extension": "md",
-                "relPath": "src/views/specs/bare/layout/layout.md",
+                "relPath": "src/views/_specs/bare/layout/layout.md",
                 "children": {}
             },
             "@coffeekraken.sugar.views.layout.Main": {
@@ -21458,7 +21458,7 @@
                 },
                 "filename": "main.md",
                 "extension": "md",
-                "relPath": "src/views/specs/layouts/main/main.md",
+                "relPath": "src/views/_specs/layouts/main/main.md",
                 "children": {}
             },
             "@coffeekraken.sugar.php.views.layouts.main": {

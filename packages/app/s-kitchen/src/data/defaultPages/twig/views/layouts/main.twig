@@ -1,0 +1,21 @@
+{% extends '@sugar/layouts/main/main.twig' %}
+
+{# @extends('coffeekraken.layouts.main', [
+    'bodyAttributes' => [
+        'id' => (isset($request) && $request->path != '/' && $request->path != '') ? \Sugar\string\idCompliant($request->path) : 'homepage',
+        's-sugar' => true,
+        'class' => 'initial-loading'
+    ]
+]) #}
+
+{% block title %}
+    Coffeekraken
+{% endblock %}
+
+{% block body %}
+
+    <div class="content">
+        {{ body|raw }}
+    </div>
+
+{% endblock %}

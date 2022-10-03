@@ -37,6 +37,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
+const string_1 = require("@coffeekraken/sugar/string");
+const fs_1 = __importDefault(require("fs"));
 /**
  * @name          SDataFileJs
  * @namespace     node
@@ -72,9 +74,21 @@ class SDataHandlerJs {
             if (filePath.match(/\.json$/)) {
                 settings = { assert: { type: 'json' } };
             }
-            let data = (yield Promise.resolve().then(() => __importStar(require(filePath)))).default;
+            let finalFilePath = filePath;
+            if (filePath.match(/\.json$/)) {
+                finalFilePath = filePath.replace('.json', `.${(0, string_1.__uniqid)()}.json`);
+            }
+            else {
+                finalFilePath = filePath.replace('.js', `.${(0, string_1.__uniqid)()}.js`);
+            }
+            // make a copy of the file to avoid import caching
+            fs_1.default.copyFileSync(filePath, finalFilePath);
+            // import the newly created file
+            let data = (yield Promise.resolve().then(() => __importStar(require(finalFilePath)))).default;
             if (typeof data === 'function')
                 data = yield data();
+            // delete the file
+            fs_1.default.unlinkSync(finalFilePath);
             resolve(data);
         }));
     }
@@ -92,4 +106,4 @@ exports.default = SDataHandlerJs;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 SDataHandlerJs.extensions = ['js', 'json'];
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBRWQsd0VBQWlEO0FBRWpEOzs7Ozs7Ozs7Ozs7OztHQWNHO0FBQ0gsTUFBcUIsY0FBYztJQWMvQjs7Ozs7Ozs7Ozs7O09BWUc7SUFDSCxNQUFNLENBQUMsSUFBSSxDQUFDLFFBQVE7UUFDaEIsT0FBTyxJQUFJLG1CQUFVLENBQUMsQ0FBTyxFQUFFLE9BQU8sRUFBRSxFQUFFLEVBQUU7WUFDeEMsSUFBSSxRQUFRLEdBQUcsRUFBRSxDQUFDO1lBQ2xCLElBQUksUUFBUSxDQUFDLEtBQUssQ0FBQyxTQUFTLENBQUMsRUFBRTtnQkFDM0IsUUFBUSxHQUFHLEVBQUUsTUFBTSxFQUFFLEVBQUUsSUFBSSxFQUFFLE1BQU0sRUFBRSxFQUFFLENBQUM7YUFDM0M7WUFDRCxJQUFJLElBQUksR0FBRyxDQUFDLHdEQUFhLFFBQVEsR0FBVyxDQUFDLENBQUMsT0FBTyxDQUFDO1lBQ3RELElBQUksT0FBTyxJQUFJLEtBQUssVUFBVTtnQkFBRSxJQUFJLEdBQUcsTUFBTSxJQUFJLEVBQUUsQ0FBQztZQUNwRCxPQUFPLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDbEIsQ0FBQyxDQUFBLENBQUMsQ0FBQztJQUNQLENBQUM7O0FBckNMLGlDQXNDQztBQXJDRzs7Ozs7Ozs7OztHQVVHO0FBQ0kseUJBQVUsR0FBRyxDQUFDLElBQUksRUFBRSxNQUFNLENBQUMsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBRWQsd0VBQWlEO0FBQ2pELHVEQUFzRDtBQUN0RCw0Q0FBc0I7QUFFdEI7Ozs7Ozs7Ozs7Ozs7O0dBY0c7QUFDSCxNQUFxQixjQUFjO0lBYy9COzs7Ozs7Ozs7Ozs7T0FZRztJQUNILE1BQU0sQ0FBQyxJQUFJLENBQUMsUUFBUTtRQUNoQixPQUFPLElBQUksbUJBQVUsQ0FBQyxDQUFPLEVBQUUsT0FBTyxFQUFFLEVBQUUsRUFBRTtZQUN4QyxJQUFJLFFBQVEsR0FBRyxFQUFFLENBQUM7WUFDbEIsSUFBSSxRQUFRLENBQUMsS0FBSyxDQUFDLFNBQVMsQ0FBQyxFQUFFO2dCQUMzQixRQUFRLEdBQUcsRUFBRSxNQUFNLEVBQUUsRUFBRSxJQUFJLEVBQUUsTUFBTSxFQUFFLEVBQUUsQ0FBQzthQUMzQztZQUVELElBQUksYUFBYSxHQUFHLFFBQVEsQ0FBQztZQUM3QixJQUFJLFFBQVEsQ0FBQyxLQUFLLENBQUMsU0FBUyxDQUFDLEVBQUU7Z0JBQzNCLGFBQWEsR0FBRyxRQUFRLENBQUMsT0FBTyxDQUM1QixPQUFPLEVBQ1AsSUFBSSxJQUFBLGlCQUFRLEdBQUUsT0FBTyxDQUN4QixDQUFDO2FBQ0w7aUJBQU07Z0JBQ0gsYUFBYSxHQUFHLFFBQVEsQ0FBQyxPQUFPLENBQUMsS0FBSyxFQUFFLElBQUksSUFBQSxpQkFBUSxHQUFFLEtBQUssQ0FBQyxDQUFDO2FBQ2hFO1lBRUQsa0RBQWtEO1lBQ2xELFlBQUksQ0FBQyxZQUFZLENBQUMsUUFBUSxFQUFFLGFBQWEsQ0FBQyxDQUFDO1lBRTNDLGdDQUFnQztZQUNoQyxJQUFJLElBQUksR0FBRyxDQUFDLHdEQUFhLGFBQWEsR0FBVyxDQUFDLENBQUMsT0FBTyxDQUFDO1lBQzNELElBQUksT0FBTyxJQUFJLEtBQUssVUFBVTtnQkFBRSxJQUFJLEdBQUcsTUFBTSxJQUFJLEVBQUUsQ0FBQztZQUVwRCxrQkFBa0I7WUFDbEIsWUFBSSxDQUFDLFVBQVUsQ0FBQyxhQUFhLENBQUMsQ0FBQztZQUUvQixPQUFPLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDbEIsQ0FBQyxDQUFBLENBQUMsQ0FBQztJQUNQLENBQUM7O0FBeERMLGlDQXlEQztBQXhERzs7Ozs7Ozs7OztHQVVHO0FBQ0kseUJBQVUsR0FBRyxDQUFDLElBQUksRUFBRSxNQUFNLENBQUMsQ0FBQyJ9

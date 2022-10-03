@@ -1,0 +1,22 @@
+{
+    "type": "link",
+    "title": "Link",
+    "description": "Describe a link with props like \"url\", \"target\", etc...",
+    "props": {
+        "url": {
+            "type": "String",
+            "description": "Specify the url of the link",
+            "required": true
+        },
+        "target": {
+            "type": "String",
+            "description": "Specify the target of the link",
+            "values": ["__self", "__blank"],
+            "default": "__self"
+        },
+        "title": {
+            "type": "String",
+            "description": "Specify a title to be used on the link"
+        }
+    }
+}

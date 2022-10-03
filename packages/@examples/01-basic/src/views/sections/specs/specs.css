@@ -1,0 +1,28 @@
+.section-specs {
+  background: sugar.color(base, background, --darken 10%);
+  @sugar.border.radius();
+
+  .__spec {
+    padding-block: sugar.padding(70);
+    padding-inline: sugar.padding(50);
+    background: sugar.color(base, surface);
+    @sugar.border.radius();
+    @sugar.depth (100);
+
+    &:nth-child(1) {
+      position: relative;
+      top: -100px;
+      left: -50px;
+    }
+    &:nth-child(2) {
+      position: relative;
+      top: 50px;
+      left: 0;
+    }
+    &:nth-child(3) {
+      position: relative;
+      top: -30px;
+      left: 50px;
+    }
+  }
+}

@@ -24,6 +24,9 @@ namespace Sugar\twig;
  */
 function initTwig($twig, $loader = null)
 {
+    // register functions and filters
+    require_once __DIR__ . '/filters/registerFilters.php';
+    require_once __DIR__ . '/functions/registerFunctions.php';
     $twig = \Sugar\twig\registerFilters($twig);
     $twig = \Sugar\twig\registerFunctions($twig);
 

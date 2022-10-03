@@ -23,36 +23,36 @@ namespace Sugar\twig;
 function registerFunctions($twig)
 {
     // Array
-    $toArray = require_once 'cast/toArray.php';
+    $toArray = require_once __DIR__ . '/cast/toArray.php';
     $twig->addFunction($toArray);
 
     // Cast
-    $toObject = require_once 'cast/toObject.php';
+    $toObject = require_once __DIR__ . '/cast/toObject.php';
     $twig->addFunction($toObject);
 
     // Css
-    $layoutCss = require_once 'string/layoutCss.php';
+    $layoutCss = require_once __DIR__ . '/css/layoutCss.php';
     $twig->addFunction($layoutCss);
 
     // Frontspec
-    $frontspecAssets = require_once 'frontspec/assets.php';
+    $frontspecAssets = require_once __DIR__ . '/frontspec/assets.php';
     $twig->addFunction($frontspecAssets);
 
-    $frontspecOg = require_once 'frontspec/og.php';
+    $frontspecOg = require_once __DIR__ . '/frontspec/og.php';
     $twig->addFunction($frontspecOg);
 
-    $frontspecMetas = require_once 'frontspec/metas.php';
+    $frontspecMetas = require_once __DIR__ . '/frontspec/metas.php';
     $twig->addFunction($frontspecMetas);
 
     // Html
-    $attrs = require_once 'html/attrs.php';
+    $attrs = require_once __DIR__ . '/html/attrs.php';
     $twig->addFunction($attrs);
 
     // String
-    $idCompliant = require_once 'string/idCompliant.php';
+    $idCompliant = require_once __DIR__ . '/string/idCompliant.php';
     $twig->addFunction($idCompliant);
 
-    $uniqid = require_once 'string/uniqid.php';
+    $uniqid = require_once __DIR__ . '/string/uniqid.php';
     $twig->addFunction($uniqid);
 
     return $twig;

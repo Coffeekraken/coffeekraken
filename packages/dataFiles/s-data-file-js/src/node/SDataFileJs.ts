@@ -1,6 +1,8 @@
 // @ts-nocheck
 
 import __SPromise from '@coffeekraken/s-promise';
+import { __uniqid } from '@coffeekraken/sugar/string';
+import __fs from 'fs';
 
 /**
  * @name          SDataFileJs
@@ -50,8 +52,27 @@ export default class SDataHandlerJs {
             if (filePath.match(/\.json$/)) {
                 settings = { assert: { type: 'json' } };
             }
-            let data = (await import(filePath, settings)).default;
+
+            let finalFilePath = filePath;
+            if (filePath.match(/\.json$/)) {
+                finalFilePath = filePath.replace(
+                    '.json',
+                    `.${__uniqid()}.json`,
+                );
+            } else {
+                finalFilePath = filePath.replace('.js', `.${__uniqid()}.js`);
+            }
+
+            // make a copy of the file to avoid import caching
+            __fs.copyFileSync(filePath, finalFilePath);
+
+            // import the newly created file
+            let data = (await import(finalFilePath, settings)).default;
             if (typeof data === 'function') data = await data();
+
+            // delete the file
+            __fs.unlinkSync(finalFilePath);
+
             resolve(data);
         });
     }

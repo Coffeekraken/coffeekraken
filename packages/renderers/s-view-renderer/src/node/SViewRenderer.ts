@@ -8,13 +8,9 @@ import type { ISPromise } from '@coffeekraken/s-promise';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __unique } from '@coffeekraken/sugar/array';
-import {
-    __dirname,
-    __extension,
-    __writeJsonSync,
-} from '@coffeekraken/sugar/fs';
+import { __extension, __writeJsonSync } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import { __packageRootDir, __packageTmpDir } from '@coffeekraken/sugar/path';
+import { __packageTmpDir } from '@coffeekraken/sugar/path';
 import { __uniqid } from '@coffeekraken/sugar/string';
 import __fs from 'fs';
 import __glob from 'glob';
@@ -129,13 +125,13 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
     static get defaultRootDirs(): string[] {
         return [
             ...__SSugarConfig.get('viewRenderer.rootDirs'),
-            // @ts-ignore
-            __path.resolve(
-                __packageRootDir(__dirname()),
-                'src/php/views/blade',
-            ),
-            // @ts-ignore
-            __path.resolve(__packageRootDir(__dirname()), 'src/php/views/twig'),
+            // // @ts-ignore
+            // __path.resolve(
+            //     __packageRootDir(__dirname()),
+            //     'src/php/views/blade',
+            // ),
+            // // @ts-ignore
+            // __path.resolve(__packageRootDir(__dirname()), 'src/php/views/twig'),
         ];
     }
 
@@ -385,34 +381,6 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
             });
         }
 
-        // track the shared data
-        let sharedData = this.settings.sharedData ?? {};
-
-        // shared data
-        if (this.settings.sharedDataFiles) {
-            for (let i = 0; i < this.settings.sharedDataFiles.length; i++) {
-                const dataFilePath = this.settings.sharedDataFiles[i];
-                const extension = __extension(dataFilePath);
-                if (!SViewRenderer.dataFiles[extension]) {
-                    throw new Error(
-                        `<red>[render]</red> The extension "${extension}" is not registered as a data file handler`,
-                    );
-                }
-                const sharedDataFiles = await SViewRenderer.dataFiles[
-                    extension
-                ].load(dataFilePath);
-                if (sharedDataFiles) {
-                    sharedData = __deepMerge(sharedData, sharedDataFiles);
-                }
-            }
-        }
-
-        // save the shared data
-        this._sharedData = sharedData;
-
-        // save the shared data on the disk
-        __writeJsonSync(this._sharedDataFilePath, sharedData);
-
         this._loaded = true;
     }
 
@@ -420,6 +388,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
         // try to get an engine for this view
         for (let i = 0; i < Object.keys(SViewRenderer.engines).length; i++) {
             const engineExt = Object.keys(SViewRenderer.engines)[i];
+
             const reg = new RegExp(`${engineExt}$`);
             if (reg.test(viewPath)) {
                 // this._viewExt = engineExt;
@@ -491,14 +460,23 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
                 // doted path
                 for (let i = 0; i < this.settings.rootDirs.length; i++) {
                     const rootDir = this.settings.rootDirs[i];
-                    const potentialViewPath = `${rootDir}/${viewDotPath
+                    const potentialViewGlob = `${rootDir}/${viewDotPath
                         .split('.')
-                        .join('/')}.!(data)@(${handledViewsExtensions.join(
-                        '|',
-                    )})`;
-                    const matches = __glob.sync(potentialViewPath);
+                        .join('/')}.@(${handledViewsExtensions.join('|')})`;
+
+                    const matches = __glob.sync(potentialViewGlob);
                     if (matches && matches.length) {
-                        finalViewPath = matches[0];
+                        for (let j = 0; j < matches.length; j++) {
+                            const potentialPath = matches[j];
+                            // exclude .data files
+                            if (potentialPath.match(/\.data\.[a-zA-Z0-9]+/)) {
+                                continue;
+                            }
+                            finalViewPath = potentialPath;
+                            break;
+                        }
+                    }
+                    if (finalViewPath) {
                         break;
                     }
                 }
@@ -511,6 +489,49 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
 
         // @ts-ignore
         return finalViewPath;
+    }
+
+    /**
+     * Load the shared data if exists
+     */
+    _needLoad = true;
+    async _loadSharedData() {
+        // quick and dirty thottle
+        if (!this._needLoad) {
+            return;
+        }
+        this._needLoad = false;
+        setTimeout(() => {
+            this._needLoad = true;
+        }, 1000);
+
+        // track the shared data
+        let sharedData = this.settings.sharedData ?? {};
+
+        // shared data
+        if (this.settings.sharedDataFiles) {
+            for (let i = 0; i < this.settings.sharedDataFiles.length; i++) {
+                const dataFilePath = this.settings.sharedDataFiles[i];
+                const extension = __extension(dataFilePath);
+                if (!SViewRenderer.dataFiles[extension]) {
+                    throw new Error(
+                        `<red>[render]</red> The extension "${extension}" is not registered as a data file handler`,
+                    );
+                }
+                const sharedDataFiles = await SViewRenderer.dataFiles[
+                    extension
+                ].load(dataFilePath);
+                if (sharedDataFiles) {
+                    sharedData = __deepMerge(sharedData, sharedDataFiles);
+                }
+            }
+        }
+
+        // save the shared data
+        this._sharedData = sharedData;
+
+        // save the shared data on the disk
+        __writeJsonSync(this._sharedDataFilePath, sharedData);
     }
 
     /**
@@ -536,6 +557,9 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
         return new __SPromise(async ({ resolve, reject, pipe }) => {
             // ensure all is loaded
             await this._load();
+
+            // load shared data
+            await this._loadSharedData();
 
             // get the final view path
             const finalViewPath = this._getFinalViewPath(viewDotPath);

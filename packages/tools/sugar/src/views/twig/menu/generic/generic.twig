@@ -1,0 +1,22 @@
+{% macro menu(items, level) %}
+    {% for item in items %}
+        <li class="s-menu__item {{ item.attributes.class }}" {{ attrs(item.attributes, ['class']) }}>
+            {% if item.raw %}
+                {{ item.raw|raw }}
+            {% else %}
+                <a class="s-menu__link" href="{{ item.href }}">
+                    {{ item.label|raw }}
+                </a>
+            {% endif %}
+            {% if item.children %}
+                <ul class="s-menu__children s-menu--level-{{ level }}">
+                    {{ _self.menu(item.children, level + 1)|raw }}
+                </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+{% endmacro %}
+
+<ul class="s-menu {{ attributes.class }} s-menu--level-0" {{ attrs(attributes, ['class']) }}>
+    {{ _self.menu(menu.items, 1)|raw }}
+</ul>

@@ -1,0 +1,9 @@
+.menu-about {
+  padding: sugar.padding(30);
+  background: sugar.color(base, surface);
+  @sugar.border.radius();
+
+  * {
+    white-space: nowrap;
+  }
+}

@@ -40,7 +40,6 @@
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function layoutCss($layout, $settings = [])
-{
+return new \Twig\TwigFunction('layoutCss', function ($layout, $settings = []) {
     return \Sugar\css\layoutCss($layout, $settings);
-}
+});

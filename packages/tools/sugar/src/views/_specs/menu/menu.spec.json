@@ -1,0 +1,14 @@
+{
+    "type": "menu",
+    "title": "Menu",
+    "description": "Describe a menu with children etc",
+    "props": {
+        "attributes": "@sugar.views.props.attributes",
+        "items": {
+            "type": "menuItem[]",
+            "description": "Specify a menu item",
+            "required": true,
+            "props": "@sugar.views.props.menuItem"
+        }
+    }
+}

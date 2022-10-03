@@ -4,70 +4,18 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2516f4dafb22285b91174ad4c387fa1a",
+    "content-hash": "a644e683d3fb812ef11642181c09ef38",
     "packages": [
         {
-            "name": "coffeekraken/s-twig",
-            "version": "2.0.0-alpha.19",
-            "dist": {
-                "type": "path",
-                "url": "../../tools/s-twig",
-                "reference": "e5aff5b09cc95548c68bb41ea4e1dc8b4d39f424"
-            },
-            "require": {
-                "coffeekraken/sugar": "^2.0@alpha",
-                "twig/twig": "3.x-dev"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/php/autoload.php"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com"
-                }
-            ],
-            "description": "Some additional feature for the twig template renderer.",
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
-            "name": "coffeekraken/s-view-renderer",
-            "version": "2.0.0-alpha.19",
-            "dist": {
-                "type": "path",
-                "url": "../s-view-renderer",
-                "reference": "df05b55ffb98d436aeebed336c208ab9020aa570"
-            },
-            "require": {
-                "coffeekraken/s-twig": "^2.0@alpha",
-                "coffeekraken/sugar": "^2.0@alpha"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/php/autoload.php"
-                ]
-            },
-            "homepage": "https://coffeekraken.io",
-            "transport-options": {
-                "relative": true
-            }
-        },
-        {
             "name": "coffeekraken/sugar",
-            "version": "2.0.0-alpha.19",
+            "version": "2.0.0-alpha.20",
             "dist": {
                 "type": "path",
                 "url": "../../tools/sugar",
-                "reference": "f53f235f8bb5188a0a410d32c75422263a603e8d"
+                "reference": "00ce153729c145a0c4552dcd730000642226c592"
+            },
+            "require": {
+                "twig/twig": "^3.4"
             },
             "type": "library",
             "autoload": {
@@ -253,12 +201,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "40b6f59430cc17999406a5557c9e178704e92fa8"
+                "reference": "7a2e23ce17c048d2c393a55d76d72eb0dbbf356b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/40b6f59430cc17999406a5557c9e178704e92fa8",
-                "reference": "40b6f59430cc17999406a5557c9e178704e92fa8",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/7a2e23ce17c048d2c393a55d76d72eb0dbbf356b",
+                "reference": "7a2e23ce17c048d2c393a55d76d72eb0dbbf356b",
                 "shasum": ""
             },
             "require": {
@@ -322,16 +270,14 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-08-14T13:29:42+00:00"
+            "time": "2022-09-28T08:43:25+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "coffeekraken/s-twig": 15,
-        "coffeekraken/sugar": 15,
-        "coffeekraken/s-view-renderer": 15
+        "coffeekraken/sugar": 15
     },
     "prefer-stable": false,
     "prefer-lowest": false,

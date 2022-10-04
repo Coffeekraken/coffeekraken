@@ -1,27 +1,31 @@
 <section class="section-tabs">
     <div class="s-container">
-        <div class="s-layout:1222">
-
+        <div class="s-layout:122">
             <div>
-                <div class="__tabs s-tab:vertical">
+                <div class="__tabs">
                     {% for tab in tabs %}
-                        <div>
+                        <a class="__tabs-item" href="#{{ tab.id }}" s-activate group="tabs">
                             {{ tab.title }}
-                        </div>
+                        </a>
                     {% endfor %}
                 </div>
             </div>
 
-            {# {% for spec in specs %}
-                <div class="__spec">
-                    <h1 class="s-typo:h1 s-mbe:30">{{ spec.title|raw }}</h1>
-                    <p class="s-typo:lead s-mbe:20 s-tc:accent">{{ spec.intro|raw }}</p>
-                    <p class="s-typo:p">{{ spec.description|raw }}</p>
-                    <a class="s-btn s-mbs:40 s-color:accent" href="{{ spec.cta.link.url }}" target="{{ spec.cta.link.target }}">
-                        {{ spec.cta.label }}
-                    </a>
-                </div>
-            {% endfor %} #}
+            <div>
+
+                {% for tab in tabs %}
+                    <div class="__content" id="{{ tab.id }}">
+                        <h1 class="s-typo:h1 s-mbe:30">{{ tab.title|raw }}</h1>
+                        <p class="s-typo:lead s-mbe:20 s-tc:accent">{{ tab.intro|raw }}</p>
+                        <p class="s-typo:p">{{ tab.description|raw }}</p>
+                        <a class="s-btn s-mbs:40 s-color:accent" href="{{ tab.cta.link.url }}" target="{{ tab.cta.link.target }}">
+                            {{ tab.cta.label }}
+                        </a>
+                    </div>
+                {% endfor %}
+
+            </div>
+
         </div>
     </div>
 </section>

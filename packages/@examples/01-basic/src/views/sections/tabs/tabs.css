@@ -1,2 +1,59 @@
 .section-tabs {
+  margin-block-start: -30px;
+  position: relative;
+  z-index: 10;
+
+  .__tabs {
+    background-color: sugar.color(base, surface);
+  }
+
+  .__tabs-item {
+    display: block;
+    padding: sugar.padding(30) sugar.padding(50);
+    background: linear-gradient(
+      90deg,
+      sugar.color(base, surface),
+      sugar.color(base, background)
+    );
+    font-size: sugar.font.size(50);
+    transform: scale(1);
+    position: relative;
+    @sugar.transition (fast);
+
+    &:not(:last-child) {
+      border-bottom: 1px solid sugar.color(accent, --alpha 0.1);
+    }
+
+    &:hover {
+      background: sugar.color(accent, --alpha 0.3);
+      color: sugar.color(accent, foreground);
+    }
+
+    &.active {
+      background: linear-gradient(
+        -90deg,
+        sugar.color(accent),
+        sugar.color(accent)
+      );
+      z-index: 2;
+      color: sugar.color(accent, foreground);
+      font-weight: bold;
+      transform: scale(1.03);
+    }
+  }
+
+  .__content {
+    padding: sugar.padding(50);
+    background-color: sugar.color(base, surface);
+    background-image: linear-gradient(
+      45deg,
+      sugar.color(base, surface),
+      sugar.color(base, background)
+    );
+    display: none;
+
+    &.active {
+      display: block;
+    }
+  }
 }

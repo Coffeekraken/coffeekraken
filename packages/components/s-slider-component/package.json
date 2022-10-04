@@ -1,35 +1,38 @@
 {
     "name": "@coffeekraken/s-slider-component",
     "version": "2.0.0-alpha.20",
-    "description": "Powerful web component to create nice and fully customizable sliders. Support behaviors like slideable, horizontal|vertical, and more...",
-    "type": "module",
-    "homepage": "https://coffeekraken.io",
+    "description": "",
     "scripts": {
-        "dev": "sugar frontstack",
-        "build": "sugar frontstack build",
-        "build.watch": "sugar vite.build --lib --watch",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "",
-    "license": "MIT",
+    "license": "ISC",
     "dependencies": {
-        "@coffeekraken/s-component-utils": "^2.0.0-alpha.20",
+        "@builder.io/mitosis": "^0.0.61",
+        "@builder.io/mitosis-cli": "^0.0.22",
+        "@coffeekraken/s-clipboard-copy-component": "^2.0.0-alpha.20",
+        "@coffeekraken/s-component": "^2.0.0-alpha.20",
         "@coffeekraken/s-interface": "^2.0.0-alpha.20",
-        "@coffeekraken/s-lit-component": "^2.0.0-alpha.20",
+        "@coffeekraken/s-mitosis": "^2.0.0-alpha.20",
         "@coffeekraken/sugar": "^2.0.0-alpha.20",
-        "lit": "^2.2.8",
-        "swiper": "^8.3.2"
+        "@prettier/plugin-php": "^0.18.9",
+        "highlight.js": "^11.6.0",
+        "html-tags": "^3.2.0",
+        "known-css-properties": "^0.25.0",
+        "prettier": "^2.7.1"
     },
-    "main": "dist/pkg/cjs/js/exports.js",
-    "module": "dist/pkg/esm/js/exports.js",
     "exports": {
         ".": {
-            "require": "./dist/pkg/cjs/js/exports.js",
-            "import": "./dist/pkg/esm/js/exports.js"
+            "require": "./dist/pkg/cjs/js/lazy.js",
+            "import": "./dist/pkg/esm/js/lazy.js"
         },
         "./lazy": {
             "require": "./dist/pkg/cjs/js/lazy.js",
             "import": "./dist/pkg/esm/js/lazy.js"
+        },
+        "./webcomponent": {
+            "require": "./dist/js/webcomponent/src/js/SCodeExampleComponent.ts",
+            "import": "./dist/js/webcomponent/src/js/SCodeExampleComponent.ts"
         },
         "./shared/*": {
             "require": "./dist/pkg/cjs/shared/*.js",

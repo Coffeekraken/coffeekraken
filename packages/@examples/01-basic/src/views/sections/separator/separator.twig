@@ -1,0 +1,16 @@
+<section class="section-separator">
+    <div class="__bkg">
+        {% if image %}
+            <img class="__img" src="{{ image.url }}" alt="{{ image.alt }}" />
+        {% endif %}
+    </div>
+    <div class="__content">
+        <div class="s-container">
+            {% if title %}
+                <h1 class="s-typo:h1">
+                    {{ title|raw }}
+                </h1>
+            {% endif %}
+        </div>
+    </div>
+</section>

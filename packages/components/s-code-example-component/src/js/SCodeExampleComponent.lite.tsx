@@ -264,7 +264,7 @@ export default function SCodeExample(props: Props) {
         <div
             id={state.id}
             ref={$container}
-            class={state.component?.className('', null, 'bare')}
+            class={state.component?.className('', null, 's-bare')}
             status={state.status}
         >
             {props.children}

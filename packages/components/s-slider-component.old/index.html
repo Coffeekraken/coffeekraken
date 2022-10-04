@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Slider component</title>
+    </head>
+    <body>
+        <script type="module">
+            import __css from './src/css/dev.css';
+            import { define } from './src/js/index.ts';
+            import __SSliderSlideableBehavior from './src/js/behaviors/SSliderSlideableBehavior.ts';
+
+            define({
+                behavior: 'slideable',
+                availableBehaviors: {
+                    slideable: {
+                        class: __SSliderSlideableBehavior,
+                        settings: {
+                            friction: 0.7
+                        }
+                    }
+                }
+            });
+        </script>
+
+        <br />
+        <br />
+
+        <h1>Default controls nav</h1>
+
+        <s-slider controls nav swipe>
+            <div s-slider-slide class="s-bg--accent">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+            <div s-slider-slide class="s-bg--complementary">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+            <div s-slider-slide class="s-bg--info">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+            <div s-slider-slide class="s-bg--error">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+        </s-slider>
+
+        <h1>Default tight controls nav</h1>
+
+        <s-slider lnf="default-tight" controls nav>
+            <div s-slider-slide class="s-bg--accent">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+            <div s-slider-slide class="s-bg--complementary">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+            <div s-slider-slide class="s-bg--info">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+            <div s-slider-slide class="s-bg--error">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+        </s-slider>
+
+        <h1>Default contained controls nav</h1>
+
+        <s-slider lnf="default-contained" controls nav>
+            <div s-slider-slide class="s-bg--accent">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+            <div s-slider-slide class="s-bg--complementary">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+            <div s-slider-slide class="s-bg--info">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+            <div s-slider-slide class="s-bg--error">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+        </s-slider>
+
+        <h1>Default vertical controls nav</h1>
+
+        <s-slider direction="vertical" controls nav>
+            <div s-slider-slide class="s-bg--accent">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+            <div s-slider-slide class="s-bg--complementary">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+            <div s-slider-slide class="s-bg--info">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+            <div s-slider-slide class="s-bg--error">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+        </s-slider>
+
+        <h1>Default tight vertical controls nav</h1>
+
+        <s-slider lnf="default-tight" direction="vertical" controls nav>
+            <div s-slider-slide class="s-bg--accent">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+            <div s-slider-slide class="s-bg--complementary">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+            <div s-slider-slide class="s-bg--info">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+            <div s-slider-slide class="s-bg--error">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+        </s-slider>
+
+        <h1>Default contained vertical controls nav</h1>
+
+        <s-slider lnf="default-contained" direction="vertical" controls nav>
+            <div s-slider-slide class="s-bg--accent">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+            <div s-slider-slide class="s-bg--complementary">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+            <div s-slider-slide class="s-bg--info">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+            <div s-slider-slide class="s-bg--error">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+        </s-slider>
+
+        <h1>Default loop progress controls nav</h1>
+         <s-slider lnf="default" loop progress controls nav>
+            <div s-slider-slide class="s-bg--accent">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+            <div s-slider-slide class="s-bg--complementary">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+            <div s-slider-slide class="s-bg--info">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+            <div s-slider-slide class="s-bg--error">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+        </s-slider>
+
+        <h1>Default timer loop progress controls nav</h1>
+         <s-slider lnf="default" timer="2500" loop progress controls nav>
+            <div s-slider-slide class="s-bg--accent">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+            <div s-slider-slide class="s-bg--complementary">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+            <div s-slider-slide class="s-bg--info">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+            <div s-slider-slide class="s-bg--error">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+        </s-slider>
+
+        <h1>Default contained loop controls nav</h1>
+         <s-slider lnf="default" loop controls nav>
+            <div s-slider-slide class="s-bg--accent">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+            <div s-slider-slide class="s-bg--complementary">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+            <div s-slider-slide class="s-bg--info">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+            <div s-slider-slide class="s-bg--error">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+        </s-slider>
+
+        <!--
+        <s-slider side-reveal="50px" scrollable>
+            <div s-slider-slide class="s-bg--accent">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+            <div s-slider-slide class="s-bg--complementary">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+            <div s-slider-slide class="s-bg--info">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+            <div s-slider-slide class="s-bg--error">
+                <h1 class="s-typo--h1">Slide #1</h1>
+                <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+            </div>
+        </s-slider> -->
+
+    </body>
+</html>

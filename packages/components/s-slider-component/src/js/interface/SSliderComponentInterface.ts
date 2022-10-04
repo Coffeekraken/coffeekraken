@@ -132,6 +132,12 @@ export default class SSliderComponentInterface extends __SInterface {
                     'Specify a function that will take care of transitioning the slider from the current item to the next/previous',
                 type: 'Function',
             },
+            cssDeps: {
+                description:
+                    'Specify some css url(s) or link tag id(s) to inject into the shadowRoot of the component',
+                type: 'String[]',
+                default: ['slider'],
+            },
         };
     }
 }

@@ -5,9 +5,11 @@ import __SComponent from '../shared/SComponent';
 
 import __STheme from '@coffeekraken/s-theme';
 
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __adoptStyleInShadowRoot } from '@coffeekraken/sugar/dom';
 
 import { __debounce } from '@coffeekraken/sugar/function';
+import { __isPath } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 
 export interface ISComponentDispatchSettings {
@@ -227,18 +229,35 @@ export default class SComponent extends __SComponent {
         }
 
         cssDeps.forEach((dep) => {
-            let $link;
+            let $styleOrLink;
 
             try {
-                $link = document.querySelector(`link#${dep}`)?.cloneNode(true);
+                $styleOrLink = document
+                    .querySelector(`link#${dep}`)
+                    ?.cloneNode(true);
             } catch (e) {}
 
-            if (!$link) {
-                $link = document.createElement('link');
-                $link.rel = 'stylesheet';
-                $link.href = dep;
+            if (dep.match(/^[a-zA-Z0-9_-]+$/)) {
+                $styleOrLink = document.createElement('link');
+                $styleOrLink.rel = 'stylesheet';
+                $styleOrLink.href = `${__SSugarConfig.get(
+                    'serve.css.path',
+                )}/partials/${dep}.css`;
             }
-            $shadowRoot.appendChild($link);
+
+            if (__isPath(dep) && !$styleOrLink) {
+                $styleOrLink = document.createElement('link');
+                $styleOrLink.rel = 'stylesheet';
+                $styleOrLink.href = dep;
+            }
+
+            if (!$styleOrLink) {
+                $styleOrLink = document.createElement('style');
+                $styleOrLink.type = 'text/css';
+                $styleOrLink.appendChild(document.createTextNode(dep));
+            }
+
+            $shadowRoot.appendChild($styleOrLink);
         });
     }
 

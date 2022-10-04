@@ -1,6 +1,8 @@
 export default {
+    title: 'Expect more!',
     tabs: [
         {
+            id: 'tab-1',
             title: 'Supercharged!',
             intro: 'Up to 18 hours of battery life.',
             description:
@@ -15,7 +17,8 @@ export default {
             },
         },
         {
-            title: 'Supercharged!',
+            id: 'tab-2',
+            title: 'Extracharged!',
             intro: 'Up to 18 hours of battery life.',
             description:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra libero tincidunt arcu dignissim rhoncus. Vivamus a ipsum eget mauris.',
@@ -29,7 +32,8 @@ export default {
             },
         },
         {
-            title: 'Supercharged!',
+            id: 'tab-3',
+            title: 'Gigacharged!',
             intro: 'Up to 18 hours of battery life.',
             description:
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra libero tincidunt arcu dignissim rhoncus. Vivamus a ipsum eget mauris.',

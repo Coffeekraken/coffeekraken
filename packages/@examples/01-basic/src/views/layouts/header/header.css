@@ -1,29 +1,35 @@
 .header {
-    position: fixed;
-    top: sugar.margin(30);
-    width: 100%;
+  position: fixed;
+  top: sugar.margin(30);
+  width: 100%;
+  z-index: 100;
+  @sugar.transition();
 
-    .s-container {
-        position: relative;
+  body.scrolled & {
+    top: 0;
+  }
 
-        &:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: calc(sugar.margin(30) * -1);
-            right: calc(sugar.margin(30) * -1);
-            bottom: 0;
-            z-index: -1;
-            background: sugar.color(base, surface);
-            opacity: 0;
-            @sugar.border.radius();
-            @sugar.depth (100);
-            @sugar.transition();
+  .s-container {
+    position: relative;
 
-            body.scrolled & {
-                opacity: 1;
-                background: sugar.color(base, surface, --darken 5%);
-            }
-        }
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: calc(sugar.margin(30) * -1);
+      right: calc(sugar.margin(30) * -1);
+      bottom: 0;
+      z-index: -1;
+      background: sugar.color(base, surface);
+      opacity: 0;
+      @sugar.border.radius();
+      @sugar.depth (100);
+      @sugar.transition();
+
+      body.scrolled & {
+        opacity: 1;
+        background: sugar.color(base, surface, --darken 5%);
+      }
     }
+  }
 }

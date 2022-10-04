@@ -4,16 +4,21 @@
     sugar.color(base, surface, --darken 10%),
     sugar.color(base, surface, --alpha 0)
   );
+  margin-block-start: 100px;
+  margin-block-end: 100px;
   @sugar.border.radius();
 
   .__spec {
+    position: relative;
+    z-index: 10;
     padding-block: sugar.padding(70);
     padding-inline: sugar.padding(50);
-    background: sugar.color(base, surface);
-    background: linear-gradient(
+    margin: -50px 0;
+    background-color: sugar.color(base, surface);
+    background-image: linear-gradient(
       -45deg,
       sugar.color(base, surface, --alpha 0),
-      sugar.color(base, surface)
+      sugar.color(base, --alpha 0.2)
     );
     @sugar.border.radius();
     @sugar.depth (100);
@@ -28,14 +33,14 @@
     &:before {
       width: 100px;
       height: 2px;
-      bottom: -2px;
-      right: -2px;
+      bottom: -12px;
+      right: -12px;
     }
     &:after {
       width: 2px;
       height: 100px;
-      bottom: 0px;
-      right: -2px;
+      bottom: -10px;
+      right: -12px;
     }
 
     &:nth-child(1) {
@@ -45,7 +50,7 @@
     }
     &:nth-child(2) {
       position: relative;
-      top: 50px;
+      top: 100px;
       left: 0;
     }
     &:nth-child(3) {

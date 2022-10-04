@@ -12,9 +12,9 @@ import __faker from 'faker';
  *
  * Generate the tabs classes
  *
- * @param       {('solid')[]}                           [styles=['solid']]         The style(s) you want to generate
+ * @param       {('solid')[]}                           [lnfs=['solid']]         The style(s) you want to generate
  * @param       {('default'|'square'|'pill')[]}             [shape=['default','square','pill']]         The shape(s) you want to generate
- * @param       {'solid'}                [defaultStyle='theme.ui.tabs.defaultStyle']           The default style you want
+ * @param       {'solid'}                [defaultLnf='theme.ui.tabs.defaultLnf']           The default style you want
  * @param       {'default'|'square'|'pill'}        [defaultShape='theme.ui.tabs.defaultShape']           The default shape you want
  * @param       {String}                            [defaultColor=theme.ui.tabs.defaultColor]            The default color you want
  * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
@@ -30,7 +30,7 @@ import __faker from 'faker';
 class postcssSugarPluginUiListClassesInterface extends __SInterface {
     static get _definition() {
         return {
-            styles: {
+            lnfs: {
                 type: 'String[]',
                 values: ['solid'],
                 default: ['solid'],
@@ -40,10 +40,10 @@ class postcssSugarPluginUiListClassesInterface extends __SInterface {
                 values: ['default', 'square', 'pill'],
                 default: ['default', 'square', 'pill'],
             },
-            defaultStyle: {
+            defaultLnf: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.get('ui.tabs.defaultStyle') ?? 'solid',
+                default: __STheme.get('ui.tabs.defaultLnf') ?? 'solid',
             },
             defaultShape: {
                 type: 'String',
@@ -68,9 +68,9 @@ class postcssSugarPluginUiListClassesInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiListClassesParams {
-    styles: 'solid'[];
+    lnfs: 'solid'[];
     shapes: ('default' | 'square' | 'pill')[];
-    defaultStyle: 'solid';
+    defaultLnf: 'solid';
     defaultShape: 'default' | 'square' | 'pill';
     defaultColor: string;
     scope: ('bare' | 'lnf' | 'shape' | 'vr' | 'tf')[];
@@ -97,9 +97,9 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiListClassesParams = {
-        styles: [],
+        lnfs: [],
         shapes: [],
-        defaultStyle: 'solid',
+        defaultLnf: 'solid',
         defaultShape: 'default',
         defaultColor: 'main',
         scope: [],
@@ -126,11 +126,11 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
-        ${finalParams.styles
-            .map((style) => {
+        ${finalParams.lnfs
+            .map((lnf) => {
                 return ` * @cssClass     s-tabs${
-                    style === finalParams.defaultStyle ? '' : `:${style}`
-                }           Apply the ${style} tabs style`;
+                    lnf === finalParams.defaultLnf ? '' : `:${lnf}`
+                }           Apply the ${lnf} tabs lnf`;
             })
             .join('\n')}
         ${finalParams.shapes
@@ -144,15 +144,15 @@ export default function ({
         * @cssClass       s-tabs:fill       Add a background to the tabs
         * @cssClass       s-tabs:vertical    Display the tabs horizontally
         * 
-        ${finalParams.styles
-            .map((style) => {
-                return ` * @example        html       ${style} style ${
-                    finalParams.defaultStyle === style
+        ${finalParams.lnfs
+            .map((lnf) => {
+                return ` * @example        html       ${lnf} lnf ${
+                    finalParams.defaultLnf === lnf
                         ? '<span class="s-badge:outline s-scale:05">default</span>'
                         : ''
                 }
             *   <ul class="s-tabs${
-                style === finalParams.defaultStyle ? '' : `:${style}`
+                lnf === finalParams.defaultLnf ? '' : `:${lnf}`
             } s-color:accent">
             *     <li tabindex="0" active>${__faker.name.findName()}</li>
             *     <li tabindex="0">${__faker.name.findName()}</li>
@@ -247,20 +247,20 @@ export default function ({
     }
 
     if (finalParams.scope.includes('lnf')) {
-        finalParams.styles.forEach((style) => {
+        finalParams.lnfs.forEach((lnf) => {
             vars.comment(
                 () => `/**
               * @name           s-tabs${
-                  finalParams.defaultStyle === style ? '' : `:${style}`
+                  finalParams.defaultLnf === lnf ? '' : `:${lnf}`
               }
               * @namespace          sugar.style.ui.tabs
               * @type           CssClass
               * 
-              * This class represent a "<yellow>${style}</yellow>" tabs
+              * This class represent a "<yellow>${lnf}</yellow>" tabs
               * 
               * @example        html
               * <div class="s-tabs${
-                  finalParams.defaultStyle === style ? '' : `:${style}`
+                  finalParams.defaultLnf === lnf ? '' : `:${lnf}`
               }">
               *    <div class="active">An active tab</div>
               *    <div>A tab</div>
@@ -269,8 +269,10 @@ export default function ({
            `,
             ).code(
                 `
-          .s-tabs${finalParams.defaultStyle === style ? '' : `--${style}`} {
-            @sugar.ui.tabs($style: ${style}, $scope: lnf);
+          .s-tabs${
+              finalParams.defaultLnf === lnf ? '' : `--${lnf}`
+          }:not(.s-bare) {
+            @sugar.ui.tabs($lnf: ${lnf}, $scope: lnf);
           }
         `,
                 { type: 'CssClass' },
@@ -301,7 +303,9 @@ export default function ({
          `,
             ).code(
                 `
-        .s-tabs${finalParams.defaultShape === shape ? '' : `--${shape}`} {
+        .s-tabs${
+            finalParams.defaultShape === shape ? '' : `--${shape}`
+        }:not(.s-bare) {
           @sugar.ui.tabs($shape: ${shape}, $scope: shape);
 
           &.s-tabs--vertical {
@@ -318,7 +322,7 @@ export default function ({
     if (finalParams.scope.includes('lnf')) {
         vars.code(
             () => `
-            .s-tabs:not(.s-color) {
+            .s-tabs:not(.s-color):not(.s-bare) {
                 @sugar.color(${finalParams.defaultColor});
             }
         `,

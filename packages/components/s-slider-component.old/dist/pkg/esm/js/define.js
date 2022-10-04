@@ -1,0 +1,5 @@
+import __SSliderWebcomponent from './SSliderComponent';
+export default function define(props = {}, tagName = 's-slider') {
+    __SSliderWebcomponent.define(tagName, __SSliderWebcomponent, props);
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBLE9BQU8scUJBQXFCLE1BQU0sb0JBQW9CLENBQUM7QUFFdkQsTUFBTSxDQUFDLE9BQU8sVUFBVSxNQUFNLENBQzFCLFFBQXlDLEVBQUUsRUFDM0MsT0FBTyxHQUFHLFVBQVU7SUFFcEIscUJBQXFCLENBQUMsTUFBTSxDQUFDLE9BQU8sRUFBRSxxQkFBcUIsRUFBRSxLQUFLLENBQUMsQ0FBQztBQUN4RSxDQUFDIn0=

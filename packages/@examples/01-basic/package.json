@@ -29,8 +29,9 @@
         "build": "sugar build"
     },
     "dependencies": {
-        "@coffeekraken/s-postcss-sugar-plugin": "workspace:^",
-        "@coffeekraken/s-sugar-feature": "workspace:^",
+        "@coffeekraken/s-activate-feature": "^2.0.0-alpha.20",
+        "@coffeekraken/s-postcss-sugar-plugin": "2.0.0-alpha.20",
+        "@coffeekraken/s-sugar-feature": "2.0.0-alpha.20",
         "@coffeekraken/sugar": "workspace:^",
         "autoprefixer": "^10.4.12",
         "postcss": "^8.4.17",

@@ -2,6 +2,7 @@
 
 import __SBench from '@coffeekraken/s-bench';
 import __SPromise from '@coffeekraken/s-promise';
+import { __isPlainObject } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __fs from 'fs';
 
@@ -79,7 +80,9 @@ export default function genericHandler({
                     dataFn;
 
                 // directly passed function
-                if (typeof viewObj.data === 'function') {
+                if (__isPlainObject(viewObj.data)) {
+                    dataFn = () => viewObj.data;
+                } else if (typeof viewObj.data === 'function') {
                     dataFn = viewObj.data;
                 } else if (
                     viewObj.data.handler &&
@@ -88,7 +91,6 @@ export default function genericHandler({
                     dataFn = viewObj.data.handler;
                 }
 
-                // if the passed data is a string
                 if (!dataFn) {
                     if (typeof viewObj.data === 'string') {
                         dataHandlerStr = viewObj.data;
@@ -128,6 +130,7 @@ export default function genericHandler({
                 const dataFnResult = await dataFn({
                     req,
                     res,
+                    viewRenderer: res.viewRenderer,
                     params: dataParams,
                     settings: dataSettings,
                     pageConfig,

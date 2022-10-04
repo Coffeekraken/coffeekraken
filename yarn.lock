@@ -9,8 +9,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "01-basic@workspace:packages/@examples/01-basic"
   dependencies:
-    "@coffeekraken/s-postcss-sugar-plugin": "workspace:^"
-    "@coffeekraken/s-sugar-feature": "workspace:^"
+    "@coffeekraken/s-activate-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-postcss-sugar-plugin": 2.0.0-alpha.20
+    "@coffeekraken/s-sugar-feature": 2.0.0-alpha.20
     "@coffeekraken/sugar": "workspace:^"
     autoprefixer: ^10.4.12
     postcss: ^8.4.17
@@ -2793,7 +2794,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-postcss-sugar-plugin@^2.0.0-alpha.20, @coffeekraken/s-postcss-sugar-plugin@workspace:^, @coffeekraken/s-postcss-sugar-plugin@workspace:packages/postcss/s-postcss-sugar-plugin":
+"@coffeekraken/s-postcss-sugar-plugin@2.0.0-alpha.20, @coffeekraken/s-postcss-sugar-plugin@^2.0.0-alpha.20, @coffeekraken/s-postcss-sugar-plugin@workspace:packages/postcss/s-postcss-sugar-plugin":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-postcss-sugar-plugin@workspace:packages/postcss/s-postcss-sugar-plugin"
   dependencies:
@@ -2935,12 +2936,18 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-slider-component@workspace:packages/components/s-slider-component"
   dependencies:
-    "@coffeekraken/s-component-utils": ^2.0.0-alpha.20
+    "@builder.io/mitosis": ^0.0.61
+    "@builder.io/mitosis-cli": ^0.0.22
+    "@coffeekraken/s-clipboard-copy-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-component": ^2.0.0-alpha.20
     "@coffeekraken/s-interface": ^2.0.0-alpha.20
-    "@coffeekraken/s-lit-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-mitosis": ^2.0.0-alpha.20
     "@coffeekraken/sugar": ^2.0.0-alpha.20
-    lit: ^2.2.8
-    swiper: ^8.3.2
+    "@prettier/plugin-php": ^0.18.9
+    highlight.js: ^11.6.0
+    html-tags: ^3.2.0
+    known-css-properties: ^0.25.0
+    prettier: ^2.7.1
   languageName: unknown
   linkType: soft
 
@@ -3037,7 +3044,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-sugar-feature@^2.0.0-alpha.20, @coffeekraken/s-sugar-feature@workspace:^, @coffeekraken/s-sugar-feature@workspace:packages/features/s-sugar-feature":
+"@coffeekraken/s-sugar-feature@2.0.0-alpha.20, @coffeekraken/s-sugar-feature@^2.0.0-alpha.20, @coffeekraken/s-sugar-feature@workspace:packages/features/s-sugar-feature":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-sugar-feature@workspace:packages/features/s-sugar-feature"
   dependencies:
@@ -9352,15 +9359,6 @@ __metadata:
   version: 0.1.2
   resolution: "dom-walk@npm:0.1.2"
   checksum: 19eb0ce9c6de39d5e231530685248545d9cd2bd97b2cb3486e0bfc0f2a393a9addddfd5557463a932b52fdfcf68ad2a619020cd2c74a5fe46fbecaa8e80872f3
-  languageName: node
-  linkType: hard
-
-"dom7@npm:^4.0.4":
-  version: 4.0.4
-  resolution: "dom7@npm:4.0.4"
-  dependencies:
-    ssr-window: ^4.0.0
-  checksum: b38604f74e915b4d05b6634f9ff239a708c468180f498a28ff67f2a61233697d9bd7192703b788a24541c3591e7f1a6e83a2cbf70bc871a85e033f82e19abc31
   languageName: node
   linkType: hard
 
@@ -18543,13 +18541,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ssr-window@npm:^4.0.0, ssr-window@npm:^4.0.2":
-  version: 4.0.2
-  resolution: "ssr-window@npm:4.0.2"
-  checksum: df182600927f4f3225224cf8c02338ea637c9750519505bbfb9a9236741a2a7ec088386fb948bca7b447b8303d9109e7dc7672e3de041c79ac2a0e03665af7d2
-  languageName: node
-  linkType: hard
-
 "ssri@npm:^9.0.0":
   version: 9.0.1
   resolution: "ssri@npm:9.0.1"
@@ -19001,16 +18992,6 @@ __metadata:
   version: 2.5.0
   resolution: "svgpath@npm:2.5.0"
   checksum: 90301456898dfce54a4d55755db57d4f0e5df3ee80cedce9f75fa08e1703b814daedfccd3adf87d3460b20d40310009832539e83924dc8b6151fe58ec0ec6732
-  languageName: node
-  linkType: hard
-
-"swiper@npm:^8.3.2":
-  version: 8.3.2
-  resolution: "swiper@npm:8.3.2"
-  dependencies:
-    dom7: ^4.0.4
-    ssr-window: ^4.0.2
-  checksum: 881d8e4fdedc391593c9ecee1ca0fddaebd16b2f6be493f80869fbaf848761cf7e41a7d7ba4b9fe4c4d61e9bef87ba33154d22bb6a8a8503c22c49f793bef1c1
   languageName: node
   linkType: hard
 

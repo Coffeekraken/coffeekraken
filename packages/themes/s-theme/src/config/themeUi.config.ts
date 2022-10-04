@@ -2229,7 +2229,7 @@ export default (api) => {
                 return api.theme.ui.default.transition;
             },
             /**
-             * @name          defaultStyle
+             * @name          defaultLnf
              * @namespace     config.themeUi.tabs
              * @type          Number
              * @default      [theme.ui.default.defaultStyle]
@@ -2239,7 +2239,7 @@ export default (api) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            get defaultStyle() {
+            get defaultLnf() {
                 return api.theme.ui.default.defaultStyle;
             },
             /**

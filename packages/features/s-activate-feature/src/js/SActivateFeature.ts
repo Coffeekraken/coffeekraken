@@ -250,6 +250,8 @@ export default class SActivateFeature extends __SFeature {
             this._restoreState();
         } else if (this.props.active) {
             this.activate();
+        } else if (this.props.group && this._$groupElements[0] === this.node) {
+            this.activate();
         }
     }
 
@@ -354,10 +356,15 @@ export default class SActivateFeature extends __SFeature {
             this.state.active = true;
             this.props.active = true;
 
+            // add the "active" class
+            this.node.classList.add(this.props.activeClass);
+
             // loop on targets to activate them
             if (this._$targets) {
                 // @ts-ignore
                 this._$targets.forEach(($target) => {
+                    console.log('ac', $target);
+
                     if (this.props.activeClass) {
                         $target.classList.add(this.props.activeClass);
                     }
@@ -397,6 +404,9 @@ export default class SActivateFeature extends __SFeature {
         this._unactivateTimeout = setTimeout(() => {
             this.state.active = false;
             this.props.active = false;
+
+            // add the "active" class
+            this.node.classList.remove(this.props.activeClass);
 
             // loop on targets to unactivate them
             if (this._$targets) {

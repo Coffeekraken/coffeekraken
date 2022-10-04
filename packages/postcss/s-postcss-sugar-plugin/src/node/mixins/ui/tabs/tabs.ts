@@ -31,11 +31,11 @@ import __STheme from '@coffeekraken/s-theme';
 class postcssSugarPluginUiTabInterface extends __SInterface {
     static get _definition() {
         return {
-            style: {
+            lnf: {
                 type: 'String',
-                description: 'Specify the style you want for your tabs',
+                description: 'Specify the look and feel you want for your tabs',
                 values: ['solid'],
-                default: __STheme.get('ui.tabs.defaultStyle'),
+                default: __STheme.get('ui.tabs.defaultLnf'),
             },
             shape: {
                 type: 'String',
@@ -81,7 +81,7 @@ class postcssSugarPluginUiTabInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiTabParams {
-    style: 'solid';
+    lnf: 'solid';
     shape: 'default' | 'square' | 'pill';
     grow: boolean;
     fill: boolean;
@@ -102,7 +102,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiTabParams = {
-        style: 'solid',
+        lnf: 'solid',
         shape: 'default',
         grow: false,
         fill: false,
@@ -183,7 +183,7 @@ export default function ({
     }
 
     if (finalParams.scope.indexOf('lnf') !== -1) {
-        switch (finalParams.style) {
+        switch (finalParams.lnf) {
             case 'solid':
             default:
                 vars.push(`

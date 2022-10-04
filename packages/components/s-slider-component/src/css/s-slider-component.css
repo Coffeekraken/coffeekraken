@@ -23,12 +23,18 @@
     }
 }
 
+::slotted([s-slider-slide]) {
+    flex-shrink: 0;
+    width: calc(100% - var(--s-slider-inline-reveal, 0%) * 2);
+    height: calc(100% - var(--s-slider-block-reveal, 0%) * 2);
+}
+
 .s-slider[lnf^='default'] {
     --s-slider-space: 20px;
 
     position: relative;
 
-    &[mounted] {
+    &[status='mounted'] {
         display: block;
     }
 
@@ -50,12 +56,6 @@
                 user-select: none;
                 width: 100%;
                 height: 100%;
-
-                > .s-slider__slide {
-                    flex-shrink: 0;
-                    width: calc(100% - var(--s-slider-inline-reveal, 0%) * 2);
-                    height: calc(100% - var(--s-slider-block-reveal, 0%) * 2);
-                }
             }
         }
 

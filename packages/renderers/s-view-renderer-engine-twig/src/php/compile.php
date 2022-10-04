@@ -33,6 +33,11 @@ $twig->addExtension(new \Twig\Extension\DebugExtension());
 $twig = \Sugar\twig\initTwig($twig, $loader);
 
 try {
+    // $specs = \Sugar\specs\listSpecs(['sugar.views.specs.*']);
+    // foreach ($specs as $spec) {
+    //     print_r($spec['read']());
+    // }
+
     print \Sugar\html\expandPleasantCssClassnames(
         $twig->render(str_replace('.', '/', $viewName) . '.twig', (array) $data)
     );

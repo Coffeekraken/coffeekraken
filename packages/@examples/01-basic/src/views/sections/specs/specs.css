@@ -1,13 +1,42 @@
 .section-specs {
-  background: sugar.color(base, background, --darken 10%);
+  background: sugar.color(base, surface, --darken 10%);
+  background: linear-gradient(
+    sugar.color(base, surface, --darken 10%),
+    sugar.color(base, surface, --alpha 0)
+  );
   @sugar.border.radius();
 
   .__spec {
     padding-block: sugar.padding(70);
     padding-inline: sugar.padding(50);
     background: sugar.color(base, surface);
+    background: linear-gradient(
+      -45deg,
+      sugar.color(base, surface, --alpha 0),
+      sugar.color(base, surface)
+    );
     @sugar.border.radius();
     @sugar.depth (100);
+
+    &:before,
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      background: sugar.color(accent);
+    }
+    &:before {
+      width: 100px;
+      height: 2px;
+      bottom: -2px;
+      right: -2px;
+    }
+    &:after {
+      width: 2px;
+      height: 100px;
+      bottom: 0px;
+      right: -2px;
+    }
 
     &:nth-child(1) {
       position: relative;

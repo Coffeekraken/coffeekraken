@@ -58,6 +58,85 @@ class SSpecs
     }
 
     /**
+     * @name            list
+     * @type            Function
+     * @platform        php
+     * @status          beta
+     *
+     * This method allows you to list all the available spec files inside a particular namespace(s), or simply all.
+     *
+     * @param       {String}        $namespaces         An array of namespaces to list the specs from. If not set, list all the specs from all the namespaces
+     * @return      {Any}                               A list of all the specs files available
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    public function list($namespaces = [])
+    {
+        $results = [];
+        $namespacesFolders = [];
+        $definedNamespaces = $this->settings->namespaces;
+        $definedNamespacesKeys = array_keys((array) $definedNamespaces);
+
+        $finalNamespaces = [];
+
+        if (!count($namespaces)) {
+            $finalNamespaces = $definedNamespacesKeys;
+        } else {
+            foreach ($definedNamespacesKeys as $definedNamespace) {
+                foreach ($namespaces as $passedNamespace) {
+                    if (str_starts_with($passedNamespace, $definedNamespace)) {
+                        if (!in_array($definedNamespace, $finalNamespaces)) {
+                            array_push($finalNamespaces, $definedNamespace);
+                        }
+                    }
+                }
+            }
+        }
+
+        foreach ($finalNamespaces as $namespace) {
+            $folders = $definedNamespaces[$namespace];
+
+            foreach ($folders as $folder) {
+                $specFiles = glob($folder . '/**/*.spec.json');
+
+                foreach ($specFiles as $specFilePath) {
+                    $filename = basename($specFilePath);
+                    $name = str_replace('.spec.json', '', $filename);
+                    $dotpath =
+                        $namespace .
+                        implode(
+                            '.',
+                            explode(
+                                '/',
+                                str_replace(
+                                    $folder,
+                                    '',
+                                    str_replace('.spec.json', '', $specFilePath)
+                                )
+                            )
+                        );
+
+                    $that = $this;
+                    array_push($results, [
+                        'name' => $name,
+                        'filename' => $filename,
+                        'dotpath' => $dotpath,
+                        'namespace' => $namespace,
+                        'path' => $specFilePath,
+                        'dir' => dirname($specFilePath),
+                        'read' => function () use ($that, $dotpath) {
+                            return $that->read($dotpath);
+                        },
+                    ]);
+                }
+            }
+        }
+
+        return $results;
+    }
+
+    /**
      * @name            read
      * @type            Function
      * @platform        php
@@ -76,10 +155,10 @@ class SSpecs
         $finalValue;
 
         $definedNamespaces = $this->settings->namespaces;
-        $definesNamespacesKeys = array_keys((array) $definedNamespaces);
+        $definedNamespacesKeys = array_keys((array) $definedNamespaces);
 
         $currentNamespace = '';
-        foreach ($definesNamespacesKeys as $namespace) {
+        foreach ($definedNamespacesKeys as $namespace) {
             if (str_starts_with($specDotPath, $namespace)) {
                 $currentNamespace = $namespace;
                 break;
@@ -91,7 +170,7 @@ class SSpecs
                 '[SSpecs.read] The passed dotpath ' .
                     $specDotPath .
                     '" does not correspond to any registered namespaces which are:' .
-                    implode("\n- ", $definesNamespacesKeys)
+                    implode("\n- ", $definedNamespacesKeys)
             );
         }
 

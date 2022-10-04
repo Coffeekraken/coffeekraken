@@ -73,10 +73,6 @@ function buildMediaQuery($media, $params = null)
         ],
     ];
 
-    // if (isset($params)) {
-    //     var_dump($params);
-    // }
-
     $finalParams = (object) $params;
     $finalParams = (object) \Sugar\convert\objectToArray($finalParams);
 
@@ -131,10 +127,10 @@ function buildMediaQuery($media, $params = null)
         }
 
         $queryList = [];
-        foreach (array_keys((array) $mediaQueryConfig) as $prop) {
+        foreach (array_keys($mediaQueryConfig) as $prop) {
             $value = $mediaQueryConfig[$prop];
 
-            if (!$value) {
+            if ($value == null) {
                 continue;
             }
 

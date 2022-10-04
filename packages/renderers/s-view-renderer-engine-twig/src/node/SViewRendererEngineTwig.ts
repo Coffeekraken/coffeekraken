@@ -42,12 +42,6 @@ export default class SViewRendererEngineTwig {
     ) {
         return new __SPromise(
             async ({ resolve, reject, emit }) => {
-                if (!__fs.existsSync(viewPath)) {
-                    return reject(
-                        `It seems that the view you passed "<cyan>${viewPath}</cyan>" does not exists...`,
-                    );
-                }
-
                 if (!__fs.existsSync(viewRendererSettings.cacheDir)) {
                     __fs.mkdirSync(viewRendererSettings.cacheDir, {
                         recursive: true,
@@ -58,11 +52,6 @@ export default class SViewRendererEngineTwig {
                 __unique([...viewRendererSettings.rootDirs]).forEach((path) => {
                     viewDotPath = viewDotPath.replace(`${path}/`, '');
                 });
-
-                viewDotPath = viewDotPath
-                    .split('/')
-                    .join('.')
-                    .replace('.blade.php', '');
 
                 // pass the shared data file path through the data
                 data._sharedDataFilePath = sharedDataFilePath;
@@ -82,11 +71,6 @@ export default class SViewRendererEngineTwig {
                         paramsThroughFile: true,
                     },
                 );
-
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: 'ehheineij',
-                });
 
                 resPro.catch((e) => {
                     // @TODO            make the 'log' event displayed on the terminal

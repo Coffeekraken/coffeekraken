@@ -3,22 +3,25 @@
 {% if not id  %}
     {% set finalId = 's-layout-' ~ uniqid() %}
 {% endif %}
-
 <style>
-{% set defaultCss = layoutCss(layout.default, {
-    selector: '#' ~ id    
-}) %}
-{{ defaultCss|raw }}
-{% for media, layout in layout %}
-    {% if media != 'default' %}
-        {{ layoutCss(layout, {
-            selector: '#' ~ id,
-            media: media,
-            mediaSettings: frontspec.mediaSettings
-        }) }}
-    {% endif %}
+
+{% for media, lay in layout|toArray %}
+    {{ layoutCss(lay, {
+        selector: '#' ~ finalId ~ '-layout',
+        media: media,
+        mediaSettings: frontspec.media
+    })|raw }}
 {% endfor %}
 </style>
-<div id="{{ finalId }}" {{ attrs(attributes)|raw }}>
-    {{ content|raw }}
+
+<div id="{{ finalId }}" class="{{ attributes.class }}" {{ attrs(attributes, ['class'])|raw }}>
+    {% if container %}
+        <div class="s-container:{{ container }}">
+    {% endif %}
+    <div class="s-layout" id="{{ finalId }}-layout">
+        {{ content|raw }}
+    </div>
+    {% if container %}
+    </div>
+    {% endif %}
 </div>

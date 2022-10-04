@@ -114,7 +114,6 @@ export default function ({
     }
 
     if (finalParams.scope.includes('lnf')) {
-        console.log('LNF');
     }
 
     // lnf
@@ -144,10 +143,12 @@ export default function ({
                     > .s-menu__item {
                         padding: sugar.padding(ui.menu.paddingBlock) sugar.padding(ui.menu.paddingInline);
                         border-radius: sugar.border.radius(ui.menu.borderRadius);
+                        @sugar.transition(fast);
 
                         &:hover,
                         &:active {
-                            background: sugar.color(base, background, --darken 3%);
+                            background: sugar.color(accent);
+                            color: sugar.color(accent, foreground);
                         }
 
                         > .s-menu__children {

@@ -292,6 +292,7 @@ export default class S extends HTMLElement {
     this.state = {
       status: "idle",
       id: null,
+      currentSlideId: null,
       component: null,
       slideElements: [],
       slidesIds: [],
@@ -419,9 +420,7 @@ export default class S extends HTMLElement {
       
           <template data-el="show-s">
             <div class="s-slider__nav">
-              <template data-el="for-s">
-                <div class="s-slider__nav-item active"></div>
-              </template>
+              <template data-el="for-s"><div data-el="div-s-6"></div></template>
             </div>
           </template>
       
@@ -529,6 +528,10 @@ export default class S extends HTMLElement {
     this._root.querySelectorAll("[data-el='for-s']").forEach((el) => {
       let array = this.state.slideElements;
       this.renderLoop(el, array, "child", "idx");
+    });
+
+    this._root.querySelectorAll("[data-el='div-s-6']").forEach((el) => {
+      el.className = `s-slider__nav-item ${true ? "active" : ""}`;
     });
   }
 

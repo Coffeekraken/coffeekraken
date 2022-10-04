@@ -14,7 +14,8 @@ export default function (api) {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get rootDirs() {
-            return [`${api.config.storage.src.rootDir}/views`];
+            const dirs = [`${api.config.storage.src.rootDir}/views`];
+            return dirs;
         },
 
         /**
@@ -31,6 +32,19 @@ export default function (api) {
         get cacheDir() {
             return `${api.config.storage.package.cacheDir}/views`;
         },
+
+        /**
+         * @name          defaultEngine
+         * @namespace     config.viewRenderer
+         * @type          String
+         * @default       twig
+         *
+         * Store which engine to use when no any is specified at the dotpath start like "twig://...", "blade://...", etc...
+         *
+         * @since       2.0.0
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        defaultEngine: 'twig',
 
         /**
          * @name          engines

@@ -45,11 +45,17 @@ function layoutCss($layout, $settings = [])
             'justify' => 'stretch',
             'media' => null,
             'mediaSettings' => [],
-            'minify' => true,
+            'minify' => false,
             'scope' => ['bare', 'lnf', 'gap', 'align', 'justify'],
         ],
         (array) $settings
     );
+
+    // make sure that if we pass the media as "default"
+    // it is setted to desktop
+    if ($finalParams->media === 'default') {
+        $finalParams->media = 'desktop';
+    }
 
     $areas = [];
 

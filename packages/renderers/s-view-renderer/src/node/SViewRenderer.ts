@@ -2,7 +2,6 @@ import __SClass from '@coffeekraken/s-class';
 import type { ISDurationObject } from '@coffeekraken/s-duration';
 import __SDuration from '@coffeekraken/s-duration';
 import type { ISFileObject } from '@coffeekraken/s-file';
-import __SFile from '@coffeekraken/s-file';
 // import __page404 from './pages/404';
 import type { ISPromise } from '@coffeekraken/s-promise';
 import __SPromise from '@coffeekraken/s-promise';
@@ -54,6 +53,7 @@ import __SViewRendererSettingsInterface from './interface/SViewRendererSettingsI
 export interface ISViewRendererSettings {
     rootDirs: string[];
     cacheDir: string;
+    defaultEngine: 'twig' | 'blade';
     enginesSettings?: any;
     sharedData?: any;
     sharedDataFiles?: string[];
@@ -246,66 +246,6 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
     }
 
     /**
-     * @name					getViewMetas
-     * @type 					Function
-     * @static
-     *
-     * This static method allows you to give a "potential" view path (with or without the extension) and get
-     * back an object that describe the view with infos like "type", "path", "extension", etc...
-     * If nothing is found, you will get ```false``` back.
-     *
-     * @param       {String}      viewPath        The view path to check. Either a relative path to the @config.frontend.viewsDir configuration, or an absolute path
-     * @return      {Object|Boolean}              Return an object describing the view or ```false``` if not found
-     *
-     * @since
-     * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static getViewMetas(viewPath: string): ISViewViewMetas | undefined {
-        const viewsDirs = __SSugarConfig.get('viewRenderer.rootDirs');
-
-        for (let i = 0; i < viewsDirs.length; i++) {
-            const viewsDir = viewsDirs[i];
-
-            let path = `${viewsDir}/${viewPath}`;
-            if (__path.isAbsolute(viewPath)) {
-                path = viewPath;
-            }
-
-            let finalViewPath, viewType;
-
-            if (__fs.existsSync(path)) {
-                finalViewPath = path;
-                const fileName = path.split('/').slice(-1).join('');
-                viewType = fileName.split('.').slice(1).join('.');
-            } else {
-                for (
-                    let i = 0;
-                    i < Object.keys(SViewRenderer.engines).length;
-                    i++
-                ) {
-                    const engineExt = Object.keys(SViewRenderer.engines)[i];
-                    if (__fs.existsSync(`${path}.${engineExt}`)) {
-                        finalViewPath = `${path}.${engineExt}`;
-                        viewType = engineExt;
-                        break;
-                    }
-                }
-            }
-
-            // check if we have a view founded
-            if (!finalViewPath) continue;
-
-            // build the info object
-            const infoObj = __SFile.new(finalViewPath);
-
-            // return the infos
-            return infoObj.toObject();
-        }
-
-        return undefined;
-    }
-
-    /**
      * @name        _sharedDataFilePath
      * @type        String
      * @private
@@ -384,16 +324,30 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
         this._loaded = true;
     }
 
-    _getRendererEngineClassForView(viewPath: string): any {
+    /**
+     * Try to get the render engine class from the finalViewPath.
+     */
+    _getRendererEngineClassFromFinalViewPath(finalViewPath: string): any {
         // try to get an engine for this view
         for (let i = 0; i < Object.keys(SViewRenderer.engines).length; i++) {
             const engineExt = Object.keys(SViewRenderer.engines)[i];
-
             const reg = new RegExp(`${engineExt}$`);
-            if (reg.test(viewPath)) {
+            if (reg.test(finalViewPath)) {
                 // this._viewExt = engineExt;
                 return SViewRenderer.engines[engineExt];
                 break;
+            }
+        }
+    }
+
+    /**
+     * Get the render engine class from the engine id
+     */
+    _getRendererEngineClassFromEngineId(engineId: string): any {
+        // try to get an engine for this view
+        for (let [ext, EngineClass] of Object.entries(SViewRenderer.engines)) {
+            if (EngineClass.id === engineId) {
+                return EngineClass;
             }
         }
     }
@@ -561,17 +515,42 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
             // load shared data
             await this._loadSharedData();
 
-            // get the final view path
-            const finalViewPath = this._getFinalViewPath(viewDotPath);
-            if (!finalViewPath) {
-                throw new Error(
-                    `<red>[render]</red> The passed viewDotPath "${viewDotPath}" does not exists...`,
-                );
+            // get the final settings
+            const viewRendererSettings = Object.assign(
+                {},
+                <ISViewRendererSettings>(
+                    __deepMerge(this.settings, settings || {})
+                ),
+            );
+
+            let RendererEngineClass,
+                engine = viewRendererSettings.defaultEngine;
+
+            if (viewDotPath.match(/^[a-z]+\:\/\//)) {
+                const parts = viewDotPath.split('://');
+                // @ts-ignore
+                engine = parts[0];
+                viewDotPath = parts[1];
             }
 
+            // try to get the final view path
+            const finalViewPath = this._getFinalViewPath(viewDotPath);
+
             // get the view renderer engine class for the passed view
-            const RendererEngineClass =
-                this._getRendererEngineClassForView(finalViewPath);
+            // try to get the engine class from the final view part
+            if (finalViewPath && !RendererEngineClass) {
+                RendererEngineClass =
+                    this._getRendererEngineClassFromFinalViewPath(
+                        finalViewPath,
+                    );
+            }
+
+            // if we don't have any RenderClass yet, get it from the passed engine of the default engine
+            if (!RendererEngineClass) {
+                RendererEngineClass =
+                    this._getRendererEngineClassFromEngineId(engine);
+            }
+
             if (!RendererEngineClass) {
                 throw new Error(
                     `<red>[render]</red> No engine is registered for your dotPath "${viewDotPath}"...`,
@@ -579,15 +558,11 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
             }
 
             // data file class and path
-            const dataFileClassAndPath =
-                this._getDataFileClassForView(finalViewPath);
-
-            const viewRendererSettings = Object.assign(
-                {},
-                <ISViewRendererSettings>(
-                    __deepMerge(this.settings, settings || {})
-                ),
-            );
+            let dataFileClassAndPath;
+            if (finalViewPath) {
+                dataFileClassAndPath =
+                    this._getDataFileClassForView(finalViewPath);
+            }
 
             const duration = new __SDuration();
 
@@ -610,7 +585,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
             let renderPromise, result, error;
 
             renderPromise = rendererInstance.render(
-                finalViewPath,
+                viewDotPath,
                 Object.assign({}, data),
                 this._sharedDataFilePath,
                 viewRendererSettings,
@@ -621,7 +596,6 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
             // resolve the render process
             const resObj: Partial<ISViewRendererRenderResult> = {
                 // engine: this._engineInstance.engineMetas,
-                view: SViewRenderer.getViewMetas(finalViewPath),
                 ...duration.end(),
                 value: result.value,
                 error: result.error,

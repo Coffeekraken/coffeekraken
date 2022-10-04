@@ -26,6 +26,7 @@
 
   let status = "idle";
   let id = null;
+  let currentSlideId = null;
   let component = null;
   let slideElements = [];
   let slidesIds = [];
@@ -58,7 +59,7 @@
     {#if slideElements.length}
       <div class="s-slider__nav">
         {#each slideElements as child, idx}
-          <div class="s-slider__nav-item active" />
+          <div class={`s-slider__nav-item ${true ? "active" : ""}`} />
         {/each}
       </div>
     {/if}

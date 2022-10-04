@@ -288,7 +288,9 @@ const DEFAULT_PROPS = __SSliderComponentInterface.defaults();
         <ng-container *ngIf="slideElements.length">
           <div class="s-slider__nav">
             <ng-container *ngFor="let child of slideElements; let idx = index">
-              <div class="s-slider__nav-item active"></div>
+              <div
+                [class]="\`s-slider__nav-item \${true ? 'active' : ''}\`"
+              ></div>
             </ng-container>
           </div>
         </ng-container>
@@ -315,6 +317,7 @@ export default class S {
 
   status = "idle";
   id = null;
+  currentSlideId = null;
   component = null;
   slideElements = [];
   slidesIds = [];

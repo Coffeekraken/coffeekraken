@@ -9,6 +9,7 @@ const DEFAULT_PROPS = __SSliderComponentInterface.defaults();
 function S(props) {
   const [status, setStatus] = createSignal("idle");
   const [id, setId] = createSignal(null);
+  const [currentSlideId, setCurrentSlideId] = createSignal(null);
   const [component, setComponent] = createSignal(null);
   const [slideElements, setSlideElements] = createSignal([]);
   const [slidesIds, setSlidesIds] = createSignal([]);
@@ -45,7 +46,7 @@ function S(props) {
               {(child, _index) => {
               const idx = _index();
 
-              return <div class="s-slider__nav-item active"></div>;
+              return <div class={`s-slider__nav-item ${true ? "active" : ""}`}></div>;
             }}
             </For>
           </div>

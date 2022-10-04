@@ -1,0 +1,31 @@
+.section-specs {
+  background: sugar.color(base, surface, --darken 10%);
+  background: linear-gradient(
+    sugar.color(base, surface, --darken 10%),
+    sugar.color(base, surface, --alpha 0)
+  );
+  margin-block-start: 100px;
+  margin-block-end: 100px;
+
+  .card {
+    margin-block-end: -100px;
+  }
+
+  .s-layout {
+    & > *:nth-child(1) .card {
+      position: relative;
+      top: -100px;
+      left: -50px;
+    }
+    & > *:nth-child(2) .card {
+      position: relative;
+      top: 100px;
+      left: 0;
+    }
+    & > *:nth-child(3) .card {
+      position: relative;
+      top: -30px;
+      left: 50px;
+    }
+  }
+}

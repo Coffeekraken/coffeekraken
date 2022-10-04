@@ -21,7 +21,13 @@
       <template v-if="slideElements.length">
         <div class="s-slider__nav">
           <template :key="index" v-for="(child, index) in slideElements">
-            <div class="s-slider__nav-item active"></div>
+            <div
+              :class="
+                _classStringToObject(
+                  `s-slider__nav-item ${true ? 'active' : ''}`
+                )
+              "
+            ></div>
           </template>
         </div>
       </template>
@@ -53,6 +59,7 @@ export default {
   data: () => ({
     status: "idle",
     id: null,
+    currentSlideId: null,
     component: null,
     slideElements: [],
     slidesIds: [],

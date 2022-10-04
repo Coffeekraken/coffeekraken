@@ -34,6 +34,13 @@ export default class SViewRendererSettingsInterface extends __SInterface {
                 type: 'String',
                 default: __SSugarConfig.get('viewRenderer.cacheDir'),
             },
+            defaultEngine: {
+                description:
+                    'Specify the default engine to use when not any is specified at the dotpath start like "twig://...", etc...',
+                type: 'String',
+                values: ['twig', 'blade'],
+                default: __SSugarConfig.get('viewRenderer.defaultEngine'),
+            },
             enginesSettings: {
                 description:
                     'Specify some engines settings. Object must contain each engine settings under his own property. For blade, the property name is "blade"',

@@ -303,6 +303,12 @@
                 "import": "./dist/pkg/esm/node/monorepo/_exports.js"
             }
         },
+        "./npm": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/npm/_exports.js",
+                "import": "./dist/pkg/esm/node/npm/_exports.js"
+            }
+        },
         "./network": {
             "node": {
                 "require": "./dist/pkg/cjs/node/network/_exports.js",

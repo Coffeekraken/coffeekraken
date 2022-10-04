@@ -10,6 +10,7 @@ function S(props) {
   const $container = useRef(null);
   const [status, setStatus] = useState(() => "idle");
   const [id, setId] = useState(() => null);
+  const [currentSlideId, setCurrentSlideId] = useState(() => null);
   const [component, setComponent] = useState(() => null);
   const [slideElements, setSlideElements] = useState(() => []);
   const [slidesIds, setSlidesIds] = useState(() => []);
@@ -46,7 +47,7 @@ function S(props) {
   }, props.children)), slideElements.length ? /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", {
     className: "s-slider__nav"
   }, slideElements == null ? void 0 : slideElements.map((child, idx) => /* @__PURE__ */ React.createElement("div", {
-    className: "s-slider__nav-item active"
+    className: `s-slider__nav-item ${true ? "active" : ""}`
   })))) : null, /* @__PURE__ */ React.createElement("div", {
     className: "s-slider__controls"
   }, /* @__PURE__ */ React.createElement("div", {

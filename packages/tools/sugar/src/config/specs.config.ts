@@ -1,4 +1,4 @@
-import { __dirname } from '@coffeekraken/sugar/fs';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __path from 'path';
 
 export default function (api) {
@@ -6,17 +6,22 @@ export default function (api) {
 
     return {
         namespaces: {
-            'sugar.views': [
-                __path.resolve(__dirname(), '../../../../src/views/_specs'),
-            ],
+            'sugar.views': [`./node_modules/@coffeekraken/sugar/src/views`],
             'sugar.blade': [
-                __path.resolve(
-                    __dirname(),
-                    '../../../../src/views/blade/@sugar',
-                ),
+                `./node_modules/@coffeekraken/sugar/src/views/blade/@sugar`,
             ],
-            'sugar.twig': [
-                __path.resolve(__dirname(), '../../../../src/views/twig'),
+            'sugar.twig': [`./node_modules/@coffeekraken/sugar/src/views/twig`],
+            sections: [
+                `./${__path.relative(
+                    __packageRootDir(),
+                    api.config.storage.src.viewsDir,
+                )}/sections`,
+            ],
+            components: [
+                `./${__path.relative(
+                    __packageRootDir(),
+                    api.config.storage.src.viewsDir,
+                )}/components`,
             ],
         },
     };

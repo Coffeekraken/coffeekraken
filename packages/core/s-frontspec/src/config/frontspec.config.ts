@@ -37,6 +37,30 @@ export default function (api) {
                         return api.theme.media;
                     },
                 },
+                views: {
+                    type: 'config',
+                    config: 'views',
+                },
+                specs: {
+                    type: 'config',
+                    config: 'specs',
+                    // get value() {
+                    //     const specsConfig = Object.assign({}, api.config.specs);
+                    //     for (let [namespace, paths] of Object.entries(
+                    //         specsConfig.namespaces,
+                    //     )) {
+                    //         specsConfig.namespaces[namespace] = paths.map(
+                    //             (path) => {
+                    //                 return __path.relative(
+                    //                     __packageRootDir(),
+                    //                     path,
+                    //                 );
+                    //             },
+                    //         );
+                    //     }
+                    //     return specsConfig;
+                    // },
+                },
                 google: {
                     type: 'config',
                     config: 'google',

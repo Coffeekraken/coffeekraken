@@ -1,20 +1,20 @@
 {
     "metas": {
         "lang": "en",
-        "title": "Coffeekraken",
-        "homepage": "https://coffeekraken.io",
-        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "title": "01-basic",
+        "homepage": "",
+        "description": "",
         "themeColor": "#ffbb00",
         "author": {
-            "name": "Olivier Bossel",
-            "email": "olivier.bossel@gmail.com",
-            "url": "https://coffeekraken.io"
+            "name": "",
+            "email": "",
+            "url": ""
         },
         "og": {
-            "title": "Coffeekraken",
-            "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+            "title": "01-basic",
+            "description": "",
             "type": "website",
-            "url": "https://coffeekraken.io",
+            "url": "",
             "image": "https://cdnv2.coffeekraken.io/coffeekraken-og.png"
         }
     },
@@ -69,9 +69,38 @@
             }
         }
     },
-    "google": {
-        "ga": "UA-91271113-1"
+    "views": {
+        "rootFolders": {
+            "twig": [
+                "./src/views",
+                "./node_modules/@coffeekraken/sugar/src/views/twig"
+            ],
+            "blade": [
+                "./src/views",
+                "./node_modules/@coffeekraken/sugar/src/views/blade"
+            ]
+        }
     },
+    "specs": {
+        "namespaces": {
+            "sugar.views": [
+                "./node_modules/@coffeekraken/sugar/src/views"
+            ],
+            "sugar.blade": [
+                "./node_modules/@coffeekraken/sugar/src/views/blade/@sugar"
+            ],
+            "sugar.twig": [
+                "./node_modules/@coffeekraken/sugar/src/views/twig"
+            ],
+            "sections": [
+                "./src/views/sections"
+            ],
+            "components": [
+                "./src/views/components"
+            ]
+        }
+    },
+    "google": {},
     "margin": {
         "0": 0,
         "10": 0.375,
@@ -237,7 +266,7 @@
     },
     "layout": {
         "offset": {
-            "top": 100,
+            "top": 0,
             "right": 0,
             "bottom": 0,
             "left": 0

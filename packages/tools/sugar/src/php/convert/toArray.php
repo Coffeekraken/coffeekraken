@@ -3,7 +3,7 @@
 namespace Sugar\convert;
 
 /**
- * @name            objectToArray
+ * @name            toArray
  * @namespace            php.convert
  * @type            Function
  * @platform        php
@@ -15,7 +15,7 @@ namespace Sugar\convert;
  * @return      {Array}                         The resulting associative array
  *
  * @example         php
- * \Sugar\convert\objectToArray((object) [
+ * \Sugar\convert\toArray((object) [
  *    'prop1' => 'Hello',
  *    'prop2' => 'World'
  * ]);
@@ -23,14 +23,14 @@ namespace Sugar\convert;
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function objectToArray($obj)
+function toArray($obj)
 {
     //only process if it's an object or array being passed to the function
     if (is_object($obj) || is_array($obj)) {
         $ret = (array) $obj;
         foreach ($ret as &$item) {
             //recursively process EACH element regardless of type
-            $item = objectToArray($item);
+            $item = toArray($item);
         }
         return $ret;
     }

@@ -4,15 +4,25 @@ export default {
   views: [
     'sections.heading.heading',
     {
-      path: '@sugar.bare.layout.layout',
+      path: 'sugar.bare.layout.layout',
       async data({ res, viewRenderer }) {
+        const imgPath = '/dist/img/slider/slide-0%i.jpg';
+
         const cardData = {
+          image: {
+            url: imgPath,
+            alt: '',
+            title: '',
+          },
+          attributes: {
+            class: 'card',
+          },
           title: 'Supercharged!',
           intro: 'Up to 18 hours of battery life.',
-          description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra libero tincidunt arcu dignissim rhoncus. Vivamus a ipsum eget mauris.',
+          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra libero tincidunt arcu dignissim rhoncus. Vivamus a ipsum eget mauris.',
           cta: {
             label: 'Discover more...',
+            color: 'accent',
             link: {
               url: 'https://apple.com',
               target: '_blank',
@@ -24,8 +34,9 @@ export default {
         const cardsHtml: string[] = [];
 
         for (let i = 0; i < 3; i++) {
+          cardData.image.url = imgPath.replace('%i', i + 1);
           const result = await viewRenderer.render(
-            'components.card.card',
+            'sugar.components.card.card',
             cardData
           );
           cardsHtml.push(`<div>

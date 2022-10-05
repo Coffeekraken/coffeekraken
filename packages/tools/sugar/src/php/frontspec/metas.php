@@ -23,6 +23,8 @@ namespace Sugar\frontspec;
  */
 function metas($frontspec, $env = 'development')
 {
+    $frontspec = \Sugar\convert\toObject($frontspec);
+
     $metas = [];
     if (isset($frontspec->metas)) {
         $metas = $frontspec->metas;

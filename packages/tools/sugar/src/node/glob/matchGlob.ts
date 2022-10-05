@@ -1,11 +1,10 @@
-import __isGlob from '../../shared/is/glob';
-import __fs from 'fs';
-import __toRegex from 'to-regex';
-import __minimatch from 'minimatch';
-import __deepMerge from '../../shared/object/deepMerge';
 import { __isDirectory } from '@coffeekraken/sugar/is';
-import __expandGlob from '../../shared/glob/expandGlob';
+import __fs from 'fs';
+import __minimatch from 'minimatch';
 import __path from 'path';
+import __toRegex from 'to-regex';
+import __expandGlob from '../../shared/glob/expandGlob';
+import __deepMerge from '../../shared/object/deepMerge';
 
 /**
  * @name            matchGlob
@@ -53,7 +52,7 @@ export default function __matchGlob(
 
     if (Array.isArray(glob)) {
         for (let i = 0; i < glob.length; i++) {
-            if (matchGlob(input, glob[i], settings)) return true;
+            if (__matchGlob(input, glob[i], settings)) return true;
         }
         return false;
     }

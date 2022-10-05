@@ -239,12 +239,12 @@ class SSpecs
         });
 
         // make sure we have an object
-        $specJson = \Sugar\convert\arrayToObject($specJson);
+        $specJson = \Sugar\convert\toObject($specJson);
 
         // check if the spec extends another
         if (isset($specJson->extends)) {
             $extendsJson = $this->read($specJson->extends);
-            $extendsJson = \Sugar\convert\arrayToObject($extendsJson);
+            $extendsJson = \Sugar\convert\toObject($extendsJson);
             $specJson = \Sugar\object\deepMerge($extendsJson, $specJson);
             unset($specJson->extends);
         }

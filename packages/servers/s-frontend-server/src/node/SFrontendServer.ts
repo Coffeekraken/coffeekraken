@@ -5,6 +5,7 @@ import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __wait } from '@coffeekraken/sugar/datetime';
 import { __isPortFree } from '@coffeekraken/sugar/network';
+import { __uniqid } from '@coffeekraken/sugar/string';
 import __compression from 'compression';
 import __express from 'express';
 import __fs from 'fs';
@@ -14,8 +15,8 @@ import __SFrontendServerCorsProxyParamsInterface from './interface/SFrontendServ
 import __SFrontendServerStartParamsInterface from './interface/SFrontendServerStartParamsInterface';
 // import __vhost from 'vhost';
 import __SDuration from '@coffeekraken/s-duration';
-import __SGlob from '@coffeekraken/s-glob';
 import __STypescriptBuilder from '@coffeekraken/s-typescript-builder';
+import { __pool } from '@coffeekraken/sugar/fs';
 import { __onProcessExit } from '@coffeekraken/sugar/process';
 import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
 import __runMiddleware from 'run-middleware';
@@ -514,11 +515,21 @@ export default class SFrontendServer extends __SClass {
         return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
             const pagesFolder = __SSugarConfig.get('storage.src.pagesDir');
 
-            let pagesFiles = __SGlob.resolve(`**/*.{ts,js}`, {
+            const pagesFilesPaths: string[] = [];
+            let _404PageFile;
+
+            const pool = __pool(`${pagesFolder}/**/*.{ts,js}`, {
                 cwd: pagesFolder,
+                watch: true,
             });
-            const pagesFilesPaths = pagesFiles.map((f) => f.path);
-            pagesFiles = pagesFiles.filter((file) => {
+            pool.on('unlink', (file) => {
+                if (!pagesFilesPaths.includes(file.path)) {
+                    return;
+                }
+                pagesFilesPaths.splice(pagesFilesPaths.indexOf(file.path), 1);
+            });
+            pool.on('add,change', async (file) => {
+                // protect bad files names
                 if (file.name.split('.').length > 2) return false;
 
                 // remove js files if the .ts equivalent exists
@@ -528,28 +539,27 @@ export default class SFrontendServer extends __SClass {
                         `${file.path.replace(/\.js$/, '.ts')}`,
                     )
                 ) {
-                    return false;
+                    return;
                 }
 
-                return true;
-            });
+                // add the file in the stack
+                pagesFilesPaths.push(file.path);
 
-            let _404PageFile;
+                console.log('file', file.path);
 
-            for (let [index, pageFile] of pagesFiles.entries()) {
                 // handle 404 at the end
-                if (pageFile.nameWithoutExt === '404') {
-                    _404PageFile = pageFile;
-                    continue;
+                if (file.nameWithoutExt === '404') {
+                    _404PageFile = file;
+                    return;
                 }
 
                 // build final path. If is a typescript,
                 // it will be transpiled and override the default
-                let finalPagePath = pageFile.path,
+                let finalPagePath = file.path,
                     buildedFileRes;
 
                 // compile typescript if needed
-                if (pageFile.extension === 'ts') {
+                if (file.extension === 'ts') {
                     buildedFileRes = await __STypescriptBuilder.buildTemporary(
                         finalPagePath,
                     );
@@ -557,10 +567,16 @@ export default class SFrontendServer extends __SClass {
                 }
 
                 // @ts-ignore
-                const { default: pageConfig } = await import(finalPagePath);
-                await pipe(this._registerPageConfig(pageConfig, pageFile));
-            }
+                const { default: pageConfig } = await import(
+                    `${finalPagePath}?${__uniqid()}`
+                );
+                await pipe(this._registerPageConfig(pageConfig, file));
+            });
 
+            // wait until our pool is ready
+            await pool.ready;
+
+            // handle 404 page
             if (_404PageFile) {
                 let _404BuildedFileRes,
                     final404PagePath = _404PageFile.path;
@@ -579,6 +595,7 @@ export default class SFrontendServer extends __SClass {
                 await pipe(this._registerPageConfig(pageConfig, _404PageFile));
             }
 
+            // end of the pages registration
             resolve();
         });
     }
@@ -587,6 +604,10 @@ export default class SFrontendServer extends __SClass {
      * This method register the passed pageConfig config object that can be specified
      * either in the "pages" folder or in the "frontendServer.pages" configuration.
      */
+    _pagesConfigsBySlug = {};
+    _getPageConfigBySlug(slug) {
+        return this._pagesConfigsBySlug[slug];
+    }
     _registerPageConfig(
         pageConfig: ISFrontendServerPageConfig,
         pageFile?: any,
@@ -594,18 +615,26 @@ export default class SFrontendServer extends __SClass {
     ): Promise<void> {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
-                let handlerFn,
-                    slug = '',
+                let slug = '',
                     slugs: string[] = pageConfig.slugs ?? [];
 
                 // generate path
-                if (pageFile && !pageConfig.slugs) {
+                if (
+                    pageFile &&
+                    !pageConfig.slugs &&
+                    pageFile.nameWithoutExt !== 'index'
+                ) {
                     slug = `/${pageFile.relPath
                         .split('/')
                         .slice(0, -1)
                         .join('/')
                         .replace(/\.(t|j)s$/, '')
                         .replace(/\./g, '/')}`;
+                } else if (
+                    !pageConfig.slugs &&
+                    pageFile.nameWithoutExt === 'index'
+                ) {
+                    slug = '/';
                 }
 
                 if (!pageConfig.slugs) {
@@ -632,11 +661,6 @@ export default class SFrontendServer extends __SClass {
                     slugs = [slug];
                 }
 
-                // handler
-                handlerFn = await this._getHandlerFn(
-                    pageConfig.handler ?? 'generic',
-                );
-
                 slugs.forEach((slug) => {
                     emit('log', {
                         type: __SLog.TYPE_INFO,
@@ -647,33 +671,47 @@ export default class SFrontendServer extends __SClass {
                         }`,
                     });
 
-                    this._express.get(slug, (req, res, next) => {
-                        if (pageConfig.params) {
-                            for (let [key, value] of Object.entries(
-                                req.params,
-                            )) {
-                                // do not process non "number" keys
-                                if (typeof __autoCast(key) !== 'number') {
-                                    continue;
-                                }
-                                const paramKey = Object.keys(pageConfig.params)[
-                                    parseInt(key)
-                                ];
-                                delete req.params[key];
-                                req.params[paramKey] = value;
-                            }
-                        }
+                    // register the route only once by slug
+                    if (!this._getPageConfigBySlug(slug)) {
+                        this._express.get(slug, async (req, res, next) => {
+                            const _pageConfig =
+                                this._getPageConfigBySlug(slug) ?? pageConfig;
 
-                        const handlerPro = handlerFn({
-                            req,
-                            res,
-                            next,
-                            pageConfig,
-                            pageFile,
-                            frontendServerConfig: this._config,
+                            // handler
+                            const handlerFn = await this._getHandlerFn(
+                                _pageConfig.handler ?? 'generic',
+                            );
+
+                            if (_pageConfig.params) {
+                                for (let [key, value] of Object.entries(
+                                    req.params,
+                                )) {
+                                    // do not process non "number" keys
+                                    if (typeof __autoCast(key) !== 'number') {
+                                        continue;
+                                    }
+                                    const paramKey = Object.keys(
+                                        _pageConfig.params,
+                                    )[parseInt(key)];
+                                    delete req.params[key];
+                                    req.params[paramKey] = value;
+                                }
+                            }
+
+                            const handlerPro = handlerFn({
+                                req,
+                                res,
+                                next,
+                                pageConfig: _pageConfig,
+                                pageFile,
+                                frontendServerConfig: this._config,
+                            });
+                            pipe(handlerPro);
                         });
-                        pipe(handlerPro);
-                    });
+                    }
+
+                    // set the new pageConfig for this slug
+                    this._pagesConfigsBySlug[slug] = pageConfig;
                 });
 
                 resolve();

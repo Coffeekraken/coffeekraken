@@ -70,7 +70,7 @@
         }
     },
     "views": {
-        "rootFolders": {
+        "rootDirs": {
             "twig": [
                 "./src/views",
                 "./node_modules/@coffeekraken/sugar/src/views/twig"
@@ -85,12 +85,6 @@
         "namespaces": {
             "sugar.views": [
                 "./node_modules/@coffeekraken/sugar/src/views"
-            ],
-            "sugar.blade": [
-                "./node_modules/@coffeekraken/sugar/src/views/blade/@sugar"
-            ],
-            "sugar.twig": [
-                "./node_modules/@coffeekraken/sugar/src/views/twig"
             ],
             "sections": [
                 "./src/views/sections"

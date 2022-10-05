@@ -3,7 +3,7 @@
 namespace Sugar\convert;
 
 /**
- * @name            arrayToObject
+ * @name            toObject
  * @namespace            php.convert
  * @type            Function
  * @platform        php
@@ -15,7 +15,7 @@ namespace Sugar\convert;
  * @return      {Object}                         The resulting object
  *
  * @example         php
- * \Sugar\convert\arrayToObject([
+ * \Sugar\convert\toObject([
  *    'prop1' => 'Hello',
  *    'prop2' => 'World'
  * ]);
@@ -23,7 +23,7 @@ namespace Sugar\convert;
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function arrayToObject($array)
+function toObject($array)
 {
     $obj = new \stdClass();
 
@@ -34,7 +34,7 @@ function arrayToObject($array)
     foreach ($array as $k => $v) {
         if (strlen($k)) {
             if (is_array($v)) {
-                $obj->{$k} = arrayToObject($v); //RECURSION
+                $obj->{$k} = toObject($v); //RECURSION
             } else {
                 $obj->{$k} = $v;
             }

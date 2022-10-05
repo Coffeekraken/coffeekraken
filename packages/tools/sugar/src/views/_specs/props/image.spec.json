@@ -1,0 +1,22 @@
+{
+    "type": "image",
+    "title": "Image",
+    "description": "A simple image with title and alt properties",
+    "props": {
+        "url": {
+            "type": "String",
+            "description": "The image url",
+            "required": true
+        },
+        "title": {
+            "type": "String",
+            "description": "The image title",
+            "required": true
+        },
+        "alt": {
+            "type": "String",
+            "description": "The image alternative text",
+            "required": true
+        }
+    }
+}

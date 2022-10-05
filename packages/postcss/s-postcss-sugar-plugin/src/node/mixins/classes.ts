@@ -84,6 +84,7 @@ export default async function ({
         '@sugar.opacity.classes;',
         '@sugar.scale.classes;',
         '@sugar.padding.classes;',
+        '@sugar.spacing.classes;',
         '@sugar.userSelect.classes;',
         '@sugar.visibility.classes;',
         '@sugar.visually.classes;',

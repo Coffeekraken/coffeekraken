@@ -5,7 +5,7 @@ export default function ({ env, config }) {
     if (env.platform !== 'node') return;
 
     return {
-        rootFolders: {
+        rootDirs: {
             twig: [
                 `./${__path.relative(
                     __packageRootDir(),

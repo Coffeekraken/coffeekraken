@@ -22,6 +22,8 @@ namespace Sugar\frontspec;
  */
 function og($frontspec)
 {
+    $frontspec = \Sugar\convert\toObject($frontspec);
+
     if (!isset($frontspec->og)) {
         return '';
     }

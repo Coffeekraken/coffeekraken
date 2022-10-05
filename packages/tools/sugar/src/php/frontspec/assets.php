@@ -23,6 +23,8 @@ namespace Sugar\frontspec;
  */
 function assets($frontspec, $cacheBuster = '')
 {
+    $frontspec = \Sugar\convert\toObject($frontspec);
+
     $assets = $frontspec->assets;
     $assetsStr = [];
 

@@ -35,7 +35,7 @@ function initTwig($twig, $loader = null)
     if ($loader and method_exists($loader, 'addPath')) {
         $defaultViewDirs = \Sugar\twig\getDefaultViewDirs();
         foreach ($defaultViewDirs as $path) {
-            $loader->addPath($path, 'sugar');
+            $loader->addPath($path);
         }
     }
 

@@ -32,14 +32,12 @@ $twig->addExtension(new \Twig\Extension\DebugExtension());
 // init twig with Sugar power
 $twig = \Sugar\twig\initTwig($twig, $loader);
 
-try {
-    // $specs = \Sugar\specs\listSpecs(['sugar.views.specs.*']);
-    // foreach ($specs as $spec) {
-    //     print_r($spec['read']());
-    // }
+// ensure we send an array to the renderer
+$data = \Sugar\convert\toArray($data);
 
+try {
     print \Sugar\html\expandPleasantCssClassnames(
-        $twig->render(str_replace('.', '/', $viewName) . '.twig', (array) $data)
+        $twig->render(str_replace('.', '/', $viewName) . '.twig', $data)
     );
 } catch (Exception $e) {
     print $e;

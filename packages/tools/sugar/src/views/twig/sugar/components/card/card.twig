@@ -1,0 +1,31 @@
+<div class="s-card {{ attributes.class }}" {{ attrs(attributes, ['class'])|raw }}>
+
+    {% if image %}
+        <div class="s-card__img-container">
+            <img class="s-card__img s-mbe:{{ spacing ? spacing : '30' }}" src="{{ image.url }}" alt="{{ image.alt }}" title="{{ image.title }}" />
+        </div>
+    {% endif %}
+
+    <div class="s-card__content s-spacing:{{ spacing ? spacing : '30' }}">
+        {% if title %}
+            <h1 class="s-card__title s-typo:h1">{{ title|raw }}</h1>
+        {% endif %}
+        {% if intro %}
+            <p class="s-card__lead s-typo:lead s-tc:{{ color ? color : 'accent' }}">{{ intro|raw }}</p>
+        {% endif %}
+        {% if text %}
+            <p class="s-card__text s-typo:p">{{ text|raw }}</p>
+        {% endif %}
+        {% if cta %}
+            <div class="s-card__cta">
+                {% set override = {} %}
+                {% if color and not cta.color %}
+                    {% set override = {
+                        color: color
+                    } %}
+                {% endif %}
+                {% include 'sugar/components/cta/cta.twig' with cta|merge(override) only %}
+            </div>
+        {% endif %}
+    </div>
+</div>

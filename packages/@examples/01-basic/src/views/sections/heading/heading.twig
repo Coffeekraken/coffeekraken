@@ -8,15 +8,21 @@
     <div class="s-container">
         <div class="s-layout:12">
             <div>
-                <h1 class="s-typo:h1 s-mbe:40">
-                    {{ title|raw }}
-                </h1>
-                <p class="s-typo:p">
-                    {{ description|raw }}
-                </p>
-                <a class="s-btn s-mbs:40 s-color:accent" href="{{ cta.link.url }}" target="{{ cta.link.target }}">
-                    {{ cta.label }}
-                </a>
+                {% if title %}
+                    <h1 class="s-typo:h1 s-mbe:40">
+                        {{ title|raw }}
+                    </h1>
+                {% endif %}
+                {% if text %}
+                    <p class="s-typo:p">
+                        {{ text|raw }}
+                    </p>
+                {% endif %}
+                {% if cta %}
+                    <div class="s-mbs:40">
+                        {% include 'sugar/components/cta/cta.twig' with cta %}
+                    </div>
+                {% endif %}
             </div>
             <div>
                 <img src="{{ image.url }}" title="{{ image.title }}" alt="{{ image.alt }}" />

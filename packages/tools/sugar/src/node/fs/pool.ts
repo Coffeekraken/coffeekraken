@@ -1,11 +1,11 @@
 import __SFile from '@coffeekraken/s-file';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import { __matchGlob } from '@coffeekraken/sugar/glob';
 import __chokidar from 'chokidar';
 import __fs from 'fs';
 import __expandGlob from '../../shared/glob/expandGlob';
 import __deepMerge from '../../shared/object/deepMerge';
-import { __matchGlob } from '@coffeekraken/sugar/glob';
 
 /**
  * @name                pool
@@ -18,13 +18,9 @@ import { __matchGlob } from '@coffeekraken/sugar/glob';
  * This function simply take as parameter a glob (or array of globs) pattern(s)
  * and return an SPromise instance through which you can subscribe to events like:
  * - ready: Emitted once the pool is ready
- * - file: Emitted for each file founded, added or updated
- * - files: Emitted with a list of founded files
- * - change: Emitted when a file has been updated (alias to update)
- * - update: Emitted when a file has been updated
- * - unlink: Emitted when a file has been deleted
  * - add: Emitted when a file has been added
- *
+ * - change: Emitted when a file has been updated (alias to update)
+ * - unlink: Emitted when a file has been deleted
  *
  * @param       {String|Array<String>}          input           The input glob(s)
  * @param       {IPoolSettings}             [settings={}]       Some settings to configure your pool. Support all the chokidar settings
@@ -83,7 +79,9 @@ export interface IChokidarSettings {
 export default function __pool(input, settings?: Partial<IPoolSettings>) {
     const filesStack: Record<string, string | __SFile> = {};
 
-    return new __SPromise(
+    let whenReadyResolve;
+
+    const promise = new __SPromise(
         async ({ resolve, reject, emit, cancel, on }) => {
             await __SSugarConfig.load();
 
@@ -136,7 +134,6 @@ export default function __pool(input, settings?: Partial<IPoolSettings>) {
                         else filesStack[path] = path;
                     }
                     emit('add', filesStack[path]);
-                    emit('file', filesStack[path]);
                 })
                 .on('change', (path) => {
                     if (!__fs.existsSync(`${set.cwd}/${path}`)) return;
@@ -147,9 +144,7 @@ export default function __pool(input, settings?: Partial<IPoolSettings>) {
                             );
                         else filesStack[path] = path;
                     }
-                    emit('update', filesStack[path]);
                     emit('change', filesStack[path]);
-                    emit('file', filesStack[path]);
                 })
                 .on('unlink', (path) => {
                     // @ts-ignore
@@ -193,9 +188,7 @@ export default function __pool(input, settings?: Partial<IPoolSettings>) {
                         });
 
                     emit('ready', finalFiles);
-                    if (finalFiles.length && !set.ignoreInitial) {
-                        emit('files', finalFiles);
-                    }
+                    whenReadyResolve(finalFiles);
                     if (!set.watch) {
                         watcher.close();
                         resolve(finalFiles);
@@ -211,4 +204,11 @@ export default function __pool(input, settings?: Partial<IPoolSettings>) {
             eventEmitter: {},
         },
     );
+
+    // add an "initialFiles" promise to have access to them if wanted
+    promise.ready = new Promise((resolve, reject) => {
+        whenReadyResolve = resolve;
+    });
+
+    return promise;
 }

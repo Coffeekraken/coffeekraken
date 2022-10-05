@@ -7,10 +7,6 @@ export default function (api) {
     return {
         namespaces: {
             'sugar.views': [`./node_modules/@coffeekraken/sugar/src/views`],
-            'sugar.blade': [
-                `./node_modules/@coffeekraken/sugar/src/views/blade/@sugar`,
-            ],
-            'sugar.twig': [`./node_modules/@coffeekraken/sugar/src/views/twig`],
             sections: [
                 `./${__path.relative(
                     __packageRootDir(),

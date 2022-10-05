@@ -74,7 +74,7 @@ function buildMediaQuery($media, $params = null)
     ];
 
     $finalParams = (object) $params;
-    $finalParams = (object) \Sugar\convert\objectToArray($finalParams);
+    $finalParams = (object) \Sugar\convert\toArray($finalParams);
 
     $queries = [];
 

@@ -1,0 +1,23 @@
+{
+    "type": "prop",
+    "title": "Color",
+    "description": "List of available colors",
+    "props": {
+        "name": {
+            "type": "String",
+            "description": "The color name",
+            "values": [
+                "base",
+                "main",
+                "accent",
+                "complementary",
+                "success",
+                "info",
+                "warning",
+                "error"
+            ],
+            "default": "accent",
+            "required": "true"
+        }
+    }
+}

@@ -1,8 +1,10 @@
+#cards-layout {
+  perspective: 800px;
+}
+
 .card {
   position: relative;
   z-index: 10;
-  padding-block: sugar.padding(70);
-  padding-inline: sugar.padding(50);
   background-color: sugar.color(base, surface);
   background-image: linear-gradient(
     -45deg,
@@ -11,6 +13,33 @@
   );
   @sugar.border.radius();
   @sugar.depth (100);
+
+  .s-card__img-container {
+    perspective: 800px;
+  }
+
+  .s-card__img {
+    @sugar.depth (100);
+    @sugar.border.radius();
+    transform: rotateX(-5deg) rotateY(35deg) translateX(10%) translateY(-10%);
+  }
+  :nth-child(2) > & {
+    .s-card__img {
+      transform: rotateX(10deg) rotateY(10deg) rotateZ(2deg) translateX(2%)
+        translateY(-10%) scale(0.85);
+    }
+  }
+  :nth-child(3) > & {
+    .s-card__img {
+      transform: rotateX(-5deg) rotateY(-35deg) translateX(-10%)
+        translateY(-10%);
+    }
+  }
+
+  .s-card__content {
+    padding-block-end: sugar.padding(50);
+    padding-inline: sugar.padding(50);
+  }
 
   &:before,
   &:after {

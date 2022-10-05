@@ -1,0 +1,15 @@
+{
+    "type": "component",
+    "title": "Cta",
+    "description": "Display a call to action",
+    "props": {
+        "label": {
+            "type": "String",
+            "description": "The cta label",
+            "required": true
+        },
+        "link": "@sugar.views.props.link",
+        "color": "@sugar.views.props.color",
+        "attributes": "@sugar.views.props.attributes"
+    }
+}

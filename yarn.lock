@@ -2119,6 +2119,7 @@ __metadata:
     "@coffeekraken/s-interface": ^2.0.0-alpha.20
     "@coffeekraken/s-promise": ^2.0.0-alpha.20
     "@coffeekraken/s-state": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
     "@coffeekraken/s-theme": ^2.0.0-alpha.20
     "@coffeekraken/sugar": ^2.0.0-alpha.20
     fastdom: ^1.0.11
@@ -2470,6 +2471,7 @@ __metadata:
     body-parser: ^1.20.0
     compression: ^1.7.4
     express: ^4.18.1
+    express-remove-route: ^1.0.0
     http-proxy-middleware: ^2.0.6
     marked: ^4.0.18
     minimatch: ^3.1.2
@@ -10267,6 +10269,13 @@ __metadata:
     jest-matcher-utils: ^27.5.1
     jest-message-util: ^27.5.1
   checksum: b2c66beb52de53ef1872165aace40224e722bca3c2274c54cfa74b6d617d55cf0ccdbf36783ccd64dbea501b280098ed33fd0b207d4f15bc03cd3c7a24364a6a
+  languageName: node
+  linkType: hard
+
+"express-remove-route@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "express-remove-route@npm:1.0.0"
+  checksum: 4845b6dce75bcaf59bfbe0a27f561cce8aad0bc695d5150b633b6511fac24eaa7fab05cb8120fd333e10463bb19b5f898ec739501f7813ed105a153e6687ee2b
   languageName: node
   linkType: hard
 

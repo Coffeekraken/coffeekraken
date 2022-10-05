@@ -77,6 +77,11 @@ export default function ({
     // bare
     if (finalParams.scope.indexOf('bare') !== -1) {
         switch (finalParams.type) {
+            case 'mobile':
+                vars.push(`
+                    
+                `);
+                break;
             case 'primary':
             default:
                 vars.push(`
@@ -88,6 +93,18 @@ export default function ({
                     user-select: none;
                     flex-grow: 1;
 
+                    @sugar.media mobile {
+                        position: fixed;
+                        top: 0; left: 0;
+                        height: 100vh;
+                        width: 100vw;
+                        overflow-y: auto;
+                        justify-content: flex-start; 
+                        flex-direction: column;
+                        text-align: inherit;
+                        user-select: none;
+                    }
+
                     .s-menu__item:not(:hover,:focus,:focus-within) > .s-menu__children {
                         @sugar.visually.hidden();
                     }
@@ -97,6 +114,10 @@ export default function ({
                     }
                     .s-menu__item .s-menu__item {
                         text-align: initial;
+                    }
+
+                    .s-menu__link {
+                        display: block;
                     }
 
                     .s-menu--level-1 {
@@ -110,6 +131,12 @@ export default function ({
                             display: block;
                         }
 
+                        @sugar.media mobile {
+                            position: relative;
+                            top: 0; left: 0;
+                            transform: none;
+                            margin-block-start: sugar.padding(ui.menu.paddingBlock);
+                        }
                     }
                 `);
                 break;
@@ -146,10 +173,33 @@ export default function ({
             case 'solid':
             default:
                 vars.push(`
+
+                    @sugar.media mobile {
+                        background: sugar.color(base, background);
+                        padding-inline: sugar.padding(30);
+                    }
+
                     > .s-menu__item {
                         padding: sugar.padding(ui.menu.paddingBlock) sugar.padding(ui.menu.paddingInline);
                         border-radius: sugar.border.radius(ui.menu.borderRadius);
                         @sugar.transition(fast);
+
+                        @sugar.media mobile {
+                            padding: sugar.padding(ui.menu.paddingBlock) sugar.padding(20);
+                            width: 100%;
+
+                        }
+
+                        > .s-menu__link {
+                            padding: 0;
+                            @sugar.transition(fast);
+                        }
+                        &:hover,
+                        &:active {
+                            > .s-menu__link {
+                                padding: 0 sugar.padding(20);
+                            }
+                        }
 
                         &:hover,
                         &:active {
@@ -163,9 +213,12 @@ export default function ({
                             @sugar.depth(100);
                             @sugar.border.radius();
 
+                            @sugar.media mobile {
+                                background: sugar.color(base, surface);
+                            }
+
                             .s-menu__item {
                                 background: sugar.color(accent, --alpha 0);
-
 
                                 &:has(> .s-menu__link):hover {
                                     background: sugar.color(accent);

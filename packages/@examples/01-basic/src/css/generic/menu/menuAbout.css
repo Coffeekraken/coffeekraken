@@ -3,7 +3,15 @@
   background: sugar.color(base, surface);
   @sugar.border.radius();
 
+  @sugar.media mobile {
+    padding: sugar.padding(30);
+  }
+
   * {
     white-space: nowrap;
+
+    @sugar.media mobile {
+      white-space: unset;
+    }
   }
 }

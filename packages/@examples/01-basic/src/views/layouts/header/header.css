@@ -10,21 +10,29 @@
   }
 
   @sugar.media mobile {
+    padding: sugar.padding(30);
+    top: 0;
     padding-inline: sugar.padding(30);
+    background: sugar.color(base, background);
+    height: 80px;
+    @sugar.depth (100);
   }
 
-  .__default-menu .s-menu {
-    @sugar.ui.menu();
-  }
-  .__mobile-menu {
-    display: none;
-  }
-  @sugar.media mobile {
-    .__default-menu {
-      display: none;
+  .logo {
+    width: 150px;
+
+    @sugar.media mobile {
+      width: 130px;
     }
-    .__mobile-menu {
-      display: block;
+  }
+
+  .s-menu {
+    @sugar.ui.menu();
+
+    @sugar.media mobile {
+      top: calc(80px - sugar.margin(30));
+      left: calc(sugar.margin(30) * -1);
+      height: calc(100vh - 80px);
     }
   }
 

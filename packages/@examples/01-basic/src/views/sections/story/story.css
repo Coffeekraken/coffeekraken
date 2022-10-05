@@ -8,6 +8,10 @@
     gap: sugar.margin(50);
     position: relative;
     z-index: 10;
+
+    @sugar.media mobile {
+      @sugar.layout ('2 _ 1');
+    }
   }
 
   &:before {

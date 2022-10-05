@@ -5,7 +5,7 @@ export default function (api) {
          * @namespace         config.themeMedia
          * @type              String
          * @values            >,<,=,>=,<=
-         * @default           >=
+         * @default           <=
          *
          * Specify the default action to apply if you don't specify one in your media
          * mixin call like ```@include Sugar.media('tablet') {...}```. If the defaultAction is set to ">=",
@@ -14,7 +14,7 @@ export default function (api) {
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        defaultAction: '>=',
+        defaultAction: '<=',
         /**
          * @name              defaultQuery
          * @namespace         config.themeMedia

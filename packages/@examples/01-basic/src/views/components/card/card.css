@@ -60,4 +60,13 @@
     bottom: -10px;
     right: -12px;
   }
+
+  @sugar.media mobile {
+    &:before {
+      right: sugar.margin(30);
+    }
+    &:after {
+      right: sugar.margin(30);
+    }
+  }
 }

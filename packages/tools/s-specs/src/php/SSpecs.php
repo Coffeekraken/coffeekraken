@@ -50,9 +50,61 @@ class SSpecs
     public function __construct($settings)
     {
         $this->settings = (object) $settings;
+
+        // if no namespace found, try to get them from
+        // the frontspec file
+        if (file_exists(getcwd() . '/frontspec.json')) {
+            $frontspecPath = getcwd() . '/frontspec.json';
+        } else {
+            $potentialFrontspecPath = glob('**/frontspec.json');
+            if (count($potentialFrontspecPath)) {
+                $frontspecPath = $potentialFrontspecPath[0];
+            }
+        }
+
+        if ($frontspecPath) {
+            $frontspecJson = json_decode(file_get_contents($frontspecPath));
+
+            // handle namespaces
+            if (isset($frontspecJson->specs->namespaces)) {
+                foreach (
+                    (array) $frontspecJson->specs->namespaces
+                    as $namespace => $paths
+                ) {
+                    if (!isset($this->settings->namespaces[$namespace])) {
+                        $this->settings->namespaces[$namespace] = [];
+                    }
+                    foreach ($paths as $path) {
+                        array_push(
+                            $this->settings->namespaces[$namespace],
+                            $path
+                        );
+                    }
+                }
+            }
+        }
+
         if (!isset($this->settings->namespaces)) {
             throw new Exception(
                 '[SSpecs] You MUST at least specify some "namespaces" folders to search specs files in...'
+            );
+        }
+
+        // format namespaces paths
+        foreach ((array) $this->settings->namespaces as $namespace => $paths) {
+            if (!isset($this->settings->namespaces[$namespace])) {
+                $this->settings->namespaces[$namespace] = [];
+            }
+
+            $this->settings->namespaces[$namespace] = array_unique(
+                array_map(function ($value) {
+                    if (str_starts_with($value, './')) {
+                        return isset($frontspecPath)
+                            ? dirname($frontspecPath)
+                            : getcwd() . '/' . str_replace('./', '', $value);
+                    }
+                    return $value;
+                }, $this->settings->namespaces[$namespace])
             );
         }
     }
@@ -159,7 +211,7 @@ class SSpecs
 
         $currentNamespace = '';
         foreach ($definedNamespacesKeys as $namespace) {
-            if (str_starts_with($specDotPath, $namespace)) {
+            if (str_starts_with((string) $specDotPath, $namespace)) {
                 $currentNamespace = $namespace;
                 break;
             }
@@ -197,6 +249,7 @@ class SSpecs
         foreach ($dirs as $dir) {
             // direct path my/path => my/path.spec.json
             $potentialSpecPath = $dir . '/' . $internalPath;
+
             if (file_exists($potentialSpecPath)) {
                 $finalSpecFilePath = $potentialSpecPath;
                 break;
@@ -242,7 +295,7 @@ class SSpecs
         $specJson = \Sugar\convert\toObject($specJson);
 
         // check if the spec extends another
-        if (isset($specJson->extends)) {
+        if (isset($specJson->extends) && is_string($specJson->extends)) {
             $extendsJson = $this->read($specJson->extends);
             $extendsJson = \Sugar\convert\toObject($extendsJson);
             $specJson = \Sugar\object\deepMerge($extendsJson, $specJson);

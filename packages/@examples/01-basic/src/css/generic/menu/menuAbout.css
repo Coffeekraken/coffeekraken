@@ -1,5 +1,5 @@
 .menu-about {
-  padding: sugar.padding(30);
+  padding: sugar.padding(50);
   background: sugar.color(base, surface);
   @sugar.border.radius();
 

@@ -3,6 +3,29 @@
     padding-block: sugar.padding(100);
     position: relative;
 
+    @sugar.media mobile {
+        padding-block: 0 sugar.padding(50);
+        padding-inline: sugar.padding(30);
+    }
+
+    .__layout {
+        @sugar.layout '1 2';
+
+        @sugar.media mobile {
+            @sugar.layout '1 _ 2';
+
+            > *:nth-child(2) {
+                display: none;
+            }
+        }
+    }
+
+    .s-form {
+        @sugar.media mobile {
+            margin-block-start: calc(sugar.margin(40) * -1);
+        }
+    }
+
     .__img {
         position: absolute;
         bottom: 0;

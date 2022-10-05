@@ -200,7 +200,9 @@ export default function genericHandler({
                 delete viewObj.data;
                 return viewObj;
             });
-            finalResult = JSON.stringify(errors, null, 4);
+            finalResult = JSON.stringify(errors, null, 4)
+                .split(/\\n/)
+                .join(`\n\n`);
         }
 
         __SBench.step('handlers.generic', 'afterLayoutRendering');

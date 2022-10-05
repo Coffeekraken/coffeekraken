@@ -48,6 +48,10 @@ function registerFunctions($twig)
     $attrs = require_once __DIR__ . '/html/attrs.php';
     $twig->addFunction($attrs);
 
+    // specs
+    $readSpec = require_once __DIR__ . '/specs/readSpec.php';
+    $twig->addFunction($readSpec);
+
     // String
     $idCompliant = require_once __DIR__ . '/string/idCompliant.php';
     $twig->addFunction($idCompliant);

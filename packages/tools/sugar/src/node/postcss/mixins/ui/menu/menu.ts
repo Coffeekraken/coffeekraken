@@ -72,6 +72,8 @@ export default function ({
 
     const vars: string[] = [];
 
+    console.log(finalParams);
+
     // bare
     if (finalParams.scope.indexOf('bare') !== -1) {
         switch (finalParams.type) {
@@ -164,7 +166,8 @@ export default function ({
                             .s-menu__item {
                                 background: sugar.color(accent, --alpha 0);
 
-                                &:hover {
+
+                                &:has(> .s-menu__link):hover {
                                     background: sugar.color(accent);
                                     color: sugar.color(accent, foreground);
                                 }

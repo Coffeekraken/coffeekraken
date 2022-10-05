@@ -24,7 +24,7 @@
     } */
 }
 
-@sugar.ui.menu.classes();
+/* @sugar.ui.menu.classes(); */
 
 @sugar.partial ('slider') {
   @sugar.ui.slider.classes();

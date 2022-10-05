@@ -6,13 +6,18 @@
         <img src="/dist/img/macos-wallpaper-01.jpg" />
     </div>
     <div class="s-container">
-        <div class="s-layout:12">
+        <div class="__layout">
             <div>
                 {% if title %}
-                    <h1 class="s-typo:h1 s-mbe:40">
+                    <h1 class="s-typo:h2 s-mbe:40">
                         {{ title|raw }}
                     </h1>
                 {% endif %}
+
+                <pre>
+                    {{ readSpec("components.card") }}
+                </pre>
+
                 {% if text %}
                     <p class="s-typo:p">
                         {{ text|raw }}

@@ -1,4 +1,4 @@
 {
-  "extends": "@sugar.views.components.card",
+  "extends": "sugar.views.components.card",
   "viewPath": "sugar/components/card/card.twig"
 }

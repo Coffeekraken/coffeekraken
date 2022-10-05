@@ -1,0 +1,17 @@
+{
+  "type": "section",
+  "title": "Separator",
+  "description": "Separator section",
+  "props": {
+    "title": {
+      "type": "String",
+      "title": "Title",
+      "description": "Separator title",
+      "required": true
+    },
+    "image": {
+      "extends": "@sugar.views.props.image",
+      "title": "Background image"
+    }
+  }
+}

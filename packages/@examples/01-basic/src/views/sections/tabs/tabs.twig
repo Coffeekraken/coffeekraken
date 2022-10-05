@@ -17,7 +17,7 @@
                     <div class="__content" id="{{ tab.id }}">
                         <h1 class="s-typo:h1 s-mbe:30">{{ tab.title|raw }}</h1>
                         <p class="s-typo:lead s-mbe:20 s-tc:accent">{{ tab.intro|raw }}</p>
-                        <p class="s-typo:p">{{ tab.description|raw }}</p>
+                        <p class="s-typo:p">{{ tab.text|raw }}</p>
                         <a class="s-btn s-mbs:40 s-color:accent" href="{{ tab.cta.link.url }}" target="{{ tab.cta.link.target }}">
                             {{ tab.cta.label }}
                         </a>

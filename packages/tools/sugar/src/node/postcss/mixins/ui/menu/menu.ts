@@ -98,6 +98,7 @@ export default function ({
                     }
 
                     .s-menu--level-1 {
+                        min-width: 100%;
                         position: absolute;
                         top: 100%;
                         left: 50%;
@@ -123,7 +124,7 @@ export default function ({
                 font-size: sugar.font.size(50);
             }
 
-            .s-menu__item .s-menu__item .s-menu__link {
+            .s-menu__item .s-menu__item .s-menu__item {
                 display: block;
                 font-size: sugar.font.size(40);
                 padding: sugar.padding(ui.menu.paddingBlock) sugar.padding(ui.menu.paddingInline);
@@ -153,10 +154,11 @@ export default function ({
 
                         > .s-menu__children {
                             background: sugar.color(base, background);
+                            padding: sugar.padding(20);
                             @sugar.depth(100);
                             @sugar.border.radius();
 
-                            .s-menu__link {
+                            .s-menu__item {
                                 background: sugar.color(accent, --alpha 0);
 
                                 &:hover {

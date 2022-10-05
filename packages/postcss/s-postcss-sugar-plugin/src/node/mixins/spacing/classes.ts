@@ -97,7 +97,7 @@ export default function ({
         .s-spacing {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
+            align-items: inherit;
         }
     `);
 
@@ -134,6 +134,37 @@ export default function ({
             { type: 'CssClass' },
         );
     });
+
+    // direction
+    vars.comment(
+        () => `/**
+        * @name            s-spacing:column
+        * @namespace          sugar.style.spacing
+        * @type             CssClass
+        * @platform             css
+        * @status               beta
+        * 
+        * This class allows you to apply the "<yellow>column</yellow>" spacing direction any HTMLElement container
+        * 
+        * @example      html
+        * <div class="s-spacing:30:column">
+        *   <h1 class="s-typo:h1">Hello world</h1>
+        *   <p class="s-typo:lead">${__faker.name.findName()}</p>
+        *   <p class="s-typo:p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis egestas non tortor sed aliquet. Fusce finibus erat at leo scelerisque, a lobortis purus pretium. Aliquam ornare leo id mi imperdiet.</p>
+        *   <a class="s-btn s-color:accent">Simple Cta</a>
+        * </div>
+        * 
+        * @since        2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+        */
+        `,
+    ).code(
+        `
+        .s-spacing--column {
+            flex-direction: unset;
+        }`,
+        { type: 'CssClass' },
+    );
 
     return vars;
 }

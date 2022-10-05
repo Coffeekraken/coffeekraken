@@ -1,0 +1,41 @@
+{
+    "type": "section",
+    "title": "Story",
+    "description": "Story section",
+    "props": {
+        "layout": {
+            "type": "Select",
+            "title": "Layout",
+            "description": "Section layout",
+            "options": ["12", "21"]
+        },
+        "title": {
+            "type": "String",
+            "title": "Title",
+            "description": "Story title",
+            "required": true
+        },
+        "intro": {
+            "type": "String",
+            "title": "Intro",
+            "description": "Story intro",
+            "required": true
+        },
+        "text": {
+            "type": "String",
+            "title": "Text",
+            "description": "Story text",
+            "required": true
+        },
+        "cta": {
+            "extends": "@sugar.views.components.cta",
+            "title": "Story Cta",
+            "required": true
+        },
+        "image": {
+            "extends": "@sugar.views.props.image",
+            "title": "Background image",
+            "required": true
+        }
+    }
+}

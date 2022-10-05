@@ -1,0 +1,32 @@
+<form action="{{ action }}" class="s-form {% if lnf.color %} s-color:{{ lnf.color }} {% endif %} s-spacing:{{ lnf.spacing ? lnf.spacing : '20' }}">
+    {% for field in fields %}
+        <div class="s-form__field">
+            
+            {% if field.type == 'text' %}
+                <label class="s-form__label s-label:{{ lnf.labelType ? lnf.labelType : 'default' }}:responsive" s-form-validate {{ attrs(field.validations)|raw }}>
+                    <span>{{ field.label }}</span>
+                    <input class="s-form__text s-input" {{ field.attributes.class }} {{ attrs(field.attributes, ['class'])|raw }} placeholder="{{ field.placeholder ? field.placeholder : field.label }}" type="text" name="{{ field.name }}" />
+                </label>
+            {% endif %}
+
+            {% if field.type == 'textarea' %}
+                <label class="s-form__label s-label:{{ lnf.labelType ? lnf.labelType : 'default' }}:responsive" s-form-validate {{ attrs(field.validations)|raw }}>
+                    <span>{{ field.label }}</span>
+                    <textarea class="s-form__textarea s-input {{ field.attributes.class }}" {{ attrs(field.attributes, ['class'])|raw }} placeholder="{{ field.placeholder ? field.placeholder : field.label }}" name="{{ field.name }}"></textarea>
+                </label>
+            {% endif %}
+
+        </div>
+    {% endfor %}
+
+    {% if actions %}
+        <div class="s-form__actions s-spacing:{{ lnf.spacing ? lnf.spacing : '20' }}:column" style="flex-direction: row-reverse">
+            {% for action in actions %}
+                <button class="s-form__action s-btn s-color:{{ lnf.color }} {{ action.attributes.class }}" {{ attrs(field.attributes, ['class'])|raw }} type="{{ action.type }}">
+                    {{ action.label }}
+                </button>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+</form>

@@ -207,7 +207,8 @@ export default function ({
         switch (finalParams.style) {
             case 'float':
                 vars.push(`
-                  
+                  width: 100%;  
+
                   & > *:not(input):not(textarea):not(select) {
                     transition: sugar.theme(ui.label.transition);
                   }
@@ -219,6 +220,7 @@ export default function ({
                   & > input:not([type="checkbox"]):not([type="radio"]),
                   & > textarea,
                   & > select {
+                    width: 100% !important;
                     transition: sugar.theme(ui.label.transition);
 
                     &::placeholder {

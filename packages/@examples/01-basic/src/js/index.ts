@@ -8,7 +8,7 @@ import __STheme from '@coffeekraken/s-theme';
 import { define as __sActivateFeature } from '@coffeekraken/s-activate-feature';
 import { define as __sAppearFeature } from '@coffeekraken/s-appear-feature';
 // import { define as __sFloatingFeature } from '@coffeekraken/s-floating-feature';
-// import { define as __sFormValidateFeature } from '@coffeekraken/s-form-validate-feature';
+import { define as __sFormValidateFeature } from '@coffeekraken/s-form-validate-feature';
 // import { define as __sInlineFeature } from '@coffeekraken/s-inline-feature';
 // import { define as __sPageTransitionFeature } from '@coffeekraken/s-page-transition-feature';
 // import { define as __sRefocusFeature } from '@coffeekraken/s-refocus-feature';
@@ -54,7 +54,7 @@ __SConductor.setup({
   // __sRefocusFeature();
   // __sInlineFeature();
   // __sParallaxFeature();
-  // __sFormValidateFeature({});
+  __sFormValidateFeature({});
   // __sPageTransitionFeature();
 
   // Project related components

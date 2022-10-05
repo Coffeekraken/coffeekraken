@@ -124,11 +124,14 @@ export default function ({
                 font-size: sugar.font.size(50);
             }
 
-            .s-menu__item .s-menu__item .s-menu__item {
+            .s-menu--level-1 .s-menu__item,
+            .s-menu--level-1 .s-menu__link {
                 display: block;
                 font-size: sugar.font.size(40);
-                padding: sugar.padding(ui.menu.paddingBlock) sugar.padding(ui.menu.paddingInline);
                 @sugar.border.radius();
+            }
+            .s-menu--level-1 .s-menu__link {
+                padding: sugar.padding(ui.menu.paddingBlock) sugar.padding(ui.menu.paddingInline);
             }
 
         `);

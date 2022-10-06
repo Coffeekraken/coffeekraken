@@ -3,10 +3,15 @@
 
         <nav class="s-flex:align-center">
             <div>
-                {% include 'generic/logo/logo.twig' %}
+                <a href="/" title="Kraken">
+                    {% include 'generic/logo/logo.twig' %}
+                </a>
             </div>
             <div class="s-flex-item:grow">
-                {% include 'sugar/menu/generic/generic.twig' %}
+                {% include 'sugar/menu/generic/generic.twig' with {
+                    id: 'menu'
+                } %}
+                <label for="menu" class="__menu-toggle"></label>
             </div>
         </nav>
     </div>

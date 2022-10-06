@@ -8,25 +8,29 @@
     <div class="s-container">
         <div class="__layout">
             <div>
-                {% if title %}
-                    <h1 class="s-typo:h2 s-mbe:40">
-                        {{ title|raw }}
-                    </h1>
-                {% endif %}
+                <div s-appear in="left" delay="500">
+                    {% if title %}
+                        <h1 class="s-typo:h2 s-mbe:40">
+                            {{ title|raw }}
+                        </h1>
+                    {% endif %}
 
-                {% if text %}
-                    <p class="s-typo:p">
-                        {{ text|raw }}
-                    </p>
-                {% endif %}
-                {% if cta %}
-                    <div class="s-mbs:40">
-                        {% include 'sugar/components/cta/cta.twig' with cta %}
-                    </div>
-                {% endif %}
+                    {% if text %}
+                        <p class="s-typo:p">
+                            {{ text|raw }}
+                        </p>
+                    {% endif %}
+                    {% if cta %}
+                        <div class="s-mbs:40">
+                            {% include 'sugar/components/cta/cta.twig' with cta %}
+                        </div>
+                    {% endif %}
+                </div>
             </div>
             <div>
-                <img src="{{ image.url }}" title="{{ image.title }}" alt="{{ image.alt }}" />
+                <div s-appear in="right" delay="600">
+                    <img src="{{ image.url }}" title="{{ image.title }}" alt="{{ image.alt }}" />
+                </div>
             </div>
         </div>
     </div>

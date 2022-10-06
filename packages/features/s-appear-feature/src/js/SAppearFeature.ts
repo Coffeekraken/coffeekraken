@@ -117,10 +117,6 @@ export default class SAppearFeature extends __SFeature {
     }
 
     appear() {
-        if (this.node.id === 'features-frontend') {
-            console.log('APPEAR');
-        }
-
         const appearId = __uniqid();
         let delay = this.props.delay[0];
         if (this.props.delay.length === 2) {

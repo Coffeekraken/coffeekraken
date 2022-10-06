@@ -72,8 +72,6 @@ export default function ({
 
     const vars: string[] = [];
 
-    console.log(finalParams);
-
     // bare
     if (finalParams.scope.indexOf('bare') !== -1) {
         switch (finalParams.type) {
@@ -85,57 +83,79 @@ export default function ({
             case 'primary':
             default:
                 vars.push(`
-                    position: relative;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-evenly;
-                    text-align: center;
-                    user-select: none;
-                    flex-grow: 1;
 
-                    @sugar.media mobile {
+                    position: relative;
+                    user-select: none;
+
+                    @sugar.media <=mobile {
                         position: fixed;
                         top: 0; left: 0;
                         height: 100vh;
                         width: 100vw;
-                        overflow-y: auto;
-                        justify-content: flex-start; 
-                        flex-direction: column;
-                        text-align: inherit;
-                        user-select: none;
+                        transform: translateX(100vw);
+                        pointer-events: none;
+
+                        input[type="checkbox"]:checked + & {
+                            pointer-events: all;
+                            transform: translateX(0);
+                        }
                     }
 
-                    .s-menu__item:not(:hover,:focus,:focus-within) > .s-menu__children {
-                        @sugar.visually.hidden();
-                    }
-
-                    .s-menu__item {
+                    .s-menu__inner {
+                        display: flex;
                         position: relative;
-                    }
-                    .s-menu__item .s-menu__item {
-                        text-align: initial;
-                    }
+                        align-items: center;
+                        justify-content: space-evenly;
+                        text-align: center;
+                        flex-grow: 1;
 
-                    .s-menu__link {
-                        display: block;
-                    }
+                        @sugar.media <=mobile {
+                            height: 100%;
+                            width: 100%;
+                            overflow-y: auto;
+                            justify-content: flex-start; 
+                            flex-direction: column;
+                            text-align: inherit;
+                        }
 
-                    .s-menu--level-1 {
-                        min-width: 100%;
-                        position: absolute;
-                        top: 100%;
-                        left: 50%;
-                        transform: translateX(-50%);
+                        .s-menu__item > .s-menu__children {
+                            opacity: 1;
+                            pointer-events: all;
+                        }
+                        .s-menu__item:not(:hover,:focus,:focus-within) > .s-menu__children {
+                            opacity: 0;
+                            pointer-events: none;
+                        }
 
-                        & > .s-menu__item {
+
+                        .s-menu__item {
+                            position: relative;
+                        }
+                        .s-menu__item .s-menu__item {
+                            text-align: initial;
+                        }
+
+                        .s-menu__link {
                             display: block;
                         }
 
-                        @sugar.media mobile {
-                            position: relative;
-                            top: 0; left: 0;
-                            transform: none;
-                            margin-block-start: sugar.padding(ui.menu.paddingBlock);
+                        .s-menu--level-1 {
+                            min-width: 100%;
+                            position: absolute;
+                            top: 100%;
+                            left: 50%;
+                            transform: translateX(-50%);
+
+                            & > .s-menu__item {
+                                display: block;
+                            }
+
+                            @sugar.media <=mobile {
+                                position: relative;
+                                top: 0; left: 0;
+                                transform: none;
+                                margin-block-start: sugar.padding(ui.menu.paddingBlock);
+                            }
                         }
                     }
                 `);
@@ -174,60 +194,77 @@ export default function ({
             default:
                 vars.push(`
 
-                    @sugar.media mobile {
-                        background: sugar.color(base, background);
-                        padding-inline: sugar.padding(30);
+                    @sugar.media <=mobile {
+                        @sugar.transition();
                     }
 
-                    > .s-menu__item {
-                        padding: sugar.padding(ui.menu.paddingBlock) sugar.padding(ui.menu.paddingInline);
-                        border-radius: sugar.border.radius(ui.menu.borderRadius);
-                        @sugar.transition(fast);
-
-                        @sugar.media mobile {
-                            padding: sugar.padding(ui.menu.paddingBlock) sugar.padding(20);
-                            width: 100%;
-
+                    .s-menu__inner {
+                        @sugar.media <=mobile {
+                            background: sugar.color(base, background);
+                            padding-inline: sugar.padding(30);
+                            @sugar.transition();
                         }
 
-                        > .s-menu__link {
-                            padding: 0;
+                        .s-menu--level-1 {
+                            transform: translateX(-50%) translateY(50px);
+                        }
+                        .s-menu__item:not(:hover,:focus,:focus-within) > .s-menu--level-1 {
+                            transform: translateX(-50%) translateY(0);
+                        }
+
+                        .s-menu__item > .s-menu__children {
                             @sugar.transition(fast);
                         }
-                        &:hover,
-                        &:active {
+
+                        > .s-menu__item {
+                            padding: sugar.padding(ui.menu.paddingBlock) sugar.padding(ui.menu.paddingInline);
+                            border-radius: sugar.border.radius(ui.menu.borderRadius);
+                            @sugar.transition(fast);
+
+                            @sugar.media <=mobile {
+                                padding: sugar.padding(ui.menu.paddingBlock) sugar.padding(20);
+                                width: 100%;
+                            }
+
                             > .s-menu__link {
-                                padding: 0 sugar.padding(20);
+                                padding: 0;
+                                @sugar.transition(fast);
                             }
-                        }
+                            &:hover,
+                            &:active {
+                                background: sugar.color(accent);
+                                color: sugar.color(accent, foreground);
 
-                        &:hover,
-                        &:active {
-                            background: sugar.color(accent);
-                            color: sugar.color(accent, foreground);
-                        }
+                                > .s-menu__link {
 
-                        > .s-menu__children {
-                            background: sugar.color(base, background);
-                            padding: sugar.padding(20);
-                            @sugar.depth(100);
-                            @sugar.border.radius();
-
-                            @sugar.media mobile {
-                                background: sugar.color(base, surface);
-                            }
-
-                            .s-menu__item {
-                                background: sugar.color(accent, --alpha 0);
-
-                                &:has(> .s-menu__link):hover {
-                                    background: sugar.color(accent);
-                                    color: sugar.color(accent, foreground);
+                                    @sugar.media <=mobile {
+                                        padding: 0 sugar.padding(20);
+                                    }
                                 }
                             }
 
-                        }
+                            > .s-menu__children {
+                                background: sugar.color(base, background);
+                                padding: sugar.padding(20);
+                                @sugar.depth(100);
+                                @sugar.border.radius();
 
+                                @sugar.media <=mobile {
+                                    background: sugar.color(base, surface);
+                                }
+
+                                .s-menu__item {
+                                    background: sugar.color(accent, --alpha 0);
+
+                                    &:has(> .s-menu__link):hover {
+                                        background: sugar.color(accent);
+                                        color: sugar.color(accent, foreground);
+                                    }
+                                }
+
+                            }
+
+                        }
                     }
                 `);
                 break;

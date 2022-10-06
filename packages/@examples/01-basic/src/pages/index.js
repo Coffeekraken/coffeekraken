@@ -69,7 +69,7 @@ export default {
               'sugar.components.card.card',
               cardData
             );
-            cardsHtml.push(`<div>
+            cardsHtml.push(`<div s-appear in="bottom" delay="1000-1500">
             ${result.value}
           </div>`);
           }

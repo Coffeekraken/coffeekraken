@@ -10,7 +10,7 @@
       "required": true
     },
     "image": {
-      "extends": "@sugar.views.props.image",
+      "extends": "sugar.views.props.image",
       "title": "Background image"
     }
   }

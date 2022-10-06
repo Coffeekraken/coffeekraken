@@ -45,6 +45,7 @@ export default function ({
         '@sugar.ui.list.classes;',
         '@sugar.ui.loader.classes;',
         '@sugar.ui.tabs.classes;',
+        '@sugar.ui.toggle.classes;',
         '@sugar.ui.radio.classes;',
         '@sugar.ui.range.classes;',
         '@sugar.ui.select.classes;',

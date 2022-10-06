@@ -209,7 +209,7 @@ export default function ({
                             transform: translateX(-50%) translateY(0);
                         }
                         .s-menu__item:not(:hover,:focus,:focus-within) > .s-menu--level-1 {
-                            transform: translateX(-50%) translateY(-50px);
+                            transform: translateX(-50%) translateY(-25px);
                         }
 
                         .s-menu__item > .s-menu__children {

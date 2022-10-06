@@ -39,7 +39,7 @@ export default {
             'sugar.components.card.card',
             cardData
           );
-          cardsHtml.push(`<div s-appear in="bottom" delay="1000-1500">
+          cardsHtml.push(`<div>
             ${result.value}
           </div>`);
         }
@@ -52,8 +52,8 @@ export default {
             class: 'section-specs',
           },
           layout: {
+            default: '1 2 3',
             mobile: '1 _ 2 _ 3',
-            desktop: '1 2 3',
           },
           content: cardsHtml.join('\n'),
           gap: 50,

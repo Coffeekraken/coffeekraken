@@ -54,7 +54,7 @@ function layoutCss($layout, $settings = [])
     // make sure that if we pass the media as "default"
     // it is setted to desktop
     if ($finalParams->media === 'default') {
-        $finalParams->media = 'desktop';
+        $finalParams->media = null;
     }
 
     $areas = [];

@@ -19,7 +19,7 @@ namespace Sugar\object;
  * \Sugar\object\deepMap((object) [
  *    'prop1' => 'Hello',
  *    'prop2' => 'World'
- * ], function($value) {
+ * ], function($prop, $value, $object) {
  *      return 'Hello ' . $value;
  * });
  * // [
@@ -31,23 +31,28 @@ namespace Sugar\object;
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function deepMap($value, $callback, $_initialValue = null)
+function deepMap(&$value, $callback, $prop = null, &$object = null)
 {
     if (is_array($value)) {
         foreach ($value as $index => $item) {
-            $value[$index] = deepMap($item, $callback, $_initialValue);
+            $value[$index] = deepMap($item, $callback, $index, $value);
         }
     } elseif (is_object($value)) {
         $object_vars = get_object_vars($value);
-        foreach ($object_vars as $property_name => $property_value) {
-            $value->$property_name = deepMap(
-                $property_value,
+        foreach ($object_vars as $propertyName => $propertyValue) {
+            $value->$propertyName = deepMap(
+                $propertyValue,
                 $callback,
-                $_initialValue
+                $propertyName,
+                $value
             );
         }
     } else {
-        $value = call_user_func($callback, $value, $_initialValue);
+        $value = call_user_func_array($callback, [$prop, &$value, &$object]);
+        if (is_int($value) && $value == -1) {
+            $object->$prop = 'CCCC';
+            unset($object->$prop);
+        }
     }
 
     return $value;

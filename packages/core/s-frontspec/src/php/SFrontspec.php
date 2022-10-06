@@ -59,6 +59,7 @@ class SFrontspec
 
         // format relative paths
         $frontspecJson = \Sugar\ar\deepMap($frontspecJson, function (
+            $prop,
             $value
         ) use ($frontspecPath) {
             if ($value == null) {

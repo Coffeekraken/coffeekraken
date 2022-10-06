@@ -22,7 +22,7 @@
       "required": true
     },
     "cta": {
-      "extends": "sugar.views.component.cta",
+      "extends": "sugar.views.components.cta",
       "title": "Heading Cta",
       "required": true
     }

@@ -277,7 +277,7 @@ class SSpecs
         $specJson = json_decode(file_get_contents($finalSpecFilePath), true);
 
         // traverse each values to resolve them if needed
-        $specJson = \Sugar\object\deepMap($specJson, function ($v) use (
+        $specJson = \Sugar\object\deepMap($specJson, function ($p, $v) use (
             $specJson
         ) {
             return $this->resolve($v, $specJson);
@@ -286,13 +286,39 @@ class SSpecs
         // make sure we have an object
         $specJson = \Sugar\convert\toObject($specJson);
 
-        // check if the spec extends another
-        if (isset($specJson->extends) && is_string($specJson->extends)) {
-            $extendsJson = $this->read($specJson->extends);
-            $extendsJson = \Sugar\convert\toObject($extendsJson);
-            $specJson = \Sugar\object\deepMerge($extendsJson, $specJson);
-            unset($specJson->extends);
-        }
+        // handle "extends" property
+        $specJson = \Sugar\object\deepMap($specJson, function (
+            $prop,
+            $value,
+            &$object
+        ) {
+            if ($prop == 'extends') {
+                if (substr($value, 0, 1) == '@') {
+                    throw new Exception(
+                        'The "extends": "' .
+                            $value .
+                            '" property cannot start with an "@"'
+                    );
+                }
+                $extendsJson = $this->read($value);
+                $extendsJson = \Sugar\convert\toObject($extendsJson);
+
+                $keys = array_keys(get_object_vars($extendsJson));
+                $object_vars = get_object_vars($extendsJson);
+                foreach ($object_vars as $propertyName => $propertyValue) {
+                    if (property_exists($object, $propertyName)) {
+                        var_dump($propertyName);
+                        $object->$propertyName = \Sugar\object\deepMerge(
+                            $extendsJson,
+                            $object
+                        );
+                    } elseif ($propertyName != 'extends') {
+                        $object->$propertyName = $propertyValue;
+                    }
+                }
+            }
+            return $value;
+        });
 
         // if we have an internal spec dotpath
         if (isset($internalSpecDotPath)) {
@@ -316,6 +342,7 @@ class SSpecs
                 $newValue = \Sugar\ar\get($specJson, $internalDotPath);
                 if (is_array($newValue) ||  is_object($newValue)) {
                     $newValue = \Sugar\object\deepMap($newValue, function (
+                        $p,
                         $v
                     ) use ($newValue) {
                         return $this->resolve($v, $newValue);

@@ -150,6 +150,15 @@ export default class SSpecs extends __SClass {
 
         // check if the spec extends another
         if (specJson.extends) {
+            if (
+                typeof specJson.extends == 'string' &&
+                specJson.extends.slice(0, 1) === '@'
+            ) {
+                throw new Error(
+                    `The "extends": "${specJson.extends}" property cannot start with an "@"`,
+                );
+            }
+
             let extendsJson = this.read(specJson.extends);
             specJson = __deepMerge(extendsJson, specJson);
             delete specJson.extends;

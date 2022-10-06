@@ -39,9 +39,9 @@ function deepMap($value, $callback, $_initialValue = null)
         }
     } elseif (is_object($value)) {
         $object_vars = get_object_vars($value);
-        foreach ($object_vars as $property_name => $property_value) {
-            $value->$property_name = deepMap(
-                $property_value,
+        foreach ($object_vars as $propertyName => $propertyValue) {
+            $value->$propertyName = deepMap(
+                $propertyValue,
                 $callback,
                 $_initialValue
             );

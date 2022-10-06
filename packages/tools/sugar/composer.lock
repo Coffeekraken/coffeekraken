@@ -4,8 +4,27 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5f1a3c4fd92b0a9f7728640854a6a6db",
+    "content-hash": "780d5032050fc06d2093d442f9d6e84c",
     "packages": [
+        {
+            "name": "coffeekraken/s-frontspec",
+            "version": "2.0.0-alpha.20",
+            "dist": {
+                "type": "path",
+                "url": "../../core/s-frontspec",
+                "reference": "10540a76e356c65c069772124200b3e202655b49"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/php/autoload.php"
+                ]
+            },
+            "homepage": "https://coffeekraken.io",
+            "transport-options": {
+                "relative": true
+            }
+        },
         {
             "name": "coffeekraken/s-specs",
             "version": "2.0.0-alpha.20",
@@ -192,16 +211,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v3.4.2",
+            "version": "v3.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "e07cdd3d430cd7e453c31b36eb5ad6c0c5e43077"
+                "reference": "c38fd6b0b7f370c198db91ffd02e23b517426b58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/e07cdd3d430cd7e453c31b36eb5ad6c0c5e43077",
-                "reference": "e07cdd3d430cd7e453c31b36eb5ad6c0c5e43077",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/c38fd6b0b7f370c198db91ffd02e23b517426b58",
+                "reference": "c38fd6b0b7f370c198db91ffd02e23b517426b58",
                 "shasum": ""
             },
             "require": {
@@ -252,7 +271,7 @@
             ],
             "support": {
                 "issues": "https://github.com/twigphp/Twig/issues",
-                "source": "https://github.com/twigphp/Twig/tree/v3.4.2"
+                "source": "https://github.com/twigphp/Twig/tree/v3.4.3"
             },
             "funding": [
                 {
@@ -264,14 +283,15 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-08-12T06:47:24+00:00"
+            "time": "2022-09-28T08:42:51+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "alpha",
     "stability-flags": {
-        "coffeekraken/s-specs": 15
+        "coffeekraken/s-specs": 15,
+        "coffeekraken/s-frontspec": 15
     },
     "prefer-stable": false,
     "prefer-lowest": false,

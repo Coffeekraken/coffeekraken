@@ -8,6 +8,11 @@
     <div class="s-container">
         <div class="__layout">
             <div>
+
+                <pre>
+                    {{ dump(readFrontspec()) }}
+                </pre>
+
                 {% if title %}
                     <h1 class="s-typo:h2 s-mbe:40">
                         {{ title|raw }}

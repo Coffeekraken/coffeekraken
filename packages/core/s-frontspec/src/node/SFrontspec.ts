@@ -18,8 +18,7 @@ import __SFrontspecBuildParamsInterface from './interface/SFrontspecBuildParamsI
  * @extends             SPromise
  * @status              wip
  *
- * This class represent the ```frontspec.json``` file and allows you to generate it from some sources (glob pattern(s))
- * and save it inside a directory you choose.
+ * This class represent the ```frontspec.json``` file and allows you to generate it.
  *
  * @param           {Object}        [settings={}]           An object of settings to configure your frontspec instance:
  *

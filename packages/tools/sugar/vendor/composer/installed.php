@@ -10,6 +10,15 @@
         'dev' => true,
     ),
     'versions' => array(
+        'coffeekraken/s-frontspec' => array(
+            'pretty_version' => '2.0.0-alpha.20',
+            'version' => '2.0.0.0-alpha20',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../coffeekraken/s-frontspec',
+            'aliases' => array(),
+            'reference' => '10540a76e356c65c069772124200b3e202655b49',
+            'dev_requirement' => false,
+        ),
         'coffeekraken/s-specs' => array(
             'pretty_version' => '2.0.0-alpha.20',
             'version' => '2.0.0.0-alpha20',
@@ -47,12 +56,12 @@
             'dev_requirement' => false,
         ),
         'twig/twig' => array(
-            'pretty_version' => 'v3.4.2',
-            'version' => '3.4.2.0',
+            'pretty_version' => 'v3.4.3',
+            'version' => '3.4.3.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../twig/twig',
             'aliases' => array(),
-            'reference' => 'e07cdd3d430cd7e453c31b36eb5ad6c0c5e43077',
+            'reference' => 'c38fd6b0b7f370c198db91ffd02e23b517426b58',
             'dev_requirement' => false,
         ),
     ),

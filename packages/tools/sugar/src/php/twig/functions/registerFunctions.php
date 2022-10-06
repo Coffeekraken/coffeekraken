@@ -44,6 +44,9 @@ function registerFunctions($twig)
     $frontspecMetas = require_once __DIR__ . '/frontspec/metas.php';
     $twig->addFunction($frontspecMetas);
 
+    $frontspecRead = require_once __DIR__ . '/frontspec/readFrontspec.php';
+    $twig->addFunction($frontspecRead);
+
     // Html
     $attrs = require_once __DIR__ . '/html/attrs.php';
     $twig->addFunction($attrs);

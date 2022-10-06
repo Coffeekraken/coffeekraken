@@ -1,0 +1,26 @@
+.s-btn {
+  background: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  perspective: 800px;
+
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: sugar.color(accent);
+    z-index: -1;
+    transform: rotateX(-5deg) rotateY(25deg) translateX(2%) scale(1);
+    border-radius: 0 !important;
+    @sugar.transition (fast);
+  }
+
+  &:hover:before {
+    transform: rotateX(5deg) rotateY(-35deg) rotateZ(5deg) translateX(-5%)
+      scale(1.2);
+  }
+}

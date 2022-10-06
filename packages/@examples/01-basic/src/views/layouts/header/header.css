@@ -1,3 +1,7 @@
+.__menu-toggle {
+  @sugar.ui.toggle ('burger');
+}
+
 .header {
   position: fixed;
   top: sugar.margin(30);
@@ -27,7 +31,6 @@
   }
 
   .__menu-toggle {
-    @sugar.ui.toggle ('burger');
     position: fixed;
     top: calc(40px - 0.35em);
     right: 0;

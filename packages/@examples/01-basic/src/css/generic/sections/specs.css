@@ -26,10 +26,6 @@
 
       &:hover {
         transform: rotateX(0) rotateY(0) rotateZ(0) !important;
-
-        .s-card__img {
-          transform: rotateX(0) rotateY(0) rotateZ(0) translate(0, 0) scale(0.9) !important;
-        }
       }
     }
 

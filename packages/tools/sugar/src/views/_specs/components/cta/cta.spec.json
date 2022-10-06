@@ -1,10 +1,10 @@
 {
-    "type": "component",
+    "type": "Component",
     "title": "Cta",
     "description": "Display a call to action",
     "props": {
         "label": {
-            "type": "String",
+            "type": "Text",
             "description": "The cta label",
             "required": true
         },

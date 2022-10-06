@@ -7,6 +7,18 @@ export default function (api) {
     return {
         namespaces: {
             'sugar.views': [`./node_modules/@coffeekraken/sugar/src/views`],
+            views: [
+                `./${__path.relative(
+                    __packageRootDir(),
+                    api.config.storage.src.viewsDir,
+                )}`,
+            ],
+            bare: [
+                `./${__path.relative(
+                    __packageRootDir(),
+                    api.config.storage.src.viewsDir,
+                )}/bare`,
+            ],
             sections: [
                 `./${__path.relative(
                     __packageRootDir(),

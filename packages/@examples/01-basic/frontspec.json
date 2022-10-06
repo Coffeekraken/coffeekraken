@@ -44,7 +44,7 @@
         }
     },
     "media": {
-        "defaultAction": ">=",
+        "defaultAction": "<=",
         "defaultQuery": "screen",
         "queries": {
             "mobile": {
@@ -85,6 +85,12 @@
         "namespaces": {
             "sugar.views": [
                 "./node_modules/@coffeekraken/sugar/src/views"
+            ],
+            "views": [
+                "./src/views"
+            ],
+            "bare": [
+                "./src/views/bare"
             ],
             "sections": [
                 "./src/views/sections"

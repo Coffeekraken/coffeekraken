@@ -1,10 +1,10 @@
 {
-    "type": "prop",
+    "type": "Color",
     "title": "Color",
     "description": "List of available colors",
     "props": {
         "name": {
-            "type": "String",
+            "type": "Text",
             "description": "The color name",
             "values": [
                 "base",

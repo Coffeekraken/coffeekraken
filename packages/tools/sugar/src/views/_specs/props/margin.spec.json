@@ -1,5 +1,4 @@
 {
-    "type": "prop",
     "description": "Specify the margins you want around your layout by media (mobile, etc...). Default values must be stored under the \"default\" media",
     "type": "Object{}",
     "props": {

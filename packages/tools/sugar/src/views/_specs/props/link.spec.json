@@ -1,5 +1,5 @@
 {
-    "type": "link",
+    "type": "Link",
     "title": "Link",
     "description": "Describe a link with props like \"url\", \"target\", etc...",
     "props": {

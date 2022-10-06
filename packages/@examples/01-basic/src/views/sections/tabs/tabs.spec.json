@@ -1,10 +1,10 @@
 {
-  "type": "section",
+  "type": "Section",
   "title": "Tabs",
   "description": "Tabs section",
   "props": {
     "title": {
-      "type": "String",
+      "type": "Text",
       "title": "Title",
       "description": "Tabs title",
       "required": true
@@ -15,7 +15,7 @@
       "description": "Tabs",
       "props": {
         "id": {
-          "type": "String",
+          "type": "Text",
           "title": "Id",
           "description": "Tab id",
           "required": true,
@@ -24,13 +24,13 @@
           }
         },
         "intro": {
-          "type": "String",
+          "type": "Text",
           "title": "Intro",
           "description": "Tab intro",
           "required": true
         },
         "text": {
-          "type": "String",
+          "type": "Text",
           "title": "Text",
           "description": "Tab text",
           "required": true

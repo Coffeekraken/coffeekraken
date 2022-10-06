@@ -1,22 +1,22 @@
 {
-  "type": "section",
+  "type": "Section",
   "title": "Heading",
   "description": "Heading section",
   "props": {
     "title": {
-      "type": "String",
+      "type": "Text",
       "title": "Title",
       "description": "Heading title",
       "required": true
     },
     "intro": {
-      "type": "String",
+      "type": "Text",
       "title": "Intro",
       "description": "Heading intro",
       "required": true
     },
     "text": {
-      "type": "String",
+      "type": "Text",
       "title": "Text",
       "description": "Heading text",
       "required": true

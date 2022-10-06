@@ -1,10 +1,10 @@
 {
-  "type": "section",
+  "type": "Section",
   "title": "Separator",
   "description": "Separator section",
   "props": {
     "title": {
-      "type": "String",
+      "type": "Text",
       "title": "Title",
       "description": "Separator title",
       "required": true

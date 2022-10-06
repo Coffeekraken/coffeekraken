@@ -96,7 +96,7 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
                             pointer-events: all;
                         }
                         .s-menu__item:not(:hover,:focus,:focus-within) > .s-menu__children {
-                            opacity: 0;
+                            @sugar.visually.hidden();
                             pointer-events: none;
                         }
 

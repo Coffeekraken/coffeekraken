@@ -1,6 +1,19 @@
 {
-    "type": "prop",
+    "type": "Select",
     "description": "Specify the media on which to apply this new layout",
-    "type": "String",
-    "required": true
+    "required": true,
+    "options": [
+        {
+            "name": "desktop",
+            "value": "desktop"
+        },
+        {
+            "name": "tablet",
+            "value": "tablet"
+        },
+        {
+            "name": "mobile",
+            "value": "mobile"
+        }
+    ]
 }

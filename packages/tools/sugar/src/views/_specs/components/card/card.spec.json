@@ -1,19 +1,19 @@
 {
-    "type": "component",
+    "type": "Component",
     "title": "Card",
     "description": "Display a nice card with some infos like \"image\", \"title\", \"intro\", \"description\" and \"cta\"",
     "props": {
         "image": "@sugar.views.props.image",
         "title": {
-            "type": "String",
+            "type": "Text",
             "description": "The card title"
         },
         "intro": {
-            "type": "String",
+            "type": "Text",
             "description": "The card intro"
         },
         "text": {
-            "type": "String",
+            "type": "Text",
             "description": "The card text"
         },
         "spacing": "@sugar.views.props.spacing",

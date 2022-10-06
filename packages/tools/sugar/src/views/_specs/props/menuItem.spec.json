@@ -4,7 +4,7 @@
     "description": "Describe a menu item with props like url, target, etc...",
     "props": {
         "label": {
-            "type": "String",
+            "type": "Text",
             "description": "Specify the label to display"
         },
         "raw": {
@@ -13,7 +13,7 @@
         },
         "link": "@sugar.views.props.link",
         "children": {
-            "type": "menuItem[]",
+            "type": "Object[]",
             "description": "Specify a menu item child"
         }
     }

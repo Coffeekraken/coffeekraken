@@ -1,0 +1,18 @@
+{
+    "type": "Select",
+    "description": "The available containers",
+    "options": [
+        {
+            "name": "Default",
+            "value": "default"
+        },
+        {
+            "name": "Wide",
+            "value": "wide"
+        },
+        {
+            "name": "Full",
+            "value": "full"
+        }
+    ]
+}

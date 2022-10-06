@@ -307,7 +307,6 @@ class SSpecs
                 $object_vars = get_object_vars($extendsJson);
                 foreach ($object_vars as $propertyName => $propertyValue) {
                     if (property_exists($object, $propertyName)) {
-                        var_dump($propertyName);
                         $object->$propertyName = \Sugar\object\deepMerge(
                             $extendsJson,
                             $object

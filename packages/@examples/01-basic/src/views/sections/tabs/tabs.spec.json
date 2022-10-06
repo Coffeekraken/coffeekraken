@@ -1,46 +1,46 @@
 {
-    "type": "section",
-    "title": "Tabs",
-    "description": "Tabs section",
-    "props": {
-        "title": {
-            "type": "String",
-            "title": "Title",
-            "description": "Tabs title",
-            "required": true
+  "type": "section",
+  "title": "Tabs",
+  "description": "Tabs section",
+  "props": {
+    "title": {
+      "type": "String",
+      "title": "Title",
+      "description": "Tabs title",
+      "required": true
+    },
+    "tabs": {
+      "type": "Object[]",
+      "title": "Tabs",
+      "description": "Tabs",
+      "props": {
+        "id": {
+          "type": "String",
+          "title": "Id",
+          "description": "Tab id",
+          "required": true,
+          "validators": {
+            "pattern": "/[a-zA-Z0-9_-]+/"
+          }
         },
-        "tabs": {
-            "type": "Object[]",
-            "title": "Tabs",
-            "description": "Tabs",
-            "props": {
-                "id": {
-                    "type": "String",
-                    "title": "Id",
-                    "description": "Tab id",
-                    "required": true,
-                    "validators": {
-                        "pattern": "/[a-zA-Z0-9_-]+/"
-                    }
-                },
-                "intro": {
-                    "type": "String",
-                    "title": "Intro",
-                    "description": "Tab intro",
-                    "required": true
-                },
-                "text": {
-                    "type": "String",
-                    "title": "Text",
-                    "description": "Tab text",
-                    "required": true
-                },
-                "cta": {
-                    "extends": "@sugar.views.components.cta",
-                    "title": "Tab Cta",
-                    "required": true
-                }
-            }
+        "intro": {
+          "type": "String",
+          "title": "Intro",
+          "description": "Tab intro",
+          "required": true
+        },
+        "text": {
+          "type": "String",
+          "title": "Text",
+          "description": "Tab text",
+          "required": true
+        },
+        "cta": {
+          "extends": "sugar.views.components.cta",
+          "title": "Tab Cta",
+          "required": true
         }
+      }
     }
+  }
 }

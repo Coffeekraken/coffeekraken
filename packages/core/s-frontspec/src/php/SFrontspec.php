@@ -61,6 +61,10 @@ class SFrontspec
         $frontspecJson = \Sugar\ar\deepMap($frontspecJson, function (
             $value
         ) use ($frontspecPath) {
+            if ($value == null) {
+                return null;
+            }
+
             if (str_starts_with($value, './')) {
                 return dirname($frontspecPath) .
                     '/' .
@@ -80,7 +84,7 @@ class SFrontspec
      *
      * This method allows you to read a spec file and/or a value inside the passed spec file.
      *
-     * @param       {String}        $frontspecPath        A dotpath that point to a json spec file relative to one of the registered "$settings->namespaces" folders. You can then specify an internal dotpath to get a specific value inside the passed file like so "sugar.views.props.attributes:title"
+     * @param       {String}        [$frontspecPath=null]        A path to the frontspec file you want to load
      * @return      {Any}                               The requested spec value
      *
      * @since       2.0.0

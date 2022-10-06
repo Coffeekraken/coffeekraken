@@ -6,11 +6,16 @@
         ]
     },
     "require": {
+        "coffeekraken/s-frontspec": "^2.0@alpha"
     },
     "repositories": [
         {
             "type": "path",
             "url": "../sugar"
+        },
+        {
+            "type": "path",
+            "url": "../../core/s-frontspec"
         }
     ],
     "version": "2.0.0-alpha.20",

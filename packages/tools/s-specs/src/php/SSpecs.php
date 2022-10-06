@@ -12,6 +12,11 @@
  * You will also have easy access to your files through "namespaces" that represent different folders on your system. This will simplify
  * the way you read your files by prefixing your dotpath (simple fs "/" replacement) with the namespace you want to look in.
  *
+ * @param       {Object|Array}          [$settings=[]]              Some settings to configure your instance
+ *
+ * @setting         {Object|Array}            [namespaces=[]]             An array|object of namespace like "my.namespace" property with a simple array of folders where to search for specs files when using this namespace
+ * @setting         {Object|Array}            [sFrontspecSettings=[]]           Some settings to pass to the SFrontspec class in order to read the `frontspec.json` content
+ *
  * @example         php
  * $spec = new SSpecs([
  *   'namespaces' => [
@@ -49,38 +54,25 @@ class SSpecs
      */
     public function __construct($settings)
     {
-        $this->settings = (object) $settings;
+        $this->settings = (object) array_merge_recursive(
+            [
+                'namespaces' => [],
+                'sFrontspecSettings' => [],
+            ],
+            (array) $settings
+        );
 
-        // if no namespace found, try to get them from
-        // the frontspec file
-        if (file_exists(getcwd() . '/frontspec.json')) {
-            $frontspecPath = getcwd() . '/frontspec.json';
-        } else {
-            $potentialFrontspecPath = glob('**/frontspec.json');
-            if (count($potentialFrontspecPath)) {
-                $frontspecPath = $potentialFrontspecPath[0];
-            }
-        }
+        $frontspec = new \SFrontspec($this->settings->sFrontspecSettings);
+        $frontspecJson = $frontspec->read();
 
-        if ($frontspecPath) {
-            $frontspecJson = json_decode(file_get_contents($frontspecPath));
-
-            // handle namespaces
-            if (isset($frontspecJson->specs->namespaces)) {
-                foreach (
-                    (array) $frontspecJson->specs->namespaces
-                    as $namespace => $paths
-                ) {
-                    if (!isset($this->settings->namespaces[$namespace])) {
-                        $this->settings->namespaces[$namespace] = [];
-                    }
-                    foreach ($paths as $path) {
-                        array_push(
-                            $this->settings->namespaces[$namespace],
-                            $path
-                        );
-                    }
+        if (isset($frontspecJson->specs->namespaces)) {
+            foreach ($frontspecJson->specs->namespaces as $ns => $paths) {
+                if (!isset($this->settings->namespaces[$ns])) {
+                    $this->settings->namespaces[$ns] = [];
                 }
+                $this->settings->namespaces[$ns] = array_unique(
+                    array_merge($this->settings->namespaces[$ns], $paths)
+                );
             }
         }
 

@@ -1,30 +1,25 @@
 {
-  "type": "Section",
-  "title": "Heading",
-  "description": "Heading section",
-  "props": {
-    "title": {
-      "type": "Text",
-      "title": "Title",
-      "description": "Heading title",
-      "required": true
-    },
-    "intro": {
-      "type": "Text",
-      "title": "Intro",
-      "description": "Heading intro",
-      "required": true
-    },
-    "text": {
-      "type": "Text",
-      "title": "Text",
-      "description": "Heading text",
-      "required": true
-    },
-    "cta": {
-      "extends": "sugar.views.components.cta",
-      "title": "Heading Cta",
-      "required": true
+    "type": "Section",
+    "title": "Heading",
+    "description": "Heading section",
+    "props": {
+        "title": {
+            "type": "Text",
+            "title": "Title",
+            "description": "Heading title",
+            "required": true
+        },
+        "text": {
+            "type": "Text",
+            "title": "Text",
+            "description": "Heading text",
+            "required": true
+        },
+        "image": "@sugar.views.props.image",
+        "cta": {
+            "extends": "sugar.views.components.cta",
+            "title": "Heading Cta",
+            "required": true
+        }
     }
-  }
 }

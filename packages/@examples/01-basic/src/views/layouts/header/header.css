@@ -1,70 +1,70 @@
 .__menu-toggle {
-  @sugar.ui.toggle ('burger');
+    @sugar.ui.toggle ('burger');
 }
 
 .header {
-  position: fixed;
-  top: sugar.margin(30);
-  width: 100%;
-  z-index: 100;
-  @sugar.transition();
+    position: fixed;
+    top: sugar.margin(30);
+    width: 100%;
+    z-index: 100;
+    @sugar.transition();
 
-  body.scrolled & {
-    top: 0;
-  }
-
-  @sugar.media mobile {
-    padding: sugar.padding(30);
-    top: 0;
-    padding-inline: sugar.padding(30);
-    background: sugar.color(base, background);
-    height: 80px;
-    @sugar.depth (100);
-  }
-
-  .logo {
-    width: 150px;
+    body.scrolled & {
+        top: 0;
+    }
 
     @sugar.media mobile {
-      width: 130px;
+        padding: sugar.padding(30);
+        top: 0;
+        padding-inline: sugar.padding(30);
+        background: sugar.color(base, background);
+        height: 80px;
+        @sugar.depth (100);
     }
-  }
 
-  .__menu-toggle {
-    position: fixed;
-    top: calc(40px - 0.35em);
-    right: 0;
-    font-size: 30px;
-    display: none;
+    .logo {
+        width: 150px;
 
-    @sugar.media <=mobile {
-      display: block;
+        @sugar.media mobile {
+            width: 130px;
+        }
     }
-  }
 
-  .s-container {
-    position: relative;
-    perspective: 800px;
+    .__menu-toggle {
+        position: fixed;
+        top: calc(40px - 0.35em);
+        right: 0;
+        font-size: 30px;
+        display: none;
 
-    &:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: calc(sugar.margin(30) * -1);
-      right: calc(sugar.margin(30) * -1);
-      bottom: 0;
-      z-index: -1;
-      background: sugar.color(base, surface);
-      opacity: 0;
-      transform: rotateX(-10deg) rotateY(1deg) translateX(2%) scale(1.1);
-      @sugar.border.radius();
-      @sugar.depth (100);
-      @sugar.transition();
-
-      body.scrolled & {
-        opacity: 1;
-        background: sugar.color(base, surface, --darken 5%);
-      }
+        @sugar.media <=mobile {
+            display: block;
+        }
     }
-  }
+
+    .s-container {
+        position: relative;
+        perspective: 800px;
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: calc(sugar.margin(30) * -1);
+            right: calc(sugar.margin(30) * -1);
+            bottom: 0;
+            z-index: -1;
+            background: sugar.color(base, surface);
+            opacity: 0;
+            transform: rotateX(-10deg) rotateY(1deg) translateX(2%) scale(1.1);
+            @sugar.border.radius();
+            @sugar.depth (100);
+            @sugar.transition();
+
+            body.scrolled & {
+                opacity: 1;
+                background: sugar.color(base, surface, --darken 5%);
+            }
+        }
+    }
 }

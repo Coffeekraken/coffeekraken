@@ -1,0 +1,13 @@
+#cards-layout {
+    perspective: 800px;
+}
+
+.card {
+    position: relative;
+    z-index: 10;
+
+    .s-card__content {
+        padding-block-end: sugar.padding(50);
+        padding-inline: sugar.padding(50);
+    }
+}

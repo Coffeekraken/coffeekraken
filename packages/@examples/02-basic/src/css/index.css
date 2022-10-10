@@ -1,0 +1,20 @@
+/* importing sugar toolkit */
+@sugar.import ('./sugar.css');
+@sugar.import ('../views/**/*.css');
+@sugar.import ('./generic/**/*.css');
+
+body {
+  &.initial-loading .content {
+    display: none;
+  }
+}
+
+/* logo */
+.logo {
+  [fill='white'] {
+    fill: sugar.color(base, --darken 30%);
+  }
+  [fill='#FEBD0F'] {
+    fill: sugar.color(accent);
+  }
+}

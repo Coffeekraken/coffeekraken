@@ -4,29 +4,28 @@
 @sugar.import ('./generic/**/*.css');
 
 body {
-  background: sugar.color(base, background);
-  backgroung: url('../img/macbook-air-02.png');
+    background: sugar.color(base, background);
 
-  &.initial-loading .content {
-    display: none;
-  }
+    &.initial-loading .content {
+        display: none;
+    }
 }
 
 /* logo */
 .logo {
-  svg [fill='white'] {
-    fill: sugar.color(main, --darken 10);
-  }
-  svg [fill='#FEBD0F'] {
-    fill: sugar.color(accent);
-  }
-
-  @sugar.theme.when (dark) {
     svg [fill='white'] {
-      fill: sugar.color(main, text);
+        fill: sugar.color(main, --darken 10);
     }
     svg [fill='#FEBD0F'] {
-      fill: sugar.color(accent);
+        fill: sugar.color(accent);
     }
-  }
+
+    @sugar.theme.when (dark) {
+        svg [fill='white'] {
+            fill: sugar.color(main, text);
+        }
+        svg [fill='#FEBD0F'] {
+            fill: sugar.color(accent);
+        }
+    }
 }

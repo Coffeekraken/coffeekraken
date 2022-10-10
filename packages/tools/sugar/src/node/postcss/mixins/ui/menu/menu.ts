@@ -130,6 +130,12 @@ export default function ({
 
                         .s-menu__item {
                             position: relative;
+
+                            @sugar.media <=mobile {
+                                display: block;
+                                width: 100%;
+                            }
+
                         }
                         .s-menu__item .s-menu__item {
                             text-align: initial;
@@ -154,7 +160,6 @@ export default function ({
                                 position: relative;
                                 top: 0; left: 0;
                                 transform: none;
-                                margin-block-start: sugar.padding(ui.menu.paddingBlock);
                             }
                         }
                     }
@@ -220,30 +225,37 @@ export default function ({
                             @sugar.transition(fast);
                         }
 
-                        > .s-menu__item {
-                            padding: sugar.padding(ui.menu.paddingBlock) sugar.padding(ui.menu.paddingInline);
+                        .s-menu__link {
                             border-radius: sugar.border.radius(ui.menu.borderRadius);
+                            padding: sugar.padding(ui.menu.paddingBlock) sugar.padding(ui.menu.paddingInline);
                             @sugar.transition(fast);
 
                             @sugar.media <=mobile {
                                 padding: sugar.padding(ui.menu.paddingBlock) sugar.padding(20);
                                 width: 100%;
                             }
+                        }
 
-                            > .s-menu__link {
-                                padding: 0;
-                                @sugar.transition(fast);
-                            }
+                        .s-menu__item {
+
                             &:hover,
                             &:active {
-                                background: sugar.color(accent);
-                                color: sugar.color(accent, foreground);
-
                                 > .s-menu__link {
-
                                     @sugar.media <=mobile {
-                                        padding: 0 sugar.padding(20);
+                                        padding: sugar.padding(ui.menu.paddingBlock) sugar.padding(ui.menu.paddingInline);
+                                        width: 100%;
                                     }
+                                }
+                            }
+                        }
+
+                        > .s-menu__item {
+                            
+                            &:hover,
+                            &:active {
+                                > .s-menu__link {
+                                    background: sugar.color(accent);
+                                    color: sugar.color(accent, foreground);
                                 }
                             }
 
@@ -252,10 +264,6 @@ export default function ({
                                 padding: sugar.padding(20);
                                 @sugar.depth(100);
                                 @sugar.border.radius();
-
-                                @sugar.media <=mobile {
-                                    background: sugar.color(base, surface);
-                                }
 
                                 .s-menu__item {
                                     background: sugar.color(accent, --alpha 0);

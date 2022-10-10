@@ -9,7 +9,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @interface       ./theme
  * @status        beta
  *
- * This function allows you to get a theme value using dot path like "font.family.default.font-family", etc...
+ * This function allows you to get a theme value using dot path like "font.family.font-family", etc...
  * Usually the best way to access theme config is to use dedicated functions/mixins like "sugar.margin", "sugar.font.family", etc...
  *
  * @param       {String}        dotPath      The dot path to the theme config value you want back
@@ -20,7 +20,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @example       css
  * .my-element {
- *    font-family: sugar.theme(font.family.default.font-family);
+ *    font-family: sugar.theme(font.family.font-family);
  * }
  *
  * @since     2.0.0

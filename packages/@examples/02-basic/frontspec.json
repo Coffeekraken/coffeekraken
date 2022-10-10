@@ -1,0 +1,332 @@
+{
+    "metas": {
+        "lang": "en",
+        "title": "01-basic",
+        "homepage": "",
+        "description": "",
+        "themeColor": "#ffbb00",
+        "author": {
+            "name": "",
+            "email": "",
+            "url": ""
+        },
+        "og": {
+            "title": "01-basic",
+            "description": "",
+            "type": "website",
+            "url": "",
+            "image": "https://cdnv2.coffeekraken.io/coffeekraken-og.png"
+        }
+    },
+    "assets": {
+        "dev": {
+            "type": "module",
+            "defer": true,
+            "src": "/src/js/index.ts",
+            "env": "development"
+        },
+        "module": {
+            "type": "module",
+            "defer": true,
+            "src": "/dist/js/index.esm.js",
+            "env": "production"
+        },
+        "nomodule": {
+            "nomodule": true,
+            "defer": true,
+            "src": "/dist/js/index.amd.js",
+            "env": "production"
+        },
+        "style": {
+            "id": "global",
+            "defer": true,
+            "src": "/dist/css/index.css"
+        }
+    },
+    "media": {
+        "defaultAction": "<=",
+        "defaultQuery": "screen",
+        "queries": {
+            "mobile": {
+                "min-width": 0,
+                "max-width": 639
+            },
+            "tablet": {
+                "min-width": 640,
+                "max-width": 1279
+            },
+            "desktop": {
+                "min-width": 1280,
+                "max-width": 2047
+            },
+            "wide": {
+                "min-width": 2048,
+                "max-width": null
+            },
+            "dwarf": {
+                "min-height": null,
+                "max-height": 700
+            }
+        }
+    },
+    "views": {
+        "rootDirs": {
+            "twig": [
+                "./src/views",
+                "./node_modules/@coffeekraken/sugar/src/views/twig"
+            ],
+            "blade": [
+                "./src/views",
+                "./node_modules/@coffeekraken/sugar/src/views/blade"
+            ]
+        }
+    },
+    "specs": {
+        "namespaces": {
+            "sugar.views": [
+                "./node_modules/@coffeekraken/sugar/src/views"
+            ],
+            "views": [
+                "./src/views"
+            ],
+            "bare": [
+                "./src/views/bare"
+            ],
+            "sections": [
+                "./src/views/sections"
+            ],
+            "components": [
+                "./src/views/components"
+            ]
+        }
+    },
+    "google": {},
+    "margin": {
+        "0": 0,
+        "10": 0.375,
+        "20": 0.75,
+        "30": 1.5,
+        "40": 2.25,
+        "50": 3,
+        "60": 3.75,
+        "70": 4.5,
+        "80": 5.25,
+        "90": 6,
+        "100": 6.75,
+        "default": "1rem"
+    },
+    "padding": {
+        "0": 0,
+        "10": 0.375,
+        "20": 0.75,
+        "30": 1.5,
+        "40": 2.25,
+        "50": 3,
+        "60": 3.75,
+        "70": 4.5,
+        "80": 5.25,
+        "90": 6,
+        "100": 6.75,
+        "default": "1rem"
+    },
+    "font": {
+        "family": {
+            "default": {
+                "font-family": "\"Titillium Web\"",
+                "font-weight": 400,
+                "import": "https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap"
+            },
+            "title": {
+                "font-family": "\"Titillium Web\"",
+                "font-weight": 600,
+                "import": "https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap"
+            },
+            "quote": {
+                "font-family": "\"Palatino, Times, Georgia, serif\"",
+                "font-weight": "normal",
+                "font-style": "normal",
+                "font-display": "auto",
+                "cap-height": 0.65
+            },
+            "code": {
+                "font-family": "Menlo, Monaco, Consolas, Courier New, monospace",
+                "font-weight": "normal",
+                "font-style": "normal",
+                "font-display": "auto",
+                "cap-height": 0.65
+            }
+        },
+        "size": {
+            "0": 0,
+            "5": "0.5",
+            "10": 0.65,
+            "20": 0.75,
+            "30": 1.1,
+            "40": 1.25,
+            "50": 1.5,
+            "60": 2,
+            "70": 2.5,
+            "80": 3,
+            "90": 4,
+            "100": 5,
+            "default": "16px"
+        }
+    },
+    "typo": {
+        "h1": {
+            "class": "s-typo:h1"
+        },
+        "h2": {
+            "class": "s-typo:h2"
+        },
+        "h3": {
+            "class": "s-typo:h3"
+        },
+        "h4": {
+            "class": "s-typo:h4"
+        },
+        "h5": {
+            "class": "s-typo:h5"
+        },
+        "h6": {
+            "class": "s-typo:h6"
+        },
+        "p": {
+            "class": "s-typo:p"
+        },
+        "lead": {
+            "class": "s-typo:lead"
+        },
+        "hr": {
+            "class": "s-typo:hr"
+        },
+        "pre": {
+            "class": "s-typo:pre"
+        },
+        "code": {
+            "class": "s-typo:code"
+        },
+        "a": {
+            "class": "s-typo:a"
+        },
+        "quote": {
+            "class": "s-typo:quote"
+        },
+        "b": {
+            "class": "s-typo:b"
+        },
+        "bold": {
+            "class": "s-typo:bold"
+        },
+        "strong": {
+            "class": "s-typo:strong"
+        },
+        "i": {
+            "class": "s-typo:i"
+        },
+        "italic": {
+            "class": "s-typo:italic"
+        },
+        "em": {
+            "class": "s-typo:em"
+        },
+        "large": {
+            "class": "s-typo:large"
+        },
+        "larger": {
+            "class": "s-typo:larger"
+        },
+        "largest": {
+            "class": "s-typo:largest"
+        },
+        "small": {
+            "class": "s-typo:small"
+        },
+        "smaller": {
+            "class": "s-typo:smaller"
+        },
+        "smallest": {
+            "class": "s-typo:smallest"
+        },
+        "mark": {
+            "class": "s-typo:mark"
+        },
+        "del": {
+            "class": "s-typo:del"
+        },
+        "ins": {
+            "class": "s-typo:ins"
+        },
+        "sub": {
+            "class": "s-typo:sub"
+        },
+        "sup": {
+            "class": "s-typo:sup"
+        }
+    },
+    "layout": {
+        "offset": {
+            "top": 0,
+            "right": 0,
+            "bottom": 0,
+            "left": 0
+        },
+        "container": {
+            "default": "1280px",
+            "wide": "1440px",
+            "full": "none"
+        },
+        "grid": {
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "4": 4,
+            "5": 5,
+            "6": 6,
+            "7": 7,
+            "8": 8,
+            "9": 9,
+            "10": 10,
+            "11": 11,
+            "12": 12
+        },
+        "layout": {
+            "1": "1",
+            "12": "1 2",
+            "21": "2 1",
+            "112": "1 1 2",
+            "122": "1 2 2",
+            "123": "1 2 3",
+            "211": "2 1 1",
+            "221": "2 2 1",
+            "321": "3 2 1",
+            "1112": "1 1 1 2",
+            "1222": "1 2 2 2",
+            "1234": "1 2 3 4",
+            "2221": "2 2 2 1",
+            "11112": "1 1 1 1 2",
+            "12222": "1 2 2 2 2",
+            "12345": "1 2 3 4 5",
+            "22221": "2 2 2 2 1",
+            "111112": "1 1 1 1 1 2",
+            "122222": "1 2 2 2 2 2",
+            "123456": "1 2 3 4 5 6",
+            "1_2": "1 _ 2",
+            "2_1": "2 _ 1",
+            "12_33": "1 2 _ 3 3",
+            "1_23": "1 _ 2 3",
+            "1_2_3": "1 _ 2 _ 3",
+            "32_1": "3 2 _ 1",
+            "3_21": "3 _ 2 1",
+            "12_34": "1 2 _ 3 4",
+            "123_4": "1 2 3 _ 4",
+            "1_234": "1 _ 2 3 4",
+            "1_2_3_4": "1 _ 2 _ 3 _ 4",
+            "123_45": "1 2 3 _ 4 5",
+            "12_345": "1 2 _ 3 4 5",
+            "1_2345": "1 _ 2 3 4 5",
+            "1234_5": "1 2 3 4 _ 5",
+            "1_2_3_4_5": "1 _ 2 _ 3 _ 4 _ 5"
+        }
+    }
+}

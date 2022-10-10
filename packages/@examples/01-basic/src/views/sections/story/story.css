@@ -50,7 +50,6 @@
   }
 
   &[layout='21'] {
-    background-color: sugar.color(base, background);
     transform: skewY(-2deg);
 
     .s-layout {

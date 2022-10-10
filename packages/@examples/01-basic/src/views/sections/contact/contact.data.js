@@ -11,10 +11,6 @@ export default {
         type: 'submit',
         label: 'Send my message!',
       },
-      reset: {
-        type: 'reset',
-        label: 'Reset...',
-      },
     },
     fields: {
       name: {

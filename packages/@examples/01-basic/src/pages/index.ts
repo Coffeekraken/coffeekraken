@@ -72,6 +72,15 @@ export default {
       },
     },
     {
+      path: 'sections.card.card',
+      async data() {
+        const d = (
+          await import(`../views/sections/card/card.data.js?${__uniqid()}`)
+        ).default;
+        return d;
+      },
+    },
+    {
       path: 'sections.story.story',
       async data() {
         const d = (

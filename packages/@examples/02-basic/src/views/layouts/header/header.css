@@ -7,12 +7,29 @@
   top: 0;
   width: 100%;
   z-index: 100;
-  background: sugar.color(base, background, --alpha 0.8);
+  padding-block: sugar.padding(40);
+  background: sugar.color(base, background, --alpha 0);
   @sugar.transition();
 
   body.scrolled & {
-    background: sugar.color(base, background, --alpha 1);
     top: 0;
+    padding-block: sugar.padding(10);
+    background: sugar.color(base, background, --alpha 1);
+  }
+
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      0deg,
+      sugar.color(base, background, --alpha 0.2),
+      sugar.color(base, background, --alpha 0.7)
+    );
   }
 
   @sugar.media mobile {
@@ -47,26 +64,6 @@
 
     @sugar.media <=mobile {
       display: block;
-    }
-  }
-
-  .s-container {
-    position: relative;
-
-    &:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: -1;
-      background: sugar.color(base, background);
-      opacity: 0;
-      @sugar.border.radius();
-      @sugar.transition();
-
-      body.scrolled & {
-        opacity: 1;
-      }
     }
   }
 }

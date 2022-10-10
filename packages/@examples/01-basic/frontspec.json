@@ -1,4 +1,14 @@
 {
+    "$custom": {
+        "menus": {
+            "primary": {
+                "name": "Primary menu"
+            },
+            "secondary": {
+                "name": "Secondary menu"
+            }
+        }
+    },
     "metas": {
         "lang": "en",
         "title": "01-basic",
@@ -70,6 +80,15 @@
         }
     },
     "views": {
+        "layouts": {
+            "main": {
+                "name": "Default (main)",
+                "viewPath": {
+                    "twig": "layouts/main.twig",
+                    "blade": null
+                }
+            }
+        },
         "rootDirs": {
             "twig": [
                 "./src/views",
@@ -327,6 +346,14 @@
             "1_2345": "1 _ 2 3 4 5",
             "1234_5": "1 2 3 4 _ 5",
             "1_2_3_4_5": "1 _ 2 _ 3 _ 4 _ 5"
+        }
+    },
+    "menus": {
+        "primary": {
+            "name": "Primary menu"
+        },
+        "secondary": {
+            "name": "Secondary menu"
         }
     }
 }

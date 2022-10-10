@@ -1,6 +1,10 @@
 .s-menu#primary-menu {
   @sugar.ui.menu();
 
+  .s-menu__link {
+    background: none !important;
+  }
+
   @sugar.media <=mobile {
     width: calc(100vw - (sugar.margin(30) * 2));
     height: calc(100vh - 80px - (sugar.margin(30)));

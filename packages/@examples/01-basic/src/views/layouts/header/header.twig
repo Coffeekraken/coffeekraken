@@ -9,7 +9,8 @@
             </div>
             <div class="s-flex-item:grow">
                 {% include 'sugar/menu/generic/generic.twig' with {
-                    id: 'primary-menu'
+                    'id': 'primary-menu',
+                    'menu': menus.primary
                 } %}
                 <label for="primary-menu" class="__menu-toggle"></label>
             </div>

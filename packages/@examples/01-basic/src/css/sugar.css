@@ -3,23 +3,23 @@
  * To help improve speed
  */
 @sugar.cache ('sugar') {
-  /**
+    /**
     * Init sugar. This will import a reset css and print the
     * needed variables
     */
-  @sugar.init ($variant: 'dark');
+    @sugar.init ($variant: 'dark');
 
-  /**
+    /**
     * Generate some utility classes like "s-tc:accent, s-mb:30", etc...
     * that depends on your theme configuration
     */
-  @sugar.classes();
+    @sugar.classes();
 
-  /**
+    /**
     * Generate media scoped classes to use like "@mobile s-pbe:100", etc...
     * that depends on your theme configuration
     */
-  /* @sugar.media.classes ('mobile,tablet') {
+    /* @sugar.media.classes ('mobile,tablet') {
         @sugar.classes();
     } */
 }
@@ -27,7 +27,7 @@
 /* @sugar.ui.menu.classes(); */
 
 @sugar.partial ('slider') {
-  @sugar.ui.slider.classes();
+    @sugar.ui.slider.classes();
 }
 
 /**
@@ -43,4 +43,5 @@
     fab:twitter
     fab:facebook
     fab:patreon
+    fab:instagram
 );

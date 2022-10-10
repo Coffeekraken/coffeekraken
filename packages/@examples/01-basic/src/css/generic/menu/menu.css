@@ -1,10 +1,4 @@
-/* .s-menu {
-  input[type='checkbox']:checked + & {
-    transform: translateX(0);
-  }
-} */
-
-.s-menu {
+.s-menu#primary-menu {
   @sugar.ui.menu();
 
   @sugar.media <=mobile {
@@ -48,7 +42,7 @@
   }
 }
 
-.s-menu__item {
+#primary-menu .s-menu__item {
   background: none !important;
   position: relative;
   perspective: 800px;

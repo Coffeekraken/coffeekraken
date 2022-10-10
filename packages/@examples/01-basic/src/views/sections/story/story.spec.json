@@ -10,11 +10,11 @@
       "options": [
         {
           "name": "Image right",
-          "value": "1 2"
+          "value": "12"
         },
         {
           "name": "Image left",
-          "value": "2 1"
+          "value": "21"
         }
       ]
     },

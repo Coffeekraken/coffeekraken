@@ -4,15 +4,15 @@
             
             {% if field.type == 'text' %}
                 <label class="s-form__label s-label:{{ lnf.labelType ? lnf.labelType : 'default' }}:responsive" s-form-validate {{ attrs(field.validations)|raw }}>
-                    <span>{{ field.label }}</span>
                     <input class="s-form__text s-input" {{ field.attributes.class }} {{ attrs(field.attributes, ['class'])|raw }} placeholder="{{ field.placeholder ? field.placeholder : field.label }}" type="text" name="{{ field.name }}" />
+                    <span>{{ field.label }}</span>
                 </label>
             {% endif %}
 
             {% if field.type == 'textarea' %}
                 <label class="s-form__label s-label:{{ lnf.labelType ? lnf.labelType : 'default' }}:responsive" s-form-validate {{ attrs(field.validations)|raw }}>
-                    <span>{{ field.label }}</span>
                     <textarea class="s-form__textarea s-input {{ field.attributes.class }}" {{ attrs(field.attributes, ['class'])|raw }} placeholder="{{ field.placeholder ? field.placeholder : field.label }}" name="{{ field.name }}"></textarea>
+                    <span>{{ field.label }}</span>
                 </label>
             {% endif %}
 

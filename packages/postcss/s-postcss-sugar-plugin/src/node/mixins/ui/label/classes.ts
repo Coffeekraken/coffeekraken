@@ -275,8 +275,9 @@ export default function ({
                 > textarea,
                 > div {
                     width: 100%;
-                }   
-                > span {
+                }
+
+                &:not(.s-label--float) > span {
                     padding-block-start: 0;
                 } 
             }

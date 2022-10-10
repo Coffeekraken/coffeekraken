@@ -207,6 +207,10 @@ export default function ({
 
                         .s-menu--level-1 {
                             transform: translateX(-50%) translateY(0);
+
+                            @sugar.media <=mobile {
+                                transform: translate(0, 0) !important;
+                            }
                         }
                         .s-menu__item:not(:hover,:focus,:focus-within) > .s-menu--level-1 {
                             transform: translateX(-50%) translateY(-25px);

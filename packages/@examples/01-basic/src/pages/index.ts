@@ -16,6 +16,9 @@ export default {
           },
           attributes: {
             class: 'card',
+            's-appear': true,
+            in: Math.random() > 0.5 ? 'bottom' : 'top',
+            delay: '300-600',
           },
           title: 'Supercharged!',
           intro: 'Up to 18 hours of battery life.',
@@ -39,9 +42,11 @@ export default {
             'sugar.components.card.card',
             cardData
           );
-          cardsHtml.push(`<div>
-            ${result.value}
-          </div>`);
+          const cellResult = await viewRenderer.render('sugar.bare.cell.cell', {
+            content: result.value,
+          });
+
+          cardsHtml.push(cellResult.value);
         }
 
         return {

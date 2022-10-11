@@ -120,6 +120,21 @@ export default (api) => {
                 return api.theme.depth.default;
             },
 
+            /**
+             * @name          spacing
+             * @namespace     config.themeUi.default
+             * @type          String
+             * @default      [theme.space.30]
+             *
+             * Specify the default padding block for ui's
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get spacing() {
+                return api.theme.space['30'];
+            },
+
             rhythmVertical: {
                 /**
                  * @name          margin-bottom

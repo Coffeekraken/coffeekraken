@@ -9,6 +9,9 @@ export default {
     },
     attributes: {
       class: 'card card--large',
+      's-appear': true,
+      in: 'left',
+      delay: '300-600',
     },
     title: 'Supercharged!',
     intro: 'Up to 18 hours of battery life.',
@@ -28,6 +31,9 @@ export default {
     image: null,
     attributes: {
       class: 'card',
+      's-appear': true,
+      in: 'right',
+      delay: '300-600',
     },
     title: 'Supercharged!',
     intro: 'Up to 18 hours of battery life.',

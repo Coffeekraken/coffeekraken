@@ -3,29 +3,25 @@
 }
 
 .card {
+  @sugar.ui.card();
   position: relative;
   z-index: 10;
-  background-color: sugar.color(base, surface);
   background-image: linear-gradient(
     -45deg,
     sugar.color(base, surface, --alpha 0),
     sugar.color(base, --alpha 0.2)
   );
-  @sugar.border.radius();
-  @sugar.depth (100);
 
   .s-card__img-container {
     perspective: 800px;
   }
 
   .s-card__img {
-    @sugar.depth (100);
-    @sugar.border.radius();
+    margin-block-end: -10%;
     transform: rotateX(-5deg) rotateY(35deg) translateX(10%) translateY(-10%);
+    @sugar.transition();
   }
   &:hover .s-card__img {
-    @sugar.depth (100);
-    @sugar.border.radius();
     transform: rotateX(-5deg) rotateY(-25deg) rotateZ(-5deg) translateX(-5%)
       translateY(-10%) scale(0.9);
   }
@@ -56,8 +52,8 @@
   }
 
   .s-card__content {
-    padding-block-end: sugar.padding(50);
-    padding-inline: sugar.padding(50);
+    /* padding-block-end: sugar.padding(50);
+        padding-inline: sugar.padding(50); */
   }
 
   &:before,

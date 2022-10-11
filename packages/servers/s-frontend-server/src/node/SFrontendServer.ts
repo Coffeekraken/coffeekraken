@@ -545,8 +545,6 @@ export default class SFrontendServer extends __SClass {
                 // add the file in the stack
                 pagesFilesPaths.push(file.path);
 
-                console.log('file', file.path);
-
                 // handle 404 at the end
                 if (file.nameWithoutExt === '404') {
                     _404PageFile = file;

@@ -7,28 +7,9 @@
     margin-inline: calc(sugar.margin(100) * -1);
   }
 
-  .s-card:not(.card--large) {
-    .s-card__content {
-      padding: sugar.padding(50);
-    }
-    .s-card__img {
-      display: none;
-    }
-  }
-
   .card--large {
-    @sugar.layout ('1 2');
-    gap: sugar.margin(20);
-
-    .s-card__content {
-      padding-inline-end: sugar.padding(50);
-      padding-inline-start: 0;
-      padding-block: sugar.padding(50);
-    }
-    .s-card__img {
-      aspect-ratio: 4/2.8;
-      transform: rotateX(-5deg) rotateY(35deg) translateX(10%) translateY(0);
-      @sugar.transition();
+    .s-card__img-container {
+      width: 33%;
     }
   }
 }

@@ -1,4 +1,4 @@
-<div class="s-card {{ attributes.class }}" {{ attrs(attributes, ['class'])|raw }}>
+<div class="s-card {{ attributes.class }} {{ direction ? 's-card--' ~ direction : '' }}" {{ attrs(attributes, ['class'])|raw }}>
 
     {% if image %}
         <div class="s-card__img-container">

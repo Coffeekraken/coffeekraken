@@ -16,6 +16,28 @@
             "type": "Text",
             "description": "The card text"
         },
+        "direction": {
+            "type": "Select",
+            "description": "Specify the direction of the card. Horizontal, vertical, etc...",
+            "options": [
+                {
+                    "name": "Vertical",
+                    "value": "vertical"
+                },
+                {
+                    "name": "Horizontal",
+                    "value": "horizontal"
+                },
+                {
+                    "name": "Vertical reversed",
+                    "value": "vertical-reverse"
+                },
+                {
+                    "name": "Horizontal reversed",
+                    "value": "horizontal-reverse"
+                }
+            ]
+        },
         "spacing": "@sugar.views.props.spacing",
         "color": "@sugar.views.props.color",
         "cta": "@sugar.views.components.cta",

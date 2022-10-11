@@ -6,6 +6,9 @@
             },
             "secondary": {
                 "name": "Secondary menu"
+            },
+            "footer": {
+                "name": "Footer menu"
             }
         }
     },
@@ -355,6 +358,9 @@
         },
         "secondary": {
             "name": "Secondary menu"
+        },
+        "footer": {
+            "name": "Footer menu"
         }
     }
 }

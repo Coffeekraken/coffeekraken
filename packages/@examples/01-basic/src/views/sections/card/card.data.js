@@ -22,6 +22,7 @@ export default {
         title: 'Discover more on apple.com',
       },
     },
+    direction: 'horizontal',
   },
   card1: {
     image: null,
@@ -40,5 +41,6 @@ export default {
         title: 'Discover more on apple.com',
       },
     },
+    direction: 'horizontal',
   },
 };

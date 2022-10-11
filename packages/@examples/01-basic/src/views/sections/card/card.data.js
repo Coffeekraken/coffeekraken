@@ -1,7 +1,7 @@
 const imgPath = '/dist/img/card-01.jpg';
 
 export default {
-  card: {
+  cardOne: {
     image: {
       url: imgPath,
       alt: '',
@@ -27,7 +27,7 @@ export default {
     },
     direction: 'horizontal',
   },
-  card1: {
+  cardTwo: {
     image: null,
     attributes: {
       class: 'card',

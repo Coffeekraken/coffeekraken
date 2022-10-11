@@ -5,11 +5,33 @@
     @sugar.layout ('1 1 2');
     gap: sugar.padding(50);
     margin-inline: calc(sugar.margin(100) * -1);
+
+    @sugar.media <=mobile {
+      @sugar.layout ('1 _ 2');
+      margin-inline: 0;
+    }
+  }
+
+  .s-card {
+    @sugar.media <=mobile {
+      flex-direction: column;
+    }
   }
 
   .card--large {
     .s-card__img-container {
       width: 33%;
+
+      @sugar.media <=mobile {
+        width: 100%;
+      }
+
+      .s-card__img {
+        @sugar.media <=mobile {
+          width: 100%;
+          height: 180px;
+        }
+      }
     }
   }
 }

@@ -1,0 +1,9 @@
+{
+  "type": "section",
+  "title": "Cards",
+  "description": "Display two cards together",
+  "props": {
+    "cardOne": "@sugar.views.components.card",
+    "cardTwo": "@sugar.views.components.card"
+  }
+}

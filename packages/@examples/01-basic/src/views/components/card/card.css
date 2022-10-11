@@ -19,6 +19,8 @@
   .s-card__img {
     margin-block-end: -10%;
     transform: rotateX(-5deg) rotateY(35deg) translateX(10%) translateY(-10%);
+    @sugar.border.radius();
+    @sugar.depth (100);
     @sugar.transition();
   }
   &:hover .s-card__img {

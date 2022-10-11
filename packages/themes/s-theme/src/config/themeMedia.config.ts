@@ -17,6 +17,22 @@ export default function (api) {
         defaultAction: '<=',
 
         /**
+         * @name              defaultMedia
+         * @namespace         config.themeMedia
+         * @type              String
+         * @default           api.this.defaultAction === '<=' ? 'desktop' : 'mobile'
+         *
+         * Specify the default media that will not generate any media queries at all like in mobile first, it will
+         * be the mobile media and in desktop first it will be the desktop media
+         *
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+         get defaultMedia() {
+            return api.this.defaultAction === '>=' ? 'mobile' : 'desktop';
+         }
+
+        /**
          * @name              defaultQuery
          * @namespace         config.themeMedia
          * @type              String

@@ -4,16 +4,11 @@
     {% set finalId = 's-layout-' ~ uniqid() %}
 {% endif %}
 <style>
-
-{% for media, lay in layout|toArray %}
-    {{ layoutCss(lay, {
-        selector: '#' ~ finalId ~ '-layout',
-        media: media,
-        mediaSettings: frontspec.media
-    })|raw }}
-{% endfor %}
+{{ layoutCss(layout, {
+    selector: '#' ~ finalId ~ '-layout',
+    mediaSettings: frontspec.media|toObject
+})|raw }}
 </style>
-
 <div id="{{ finalId }}" class="{{ attributes.class }}" {{ attrs(attributes, ['class'])|raw }}>
     {% if container %}
         <div class="s-container:{{ container }}">

@@ -36,6 +36,13 @@ namespace Sugar\css;
  */
 function layoutCss($layout, $settings = [])
 {
+    $settings = (object) $settings;
+
+    if (!isset($settings->mediaSettings)) {
+        $frontspecJson = \Sugar\frontspec\readFrontspec();
+        $settings->mediaSettings = $frontspecJson->media;
+    }
+
     $finalParams = (object) array_merge(
         [
             'selector' => '#layout',
@@ -44,17 +51,51 @@ function layoutCss($layout, $settings = [])
             'align' => 'stretch',
             'justify' => 'stretch',
             'media' => null,
-            'mediaSettings' => [],
+            'mediaSettings' => (object) [],
             'minify' => false,
             'scope' => ['bare', 'lnf', 'gap', 'align', 'justify'],
         ],
         (array) $settings
     );
 
+    // handle array or object passed
+    if (is_object($layout) or is_array($layout)) {
+        $layout = (array) $layout;
+
+        $finalCss = [];
+
+        $queries = (array) $finalParams->mediaSettings->queries;
+        $keys = array_keys($queries);
+
+        $orderedLayouts = [];
+        foreach ($keys as $media) {
+            if (isset($layout[$media])) {
+                $orderedLayouts[$media] = $layout[$media];
+            }
+        }
+        $orderedLayouts = array_reverse($orderedLayouts);
+
+        foreach ($orderedLayouts as $media => $lay) {
+            array_push(
+                $finalCss,
+                layoutCss(
+                    $lay,
+                    array_merge((array) $settings, [
+                        'media' => $media,
+                    ])
+                )
+            );
+        }
+
+        return implode("\n", $finalCss);
+    }
+
     // make sure that if we pass the media as "default"
     // it is setted to desktop
-    if ($finalParams->media === 'default') {
-        $finalParams->media = null;
+    if (isset($finalParams->mediaSettings->defaultMedia)) {
+        if ($finalParams->media == $finalParams->mediaSettings->defaultMedia) {
+            $finalParams->media = null;
+        }
     }
 
     $areas = [];

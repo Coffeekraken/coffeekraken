@@ -46,13 +46,13 @@ export default {
 
         return {
           container: true,
-          frontspec: res.frontspec,
+          // frontspec: res.templateData.shared.frontspec,
           id: 'cards',
           attributes: {
             class: 'section-specs',
           },
           layout: {
-            default: '1 2 3',
+            desktop: '1 2 3',
             mobile: '1 _ 2 _ 3',
           },
           content: cardsHtml.join('\n'),

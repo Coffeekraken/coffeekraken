@@ -239,7 +239,7 @@ type Props = {
   id: string;
   lnf: "none" | "default";
   direction: "horizontal" | "vertical";
-  behabiors: Record<string, any>;
+  behaviors: Record<string, any>;
   behavior: "none" | "default";
   nextIconClass: string;
   previousIconClass: string;
@@ -261,6 +261,8 @@ type Props = {
 };
 
 import __SComponent from "@coffeekraken/s-component";
+import { __elementAreaStats } from "@coffeekraken/sugar/dom";
+import { __easeInterval } from "@coffeekraken/sugar/function";
 import { __uniqid } from "@coffeekraken/sugar/string";
 import __css from "../../../../../src/css/s-slider-component.css";
 import __SSliderComponentInterface from "../../../../../src/js/interface/SSLiderComponentInterface";
@@ -277,6 +279,10 @@ export default class S extends HTMLElement {
     return this._root.querySelector("[data-ref='S-$container']");
   }
 
+  get _$root() {
+    return this._root.querySelector("[data-ref='S-$root']");
+  }
+
   get _$slides() {
     return this._root.querySelector("[data-ref='S-$slides']");
   }
@@ -290,23 +296,225 @@ export default class S extends HTMLElement {
     const self = this;
 
     this.state = {
-      status: "idle",
-      id: null,
-      currentSlideId: null,
-      component: null,
-      slideElements: [],
-      slidesIds: [],
+      _status: "idle",
+      _id: null,
+      _currentSlideId: null,
+      _component: null,
+      _behaviors: {},
+      _slideElements: [],
+      _slidesIds: [],
       mount() {
         try {
-          self.state.component.injectStyleInShadowRoot(
+          self.state._component.injectStyleInShadowRoot(
             [__css, ...(self.props.cssDeps ?? [])],
             self._$container
           );
         } catch (e) {}
 
-        self.state.slideElements = Array.from(
+        self.state._behaviors = {
+          default({ fromSlideId, toSlideId }) {
+            const $slidesWrapper = self._$slides;
+            $slidesWrapper._isScrollingFromNextOrPrevious = false;
+
+            if (!$slidesWrapper._isBehaviorInited) {
+              $slidesWrapper._isBehaviorInited = true; // const $slideElements = $slides.querySelector('slot');
+              // console.log('^slot', slots.assignedNodes());
+              // self.state._slideElements.forEach(($slide) => {
+              //     const observer = new IntersectionObserver(
+              //         (entries, observer) => {
+              //             console.log('mutations', entries);
+              //         },
+              //         {
+              //             // root: $slidesWrapper,
+              //         },
+              //     );
+              //     console.log('SLIT', $slide);
+              //     observer.observe($slide);
+              // });
+
+              let scrollTimeout;
+              $slidesWrapper.addEventListener("scroll", (e) => {
+                if ($slidesWrapper._isScrollingFromNextOrPrevious) {
+                  return;
+                }
+
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                  let $inViewSlide,
+                    largerPercentage = 0;
+
+                  for (let i = 0; i < self.state._slideElements.length; i++) {
+                    const $slide = self.state._slideElements[i];
+
+                    const stats = __elementAreaStats($slide, {
+                      relativeTo: $slidesWrapper,
+                    });
+
+                    if (
+                      stats.percentageX + stats.percentageY >
+                      largerPercentage
+                    ) {
+                      largerPercentage = stats.percentageX + stats.percentageY;
+                      $inViewSlide = $slide;
+                    }
+                  }
+
+                  self.state.goTo(self.state.getSlideIdByElement($inViewSlide)); // console.log($inViewSlide);
+                }, 100);
+              });
+            }
+
+            const $from = self.state.getSlideElementById(fromSlideId),
+              $to = self.state.getSlideElementById(toSlideId);
+            const fromRect = $from.getBoundingClientRect(),
+              toRect = $to.getBoundingClientRect(),
+              parentRect = $slidesWrapper.getBoundingClientRect();
+            let startX = $slidesWrapper.scrollLeft,
+              startY = $slidesWrapper.scrollTop;
+            const dist =
+              self.props.direction === "vertical"
+                ? toRect.y - parentRect.top
+                : toRect.x - parentRect.left; // remove "smooth" from the scroll-behavior css
+
+            const initialScrollBehavior = $slidesWrapper.style.scrollBehavior,
+              initialScrollSnapType = $slidesWrapper.style.scrollSnapType;
+            $slidesWrapper.style.scrollBehavior = "initial";
+            $slidesWrapper.style.scrollSnapType = "initial";
+            $slidesWrapper._isScrollingFromNextOrPrevious = true;
+
+            __easeInterval(
+              self.props.transitionDuration,
+              (percentage) => {
+                const offset = (dist / 100) * percentage;
+
+                if (self.props.direction === "vertical") {
+                  $slidesWrapper.scrollTop = startY + offset;
+                } else {
+                  $slidesWrapper.scrollLeft = startX + offset;
+                }
+              },
+              {
+                easing: self.props.transitionEasing,
+
+                onEnd() {
+                  $slidesWrapper.style.scrollBehavior = initialScrollBehavior;
+                  $slidesWrapper.style.scrollSnapType = initialScrollSnapType;
+                  $slidesWrapper._isScrollingFromNextOrPrevious = false;
+                },
+              }
+            );
+          },
+        }; // get all the slides elements
+
+        self.update();
+        self.state._slideElements = Array.from(
           document.querySelectorAll("[s-slider-slide]")
+        ); // set all the slides ids
+
+        self.update();
+        self.state._slidesIds = self.state._slideElements.map(($slide, i) => {
+          return $slide.hasAttribute("id") ? $slide.id : i;
+        }); // activate the correct slide first
+
+        self.update();
+
+        if (self.props.slide) {
+          self.state._currentSlideId = self.props.slide;
+          self.update();
+        } else {
+          self.state._currentSlideId = self.state._slidesIds[0];
+          self.update();
+        }
+
+        self.state.goTo(self.state._currentSlideId);
+      },
+      getSlideIdByElement($slide) {
+        const idx = self.state._slideElements.indexOf($slide);
+
+        if (idx === -1) {
+          return;
+        }
+
+        return self.state._slidesIds[idx];
+      },
+      getSlideIdxByElement($slide) {
+        return self.state.getSlideIdxById(
+          self.state.getSlideIdByElement($slide)
         );
+      },
+      getSlideElementById(id) {
+        const slideIdx = self.state._slidesIds.indexOf(id);
+
+        return self.state._slideElements[slideIdx];
+      },
+      getSlideIdxById(id) {
+        return self.state._slidesIds.indexOf(id);
+      },
+      getFirstSlideId() {
+        return self.state._slidesIds[0];
+      },
+      getLastSlideId() {
+        return self.state._slidesIds[self.state._slidesIds.length - 1];
+      },
+      getPreviousSlideId() {
+        const currentSlideIdx = self.state.getCurrentSlideIdx();
+
+        if (currentSlideIdx > 0) {
+          return self.state._slidesIds[currentSlideIdx - 1];
+        }
+
+        return self.state.getLastSlideId();
+      },
+      getNextSlideId() {
+        const currentSlideIdx = self.state.getCurrentSlideIdx();
+
+        if (currentSlideIdx < self.state._slidesIds.length) {
+          return self.state._slidesIds[currentSlideIdx + 1];
+        }
+
+        return self.state.getFirstSlideId();
+      },
+      getCurrentSlideIdx() {
+        return self.state.getSlideIdxById(self.state._currentSlideId);
+      },
+      isLast() {
+        return self.state._currentSlideId === self.state.getLastSlideId();
+      },
+      isFirst() {
+        return self.state._currentSlideId === self.state.getFirstSlideId();
+      },
+      previous() {
+        if (!self.props.loop && self.state.isFirst()) {
+          return;
+        }
+
+        self.state.goTo(self.state.getPreviousSlideId());
+      },
+      next() {
+        if (!self.props.loop && self.state.isLast()) {
+          return;
+        }
+
+        self.state.goTo(self.state.getNextSlideId());
+      },
+      goTo(slideId) {
+        // call the behavior
+        const behaviorFn =
+          self.props.behaviors?.[self.props.behavior] ??
+          self.state._behaviors[self.props.behavior];
+        behaviorFn?.({
+          fromSlideId: self.state._currentSlideId,
+          toSlideId: slideId,
+          component: self.state._component,
+          getSlideElementById: self.state.getSlideElementById,
+          getSlideIdxById: self.state.getSlideIdxById,
+          getFirstSlideId: self.state.getFirstSlideId,
+          getLastSlideId: self.state.getLastSlideId,
+          isLast: self.state.isLast,
+          isFirst: self.state.isFirst,
+        }); // assign the new state current slide id
+
+        self.state._currentSlideId = slideId;
         self.update();
       },
     };
@@ -314,12 +522,40 @@ export default class S extends HTMLElement {
       this.props = {};
     }
 
-    this.componentProps = ["cssDeps", "lnf", "children"];
+    this.componentProps = [
+      "cssDeps",
+      "direction",
+      "transitionDuration",
+      "transitionEasing",
+      "slide",
+      "loop",
+      "behaviors",
+      "behavior",
+      "lnf",
+      "controls",
+      "nav",
+      "swipe",
+      "mousewheel",
+      "clickOnSlide",
+      "children",
+    ];
+
+    this.updateDeps = [[]];
 
     // used to keep track of all nodes created by show/for
     this.nodesToDestroy = [];
     // batch updates
     this.pendingUpdate = false;
+
+    // Event handler for 'pointerup' event on div-s-7
+    this.onDivS7Pointerup = (event) => {
+      this.state.previous();
+    };
+
+    // Event handler for 'pointerup' event on div-s-8
+    this.onDivS8Pointerup = (event) => {
+      this.state.next();
+    };
 
     if (true) {
       this.attachShadow({ mode: "open" });
@@ -354,8 +590,8 @@ export default class S extends HTMLElement {
     this.props.lnf = this.props.lnf ?? defaultProps.lnf ?? DEFAULT_PROPS.lnf;
     this.props.direction =
       this.props.direction ?? defaultProps.direction ?? DEFAULT_PROPS.direction;
-    this.props.behabiors =
-      this.props.behabiors ?? defaultProps.behabiors ?? DEFAULT_PROPS.behabiors;
+    this.props.behaviors =
+      this.props.behaviors ?? defaultProps.behaviors ?? DEFAULT_PROPS.behaviors;
     this.props.behavior =
       this.props.behavior ?? defaultProps.behavior ?? DEFAULT_PROPS.behavior;
     this.props.nextIconClass =
@@ -411,7 +647,7 @@ export default class S extends HTMLElement {
     this._root.innerHTML = `
                         
       <div data-el="div-s-1" data-ref="S-$container">
-        <div data-el="div-s-2">
+        <div data-el="div-s-2" data-ref="S-$root">
           <div data-el="div-s-3">
             <div data-el="div-s-4" data-ref="S-$slides">
               <slot></slot>
@@ -425,11 +661,11 @@ export default class S extends HTMLElement {
           </template>
       
           <div class="s-slider__controls">
-            <div class="s-slider__controls-previous">
+            <div data-el="div-s-7">
               <div class="s-slider__controls-previous-arrow"></div>
             </div>
       
-            <div class="s-slider__controls-next active">
+            <div data-el="div-s-8">
               <div class="s-slider__controls-next-arrow"></div>
             </div>
           </div>
@@ -466,18 +702,29 @@ export default class S extends HTMLElement {
   onMount() {
     // onMount
     __SSliderComponentInterface;
-    this.state.component = new __SComponent("s-slider", {
+    this.state._component = new __SComponent("s-slider", {
       bare: false,
     });
     this.update();
-    this.state.id = `s-slider-${__uniqid()}`;
+    this.state._id = `s-slider-${__uniqid()}`;
     this.update();
     this.state.mount();
-    this.state.status = "mounted";
+    this.state._status = "mounted";
     this.update();
   }
 
-  onUpdate() {}
+  onUpdate() {
+    const self = this;
+
+    self._$root.style.setProperty(
+      "--s-slider-slide",
+      self.state.getCurrentSlideIdx()
+    );
+    self._$root.style.setProperty(
+      "--s-slider-total",
+      self.state._slidesIds.length
+    );
+  }
 
   update() {
     if (this.pendingUpdate === true) {
@@ -497,41 +744,70 @@ export default class S extends HTMLElement {
 
   updateBindings() {
     this._root.querySelectorAll("[data-el='div-s-1']").forEach((el) => {
-      el.setAttribute("id", this.state.id);
+      el.setAttribute("id", this.state._id);
 
-      el.className = this.state.component?.className("", null, "s-bare");
+      el.className = this.state._component?.className("", null, "s-bare");
 
-      el.setAttribute("status", this.state.status);
+      el.setAttribute("status", this.state._status);
+
+      el.setAttribute("direction", this.props.direction);
+
+      el.setAttribute("behavior", this.props.behavior ?? "default");
 
       el.setAttribute("lnf", this.props.lnf ?? "default");
     });
 
     this._root.querySelectorAll("[data-el='div-s-2']").forEach((el) => {
-      el.className = this.state.component?.className("__root");
+      el.className = this.state._component?.className("__root");
     });
 
     this._root.querySelectorAll("[data-el='div-s-3']").forEach((el) => {
-      el.className = this.state.component?.className("__slides-wrapper");
+      el.className = this.state._component?.className("__slides-wrapper");
     });
 
     this._root.querySelectorAll("[data-el='div-s-4']").forEach((el) => {
-      el.className = this.state.component?.className("__slides");
+      el.className = this.state._component?.className("__slides");
     });
 
     this._root.querySelectorAll("[data-el='show-s']").forEach((el) => {
-      const whenCondition = this.state.slideElements.length;
+      const whenCondition = this.state._slideElements.length;
       if (whenCondition) {
         this.showContent(el);
       }
     });
 
     this._root.querySelectorAll("[data-el='for-s']").forEach((el) => {
-      let array = this.state.slideElements;
-      this.renderLoop(el, array, "child", "idx");
+      let array = this.state._slideElements;
+      this.renderLoop(el, array, "child");
     });
 
     this._root.querySelectorAll("[data-el='div-s-6']").forEach((el) => {
-      el.className = `s-slider__nav-item ${true ? "active" : ""}`;
+      const child = this.getScope(el, "child");
+
+      el.className = `s-slider__nav-item ${
+        this.state.getSlideIdxByElement(child) ==
+        this.state.getCurrentSlideIdx()
+          ? "active"
+          : ""
+      }`;
+    });
+
+    this._root.querySelectorAll("[data-el='div-s-7']").forEach((el) => {
+      el.className = `s-slider__controls-previous ${
+        this.props.loop || !this.state.isFirst() ? "active" : ""
+      }`;
+
+      el.removeEventListener("pointerup", this.onDivS7Pointerup);
+      el.addEventListener("pointerup", this.onDivS7Pointerup);
+    });
+
+    this._root.querySelectorAll("[data-el='div-s-8']").forEach((el) => {
+      el.className = `s-slider__controls-next ${
+        this.props.loop || !this.state.isLast() ? "active" : ""
+      }`;
+
+      el.removeEventListener("pointerup", this.onDivS8Pointerup);
+      el.addEventListener("pointerup", this.onDivS8Pointerup);
     });
   }
 

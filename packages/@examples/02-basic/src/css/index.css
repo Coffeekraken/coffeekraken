@@ -4,6 +4,8 @@
 @sugar.import ('./generic/**/*.css');
 
 body {
+  overflow-x: hidden;
+
   &.initial-loading .content {
     display: none;
   }

@@ -34,6 +34,7 @@ export default class SSliderComponentInterface extends __SInterface {
             behaviors: {
                 description: 'Specify the available behaviors for the slider',
                 type: 'Object',
+                default: {},
             },
             behavior: {
                 description:

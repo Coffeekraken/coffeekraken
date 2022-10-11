@@ -94,7 +94,12 @@ export default function ({
                 &:focus,
                 &:focus-within,
                 input:checked + &,
-                input:checked + .s-menu + & {                
+                input:checked + .s-menu + &,
+                :active > &,
+                :focus > &,
+                :focus-within > &,
+                input:checked + * > &,
+                input:checked + .s-menu + * > &, {                
                     transform: translateY(-0.5em) rotate(45deg);
             
                     &:before {

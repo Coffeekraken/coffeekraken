@@ -175,7 +175,7 @@ export default class SActivateFeature extends __SFeature {
                 } else {
                     switch (trigger) {
                         case 'click':
-                            $triggerer.addEventListener('pointerup', (e) => {
+                            $triggerer.addEventListener('click', (e) => {
                                 // only direct child(s) of the triggerer can trigger the activation
                                 if (e.target !== $triggerer) {
                                     // @ts-ignore
@@ -363,8 +363,6 @@ export default class SActivateFeature extends __SFeature {
             if (this._$targets) {
                 // @ts-ignore
                 this._$targets.forEach(($target) => {
-                    console.log('ac', $target);
-
                     if (this.props.activeClass) {
                         $target.classList.add(this.props.activeClass);
                     }

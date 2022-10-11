@@ -1,80 +1,53 @@
 .s-menu#primary-menu {
-  @sugar.ui.menu();
-
-  .s-menu__link--level-0 {
-    font-weight: bold;
-  }
-
-  @sugar.media <=mobile {
-    width: 100vw;
-    height: calc(100vh - 80px);
+    position: absolute;
     top: 80px;
-    left: 0;
-    transform: translate(100%, 0);
+    right: calc(50% - calc(sugar.theme(layout.container.default) * 0.5));
+    background: sugar.color(base, background);
+    padding: sugar.padding(30);
+    opacity: 0;
+    transform: translateX(0) translateY(25px);
+    pointer-events: none;
+    @sugar.border.radius();
+    @sugar.depth (100);
+    @sugar.transition (fast);
 
-    input:checked + & {
-      transform: translate(0, 0);
+    @sugar.media <=mobile {
+        right: 0;
+    }
 
-      &:before {
+    :checked + & {
         opacity: 1;
-      }
+        pointer-events: all;
+        transform: translateX(0) translateY(0);
     }
 
-    &:before {
-      content: '';
-      display: block;
-      position: fixed;
-      top: calc(sugar.margin(30) * -1 * 2);
-      left: 50%;
-      width: 100vw;
-      height: 100vh;
-      transform: translate(-50%, 0);
-      opacity: 0;
-      @sugar.transition (slow);
-    }
-
-    .s-menu__inner {
-      padding-block-start: sugar.padding(20);
-      padding-block-end: sugar.padding(100);
+    .s-menu__item:not(:focus, :focus-within) > .s-menu--level-1 {
+        display: none;
     }
 
     .s-menu__item:not(:last-child) {
-      border-bottom: 1px solid sugar.color(accent, --alpha 0.3);
+        border-bottom: 1px solid sugar.color(base, border);
+
+        &.s-menu__item--level-1 {
+            background: sugar.color(base, surface);
+            margin-inline-end: calc(sugar.margin(50) * -1);
+            @sugar.depth (30);
+        }
     }
-  }
-}
 
-/* #primary-menu .s-menu__item {
-    background: none !important;
-    position: relative;
-    perspective: 800px;
+    .s-menu__link {
+        display: block;
+        padding: sugar.padding(30);
+        background: sugar.color(accent, --alpha 0);
+        @sugar.border.radius();
+        @sugar.transition (fast);
 
-    &:has(> .s-menu__link) {
-        &:before {
-            opacity: 0;
-            pointer-events: none;
-            content: '';
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        &:hover {
             background: sugar.color(accent);
-            z-index: -1;
-            transform: rotateX(0) rotateY(0) translateX(0);
-            @sugar.transition (fast);
+            color: sugar.color(accent, foreground);
         }
 
-        &:hover:before {
-            opacity: 1;
-
-            transform: rotateX(-5deg) rotateY(35deg) translateX(2%);
-        }
-
-        &:nth-child(odd):before {
-            transform: rotateX(5deg) rotateY(-35deg) rotateZ(5deg)
-                translateX(-5%);
+        &.s-menu__link--level-1 {
         }
     }
-} */
+}

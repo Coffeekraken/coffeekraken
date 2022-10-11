@@ -84,7 +84,7 @@ export default function (api) {
          * @name            50
          * @namespace       config.themeSpace
          * @type            String
-         * @default         3
+         * @default         3.25
          *
          * Specify the "50" space used for margins and paddings.
          * MUST be a scale factor relative to the "default" absolute value specified.
@@ -92,12 +92,12 @@ export default function (api) {
          * @since           1.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        50: 3,
+        50: 3.25,
         /**
          * @name            60
          * @namespace       config.themeSpace
          * @type            String
-         * @default         3.75
+         * @default         4.25
          *
          * Specify the "60" space used for margins and paddings.
          * MUST be a scale factor relative to the "default" absolute value specified.
@@ -105,12 +105,12 @@ export default function (api) {
          * @since           1.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        60: 3.75,
+        60: 4.25,
         /**
          * @name            70
          * @namespace       config.themeSpace
          * @type            String
-         * @default         4.5
+         * @default         5.5
          *
          * Specify the "70" space used for margins and paddings.
          * MUST be a scale factor relative to the "default" absolute value specified.
@@ -118,12 +118,12 @@ export default function (api) {
          * @since           1.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        70: 4.5,
+        70: 5.5,
         /**
          * @name            80
          * @namespace       config.themeSpace
          * @type            String
-         * @default         5.25
+         * @default         7
          *
          * Specify the "80" space used for margins and paddings.
          * MUST be a scale factor relative to the "default" absolute value specified.
@@ -131,12 +131,12 @@ export default function (api) {
          * @since           1.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        80: 5.25,
+        80: 7,
         /**
          * @name            90
          * @namespace       config.themeSpace
          * @type            String
-         * @default         6
+         * @default         9
          *
          * Specify the "90" space used for margins and paddings.
          * MUST be a scale factor relative to the "default" absolute value specified.
@@ -144,12 +144,12 @@ export default function (api) {
          * @since           1.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        90: 6,
+        90: 9,
         /**
          * @name            100
          * @namespace       config.themeSpace
          * @type            String
-         * @default         6.75
+         * @default         11
          *
          * Specify the "100" space used for margins and paddings.
          * MUST be a scale factor relative to the "default" absolute value specified.
@@ -157,7 +157,7 @@ export default function (api) {
          * @since           1.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        100: 6.75,
+        100: 11,
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRztJQUN4QixJQUFJLEdBQUcsQ0FBQyxHQUFHLENBQUMsUUFBUSxLQUFLLE1BQU07UUFBRSxPQUFPO0lBRXhDLE9BQU87UUFDSDs7Ozs7Ozs7Ozs7V0FXRztRQUNILE9BQU8sRUFBRSxNQUFNO1FBRWY7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxDQUFDLEVBQUUsQ0FBQztRQUVKOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsRUFBRSxFQUFFLEtBQUs7UUFFVDs7Ozs7Ozs7Ozs7V0FXRztRQUNILEVBQUUsRUFBRSxJQUFJO1FBRVI7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxFQUFFLEVBQUUsR0FBRztRQUVQOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsRUFBRSxFQUFFLElBQUk7UUFFUjs7Ozs7Ozs7Ozs7V0FXRztRQUNILEVBQUUsRUFBRSxDQUFDO1FBRUw7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxFQUFFLEVBQUUsSUFBSTtRQUVSOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsRUFBRSxFQUFFLEdBQUc7UUFFUDs7Ozs7Ozs7Ozs7V0FXRztRQUNILEVBQUUsRUFBRSxJQUFJO1FBRVI7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxFQUFFLEVBQUUsQ0FBQztRQUVMOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsR0FBRyxFQUFFLElBQUk7S0FDWixDQUFDO0FBQ04sQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRztJQUN4QixJQUFJLEdBQUcsQ0FBQyxHQUFHLENBQUMsUUFBUSxLQUFLLE1BQU07UUFBRSxPQUFPO0lBRXhDLE9BQU87UUFDSDs7Ozs7Ozs7Ozs7V0FXRztRQUNILE9BQU8sRUFBRSxNQUFNO1FBRWY7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxDQUFDLEVBQUUsQ0FBQztRQUVKOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsRUFBRSxFQUFFLEtBQUs7UUFFVDs7Ozs7Ozs7Ozs7V0FXRztRQUNILEVBQUUsRUFBRSxJQUFJO1FBRVI7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxFQUFFLEVBQUUsR0FBRztRQUVQOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsRUFBRSxFQUFFLElBQUk7UUFFUjs7Ozs7Ozs7Ozs7V0FXRztRQUNILEVBQUUsRUFBRSxJQUFJO1FBRVI7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxFQUFFLEVBQUUsSUFBSTtRQUVSOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsRUFBRSxFQUFFLEdBQUc7UUFFUDs7Ozs7Ozs7Ozs7V0FXRztRQUNILEVBQUUsRUFBRSxDQUFDO1FBRUw7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxFQUFFLEVBQUUsQ0FBQztRQUVMOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsR0FBRyxFQUFFLEVBQUU7S0FDVixDQUFDO0FBQ04sQ0FBQyJ9

@@ -1,24 +1,24 @@
 .section-story {
-  position: relative;
-  padding: sugar.padding(100) sugar.padding(30);
-
-  .s-layout {
-    align-items: center;
-    gap: sugar.margin(50);
     position: relative;
-    z-index: 10;
-
-    @sugar.media mobile {
-      @sugar.layout ('2 _ 1');
-    }
-  }
-
-  &[layout='21'] {
-    background-color: sugar.color(base, background);
-    transform: skewY(-2deg);
+    padding: sugar.padding(80) sugar.padding(30);
 
     .s-layout {
-      transform: skewY(2deg);
+        align-items: center;
+        gap: sugar.margin(50);
+        position: relative;
+        z-index: 10;
+
+        @sugar.media mobile {
+            @sugar.layout ('2 _ 1');
+        }
     }
-  }
+
+    &[layout='21'] {
+        background-color: sugar.color(base, background);
+        transform: skewY(-2deg);
+
+        .s-layout {
+            transform: skewY(2deg);
+        }
+    }
 }

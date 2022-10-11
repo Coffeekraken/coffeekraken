@@ -1,25 +1,25 @@
 .section-separator {
+  position: relative;
+  transform: skewY(1deg);
+
+  .__bkg {
+    background: sugar.color(base, background, --lighten 5%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    .__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .__content {
     position: relative;
-    transform: skewY(1deg);
-
-    .__bkg {
-        background: sugar.color(base, background, --lighten 5%);
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-
-        .__img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-    }
-
-    .__content {
-        position: relative;
-        z-index: 1;
-        padding: sugar.padding(100) sugar.padding(30);
-    }
+    z-index: 1;
+    padding: sugar.padding(80) sugar.padding(30);
+  }
 }

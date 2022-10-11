@@ -160,5 +160,5 @@
                     display: none;
                 }
 .s-rhythm--vertical > .s-slider {
-                    margin-bottom: calc(var(--s-theme-margin-default, 1rem) * 3.75);
+                    margin-bottom: calc(var(--s-theme-margin-default, 1rem) * 4.25);
                 }

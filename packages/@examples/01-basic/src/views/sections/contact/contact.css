@@ -1,6 +1,6 @@
 .section-contact {
   background: sugar.color(base, background, --darken 5%);
-  padding-block: sugar.padding(100);
+  padding-block: sugar.padding(80);
   position: relative;
 
   @sugar.media mobile {

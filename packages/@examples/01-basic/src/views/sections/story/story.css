@@ -1,6 +1,6 @@
 .section-story {
   position: relative;
-  padding: sugar.padding(100) sugar.padding(30);
+  padding: sugar.padding(80) sugar.padding(30);
   background: sugar.color(base, background, --darken 5%);
 
   .s-layout {

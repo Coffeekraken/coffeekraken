@@ -2,27 +2,15 @@
     <div class="s-container">
         <div class="s-layout">
             <div>
-                <a class="s-display:block s-mbe:30" href="/" title="Kraken">
+                <a href="/" title="Kraken">
                     {% include 'generic/logo/logo.twig' %}
                 </a>
-                <p class="s-typo:p">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vestibulum varius mauris, vel lobortis sapien ornare vitae.
-                </p>
             </div>
             <div>
                 {% include 'sugar/menu/generic/generic.twig' with {
                     'id': 'footer-menu',
-                    'menu': menuFooter
+                    'menu': menus.footer
                 } %}
-            </div>
-            <div>
-                <h4 class="s-typo:h5 s-mbe:30">
-                    Contact
-                </h4>
-                <p class="s-typo:p s-tc:accent s-mbe:10">BuzzBrothers</p>
-                <p class="s-typo:p s-mbe:10">Rue Vautier 37</p>
-                <p class="s-typo:p s-mbe:10">1227 Carouge</p>
-                <a href="tel: 022 300 51 40" class="s-typo:a">+41 22 300 51 40</a>
             </div>
         </div>
     </div>

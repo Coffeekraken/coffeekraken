@@ -10,7 +10,7 @@
     left: 50%;
     width: 100vw;
     height: 50px;
-    background: sugar.color(accent);
+    background: sugar.color(accent, --alpha 0.1);
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 0);
     transform-origin: 0 0;
     transform: translateX(-30%) skewY(10deg);
@@ -24,7 +24,7 @@
     right: 50%;
     width: 100vw;
     height: 50px;
-    background: sugar.color(complementary);
+    background: sugar.color(complementary, --alpha 0.1);
     clip-path: polygon(0 0, 100% 0, 100% 0, 0 100%);
     transform: translateX(-30%) skewY(10deg);
   }
@@ -46,6 +46,6 @@
   .__content {
     position: relative;
     z-index: 1;
-    padding: sugar.padding(100) sugar.padding(30);
+    padding: sugar.padding(80) sugar.padding(30);
   }
 }

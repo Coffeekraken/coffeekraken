@@ -18,7 +18,7 @@
     }
   }
 
-  .card--large {
+  .s-layout > div:first-child > .s-card {
     .s-card__img-container {
       width: 33%;
 

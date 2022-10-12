@@ -21,7 +21,12 @@ if ($data->_sharedDataFilePath) {
 // preparing the paths
 $viewName = str_replace('.twig', '', $params->viewDotPath);
 
-$loader = new \Twig\Loader\FilesystemLoader($params->rootDirs);
+$loader = new \Twig\Loader\FilesystemLoader();
+foreach ($params->rootDirs as $dir) {
+    if (file_exists($dir)) {
+        $loader->addPath($dir);
+    }
+}
 $twig = new \Twig\Environment($loader, [
     // 'cache' => $params->cacheDir . '/twig',
     'debug' => true,

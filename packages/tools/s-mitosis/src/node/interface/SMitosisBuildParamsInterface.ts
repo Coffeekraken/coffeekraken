@@ -20,6 +20,12 @@ import __SInterface from '@coffeekraken/s-interface';
 class SMitosisBuildParamsInterface extends __SInterface {
     static get _definition() {
         return {
+            targets: {
+                type: 'String[]',
+                description: 'Specify the targets you want for your build',
+                default: ['webcomponent', 'react'],
+                values: ['webcomponent', 'react'],
+            },
             watch: {
                 type: 'Boolean',
                 description:

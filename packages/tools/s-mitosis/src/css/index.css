@@ -1,0 +1,32 @@
+@sugar.theme();
+
+body {
+    margin: 0;
+}
+
+.content {
+    display: none;
+
+    &.active {
+        display: block;
+    }
+}
+
+.s-tabs {
+    @sugar.ui.tabs ($scope: 'bare');
+    background: sugar.color(base, backgroud, --darken 45%);
+
+    .s-tabs__item {
+        padding: sugar.padding(ui.tabs.paddingBlock)
+            sugar.padding(ui.tabs.paddingInline);
+        background: sugar.color(accent, --alpha 0);
+        color: sugar.color(accent, foreground);
+
+        &:hover {
+            background: sugar.color(accent, --alpha 0.3);
+        }
+        &.active {
+            background: sugar.color(accent, --alpha 1);
+        }
+    }
+}

@@ -23,6 +23,12 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 class SMitosisBuildParamsInterface extends s_interface_1.default {
     static get _definition() {
         return {
+            targets: {
+                type: 'String[]',
+                description: 'Specify the targets you want for your build',
+                default: ['webcomponent', 'react'],
+                values: ['webcomponent', 'react'],
+            },
             watch: {
                 type: 'Boolean',
                 description: 'Specify if you want to watch for files updates and rebuild your component(s) automatically',
@@ -33,4 +39,4 @@ class SMitosisBuildParamsInterface extends s_interface_1.default {
     }
 }
 exports.default = SMitosisBuildParamsInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDRFQUFxRDtBQUVyRDs7Ozs7Ozs7Ozs7Ozs7R0FjRztBQUNILE1BQU0sNEJBQTZCLFNBQVEscUJBQVk7SUFDbkQsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUUsU0FBUztnQkFDZixXQUFXLEVBQ1AsNEZBQTRGO2dCQUNoRyxPQUFPLEVBQUUsS0FBSztnQkFDZCxLQUFLLEVBQUUsR0FBRzthQUNiO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQUNELGtCQUFlLDRCQUE0QixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDRFQUFxRDtBQUVyRDs7Ozs7Ozs7Ozs7Ozs7R0FjRztBQUNILE1BQU0sNEJBQTZCLFNBQVEscUJBQVk7SUFDbkQsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILE9BQU8sRUFBRTtnQkFDTCxJQUFJLEVBQUUsVUFBVTtnQkFDaEIsV0FBVyxFQUFFLDZDQUE2QztnQkFDMUQsT0FBTyxFQUFFLENBQUMsY0FBYyxFQUFFLE9BQU8sQ0FBQztnQkFDbEMsTUFBTSxFQUFFLENBQUMsY0FBYyxFQUFFLE9BQU8sQ0FBQzthQUNwQztZQUNELEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUUsU0FBUztnQkFDZixXQUFXLEVBQ1AsNEZBQTRGO2dCQUNoRyxPQUFPLEVBQUUsS0FBSztnQkFDZCxLQUFLLEVBQUUsR0FBRzthQUNiO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQUNELGtCQUFlLDRCQUE0QixDQUFDIn0=

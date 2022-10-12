@@ -374,6 +374,31 @@ export default class SActivateFeature extends __SFeature {
                             );
                         });
                     }
+
+                    // handle if the direct child is a template
+                    if (
+                        $target.children.length === 1 &&
+                        $target.children[0].tagName === 'TEMPLATE'
+                    ) {
+                        const $template: HTMLTemplateElement =
+                            $target.children[0];
+                        const $container = document.createElement('div');
+                        const html = [];
+                        Array.from($template.content.childNodes).forEach(
+                            ($child) => {
+                                if ($child.tagName === 'SCRIPT') {
+                                    document.head.appendChild($child);
+                                } else {
+                                    html.push(
+                                        $child.outerHTML ?? $child.textContent,
+                                    );
+                                }
+                            },
+                        );
+                        $container.innerHTML = html.join('\n');
+                        $target.appendChild($container);
+                        $template.remove();
+                    }
                 });
             }
         }, this.props.activateTimeout);

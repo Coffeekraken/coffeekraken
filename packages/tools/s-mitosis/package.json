@@ -9,12 +9,18 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
+        "@coffeekraken/s-activate-feature": "^2.0.0-alpha.20",
         "@coffeekraken/s-component": "^2.0.0-alpha.20",
         "@coffeekraken/s-interface": "^2.0.0-alpha.20",
         "@coffeekraken/s-log": "^2.0.0-alpha.20",
         "@coffeekraken/s-promise": "^2.0.0-alpha.20",
+        "@coffeekraken/s-view-renderer": "^2.0.0-alpha.20",
         "@coffeekraken/sugar": "^2.0.0-alpha.20",
-        "chokidar": "^3.5.3"
+        "chokidar": "^3.5.3",
+        "express": "^4.18.2",
+        "glob": "^8.0.3",
+        "vite": "^3.1.7",
+        "vite-plugin-dynamic-import": "^1.2.2"
     },
     "main": "dist/pkg/cjs/node/exports.js",
     "module": "dist/pkg/esm/node/exports.js",

@@ -2,11 +2,19 @@ import __SClass from '@coffeekraken/s-class';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __SViewRenderer from '@coffeekraken/s-view-renderer';
+import { __dirname } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import { __onProcessExit, __spawn } from '@coffeekraken/sugar/process';
+import { __dashCase } from '@coffeekraken/sugar/string';
 import __chokidar from 'chokidar';
+import __express from 'express';
+import __glob from 'glob';
+import __path from 'path';
+import { createServer } from 'vite';
 import __SMitosisBuildParamsInterface from './interface/SMitosisBuildParamsInterface';
+import __SMitosisStartParamsInterface from './interface/SMitosisStartParamsInterface';
 
 /**
  * @name                SMitosis
@@ -37,6 +45,10 @@ import __SMitosisBuildParamsInterface from './interface/SMitosisBuildParamsInter
 
 export interface ISMitosisBuildParams {
     watch: boolean;
+}
+
+export interface ISMitosisStartParams {
+    port: number;
 }
 
 export interface ISMitosisSettings {}
@@ -89,6 +101,131 @@ class SMitosis extends __SClass {
                 delete this.constructor._cachedDocmapJson.current;
             });
         }
+    }
+
+    /**
+     * @name          start
+     * @type          Function
+     *
+     * This method allows you to start a server in order to develop your mitosis component easily
+     * with feature like multiple frameworks testing, auto compilation, etc...
+     *
+     * @param         {Partial<ISMitosisStartParams>}          params        The params to use to start your mitosis env
+     * @return        {SPromise}                                     A promise resolved once the scan process has been finished
+     *
+     * @since         2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    start(params: Partial<ISMitosisStartParams>): Promise<any> {
+        const finalParams = <ISMitosisStartParams>(
+            __deepMerge(__SMitosisStartParamsInterface.defaults(), params)
+        );
+        return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+            emit('log', {
+                type: __SLog.TYPE_INFO,
+                value: `<yellow>[start]</yellow> Starting a new mitosis server...`,
+            });
+
+            const app: any = __express();
+
+            app.get('/', async (req, res) => {
+                const viewRenderer = new __SViewRenderer({
+                    rootDirs: [`${__packageRootDir(__dirname())}/src/views`],
+                });
+
+                const componentFiles = __glob.sync('output/**/*.*', {
+                        cwd: __packageRootDir(),
+                    }),
+                    components: any[] = [];
+
+                componentFiles.forEach((componentFilePath) => {
+                    const target = componentFilePath.split('/')[1],
+                        absoluteComponentFilePath = `${__packageRootDir()}/${componentFilePath}`,
+                        name = __path
+                            .basename(componentFilePath)
+                            .replace(__path.extname(componentFilePath), '')
+                            .replace(/Component$/, '');
+
+                    components.push({
+                        target,
+                        name,
+                        tagName: __dashCase(name),
+                        path: `/${componentFilePath}`,
+                    });
+                });
+
+                const result = await viewRenderer.render('index', {
+                    ...params,
+                    components,
+                });
+
+                // const htmlFilePath = `${__packageRootDir(
+                //     __dirname(),
+                // )}/src/public/index.html`;
+                res.type('text/html');
+                res.send(result.value);
+            });
+
+            app.get('/dist/css/index.css', async (req, res) => {
+                const cssFilePath = `${__packageRootDir(
+                    __dirname(),
+                )}/dist/css/index.css`;
+                res.sendFile(cssFilePath);
+            });
+            app.get('/dist/js/index.esm.js', async (req, res) => {
+                const jsFilePath = `${__packageRootDir(
+                    __dirname(),
+                )}/dist/js/index.esm.js`;
+                res.sendFile(jsFilePath);
+            });
+
+            let server;
+            await new Promise((_resolve) => {
+                server = app.listen(8082, () => {
+                    _resolve();
+                });
+            });
+
+            const viteServer = await createServer({
+                // any valid user config options, plus `mode` and `configFile`
+                configFile: false,
+                root: __packageRootDir(),
+                optimizeDeps: {
+                    esbuildOptions: {
+                        // mainFields: ['module', 'main'],
+                        resolveExtensions: ['.js', '.ts'],
+                    },
+                },
+                // plugins: [__dynamicImportPlugin()],
+                server: {
+                    port: finalParams.port,
+                    proxy: __SSugarConfig.get('mitosis.server.proxy'),
+                },
+            });
+            await viteServer.listen();
+
+            emit('log', {
+                type: __SLog.TYPE_INFO,
+                value: `<green>[start]</green> Your mitosis server is available at:`,
+            });
+            emit('log', {
+                type: __SLog.TYPE_INFO,
+                value: `<green>[start]</green> <cyan>http://127.0.0.1:${finalParams.port}</cyan>`,
+            });
+
+            __onProcessExit(() => {
+                emit('log', {
+                    value: `<red>[kill]</red> Gracefully killing the <cyan>mitosis server</cyan>...`,
+                });
+                return new Promise((resolve) => {
+                    server.close(async () => {
+                        await viteServer.close();
+                        // @ts-ignore
+                        resolve();
+                    });
+                });
+            });
+        });
     }
 
     /**
@@ -178,6 +315,26 @@ class SMitosis extends __SClass {
                         value: `<yellow>[watch]</yellow> Watching for files changes...`,
                     });
                 }
+
+                // const files = __glob.sync(`output/**/*.*`, {
+                //     cwd: __packageRootDir(),
+                // });
+
+                // files.forEach((filePath) => {
+                //     const absoluteFilePath = `${__packageRootDir()}/${filePath}`,
+                //         target = filePath.split('/')[1];
+
+                //     __ensureDirSync(
+                //         `${__packageRootDir()}/src/js/build/${target}`,
+                //     );
+                //     __fs.renameSync(
+                //         absoluteFilePath,
+                //         `${__packageRootDir()}/src/js/build/${target}/${__path.basename(
+                //             filePath,
+                //         )}`,
+                //     );
+                // });
+                // __removeSync(`${__packageRootDir()}/output`);
 
                 resolve();
             },

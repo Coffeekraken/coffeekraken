@@ -13,8 +13,8 @@ import __SComponent from '@coffeekraken/s-component';
 import { __elementAreaStats } from '@coffeekraken/sugar/dom';
 import { __easeInterval } from '@coffeekraken/sugar/function';
 import { __uniqid } from '@coffeekraken/sugar/string';
-import __css from '../../../../../src/css/s-slider-component.css';
-import __SSliderComponentInterface from '../../../../../src/js/interface/SSLiderComponentInterface';
+import __css from '../../../../src/css/s-slider-component.css';
+import __SSliderComponentInterface from '../../../../src/js/interface/SSliderComponentInterface';
 
 /**
  * @name                SSliderComponent
@@ -284,7 +284,21 @@ useMetadata({
     isAttachedToShadowDom: true,
 });
 
-export default function S(props: Props) {
+export const preview = `
+    <s-slider>
+        <div s-slider-slide>
+            <img src="https://picsum.photos/1600/900?1" />
+        </div>
+        <div s-slider-slide>
+            <img src="https://picsum.photos/1600/900?2" />
+        </div>
+        <div s-slider-slide>
+            <img src="https://picsum.photos/1600/900?3" />
+        </div>
+    </s-slider>
+`;
+
+export default function SSlider(props: Props) {
     // default props
     useDefaultProps<Props>(DEFAULT_PROPS);
 

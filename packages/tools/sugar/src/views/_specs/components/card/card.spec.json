@@ -39,7 +39,6 @@
             ]
         },
         "spacing": "@sugar.views.props.spacing",
-        "color": "@sugar.views.props.color",
         "cta": "@sugar.views.components.cta",
         "attributes": "@sugar.views.props.attributes"
     }

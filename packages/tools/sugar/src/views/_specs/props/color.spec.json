@@ -2,24 +2,40 @@
     "type": "Select",
     "title": "Color",
     "description": "List of available colors",
-    ""
-
-    "props": {
-        "name": {
-            "type": "Text",
-            "description": "The color name",
-            "values": [
-                "base",
-                "main",
-                "accent",
-                "complementary",
-                "success",
-                "info",
-                "warning",
-                "error"
-            ],
-            "default": "accent",
-            "required": "true"
+    "options": [
+        {
+            "name": "Base",
+            "value": "base"
+        },
+        {
+            "name": "Main",
+            "value": "main"
+        },
+        {
+            "name": "Accent",
+            "value": "accent"
+        },
+        {
+            "name": "Complementary",
+            "value": "complementary"
+        },
+        {
+            "name": "Success",
+            "value": "success"
+        },
+        {
+            "name": "Info",
+            "value": "info"
+        },
+        {
+            "name": "Warning",
+            "value": "warning"
+        },
+        {
+            "name": "Error",
+            "value": "error"
         }
-    }
+    ],
+    "default": "accent",
+    "required": true
 }

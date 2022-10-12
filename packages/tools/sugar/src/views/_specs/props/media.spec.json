@@ -4,6 +4,10 @@
     "required": true,
     "options": [
         {
+            "name": "Wide",
+            "value": "wide"
+        },
+        {
             "name": "desktop",
             "value": "desktop"
         },

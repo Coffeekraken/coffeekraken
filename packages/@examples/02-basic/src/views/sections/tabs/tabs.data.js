@@ -1,5 +1,10 @@
 export default {
     title: 'Expect more!',
+    image: {
+        url: '/dist/img/tango.jpg',
+        title: '',
+        alt: '',
+    },
     tabs: [
         {
             id: 'tab-1',

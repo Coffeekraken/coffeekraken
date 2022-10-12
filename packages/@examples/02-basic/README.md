@@ -15,18 +15,18 @@
 
 <!-- image -->
 
-![01-basic](https://cdnv2.coffeekraken.io/readme-header.png)
+![02-basic](https://cdnv2.coffeekraken.io/readme-header.png)
 
 
 <!-- header -->
 
-# 01-basic
+# 02-basic
 
 ###### [AGPL-version-3.0](./license) 1.0.0 - [Git repository]()
 
-[![size](https://shields.io/bundlephobia/min/01-basic?style&#x3D;for-the-badge)](https://www.npmjs.com/package/01-basic)
-[![downloads](https://shields.io/npm/dm/01-basic?style&#x3D;for-the-badge)](https://www.npmjs.com/package/01-basic)
-[![license](https://shields.io/npm/l/01-basic?style&#x3D;for-the-badge)](./LICENSE)
+[![size](https://shields.io/bundlephobia/min/02-basic?style&#x3D;for-the-badge)](https://www.npmjs.com/package/02-basic)
+[![downloads](https://shields.io/npm/dm/02-basic?style&#x3D;for-the-badge)](https://www.npmjs.com/package/02-basic)
+[![license](https://shields.io/npm/l/02-basic?style&#x3D;for-the-badge)](./LICENSE)
 [![discord](https://img.shields.io/discord/940362961682333767?color&#x3D;5100FF&amp;label&#x3D;Join%20us%20on%20Discord&amp;style&#x3D;for-the-badge)](https://discord.gg/HzycksDJ)
 
 
@@ -42,7 +42,7 @@
 ### Install
 
 ```shell
-npm i 01-basic
+npm i 02-basic
 
 ```
 

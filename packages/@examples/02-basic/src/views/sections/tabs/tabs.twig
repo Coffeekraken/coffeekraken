@@ -1,7 +1,7 @@
-<section class="section-tabs">
+<section class="section-tabs" s-appear in="bottom" delay="400">
     <div class="s-container">
-        <div class="__layout">
-            <div s-appear in="left" delay="400">
+        <div class="s-layout">
+            <div s-appear in="left" delay="600">
                 <div class="__tabs">
                     {% for tab in tabs %}
                         <a class="__tabs-item" href="#{{ tab.id }}" s-activate group="tabs">
@@ -10,9 +10,7 @@
                     {% endfor %}
                 </div>
             </div>
-
-            <div s-appear in="right" delay="600">
-
+            <div s-appear in="right" delay="700">
                 {% for tab in tabs %}
                     <div class="__content" id="{{ tab.id }}">
                         <h1 class="s-typo:h3 s-mbe:30">{{ tab.title|raw }}</h1>
@@ -23,9 +21,8 @@
                         </a>
                     </div>
                 {% endfor %}
-
             </div>
-
+            <img  class="__img" src="{{ image.url }}" />
         </div>
     </div>
 </section>

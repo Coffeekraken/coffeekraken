@@ -1,4 +1,14 @@
 {
+    "$custom": {
+        "menus": {
+            "primary": {
+                "name": "Primary menu"
+            },
+            "footer": {
+                "name": "Footer menu"
+            }
+        }
+    },
     "metas": {
         "lang": "en",
         "title": "01-basic",

@@ -1,57 +1,57 @@
 .section-specs {
-  background: sugar.color(base, surface, --darken 10%);
-  background: linear-gradient(
-    sugar.color(base, surface, --darken 10%),
-    sugar.color(base, surface, --alpha 0)
-  );
-  margin-block-start: 100px;
-  margin-block-end: 100px;
-  position: relative;
-  z-index: 20;
+    background: sugar.color(base, surface, --darken 10%);
+    background: linear-gradient(
+        sugar.color(base, surface, --darken 10%),
+        sugar.color(base, surface, --alpha 0)
+    );
+    margin-block-start: 100px;
+    margin-block-end: 100px;
+    position: relative;
+    z-index: 20;
 
-  @sugar.media <=mobile {
-    margin-block-start: 0;
-  }
-
-  .s-layout {
-    @sugar.media mobile {
-      gap: sugar.margin(100);
-    }
-  }
-
-  @sugar.media >mobile {
-    .card {
-      margin-block-end: -100px;
-      @sugar.transition();
-
-      .s-card__img {
-        @sugar.transition();
-      }
-
-      &:hover {
-        transform: rotateX(0) rotateY(0) rotateZ(0) !important;
-      }
+    @sugar.media <=mobile {
+        margin-block-start: 0;
     }
 
     .s-layout {
-      & > *:nth-child(1) .card {
-        position: relative;
-        top: -100px;
-        left: 0;
-        transform: rotateX(5deg) rotateY(5deg) rotateZ(2deg);
-      }
-      & > *:nth-child(2) .card {
-        position: relative;
-        top: 100px;
-        left: 0;
-        transform: rotateX(-5deg) rotateY(-5deg) rotateZ(0deg);
-      }
-      & > *:nth-child(3) .card {
-        position: relative;
-        top: -40px;
-        left: 0;
-        transform: rotateX(5deg) rotateY(5deg) rotateZ(-1deg);
-      }
+        @sugar.media mobile {
+            gap: sugar.margin(100);
+        }
     }
-  }
+
+    @sugar.media >mobile {
+        .s-card {
+            margin-block-end: -100px;
+            @sugar.transition();
+
+            .s-card__img {
+                @sugar.transition();
+            }
+
+            &:hover {
+                transform: rotateX(0) rotateY(0) rotateZ(0) !important;
+            }
+        }
+
+        .s-layout {
+            & > *:nth-child(1) .s-card {
+                position: relative;
+                top: -100px;
+                left: 0;
+                transform: rotateX(5deg) rotateY(5deg) rotateZ(2deg);
+            }
+            & > *:nth-child(2) .s-card {
+                position: relative;
+                top: 100px;
+                left: 0;
+                transform: rotateX(-5deg) rotateY(-5deg) rotateZ(0deg);
+            }
+            & > *:nth-child(3) .s-card {
+                position: relative;
+                top: -40px;
+                left: 0;
+                transform: rotateX(5deg) rotateY(5deg) rotateZ(-1deg);
+            }
+        }
+    }
 }

@@ -2,7 +2,7 @@
     perspective: 800px;
 }
 
-.card {
+.s-card {
     position: relative;
     z-index: 10;
 

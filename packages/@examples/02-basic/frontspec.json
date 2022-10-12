@@ -11,17 +11,17 @@
     },
     "metas": {
         "lang": "en",
-        "title": "01-basic",
+        "title": "02-basic",
         "homepage": "",
         "description": "",
-        "themeColor": "#ffbb00",
+        "themeColor": "#E40015",
         "author": {
             "name": "",
             "email": "",
             "url": ""
         },
         "og": {
-            "title": "01-basic",
+            "title": "02-basic",
             "description": "",
             "type": "website",
             "url": "",
@@ -55,6 +55,7 @@
     },
     "media": {
         "defaultAction": "<=",
+        "defaultMedia": "desktop",
         "defaultQuery": "screen",
         "queries": {
             "mobile": {
@@ -72,14 +73,19 @@
             "wide": {
                 "min-width": 2048,
                 "max-width": null
-            },
-            "dwarf": {
-                "min-height": null,
-                "max-height": 700
             }
         }
     },
     "views": {
+        "layouts": {
+            "main": {
+                "name": "Default (main)",
+                "viewPath": {
+                    "twig": "layouts/main.twig",
+                    "blade": null
+                }
+            }
+        },
         "rootDirs": {
             "twig": [
                 "./src/views",
@@ -117,12 +123,12 @@
         "20": 0.75,
         "30": 1.5,
         "40": 2.25,
-        "50": 3,
-        "60": 3.75,
-        "70": 4.5,
-        "80": 5.25,
-        "90": 6,
-        "100": 6.75,
+        "50": 3.25,
+        "60": 4.25,
+        "70": 5.5,
+        "80": 7,
+        "90": 9,
+        "100": 11,
         "default": "1rem"
     },
     "padding": {
@@ -131,12 +137,12 @@
         "20": 0.75,
         "30": 1.5,
         "40": 2.25,
-        "50": 3,
-        "60": 3.75,
-        "70": 4.5,
-        "80": 5.25,
-        "90": 6,
-        "100": 6.75,
+        "50": 3.25,
+        "60": 4.25,
+        "70": 5.5,
+        "80": 7,
+        "90": 9,
+        "100": 11,
         "default": "1rem"
     },
     "font": {
@@ -147,9 +153,9 @@
                 "import": "https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap"
             },
             "title": {
-                "font-family": "\"Titillium Web\"",
-                "font-weight": 600,
-                "import": "https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap"
+                "font-family": "Caveat",
+                "font-weight": 700,
+                "import": "https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap"
             },
             "quote": {
                 "font-family": "\"Palatino, Times, Georgia, serif\"",
@@ -337,6 +343,14 @@
             "1_2345": "1 _ 2 3 4 5",
             "1234_5": "1 2 3 4 _ 5",
             "1_2_3_4_5": "1 _ 2 _ 3 _ 4 _ 5"
+        }
+    },
+    "menus": {
+        "primary": {
+            "name": "Primary menu"
+        },
+        "footer": {
+            "name": "Footer menu"
         }
     }
 }

@@ -3,6 +3,12 @@
     "title": "Heading",
     "description": "Heading section",
     "props": {
+        "bkg": {
+            "type": "Image",
+            "Title": "Background image",
+            "description": "Background image",
+            "required": true
+        },
         "title": {
             "type": "Text",
             "title": "Title",

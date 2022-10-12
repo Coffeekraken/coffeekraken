@@ -68,11 +68,17 @@ function layoutCss($layout, $settings = [])
         $keys = array_keys($queries);
 
         $orderedLayouts = [];
+
         foreach ($keys as $media) {
             if (isset($layout[$media])) {
                 $orderedLayouts[$media] = $layout[$media];
             }
         }
+
+        if (isset($layout['default'])) {
+            $orderedLayouts['default'] = $layout['default'];
+        }
+
         $orderedLayouts = array_reverse($orderedLayouts);
 
         foreach ($orderedLayouts as $media => $lay) {
@@ -91,8 +97,10 @@ function layoutCss($layout, $settings = [])
     }
 
     // make sure that if we pass the media as "default"
-    // it is setted to desktop
-    if (isset($finalParams->mediaSettings->defaultMedia)) {
+    // it is setted to null to avoid creating media query for it
+    if ($finalParams->media == 'default') {
+        $finalParams->media = null;
+    } elseif (isset($finalParams->mediaSettings->defaultMedia)) {
         if ($finalParams->media == $finalParams->mediaSettings->defaultMedia) {
             $finalParams->media = null;
         }

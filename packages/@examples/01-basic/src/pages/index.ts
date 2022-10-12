@@ -50,7 +50,7 @@ export default {
         }
 
         return {
-          container: true,
+          container: 'wide',
           // frontspec: res.templateData.shared.frontspec,
           id: 'cards',
           attributes: {

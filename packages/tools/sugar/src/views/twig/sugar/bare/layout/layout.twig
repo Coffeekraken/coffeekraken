@@ -12,7 +12,7 @@
     {% if container %}
         <div class="s-container:{{ container }}">
     {% endif %}
-    <div class="s-layout" id="{{ finalId }}-layout">
+    <div class="s-layout {{ gap ? 's-gap:' ~ gap : '' }}" id="{{ finalId }}-layout">
         {{ content|raw }}
     </div>
     {% if container %}

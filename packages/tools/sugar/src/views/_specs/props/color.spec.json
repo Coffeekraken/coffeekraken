@@ -1,7 +1,9 @@
 {
-    "type": "Color",
+    "type": "Select",
     "title": "Color",
     "description": "List of available colors",
+    ""
+
     "props": {
         "name": {
             "type": "Text",

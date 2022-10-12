@@ -55,11 +55,6 @@
         }
     }
 
-    .s-card__content {
-        /* padding-block-end: sugar.padding(50);
-        padding-inline: sugar.padding(50); */
-    }
-
     &:before,
     &:after {
         content: '';

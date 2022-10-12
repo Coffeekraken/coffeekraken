@@ -3,19 +3,33 @@
     "title": "Link",
     "description": "Describe a link with props like \"url\", \"target\", etc...",
     "props": {
+        "text": {
+            "type": "Text",
+            "description": "Specify the text of the link",
+            "required": true
+        },
         "url": {
-            "type": "String",
+            "type": "Text",
             "description": "Specify the url of the link",
             "required": true
         },
         "target": {
-            "type": "String",
+            "type": "Select",
             "description": "Specify the target of the link",
-            "values": ["__self", "__blank"],
+            "options": [
+                {
+                    "name": "Same window (tab)",
+                    "value": "__self"
+                },
+                {
+                    "name": "New window (tab)",
+                    "value": "__blank"
+                }
+            ],
             "default": "__self"
         },
         "title": {
-            "type": "String",
+            "type": "Text",
             "description": "Specify a title to be used on the link"
         }
     }

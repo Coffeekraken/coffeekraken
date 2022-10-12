@@ -4,9 +4,6 @@
             "primary": {
                 "name": "Primary menu"
             },
-            "secondary": {
-                "name": "Secondary menu"
-            },
             "footer": {
                 "name": "Footer menu"
             }
@@ -76,10 +73,6 @@
             "wide": {
                 "min-width": 2048,
                 "max-width": null
-            },
-            "dwarf": {
-                "min-height": null,
-                "max-height": 700
             }
         }
     },
@@ -355,9 +348,6 @@
     "menus": {
         "primary": {
             "name": "Primary menu"
-        },
-        "secondary": {
-            "name": "Secondary menu"
         },
         "footer": {
             "name": "Footer menu"

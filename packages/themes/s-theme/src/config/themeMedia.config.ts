@@ -28,9 +28,9 @@ export default function (api) {
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-         get defaultMedia() {
+        get defaultMedia() {
             return api.this.defaultAction === '>=' ? 'mobile' : 'desktop';
-         }
+        },
 
         /**
          * @name              defaultQuery
@@ -108,23 +108,6 @@ export default function (api) {
             wide: {
                 'min-width': 2048,
                 'max-width': null,
-            },
-
-            /**
-             * @name          dwarf
-             * @namespace     config.themeMedia.queries
-             * @type          Object
-             * @default       {'min-width': 2048, 'max-width': null}
-             *
-             * Specify the media query arguments needed to target dwarf.
-             * Dwarf here means small height screen.
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            dwarf: {
-                'min-height': null,
-                'max-height': 700,
             },
         },
     };

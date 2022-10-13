@@ -8,8 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.preprocess = void 0;
+const s_vite_postcss_plugin_1 = __importDefault(require("@coffeekraken/s-vite-postcss-plugin"));
 const load_1 = require("@coffeekraken/sugar/load");
 const object_1 = require("@coffeekraken/sugar/object");
 function preprocess(api) {
@@ -24,35 +28,52 @@ function default_1(api) {
     if (api.env.platform !== 'node')
         return;
     return {
-        server: {
+        vite: {
             /**
-             * @name            port
-             * @namespace       config.mitosis.server
-             * @type            Number
-             * @default         3001
+             * @name          logLevel
+             * @namespace     config.mitosis.vite
+             * @type          String
+             * @default      error
              *
-             * Specify the mitosis server port
+             * Specify the log level
              *
-             * @since           2.0.0
-             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            port: 3001,
-            proxy: {
-                '^/$': {
-                    target: 'http://127.0.0.1:8082',
-                    changeOrigin: true,
-                },
-                '/dist/css/index.css': {
-                    target: 'http://127.0.0.1:8082',
-                    changeOrigin: true,
-                },
-                '/dist/js/index.esm.js': {
-                    target: 'http://127.0.0.1:8082',
-                    changeOrigin: true,
+            logLevel: 'error',
+            get plugins() {
+                return [(0, s_vite_postcss_plugin_1.default)()];
+            },
+            server: {
+                /**
+                 * @name            port
+                 * @namespace       config.mitosis.vite.server
+                 * @type            Number
+                 * @default         3001
+                 *
+                 * Specify the mitosis server port
+                 *
+                 * @since           2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                port: 3001,
+                proxy: {
+                    '^/$': {
+                        target: 'http://127.0.0.1:8082',
+                        changeOrigin: true,
+                    },
+                    '/dist/css/index.css': {
+                        target: 'http://127.0.0.1:8082',
+                        changeOrigin: true,
+                    },
+                    '/dist/js/index.esm.js': {
+                        target: 'http://127.0.0.1:8082',
+                        changeOrigin: true,
+                    },
                 },
             },
         },
     };
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7OztBQUFBLG1EQUE0RDtBQUM1RCx1REFBeUQ7QUFFekQsU0FBc0IsVUFBVSxDQUFDLEdBQUc7OztRQUNoQyxNQUFNLE1BQU0sR0FBRyxNQUFBLENBQUMsTUFBTSxJQUFBLHVCQUFnQixFQUFDLG1CQUFtQixDQUFDLENBQUMsbUNBQUksRUFBRSxDQUFDO1FBQ25FLE9BQU8sSUFBQSxvQkFBVyxFQUFDLEdBQUcsQ0FBQyxJQUFJLEVBQUUsTUFBTSxDQUFDLENBQUM7O0NBQ3hDO0FBSEQsZ0NBR0M7QUFFRCxtQkFBeUIsR0FBRztJQUN4QixJQUFJLEdBQUcsQ0FBQyxHQUFHLENBQUMsUUFBUSxLQUFLLE1BQU07UUFBRSxPQUFPO0lBQ3hDLE9BQU87UUFDSCxNQUFNLEVBQUU7WUFDSjs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLElBQUk7WUFDVixLQUFLLEVBQUU7Z0JBQ0gsS0FBSyxFQUFFO29CQUNILE1BQU0sRUFBRSx1QkFBdUI7b0JBQy9CLFlBQVksRUFBRSxJQUFJO2lCQUNyQjtnQkFDRCxxQkFBcUIsRUFBRTtvQkFDbkIsTUFBTSxFQUFFLHVCQUF1QjtvQkFDL0IsWUFBWSxFQUFFLElBQUk7aUJBQ3JCO2dCQUNELHVCQUF1QixFQUFFO29CQUNyQixNQUFNLEVBQUUsdUJBQXVCO29CQUMvQixZQUFZLEVBQUUsSUFBSTtpQkFDckI7YUFDSjtTQUNKO0tBQ0osQ0FBQztBQUNOLENBQUM7QUFoQ0QsNEJBZ0NDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7OztBQUFBLGdHQUF1RTtBQUN2RSxtREFBNEQ7QUFDNUQsdURBQXlEO0FBRXpELFNBQXNCLFVBQVUsQ0FBQyxHQUFHOzs7UUFDaEMsTUFBTSxNQUFNLEdBQUcsTUFBQSxDQUFDLE1BQU0sSUFBQSx1QkFBZ0IsRUFBQyxtQkFBbUIsQ0FBQyxDQUFDLG1DQUFJLEVBQUUsQ0FBQztRQUNuRSxPQUFPLElBQUEsb0JBQVcsRUFBQyxHQUFHLENBQUMsSUFBSSxFQUFFLE1BQU0sQ0FBQyxDQUFDOztDQUN4QztBQUhELGdDQUdDO0FBRUQsbUJBQXlCLEdBQUc7SUFDeEIsSUFBSSxHQUFHLENBQUMsR0FBRyxDQUFDLFFBQVEsS0FBSyxNQUFNO1FBQUUsT0FBTztJQUN4QyxPQUFPO1FBQ0gsSUFBSSxFQUFFO1lBQ0Y7Ozs7Ozs7Ozs7ZUFVRztZQUNILFFBQVEsRUFBRSxPQUFPO1lBRWpCLElBQUksT0FBTztnQkFDUCxPQUFPLENBQUMsSUFBQSwrQkFBb0IsR0FBRSxDQUFDLENBQUM7WUFDcEMsQ0FBQztZQUVELE1BQU0sRUFBRTtnQkFDSjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxJQUFJLEVBQUUsSUFBSTtnQkFFVixLQUFLLEVBQUU7b0JBQ0gsS0FBSyxFQUFFO3dCQUNILE1BQU0sRUFBRSx1QkFBdUI7d0JBQy9CLFlBQVksRUFBRSxJQUFJO3FCQUNyQjtvQkFDRCxxQkFBcUIsRUFBRTt3QkFDbkIsTUFBTSxFQUFFLHVCQUF1Qjt3QkFDL0IsWUFBWSxFQUFFLElBQUk7cUJBQ3JCO29CQUNELHVCQUF1QixFQUFFO3dCQUNyQixNQUFNLEVBQUUsdUJBQXVCO3dCQUMvQixZQUFZLEVBQUUsSUFBSTtxQkFDckI7aUJBQ0o7YUFDSjtTQUNKO0tBQ0osQ0FBQztBQUNOLENBQUM7QUFwREQsNEJBb0RDIn0=

@@ -16,6 +16,7 @@
     "@coffeekraken/s-component": "^2.0.0-alpha.20",
     "@coffeekraken/s-interface": "^2.0.0-alpha.20",
     "@coffeekraken/s-mitosis": "^2.0.0-alpha.20",
+    "@coffeekraken/s-specs-editor-component": "^2.0.0-alpha.20",
     "@coffeekraken/sugar": "^2.0.0-alpha.20",
     "@prettier/plugin-php": "^0.18.9",
     "glob": "^8.0.3",
@@ -35,8 +36,8 @@
       "import": "./dist/pkg/esm/js/lazy.js"
     },
     "./webcomponent": {
-      "require": "./dist/js/webcomponent/src/js/SCodeExampleComponent.ts",
-      "import": "./dist/js/webcomponent/src/js/SCodeExampleComponent.ts"
+      "require": "./src/js/build/webcomponent/SSliderComponent.ts",
+      "import": "./src/js/build/webcomponent/SSliderComponent.ts"
     },
     "./shared/*": {
       "require": "./dist/pkg/cjs/shared/*.js",

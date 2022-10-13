@@ -1,0 +1,3 @@
+[submodule "packages/@contribute/mitosis"]
+	path = packages/@contribute/mitosis
+	url = https://github.com/BuilderIO/mitosis

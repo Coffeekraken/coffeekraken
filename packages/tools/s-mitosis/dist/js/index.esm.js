@@ -6121,13 +6121,13 @@ var shim$8 = function shimName() {
   });
   return polyfill2;
 };
-var define$5 = defineProperties_1;
+var define$6 = defineProperties_1;
 var callBind$1 = callBind$3.exports;
 var implementation$6 = implementation$8;
 var getPolyfill$2 = polyfill$3;
 var shim$7 = shim$8;
 var bound$1 = callBind$1(implementation$6);
-define$5(bound$1, {
+define$6(bound$1, {
   getPolyfill: getPolyfill$2,
   implementation: implementation$6,
   shim: shim$7
@@ -6303,10 +6303,10 @@ var polyfill$2 = function getPolyfill3() {
   }
   return implementation$4;
 };
-var define$4 = defineProperties_1;
+var define$5 = defineProperties_1;
 var getPolyfill$1 = polyfill$2;
 var shim$6 = function shimGetPrototypeOf() {
-  define$4(
+  define$5(
     commonjsGlobal,
     { Reflect: {} },
     { Reflect: function() {
@@ -6314,7 +6314,7 @@ var shim$6 = function shimGetPrototypeOf() {
     } }
   );
   var polyfill2 = getPolyfill$1();
-  define$4(
+  define$5(
     Reflect,
     { getPrototypeOf: polyfill2 },
     { getPrototypeOf: function() {
@@ -6324,12 +6324,12 @@ var shim$6 = function shimGetPrototypeOf() {
   return polyfill2;
 };
 var callBind = callBind$3.exports;
-var define$3 = defineProperties_1;
+var define$4 = defineProperties_1;
 var implementation$3 = implementation$5;
 var getPolyfill = polyfill$2;
 var shim$5 = shim$6;
 var bound = callBind(getPolyfill(), typeof Reflect === "object" ? Reflect : Object);
-define$3(bound, {
+define$4(bound, {
   getPolyfill,
   implementation: implementation$3,
   shim: shim$5
@@ -6830,7 +6830,7 @@ function parse$1(pattern, isSub) {
   }
   if (pattern === "")
     return "";
-  var re = "";
+  var re2 = "";
   var hasMagic = !!options.nocase;
   var escaping = false;
   var patternListStack = [];
@@ -6845,25 +6845,25 @@ function parse$1(pattern, isSub) {
     if (stateChar) {
       switch (stateChar) {
         case "*":
-          re += star$1;
+          re2 += star$1;
           hasMagic = true;
           break;
         case "?":
-          re += qmark$1;
+          re2 += qmark$1;
           hasMagic = true;
           break;
         default:
-          re += "\\" + stateChar;
+          re2 += "\\" + stateChar;
           break;
       }
-      self2.debug("clearStateChar %j %j", stateChar, re);
+      self2.debug("clearStateChar %j %j", stateChar, re2);
       stateChar = false;
     }
   }
   for (var i2 = 0, len = pattern.length, c; i2 < len && (c = pattern.charAt(i2)); i2++) {
-    this.debug("%s	%s %s %j", pattern, i2, re, c);
+    this.debug("%s	%s %s %j", pattern, i2, re2, c);
     if (escaping && reSpecials$1[c]) {
-      re += "\\" + c;
+      re2 += "\\" + c;
       escaping = false;
       continue;
     }
@@ -6880,12 +6880,12 @@ function parse$1(pattern, isSub) {
       case "+":
       case "@":
       case "!":
-        this.debug("%s	%s %s %j <-- stateChar", pattern, i2, re, c);
+        this.debug("%s	%s %s %j <-- stateChar", pattern, i2, re2, c);
         if (inClass) {
           this.debug("  in class");
           if (c === "!" && i2 === classStart + 1)
             c = "^";
-          re += c;
+          re2 += c;
           continue;
         }
         self2.debug("call clearStateChar %j", stateChar);
@@ -6896,61 +6896,61 @@ function parse$1(pattern, isSub) {
         continue;
       case "(":
         if (inClass) {
-          re += "(";
+          re2 += "(";
           continue;
         }
         if (!stateChar) {
-          re += "\\(";
+          re2 += "\\(";
           continue;
         }
         patternListStack.push({
           type: stateChar,
           start: i2 - 1,
-          reStart: re.length,
+          reStart: re2.length,
           open: plTypes$1[stateChar].open,
           close: plTypes$1[stateChar].close
         });
-        re += stateChar === "!" ? "(?:(?!(?:" : "(?:";
-        this.debug("plType %j %j", stateChar, re);
+        re2 += stateChar === "!" ? "(?:(?!(?:" : "(?:";
+        this.debug("plType %j %j", stateChar, re2);
         stateChar = false;
         continue;
       case ")":
         if (inClass || !patternListStack.length) {
-          re += "\\)";
+          re2 += "\\)";
           continue;
         }
         clearStateChar();
         hasMagic = true;
         var pl = patternListStack.pop();
-        re += pl.close;
+        re2 += pl.close;
         if (pl.type === "!") {
           negativeLists.push(pl);
         }
-        pl.reEnd = re.length;
+        pl.reEnd = re2.length;
         continue;
       case "|":
         if (inClass || !patternListStack.length || escaping) {
-          re += "\\|";
+          re2 += "\\|";
           escaping = false;
           continue;
         }
         clearStateChar();
-        re += "|";
+        re2 += "|";
         continue;
       case "[":
         clearStateChar();
         if (inClass) {
-          re += "\\" + c;
+          re2 += "\\" + c;
           continue;
         }
         inClass = true;
         classStart = i2;
-        reClassStart = re.length;
-        re += c;
+        reClassStart = re2.length;
+        re2 += c;
         continue;
       case "]":
         if (i2 === classStart + 1 || !inClass) {
-          re += "\\" + c;
+          re2 += "\\" + c;
           escaping = false;
           continue;
         }
@@ -6959,51 +6959,51 @@ function parse$1(pattern, isSub) {
           RegExp("[" + cs + "]");
         } catch (er) {
           var sp = this.parse(cs, SUBPARSE$1);
-          re = re.substr(0, reClassStart) + "\\[" + sp[0] + "\\]";
+          re2 = re2.substr(0, reClassStart) + "\\[" + sp[0] + "\\]";
           hasMagic = hasMagic || sp[1];
           inClass = false;
           continue;
         }
         hasMagic = true;
         inClass = false;
-        re += c;
+        re2 += c;
         continue;
       default:
         clearStateChar();
         if (escaping) {
           escaping = false;
         } else if (reSpecials$1[c] && !(c === "^" && inClass)) {
-          re += "\\";
+          re2 += "\\";
         }
-        re += c;
+        re2 += c;
     }
   }
   if (inClass) {
     cs = pattern.substr(classStart + 1);
     sp = this.parse(cs, SUBPARSE$1);
-    re = re.substr(0, reClassStart) + "\\[" + sp[0];
+    re2 = re2.substr(0, reClassStart) + "\\[" + sp[0];
     hasMagic = hasMagic || sp[1];
   }
   for (pl = patternListStack.pop(); pl; pl = patternListStack.pop()) {
-    var tail = re.slice(pl.reStart + pl.open.length);
-    this.debug("setting tail", re, pl);
+    var tail = re2.slice(pl.reStart + pl.open.length);
+    this.debug("setting tail", re2, pl);
     tail = tail.replace(/((?:\\{2}){0,64})(\\?)\|/g, function(_, $1, $2) {
       if (!$2) {
         $2 = "\\";
       }
       return $1 + $1 + $2 + "|";
     });
-    this.debug("tail=%j\n   %s", tail, tail, pl, re);
+    this.debug("tail=%j\n   %s", tail, tail, pl, re2);
     var t = pl.type === "*" ? star$1 : pl.type === "?" ? qmark$1 : "\\" + pl.type;
     hasMagic = true;
-    re = re.slice(0, pl.reStart) + t + "\\(" + tail;
+    re2 = re2.slice(0, pl.reStart) + t + "\\(" + tail;
   }
   clearStateChar();
   if (escaping) {
-    re += "\\\\";
+    re2 += "\\\\";
   }
   var addPatternStart = false;
-  switch (re.charAt(0)) {
+  switch (re2.charAt(0)) {
     case "[":
     case ".":
     case "(":
@@ -7011,10 +7011,10 @@ function parse$1(pattern, isSub) {
   }
   for (var n = negativeLists.length - 1; n > -1; n--) {
     var nl = negativeLists[n];
-    var nlBefore = re.slice(0, nl.reStart);
-    var nlFirst = re.slice(nl.reStart, nl.reEnd - 8);
-    var nlLast = re.slice(nl.reEnd - 8, nl.reEnd);
-    var nlAfter = re.slice(nl.reEnd);
+    var nlBefore = re2.slice(0, nl.reStart);
+    var nlFirst = re2.slice(nl.reStart, nl.reEnd - 8);
+    var nlLast = re2.slice(nl.reEnd - 8, nl.reEnd);
+    var nlAfter = re2.slice(nl.reEnd);
     nlLast += nlAfter;
     var openParensBefore = nlBefore.split("(").length - 1;
     var cleanAfter = nlAfter;
@@ -7027,28 +7027,28 @@ function parse$1(pattern, isSub) {
       dollar = "$";
     }
     var newRe = nlBefore + nlFirst + nlAfter + dollar + nlLast;
-    re = newRe;
+    re2 = newRe;
   }
-  if (re !== "" && hasMagic) {
-    re = "(?=.)" + re;
+  if (re2 !== "" && hasMagic) {
+    re2 = "(?=.)" + re2;
   }
   if (addPatternStart) {
-    re = patternStart + re;
+    re2 = patternStart + re2;
   }
   if (isSub === SUBPARSE$1) {
-    return [re, hasMagic];
+    return [re2, hasMagic];
   }
   if (!hasMagic) {
     return globUnescape$1(pattern);
   }
   var flags = options.nocase ? "i" : "";
   try {
-    var regExp = new RegExp("^" + re + "$", flags);
+    var regExp = new RegExp("^" + re2 + "$", flags);
   } catch (er) {
     return new RegExp("$.");
   }
   regExp._glob = pattern;
-  regExp._src = re;
+  regExp._src = re2;
   return regExp;
 }
 minimatch$1.makeRe = function(pattern, options) {
@@ -7066,16 +7066,16 @@ function makeRe$1() {
   var options = this.options;
   var twoStar = options.noglobstar ? star$1 : options.dot ? twoStarDot$1 : twoStarNoDot$1;
   var flags = options.nocase ? "i" : "";
-  var re = set.map(function(pattern) {
+  var re2 = set.map(function(pattern) {
     return pattern.map(function(p) {
       return p === GLOBSTAR$1 ? twoStar : typeof p === "string" ? regExpEscape$1(p) : p._src;
     }).join("\\/");
   }).join("|");
-  re = "^(?:" + re + ")$";
+  re2 = "^(?:" + re2 + ")$";
   if (this.negate)
-    re = "^(?!" + re + ").*$";
+    re2 = "^(?!" + re2 + ").*$";
   try {
-    this.regexp = new RegExp(re, flags);
+    this.regexp = new RegExp(re2, flags);
   } catch (ex) {
     this.regexp = false;
   }
@@ -8847,7 +8847,7 @@ function __isColor(value) {
  * Copyright (c) 2014-2016, Jon Schlinkert.
  * Licensed under the MIT License.
  */
-var isExtglob$1 = function isExtglob2(str2) {
+var isExtglob$3 = function isExtglob2(str2) {
   if (typeof str2 !== "string" || str2 === "") {
     return false;
   }
@@ -8865,7 +8865,7 @@ var isExtglob$1 = function isExtglob2(str2) {
  * Copyright (c) 2014-2017, Jon Schlinkert.
  * Released under the MIT License.
  */
-var isExtglob = isExtglob$1;
+var isExtglob$2 = isExtglob$3;
 var chars = { "{": "}", "(": ")", "[": "]" };
 var strictCheck = function(str2) {
   if (str2[0] === "!") {
@@ -8977,11 +8977,11 @@ var relaxedCheck = function(str2) {
   }
   return false;
 };
-var isGlob = function isGlob2(str2, options) {
+var isGlob$2 = function isGlob2(str2, options) {
   if (typeof str2 !== "string" || str2 === "") {
     return false;
   }
-  if (isExtglob(str2)) {
+  if (isExtglob$2(str2)) {
     return true;
   }
   var check = strictCheck;
@@ -8991,7 +8991,7 @@ var isGlob = function isGlob2(str2, options) {
   return check(str2);
 };
 function __isGlob(string2) {
-  return isGlob(string2);
+  return isGlob$2(string2);
 }
 function __isNode() {
   return typeof process !== "undefined" && process.release && process.release.name === "node";
@@ -9001,6 +9001,51 @@ function __isOfType(value, typeString, settings = {}) {
   const typeInstance = new SType(typeString, settings);
   const res = typeInstance.is(value);
   return res;
+}
+/*!
+ * is-extglob <https://github.com/jonschlinkert/is-extglob>
+ *
+ * Copyright (c) 2014-2015, Jon Schlinkert.
+ * Licensed under the MIT License.
+ */
+var isExtglob$1 = function isExtglob3(str2) {
+  return typeof str2 === "string" && /[@?!+*]\(/.test(str2);
+};
+/*!
+ * is-glob <https://github.com/jonschlinkert/is-glob>
+ *
+ * Copyright (c) 2014-2015, Jon Schlinkert.
+ * Licensed under the MIT License.
+ */
+var isExtglob = isExtglob$1;
+var isGlob$1 = function isGlob3(str2) {
+  return typeof str2 === "string" && (/[*!?{}(|)[\]]/.test(str2) || isExtglob(str2));
+};
+/*!
+ * is-invalid-path <https://github.com/jonschlinkert/is-invalid-path>
+ *
+ * Copyright (c) 2015, Jon Schlinkert.
+ * Licensed under the MIT License.
+ */
+var isGlob = isGlob$1;
+var re = /[‘“!#$%&+^<=>`]/;
+var isInvalidPath$1 = function(str2) {
+  return typeof str2 !== "string" || isGlob(str2) || re.test(str2);
+};
+/*!
+ * is-valid-path <https://github.com/jonschlinkert/is-valid-path>
+ *
+ * Copyright (c) 2015 Jon Schlinkert, contributors.
+ * Licensed under the MIT license.
+ */
+var isInvalidPath = isInvalidPath$1;
+var isValidPath = function(str2) {
+  return isInvalidPath(str2) === false;
+};
+function __isPath(path2) {
+  if (!isValidPath(path2))
+    return false;
+  return true;
 }
 function __isString(value) {
   return typeof value === "string" || value instanceof String;
@@ -9379,7 +9424,7 @@ class Minimatch {
     }
     if (pattern === "")
       return "";
-    let re = "";
+    let re2 = "";
     let hasMagic = !!options.nocase;
     let escaping = false;
     const patternListStack = [];
@@ -9396,31 +9441,31 @@ class Minimatch {
       if (stateChar) {
         switch (stateChar) {
           case "*":
-            re += star;
+            re2 += star;
             hasMagic = true;
             break;
           case "?":
-            re += qmark;
+            re2 += qmark;
             hasMagic = true;
             break;
           default:
-            re += "\\" + stateChar;
+            re2 += "\\" + stateChar;
             break;
         }
-        this.debug("clearStateChar %j %j", stateChar, re);
+        this.debug("clearStateChar %j %j", stateChar, re2);
         stateChar = false;
       }
     };
     for (let i2 = 0, c; i2 < pattern.length && (c = pattern.charAt(i2)); i2++) {
-      this.debug("%s	%s %s %j", pattern, i2, re, c);
+      this.debug("%s	%s %s %j", pattern, i2, re2, c);
       if (escaping) {
         if (c === "/") {
           return false;
         }
         if (reSpecials[c]) {
-          re += "\\";
+          re2 += "\\";
         }
-        re += c;
+        re2 += c;
         escaping = false;
         continue;
       }
@@ -9437,12 +9482,12 @@ class Minimatch {
         case "+":
         case "@":
         case "!":
-          this.debug("%s	%s %s %j <-- stateChar", pattern, i2, re, c);
+          this.debug("%s	%s %s %j <-- stateChar", pattern, i2, re2, c);
           if (inClass) {
             this.debug("  in class");
             if (c === "!" && i2 === classStart + 1)
               c = "^";
-            re += c;
+            re2 += c;
             continue;
           }
           this.debug("call clearStateChar %j", stateChar);
@@ -9453,60 +9498,60 @@ class Minimatch {
           continue;
         case "(":
           if (inClass) {
-            re += "(";
+            re2 += "(";
             continue;
           }
           if (!stateChar) {
-            re += "\\(";
+            re2 += "\\(";
             continue;
           }
           patternListStack.push({
             type: stateChar,
             start: i2 - 1,
-            reStart: re.length,
+            reStart: re2.length,
             open: plTypes[stateChar].open,
             close: plTypes[stateChar].close
           });
-          re += stateChar === "!" ? "(?:(?!(?:" : "(?:";
-          this.debug("plType %j %j", stateChar, re);
+          re2 += stateChar === "!" ? "(?:(?!(?:" : "(?:";
+          this.debug("plType %j %j", stateChar, re2);
           stateChar = false;
           continue;
         case ")":
           if (inClass || !patternListStack.length) {
-            re += "\\)";
+            re2 += "\\)";
             continue;
           }
           clearStateChar();
           hasMagic = true;
           pl = patternListStack.pop();
-          re += pl.close;
+          re2 += pl.close;
           if (pl.type === "!") {
             negativeLists.push(pl);
           }
-          pl.reEnd = re.length;
+          pl.reEnd = re2.length;
           continue;
         case "|":
           if (inClass || !patternListStack.length) {
-            re += "\\|";
+            re2 += "\\|";
             continue;
           }
           clearStateChar();
-          re += "|";
+          re2 += "|";
           continue;
         case "[":
           clearStateChar();
           if (inClass) {
-            re += "\\" + c;
+            re2 += "\\" + c;
             continue;
           }
           inClass = true;
           classStart = i2;
-          reClassStart = re.length;
-          re += c;
+          reClassStart = re2.length;
+          re2 += c;
           continue;
         case "]":
           if (i2 === classStart + 1 || !inClass) {
-            re += "\\" + c;
+            re2 += "\\" + c;
             continue;
           }
           cs = pattern.substring(classStart + 1, i2);
@@ -9514,56 +9559,56 @@ class Minimatch {
             RegExp("[" + cs + "]");
           } catch (er) {
             sp = this.parse(cs, SUBPARSE);
-            re = re.substr(0, reClassStart) + "\\[" + sp[0] + "\\]";
+            re2 = re2.substr(0, reClassStart) + "\\[" + sp[0] + "\\]";
             hasMagic = hasMagic || sp[1];
             inClass = false;
             continue;
           }
           hasMagic = true;
           inClass = false;
-          re += c;
+          re2 += c;
           continue;
         default:
           clearStateChar();
           if (reSpecials[c] && !(c === "^" && inClass)) {
-            re += "\\";
+            re2 += "\\";
           }
-          re += c;
+          re2 += c;
           break;
       }
     }
     if (inClass) {
       cs = pattern.substr(classStart + 1);
       sp = this.parse(cs, SUBPARSE);
-      re = re.substr(0, reClassStart) + "\\[" + sp[0];
+      re2 = re2.substr(0, reClassStart) + "\\[" + sp[0];
       hasMagic = hasMagic || sp[1];
     }
     for (pl = patternListStack.pop(); pl; pl = patternListStack.pop()) {
       let tail;
-      tail = re.slice(pl.reStart + pl.open.length);
-      this.debug("setting tail", re, pl);
+      tail = re2.slice(pl.reStart + pl.open.length);
+      this.debug("setting tail", re2, pl);
       tail = tail.replace(/((?:\\{2}){0,64})(\\?)\|/g, (_, $1, $2) => {
         if (!$2) {
           $2 = "\\";
         }
         return $1 + $1 + $2 + "|";
       });
-      this.debug("tail=%j\n   %s", tail, tail, pl, re);
+      this.debug("tail=%j\n   %s", tail, tail, pl, re2);
       const t = pl.type === "*" ? star : pl.type === "?" ? qmark : "\\" + pl.type;
       hasMagic = true;
-      re = re.slice(0, pl.reStart) + t + "\\(" + tail;
+      re2 = re2.slice(0, pl.reStart) + t + "\\(" + tail;
     }
     clearStateChar();
     if (escaping) {
-      re += "\\\\";
+      re2 += "\\\\";
     }
-    const addPatternStart = addPatternStartSet[re.charAt(0)];
+    const addPatternStart = addPatternStartSet[re2.charAt(0)];
     for (let n = negativeLists.length - 1; n > -1; n--) {
       const nl = negativeLists[n];
-      const nlBefore = re.slice(0, nl.reStart);
-      const nlFirst = re.slice(nl.reStart, nl.reEnd - 8);
-      let nlAfter = re.slice(nl.reEnd);
-      const nlLast = re.slice(nl.reEnd - 8, nl.reEnd) + nlAfter;
+      const nlBefore = re2.slice(0, nl.reStart);
+      const nlFirst = re2.slice(nl.reStart, nl.reEnd - 8);
+      let nlAfter = re2.slice(nl.reEnd);
+      const nlLast = re2.slice(nl.reEnd - 8, nl.reEnd) + nlAfter;
       const openParensBefore = nlBefore.split("(").length - 1;
       let cleanAfter = nlAfter;
       for (let i2 = 0; i2 < openParensBefore; i2++) {
@@ -9571,25 +9616,25 @@ class Minimatch {
       }
       nlAfter = cleanAfter;
       const dollar = nlAfter === "" && isSub !== SUBPARSE ? "$" : "";
-      re = nlBefore + nlFirst + nlAfter + dollar + nlLast;
+      re2 = nlBefore + nlFirst + nlAfter + dollar + nlLast;
     }
-    if (re !== "" && hasMagic) {
-      re = "(?=.)" + re;
+    if (re2 !== "" && hasMagic) {
+      re2 = "(?=.)" + re2;
     }
     if (addPatternStart) {
-      re = patternStart + re;
+      re2 = patternStart + re2;
     }
     if (isSub === SUBPARSE) {
-      return [re, hasMagic];
+      return [re2, hasMagic];
     }
     if (!hasMagic) {
       return globUnescape(pattern);
     }
     const flags = options.nocase ? "i" : "";
     try {
-      return Object.assign(new RegExp("^" + re + "$", flags), {
+      return Object.assign(new RegExp("^" + re2 + "$", flags), {
         _glob: pattern,
-        _src: re
+        _src: re2
       });
     } catch (er) {
       return new RegExp("$.");
@@ -9606,7 +9651,7 @@ class Minimatch {
     const options = this.options;
     const twoStar = options.noglobstar ? star : options.dot ? twoStarDot : twoStarNoDot;
     const flags = options.nocase ? "i" : "";
-    let re = set.map((pattern) => {
+    let re2 = set.map((pattern) => {
       pattern = pattern.map(
         (p) => typeof p === "string" ? regExpEscape(p) : p === GLOBSTAR ? GLOBSTAR : p._src
       ).reduce((set2, p) => {
@@ -9634,11 +9679,11 @@ class Minimatch {
       });
       return pattern.filter((p) => p !== GLOBSTAR).join("/");
     }).join("|");
-    re = "^(?:" + re + ")$";
+    re2 = "^(?:" + re2 + ")$";
     if (this.negate)
-      re = "^(?!" + re + ").*$";
+      re2 = "^(?!" + re2 + ").*$";
     try {
-      this.regexp = new RegExp(re, flags);
+      this.regexp = new RegExp(re2, flags);
     } catch (ex) {
       this.regexp = false;
     }
@@ -9828,42 +9873,42 @@ class SEventEmitter$1 extends SClass {
     this._asyncStarted = true;
     this._processBuffer();
   }
-  _createMetas(event, metas = {}) {
+  _createMetas(event2, metas = {}) {
     var _a3, _b2, _c;
     return __deepMerge({
-      event,
-      name: event,
+      event: event2,
+      name: event2,
       emitter: (_b2 = (_a3 = this.settings.bind) !== null && _a3 !== void 0 ? _a3 : metas === null || metas === void 0 ? void 0 : metas.emitter) !== null && _b2 !== void 0 ? _b2 : this,
       originalEmitter: (_c = metas === null || metas === void 0 ? void 0 : metas.originalEmitter) !== null && _c !== void 0 ? _c : this,
       time: Date.now(),
       level: 0
     }, metas !== null && metas !== void 0 ? metas : {});
   }
-  emit(event, value, metas) {
+  emit(event2, value, metas) {
     return new Promise((resolve, reject) => __awaiter$c(this, void 0, void 0, function* () {
-      let metasObj = this._createMetas(event, metas);
+      let metasObj = this._createMetas(event2, metas);
       const isFirstLevel = !metasObj.level;
       if (__isPlainObject(value)) {
         Object.keys(this.settings.defaults).forEach((key) => {
           var _a3;
           const parts = key.split(",").map((l) => l.trim());
-          if (parts.indexOf(event) === -1 && parts.indexOf("*") === -1)
+          if (parts.indexOf(event2) === -1 && parts.indexOf("*") === -1)
             return;
           value = __deepMerge(value, (_a3 = this.settings.defaults) === null || _a3 === void 0 ? void 0 : _a3[key]);
         });
       }
-      const CastClass = this.settings.castByEvent[event];
+      const CastClass = this.settings.castByEvent[event2];
       if (CastClass && isClass$1(CastClass) && !(value instanceof CastClass) && !value._sEventEmitterPreprocessed) {
         value = new CastClass(value);
       }
-      if (event === "ask") {
+      if (event2 === "ask") {
         if (isFirstLevel) {
           metasObj.askId = __uniqid();
         }
       }
       if (!this._asyncStarted && this.settings.asyncStart) {
         this._buffer.push({
-          event,
+          event: event2,
           value,
           metas: metasObj,
           resolve,
@@ -9872,7 +9917,7 @@ class SEventEmitter$1 extends SClass {
         return;
       }
       this._emit({
-        event,
+        event: event2,
         value,
         metas: metasObj,
         resolve,
@@ -9897,30 +9942,30 @@ class SEventEmitter$1 extends SClass {
   _registerNewEventsStacks(events) {
     if (typeof events === "string")
       events = events.split(",").map((s) => s.trim());
-    events.forEach((event) => {
-      if (!this._eventsStacks[event]) {
-        this._eventsStacks[event] = {
+    events.forEach((event2) => {
+      if (!this._eventsStacks[event2]) {
+        this._eventsStacks[event2] = {
           buffer: [],
           callStack: []
         };
       }
     });
   }
-  _registerCallbackInEventStack(event, callback, settings = {}) {
+  _registerCallbackInEventStack(event2, callback, settings = {}) {
     settings = Object.assign({ callNumber: void 0, filter: void 0, processor: void 0, id: void 0 }, settings);
     if (settings.id) {
       if (!this._onStackById[settings.id])
         this._onStackById[settings.id] = [];
       this._onStackById[settings.id].push({
-        event,
+        event: event2,
         callback,
         settings
       });
     }
-    if (!this._eventsStacks[event]) {
-      this._registerNewEventsStacks(event);
+    if (!this._eventsStacks[event2]) {
+      this._registerNewEventsStacks(event2);
     }
-    const eventStackObj = this._eventsStacks[event];
+    const eventStackObj = this._eventsStacks[event2];
     let callNumber = settings.callNumber;
     if (callNumber === void 0) {
       callNumber = -1;
@@ -9946,16 +9991,16 @@ class SEventEmitter$1 extends SClass {
       }, this.settings.bufferTimeout);
     }
   }
-  _emitEventStack(event, initialValue, metasObj) {
+  _emitEventStack(event2, initialValue, metasObj) {
     return __awaiter$c(this, void 0, void 0, function* () {
       let currentCallbackReturnedValue = initialValue;
       if (!this._eventsStacks || Object.keys(this._eventsStacks).length === 0)
         return currentCallbackReturnedValue;
-      if (!this._eventsStacks[event]) {
-        this._registerNewEventsStacks(event);
+      if (!this._eventsStacks[event2]) {
+        this._registerNewEventsStacks(event2);
       }
       let eventStackArray = [];
-      const eventStackObj = this._eventsStacks[event];
+      const eventStackObj = this._eventsStacks[event2];
       if (eventStackObj && eventStackObj.callStack) {
         eventStackArray = [
           ...eventStackArray,
@@ -9963,9 +10008,9 @@ class SEventEmitter$1 extends SClass {
         ];
       }
       Object.keys(this._eventsStacks).forEach((stackName) => {
-        if (stackName === event)
+        if (stackName === event2)
           return currentCallbackReturnedValue;
-        if (__minimatch(event, stackName) && this._eventsStacks[stackName] !== void 0) {
+        if (__minimatch(event2, stackName) && this._eventsStacks[stackName] !== void 0) {
           eventStackArray = [
             ...eventStackArray,
             ...this._eventsStacks[stackName].callStack
@@ -10048,19 +10093,19 @@ class SEventEmitter$1 extends SClass {
     });
     return this;
   }
-  off(event, callback) {
+  off(event2, callback) {
     if (!callback) {
-      if (this._eventsStacks[event]) {
-        delete this._eventsStacks[event];
-      } else if (this._onStackById[event]) {
-        this._onStackById[event].forEach((onStackByIdObj) => {
+      if (this._eventsStacks[event2]) {
+        delete this._eventsStacks[event2];
+      } else if (this._onStackById[event2]) {
+        this._onStackById[event2].forEach((onStackByIdObj) => {
           this.off(onStackByIdObj.event, onStackByIdObj.callback);
         });
-        delete this._onStackById[event];
+        delete this._onStackById[event2];
       }
       return this;
     }
-    const eventStackObj = this._eventsStacks[event];
+    const eventStackObj = this._eventsStacks[event2];
     if (!eventStackObj)
       return this;
     eventStackObj.callStack = eventStackObj.callStack.filter((item) => {
@@ -10068,7 +10113,7 @@ class SEventEmitter$1 extends SClass {
         return false;
       return true;
     });
-    this._eventsStacks[event] = eventStackObj;
+    this._eventsStacks[event2] = eventStackObj;
     return this;
   }
   destroy() {
@@ -10550,11 +10595,11 @@ function noCase(input, options) {
     end--;
   return result2.slice(start, end).split("\0").map(transform).join(delimiter);
 }
-function replace(input, re, value) {
-  if (re instanceof RegExp)
-    return input.replace(re, value);
-  return re.reduce(function(input2, re2) {
-    return input2.replace(re2, value);
+function replace(input, re2, value) {
+  if (re2 instanceof RegExp)
+    return input.replace(re2, value);
+  return re2.reduce(function(input2, re3) {
+    return input2.replace(re3, value);
   }, input);
 }
 function dotCase(input, options) {
@@ -10915,16 +10960,16 @@ lib.exports = function(regexpStr) {
 lib.exports.types = types$1;
 var parse = lib.exports;
 var types = parse.types;
-var safeRegex = function(re, opts) {
+var safeRegex = function(re2, opts) {
   if (!opts)
     opts = {};
   var replimit = opts.limit === void 0 ? 25 : opts.limit;
-  if (isRegExp(re))
-    re = re.source;
-  else if (typeof re !== "string")
-    re = String(re);
+  if (isRegExp(re2))
+    re2 = re2.source;
+  else if (typeof re2 !== "string")
+    re2 = String(re2);
   try {
-    re = parse(re);
+    re2 = parse(re2);
   } catch (err) {
     return false;
   }
@@ -10954,7 +10999,7 @@ var safeRegex = function(re, opts) {
         return false;
     }
     return true;
-  }(re, 0);
+  }(re2, 0);
 };
 function isRegExp(x) {
   return {}.toString.call(x) === "[object RegExp]";
@@ -11204,7 +11249,7 @@ var isDescriptor$1 = function isDescriptor2(obj2, key) {
  */
 var isobject = isobject$1;
 var isDescriptor = isDescriptor$1;
-var define$2 = typeof Reflect !== "undefined" && Reflect.defineProperty ? Reflect.defineProperty : Object.defineProperty;
+var define$3 = typeof Reflect !== "undefined" && Reflect.defineProperty ? Reflect.defineProperty : Object.defineProperty;
 var defineProperty = function defineProperty2(obj2, key, val) {
   if (!isobject(obj2) && typeof obj2 !== "function" && !Array.isArray(obj2)) {
     throw new TypeError("expected an object, function, or array");
@@ -11213,10 +11258,10 @@ var defineProperty = function defineProperty2(obj2, key, val) {
     throw new TypeError('expected "key" to be a string');
   }
   if (isDescriptor(val)) {
-    define$2(obj2, key, val);
+    define$3(obj2, key, val);
     return obj2;
   }
-  define$2(obj2, key, {
+  define$3(obj2, key, {
     configurable: true,
     enumerable: false,
     writable: true,
@@ -11418,7 +11463,7 @@ toRegex.create = function(pattern, options) {
 };
 var regexNot = toRegex;
 var safe = safeRegex;
-var define$1 = defineProperty;
+var define$2 = defineProperty;
 var extend = extendShallow$1;
 var not = regexNot;
 var MAX_LENGTH = 1024 * 64;
@@ -11494,10 +11539,10 @@ function makeRe(pattern, options) {
   return regex2;
 }
 function memoize(regex2, key, pattern, options) {
-  define$1(regex2, "cached", true);
-  define$1(regex2, "pattern", pattern);
-  define$1(regex2, "options", options);
-  define$1(regex2, "key", key);
+  define$2(regex2, "cached", true);
+  define$2(regex2, "pattern", pattern);
+  define$2(regex2, "options", options);
+  define$2(regex2, "key", key);
   cache[key] = regex2;
 }
 function createKey(pattern, options) {
@@ -11515,7 +11560,7 @@ toRegex$1.exports.makeRe = makeRe;
 var sprintf = {};
 (function(exports) {
   !function() {
-    var re = {
+    var re2 = {
       not_string: /[^s]/,
       not_bool: /[^t]/,
       not_type: /[^T]/,
@@ -11558,13 +11603,13 @@ var sprintf = {};
           } else {
             arg = argv[cursor++];
           }
-          if (re.not_type.test(ph.type) && re.not_primitive.test(ph.type) && arg instanceof Function) {
+          if (re2.not_type.test(ph.type) && re2.not_primitive.test(ph.type) && arg instanceof Function) {
             arg = arg();
           }
-          if (re.numeric_arg.test(ph.type) && (typeof arg !== "number" && isNaN(arg))) {
+          if (re2.numeric_arg.test(ph.type) && (typeof arg !== "number" && isNaN(arg))) {
             throw new TypeError(sprintf2("[sprintf] expecting number but found %T", arg));
           }
-          if (re.number.test(ph.type)) {
+          if (re2.number.test(ph.type)) {
             is_positive = arg >= 0;
           }
           switch (ph.type) {
@@ -11619,12 +11664,12 @@ var sprintf = {};
               arg = (parseInt(arg, 10) >>> 0).toString(16).toUpperCase();
               break;
           }
-          if (re.json.test(ph.type)) {
+          if (re2.json.test(ph.type)) {
             output += arg;
           } else {
-            if (re.number.test(ph.type) && (!is_positive || ph.sign)) {
+            if (re2.number.test(ph.type) && (!is_positive || ph.sign)) {
               sign2 = is_positive ? "+" : "-";
-              arg = arg.toString().replace(re.sign, "");
+              arg = arg.toString().replace(re2.sign, "");
             } else {
               sign2 = "";
             }
@@ -11644,20 +11689,20 @@ var sprintf = {};
       }
       var _fmt = fmt, match2, parse_tree = [], arg_names = 0;
       while (_fmt) {
-        if ((match2 = re.text.exec(_fmt)) !== null) {
+        if ((match2 = re2.text.exec(_fmt)) !== null) {
           parse_tree.push(match2[0]);
-        } else if ((match2 = re.modulo.exec(_fmt)) !== null) {
+        } else if ((match2 = re2.modulo.exec(_fmt)) !== null) {
           parse_tree.push("%");
-        } else if ((match2 = re.placeholder.exec(_fmt)) !== null) {
+        } else if ((match2 = re2.placeholder.exec(_fmt)) !== null) {
           if (match2[2]) {
             arg_names |= 1;
             var field_list = [], replacement_field = match2[2], field_match = [];
-            if ((field_match = re.key.exec(replacement_field)) !== null) {
+            if ((field_match = re2.key.exec(replacement_field)) !== null) {
               field_list.push(field_match[1]);
               while ((replacement_field = replacement_field.substring(field_match[0].length)) !== "") {
-                if ((field_match = re.key_access.exec(replacement_field)) !== null) {
+                if ((field_match = re2.key_access.exec(replacement_field)) !== null) {
                   field_list.push(field_match[1]);
-                } else if ((field_match = re.index_access.exec(replacement_field)) !== null) {
+                } else if ((field_match = re2.index_access.exec(replacement_field)) !== null) {
                   field_list.push(field_match[1]);
                 } else {
                   throw new SyntaxError("[sprintf] failed to parse named argument key");
@@ -12825,7 +12870,7 @@ class SStateFsAdapter {
   _init() {
     var _a3, _b2;
     return __awaiter$a(this, void 0, void 0, function* () {
-      const _packageTmpDir = (yield __vitePreload(() => import("./packageTmpDir.d087c040.js"), true ? [] : void 0)).default;
+      const _packageTmpDir = (yield __vitePreload(() => import("./packageTmpDir.9c6866c0.js"), true ? [] : void 0)).default;
       this._statesDir = (_b2 = (_a3 = this._settings) === null || _a3 === void 0 ? void 0 : _a3.folder) !== null && _b2 !== void 0 ? _b2 : `${_packageTmpDir()}/states`;
       this._stateFile = `${this._statesDir}/${this._id}.state.json`;
     });
@@ -12918,16 +12963,16 @@ class SState extends SClass {
     Object.defineProperty(proxy, "$set", {
       enumerable: false,
       get() {
-        return (event, handler) => {
-          return _this._eventEmitter.on(`set.${event}`, handler);
+        return (event2, handler) => {
+          return _this._eventEmitter.on(`set.${event2}`, handler);
         };
       }
     });
     Object.defineProperty(proxy, "$delete", {
       enumerable: false,
       get() {
-        return (event, handler) => {
-          return _this._eventEmitter.on(`delete.${event}`, handler);
+        return (event2, handler) => {
+          return _this._eventEmitter.on(`delete.${event2}`, handler);
         };
       }
     });
@@ -13745,11 +13790,11 @@ var lodash = { exports: {} };
     function unicodeWords(string2) {
       return string2.match(reUnicodeWord) || [];
     }
-    var runInContext = function runInContext2(context) {
-      context = context == null ? root : _.defaults(root.Object(), context, _.pick(root, contextProps));
-      var Array2 = context.Array, Date2 = context.Date, Error2 = context.Error, Function2 = context.Function, Math2 = context.Math, Object2 = context.Object, RegExp2 = context.RegExp, String2 = context.String, TypeError2 = context.TypeError;
+    var runInContext = function runInContext2(context2) {
+      context2 = context2 == null ? root : _.defaults(root.Object(), context2, _.pick(root, contextProps));
+      var Array2 = context2.Array, Date2 = context2.Date, Error2 = context2.Error, Function2 = context2.Function, Math2 = context2.Math, Object2 = context2.Object, RegExp2 = context2.RegExp, String2 = context2.String, TypeError2 = context2.TypeError;
       var arrayProto = Array2.prototype, funcProto = Function2.prototype, objectProto = Object2.prototype;
-      var coreJsData = context["__core-js_shared__"];
+      var coreJsData = context2["__core-js_shared__"];
       var funcToString = funcProto.toString;
       var hasOwnProperty2 = objectProto.hasOwnProperty;
       var idCounter = 0;
@@ -13763,7 +13808,7 @@ var lodash = { exports: {} };
       var reIsNative = RegExp2(
         "^" + funcToString.call(hasOwnProperty2).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
       );
-      var Buffer = moduleExports ? context.Buffer : undefined$12, Symbol2 = context.Symbol, Uint8Array2 = context.Uint8Array, allocUnsafe = Buffer ? Buffer.allocUnsafe : undefined$12, getPrototype = overArg(Object2.getPrototypeOf, Object2), objectCreate = Object2.create, propertyIsEnumerable = objectProto.propertyIsEnumerable, splice = arrayProto.splice, spreadableSymbol = Symbol2 ? Symbol2.isConcatSpreadable : undefined$12, symIterator = Symbol2 ? Symbol2.iterator : undefined$12, symToStringTag = Symbol2 ? Symbol2.toStringTag : undefined$12;
+      var Buffer = moduleExports ? context2.Buffer : undefined$12, Symbol2 = context2.Symbol, Uint8Array2 = context2.Uint8Array, allocUnsafe = Buffer ? Buffer.allocUnsafe : undefined$12, getPrototype = overArg(Object2.getPrototypeOf, Object2), objectCreate = Object2.create, propertyIsEnumerable = objectProto.propertyIsEnumerable, splice = arrayProto.splice, spreadableSymbol = Symbol2 ? Symbol2.isConcatSpreadable : undefined$12, symIterator = Symbol2 ? Symbol2.iterator : undefined$12, symToStringTag = Symbol2 ? Symbol2.toStringTag : undefined$12;
       var defineProperty3 = function() {
         try {
           var func = getNative(Object2, "defineProperty");
@@ -13772,9 +13817,9 @@ var lodash = { exports: {} };
         } catch (e) {
         }
       }();
-      var ctxClearTimeout = context.clearTimeout !== root.clearTimeout && context.clearTimeout, ctxNow = Date2 && Date2.now !== root.Date.now && Date2.now, ctxSetTimeout = context.setTimeout !== root.setTimeout && context.setTimeout;
-      var nativeCeil = Math2.ceil, nativeFloor = Math2.floor, nativeGetSymbols = Object2.getOwnPropertySymbols, nativeIsBuffer = Buffer ? Buffer.isBuffer : undefined$12, nativeIsFinite = context.isFinite, nativeJoin = arrayProto.join, nativeKeys = overArg(Object2.keys, Object2), nativeMax = Math2.max, nativeMin = Math2.min, nativeNow = Date2.now, nativeParseInt = context.parseInt, nativeRandom = Math2.random, nativeReverse = arrayProto.reverse;
-      var DataView2 = getNative(context, "DataView"), Map2 = getNative(context, "Map"), Promise2 = getNative(context, "Promise"), Set2 = getNative(context, "Set"), WeakMap2 = getNative(context, "WeakMap"), nativeCreate = getNative(Object2, "create");
+      var ctxClearTimeout = context2.clearTimeout !== root.clearTimeout && context2.clearTimeout, ctxNow = Date2 && Date2.now !== root.Date.now && Date2.now, ctxSetTimeout = context2.setTimeout !== root.setTimeout && context2.setTimeout;
+      var nativeCeil = Math2.ceil, nativeFloor = Math2.floor, nativeGetSymbols = Object2.getOwnPropertySymbols, nativeIsBuffer = Buffer ? Buffer.isBuffer : undefined$12, nativeIsFinite = context2.isFinite, nativeJoin = arrayProto.join, nativeKeys = overArg(Object2.keys, Object2), nativeMax = Math2.max, nativeMin = Math2.min, nativeNow = Date2.now, nativeParseInt = context2.parseInt, nativeRandom = Math2.random, nativeReverse = arrayProto.reverse;
+      var DataView2 = getNative(context2, "DataView"), Map2 = getNative(context2, "Map"), Promise2 = getNative(context2, "Promise"), Set2 = getNative(context2, "Set"), WeakMap2 = getNative(context2, "WeakMap"), nativeCreate = getNative(Object2, "create");
       var metaMap = WeakMap2 && new WeakMap2();
       var realNames = {};
       var dataViewCtorString = toSource(DataView2), mapCtorString = toSource(Map2), promiseCtorString = toSource(Promise2), setCtorString = toSource(Set2), weakMapCtorString = toSource(WeakMap2);
@@ -20271,10 +20316,10 @@ function __addEventListener($elm, eventNames, callback = null, useCapture = fals
     });
   });
   eventNames.forEach((eventName) => {
-    const internalCallback = (event) => {
+    const internalCallback = (event2) => {
       if (callback)
-        callback.apply(this, [event]);
-      promise.emit(eventName, event);
+        callback.apply(this, [event2]);
+      promise.emit(eventName, event2);
     };
     eventsStack[eventName] = {
       callback: internalCallback,
@@ -20301,11 +20346,11 @@ function __addEventListenerOnce($elm, eventNames, callback = null, useCapture = 
     eventsStack[eventName] = {
       promise
     };
-    promise.on(eventNames, (event) => {
+    promise.on(eventNames, (event2) => {
       if (callback && typeof callback === "function") {
-        callback.apply(this, [event]);
+        callback.apply(this, [event2]);
       }
-      globalPromise.emit(eventName, event);
+      globalPromise.emit(eventName, event2);
       promise.cancel();
     });
   });
@@ -22679,10 +22724,10 @@ STheme.defaultThemeMetas = {};
 function __debounce(fn2, delay) {
   let timer = null;
   return function() {
-    const context = this, args = arguments;
+    const context2 = this, args = arguments;
     clearTimeout(timer);
     timer = setTimeout(function() {
-      fn2.apply(context, args);
+      fn2.apply(context2, args);
     }, delay);
   };
 }
@@ -24105,7 +24150,7 @@ class SActivateFeatureInterface extends SInterface {
     };
   }
 }
-function define(props = {}, name2 = "s-activate") {
+function define$1(props = {}, name2 = "s-activate") {
   SActivateFeature.define(name2, SActivateFeature, props);
 }
 var __awaiter = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
@@ -24374,6 +24419,731 @@ class SActivateFeature extends SFeature {
     });
   }
 }
+const __css = ".s-specs-editor {\n    background: red;\n}\n";
+class SSpecsEditorComponentInterface extends SInterface {
+  static get _definition() {
+    return {
+      specs: {
+        type: "Object",
+        title: "Specs",
+        description: "Specify the SSpecs resulting json to use for the editor",
+        required: true
+      }
+    };
+  }
+}
+class SComponentSettingsInterface extends SInterface {
+  static get _definition() {
+    return {
+      interface: {
+        description: "Specify an SInterface class to use as our properties definition",
+        type: "SInterface"
+      },
+      styleClasses: {
+        description: 'Define if you want the "style" class in when using the className and uniqueClassName method',
+        type: "Boolean"
+      }
+    };
+  }
+}
+class SComponent$1 extends SClass {
+  constructor(name2, settings) {
+    super(__deepMerge(SComponentSettingsInterface.defaults(), settings !== null && settings !== void 0 ? settings : {}));
+    this.name = name2;
+  }
+  static setDefaultProps(selector, props) {
+    selector = Array.isArray(selector) ? selector : [selector];
+    selector.forEach((sel) => {
+      var _a3;
+      this._defaultProps[sel] = Object.assign(Object.assign({}, (_a3 = this._defaultProps[sel]) !== null && _a3 !== void 0 ? _a3 : {}), props);
+    });
+  }
+  static getDefaultProps(selector) {
+    var _a3, _b2;
+    return Object.assign(Object.assign({}, (_a3 = this._defaultProps["*"]) !== null && _a3 !== void 0 ? _a3 : {}), (_b2 = this._defaultProps[selector]) !== null && _b2 !== void 0 ? _b2 : {});
+  }
+  className(cls = "", styleCls, bareStyleCls) {
+    let clsString = cls.split(" ").map((clsName) => {
+      const clses = [];
+      clses.push(`${this.name.toLowerCase()}${clsName && !clsName.match(/^__/) ? "-" : ""}${clsName}`);
+      return clses.join(" ");
+    }).join(" ");
+    if (!this.settings.bare && styleCls) {
+      clsString += ` ${styleCls}`;
+    } else if (this.settings.bare && bareStyleCls) {
+      clsString += ` ${bareStyleCls}`;
+    }
+    return clsString;
+  }
+}
+SComponent$1._defaultProps = {};
+class SComponent extends SComponent$1 {
+  constructor(name2, settings) {
+    super(name2, __deepMerge(settings !== null && settings !== void 0 ? settings : {}));
+    this._mediaQueries = {};
+  }
+  makePropsResponsive(props) {
+    var _a3;
+    props.responsive = __deepMerge({}, (_a3 = props.responsive) !== null && _a3 !== void 0 ? _a3 : {});
+    Object.defineProperty(props, "toResetResponsiveProps", {
+      enumerable: false,
+      writable: true,
+      value: {}
+    });
+    if (Object.keys(props.responsive).length === 1 && props.responsive.original) {
+      return;
+    }
+    window.addEventListener("resize", __debounce(() => {
+      this._applyResponsiveProps(props);
+    }, 100));
+    this._applyResponsiveProps(props);
+  }
+  _applyResponsiveProps(props = {}) {
+    var _a3;
+    let matchedMedia = [];
+    const responsiveObj = Object.assign({}, props.responsive);
+    for (let [media, responsiveProps] of Object.entries(props.responsive)) {
+      let applyProps = function() {
+        for (let [key, value] of Object.entries(responsiveProps)) {
+          props.toResetResponsiveProps[key] = props[key];
+          props[key] = value;
+        }
+      };
+      const queries = STheme.get(`media.queries`);
+      media.replace(/(<|>|=|\|)/gm, "");
+      if (media === "toResetResponsiveProps") {
+        continue;
+      }
+      if (media.match(/[a-zA-Z0-9<>=]/) && queries[media]) {
+        let mediaQuery = this._mediaQueries[media];
+        if (!mediaQuery) {
+          this._mediaQueries[media] = STheme.buildMediaQuery(media);
+          mediaQuery = this._mediaQueries[media];
+        }
+        if (window.matchMedia(mediaQuery.replace(/^@media\s/, "")).matches) {
+          applyProps();
+          matchedMedia.push(media);
+        }
+      } else {
+        if (window.matchMedia(media).matches) {
+          applyProps();
+          matchedMedia.push(media);
+        }
+      }
+    }
+    if (!matchedMedia.length) {
+      for (let [key, value] of Object.entries((_a3 = props.toResetResponsiveProps) !== null && _a3 !== void 0 ? _a3 : {})) {
+        props[key] = value;
+        delete props.toResetResponsiveProps[key];
+      }
+    }
+    props.responsive = responsiveObj;
+  }
+  saveState(state) {
+    if (this.settings.id) {
+      window.localStorage.setItem(`${this.settings.id}-state`, JSON.stringify(state));
+    }
+  }
+  restoreState() {
+    var _a3;
+    if (!this.settings.id) {
+      return {};
+    }
+    return JSON.parse((_a3 = window.localStorage.getItem(`${this.settings.id}-state`)) !== null && _a3 !== void 0 ? _a3 : "{}");
+  }
+  dispatchEvent($elm, eventName, settings) {
+    const finalSettings = Object.assign({ bubbles: true, cancelable: true, detail: {} }, settings !== null && settings !== void 0 ? settings : {});
+    const componentName = this.name;
+    $elm.dispatchEvent(new CustomEvent(eventName, Object.assign(Object.assign({}, finalSettings), { detail: Object.assign(Object.assign({}, finalSettings.detail), { eventComponent: componentName }) })));
+    $elm.dispatchEvent(new CustomEvent(componentName, Object.assign(Object.assign({}, finalSettings), { detail: Object.assign(Object.assign({}, finalSettings.detail), { eventType: eventName }) })));
+  }
+  adoptStyleInShadowRoot($shadowRoot, $context) {
+    return __adoptStyleInShadowRoot($shadowRoot, $context);
+  }
+  injectStyleInShadowRoot(cssDeps, $shadowRoot) {
+    if (!Array.isArray(cssDeps)) {
+      cssDeps = [cssDeps];
+    }
+    cssDeps.forEach((dep) => {
+      var _a3;
+      let $styleOrLink;
+      try {
+        $styleOrLink = (_a3 = document.querySelector(`link#${dep}`)) === null || _a3 === void 0 ? void 0 : _a3.cloneNode(true);
+      } catch (e) {
+      }
+      if (dep.match(/^[a-zA-Z0-9_-]+$/)) {
+        $styleOrLink = document.createElement("link");
+        $styleOrLink.rel = "stylesheet";
+        $styleOrLink.href = `${SSugarConfig.get("serve.css.path")}/partials/${dep}.css`;
+      }
+      if (__isPath(dep) && !$styleOrLink) {
+        $styleOrLink = document.createElement("link");
+        $styleOrLink.rel = "stylesheet";
+        $styleOrLink.href = dep;
+      }
+      if (!$styleOrLink) {
+        $styleOrLink = document.createElement("style");
+        $styleOrLink.type = "text/css";
+        $styleOrLink.appendChild(document.createTextNode(dep));
+      }
+      $shadowRoot.appendChild($styleOrLink);
+    });
+  }
+  exposeApi($on, apiObj, ctx) {
+    setTimeout(() => {
+      Object.keys(apiObj).forEach((apiFnName) => {
+        const apiFn = apiObj[apiFnName].bind(ctx);
+        $on[apiFnName] = apiFn;
+      });
+    });
+  }
+}
+const DEFAULT_PROPS = SSpecsEditorComponentInterface.defaults();
+class SSpecsEditor extends HTMLElement {
+  get _$container() {
+    return this._root.querySelector("[data-ref='SSpecsEditor-$container']");
+  }
+  get _root() {
+    return this.shadowRoot || this;
+  }
+  constructor() {
+    super();
+    const self2 = this;
+    this.state = {
+      _status: "idle",
+      _id: null,
+      _specs: {},
+      _specArray: [],
+      _propsValues: {},
+      _component: null,
+      mount() {
+        var _a3, _b2;
+        try {
+          self2.state._component.injectStyleInShadowRoot(
+            [__css, ...(_a3 = self2.props.cssDeps) != null ? _a3 : []],
+            self2._$container
+          );
+        } catch (e) {
+        }
+        self2.state._propsValues = (_b2 = self2.state._component.restoreState()) != null ? _b2 : {};
+        self2.update();
+        console.log("ss", self2.state._propsValues);
+        self2.state._specs = JSON.parse(self2.props.specs);
+        self2.update();
+        Object.keys(self2.state._specs.props).forEach((key) => {
+          self2.state._specArray.push({
+            id: key,
+            ...self2.state._specs.props[key]
+          });
+        });
+      },
+      update(event2, prop) {
+        if (event2.target.type === "checkbox") {
+          prop.value = event2.target.checked;
+        } else {
+          prop.value = event2.target.value;
+        }
+        if (prop.value !== prop.default) {
+          self2.state._propsValues[prop.id] = prop.value;
+        } else {
+          delete self2.state._propsValues[prop.id];
+        }
+        self2._$container.dispatchEvent(
+          new CustomEvent("s-specs-editor.change", {
+            bubbles: true,
+            composed: true,
+            detail: { ...prop }
+          })
+        );
+        self2.state._component.saveState(self2.state._propsValues);
+      }
+    };
+    if (!this.props) {
+      this.props = {};
+    }
+    this.componentProps = ["cssDeps", "specs", "lnf", "id"];
+    this.updateDeps = [[]];
+    this.nodesToDestroy = [];
+    this.pendingUpdate = false;
+    this.onInputSSpecsEditor1Input = (e) => {
+      const v = this.getScope(event.currentTarget, "v");
+      this.state.update(e, v);
+    };
+    this.onSelectSSpecsEditor1Input = (e) => {
+      const v = this.getScope(event.currentTarget, "v");
+      this.state.update(e, v);
+    };
+    this.onInputSSpecsEditor2Input = (e) => {
+      const v = this.getScope(event.currentTarget, "v");
+      this.state.update(e, v);
+    };
+  }
+  destroyAnyNodes() {
+    this.nodesToDestroy.forEach((el) => el.remove());
+    this.nodesToDestroy = [];
+  }
+  connectedCallback() {
+    var _a3, _b2, _c, _d, _e, _f, _g, _h;
+    this.getAttributeNames().forEach((attr) => {
+      const jsVar = attr.replace(/-/g, "");
+      const regexp = new RegExp(jsVar, "i");
+      this.componentProps.forEach((prop) => {
+        if (regexp.test(prop)) {
+          const attrValue = this.getAttribute(attr);
+          if (this.props[prop] !== attrValue) {
+            this.props[prop] = attrValue;
+          }
+        }
+      });
+    });
+    const defaultProps = SComponent.getDefaultProps(
+      this.tagName.toLowerCase()
+    );
+    this.props.id = (_b2 = (_a3 = this.props.id) != null ? _a3 : defaultProps.id) != null ? _b2 : DEFAULT_PROPS.id;
+    this.props.specs = (_d = (_c = this.props.specs) != null ? _c : defaultProps.specs) != null ? _d : DEFAULT_PROPS.specs;
+    this.props.lnf = (_f = (_e = this.props.lnf) != null ? _e : defaultProps.lnf) != null ? _f : DEFAULT_PROPS.lnf;
+    this.props.cssDeps = (_h = (_g = this.props.cssDeps) != null ? _g : defaultProps.cssDeps) != null ? _h : DEFAULT_PROPS.cssDeps;
+    this._root.innerHTML = `
+                        
+      <template data-el="show-s-specs-editor">
+        <div data-el="div-s-specs-editor-1" data-ref="SSpecsEditor-$container">
+          <template data-el="for-s-specs-editor">
+            <div data-el="div-s-specs-editor-2">
+              <template data-el="show-s-specs-editor-2">
+                <div data-el="div-s-specs-editor-3">
+                  <label data-el="label-s-specs-editor-1">
+                    <input
+                      type="text"
+                      data-el="input-s-specs-editor-1"
+                      data-dom-state="SSpecsEditor-input-s-specs-editor-1"
+                    />
+      
+                    <span>
+                      <template data-el="show-s-specs-editor-3">
+                        <span class="s-tooltip-container">
+                          <i class="fa-solid fa-circle-question"></i>
+      
+                          <div class="s-tooltip s-tooltip--right">
+                            <template data-el="div-s-specs-editor-4">
+                              <!-- v.description -->
+                            </template>
+                          </div>
+                        </span>
+                      </template>
+      
+                      <template data-el="div-s-specs-editor-5">
+                        <!-- v.title ?? v.id -->
+                      </template>
+                    </span>
+                  </label>
+                </div>
+              </template>
+      
+              <template data-el="show-s-specs-editor-4">
+                <div data-el="div-s-specs-editor-6">
+                  <label data-el="label-s-specs-editor-2">
+                    <select
+                      data-el="select-s-specs-editor-1"
+                      data-dom-state="SSpecsEditor-select-s-specs-editor-1"
+                    ></select>
+      
+                    <span>
+                      <template data-el="show-s-specs-editor-5">
+                        <span class="s-tooltip-container">
+                          <i class="fa-solid fa-circle-question"></i>
+      
+                          <div class="s-tooltip s-tooltip--right">
+                            <template data-el="div-s-specs-editor-7">
+                              <!-- v.description -->
+                            </template>
+                          </div>
+                        </span>
+                      </template>
+      
+                      <template data-el="div-s-specs-editor-8">
+                        <!-- v.title ?? v.id -->
+                      </template>
+                    </span>
+                  </label>
+                </div>
+              </template>
+      
+              <template data-el="show-s-specs-editor-6">
+                <div data-el="div-s-specs-editor-9">
+                  <label data-el="label-s-specs-editor-3">
+                    <input
+                      type="checkbox"
+                      data-el="input-s-specs-editor-2"
+                      data-dom-state="SSpecsEditor-input-s-specs-editor-2"
+                    />
+      
+                    <span>
+                      <template data-el="show-s-specs-editor-7">
+                        <span class="s-tooltip-container">
+                          <i class="fa-solid fa-circle-question"></i>
+      
+                          <div class="s-tooltip s-tooltip--right">
+                            <template data-el="div-s-specs-editor-10">
+                              <!-- v.description -->
+                            </template>
+                          </div>
+                        </span>
+                      </template>
+      
+                      <template data-el="div-s-specs-editor-11">
+                        <!-- v.title ?? v.id -->
+                      </template>
+                    </span>
+                  </label>
+                </div>
+              </template>
+            </div>
+          </template>
+        </div>
+      </template>`;
+    this.pendingUpdate = true;
+    this.render();
+    this.onMount();
+    this.pendingUpdate = false;
+    this.update();
+  }
+  showContent(el) {
+    const elementFragment = el.content.cloneNode(true);
+    const children = Array.from(elementFragment.childNodes);
+    children.forEach((child) => {
+      if (el == null ? void 0 : el.scope) {
+        child.scope = el.scope;
+      }
+      if (el == null ? void 0 : el.context) {
+        child.context = el.context;
+      }
+      this.nodesToDestroy.push(child);
+    });
+    el.after(elementFragment);
+  }
+  onMount() {
+    var _a3;
+    this.state._component = new SComponent("s-specs-editor", {
+      id: this.props.id,
+      bare: false
+    });
+    this.update();
+    this.state._id = (_a3 = this.props.id) != null ? _a3 : `s-specs-editor-${__uniqid()}`;
+    this.update();
+    this.state.mount();
+    this.state._status = "mounted";
+    this.update();
+  }
+  onUpdate() {
+    const self2 = this;
+    Array.from(self2._$container.querySelectorAll("select")).forEach(
+      ($select) => {
+        if ($select._inited) {
+          return;
+        }
+        $select._inited = true;
+        const _p = JSON.parse($select.getAttribute("prop"));
+        _p.options.forEach((opt) => {
+          var _a3, _b2;
+          const $option = document.createElement("option");
+          $option.setAttribute("value", opt.value);
+          console.log(
+            "SSSS",
+            opt.id,
+            (_a3 = self2.state._propsValues[_p.id]) != null ? _a3 : _p.default,
+            opt.value
+          );
+          if (((_b2 = self2.state._propsValues[_p.id]) != null ? _b2 : _p.default) === opt.value) {
+            $option.setAttribute("selected", true);
+          }
+          $option.innerHTML = opt.name;
+          $select.appendChild($option);
+        });
+      }
+    );
+  }
+  update() {
+    if (this.pendingUpdate === true) {
+      return;
+    }
+    this.pendingUpdate = true;
+    this.render();
+    this.onUpdate();
+    this.pendingUpdate = false;
+  }
+  render() {
+    const preStateful = this.getStateful(this._root);
+    const preValues = this.prepareHydrate(preStateful);
+    this.destroyAnyNodes();
+    this.updateBindings();
+    if (preValues.length) {
+      const nextStateful = this.getStateful(this._root);
+      this.hydrateDom(preValues, nextStateful);
+    }
+  }
+  getStateful(el) {
+    const stateful = el.querySelectorAll("[data-dom-state]");
+    return stateful ? Array.from(stateful) : [];
+  }
+  prepareHydrate(stateful) {
+    return stateful.map((el) => {
+      return {
+        id: el.dataset.domState,
+        value: el.value,
+        active: document.activeElement === el,
+        selectionStart: el.selectionStart
+      };
+    });
+  }
+  hydrateDom(preValues, stateful) {
+    return stateful.map((el, index) => {
+      const prev = preValues.find(
+        (prev2) => el.dataset.domState === prev2.id
+      );
+      if (prev) {
+        el.value = prev.value;
+        if (prev.active) {
+          el.focus();
+          el.selectionStart = prev.selectionStart;
+        }
+      }
+    });
+  }
+  updateBindings() {
+    this._root.querySelectorAll("[data-el='show-s-specs-editor']").forEach((el) => {
+      const whenCondition = this.state._specArray.length;
+      if (whenCondition) {
+        this.showContent(el);
+      }
+    });
+    this._root.querySelectorAll("[data-el='div-s-specs-editor-1']").forEach((el) => {
+      var _a3, _b2;
+      el.setAttribute("id", this.state._id);
+      el.className = (_a3 = this.state._component) == null ? void 0 : _a3.className(
+        "",
+        null,
+        "s-bare"
+      );
+      el.setAttribute("status", this.state._status);
+      el.setAttribute("lnf", (_b2 = this.props.lnf) != null ? _b2 : "default");
+    });
+    this._root.querySelectorAll("[data-el='for-s-specs-editor']").forEach((el) => {
+      let array = this.state._specArray;
+      this.renderLoop(el, array, "v", "index");
+    });
+    this._root.querySelectorAll("[data-el='div-s-specs-editor-2']").forEach((el) => {
+      const v = this.getScope(el, "v");
+      el.setAttribute("prop", v.id);
+      el.className = this.state._component.className("__prop");
+    });
+    this._root.querySelectorAll("[data-el='show-s-specs-editor-2']").forEach((el) => {
+      const v = this.getScope(el, "v");
+      const whenCondition = v.type.toLowerCase() === "text";
+      if (whenCondition) {
+        this.showContent(el);
+      }
+    });
+    this._root.querySelectorAll("[data-el='div-s-specs-editor-3']").forEach((el) => {
+      el.className = this.state._component.className("__prop--text");
+    });
+    this._root.querySelectorAll("[data-el='label-s-specs-editor-1']").forEach((el) => {
+      el.className = this.state._component.className(
+        "__label",
+        "s-label s-label--block"
+      );
+    });
+    this._root.querySelectorAll("[data-el='input-s-specs-editor-1']").forEach((el) => {
+      var _a3, _b2, _c;
+      el.removeEventListener("input", this.onInputSSpecsEditor1Input);
+      el.addEventListener("input", this.onInputSSpecsEditor1Input);
+      const v = this.getScope(el, "v");
+      el.setAttribute("name", v.id);
+      el.className = this.state._component.className(
+        "__input",
+        "s-input"
+      );
+      el.setAttribute("placeholder", (_b2 = (_a3 = v.default) != null ? _a3 : v.title) != null ? _b2 : v.id);
+      el.value = (_c = this.state._propsValues[v.id]) != null ? _c : v.default;
+    });
+    this._root.querySelectorAll("[data-el='show-s-specs-editor-3']").forEach((el) => {
+      const v = this.getScope(el, "v");
+      const whenCondition = v.description;
+      if (whenCondition) {
+        this.showContent(el);
+      }
+    });
+    this._root.querySelectorAll("[data-el='div-s-specs-editor-4']").forEach((el) => {
+      const v = this.getScope(el, "v");
+      this.renderTextNode(el, v.description);
+    });
+    this._root.querySelectorAll("[data-el='div-s-specs-editor-5']").forEach((el) => {
+      var _a3;
+      const v = this.getScope(el, "v");
+      this.renderTextNode(el, (_a3 = v.title) != null ? _a3 : v.id);
+    });
+    this._root.querySelectorAll("[data-el='show-s-specs-editor-4']").forEach((el) => {
+      const v = this.getScope(el, "v");
+      const whenCondition = v.type.toLowerCase() === "select";
+      if (whenCondition) {
+        this.showContent(el);
+      }
+    });
+    this._root.querySelectorAll("[data-el='div-s-specs-editor-6']").forEach((el) => {
+      el.className = this.state._component.className("__prop--select");
+    });
+    this._root.querySelectorAll("[data-el='label-s-specs-editor-2']").forEach((el) => {
+      el.className = this.state._component.className(
+        "__label",
+        "s-label s-label--block"
+      );
+    });
+    this._root.querySelectorAll("[data-el='select-s-specs-editor-1']").forEach((el) => {
+      var _a3, _b2;
+      el.removeEventListener(
+        "input",
+        this.onSelectSSpecsEditor1Input
+      );
+      el.addEventListener("input", this.onSelectSSpecsEditor1Input);
+      const v = this.getScope(el, "v");
+      el.setAttribute("name", v.id);
+      el.className = this.state._component.className(
+        "__select",
+        "s-select"
+      );
+      el.setAttribute("placeholder", (_b2 = (_a3 = v.default) != null ? _a3 : v.title) != null ? _b2 : v.id);
+      el.setAttribute("prop", JSON.stringify(v));
+    });
+    this._root.querySelectorAll("[data-el='show-s-specs-editor-5']").forEach((el) => {
+      const v = this.getScope(el, "v");
+      const whenCondition = v.description;
+      if (whenCondition) {
+        this.showContent(el);
+      }
+    });
+    this._root.querySelectorAll("[data-el='div-s-specs-editor-7']").forEach((el) => {
+      const v = this.getScope(el, "v");
+      this.renderTextNode(el, v.description);
+    });
+    this._root.querySelectorAll("[data-el='div-s-specs-editor-8']").forEach((el) => {
+      var _a3;
+      const v = this.getScope(el, "v");
+      this.renderTextNode(el, (_a3 = v.title) != null ? _a3 : v.id);
+    });
+    this._root.querySelectorAll("[data-el='show-s-specs-editor-6']").forEach((el) => {
+      const v = this.getScope(el, "v");
+      const whenCondition = v.type.toLowerCase() === "checkbox";
+      if (whenCondition) {
+        this.showContent(el);
+      }
+    });
+    this._root.querySelectorAll("[data-el='div-s-specs-editor-9']").forEach((el) => {
+      el.className = `${this.state._component.className(
+        "__prop--checkbox"
+      )}`;
+    });
+    this._root.querySelectorAll("[data-el='label-s-specs-editor-3']").forEach((el) => {
+      el.className = this.state._component.className(
+        "__label",
+        "s-label"
+      );
+    });
+    this._root.querySelectorAll("[data-el='input-s-specs-editor-2']").forEach((el) => {
+      el.removeEventListener("input", this.onInputSSpecsEditor2Input);
+      el.addEventListener("input", this.onInputSSpecsEditor2Input);
+      const v = this.getScope(el, "v");
+      el.setAttribute("name", v.id);
+      el.className = this.state._component.className(
+        "__checkbox",
+        "s-switch"
+      );
+    });
+    this._root.querySelectorAll("[data-el='show-s-specs-editor-7']").forEach((el) => {
+      const v = this.getScope(el, "v");
+      const whenCondition = v.description;
+      if (whenCondition) {
+        this.showContent(el);
+      }
+    });
+    this._root.querySelectorAll("[data-el='div-s-specs-editor-10']").forEach((el) => {
+      const v = this.getScope(el, "v");
+      this.renderTextNode(el, v.description);
+    });
+    this._root.querySelectorAll("[data-el='div-s-specs-editor-11']").forEach((el) => {
+      var _a3;
+      const v = this.getScope(el, "v");
+      this.renderTextNode(el, (_a3 = v.title) != null ? _a3 : v.id);
+    });
+  }
+  renderTextNode(el, text) {
+    const textNode = document.createTextNode(text);
+    if (el == null ? void 0 : el.scope) {
+      textNode.scope = el.scope;
+    }
+    if (el == null ? void 0 : el.context) {
+      textNode.context = el.context;
+    }
+    el.after(textNode);
+    this.nodesToDestroy.push(el.nextSibling);
+  }
+  getScope(el, name2) {
+    var _a3;
+    do {
+      let value = (_a3 = el == null ? void 0 : el.scope) == null ? void 0 : _a3[name2];
+      if (value !== void 0) {
+        return value;
+      }
+    } while (el = el.parentNode);
+  }
+  renderLoop(template2, array, itemName, itemIndex, collectionName) {
+    const collection = [];
+    for (let [index, value] of array.entries()) {
+      const elementFragment = template2.content.cloneNode(true);
+      const children = Array.from(elementFragment.childNodes);
+      const localScope = {};
+      let scope = localScope;
+      if (template2 == null ? void 0 : template2.scope) {
+        const getParent = {
+          get(target, prop, receiver) {
+            if (prop in target) {
+              return target[prop];
+            }
+            if (prop in template2.scope) {
+              return template2.scope[prop];
+            }
+            return target[prop];
+          }
+        };
+        scope = new Proxy(localScope, getParent);
+      }
+      children.forEach((child) => {
+        if (itemName !== void 0) {
+          scope[itemName] = value;
+        }
+        if (itemIndex !== void 0) {
+          scope[itemIndex] = index;
+        }
+        if (collectionName !== void 0) {
+          scope[collectionName] = array;
+        }
+        child.scope = scope;
+        if (template2.context) {
+          child.context = context;
+        }
+        this.nodesToDestroy.push(child);
+        collection.unshift(child);
+      });
+    }
+    collection.forEach((child) => template2.after(child));
+  }
+}
+function define(props = {}, tagName = "s-specs-editor") {
+  SComponent.setDefaultProps(tagName, props);
+  customElements.define(
+    tagName,
+    class SSpecsEditorComponent extends SSpecsEditor {
+    }
+  );
+}
 function ___isObject(item) {
   return item && typeof item === "object" && !Array.isArray(item);
 }
@@ -24394,19 +25164,47 @@ function ___deepMerge(target, ...sources) {
   }
   return ___deepMerge(target, ...sources);
 }
-document.env = ___deepMerge(JSON.parse(`{"PLATFORM":"browser","ENV":"development","ENVIRONMENT":"development","SUGAR":{"config":{"assets":{"dev":{"type":"module","defer":true,"src":"/src/js/index.ts","env":"development"},"module":{"type":"module","defer":true,"src":"/dist/js/index.esm.js","env":"production"},"nomodule":{"nomodule":true,"defer":true,"src":"/dist/js/index.amd.js","env":"production"},"style":{"id":"global","defer":true,"src":"/dist/css/index.css"}},"datetime":{"dateFormat":"YYYY-MM-DD","timeFormat":"h:mm:ss","i18n":{"previousMonth":"Previous Month","nextMonth":"Next Month","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"weekdaysShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]}},"discord":{"server":{"id":"940362961682333767","url":"https://discord.gg/HzycksDJ"}},"google":{},"metas":{"lang":"en","og":{"type":"website","image":"https://cdnv2.coffeekraken.io/coffeekraken-og.png"}},"project":{"environments":{}},"serve":{"img":{"imgPath":"/dist/img"},"js":{"path":"/dist/js"},"css":{"path":"/dist/css"},"icons":{"path":"/dist/icons"},"fonts":{"path":"/dist/fonts"},"cache":{"path":"/cache"}},"storage":{"system":{"tmpDir":"/private/var/folders/33/7q1vr_6d6ld40_t2hjfqx6340000gn/T"},"package":{"rootDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis","localDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/.local","cacheDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/.local/cache","tmpDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/.local/tmp","nodeModulesDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/node_modules"},"sugar":{"rootDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/config/s-sugar-config"},"src":{"rootDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/src","jsDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/src/js","nodeDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/src/node","cssDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/src/css","configDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/src/config","docDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/src/doc","fontsDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/src/fonts","iconsDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/src/icons","imgDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/src/img","pagesDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/src/pages","publicDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/src/public","viewsDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/src/views"},"dist":{"rootDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/dist","jsDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/dist/js","nodeDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/dist/node","cssDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/dist/css","docDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/dist/doc","fontsDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/dist/fonts","iconsDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/dist/icons","imgDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/dist/img","pagesDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/dist/pages","viewsDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/dist/views"},"exclude":["**/bin/**","**/.DS_Store","**/__WIP__/**","**/__wip__/**","**/__TESTS/**","**/__tests__/**","**/__tests__.wip/**","**/.*/**","**/node_modules/**"]},"dashboard":{"layout":[["s-dashboard-pages"],["s-dashboard-browserstack","s-dashboard-google","s-dashboard-web-vitals","s-dashboard-responsive"],["s-dashboard-project","s-dashboard-frontend-checker"]]},"env":{"envFromLocation":{"development":"https?://(localhost|127.0.0.1|0.0.0.0|192.168.[0-9]{1,3}.[0-9]{1,3}|.*.local)","staging":"https?://([a-zA-Z0-9.-]+)?staging([a-zA-Z0-9.-]+)?","production":"https://.*"},"git":{"template":{"name":"Template","commit":{}}}},"frontendServer":{"port":8080,"hostname":"127.0.0.1","rootDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis","staticDirs":{"/dist/css/partials":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/dist/css/partials","/dist":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/src"},"viewsDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/src/views","pagesDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/src/pages","logLevel":"info","corsProxy":{"port":9999,"url":"http://127.0.0.1:9999","targetUrlHeaderName":"TargetUrl","limit":"12mb"},"proxy":{},"middlewares":{"bench":{"description":"Track how many times take a request","path":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server/dist/pkg/esm/config/../node/middleware/benchMiddleware","settings":{}},"request":{"description":"Inject the \\"request\\" object for views","path":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server/dist/pkg/esm/config/../node/middleware/requestMiddleware","settings":{}},"env":{"description":"Inject an \\"env\\" object for the views","path":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server/dist/pkg/esm/config/../node/middleware/envMiddleware","settings":{}},"packageJson":{"description":"Inject a \\"packageJson\\" object for the views","path":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server/dist/pkg/esm/config/../node/middleware/packageJsonMiddleware","settings":{}}},"data":{},"modules":{"404":{"description":"This module handle the 404 by rendering either your 404 page configured in the pages or the default 404 page","path":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server/dist/pkg/esm/config/../node/modules/404/404","settings":{}},"publicDir":{"description":"This module allows you to serve files from the public directory","path":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server/dist/pkg/esm/config/../node/modules/publicDir/publicDir","settings":{}},"generic":{"description":"This module gives you access to the \\"generic\\" handler that renders dynamically views from your page config","path":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server/dist/pkg/esm/config/../node/modules/generic/generic","settings":{}},"docmap":{"description":"This module gives you access to a \\"docmap\\" object in the views","path":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server/dist/pkg/esm/config/../node/modules/docmap/docmap","settings":{}},"redirect":{"description":"This module allows you to make redirections depending on requested path","path":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server/dist/pkg/esm/config/../node/modules/redirect/redirect","settings":{}},"config":{"description":"This module gives you access to a \\"config\\" and a \\"configFiles\\" object into the views","path":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server/dist/pkg/esm/config/../node/modules/config/config","settings":{}},"frontspec":{"description":"This module gives you access to a \\"frontspec\\" object into the views","path":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server/dist/pkg/esm/config/../node/modules/frontspec/frontspec","settings":{}}},"pages":{},"handlers":{}},"kitchenActions":{"copy":{"title":"Copy file/directory","description":"Copy a file or a directory from the source to the destination passed in params","command":"sugar fs.copy [arguments]","params":{},"settings":{}},"rename":{"title":"Rename project","description":"Rename a project (folder, package.json, etc...)","command":"sugar package.rename [arguments]","params":{},"settings":{}},"initNpm":{"title":"Init npm package","description":"Init npm package in the project","command":"npm init es6 -y","params":{},"settings":{}},"addSugarJson":{"title":"Adding sugar.json file","description":"Adding the sugar.json file to the project","command":"sugar kitchen.add sugarJson [arguments]","params":{},"settings":{}},"addSugar":{"title":"Adding sugar","description":"Adding the sugar toolkit and the s-sugar feature in your project","command":"sugar kitchen.add sugar [arguments]","params":{},"settings":{}},"addNvmrc":{"title":"Adding .nvmrc file","description":"Adding the .nvmrc file to the project","command":"sugar kitchen.add nvmrc [arguments]","params":{},"settings":{}},"addFrontspecJson":{"title":"Adding frontspec.json file","description":"Adding the frontspec.json file to the project","command":"sugar kitchen.add frontspec [arguments]","params":{},"settings":{}},"addManifestJson":{"title":"Adding manifest.json file","description":"Adding the manifest.json file to the project","command":"sugar kitchen.add manifest [arguments]","params":{},"settings":{}},"addFavicon":{"title":"Adding source favicon file","description":"Adding the favicon source file to the project","command":"sugar kitchen.add favicon [arguments]","params":{},"settings":{}},"addReadme":{"title":"Adding source README.md file","description":"Adding the README.md source file to the project","command":"sugar kitchen.add readme [arguments]","params":{},"settings":{}},"addDefaultPages":{"title":"Adding default pages/views file","description":"Adding some default pages/views to the project","command":"sugar kitchen.add defaultPages [arguments]","params":{},"settings":{}},"addDefaultScripts":{"title":"Adding default script files","description":"Adding some default scripts to the project","command":"sugar kitchen.add defaultScripts [arguments]","params":{},"settings":{}},"addDefaultPackageJson":{"title":"Adding default package.json file","description":"Adding default package.json to the project","command":"sugar kitchen.add defaultPackageJson [arguments]","params":{},"settings":{}},"addSugarPostcss":{"title":"Adding sugar postcss plugin","description":"Adding the sugar postcss plugin to the project","command":"sugar kitchen.add postcss [arguments]","params":{},"settings":{}},"installDependencies":{"title":"Install dependencies","description":"Install dependencies like node_modules and composer if exists","command":"sugar package.install [arguments]","interface":"@coffeekraken/s-package/node/interface/SPackageInstallParamsInterface","params":{},"settings":{"silent":true}},"frontendServer":{"title":"Frontend server","description":"Frontend server using the @coffeekraken/s-frontend-server package","command":"sugar frontendServer.start [arguments]","interface":"@coffeekraken/s-frontend-server/node/interface/SFrontendServerStartParamsInterface","params":{},"settings":{"processManager":{"restart":true}}},"corsProxy":{"title":"Cors Proxy","description":"Frontend cors proxy server using the @coffeekraken/s-frontend-server package","command":"sugar frontendServer.corsProxy [arguments]","interface":"@coffeekraken/s-frontend-server/node/interface/SFrontendServerCorsProxyParamsInterface","params":{},"settings":{"processManager":{"restart":true}}},"postcssBuild":{"title":"PostCSS build action","description":"Build css using the amazing PostCSS package","command":"sugar postcss.build [arguments]","interface":"@coffeekraken/s-postcss-builder/node/interface/SPostcssBuilderBuildParamsInterface","params":{},"settings":{"processManager":{}}},"typescriptBuild":{"title":"Typescript builder build action","description":"Build typescript using the s-typescript-builder package","command":"sugar typescript.build [arguments]","interface":"@coffeekraken/s-typescript-builder/node/interface/STypescriptBuilderBuildParamsInterface","params":{"watch":true},"settings":{"processManager":{}}},"imagesBuild":{"title":"Images build action","description":"Build your images with ease. Compress, resize, webp version, etc...","command":"sugar images.build [arguments]","interface":"@coffeekraken/s-images-builder/node/interface/SImagesBuilderBuildParamsInterface","params":{},"settings":{"processManager":{}}},"vite":{"title":"Vite development stack","description":"Allow to build files easily while developing","command":"sugar vite [arguments]","interface":"@coffeekraken/s-vite/node/interface/SViteStartParamsInterface","params":{},"settings":{"processManager":{}}},"viteBuild":{"title":"Vite build stack","description":"Allow to compile javascript (js, ts, riot, react, etc...) files easily","command":"sugar vite.build [arguments]","interface":"@coffeekraken/s-vite/node/interface/SViteBuildParamsInterface","params":{},"settings":{"processManager":{}}},"docmapBuild":{"title":"Docmap build action","description":"Allow to build and maintain up to date the docmap.json file","command":"sugar docmap.build [arguments]","interface":"@coffeekraken/s-docmap/node/interface/SDocmapBuildParamsInterface","params":{},"settings":{"processManager":{}}},"sitemapBuild":{"title":"Sitemap build action","description":"Allow to build and maintain up to date the sitemap.xml file","command":"sugar sitemap.build [arguments]","interface":"@coffeekraken/s-sitemap-builder/node/interface/SSitemapBuilderBuildParamsInterface","params":{},"settings":{"processManager":{}}},"faviconBuild":{"title":"Docmap build action","description":"Allow to build and maintain up to date your favicon files and the manifest.json","command":"sugar favicon.build [arguments]","interface":"@coffeekraken/s-favicon-builder/node/interface/SFaviconBuilderBuildParamsInterface","params":{},"settings":{"processManager":{}}},"markdownBuild":{"title":"Docmap build action","description":"Allow to build your markdown files","command":"sugar markdown.build -p default,readme [arguments]","interface":"@coffeekraken/s-markdown-builder/node/interface/SMarkdownBuilderBuildParamsInterface","params":{},"settings":{"processManager":{}}},"format":{"title":"SCodeFormatter format action","description":"Format your code using the s-code-formatter package","command":"sugar formatter.format [arguments]","interface":"@coffeekraken/s-code-formatter/node/interface/SCodeFormatterFormatParamsInterface","params":{"watch":true},"settings":{"processManager":{}}}},"theme":{"theme":"default","variant":"light","cssVariables":["*"],"themes":{"default-light":{"defaultColor":"main","color":{},"easing":{"default":"cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"scroll":{"duration":300,"offset":0,"offsetX":0,"offsetY":0},"timing":{},"transition":{},"helpers":{},"layout":{"offset":{"top":0,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}},"ratio":{},"scalable":{},"scale":{},"opacity":{},"width":{},"height":{},"depth":{},"size":{},"font":{},"border":{},"space":{},"margin":{},"padding":{},"offsize":{},"media":{"defaultAction":"<=","defaultMedia":"desktop","defaultQuery":"screen","queries":{"mobile":{"min-width":0,"max-width":639},"tablet":{"min-width":640,"max-width":1279},"desktop":{"min-width":1280,"max-width":2047},"wide":{"min-width":2048,"max-width":null}}},"ui":{},"typo":{},"colorSchema":{},"metas":{"title":"Coffeekraken (default)","description":"Default Coffeekraken theme that you can use as a base for your custom theme"}},"default-dark":{"defaultColor":"main","color":{},"easing":{"default":"cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"scroll":{"duration":300,"offset":0,"offsetX":0,"offsetY":0},"timing":{},"transition":{},"helpers":{},"layout":{"offset":{"top":0,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}},"ratio":{},"scalable":{},"scale":{},"opacity":{},"width":{},"height":{},"depth":{},"size":{},"font":{},"border":{},"space":{},"margin":{},"padding":{},"offsize":{},"media":{"defaultAction":"<=","defaultMedia":"desktop","defaultQuery":"screen","queries":{"mobile":{"min-width":0,"max-width":639},"tablet":{"min-width":640,"max-width":1279},"desktop":{"min-width":1280,"max-width":2047},"wide":{"min-width":2048,"max-width":null}}},"ui":{},"typo":{},"colorSchema":{},"metas":{"title":"Coffeekraken (default)","description":"Default Coffeekraken theme that you can use as a base for your custom theme"}}}},"themeBase":{"defaultColor":"main","color":{},"easing":{"default":"cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"scroll":{"duration":300,"offset":0,"offsetX":0,"offsetY":0},"timing":{},"transition":{},"helpers":{},"layout":{"offset":{"top":0,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}},"ratio":{},"scalable":{},"scale":{},"opacity":{},"width":{},"height":{},"depth":{},"size":{},"font":{},"border":{},"space":{},"margin":{},"padding":{},"offsize":{},"media":{"defaultAction":"<=","defaultMedia":"desktop","defaultQuery":"screen","queries":{"mobile":{"min-width":0,"max-width":639},"tablet":{"min-width":640,"max-width":1279},"desktop":{"min-width":1280,"max-width":2047},"wide":{"min-width":2048,"max-width":null}}},"ui":{},"typo":{}},"themeDefault":{"themeName":"default","metas":{"title":"Coffeekraken (default)","description":"Default Coffeekraken theme that you can use as a base for your custom theme"},"variants":{"light":{"defaultColor":"main","color":{},"easing":{"default":"cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"scroll":{"duration":300,"offset":0,"offsetX":0,"offsetY":0},"timing":{},"transition":{},"helpers":{},"layout":{"offset":{"top":0,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}},"ratio":{},"scalable":{},"scale":{},"opacity":{},"width":{},"height":{},"depth":{},"size":{},"font":{},"border":{},"space":{},"margin":{},"padding":{},"offsize":{},"media":{"defaultAction":"<=","defaultMedia":"desktop","defaultQuery":"screen","queries":{"mobile":{"min-width":0,"max-width":639},"tablet":{"min-width":640,"max-width":1279},"desktop":{"min-width":1280,"max-width":2047},"wide":{"min-width":2048,"max-width":null}}},"ui":{},"typo":{},"colorSchema":{},"metas":{"title":"Coffeekraken (default)","description":"Default Coffeekraken theme that you can use as a base for your custom theme"}},"dark":{"defaultColor":"main","color":{},"easing":{"default":"cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"scroll":{"duration":300,"offset":0,"offsetX":0,"offsetY":0},"timing":{},"transition":{},"helpers":{},"layout":{"offset":{"top":0,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}},"ratio":{},"scalable":{},"scale":{},"opacity":{},"width":{},"height":{},"depth":{},"size":{},"font":{},"border":{},"space":{},"margin":{},"padding":{},"offsize":{},"media":{"defaultAction":"<=","defaultMedia":"desktop","defaultQuery":"screen","queries":{"mobile":{"min-width":0,"max-width":639},"tablet":{"min-width":640,"max-width":1279},"desktop":{"min-width":1280,"max-width":2047},"wide":{"min-width":2048,"max-width":null}}},"ui":{},"typo":{},"colorSchema":{},"metas":{"title":"Coffeekraken (default)","description":"Default Coffeekraken theme that you can use as a base for your custom theme"}}}},"themeDefaultDark":{"defaultColor":"main","color":{},"easing":{"default":"cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"scroll":{"duration":300,"offset":0,"offsetX":0,"offsetY":0},"timing":{},"transition":{},"helpers":{},"layout":{"offset":{"top":0,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}},"ratio":{},"scalable":{},"scale":{},"opacity":{},"width":{},"height":{},"depth":{},"size":{},"font":{},"border":{},"space":{},"margin":{},"padding":{},"offsize":{},"media":{"defaultAction":"<=","defaultMedia":"desktop","defaultQuery":"screen","queries":{"mobile":{"min-width":0,"max-width":639},"tablet":{"min-width":640,"max-width":1279},"desktop":{"min-width":1280,"max-width":2047},"wide":{"min-width":2048,"max-width":null}}},"ui":{},"typo":{},"colorSchema":{},"metas":{"title":"Coffeekraken (default)","description":"Default Coffeekraken theme that you can use as a base for your custom theme"}},"themeDefaultLight":{"defaultColor":"main","color":{},"easing":{"default":"cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"scroll":{"duration":300,"offset":0,"offsetX":0,"offsetY":0},"timing":{},"transition":{},"helpers":{},"layout":{"offset":{"top":0,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}},"ratio":{},"scalable":{},"scale":{},"opacity":{},"width":{},"height":{},"depth":{},"size":{},"font":{},"border":{},"space":{},"margin":{},"padding":{},"offsize":{},"media":{"defaultAction":"<=","defaultMedia":"desktop","defaultQuery":"screen","queries":{"mobile":{"min-width":0,"max-width":639},"tablet":{"min-width":640,"max-width":1279},"desktop":{"min-width":1280,"max-width":2047},"wide":{"min-width":2048,"max-width":null}}},"ui":{},"typo":{},"colorSchema":{},"metas":{"title":"Coffeekraken (default)","description":"Default Coffeekraken theme that you can use as a base for your custom theme"}},"themeEasing":{"default":"cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"themeLayout":{"offset":{"top":0,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}},"themeMedia":{"defaultAction":"<=","defaultMedia":"desktop","defaultQuery":"screen","queries":{"mobile":{"min-width":0,"max-width":639},"tablet":{"min-width":640,"max-width":1279},"desktop":{"min-width":1280,"max-width":2047},"wide":{"min-width":2048,"max-width":null}}},"themeScroll":{"duration":300,"offset":0,"offsetX":0,"offsetY":0}}},"PACKAGE":{"name":"@coffeekraken/s-mitosis","version":"2.0.0-alpha.20","description":"Some utils plugins and more around the AMAZING @builer.io/mitosis tool!","homepage":"https://coffeekraken.io","scripts":{"test":"echo \\"Error: no test specified\\" && exit 1"},"author":"","license":"MIT","dependencies":{"@coffeekraken/s-activate-feature":"^2.0.0-alpha.20","@coffeekraken/s-component":"^2.0.0-alpha.20","@coffeekraken/s-interface":"^2.0.0-alpha.20","@coffeekraken/s-log":"^2.0.0-alpha.20","@coffeekraken/s-promise":"^2.0.0-alpha.20","@coffeekraken/s-view-renderer":"^2.0.0-alpha.20","@coffeekraken/sugar":"^2.0.0-alpha.20","chokidar":"^3.5.3","express":"^4.18.2","glob":"^8.0.3","vite":"^3.1.7","vite-plugin-dynamic-import":"^1.2.2"},"main":"dist/pkg/cjs/node/exports.js","module":"dist/pkg/esm/node/exports.js","exports":{".":{"require":"./dist/pkg/cjs/node/exports.js","import":"./dist/pkg/esm/node/exports.js"},"./shared/*":{"require":"./dist/pkg/cjs/shared/*.js","import":"./dist/pkg/esm/shared/*.js"},"./node/*":{"require":"./dist/pkg/cjs/node/*.js","import":"./dist/pkg/esm/node/*.js"},"./js/*":{"require":"./dist/pkg/cjs/js/*.js","import":"./dist/pkg/esm/js/*.js"}}}}`), {
+document.env = ___deepMerge(JSON.parse(`{"PLATFORM":"browser","ENV":"development","ENVIRONMENT":"development","SUGAR":{"config":{"assets":{"dev":{"type":"module","defer":true,"src":"/src/js/index.ts","env":"development"},"module":{"type":"module","defer":true,"src":"/dist/js/index.esm.js","env":"production"},"nomodule":{"nomodule":true,"defer":true,"src":"/dist/js/index.amd.js","env":"production"},"style":{"id":"global","defer":true,"src":"/dist/css/index.css"}},"datetime":{"dateFormat":"YYYY-MM-DD","timeFormat":"h:mm:ss","i18n":{"previousMonth":"Previous Month","nextMonth":"Next Month","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"weekdaysShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]}},"discord":{"server":{"id":"940362961682333767","url":"https://discord.gg/HzycksDJ"}},"google":{},"metas":{"lang":"en","og":{"type":"website","image":"https://cdnv2.coffeekraken.io/coffeekraken-og.png"}},"project":{"environments":{}},"serve":{"img":{"imgPath":"/dist/img"},"js":{"path":"/dist/js"},"css":{"path":"/dist/css"},"icons":{"path":"/dist/icons"},"fonts":{"path":"/dist/fonts"},"cache":{"path":"/cache"}},"storage":{"system":{"tmpDir":"/private/var/folders/33/7q1vr_6d6ld40_t2hjfqx6340000gn/T"},"package":{"rootDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis","localDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/.local","cacheDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/.local/cache","tmpDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/.local/tmp","nodeModulesDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/node_modules"},"sugar":{"rootDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/config/s-sugar-config"},"src":{"rootDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/src","jsDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/src/js","nodeDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/src/node","cssDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/src/css","configDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/src/config","docDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/src/doc","fontsDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/src/fonts","iconsDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/src/icons","imgDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/src/img","pagesDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/src/pages","publicDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/src/public","viewsDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/src/views"},"dist":{"rootDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/dist","jsDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/dist/js","nodeDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/dist/node","cssDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/dist/css","docDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/dist/doc","fontsDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/dist/fonts","iconsDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/dist/icons","imgDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/dist/img","pagesDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/dist/pages","viewsDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/dist/views"},"exclude":["**/bin/**","**/.DS_Store","**/__WIP__/**","**/__wip__/**","**/__TESTS/**","**/__tests__/**","**/__tests__.wip/**","**/.*/**","**/node_modules/**"]},"dashboard":{"layout":[["s-dashboard-pages"],["s-dashboard-browserstack","s-dashboard-google","s-dashboard-web-vitals","s-dashboard-responsive"],["s-dashboard-project","s-dashboard-frontend-checker"]]},"env":{"envFromLocation":{"development":"https?://(localhost|127.0.0.1|0.0.0.0|192.168.[0-9]{1,3}.[0-9]{1,3}|.*.local)","staging":"https?://([a-zA-Z0-9.-]+)?staging([a-zA-Z0-9.-]+)?","production":"https://.*"},"git":{"template":{"name":"Template","commit":{}}}},"frontendServer":{"port":8080,"hostname":"127.0.0.1","rootDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis","staticDirs":{"/dist/css/partials":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/dist/css/partials","/dist":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/src"},"viewsDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/src/views","pagesDir":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-mitosis/src/pages","logLevel":"info","corsProxy":{"port":9999,"url":"http://127.0.0.1:9999","targetUrlHeaderName":"TargetUrl","limit":"12mb"},"proxy":{},"middlewares":{"bench":{"description":"Track how many times take a request","path":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server/dist/pkg/esm/config/../node/middleware/benchMiddleware","settings":{}},"request":{"description":"Inject the \\"request\\" object for views","path":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server/dist/pkg/esm/config/../node/middleware/requestMiddleware","settings":{}},"env":{"description":"Inject an \\"env\\" object for the views","path":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server/dist/pkg/esm/config/../node/middleware/envMiddleware","settings":{}},"packageJson":{"description":"Inject a \\"packageJson\\" object for the views","path":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server/dist/pkg/esm/config/../node/middleware/packageJsonMiddleware","settings":{}}},"data":{},"modules":{"404":{"description":"This module handle the 404 by rendering either your 404 page configured in the pages or the default 404 page","path":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server/dist/pkg/esm/config/../node/modules/404/404","settings":{}},"publicDir":{"description":"This module allows you to serve files from the public directory","path":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server/dist/pkg/esm/config/../node/modules/publicDir/publicDir","settings":{}},"generic":{"description":"This module gives you access to the \\"generic\\" handler that renders dynamically views from your page config","path":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server/dist/pkg/esm/config/../node/modules/generic/generic","settings":{}},"docmap":{"description":"This module gives you access to a \\"docmap\\" object in the views","path":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server/dist/pkg/esm/config/../node/modules/docmap/docmap","settings":{}},"redirect":{"description":"This module allows you to make redirections depending on requested path","path":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server/dist/pkg/esm/config/../node/modules/redirect/redirect","settings":{}},"config":{"description":"This module gives you access to a \\"config\\" and a \\"configFiles\\" object into the views","path":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server/dist/pkg/esm/config/../node/modules/config/config","settings":{}},"frontspec":{"description":"This module gives you access to a \\"frontspec\\" object into the views","path":"/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server/dist/pkg/esm/config/../node/modules/frontspec/frontspec","settings":{}}},"pages":{},"handlers":{}},"kitchenActions":{"copy":{"title":"Copy file/directory","description":"Copy a file or a directory from the source to the destination passed in params","command":"sugar fs.copy [arguments]","params":{},"settings":{}},"rename":{"title":"Rename project","description":"Rename a project (folder, package.json, etc...)","command":"sugar package.rename [arguments]","params":{},"settings":{}},"initNpm":{"title":"Init npm package","description":"Init npm package in the project","command":"npm init es6 -y","params":{},"settings":{}},"addSugarJson":{"title":"Adding sugar.json file","description":"Adding the sugar.json file to the project","command":"sugar kitchen.add sugarJson [arguments]","params":{},"settings":{}},"addSugar":{"title":"Adding sugar","description":"Adding the sugar toolkit and the s-sugar feature in your project","command":"sugar kitchen.add sugar [arguments]","params":{},"settings":{}},"addNvmrc":{"title":"Adding .nvmrc file","description":"Adding the .nvmrc file to the project","command":"sugar kitchen.add nvmrc [arguments]","params":{},"settings":{}},"addFrontspecJson":{"title":"Adding frontspec.json file","description":"Adding the frontspec.json file to the project","command":"sugar kitchen.add frontspec [arguments]","params":{},"settings":{}},"addManifestJson":{"title":"Adding manifest.json file","description":"Adding the manifest.json file to the project","command":"sugar kitchen.add manifest [arguments]","params":{},"settings":{}},"addFavicon":{"title":"Adding source favicon file","description":"Adding the favicon source file to the project","command":"sugar kitchen.add favicon [arguments]","params":{},"settings":{}},"addReadme":{"title":"Adding source README.md file","description":"Adding the README.md source file to the project","command":"sugar kitchen.add readme [arguments]","params":{},"settings":{}},"addDefaultPages":{"title":"Adding default pages/views file","description":"Adding some default pages/views to the project","command":"sugar kitchen.add defaultPages [arguments]","params":{},"settings":{}},"addDefaultScripts":{"title":"Adding default script files","description":"Adding some default scripts to the project","command":"sugar kitchen.add defaultScripts [arguments]","params":{},"settings":{}},"addDefaultPackageJson":{"title":"Adding default package.json file","description":"Adding default package.json to the project","command":"sugar kitchen.add defaultPackageJson [arguments]","params":{},"settings":{}},"addSugarPostcss":{"title":"Adding sugar postcss plugin","description":"Adding the sugar postcss plugin to the project","command":"sugar kitchen.add postcss [arguments]","params":{},"settings":{}},"installDependencies":{"title":"Install dependencies","description":"Install dependencies like node_modules and composer if exists","command":"sugar package.install [arguments]","interface":"@coffeekraken/s-package/node/interface/SPackageInstallParamsInterface","params":{},"settings":{"silent":true}},"frontendServer":{"title":"Frontend server","description":"Frontend server using the @coffeekraken/s-frontend-server package","command":"sugar frontendServer.start [arguments]","interface":"@coffeekraken/s-frontend-server/node/interface/SFrontendServerStartParamsInterface","params":{},"settings":{"processManager":{"restart":true}}},"corsProxy":{"title":"Cors Proxy","description":"Frontend cors proxy server using the @coffeekraken/s-frontend-server package","command":"sugar frontendServer.corsProxy [arguments]","interface":"@coffeekraken/s-frontend-server/node/interface/SFrontendServerCorsProxyParamsInterface","params":{},"settings":{"processManager":{"restart":true}}},"postcssBuild":{"title":"PostCSS build action","description":"Build css using the amazing PostCSS package","command":"sugar postcss.build [arguments]","interface":"@coffeekraken/s-postcss-builder/node/interface/SPostcssBuilderBuildParamsInterface","params":{},"settings":{"processManager":{}}},"typescriptBuild":{"title":"Typescript builder build action","description":"Build typescript using the s-typescript-builder package","command":"sugar typescript.build [arguments]","interface":"@coffeekraken/s-typescript-builder/node/interface/STypescriptBuilderBuildParamsInterface","params":{"watch":true},"settings":{"processManager":{}}},"imagesBuild":{"title":"Images build action","description":"Build your images with ease. Compress, resize, webp version, etc...","command":"sugar images.build [arguments]","interface":"@coffeekraken/s-images-builder/node/interface/SImagesBuilderBuildParamsInterface","params":{},"settings":{"processManager":{}}},"vite":{"title":"Vite development stack","description":"Allow to build files easily while developing","command":"sugar vite [arguments]","interface":"@coffeekraken/s-vite/node/interface/SViteStartParamsInterface","params":{},"settings":{"processManager":{}}},"viteBuild":{"title":"Vite build stack","description":"Allow to compile javascript (js, ts, riot, react, etc...) files easily","command":"sugar vite.build [arguments]","interface":"@coffeekraken/s-vite/node/interface/SViteBuildParamsInterface","params":{},"settings":{"processManager":{}}},"docmapBuild":{"title":"Docmap build action","description":"Allow to build and maintain up to date the docmap.json file","command":"sugar docmap.build [arguments]","interface":"@coffeekraken/s-docmap/node/interface/SDocmapBuildParamsInterface","params":{},"settings":{"processManager":{}}},"sitemapBuild":{"title":"Sitemap build action","description":"Allow to build and maintain up to date the sitemap.xml file","command":"sugar sitemap.build [arguments]","interface":"@coffeekraken/s-sitemap-builder/node/interface/SSitemapBuilderBuildParamsInterface","params":{},"settings":{"processManager":{}}},"faviconBuild":{"title":"Docmap build action","description":"Allow to build and maintain up to date your favicon files and the manifest.json","command":"sugar favicon.build [arguments]","interface":"@coffeekraken/s-favicon-builder/node/interface/SFaviconBuilderBuildParamsInterface","params":{},"settings":{"processManager":{}}},"markdownBuild":{"title":"Docmap build action","description":"Allow to build your markdown files","command":"sugar markdown.build -p default,readme [arguments]","interface":"@coffeekraken/s-markdown-builder/node/interface/SMarkdownBuilderBuildParamsInterface","params":{},"settings":{"processManager":{}}},"format":{"title":"SCodeFormatter format action","description":"Format your code using the s-code-formatter package","command":"sugar formatter.format [arguments]","interface":"@coffeekraken/s-code-formatter/node/interface/SCodeFormatterFormatParamsInterface","params":{"watch":true},"settings":{"processManager":{}}}},"theme":{"theme":"default","variant":"light","cssVariables":["*"],"themes":{"default-light":{"defaultColor":"main","color":{},"easing":{"default":"cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"scroll":{"duration":300,"offset":0,"offsetX":0,"offsetY":0},"timing":{},"transition":{},"helpers":{},"layout":{"offset":{"top":0,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}},"ratio":{},"scalable":{},"scale":{},"opacity":{},"width":{},"height":{},"depth":{},"size":{},"font":{},"border":{},"space":{},"margin":{},"padding":{},"offsize":{},"media":{"defaultAction":"<=","defaultMedia":"desktop","defaultQuery":"screen","queries":{"mobile":{"min-width":0,"max-width":639},"tablet":{"min-width":640,"max-width":1279},"desktop":{"min-width":1280,"max-width":2047},"wide":{"min-width":2048,"max-width":null}}},"ui":{},"typo":{},"colorSchema":{},"metas":{"title":"Coffeekraken (default)","description":"Default Coffeekraken theme that you can use as a base for your custom theme"}},"default-dark":{"defaultColor":"main","color":{},"easing":{"default":"cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"scroll":{"duration":300,"offset":0,"offsetX":0,"offsetY":0},"timing":{},"transition":{},"helpers":{},"layout":{"offset":{"top":0,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}},"ratio":{},"scalable":{},"scale":{},"opacity":{},"width":{},"height":{},"depth":{},"size":{},"font":{},"border":{},"space":{},"margin":{},"padding":{},"offsize":{},"media":{"defaultAction":"<=","defaultMedia":"desktop","defaultQuery":"screen","queries":{"mobile":{"min-width":0,"max-width":639},"tablet":{"min-width":640,"max-width":1279},"desktop":{"min-width":1280,"max-width":2047},"wide":{"min-width":2048,"max-width":null}}},"ui":{},"typo":{},"colorSchema":{},"metas":{"title":"Coffeekraken (default)","description":"Default Coffeekraken theme that you can use as a base for your custom theme"}}}},"themeBase":{"defaultColor":"main","color":{},"easing":{"default":"cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"scroll":{"duration":300,"offset":0,"offsetX":0,"offsetY":0},"timing":{},"transition":{},"helpers":{},"layout":{"offset":{"top":0,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}},"ratio":{},"scalable":{},"scale":{},"opacity":{},"width":{},"height":{},"depth":{},"size":{},"font":{},"border":{},"space":{},"margin":{},"padding":{},"offsize":{},"media":{"defaultAction":"<=","defaultMedia":"desktop","defaultQuery":"screen","queries":{"mobile":{"min-width":0,"max-width":639},"tablet":{"min-width":640,"max-width":1279},"desktop":{"min-width":1280,"max-width":2047},"wide":{"min-width":2048,"max-width":null}}},"ui":{},"typo":{}},"themeDefault":{"themeName":"default","metas":{"title":"Coffeekraken (default)","description":"Default Coffeekraken theme that you can use as a base for your custom theme"},"variants":{"light":{"defaultColor":"main","color":{},"easing":{"default":"cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"scroll":{"duration":300,"offset":0,"offsetX":0,"offsetY":0},"timing":{},"transition":{},"helpers":{},"layout":{"offset":{"top":0,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}},"ratio":{},"scalable":{},"scale":{},"opacity":{},"width":{},"height":{},"depth":{},"size":{},"font":{},"border":{},"space":{},"margin":{},"padding":{},"offsize":{},"media":{"defaultAction":"<=","defaultMedia":"desktop","defaultQuery":"screen","queries":{"mobile":{"min-width":0,"max-width":639},"tablet":{"min-width":640,"max-width":1279},"desktop":{"min-width":1280,"max-width":2047},"wide":{"min-width":2048,"max-width":null}}},"ui":{},"typo":{},"colorSchema":{},"metas":{"title":"Coffeekraken (default)","description":"Default Coffeekraken theme that you can use as a base for your custom theme"}},"dark":{"defaultColor":"main","color":{},"easing":{"default":"cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"scroll":{"duration":300,"offset":0,"offsetX":0,"offsetY":0},"timing":{},"transition":{},"helpers":{},"layout":{"offset":{"top":0,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}},"ratio":{},"scalable":{},"scale":{},"opacity":{},"width":{},"height":{},"depth":{},"size":{},"font":{},"border":{},"space":{},"margin":{},"padding":{},"offsize":{},"media":{"defaultAction":"<=","defaultMedia":"desktop","defaultQuery":"screen","queries":{"mobile":{"min-width":0,"max-width":639},"tablet":{"min-width":640,"max-width":1279},"desktop":{"min-width":1280,"max-width":2047},"wide":{"min-width":2048,"max-width":null}}},"ui":{},"typo":{},"colorSchema":{},"metas":{"title":"Coffeekraken (default)","description":"Default Coffeekraken theme that you can use as a base for your custom theme"}}}},"themeDefaultDark":{"defaultColor":"main","color":{},"easing":{"default":"cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"scroll":{"duration":300,"offset":0,"offsetX":0,"offsetY":0},"timing":{},"transition":{},"helpers":{},"layout":{"offset":{"top":0,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}},"ratio":{},"scalable":{},"scale":{},"opacity":{},"width":{},"height":{},"depth":{},"size":{},"font":{},"border":{},"space":{},"margin":{},"padding":{},"offsize":{},"media":{"defaultAction":"<=","defaultMedia":"desktop","defaultQuery":"screen","queries":{"mobile":{"min-width":0,"max-width":639},"tablet":{"min-width":640,"max-width":1279},"desktop":{"min-width":1280,"max-width":2047},"wide":{"min-width":2048,"max-width":null}}},"ui":{},"typo":{},"colorSchema":{},"metas":{"title":"Coffeekraken (default)","description":"Default Coffeekraken theme that you can use as a base for your custom theme"}},"themeDefaultLight":{"defaultColor":"main","color":{},"easing":{"default":"cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"scroll":{"duration":300,"offset":0,"offsetX":0,"offsetY":0},"timing":{},"transition":{},"helpers":{},"layout":{"offset":{"top":0,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}},"ratio":{},"scalable":{},"scale":{},"opacity":{},"width":{},"height":{},"depth":{},"size":{},"font":{},"border":{},"space":{},"margin":{},"padding":{},"offsize":{},"media":{"defaultAction":"<=","defaultMedia":"desktop","defaultQuery":"screen","queries":{"mobile":{"min-width":0,"max-width":639},"tablet":{"min-width":640,"max-width":1279},"desktop":{"min-width":1280,"max-width":2047},"wide":{"min-width":2048,"max-width":null}}},"ui":{},"typo":{},"colorSchema":{},"metas":{"title":"Coffeekraken (default)","description":"Default Coffeekraken theme that you can use as a base for your custom theme"}},"themeEasing":{"default":"cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"themeLayout":{"offset":{"top":0,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}},"themeMedia":{"defaultAction":"<=","defaultMedia":"desktop","defaultQuery":"screen","queries":{"mobile":{"min-width":0,"max-width":639},"tablet":{"min-width":640,"max-width":1279},"desktop":{"min-width":1280,"max-width":2047},"wide":{"min-width":2048,"max-width":null}}},"themeScroll":{"duration":300,"offset":0,"offsetX":0,"offsetY":0}}},"PACKAGE":{"name":"@coffeekraken/s-mitosis","version":"2.0.0-alpha.20","description":"Some utils plugins and more around the AMAZING @builer.io/mitosis tool!","homepage":"https://coffeekraken.io","scripts":{"test":"echo \\"Error: no test specified\\" && exit 1"},"author":"","license":"MIT","dependencies":{"@coffeekraken/s-activate-feature":"^2.0.0-alpha.20","@coffeekraken/s-component":"^2.0.0-alpha.20","@coffeekraken/s-interface":"^2.0.0-alpha.20","@coffeekraken/s-log":"^2.0.0-alpha.20","@coffeekraken/s-postcss-builder":"^2.0.0-alpha.20","@coffeekraken/s-promise":"^2.0.0-alpha.20","@coffeekraken/s-specs":"^2.0.0-alpha.20","@coffeekraken/s-specs-editor-component":"^2.0.0-alpha.20","@coffeekraken/s-view-renderer":"^2.0.0-alpha.20","@coffeekraken/sugar":"^2.0.0-alpha.20","chokidar":"^3.5.3","express":"^4.18.2","glob":"^8.0.3","vite":"^3.1.7","vite-plugin-dynamic-import":"^1.2.2"},"main":"dist/pkg/cjs/node/exports.js","module":"dist/pkg/esm/node/exports.js","exports":{".":{"require":"./dist/pkg/cjs/node/exports.js","import":"./dist/pkg/esm/node/exports.js"},"./shared/*":{"require":"./dist/pkg/cjs/shared/*.js","import":"./dist/pkg/esm/shared/*.js"},"./node/*":{"require":"./dist/pkg/cjs/node/*.js","import":"./dist/pkg/esm/node/*.js"},"./js/*":{"require":"./dist/pkg/cjs/js/*.js","import":"./dist/pkg/esm/js/*.js"}}}}`), {
   SUGAR: (_a2 = document.SUGAR) != null ? _a2 : {}
 });
 (async () => {
+  define$1();
   define();
   __querySelectorLive("[component]", async ($app) => {
+    var _a3;
     const component = JSON.parse($app.getAttribute("component"));
-    console.log(component);
     const componentImport = await __vitePreload(() => import(component.path), true ? [] : void 0);
+    const $componentContainer = document.querySelector(
+      `#component-${component.target}`
+    );
     switch (component.target) {
       case "webcomponent":
         componentImport.define();
-        $app.innerHTML = componentImport.preview;
+        $app.innerHTML = (_a3 = componentImport.metas) == null ? void 0 : _a3.preview;
+        let $component = $app.children[0];
+        $component.tagName;
+        $componentContainer == null ? void 0 : $componentContainer.addEventListener(
+          "s-specs-editor.change",
+          (e) => {
+            const updatedProp = e.detail;
+            $component.remove();
+            const domParser = new DOMParser();
+            const $dom = domParser.parseFromString(
+              componentImport.metas.preview,
+              "text/html"
+            );
+            $component = $dom.body.children[0];
+            for (let [prop, value] of Object.entries(
+              component.specs.props
+            )) {
+              if (prop === updatedProp.id) {
+                console.log(prop, value);
+              }
+            }
+            $app.appendChild();
+            console.log("Updated", e.detail);
+          }
+        );
         break;
     }
   });

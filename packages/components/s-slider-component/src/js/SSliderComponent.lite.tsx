@@ -9,12 +9,12 @@ import {
     useStore,
 } from '@builder.io/mitosis';
 
+import __css from '%packageRootDir/src/css/s-slider-component.css';
+import __SSliderComponentInterface from '%packageRootDir/src/js/interface/SSliderComponentInterface';
 import __SComponent from '@coffeekraken/s-component';
 import { __elementAreaStats } from '@coffeekraken/sugar/dom';
 import { __easeInterval } from '@coffeekraken/sugar/function';
 import { __uniqid } from '@coffeekraken/sugar/string';
-import __css from '../../../../src/css/s-slider-component.css';
-import __SSliderComponentInterface from '../../../../src/js/interface/SSliderComponentInterface';
 
 /**
  * @name                SSliderComponent
@@ -278,25 +278,27 @@ type Props = {
     cssDeps: string[];
 };
 
-const DEFAULT_PROPS = __SSliderComponentInterface.defaults();
-
 useMetadata({
     isAttachedToShadowDom: true,
 });
 
-export const preview = `
-    <s-slider>
-        <div s-slider-slide>
-            <img src="https://picsum.photos/1600/900?1" />
-        </div>
-        <div s-slider-slide>
-            <img src="https://picsum.photos/1600/900?2" />
-        </div>
-        <div s-slider-slide>
-            <img src="https://picsum.photos/1600/900?3" />
-        </div>
-    </s-slider>
-`;
+export const DEFAULT_PROPS = __SSliderComponentInterface.defaults();
+export const metas = {
+    interface: __SSliderComponentInterface,
+    preview: `
+        <s-slider>
+            <div s-slider-slide>
+                <img src="https://picsum.photos/1600/900?1" />
+            </div>
+            <div s-slider-slide>
+                <img src="https://picsum.photos/1600/900?2" />
+            </div>
+            <div s-slider-slide>
+                <img src="https://picsum.photos/1600/900?3" />
+            </div>
+        </s-slider>
+    `,
+};
 
 export default function SSlider(props: Props) {
     // default props
@@ -323,7 +325,11 @@ export default function SSlider(props: Props) {
                     [__css, ...(props.cssDeps ?? [])],
                     $container,
                 );
-            } catch (e) {}
+            } catch (e) {
+                console.log(e);
+            }
+
+            console.log('DEFAU', DEFAULT_PROPS);
 
             state._behaviors = {
                 default({ fromSlideId, toSlideId }) {
@@ -392,6 +398,8 @@ export default function SSlider(props: Props) {
 
                     const $from = state.getSlideElementById(fromSlideId),
                         $to = state.getSlideElementById(toSlideId);
+
+                    console.log('f', fromSlideId, $from, $to);
 
                     const fromRect = $from.getBoundingClientRect(),
                         toRect = $to.getBoundingClientRect(),
@@ -516,6 +524,14 @@ export default function SSlider(props: Props) {
             state.goTo(state.getNextSlideId());
         },
         goTo(slideId) {
+            console.log(
+                'Go to',
+                slideId,
+                state._currentSlideId,
+                state._slidesIds,
+                state._slideElements,
+            );
+
             // call the behavior
             const behaviorFn =
                 props.behaviors?.[props.behavior] ??
@@ -538,6 +554,7 @@ export default function SSlider(props: Props) {
     });
 
     onUpdate(() => {
+        console.log('UPDTE');
         $root.style.setProperty('--s-slider-slide', state.getCurrentSlideIdx());
         $root.style.setProperty('--s-slider-total', state._slidesIds.length);
     });
@@ -545,10 +562,11 @@ export default function SSlider(props: Props) {
     // when component is mounting
     onMount(() => {
         __SSliderComponentInterface;
+        state._id = props.id ?? `s-slider-${__uniqid()}`;
         state._component = new __SComponent('s-slider', {
+            id: props.id,
             bare: false,
         });
-        state._id = `s-slider-${__uniqid()}`;
         state.mount();
         state._status = 'mounted';
     });
@@ -597,24 +615,26 @@ export default function SSlider(props: Props) {
                         </For>
                     </div>
                 </Show>
-                <div class="s-slider__controls">
-                    <div
-                        class={`s-slider__controls-previous ${
-                            props.loop || !state.isFirst() ? 'active' : ''
-                        }`}
-                        onPointerUp={() => state.previous()}
-                    >
-                        <div class="s-slider__controls-previous-arrow"></div>
+                <Show when={props.controls}>
+                    <div class="s-slider__controls">
+                        <div
+                            class={`s-slider__controls-previous ${
+                                props.loop || !state.isFirst() ? 'active' : ''
+                            }`}
+                            onPointerUp={() => state.previous()}
+                        >
+                            <div class="s-slider__controls-previous-arrow"></div>
+                        </div>
+                        <div
+                            class={`s-slider__controls-next ${
+                                props.loop || !state.isLast() ? 'active' : ''
+                            }`}
+                            onPointerUp={() => state.next()}
+                        >
+                            <div class="s-slider__controls-next-arrow"></div>
+                        </div>
                     </div>
-                    <div
-                        class={`s-slider__controls-next ${
-                            props.loop || !state.isLast() ? 'active' : ''
-                        }`}
-                        onPointerUp={() => state.next()}
-                    >
-                        <div class="s-slider__controls-next-arrow"></div>
-                    </div>
-                </div>
+                </Show>
             </div>
         </div>
     );

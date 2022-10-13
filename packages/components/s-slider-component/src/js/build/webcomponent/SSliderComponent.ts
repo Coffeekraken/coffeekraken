@@ -260,31 +260,47 @@ type Props = {
     cssDeps: string[];
 };
 
+import __css from '../../../../src/css/s-slider-component.css';
+import __SSliderComponentInterface from '../../../../src/js/interface/SSliderComponentInterface';
 import __SComponent from '@coffeekraken/s-component';
 import { __elementAreaStats } from '@coffeekraken/sugar/dom';
 import { __easeInterval } from '@coffeekraken/sugar/function';
 import { __uniqid } from '@coffeekraken/sugar/string';
-import __css from '../../../../../src/css/s-slider-component.css';
-import __SSliderComponentInterface from '../../../../../src/js/interface/SSLiderComponentInterface';
-const DEFAULT_PROPS = __SSliderComponentInterface.defaults();
+export const DEFAULT_PROPS = __SSliderComponentInterface.defaults();
+export const metas = {
+    interface: __SSliderComponentInterface,
+    preview: `
+        <s-slider>
+            <div s-slider-slide>
+                <img src="https://picsum.photos/1600/900?1" />
+            </div>
+            <div s-slider-slide>
+                <img src="https://picsum.photos/1600/900?2" />
+            </div>
+            <div s-slider-slide>
+                <img src="https://picsum.photos/1600/900?3" />
+            </div>
+        </s-slider>
+    `,
+};
 
 /**
  * Usage:
  *
- *  <s></s>
+ *  <s-slider></s-slider>
  *
  */
-export default class S extends HTMLElement {
+export default class SSlider extends HTMLElement {
     get _$container() {
-        return this._root.querySelector("[data-ref='S-$container']");
+        return this._root.querySelector("[data-ref='SSlider-$container']");
     }
 
     get _$root() {
-        return this._root.querySelector("[data-ref='S-$root']");
+        return this._root.querySelector("[data-ref='SSlider-$root']");
     }
 
     get _$slides() {
-        return this._root.querySelector("[data-ref='S-$slides']");
+        return this._root.querySelector("[data-ref='SSlider-$slides']");
     }
 
     get _root() {
@@ -309,8 +325,11 @@ export default class S extends HTMLElement {
                         [__css, ...(self.props.cssDeps ?? [])],
                         self._$container,
                     );
-                } catch (e) {}
+                } catch (e) {
+                    console.log(e);
+                }
 
+                console.log('DEFAU', DEFAULT_PROPS);
                 self.state._behaviors = {
                     default({ fromSlideId, toSlideId }) {
                         const $slidesWrapper = self._$slides;
@@ -384,6 +403,7 @@ export default class S extends HTMLElement {
                         const $from =
                                 self.state.getSlideElementById(fromSlideId),
                             $to = self.state.getSlideElementById(toSlideId);
+                        console.log('f', fromSlideId, $from, $to);
                         const fromRect = $from.getBoundingClientRect(),
                             toRect = $to.getBoundingClientRect(),
                             parentRect = $slidesWrapper.getBoundingClientRect();
@@ -527,7 +547,14 @@ export default class S extends HTMLElement {
                 self.state.goTo(self.state.getNextSlideId());
             },
             goTo(slideId) {
-                // call the behavior
+                console.log(
+                    'Go to',
+                    slideId,
+                    self.state._currentSlideId,
+                    self.state._slidesIds,
+                    self.state._slideElements,
+                ); // call the behavior
+
                 const behaviorFn =
                     self.props.behaviors?.[self.props.behavior] ??
                     self.state._behaviors[self.props.behavior];
@@ -576,13 +603,13 @@ export default class S extends HTMLElement {
         // batch updates
         this.pendingUpdate = false;
 
-        // Event handler for 'pointerup' event on div-s-7
-        this.onDivS7Pointerup = (event) => {
+        // Event handler for 'pointerup' event on div-s-slider-7
+        this.onDivSSlider7Pointerup = (event) => {
             this.state.previous();
         };
 
-        // Event handler for 'pointerup' event on div-s-8
-        this.onDivS8Pointerup = (event) => {
+        // Event handler for 'pointerup' event on div-s-slider-8
+        this.onDivSSlider8Pointerup = (event) => {
             this.state.next();
         };
 
@@ -689,26 +716,28 @@ export default class S extends HTMLElement {
 
         this._root.innerHTML = `
                         
-      <div data-el="div-s-1" data-ref="S-$container">
-        <div data-el="div-s-2" data-ref="S-$root">
-          <div data-el="div-s-3">
-            <div data-el="div-s-4" data-ref="S-$slides">
+      <div data-el="div-s-slider-1" data-ref="SSlider-$container">
+        <div data-el="div-s-slider-2" data-ref="SSlider-$root">
+          <div data-el="div-s-slider-3">
+            <div data-el="div-s-slider-4" data-ref="SSlider-$slides">
               <slot></slot>
             </div>
           </div>
       
-          <template data-el="show-s">
+          <template data-el="show-s-slider">
             <div class="s-slider__nav">
-              <template data-el="for-s"><div data-el="div-s-6"></div></template>
+              <template data-el="for-s-slider">
+                <div data-el="div-s-slider-6"></div>
+              </template>
             </div>
           </template>
       
           <div class="s-slider__controls">
-            <div data-el="div-s-7">
+            <div data-el="div-s-slider-7">
               <div class="s-slider__controls-previous-arrow"></div>
             </div>
       
-            <div data-el="div-s-8">
+            <div data-el="div-s-slider-8">
               <div class="s-slider__controls-next-arrow"></div>
             </div>
           </div>
@@ -759,6 +788,7 @@ export default class S extends HTMLElement {
     onUpdate() {
         const self = this;
 
+        console.log('UPDTE');
         self._$root.style.setProperty(
             '--s-slider-slide',
             self.state.getCurrentSlideIdx(),
@@ -786,72 +816,101 @@ export default class S extends HTMLElement {
     }
 
     updateBindings() {
-        this._root.querySelectorAll("[data-el='div-s-1']").forEach((el) => {
-            el.setAttribute('id', this.state._id);
+        this._root
+            .querySelectorAll("[data-el='div-s-slider-1']")
+            .forEach((el) => {
+                el.setAttribute('id', this.state._id);
 
-            el.className = this.state._component?.className('', null, 's-bare');
+                el.className = this.state._component?.className(
+                    '',
+                    null,
+                    's-bare',
+                );
 
-            el.setAttribute('status', this.state._status);
+                el.setAttribute('status', this.state._status);
 
-            el.setAttribute('direction', this.props.direction);
+                el.setAttribute('direction', this.props.direction);
 
-            el.setAttribute('behavior', this.props.behavior ?? 'default');
+                el.setAttribute('behavior', this.props.behavior ?? 'default');
 
-            el.setAttribute('lnf', this.props.lnf ?? 'default');
-        });
+                el.setAttribute('lnf', this.props.lnf ?? 'default');
+            });
 
-        this._root.querySelectorAll("[data-el='div-s-2']").forEach((el) => {
-            el.className = this.state._component?.className('__root');
-        });
+        this._root
+            .querySelectorAll("[data-el='div-s-slider-2']")
+            .forEach((el) => {
+                el.className = this.state._component?.className('__root');
+            });
 
-        this._root.querySelectorAll("[data-el='div-s-3']").forEach((el) => {
-            el.className = this.state._component?.className('__slides-wrapper');
-        });
+        this._root
+            .querySelectorAll("[data-el='div-s-slider-3']")
+            .forEach((el) => {
+                el.className =
+                    this.state._component?.className('__slides-wrapper');
+            });
 
-        this._root.querySelectorAll("[data-el='div-s-4']").forEach((el) => {
-            el.className = this.state._component?.className('__slides');
-        });
+        this._root
+            .querySelectorAll("[data-el='div-s-slider-4']")
+            .forEach((el) => {
+                el.className = this.state._component?.className('__slides');
+            });
 
-        this._root.querySelectorAll("[data-el='show-s']").forEach((el) => {
-            const whenCondition = this.state._slideElements.length;
-            if (whenCondition) {
-                this.showContent(el);
-            }
-        });
+        this._root
+            .querySelectorAll("[data-el='show-s-slider']")
+            .forEach((el) => {
+                const whenCondition = this.state._slideElements.length;
+                if (whenCondition) {
+                    this.showContent(el);
+                }
+            });
 
-        this._root.querySelectorAll("[data-el='for-s']").forEach((el) => {
-            let array = this.state._slideElements;
-            this.renderLoop(el, array, 'child');
-        });
+        this._root
+            .querySelectorAll("[data-el='for-s-slider']")
+            .forEach((el) => {
+                let array = this.state._slideElements;
+                this.renderLoop(el, array, 'child');
+            });
 
-        this._root.querySelectorAll("[data-el='div-s-6']").forEach((el) => {
-            const child = this.getScope(el, 'child');
+        this._root
+            .querySelectorAll("[data-el='div-s-slider-6']")
+            .forEach((el) => {
+                const child = this.getScope(el, 'child');
 
-            el.className = `s-slider__nav-item ${
-                this.state.getSlideIdxByElement(child) ==
-                this.state.getCurrentSlideIdx()
-                    ? 'active'
-                    : ''
-            }`;
-        });
+                el.className = `s-slider__nav-item ${
+                    this.state.getSlideIdxByElement(child) ==
+                    this.state.getCurrentSlideIdx()
+                        ? 'active'
+                        : ''
+                }`;
+            });
 
-        this._root.querySelectorAll("[data-el='div-s-7']").forEach((el) => {
-            el.className = `s-slider__controls-previous ${
-                this.props.loop || !this.state.isFirst() ? 'active' : ''
-            }`;
+        this._root
+            .querySelectorAll("[data-el='div-s-slider-7']")
+            .forEach((el) => {
+                el.className = `s-slider__controls-previous ${
+                    this.props.loop || !this.state.isFirst() ? 'active' : ''
+                }`;
 
-            el.removeEventListener('pointerup', this.onDivS7Pointerup);
-            el.addEventListener('pointerup', this.onDivS7Pointerup);
-        });
+                el.removeEventListener(
+                    'pointerup',
+                    this.onDivSSlider7Pointerup,
+                );
+                el.addEventListener('pointerup', this.onDivSSlider7Pointerup);
+            });
 
-        this._root.querySelectorAll("[data-el='div-s-8']").forEach((el) => {
-            el.className = `s-slider__controls-next ${
-                this.props.loop || !this.state.isLast() ? 'active' : ''
-            }`;
+        this._root
+            .querySelectorAll("[data-el='div-s-slider-8']")
+            .forEach((el) => {
+                el.className = `s-slider__controls-next ${
+                    this.props.loop || !this.state.isLast() ? 'active' : ''
+                }`;
 
-            el.removeEventListener('pointerup', this.onDivS8Pointerup);
-            el.addEventListener('pointerup', this.onDivS8Pointerup);
-        });
+                el.removeEventListener(
+                    'pointerup',
+                    this.onDivSSlider8Pointerup,
+                );
+                el.addEventListener('pointerup', this.onDivSSlider8Pointerup);
+            });
     }
 
     // Helper to render content
@@ -921,7 +980,7 @@ export default class S extends HTMLElement {
     }
 }
 
-export function define(props = {}, tagName = 's') {
+export function define(props = {}, tagName = 's-slider') {
     __SComponent.setDefaultProps(tagName, props);
-    customElements.define(tagName, class SComponent extends S {});
+    customElements.define(tagName, class SSliderComponent extends SSlider {});
 }

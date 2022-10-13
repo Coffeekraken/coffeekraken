@@ -1,4 +1,5 @@
 import __SClass from '@coffeekraken/s-class';
+import __SInterface from '@coffeekraken/s-interface';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __isPlainObject } from '@coffeekraken/sugar/is';
 import { __deepMap, __deepMerge, __get } from '@coffeekraken/sugar/object';
@@ -41,6 +42,106 @@ export interface ISSpecsSettings {
 }
 
 export default class SSpecs extends __SClass {
+    /**
+     * @name            fromInterface
+     * @type            Function
+     * @status          beta
+     * @static
+     *
+     * This method allows you to convert an SInterface class into a spec object
+     *
+     * @param       {SInterface}        int             The SInterface class you want to use for your spec object
+     * @return      {Any}                               The requested spec object
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static fromInterface(
+        int: __SInterface,
+        settings: Partial<ISSpecsSettings> = {},
+    ): any {
+        let specJson = {
+            title: int.title,
+            description: int.description,
+            props: {},
+        };
+
+        for (let [prop, value] of Object.entries(int.definition)) {
+            const repeatableStr = value.type.match(/\[\]$/)
+                ? '[]'
+                : value.type.match(/\{\}$/)
+                ? '{}'
+                : '';
+
+            let type;
+            if (value.values && value.values.length) {
+                type = 'Select';
+            }
+
+            switch (value.type.toLowerCase()) {
+                case 'boolean':
+                    specJson.props[prop] = {
+                        type: type ?? 'Checkbox',
+                    };
+                    break;
+                case 'number':
+                    specJson.props[prop] = {
+                        type: type ?? 'Number',
+                    };
+                    break;
+                case 'integer':
+                    specJson.props[prop] = {
+                        type: type ?? 'Integer',
+                    };
+                    break;
+                case 'string':
+                    specJson.props[prop] = {
+                        type: type ?? 'Text',
+                    };
+                    break;
+                default:
+                    specJson.props[prop] = {
+                        type: type ?? value.type ?? 'Text',
+                    };
+                    break;
+            }
+            specJson.props[prop] = {
+                ...(specJson.props[prop] ?? {}),
+                ...(value.specs ?? {}),
+                type: `${specJson.props[prop].type}${repeatableStr}`,
+                title: value.title,
+                description: value.description,
+                default: value.default,
+                required: value.required,
+            };
+
+            if (type === 'Select') {
+                specJson.props[prop].options = value.values.map((v) => {
+                    return {
+                        name: v,
+                        value: v,
+                    };
+                });
+            }
+        }
+
+        // resolve the @...
+        const specs = new SSpecs(settings);
+        specJson = specs.resolve(specJson);
+
+        // return the new spec json
+        return specJson;
+    }
+
+    /**
+     * @name        constructor
+     * @type        Function
+     *
+     * Constructor
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
     constructor(settings: Partial<ISSpecsSettings>) {
         super(__deepMerge(__SSugarConfig.get('specs') ?? {}, settings ?? {}));
         if (!this.settings.namespaces) {
@@ -144,9 +245,7 @@ export default class SSpecs extends __SClass {
         );
 
         // traverse each values to resolve them if needed
-        specJson = __deepMap(specJson, ({ object, prop, value, path }) => {
-            return this.resolve(value, specJson);
-        });
+        specJson = this.resolve(specJson);
 
         // check if the spec extends another
         if (specJson.extends) {
@@ -174,10 +273,31 @@ export default class SSpecs extends __SClass {
     }
 
     /**
+     * @name            resolve
+     * @type            Function
+     * @status          beta
+     *
+     * This method allows you to pass a specJson object and resolve all the "@..." values in it
+     *
+     * @param       {Any}           specJson            The specJson to resolve
+     * @return      {Any}                               The resolved specJson object
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    resolve(specJson: any): any {
+        // traverse each values to resolve them if needed
+        specJson = __deepMap(specJson, ({ object, prop, value, path }) => {
+            return this._resolve(value, specJson);
+        });
+        return specJson;
+    }
+
+    /**
      * This method take a value (string, boolean, etc...) and try to resolve it
      * if it is something like "@this.props...", or "@sugar.views...", etc...
      */
-    resolve(value, specJson) {
+    _resolve(value, specJson) {
         let newValue = value;
 
         if (typeof value === 'string') {
@@ -186,9 +306,13 @@ export default class SSpecs extends __SClass {
                 newValue = __get(specJson, internalDotPath);
                 if (Array.isArray(newValue) || __isPlainObject(newValue)) {
                     newValue = __deepMap(newValue, ({ value: v }) => {
-                        return this.resolve(v, newValue);
+                        return this._resolve(v, newValue);
                     });
                 }
+            } else if (value.startsWith('@config.')) {
+                const dotPath = value.replace('@config.', ''),
+                    config = __SSugarConfig.get(dotPath);
+                newValue = config;
             } else if (value.startsWith('@')) {
                 const dotPath = value.replace('@', ''),
                     spec = this.read(dotPath);

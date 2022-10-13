@@ -47,16 +47,18 @@ export default class SSliderComponentInterface extends __SInterface {
             nextIconClass: {
                 description: 'Specify the class of the next icon',
                 type: 'String',
+                default: 's-icon:arrow-right',
             },
             previousIconClass: {
                 description: 'Specify the class of the previous icon',
                 type: 'String',
+                default: 's-icon:arrow-left',
             },
             controls: {
                 description:
                     'Specify if you want to display the controls or not. Controls are the previous and next icons',
                 type: 'Boolean',
-                default: false,
+                default: true,
             },
             nav: {
                 description:

@@ -33,20 +33,53 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const s_activate_feature_1 = require("@coffeekraken/s-activate-feature");
+const webcomponent_1 = require("@coffeekraken/s-specs-editor-component/webcomponent");
 const dom_1 = require("@coffeekraken/sugar/dom");
 (() => __awaiter(void 0, void 0, void 0, function* () {
     // features
     (0, s_activate_feature_1.define)();
+    // components
+    (0, webcomponent_1.define)();
     (0, dom_1.__querySelectorLive)('[component]', ($app) => __awaiter(void 0, void 0, void 0, function* () {
+        var _a;
         const component = JSON.parse($app.getAttribute('component'));
-        console.log(component);
         const componentImport = yield Promise.resolve().then(() => __importStar(require(component.path)));
+        const $componentContainer = document.querySelector(`#component-${component.target}`);
         switch (component.target) {
             case 'webcomponent':
                 componentImport.define();
-                $app.innerHTML = componentImport.preview;
+                $app.innerHTML = (_a = componentImport.metas) === null || _a === void 0 ? void 0 : _a.preview;
+                let $component = $app.children[0], componentTagName = $component.tagName;
+                $componentContainer === null || $componentContainer === void 0 ? void 0 : $componentContainer.addEventListener('s-specs-editor.change', (e) => {
+                    const updatedProp = e.detail;
+                    // const prop = e.detail;
+                    // if (typeof prop.value === 'boolean') {
+                    //     if (prop.value) {
+                    //         $component.setAttribute(prop.id, 'true');
+                    //     } else {
+                    //         $component.removeAttribute(prop.id);
+                    //     }
+                    // } else {
+                    //     if (!prop.value) {
+                    //         $component.removeAttribute(prop.id);
+                    //     } else {
+                    //         $component.setAttribute(prop.id, prop.value);
+                    //     }
+                    // }
+                    $component.remove();
+                    const domParser = new DOMParser();
+                    const $dom = domParser.parseFromString(componentImport.metas.preview, 'text/html');
+                    $component = $dom.body.children[0];
+                    for (let [prop, value] of Object.entries(component.specs.props)) {
+                        if (prop === updatedProp.id) {
+                            console.log(prop, value);
+                        }
+                    }
+                    $app.appendChild();
+                    console.log('Updated', e.detail);
+                });
                 break;
         }
     }));
 }))();
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSx5RUFBZ0Y7QUFDaEYsaURBQThEO0FBRTlELENBQUMsR0FBUyxFQUFFO0lBQ1IsV0FBVztJQUNYLElBQUEsMkJBQWtCLEdBQUUsQ0FBQztJQUVyQixJQUFBLHlCQUFtQixFQUFDLGFBQWEsRUFBRSxDQUFPLElBQUksRUFBRSxFQUFFO1FBQzlDLE1BQU0sU0FBUyxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLFlBQVksQ0FBQyxXQUFXLENBQUMsQ0FBQyxDQUFDO1FBQzdELE9BQU8sQ0FBQyxHQUFHLENBQUMsU0FBUyxDQUFDLENBQUM7UUFFdkIsTUFBTSxlQUFlLEdBQUcsd0RBQWEsU0FBUyxDQUFDLElBQUksR0FBQyxDQUFDO1FBRXJELFFBQVEsU0FBUyxDQUFDLE1BQU0sRUFBRTtZQUN0QixLQUFLLGNBQWM7Z0JBQ2YsZUFBZSxDQUFDLE1BQU0sRUFBRSxDQUFDO2dCQUN6QixJQUFJLENBQUMsU0FBUyxHQUFHLGVBQWUsQ0FBQyxPQUFPLENBQUM7Z0JBQ3pDLE1BQU07U0FDYjtJQUNMLENBQUMsQ0FBQSxDQUFDLENBQUM7QUFDUCxDQUFDLENBQUEsQ0FBQyxFQUFFLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSx5RUFBZ0Y7QUFDaEYsc0ZBQTZHO0FBQzdHLGlEQUE4RDtBQUU5RCxDQUFDLEdBQVMsRUFBRTtJQUNSLFdBQVc7SUFDWCxJQUFBLDJCQUFrQixHQUFFLENBQUM7SUFFckIsYUFBYTtJQUNiLElBQUEscUJBQTRCLEdBQUUsQ0FBQztJQUUvQixJQUFBLHlCQUFtQixFQUFDLGFBQWEsRUFBRSxDQUFPLElBQUksRUFBRSxFQUFFOztRQUM5QyxNQUFNLFNBQVMsR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxZQUFZLENBQUMsV0FBVyxDQUFDLENBQUMsQ0FBQztRQUM3RCxNQUFNLGVBQWUsR0FBRyx3REFBYSxTQUFTLENBQUMsSUFBSSxHQUFDLENBQUM7UUFFckQsTUFBTSxtQkFBbUIsR0FBRyxRQUFRLENBQUMsYUFBYSxDQUM5QyxjQUFjLFNBQVMsQ0FBQyxNQUFNLEVBQUUsQ0FDbkMsQ0FBQztRQUVGLFFBQVEsU0FBUyxDQUFDLE1BQU0sRUFBRTtZQUN0QixLQUFLLGNBQWM7Z0JBQ2YsZUFBZSxDQUFDLE1BQU0sRUFBRSxDQUFDO2dCQUN6QixJQUFJLENBQUMsU0FBUyxHQUFHLE1BQUEsZUFBZSxDQUFDLEtBQUssMENBQUUsT0FBTyxDQUFDO2dCQUVoRCxJQUFJLFVBQVUsR0FBRyxJQUFJLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQyxFQUM3QixnQkFBZ0IsR0FBRyxVQUFVLENBQUMsT0FBTyxDQUFDO2dCQUUxQyxtQkFBbUIsYUFBbkIsbUJBQW1CLHVCQUFuQixtQkFBbUIsQ0FBRSxnQkFBZ0IsQ0FDakMsdUJBQXVCLEVBQ3ZCLENBQUMsQ0FBQyxFQUFFLEVBQUU7b0JBQ0YsTUFBTSxXQUFXLEdBQUcsQ0FBQyxDQUFDLE1BQU0sQ0FBQztvQkFFN0IseUJBQXlCO29CQUN6Qix5Q0FBeUM7b0JBQ3pDLHdCQUF3QjtvQkFDeEIsb0RBQW9EO29CQUNwRCxlQUFlO29CQUNmLCtDQUErQztvQkFDL0MsUUFBUTtvQkFDUixXQUFXO29CQUNYLHlCQUF5QjtvQkFDekIsK0NBQStDO29CQUMvQyxlQUFlO29CQUNmLHdEQUF3RDtvQkFDeEQsUUFBUTtvQkFDUixJQUFJO29CQUVKLFVBQVUsQ0FBQyxNQUFNLEVBQUUsQ0FBQztvQkFFcEIsTUFBTSxTQUFTLEdBQUcsSUFBSSxTQUFTLEVBQUUsQ0FBQztvQkFDbEMsTUFBTSxJQUFJLEdBQUcsU0FBUyxDQUFDLGVBQWUsQ0FDbEMsZUFBZSxDQUFDLEtBQUssQ0FBQyxPQUFPLEVBQzdCLFdBQVcsQ0FDZCxDQUFDO29CQUNGLFVBQVUsR0FBRyxJQUFJLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxDQUFDLENBQUMsQ0FBQztvQkFFbkMsS0FBSyxJQUFJLENBQUMsSUFBSSxFQUFFLEtBQUssQ0FBQyxJQUFJLE1BQU0sQ0FBQyxPQUFPLENBQ3BDLFNBQVMsQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUN4QixFQUFFO3dCQUNDLElBQUksSUFBSSxLQUFLLFdBQVcsQ0FBQyxFQUFFLEVBQUU7NEJBQ3pCLE9BQU8sQ0FBQyxHQUFHLENBQUMsSUFBSSxFQUFFLEtBQUssQ0FBQyxDQUFDO3lCQUM1QjtxQkFDSjtvQkFFRCxJQUFJLENBQUMsV0FBVyxFQUFFLENBQUM7b0JBRW5CLE9BQU8sQ0FBQyxHQUFHLENBQUMsU0FBUyxFQUFFLENBQUMsQ0FBQyxNQUFNLENBQUMsQ0FBQztnQkFDckMsQ0FBQyxDQUNKLENBQUM7Z0JBRUYsTUFBTTtTQUNiO0lBQ0wsQ0FBQyxDQUFBLENBQUMsQ0FBQztBQUNQLENBQUMsQ0FBQSxDQUFDLEVBQUUsQ0FBQyJ9

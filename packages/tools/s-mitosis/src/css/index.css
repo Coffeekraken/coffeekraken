@@ -1,19 +1,84 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css');
+
+@sugar.init();
 @sugar.theme();
+@sugar.ui.specsEditor.classes();
+@sugar.ui.input.classes();
+@sugar.ui.label.classes();
+@sugar.ui.select.classes();
+@sugar.ui.switch.classes();
+@sugar.ui.tooltip.classes();
+
+@sugar.ui.slider.classes();
+
+@sugar.icon.classes (
+    fab:github
+    fa:circle-question:question
+):;
 
 body {
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+s-slider {
+    display: block;
+    width: 75%;
+    min-width: 400px;
+    max-width: 1600px;
+    aspect-ratio: 16/9;
+}
+
+.body {
+    display: flex;
+    flex-grow: 1;
+}
+
+.fa-solid {
+    color: sugar.color(base, text, --alpha 0.5);
+    margin-inline-end: sugar.margin(10);
+}
+.s-tooltip {
+    width: 300px;
+}
+
+.component {
+    display: none;
+    height: calc(100vh - 42px);
+
+    &.active {
+        display: flex;
+        width: 100%;
+    }
+}
+
+.sidebar {
+    width: 450px;
+    background: sugar.color(base, surface);
+    padding: sugar.padding(50);
+    height: calc(100vh - 42px);
+    overflow-y: auto;
+    @sugar.scrollbar();
 }
 
 .content {
-    display: none;
+    flex-grow: 1;
+}
 
-    &.active {
-        display: block;
-    }
+div[component] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 42px);
+    overflow-y: auto;
+    @sugar.scrollbar();
 }
 
 .s-tabs {
     @sugar.ui.tabs ($scope: 'bare');
+    width: 100%;
     background: sugar.color(base, backgroud, --darken 45%);
 
     .s-tabs__item {
@@ -28,5 +93,13 @@ body {
         &.active {
             background: sugar.color(accent, --alpha 1);
         }
+    }
+}
+
+.s-specs-editor__prop:has(> div) {
+    padding-block: sugar.padding(20);
+
+    &.s-specs-editor__prop-checkbox {
+        border-bottom: 1px solid sugar.color(base, surface, --darken 5%);
     }
 }

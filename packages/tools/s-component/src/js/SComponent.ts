@@ -133,6 +133,48 @@ export default class SComponent extends __SComponent {
     }
 
     /**
+     * @name           saveState
+     * @type            Function
+     * @async
+     *
+     * This method allows you to save the passed component state into the localStorage
+     *
+     * @param           {Object}            state       The state object to save
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    saveState(state: any): void {
+        if (this.settings.id) {
+            window.localStorage.setItem(
+                `${this.settings.id}-state`,
+                JSON.stringify(state),
+            );
+        }
+    }
+
+    /**
+     * @name           restoreState
+     * @type            Function
+     * @async
+     *
+     * This method allows you to save the passed component state into the localStorage
+     *
+     * @param           {Object}            state       The state object to save
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    restoreState(): void {
+        if (!this.settings.id) {
+            return {};
+        }
+        return JSON.parse(
+            window.localStorage.getItem(`${this.settings.id}-state`) ?? '{}',
+        );
+    }
+
+    /**
      * @name           dispatchEvent
      * @type            Function
      * @async

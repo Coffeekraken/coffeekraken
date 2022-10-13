@@ -31,7 +31,7 @@ class SMitosisStartParamsInterface extends __SInterface {
                 type: 'String',
                 description:
                     'Specify the server port you want for your mitosis environment',
-                default: __SSugarConfig.get('mitosis.server.port'),
+                default: __SSugarConfig.get('mitosis.vite.server.port'),
             },
         };
     }

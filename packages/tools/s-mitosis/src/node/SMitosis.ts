@@ -1,15 +1,21 @@
 import __SClass from '@coffeekraken/s-class';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
+import __SSpecs from '@coffeekraken/s-specs';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SViewRenderer from '@coffeekraken/s-view-renderer';
-import { __dirname } from '@coffeekraken/sugar/fs';
+import {
+    __dirname,
+    __ensureDirSync,
+    __removeSync,
+} from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import { __onProcessExit, __spawn } from '@coffeekraken/sugar/process';
 import { __dashCase } from '@coffeekraken/sugar/string';
 import __chokidar from 'chokidar';
 import __express from 'express';
+import __fs from 'fs';
 import __glob from 'glob';
 import __path from 'path';
 import { createServer } from 'vite';
@@ -133,13 +139,39 @@ class SMitosis extends __SClass {
                     rootDirs: [`${__packageRootDir(__dirname())}/src/views`],
                 });
 
-                const componentFiles = __glob.sync('output/**/*.*', {
+                const componentFiles = __glob.sync('src/js/build/**/*.*', {
                         cwd: __packageRootDir(),
                     }),
                     components: any[] = [];
 
-                componentFiles.forEach((componentFilePath) => {
-                    const target = componentFilePath.split('/')[1],
+                const componentInterfacePath = __glob.sync(
+                    'dist/pkg/esm/js/interface/*.*',
+                    {
+                        cwd: __packageRootDir(),
+                    },
+                );
+
+                let ComponentInterface,
+                    componentSpecs = {};
+
+                if (componentInterfacePath.length) {
+                    const finalComponentInterfacePath = `../../../../${__path.relative(
+                        __packageRootDir(__dirname()),
+                        `${__packageRootDir()}/${componentInterfacePath[0]}`,
+                    )}`;
+
+                    // import the interface
+                    ComponentInterface = (
+                        await import(finalComponentInterfacePath)
+                    ).default;
+
+                    // convert interface to specs
+                    componentSpecs = __SSpecs.fromInterface(ComponentInterface);
+                }
+
+                for (let i = 0; i < componentFiles.length; i++) {
+                    const componentFilePath = componentFiles[i];
+                    const target = componentFilePath.split('/')[3],
                         absoluteComponentFilePath = `${__packageRootDir()}/${componentFilePath}`,
                         name = __path
                             .basename(componentFilePath)
@@ -149,10 +181,11 @@ class SMitosis extends __SClass {
                     components.push({
                         target,
                         name,
+                        specs: componentSpecs,
                         tagName: __dashCase(name),
                         path: `/${componentFilePath}`,
                     });
-                });
+                }
 
                 const result = await viewRenderer.render('index', {
                     ...params,
@@ -186,22 +219,22 @@ class SMitosis extends __SClass {
                 });
             });
 
-            const viteServer = await createServer({
-                // any valid user config options, plus `mode` and `configFile`
-                configFile: false,
-                root: __packageRootDir(),
-                optimizeDeps: {
-                    esbuildOptions: {
-                        // mainFields: ['module', 'main'],
-                        resolveExtensions: ['.js', '.ts'],
+            const viteServer = await createServer(
+                __deepMerge(__SSugarConfig.get('mitosis.vite'), {
+                    // any valid user config options, plus `mode` and `configFile`
+                    configFile: false,
+                    root: __packageRootDir(),
+                    optimizeDeps: {
+                        esbuildOptions: {
+                            // mainFields: ['module', 'main'],
+                            resolveExtensions: ['.js', '.ts'],
+                        },
                     },
-                },
-                // plugins: [__dynamicImportPlugin()],
-                server: {
-                    port: finalParams.port,
-                    proxy: __SSugarConfig.get('mitosis.server.proxy'),
-                },
-            });
+                    server: {
+                        port: finalParams.port,
+                    },
+                }),
+            );
             await viteServer.listen();
 
             emit('log', {
@@ -316,25 +349,27 @@ class SMitosis extends __SClass {
                     });
                 }
 
-                // const files = __glob.sync(`output/**/*.*`, {
-                //     cwd: __packageRootDir(),
-                // });
+                const files = __glob.sync(`output/**/*.*`, {
+                    cwd: __packageRootDir(),
+                });
 
-                // files.forEach((filePath) => {
-                //     const absoluteFilePath = `${__packageRootDir()}/${filePath}`,
-                //         target = filePath.split('/')[1];
+                files.forEach((filePath) => {
+                    const absoluteFilePath = `${__packageRootDir()}/${filePath}`,
+                        target = filePath.split('/')[1],
+                        destFilePath = `${__packageRootDir()}/src/js/build/${target}/${__path.basename(
+                            filePath,
+                        )}`;
 
-                //     __ensureDirSync(
-                //         `${__packageRootDir()}/src/js/build/${target}`,
-                //     );
-                //     __fs.renameSync(
-                //         absoluteFilePath,
-                //         `${__packageRootDir()}/src/js/build/${target}/${__path.basename(
-                //             filePath,
-                //         )}`,
-                //     );
-                // });
-                // __removeSync(`${__packageRootDir()}/output`);
+                    __ensureDirSync(
+                        `${__packageRootDir()}/src/js/build/${target}`,
+                    );
+                    __fs.renameSync(absoluteFilePath, destFilePath);
+
+                    let code = __fs.readFileSync(destFilePath).toString();
+                    code = code.replace(/%packageRootDir\//gm, '../../../../');
+                    __fs.writeFileSync(destFilePath, code);
+                });
+                __removeSync(`${__packageRootDir()}/output`);
 
                 resolve();
             },

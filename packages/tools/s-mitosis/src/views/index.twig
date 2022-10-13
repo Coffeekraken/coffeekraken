@@ -17,25 +17,36 @@
 <body>
     <div class="s-tabs">
         {% for component in components %}
-            <div class="s-tabs__item" s-activate href="#{{ component.target }}" group="tabs">
+            <div class="s-tabs__item" id="tab-{{ component.target }}" s-activate href="#component-{{ component.target }}" group="tabs" save-state>
                 {{ component.target }}
             </div>
         {% endfor %}
     </div>
 
-    {% for component in components %}
-        <div class="content" id="{{ component.target }}">
-            <template>
-                <div id="app-{{ component.target }}" component="{{ component|json_encode }}">
-                    {{ component.target }}
+    <div class="body">
 
-                    <{{ component.tagName }}>
-                        
-                    </{{ component.tagName }}>
+        {% for component in components %}
+
+            <div class="component" id="component-{{ component.target }}">
+
+                <div class="sidebar">
+                    <s-specs-editor id="{{ component.name|lower }}-{{ component.target }}" specs="{{ component.specs|json_encode }}"></s-specs-editor>
+                </div>
+
+                <div class="content" id="content-{{ component.target }}">
+
+                        <div id="app-{{ component.target }}" component="{{ component|json_encode }}">
+                            {{ component.target }}
+
+                            {{ component.preview|raw }}
+
+                        </div>
 
                 </div>
-            </template>
-        </div>
-    {% endfor %}
+                
+            </div>
+        {% endfor %}
+
+    </div>
 </body>
 </html>

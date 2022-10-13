@@ -38,7 +38,7 @@ class SViteBuildParamsInterface extends __SInterface {
                     'Specify the type(s) of build you want. Can be "lib", "bundle" or "module"',
                 type: 'Array<String>',
                 values: ['lib', 'bundle', 'module'],
-                default: ['bundle', 'module'],
+                default: ['module'],
                 alias: 't',
             },
             format: {

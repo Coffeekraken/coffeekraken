@@ -32,9 +32,7 @@ import __SMitosisStartParamsInterface from './interface/SMitosisStartParamsInter
  * This class allows you to use the AMAZING @builder.io/mitosis compiler on your project with additional features like
  * the possibility to watch your components changes and rebuild it automatically.
  *
- * @param           {Object}        [settings={}]           An object of settings to configure your docmap instance:
- * - filename (docmap.json) {String}: Specify the filename you want
- * - outputDir (packageRootDir()) {String}: Specify the directory where you want to save your docmap.json file when using the ```save``` method
+ * @param           {Object}        [settings={}]           An object of settings to configure your SMitosis instance:
  *
  * @todo      interface
  * @todo      doc

@@ -2627,6 +2627,31 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@coffeekraken/s-carpenter@workspace:packages/app/s-carpenter":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/s-carpenter@workspace:packages/app/s-carpenter"
+  dependencies:
+    "@coffeekraken/cli": ^2.0.0-alpha.20
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-duration": ^2.0.0-alpha.20
+    "@coffeekraken/s-env": ^2.0.0-alpha.20
+    "@coffeekraken/s-favicon-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-frontspec": ^2.0.0-alpha.20
+    "@coffeekraken/s-images-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-log": ^2.0.0-alpha.20
+    "@coffeekraken/s-markdown-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-postcss-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-process": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-json": ^2.0.0-alpha.20
+    "@coffeekraken/s-vite": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
+    recursive-copy: ^2.0.14
+  languageName: unknown
+  linkType: soft
+
 "@coffeekraken/s-class@^2.0.0-alpha.20, @coffeekraken/s-class@workspace:packages/core/s-class":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-class@workspace:packages/core/s-class"
@@ -2721,6 +2746,19 @@ __metadata:
     "@coffeekraken/s-class": ^2.0.0-alpha.20
     "@coffeekraken/s-interface": ^2.0.0-alpha.20
     "@coffeekraken/sugar": ^2.0.0-alpha.20
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/s-component-proxy@^2.0.0-alpha.20, @coffeekraken/s-component-proxy@workspace:packages/tools/s-component-proxy":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/s-component-proxy@workspace:packages/tools/s-component-proxy"
+  dependencies:
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
+    fastdom: ^1.0.11
   languageName: unknown
   linkType: soft
 
@@ -3281,6 +3319,7 @@ __metadata:
   dependencies:
     "@coffeekraken/s-activate-feature": ^2.0.0-alpha.20
     "@coffeekraken/s-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-component-proxy": ^2.0.0-alpha.20
     "@coffeekraken/s-interface": ^2.0.0-alpha.20
     "@coffeekraken/s-log": ^2.0.0-alpha.20
     "@coffeekraken/s-postcss-builder": ^2.0.0-alpha.20

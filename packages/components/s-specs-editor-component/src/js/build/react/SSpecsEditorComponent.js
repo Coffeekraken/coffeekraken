@@ -52,16 +52,40 @@ function SSpecsEditor(props) {
             );
         } catch (e) {}
         set_propsValues((_b = _component.restoreState()) != null ? _b : {});
-        console.log('ss', _propsValues);
         set_specs(JSON.parse(props.specs));
         Object.keys(_specs.props).forEach((key) => {
+            var _a3, _b2;
             _specArray.push(
-                __spreadValues(
+                __spreadProps(
+                    __spreadValues(
+                        {
+                            id: key,
+                        },
+                        _specs.props[key],
+                    ),
                     {
-                        id: key,
+                        value:
+                            (_b2 =
+                                (_a3 = _propsValues[key]) != null
+                                    ? _a3
+                                    : _specs.props[key].value) != null
+                                ? _b2
+                                : _specs.props[key].default,
                     },
-                    _specs.props[key],
                 ),
+            );
+        });
+        setTimeout(() => {
+            const initialSpecsJson = {};
+            _specArray.forEach((prop) => {
+                initialSpecsJson[prop.id] = prop.value;
+            });
+            $container.current.dispatchEvent(
+                new CustomEvent('s-specs-editor.change', {
+                    bubbles: true,
+                    composed: true,
+                    detail: initialSpecsJson,
+                }),
             );
         });
     }
@@ -80,7 +104,9 @@ function SSpecsEditor(props) {
             new CustomEvent('s-specs-editor.change', {
                 bubbles: true,
                 composed: true,
-                detail: __spreadValues({}, prop),
+                detail: {
+                    [prop.id]: prop.value,
+                },
             }),
         );
         _component.saveState(_propsValues);
@@ -99,6 +125,20 @@ function SSpecsEditor(props) {
         set_status('mounted');
     }, []);
     useEffect(() => {
+        Array.from(
+            $container.current.querySelectorAll('input[type="checkbox"'),
+        ).forEach(($checkbox) => {
+            if ($checkbox._inited) {
+                return;
+            }
+            $checkbox._inited = true;
+            const _p = JSON.parse($checkbox.getAttribute('prop'));
+            if (_p.value) {
+                $checkbox.setAttribute('checked', 'true');
+            } else {
+                $checkbox.removeAttribute('checked');
+            }
+        });
         Array.from($container.current.querySelectorAll('select')).forEach(
             ($select) => {
                 if ($select._inited) {
@@ -107,20 +147,9 @@ function SSpecsEditor(props) {
                 $select._inited = true;
                 const _p = JSON.parse($select.getAttribute('prop'));
                 _p.options.forEach((opt) => {
-                    var _a2, _b;
                     const $option = document.createElement('option');
                     $option.setAttribute('value', opt.value);
-                    console.log(
-                        'SSSS',
-                        opt.id,
-                        (_a2 = _propsValues[_p.id]) != null ? _a2 : _p.default,
-                        opt.value,
-                    );
-                    if (
-                        ((_b = _propsValues[_p.id]) != null
-                            ? _b
-                            : _p.default) === opt.value
-                    ) {
+                    if (_p.value === opt.value) {
                         $option.setAttribute('selected', true);
                     }
                     $option.innerHTML = opt.name;
@@ -151,7 +180,7 @@ function SSpecsEditor(props) {
                       _specArray == null
                           ? void 0
                           : _specArray.map((v, index) => {
-                                var _a2, _b, _c, _d, _e, _f, _g, _h, _i;
+                                var _a2, _b, _c, _d, _e, _f, _g;
                                 return /* @__PURE__ */ React.createElement(
                                     'div',
                                     {
@@ -202,13 +231,7 @@ function SSpecsEditor(props) {
                                                                   null
                                                                       ? _b
                                                                       : v.id,
-                                                              value:
-                                                                  (_c =
-                                                                      _propsValues[
-                                                                          v.id
-                                                                      ]) != null
-                                                                      ? _c
-                                                                      : v.default,
+                                                              value: v.value,
                                                           },
                                                       ),
                                                       /* @__PURE__ */ React.createElement(
@@ -242,8 +265,8 @@ function SSpecsEditor(props) {
                                                                     ),
                                                                 )
                                                               : null,
-                                                          (_d = v.title) != null
-                                                              ? _d
+                                                          (_c = v.title) != null
+                                                              ? _c
                                                               : v.id,
                                                       ),
                                                   ),
@@ -283,15 +306,91 @@ function SSpecsEditor(props) {
                                                                       's-select',
                                                                   ),
                                                               placeholder:
-                                                                  (_f =
-                                                                      (_e =
+                                                                  (_e =
+                                                                      (_d =
                                                                           v.default) !=
                                                                       null
-                                                                          ? _e
+                                                                          ? _d
                                                                           : v.title) !=
                                                                   null
-                                                                      ? _f
+                                                                      ? _e
                                                                       : v.id,
+                                                              prop: JSON.stringify(
+                                                                  v,
+                                                              ),
+                                                          },
+                                                      ),
+                                                      /* @__PURE__ */ React.createElement(
+                                                          'span',
+                                                          null,
+                                                          v.description
+                                                              ? /* @__PURE__ */ React.createElement(
+                                                                    React.Fragment,
+                                                                    null,
+                                                                    /* @__PURE__ */ React.createElement(
+                                                                        'span',
+                                                                        {
+                                                                            className:
+                                                                                's-tooltip-container',
+                                                                        },
+                                                                        /* @__PURE__ */ React.createElement(
+                                                                            'i',
+                                                                            {
+                                                                                className:
+                                                                                    'fa-solid fa-circle-question',
+                                                                            },
+                                                                        ),
+                                                                        /* @__PURE__ */ React.createElement(
+                                                                            'div',
+                                                                            {
+                                                                                className:
+                                                                                    's-tooltip s-tooltip--right',
+                                                                            },
+                                                                            v.description,
+                                                                        ),
+                                                                    ),
+                                                                )
+                                                              : null,
+                                                          (_f = v.title) != null
+                                                              ? _f
+                                                              : v.id,
+                                                      ),
+                                                  ),
+                                              ),
+                                          )
+                                        : null,
+                                    v.type.toLowerCase() === 'checkbox'
+                                        ? /* @__PURE__ */ React.createElement(
+                                              React.Fragment,
+                                              null,
+                                              /* @__PURE__ */ React.createElement(
+                                                  'div',
+                                                  {
+                                                      className: `${_component.className(
+                                                          '__prop--checkbox',
+                                                      )}`,
+                                                  },
+                                                  /* @__PURE__ */ React.createElement(
+                                                      'label',
+                                                      {
+                                                          className:
+                                                              _component.className(
+                                                                  '__label',
+                                                                  's-label',
+                                                              ),
+                                                      },
+                                                      /* @__PURE__ */ React.createElement(
+                                                          'input',
+                                                          {
+                                                              type: 'checkbox',
+                                                              onChange: (e) =>
+                                                                  update(e, v),
+                                                              name: v.id,
+                                                              className:
+                                                                  _component.className(
+                                                                      '__checkbox',
+                                                                      's-switch',
+                                                                  ),
                                                               prop: JSON.stringify(
                                                                   v,
                                                               ),
@@ -330,100 +429,6 @@ function SSpecsEditor(props) {
                                                               : null,
                                                           (_g = v.title) != null
                                                               ? _g
-                                                              : v.id,
-                                                      ),
-                                                  ),
-                                              ),
-                                          )
-                                        : null,
-                                    v.type.toLowerCase() === 'checkbox'
-                                        ? /* @__PURE__ */ React.createElement(
-                                              React.Fragment,
-                                              null,
-                                              /* @__PURE__ */ React.createElement(
-                                                  'div',
-                                                  {
-                                                      className: `${_component.className(
-                                                          '__prop--checkbox',
-                                                      )}`,
-                                                  },
-                                                  /* @__PURE__ */ React.createElement(
-                                                      'label',
-                                                      {
-                                                          className:
-                                                              _component.className(
-                                                                  '__label',
-                                                                  's-label',
-                                                              ),
-                                                      },
-                                                      /* @__PURE__ */ React.createElement(
-                                                          'input',
-                                                          __spreadProps(
-                                                              __spreadValues(
-                                                                  {},
-                                                                  {
-                                                                      checked:
-                                                                          (_h =
-                                                                              _propsValues[
-                                                                                  v
-                                                                                      .id
-                                                                              ]) !=
-                                                                          null
-                                                                              ? _h
-                                                                              : v.default,
-                                                                  },
-                                                              ),
-                                                              {
-                                                                  type: 'checkbox',
-                                                                  onChange: (
-                                                                      e,
-                                                                  ) =>
-                                                                      update(
-                                                                          e,
-                                                                          v,
-                                                                      ),
-                                                                  name: v.id,
-                                                                  className:
-                                                                      _component.className(
-                                                                          '__checkbox',
-                                                                          's-switch',
-                                                                      ),
-                                                              },
-                                                          ),
-                                                      ),
-                                                      /* @__PURE__ */ React.createElement(
-                                                          'span',
-                                                          null,
-                                                          v.description
-                                                              ? /* @__PURE__ */ React.createElement(
-                                                                    React.Fragment,
-                                                                    null,
-                                                                    /* @__PURE__ */ React.createElement(
-                                                                        'span',
-                                                                        {
-                                                                            className:
-                                                                                's-tooltip-container',
-                                                                        },
-                                                                        /* @__PURE__ */ React.createElement(
-                                                                            'i',
-                                                                            {
-                                                                                className:
-                                                                                    'fa-solid fa-circle-question',
-                                                                            },
-                                                                        ),
-                                                                        /* @__PURE__ */ React.createElement(
-                                                                            'div',
-                                                                            {
-                                                                                className:
-                                                                                    's-tooltip s-tooltip--right',
-                                                                            },
-                                                                            v.description,
-                                                                        ),
-                                                                    ),
-                                                                )
-                                                              : null,
-                                                          (_i = v.title) != null
-                                                              ? _i
                                                               : v.id,
                                                       ),
                                                   ),

@@ -86,8 +86,6 @@ export default function SSpecsEditor(props: Props) {
             // restore the props values
             state._propsValues = state._component.restoreState() ?? {};
 
-            console.log('ss', state._propsValues);
-
             // cast specs
             state._specs = JSON.parse(props.specs);
 
@@ -95,7 +93,26 @@ export default function SSpecsEditor(props: Props) {
                 state._specArray.push({
                     id: key,
                     ...state._specs.props[key],
+                    value:
+                        state._propsValues[key] ??
+                        state._specs.props[key].value ??
+                        state._specs.props[key].default,
                 });
+            });
+
+            setTimeout(() => {
+                const initialSpecsJson = {};
+                state._specArray.forEach((prop) => {
+                    initialSpecsJson[prop.id] = prop.value;
+                });
+
+                $container.dispatchEvent(
+                    new CustomEvent('s-specs-editor.change', {
+                        bubbles: true,
+                        composed: true,
+                        detail: initialSpecsJson,
+                    }),
+                );
             });
         },
         update(event, prop) {
@@ -119,7 +136,7 @@ export default function SSpecsEditor(props: Props) {
                     bubbles: true,
                     composed: true,
                     detail: {
-                        ...prop,
+                        [prop.id]: prop.value,
                     },
                 }),
             );
@@ -130,6 +147,23 @@ export default function SSpecsEditor(props: Props) {
     });
 
     onUpdate(() => {
+        // checkbox
+        Array.from(
+            $container.querySelectorAll('input[type="checkbox"'),
+        ).forEach(($checkbox) => {
+            if ($checkbox._inited) {
+                return;
+            }
+            $checkbox._inited = true;
+            const _p = JSON.parse($checkbox.getAttribute('prop'));
+            if (_p.value) {
+                $checkbox.setAttribute('checked', 'true');
+            } else {
+                $checkbox.removeAttribute('checked');
+            }
+        });
+
+        // select
         Array.from($container.querySelectorAll('select')).forEach(($select) => {
             if ($select._inited) {
                 return;
@@ -139,13 +173,7 @@ export default function SSpecsEditor(props: Props) {
             _p.options.forEach((opt) => {
                 const $option = document.createElement('option');
                 $option.setAttribute('value', opt.value);
-                console.log(
-                    'SSSS',
-                    opt.id,
-                    state._propsValues[_p.id] ?? _p.default,
-                    opt.value,
-                );
-                if ((state._propsValues[_p.id] ?? _p.default) === opt.value) {
+                if (_p.value === opt.value) {
                     $option.setAttribute('selected', true);
                 }
                 $option.innerHTML = opt.name;
@@ -206,10 +234,7 @@ export default function SSpecsEditor(props: Props) {
                                             placeholder={
                                                 v.default ?? v.title ?? v.id
                                             }
-                                            value={
-                                                state._propsValues[v.id] ??
-                                                v.default
-                                            }
+                                            value={v.value}
                                         />
                                         <span>
                                             <Show when={v.description}>
@@ -285,11 +310,7 @@ export default function SSpecsEditor(props: Props) {
                                                 '__checkbox',
                                                 's-switch',
                                             )}
-                                            {...{
-                                                checked:
-                                                    state._propsValues[v.id] ??
-                                                    v.default,
-                                            }}
+                                            prop={JSON.stringify(v)}
                                         />
                                         <span>
                                             <Show when={v.description}>

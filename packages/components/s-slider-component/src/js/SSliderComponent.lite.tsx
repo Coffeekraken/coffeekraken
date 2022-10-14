@@ -599,7 +599,7 @@ export default function SSlider(props: Props) {
                         {props.children}
                     </div>
                 </div>
-                <Show when={state._slideElements.length}>
+                <Show when={state._slideElements.length && props.nav}>
                     <div class="s-slider__nav">
                         <For each={state._slideElements}>
                             {(child) => (

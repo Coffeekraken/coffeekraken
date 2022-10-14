@@ -594,6 +594,7 @@ export default class SSlider extends HTMLElement {
             'mousewheel',
             'clickOnSlide',
             'children',
+            'id',
         ];
 
         this.updateDeps = [[]];
@@ -732,15 +733,17 @@ export default class SSlider extends HTMLElement {
             </div>
           </template>
       
-          <div class="s-slider__controls">
-            <div data-el="div-s-slider-7">
-              <div class="s-slider__controls-previous-arrow"></div>
-            </div>
+          <template data-el="show-s-slider-2">
+            <div class="s-slider__controls">
+              <div data-el="div-s-slider-7">
+                <div class="s-slider__controls-previous-arrow"></div>
+              </div>
       
-            <div data-el="div-s-slider-8">
-              <div class="s-slider__controls-next-arrow"></div>
+              <div data-el="div-s-slider-8">
+                <div class="s-slider__controls-next-arrow"></div>
+              </div>
             </div>
-          </div>
+          </template>
         </div>
       </div>`;
         this.pendingUpdate = true;
@@ -774,11 +777,12 @@ export default class SSlider extends HTMLElement {
     onMount() {
         // onMount
         __SSliderComponentInterface;
+        this.state._id = this.props.id ?? `s-slider-${__uniqid()}`;
+        this.update();
         this.state._component = new __SComponent('s-slider', {
+            id: this.props.id,
             bare: false,
         });
-        this.update();
-        this.state._id = `s-slider-${__uniqid()}`;
         this.update();
         this.state.mount();
         this.state._status = 'mounted';
@@ -858,7 +862,8 @@ export default class SSlider extends HTMLElement {
         this._root
             .querySelectorAll("[data-el='show-s-slider']")
             .forEach((el) => {
-                const whenCondition = this.state._slideElements.length;
+                const whenCondition =
+                    this.state._slideElements.length && this.props.nav;
                 if (whenCondition) {
                     this.showContent(el);
                 }
@@ -882,6 +887,15 @@ export default class SSlider extends HTMLElement {
                         ? 'active'
                         : ''
                 }`;
+            });
+
+        this._root
+            .querySelectorAll("[data-el='show-s-slider-2']")
+            .forEach((el) => {
+                const whenCondition = this.props.controls;
+                if (whenCondition) {
+                    this.showContent(el);
+                }
             });
 
         this._root

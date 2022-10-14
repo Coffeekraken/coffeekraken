@@ -11,6 +11,7 @@
     "dependencies": {
         "@coffeekraken/s-activate-feature": "^2.0.0-alpha.20",
         "@coffeekraken/s-component": "^2.0.0-alpha.20",
+        "@coffeekraken/s-component-proxy": "^2.0.0-alpha.20",
         "@coffeekraken/s-interface": "^2.0.0-alpha.20",
         "@coffeekraken/s-log": "^2.0.0-alpha.20",
         "@coffeekraken/s-postcss-builder": "^2.0.0-alpha.20",

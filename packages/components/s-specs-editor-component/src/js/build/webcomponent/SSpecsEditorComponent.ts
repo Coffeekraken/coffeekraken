@@ -85,17 +85,35 @@ export default class SSpecsEditor extends HTMLElement {
                 } catch (e) {} // restore the props values
 
                 self.state._propsValues =
-                    self.state._component.restoreState() ?? {};
-                self.update();
-                console.log('ss', self.state._propsValues); // cast specs
+                    self.state._component.restoreState() ?? {}; // cast specs
 
+                self.update();
                 self.state._specs = JSON.parse(self.props.specs);
                 self.update();
                 Object.keys(self.state._specs.props).forEach((key) => {
                     self.state._specArray.push({
                         id: key,
                         ...self.state._specs.props[key],
+                        value:
+                            self.state._propsValues[key] ??
+                            self.state._specs.props[key].value ??
+                            self.state._specs.props[key].default,
                     });
+                });
+                setTimeout(() => {
+                    const initialSpecsJson = {};
+
+                    self.state._specArray.forEach((prop) => {
+                        initialSpecsJson[prop.id] = prop.value;
+                    });
+
+                    self._$container.dispatchEvent(
+                        new CustomEvent('s-specs-editor.change', {
+                            bubbles: true,
+                            composed: true,
+                            detail: initialSpecsJson,
+                        }),
+                    );
                 });
             },
             update(event, prop) {
@@ -116,7 +134,9 @@ export default class SSpecsEditor extends HTMLElement {
                     new CustomEvent('s-specs-editor.change', {
                         bubbles: true,
                         composed: true,
-                        detail: { ...prop },
+                        detail: {
+                            [prop.id]: prop.value,
+                        },
                     }),
                 ); // save the props values
 
@@ -335,6 +355,25 @@ export default class SSpecsEditor extends HTMLElement {
     onUpdate() {
         const self = this;
 
+        // checkbox
+        Array.from(
+            self._$container.querySelectorAll('input[type="checkbox"'),
+        ).forEach(($checkbox) => {
+            if ($checkbox._inited) {
+                return;
+            }
+
+            $checkbox._inited = true;
+
+            const _p = JSON.parse($checkbox.getAttribute('prop'));
+
+            if (_p.value) {
+                $checkbox.setAttribute('checked', 'true');
+            } else {
+                $checkbox.removeAttribute('checked');
+            }
+        }); // select
+
         Array.from(self._$container.querySelectorAll('select')).forEach(
             ($select) => {
                 if ($select._inited) {
@@ -348,17 +387,8 @@ export default class SSpecsEditor extends HTMLElement {
                 _p.options.forEach((opt) => {
                     const $option = document.createElement('option');
                     $option.setAttribute('value', opt.value);
-                    console.log(
-                        'SSSS',
-                        opt.id,
-                        self.state._propsValues[_p.id] ?? _p.default,
-                        opt.value,
-                    );
 
-                    if (
-                        (self.state._propsValues[_p.id] ?? _p.default) ===
-                        opt.value
-                    ) {
+                    if (_p.value === opt.value) {
                         $option.setAttribute('selected', true);
                     }
 
@@ -509,7 +539,7 @@ export default class SSpecsEditor extends HTMLElement {
 
                 el.setAttribute('placeholder', v.default ?? v.title ?? v.id);
 
-                el.value = this.state._propsValues[v.id] ?? v.default;
+                el.value = v.value;
             });
 
         this._root
@@ -650,6 +680,8 @@ export default class SSpecsEditor extends HTMLElement {
                     '__checkbox',
                     's-switch',
                 );
+
+                el.setAttribute('prop', JSON.stringify(v));
             });
 
         this._root

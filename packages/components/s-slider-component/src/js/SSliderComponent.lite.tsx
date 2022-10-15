@@ -305,10 +305,9 @@ export default function SSlider(props: Props) {
     useDefaultProps<Props>(DEFAULT_PROPS);
 
     // const component = new __SComponent('s-code-example');
-    const $container = useRef<HTMLElement>(null),
-        $slides = useRef<HTMLElement>(null),
-        $root = useRef<HTMLElement>(null),
-        $code = useRef<HTMLElement>(null);
+    const container = useRef<HTMLElement>(null);
+    const slides = useRef<HTMLElement>(null);
+    const root = useRef<HTMLElement>(null);
 
     // state
     const state = useStore({
@@ -318,12 +317,12 @@ export default function SSlider(props: Props) {
         _component: null,
         _behaviors: {},
         _slideElements: [],
-        _slidesIds: [],
+        slidesIds: [],
         mount() {
             try {
                 state._component.injectStyleInShadowRoot(
                     [__css, ...(props.cssDeps ?? [])],
-                    $container,
+                    props.container,
                 );
             } catch (e) {
                 console.log(e);
@@ -333,7 +332,7 @@ export default function SSlider(props: Props) {
 
             state._behaviors = {
                 default({ fromSlideId, toSlideId }) {
-                    const $slidesWrapper = $slides;
+                    const $slidesWrapper = props.slides;
 
                     $slidesWrapper._isScrollingFromNextOrPrevious = false;
 
@@ -555,8 +554,14 @@ export default function SSlider(props: Props) {
 
     onUpdate(() => {
         console.log('UPDTE');
-        $root.style.setProperty('--s-slider-slide', state.getCurrentSlideIdx());
-        $root.style.setProperty('--s-slider-total', state._slidesIds.length);
+        props.root.style.setProperty(
+            '--s-slider-slide',
+            state.getCurrentSlideIdx(),
+        );
+        props.root.style.setProperty(
+            '--s-slider-total',
+            state._slidesIds.length,
+        );
     });
 
     // when component is mounting
@@ -575,7 +580,7 @@ export default function SSlider(props: Props) {
     return (
         <div
             id={state._id}
-            ref={$container}
+            ref={container}
             class={state._component?.className('', null, 's-bare')}
             status={state._status}
             direction={props.direction}
@@ -590,10 +595,10 @@ export default function SSlider(props: Props) {
                 loop: props.loop,
             }}
         >
-            <div class={state._component?.className('__root')} ref={$root}>
+            <div class={state._component?.className('_root')} ref={root}>
                 <div class={state._component?.className('__slides-wrapper')}>
                     <div
-                        ref={$slides}
+                        ref={slides}
                         class={state._component?.className('__slides')}
                     >
                         {props.children}

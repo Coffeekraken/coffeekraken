@@ -291,16 +291,16 @@ export const metas = {
  *
  */
 export default class SSlider extends HTMLElement {
-    get _$container() {
-        return this._root.querySelector("[data-ref='SSlider-$container']");
+    get _container() {
+        return this._root.querySelector("[data-ref='SSlider-container']");
     }
 
-    get _$root() {
-        return this._root.querySelector("[data-ref='SSlider-$root']");
+    get _root() {
+        return this._root.querySelector("[data-ref='SSlider-root']");
     }
 
-    get _$slides() {
-        return this._root.querySelector("[data-ref='SSlider-$slides']");
+    get _slides() {
+        return this._root.querySelector("[data-ref='SSlider-slides']");
     }
 
     get _root() {
@@ -318,12 +318,12 @@ export default class SSlider extends HTMLElement {
             _component: null,
             _behaviors: {},
             _slideElements: [],
-            _slidesIds: [],
+            slidesIds: [],
             mount() {
                 try {
                     self.state._component.injectStyleInShadowRoot(
                         [__css, ...(self.props.cssDeps ?? [])],
-                        self._$container,
+                        self.props.self._container,
                     );
                 } catch (e) {
                     console.log(e);
@@ -332,7 +332,7 @@ export default class SSlider extends HTMLElement {
                 console.log('DEFAU', DEFAULT_PROPS);
                 self.state._behaviors = {
                     default({ fromSlideId, toSlideId }) {
-                        const $slidesWrapper = self._$slides;
+                        const $slidesWrapper = self.props.self._slides;
                         $slidesWrapper._isScrollingFromNextOrPrevious = false;
 
                         if (!$slidesWrapper._isBehaviorInited) {
@@ -580,6 +580,8 @@ export default class SSlider extends HTMLElement {
 
         this.componentProps = [
             'cssDeps',
+            'container',
+            'slides',
             'direction',
             'transitionDuration',
             'transitionEasing',
@@ -594,6 +596,7 @@ export default class SSlider extends HTMLElement {
             'mousewheel',
             'clickOnSlide',
             'children',
+            'root',
             'id',
         ];
 
@@ -717,10 +720,10 @@ export default class SSlider extends HTMLElement {
 
         this._root.innerHTML = `
                         
-      <div data-el="div-s-slider-1" data-ref="SSlider-$container">
-        <div data-el="div-s-slider-2" data-ref="SSlider-$root">
+      <div data-el="div-s-slider-1" data-ref="SSlider-container">
+        <div data-el="div-s-slider-2" data-ref="SSlider-root">
           <div data-el="div-s-slider-3">
-            <div data-el="div-s-slider-4" data-ref="SSlider-$slides">
+            <div data-el="div-s-slider-4" data-ref="SSlider-slides">
               <slot></slot>
             </div>
           </div>
@@ -793,11 +796,11 @@ export default class SSlider extends HTMLElement {
         const self = this;
 
         console.log('UPDTE');
-        self._$root.style.setProperty(
+        self.props.self._root.style.setProperty(
             '--s-slider-slide',
             self.state.getCurrentSlideIdx(),
         );
-        self._$root.style.setProperty(
+        self.props.self._root.style.setProperty(
             '--s-slider-total',
             self.state._slidesIds.length,
         );
@@ -843,7 +846,7 @@ export default class SSlider extends HTMLElement {
         this._root
             .querySelectorAll("[data-el='div-s-slider-2']")
             .forEach((el) => {
-                el.className = this.state._component?.className('__root');
+                el.className = this.state._component?.className('_root');
             });
 
         this._root
@@ -997,4 +1000,8 @@ export default class SSlider extends HTMLElement {
 export function define(props = {}, tagName = 's-slider') {
     __SComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, class SSliderComponent extends SSlider {});
+}
+
+if (!metas.type) {
+    metas.type = 'webcomponent';
 }

@@ -16,7 +16,7 @@ export default (pluginOptions) => (options) => {
                         const matches = code.match(
                             /customElements.define\(\"([a-zA-Z0-9_-]+)\"\, ([a-zA-Z0-9]+)\);/,
                         );
-                        if (matches.length >= 3) {
+                        if (matches?.length >= 3) {
                             code = code.replace(
                                 matches[0],
                                 `

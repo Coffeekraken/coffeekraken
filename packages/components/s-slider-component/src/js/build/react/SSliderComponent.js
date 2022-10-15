@@ -50,20 +50,22 @@ const metas = {
 };
 function SSlider(props) {
     var _a, _b;
-    const $container = useRef(null);
+    const container = useRef(null);
+    const slides = useRef(null);
+    const root = useRef(null);
     const [_status, set_status] = useState(() => 'idle');
     const [_id, set_id] = useState(() => null);
     const [_currentSlideId, set_currentSlideId] = useState(() => null);
     const [_component, set_component] = useState(() => null);
     const [_behaviors, set_behaviors] = useState(() => ({}));
     const [_slideElements, set_slideElements] = useState(() => []);
-    const [_slidesIds, set_slidesIds] = useState(() => []);
+    const [slidesIds, setSlidesIds] = useState(() => []);
     function mount() {
         var _a2;
         try {
             _component.injectStyleInShadowRoot(
                 [__css, ...((_a2 = props.cssDeps) != null ? _a2 : [])],
-                $container.current,
+                props.container.current,
             );
         } catch (e) {
             console.log(e);
@@ -71,7 +73,7 @@ function SSlider(props) {
         console.log('DEFAU', DEFAULT_PROPS);
         set_behaviors({
             default({ fromSlideId, toSlideId }) {
-                const $slidesWrapper = $slides.current;
+                const $slidesWrapper = props.slides.current;
                 $slidesWrapper._isScrollingFromNextOrPrevious = false;
                 if (!$slidesWrapper._isBehaviorInited) {
                     $slidesWrapper._isBehaviorInited = true;
@@ -247,6 +249,7 @@ function SSlider(props) {
               });
         set_currentSlideId(slideId);
     }
+    const [_slidesIds, set_slidesIds] = useState(() => null);
     useEffect(() => {
         var _a2;
         __SSliderComponentInterface;
@@ -262,11 +265,14 @@ function SSlider(props) {
     }, []);
     useEffect(() => {
         console.log('UPDTE');
-        $root.current.style.setProperty(
+        props.root.current.style.setProperty(
             '--s-slider-slide',
             getCurrentSlideIdx(),
         );
-        $root.current.style.setProperty('--s-slider-total', _slidesIds.length);
+        props.root.current.style.setProperty(
+            '--s-slider-total',
+            _slidesIds.length,
+        );
     });
     return /* @__PURE__ */ React.createElement(
         'div',
@@ -284,7 +290,7 @@ function SSlider(props) {
             ),
             {
                 id: _id,
-                ref: $container,
+                ref: container,
                 className:
                     _component == null
                         ? void 0
@@ -299,10 +305,8 @@ function SSlider(props) {
             'div',
             {
                 className:
-                    _component == null
-                        ? void 0
-                        : _component.className('__root'),
-                ref: $root,
+                    _component == null ? void 0 : _component.className('_root'),
+                ref: root,
             },
             /* @__PURE__ */ React.createElement(
                 'div',
@@ -315,7 +319,7 @@ function SSlider(props) {
                 /* @__PURE__ */ React.createElement(
                     'div',
                     {
-                        ref: $slides,
+                        ref: slides,
                         className:
                             _component == null
                                 ? void 0
@@ -387,5 +391,8 @@ function SSlider(props) {
                 : null,
         ),
     );
+}
+if (!metas.type) {
+    metas.type = 'react';
 }
 export { DEFAULT_PROPS, SSlider as default, metas };

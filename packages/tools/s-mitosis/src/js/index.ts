@@ -20,7 +20,7 @@ import { __querySelectorLive } from '@coffeekraken/sugar/dom';
                 `#component-${component.target}`,
             );
 
-        componentProxy.create(componentImport.metas.preview, {
+        componentProxy.create({
             $root: $app,
         });
         $componentContainer?.addEventListener('s-specs-editor.change', (e) => {

@@ -1,9 +1,11 @@
+import __defaultMetasPlugin from './plugins/defaultMetasPlugin';
 import __defaultPropsPlugin from './plugins/defaultPropsPlugin';
 import __exportDefaultClassPlugin from './plugins/exportDefaultClassPlugin';
 import __exportDefinePlugin from './plugins/exportDefinePlugin';
+:
 
 export default function () {
-    return {
+    const plugins = {
         webcomponent: {
             plugins: [
                 __defaultPropsPlugin({
@@ -14,8 +16,19 @@ export default function () {
                 }),
                 __exportDefinePlugin({
                     target: 'webcomponent',
-                }),
+                })
             ],
         },
+        react: {
+            plugins: []
+        }
     };
+
+    for (let [target, options] of Object.entries(plugins)) {
+        options.plugins.push(__defaultMetasPlugin({
+            target
+        }));
+    }
+
+    return plugins;
 }

@@ -15,7 +15,8 @@
         "@coffeekraken/s-promise": "^2.0.0-alpha.20",
         "@coffeekraken/s-sugar-config": "^2.0.0-alpha.20",
         "@coffeekraken/sugar": "^2.0.0-alpha.20",
-        "fastdom": "^1.0.11"
+        "fastdom": "^1.0.11",
+        "react": "^18.2.0"
     },
     "exports": {
         ".": {

@@ -1,9 +1,12 @@
 import { __getExtendsStack } from '@coffeekraken/sugar/class';
-import type { ISComponentProxyCreateSettings } from '../SComponentProxy';
+import type {
+    ISComponentProxyComponent,
+    ISComponentProxyCreateSettings,
+} from '../SComponentProxy';
 
 export default {
     id: 'mitosisWebcomponent',
-    test(component: any) {
+    test(component: ISComponentProxyComponent) {
         let isHtmlElement = false;
         try {
             const extendsStack = __getExtendsStack(component.default);
@@ -14,25 +17,24 @@ export default {
         return component.define && isHtmlElement;
     },
     create(
-        component: any,
-        html: string,
+        component: ISComponentProxyComponent,
         settings: Partial<ISComponentProxyCreateSettings>,
     ): any {
         const $root = settings.$root ?? document.body;
-        component.define();
-        $root.innerHTML = html;
+        component.define?.();
+        $root.innerHTML = <string>component.metas?.preview ?? settings.html;
         const $component = $root.children[0];
-        return $component;
+        component.$element = $component;
     },
-    setProps($component: HTMLElement, props: any): void {
+    setProps(component: ISComponentProxyComponent, props: any): void {
         for (let [prop, value] of Object.entries(props ?? {})) {
             if (value === undefined) {
                 continue;
             }
             // @ts-ignore
-            $component.props[prop] = value;
+            component.$element.props[prop] = value;
         }
         // @ts-ignore
-        $component.update();
+        component.$element.update();
     },
 };

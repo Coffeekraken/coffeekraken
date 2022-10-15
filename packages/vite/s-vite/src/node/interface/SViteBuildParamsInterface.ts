@@ -63,6 +63,12 @@ class SViteBuildParamsInterface extends __SInterface {
                 default: false,
                 alias: 'w',
             },
+            buildInitial: {
+                description:
+                    'Specify if you want to build first and watch the changes after of to only build when changes are detected',
+                type: 'Boolean',
+                default: false,
+            },
             lib: {
                 description:
                     'Specify if your build type is "lib". Same as setting the "type" argument to "lib"',

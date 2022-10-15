@@ -783,3 +783,7 @@ export function define(props = {}, tagName = 's-specs-editor') {
         class SSpecsEditorComponent extends SSpecsEditor {},
     );
 }
+
+if (!metas.type) {
+    metas.type = 'webcomponent';
+}

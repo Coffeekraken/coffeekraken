@@ -1,6 +1,8 @@
 import __SClass from '@coffeekraken/s-class';
+import __SInterface from '@coffeekraken/s-interface';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __mitosisWebcomponentAdapter from './adapters/mitosisWebcomponentAdapter';
+import __reactAdapter from './adapters/reactAdapter';
 
 /**
  * @name                SComponentProxy
@@ -31,6 +33,21 @@ import __mitosisWebcomponentAdapter from './adapters/mitosisWebcomponentAdapter'
  */
 export interface ISComponentProxySettings {}
 
+export interface ISComponentProxyMetas {
+    type: 'webcomponent' | 'react';
+    interface: __SInterface;
+    preview: string;
+}
+
+export interface ISComponentProxyComponent {
+    default: any;
+    metas?: Partial<ISComponentProxyMetas>;
+    preview?: string;
+    define?: Function;
+    DEFAULT_PROPS?: any;
+    $element: any;
+}
+
 export interface ISComponentProxyAdapterTestFn {
     (component: any): boolean;
 }
@@ -46,6 +63,7 @@ export interface ISComponentProxyAdapter {
 
 export interface ISComponentProxyCreateSettings {
     $root: HTMLElement;
+    html: string;
 }
 
 class SComponentProxy extends __SClass {
@@ -58,7 +76,7 @@ class SComponentProxy extends __SClass {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    public component;
+    public component: ISComponentProxyComponent;
 
     /**
      * @name            adapter
@@ -107,7 +125,10 @@ class SComponentProxy extends __SClass {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(component: any, settings?: Partial<ISComponentProxySettings>) {
+    constructor(
+        component: ISComponentProxyComponent,
+        settings?: Partial<ISComponentProxySettings>,
+    ) {
         super(
             __deepMerge(
                 {
@@ -118,7 +139,15 @@ class SComponentProxy extends __SClass {
                 settings || {},
             ),
         );
-        this.component = component;
+        this.component = {
+            default: null,
+            metas: {},
+            preview: '',
+            define: null,
+            DEFAULT_PROPS: {},
+            $element: null,
+            ...component,
+        };
 
         for (let [id, adapter] of Object.entries(
             SComponentProxy._registeredAdapter,
@@ -137,11 +166,11 @@ class SComponentProxy extends __SClass {
         }
     }
 
-    _apply(component: any): any {
-        if (!component) return;
-        this.component = component;
-        return component;
-    }
+    // _apply(component: ISComponentProxyComponent): any {
+    //     if (!component) return;
+    //     this.component.default = component;
+    //     return component;
+    // }
 
     /**
      * @name            create
@@ -154,11 +183,8 @@ class SComponentProxy extends __SClass {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    create(
-        html: string,
-        settings: Partial<ISComponentProxyCreateSettings>,
-    ): void {
-        this._apply(this.adapter.create(this.component, html, settings));
+    create(settings: Partial<ISComponentProxyCreateSettings>): void {
+        this.adapter.create(this.component, settings);
     }
 
     /**
@@ -173,11 +199,12 @@ class SComponentProxy extends __SClass {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     setProps(props: any): void {
-        this._apply(this.adapter.setProps(this.component, props));
+        this.adapter.setProps(this.component, props);
     }
 }
 
 // register default adapters
 SComponentProxy.registerAdapter(__mitosisWebcomponentAdapter);
+SComponentProxy.registerAdapter(__reactAdapter);
 
 export default SComponentProxy;

@@ -167,6 +167,9 @@ export default function (api) {
                 resolveExtensions: ['.js', '.ts'],
             },
         },
+
+        dedupe: ['react', 'react-dom'],
+
         build: {
             // lib: {
             //     /**

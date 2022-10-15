@@ -37,6 +37,7 @@ export interface ISViteBuildParams {
     prod: boolean;
     noWrite: boolean;
     watch: boolean;
+    buildInitial: boolean;
     verbose: boolean;
     target: string;
     format: ('esm' | 'amd' | 'umd' | 'cjs' | 'iife')[];
@@ -46,6 +47,26 @@ export interface ISViteBuildParams {
     lib: boolean;
     minify: boolean | 'esbuild' | 'terser';
     analyze: boolean;
+}
+
+export interface ISViteBuildResult {
+    type: 'module' | 'modules' | 'lib' | 'bundle';
+    format: 'esm' | 'amd' | 'umd' | 'cjs' | 'iife';
+    files: ISViteBuildFileResult[];
+}
+
+export interface ISViteBuildFileResult {
+    isEntry: boolean;
+    format: 'esm' | 'amd' | 'umd' | 'cjs' | 'iife';
+    fileName: string;
+    outDir: string;
+    code: string;
+}
+
+export interface ISViteBuildParamsInternal extends ISViteBuildParams {
+    outputDir: string;
+    outputAssetsDir: string;
+    formats: string[];
 }
 
 export default class SVite extends __SClass {
@@ -161,13 +182,14 @@ export default class SVite extends __SClass {
      * @since         2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
+    rebuildTimeoutByPath = {};
     build(params: ISViteBuildParams | String) {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 const viteConfig = __SugarConfig.get('vite'),
                     outputDir = viteConfig.build.outDir,
                     outputAssetsDir = `${outputDir}/${viteConfig.build.assetsDir}`;
-                const duration = new __SDuration();
+                let duration = new __SDuration();
 
                 // clean previous build
                 __removeSync(outputAssetsDir);
@@ -185,16 +207,22 @@ export default class SVite extends __SClass {
                 if (
                     finalParams.bundle &&
                     finalParams.type.indexOf('bundle') === -1
-                )
+                ) {
                     finalParams.type = ['bundle'];
+                }
 
                 for (let i = 0; i < finalParams.type.length; i++) {
                     const buildType = finalParams.type[i];
 
+                    let buildResult;
+
                     // @ts-ignore
-                    const buildParams: ISViteBuildParams = __deepMerge(
+                    const buildParams: ISViteBuildParamsInternal = __deepMerge(
                         Object.assign(finalParams),
-                        {},
+                        {
+                            outputDir,
+                            outputAssetsDir,
+                        },
                     );
 
                     // shortcuts
@@ -205,10 +233,88 @@ export default class SVite extends __SClass {
                         buildParams.minify = 'esbuild';
                     }
 
+                    // automatic formats
+                    let finalFormats = buildParams.format;
+                    if (!buildParams.format.length) {
+                        switch (buildType) {
+                            case 'bundle':
+                                finalFormats = ['amd'];
+                                break;
+                            case 'module':
+                            case 'lib':
+                                finalFormats = ['esm'];
+                                break;
+                        }
+                    }
+
+                    // set the formats in buildParams
+                    buildParams.formats = finalFormats;
+
+                    const _this = this;
+                    let isFirstGenerated; // track if the first build has been made using the "watch" param
                     const config: any = __deepMerge(viteConfig, {
                         logLevel: 'silent',
+                        plugins: [
+                            ...(viteConfig.plugins ?? []),
+                            {
+                                name: 's-vite-end-detection',
+                                async generateBundle(bundle, chunks) {
+                                    if (!buildParams.watch) {
+                                        return;
+                                    }
+
+                                    const buildResult: ISViteBuildResult = {
+                                        type: buildType,
+                                        format: finalFormats[0],
+                                        files: [],
+                                    };
+
+                                    for (let [key, chunkObj] of Object.entries(
+                                        chunks,
+                                    )) {
+                                        buildResult.files.push({
+                                            isEntry: chunkObj.isEntry,
+                                            format: finalFormats[0],
+                                            fileName: chunkObj.fileName,
+                                            outDir: outputDir,
+                                            code: chunkObj.code,
+                                        });
+                                    }
+
+                                    // handle result
+                                    await pipe(
+                                        _this._handleBuildResult(
+                                            buildResult,
+                                            buildParams,
+                                        ),
+                                    );
+
+                                    emit('log', {
+                                        type: __SLog.TYPE_INFO,
+                                        value: `<green>[success]</green> Build completed <green>successfully</green> in <yellow>${
+                                            duration.end().formatedDuration
+                                        }</yellow>`,
+                                    });
+
+                                    // display the watch message
+                                    if (buildParams.watch) {
+                                        emit('log', {
+                                            type: __SLog.TYPE_INFO,
+                                            value: `<cyan>[watch]</cyan> Watching for changes...`,
+                                        });
+                                    }
+                                },
+                            },
+                        ],
                         build: {
-                            watch: buildParams.watch ? {} : false,
+                            watch: buildParams.watch
+                                ? {
+                                      chokidar: {
+                                          usePolling: true, // use this to avoid building multiple time the same file when things like "prettier" format and save the file
+                                          interval: 500,
+                                      },
+                                  }
+                                : false,
                             target: buildParams.target ?? 'modules',
                             write: false,
                             minify: buildParams.minify,
@@ -217,12 +323,7 @@ export default class SVite extends __SClass {
                                 input: buildParams.input,
                                 external: [],
                                 plugins: [],
-                                output: {
-                                    // compact: true,
-                                    // manualChunks(id) {
-                                    //     return 'index';
-                                    // },
-                                },
+                                output: {},
                                 onwarn(warning, warn) {
                                     const onwarnRes =
                                         viteConfig.build?.rollupOptions?.onwarn?.(
@@ -244,14 +345,6 @@ export default class SVite extends __SClass {
                                         type: __SLog.TYPE_WARNING,
                                         value: `at <cyan>${warning.loc.file}</cyan>:<yellow>${warning.loc.column}:${warning.loc.line}</yellow>`,
                                     });
-                                    // emit('log', {
-                                    //     margin: {
-                                    //         bottom: 2,
-                                    //     },
-                                    //     type: __SLog.TYPE_WARNING,
-                                    //     value: warning.frame,
-                                    // });
-
                                     return onwarnRes;
                                 },
                             },
@@ -328,20 +421,6 @@ export default class SVite extends __SClass {
                         ];
                     }
 
-                    // automatic formats
-                    let finalFormats = buildParams.format;
-                    if (!buildParams.format.length) {
-                        switch (buildType) {
-                            case 'bundle':
-                                finalFormats = ['amd'];
-                                break;
-                            case 'module':
-                            case 'lib':
-                                finalFormats = ['esm'];
-                                break;
-                        }
-                    }
-
                     // setup outputs
                     const outputs: any[] = [];
                     let outputsFilenames: string[] = [];
@@ -408,114 +487,40 @@ export default class SVite extends __SClass {
                     config.build.rollupOptions.output = outputs;
 
                     // process to bundle
-                    const res = await __viteBuild(config);
-                    // console.log(res[0].output);
+                    buildResult = await __viteBuild(config);
 
-                    if (res.constructor?.name === 'WatchEmitter') {
-                        // @ts-ignore
-                        res.on('change', async () => {
-                            emit('log', {
-                                type: __SLog.TYPE_INFO,
-                                value: `<yellow>[watch]</yellow> Update detected. Re-building...`,
-                            });
-                            await pipe(
-                                this.build({
-                                    ...params,
-                                    watch: false,
-                                    verbose: false,
-                                }),
-                            );
-                            emit('log', {
-                                type: __SLog.TYPE_INFO,
-                                value: `<cyan>[watch]</cyan> Watching for changes...`,
-                            });
+                    // if the buildResult is a WatchEmitter instance,
+                    // it means that the build has been launchec with the "watch" attribute
+                    // and vite will returns something different that a normal build.
+                    // Handle that here...
+                    if (buildResult.constructor?.name === 'WatchEmitter') {
+                        buildResult.on('change', () => {
+                            duration = new __SDuration();
                         });
-                        await pipe(
-                            this.build({
-                                ...params,
-                                watch: false,
-                                verbose: false,
-                            }),
-                        );
-                        emit('log', {
-                            type: __SLog.TYPE_INFO,
-                            value: `<cyan>[watch]</cyan> Watching for changes...`,
-                        });
+
+                        // stop here if the vite instance is set to watch mode
                         return;
                     }
 
-                    // @TODO        check to replace this dirty fix
-                    let outCode = res[0].output[0].code;
-                    // var SCodeExample_vue_vue_type_style_index_0_scoped_true_lang
-                    const cssVarMatches = outCode.match(
-                        /var\s[a-zA-Z0-9-_]+type_style[a-zA-Z0-9-_]+/gm,
+                    const finalBuildResult: ISViteBuildResult = {
+                        type: buildType,
+                        format: finalFormats[0],
+                        files: [],
+                    };
+                    for (let i = 0; i < buildResult[0].output?.length; i++) {
+                        const output = buildResult[0].output[i];
+                        finalBuildResult.files.push({
+                            isEntry: output.isEntry ?? false,
+                            format: finalFormats[0],
+                            fileName: output.fileName,
+                            outDir: outputDir,
+                            code: output.code,
+                        });
+                    }
+
+                    buildResult = await pipe(
+                        this._handleBuildResult(finalBuildResult, buildParams),
                     );
-                    if (cssVarMatches) {
-                        cssVarMatches.forEach((match) => {
-                            const varName = match.replace(/var\s?/, '').trim();
-                            const injectCode = `
-                var $style = document.querySelector('style#${varName}');
-                if (!$style) {
-                  $style = document.createElement('style');
-                  $style.setAttribute('id', '${varName}');
-                  $style.type = 'text/css';
-                  $style.appendChild(document.createTextNode(${varName}));
-                  document.head.appendChild($style);
-                }
-              `;
-                            outCode += injectCode;
-                            res[0].output[0].code = outCode;
-                        });
-                    }
-
-                    // stacking res inside the results object
-                    results[buildType] = res;
-
-                    // handle generated bundles
-                    if (!buildParams.noWrite) {
-                        let entryFileName, entryFinalFileName;
-
-                        // @ts-ignore
-                        res.forEach((bundleObj, i) => {
-                            const output = bundleObj.output[0];
-
-                            bundleObj.output.forEach((outputObj) => {
-                                if (outputObj.fileName.match(/\.css$/)) {
-                                    return;
-                                }
-
-                                let finalCode = outputObj.code;
-
-                                let finalFileName = outputObj.fileName;
-                                if (outputObj.isEntry) {
-                                    entryFileName = finalFileName;
-                                    finalFileName = finalFileName
-                                        .replace(
-                                            /^index\./,
-                                            `index.${finalFormats[0]}.`,
-                                        )
-                                        .replace(/\.[a-zA-Z0-9]+\.js/, '.js');
-                                    entryFinalFileName = finalFileName;
-                                } else if (entryFileName) {
-                                    finalCode = finalCode
-                                        .split(`/${entryFileName}`)
-                                        .join(`/${entryFinalFileName}`);
-                                }
-
-                                __writeFileSync(
-                                    `${outputAssetsDir}/${finalFileName}`,
-                                    finalCode,
-                                );
-                                const file = new __SFile(
-                                    `${outputAssetsDir}/${finalFileName}`,
-                                );
-                                emit('log', {
-                                    type: __SLog.TYPE_INFO,
-                                    value: `<green>[save]</green> File "<yellow>${file.relPath}</yellow>" <yellow>${file.stats.kbytes}kb</yellow> saved <green>successfully</green>`,
-                                });
-                            });
-                        });
-                    }
                 }
 
                 emit('log', {
@@ -530,6 +535,78 @@ export default class SVite extends __SClass {
             {
                 metas: {
                     id: this.metas.id,
+                },
+            },
+        );
+    }
+
+    _handleBuildResult(
+        buildResult: ISViteBuildResult,
+        buildParams: ISViteBuildParamsInternal,
+    ): Promise<ISViteBuildResult> {
+        return new __SPromise(
+            async ({ resolve, reject, pipe, emit }) => {
+                for (let i = 0; i < buildResult.files.length; i++) {
+                    const buildFileResult: ISViteBuildFileResult =
+                        buildResult.files[i];
+
+                    //             const cssVarMatches = buildFileResult.code.match(
+                    //                 /var\s[a-zA-Z0-9-_]+type_style[a-zA-Z0-9-_]+/gm,
+                    //             );
+                    //             if (cssVarMatches) {
+                    //                 cssVarMatches.forEach((match) => {
+                    //                     const varName = match.replace(/var\s?/, '').trim();
+                    //                     const injectCode = `
+                    //     var $style = document.querySelector('style#${varName}');
+                    //     if (!$style) {
+                    //     $style = document.createElement('style');
+                    //     $style.setAttribute('id', '${varName}');
+                    //     $style.type = 'text/css';
+                    //     $style.appendChild(document.createTextNode(${varName}));
+                    //     document.head.appendChild($style);
+                    //     }
+                    // `;
+
+                    //                     buildFileResult.code += injectCode;
+                    //                 });
+                    //             }
+
+                    // handle generated bundles
+                    if (!buildParams.noWrite) {
+                        // handle only js files
+                        if (!buildFileResult.fileName.match(/\.js$/)) {
+                            continue;
+                        }
+
+                        // rename the entry file with "index.%format.js"
+                        if (buildFileResult.isEntry) {
+                            buildFileResult.fileName = buildFileResult.fileName
+                                .replace(
+                                    /^index\./,
+                                    `index.${buildFileResult.format}.`,
+                                )
+                                .replace(/\.[a-zA-Z0-9]+\.js/, '.js');
+                        }
+
+                        // write the file on the disk
+                        __writeFileSync(
+                            `${buildFileResult.outDir}/${buildFileResult.fileName}`,
+                            buildFileResult.code,
+                        );
+                        const file = new __SFile(
+                            `${buildFileResult.outDir}/${buildFileResult.fileName}`,
+                        );
+                        emit('log', {
+                            type: __SLog.TYPE_INFO,
+                            value: `<green>[save]</green> File "<yellow>${file.relPath}</yellow>" <yellow>${file.stats.kbytes}kb</yellow> saved <green>successfully</green>`,
+                        });
+                    }
+                }
+                resolve(buildResult);
+            },
+            {
+                metas: {
+                    id: 'SVite',
                 },
             },
         );

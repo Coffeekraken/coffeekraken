@@ -442,4 +442,7 @@ function SSpecsEditor(props) {
             : null,
     );
 }
+if (!metas.type) {
+    metas.type = 'react';
+}
 export { DEFAULT_PROPS, SSpecsEditor as default, metas };

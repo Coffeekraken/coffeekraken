@@ -34,6 +34,12 @@ function registerFunctions($twig)
     $layoutCss = require_once __DIR__ . '/css/layoutCss.php';
     $twig->addFunction($layoutCss);
 
+    $marginClasses = require_once __DIR__ . '/css/marginClasses.php';
+    $twig->addFunction($marginClasses);
+
+    $paddingClasses = require_once __DIR__ . '/css/paddingClasses.php';
+    $twig->addFunction($paddingClasses);
+
     // Frontspec
     $frontspecAssets = require_once __DIR__ . '/frontspec/assets.php';
     $twig->addFunction($frontspecAssets);

@@ -1,22 +1,30 @@
 {
-    "description": "Specify the margins you want around your layout by media (mobile, etc...). Default values must be stored under the \"default\" media",
     "type": "Object{}",
+    "description": "Specify the margins you want around your layout",
     "props": {
-        "top": {
-            "description": "Specify the margin top",
-            "type": "String"
+        "block": {
+            "extends": "sugar.views.props.space",
+            "description": "Specify the margin block (top, bottom)"
         },
-        "right": {
-            "description": "Specify the margin right",
-            "type": "String"
+        "inline": {
+            "extends": "sugar.views.props.space",
+            "description": "Specify the margin inkine (left, right)"
         },
-        "bottom": {
-            "description": "Specify the margin bottom",
-            "type": "String"
+        "blockStart": {
+            "extends": "sugar.views.props.space",
+            "description": "Specify the margin block start (top)"
         },
-        "left": {
-            "description": "Specify the margin left",
-            "type": "String"
+        "blockEnd": {
+            "extends": "sugar.views.props.space",
+            "description": "Specify the margin block end (bottom)"
+        },
+        "inlineStart": {
+            "extends": "sugar.views.props.space",
+            "description": "Specify the margin inline start (left)"
+        },
+        "inlineEnd": {
+            "extends": "sugar.views.props.space",
+            "description": "Specify the margin inline end (right)"
         }
     }
 }

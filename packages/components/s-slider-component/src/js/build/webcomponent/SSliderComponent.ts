@@ -291,16 +291,16 @@ export const metas = {
  *
  */
 export default class SSlider extends HTMLElement {
-    get _container() {
-        return this._root.querySelector("[data-ref='SSlider-container']");
+    get _$container() {
+        return this._root.querySelector("[data-ref='SSlider-$container']");
     }
 
-    get _root() {
-        return this._root.querySelector("[data-ref='SSlider-root']");
+    get _$root() {
+        return this._root.querySelector("[data-ref='SSlider-$root']");
     }
 
-    get _slides() {
-        return this._root.querySelector("[data-ref='SSlider-slides']");
+    get _$slides() {
+        return this._root.querySelector("[data-ref='SSlider-$slides']");
     }
 
     get _root() {
@@ -318,12 +318,12 @@ export default class SSlider extends HTMLElement {
             _component: null,
             _behaviors: {},
             _slideElements: [],
-            slidesIds: [],
+            _slidesIds: [],
             mount() {
                 try {
                     self.state._component.injectStyleInShadowRoot(
                         [__css, ...(self.props.cssDeps ?? [])],
-                        self.props.self._container,
+                        self._$container,
                     );
                 } catch (e) {
                     console.log(e);
@@ -332,7 +332,7 @@ export default class SSlider extends HTMLElement {
                 console.log('DEFAU', DEFAULT_PROPS);
                 self.state._behaviors = {
                     default({ fromSlideId, toSlideId }) {
-                        const $slidesWrapper = self.props.self._slides;
+                        const $slidesWrapper = self._$slides;
                         $slidesWrapper._isScrollingFromNextOrPrevious = false;
 
                         if (!$slidesWrapper._isBehaviorInited) {
@@ -580,8 +580,6 @@ export default class SSlider extends HTMLElement {
 
         this.componentProps = [
             'cssDeps',
-            'container',
-            'slides',
             'direction',
             'transitionDuration',
             'transitionEasing',
@@ -596,7 +594,6 @@ export default class SSlider extends HTMLElement {
             'mousewheel',
             'clickOnSlide',
             'children',
-            'root',
             'id',
         ];
 
@@ -720,10 +717,10 @@ export default class SSlider extends HTMLElement {
 
         this._root.innerHTML = `
                         
-      <div data-el="div-s-slider-1" data-ref="SSlider-container">
-        <div data-el="div-s-slider-2" data-ref="SSlider-root">
+      <div data-el="div-s-slider-1" data-ref="SSlider-$container">
+        <div data-el="div-s-slider-2" data-ref="SSlider-$root">
           <div data-el="div-s-slider-3">
-            <div data-el="div-s-slider-4" data-ref="SSlider-slides">
+            <div data-el="div-s-slider-4" data-ref="SSlider-$slides">
               <slot></slot>
             </div>
           </div>
@@ -796,11 +793,11 @@ export default class SSlider extends HTMLElement {
         const self = this;
 
         console.log('UPDTE');
-        self.props.self._root.style.setProperty(
+        self._$root.style.setProperty(
             '--s-slider-slide',
             self.state.getCurrentSlideIdx(),
         );
-        self.props.self._root.style.setProperty(
+        self._$root.style.setProperty(
             '--s-slider-total',
             self.state._slidesIds.length,
         );

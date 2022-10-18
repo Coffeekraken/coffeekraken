@@ -28,6 +28,10 @@ export default function (api) {
                 return [__SVitePostcssPlugin()];
             },
 
+            resolve: {
+                dedupe: ['react', 'react-dom'],
+            },
+
             server: {
                 /**
                  * @name            port

@@ -1,22 +1,30 @@
 {
     "type": "Object{}",
-    "description": "Specify the paddings you want around your layout by media (mobile, etc...). Default values must be stored under the \"default\" media",
+    "description": "Specify the paddings you want around your layout",
     "props": {
-        "top": {
-            "description": "Specify the padding top",
-            "type": "String"
+        "block": {
+            "extends": "sugar.views.props.space",
+            "description": "Specify the padding block (top, bottom)"
         },
-        "right": {
-            "description": "Specify the padding right",
-            "type": "String"
+        "inline": {
+            "extends": "sugar.views.props.space",
+            "description": "Specify the padding inkine (left, right)"
         },
-        "bottom": {
-            "description": "Specify the padding bottom",
-            "type": "String"
+        "blockStart": {
+            "extends": "sugar.views.props.space",
+            "description": "Specify the padding block start (top)"
         },
-        "left": {
-            "description": "Specify the padding left",
-            "type": "String"
+        "blockEnd": {
+            "extends": "sugar.views.props.space",
+            "description": "Specify the padding block end (bottom)"
+        },
+        "inlineStart": {
+            "extends": "sugar.views.props.space",
+            "description": "Specify the padding inline start (left)"
+        },
+        "inlineEnd": {
+            "extends": "sugar.views.props.space",
+            "description": "Specify the padding inline end (right)"
         }
     }
 }

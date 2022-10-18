@@ -37,7 +37,7 @@ const dom_1 = require("@coffeekraken/sugar/dom");
 function define(props = {}, tagName = 's-slider', settings = {}) {
     var _a;
     (0, dom_1.__querySelectorLive)(tagName, ($elm) => __awaiter(this, void 0, void 0, function* () {
-        const { define } = yield Promise.resolve().then(() => __importStar(require('../../../js/webcomponent/src/js/SSliderComponent')));
+        const { define } = yield Promise.resolve().then(() => __importStar(require('../../../../src/js/build/webcomponent/SSliderComponent')));
         define(props, tagName);
     }), {
         when: (_a = settings.when) !== null && _a !== void 0 ? _a : 'nearViewport',
@@ -45,4 +45,4 @@ function define(props = {}, tagName = 's-slider', settings = {}) {
     });
 }
 exports.define = define;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsaURBQThEO0FBTzlELFNBQWdCLE1BQU0sQ0FDbEIsS0FBSyxHQUFHLEVBQUUsRUFDVixPQUFPLEdBQUcsVUFBVSxFQUNwQixXQUF5QyxFQUFFOztJQUUzQyxJQUFBLHlCQUFtQixFQUNmLE9BQU8sRUFDUCxDQUFPLElBQUksRUFBRSxFQUFFO1FBQ1gsTUFBTSxFQUFFLE1BQU0sRUFBRSxHQUFHLHdEQUNmLGtEQUFrRCxHQUNyRCxDQUFDO1FBQ0YsTUFBTSxDQUFDLEtBQUssRUFBRSxPQUFPLENBQUMsQ0FBQztJQUMzQixDQUFDLENBQUEsRUFDRDtRQUNJLElBQUksRUFBRSxNQUFBLFFBQVEsQ0FBQyxJQUFJLG1DQUFJLGNBQWM7UUFDckMsU0FBUyxFQUFFLElBQUk7S0FDbEIsQ0FDSixDQUFDO0FBQ04sQ0FBQztBQWxCRCx3QkFrQkMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsaURBQThEO0FBTzlELFNBQWdCLE1BQU0sQ0FDbEIsS0FBSyxHQUFHLEVBQUUsRUFDVixPQUFPLEdBQUcsVUFBVSxFQUNwQixXQUF5QyxFQUFFOztJQUUzQyxJQUFBLHlCQUFtQixFQUNmLE9BQU8sRUFDUCxDQUFPLElBQUksRUFBRSxFQUFFO1FBQ1gsTUFBTSxFQUFFLE1BQU0sRUFBRSxHQUFHLHdEQUNmLHdEQUF3RCxHQUMzRCxDQUFDO1FBQ0YsTUFBTSxDQUFDLEtBQUssRUFBRSxPQUFPLENBQUMsQ0FBQztJQUMzQixDQUFDLENBQUEsRUFDRDtRQUNJLElBQUksRUFBRSxNQUFBLFFBQVEsQ0FBQyxJQUFJLG1DQUFJLGNBQWM7UUFDckMsU0FBUyxFQUFFLElBQUk7S0FDbEIsQ0FDSixDQUFDO0FBQ04sQ0FBQztBQWxCRCx3QkFrQkMifQ==

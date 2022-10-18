@@ -14,7 +14,7 @@ export function define(
         tagName,
         async ($elm) => {
             const { define } = await import(
-                '../../../js/webcomponent/src/js/SSliderComponent'
+                '../../../../src/js/build/webcomponent/SSliderComponent'
             );
             define(props, tagName);
         },

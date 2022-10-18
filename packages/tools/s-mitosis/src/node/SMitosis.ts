@@ -222,7 +222,9 @@ class SMitosis extends __SClass {
                     // any valid user config options, plus `mode` and `configFile`
                     configFile: false,
                     root: __packageRootDir(),
-                    dedupe: ['react', 'react-dom'],
+                    resolve: {
+                        dedupe: ['react', 'react-dom'],
+                    },
                     optimizeDeps: {
                         esbuildOptions: {
                             // mainFields: ['module', 'main'],

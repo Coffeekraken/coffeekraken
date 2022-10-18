@@ -9,6 +9,8 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
+        "@builder.io/mitosis": "^0.0.74",
+        "@builder.io/mitosis-cli": "^0.0.33",
         "@coffeekraken/s-activate-feature": "^2.0.0-alpha.20",
         "@coffeekraken/s-component": "^2.0.0-alpha.20",
         "@coffeekraken/s-component-proxy": "^2.0.0-alpha.20",

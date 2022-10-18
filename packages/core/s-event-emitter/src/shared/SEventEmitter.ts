@@ -5,13 +5,13 @@ import {
     __isChildProcess,
     __isClass,
     __isNode,
-    __isPlainObject
+    __isPlainObject,
 } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __getColorFor from '@coffeekraken/sugar/shared/dev/color/getColorFor';
 import __toString from '@coffeekraken/sugar/shared/string/toString';
 import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
-import __minimatch from 'minimatch';
+import __globToRegex from 'glob-to-regexp';
 
 /**
  * @name                  SEventEmitter
@@ -786,7 +786,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
         Object.keys(this._eventsStacks).forEach((stackName) => {
             if (stackName === event) return currentCallbackReturnedValue;
             if (
-                __minimatch(event, stackName) &&
+                __globToRegex(stackName).test(event) &&
                 this._eventsStacks[stackName] !== undefined
             ) {
                 // the glob pattern match the emited stack so add it to the stack array

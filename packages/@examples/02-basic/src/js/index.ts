@@ -33,60 +33,60 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
 
 // setup conductor
 __SConductor.setup({
-  log: true,
+    log: true,
 });
 
 // Init script
 (async () => {
-  // Set some features defaults
-  __SFeature.setDefaultProps('*', {});
+    // Set some features defaults
+    __SFeature.setDefaultProps('*', {});
 
-  // Set some components defaults
-  __SLitComponent.setDefaultProps('*', {});
+    // Set some components defaults
+    __SLitComponent.setDefaultProps('*', {});
 
-  // Init theme
-  __STheme.init();
+    // Init theme
+    __STheme.init();
 
-  // features
-  __sActivateFeature();
-  __sAppearFeature();
-  // __sFloatingFeature();
-  // __sRefocusFeature();
-  // __sInlineFeature();
-  // __sParallaxFeature();
-  __sFormValidateFeature({});
-  // __sPageTransitionFeature();
+    // features
+    __sActivateFeature();
+    __sAppearFeature();
+    // __sFloatingFeature();
+    // __sRefocusFeature();
+    // __sInlineFeature();
+    // __sParallaxFeature();
+    __sFormValidateFeature({});
+    // __sPageTransitionFeature();
 
-  // Project related components
-  // ...
+    // Project related components
+    // ...
 
-  // Components
-  // __SCodeExampleWebcomponent();
-  // __SFiltrableInputComponent();
-  // __SSidePanelWebcomponent();
-  // __SColorPickerComponent();
-  // __SDatetimePickerComponent();
-  // __SScrollComponent();
-  // __SRangeWebcomponent();
-  __SSliderComponent({
-    // behaviors: {
-    //   slideable: {
-    //     class: SSliderSlideableBehavior,
-    //     settings: {},
-    //   },
-    // },
-  });
+    // Components
+    // __SCodeExampleWebcomponent();
+    // __SFiltrableInputComponent();
+    // __SSidePanelWebcomponent();
+    // __SColorPickerComponent();
+    // __SDatetimePickerComponent();
+    // __SScrollComponent();
+    // __SRangeWebcomponent();
+    __SSliderComponent({
+        // behaviors: {
+        //   slideable: {
+        //     class: SSliderSlideableBehavior,
+        //     settings: {},
+        //   },
+        // },
+    });
 
-  // Dashboard
-  // new __SDashboard({
-  //     dashboard: {
-  //         components: {
-  //             's-dashboard-pages': {
-  //                 onSelect: (page) => {
-  //                     document.location.href = page.item.loc;
-  //                 },
-  //             },
-  //         },
-  //     },
-  // });
+    // Dashboard
+    // new __SDashboard({
+    //     dashboard: {
+    //         components: {
+    //             's-dashboard-pages': {
+    //                 onSelect: (page) => {
+    //                     document.location.href = page.item.loc;
+    //                 },
+    //             },
+    //         },
+    //     },
+    // });
 })();

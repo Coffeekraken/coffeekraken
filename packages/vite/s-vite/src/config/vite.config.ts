@@ -67,25 +67,24 @@ export default function (api) {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         mode: 'development',
-        // resolve: {
-        //     // preserveSymlinks: true,
-        //     alias: {
-        //         static: '',
-
-        //         /**
-        //          * @name          vue
-        //          * @namespace     config.vite.resolve.alias
-        //          * @type          String
-        //          * @default      vue/dist/vue.esm-bundler.js
-        //          *
-        //          * Specify the esm builder alias resolution path
-        //          *
-        //          * @since       2.0.0
-        //          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        //          */
-        //         vue: 'vue/dist/vue.esm-bundler.js',
-        //     },
-        // },
+        resolve: {
+            dedupe: ['react', 'react-dom', 'vue'],
+            // preserveSymlinks: true,
+            alias: {
+                /**
+                 * @name          vue
+                 * @namespace     config.vite.resolve.alias
+                 * @type          String
+                 * @default      vue/dist/vue.esm-bundler.js
+                 *
+                 * Specify the esm builder alias resolution path
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                vue: 'vue/dist/vue.esm-bundler.js',
+            },
+        },
         /**
          * @name          plugins
          * @namespace     config.vite
@@ -167,8 +166,6 @@ export default function (api) {
                 resolveExtensions: ['.js', '.ts'],
             },
         },
-
-        dedupe: ['react', 'react-dom'],
 
         build: {
             // lib: {

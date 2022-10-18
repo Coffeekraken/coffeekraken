@@ -13,18 +13,42 @@ import { __querySelectorLive } from '@coffeekraken/sugar/dom';
     }, 1000);
 
     __querySelectorLive('[component]', async ($app) => {
-        const component = JSON.parse($app.getAttribute('component')),
-            componentImport = await import(component.path),
-            componentProxy = new __SComponentProxy(componentImport),
-            $componentContainer = document.querySelector(
-                `#component-${component.target}`,
-            );
+        const component = JSON.parse($app.getAttribute('component'));
+        const componentProxy = new __SComponentProxy(component);
+        // const componentImport = await componentProxy.load();
+
+        if (component.target !== 'vue') {
+            return;
+        }
+
+        const componentImport = await componentProxy.load();
+
+        // $componentContainer = document.querySelector(
+        //     `#component-${component.target}`,
+        // );
+
+        console.log('create', component);
+
+        // const app = createApp({
+        //     data() {
+        //         return {};
+        //     },
+        //     template: component.specs.preview,
+        //     // render() {
+        //     //     return `
+        //     //         <div v-html=>Hello !!!</div>
+        //     //     `;
+        //     // },
+        // });
+        // const $root = $app ?? document.body;
+        // app.component('s-slider', componentImport.default);
+        // app.mount($root);
 
         componentProxy.create({
             $root: $app,
         });
-        $componentContainer?.addEventListener('s-specs-editor.change', (e) => {
-            componentProxy.setProps(e.detail);
-        });
+        // $componentContainer?.addEventListener('s-specs-editor.change', (e) => {
+        //     componentProxy.setProps(e.detail);
+        // });
     });
 })();

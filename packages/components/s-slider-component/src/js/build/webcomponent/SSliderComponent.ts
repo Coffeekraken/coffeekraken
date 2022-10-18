@@ -329,28 +329,13 @@ export default class SSlider extends HTMLElement {
                     console.log(e);
                 }
 
-                console.log('DEFAU', DEFAULT_PROPS);
                 self.state._behaviors = {
                     default({ fromSlideId, toSlideId }) {
                         const $slidesWrapper = self._$slides;
                         $slidesWrapper._isScrollingFromNextOrPrevious = false;
 
                         if (!$slidesWrapper._isBehaviorInited) {
-                            $slidesWrapper._isBehaviorInited = true; // const $slideElements = $slides.querySelector('slot');
-                            // console.log('^slot', slots.assignedNodes());
-                            // self.state._slideElements.forEach(($slide) => {
-                            //     const observer = new IntersectionObserver(
-                            //         (entries, observer) => {
-                            //             console.log('mutations', entries);
-                            //         },
-                            //         {
-                            //             // root: $slidesWrapper,
-                            //         },
-                            //     );
-                            //     console.log('SLIT', $slide);
-                            //     observer.observe($slide);
-                            // });
-
+                            $slidesWrapper._isBehaviorInited = true;
                             let scrollTimeout;
                             $slidesWrapper.addEventListener('scroll', (e) => {
                                 if (
@@ -395,7 +380,7 @@ export default class SSlider extends HTMLElement {
                                         self.state.getSlideIdByElement(
                                             $inViewSlide,
                                         ),
-                                    ); // console.log($inViewSlide);
+                                    );
                                 }, 100);
                             });
                         }
@@ -403,7 +388,6 @@ export default class SSlider extends HTMLElement {
                         const $from =
                                 self.state.getSlideElementById(fromSlideId),
                             $to = self.state.getSlideElementById(toSlideId);
-                        console.log('f', fromSlideId, $from, $to);
                         const fromRect = $from.getBoundingClientRect(),
                             toRect = $to.getBoundingClientRect(),
                             parentRect = $slidesWrapper.getBoundingClientRect();
@@ -547,14 +531,7 @@ export default class SSlider extends HTMLElement {
                 self.state.goTo(self.state.getNextSlideId());
             },
             goTo(slideId) {
-                console.log(
-                    'Go to',
-                    slideId,
-                    self.state._currentSlideId,
-                    self.state._slidesIds,
-                    self.state._slideElements,
-                ); // call the behavior
-
+                // call the behavior
                 const behaviorFn =
                     self.props.behaviors?.[self.props.behavior] ??
                     self.state._behaviors[self.props.behavior];
@@ -792,7 +769,6 @@ export default class SSlider extends HTMLElement {
     onUpdate() {
         const self = this;
 
-        console.log('UPDTE');
         self._$root.style.setProperty(
             '--s-slider-slide',
             self.state.getCurrentSlideIdx(),

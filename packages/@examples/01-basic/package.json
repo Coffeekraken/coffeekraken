@@ -40,5 +40,19 @@
         "postcss-import": "^15.0.0",
         "postcss-nested": "^5.0.6",
         "postcss-property-lookup": "^3.0.0"
+    },
+    "exports": {
+        "./shared/*": {
+            "require": "./dist/pkg/cjs/shared/*.js",
+            "import": "./dist/pkg/esm/shared/*.js"
+        },
+        "./node/*": {
+            "require": "./dist/pkg/cjs/node/*.js",
+            "import": "./dist/pkg/esm/node/*.js"
+        },
+        "./js/*": {
+            "require": "./dist/pkg/cjs/js/*.js",
+            "import": "./dist/pkg/esm/js/*.js"
+        }
     }
 }

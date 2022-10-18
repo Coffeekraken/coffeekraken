@@ -125,6 +125,12 @@ export default class SSpecs extends __SClass {
             }
         }
 
+        // take the "_specs" static property of the SInterface class
+        // if exists
+        if (int._specs) {
+            specJson = __deepMerge(specJson, int._specs);
+        }
+
         // resolve the @...
         const specs = new SSpecs(settings);
         specJson = specs.resolve(specJson);

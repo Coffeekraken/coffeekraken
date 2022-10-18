@@ -21,6 +21,9 @@ export default function () {
         },
         react: {
             plugins: []
+        },
+        vue3: {
+            plugins: []
         }
     };
 

@@ -223,7 +223,10 @@ class SMitosis extends __SClass {
                     configFile: false,
                     root: __packageRootDir(),
                     resolve: {
-                        dedupe: ['react', 'react-dom'],
+                        dedupe: ['react', 'react-dom', 'vue'],
+                        alias: {
+                            vue: 'vue/dist/vue.esm-bundler.js',
+                        },
                     },
                     optimizeDeps: {
                         esbuildOptions: {

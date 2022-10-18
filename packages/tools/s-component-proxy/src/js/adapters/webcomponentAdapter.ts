@@ -5,8 +5,15 @@ import type {
 } from '../SComponentProxy';
 
 export default {
-    id: 'mitosisWebcomponent',
+    id: 'webcomponent',
     test(component: ISComponentProxyComponent) {
+        if (
+            component.target === 'webcomponent' ||
+            component.metas?.type === 'webcomponent'
+        ) {
+            return true;
+        }
+
         let isHtmlElement = false;
         try {
             const extendsStack = __getExtendsStack(component.default);

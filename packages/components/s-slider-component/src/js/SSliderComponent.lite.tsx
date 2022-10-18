@@ -285,19 +285,6 @@ useMetadata({
 export const DEFAULT_PROPS = __SSliderComponentInterface.defaults();
 export const metas = {
     interface: __SSliderComponentInterface,
-    preview: `
-        <s-slider>
-            <div s-slider-slide>
-                <img src="https://picsum.photos/1600/900?1" />
-            </div>
-            <div s-slider-slide>
-                <img src="https://picsum.photos/1600/900?2" />
-            </div>
-            <div s-slider-slide>
-                <img src="https://picsum.photos/1600/900?3" />
-            </div>
-        </s-slider>
-    `,
 };
 
 export default function SSlider(props: Props) {
@@ -328,8 +315,6 @@ export default function SSlider(props: Props) {
                 console.log(e);
             }
 
-            console.log('DEFAU', DEFAULT_PROPS);
-
             state._behaviors = {
                 default({ fromSlideId, toSlideId }) {
                     const $slidesWrapper = $slides;
@@ -338,22 +323,6 @@ export default function SSlider(props: Props) {
 
                     if (!$slidesWrapper._isBehaviorInited) {
                         $slidesWrapper._isBehaviorInited = true;
-
-                        // const $slideElements = $slides.querySelector('slot');
-                        // console.log('^slot', slots.assignedNodes());
-
-                        // state._slideElements.forEach(($slide) => {
-                        //     const observer = new IntersectionObserver(
-                        //         (entries, observer) => {
-                        //             console.log('mutations', entries);
-                        //         },
-                        //         {
-                        //             // root: $slidesWrapper,
-                        //         },
-                        //     );
-                        //     console.log('SLIT', $slide);
-                        //     observer.observe($slide);
-                        // });
 
                         let scrollTimeout;
                         $slidesWrapper.addEventListener('scroll', (e) => {
@@ -389,16 +358,12 @@ export default function SSlider(props: Props) {
                                 state.goTo(
                                     state.getSlideIdByElement($inViewSlide),
                                 );
-
-                                // console.log($inViewSlide);
                             }, 100);
                         });
                     }
 
                     const $from = state.getSlideElementById(fromSlideId),
                         $to = state.getSlideElementById(toSlideId);
-
-                    console.log('f', fromSlideId, $from, $to);
 
                     const fromRect = $from.getBoundingClientRect(),
                         toRect = $to.getBoundingClientRect(),
@@ -523,14 +488,6 @@ export default function SSlider(props: Props) {
             state.goTo(state.getNextSlideId());
         },
         goTo(slideId) {
-            console.log(
-                'Go to',
-                slideId,
-                state._currentSlideId,
-                state._slidesIds,
-                state._slideElements,
-            );
-
             // call the behavior
             const behaviorFn =
                 props.behaviors?.[props.behavior] ??
@@ -553,7 +510,6 @@ export default function SSlider(props: Props) {
     });
 
     onUpdate(() => {
-        console.log('UPDTE');
         $root.style.setProperty('--s-slider-slide', state.getCurrentSlideIdx());
         $root.style.setProperty('--s-slider-total', state._slidesIds.length);
     });

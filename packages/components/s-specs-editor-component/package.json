@@ -1,68 +1,68 @@
 {
-  "name": "@coffeekraken/s-specs-editor-component",
-  "version": "2.0.0-alpha.20",
-  "description": "",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@builder.io/mitosis": "^0.0.61",
-    "@builder.io/mitosis-cli": "^0.0.22",
-    "@coffeekraken/s-clipboard-copy-component": "^2.0.0-alpha.20",
-    "@coffeekraken/s-component": "^2.0.0-alpha.20",
-    "@coffeekraken/s-interface": "^2.0.0-alpha.20",
-    "@coffeekraken/s-mitosis": "^2.0.0-alpha.20",
-    "@coffeekraken/sugar": "^2.0.0-alpha.20",
-    "@prettier/plugin-php": "^0.18.9",
-    "glob": "^8.0.3",
-    "highlight.js": "^11.6.0",
-    "html-tags": "^3.2.0",
-    "known-css-properties": "^0.25.0",
-    "prettier": "^2.7.1",
-    "react": "^18.2.0"
-  },
-  "exports": {
-    ".": {
-      "require": "./dist/pkg/cjs/js/lazy.js",
-      "import": "./dist/pkg/esm/js/lazy.js"
+    "name": "@coffeekraken/s-specs-editor-component",
+    "version": "2.0.0-alpha.20",
+    "description": "",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "storybook": "start-storybook -p 6006",
+        "build-storybook": "build-storybook"
     },
-    "./lazy": {
-      "require": "./dist/pkg/cjs/js/lazy.js",
-      "import": "./dist/pkg/esm/js/lazy.js"
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@builder.io/mitosis": "^0.0.61",
+        "@builder.io/mitosis-cli": "^0.0.22",
+        "@coffeekraken/s-clipboard-copy-component": "^2.0.0-alpha.20",
+        "@coffeekraken/s-component": "^2.0.0-alpha.20",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.20",
+        "@coffeekraken/s-mitosis": "^2.0.0-alpha.20",
+        "@coffeekraken/sugar": "^2.0.0-alpha.20",
+        "@prettier/plugin-php": "^0.18.9",
+        "glob": "^8.0.3",
+        "highlight.js": "^11.6.0",
+        "html-tags": "^3.2.0",
+        "known-css-properties": "^0.25.0",
+        "prettier": "^2.7.1",
+        "react": "^18.2.0"
     },
-    "./webcomponent": {
-      "require": "./src/js/build/webcomponent/SSpecsEditorComponent.ts",
-      "import": "./src/js/build/webcomponent/SSpecsEditorComponent.ts"
+    "exports": {
+        ".": {
+            "require": "./dist/pkg/cjs/js/lazy.js",
+            "import": "./dist/pkg/esm/js/lazy.js"
+        },
+        "./lazy": {
+            "require": "./dist/pkg/cjs/js/lazy.js",
+            "import": "./dist/pkg/esm/js/lazy.js"
+        },
+        "./webcomponent": {
+            "require": "./src/js/build/webcomponent/SSpecsEditorComponent.ts",
+            "import": "./src/js/build/webcomponent/SSpecsEditorComponent.ts"
+        },
+        "./shared/*": {
+            "require": "./dist/pkg/cjs/shared/*.js",
+            "import": "./dist/pkg/esm/shared/*.js"
+        },
+        "./node/*": {
+            "require": "./dist/pkg/cjs/node/*.js",
+            "import": "./dist/pkg/esm/node/*.js"
+        },
+        "./js/*": {
+            "require": "./dist/pkg/cjs/js/*.js",
+            "import": "./dist/pkg/esm/js/*.js"
+        }
     },
-    "./shared/*": {
-      "require": "./dist/pkg/cjs/shared/*.js",
-      "import": "./dist/pkg/esm/shared/*.js"
-    },
-    "./node/*": {
-      "require": "./dist/pkg/cjs/node/*.js",
-      "import": "./dist/pkg/esm/node/*.js"
-    },
-    "./js/*": {
-      "require": "./dist/pkg/cjs/js/*.js",
-      "import": "./dist/pkg/esm/js/*.js"
+    "devDependencies": {
+        "@babel/core": "^7.19.3",
+        "@mdx-js/react": "^1.6.22",
+        "@storybook/addon-actions": "^6.5.12",
+        "@storybook/addon-docs": "^6.5.12",
+        "@storybook/addon-essentials": "^6.5.12",
+        "@storybook/addon-interactions": "^6.5.12",
+        "@storybook/addon-links": "^6.5.12",
+        "@storybook/builder-webpack4": "^6.5.12",
+        "@storybook/manager-webpack4": "^6.5.12",
+        "@storybook/react": "^6.5.12",
+        "@storybook/testing-library": "^0.0.13",
+        "babel-loader": "^8.2.5"
     }
-  },
-  "devDependencies": {
-    "@babel/core": "^7.19.3",
-    "@mdx-js/react": "^1.6.22",
-    "@storybook/addon-actions": "^6.5.12",
-    "@storybook/addon-docs": "^6.5.12",
-    "@storybook/addon-essentials": "^6.5.12",
-    "@storybook/addon-interactions": "^6.5.12",
-    "@storybook/addon-links": "^6.5.12",
-    "@storybook/builder-webpack4": "^6.5.12",
-    "@storybook/manager-webpack4": "^6.5.12",
-    "@storybook/react": "^6.5.12",
-    "@storybook/testing-library": "^0.0.13",
-    "babel-loader": "^8.2.5"
-  }
 }

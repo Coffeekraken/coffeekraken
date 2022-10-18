@@ -21,6 +21,23 @@ import { __easeOutQuad } from '@coffeekraken/sugar/easing';
  */
 
 export default class SSliderComponentInterface extends __SInterface {
+    static get _specs() {
+        return {
+            preview: `
+                <s-slider>
+                    <div s-slider-slide>
+                        <img src="https://picsum.photos/1600/900?1" />
+                    </div>
+                    <div s-slider-slide>
+                        <img src="https://picsum.photos/1600/900?2" />
+                    </div>
+                    <div s-slider-slide>
+                        <img src="https://picsum.photos/1600/900?3" />
+                    </div>
+                </s-slider>
+            `,
+        };
+    }
     static get _definition() {
         return {
             direction: {

@@ -1,13 +1,10 @@
-import { createElement, isValidElement } from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client';
 
 export default {
     id: 'react',
     test(component: any) {
-        return (
-            isValidElement(component.default) ||
-            component.metas?.type === 'react'
-        );
+        return component.metas?.type === 'react';
     },
     create(
         component: any,
@@ -16,7 +13,8 @@ export default {
         console.log('create', component);
 
         const root = createRoot(settings.$root);
-        root.render(createElement(component.default, {}, null));
+
+        root.render(React.createElement(component.default, {}, null));
         // const $root = settings.$root ?? document.body;
         // component.define();
         // $root.innerHTML = html;

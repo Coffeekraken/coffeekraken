@@ -1,6 +1,7 @@
 import __SVitePostcssPlugin from '@coffeekraken/s-vite-postcss-plugin';
 import { __loadConfigFile } from '@coffeekraken/sugar/load';
 import { __deepMerge } from '@coffeekraken/sugar/object';
+import __vue from '@vitejs/plugin-vue';
 
 export async function preprocess(api) {
     const config = (await __loadConfigFile('mitosis.config.js')) ?? {};
@@ -25,11 +26,14 @@ export default function (api) {
             logLevel: 'error',
 
             get plugins() {
-                return [__SVitePostcssPlugin()];
+                return [__SVitePostcssPlugin(), __vue()];
             },
 
             resolve: {
-                dedupe: ['react', 'react-dom'],
+                alias: {
+                    // vue: 'vue/dist/vue.esm-bundler.js',
+                },
+                dedupe: ['react', 'react-dom', 'vue'],
             },
 
             server: {

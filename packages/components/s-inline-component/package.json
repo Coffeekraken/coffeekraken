@@ -16,8 +16,8 @@
     },
     "exports": {
         ".": {
-            "require": "./dist/pkg/cjs/js/lazy.js",
-            "import": "./dist/pkg/esm/js/lazy.js"
+            "require": "./dist/pkg/cjs/js/exports.js",
+            "import": "./dist/pkg/esm/js/exports.js"
         },
         "./lazy": {
             "require": "./dist/pkg/cjs/js/lazy.js",
@@ -39,5 +39,7 @@
             "require": "./dist/pkg/cjs/js/*.js",
             "import": "./dist/pkg/esm/js/*.js"
         }
-    }
+    },
+    "main": "dist/pkg/cjs/js/exports.js",
+    "module": "dist/pkg/esm/js/exports.js"
 }

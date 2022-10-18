@@ -1,8 +1,9 @@
 import __SClass from '@coffeekraken/s-class';
 import __SInterface from '@coffeekraken/s-interface';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __mitosisWebcomponentAdapter from './adapters/mitosisWebcomponentAdapter';
-import __reactAdapter from './adapters/reactAdapter';
+import __webcomponentAdapter from './adapters/webcomponentAdapter';
+// import __reactAdapter from './adapters/reactAdapter';
+import __vue3Adapter from './adapters/vue3Adapter';
 
 /**
  * @name                SComponentProxy
@@ -34,14 +35,16 @@ import __reactAdapter from './adapters/reactAdapter';
 export interface ISComponentProxySettings {}
 
 export interface ISComponentProxyMetas {
-    type: 'webcomponent' | 'react';
+    type: 'webcomponent' | 'react' | 'vue3' | 'svelte' | 'solid';
     interface: __SInterface;
     preview: string;
 }
 
 export interface ISComponentProxyComponent {
     default: any;
+    path: string;
     metas?: Partial<ISComponentProxyMetas>;
+    target: string;
     preview?: string;
     define?: Function;
     DEFAULT_PROPS?: any;
@@ -64,6 +67,7 @@ export interface ISComponentProxyAdapter {
 export interface ISComponentProxyCreateSettings {
     $root: HTMLElement;
     html: string;
+    external: any;
 }
 
 class SComponentProxy extends __SClass {
@@ -141,6 +145,7 @@ class SComponentProxy extends __SClass {
         );
         this.component = {
             default: null,
+            path: null,
             metas: {},
             preview: '',
             define: null,
@@ -153,6 +158,8 @@ class SComponentProxy extends __SClass {
             SComponentProxy._registeredAdapter,
         )) {
             if (adapter.test(this.component)) {
+                console.log('OUN', adapter.id);
+
                 this.adapter = adapter;
                 break;
             }
@@ -166,11 +173,24 @@ class SComponentProxy extends __SClass {
         }
     }
 
-    // _apply(component: ISComponentProxyComponent): any {
-    //     if (!component) return;
-    //     this.component.default = component;
-    //     return component;
-    // }
+    /**
+     * @name            load
+     * @type            Function
+     * @async
+     *
+     * This method allows you to load the component you want to use
+     *
+     * @param       {any}           props           The properties you want to set
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    async load(settings?: Partial<ISComponentProxyCreateSettings>): void {
+        if (!this.adapter.load) {
+            return await import(this.component.path);
+        }
+        return await this.adapter.load(this.component, settings);
+    }
 
     /**
      * @name            create
@@ -183,7 +203,7 @@ class SComponentProxy extends __SClass {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    create(settings: Partial<ISComponentProxyCreateSettings>): void {
+    create(settings?: Partial<ISComponentProxyCreateSettings>): void {
         this.adapter.create(this.component, settings);
     }
 
@@ -204,7 +224,8 @@ class SComponentProxy extends __SClass {
 }
 
 // register default adapters
-SComponentProxy.registerAdapter(__mitosisWebcomponentAdapter);
-SComponentProxy.registerAdapter(__reactAdapter);
+SComponentProxy.registerAdapter(__webcomponentAdapter);
+// SComponentProxy.registerAdapter(__reactAdapter);
+SComponentProxy.registerAdapter(__vue3Adapter);
 
 export default SComponentProxy;

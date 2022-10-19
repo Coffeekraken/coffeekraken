@@ -68,7 +68,7 @@ export default function (api) {
          */
         mode: 'development',
         resolve: {
-            dedupe: ['react', 'react-dom', 'vue'],
+            dedupe: ['react', 'react-dom'],
             // preserveSymlinks: true,
             alias: {
                 /**
@@ -82,7 +82,8 @@ export default function (api) {
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                vue: 'vue/dist/vue.esm-bundler.js',
+                // vue: 'vue/dist/vue.esm-bundler.js',
+                // vue: 'vue/dist/vue.global.js',
             },
         },
         /**
@@ -226,8 +227,6 @@ export default function (api) {
             get assetsDir() {
                 return '';
             },
-
-            rollupOptions: {},
         },
         server: {
             // watch: {

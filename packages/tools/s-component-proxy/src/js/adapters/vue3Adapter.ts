@@ -1,4 +1,5 @@
-import { createApp } from 'vue';
+import { createApp } from 'vue/dist/vue.esm-bundler';
+// import 'https://unpkg.com/vue@3/dist/vue.global.js';
 
 import type {
     ISComponentProxyComponent,
@@ -19,6 +20,8 @@ export default {
     },
     async load(component: ISComponentProxyComponent) {
         const imported = await import(component.path);
+        console.log('imported', imported);
+        // imported.name = 'SSlider';
         component.default = imported.default;
         return imported;
 
@@ -35,10 +38,14 @@ export default {
     ): any {
         console.log('create', component);
 
-        const app = createApp({});
-        app.component(component.tagName, component.default);
+        const app = createApp({
+            data() {
+                return {};
+            },
+            template: component.specs.preview,
+        });
+        app.component('SSlider', component.default);
         const $root = settings.$root ?? document.body;
-        // // $root.innerHTML = component.specs?.preview;
         app.mount($root);
 
         // const app = createApp(component.default);

@@ -1,29 +1,31 @@
 {
     "name": "@coffeekraken/s-carpenter",
     "version": "2.0.0-alpha.20",
-    "description": "Nice little app that let you display, control and play with your components, section, etc...",
-    "type": "module",
-    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+    "description": "Display easily your components library as well as your sections, etc...",
+    "homepage": "https://coffeekraken.io",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/cli": "^2.0.0-alpha.20",
-        "@coffeekraken/s-class": "^2.0.0-alpha.20",
-        "@coffeekraken/s-duration": "^2.0.0-alpha.20",
-        "@coffeekraken/s-env": "^2.0.0-alpha.20",
-        "@coffeekraken/s-favicon-builder": "^2.0.0-alpha.20",
-        "@coffeekraken/s-frontspec": "^2.0.0-alpha.20",
-        "@coffeekraken/s-images-builder": "^2.0.0-alpha.20",
+        "@coffeekraken/s-activate-feature": "^2.0.0-alpha.20",
+        "@coffeekraken/s-component": "^2.0.0-alpha.20",
+        "@coffeekraken/s-component-proxy": "^2.0.0-alpha.20",
         "@coffeekraken/s-interface": "^2.0.0-alpha.20",
         "@coffeekraken/s-log": "^2.0.0-alpha.20",
-        "@coffeekraken/s-markdown-builder": "^2.0.0-alpha.20",
         "@coffeekraken/s-postcss-builder": "^2.0.0-alpha.20",
-        "@coffeekraken/s-process": "^2.0.0-alpha.20",
         "@coffeekraken/s-promise": "^2.0.0-alpha.20",
-        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.20",
-        "@coffeekraken/s-sugar-json": "^2.0.0-alpha.20",
-        "@coffeekraken/s-vite": "^2.0.0-alpha.20",
+        "@coffeekraken/s-specs": "^2.0.0-alpha.20",
+        "@coffeekraken/s-specs-editor-component": "^2.0.0-alpha.20",
+        "@coffeekraken/s-view-renderer": "^2.0.0-alpha.20",
         "@coffeekraken/sugar": "^2.0.0-alpha.20",
-        "recursive-copy": "^2.0.14"
+        "@vitejs/plugin-vue": "^3.1.2",
+        "chokidar": "^3.5.3",
+        "express": "^4.18.2",
+        "glob": "^8.0.3",
+        "vite": "^3.1.7",
+        "vite-plugin-dynamic-import": "^1.2.2"
     },
     "main": "dist/pkg/cjs/node/exports.js",
     "module": "dist/pkg/esm/node/exports.js",
@@ -44,6 +46,5 @@
             "require": "./dist/pkg/cjs/js/*.js",
             "import": "./dist/pkg/esm/js/*.js"
         }
-    },
-    "homepage": "https://coffeekraken.io"
+    }
 }

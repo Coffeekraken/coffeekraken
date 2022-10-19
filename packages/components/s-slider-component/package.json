@@ -10,12 +10,10 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "@builder.io/mitosis": "^0.0.74",
-        "@builder.io/mitosis-cli": "^0.0.22",
+        "@coffeekraken/s-carpenter": "^2.0.0-alpha.20",
         "@coffeekraken/s-clipboard-copy-component": "^2.0.0-alpha.20",
         "@coffeekraken/s-component": "^2.0.0-alpha.20",
         "@coffeekraken/s-interface": "^2.0.0-alpha.20",
-        "@coffeekraken/s-mitosis": "^2.0.0-alpha.20",
         "@coffeekraken/s-specs-editor-component": "^2.0.0-alpha.20",
         "@coffeekraken/sugar": "^2.0.0-alpha.20",
         "@prettier/plugin-php": "^0.18.9",
@@ -23,7 +21,8 @@
         "highlight.js": "^11.6.0",
         "html-tags": "^3.2.0",
         "known-css-properties": "^0.25.0",
-        "prettier": "^2.7.1"
+        "prettier": "^2.7.1",
+        "vue": "^3.2.41"
     },
     "exports": {
         ".": {

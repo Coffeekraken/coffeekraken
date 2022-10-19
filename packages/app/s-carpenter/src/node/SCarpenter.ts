@@ -1,40 +1,89 @@
 import __SClass from '@coffeekraken/s-class';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
+import __SSpecs from '@coffeekraken/s-specs';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __SViewRenderer from '@coffeekraken/s-view-renderer';
+import { __dirname } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import { __onProcessExit } from '@coffeekraken/sugar/process';
-import __glob from 'glob';
-import __path from 'path';
+import __express from 'express';
+import __SCarpenterStartParamsInterface from './interface/SCarpenterStartParamsInterface';
 
-export interface ISCarpenterSettings {}
+/**
+ * @name                SCarpenter
+ * @namespace           node
+ * @type                Class
+ * @extends             SPromise
+ * @status              wip
+ *
+ * This class allows you to use the display your components library as well as your sections, etc... in a
+ * nice and easy interface that let you customize the props of your components live
+ *
+ * @param           {Object}        [settings={}]           An object of settings to configure your SCarpenter instance:
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @example             js
+ * import SCarpenter from '@coffeekraken/s-carpenter';
+ * const carpenter = new SCarpenter();
+ * carpenter.start();
+ *
+ * @since           2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
 
 export interface ISCarpenterStartParams {
     port: number;
 }
 
+export interface ISCarpenterSettingsSource {
+    title: string;
+    inDir: string;
+    glob: string;
+}
+
+export interface ISCarpenterSettingsSources {
+    [key: string]: Partial<ISCarpenterSettingsSource>;
+}
+
+export interface ISCarpenterSettings {
+    sources: ISCarpenterSettingsSources;
+}
+
 class SCarpenter extends __SClass {
     /**
      * @name            constructor
-     * @type              Function
+     * @type            Function
      * @constructor
      *
      * Constructor
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings?: Partial<ISCarpenterSettings>) {
-        super(__deepMerge({}, settings ?? {}));
+        super(
+            __deepMerge(
+                {
+                    metas: {
+                        id: 'SCarpenter',
+                    },
+                },
+                __SSugarConfig.get('carpenter'),
+                settings || {},
+            ),
+        );
     }
 
     /**
      * @name          start
      * @type          Function
      *
-     * This method allows you to start a server in order to develop your mitosis component easily
-     * with feature like multiple frameworks testing, auto compilation, etc...
+     * This method allows you to start a server in order display your components library in a nice and coherent interface
      *
      * @param         {Partial<ISCarpenterStartParams>}          params        The params to use to start your mitosis env
      * @return        {SPromise}                                     A promise resolved once the scan process has been finished
@@ -44,79 +93,70 @@ class SCarpenter extends __SClass {
      */
     start(params: Partial<ISCarpenterStartParams>): Promise<any> {
         const finalParams = <ISCarpenterStartParams>(
-            __deepMerge(__SMitosisStartParamsInterface.defaults(), params)
+            __deepMerge(__SCarpenterStartParamsInterface.defaults(), params)
         );
+
         return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
             emit('log', {
                 type: __SLog.TYPE_INFO,
-                value: `<yellow>[start]</yellow> Starting a new mitosis server...`,
+                value: `<yellow>[start]</yellow> Starting a new carpenter server...`,
             });
 
-            const app: any = __express();
+            const viewRenderer = new __SViewRenderer({
+                rootDirs: [`${__packageRootDir(__dirname())}/src/views`],
+            });
+
+            const app: any = __express(),
+                watchers = {},
+                specsBySources = {};
+
+            for (let [key, source] of Object.entries(this.settings.sources)) {
+                // watchers[key] = __chokidar.watch(source.glob, {
+                //     cwd: source.inDir,
+                //     ignoreInitial: false,
+                // });
+                // watchers[key].on('add', (newFileRelPath) => {
+                //     const newFileAbsPath = `${source.inDir}/${newFileRelPath}`;
+                //     const spec = new __SSpecs();
+                //     console.log(newFileAbsPath);
+                //     console.log(spec.read(newFileAbsPath));
+                // });
+                // watchers[key].on('change', (updatedFilePath) => {});
+
+                if (!specsBySources[key]) {
+                    specsBySources[key] = {
+                        // @ts-ignore
+                        ...source,
+                        specs: [],
+                    };
+                }
+
+                // console.log(key, source);
+
+                const specs = new __SSpecs();
+                const specsArray = specs.list(source.specsNamespaces);
+
+                specsBySources[key].specs = [
+                    ...specsBySources[key].specs,
+                    specsArray,
+                ];
+
+                specsArray.forEach((spec) => {
+                    // listen for request on that particular component
+                    app.get(`/${spec.dotpath}`, async (req, res) => {
+                        console.log(specsBySources);
+
+                        const result = await viewRenderer.render('index', {});
+
+                        res.type('text/html');
+                        res.send(result.value);
+                    });
+                });
+            }
 
             app.get('/', async (req, res) => {
-                const viewRenderer = new __SViewRenderer({
-                    rootDirs: [`${__packageRootDir(__dirname())}/src/views`],
-                });
-
-                const componentFiles = __glob.sync('src/js/build/**/*.*', {
-                        cwd: __packageRootDir(),
-                    }),
-                    components: any[] = [];
-
-                const componentInterfacePath = __glob.sync(
-                    'dist/pkg/esm/js/interface/*.*',
-                    {
-                        cwd: __packageRootDir(),
-                    },
-                );
-
-                let ComponentInterface,
-                    componentSpecs = {};
-
-                if (componentInterfacePath.length) {
-                    const finalComponentInterfacePath = `../../../../${__path.relative(
-                        __packageRootDir(__dirname()),
-                        `${__packageRootDir()}/${componentInterfacePath[0]}`,
-                    )}`;
-
-                    // import the interface
-                    ComponentInterface = (
-                        await import(finalComponentInterfacePath)
-                    ).default;
-
-                    // convert interface to specs
-                    componentSpecs = __SSpecs.fromInterface(ComponentInterface);
-                }
-
-                for (let i = 0; i < componentFiles.length; i++) {
-                    const componentFilePath = componentFiles[i];
-                    const target = componentFilePath.split('/')[3],
-                        absoluteComponentFilePath = `${__packageRootDir()}/${componentFilePath}`,
-                        name = __path
-                            .basename(componentFilePath)
-                            .replace(__path.extname(componentFilePath), '')
-                            .replace(/Component$/, '');
-
-                    components.push({
-                        target,
-                        name,
-                        specs: componentSpecs,
-                        tagName: __dashCase(name),
-                        path: `/${componentFilePath}`,
-                    });
-                }
-
-                const result = await viewRenderer.render('index', {
-                    ...params,
-                    components,
-                });
-
-                // const htmlFilePath = `${__packageRootDir(
-                //     __dirname(),
-                // )}/src/public/index.html`;
                 res.type('text/html');
-                res.send(result.value);
+                res.send('Hello');
             });
 
             app.get('/dist/css/index.css', async (req, res) => {
@@ -134,32 +174,14 @@ class SCarpenter extends __SClass {
 
             let server;
             await new Promise((_resolve) => {
-                server = app.listen(8082, () => {
+                server = app.listen(finalParams.port, () => {
                     _resolve();
                 });
             });
 
-            const viteServer = await createServer(
-                __deepMerge(__SSugarConfig.get('mitosis.vite'), {
-                    // any valid user config options, plus `mode` and `configFile`
-                    configFile: false,
-                    root: __packageRootDir(),
-                    optimizeDeps: {
-                        esbuildOptions: {
-                            // mainFields: ['module', 'main'],
-                            resolveExtensions: ['.js', '.ts'],
-                        },
-                    },
-                    server: {
-                        port: finalParams.port,
-                    },
-                }),
-            );
-            await viteServer.listen();
-
             emit('log', {
                 type: __SLog.TYPE_INFO,
-                value: `<green>[start]</green> Your mitosis server is available at:`,
+                value: `<green>[start]</green> Your carpenter server is available at:`,
             });
             emit('log', {
                 type: __SLog.TYPE_INFO,
@@ -172,7 +194,6 @@ class SCarpenter extends __SClass {
                 });
                 return new Promise((resolve) => {
                     server.close(async () => {
-                        await viteServer.close();
                         // @ts-ignore
                         resolve();
                     });
@@ -181,4 +202,5 @@ class SCarpenter extends __SClass {
         });
     }
 }
+
 export default SCarpenter;

@@ -3,7 +3,10 @@ import __SInterface from '@coffeekraken/s-interface';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __isPlainObject } from '@coffeekraken/sugar/is';
 import { __deepMap, __deepMerge, __get } from '@coffeekraken/sugar/object';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
+import __glob from 'glob';
+import __path from 'path';
 
 /**
  * @name            SSpecs
@@ -39,6 +42,16 @@ import __fs from 'fs';
 
 export interface ISSpecsSettings {
     namespaces: Record<string, string[]>;
+}
+
+export interface ISSpecsListResult {
+    name: string;
+    filename: string;
+    dotpath: string;
+    namespace: string;
+    path: string;
+    dir: string;
+    read: Function;
 }
 
 export default class SSpecs extends __SClass {
@@ -155,6 +168,25 @@ export default class SSpecs extends __SClass {
                 '[SSpecs] You MUST at least specify some "namespaces" folders to search specs files in...',
             );
         }
+
+        const monorepoRootPath = __packageRootDir(process.cwd(), {
+            highest: true,
+        });
+        for (let [namespace, dirs] of Object.entries(
+            this.settings.namespaces,
+        )) {
+            this.settings.namespaces[namespace].forEach((dir, i) => {
+                if (dir.startsWith('./node_modules')) {
+                    this.settings.namespaces[namespace].push(
+                        `${monorepoRootPath}${dir.replace(/^\./, ``)}`,
+                    );
+                }
+                if (dir.startsWith('.')) {
+                    this.settings.namespaces[namespace][i] =
+                        __path.resolve(dir);
+                }
+            });
+        }
     }
 
     /**
@@ -171,8 +203,9 @@ export default class SSpecs extends __SClass {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     read(specDotPath) {
-        let finalValue;
+        let finalSpecFilePath;
 
+        // if (!finalSpecFilePath) {
         let definedNamespaces = this.settings.namespaces;
         let definesNamespacesKeys = Object.keys(definedNamespaces);
 
@@ -208,8 +241,6 @@ export default class SSpecs extends __SClass {
         );
         let internalPath = `${internalDotPath.split('.').join('/')}.spec.json`;
 
-        let finalSpecFilePath;
-
         // loop on each registered namespaces directories to check if the specDotPath
         // correspond to a file in one of them...
         const dirs = this.settings.namespaces[currentNamespace];
@@ -238,6 +269,7 @@ export default class SSpecs extends __SClass {
                 break;
             }
         }
+        // }
 
         if (!finalSpecFilePath) {
             throw new Error(
@@ -251,22 +283,18 @@ export default class SSpecs extends __SClass {
         );
 
         // traverse each values to resolve them if needed
-        specJson = this.resolve(specJson);
+        specJson = __deepMap(specJson, ({ object, prop, value, path }) => {
+            return this.resolve(value, object);
+        });
 
-        // check if the spec extends another
         if (specJson.extends) {
-            if (
-                typeof specJson.extends == 'string' &&
-                specJson.extends.slice(0, 1) === '@'
-            ) {
+            if (specJson.extends.startsWith('@')) {
                 throw new Error(
                     `The "extends": "${specJson.extends}" property cannot start with an "@"`,
                 );
             }
-
             let extendsJson = this.read(specJson.extends);
             specJson = __deepMerge(extendsJson, specJson);
-            delete specJson.extends;
         }
 
         // if we have an internal spec dotpath
@@ -276,6 +304,73 @@ export default class SSpecs extends __SClass {
 
         // return the getted specJson
         return specJson;
+    }
+
+    /**
+     * @name            list
+     * @type            Function
+     * @platform        php
+     * @status          beta
+     *
+     * This method allows you to list all the available spec files inside a particular namespace(s), or simply all.
+     *
+     * @param       {String}        $namespaces         An array of namespaces to list the specs from. If not set, list all the specs from all the namespaces
+     * @return      {Any}                               A list of all the specs files available
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    list(namespaces = []) {
+        let results: ISSpecsListResult[] = [],
+            definedNamespaces = this.settings.namespaces,
+            definedNamespacesKeys: string[] = Object.keys(definedNamespaces),
+            finalNamespaces: string[] = [];
+
+        if (!namespaces.length) {
+            finalNamespaces = definedNamespacesKeys;
+        } else {
+            definedNamespacesKeys.forEach((definedNamespace) => {
+                namespaces.forEach((passedNamespace) => {
+                    if (definedNamespace.startsWith(passedNamespace)) {
+                        if (!finalNamespaces.includes(definedNamespace)) {
+                            finalNamespaces.push(definedNamespace);
+                        }
+                    }
+                });
+            });
+        }
+
+        finalNamespaces.forEach((namespace) => {
+            const folders = definedNamespaces[namespace];
+
+            folders.forEach((folder) => {
+                const specFiles = __glob.sync(`${folder}/**/*.spec.json`);
+
+                specFiles.forEach((specFilePath) => {
+                    const filename = __path.basename(specFilePath),
+                        name = filename.replace('.spec.json', ''),
+                        dotpath = `${namespace}${specFilePath
+                            .replace('.spec.json', '')
+                            .replace(folder, '')
+                            .split('/')
+                            .join('.')}`;
+
+                    results.push({
+                        name,
+                        filename,
+                        dotpath,
+                        namespace,
+                        path: specFilePath,
+                        dir: __path.dirname(specFilePath),
+                        read: () => {
+                            return this.read(dotpath);
+                        },
+                    });
+                });
+            });
+        });
+
+        return results;
     }
 
     /**
@@ -291,19 +386,7 @@ export default class SSpecs extends __SClass {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    resolve(specJson: any): any {
-        // traverse each values to resolve them if needed
-        specJson = __deepMap(specJson, ({ object, prop, value, path }) => {
-            return this._resolve(value, specJson);
-        });
-        return specJson;
-    }
-
-    /**
-     * This method take a value (string, boolean, etc...) and try to resolve it
-     * if it is something like "@this.props...", or "@sugar.views...", etc...
-     */
-    _resolve(value, specJson) {
+    resolve(value: any, specJson: any): any {
         let newValue = value;
 
         if (typeof value === 'string') {
@@ -312,7 +395,7 @@ export default class SSpecs extends __SClass {
                 newValue = __get(specJson, internalDotPath);
                 if (Array.isArray(newValue) || __isPlainObject(newValue)) {
                     newValue = __deepMap(newValue, ({ value: v }) => {
-                        return this._resolve(v, newValue);
+                        return this.resolve(v, newValue);
                     });
                 }
             } else if (value.startsWith('@config.')) {

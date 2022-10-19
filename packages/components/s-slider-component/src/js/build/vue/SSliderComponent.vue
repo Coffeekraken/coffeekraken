@@ -102,7 +102,7 @@ export const DEFAULT_PROPS = __SSliderComponentInterface.defaults();
 export const metas = {
     interface: __SSliderComponentInterface,
     preview: `
-      <s-slider>
+      <SSlider>
           <div s-slider-slide>
               <img src="https://picsum.photos/1600/900?1" />
           </div>
@@ -112,7 +112,7 @@ export const metas = {
           <div s-slider-slide>
               <img src="https://picsum.photos/1600/900?3" />
           </div>
-      </s-slider>
+      </SSlider>
   `,
 };
 

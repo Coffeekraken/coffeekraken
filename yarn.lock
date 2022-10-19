@@ -2695,28 +2695,27 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-carpenter@workspace:packages/app/s-carpenter":
+"@coffeekraken/s-carpenter@^2.0.0-alpha.20, @coffeekraken/s-carpenter@workspace:packages/app/s-carpenter":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-carpenter@workspace:packages/app/s-carpenter"
   dependencies:
-    "@coffeekraken/cli": ^2.0.0-alpha.20
-    "@coffeekraken/s-class": ^2.0.0-alpha.20
-    "@coffeekraken/s-duration": ^2.0.0-alpha.20
-    "@coffeekraken/s-env": ^2.0.0-alpha.20
-    "@coffeekraken/s-favicon-builder": ^2.0.0-alpha.20
-    "@coffeekraken/s-frontspec": ^2.0.0-alpha.20
-    "@coffeekraken/s-images-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-activate-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-component-proxy": ^2.0.0-alpha.20
     "@coffeekraken/s-interface": ^2.0.0-alpha.20
     "@coffeekraken/s-log": ^2.0.0-alpha.20
-    "@coffeekraken/s-markdown-builder": ^2.0.0-alpha.20
     "@coffeekraken/s-postcss-builder": ^2.0.0-alpha.20
-    "@coffeekraken/s-process": ^2.0.0-alpha.20
     "@coffeekraken/s-promise": ^2.0.0-alpha.20
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
-    "@coffeekraken/s-sugar-json": ^2.0.0-alpha.20
-    "@coffeekraken/s-vite": ^2.0.0-alpha.20
+    "@coffeekraken/s-specs": ^2.0.0-alpha.20
+    "@coffeekraken/s-specs-editor-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-view-renderer": ^2.0.0-alpha.20
     "@coffeekraken/sugar": ^2.0.0-alpha.20
-    recursive-copy: ^2.0.14
+    "@vitejs/plugin-vue": ^3.1.2
+    chokidar: ^3.5.3
+    express: ^4.18.2
+    glob: ^8.0.3
+    vite: ^3.1.7
+    vite-plugin-dynamic-import: ^1.2.2
   languageName: unknown
   linkType: soft
 
@@ -3691,12 +3690,10 @@ __metadata:
   resolution: "@coffeekraken/s-slider-component@workspace:packages/components/s-slider-component"
   dependencies:
     "@babel/core": ^7.19.3
-    "@builder.io/mitosis": ^0.0.74
-    "@builder.io/mitosis-cli": ^0.0.22
+    "@coffeekraken/s-carpenter": ^2.0.0-alpha.20
     "@coffeekraken/s-clipboard-copy-component": ^2.0.0-alpha.20
     "@coffeekraken/s-component": ^2.0.0-alpha.20
     "@coffeekraken/s-interface": ^2.0.0-alpha.20
-    "@coffeekraken/s-mitosis": ^2.0.0-alpha.20
     "@coffeekraken/s-specs-editor-component": ^2.0.0-alpha.20
     "@coffeekraken/sugar": ^2.0.0-alpha.20
     "@mdx-js/react": ^1.6.22
@@ -3716,6 +3713,7 @@ __metadata:
     html-tags: ^3.2.0
     known-css-properties: ^0.25.0
     prettier: ^2.7.1
+    vue: ^3.2.41
   languageName: unknown
   linkType: soft
 

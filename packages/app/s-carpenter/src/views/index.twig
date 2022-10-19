@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mitosis development environment</title>
+
+    {# <!-- React -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script> #}
+
+    <script defer src="/dist/js/index.esm.js" type="module"></script>
+    <link rel="stylesheet" href="/dist/css/index.css" />
+
+</head>
+<body>
+    <div class="s-tabs">
+        {% for component in components %}
+            <div class="s-tabs__item" id="tab-{{ component.target }}" s-activate href="#component-{{ component.target }}" group="tabs" save-state>
+                {{ component.target }}
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="body">
+
+        {% for component in components %}
+
+            <div class="component" id="component-{{ component.target }}">
+
+                <div class="sidebar">
+                    <s-specs-editor id="{{ component.name|lower }}-{{ component.target }}" specs="{{ component.specs|json_encode }}"></s-specs-editor>
+                </div>
+
+                <div class="content" id="content-{{ component.target }}">
+
+                        <div id="app-{{ component.target }}" component="{{ component|json_encode }}">
+                            {{ component.target }}
+
+                            {{ component.preview|raw }}
+
+                        </div>
+
+                </div>
+                
+            </div>
+        {% endfor %}
+
+    </div>
+</body>
+</html>

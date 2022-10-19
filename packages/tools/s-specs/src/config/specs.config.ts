@@ -3,5 +3,8 @@ export default function (api) {
 
     return {
         namespaces: {},
+        get cwd() {
+            return api.config.storage.rootDir;
+        },
     };
 }

@@ -339,13 +339,12 @@ class SSpecs
             if (str_starts_with($value, '@this')) {
                 $internalDotPath = str_replace('@this.', '', $value);
                 $newValue = \Sugar\ar\get($specJson, $internalDotPath);
-                if (is_array($newValue) ||  is_object($newValue)) {
+                if (is_array($newValue) || is_object($newValue)) {
                     $newValue = \Sugar\object\deepMap($newValue, function (
                         $p,
                         $v
                     ) use ($newValue) {
                         return $this->resolve($v, $newValue);
-                        return $v;
                     });
                 }
             } elseif (str_starts_with($value, '@')) {

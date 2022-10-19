@@ -1,27 +1,4 @@
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -38,32 +15,38 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const s_class_1 = __importDefault(require("@coffeekraken/s-class"));
 const s_log_1 = __importDefault(require("@coffeekraken/s-log"));
 const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
+const s_specs_1 = __importDefault(require("@coffeekraken/s-specs"));
 const s_sugar_config_1 = __importDefault(require("@coffeekraken/s-sugar-config"));
+const s_view_renderer_1 = __importDefault(require("@coffeekraken/s-view-renderer"));
+const fs_1 = require("@coffeekraken/sugar/fs");
 const object_1 = require("@coffeekraken/sugar/object");
 const path_1 = require("@coffeekraken/sugar/path");
 const process_1 = require("@coffeekraken/sugar/process");
-const glob_1 = __importDefault(require("glob"));
-const path_2 = __importDefault(require("path"));
+const express_1 = __importDefault(require("express"));
+const SCarpenterStartParamsInterface_1 = __importDefault(require("./interface/SCarpenterStartParamsInterface"));
 class SCarpenter extends s_class_1.default {
     /**
      * @name            constructor
-     * @type              Function
+     * @type            Function
      * @constructor
      *
      * Constructor
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings) {
-        super((0, object_1.__deepMerge)({}, settings !== null && settings !== void 0 ? settings : {}));
+        super((0, object_1.__deepMerge)({
+            metas: {
+                id: 'SCarpenter',
+            },
+        }, s_sugar_config_1.default.get('carpenter'), settings || {}));
     }
     /**
      * @name          start
      * @type          Function
      *
-     * This method allows you to start a server in order to develop your mitosis component easily
-     * with feature like multiple frameworks testing, auto compilation, etc...
+     * This method allows you to start a server in order display your components library in a nice and coherent interface
      *
      * @param         {Partial<ISCarpenterStartParams>}          params        The params to use to start your mitosis env
      * @return        {SPromise}                                     A promise resolved once the scan process has been finished
@@ -72,84 +55,69 @@ class SCarpenter extends s_class_1.default {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     start(params) {
-        const finalParams = ((0, object_1.__deepMerge)(__SMitosisStartParamsInterface.defaults(), params));
+        const finalParams = ((0, object_1.__deepMerge)(SCarpenterStartParamsInterface_1.default.defaults(), params));
         return new s_promise_1.default(({ resolve, reject, emit, pipe }) => __awaiter(this, void 0, void 0, function* () {
             emit('log', {
                 type: s_log_1.default.TYPE_INFO,
-                value: `<yellow>[start]</yellow> Starting a new mitosis server...`,
+                value: `<yellow>[start]</yellow> Starting a new carpenter server...`,
             });
-            const app = __express();
+            const viewRenderer = new s_view_renderer_1.default({
+                rootDirs: [`${(0, path_1.__packageRootDir)((0, fs_1.__dirname)())}/src/views`],
+            });
+            const app = (0, express_1.default)(), watchers = {}, specsBySources = {};
+            for (let [key, source] of Object.entries(this.settings.sources)) {
+                // watchers[key] = __chokidar.watch(source.glob, {
+                //     cwd: source.inDir,
+                //     ignoreInitial: false,
+                // });
+                // watchers[key].on('add', (newFileRelPath) => {
+                //     const newFileAbsPath = `${source.inDir}/${newFileRelPath}`;
+                //     const spec = new __SSpecs();
+                //     console.log(newFileAbsPath);
+                //     console.log(spec.read(newFileAbsPath));
+                // });
+                // watchers[key].on('change', (updatedFilePath) => {});
+                if (!specsBySources[key]) {
+                    specsBySources[key] = Object.assign(Object.assign({}, source), { specs: [] });
+                }
+                // console.log(key, source);
+                const specs = new s_specs_1.default();
+                const specsArray = specs.list(source.specsNamespaces);
+                specsBySources[key].specs = [
+                    ...specsBySources[key].specs,
+                    specsArray,
+                ];
+                specsArray.forEach((spec) => {
+                    // listen for request on that particular component
+                    app.get(`/${spec.dotpath}`, (req, res) => __awaiter(this, void 0, void 0, function* () {
+                        console.log(specsBySources);
+                        const result = yield viewRenderer.render('index', {});
+                        res.type('text/html');
+                        res.send(result.value);
+                    }));
+                });
+            }
             app.get('/', (req, res) => __awaiter(this, void 0, void 0, function* () {
-                const viewRenderer = new __SViewRenderer({
-                    rootDirs: [`${(0, path_1.__packageRootDir)(__dirname())}/src/views`],
-                });
-                const componentFiles = glob_1.default.sync('src/js/build/**/*.*', {
-                    cwd: (0, path_1.__packageRootDir)(),
-                }), components = [];
-                const componentInterfacePath = glob_1.default.sync('dist/pkg/esm/js/interface/*.*', {
-                    cwd: (0, path_1.__packageRootDir)(),
-                });
-                let ComponentInterface, componentSpecs = {};
-                if (componentInterfacePath.length) {
-                    const finalComponentInterfacePath = `../../../../${path_2.default.relative((0, path_1.__packageRootDir)(__dirname()), `${(0, path_1.__packageRootDir)()}/${componentInterfacePath[0]}`)}`;
-                    // import the interface
-                    ComponentInterface = (yield Promise.resolve().then(() => __importStar(require(finalComponentInterfacePath)))).default;
-                    // convert interface to specs
-                    componentSpecs = __SSpecs.fromInterface(ComponentInterface);
-                }
-                for (let i = 0; i < componentFiles.length; i++) {
-                    const componentFilePath = componentFiles[i];
-                    const target = componentFilePath.split('/')[3], absoluteComponentFilePath = `${(0, path_1.__packageRootDir)()}/${componentFilePath}`, name = path_2.default
-                        .basename(componentFilePath)
-                        .replace(path_2.default.extname(componentFilePath), '')
-                        .replace(/Component$/, '');
-                    components.push({
-                        target,
-                        name,
-                        specs: componentSpecs,
-                        tagName: __dashCase(name),
-                        path: `/${componentFilePath}`,
-                    });
-                }
-                const result = yield viewRenderer.render('index', Object.assign(Object.assign({}, params), { components }));
-                // const htmlFilePath = `${__packageRootDir(
-                //     __dirname(),
-                // )}/src/public/index.html`;
                 res.type('text/html');
-                res.send(result.value);
+                res.send('Hello');
             }));
             app.get('/dist/css/index.css', (req, res) => __awaiter(this, void 0, void 0, function* () {
-                const cssFilePath = `${(0, path_1.__packageRootDir)(__dirname())}/dist/css/index.css`;
+                const cssFilePath = `${(0, path_1.__packageRootDir)((0, fs_1.__dirname)())}/dist/css/index.css`;
                 res.sendFile(cssFilePath);
             }));
             app.get('/dist/js/index.esm.js', (req, res) => __awaiter(this, void 0, void 0, function* () {
-                const jsFilePath = `${(0, path_1.__packageRootDir)(__dirname())}/dist/js/index.esm.js`;
+                const jsFilePath = `${(0, path_1.__packageRootDir)((0, fs_1.__dirname)())}/dist/js/index.esm.js`;
                 res.sendFile(jsFilePath);
             }));
             let server;
             yield new Promise((_resolve) => {
-                server = app.listen(8082, () => {
+                server = app.listen(finalParams.port, () => {
                     _resolve();
                 });
             });
-            const viteServer = yield createServer((0, object_1.__deepMerge)(s_sugar_config_1.default.get('mitosis.vite'), {
-                // any valid user config options, plus `mode` and `configFile`
-                configFile: false,
-                root: (0, path_1.__packageRootDir)(),
-                optimizeDeps: {
-                    esbuildOptions: {
-                        // mainFields: ['module', 'main'],
-                        resolveExtensions: ['.js', '.ts'],
-                    },
-                },
-                server: {
-                    port: finalParams.port,
-                },
-            }));
-            yield viteServer.listen();
             emit('log', {
                 type: s_log_1.default.TYPE_INFO,
-                value: `<green>[start]</green> Your mitosis server is available at:`,
+                value: `<green>[start]</green> Your carpenter server is available at:`,
             });
             emit('log', {
                 type: s_log_1.default.TYPE_INFO,
@@ -161,7 +129,6 @@ class SCarpenter extends s_class_1.default {
                 });
                 return new Promise((resolve) => {
                     server.close(() => __awaiter(this, void 0, void 0, function* () {
-                        yield viteServer.close();
                         // @ts-ignore
                         resolve();
                     }));
@@ -171,4 +138,4 @@ class SCarpenter extends s_class_1.default {
     }
 }
 exports.default = SCarpenter;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxvRUFBNkM7QUFDN0MsZ0VBQXlDO0FBQ3pDLHdFQUFpRDtBQUNqRCxrRkFBMEQ7QUFDMUQsdURBQXlEO0FBQ3pELG1EQUE0RDtBQUM1RCx5REFBOEQ7QUFDOUQsZ0RBQTBCO0FBQzFCLGdEQUEwQjtBQVExQixNQUFNLFVBQVcsU0FBUSxpQkFBUTtJQUM3Qjs7Ozs7Ozs7O09BU0c7SUFDSCxZQUFZLFFBQXVDO1FBQy9DLEtBQUssQ0FBQyxJQUFBLG9CQUFXLEVBQUMsRUFBRSxFQUFFLFFBQVEsYUFBUixRQUFRLGNBQVIsUUFBUSxHQUFJLEVBQUUsQ0FBQyxDQUFDLENBQUM7SUFDM0MsQ0FBQztJQUVEOzs7Ozs7Ozs7Ozs7T0FZRztJQUNILEtBQUssQ0FBQyxNQUF1QztRQUN6QyxNQUFNLFdBQVcsR0FBMkIsQ0FDeEMsSUFBQSxvQkFBVyxFQUFDLDhCQUE4QixDQUFDLFFBQVEsRUFBRSxFQUFFLE1BQU0sQ0FBQyxDQUNqRSxDQUFDO1FBQ0YsT0FBTyxJQUFJLG1CQUFVLENBQUMsQ0FBTyxFQUFFLE9BQU8sRUFBRSxNQUFNLEVBQUUsSUFBSSxFQUFFLElBQUksRUFBRSxFQUFFLEVBQUU7WUFDNUQsSUFBSSxDQUFDLEtBQUssRUFBRTtnQkFDUixJQUFJLEVBQUUsZUFBTSxDQUFDLFNBQVM7Z0JBQ3RCLEtBQUssRUFBRSwyREFBMkQ7YUFDckUsQ0FBQyxDQUFDO1lBRUgsTUFBTSxHQUFHLEdBQVEsU0FBUyxFQUFFLENBQUM7WUFFN0IsR0FBRyxDQUFDLEdBQUcsQ0FBQyxHQUFHLEVBQUUsQ0FBTyxHQUFHLEVBQUUsR0FBRyxFQUFFLEVBQUU7Z0JBQzVCLE1BQU0sWUFBWSxHQUFHLElBQUksZUFBZSxDQUFDO29CQUNyQyxRQUFRLEVBQUUsQ0FBQyxHQUFHLElBQUEs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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsb0VBQTZDO0FBQzdDLGdFQUF5QztBQUN6Qyx3RUFBaUQ7QUFDakQsb0VBQTZDO0FBQzdDLGtGQUEwRDtBQUMxRCxvRkFBNEQ7QUFDNUQsK0NBQW1EO0FBQ25ELHVEQUF5RDtBQUN6RCxtREFBNEQ7QUFDNUQseURBQThEO0FBQzlELHNEQUFnQztBQUNoQyxnSEFBMEY7QUE2QzFGLE1BQU0sVUFBVyxTQUFRLGlCQUFRO0lBQzdCOzs7Ozs7Ozs7T0FTRztJQUNILFlBQVksUUFBdUM7UUFDL0MsS0FBSyxDQUNELElBQUEsb0JBQVcsRUFDUDtZQUNJLEtBQUssRUFBRTtnQkFDSCxFQUFFLEVBQUUsWUFBWTthQUNuQjtTQUNKLEVBQ0Qsd0JBQWMsQ0FBQyxHQUFHLENBQUMsV0FBVyxDQUFDLEVBQy9CLFFBQVEsSUFBSSxFQUFFLENBQ2pCLENBQ0osQ0FBQztJQUNOLENBQUM7SUFFRDs7Ozs7Ozs7Ozs7T0FXRztJQUNILEtBQUssQ0FBQyxNQUF1QztRQUN6QyxNQUFNLFdBQVcsR0FBMkIsQ0FDeEMsSUFBQSxvQkFBVyxFQUFDLHdDQUFnQyxDQUFDLFFBQVEsRUFBRSxFQUFFLE1BQU0sQ0FBQyxDQUNuRSxDQUFDO1FBRUYsT0FBTyxJQUFJLG1CQUFVLENBQUMsQ0FBTyxFQUFFLE9BQU8sRUFBRSxNQUFNLEVBQUUsSUFBSSxFQUFFLElBQUksRUFBRSxFQUFFLEVBQUU7WUFDNUQsSUFBSSxDQUFDLEtBQUssRUFBRTtnQkFDUixJQUFJLEVBQUUsZUFBTSxDQUFDLFNBQVM7Z0JBQ3RCLEtBQUssRUFBRSw2REFBNkQ7YUFDdkUsQ0FBQyxDQUFDO1lBRUgsTUFBTSxZQUFZLEdBQUcsSUFBSSx5QkFBZSxDQUFDO2dCQUNyQyxRQUFRLEVBQUUsQ0FBQyxHQUFHLElBQUEsdUJBQWdCLEVBQUMsSUFBQSxjQUFTLEdBQUUs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

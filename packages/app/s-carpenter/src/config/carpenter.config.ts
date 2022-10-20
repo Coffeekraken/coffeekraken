@@ -1,5 +1,4 @@
 export default function (api) {
-    if (api.env.platform !== 'node') return;
     return {
         server: {
             port: 3001,

@@ -1,0 +1,74 @@
+.s-carpenter {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 500;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+
+    .__navigation {
+        display: none;
+    }
+    .__editor {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 500px;
+        height: 100%;
+        background: sugar.color(base, background);
+        transform: translateX(100%);
+        opacity: 0;
+        pointer-events: none;
+        overflow-y: auto;
+        @sugar.depth (100);
+        @sugar.transition();
+        @sugar.scrollbar();
+
+        &.active {
+            transform: translateX(0);
+            opacity: 1;
+            pointer-events: all;
+        }
+    }
+
+    .s-specs-editor__prop:not(.s-specs-editor__child .s-specs-editor__prop) {
+        padding-inline: sugar.padding(40);
+    }
+
+    .s-specs-editor__label {
+        margin-block-end: sugar.margin(20);
+    }
+
+    .s-specs-editor__metas {
+        padding: sugar.padding(40);
+    }
+
+    .s-specs-editor__child {
+        padding: sugar.padding(40);
+        background: sugar.color(base, background, --darken 5% --alpha 0.3);
+
+        &:not(:first-child) {
+            margin-block-start: sugar.margin(40);
+        }
+        &:not(:last-child) {
+            margin-block-end: sugar.margin(40);
+        }
+    }
+}
+.s-carpenter-toolbar {
+    position: absolute;
+    z-index: 500;
+    background: red;
+    display: inline-block;
+    padding: 40px;
+    transform: translateX(-100%);
+
+    pointer-events: none;
+    opacity: 0;
+}
+body:has([s-carpenter]:hover) .s-carpenter-toolbar,
+.s-carpenter-toolbar:hover {
+    opacity: 1;
+    pointer-events: all;
+}

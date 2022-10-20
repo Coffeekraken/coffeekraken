@@ -103,31 +103,6 @@ export default class SLitComponent extends LitElement {
         // set the default props
         SLitComponent.setDefaultProps(tagName, props);
         win.customElements.define(tagName.toLowerCase(), class extends Cls {});
-
-        // // register the custom element with the suffix "-up"
-        // try {
-        //     customElements.define(`${tagName}-up`, Cls);
-        // } catch (e) {}
-
-        // function copyAttributes($source, $target) {
-        //     return Array.from($source.attributes).forEach((attribute) => {
-        //         // if ($target[attribute.name] !== undefined) {
-        //         //     $target[attribute.name] = attribute.nodeValue;
-        //         // }
-        //         $target.setAttribute(attribute.name, attribute.nodeValue);
-        //     });
-        // }
-
-        // __querySelectorLive(tagName, ($elm) => {
-        //     const $node = document.createElement(`${tagName}-up`);
-        //     $node.classList.add($elm.tagName.toLowerCase().replace(/-up$/, ''));
-        //     copyAttributes($elm, $node);
-        //     while ($elm.childNodes.length > 0) {
-        //         $node.appendChild($elm.childNodes[0]);
-        //     }
-        //     $elm.parentNode.insertBefore($node, $elm.nextSibling);
-        //     $elm.remove();
-        // });
     }
 
     /**
@@ -150,7 +125,7 @@ export default class SLitComponent extends LitElement {
         __SComponentUtils.setDefaultProps(selector, props);
     }
 
-    static createProperties(properties: any, int: __SInterface): any {
+    static propertiesFromInterface(properties: any, int: __SInterface): any {
         const propertiesObj = {};
 
         class SLitComponentPropsInterface extends SComponentUtilsDefaultPropsInterface {}
@@ -198,17 +173,37 @@ export default class SLitComponent extends LitElement {
             // handle physical and boolean attributes
             if (
                 definition.physical ||
+                definition.type?.type?.toLowerCase?.() === 'boolean' ||
                 definition.type?.toLowerCase?.() === 'boolean' ||
-                definition.type?.type?.toLowerCase?.() === 'boolean'
+                definition.type?.type?.toLowerCase?.() === 'object' ||
+                definition.type?.toLowerCase?.() === 'object'
             ) {
                 propertiesObj[prop].reflect = true;
                 propertiesObj[prop].attribute = __dashCase(prop);
                 propertiesObj[prop].converter = {
                     fromAttribute: (value, type) => {
+                        const typeStr =
+                            definition.type?.type?.toLowerCase() ??
+                            definition.type?.toLowerCase();
+
+                        if (typeStr === 'object' && typeof value === 'string') {
+                            try {
+                                const json = JSON.parse(value);
+                                console.log('V', json, value);
+                                return json;
+                            } catch (e) {
+                                console.error(e);
+                            }
+                        }
                         if (value === 'true' || value === '') return true;
                         return value;
                     },
                     toAttribute(value) {
+                        try {
+                            const jsonStr = JSON.stringify(value);
+                            return jsonStr;
+                        } catch (e) {}
+
                         if (
                             value === 'false' ||
                             value === false ||
@@ -257,6 +252,11 @@ export default class SLitComponent extends LitElement {
         // init default state
         if (this.constructor.state) {
             this.state = Object.assign({}, this.constructor.state);
+        } else {
+            this.state = {};
+        }
+        if (!this.state?.status) {
+            this.state.status = 'pending';
         }
 
         // shadow handler
@@ -298,7 +298,7 @@ export default class SLitComponent extends LitElement {
             }
             // set the component as mounted
             // @ts-ignore
-            this.props.mounted = true;
+            this.props.status = 'mounted';
         };
 
         // litElement shouldUpdate
@@ -333,7 +333,7 @@ export default class SLitComponent extends LitElement {
                 'direct';
 
             // component class
-            this.classList.add(...this.componentUtils.className('').split(' '));
+            // this.classList.add(...this.componentUtils.className('').split(' '));
 
             await __wait();
             await __wait();
@@ -368,7 +368,7 @@ export default class SLitComponent extends LitElement {
 
         let properties = this.constructor.properties;
         if (!properties) {
-            properties = this.constructor.createProperties();
+            properties = this.constructor.propertiesFromInterface();
         }
 
         // this.props stack
@@ -380,6 +380,13 @@ export default class SLitComponent extends LitElement {
                     return _this[prop];
                 },
                 set(value) {
+                    // ensure to have parsed object when the _this[prop].value is a string
+                    if (value?.value && typeof value.value === 'string') {
+                        try {
+                            _this[prop] = JSON.parse(value.value);
+                            return;
+                        } catch (e) {}
+                    }
                     _this[prop] = value;
                 },
             });
@@ -403,7 +410,7 @@ export default class SLitComponent extends LitElement {
         Object.assign(this.props, finalProps);
 
         // make props responsive
-        this.componentUtils.makePropsResponsive(this.props);
+        // this.componentUtils.makePropsResponsive(this.props);
 
         // handle state if needed
         if (this.state) {

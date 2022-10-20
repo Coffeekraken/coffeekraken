@@ -10,9 +10,10 @@ __metadata:
   resolution: "01-basic@workspace:packages/@examples/01-basic"
   dependencies:
     "@coffeekraken/s-activate-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-carpenter": 2.0.0-alpha.20
     "@coffeekraken/s-postcss-sugar-plugin": 2.0.0-alpha.20
     "@coffeekraken/s-sugar-feature": 2.0.0-alpha.20
-    "@coffeekraken/sugar": "workspace:^"
+    "@coffeekraken/sugar": 2.0.0-alpha.20
     autoprefixer: ^10.4.12
     postcss: ^8.4.17
     postcss-atroot: ^0.2.3
@@ -2695,7 +2696,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-carpenter@^2.0.0-alpha.20, @coffeekraken/s-carpenter@workspace:packages/app/s-carpenter":
+"@coffeekraken/s-carpenter@2.0.0-alpha.20, @coffeekraken/s-carpenter@^2.0.0-alpha.20, @coffeekraken/s-carpenter@workspace:packages/app/s-carpenter":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-carpenter@workspace:packages/app/s-carpenter"
   dependencies:
@@ -2708,6 +2709,7 @@ __metadata:
     "@coffeekraken/s-promise": ^2.0.0-alpha.20
     "@coffeekraken/s-specs": ^2.0.0-alpha.20
     "@coffeekraken/s-specs-editor-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
     "@coffeekraken/s-view-renderer": ^2.0.0-alpha.20
     "@coffeekraken/sugar": ^2.0.0-alpha.20
     "@vitejs/plugin-vue": ^3.1.2
@@ -3721,32 +3723,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-specs-editor-component@workspace:packages/components/s-specs-editor-component"
   dependencies:
-    "@babel/core": ^7.19.3
-    "@builder.io/mitosis": ^0.0.61
-    "@builder.io/mitosis-cli": ^0.0.22
     "@coffeekraken/s-clipboard-copy-component": ^2.0.0-alpha.20
     "@coffeekraken/s-component": ^2.0.0-alpha.20
     "@coffeekraken/s-interface": ^2.0.0-alpha.20
     "@coffeekraken/s-mitosis": ^2.0.0-alpha.20
     "@coffeekraken/sugar": ^2.0.0-alpha.20
-    "@mdx-js/react": ^1.6.22
-    "@prettier/plugin-php": ^0.18.9
-    "@storybook/addon-actions": ^6.5.12
-    "@storybook/addon-docs": ^6.5.12
-    "@storybook/addon-essentials": ^6.5.12
-    "@storybook/addon-interactions": ^6.5.12
-    "@storybook/addon-links": ^6.5.12
-    "@storybook/builder-webpack4": ^6.5.12
-    "@storybook/manager-webpack4": ^6.5.12
-    "@storybook/react": ^6.5.12
-    "@storybook/testing-library": ^0.0.13
-    babel-loader: ^8.2.5
-    glob: ^8.0.3
-    highlight.js: ^11.6.0
     html-tags: ^3.2.0
     known-css-properties: ^0.25.0
-    prettier: ^2.7.1
-    react: ^18.2.0
   languageName: unknown
   linkType: soft
 
@@ -4094,7 +4077,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/sugar@^2.0.0-alpha.20, @coffeekraken/sugar@workspace:^, @coffeekraken/sugar@workspace:packages/tools/sugar":
+"@coffeekraken/sugar@2.0.0-alpha.20, @coffeekraken/sugar@^2.0.0-alpha.20, @coffeekraken/sugar@workspace:^, @coffeekraken/sugar@workspace:packages/tools/sugar":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/sugar@workspace:packages/tools/sugar"
   dependencies:

@@ -1,3 +1,14 @@
-<a class="s-cta s-btn s-color:{{ color }} {{ attributes.class }}" {{ attrs(attributes, ['class'])|raw }} href="{{ link.url }}" target="{{ link.target }}">
+<a class="s-cta s-btn s-color:{{ color }} {{ attributes.class }}" {{ attrs(attributes, ['class'])|raw }}
+    href="{{ link.url }}"
+    target="{{ link.target }}"
+    color="{{ color }}"
+    s-carpenter="components.cta"
+    s-carpenter-map="{{ {
+        url: '@href',
+        target: '@target',
+        label: 'innerHTML',
+        color: '@class:s-color:%color'
+    }|json_encode() }}"
+>
     {{ label ? label : link.text }}
 </a>

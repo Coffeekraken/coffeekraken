@@ -28,10 +28,12 @@ export default class SComponentUtilsDefaultPropsInterface extends __SInterface {
                 type: 'String',
                 physical: true,
             },
-            mounted: {
-                description: 'Specify if your component is mounted or not',
-                type: 'Boolean',
-                default: false,
+            status: {
+                description:
+                    'Specify the status of the component. Can be "pending", "mounting" or "mounted"',
+                type: 'String',
+                values: ['pending', 'mounting', 'mounted'],
+                default: 'pending',
                 physical: true,
             },
             mountWhen: {

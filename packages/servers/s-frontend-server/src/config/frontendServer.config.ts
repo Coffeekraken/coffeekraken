@@ -385,6 +385,33 @@ export default function (api) {
             //     path: `${__dirname()}/../node/modules/sitemap/sitemap`,
             //     settings: {},
             // },
+            carpenter: {
+                /**
+                 * @name            description
+                 * @namespace       config.frontendServer.modules.carpenter
+                 * @type            String
+                 *
+                 * Specify the module description
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                description:
+                    'This module gives you access to a "carpenter" object in the views',
+                /**
+                 * @name            path
+                 * @namespace       config.frontendServer.modules.carpenter
+                 * @type            String
+                 * @default             ${__dirname()}/../node/modules/carpenter/carpenter
+                 *
+                 * Specify where to find the "carpenter" module
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                path: `${__dirname()}/../node/modules/carpenter/carpenter`,
+                settings: {},
+            },
             redirect: {
                 /**
                  * @name            description

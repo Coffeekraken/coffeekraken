@@ -6,17 +6,15 @@ interface ILazyDefineSettings {
 }
 
 export function define(
-    props = {},
-    tagName = 's-slider',
+    props,
+    tagName = 's-specs-editor',
     settings: Partial<ILazyDefineSettings> = {},
 ) {
     __querySelectorLive(
         tagName,
         async ($elm) => {
-            const { define } = await import(
-                '../../../js/webcomponent/src/js/SSliderComponent'
-            );
-            define(props, tagName);
+            const define = await import('./define');
+            define.default(props, tagName);
         },
         {
             when: settings.when ?? 'nearViewport',

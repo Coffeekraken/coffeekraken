@@ -1,3 +1,9 @@
+var __defProp = Object.defineProperty;
+var __defNormalProp = (obj2, key, value) => key in obj2 ? __defProp(obj2, key, { enumerable: true, configurable: true, writable: true, value }) : obj2[key] = value;
+var __publicField = (obj2, key, value) => {
+  __defNormalProp(obj2, typeof key !== "symbol" ? key + "" : key, value);
+  return value;
+};
 var _a2;
 function __unique(array) {
   const a = array.concat();
@@ -787,24 +793,24 @@ function requireConversions() {
     const r = rgb[0] / 255;
     const g2 = rgb[1] / 255;
     const b = rgb[2] / 255;
-    const v = Math.max(r, g2, b);
-    const diff = v - Math.min(r, g2, b);
+    const v2 = Math.max(r, g2, b);
+    const diff = v2 - Math.min(r, g2, b);
     const diffc = function(c) {
-      return (v - c) / 6 / diff + 1 / 2;
+      return (v2 - c) / 6 / diff + 1 / 2;
     };
     if (diff === 0) {
       h = 0;
       s = 0;
     } else {
-      s = diff / v;
+      s = diff / v2;
       rdif = diffc(r);
       gdif = diffc(g2);
       bdif = diffc(b);
-      if (r === v) {
+      if (r === v2) {
         h = bdif - gdif;
-      } else if (g2 === v) {
+      } else if (g2 === v2) {
         h = 1 / 3 + rdif - bdif;
-      } else if (b === v) {
+      } else if (b === v2) {
         h = 2 / 3 + gdif - rdif;
       }
       if (h < 0) {
@@ -816,7 +822,7 @@ function requireConversions() {
     return [
       h * 360,
       s * 100,
-      v * 100
+      v2 * 100
     ];
   };
   convert2.rgb.hwb = function(rgb) {
@@ -937,43 +943,43 @@ function requireConversions() {
     l *= 2;
     s *= l <= 1 ? l : 2 - l;
     smin *= lmin <= 1 ? lmin : 2 - lmin;
-    const v = (l + s) / 2;
+    const v2 = (l + s) / 2;
     const sv = l === 0 ? 2 * smin / (lmin + smin) : 2 * s / (l + s);
-    return [h, sv * 100, v * 100];
+    return [h, sv * 100, v2 * 100];
   };
   convert2.hsv.rgb = function(hsv) {
     const h = hsv[0] / 60;
     const s = hsv[1] / 100;
-    let v = hsv[2] / 100;
+    let v2 = hsv[2] / 100;
     const hi = Math.floor(h) % 6;
     const f = h - Math.floor(h);
-    const p = 255 * v * (1 - s);
-    const q = 255 * v * (1 - s * f);
-    const t = 255 * v * (1 - s * (1 - f));
-    v *= 255;
+    const p = 255 * v2 * (1 - s);
+    const q = 255 * v2 * (1 - s * f);
+    const t = 255 * v2 * (1 - s * (1 - f));
+    v2 *= 255;
     switch (hi) {
       case 0:
-        return [v, t, p];
+        return [v2, t, p];
       case 1:
-        return [q, v, p];
+        return [q, v2, p];
       case 2:
-        return [p, v, t];
+        return [p, v2, t];
       case 3:
-        return [p, q, v];
+        return [p, q, v2];
       case 4:
-        return [t, p, v];
+        return [t, p, v2];
       case 5:
-        return [v, p, q];
+        return [v2, p, q];
     }
   };
   convert2.hsv.hsl = function(hsv) {
     const h = hsv[0];
     const s = hsv[1] / 100;
-    const v = hsv[2] / 100;
-    const vmin = Math.max(v, 0.01);
+    const v2 = hsv[2] / 100;
+    const vmin = Math.max(v2, 0.01);
     let sl;
     let l;
-    l = (2 - s) * v;
+    l = (2 - s) * v2;
     const lmin = (2 - s) * vmin;
     sl = s * vmin;
     sl /= lmin <= 1 ? lmin : 2 - lmin;
@@ -992,12 +998,12 @@ function requireConversions() {
       bl /= ratio;
     }
     const i2 = Math.floor(6 * h);
-    const v = 1 - bl;
+    const v2 = 1 - bl;
     f = 6 * h - i2;
     if ((i2 & 1) !== 0) {
       f = 1 - f;
     }
-    const n = wh + f * (v - wh);
+    const n = wh + f * (v2 - wh);
     let r;
     let g2;
     let b;
@@ -1005,32 +1011,32 @@ function requireConversions() {
       default:
       case 6:
       case 0:
-        r = v;
+        r = v2;
         g2 = n;
         b = wh;
         break;
       case 1:
         r = n;
-        g2 = v;
+        g2 = v2;
         b = wh;
         break;
       case 2:
         r = wh;
-        g2 = v;
+        g2 = v2;
         b = n;
         break;
       case 3:
         r = wh;
         g2 = n;
-        b = v;
+        b = v2;
         break;
       case 4:
         r = n;
         g2 = wh;
-        b = v;
+        b = v2;
         break;
       case 5:
-        r = v;
+        r = v2;
         g2 = wh;
         b = n;
         break;
@@ -1243,11 +1249,11 @@ function requireConversions() {
   };
   convert2.hsv.hcg = function(hsv) {
     const s = hsv[1] / 100;
-    const v = hsv[2] / 100;
-    const c = s * v;
+    const v2 = hsv[2] / 100;
+    const c = s * v2;
     let f = 0;
     if (c < 1) {
-      f = (v - c) / (1 - c);
+      f = (v2 - c) / (1 - c);
     }
     return [hsv[0], c * 100, f * 100];
   };
@@ -1260,13 +1266,13 @@ function requireConversions() {
     }
     const pure = [0, 0, 0];
     const hi = h % 1 * 6;
-    const v = hi % 1;
-    const w = 1 - v;
+    const v2 = hi % 1;
+    const w = 1 - v2;
     let mg = 0;
     switch (Math.floor(hi)) {
       case 0:
         pure[0] = 1;
-        pure[1] = v;
+        pure[1] = v2;
         pure[2] = 0;
         break;
       case 1:
@@ -1277,7 +1283,7 @@ function requireConversions() {
       case 2:
         pure[0] = 0;
         pure[1] = 1;
-        pure[2] = v;
+        pure[2] = v2;
         break;
       case 3:
         pure[0] = 0;
@@ -1285,7 +1291,7 @@ function requireConversions() {
         pure[2] = 1;
         break;
       case 4:
-        pure[0] = v;
+        pure[0] = v2;
         pure[1] = 0;
         pure[2] = 1;
         break;
@@ -1304,12 +1310,12 @@ function requireConversions() {
   convert2.hcg.hsv = function(hcg) {
     const c = hcg[1] / 100;
     const g2 = hcg[2] / 100;
-    const v = c + g2 * (1 - c);
+    const v2 = c + g2 * (1 - c);
     let f = 0;
-    if (v > 0) {
-      f = c / v;
+    if (v2 > 0) {
+      f = c / v2;
     }
-    return [hcg[0], f * 100, v * 100];
+    return [hcg[0], f * 100, v2 * 100];
   };
   convert2.hcg.hsl = function(hcg) {
     const c = hcg[1] / 100;
@@ -1326,17 +1332,17 @@ function requireConversions() {
   convert2.hcg.hwb = function(hcg) {
     const c = hcg[1] / 100;
     const g2 = hcg[2] / 100;
-    const v = c + g2 * (1 - c);
-    return [hcg[0], (v - c) * 100, (1 - v) * 100];
+    const v2 = c + g2 * (1 - c);
+    return [hcg[0], (v2 - c) * 100, (1 - v2) * 100];
   };
   convert2.hwb.hcg = function(hwb) {
     const w = hwb[1] / 100;
     const b = hwb[2] / 100;
-    const v = 1 - b;
-    const c = v - w;
+    const v2 = 1 - b;
+    const c = v2 - w;
     let g2 = 0;
     if (c < 1) {
-      g2 = (v - c) / (1 - c);
+      g2 = (v2 - c) / (1 - c);
     }
     return [hwb[0], c * 100, g2 * 100];
   };
@@ -1538,7 +1544,7 @@ function requireColorConvert() {
     });
   };
   let colorConvert2;
-  const makeDynamicStyles = (wrap, targetSpace, identity, isBackground) => {
+  const makeDynamicStyles = (wrap2, targetSpace, identity, isBackground) => {
     if (colorConvert2 === void 0) {
       colorConvert2 = requireColorConvert();
     }
@@ -1547,9 +1553,9 @@ function requireColorConvert() {
     for (const [sourceSpace, suite] of Object.entries(colorConvert2)) {
       const name2 = sourceSpace === "ansi16" ? "ansi" : sourceSpace;
       if (sourceSpace === targetSpace) {
-        styles2[name2] = wrap(identity, offset);
+        styles2[name2] = wrap2(identity, offset);
       } else if (typeof suite === "object") {
-        styles2[name2] = wrap(suite[targetSpace], offset);
+        styles2[name2] = wrap2(suite[targetSpace], offset);
       }
     }
     return styles2;
@@ -1798,7 +1804,7 @@ const {
   stringReplaceAll,
   stringEncaseCRLFWithFirstIndex
 } = util$2;
-const { isArray: isArray$4 } = Array;
+const { isArray: isArray$5 } = Array;
 const levelMapping = [
   "ansi",
   "ansi",
@@ -1906,7 +1912,7 @@ const createStyler = (open, close, parent) => {
 };
 const createBuilder = (self2, _styler, _isEmpty) => {
   const builder = (...arguments_) => {
-    if (isArray$4(arguments_[0]) && isArray$4(arguments_[0].raw)) {
+    if (isArray$5(arguments_[0]) && isArray$5(arguments_[0].raw)) {
       return applyStyle(builder, chalkTag(builder, ...arguments_));
     }
     return applyStyle(builder, arguments_.length === 1 ? "" + arguments_[0] : arguments_.join(" "));
@@ -1941,7 +1947,7 @@ const applyStyle = (self2, string2) => {
 let template;
 const chalkTag = (chalk2, ...strings) => {
   const [firstString] = strings;
-  if (!isArray$4(firstString) || !isArray$4(firstString.raw)) {
+  if (!isArray$5(firstString) || !isArray$5(firstString.raw)) {
     return strings.join(" ");
   }
   const arguments_ = strings.slice(1);
@@ -1965,8 +1971,8 @@ chalk.stderr.supportsColor = stderrColor;
 var source = chalk;
 function __mapToObject(map2) {
   const obj2 = {};
-  for (const [k, v] of map2)
-    obj2[k] = v;
+  for (const [k, v2] of map2)
+    obj2[k] = v2;
   return obj2;
 }
 function __isArray(value) {
@@ -2110,17 +2116,17 @@ function __deepMap(objectOrArray, processor, settings = {}, _path = []) {
   return newObject;
 }
 var decycle_1;
-const isArray$3 = (e) => Array.isArray(e), isObject$5 = (e) => "Object" === Object.prototype.toString.call(e).slice(8, -1), validate$1 = (e) => {
+const isArray$4 = (e) => Array.isArray(e), isObject$5 = (e) => "Object" === Object.prototype.toString.call(e).slice(8, -1), validate$1 = (e) => {
   if (void 0 === e)
     throw new Error("This method requires one parameter");
-  if (!isArray$3(e) && !isObject$5(e))
+  if (!isArray$4(e) && !isObject$5(e))
     throw new TypeError("This method only accepts arrays and objects");
 }, findRef = (e, r) => Object.keys(r).find((a) => r[a] === e), decycle = (e) => {
   validate$1(e);
   let r = {};
   const a = (e2, c = "$") => {
     const s = findRef(e2, r);
-    return s ? { $ref: s } : isArray$3(e2) || isObject$5(e2) ? (r[c] = e2, isArray$3(e2) ? e2.map((e3, r2) => a(e3, `${c}[${r2}]`)) : Object.keys(e2).reduce((r2, s2) => (r2[s2] = a(e2[s2], `${c}.${s2}`), r2), {})) : e2;
+    return s ? { $ref: s } : isArray$4(e2) || isObject$5(e2) ? (r[c] = e2, isArray$4(e2) ? e2.map((e3, r2) => a(e3, `${c}[${r2}]`)) : Object.keys(e2).reduce((r2, s2) => (r2[s2] = a(e2[s2], `${c}.${s2}`), r2), {})) : e2;
   };
   return a(e);
 };
@@ -2566,13 +2572,13 @@ class SClass {
   }
 }
 function getMetas(ctx) {
-  var _a3, _b2, _c, _d, _e, _f, _g, _h;
+  var _a3, _b2, _c2, _d2, _e, _f, _g, _h;
   let name2 = `<yellow>${((_a3 = ctx.settings.metas) === null || _a3 === void 0 ? void 0 : _a3.name) || ""}</yellow>`;
   if ((_b2 = ctx.settings.metas) === null || _b2 === void 0 ? void 0 : _b2.id) {
     name2 += ` <cyan>${ctx.settings.metas.id}</cyan>`;
   }
   const metasObj = {
-    id: (_d = (_c = ctx.settings.metas) === null || _c === void 0 ? void 0 : _c.id) !== null && _d !== void 0 ? _d : ctx.constructor.name,
+    id: (_d2 = (_c2 = ctx.settings.metas) === null || _c2 === void 0 ? void 0 : _c2.id) !== null && _d2 !== void 0 ? _d2 : ctx.constructor.name,
     name: (_f = (_e = ctx.settings.metas) === null || _e === void 0 ? void 0 : _e.name) !== null && _f !== void 0 ? _f : ctx.constructor.name,
     formattedName: name2,
     color: (_h = (_g = ctx.settings.metas) === null || _g === void 0 ? void 0 : _g.color) !== null && _h !== void 0 ? _h : "yellow"
@@ -2923,49 +2929,49 @@ function __replaceTags(text, tags) {
 }
 source.level = 3;
 const tagsMap = {
-  black: (tag, content) => source.black(content),
-  red: (tag, content) => source.red(content),
-  green: (tag, content) => source.green(content),
-  yellow: (tag, content) => source.yellow(content),
-  blue: (tag, content) => source.blue(content),
-  magenta: (tag, content) => source.magenta(content),
-  cyan: (tag, content) => source.cyan(content),
-  white: (tag, content) => source.white(content),
-  grey: (tag, content) => source.grey(content),
-  bgBlack: (tag, content) => source.bgBlack(content),
-  bgRed: (tag, content) => source.bgRed(content),
-  bgGreen: (tag, content) => source.bgGreen(content),
-  bgYellow: (tag, content) => source.bgYellow(content),
-  bgBlue: (tag, content) => source.bgBlue(content),
-  bgMagenta: (tag, content) => source.bgMagenta(content),
-  bgCyan: (tag, content) => source.bgCyan(content),
-  bgWhite: (tag, content) => source.bgWhite(content),
-  bold: (tag, content) => source.bold(content),
-  dim: (tag, content) => source.dim(content),
-  italic: (tag, content) => source.italic(content),
-  underline: (tag, content) => source.underline(content),
-  strike: (tag, content) => source.strike(content),
-  h1: (tag, content) => {
+  black: (tag2, content) => source.black(content),
+  red: (tag2, content) => source.red(content),
+  green: (tag2, content) => source.green(content),
+  yellow: (tag2, content) => source.yellow(content),
+  blue: (tag2, content) => source.blue(content),
+  magenta: (tag2, content) => source.magenta(content),
+  cyan: (tag2, content) => source.cyan(content),
+  white: (tag2, content) => source.white(content),
+  grey: (tag2, content) => source.grey(content),
+  bgBlack: (tag2, content) => source.bgBlack(content),
+  bgRed: (tag2, content) => source.bgRed(content),
+  bgGreen: (tag2, content) => source.bgGreen(content),
+  bgYellow: (tag2, content) => source.bgYellow(content),
+  bgBlue: (tag2, content) => source.bgBlue(content),
+  bgMagenta: (tag2, content) => source.bgMagenta(content),
+  bgCyan: (tag2, content) => source.bgCyan(content),
+  bgWhite: (tag2, content) => source.bgWhite(content),
+  bold: (tag2, content) => source.bold(content),
+  dim: (tag2, content) => source.dim(content),
+  italic: (tag2, content) => source.italic(content),
+  underline: (tag2, content) => source.underline(content),
+  strike: (tag2, content) => source.strike(content),
+  h1: (tag2, content) => {
     return source.underline(source.bold(content)) + "\n\n";
   },
-  h2: (tag, content) => {
+  h2: (tag2, content) => {
     return source.bold(content) + "\n";
   },
-  date: (tag, content) => new Date().getDate().toString().padStart("0", 2) + "-" + (new Date().getMonth() + 1).toString().padStart("0", 2) + "-" + new Date().getFullYear().toString().padStart("0", 2),
-  time: (tag, content) => new Date().getHours().toString().padStart("0", 2) + ":" + new Date().getMinutes().toString().padStart("0", 2) + ":" + new Date().getMinutes().toString().padStart("0", 2),
-  day: (tag, content) => new Date().getDate().toString().padStart("0", 2),
-  days: (tag, content) => new Date().getDate().toString().padStart("0", 2),
-  month: (tag, content) => new Date().getMonth().toString().padStart("0", 2),
-  months: (tag, content) => new Date().getMonth().toString().padStart("0", 2),
-  year: (tag, content) => new Date().getFullYear().toString().padStart("0", 2),
-  years: (tag, content) => new Date().getFullYear().toString().padStart("0", 2),
-  hour: (tag, content) => new Date().getHours().toString().padStart("0", 2),
-  hours: (tag, content) => new Date().getHours().toString().padStart("0", 2),
-  minute: (tag, content) => new Date().getMinutes().toString().padStart("0", 2),
-  minutes: (tag, content) => new Date().getMinutes().toString().padStart("0", 2),
-  second: (tag, content) => new Date().getSeconds().toString().padStart("0", 2),
-  seconds: (tag, content) => new Date().getSeconds().toString().padStart("0", 2),
-  br: (tag, content) => "\n"
+  date: (tag2, content) => new Date().getDate().toString().padStart("0", 2) + "-" + (new Date().getMonth() + 1).toString().padStart("0", 2) + "-" + new Date().getFullYear().toString().padStart("0", 2),
+  time: (tag2, content) => new Date().getHours().toString().padStart("0", 2) + ":" + new Date().getMinutes().toString().padStart("0", 2) + ":" + new Date().getMinutes().toString().padStart("0", 2),
+  day: (tag2, content) => new Date().getDate().toString().padStart("0", 2),
+  days: (tag2, content) => new Date().getDate().toString().padStart("0", 2),
+  month: (tag2, content) => new Date().getMonth().toString().padStart("0", 2),
+  months: (tag2, content) => new Date().getMonth().toString().padStart("0", 2),
+  year: (tag2, content) => new Date().getFullYear().toString().padStart("0", 2),
+  years: (tag2, content) => new Date().getFullYear().toString().padStart("0", 2),
+  hour: (tag2, content) => new Date().getHours().toString().padStart("0", 2),
+  hours: (tag2, content) => new Date().getHours().toString().padStart("0", 2),
+  minute: (tag2, content) => new Date().getMinutes().toString().padStart("0", 2),
+  minutes: (tag2, content) => new Date().getMinutes().toString().padStart("0", 2),
+  second: (tag2, content) => new Date().getSeconds().toString().padStart("0", 2),
+  seconds: (tag2, content) => new Date().getSeconds().toString().padStart("0", 2),
+  br: (tag2, content) => "\n"
 };
 function __parseHtml(message) {
   let isArray2 = false;
@@ -3094,27 +3100,27 @@ const fn$1 = function(stack, callback, settings = {}) {
         return k;
     }
   };
-  const _set = (s, k, v) => {
+  const _set = (s, k, v2) => {
     switch (__typeof(s).toLowerCase()) {
       case "array":
         if (settings.newStack === true)
-          s.push(v);
+          s.push(v2);
         else
-          s[k] = v;
+          s[k] = v2;
         break;
       case "object":
-        s[k] = v;
+        s[k] = v2;
         break;
       case "number":
       case "integer":
       case "string":
-        s.push(v);
+        s.push(v2);
         break;
       case "map":
-        s.set(k, v);
+        s.set(k, v2);
         break;
       case "set":
-        s.add(v);
+        s.add(v2);
         break;
     }
   };
@@ -3265,8 +3271,8 @@ var lodash_clone = { exports: {} };
   var reIsNative = RegExp(
     "^" + funcToString.call(hasOwnProperty2).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
   );
-  var Buffer = moduleExports ? root.Buffer : void 0, Symbol2 = root.Symbol, Uint8Array2 = root.Uint8Array, getPrototype = overArg(Object.getPrototypeOf, Object), objectCreate = Object.create, propertyIsEnumerable = objectProto.propertyIsEnumerable, splice = arrayProto.splice;
-  var nativeGetSymbols = Object.getOwnPropertySymbols, nativeIsBuffer = Buffer ? Buffer.isBuffer : void 0, nativeKeys = overArg(Object.keys, Object);
+  var Buffer2 = moduleExports ? root.Buffer : void 0, Symbol2 = root.Symbol, Uint8Array2 = root.Uint8Array, getPrototype = overArg(Object.getPrototypeOf, Object), objectCreate = Object.create, propertyIsEnumerable = objectProto.propertyIsEnumerable, splice = arrayProto.splice;
+  var nativeGetSymbols = Object.getOwnPropertySymbols, nativeIsBuffer = Buffer2 ? Buffer2.isBuffer : void 0, nativeKeys = overArg(Object.keys, Object);
   var DataView2 = getNative(root, "DataView"), Map2 = getNative(root, "Map"), Promise2 = getNative(root, "Promise"), Set2 = getNative(root, "Set"), WeakMap2 = getNative(root, "WeakMap"), nativeCreate = getNative(Object, "create");
   var dataViewCtorString = toSource(DataView2), mapCtorString = toSource(Map2), promiseCtorString = toSource(Promise2), setCtorString = toSource(Set2), weakMapCtorString = toSource(WeakMap2);
   var symbolProto = Symbol2 ? Symbol2.prototype : void 0, symbolValueOf = symbolProto ? symbolProto.valueOf : void 0;
@@ -3463,11 +3469,11 @@ var lodash_clone = { exports: {} };
         return copyArray(value, result2);
       }
     } else {
-      var tag = getTag(value), isFunc = tag == funcTag || tag == genTag;
+      var tag2 = getTag(value), isFunc = tag2 == funcTag || tag2 == genTag;
       if (isBuffer2(value)) {
         return cloneBuffer(value, isDeep);
       }
-      if (tag == objectTag || tag == argsTag || isFunc && !object) {
+      if (tag2 == objectTag || tag2 == argsTag || isFunc && !object) {
         if (isHostObject(value)) {
           return object ? value : {};
         }
@@ -3476,10 +3482,10 @@ var lodash_clone = { exports: {} };
           return copySymbols(value, baseAssign(result2, value));
         }
       } else {
-        if (!cloneableTags[tag]) {
+        if (!cloneableTags[tag2]) {
           return object ? value : {};
         }
-        result2 = initCloneByTag(value, tag, baseClone, isDeep);
+        result2 = initCloneByTag(value, tag2, baseClone, isDeep);
       }
     }
     stack || (stack = new Stack());
@@ -3631,9 +3637,9 @@ var lodash_clone = { exports: {} };
   function initCloneObject(object) {
     return typeof object.constructor == "function" && !isPrototype2(object) ? baseCreate(getPrototype(object)) : {};
   }
-  function initCloneByTag(object, tag, cloneFunc, isDeep) {
+  function initCloneByTag(object, tag2, cloneFunc, isDeep) {
     var Ctor = object.constructor;
-    switch (tag) {
+    switch (tag2) {
       case arrayBufferTag:
         return cloneArrayBuffer(object);
       case boolTag:
@@ -3710,8 +3716,8 @@ var lodash_clone = { exports: {} };
   }
   var isBuffer2 = nativeIsBuffer || stubFalse;
   function isFunction2(value) {
-    var tag = isObject3(value) ? objectToString.call(value) : "";
-    return tag == funcTag || tag == genTag;
+    var tag2 = isObject3(value) ? objectToString.call(value) : "";
+    return tag2 == funcTag || tag2 == genTag;
   }
   function isLength(value) {
     return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
@@ -3840,8 +3846,8 @@ var lodash_clonedeep = { exports: {} };
   var reIsNative = RegExp(
     "^" + funcToString.call(hasOwnProperty2).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
   );
-  var Buffer = moduleExports ? root.Buffer : void 0, Symbol2 = root.Symbol, Uint8Array2 = root.Uint8Array, getPrototype = overArg(Object.getPrototypeOf, Object), objectCreate = Object.create, propertyIsEnumerable = objectProto.propertyIsEnumerable, splice = arrayProto.splice;
-  var nativeGetSymbols = Object.getOwnPropertySymbols, nativeIsBuffer = Buffer ? Buffer.isBuffer : void 0, nativeKeys = overArg(Object.keys, Object);
+  var Buffer2 = moduleExports ? root.Buffer : void 0, Symbol2 = root.Symbol, Uint8Array2 = root.Uint8Array, getPrototype = overArg(Object.getPrototypeOf, Object), objectCreate = Object.create, propertyIsEnumerable = objectProto.propertyIsEnumerable, splice = arrayProto.splice;
+  var nativeGetSymbols = Object.getOwnPropertySymbols, nativeIsBuffer = Buffer2 ? Buffer2.isBuffer : void 0, nativeKeys = overArg(Object.keys, Object);
   var DataView2 = getNative(root, "DataView"), Map2 = getNative(root, "Map"), Promise2 = getNative(root, "Promise"), Set2 = getNative(root, "Set"), WeakMap2 = getNative(root, "WeakMap"), nativeCreate = getNative(Object, "create");
   var dataViewCtorString = toSource(DataView2), mapCtorString = toSource(Map2), promiseCtorString = toSource(Promise2), setCtorString = toSource(Set2), weakMapCtorString = toSource(WeakMap2);
   var symbolProto = Symbol2 ? Symbol2.prototype : void 0, symbolValueOf = symbolProto ? symbolProto.valueOf : void 0;
@@ -4038,11 +4044,11 @@ var lodash_clonedeep = { exports: {} };
         return copyArray(value, result2);
       }
     } else {
-      var tag = getTag(value), isFunc = tag == funcTag || tag == genTag;
+      var tag2 = getTag(value), isFunc = tag2 == funcTag || tag2 == genTag;
       if (isBuffer2(value)) {
         return cloneBuffer(value, isDeep);
       }
-      if (tag == objectTag || tag == argsTag || isFunc && !object) {
+      if (tag2 == objectTag || tag2 == argsTag || isFunc && !object) {
         if (isHostObject(value)) {
           return object ? value : {};
         }
@@ -4051,10 +4057,10 @@ var lodash_clonedeep = { exports: {} };
           return copySymbols(value, baseAssign(result2, value));
         }
       } else {
-        if (!cloneableTags[tag]) {
+        if (!cloneableTags[tag2]) {
           return object ? value : {};
         }
-        result2 = initCloneByTag(value, tag, baseClone, isDeep);
+        result2 = initCloneByTag(value, tag2, baseClone, isDeep);
       }
     }
     stack || (stack = new Stack());
@@ -4206,9 +4212,9 @@ var lodash_clonedeep = { exports: {} };
   function initCloneObject(object) {
     return typeof object.constructor == "function" && !isPrototype2(object) ? baseCreate(getPrototype(object)) : {};
   }
-  function initCloneByTag(object, tag, cloneFunc, isDeep) {
+  function initCloneByTag(object, tag2, cloneFunc, isDeep) {
     var Ctor = object.constructor;
-    switch (tag) {
+    switch (tag2) {
       case arrayBufferTag:
         return cloneArrayBuffer(object);
       case boolTag:
@@ -4285,8 +4291,8 @@ var lodash_clonedeep = { exports: {} };
   }
   var isBuffer2 = nativeIsBuffer || stubFalse;
   function isFunction2(value) {
-    var tag = isObject3(value) ? objectToString.call(value) : "";
-    return tag == funcTag || tag == genTag;
+    var tag2 = isObject3(value) ? objectToString.call(value) : "";
+    return tag2 == funcTag || tag2 == genTag;
   }
   function isLength(value) {
     return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
@@ -5887,8 +5893,8 @@ function requireIsTypedArray() {
       return false;
     }
     if (!hasToStringTag2 || !(Symbol.toStringTag in value)) {
-      var tag = $slice2($toString2(value), 8, -1);
-      return $indexOf2(typedArrays2, tag) > -1;
+      var tag2 = $slice2($toString2(value), 8, -1);
+      return $indexOf2(typedArrays2, tag2) > -1;
     }
     if (!gOPD2) {
       return false;
@@ -6086,13 +6092,13 @@ var shim$8 = function shimName() {
   });
   return polyfill2;
 };
-var define$6 = defineProperties_1;
+var define$7 = defineProperties_1;
 var callBind$1 = callBind$3.exports;
 var implementation$6 = implementation$8;
 var getPolyfill$2 = polyfill$3;
 var shim$7 = shim$8;
 var bound$1 = callBind$1(implementation$6);
-define$6(bound$1, {
+define$7(bound$1, {
   getPolyfill: getPolyfill$2,
   implementation: implementation$6,
   shim: shim$7
@@ -6136,7 +6142,7 @@ var isAsyncFunction$1 = function isAsyncFunction2(fn2) {
 var whichBoxedPrimitive = whichBoxedPrimitive$1;
 var whichCollection = whichCollection$1;
 var whichTypedArray = whichTypedArray$1;
-var isArray$2 = isarray;
+var isArray$3 = isarray;
 var isDate$1 = isDateObject;
 var isRegex = isRegex$1;
 var isWeakRef = isWeakref;
@@ -6171,7 +6177,7 @@ var whichBuiltinType$1 = function whichBuiltinType2(value) {
   if (which) {
     return which;
   }
-  if (isArray$2(value)) {
+  if (isArray$3(value)) {
     return "Array";
   }
   if (isDate$1(value)) {
@@ -6199,9 +6205,9 @@ var whichBuiltinType$1 = function whichBuiltinType2(value) {
     return "Promise";
   }
   if (toStringTag && toStringTag in value) {
-    var tag = value[toStringTag];
-    if (isKnownBuiltin(tag)) {
-      return tag;
+    var tag2 = value[toStringTag];
+    if (isKnownBuiltin(tag2)) {
+      return tag2;
     }
   }
   if (typeof value.constructor === "function") {
@@ -6268,10 +6274,10 @@ var polyfill$2 = function getPolyfill3() {
   }
   return implementation$4;
 };
-var define$5 = defineProperties_1;
+var define$6 = defineProperties_1;
 var getPolyfill$1 = polyfill$2;
 var shim$6 = function shimGetPrototypeOf() {
-  define$5(
+  define$6(
     commonjsGlobal,
     { Reflect: {} },
     { Reflect: function() {
@@ -6279,7 +6285,7 @@ var shim$6 = function shimGetPrototypeOf() {
     } }
   );
   var polyfill2 = getPolyfill$1();
-  define$5(
+  define$6(
     Reflect,
     { getPrototypeOf: polyfill2 },
     { getPrototypeOf: function() {
@@ -6289,12 +6295,12 @@ var shim$6 = function shimGetPrototypeOf() {
   return polyfill2;
 };
 var callBind = callBind$3.exports;
-var define$4 = defineProperties_1;
+var define$5 = defineProperties_1;
 var implementation$3 = implementation$5;
 var getPolyfill = polyfill$2;
 var shim$5 = shim$6;
 var bound = callBind(getPolyfill(), typeof Reflect === "object" ? Reflect : Object);
-define$4(bound, {
+define$5(bound, {
   getPolyfill,
   implementation: implementation$3,
   shim: shim$5
@@ -6388,14 +6394,14 @@ var concatMap$1 = function(xs, fn2) {
   var res = [];
   for (var i2 = 0; i2 < xs.length; i2++) {
     var x = fn2(xs[i2], i2);
-    if (isArray$1(x))
+    if (isArray$2(x))
       res.push.apply(res, x);
     else
       res.push(x);
   }
   return res;
 };
-var isArray$1 = Array.isArray || function(xs) {
+var isArray$2 = Array.isArray || function(xs) {
   return Object.prototype.toString.call(xs) === "[object Array]";
 };
 var balancedMatch = balanced$1;
@@ -6795,7 +6801,7 @@ function parse$1(pattern, isSub) {
   }
   if (pattern === "")
     return "";
-  var re2 = "";
+  var re = "";
   var hasMagic = !!options.nocase;
   var escaping = false;
   var patternListStack = [];
@@ -6810,25 +6816,25 @@ function parse$1(pattern, isSub) {
     if (stateChar) {
       switch (stateChar) {
         case "*":
-          re2 += star;
+          re += star;
           hasMagic = true;
           break;
         case "?":
-          re2 += qmark;
+          re += qmark;
           hasMagic = true;
           break;
         default:
-          re2 += "\\" + stateChar;
+          re += "\\" + stateChar;
           break;
       }
-      self2.debug("clearStateChar %j %j", stateChar, re2);
+      self2.debug("clearStateChar %j %j", stateChar, re);
       stateChar = false;
     }
   }
   for (var i2 = 0, len = pattern.length, c; i2 < len && (c = pattern.charAt(i2)); i2++) {
-    this.debug("%s	%s %s %j", pattern, i2, re2, c);
+    this.debug("%s	%s %s %j", pattern, i2, re, c);
     if (escaping && reSpecials[c]) {
-      re2 += "\\" + c;
+      re += "\\" + c;
       escaping = false;
       continue;
     }
@@ -6845,12 +6851,12 @@ function parse$1(pattern, isSub) {
       case "+":
       case "@":
       case "!":
-        this.debug("%s	%s %s %j <-- stateChar", pattern, i2, re2, c);
+        this.debug("%s	%s %s %j <-- stateChar", pattern, i2, re, c);
         if (inClass) {
           this.debug("  in class");
           if (c === "!" && i2 === classStart + 1)
             c = "^";
-          re2 += c;
+          re += c;
           continue;
         }
         self2.debug("call clearStateChar %j", stateChar);
@@ -6861,61 +6867,61 @@ function parse$1(pattern, isSub) {
         continue;
       case "(":
         if (inClass) {
-          re2 += "(";
+          re += "(";
           continue;
         }
         if (!stateChar) {
-          re2 += "\\(";
+          re += "\\(";
           continue;
         }
         patternListStack.push({
           type: stateChar,
           start: i2 - 1,
-          reStart: re2.length,
+          reStart: re.length,
           open: plTypes[stateChar].open,
           close: plTypes[stateChar].close
         });
-        re2 += stateChar === "!" ? "(?:(?!(?:" : "(?:";
-        this.debug("plType %j %j", stateChar, re2);
+        re += stateChar === "!" ? "(?:(?!(?:" : "(?:";
+        this.debug("plType %j %j", stateChar, re);
         stateChar = false;
         continue;
       case ")":
         if (inClass || !patternListStack.length) {
-          re2 += "\\)";
+          re += "\\)";
           continue;
         }
         clearStateChar();
         hasMagic = true;
         var pl = patternListStack.pop();
-        re2 += pl.close;
+        re += pl.close;
         if (pl.type === "!") {
           negativeLists.push(pl);
         }
-        pl.reEnd = re2.length;
+        pl.reEnd = re.length;
         continue;
       case "|":
         if (inClass || !patternListStack.length || escaping) {
-          re2 += "\\|";
+          re += "\\|";
           escaping = false;
           continue;
         }
         clearStateChar();
-        re2 += "|";
+        re += "|";
         continue;
       case "[":
         clearStateChar();
         if (inClass) {
-          re2 += "\\" + c;
+          re += "\\" + c;
           continue;
         }
         inClass = true;
         classStart = i2;
-        reClassStart = re2.length;
-        re2 += c;
+        reClassStart = re.length;
+        re += c;
         continue;
       case "]":
         if (i2 === classStart + 1 || !inClass) {
-          re2 += "\\" + c;
+          re += "\\" + c;
           escaping = false;
           continue;
         }
@@ -6924,51 +6930,51 @@ function parse$1(pattern, isSub) {
           RegExp("[" + cs + "]");
         } catch (er) {
           var sp = this.parse(cs, SUBPARSE);
-          re2 = re2.substr(0, reClassStart) + "\\[" + sp[0] + "\\]";
+          re = re.substr(0, reClassStart) + "\\[" + sp[0] + "\\]";
           hasMagic = hasMagic || sp[1];
           inClass = false;
           continue;
         }
         hasMagic = true;
         inClass = false;
-        re2 += c;
+        re += c;
         continue;
       default:
         clearStateChar();
         if (escaping) {
           escaping = false;
         } else if (reSpecials[c] && !(c === "^" && inClass)) {
-          re2 += "\\";
+          re += "\\";
         }
-        re2 += c;
+        re += c;
     }
   }
   if (inClass) {
     cs = pattern.substr(classStart + 1);
     sp = this.parse(cs, SUBPARSE);
-    re2 = re2.substr(0, reClassStart) + "\\[" + sp[0];
+    re = re.substr(0, reClassStart) + "\\[" + sp[0];
     hasMagic = hasMagic || sp[1];
   }
   for (pl = patternListStack.pop(); pl; pl = patternListStack.pop()) {
-    var tail = re2.slice(pl.reStart + pl.open.length);
-    this.debug("setting tail", re2, pl);
+    var tail = re.slice(pl.reStart + pl.open.length);
+    this.debug("setting tail", re, pl);
     tail = tail.replace(/((?:\\{2}){0,64})(\\?)\|/g, function(_, $1, $2) {
       if (!$2) {
         $2 = "\\";
       }
       return $1 + $1 + $2 + "|";
     });
-    this.debug("tail=%j\n   %s", tail, tail, pl, re2);
+    this.debug("tail=%j\n   %s", tail, tail, pl, re);
     var t = pl.type === "*" ? star : pl.type === "?" ? qmark : "\\" + pl.type;
     hasMagic = true;
-    re2 = re2.slice(0, pl.reStart) + t + "\\(" + tail;
+    re = re.slice(0, pl.reStart) + t + "\\(" + tail;
   }
   clearStateChar();
   if (escaping) {
-    re2 += "\\\\";
+    re += "\\\\";
   }
   var addPatternStart = false;
-  switch (re2.charAt(0)) {
+  switch (re.charAt(0)) {
     case "[":
     case ".":
     case "(":
@@ -6976,10 +6982,10 @@ function parse$1(pattern, isSub) {
   }
   for (var n = negativeLists.length - 1; n > -1; n--) {
     var nl = negativeLists[n];
-    var nlBefore = re2.slice(0, nl.reStart);
-    var nlFirst = re2.slice(nl.reStart, nl.reEnd - 8);
-    var nlLast = re2.slice(nl.reEnd - 8, nl.reEnd);
-    var nlAfter = re2.slice(nl.reEnd);
+    var nlBefore = re.slice(0, nl.reStart);
+    var nlFirst = re.slice(nl.reStart, nl.reEnd - 8);
+    var nlLast = re.slice(nl.reEnd - 8, nl.reEnd);
+    var nlAfter = re.slice(nl.reEnd);
     nlLast += nlAfter;
     var openParensBefore = nlBefore.split("(").length - 1;
     var cleanAfter = nlAfter;
@@ -6992,28 +6998,28 @@ function parse$1(pattern, isSub) {
       dollar = "$";
     }
     var newRe = nlBefore + nlFirst + nlAfter + dollar + nlLast;
-    re2 = newRe;
+    re = newRe;
   }
-  if (re2 !== "" && hasMagic) {
-    re2 = "(?=.)" + re2;
+  if (re !== "" && hasMagic) {
+    re = "(?=.)" + re;
   }
   if (addPatternStart) {
-    re2 = patternStart + re2;
+    re = patternStart + re;
   }
   if (isSub === SUBPARSE) {
-    return [re2, hasMagic];
+    return [re, hasMagic];
   }
   if (!hasMagic) {
     return globUnescape(pattern);
   }
   var flags = options.nocase ? "i" : "";
   try {
-    var regExp = new RegExp("^" + re2 + "$", flags);
+    var regExp = new RegExp("^" + re + "$", flags);
   } catch (er) {
     return new RegExp("$.");
   }
   regExp._glob = pattern;
-  regExp._src = re2;
+  regExp._src = re;
   return regExp;
 }
 minimatch.makeRe = function(pattern, options) {
@@ -7031,16 +7037,16 @@ function makeRe$1() {
   var options = this.options;
   var twoStar = options.noglobstar ? star : options.dot ? twoStarDot : twoStarNoDot;
   var flags = options.nocase ? "i" : "";
-  var re2 = set.map(function(pattern) {
+  var re = set.map(function(pattern) {
     return pattern.map(function(p) {
       return p === GLOBSTAR ? twoStar : typeof p === "string" ? regExpEscape(p) : p._src;
     }).join("\\/");
   }).join("|");
-  re2 = "^(?:" + re2 + ")$";
+  re = "^(?:" + re + ")$";
   if (this.negate)
-    re2 = "^(?!" + re2 + ").*$";
+    re = "^(?!" + re + ").*$";
   try {
-    this.regexp = new RegExp(re2, flags);
+    this.regexp = new RegExp(re, flags);
   } catch (ex) {
     this.regexp = false;
   }
@@ -7518,7 +7524,7 @@ var object_hash = { exports: {} };
         function m(e3, t2, n2, r2) {
           return r2 || (D("boolean" == typeof n2, "missing or invalid endian"), D(t2 + 7 < e3.length, "Trying to read beyond buffer length")), f.read(e3, t2, n2, 52, 8);
         }
-        function v(e3, t2, n2, r2, o2) {
+        function v2(e3, t2, n2, r2, o2) {
           o2 || (D(null != t2, "missing value"), D("boolean" == typeof r2, "missing or invalid endian"), D(null != n2, "missing offset"), D(n2 + 1 < e3.length, "trying to write beyond buffer length"), N(t2, 65535));
           var i3 = e3.length;
           if (!(i3 <= n2))
@@ -7533,7 +7539,7 @@ var object_hash = { exports: {} };
               e3[n2 + u2] = t2 >>> 8 * (r2 ? u2 : 3 - u2) & 255;
         }
         function E(e3, t2, n2, r2, o2) {
-          o2 || (D(null != t2, "missing value"), D("boolean" == typeof r2, "missing or invalid endian"), D(null != n2, "missing offset"), D(n2 + 1 < e3.length, "Trying to write beyond buffer length"), Y(t2, 32767, -32768)), e3.length <= n2 || v(e3, 0 <= t2 ? t2 : 65535 + t2 + 1, n2, r2, o2);
+          o2 || (D(null != t2, "missing value"), D("boolean" == typeof r2, "missing or invalid endian"), D(null != n2, "missing offset"), D(n2 + 1 < e3.length, "Trying to write beyond buffer length"), Y(t2, 32767, -32768)), e3.length <= n2 || v2(e3, 0 <= t2 ? t2 : 65535 + t2 + 1, n2, r2, o2);
         }
         function I(e3, t2, n2, r2, o2) {
           o2 || (D(null != t2, "missing value"), D("boolean" == typeof r2, "missing or invalid endian"), D(null != n2, "missing offset"), D(n2 + 3 < e3.length, "Trying to write beyond buffer length"), Y(t2, 2147483647, -2147483648)), e3.length <= n2 || _(e3, 0 <= t2 ? t2 : 4294967295 + t2 + 1, n2, r2, o2);
@@ -7755,9 +7761,9 @@ var object_hash = { exports: {} };
         }, g2.prototype.writeUInt8 = function(e3, t2, n2) {
           n2 || (D(null != e3, "missing value"), D(null != t2, "missing offset"), D(t2 < this.length, "trying to write beyond buffer length"), N(e3, 255)), t2 >= this.length || (this[t2] = e3);
         }, g2.prototype.writeUInt16LE = function(e3, t2, n2) {
-          v(this, e3, t2, true, n2);
+          v2(this, e3, t2, true, n2);
         }, g2.prototype.writeUInt16BE = function(e3, t2, n2) {
-          v(this, e3, t2, false, n2);
+          v2(this, e3, t2, false, n2);
         }, g2.prototype.writeUInt32LE = function(e3, t2, n2) {
           _(this, e3, t2, true, n2);
         }, g2.prototype.writeUInt32BE = function(e3, t2, n2) {
@@ -7974,7 +7980,7 @@ var object_hash = { exports: {} };
           for (var n2, r2, o2, i3, u2, a2 = Array(80), s2 = 1732584193, f2 = -271733879, c2 = -1732584194, l2 = 271733878, d3 = -1009589776, h = 0; h < e3.length; h += 16) {
             for (var p = s2, g2 = f2, y = c2, w = l2, b = d3, m = 0; m < 80; m++) {
               a2[m] = m < 16 ? e3[h + m] : E(a2[m - 3] ^ a2[m - 8] ^ a2[m - 14] ^ a2[m - 16], 1);
-              var v = _(_(E(s2, 5), (o2 = f2, i3 = c2, u2 = l2, (r2 = m) < 20 ? o2 & i3 | ~o2 & u2 : !(r2 < 40) && r2 < 60 ? o2 & i3 | o2 & u2 | i3 & u2 : o2 ^ i3 ^ u2)), _(_(d3, a2[m]), (n2 = m) < 20 ? 1518500249 : n2 < 40 ? 1859775393 : n2 < 60 ? -1894007588 : -899497514)), d3 = l2, l2 = c2, c2 = E(f2, 30), f2 = s2, s2 = v;
+              var v2 = _(_(E(s2, 5), (o2 = f2, i3 = c2, u2 = l2, (r2 = m) < 20 ? o2 & i3 | ~o2 & u2 : !(r2 < 40) && r2 < 60 ? o2 & i3 | o2 & u2 | i3 & u2 : o2 ^ i3 ^ u2)), _(_(d3, a2[m]), (n2 = m) < 20 ? 1518500249 : n2 < 40 ? 1859775393 : n2 < 60 ? -1894007588 : -899497514)), d3 = l2, l2 = c2, c2 = E(f2, 30), f2 = s2, s2 = v2;
             }
             s2 = _(s2, p), f2 = _(f2, g2), c2 = _(c2, y), l2 = _(l2, w), d3 = _(d3, b);
           }
@@ -8003,10 +8009,10 @@ var object_hash = { exports: {} };
         function f(e3, t2) {
           var n2, r2, o2, i3, u2, a2, s2, f2, c2, l2, d3 = new Array(1116352408, 1899447441, 3049323471, 3921009573, 961987163, 1508970993, 2453635748, 2870763221, 3624381080, 310598401, 607225278, 1426881987, 1925078388, 2162078206, 2614888103, 3248222580, 3835390401, 4022224774, 264347078, 604807628, 770255983, 1249150122, 1555081692, 1996064986, 2554220882, 2821834349, 2952996808, 3210313671, 3336571891, 3584528711, 113926993, 338241895, 666307205, 773529912, 1294757372, 1396182291, 1695183700, 1986661051, 2177026350, 2456956037, 2730485921, 2820302411, 3259730800, 3345764771, 3516065817, 3600352804, 4094571909, 275423344, 430227734, 506948616, 659060556, 883997877, 958139571, 1322822218, 1537002063, 1747873779, 1955562222, 2024104815, 2227730452, 2361852424, 2428436474, 2756734187, 3204031479, 3329325298), h = new Array(1779033703, 3144134277, 1013904242, 2773480762, 1359893119, 2600822924, 528734635, 1541459225), p = new Array(64);
           e3[t2 >> 5] |= 128 << 24 - t2 % 32, e3[15 + (t2 + 64 >> 9 << 4)] = t2;
-          for (var g2, y, w, b, m, v, _, E, I = 0; I < e3.length; I += 16) {
+          for (var g2, y, w, b, m, v2, _, E, I = 0; I < e3.length; I += 16) {
             n2 = h[0], r2 = h[1], o2 = h[2], i3 = h[3], u2 = h[4], a2 = h[5], s2 = h[6], f2 = h[7];
             for (var A = 0; A < 64; A++)
-              p[A] = A < 16 ? e3[A + I] : B(B(B((E = p[A - 2], L(E, 17) ^ L(E, 19) ^ E >>> 10), p[A - 7]), (_ = p[A - 15], L(_, 7) ^ L(_, 18) ^ _ >>> 3)), p[A - 16]), c2 = B(B(B(B(f2, L(v = u2, 6) ^ L(v, 11) ^ L(v, 25)), (m = u2) & a2 ^ ~m & s2), d3[A]), p[A]), l2 = B(L(b = n2, 2) ^ L(b, 13) ^ L(b, 22), (g2 = n2) & (y = r2) ^ g2 & (w = o2) ^ y & w), f2 = s2, s2 = a2, a2 = u2, u2 = B(i3, c2), i3 = o2, o2 = r2, r2 = n2, n2 = B(c2, l2);
+              p[A] = A < 16 ? e3[A + I] : B(B(B((E = p[A - 2], L(E, 17) ^ L(E, 19) ^ E >>> 10), p[A - 7]), (_ = p[A - 15], L(_, 7) ^ L(_, 18) ^ _ >>> 3)), p[A - 16]), c2 = B(B(B(B(f2, L(v2 = u2, 6) ^ L(v2, 11) ^ L(v2, 25)), (m = u2) & a2 ^ ~m & s2), d3[A]), p[A]), l2 = B(L(b = n2, 2) ^ L(b, 13) ^ L(b, 22), (g2 = n2) & (y = r2) ^ g2 & (w = o2) ^ y & w), f2 = s2, s2 = a2, a2 = u2, u2 = B(i3, c2), i3 = o2, o2 = r2, r2 = n2, n2 = B(c2, l2);
             h[0] = B(n2, h[0]), h[1] = B(r2, h[1]), h[2] = B(o2, h[2]), h[3] = B(i3, h[3]), h[4] = B(u2, h[4]), h[5] = B(a2, h[5]), h[6] = B(s2, h[6]), h[7] = B(f2, h[7]);
           }
           return h;
@@ -8812,7 +8818,7 @@ function __isColor(value) {
  * Copyright (c) 2014-2016, Jon Schlinkert.
  * Licensed under the MIT License.
  */
-var isExtglob$3 = function isExtglob2(str2) {
+var isExtglob$1 = function isExtglob2(str2) {
   if (typeof str2 !== "string" || str2 === "") {
     return false;
   }
@@ -8830,7 +8836,7 @@ var isExtglob$3 = function isExtglob2(str2) {
  * Copyright (c) 2014-2017, Jon Schlinkert.
  * Released under the MIT License.
  */
-var isExtglob$2 = isExtglob$3;
+var isExtglob = isExtglob$1;
 var chars = { "{": "}", "(": ")", "[": "]" };
 var strictCheck = function(str2) {
   if (str2[0] === "!") {
@@ -8942,11 +8948,11 @@ var relaxedCheck = function(str2) {
   }
   return false;
 };
-var isGlob$2 = function isGlob2(str2, options) {
+var isGlob = function isGlob2(str2, options) {
   if (typeof str2 !== "string" || str2 === "") {
     return false;
   }
-  if (isExtglob$2(str2)) {
+  if (isExtglob(str2)) {
     return true;
   }
   var check = strictCheck;
@@ -8956,7 +8962,7 @@ var isGlob$2 = function isGlob2(str2, options) {
   return check(str2);
 };
 function __isGlob(string2) {
-  return isGlob$2(string2);
+  return isGlob(string2);
 }
 function __isNode() {
   return typeof process !== "undefined" && process.release && process.release.name === "node";
@@ -8966,51 +8972,6 @@ function __isOfType(value, typeString, settings = {}) {
   const typeInstance = new SType(typeString, settings);
   const res = typeInstance.is(value);
   return res;
-}
-/*!
- * is-extglob <https://github.com/jonschlinkert/is-extglob>
- *
- * Copyright (c) 2014-2015, Jon Schlinkert.
- * Licensed under the MIT License.
- */
-var isExtglob$1 = function isExtglob3(str2) {
-  return typeof str2 === "string" && /[@?!+*]\(/.test(str2);
-};
-/*!
- * is-glob <https://github.com/jonschlinkert/is-glob>
- *
- * Copyright (c) 2014-2015, Jon Schlinkert.
- * Licensed under the MIT License.
- */
-var isExtglob = isExtglob$1;
-var isGlob$1 = function isGlob3(str2) {
-  return typeof str2 === "string" && (/[*!?{}(|)[\]]/.test(str2) || isExtglob(str2));
-};
-/*!
- * is-invalid-path <https://github.com/jonschlinkert/is-invalid-path>
- *
- * Copyright (c) 2015, Jon Schlinkert.
- * Licensed under the MIT License.
- */
-var isGlob = isGlob$1;
-var re = /[‘“!#$%&+^<=>`]/;
-var isInvalidPath$1 = function(str2) {
-  return typeof str2 !== "string" || isGlob(str2) || re.test(str2);
-};
-/*!
- * is-valid-path <https://github.com/jonschlinkert/is-valid-path>
- *
- * Copyright (c) 2015 Jon Schlinkert, contributors.
- * Licensed under the MIT license.
- */
-var isInvalidPath = isInvalidPath$1;
-var isValidPath = function(str2) {
-  return isInvalidPath(str2) === false;
-};
-function __isPath(path2) {
-  if (!isValidPath(path2))
-    return false;
-  return true;
 }
 function __isString(value) {
   return typeof value === "string" || value instanceof String;
@@ -9100,7 +9061,7 @@ var globToRegexp = function(glob, opts) {
   }
   return new RegExp(reStr, flags);
 };
-var __awaiter$c = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$d = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -9158,13 +9119,13 @@ class SEventEmitter$1 extends SClass {
     if (!sourceSEventEmitter || !sourceSEventEmitter.on || typeof sourceSEventEmitter.on !== "function") {
       return sourceSEventEmitter;
     }
-    sourceSEventEmitter.on(set.events || "*", (value, metas) => __awaiter$c(this, void 0, void 0, function* () {
-      var _a3, _b2, _c, _d, _e, _f, _g;
+    sourceSEventEmitter.on(set.events || "*", (value, metas) => __awaiter$d(this, void 0, void 0, function* () {
+      var _a3, _b2, _c2, _d2, _e, _f, _g;
       if (!metas || !value) {
         return;
       }
-      metas.id = (_c = (_a3 = metas.id) !== null && _a3 !== void 0 ? _a3 : (_b2 = metas.emitter.metas) === null || _b2 === void 0 ? void 0 : _b2.id) !== null && _c !== void 0 ? _c : __uniqid();
-      metas.color = (_f = (_d = metas.color) !== null && _d !== void 0 ? _d : (_e = metas.emitter.metas) === null || _e === void 0 ? void 0 : _e.color) !== null && _f !== void 0 ? _f : getColorFor(metas.id);
+      metas.id = (_c2 = (_a3 = metas.id) !== null && _a3 !== void 0 ? _a3 : (_b2 = metas.emitter.metas) === null || _b2 === void 0 ? void 0 : _b2.id) !== null && _c2 !== void 0 ? _c2 : __uniqid();
+      metas.color = (_f = (_d2 = metas.color) !== null && _d2 !== void 0 ? _d2 : (_e = metas.emitter.metas) === null || _e === void 0 ? void 0 : _e.color) !== null && _f !== void 0 ? _f : getColorFor(metas.id);
       if (set.exclude && set.exclude.indexOf(metas.event) !== -1)
         return;
       if (set.filter && !set.filter(value, metas))
@@ -9239,42 +9200,42 @@ class SEventEmitter$1 extends SClass {
     this._asyncStarted = true;
     this._processBuffer();
   }
-  _createMetas(event2, metas = {}) {
-    var _a3, _b2, _c;
+  _createMetas(event, metas = {}) {
+    var _a3, _b2, _c2;
     return __deepMerge({
-      event: event2,
-      name: event2,
+      event,
+      name: event,
       emitter: (_b2 = (_a3 = this.settings.bind) !== null && _a3 !== void 0 ? _a3 : metas === null || metas === void 0 ? void 0 : metas.emitter) !== null && _b2 !== void 0 ? _b2 : this,
-      originalEmitter: (_c = metas === null || metas === void 0 ? void 0 : metas.originalEmitter) !== null && _c !== void 0 ? _c : this,
+      originalEmitter: (_c2 = metas === null || metas === void 0 ? void 0 : metas.originalEmitter) !== null && _c2 !== void 0 ? _c2 : this,
       time: Date.now(),
       level: 0
     }, metas !== null && metas !== void 0 ? metas : {});
   }
-  emit(event2, value, metas) {
-    return new Promise((resolve, reject) => __awaiter$c(this, void 0, void 0, function* () {
-      let metasObj = this._createMetas(event2, metas);
+  emit(event, value, metas) {
+    return new Promise((resolve, reject) => __awaiter$d(this, void 0, void 0, function* () {
+      let metasObj = this._createMetas(event, metas);
       const isFirstLevel = !metasObj.level;
       if (__isPlainObject(value)) {
         Object.keys(this.settings.defaults).forEach((key) => {
           var _a3;
           const parts = key.split(",").map((l) => l.trim());
-          if (parts.indexOf(event2) === -1 && parts.indexOf("*") === -1)
+          if (parts.indexOf(event) === -1 && parts.indexOf("*") === -1)
             return;
           value = __deepMerge(value, (_a3 = this.settings.defaults) === null || _a3 === void 0 ? void 0 : _a3[key]);
         });
       }
-      const CastClass = this.settings.castByEvent[event2];
+      const CastClass = this.settings.castByEvent[event];
       if (CastClass && isClass$1(CastClass) && !(value instanceof CastClass) && !value._sEventEmitterPreprocessed) {
         value = new CastClass(value);
       }
-      if (event2 === "ask") {
+      if (event === "ask") {
         if (isFirstLevel) {
           metasObj.askId = __uniqid();
         }
       }
       if (!this._asyncStarted && this.settings.asyncStart) {
         this._buffer.push({
-          event: event2,
+          event,
           value,
           metas: metasObj,
           resolve,
@@ -9283,7 +9244,7 @@ class SEventEmitter$1 extends SClass {
         return;
       }
       this._emit({
-        event: event2,
+        event,
         value,
         metas: metasObj,
         resolve,
@@ -9292,7 +9253,7 @@ class SEventEmitter$1 extends SClass {
     }));
   }
   _emit(logObj) {
-    return __awaiter$c(this, void 0, void 0, function* () {
+    return __awaiter$d(this, void 0, void 0, function* () {
       logObj.metas.uid = __uniqid();
       if (logObj.event === "ask") {
         this.constructor.global.on(`answer.${logObj.metas.askId}`, (answer, metas) => {
@@ -9308,30 +9269,30 @@ class SEventEmitter$1 extends SClass {
   _registerNewEventsStacks(events) {
     if (typeof events === "string")
       events = events.split(",").map((s) => s.trim());
-    events.forEach((event2) => {
-      if (!this._eventsStacks[event2]) {
-        this._eventsStacks[event2] = {
+    events.forEach((event) => {
+      if (!this._eventsStacks[event]) {
+        this._eventsStacks[event] = {
           buffer: [],
           callStack: []
         };
       }
     });
   }
-  _registerCallbackInEventStack(event2, callback, settings = {}) {
+  _registerCallbackInEventStack(event, callback, settings = {}) {
     settings = Object.assign({ callNumber: void 0, filter: void 0, processor: void 0, id: void 0 }, settings);
     if (settings.id) {
       if (!this._onStackById[settings.id])
         this._onStackById[settings.id] = [];
       this._onStackById[settings.id].push({
-        event: event2,
+        event,
         callback,
         settings
       });
     }
-    if (!this._eventsStacks[event2]) {
-      this._registerNewEventsStacks(event2);
+    if (!this._eventsStacks[event]) {
+      this._registerNewEventsStacks(event);
     }
-    const eventStackObj = this._eventsStacks[event2];
+    const eventStackObj = this._eventsStacks[event];
     let callNumber = settings.callNumber;
     if (callNumber === void 0) {
       callNumber = -1;
@@ -9357,16 +9318,16 @@ class SEventEmitter$1 extends SClass {
       }, this.settings.bufferTimeout);
     }
   }
-  _emitEventStack(event2, initialValue, metasObj) {
-    return __awaiter$c(this, void 0, void 0, function* () {
+  _emitEventStack(event, initialValue, metasObj) {
+    return __awaiter$d(this, void 0, void 0, function* () {
       let currentCallbackReturnedValue = initialValue;
       if (!this._eventsStacks || Object.keys(this._eventsStacks).length === 0)
         return currentCallbackReturnedValue;
-      if (!this._eventsStacks[event2]) {
-        this._registerNewEventsStacks(event2);
+      if (!this._eventsStacks[event]) {
+        this._registerNewEventsStacks(event);
       }
       let eventStackArray = [];
-      const eventStackObj = this._eventsStacks[event2];
+      const eventStackObj = this._eventsStacks[event];
       if (eventStackObj && eventStackObj.callStack) {
         eventStackArray = [
           ...eventStackArray,
@@ -9374,9 +9335,9 @@ class SEventEmitter$1 extends SClass {
         ];
       }
       Object.keys(this._eventsStacks).forEach((stackName) => {
-        if (stackName === event2)
+        if (stackName === event)
           return currentCallbackReturnedValue;
-        if (globToRegexp(stackName).test(event2) && this._eventsStacks[stackName] !== void 0) {
+        if (globToRegexp(stackName).test(event) && this._eventsStacks[stackName] !== void 0) {
           eventStackArray = [
             ...eventStackArray,
             ...this._eventsStacks[stackName].callStack
@@ -9420,7 +9381,7 @@ class SEventEmitter$1 extends SClass {
     });
   }
   _emitEvents(events, initialValue, metas) {
-    return new Promise((resolve, reject) => __awaiter$c(this, void 0, void 0, function* () {
+    return new Promise((resolve, reject) => __awaiter$d(this, void 0, void 0, function* () {
       if (!events)
         return this;
       if (typeof events === "string")
@@ -9459,19 +9420,19 @@ class SEventEmitter$1 extends SClass {
     });
     return this;
   }
-  off(event2, callback) {
+  off(event, callback) {
     if (!callback) {
-      if (this._eventsStacks[event2]) {
-        delete this._eventsStacks[event2];
-      } else if (this._onStackById[event2]) {
-        this._onStackById[event2].forEach((onStackByIdObj) => {
+      if (this._eventsStacks[event]) {
+        delete this._eventsStacks[event];
+      } else if (this._onStackById[event]) {
+        this._onStackById[event].forEach((onStackByIdObj) => {
           this.off(onStackByIdObj.event, onStackByIdObj.callback);
         });
-        delete this._onStackById[event2];
+        delete this._onStackById[event];
       }
       return this;
     }
-    const eventStackObj = this._eventsStacks[event2];
+    const eventStackObj = this._eventsStacks[event];
     if (!eventStackObj)
       return this;
     eventStackObj.callStack = eventStackObj.callStack.filter((item) => {
@@ -9479,7 +9440,7 @@ class SEventEmitter$1 extends SClass {
         return false;
       return true;
     });
-    this._eventsStacks[event2] = eventStackObj;
+    this._eventsStacks[event] = eventStackObj;
     return this;
   }
   destroy() {
@@ -9522,7 +9483,7 @@ const fn = function treatAsValue(promise, settings = {}) {
     return promise;
   }
 };
-var __awaiter$b = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$c = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -9598,7 +9559,7 @@ class SPromise extends SClass.extends(Promise) {
     this.bind = this._eventEmitter.bind.bind(this);
     this._resolvers = resolvers;
     if (this.promiseSettings.destroyTimeout !== -1) {
-      this.on("finally", (v, m) => {
+      this.on("finally", (v2, m) => {
         setTimeout(() => {
           this.destroy();
         }, this.promiseSettings.destroyTimeout);
@@ -9612,7 +9573,7 @@ class SPromise extends SClass.extends(Promise) {
           return;
         api[func] = this[func].bind(this);
       });
-      (() => __awaiter$b(this, void 0, void 0, function* () {
+      (() => __awaiter$c(this, void 0, void 0, function* () {
         yield __wait(0);
         try {
           yield executorFn(api);
@@ -9639,10 +9600,10 @@ class SPromise extends SClass.extends(Promise) {
     }
   }
   static queue(promises, before, after) {
-    return new SPromise(({ resolve, reject, pipe }) => __awaiter$b(this, void 0, void 0, function* () {
+    return new SPromise(({ resolve, reject, pipe }) => __awaiter$c(this, void 0, void 0, function* () {
       const results = {};
       function next() {
-        return __awaiter$b(this, void 0, void 0, function* () {
+        return __awaiter$c(this, void 0, void 0, function* () {
           const firstKey = Object.keys(promises)[0];
           let promise = promises[firstKey];
           if (typeof promise === "function")
@@ -9728,7 +9689,7 @@ class SPromise extends SClass.extends(Promise) {
     return this._resolve(arg, stacksOrder);
   }
   _resolve(arg, stacksOrder = "resolve,finally") {
-    return __awaiter$b(this, void 0, void 0, function* () {
+    return __awaiter$c(this, void 0, void 0, function* () {
       if (this._promiseState === "destroyed")
         return;
       this._promiseState = "resolved";
@@ -9748,7 +9709,7 @@ class SPromise extends SClass.extends(Promise) {
     return this._reject(arg, stacksOrder);
   }
   _reject(arg, stacksOrder = `catch,reject,finally`) {
-    return __awaiter$b(this, void 0, void 0, function* () {
+    return __awaiter$c(this, void 0, void 0, function* () {
       if (this._promiseState === "destroyed")
         return;
       this._promiseState = "rejected";
@@ -9770,7 +9731,7 @@ class SPromise extends SClass.extends(Promise) {
   _cancel(arg, stacksOrder = "cancel,finally") {
     if (this._promiseState === "destroyed")
       return;
-    return new Promise((resolve, reject) => __awaiter$b(this, void 0, void 0, function* () {
+    return new Promise((resolve, reject) => __awaiter$c(this, void 0, void 0, function* () {
       this._promiseState = "canceled";
       const stacksOrderArray = stacksOrder.split(",").map((l) => l.trim());
       for (let i2 = 0; i2 < stacksOrderArray.length; i2++) {
@@ -9951,7 +9912,7 @@ function noCase(input, options) {
   if (options === void 0) {
     options = {};
   }
-  var _a3 = options.splitRegexp, splitRegexp = _a3 === void 0 ? DEFAULT_SPLIT_REGEXP : _a3, _b2 = options.stripRegexp, stripRegexp = _b2 === void 0 ? DEFAULT_STRIP_REGEXP : _b2, _c = options.transform, transform = _c === void 0 ? lowerCase : _c, _d = options.delimiter, delimiter = _d === void 0 ? " " : _d;
+  var _a3 = options.splitRegexp, splitRegexp = _a3 === void 0 ? DEFAULT_SPLIT_REGEXP : _a3, _b2 = options.stripRegexp, stripRegexp = _b2 === void 0 ? DEFAULT_STRIP_REGEXP : _b2, _c2 = options.transform, transform = _c2 === void 0 ? lowerCase : _c2, _d2 = options.delimiter, delimiter = _d2 === void 0 ? " " : _d2;
   var result2 = replace(replace(input, splitRegexp, "$1\0$2"), stripRegexp, "\0");
   var start = 0;
   var end = result2.length;
@@ -9961,11 +9922,11 @@ function noCase(input, options) {
     end--;
   return result2.slice(start, end).split("\0").map(transform).join(delimiter);
 }
-function replace(input, re2, value) {
-  if (re2 instanceof RegExp)
-    return input.replace(re2, value);
-  return re2.reduce(function(input2, re3) {
-    return input2.replace(re3, value);
+function replace(input, re, value) {
+  if (re instanceof RegExp)
+    return input.replace(re, value);
+  return re.reduce(function(input2, re2) {
+    return input2.replace(re2, value);
   }, input);
 }
 function dotCase(input, options) {
@@ -10326,16 +10287,16 @@ lib.exports = function(regexpStr) {
 lib.exports.types = types$1;
 var parse = lib.exports;
 var types = parse.types;
-var safeRegex = function(re2, opts) {
+var safeRegex = function(re, opts) {
   if (!opts)
     opts = {};
   var replimit = opts.limit === void 0 ? 25 : opts.limit;
-  if (isRegExp(re2))
-    re2 = re2.source;
-  else if (typeof re2 !== "string")
-    re2 = String(re2);
+  if (isRegExp(re))
+    re = re.source;
+  else if (typeof re !== "string")
+    re = String(re);
   try {
-    re2 = parse(re2);
+    re = parse(re);
   } catch (err) {
     return false;
   }
@@ -10365,7 +10326,7 @@ var safeRegex = function(re2, opts) {
         return false;
     }
     return true;
-  }(re2, 0);
+  }(re, 0);
 };
 function isRegExp(x) {
   return {}.toString.call(x) === "[object RegExp]";
@@ -10397,7 +10358,7 @@ var kindOf = function kindOf2(val) {
   if (type === "function") {
     return isGeneratorFn(val) ? "generatorfunction" : "function";
   }
-  if (isArray(val))
+  if (isArray$1(val))
     return "array";
   if (isBuffer(val))
     return "buffer";
@@ -10462,7 +10423,7 @@ var kindOf = function kindOf2(val) {
 function ctorName(val) {
   return typeof val.constructor === "function" ? val.constructor.name : null;
 }
-function isArray(val) {
+function isArray$1(val) {
   if (Array.isArray)
     return Array.isArray(val);
   return val instanceof Array;
@@ -10615,7 +10576,7 @@ var isDescriptor$1 = function isDescriptor2(obj2, key) {
  */
 var isobject = isobject$1;
 var isDescriptor = isDescriptor$1;
-var define$3 = typeof Reflect !== "undefined" && Reflect.defineProperty ? Reflect.defineProperty : Object.defineProperty;
+var define$4 = typeof Reflect !== "undefined" && Reflect.defineProperty ? Reflect.defineProperty : Object.defineProperty;
 var defineProperty = function defineProperty2(obj2, key, val) {
   if (!isobject(obj2) && typeof obj2 !== "function" && !Array.isArray(obj2)) {
     throw new TypeError("expected an object, function, or array");
@@ -10624,10 +10585,10 @@ var defineProperty = function defineProperty2(obj2, key, val) {
     throw new TypeError('expected "key" to be a string');
   }
   if (isDescriptor(val)) {
-    define$3(obj2, key, val);
+    define$4(obj2, key, val);
     return obj2;
   }
-  define$3(obj2, key, {
+  define$4(obj2, key, {
     configurable: true,
     enumerable: false,
     writable: true,
@@ -10829,7 +10790,7 @@ toRegex.create = function(pattern, options) {
 };
 var regexNot = toRegex;
 var safe = safeRegex;
-var define$2 = defineProperty;
+var define$3 = defineProperty;
 var extend = extendShallow$1;
 var not = regexNot;
 var MAX_LENGTH = 1024 * 64;
@@ -10905,10 +10866,10 @@ function makeRe(pattern, options) {
   return regex2;
 }
 function memoize(regex2, key, pattern, options) {
-  define$2(regex2, "cached", true);
-  define$2(regex2, "pattern", pattern);
-  define$2(regex2, "options", options);
-  define$2(regex2, "key", key);
+  define$3(regex2, "cached", true);
+  define$3(regex2, "pattern", pattern);
+  define$3(regex2, "options", options);
+  define$3(regex2, "key", key);
   cache[key] = regex2;
 }
 function createKey(pattern, options) {
@@ -10926,7 +10887,7 @@ toRegex$1.exports.makeRe = makeRe;
 var sprintf = {};
 (function(exports) {
   !function() {
-    var re2 = {
+    var re = {
       not_string: /[^s]/,
       not_bool: /[^t]/,
       not_type: /[^T]/,
@@ -10969,13 +10930,13 @@ var sprintf = {};
           } else {
             arg = argv[cursor++];
           }
-          if (re2.not_type.test(ph.type) && re2.not_primitive.test(ph.type) && arg instanceof Function) {
+          if (re.not_type.test(ph.type) && re.not_primitive.test(ph.type) && arg instanceof Function) {
             arg = arg();
           }
-          if (re2.numeric_arg.test(ph.type) && (typeof arg !== "number" && isNaN(arg))) {
+          if (re.numeric_arg.test(ph.type) && (typeof arg !== "number" && isNaN(arg))) {
             throw new TypeError(sprintf2("[sprintf] expecting number but found %T", arg));
           }
-          if (re2.number.test(ph.type)) {
+          if (re.number.test(ph.type)) {
             is_positive = arg >= 0;
           }
           switch (ph.type) {
@@ -11030,12 +10991,12 @@ var sprintf = {};
               arg = (parseInt(arg, 10) >>> 0).toString(16).toUpperCase();
               break;
           }
-          if (re2.json.test(ph.type)) {
+          if (re.json.test(ph.type)) {
             output += arg;
           } else {
-            if (re2.number.test(ph.type) && (!is_positive || ph.sign)) {
+            if (re.number.test(ph.type) && (!is_positive || ph.sign)) {
               sign2 = is_positive ? "+" : "-";
-              arg = arg.toString().replace(re2.sign, "");
+              arg = arg.toString().replace(re.sign, "");
             } else {
               sign2 = "";
             }
@@ -11055,20 +11016,20 @@ var sprintf = {};
       }
       var _fmt = fmt, match2, parse_tree = [], arg_names = 0;
       while (_fmt) {
-        if ((match2 = re2.text.exec(_fmt)) !== null) {
+        if ((match2 = re.text.exec(_fmt)) !== null) {
           parse_tree.push(match2[0]);
-        } else if ((match2 = re2.modulo.exec(_fmt)) !== null) {
+        } else if ((match2 = re.modulo.exec(_fmt)) !== null) {
           parse_tree.push("%");
-        } else if ((match2 = re2.placeholder.exec(_fmt)) !== null) {
+        } else if ((match2 = re.placeholder.exec(_fmt)) !== null) {
           if (match2[2]) {
             arg_names |= 1;
             var field_list = [], replacement_field = match2[2], field_match = [];
-            if ((field_match = re2.key.exec(replacement_field)) !== null) {
+            if ((field_match = re.key.exec(replacement_field)) !== null) {
               field_list.push(field_match[1]);
               while ((replacement_field = replacement_field.substring(field_match[0].length)) !== "") {
-                if ((field_match = re2.key_access.exec(replacement_field)) !== null) {
+                if ((field_match = re.key_access.exec(replacement_field)) !== null) {
                   field_list.push(field_match[1]);
-                } else if ((field_match = re2.index_access.exec(replacement_field)) !== null) {
+                } else if ((field_match = re.index_access.exec(replacement_field)) !== null) {
                   field_list.push(field_match[1]);
                 } else {
                   throw new SyntaxError("[sprintf] failed to parse named argument key");
@@ -11241,16 +11202,16 @@ class SType {
           for (let j = 0; j < typeObj.of.length; j++) {
             const type = typeObj.of[j];
             const idx = loopOn[k];
-            const v = typeOf2 === "Map" ? value.get(idx) : value[idx];
-            const ofRes = this._isType(v, type, settings);
+            const v2 = typeOf2 === "Map" ? value.get(idx) : value[idx];
+            const ofRes = this._isType(v2, type, settings);
             if (ofRes !== true) {
               issues[typeObj.type] = {
                 expected: {
                   type: typeObj.type
                 },
                 received: {
-                  type: __typeof(v),
-                  value: v
+                  type: __typeof(v2),
+                  value: v2
                 }
               };
             } else {
@@ -11826,8 +11787,8 @@ class SDescriptor extends SClass {
         const ruleSettings = ruleObj2.settings !== void 0 ? ruleObj2.settings : {};
         if (ruleSettings.mapOnArray && Array.isArray(resultValue)) {
           let newResultValue = [];
-          resultValue.forEach((v) => {
-            const processedValue = this._processRule(v, ruleObj2, propName, params, ruleSettings, settings);
+          resultValue.forEach((v2) => {
+            const processedValue = this._processRule(v2, ruleObj2, propName, params, ruleSettings, settings);
             if (Array.isArray(processedValue)) {
               newResultValue = [
                 ...newResultValue,
@@ -12236,7 +12197,7 @@ const __vitePreload = function preload(baseModule, deps, importerUrl) {
     }
   })).then(() => baseModule());
 };
-var __awaiter$a = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$b = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -12270,15 +12231,15 @@ class SStateFsAdapter {
   }
   _init() {
     var _a3, _b2;
-    return __awaiter$a(this, void 0, void 0, function* () {
-      const _packageTmpDir = (yield __vitePreload(() => import("./packageTmpDir.7a83c698.js"), true ? [] : void 0)).default;
+    return __awaiter$b(this, void 0, void 0, function* () {
+      const _packageTmpDir = (yield __vitePreload(() => import("./packageTmpDir.f879bf57.js"), true ? "__VITE_PRELOAD__" : void 0)).default;
       this._statesDir = (_b2 = (_a3 = this._settings) === null || _a3 === void 0 ? void 0 : _a3.folder) !== null && _b2 !== void 0 ? _b2 : `${_packageTmpDir()}/states`;
       this._stateFile = `${this._statesDir}/${this._id}.state.json`;
     });
   }
   save(state) {
-    return new Promise((resolve) => __awaiter$a(this, void 0, void 0, function* () {
-      const _fs = yield __vitePreload(() => import("./__vite-browser-external_fs.addc2852.js"), true ? [] : void 0);
+    return new Promise((resolve) => __awaiter$b(this, void 0, void 0, function* () {
+      const _fs = yield __vitePreload(() => import("./__vite-browser-external_fs.addc2852.js"), true ? "__VITE_PRELOAD__" : void 0);
       yield this._init();
       if (!_fs.existsSync(this._statesDir)) {
         _fs.mkdirSync(this._statesDir);
@@ -12291,8 +12252,8 @@ class SStateFsAdapter {
     }));
   }
   load() {
-    return new Promise((resolve) => __awaiter$a(this, void 0, void 0, function* () {
-      const _fs = yield __vitePreload(() => import("./__vite-browser-external_fs.addc2852.js"), true ? [] : void 0);
+    return new Promise((resolve) => __awaiter$b(this, void 0, void 0, function* () {
+      const _fs = yield __vitePreload(() => import("./__vite-browser-external_fs.addc2852.js"), true ? "__VITE_PRELOAD__" : void 0);
       yield this._init();
       let fileContent = "{}";
       if (_fs.existsSync(this._stateFile)) {
@@ -12302,7 +12263,7 @@ class SStateFsAdapter {
     }));
   }
 }
-var __awaiter$9 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$a = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -12364,16 +12325,16 @@ class SState extends SClass {
     Object.defineProperty(proxy, "$set", {
       enumerable: false,
       get() {
-        return (event2, handler) => {
-          return _this._eventEmitter.on(`set.${event2}`, handler);
+        return (event, handler) => {
+          return _this._eventEmitter.on(`set.${event}`, handler);
         };
       }
     });
     Object.defineProperty(proxy, "$delete", {
       enumerable: false,
       get() {
-        return (event2, handler) => {
-          return _this._eventEmitter.on(`delete.${event2}`, handler);
+        return (event, handler) => {
+          return _this._eventEmitter.on(`delete.${event}`, handler);
         };
       }
     });
@@ -12383,7 +12344,7 @@ class SState extends SClass {
         return true;
       }
     });
-    (() => __awaiter$9(this, void 0, void 0, function* () {
+    (() => __awaiter$a(this, void 0, void 0, function* () {
       if (this.settings.save) {
         const restoredState = yield this.settings.adapter.load();
         __deepAssign(proxy, restoredState);
@@ -13191,11 +13152,11 @@ var lodash = { exports: {} };
     function unicodeWords(string2) {
       return string2.match(reUnicodeWord) || [];
     }
-    var runInContext = function runInContext2(context2) {
-      context2 = context2 == null ? root : _.defaults(root.Object(), context2, _.pick(root, contextProps));
-      var Array2 = context2.Array, Date2 = context2.Date, Error2 = context2.Error, Function2 = context2.Function, Math2 = context2.Math, Object2 = context2.Object, RegExp2 = context2.RegExp, String2 = context2.String, TypeError2 = context2.TypeError;
+    var runInContext = function runInContext2(context) {
+      context = context == null ? root : _.defaults(root.Object(), context, _.pick(root, contextProps));
+      var Array2 = context.Array, Date2 = context.Date, Error2 = context.Error, Function2 = context.Function, Math2 = context.Math, Object2 = context.Object, RegExp2 = context.RegExp, String2 = context.String, TypeError2 = context.TypeError;
       var arrayProto = Array2.prototype, funcProto = Function2.prototype, objectProto = Object2.prototype;
-      var coreJsData = context2["__core-js_shared__"];
+      var coreJsData = context["__core-js_shared__"];
       var funcToString = funcProto.toString;
       var hasOwnProperty2 = objectProto.hasOwnProperty;
       var idCounter = 0;
@@ -13209,7 +13170,7 @@ var lodash = { exports: {} };
       var reIsNative = RegExp2(
         "^" + funcToString.call(hasOwnProperty2).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
       );
-      var Buffer = moduleExports ? context2.Buffer : undefined$12, Symbol2 = context2.Symbol, Uint8Array2 = context2.Uint8Array, allocUnsafe = Buffer ? Buffer.allocUnsafe : undefined$12, getPrototype = overArg(Object2.getPrototypeOf, Object2), objectCreate = Object2.create, propertyIsEnumerable = objectProto.propertyIsEnumerable, splice = arrayProto.splice, spreadableSymbol = Symbol2 ? Symbol2.isConcatSpreadable : undefined$12, symIterator = Symbol2 ? Symbol2.iterator : undefined$12, symToStringTag = Symbol2 ? Symbol2.toStringTag : undefined$12;
+      var Buffer2 = moduleExports ? context.Buffer : undefined$12, Symbol2 = context.Symbol, Uint8Array2 = context.Uint8Array, allocUnsafe = Buffer2 ? Buffer2.allocUnsafe : undefined$12, getPrototype = overArg(Object2.getPrototypeOf, Object2), objectCreate = Object2.create, propertyIsEnumerable = objectProto.propertyIsEnumerable, splice = arrayProto.splice, spreadableSymbol = Symbol2 ? Symbol2.isConcatSpreadable : undefined$12, symIterator = Symbol2 ? Symbol2.iterator : undefined$12, symToStringTag = Symbol2 ? Symbol2.toStringTag : undefined$12;
       var defineProperty3 = function() {
         try {
           var func = getNative(Object2, "defineProperty");
@@ -13218,9 +13179,9 @@ var lodash = { exports: {} };
         } catch (e) {
         }
       }();
-      var ctxClearTimeout = context2.clearTimeout !== root.clearTimeout && context2.clearTimeout, ctxNow = Date2 && Date2.now !== root.Date.now && Date2.now, ctxSetTimeout = context2.setTimeout !== root.setTimeout && context2.setTimeout;
-      var nativeCeil = Math2.ceil, nativeFloor = Math2.floor, nativeGetSymbols = Object2.getOwnPropertySymbols, nativeIsBuffer = Buffer ? Buffer.isBuffer : undefined$12, nativeIsFinite = context2.isFinite, nativeJoin = arrayProto.join, nativeKeys = overArg(Object2.keys, Object2), nativeMax = Math2.max, nativeMin = Math2.min, nativeNow = Date2.now, nativeParseInt = context2.parseInt, nativeRandom = Math2.random, nativeReverse = arrayProto.reverse;
-      var DataView2 = getNative(context2, "DataView"), Map2 = getNative(context2, "Map"), Promise2 = getNative(context2, "Promise"), Set2 = getNative(context2, "Set"), WeakMap2 = getNative(context2, "WeakMap"), nativeCreate = getNative(Object2, "create");
+      var ctxClearTimeout = context.clearTimeout !== root.clearTimeout && context.clearTimeout, ctxNow = Date2 && Date2.now !== root.Date.now && Date2.now, ctxSetTimeout = context.setTimeout !== root.setTimeout && context.setTimeout;
+      var nativeCeil = Math2.ceil, nativeFloor = Math2.floor, nativeGetSymbols = Object2.getOwnPropertySymbols, nativeIsBuffer = Buffer2 ? Buffer2.isBuffer : undefined$12, nativeIsFinite = context.isFinite, nativeJoin = arrayProto.join, nativeKeys = overArg(Object2.keys, Object2), nativeMax = Math2.max, nativeMin = Math2.min, nativeNow = Date2.now, nativeParseInt = context.parseInt, nativeRandom = Math2.random, nativeReverse = arrayProto.reverse;
+      var DataView2 = getNative(context, "DataView"), Map2 = getNative(context, "Map"), Promise2 = getNative(context, "Promise"), Set2 = getNative(context, "Set"), WeakMap2 = getNative(context, "WeakMap"), nativeCreate = getNative(Object2, "create");
       var metaMap = WeakMap2 && new WeakMap2();
       var realNames = {};
       var dataViewCtorString = toSource(DataView2), mapCtorString = toSource(Map2), promiseCtorString = toSource(Promise2), setCtorString = toSource(Set2), weakMapCtorString = toSource(WeakMap2);
@@ -13612,20 +13573,20 @@ var lodash = { exports: {} };
             return copyArray(value, result3);
           }
         } else {
-          var tag = getTag(value), isFunc = tag == funcTag || tag == genTag;
+          var tag2 = getTag(value), isFunc = tag2 == funcTag || tag2 == genTag;
           if (isBuffer2(value)) {
             return cloneBuffer(value, isDeep);
           }
-          if (tag == objectTag || tag == argsTag || isFunc && !object) {
+          if (tag2 == objectTag || tag2 == argsTag || isFunc && !object) {
             result3 = isFlat || isFunc ? {} : initCloneObject(value);
             if (!isDeep) {
               return isFlat ? copySymbolsIn(value, baseAssignIn(result3, value)) : copySymbols(value, baseAssign(result3, value));
             }
           } else {
-            if (!cloneableTags[tag]) {
+            if (!cloneableTags[tag2]) {
               return object ? value : {};
             }
-            result3 = initCloneByTag(value, tag, isDeep);
+            result3 = initCloneByTag(value, tag2, isDeep);
           }
         }
         stack || (stack = new Stack());
@@ -14942,11 +14903,11 @@ var lodash = { exports: {} };
       };
       function createToPairs(keysFunc) {
         return function(object) {
-          var tag = getTag(object);
-          if (tag == mapTag) {
+          var tag2 = getTag(object);
+          if (tag2 == mapTag) {
             return mapToArray(object);
           }
-          if (tag == setTag) {
+          if (tag2 == setTag) {
             return setToPairs(object);
           }
           return baseToPairs(object, keysFunc(object));
@@ -15066,8 +15027,8 @@ var lodash = { exports: {} };
         stack["delete"](other);
         return result3;
       }
-      function equalByTag(object, other, tag, bitmask, customizer, equalFunc, stack) {
-        switch (tag) {
+      function equalByTag(object, other, tag2, bitmask, customizer, equalFunc, stack) {
+        switch (tag2) {
           case dataViewTag:
             if (object.byteLength != other.byteLength || object.byteOffset != other.byteOffset) {
               return false;
@@ -15203,7 +15164,7 @@ var lodash = { exports: {} };
         return baseIsNative(value) ? value : undefined$12;
       }
       function getRawTag(value) {
-        var isOwn = hasOwnProperty2.call(value, symToStringTag), tag = value[symToStringTag];
+        var isOwn = hasOwnProperty2.call(value, symToStringTag), tag2 = value[symToStringTag];
         try {
           value[symToStringTag] = undefined$12;
           var unmasked = true;
@@ -15212,7 +15173,7 @@ var lodash = { exports: {} };
         var result3 = nativeObjectToString.call(value);
         if (unmasked) {
           if (isOwn) {
-            value[symToStringTag] = tag;
+            value[symToStringTag] = tag2;
           } else {
             delete value[symToStringTag];
           }
@@ -15309,9 +15270,9 @@ var lodash = { exports: {} };
       function initCloneObject(object) {
         return typeof object.constructor == "function" && !isPrototype2(object) ? baseCreate(getPrototype(object)) : {};
       }
-      function initCloneByTag(object, tag, isDeep) {
+      function initCloneByTag(object, tag2, isDeep) {
         var Ctor = object.constructor;
-        switch (tag) {
+        switch (tag2) {
           case arrayBufferTag:
             return cloneArrayBuffer(object);
           case boolTag:
@@ -16192,8 +16153,8 @@ var lodash = { exports: {} };
         if (isArrayLike(collection)) {
           return isString3(collection) ? stringSize(collection) : collection.length;
         }
-        var tag = getTag(collection);
-        if (tag == mapTag || tag == setTag) {
+        var tag2 = getTag(collection);
+        if (tag2 == mapTag || tag2 == setTag) {
           return collection.size;
         }
         return baseKeys(collection).length;
@@ -16469,7 +16430,7 @@ var lodash = { exports: {} };
       function unary(func) {
         return ary(func, 1);
       }
-      function wrap(value, wrapper) {
+      function wrap2(value, wrapper) {
         return partial(castFunction(wrapper), value);
       }
       function castArray() {
@@ -16531,8 +16492,8 @@ var lodash = { exports: {} };
         if (isArrayLike(value) && (isArray2(value) || typeof value == "string" || typeof value.splice == "function" || isBuffer2(value) || isTypedArray2(value) || isArguments5(value))) {
           return !value.length;
         }
-        var tag = getTag(value);
-        if (tag == mapTag || tag == setTag) {
+        var tag2 = getTag(value);
+        if (tag2 == mapTag || tag2 == setTag) {
           return !value.size;
         }
         if (isPrototype2(value)) {
@@ -16557,8 +16518,8 @@ var lodash = { exports: {} };
         if (!isObjectLike(value)) {
           return false;
         }
-        var tag = baseGetTag(value);
-        return tag == errorTag || tag == domExcTag || typeof value.message == "string" && typeof value.name == "string" && !isPlainObject3(value);
+        var tag2 = baseGetTag(value);
+        return tag2 == errorTag || tag2 == domExcTag || typeof value.message == "string" && typeof value.name == "string" && !isPlainObject3(value);
       }
       function isFinite2(value) {
         return typeof value == "number" && nativeIsFinite(value);
@@ -16567,8 +16528,8 @@ var lodash = { exports: {} };
         if (!isObject3(value)) {
           return false;
         }
-        var tag = baseGetTag(value);
-        return tag == funcTag || tag == genTag || tag == asyncTag || tag == proxyTag;
+        var tag2 = baseGetTag(value);
+        return tag2 == funcTag || tag2 == genTag || tag2 == asyncTag || tag2 == proxyTag;
       }
       function isInteger(value) {
         return typeof value == "number" && value == toInteger2(value);
@@ -16655,7 +16616,7 @@ var lodash = { exports: {} };
         if (symIterator && value[symIterator]) {
           return iteratorToArray(value[symIterator]());
         }
-        var tag = getTag(value), func = tag == mapTag ? mapToArray : tag == setTag ? setToArray : values;
+        var tag2 = getTag(value), func = tag2 == mapTag ? mapToArray : tag2 == setTag ? setToArray : values;
         return func(value);
       }
       function toFinite(value) {
@@ -17592,7 +17553,7 @@ var lodash = { exports: {} };
       lodash2.valuesIn = valuesIn;
       lodash2.without = without;
       lodash2.words = words;
-      lodash2.wrap = wrap;
+      lodash2.wrap = wrap2;
       lodash2.xor = xor;
       lodash2.xorBy = xorBy;
       lodash2.xorWith = xorWith;
@@ -18434,7 +18395,7 @@ class SColorSettingsInterface extends SInterface {
 }
 class SColor extends SClass {
   constructor(color, settings) {
-    var _c, _d;
+    var _c2, _d2;
     super(__deepMerge(
       SColorSettingsInterface.defaults(),
       settings !== null && settings !== void 0 ? settings : {}
@@ -18459,9 +18420,9 @@ class SColor extends SClass {
         this._h = color.h;
         this._s = color.s;
         this._l = color.l;
-        this._a = (_c = color.a) !== null && _c !== void 0 ? _c : 1;
+        this._a = (_c2 = color.a) !== null && _c2 !== void 0 ? _c2 : 1;
       } else if (color.r !== void 0 && color.g !== void 0 && color.b !== void 0) {
-        const converted = __rgbaToHsla(color.r, color.g, color.b, (_d = color.a) !== null && _d !== void 0 ? _d : 1);
+        const converted = __rgbaToHsla(color.r, color.g, color.b, (_d2 = color.a) !== null && _d2 !== void 0 ? _d2 : 1);
         this._h = converted.h;
         this._s = converted.s;
         this._l = converted.l;
@@ -18973,7 +18934,7 @@ globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator
     step((generator = generator.apply(thisArg, _arguments || [])).next());
   });
 };
-var __awaiter$8 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$9 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -19001,10 +18962,10 @@ var __awaiter$8 = globalThis && globalThis.__awaiter || function(thisArg, _argum
   });
 };
 function __adoptStyleInShadowRoot($shadowRoot, $context = document) {
-  return __awaiter$8(this, void 0, void 0, function* () {
+  return __awaiter$9(this, void 0, void 0, function* () {
     const $links = $context.querySelectorAll('link[rel="stylesheet"]');
     if ($links && $shadowRoot) {
-      Array.from($links).forEach(($link) => __awaiter$8(this, void 0, void 0, function* () {
+      Array.from($links).forEach(($link) => __awaiter$9(this, void 0, void 0, function* () {
         $shadowRoot === null || $shadowRoot === void 0 ? void 0 : $shadowRoot.appendChild($link.cloneNode());
       }));
     }
@@ -19103,14 +19064,14 @@ var fastdom = { exports: {} };
   }(typeof window !== "undefined" ? window : commonjsGlobal);
 })(fastdom);
 const __fastdom = fastdom.exports;
-var _a$1, _b$1;
+var _a$4, _b$4;
 let oldX = 0, oldY = 0;
 const threshold = 0;
 try {
-  (_a$1 = document === null || document === void 0 ? void 0 : document.addEventListener) === null || _a$1 === void 0 ? void 0 : _a$1.call(document, "pointermove", (e) => {
+  (_a$4 = document === null || document === void 0 ? void 0 : document.addEventListener) === null || _a$4 === void 0 ? void 0 : _a$4.call(document, "pointermove", (e) => {
     calculateDirection(e);
   });
-  (_b$1 = document === null || document === void 0 ? void 0 : document.addEventListener) === null || _b$1 === void 0 ? void 0 : _b$1.call(document, "pointerdown", (e) => {
+  (_b$4 = document === null || document === void 0 ? void 0 : document.addEventListener) === null || _b$4 === void 0 ? void 0 : _b$4.call(document, "pointerdown", (e) => {
     calculateDirection(e);
   });
 } catch (e) {
@@ -19165,7 +19126,7 @@ function __inViewportStatusChange($elm, settings) {
     (_a3 = observer.disconnect) === null || _a3 === void 0 ? void 0 : _a3.call(observer);
   });
 }
-var __awaiter$7 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$8 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -19207,7 +19168,7 @@ const triggers = [
 ];
 function __when($elm, trigger, settings) {
   const finalSettings = Object.assign({ whenInViewport: {}, whenNearViewport: {}, whenOutOfViewport: {}, whenInteract: {}, whenVisible: {}, whenStylesheetsReady: {} }, settings !== null && settings !== void 0 ? settings : {});
-  return new SPromise(({ resolve, reject }) => __awaiter$7(this, void 0, void 0, function* () {
+  return new SPromise(({ resolve, reject }) => __awaiter$8(this, void 0, void 0, function* () {
     if (!Array.isArray(trigger))
       trigger = trigger.split(",").map((t) => t.trim());
     const promises = [];
@@ -19297,7 +19258,7 @@ function __whenDomReady() {
     }
   });
 }
-var __awaiter$6 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$7 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -19335,7 +19296,7 @@ function __whenEntersViewport(elm, settings = {}) {
   }
   settings = Object.assign({}, settings);
   let observer, resizeTimeout;
-  return new Promise((resolve) => __awaiter$6(this, void 0, void 0, function* () {
+  return new Promise((resolve) => __awaiter$7(this, void 0, void 0, function* () {
     var _a3;
     const options = {
       root: null,
@@ -19511,7 +19472,7 @@ function __whenLinkLoaded(link, cb = null) {
     }
   });
 }
-var __awaiter$5 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$6 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -19552,7 +19513,7 @@ function __whenNearViewport(elm, settings = {}) {
   let $closest = __closestScrollable(elm);
   if (($closest === null || $closest === void 0 ? void 0 : $closest.tagName) === "HTML")
     $closest = null;
-  return new SPromise(({ resolve }) => __awaiter$5(this, void 0, void 0, function* () {
+  return new SPromise(({ resolve }) => __awaiter$6(this, void 0, void 0, function* () {
     var _a3;
     const options = {
       root: $closest,
@@ -19717,10 +19678,10 @@ function __addEventListener($elm, eventNames, callback = null, useCapture = fals
     });
   });
   eventNames.forEach((eventName) => {
-    const internalCallback = (event2) => {
+    const internalCallback = (event) => {
       if (callback)
-        callback.apply(this, [event2]);
-      promise.emit(eventName, event2);
+        callback.apply(this, [event]);
+      promise.emit(eventName, event);
     };
     eventsStack[eventName] = {
       callback: internalCallback,
@@ -19747,11 +19708,11 @@ function __addEventListenerOnce($elm, eventNames, callback = null, useCapture = 
     eventsStack[eventName] = {
       promise
     };
-    promise.on(eventNames, (event2) => {
+    promise.on(eventNames, (event) => {
       if (callback && typeof callback === "function") {
-        callback.apply(this, [event2]);
+        callback.apply(this, [event]);
       }
-      globalPromise.emit(eventName, event2);
+      globalPromise.emit(eventName, event);
       promise.cancel();
     });
   });
@@ -19819,17 +19780,17 @@ function __isScrollable($elm, settings) {
     return true;
   return false;
 }
-var _a, _b;
+var _a$3, _b$3;
 let _isUserScrolling = false, _isUserScrollingTimeout;
 try {
-  (_a = document === null || document === void 0 ? void 0 : document.addEventListener) === null || _a === void 0 ? void 0 : _a.call(document, "wheel", (e) => {
+  (_a$3 = document === null || document === void 0 ? void 0 : document.addEventListener) === null || _a$3 === void 0 ? void 0 : _a$3.call(document, "wheel", (e) => {
     _isUserScrolling = true;
     clearTimeout(_isUserScrollingTimeout);
     _isUserScrollingTimeout = setTimeout(() => {
       _isUserScrolling = false;
     }, 200);
   });
-  (_b = document === null || document === void 0 ? void 0 : document.addEventListener) === null || _b === void 0 ? void 0 : _b.call(document, "touchmove", (e) => {
+  (_b$3 = document === null || document === void 0 ? void 0 : document.addEventListener) === null || _b$3 === void 0 ? void 0 : _b$3.call(document, "touchmove", (e) => {
     _isUserScrolling = true;
     clearTimeout(_isUserScrollingTimeout);
     _isUserScrollingTimeout = setTimeout(() => {
@@ -19859,7 +19820,7 @@ function __closestScrollable($elm, selector) {
   const res = __traverseUp($elm, ($e) => __isScrollable($e));
   return res;
 }
-var __awaiter$4 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$5 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -19887,7 +19848,7 @@ var __awaiter$4 = globalThis && globalThis.__awaiter || function(thisArg, _argum
   });
 };
 function __querySelectorLive(selector, cb = null, settings = {}, _isFirstLevel = true) {
-  var _a3, _b2, _c;
+  var _a3, _b2, _c2;
   let _emit, noScopeSelector, observer, canceled = false;
   __uniqid();
   const selectedNodes = [];
@@ -19940,7 +19901,7 @@ function __querySelectorLive(selector, cb = null, settings = {}, _isFirstLevel =
     }
   }
   function processNode(node2, sel) {
-    return __awaiter$4(this, void 0, void 0, function* () {
+    return __awaiter$5(this, void 0, void 0, function* () {
       if (!node2.matches || isCanceled()) {
         return;
       }
@@ -19969,7 +19930,7 @@ function __querySelectorLive(selector, cb = null, settings = {}, _isFirstLevel =
   }
   if (settings.scopes && (settings.rootNode === document || !((_a3 = settings.rootNode) === null || _a3 === void 0 ? void 0 : _a3.hasAttribute("s-scope")))) {
     let isAfterCalledByScopeId = {};
-    innerPromises.push(__querySelectorLive("[s-scope]", ($scope) => __awaiter$4(this, void 0, void 0, function* () {
+    innerPromises.push(__querySelectorLive("[s-scope]", ($scope) => __awaiter$5(this, void 0, void 0, function* () {
       const scopeId = $scope.id || `s-scope-${__uniqid()}`;
       if ($scope.id !== scopeId) {
         $scope.setAttribute("id", scopeId);
@@ -20029,7 +19990,7 @@ function __querySelectorLive(selector, cb = null, settings = {}, _isFirstLevel =
       console.log("SE", settings);
     }
     findAndProcess(settings.rootNode, selector);
-    (_c = settings.afterFirst) === null || _c === void 0 ? void 0 : _c.call(settings);
+    (_c2 = settings.afterFirst) === null || _c2 === void 0 ? void 0 : _c2.call(settings);
   }
   pro.on("cancel", () => {
     canceled = true;
@@ -21381,7 +21342,7 @@ const require$$0 = {
   properties
 };
 knownCssProperties.all = require$$0.properties;
-var __awaiter$3 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$4 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -21490,8 +21451,8 @@ class SThemeBase extends SEventEmitter {
     let fb = this.getTheme().get(dotPath);
     if (!fallback || typeof fb === "string" && fb.includes(","))
       fb = 0;
-    const v = `var(${__compressVarName(`--s-theme-${dotPath.replace(/\./gm, "-").replace(/:/gm, "-").replace(/\?/gm, "").replace(/--/gm, "-")}`)}, ${fb})`;
-    return v;
+    const v2 = `var(${__compressVarName(`--s-theme-${dotPath.replace(/\./gm, "-").replace(/:/gm, "-").replace(/\?/gm, "").replace(/--/gm, "-")}`)}, ${fb})`;
+    return v2;
   }
   static buildMediaQuery(queryString) {
     let currentQueryList = [];
@@ -21895,7 +21856,7 @@ class SThemeBase extends SEventEmitter {
     return map2;
   }
   loopOnColors(callback) {
-    return __awaiter$3(this, void 0, void 0, function* () {
+    return __awaiter$4(this, void 0, void 0, function* () {
       const colorsObj = this.get("color"), colorSchemasObj = this.get("colorSchema");
       for (let [colorName2, colorValue] of Object.entries(colorsObj)) {
         const c = new SColor(colorValue);
@@ -22023,7 +21984,7 @@ class STheme extends SThemeBase {
     return themeInstance;
   }
   static getThemeMetas($context = document.querySelector("html")) {
-    var _a3, _b2, _c, _d;
+    var _a3, _b2, _c2, _d2;
     let defaultTheme = (_a3 = STheme.defaultThemeMetas.theme) !== null && _a3 !== void 0 ? _a3 : SSugarConfig.get("theme.theme"), defaultVariant = (_b2 = STheme.defaultThemeMetas.variant) !== null && _b2 !== void 0 ? _b2 : SSugarConfig.get("theme.variant");
     let theme = defaultTheme, variant = defaultVariant;
     const savedTheme = localStorage.getItem("s-theme");
@@ -22032,11 +21993,11 @@ class STheme extends SThemeBase {
       theme = parts[0];
       variant = parts[1];
     } else if ($context.hasAttribute("theme")) {
-      let attr = (_c = $context.getAttribute("theme")) !== null && _c !== void 0 ? _c : "", parts = attr.split("-").map((l) => l.trim());
+      let attr = (_c2 = $context.getAttribute("theme")) !== null && _c2 !== void 0 ? _c2 : "", parts = attr.split("-").map((l) => l.trim());
       theme = parts[0], variant = parts[1];
     }
     const name2 = `${theme !== null && theme !== void 0 ? theme : defaultTheme}-${variant !== null && variant !== void 0 ? variant : defaultVariant}`;
-    const metas = (_d = SSugarConfig.get(`theme.themes.${name2}.metas`)) !== null && _d !== void 0 ? _d : {};
+    const metas = (_d2 = SSugarConfig.get(`theme.themes.${name2}.metas`)) !== null && _d2 !== void 0 ? _d2 : {};
     return __deepMerge({
       name: name2,
       theme: theme !== null && theme !== void 0 ? theme : defaultTheme,
@@ -22125,10 +22086,10 @@ STheme.defaultThemeMetas = {};
 function __debounce(fn2, delay) {
   let timer = null;
   return function() {
-    const context2 = this, args = arguments;
+    const context = this, args = arguments;
     clearTimeout(timer);
     timer = setTimeout(function() {
-      fn2.apply(context2, args);
+      fn2.apply(context, args);
     }, delay);
   };
 }
@@ -22313,7 +22274,7 @@ try {
 }
 if (test.length === 1)
   ;
-var d$1 = { exports: {} };
+var d$2 = { exports: {} };
 var _undefined = void 0;
 var is$4 = function(value) {
   return value !== _undefined && value !== null;
@@ -22384,7 +22345,7 @@ function requireShim$1() {
 }
 var contains$1 = isImplemented$3() ? String.prototype.contains : requireShim$1();
 var isValue = is$4, isPlainFunction = is, assign = assign$1, normalizeOpts = normalizeOptions, contains = contains$1;
-var d = d$1.exports = function(dscr, value) {
+var d$1 = d$2.exports = function(dscr, value) {
   var c, e, w, options, desc;
   if (arguments.length < 2 || typeof dscr !== "string") {
     options = value;
@@ -22404,7 +22365,7 @@ var d = d$1.exports = function(dscr, value) {
   desc = { value, configurable: c, enumerable: e, writable: w };
   return !options ? desc : assign(normalizeOpts(options), desc);
 };
-d.gs = function(dscr, get2, set) {
+d$1.gs = function(dscr, get2, set) {
   var c, e, options, desc;
   if (typeof dscr !== "string") {
     options = set;
@@ -22437,7 +22398,7 @@ d.gs = function(dscr, get2, set) {
 };
 var eventEmitter = { exports: {} };
 (function(module, exports) {
-  var d2 = d$1.exports, callable = validCallable, apply = Function.prototype.apply, call = Function.prototype.call, create2 = Object.create, defineProperty3 = Object.defineProperty, defineProperties2 = Object.defineProperties, hasOwnProperty2 = Object.prototype.hasOwnProperty, descriptor2 = { configurable: true, enumerable: false, writable: true }, on, once, off, emit, methods, descriptors, base;
+  var d2 = d$2.exports, callable = validCallable, apply = Function.prototype.apply, call = Function.prototype.call, create2 = Object.create, defineProperty3 = Object.defineProperty, defineProperties2 = Object.defineProperties, hasOwnProperty2 = Object.prototype.hasOwnProperty, descriptor2 = { configurable: true, enumerable: false, writable: true }, on, once, off, emit, methods, descriptors, base;
   on = function(type, listener) {
     var data;
     callable(listener);
@@ -22690,7 +22651,7 @@ function requireGenerateName() {
   if (hasRequiredGenerateName)
     return generateName;
   hasRequiredGenerateName = 1;
-  var d2 = d$1.exports;
+  var d2 = d$2.exports;
   var create2 = Object.create, defineProperty3 = Object.defineProperty, objPrototype = Object.prototype;
   var created = create2(null);
   generateName = function(desc) {
@@ -22721,7 +22682,7 @@ function requireStandardSymbols() {
   if (hasRequiredStandardSymbols)
     return standardSymbols;
   hasRequiredStandardSymbols = 1;
-  var d2 = d$1.exports, NativeSymbol = requireGlobalThis().Symbol;
+  var d2 = d$2.exports, NativeSymbol = requireGlobalThis().Symbol;
   standardSymbols = function(SymbolPolyfill) {
     return Object.defineProperties(SymbolPolyfill, {
       hasInstance: d2(
@@ -22760,7 +22721,7 @@ function requireSymbolRegistry() {
   if (hasRequiredSymbolRegistry)
     return symbolRegistry;
   hasRequiredSymbolRegistry = 1;
-  var d2 = d$1.exports, validateSymbol2 = requireValidateSymbol();
+  var d2 = d$2.exports, validateSymbol2 = requireValidateSymbol();
   var registry = /* @__PURE__ */ Object.create(null);
   symbolRegistry = function(SymbolPolyfill) {
     return Object.defineProperties(SymbolPolyfill, {
@@ -22788,7 +22749,7 @@ function requirePolyfill() {
   if (hasRequiredPolyfill)
     return polyfill;
   hasRequiredPolyfill = 1;
-  var d2 = d$1.exports, validateSymbol2 = requireValidateSymbol(), NativeSymbol = requireGlobalThis().Symbol, generateName2 = requireGenerateName(), setupStandardSymbols = requireStandardSymbols(), setupSymbolRegistry = requireSymbolRegistry();
+  var d2 = d$2.exports, validateSymbol2 = requireValidateSymbol(), NativeSymbol = requireGlobalThis().Symbol, generateName2 = requireGenerateName(), setupStandardSymbols = requireStandardSymbols(), setupSymbolRegistry = requireSymbolRegistry();
   var create2 = Object.create, defineProperties2 = Object.defineProperties, defineProperty3 = Object.defineProperty;
   var SymbolPolyfill, HiddenSymbol, isNativeSafe;
   if (typeof NativeSymbol === "function") {
@@ -23022,10 +22983,11 @@ class SComponentUtilsDefaultPropsInterface extends SInterface {
         type: "String",
         physical: true
       },
-      mounted: {
-        description: "Specify if your component is mounted or not",
-        type: "Boolean",
-        default: false,
+      status: {
+        description: 'Specify the status of the component. Can be "pending", "mounting" or "mounted"',
+        type: "String",
+        values: ["pending", "mounting", "mounted"],
+        default: "pending",
         physical: true
       },
       mountWhen: {
@@ -23090,7 +23052,7 @@ class SComponentUtilsSettingsInterface extends SInterface {
     };
   }
 }
-var __awaiter$2 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$3 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -23227,7 +23189,7 @@ class SComponentUtils extends SClass {
     });
     if (finalStateSettings.save && !finalStateSettings.id) {
       console.log("HTMLElement", this.node);
-      throw new Error(`To save the state, the HTMLElement must have an id...`);
+      throw new Error(`To save the state of your component, the HTMLElement must have an id...`);
     }
     let _state;
     if (state.isSState) {
@@ -23304,7 +23266,7 @@ class SComponentUtils extends SClass {
     return this._inViewportStatusChangePromise;
   }
   waitAndExecute(when, callback) {
-    return new Promise((resolve, reject) => __awaiter$2(this, void 0, void 0, function* () {
+    return new Promise((resolve, reject) => __awaiter$3(this, void 0, void 0, function* () {
       if (!when || when === "direct" || when === "directly") {
         yield __wait();
       } else {
@@ -23329,15 +23291,15 @@ class SComponentUtils extends SClass {
     return __adoptStyleInShadowRoot($shadowRoot, $context);
   }
   defaultProps(interf) {
-    var _a3, _b2, _c, _d;
+    var _a3, _b2, _c2, _d2;
     if (this._defaultProps)
       return Object.assign({}, this._defaultProps);
     this._defaultProps = Object.assign({}, __deepMerge(
       SComponentUtilsDefaultPropsInterface.defaults(),
       (_a3 = this.settings.defaultProps) !== null && _a3 !== void 0 ? _a3 : {},
       (_b2 = this.constructor._defaultProps["*"]) !== null && _b2 !== void 0 ? _b2 : {},
-      (_c = this.constructor._defaultProps[this.name]) !== null && _c !== void 0 ? _c : {},
-      (_d = interf === null || interf === void 0 ? void 0 : interf.defaults()) !== null && _d !== void 0 ? _d : {}
+      (_c2 = this.constructor._defaultProps[this.name]) !== null && _c2 !== void 0 ? _c2 : {},
+      (_d2 = interf === null || interf === void 0 ? void 0 : interf.defaults()) !== null && _d2 !== void 0 ? _d2 : {}
     ));
     return this._defaultProps;
   }
@@ -23351,11 +23313,11 @@ class SComponentUtils extends SClass {
     this._PropsInterface = PropsInterface;
     return this._PropsInterface;
   }
-  injectStyle(css, id = this.tagName) {
+  injectStyle(css2, id = this.tagName) {
     if (this.constructor._injectedStyles.indexOf(id) !== -1)
       return;
     this.constructor._injectedStyles.push(id);
-    __injectStyle(css, {
+    __injectStyle(css2, {
       id
     });
   }
@@ -23405,7 +23367,7 @@ class SComponentUtils extends SClass {
 SComponentUtils.fastdom = __fastdom;
 SComponentUtils._defaultProps = {};
 SComponentUtils._injectedStyles = [];
-var __awaiter$1 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$2 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -23434,18 +23396,18 @@ var __awaiter$1 = globalThis && globalThis.__awaiter || function(thisArg, _argum
 };
 class SFeature extends SClass {
   constructor(name2, node2, settings) {
-    var _a3, _b2, _c, _d;
+    var _a3, _b2, _c2, _d2;
     super(__deepMerge({}, settings));
     this.componentUtils = new SComponentUtils(node2, Object.assign(Object.assign(Object.assign({}, (_a3 = this.settings) !== null && _a3 !== void 0 ? _a3 : {}), (_b2 = this.settings.componentUtils) !== null && _b2 !== void 0 ? _b2 : {}), { name: name2 }));
     this.name = name2;
     this.node = node2;
     this.node.classList.add(...this.componentUtils.className("").split(" "));
     this.props = this.componentUtils.handleProps({}, {
-      interface: (_c = this.settings.interface) !== null && _c !== void 0 ? _c : (_d = this.settings.componentUtils) === null || _d === void 0 ? void 0 : _d.interface
+      interface: (_c2 = this.settings.interface) !== null && _c2 !== void 0 ? _c2 : (_d2 = this.settings.componentUtils) === null || _d2 === void 0 ? void 0 : _d2.interface
     });
     this.componentUtils.waitAndExecute(
       this.props.mountWhen,
-      () => __awaiter$1(this, void 0, void 0, function* () {
+      () => __awaiter$2(this, void 0, void 0, function* () {
         var _e;
         yield (_e = this.mount) === null || _e === void 0 ? void 0 : _e.call(this);
         this.props.mounted = true;
@@ -23551,10 +23513,10 @@ class SActivateFeatureInterface extends SInterface {
     };
   }
 }
-function define$1(props = {}, name2 = "s-activate") {
+function define$2(props = {}, name2 = "s-activate") {
   SActivateFeature.define(name2, SActivateFeature, props);
 }
-var __awaiter = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$1 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -23742,7 +23704,7 @@ class SActivateFeature extends SFeature {
     });
   }
   activate(params) {
-    return __awaiter(this, void 0, void 0, function* () {
+    return __awaiter$1(this, void 0, void 0, function* () {
       const finalParams = Object.assign({ force: false, preventSave: false }, params !== null && params !== void 0 ? params : {});
       clearTimeout(this._unactivateTimeout);
       if (!finalParams.force && this.isActive())
@@ -23779,16 +23741,16 @@ class SActivateFeature extends SFeature {
             if ($target.children.length === 1 && $target.children[0].tagName === "TEMPLATE") {
               const $template = $target.children[0];
               const $container = document.createElement("div");
-              const html = [];
+              const html2 = [];
               Array.from($template.content.childNodes).forEach(($child) => {
                 var _a3;
                 if ($child.tagName === "SCRIPT") {
                   document.head.appendChild($child);
                 } else {
-                  html.push((_a3 = $child.outerHTML) !== null && _a3 !== void 0 ? _a3 : $child.textContent);
+                  html2.push((_a3 = $child.outerHTML) !== null && _a3 !== void 0 ? _a3 : $child.textContent);
                 }
               });
-              $container.innerHTML = html.join("\n");
+              $container.innerHTML = html2.join("\n");
               $target.appendChild($container);
               $template.remove();
             }
@@ -23798,7 +23760,7 @@ class SActivateFeature extends SFeature {
     });
   }
   unactivate(params) {
-    return __awaiter(this, void 0, void 0, function* () {
+    return __awaiter$1(this, void 0, void 0, function* () {
       const finalParams = Object.assign({ force: false, preventSave: false }, params !== null && params !== void 0 ? params : {});
       if (!finalParams.force && !this.isActive())
         return;
@@ -23820,7 +23782,1683 @@ class SActivateFeature extends SFeature {
     });
   }
 }
-const __css = ".s-specs-editor {\n    background: red;\n}\n";
+/**
+ * @license
+ * Copyright 2019 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+const supportsAdoptingStyleSheets = window.ShadowRoot && (window.ShadyCSS === void 0 || window.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype;
+const constructionToken = Symbol();
+const cssTagCache = /* @__PURE__ */ new WeakMap();
+class CSSResult {
+  constructor(cssText, strings, safeToken) {
+    this["_$cssResult$"] = true;
+    if (safeToken !== constructionToken) {
+      throw new Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
+    }
+    this.cssText = cssText;
+    this._strings = strings;
+  }
+  get styleSheet() {
+    let styleSheet = this._styleSheet;
+    const strings = this._strings;
+    if (supportsAdoptingStyleSheets && styleSheet === void 0) {
+      const cacheable = strings !== void 0 && strings.length === 1;
+      if (cacheable) {
+        styleSheet = cssTagCache.get(strings);
+      }
+      if (styleSheet === void 0) {
+        (this._styleSheet = styleSheet = new CSSStyleSheet()).replaceSync(this.cssText);
+        if (cacheable) {
+          cssTagCache.set(strings, styleSheet);
+        }
+      }
+    }
+    return styleSheet;
+  }
+  toString() {
+    return this.cssText;
+  }
+}
+const textFromCSSResult = (value) => {
+  if (value["_$cssResult$"] === true) {
+    return value.cssText;
+  } else if (typeof value === "number") {
+    return value;
+  } else {
+    throw new Error(`Value passed to 'css' function must be a 'css' function result: ${value}. Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.`);
+  }
+};
+const unsafeCSS = (value) => new CSSResult(typeof value === "string" ? value : String(value), void 0, constructionToken);
+const css = (strings, ...values) => {
+  const cssText = strings.length === 1 ? strings[0] : values.reduce((acc, v2, idx) => acc + textFromCSSResult(v2) + strings[idx + 1], strings[0]);
+  return new CSSResult(cssText, strings, constructionToken);
+};
+const adoptStyles = (renderRoot, styles2) => {
+  if (supportsAdoptingStyleSheets) {
+    renderRoot.adoptedStyleSheets = styles2.map((s) => s instanceof CSSStyleSheet ? s : s.styleSheet);
+  } else {
+    styles2.forEach((s) => {
+      const style = document.createElement("style");
+      const nonce = window["litNonce"];
+      if (nonce !== void 0) {
+        style.setAttribute("nonce", nonce);
+      }
+      style.textContent = s.cssText;
+      renderRoot.appendChild(style);
+    });
+  }
+};
+const cssResultFromStyleSheet = (sheet) => {
+  let cssText = "";
+  for (const rule of sheet.cssRules) {
+    cssText += rule.cssText;
+  }
+  return unsafeCSS(cssText);
+};
+const getCompatibleStyle = supportsAdoptingStyleSheets ? (s) => s : (s) => s instanceof CSSStyleSheet ? cssResultFromStyleSheet(s) : s;
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+var _a$2, _b$2, _c$2;
+var _d$1;
+let requestUpdateThenable;
+let issueWarning$2;
+const trustedTypes$1 = window.trustedTypes;
+const emptyStringForBooleanAttribute$1 = trustedTypes$1 ? trustedTypes$1.emptyScript : "";
+const polyfillSupport$2 = window.reactiveElementPolyfillSupportDevMode;
+{
+  const issuedWarnings = (_a$2 = globalThis.litIssuedWarnings) !== null && _a$2 !== void 0 ? _a$2 : globalThis.litIssuedWarnings = /* @__PURE__ */ new Set();
+  issueWarning$2 = (code, warning) => {
+    warning += ` See https://lit.dev/msg/${code} for more information.`;
+    if (!issuedWarnings.has(warning)) {
+      console.warn(warning);
+      issuedWarnings.add(warning);
+    }
+  };
+  issueWarning$2("dev-mode", `Lit is in dev mode. Not recommended for production!`);
+  if (((_b$2 = window.ShadyDOM) === null || _b$2 === void 0 ? void 0 : _b$2.inUse) && polyfillSupport$2 === void 0) {
+    issueWarning$2("polyfill-support-missing", `Shadow DOM is being polyfilled via \`ShadyDOM\` but the \`polyfill-support\` module has not been loaded.`);
+  }
+  requestUpdateThenable = (name2) => ({
+    then: (onfulfilled, _onrejected) => {
+      issueWarning$2("request-update-promise", `The \`requestUpdate\` method should no longer return a Promise but does so on \`${name2}\`. Use \`updateComplete\` instead.`);
+      if (onfulfilled !== void 0) {
+        onfulfilled(false);
+      }
+    }
+  });
+}
+const debugLogEvent$1 = (event) => {
+  const shouldEmit = window.emitLitDebugLogEvents;
+  if (!shouldEmit) {
+    return;
+  }
+  window.dispatchEvent(new CustomEvent("lit-debug", {
+    detail: event
+  }));
+};
+const JSCompiler_renameProperty = (prop, _obj) => prop;
+const defaultConverter = {
+  toAttribute(value, type) {
+    switch (type) {
+      case Boolean:
+        value = value ? emptyStringForBooleanAttribute$1 : null;
+        break;
+      case Object:
+      case Array:
+        value = value == null ? value : JSON.stringify(value);
+        break;
+    }
+    return value;
+  },
+  fromAttribute(value, type) {
+    let fromValue = value;
+    switch (type) {
+      case Boolean:
+        fromValue = value !== null;
+        break;
+      case Number:
+        fromValue = value === null ? null : Number(value);
+        break;
+      case Object:
+      case Array:
+        try {
+          fromValue = JSON.parse(value);
+        } catch (e) {
+          fromValue = null;
+        }
+        break;
+    }
+    return fromValue;
+  }
+};
+const notEqual = (value, old) => {
+  return old !== value && (old === old || value === value);
+};
+const defaultPropertyDeclaration = {
+  attribute: true,
+  type: String,
+  converter: defaultConverter,
+  reflect: false,
+  hasChanged: notEqual
+};
+const finalized = "finalized";
+class ReactiveElement extends HTMLElement {
+  constructor() {
+    super();
+    this.__instanceProperties = /* @__PURE__ */ new Map();
+    this.isUpdatePending = false;
+    this.hasUpdated = false;
+    this.__reflectingProperty = null;
+    this._initialize();
+  }
+  static addInitializer(initializer) {
+    var _a3;
+    (_a3 = this._initializers) !== null && _a3 !== void 0 ? _a3 : this._initializers = [];
+    this._initializers.push(initializer);
+  }
+  static get observedAttributes() {
+    this.finalize();
+    const attributes = [];
+    this.elementProperties.forEach((v2, p) => {
+      const attr = this.__attributeNameForProperty(p, v2);
+      if (attr !== void 0) {
+        this.__attributeToPropertyMap.set(attr, p);
+        attributes.push(attr);
+      }
+    });
+    return attributes;
+  }
+  static createProperty(name2, options = defaultPropertyDeclaration) {
+    var _a3;
+    if (options.state) {
+      options.attribute = false;
+    }
+    this.finalize();
+    this.elementProperties.set(name2, options);
+    if (!options.noAccessor && !this.prototype.hasOwnProperty(name2)) {
+      const key = typeof name2 === "symbol" ? Symbol() : `__${name2}`;
+      const descriptor2 = this.getPropertyDescriptor(name2, key, options);
+      if (descriptor2 !== void 0) {
+        Object.defineProperty(this.prototype, name2, descriptor2);
+        {
+          if (!this.hasOwnProperty("__reactivePropertyKeys")) {
+            this.__reactivePropertyKeys = new Set((_a3 = this.__reactivePropertyKeys) !== null && _a3 !== void 0 ? _a3 : []);
+          }
+          this.__reactivePropertyKeys.add(name2);
+        }
+      }
+    }
+  }
+  static getPropertyDescriptor(name2, key, options) {
+    return {
+      get() {
+        return this[key];
+      },
+      set(value) {
+        const oldValue = this[name2];
+        this[key] = value;
+        this.requestUpdate(name2, oldValue, options);
+      },
+      configurable: true,
+      enumerable: true
+    };
+  }
+  static getPropertyOptions(name2) {
+    return this.elementProperties.get(name2) || defaultPropertyDeclaration;
+  }
+  static finalize() {
+    if (this.hasOwnProperty(finalized)) {
+      return false;
+    }
+    this[finalized] = true;
+    const superCtor = Object.getPrototypeOf(this);
+    superCtor.finalize();
+    this.elementProperties = new Map(superCtor.elementProperties);
+    this.__attributeToPropertyMap = /* @__PURE__ */ new Map();
+    if (this.hasOwnProperty(JSCompiler_renameProperty("properties"))) {
+      const props = this.properties;
+      const propKeys = [
+        ...Object.getOwnPropertyNames(props),
+        ...Object.getOwnPropertySymbols(props)
+      ];
+      for (const p of propKeys) {
+        this.createProperty(p, props[p]);
+      }
+    }
+    this.elementStyles = this.finalizeStyles(this.styles);
+    {
+      const warnRemovedOrRenamed = (name2, renamed = false) => {
+        if (this.prototype.hasOwnProperty(name2)) {
+          issueWarning$2(renamed ? "renamed-api" : "removed-api", `\`${name2}\` is implemented on class ${this.name}. It has been ${renamed ? "renamed" : "removed"} in this version of LitElement.`);
+        }
+      };
+      warnRemovedOrRenamed("initialize");
+      warnRemovedOrRenamed("requestUpdateInternal");
+      warnRemovedOrRenamed("_getUpdateComplete", true);
+    }
+    return true;
+  }
+  static finalizeStyles(styles2) {
+    const elementStyles = [];
+    if (Array.isArray(styles2)) {
+      const set = new Set(styles2.flat(Infinity).reverse());
+      for (const s of set) {
+        elementStyles.unshift(getCompatibleStyle(s));
+      }
+    } else if (styles2 !== void 0) {
+      elementStyles.push(getCompatibleStyle(styles2));
+    }
+    return elementStyles;
+  }
+  static __attributeNameForProperty(name2, options) {
+    const attribute = options.attribute;
+    return attribute === false ? void 0 : typeof attribute === "string" ? attribute : typeof name2 === "string" ? name2.toLowerCase() : void 0;
+  }
+  _initialize() {
+    var _a3;
+    this.__updatePromise = new Promise((res) => this.enableUpdating = res);
+    this._$changedProperties = /* @__PURE__ */ new Map();
+    this.__saveInstanceProperties();
+    this.requestUpdate();
+    (_a3 = this.constructor._initializers) === null || _a3 === void 0 ? void 0 : _a3.forEach((i2) => i2(this));
+  }
+  addController(controller) {
+    var _a3, _b2;
+    ((_a3 = this.__controllers) !== null && _a3 !== void 0 ? _a3 : this.__controllers = []).push(controller);
+    if (this.renderRoot !== void 0 && this.isConnected) {
+      (_b2 = controller.hostConnected) === null || _b2 === void 0 ? void 0 : _b2.call(controller);
+    }
+  }
+  removeController(controller) {
+    var _a3;
+    (_a3 = this.__controllers) === null || _a3 === void 0 ? void 0 : _a3.splice(this.__controllers.indexOf(controller) >>> 0, 1);
+  }
+  __saveInstanceProperties() {
+    this.constructor.elementProperties.forEach((_v, p) => {
+      if (this.hasOwnProperty(p)) {
+        this.__instanceProperties.set(p, this[p]);
+        delete this[p];
+      }
+    });
+  }
+  createRenderRoot() {
+    var _a3;
+    const renderRoot = (_a3 = this.shadowRoot) !== null && _a3 !== void 0 ? _a3 : this.attachShadow(this.constructor.shadowRootOptions);
+    adoptStyles(renderRoot, this.constructor.elementStyles);
+    return renderRoot;
+  }
+  connectedCallback() {
+    var _a3;
+    if (this.renderRoot === void 0) {
+      this.renderRoot = this.createRenderRoot();
+    }
+    this.enableUpdating(true);
+    (_a3 = this.__controllers) === null || _a3 === void 0 ? void 0 : _a3.forEach((c) => {
+      var _a4;
+      return (_a4 = c.hostConnected) === null || _a4 === void 0 ? void 0 : _a4.call(c);
+    });
+  }
+  enableUpdating(_requestedUpdate) {
+  }
+  disconnectedCallback() {
+    var _a3;
+    (_a3 = this.__controllers) === null || _a3 === void 0 ? void 0 : _a3.forEach((c) => {
+      var _a4;
+      return (_a4 = c.hostDisconnected) === null || _a4 === void 0 ? void 0 : _a4.call(c);
+    });
+  }
+  attributeChangedCallback(name2, _old, value) {
+    this._$attributeToProperty(name2, value);
+  }
+  __propertyToAttribute(name2, value, options = defaultPropertyDeclaration) {
+    var _a3, _b2;
+    const attr = this.constructor.__attributeNameForProperty(name2, options);
+    if (attr !== void 0 && options.reflect === true) {
+      const toAttribute = (_b2 = (_a3 = options.converter) === null || _a3 === void 0 ? void 0 : _a3.toAttribute) !== null && _b2 !== void 0 ? _b2 : defaultConverter.toAttribute;
+      const attrValue = toAttribute(value, options.type);
+      if (this.constructor.enabledWarnings.indexOf("migration") >= 0 && attrValue === void 0) {
+        issueWarning$2("undefined-attribute-value", `The attribute value for the ${name2} property is undefined on element ${this.localName}. The attribute will be removed, but in the previous version of \`ReactiveElement\`, the attribute would not have changed.`);
+      }
+      this.__reflectingProperty = name2;
+      if (attrValue == null) {
+        this.removeAttribute(attr);
+      } else {
+        this.setAttribute(attr, attrValue);
+      }
+      this.__reflectingProperty = null;
+    }
+  }
+  _$attributeToProperty(name2, value) {
+    var _a3, _b2;
+    const ctor = this.constructor;
+    const propName = ctor.__attributeToPropertyMap.get(name2);
+    if (propName !== void 0 && this.__reflectingProperty !== propName) {
+      const options = ctor.getPropertyOptions(propName);
+      const converter = options.converter;
+      const fromAttribute = (_b2 = (_a3 = converter === null || converter === void 0 ? void 0 : converter.fromAttribute) !== null && _a3 !== void 0 ? _a3 : typeof converter === "function" ? converter : null) !== null && _b2 !== void 0 ? _b2 : defaultConverter.fromAttribute;
+      this.__reflectingProperty = propName;
+      this[propName] = fromAttribute(value, options.type);
+      this.__reflectingProperty = null;
+    }
+  }
+  requestUpdate(name2, oldValue, options) {
+    let shouldRequestUpdate = true;
+    if (name2 !== void 0) {
+      options = options || this.constructor.getPropertyOptions(name2);
+      const hasChanged = options.hasChanged || notEqual;
+      if (hasChanged(this[name2], oldValue)) {
+        if (!this._$changedProperties.has(name2)) {
+          this._$changedProperties.set(name2, oldValue);
+        }
+        if (options.reflect === true && this.__reflectingProperty !== name2) {
+          if (this.__reflectingProperties === void 0) {
+            this.__reflectingProperties = /* @__PURE__ */ new Map();
+          }
+          this.__reflectingProperties.set(name2, options);
+        }
+      } else {
+        shouldRequestUpdate = false;
+      }
+    }
+    if (!this.isUpdatePending && shouldRequestUpdate) {
+      this.__updatePromise = this.__enqueueUpdate();
+    }
+    return requestUpdateThenable(this.localName);
+  }
+  async __enqueueUpdate() {
+    this.isUpdatePending = true;
+    try {
+      await this.__updatePromise;
+    } catch (e) {
+      Promise.reject(e);
+    }
+    const result2 = this.scheduleUpdate();
+    if (result2 != null) {
+      await result2;
+    }
+    return !this.isUpdatePending;
+  }
+  scheduleUpdate() {
+    return this.performUpdate();
+  }
+  performUpdate() {
+    var _a3, _b2;
+    if (!this.isUpdatePending) {
+      return;
+    }
+    debugLogEvent$1 === null || debugLogEvent$1 === void 0 ? void 0 : debugLogEvent$1({ kind: "update" });
+    if (!this.hasUpdated) {
+      {
+        const shadowedProperties = [];
+        (_a3 = this.constructor.__reactivePropertyKeys) === null || _a3 === void 0 ? void 0 : _a3.forEach((p) => {
+          var _a4;
+          if (this.hasOwnProperty(p) && !((_a4 = this.__instanceProperties) === null || _a4 === void 0 ? void 0 : _a4.has(p))) {
+            shadowedProperties.push(p);
+          }
+        });
+        if (shadowedProperties.length) {
+          throw new Error(`The following properties on element ${this.localName} will not trigger updates as expected because they are set using class fields: ${shadowedProperties.join(", ")}. Native class fields and some compiled output will overwrite accessors used for detecting changes. See https://lit.dev/msg/class-field-shadowing for more information.`);
+        }
+      }
+    }
+    if (this.__instanceProperties) {
+      this.__instanceProperties.forEach((v2, p) => this[p] = v2);
+      this.__instanceProperties = void 0;
+    }
+    let shouldUpdate = false;
+    const changedProperties = this._$changedProperties;
+    try {
+      shouldUpdate = this.shouldUpdate(changedProperties);
+      if (shouldUpdate) {
+        this.willUpdate(changedProperties);
+        (_b2 = this.__controllers) === null || _b2 === void 0 ? void 0 : _b2.forEach((c) => {
+          var _a4;
+          return (_a4 = c.hostUpdate) === null || _a4 === void 0 ? void 0 : _a4.call(c);
+        });
+        this.update(changedProperties);
+      } else {
+        this.__markUpdated();
+      }
+    } catch (e) {
+      shouldUpdate = false;
+      this.__markUpdated();
+      throw e;
+    }
+    if (shouldUpdate) {
+      this._$didUpdate(changedProperties);
+    }
+  }
+  willUpdate(_changedProperties) {
+  }
+  _$didUpdate(changedProperties) {
+    var _a3;
+    (_a3 = this.__controllers) === null || _a3 === void 0 ? void 0 : _a3.forEach((c) => {
+      var _a4;
+      return (_a4 = c.hostUpdated) === null || _a4 === void 0 ? void 0 : _a4.call(c);
+    });
+    if (!this.hasUpdated) {
+      this.hasUpdated = true;
+      this.firstUpdated(changedProperties);
+    }
+    this.updated(changedProperties);
+    if (this.isUpdatePending && this.constructor.enabledWarnings.indexOf("change-in-update") >= 0) {
+      issueWarning$2("change-in-update", `Element ${this.localName} scheduled an update (generally because a property was set) after an update completed, causing a new update to be scheduled. This is inefficient and should be avoided unless the next update can only be scheduled as a side effect of the previous update.`);
+    }
+  }
+  __markUpdated() {
+    this._$changedProperties = /* @__PURE__ */ new Map();
+    this.isUpdatePending = false;
+  }
+  get updateComplete() {
+    return this.getUpdateComplete();
+  }
+  getUpdateComplete() {
+    return this.__updatePromise;
+  }
+  shouldUpdate(_changedProperties) {
+    return true;
+  }
+  update(_changedProperties) {
+    if (this.__reflectingProperties !== void 0) {
+      this.__reflectingProperties.forEach((v2, k) => this.__propertyToAttribute(k, this[k], v2));
+      this.__reflectingProperties = void 0;
+    }
+    this.__markUpdated();
+  }
+  updated(_changedProperties) {
+  }
+  firstUpdated(_changedProperties) {
+  }
+}
+_d$1 = finalized;
+ReactiveElement[_d$1] = true;
+ReactiveElement.elementProperties = /* @__PURE__ */ new Map();
+ReactiveElement.elementStyles = [];
+ReactiveElement.shadowRootOptions = { mode: "open" };
+polyfillSupport$2 === null || polyfillSupport$2 === void 0 ? void 0 : polyfillSupport$2({ ReactiveElement });
+{
+  ReactiveElement.enabledWarnings = ["change-in-update"];
+  const ensureOwnWarnings = function(ctor) {
+    if (!ctor.hasOwnProperty(JSCompiler_renameProperty("enabledWarnings"))) {
+      ctor.enabledWarnings = ctor.enabledWarnings.slice();
+    }
+  };
+  ReactiveElement.enableWarning = function(warning) {
+    ensureOwnWarnings(this);
+    if (this.enabledWarnings.indexOf(warning) < 0) {
+      this.enabledWarnings.push(warning);
+    }
+  };
+  ReactiveElement.disableWarning = function(warning) {
+    ensureOwnWarnings(this);
+    const i2 = this.enabledWarnings.indexOf(warning);
+    if (i2 >= 0) {
+      this.enabledWarnings.splice(i2, 1);
+    }
+  };
+}
+((_c$2 = globalThis.reactiveElementVersions) !== null && _c$2 !== void 0 ? _c$2 : globalThis.reactiveElementVersions = []).push("1.3.4");
+if (globalThis.reactiveElementVersions.length > 1) {
+  issueWarning$2("multiple-versions", `Multiple versions of Lit loaded. Loading multiple versions is not recommended.`);
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+var _a$1, _b$1, _c$1, _d;
+const debugLogEvent = (event) => {
+  const shouldEmit = window.emitLitDebugLogEvents;
+  if (!shouldEmit) {
+    return;
+  }
+  window.dispatchEvent(new CustomEvent("lit-debug", {
+    detail: event
+  }));
+};
+let debugLogRenderId = 0;
+let issueWarning$1;
+{
+  (_a$1 = globalThis.litIssuedWarnings) !== null && _a$1 !== void 0 ? _a$1 : globalThis.litIssuedWarnings = /* @__PURE__ */ new Set();
+  issueWarning$1 = (code, warning) => {
+    warning += code ? ` See https://lit.dev/msg/${code} for more information.` : "";
+    if (!globalThis.litIssuedWarnings.has(warning)) {
+      console.warn(warning);
+      globalThis.litIssuedWarnings.add(warning);
+    }
+  };
+  issueWarning$1("dev-mode", `Lit is in dev mode. Not recommended for production!`);
+}
+const wrap = ((_b$1 = window.ShadyDOM) === null || _b$1 === void 0 ? void 0 : _b$1.inUse) && ((_c$1 = window.ShadyDOM) === null || _c$1 === void 0 ? void 0 : _c$1.noPatch) === true ? window.ShadyDOM.wrap : (node2) => node2;
+const trustedTypes = globalThis.trustedTypes;
+const policy = trustedTypes ? trustedTypes.createPolicy("lit-html", {
+  createHTML: (s) => s
+}) : void 0;
+const identityFunction = (value) => value;
+const noopSanitizer = (_node, _name, _type) => identityFunction;
+const setSanitizer = (newSanitizer) => {
+  if (sanitizerFactoryInternal !== noopSanitizer) {
+    throw new Error(`Attempted to overwrite existing lit-html security policy. setSanitizeDOMValueFactory should be called at most once.`);
+  }
+  sanitizerFactoryInternal = newSanitizer;
+};
+const _testOnlyClearSanitizerFactoryDoNotCallOrElse = () => {
+  sanitizerFactoryInternal = noopSanitizer;
+};
+const createSanitizer = (node2, name2, type) => {
+  return sanitizerFactoryInternal(node2, name2, type);
+};
+const boundAttributeSuffix = "$lit$";
+const marker = `lit$${String(Math.random()).slice(9)}$`;
+const markerMatch = "?" + marker;
+const nodeMarker = `<${markerMatch}>`;
+const d = document;
+const createMarker = (v2 = "") => d.createComment(v2);
+const isPrimitive = (value) => value === null || typeof value != "object" && typeof value != "function";
+const isArray = Array.isArray;
+const isIterable = (value) => isArray(value) || typeof (value === null || value === void 0 ? void 0 : value[Symbol.iterator]) === "function";
+const SPACE_CHAR = `[ 	
+\f\r]`;
+const ATTR_VALUE_CHAR = `[^ 	
+\f\r"'\`<>=]`;
+const NAME_CHAR = `[^\\s"'>=/]`;
+const textEndRegex = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g;
+const COMMENT_START = 1;
+const TAG_NAME = 2;
+const DYNAMIC_TAG_NAME = 3;
+const commentEndRegex = /-->/g;
+const comment2EndRegex = />/g;
+const tagEndRegex = new RegExp(`>|${SPACE_CHAR}(?:(${NAME_CHAR}+)(${SPACE_CHAR}*=${SPACE_CHAR}*(?:${ATTR_VALUE_CHAR}|("|')|))|$)`, "g");
+const ENTIRE_MATCH = 0;
+const ATTRIBUTE_NAME = 1;
+const SPACES_AND_EQUALS = 2;
+const QUOTE_CHAR = 3;
+const singleQuoteAttrEndRegex = /'/g;
+const doubleQuoteAttrEndRegex = /"/g;
+const rawTextElement = /^(?:script|style|textarea|title)$/i;
+const HTML_RESULT = 1;
+const SVG_RESULT = 2;
+const ATTRIBUTE_PART = 1;
+const CHILD_PART = 2;
+const PROPERTY_PART = 3;
+const BOOLEAN_ATTRIBUTE_PART = 4;
+const EVENT_PART = 5;
+const ELEMENT_PART = 6;
+const COMMENT_PART = 7;
+const tag = (type) => (strings, ...values) => {
+  if (strings.some((s) => s === void 0)) {
+    console.warn("Some template strings are undefined.\nThis is probably caused by illegal octal escape sequences.");
+  }
+  return {
+    ["_$litType$"]: type,
+    strings,
+    values
+  };
+};
+const html = tag(HTML_RESULT);
+const noChange = Symbol.for("lit-noChange");
+const nothing = Symbol.for("lit-nothing");
+const templateCache = /* @__PURE__ */ new WeakMap();
+const render = (value, container, options) => {
+  var _a3, _b2;
+  if (container == null) {
+    throw new TypeError(`The container to render into may not be ${container}`);
+  }
+  const renderId = debugLogRenderId++;
+  const partOwnerNode = (_a3 = options === null || options === void 0 ? void 0 : options.renderBefore) !== null && _a3 !== void 0 ? _a3 : container;
+  let part = partOwnerNode["_$litPart$"];
+  debugLogEvent === null || debugLogEvent === void 0 ? void 0 : debugLogEvent({
+    kind: "begin render",
+    id: renderId,
+    value,
+    container,
+    options,
+    part
+  });
+  if (part === void 0) {
+    const endNode = (_b2 = options === null || options === void 0 ? void 0 : options.renderBefore) !== null && _b2 !== void 0 ? _b2 : null;
+    partOwnerNode["_$litPart$"] = part = new ChildPart(container.insertBefore(createMarker(), endNode), endNode, void 0, options !== null && options !== void 0 ? options : {});
+  }
+  part._$setValue(value);
+  debugLogEvent === null || debugLogEvent === void 0 ? void 0 : debugLogEvent({
+    kind: "end render",
+    id: renderId,
+    value,
+    container,
+    options,
+    part
+  });
+  return part;
+};
+{
+  render.setSanitizer = setSanitizer;
+  render.createSanitizer = createSanitizer;
+  {
+    render._testOnlyClearSanitizerFactoryDoNotCallOrElse = _testOnlyClearSanitizerFactoryDoNotCallOrElse;
+  }
+}
+const walker = d.createTreeWalker(d, 129, null, false);
+let sanitizerFactoryInternal = noopSanitizer;
+const getTemplateHtml = (strings, type) => {
+  const l = strings.length - 1;
+  const attrNames = [];
+  let html2 = type === SVG_RESULT ? "<svg>" : "";
+  let rawTextEndRegex;
+  let regex2 = textEndRegex;
+  for (let i2 = 0; i2 < l; i2++) {
+    const s = strings[i2];
+    let attrNameEndIndex = -1;
+    let attrName;
+    let lastIndex = 0;
+    let match2;
+    while (lastIndex < s.length) {
+      regex2.lastIndex = lastIndex;
+      match2 = regex2.exec(s);
+      if (match2 === null) {
+        break;
+      }
+      lastIndex = regex2.lastIndex;
+      if (regex2 === textEndRegex) {
+        if (match2[COMMENT_START] === "!--") {
+          regex2 = commentEndRegex;
+        } else if (match2[COMMENT_START] !== void 0) {
+          regex2 = comment2EndRegex;
+        } else if (match2[TAG_NAME] !== void 0) {
+          if (rawTextElement.test(match2[TAG_NAME])) {
+            rawTextEndRegex = new RegExp(`</${match2[TAG_NAME]}`, "g");
+          }
+          regex2 = tagEndRegex;
+        } else if (match2[DYNAMIC_TAG_NAME] !== void 0) {
+          {
+            throw new Error("Bindings in tag names are not supported. Please use static templates instead. See https://lit.dev/docs/templates/expressions/#static-expressions");
+          }
+        }
+      } else if (regex2 === tagEndRegex) {
+        if (match2[ENTIRE_MATCH] === ">") {
+          regex2 = rawTextEndRegex !== null && rawTextEndRegex !== void 0 ? rawTextEndRegex : textEndRegex;
+          attrNameEndIndex = -1;
+        } else if (match2[ATTRIBUTE_NAME] === void 0) {
+          attrNameEndIndex = -2;
+        } else {
+          attrNameEndIndex = regex2.lastIndex - match2[SPACES_AND_EQUALS].length;
+          attrName = match2[ATTRIBUTE_NAME];
+          regex2 = match2[QUOTE_CHAR] === void 0 ? tagEndRegex : match2[QUOTE_CHAR] === '"' ? doubleQuoteAttrEndRegex : singleQuoteAttrEndRegex;
+        }
+      } else if (regex2 === doubleQuoteAttrEndRegex || regex2 === singleQuoteAttrEndRegex) {
+        regex2 = tagEndRegex;
+      } else if (regex2 === commentEndRegex || regex2 === comment2EndRegex) {
+        regex2 = textEndRegex;
+      } else {
+        regex2 = tagEndRegex;
+        rawTextEndRegex = void 0;
+      }
+    }
+    {
+      console.assert(attrNameEndIndex === -1 || regex2 === tagEndRegex || regex2 === singleQuoteAttrEndRegex || regex2 === doubleQuoteAttrEndRegex, "unexpected parse state B");
+    }
+    const end = regex2 === tagEndRegex && strings[i2 + 1].startsWith("/>") ? " " : "";
+    html2 += regex2 === textEndRegex ? s + nodeMarker : attrNameEndIndex >= 0 ? (attrNames.push(attrName), s.slice(0, attrNameEndIndex) + boundAttributeSuffix + s.slice(attrNameEndIndex)) + marker + end : s + marker + (attrNameEndIndex === -2 ? (attrNames.push(void 0), i2) : end);
+  }
+  const htmlResult = html2 + (strings[l] || "<?>") + (type === SVG_RESULT ? "</svg>" : "");
+  if (!Array.isArray(strings) || !strings.hasOwnProperty("raw")) {
+    let message = "invalid template strings array";
+    {
+      message = `
+          Internal Error: expected template strings to be an array
+          with a 'raw' field. Faking a template strings array by
+          calling html or svg like an ordinary function is effectively
+          the same as calling unsafeHtml and can lead to major security
+          issues, e.g. opening your code up to XSS attacks.
+
+          If you're using the html or svg tagged template functions normally
+          and and still seeing this error, please file a bug at
+          https://github.com/lit/lit/issues/new?template=bug_report.md
+          and include information about your build tooling, if any.
+        `.trim().replace(/\n */g, "\n");
+    }
+    throw new Error(message);
+  }
+  return [
+    policy !== void 0 ? policy.createHTML(htmlResult) : htmlResult,
+    attrNames
+  ];
+};
+class Template {
+  constructor({ strings, ["_$litType$"]: type }, options) {
+    this.parts = [];
+    let node2;
+    let nodeIndex = 0;
+    let attrNameIndex = 0;
+    const partCount = strings.length - 1;
+    const parts = this.parts;
+    const [html2, attrNames] = getTemplateHtml(strings, type);
+    this.el = Template.createElement(html2, options);
+    walker.currentNode = this.el.content;
+    if (type === SVG_RESULT) {
+      const content = this.el.content;
+      const svgElement = content.firstChild;
+      svgElement.remove();
+      content.append(...svgElement.childNodes);
+    }
+    while ((node2 = walker.nextNode()) !== null && parts.length < partCount) {
+      if (node2.nodeType === 1) {
+        {
+          const tag2 = node2.localName;
+          if (/^(?:textarea|template)$/i.test(tag2) && node2.innerHTML.includes(marker)) {
+            const m = `Expressions are not supported inside \`${tag2}\` elements. See https://lit.dev/msg/expression-in-${tag2} for more information.`;
+            if (tag2 === "template") {
+              throw new Error(m);
+            } else
+              issueWarning$1("", m);
+          }
+        }
+        if (node2.hasAttributes()) {
+          const attrsToRemove = [];
+          for (const name2 of node2.getAttributeNames()) {
+            if (name2.endsWith(boundAttributeSuffix) || name2.startsWith(marker)) {
+              const realName = attrNames[attrNameIndex++];
+              attrsToRemove.push(name2);
+              if (realName !== void 0) {
+                const value = node2.getAttribute(realName.toLowerCase() + boundAttributeSuffix);
+                const statics = value.split(marker);
+                const m = /([.?@])?(.*)/.exec(realName);
+                parts.push({
+                  type: ATTRIBUTE_PART,
+                  index: nodeIndex,
+                  name: m[2],
+                  strings: statics,
+                  ctor: m[1] === "." ? PropertyPart : m[1] === "?" ? BooleanAttributePart : m[1] === "@" ? EventPart : AttributePart
+                });
+              } else {
+                parts.push({
+                  type: ELEMENT_PART,
+                  index: nodeIndex
+                });
+              }
+            }
+          }
+          for (const name2 of attrsToRemove) {
+            node2.removeAttribute(name2);
+          }
+        }
+        if (rawTextElement.test(node2.tagName)) {
+          const strings2 = node2.textContent.split(marker);
+          const lastIndex = strings2.length - 1;
+          if (lastIndex > 0) {
+            node2.textContent = trustedTypes ? trustedTypes.emptyScript : "";
+            for (let i2 = 0; i2 < lastIndex; i2++) {
+              node2.append(strings2[i2], createMarker());
+              walker.nextNode();
+              parts.push({ type: CHILD_PART, index: ++nodeIndex });
+            }
+            node2.append(strings2[lastIndex], createMarker());
+          }
+        }
+      } else if (node2.nodeType === 8) {
+        const data = node2.data;
+        if (data === markerMatch) {
+          parts.push({ type: CHILD_PART, index: nodeIndex });
+        } else {
+          let i2 = -1;
+          while ((i2 = node2.data.indexOf(marker, i2 + 1)) !== -1) {
+            parts.push({ type: COMMENT_PART, index: nodeIndex });
+            i2 += marker.length - 1;
+          }
+        }
+      }
+      nodeIndex++;
+    }
+    debugLogEvent === null || debugLogEvent === void 0 ? void 0 : debugLogEvent({
+      kind: "template prep",
+      template: this,
+      clonableTemplate: this.el,
+      parts: this.parts,
+      strings
+    });
+  }
+  static createElement(html2, _options) {
+    const el = d.createElement("template");
+    el.innerHTML = html2;
+    return el;
+  }
+}
+function resolveDirective(part, value, parent = part, attributeIndex) {
+  var _a3, _b2, _c2;
+  var _d2;
+  if (value === noChange) {
+    return value;
+  }
+  let currentDirective = attributeIndex !== void 0 ? (_a3 = parent.__directives) === null || _a3 === void 0 ? void 0 : _a3[attributeIndex] : parent.__directive;
+  const nextDirectiveConstructor = isPrimitive(value) ? void 0 : value["_$litDirective$"];
+  if ((currentDirective === null || currentDirective === void 0 ? void 0 : currentDirective.constructor) !== nextDirectiveConstructor) {
+    (_b2 = currentDirective === null || currentDirective === void 0 ? void 0 : currentDirective["_$notifyDirectiveConnectionChanged"]) === null || _b2 === void 0 ? void 0 : _b2.call(currentDirective, false);
+    if (nextDirectiveConstructor === void 0) {
+      currentDirective = void 0;
+    } else {
+      currentDirective = new nextDirectiveConstructor(part);
+      currentDirective._$initialize(part, parent, attributeIndex);
+    }
+    if (attributeIndex !== void 0) {
+      ((_c2 = (_d2 = parent).__directives) !== null && _c2 !== void 0 ? _c2 : _d2.__directives = [])[attributeIndex] = currentDirective;
+    } else {
+      parent.__directive = currentDirective;
+    }
+  }
+  if (currentDirective !== void 0) {
+    value = resolveDirective(part, currentDirective._$resolve(part, value.values), currentDirective, attributeIndex);
+  }
+  return value;
+}
+class TemplateInstance {
+  constructor(template2, parent) {
+    this._parts = [];
+    this._$disconnectableChildren = void 0;
+    this._$template = template2;
+    this._$parent = parent;
+  }
+  get parentNode() {
+    return this._$parent.parentNode;
+  }
+  get _$isConnected() {
+    return this._$parent._$isConnected;
+  }
+  _clone(options) {
+    var _a3;
+    const { el: { content }, parts } = this._$template;
+    const fragment = ((_a3 = options === null || options === void 0 ? void 0 : options.creationScope) !== null && _a3 !== void 0 ? _a3 : d).importNode(content, true);
+    walker.currentNode = fragment;
+    let node2 = walker.nextNode();
+    let nodeIndex = 0;
+    let partIndex = 0;
+    let templatePart = parts[0];
+    while (templatePart !== void 0) {
+      if (nodeIndex === templatePart.index) {
+        let part;
+        if (templatePart.type === CHILD_PART) {
+          part = new ChildPart(node2, node2.nextSibling, this, options);
+        } else if (templatePart.type === ATTRIBUTE_PART) {
+          part = new templatePart.ctor(node2, templatePart.name, templatePart.strings, this, options);
+        } else if (templatePart.type === ELEMENT_PART) {
+          part = new ElementPart(node2, this, options);
+        }
+        this._parts.push(part);
+        templatePart = parts[++partIndex];
+      }
+      if (nodeIndex !== (templatePart === null || templatePart === void 0 ? void 0 : templatePart.index)) {
+        node2 = walker.nextNode();
+        nodeIndex++;
+      }
+    }
+    return fragment;
+  }
+  _update(values) {
+    let i2 = 0;
+    for (const part of this._parts) {
+      if (part !== void 0) {
+        debugLogEvent === null || debugLogEvent === void 0 ? void 0 : debugLogEvent({
+          kind: "set part",
+          part,
+          value: values[i2],
+          valueIndex: i2,
+          values,
+          templateInstance: this
+        });
+        if (part.strings !== void 0) {
+          part._$setValue(values, part, i2);
+          i2 += part.strings.length - 2;
+        } else {
+          part._$setValue(values[i2]);
+        }
+      }
+      i2++;
+    }
+  }
+}
+class ChildPart {
+  constructor(startNode, endNode, parent, options) {
+    var _a3;
+    this.type = CHILD_PART;
+    this._$committedValue = nothing;
+    this._$disconnectableChildren = void 0;
+    this._$startNode = startNode;
+    this._$endNode = endNode;
+    this._$parent = parent;
+    this.options = options;
+    this.__isConnected = (_a3 = options === null || options === void 0 ? void 0 : options.isConnected) !== null && _a3 !== void 0 ? _a3 : true;
+    {
+      this._textSanitizer = void 0;
+    }
+  }
+  get _$isConnected() {
+    var _a3, _b2;
+    return (_b2 = (_a3 = this._$parent) === null || _a3 === void 0 ? void 0 : _a3._$isConnected) !== null && _b2 !== void 0 ? _b2 : this.__isConnected;
+  }
+  get parentNode() {
+    let parentNode = wrap(this._$startNode).parentNode;
+    const parent = this._$parent;
+    if (parent !== void 0 && parentNode.nodeType === 11) {
+      parentNode = parent.parentNode;
+    }
+    return parentNode;
+  }
+  get startNode() {
+    return this._$startNode;
+  }
+  get endNode() {
+    return this._$endNode;
+  }
+  _$setValue(value, directiveParent = this) {
+    if (this.parentNode === null) {
+      throw new Error(`This \`ChildPart\` has no \`parentNode\` and therefore cannot accept a value. This likely means the element containing the part was manipulated in an unsupported way outside of Lit's control such that the part's marker nodes were ejected from DOM. For example, setting the element's \`innerHTML\` or \`textContent\` can do this.`);
+    }
+    value = resolveDirective(this, value, directiveParent);
+    if (isPrimitive(value)) {
+      if (value === nothing || value == null || value === "") {
+        if (this._$committedValue !== nothing) {
+          debugLogEvent === null || debugLogEvent === void 0 ? void 0 : debugLogEvent({
+            kind: "commit nothing to child",
+            start: this._$startNode,
+            end: this._$endNode,
+            parent: this._$parent,
+            options: this.options
+          });
+          this._$clear();
+        }
+        this._$committedValue = nothing;
+      } else if (value !== this._$committedValue && value !== noChange) {
+        this._commitText(value);
+      }
+    } else if (value["_$litType$"] !== void 0) {
+      this._commitTemplateResult(value);
+    } else if (value.nodeType !== void 0) {
+      this._commitNode(value);
+    } else if (isIterable(value)) {
+      this._commitIterable(value);
+    } else {
+      this._commitText(value);
+    }
+  }
+  _insert(node2, ref = this._$endNode) {
+    return wrap(wrap(this._$startNode).parentNode).insertBefore(node2, ref);
+  }
+  _commitNode(value) {
+    var _a3;
+    if (this._$committedValue !== value) {
+      this._$clear();
+      if (sanitizerFactoryInternal !== noopSanitizer) {
+        const parentNodeName = (_a3 = this._$startNode.parentNode) === null || _a3 === void 0 ? void 0 : _a3.nodeName;
+        if (parentNodeName === "STYLE" || parentNodeName === "SCRIPT") {
+          let message = "Forbidden";
+          {
+            if (parentNodeName === "STYLE") {
+              message = `Lit does not support binding inside style nodes. This is a security risk, as style injection attacks can exfiltrate data and spoof UIs. Consider instead using css\`...\` literals to compose styles, and make do dynamic styling with css custom properties, ::parts, <slot>s, and by mutating the DOM rather than stylesheets.`;
+            } else {
+              message = `Lit does not support binding inside script nodes. This is a security risk, as it could allow arbitrary code execution.`;
+            }
+          }
+          throw new Error(message);
+        }
+      }
+      debugLogEvent === null || debugLogEvent === void 0 ? void 0 : debugLogEvent({
+        kind: "commit node",
+        start: this._$startNode,
+        parent: this._$parent,
+        value,
+        options: this.options
+      });
+      this._$committedValue = this._insert(value);
+    }
+  }
+  _commitText(value) {
+    if (this._$committedValue !== nothing && isPrimitive(this._$committedValue)) {
+      const node2 = wrap(this._$startNode).nextSibling;
+      {
+        if (this._textSanitizer === void 0) {
+          this._textSanitizer = createSanitizer(node2, "data", "property");
+        }
+        value = this._textSanitizer(value);
+      }
+      debugLogEvent === null || debugLogEvent === void 0 ? void 0 : debugLogEvent({
+        kind: "commit text",
+        node: node2,
+        value,
+        options: this.options
+      });
+      node2.data = value;
+    } else {
+      {
+        const textNode = document.createTextNode("");
+        this._commitNode(textNode);
+        if (this._textSanitizer === void 0) {
+          this._textSanitizer = createSanitizer(textNode, "data", "property");
+        }
+        value = this._textSanitizer(value);
+        debugLogEvent === null || debugLogEvent === void 0 ? void 0 : debugLogEvent({
+          kind: "commit text",
+          node: textNode,
+          value,
+          options: this.options
+        });
+        textNode.data = value;
+      }
+    }
+    this._$committedValue = value;
+  }
+  _commitTemplateResult(result2) {
+    var _a3;
+    const { values, ["_$litType$"]: type } = result2;
+    const template2 = typeof type === "number" ? this._$getTemplate(result2) : (type.el === void 0 && (type.el = Template.createElement(type.h, this.options)), type);
+    if (((_a3 = this._$committedValue) === null || _a3 === void 0 ? void 0 : _a3._$template) === template2) {
+      debugLogEvent === null || debugLogEvent === void 0 ? void 0 : debugLogEvent({
+        kind: "template updating",
+        template: template2,
+        instance: this._$committedValue,
+        parts: this._$committedValue._parts,
+        options: this.options,
+        values
+      });
+      this._$committedValue._update(values);
+    } else {
+      const instance = new TemplateInstance(template2, this);
+      const fragment = instance._clone(this.options);
+      debugLogEvent === null || debugLogEvent === void 0 ? void 0 : debugLogEvent({
+        kind: "template instantiated",
+        template: template2,
+        instance,
+        parts: instance._parts,
+        options: this.options,
+        fragment,
+        values
+      });
+      instance._update(values);
+      debugLogEvent === null || debugLogEvent === void 0 ? void 0 : debugLogEvent({
+        kind: "template instantiated and updated",
+        template: template2,
+        instance,
+        parts: instance._parts,
+        options: this.options,
+        fragment,
+        values
+      });
+      this._commitNode(fragment);
+      this._$committedValue = instance;
+    }
+  }
+  _$getTemplate(result2) {
+    let template2 = templateCache.get(result2.strings);
+    if (template2 === void 0) {
+      templateCache.set(result2.strings, template2 = new Template(result2));
+    }
+    return template2;
+  }
+  _commitIterable(value) {
+    if (!isArray(this._$committedValue)) {
+      this._$committedValue = [];
+      this._$clear();
+    }
+    const itemParts = this._$committedValue;
+    let partIndex = 0;
+    let itemPart;
+    for (const item of value) {
+      if (partIndex === itemParts.length) {
+        itemParts.push(itemPart = new ChildPart(this._insert(createMarker()), this._insert(createMarker()), this, this.options));
+      } else {
+        itemPart = itemParts[partIndex];
+      }
+      itemPart._$setValue(item);
+      partIndex++;
+    }
+    if (partIndex < itemParts.length) {
+      this._$clear(itemPart && wrap(itemPart._$endNode).nextSibling, partIndex);
+      itemParts.length = partIndex;
+    }
+  }
+  _$clear(start = wrap(this._$startNode).nextSibling, from2) {
+    var _a3;
+    (_a3 = this._$notifyConnectionChanged) === null || _a3 === void 0 ? void 0 : _a3.call(this, false, true, from2);
+    while (start && start !== this._$endNode) {
+      const n = wrap(start).nextSibling;
+      wrap(start).remove();
+      start = n;
+    }
+  }
+  setConnected(isConnected) {
+    var _a3;
+    if (this._$parent === void 0) {
+      this.__isConnected = isConnected;
+      (_a3 = this._$notifyConnectionChanged) === null || _a3 === void 0 ? void 0 : _a3.call(this, isConnected);
+    } else {
+      throw new Error("part.setConnected() may only be called on a RootPart returned from render().");
+    }
+  }
+}
+class AttributePart {
+  constructor(element, name2, strings, parent, options) {
+    this.type = ATTRIBUTE_PART;
+    this._$committedValue = nothing;
+    this._$disconnectableChildren = void 0;
+    this.element = element;
+    this.name = name2;
+    this._$parent = parent;
+    this.options = options;
+    if (strings.length > 2 || strings[0] !== "" || strings[1] !== "") {
+      this._$committedValue = new Array(strings.length - 1).fill(new String());
+      this.strings = strings;
+    } else {
+      this._$committedValue = nothing;
+    }
+    {
+      this._sanitizer = void 0;
+    }
+  }
+  get tagName() {
+    return this.element.tagName;
+  }
+  get _$isConnected() {
+    return this._$parent._$isConnected;
+  }
+  _$setValue(value, directiveParent = this, valueIndex, noCommit) {
+    const strings = this.strings;
+    let change = false;
+    if (strings === void 0) {
+      value = resolveDirective(this, value, directiveParent, 0);
+      change = !isPrimitive(value) || value !== this._$committedValue && value !== noChange;
+      if (change) {
+        this._$committedValue = value;
+      }
+    } else {
+      const values = value;
+      value = strings[0];
+      let i2, v2;
+      for (i2 = 0; i2 < strings.length - 1; i2++) {
+        v2 = resolveDirective(this, values[valueIndex + i2], directiveParent, i2);
+        if (v2 === noChange) {
+          v2 = this._$committedValue[i2];
+        }
+        change || (change = !isPrimitive(v2) || v2 !== this._$committedValue[i2]);
+        if (v2 === nothing) {
+          value = nothing;
+        } else if (value !== nothing) {
+          value += (v2 !== null && v2 !== void 0 ? v2 : "") + strings[i2 + 1];
+        }
+        this._$committedValue[i2] = v2;
+      }
+    }
+    if (change && !noCommit) {
+      this._commitValue(value);
+    }
+  }
+  _commitValue(value) {
+    if (value === nothing) {
+      wrap(this.element).removeAttribute(this.name);
+    } else {
+      {
+        if (this._sanitizer === void 0) {
+          this._sanitizer = sanitizerFactoryInternal(this.element, this.name, "attribute");
+        }
+        value = this._sanitizer(value !== null && value !== void 0 ? value : "");
+      }
+      debugLogEvent === null || debugLogEvent === void 0 ? void 0 : debugLogEvent({
+        kind: "commit attribute",
+        element: this.element,
+        name: this.name,
+        value,
+        options: this.options
+      });
+      wrap(this.element).setAttribute(this.name, value !== null && value !== void 0 ? value : "");
+    }
+  }
+}
+class PropertyPart extends AttributePart {
+  constructor() {
+    super(...arguments);
+    this.type = PROPERTY_PART;
+  }
+  _commitValue(value) {
+    {
+      if (this._sanitizer === void 0) {
+        this._sanitizer = sanitizerFactoryInternal(this.element, this.name, "property");
+      }
+      value = this._sanitizer(value);
+    }
+    debugLogEvent === null || debugLogEvent === void 0 ? void 0 : debugLogEvent({
+      kind: "commit property",
+      element: this.element,
+      name: this.name,
+      value,
+      options: this.options
+    });
+    this.element[this.name] = value === nothing ? void 0 : value;
+  }
+}
+const emptyStringForBooleanAttribute = trustedTypes ? trustedTypes.emptyScript : "";
+class BooleanAttributePart extends AttributePart {
+  constructor() {
+    super(...arguments);
+    this.type = BOOLEAN_ATTRIBUTE_PART;
+  }
+  _commitValue(value) {
+    debugLogEvent === null || debugLogEvent === void 0 ? void 0 : debugLogEvent({
+      kind: "commit boolean attribute",
+      element: this.element,
+      name: this.name,
+      value: !!(value && value !== nothing),
+      options: this.options
+    });
+    if (value && value !== nothing) {
+      wrap(this.element).setAttribute(this.name, emptyStringForBooleanAttribute);
+    } else {
+      wrap(this.element).removeAttribute(this.name);
+    }
+  }
+}
+class EventPart extends AttributePart {
+  constructor(element, name2, strings, parent, options) {
+    super(element, name2, strings, parent, options);
+    this.type = EVENT_PART;
+    if (this.strings !== void 0) {
+      throw new Error(`A \`<${element.localName}>\` has a \`@${name2}=...\` listener with invalid content. Event listeners in templates must have exactly one expression and no surrounding text.`);
+    }
+  }
+  _$setValue(newListener, directiveParent = this) {
+    var _a3;
+    newListener = (_a3 = resolveDirective(this, newListener, directiveParent, 0)) !== null && _a3 !== void 0 ? _a3 : nothing;
+    if (newListener === noChange) {
+      return;
+    }
+    const oldListener = this._$committedValue;
+    const shouldRemoveListener = newListener === nothing && oldListener !== nothing || newListener.capture !== oldListener.capture || newListener.once !== oldListener.once || newListener.passive !== oldListener.passive;
+    const shouldAddListener = newListener !== nothing && (oldListener === nothing || shouldRemoveListener);
+    debugLogEvent === null || debugLogEvent === void 0 ? void 0 : debugLogEvent({
+      kind: "commit event listener",
+      element: this.element,
+      name: this.name,
+      value: newListener,
+      options: this.options,
+      removeListener: shouldRemoveListener,
+      addListener: shouldAddListener,
+      oldListener
+    });
+    if (shouldRemoveListener) {
+      this.element.removeEventListener(this.name, this, oldListener);
+    }
+    if (shouldAddListener) {
+      this.element.addEventListener(this.name, this, newListener);
+    }
+    this._$committedValue = newListener;
+  }
+  handleEvent(event) {
+    var _a3, _b2;
+    if (typeof this._$committedValue === "function") {
+      this._$committedValue.call((_b2 = (_a3 = this.options) === null || _a3 === void 0 ? void 0 : _a3.host) !== null && _b2 !== void 0 ? _b2 : this.element, event);
+    } else {
+      this._$committedValue.handleEvent(event);
+    }
+  }
+}
+class ElementPart {
+  constructor(element, parent, options) {
+    this.element = element;
+    this.type = ELEMENT_PART;
+    this._$disconnectableChildren = void 0;
+    this._$parent = parent;
+    this.options = options;
+  }
+  get _$isConnected() {
+    return this._$parent._$isConnected;
+  }
+  _$setValue(value) {
+    debugLogEvent === null || debugLogEvent === void 0 ? void 0 : debugLogEvent({
+      kind: "commit to element binding",
+      element: this.element,
+      value,
+      options: this.options
+    });
+    resolveDirective(this, value);
+  }
+}
+const polyfillSupport$1 = window.litHtmlPolyfillSupportDevMode;
+polyfillSupport$1 === null || polyfillSupport$1 === void 0 ? void 0 : polyfillSupport$1(Template, ChildPart);
+((_d = globalThis.litHtmlVersions) !== null && _d !== void 0 ? _d : globalThis.litHtmlVersions = []).push("2.2.7");
+if (globalThis.litHtmlVersions.length > 1) {
+  issueWarning$1("multiple-versions", `Multiple versions of Lit loaded. Loading multiple versions is not recommended.`);
+}
+/**
+ * @license
+ * Copyright 2017 Google LLC
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+var _a, _b, _c;
+let issueWarning;
+{
+  const issuedWarnings = (_a = globalThis.litIssuedWarnings) !== null && _a !== void 0 ? _a : globalThis.litIssuedWarnings = /* @__PURE__ */ new Set();
+  issueWarning = (code, warning) => {
+    warning += ` See https://lit.dev/msg/${code} for more information.`;
+    if (!issuedWarnings.has(warning)) {
+      console.warn(warning);
+      issuedWarnings.add(warning);
+    }
+  };
+}
+class LitElement extends ReactiveElement {
+  constructor() {
+    super(...arguments);
+    this.renderOptions = { host: this };
+    this.__childPart = void 0;
+  }
+  createRenderRoot() {
+    var _a3;
+    var _b2;
+    const renderRoot = super.createRenderRoot();
+    (_a3 = (_b2 = this.renderOptions).renderBefore) !== null && _a3 !== void 0 ? _a3 : _b2.renderBefore = renderRoot.firstChild;
+    return renderRoot;
+  }
+  update(changedProperties) {
+    const value = this.render();
+    if (!this.hasUpdated) {
+      this.renderOptions.isConnected = this.isConnected;
+    }
+    super.update(changedProperties);
+    this.__childPart = render(value, this.renderRoot, this.renderOptions);
+  }
+  connectedCallback() {
+    var _a3;
+    super.connectedCallback();
+    (_a3 = this.__childPart) === null || _a3 === void 0 ? void 0 : _a3.setConnected(true);
+  }
+  disconnectedCallback() {
+    var _a3;
+    super.disconnectedCallback();
+    (_a3 = this.__childPart) === null || _a3 === void 0 ? void 0 : _a3.setConnected(false);
+  }
+  render() {
+    return noChange;
+  }
+}
+LitElement["finalized"] = true;
+LitElement["_$litElement$"] = true;
+(_b = globalThis.litElementHydrateSupport) === null || _b === void 0 ? void 0 : _b.call(globalThis, { LitElement });
+const polyfillSupport = globalThis.litElementPolyfillSupportDevMode;
+polyfillSupport === null || polyfillSupport === void 0 ? void 0 : polyfillSupport({ LitElement });
+{
+  LitElement["finalize"] = function() {
+    const finalized2 = ReactiveElement.finalize.call(this);
+    if (!finalized2) {
+      return false;
+    }
+    const warnRemovedOrRenamed = (obj2, name2, renamed = false) => {
+      if (obj2.hasOwnProperty(name2)) {
+        const ctorName2 = (typeof obj2 === "function" ? obj2 : obj2.constructor).name;
+        issueWarning(renamed ? "renamed-api" : "removed-api", `\`${name2}\` is implemented on class ${ctorName2}. It has been ${renamed ? "renamed" : "removed"} in this version of LitElement.`);
+      }
+    };
+    warnRemovedOrRenamed(this, "render");
+    warnRemovedOrRenamed(this, "getStyles", true);
+    warnRemovedOrRenamed(this.prototype, "adoptStyles");
+    return true;
+  };
+}
+((_c = globalThis.litElementVersions) !== null && _c !== void 0 ? _c : globalThis.litElementVersions = []).push("3.2.2");
+if (globalThis.litElementVersions.length > 1) {
+  issueWarning("multiple-versions", `Multiple versions of Lit loaded. Loading multiple versions is not recommended.`);
+}
+var __awaiter = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function(resolve) {
+      resolve(value);
+    });
+  }
+  return new (P || (P = Promise))(function(resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function step(result2) {
+      result2.done ? resolve(result2.value) : adopt(result2.value).then(fulfilled, rejected);
+    }
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+class SLitComponent extends LitElement {
+  constructor(settings = {}) {
+    var _a3, _b2, _c2, _d2, _e, _f, _g, _h, _j, _k;
+    super();
+    this.settings = {};
+    this.props = {};
+    this._shouldUpdate = false;
+    this._state = {};
+    this.settings = __deepMerge({
+      componentUtils: {},
+      shadowDom: false,
+      get rootNode() {
+        var _a4;
+        return (_a4 = this.shadowRoot) === null || _a4 === void 0 ? void 0 : _a4.querySelector("*:first-child");
+      }
+    }, settings);
+    if (this.constructor.state) {
+      this.state = Object.assign({}, this.constructor.state);
+    } else {
+      this.state = {};
+    }
+    if (!((_a3 = this.state) === null || _a3 === void 0 ? void 0 : _a3.status)) {
+      this.state.status = "pending";
+    }
+    if (this.settings.shadowDom === false) {
+      this.createRenderRoot = () => {
+        return this;
+      };
+    }
+    if (!SLitComponent._keepInjectedCssBeforeStylesheetLinksInited) {
+      const $firstStylesheetLink = document.head.querySelector('link[rel="stylesheet"]');
+      __querySelectorLive("style", ($style) => {
+        if ($firstStylesheetLink) {
+          document.head.insertBefore($style, $firstStylesheetLink);
+        }
+      }, {
+        rootNode: document.head
+      });
+      SLitComponent._keepInjectedCssBeforeStylesheetLinksInited = true;
+    }
+    const nodeFirstUpdated = (_b2 = this.firstUpdated) === null || _b2 === void 0 ? void 0 : _b2.bind(this);
+    this.firstUpdated = () => __awaiter(this, void 0, void 0, function* () {
+      if (nodeFirstUpdated) {
+        yield nodeFirstUpdated();
+      }
+      this.props.status = "mounted";
+    });
+    const nodeShouldUpdate = (_c2 = this.shouldUpdate) === null || _c2 === void 0 ? void 0 : _c2.bind(this);
+    this.shouldUpdate = () => {
+      if (nodeShouldUpdate) {
+        const res = nodeShouldUpdate();
+        if (!res)
+          return false;
+      }
+      return this._shouldUpdate;
+    };
+    this.componentUtils = new SComponentUtils(this, Object.assign(Object.assign(Object.assign({}, (_d2 = this.settings) !== null && _d2 !== void 0 ? _d2 : {}), (_e = this.settings.componentUtils) !== null && _e !== void 0 ? _e : {}), { style: (_k = (_h = (_g = (_f = this.constructor.styles) === null || _f === void 0 ? void 0 : _f.cssText) !== null && _g !== void 0 ? _g : this.settings.style) !== null && _h !== void 0 ? _h : (_j = this.settings.componentUtils) === null || _j === void 0 ? void 0 : _j.style) !== null && _k !== void 0 ? _k : "" }));
+    (() => __awaiter(this, void 0, void 0, function* () {
+      var _l, _m;
+      const defaultProps = SComponentUtils.getDefaultProps(this.tagName.toLowerCase());
+      const mountWhen = (_m = (_l = this.getAttribute("mount-when")) !== null && _l !== void 0 ? _l : defaultProps.mountWhen) !== null && _m !== void 0 ? _m : "direct";
+      yield __wait();
+      yield __wait();
+      if (!mountWhen.match(/^direct(ly)?$/)) {
+        yield this.componentUtils.waitAndExecute(mountWhen, () => {
+          this._mount();
+        });
+      } else {
+        this._mount();
+      }
+    }))();
+  }
+  get state() {
+    return this._state;
+  }
+  set state(state) {
+    Object.assign(this._state, state);
+  }
+  static define(tagName, Cls, props = {}, settings = {}) {
+    var _a3;
+    const win = (_a3 = settings.window) !== null && _a3 !== void 0 ? _a3 : window;
+    if (win.customElements.get(tagName.toLowerCase())) {
+      return;
+    }
+    SLitComponent.setDefaultProps(tagName, props);
+    win.customElements.define(tagName.toLowerCase(), class extends Cls {
+    });
+  }
+  static setDefaultProps(selector, props) {
+    SComponentUtils.setDefaultProps(selector, props);
+  }
+  static propertiesFromInterface(properties2, int) {
+    var _a3;
+    const propertiesObj = {};
+    class SLitComponentPropsInterface extends SComponentUtilsDefaultPropsInterface {
+    }
+    SLitComponentPropsInterface.definition = Object.assign(Object.assign({}, SLitComponentPropsInterface.definition), (_a3 = int === null || int === void 0 ? void 0 : int.definition) !== null && _a3 !== void 0 ? _a3 : {});
+    Object.keys(SLitComponentPropsInterface.definition).forEach((prop) => {
+      var _a4, _b2, _c2, _d2, _e, _f, _g, _h, _j, _k, _l, _m, _o;
+      const definition = SLitComponentPropsInterface.definition[prop];
+      propertiesObj[prop] = Object.assign({}, (_a4 = definition.lit) !== null && _a4 !== void 0 ? _a4 : {});
+      let type = String, typeStr = (_c2 = (_b2 = definition.type) === null || _b2 === void 0 ? void 0 : _b2.type) !== null && _c2 !== void 0 ? _c2 : definition.type;
+      switch (typeStr.toLowerCase()) {
+        case "boolean":
+          type = Boolean;
+          break;
+        case "object":
+          type = Object;
+          break;
+        case "number":
+          type = Number;
+          break;
+        default:
+          if (typeStr.match(/\[\]$/)) {
+            type = Array;
+          }
+          break;
+      }
+      propertiesObj[prop].type = type;
+      propertiesObj[prop].default = definition.default;
+      if (definition.physical || ((_f = (_e = (_d2 = definition.type) === null || _d2 === void 0 ? void 0 : _d2.type) === null || _e === void 0 ? void 0 : _e.toLowerCase) === null || _f === void 0 ? void 0 : _f.call(_e)) === "boolean" || ((_h = (_g = definition.type) === null || _g === void 0 ? void 0 : _g.toLowerCase) === null || _h === void 0 ? void 0 : _h.call(_g)) === "boolean" || ((_l = (_k = (_j = definition.type) === null || _j === void 0 ? void 0 : _j.type) === null || _k === void 0 ? void 0 : _k.toLowerCase) === null || _l === void 0 ? void 0 : _l.call(_k)) === "object" || ((_o = (_m = definition.type) === null || _m === void 0 ? void 0 : _m.toLowerCase) === null || _o === void 0 ? void 0 : _o.call(_m)) === "object") {
+        propertiesObj[prop].reflect = true;
+        propertiesObj[prop].attribute = __dashCase(prop);
+        propertiesObj[prop].converter = {
+          fromAttribute: (value, type2) => {
+            var _a5, _b3, _c3, _d3;
+            const typeStr2 = (_c3 = (_b3 = (_a5 = definition.type) === null || _a5 === void 0 ? void 0 : _a5.type) === null || _b3 === void 0 ? void 0 : _b3.toLowerCase()) !== null && _c3 !== void 0 ? _c3 : (_d3 = definition.type) === null || _d3 === void 0 ? void 0 : _d3.toLowerCase();
+            if (typeStr2 === "object" && typeof value === "string") {
+              try {
+                const json = JSON.parse(value);
+                console.log("V", json, value);
+                return json;
+              } catch (e) {
+                console.error(e);
+              }
+            }
+            if (value === "true" || value === "")
+              return true;
+            return value;
+          },
+          toAttribute(value) {
+            try {
+              const jsonStr = JSON.stringify(value);
+              return jsonStr;
+            } catch (e) {
+            }
+            if (value === "false" || value === false || value === null) {
+              return null;
+            }
+            return String(value);
+          }
+        };
+      }
+    });
+    const props = Object.assign(Object.assign({}, propertiesObj), properties2 !== null && properties2 !== void 0 ? properties2 : {});
+    return props;
+  }
+  _mount() {
+    var _a3, _b2, _c2;
+    return __awaiter(this, void 0, void 0, function* () {
+      const _this = this, defaultProps = SComponentUtils.getDefaultProps(this.tagName.toLowerCase());
+      let properties2 = this.constructor.properties;
+      if (!properties2) {
+        properties2 = this.constructor.propertiesFromInterface();
+      }
+      let finalProps = {};
+      for (let [prop, obj2] of Object.entries(properties2)) {
+        Object.defineProperty(this.props, prop, {
+          enumerable: true,
+          get() {
+            return _this[prop];
+          },
+          set(value) {
+            if ((value === null || value === void 0 ? void 0 : value.value) && typeof value.value === "string") {
+              try {
+                _this[prop] = JSON.parse(value.value);
+                return;
+              } catch (e) {
+              }
+            }
+            _this[prop] = value;
+          }
+        });
+        let attrValue = this.getAttribute(__dashCase(prop));
+        if (attrValue !== null) {
+          if (attrValue === "false")
+            attrValue = false;
+          if (attrValue === "")
+            attrValue = true;
+          finalProps[prop] = attrValue;
+        }
+        if (finalProps[prop] === void 0 && this[prop] === void 0) {
+          finalProps[prop] = (_a3 = defaultProps[prop]) !== null && _a3 !== void 0 ? _a3 : obj2.default;
+        }
+      }
+      if (this.settings.interface) {
+        finalProps = this.settings.interface.apply(finalProps);
+      }
+      Object.assign(this.props, finalProps);
+      if (this.state) {
+        this.state = this.componentUtils.handleState(this.state, {
+          save: this.props.saveState
+        });
+        this.state.$set("*", () => {
+          this.requestUpdate();
+        });
+      }
+      if (this.props.verbose) {
+        console.log(`[${this.tagName.toLowerCase()}]${this.id ? ` #${this.id} ` : " "}mounting`);
+      }
+      if (this.mount && typeof this.mount === "function") {
+        yield this.mount();
+      }
+      this._shouldUpdate = true;
+      this.requestUpdate();
+      yield this.updateComplete;
+      this.componentUtils.injectStyle((_c2 = (_b2 = this.constructor.styles) === null || _b2 === void 0 ? void 0 : _b2.cssText) !== null && _c2 !== void 0 ? _c2 : "", this.tagName);
+      yield __wait();
+      if (this.props.adoptStyle && this.shadowRoot) {
+        yield this.componentUtils.adoptStyleInShadowRoot(this.shadowRoot);
+      }
+      return true;
+    });
+  }
+}
+SLitComponent._keepInjectedCssBeforeStylesheetLinksInited = false;
 class SSpecsEditorComponentInterface extends SInterface {
   static get _definition() {
     return {
@@ -23833,741 +25471,315 @@ class SSpecsEditorComponentInterface extends SInterface {
     };
   }
 }
-class SComponentSettingsInterface extends SInterface {
-  static get _definition() {
-    return {
-      interface: {
-        description: "Specify an SInterface class to use as our properties definition",
-        type: "SInterface"
-      },
-      styleClasses: {
-        description: 'Define if you want the "style" class in when using the className and uniqueClassName method',
-        type: "Boolean"
-      }
-    };
-  }
+const __css = ".s-specs-editor {\n}\n";
+function define$1(props = {}, tagName = "s-specs-editor") {
+  SClipboardCopyComponent.define(tagName, SClipboardCopyComponent, props);
 }
-class SComponent$1 extends SClass {
-  constructor(name2, settings) {
-    super(__deepMerge(SComponentSettingsInterface.defaults(), settings !== null && settings !== void 0 ? settings : {}));
-    this.name = name2;
-  }
-  static setDefaultProps(selector, props) {
-    selector = Array.isArray(selector) ? selector : [selector];
-    selector.forEach((sel) => {
-      var _a3;
-      this._defaultProps[sel] = Object.assign(Object.assign({}, (_a3 = this._defaultProps[sel]) !== null && _a3 !== void 0 ? _a3 : {}), props);
-    });
-  }
-  static getDefaultProps(selector) {
-    var _a3, _b2;
-    return Object.assign(Object.assign({}, (_a3 = this._defaultProps["*"]) !== null && _a3 !== void 0 ? _a3 : {}), (_b2 = this._defaultProps[selector]) !== null && _b2 !== void 0 ? _b2 : {});
-  }
-  className(cls = "", styleCls, bareStyleCls) {
-    let clsString = cls.split(" ").map((clsName) => {
-      const clses = [];
-      clses.push(`${this.name.toLowerCase()}${clsName && !clsName.match(/^__/) ? "-" : ""}${clsName}`);
-      return clses.join(" ");
-    }).join(" ");
-    if (!this.settings.bare && styleCls) {
-      clsString += ` ${styleCls}`;
-    } else if (this.settings.bare && bareStyleCls) {
-      clsString += ` ${bareStyleCls}`;
-    }
-    return clsString;
-  }
-}
-SComponent$1._defaultProps = {};
-class SComponent extends SComponent$1 {
-  constructor(name2, settings) {
-    super(name2, __deepMerge(settings !== null && settings !== void 0 ? settings : {}));
-    this._mediaQueries = {};
-  }
-  makePropsResponsive(props) {
-    var _a3;
-    props.responsive = __deepMerge({}, (_a3 = props.responsive) !== null && _a3 !== void 0 ? _a3 : {});
-    Object.defineProperty(props, "toResetResponsiveProps", {
-      enumerable: false,
-      writable: true,
-      value: {}
-    });
-    if (Object.keys(props.responsive).length === 1 && props.responsive.original) {
-      return;
-    }
-    window.addEventListener("resize", __debounce(() => {
-      this._applyResponsiveProps(props);
-    }, 100));
-    this._applyResponsiveProps(props);
-  }
-  _applyResponsiveProps(props = {}) {
-    var _a3;
-    let matchedMedia = [];
-    const responsiveObj = Object.assign({}, props.responsive);
-    for (let [media, responsiveProps] of Object.entries(props.responsive)) {
-      let applyProps = function() {
-        for (let [key, value] of Object.entries(responsiveProps)) {
-          props.toResetResponsiveProps[key] = props[key];
-          props[key] = value;
-        }
-      };
-      const queries = STheme.get(`media.queries`);
-      media.replace(/(<|>|=|\|)/gm, "");
-      if (media === "toResetResponsiveProps") {
-        continue;
-      }
-      if (media.match(/[a-zA-Z0-9<>=]/) && queries[media]) {
-        let mediaQuery = this._mediaQueries[media];
-        if (!mediaQuery) {
-          this._mediaQueries[media] = STheme.buildMediaQuery(media);
-          mediaQuery = this._mediaQueries[media];
-        }
-        if (window.matchMedia(mediaQuery.replace(/^@media\s/, "")).matches) {
-          applyProps();
-          matchedMedia.push(media);
-        }
-      } else {
-        if (window.matchMedia(media).matches) {
-          applyProps();
-          matchedMedia.push(media);
-        }
-      }
-    }
-    if (!matchedMedia.length) {
-      for (let [key, value] of Object.entries((_a3 = props.toResetResponsiveProps) !== null && _a3 !== void 0 ? _a3 : {})) {
-        props[key] = value;
-        delete props.toResetResponsiveProps[key];
-      }
-    }
-    props.responsive = responsiveObj;
-  }
-  saveState(state) {
-    if (this.settings.id) {
-      window.localStorage.setItem(`${this.settings.id}-state`, JSON.stringify(state));
-    }
-  }
-  restoreState() {
-    var _a3;
-    if (!this.settings.id) {
-      return {};
-    }
-    return JSON.parse((_a3 = window.localStorage.getItem(`${this.settings.id}-state`)) !== null && _a3 !== void 0 ? _a3 : "{}");
-  }
-  dispatchEvent($elm, eventName, settings) {
-    const finalSettings = Object.assign({ bubbles: true, cancelable: true, detail: {} }, settings !== null && settings !== void 0 ? settings : {});
-    const componentName = this.name;
-    $elm.dispatchEvent(new CustomEvent(eventName, Object.assign(Object.assign({}, finalSettings), { detail: Object.assign(Object.assign({}, finalSettings.detail), { eventComponent: componentName }) })));
-    $elm.dispatchEvent(new CustomEvent(componentName, Object.assign(Object.assign({}, finalSettings), { detail: Object.assign(Object.assign({}, finalSettings.detail), { eventType: eventName }) })));
-  }
-  adoptStyleInShadowRoot($shadowRoot, $context) {
-    return __adoptStyleInShadowRoot($shadowRoot, $context);
-  }
-  injectStyleInShadowRoot(cssDeps, $shadowRoot) {
-    if (!Array.isArray(cssDeps)) {
-      cssDeps = [cssDeps];
-    }
-    cssDeps.forEach((dep) => {
-      var _a3;
-      let $styleOrLink;
-      try {
-        $styleOrLink = (_a3 = document.querySelector(`link#${dep}`)) === null || _a3 === void 0 ? void 0 : _a3.cloneNode(true);
-      } catch (e) {
-      }
-      if (dep.match(/^[a-zA-Z0-9_-]+$/)) {
-        $styleOrLink = document.createElement("link");
-        $styleOrLink.rel = "stylesheet";
-        $styleOrLink.href = `${SSugarConfig.get("serve.css.path")}/partials/${dep}.css`;
-      }
-      if (__isPath(dep) && !$styleOrLink) {
-        $styleOrLink = document.createElement("link");
-        $styleOrLink.rel = "stylesheet";
-        $styleOrLink.href = dep;
-      }
-      if (!$styleOrLink) {
-        $styleOrLink = document.createElement("style");
-        $styleOrLink.type = "text/css";
-        $styleOrLink.appendChild(document.createTextNode(dep));
-      }
-      $shadowRoot.appendChild($styleOrLink);
-    });
-  }
-  exposeApi($on, apiObj, ctx) {
-    setTimeout(() => {
-      Object.keys(apiObj).forEach((apiFnName) => {
-        const apiFn = apiObj[apiFnName].bind(ctx);
-        $on[apiFnName] = apiFn;
-      });
-    });
-  }
-}
-const DEFAULT_PROPS = SSpecsEditorComponentInterface.defaults();
-class SSpecsEditor extends HTMLElement {
-  get _$container() {
-    return this._root.querySelector("[data-ref='SSpecsEditor-$container']");
-  }
-  get _root() {
-    return this.shadowRoot || this;
-  }
+class SClipboardCopyComponent extends SLitComponent {
   constructor() {
-    super();
-    const self2 = this;
-    this.state = {
-      _status: "idle",
-      _id: null,
-      _specs: {},
-      _specArray: [],
-      _propsValues: {},
-      _component: null,
-      mount() {
-        var _a3, _b2;
-        try {
-          self2.state._component.injectStyleInShadowRoot(
-            [__css, ...(_a3 = self2.props.cssDeps) != null ? _a3 : []],
-            self2._$container
-          );
-        } catch (e) {
-        }
-        self2.state._propsValues = (_b2 = self2.state._component.restoreState()) != null ? _b2 : {};
-        self2.update();
-        self2.state._specs = JSON.parse(self2.props.specs);
-        self2.update();
-        Object.keys(self2.state._specs.props).forEach((key) => {
-          var _a4, _b3;
-          self2.state._specArray.push({
-            id: key,
-            ...self2.state._specs.props[key],
-            value: (_b3 = (_a4 = self2.state._propsValues[key]) != null ? _a4 : self2.state._specs.props[key].value) != null ? _b3 : self2.state._specs.props[key].default
-          });
-        });
-        setTimeout(() => {
-          const initialSpecsJson = {};
-          self2.state._specArray.forEach((prop) => {
-            initialSpecsJson[prop.id] = prop.value;
-          });
-          self2._$container.dispatchEvent(
-            new CustomEvent("s-specs-editor.change", {
-              bubbles: true,
-              composed: true,
-              detail: initialSpecsJson
-            })
-          );
-        });
-      },
-      update(event2, prop) {
-        if (event2.target.type === "checkbox") {
-          prop.value = event2.target.checked;
-        } else {
-          prop.value = event2.target.value;
-        }
-        if (prop.value !== prop.default) {
-          self2.state._propsValues[prop.id] = prop.value;
-        } else {
-          delete self2.state._propsValues[prop.id];
-        }
-        self2._$container.dispatchEvent(
-          new CustomEvent("s-specs-editor.change", {
-            bubbles: true,
-            composed: true,
-            detail: {
-              [prop.id]: prop.value
-            }
-          })
-        );
-        self2.state._component.saveState(self2.state._propsValues);
-      }
-    };
-    if (!this.props) {
-      this.props = {};
-    }
-    this.componentProps = ["cssDeps", "specs", "lnf", "id"];
-    this.updateDeps = [[]];
-    this.nodesToDestroy = [];
-    this.pendingUpdate = false;
-    this.onInputSSpecsEditor1Input = (e) => {
-      const v = this.getScope(event.currentTarget, "v");
-      this.state.update(e, v);
-    };
-    this.onSelectSSpecsEditor1Input = (e) => {
-      const v = this.getScope(event.currentTarget, "v");
-      this.state.update(e, v);
-    };
-    this.onInputSSpecsEditor2Input = (e) => {
-      const v = this.getScope(event.currentTarget, "v");
-      this.state.update(e, v);
-    };
+    super(__deepMerge({
+      name: "s-specs-editor",
+      interface: SSpecsEditorComponentInterface
+    }));
+    this.state = {};
   }
-  destroyAnyNodes() {
-    this.nodesToDestroy.forEach((el) => el.remove());
-    this.nodesToDestroy = [];
+  static get properties() {
+    return SLitComponent.propertiesFromInterface({}, SSpecsEditorComponentInterface);
   }
-  connectedCallback() {
-    var _a3, _b2, _c, _d, _e, _f, _g, _h;
-    this.getAttributeNames().forEach((attr) => {
-      const jsVar = attr.replace(/-/g, "");
-      const regexp = new RegExp(jsVar, "i");
-      this.componentProps.forEach((prop) => {
-        if (regexp.test(prop)) {
-          const attrValue = this.getAttribute(attr);
-          if (this.props[prop] !== attrValue) {
-            this.props[prop] = attrValue;
-          }
-        }
-      });
-    });
-    const defaultProps = SComponent.getDefaultProps(
-      this.tagName.toLowerCase()
-    );
-    this.props.id = (_b2 = (_a3 = this.props.id) != null ? _a3 : defaultProps.id) != null ? _b2 : DEFAULT_PROPS.id;
-    this.props.specs = (_d = (_c = this.props.specs) != null ? _c : defaultProps.specs) != null ? _d : DEFAULT_PROPS.specs;
-    this.props.lnf = (_f = (_e = this.props.lnf) != null ? _e : defaultProps.lnf) != null ? _f : DEFAULT_PROPS.lnf;
-    this.props.cssDeps = (_h = (_g = this.props.cssDeps) != null ? _g : defaultProps.cssDeps) != null ? _h : DEFAULT_PROPS.cssDeps;
-    this._root.innerHTML = `
-                        
-      <template data-el="show-s-specs-editor">
-        <div data-el="div-s-specs-editor-1" data-ref="SSpecsEditor-$container">
-          <template data-el="for-s-specs-editor">
-            <div data-el="div-s-specs-editor-2">
-              <template data-el="show-s-specs-editor-2">
-                <div data-el="div-s-specs-editor-3">
-                  <label data-el="label-s-specs-editor-1">
-                    <input
-                      type="text"
-                      data-el="input-s-specs-editor-1"
-                      data-dom-state="SSpecsEditor-input-s-specs-editor-1"
-                    />
-      
-                    <span>
-                      <template data-el="show-s-specs-editor-3">
-                        <span class="s-tooltip-container">
-                          <i class="fa-solid fa-circle-question"></i>
-      
-                          <div class="s-tooltip s-tooltip--right">
-                            <template data-el="div-s-specs-editor-4">
-                              <!-- v.description -->
-                            </template>
-                          </div>
-                        </span>
-                      </template>
-      
-                      <template data-el="div-s-specs-editor-5">
-                        <!-- v.title ?? v.id -->
-                      </template>
-                    </span>
-                  </label>
-                </div>
-              </template>
-      
-              <template data-el="show-s-specs-editor-4">
-                <div data-el="div-s-specs-editor-6">
-                  <label data-el="label-s-specs-editor-2">
-                    <select
-                      data-el="select-s-specs-editor-1"
-                      data-dom-state="SSpecsEditor-select-s-specs-editor-1"
-                    ></select>
-      
-                    <span>
-                      <template data-el="show-s-specs-editor-5">
-                        <span class="s-tooltip-container">
-                          <i class="fa-solid fa-circle-question"></i>
-      
-                          <div class="s-tooltip s-tooltip--right">
-                            <template data-el="div-s-specs-editor-7">
-                              <!-- v.description -->
-                            </template>
-                          </div>
-                        </span>
-                      </template>
-      
-                      <template data-el="div-s-specs-editor-8">
-                        <!-- v.title ?? v.id -->
-                      </template>
-                    </span>
-                  </label>
-                </div>
-              </template>
-      
-              <template data-el="show-s-specs-editor-6">
-                <div data-el="div-s-specs-editor-9">
-                  <label data-el="label-s-specs-editor-3">
-                    <input
-                      type="checkbox"
-                      data-el="input-s-specs-editor-2"
-                      data-dom-state="SSpecsEditor-input-s-specs-editor-2"
-                    />
-      
-                    <span>
-                      <template data-el="show-s-specs-editor-7">
-                        <span class="s-tooltip-container">
-                          <i class="fa-solid fa-circle-question"></i>
-      
-                          <div class="s-tooltip s-tooltip--right">
-                            <template data-el="div-s-specs-editor-10">
-                              <!-- v.description -->
-                            </template>
-                          </div>
-                        </span>
-                      </template>
-      
-                      <template data-el="div-s-specs-editor-11">
-                        <!-- v.title ?? v.id -->
-                      </template>
-                    </span>
-                  </label>
-                </div>
-              </template>
-            </div>
-          </template>
-        </div>
-      </template>`;
-    this.pendingUpdate = true;
-    this.render();
-    this.onMount();
-    this.pendingUpdate = false;
-    this.update();
+  static get styles() {
+    return css`
+            ${unsafeCSS(__css)}
+        `;
   }
-  showContent(el) {
-    const elementFragment = el.content.cloneNode(true);
-    const children = Array.from(elementFragment.childNodes);
-    children.forEach((child) => {
-      if (el == null ? void 0 : el.scope) {
-        child.scope = el.scope;
-      }
-      if (el == null ? void 0 : el.context) {
-        child.context = el.context;
-      }
-      this.nodesToDestroy.push(child);
-    });
-    el.after(elementFragment);
-  }
-  onMount() {
-    var _a3;
-    this.state._component = new SComponent("s-specs-editor", {
-      id: this.props.id,
-      bare: false
-    });
-    this.update();
-    this.state._id = (_a3 = this.props.id) != null ? _a3 : `s-specs-editor-${__uniqid()}`;
-    this.update();
-    this.state.mount();
-    this.state._status = "mounted";
-    this.update();
-  }
-  onUpdate() {
-    const self2 = this;
-    Array.from(
-      self2._$container.querySelectorAll('input[type="checkbox"')
-    ).forEach(($checkbox) => {
-      if ($checkbox._inited) {
-        return;
-      }
-      $checkbox._inited = true;
-      const _p = JSON.parse($checkbox.getAttribute("prop"));
-      if (_p.value) {
-        $checkbox.setAttribute("checked", "true");
-      } else {
-        $checkbox.removeAttribute("checked");
-      }
-    });
-    Array.from(self2._$container.querySelectorAll("select")).forEach(
-      ($select) => {
-        if ($select._inited) {
-          return;
-        }
-        $select._inited = true;
-        const _p = JSON.parse($select.getAttribute("prop"));
-        _p.options.forEach((opt) => {
-          const $option = document.createElement("option");
-          $option.setAttribute("value", opt.value);
-          if (_p.value === opt.value) {
-            $option.setAttribute("selected", true);
-          }
-          $option.innerHTML = opt.name;
-          $select.appendChild($option);
-        });
-      }
-    );
-  }
-  update() {
-    if (this.pendingUpdate === true) {
-      return;
-    }
-    this.pendingUpdate = true;
-    this.render();
-    this.onUpdate();
-    this.pendingUpdate = false;
+  mount() {
+    console.log(this.props.specs);
   }
   render() {
-    const preStateful = this.getStateful(this._root);
-    const preValues = this.prepareHydrate(preStateful);
-    this.destroyAnyNodes();
-    this.updateBindings();
-    if (preValues.length) {
-      const nextStateful = this.getStateful(this._root);
-      this.hydrateDom(preValues, nextStateful);
-    }
-  }
-  getStateful(el) {
-    const stateful = el.querySelectorAll("[data-dom-state]");
-    return stateful ? Array.from(stateful) : [];
-  }
-  prepareHydrate(stateful) {
-    return stateful.map((el) => {
-      return {
-        id: el.dataset.domState,
-        value: el.value,
-        active: document.activeElement === el,
-        selectionStart: el.selectionStart
-      };
-    });
-  }
-  hydrateDom(preValues, stateful) {
-    return stateful.map((el, index) => {
-      const prev = preValues.find(
-        (prev2) => el.dataset.domState === prev2.id
-      );
-      if (prev) {
-        el.value = prev.value;
-        if (prev.active) {
-          el.focus();
-          el.selectionStart = prev.selectionStart;
-        }
-      }
-    });
-  }
-  updateBindings() {
-    this._root.querySelectorAll("[data-el='show-s-specs-editor']").forEach((el) => {
-      const whenCondition = this.state._specArray.length;
-      if (whenCondition) {
-        this.showContent(el);
-      }
-    });
-    this._root.querySelectorAll("[data-el='div-s-specs-editor-1']").forEach((el) => {
-      var _a3, _b2;
-      el.setAttribute("id", this.state._id);
-      el.className = (_a3 = this.state._component) == null ? void 0 : _a3.className(
-        "",
-        null,
-        "s-bare"
-      );
-      el.setAttribute("status", this.state._status);
-      el.setAttribute("lnf", (_b2 = this.props.lnf) != null ? _b2 : "default");
-    });
-    this._root.querySelectorAll("[data-el='for-s-specs-editor']").forEach((el) => {
-      let array = this.state._specArray;
-      this.renderLoop(el, array, "v", "index");
-    });
-    this._root.querySelectorAll("[data-el='div-s-specs-editor-2']").forEach((el) => {
-      const v = this.getScope(el, "v");
-      el.setAttribute("prop", v.id);
-      el.className = this.state._component.className("__prop");
-    });
-    this._root.querySelectorAll("[data-el='show-s-specs-editor-2']").forEach((el) => {
-      const v = this.getScope(el, "v");
-      const whenCondition = v.type.toLowerCase() === "text";
-      if (whenCondition) {
-        this.showContent(el);
-      }
-    });
-    this._root.querySelectorAll("[data-el='div-s-specs-editor-3']").forEach((el) => {
-      el.className = this.state._component.className("__prop--text");
-    });
-    this._root.querySelectorAll("[data-el='label-s-specs-editor-1']").forEach((el) => {
-      el.className = this.state._component.className(
-        "__label",
-        "s-label s-label--block"
-      );
-    });
-    this._root.querySelectorAll("[data-el='input-s-specs-editor-1']").forEach((el) => {
-      var _a3, _b2;
-      el.removeEventListener("input", this.onInputSSpecsEditor1Input);
-      el.addEventListener("input", this.onInputSSpecsEditor1Input);
-      const v = this.getScope(el, "v");
-      el.setAttribute("name", v.id);
-      el.className = this.state._component.className(
-        "__input",
-        "s-input"
-      );
-      el.setAttribute("placeholder", (_b2 = (_a3 = v.default) != null ? _a3 : v.title) != null ? _b2 : v.id);
-      el.value = v.value;
-    });
-    this._root.querySelectorAll("[data-el='show-s-specs-editor-3']").forEach((el) => {
-      const v = this.getScope(el, "v");
-      const whenCondition = v.description;
-      if (whenCondition) {
-        this.showContent(el);
-      }
-    });
-    this._root.querySelectorAll("[data-el='div-s-specs-editor-4']").forEach((el) => {
-      const v = this.getScope(el, "v");
-      this.renderTextNode(el, v.description);
-    });
-    this._root.querySelectorAll("[data-el='div-s-specs-editor-5']").forEach((el) => {
-      var _a3;
-      const v = this.getScope(el, "v");
-      this.renderTextNode(el, (_a3 = v.title) != null ? _a3 : v.id);
-    });
-    this._root.querySelectorAll("[data-el='show-s-specs-editor-4']").forEach((el) => {
-      const v = this.getScope(el, "v");
-      const whenCondition = v.type.toLowerCase() === "select";
-      if (whenCondition) {
-        this.showContent(el);
-      }
-    });
-    this._root.querySelectorAll("[data-el='div-s-specs-editor-6']").forEach((el) => {
-      el.className = this.state._component.className("__prop--select");
-    });
-    this._root.querySelectorAll("[data-el='label-s-specs-editor-2']").forEach((el) => {
-      el.className = this.state._component.className(
-        "__label",
-        "s-label s-label--block"
-      );
-    });
-    this._root.querySelectorAll("[data-el='select-s-specs-editor-1']").forEach((el) => {
-      var _a3, _b2;
-      el.removeEventListener(
-        "input",
-        this.onSelectSSpecsEditor1Input
-      );
-      el.addEventListener("input", this.onSelectSSpecsEditor1Input);
-      const v = this.getScope(el, "v");
-      el.setAttribute("name", v.id);
-      el.className = this.state._component.className(
-        "__select",
-        "s-select"
-      );
-      el.setAttribute("placeholder", (_b2 = (_a3 = v.default) != null ? _a3 : v.title) != null ? _b2 : v.id);
-      el.setAttribute("prop", JSON.stringify(v));
-    });
-    this._root.querySelectorAll("[data-el='show-s-specs-editor-5']").forEach((el) => {
-      const v = this.getScope(el, "v");
-      const whenCondition = v.description;
-      if (whenCondition) {
-        this.showContent(el);
-      }
-    });
-    this._root.querySelectorAll("[data-el='div-s-specs-editor-7']").forEach((el) => {
-      const v = this.getScope(el, "v");
-      this.renderTextNode(el, v.description);
-    });
-    this._root.querySelectorAll("[data-el='div-s-specs-editor-8']").forEach((el) => {
-      var _a3;
-      const v = this.getScope(el, "v");
-      this.renderTextNode(el, (_a3 = v.title) != null ? _a3 : v.id);
-    });
-    this._root.querySelectorAll("[data-el='show-s-specs-editor-6']").forEach((el) => {
-      const v = this.getScope(el, "v");
-      const whenCondition = v.type.toLowerCase() === "checkbox";
-      if (whenCondition) {
-        this.showContent(el);
-      }
-    });
-    this._root.querySelectorAll("[data-el='div-s-specs-editor-9']").forEach((el) => {
-      el.className = `${this.state._component.className(
-        "__prop--checkbox"
-      )}`;
-    });
-    this._root.querySelectorAll("[data-el='label-s-specs-editor-3']").forEach((el) => {
-      el.className = this.state._component.className(
-        "__label",
-        "s-label"
-      );
-    });
-    this._root.querySelectorAll("[data-el='input-s-specs-editor-2']").forEach((el) => {
-      el.removeEventListener("input", this.onInputSSpecsEditor2Input);
-      el.addEventListener("input", this.onInputSSpecsEditor2Input);
-      const v = this.getScope(el, "v");
-      el.setAttribute("name", v.id);
-      el.className = this.state._component.className(
-        "__checkbox",
-        "s-switch"
-      );
-      el.setAttribute("prop", JSON.stringify(v));
-    });
-    this._root.querySelectorAll("[data-el='show-s-specs-editor-7']").forEach((el) => {
-      const v = this.getScope(el, "v");
-      const whenCondition = v.description;
-      if (whenCondition) {
-        this.showContent(el);
-      }
-    });
-    this._root.querySelectorAll("[data-el='div-s-specs-editor-10']").forEach((el) => {
-      const v = this.getScope(el, "v");
-      this.renderTextNode(el, v.description);
-    });
-    this._root.querySelectorAll("[data-el='div-s-specs-editor-11']").forEach((el) => {
-      var _a3;
-      const v = this.getScope(el, "v");
-      this.renderTextNode(el, (_a3 = v.title) != null ? _a3 : v.id);
-    });
-  }
-  renderTextNode(el, text) {
-    const textNode = document.createTextNode(text);
-    if (el == null ? void 0 : el.scope) {
-      textNode.scope = el.scope;
-    }
-    if (el == null ? void 0 : el.context) {
-      textNode.context = el.context;
-    }
-    el.after(textNode);
-    this.nodesToDestroy.push(el.nextSibling);
-  }
-  getScope(el, name2) {
     var _a3;
-    do {
-      let value = (_a3 = el == null ? void 0 : el.scope) == null ? void 0 : _a3[name2];
-      if (value !== void 0) {
-        return value;
-      }
-    } while (el = el.parentNode);
-  }
-  renderLoop(template2, array, itemName, itemIndex, collectionName) {
-    const collection = [];
-    for (let [index, value] of array.entries()) {
-      const elementFragment = template2.content.cloneNode(true);
-      const children = Array.from(elementFragment.childNodes);
-      const localScope = {};
-      let scope = localScope;
-      if (template2 == null ? void 0 : template2.scope) {
-        const getParent = {
-          get(target, prop, receiver) {
-            if (prop in target) {
-              return target[prop];
-            }
-            if (prop in template2.scope) {
-              return template2.scope[prop];
-            }
-            return target[prop];
-          }
-        };
-        scope = new Proxy(localScope, getParent);
-      }
-      children.forEach((child) => {
-        if (itemName !== void 0) {
-          scope[itemName] = value;
-        }
-        if (itemIndex !== void 0) {
-          scope[itemIndex] = index;
-        }
-        if (collectionName !== void 0) {
-          scope[collectionName] = array;
-        }
-        child.scope = scope;
-        if (template2.context) {
-          child.context = context;
-        }
-        this.nodesToDestroy.push(child);
-        collection.unshift(child);
-      });
-    }
-    collection.forEach((child) => template2.after(child));
+    return html`
+            <div
+                class="${(_a3 = this.componentUtils) === null || _a3 === void 0 ? void 0 : _a3.className("", null, "s-bare")}"
+                id="${this.props.id}"
+                status="${this.state.status}"
+            >
+                ${this.props.specs ? html`
+                          <div
+                              class="${this.componentUtils.className("__root")}"
+                          >
+                              ${Object.keys(this.props.specs.props).map((prop) => {
+      var _a4, _b2, _c2, _d2, _e, _f, _g;
+      const propObj = this.props.specs.props[prop];
+      return html`
+                                          <div
+                                              prop="${propObj.id}"
+                                              class="${this.componentUtils.className("__prop")}"
+                                          >
+                                              ${propObj.type.toLowerCase() === "text" ? html`
+                                                        <div
+                                                            class="${this.componentUtils.className("__prop--text")}"
+                                                        >
+                                                            <label
+                                                                class="${this.componentUtils.className("__label", "s-label s-label--block")}"
+                                                            >
+                                                                <input
+                                                                    onChange=${(e) => this._update(e, propObj)}
+                                                                    type="text"
+                                                                    name="${propObj.id}"
+                                                                    class="${this.componentUtils.className("__input", "s-input")}"
+                                                                    placeholder="${(_b2 = (_a4 = propObj.default) !== null && _a4 !== void 0 ? _a4 : propObj.title) !== null && _b2 !== void 0 ? _b2 : propObj.id}"
+                                                                    value="${propObj.value}"
+                                                                />
+                                                                <span>
+                                                                    ${propObj.description ? html`
+                                                                              <span
+                                                                                  class="s-tooltip-container"
+                                                                              >
+                                                                                  <i
+                                                                                      class="fa-solid fa-circle-question"
+                                                                                  ></i>
+                                                                                  <div
+                                                                                      class="s-tooltip s-tooltip--right"
+                                                                                  >
+                                                                                      ${propObj.description}
+                                                                                  </div>
+                                                                              </span>
+                                                                          ` : ""}
+                                                                    ${(_c2 = propObj.title) !== null && _c2 !== void 0 ? _c2 : propObj.id}
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    ` : propObj.type.toLowerCase() === "select" ? html`
+                                                        <div
+                                                            class="${this.componentUtils.className("__prop--select")}"
+                                                        >
+                                                            <label
+                                                                class="${this.componentUtils.className("__label", "s-label s-label--block")}"
+                                                            >
+                                                                <select
+                                                                    onChange=${(e) => this._update(e, v)}
+                                                                    name="${propObj.id}"
+                                                                    class="${this.componentUtils.className("__select", "s-select")}"
+                                                                    placeholder="${(_e = (_d2 = propObj.default) !== null && _d2 !== void 0 ? _d2 : propObj.title) !== null && _e !== void 0 ? _e : propObj.id}"
+                                                                    prop="${JSON.stringify(propObj)}"
+                                                                >
+                                                                    ${propObj.options.map((option) => html`
+                                                                            <option
+                                                                                value="${option.value}"
+                                                                            >
+                                                                                ${option.name}
+                                                                            </option>
+                                                                        `)}
+                                                                </select>
+                                                                <span>
+                                                                    ${propObj.description ? html`
+                                                                              <span
+                                                                                  class="s-tooltip-container"
+                                                                              >
+                                                                                  <i
+                                                                                      class="fa-solid fa-circle-question"
+                                                                                  ></i>
+                                                                                  <div
+                                                                                      class="s-tooltip s-tooltip--right"
+                                                                                  >
+                                                                                      ${propObj.description}
+                                                                                  </div>
+                                                                              </span>
+                                                                          ` : ""}
+                                                                    ${(_f = propObj.title) !== null && _f !== void 0 ? _f : propObj.id}
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    ` : propObj.type.toLowerCase() === "checkbox" ? html`
+                                                        <div
+                                                            class="${this.componentUtils.className("__prop--checkbox")}"
+                                                        >
+                                                            <label
+                                                                class="${this.componentUtils.className("__label", "s-label")}"
+                                                            >
+                                                                <input
+                                                                    onChange=${(e) => this._update(e, v)}
+                                                                    type="checkbox"
+                                                                    name="${propObj.id}"
+                                                                    class="${this.componentUtils.className("__checkbox", "s-switch")}"
+                                                                    checked?=${propObj.value}
+                                                                />
+                                                                <span>
+                                                                    ${propObj.description ? html`
+                                                                              <span
+                                                                                  class="s-tooltip-container"
+                                                                              >
+                                                                                  <i
+                                                                                      class="fa-solid fa-circle-question"
+                                                                                  ></i>
+                                                                                  <div
+                                                                                      class="s-tooltip s-tooltip--right"
+                                                                                  >
+                                                                                      ${propObj.description}
+                                                                                  </div>
+                                                                              </span>
+                                                                          ` : ""}
+                                                                    ${(_g = propObj.title) !== null && _g !== void 0 ? _g : propObj.id}
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    ` : ""}
+                                          </div>
+                                      `;
+    })}
+                          </div>
+                      ` : ""}
+            </div>
+        `;
   }
 }
-function define(props = {}, tagName = "s-specs-editor") {
-  SComponent.setDefaultProps(tagName, props);
-  customElements.define(
-    tagName,
-    class SSpecsEditorComponent extends SSpecsEditor {
+class SCarpenterComponentInterface extends SInterface {
+  static get _definition() {
+    return {
+      source: {
+        type: "String",
+        description: "Specify a url from where to get the carpenter data back, or a simple id pointing to a HTMLTemplate tag that host the JSON data",
+        default: "/carpenter.json",
+        required: true
+      }
+    };
+  }
+}
+function define(props = {}, tagName = "s-carpenter") {
+  SCarpenterComponent.define(tagName, SCarpenterComponent, props);
+}
+define$1();
+class SCarpenterComponent extends SLitComponent {
+  constructor() {
+    super(
+      __deepMerge({
+        name: "s-specs-editor",
+        interface: SCarpenterComponentInterface,
+        carpenter: SSugarConfig.get("carpenter")
+      })
+    );
+    __publicField(this, "state", {
+      state: "pending",
+      data: null,
+      specs: null,
+      global: null
+    });
+    __publicField(this, "_$toolbar");
+  }
+  static get properties() {
+    return SLitComponent.propertiesFromInterface(
+      {},
+      SCarpenterComponentInterface
+    );
+  }
+  async mount() {
+    this.state.data = await this._getData(this.props.source);
+    __querySelectorLive(`[s-carpenter]`, ($elm) => {
+      $elm.addEventListener("pointerover", (e) => {
+        console.log("Hover", e.target);
+      });
+      $elm.addEventListener("pointerout", (e) => {
+        console.log("Hover", e.target);
+      });
+    });
+  }
+  _createToolbarElement() {
+    if (this._$toolbar) {
+      return this._$toolbar;
     }
-  );
+    const $toolbar = document.createElement("div");
+    $toolbar.classList.add("s-carpenter-toolbar");
+    this._$toolbar = $toolbar;
+    return $toolbar;
+  }
+  _addToolbarOn($elm) {
+    this._createToolbarElement();
+  }
+  _removeToolbarFrom($elm) {
+  }
+  async _getData(source2) {
+    let data;
+    try {
+      if (source2.startsWith("/") || source2.match(/^http?s\:\/\//)) {
+        data = await fetch(source2).then((response) => response.json());
+      } else {
+        const $template = document.querySelectorAll(
+          `template#${source2}`
+        );
+        if ($template) {
+          data = JSON.parse($template.content.textContent);
+        }
+      }
+    } catch (e) {
+    }
+    if (!data) {
+      throw new Error(
+        `[SCarpenterComponent] The passed source "${source2}" does not provide any valid data...`
+      );
+    }
+    return data;
+  }
+  render() {
+    return html`
+            <nav class="__navigation">
+                ${this.state.data ? html`
+                          <ul class="s-fs-tree">
+                              ${Object.keys(this.state.data.specsBySources).map(
+      (sourceId) => {
+        var _a3;
+        const sourceObj = this.state.data.specsBySources[sourceId];
+        if (typeof sourceObj === "function") {
+          return "";
+        }
+        return html`
+                                          <li class="active">
+                                              <div>
+                                                  <i
+                                                      class="fa-regular fa-folder"
+                                                  ></i>
+                                                  <span tabindex="0"
+                                                      >${(_a3 = sourceObj.title) != null ? _a3 : sourceId}</span
+                                                  >
+                                              </div>
+                                              <ul>
+                                                  ${Object.keys(
+          sourceObj.specs
+        ).map((dotpath) => {
+          var _a4;
+          const specObj = sourceObj.specs[dotpath];
+          return html`
+                                                          <li class="active">
+                                                              <div>
+                                                                  <i
+                                                                      class="fa-regular fa-file"
+                                                                  ></i>
+                                                                  <a
+                                                                      tabindex="0"
+                                                                      >${(_a4 = specObj.title) != null ? _a4 : specObj.name}</a
+                                                                  >
+                                                              </div>
+                                                          </li>
+                                                      `;
+        })}
+                                              </ul>
+                                          </li>
+                                      `;
+      }
+    )}
+                          </ul>
+                      ` : ""}
+            </nav>
+
+            <section class="content">Content</section>
+
+            <nav class="__editor">
+                ${this.state.specs ? html`
+                          <s-specs-editor
+                              specs=${JSON.stringify(this.state.specs.specs)}
+                          ></s-specs-editor>
+                      ` : ""}
+            </nav>
+        `;
+  }
 }
 function ___isObject(item) {
   return item && typeof item === "object" && !Array.isArray(item);
@@ -24593,10 +25805,9 @@ document.env = ___deepMerge(JSON.parse(`{"PLATFORM":"browser","ENV":"development
   SUGAR: (_a2 = document.SUGAR) != null ? _a2 : {}
 });
 (async () => {
-  define$1();
-  setTimeout(() => {
-    define();
-  }, 1e3);
+  define$2();
+  console.log(define);
+  define();
 })();
 export {
   SSugarConfig as S

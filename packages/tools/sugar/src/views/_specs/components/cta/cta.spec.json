@@ -3,8 +3,8 @@
     "title": "Cta",
     "description": "Display a call to action",
     "props": {
-        "link": "@sugar.views.props.link",
         "color": "@sugar.views.props.color",
-        "attributes": "@sugar.views.props.attributes"
+        "attributes": "@sugar.views.props.attributes",
+        "link": "@sugar.views.props.link"
     }
 }

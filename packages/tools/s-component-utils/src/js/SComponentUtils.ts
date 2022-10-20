@@ -424,7 +424,7 @@ export default class SComponentUtils extends __SClass {
         if (finalStateSettings.save && !finalStateSettings.id) {
             console.log('HTMLElement', this.node);
             throw new Error(
-                `To save the state, the HTMLElement must have an id...`,
+                `To save the state of your component, the HTMLElement must have an id...`,
             );
         }
 

@@ -169,35 +169,6 @@ export default function (api) {
         },
 
         build: {
-            // lib: {
-            //     /**
-            //      * @name          entry
-            //      * @namespace     config.vite.build.lib
-            //      * @type          String
-            //      * @default      [config.storage.src.jsDir]/index.ts
-            //      *
-            //      * Specify the entry file for a "lib" build
-            //      *
-            //      * @since       2.0.0
-            //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-            //      */
-            //     get entry() {
-            //         return `${api.config.storage.src.jsDir}/index.ts`;
-            //     },
-
-            //     /**
-            //      * @name          name
-            //      * @namespace     config.vite.build.lib
-            //      * @type          String
-            //      * @default      index
-            //      *
-            //      * Specify the entry name for a "lib" build
-            //      *
-            //      * @since       2.0.0
-            //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-            //      */
-            //     name: 'index',
-            // },
             /**
              * @name          outDir
              * @namespace     config.vite.build

@@ -1,4 +1,6 @@
-<div class="s-card {{ attributes.class }} {{ direction ? 's-card--' ~ direction : '' }}" {{ attrs(attributes, ['class'])|raw }}>
+<div class="s-card {{ attributes.class }} {{ direction ? 's-card--' ~ direction : '' }}" {{ attrs(attributes, ['class'])|raw }}
+    s-carpenter="components.card"
+>
 
     {% if image %}
         <div class="s-card__img-container">
@@ -8,13 +10,13 @@
 
     <div class="s-card__content s-spacing:{{ spacing ? spacing : '30' }}">
         {% if title %}
-            <h1 class="s-card__title s-typo:h3">{{ title|raw }}</h1>
+            <h1 class="s-card__title s-typo:h3" s-carpenter-editable="title">{{ title|raw }}</h1>
         {% endif %}
         {% if intro %}
-            <p class="s-card__lead s-typo:lead s-tc:{{ color ? color : 'accent' }}">{{ intro|raw }}</p>
+            <p class="s-card__lead s-typo:lead s-tc:{{ color ? color : 'accent' }}" s-carpenter-editable="intro">{{ intro|raw }}</p>
         {% endif %}
         {% if text %}
-            <p class="s-card__text s-typo:p">{{ text|raw }}</p>
+            <p class="s-card__text s-typo:p" s-carpenter-editable="text">{{ text|raw }}</p>
         {% endif %}
         {% if cta %}
             <div class="s-card__cta">

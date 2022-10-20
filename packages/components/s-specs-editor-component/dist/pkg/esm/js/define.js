@@ -1,0 +1,5 @@
+import __SSpecsEditorComponent from './SSpecsEditorComponent';
+export default function define(props = {}, tagName = 's-specs-editor') {
+    __SSpecsEditorComponent.define(tagName, __SSpecsEditorComponent, props);
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBLE9BQU8sdUJBQXVCLE1BQU0seUJBQXlCLENBQUM7QUFFOUQsTUFBTSxDQUFDLE9BQU8sVUFBVSxNQUFNLENBQzFCLFFBQXVELEVBQUUsRUFDekQsT0FBTyxHQUFHLGdCQUFnQjtJQUUxQix1QkFBdUIsQ0FBQyxNQUFNLENBQUMsT0FBTyxFQUFFLHVCQUF1QixFQUFFLEtBQUssQ0FBQyxDQUFDO0FBQzVFLENBQUMifQ==

@@ -3,12 +3,12 @@ import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSpecs from '@coffeekraken/s-specs';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __SViewRenderer from '@coffeekraken/s-view-renderer';
 import { __dirname } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import { __onProcessExit } from '@coffeekraken/sugar/process';
 import __express from 'express';
+import __fs from 'fs';
 import __SCarpenterStartParamsInterface from './interface/SCarpenterStartParamsInterface';
 
 /**
@@ -102,12 +102,9 @@ class SCarpenter extends __SClass {
                 value: `<yellow>[start]</yellow> Starting a new carpenter server...`,
             });
 
-            const viewRenderer = new __SViewRenderer({
-                rootDirs: [`${__packageRootDir(__dirname())}/src/views`],
-            });
-
             const app: any = __express(),
                 watchers = {},
+                specsMap = {},
                 specsBySources = {};
 
             for (let [key, source] of Object.entries(this.settings.sources)) {
@@ -127,38 +124,70 @@ class SCarpenter extends __SClass {
                     specsBySources[key] = {
                         // @ts-ignore
                         ...source,
-                        specs: [],
+                        specs: {},
                     };
                 }
 
                 // console.log(key, source);
 
-                const specs = new __SSpecs();
-                const specsArray = specs.list(source.specsNamespaces);
+                const specsInstance = new __SSpecs();
+                const specsArray = specsInstance.list(source.specsNamespaces);
 
-                specsBySources[key].specs = [
-                    ...specsBySources[key].specs,
-                    specsArray,
-                ];
+                // specsBySources[key].specs = [
+                //     ...specsBySources[key].specs,
+                //     ...specsArray,
+                // ];
 
-                specsArray.forEach((spec) => {
+                specsArray.forEach((specs) => {
+                    const specsJson = specs.read();
+
+                    specsBySources[key].specs[specs.dotpath] = specsJson;
+
+                    specsMap[specs.dotpath] = specsJson;
+
                     // listen for request on that particular component
-                    app.get(`/${spec.dotpath}`, async (req, res) => {
-                        console.log(specsBySources);
-
-                        const result = await viewRenderer.render('index', {});
-
-                        res.type('text/html');
-                        res.send(result.value);
-                    });
+                    // app.get(`/json/${specs.dotpath}`, async (req, res) => {
+                    //     specs.specs = specs.read();
+                    //     res.type('application/json');
+                    //     res.send(specs);
+                    // });
                 });
             }
 
-            app.get('/', async (req, res) => {
-                res.type('text/html');
-                res.send('Hello');
+            // // listen for request on that particular component
+            // app.get(`/${specs.dotpath}`, async (req, res) => {
+            //     // load html here to have updated html without reloading the server
+            //     const html = __fs
+            //         .readFileSync(
+            //             `${__packageRootDir(
+            //                 __dirname(),
+            //             )}/src/views/index.html`,
+            //         )
+            //         .toString();
+            //     res.type('text/html');
+            //     res.send(html);
+            // });
+
+            // listen for requesting the global data like specs by sources, etc...
+            app.get(`/carpenter`, async (req, res) => {
+                res.type('application/json');
+                res.send({
+                    specsMap,
+                    specsBySources,
+                });
             });
 
+            app.get('/', async (req, res) => {
+                // load html here to have updated html without reloading the server
+                const html = __fs
+                    .readFileSync(
+                        `${__packageRootDir(__dirname())}/src/views/index.html`,
+                    )
+                    .toString();
+
+                res.type('text/html');
+                res.send(html);
+            });
             app.get('/dist/css/index.css', async (req, res) => {
                 const cssFilePath = `${__packageRootDir(
                     __dirname(),

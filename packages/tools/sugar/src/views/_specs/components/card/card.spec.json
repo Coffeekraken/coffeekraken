@@ -3,21 +3,24 @@
     "title": "Card",
     "description": "Display a nice card with some infos like \"image\", \"title\", \"intro\", \"description\" and \"cta\"",
     "props": {
-        "image": "@sugar.views.props.image",
         "title": {
             "type": "Text",
+            "title": "Title",
             "description": "The card title"
         },
         "intro": {
             "type": "Text",
+            "title": "Intro",
             "description": "The card intro"
         },
         "text": {
             "type": "Text",
+            "title": "Text",
             "description": "The card text"
         },
         "direction": {
             "type": "Select",
+            "title": "Direction",
             "description": "Specify the direction of the card. Horizontal, vertical, etc...",
             "options": [
                 {
@@ -39,6 +42,7 @@
             ]
         },
         "spacing": "@sugar.views.props.spacing",
+        "image": "@sugar.views.props.image",
         "cta": "@sugar.views.components.cta",
         "attributes": "@sugar.views.props.attributes"
     }

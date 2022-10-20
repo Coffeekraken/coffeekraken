@@ -1,5 +1,6 @@
 {
     "type": "Object{}",
+    "title": "Margin",
     "description": "Specify the margins you want around your layout",
     "props": {
         "block": {

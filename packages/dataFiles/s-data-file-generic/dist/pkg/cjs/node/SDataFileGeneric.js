@@ -34,7 +34,7 @@ const fs_2 = __importDefault(require("fs"));
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-class SDataHandlerGeneric {
+class SDataFileGeneric {
     /**
      * @name          load
      * @type          Function
@@ -50,11 +50,22 @@ class SDataHandlerGeneric {
      */
     static load(filePath) {
         return new s_promise_1.default(({ resolve, reject }) => __awaiter(this, void 0, void 0, function* () {
-            const extension = (0, fs_1.__extension)(filePath), filePathWithoutExtension = filePath.replace(`.${extension}`, '');
+            const extension = (0, fs_1.__extension)(filePath), filePathWithoutExtension = filePath
+                .replace(`.${extension}`, '')
+                .replace(/\.(data|spec)\.[a-zA-Z0-9]+$/, '');
             let dataFilePath = filePath;
-            if (!fs_2.default.existsSync(dataFilePath) ||
-                !SDataHandlerGeneric.extensions.includes(extension)) {
-                dataFilePath = (0, fs_1.__checkPathWithMultipleExtensions)(`${filePathWithoutExtension}.data.${extension}`, SDataHandlerGeneric.extensions);
+            if (!(dataFilePath === null || dataFilePath === void 0 ? void 0 : dataFilePath.match(/\.data\.[a-zA-Z0-9]+$/))) {
+                dataFilePath = null;
+            }
+            if (dataFilePath && fs_2.default.existsSync(dataFilePath)) {
+                // direct data file reference
+            }
+            else {
+                dataFilePath = (0, fs_1.__checkPathWithMultipleExtensions)(`${filePathWithoutExtension}`, SDataFileGeneric.extensions.map(p => `data.${p}`));
+            }
+            // make sure the file is a .data.something...
+            if (!(dataFilePath === null || dataFilePath === void 0 ? void 0 : dataFilePath.match(/\.data\.[a-zA-Z0-9]+$/))) {
+                dataFilePath = null;
             }
             if (!dataFilePath) {
                 return resolve({});
@@ -72,7 +83,7 @@ class SDataHandlerGeneric {
         }));
     }
 }
-exports.default = SDataHandlerGeneric;
+exports.default = SDataFileGeneric;
 /**
  * @name          extensions
  * @type          String[]
@@ -84,5 +95,5 @@ exports.default = SDataHandlerGeneric;
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-SDataHandlerGeneric.extensions = ['php', 'js', 'json'];
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7OztBQUVkLGtGQUF5RDtBQUN6RCxvRkFBMkQ7QUFDM0Qsd0VBQWlEO0FBQ2pELCtDQUdnQztBQUNoQyw0Q0FBc0I7QUFFdEI7Ozs7Ozs7Ozs7Ozs7OztHQWVHO0FBQ0gsTUFBcUIsbUJBQW1CO0lBY3BDOzs7Ozs7Ozs7Ozs7T0FZRztJQUNILE1BQU0sQ0FBQyxJQUFJLENBQUMsUUFBUTtRQUNoQixPQUFPLElBQUksbUJBQVUsQ0FBQyxDQUFPLEVBQUUsT0FBTyxFQUFFLE1BQU0sRUFBRSxFQUFFLEVBQUU7WUFDaEQsTUFBTSxTQUFTLEdBQUcsSUFBQSxnQkFBVyxFQUFDLFFBQVEsQ0FBQyxFQUNuQyx3QkFBd0IsR0FBRyxRQUFRLENBQUMsT0FBTyxDQUN2QyxJQUFJLFNBQVMsRUFBRSxFQUNmLEVBQUUsQ0FDTCxDQUFDO1lBRU4sSUFBSSxZQUFZLEdBQUcsUUFBUSxDQUFDO1lBQzVCLElBQ0ksQ0FBQyxZQUFJLENBQUMsVUFBVSxDQUFDLFlBQVksQ0FBQztnQkFDOUIsQ0FBQyxtQkFBbUIsQ0FBQyxVQUFVLENBQUMsUUFBUSxDQUFDLFNBQVMsQ0FBQyxFQUNyRDtnQkFDRSxZQUFZLEdBQUcsSUFBQSxzQ0FBaUMsRUFDNUMsR0FBRyx3QkFBd0IsU0FBUyxTQUFTLEVBQUUsRUFDL0MsbUJBQW1CLENBQUMsVUFBVSxDQUNqQyxDQUFDO2FBQ0w7WUFFRCxJQUFJLENBQUMsWUFBWSxFQUFFO2dCQUNmLE9BQU8sT0FBTyxDQUFDLEVBQUUsQ0FBQyxDQUFDO2FBQ3RCO1lBRUQsUUFBUSxJQUFBLGdCQUFXLEVBQUMsWUFBWSxDQUFDLEVBQUU7Z0JBQy9CLEtBQUssS0FBSztvQkFDTixPQUFPLE9BQU8sQ0FBQyxNQUFNLHlCQUFjLENBQUMsSUFBSSxDQUFDLFlBQVksQ0FBQyxDQUFDLENBQUM7b0JBQ3hELE1BQU07Z0JBQ1YsS0FBSyxJQUFJLENBQUM7Z0JBQ1YsS0FBSyxNQUFNO29CQUNQLE9BQU8sT0FBTyxDQUFDLE1BQU0sd0JBQWEsQ0FBQyxJQUFJLENBQUMsWUFBWSxDQUFDLENBQUMsQ0FBQztvQkFDdkQsTUFBTTthQUNiO1lBRUQsT0FBTyxDQUFDLEVBQUUsQ0FBQyxDQUFDO1FBQ2hCLENBQUMsQ0FBQSxDQUFDLENBQUM7SUFDUCxDQUFDOztBQTlETCxzQ0ErREM7QUE5REc7Ozs7Ozs7Ozs7R0FVRztBQUNJLDhCQUFVLEdBQUcsQ0FBQyxLQUFLLEVBQUUsSUFBSSxFQUFFLE1BQU0sQ0FBQyxDQUFDIn0=
+SDataFileGeneric.extensions = ['php', 'js', 'json'];
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7OztBQUVkLGtGQUF5RDtBQUN6RCxvRkFBMkQ7QUFDM0Qsd0VBQWlEO0FBQ2pELCtDQUdnQztBQUNoQyw0Q0FBc0I7QUFFdEI7Ozs7Ozs7Ozs7Ozs7OztHQWVHO0FBQ0gsTUFBcUIsZ0JBQWdCO0lBY2pDOzs7Ozs7Ozs7Ozs7T0FZRztJQUNILE1BQU0sQ0FBQyxJQUFJLENBQUMsUUFBUTtRQUNoQixPQUFPLElBQUksbUJBQVUsQ0FBQyxDQUFPLEVBQUUsT0FBTyxFQUFFLE1BQU0sRUFBRSxFQUFFLEVBQUU7WUFDaEQsTUFBTSxTQUFTLEdBQUcsSUFBQSxnQkFBVyxFQUFDLFFBQVEsQ0FBQyxFQUNuQyx3QkFBd0IsR0FBRyxRQUFRO2lCQUM5QixPQUFPLENBQUMsSUFBSSxTQUFTLEVBQUUsRUFBRSxFQUFFLENBQUM7aUJBQzVCLE9BQU8sQ0FBQyw4QkFBOEIsRUFBRSxFQUFFLENBQUMsQ0FBQztZQUVyRCxJQUFJLFlBQVksR0FBRyxRQUFRLENBQUM7WUFFNUIsSUFBSSxDQUFDLENBQUEsWUFBWSxhQUFaLFlBQVksdUJBQVosWUFBWSxDQUFFLEtBQUssQ0FBQyx1QkFBdUIsQ0FBQyxDQUFBLEVBQUU7Z0JBQy9DLFlBQVksR0FBRyxJQUFJLENBQUM7YUFDdkI7WUFFRCxJQUFJLFlBQVksSUFBSSxZQUFJLENBQUMsVUFBVSxDQUFDLFlBQVksQ0FBQyxFQUFFO2dCQUMvQyw2QkFBNkI7YUFDaEM7aUJBQU07Z0JBQ0gsWUFBWSxHQUFHLElBQUEsc0NBQWlDLEVBQzVDLEdBQUcsd0JBQXdCLEVBQUUsRUFDN0IsZ0JBQWdCLENBQUMsVUFBVSxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLFFBQVEsQ0FBQyxFQUFFLENBQUMsQ0FDcEQsQ0FBQzthQUNMO1lBRUQsNkNBQTZDO1lBQzdDLElBQUksQ0FBQyxDQUFBLFlBQVksYUFBWixZQUFZLHVCQUFaLFlBQVksQ0FBRSxLQUFLLENBQUMsdUJBQXVCLENBQUMsQ0FBQSxFQUFFO2dCQUMvQyxZQUFZLEdBQUcsSUFBSSxDQUFDO2FBQ3ZCO1lBRUQsSUFBSSxDQUFDLFlBQVksRUFBRTtnQkFDZixPQUFPLE9BQU8sQ0FBQyxFQUFFLENBQUMsQ0FBQzthQUN0QjtZQUVELFFBQVEsSUFBQSxnQkFBVyxFQUFDLFlBQVksQ0FBQyxFQUFFO2dCQUMvQixLQUFLLEtBQUs7b0JBQ04sT0FBTyxPQUFPLENBQUMsTUFBTSx5QkFBYyxDQUFDLElBQUksQ0FBQyxZQUFZLENBQUMsQ0FBQyxDQUFDO29CQUN4RCxNQUFNO2dCQUNWLEtBQUssSUFBSSxDQUFDO2dCQUNWLEtBQUssTUFBTTtvQkFDUCxPQUFPLE9BQU8sQ0FBQyxNQUFNLHdCQUFhLENBQUMsSUFBSSxDQUFDLFlBQVksQ0FBQyxDQUFDLENBQUM7b0JBQ3ZELE1BQU07YUFDYjtZQUVELE9BQU8sQ0FBQyxFQUFFLENBQUMsQ0FBQztRQUNoQixDQUFDLENBQUEsQ0FBQyxDQUFDO0lBQ1AsQ0FBQzs7QUF0RUwsbUNBdUVDO0FBdEVHOzs7Ozs7Ozs7O0dBVUc7QUFDSSwyQkFBVSxHQUFHLENBQUMsS0FBSyxFQUFFLElBQUksRUFBRSxNQUFNLENBQUMsQ0FBQyJ9

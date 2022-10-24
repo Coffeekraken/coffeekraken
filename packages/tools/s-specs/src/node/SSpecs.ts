@@ -202,11 +202,16 @@ export default class SSpecs extends __SClass {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    read(specDotPath) {
+    read(specDotPath: string, settings?: Partial<ISSpecsSettings>) {
         let finalSpecFilePath;
 
-        // if (!finalSpecFilePath) {
-        let definedNamespaces = this.settings.namespaces;
+        const finalSettings: ISSpecsSettings = __deepMerge(
+            // @ts-ignore
+            this.settings,
+            settings ?? {},
+        );
+
+        let definedNamespaces = finalSettings.namespaces;
         let definesNamespacesKeys = Object.keys(definedNamespaces);
 
         let currentNamespace = '';
@@ -243,7 +248,7 @@ export default class SSpecs extends __SClass {
 
         // loop on each registered namespaces directories to check if the specDotPath
         // correspond to a file in one of them...
-        const dirs = this.settings.namespaces[currentNamespace];
+        const dirs = finalSettings.namespaces[currentNamespace];
         for (let i = 0; i < dirs.length; i++) {
             const dir = dirs[i];
 
@@ -269,7 +274,6 @@ export default class SSpecs extends __SClass {
                 break;
             }
         }
-        // }
 
         if (!finalSpecFilePath) {
             throw new Error(
@@ -301,6 +305,12 @@ export default class SSpecs extends __SClass {
         if (internalSpecDotPath) {
             return __get(specJson, internalSpecDotPath);
         }
+
+        // add metas about the spec file read
+        specJson.metas = {
+            path: finalSpecFilePath,
+            settings: finalSettings,
+        };
 
         // return the getted specJson
         return specJson;

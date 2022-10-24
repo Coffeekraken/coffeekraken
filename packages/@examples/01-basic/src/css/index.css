@@ -1,5 +1,6 @@
 /* importing sugar toolkit */
 @sugar.import ('./sugar.css');
+@sugar.import ('./carpenter.css');
 @sugar.import ('../views/**/*.css');
 @sugar.import ('./generic/**/*.css');
 

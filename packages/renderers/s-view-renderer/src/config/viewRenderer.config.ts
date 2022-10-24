@@ -13,9 +13,8 @@ export default function (api) {
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        get rootDirs() {
-            const dirs = [`${api.config.storage.src.rootDir}/views`];
-            return dirs;
+        rootDirs: {
+            views: `${api.config.storage.src.rootDir}/views`,
         },
 
         /**

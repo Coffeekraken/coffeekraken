@@ -25,7 +25,7 @@ import __fs from 'fs';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default class SDataHandlerGeneric {
+export default class SDataFileGeneric {
     /**
      * @name          extensions
      * @type          String[]
@@ -55,20 +55,28 @@ export default class SDataHandlerGeneric {
     static load(filePath) {
         return new __SPromise(async ({ resolve, reject }) => {
             const extension = __extension(filePath),
-                filePathWithoutExtension = filePath.replace(
-                    `.${extension}`,
-                    '',
-                );
+                filePathWithoutExtension = filePath
+                    .replace(`.${extension}`, '')
+                    .replace(/\.(data|spec)\.[a-zA-Z0-9]+$/, '');
 
             let dataFilePath = filePath;
-            if (
-                !__fs.existsSync(dataFilePath) ||
-                !SDataHandlerGeneric.extensions.includes(extension)
-            ) {
+
+            if (!dataFilePath?.match(/\.data\.[a-zA-Z0-9]+$/)) {
+                dataFilePath = null;
+            }
+
+            if (dataFilePath && __fs.existsSync(dataFilePath)) {
+                // direct data file reference
+            } else {
                 dataFilePath = __checkPathWithMultipleExtensions(
-                    `${filePathWithoutExtension}.data.${extension}`,
-                    SDataHandlerGeneric.extensions,
+                    `${filePathWithoutExtension}`
+                    SDataFileGeneric.extensions.map(p => `data.${p}`)
                 );
+            }
+
+            // make sure the file is a .data.something...
+            if (!dataFilePath?.match(/\.data\.[a-zA-Z0-9]+$/)) {
+                dataFilePath = null;
             }
 
             if (!dataFilePath) {

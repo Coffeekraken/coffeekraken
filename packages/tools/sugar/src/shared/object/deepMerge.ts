@@ -51,9 +51,13 @@ export default function __deepMerge(...args) {
 
         const secondProps = Object.getOwnPropertyNames(secondObj);
         secondProps.forEach((key) => {
-            const desc = Object.getOwnPropertyDescriptor(secondObj, key);
-            if (desc.set || desc.get) {
-                Object.defineProperty(newObj, key, desc);
+            const secondObjDesc = Object.getOwnPropertyDescriptor(
+                secondObj,
+                key,
+            );
+
+            if (secondObjDesc.set || secondObjDesc.get) {
+                Object.defineProperty(newObj, key, secondObjDesc);
             } else if (
                 __isPlainObject(newObj[key]) &&
                 __isPlainObject(secondObj[key])

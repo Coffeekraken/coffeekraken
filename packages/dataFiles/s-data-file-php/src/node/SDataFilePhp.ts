@@ -4,6 +4,7 @@ import __SPromise from '@coffeekraken/s-promise';
 import { __dirname } from '@coffeekraken/sugar/fs';
 import { __execPhp } from '@coffeekraken/sugar/exec';
 import __path from 'path';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 
 /**
  * @name          SDataFilePhp
@@ -50,7 +51,10 @@ export default class SDataFilePhp {
     static load(filePath) {
         return new __SPromise(async ({ resolve }) => {
             const data = await __execPhp(
-                __path.resolve(__packageRoot(__dirname()), 'src/php/data.php'),
+                __path.resolve(
+                    __packageRootDir(__dirname()),
+                    'src/php/data.php',
+                ),
                 {
                     filePath,
                 },

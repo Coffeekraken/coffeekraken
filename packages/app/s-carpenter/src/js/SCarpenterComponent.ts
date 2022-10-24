@@ -105,6 +105,11 @@ export default class SCarpenterComponent extends __SLitComponent {
             });
         });
 
+        // listen spec editor update
+        this.addEventListener('s-specs-editor.update', (e) => {
+            console.log('SPecs up', e.detail);
+        });
+
         // listen on click
         this._$toolbar.addEventListener('pointerup', (e) => {
             // try to get the spec from the data fetched at start
@@ -126,29 +131,29 @@ export default class SCarpenterComponent extends __SLitComponent {
                 return;
             }
 
+            // open the editor
+            this._openEditor();
+
             // get the current values from the component directly in the HTML
             const $dataElements = this.state.$currentElement.querySelectorAll(
                 `[s-carpenter-editable]`,
             );
-            if ($dataElements) {
-                Array.from($dataElements).forEach(($dataElm) => {
-                    console.log($dataElm);
-                    const data = this._getDataFrom($dataElm);
-                });
-            }
 
+            // update the UI
             this.requestUpdate();
         });
     }
 
     /**
-     * Get the data from an HTMLElement
+     * Get the current component data
      */
-    _getDataFrom($element: HTMLElement): any {
-        const map = JSON.parse(
-            $element.getAttribute('s-carpenter-map') ?? '{}',
-        );
-        console.log('map', map);
+    _getCurrentData() {}
+
+    /**
+     * open the editor
+     */
+    _openEditor() {
+        document.body.classList.add('s-carpenter--editor');
     }
 
     /**

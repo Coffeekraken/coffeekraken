@@ -1,6 +1,3 @@
-import { __packageRootDir } from '@coffeekraken/sugar/path';
-import __path from 'path';
-
 export default function (api) {
     if (api.env.platform !== 'node') return;
 
@@ -21,30 +18,6 @@ export default function (api) {
             'sugar.components': [
                 ...(api.config.specs.namespaces?.['sugar.components'] ?? []),
                 `./node_modules/@coffeekraken/sugar/src/views/_specs/components`,
-            ],
-            views: [
-                `./${__path.relative(
-                    __packageRootDir(),
-                    api.config.storage.src.viewsDir,
-                )}`,
-            ],
-            bare: [
-                `./${__path.relative(
-                    __packageRootDir(),
-                    api.config.storage.src.viewsDir,
-                )}/bare`,
-            ],
-            sections: [
-                `./${__path.relative(
-                    __packageRootDir(),
-                    api.config.storage.src.viewsDir,
-                )}/sections`,
-            ],
-            components: [
-                `./${__path.relative(
-                    __packageRootDir(),
-                    api.config.storage.src.viewsDir,
-                )}/components`,
             ],
         },
     };

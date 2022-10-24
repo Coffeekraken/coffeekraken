@@ -3,11 +3,12 @@ import type { ISDurationObject } from '@coffeekraken/s-duration';
 import __SDuration from '@coffeekraken/s-duration';
 import type { ISFileObject } from '@coffeekraken/s-file';
 // import __page404 from './pages/404';
+import __SDataFileGeneric from '@coffeekraken/s-data-file-generic';
 import type { ISPromise } from '@coffeekraken/s-promise';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __unique } from '@coffeekraken/sugar/array';
-import { __extension, __writeJsonSync } from '@coffeekraken/sugar/fs';
+import { __writeJsonSync } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __packageTmpDir } from '@coffeekraken/sugar/path';
 import { __uniqid } from '@coffeekraken/sugar/string';
@@ -51,7 +52,7 @@ import __SViewRendererSettingsInterface from './interface/SViewRendererSettingsI
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export interface ISViewRendererSettings {
-    rootDirs: string[];
+    rootDirs: Record<string, string>;
     cacheDir: string;
     defaultEngine: 'twig' | 'blade';
     enginesSettings?: any;
@@ -100,18 +101,6 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
     static engines = {};
 
     /**
-     * @name       dataFiles
-     * @type      Object
-     * @static
-     *
-     * Store the registered dataFiles using the ```registerDataFiles``` static method
-     *
-     * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static dataFiles = {};
-
-    /**
      * @name      defaultRootDirs
      * @type      Array
      * @static
@@ -123,16 +112,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static get defaultRootDirs(): string[] {
-        return [
-            ...__SSugarConfig.get('viewRenderer.rootDirs'),
-            // // @ts-ignore
-            // __path.resolve(
-            //     __packageRootDir(__dirname()),
-            //     'src/php/views/blade',
-            // ),
-            // // @ts-ignore
-            // __path.resolve(__packageRootDir(__dirname()), 'src/php/views/twig'),
-        ];
+        return Object.values(__SSugarConfig.get('viewRenderer.rootDirs'));
     }
 
     /**
@@ -219,33 +199,6 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
     }
 
     /**
-     * @name      registerDataFiles
-     * @type      Function
-     * @static
-     *
-     * This static method can be used to register some SDataFiles classes
-     *
-     * @param       {Class}        DataFileClass      The data file class
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static registerDataFiles(
-        DataFileClass: string,
-        extensions: string | string[],
-    ): void {
-        // register the engine under each names
-        const exts = Array.isArray(extensions)
-            ? extensions
-            : extensions.split(',').map((l) => l.trim());
-        exts.forEach((extension) => {
-            if (SViewRenderer.dataFiles[extension]) return;
-            // register the engine in the stack
-            SViewRenderer.dataFiles[extension] = DataFileClass;
-        });
-    }
-
-    /**
      * @name        _sharedDataFilePath
      * @type        String
      * @private
@@ -310,17 +263,6 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
             });
         }
 
-        const defaultDataHandlers =
-            __SSugarConfig.get('viewRenderer.dataFiles') || [];
-        for (let i = 0; i < defaultDataHandlers.length; i++) {
-            const path = defaultDataHandlers[i];
-            // @ts-ignore
-            const { default: DataFileClass } = await import(path);
-            DataFileClass.extensions.forEach((ext) => {
-                SViewRenderer.registerDataFiles(DataFileClass, ext);
-            });
-        }
-
         this._loaded = true;
     }
 
@@ -352,39 +294,6 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
         }
     }
 
-    _getDataFileClassForView(viewPath: string): any {
-        // loop on each dataFiles available
-        for (let [dataFileExt, DataFileClass] of Object.entries(
-            SViewRenderer.dataFiles,
-        )) {
-            let potentialDataFilePath = viewPath;
-
-            for (let [key, engineObj] of Object.entries(
-                SViewRenderer.engines,
-            )) {
-                // @ts-ignore
-                engineObj.extensions.forEach((ext) => {
-                    const reg = new RegExp(`.${ext}$`);
-                    potentialDataFilePath = potentialDataFilePath.replace(
-                        reg,
-                        '',
-                    );
-                });
-            }
-
-            // add extension
-            potentialDataFilePath += `.data.${dataFileExt}`;
-
-            // check if exists and return if true
-            if (__fs.existsSync(`${potentialDataFilePath}`)) {
-                return {
-                    dataFilePath: `${potentialDataFilePath}`,
-                    DataFileClass,
-                };
-            }
-        }
-    }
-
     _getFinalViewPath(viewDotPath: string): string {
         let finalViewPath: string;
 
@@ -392,10 +301,40 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
             SViewRenderer.engines,
         );
 
-        // remove all the engines extensions from the viewPath
-        Object.keys(SViewRenderer.engines).forEach((ext) => {
-            viewDotPath = viewDotPath.replace(`.${ext}`, '');
-        });
+        // direct view path
+        if (__fs.existsSync(viewDotPath)) {
+            return viewDotPath;
+        }
+
+        // doted path
+        for (let i = 0; i < this.settings.rootDirs.length; i++) {
+            const rootDir = this.settings.rootDirs[i];
+            const potentialViewGlob = `${rootDir}/${viewDotPath
+                .split('.')
+                .join('/')}.@(${handledViewsExtensions.join('|')})`;
+
+            const matches = __glob.sync(potentialViewGlob);
+            if (matches && matches.length) {
+                for (let j = 0; j < matches.length; j++) {
+                    const potentialPath = matches[j];
+                    // exclude .data files
+                    if (potentialPath.match(/\.data\.[a-zA-Z0-9]+/)) {
+                        continue;
+                    }
+                    finalViewPath = potentialPath;
+                    break;
+                }
+            }
+            // @ts-ignore
+            if (finalViewPath) {
+                break;
+            }
+        }
+
+        // // remove all the engines extensions from the viewPath
+        // Object.keys(SViewRenderer.engines).forEach((ext) => {
+        //     viewDotPath = viewDotPath.replace(`.${ext}`, '');
+        // });
 
         // detect and save the view doted path or the view template string
         if (
@@ -410,30 +349,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
                     // );
                     finalViewPath = viewDotPath;
                 }
-            } else if (!viewDotPath.match(/\//gm)) {
-                // doted path
-                for (let i = 0; i < this.settings.rootDirs.length; i++) {
-                    const rootDir = this.settings.rootDirs[i];
-                    const potentialViewGlob = `${rootDir}/${viewDotPath
-                        .split('.')
-                        .join('/')}.@(${handledViewsExtensions.join('|')})`;
-
-                    const matches = __glob.sync(potentialViewGlob);
-                    if (matches && matches.length) {
-                        for (let j = 0; j < matches.length; j++) {
-                            const potentialPath = matches[j];
-                            // exclude .data files
-                            if (potentialPath.match(/\.data\.[a-zA-Z0-9]+/)) {
-                                continue;
-                            }
-                            finalViewPath = potentialPath;
-                            break;
-                        }
-                    }
-                    if (finalViewPath) {
-                        break;
-                    }
-                }
+            } else {
             }
         } else {
             // throw new Error(
@@ -466,18 +382,10 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
         if (this.settings.sharedDataFiles) {
             for (let i = 0; i < this.settings.sharedDataFiles.length; i++) {
                 const dataFilePath = this.settings.sharedDataFiles[i];
-                const extension = __extension(dataFilePath);
-                if (!SViewRenderer.dataFiles[extension]) {
-                    throw new Error(
-                        `<red>[render]</red> The extension "${extension}" is not registered as a data file handler`,
-                    );
-                }
-                const sharedDataFiles = await SViewRenderer.dataFiles[
-                    extension
-                ].load(dataFilePath);
-                if (sharedDataFiles) {
-                    sharedData = __deepMerge(sharedData, sharedDataFiles);
-                }
+                sharedData = __deepMerge(
+                    sharedData,
+                    await __SDataFileGeneric.load(dataFilePath),
+                );
             }
         }
 
@@ -496,7 +404,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
      * Main method to render your view by passing it an object of data to use as well as an object of settings to override the default passed onces
      *
      * @param       {String}        viewDotPath        The dotPath of the view you want to render
-     * @param       {Object}        [data={}]       An object of data to use to render the view.
+     * @param       {String|Object|Promise<Object>}        [data={}]       An object of data to use to render the view. If is a string, use the SDataGeneric class to resolve the data
      * @param       {Object}        [settings={}]     An object of settings that will be passed to the render engine method to use to override the default onces passed in the constructor. Check the used engine render documentation
      * @return      {SPromise}                    An SPromise instance that will be resolved once the rendering process has correctly finished
      *
@@ -505,7 +413,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
      */
     render(
         viewDotPath: string,
-        data = {},
+        data: string | Promise<any> | any = {},
         settings?: Partial<ISViewRendererSettings>,
     ): Promise<ISViewRendererRenderResult> {
         return new __SPromise(async ({ resolve, reject, pipe }) => {
@@ -514,6 +422,11 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
 
             // load shared data
             await this._loadSharedData();
+
+            // ensure viewDotPath is a dotPath and not something line path/my/view.twig
+            viewDotPath = viewDotPath
+                .replace(/\.(twig|blade.php|hbs|php|tpl|volt)$/, '')
+                .replace(/\//gm, '.');
 
             // get the final settings
             const viewRendererSettings = Object.assign(
@@ -532,6 +445,8 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
                 engine = parts[0];
                 viewDotPath = parts[1];
             }
+
+            console.log('VIEW', viewDotPath);
 
             // try to get the final view path
             const finalViewPath = this._getFinalViewPath(viewDotPath);
@@ -557,22 +472,22 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
                 );
             }
 
-            // data file class and path
-            let dataFileClassAndPath;
-            if (finalViewPath) {
-                dataFileClassAndPath =
-                    this._getDataFileClassForView(finalViewPath);
+            // use the generic data file class to load the data
+            // if the passed data is a string
+            if (typeof data === 'string') {
+                data = await __SDataFileGeneric.load(data);
+            } else {
+                // resolve data if is a promise
+                data = await data;
             }
+
+            // load the .data.... view neighbour file
+            data = __deepMerge(
+                (await __SDataFileGeneric.load(finalViewPath)) ?? {},
+                data ?? {},
+            );
 
             const duration = new __SDuration();
-
-            if (dataFileClassAndPath) {
-                const gettedData =
-                    await dataFileClassAndPath.DataFileClass.load(
-                        dataFileClassAndPath.dataFilePath,
-                    );
-                if (gettedData) data = __deepMerge(gettedData, data);
-            }
 
             const engineSettings = __deepMerge(
                 RendererEngineClass.interface?.defaults() ?? {},

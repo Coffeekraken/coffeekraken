@@ -23,49 +23,49 @@ namespace Sugar\twig;
 function registerFunctions($twig)
 {
     // Array
-    $toArray = require_once __DIR__ . '/cast/toArray.php';
+    $toArray = require __DIR__ . '/cast/toArray.php';
     $twig->addFunction($toArray);
 
     // Cast
-    $toObject = require_once __DIR__ . '/cast/toObject.php';
+    $toObject = require __DIR__ . '/cast/toObject.php';
     $twig->addFunction($toObject);
 
     // Css
-    $layoutCss = require_once __DIR__ . '/css/layoutCss.php';
+    $layoutCss = require __DIR__ . '/css/layoutCss.php';
     $twig->addFunction($layoutCss);
 
-    $marginClasses = require_once __DIR__ . '/css/marginClasses.php';
+    $marginClasses = require __DIR__ . '/css/marginClasses.php';
     $twig->addFunction($marginClasses);
 
-    $paddingClasses = require_once __DIR__ . '/css/paddingClasses.php';
+    $paddingClasses = require __DIR__ . '/css/paddingClasses.php';
     $twig->addFunction($paddingClasses);
 
     // Frontspec
-    $frontspecAssets = require_once __DIR__ . '/frontspec/assets.php';
+    $frontspecAssets = require __DIR__ . '/frontspec/assets.php';
     $twig->addFunction($frontspecAssets);
 
-    $frontspecOg = require_once __DIR__ . '/frontspec/og.php';
+    $frontspecOg = require __DIR__ . '/frontspec/og.php';
     $twig->addFunction($frontspecOg);
 
-    $frontspecMetas = require_once __DIR__ . '/frontspec/metas.php';
+    $frontspecMetas = require __DIR__ . '/frontspec/metas.php';
     $twig->addFunction($frontspecMetas);
 
-    $frontspecRead = require_once __DIR__ . '/frontspec/readFrontspec.php';
+    $frontspecRead = require __DIR__ . '/frontspec/readFrontspec.php';
     $twig->addFunction($frontspecRead);
 
     // Html
-    $attrs = require_once __DIR__ . '/html/attrs.php';
+    $attrs = require __DIR__ . '/html/attrs.php';
     $twig->addFunction($attrs);
 
     // specs
-    $readSpec = require_once __DIR__ . '/specs/readSpec.php';
+    $readSpec = require __DIR__ . '/specs/readSpec.php';
     $twig->addFunction($readSpec);
 
     // String
-    $idCompliant = require_once __DIR__ . '/string/idCompliant.php';
+    $idCompliant = require __DIR__ . '/string/idCompliant.php';
     $twig->addFunction($idCompliant);
 
-    $uniqid = require_once __DIR__ . '/string/uniqid.php';
+    $uniqid = require __DIR__ . '/string/uniqid.php';
     $twig->addFunction($uniqid);
 
     return $twig;

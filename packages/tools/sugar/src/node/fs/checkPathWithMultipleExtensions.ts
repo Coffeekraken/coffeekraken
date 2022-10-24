@@ -31,7 +31,6 @@ export default function __checkPathWithMultipleExtensions(
     exts: string[],
 ): string | undefined {
     const extension = __extension(path) || '';
-
     const pathWithoutExt = path.replace(`.${extension}`, '');
     for (let i = 0; i < exts.length; i++) {
         const ext = exts[i];

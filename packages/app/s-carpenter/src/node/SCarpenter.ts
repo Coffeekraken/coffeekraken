@@ -80,6 +80,50 @@ class SCarpenter extends __SClass {
     }
 
     /**
+     * @name          loadSpecs
+     * @type          Function
+     *
+     * This method allows you to load the specs specified in the config.carpenter.sources configuration
+     *
+     * @return        {SPromise}                                     A promise resolved with the corresponding specs loaded
+     *
+     * @since         2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    loadSpecs(settings?: Partial<ISCarpenterSettings>): Promise<any> {
+        const finalSettings = __deepMerge(this.settings, settings ?? {});
+
+        return new __SPromise(({ resolve, reject, emit, pipe }) => {
+            const specsMap = {},
+                specsBySources = {};
+
+            for (let [key, source] of Object.entries(finalSettings.sources)) {
+                if (!specsBySources[key]) {
+                    specsBySources[key] = {
+                        // @ts-ignore
+                        ...source,
+                        specs: {},
+                    };
+                }
+
+                const specsInstance = new __SSpecs();
+                const specsArray = specsInstance.list(source.specsNamespaces);
+
+                specsArray.forEach((specs) => {
+                    const specsJson = specs.read();
+                    specsBySources[key].specs[specs.dotpath] = specsJson;
+                    specsMap[specs.dotpath] = specsJson;
+                });
+            }
+
+            resolve({
+                specsMap,
+                specsBySources,
+            });
+        });
+    }
+
+    /**
      * @name          start
      * @type          Function
      *
@@ -103,70 +147,9 @@ class SCarpenter extends __SClass {
             });
 
             const app: any = __express(),
-                watchers = {},
-                specsMap = {},
-                specsBySources = {};
+                watchers = {};
 
-            for (let [key, source] of Object.entries(this.settings.sources)) {
-                // watchers[key] = __chokidar.watch(source.glob, {
-                //     cwd: source.inDir,
-                //     ignoreInitial: false,
-                // });
-                // watchers[key].on('add', (newFileRelPath) => {
-                //     const newFileAbsPath = `${source.inDir}/${newFileRelPath}`;
-                //     const spec = new __SSpecs();
-                //     console.log(newFileAbsPath);
-                //     console.log(spec.read(newFileAbsPath));
-                // });
-                // watchers[key].on('change', (updatedFilePath) => {});
-
-                if (!specsBySources[key]) {
-                    specsBySources[key] = {
-                        // @ts-ignore
-                        ...source,
-                        specs: {},
-                    };
-                }
-
-                // console.log(key, source);
-
-                const specsInstance = new __SSpecs();
-                const specsArray = specsInstance.list(source.specsNamespaces);
-
-                // specsBySources[key].specs = [
-                //     ...specsBySources[key].specs,
-                //     ...specsArray,
-                // ];
-
-                specsArray.forEach((specs) => {
-                    const specsJson = specs.read();
-
-                    specsBySources[key].specs[specs.dotpath] = specsJson;
-
-                    specsMap[specs.dotpath] = specsJson;
-
-                    // listen for request on that particular component
-                    // app.get(`/json/${specs.dotpath}`, async (req, res) => {
-                    //     specs.specs = specs.read();
-                    //     res.type('application/json');
-                    //     res.send(specs);
-                    // });
-                });
-            }
-
-            // // listen for request on that particular component
-            // app.get(`/${specs.dotpath}`, async (req, res) => {
-            //     // load html here to have updated html without reloading the server
-            //     const html = __fs
-            //         .readFileSync(
-            //             `${__packageRootDir(
-            //                 __dirname(),
-            //             )}/src/views/index.html`,
-            //         )
-            //         .toString();
-            //     res.type('text/html');
-            //     res.send(html);
-            // });
+            const { specsMap, specsBySources } = await this.loadSpecs();
 
             // listen for requesting the global data like specs by sources, etc...
             app.get(`/carpenter`, async (req, res) => {

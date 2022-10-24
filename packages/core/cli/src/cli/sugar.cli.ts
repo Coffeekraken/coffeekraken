@@ -6,6 +6,7 @@ import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import __SLog from '@coffeekraken/s-log';
 import type { ISStdio } from '@coffeekraken/s-stdio';
 import __SStdio from '@coffeekraken/s-stdio';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 import { __sugarBanner } from '@coffeekraken/sugar/ascii';
@@ -166,7 +167,7 @@ export default class SSugarCli {
             cache: true,
         });
         // console.log('LOADED');
-        // console.log(__SSugarConfig.get('themeDefaultLight'));
+        // console.log(__SSugarConfig.get('viewRenderer'));
         // return;
 
         // check the "sugar.lock" file in the tmp folder

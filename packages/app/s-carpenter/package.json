@@ -32,8 +32,14 @@
     "module": "dist/pkg/esm/js/exports.js",
     "exports": {
         ".": {
-            "require": "./dist/pkg/cjs/js/exports.js",
-            "import": "./dist/pkg/esm/js/exports.js"
+            "node": {
+                "require": "./dist/pkg/cjs/node/exports.js",
+                "import": "./dist/pkg/esm/node/exports.js"
+            },
+            "default": {
+                "require": "./dist/pkg/cjs/js/exports.js",
+                "import": "./dist/pkg/esm/js/exports.js"
+            }
         },
         "./shared/*": {
             "require": "./dist/pkg/cjs/shared/*.js",
@@ -46,14 +52,6 @@
         "./js/*": {
             "require": "./dist/pkg/cjs/js/*.js",
             "import": "./dist/pkg/esm/js/*.js"
-        },
-        "node": {
-            "require": "./dist/pkg/cjs/node/exports.js",
-            "import": "./dist/pkg/esm/node/exports.js"
-        },
-        "default": {
-            "require": "./dist/pkg/cjs/js/exports.js",
-            "import": "./dist/pkg/esm/js/exports.js"
         }
     }
 }

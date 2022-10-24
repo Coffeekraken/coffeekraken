@@ -1,7 +1,8 @@
 import __SBench from '@coffeekraken/s-bench';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSpecs from '@coffeekraken/s-specs';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __SViewRenderer from '@coffeekraken/s-view-renderer';
+import __SCarpenter from '@coffeekraken/s-carpenter';
 
 export default function carpenterHandler({ req, res, pageConfig }) {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
@@ -9,43 +10,69 @@ export default function carpenterHandler({ req, res, pageConfig }) {
 
         __SBench.step('data.carpenterHandler', 'beforeSitemapRead');
 
-        const carpenterSources = __SSugarConfig.get('carpenter.sources') ?? {};
+        // load current component/section/... specs
+        const specsInstance = new __SSpecs();
+        const currentSpecs = await specsInstance.read(req.params.dotpath);
 
-        const specsMap = {},
-            specsBySources = {};
+        // load the global carpenter specs
+        const carpenterInstance = new __SCarpenter();
+        const carpenterSpecs = await carpenterInstance.loadSpecs();
 
-        for (let [key, source] of Object.entries(carpenterSources)) {
-            if (!specsBySources[key]) {
-                specsBySources[key] = {
-                    // @ts-ignore
-                    ...source,
-                    specs: {},
-                };
-            }
+        // render the current component/section, etc...
+        const currentViewResult = await res.viewRenderer.render(
+            currentSpecs.viewPath,
+            currentSpecs.metas.path,
+        );
 
-            const specsInstance = new __SSpecs();
-            const specsArray = specsInstance.list(source.specsNamespaces);
+        const errors = {
+            pageConfig,
+            views: [],
+            layout: undefined,
+        };
 
-            specsArray.forEach((specs) => {
-                const specsJson = specs.read();
-                specsBySources[key].specs[specs.dotpath] = specsJson;
-                specsMap[specs.dotpath] = specsJson;
+        let layoutPath = pageConfig.layout ?? 'layouts.carpenter';
+        const layoutData = Object.assign({}, res.templateData ?? {});
+        let finalResult;
+
+        // rendering layout using data
+        try {
+            const layoutPromise = res.viewRenderer.render(layoutPath, {
+                ...layoutData,
+                carpenter: carpenterSpecs,
+                body: currentViewResult.value,
             });
+            pipe(layoutPromise);
+            const layoutRes = await layoutPromise;
+
+            if (layoutRes.error) {
+                errors.layout = {
+                    layoutPath,
+                    error: layoutRes.error,
+                };
+            } else {
+                finalResult = layoutRes.value;
+            }
+        } catch (e) {
+            console.log(e);
         }
 
-        __SBench.step('data.carpenterHandler', 'afterSitemapRead');
-
-        __SBench.end('data.carpenterHandler').log();
+        if (errors.views.length || errors.layout) {
+            errors.views = errors.views.map((viewObj) => {
+                delete viewObj.data;
+                return viewObj;
+            });
+            finalResult = JSON.stringify(errors, null, 4)
+                .split(/\\n/)
+                .join(`\n\n`);
+        }
 
         res.status(200);
-        res.type('application/json');
-        res.send({
-            specsMap,
-            specsBySources,
-        });
-        resolve({
-            specsMap,
-            specsBySources,
-        });
+        res.type(
+            errors.views.length || errors.layout
+                ? 'application/json'
+                : 'text/html',
+        );
+        res.send(finalResult);
+        resolve();
     });
 }

@@ -47,26 +47,30 @@ export default function sVitePluginSugar(settings: any = {}) {
         const code = [
             `// sugar environment`,
             `
-                function ___isObject(item) {
-                    return (item && typeof item === 'object' && !Array.isArray(item));
-                }
-                function ___deepMerge(target, ...sources) {
-                    if (!sources.length) return target;
-                    var source = sources.shift();
-                    if (___isObject(target) && ___isObject(source)) {
-                        for (const key in source) {
-                        if (___isObject(source[key])) {
-                            if (!target[key]) Object.assign(target, { [key]: {} });
-                            ___deepMerge(target[key], source[key]);
-                        } else {
-                            Object.assign(target, { [key]: source[key] });
-                        }
-                        }
+                if (!window.___isObject) {
+                    window.___isObject = function (item) {
+                        return (item && typeof item === 'object' && !Array.isArray(item));
                     }
-                    return ___deepMerge(target, ...sources);
+                }
+                if (!window.___deepMerge) {
+                    window.___deepMerge = function (target, ...sources) {
+                        if (!sources.length) return target;
+                        var source = sources.shift();
+                        if (window.___isObject(target) && window.___isObject(source)) {
+                            for (const key in source) {
+                            if (window.___isObject(source[key])) {
+                                if (!target[key]) Object.assign(target, { [key]: {} });
+                               window.___deepMerge(target[key], source[key]);
+                            } else {
+                                Object.assign(target, { [key]: source[key] });
+                            }
+                            }
+                        }
+                        return window.___deepMerge(target, ...sources);
+                    }
                 }
             `.replace('\n', ''),
-            `document.env = ___deepMerge(JSON.parse(\`${envJsonStr}\`), {
+            `document.env = window.___deepMerge(JSON.parse(\`${envJsonStr}\`), {
                 SUGAR: document.SUGAR ?? {}
             })`,
         ];

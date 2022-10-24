@@ -96,6 +96,51 @@ export default class SClipboardCopyComponent extends __SLitComponent {
     }
     mount() {}
 
+    _update(e, propSpecs) {
+        switch (e.target.tagName.toLowerCase()) {
+            default:
+                if (e.target.value === propSpecs.default) {
+                    delete propSpecs.value;
+                } else {
+                    propSpecs.value = e.target.value;
+                }
+                break;
+        }
+
+        this.componentUtils.dispatchEvent('update', {
+            detail: {
+                propSpecs: Object.assign({}, propSpecs),
+                propsSpecs: Object.assign({}, this.props.specs),
+                values: this._specsToValues(
+                    Object.assign({}, this.props.specs),
+                ),
+            },
+        });
+    }
+
+    _specsToValues(specs) {
+        const values = {};
+
+        function treatProps(props, targetObj) {
+            for (let [prop, value] of Object.entries(props)) {
+                if (value.value !== undefined) {
+                    targetObj[prop] = value.value;
+                } else if (value.default !== undefined) {
+                    targetObj[prop] = value.default;
+                } else if (value.props) {
+                    targetObj[prop] = {};
+                    treatProps(value.props, targetObj[prop]);
+                }
+            }
+        }
+
+        treatProps(specs.props, values);
+
+        console.log(values);
+
+        return values;
+    }
+
     _renderSelectElement(propObj) {
         return html`
             <div class="${this.componentUtils.className('__prop--select')}">
@@ -106,7 +151,7 @@ export default class SClipboardCopyComponent extends __SLitComponent {
                     )}"
                 >
                     <select
-                        onChange=${(e) => this._update(e, v)}
+                        @change=${(e) => this._update(e, propObj)}
                         name="${propObj.id}"
                         class="${this.componentUtils.className(
                             '__select',
@@ -155,7 +200,7 @@ export default class SClipboardCopyComponent extends __SLitComponent {
                     )}"
                 >
                     <input
-                        onChange=${(e) => this._update(e, v)}
+                        @change=${(e) => this._update(e, propObj)}
                         type="checkbox"
                         name="${propObj.id}"
                         class="${this.componentUtils.className(
@@ -194,7 +239,7 @@ export default class SClipboardCopyComponent extends __SLitComponent {
                     )}"
                 >
                     <input
-                        onChange=${(e) => this._update(e, propObj)}
+                        @change=${(e) => this._update(e, propObj)}
                         type="text"
                         name="${propObj.id}"
                         class="${this.componentUtils.className(

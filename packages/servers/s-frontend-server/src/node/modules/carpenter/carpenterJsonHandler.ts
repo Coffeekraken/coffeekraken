@@ -1,4 +1,5 @@
 import __SBench from '@coffeekraken/s-bench';
+import __SDataFileGeneric from '@coffeekraken/s-data-file-generic';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSpecs from '@coffeekraken/s-specs';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
@@ -24,11 +25,19 @@ export default function carpenterJsonHandler({ req, res, pageConfig }) {
             const specsInstance = new __SSpecs();
             const specsArray = specsInstance.list(source.specsNamespaces);
 
-            specsArray.forEach((specs) => {
-                const specsJson = specs.read();
+            for (let i = 0; i < specsArray.length; i++) {
+                const specs = specsArray[i];
+
+                const specsJson = await specs.read();
+
+                const data =
+                    (await __SDataFileGeneric.load(specsJson.metas.path)) ?? {};
+
+                __SSpecs.applyValuesToSpecs(data, specsJson);
+
                 specsBySources[key].specs[specs.dotpath] = specsJson;
                 specsMap[specs.dotpath] = specsJson;
-            });
+            }
         }
 
         __SBench.step('data.carpenterJsonHandler', 'afterSpecsRead');

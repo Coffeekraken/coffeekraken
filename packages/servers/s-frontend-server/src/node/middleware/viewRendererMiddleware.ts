@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-import __SBench from '@coffeekraken/s-bench';
 import __SViewRenderer from '@coffeekraken/s-view-renderer';
 
 /**
@@ -41,8 +40,6 @@ function viewRendererMiddleware(settings = {}) {
         }
 
         res.viewRenderer = _viewRenderer;
-
-        __SBench.step('request', 'viewRendererMiddleware');
 
         return next();
     };

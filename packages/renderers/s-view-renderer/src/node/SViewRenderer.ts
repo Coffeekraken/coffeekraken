@@ -52,7 +52,7 @@ import __SViewRendererSettingsInterface from './interface/SViewRendererSettingsI
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export interface ISViewRendererSettings {
-    rootDirs: Record<string, string>;
+    rootDirs: string[];
     cacheDir: string;
     defaultEngine: 'twig' | 'blade';
     enginesSettings?: any;
@@ -112,7 +112,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static get defaultRootDirs(): string[] {
-        return Object.values(__SSugarConfig.get('viewRenderer.rootDirs'));
+        return __SSugarConfig.get('viewRenderer.rootDirs');
     }
 
     /**
@@ -306,17 +306,29 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
             return viewDotPath;
         }
 
-        // doted path
+        // direct from the rootDirs
         for (let i = 0; i < this.settings.rootDirs.length; i++) {
             const rootDir = this.settings.rootDirs[i];
-            const potentialViewGlob = `${rootDir}/${viewDotPath
-                .split('.')
-                .join('/')}.@(${handledViewsExtensions.join('|')})`;
+            if (__fs.existsSync(`${rootDir}/${viewDotPath}`)) {
+                return `${rootDir}/${viewDotPath}`;
+            }
+        }
 
-            const matches = __glob.sync(potentialViewGlob);
+        // doted path
+        for (let i = 0; i < this.settings.rootDirs.length; i++) {
+            const rootDir = this.settings.rootDirs[i],
+                viewName = viewDotPath.split('.').slice(-1)[0],
+                viewPath = viewDotPath.replace(/\./gm, '/'),
+                globPart = `@(${handledViewsExtensions.join('|')})`;
+
+            const potentialViewGlob1 = `${rootDir}/${viewPath}.${globPart}`,
+                potentialViewGlob2 = `${rootDir}/${viewPath}/${viewName}.${globPart}`;
+
+            let potentialPath;
+            let matches = __glob.sync(potentialViewGlob1);
             if (matches && matches.length) {
                 for (let j = 0; j < matches.length; j++) {
-                    const potentialPath = matches[j];
+                    potentialPath = matches[j];
                     // exclude .data files
                     if (potentialPath.match(/\.data\.[a-zA-Z0-9]+/)) {
                         continue;
@@ -324,7 +336,24 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
                     finalViewPath = potentialPath;
                     break;
                 }
+            } else {
+                // try to add the name of the view again like
+                // if it is stored in a folder with the same name
+                // retry again with new glob string
+                matches = __glob.sync(potentialViewGlob2);
+                if (matches && matches.length) {
+                    for (let j = 0; j < matches.length; j++) {
+                        potentialPath = matches[j];
+                        // exclude .data files
+                        if (potentialPath.match(/\.data\.[a-zA-Z0-9]+/)) {
+                            continue;
+                        }
+                        finalViewPath = potentialPath;
+                        break;
+                    }
+                }
             }
+
             // @ts-ignore
             if (finalViewPath) {
                 break;
@@ -446,8 +475,6 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
                 viewDotPath = parts[1];
             }
 
-            console.log('VIEW', viewDotPath);
-
             // try to get the final view path
             const finalViewPath = this._getFinalViewPath(viewDotPath);
 
@@ -500,7 +527,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
             let renderPromise, result, error;
 
             renderPromise = rendererInstance.render(
-                viewDotPath,
+                finalViewPath,
                 Object.assign({}, data),
                 this._sharedDataFilePath,
                 viewRendererSettings,

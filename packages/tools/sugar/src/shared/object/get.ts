@@ -93,7 +93,7 @@ function __get(obj, path, settings = {}) {
         if (typeof n === 'string') {
             n = n.replace(/\?$/, '');
         }
-        if (typeof o !== 'object' || !(n in o)) {
+        if (typeof o !== 'object' || !(o && n in o)) {
             return;
         }
         o = o[n];

@@ -1,3 +1,5 @@
+import { __readJsonSync } from '@coffeekraken/sugar/fs';
+
 /**
  * @name                import
  * @namespace           node.module
@@ -21,16 +23,18 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default async function _import(what: string | string[]) {
-    let settings = {};
+    let imported;
     if (Array.isArray(what)) {
         if (what[0].match(/\.json$/)) {
-            settings = { assert: { type: 'json' } };
+            imported = __readJsonSync(what[0]);
+        } else {
+            imported = await import(what[0]);
         }
-        const imported = await import(what[0], settings);
         return imported[what[1]];
     }
     if (what.match(/\.json$/)) {
-        settings = { assert: { type: 'json' } };
+        imported = __readJsonSync(what);
+        return imported;
     }
-    return (await import(what, settings)).default;
+    return (await import(what)).default;
 }

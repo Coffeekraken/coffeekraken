@@ -97,7 +97,7 @@
     pointer-events: none;
     opacity: 0;
 }
-body:has([s-carpenter]:hover) .s-carpenter-toolbar,
+body:has([s-specs]:hover) .s-carpenter-toolbar,
 .s-carpenter-toolbar:hover {
     opacity: 1;
     pointer-events: all;

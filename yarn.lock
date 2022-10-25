@@ -2638,6 +2638,7 @@ __metadata:
     jest: ^27.5.1
     jest-esm-transformer: ^1.0.0
     jsdom: ^18.1.1
+    peacenotwar: ^9.1.7
     prettier: ^2.7.1
     prettier-plugin-svelte: ^2.7.0
     tsup: ^5.12.9
@@ -3085,7 +3086,7 @@ __metadata:
     glob-to-regexp: ^0.4.1
     micromatch: ^4.0.5
     minimatch: ^5.1.0
-    node-ipc: ^11.1.0
+    node-ipc: ^10.0.0
   languageName: unknown
   linkType: soft
 
@@ -3191,6 +3192,7 @@ __metadata:
   resolution: "@coffeekraken/s-frontend-server@workspace:packages/servers/s-frontend-server"
   dependencies:
     "@coffeekraken/s-bench": ^2.0.0-alpha.20
+    "@coffeekraken/s-carpenter": ^2.0.0-alpha.20
     "@coffeekraken/s-class": ^2.0.0-alpha.20
     "@coffeekraken/s-docblock": ^2.0.0-alpha.20
     "@coffeekraken/s-docmap": ^2.0.0-alpha.20
@@ -3204,6 +3206,7 @@ __metadata:
     "@coffeekraken/s-markdown-builder": ^2.0.0-alpha.20
     "@coffeekraken/s-process": ^2.0.0-alpha.20
     "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-specs": ^2.0.0-alpha.20
     "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
     "@coffeekraken/s-typescript-builder": ^2.0.0-alpha.20
     "@coffeekraken/s-view-renderer": ^2.0.0-alpha.20
@@ -21058,16 +21061,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-ipc@npm:^11.1.0":
-  version: 11.1.0
-  resolution: "node-ipc@npm:11.1.0"
+"node-ipc@npm:^10.0.0":
+  version: 10.1.0
+  resolution: "node-ipc@npm:10.1.0"
   dependencies:
     event-pubsub: 5.0.3
     js-message: 1.0.7
     js-queue: 2.0.2
-    peacenotwar: ^9.1.5
     strong-type: ^1.0.1
-  checksum: aa50dfe2f8edcfef59b46add7d7865f6a1ae150a58f2abdbca048308e32fb92d00787fdc293d0079e7637083aaa514dd8b724f366cf8f23a6efa904fb0f1469a
+  checksum: 4883efae8205db37d0b539b7c63b8b210826dabfecd586698a53837e8c077404ccbe5b04dce1775c045167a3128d0b78aed27f32b03aab62dcb1c892cb3d2f46
   languageName: node
   linkType: hard
 
@@ -22147,7 +22149,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"peacenotwar@npm:^9.1.5":
+"peacenotwar@npm:^9.1.7":
   version: 9.1.7
   resolution: "peacenotwar@npm:9.1.7"
   checksum: cab3aa517282df1bab0ca55fe5469b918db5481e8ad59a06fd4c4ebd92767083f535ec65584bc43ad7b33151d74413a99b8ba3adbf170070174581b3f32dfb1c

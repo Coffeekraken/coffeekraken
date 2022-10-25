@@ -648,8 +648,8 @@ export default class SVite extends __SClass {
                     __packageRootDir(),
                     finalParams.dir,
                 )}" --config ${configPath} --root ${__packageRootDir()} --passWithNoTests --dom --globals ${
-                    finalParams.watch ? '--watch' : '--run'
-                }`;
+                    finalParams.watch ? '--watch --changed' : '--run'
+                } --ui --open`;
 
                 // run the test
                 const pro = __childProcess.spawn(command, [], {

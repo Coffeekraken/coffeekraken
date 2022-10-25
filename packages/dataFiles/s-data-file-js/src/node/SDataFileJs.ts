@@ -1,6 +1,7 @@
 // @ts-nocheck
 
 import __SPromise from '@coffeekraken/s-promise';
+import { __readJsonSync } from '@coffeekraken/sugar/fs';
 import { __uniqid } from '@coffeekraken/sugar/string';
 
 /**
@@ -47,16 +48,13 @@ export default class SDataHandlerJs {
      */
     static load(filePath) {
         return new __SPromise(async ({ resolve }) => {
-            let settings = {};
-            if (filePath.match(/\.json$/)) {
-                settings = { assert: { type: 'json' } };
-            }
-            let finalFilePath = filePath;
-
             // import the newly created file
-            let data = (
-                await import(`${finalFilePath}?${__uniqid()}`, settings)
-            ).default;
+            let data = {};
+            if (filePath.match(/\.json$/)) {
+                data = __readJsonSync(filePath);
+            } else {
+                data = (await import(`${filePath}?${__uniqid()}`)).default;
+            }
             if (typeof data === 'function') data = await data();
 
             resolve(data);

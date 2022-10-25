@@ -7,16 +7,18 @@ export default function (api) {
                 ...(api.config.specs.namespaces?.['sugar.views'] ?? []),
                 `./node_modules/@coffeekraken/sugar/src/views/_specs`,
             ],
-            'sugar.bare': [
-                ...(api.config.specs.namespaces?.['sugar.bare'] ?? []),
+            'sugar.views.bare': [
+                ...(api.config.specs.namespaces?.['sugar.views.bare'] ?? []),
                 `./node_modules/@coffeekraken/sugar/src/views/_specs/bare`,
             ],
-            'sugar.sections': [
-                ...(api.config.specs.namespaces?.['sugar.sections'] ?? []),
+            'sugar.views.sections': [
+                ...(api.config.specs.namespaces?.['sugar.views.sections'] ??
+                    []),
                 `./node_modules/@coffeekraken/sugar/src/views/_specs/sections`,
             ],
-            'sugar.components': [
-                ...(api.config.specs.namespaces?.['sugar.components'] ?? []),
+            'sugar.views.components': [
+                ...(api.config.specs.namespaces?.['sugar.views.components'] ??
+                    []),
                 `./node_modules/@coffeekraken/sugar/src/views/_specs/components`,
             ],
         },

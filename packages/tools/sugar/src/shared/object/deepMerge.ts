@@ -16,9 +16,12 @@ import __isPlainObject from '../is/isPlainObject';
  *
  * @param           {Object}            args...        Pass all the objects you want to merge
  * @param           {Object}            [settings={}]       Pass as last object the settings one that can contain these properties:
- * - object (true) {Boolean}: Specify if you want to merge the objects
- * - array (false) {Boolean}: Specify if you want to merge the arrays
  * @return          {Object}                              The merged object result
+ *
+ * @setting         {Boolean}           [mergeArray=false]      Merge or not arrays
+ *
+ * @feature         Support array merging by passing the last parameter as the { mergeArray: true } object
+ * @feature         Support merging object with getters. Can access the source object from the second object property getter using the `this.$source` property
  *
  * @todo      interface
  * @todo      doc
@@ -32,7 +35,28 @@ import __isPlainObject from '../is/isPlainObject';
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
+export interface IDeepMergeSettings {
+    mergeArray?: boolean;
+    // mergeGetterSource: boolean;
+}
+
 export default function __deepMerge(...args) {
+    let finalSettings: IDeepMergeSettings = {
+        mergeArray: false,
+    };
+    // const potentialSettings = args[args.length - 1];
+    // if (
+    //     potentialSettings?.mergeArray !== undefined ||
+    //     potentialSettings?.mergeGetterSource !== undefined
+    // ) {
+    //     finalSettings = {
+    //         ...finalSettings,
+    //         ...potentialSettings,
+    //     };
+    //     // remove the settings object from the merge process
+    //     args = args.slice(0, -1);
+    // }
+
     function merge(firstObj, secondObj) {
         const newObj = {};
         if (!firstObj && secondObj) return secondObj;
@@ -49,15 +73,69 @@ export default function __deepMerge(...args) {
             }
         });
 
+        // delete newObj.$source;
+        // if (!newObj.$source) {
+        //     Object.defineProperty(newObj, '$source', {
+        //         enumerable: false,
+        //         configurable: false,
+        //         value: firstObj,
+        //     });
+        // }
+        // Object.defineProperty(secondObj, 'plop', {
+        //     value: 'yop',
+        // });
+
         const secondProps = Object.getOwnPropertyNames(secondObj);
         secondProps.forEach((key) => {
+            // if (finalSettings.mergeGetterSource && key === '$source') {
+            //     return;
+            // }
+
             const secondObjDesc = Object.getOwnPropertyDescriptor(
                 secondObj,
                 key,
             );
 
+            // const secondObjValue = secondObj[key];
+
+            // delete secondObj[key];
+            // Object.defineProperty(secondObj, key, {
+            //     configurable: true,
+            //     writable: true,
+            //     value: secondObjValue,
+            //     // get() {
+            //     //     console.log('GET', key);
+            //     //     return secondObjValue;
+            //     // },
+            // });
+
+            // secondObjDesc.$source = secondObj.$source;
+
             if (secondObjDesc.set || secondObjDesc.get) {
+                // const v = secondObj[key];
+                // Object.defineProperty(newObj, key, {
+                //     enumerable: true,
+                //     writable: true,
+                //     get() {
+                //         console.log('GET', key, v);
+                //         return v;
+                //     },
+                // });
+
+                // if (finalSettings.mergeGetterSource) {
+                //     Object.defineProperty(newObj, '$source', {
+                //         enumerable: false,
+                //         value: firstObj,
+                //     });
+                // }
+
                 Object.defineProperty(newObj, key, secondObjDesc);
+            } else if (
+                finalSettings.mergeArray &&
+                Array.isArray(firstObj[key]) &&
+                Array.isArray(secondObj[key])
+            ) {
+                newObj[key] = [...firstObj[key], ...secondObj[key]];
             } else if (
                 __isPlainObject(newObj[key]) &&
                 __isPlainObject(secondObj[key])

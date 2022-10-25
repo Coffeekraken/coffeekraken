@@ -80,7 +80,7 @@ export default function ({
     ) {
         vars.comment(
             `/**
-            * @name           .s-code-example:not(.bare)
+            * @name           .s-code-example[lnf="default"]
             * @namespace          sugar.style.ui.codeExample
             * @type           CssClass
             * 
@@ -97,7 +97,7 @@ export default function ({
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
         ).code(
-            `.s-code-example:not(.bare) {
+            `.s-code-example[lnf="default"] {
                 @sugar.ui.codeExample($style: ${finalParams.defaultStyle}, $scope: lnf);
             }`,
             {
@@ -109,7 +109,7 @@ export default function ({
     if (finalParams.scope.includes('theme')) {
         vars.code(
             `
-            .s-code-example:not(.bare) {
+            .s-code-example {
                 @sugar.highlightjs.theme;
             }
         `,
@@ -123,7 +123,7 @@ export default function ({
     if (finalParams.scope.includes('lnf')) {
         vars.code(
             () => `
-            .s-code-example:not(.bare):not(.s-color) {
+            .s-code-example:not(.s-color) {
                 @sugar.color(${finalParams.defaultColor});
             }
         `,

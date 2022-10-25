@@ -37,6 +37,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
+const fs_1 = require("@coffeekraken/sugar/fs");
 const string_1 = require("@coffeekraken/sugar/string");
 /**
  * @name          SDataFileJs
@@ -69,13 +70,14 @@ class SDataHandlerJs {
      */
     static load(filePath) {
         return new s_promise_1.default(({ resolve }) => __awaiter(this, void 0, void 0, function* () {
-            let settings = {};
-            if (filePath.match(/\.json$/)) {
-                settings = { assert: { type: 'json' } };
-            }
-            let finalFilePath = filePath;
             // import the newly created file
-            let data = (yield Promise.resolve().then(() => __importStar(require(`${finalFilePath}?${(0, string_1.__uniqid)()}`)))).default;
+            let data = {};
+            if (filePath.match(/\.json$/)) {
+                data = (0, fs_1.__readJsonSync)(filePath);
+            }
+            else {
+                data = (yield Promise.resolve().then(() => __importStar(require(`${filePath}?${(0, string_1.__uniqid)()}`)))).default;
+            }
             if (typeof data === 'function')
                 data = yield data();
             resolve(data);
@@ -95,4 +97,4 @@ exports.default = SDataHandlerJs;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 SDataHandlerJs.extensions = ['js', 'json'];
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBRWQsd0VBQWlEO0FBQ2pELHVEQUFzRDtBQUV0RDs7Ozs7Ozs7Ozs7Ozs7R0FjRztBQUNILE1BQXFCLGNBQWM7SUFjL0I7Ozs7Ozs7Ozs7OztPQVlHO0lBQ0gsTUFBTSxDQUFDLElBQUksQ0FBQyxRQUFRO1FBQ2hCLE9BQU8sSUFBSSxtQkFBVSxDQUFDLENBQU8sRUFBRSxPQUFPLEVBQUUsRUFBRSxFQUFFO1lBQ3hDLElBQUksUUFBUSxHQUFHLEVBQUUsQ0FBQztZQUNsQixJQUFJLFFBQVEsQ0FBQyxLQUFLLENBQUMsU0FBUyxDQUFDLEVBQUU7Z0JBQzNCLFFBQVEsR0FBRyxFQUFFLE1BQU0sRUFBRSxFQUFFLElBQUksRUFBRSxNQUFNLEVBQUUsRUFBRSxDQUFDO2FBQzNDO1lBQ0QsSUFBSSxhQUFhLEdBQUcsUUFBUSxDQUFDO1lBRTdCLGdDQUFnQztZQUNoQyxJQUFJLElBQUksR0FBRyxDQUNQLHdEQUFhLEdBQUcsYUFBYSxJQUFJLElBQUEsaUJBQVEsR0FBRSxFQUFFLEdBQVcsQ0FDM0QsQ0FBQyxPQUFPLENBQUM7WUFDVixJQUFJLE9BQU8sSUFBSSxLQUFLLFVBQVU7Z0JBQUUsSUFBSSxHQUFHLE1BQU0sSUFBSSxFQUFFLENBQUM7WUFFcEQsT0FBTyxDQUFDLElBQUksQ0FBQyxDQUFDO1FBQ2xCLENBQUMsQ0FBQSxDQUFDLENBQUM7SUFDUCxDQUFDOztBQTNDTCxpQ0E0Q0M7QUEzQ0c7Ozs7Ozs7Ozs7R0FVRztBQUNJLHlCQUFVLEdBQUcsQ0FBQyxJQUFJLEVBQUUsTUFBTSxDQUFDLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBRWQsd0VBQWlEO0FBQ2pELCtDQUF3RDtBQUN4RCx1REFBc0Q7QUFFdEQ7Ozs7Ozs7Ozs7Ozs7O0dBY0c7QUFDSCxNQUFxQixjQUFjO0lBYy9COzs7Ozs7Ozs7Ozs7T0FZRztJQUNILE1BQU0sQ0FBQyxJQUFJLENBQUMsUUFBUTtRQUNoQixPQUFPLElBQUksbUJBQVUsQ0FBQyxDQUFPLEVBQUUsT0FBTyxFQUFFLEVBQUUsRUFBRTtZQUN4QyxnQ0FBZ0M7WUFDaEMsSUFBSSxJQUFJLEdBQUcsRUFBRSxDQUFDO1lBQ2QsSUFBSSxRQUFRLENBQUMsS0FBSyxDQUFDLFNBQVMsQ0FBQyxFQUFFO2dCQUMzQixJQUFJLEdBQUcsSUFBQSxtQkFBYyxFQUFDLFFBQVEsQ0FBQyxDQUFDO2FBQ25DO2lCQUFNO2dCQUNILElBQUksR0FBRyxDQUFDLHdEQUFhLEdBQUcsUUFBUSxJQUFJLElBQUEsaUJBQVEsR0FBRSxFQUFFLEdBQUMsQ0FBQyxDQUFDLE9BQU8sQ0FBQzthQUM5RDtZQUNELElBQUksT0FBTyxJQUFJLEtBQUssVUFBVTtnQkFBRSxJQUFJLEdBQUcsTUFBTSxJQUFJLEVBQUUsQ0FBQztZQUVwRCxPQUFPLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDbEIsQ0FBQyxDQUFBLENBQUMsQ0FBQztJQUNQLENBQUM7O0FBeENMLGlDQXlDQztBQXhDRzs7Ozs7Ozs7OztHQVVHO0FBQ0kseUJBQVUsR0FBRyxDQUFDLElBQUksRUFBRSxNQUFNLENBQUMsQ0FBQyJ9

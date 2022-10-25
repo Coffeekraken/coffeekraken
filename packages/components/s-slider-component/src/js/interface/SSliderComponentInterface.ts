@@ -21,23 +21,6 @@ import { __easeOutQuad } from '@coffeekraken/sugar/easing';
  */
 
 export default class SSliderComponentInterface extends __SInterface {
-    static get _specs() {
-        return {
-            preview: `
-                <s-slider>
-                    <div s-slider-slide>
-                        <img src="https://picsum.photos/1600/900?1" />
-                    </div>
-                    <div s-slider-slide>
-                        <img src="https://picsum.photos/1600/900?2" />
-                    </div>
-                    <div s-slider-slide>
-                        <img src="https://picsum.photos/1600/900?3" />
-                    </div>
-                </s-slider>
-            `,
-        };
-    }
     static get _definition() {
         return {
             direction: {
@@ -51,7 +34,6 @@ export default class SSliderComponentInterface extends __SInterface {
             behaviors: {
                 description: 'Specify the available behaviors for the slider',
                 type: 'Object',
-                default: {},
             },
             behavior: {
                 description:
@@ -64,18 +46,16 @@ export default class SSliderComponentInterface extends __SInterface {
             nextIconClass: {
                 description: 'Specify the class of the next icon',
                 type: 'String',
-                default: 's-icon:arrow-right',
             },
             previousIconClass: {
                 description: 'Specify the class of the previous icon',
                 type: 'String',
-                default: 's-icon:arrow-left',
             },
             controls: {
                 description:
                     'Specify if you want to display the controls or not. Controls are the previous and next icons',
                 type: 'Boolean',
-                default: true,
+                default: false,
             },
             nav: {
                 description:
@@ -151,12 +131,6 @@ export default class SSliderComponentInterface extends __SInterface {
                 description:
                     'Specify a function that will take care of transitioning the slider from the current item to the next/previous',
                 type: 'Function',
-            },
-            cssDeps: {
-                description:
-                    'Specify some css url(s) or link tag id(s) to inject into the shadowRoot of the component',
-                type: 'String[]',
-                default: ['slider'],
             },
         };
     }

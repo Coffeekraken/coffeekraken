@@ -76,6 +76,7 @@ export interface ISConfigSettings {
     env: ISConfigEnvObj;
     cache: boolean;
     updateTimeout: number;
+    loadTimeout: number;
     throwErrorOnUndefinedConfig: boolean;
     // resolvers: ISConfigResolverObj[];
 }
@@ -232,6 +233,7 @@ export default class SConfig {
                 },
                 cache: true,
                 updateTimeout: 500,
+                loadTimeout: 5000,
                 throwErrorOnUndefinedConfig: true,
             },
             settings,
@@ -279,6 +281,12 @@ export default class SConfig {
             clean: false,
             ...(settings ?? {}),
         };
+
+        const loadTimeout = setTimeout(() => {
+            throw new Error(
+                `[SConfig.load] It seem's that your configuration take too long to load. Either do something about that or increase the SConfig "<yellow>loadTimeout</yellow>" setting...`,
+            );
+        }, this.settings.loadTimeout);
 
         // get the config integrity from the adapter
         this.integrity = await this.adapter.integrity();
@@ -401,6 +409,9 @@ export default class SConfig {
                 return true;
             });
         }
+
+        // clear the load timeout
+        clearTimeout(loadTimeout);
 
         // return the config
         return this.config;

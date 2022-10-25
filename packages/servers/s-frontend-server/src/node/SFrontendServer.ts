@@ -164,6 +164,8 @@ export default class SFrontendServer extends __SClass {
                             : '',
                 };
 
+                this._express.use(__bodyParser.json({ limit: '120mb' }));
+
                 this._express.use((req, res, next) => {
                     if (!res.templateData) res.templateData = {};
                     if (!res.templateData.shared) res.templateData.shared = {};
@@ -190,6 +192,11 @@ export default class SFrontendServer extends __SClass {
                     } else {
                         next();
                     }
+                });
+
+                // viewRendererMiddleware
+                this._express.use((req, res, next) => {
+                    pipe(__viewRendererMiddleware()(req, res, next));
                 });
 
                 if (this._config.modules) {
@@ -281,15 +288,10 @@ export default class SFrontendServer extends __SClass {
                         // register the middleware inside the express configuration
                         // @ts-ignore
                         this._express.use((req, res, next) => {
-                            return pipe(middleware(req, res, next));
+                            pipe(middleware(req, res, next));
                         });
                     }
                 }
-
-                // viewRendererMiddleware
-                this._express.use((req, res, next) => {
-                    return pipe(__viewRendererMiddleware()(req, res, next));
-                });
 
                 // logging requests
                 if (logLevelInt >= 4) {

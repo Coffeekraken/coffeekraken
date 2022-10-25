@@ -1,8 +1,7 @@
 import __SBench from '@coffeekraken/s-bench';
+import __SCarpenter from '@coffeekraken/s-carpenter';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSpecs from '@coffeekraken/s-specs';
-import __SViewRenderer from '@coffeekraken/s-view-renderer';
-import __SCarpenter from '@coffeekraken/s-carpenter';
 
 export default function carpenterHandler({ req, res, pageConfig }) {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
@@ -18,9 +17,12 @@ export default function carpenterHandler({ req, res, pageConfig }) {
         const carpenterInstance = new __SCarpenter();
         const carpenterSpecs = await carpenterInstance.loadSpecs();
 
+        const viewPath =
+            currentSpecs.viewPath ?? req.params.dotpath.replace(/^views\./, '');
+
         // render the current component/section, etc...
         const currentViewResult = await res.viewRenderer.render(
-            currentSpecs.viewPath,
+            viewPath,
             currentSpecs.metas.path,
         );
 

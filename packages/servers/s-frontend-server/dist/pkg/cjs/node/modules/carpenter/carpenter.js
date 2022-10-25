@@ -12,9 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const s_data_file_generic_1 = __importDefault(require("@coffeekraken/s-data-file-generic"));
 const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
+const s_specs_1 = __importDefault(require("@coffeekraken/s-specs"));
 const fs_1 = require("@coffeekraken/sugar/fs");
-function carpenter(express, settings, config) {
+const object_1 = require("@coffeekraken/sugar/object");
+function carpenter(app, settings, config) {
     return new s_promise_1.default(({ resolve, reject, emit, pipe }) => __awaiter(this, void 0, void 0, function* () {
         // handlers
         config.handlers.carpenterJson = {
@@ -38,8 +41,27 @@ function carpenter(express, settings, config) {
             slugs: ['/carpenter', '/carpenter/:dotpath'],
             handler: 'carpenter',
         };
+        app.post('/carpenter/:dotpath', (req, res) => __awaiter(this, void 0, void 0, function* () {
+            var _a, _b;
+            // read the requested spec file
+            const specsInstance = new s_specs_1.default(), specs = yield specsInstance.read(req.params.dotpath, {
+                loadDataFile: true,
+            });
+            // take in consideration the optional "viewPath" property in the spec file
+            const viewPath = (_a = specs.viewPath) !== null && _a !== void 0 ? _a : req.params.dotpath.replace(/^views\./, '');
+            // load the original data file alongside the spec one
+            let originalData = {};
+            if (specs.metas.path) {
+                originalData = yield s_data_file_generic_1.default.load(specs.metas.path);
+            }
+            // render the view with the merged data
+            const result = yield res.viewRenderer.render(viewPath, (0, object_1.__deepMerge)(originalData, (_b = req.body) !== null && _b !== void 0 ? _b : {}));
+            res.status(200);
+            res.type('text/html');
+            res.send(result.value);
+        }));
         resolve(true);
     }));
 }
 exports.default = carpenter;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsd0VBQWlEO0FBQ2pELCtDQUFtRDtBQUVuRCxTQUF3QixTQUFTLENBQUMsT0FBTyxFQUFFLFFBQVEsRUFBRSxNQUFNO0lBQ3ZELE9BQU8sSUFBSSxtQkFBVSxDQUFDLENBQU8sRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRSxJQUFJLEVBQUUsRUFBRSxFQUFFO1FBQzVELFdBQVc7UUFDWCxNQUFNLENBQUMsUUFBUSxDQUFDLGFBQWEsR0FBRztZQUM1QixXQUFXLEVBQUUsa0NBQWtDO1lBQy9DLElBQUksRUFBRSxHQUFHLElBQUEsY0FBUyxHQUFFLHVCQUF1QjtZQUMzQyxPQUFPLEVBQUUsRUFBRTtTQUNkLENBQUM7UUFDRixNQUFNLENBQUMsUUFBUSxDQUFDLFNBQVMsR0FBRztZQUN4QixXQUFXLEVBQ1AsNkRBQTZEO1lBQ2pFLElBQUksRUFBRSxHQUFHLElBQUEsY0FBUyxHQUFFLG1CQUFtQjtZQUN2QyxPQUFPLEVBQUUsRUFBRTtTQUNkLENBQUM7UUFFRixRQUFRO1FBQ1IsTUFBTSxDQUFDLEtBQUssQ0FBQyxhQUFhLEdBQUc7WUFDekIsV0FBVyxFQUFFLGtDQUFrQztZQUMvQyxLQUFLLEVBQUUsQ0FBQyxpQkFBaUIsQ0FBQztZQUMxQixPQUFPLEVBQUUsZUFBZTtTQUMzQixDQUFDO1FBRUYsTUFBTSxDQUFDLEtBQUssQ0FBQyxTQUFTLEdBQUc7WUFDckIsV0FBVyxFQUNQLDZEQUE2RDtZQUNqRSxLQUFLLEVBQUUsQ0FBQyxZQUFZLEVBQUUscUJBQXFCLENBQUM7WUFDNUMsT0FBTyxFQUFFLFdBQVc7U0FDdkIsQ0FBQztRQUVGLE9BQU8sQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUNsQixDQUFDLENBQUEsQ0FBQyxDQUFDO0FBQ1AsQ0FBQztBQS9CRCw0QkErQkMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsNEZBQW1FO0FBQ25FLHdFQUFpRDtBQUNqRCxvRUFBNkM7QUFDN0MsK0NBQW1EO0FBQ25ELHVEQUF5RDtBQUV6RCxTQUF3QixTQUFTLENBQUMsR0FBRyxFQUFFLFFBQVEsRUFBRSxNQUFNO0lBQ25ELE9BQU8sSUFBSSxtQkFBVSxDQUFDLENBQU8sRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRSxJQUFJLEVBQUUsRUFBRSxFQUFFO1FBQzVELFdBQVc7UUFDWCxNQUFNLENBQUMsUUFBUSxDQUFDLGFBQWEsR0FBRztZQUM1QixXQUFXLEVBQUUsa0NBQWtDO1lBQy9DLElBQUksRUFBRSxHQUFHLElBQUEsY0FBUyxHQUFFLHVCQUF1QjtZQUMzQyxPQUFPLEVBQUUsRUFBRTtTQUNkLENBQUM7UUFDRixNQUFNLENBQUMsUUFBUSxDQUFDLFNBQVMsR0FBRztZQUN4QixXQUFXLEVBQ1AsNkRBQTZEO1lBQ2pFLElBQUksRUFBRSxHQUFHLElBQUEsY0FBUyxHQUFFLG1CQUFtQjtZQUN2QyxPQUFPLEVBQUUsRUFBRTtTQUNkLENBQUM7UUFFRixRQUFRO1FBQ1IsTUFBTSxDQUFDLEtBQUssQ0FBQyxhQUFhLEdBQUc7WUFDekIsV0FBVyxFQUFFLGtDQUFrQztZQUMvQyxLQUFLLEVBQUUsQ0FBQyxpQkFBaUIsQ0FBQztZQUMxQixPQUFPLEVBQUUsZUFBZTtTQUMzQixDQUFDO1FBRUYsTUFBTSxDQUFDLEtBQUssQ0FBQyxTQUFTLEdBQUc7WUFDckIsV0FBVyxFQUNQLDZEQUE2RDtZQUNqRSxLQUFLLEVBQUUsQ0FBQyxZQUFZLEVBQUUscUJBQXFCLENBQUM7WUFDNUMsT0FBTyxFQUFFLFdBQVc7U0FDdkIsQ0FBQztRQUVGLEdBQUcsQ0FBQyxJQUFJLENBQUMscUJBQXFCLEVBQUUsQ0FBTyxHQUFHLEVBQUUsR0FBRyxFQUFFLEVBQUU7O1lBQy9DLCtCQUErQjtZQUMvQixNQUFNLGFBQWEsR0FBRyxJQUFJLGlCQUFRLEVBQUUsRUFDaEMsS0FBSyxHQUFHLE1BQU0sYUFBYSxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsTUFBTSxDQUFDLE9BQU8sRUFBRTtnQkFDakQsWUFBWSxFQUFFLElBQUk7YUFDckIsQ0FBQyxDQUFDO1lBRVAsMEVBQTBFO1lBQzFFLE1BQU0sUUFBUSxHQUNWLE1BQUEsS0FBSyxDQUFDLFFBQVEsbUNBQUksR0FBRyxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDLFVBQVUsRUFBRSxFQUFFLENBQUMsQ0FBQztZQUVqRSxxREFBcUQ7WUFDckQsSUFBSSxZQUFZLEdBQUcsRUFBRSxDQUFDO1lBQ3RCLElBQUksS0FBSyxDQUFDLEtBQUssQ0FBQyxJQUFJLEVBQUU7Z0JBQ2xCLFlBQVksR0FBRyxNQUFNLDZCQUFrQixDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxDQUFDO2FBQ2xFO1lBRUQsdUNBQXVDO1lBQ3ZDLE1BQU0sTUFBTSxHQUFHLE1BQU0sR0FBRyxDQUFDLFlBQVksQ0FBQyxNQUFNLENBQ3hDLFFBQVEsRUFDUixJQUFBLG9CQUFXLEVBQUMsWUFBWSxFQUFFLE1BQUEsR0FBRyxDQUFDLElBQUksbUNBQUksRUFBRSxDQUFDLENBQzVDLENBQUM7WUFFRixHQUFHLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxDQUFDO1lBQ2hCLEdBQUcsQ0FBQyxJQUFJLENBQUMsV0FBVyxDQUFDLENBQUM7WUFDdEIsR0FBRyxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLENBQUM7UUFDM0IsQ0FBQyxDQUFBLENBQUMsQ0FBQztRQUVILE9BQU8sQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUNsQixDQUFDLENBQUEsQ0FBQyxDQUFDO0FBQ1AsQ0FBQztBQTNERCw0QkEyREMifQ==

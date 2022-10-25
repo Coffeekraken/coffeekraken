@@ -1,4 +1,9 @@
 describe('SEventEmitter.shared.SEventEmitter', () => {
+    it('Should tests be implemeded', () => {
+        // @TODO        implement tests
+        expect(true).toBe(true);
+    });
+
     // it('Should emit an event correctly', async () => {
     //     const emitter1 = new __SEventEmitter(),
     //         emitter2 = new __SEventEmitter(),

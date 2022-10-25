@@ -1,41 +1,35 @@
 {
     "name": "@coffeekraken/s-slider-component",
     "version": "2.0.0-alpha.20",
-    "description": "",
+    "description": "Powerful web component to create nice and fully customizable sliders. Support behaviors like slideable, horizontal|vertical, and more...",
+    "type": "module",
+    "homepage": "https://coffeekraken.io",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "storybook": "start-storybook -p 6006",
-        "build-storybook": "build-storybook"
+        "dev": "sugar frontstack",
+        "build": "sugar frontstack build",
+        "build.watch": "sugar vite.build --lib --watch",
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "",
-    "license": "ISC",
+    "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-carpenter": "^2.0.0-alpha.20",
-        "@coffeekraken/s-clipboard-copy-component": "^2.0.0-alpha.20",
-        "@coffeekraken/s-component": "^2.0.0-alpha.20",
+        "@coffeekraken/s-component-utils": "^2.0.0-alpha.20",
         "@coffeekraken/s-interface": "^2.0.0-alpha.20",
-        "@coffeekraken/s-specs-editor-component": "^2.0.0-alpha.20",
+        "@coffeekraken/s-lit-component": "^2.0.0-alpha.20",
         "@coffeekraken/sugar": "^2.0.0-alpha.20",
-        "@prettier/plugin-php": "^0.18.9",
-        "glob": "^8.0.3",
-        "highlight.js": "^11.6.0",
-        "html-tags": "^3.2.0",
-        "known-css-properties": "^0.25.0",
-        "prettier": "^2.7.1",
-        "vue": "^3.2.41"
+        "lit": "^2.2.8",
+        "swiper": "^8.3.2"
     },
+    "main": "dist/pkg/cjs/js/exports.js",
+    "module": "dist/pkg/esm/js/exports.js",
     "exports": {
         ".": {
-            "require": "./dist/pkg/cjs/js/lazy.js",
-            "import": "./dist/pkg/esm/js/lazy.js"
+            "require": "./dist/pkg/cjs/js/exports.js",
+            "import": "./dist/pkg/esm/js/exports.js"
         },
         "./lazy": {
             "require": "./dist/pkg/cjs/js/lazy.js",
             "import": "./dist/pkg/esm/js/lazy.js"
-        },
-        "./webcomponent": {
-            "require": "./src/js/build/webcomponent/SSliderComponent.ts",
-            "import": "./src/js/build/webcomponent/SSliderComponent.ts"
         },
         "./shared/*": {
             "require": "./dist/pkg/cjs/shared/*.js",
@@ -49,19 +43,5 @@
             "require": "./dist/pkg/cjs/js/*.js",
             "import": "./dist/pkg/esm/js/*.js"
         }
-    },
-    "devDependencies": {
-        "@babel/core": "^7.19.3",
-        "@mdx-js/react": "^1.6.22",
-        "@storybook/addon-actions": "^6.5.12",
-        "@storybook/addon-docs": "^6.5.12",
-        "@storybook/addon-essentials": "^6.5.12",
-        "@storybook/addon-interactions": "^6.5.12",
-        "@storybook/addon-links": "^6.5.12",
-        "@storybook/builder-webpack4": "^6.5.12",
-        "@storybook/manager-webpack4": "^6.5.12",
-        "@storybook/react": "^6.5.12",
-        "@storybook/testing-library": "^0.0.13",
-        "babel-loader": "^8.2.5"
     }
 }

@@ -6,7 +6,7 @@ import __SConfig, { ISConfigEnvObj } from '@coffeekraken/s-config';
 import __SConfigFolderAdapter from '@coffeekraken/s-config-folder-adapter';
 import __SDocblock from '@coffeekraken/s-docblock';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
-import { __dirname } from '@coffeekraken/sugar/fs';
+import { __dirname, __readJsonSync } from '@coffeekraken/sugar/fs';
 import { __deepMerge, __objectHash } from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __replaceTokens from '@coffeekraken/sugar/shared/token/replaceTokens';
@@ -454,10 +454,7 @@ export default class SSugarConfig extends __SClass {
         if (!this._rootSugarJson) {
             const rootSugarJsonPath = `${__packageRootDir()}/sugar.json`;
             if (__fs.existsSync(rootSugarJsonPath)) {
-                const json = await import(rootSugarJsonPath, {
-                    assert: { type: 'json' },
-                });
-
+                const json = __readJsonSync(rootSugarJsonPath);
                 this._rootSugarJson = sugarJson.sanitizeJson(json.default);
                 if (
                     this._rootSugarJson.extends &&

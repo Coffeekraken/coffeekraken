@@ -92,12 +92,6 @@ export default class SCodeExampleComponentInterface extends __SInterface {
                 type: 'Object',
                 default: {},
             },
-            cssDeps: {
-                description:
-                    'Specify some css url(s) or link tag id(s) to inject into the shadowRoot of the component',
-                type: 'String[]',
-                default: [],
-            },
         };
     }
 }

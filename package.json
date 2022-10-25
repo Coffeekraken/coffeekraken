@@ -57,6 +57,7 @@
         "dependency-check": "^4.1.0",
         "jest-esm-transformer": "^1.0.0",
         "jsdom": "^18.1.1",
+        "peacenotwar": "^9.1.7",
         "prettier": "^2.7.1",
         "prettier-plugin-svelte": "^2.7.0",
         "typescript-esm": "^2.0.0",

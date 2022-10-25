@@ -29,6 +29,13 @@ export default class SCarpenterComponentInterface extends __SInterface {
                 default: '/carpenter.json',
                 required: true,
             },
+            adapter: {
+                type: 'String',
+                description:
+                    'Specify the adapter to use in order to apply the updated properties on a component/section/etc... Must be a registered adapter id',
+                default: 'ajax',
+                required: true,
+            },
         };
     }
 }

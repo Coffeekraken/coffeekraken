@@ -6,17 +6,16 @@ interface ILazyDefineSettings {
 }
 
 export function define(
-    props = {},
-    tagName = 's-inline',
+    props,
+    tagName = 's-code-example',
     settings: Partial<ILazyDefineSettings> = {},
 ) {
     __querySelectorLive(
         tagName,
-        async ($elm) => {
-            const { define } = await import(
-                '../../../js/webcomponent/src/js/SCodeExampleComponent'
-            );
-            define(props, tagName);
+        async ($elm, api) => {
+            // api.cancel();§
+            const define = await import('./define');
+            define.default(props, tagName);
         },
         {
             when: settings.when ?? 'nearViewport',

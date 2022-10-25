@@ -6,14 +6,17 @@ import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import __SLog from '@coffeekraken/s-log';
 import type { ISStdio } from '@coffeekraken/s-stdio';
 import __SStdio from '@coffeekraken/s-stdio';
-import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 import { __sugarBanner } from '@coffeekraken/sugar/ascii';
 import { __parseArgs } from '@coffeekraken/sugar/cli';
 import { __parseHtml } from '@coffeekraken/sugar/console';
 import { __wait } from '@coffeekraken/sugar/datetime';
-import { __dirname, __writeFileSync } from '@coffeekraken/sugar/fs';
+import {
+    __dirname,
+    __readJsonSync,
+    __writeFileSync,
+} from '@coffeekraken/sugar/fs';
 import { __isChildProcess } from '@coffeekraken/sugar/is';
 import { __packageJsonSync } from '@coffeekraken/sugar/package';
 import {
@@ -466,17 +469,11 @@ export default class SSugarCli {
         for (let i = 0; i < Object.keys(this._sugarJsons).length; i++) {
             const packageName = Object.keys(this._sugarJsons)[i];
             const sugarJson = this._sugarJsons[packageName];
-            const packageJson = (
-                await import(
-                    sugarJson.metas.path.replace(
-                        '/sugar.json',
-                        '/package.json',
-                    ),
-                    {
-                        assert: { type: 'json' },
-                    }
-                )
-            ).default;
+
+            const packageJson = __readJsonSync(
+                sugarJson.metas.path.replace('/sugar.json', '/package.json'),
+            );
+
             if (!sugarJson.cli) continue;
             sugarJson.cli.forEach((cliObj) => {
                 if (!cliObj.actions) {

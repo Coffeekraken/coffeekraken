@@ -1,7 +1,8 @@
+import { __readJsonSync } from '@coffeekraken/sugar/fs';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
 import __path from 'path';
 import __yaml from 'yaml';
-import { __packageRootDir } from '@coffeekraken/sugar/path';
 
 /**
  * @name            loadConfigFile
@@ -72,20 +73,14 @@ export default async function __loadConfigFile(
                 ',',
             )}" does exists...`,
         );
-    } else if (!finalFilePath) return;
+    } else if (!finalFilePath) return {};
 
     const extension = finalFilePath.split('.').pop();
     let str;
     switch (extension) {
         case 'json':
-            return (
-                // @ts-ignore
-                (
-                    await import(
-                        __path.resolve(finalSettings.rootDir, finalFilePath),
-                        { assert: { type: 'json' } }
-                    )
-                ).default
+            return __readJsonSync(
+                __path.resolve(finalSettings.rootDir, finalFilePath),
             );
             break;
         case 'js':

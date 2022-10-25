@@ -27,9 +27,7 @@ export default class SViewRendererSettingsInterface extends __SInterface {
                 description:
                     'Specify some folder paths where to search for views',
                 type: 'String[]',
-                default: Object.values(
-                    __SSugarConfig.get('viewRenderer.rootDirs'),
-                ),
+                default: __SSugarConfig.get('viewRenderer.rootDirs'),
             },
             cacheDir: {
                 description: 'Specigy the folder to store the engines cache',

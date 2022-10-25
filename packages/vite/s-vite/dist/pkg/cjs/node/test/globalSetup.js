@@ -13,7 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const s_sugar_config_1 = __importDefault(require("@coffeekraken/s-sugar-config"));
-beforeEach(() => __awaiter(void 0, void 0, void 0, function* () {
-    yield s_sugar_config_1.default.load();
-}));
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsa0ZBQTBEO0FBRTFELFVBQVUsQ0FBQyxHQUFTLEVBQUU7SUFDbEIsTUFBTSx3QkFBYyxDQUFDLElBQUksRUFBRSxDQUFDO0FBQ2hDLENBQUMsQ0FBQSxDQUFDLENBQUMifQ==
+beforeAll(function () {
+    return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
+        yield s_sugar_config_1.default.load();
+        resolve();
+    }));
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsa0ZBQTBEO0FBRTFELFNBQVMsQ0FBQztJQUNOLE9BQU8sSUFBSSxPQUFPLENBQUMsQ0FBTyxPQUFPLEVBQUUsRUFBRTtRQUNqQyxNQUFNLHdCQUFjLENBQUMsSUFBSSxFQUFFLENBQUM7UUFDNUIsT0FBTyxFQUFFLENBQUM7SUFDZCxDQUFDLENBQUEsQ0FBQyxDQUFDO0FBQ1AsQ0FBQyxDQUFDLENBQUMifQ==

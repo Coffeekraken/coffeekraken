@@ -42,7 +42,10 @@ import __path from 'path';
 
 export interface ISSpecsSettings {
     namespaces: Record<string, string[]>;
+    read: Partial<ISSpecsReadSettings>;
 }
+
+export interface ISSpecsReadSettings {}
 
 export interface ISSpecsListResult {
     name: string;
@@ -153,6 +156,38 @@ export default class SSpecs extends __SClass {
     }
 
     /**
+     * @name            applyValuesToSpecs
+     * @type            Function
+     * @status          beta
+     * @static
+     *
+     * This method allows you to apply an object of value directly on a specs object.
+     * It will apply each values to the "value" property of each props
+     *
+     * @param       {SInterface}        int             The SInterface class you want to use for your spec object
+     * @return      {Any}                               The requested spec object
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static applyValuesToSpecs(values: any = {}, specs: any): any {
+        __deepMap(specs.props, ({ object, prop, value, path }) => {
+            const valuePath = path
+                .replace(/\.props/gm, '')
+                .split('.')
+                .slice(0, -1)
+                .join('.');
+
+            const v = __get(values, valuePath);
+            if (v !== undefined && !object.props) {
+                object.value = v;
+            }
+            return value;
+        });
+        return specs;
+    }
+
+    /**
      * @name        constructor
      * @type        Function
      *
@@ -162,7 +197,15 @@ export default class SSpecs extends __SClass {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings: Partial<ISSpecsSettings>) {
-        super(__deepMerge(__SSugarConfig.get('specs') ?? {}, settings ?? {}));
+        super(
+            __deepMerge(
+                {
+                    read: {},
+                },
+                __SSugarConfig.get('specs') ?? {},
+                settings ?? {},
+            ),
+        );
         if (!this.settings.namespaces) {
             throw new Error(
                 '[SSpecs] You MUST at least specify some "namespaces" folders to search specs files in...',
@@ -202,16 +245,16 @@ export default class SSpecs extends __SClass {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    read(specDotPath: string, settings?: Partial<ISSpecsSettings>) {
+    read(specDotPath: string, settings?: Partial<ISSpecsReadSettings>) {
         let finalSpecFilePath;
 
-        const finalSettings: ISSpecsSettings = __deepMerge(
+        const finalSettings: ISSpecsReadSettings = __deepMerge(
             // @ts-ignore
-            this.settings,
+            this.settings.read ?? {},
             settings ?? {},
         );
 
-        let definedNamespaces = finalSettings.namespaces;
+        let definedNamespaces = this.settings.namespaces;
         let definesNamespacesKeys = Object.keys(definedNamespaces);
 
         let currentNamespace = '';
@@ -248,7 +291,7 @@ export default class SSpecs extends __SClass {
 
         // loop on each registered namespaces directories to check if the specDotPath
         // correspond to a file in one of them...
-        const dirs = finalSettings.namespaces[currentNamespace];
+        const dirs = this.settings.namespaces[currentNamespace];
         for (let i = 0; i < dirs.length; i++) {
             const dir = dirs[i];
 
@@ -304,6 +347,10 @@ export default class SSpecs extends __SClass {
         // if we have an internal spec dotpath
         if (internalSpecDotPath) {
             return __get(specJson, internalSpecDotPath);
+        }
+
+        // load data file if wanted
+        if (finalSettings.loadDataFile) {
         }
 
         // add metas about the spec file read
@@ -372,8 +419,8 @@ export default class SSpecs extends __SClass {
                         namespace,
                         path: specFilePath,
                         dir: __path.dirname(specFilePath),
-                        read: () => {
-                            return this.read(dotpath);
+                        read: (settings: Partial<ISSpecsReadSettings>) => {
+                            return this.read(dotpath, settings ?? {});
                         },
                     });
                 });

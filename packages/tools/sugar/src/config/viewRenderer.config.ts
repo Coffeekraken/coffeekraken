@@ -17,24 +17,23 @@ export default function (api) {
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        rootDirs: {
-            get sugar() {
-                switch (api.config.viewRenderer.defaultEngine) {
-                    case 'blade':
-                        return `${__path.resolve(
-                            __packageRootDir(__dirname()),
-                            'src/views/blade',
-                        )}`;
-                        break;
-                    case 'twig':
-                    default:
-                        return `${__path.resolve(
-                            __packageRootDir(__dirname()),
-                            'src/views/twig',
-                        )}`;
-                        break;
-                }
-            },
+        get rootDirs() {
+            if (api.config.viewRenderer.defaultEngine === 'twig') {
+                return [
+                    ...(api.parent.rootDirs ?? []),
+                    `${__path.resolve(
+                        __packageRootDir(__dirname()),
+                        'src/views/twig',
+                    )}`,
+                ];
+            }
+            return [
+                ...(api.parent.rootDirs ?? []),
+                `${__path.resolve(
+                    __packageRootDir(__dirname()),
+                    'src/views/blade',
+                )}`,
+            ];
         },
     };
 }

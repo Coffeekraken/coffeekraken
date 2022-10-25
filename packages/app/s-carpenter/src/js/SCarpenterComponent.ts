@@ -12,6 +12,8 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 import __define from './define';
 
+import __ajaxAdapter from './adapters/ajaxAdapter';
+
 // @ts-ignore
 import __css from '../../../../src/css/s-carpenter-component.css'; // relative to /dist/pkg/esm/js
 
@@ -52,6 +54,10 @@ __sSpecsEditorComponentDefine();
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
+export interface ISCarpenterComponentAdapter {
+    apply($elm: HTMLElement, props: any);
+}
+
 export default class SCarpenterComponent extends __SLitComponent {
     static get properties() {
         return __SLitComponent.propertiesFromInterface(
@@ -64,6 +70,21 @@ export default class SCarpenterComponent extends __SLitComponent {
         return css`
             ${unsafeCSS(__css)}
         `;
+    }
+
+    static _registeredAdapters: Record<string, ISCarpenterComponentAdapter> = {
+        ajax: __ajaxAdapter,
+    };
+    static registerAdapter(
+        id: string,
+        adapter: ISCarpenterComponentAdapter,
+    ): void {
+        if (SCarpenterComponent._registeredAdapters[id]) {
+            throw new Error(
+                `[SCarpenterComponent] Sorry but the "${id}" adapter already exists...`,
+            );
+        }
+        SCarpenterComponent._registeredAdapters[id] = adapter;
     }
 
     state = {
@@ -89,11 +110,19 @@ export default class SCarpenterComponent extends __SLitComponent {
         // get the data
         this.state.data = await this._getData(this.props.source);
 
+        // check the specified adapter
+        if (!SCarpenterComponent._registeredAdapters[this.props.adapter]) {
+            console.log(this);
+            throw new Error(
+                `[SCarpenterComponent] Sorry but the specified "${this.props.adapter}" is not registered...`,
+            );
+        }
+
         // create the toolbar element
         this._createToolbarElement();
 
         // watch for hover on carpenter elements
-        __querySelectorLive(`[s-carpenter]`, ($elm) => {
+        __querySelectorLive(`[s-specs]`, ($elm) => {
             $elm.addEventListener('pointerover', (e) => {
                 if (this._$toolbar?.parent) {
                     return;
@@ -101,13 +130,19 @@ export default class SCarpenterComponent extends __SLitComponent {
                 this._activateElement(e.currentTarget);
 
                 // set the hovered dotpath
-                this.state.hoveredDotpath = $elm.getAttribute('s-carpenter');
+                this.state.hoveredDotpath = $elm.getAttribute('s-specs');
             });
         });
 
         // listen spec editor update
-        this.addEventListener('s-specs-editor.update', (e) => {
-            console.log('SPecs up', e.detail);
+        this.addEventListener('s-specs-editor.update', async (e) => {
+            // make use of the specified adapter to update the component/section/etc...
+            const adapterResult = await SCarpenterComponent._registeredAdapters[
+                this.props.adapter
+            ].apply(this.state.$currentElement, e.detail.values ?? {});
+            if (adapterResult) {
+                this.state.$currentElement = adapterResult;
+            }
         });
 
         // listen on click
@@ -127,17 +162,16 @@ export default class SCarpenterComponent extends __SLitComponent {
                 }
             }
 
+            console.log(potentialDotpath);
+
+            console.log('specs', this.state.data);
+
             if (!this.state.currentSpecs) {
                 return;
             }
 
             // open the editor
             this._openEditor();
-
-            // get the current values from the component directly in the HTML
-            const $dataElements = this.state.$currentElement.querySelectorAll(
-                `[s-carpenter-editable]`,
-            );
 
             // update the UI
             this.requestUpdate();
@@ -160,11 +194,7 @@ export default class SCarpenterComponent extends __SLitComponent {
      * close the editor
      */
     _closeEditor() {
-        // reset the current specs
-        this.state.currentSpecs = null;
-
-        // reset the current element
-        this.state.$currentElement = null;
+        document.body.classList.remove('s-carpenter--editor');
     }
 
     /**
@@ -195,13 +225,7 @@ export default class SCarpenterComponent extends __SLitComponent {
         // set the current element
         this.state.$currentElement = $elm;
 
-        // get the nested components
-        const $nestedElements = $elm.querySelectorAll('[s-carpenter]');
-        if ($nestedElements) {
-            this.state.$nestedElements = Array.from($nestedElements);
-            console.log('state', this.state);
-        }
-
+        // append toolbar to viewport
         document.body.appendChild($toolbar);
     }
 

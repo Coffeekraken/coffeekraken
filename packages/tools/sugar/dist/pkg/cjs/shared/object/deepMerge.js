@@ -5,37 +5,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const isPlainObject_1 = __importDefault(require("../is/isPlainObject"));
-/**
- * @name                deepMerge
- * @namespace            shared.object
- * @type                Function
- * @platform          js
- * @platform          node
- * @status        beta
- *
- * Deep merge one object with another and return the merged object result. This merging implementation support:
- * - Merging object with getters/setters
- * - n numbers of objects as arguments
- *
- * @param           {Object}            args...        Pass all the objects you want to merge
- * @param           {Object}            [settings={}]       Pass as last object the settings one that can contain these properties:
- * - object (true) {Boolean}: Specify if you want to merge the objects
- * - array (false) {Boolean}: Specify if you want to merge the arrays
- * @return          {Object}                              The merged object result
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example           js
- * import { __deepMerge } from '@coffeekraken/sugar/object';
- * __deepMerge({a: {b: {c: 'c', d: 'd'}}}, {a: {b: {e: 'e', f: 'f'}}});
- * // => { a: { b: { c: 'c', d: 'd', e: 'e', f: 'f' } } }
- *
- * @since       2.0.0
- * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
 function __deepMerge(...args) {
+    let finalSettings = {
+        mergeArray: false,
+    };
+    // const potentialSettings = args[args.length - 1];
+    // if (
+    //     potentialSettings?.mergeArray !== undefined ||
+    //     potentialSettings?.mergeGetterSource !== undefined
+    // ) {
+    //     finalSettings = {
+    //         ...finalSettings,
+    //         ...potentialSettings,
+    //     };
+    //     // remove the settings object from the merge process
+    //     args = args.slice(0, -1);
+    // }
     function merge(firstObj, secondObj) {
         const newObj = {};
         if (!firstObj && secondObj)
@@ -54,11 +39,57 @@ function __deepMerge(...args) {
                 newObj[key] = firstObj[key];
             }
         });
+        // delete newObj.$source;
+        // if (!newObj.$source) {
+        //     Object.defineProperty(newObj, '$source', {
+        //         enumerable: false,
+        //         configurable: false,
+        //         value: firstObj,
+        //     });
+        // }
+        // Object.defineProperty(secondObj, 'plop', {
+        //     value: 'yop',
+        // });
         const secondProps = Object.getOwnPropertyNames(secondObj);
         secondProps.forEach((key) => {
+            // if (finalSettings.mergeGetterSource && key === '$source') {
+            //     return;
+            // }
             const secondObjDesc = Object.getOwnPropertyDescriptor(secondObj, key);
+            // const secondObjValue = secondObj[key];
+            // delete secondObj[key];
+            // Object.defineProperty(secondObj, key, {
+            //     configurable: true,
+            //     writable: true,
+            //     value: secondObjValue,
+            //     // get() {
+            //     //     console.log('GET', key);
+            //     //     return secondObjValue;
+            //     // },
+            // });
+            // secondObjDesc.$source = secondObj.$source;
             if (secondObjDesc.set || secondObjDesc.get) {
+                // const v = secondObj[key];
+                // Object.defineProperty(newObj, key, {
+                //     enumerable: true,
+                //     writable: true,
+                //     get() {
+                //         console.log('GET', key, v);
+                //         return v;
+                //     },
+                // });
+                // if (finalSettings.mergeGetterSource) {
+                //     Object.defineProperty(newObj, '$source', {
+                //         enumerable: false,
+                //         value: firstObj,
+                //     });
+                // }
                 Object.defineProperty(newObj, key, secondObjDesc);
+            }
+            else if (finalSettings.mergeArray &&
+                Array.isArray(firstObj[key]) &&
+                Array.isArray(secondObj[key])) {
+                newObj[key] = [...firstObj[key], ...secondObj[key]];
             }
             else if ((0, isPlainObject_1.default)(newObj[key]) &&
                 (0, isPlainObject_1.default)(secondObj[key])) {
@@ -78,4 +109,4 @@ function __deepMerge(...args) {
     return currentObj;
 }
 exports.default = __deepMerge;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdFQUFrRDtBQUVsRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0E2Qkc7QUFDSCxTQUF3QixXQUFXLENBQUMsR0FBRyxJQUFJO0lBQ3ZDLFNBQVMsS0FBSyxDQUFDLFFBQVEsRUFBRSxTQUFTO1FBQzlCLE1BQU0sTUFBTSxHQUFHLEVBQUUsQ0FBQztRQUNsQixJQUFJLENBQUMsUUFBUSxJQUFJLFNBQVM7WUFBRSxPQUFPLFNBQVMsQ0FBQztRQUM3QyxJQUFJLENBQUMsU0FBUyxJQUFJLFFBQVE7WUFBRSxPQUFPLFFBQVEsQ0FBQztRQUM1QyxJQUFJLENBQUMsUUFBUSxJQUFJLENBQUMsU0FBUztZQUFFLE9BQU8sRUFBRSxDQUFDO1FBRXZDLE1BQU0sVUFBVSxHQUFHLE1BQU0sQ0FBQyxtQkFBbUIsQ0FBQyxRQUFRLENBQUMsQ0FBQztRQUN4RCxVQUFVLENBQUMsT0FBTyxDQUFDLENBQUMsR0FBRyxFQUFFLEVBQUU7WUFDdkIsTUFBTSxJQUFJLEdBQUcsTUFBTSxDQUFDLHdCQUF3QixDQUFDLFFBQVEsRUFBRSxHQUFHLENBQUMsQ0FBQztZQUM1RCxJQUFJLElBQUksQ0FBQyxHQUFHLElBQUksSUFBSSxDQUFDLEdBQUcsRUFBRTtnQkFDdEIsTUFBTSxDQUFDLGNBQWMsQ0FBQyxNQUFNLEVBQUUsR0FBRyxFQUFFLElBQUksQ0FBQyxDQUFDO2FBQzVDO2lCQUFNO2dCQUNILE1BQU0sQ0FBQyxHQUFHLENBQUMsR0FBRyxRQUFRLENBQUMsR0FBRyxDQUFDLENBQUM7YUFDL0I7UUFDTCxDQUFDLENBQUMsQ0FBQztRQUVILE1BQU0sV0FBVyxHQUFHLE1BQU0sQ0FBQyxtQkFBbUIsQ0FBQyxTQUFTLENBQUMsQ0FBQztRQUMxRCxXQUFXLENBQUMsT0FBTyxDQUFDLENBQUMsR0FBRyxFQUFFLEVBQUU7WUFDeEIsTUFBTSxhQUFhLEdBQUcsTUFBTSxDQUFDLHdCQUF3QixDQUNqRCxTQUFTLEVBQ1QsR0FBRyxDQUNOLENBQUM7WUFFRixJQUFJLGFBQWEsQ0FBQyxHQUFHLElBQUksYUFBYSxDQUFDLEdBQUcsRUFBRTtnQkFDeEMsTUFBTSxDQUFDLGNBQWMsQ0FBQyxNQUFNLEVBQUUsR0FBRyxFQUFFLGFBQWEsQ0FBQyxDQUFDO2FBQ3JEO2lCQUFNLElBQ0gsSUFBQSx1QkFBZSxFQUFDLE1BQU0sQ0FBQyxHQUFHLENBQUMsQ0FBQztnQkFDNUIsSUFBQSx1QkFBZSxFQUFDLFNBQVMsQ0FBQyxHQUFHLENBQUMsQ0FBQyxFQUNqQztnQkFDRSxNQUFNLENBQUMsR0FBRyxDQUFDLEdBQUcsS0FBSyxDQUFDLE1BQU0sQ0FBQyxHQUFHLENBQUMsRUFBRSxTQUFTLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQzthQUNwRDtpQkFBTTtnQkFDSCxNQUFNLENBQUMsR0FBRyxDQUFDLEdBQUcsU0FBUyxDQUFDLEdBQUcsQ0FBQyxDQUFDO2FBQ2hDO1FBQ0wsQ0FBQyxDQUFDLENBQUM7UUFFSCxPQUFPLE1BQU0sQ0FBQztJQUNsQixDQUFDO0lBRUQsSUFBSSxVQUFVLEdBQUcsRUFBRSxDQUFDO0lBQ3BCLEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyxJQUFJLENBQUMsTUFBTSxFQUFFLENBQUMsRUFBRSxFQUFFO1FBQ2xDLE1BQU0sVUFBVSxHQUFHLElBQUksQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUMzQixVQUFVLEdBQUcsS0FBSyxDQUFDLFVBQVUsRUFBRSxVQUFVLENBQUMsQ0FBQztLQUM5QztJQUVELE9BQU8sVUFBVSxDQUFDO0FBQ3RCLENBQUM7QUE5Q0QsOEJBOENDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdFQUFrRDtBQXdDbEQsU0FBd0IsV0FBVyxDQUFDLEdBQUcsSUFBSTtJQUN2QyxJQUFJLGFBQWEsR0FBdUI7UUFDcEMsVUFBVSxFQUFFLEtBQUs7S0FDcEIsQ0FBQztJQUNGLG1EQUFtRDtJQUNuRCxPQUFPO0lBQ1AscURBQXFEO0lBQ3JELHlEQUF5RDtJQUN6RCxNQUFNO0lBQ04sd0JBQXdCO0lBQ3hCLDRCQUE0QjtJQUM1QixnQ0FBZ0M7SUFDaEMsU0FBUztJQUNULDJEQUEyRDtJQUMzRCxnQ0FBZ0M7SUFDaEMsSUFBSTtJQUVKLFNBQVMsS0FBSyxDQUFDLFFBQVEsRUFBRSxTQUFTO1FBQzlCLE1BQU0sTUFBTSxHQUFHLEVBQUUsQ0FBQztRQUNsQixJQUFJLENBQUMsUUFBUSxJQUFJLFNBQVM7WUFBRSxPQUFPLFNBQVMsQ0FBQztRQUM3QyxJQUFJLENBQUMsU0FBUyxJQUFJLFFBQVE7WUFBRSxPQUFPLFFBQVEsQ0FBQztRQUM1QyxJQUFJLENBQUMsUUFBUSxJQUFJLENBQUMsU0FBUztZQUFFLE9BQU8sRUFBRSxDQUFDO1FBRXZDLE1BQU0sVUFBVSxHQUFHLE1BQU0sQ0FBQyxtQkFBbUIsQ0FBQyxRQUFRLENBQUMsQ0FBQztRQUN4RCxVQUFVLENBQUMsT0FBTyxDQUFDLENBQUMsR0FBRyxFQUFFLEVBQUU7WUFDdkIsTUFBTSxJQUFJLEdBQUcsTUFBTSxDQUFDLHdCQUF3QixDQUFDLFFBQVEsRUFBRSxHQUFHLENBQUMsQ0FBQztZQUM1RCxJQUFJLElBQUksQ0FBQyxHQUFHLElBQUksSUFBSSxDQUFDLEdBQUcsRUFBRTtnQkFDdEIsTUFBTSxDQUFDLGNBQWMsQ0FBQyxNQUFNLEVBQUUsR0FBRyxFQUFFLElBQUksQ0FBQyxDQUFDO2FBQzVDO2lCQUFNO2dCQUNILE1BQU0sQ0FBQyxHQUFHLENBQUMs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

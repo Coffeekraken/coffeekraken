@@ -12,19 +12,19 @@ export default function (api) {
                     api.config.storage.src.viewsDir,
                 )}`,
             ],
-            bare: [
+            'views.bare': [
                 `./${__path.relative(
                     __packageRootDir(),
                     api.config.storage.src.viewsDir,
                 )}/bare`,
             ],
-            sections: [
+            'views.sections': [
                 `./${__path.relative(
                     __packageRootDir(),
                     api.config.storage.src.viewsDir,
                 )}/sections`,
             ],
-            components: [
+            'views.components': [
                 `./${__path.relative(
                     __packageRootDir(),
                     api.config.storage.src.viewsDir,
@@ -32,7 +32,7 @@ export default function (api) {
             ],
         },
         get cwd() {
-            return api.config.storage.rootDir;
+            return api.config.storage.package.rootDir;
         },
     };
 }

@@ -5,7 +5,7 @@ import __SDataFilePhp from '@coffeekraken/s-data-file-php';
 import __SPromise from '@coffeekraken/s-promise';
 import {
     __checkPathWithMultipleExtensions,
-    __extension,
+    __extension
 } from '@coffeekraken/sugar/fs';
 import __fs from 'fs';
 

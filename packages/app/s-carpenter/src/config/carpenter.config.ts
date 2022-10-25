@@ -6,11 +6,11 @@ export default function (api) {
         sources: {
             components: {
                 title: 'Components',
-                specsNamespaces: ['components'],
+                specsNamespaces: ['views.components'],
             },
             sections: {
                 title: 'Sections',
-                specsNamespaces: ['sections'],
+                specsNamespaces: ['views.sections'],
             },
         },
     };

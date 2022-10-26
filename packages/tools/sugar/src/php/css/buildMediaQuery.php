@@ -35,8 +35,8 @@ namespace Sugar\css;
  * \Sugar\css\buildMediaQuery('desktop', [
  *   'queries' => [
  *      'desktop' => [
- *          'min-width': 1000,
- *          'max-width': null
+ *          'minWidth': 1000,
+ *          'maxWidth': null
  *      ]
  *   ]
  * ]);
@@ -51,24 +51,20 @@ function buildMediaQuery($media, $params = null)
         'defaultQuery' => 'screen',
         'queries' => [
             'mobile' => [
-                'min-width' => 0,
-                'max-width' => 639,
+                'minWidth' => 0,
+                'maxWidth' => 639,
             ],
             'tablet' => [
-                'min-width' => 640,
-                'max-width' => 1279,
+                'minWidth' => 640,
+                'maxWidth' => 1279,
             ],
             'desktop' => [
-                'min-width' => 1280,
-                'max-width' => 2047,
+                'minWidth' => 1280,
+                'maxWidth' => 2047,
             ],
             'wide' => [
-                'min-width' => 2048,
-                'max-width' => null,
-            ],
-            'dwarf' => [
-                'min-height' => null,
-                'max-height' => 700,
+                'minWidth' => 2048,
+                'maxWidth' => null,
             ],
         ],
     ];
@@ -134,18 +130,25 @@ function buildMediaQuery($media, $params = null)
                 continue;
             }
 
+            $camelToDashMap = [
+                'minWidth' => 'min-width',
+                'maxWidth' => 'max-width',
+                'minDeviceWidth' => 'min-device-width',
+                'maxDeviceWidth' => 'max-device-width',
+            ];
+
             if (
                 in_array($prop, [
-                    'min-width',
-                    'max-width',
-                    'min-device-width',
-                    'max-device-width',
+                    'minWidth',
+                    'maxWidth',
+                    'minDeviceWidth',
+                    'maxDeviceWidth',
                 ])
             ) {
                 if ($action == '>') {
-                    if ($prop == 'max-width' || $prop == 'max-device-width') {
+                    if ($prop == 'maxWidth' || $prop == 'maxDeviceWidth') {
                         $argName = 'min-width';
-                        if (str_contains($prop, '-device')) {
+                        if (str_contains($prop, 'Device')) {
                             $argName = 'min-device-width';
                         }
                         array_push(
@@ -154,9 +157,9 @@ function buildMediaQuery($media, $params = null)
                         );
                     }
                 } elseif ($action == '<') {
-                    if ($prop == 'min-width' || $prop == 'min-device-width') {
+                    if ($prop == 'minWidth' || $prop == 'minDeviceWidth') {
                         $argName = 'max-width';
-                        if (str_contains($prop, '-device')) {
+                        if (str_contains($prop, 'Device')) {
                             $argName = 'max-device-width';
                         }
                         array_push(
@@ -165,26 +168,49 @@ function buildMediaQuery($media, $params = null)
                         );
                     }
                 } elseif ($action == '=') {
-                    array_push($queryList, '(' . $prop . ': ' . $value . 'px)');
+                    array_push(
+                        $queryList,
+                        '(' . $camelToDashMap[$prop] . ': ' . $value . 'px)'
+                    );
                 } elseif ($action == '>=') {
-                    if ($prop == 'min-width' || $prop == 'min-device-width') {
+                    if ($prop == 'minWidth' || $prop == 'minDeviceWidth') {
+                        $argName = 'min-width';
+                        if (str_contains($prop, 'Device')) {
+                            $argName = 'min-device-width';
+                        }
                         array_push(
                             $queryList,
-                            '(' . $prop . ': ' . $value . 'px)'
+                            '(' . $argName . ': ' . $value . 'px)'
                         );
                     }
                 } elseif ($action == '<=') {
-                    if ($prop == 'max-width' || $prop == 'max-device-width') {
+                    if ($prop == 'maxWidth' || $prop == 'maxDeviceWidth') {
+                        $argName = 'max-width';
+                        if (str_contains($prop, 'Device')) {
+                            $argName = 'max-device-width';
+                        }
                         array_push(
                             $queryList,
-                            '(' . $prop . ': ' . $value . 'px)'
+                            '(' . $argName . ': ' . $value . 'px)'
                         );
                     }
-                } else {
-                    array_push($queryList, '(' . $prop . ': ' . $value . 'px)');
+                } elseif ($action == '>=') {
+                    if ($prop == 'minWidth' || $prop == 'minDeviceWidth') {
+                        $argName = 'min-width';
+                        if (str_contains($prop, 'Device')) {
+                            $argName = 'min-device-width';
+                        }
+                        array_push(
+                            $queryList,
+                            '(' . $argName . ': ' . $value . 'px)'
+                        );
+                    }
                 }
             } else {
-                array_push($queryList, '(' . $prop . ': ' . $value . 'px)');
+                array_push(
+                    $queryList,
+                    '(' . $camelToDashMap[$prop] . ': ' . $value . 'px)'
+                );
             }
         }
 

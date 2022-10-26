@@ -1,5 +1,7 @@
 import __SLitComponent from '@coffeekraken/s-lit-component';
 
+import { __get } from '@coffeekraken/sugar/object';
+
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
 import __SSpecsEditorComponentInterface from './interface/SSpecsEditorComponentInterface';
@@ -9,18 +11,18 @@ import __css from '../../../../src/css/s-specs-editor-component.css'; // relativ
 
 import __define from './define';
 
-export interface ISClipboardCopyComponentProps {
+export interface ISSpecsEditorComponentProps {
     from: string;
     successTimeout: number;
     errorTimeout: number;
 }
 
 /**
- * @name                SClipboardCopyComponent
+ * @name                SSpecsEditorComponent
  * @as                  Clipboard copy
  * @namespace           js
  * @type                CustomElement
- * @interface           ./interface/SClipboardCopyComponentInterface.ts
+ * @interface           ./interface/SSpecsEditorComponentInterface.ts
  * @menu                Styleguide / UI              /styleguide/ui/s-clipboard-copy
  * @platform            html
  * @status              beta
@@ -70,7 +72,7 @@ export interface ISClipboardCopyComponentProps {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export default class SClipboardCopyComponent extends __SLitComponent {
+export default class SSpecsEditorComponent extends __SLitComponent {
     static get properties() {
         return __SLitComponent.propertiesFromInterface(
             {},
@@ -178,7 +180,9 @@ export default class SClipboardCopyComponent extends __SLitComponent {
                                       <i
                                           class="fa-solid fa-circle-question"
                                       ></i>
-                                      <div class="s-tooltip s-tooltip--left">
+                                      <div
+                                          class="s-tooltip s-tooltip--left s-color s-color--accent"
+                                      >
                                           ${propObj.description}
                                       </div>
                                   </span>
@@ -217,7 +221,9 @@ export default class SClipboardCopyComponent extends __SLitComponent {
                                       <i
                                           class="fa-solid fa-circle-question"
                                       ></i>
-                                      <div class="s-tooltip s-tooltip--left">
+                                      <div
+                                          class="s-tooltip s-tooltip--left s-color s-color--accent"
+                                      >
                                           ${propObj.description}
                                       </div>
                                   </span>
@@ -259,7 +265,9 @@ export default class SClipboardCopyComponent extends __SLitComponent {
                                       <i
                                           class="fa-solid fa-circle-question"
                                       ></i>
-                                      <div class="s-tooltip s-tooltip--left">
+                                      <div
+                                          class="s-tooltip s-tooltip--left s-color s-color--accent"
+                                      >
                                           ${propObj.description}
                                       </div>
                                   </span>
@@ -271,7 +279,9 @@ export default class SClipboardCopyComponent extends __SLitComponent {
         `;
     }
 
-    _renderElements(specs) {
+    _render;
+
+    _renderElements(specs, path: string[] = []) {
         // console.log('props', specs.props);
         // console.log('keys', Object.keys(specs.props));
 
@@ -284,52 +294,71 @@ export default class SClipboardCopyComponent extends __SLitComponent {
         // });
         // console.log('sorte', sortedKeys);
 
-        return html`
-            ${Object.keys(specs.props).map((prop) => {
-                const propObj = specs.props[prop];
+        const _props = __get(specs, path.join('.'));
 
-                if (propObj.props) {
-                    return html`
-                        <div
-                            class="${this.componentUtils.className('__child')}"
-                        >
-                            <h3
+        if (_props.type.match(/(\{\}|\[\])/)) {
+            console.log(
+                'p',
+                `values.${path.filter((p) => p !== 'props').join('.')}`,
+            );
+            const loopOn = __get(specs, `values`);
+
+            console.log(loopOn);
+        } else {
+            return html`
+                ${Object.keys(specs.props).map((prop) => {
+                    const propObj = specs.props[prop];
+                    if (propObj.props) {
+                        return html`
+                            <div
                                 class="${this.componentUtils.className(
-                                    '__child-title',
-                                    's-typo--h5',
+                                    '__child',
                                 )}"
                             >
-                                ${propObj.title}
-                            </h3>
-                            <p
+                                <h3
+                                    class="${this.componentUtils.className(
+                                        '__child-title',
+                                        's-typo--h5',
+                                    )}"
+                                >
+                                    ${propObj.title}
+                                </h3>
+                                <p
+                                    class="${this.componentUtils.className(
+                                        '__child-description',
+                                        's-typo--p',
+                                    )}"
+                                >
+                                    ${propObj.description}
+                                </p>
+                                ${this._renderElements(specs, [
+                                    ...path,
+                                    'props',
+                                    prop,
+                                ])}
+                            </div>
+                        `;
+                    } else {
+                        return html`
+                            <div
+                                prop="${propObj.id}"
                                 class="${this.componentUtils.className(
-                                    '__child-description',
-                                    's-typo--p',
+                                    '__prop',
                                 )}"
                             >
-                                ${propObj.description}
-                            </p>
-                            ${this._renderElements(propObj)}
-                        </div>
-                    `;
-                } else {
-                    return html`
-                        <div
-                            prop="${propObj.id}"
-                            class="${this.componentUtils.className('__prop')}"
-                        >
-                            ${propObj.type.toLowerCase() === 'text'
-                                ? this._renderTextElement(propObj)
-                                : propObj.type.toLowerCase() === 'select'
-                                ? this._renderSelectElement(propObj)
-                                : propObj.type.toLowerCase() === 'checkbox'
-                                ? this._renderCheckboxElement(propObj)
-                                : ''}
-                        </div>
-                    `;
-                }
-            })}
-        `;
+                                ${propObj.type.toLowerCase() === 'text'
+                                    ? this._renderTextElement(propObj)
+                                    : propObj.type.toLowerCase() === 'select'
+                                    ? this._renderSelectElement(propObj)
+                                    : propObj.type.toLowerCase() === 'checkbox'
+                                    ? this._renderCheckboxElement(propObj)
+                                    : ''}
+                            </div>
+                        `;
+                    }
+                })}
+            `;
+        }
     }
 
     render() {

@@ -10,6 +10,8 @@ import __isColor from './isColor';
 import __isCreditCard from './isCreditCard';
 import __isCyclic from './isCyclic';
 import __isDdmmyyyyDate from './isDdmmyyyyDate';
+import __isDomElement from './isDomElement';
+import __isDomNode from './isDomNode';
 import __isEmail from './isEmail';
 import __isEsm from './isEsm';
 import __isEven from './isEven';
@@ -53,6 +55,8 @@ export {
     __isCreditCard,
     __isCyclic,
     __isDdmmyyyyDate,
+    __isDomElement,
+    __isDomNode,
     __isEmail,
     __isEsm,
     __isEven,

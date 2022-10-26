@@ -49,7 +49,7 @@ function default_1(api) {
              * @name          mobile
              * @namespace     config.themeMedia.queries
              * @type          Object
-             * @default       {'min-width': 0, 'max-width': 639}
+             * @default       {'minWidth': 0, 'maxWidth': 639}
              *
              * Specify the media query arguments needed to target mobile
              *
@@ -57,14 +57,14 @@ function default_1(api) {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             mobile: {
-                'min-width': 0,
-                'max-width': 639,
+                minWidth: 0,
+                maxWidth: 639,
             },
             /**
              * @name          tablet
              * @namespace     config.themeMedia.queries
              * @type          Object
-             * @default       {'min-width': 640, 'max-width': 1279}
+             * @default       {'minWidth': 640, 'maxWidth': 1279}
              *
              * Specify the media query arguments needed to target tablet
              *
@@ -72,14 +72,14 @@ function default_1(api) {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             tablet: {
-                'min-width': 640,
-                'max-width': 1279,
+                minWidth: 640,
+                maxWidth: 1279,
             },
             /**
              * @name          desktop
              * @namespace     config.themeMedia.queries
              * @type          Object
-             * @default       {'min-width': 1280, 'max-width': 2047}
+             * @default       {'minWidth': 1280, 'maxWidth': 2047}
              *
              * Specify the media query arguments needed to target desktop
              *
@@ -87,14 +87,14 @@ function default_1(api) {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             desktop: {
-                'min-width': 1280,
-                'max-width': 2047,
+                minWidth: 1280,
+                maxWidth: 2047,
             },
             /**
              * @name          wide
              * @namespace     config.themeMedia.queries
              * @type          Object
-             * @default       {'min-width': 2048, 'max-width': null}
+             * @default       {'minWidth': 2048, 'maxWidth': null}
              *
              * Specify the media query arguments needed to target wide
              *
@@ -102,11 +102,11 @@ function default_1(api) {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             wide: {
-                'min-width': 2048,
-                'max-width': null,
+                minWidth: 2048,
+                maxWidth: null,
             },
         },
     };
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsbUJBQXlCLEdBQUc7SUFDeEIsT0FBTztRQUNIOzs7Ozs7Ozs7Ozs7O1dBYUc7UUFDSCxhQUFhLEVBQUUsSUFBSTtRQUVuQjs7Ozs7Ozs7Ozs7V0FXRztRQUNILElBQUksWUFBWTtZQUNaLE9BQU8sR0FBRyxDQUFDLElBQUksQ0FBQyxhQUFhLEtBQUssSUFBSSxDQUFDLENBQUMsQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDLFNBQVMsQ0FBQztRQUNsRSxDQUFDO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILFlBQVksRUFBRSxRQUFRO1FBRXRCLE9BQU8sRUFBRTtZQUNMOzs7Ozs7Ozs7O2VBVUc7WUFDSCxNQUFNLEVBQUU7Z0JBQ0osV0FBVyxFQUFFLENBQUM7Z0JBQ2QsV0FBVyxFQUFFLEdBQUc7YUFDbkI7WUFFRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsTUFBTSxFQUFFO2dCQUNKLFdBQVcsRUFBRSxHQUFHO2dCQUNoQixXQUFXLEVBQUUsSUFBSTthQUNwQjtZQUVEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxPQUFPLEVBQUU7Z0JBQ0wsV0FBVyxFQUFFLElBQUk7Z0JBQ2pCLFdBQVcsRUFBRSxJQUFJO2FBQ3BCO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRTtnQkFDRixXQUFXLEVBQUUsSUFBSTtnQkFDakIsV0FBVyxFQUFFLElBQUk7YUFDcEI7U0FDSjtLQUNKLENBQUM7QUFDTixDQUFDO0FBakhELDRCQWlIQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsbUJBQXlCLEdBQUc7SUFDeEIsT0FBTztRQUNIOzs7Ozs7Ozs7Ozs7O1dBYUc7UUFDSCxhQUFhLEVBQUUsSUFBSTtRQUVuQjs7Ozs7Ozs7Ozs7V0FXRztRQUNILElBQUksWUFBWTtZQUNaLE9BQU8sR0FBRyxDQUFDLElBQUksQ0FBQyxhQUFhLEtBQUssSUFBSSxDQUFDLENBQUMsQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDLFNBQVMsQ0FBQztRQUNsRSxDQUFDO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILFlBQVksRUFBRSxRQUFRO1FBRXRCLE9BQU8sRUFBRTtZQUNMOzs7Ozs7Ozs7O2VBVUc7WUFDSCxNQUFNLEVBQUU7Z0JBQ0osUUFBUSxFQUFFLENBQUM7Z0JBQ1gsUUFBUSxFQUFFLEdBQUc7YUFDaEI7WUFFRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsTUFBTSxFQUFFO2dCQUNKLFFBQVEsRUFBRSxHQUFHO2dCQUNiLFFBQVEsRUFBRSxJQUFJO2FBQ2pCO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILE9BQU8sRUFBRTtnQkFDTCxRQUFRLEVBQUUsSUFBSTtnQkFDZCxRQUFRLEVBQUUsSUFBSTthQUNqQjtZQUVEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUU7Z0JBQ0YsUUFBUSxFQUFFLElBQUk7Z0JBQ2QsUUFBUSxFQUFFLElBQUk7YUFDakI7U0FDSjtLQUNKLENBQUM7QUFDTixDQUFDO0FBakhELDRCQWlIQyJ9

@@ -1,5 +1,5 @@
 {
-    "type": "Component",
+    "type": "Object",
     "title": "Cta",
     "description": "Display a call to action",
     "props": {

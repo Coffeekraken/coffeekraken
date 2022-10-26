@@ -1,5 +1,6 @@
 .section-separator {
   position: relative;
+  width: 100%;
   transform: skewY(1deg);
 
   .__bkg {

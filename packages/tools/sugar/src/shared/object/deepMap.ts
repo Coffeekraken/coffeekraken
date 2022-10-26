@@ -47,7 +47,7 @@ export default function __deepMap(
             classInstances: false,
             array: true,
             privateProps: false,
-            cloneFirst: true,
+            cloneFirst: false,
         },
         settings,
     );
@@ -99,8 +99,9 @@ export default function __deepMap(
             delete objectOrArray[prop];
             return;
         }
-        if (isArray) newObject.push(res);
-        else {
+        if (isArray) {
+            newObject.push(res);
+        } else {
             if (prop === '...' && __isPlainObject(res)) {
                 // console.log('DEFEF', res);
                 newObject = {

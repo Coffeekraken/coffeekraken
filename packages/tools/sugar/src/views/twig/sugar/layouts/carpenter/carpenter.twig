@@ -1,0 +1,12 @@
+{% extends 'sugar/layouts/main/main.twig' %}
+
+{% block title %}
+    Coffeekraken Carpenter
+{% endblock %}
+
+{% block body %}
+
+    {{ body|raw }}
+    <s-carpenter id="carpenter" save-state iframe></s-carpenter>
+
+{% endblock %}

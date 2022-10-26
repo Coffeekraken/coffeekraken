@@ -1,6 +1,7 @@
 // @ts-nocheck
 
 import __proxyArray from '../array/proxyArray';
+import __isDomElement from '../is/isDomElement';
 import __clone from '../object/clone';
 import __deepMap from '../object/deepMap';
 import __deepMerge from '../object/deepMerge';
@@ -27,11 +28,13 @@ import __deepMerge from '../object/deepMerge';
  * - push: An item has been added inside an array
  * - {methodName}: Every array actions
  * @param         {Object}                [settings={}]         An object of settings to configure your proxy:
- * - deep (true) {Boolean}: Specify if you want to watch the passed object deeply or juste the first level
- * - handleSet (true) {Boolean}: Specify if you want to handle the "set" action
- * - handleGet (false) {Boolean}: Specify if you want to handle the "get" action
- * - handleDelete (true) {Boolean}: Specify if you want to handle the "delete" action
  * @return          {Object}                                  The proxied object
+ *
+ * @setting         {Boolean}         [deep=true]           Specify if you want to watch the passed object deeply or juste the first level
+ * @setting        {Boolean}           [handleSet=true]        Specify if you want to handle the "set" action
+ * @setting         {Boolean}           [handleGet=false]           Specify if you want to handle the "get" action
+ * @setting         {Boolean}           [handleDelete=true]         Specify if you want to handle the "delete" action
+ * @setting         {Boolean}            [domElements=false]        Specify if you want to proxy dom elements
  *
  * @todo      interface
  * @todo      doc
@@ -49,6 +52,9 @@ import __deepMerge from '../object/deepMerge';
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
+
+const _loopTimeout = new WeakMap();
+
 export default function __deepProxy(object, handlerFn, settings = {}) {
     const preproxy = new WeakMap();
     let isRevoked = false;
@@ -58,6 +64,7 @@ export default function __deepProxy(object, handlerFn, settings = {}) {
             handleSet: true,
             handleGet: false,
             handleDelete: true,
+            domElements: false,
         },
         settings,
     );
@@ -65,18 +72,39 @@ export default function __deepProxy(object, handlerFn, settings = {}) {
     function makeHandler(path) {
         return {
             set(target, key, value) {
+                // protect agains set loop
+                if (!_loopTimeout.has(target)) {
+                    _loopTimeout.set(target, {});
+                }
+                const dotpath = [...path, key].join('.');
+                const timeouts = _loopTimeout.get(target);
+                if (timeouts[dotpath]) {
+                    return true;
+                }
+                timeouts[dotpath] = true;
+                setTimeout(() => {
+                    delete timeouts[dotpath];
+                });
+
+                // stop here if revoked of does not handle set
                 if (isRevoked || !settings.handleSet) return true;
 
+                // stop here if the value are the same already
                 if (value === target[key]) return true;
 
+                // handle deep proxy
                 if (settings.deep && typeof value === 'object') {
                     value = proxify(value, [...path, key]);
                 }
 
+                // keep track of the old value
                 const oldValue = target[key];
 
+                // set the new value
                 target[key] = value;
 
+                // call the handler function with all the
+                // usefull parameters
                 handlerFn({
                     object,
                     target,
@@ -88,6 +116,7 @@ export default function __deepProxy(object, handlerFn, settings = {}) {
                     value,
                 });
 
+                // write update
                 return true;
             },
 
@@ -137,6 +166,9 @@ export default function __deepProxy(object, handlerFn, settings = {}) {
 
     function proxify(obj, path) {
         if (obj === null) return obj;
+        if (!settings.domElements && __isDomElement(obj)) {
+            return obj;
+        }
 
         if (settings.deep) {
             for (const key of Object.keys(obj)) {
@@ -163,7 +195,7 @@ export default function __deepProxy(object, handlerFn, settings = {}) {
         const revokePropertyObj = {
             writable: true,
             configurable: false,
-            enumerable: true,
+            enumerable: false,
             value: () => {
                 // make a shallow copy of the proxy object
                 let __copy = __clone(p.proxy, { deep: true });
@@ -206,5 +238,6 @@ export default function __deepProxy(object, handlerFn, settings = {}) {
         }
         return p.proxy;
     }
+
     return proxify(object, []);
 }

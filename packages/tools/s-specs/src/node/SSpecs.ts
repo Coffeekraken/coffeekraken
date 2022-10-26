@@ -171,19 +171,23 @@ export default class SSpecs extends __SClass {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static applyValuesToSpecs(values: any = {}, specs: any): any {
-        __deepMap(specs.props, ({ object, prop, value, path }) => {
-            const valuePath = path
-                .replace(/\.props/gm, '')
-                .split('.')
-                .slice(0, -1)
-                .join('.');
+        specs.values = values;
 
-            const v = __get(values, valuePath);
-            if (v !== undefined && !object.props) {
-                object.value = v;
-            }
-            return value;
-        });
+        // __deepMap(values, ({ object, prop, value, path }) => {
+        //     // const valuePath = path
+        //     //     .replace(/\.props/gm, '')
+        //     //     .split('.')
+        //     //     .slice(0, -1)
+        //     //     .join('.');
+
+        //     console.log(path);
+
+        //     // const v = __get(values, valuePath);
+        //     // if (v !== undefined && !object.props) {
+        //     //     object.value = v;
+        //     // }
+        //     return value;
+        // });
         return specs;
     }
 
@@ -334,27 +338,34 @@ export default class SSpecs extends __SClass {
             return this.resolve(value, object);
         });
 
-        if (specJson.extends) {
-            if (specJson.extends.startsWith('@')) {
-                throw new Error(
-                    `The "extends": "${specJson.extends}" property cannot start with an "@"`,
-                );
-            }
-            let extendsJson = this.read(specJson.extends);
-            specJson = __deepMerge(extendsJson, specJson);
-        }
+        specJson = __deepMap(
+            specJson,
+            ({ object, prop, value, path }) => {
+                if (prop === 'extends') {
+                    if (value.startsWith('@')) {
+                        throw new Error(
+                            `The "extends": "${value}" property cannot start with an "@"`,
+                        );
+                    }
+                    let extendsJson = this.read(value);
+                    const newObj = __deepMerge(extendsJson, object);
+                    Object.assign(object, newObj);
+                }
+                return value;
+            },
+            {
+                cloneFirst: false,
+            },
+        );
 
         // if we have an internal spec dotpath
         if (internalSpecDotPath) {
             return __get(specJson, internalSpecDotPath);
         }
 
-        // load data file if wanted
-        if (finalSettings.loadDataFile) {
-        }
-
         // add metas about the spec file read
         specJson.metas = {
+            dotpath: specDotPath,
             path: finalSpecFilePath,
             settings: finalSettings,
         };

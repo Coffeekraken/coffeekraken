@@ -1,5 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
+import { __dashCase } from '@coffeekraken/sugar/string';
 
 class postcssSugarPluginMediaMixinInterface extends __SInterface {
     static get _definition() {
@@ -126,6 +127,7 @@ export default function ({
 
         Object.keys(mediaQueryConfig).forEach((prop) => {
             const value = mediaQueryConfig[prop];
+            prop = __dashCase(prop);
             if (!value) return;
 
             if (

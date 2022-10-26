@@ -1,5 +1,6 @@
 import __SBench from '@coffeekraken/s-bench';
 import __SDataFileGeneric from '@coffeekraken/s-data-file-generic';
+import __SFrontspec from '@coffeekraken/s-frontspec';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSpecs from '@coffeekraken/s-specs';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
@@ -9,6 +10,9 @@ export default function carpenterJsonHandler({ req, res, pageConfig }) {
         __SBench.start('data.carpenterJsonHandler');
 
         const carpenterSources = __SSugarConfig.get('carpenter.sources') ?? {};
+
+        const frontspec = new __SFrontspec(),
+            frontspecJson = await frontspec.read();
 
         const specsMap = {},
             specsBySources = {};
@@ -49,10 +53,12 @@ export default function carpenterJsonHandler({ req, res, pageConfig }) {
         res.send({
             specsMap,
             specsBySources,
+            frontspec: frontspecJson,
         });
         resolve({
             specsMap,
             specsBySources,
+            frontspec: frontspecJson,
         });
     });
 }

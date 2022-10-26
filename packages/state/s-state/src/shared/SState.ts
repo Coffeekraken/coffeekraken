@@ -172,6 +172,8 @@ export default class SState extends __SClass {
             }
         })();
 
+        this._proxy = proxy;
+
         return proxy;
     }
 }

@@ -70,15 +70,28 @@ export default function ({
         vars.push(`
             display: flex;
             flex-direction: column;
+            align-items: center;
 
             &.s-card--horizontal {
                 flex-direction: row;
+
+                @sugar.media mobile {
+                    flex-direction: column;
+                }
             }
             &.s-card--horizontal-reverse {
                 flex-direction: row-reverse;
+
+                @sugar.media mobile {
+                    flex-direction: column-reverse;
+                }
             }
             &.s-card--vertical-reverse {
                 flex-direction: column-reverse;
+            }
+
+            .s-card__content {
+                align-items: unset;
             }
         `);
     }

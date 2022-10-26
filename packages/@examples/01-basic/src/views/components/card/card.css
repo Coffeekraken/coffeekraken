@@ -1,86 +1,95 @@
 #cards-layout {
-    perspective: 800px;
+  perspective: 800px;
 }
 
 .s-card {
-    @sugar.ui.card();
-    position: relative;
-    z-index: 10;
-    background-image: linear-gradient(
-        -45deg,
-        sugar.color(base, surface, --alpha 0),
-        sugar.color(base, --alpha 0.2)
-    );
+  @sugar.ui.card();
+  position: relative;
+  z-index: 10;
+  background-image: linear-gradient(
+    -45deg,
+    sugar.color(base, surface, --alpha 0),
+    sugar.color(base, --alpha 0.2)
+  );
+  max-width: 500px;
 
-    .s-card__img-container {
-        perspective: 800px;
+  &--horizontal {
+    max-width: 1280px;
+  }
+
+  .s-card__img-container {
+    perspective: 800px;
+
+    img {
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      width: 100%;
     }
+  }
 
+  .s-card__img {
+    margin-block-end: -10%;
+    transform: rotateX(-5deg) rotateY(35deg) translateX(10%) translateY(-10%);
+    @sugar.border.radius();
+    @sugar.depth (100);
+    @sugar.transition();
+  }
+  &:hover .s-card__img {
+    transform: rotateX(-5deg) rotateY(-25deg) rotateZ(-5deg) translateX(-5%)
+      translateY(-10%) scale(0.9);
+  }
+
+  :nth-child(2) > & {
     .s-card__img {
-        margin-block-end: -10%;
-        transform: rotateX(-5deg) rotateY(35deg) translateX(10%)
-            translateY(-10%);
-        @sugar.border.radius();
-        @sugar.depth (100);
-        @sugar.transition();
+      transform: rotateX(10deg) rotateY(10deg) rotateZ(2deg) translateX(2%)
+        translateY(-10%) scale(0.85);
     }
-    &:hover .s-card__img {
-        transform: rotateX(-5deg) rotateY(-25deg) rotateZ(-5deg) translateX(-5%)
-            translateY(-10%) scale(0.9);
+  }
+  :nth-child(2) > &:hover {
+    .s-card__img {
+      transform: rotateX(-5deg) rotateY(35deg) translateX(10%) translateY(-10%);
     }
+  }
 
-    :nth-child(2) > & {
-        .s-card__img {
-            transform: rotateX(10deg) rotateY(10deg) rotateZ(2deg)
-                translateX(2%) translateY(-10%) scale(0.85);
-        }
+  :nth-child(3) > & {
+    .s-card__img {
+      transform: rotateX(-5deg) rotateY(-35deg) translateX(-10%)
+        translateY(-10%);
     }
-    :nth-child(2) > &:hover {
-        .s-card__img {
-            transform: rotateX(-5deg) rotateY(35deg) translateX(10%)
-                translateY(-10%);
-        }
+  }
+  :nth-child(3) > &:hover {
+    .s-card__img {
+      transform: rotateX(10deg) rotateY(10deg) rotateZ(2deg) translateX(2%)
+        translateY(-10%) scale(0.85);
     }
+  }
 
-    :nth-child(3) > & {
-        .s-card__img {
-            transform: rotateX(-5deg) rotateY(-35deg) translateX(-10%)
-                translateY(-10%);
-        }
-    }
-    :nth-child(3) > &:hover {
-        .s-card__img {
-            transform: rotateX(10deg) rotateY(10deg) rotateZ(2deg)
-                translateX(2%) translateY(-10%) scale(0.85);
-        }
-    }
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    background: sugar.color(accent);
+  }
+  &:before {
+    width: 100px;
+    height: 2px;
+    bottom: -12px;
+    right: -12px;
+  }
+  &:after {
+    width: 2px;
+    height: 100px;
+    bottom: -10px;
+    right: -12px;
+  }
 
-    &:before,
-    &:after {
-        content: '';
-        display: block;
-        position: absolute;
-        background: sugar.color(accent);
-    }
+  @sugar.media mobile {
     &:before {
-        width: 100px;
-        height: 2px;
-        bottom: -12px;
-        right: -12px;
+      right: sugar.margin(30);
     }
     &:after {
-        width: 2px;
-        height: 100px;
-        bottom: -10px;
-        right: -12px;
+      right: sugar.margin(30);
     }
-
-    @sugar.media mobile {
-        &:before {
-            right: sugar.margin(30);
-        }
-        &:after {
-            right: sugar.margin(30);
-        }
-    }
+  }
 }

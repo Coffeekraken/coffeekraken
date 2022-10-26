@@ -189,7 +189,6 @@ export default class SLitComponent extends LitElement {
                         if (typeStr === 'object' && typeof value === 'string') {
                             try {
                                 const json = JSON.parse(value);
-                                console.log('V', json, value);
                                 return json;
                             } catch (e) {
                                 console.error(e);
@@ -412,16 +411,6 @@ export default class SLitComponent extends LitElement {
         // make props responsive
         // this.componentUtils.makePropsResponsive(this.props);
 
-        // handle state if needed
-        if (this.state) {
-            this.state = this.componentUtils.handleState(this.state, {
-                save: this.props.saveState,
-            });
-            this.state.$set('*', () => {
-                this.requestUpdate();
-            });
-        }
-
         // verbose
         if (this.props.verbose) {
             console.log(
@@ -429,6 +418,21 @@ export default class SLitComponent extends LitElement {
                     this.id ? ` #${this.id} ` : ' '
                 }mounting`,
             );
+        }
+
+        // handle state if needed
+        if (this.state) {
+            const state = Object.assign({}, this.state);
+            delete this.state;
+            Object.defineProperty(this, 'state', {
+                enumerable: true,
+                value: this.componentUtils.handleState(state, {
+                    save: this.props.saveState,
+                }),
+            });
+            this.state.$set('*', (action) => {
+                this.requestUpdate();
+            });
         }
 
         // custom mount function

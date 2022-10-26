@@ -50,7 +50,7 @@ export default function (api) {
              * @name          mobile
              * @namespace     config.themeMedia.queries
              * @type          Object
-             * @default       {'min-width': 0, 'max-width': 639}
+             * @default       {'minWidth': 0, 'maxWidth': 639}
              *
              * Specify the media query arguments needed to target mobile
              *
@@ -58,15 +58,15 @@ export default function (api) {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             mobile: {
-                'min-width': 0,
-                'max-width': 639,
+                minWidth: 0,
+                maxWidth: 639,
             },
 
             /**
              * @name          tablet
              * @namespace     config.themeMedia.queries
              * @type          Object
-             * @default       {'min-width': 640, 'max-width': 1279}
+             * @default       {'minWidth': 640, 'maxWidth': 1279}
              *
              * Specify the media query arguments needed to target tablet
              *
@@ -74,15 +74,15 @@ export default function (api) {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             tablet: {
-                'min-width': 640,
-                'max-width': 1279,
+                minWidth: 640,
+                maxWidth: 1279,
             },
 
             /**
              * @name          desktop
              * @namespace     config.themeMedia.queries
              * @type          Object
-             * @default       {'min-width': 1280, 'max-width': 2047}
+             * @default       {'minWidth': 1280, 'maxWidth': 2047}
              *
              * Specify the media query arguments needed to target desktop
              *
@@ -90,15 +90,15 @@ export default function (api) {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             desktop: {
-                'min-width': 1280,
-                'max-width': 2047,
+                minWidth: 1280,
+                maxWidth: 2047,
             },
 
             /**
              * @name          wide
              * @namespace     config.themeMedia.queries
              * @type          Object
-             * @default       {'min-width': 2048, 'max-width': null}
+             * @default       {'minWidth': 2048, 'maxWidth': null}
              *
              * Specify the media query arguments needed to target wide
              *
@@ -106,8 +106,8 @@ export default function (api) {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             wide: {
-                'min-width': 2048,
-                'max-width': null,
+                minWidth: 2048,
+                maxWidth: null,
             },
         },
     };

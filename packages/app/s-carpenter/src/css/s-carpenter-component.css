@@ -54,6 +54,7 @@ body:not(.s-carpenter--in-iframe) {
         background: sugar.color(base, background);
         transform: translateX(100%);
         opacity: 0;
+        padding-block-end: sugar.padding(50);
         pointer-events: none;
         overflow-y: auto;
         @sugar.depth (100);
@@ -109,6 +110,19 @@ body:not(.s-carpenter--in-iframe) {
     }
 
     .s-specs-editor__prop:not(.s-specs-editor__child .s-specs-editor__prop) {
+        /* padding-inline: sugar.padding(40); */
+    }
+
+    .s-specs-editor__prop {
+        padding-inline: sugar.padding(40);
+    }
+    .s-specs-editor__child-title {
+        padding-block-start: sugar.padding(30);
+        padding-inline: sugar.padding(40);
+        color: sugar.color(accent);
+    }
+    .s-specs-editor__child-description {
+        padding-block-end: sugar.padding(30);
         padding-inline: sugar.padding(40);
     }
 
@@ -126,12 +140,23 @@ body:not(.s-carpenter--in-iframe) {
     }
 
     .s-specs-editor__metas {
-        padding: sugar.padding(40);
+        padding-block: sugar.padding(30);
+        margin-block-end: sugar.margin(30);
+        background-image: linear-gradient(
+            45deg,
+            sugar.color(base, background),
+            sugar.color(base, background, --lighten 5%)
+        );
+        @sugar.depth (100);
+
+        .s-typo--h3 {
+            color: sugar.color(accent);
+        }
     }
 
     .s-specs-editor__child {
-        padding: sugar.padding(40);
-        background: sugar.color(base, background, --darken 5% --alpha 0.3);
+        /* padding: sugar.padding(40); */
+        /* background: sugar.color(base, background, --darken 5% --alpha 0.3); */
 
         &:not(:first-child) {
             margin-block-start: sugar.margin(40);

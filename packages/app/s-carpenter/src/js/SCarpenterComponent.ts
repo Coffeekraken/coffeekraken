@@ -560,6 +560,7 @@ export default class SCarpenterComponent extends __SLitComponent {
                     ${this.state.currentSpecs
                         ? html`
                               <s-specs-editor
+                                  id="${this.props.dotpath}"
                                   specs="${JSON.stringify(
                                       this.state.currentSpecs,
                                   )}"

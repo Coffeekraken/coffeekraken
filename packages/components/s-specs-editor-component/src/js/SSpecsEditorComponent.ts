@@ -3,7 +3,9 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 import { __get } from '@coffeekraken/sugar/object';
 
 import { __deepMerge } from '@coffeekraken/sugar/object';
+import { __lowerFirst } from '@coffeekraken/sugar/string';
 import { css, html, unsafeCSS } from 'lit';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import __SSpecsEditorComponentInterface from './interface/SSpecsEditorComponentInterface';
 
 // @ts-ignore
@@ -86,7 +88,9 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         `;
     }
 
-    state = {};
+    static state = {
+        actives: {},
+    };
 
     constructor() {
         super(
@@ -118,6 +122,43 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                 ),
             },
         });
+    }
+
+    _toggle(id: string): void {
+        if (!this.state.actives[id]) {
+            this.state.actives[id] = true;
+        }
+        {
+            this.state.actives[id] = false;
+        }
+    }
+    _isActive(id: string): boolean {
+        return this.state.actives[id];
+    }
+
+    /**
+     * Add an item in a repeatable one
+     */
+    _addItem(stack, specs) {
+        switch (specs.type.toLowerCase()) {
+            case 'object{}':
+            default:
+                stack.push({});
+                break;
+        }
+
+        this.requestUpdate();
+    }
+
+    /**
+     * Remove an item in a repeatable one
+     */
+    _removeItem(stack, item, specs) {
+        if (Array.isArray(stack)) {
+            stack.splice(stack.indexOf(item), 1);
+        }
+
+        this.requestUpdate();
     }
 
     _specsToValues(specs) {
@@ -279,35 +320,126 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         `;
     }
 
-    _render;
+    _renderElement(propObj) {
+        return html`
+            ${propObj.type.toLowerCase() === 'text'
+                ? this._renderTextElement(propObj)
+                : propObj.type.toLowerCase() === 'select'
+                ? this._renderSelectElement(propObj)
+                : propObj.type.toLowerCase() === 'checkbox'
+                ? this._renderCheckboxElement(propObj)
+                : ''}
+        `;
+    }
 
-    _renderElements(specs, path: string[] = []) {
-        // console.log('props', specs.props);
-        // console.log('keys', Object.keys(specs.props));
+    _renderElements(
+        specs: any,
+        path: string[] = [],
+        values: any = {},
+        forceNoRepeat = false,
+    ) {
+        // const _specs = __get(specs, path.join('.'));
+        const _specs = specs;
+        if (!forceNoRepeat && _specs.type.match(/(\{\}|\[\])/)) {
+            const valuesPath = `${path.filter((p) => p !== 'props').join('.')}`;
+            const loopOn = __get(values, valuesPath);
 
-        // const sortedKeys = Object.keys(specs.props).sort((a, b) => {
-        //     if (specs.props[a].props) {
-        //         console.log('a', a, b);
-        //         return 1;
-        //     }
-        //     return -1;
-        // });
-        // console.log('sorte', sortedKeys);
+            return html`
+                <div class="${this.componentUtils.className('__repeatable')}">
+                    ${loopOn.map(
+                        (v, i) => html`
+                            <div
+                                tabindex="0"
+                                @pointerup=${() =>
+                                    this._toggle(`${path.join('.')}-${i}`)}
+                                class="${this.componentUtils.className(
+                                    '__repeatable-title',
+                                )} ${this._isActive(`${path.join('.')}-${i}`)
+                                    ? 'active'
+                                    : ''}"
+                            >
+                                ${v.title ??
+                                v.name ??
+                                v.id ??
+                                `${_specs.title} #${i}`}
+                                ${this._isActive(`${path.join('.')}-${i}`)
+                                    ? html`
+                                          ${unsafeHTML(
+                                              this.props.icons.collapse,
+                                          )}
+                                      `
+                                    : html`
+                                          ${unsafeHTML(this.props.icons.expand)}
+                                      `}
+                            </div>
+                            <div
+                                tabindex="0"
+                                class="${this.componentUtils.className(
+                                    '__repeatable-item',
+                                )} ${this._isActive(`${path.join('.')}-${i}`)
+                                    ? 'active'
+                                    : ''}"
+                            >
+                                <div
+                                    class="${this.componentUtils.className(
+                                        '__repeatable-item-actions',
+                                    )} ${this._isActive(
+                                        `${path.join('.')}-${i}`,
+                                    )
+                                        ? 'active'
+                                        : ''}"
+                                >
+                                    <button
+                                        @pointerup=${() =>
+                                            this._removeItem(loopOn, v, _specs)}
+                                        class="${this.componentUtils.className(
+                                            '__repeatable-remove',
+                                            's-badge s-color s-color--error',
+                                        )}"
+                                    >
+                                        Remove
+                                    </button>
+                                </div>
 
-        const _props = __get(specs, path.join('.'));
+                                <div
+                                    class="${this.componentUtils.className(
+                                        '__repeatable-item-props',
+                                    )}"
+                                >
+                                    ${this._renderElements(
+                                        specs,
+                                        [...path],
+                                        v,
+                                        true,
+                                    )}
+                                </div>
+                            </div>
+                        `,
+                    )}
 
-        if (_props.type.match(/(\{\}|\[\])/)) {
-            console.log(
-                'p',
-                `values.${path.filter((p) => p !== 'props').join('.')}`,
-            );
-            const loopOn = __get(specs, `values`);
-
-            console.log(loopOn);
+                    <div
+                        class="${this.componentUtils.className(
+                            '__repeatable-actions',
+                        )}"
+                    >
+                        <button
+                            @pointerup=${() => this._addItem(loopOn, _specs)}
+                            class="${this.componentUtils.className(
+                                '__btn',
+                                's-btn',
+                            )}"
+                        >
+                            Add a
+                            ${__lowerFirst(_specs.title).replace(/s$/, '')}
+                            ${unsafeHTML(this.props.icons.add)}
+                        </button>
+                    </div>
+                </div>
+            `;
         } else {
             return html`
-                ${Object.keys(specs.props).map((prop) => {
-                    const propObj = specs.props[prop];
+                ${Object.keys(_specs.props).map((prop) => {
+                    const propObj = _specs.props[prop];
                     if (propObj.props) {
                         return html`
                             <div
@@ -331,11 +463,14 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                 >
                                     ${propObj.description}
                                 </p>
-                                ${this._renderElements(specs, [
-                                    ...path,
-                                    'props',
-                                    prop,
-                                ])}
+                                ${this._renderElements(
+                                    propObj,
+                                    !forceNoRepeat
+                                        ? [...path, 'props', prop]
+                                        : path,
+                                    values,
+                                    forceNoRepeat,
+                                )}
                             </div>
                         `;
                     } else {
@@ -346,13 +481,11 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                     '__prop',
                                 )}"
                             >
-                                ${propObj.type.toLowerCase() === 'text'
-                                    ? this._renderTextElement(propObj)
-                                    : propObj.type.toLowerCase() === 'select'
-                                    ? this._renderSelectElement(propObj)
-                                    : propObj.type.toLowerCase() === 'checkbox'
-                                    ? this._renderCheckboxElement(propObj)
-                                    : ''}
+                                ${this._renderElement(
+                                    propObj,
+                                    [...path, 'props', prop],
+                                    values,
+                                )}
                             </div>
                         `;
                     }
@@ -395,7 +528,11 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                       ${this.props.specs.description}
                                   </p>
                               </div>
-                              ${this._renderElements(this.props.specs)}
+                              ${this._renderElements(
+                                  this.props.specs,
+                                  [],
+                                  this.props.specs.values,
+                              )}
                           </div>
                       `
                     : ''}

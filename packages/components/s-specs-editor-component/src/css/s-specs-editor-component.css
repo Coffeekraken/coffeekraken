@@ -1,8 +1,79 @@
 .s-specs-editor {
+    user-select: none;
+
     .s-tooltip-container {
         float: right;
     }
     .s-tooltip {
         min-width: 250px;
+    }
+    $ .s-specs-editor__repeatable {
+        /* background: red; */
+        background: sugar.color(base, background, --darken 5%);
+    }
+    .s-specs-editor__repeatable-title {
+        background: sugar.color(base, surface);
+        background-image: linear-gradient(
+            -25deg,
+            sugar.color(base, background),
+            sugar.color(base, background, --lighten 5%)
+        );
+        padding: sugar.padding(30) sugar.padding(40);
+        cursor: pointer;
+        @sugar.depth (100);
+
+        &.active,
+        &:hover {
+            background-image: linear-gradient(
+                -45deg,
+                sugar.color(accent),
+                sugar.color(accent, --darken 3%)
+            );
+        }
+
+        &.active {
+            background-image: linear-gradient(
+                45deg,
+                sugar.color(accent),
+                sugar.color(accent, --darken 3%)
+            );
+        }
+
+        .s-specs-editor__repeatable-remove {
+            float: right;
+            display: none;
+            margin-inline-end: sugar.margin(10);
+        }
+        &:hover .s-specs-editor__repeatable-remove {
+            display: block;
+            i {
+                margin-inline-start: sugar.margin(10);
+            }
+        }
+
+        i {
+            float: right;
+        }
+    }
+    .s-specs-editor__repeatable-item {
+        display: none;
+    }
+    .s-specs-editor__repeatable-item.active {
+        display: block;
+    }
+
+    .s-specs-editor__repeatable-item-actions {
+        text-align: end;
+        padding: sugar.padding(30) sugar.padding(40);
+        background: sugar.color(base, background, --darken 5%);
+    }
+
+    .s-specs-editor__repeatable-item-props {
+        padding: sugar.padding(30) 0;
+    }
+
+    .s-specs-editor__repeatable-actions {
+        padding: sugar.padding(30) sugar.padding(30);
+        text-align: end;
     }
 }

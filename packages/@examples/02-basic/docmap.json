@@ -3,18 +3,20 @@
     "extends": [],
     "generated": {
         "extends": [
-            "01-basic",
             "@coffeekraken/cli",
-            "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
+            "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-code-formatter-prettier",
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
+            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
@@ -53,6 +55,7 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
@@ -69,6 +72,9 @@
             "@coffeekraken/s-request",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -94,8 +100,8 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "02-basic.doc.README": {
-                "id": "02-basic.doc.README",
+            "@example.02-basic.doc.README": {
+                "id": "@example.02-basic.doc.README",
                 "name": "README",
                 "type": {
                     "types": [
@@ -117,7 +123,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "02-basic.doc",
+                "namespace": "@example.02-basic.doc",
                 "status": "wip",
                 "since": "2.0.0",
                 "author": {
@@ -130,8 +136,8 @@
                 "relPath": "README.md",
                 "children": {}
             },
-            "02-basic.sugar.style.resets.Global-reset": {
-                "id": "02-basic.sugar.style.resets.Global-reset",
+            "@example.02-basic.sugar.style.resets.Global-reset": {
+                "id": "@example.02-basic.sugar.style.resets.Global-reset",
                 "name": "Global reset",
                 "type": {
                     "types": [
@@ -155,7 +161,7 @@
                     }
                 ],
                 "description": "These mixins allows you to apply some resets like `destyle` and/or the `sugar` one.\nThe `destyle` one is well known and you can find the documentation on their website.\nThe `sugar` one is our own that add some resets like setting max-width to 100% for images, and some more. Check our his own documentation page.",
-                "namespace": "02-basic.sugar.style.resets",
+                "namespace": "@example.02-basic.sugar.style.resets",
                 "status": "beta",
                 "example": [],
                 "since": "2.0.0",
@@ -168,8 +174,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.resets.Destyle-reset": {
-                "id": "02-basic.sugar.style.resets.Destyle-reset",
+            "@example.02-basic.sugar.style.resets.Destyle-reset": {
+                "id": "@example.02-basic.sugar.style.resets.Destyle-reset",
                 "name": "Destyle reset",
                 "type": {
                     "types": [
@@ -193,7 +199,7 @@
                     }
                 ],
                 "description": "These mixins allows you to apply the `destyle` reset easily.",
-                "namespace": "02-basic.sugar.style.resets",
+                "namespace": "@example.02-basic.sugar.style.resets",
                 "status": "beta",
                 "example": [],
                 "since": "2.0.0",
@@ -206,8 +212,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.resets.Sugar-reset": {
-                "id": "02-basic.sugar.style.resets.Sugar-reset",
+            "@example.02-basic.sugar.style.resets.Sugar-reset": {
+                "id": "@example.02-basic.sugar.style.resets.Sugar-reset",
                 "name": "Sugar reset",
                 "type": {
                     "types": [
@@ -231,7 +237,7 @@
                     }
                 ],
                 "description": "This mixin allows you to apply the `sugar` reset easily.",
-                "namespace": "02-basic.sugar.style.resets",
+                "namespace": "@example.02-basic.sugar.style.resets",
                 "status": "beta",
                 "example": [],
                 "since": "2.0.0",
@@ -244,8 +250,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.font.default": {
-                "id": "02-basic.sugar.style.font.default",
+            "@example.02-basic.sugar.style.font.default": {
+                "id": "@example.02-basic.sugar.style.font.default",
                 "name": "default",
                 "type": {
                     "types": [
@@ -262,7 +268,7 @@
                     }
                 ],
                 "description": "This declare the @font-face for the \"<yellow>default</yellow> font family\"",
-                "namespace": "02-basic.sugar.style.font",
+                "namespace": "@example.02-basic.sugar.style.font",
                 "status": "beta",
                 "since": "2.0.0",
                 "author": {
@@ -274,8 +280,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.font.title": {
-                "id": "02-basic.sugar.style.font.title",
+            "@example.02-basic.sugar.style.font.title": {
+                "id": "@example.02-basic.sugar.style.font.title",
                 "name": "title",
                 "type": {
                     "types": [
@@ -292,7 +298,7 @@
                     }
                 ],
                 "description": "This declare the @font-face for the \"<yellow>title</yellow> font family\"",
-                "namespace": "02-basic.sugar.style.font",
+                "namespace": "@example.02-basic.sugar.style.font",
                 "status": "beta",
                 "since": "2.0.0",
                 "author": {
@@ -304,8 +310,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.ui.Avatar": {
-                "id": "02-basic.sugar.style.ui.Avatar",
+            "@example.02-basic.sugar.style.ui.Avatar": {
+                "id": "@example.02-basic.sugar.style.ui.Avatar",
                 "name": "Avatar",
                 "type": {
                     "types": [
@@ -329,7 +335,7 @@
                     }
                 ],
                 "description": "These classes allows to apply some avatar style around any image.",
-                "namespace": "02-basic.sugar.style.ui",
+                "namespace": "@example.02-basic.sugar.style.ui",
                 "status": "beta",
                 "example": [
                     {
@@ -373,8 +379,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.ui.Backdrop": {
-                "id": "02-basic.sugar.style.ui.Backdrop",
+            "@example.02-basic.sugar.style.ui.Backdrop": {
+                "id": "@example.02-basic.sugar.style.ui.Backdrop",
                 "name": "Backdrop",
                 "type": {
                     "types": [
@@ -398,7 +404,7 @@
                     }
                 ],
                 "description": "These classes allows you to display nice backdrop with simple class.",
-                "namespace": "02-basic.sugar.style.ui",
+                "namespace": "@example.02-basic.sugar.style.ui",
                 "status": "beta",
                 "example": [
                     {
@@ -417,8 +423,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.ui.Badges": {
-                "id": "02-basic.sugar.style.ui.Badges",
+            "@example.02-basic.sugar.style.ui.Badges": {
+                "id": "@example.02-basic.sugar.style.ui.Badges",
                 "name": "Badges",
                 "type": {
                     "types": [
@@ -442,7 +448,7 @@
                     }
                 ],
                 "description": "These classes allows you to display any HTMLElement as a badge",
-                "namespace": "02-basic.sugar.style.ui",
+                "namespace": "@example.02-basic.sugar.style.ui",
                 "status": "beta",
                 "example": [
                     {
@@ -486,8 +492,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.ui.Blockquote": {
-                "id": "02-basic.sugar.style.ui.Blockquote",
+            "@example.02-basic.sugar.style.ui.Blockquote": {
+                "id": "@example.02-basic.sugar.style.ui.Blockquote",
                 "name": "Blockquote",
                 "type": {
                     "types": [
@@ -511,7 +517,7 @@
                     }
                 ],
                 "description": "These classes allows you to display nice blockquote with simple class.",
-                "namespace": "02-basic.sugar.style.ui",
+                "namespace": "@example.02-basic.sugar.style.ui",
                 "status": "beta",
                 "example": [
                     {
@@ -560,8 +566,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.ui.Buttons": {
-                "id": "02-basic.sugar.style.ui.Buttons",
+            "@example.02-basic.sugar.style.ui.Buttons": {
+                "id": "@example.02-basic.sugar.style.ui.Buttons",
                 "name": "Buttons",
                 "type": {
                     "types": [
@@ -585,7 +591,7 @@
                     }
                 ],
                 "description": "These classes allows you to display any HTMLElement as a button",
-                "namespace": "02-basic.sugar.style.ui",
+                "namespace": "@example.02-basic.sugar.style.ui",
                 "status": "beta",
                 "example": [
                     {
@@ -639,8 +645,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.ui.Checkbox": {
-                "id": "02-basic.sugar.style.ui.Checkbox",
+            "@example.02-basic.sugar.style.ui.Checkbox": {
+                "id": "@example.02-basic.sugar.style.ui.Checkbox",
                 "name": "Checkbox",
                 "type": {
                     "types": [
@@ -664,7 +670,7 @@
                     }
                 ],
                 "description": "These classes allows you to display nice checkbox in your forms",
-                "namespace": "02-basic.sugar.style.ui",
+                "namespace": "@example.02-basic.sugar.style.ui",
                 "status": "beta",
                 "example": [
                     {
@@ -718,8 +724,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.ui.Dropdown": {
-                "id": "02-basic.sugar.style.ui.Dropdown",
+            "@example.02-basic.sugar.style.ui.Dropdown": {
+                "id": "@example.02-basic.sugar.style.ui.Dropdown",
                 "name": "Dropdown",
                 "type": {
                     "types": [
@@ -743,7 +749,7 @@
                     }
                 ],
                 "description": "These classes allows you to display nice dropdown on buttons or whatever",
-                "namespace": "02-basic.sugar.style.ui",
+                "namespace": "@example.02-basic.sugar.style.ui",
                 "status": "beta",
                 "example": [
                     {
@@ -787,8 +793,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.ui.Fs-Tree": {
-                "id": "02-basic.sugar.style.ui.Fs-Tree",
+            "@example.02-basic.sugar.style.ui.Fs-Tree": {
+                "id": "@example.02-basic.sugar.style.ui.Fs-Tree",
                 "name": "Fs Tree",
                 "type": {
                     "types": [
@@ -812,7 +818,7 @@
                     }
                 ],
                 "description": "These classes allows you to display a nice filesystem tree",
-                "namespace": "02-basic.sugar.style.ui",
+                "namespace": "@example.02-basic.sugar.style.ui",
                 "status": "beta",
                 "example": [
                     {
@@ -851,8 +857,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.ui.input.Text-Input": {
-                "id": "02-basic.sugar.style.ui.input.Text-Input",
+            "@example.02-basic.sugar.style.ui.input.Text-Input": {
+                "id": "@example.02-basic.sugar.style.ui.input.Text-Input",
                 "name": "Text Input",
                 "type": {
                     "types": [
@@ -876,7 +882,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply some styles to your text input",
-                "namespace": "02-basic.sugar.style.ui.input",
+                "namespace": "@example.02-basic.sugar.style.ui.input",
                 "status": "beta",
                 "example": [
                     {
@@ -920,8 +926,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.ui.inputContainer.Input-container": {
-                "id": "02-basic.sugar.style.ui.inputContainer.Input-container",
+            "@example.02-basic.sugar.style.ui.inputContainer.Input-container": {
+                "id": "@example.02-basic.sugar.style.ui.inputContainer.Input-container",
                 "name": "Input container",
                 "type": {
                     "types": [
@@ -945,7 +951,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply some styles to input container",
-                "namespace": "02-basic.sugar.style.ui.inputContainer",
+                "namespace": "@example.02-basic.sugar.style.ui.inputContainer",
                 "status": "beta",
                 "example": [
                     {
@@ -989,8 +995,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.ui.Labels": {
-                "id": "02-basic.sugar.style.ui.Labels",
+            "@example.02-basic.sugar.style.ui.Labels": {
+                "id": "@example.02-basic.sugar.style.ui.Labels",
                 "name": "Labels",
                 "type": {
                     "types": [
@@ -1014,7 +1020,7 @@
                     }
                 ],
                 "description": "These classes allows you to structure forms using labels.",
-                "namespace": "02-basic.sugar.style.ui",
+                "namespace": "@example.02-basic.sugar.style.ui",
                 "status": "beta",
                 "example": [
                     {
@@ -1043,8 +1049,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.ui.Lists": {
-                "id": "02-basic.sugar.style.ui.Lists",
+            "@example.02-basic.sugar.style.ui.Lists": {
+                "id": "@example.02-basic.sugar.style.ui.Lists",
                 "name": "Lists",
                 "type": {
                     "types": [
@@ -1068,7 +1074,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply list styles to any ul, ol, dl, etc...",
-                "namespace": "02-basic.sugar.style.ui",
+                "namespace": "@example.02-basic.sugar.style.ui",
                 "status": "beta",
                 "example": [
                     {
@@ -1112,8 +1118,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.ui.Loaders": {
-                "id": "02-basic.sugar.style.ui.Loaders",
+            "@example.02-basic.sugar.style.ui.Loaders": {
+                "id": "@example.02-basic.sugar.style.ui.Loaders",
                 "name": "Loaders",
                 "type": {
                     "types": [
@@ -1137,7 +1143,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply loader styles like \"spinner\", and more to come...",
-                "namespace": "02-basic.sugar.style.ui",
+                "namespace": "@example.02-basic.sugar.style.ui",
                 "status": "beta",
                 "example": [
                     {
@@ -1171,8 +1177,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.ui.Tabs": {
-                "id": "02-basic.sugar.style.ui.Tabs",
+            "@example.02-basic.sugar.style.ui.Tabs": {
+                "id": "@example.02-basic.sugar.style.ui.Tabs",
                 "name": "Tabs",
                 "type": {
                     "types": [
@@ -1196,7 +1202,7 @@
                     }
                 ],
                 "description": "These classes allows you to style list (or any others) HTMLElement as tabs",
-                "namespace": "02-basic.sugar.style.ui",
+                "namespace": "@example.02-basic.sugar.style.ui",
                 "status": "beta",
                 "example": [
                     {
@@ -1255,8 +1261,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.ui.Toggles": {
-                "id": "02-basic.sugar.style.ui.Toggles",
+            "@example.02-basic.sugar.style.ui.Toggles": {
+                "id": "@example.02-basic.sugar.style.ui.Toggles",
                 "name": "Toggles",
                 "type": {
                     "types": [
@@ -1280,7 +1286,7 @@
                     }
                 ],
                 "description": "These classes allows you to display any HTMLElement as a toggle",
-                "namespace": "02-basic.sugar.style.ui",
+                "namespace": "@example.02-basic.sugar.style.ui",
                 "status": "beta",
                 "example": [
                     {
@@ -1299,8 +1305,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.ui.Radio": {
-                "id": "02-basic.sugar.style.ui.Radio",
+            "@example.02-basic.sugar.style.ui.Radio": {
+                "id": "@example.02-basic.sugar.style.ui.Radio",
                 "name": "Radio",
                 "type": {
                     "types": [
@@ -1324,7 +1330,7 @@
                     }
                 ],
                 "description": "These classes allows you to display nice radio in your forms",
-                "namespace": "02-basic.sugar.style.ui",
+                "namespace": "@example.02-basic.sugar.style.ui",
                 "status": "beta",
                 "example": [
                     {
@@ -1373,8 +1379,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.ui.Range": {
-                "id": "02-basic.sugar.style.ui.Range",
+            "@example.02-basic.sugar.style.ui.Range": {
+                "id": "@example.02-basic.sugar.style.ui.Range",
                 "name": "Range",
                 "type": {
                     "types": [
@@ -1398,7 +1404,7 @@
                     }
                 ],
                 "description": "These classes allows you to display nice radio in your forms",
-                "namespace": "02-basic.sugar.style.ui",
+                "namespace": "@example.02-basic.sugar.style.ui",
                 "status": "beta",
                 "example": [
                     {
@@ -1452,8 +1458,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.ui.Select": {
-                "id": "02-basic.sugar.style.ui.Select",
+            "@example.02-basic.sugar.style.ui.Select": {
+                "id": "@example.02-basic.sugar.style.ui.Select",
                 "name": "Select",
                 "type": {
                     "types": [
@@ -1477,7 +1483,7 @@
                     }
                 ],
                 "description": "These classes allows you to display nice select in your forms",
-                "namespace": "02-basic.sugar.style.ui",
+                "namespace": "@example.02-basic.sugar.style.ui",
                 "status": "beta",
                 "example": [
                     {
@@ -1531,8 +1537,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.ui.Switch": {
-                "id": "02-basic.sugar.style.ui.Switch",
+            "@example.02-basic.sugar.style.ui.Switch": {
+                "id": "@example.02-basic.sugar.style.ui.Switch",
                 "name": "Switch",
                 "type": {
                     "types": [
@@ -1556,7 +1562,7 @@
                     }
                 ],
                 "description": "These classes allows you to style checkbox HTMLElement as switches",
-                "namespace": "02-basic.sugar.style.ui",
+                "namespace": "@example.02-basic.sugar.style.ui",
                 "status": "beta",
                 "example": [
                     {
@@ -1605,8 +1611,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.ui.Table": {
-                "id": "02-basic.sugar.style.ui.Table",
+            "@example.02-basic.sugar.style.ui.Table": {
+                "id": "@example.02-basic.sugar.style.ui.Table",
                 "name": "Table",
                 "type": {
                     "types": [
@@ -1630,7 +1636,7 @@
                     }
                 ],
                 "description": "These classes allows you to display nice tables with ease.",
-                "namespace": "02-basic.sugar.style.ui",
+                "namespace": "@example.02-basic.sugar.style.ui",
                 "status": "beta",
                 "example": [
                     {
@@ -1674,8 +1680,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.ui.Tooltips": {
-                "id": "02-basic.sugar.style.ui.Tooltips",
+            "@example.02-basic.sugar.style.ui.Tooltips": {
+                "id": "@example.02-basic.sugar.style.ui.Tooltips",
                 "name": "Tooltips",
                 "type": {
                     "types": [
@@ -1699,7 +1705,7 @@
                     }
                 ],
                 "description": "These classes allows you display nice tooltips on any HTMLElement",
-                "namespace": "02-basic.sugar.style.ui",
+                "namespace": "@example.02-basic.sugar.style.ui",
                 "status": "beta",
                 "example": [
                     {
@@ -1748,8 +1754,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.ui.Typography": {
-                "id": "02-basic.sugar.style.ui.Typography",
+            "@example.02-basic.sugar.style.ui.Typography": {
+                "id": "@example.02-basic.sugar.style.ui.Typography",
                 "name": "Typography",
                 "type": {
                     "types": [
@@ -1773,7 +1779,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply basic typo styles like `sub`, `strong`, etc... on any HTMLElement\nThese styles are defined in the `theme.typo` theme settings.",
-                "namespace": "02-basic.sugar.style.ui",
+                "namespace": "@example.02-basic.sugar.style.ui",
                 "status": "beta",
                 "example": [
                     {
@@ -1937,8 +1943,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.Group": {
-                "id": "02-basic.sugar.style.Group",
+            "@example.02-basic.sugar.style.Group": {
+                "id": "@example.02-basic.sugar.style.Group",
                 "name": "Group",
                 "type": {
                     "types": [
@@ -1962,7 +1968,7 @@
                     }
                 ],
                 "description": "These classes allows you to group elements like s-btn, s-input, etc...\nNote that for this to work fine when direction is \"rtl\", you MUST specify the dir=\"rtl\" attribute\non the html tag",
-                "namespace": "02-basic.sugar.style",
+                "namespace": "@example.02-basic.sugar.style",
                 "status": "beta",
                 "example": [
                     {
@@ -1996,8 +2002,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.Clearfix": {
-                "id": "02-basic.sugar.style.helpers.Clearfix",
+            "@example.02-basic.sugar.style.helpers.Clearfix": {
+                "id": "@example.02-basic.sugar.style.helpers.Clearfix",
                 "name": "Clearfix",
                 "type": {
                     "types": [
@@ -2021,7 +2027,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply a clearfix on any HTMLElement",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -2055,8 +2061,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.cursor.Cursor": {
-                "id": "02-basic.sugar.style.cursor.Cursor",
+            "@example.02-basic.sugar.style.cursor.Cursor": {
+                "id": "@example.02-basic.sugar.style.cursor.Cursor",
                 "name": "Cursor",
                 "type": {
                     "types": [
@@ -2080,7 +2086,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply a specific cursor on any HTMLElement",
-                "namespace": "02-basic.sugar.style.cursor",
+                "namespace": "@example.02-basic.sugar.style.cursor",
                 "status": "beta",
                 "example": [
                     {
@@ -2098,8 +2104,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.Colors": {
-                "id": "02-basic.sugar.style.helpers.Colors",
+            "@example.02-basic.sugar.style.helpers.Colors": {
+                "id": "@example.02-basic.sugar.style.helpers.Colors",
                 "name": "Colors",
                 "type": {
                     "types": [
@@ -2123,7 +2129,7 @@
                     }
                 ],
                 "description": "These classes allows you to set text and background colors easily to any HTMLElement",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -2147,8 +2153,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.Fit-Sizes": {
-                "id": "02-basic.sugar.style.helpers.Fit-Sizes",
+            "@example.02-basic.sugar.style.helpers.Fit-Sizes": {
+                "id": "@example.02-basic.sugar.style.helpers.Fit-Sizes",
                 "name": "Fit Sizes",
                 "type": {
                     "types": [
@@ -2172,7 +2178,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply a fit size on any HTMLElement.\nOn image and video, uses `object-fit` property, on all others,\nsimply fill the element using an absolute position, top: 0, left: 0 and width/height: 100%.",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -2206,8 +2212,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.Link": {
-                "id": "02-basic.sugar.style.helpers.Link",
+            "@example.02-basic.sugar.style.helpers.Link": {
+                "id": "@example.02-basic.sugar.style.helpers.Link",
                 "name": "Link",
                 "type": {
                     "types": [
@@ -2231,7 +2237,7 @@
                     }
                 ],
                 "description": "These classes allows to apply some link styling utils to any HTMLElement.",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -2250,8 +2256,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.Gap": {
-                "id": "02-basic.sugar.style.helpers.Gap",
+            "@example.02-basic.sugar.style.helpers.Gap": {
+                "id": "@example.02-basic.sugar.style.helpers.Gap",
                 "name": "Gap",
                 "type": {
                     "types": [
@@ -2275,7 +2281,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply some gap attributes on any HTMLElement and with",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -2299,8 +2305,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.Heights": {
-                "id": "02-basic.sugar.style.helpers.Heights",
+            "@example.02-basic.sugar.style.helpers.Heights": {
+                "id": "@example.02-basic.sugar.style.helpers.Heights",
                 "name": "Heights",
                 "type": {
                     "types": [
@@ -2324,7 +2330,7 @@
                     }
                 ],
                 "description": "These classes allows to apply some height to any HTMLElement.\nThese widths are defined in the `theme.height` theme settings.",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -2393,8 +2399,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.Text": {
-                "id": "02-basic.sugar.style.helpers.Text",
+            "@example.02-basic.sugar.style.helpers.Text": {
+                "id": "@example.02-basic.sugar.style.helpers.Text",
                 "name": "Text",
                 "type": {
                     "types": [
@@ -2418,7 +2424,7 @@
                     }
                 ],
                 "description": "These classes allows to apply some text styling like `text-align: left`, `text-align: right`, `text-decoration: underline`, etc...\ndirectly inside your HTML.",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -2447,8 +2453,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.Depth": {
-                "id": "02-basic.sugar.style.helpers.Depth",
+            "@example.02-basic.sugar.style.helpers.Depth": {
+                "id": "@example.02-basic.sugar.style.helpers.Depth",
                 "name": "Depth",
                 "type": {
                     "types": [
@@ -2472,7 +2478,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply some depth shadows to any HTMLElement.\nThese depths are defined in the theme configuration under `theme.depth` namespace.",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -2551,8 +2557,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.Disabled": {
-                "id": "02-basic.sugar.style.helpers.Disabled",
+            "@example.02-basic.sugar.style.helpers.Disabled": {
+                "id": "@example.02-basic.sugar.style.helpers.Disabled",
                 "name": "Disabled",
                 "type": {
                     "types": [
@@ -2576,7 +2582,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply the disabled style on any HTMLElement.\nThis make sure *no pointer events** stays active as well as displaying the **not-allowed cursor**.",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -2595,8 +2601,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.Flexbox": {
-                "id": "02-basic.sugar.style.helpers.Flexbox",
+            "@example.02-basic.sugar.style.helpers.Flexbox": {
+                "id": "@example.02-basic.sugar.style.helpers.Flexbox",
                 "name": "Flexbox",
                 "type": {
                     "types": [
@@ -2620,7 +2626,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply some flex attributes on any HTMLElement and with\nthat you can *create some layouts directly in your HTML**.",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -2654,8 +2660,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.Float": {
-                "id": "02-basic.sugar.style.helpers.Float",
+            "@example.02-basic.sugar.style.helpers.Float": {
+                "id": "@example.02-basic.sugar.style.helpers.Float",
                 "name": "Float",
                 "type": {
                     "types": [
@@ -2679,7 +2685,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply some float styling into your html.",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -2708,8 +2714,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.Ratio": {
-                "id": "02-basic.sugar.style.helpers.Ratio",
+            "@example.02-basic.sugar.style.helpers.Ratio": {
+                "id": "@example.02-basic.sugar.style.helpers.Ratio",
                 "name": "Ratio",
                 "type": {
                     "types": [
@@ -2733,7 +2739,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply some ratio to any HTMLElement.\n*These classes make use of the `aspect-ratio` css property**",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -2777,8 +2783,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.Radius": {
-                "id": "02-basic.sugar.style.helpers.Radius",
+            "@example.02-basic.sugar.style.helpers.Radius": {
+                "id": "@example.02-basic.sugar.style.helpers.Radius",
                 "name": "Radius",
                 "type": {
                     "types": [
@@ -2802,7 +2808,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply border radius on any HTMLElement",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -2821,8 +2827,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.Border-width": {
-                "id": "02-basic.sugar.style.helpers.Border-width",
+            "@example.02-basic.sugar.style.helpers.Border-width": {
+                "id": "@example.02-basic.sugar.style.helpers.Border-width",
                 "name": "Border width",
                 "type": {
                     "types": [
@@ -2846,7 +2852,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply some border width to any HTMLElement",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -2865,8 +2871,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.Border-color": {
-                "id": "02-basic.sugar.style.helpers.Border-color",
+            "@example.02-basic.sugar.style.helpers.Border-color": {
+                "id": "@example.02-basic.sugar.style.helpers.Border-color",
                 "name": "Border color",
                 "type": {
                     "types": [
@@ -2890,7 +2896,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply some border color to any HTMLElement",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -2909,8 +2915,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.Display": {
-                "id": "02-basic.sugar.style.helpers.Display",
+            "@example.02-basic.sugar.style.helpers.Display": {
+                "id": "@example.02-basic.sugar.style.helpers.Display",
                 "name": "Display",
                 "type": {
                     "types": [
@@ -2934,7 +2940,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply the some display like `inline`, `inline-block`, `block`, etc...\non any HTMLElement",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -2988,8 +2994,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.Overflow": {
-                "id": "02-basic.sugar.style.helpers.Overflow",
+            "@example.02-basic.sugar.style.helpers.Overflow": {
+                "id": "@example.02-basic.sugar.style.helpers.Overflow",
                 "name": "Overflow",
                 "type": {
                     "types": [
@@ -3013,7 +3019,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply some overflow attributes on any HTMLElement.",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -3072,8 +3078,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.Positions": {
-                "id": "02-basic.sugar.style.helpers.Positions",
+            "@example.02-basic.sugar.style.helpers.Positions": {
+                "id": "@example.02-basic.sugar.style.helpers.Positions",
                 "name": "Positions",
                 "type": {
                     "types": [
@@ -3097,7 +3103,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply some positions like `absolute`, `fixed`, etc... on any HTMLElement",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -3131,8 +3137,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.Pointer": {
-                "id": "02-basic.sugar.style.helpers.Pointer",
+            "@example.02-basic.sugar.style.helpers.Pointer": {
+                "id": "@example.02-basic.sugar.style.helpers.Pointer",
                 "name": "Pointer",
                 "type": {
                     "types": [
@@ -3156,7 +3162,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply some pointer attributes on any HTMLElement.",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -3190,8 +3196,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.Transitions": {
-                "id": "02-basic.sugar.style.helpers.Transitions",
+            "@example.02-basic.sugar.style.helpers.Transitions": {
+                "id": "@example.02-basic.sugar.style.helpers.Transitions",
                 "name": "Transitions",
                 "type": {
                     "types": [
@@ -3215,7 +3221,7 @@
                     }
                 ],
                 "description": "These classes allows to apply some transitions on any HTMLElement.\nThese transitions are defined in the `theme.transition` theme settings.",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -3244,8 +3250,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.Margin": {
-                "id": "02-basic.sugar.style.helpers.Margin",
+            "@example.02-basic.sugar.style.helpers.Margin": {
+                "id": "@example.02-basic.sugar.style.helpers.Margin",
                 "name": "Margin",
                 "type": {
                     "types": [
@@ -3269,7 +3275,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply margins to any HTMLElement",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -3298,8 +3304,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.Offsize": {
-                "id": "02-basic.sugar.style.helpers.Offsize",
+            "@example.02-basic.sugar.style.helpers.Offsize": {
+                "id": "@example.02-basic.sugar.style.helpers.Offsize",
                 "name": "Offsize",
                 "type": {
                     "types": [
@@ -3323,7 +3329,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply an offsize to any HTMLElement.\nAn offsize is a \"space\" that you want to ADD to the width/height of an element.\nYou can specify where you want to add this offsize like for margin and padding by using the \"inline\" and \"block\" notation.",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -3357,8 +3363,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.Order": {
-                "id": "02-basic.sugar.style.helpers.Order",
+            "@example.02-basic.sugar.style.helpers.Order": {
+                "id": "@example.02-basic.sugar.style.helpers.Order",
                 "name": "Order",
                 "type": {
                     "types": [
@@ -3382,7 +3388,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply some order attributes on any HTMLElement.",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -3401,8 +3407,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.tools.Scale": {
-                "id": "02-basic.sugar.style.tools.Scale",
+            "@example.02-basic.sugar.style.tools.Scale": {
+                "id": "@example.02-basic.sugar.style.tools.Scale",
                 "name": "Scale",
                 "type": {
                     "types": [
@@ -3426,7 +3432,7 @@
                     }
                 ],
                 "description": "These classes allows to apply a scale to any supported UI elements.\nThis scale does not use the transform property but increase actual values like `padding`,\n`margin`, etc... In fact, all the properties setted with the `sugar.scallable` function.\nIt's usually a good practice to set the `font-size` of your UI element to `sugar.scalable(1rem)`\nand then to set inner values using `em` unit.",
-                "namespace": "02-basic.sugar.style.tools",
+                "namespace": "@example.02-basic.sugar.style.tools",
                 "status": "beta",
                 "example": [
                     {
@@ -3444,8 +3450,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.Padding": {
-                "id": "02-basic.sugar.style.helpers.Padding",
+            "@example.02-basic.sugar.style.helpers.Padding": {
+                "id": "@example.02-basic.sugar.style.helpers.Padding",
                 "name": "Padding",
                 "type": {
                     "types": [
@@ -3469,7 +3475,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply padding to any HTMLElement",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -3498,8 +3504,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.Spacing": {
-                "id": "02-basic.sugar.style.helpers.Spacing",
+            "@example.02-basic.sugar.style.helpers.Spacing": {
+                "id": "@example.02-basic.sugar.style.helpers.Spacing",
                 "name": "Spacing",
                 "type": {
                     "types": [
@@ -3523,7 +3529,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply spacing to any HTMLElement container",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -3542,8 +3548,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.User-select": {
-                "id": "02-basic.sugar.style.helpers.User-select",
+            "@example.02-basic.sugar.style.helpers.User-select": {
+                "id": "@example.02-basic.sugar.style.helpers.User-select",
                 "name": "User select",
                 "type": {
                     "types": [
@@ -3567,7 +3573,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply some user-select style on any HTMLElement",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -3601,8 +3607,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.Visibility": {
-                "id": "02-basic.sugar.style.helpers.Visibility",
+            "@example.02-basic.sugar.style.helpers.Visibility": {
+                "id": "@example.02-basic.sugar.style.helpers.Visibility",
                 "name": "Visibility",
                 "type": {
                     "types": [
@@ -3626,7 +3632,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply a visibility style on any HTMLElement",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -3645,8 +3651,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.Visually": {
-                "id": "02-basic.sugar.style.helpers.Visually",
+            "@example.02-basic.sugar.style.helpers.Visually": {
+                "id": "@example.02-basic.sugar.style.helpers.Visually",
                 "name": "Visually",
                 "type": {
                     "types": [
@@ -3670,7 +3676,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply a visually style on any HTMLElement",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -3689,8 +3695,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.Truncate": {
-                "id": "02-basic.sugar.style.helpers.Truncate",
+            "@example.02-basic.sugar.style.helpers.Truncate": {
+                "id": "@example.02-basic.sugar.style.helpers.Truncate",
                 "name": "Truncate",
                 "type": {
                     "types": [
@@ -3714,7 +3720,7 @@
                     }
                 ],
                 "description": "These classes allows you to **truncate texts to a number of lines** on any HTMLElement",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -3778,8 +3784,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.tools.Scrollbar": {
-                "id": "02-basic.sugar.style.tools.Scrollbar",
+            "@example.02-basic.sugar.style.tools.Scrollbar": {
+                "id": "@example.02-basic.sugar.style.tools.Scrollbar",
                 "name": "Scrollbar",
                 "type": {
                     "types": [
@@ -3803,7 +3809,7 @@
                     }
                 ],
                 "description": "These classes allows to apply a custom scrollbar that follows your theme settings.\nIt is based on the `theme.ui.scrollbar` settings.",
-                "namespace": "02-basic.sugar.style.tools",
+                "namespace": "@example.02-basic.sugar.style.tools",
                 "status": "beta",
                 "example": [
                     {
@@ -3827,8 +3833,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.Widths": {
-                "id": "02-basic.sugar.style.helpers.Widths",
+            "@example.02-basic.sugar.style.helpers.Widths": {
+                "id": "@example.02-basic.sugar.style.helpers.Widths",
                 "name": "Widths",
                 "type": {
                     "types": [
@@ -3852,7 +3858,7 @@
                     }
                 ],
                 "description": "These classes allows to apply some width to any HTMLElement.\nThese widths are defined in the `theme.width` theme settings.",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -3921,8 +3927,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.helpers.White-space": {
-                "id": "02-basic.sugar.style.helpers.White-space",
+            "@example.02-basic.sugar.style.helpers.White-space": {
+                "id": "@example.02-basic.sugar.style.helpers.White-space",
                 "name": "White space",
                 "type": {
                     "types": [
@@ -3946,7 +3952,7 @@
                     }
                 ],
                 "description": "These classes allows you to apply some white-space style on any HTMLElement",
-                "namespace": "02-basic.sugar.style.helpers",
+                "namespace": "@example.02-basic.sugar.style.helpers",
                 "status": "beta",
                 "example": [
                     {
@@ -4005,8 +4011,8 @@
                 "extension": "dev",
                 "relPath": "dist/css/index.dev.css"
             },
-            "02-basic.sugar.style.ui.Icons": {
-                "id": "02-basic.sugar.style.ui.Icons",
+            "@example.02-basic.sugar.style.ui.Icons": {
+                "id": "@example.02-basic.sugar.style.ui.Icons",
                 "name": "Icons",
                 "type": {
                     "types": [
@@ -4030,7 +4036,7 @@
                     }
                 ],
                 "description": "These classes represent all the icons that you have listed in your project using the @sugar.icon.classes mixin.\nBy using this mixin, your icons will be accessible using the same s-icon:{name} classes\nindependently of the icon source that can be *Fontawesome** or your **Filesystem**.\nThese providers are the one that we support for now but others can be added if needed.",
-                "namespace": "02-basic.sugar.style.ui",
+                "namespace": "@example.02-basic.sugar.style.ui",
                 "status": "beta",
                 "example": [
                     {
@@ -4050,7 +4056,7 @@
                 "relPath": "dist/css/index.dev.css",
                 "children": {
                     "global reset": {
-                        "id": "02-basic.sugar.style.resets.Global-reset",
+                        "id": "@example.02-basic.sugar.style.resets.Global-reset",
                         "name": "Global reset",
                         "type": {
                             "types": [
@@ -4074,7 +4080,7 @@
                             }
                         ],
                         "description": "These mixins allows you to apply some resets like `destyle` and/or the `sugar` one.\nThe `destyle` one is well known and you can find the documentation on their website.\nThe `sugar` one is our own that add some resets like setting max-width to 100% for images, and some more. Check our his own documentation page.",
-                        "namespace": "02-basic.sugar.style.resets",
+                        "namespace": "@example.02-basic.sugar.style.resets",
                         "status": "beta",
                         "example": [],
                         "since": "2.0.0",
@@ -4085,7 +4091,7 @@
                         }
                     },
                     "destyle reset": {
-                        "id": "02-basic.sugar.style.resets.Destyle-reset",
+                        "id": "@example.02-basic.sugar.style.resets.Destyle-reset",
                         "name": "Destyle reset",
                         "type": {
                             "types": [
@@ -4109,7 +4115,7 @@
                             }
                         ],
                         "description": "These mixins allows you to apply the `destyle` reset easily.",
-                        "namespace": "02-basic.sugar.style.resets",
+                        "namespace": "@example.02-basic.sugar.style.resets",
                         "status": "beta",
                         "example": [],
                         "since": "2.0.0",
@@ -4120,7 +4126,7 @@
                         }
                     },
                     "sugar reset": {
-                        "id": "02-basic.sugar.style.resets.Sugar-reset",
+                        "id": "@example.02-basic.sugar.style.resets.Sugar-reset",
                         "name": "Sugar reset",
                         "type": {
                             "types": [
@@ -4144,7 +4150,7 @@
                             }
                         ],
                         "description": "This mixin allows you to apply the `sugar` reset easily.",
-                        "namespace": "02-basic.sugar.style.resets",
+                        "namespace": "@example.02-basic.sugar.style.resets",
                         "status": "beta",
                         "example": [],
                         "since": "2.0.0",

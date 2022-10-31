@@ -3,12 +3,15 @@
     "extends": [],
     "generated": {
         "extends": [
+            "01-basic",
+            "02-basic",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
+            "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
@@ -17,6 +20,7 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config-adapter",
             "@coffeekraken/s-config-folder-adapter",
@@ -69,6 +73,7 @@
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-specs-editor-component",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -1110,13 +1115,13 @@
                         "description": ""
                     }
                 ],
-                "description": "This function allows you to get a theme value using dot path like \"font.family.default.font-family\", etc...\nUsually the best way to access theme config is to use dedicated functions/mixins like \"sugar.margin\", \"sugar.font.family\", etc...",
+                "description": "This function allows you to get a theme value using dot path like \"font.family.font-family\", etc...\nUsually the best way to access theme config is to use dedicated functions/mixins like \"sugar.margin\", \"sugar.font.family\", etc...",
                 "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.function.theme",
                 "status": "beta",
                 "example": [
                     {
                         "language": "css",
-                        "code": ".my-element {\n   font-family: sugar.theme(font.family.default.font-family);\n}"
+                        "code": ".my-element {\n   font-family: sugar.theme(font.family.font-family);\n}"
                     }
                 ],
                 "interface": {
@@ -1173,13 +1178,13 @@
                         "description": ""
                     }
                 ],
-                "description": "This function allows you to get a theme value using dot path like \"font.family.default.font-family\", etc...\nUsually the best way to access theme config is to use dedicated functions/mixins like \"sugar.margin\", \"sugar.font.family\", etc...\nThis function make the same as using the `sugar.theme` one with the parameter `return`set to \"value\"",
+                "description": "This function allows you to get a theme value using dot path like \"font.family.font-family\", etc...\nUsually the best way to access theme config is to use dedicated functions/mixins like \"sugar.margin\", \"sugar.font.family\", etc...\nThis function make the same as using the `sugar.theme` one with the parameter `return`set to \"value\"",
                 "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.function.theme",
                 "status": "beta",
                 "example": [
                     {
                         "language": "css",
-                        "code": ".my-element {\n   font-family: sugar.theme.value(font.family.default.font-family);\n}"
+                        "code": ".my-element {\n   font-family: sugar.theme.value(font.family.font-family);\n}"
                     }
                 ],
                 "interface": {
@@ -1228,13 +1233,13 @@
                         "description": ""
                     }
                 ],
-                "description": "This function allows you to get a theme value using dot path like \"font.family.default.font-family\", etc...\nUsually the best way to access theme config is to use dedicated functions/mixins like \"sugar.margin\", \"sugar.font.family\", etc...\nThis function make the same as using the `sugar.theme` one with the parameter `return`set to \"var\"",
+                "description": "This function allows you to get a theme value using dot path like \"font.family.font-family\", etc...\nUsually the best way to access theme config is to use dedicated functions/mixins like \"sugar.margin\", \"sugar.font.family\", etc...\nThis function make the same as using the `sugar.theme` one with the parameter `return`set to \"var\"",
                 "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.function.theme",
                 "status": "beta",
                 "example": [
                     {
                         "language": "css",
-                        "code": ".my-element {\n   font-family: sugar.theme(font.family.default.font-family);\n}"
+                        "code": ".my-element {\n   font-family: sugar.theme(font.family.font-family);\n}"
                     }
                 ],
                 "interface": {
@@ -4245,6 +4250,43 @@
                 "filename": "gradient.ts",
                 "extension": "ts",
                 "relPath": "src/node/mixins/shadow/gradient.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.spacing.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.spacing.classes",
+                "name": "classes",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ],
+                    "raw": "PostcssMixin"
+                },
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the spacing helper classes like s-p:10, s-pie:40, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.spacing",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": "@sugar.spacing.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.ts",
+                "extension": "ts",
+                "relPath": "src/node/mixins/spacing/classes.ts",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.state.focus": {
@@ -8724,7 +8766,7 @@
                     "name": "postcssSugarPluginUiListClassesInterface",
                     "description": "",
                     "definition": {
-                        "styles": {
+                        "lnfs": {
                             "type": "String[]",
                             "values": [
                                 "solid"
@@ -8746,7 +8788,7 @@
                                 "pill"
                             ]
                         },
-                        "defaultStyle": {
+                        "defaultLnf": {
                             "type": "String",
                             "values": [
                                 "solid"
@@ -8843,9 +8885,9 @@
                     "name": "postcssSugarPluginUiTabInterface",
                     "description": "",
                     "definition": {
-                        "style": {
+                        "lnf": {
                             "type": "String",
-                            "description": "Specify the style you want for your tabs",
+                            "description": "Specify the look and feel you want for your tabs",
                             "values": [
                                 "solid"
                             ],
@@ -8922,6 +8964,108 @@
                 "filename": "tabs.ts",
                 "extension": "ts",
                 "relPath": "src/node/mixins/ui/tabs/tabs.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.toggle.classes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.toggle.classes",
+                "name": "classes",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ],
+                    "raw": "PostcssMixin"
+                },
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "Generate the toggle classes",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.toggle",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": "@sugar.ui.toggle.classes();"
+                    }
+                ],
+                "interface": {
+                    "name": "postcssSugarPluginUiToggleClassesInterface",
+                    "description": "",
+                    "definition": {
+                        "types": {
+                            "type": "String[]",
+                            "values": [
+                                "burger"
+                            ],
+                            "default": [
+                                "burger"
+                            ]
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.ts",
+                "extension": "ts",
+                "relPath": "src/node/mixins/ui/toggle/classes.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.toggle.toggle": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.toggle.toggle",
+                "name": "toggle",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ],
+                    "raw": "PostcssMixin"
+                },
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to generate some \"toggle\" UI components like a burger, etc...\nA toggle is a 1 tag element that reacts to his \"state\" like the \"focus\" and \"active\".",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.toggle",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-element {\n     @sugar.ui.toggle(burger);\n}"
+                    }
+                ],
+                "interface": {
+                    "name": "postcssSugarPluginUiBadgeInterface",
+                    "description": "",
+                    "definition": {
+                        "type": {
+                            "type": "String",
+                            "values": [
+                                "burger"
+                            ],
+                            "required": true
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "toggle.ts",
+                "extension": "ts",
+                "relPath": "src/node/mixins/ui/toggle/toggle.ts",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.tooltip.classes": {

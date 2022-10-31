@@ -4,12 +4,12 @@ import __SDocmap from '@coffeekraken/s-docmap';
 import __SPromise from '@coffeekraken/s-promise';
 
 /**
- * @name                docMap
+ * @name                docmap
  * @namespace           sugar.node.server.frontend.handlers
  * @type                Function
  * @status              wip
  *
- * This function is responsible of responding to express requests made on the docMap url
+ * This function is responsible of responding to express requests made on the docmap url
  *
  * @param         {Object}          req             The express request object
  * @param         {Object}          res             The express response object
@@ -22,11 +22,11 @@ import __SPromise from '@coffeekraken/s-promise';
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default async function docMap(req, res, settings = {}) {
+export default async function docmap(req, res, settings = {}) {
     return new __SPromise(async ({ resolve, reject, pipe }) => {
-        const docMap = new __SDocmap();
+        const docmap = new __SDocmap();
 
-        const json = await docMap.read({
+        const json = await docmap.read({
             snapshot: req.query.v,
         });
 

@@ -292,7 +292,7 @@ export interface ISSliderComponentTimer {
 
 export default class SSliderComponent extends __SLitComponent {
     static get properties() {
-        return __SLitComponent.createProperties(
+        return __SLitComponent.propertiesFromInterface(
             {},
             __SSliderComponentInterface,
         );
@@ -1241,7 +1241,11 @@ export default class SSliderComponent extends __SLitComponent {
 
         // default
         if (this.props.behavior === 'default') {
-            this.$slidesWrapper.style.overflowX = 'auto';
+            if (this.props.direction === 'vertical') {
+                this.$slidesWrapper.style.overflowY = 'auto';
+            } else {
+                this.$slidesWrapper.style.overflowX = 'auto';
+            }
 
             const $slidesWrapper = this.$slidesWrapper;
 
@@ -1250,6 +1254,7 @@ export default class SSliderComponent extends __SLitComponent {
                 startY = this.$slidesWrapper.scrollTop;
             const dist =
                 this.props.direction === 'vertical' ? toRect.y : toRect.x;
+            const _this = this;
             __easeInterval(
                 this.props.transitionDuration,
                 (percentage) => {
@@ -1264,7 +1269,11 @@ export default class SSliderComponent extends __SLitComponent {
                 {
                     easing: this.props.transitionEasing,
                     onEnd() {
-                        $slidesWrapper.style.overflowX = 'hidden';
+                        if (_this.props.direction === 'vertical') {
+                            $slidesWrapper.style.overflowY = 'hidden';
+                        } else {
+                            $slidesWrapper.style.overflowX = 'hidden';
+                        }
                     },
                 },
             );

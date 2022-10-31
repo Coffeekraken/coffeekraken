@@ -5,7 +5,6 @@ import __SInterface from '@coffeekraken/s-interface';
  * @namespace           js.interface
  * @type                      Class
  * @extends             SInterface
- * @interface
  * @status              beta
  * @platform             js
  *

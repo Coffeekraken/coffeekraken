@@ -1,5 +1,10 @@
 export default function () {
     return {
-        defaultAction: '<=',
+        queries: {
+            dwarf: {
+                minHeight: 0,
+                maxHeight: 950,
+            },
+        }
     };
 }

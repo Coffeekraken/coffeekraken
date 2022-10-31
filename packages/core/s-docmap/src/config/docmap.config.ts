@@ -5,6 +5,32 @@ export default function (api) {
     if (api.env.platform !== 'node') return;
 
     return {
+        /**
+         * @name        noExtends
+         * @namespace   config.docmap
+         * @type        Boolean
+         * @default     false
+         *
+         * Specify if you want to disable the extends search process that will result in the "extends" array in the docmap.json file
+         *
+         * @since       2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        noExtends: false,
+
+        /**
+         * @name        excludePackages
+         * @namespace   config.docmap
+         * @type        Boolean
+         * @default     ['@website/*', '@example/*']
+         *
+         * Specify some package(s) name(s) (glob) to avoid extending.
+         *
+         * @since       2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        excludePackages: ['@website/*', '@example/*'],
+
         read: {
             /**
              * @name          input
@@ -45,7 +71,7 @@ export default function (api) {
              * @since       2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            sortDeep: ['menu.custom.styleguide'],
+            sortDeep: ['menu.custom.styleguide', 'menu.custom.specs'],
         },
 
         snapshot: {
@@ -124,19 +150,6 @@ export default function (api) {
                 '**/__tests__.wip/**/*',
                 '**/__wip__/**/*',
             ],
-
-            /**
-             * @name        noExtends
-             * @namespace   config.docmap.build
-             * @type        Boolean
-             * @default     false
-             *
-             * Specify if you want to disable the extends search process that will result in the "extends" array in the docmap.json file
-             *
-             * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            noExtends: false,
 
             filters: {
                 /**

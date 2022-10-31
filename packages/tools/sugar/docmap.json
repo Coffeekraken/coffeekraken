@@ -2,17 +2,23 @@
     "map": {},
     "generated": {
         "extends": [
+            "01-basic",
+            "02-basic",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
+            "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-code-formatter-prettier",
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
+            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
@@ -51,6 +57,7 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
@@ -68,6 +75,8 @@
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -92,6 +101,515 @@
             "@coffeekraken/s-vite"
         ],
         "map": {
+            "@coffeekraken.sugar.config.themeUi.menu.paddingInline": {
+                "id": "@coffeekraken.sugar.config.themeUi.menu.paddingInline",
+                "name": "paddingInline",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.padding.50]",
+                "description": "Specify the default padding inline for code ui",
+                "namespace": "@coffeekraken.sugar.config.themeUi.menu",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.menu.paddingBlock": {
+                "id": "@coffeekraken.sugar.config.themeUi.menu.paddingBlock",
+                "name": "paddingBlock",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.padding.50]",
+                "description": "Specify the default padding block for code ui",
+                "namespace": "@coffeekraken.sugar.config.themeUi.menu",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.menu.borderRadius": {
+                "id": "@coffeekraken.sugar.config.themeUi.menu.borderRadius",
+                "name": "borderRadius",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.borderRadius]",
+                "description": "Specify the default border radius for code ui",
+                "namespace": "@coffeekraken.sugar.config.themeUi.menu",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.menu.borderWidth": {
+                "id": "@coffeekraken.sugar.config.themeUi.menu.borderWidth",
+                "name": "borderWidth",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.borderWidth]",
+                "description": "Specify the default border width for code ui",
+                "namespace": "@coffeekraken.sugar.config.themeUi.menu",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.menu.transition": {
+                "id": "@coffeekraken.sugar.config.themeUi.menu.transition",
+                "name": "transition",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.transition]",
+                "description": "Specify the default transition for code ui",
+                "namespace": "@coffeekraken.sugar.config.themeUi.menu",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.menu.defaultColor": {
+                "id": "@coffeekraken.sugar.config.themeUi.menu.defaultColor",
+                "name": "defaultColor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.defaultColor]",
+                "description": "Specify the default color for code ui",
+                "namespace": "@coffeekraken.sugar.config.themeUi.menu",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.menu.defaultLnf": {
+                "id": "@coffeekraken.sugar.config.themeUi.menu.defaultLnf",
+                "name": "defaultLnf",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Number"
+                        }
+                    ],
+                    "raw": "Number"
+                },
+                "default": "[theme.ui.default.defaultStyle]",
+                "description": "Specify the default look and feel for your menus",
+                "namespace": "@coffeekraken.sugar.config.themeUi.menu",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.menu.defaultType": {
+                "id": "@coffeekraken.sugar.config.themeUi.menu.defaultType",
+                "name": "defaultType",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Number"
+                        }
+                    ],
+                    "raw": "Number"
+                },
+                "default": "primary",
+                "description": "Specify the default look and feel for your menus",
+                "namespace": "@coffeekraken.sugar.config.themeUi.menu",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.menu.depth": {
+                "id": "@coffeekraken.sugar.config.themeUi.menu.depth",
+                "name": "depth",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.depth]",
+                "description": "Specify the default depth for code items",
+                "namespace": "@coffeekraken.sugar.config.themeUi.menu",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.menu.rhythmVertical": {
+                "id": "@coffeekraken.sugar.config.themeUi.menu.rhythmVertical",
+                "name": "rhythmVertical",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Object"
+                        }
+                    ],
+                    "raw": "Object"
+                },
+                "default": "[theme.ui.default.rhythmVertical]",
+                "description": "Specify the default vertical rhythm for your code ui",
+                "namespace": "@coffeekraken.sugar.config.themeUi.menu",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.card.paddingInline": {
+                "id": "@coffeekraken.sugar.config.themeUi.card.paddingInline",
+                "name": "paddingInline",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.padding.50]",
+                "description": "Specify the default padding inline for code ui",
+                "namespace": "@coffeekraken.sugar.config.themeUi.card",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.card.paddingBlock": {
+                "id": "@coffeekraken.sugar.config.themeUi.card.paddingBlock",
+                "name": "paddingBlock",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.padding.50]",
+                "description": "Specify the default padding block for code ui",
+                "namespace": "@coffeekraken.sugar.config.themeUi.card",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.card.borderRadius": {
+                "id": "@coffeekraken.sugar.config.themeUi.card.borderRadius",
+                "name": "borderRadius",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.borderRadius]",
+                "description": "Specify the default border radius for code ui",
+                "namespace": "@coffeekraken.sugar.config.themeUi.card",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.card.borderWidth": {
+                "id": "@coffeekraken.sugar.config.themeUi.card.borderWidth",
+                "name": "borderWidth",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.borderWidth]",
+                "description": "Specify the default border width for code ui",
+                "namespace": "@coffeekraken.sugar.config.themeUi.card",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.card.transition": {
+                "id": "@coffeekraken.sugar.config.themeUi.card.transition",
+                "name": "transition",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.transition]",
+                "description": "Specify the default transition for code ui",
+                "namespace": "@coffeekraken.sugar.config.themeUi.card",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.card.defaultColor": {
+                "id": "@coffeekraken.sugar.config.themeUi.card.defaultColor",
+                "name": "defaultColor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.defaultColor]",
+                "description": "Specify the default color for code ui",
+                "namespace": "@coffeekraken.sugar.config.themeUi.card",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.card.defaultLnf": {
+                "id": "@coffeekraken.sugar.config.themeUi.card.defaultLnf",
+                "name": "defaultLnf",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Number"
+                        }
+                    ],
+                    "raw": "Number"
+                },
+                "default": "[theme.ui.default.defaultStyle]",
+                "description": "Specify the default look and feel for your menus",
+                "namespace": "@coffeekraken.sugar.config.themeUi.card",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.card.defaultType": {
+                "id": "@coffeekraken.sugar.config.themeUi.card.defaultType",
+                "name": "defaultType",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Number"
+                        }
+                    ],
+                    "raw": "Number"
+                },
+                "default": "primary",
+                "description": "Specify the default look and feel for your menus",
+                "namespace": "@coffeekraken.sugar.config.themeUi.card",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.card.depth": {
+                "id": "@coffeekraken.sugar.config.themeUi.card.depth",
+                "name": "depth",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.depth]",
+                "description": "Specify the default depth for code items",
+                "namespace": "@coffeekraken.sugar.config.themeUi.card",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.card.spacing": {
+                "id": "@coffeekraken.sugar.config.themeUi.card.spacing",
+                "name": "spacing",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Object"
+                        }
+                    ],
+                    "raw": "Object"
+                },
+                "default": "[theme.ui.default.spacing]",
+                "description": "Specify the default vertical rhythm for your code ui",
+                "namespace": "@coffeekraken.sugar.config.themeUi.card",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.config.viewRenderer.rootDirs": {
+                "id": "@coffeekraken.sugar.config.viewRenderer.rootDirs",
+                "name": "rootDirs",
+                "type": {
+                    "types": [
+                        {
+                            "type": "array",
+                            "of": [
+                                "string"
+                            ]
+                        }
+                    ],
+                    "raw": "string[]"
+                },
+                "default": "['[config.storage.src.rootDir]/views']",
+                "description": "Specify the roots views directories",
+                "namespace": "@coffeekraken.sugar.config.viewRenderer",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "viewRenderer.config.ts",
+                "extension": "config",
+                "relPath": "src/config/viewRenderer.config.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.cli.interface.SRunCommandParamsInterface": {
                 "id": "@coffeekraken.sugar.cli.interface.SRunCommandParamsInterface",
                 "name": "SRunCommandParamsInterface",
@@ -3079,7 +3597,7 @@
                         "description": ""
                     }
                 ],
-                "description": "This function simply take as parameter a glob (or array of globs) pattern(s)\nand return an SPromise instance through which you can subscribe to events like:\n- ready: Emitted once the pool is ready\n- file: Emitted for each file founded, added or updated\n- files: Emitted with a list of founded files\n- change: Emitted when a file has been updated (alias to update)\n- update: Emitted when a file has been updated\n- unlink: Emitted when a file has been deleted\n- add: Emitted when a file has been added",
+                "description": "This function simply take as parameter a glob (or array of globs) pattern(s)\nand return an SPromise instance through which you can subscribe to events like:\n- ready: Emitted once the pool is ready\n- add: Emitted when a file has been added\n- change: Emitted when a file has been updated (alias to update)\n- unlink: Emitted when a file has been deleted",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
                 "example": [
@@ -6230,7 +6748,7 @@
                 "example": [
                     {
                         "language": "php",
-                        "code": "\\Sugar\\ar\\deepMap([\n   'prop1' => 'Hello',\n   'prop2' => 'World'\n], function($value) {\n     return 'Hello ' . $value;\n});\n// [\n//   'prop1' => 'Hello Plop',\n//   'prop2' => 'Hello World'\n// ]"
+                        "code": "\\Sugar\\ar\\deepMap([\n   'prop1' => 'Hello',\n   'prop2' => 'World'\n], function($prop, $value, $object) {\n     return 'Hello ' . $value;\n});\n// [\n//   'prop1' => 'Hello Plop',\n//   'prop2' => 'Hello World'\n// ]"
                     }
                 ],
                 "since": "2.0.0",
@@ -6355,46 +6873,9 @@
                 "relPath": "src/php/blade/getDefaultViewDirs.php",
                 "children": {}
             },
-            "@coffeekraken.sugar.php.convert.arrayToObject": {
-                "id": "@coffeekraken.sugar.php.convert.arrayToObject",
-                "name": "arrayToObject",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "platform": [
-                    {
-                        "name": "php",
-                        "description": ""
-                    }
-                ],
-                "description": "This function allows you to convert recursively an associative array to an object",
-                "namespace": "@coffeekraken.sugar.php.convert",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "php",
-                        "code": "\\Sugar\\convert\\arrayToObject([\n   'prop1' => 'Hello',\n   'prop2' => 'World'\n]);"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "arrayToObject.php",
-                "extension": "php",
-                "relPath": "src/php/convert/arrayToObject.php",
-                "children": {}
-            },
-            "@coffeekraken.sugar.php.convert.objectToArray": {
-                "id": "@coffeekraken.sugar.php.convert.objectToArray",
-                "name": "objectToArray",
+            "@coffeekraken.sugar.php.convert.toArray": {
+                "id": "@coffeekraken.sugar.php.convert.toArray",
+                "name": "toArray",
                 "type": {
                     "types": [
                         {
@@ -6415,7 +6896,7 @@
                 "example": [
                     {
                         "language": "php",
-                        "code": "\\Sugar\\convert\\objectToArray((object) [\n   'prop1' => 'Hello',\n   'prop2' => 'World'\n]);"
+                        "code": "\\Sugar\\convert\\toArray((object) [\n   'prop1' => 'Hello',\n   'prop2' => 'World'\n]);"
                     }
                 ],
                 "since": "2.0.0",
@@ -6424,9 +6905,46 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "objectToArray.php",
+                "filename": "toArray.php",
                 "extension": "php",
-                "relPath": "src/php/convert/objectToArray.php",
+                "relPath": "src/php/convert/toArray.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.convert.toObject": {
+                "id": "@coffeekraken.sugar.php.convert.toObject",
+                "name": "toObject",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to convert recursively an associative array to an object",
+                "namespace": "@coffeekraken.sugar.php.convert",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "\\Sugar\\convert\\toObject([\n   'prop1' => 'Hello',\n   'prop2' => 'World'\n]);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "toObject.php",
+                "extension": "php",
+                "relPath": "src/php/convert/toObject.php",
                 "children": {}
             },
             "@coffeekraken.sugar.php.css.buildMediaQuery": {
@@ -6452,7 +6970,7 @@
                 "example": [
                     {
                         "language": "php",
-                        "code": "\\Sugar\\css\\buildMediaQuery('desktop');\n\\Sugar\\css\\buildMediaQuery('>desktop');\n\\Sugar\\css\\buildMediaQuery('<tablet');\n\\Sugar\\css\\buildMediaQuery('desktop', [\n  'queries' => [\n     'desktop' => [\n         'min-width': 1000,\n         'max-width': null\n     ]\n  ]\n]);"
+                        "code": "\\Sugar\\css\\buildMediaQuery('desktop');\n\\Sugar\\css\\buildMediaQuery('>desktop');\n\\Sugar\\css\\buildMediaQuery('<tablet');\n\\Sugar\\css\\buildMediaQuery('desktop', [\n  'queries' => [\n     'desktop' => [\n         'minWidth': 1000,\n         'maxWidth': null\n     ]\n  ]\n]);"
                     }
                 ],
                 "since": "2.0.0",
@@ -6501,6 +7019,80 @@
                 "filename": "layoutCss.php",
                 "extension": "php",
                 "relPath": "src/php/css/layoutCss.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.css.marginClasses": {
+                "id": "@coffeekraken.sugar.php.css.marginClasses",
+                "name": "marginClasses",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This function takes an object|array of margins issued from the themeMargin.config.ts configuration file like:\n- \"blockStart\" => 10\n- \"inlineEnd\" => 30\n- \"block\" => 10\n- etc...\nThis function will returns you the classes like \"s-mbs:10\" that you can apply where you want in your views.",
+                "namespace": "@coffeekraken.sugar.php.css",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "\\Sugar\\css\\marginClasses([\n     'block' => 20,\n     'inlineEnd' => 10\n]);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "marginClasses.php",
+                "extension": "php",
+                "relPath": "src/php/css/marginClasses.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.css.paddingClasses": {
+                "id": "@coffeekraken.sugar.php.css.paddingClasses",
+                "name": "paddingClasses",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This function takes an object|array of paddings issued from the themePadding.config.ts configuration file like:\n- \"blockStart\" => 10\n- \"inlineEnd\" => 30\n- \"block\" => 10\n- etc...\nThis function will returns you the classes like \"s-pbs:10\" that you can apply where you want in your views.",
+                "namespace": "@coffeekraken.sugar.php.css",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "\\Sugar\\css\\paddingClasses([\n     'block' => 20,\n     'inlineEnd' => 10\n]);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "paddingClasses.php",
+                "extension": "php",
+                "relPath": "src/php/css/paddingClasses.php",
                 "children": {}
             },
             "@coffeekraken.sugar.php.array.pre": {
@@ -6649,6 +7241,43 @@
                 "filename": "og.php",
                 "extension": "php",
                 "relPath": "src/php/frontspec/og.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.twig.functions.frontspec.readFrontspec": {
+                "id": "@coffeekraken.sugar.php.twig.functions.frontspec.readFrontspec",
+                "name": "readFrontspec",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "twig",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to read the `frontspec.json` file",
+                "namespace": "@coffeekraken.sugar.php.twig.functions.frontspec",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "<code>\n {{ readFrontspec() }}\n</code>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "readFrontspec.php",
+                "extension": "php",
+                "relPath": "src/php/frontspec/readFrontspec.php",
                 "children": {}
             },
             "@coffeekraken.sugar.php.gravatar.url": {
@@ -6896,7 +7525,7 @@
                 "example": [
                     {
                         "language": "php",
-                        "code": "\\Sugar\\object\\deepMap((object) [\n   'prop1' => 'Hello',\n   'prop2' => 'World'\n], function($value) {\n     return 'Hello ' . $value;\n});\n// [\n//   'prop1' => 'Hello Plop',\n//   'prop2' => 'Hello World'\n// ]"
+                        "code": "\\Sugar\\object\\deepMap((object) [\n   'prop1' => 'Hello',\n   'prop2' => 'World'\n], function($prop, $value, $object) {\n     return 'Hello ' . $value;\n});\n// [\n//   'prop1' => 'Hello Plop',\n//   'prop2' => 'Hello World'\n// ]"
                     }
                 ],
                 "since": "2.0.0",
@@ -6982,6 +7611,43 @@
                 "filename": "extension.php",
                 "extension": "php",
                 "relPath": "src/php/path/extension.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.specs.listSpecs": {
+                "id": "@coffeekraken.sugar.php.specs.listSpecs",
+                "name": "listSpecs",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This method allows you to list all the available spec files inside a particular namespace(s), or simply all.",
+                "namespace": "@coffeekraken.sugar.php.specs",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "$specs = \\Sugar\\specs\\listSpecs();"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "listSpecs.php",
+                "extension": "php",
+                "relPath": "src/php/specs/listSpecs.php",
                 "children": {}
             },
             "@coffeekraken.sugar.php.specs.readSpec": {
@@ -11611,6 +12277,80 @@
                 "filename": "isDdmmyyyyDate.ts",
                 "extension": "ts",
                 "relPath": "src/shared/is/isDdmmyyyyDate.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.is.isDomElement": {
+                "id": "@coffeekraken.sugar.js.is.isDomElement",
+                "name": "isDomElement",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Check if the passed element is a DOM element",
+                "namespace": "@coffeekraken.sugar.js.is",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { __isDomElement } from '@coffeekraken/sugar/dom'\n__isDomElement($myElement);"
+                    }
+                ],
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "isDomElement.ts",
+                "extension": "ts",
+                "relPath": "src/shared/is/isDomElement.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.is.isDomNode": {
+                "id": "@coffeekraken.sugar.js.is.isDomNode",
+                "name": "isDomNode",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Check if the passed element is a DOM node",
+                "namespace": "@coffeekraken.sugar.js.is",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { __isDomNode } from '@coffeekraken/sugar/dom'\n__isDomNode($myElement);"
+                    }
+                ],
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "isDomNode.ts",
+                "extension": "ts",
+                "relPath": "src/shared/is/isDomNode.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.shared.is.isEmail": {
@@ -17677,6 +18417,43 @@
                 "relPath": "src/js/dom/html/stringToNode.ts",
                 "children": {}
             },
+            "@coffeekraken.sugar.js.dom.inject.injectIframeContent": {
+                "id": "@coffeekraken.sugar.js.dom.inject.injectIframeContent",
+                "name": "injectIframeContent",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Inject some content into an iframe",
+                "namespace": "@coffeekraken.sugar.js.dom.inject",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { __injectIframeContent } from '@coffeekraken/sugar/dom'\n __injectIframeContent($myIframe, '<html>...</html>');"
+                    }
+                ],
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "injectIframeContent.ts",
+                "extension": "ts",
+                "relPath": "src/js/dom/inject/injectIframeContent.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.js.dom.inject.injectScript": {
                 "id": "@coffeekraken.sugar.js.dom.inject.injectScript",
                 "name": "injectScript",
@@ -21075,6 +21852,80 @@
                 "relPath": "src/php/twig/functions/css/layoutCss.php",
                 "children": {}
             },
+            "@coffeekraken.sugar.php.twig.css.marginClasses": {
+                "id": "@coffeekraken.sugar.php.twig.css.marginClasses",
+                "name": "marginClasses",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This function takes an object|array of margins issued from the themeMargin.config.ts configuration file like:\n- \"blockStart\" => 10\n- \"inlineEnd\" => 30\n- \"block\" => 10\n- etc...\nThis function will returns you the classes like \"s-mbs:10\" that you can apply where you want in your views.",
+                "namespace": "@coffeekraken.sugar.php.twig.css",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "<div class=\"{{ marginClasses({\n block: 10\n}) }}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "marginClasses.php",
+                "extension": "php",
+                "relPath": "src/php/twig/functions/css/marginClasses.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.twig.css.paddingClasses": {
+                "id": "@coffeekraken.sugar.php.twig.css.paddingClasses",
+                "name": "paddingClasses",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This function takes an object|array of paddings issued from the themeMargin.config.ts configuration file like:\n- \"blockStart\" => 10\n- \"inlineEnd\" => 30\n- \"block\" => 10\n- etc...\nThis function will returns you the classes like \"s-mbs:10\" that you can apply where you want in your views.",
+                "namespace": "@coffeekraken.sugar.php.twig.css",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "<div class=\"{{ paddingClasses({\n block: 10\n}) }}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "paddingClasses.php",
+                "extension": "php",
+                "relPath": "src/php/twig/functions/css/paddingClasses.php",
+                "children": {}
+            },
             "@coffeekraken.sugar.php.twig.functions.frontspec.assets": {
                 "id": "@coffeekraken.sugar.php.twig.functions.frontspec.assets",
                 "name": "assets",
@@ -21107,9 +21958,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "assetsHtml.php",
+                "filename": "assets.php",
                 "extension": "php",
-                "relPath": "src/php/twig/functions/frontspec/assetsHtml.php",
+                "relPath": "src/php/twig/functions/frontspec/assets.php",
                 "children": {}
             },
             "@coffeekraken.sugar.php.twig.functions.frontspec.metas": {
@@ -21223,6 +22074,43 @@
                 "relPath": "src/php/twig/functions/html/attrs.php",
                 "children": {}
             },
+            "@coffeekraken.sugar.php.twig.functions.specs.readSpec": {
+                "id": "@coffeekraken.sugar.php.twig.functions.specs.readSpec",
+                "name": "readSpec",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "twig",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to read a spec file like the \"viewspec.json\", \"frontspec\", etc... using the SSpecs class\nthat gives you the ability to reference other json and json props.",
+                "namespace": "@coffeekraken.sugar.php.twig.functions.specs",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "<code>\n {{ readSpec('sugar.views.component.card') }}\n</code>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "readSpec.php",
+                "extension": "php",
+                "relPath": "src/php/twig/functions/specs/readSpec.php",
+                "children": {}
+            },
             "@coffeekraken.sugar.php.twig.functions.string.idCompliant": {
                 "id": "@coffeekraken.sugar.php.twig.functions.string.idCompliant",
                 "name": "idCompliant",
@@ -21297,8 +22185,8 @@
                 "relPath": "src/php/twig/functions/string/uniqid.php",
                 "children": {}
             },
-            "@coffeekraken.sugar.views.bare.cell.Cell": {
-                "id": "@coffeekraken.sugar.views.bare.cell.Cell",
+            "@coffeekraken.sugar.specs.views.bare.cell.Cell": {
+                "id": "@coffeekraken.sugar.specs.views.bare.cell.Cell",
                 "name": "Cell",
                 "type": {
                     "types": [
@@ -21310,10 +22198,10 @@
                 },
                 "menu": {
                     "tree": [
-                        "Views",
-                        "Bare"
+                        "Specs",
+                        "Views"
                     ],
-                    "slug": "/views/bare/cell"
+                    "slug": "/specs/sugar.views.bare.cell"
                 },
                 "platform": [
                     {
@@ -21325,7 +22213,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@coffeekraken.sugar.views.bare.cell",
+                "namespace": "@coffeekraken.sugar.specs.views.bare.cell",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -21338,8 +22226,8 @@
                 "relPath": "src/views/_specs/bare/cell/cell.md",
                 "children": {}
             },
-            "@coffeekraken.sugar.views.bare.container.Container": {
-                "id": "@coffeekraken.sugar.views.bare.container.Container",
+            "@coffeekraken.sugar.specs.views.bare.container.Container": {
+                "id": "@coffeekraken.sugar.specs.views.bare.container.Container",
                 "name": "Container",
                 "type": {
                     "types": [
@@ -21351,10 +22239,10 @@
                 },
                 "menu": {
                     "tree": [
-                        "Views",
-                        "Bare"
+                        "Specs",
+                        "Views"
                     ],
-                    "slug": "/views/bare/container"
+                    "slug": "/specs/sugar.views.bare.container"
                 },
                 "platform": [
                     {
@@ -21366,7 +22254,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@coffeekraken.sugar.views.bare.container",
+                "namespace": "@coffeekraken.sugar.specs.views.bare.container",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -21379,8 +22267,8 @@
                 "relPath": "src/views/_specs/bare/container/container.md",
                 "children": {}
             },
-            "@coffeekraken.sugar.views.bare.layout.Layout": {
-                "id": "@coffeekraken.sugar.views.bare.layout.Layout",
+            "@coffeekraken.sugar.specs.views.bare.layout.Layout": {
+                "id": "@coffeekraken.sugar.specs.views.bare.layout.Layout",
                 "name": "Layout",
                 "type": {
                     "types": [
@@ -21392,10 +22280,10 @@
                 },
                 "menu": {
                     "tree": [
-                        "Views",
-                        "Bare"
+                        "Specs",
+                        "Views"
                     ],
-                    "slug": "/views/bare/layout"
+                    "slug": "/specs/sugar.views.bare.layout"
                 },
                 "platform": [
                     {
@@ -21407,7 +22295,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@coffeekraken.sugar.views.bare.layout",
+                "namespace": "@coffeekraken.sugar.specs.views.bare.layout",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -21461,6 +22349,80 @@
                 "relPath": "src/views/_specs/layouts/main/main.md",
                 "children": {}
             },
+            "@coffeekraken.sugar.ui.card.menu": {
+                "id": "@coffeekraken.sugar.ui.card.menu",
+                "name": "menu",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ],
+                    "raw": "PostcssMixin"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "Apply the menu lnf to any .s-menu element",
+                "namespace": "@coffeekraken.sugar.ui.card",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".s-menu {\n   @sugar.ui.card;\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "card.ts",
+                "extension": "ts",
+                "relPath": "src/node/postcss/mixins/ui/card/card.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.ui.menu.menu": {
+                "id": "@coffeekraken.sugar.ui.menu.menu",
+                "name": "menu",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ],
+                    "raw": "PostcssMixin"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "Apply the menu lnf to any .s-menu element",
+                "namespace": "@coffeekraken.sugar.ui.menu",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".s-menu {\n   @sugar.ui.menu;\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "menu.ts",
+                "extension": "ts",
+                "relPath": "src/node/postcss/mixins/ui/menu/menu.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.php.views.layouts.main": {
                 "id": "@coffeekraken.sugar.php.views.layouts.main",
                 "name": "main",
@@ -21482,7 +22444,7 @@
                 },
                 "filename": "main.blade.php",
                 "extension": "blade",
-                "relPath": "src/views/blade/@sugar/layouts/main/main.blade.php",
+                "relPath": "src/views/blade/sugar/layouts/main/main.blade.php",
                 "children": {}
             }
         }

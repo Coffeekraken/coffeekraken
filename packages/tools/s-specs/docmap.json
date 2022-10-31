@@ -1,0 +1,272 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "01-basic",
+            "02-basic",
+            "@coffeekraken/cli",
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-bench",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-carpenter",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-proxy",
+            "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-component",
+            "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
+            "@coffeekraken/s-datetime-picker-component",
+            "@coffeekraken/s-deps-feature",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
+            "@coffeekraken/s-duration",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-floating-feature",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-checker",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
+            "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-mitosis",
+            "@coffeekraken/s-monorepo",
+            "@coffeekraken/s-package",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
+            "@coffeekraken/s-parallax-feature",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-export-plugin",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-rating-component",
+            "@coffeekraken/s-refocus-feature",
+            "@coffeekraken/s-request",
+            "@coffeekraken/s-scroll-component",
+            "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-state",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-element",
+            "@coffeekraken/s-sugar-feature",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-template-feature",
+            "@coffeekraken/s-theme-switcher-component",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
+            "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
+            "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
+            "@coffeekraken/s-view-renderer-engine-twig",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-postcss-plugin",
+            "@coffeekraken/s-vite-sugar-plugin",
+            "@coffeekraken/s-vite",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-specs.php.SSpecs": {
+                "id": "@coffeekraken.s-specs.php.SSpecs",
+                "name": "SSpecs",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to access with ease some specification file(s) that supports internal and external references to other files, etc...\nThis is usefull to build specification files in json format that make share some parts through common files, etc...\nYou will also have easy access to your files through \"namespaces\" that represent different folders on your system. This will simplify\nthe way you read your files by prefixing your dotpath (simple fs \"/\" replacement) with the namespace you want to look in.",
+                "namespace": "@coffeekraken.s-specs.php",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __SSpecs from '@coffeekraken/s-specs';\nconst spec = new __SSpecs({\n  namespaces: {\n     myNamespace: [\n         '/my/absolute/path/to/my/specs/directory'\n     ]\n  }\n});\n\n// read a spec file\nconst viewSpec = spec.read('myNamespace.views.mySpecFile');\n\n// read a spec file and specify an internal property to get\nconst title = spec.read('myNamespace.views.mySpecFile:title);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SSpecs.ts",
+                "extension": "ts",
+                "relPath": "src/node/SSpecs.ts",
+                "children": {
+                    "frominterface": {
+                        "id": "s192534e62be47aad90be633692a11d1df92f9421373b2bb2099b5052429bfa1c",
+                        "name": "fromInterface",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This method allows you to convert an SInterface class into a spec object",
+                        "status": "beta",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "applyvaluestospecs": {
+                        "id": "s013604f39a618e04ca13e373bc662a7d266b176f437380ff5f11d408d6f6a4ae",
+                        "name": "applyValuesToSpecs",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This method allows you to apply an object of value directly on a specs object.\nIt will apply each values to the \"value\" property of each props",
+                        "status": "beta",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "constructor": {
+                        "id": "s5535823f4f4719348a9888f6d5fc89f5b91064971a2ee23140031136429e609e",
+                        "name": "constructor",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "read": {
+                        "id": "sae80c03594f6902a3375079168bdbcdcf1bdd291d0e0f499fb056b94582aa893",
+                        "name": "read",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This method allows you to read a spec file and/or a value inside the passed spec file.",
+                        "status": "beta",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "list": {
+                        "id": "sc4f97fa03edd07d29f52c75814abf3a377f4579fa0383fdaf23f4ca103098f19",
+                        "name": "list",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "platform": [
+                            {
+                                "name": "php",
+                                "description": ""
+                            }
+                        ],
+                        "description": "This method allows you to list all the available spec files inside a particular namespace(s), or simply all.",
+                        "status": "beta",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "resolve": {
+                        "id": "s8cea0e0282ba82717b8a3ca4ea94dedeccaf537f261ad640d96330147cadcf15",
+                        "name": "resolve",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This method allows you to pass a specJson object and resolve all the \"@...\" values in it",
+                        "status": "beta",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

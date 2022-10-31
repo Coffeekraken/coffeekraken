@@ -34,15 +34,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.define = void 0;
 const dom_1 = require("@coffeekraken/sugar/dom");
-function define(props = {}, tagName = 's-clipboard-copy', settings = {}) {
+function define(props, tagName = 's-clipboard-copy', settings = {}) {
     var _a;
     (0, dom_1.__querySelectorLive)(tagName, ($elm) => __awaiter(this, void 0, void 0, function* () {
-        const { define } = yield Promise.resolve().then(() => __importStar(require('../../../js/webcomponent/src/js/SClipboardCopyComponent')));
-        define(props, tagName);
+        const define = yield Promise.resolve().then(() => __importStar(require('./define')));
+        define.default(props, tagName);
     }), {
         when: (_a = settings.when) !== null && _a !== void 0 ? _a : 'nearViewport',
         firstOnly: true,
     });
 }
 exports.define = define;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsaURBQThEO0FBTzlELFNBQWdCLE1BQU0sQ0FDbEIsS0FBSyxHQUFHLEVBQUUsRUFDVixPQUFPLEdBQUcsa0JBQWtCLEVBQzVCLFdBQXlDLEVBQUU7O0lBRTNDLElBQUEseUJBQW1CLEVBQ2YsT0FBTyxFQUNQLENBQU8sSUFBSSxFQUFFLEVBQUU7UUFDWCxNQUFNLEVBQUUsTUFBTSxFQUFFLEdBQUcsd0RBQ2YseURBQXlELEdBQzVELENBQUM7UUFDRixNQUFNLENBQUMsS0FBSyxFQUFFLE9BQU8sQ0FBQyxDQUFDO0lBQzNCLENBQUMsQ0FBQSxFQUNEO1FBQ0ksSUFBSSxFQUFFLE1BQUEsUUFBUSxDQUFDLElBQUksbUNBQUksY0FBYztRQUNyQyxTQUFTLEVBQUUsSUFBSTtLQUNsQixDQUNKLENBQUM7QUFDTixDQUFDO0FBbEJELHdCQWtCQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsaURBQThEO0FBTzlELFNBQWdCLE1BQU0sQ0FDbEIsS0FBSyxFQUNMLE9BQU8sR0FBRyxrQkFBa0IsRUFDNUIsV0FBeUMsRUFBRTs7SUFFM0MsSUFBQSx5QkFBbUIsRUFDZixPQUFPLEVBQ1AsQ0FBTyxJQUFJLEVBQUUsRUFBRTtRQUNYLE1BQU0sTUFBTSxHQUFHLHdEQUFhLFVBQVUsR0FBQyxDQUFDO1FBQ3hDLE1BQU0sQ0FBQyxPQUFPLENBQUMsS0FBSyxFQUFFLE9BQU8sQ0FBQyxDQUFDO0lBQ25DLENBQUMsQ0FBQSxFQUNEO1FBQ0ksSUFBSSxFQUFFLE1BQUEsUUFBUSxDQUFDLElBQUksbUNBQUksY0FBYztRQUNyQyxTQUFTLEVBQUUsSUFBSTtLQUNsQixDQUNKLENBQUM7QUFDTixDQUFDO0FBaEJELHdCQWdCQyJ9

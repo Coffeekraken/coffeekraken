@@ -26,9 +26,9 @@
 
 /* @sugar.ui.menu.classes(); */
 
-@sugar.partial ('slider') {
-    @sugar.ui.slider.classes();
-}
+/* @sugar.partial ('slider') { */
+@sugar.ui.slider.classes();
+/* } */
 
 /**
  * Define some icons to be used with classes like "s-icon:github", etc...

@@ -1,19 +1,24 @@
 {
     "name": "@coffeekraken/s-clipboard-copy-component",
     "version": "2.0.0-alpha.20",
-    "description": "",
+    "description": "Simple copy to clipboard component that let you specify with ease a target to use for copy like an input, textarea, etc...",
+    "type": "module",
+    "homepage": "https://coffeekraken.io",
     "scripts": {
+        "dev": "sugar frontstack dev",
+        "build": "sugar frontstack build",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "",
-    "license": "ISC",
+    "license": "MIT",
     "dependencies": {
-        "@builder.io/mitosis": "^0.0.61",
-        "@builder.io/mitosis-cli": "^0.0.22",
-        "@coffeekraken/s-component": "^2.0.0-alpha.20",
         "@coffeekraken/s-interface": "^2.0.0-alpha.20",
-        "@coffeekraken/s-mitosis": "^2.0.0-alpha.20"
+        "@coffeekraken/s-lit-component": "^2.0.0-alpha.20",
+        "@coffeekraken/sugar": "^2.0.0-alpha.20",
+        "lit": "^2.2.8"
     },
+    "main": "dist/pkg/cjs/js/exports.js",
+    "module": "dist/pkg/esm/js/exports.js",
     "exports": {
         ".": {
             "require": "./dist/pkg/cjs/js/exports.js",
@@ -22,10 +27,6 @@
         "./lazy": {
             "require": "./dist/pkg/cjs/js/lazy.js",
             "import": "./dist/pkg/esm/js/lazy.js"
-        },
-        "./webcomponent": {
-            "require": "./dist/js/webcomponent/src/js/SClipboardCopyComponent.ts",
-            "import": "./dist/js/webcomponent/src/js/SClipboardCopyComponent.ts"
         },
         "./shared/*": {
             "require": "./dist/pkg/cjs/shared/*.js",
@@ -39,7 +40,5 @@
             "require": "./dist/pkg/cjs/js/*.js",
             "import": "./dist/pkg/esm/js/*.js"
         }
-    },
-    "main": "dist/pkg/cjs/js/exports.js",
-    "module": "dist/pkg/esm/js/exports.js"
+    }
 }

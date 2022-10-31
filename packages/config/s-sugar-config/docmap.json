@@ -3,12 +3,15 @@
     "extends": [],
     "generated": {
         "extends": [
+            "01-basic",
+            "02-basic",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
+            "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
@@ -17,6 +20,7 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config-adapter",
             "@coffeekraken/s-config-folder-adapter",
@@ -47,7 +51,6 @@
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
-            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
@@ -70,6 +73,7 @@
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-specs-editor-component",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -94,6 +98,103 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-sugar-config.config.assets.dev": {
+                "id": "@coffeekraken.s-sugar-config.config.assets.dev",
+                "name": "dev",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "{ type: 'module', defer: true, src: '/src/js/index.ts', env: 'development' }",
+                "description": "Specify the development javascript index asset.",
+                "namespace": "@coffeekraken.s-sugar-config.config.assets",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "assets.config.ts",
+                "extension": "config",
+                "relPath": "src/config/assets.config.ts"
+            },
+            "@coffeekraken.s-sugar-config.config.assets.module": {
+                "id": "@coffeekraken.s-sugar-config.config.assets.module",
+                "name": "module",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "{ type: 'module', defer: true, src: '/dist/js/index.esm.js', env: 'production' }",
+                "description": "Specify the production javascript module index asset.",
+                "namespace": "@coffeekraken.s-sugar-config.config.assets",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "assets.config.ts",
+                "extension": "config",
+                "relPath": "src/config/assets.config.ts"
+            },
+            "@coffeekraken.s-sugar-config.config.assets.nomodule": {
+                "id": "@coffeekraken.s-sugar-config.config.assets.nomodule",
+                "name": "nomodule",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "{ nomodule: true, defer: true, src: '/dist/js/index.amd.js', env: 'production' }",
+                "description": "Specify the production javascript nomodule index asset.",
+                "namespace": "@coffeekraken.s-sugar-config.config.assets",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "assets.config.ts",
+                "extension": "config",
+                "relPath": "src/config/assets.config.ts"
+            },
+            "@coffeekraken.s-sugar-config.config.assets.style": {
+                "id": "@coffeekraken.s-sugar-config.config.assets.style",
+                "name": "style",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "{ defer: true, src: '/dist/css/index.css' }",
+                "description": "Specify the production style index asset.",
+                "namespace": "@coffeekraken.s-sugar-config.config.assets",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "assets.config.ts",
+                "extension": "config",
+                "relPath": "src/config/assets.config.ts",
+                "children": {}
+            },
             "@coffeekraken.s-sugar-config.config.config.browser.include.include": {
                 "id": "@coffeekraken.s-sugar-config.config.config.browser.include.include",
                 "name": "include",
@@ -1068,6 +1169,175 @@
                 "filename": "log.config.ts",
                 "extension": "config",
                 "relPath": "src/config/log.config.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-sugar-config.config.metas.lang": {
+                "id": "@coffeekraken.s-sugar-config.config.metas.lang",
+                "name": "lang",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "en",
+                "description": "Specify the lang of the project",
+                "namespace": "@coffeekraken.s-sugar-config.config.metas",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "metas.config.ts",
+                "extension": "config",
+                "relPath": "src/config/metas.config.ts"
+            },
+            "@coffeekraken.s-sugar-config.config.metas.title": {
+                "id": "@coffeekraken.s-sugar-config.config.metas.title",
+                "name": "title",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "config.packageJson.title ?? config.packageJson.name",
+                "description": "Specify the title of the project",
+                "namespace": "@coffeekraken.s-sugar-config.config.metas",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "metas.config.ts",
+                "extension": "config",
+                "relPath": "src/config/metas.config.ts"
+            },
+            "@coffeekraken.s-sugar-config.config.metas.homepage": {
+                "id": "@coffeekraken.s-sugar-config.config.metas.homepage",
+                "name": "homepage",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "config.packageJson.homepage",
+                "description": "Specify the homepage url of the project",
+                "namespace": "@coffeekraken.s-sugar-config.config.metas",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "metas.config.ts",
+                "extension": "config",
+                "relPath": "src/config/metas.config.ts"
+            },
+            "@coffeekraken.s-sugar-config.config.metas.description": {
+                "id": "@coffeekraken.s-sugar-config.config.metas.description",
+                "name": "description",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "config.packageJson.description",
+                "description": "Specify the description of the project",
+                "namespace": "@coffeekraken.s-sugar-config.config.metas",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "metas.config.ts",
+                "extension": "config",
+                "relPath": "src/config/metas.config.ts"
+            },
+            "@coffeekraken.s-sugar-config.config.metas.themeColor": {
+                "id": "@coffeekraken.s-sugar-config.config.metas.themeColor",
+                "name": "themeColor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "theme.color.accent",
+                "description": "Specify the theme main color of the project",
+                "namespace": "@coffeekraken.s-sugar-config.config.metas",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "metas.config.ts",
+                "extension": "config",
+                "relPath": "src/config/metas.config.ts"
+            },
+            "@coffeekraken.s-sugar-config.config.metas.author": {
+                "id": "@coffeekraken.s-sugar-config.config.metas.author",
+                "name": "author",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "config.packageJson.author",
+                "description": "Specify the author of the project.\nMust be an object with the \"name\", \"email\" and \"url\" properties",
+                "namespace": "@coffeekraken.s-sugar-config.config.metas",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "metas.config.ts",
+                "extension": "config",
+                "relPath": "src/config/metas.config.ts"
+            },
+            "@coffeekraken.s-sugar-config.config.metas.ob": {
+                "id": "@coffeekraken.s-sugar-config.config.metas.ob",
+                "name": "ob",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "config.packageJson.author",
+                "description": "Specify the opengraph metas for the project\nMust be an object with the \"title\", \"description\", \"type\", \"url\" and \"image\" properties",
+                "namespace": "@coffeekraken.s-sugar-config.config.metas",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "metas.config.ts",
+                "extension": "config",
+                "relPath": "src/config/metas.config.ts",
                 "children": {}
             },
             "@coffeekraken.s-sugar-config.config.npm.rootDir": {
@@ -2911,10 +3181,10 @@
                 "type": {
                     "types": [
                         {
-                            "type": ".                      Class"
+                            "type": "Class"
                         }
                     ],
-                    "raw": ".                      Class"
+                    "raw": "Class"
                 },
                 "platform": [
                     {

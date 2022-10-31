@@ -1,12 +1,12 @@
 <!--
 /**
  * @name            Layout
- * @namespace       views.bare.layout
+ * @namespace       specs.views.bare.layout
  * @type            Markdown
  * @platform        blade
  * @platform        twig
  * @status          stable
- * @menu            Views / Bare           /views/bare/layout
+ * @menu            Specs / Views           /specs/sugar.views.bare.layout
  *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -30,10 +30,10 @@ This view allows you to generate quickly and efficiently fully responsive layout
 #### Blade
 
 ```php
-@include('@sugar.bare.layout.layout', [
+@include('sugar.bare.layout.layout', [
     'id' => 'my-cool-layout',
     'layout' => [
-        'default' => '1 1 2 _ 1 1 3'
+        'desktop' => '1 1 2 _ 1 1 3'
         'mobile' => '1 _ 2 _ 3'
     ],
     'content' => '
@@ -58,7 +58,7 @@ This view allows you to generate quickly and efficiently fully responsive layout
 {% include 'sugar.bare.layout.layout' with {
     content: '<h2>Hello world</h2>',
     layout: {
-        default: '1 1 2 _ 1 1 3'
+        desktop: '1 1 2 _ 1 1 3'
         mobile: '1 _ 2 _ 3'
     },
     content: '

@@ -2,7 +2,7 @@
 .rating {
         display: flex;
         gap: calc(var(--s-theme-margin-default, 1rem) * 1.5);
-        margin-block-end: calc(var(--s-theme-margin-default, 1rem) * 3);
+        margin-block-end: calc(var(--s-theme-margin-default, 1rem) * 3.25);
     }
 .rating:nth-child(odd) .rating__comment {
                 order: 1;

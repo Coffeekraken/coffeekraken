@@ -29,7 +29,7 @@ export default class CKDiscover extends __SLitComponent {
         });
     }
     static get properties() {
-        return __SLitComponent.createProperties({}, SCKDiscoverPropsInterface);
+        return __SLitComponent.propertiesFromInterface({}, SCKDiscoverPropsInterface);
     }
     firstUpdated() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -66,65 +66,72 @@ export default class CKDiscover extends __SLitComponent {
     render() {
         var _a, _b, _c, _d, _e, _f;
         return html `
-      <div class="ck-discover">
-        ${!this.item
+            <div class="ck-discover">
+                ${!this.item
             ? html `
-              <div class="s-code-example-loader">
-                <i class="s-loader:spinner s-color:accent"></i>
-                &nbsp;
-                <p class="s-typo:p s-display:inline-block">
-                  Loading code example. Please wait...
-                </p>
-              </div>
-            `
+                          <div class="s-code-example-loader">
+                              <i class="s-loader:spinner s-color:accent"></i>
+                              &nbsp;
+                              <p class="s-typo:p s-display:inline-block">
+                                  Loading code example. Please wait...
+                              </p>
+                          </div>
+                      `
             : html `
-              <a
-                @click="${this.grabItem}"
-                class="s-btn s-radius:100 s-align:abs-top-right s-color:accent s-float:right"
-              >
-                <i class="s-icon:ui-refresh"></i>
-              </a>
-              ${this.item.async
+                          <a
+                              @click="${this.grabItem}"
+                              class="s-btn s-radius:100 s-align:abs-top-right s-color:accent s-float:right"
+                          >
+                              <i class="s-icon:ui-refresh"></i>
+                          </a>
+                          ${this.item.async
                 ? html `
-                    <span class="s-badge:outline s-color:accent">Async</span
-                    >&nbsp;
-                  `
+                                    <span class="s-badge:outline s-color:accent"
+                                        >Async</span
+                                    >&nbsp;
+                                `
                 : ''}
-              ${((_b = (_a = this.item.type) === null || _a === void 0 ? void 0 : _a.types) === null || _b === void 0 ? void 0 : _b[0].type) || this.item.type
+                          ${((_b = (_a = this.item.type) === null || _a === void 0 ? void 0 : _a.types) === null || _b === void 0 ? void 0 : _b[0].type) || this.item.type
                 ? html `
-                    <span class="s-badge s-color:complementary"
-                      >${(_f = (_e = (_d = (_c = this.item.type) === null || _c === void 0 ? void 0 : _c.types) === null || _d === void 0 ? void 0 : _d[0]) === null || _e === void 0 ? void 0 : _e.type) !== null && _f !== void 0 ? _f : this.item.type}</span
-                    >
-                  `
+                                    <span class="s-badge s-color:complementary"
+                                        >${(_f = (_e = (_d = (_c = this.item.type) === null || _c === void 0 ? void 0 : _c.types) === null || _d === void 0 ? void 0 : _d[0]) === null || _e === void 0 ? void 0 : _e.type) !== null && _f !== void 0 ? _f : this.item.type}</span
+                                    >
+                                `
                 : ''}
-              <br />
-              <br />
-              <h1 class="s-typo:h3 s-mbe:30">${this.item.name}</h1>
-              <p class="s-typo:p s-mbe:30 s-truncate:3">
-                ${this.item.description}
-              </p>
-              ${!this.timeout
+                          <br />
+                          <br />
+                          <h1 class="s-typo:h3 s-mbe:30">${this.item.name}</h1>
+                          <p class="s-typo:p s-mbe:30 s-truncate:3">
+                              ${this.item.description}
+                          </p>
+                          ${!this.timeout
                 ? html `
-                    <s-code-example lines="8" s-deps css="codeExample">
-                      <template
-                        lang="${this.props.platform === 'ts' ||
+                                    <s-code-example
+                                        lines="8"
+                                        s-deps
+                                        css="codeExample"
+                                    >
+                                        <code
+                                            lang="${this.props.platform ===
+                    'ts' ||
                     this.props.platform === 'node'
                     ? 'js'
-                    : this.props.platform === 'postcss'
+                    : this.props.platform ===
+                        'postcss'
                         ? 'css'
                         : this.props.platform}"
-                      >
-                        ${this.item.example[0].code}
-                      </template>
-                    </s-code-example>
-                  `
+                                        >
+                                            ${this.item.example[0].code}
+                                        </code>
+                                    </s-code-example>
+                                `
                 : ''}
-            `}
-      </div>
-    `;
+                      `}
+            </div>
+        `;
     }
 }
 export function define(props = {}, tagName = 'ck-discover') {
     __SLitComponent.define(tagName, CKDiscover, props);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7QUFFZCxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUNyRCxPQUFPLGVBQWUsTUFBTSwrQkFBK0IsQ0FBQztBQUM1RCxPQUFPLGNBQWMsTUFBTSwwQ0FBMEMsQ0FBQztBQUN0RSxPQUFPLEVBQUUsSUFBSSxFQUFFLE1BQU0sS0FBSyxDQUFDO0FBQzNCLE9BQU8sRUFBRSxVQUFVLEVBQUUsTUFBTSxnQkFBZ0IsQ0FBQztBQUU1QyxNQUFNLHlCQUEwQixTQUFRLFlBQVk7SUFDbEQsTUFBTSxLQUFLLFdBQVc7UUFDcEIsT0FBTztZQUNMLFFBQVEsRUFBRTtnQkFDUixJQUFJLEVBQUUsUUFBUTthQUNmO1NBQ0YsQ0FBQztJQUNKLENBQUM7Q0FDRjtBQUVELE1BQU0sQ0FBQyxPQUFPLE9BQU8sVUFBVyxTQUFRLGVBQWU7SUFLckQ7UUFDRSxLQUFLLENBQUM7WUFDSixTQUFTLEVBQUUsS0FBSztTQUNqQixDQUFDLENBQUM7SUFDTCxDQUFDO0lBUkQsTUFBTSxLQUFLLFVBQVU7UUFDbkIsT0FBTyxlQUFlLENBQUMsZ0JBQWdCLENBQUMsRUFBRSxFQUFFLHlCQUF5QixDQUFDLENBQUM7SUFDekUsQ0FBQztJQVlLLFlBQVk7O1lBQ2hCLElBQUksQ0FBQyxPQUFPLEdBQUcsTUFBTSxVQUFVLEVBQUUsQ0FBQztZQUNsQyxJQUFJLENBQUMsUUFBUSxFQUFFLENBQUM7UUFDbEIsQ0FBQztLQUFBO0lBRUssUUFBUTs7WUFDWix5QkFBeUI7WUFDekIsNEJBQTRCO1lBQzVCLHdCQUF3QjtZQUV4QixNQUFNLE1BQU0sR0FBRyxjQUFjLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxHQUFHLEVBQUUsQ0FBQyxHQUFHLEVBQUUsSUFBSSxFQUFFLEVBQUU7O2dCQUM1RCxJQUFJLENBQUMsSUFBSSxDQUFDLFFBQVE7b0JB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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7QUFFZCxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUNyRCxPQUFPLGVBQWUsTUFBTSwrQkFBK0IsQ0FBQztBQUM1RCxPQUFPLGNBQWMsTUFBTSwwQ0FBMEMsQ0FBQztBQUN0RSxPQUFPLEVBQUUsSUFBSSxFQUFFLE1BQU0sS0FBSyxDQUFDO0FBQzNCLE9BQU8sRUFBRSxVQUFVLEVBQUUsTUFBTSxnQkFBZ0IsQ0FBQztBQUU1QyxNQUFNLHlCQUEwQixTQUFRLFlBQVk7SUFDaEQsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILFFBQVEsRUFBRTtnQkFDTixJQUFJLEVBQUUsUUFBUTthQUNqQjtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFFRCxNQUFNLENBQUMsT0FBTyxPQUFPLFVBQVcsU0FBUSxlQUFlO0lBUW5EO1FBQ0ksS0FBSyxDQUFDO1lBQ0YsU0FBUyxFQUFFLEtBQUs7U0FDbkIsQ0FBQyxDQUFDO0lBQ1AsQ0FBQztJQVhELE1BQU0sS0FBSyxVQUFVO1FBQ2pCLE9BQU8sZUFBZSxDQUFDLHVCQUF1QixDQUMxQyxFQUFFLEVBQ0YseUJBQXlCLENBQzVCLENBQUM7SUFDTixDQUFDO0lBWUssWUFBWTs7WUFDZCxJQUFJLENBQUMsT0FBTyxHQUFHLE1BQU0sVUFBVSxFQUFFLENBQUM7WUFDbEMsSUFBSSxDQUFDLFFBQVEsRUFBRSxDQUFDO1FBQ3BCLENBQUM7S0FBQTtJQUVLLFFBQVE7O1lBQ1YseUJBQXlCO1lBQ3pCLDRCQUE0QjtZQUM1Qix3QkFBd0I7WUFFeEIsTUFBTSxNQUFNLEdBQUcsY0FBYyxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsR0FBRyxFQUFFLENBQUMsR0FBRyxFQUFFLElBQUksRUFBRSxFQUFFOztnQkFDMUQsSUFBSSxDQUFDLElBQUksQ0FBQyxRQUFRO29C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

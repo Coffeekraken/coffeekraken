@@ -3,12 +3,15 @@
     "extends": [],
     "generated": {
         "extends": [
+            "01-basic",
+            "02-basic",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
+            "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
@@ -17,6 +20,7 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config-adapter",
             "@coffeekraken/s-config-folder-adapter",
@@ -46,7 +50,6 @@
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
-            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
@@ -69,6 +72,7 @@
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-specs-editor-component",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -94,8 +98,8 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-frontspec.config.frontspec.assets.viteClient": {
-                "id": "@coffeekraken.s-frontspec.config.frontspec.assets.viteClient",
+            "@coffeekraken.s-frontspec.config.frontspec.default.assets.viteClient": {
+                "id": "@coffeekraken.s-frontspec.config.frontspec.default.assets.viteClient",
                 "name": "viteClient",
                 "type": {
                     "types": [
@@ -107,7 +111,7 @@
                 },
                 "default": "vite client script",
                 "description": "Specify some items you want to integrate to the head tag. It can be everything you want",
-                "namespace": "@coffeekraken.s-frontspec.config.frontspec.assets",
+                "namespace": "@coffeekraken.s-frontspec.config.frontspec.default.assets",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -166,7 +170,7 @@
                     ],
                     "raw": "Class"
                 },
-                "description": "This class represent the ```frontspec.json``` file and allows you to generate it from some sources (glob pattern(s))\nand save it inside a directory you choose.",
+                "description": "This class represent the ```frontspec.json``` file and allows you to generate it.",
                 "namespace": "@coffeekraken.s-frontspec.node",
                 "status": "wip",
                 "example": [
@@ -223,6 +227,25 @@
                             "url": "https://coffeekraken.io"
                         }
                     },
+                    "build": {
+                        "id": "s1eca1a6a17c03833470399749c6f31c212cd88410ad077a005e8fd739a1ec9fd",
+                        "name": "build",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This static method allows you to build the frontspec.json file from the configs specifies in the config.frontspec.build.sources stack.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
                     "assetstoserve": {
                         "id": "s6d86cf1924ed434cc4c18743bd0ca39395b29f596193136f86bfb9fa897e83f1",
                         "name": "assetsToServe",
@@ -245,16 +268,80 @@
                     }
                 }
             },
+            "@coffeekraken.s-frontspec.php.SFrontspec": {
+                "id": "@coffeekraken.s-frontspec.php.SFrontspec",
+                "name": "SFrontspec",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to access the `frontspec.json` file that is usualy at the root of the frontend project.",
+                "namespace": "@coffeekraken.s-frontspec.php",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "$frontspec = new SFrontspec();\n$frontspecJson = $frontspec->read();"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SFrontspec.php",
+                "extension": "php",
+                "relPath": "src/php/SFrontspec.php",
+                "children": {
+                    "read": {
+                        "id": "s84818b9936378ec4191dec6daff36363c1f8512094b6fb9b36f505e41c96e005",
+                        "name": "read",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "platform": [
+                            {
+                                "name": "php",
+                                "description": ""
+                            }
+                        ],
+                        "description": "This method allows you to read a spec file and/or a value inside the passed spec file.",
+                        "status": "beta",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    }
+                }
+            },
             "@coffeekraken.s-frontspec.node.interface.SFrontspecAddParamsInterface": {
                 "id": "@coffeekraken.s-frontspec.node.interface.SFrontspecAddParamsInterface",
                 "name": "SFrontspecAddParamsInterface",
                 "type": {
                     "types": [
                         {
-                            "type": ".                      Class"
+                            "type": "Class"
                         }
                     ],
-                    "raw": ".                      Class"
+                    "raw": "Class"
                 },
                 "platform": [
                     {
@@ -281,16 +368,348 @@
                 "relPath": "src/node/interface/SFrontspecAddParamsInterface.ts",
                 "children": {}
             },
+            "@coffeekraken.s-frontspec.node.interface.SFrontspecBuildParamsInterface": {
+                "id": "@coffeekraken.s-frontspec.node.interface.SFrontspecBuildParamsInterface",
+                "name": "SFrontspecBuildParamsInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe the minimum requirement\nneeded to build the add the frontspec.build file",
+                "namespace": "@coffeekraken.s-frontspec.node.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SFrontspecBuildParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "sources": {
+                            "type": "Object",
+                            "description": "Specify each properties you want in your frontspec with an object that describe the type of the source and some settings depending on the source itself",
+                            "default": {
+                                "metas": {
+                                    "type": "config",
+                                    "config": "metas"
+                                },
+                                "assets": {
+                                    "type": "config",
+                                    "config": "assets"
+                                },
+                                "media": {
+                                    "type": "object",
+                                    "value": {
+                                        "defaultAction": "<=",
+                                        "defaultMedia": "desktop",
+                                        "defaultQuery": "screen",
+                                        "queries": {
+                                            "mobile": {
+                                                "minWidth": 0,
+                                                "maxWidth": 639
+                                            },
+                                            "tablet": {
+                                                "minWidth": 640,
+                                                "maxWidth": 1279
+                                            },
+                                            "desktop": {
+                                                "minWidth": 1280,
+                                                "maxWidth": 2047
+                                            },
+                                            "wide": {
+                                                "minWidth": 2048,
+                                                "maxWidth": null
+                                            }
+                                        }
+                                    }
+                                },
+                                "views": {
+                                    "type": "config",
+                                    "config": "views"
+                                },
+                                "specs": {
+                                    "type": "config",
+                                    "config": "specs"
+                                },
+                                "google": {
+                                    "type": "config",
+                                    "config": "google"
+                                },
+                                "margin": {
+                                    "type": "object",
+                                    "value": {
+                                        "0": 0,
+                                        "10": 0.375,
+                                        "20": 0.75,
+                                        "30": 1.5,
+                                        "40": 2.25,
+                                        "50": 3.25,
+                                        "60": 4.25,
+                                        "70": 5.5,
+                                        "80": 7,
+                                        "90": 9,
+                                        "100": 11,
+                                        "default": "1rem"
+                                    }
+                                },
+                                "padding": {
+                                    "type": "object",
+                                    "value": {
+                                        "0": 0,
+                                        "10": 0.375,
+                                        "20": 0.75,
+                                        "30": 1.5,
+                                        "40": 2.25,
+                                        "50": 3.25,
+                                        "60": 4.25,
+                                        "70": 5.5,
+                                        "80": 7,
+                                        "90": 9,
+                                        "100": 11,
+                                        "default": "1rem"
+                                    }
+                                },
+                                "font": {
+                                    "type": "object",
+                                    "value": {
+                                        "family": {
+                                            "default": {
+                                                "font-family": "\"Titillium Web\"",
+                                                "font-weight": 400,
+                                                "import": "https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap"
+                                            },
+                                            "title": {
+                                                "font-family": "\"Titillium Web\"",
+                                                "font-weight": 600,
+                                                "import": "https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap"
+                                            },
+                                            "quote": {
+                                                "font-family": "\"Palatino, Times, Georgia, serif\"",
+                                                "font-weight": "normal",
+                                                "font-style": "normal",
+                                                "font-display": "auto",
+                                                "cap-height": 0.65
+                                            },
+                                            "code": {
+                                                "font-family": "Menlo, Monaco, Consolas, Courier New, monospace",
+                                                "font-weight": "normal",
+                                                "font-style": "normal",
+                                                "font-display": "auto",
+                                                "cap-height": 0.65
+                                            }
+                                        },
+                                        "size": {
+                                            "0": 0,
+                                            "5": "0.5",
+                                            "10": 0.65,
+                                            "20": 0.75,
+                                            "30": 1.1,
+                                            "40": 1.25,
+                                            "50": 1.5,
+                                            "60": 2,
+                                            "70": 2.5,
+                                            "80": 3,
+                                            "90": 4,
+                                            "100": 5,
+                                            "default": "16px"
+                                        }
+                                    }
+                                },
+                                "typo": {
+                                    "type": "object",
+                                    "value": {
+                                        "h1": {
+                                            "class": "s-typo:h1"
+                                        },
+                                        "h2": {
+                                            "class": "s-typo:h2"
+                                        },
+                                        "h3": {
+                                            "class": "s-typo:h3"
+                                        },
+                                        "h4": {
+                                            "class": "s-typo:h4"
+                                        },
+                                        "h5": {
+                                            "class": "s-typo:h5"
+                                        },
+                                        "h6": {
+                                            "class": "s-typo:h6"
+                                        },
+                                        "p": {
+                                            "class": "s-typo:p"
+                                        },
+                                        "lead": {
+                                            "class": "s-typo:lead"
+                                        },
+                                        "hr": {
+                                            "class": "s-typo:hr"
+                                        },
+                                        "pre": {
+                                            "class": "s-typo:pre"
+                                        },
+                                        "code": {
+                                            "class": "s-typo:code"
+                                        },
+                                        "a": {
+                                            "class": "s-typo:a"
+                                        },
+                                        "quote": {
+                                            "class": "s-typo:quote"
+                                        },
+                                        "b": {
+                                            "class": "s-typo:b"
+                                        },
+                                        "bold": {
+                                            "class": "s-typo:bold"
+                                        },
+                                        "strong": {
+                                            "class": "s-typo:strong"
+                                        },
+                                        "i": {
+                                            "class": "s-typo:i"
+                                        },
+                                        "italic": {
+                                            "class": "s-typo:italic"
+                                        },
+                                        "em": {
+                                            "class": "s-typo:em"
+                                        },
+                                        "large": {
+                                            "class": "s-typo:large"
+                                        },
+                                        "larger": {
+                                            "class": "s-typo:larger"
+                                        },
+                                        "largest": {
+                                            "class": "s-typo:largest"
+                                        },
+                                        "small": {
+                                            "class": "s-typo:small"
+                                        },
+                                        "smaller": {
+                                            "class": "s-typo:smaller"
+                                        },
+                                        "smallest": {
+                                            "class": "s-typo:smallest"
+                                        },
+                                        "mark": {
+                                            "class": "s-typo:mark"
+                                        },
+                                        "del": {
+                                            "class": "s-typo:del"
+                                        },
+                                        "ins": {
+                                            "class": "s-typo:ins"
+                                        },
+                                        "sub": {
+                                            "class": "s-typo:sub"
+                                        },
+                                        "sup": {
+                                            "class": "s-typo:sup"
+                                        }
+                                    }
+                                },
+                                "layout": {
+                                    "type": "object",
+                                    "value": {
+                                        "offset": {
+                                            "top": 0,
+                                            "right": 0,
+                                            "bottom": 0,
+                                            "left": 0
+                                        },
+                                        "container": {
+                                            "default": "1280px",
+                                            "wide": "1440px",
+                                            "full": "none"
+                                        },
+                                        "grid": {
+                                            "1": 1,
+                                            "2": 2,
+                                            "3": 3,
+                                            "4": 4,
+                                            "5": 5,
+                                            "6": 6,
+                                            "7": 7,
+                                            "8": 8,
+                                            "9": 9,
+                                            "10": 10,
+                                            "11": 11,
+                                            "12": 12
+                                        },
+                                        "layout": {
+                                            "1": "1",
+                                            "12": "1 2",
+                                            "21": "2 1",
+                                            "112": "1 1 2",
+                                            "122": "1 2 2",
+                                            "123": "1 2 3",
+                                            "211": "2 1 1",
+                                            "221": "2 2 1",
+                                            "321": "3 2 1",
+                                            "1112": "1 1 1 2",
+                                            "1222": "1 2 2 2",
+                                            "1234": "1 2 3 4",
+                                            "2221": "2 2 2 1",
+                                            "11112": "1 1 1 1 2",
+                                            "12222": "1 2 2 2 2",
+                                            "12345": "1 2 3 4 5",
+                                            "22221": "2 2 2 2 1",
+                                            "111112": "1 1 1 1 1 2",
+                                            "122222": "1 2 2 2 2 2",
+                                            "123456": "1 2 3 4 5 6",
+                                            "1_2": "1 _ 2",
+                                            "2_1": "2 _ 1",
+                                            "12_33": "1 2 _ 3 3",
+                                            "1_23": "1 _ 2 3",
+                                            "1_2_3": "1 _ 2 _ 3",
+                                            "32_1": "3 2 _ 1",
+                                            "3_21": "3 _ 2 1",
+                                            "12_34": "1 2 _ 3 4",
+                                            "123_4": "1 2 3 _ 4",
+                                            "1_234": "1 _ 2 3 4",
+                                            "1_2_3_4": "1 _ 2 _ 3 _ 4",
+                                            "123_45": "1 2 3 _ 4 5",
+                                            "12_345": "1 2 _ 3 4 5",
+                                            "1_2345": "1 _ 2 3 4 5",
+                                            "1234_5": "1 2 3 4 _ 5",
+                                            "1_2_3_4_5": "1 _ 2 _ 3 _ 4 _ 5"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SFrontspecBuildParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SFrontspecBuildParamsInterface.ts",
+                "children": {}
+            },
             "@coffeekraken.s-frontspec.node.interface.SFrontspecReadParamsInterface": {
                 "id": "@coffeekraken.s-frontspec.node.interface.SFrontspecReadParamsInterface",
                 "name": "SFrontspecReadParamsInterface",
                 "type": {
                     "types": [
                         {
-                            "type": ".                      Class"
+                            "type": "Class"
                         }
                     ],
-                    "raw": ".                      Class"
+                    "raw": "Class"
                 },
                 "platform": [
                     {

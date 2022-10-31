@@ -145,7 +145,7 @@
 #homepage-features .__recipes-grid {
         
 
-            gap: calc(var(--s-theme-margin-default, 1rem) * 3);
+            gap: calc(var(--s-theme-margin-default, 1rem) * 3.25);
 }
     
 
@@ -331,7 +331,7 @@
 #homepage-features .__webcomponents-grid {
         
 
-            gap: calc(var(--s-theme-margin-default, 1rem) * 3);
+            gap: calc(var(--s-theme-margin-default, 1rem) * 3.25);
 }
     
 

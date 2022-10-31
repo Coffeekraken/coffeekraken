@@ -1,11 +1,11 @@
 // @ts-nocheck
 
-import __SLitComponent from "@coffeekraken/s-lit-component";
-import { html } from "lit";
+import __SLitComponent from '@coffeekraken/s-lit-component';
+import { html } from 'lit';
 
 export default class CKFallingStars extends __SLitComponent {
   static get properties() {
-    return __SLitComponent.createProperties();
+    return __SLitComponent.propertiesFromInterface();
   }
 
   constructor() {
@@ -23,8 +23,8 @@ export default class CKFallingStars extends __SLitComponent {
     for (let i = 0; i < this._maxCount; i++) {
       const left = `${Math.random() * 100}%`;
 
-      const $starStyle = document.createElement("style");
-      $starStyle.rel = "stylesheet";
+      const $starStyle = document.createElement('style');
+      $starStyle.rel = 'stylesheet';
       $starStyle.innerHTML = `
                 @keyframes star-${i} {
                     0% {
@@ -58,17 +58,17 @@ export default class CKFallingStars extends __SLitComponent {
 
     const starId = Math.round(Math.random() * this._maxCount);
 
-    const $star = document.createElement("div");
-    $star.classList.add("__star");
+    const $star = document.createElement('div');
+    $star.classList.add('__star');
     $star.classList.add(`__star-${starId}`);
-    $star.classList.add(Math.random() < 0.5 ? "accent" : "complementary");
+    $star.classList.add(Math.random() < 0.5 ? 'accent' : 'complementary');
 
     const speed = 1 + Math.random() * 1.5;
 
-    $star.style.setProperty("--left", `${Math.random() * 100}%`);
-    $star.style.setProperty("--falling-time", `${speed}s`);
-    $star.style.setProperty("--speed", speed);
-    $star.style.setProperty("--scale", Math.random() * 2);
+    $star.style.setProperty('--left', `${Math.random() * 100}%`);
+    $star.style.setProperty('--falling-time', `${speed}s`);
+    $star.style.setProperty('--speed', speed);
+    $star.style.setProperty('--scale', Math.random() * 2);
 
     setTimeout(() => {
       $star.remove();
@@ -84,7 +84,7 @@ export default class CKFallingStars extends __SLitComponent {
   }
 }
 
-export function define(props: any = {}, tagName = "ck-falling-stars") {
+export function define(props: any = {}, tagName = 'ck-falling-stars') {
   __SLitComponent.setDefaultProps(tagName, props);
   customElements.define(tagName, CKFallingStars);
 }

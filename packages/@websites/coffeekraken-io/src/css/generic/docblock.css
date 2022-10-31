@@ -1,40 +1,40 @@
-@sugar.partial (docblock) {
-  .docblock {
-    &:not(.first) {
-      border-left: 1px solid sugar.color(accent);
-      border-radius: sugar.border.radius();
-      margin-block-start: sugar.margin(50);
-    }
+/* @sugar.partial (docblock) { */
+.docblock {
+  &:not(.first) {
+    border-left: 1px solid sugar.color(accent);
+    border-radius: sugar.border.radius();
+    margin-block-start: sugar.margin(50);
+  }
 
-    .__toggle-content {
-      display: none;
+  .__toggle-content {
+    display: none;
 
-      > *:first-child {
-        margin-top: 0 !important;
-      }
-    }
-
-    &.active .__toggle-content {
-      display: block;
-      padding: sugar.padding(50) 0 sugar.padding(50) sugar.padding(50);
-    }
-
-    .__section-title {
-      padding: sugar.padding(30);
-      font-size: sugar.font.size(40);
-      background: sugar.color(main, surface);
-      border-radius: sugar.border.radius();
-      margin-block-start: sugar.margin(20);
-      transition: sugar.transition(fast);
-
-      &:hover,
-      &:focus {
-        background: sugar.color(main, surface, --lighten 5);
-      }
-    }
-
-    &.active .__section-title {
-      background: sugar.color(accent, surface) !important;
+    > *:first-child {
+      margin-top: 0 !important;
     }
   }
+
+  &.active .__toggle-content {
+    display: block;
+    padding: sugar.padding(50) 0 sugar.padding(50) sugar.padding(50);
+  }
+
+  .__section-title {
+    padding: sugar.padding(30);
+    font-size: sugar.font.size(40);
+    background: sugar.color(main, surface);
+    border-radius: sugar.border.radius();
+    margin-block-start: sugar.margin(20);
+    transition: sugar.transition(fast);
+
+    &:hover,
+    &:focus {
+      background: sugar.color(main, surface, --lighten 5);
+    }
+  }
+
+  &.active .__section-title {
+    background: sugar.color(accent, surface) !important;
+  }
 }
+/* } */

@@ -42,7 +42,7 @@
                     </a>
                 </div>
                 <div class="__illustration @mobile s-hide">
-                    <s-inline class="adaptive-color" src="/dist/img/illustrations/opensource.svg" />
+                    <img  class="adaptive-color" src="/dist/img/illustrations/opensource.svg" />
                 </div>
             </div>
 

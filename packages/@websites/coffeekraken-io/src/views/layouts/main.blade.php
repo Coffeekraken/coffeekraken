@@ -1,4 +1,4 @@
-@extends('@sugar.layouts.main.main', [
+@extends('sugar.layouts.main.main', [
 'bodyAttributes' => [
 'id' => ($request->path != '/' and $request->path != '') ? \Sugar\string\idCompliant($request->path) : 'homepage',
 's-sugar' => true

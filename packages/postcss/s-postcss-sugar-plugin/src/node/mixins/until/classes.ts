@@ -73,7 +73,7 @@ export default function ({
         `,
         ).code(
             `
-            .s-until.s-until--${state}:not(.s-until--sibling):not(.s-until--siblings):not(.s-until--parent):not(.s-until--grandparent):not(.s-until--ancestor)[${state}] {
+            .s-until.s-until--${state}:not(.s-until--sibling):not(.s-until--siblings):not(.s-until--parent):not(.s-until--grandparent):not(.s-until--ancestor):is([${state}],[status="${state}"]) {
                 display: none;
             }`,
             { type: 'CssClass' },
@@ -102,7 +102,8 @@ export default function ({
         ).code(
             `
             *.${state} + .s-until.s-until--sibling.s-until--${state},
-            *[${state}] + .s-until.s-until--sibling.s-until--${state} {
+            *[${state}] + .s-until.s-until--sibling.s-until--${state},
+            *[status="${state}"] + .s-until.s-until--sibling.s-until--${state} {
                 display: none;
             }`,
             { type: 'CssClass' },
@@ -131,7 +132,8 @@ export default function ({
         ).code(
             `
             *.${state} ~  .s-until.s-until--siblings.s-until--${state},
-            *[${state}] ~ .s-until.s-until--siblings.s-until--${state} {
+            *[${state}] ~ .s-until.s-until--siblings.s-until--${state},
+            *[status="${state}"] ~ .s-until.s-until--siblings.s-until--${state} {
                 display: none;
             }`,
             { type: 'CssClass' },
@@ -159,10 +161,11 @@ export default function ({
         `,
         ).code(
             `
-            *:not([${state}]):not(.${state}) > .s-until.s-until--parent.s-until--${state} {
+            *:not([status="${state}"]):not([${state}]):not(.${state}) > .s-until.s-until--parent.s-until--${state} {
                 display: unset;
             }
             *[${state}] > .s-until.s-until--parent.s-until--${state},
+            *[status="${state}"] > .s-until.s-until--parent.s-until--${state},
             *.${state} > .s-until.s-until--parent.s-until--${state} {
                 display: none;
             }`,
@@ -191,10 +194,11 @@ export default function ({
         `,
         ).code(
             `
-            *:not([${state}]):not(.${state}) > * > .s-until.s-until--grandparent.s-until--${state} {
+            *:not([status="${state}"]):not([${state}]):not(.${state}) > * > .s-until.s-until--grandparent.s-until--${state} {
                 display: unset;
             }
             *[${state}] > * > .s-until.s-until--grandparent.s-until--${state},
+            *[status="${state}"] > * > .s-until.s-until--grandparent.s-until--${state},
             *.${state} > * > .s-until.s-until--grandparent.s-until--${state} {
                 display: none;
             }`,
@@ -223,10 +227,11 @@ export default function ({
         `,
         ).code(
             `
-            *:not([${state}]):not(.${state}) .s-until.s-until--ancestor.s-until--${state} {
+            *:not([status="${state}"]):not([${state}]):not(.${state}) .s-until.s-until--ancestor.s-until--${state} {
                 display: unset;
             }
             *[${state}] .s-until.s-until--ancestor.s-until--${state},
+            *[status="${state}"] .s-until.s-until--ancestor.s-until--${state},
             *.${state} .s-until.s-until--ancestor.s-until--${state} {
                 display: none;
             }`,

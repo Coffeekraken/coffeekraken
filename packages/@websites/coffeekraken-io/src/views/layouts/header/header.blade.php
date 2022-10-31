@@ -65,9 +65,9 @@
                 @include('layouts.header.partials.menuItem', ['menuItem' =>
                 $docmap->menu->custom->styleguide->tree->styleguide, 'class' => ''])
 
-                {{-- Styleguide --}}
+                {{-- Specs --}}
                 @include('layouts.header.partials.menuItem', ['menuItem' =>
-                $docmap->menu->custom->views->tree->views, 'class' => ''])
+                $docmap->menu->custom->specs->tree->specs, 'class' => ''])
 
                 {{-- API --}}
                 @php

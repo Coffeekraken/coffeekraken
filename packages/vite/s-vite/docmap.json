@@ -3,12 +3,15 @@
     "extends": [],
     "generated": {
         "extends": [
+            "01-basic",
+            "02-basic",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
+            "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
@@ -16,7 +19,9 @@
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
+            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config-adapter",
             "@coffeekraken/s-config-folder-adapter",
@@ -53,6 +58,7 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
@@ -70,6 +76,8 @@
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -180,6 +188,30 @@
                 "default": "development",
                 "description": "Specify the mode to work with. Can be \"development\" or \"production\"",
                 "namespace": "@coffeekraken.s-vite.config.vite",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "vite.config.ts",
+                "extension": "config",
+                "relPath": "src/config/vite.config.ts"
+            },
+            "@coffeekraken.s-vite.config.vite.resolve.alias.vue": {
+                "id": "@coffeekraken.s-vite.config.vite.resolve.alias.vue",
+                "name": "vue",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "vue/dist/vue.esm-bundler.js",
+                "description": "Specify the esm builder alias resolution path",
+                "namespace": "@coffeekraken.s-vite.config.vite.resolve.alias",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -316,54 +348,6 @@
                 "extension": "config",
                 "relPath": "src/config/vite.config.ts"
             },
-            "@coffeekraken.s-vite.config.vite.build.lib.entry": {
-                "id": "@coffeekraken.s-vite.config.vite.build.lib.entry",
-                "name": "entry",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.src.jsDir]/index.ts",
-                "description": "Specify the entry file for a \"lib\" build",
-                "namespace": "@coffeekraken.s-vite.config.vite.build.lib",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "vite.config.ts",
-                "extension": "config",
-                "relPath": "src/config/vite.config.ts"
-            },
-            "@coffeekraken.s-vite.config.vite.build.lib.name": {
-                "id": "@coffeekraken.s-vite.config.vite.build.lib.name",
-                "name": "name",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "index",
-                "description": "Specify the entry name for a \"lib\" build",
-                "namespace": "@coffeekraken.s-vite.config.vite.build.lib",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "vite.config.ts",
-                "extension": "config",
-                "relPath": "src/config/vite.config.ts"
-            },
             "@coffeekraken.s-vite.config.vite.build.outDir": {
                 "id": "@coffeekraken.s-vite.config.vite.build.outDir",
                 "name": "outDir",
@@ -377,6 +361,30 @@
                 },
                 "default": "[config.storage.dist.jsDir]",
                 "description": "Specify the output directory for the build",
+                "namespace": "@coffeekraken.s-vite.config.vite.build",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "vite.config.ts",
+                "extension": "config",
+                "relPath": "src/config/vite.config.ts"
+            },
+            "@coffeekraken.s-vite.config.vite.build.assetsDir": {
+                "id": "@coffeekraken.s-vite.config.vite.build.assetsDir",
+                "name": "assetsDir",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "'''",
+                "description": "Specify the output assets directory for the build relative to the \"outDir\"",
                 "namespace": "@coffeekraken.s-vite.config.vite.build",
                 "since": "2.0.0",
                 "author": {
@@ -527,10 +535,10 @@
                 "type": {
                     "types": [
                         {
-                            "type": ".                      Class"
+                            "type": "Class"
                         }
                     ],
-                    "raw": ".                      Class"
+                    "raw": "Class"
                 },
                 "platform": [
                     {
@@ -564,7 +572,6 @@
                                 "module"
                             ],
                             "default": [
-                                "bundle",
                                 "module"
                             ],
                             "alias": "t"
@@ -598,6 +605,11 @@
                             "default": false,
                             "alias": "w"
                         },
+                        "buildInitial": {
+                            "description": "Specify if you want to build first and watch the changes after of to only build when changes are detected",
+                            "type": "Boolean",
+                            "default": false
+                        },
                         "lib": {
                             "description": "Specify if your build type is \"lib\". Same as setting the \"type\" argument to \"lib\"",
                             "type": "Boolean",
@@ -629,7 +641,7 @@
                         },
                         "minify": {
                             "description": "Specify if you want to minify your build or not",
-                            "type": "Boolean",
+                            "type": "Boolean|String",
                             "default": false,
                             "alias": "m"
                         },
@@ -658,10 +670,10 @@
                 "type": {
                     "types": [
                         {
-                            "type": ".                      Class"
+                            "type": "Class"
                         }
                     ],
-                    "raw": ".                      Class"
+                    "raw": "Class"
                 },
                 "platform": [
                     {
@@ -694,10 +706,10 @@
                 "type": {
                     "types": [
                         {
-                            "type": ".                      Class"
+                            "type": "Class"
                         }
                     ],
-                    "raw": ".                      Class"
+                    "raw": "Class"
                 },
                 "platform": [
                     {

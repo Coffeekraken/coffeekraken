@@ -3,12 +3,15 @@
     "extends": [],
     "generated": {
         "extends": [
+            "01-basic",
+            "02-basic",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
+            "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
@@ -16,7 +19,9 @@
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
+            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config-adapter",
             "@coffeekraken/s-config-folder-adapter",
@@ -69,6 +74,7 @@
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-specs-editor-component",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -788,6 +794,40 @@
                 "filename": "sort.ts",
                 "extension": "ts",
                 "relPath": "src/node/helpers/sort.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-handlebars.node.helpers.spec": {
+                "id": "@coffeekraken.s-handlebars.node.helpers.spec",
+                "name": "spec",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This helper allows you to access a json spec registered in the",
+                "namespace": "@coffeekraken.s-handlebars.node.helpers",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "spec.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/spec.ts",
                 "children": {}
             },
             "@coffeekraken.s-handlebars.node.helpers.toString": {

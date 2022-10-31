@@ -1,4 +1,3 @@
-import __lazy from './lazy';
-import __
-
-export { __lazy };
+import __SClipboardCopy from './SClipboardCopy';
+export * from './SClipboardCopy';
+export default __SClipboardCopy;

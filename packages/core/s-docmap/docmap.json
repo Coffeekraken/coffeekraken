@@ -3,12 +3,15 @@
     "extends": [],
     "generated": {
         "extends": [
+            "01-basic",
+            "02-basic",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
+            "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
@@ -17,6 +20,7 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config-adapter",
             "@coffeekraken/s-config-folder-adapter",
@@ -46,7 +50,6 @@
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
-            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
@@ -69,6 +72,7 @@
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-specs-editor-component",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -547,6 +551,25 @@
                             "url": "https://coffeekraken.io"
                         }
                     },
+                    "search": {
+                        "id": "s8a461d784102a4cd7ef24c444497ab8154de45896ba3a4594cd92de221284d4a",
+                        "name": "search",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This methodallows you to search for an docmap item by it's slug.\nYou can specify if you want to search also in the \"packages\" section or not",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
                     "extractmenu": {
                         "id": "s3a5389265c41fef10c58b94979c8f59b9971ed124dd40308a9f07123fc039a64",
                         "name": "extractMenu",
@@ -613,10 +636,10 @@
                 "type": {
                     "types": [
                         {
-                            "type": ".                      Class"
+                            "type": "Class"
                         }
                     ],
-                    "raw": ".                      Class"
+                    "raw": "Class"
                 },
                 "platform": [
                     {
@@ -720,10 +743,10 @@
                 "type": {
                     "types": [
                         {
-                            "type": ".                      Class"
+                            "type": "Class"
                         }
                     ],
-                    "raw": ".                      Class"
+                    "raw": "Class"
                 },
                 "platform": [
                     {
@@ -762,10 +785,10 @@
                 "type": {
                     "types": [
                         {
-                            "type": ".                      Class"
+                            "type": "Class"
                         }
                     ],
-                    "raw": ".                      Class"
+                    "raw": "Class"
                 },
                 "platform": [
                     {
@@ -819,10 +842,10 @@
                 "type": {
                     "types": [
                         {
-                            "type": ".                      Class"
+                            "type": "Class"
                         }
                     ],
-                    "raw": ".                      Class"
+                    "raw": "Class"
                 },
                 "platform": [
                     {
@@ -866,10 +889,10 @@
                 "type": {
                     "types": [
                         {
-                            "type": ".                      Class"
+                            "type": "Class"
                         }
                     ],
-                    "raw": ".                      Class"
+                    "raw": "Class"
                 },
                 "platform": [
                     {

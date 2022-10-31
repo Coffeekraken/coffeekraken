@@ -1,10 +1,10 @@
 @sugar.cache (sugar) {
-    @sugar.init;
-    @sugar.theme (dark, null, true);
+  @sugar.init;
+  @sugar.theme (dark, null, true);
 
-    @sugar.classes;
+  @sugar.classes;
 
-    @sugar.partial (mobile) {
+  /* @sugar.partial (mobile) {
         @sugar.media.classes (mobile) {
             @sugar.classes;
         }
@@ -13,32 +13,32 @@
         @sugar.media.classes (tablet) {
             @sugar.classes;
         }
-    }
+    } */
 
-    @sugar.partial (sFiltrableInput) {
-        @sugar.ui.filtrableinput.classes;
-    }
-    @sugar.partial (sColorPicker) {
-        @sugar.ui.colorpicker.classes;
-    }
-    @sugar.partial (sDatetimePicker) {
-        @sugar.ui.datetimepicker.classes;
-    }
-    @sugar.partial (sCodeExample) {
-        @sugar.ui.codeexample.classes;
-    }
-    @sugar.partial (sRating) {
-        @sugar.ui.rating.classes;
-    }
-    @sugar.partial (sSlider) {
-        @sugar.ui.slider.classes;
-    }
-    @sugar.partial (sThemeSwitcher) {
-        @sugar.ui.themeswitcher.classes;
-    }
-    @sugar.partial (sPlatform) {
-        @sugar.platform.classes;
-    }
+  /* @sugar.partial (sFiltrableInput) { */
+  @sugar.ui.filtrableinput.classes;
+  /* } */
+  /* @sugar.partial (sColorPicker) { */
+  @sugar.ui.colorpicker.classes;
+  /* } */
+  /* @sugar.partial (sDatetimePicker) { */
+  @sugar.ui.datetimepicker.classes;
+  /* } */
+  /* @sugar.partial (sCodeExample) { */
+  @sugar.ui.codeexample.classes;
+  /* } */
+  /* @sugar.partial (sRating) { */
+  @sugar.ui.rating.classes;
+  /* } */
+  /* @sugar.partial (sSlider) { */
+  @sugar.ui.slider.classes;
+  /* } */
+  /* @sugar.partial (sThemeSwitcher) { */
+  @sugar.ui.themeswitcher.classes;
+  /* } */
+  /* @sugar.partial (sPlatform) { */
+  @sugar.platform.classes;
+  /* } */
 }
 
 @sugar.icon.classes (

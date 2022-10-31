@@ -62,7 +62,7 @@ export interface ISRatingComponentProps {
 
 export default class SRatingComponent extends __SLitComponent {
     static get properties() {
-        return __SLitComponent.createProperties(
+        return __SLitComponent.propertiesFromInterface(
             {},
             __SRatingComponentInterface,
         );

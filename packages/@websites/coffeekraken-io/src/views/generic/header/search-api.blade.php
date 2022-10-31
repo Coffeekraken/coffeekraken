@@ -4,7 +4,7 @@
 
 <p class="s-typo:lead s-mbe:50">
     To access the search, simply click in the <span class="s-tc:accent">search input on top of the page</span>, of
-    make use of the <span class="s-badge s-color:complementary">CTRL + P</span> shortcut...
+    make use of the <span class="s-badge s-color:complementary">CTRL + F</span> shortcut...
 </p>
 
 <p class="s-typo:p">

@@ -1,0 +1,272 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "01-basic",
+            "02-basic",
+            "@coffeekraken/cli",
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-bench",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-carpenter",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-component",
+            "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
+            "@coffeekraken/s-datetime-picker-component",
+            "@coffeekraken/s-deps-feature",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
+            "@coffeekraken/s-duration",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-floating-feature",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-checker",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
+            "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-monorepo",
+            "@coffeekraken/s-package",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
+            "@coffeekraken/s-parallax-feature",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-export-plugin",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-rating-component",
+            "@coffeekraken/s-refocus-feature",
+            "@coffeekraken/s-request",
+            "@coffeekraken/s-scroll-component",
+            "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-state",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-element",
+            "@coffeekraken/s-sugar-feature",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-template-feature",
+            "@coffeekraken/s-theme-switcher-component",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
+            "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
+            "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
+            "@coffeekraken/s-view-renderer-engine-twig",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-postcss-plugin",
+            "@coffeekraken/s-vite-sugar-plugin",
+            "@coffeekraken/s-vite",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-component-proxy.node.SComponentProxy": {
+                "id": "@coffeekraken.s-component-proxy.node.SComponentProxy",
+                "name": "SComponentProxy",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "description": "This class allows you to manage component builded in frameworks like React, Solid, etc...\nYou will be able to set new properties and il will update the component accordingly.",
+                "namespace": "@coffeekraken.s-component-proxy.node",
+                "status": "wip",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SComponentProxy from '@coffeekraken/s-component-proxy';\nconst component = new SComponentProxy(myComponent);\ncomponent.setProps({\n     hello: 'world'\n});"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SComponentProxy.ts",
+                "extension": "ts",
+                "relPath": "src/js/SComponentProxy.ts",
+                "children": {
+                    "component": {
+                        "id": "s939e30ab4e0cd08de68279d98471f289992b6e85171ed2ebc30bacb9fef40b85",
+                        "name": "component",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "any"
+                                }
+                            ],
+                            "raw": "any"
+                        },
+                        "description": "Store the component to handle",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "adapter": {
+                        "id": "s36f9ad2b3d69ee7f9b96b3666775e5890e70c7a11062a5443760b18a61a5e5fb",
+                        "name": "adapter",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "any"
+                                }
+                            ],
+                            "raw": "any"
+                        },
+                        "description": "Store the adapter to handle this component",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "registeradapter": {
+                        "id": "sd5a21ab3782209e135364b1d637ab75352a057b8468a511d0abee934c030ce29",
+                        "name": "registerAdapter",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This static method allows you to register a new component adapter for different frameworks, etc...",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "constructor": {
+                        "id": "sfa166a726e2f17bad10f0fa6a932646b6f0d93a5c18c2e6571524f4a269e2402",
+                        "name": "constructor",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "load": {
+                        "id": "s62f93765409d7dc89c2920948f5348eba54825988004579de5bbb9134fc81f4a",
+                        "name": "load",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This method allows you to load the component you want to use",
+                        "async": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "create": {
+                        "id": "s453b0cea2aaee6ee8bfd458bc6cded34ad1d26971e72fc24ae932ad4b3cae405",
+                        "name": "create",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This method allows you to create a component through the adapter",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "setprops": {
+                        "id": "s1e992d13210d9f320d4cde5304e16a3d6f660ea31352b2e2d96a90d261f20d54",
+                        "name": "setProps",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This method allows you to set the properties of a component",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -60,5 +60,5 @@
 --s-theme-color-current-a: var(--s-theme-color-main-a, 1);
             }
 .s-rhythm--vertical > .s-rating {
-                    margin-bottom: calc(var(--s-theme-margin-default, 1rem) * 3.75);
+                    margin-bottom: calc(var(--s-theme-margin-default, 1rem) * 4.25);
                 }

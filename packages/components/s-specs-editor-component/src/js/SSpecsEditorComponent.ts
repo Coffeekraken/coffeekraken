@@ -184,7 +184,9 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         return values;
     }
 
-    _renderSelectElement(propObj) {
+    _renderSelectElement(propObj, path, values) {
+        const prop = path.at(-1),
+            value = values[prop] ?? propObj.value ?? propObj.default;
         return html`
             <div class="${this.componentUtils.className('__prop--select')}">
                 <label
@@ -203,11 +205,14 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                         placeholder="${propObj.default ??
                         propObj.title ??
                         propObj.id}"
-                        prop="${JSON.stringify(propObj)}"
+                        value="${value}"
                     >
                         ${propObj.options.map(
                             (option) => html`
-                                <option value="${option.value}">
+                                <option
+                                    value="${option.value}"
+                                    ?selected=${option.value === value}
+                                >
                                     ${option.name}
                                 </option>
                             `,
@@ -235,7 +240,9 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         `;
     }
 
-    _renderCheckboxElement(propObj) {
+    _renderCheckboxElement(propObj, path, values) {
+        const prop = path.at(-1),
+            value = values[prop] ?? propObj.value ?? propObj.default;
         return html`
             <div class="${this.componentUtils.className('__prop--checkbox')}">
                 <label
@@ -252,7 +259,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                             '__checkbox',
                             's-switch',
                         )}"
-                        checked?=${propObj.value}
+                        checked?=${value}
                     />
                     <span>
                         ${propObj.title ?? propObj.id}
@@ -276,7 +283,9 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         `;
     }
 
-    _renderTextElement(propObj) {
+    _renderTextElement(propObj, path, values) {
+        const prop = path.at(-1),
+            value = values[prop] ?? propObj.value ?? propObj.default;
         return html`
             <div class="${this.componentUtils.className('__prop--text')}">
                 <label
@@ -296,7 +305,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                         placeholder="${propObj.default ??
                         propObj.title ??
                         propObj.id}"
-                        value="${propObj.value}"
+                        value="${value}"
                     />
                     <span>
                         ${propObj.title ?? propObj.id}
@@ -320,14 +329,16 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         `;
     }
 
-    _renderElement(propObj) {
+    _renderElement(propObj, path, values) {
+        console.log(path, values);
+
         return html`
             ${propObj.type.toLowerCase() === 'text'
-                ? this._renderTextElement(propObj)
+                ? this._renderTextElement(propObj, path, values)
                 : propObj.type.toLowerCase() === 'select'
-                ? this._renderSelectElement(propObj)
+                ? this._renderSelectElement(propObj, path, values)
                 : propObj.type.toLowerCase() === 'checkbox'
-                ? this._renderCheckboxElement(propObj)
+                ? this._renderCheckboxElement(propObj, path, values)
                 : ''}
         `;
     }

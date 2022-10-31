@@ -159,7 +159,7 @@ export interface ISDatetimePickerComponentProps {
  */
 export default class SDatetimePickerComponent extends __SLitComponent {
     static get properties() {
-        return __SLitComponent.createProperties(
+        return __SLitComponent.propertiesFromInterface(
             {},
             __SDatetimePickerComponentInterface,
         );

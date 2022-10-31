@@ -1,5 +1,5 @@
 {
-    "name": "@coffeekraken/coffeekraken-io",
+    "name": "@website/coffeekraken-io",
     "title": "Coffeekraken",
     "version": "2.0.0-alpha.20",
     "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
@@ -53,7 +53,6 @@
         "@coffeekraken/s-glob": "^2.0.0-alpha.20",
         "@coffeekraken/s-handlebars": "^2.0.0-alpha.20",
         "@coffeekraken/s-images-builder": "^2.0.0-alpha.20",
-        "@coffeekraken/s-inline-component": "^2.0.0-alpha.20",
         "@coffeekraken/s-inline-feature": "^2.0.0-alpha.20",
         "@coffeekraken/s-interface": "^2.0.0-alpha.20",
         "@coffeekraken/s-kitchen": "^2.0.0-alpha.20",

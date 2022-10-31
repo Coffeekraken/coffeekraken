@@ -1,12 +1,12 @@
 <!--
 /**
  * @name            Container
- * @namespace       views.bare.container
+ * @namespace       specs.views.bare.container
  * @type            Markdown
  * @platform        blade
  * @platform        twig
  * @status          stable
- * @menu            Views / Bare           /views/bare/container
+ * @menu            Specs / Views           /specs/sugar.views.bare.container
  *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -31,7 +31,7 @@ The goal of this view is to wrap your sections and either centers it or make it 
 #### Blade
 
 ```php
-@include('@sugar.bare.container.container', [
+@include('sugar.bare.container.container', [
     'type' => [
         'default' => '',
         'wide' => 'full'

@@ -1,0 +1,372 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "01-basic",
+            "02-basic",
+            "@coffeekraken/cli",
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-bench",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-carpenter",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-component",
+            "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
+            "@coffeekraken/s-datetime-picker-component",
+            "@coffeekraken/s-deps-feature",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
+            "@coffeekraken/s-duration",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-floating-feature",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-checker",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-monorepo",
+            "@coffeekraken/s-package",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
+            "@coffeekraken/s-parallax-feature",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-export-plugin",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-rating-component",
+            "@coffeekraken/s-refocus-feature",
+            "@coffeekraken/s-request",
+            "@coffeekraken/s-scroll-component",
+            "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-state",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-element",
+            "@coffeekraken/s-sugar-feature",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-template-feature",
+            "@coffeekraken/s-theme-switcher-component",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
+            "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
+            "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
+            "@coffeekraken/s-view-renderer-engine-twig",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-postcss-plugin",
+            "@coffeekraken/s-vite-sugar-plugin",
+            "@coffeekraken/s-vite",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor.borderRadius": {
+                "id": "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor.borderRadius",
+                "name": "borderRadius",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.borderRadius]",
+                "description": "Specify the default border radius for button ui",
+                "namespace": "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor.defaultColor": {
+                "id": "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor.defaultColor",
+                "name": "defaultColor",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.defaultColor]",
+                "description": "Specify the default color for datetime picker ui",
+                "namespace": "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor.defaultStyle": {
+                "id": "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor.defaultStyle",
+                "name": "defaultStyle",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Number"
+                        }
+                    ],
+                    "raw": "Number"
+                },
+                "default": "[theme.ui.default.defaultStyle]",
+                "description": "Specify the default style for your filtrable input ui",
+                "namespace": "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor.transition": {
+                "id": "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor.transition",
+                "name": "transition",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "all .5s ease-in-out",
+                "description": "Specify the default transition for button ui",
+                "namespace": "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor.depth": {
+                "id": "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor.depth",
+                "name": "depth",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Number"
+                        }
+                    ],
+                    "raw": "Number"
+                },
+                "default": "[theme.ui.default.depth]",
+                "description": "Specify the default depth for your button ui",
+                "namespace": "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor.rhythmVertical": {
+                "id": "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor.rhythmVertical",
+                "name": "rhythmVertical",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Object"
+                        }
+                    ],
+                    "raw": "Object"
+                },
+                "default": "[theme.ui.default.rhythmVertical]",
+                "description": "Specify the default vertical rhythm for your datetime picker ui",
+                "namespace": "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-specs-editor-component.js.SSpecsEditorComponent": {
+                "id": "@coffeekraken.s-specs-editor-component.js.SSpecsEditorComponent",
+                "name": "SSpecsEditorComponent",
+                "as": "Clipboard copy",
+                "type": {
+                    "types": [
+                        {
+                            "type": "CustomElement"
+                        }
+                    ],
+                    "raw": "CustomElement"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "UI"
+                    ],
+                    "slug": "/styleguide/ui/s-clipboard-copy"
+                },
+                "platform": [
+                    {
+                        "name": "html",
+                        "description": ""
+                    }
+                ],
+                "description": "This component represent a simple \"copy to clipboard\" component that will copy a \"from\" target when clicked.",
+                "namespace": "@coffeekraken.s-specs-editor-component.js",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Copy from an input",
+                        "code": "<div class=\"s-flex:align-center\">\n     <input class=\"s-input s-width:30\" type=\"text\" value=\"Hello world\" id=\"my-input\" />\n     <s-clipboard-copy class=\"s-mis:20\" from=\"my-input\"></s-clipboard-copy>\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Using the input container addon",
+                        "code": "<label class=\"s-label\">\n     <span>Enter something and copy it!</span>\n     <div class=\"s-input-container:addon s-width:40\">\n         <input class=\"s-input\" type=\"text\" value=\"Hello world\" id=\"my-input\" />\n         <div>\n             <s-clipboard-copy class=\"s-mis:20\" from=\"my-input\"></s-clipboard-copy>\n         </div>\n     </div>\n</span>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Copy from a paragraph",
+                        "code": "<div class=\"s-flex:align-center\">\n     <p class=\"s-typo:p\" id=\"my-paragraph\">Hello world</p>\n     <s-clipboard-copy class=\"s-mis:20\" from=\"my-paragraph\"></s-clipboard-copy>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SSpecsEditorComponent.ts",
+                "extension": "ts",
+                "relPath": "src/js/SSpecsEditorComponent.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-specs-editor-component.js.interface.SSpecsEditorComponentInterface": {
+                "id": "@coffeekraken.s-specs-editor-component.js.interface.SSpecsEditorComponentInterface",
+                "name": "SSpecsEditorComponentInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe parameters of the SSpecsEditorComponent",
+                "namespace": "@coffeekraken.s-specs-editor-component.js.interface",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SSpecsEditorComponentInterface.ts",
+                "extension": "ts",
+                "relPath": "src/js/interface/SSpecsEditorComponentInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-specs-editor-component.ui.specsEditor.slider": {
+                "id": "@coffeekraken.s-specs-editor-component.ui.specsEditor.slider",
+                "name": "slider",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ],
+                    "raw": "PostcssMixin"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "Apply the slider style to any s-slider element",
+                "namespace": "@coffeekraken.s-specs-editor-component.ui.specsEditor",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".s-slider {\n   @sugar.ui.specsEditor;\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "specsEditor.ts",
+                "extension": "ts",
+                "relPath": "src/node/postcss/mixins/ui/specsEditor/specsEditor.ts",
+                "children": {}
+            }
+        }
+    }
+}

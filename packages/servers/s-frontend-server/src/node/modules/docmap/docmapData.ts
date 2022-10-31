@@ -2,7 +2,7 @@ import __SDocmap from '@coffeekraken/s-docmap';
 import __SMarkdownBuilder from '@coffeekraken/s-markdown-builder';
 import __SPromise from '@coffeekraken/s-promise';
 
-export default function docmapMarkdownData({ req, res, pageConfig }) {
+export default function docmapData({ req, res, pageConfig }) {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
         // building the namespace with the passed
         // :organisation and :package params in the url

@@ -104,7 +104,7 @@ export interface ISCodeExampleComponentProps {
  */
 export default class SCodeExample extends __SLitComponent {
     static get properties() {
-        return __SLitComponent.createProperties(
+        return __SLitComponent.propertiesFromInterface(
             {},
             __SCodeExampleComponentInterface,
         );

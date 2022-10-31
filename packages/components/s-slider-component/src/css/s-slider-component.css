@@ -13,6 +13,7 @@
     > .s-slider__root {
         > .s-slider__slides-wrapper {
             overflow-x: hidden;
+            overflow-y: hidden;
 
             /* > .s-slider__slides {
                 position: relative;
@@ -28,7 +29,7 @@
 
     position: relative;
 
-    &[mounted] {
+    &[status='mounted'] {
         display: block;
     }
 

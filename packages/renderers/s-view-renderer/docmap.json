@@ -3,12 +3,15 @@
     "extends": [],
     "generated": {
         "extends": [
+            "01-basic",
+            "02-basic",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
+            "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
@@ -17,6 +20,7 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config-adapter",
             "@coffeekraken/s-config-folder-adapter",
@@ -70,6 +74,7 @@
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-specs-editor-component",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -134,6 +139,30 @@
                 },
                 "default": "[config.storage.package.cacheDir]",
                 "description": "Specify the views template rendering cache directory",
+                "namespace": "@coffeekraken.s-view-renderer.config.viewRenderer",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "viewRenderer.config.ts",
+                "extension": "config",
+                "relPath": "src/config/viewRenderer.config.ts"
+            },
+            "@coffeekraken.s-view-renderer.config.viewRenderer.defaultEngine": {
+                "id": "@coffeekraken.s-view-renderer.config.viewRenderer.defaultEngine",
+                "name": "defaultEngine",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "twig",
+                "description": "Store which engine to use when no any is specified at the dotpath start like \"twig://...\", \"blade://...\", etc...",
                 "namespace": "@coffeekraken.s-view-renderer.config.viewRenderer",
                 "since": "2.0.0",
                 "author": {
@@ -313,26 +342,6 @@
                             "url": "https://coffeekraken.io"
                         }
                     },
-                    "datafiles": {
-                        "id": "sc11b142040935529ae1c0b2564646e6a1c3678af0b37996e52d545713763df52",
-                        "name": "dataFiles",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Object"
-                                }
-                            ],
-                            "raw": "Object"
-                        },
-                        "description": "Store the registered dataFiles using the ```registerDataFiles``` static method",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
                     "defaultrootdirs": {
                         "id": "sb73f3ce9a45e6273da810cae5daa3e334b44207c90ad2dec52075899366164d3",
                         "name": "defaultRootDirs",
@@ -374,7 +383,7 @@
                         }
                     },
                     "render": {
-                        "id": "s09092e21fe77d78e0e0d8c9c81b0b694252d29879618b2462658b94b488eb21e",
+                        "id": "sd03ca12f8cee85c3f52b3c5b9e2f2eb419879dc78a08e6670d5981b90733a250",
                         "name": "render",
                         "type": {
                             "types": [
@@ -413,46 +422,6 @@
                             "url": "https://coffeekraken.io"
                         }
                     },
-                    "registerdatafiles": {
-                        "id": "sb38ac9cb9b8e005b6cf67e0560706eaa5ac8f363baaea07286d8094c64719bc3",
-                        "name": "registerDataFiles",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ],
-                            "raw": "Function"
-                        },
-                        "description": "This static method can be used to register some SDataFiles classes",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
-                    "getviewmetas": {
-                        "id": "s7cc5b6e44a25f9a4092f5a14330fef24321bd0c3618051f27dac4a2ef4510d3d",
-                        "name": "getViewMetas",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ],
-                            "raw": "Function"
-                        },
-                        "description": "This static method allows you to give a \"potential\" view path (with or without the extension) and get\nback an object that describe the view with infos like \"type\", \"path\", \"extension\", etc...\nIf nothing is found, you will get ```false``` back.",
-                        "static": "true",
-                        "since": "true",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
                     "constructor": {
                         "id": "sea1d71c951c0f396e0a8848fdace207bd0312608d7bc1e7a991b3072dcaceedd",
                         "name": "constructor",
@@ -480,10 +449,10 @@
                 "type": {
                     "types": [
                         {
-                            "type": ".                      Class"
+                            "type": "Class"
                         }
                     ],
-                    "raw": ".                      Class"
+                    "raw": "Class"
                 },
                 "platform": [
                     {
@@ -500,15 +469,25 @@
                     "definition": {
                         "rootDirs": {
                             "description": "Specify some folder paths where to search for views",
-                            "type": "String",
+                            "type": "String[]",
                             "default": [
-                                "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/renderers/s-view-renderer/src/views"
+                                "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/renderers/s-view-renderer/src/views",
+                                "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/sugar/src/views/twig"
                             ]
                         },
                         "cacheDir": {
                             "description": "Specigy the folder to store the engines cache",
                             "type": "String",
                             "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/renderers/s-view-renderer/.local/cache/views"
+                        },
+                        "defaultEngine": {
+                            "description": "Specify the default engine to use when not any is specified at the dotpath start like \"twig://...\", etc...",
+                            "type": "String",
+                            "values": [
+                                "twig",
+                                "blade"
+                            ],
+                            "default": "twig"
                         },
                         "enginesSettings": {
                             "description": "Specify some engines settings. Object must contain each engine settings under his own property. For blade, the property name is \"blade\"",
@@ -569,104 +548,6 @@
                 "filename": "404.ts",
                 "extension": "ts",
                 "relPath": "src/node/pages/404.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-view-renderer.php.core.getDefaultViewDirs": {
-                "id": "@coffeekraken.s-view-renderer.php.core.getDefaultViewDirs",
-                "name": "getDefaultViewDirs",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "platform": [
-                    {
-                        "name": "php",
-                        "description": ""
-                    }
-                ],
-                "description": "This function gives you the default root directories where to search for views.\nYou will need to add these if you want to use the \"@coffeekraken\" layouts, etc...",
-                "namespace": "@coffeekraken.s-view-renderer.php.core",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "twig",
-                        "code": "$viewDirs = \\SViewRenderer\\getDefaultViewDirs();"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "getDefaultViewDirs.php",
-                "extension": "php",
-                "relPath": "src/php/core/getDefaultViewDirs.php",
-                "children": {}
-            },
-            "@coffeekraken.s-view-renderer.php.twig.initTwig": {
-                "id": "@coffeekraken.s-view-renderer.php.twig.initTwig",
-                "name": "initTwig",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "platform": [
-                    {
-                        "name": "php",
-                        "description": ""
-                    }
-                ],
-                "description": "This function init your twig to have access to helpers delivered from the \"coffeekraken/s-twig\" package like \"toArray\", \"idCompliant\", and many more...\nThese helpers/functions are used inside the @coffeekraken layouts, views, etc... so you will need to init your twig using this function.",
-                "namespace": "@coffeekraken.s-view-renderer.php.twig",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "twig",
-                        "code": "$twig = \\SViewRenderer\\initTwig($twig, $loader);"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "initTwig.php",
-                "extension": "php",
-                "relPath": "src/php/twig/initTwig.php",
-                "children": {}
-            },
-            "@coffeekraken.s-view-renderer.php.views.layouts.main": {
-                "id": "@coffeekraken.s-view-renderer.php.views.layouts.main",
-                "name": "main",
-                "type": {
-                    "types": [
-                        {
-                            "type": "blade"
-                        }
-                    ],
-                    "raw": "blade"
-                },
-                "description": "Main layout that handle things like scripts import, stylesheets import, etc...",
-                "namespace": "@coffeekraken.s-view-renderer.php.views.layouts",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "main.blade.php",
-                "extension": "blade",
-                "relPath": "src/php/views/blade/@coffeekraken/layouts/main.blade.php",
                 "children": {}
             }
         }

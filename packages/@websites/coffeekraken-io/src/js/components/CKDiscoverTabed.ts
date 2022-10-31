@@ -16,7 +16,10 @@ class SCKDiscoverTabedPropsInterface extends __SInterface {
 
 export default class CKDiscoverTabed extends __SLitComponent {
   static get properties() {
-    return __SLitComponent.createProperties({}, SCKDiscoverTabedPropsInterface);
+    return __SLitComponent.propertiesFromInterface(
+      {},
+      SCKDiscoverTabedPropsInterface
+    );
   }
 
   constructor() {

@@ -3,12 +3,15 @@
     "extends": [],
     "generated": {
         "extends": [
+            "01-basic",
+            "02-basic",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
+            "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
@@ -17,6 +20,7 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config-adapter",
             "@coffeekraken/s-config-folder-adapter",
@@ -70,6 +74,7 @@
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-specs-editor-component",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -5381,8 +5386,32 @@
                     ],
                     "raw": "String"
                 },
-                "default": ">=",
+                "default": "<=",
                 "description": "Specify the default action to apply if you don't specify one in your media\nmixin call like ```@include Sugar.media('tablet') {...}```. If the defaultAction is set to \">=\",\nthe above media will be the same as ```@include Sugar.media('>=tablet') {...}```",
+                "namespace": "@coffeekraken.s-theme.config.themeMedia",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeMedia.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeMedia.config.ts"
+            },
+            "@coffeekraken.s-theme.config.themeMedia.defaultMedia": {
+                "id": "@coffeekraken.s-theme.config.themeMedia.defaultMedia",
+                "name": "defaultMedia",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "api.this.defaultAction === '<=' ? 'desktop' : 'mobile'",
+                "description": "Specify the default media that will not generate any media queries at all like in mobile first, it will\nbe the mobile media and in desktop first it will be the desktop media",
                 "namespace": "@coffeekraken.s-theme.config.themeMedia",
                 "since": "2.0.0",
                 "author": {
@@ -5429,7 +5458,7 @@
                     ],
                     "raw": "Object"
                 },
-                "default": "{'min-width': 0, 'max-width': 639}",
+                "default": "{'minWidth': 0, 'maxWidth': 639}",
                 "description": "Specify the media query arguments needed to target mobile",
                 "namespace": "@coffeekraken.s-theme.config.themeMedia.queries",
                 "since": "2.0.0",
@@ -5453,7 +5482,7 @@
                     ],
                     "raw": "Object"
                 },
-                "default": "{'min-width': 640, 'max-width': 1279}",
+                "default": "{'minWidth': 640, 'maxWidth': 1279}",
                 "description": "Specify the media query arguments needed to target tablet",
                 "namespace": "@coffeekraken.s-theme.config.themeMedia.queries",
                 "since": "2.0.0",
@@ -5477,7 +5506,7 @@
                     ],
                     "raw": "Object"
                 },
-                "default": "{'min-width': 1280, 'max-width': 2047}",
+                "default": "{'minWidth': 1280, 'maxWidth': 2047}",
                 "description": "Specify the media query arguments needed to target desktop",
                 "namespace": "@coffeekraken.s-theme.config.themeMedia.queries",
                 "since": "2.0.0",
@@ -5501,32 +5530,8 @@
                     ],
                     "raw": "Object"
                 },
-                "default": "{'min-width': 2048, 'max-width': null}",
+                "default": "{'minWidth': 2048, 'maxWidth': null}",
                 "description": "Specify the media query arguments needed to target wide",
-                "namespace": "@coffeekraken.s-theme.config.themeMedia.queries",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeMedia.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeMedia.config.ts"
-            },
-            "@coffeekraken.s-theme.config.themeMedia.queries.dwarf": {
-                "id": "@coffeekraken.s-theme.config.themeMedia.queries.dwarf",
-                "name": "dwarf",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Object"
-                        }
-                    ],
-                    "raw": "Object"
-                },
-                "default": "{'min-width': 2048, 'max-width': null}",
-                "description": "Specify the media query arguments needed to target dwarf.\nDwarf here means small height screen.",
                 "namespace": "@coffeekraken.s-theme.config.themeMedia.queries",
                 "since": "2.0.0",
                 "author": {
@@ -7742,7 +7747,7 @@
                     ],
                     "raw": "String"
                 },
-                "default": "3",
+                "default": "3.25",
                 "description": "Specify the \"50\" space used for margins and paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
                 "namespace": "@coffeekraken.s-theme.config.themeSpace",
                 "since": "1.0.0",
@@ -7766,7 +7771,7 @@
                     ],
                     "raw": "String"
                 },
-                "default": "3.75",
+                "default": "4.25",
                 "description": "Specify the \"60\" space used for margins and paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
                 "namespace": "@coffeekraken.s-theme.config.themeSpace",
                 "since": "1.0.0",
@@ -7790,7 +7795,7 @@
                     ],
                     "raw": "String"
                 },
-                "default": "4.5",
+                "default": "5.5",
                 "description": "Specify the \"70\" space used for margins and paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
                 "namespace": "@coffeekraken.s-theme.config.themeSpace",
                 "since": "1.0.0",
@@ -7814,7 +7819,7 @@
                     ],
                     "raw": "String"
                 },
-                "default": "5.25",
+                "default": "7",
                 "description": "Specify the \"80\" space used for margins and paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
                 "namespace": "@coffeekraken.s-theme.config.themeSpace",
                 "since": "1.0.0",
@@ -7838,7 +7843,7 @@
                     ],
                     "raw": "String"
                 },
-                "default": "6",
+                "default": "9",
                 "description": "Specify the \"90\" space used for margins and paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
                 "namespace": "@coffeekraken.s-theme.config.themeSpace",
                 "since": "1.0.0",
@@ -7862,7 +7867,7 @@
                     ],
                     "raw": "String"
                 },
-                "default": "6.75",
+                "default": "11",
                 "description": "Specify the \"100\" space used for margins and paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
                 "namespace": "@coffeekraken.s-theme.config.themeSpace",
                 "since": "1.0.0",
@@ -8948,6 +8953,30 @@
                 },
                 "default": "[theme.depth.default]",
                 "description": "Specify the default depth for ui's",
+                "namespace": "@coffeekraken.s-theme.config.themeUi.default",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.s-theme.config.themeUi.default.spacing": {
+                "id": "@coffeekraken.s-theme.config.themeUi.default.spacing",
+                "name": "spacing",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.space.30]",
+                "description": "Specify the default padding block for ui's",
                 "namespace": "@coffeekraken.s-theme.config.themeUi.default",
                 "since": "2.0.0",
                 "author": {
@@ -12559,9 +12588,9 @@
                 "extension": "config",
                 "relPath": "src/config/themeUi.config.ts"
             },
-            "@coffeekraken.s-theme.config.themeUi.tabs.defaultStyle": {
-                "id": "@coffeekraken.s-theme.config.themeUi.tabs.defaultStyle",
-                "name": "defaultStyle",
+            "@coffeekraken.s-theme.config.themeUi.tabs.defaultLnf": {
+                "id": "@coffeekraken.s-theme.config.themeUi.tabs.defaultLnf",
+                "name": "defaultLnf",
                 "type": {
                     "types": [
                         {

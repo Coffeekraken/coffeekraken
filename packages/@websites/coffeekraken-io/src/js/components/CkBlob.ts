@@ -1,15 +1,15 @@
 // @ts-nocheck
 
-import __SLitComponent from "@coffeekraken/s-lit-component";
-import __SSugarConfig from "@coffeekraken/s-sugar-config";
-import __STheme from "@coffeekraken/s-theme";
+import __SLitComponent from '@coffeekraken/s-lit-component';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __STheme from '@coffeekraken/s-theme';
 // import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/controls/OrbitControls.js';
-import { html } from "lit";
-import * as THREE from "three";
-import { OBJLoader } from "./lib/three/examples/jsm/loaders/OBJLoader.js";
+import { html } from 'lit';
+import * as THREE from 'three';
+import { OBJLoader } from './lib/three/examples/jsm/loaders/OBJLoader.js';
 // import { RGBELoader } from './lib/three/examples/jsm/loaders/RGBELoader';
-import { EffectComposer } from "./lib/three/examples/jsm/postprocessing/EffectComposer.js";
-import { RenderPass } from "./lib/three/examples/jsm/postprocessing/RenderPass.js";
+import { EffectComposer } from './lib/three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from './lib/three/examples/jsm/postprocessing/RenderPass.js';
 
 interface IFlyingCoffee {
   grain: any;
@@ -19,7 +19,7 @@ interface IFlyingCoffee {
 
 export default class CKBlob extends __SLitComponent {
   static get properties() {
-    return __SLitComponent.createProperties();
+    return __SLitComponent.propertiesFromInterface();
   }
 
   constructor() {
@@ -43,14 +43,14 @@ export default class CKBlob extends __SLitComponent {
   // _perlin = __perlin();
 
   _isDark = document
-    .querySelector("html")
-    .getAttribute("theme")
+    .querySelector('html')
+    .getAttribute('theme')
     ?.toString()
-    .includes("dark");
+    .includes('dark');
 
   _postprocessing = {};
 
-  _$html = document.querySelector("html");
+  _$html = document.querySelector('html');
 
   async firstUpdated() {
     this._scene = new THREE.Scene();
@@ -63,7 +63,7 @@ export default class CKBlob extends __SLitComponent {
     this._camera.position.z = 60;
 
     // theme change
-    document.addEventListener("s-theme.change", (e) => {
+    document.addEventListener('s-theme.change', (e) => {
       const newBlob = new CKBlob();
       this.after(newBlob);
       this.remove();
@@ -71,21 +71,21 @@ export default class CKBlob extends __SLitComponent {
 
     setInterval(() => {
       this._isDark = this._$html
-        .getAttribute("theme")
+        .getAttribute('theme')
         ?.toString()
-        .includes("dark");
+        .includes('dark');
     }, 200);
 
     this._theme = __STheme.getCurrentTheme();
     this._colors = {
-      accent: this._theme.getColor("accent").toHex(),
-      complementary: this._theme.getColor("complementary").toHex(),
+      accent: this._theme.getColor('accent').toHex(),
+      complementary: this._theme.getColor('complementary').toHex(),
     };
     let saveTimeout;
-    this._theme.on("update", (data) => {
-      if (data.dotPath.includes("color.accent")) {
+    this._theme.on('update', (data) => {
+      if (data.dotPath.includes('color.accent')) {
         this._colors.accent = data.value;
-      } else if (data.dotPath.includes("color.complementary")) {
+      } else if (data.dotPath.includes('color.complementary')) {
         this._colors.complementary = data.value;
       }
       clearTimeout(saveTimeout);
@@ -99,7 +99,7 @@ export default class CKBlob extends __SLitComponent {
 
     this._materialsByObj = {};
 
-    this._darkMaterial = new THREE.MeshBasicMaterial({ color: "black" });
+    this._darkMaterial = new THREE.MeshBasicMaterial({ color: 'black' });
 
     var width = this.offsetWidth || 1;
     var height = this.offsetHeight || 1;
@@ -125,7 +125,7 @@ export default class CKBlob extends __SLitComponent {
     this._renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     // this._renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     // this._renderer.toneMapping = THREE.ReinhardToneMapping;
-    this.querySelector(".ck-blob").appendChild(this._renderer.domElement);
+    this.querySelector('.ck-blob').appendChild(this._renderer.domElement);
 
     // load env map
     // this._envMap = await this.loadEnvMap();
@@ -184,7 +184,7 @@ export default class CKBlob extends __SLitComponent {
 
     this._planePoints = this.createPlanePoints(0x212728);
 
-    this._planePointsLight = this.createPlanePoints(0x212728, 1, "6.0");
+    this._planePointsLight = this.createPlanePoints(0x212728, 1, '6.0');
     this._planePointsLight.rotation.set(Math.PI / 2, 0, Math.PI / 9);
 
     // this._pointSpheres = [pointsSphere1];
@@ -267,15 +267,15 @@ export default class CKBlob extends __SLitComponent {
     this._grains = [];
 
     const yellowMaterial = await this.createGrainMaterial(
-      `${__SSugarConfig.get("serve.img.url")}/3d/coffeeGrain/grain-yellow.jpg`
+      `${__SSugarConfig.get('serve.img.url')}/3d/coffeeGrain/grain-yellow.jpg`
     );
 
     const purpleMaterial = await this.createGrainMaterial(
-      `${__SSugarConfig.get("serve.img.url")}/3d/coffeeGrain/grain-purple.jpg`
+      `${__SSugarConfig.get('serve.img.url')}/3d/coffeeGrain/grain-purple.jpg`
     );
 
     const materials = [yellowMaterial, purpleMaterial];
-    const colors = ["accent", "complementary"];
+    const colors = ['accent', 'complementary'];
 
     const count = 12;
 
@@ -329,7 +329,7 @@ export default class CKBlob extends __SLitComponent {
     }
   }
 
-  createPlanePoints(color, alphaVariation, pointSize = "8.0") {
+  createPlanePoints(color, alphaVariation, pointSize = '8.0') {
     const numVertices = this._plane.geometry.attributes.position.count;
     var alphas = new Float32Array(numVertices * 1); // 1 values per vertex
 
@@ -376,7 +376,7 @@ export default class CKBlob extends __SLitComponent {
         gl_FragColor = vec4( color, vAlpha );
         }`;
 
-    plane.geometry.setAttribute("alpha", new THREE.BufferAttribute(alphas, 1));
+    plane.geometry.setAttribute('alpha', new THREE.BufferAttribute(alphas, 1));
     // point cloud material
     var shaderMaterial = new THREE.ShaderMaterial({
       uniforms: {
@@ -440,7 +440,7 @@ export default class CKBlob extends __SLitComponent {
       const texture = await this.loadTexture(texturePath);
       const bumpMap = await this.loadTexture(
         `${__SSugarConfig.get(
-          "serve.img.url"
+          'serve.img.url'
         )}/3d/coffeeGrain/coffeeGrainBumpMap.jpg`
       );
 
@@ -469,7 +469,7 @@ export default class CKBlob extends __SLitComponent {
   loadCoffeeGrain() {
     return new Promise((resolve) => {
       new OBJLoader().load(
-        `${__SSugarConfig.get("serve.img.url")}/3d/coffeeGrain/coffeeGrain.obj`,
+        `${__SSugarConfig.get('serve.img.url')}/3d/coffeeGrain/coffeeGrain.obj`,
         (object) => {
           object.castShadow = true;
           object.scale.set(0.01, 0.01, 0.01);
@@ -515,7 +515,7 @@ export default class CKBlob extends __SLitComponent {
         if (child.material) {
           // console.log(grainObj.color);
           child.material.color.setHex(
-            `0x${this._colors[grainObj.color].replace("#", "")}`
+            `0x${this._colors[grainObj.color].replace('#', '')}`
           );
         }
       });
@@ -556,7 +556,7 @@ export default class CKBlob extends __SLitComponent {
   }
 }
 
-export function define(props: any = {}, tagName = "ck-blob") {
+export function define(props: any = {}, tagName = 'ck-blob') {
   __SLitComponent.setDefaultProps(tagName, props);
   customElements.define(tagName, CKBlob);
 }

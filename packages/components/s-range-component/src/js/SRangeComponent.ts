@@ -84,7 +84,10 @@ export interface ISRangeComponentProps extends ISLitComponentDefaultProps {
 
 export default class SRangeComponent extends __SLitComponent {
     static get properties() {
-        return __SLitComponent.createProperties({}, __SRangeComponentInterface);
+        return __SLitComponent.propertiesFromInterface(
+            {},
+            __SRangeComponentInterface,
+        );
     }
 
     static get styles() {

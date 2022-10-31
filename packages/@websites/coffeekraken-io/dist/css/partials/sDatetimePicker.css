@@ -229,5 +229,5 @@
 --s-theme-color-current-a: var(--s-theme-color-accent-a, 1);
             }
 .s-rhythm--vertical > .s-datetime-picker[inline] {
-                    margin-bottom: calc(var(--s-theme-margin-default, 1rem) * 3.75);
+                    margin-bottom: calc(var(--s-theme-margin-default, 1rem) * 4.25);
                 }

@@ -6,8 +6,6 @@ export default function docmapMarkdownData({ req, res, pageConfig }) {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
         let html;
 
-        console.log(req);
-
         let namespace = req.params.namespace;
         if (!namespace) {
             namespace = '';

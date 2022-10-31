@@ -1,12 +1,12 @@
 <!--
 /**
  * @name            Cell
- * @namespace       views.bare.cell
+ * @namespace       specs.views.bare.cell
  * @type            Markdown
  * @platform        blade
  * @platform        twig
  * @status          stable
- * @menu            Views / Bare           /views/bare/cell
+ * @menu            Specs / Views           /specs/sugar.views.bare.cell
  *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -29,7 +29,7 @@ Simple cell that can be used inside a layout, etc...
 #### Blade
 
 ```php
-@include('@sugar.bare.cell.cell', [
+@include('sugar.bare.cell.cell', [
     'content' => '
         <h2>Hello world</h2>
     ',

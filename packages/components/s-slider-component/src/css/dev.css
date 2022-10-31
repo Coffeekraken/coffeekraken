@@ -17,14 +17,13 @@ s-slider {
     margin-bottom: 50px;
     color: white;
 
-    @sugar.color(accent);
-
+    @sugar.color (accent);
 }
 
 .s-slider {
 }
 
-s-slider[mounted] .s-slider {
+s-slider[status='mounted'] .s-slider {
     display: block;
 }
 
@@ -35,15 +34,16 @@ s-slider[mounted] .s-slider {
     align-items: center;
 
     img {
-        width: 100%; height: 100%; 
+        width: 100%;
+        height: 100%;
         object-fit: cover;
     }
 }
 
-s-slider[lnf*="contained"] {
-    @sugar.color.current(#ffffff);
+s-slider[lnf*='contained'] {
+    @sugar.color.current (#ffffff);
 }
 
 .s-slider__progress {
-    @sugar.color.current(#ffffff);
+    @sugar.color.current (#ffffff);
 }

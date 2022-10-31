@@ -5,7 +5,7 @@
  * @type            Markdown
  * @platform        md
  * @status          stable
- * @menu            Documentation / Overview           /doc/get-started/overview
+ * @menu            Documentation / Get Started           /doc/get-started/overview
  *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

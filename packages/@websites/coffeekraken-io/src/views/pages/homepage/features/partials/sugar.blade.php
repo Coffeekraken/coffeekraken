@@ -5,7 +5,7 @@
 
             <div class="s-layout:21 s-gap:column:50 @mobile s-layout:1_2">
                 <div>
-                    <s-inline class="illustration adaptive-color @mobile s-hide" src="/dist/img/illustrations/packages.svg" />
+                    <img s-inline class="illustration adaptive-color @mobile s-hide" src="/dist/img/illustrations/packages.svg" />
                 </div>
                 <div class="s-mbe:80">
                     <h3 class="s-typo:h3 s-mbe:30">

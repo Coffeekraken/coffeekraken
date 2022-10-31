@@ -5,29 +5,29 @@
     position: relative;
     cursor: pointer;
 
-    &:not([mounted]) > * {
+    &:not([status='mounted']) > * {
         opacity: 0.001;
         pointer-events: none;
     }
 
-    &[step='pending'] {
+    .s-clipboard-copy__root[state='pending'] {
         .icon-copy {
             opacity: 1;
         }
     }
-    &[step='copy'] {
+    .s-clipboard-copy__root[state='copy'] {
         .icon-copy {
             opacity: 1;
         }
     }
-    &[step='success'] {
+    .s-clipboard-copy__root[state='success'] {
         color: sugar.color(success);
 
         .icon-success {
             opacity: 1;
         }
     }
-    &[step='error'] {
+    .s-clipboard-copy__root[state='error'] {
         color: sugar.color(error);
 
         .icon-error {

@@ -1,5 +1,5 @@
-@sugar.partial (codeExampleSection) {
-  .code-example-section {
+/* @sugar.partial (codeExampleSection) { */
+.code-example-section {
     margin-block-end: sugar.margin(80);
     padding-block: sugar.padding(50);
 
@@ -10,16 +10,16 @@
 );
 
     @sugar.media mobile {
-      @sugar.layout (
+        @sugar.layout (
     1
     2
     3
     , $gap: 50, $gapBetween: true
     );
     }
-  }
+}
 
-  .code-example-section--right {
+.code-example-section--right {
     margin-block-end: sugar.margin(80);
 
     @sugar.layout (
@@ -29,12 +29,12 @@
 );
 
     @sugar.media mobile {
-      @sugar.layout (
+        @sugar.layout (
     1
     2
     3
     , $gap: 50, $gapBetween: true
     );
     }
-  }
 }
+/* } */

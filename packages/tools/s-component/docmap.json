@@ -3,12 +3,15 @@
     "extends": [],
     "generated": {
         "extends": [
+            "01-basic",
+            "02-basic",
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
+            "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
@@ -16,6 +19,8 @@
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
+            "@coffeekraken/s-component-proxy",
+            "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config-adapter",
             "@coffeekraken/s-config-folder-adapter",
@@ -69,6 +74,7 @@
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-specs-editor-component",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -94,8 +100,8 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-component-utils.doc.README": {
-                "id": "@coffeekraken.s-component-utils.doc.README",
+            "@coffeekraken.s-component.doc.README": {
+                "id": "@coffeekraken.s-component.doc.README",
                 "name": "README",
                 "type": {
                     "types": [
@@ -117,7 +123,7 @@
                         "description": ""
                     }
                 ],
-                "namespace": "@coffeekraken.s-component-utils.doc",
+                "namespace": "@coffeekraken.s-component.doc",
                 "status": "stable",
                 "since": "2.0.0",
                 "author": {
@@ -130,47 +136,16 @@
                 "relPath": "src/doc/README.md",
                 "children": {}
             },
-            "@coffeekraken.s-component-utils.js.interface.SComponentUtilsDefaultPropsInterface": {
-                "id": "@coffeekraken.s-component-utils.js.interface.SComponentUtilsDefaultPropsInterface",
-                "name": "SComponentUtilsDefaultPropsInterface",
+            "@coffeekraken.s-component.shared.interface.SComponentSettingsInterface": {
+                "id": "@coffeekraken.s-component.shared.interface.SComponentSettingsInterface",
+                "name": "SComponentSettingsInterface",
                 "type": {
                     "types": [
                         {
-                            "type": ".                      Class"
+                            "type": "Class"
                         }
                     ],
-                    "raw": ".                      Class"
-                },
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    }
-                ],
-                "description": "This class represent the interface that describe parameters of a basic SComponent",
-                "namespace": "@coffeekraken.s-component-utils.js.interface",
-                "status": "beta",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "SComponentUtilsDefaultPropsInterface.js",
-                "extension": "js",
-                "relPath": "src/js/interface/SComponentUtilsDefaultPropsInterface.js",
-                "children": {}
-            },
-            "@coffeekraken.s-component-utils.js.interface.SComponentUtilsSettingsInterface": {
-                "id": "@coffeekraken.s-component-utils.js.interface.SComponentUtilsSettingsInterface",
-                "name": "SComponentUtilsSettingsInterface",
-                "type": {
-                    "types": [
-                        {
-                            "type": ".                      Class"
-                        }
-                    ],
-                    "raw": ".                      Class"
+                    "raw": "Class"
                 },
                 "platform": [
                     {
@@ -179,27 +154,19 @@
                     }
                 ],
                 "description": "This class represent the interface that describe SComponentUtils settings",
-                "namespace": "@coffeekraken.s-component-utils.js.interface",
+                "namespace": "@coffeekraken.s-component.shared.interface",
                 "status": "beta",
                 "interface": {
-                    "name": "SComponentUtilsSettingsInterface",
+                    "name": "SComponentSettingsInterface",
                     "description": "",
                     "definition": {
                         "interface": {
                             "description": "Specify an SInterface class to use as our properties definition",
                             "type": "SInterface"
                         },
-                        "props": {
-                            "description": "Specify a properties object to use as our properties definition",
-                            "type": "Object"
-                        },
-                        "style": {
-                            "description": "Specify a style string to use as style to inject for our component",
-                            "type": "String"
-                        },
-                        "defaultProps": {
-                            "description": "Pass an object that act as the default properties value for our component",
-                            "type": "Object"
+                        "styleClasses": {
+                            "description": "Define if you want the \"style\" class in when using the className and uniqueClassName method",
+                            "type": "Boolean"
                         }
                     }
                 },
@@ -209,9 +176,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SComponentUtilsSettingsInterface.ts",
+                "filename": "SComponentSettingsInterface.ts",
                 "extension": "ts",
-                "relPath": "src/js/interface/SComponentUtilsSettingsInterface.ts",
+                "relPath": "src/shared/interface/SComponentSettingsInterface.ts",
                 "children": {}
             }
         }

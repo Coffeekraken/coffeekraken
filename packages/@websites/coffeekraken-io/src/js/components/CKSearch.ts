@@ -209,7 +209,7 @@ __sFiltrableInputDefine(
 
 export default class CKSearch extends __SLitComponent {
   static get properties() {
-    return __SLitComponent.createProperties();
+    return __SLitComponent.propertiesFromInterface();
   }
 
   constructor() {

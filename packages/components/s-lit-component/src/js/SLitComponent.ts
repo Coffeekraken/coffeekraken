@@ -198,19 +198,24 @@ export default class SLitComponent extends LitElement {
                         return value;
                     },
                     toAttribute(value) {
-                        try {
-                            const jsonStr = JSON.stringify(value);
-                            return jsonStr;
-                        } catch (e) {}
+                        if (
+                            typeof value !== 'string' &&
+                            typeof value !== 'boolean'
+                        ) {
+                            try {
+                                const jsonStr = JSON.stringify(value);
+                                return jsonStr;
+                            } catch (e) {}
+                        }
 
                         if (
                             value === 'false' ||
                             value === false ||
                             value === null
                         ) {
-                            return null;
+                            return undefined;
                         }
-                        return String(value);
+                        return value;
                     },
                 };
             }
@@ -220,6 +225,9 @@ export default class SLitComponent extends LitElement {
             ...propertiesObj,
             ...(properties ?? {}),
         };
+        if (props.direction) {
+            console.log(props);
+        }
 
         return props;
     }
@@ -332,7 +340,7 @@ export default class SLitComponent extends LitElement {
                 'direct';
 
             // component class
-            // this.classList.add(...this.componentUtils.className('').split(' '));
+            this.classList.add(...this.componentUtils.className('').split(' '));
 
             await __wait();
             await __wait();

@@ -73,6 +73,7 @@ export interface ISDocmapBuildParams {
     globs: string[];
     exclude: string[];
     noExtends: boolean;
+    excludePackages: string[];
     filters: Record<string, RegExp>;
     tags: string[];
     save: boolean;
@@ -91,6 +92,7 @@ export interface ISDocmapReadParams {
     input: string;
     sort: string[];
     sortDeep: string[];
+    excludePackages: string[];
     snapshot: string;
     snapshotDir: string;
 }
@@ -106,6 +108,8 @@ export interface ISDocmapCustomMenuSettingFn {
 export interface ISDocmapSettings {
     customMenu: Record<string, ISDocmapCustomMenuSettingFn>;
     tagsProxy: Record<string, ISDocmapTagProxyFn>;
+    noExtends: boolean;
+    excludePackages: string[];
 }
 
 export interface ISDocmapEntry {
@@ -151,6 +155,7 @@ export interface ISDocmapMetasObj {
 export interface ISDocmapSearchParams {
     slug: string;
     namespace: string;
+    excludePackages: string[];
 }
 
 export interface ISDocmapSearchResult {
@@ -244,16 +249,20 @@ class SDocmap extends __SClass implements ISDocmap {
                             if (key === 'styleguide') return true;
                             return false;
                         },
-                        views({ key, value, isObject }) {
+                        specs({ key, value, isObject }) {
                             if (
                                 key.split('/').length > 1 &&
                                 key.match(/^([a-zA-Z0-9-_@\/]+)?\/views\//)
                             )
                                 return true;
-                            if (key === 'views') return true;
+                            if (key === 'specs') return true;
                             return false;
                         },
                     },
+                    noExtends: __SSugarConfig.get('docmap.noExtends'),
+                    excludePackages: __SSugarConfig.get(
+                        'docmap.excludePackages',
+                    ),
                 }),
                 settings || {},
             ),
@@ -307,6 +316,8 @@ class SDocmap extends __SClass implements ISDocmap {
                     )
                 );
 
+                const packageJson = __packageJsonSync();
+
                 // snapshot param handling
                 if (finalParams.snapshot) {
                     finalParams.input = __path.resolve(
@@ -358,8 +369,20 @@ class SDocmap extends __SClass implements ISDocmap {
                 };
 
                 const loadJson = async (packageNameOrPath, currentPath) => {
-                    if (extendedPackages.indexOf(packageNameOrPath) !== -1)
+                    // check if package is excluded from the extends
+                    if (
+                        (packageNameOrPath !== packageJson.name,
+                        this._isPackageExtendsExcluded(
+                            packageNameOrPath,
+                            finalParams.excludePackages,
+                        ))
+                    ) {
                         return;
+                    }
+
+                    if (extendedPackages.indexOf(packageNameOrPath) !== -1) {
+                        return;
+                    }
                     extendedPackages.push(packageNameOrPath);
 
                     let currentPathDocmapJsonPath,
@@ -412,6 +435,18 @@ class SDocmap extends __SClass implements ISDocmap {
                     }
 
                     const currentPackageJson = __readJsonSync(packageJsonPath);
+
+                    // check if package is excluded from the extends
+                    if (
+                        currentPackageJson.name !== packageJson.name &&
+                        this._isPackageExtendsExcluded(
+                            currentPackageJson.name,
+                            finalParams.excludePackages,
+                        )
+                    ) {
+                        return;
+                    }
+
                     const docmapJson = __readJsonSync(
                         currentPathDocmapJsonPath,
                     );
@@ -796,6 +831,21 @@ class SDocmap extends __SClass implements ISDocmap {
     }
 
     /**
+     * Check if the passed package name is excluded from the extends array or not
+     */
+    _isPackageExtendsExcluded(
+        packageName: string,
+        excludePackages: string[] = this.settings.excludePackages,
+    ): boolean {
+        for (let excludePackageName of excludePackages) {
+            if (__micromatch.isMatch(packageName, excludePackageName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * @name          build
      * @type          Function
      *
@@ -871,7 +921,7 @@ class SDocmap extends __SClass implements ISDocmap {
                         value: `<yellow>[build]</yellow> Found <cyan>${currentDocmapFiles.length}</cyan> docmap.json file(s) in dependencies`,
                     });
 
-                    const extendsArray: string[] = [];
+                    let extendsArray: string[] = [];
                     currentDocmapFiles.forEach((file) => {
                         if (!__fs.existsSync(`${file.dirPath}/package.json`)) {
                             return;
@@ -883,6 +933,14 @@ class SDocmap extends __SClass implements ISDocmap {
                         if (currentPackageJson.name === packageJson.name)
                             return;
                         extendsArray.push(currentPackageJson.name);
+                    });
+
+                    // filter extends
+                    extendsArray = extendsArray.filter((packageName) => {
+                        return !this._isPackageExtendsExcluded(
+                            packageName,
+                            finalParams.excludePackages,
+                        );
                     });
 
                     // @ts-ignore

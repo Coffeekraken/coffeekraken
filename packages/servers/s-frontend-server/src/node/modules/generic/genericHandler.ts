@@ -80,7 +80,7 @@ export default function genericHandler({
                     dataFn;
 
                 // directly passed function
-                if (__isPlainObject(viewObj.data)) {
+                if (__isPlainObject(viewObj.data) && !viewObj.data.handler) {
                     dataFn = () => viewObj.data;
                 } else if (typeof viewObj.data === 'function') {
                     dataFn = viewObj.data;

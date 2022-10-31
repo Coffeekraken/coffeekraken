@@ -153,7 +153,7 @@ export interface ISColorPickerComponentProps {
  */
 export default class SColorPickerComponent extends __SLitComponent {
     static get properties() {
-        return __SLitComponent.createProperties(
+        return __SLitComponent.propertiesFromInterface(
             {},
             __SColorPickerComponentInterface,
         );

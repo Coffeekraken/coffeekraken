@@ -11,12 +11,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import __SDocmap from '@coffeekraken/s-docmap';
 import __SPromise from '@coffeekraken/s-promise';
 /**
- * @name                docMap
+ * @name                docmap
  * @namespace           sugar.node.server.frontend.handlers
  * @type                Function
  * @status              wip
  *
- * This function is responsible of responding to express requests made on the docMap url
+ * This function is responsible of responding to express requests made on the docmap url
  *
  * @param         {Object}          req             The express request object
  * @param         {Object}          res             The express response object
@@ -29,11 +29,11 @@ import __SPromise from '@coffeekraken/s-promise';
  * @since       2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function docMap(req, res, settings = {}) {
+export default function docmap(req, res, settings = {}) {
     return __awaiter(this, void 0, void 0, function* () {
         return new __SPromise(({ resolve, reject, pipe }) => __awaiter(this, void 0, void 0, function* () {
-            const docMap = new __SDocmap();
-            const json = yield docMap.read({
+            const docmap = new __SDocmap();
+            const json = yield docmap.read({
                 snapshot: req.query.v,
             });
             const finalJson = Object.assign(Object.assign({}, json), { map: {} });

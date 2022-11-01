@@ -1,4 +1,4 @@
-@sugar.cache (sugar) {
+/* @sugar.cache (sugar) { */
   @sugar.init;
   @sugar.theme (dark, null, true);
 
@@ -39,7 +39,7 @@
   /* @sugar.partial (sPlatform) { */
   @sugar.platform.classes;
   /* } */
-}
+/* } */
 
 @sugar.icon.classes (
   fa:user:user

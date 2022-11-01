@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 import __getSize from 'get-folder-size';
-import __filesize from 'filesize';
 
 /**
  * @name                            folderSize
@@ -11,27 +10,23 @@ import __filesize from 'filesize';
  * @platform        node
  * @status          beta
  *
- * Calculate the size of the passed folder and return it through a promise, either in raw format, either in human readdable one...
+ * Calculate the size of the passed folder and return it through a promise in bytes format
  *
  * @param             {String}                folderPath                  The folder path to calculate the size
- * @param             {Boolean|Any}               [format={}]               False if you want raw size, an object that will be sent to [filesize](https://www.npmjs.com/package/filesize) package to format your data
  * @return            {Promise}                                           A promise that will be resolved once the folder size has been calculated
  *
  * @example           js
  * import { __folderSize } from '@coffeekraken/sugar/fs';
  * await __folderSize('my/cool/folder');
- * await __folderSize('my/cool/folder', false); // no formatting
  *
  *
- * @see             https://www.npmjs.com/package/filesize
+ * @see             https://www.npmjs.com/package/get-folder-size
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function __folderSize(folderPath: string, format = {}) {
-    return new Promise((resolve, reject) => {
-        __getSize(folderPath, (error, size) => {
-            if (error) throw error;
-            resolve(format === false ? size : __filesize(size, format));
-        });
+export default function __folderSize(folderPath: string) {
+    return new Promise(async (resolve, reject) => {
+        const size = await __getSize.loose(folderPath);
+        resolve(size);
     });
 }

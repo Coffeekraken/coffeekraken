@@ -25,6 +25,7 @@
         "csso": "^5.0.5",
         "faker": "^5.5.3",
         "fantasticon": "1.2.3",
+        "get-folder-size": "^4.0.0",
         "glob": "^7.2.3",
         "oslllo-svg-fixer": "^1.4.1",
         "postcss": "^8.4.14",

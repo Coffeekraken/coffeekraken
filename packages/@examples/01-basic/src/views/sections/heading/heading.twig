@@ -1,4 +1,4 @@
-<section class="section-heading">
+<section class="section-heading {{ paddingClasses(padding) }} {{ marginClasses(margin) }}">
     <div class="__bkg">
         {# <video autoplay loop>
             <source src="/dist/video/heading-background.mp4" type="video/mp4" />
@@ -26,7 +26,7 @@
                         </div>
                     {% endif %}
                     {# <pre>
-                    {{ readSpec('views.sections.tabs') }}
+                    {{ readSpec('views.bare.layout') }}
                     </pre> #}
                 </div>
             </div>

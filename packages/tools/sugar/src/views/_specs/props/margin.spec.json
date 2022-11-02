@@ -3,6 +3,10 @@
     "title": "Margin",
     "description": "Specify the margins you want around your layout",
     "props": {
+        "all": {
+            "extends": "sugar.views.props.space",
+            "description": "Specify the margin (top, bottom, right and left)"
+        },
         "block": {
             "extends": "sugar.views.props.space",
             "description": "Specify the margin block (top, bottom)"

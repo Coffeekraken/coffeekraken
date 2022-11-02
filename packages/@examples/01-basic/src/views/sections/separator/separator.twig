@@ -1,4 +1,4 @@
-<section class="section-separator">
+<section class="section-separator {{ paddingClasses(padding) }} {{ marginClasses(margin) }}">
     <div class="__bkg">
         {% if image %}
             <img class="__img" src="{{ image.url }}" alt="{{ image.alt }}" />

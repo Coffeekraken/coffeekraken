@@ -1,4 +1,4 @@
-<div class="s-card {{ attributes.class }} {{ direction ? 's-card--' ~ direction : '' }}" {{ attrs(attributes, ['class'])|raw }}
+<div class="s-card {{ attributes.class }} {{ direction ? 's-card--' ~ direction : '' }} {{ paddingClasses(padding) }} {{ marginClasses(margin) }}" {{ attrs(attributes, ['class'])|raw }}
     s-specs="views.components.card"
 >
     {% if image %}

@@ -33,6 +33,10 @@ function paddingClasses($paddings = [])
     $paddings = (array) $paddings;
     $classes = [];
 
+    if (isset($paddings['all'])) {
+        array_push($classes, 's-p--' . $paddings['all']);
+    }
+
     if (isset($paddings['block'])) {
         array_push($classes, 's-pb--' . $paddings['block']);
     }

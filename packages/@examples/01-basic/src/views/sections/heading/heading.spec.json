@@ -26,6 +26,8 @@
             "extends": "sugar.views.components.cta",
             "title": "Heading Cta",
             "required": true
-        }
+        },
+        "margin": "@sugar.views.props.margin",
+        "padding": "@sugar.views.props.padding"
     }
 }

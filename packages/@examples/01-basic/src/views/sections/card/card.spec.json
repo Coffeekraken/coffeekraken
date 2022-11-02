@@ -1,9 +1,11 @@
 {
-  "type": "section",
-  "title": "Cards",
-  "description": "Display two cards together",
-  "props": {
-    "cardOne": "@sugar.views.components.card",
-    "cardTwo": "@sugar.views.components.card"
-  }
+    "type": "section",
+    "title": "Cards",
+    "description": "Display two cards together",
+    "props": {
+        "cardOne": "@sugar.views.components.card",
+        "cardTwo": "@sugar.views.components.card",
+        "margin": "@sugar.views.props.margin",
+        "padding": "@sugar.views.props.padding"
+    }
 }

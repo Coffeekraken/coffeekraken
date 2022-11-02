@@ -1,50 +1,52 @@
 {
-  "type": "Section",
-  "title": "Story",
-  "description": "Story section",
-  "props": {
-    "layout": {
-      "type": "Select",
-      "title": "Layout",
-      "description": "Section layout",
-      "options": [
-        {
-          "name": "Image right",
-          "value": "12"
+    "type": "Section",
+    "title": "Story",
+    "description": "Story section",
+    "props": {
+        "layout": {
+            "type": "Select",
+            "title": "Layout",
+            "description": "Section layout",
+            "options": [
+                {
+                    "name": "Image right",
+                    "value": "12"
+                },
+                {
+                    "name": "Image left",
+                    "value": "21"
+                }
+            ]
         },
-        {
-          "name": "Image left",
-          "value": "21"
-        }
-      ]
-    },
-    "title": {
-      "type": "Text",
-      "title": "Title",
-      "description": "Story title",
-      "required": true
-    },
-    "intro": {
-      "type": "Text",
-      "title": "Intro",
-      "description": "Story intro",
-      "required": true
-    },
-    "text": {
-      "type": "Text",
-      "title": "Text",
-      "description": "Story text",
-      "required": true
-    },
-    "cta": {
-      "extends": "sugar.views.components.cta",
-      "title": "Story Cta",
-      "required": true
-    },
-    "image": {
-      "extends": "sugar.views.props.image",
-      "title": "Background image",
-      "required": true
+        "title": {
+            "type": "Text",
+            "title": "Title",
+            "description": "Story title",
+            "required": true
+        },
+        "intro": {
+            "type": "Text",
+            "title": "Intro",
+            "description": "Story intro",
+            "required": true
+        },
+        "text": {
+            "type": "Text",
+            "title": "Text",
+            "description": "Story text",
+            "required": true
+        },
+        "cta": {
+            "extends": "sugar.views.components.cta",
+            "title": "Story Cta",
+            "required": true
+        },
+        "image": {
+            "extends": "sugar.views.props.image",
+            "title": "Background image",
+            "required": true
+        },
+        "margin": "@sugar.views.props.margin",
+        "padding": "@sugar.views.props.padding"
     }
-  }
 }

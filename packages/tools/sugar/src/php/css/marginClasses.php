@@ -33,6 +33,10 @@ function marginClasses($margins = [])
     $margins = (array) $margins;
     $classes = [];
 
+    if (isset($margins['all'])) {
+        array_push($classes, 's-m--' . $margins['all']);
+    }
+
     if (isset($margins['block'])) {
         array_push($classes, 's-mb--' . $margins['block']);
     }

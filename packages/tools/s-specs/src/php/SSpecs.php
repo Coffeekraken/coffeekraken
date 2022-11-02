@@ -309,7 +309,7 @@ class SSpecs
                     if (property_exists($object, $propertyName)) {
                         $object->$propertyName = \Sugar\object\deepMerge(
                             $extendsJson,
-                            $object
+                            $propertyValue
                         );
                     } elseif ($propertyName != 'extends') {
                         $object->$propertyName = $propertyValue;

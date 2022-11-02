@@ -3,6 +3,7 @@ import configFileNameFromDocmapPath from './configFileNameFromDocmapPath';
 import configFiles from './configFiles';
 import configFromDocmap from './configFromDocmap';
 import formatConfigValue from './formatConfigValue';
+import frontspec from './frontspec';
 import get from './get';
 import ifEqual from './ifEqual';
 import ifMatch from './ifMatch';
@@ -12,6 +13,7 @@ import isLicense from './isLicense';
 import isSectionWanted from './isSectionWanted';
 import join from './join';
 import jsonStringify from './jsonStringify';
+import keys from './keys';
 import length from './length';
 import __replace from './replace';
 import rootRelative from './rootRelative';
@@ -28,6 +30,7 @@ export {
     configFromDocmap,
     formatConfigValue,
     config,
+    frontspec,
     get,
     __import as import,
     __includes as includes,
@@ -37,6 +40,7 @@ export {
     isLicense,
     isSectionWanted,
     jsonStringify,
+    keys,
     length,
     join,
     toString,

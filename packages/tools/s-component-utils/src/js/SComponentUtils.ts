@@ -410,15 +410,15 @@ export default class SComponentUtils extends __SClass {
             ...(settings ?? {}),
         };
 
-        // let preventSave = false;
-        // Object.defineProperty(state, 'preventSave', {
-        //     enumerable: false,
-        //     get() {
-        //         return () => {
-        //             preventSave = true;
-        //         };
-        //     },
-        // });
+        let preventSave = false;
+        Object.defineProperty(state, 'preventSave', {
+            enumerable: false,
+            get() {
+                return () => {
+                    preventSave = true;
+                };
+            },
+        });
 
         // make sure we have an id
         if (finalStateSettings.save && !finalStateSettings.id) {

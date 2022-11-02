@@ -65,7 +65,6 @@ let _postProcessorRegistered = false;
 export default function ({
     params,
     atRule,
-    getCacheFilePath,
     getRoot,
     postcssApi,
     postcss,
@@ -75,7 +74,6 @@ export default function ({
 }: {
     params: Partial<IPostcssSugarPluginMediaMixinClassesParams>;
     atRule: any;
-    getCacheFilePath: Function;
     getRoot: Function;
     postcssApi: any;
     postcss: any;

@@ -84,7 +84,7 @@
                     // do something with your element..
                     });'
                     ]])
-                    <blockquote class="s-blockquote s-color:accent s-mbs:20">
+                    <blockquote class="s-blockquote s-color:accent s-mbs:40">
                         Note that the <code class="s-typo:code">__</code> at the start of our imports is just <span
                             class="s-tc:accent">a convention</span> that we follow. It helps to see what is an
                         imported item

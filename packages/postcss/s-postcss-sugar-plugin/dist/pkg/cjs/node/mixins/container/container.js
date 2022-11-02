@@ -50,7 +50,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     }
     vars.code(`
         width: 100%;
-        max-width: sugar.theme(layout.container.${finalParams.name});
+        max-width: sugar.theme(layout.container.${finalParams.name}, true);
     `);
     return vars;
 }

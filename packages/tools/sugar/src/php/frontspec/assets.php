@@ -16,7 +16,7 @@ namespace Sugar\frontspec;
  * @return    {String}    The HTML code of the assets
  *
  * @example    php
- * \Sugar\frontspec\assets($frontspec->assets);
+ * \Sugar\frontspec\assets($frontspec);
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

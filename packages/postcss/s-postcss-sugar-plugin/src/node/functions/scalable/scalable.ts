@@ -10,6 +10,8 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * This function allows you to get value that will be scaled using the "--s-scale" variable.
  * This allows you to make your components aware of classes like "s-scale-10", etc...
+ * The resulting value of this will be affected by the --s-scale-global variable that you can change
+ * using the `@sugar.scale.global(0.9)` mixin...
  *
  * @param       {Number}        value      The value you want to be scalable
  * @return      {Css}                   The corresponding css
@@ -49,5 +51,5 @@ export default function ({
         ...params,
     };
 
-    return `calc(${finalParams.value} * var(--s-scale, 1))`;
+    return `calc(${finalParams.value} * var(--s-scale, 1) * var(--s-scale-global, 1))`;
 }

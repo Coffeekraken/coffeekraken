@@ -14,10 +14,8 @@ namespace Sugar\frontspec;
  * @param       {Object}            $sFrontspecSettings         Some settings to pass to the SFrontspec class like the path, etc...
  * @return      {Object}                                        The frontspec json
  *
- * @example         twig
- * <code>
- *  {{ readFrontspec() }}
- * </code>
+ * @example         php
+ * \Sugar\frontspec\readFrontspec();
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

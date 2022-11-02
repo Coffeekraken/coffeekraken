@@ -7,7 +7,7 @@ import { __sha256 } from '@coffeekraken/sugar/crypto';
 import {
     __dirname,
     __folderHash,
-    __folderPath,
+    __readJsonSync,
     __writeFileSync,
 } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
@@ -21,21 +21,18 @@ import __postcss from 'postcss';
 import __getRoot from './utils/getRoot';
 
 import { __compressVarName } from '@coffeekraken/sugar/css';
-import { __objectHash } from '@coffeekraken/sugar/object';
 import __CssVars from './CssVars';
 
 const mixinsStack = {},
     functionsStack = {};
 let pluginHash = __folderHash(__path.resolve(__dirname(), '../../..'), {
-        include: {
-            ctime: true,
-        },
-    }),
-    rootDir;
-let loadedPromise;
-
-const _cacheObjById = {},
-    _cachedIds = [];
+    include: {
+        ctime: true,
+    },
+});
+let loadedPromise,
+    compileFileTimeout,
+    cacheBustedWarningDisplayed = false;
 
 export interface IPostcssSugarPluginSettings {
     outDir: string;
@@ -107,11 +104,8 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
         },
         settings,
     );
-    // if (settings.partials === undefined) {
-    //     settings.partials = settings.target !== 'vite';
-    // }
 
-    let themeHash, cacheDir;
+    let themeHash, cacheDir, fromCache;
 
     if (_configLoaded) {
         updateConfig();
@@ -131,9 +125,6 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             ),
             cache: __SSugarConfig.get('postcssSugarPlugin.cache'),
         });
-        // if (settings.partials === undefined) {
-        //     settings.partials = settings.target !== 'vite';
-        // }
 
         // remove cache if not for vite target
         if (settings.cache === undefined && settings.target !== 'vite') {
@@ -187,42 +178,6 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
         return;
     }
 
-    // const _cacheHashById = {};
-    // function saveCache(): string | string[] {
-    //     // store the hash for the id
-    //     if (!_cacheObjById[id]) _cacheObjById[id] = {};
-    //     _cacheObjById[id].hash = hash;
-    //     _cacheObjById[id].content = content;
-
-    //     const cachePath = getCacheFilePath(hash);
-    //     if (!__fs.existsSync(cachePath)) {
-    //         console.log(
-    //             `<yellow>[cache]</yellow> Caching object "<cyan>${id}</cyan>"`,
-    //         );
-    //         const returned = `
-    //             /* CACHE:${hash} */
-    //             ${Array.isArray(content) ? content.join('\n') : content}
-    //             /* ENDCACHE:${hash} */
-    //         `;
-    //         _cacheObjById[id].return = returned;
-    //     }
-    //     console.log(
-    //         `<green>[postcss]</green> Object "<cyan>${id}</cyan>" taken from cache`,
-    //     );
-    //     // const returned = `/* FROMCACHE:${hash} */`;
-    //     try {
-    //         const returned = __fs.readFileSync(cachePath, 'utf8').toString();
-    //         _cacheObjById[id].return = returned;
-    //         return returned;
-    //     } catch (e) {}
-    //     return content;
-    // }
-
-    function getCacheFilePath(cacheId) {
-        const fileName = `${cacheId}.css`;
-        return `${__packageCacheDir()}/postcssSugarPlugin/${pluginHash}/${fileName}`;
-    }
-
     function nodesToString(nodes) {
         return nodes
             .map((node) => node.toString())
@@ -259,22 +214,6 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             }
         }
         atRule.remove();
-    }
-
-    function cleanCache() {
-        __fs.readdirSync(`${settings.cacheDir}`).forEach((fileName) => {
-            const filePath = `${settings.cacheDir}/${fileName}`;
-            const fileStats = __fs.statSync(filePath);
-            if (Date.now() > fileStats.birthtimeMs + settings.cacheTtl) {
-                // delete the cache file
-                __fs.unlinkSync(filePath);
-            }
-        });
-    }
-
-    function isCached(id: string): boolean {
-        const cacheFilePath = `${settings.cacheDir}/${id}.txt`;
-        return _cachedIds.includes(id) || __fs.existsSync(cacheFilePath);
     }
 
     const sharedData = {
@@ -510,240 +449,196 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
         return loadedPromise;
     }
 
+    function markAsCached(filePath: string): void {
+        let cachemapFilePath = `${settings.cacheDir}/cachemap.json`,
+            cachemap = {};
+        // relative path
+        if (!filePath.match(/^\//)) {
+            filePath = `${__packageRootDir()}/${filePath}`;
+        }
+        // read the cachemap file
+        if (__fs.existsSync(cachemapFilePath)) {
+            cachemap = __readJsonSync(cachemapFilePath);
+        }
+        // save the timestamp for the passed file
+        cachemap[filePath] = Date.now();
+        // write the new data on disk
+        __writeFileSync(cachemapFilePath, JSON.stringify(cachemap, null, 4));
+    }
+
+    function isCachedPluginHashValid(): boolean {
+        const pluginHashFilePath = `${settings.cacheDir}/pluginHash.txt`;
+
+        // check plugin hash
+        if (__fs.existsSync(pluginHashFilePath)) {
+            const cachedPluginHash = __fs
+                .readFileSync(pluginHashFilePath)
+                .toString();
+            if (cachedPluginHash !== pluginHash) {
+                return false;
+            }
+        } else {
+            // no plugin hash cached so cache invalid
+            return false;
+        }
+    }
+
+    function isCacheValid(filePath: string): boolean {
+        let cachemapFilePath = `${settings.cacheDir}/cachemap.json`,
+            cachemap = {};
+
+        // check plugin hash cached
+        if (!isCachedPluginHashValid()) {
+            return false;
+        }
+
+        // relative path
+        if (!filePath.match(/^\//)) {
+            filePath = `${__packageRootDir()}/${filePath}`;
+        }
+        // if the file does not exists
+        // the cache if invalid
+        if (!__fs.existsSync(filePath)) {
+            return false;
+        }
+        // read the cachemap file
+        if (__fs.existsSync(cachemapFilePath)) {
+            cachemap = __readJsonSync(cachemapFilePath);
+        }
+        // if the filepath is not in the cachemap
+        // the cache is invalid
+        if (!cachemap[filePath]) {
+            return false;
+        }
+        // get the file stats to compare with the cache timestamp
+        const stats = __fs.statSync(filePath);
+        if (stats.mtime > cachemap[filePath]) {
+            return false;
+        }
+        // otherwise, the cache if ok
+        return true;
+    }
+
+    function getCachedData(filePath: string): string {
+        let cacheFilePath = `${settings.cacheDir}/${filePath}`;
+
+        if (filePath.match(/^\//)) {
+            cacheFilePath = `${settings.cacheDir}/${__path.relative(
+                __packageRootDir(),
+                filePath,
+            )}`;
+        }
+
+        // remove "../" in path
+        cacheFilePath = cacheFilePath.replace(/\.\.\//gm, '');
+
+        // check if the cache is valid or not
+        if (!isCacheValid(filePath)) {
+            return '';
+        }
+        // relative path
+        if (!filePath.match(/^\//)) {
+            filePath = `${__packageRootDir()}/${filePath}`;
+        }
+        // if the file does not exists
+        // the cache if invalid
+        if (!__fs.existsSync(cacheFilePath)) {
+            return '';
+        }
+        // read and return the cached content
+        return __fs.readFileSync(cacheFilePath).toString();
+    }
+
+    function setCacheData(filePath: string, data: string): void {
+        let cacheFilePath = `${settings.cacheDir}/${filePath}`;
+
+        if (filePath.match(/^\//)) {
+            cacheFilePath = `${settings.cacheDir}/${__path.relative(
+                __packageRootDir(),
+                filePath,
+            )}`;
+        }
+
+        // remove "../" in path
+        cacheFilePath = cacheFilePath.replace(/\.\.\//gm, '');
+
+        // relative path
+        if (!filePath.match(/^\//)) {
+            filePath = `${__packageRootDir()}/${filePath}`;
+        }
+        // mark the file as cached
+        markAsCached(filePath);
+        // write the cache file
+        __writeFileSync(cacheFilePath, data);
+    }
+
     const pluginObj = {
         postcssPlugin: 'sugar',
         async Once(root) {
             __SBench.start('postcssSugarPlugin');
             await _load();
 
-            // const css = __fs
-            //     .readFileSync(`${__packageRootDir()}/dist/css/index.dev.css`)
-            //     .toString();
+            clearTimeout(compileFileTimeout);
+            compileFileTimeout = setTimeout(() => {
+                console.log(
+                    `<yellow>[postcss]</yellow> Your file <cyan>${__path.relative(
+                        __packageRootDir(),
+                        root.source.input.file,
+                    )}</cyan> take some times to compile. Please wait...`,
+                );
+            }, 3000);
 
-            // function replaceRecursively(str) {
-            //     if (!str) {
-            //         return '';
-            //     }
-
-            //     // console.log('SSS', str);
-
-            //     const cacheMatches = [
-            //         ...str.matchAll(
-            //             /\/\*\!\sS-CACHE-START:([a-zA-Z0-9_=-]+)\s\*\//g,
-            //         ),
-            //     ];
-            //     const cacheIds = __unique(
-            //         cacheMatches.map((cacheMatch) => {
-            //             return cacheMatch[1];
-            //         }),
-            //     );
-            //     cacheIds.forEach((cacheId) => {
-            //         const matches = [
-            //             ...(str?.match?.(
-            //                 new RegExp(
-            //                     `\\/\\*! S-CACHE-START:${cacheId.trim()} \\*\\/`,
-            //                     'g',
-            //                 ),
-            //             ) ?? []),
-            //         ];
-            //         matches.forEach((matchStartComment) => {
-            //             const matchId = matchStartComment
-            //                 .replace(/^\/\*\!\s/, '')
-            //                 .replace(/\s\*\/$/, '')
-            //                 .split(':')[1];
-
-            //             const contentMatches = [
-            //                 ...(str?.match?.(
-            //                     new RegExp(
-            //                         `\\/\\*! S-CACHE-START:${matchId.trim()} \\*\\/([\\W\\w]*)\\/\\*! S-CACHE-END:${matchId.trim()} \\*\\/`,
-            //                         'g',
-            //                     ),
-            //                 ) ?? []),
-            //             ];
-
-            //             contentMatches.forEach((contentMatch) => {
-            //                 let toCacheStr = contentMatch
-            //                     .trim()
-            //                     .replace(
-            //                         new RegExp(
-            //                             `^\\/\\*! S-CACHE-START:${matchId} \\*\\/`,
-            //                         ),
-            //                         '',
-            //                     )
-            //                     .replace(
-            //                         new RegExp(
-            //                             `\\/\\*! S-CACHE-END:${matchId} \\*\\/$`,
-            //                         ),
-            //                         '',
-            //                     );
-
-            //                 if (
-            //                     toCacheStr.match(
-            //                         /\/\*\!\sS-CACHE-START:[a-zA-Z0-9]+\s\*\//,
-            //                     )
-            //                 ) {
-            //                     toCacheStr = replaceRecursively(toCacheStr);
-            //                 }
-
-            //                 // save to cache file
-            //                 __writeFileSync(
-            //                     `${settings.cacheDir}/${matchId}.txt`,
-            //                     toCacheStr,
-            //                 );
-
-            //                 // return the new string with the S-CACHE-ENTRY comment
-            //                 // replacing the actual content
-            //                 str = str.replace(
-            //                     contentMatch,
-            //                     `
-            //                     /*! S-CACHE-ENTRY:${matchId} */
-            //                 `,
-            //                 );
-            //             });
-
-            //             // console.log(contentMatches);
-            //         });
-            //     });
-
-            //     // return the updated css
-            //     return str;
-            // }
-
-            // console.log(replaceRecursively(css));
-
-            // // const cacheMatches = [
-            // //     ...css.matchAll(
-            // //         /\/\*\!\sS-CACHE-START:([a-zA-Z0-9_=-]+)\s\*\//g,
-            // //     ),
-            // // ];
-            // // const cacheIds = __unique(
-            // //     cacheMatches.map((cacheMatch) => {
-            // //         return cacheMatch[1];
-            // //     }),
-            // // );
-            // // cacheIds.forEach((cacheId) => {
-            // //     const match = [
-            // //         ...css.matchAll(
-            // //             new RegExp(
-            // //                 `/*! S-CACHE-START:${cacheId.trim()} \\*\\/`,
-            // //                 'g',
-            // //             ),
-            // //         ),
-            // //     ];
-            // //     console.log(match);
-            // // });
-
-            // // console.log(cacheIds);
-
-            // throw 'coco';
-
-            // // clean the cache
-            // if (settings.cache) {
-            //     __ensureDirSync(settings.cacheDir);
-            //     // let cacheSize = await __folderSize(settings.cacheDir);
-            //     console.log(
-            //         `<yellow>[cache]</yellow> Maintaining cache integrity...`,
-            //     );
-            //     cleanCache();
-            //     // cacheSize = await __folderSize(settings.cacheDir);
-            //     console.log(`<green>[cache]</green> Cache integrity healthy`);
-            // }
-
-            if (root.source?.input?.from) {
-                if (!rootDir) {
-                    rootDir = __folderPath(root.source.input.from);
+            if (
+                root.source.input.file.match(/\.css$/) &&
+                !root.source.input.file.match(/index\.css$/)
+            ) {
+                const cachedDataStr = getCachedData(root.source.input.file);
+                if (cachedDataStr) {
+                    // console.log(
+                    //     `<green>[cache]</green> Data resolved from cache for file "<cyan>${__path
+                    //         .relative(
+                    //             __packageRootDir(),
+                    //             root.source.input.file,
+                    //         )
+                    //         .replace(/\.\.\//gm, '')}</cyan>"`,
+                    // );
+                    fromCache = true;
+                    const ast = __postcss.parse(cachedDataStr, {
+                        from: root.source.input.file,
+                    });
+                    root.nodes = ast.nodes;
                 }
             }
         },
 
         async OnceExit(root) {
-            // // replace SCACHE comments by actual content
-            // let loadedCacheById = {};
-            // root.walkComments((comment) => {
-            //     if (comment.text.startsWith('SCACHE:')) {
-            //         const cacheId = comment.text.split(':')[1],
-            //             cachePath = `${settings.cacheDir}/${cacheId}.txt`;
-            //         if (
-            //             !loadedCacheById[cacheId] &&
-            //             __fs.existsSync(cachePath)
-            //         ) {
-            //             loadedCacheById[cacheId] = __fs
-            //                 .readFileSync(cachePath)
-            //                 .toString();
-            //         }
-            //         // console.log('replace', loadedCacheById[cacheId]);
-            //         comment.replaceWith(loadedCacheById[cacheId]);
-            //     }
-            // });
-
-            // replace S-CACHE-ENTRY comments by actual content
-            let loadedCacheById = {};
-            root.walkComments((comment) => {
-                if (comment.text.startsWith('! S-CACHE-ENTRY:')) {
-                    const cacheId = comment.text
-                            .replace('! ', '')
-                            .split(':')[1],
-                        cachePath = `${settings.cacheDir}/${cacheId}.txt`;
-                    if (
-                        !loadedCacheById[cacheId] &&
-                        __fs.existsSync(cachePath)
-                    ) {
-                        loadedCacheById[cacheId] = __fs
-                            .readFileSync(cachePath)
-                            .toString();
-                    }
-                    // console.log('replace', loadedCacheById[cacheId]);
-                    comment.replaceWith(loadedCacheById[cacheId]);
-                }
-            });
-
             if (settings.cache) {
-                const cachedContentById = {};
-                root.walk((node) => {
-                    if (
-                        node.type === 'comment' &&
-                        node.text.startsWith('! S-CACHE-START:')
-                    ) {
-                        const cacheId = node.text
-                            .replace(/^!\s/, '')
-                            .split(':')[1];
-                        console.log('to cache', cacheId);
-                        if (!cachedContentById[cacheId]) {
-                            cachedContentById[cacheId] = {
-                                active: true,
-                                ended: false,
-                                nodes: [],
-                            };
-                        }
-                    } else if (
-                        node.type === 'comment' &&
-                        node.text.startsWith('! S-CACHE-END:')
-                    ) {
-                        const cacheId = node.text
-                            .replace(/^!\s/, '')
-                            .split(':')[1];
-                        const cacheObj = cachedContentById[cacheId];
-                        cacheObj?.ended = true;
-                        cacheObj?.active = false;
-                    } else {
-                        for (let [id, cacheObj] of Object.entries(
-                            cachedContentById,
-                        )) {
-                            if (cacheObj.active && !cacheObj.ended) {
-                                cacheObj.nodes.push(node);
-                            }
-                        }
-                    }
-                });
-
-                for (let [cacheId, cacheObj] of Object.entries(
-                    cachedContentById,
-                )) {
-                    __writeFileSync(
-                        `${settings.cacheDir}/${cacheId}.txt`,
-                        nodesToString(cacheObj.nodes),
+                if (
+                    !isCachedPluginHashValid() &&
+                    !cacheBustedWarningDisplayed
+                ) {
+                    console.log(
+                        `<magenta>[cache]</magenta> Cache invalidated by plugin update. First compilation may take some times...`,
                     );
+                    cacheBustedWarningDisplayed = true;
                 }
+
+                if (!fromCache) {
+                    // console.log(
+                    //     `<magenta>[cache]</magenta> Save data in cache for file "<cyan>${__path
+                    //         .relative(
+                    //             __packageRootDir(),
+                    //             root.source.input.file,
+                    //         )
+                    //         .replace(/\.\.\//gm, '')}</cyan>"`,
+                    // );
+                }
+                setCacheData(root.source.input.file, nodesToString(root.nodes));
+                fromCache = false; // reset the variable for next compile
+
+                // update the cached plugin hash
+                const pluginHashFilePath = `${settings.cacheDir}/pluginHash.txt`;
+                __writeFileSync(pluginHashFilePath, pluginHash);
             }
 
             for (let i = 0; i < postProcessorsRegisteredFn.length; i++) {
@@ -767,7 +662,6 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                     themeHash,
                     cacheDir,
                     getRoot: __getRoot,
-                    getCacheFilePath,
                     settings,
                     root,
                     sharedData,
@@ -831,92 +725,43 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
 
                 const params = mixinInterface.apply(processedParams, {});
 
-                let mixinResult,
-                    mixinCacheId,
-                    mixinCacheFilePath,
-                    fromCache = false;
+                let mixinResult;
 
-                // leverage cache if wanted
-                if (settings.cache) {
-                    mixinCacheId = __objectHash({
-                        // pluginHash,
-                        params,
-                        name: atRule.name,
-                        sharedData,
-                        settings,
-                    });
-                    mixinCacheFilePath = `${settings.cacheDir}/${mixinCacheId}.txt`;
-
-                    if (isCached(mixinCacheId)) {
-                        mixinResult = `/*! S-CACHE-ENTRY:${mixinCacheId} */`;
-                        fromCache = true;
-                    }
-                }
-
-                // if no cache
-                if (!fromCache) {
-                    delete params.help;
-                    mixinResult = await mixinFn({
-                        params,
-                        atRule,
-                        findUp,
-                        nodesToString,
-                        CssVars: __CssVars,
-                        pluginHash,
-                        themeHash,
-                        cacheDir,
-                        getRoot: __getRoot,
-                        getCacheFilePath,
-                        replaceWith(nodes) {
-                            replaceWith(atRule, nodes);
-                        },
-                        atRootStart(css) {
-                            const root = __getRoot(atRule);
-                            root.prepend(css);
-                        },
-                        atRootEnd(css) {
-                            const root = __getRoot(atRule);
-                            root.append(css);
-                        },
-                        postcssApi,
-                        sourcePath,
-                        sharedData,
-                        registerPostProcessor(fn: Function) {
-                            postProcessorsRegisteredFn.push(fn);
-                        },
-                        postcss: __postcss,
-                        settings,
-                    });
-                }
+                delete params.help;
+                mixinResult = await mixinFn({
+                    params,
+                    atRule,
+                    findUp,
+                    nodesToString,
+                    CssVars: __CssVars,
+                    pluginHash,
+                    themeHash,
+                    cacheDir,
+                    getRoot: __getRoot,
+                    replaceWith(nodes) {
+                        replaceWith(atRule, nodes);
+                    },
+                    atRootStart(css) {
+                        const root = __getRoot(atRule);
+                        root.prepend(css);
+                    },
+                    atRootEnd(css) {
+                        const root = __getRoot(atRule);
+                        root.append(css);
+                    },
+                    postcssApi,
+                    sourcePath,
+                    sharedData,
+                    registerPostProcessor(fn: Function) {
+                        postProcessorsRegisteredFn.push(fn);
+                    },
+                    postcss: __postcss,
+                    settings,
+                });
 
                 if (mixinResult) {
                     mixinResult = contentToString(mixinResult);
-
-                    if (fromCache) {
-                        replaceWith(atRule, mixinResult);
-                    } else if (settings.cache && mixinCacheId) {
-                        if (!_cachedIds.includes(mixinCacheId)) {
-                            _cachedIds.push(mixinCacheId);
-                        }
-                        replaceWith(
-                            atRule,
-                            `
-                            /*! S-CACHE-START:${mixinCacheId} */
-                            ${mixinResult}
-                            /*! S-CACHE-END:${mixinCacheId} */
-                        `,
-                        );
-                    }
-
-                    // // save cache if wanted
-                    // if (
-                    //     !fromCache &&
-                    //     settings.cache &&
-                    //     mixinCacheFilePath &&
-                    //     !__fs.existsSync(mixinCacheFilePath)
-                    // ) {
-                    //     __writeFileSync(mixinCacheFilePath, mixinResult);
-                    // }
+                    replaceWith(atRule, mixinResult);
                 }
             } else if (atRule.name.match(/^import/)) {
                 // check settings

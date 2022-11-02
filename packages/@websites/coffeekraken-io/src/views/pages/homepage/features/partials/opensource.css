@@ -54,14 +54,14 @@
       background: sugar.color(accent);
     }
     &:before {
-      width: 100px;
+      width: sugar.scalable(100px);
       height: 2px;
       bottom: -12px;
       right: -12px;
     }
     &:after {
       width: 2px;
-      height: 100px;
+      height: sugar.scalable(100px);
       bottom: -10px;
       right: -12px;
     }

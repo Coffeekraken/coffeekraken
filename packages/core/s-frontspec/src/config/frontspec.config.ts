@@ -24,66 +24,80 @@ export default function (api) {
         build: {
             sources: {
                 metas: {
+                    title: 'Metas',
+                    description:
+                        'Specify some metas data like the title, description, opengraph, etc...',
                     type: 'config',
                     config: 'metas',
                 },
                 assets: {
+                    title: 'Assets',
+                    description:
+                        'Specify the assets to load like the css, js, etc...',
                     type: 'config',
                     config: 'assets',
                 },
                 media: {
+                    title: 'Media',
+                    description:
+                        'Specify the responsive specifications like the queries (breakpoints), default action, etc...',
                     type: 'object',
                     get value() {
                         return api.theme.media;
                     },
                 },
                 views: {
+                    title: 'Views',
+                    description:
+                        'Specify the views specifications like where to find them, etc...',
                     type: 'config',
                     config: 'views',
                 },
                 specs: {
+                    title: 'Specs',
+                    description:
+                        'Specify some specs related specifications like where to find them, etc...',
                     type: 'config',
                     config: 'specs',
-                    // get value() {
-                    //     const specsConfig = Object.assign({}, api.config.specs);
-                    //     for (let [namespace, paths] of Object.entries(
-                    //         specsConfig.namespaces,
-                    //     )) {
-                    //         specsConfig.namespaces[namespace] = paths.map(
-                    //             (path) => {
-                    //                 return __path.relative(
-                    //                     __packageRootDir(),
-                    //                     path,
-                    //                 );
-                    //             },
-                    //         );
-                    //     }
-                    //     return specsConfig;
-                    // },
                 },
                 google: {
+                    title: 'Google',
+                    description:
+                        'Specify some google specifications like the GTM/GA to use, etc...',
                     type: 'config',
                     config: 'google',
                 },
                 margin: {
+                    title: 'Margin',
+                    description:
+                        'Specify the margins available in the project.',
                     type: 'object',
                     get value() {
                         return api.theme.margin;
                     },
                 },
                 padding: {
+                    title: 'Padding',
+                    description:
+                        'Specify the paddings available in the project.',
                     type: 'object',
                     get value() {
                         return api.theme.padding;
                     },
                 },
                 font: {
+                    title: 'Font',
+                    description:
+                        'Specify the fonts specifications like the font-faces available, sizes, etc...',
                     type: 'object',
                     get value() {
                         return api.theme.font;
                     },
                 },
                 typo: {
+                    title: 'Typo',
+                    description:
+                        'Specify some typo specifications like which are the available typo classes/tags, etc...',
                     type: 'object',
                     get value() {
                         const finalObj = {};
@@ -99,6 +113,9 @@ export default function (api) {
                     },
                 },
                 layout: {
+                    title: 'Layout',
+                    description:
+                        'Specify some layout specifications like the available containers, layouts and grids.',
                     type: 'object',
                     get value() {
                         return api.theme.layout;

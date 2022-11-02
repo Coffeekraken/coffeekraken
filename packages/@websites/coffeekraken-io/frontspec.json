@@ -45,29 +45,80 @@
     },
     "media": {
         "defaultAction": "<=",
+        "defaultMedia": "desktop",
         "defaultQuery": "screen",
         "queries": {
             "mobile": {
-                "min-width": 0,
-                "max-width": 639
+                "minWidth": 0,
+                "maxWidth": 639
             },
             "tablet": {
-                "min-width": 640,
-                "max-width": 1279
+                "minWidth": 640,
+                "maxWidth": 1279
             },
             "desktop": {
-                "min-width": 1280,
-                "max-width": 2047
+                "minWidth": 1280,
+                "maxWidth": 2047
             },
             "wide": {
-                "min-width": 2048,
-                "max-width": null
+                "minWidth": 2048,
+                "maxWidth": null
             },
             "dwarf": {
-                "min-height": null,
-                "max-height": 700
+                "minHeight": 0,
+                "maxHeight": 950
             }
         }
+    },
+    "views": {
+        "layouts": {
+            "main": {
+                "name": "Default (main)",
+                "viewPath": {
+                    "twig": "layouts/main.twig",
+                    "blade": null
+                }
+            }
+        },
+        "rootDirs": {
+            "twig": [
+                "./src/views",
+                "./node_modules/@coffeekraken/sugar/src/views/twig"
+            ],
+            "blade": [
+                "./src/views",
+                "./node_modules/@coffeekraken/sugar/src/views/blade"
+            ]
+        }
+    },
+    "specs": {
+        "namespaces": {
+            "views": [
+                "./src/views"
+            ],
+            "views.bare": [
+                "./src/views/bare"
+            ],
+            "views.sections": [
+                "./src/views/sections"
+            ],
+            "views.components": [
+                "./src/views/components"
+            ],
+            "sugar.views": [
+                "./node_modules/@coffeekraken/sugar/src/views/_specs"
+            ],
+            "sugar.views.bare": [
+                "./node_modules/@coffeekraken/sugar/src/views/_specs/bare"
+            ],
+            "sugar.views.sections": [
+                "./node_modules/@coffeekraken/sugar/src/views/_specs/sections"
+            ],
+            "sugar.views.components": [
+                "./node_modules/@coffeekraken/sugar/src/views/_specs/components"
+            ]
+        },
+        "cwd": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/coffeekraken-io"
     },
     "google": {
         "ga": "UA-91271113-1"
@@ -78,12 +129,12 @@
         "20": 0.75,
         "30": 1.5,
         "40": 2.25,
-        "50": 3,
-        "60": 3.75,
-        "70": 4.5,
-        "80": 5.25,
-        "90": 6,
-        "100": 6.75,
+        "50": 3.25,
+        "60": 4.25,
+        "70": 5.5,
+        "80": 7,
+        "90": 9,
+        "100": 11,
         "default": "1rem"
     },
     "padding": {
@@ -92,12 +143,12 @@
         "20": 0.75,
         "30": 1.5,
         "40": 2.25,
-        "50": 3,
-        "60": 3.75,
-        "70": 4.5,
-        "80": 5.25,
-        "90": 6,
-        "100": 6.75,
+        "50": 3.25,
+        "60": 4.25,
+        "70": 5.5,
+        "80": 7,
+        "90": 9,
+        "100": 11,
         "default": "1rem"
     },
     "font": {

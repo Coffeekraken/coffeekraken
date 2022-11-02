@@ -1,0 +1,4 @@
+import __SAssetPickerComponent from './SAssetPickerComponent';
+export * from './SAssetPickerComponent';
+export default __SAssetPickerComponent;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sdUJBQXVCLE1BQU0seUJBQXlCLENBQUM7QUFDOUQsY0FBYyx5QkFBeUIsQ0FBQztBQUN4QyxlQUFlLHVCQUF1QixDQUFDIn0=

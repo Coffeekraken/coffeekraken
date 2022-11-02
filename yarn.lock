@@ -1871,6 +1871,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@coffeekraken/s-asset-picker-component@^2.0.0-alpha.20, @coffeekraken/s-asset-picker-component@workspace:packages/components/s-asset-picker-component":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/s-asset-picker-component@workspace:packages/components/s-asset-picker-component"
+  dependencies:
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-lit-component": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
+    lit: ^2.2.8
+  languageName: unknown
+  linkType: soft
+
 "@coffeekraken/s-bench@^2.0.0-alpha.20, @coffeekraken/s-bench@workspace:packages/tools/s-bench":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-bench@workspace:packages/tools/s-bench"
@@ -2454,6 +2465,7 @@ __metadata:
   resolution: "@coffeekraken/s-handlebars@workspace:packages/tools/s-handlebars"
   dependencies:
     "@coffeekraken/s-file": ^2.0.0-alpha.20
+    "@coffeekraken/s-frontspec": ^2.0.0-alpha.20
     "@coffeekraken/s-promise": ^2.0.0-alpha.20
     "@coffeekraken/s-specs": ^2.0.0-alpha.20
     "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
@@ -2891,10 +2903,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-specs-editor-component@workspace:packages/components/s-specs-editor-component"
   dependencies:
+    "@coffeekraken/s-asset-picker-component": ^2.0.0-alpha.20
     "@coffeekraken/s-clipboard-copy-component": ^2.0.0-alpha.20
     "@coffeekraken/s-component": ^2.0.0-alpha.20
     "@coffeekraken/s-interface": ^2.0.0-alpha.20
-    "@coffeekraken/s-mitosis": ^2.0.0-alpha.20
     "@coffeekraken/sugar": ^2.0.0-alpha.20
     html-tags: ^3.2.0
     known-css-properties: ^0.25.0

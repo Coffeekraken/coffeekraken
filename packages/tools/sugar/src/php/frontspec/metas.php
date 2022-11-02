@@ -16,7 +16,7 @@ namespace Sugar\frontspec;
  * @return    {String}    The HTML code of the metas
  *
  * @example    php
- * \Sugar\frontspec\metas($frontspec->metas, 'production');
+ * \Sugar\frontspec\metas($frontspec, 'production');
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

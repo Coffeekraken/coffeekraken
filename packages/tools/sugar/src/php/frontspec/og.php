@@ -15,7 +15,7 @@ namespace Sugar\frontspec;
  * @return    {String}    The HTML code of the og
  *
  * @example    php
- * \Sugar\frontspec\og($frontspec->og);
+ * \Sugar\frontspec\og($frontspec);
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

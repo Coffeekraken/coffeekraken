@@ -1,0 +1,5 @@
+import __SAssetPickerComponent from './SAssetPickerComponent';
+export default function define(props = {}, tagName = 's-asset-picker') {
+    __SAssetPickerComponent.define(tagName, __SAssetPickerComponent, props);
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBLE9BQU8sdUJBQXVCLE1BQU0seUJBQXlCLENBQUM7QUFFOUQsTUFBTSxDQUFDLE9BQU8sVUFBVSxNQUFNLENBQzFCLFFBQThDLEVBQUUsRUFDaEQsT0FBTyxHQUFHLGdCQUFnQjtJQUUxQix1QkFBdUIsQ0FBQyxNQUFNLENBQUMsT0FBTyxFQUFFLHVCQUF1QixFQUFFLEtBQUssQ0FBQyxDQUFDO0FBQzVFLENBQUMifQ==

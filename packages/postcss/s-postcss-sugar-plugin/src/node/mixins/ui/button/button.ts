@@ -109,7 +109,6 @@ export default function ({
         vertical-align: middle;
         padding-inline: sugar.padding(ui.button.paddingInline);
         padding-block: sugar.padding(ui.button.paddingBlock);
-
       
         & > * {
           pointer-events: none;
@@ -125,13 +124,14 @@ export default function ({
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
           font-size: sugar.scalable(1rem);
+          text-decoration: none;
         `);
 
         switch (finalParams.style) {
             case 'gradient':
                 vars.push(`
                     background: none !important;
-                    color: sugar.color(current, foreground);
+                    color: sugar.color(current, foreground) !important;
                     transition: sugar.theme(ui.button.transition);
                     border: sugar.color(current, border) solid sugar.theme(ui.button.borderWidth);
 
@@ -166,7 +166,7 @@ export default function ({
                     }
 
                     &:hover, &:focus {
-                      color: sugar.color(current, foreground);
+                      color: sugar.color(current, foreground) !important;
 
                       &:after {
                         opacity: 1;
@@ -179,11 +179,11 @@ export default function ({
                 vars.push(`
                 background-color: sugar.color(current, --alpha 0);
                 border: sugar.color(current) solid sugar.theme(ui.button.borderWidth);
-                color: sugar.color(current);
+                color: sugar.color(current) !important;
 
                 &:hover, &:focus {
                   background-color: sugar.color(current);
-                  color: sugar.color(current, foreground);
+                  color: sugar.color(current, foreground) !important;
                 }
               `);
                 break;
@@ -191,11 +191,10 @@ export default function ({
                 vars.push(`
                   background: none !important;
                   border: rgba(0,0,0,0) solid sugar.theme(ui.button.borderWidth);
-                  color: sugar.color(current);
+                  color: sugar.color(current) !important;
                   box-shadow: none !important;
 
                   &:hover, &:focus {
-                    color: sugar.color(current);
                     transform: scale(1.1);
                   }
 
@@ -209,11 +208,11 @@ export default function ({
                 vars.push(`
                   background-color: sugar.color(current);
                   border: sugar.color(current, border) solid sugar.theme(ui.button.borderWidth);
-                  color: sugar.color(current, foreground);
+                  color: sugar.color(current, foreground) !important;
 
                   &:hover, &:focus {
                     background-color: sugar.color(current, --darken 6);
-                    color: sugar.color(current, foreground);
+                    color: sugar.color(current, foreground) !important;
 
                     @sugar.theme.when(dark) {
                       background-color: sugar.color(current, --lighten 6);

@@ -99,41 +99,39 @@ export default class SFrontspec extends __SPromise {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     read() {
-        return new __SPromise(async ({ resolve, pipe, emit }) => {
-            const frontspecPath = `${__packageRootDir()}/frontspec.json`;
+        const frontspecPath = `${__packageRootDir()}/frontspec.json`;
 
-            if (!__fs.existsSync(frontspecPath)) {
-                return resolve({});
-            }
+        if (!__fs.existsSync(frontspecPath)) {
+            return {};
+        }
 
-            let frontspecJson = {};
-            try {
-                frontspecJson = __readJsonSync(frontspecPath);
-            } catch (e) {
-                console.log(e);
-            }
+        let frontspecJson = {};
+        try {
+            frontspecJson = __readJsonSync(frontspecPath);
+        } catch (e) {
+            console.log(e);
+        }
 
-            let res = __deepMerge(
-                __SSugarConfig.get('frontspec')?.default ?? {},
-                frontspecJson,
-            );
+        let res = __deepMerge(
+            __SSugarConfig.get('frontspec')?.default ?? {},
+            frontspecJson,
+        );
 
-            res.frontspec = {
-                path: frontspecPath,
-                folderPath: __folderPath(frontspecPath),
-            };
+        res.frontspec = {
+            path: frontspecPath,
+            folderPath: __folderPath(frontspecPath),
+        };
 
-            if (res.assets) {
-                Object.keys(res.assets).forEach((id) => {
-                    const assetObj = res.assets[id];
-                    if (assetObj.env && !__SEnv.is(assetObj.env)) {
-                        delete res.assets[id];
-                    }
-                });
-            }
+        if (res.assets) {
+            Object.keys(res.assets).forEach((id) => {
+                const assetObj = res.assets[id];
+                if (assetObj.env && !__SEnv.is(assetObj.env)) {
+                    delete res.assets[id];
+                }
+            });
+        }
 
-            resolve(res);
-        });
+        return res;
     }
 
     /**

@@ -81,6 +81,10 @@ export default function ({
         ...params,
     };
 
+    if (!finalParams.path.match(/\.css$/)) {
+        return;
+    }
+
     const dirName =
         typeof atRule.source.input.file === 'string'
             ? __path.dirname(atRule.source.input.file)
@@ -115,9 +119,6 @@ export default function ({
             triggerUpdate(path);
         });
     }
-
-    const commentRule = postcss.parse(`/* S */`);
-    atRule.parent.insertAfter(atRule, commentRule);
 
     files.forEach((file) => {
         let newRule = postcss.parse(`@import "${file.relPath}";`);

@@ -14,7 +14,7 @@
 
 {{#> layout-doc }}
 
-# `viewspec.json`
+# Views specs
 
 > Spec version **1.0.0-alpha.0**
 
@@ -23,44 +23,75 @@
 His goal is to describe a particular view like `hello.blade.php`.
 By describing the data that this view depends on, you can use that and build your backend automatically. Pretty usefull for medium/large projects.
 
-## Overview
+## Filename
 
-The `viewspec.json` files has to live in at the same place of the view he's describe. Each viewspec describe a specific view and has to respect this structure:
+A specification file has to be named with `.spec.json` at his end. Usually this mean that if you have a view named `card.twig.php`, the files will be something like this:
+
+```
+| src
+  | views
+    | components
+      | card
+        | card.twig
+        | card.spec.json
+```
+
+## Structure
+
+Here's an example of the card.spec.json file and how it can be written:
 
 ```js
 {
-    "id": "my-cool-view",
-    "name": "My cool view",
-    "description": "This is my cool view that handle the display of cool things",
-    "engine": "blade",
+    "type": "Component",
+    "title": "Card",
+    "description": "Display a nice card with some infos like \"image\", \"title\", \"intro\", \"description\" and \"cta\"",
     "props": {
         "title": {
-            "type": "String",
-            "required": true
+            "type": "Text",
+            "title": "Title",
+            "description": "The card title"
         },
-        "author": {
-            "type": "Object",
-            "props": {
-                "name": {
-                    "type": "String",
-                    "label": "Author name",
-                    "required": true
-                },
-                "email": {
-                    "type": "String",
-                    "label": "Author email",
-                    "required": true
-                }
-            }
+        "intro": {
+            "type": "Text",
+            "title": "Intro",
+            "description": "The card intro"
         },
-        "images": {
-            "type": "Image[]",
-            "label": "Cool images",
-            "required": true
-        }
+        "text": {
+            "type": "Text",
+            "title": "Text",
+            "description": "The card text"
+        },
+        "image": {
+          "type": "Image",
+          "title": "Image",
+          "description": "A simple image with title and alt properties",
+          "props": {
+              "url": {
+                  "type": "Text",
+                  "title": "Url",
+                  "description": "The image url",
+                  "required": true
+              },
+              "title": {
+                  "type": "Text",
+                  "title": "Title",
+                  "description": "The image title",
+                  "required": true
+              },
+              "alt": {
+                  "type": "Text",
+                  "title": "Alternative text",
+                  "description": "The image alternative text",
+                  "required": true
+              }
+          },
+        },
+        "cta": "@sugar.views.components.cta"
     }
 }
 ```
+
+> Note that the "cta" property is set to `@sugar.views.components.cta`. This is a link to another existing spec file that is available from the [@coffeekraken/sugar](/package/@coffeekraken/sugar/doc/readme) package. To read a spec file, make use of the [@coffeekraken/s-specs](/package/@coffeekraken/s-specs/doc/readme) package that will resolve these links for you.
 
 ## Data types
 
@@ -101,21 +132,21 @@ If we take the overview example above, the resulting data that has to be injecte
 
 ```php
 return [
-  "title" => "Hello world",
-  "author" => [
-    "name" => "Olivier Bossel",
-    "email" => "something@gmail.com",
+  'title' => 'Hello world',
+  'author' => [
+    'name' => 'Olivier Bossel',
+    'email' => 'something@gmail.com',
   ],
-  "images" => [
+  'images' => [
     [
-      "src" => "https://picsum.photos/200/300",
-      "title" => "Hello",
-      "alt" => "world",
+      'src' => 'https://picsum.photos/200/300',
+      'title' => 'Hello',
+      'alt' => 'world',
     ],
     [
-      "src" => "https://picsum.photos/200/300",
-      "title" => "Hello",
-      "alt" => "world",
+      'src' => 'https://picsum.photos/200/300',
+      'title' => 'Hello',
+      'alt' => 'world',
     ],
   ],
 ];

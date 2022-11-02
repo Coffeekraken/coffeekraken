@@ -49,7 +49,7 @@
         },
         "assets": {
             "description": "Specify the assets you want to load by environments",
-            "type": "Object{}",
+            "type": "Object",
             "props": {
                 "id": {
                     "type": "String",

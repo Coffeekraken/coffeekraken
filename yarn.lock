@@ -2264,6 +2264,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@coffeekraken/s-dropzone-component@^2.0.0-alpha.20, @coffeekraken/s-dropzone-component@workspace:packages/components/s-dropzone-component":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/s-dropzone-component@workspace:packages/components/s-dropzone-component"
+  dependencies:
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-lit-component": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
+    lit: ^2.2.8
+  languageName: unknown
+  linkType: soft
+
 "@coffeekraken/s-duration@^2.0.0-alpha.20, @coffeekraken/s-duration@workspace:packages/tools/s-duration":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-duration@workspace:packages/tools/s-duration"
@@ -2906,6 +2917,7 @@ __metadata:
     "@coffeekraken/s-asset-picker-component": ^2.0.0-alpha.20
     "@coffeekraken/s-clipboard-copy-component": ^2.0.0-alpha.20
     "@coffeekraken/s-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-dropzone-component": ^2.0.0-alpha.20
     "@coffeekraken/s-interface": ^2.0.0-alpha.20
     "@coffeekraken/sugar": ^2.0.0-alpha.20
     html-tags: ^3.2.0

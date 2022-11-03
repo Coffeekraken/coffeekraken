@@ -823,7 +823,7 @@ export default class SComponentUtils extends __SClass {
         let clsString = cls
             .split(' ')
             .map((clsName) => {
-                const clses: string[] = [];
+                let clses: string[] = [];
                 // class from the component tagname
                 clses.push(
                     `${this.node.tagName.toLowerCase()}${
@@ -841,6 +841,8 @@ export default class SComponentUtils extends __SClass {
                         }${clsName}`,
                     );
                 }
+                // replace '---' by '--'
+                clses = clses.map((c) => c.replace('---', '--'));
                 return clses.join(' ');
             })
             .join(' ');

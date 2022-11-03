@@ -1,0 +1,5 @@
+import __SDropzoneComponent from './SDropzoneComponent';
+export default function define(props = {}, tagName = 's-dropzone') {
+    __SDropzoneComponent.define(tagName, __SDropzoneComponent, props);
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBLE9BQU8sb0JBQW9CLE1BQU0sc0JBQXNCLENBQUM7QUFFeEQsTUFBTSxDQUFDLE9BQU8sVUFBVSxNQUFNLENBQzFCLFFBQTJDLEVBQUUsRUFDN0MsT0FBTyxHQUFHLFlBQVk7SUFFdEIsb0JBQW9CLENBQUMsTUFBTSxDQUFDLE9BQU8sRUFBRSxvQkFBb0IsRUFBRSxLQUFLLENBQUMsQ0FBQztBQUN0RSxDQUFDIn0=

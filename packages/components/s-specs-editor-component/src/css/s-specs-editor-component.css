@@ -1,6 +1,10 @@
 .s-specs-editor {
     user-select: none;
 
+    .s-specs-editor__dropzone {
+        padding-inline: sugar.padding(40);
+    }
+
     .s-tooltip-container {
         float: right;
     }

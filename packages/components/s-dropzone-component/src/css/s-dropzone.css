@@ -1,0 +1,150 @@
+.s-dropzone {
+    position: relative;
+    min-width: 100px;
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+    user-select: none;
+
+    .s-dropzone__root {
+        flex-grow: 1;
+        display: flex;
+    }
+
+    .s-dropzone__drop {
+        position: relative;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        gap: sugar.margin(20);
+        align-items: center;
+        justify-content: center;
+    }
+
+    .s-dropzone__text {
+    }
+
+    .s-dropzone__droped {
+    }
+
+    .s-dropzone__files {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .s-dropzone__file {
+        flex-grow: 1;
+        width: 100%;
+        height: 100%;
+    }
+
+    .s-dropzone__help {
+        position: absolute;
+        top: sugar.margin(10);
+        right: sugar.margin(10);
+    }
+}
+
+@keyframes s-dropzone-file-drop {
+    0% {
+        transform: scale(1);
+    }
+    30% {
+        transform: scale(0.96);
+    }
+    90% {
+        transform: scale(1.02);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.s-dropzone {
+    aspect-ratio: 16/9;
+    background: sugar.color(base, surface);
+    border: solid 1px sugar.color(accent, border);
+    @sugar.transition (fast);
+    @sugar.border.radius();
+
+    &:hover,
+    &--over {
+        background: sugar.color(accent, background);
+
+        .s-dropzone__drop {
+            i {
+                opacity: 0.6 !important;
+            }
+        }
+    }
+    &--files {
+        background: sugar.color(accent) !important;
+        color: sugar.color(accent, foreground);
+    }
+
+    &--error {
+        background: sugar.color(error);
+        color: sugar.color(error, foreground);
+        border: solid 1px sugar.color(error, border);
+    }
+
+    .s-dropzone__drop {
+        i {
+            font-size: sugar.font.size(70);
+            opacity: 0.3;
+        }
+    }
+
+    .s-dropzone__text {
+        color: sugar.color(base, text, --alpha 0.5);
+    }
+
+    .s-dropzone__droped {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .s-dropzone__reset-btn {
+        position: absolute;
+        bottom: sugar.margin(20);
+        right: sugar.margin(20);
+    }
+
+    .s-dropzone__files {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        @sugar.border.radius();
+    }
+
+    .s-dropzone__file {
+        animation: 0.3s ease-in-out s-dropzone-file-drop;
+
+        &--image {
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+
+    .s-dropzone__help {
+        i {
+            opacity: 0.5;
+            @sugar.transition (fast);
+        }
+        &:hover {
+            i {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.s-dropzone {
+    /* width: 300px; */
+}

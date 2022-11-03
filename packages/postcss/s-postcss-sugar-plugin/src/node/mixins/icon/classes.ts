@@ -2,6 +2,7 @@ import __SGlob from '@coffeekraken/s-glob';
 import __SInterface from '@coffeekraken/s-interface';
 import { __fileName } from '@coffeekraken/sugar/fs';
 import { __isGlob } from '@coffeekraken/sugar/is';
+import { __packagePath } from '@coffeekraken/sugar/npm';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import { __unquote } from '@coffeekraken/sugar/string';
 
@@ -92,7 +93,8 @@ export default function ({
         ...params,
     };
 
-    const iconsObjs: any[] = [];
+    const iconsObjs: any[] = [],
+        iconsPaths: string[] = [];
 
     finalParams.icons.forEach((iconStr) => {
         const protocol = iconStr.split(':')[0];
@@ -122,7 +124,6 @@ export default function ({
                     .replace(/('|"|`)$/, '');
                 as = splits[2];
 
-                const iconsPaths: string[] = [];
                 // handle globs
                 if (__isGlob(path)) {
                     const files = __SGlob.resolve(path, {
@@ -133,6 +134,45 @@ export default function ({
                     });
                 } else {
                     iconsPaths.push(path);
+                }
+
+                iconsPaths.forEach((iconPath) => {
+                    const iconAs = as ?? __fileName(iconPath).split('.')[0];
+                    iconsObjs.push({
+                        str: iconStr,
+                        protocol,
+                        path: iconPath,
+                        name: iconAs,
+                        as: iconAs,
+                    });
+                });
+                break;
+            case 'sugar':
+                splits = iconStr.split(':');
+                name = __unquote(splits[1])
+                    .replace(/^('|"|`)/, '')
+                    .replace(/('|"|`)$/, '');
+                as = splits[2] ?? name;
+
+                // handle globs
+                if (__isGlob(name)) {
+                    const files = __SGlob.resolve(
+                        `${__packagePath(
+                            '@coffeekraken/sugar',
+                        )}/src/icons/${name}`,
+                        {
+                            cwd: __packageRootDir(),
+                        },
+                    );
+                    files.forEach((file: any) => {
+                        iconsPaths.push(file.relPath);
+                    });
+                } else {
+                    iconsPaths.push(
+                        `${__packagePath(
+                            '@coffeekraken/sugar',
+                        )}/src/icons/${name}.svg`,
+                    );
                 }
 
                 iconsPaths.forEach((iconPath) => {
@@ -279,6 +319,38 @@ export default function ({
                             @sugar.icon.fs(${iconObj.path}, ${iconObj.as});
                         }
                     `,
+                    { type: 'CssClass' },
+                );
+                break;
+            case 'sugar':
+                vars.comment(
+                    () => `
+                            /**
+                             * @name        s-icon:${iconObj.as}
+                             * @namespace          sugar.style.icon
+                             * @type           CssClass
+                             * @platform         css
+                             * @status         beta
+                             *
+                             * efe
+                             *
+                             * @example        html
+                             * <i class="s-icon:${iconObj.as} s-font:20"></i>
+                             * <i class="s-icon:${iconObj.as} s-font:40"></i>
+                             * <i class="s-icon:${iconObj.as} s-font:60"></i>
+                             * <i class="s-icon:${iconObj.as} s-font:80"></i>
+                             * <i class="s-icon:${iconObj.as} s-font:100"></i>
+                             * 
+                             * @since      2.0.0
+                             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                             */
+                            `,
+                ).code(
+                    `
+                            .s-icon--${iconObj.as} {
+                                @sugar.icon.sugar(${iconObj.path}, ${iconObj.as});
+                            }
+                        `,
                     { type: 'CssClass' },
                 );
                 break;

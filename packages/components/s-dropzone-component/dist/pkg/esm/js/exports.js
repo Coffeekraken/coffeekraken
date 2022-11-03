@@ -1,0 +1,4 @@
+import __SDropzoneComponent from './SDropzoneComponent';
+export * from './SDropzoneComponent';
+export default __SDropzoneComponent;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sb0JBQW9CLE1BQU0sc0JBQXNCLENBQUM7QUFDeEQsY0FBYyxzQkFBc0IsQ0FBQztBQUNyQyxlQUFlLG9CQUFvQixDQUFDIn0=

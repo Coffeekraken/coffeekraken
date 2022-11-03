@@ -5,6 +5,7 @@ export * from './detect/_exports';
 export * from './distance/_exports';
 export * from './element/_exports';
 export * from './event/_exports';
+export * from './form/_exports';
 export * from './html/_exports';
 export * from './inject/_exports';
 export * from './input/_exports';

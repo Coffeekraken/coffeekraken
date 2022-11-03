@@ -17,6 +17,7 @@ import __isEsm from './isEsm';
 import __isEven from './isEven';
 import __isFunction from './isFunction';
 import __isGlob from './isGlob';
+import __isImageUrl from './isImageUrl';
 import __isInteger from './isInteger';
 import __isIsoDate from './isIsoDate';
 import __isIsoDateTime from './isIsoDateTime';
@@ -62,6 +63,7 @@ export {
     __isEven,
     __isFunction,
     __isGlob,
+    __isImageUrl,
     __isInteger,
     __isIsoDate,
     __isIsoDateTime,

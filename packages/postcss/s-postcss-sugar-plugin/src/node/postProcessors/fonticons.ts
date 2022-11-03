@@ -6,9 +6,11 @@ import {
     __folderHash,
     __writeFileSync,
 } from '@coffeekraken/sugar/fs';
-import { __packageCacheDir } from '@coffeekraken/sugar/path';
-import { __packageRootDir } from '@coffeekraken/sugar/path';
-import { __srcCssDir } from '@coffeekraken/sugar/path';
+import {
+    __packageCacheDir,
+    __packageRootDir,
+    __srcCssDir,
+} from '@coffeekraken/sugar/path';
 import { generateFonts } from 'fantasticon';
 import __fs from 'fs';
 import __svgFixer from 'oslllo-svg-fixer';
@@ -66,6 +68,7 @@ export default async function ({ root, sharedData, settings }) {
 
     // use cache only if the target is  "vite"
     const hashCacheFilePath = `${__packageCacheDir()}/postcss/iconsFolderHash.txt`;
+
     // if (settings.target === 'vite') {
     // handle cached hash
     if (__fs.existsSync(hashCacheFilePath)) {
@@ -82,18 +85,7 @@ export default async function ({ root, sharedData, settings }) {
 
     console.log(`<yellow>[fonticons]</yellow> Generate fonticons...`);
 
-    // // fix svg's just to be sure
-    // const svgIcons = __fs.readdirSync(inputDir);
-    // for (let i = 0; i < svgIcons.length; i++) {
-    //     const fullSvgIconPath = `${inputDir}/${svgIcons[i]}`;
-    //     const svgIconStr = __fs
-    //         .readFileSync(fullSvgIconPath, 'utf-8')
-    //         .toString();
-    //     const outlinedSvgIconStr = await __svgOutlineStroke(svgIconStr);
-    //     __fs.writeFileSync(fullSvgIconPath, outlinedSvgIconStr);
-    // }
-
-    const fixResult = await __svgFixer(inputDir, inputDir).fix();
+    await __svgFixer(inputDir, inputDir).fix();
 
     const result = await generateFonts({
         inputDir,

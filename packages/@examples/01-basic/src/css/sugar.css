@@ -21,7 +21,7 @@
 /* @sugar.ui.menu.classes(); */
 
 /* @sugar.partial ('slider') { */
-@sugar.ui.slider.classes();
+/* @sugar.ui.slider.classes(); */
 /* } */
 
 /**
@@ -38,4 +38,6 @@
     fab:facebook
     fab:patreon
     fab:instagram
+    sugar:misc-image:drop-file
+    sugar:ui-help-solid:help
 );

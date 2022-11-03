@@ -3,6 +3,9 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 import { __get } from '@coffeekraken/sugar/object';
 
 import { define as __SAssetPickerComponentDefine } from '@coffeekraken/s-asset-picker-component';
+import { define as __SDropzoneComponentDefine } from '@coffeekraken/s-dropzone-component';
+}
+
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __lowerFirst } from '@coffeekraken/sugar/string';
 import { css, html, unsafeCSS } from 'lit';
@@ -16,6 +19,7 @@ import __define from './define';
 
 // components
 __SAssetPickerComponentDefine();
+__SDropzoneComponentDefine();
 
 export interface ISSpecsEditorComponentProps {
     from: string;
@@ -359,8 +363,6 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             const valuesPath = `${path.filter((p) => p !== 'props').join('.')}`;
             const loopOn = __get(values, valuesPath);
 
-            console.log('loop', values, valuesPath, specs.type);
-
             return html`
                 <div class="${this.componentUtils.className('__repeatable')}">
                     ${loopOn.map(
@@ -480,6 +482,13 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                 >
                                     ${propObj.description}
                                 </p>
+
+                                ${propObj.type.toLowerCase() === 'image' ? html`
+                                        <div class="${this.componentUtils.className('__dropzone')}">
+                                            <s-dropzone accept="image/*,image/jpg,text/html" files="https://picsum.photos/200/300"></s-dropzone>
+                                    </div>
+                                ` : ''}
+
                                 ${this._renderElements(
                                     propObj,
                                     !forceNoRepeat

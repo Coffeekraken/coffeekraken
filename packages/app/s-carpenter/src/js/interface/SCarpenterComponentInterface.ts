@@ -21,10 +21,10 @@ import __SInterface from '@coffeekraken/s-interface';
 export default class SCarpenterComponentInterface extends __SInterface {
     static get _definition() {
         return {
-            source: {
+            specs: {
                 type: 'String',
                 description:
-                    'Specify a url from where to get the carpenter data back, or a simple id pointing to a HTMLTemplate tag that host the JSON data',
+                    'Specify a url from where to get the carpenter data back, directly the JSON data or a simple id pointing to a HTMLTemplate tag that host the JSON data',
                 default: '/carpenter.json',
                 required: true,
             },
@@ -35,6 +35,12 @@ export default class SCarpenterComponentInterface extends __SInterface {
                 default: 'ajax',
                 required: true,
             },
+            sidebar: {
+                type: 'Boolean',
+                description:
+                    'Specify if you want the left sidebar to jump across all the components/sections/etc...',
+                default: false,
+            },
             pagesLink: {
                 type: 'String',
                 description:
@@ -42,7 +48,7 @@ export default class SCarpenterComponentInterface extends __SInterface {
                 default: '/carpenter/%dotpath',
             },
             iframe: {
-                type: 'Boolean',
+                type: 'Boolean|String',
                 description:
                     'Specify if you want to put the page content inside an iframe to allow responsive resizing of your viewport. Can be either a boolean in which an iframe will be created automatically, or an iframe id to use',
                 default: false,

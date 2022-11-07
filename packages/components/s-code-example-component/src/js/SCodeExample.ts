@@ -312,10 +312,6 @@ export default class SCodeExample extends __SLitComponent {
                     // @ts-ignore
                     this.props.lines
                 }"
-                ?mounted="${
-                    // @ts-ignore
-                    this.mounted
-                }"
                 ?bare="${
                     // @ts-ignore
                     this.props.bare

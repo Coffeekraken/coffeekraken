@@ -19,6 +19,7 @@ import __STypescriptBuilder from '@coffeekraken/s-typescript-builder';
 import { __pool } from '@coffeekraken/sugar/fs';
 import { __onProcessExit } from '@coffeekraken/sugar/process';
 import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
+import __fileUpload from 'express-fileupload';
 import __runMiddleware from 'run-middleware';
 
 import __viewRendererMiddleware from './middleware/viewRendererMiddleware';
@@ -165,6 +166,7 @@ export default class SFrontendServer extends __SClass {
                 };
 
                 this._express.use(__bodyParser.json({ limit: '120mb' }));
+                this._express.use(__fileUpload());
 
                 this._express.use((req, res, next) => {
                     if (!res.templateData) res.templateData = {};

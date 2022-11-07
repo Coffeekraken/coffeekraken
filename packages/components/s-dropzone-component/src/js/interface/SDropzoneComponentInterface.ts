@@ -22,14 +22,22 @@ import __SInterface from '@coffeekraken/s-interface';
 export default class SDropzoneComponentInterface extends __SInterface {
     static get _definition() {
         return {
-            max: {
+            maxFiles: {
                 type: 'Number',
                 description:
                     'Specify the maximum files that can be droped on the dropzone at once',
                 default: 1,
             },
+            maxSize: {
+                type: 'Number',
+                description:
+                    'Specify the maximum file size accepted by the dropzone',
+            },
             files: {
-                type: 'String[]',
+                type: {
+                    type: 'String[]',
+                    splitChars: [',', ' '],
+                },
                 description:
                     'Specify some initial file(s) to be used and displayed in the UI. MUST contain at least a "src" attribute by file passed',
             },
@@ -52,6 +60,17 @@ export default class SDropzoneComponentInterface extends __SInterface {
                     'Specify a name for the input[type="file"] input that will be created if you set the "input" property to true',
                 default: 'files',
             },
+            upload: {
+                type: 'Boolean',
+                description:
+                    'Specify if you want the droped file(s) to be uploaded or not',
+                default: false,
+            },
+            uploadUrl: {
+                type: 'String',
+                description: 'Specify the url where to upload the file(s)',
+                default: '/upload',
+            },
             errorTimeout: {
                 type: 'Number',
                 description:
@@ -73,7 +92,7 @@ export default class SDropzoneComponentInterface extends __SInterface {
                 type: 'Object',
                 description: 'Specify some words/sentences to be translated',
                 default: {
-                    reset: 'Reset',
+                    clear: 'Clear',
                     clickOrDrag: 'Click or drag file(s) here...',
                 },
             },

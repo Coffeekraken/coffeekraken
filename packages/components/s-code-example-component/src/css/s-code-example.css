@@ -10,7 +10,7 @@
         display: none;
     }
 
-    &[status='mounted'] {
+    &[mounted] {
         > * {
             display: block;
         }

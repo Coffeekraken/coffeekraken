@@ -55,8 +55,19 @@ import __deepMerge from '../object/deepMerge';
 
 const _loopTimeout = new WeakMap();
 
-export default function __deepProxy(object, handlerFn, settings = {}) {
-    const preproxy = new WeakMap();
+export interface IDeepProxySettings {
+    deep: boolean;
+    handleSet: boolean;
+    handleGet: boolean;
+    handleDelete: boolean;
+    domElements: boolean;
+}
+
+export default function __deepProxy(
+    object,
+    handlerFn,
+    settings: Partial<IDeepProxySettings> = {},
+) {
     let isRevoked = false;
     settings = __deepMerge(
         {

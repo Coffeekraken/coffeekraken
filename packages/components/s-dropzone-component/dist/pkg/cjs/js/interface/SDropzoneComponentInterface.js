@@ -25,13 +25,20 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 class SDropzoneComponentInterface extends s_interface_1.default {
     static get _definition() {
         return {
-            max: {
+            maxFiles: {
                 type: 'Number',
                 description: 'Specify the maximum files that can be droped on the dropzone at once',
                 default: 1,
             },
+            maxSize: {
+                type: 'Number',
+                description: 'Specify the maximum file size accepted by the dropzone',
+            },
             files: {
-                type: 'String[]',
+                type: {
+                    type: 'String[]',
+                    splitChars: [',', ' '],
+                },
                 description: 'Specify some initial file(s) to be used and displayed in the UI. MUST contain at least a "src" attribute by file passed',
             },
             accept: {
@@ -50,6 +57,16 @@ class SDropzoneComponentInterface extends s_interface_1.default {
                 type: 'String',
                 description: 'Specify a name for the input[type="file"] input that will be created if you set the "input" property to true',
                 default: 'files',
+            },
+            upload: {
+                type: 'Boolean',
+                description: 'Specify if you want the droped file(s) to be uploaded or not',
+                default: false,
+            },
+            uploadUrl: {
+                type: 'String',
+                description: 'Specify the url where to upload the file(s)',
+                default: '/upload',
             },
             errorTimeout: {
                 type: 'Number',
@@ -70,7 +87,7 @@ class SDropzoneComponentInterface extends s_interface_1.default {
                 type: 'Object',
                 description: 'Specify some words/sentences to be translated',
                 default: {
-                    reset: 'Reset',
+                    clear: 'Clear',
                     clickOrDrag: 'Click or drag file(s) here...',
                 },
             },
@@ -78,4 +95,4 @@ class SDropzoneComponentInterface extends s_interface_1.default {
     }
 }
 exports.default = SDropzoneComponentInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsNEVBQXFEO0FBRXJEOzs7Ozs7Ozs7Ozs7Ozs7OztHQWlCRztBQUVILE1BQXFCLDJCQUE0QixTQUFRLHFCQUFZO0lBQ2pFLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxHQUFHLEVBQUU7Z0JBQ0QsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsV0FBVyxFQUNQLHNFQUFzRTtnQkFDMUUsT0FBTyxFQUFFLENBQUM7YUFDYjtZQUNELEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUUsVUFBVTtnQkFDaEIsV0FBVyxFQUNQLHlIQUF5SDthQUNoSTtZQUNELE1BQU0sRUFBRTtnQkFDSixJQUFJLEVBQUU7b0JBQ0YsSUFBSSxFQUFFLFVBQVU7b0JBQ2hCLFVBQVUsRUFBRSxDQUFDLEdBQUcsRUFBRSxHQUFHLENBQUM7aUJBQ3pCO2dCQUNELFdBQVcsRUFDUCw2R0FBNkc7YUFDcEg7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFLFNBQVM7Z0JBQ2YsV0FBVyxFQUFFLGtEQUFrRDtnQkFDL0QsT0FBTyxFQUFFLElBQUk7YUFDaEI7WUFDRCxJQUFJLEVBQUU7Z0JBQ0YsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsV0FBVyxFQUNQLDhHQUE4RztnQkFDbEgsT0FBTyxFQUFFLE9BQU87YUFDbkI7WUFDRCxZQUFZLEVBQUU7Z0JBQ1YsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsV0FBVyxFQUNQLDBGQUEwRjtnQkFDOUYsT0FBTyxFQUFFLElBQUk7YUFDaEI7WUFDRCxRQUFRLEVBQUU7Z0JBQ04sSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsV0FBVyxFQUFFLGlEQUFpRDtnQkFDOUQsT0FBTyxFQUFFLHFDQUFxQzthQUNqRDtZQUNELFlBQVksRUFBRTtnQkFDVixJQUFJLEVBQUUsUUFBUTtnQkFDZCxXQUFXLEVBQ1AsK0VBQStFO2dCQUNuRixPQUFPLEVBQUUsMENBQTBDO2FBQ3REO1lBQ0QsSUFBSSxFQUFFO2dCQUNGLElBQUksRUFBRSxRQUFRO2dCQUNkLFdBQVcsRUFBRSwrQ0FBK0M7Z0JBQzVELE9BQU8sRUFBRTtvQkFDTCxLQUFLLEVBQUUsT0FBTztvQkFDZCxXQUFXLEVBQUUsK0JBQStCO2lCQUMvQzthQUNKO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQTVERCw4Q0E0REMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsNEVBQXFEO0FBRXJEOzs7Ozs7Ozs7Ozs7Ozs7OztHQWlCRztBQUVILE1BQXFCLDJCQUE0QixTQUFRLHFCQUFZO0lBQ2pFLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxRQUFRLEVBQUU7Z0JBQ04sSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsV0FBVyxFQUNQLHNFQUFzRTtnQkFDMUUsT0FBTyxFQUFFLENBQUM7YUFDYjtZQUNELE9BQU8sRUFBRTtnQkFDTCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxXQUFXLEVBQ1Asd0RBQXdEO2FBQy9EO1lBQ0QsS0FBSyxFQUFFO2dCQUNILElBQUksRUFBRTtvQkFDRixJQUFJLEVBQUUsVUFBVTtvQkFDaEIsVUFBVSxFQUFFLENBQUMsR0FBRyxFQUFFLEdBQUcsQ0FBQztpQkFDekI7Z0JBQ0QsV0FBVyxFQUNQLHlIQUF5SDthQUNoSTtZQUNELE1BQU0sRUFBRTtnQkFDSixJQUFJLEVBQUU7b0JBQ0YsSUFBSSxFQUFFLFVBQVU7b0JBQ2hCLFVBQVUsRUFBRSxDQUFDLEdBQUcsRUFBRSxHQUFHLENBQUM7aUJBQ3pCO2dCQUNELFdBQVcsRUFDUCw2R0FBNkc7YUFDcEg7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFLFNBQVM7Z0JBQ2YsV0FBVyxFQUFFLGtEQUFrRDtnQkFDL0QsT0FBTyxFQUFFLElBQUk7YUFDaEI7WUFDRCxJQUFJLEVBQUU7Z0JBQ0YsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsV0FBVyxFQUNQLDhHQUE4RztnQkFDbEgsT0FBTyxFQUFFLE9BQU87YUFDbkI7WUFDRCxNQUFNLEVBQUU7Z0JBQ0osSUFBSSxFQUFFLFNBQVM7Z0JBQ2YsV0FBVyxFQUNQLDhEQUE4RDtnQkFDbEUsT0FBTyxFQUFFLEtBQUs7YUFDakI7WUFDRCxTQUFTLEVBQUU7Z0JBQ1AsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsV0FBVyxFQUFFLDZDQUE2QztnQkFDMUQsT0FBTyxFQUFFLFNBQVM7YUFDckI7WUFDRCxZQUFZLEVBQUU7Z0JBQ1YsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsV0FBVyxFQUNQLDBGQUEwRjtnQkFDOUYsT0FBTyxFQUFFLElBQUk7YUFDaEI7WUFDRCxRQUFRLEVBQUU7Z0JBQ04sSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsV0FBVyxFQUFFLGlEQUFpRDtnQkFDOUQsT0FBTyxFQUFFLHFDQUFxQzthQUNqRDtZQUNELFlBQVksRUFBRTtnQkFDVixJQUFJLEVBQUUsUUFBUTtnQkFDZCxXQUFXLEVBQ1AsK0VBQStFO2dCQUNuRixPQUFPLEVBQUUsMENBQTBDO2FBQ3REO1lBQ0QsSUFBSSxFQUFFO2dCQUNGLElBQUksRUFBRSxRQUFRO2dCQUNkLFdBQVcsRUFBRSwrQ0FBK0M7Z0JBQzVELE9BQU8sRUFBRTtvQkFDTCxLQUFLLEVBQUUsT0FBTztvQkFDZCxXQUFXLEVBQUUsK0JBQStCO2lCQUMvQzthQUNKO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQS9FRCw4Q0ErRUMifQ==

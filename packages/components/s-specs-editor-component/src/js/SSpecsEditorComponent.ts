@@ -1,11 +1,11 @@
 import __SLitComponent from '@coffeekraken/s-lit-component';
 
-import { __get } from '@coffeekraken/sugar/object';
+import { __delete, __get, __set } from '@coffeekraken/sugar/object';
 
 import { define as __SAssetPickerComponentDefine } from '@coffeekraken/s-asset-picker-component';
 import { define as __SDropzoneComponentDefine } from '@coffeekraken/s-dropzone-component';
-}
 
+import { __querySelectorUp } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __lowerFirst } from '@coffeekraken/sugar/string';
 import { css, html, unsafeCSS } from 'lit';
@@ -16,6 +16,8 @@ import __SSpecsEditorComponentInterface from './interface/SSpecsEditorComponentI
 import __css from '../../../../src/css/s-specs-editor-component.css'; // relative to /dist/pkg/esm/js
 
 import __define from './define';
+
+import __imageWidget from './widgets/imageWidget';
 
 // components
 __SAssetPickerComponentDefine();
@@ -90,6 +92,10 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         );
     }
 
+    static widgetMap = {
+        image: __imageWidget,
+    };
+
     static get styles() {
         return css`
             ${unsafeCSS(__css)}
@@ -100,6 +106,8 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         actives: {},
     };
 
+    _widgets = {};
+
     constructor() {
         super(
             __deepMerge({
@@ -108,15 +116,57 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             }),
         );
     }
-    mount() {}
+    mount() {
+        console.log(this.props.specs);
+    }
 
-    _update(e, propSpecs) {
+    getValueFromPath(path: string): any {
+        const valuePath = path.filter((p) => p !== 'props').join('.');
+        return __get(this.props.specs.values, valuePath);
+    }
+
+    setValueFromPath(path: string, value: any): any {
+        const valuePath = path.filter((p) => p !== 'props').join('.');
+        return __set(this.props.specs.values, valuePath, value);
+    }
+
+    getWidget(type: string): any {
+        if (!SSpecsEditorComponent.widgetMap[type]) {
+            return;
+        }
+        if (!this._widgets[type]) {
+            this._widgets[type] = SSpecsEditorComponent.widgetMap[type](this);
+        }
+
+        if (!this._widgets[type]._eventsInited && this._widgets[type].events) {
+            for (let [event, cb] of Object.entries(
+                this._widgets[type].events,
+            )) {
+                this.addEventListener(event, (e) => {
+                    e.$scope = __querySelectorUp(e.target, ($elm) => {
+                        return $elm.classList.contains(
+                            this.componentUtils.className('__child'),
+                        );
+                    });
+                    this._widgets[type].events[event](e);
+                });
+            }
+            this._widgets[type]._eventsInited = true;
+        }
+
+        return this._widgets[type];
+    }
+
+    _update(e, path: string[], propSpecs: any) {
+        // value path
+        const valuePath = path.filter((v) => v !== 'props').join('.');
+
         switch (e.target.tagName.toLowerCase()) {
             default:
                 if (e.target.value === propSpecs.default) {
-                    delete propSpecs.value;
+                    __delete(this.props.specs.values, valuePath);
                 } else {
-                    propSpecs.value = e.target.value;
+                    this.setValueFromPath(path, e.target.value);
                 }
                 break;
         }
@@ -125,9 +175,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             detail: {
                 propSpecs: Object.assign({}, propSpecs),
                 propsSpecs: Object.assign({}, this.props.specs),
-                values: this._specsToValues(
-                    Object.assign({}, this.props.specs),
-                ),
+                values: Object.assign({}, this.props.specs.values),
             },
         });
     }
@@ -135,10 +183,10 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     _toggle(id: string): void {
         if (!this.state.actives[id]) {
             this.state.actives[id] = true;
-        }
-        {
+        } else {
             this.state.actives[id] = false;
         }
+        this.requestUpdate();
     }
     _isActive(id: string): boolean {
         return this.state.actives[id];
@@ -155,6 +203,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                 break;
         }
 
+        // @ts-ignore
         this.requestUpdate();
     }
 
@@ -166,35 +215,13 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             stack.splice(stack.indexOf(item), 1);
         }
 
+        // @ts-ignore
         this.requestUpdate();
     }
 
-    _specsToValues(specs) {
-        const values = {};
-
-        function treatProps(props, targetObj) {
-            for (let [prop, value] of Object.entries(props)) {
-                if (value.value !== undefined) {
-                    targetObj[prop] = value.value;
-                } else if (value.default !== undefined) {
-                    targetObj[prop] = value.default;
-                } else if (value.props) {
-                    targetObj[prop] = {};
-                    treatProps(value.props, targetObj[prop]);
-                }
-            }
-        }
-
-        treatProps(specs.props, values);
-
-        console.log(values);
-
-        return values;
-    }
-
-    _renderSelectElement(propObj, path, values) {
-        const prop = path.at(-1),
-            value = values[prop] ?? propObj.value ?? propObj.default;
+    _renderSelectElement(propObj, path) {
+        const value =
+            this.getValueFromPath(path) ?? propObj.value ?? propObj.default;
         return html`
             <div class="${this.componentUtils.className('__prop--select')}">
                 <label
@@ -204,8 +231,8 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                     )}"
                 >
                     <select
-                        @change=${(e) => this._update(e, propObj)}
-                        name="${propObj.id}"
+                        @change=${(e) => this._update(e, path, propObj)}
+                        name="${path.at(-1)}"
                         class="${this.componentUtils.className(
                             '__select',
                             's-select',
@@ -213,6 +240,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                         placeholder="${propObj.default ??
                         propObj.title ??
                         propObj.id}"
+                        path="${path.join('.')}"
                         value="${value}"
                     >
                         ${propObj.options.map(
@@ -248,9 +276,9 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         `;
     }
 
-    _renderCheckboxElement(propObj, path, values) {
-        const prop = path.at(-1),
-            value = values[prop] ?? propObj.value ?? propObj.default;
+    _renderCheckboxElement(propObj, path) {
+        const value =
+            this.getValueFromPath(path) ?? propObj.value ?? propObj.default;
         return html`
             <div class="${this.componentUtils.className('__prop--checkbox')}">
                 <label
@@ -260,13 +288,14 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                     )}"
                 >
                     <input
-                        @change=${(e) => this._update(e, propObj)}
+                        @change=${(e) => this._update(e, path, propObj)}
                         type="checkbox"
-                        name="${propObj.id}"
+                        name="${path.at(-1)}"
                         class="${this.componentUtils.className(
                             '__checkbox',
                             's-switch',
                         )}"
+                        path="${path.join('.')}"
                         checked?=${value}
                     />
                     <span>
@@ -291,9 +320,10 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         `;
     }
 
-    _renderTextElement(propObj, path, values) {
-        const prop = path.at(-1),
-            value = values[prop] ?? propObj.value ?? propObj.default;
+    _renderTextElement(propObj, path) {
+        const value =
+            this.getValueFromPath(path) ?? propObj.value ?? propObj.default;
+
         return html`
             <div class="${this.componentUtils.className('__prop--text')}">
                 <label
@@ -303,9 +333,9 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                     )}"
                 >
                     <input
-                        @change=${(e) => this._update(e, propObj)}
+                        @change=${(e) => this._update(e, path, propObj)}
                         type="text"
-                        name="${propObj.id}"
+                        name="${path.at(-1)}"
                         class="${this.componentUtils.className(
                             '__input',
                             's-input',
@@ -313,6 +343,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                         placeholder="${propObj.default ??
                         propObj.title ??
                         propObj.id}"
+                        path="${path.join('.')}"
                         value="${value}"
                     />
                     <span>
@@ -337,31 +368,35 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         `;
     }
 
-    _renderElement(propObj, path, values) {
-        console.log(path, values);
+    /**
+     * Render the proper widget depending on the "type" propObj property
+     */
+    _renderEditWidget(propObj, path) {
+        const type = propObj.type.toLowerCase(),
+            widget = this.getWidget(type);
+        if (!widget) {
+            return '';
+        }
+        return widget.html(propObj, this.getValueFromPath(path) ?? {});
+    }
 
+    _renderElement(propObj, path) {
         return html`
             ${propObj.type.toLowerCase() === 'text'
-                ? this._renderTextElement(propObj, path, values)
+                ? this._renderTextElement(propObj, path)
                 : propObj.type.toLowerCase() === 'select'
-                ? this._renderSelectElement(propObj, path, values)
+                ? this._renderSelectElement(propObj, path)
                 : propObj.type.toLowerCase() === 'checkbox'
-                ? this._renderCheckboxElement(propObj, path, values)
+                ? this._renderCheckboxElement(propObj, path)
                 : ''}
         `;
     }
 
-    _renderElements(
-        specs: any,
-        path: string[] = [],
-        values: any = {},
-        forceNoRepeat = false,
-    ) {
+    _renderElements(specs: any, path: string[] = [], forceNoRepeat = false) {
         // const _specs = __get(specs, path.join('.'));
         const _specs = specs;
         if (!forceNoRepeat && _specs.type.match(/(\{\}|\[\])/)) {
-            const valuesPath = `${path.filter((p) => p !== 'props').join('.')}`;
-            const loopOn = __get(values, valuesPath);
+            const loopOn = this.getValueFromPath(path) ?? [];
 
             return html`
                 <div class="${this.componentUtils.className('__repeatable')}">
@@ -427,8 +462,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                 >
                                     ${this._renderElements(
                                         specs,
-                                        [...path],
-                                        v,
+                                        [...path, i],
                                         true,
                                     )}
                                 </div>
@@ -483,18 +517,15 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                     ${propObj.description}
                                 </p>
 
-                                ${propObj.type.toLowerCase() === 'image' ? html`
-                                        <div class="${this.componentUtils.className('__dropzone')}">
-                                            <s-dropzone accept="image/*,image/jpg,text/html" files="https://picsum.photos/200/300"></s-dropzone>
-                                    </div>
-                                ` : ''}
-
-                                ${this._renderElements(
+                                ${this._renderEditWidget(
                                     propObj,
                                     !forceNoRepeat
                                         ? [...path, 'props', prop]
                                         : path,
-                                    values,
+                                )}
+                                ${this._renderElements(
+                                    propObj,
+                                    [...path, 'props', prop],
                                     forceNoRepeat,
                                 )}
                             </div>
@@ -507,11 +538,11 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                     '__prop',
                                 )}"
                             >
-                                ${this._renderElement(
-                                    propObj,
-                                    [...path, 'props', prop],
-                                    values,
-                                )}
+                                ${this._renderElement(propObj, [
+                                    ...path,
+                                    'props',
+                                    prop,
+                                ])}
                             </div>
                         `;
                     }
@@ -554,11 +585,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                       ${this.props.specs.description}
                                   </p>
                               </div>
-                              ${this._renderElements(
-                                  this.props.specs,
-                                  [],
-                                  this.props.specs.values,
-                              )}
+                              ${this._renderElements(this.props.specs, [])}
                           </div>
                       `
                     : ''}

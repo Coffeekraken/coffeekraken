@@ -28,5 +28,8 @@ function registerFilters($twig)
     $toObject = require __DIR__ . '/cast/toObject.php';
     $twig->addFilter($toObject);
 
+    $cleanContext = require __DIR__ . '/object/cleanContext.php';
+    $twig->addFilter($cleanContext);
+
     return $twig;
 }

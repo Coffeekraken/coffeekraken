@@ -20,13 +20,14 @@ export default {
             in: Math.random() > 0.5 ? 'bottom' : 'top',
             delay: '300-600',
           },
-          title: 'Supercharged!',
+          direction: 'vertical',
+          title: `Supercharged!`,
           intro: 'Up to 18 hours of battery life.',
           text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra libero tincidunt arcu dignissim rhoncus. Vivamus a ipsum eget mauris.',
           cta: {
-            label: 'Discover more...',
             color: 'accent',
             link: {
+              text: 'Discover more...',
               url: 'https://apple.com',
               target: '_blank',
               title: 'Discover more on apple.com',
@@ -40,7 +41,10 @@ export default {
           cardData.image.url = imgPath.replace('%i', i + 1);
           const result = await viewRenderer.render(
             'sugar.components.card.card',
-            cardData
+            {
+              ...cardData,
+              title: `Superchardef #${i + 1}`,
+            }
           );
           const cellResult = await viewRenderer.render('sugar.bare.cell.cell', {
             content: result.value,

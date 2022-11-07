@@ -2270,6 +2270,7 @@ __metadata:
   dependencies:
     "@coffeekraken/s-interface": ^2.0.0-alpha.20
     "@coffeekraken/s-lit-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-promise": ^2.0.0-alpha.20
     "@coffeekraken/sugar": ^2.0.0-alpha.20
     lit: ^2.2.8
   languageName: unknown
@@ -2432,6 +2433,7 @@ __metadata:
     body-parser: ^1.20.0
     compression: ^1.7.4
     express: ^4.18.1
+    express-fileupload: ^1.4.0
     express-remove-route: ^1.0.0
     http-proxy-middleware: ^2.0.6
     marked: ^4.0.18
@@ -6490,6 +6492,7 @@ __metadata:
     "@coffeekraken/s-appear-feature": ^2.0.0-alpha.20
     "@coffeekraken/s-bench": ^2.0.0-alpha.20
     "@coffeekraken/s-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-carpenter": ^2.0.0-alpha.20
     "@coffeekraken/s-class": ^2.0.0-alpha.20
     "@coffeekraken/s-clipboard-copy-component": ^2.0.0-alpha.20
     "@coffeekraken/s-code-example-component": ^2.0.0-alpha.20
@@ -7721,6 +7724,15 @@ __metadata:
   peerDependencies:
     esbuild: ">=0.13"
   checksum: 572ade4e799fa74a56fecc02b8d997f7cf652c9b87bf1cbe7aa98a72d536792a84f262d209d9552c8feabf57376fd2b7ff82e765ed024a15d6c1c086b553bd89
+  languageName: node
+  linkType: hard
+
+"busboy@npm:^1.6.0":
+  version: 1.6.0
+  resolution: "busboy@npm:1.6.0"
+  dependencies:
+    streamsearch: ^1.1.0
+  checksum: 32801e2c0164e12106bf236291a00795c3c4e4b709ae02132883fe8478ba2ae23743b11c5735a0aae8afe65ac4b6ca4568b91f0d9fed1fdbc32ede824a73746e
   languageName: node
   linkType: hard
 
@@ -10754,6 +10766,15 @@ __metadata:
     jest-matcher-utils: ^27.5.1
     jest-message-util: ^27.5.1
   checksum: b2c66beb52de53ef1872165aace40224e722bca3c2274c54cfa74b6d617d55cf0ccdbf36783ccd64dbea501b280098ed33fd0b207d4f15bc03cd3c7a24364a6a
+  languageName: node
+  linkType: hard
+
+"express-fileupload@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "express-fileupload@npm:1.4.0"
+  dependencies:
+    busboy: ^1.6.0
+  checksum: 4dad1dab1279eab72412857c3bb6b364f86ae512ac760cb4ae140e7f5793daefd2656c2a7cc60033a476d7267ab9d89ac85b2106ce9d5697ec5d3ba9c315ac6f
   languageName: node
   linkType: hard
 
@@ -19159,6 +19180,13 @@ __metadata:
   version: 0.2.2
   resolution: "stream-to@npm:0.2.2"
   checksum: 06a3f163cfc609a7dc6952f0d953e67f5dabf68c75a7349cc0656ed4e211806e58c69ba1270263ec33c288aaf1468386c3055d592e18b76bc0f13e322ab78068
+  languageName: node
+  linkType: hard
+
+"streamsearch@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "streamsearch@npm:1.1.0"
+  checksum: 1cce16cea8405d7a233d32ca5e00a00169cc0e19fbc02aa839959985f267335d435c07f96e5e0edd0eadc6d39c98d5435fb5bbbdefc62c41834eadc5622ad942
   languageName: node
   linkType: hard
 

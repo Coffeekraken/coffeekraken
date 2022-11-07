@@ -51,6 +51,7 @@ export interface ISStateSettings {
     id: string;
     save: boolean;
     adapter: ISStateAdapter;
+    watchDeep: boolean;
 }
 
 export interface ISStateAdapter {
@@ -93,7 +94,15 @@ export default class SState extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(object: any, settings?: Partial<ISStateSettings>) {
-        super(__deepMerge({}, settings ?? {}));
+        super(
+            __deepMerge(
+                {
+                    watchDeep: false,
+                    save: false,
+                },
+                settings ?? {},
+            ),
+        );
 
         // make sure the state has an id if want to save it
         if (this.settings.save && !this.settings.id) {
@@ -113,28 +122,37 @@ export default class SState extends __SClass {
         }
 
         let saveTimeout;
-        const proxy = __deepProxy(object, (actionObj) => {
-            switch (actionObj.action) {
-                case 'set':
-                    this._eventEmitter.emit(`set.${actionObj.path}`, actionObj);
-                    break;
-                case 'delete':
-                    this._eventEmitter.emit(
-                        `delete.${actionObj.path}`,
-                        actionObj,
-                    );
-                    break;
-            }
-            // save if needed
-            if (this.settings.save) {
-                clearTimeout(saveTimeout);
-                saveTimeout = setTimeout(() => {
-                    this.settings.adapter.save(
-                        JSON.parse(JSON.stringify(proxy)),
-                    );
-                });
-            }
-        });
+        const proxy = __deepProxy(
+            object,
+            (actionObj) => {
+                switch (actionObj.action) {
+                    case 'set':
+                        this._eventEmitter.emit(
+                            `set.${actionObj.path}`,
+                            actionObj,
+                        );
+                        break;
+                    case 'delete':
+                        this._eventEmitter.emit(
+                            `delete.${actionObj.path}`,
+                            actionObj,
+                        );
+                        break;
+                }
+                // save if needed
+                if (this.settings.save) {
+                    clearTimeout(saveTimeout);
+                    saveTimeout = setTimeout(() => {
+                        this.settings.adapter.save(
+                            JSON.parse(JSON.stringify(proxy)),
+                        );
+                    });
+                }
+            },
+            {
+                deep: this.settings.watchDeep,
+            },
+        );
 
         // instanciate the event emitter
         this._eventEmitter = new __SEventEmitter();

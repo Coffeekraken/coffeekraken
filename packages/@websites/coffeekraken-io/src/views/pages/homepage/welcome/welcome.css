@@ -168,7 +168,7 @@
     position: absolute;
     left: 99vw;
 
-    &[status='mounted'] {
+    &[mounted] {
       opacity: 1;
       left: auto;
       position: relative;

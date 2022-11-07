@@ -225,9 +225,6 @@ export default class SLitComponent extends LitElement {
             ...propertiesObj,
             ...(properties ?? {}),
         };
-        if (props.direction) {
-            console.log(props);
-        }
 
         return props;
     }
@@ -263,7 +260,7 @@ export default class SLitComponent extends LitElement {
             this.state = {};
         }
         if (!this.state?.status) {
-            this.state.status = 'pending';
+            this.state.status = 'idle';
         }
 
         // shadow handler
@@ -305,7 +302,7 @@ export default class SLitComponent extends LitElement {
             }
             // set the component as mounted
             // @ts-ignore
-            this.props.status = 'mounted';
+            this.setAttribute('mounted', true);
         };
 
         // litElement shouldUpdate
@@ -353,6 +350,10 @@ export default class SLitComponent extends LitElement {
                 this._mount();
             }
         })();
+    }
+
+    disconnectedCallback() {
+        // this.state?.revoke?.();
     }
 
     /**
@@ -438,7 +439,7 @@ export default class SLitComponent extends LitElement {
                     save: this.props.saveState,
                 }),
             });
-            this.state.$set('*', (action) => {
+            this.state.$set('*', () => {
                 this.requestUpdate();
             });
         }

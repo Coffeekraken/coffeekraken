@@ -346,10 +346,10 @@ export default class SActivateFeature extends __SFeature {
             }
 
             // prevent save
-            if (finalParams.preventSave) {
-                // @ts-ignore
-                this.state.preventSave();
-            }
+            // if (finalParams.preventSave) {
+            //     // @ts-ignore
+            //     this.state.preventSave();
+            // }
 
             // add the "active" attribute to the component
             // @ts-ignore

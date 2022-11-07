@@ -28,8 +28,6 @@ export default {
             component,
         });
 
-        console.log('new', $newComponent, $elm);
-
         // @ts-ignore
         if ($elm) {
             // add the new component after the current one
@@ -41,6 +39,18 @@ export default {
 
         // return the new component
         return $newComponent;
+    },
+
+    async getProps({ $elm }): Promise<any> {
+        console.log('ddd', $elm.getAttribute('values'));
+
+        if ($elm.hasAttribute('values')) {
+            const data = JSON.parse($elm.getAttribute('values'));
+            console.log('ada', data);
+            return data;
+        }
+
+        return {};
     },
 
     async setProps({ $elm, props, component }): Promise<HTMLElement> {

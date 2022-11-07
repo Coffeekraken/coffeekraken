@@ -1,4 +1,5 @@
 import { __dirname } from '@coffeekraken/sugar/fs';
+import { __packageTmpDir } from '@coffeekraken/sugar/path';
 
 export default function (api) {
     return {
@@ -57,6 +58,7 @@ export default function (api) {
          */
         get staticDirs() {
             return {
+                '/tmp': `${__packageTmpDir()}`,
                 '/dist/css/partials': `${api.config.storage.dist.cssDir}/partials`,
                 '/dist':
                     api.env.env === 'production'
@@ -302,6 +304,33 @@ export default function (api) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 path: `${__dirname()}/../node/modules/publicDir/publicDir`,
+                settings: {},
+            },
+            upload: {
+                /**
+                 * @name            description
+                 * @namespace       config.frontendServer.modules.upload
+                 * @type            String
+                 *
+                 * Specify the module description
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                description:
+                    'This module allows you to upload files to the tmp/upload directory',
+                /**
+                 * @name            path
+                 * @namespace       config.frontendServer.modules.upload
+                 * @type            String
+                 * @default             ${__dirname()}/../node/modules/upload/upload
+                 *
+                 * Specify where to find the "upload" module
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                path: `${__dirname()}/../node/modules/upload/upload`,
                 settings: {},
             },
             generic: {

@@ -5,8 +5,9 @@ export default {
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales, ipsum sit amet consectetur facilisis, tellus urna iaculis lacus, nec.',
   text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vestibulum varius mauris, vel lobortis sapien ornare vitae.',
   cta: {
-    label: 'Discover more...',
+    color: 'accent',
     link: {
+      text: 'Discover more...',
       url: 'https://apple.com',
       target: '_blank',
       title: 'Discover more on apple.com',

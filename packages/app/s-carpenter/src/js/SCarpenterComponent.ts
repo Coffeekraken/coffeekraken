@@ -22,10 +22,23 @@ import __ajaxAdapter from './adapters/ajaxAdapter';
 // @ts-ignore
 import __css from '../../../../src/css/s-carpenter-component.css'; // relative to /dist/pkg/esm/js
 
-// @ts-ignore
+export interface ISCarpenterComponentIconsProp {
+    mobile: string;
+    tablet: string;
+    desktop: string;
+    wide: string;
+    folderOpen: string;
+    folderClose: string;
+}
 
 export interface ISCarpenterComponentProps {
-    source: string;
+    specs: string;
+    adapter: 'ajax';
+    nav: boolean;
+    pagesLink: string;
+    iframe: boolean;
+    logo: string;
+    icons: ISCarpenterComponentIconsProp;
 }
 
 // define components
@@ -62,7 +75,7 @@ __sSpecsEditorComponentDefine();
 export interface ISCarpenterComponentAdapterParams {
     $elm?: HTMLElement;
     dotpath?: string;
-    props: any;
+    props: specs;
     component: SCarpenterComponent;
 }
 
@@ -72,6 +85,16 @@ export interface ISCarpenterComponentAdapter {
 }
 
 export default class SCarpenterComponent extends __SLitComponent {
+    static create(attributes: any = {}, to: HTMLElement = document.body) {
+        if (__isInIframe() || document.querySelector('s-carpenter')) {
+            return;
+        }
+        to.innerHTML += `<s-carpenter ${Object.keys(attributes).map((attr) => {
+            const value = attributes[attr];
+            return ` ${attr}="${value}" `;
+        })}></s-carpenter>`;
+    }
+
     static get properties() {
         return __SLitComponent.propertiesFromInterface(
             {},
@@ -105,8 +128,11 @@ export default class SCarpenterComponent extends __SLitComponent {
         currentSpecs: null,
         hoveredDotpath: null,
         $currentElement: null,
+        $hoveredElement: null,
         activeMedia: 'desktop',
     };
+
+    _values = {};
 
     _data;
     _$document;
@@ -130,7 +156,12 @@ export default class SCarpenterComponent extends __SLitComponent {
         }
 
         // get the data
-        this._data = await this._getData(this.props.source);
+        this._data = await this._getData(this.props.specs);
+        if (!this._data) {
+            throw new Error(
+                `[SCarpenter] Sorry but no valid specs have been specified...`,
+            );
+        }
 
         // active the default media if not set
         if (!this.state.activeMedia) {
@@ -139,7 +170,6 @@ export default class SCarpenterComponent extends __SLitComponent {
 
         // check the specified adapter
         if (!SCarpenterComponent._registeredAdapters[this.props.adapter]) {
-            console.log(this);
             throw new Error(
                 `[SCarpenterComponent] Sorry but the specified "${this.props.adapter}" is not registered...`,
             );
@@ -181,6 +211,8 @@ export default class SCarpenterComponent extends __SLitComponent {
             // wait for the iframe to be ready
             // @TODO        check for better solution
             await __wait(500);
+
+            console.log('if', this._$iframe);
 
             // inject the iframe content
             __injectIframeContent(this._$iframe, iframeHtml);
@@ -230,8 +262,8 @@ export default class SCarpenterComponent extends __SLitComponent {
 
                     // do nothing more if already activated
                     if (
-                        e.currentTarget._id &&
-                        e.currentTarget._id === this.state.$currentElement?._id
+                        e.currentTarget.id &&
+                        e.currentTarget.id === this.state.$currentElement?.id
                     ) {
                         return;
                     }
@@ -240,7 +272,10 @@ export default class SCarpenterComponent extends __SLitComponent {
                     }
 
                     // activate the element if needed
-                    this._activateElement(e.currentTarget);
+                    this._positionToolbarOnElement(e.currentTarget);
+
+                    // set the "pre" activate element
+                    this.state.hoveredElement = $elm;
 
                     // set the hovered dotpath
                     this.state.hoveredDotpath = $elm.getAttribute('s-specs');
@@ -261,13 +296,29 @@ export default class SCarpenterComponent extends __SLitComponent {
                 props: e.detail.values ?? {},
                 component: this,
             });
+
+            // save current values in "_values" stack
+            this._values[this.state.$currentElement.id] = e.detail.values ?? {};
+
             if (adapterResult) {
                 this.state.$currentElement = adapterResult;
             }
         });
 
         // listen on click
-        this._$toolbar.addEventListener('pointerup', (e) => {
+        this._$toolbar.addEventListener('pointerup', async (e) => {
+            // do not activate 2 times the same element
+            if (
+                this.state.$currentElement.id?.trim() &&
+                this.state.$currentElement.id === this.state.$hoveredElement.id
+            ) {
+                return;
+            }
+
+            // force reset the specs editor
+            this.state.currentSpecs = null;
+            await __wait();
+
             // try to get the spec from the data fetched at start
             let potentialDotpath = this.state.hoveredDotpath;
             if (this._data.specsMap[potentialDotpath]) {
@@ -286,7 +337,8 @@ export default class SCarpenterComponent extends __SLitComponent {
                 return;
             }
 
-            console.log(this.state.currentSpecs);
+            // set the current element
+            this._setCurrentElement(this.state.$hoveredElement);
 
             // open the editor
             this._openEditor();
@@ -335,21 +387,51 @@ export default class SCarpenterComponent extends __SLitComponent {
     }
 
     /**
-     * Add the "editor" micro menu to the element
+     * Activate the element when toolbar has been clicked
      */
-    _activateElement($elm: HTMLElement): void {
-        if ($elm._id && this.state.$currentElement?._id === $elm._id) {
+    async _setCurrentElement($elm: HTMLElement): void {
+        // ensure we have an id
+        if (!$elm.id.trim()) {
+            $elm.setAttribute('id', __uniqid());
+        }
+
+        // do not activate 2 times the same element
+        if (this.state.$currentElement.id === $elm.id) {
             return;
         }
 
-        // position toolbar
-        this._setToolbarPosition($elm);
+        // get values
+        const values =
+            this._values[$elm.id] ??
+            (await SCarpenterComponent._registeredAdapters[
+                this.props.adapter
+            ].getProps({
+                $elm,
+                component: this,
+            }));
+
+        // save the getted values
+        if (values) {
+            this.state.currentSpecs.values = values;
+        }
 
         // set the current element
         this.state.$currentElement = $elm;
-        if (!$elm._id) {
-            $elm._id = __uniqid();
+    }
+
+    /**
+     * Add the "editor" micro menu to the element
+     */
+    _positionToolbarOnElement($elm: HTMLElement): void {
+        if ($elm.id && this.state.$currentElement?.id === $elm.id) {
+            return;
         }
+
+        // set the hovered element
+        this.state.$hoveredElement = $elm;
+
+        // position toolbar
+        this._setToolbarPosition($elm);
     }
 
     /**
@@ -376,13 +458,13 @@ export default class SCarpenterComponent extends __SLitComponent {
      */
     async _changePage(dotpath: string, pushState: boolean = true): void {
         const adapterResult = await SCarpenterComponent._registeredAdapters[
-            this.props.adapter
+            this.props.specs
         ].change({
             dotpath,
-            $elm: this.props.iframe
+            $elm: this.props.specs
                 ? this._$document.body.children[0]
                 : this.state.$currentElement,
-            props: {},
+            props: specs,
             component: this,
         });
         if (adapterResult) {
@@ -396,7 +478,7 @@ export default class SCarpenterComponent extends __SLitComponent {
                     dotpath,
                 },
                 document.title,
-                this.props.pagesLink.replace('%dotpath', dotpath),
+                this.props.specs.replace('%dotpath', dotpath),
             );
         }
 
@@ -430,7 +512,12 @@ export default class SCarpenterComponent extends __SLitComponent {
         let data;
 
         try {
-            if (source.startsWith('/') || source.match(/^http?s\:\/\//)) {
+            if (source.startsWith('{')) {
+                data = JSON.parse(source);
+            } else if (
+                source.startsWith('/') ||
+                source.match(/^https?\:\/\//)
+            ) {
                 data = await fetch(source).then((response) => response.json());
             } else {
                 const $template = document.querySelectorAll(
@@ -459,100 +546,119 @@ export default class SCarpenterComponent extends __SLitComponent {
 
         return html`
             <div class="${this.componentUtils.className('', null, 's-bare')}">
-                <nav class="${this.componentUtils.className('__sidebar')}">
-                    <div class="${this.componentUtils.className('__logo')}">
-                        ${unsafeHTML(this.props.logo)}
-                    </div>
+                ${this.props.sidebar
+                    ? html`
+                          <nav
+                              class="${this.componentUtils.className(
+                                  '__sidebar',
+                              )}"
+                          >
+                              <div
+                                  class="${this.componentUtils.className(
+                                      '__logo',
+                                  )}"
+                              >
+                                  ${unsafeHTML(this.props.specs)}
+                              </div>
 
-                    <div
-                        class="${this.componentUtils.className('__navigation')}"
-                    >
-                        <ul class="s-fs-tree">
-                            ${Object.keys(this._data.specsBySources).map(
-                                (sourceId) => {
-                                    const sourceObj =
-                                        this._data.specsBySources[sourceId];
-                                    if (typeof sourceObj === 'function') {
-                                        return '';
-                                    }
-                                    return html`
-                                        <li
-                                            class="${this.state.activeNavigationFolders.includes(
-                                                sourceId,
-                                            )
-                                                ? 'active'
-                                                : ''}"
-                                        >
-                                            <div
-                                                @pointerup=${() =>
-                                                    this._toggleNavigationFolder(
-                                                        sourceId,
-                                                    )}
-                                            >
-                                                ${this.state.activeNavigationFolders.includes(
-                                                    sourceId,
-                                                )
-                                                    ? html`
-                                                          ${unsafeHTML(
-                                                              this.props.icons
-                                                                  .folderOpen,
+                              <div
+                                  class="${this.componentUtils.className(
+                                      '__navigation',
+                                  )}"
+                              >
+                                  <ul class="s-fs-tree">
+                                      ${Object.keys(
+                                          this._data.specsBySources,
+                                      ).map((sourceId) => {
+                                          const sourceObj =
+                                              this._data.specsBySources[
+                                                  sourceId
+                                              ];
+                                          if (typeof sourceObj === 'function') {
+                                              return '';
+                                          }
+                                          return html`
+                                              <li
+                                                  class="${this.state.activeNavigationFolders.includes(
+                                                      sourceId,
+                                                  )
+                                                      ? 'active'
+                                                      : ''}"
+                                              >
+                                                  <div
+                                                      @pointerup=${() =>
+                                                          this._toggleNavigationFolder(
+                                                              sourceId,
                                                           )}
-                                                      `
-                                                    : html`
-                                                          ${unsafeHTML(
-                                                              this.props.icons
-                                                                  .folderClose,
-                                                          )}
-                                                      `}
-                                                <span tabindex="0"
-                                                    >${sourceObj.title ??
-                                                    sourceId}</span
-                                                >
-                                            </div>
-                                            <ul>
-                                                ${Object.keys(
-                                                    sourceObj.specs,
-                                                ).map((dotpath) => {
-                                                    const specObj =
-                                                        sourceObj.specs[
-                                                            dotpath
-                                                        ];
-                                                    return html`
-                                                        <li
-                                                            class="${document.location.href.includes(
-                                                                specObj.metas
-                                                                    .dotpath,
-                                                            )
-                                                                ? 'active'
-                                                                : ''}"
-                                                            tabindex="0"
-                                                            @pointerup=${() =>
-                                                                this._changePage(
-                                                                    specObj
-                                                                        .metas
-                                                                        .dotpath,
+                                                  >
+                                                      ${this.state.activeNavigationFolders.includes(
+                                                          sourceId,
+                                                      )
+                                                          ? html`
+                                                                ${unsafeHTML(
+                                                                    this.props
+                                                                        .specs
+                                                                        .folderOpen,
                                                                 )}
-                                                        >
-                                                            <div>
-                                                                <i
-                                                                    class="fa-regular fa-file"
-                                                                ></i>
-                                                                <a
-                                                                    >${specObj.title ??
-                                                                    specObj.name}</a
-                                                                >
-                                                            </div>
-                                                        </li>
-                                                    `;
-                                                })}
-                                            </ul>
-                                        </li>
-                                    `;
-                                },
-                            )}
-                        </ul>
-                    </div>
-                </nav>
+                                                            `
+                                                          : html`
+                                                                ${unsafeHTML(
+                                                                    this.props
+                                                                        .specs
+                                                                        .folderClose,
+                                                                )}
+                                                            `}
+                                                      <span tabindex="0"
+                                                          >${sourceObj.title ??
+                                                          sourceId}</span
+                                                      >
+                                                  </div>
+                                                  <ul>
+                                                      ${Object.keys(
+                                                          sourceObj.specs,
+                                                      ).map((dotpath) => {
+                                                          const specObj =
+                                                              sourceObj.specs[
+                                                                  dotpath
+                                                              ];
+                                                          return html`
+                                                              <li
+                                                                  class="${document.location.href.includes(
+                                                                      specObj
+                                                                          .metas
+                                                                          .dotpath,
+                                                                  )
+                                                                      ? 'active'
+                                                                      : ''}"
+                                                                  tabindex="0"
+                                                                  @pointerup=${() =>
+                                                                      this._changePage(
+                                                                          specObj
+                                                                              .metas
+                                                                              .dotpath,
+                                                                      )}
+                                                              >
+                                                                  <div>
+                                                                      <i
+                                                                          class="fa-regular fa-file"
+                                                                      ></i>
+                                                                      <a
+                                                                          >${specObj.title ??
+                                                                          specObj.name}</a
+                                                                      >
+                                                                  </div>
+                                                              </li>
+                                                          `;
+                                                      })}
+                                                  </ul>
+                                              </li>
+                                          `;
+                                      })}
+                                  </ul>
+                              </div>
+                          </nav>
+                      `
+                    : ''}
 
                 <nav
                     class="__editor ${this.state.currentSpecs ? 'active' : ''}"
@@ -560,7 +666,6 @@ export default class SCarpenterComponent extends __SLitComponent {
                     ${this.state.currentSpecs
                         ? html`
                               <s-specs-editor
-                                  id="${this.props.dotpath}"
                                   specs="${JSON.stringify(
                                       this.state.currentSpecs,
                                   )}"
@@ -570,7 +675,7 @@ export default class SCarpenterComponent extends __SLitComponent {
                         : ''}
                 </nav>
 
-                ${this._data.frontspec?.media?.queries
+                ${this._data.frontspec?.media?.queries && this.props.iframe
                     ? html`
                           <style>
                               :root {
@@ -615,7 +720,7 @@ export default class SCarpenterComponent extends __SLitComponent {
                                               )}"
                                           >
                                               ${unsafeHTML(
-                                                  this.props.icons[query],
+                                                  this.props.specs[query],
                                               )}
                                               ${__upperFirst(query)}
                                           </li>

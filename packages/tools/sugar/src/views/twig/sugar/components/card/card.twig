@@ -1,7 +1,9 @@
 <div class="s-card {{ attributes.class }} {{ direction ? 's-card--' ~ direction : '' }} {{ paddingClasses(padding) }} {{ marginClasses(margin) }}" {{ attrs(attributes, ['class'])|raw }}
     s-specs="views.components.card"
+    values="{{ _context|cleanContext|json_encode }}"
 >
-    {% if image %}
+
+    {% if image and image.url %}
         <div class="s-card__img-container">
             <img class="s-card__img" src="{{ image.url }}" alt="{{ image.alt }}" title="{{ image.title }}" />
         </div>

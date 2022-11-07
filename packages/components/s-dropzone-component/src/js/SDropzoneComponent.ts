@@ -1,5 +1,6 @@
 import __SLitComponent from '@coffeekraken/s-lit-component';
 
+import __SPromise from '@coffeekraken/s-promise';
 import { __isFileAccepted, __resetFileInput } from '@coffeekraken/sugar/dom';
 import { __isImageUrl } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
@@ -13,14 +14,21 @@ import __css from '../../../../src/css/s-dropzone.css'; // relative to /dist/pkg
 import __define from './define';
 
 export interface ISDropzoneComponentProps {
-    max: number;
+    maxFiles: number;
+    maxSize: number;
     files: string[];
     input: boolean;
     name: string;
+    upload: boolean;
+    uploadUrl: string;
     errorTimeout: Number;
     dropFileIcon: string;
     helpIcon: string;
     i18n: Record<string, string>;
+}
+
+export interface ISDropzoneComponentUploadResult {
+    url: string;
 }
 
 /**
@@ -41,7 +49,7 @@ export interface ISDropzoneComponentProps {
  * @support         edge
  *
  * @event       s-dropzone.change           Dispatched when some file(s) have been droped/selected
- * @event       s-dropzone.reset            Dispatched when the user has reseted the dropzone
+ * @event       s-dropzone.clear            Dispatched when the user has cleared the dropzone
  * @event       s-dropzone                  Dispatched for every events of the dropzone. Check the eventType property in the detail for the exact event type
  *
  * @icon            drop-file           Icon displayed when the dropzone wait for files
@@ -82,6 +90,8 @@ export default class SDropzoneComponent extends __SLitComponent {
 
     state = {
         files: [],
+        uploadPercent: 0,
+        uploadTotalPercent: 0,
     };
 
     _$input;
@@ -98,7 +108,6 @@ export default class SDropzoneComponent extends __SLitComponent {
     async firstUpdated() {
         // select the file input
         this._$input = this.querySelector('input[type="file"]');
-
         if (this.props.files) {
             for (let url of this.props.files) {
                 this.state.files.push({
@@ -106,17 +115,19 @@ export default class SDropzoneComponent extends __SLitComponent {
                     src: url,
                 });
             }
+
             // dispatch an update
             this.componentUtils.dispatchEvent('change', {
                 detail: [...this.state.files],
             });
+            this.requestUpdate();
         }
     }
 
     /**
      * Clear files
      */
-    reset() {
+    clear(dispatchEvent = true) {
         // reset input
         __resetFileInput(this._$input);
         // reset files
@@ -125,8 +136,51 @@ export default class SDropzoneComponent extends __SLitComponent {
         this.classList.remove(this.componentUtils.className('--over'));
         this.classList.remove(this.componentUtils.className('--files'));
         // dispatch an update
-        this.componentUtils.dispatchEvent('reset', {
-            detail: [...this.state.files],
+        if (dispatchEvent) {
+            this.componentUtils.dispatchEvent('clear', {
+                detail: [...this.state.files],
+            });
+        }
+    }
+
+    /**
+     * Upload a file
+     */
+    _uploadFile(file: File): Promise<ISDropzoneComponentUploadResult> {
+        return new __SPromise(async ({ resolve, reject, emit }) => {
+            const formData = new FormData();
+            formData.append('file', file);
+            const request = new XMLHttpRequest();
+            request.open('POST', this.props.uploadUrl);
+
+            // update status
+            this.state.status = 'upload';
+
+            // track upload progress
+            request.upload.addEventListener('progress', function (e) {
+                emit('progress', {
+                    value: (e.loaded / e.total) * 100,
+                });
+            });
+
+            // wait for upload complition
+            request.addEventListener('load', (e) => {
+                const data = JSON.parse(request.response);
+
+                // resolve with the server response
+                resolve(data);
+
+                // dispatch an "file" event
+                this.componentUtils.dispatchEvent('file', {
+                    detail: data,
+                });
+
+                // update status
+                this.state.status = 'idle';
+            });
+
+            // send the file
+            request.send(formData);
         });
     }
 
@@ -158,6 +212,9 @@ export default class SDropzoneComponent extends __SLitComponent {
     _onDrop(e) {
         // prevent default open behavior
         e.preventDefault();
+
+        // clear the input
+        this.clear(false);
 
         // get the droped files
         const files: any[] = [];
@@ -191,6 +248,49 @@ export default class SDropzoneComponent extends __SLitComponent {
     }
 
     /**
+     * Handle the upload if needed
+     */
+    _handleUpload(files: File[]): Promise<ISDropzoneComponentUploadResult[]> {
+        return new Promise(async (resolve, reject) => {
+            const uploadedFilesResults: ISDropzoneComponentUploadResult[] = [];
+
+            // reset the uploadTotalPercent
+            this.state.uploadTotalPercent = 0;
+
+            //  put the component in "upload" state
+            this.classList.add(this.componentUtils.className('--upload'));
+
+            for (let [idx, file] of files.entries()) {
+                const uploadResultPromise = this._uploadFile(file);
+                uploadResultPromise.on('progress', (data) => {
+                    // calculate the total uploaded percentage
+                    this.state.uploadPercent = Math.round(
+                        (100 / (files.length * 100)) * (idx * 100 + data.value),
+                    );
+                    // update ui
+                    // this.requestUpdate();
+                    this.style.setProperty(
+                        '--s-dropzone-upload-percent',
+                        `${this.state.uploadPercent}%`,
+                    );
+                    this.setAttribute(
+                        'upload-percent',
+                        `${this.state.uploadPercent}%`,
+                    );
+                });
+                const uploadResult = await uploadResultPromise;
+                uploadedFilesResults.push(uploadResult);
+            }
+
+            // put the component in "upload" state
+            this.classList.remove(this.componentUtils.className('--upload'));
+
+            // resolve the upload process with all the uploaded files
+            resolve(uploadedFilesResults);
+        });
+    }
+
+    /**
      * Handle droped file(s)
      */
     async _handleDropedFiles(files: any[], filesList: FileList): Promise<void> {
@@ -216,7 +316,7 @@ export default class SDropzoneComponent extends __SLitComponent {
             // loop on every files in the list
             for (let [idx, file] of files.entries()) {
                 // handle maximum files
-                if (idx >= this.props.max) {
+                if (idx >= this.props.maxFiles) {
                     break;
                 }
 
@@ -267,6 +367,9 @@ export default class SDropzoneComponent extends __SLitComponent {
                 }
             }
         });
+
+        // handle upload
+        this._handleUpload(files);
 
         if (this.state.files.length) {
             // set the files in the input field
@@ -358,15 +461,19 @@ export default class SDropzoneComponent extends __SLitComponent {
                                       `,
                                   )}
                               </div>
-                              <button
-                                  class="${this.componentUtils.className(
-                                      '__reset-btn',
-                                      's-btn s-color s-color--error',
-                                  )}"
-                                  @click=${() => this.reset()}
-                              >
-                                  ${this.props.i18n.reset}
-                              </button>
+                              ${this.state.status !== 'upload'
+                                  ? html`
+                                        <button
+                                            class="${this.componentUtils.className(
+                                                '__clear-btn',
+                                                's-btn s-color s-color--error',
+                                            )}"
+                                            @click=${() => this.clear()}
+                                        >
+                                            ${this.props.i18n.clear}
+                                        </button>
+                                    `
+                                  : ''}
                           </div>
                       `}
                 ${this.props.input
@@ -378,24 +485,10 @@ export default class SDropzoneComponent extends __SLitComponent {
                               name="${this.props.name}[]"
                               hidden
                               accept=${this.props.accept ?? '*'}
-                              ?multiple=${this.props.max > 1}
+                              ?multiple=${this.props.maxFiles > 1}
                           />
                       `
                     : ''}
-                ${this.state.files.map(
-                    (file) => html`
-                        ${file.type === 'url'
-                            ? html`
-                                  <input
-                                      type="text"
-                                      name="${this.props.name}[]"
-                                      value="${file.src}"
-                                      hidden
-                                  />
-                              `
-                            : ''}
-                    `,
-                )}
                 ${this.props.accept ?? this.props.help
                     ? html`
                           <div

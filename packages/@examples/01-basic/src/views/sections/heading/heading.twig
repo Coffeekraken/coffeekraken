@@ -1,4 +1,7 @@
-<section class="section-heading {{ paddingClasses(padding) }} {{ marginClasses(margin) }}">
+<section class="section-heading {{ paddingClasses(padding) }} {{ marginClasses(margin) }}"
+    s-specs="views.sections.heading"
+    values="{{ _context|cleanContext|json_encode }}"
+>
     <div class="__bkg">
         {# <video autoplay loop>
             <source src="/dist/video/heading-background.mp4" type="video/mp4" />

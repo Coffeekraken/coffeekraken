@@ -24,9 +24,9 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 class SCarpenterComponentInterface extends s_interface_1.default {
     static get _definition() {
         return {
-            source: {
+            specs: {
                 type: 'String',
-                description: 'Specify a url from where to get the carpenter data back, or a simple id pointing to a HTMLTemplate tag that host the JSON data',
+                description: 'Specify a url from where to get the carpenter data back, directly the JSON data or a simple id pointing to a HTMLTemplate tag that host the JSON data',
                 default: '/carpenter.json',
                 required: true,
             },
@@ -36,13 +36,18 @@ class SCarpenterComponentInterface extends s_interface_1.default {
                 default: 'ajax',
                 required: true,
             },
+            sidebar: {
+                type: 'Boolean',
+                description: 'Specify if you want the left sidebar to jump across all the components/sections/etc...',
+                default: false,
+            },
             pagesLink: {
                 type: 'String',
                 description: 'Specify the link to use to change page. You have access to the %dotpath token that will be replaced by the actual component/section specs dotpath',
                 default: '/carpenter/%dotpath',
             },
             iframe: {
-                type: 'Boolean',
+                type: 'Boolean|String',
                 description: 'Specify if you want to put the page content inside an iframe to allow responsive resizing of your viewport. Can be either a boolean in which an iframe will be created automatically, or an iframe id to use',
                 default: false,
             },
@@ -106,4 +111,4 @@ class SCarpenterComponentInterface extends s_interface_1.default {
     }
 }
 exports.default = SCarpenterComponentInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsNEVBQXFEO0FBRXJEOzs7Ozs7Ozs7Ozs7Ozs7O0dBZ0JHO0FBRUgsTUFBcUIsNEJBQTZCLFNBQVEscUJBQVk7SUFDbEUsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILE1BQU0sRUFBRTtnQkFDSixJQUFJLEVBQUUsUUFBUTtnQkFDZCxXQUFXLEVBQ1AsZ0lBQWdJO2dCQUNwSSxPQUFPLEVBQUUsaUJBQWlCO2dCQUMxQixRQUFRLEVBQUUsSUFBSTthQUNqQjtZQUNELE9BQU8sRUFBRTtnQkFDTCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxXQUFXLEVBQ1AsbUlBQW1JO2dCQUN2SSxPQUFPLEVBQUUsTUFBTTtnQkFDZixRQUFRLEVBQUUsSUFBSTthQUNqQjtZQUNELFNBQVMsRUFBRTtnQkFDUCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxXQUFXLEVBQ1AsbUpBQW1KO2dCQUN2SixPQUFPLEVBQUUscUJBQXFCO2FBQ2pDO1lBQ0QsTUFBTSxFQUFFO2dCQUNKLElBQUksRUFBRSxTQUFTO2dCQUNmLFdBQVcsRUFDUCw4TUFBOE07Z0JBQ2xOLE9BQU8sRUFBRSxLQUFLO2FBQ2pCO1lBQ0QsSUFBSSxFQUFFO2dCQUNGLElBQUksRUFBRSxRQUFRO2dCQUNkLFdBQVcsRUFDUCxrRUFBa0U7Z0JBQ3RFLE9BQU8sRUFBRTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O2lCQXVDUjthQUNKO1lBQ0QsS0FBSyxFQUFFO2dCQUNILElBQUksRUFBRSxRQUFRO2dCQUNkLFdBQVcsRUFBRSxrREFBa0Q7Z0JBQy9ELE9BQU8sRUFBRTtvQkFDTCxNQUFNLEVBQUUsa0RBQWtEO29CQUMxRCxNQUFNLEVBQUUsa0RBQWtEO29CQUMxRCxPQUFPLEVBQUUscUNBQXFDO29CQUM5QyxJQUFJLEVBQUUsK0NBQStDO29CQUNyRCxVQUFVLEVBQUUsMkNBQTJDO29CQUN2RCxXQUFXLEVBQUUsb0NBQW9DO2lCQUNwRDthQUNKO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQXhGRCwrQ0F3RkMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsNEVBQXFEO0FBRXJEOzs7Ozs7Ozs7Ozs7Ozs7O0dBZ0JHO0FBRUgsTUFBcUIsNEJBQTZCLFNBQVEscUJBQVk7SUFDbEUsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxXQUFXLEVBQ1AsdUpBQXVKO2dCQUMzSixPQUFPLEVBQUUsaUJBQWlCO2dCQUMxQixRQUFRLEVBQUUsSUFBSTthQUNqQjtZQUNELE9BQU8sRUFBRTtnQkFDTCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxXQUFXLEVBQ1AsbUlBQW1JO2dCQUN2SSxPQUFPLEVBQUUsTUFBTTtnQkFDZixRQUFRLEVBQUUsSUFBSTthQUNqQjtZQUNELE9BQU8sRUFBRTtnQkFDTCxJQUFJLEVBQUUsU0FBUztnQkFDZixXQUFXLEVBQ1Asd0ZBQXdGO2dCQUM1RixPQUFPLEVBQUUsS0FBSzthQUNqQjtZQUNELFNBQVMsRUFBRTtnQkFDUCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxXQUFXLEVBQ1AsbUpBQW1KO2dCQUN2SixPQUFPLEVBQUUscUJBQXFCO2FBQ2pDO1lBQ0QsTUFBTSxFQUFFO2dCQUNKLElBQUksRUFBRSxnQkFBZ0I7Z0JBQ3RCLFdBQVcsRUFDUCw4TUFBOE07Z0JBQ2xOLE9BQU8sRUFBRSxLQUFLO2FBQ2pCO1lBQ0QsSUFBSSxFQUFFO2dCQUNGLElBQUksRUFBRSxRQUFRO2dCQUNkLFdBQVcsRUFDUCxrRUFBa0U7Z0JBQ3RFLE9BQU8sRUFBRTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O2lCQXVDUjthQUNKO1lBQ0QsS0FBSyxFQUFFO2dCQUNILElBQUksRUFBRSxRQUFRO2dCQUNkLFdBQVcsRUFBRSxrREFBa0Q7Z0JBQy9ELE9BQU8sRUFBRTtvQkFDTCxNQUFNLEVBQUUsa0RBQWtEO29CQUMxRCxNQUFNLEVBQUUsa0RBQWtEO29CQUMxRCxPQUFPLEVBQUUscUNBQXFDO29CQUM5QyxJQUFJLEVBQUUsK0NBQStDO29CQUNyRCxVQUFVLEVBQUUsMkNBQTJDO29CQUN2RCxXQUFXLEVBQUUsb0NBQW9DO2lCQUNwRDthQUNKO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQTlGRCwrQ0E4RkMifQ==

@@ -62,6 +62,10 @@ export default function __set(obj, path, value, settings = {}) {
                 o[n] = {};
             }
         }
+        if (!o[n]) {
+            o[n] = {};
+        }
+
         o = o[n];
     }
 

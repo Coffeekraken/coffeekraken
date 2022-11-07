@@ -15,7 +15,9 @@ import { define as __sFormValidateFeature } from '@coffeekraken/s-form-validate-
 import __SFeature from '@coffeekraken/s-feature';
 
 // Coffeekraken components
-import { define as __sCarpenterComponentDefine } from '@coffeekraken/s-carpenter';
+import __SCarpenterComponent, {
+    define as __sCarpenterComponentDefine,
+} from '@coffeekraken/s-carpenter';
 import __SLitComponent from '@coffeekraken/s-lit-component';
 // import { define as __SCodeExampleWebcomponent } from '@coffeekraken/s-code-example-component';
 // import { define as __SColorPickerComponent } from '@coffeekraken/s-color-picker-component';
@@ -34,61 +36,63 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
 
 // setup conductor
 __SConductor.setup({
-  log: true,
+    log: true,
 });
 
 // Init script
 (async () => {
-  // Set some features defaults
-  __SFeature.setDefaultProps('*', {});
+    // Set some features defaults
+    __SFeature.setDefaultProps('*', {});
 
-  // Set some components defaults
-  __SLitComponent.setDefaultProps('*', {});
+    // Set some components defaults
+    __SLitComponent.setDefaultProps('*', {});
 
-  // Init theme
-  __STheme.init();
+    // Init theme
+    __STheme.init();
 
-  // features
-  __sActivateFeature();
-  __sAppearFeature();
-  // __sFloatingFeature();
-  // __sRefocusFeature();
-  // __sInlineFeature();
-  // __sParallaxFeature();
-  __sFormValidateFeature({});
-  // __sPageTransitionFeature();
+    // features
+    __sActivateFeature();
+    __sAppearFeature();
+    // __sFloatingFeature();
+    // __sRefocusFeature();
+    // __sInlineFeature();
+    // __sParallaxFeature();
+    __sFormValidateFeature({});
+    // __sPageTransitionFeature();
 
-  // Project related components
-  // ...
+    // Project related components
+    // ...
 
-  // Components
-  // __SCodeExampleWebcomponent();
-  // __SFiltrableInputComponent();
-  // __SSidePanelWebcomponent();
-  // __SColorPickerComponent();
-  // __SDatetimePickerComponent();
-  // __SScrollComponent();
-  // __SRangeWebcomponent();
-  // __SSliderComponent({
-  //   // behaviors: {
-  //   //   slideable: {
-  //   //     class: SSliderSlideableBehavior,
-  //   //     settings: {},
-  //   //   },
-  //   // },
-  // });
-  __sCarpenterComponentDefine();
+    // Components
+    // __SCodeExampleWebcomponent();
+    // __SFiltrableInputComponent();
+    // __SSidePanelWebcomponent();
+    // __SColorPickerComponent();
+    // __SDatetimePickerComponent();
+    // __SScrollComponent();
+    // __SRangeWebcomponent();
+    // __SSliderComponent({
+    //   // behaviors: {
+    //   //   slideable: {
+    //   //     class: SSliderSlideableBehavior,
+    //   //     settings: {},
+    //   //   },
+    //   // },
+    // });
+    __sCarpenterComponentDefine();
 
-  // Dashboard
-  // new __SDashboard({
-  //     dashboard: {
-  //         components: {
-  //             's-dashboard-pages': {
-  //                 onSelect: (page) => {
-  //                     document.location.href = page.item.loc;
-  //                 },
-  //             },
-  //         },
-  //     },
-  // });
+    __SCarpenterComponent.create();
+
+    // Dashboard
+    // new __SDashboard({
+    //     dashboard: {
+    //         components: {
+    //             's-dashboard-pages': {
+    //                 onSelect: (page) => {
+    //                     document.location.href = page.item.loc;
+    //                 },
+    //             },
+    //         },
+    //     },
+    // });
 })();

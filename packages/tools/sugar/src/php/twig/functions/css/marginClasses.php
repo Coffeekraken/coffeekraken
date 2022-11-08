@@ -15,6 +15,7 @@
  * This function will returns you the classes like "s-mbs:10" that you can apply where you want in your views.
  *
  * @param       {Array|Object}         $margins           Some margins like "block" => 10, etc...
+ * @param       {Array|Object}          [$frontspec=[]]     The frontspec json to handle things like defaultMedia, etc...
  * @return      {String}                         The resulting css classes
  *
  * @example         php
@@ -25,6 +26,9 @@
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-return new \Twig\TwigFunction('marginClasses', function ($margins) {
-    return \Sugar\css\marginClasses($margins);
+return new \Twig\TwigFunction('marginClasses', function (
+    $margins,
+    $frontspec = []
+) {
+    return \Sugar\css\marginClasses($margins, $frontspec);
 });

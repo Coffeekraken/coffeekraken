@@ -1,0 +1,17 @@
+{
+  "recipe": "generic",
+  "cli": [
+    {
+      "stack": "googleMap",
+      "description": "Google map related actions",
+      "defaultAction": "styles",
+      "actions": {
+        "styles": {
+          "scope": "package",
+          "description": "Generate a google map json style depending on your theme colors",
+          "process": "./dist/pkg/esm/cli/styles.cli.js"
+        }
+      }
+    }
+  ]
+}

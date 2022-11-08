@@ -16,7 +16,8 @@
         "layout": {
             "type": "Text{}",
             "description": "Specify the layout you want in layout string notation by media (mobile, etc...). Default layout must be stored under the \"default\" media",
-            "required": true
+            "required": true,
+            "responsive": true
         },
         "content": {
             "type": "Text",

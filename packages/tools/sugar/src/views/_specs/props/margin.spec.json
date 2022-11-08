@@ -2,6 +2,7 @@
     "type": "Object",
     "title": "Margin",
     "description": "Specify the margins you want around your layout",
+    "responsive": true,
     "props": {
         "all": {
             "extends": "sugar.views.props.space",

@@ -1,0 +1,5 @@
+import __SGoogleMapWebcomponent from './SGoogleMapComponent';
+export default function define(props = {}, tagName = 's-google-map') {
+    __SGoogleMapWebcomponent.define(tagName, __SGoogleMapWebcomponent, props);
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBLE9BQU8sd0JBQXdCLE1BQU0sdUJBQXVCLENBQUM7QUFFN0QsTUFBTSxDQUFDLE9BQU8sVUFBVSxNQUFNLENBQzFCLFFBQTRDLEVBQUUsRUFDOUMsT0FBTyxHQUFHLGNBQWM7SUFFeEIsd0JBQXdCLENBQUMsTUFBTSxDQUFDLE9BQU8sRUFBRSx3QkFBd0IsRUFBRSxLQUFLLENBQUMsQ0FBQztBQUM5RSxDQUFDIn0=

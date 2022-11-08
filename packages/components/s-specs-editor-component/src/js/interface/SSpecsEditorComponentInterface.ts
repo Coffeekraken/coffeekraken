@@ -35,6 +35,18 @@ export default class SSpecsEditorComponentInterface extends __SInterface {
                     'Specify the SSpecs resulting json to use for the editor',
                 required: true,
             },
+            frontspec: {
+                type: 'Object',
+                title: 'Frontspec',
+                description:
+                    'Specify the frontspec json to make use of it for things like media, etc...',
+            },
+            media: {
+                type: 'String',
+                title: 'Specs',
+                description:
+                    'Specify the media on which the specs editor is currently working',
+            },
             icons: {
                 type: 'Object',
                 title: 'Icons',
@@ -45,6 +57,10 @@ export default class SSpecsEditorComponentInterface extends __SInterface {
                     expand: '<i class="fa-solid fa-plus"></i>',
                     remove: '<i class="fa-solid fa-minus"></i>',
                     collapse: '<i class="fa-solid fa-minus"></i>',
+                    mobile: '<i class="fa-solid fa-mobile-screen-button"></i>',
+                    tablet: '<i class="fa-solid fa-tablet-screen-button"></i>',
+                    desktop: '<i class="fa-solid fa-desktop"></i>',
+                    wide: '<i class="fa-solid fa-arrows-left-right"></i>',
                 },
             },
         };

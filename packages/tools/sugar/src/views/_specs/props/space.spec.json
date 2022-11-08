@@ -4,6 +4,10 @@
     "description": "The available spaces option.",
     "options": [
         {
+            "name": "Default",
+            "value": null
+        },
+        {
             "name": "10",
             "value": "10"
         },

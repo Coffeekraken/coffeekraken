@@ -89,10 +89,17 @@ export default class SCarpenterComponent extends __SLitComponent {
         if (__isInIframe() || document.querySelector('s-carpenter')) {
             return;
         }
-        to.innerHTML += `<s-carpenter ${Object.keys(attributes).map((attr) => {
-            const value = attributes[attr];
-            return ` ${attr}="${value}" `;
-        })}></s-carpenter>`;
+
+        const domParser = new DOMParser(),
+            $carpenter = domParser.parseFromString(
+                `<s-carpenter ${Object.keys(attributes).map((attr) => {
+                    const value = attributes[attr];
+                    return ` ${attr}="${value}" `;
+                })}></s-carpenter>`,
+                'text/html',
+            );
+
+        to.appendChild($carpenter.body.children[0]);
     }
 
     static get properties() {
@@ -125,12 +132,13 @@ export default class SCarpenterComponent extends __SLitComponent {
 
     static state = {
         activeNavigationFolders: [],
-        currentSpecs: null,
         hoveredDotpath: null,
         $currentElement: null,
         $hoveredElement: null,
-        activeMedia: 'desktop',
+        activeMedia: null,
     };
+
+    currentSpecs = null;
 
     _values = {};
 
@@ -201,6 +209,9 @@ export default class SCarpenterComponent extends __SLitComponent {
                 this.componentUtils.className('__iframe'),
             );
 
+            // make sure we don't have any src on the iframe
+            this._$iframe.setAttribute('src', 'about:blank');
+
             // manage to add the iframe inside the body
             // alongside with the s-carpenter component
             this.remove();
@@ -211,8 +222,6 @@ export default class SCarpenterComponent extends __SLitComponent {
             // wait for the iframe to be ready
             // @TODO        check for better solution
             await __wait(500);
-
-            console.log('if', this._$iframe);
 
             // inject the iframe content
             __injectIframeContent(this._$iframe, iframeHtml);
@@ -312,28 +321,29 @@ export default class SCarpenterComponent extends __SLitComponent {
                 this.state.$currentElement.id?.trim() &&
                 this.state.$currentElement.id === this.state.$hoveredElement.id
             ) {
+                this._openEditor();
                 return;
             }
 
             // force reset the specs editor
-            this.state.currentSpecs = null;
+            this.currentSpecs = null;
+            this.requestUpdate();
             await __wait();
 
             // try to get the spec from the data fetched at start
             let potentialDotpath = this.state.hoveredDotpath;
             if (this._data.specsMap[potentialDotpath]) {
-                this.state.currentSpecs = this._data.specsMap[potentialDotpath];
+                this.currentSpecs = this._data.specsMap[potentialDotpath];
             } else {
                 potentialDotpath = `${potentialDotpath}.${
                     potentialDotpath.split('.').slice(-1)[0]
                 }`;
                 if (this._data.specsMap[potentialDotpath]) {
-                    this.state.currentSpecs =
-                        this._data.specsMap[potentialDotpath];
+                    this.currentSpecs = this._data.specsMap[potentialDotpath];
                 }
             }
 
-            if (!this.state.currentSpecs) {
+            if (!this.currentSpecs) {
                 return;
             }
 
@@ -342,6 +352,9 @@ export default class SCarpenterComponent extends __SLitComponent {
 
             // open the editor
             this._openEditor();
+
+            // request new UI update
+            this.requestUpdate();
         });
 
         // handle popstate
@@ -412,7 +425,7 @@ export default class SCarpenterComponent extends __SLitComponent {
 
         // save the getted values
         if (values) {
-            this.state.currentSpecs.values = values;
+            this.currentSpecs.values = values;
         }
 
         // set the current element
@@ -458,13 +471,13 @@ export default class SCarpenterComponent extends __SLitComponent {
      */
     async _changePage(dotpath: string, pushState: boolean = true): void {
         const adapterResult = await SCarpenterComponent._registeredAdapters[
-            this.props.specs
+            this.props.adapter
         ].change({
             dotpath,
             $elm: this.props.specs
                 ? this._$document.body.children[0]
                 : this.state.$currentElement,
-            props: specs,
+            props: this.props,
             component: this,
         });
         if (adapterResult) {
@@ -478,16 +491,18 @@ export default class SCarpenterComponent extends __SLitComponent {
                     dotpath,
                 },
                 document.title,
-                this.props.specs.replace('%dotpath', dotpath),
+                this.props.pagesLink.replace('%dotpath', dotpath),
             );
         }
 
         // update the currentSpecs
         const newSpecs = this._data.specsMap[dotpath];
-        if (newSpecs !== this.state.currentSpecs) {
-            this.state.currentSpecs = null;
+        if (newSpecs !== this.currentSpecs) {
+            this.currentSpecs = null;
+            this.requestUpdate();
             await __wait();
-            this.state.currentSpecs = newSpecs;
+            this.currentSpecs = newSpecs;
+            this.requestUpdate();
         }
     }
 
@@ -558,7 +573,7 @@ export default class SCarpenterComponent extends __SLitComponent {
                                       '__logo',
                                   )}"
                               >
-                                  ${unsafeHTML(this.props.specs)}
+                                  ${unsafeHTML(this.props.logo)}
                               </div>
 
                               <div
@@ -597,14 +612,14 @@ export default class SCarpenterComponent extends __SLitComponent {
                                                           ? html`
                                                                 ${unsafeHTML(
                                                                     this.props
-                                                                        .specs
+                                                                        .icons
                                                                         .folderOpen,
                                                                 )}
                                                             `
                                                           : html`
                                                                 ${unsafeHTML(
                                                                     this.props
-                                                                        .specs
+                                                                        .icons
                                                                         .folderClose,
                                                                 )}
                                                             `}
@@ -660,14 +675,14 @@ export default class SCarpenterComponent extends __SLitComponent {
                       `
                     : ''}
 
-                <nav
-                    class="__editor ${this.state.currentSpecs ? 'active' : ''}"
-                >
-                    ${this.state.currentSpecs
+                <nav class="__editor ${this.currentSpecs ? 'active' : ''}">
+                    ${this.currentSpecs
                         ? html`
                               <s-specs-editor
-                                  specs="${JSON.stringify(
-                                      this.state.currentSpecs,
+                                  media="${this.state.activeMedia}"
+                                  specs="${JSON.stringify(this.currentSpecs)}"
+                                  frontspec="${JSON.stringify(
+                                      this._data.frontspec ?? {},
                                   )}"
                               >
                               </s-specs-editor>

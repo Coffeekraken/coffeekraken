@@ -31,6 +31,16 @@ export default class SSpecsEditorComponentInterface extends __SInterface {
                 description: 'Specify the SSpecs resulting json to use for the editor',
                 required: true,
             },
+            frontspec: {
+                type: 'Object',
+                title: 'Frontspec',
+                description: 'Specify the frontspec json to make use of it for things like media, etc...',
+            },
+            media: {
+                type: 'String',
+                title: 'Specs',
+                description: 'Specify the media on which the specs editor is currently working',
+            },
             icons: {
                 type: 'Object',
                 title: 'Icons',
@@ -40,9 +50,13 @@ export default class SSpecsEditorComponentInterface extends __SInterface {
                     expand: '<i class="fa-solid fa-plus"></i>',
                     remove: '<i class="fa-solid fa-minus"></i>',
                     collapse: '<i class="fa-solid fa-minus"></i>',
+                    mobile: '<i class="fa-solid fa-mobile-screen-button"></i>',
+                    tablet: '<i class="fa-solid fa-tablet-screen-button"></i>',
+                    desktop: '<i class="fa-solid fa-desktop"></i>',
+                    wide: '<i class="fa-solid fa-arrows-left-right"></i>',
                 },
             },
         };
     }
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBRXJEOzs7Ozs7Ozs7Ozs7Ozs7OztHQWlCRztBQUVILE1BQU0sQ0FBQyxPQUFPLE9BQU8sOEJBQStCLFNBQVEsWUFBWTtJQUNwRSxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsRUFBRSxFQUFFO2dCQUNBLElBQUksRUFBRSxRQUFRO2dCQUNkLEtBQUssRUFBRSxJQUFJO2dCQUNYLFdBQVcsRUFDUCxrRUFBa0U7YUFDekU7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsS0FBSyxFQUFFLE9BQU87Z0JBQ2QsV0FBVyxFQUNQLHlEQUF5RDtnQkFDN0QsUUFBUSxFQUFFLElBQUk7YUFDakI7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsS0FBSyxFQUFFLE9BQU87Z0JBQ2QsV0FBVyxFQUNQLG1EQUFtRDtnQkFDdkQsT0FBTyxFQUFFO29CQUNMLEdBQUcsRUFBRSxrQ0FBa0M7b0JBQ3ZDLE1BQU0sRUFBRSxrQ0FBa0M7b0JBQzFDLE1BQU0sRUFBRSxtQ0FBbUM7b0JBQzNDLFFBQVEsRUFBRSxtQ0FBbUM7aUJBQ2hEO2FBQ0o7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBRXJEOzs7Ozs7Ozs7Ozs7Ozs7OztHQWlCRztBQUVILE1BQU0sQ0FBQyxPQUFPLE9BQU8sOEJBQStCLFNBQVEsWUFBWTtJQUNwRSxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsRUFBRSxFQUFFO2dCQUNBLElBQUksRUFBRSxRQUFRO2dCQUNkLEtBQUssRUFBRSxJQUFJO2dCQUNYLFdBQVcsRUFDUCxrRUFBa0U7YUFDekU7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsS0FBSyxFQUFFLE9BQU87Z0JBQ2QsV0FBVyxFQUNQLHlEQUF5RDtnQkFDN0QsUUFBUSxFQUFFLElBQUk7YUFDakI7WUFDRCxTQUFTLEVBQUU7Z0JBQ1AsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsS0FBSyxFQUFFLFdBQVc7Z0JBQ2xCLFdBQVcsRUFDUCw0RUFBNEU7YUFDbkY7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsS0FBSyxFQUFFLE9BQU87Z0JBQ2QsV0FBVyxFQUNQLGtFQUFrRTthQUN6RTtZQUNELEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxLQUFLLEVBQUUsT0FBTztnQkFDZCxXQUFXLEVBQ1AsbURBQW1EO2dCQUN2RCxPQUFPLEVBQUU7b0JBQ0wsR0FBRyxFQUFFLGtDQUFrQztvQkFDdkMsTUFBTSxFQUFFLGtDQUFrQztvQkFDMUMsTUFBTSxFQUFFLG1DQUFtQztvQkFDM0MsUUFBUSxFQUFFLG1DQUFtQztvQkFDN0MsTUFBTSxFQUFFLGtEQUFrRDtvQkFDMUQsTUFBTSxFQUFFLGtEQUFrRDtvQkFDMUQsT0FBTyxFQUFFLHFDQUFxQztvQkFDOUMsSUFBSSxFQUFFLCtDQUErQztpQkFDeEQ7YUFDSjtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0oifQ==

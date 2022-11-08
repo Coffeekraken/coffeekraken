@@ -23,5 +23,19 @@ export default function (api) {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         ga: undefined,
+
+        map: {
+            /**
+             * @name            apiKey
+             * @namespace       config.google
+             * @type            String
+             *
+             * Specigy the google map api key to use across your project
+             *
+             * @since           2.0.0
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            apiKey: undefined,
+        },
     };
 }

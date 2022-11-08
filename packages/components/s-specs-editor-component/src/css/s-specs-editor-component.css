@@ -80,4 +80,22 @@
         padding: sugar.padding(30) sugar.padding(30);
         text-align: end;
     }
+
+    .s-specs-editor__help-icon {
+        margin-inline-start: sugar.margin(10);
+    }
+
+    .s-specs-editor__media-icons {
+        float: right;
+    }
+    .s-specs-editor__media-icon {
+        padding-inline: sugar.padding(10);
+
+        &.active {
+            color: sugar.color(accent);
+        }
+        &.current i {
+            opacity: 1;
+        }
+    }
 }

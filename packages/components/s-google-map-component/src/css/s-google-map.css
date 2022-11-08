@@ -1,0 +1,25 @@
+.s-google-map {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    @sugar.border.radius();
+    @sugar.depth (100);
+    aspect-ratio: 1;
+
+    &:not([mounted]) {
+        opacity: 0.001;
+        pointer-events: none;
+    }
+
+    > div[style] {
+        background: none !important;
+    }
+
+    div[style*='bottom: 0px;'] {
+        * {
+            color: white !important;
+            text-shadow: none !important;
+            background: none !important;
+        }
+    }
+}

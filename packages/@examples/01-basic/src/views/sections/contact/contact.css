@@ -47,6 +47,17 @@
     }
   }
 
+  .__marker {
+    background: sugar.color(accent);
+    width: 100px;
+    height: 50px;
+    color: white;
+  }
+  .s-google-map__marker {
+    font-size: 50px;
+    color: sugar.color(accent);
+  }
+
   .__img {
     position: absolute;
     bottom: 0;

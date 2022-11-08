@@ -56,7 +56,6 @@ export default class SDataHandlerJs {
                 data = (await import(`${filePath}?${__uniqid()}`)).default;
             }
             if (typeof data === 'function') data = await data();
-
             resolve(data);
         });
     }

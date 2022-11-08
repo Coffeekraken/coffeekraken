@@ -42,11 +42,8 @@ export default {
     },
 
     async getProps({ $elm }): Promise<any> {
-        console.log('ddd', $elm.getAttribute('values'));
-
         if ($elm.hasAttribute('values')) {
             const data = JSON.parse($elm.getAttribute('values'));
-            console.log('ada', data);
             return data;
         }
 
@@ -56,10 +53,13 @@ export default {
     async setProps({ $elm, props, component }): Promise<HTMLElement> {
         // load the new component
         const $newComponent = await this.load({
-            dotpath: component.state.currentSpecs.metas.dotpath,
+            dotpath: component.currentSpecs.metas.dotpath,
             props,
             component,
         });
+
+        // keep the element id
+        $newComponent.id = $elm.id;
 
         // @ts-ignore
         $elm.after($newComponent);

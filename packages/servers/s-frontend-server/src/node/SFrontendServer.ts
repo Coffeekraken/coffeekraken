@@ -332,7 +332,7 @@ export default class SFrontendServer extends __SClass {
                 }
 
                 // "pages" folder routes
-                pipe(this._registerPagesRoutes());
+                await pipe(this._registerPagesRoutes());
 
                 if (!(await __isPortFree(this._config.port))) {
                     emit('log', {
@@ -354,6 +354,12 @@ export default class SFrontendServer extends __SClass {
                         this._config.port,
                         async () => {
                             await __wait(100);
+
+                            // 404
+                            this._express.get('*', function (req, res) {
+                                res.send('what???', 404);
+                            });
+
                             // server started successfully
                             emit('log', {
                                 value: `<yellow>Frontend server</yellow> started <green>successfully</green>`,

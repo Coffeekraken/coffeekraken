@@ -23,10 +23,18 @@ import __imageWidget from './widgets/imageWidget';
 __SAssetPickerComponentDefine();
 __SDropzoneComponentDefine();
 
+export interface ISSpecsEditorComponentIconsProp {
+    add: string;
+    expand: string;
+    remove: string;
+    collapse: string;
+}
+
 export interface ISSpecsEditorComponentProps {
-    from: string;
-    successTimeout: number;
-    errorTimeout: number;
+    id: string;
+    specs: any;
+    icons: ISSpecsEditorComponentIconsProp;
+    media: string;
 }
 
 /**
@@ -116,18 +124,142 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             }),
         );
     }
+
+    updated(changedProperties: Map<string, unknown>) {
+        console.log('up', changedProperties);
+
+        if (changedProperties.has('media')) {
+            console.log('UP', this.props.media);
+            this.requestUpdate();
+        }
+
+        // super.update(changedProperties);
+    }
+
     mount() {
-        console.log(this.props.specs);
+        console.log(this.props);
     }
 
-    getValueFromPath(path: string): any {
-        const valuePath = path.filter((p) => p !== 'props').join('.');
-        return __get(this.props.specs.values, valuePath);
+    isPathResponsive(path: string): any {
+        const currentPath = [];
+
+        for (let i = 0; i < path.length; i++) {
+            const part = path[i];
+            currentPath.push(part);
+            const propObj = __get(this.props.specs, currentPath.join('.'));
+            if (propObj.responsive) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
-    setValueFromPath(path: string, value: any): any {
-        const valuePath = path.filter((p) => p !== 'props').join('.');
-        return __set(this.props.specs.values, valuePath, value);
+    getValuePathFromPath(path: string, settings?: any): string[] {
+        const finalSettings = {
+            media: null,
+            returnDefault: true,
+            force: false,
+            ...(settings ?? {}),
+        };
+
+        const currentPath = [],
+            noneMediaValuePath = [],
+            mediaValuePath = [],
+            defaultMediaValuePath = [];
+        for (let i = 0; i < path.length; i++) {
+            const part = path[i];
+            if (part !== 'props') {
+                noneMediaValuePath.push(part);
+                mediaValuePath.push(part);
+                defaultMediaValuePath.push(part);
+            }
+            currentPath.push(part);
+            const propObj = __get(this.props.specs, currentPath.join('.'));
+            if (propObj.responsive) {
+                if (finalSettings.media) {
+                    mediaValuePath.push('media');
+                    mediaValuePath.push(finalSettings.media);
+                }
+                defaultMediaValuePath.push('media');
+                defaultMediaValuePath.push(
+                    this.props.frontspec?.media?.defaultMedia ?? 'desktop',
+                );
+            }
+        }
+
+        // current media value
+        if (finalSettings.media) {
+            const mediaScopedValue = __get(
+                this.props.specs.values,
+                mediaValuePath.join('.'),
+            );
+            if (finalSettings.force || mediaScopedValue !== undefined) {
+                return mediaValuePath;
+            }
+        }
+
+        // continue only if we want to get the default
+        // media/value returned
+        if (!finalSettings.force && !finalSettings.returnDefault) {
+            return;
+        }
+
+        if (finalSettings.media) {
+            // default media value
+            const defaultMediaValue = __get(
+                this.props.specs.values,
+                defaultMediaValuePath.join('.'),
+            );
+            if (defaultMediaValue !== undefined) {
+                return defaultMediaValuePath;
+            }
+        }
+
+        // non media "responsive"
+        const noneMediaValue = __get(
+            this.props.specs.values,
+            noneMediaValuePath.join('.'),
+        );
+        if (finalSettings.force || noneMediaValue !== undefined) {
+            return noneMediaValuePath;
+        }
+    }
+
+    getValueFromPath(path: string, settings?: any): any {
+        if (this.isPathResponsive(path)) {
+            console.log('respionsive', path, this.props.media);
+            const valuePath = this.getValuePathFromPath(path, {
+                ...(settings ?? {}),
+                media: this.props.media,
+            });
+            if (valuePath !== undefined) {
+                return __get(this.props.specs.values, valuePath.join('.'));
+            }
+        } else {
+            const valuePath = this.getValuePathFromPath(path, settings);
+            if (valuePath !== undefined) {
+                return __get(this.props.specs.values, valuePath.join('.'));
+            }
+        }
+    }
+
+    setValueFromPath(path: string, value: any, settings?: any): any {
+        // handle responsive values
+        if (this.isPathResponsive(path)) {
+            const valuePath = this.getValuePathFromPath(path, {
+                ...(settings ?? {}),
+                media: this.props.media,
+                force: true,
+            });
+            console.log('va', valuePath, value);
+            __set(this.props.specs.values ?? {}, valuePath.join('.'), value);
+        } else {
+            const valuePath = path.filter((p) => p !== 'props').join('.');
+            __set(this.props.specs.values, valuePath, value);
+        }
+
+        this.requestUpdate();
     }
 
     getWidget(type: string): any {
@@ -219,9 +351,71 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         this.requestUpdate();
     }
 
+    /**
+     * Render the field label with the responsive icons if needed, etc...
+     */
+    _renderLabel(propObj: any, path: string[]) {
+        return html`
+            <span>
+                ${propObj.description
+                    ? html`
+                          <span
+                              class="${this.componentUtils.className(
+                                  '__help-icon',
+                              )} s-tooltip-container"
+                          >
+                              <i class="fa-solid fa-circle-question"></i>
+                              <div
+                                  class="s-tooltip s-tooltip--left s-color s-color--accent"
+                              >
+                                  ${propObj.description}
+                              </div>
+                          </span>
+                      `
+                    : ''}
+                ${propObj.title ?? propObj.id}
+                ${this.props.frontspec?.media?.queries &&
+                this.isPathResponsive(path)
+                    ? html`
+                          <div
+                              class="${this.componentUtils.className(
+                                  '__media-icons',
+                              )}"
+                          >
+                              ${Object.keys(
+                                  this.props.frontspec.media.queries,
+                              ).map((media) => {
+                                  const mediaValue = this.getValueFromPath(
+                                      path,
+                                      {
+                                          media,
+                                          returnDefault: false,
+                                      },
+                                  );
+                                  return html`
+                                      <span
+                                          class="${this.componentUtils.className(
+                                              '__media-icon',
+                                          )} ${mediaValue !== undefined
+                                              ? 'active'
+                                              : ''} ${this.props.media === media
+                                              ? 'current'
+                                              : ''}"
+                                      >
+                                          ${unsafeHTML(this.props.icons[media])}
+                                      </span>
+                                  `;
+                              })}
+                          </div>
+                      `
+                    : ''}
+            </span>
+        `;
+    }
+
     _renderSelectElement(propObj, path) {
-        const value =
-            this.getValueFromPath(path) ?? propObj.value ?? propObj.default;
+        const value = this.getValueFromPath(path) ?? propObj.default;
+
         return html`
             <div class="${this.componentUtils.className('__prop--select')}">
                 <label
@@ -241,36 +435,19 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                         propObj.title ??
                         propObj.id}"
                         path="${path.join('.')}"
-                        value="${value}"
                     >
                         ${propObj.options.map(
                             (option) => html`
                                 <option
                                     value="${option.value}"
-                                    ?selected=${option.value === value}
+                                    ?selected=${option.value === String(value)}
                                 >
                                     ${option.name}
                                 </option>
                             `,
                         )}
                     </select>
-                    <span>
-                        ${propObj.title ?? propObj.id}
-                        ${propObj.description
-                            ? html`
-                                  <span class="s-tooltip-container">
-                                      <i
-                                          class="fa-solid fa-circle-question"
-                                      ></i>
-                                      <div
-                                          class="s-tooltip s-tooltip--left s-color s-color--accent"
-                                      >
-                                          ${propObj.description}
-                                      </div>
-                                  </span>
-                              `
-                            : ''}
-                    </span>
+                    ${this._renderLabel(propObj, path)}
                 </label>
             </div>
         `;
@@ -298,23 +475,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                         path="${path.join('.')}"
                         checked?=${value}
                     />
-                    <span>
-                        ${propObj.title ?? propObj.id}
-                        ${propObj.description
-                            ? html`
-                                  <span class="s-tooltip-container">
-                                      <i
-                                          class="fa-solid fa-circle-question"
-                                      ></i>
-                                      <div
-                                          class="s-tooltip s-tooltip--left s-color s-color--accent"
-                                      >
-                                          ${propObj.description}
-                                      </div>
-                                  </span>
-                              `
-                            : ''}
-                    </span>
+                    ${this._renderLabel(propObj, path)}
                 </label>
             </div>
         `;
@@ -346,23 +507,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                         path="${path.join('.')}"
                         value="${value}"
                     />
-                    <span>
-                        ${propObj.title ?? propObj.id}
-                        ${propObj.description
-                            ? html`
-                                  <span class="s-tooltip-container">
-                                      <i
-                                          class="fa-solid fa-circle-question"
-                                      ></i>
-                                      <div
-                                          class="s-tooltip s-tooltip--left s-color s-color--accent"
-                                      >
-                                          ${propObj.description}
-                                      </div>
-                                  </span>
-                              `
-                            : ''}
-                    </span>
+                    ${this._renderLabel(propObj, path)}
                 </label>
             </div>
         `;

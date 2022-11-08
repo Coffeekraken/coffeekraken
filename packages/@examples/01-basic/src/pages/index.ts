@@ -61,8 +61,10 @@ export default {
             class: 'section-specs',
           },
           layout: {
-            desktop: '1 2 3',
-            mobile: '1 _ 2 _ 3',
+            media: {
+              desktop: '1 2 3',
+              mobile: '1 _ 2 _ 3',
+            },
           },
           content: cardsHtml.join('\n'),
           gap: 50,

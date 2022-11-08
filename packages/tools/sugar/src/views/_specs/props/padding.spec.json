@@ -2,6 +2,7 @@
     "type": "Object",
     "title": "Padding",
     "description": "Specify the paddings you want around your layout",
+    "responsive": true,
     "props": {
         "all": {
             "extends": "sugar.views.props.space",

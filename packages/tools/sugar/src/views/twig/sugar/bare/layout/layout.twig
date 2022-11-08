@@ -3,7 +3,7 @@
     {% set finalId = 's-layout-' ~ uniqid() %}
 {% endif %}
 <style>
-{{ layoutCss(layout, {
+{{ layoutCss(layout.media, {
     selector: '#' ~ finalId ~ '-layout',
     mediaSettings: frontspec.media|toObject
 })|raw }}

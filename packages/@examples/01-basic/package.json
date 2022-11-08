@@ -32,6 +32,7 @@
     "dependencies": {
         "@coffeekraken/s-activate-feature": "^2.0.0-alpha.20",
         "@coffeekraken/s-carpenter": "2.0.0-alpha.20",
+        "@coffeekraken/s-google-map-component": "2.0.0-alpha.20",
         "@coffeekraken/s-postcss-sugar-plugin": "2.0.0-alpha.20",
         "@coffeekraken/s-sugar-feature": "2.0.0-alpha.20",
         "@coffeekraken/sugar": "2.0.0-alpha.20",

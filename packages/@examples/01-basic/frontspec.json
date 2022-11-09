@@ -11,7 +11,7 @@
     },
     "metas": {
         "lang": "en",
-        "title": "01-basic",
+        "title": "@example/01-basic",
         "homepage": "",
         "description": "",
         "themeColor": "#ffbb00",
@@ -21,7 +21,7 @@
             "url": ""
         },
         "og": {
-            "title": "01-basic",
+            "title": "@example/01-basic",
             "description": "",
             "type": "website",
             "url": "",
@@ -58,21 +58,21 @@
         "defaultMedia": "desktop",
         "defaultQuery": "screen",
         "queries": {
-            "mobile": {
-                "minWidth": 0,
-                "maxWidth": 639
-            },
-            "tablet": {
-                "minWidth": 640,
-                "maxWidth": 1279
+            "wide": {
+                "minWidth": 2048,
+                "maxWidth": null
             },
             "desktop": {
                 "minWidth": 1280,
                 "maxWidth": 2047
             },
-            "wide": {
-                "minWidth": 2048,
-                "maxWidth": null
+            "tablet": {
+                "minWidth": 640,
+                "maxWidth": 1279
+            },
+            "mobile": {
+                "minWidth": 0,
+                "maxWidth": 639
             }
         }
     },
@@ -126,7 +126,11 @@
         },
         "cwd": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@examples/01-basic"
     },
-    "google": {},
+    "google": {
+        "map": {
+            "apiKey": "AIzaSyDzFfEzhmYXRTlONUCtMWQ88uHJhsbtXY4"
+        }
+    },
     "margin": {
         "0": 0,
         "10": 0.375,

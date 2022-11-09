@@ -314,6 +314,12 @@ export default class SCarpenterComponent extends __SLitComponent {
             }
         });
 
+        // listen for media change in the specs editor
+        this.addEventListener('s-specs-editor.changeMedia', (e) => {
+            // change the media internaly
+            this._activateMedia(e.detail);
+        });
+
         // listen on click
         this._$toolbar.addEventListener('pointerup', async (e) => {
             // do not activate 2 times the same element

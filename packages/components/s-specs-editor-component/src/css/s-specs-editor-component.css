@@ -9,9 +9,32 @@
         float: right;
     }
     .s-tooltip {
-        min-width: 250px;
+        /* min-width: 250px; */
     }
-    $ .s-specs-editor__repeatable {
+
+    .s-specs-editor__actions {
+        padding: sugar.padding(10);
+    }
+
+    .s-specs-editor__action {
+        display: block;
+        aspect-ratio: 1;
+        width: 2em;
+        text-align: center;
+        background: sugar.color(current, --alpha 0);
+        @sugar.transition (fast);
+        @sugar.border.radius();
+
+        &:hover {
+            background: sugar.color(current, --darken 10%);
+        }
+
+        i {
+            opacity: 1;
+        }
+    }
+
+    .s-specs-editor__repeatable {
         /* background: red; */
         background: sugar.color(base, background, --darken 5%);
     }
@@ -83,6 +106,10 @@
 
     .s-specs-editor__help-icon {
         margin-inline-start: sugar.margin(10);
+
+        .s-tooltip {
+            min-width: 200px;
+        }
     }
 
     .s-specs-editor__media-icons {

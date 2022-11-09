@@ -31,7 +31,7 @@ export default function (api) {
             'postcss-atroot',
             'postcss-extend-rule',
             'postcss-property-lookup',
-            'autoprefixer',
+            // 'autoprefixer',
         ],
         pluginsOptions: {},
     };

@@ -1,6 +1,5 @@
 .section-heading {
     position: relative;
-    z-index: -1;
 
     @sugar.media mobile {
         padding-inline: sugar.padding(30);

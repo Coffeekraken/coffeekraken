@@ -53,6 +53,7 @@ export default class SSpecsEditorComponentInterface extends __SInterface {
                 description:
                     'Specify some icons html used across the interface',
                 default: {
+                    clear: '<i class="fa-solid fa-xmark"></i>',
                     add: '<i class="fa-solid fa-plus"></i>',
                     expand: '<i class="fa-solid fa-plus"></i>',
                     remove: '<i class="fa-solid fa-minus"></i>',

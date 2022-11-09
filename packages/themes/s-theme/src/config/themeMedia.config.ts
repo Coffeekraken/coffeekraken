@@ -8,8 +8,9 @@ export default function (api) {
          * @default           <=
          *
          * Specify the default action to apply if you don't specify one in your media
-         * mixin call like ```@include Sugar.media('tablet') {...}```. If the defaultAction is set to ">=",
-         * the above media will be the same as ```@include Sugar.media('>=tablet') {...}```
+         * mixin call like ```@sugar.media('tablet') {...}```. If the defaultAction is set to ">=",
+         * the above media will be the same as ```@sugar.media('>=tablet') {...}```
+         * Note that by default it is set to "<=" which mean "desktop first"
          *
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

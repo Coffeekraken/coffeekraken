@@ -44,10 +44,10 @@ namespace Sugar\css;
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function buildMediaQuery($media, $params = null)
+function buildMediaQuery($media, $frontspecMedia = null)
 {
     $finalParams = (object) [
-        'defaultAction' => '>=',
+        'defaultAction' => '<=',
         'defaultQuery' => 'screen',
         'queries' => [
             'mobile' => [
@@ -69,8 +69,11 @@ function buildMediaQuery($media, $params = null)
         ],
     ];
 
-    $finalParams = (object) $params;
+    $finalParams = (object) $frontspecMedia;
     $finalParams = (object) \Sugar\convert\toArray($finalParams);
+
+    // sort the media
+    $finalParams = \Sugar\frontspec\sortMedia($finalParams);
 
     $queries = [];
 
@@ -112,7 +115,7 @@ function buildMediaQuery($media, $params = null)
             $action = $firstChar;
         }
 
-        $mediaQueryConfig = $finalParams->queries[$mediaName];
+        $mediaQueryConfig = $finalParams->queries->$mediaName;
 
         if (!$mediaQueryConfig) {
             throw new \Exception(
@@ -123,8 +126,8 @@ function buildMediaQuery($media, $params = null)
         }
 
         $queryList = [];
-        foreach (array_keys($mediaQueryConfig) as $prop) {
-            $value = $mediaQueryConfig[$prop];
+        foreach (array_keys((array) $mediaQueryConfig) as $prop) {
+            $value = $mediaQueryConfig->$prop;
 
             if ($value == null) {
                 continue;

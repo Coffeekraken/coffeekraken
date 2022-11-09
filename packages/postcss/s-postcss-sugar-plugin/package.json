@@ -13,6 +13,7 @@
         "@coffeekraken/s-env": "^2.0.0-alpha.20",
         "@coffeekraken/s-event-emitter": "^2.0.0-alpha.20",
         "@coffeekraken/s-file": "^2.0.0-alpha.20",
+        "@coffeekraken/s-frontspec": "^2.0.0-alpha.20",
         "@coffeekraken/s-glob": "^2.0.0-alpha.20",
         "@coffeekraken/s-interface": "^2.0.0-alpha.20",
         "@coffeekraken/s-process": "^2.0.0-alpha.20",

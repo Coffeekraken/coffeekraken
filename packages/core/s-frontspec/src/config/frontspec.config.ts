@@ -1,3 +1,4 @@
+import __STheme from '@coffeekraken/s-theme';
 import { __readJson } from '@coffeekraken/sugar/fs';
 import { __ipAddress } from '@coffeekraken/sugar/network';
 import { __deepMerge } from '@coffeekraken/sugar/object';
@@ -43,7 +44,7 @@ export default function (api) {
                         'Specify the responsive specifications like the queries (breakpoints), default action, etc...',
                     type: 'object',
                     get value() {
-                        return api.theme.media;
+                        return __STheme.sortMedia(api.theme.media);
                     },
                 },
                 views: {

@@ -1,6 +1,6 @@
 import __SColor from '@coffeekraken/s-color';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import { __get } from '@coffeekraken/sugar/object';
+import { __get, __sort } from '@coffeekraken/sugar/object';
 import __set from '@coffeekraken/sugar/shared/object/set';
 // import __micromatch from 'micromatch';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
@@ -170,6 +170,41 @@ export interface ISThemeColor {
 
 export default class SThemeBase extends __SEventEmitter {
     /**
+     * @name            sortMedia
+     * @type            Function
+     * @static
+     *
+     * This function takes as input the "media" object of the `frontspec.json` file and sort the "queries"
+     * depending on the "defaultAction" specified.
+     *
+     * @param       {Object}            media      The media object to process
+     * @return      {Object}                        THe new media object with queries sorted correctly
+     *
+     * @since           2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static sortMedia(media: any): any {
+        // do nothing if the defaultAction is not specified
+        if (!media.defaultAction) {
+            return media;
+        }
+
+        // sort the queries
+        const queries = __sort(media.queries ?? {}, (a, b) => {
+            if (media.defaultAction === '<=') {
+                return a.value.minWidth < b.value.minWidth ? 1 : -1;
+            } else if (media.defaultAction === '>=') {
+                return a.value.minWidth > b.value.minWidth ? 1 : -1;
+            }
+            return 0;
+        });
+
+        media.queries = queries;
+
+        return media;
+    }
+
+    /**
      * @name        theme
      * @type        String
      *
@@ -259,7 +294,7 @@ export default class SThemeBase extends __SEventEmitter {
     }
 
     /**
-     * @name            isDarkMode
+     * @name            isDark
      * @type            Function
      * @static
      *
@@ -272,6 +307,23 @@ export default class SThemeBase extends __SEventEmitter {
      */
     static isDark(): boolean {
         return this.variant === 'dark';
+    }
+
+    /**
+     * @name            isMobileFirst
+     * @type            Function
+     * @static
+     *
+     * This method returns true if the theme is configured to be mobile first.
+     * Mobile first is true when the "config.theme.media.defaultAction" is set to "<="
+     *
+     * @return      {Boolean}               true if variant is dark, false otherwise
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static isMobileFirst(): boolean {
+        return this.getSafe('media.defaultAction') === '>=';
     }
 
     /**
@@ -500,6 +552,9 @@ export default class SThemeBase extends __SEventEmitter {
             const queryList: string[] = [];
 
             Object.keys(mediaQueryConfig).forEach((prop) => {
+                // dash case
+                const dashProp = __dashCase(prop);
+
                 const value = mediaQueryConfig[prop];
                 if (!value) return;
 
@@ -509,49 +564,49 @@ export default class SThemeBase extends __SEventEmitter {
                         'max-width',
                         'min-device-width',
                         'max-device-width',
-                    ].indexOf(prop) !== -1
+                    ].indexOf(dashProp) !== -1
                 ) {
                     if (action === '>') {
                         if (
-                            prop === 'max-width' ||
-                            prop === 'max-device-width'
+                            dashProp === 'max-width' ||
+                            dashProp === 'max-device-width'
                         ) {
                             let argName = 'min-width';
-                            if (prop.includes('-device'))
+                            if (dashProp.includes('-device'))
                                 argName = 'min-device-width';
                             queryList.push(`(${argName}: ${value + 1}px)`);
                         }
                     } else if (action === '<') {
                         if (
-                            prop === 'min-width' ||
-                            prop === 'min-device-width'
+                            dashProp === 'min-width' ||
+                            dashProp === 'min-device-width'
                         ) {
                             let argName = 'max-width';
-                            if (prop.includes('-device'))
+                            if (dashProp.includes('-device'))
                                 argName = 'max-device-width';
                             queryList.push(`(${argName}: ${value}px)`);
                         }
                     } else if (action === '=') {
-                        queryList.push(`(${prop}: ${value}px)`);
+                        queryList.push(`(${dashProp}: ${value}px)`);
                     } else if (action === '>=') {
                         if (
-                            prop === 'min-width' ||
-                            prop === 'min-device-width'
+                            dashProp === 'min-width' ||
+                            dashProp === 'min-device-width'
                         ) {
-                            queryList.push(`(${prop}: ${value}px)`);
+                            queryList.push(`(${dashProp}: ${value}px)`);
                         }
                     } else if (action === '<=') {
                         if (
-                            prop === 'max-width' ||
-                            prop === 'max-device-width'
+                            dashProp === 'max-width' ||
+                            dashProp === 'max-device-width'
                         ) {
-                            queryList.push(`(${prop}: ${value}px)`);
+                            queryList.push(`(${dashProp}: ${value}px)`);
                         }
                     } else {
-                        queryList.push(`(${prop}: ${value}px)`);
+                        queryList.push(`(${dashProp}: ${value}px)`);
                     }
                 } else {
-                    queryList.push(`(${prop}: ${value}px)`);
+                    queryList.push(`(${dashProp}: ${value}px)`);
                 }
             });
 
@@ -1230,7 +1285,14 @@ export default class SThemeBase extends __SEventEmitter {
         return this._cachedConfig;
     }
     get(dotPath, preventThrow: boolean = false): any {
-        const value = __get(this._config, dotPath);
+        let value = __get(this._config, dotPath);
+
+        if (value && dotPath === 'media') {
+            // sort the media requested
+            // @ts-ignore
+            value = this.constructor.sortMedia(value);
+        }
+
         if (value === undefined && !preventThrow) {
             throw new Error(
                 `<red>[${this.constructor.name}]</red> Sorry but the requested "<yellow>${this.id}</yellow>" theme config "<cyan>${dotPath}</cyan>" does not exists...`,

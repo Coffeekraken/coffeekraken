@@ -92,86 +92,59 @@ export default function ({
         ? finalParams.query.split(/[\s,\,]/gm).map((l) => l.trim())
         : Object.keys(mediaConfig.queries);
 
+    const sortedMedias = [];
+    Object.keys(mediaConfig.queries ?? {}).forEach(m => {
+        if (medias.includes(m)) {
+            sortedMedias.push(m);
+        }
+    })
+
     if (!_postProcessorRegistered) {
         _postProcessorRegistered = true;
 
         registerPostProcessor((root) => {
-            let inMedia, mediaRule;
-
-            const rootNodes = [...root.nodes];
-
-            rootNodes.forEach((node) => {
-                if (
-                    node.type === 'comment' &&
-                    node.text.trim().match(/^\!\sSMEDIA:[a-zA-Z0-9]+$/)
-                ) {
-                    inMedia = node.text.split(':')[1];
-                    mediaRule = new postcssApi.AtRule({
-                        name: 'media',
-                        params: __STheme
-                            .buildMediaQuery(inMedia)
-                            .replace('@media ', ''),
-                    });
-                    node.replaceWith(mediaRule);
-                    return;
+            root.nodes.forEach((node) => {
+                if (node._sMediaRule) {
+                    // node.remove();
                 }
-                if (
-                    node.type === 'comment' &&
-                    node.text.trim().match(/^\!\sSENDMEDIA:[a-zA-Z0-9]+$/)
-                ) {
-                    inMedia = null;
-                    mediaRule = null;
-                    node.remove();
-                    return;
-                }
-                if (inMedia) {
-                    if (node.type === 'comment') return;
-                    if (node.selector === ':root') return;
-
-                    if (!node.selector) {
-                        mediaRule.append(node);
-                    } else {
-                        let sels = node.selector
-                            .split(',')
-                            .map((l) => l.trim());
+                if (node.name === 'media' && node._sMedia) {
+                    node.nodes = [...node.nodes.map(n => {
+                        if (!n.selector) {
+                            return n;
+                        }
+                        let sels = n.selector.split(',').map((l) => l.trim());
                         sels = sels.map((sel) => {
                             const selectors = sel.match(/\.[a-zA-Z0-9_-]+/gm);
                             if (!selectors) return sel;
                             selectors.forEach((selector) => {
                                 sel = sel.replace(
                                     selector,
-                                    `${selector}___${inMedia}`,
+                                    `${selector}___${node._sMedia}`,
                                 );
                             });
                             return sel;
                         });
-                        node.selector = sels.join(',');
-                        mediaRule.append(node);
-                    }
+                        n.selector = sels.join(',');
+                        return n;
+                    })]
                 }
-            });
+            }
         });
     }
 
-    let refChildNode = atRule;
+    let refNode = atRule;
+    atRule._sMediaRule = true;
 
-    medias.forEach((media) => {
-        refChildNode.parent.insertBefore(
-            refChildNode,
-            postcss.parse(`/*! SMEDIA:${media} */`),
-        );
+    sortedMedias.forEach((media) => {
 
-        atRule.nodes.forEach((node) => {
-            const clonedNode = node.clone();
-            refChildNode.parent.insertAfter(refChildNode, clonedNode);
-            refChildNode = clonedNode;
-        });
-
-        refChildNode.parent.insertAfter(
-            refChildNode,
-            postcss.parse(`/*! SENDMEDIA:${media} */`),
-        );
+        const newRule = refNode.clone();
+        newRule.name = 'media';
+        newRule.params = __STheme.buildMediaQuery(media).replace('@media ', '');
+        newRule._sMedia = media;
+        refNode.parent.insertAfter(refNode, newRule);
+        if (refNode.name.startsWith('sugar')) {
+            refNode.remove();
+        }
+        refNode = newRule;
     });
-
-    atRule.remove();
 }

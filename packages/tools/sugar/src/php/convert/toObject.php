@@ -25,6 +25,10 @@ namespace Sugar\convert;
  */
 function toObject($array)
 {
+    if (!is_array($array)) {
+        $array = (array) $array;
+    }
+
     $obj = new \stdClass();
 
     if (is_object($array)) {

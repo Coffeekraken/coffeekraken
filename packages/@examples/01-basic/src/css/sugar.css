@@ -14,9 +14,10 @@
 * Generate media scoped classes to use like "@mobile s-pbe:100", etc...
 * that depends on your theme configuration
 */
-/* @sugar.media.classes ('mobile,tablet') {
-    @sugar.classes();
-} */
+@sugar.media.classes ('mobile,tablet') {
+  /* @sugar.margin.classes(); */
+  @sugar.padding.classes();
+}
 
 /* @sugar.ui.menu.classes(); */
 

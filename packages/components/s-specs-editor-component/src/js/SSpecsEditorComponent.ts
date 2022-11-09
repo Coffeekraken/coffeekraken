@@ -5,6 +5,8 @@ import { __delete, __get, __set } from '@coffeekraken/sugar/object';
 import { define as __SAssetPickerComponentDefine } from '@coffeekraken/s-asset-picker-component';
 import { define as __SDropzoneComponentDefine } from '@coffeekraken/s-dropzone-component';
 
+import __STheme from '@coffeekraken/s-theme';
+
 import { __querySelectorUp } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __lowerFirst } from '@coffeekraken/sugar/string';
@@ -24,6 +26,7 @@ __SAssetPickerComponentDefine();
 __SDropzoneComponentDefine();
 
 export interface ISSpecsEditorComponentIconsProp {
+    clear: string;
     add: string;
     expand: string;
     remove: string;
@@ -57,6 +60,10 @@ export interface ISSpecsEditorComponentProps {
  * @support         firefox
  * @support         safari
  * @support         edge
+ *
+ * @event           s-specs-editor.update               Dispatched when the user has updated some properties
+ * @event           s-specs-editor.changeMedia         Dispatched when the user has changed the media from the UI
+ * @event           s-specs-editor                      Dispatched at any events. Check the "eventType" property for the event name
  *
  * @install           shell
  * npm i @coffeekraken/s-clipboard-copy-component
@@ -126,19 +133,12 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     }
 
     updated(changedProperties: Map<string, unknown>) {
-        console.log('up', changedProperties);
-
         if (changedProperties.has('media')) {
-            console.log('UP', this.props.media);
             this.requestUpdate();
         }
-
-        // super.update(changedProperties);
     }
 
-    mount() {
-        console.log(this.props);
-    }
+    mount() {}
 
     isPathResponsive(path: string): any {
         const currentPath = [];
@@ -158,7 +158,6 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     getValuePathFromPath(path: string, settings?: any): string[] {
         const finalSettings = {
             media: null,
-            returnDefault: true,
             force: false,
             ...(settings ?? {}),
         };
@@ -197,42 +196,25 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             if (finalSettings.force || mediaScopedValue !== undefined) {
                 return mediaValuePath;
             }
-        }
-
-        // continue only if we want to get the default
-        // media/value returned
-        if (!finalSettings.force && !finalSettings.returnDefault) {
-            return;
-        }
-
-        if (finalSettings.media) {
-            // default media value
-            const defaultMediaValue = __get(
+        } else {
+            // non media "responsive"
+            const noneMediaValue = __get(
                 this.props.specs.values,
-                defaultMediaValuePath.join('.'),
+                noneMediaValuePath.join('.'),
             );
-            if (defaultMediaValue !== undefined) {
-                return defaultMediaValuePath;
+            if (finalSettings.force || noneMediaValue !== undefined) {
+                return noneMediaValuePath;
             }
-        }
-
-        // non media "responsive"
-        const noneMediaValue = __get(
-            this.props.specs.values,
-            noneMediaValuePath.join('.'),
-        );
-        if (finalSettings.force || noneMediaValue !== undefined) {
-            return noneMediaValuePath;
         }
     }
 
     getValueFromPath(path: string, settings?: any): any {
         if (this.isPathResponsive(path)) {
-            console.log('respionsive', path, this.props.media);
-            const valuePath = this.getValuePathFromPath(path, {
-                ...(settings ?? {}),
+            const finalSettings = {
                 media: this.props.media,
-            });
+                ...(settings ?? {}),
+            };
+            const valuePath = this.getValuePathFromPath(path, finalSettings);
             if (valuePath !== undefined) {
                 return __get(this.props.specs.values, valuePath.join('.'));
             }
@@ -244,15 +226,34 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         }
     }
 
+    clearValueFromPath(path: string, settings?: any): any {
+        // handle responsive values
+        if (this.isPathResponsive(path)) {
+            const valuePath = this.getValuePathFromPath(path, {
+                media: this.props.media,
+                ...(settings ?? {}),
+            });
+            console.log('re', valuePath);
+            __delete(this.props.specs.values ?? {}, valuePath.join('.'));
+            console.log(this.props.specs.values);
+        } else {
+            const valuePath = path.filter((p) => p !== 'props').join('.');
+            __delete(this.props.specs.values, valuePath);
+        }
+
+        this._update(path);
+
+        this.requestUpdate();
+    }
+
     setValueFromPath(path: string, value: any, settings?: any): any {
         // handle responsive values
         if (this.isPathResponsive(path)) {
             const valuePath = this.getValuePathFromPath(path, {
-                ...(settings ?? {}),
                 media: this.props.media,
                 force: true,
+                ...(settings ?? {}),
             });
-            console.log('va', valuePath, value);
             __set(this.props.specs.values ?? {}, valuePath.join('.'), value);
         } else {
             const valuePath = path.filter((p) => p !== 'props').join('.');
@@ -289,23 +290,24 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         return this._widgets[type];
     }
 
-    _update(e, path: string[], propSpecs: any) {
+    _update(path: string[], propSpecs: any = null, e: any = null) {
         // value path
         const valuePath = path.filter((v) => v !== 'props').join('.');
 
-        switch (e.target.tagName.toLowerCase()) {
-            default:
-                if (e.target.value === propSpecs.default) {
-                    __delete(this.props.specs.values, valuePath);
-                } else {
-                    this.setValueFromPath(path, e.target.value);
-                }
-                break;
+        if (e) {
+            switch (e.target.tagName.toLowerCase()) {
+                default:
+                    if (e.target.value === propSpecs.default) {
+                        __delete(this.props.specs.values, valuePath);
+                    } else {
+                        this.setValueFromPath(path, e.target.value);
+                    }
+                    break;
+            }
         }
 
         this.componentUtils.dispatchEvent('update', {
             detail: {
-                propSpecs: Object.assign({}, propSpecs),
                 propsSpecs: Object.assign({}, this.props.specs),
                 values: Object.assign({}, this.props.specs.values),
             },
@@ -352,6 +354,16 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     }
 
     /**
+     * Changing media
+     */
+    _changeMedia(media: string): void {
+        this.props.media = media;
+        this.componentUtils.dispatchEvent('changeMedia', {
+            detail: media,
+        });
+    }
+
+    /**
      * Render the field label with the responsive icons if needed, etc...
      */
     _renderLabel(propObj: any, path: string[]) {
@@ -365,9 +377,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                               )} s-tooltip-container"
                           >
                               <i class="fa-solid fa-circle-question"></i>
-                              <div
-                                  class="s-tooltip s-tooltip--left s-color s-color--accent"
-                              >
+                              <div class="s-tooltip s-tooltip--left">
                                   ${propObj.description}
                               </div>
                           </span>
@@ -383,29 +393,68 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                               )}"
                           >
                               ${Object.keys(
-                                  this.props.frontspec.media.queries,
-                              ).map((media) => {
-                                  const mediaValue = this.getValueFromPath(
-                                      path,
-                                      {
-                                          media,
-                                          returnDefault: false,
-                                      },
-                                  );
-                                  return html`
-                                      <span
-                                          class="${this.componentUtils.className(
-                                              '__media-icon',
-                                          )} ${mediaValue !== undefined
-                                              ? 'active'
-                                              : ''} ${this.props.media === media
-                                              ? 'current'
-                                              : ''}"
-                                      >
-                                          ${unsafeHTML(this.props.icons[media])}
-                                      </span>
-                                  `;
-                              })}
+                                  __STheme.sortMedia(this.props.frontspec.media)
+                                      .queries,
+                              )
+                                  .reverse()
+                                  .map((media) => {
+                                      const mediaValue = this.getValueFromPath(
+                                          path,
+                                          {
+                                              media,
+                                          },
+                                      );
+                                      return html`
+                                          <span
+                                              class="${this.componentUtils.className(
+                                                  '__media-icon',
+                                              )} ${mediaValue !== undefined &&
+                                              mediaValue !== null
+                                                  ? 'active'
+                                                  : ''} ${this.props.media ===
+                                              media
+                                                  ? 'current'
+                                                  : ''} s-tooltip-container"
+                                          >
+                                              <span
+                                                  @pointerup=${() =>
+                                                      this._changeMedia(media)}
+                                              >
+                                                  ${unsafeHTML(
+                                                      this.props.icons[media],
+                                                  )}
+                                              </span>
+                                              ${mediaValue !== undefined
+                                                  ? html`
+                                                        <div
+                                                            class="s-tooltip s-tooltip--interactive s-color s-color--accent ${this.componentUtils.className(
+                                                                '__actions',
+                                                            )}"
+                                                        >
+                                                            <button
+                                                                class="${this.componentUtils.className(
+                                                                    '__action',
+                                                                )}"
+                                                                @pointerup=${() =>
+                                                                    this.clearValueFromPath(
+                                                                        path,
+                                                                        {
+                                                                            media,
+                                                                        },
+                                                                    )}
+                                                            >
+                                                                ${unsafeHTML(
+                                                                    this.props
+                                                                        .icons
+                                                                        .clear,
+                                                                )}
+                                                            </button>
+                                                        </div>
+                                                    `
+                                                  : ''}
+                                          </span>
+                                      `;
+                                  })}
                           </div>
                       `
                     : ''}
@@ -415,7 +464,6 @@ export default class SSpecsEditorComponent extends __SLitComponent {
 
     _renderSelectElement(propObj, path) {
         const value = this.getValueFromPath(path) ?? propObj.default;
-
         return html`
             <div class="${this.componentUtils.className('__prop--select')}">
                 <label
@@ -425,7 +473,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                     )}"
                 >
                     <select
-                        @change=${(e) => this._update(e, path, propObj)}
+                        @change=${(e) => this._update(path, propObj, e)}
                         name="${path.at(-1)}"
                         class="${this.componentUtils.className(
                             '__select',
@@ -435,12 +483,17 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                         propObj.title ??
                         propObj.id}"
                         path="${path.join('.')}"
+                        .value="${value}"
+                        value="${value}"
                     >
                         ${propObj.options.map(
                             (option) => html`
                                 <option
+                                    .value="${option.value}"
                                     value="${option.value}"
-                                    ?selected=${option.value === String(value)}
+                                    ?selected=${(!value &&
+                                        option.value === null) ||
+                                    option.value === String(value)}
                                 >
                                     ${option.name}
                                 </option>
@@ -454,8 +507,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     }
 
     _renderCheckboxElement(propObj, path) {
-        const value =
-            this.getValueFromPath(path) ?? propObj.value ?? propObj.default;
+        const value = this.getValueFromPath(path) ?? propObj.default;
         return html`
             <div class="${this.componentUtils.className('__prop--checkbox')}">
                 <label
@@ -465,7 +517,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                     )}"
                 >
                     <input
-                        @change=${(e) => this._update(e, path, propObj)}
+                        @change=${(e) => this._update(path, propObj, e)}
                         type="checkbox"
                         name="${path.at(-1)}"
                         class="${this.componentUtils.className(
@@ -482,9 +534,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     }
 
     _renderTextElement(propObj, path) {
-        const value =
-            this.getValueFromPath(path) ?? propObj.value ?? propObj.default;
-
+        const value = this.getValueFromPath(path) ?? propObj.default;
         return html`
             <div class="${this.componentUtils.className('__prop--text')}">
                 <label
@@ -494,7 +544,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                     )}"
                 >
                     <input
-                        @change=${(e) => this._update(e, path, propObj)}
+                        @change=${(e) => this._update(path, propObj, e)}
                         type="text"
                         name="${path.at(-1)}"
                         class="${this.componentUtils.className(

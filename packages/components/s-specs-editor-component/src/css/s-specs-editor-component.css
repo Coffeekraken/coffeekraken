@@ -34,6 +34,16 @@
         }
     }
 
+    .s-specs-editor__prop--checkbox {
+        margin-block-start: sugar.margin(30);
+
+        .s-specs-editor__label {
+            > span {
+                flex-grow: 1;
+            }
+        }
+    }
+
     .s-specs-editor__repeatable {
         /* background: red; */
         background: sugar.color(base, background, --darken 5%);

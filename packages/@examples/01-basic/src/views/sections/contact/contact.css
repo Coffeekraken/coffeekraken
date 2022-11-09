@@ -47,6 +47,14 @@
     }
   }
 
+  s-google-map {
+    width: 43vw;
+    height: 700px;
+    position: relative;
+    top: calc(sugar.padding(80) * -1);
+    margin-bottom: calc(sugar.padding(80) * 2 * -1);
+  }
+
   .__marker {
     background: sugar.color(accent);
     width: 100px;

@@ -233,9 +233,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                 media: this.props.media,
                 ...(settings ?? {}),
             });
-            console.log('re', valuePath);
             __delete(this.props.specs.values ?? {}, valuePath.join('.'));
-            console.log(this.props.specs.values);
         } else {
             const valuePath = path.filter((p) => p !== 'props').join('.');
             __delete(this.props.specs.values, valuePath);
@@ -295,13 +293,19 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         const valuePath = path.filter((v) => v !== 'props').join('.');
 
         if (e) {
+            let finalValue = e.target.value;
+            if (e.currentTarget.type === 'checkbox') {
+                finalValue = e.currentTarget.checked;
+            }
+
             switch (e.target.tagName.toLowerCase()) {
                 default:
-                    if (e.target.value === propSpecs.default) {
-                        __delete(this.props.specs.values, valuePath);
-                    } else {
-                        this.setValueFromPath(path, e.target.value);
-                    }
+                    // @TODO            check to handle "default" in render part and not here...
+                    // if (finalValue === propSpecs.default) {
+                    //     __delete(this.props.specs.values, valuePath);
+                    // } else {
+                    this.setValueFromPath(path, finalValue);
+                    // }
                     break;
             }
         }
@@ -312,6 +316,8 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                 values: Object.assign({}, this.props.specs.values),
             },
         });
+
+        this.requestUpdate();
     }
 
     _toggle(id: string): void {
@@ -500,6 +506,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                             `,
                         )}
                     </select>
+
                     ${this._renderLabel(propObj, path)}
                 </label>
             </div>
@@ -525,8 +532,11 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                             's-switch',
                         )}"
                         path="${path.join('.')}"
-                        checked?=${value}
+                        ?checked=${value !== false &&
+                        value !== null &&
+                        value !== undefined}
                     />
+
                     ${this._renderLabel(propObj, path)}
                 </label>
             </div>

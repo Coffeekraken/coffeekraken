@@ -14,6 +14,7 @@ export interface ISGoogleMapComponentMarker {
     lng: number;
     icon?: string;
     content?: HTMLElement;
+    marker: any;
 }
 
 export interface ISGoogleMapComponentIcons {
@@ -25,6 +26,7 @@ export interface ISGoogleMapComponentProps {
     lat: number;
     lng: number;
     zoom: number;
+    bounds: boolean;
     theme: any;
     icons: ISGoogleMapComponentIcons;
     zoomControl: boolean;
@@ -140,6 +142,34 @@ export default class SGoogleMapComponent extends __SLitComponent {
 
         // create markers
         this._createMarkers(this._markers);
+
+        // apply the zoom if needed
+        if (this.props.zoom) {
+            const boundsListener = this._map.addListener(
+                'bounds_changed',
+                () => {
+                    google.maps.event.removeListener(boundsListener);
+                    this._map.setZoom(this.props.zoom);
+                },
+            );
+        }
+
+        // bounds id needed
+        if (this.props.bounds) {
+            this._bounds(this._markers);
+        }
+    }
+
+    /**
+     * Bounds markers
+     */
+    _bounds(markers: ISGoogleMapComponentMarker[]): void {
+        const bounds = new google.maps.LatLngBounds();
+        for (let marker of markers) {
+            const latLng = new google.maps.LatLng(marker.lat, marker.lng);
+            bounds.extend(latLng);
+        }
+        this._map.fitBounds(bounds);
     }
 
     /**
@@ -165,15 +195,6 @@ export default class SGoogleMapComponent extends __SLitComponent {
                 content: marker.content,
                 position: latLng,
             });
-
-            // } else {
-            //     // @ts-ignore
-            //     marker.marker = new google.maps.Marker({
-            //         position: latLng,
-            //         map: this._map,
-            //         title: 'Hello World!',
-            //     });
-            // }
         }
     }
 

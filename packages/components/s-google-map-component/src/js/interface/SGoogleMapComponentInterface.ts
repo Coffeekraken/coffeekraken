@@ -46,7 +46,12 @@ export default class SGoogleMapComponentInterface extends __SInterface {
             zoom: {
                 type: 'Number',
                 description: 'Specify the google map zoom',
-                default: 8,
+            },
+            bounds: {
+                type: 'Boolean',
+                description:
+                    'Specify if you want your map to be bounds on current markers',
+                default: true,
             },
             icons: {
                 type: 'Object',

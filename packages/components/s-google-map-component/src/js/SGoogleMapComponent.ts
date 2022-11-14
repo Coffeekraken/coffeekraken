@@ -39,15 +39,21 @@ export interface ISGoogleMapComponentProps {
 
 /**
  * @name                SGoogleMapComponent
- * @as                  Clipboard copy
+ * @as                  Google map
  * @namespace           js
  * @type                CustomElement
  * @interface           ./interface/SGoogleMapComponentInterface.ts
- * @menu                Styleguide / UI              /styleguide/ui/s-clipboard-copy
+ * @menu                Styleguide / UI              /styleguide/ui/s-google-map
  * @platform            html
  * @status              beta
  *
- * This component allows you to create easily nice google map with custom markers on it
+ * This component allows you to create easily nice google map with custom marker(s) on it.
+ *
+ * @feature          Framework agnostic. Simply webcomponent.
+ * @feature            Support of (custom) marker(s)
+ * @feature            Declarative markers using simple `s-gogle-map-marker` tag
+ * @feature            Theming your map as usual using the [Google cloud maps styles](https://console.cloud.google.com/google/maps-apis/studio/styles)
+ * @feature              And more...
  *
  * @support         chromium
  * @support         firefox
@@ -62,7 +68,59 @@ export interface ISGoogleMapComponentProps {
  * define();
  *
  * @example         html        Simple google map
- * <s-google-map lat="46.618038" lng="7.057280"></s-google-map>
+ * <s-google-map class="s-ratio:16-9" map-id="7bfb2f702a07e548" lat="46.618038" lng="7.057280" zoom="10">
+ *      <s-google-map-marker lat="46.118038" lng="7.157280">
+ *           <div class="my-map-marker">
+ *              <h1 class="s-typo:h1">
+ *                  Hello google!
+ *              </h1>
+ *           </div>
+ *       </s-google-map-marker>
+ * </s-google-map>
+ *
+ * @example         html        Using the base s-google-map classes
+ * <s-google-map class="s-ratio:16-9" map-id="7bfb2f702a07e548" lat="46.618038" lng="7.057280" zoom="10">
+ *   <s-google-map-marker lat="46.148038" lng="7.257280">
+ *       <div class="s-google-map-marker">
+ *           <div class="s-google-map-marker__icon">
+ *               <i class="fa-solid fa-location-dot s-tc:accent"></i>
+ *           </div>
+ *           <div class="s-google-map-marker__content">
+ *               <h1 class="s-typo:h1">
+ *                  Hello google!
+ *              </h1>
+ *           </div>
+ *       </div>
+ *   </s-google-map-marker>
+ * </s-google-map>
+ *
+ * @example         html        Using multiple markers
+ * <s-google-map class="s-ratio:16-9" map-id="7bfb2f702a07e548" lat="46.618038" lng="7.057280">
+ *   <s-google-map-marker lat="46.148038" lng="7.257280">
+ *       <div class="s-google-map-marker">
+ *           <div class="s-google-map-marker__icon">
+ *               <i class="fa-solid fa-location-dot s-tc:accent"></i>
+ *           </div>
+ *           <div class="s-google-map-marker__content">
+ *               <h1 class="s-typo:h1">
+ *                  Hello google! #1
+ *              </h1>
+ *           </div>
+ *       </div>
+ *   </s-google-map-marker>
+ *   <s-google-map-marker lat="46.248038" lng="7.457280">
+ *       <div class="s-google-map-marker">
+ *           <div class="s-google-map-marker__icon">
+ *               <i class="fa-solid fa-location-dot s-tc:accent"></i>
+ *           </div>
+ *           <div class="s-google-map-marker__content">
+ *               <h1 class="s-typo:h1">
+ *                  Hello google! #2
+ *              </h1>
+ *           </div>
+ *       </div>
+ *   </s-google-map-marker>
+ * </s-google-map>
  *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -96,7 +154,6 @@ export default class SGoogleMapComponent extends __SLitComponent {
 
             // @ts-ignore
             window._initMap = function () {
-                console.log('loaded');
                 resolve(null);
             };
 
@@ -143,21 +200,29 @@ export default class SGoogleMapComponent extends __SLitComponent {
         // create markers
         this._createMarkers(this._markers);
 
-        // apply the zoom if needed
-        if (this.props.zoom) {
-            const boundsListener = this._map.addListener(
-                'bounds_changed',
-                () => {
-                    google.maps.event.removeListener(boundsListener);
-                    this._map.setZoom(this.props.zoom);
-                },
-            );
-        }
+        // handle bounds and zoom
+        this._handleBoundsAndZoom();
+    }
 
-        // bounds id needed
-        if (this.props.bounds) {
-            this._bounds(this._markers);
-        }
+    /**
+     * Handle bounds and zoom
+     */
+    _handleBoundsAndZoom() {
+        // handle bounds and zoom
+        const boundsListener = this._map.addListener('bounds_changed', () => {
+            // do this only once
+            google.maps.event.removeListener(boundsListener);
+
+            // bounds id needed
+            if (this.props.bounds) {
+                this._bounds(this._markers);
+            }
+
+            // apply zoom if specified
+            if (this.props.zoom) {
+                this._map.setZoom(this.props.zoom);
+            }
+        });
     }
 
     /**
@@ -181,13 +246,24 @@ export default class SGoogleMapComponent extends __SLitComponent {
 
             if (!marker.content) {
                 const $defaultMarkerContent = document.createElement('div');
-                $defaultMarkerContent.classList.add(
-                    this.componentUtils.className('__marker'),
-                );
-                $defaultMarkerContent.innerHTML = `
-                    ${this.props.icons.marker}
-                `;
-                marker.content = $defaultMarkerContent;
+
+                const domParser = new DOMParser(),
+                    markerDocument = domParser.parseFromString(
+                        `
+                        <div class="${this.componentUtils.className(
+                            '-marker',
+                        )}">
+                            <div class="${this.componentUtils.className(
+                                '-marker__icon',
+                            )}">
+                                ${this.props.icons.marker}
+                            </div>
+                        </div>
+                    `,
+                        'text/html',
+                    );
+
+                marker.content = markerDocument.body.children[0];
             }
 
             marker.marker = new google.maps.marker.AdvancedMarkerView({

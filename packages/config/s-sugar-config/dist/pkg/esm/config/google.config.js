@@ -10,7 +10,7 @@ export default function (api) {
          * @since           2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        gtm: undefined,
+        gtm: null,
         /**
          * @name            ga
          * @namespace       config.google
@@ -21,7 +21,7 @@ export default function (api) {
          * @since           2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        ga: undefined,
+        ga: null,
         map: {
             /**
              * @name            apiKey
@@ -33,8 +33,8 @@ export default function (api) {
              * @since           2.0.0
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            apiKey: undefined,
+            apiKey: null,
         },
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRztJQUN4QixPQUFPO1FBQ0g7Ozs7Ozs7OztXQVNHO1FBQ0gsR0FBRyxFQUFFLFNBQVM7UUFFZDs7Ozs7Ozs7O1dBU0c7UUFDSCxFQUFFLEVBQUUsU0FBUztRQUViLEdBQUcsRUFBRTtZQUNEOzs7Ozs7Ozs7ZUFTRztZQUNILE1BQU0sRUFBRSxTQUFTO1NBQ3BCO0tBQ0osQ0FBQztBQUNOLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRztJQUN4QixPQUFPO1FBQ0g7Ozs7Ozs7OztXQVNHO1FBQ0gsR0FBRyxFQUFFLElBQUk7UUFFVDs7Ozs7Ozs7O1dBU0c7UUFDSCxFQUFFLEVBQUUsSUFBSTtRQUVSLEdBQUcsRUFBRTtZQUNEOzs7Ozs7Ozs7ZUFTRztZQUNILE1BQU0sRUFBRSxJQUFJO1NBQ2Y7S0FDSixDQUFDO0FBQ04sQ0FBQyJ9

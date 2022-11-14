@@ -25,7 +25,8 @@ export default class SGoogleMapComponentInterface extends __SInterface {
         return {
             apiKey: {
                 type: 'String',
-                description: 'Specify the google api key to use',
+                description:
+                    'Specify the google api key to use. You can specify it in the config.google.map.apiKey configuration for your project if you prefer',
                 default: __SSugarConfig.get('google.map.apiKey'),
                 required: true,
             },
@@ -38,10 +39,12 @@ export default class SGoogleMapComponentInterface extends __SInterface {
             lat: {
                 type: 'Number',
                 description: 'Specify the map latitude',
+                required: true,
             },
             lng: {
                 type: 'Number',
                 description: 'Specify the map longitude',
+                required: true,
             },
             zoom: {
                 type: 'Number',

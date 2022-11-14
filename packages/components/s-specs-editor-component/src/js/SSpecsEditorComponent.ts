@@ -42,19 +42,20 @@ export interface ISSpecsEditorComponentProps {
 
 /**
  * @name                SSpecsEditorComponent
- * @as                  Clipboard copy
- * @namespace           js
+ * @as                  Specs editor
+ * @___namespace           js
  * @type                CustomElement
  * @interface           ./interface/SSpecsEditorComponentInterface.ts
  * @menu                Styleguide / UI              /styleguide/ui/s-clipboard-copy
  * @platform            html
  * @status              beta
  *
- * This component represent a simple "copy to clipboard" component that will copy a "from" target when clicked.
+ * This component represent a simple, fully features "specs" (properties) editor. With it you will be able to pass it a `.spec.json` object
+ * and it will build for you a complete editor
  *
- * @feature           Copy to clipboard
- * @feature           Specify a "from" target to copy using a simple css selector
- * @feature           Default icons for "copy", "copied" and "error"
+ * @feature           Framework agnostic (webcomponent)
+ * @feature           Generate a fully featured specs (.spec.json) editor
+ * @feature             And more...
  *
  * @support         chromium
  * @support         firefox
@@ -64,6 +65,8 @@ export interface ISSpecsEditorComponentProps {
  * @event           s-specs-editor.update               Dispatched when the user has updated some properties
  * @event           s-specs-editor.changeMedia         Dispatched when the user has changed the media from the UI
  * @event           s-specs-editor                      Dispatched at any events. Check the "eventType" property for the event name
+ *
+ * @todo            documentation
  *
  * @install           shell
  * npm i @coffeekraken/s-clipboard-copy-component

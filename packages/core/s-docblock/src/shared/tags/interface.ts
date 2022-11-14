@@ -7,6 +7,7 @@ import {
     __folderPath,
 } from '@coffeekraken/sugar/fs';
 import { __deepMap } from '@coffeekraken/sugar/object';
+import { __resolveTypeString } from '@coffeekraken/sugar/type';
 import __fs from 'fs';
 import __path from 'path';
 
@@ -52,16 +53,23 @@ export default async function interfaceTag(data, blockSettings) {
     let interf;
 
     if (potentialPath.match(/\.ts$/)) {
-        const typescriptBuilder = new __STypescriptBuilder();
-        const result = await typescriptBuilder.build({
-            glob: __path.basename(potentialPath),
-            inDir: __path.dirname(potentialPath),
-            outDir: __path.dirname(potentialPath),
-            formats: ['esm'],
-            save: true,
-        });
+        const result = await __STypescriptBuilder.buildTemporary(potentialPath);
+
+        // const typescriptBuilder = new __STypescriptBuilder();
+        // const result = await typescriptBuilder.build({
+        //     glob: __path.basename(potentialPath),
+        //     inDir: __path.dirname(potentialPath),
+        //     outDir: __path.dirname(potentialPath),
+        //     formats: ['esm'],
+        //     save: true,
+        // });
+        // console.log('_IN', result);
         // @ts-ignore
         interf = await import(potentialPath.replace(/\.ts$/, '.js'));
+        setTimeout(() => {
+            result?.remove?.();
+        });
+
         try {
             __fs.unlinkSync(potentialPath.replace(/\.ts$/, '.js'));
         } catch (e) {}
@@ -76,6 +84,13 @@ export default async function interfaceTag(data, blockSettings) {
     else interf = interf.default;
 
     const interfaceObj = interf.toObject?.() ?? interf;
+
+    for (let [prop, value] of Object.entries(interfaceObj.definition)) {
+        if (value.type && typeof value.type === 'string') {
+            value.type = await __resolveTypeString(`{${value.type}}`);
+        }
+    }
+
     interfaceObj.definition = __deepMap(
         interfaceObj.definition,
         ({ object, prop, value }) => {

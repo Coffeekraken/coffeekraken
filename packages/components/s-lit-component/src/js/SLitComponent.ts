@@ -24,8 +24,6 @@ export interface ISLitComponentDefineSettings {
     window: any;
 }
 
-let _debug = false;
-
 export interface ISLitComponentDefaultProps {
     id: string;
     lnf: string;

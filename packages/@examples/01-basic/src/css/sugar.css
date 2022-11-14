@@ -21,6 +21,9 @@
 
 /* @sugar.ui.menu.classes(); */
 
+@sugar.ui.googleMap.classes();
+@sugar.ui.googleMapMarker.classes();
+
 /* @sugar.partial ('slider') { */
 /* @sugar.ui.slider.classes(); */
 /* } */

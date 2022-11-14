@@ -394,7 +394,7 @@ export default class SBench extends __SClass {
             ],
         });
 
-        this.resolve(this);
+        // this.resolve(this);
 
         return this;
     }

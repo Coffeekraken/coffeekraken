@@ -11,12 +11,7 @@
         background: none !important;
     }
 
-    div[style*='bottom: 0px;'] {
-        * {
-            color: white !important;
-            text-shadow: none !important;
-            background: none !important;
-            opacity: 0.7 !important;
-        }
+    .gm-style {
+        font: inherit;
     }
 }

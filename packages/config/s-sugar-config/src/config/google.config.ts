@@ -10,7 +10,7 @@ export default function (api) {
          * @since           2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        gtm: undefined,
+        gtm: null,
 
         /**
          * @name            ga
@@ -22,7 +22,7 @@ export default function (api) {
          * @since           2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        ga: undefined,
+        ga: null,
 
         map: {
             /**
@@ -35,7 +35,7 @@ export default function (api) {
              * @since           2.0.0
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            apiKey: undefined,
+            apiKey: null,
         },
     };
 }

@@ -3,13 +3,12 @@
 import __SConfigAdapter from '@coffeekraken/s-config-adapter';
 import __SDuration from '@coffeekraken/s-duration';
 import __SEnv from '@coffeekraken/s-env';
-import { __isCyclic, __isNode, __isPlainObject } from '@coffeekraken/sugar/is';
+import { __isNode, __isPlainObject } from '@coffeekraken/sugar/is';
 import {
     __decycle,
     __deepMerge,
     __filter,
     __get,
-    __toPlainObject,
 } from '@coffeekraken/sugar/object';
 import __set from '@coffeekraken/sugar/shared/object/set';
 
@@ -392,12 +391,6 @@ export default class SConfig {
             );
         }
 
-        // make sure we don't have any cyclic references inside our config
-        const cyclic = __isCyclic(this.config);
-        if (cyclic) {
-            throw new Error(cyclic);
-        }
-
         // cache for later
         // this.cache();
 
@@ -408,6 +401,29 @@ export default class SConfig {
                     return false;
                 return true;
             });
+        }
+
+        // Serialize the config just to be sure all is ok
+        try {
+            //     // make sure we don't have any cyclic references inside our config
+            // const cyclic = __isCyclic(this.config);
+            // if (cyclic) {
+            //     throw new Error(cyclic);
+            // }
+
+            JSON.stringify(this.config);
+        } catch (e) {
+            console.error(`[SConfig] Your configuration seems to be invalid... This is usually cause of one of these issue:
+
+- One of your configuration try to access another one that is not available in your current "api.env" which is
+    - Platform: ${this.settings.env.platform}
+    - Environment: ${this.settings.env.env}
+- One of your configuration does create a cyclic structure...
+
+Make sure to check these before anything else...
+            `);
+
+            throw e;
         }
 
         // clear the load timeout
@@ -529,7 +545,7 @@ export default class SConfig {
 
         if (__isPlainObject(finalValue)) {
             // finalValue = JSON.parse(JSON.stringify(finalValue));
-            finalValue = __toPlainObject(finalValue);
+            // finalValue = __toPlainObject(finalValue);
             // finalValue = __derefSync(finalValue);
         }
 

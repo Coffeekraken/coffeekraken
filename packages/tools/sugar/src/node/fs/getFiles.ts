@@ -2,8 +2,8 @@
 import __SFile from '@coffeekraken/s-file';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __chokidar from 'chokidar';
 import { __onProcessExit } from '@coffeekraken/sugar/process';
+import __chokidar from 'chokidar';
 
 /**
  * @name        getFiles
@@ -57,7 +57,7 @@ export default function __getFiles(
 ) {
     return new __SPromise(({ resolve, reject, emit }) => {
         const finalSettings: IGetFilesSettings = {
-            cwd: process.cwd(),
+            cwd: settings?.cwd ?? process.cwd(),
             watch: false,
             ignoreInitial: false,
             sFile: false,

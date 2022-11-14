@@ -827,7 +827,7 @@ export default class SComponentUtils extends __SClass {
                 // class from the component tagname
                 clses.push(
                     `${this.node.tagName.toLowerCase()}${
-                        clsName && !clsName.match(/^__/) ? '-' : ''
+                        clsName && !clsName.match(/^(__|-)/) ? '-' : ''
                     }${clsName}`,
                 );
                 // class from the passed "name" in the settings
@@ -837,7 +837,7 @@ export default class SComponentUtils extends __SClass {
                 ) {
                     clses.push(
                         `${this.settings.name.toLowerCase()}${
-                            clsName && !clsName.match(/^__/) ? '-' : ''
+                            clsName && !clsName.match(/^(__|-)/) ? '-' : ''
                         }${clsName}`,
                     );
                 }

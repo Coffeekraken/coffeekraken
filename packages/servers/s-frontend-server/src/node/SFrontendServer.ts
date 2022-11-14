@@ -357,7 +357,7 @@ export default class SFrontendServer extends __SClass {
 
                             // 404
                             this._express.get('*', function (req, res) {
-                                res.send('what???', 404);
+                                res.status(404).send('what???');
                             });
 
                             // server started successfully

@@ -47,7 +47,7 @@ __sSpecsEditorComponentDefine();
 /**
  * @name                SCarpenterComponent
  * @as                  Carpenter
- * @namespace           js
+ * @___namespace           js
  * @type                CustomElement
  * @interface           ./interface/SCarpenterComponentInterface.ts
  * @platform            html
@@ -55,6 +55,8 @@ __sSpecsEditorComponentDefine();
  *
  * This component represent a carpenter UI that display some components/section/etc... and let you change their properties
  * on the fly to see how it behave
+ *
+ * @todo               documentation
  *
  * @support         chromium
  * @support         firefox

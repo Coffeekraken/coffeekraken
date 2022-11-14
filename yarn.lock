@@ -2474,7 +2474,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-google-map-component@2.0.0-alpha.20, @coffeekraken/s-google-map-component@workspace:packages/components/s-google-map-component":
+"@coffeekraken/s-google-map-component@2.0.0-alpha.20, @coffeekraken/s-google-map-component@^2.0.0-alpha.20, @coffeekraken/s-google-map-component@workspace:packages/components/s-google-map-component":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-google-map-component@workspace:packages/components/s-google-map-component"
   dependencies:
@@ -2937,6 +2937,7 @@ __metadata:
     "@coffeekraken/s-component": ^2.0.0-alpha.20
     "@coffeekraken/s-dropzone-component": ^2.0.0-alpha.20
     "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-theme": ^2.0.0-alpha.20
     "@coffeekraken/sugar": ^2.0.0-alpha.20
     html-tags: ^3.2.0
     known-css-properties: ^0.25.0
@@ -6536,6 +6537,7 @@ __metadata:
     "@coffeekraken/s-frontend-server": ^2.0.0-alpha.20
     "@coffeekraken/s-frontspec": ^2.0.0-alpha.20
     "@coffeekraken/s-glob": ^2.0.0-alpha.20
+    "@coffeekraken/s-google-map-component": ^2.0.0-alpha.20
     "@coffeekraken/s-handlebars": ^2.0.0-alpha.20
     "@coffeekraken/s-images-builder": ^2.0.0-alpha.20
     "@coffeekraken/s-inline-feature": ^2.0.0-alpha.20

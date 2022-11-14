@@ -169,6 +169,7 @@ export default class SSugarCli {
         const config = await __SSugarConfig.load({
             cache: true,
         });
+
         // console.log('LOADED');
         // console.log(__SSugarConfig.get('viewRenderer'));
         // return;

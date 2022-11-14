@@ -6,7 +6,6 @@ import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __dirname, __getFiles } from '@coffeekraken/sugar/fs';
-import { __monorepoToPackageAbsolutePathDeepMap } from '@coffeekraken/sugar/monorepo';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import { __onProcessExit } from '@coffeekraken/sugar/process';
@@ -233,12 +232,14 @@ export default class STypescriptBuilder extends __SBuilder {
 
                 const buildedFiles: ISTypescriptBuilderResultFile[] = [];
 
-                // @ts-ignore
+                // // @ts-ignore
+                // const finalParams: ISTypescriptBuilderBuildParams =
+                //     __monorepoToPackageAbsolutePathDeepMap(
+                //         __STypescriptBuilderBuildParamsInterface.apply(params),
+                //         params.packageRoot ?? process.cwd(),
+                //     );
                 const finalParams: ISTypescriptBuilderBuildParams =
-                    __monorepoToPackageAbsolutePathDeepMap(
-                        __STypescriptBuilderBuildParamsInterface.apply(params),
-                        params.packageRoot ?? process.cwd(),
-                    );
+                    __STypescriptBuilderBuildParamsInterface.apply(params);
 
                 // this can be overrided by customSettings bellow
                 let formats = Array.isArray(finalParams.formats)
@@ -291,6 +292,18 @@ export default class STypescriptBuilder extends __SBuilder {
                         }`,
                     });
                 }
+
+                // @TODO        replace the __getFiles by the cleaner __pool function
+                // const filesPromise1 = __pool(globs, {
+                //     cwd: finalParams.inDir,
+                //     watch: finalParams.watch,
+                // });
+
+                // filesPromise1.on('add,change', (f) => {
+                //     console.log('FILE', f);
+                // });
+
+                // await filesPromise1.ready;
 
                 // watch using chokidar
                 const filesPromise = __getFiles(globs, {
@@ -350,10 +363,10 @@ export default class STypescriptBuilder extends __SBuilder {
                         }
 
                         // "localize" the file paths to the current package root
-                        buildParams = __monorepoToPackageAbsolutePathDeepMap(
-                            buildParams,
-                            finalParams.packageRoot ?? process.cwd(),
-                        );
+                        // buildParams = __monorepoToPackageAbsolutePathDeepMap(
+                        //     buildParams,
+                        //     finalParams.packageRoot ?? process.cwd(),
+                        // );
 
                         // generate all the requested formats
 

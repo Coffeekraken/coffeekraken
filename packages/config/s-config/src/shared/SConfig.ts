@@ -392,7 +392,7 @@ export default class SConfig {
         }
 
         // cache for later
-        // this.cache();
+        this.cache();
 
         // filter the empty config
         if (finalSettings.clean) {

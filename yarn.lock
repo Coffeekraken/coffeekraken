@@ -2791,6 +2791,7 @@ __metadata:
     "@coffeekraken/s-interface": ^2.0.0-alpha.20
     "@coffeekraken/s-process": ^2.0.0-alpha.20
     "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-request": ^2.0.0-alpha.20
     "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
     "@coffeekraken/s-sugar-json": ^2.0.0-alpha.20
     "@coffeekraken/s-theme": ^2.0.0-alpha.20
@@ -3349,12 +3350,14 @@ __metadata:
     is-valid-path: ^0.1.1
     jest-useragent-mock: ^0.1.1
     json-cyclic: ^1.0.2
+    keypress: ^0.2.1
     lodash.clone: ^4.5.0
     lodash.clonedeep: ^4.5.0
     memoizee: ^0.4.15
     micromatch: ^4.0.5
     minimatch: ^3.1.2
     mobile-detect: ^1.4.5
+    node-ipc: ^11.1.0
     object-encode: ^1.0.2
     object-hash: ^2.2.0
     open-graph-scraper: ^4.11.1
@@ -14264,6 +14267,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"keypress@npm:^0.2.1":
+  version: 0.2.1
+  resolution: "keypress@npm:0.2.1"
+  checksum: 8f643113fc64d4ab873c98e6b6da54de511c0b32ecefcaa4315b7466dde6c94cba0b9231421655c71b1878c7bc7c932eb75c19d0d67b6af15677778f37cd3e9e
+  languageName: node
+  linkType: hard
+
 "keyv@npm:^4.0.0":
   version: 4.3.3
   resolution: "keyv@npm:4.3.3"
@@ -15599,6 +15609,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"node-ipc@npm:^11.1.0":
+  version: 11.1.0
+  resolution: "node-ipc@npm:11.1.0"
+  dependencies:
+    event-pubsub: 5.0.3
+    js-message: 1.0.7
+    js-queue: 2.0.2
+    peacenotwar: ^9.1.5
+    strong-type: ^1.0.1
+  checksum: aa50dfe2f8edcfef59b46add7d7865f6a1ae150a58f2abdbca048308e32fb92d00787fdc293d0079e7637083aaa514dd8b724f366cf8f23a6efa904fb0f1469a
+  languageName: node
+  linkType: hard
+
 "node-releases@npm:^2.0.6":
   version: 2.0.6
   resolution: "node-releases@npm:2.0.6"
@@ -16338,7 +16361,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"peacenotwar@npm:^9.1.7":
+"peacenotwar@npm:^9.1.5, peacenotwar@npm:^9.1.7":
   version: 9.1.7
   resolution: "peacenotwar@npm:9.1.7"
   checksum: cab3aa517282df1bab0ca55fe5469b918db5481e8ad59a06fd4c4ebd92767083f535ec65584bc43ad7b33151d74413a99b8ba3adbf170070174581b3f32dfb1c

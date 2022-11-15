@@ -12,24 +12,12 @@
         "@coffeekraken/s-promise": "^2.0.0-alpha.20",
         "@coffeekraken/sugar": "^2.0.0-alpha.20"
     },
-    "main": "dist/pkg/cjs/shared/exports.js",
-    "module": "dist/pkg/esm/shared/exports.js",
+    "main": "dist/pkg/cjs/node/exports.js",
+    "module": "dist/pkg/esm/node/exports.js",
     "exports": {
-        ".": {
-            "require": "./dist/pkg/cjs/shared/exports.js",
-            "import": "./dist/pkg/esm/shared/exports.js"
-        },
-        "./shared/*": {
-            "require": "./dist/pkg/cjs/shared/*.js",
-            "import": "./dist/pkg/esm/shared/*.js"
-        },
-        "./node/*": {
-            "require": "./dist/pkg/cjs/node/*.js",
-            "import": "./dist/pkg/esm/node/*.js"
-        },
-        "./js/*": {
-            "require": "./dist/pkg/cjs/js/*.js",
-            "import": "./dist/pkg/esm/js/*.js"
+        "node": {
+            "require": "./dist/pkg/cjs/node/exports.js",
+            "import": "./dist/pkg/esm/node/exports.js"
         }
     },
     "homepage": "https://coffeekraken.io"

@@ -3,6 +3,7 @@ import __SPromise from '@coffeekraken/s-promise';
 import __uniqid from '../../shared/string/uniqid';
 // import __SIpc from '../ipc/SIpc';
 import { __isChildProcess } from '@coffeekraken/sugar/is';
+import __keypress from 'keypress';
 
 /**
  * @name                hotkey
@@ -125,7 +126,7 @@ export default function __hotkey(key, settings?: Partial<IHotkeySettings>) {
 
         if (!isListenerAlreadyAdded) {
             isListenerAlreadyAdded = true;
-            // __keypress(process.stdin);
+            __keypress(process.stdin);
             process.stdin.on('keypress', _handleKeypress);
             process.stdin.setRawMode(true);
             process.stdin.resume();

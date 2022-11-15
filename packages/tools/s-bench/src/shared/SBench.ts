@@ -1,8 +1,13 @@
 import __SClass from '@coffeekraken/s-class';
 import __SEnv from '@coffeekraken/s-env';
-import { __utcTime } from '@coffeekraken/sugar/datetime';
-import { __deepMerge } from '@coffeekraken/sugar/object';
+import { __formatDuration, __utcTime } from '@coffeekraken/sugar/datetime';
+import { __isChildProcess } from '@coffeekraken/sugar/is';
+import { __hotkey } from '@coffeekraken/sugar/keyboard';
+import { __clamp } from '@coffeekraken/sugar/math';
+import { __deepMerge, __sort } from '@coffeekraken/sugar/object';
+import { __onProcessExit } from '@coffeekraken/sugar/process';
 import __minimatch from 'minimatch';
+import __nodeIpc from 'node-ipc';
 
 // import __SBenchSettingsInterface from './interface/SBenchSettingsInterface';
 
@@ -40,6 +45,15 @@ export interface ISBenchSettings {
     body: string;
 }
 
+export interface ISBenchGlobalStepsBench {
+    duration: number;
+    steps: ISBenchStep[];
+}
+
+export interface ISBenchGlobalSteps {
+    [id: string]: ISBenchGlobalStepsBench;
+}
+
 export interface ISBenchStep {
     id: string;
     type: 'start' | 'end' | 'step';
@@ -50,16 +64,29 @@ export interface ISBenchStep {
 
 export default class SBench extends __SClass {
     /**
-     * @name        _stepsTime
+     * @name        _steps
      * @type        ISBenchStep[]
      * @private
      *
-     * Store the steps times
+     * Store the steps of this particular instance
      *
      * @since       2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     private _steps: ISBenchStep[] = [];
+
+    /**
+     * @name        _steps
+     * @type        ISBenchStep[]
+     * @private
+     * @static
+     *
+     * Store the steps of the whole benches, even child process
+     *
+     * @since       2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    private static _globalSteps: ISBenchGlobalSteps = {};
 
     /**
      * @name            _benchInstancesById
@@ -81,6 +108,19 @@ export default class SBench extends __SClass {
      * This static method allows you to get the current bench environment
      * the process is running in. The bench environment
      */
+
+    /**
+     * @name        _ipc
+     * @type        NodeIpc
+     * @static
+     * @private
+     *
+     * Store the node ipc instance server or client
+     *
+     * @since       2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    private static _ipc;
 
     /**
      * @name        filter
@@ -175,7 +215,7 @@ export default class SBench extends __SClass {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static start(id: string): SBench {
-        this._benchInstancesById[id] = new SBench(id);
+        this._benchInstancesById[id] = new this(id);
 
         const instance = this._benchInstancesById[id];
         return instance.start();
@@ -236,6 +276,120 @@ export default class SBench extends __SClass {
     }
 
     /**
+     * @name            stats
+     * @type            Function
+     * @static
+     *
+     * This method allows you to log some stats about the gathered benches
+     *
+     * @param       {String}        id          The "bench" id to use during the whole benchmark
+     * @return      {SBench}                    The SBench instance for this bench
+     *
+     * @since           2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static stats(id: string, settings?: Partial<ISBenchSettings>): SBench {
+        let sortedBenches = __sort(this._globalSteps, (a, b) => {
+            if (a.duration > b.duration) return -1;
+            return 1;
+        });
+
+        for (let [benchId, benchObj] of Object.entries(sortedBenches)) {
+            benchObj.times = 0;
+            benchObj.steps.forEach((step) => {
+                if (step.type === 'start') {
+                    benchObj.times++;
+                }
+            });
+        }
+
+        const logsAr: string[] = [];
+
+        for (let [benchId, benchObj] of Object.entries(sortedBenches)) {
+            logsAr.push(' ');
+            logsAr.push(
+                `<yellow>${'-'.repeat(process.stdout.columns)}</yellow>`,
+            );
+            let repeat = logsAr.push(
+                `<yellow>${benchId}</yellow>${' '.repeat(
+                    __clamp(20 - benchId.length, 0, 9999),
+                )} Executed <cyan>${benchObj.times}</cyan> time${
+                    benchObj.times > 1 ? 's' : ''
+                } - Total duration: <yellow>${__formatDuration(
+                    benchObj.duration,
+                )}</yellow>`,
+            );
+            logsAr.push(`<grey>${'-'.repeat(process.stdout.columns)}</grey>`);
+            logsAr.push(' ');
+
+            const stepsStats = {};
+
+            benchObj.steps.forEach((step) => {
+                const stepId = `${step.type}-${step.description}`;
+
+                if (!stepsStats[stepId]) {
+                    stepsStats[stepId] = {
+                        type: step.type,
+                        id: step.id,
+                        times: [],
+                        durations: [],
+                    };
+                }
+                if (stepsStats[stepId].times.length) {
+                    stepsStats[stepId].durations.push(
+                        step.time - stepsStats[stepId].times.at(-1),
+                    );
+                }
+                stepsStats[stepId].times.push(step.time);
+            });
+
+            for (let [type, obj] of Object.entries(stepsStats)) {
+                if (!obj.id) {
+                    continue;
+                }
+
+                logsAr.push(
+                    `<cyan>${obj.id}</cyan>${' '.repeat(
+                        __clamp(20 - obj.id.length, 0, 999),
+                    )}${obj.durations
+                        .map(
+                            (d) =>
+                                `${' '.repeat(
+                                    __clamp(4 - `${d}`.length, 0, 999),
+                                )}${
+                                    d >= 1000
+                                        ? `<red>${d}</red>`
+                                        : d >= 100
+                                        ? `<yellow>${d}</yellow>`
+                                        : `${d}`
+                                }`,
+                        )
+                        .join(' ')}`,
+                );
+            }
+
+            logsAr.push(' ');
+        }
+
+        console.log(logsAr.join('\n'));
+    }
+
+    /**
+     * Emit some data through the IPC connection
+     */
+    static _emit(id: string, data: any): void {
+        if (!__isChildProcess()) {
+            return;
+        }
+
+        // @ts-ignore
+        this._ipc.of[`ipc-s-bench-${process.ppid}`].emit('message', {
+            id,
+            data,
+        });
+    }
+
+    /**
      * @name        constructor
      * @type        Function
      * @constructor
@@ -259,6 +413,73 @@ export default class SBench extends __SClass {
                 settings ?? {},
             ),
         );
+
+        // init ipc communication if needed
+        if (!this.constructor._ipc) {
+            this.constructor._ipc = new __nodeIpc.IPC();
+            this.constructor._ipc.config.id = `ipc-s-bench-${process.pid}`;
+            this.constructor._ipc.config.retry = 1500;
+            this.constructor._ipc.config.silent = true;
+
+            if (__isChildProcess()) {
+                this.constructor._ipc.connectTo(
+                    `ipc-s-bench-${process.ppid}`,
+                    () => {
+                        // console.log('UPC ready', process.ppid);
+                    },
+                );
+            } else {
+                this.constructor._ipc.serve(() => {
+                    this.constructor._ipc.server.on(
+                        'message',
+                        (data, socket) => {
+                            if (!this.constructor._globalSteps[data.id]) {
+                                this.constructor._globalSteps[data.id] = {
+                                    duration: 0,
+                                    steps: [],
+                                };
+                            }
+                            if (
+                                this.constructor._globalSteps[data.id].steps
+                                    .length >= 2
+                            ) {
+                                this.constructor._globalSteps[
+                                    data.id
+                                ].duration +=
+                                    this.constructor._globalSteps[
+                                        data.id
+                                    ].steps.at(-1).time -
+                                    this.constructor._globalSteps[
+                                        data.id
+                                    ].steps.at(-2).time;
+                            }
+                            this.constructor._globalSteps[data.id].steps.push(
+                                data.data,
+                            );
+                        },
+                    );
+                });
+                this.constructor._ipc.server.start();
+
+                // log the stats at process exit
+                __onProcessExit(() => {
+                    this.constructor.stats();
+                });
+
+                // some usefull hotkeys
+                __hotkey('shift+c').on('press', () => {
+                    // reseting the current global stats
+                    console.log(
+                        `<yellow>[clear]</yellow> Clearing global gathered benches data...`,
+                    );
+                    this.constructor._globalSteps = {};
+                });
+                __hotkey('shift+s').on('press', () => {
+                    // loging actual data
+                    this.constructor.stats();
+                });
+            }
+        }
     }
 
     /**
@@ -305,6 +526,10 @@ export default class SBench extends __SClass {
                 }]</yellow> Starting bench session at <magenta>${__utcTime()}</magenta>`,
             ],
         });
+
+        if (__isChildProcess()) {
+            this.constructor._emit(this.metas.id, this._steps.at(-1));
+        }
 
         return this;
     }
@@ -353,6 +578,10 @@ export default class SBench extends __SClass {
             ],
         });
 
+        if (__isChildProcess()) {
+            this.constructor._emit(this.metas.id, this._steps.at(-1));
+        }
+
         return this;
     }
 
@@ -395,6 +624,9 @@ export default class SBench extends __SClass {
         });
 
         // this.resolve(this);
+        if (__isChildProcess()) {
+            this.constructor._emit(this.metas.id, this._steps.at(-1));
+        }
 
         return this;
     }

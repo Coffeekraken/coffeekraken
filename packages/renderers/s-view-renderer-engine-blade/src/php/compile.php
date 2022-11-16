@@ -11,6 +11,9 @@ if ($nodeModulesVendorsPath) {
 // use Jenssegers\Blade\Blade;
 use eftec\bladeone\BladeOne;
 
+// set some environment variables
+$_ENV['S_SPECS_VALUES'] = true;
+
 $params = [];
 
 if (file_exists($argv[1])) {

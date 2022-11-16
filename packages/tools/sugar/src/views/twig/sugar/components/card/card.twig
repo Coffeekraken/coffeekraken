@@ -1,6 +1,6 @@
 <div class="s-card {{ attributes.class }} {{ direction ? 's-card--' ~ direction : '' }} {{ paddingClasses(padding, frontspec) }} {{ marginClasses(margin, frontspec) }}" {{ attrs(attributes, ['class'])|raw }}
     s-specs="views.components.card"
-    values="{{ _context|cleanContext|json_encode }}"
+    {{ specsValues(_context)|raw }}
 >
 
     {% if image and image.url %}

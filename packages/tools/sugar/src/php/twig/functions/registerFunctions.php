@@ -61,6 +61,9 @@ function registerFunctions($twig)
     $readSpec = require __DIR__ . '/specs/readSpec.php';
     $twig->addFunction($readSpec);
 
+    $specsValues = require __DIR__ . '/specs/specsValues.php';
+    $twig->addFunction($specsValues);
+
     // String
     $idCompliant = require __DIR__ . '/string/idCompliant.php';
     $twig->addFunction($idCompliant);

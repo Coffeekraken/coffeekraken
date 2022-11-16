@@ -1,4 +1,4 @@
-<section class="section-tabs {{ paddingClasses(padding) }} {{ marginClasses(margin) }}" s-specs="views.sections.tabs" values="{{ _context|cleanContext|json_encode }}">
+<section class="section-tabs {{ paddingClasses(padding) }} {{ marginClasses(margin) }}" s-specs="views.sections.tabs" {{ specsValues(_context)|raw }}>
     <div class="s-container">
         <div class="__layout">
             <div s-appear in="left" delay="400">

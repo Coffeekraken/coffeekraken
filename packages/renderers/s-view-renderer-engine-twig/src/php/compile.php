@@ -1,7 +1,11 @@
 <?php
+
 // require the vendors
 $nodeModulesVendorsPath = realpath(__DIR__ . '/../../vendor/autoload.php');
 require_once $nodeModulesVendorsPath;
+
+// set some environment variables
+$_ENV['S_SPECS_VALUES'] = true;
 
 $params = [];
 

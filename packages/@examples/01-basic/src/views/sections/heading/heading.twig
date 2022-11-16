@@ -1,6 +1,6 @@
 <section class="section-heading {{ paddingClasses(padding) }} {{ marginClasses(margin) }}"
     s-specs="views.sections.heading"
-    values="{{ _context|cleanContext|json_encode }}"
+    {{ specsValues(_context)|raw }}
 >
     <div class="__bkg">
         {# <video autoplay loop>

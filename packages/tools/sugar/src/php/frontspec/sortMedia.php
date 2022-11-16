@@ -30,6 +30,9 @@ function sortMedia($media)
         return $media;
     }
 
+    // get the default media string
+    $defaultMedia = $media->defaultMedia;
+
     $queries = \Sugar\object\sort($media->queries, function ($a, $b) use (
         $media
     ) {
@@ -43,8 +46,24 @@ function sortMedia($media)
         return 0;
     });
 
+    // create new queries object
+    $sortedQueries = (object) [];
+
+    // add the "defaultMedia" first if exists
+    if (isset($queries->$defaultMedia)) {
+        $sortedQueries->$defaultMedia = $queries->$defaultMedia;
+    }
+
+    // add all the others queries next
+    foreach ((array) $queries as $m => $query) {
+        if ($m == $defaultMedia) {
+            continue;
+        }
+        $sortedQueries->$m = $query;
+    }
+
     // override original queries
-    $media->queries = $queries;
+    $media->queries = $sortedQueries;
 
     // return new media object
     return $media;

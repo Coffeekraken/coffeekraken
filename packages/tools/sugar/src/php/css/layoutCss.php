@@ -64,7 +64,9 @@ function layoutCss($layout, $settings = [])
 
         $finalCss = [];
 
-        $queries = (array) $finalParams->mediaSettings->queries;
+        $sortedMedia = \Sugar\frontspec\sortMedia($finalParams->mediaSettings);
+
+        $queries = (array) $sortedMedia->queries;
         $keys = array_keys($queries);
 
         $orderedLayouts = [];
@@ -78,8 +80,6 @@ function layoutCss($layout, $settings = [])
         if (isset($layout['default'])) {
             $orderedLayouts['default'] = $layout['default'];
         }
-
-        $orderedLayouts = array_reverse($orderedLayouts);
 
         foreach ($orderedLayouts as $media => $lay) {
             array_push(

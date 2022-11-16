@@ -24,9 +24,9 @@ import __SPromise from '@coffeekraken/s-promise';
  */
 export default function redirectHandler({ req, res }) {
     return new __SPromise(async ({ resolve, reject, emit }) => {
-        __SBench.start('handlers.redirect');
+        const bench = new __SBench('handlers.redirect');
         res.redirect(req.redirect);
         resolve(req.redirect);
-        __SBench.end('handlers.redirect', {}).log();
+        bench.end();
     });
 }

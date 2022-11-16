@@ -3,12 +3,10 @@
     "extends": [],
     "generated": {
         "extends": [
-            "01-basic",
-            "02-basic",
             "@coffeekraken/cli",
-            "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-asset-picker-component",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
@@ -18,6 +16,7 @@
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
+            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
@@ -48,13 +47,16 @@
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-glob",
+            "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
@@ -71,6 +73,9 @@
             "@coffeekraken/s-request",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -393,11 +398,28 @@
                     "definition": {
                         "active": {
                             "description": "Specify which \"tab\" is active in case of multiple languages examples",
-                            "type": "String"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            }
                         },
                         "toolbar": {
                             "description": "Specify what you want in the toolbar. Currently available item is \"copy\"",
-                            "type": "Array<String>",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Array<String>"
+                            },
                             "values": [
                                 "copy"
                             ],
@@ -407,7 +429,14 @@
                         },
                         "toolbarPosition": {
                             "description": "Specify the toolbar position. Can be \"content\" or \"nav\"",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "content",
                                 "nav"
@@ -416,28 +445,66 @@
                         },
                         "languages": {
                             "description": "Specify some languages that you want to support. Must be \"[key]: language\" object syntax. See [highlight.js doc](https://github.com/highlightjs/highlight.js/blob/main/SUPPORTED_LANGUAGES.md) for supported languages",
-                            "type": "Object",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
                             "default": {}
                         },
                         "items": {
                             "description": "Specify the items to put in your code example",
-                            "type": "Object[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "Object"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Object[]"
+                            },
                             "default": []
                         },
                         "lines": {
                             "description": "Specify how many lines to display at max",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 15,
                             "physical": true
                         },
                         "moreLabel": {
                             "description": "Specify the \"show more\" button label",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "Show more"
                         },
                         "lessLabel": {
                             "description": "Specigy the \"show less\" button label",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "Show less"
                         },
                         "moreAction": {
@@ -445,22 +512,50 @@
                             "values": [
                                 "toggle"
                             ],
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "toggle"
                         },
                         "more": {
                             "description": "Specify if you want to expand the more feature at start or not",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "scrollOnMore": {
                             "description": "Specify if you want to scroll to the code when clicking on the \"show more/less\" button",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         },
                         "scrollToSettings": {
                             "description": "Specify some scrollTo settings",
-                            "type": "Object",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
                             "default": {}
                         }
                     }
@@ -502,11 +597,28 @@
                     "definition": {
                         "active": {
                             "description": "Specify which \"tab\" is active in case of multiple languages examples",
-                            "type": "String"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            }
                         },
                         "toolbar": {
                             "description": "Specify what you want in the toolbar. Currently available item is \"copy\"",
-                            "type": "Array<String>",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Array<String>"
+                            },
                             "values": [
                                 "copy"
                             ],
@@ -516,7 +628,14 @@
                         },
                         "toolbarPosition": {
                             "description": "Specify the toolbar position. Can be \"content\" or \"nav\"",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "content",
                                 "nav"
@@ -525,28 +644,66 @@
                         },
                         "languages": {
                             "description": "Specify some languages that you want to support. Must be \"[key]: language\" object syntax. See [highlight.js doc](https://github.com/highlightjs/highlight.js/blob/main/SUPPORTED_LANGUAGES.md) for supported languages",
-                            "type": "Object",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
                             "default": {}
                         },
                         "items": {
                             "description": "Specify the items to put in your code example",
-                            "type": "Object[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "Object"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Object[]"
+                            },
                             "default": []
                         },
                         "lines": {
                             "description": "Specify how many lines to display at max",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 15,
                             "physical": true
                         },
                         "moreLabel": {
                             "description": "Specify the \"show more\" button label",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "Show more"
                         },
                         "lessLabel": {
                             "description": "Specigy the \"show less\" button label",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "Show less"
                         },
                         "moreAction": {
@@ -554,22 +711,50 @@
                             "values": [
                                 "toggle"
                             ],
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "toggle"
                         },
                         "more": {
                             "description": "Specify if you want to expand the more feature at start or not",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "scrollOnMore": {
                             "description": "Specify if you want to scroll to the code when clicking on the \"show more/less\" button",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         },
                         "scrollToSettings": {
                             "description": "Specify some scrollTo settings",
-                            "type": "Object",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
                             "default": {}
                         }
                     }

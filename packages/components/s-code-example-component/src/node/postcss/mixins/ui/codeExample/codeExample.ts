@@ -97,6 +97,8 @@ export default function ({
     `);
     }
 
+    console.log(finalParams);
+
     // lnf
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
@@ -105,6 +107,8 @@ export default function ({
         switch (finalParams.style) {
             case 'solid':
             default:
+                console.log('COCOOCC');
+
                 vars.push(`
 
 
@@ -112,6 +116,15 @@ export default function ({
                     transition: sugar.transition(ui.codeExample.transition);
                     border-radius: sugar.border.radius(ui.codeExample.borderRadius);
                     @sugar.depth (ui.codeExample.depth);
+                }
+
+                .s-code-example__code {
+                    &:not(:has(.hljs)) {
+                        padding: sugar.padding(ui.codeExample.paddingBlock) sugar.padding(ui.codeExample.paddingInline);
+                    }
+                    .hljs {
+                        padding: sugar.padding(ui.codeExample.paddingBlock) sugar.padding(ui.codeExample.paddingInline) !important;
+                    }
                 }
 
                 .s-code-example__more-bar {

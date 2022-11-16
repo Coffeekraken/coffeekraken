@@ -44,14 +44,17 @@ export default function ({
         '@sugar.ui.label.classes;',
         '@sugar.ui.list.classes;',
         '@sugar.ui.loader.classes;',
-        '@sugar.ui.tabs.classes;',
-        '@sugar.ui.toggle.classes;',
         '@sugar.ui.radio.classes;',
         '@sugar.ui.range.classes;',
         '@sugar.ui.select.classes;',
         '@sugar.ui.switch.classes;',
         '@sugar.ui.table.classes;',
+        '@sugar.ui.tabs.classes;',
+        '@sugar.ui.toggle.classes;',
         '@sugar.ui.tooltip.classes;',
+        // from @coffeekraken/sugar package
+        '@sugar.ui.card.classes;',
+        '@sugar.ui.menu.classes;',
     ];
 
     return cssArray;

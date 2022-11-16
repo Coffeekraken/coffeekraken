@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-import __SBench from '@coffeekraken/s-bench';
 import { __extension } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __fs from 'fs';
@@ -64,7 +63,7 @@ function resolveExtensionFreePath(settings = {}) {
             }
         }
 
-        __SBench.step('request', 'resolveExtensionFreePathMiddleware');
+        res.bench?.step('request', 'resolveExtensionFreePathMiddleware');
 
         return next();
     };

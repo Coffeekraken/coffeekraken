@@ -3,12 +3,10 @@
     "extends": [],
     "generated": {
         "extends": [
-            "01-basic",
-            "02-basic",
             "@coffeekraken/cli",
-            "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-asset-picker-component",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
@@ -18,6 +16,7 @@
             "@coffeekraken/s-code-formatter-prettier",
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
@@ -35,6 +34,7 @@
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
+            "@coffeekraken/s-dropzone-component",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -48,6 +48,7 @@
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-glob",
+            "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
@@ -56,6 +57,7 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
@@ -74,6 +76,7 @@
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
             "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -1004,63 +1007,140 @@
                     "description": "",
                     "definition": {
                         "desaturate": {
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 0,
                             "alias": "d",
                             "description": "Allows you to desaturate the color using a percentage"
                         },
                         "saturate": {
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 0,
                             "alias": "s",
                             "description": "Allows you to saturate the color using a percentage"
                         },
                         "greyscale": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false,
                             "alias": "g",
                             "description": "Allows you to get back the grayscale version of your color"
                         },
                         "spin": {
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 0,
                             "description": "Spin the hue on the passed value (max 360)"
                         },
                         "transparentize": {
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 0,
                             "description": "The amount of transparency to apply between 0-100|0-1"
                         },
                         "alpha": {
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 0,
                             "alias": "a",
                             "description": "The new alpha value to apply between 0-100|0-1"
                         },
                         "opacity": {
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 0,
                             "alias": "o",
                             "description": "The new alpha value to apply between 0-100|0-1"
                         },
                         "opacify": {
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 0,
                             "description": "The amount of transparence to remove between 0-100|0-1"
                         },
                         "darken": {
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 0,
                             "description": "The amount of darkness (of the nightmare of the shadow) to apply between 0-100"
                         },
                         "lighten": {
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 0,
                             "alias": "l",
                             "description": "The amount of lightness (of the sky of the angels) to apply between 0-100"
                         },
                         "invert": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false,
                             "alias": "i",
                             "description": "Specify if you want to invert the color to keep a good contrast ratio with a background for example"
@@ -1108,12 +1188,26 @@
                     "definition": {
                         "returnNewInstance": {
                             "description": "Specify if the methods returns by default a new SColor instance or the same",
-                            "type": "boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "boolean"
+                                    }
+                                ],
+                                "raw": "boolean"
+                            },
                             "default": false
                         },
                         "defaultFormat": {
                             "description": "Specify the default format of the color",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "hex",
                                 "rgb",

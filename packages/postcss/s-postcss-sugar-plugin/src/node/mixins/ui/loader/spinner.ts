@@ -12,8 +12,8 @@ import __STheme from '@coffeekraken/s-theme';
  * Apply the spinner style to any element
  *
  * @param        {String}           [name='s-loader-spinner']               A name for your spinner
- * @param       {String}            [duration='theme.ui.loaderSpinner.duration']        The duration of your spinner animation
- * @param        {String}           [easing='theme.ui.loaderSpinner.easing']            The easing you want for your spinner animation
+ * @param       {String}            [duration='theme.ui.loader.duration']        The duration of your spinner animation
+ * @param        {String}           [easing='theme.ui.loader.easing']            The easing you want for your spinner animation
  * @return      {String}            The generated css
  *
  * @example     css
@@ -34,11 +34,11 @@ class postcssSugarPluginUiLoaderSpinnerMixinInterface extends __SInterface {
             },
             duration: {
                 type: 'String',
-                default: __STheme.get('ui.loaderSpinner.duration'),
+                default: __STheme.get('ui.loader.duration'),
             },
             easing: {
                 type: 'String',
-                default: __STheme.get('ui.loaderSpinner.easing'),
+                default: __STheme.get('ui.loader.easing'),
             },
         };
     }

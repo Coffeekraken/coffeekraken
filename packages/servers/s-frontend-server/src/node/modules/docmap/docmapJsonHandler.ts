@@ -4,9 +4,9 @@ import __SPromise from '@coffeekraken/s-promise';
 
 export default function docmapJsonHandler({ req, res, pageConfig }) {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
-        __SBench.start('data.docmapJsonData');
+        const bench = new __SBench('data.docmapJsonData');
 
-        __SBench.step('data.docmapJsonData', 'beforeDocmapRead');
+        bench.step('beforeDocmapRead');
 
         let docmapJson = {};
 
@@ -15,7 +15,7 @@ export default function docmapJsonHandler({ req, res, pageConfig }) {
             docmapJson = await docmap.read();
         } catch (e) {}
 
-        __SBench.step('data.docmapJsonData', 'afterDocmapRead');
+        bench.step('afterDocmapRead');
 
         res.status(200);
         res.type('application/json');

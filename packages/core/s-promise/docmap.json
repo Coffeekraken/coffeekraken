@@ -3,12 +3,10 @@
     "extends": [],
     "generated": {
         "extends": [
-            "01-basic",
-            "02-basic",
             "@coffeekraken/cli",
-            "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-asset-picker-component",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
@@ -19,6 +17,7 @@
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
+            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
@@ -36,6 +35,7 @@
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
+            "@coffeekraken/s-dropzone-component",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -49,13 +49,16 @@
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-glob",
+            "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
@@ -73,6 +76,7 @@
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
             "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -554,7 +558,14 @@
                     "definition": {
                         "treatCancelAs": {
                             "description": "Specify if a \"cancel\" event/call has to be treated like a \"resolve\", or like a \"reject\" a promise level",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "resolve",
                                 "reject"
@@ -563,37 +574,92 @@
                         },
                         "destroyTimeout": {
                             "description": "Specify after how many milliseconds the promise will be destroyed after a \"finally\" event",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 1
                         },
                         "preventRejectOnThrow": {
                             "description": "Specify if you prefer your promise to be \"resolved\" when an underlying error is catched, or if is has to be rejected normally",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "emitLogErrorEventOnThrow": {
                             "description": "Specify if you want a \"log\" of type \"error\" to be emitted when an underlying error is catched",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         },
                         "resolveAtResolveEvent": {
                             "description": "Specify if youw promise has to be resolved when catching a \"resolve\" event from deeper emitter",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "rejectAtRejectEvent": {
                             "description": "Specify if youw promise has to be rejected when catching a \"reject\" event from deeper emitter",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "resolveProxies": {
                             "description": "Specify some functions to be called just before resolving the promise. This function will take the current promise resolve value and must return the updated value",
-                            "type": "Array<Function>",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Array",
+                                        "of": [
+                                            "Function"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Array<Function>"
+                            },
                             "default": []
                         },
                         "rejectProxies": {
                             "description": "Specify some functions to be called just before rejecting the promise. This function will take the current promise resolve value and must return the updated value",
-                            "type": "Array<Function>",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Array",
+                                        "of": [
+                                            "Function"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Array<Function>"
+                            },
                             "default": []
                         }
                     }
@@ -604,9 +670,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SPromiseSettingsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/shared/interface/SPromiseSettingsInterface.ts",
+                "filename": "SPromiseSettingsInterface.js",
+                "extension": "js",
+                "relPath": "src/shared/interface/SPromiseSettingsInterface.js",
                 "children": {}
             }
         }

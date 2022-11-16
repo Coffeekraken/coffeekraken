@@ -1,24 +1,8 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
 
 class postcssUiCardClassesInterface extends __SInterface {
     static get _definition() {
         return {
-            lnfs: {
-                type: 'String[]',
-                values: ['solid'],
-                default: ['solid'],
-            },
-            defaultLnf: {
-                type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.card.defaultLnf') ?? 'solid',
-            },
-            defaultColor: {
-                type: 'String',
-                values: Object.keys(__STheme.get('color')),
-                default: __STheme.get('ui.card.defaultColor'),
-            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -32,9 +16,6 @@ class postcssUiCardClassesInterface extends __SInterface {
 }
 
 export interface IPostcssUiCardClassesParams {
-    lnfs: 'solid'[];
-    defaultLnf: 'solid';
-    defaultColor: string;
     scope: ('bare' | 'lnf' | 'vr')[];
 }
 
@@ -52,14 +33,89 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiCardClassesParams = {
-        lnfs: ['solid'],
-        defaultLnf: 'solid',
-        defaultColor: 'main',
         scope: ['bare', 'lnf'],
         ...params,
     };
 
     const vars = new CssVars();
+
+    function cardTpl(params) {
+        return `*   <div class="${params.class}">
+                *     <div class="s-card__media">
+                *         <img class="s-card__img" src="https://picsum.photos/1600/900" title="..." alt="..." />
+                *     </div>
+                *     <div class="s-card__content s-spacing:30">
+                *         <h1 class="s-card__title s-typo:h3">
+                *             Hello world
+                *         </h1>
+                *         <p class="s-card__lead s-typo:lead s-tc:accent">
+                *             Lorem ipsum dolor sit amet
+                *         </p>
+                *         <p class="s-card__text s-typo:p">
+                *             Ullamco aute ex mollit enim eu exercitation excepteur consequat laborum. Incididunt eiusmod commodo officia minim consequat enim occaecat est elit cillum. Incididunt pariatur duis ex sint. Qui aliqua pariatur cupidatat exercitation quis ea eu officia. Deserunt esse magna occaecat consectetur. Irure qui velit dolor ipsum qui cillum adipisicing reprehenderit.
+                *         </p>
+                *         <div class="s-card__cta">
+                *            <a class="s-btn s-color:accent">Click me!</a> 
+                *         </div>
+                *     </div>
+                * </div>`;
+    }
+
+    vars.comment(
+        () => `
+      /**
+        * @name          Card
+        * @namespace          sugar.style.ui
+        * @type               Styleguide
+        * @menu           Styleguide / UI        /styleguide/ui/card
+        * @platform       css
+        * @status       beta
+        * 
+        * These classes allows to display nice card with options like direction, spacing, etc...
+        * 
+        * @support      chromium
+        * @support      firefox
+        * @support      safari
+        * @support      edge
+        * 
+        * @install          css
+        * \\@sugar.ui.card.classes;
+        * 
+        * .my-card {
+        *   \\@sugar.ui.card;
+        * }
+        * 
+        * @cssClass             s-card                       Specify that the card has to be displayed verticaly
+        * @cssClass             s-card:vertical            Specify that the card has to be displayed verticaly
+        * @cssClass             s-card:horizontal            Specify that the card has to be displayed horizontaly
+        * @cssClass             s-card:vertical-reverse            Specify that the card has to be displayed verticaly reversed
+        * @cssClass             s-card:horizontal-reverse            Specify that the card has to be displayed horizontaly reverses
+        * 
+        * @example          html            Default vertical
+        ${cardTpl({
+            class: 's-card',
+        })}
+        * 
+        * @example          html            Horizontal
+        ${cardTpl({
+            class: 's-card:horizontal',
+        })}
+        *
+        * @example          html            Vertical reverse
+        ${cardTpl({
+            class: 's-card:vertical-reverse',
+        })}
+        *
+        * @example          html            Horizontal reverse
+        ${cardTpl({
+            class: 's-card:horizontal-reverse',
+        })}
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+        */
+    `,
+    );
 
     if (finalParams.scope.includes('bare')) {
         vars.code(
@@ -74,10 +130,7 @@ export default function ({
         );
     }
 
-    if (
-        finalParams.lnfs.includes(finalParams.defaultLnf) &&
-        finalParams.scope.includes('lnf')
-    ) {
+    if (finalParams.scope.includes('lnf')) {
         vars.comment(
             `/**
             * @name           .s-card:not(.s-bare)
@@ -87,11 +140,9 @@ export default function ({
             * This class represent a(n) "<s-color="accent">default</s-color> card
             * 
             * @example        html
-            * <s-menu>
-            *   <template lang="js">
-            *       console.log('hello world');
-            *   </template>
-            * </s-menu>
+            ${cardTpl({
+                class: 's-card',
+            })}
             * 
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -99,23 +150,11 @@ export default function ({
         ).code(
             `
             .s-card:not(.s-bare) {
-                @sugar.ui.card($scope: lnf, $lnf: ${finalParams.defaultLnf});
+                @sugar.ui.card($scope: lnf);
             }`,
             {
                 type: 'CssClass',
             },
-        );
-    }
-
-    // default color
-    if (finalParams.scope.includes('lnf')) {
-        vars.code(
-            `
-            .s-card:not(.s-bare) {
-                @sugar.color(${finalParams.defaultColor});
-            }
-        `,
-            { type: 'CssClass' },
         );
     }
 

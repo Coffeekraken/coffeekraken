@@ -11,9 +11,8 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the fsTree style to any element
  *
- * @param       {'solid'}                           [style='theme.ui.fsTree.defaultStyle']         The style you want to generate
- * @param       {'default'|'square'|'pill'}             [shape='theme.ui.fsTree.defaultStyle']         The shape you want to generate
- * @param       {('bare'|'lnf'|'shape')[]}        [scope=['bare', 'lnf', 'shape']]      The scope you want to generate
+ * @param       {'default'}                           [lnf='theme.ui.fsTree.defaultLnf']         The style you want to generate
+ * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css
@@ -28,31 +27,25 @@ import __STheme from '@coffeekraken/s-theme';
 class postcssSugarPluginUiFsTreeInterface extends __SInterface {
     static get _definition() {
         return {
-            style: {
+            lnf: {
                 type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.fsTree.defaultStyle'),
-            },
-            shape: {
-                type: 'String',
-                values: ['default', 'square', 'pill'],
-                default: __STheme.get('ui.fsTree.defaultShape'),
+                values: ['default'],
+                default: __STheme.get('ui.fsTree.defaultLnf'),
             },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'shape'],
-                default: ['bare', 'lnf', 'shape'],
+                values: ['bare', 'lnf'],
+                default: ['bare', 'lnf'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiFsTreeParams {
-    style: 'solid';
-    shape: 'default' | 'square' | 'pill';
+    lnf: 'default';
     scope: string[];
 }
 
@@ -70,9 +63,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiFsTreeParams = {
-        style: 'solid',
-        shape: 'default',
-        scope: ['bare', 'lnf', 'shape'],
+        lnf: 'default',
+        scope: ['bare', 'lnf'],
         ...params,
     };
 
@@ -216,45 +208,12 @@ export default function ({
             
         `);
 
-        switch (finalParams.style) {
-            case 'solid':
+        switch (finalParams.lnf) {
             default:
                 vars.push(`
                     li:not(.s-disabled) {
                         > div:hover {
                             background-color: sugar.color(current, surface);
-                        }
-                    }
-                `);
-                break;
-        }
-    }
-
-    if (finalParams.scope.includes('shape')) {
-        switch (finalParams.shape) {
-            case 'square':
-                vars.push(`
-                    li {
-                        & > div {
-                            border-radius: 0;
-                        }
-                    }
-                `);
-                break;
-            case 'pill':
-                vars.push(`
-                    li {
-                        & > div {
-                            border-radius: 9999px;
-                        }
-                    }
-                `);
-                break;
-            default:
-                vars.push(`
-                    li {
-                        & > div {
-                            border-radius: sugar.border.radius(ui.fsTree.borderRadius);
                         }
                     }
                 `);

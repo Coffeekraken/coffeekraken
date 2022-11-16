@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-import __SBench from '@coffeekraken/s-bench';
 import { __readJsonSync } from '@coffeekraken/sugar/fs';
 import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import { __formatPackageJson } from '@coffeekraken/sugar/package';
@@ -47,7 +46,7 @@ function packageJsonMiddleware(settings = {}) {
             };
         }
 
-        __SBench.step('request', 'packageJsonMiddleware');
+        res.bench?.step('packageJsonMiddleware');
 
         return next();
     };

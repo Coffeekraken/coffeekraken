@@ -3,12 +3,10 @@
     "extends": [],
     "generated": {
         "extends": [
-            "01-basic",
-            "02-basic",
             "@coffeekraken/cli",
-            "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-asset-picker-component",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
@@ -19,6 +17,7 @@
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
+            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
@@ -36,6 +35,7 @@
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
+            "@coffeekraken/s-dropzone-component",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -49,6 +49,7 @@
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-glob",
+            "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
@@ -57,6 +58,7 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
@@ -75,6 +77,7 @@
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
             "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -5387,7 +5390,7 @@
                     "raw": "String"
                 },
                 "default": "<=",
-                "description": "Specify the default action to apply if you don't specify one in your media\nmixin call like ```@include Sugar.media('tablet') {...}```. If the defaultAction is set to \">=\",\nthe above media will be the same as ```@include Sugar.media('>=tablet') {...}```",
+                "description": "Specify the default action to apply if you don't specify one in your media\nmixin call like ```@sugar.media('tablet') {...}```. If the defaultAction is set to \">=\",\nthe above media will be the same as ```@sugar.media('>=tablet') {...}```\nNote that by default it is set to \"<=\" which mean \"desktop first\"",
                 "namespace": "@coffeekraken.s-theme.config.themeMedia",
                 "since": "2.0.0",
                 "author": {
@@ -14889,6 +14892,26 @@
                 "extension": "ts",
                 "relPath": "src/shared/SThemeBase.ts",
                 "children": {
+                    "sortmedia": {
+                        "id": "s91e90cf07e4b3ca99c830247837e496cd1d6509803ba902707e40629f95f44da",
+                        "name": "sortMedia",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This function takes as input the \"media\" object of the `frontspec.json` file and sort the \"queries\"\ndepending on the \"defaultAction\" specified.",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
                     "theme": {
                         "id": "sfc33415f0c69c996b5a2cbc70ef1002c8eaa44ba9ffa82fe92affb7367aed55b",
                         "name": "theme",
@@ -14968,9 +14991,9 @@
                             "url": "https://coffeekraken.io"
                         }
                     },
-                    "isdarkmode": {
-                        "id": "s789a2028ff5763bd12bd4e4a8418027544a2b9ef0aef006a5a71eb1b3e1d673c",
-                        "name": "isDarkMode",
+                    "isdark": {
+                        "id": "s7edc10f1356ec440fa14b4259c61f96bbcecdd77f7c8e9f2a32f2137d70e55cd",
+                        "name": "isDark",
                         "type": {
                             "types": [
                                 {
@@ -14980,6 +15003,26 @@
                             "raw": "Function"
                         },
                         "description": "This method returns true if the theme variant is dark, false if not",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "ismobilefirst": {
+                        "id": "sa3b89f3b50bf5bd4b2606d8fa5159c05d722e2f7e2473f5592bb9eeb0d3c2eed",
+                        "name": "isMobileFirst",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This method returns true if the theme is configured to be mobile first.\nMobile first is true when the \"config.theme.media.defaultAction\" is set to \"<=\"",
                         "static": "true",
                         "since": "2.0.0",
                         "author": {

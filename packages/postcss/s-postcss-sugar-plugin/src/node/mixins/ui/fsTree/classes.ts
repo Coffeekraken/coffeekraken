@@ -12,12 +12,9 @@ import __faker from 'faker';
  *
  * Generate the fsTree classes
  *
- * @param       {('solid')[]}                           [styles=['solid']]         The style(s) you want to generate
- * @param       {('default'|'square'|'pill')[]}             [shape=['default','square','pill']]         The shape(s) you want to generate
- * @param       {'solid'}                [defaultStyle='theme.ui.fsTree.defaultStyle']           The default style you want
- * @param       {'default'|'square'|'pill'}        [defaultShape='theme.ui.fsTree.defaultShape']           The default shape you want
- * @param       {String}                            [defaultColor=theme.ui.fsTree.defaultColor]            The default color you want
- * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
+ * @param       {('default')[]}                           [lnfs=['default']]         The style(s) you want to generate
+ * @param       {'default'}                [defaultLnf='theme.ui.fsTree.defaultLnf']           The default style you want
+ * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css
@@ -30,55 +27,35 @@ import __faker from 'faker';
 class postcssSugarPluginUiFsTreeClassesInterface extends __SInterface {
     static get _definition() {
         return {
-            styles: {
+            lnfs: {
                 type: 'String[]',
-                values: ['solid'],
-                default: ['solid'],
+                values: ['default'],
+                default: ['default'],
             },
-            shapes: {
-                type: 'String[]',
-                values: ['default', 'square', 'pill'],
-                default: ['default', 'square', 'pill'],
-            },
-            defaultStyle: {
+            defaultLnf: {
                 type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.fsTree.defaultStyle') ?? 'solid',
-            },
-            defaultColor: {
-                type: 'String',
-                values: Object.keys(__STheme.get('color')),
-                default: __STheme.get('ui.fsTree.defaultColor'),
+                values: ['default'],
+                default: __STheme.get('ui.fsTree.defaultLnf') ?? 'default',
             },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'shape', 'tf', 'vr'],
-                default: ['bare', 'lnf', 'shape', 'tf', 'vr'],
+                values: ['bare', 'lnf'],
+                default: ['bare', 'lnf'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiFsTreelassesParams {
-    styles: 'solid'[];
-    shapes: ('default' | 'square' | 'pill')[];
-    defaultStyle: 'solid';
-    defaultShape: 'default' | 'square' | 'pill';
-    defaultColor: string;
-    scope: ('bare' | 'lnf' | 'shape' | 'tf' | 'vr')[];
+    lnfs: 'default'[];
+    defaultLnf: 'default';
+    scope: ('bare' | 'lnf')[];
 }
 
 export { postcssSugarPluginUiFsTreeClassesInterface as interface };
-
-import { __dirname } from '@coffeekraken/sugar/fs';
-export function dependencies() {
-    return {
-        files: [`${__dirname()}/fsTree.js`],
-    };
-}
 
 export default function ({
     params,
@@ -92,11 +69,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiFsTreelassesParams = {
-        styles: [],
-        shapes: [],
-        defaultStyle: 'solid',
-        defaultShape: 'default',
-        defaultColor: 'main',
+        lnfs: [],
+        defaultLnf: 'default',
         scope: [],
         ...params,
     };
@@ -187,40 +161,22 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
-        ${finalParams.styles
-            .map((style) => {
+        ${finalParams.lnfs
+            .map((lnf) => {
                 return ` * @cssClass     s-fs-tree${
-                    style === finalParams.defaultStyle ? '' : `:${style}`
-                }           Apply the ${style} filesystem tree style`;
-            })
-            .join('\n')}
-        ${finalParams.shapes
-            .map((shape) => {
-                return ` * @cssClass     s-fs-tree${
-                    shape === finalParams.defaultShape ? '' : `:${shape}`
-                }           Apply the ${shape} filesystem tree shape`;
+                    lnf === finalParams.defaultLnf ? '' : `:${lnf}`
+                }           Apply the ${lnf} filesystem tree lnf`;
             })
             .join('\n')}
         * 
-        ${finalParams.styles
-            .map((style) => {
-                return ` * @example        html       ${style} style ${
-                    finalParams.defaultStyle === style
+        ${finalParams.lnfs
+            .map((lnf) => {
+                return ` * @example        html       ${lnf} lnf ${
+                    finalParams.defaultLnf === lnf
                         ? '<span class="s-badge:outline s-scale:05">default</span>'
                         : ''
                 }
-                    ${_example(style, params.defaultStyle === style)}`;
-            })
-            .join('\n')}
-        *
-        ${finalParams.shapes
-            .map((shape) => {
-                return ` * @example        html       ${shape} shape ${
-                    finalParams.defaultShape === shape
-                        ? '<span class="s-badge:outline s-scale:05">default</span>'
-                        : ''
-                }
-                ${_example(shape, params.defaultShape === shape)}`;
+                    ${_example(lnf, params.defaultLnf === lnf)}`;
             })
             .join('\n')}
         *
@@ -243,7 +199,7 @@ export default function ({
             * @type           CssClass
             * 
             * This class represent an "<yellow>${__STheme.get(
-                'ui.fsTree.defaultStyle',
+                'ui.fsTree.defaultLnf',
             )}</yellow>" filesystem tree
             * 
             * @feature       Support RTL
@@ -279,20 +235,20 @@ export default function ({
     }
 
     if (finalParams.scope.includes('lnf')) {
-        finalParams.styles.forEach((style) => {
+        finalParams.lnfs.forEach((lnf) => {
             vars.comment(
                 () => `/**
                 * @name           s-fs-tree${
-                    style === finalParams.defaultStyle ? '' : `:${style}`
+                    lnf === finalParams.defaultLnf ? '' : `:${lnf}`
                 }
                 * @namespace          sugar.style.ui.list
                 * @type           CssClass
                 * 
-                * This class represent an "<yellow>${style}</yellow>" filesystem tree
+                * This class represent an "<yellow>${lnf}</yellow>" filesystem tree
                 * 
                 * @example        html
                 * <ul class="s-fs-tree${
-                    style === finalParams.defaultStyle ? '' : `:${style}`
+                    lnf === finalParams.defaultLnf ? '' : `:${lnf}`
                 }">
                 *       <li>
                 *          <i class="s-icon:folder"></i> ${__faker.name.findName()}
@@ -312,10 +268,8 @@ export default function ({
            `,
             ).code(
                 `
-            .s-fs-tree${
-                style === finalParams.defaultStyle ? '' : `--${style}`
-            } {
-                @sugar.ui.fsTree($style: ${style}, $scope: lnf);
+            .s-fs-tree${lnf === finalParams.defaultLnf ? '' : `--${lnf}`} {
+                @sugar.ui.fsTree($lnf: ${lnf}, $scope: lnf);
             }
         `,
                 {
@@ -323,112 +277,6 @@ export default function ({
                 },
             );
         });
-    }
-
-    if (finalParams.scope.includes('shape')) {
-        finalParams.shapes.forEach((shape) => {
-            vars.comment(
-                () => `/**
-                * @name           s-fs-tree${
-                    shape === finalParams.defaultShape ? '' : `:${shape}`
-                }
-                * @namespace          sugar.style.ui.list
-                * @type           CssClass
-                * 
-                * This class represent an "<yellow>${shape}</yellow>" filesystem tree
-                * 
-                * @example        html
-                * <ul class="s-fs-tree${
-                    shape === finalParams.defaultShape ? '' : `:${shape}`
-                }">
-                *       <li>
-                *          <i class="s-icon:folder"></i> ${__faker.name.findName()}
-                *          <ul>
-                *               <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
-                *               <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
-                *              <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
-                *           </ul>
-                *           <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
-                *           <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
-                *       </li>
-                *   </ul>
-                * 
-                * @since       2.0.0
-            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-            */
-           `,
-            ).code(
-                `
-            .s-fs-tree${
-                shape === finalParams.defaultShape ? '' : `--${shape}`
-            } {
-                @sugar.ui.fsTree($shape: ${shape}, $scope: shape);
-            }
-        `,
-                {
-                    type: 'CssClass',
-                },
-            );
-        });
-    }
-
-    // default color
-    if (finalParams.scope.includes('lnf')) {
-        vars.code(
-            () => `
-            .s-blockquote:not(.s-color) {
-                @sugar.color(${finalParams.defaultColor});
-            }
-        `,
-            { type: 'CssClass' },
-        );
-    }
-
-    if (finalParams.scope.indexOf('vr') !== -1) {
-        vars.comment(
-            () => `/**
-            * @name           s-rhythm:vertical
-            * @namespace          sugar.style.ui.list
-            * @type           CssClass
-            * 
-            * This class represent some lists in the s-rhythm:vertical scope
-            * 
-            * @feature      Vertical rhythm
-            * 
-            * @example        html
-            * <div class="s-rhythm:vertical">
-            *   <ul class="s-fs-tree">
-            *       <li>
-            *          <i class="s-icon:folder"></i> ${__faker.name.findName()}
-            *          <ul>
-            *               <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
-            *               <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
-            *              <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
-            *           </ul>
-            *           <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
-            *           <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
-            *       </li>
-            *   </ul>
-            * </div>
-            * 
-            * @since      2.0.0
-            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */
-       `,
-        ).code(
-            `
-            @sugar.rhythm.vertical {
-                .s-fs-tree {
-                    ${__STheme.jsObjectToCssProperties(
-                        __STheme.get('ui.fsTree.rhythmVertical'),
-                    )}
-                } 
-            }
-        `,
-            {
-                type: 'CssClass',
-            },
-        );
     }
 
     return vars;

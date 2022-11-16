@@ -3,20 +3,20 @@
     "extends": [],
     "generated": {
         "extends": [
-            "01-basic",
-            "02-basic",
             "@coffeekraken/cli",
-            "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-code-formatter-prettier",
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
+            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
@@ -47,13 +47,16 @@
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-glob",
+            "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
@@ -69,6 +72,9 @@
             "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-scroll-component",
+            "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -546,22 +552,53 @@
                     "definition": {
                         "source": {
                             "description": "Specify the source(s) you want to build your sitemap. Can be all the configured sources specified under the \"config.sitemap.sources\" config",
-                            "type": "Array<String>",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Array<String>"
+                            },
                             "default": []
                         },
                         "sourcesSettings": {
                             "description": "Specigy sources settings by passing an object under each source \"id\" property",
-                            "type": "Object",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
                             "default": {}
                         },
                         "output": {
                             "description": "Specify where to save the sitemap in xml format",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-sitemap-builder/src/public/sitemap.xml"
                         },
                         "save": {
                             "description": "Specify if you want to save the sitemap or not",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         }
                     }
@@ -603,7 +640,14 @@
                     "definition": {
                         "sources": {
                             "description": "Specify the sources to use to build the sitemap. A source is a objet with the properties \"active\", \"settings\" and \"path\"",
-                            "type": "Object",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
                             "default": {}
                         }
                     }

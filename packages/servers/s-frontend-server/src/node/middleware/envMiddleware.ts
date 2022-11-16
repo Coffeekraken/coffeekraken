@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-import __SBench from '@coffeekraken/s-bench';
 import __SEnv from '@coffeekraken/s-env';
 
 /**
@@ -37,7 +36,7 @@ function envMiddleware(settings = {}) {
             ...__SEnv.env,
         };
 
-        __SBench.step('request', 'envMiddleware');
+        res.bench?.step('envMiddleware');
 
         return next();
     };

@@ -12,12 +12,9 @@ import __faker from 'faker';
  *
  * Generate the range classes
  *
- * @param       {('solid')[]}                           [styles=['solid']]         The style(s) you want to generate
- * @param       {('default'|'square'|'pill'|'circle')[]}             [shape=['default','square','pill','circle']]         The shape(s) you want to generate
- * @param       {'solid'}                [defaultStyle='theme.ui.range.defaultStyle']           The default style you want
- * @param       {'default'|'square'|'pill'|'circle'}        [defaultShape='theme.ui.range.defaultShape']           The default shape you want
- * @param       {String}                            [defaultColor=theme.ui.range.defaultColor]            The default color you want
- * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
+ * @param       {('default')[]}                           [lnfs=['default']]         The style(s) you want to generate
+ * @param       {'default'}                [defaultLnf='theme.ui.range.defaultLnf']           The default style you want
+ * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css
@@ -30,50 +27,32 @@ import __faker from 'faker';
 class postcssSugarPluginUiRangeClassesInterface extends __SInterface {
     static get _definition() {
         return {
-            styles: {
+            lnfs: {
                 type: 'String[]',
-                values: ['solid'],
-                default: ['solid'],
+                values: ['default'],
+                default: ['default'],
             },
-            shapes: {
-                type: 'String[]',
-                values: ['default', 'square', 'pill', 'circle'],
-                default: ['default', 'square', 'pill', 'circle'],
-            },
-            defaultStyle: {
+            defaultLnf: {
                 type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.range.defaultStyle'),
-            },
-            defaultShape: {
-                type: 'String',
-                values: ['default', 'square', 'pill', 'circle'],
-                default: __STheme.get('ui.range.defaultShape'),
-            },
-            defaultColor: {
-                type: 'String',
-                values: Object.keys(__STheme.get('color')),
-                default: __STheme.get('ui.range.defaultColor'),
+                values: ['default'],
+                default: __STheme.get('ui.range.defaultLnf'),
             },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'shape', 'vr', 'tf'],
-                default: ['bare', 'lnf', 'shape', 'vr', 'tf'],
+                values: ['bare', 'lnf', 'vr', 'tf'],
+                default: ['bare', 'lnf', 'vr', 'tf'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiRangeClassesParams {
-    styles: 'solid'[];
-    shapes: ('default' | 'square' | 'pill' | 'circle')[];
-    defaultStyle: 'solid';
-    defaultShape: 'default' | 'square' | 'pill' | 'circle';
-    defaultColor: string;
-    scope: ('bare' | 'lnf' | 'shape' | 'vr' | 'tf')[];
+    lnfs: 'default'[];
+    defaultLnf: 'default';
+    scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
 }
 
 export { postcssSugarPluginUiRangeClassesInterface as interface };
@@ -90,11 +69,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiRangeClassesParams = {
-        styles: [],
-        shapes: [],
-        defaultStyle: 'solid',
-        defaultShape: 'default',
-        defaultColor: 'main',
+        lnfs: [],
+        defaultLnf: 'default',
         scope: [],
         ...params,
     };
@@ -121,77 +97,39 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
-        ${finalParams.styles
-            .map((style) => {
+        ${finalParams.lnfs
+            .map((lnf) => {
                 return ` * @cssClass     s-range${
-                    style === finalParams.defaultStyle ? '' : `:${style}`
-                }           Apply the ${style} range style`;
-            })
-            .join('\n')}
-        ${finalParams.shapes
-            .map((shape) => {
-                return ` * @cssClass     s-range${
-                    shape === finalParams.defaultShape ? '' : `:${shape}`
-                }           Apply the ${shape} range shape`;
+                    lnf === finalParams.defaultLnf ? '' : `:${lnf}`
+                }           Apply the ${lnf} range lnf`;
             })
             .join('\n')}
         * 
-        ${finalParams.styles
-            .map((style) => {
-                return ` * @example        html       ${style}
+        ${finalParams.lnfs
+            .map((lnf) => {
+                return ` * @example        html       ${lnf}
             *   <label class="s-mbe:30 s-label:responsive">
             *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *     <input type="range" class="s-range${
-                finalParams.defaultStyle === style ? '' : `:${style}`
+                finalParams.defaultLnf === lnf ? '' : `:${lnf}`
             }" min="0" max="100" step="10" />
             *   </label>
             *   <label class="s-mbe:30 s-label:responsive">
             *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *     <input type="range" class="s-range${
-                finalParams.defaultStyle === style ? '' : `:${style}`
+                finalParams.defaultLnf === lnf ? '' : `:${lnf}`
             } s-color:accent" min="0" max="100" step="10" />
             *   </label>
             *   <label class="s-mbe:30 s-label:responsive">
             *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *     <input type="range" class="s-range${
-                finalParams.defaultStyle === style ? '' : `:${style}`
+                finalParams.defaultLnf === lnf ? '' : `:${lnf}`
             } s-color:complementary" min="0" max="100" step="10" />
             *   </label>
             *   <label class="s-mbe:30 s-label:responsive">
             *     <span>I'm disabled</span>
             *     <input type="range" disabled class="s-range${
-                finalParams.defaultStyle === style ? '' : `:${style}`
-            } s-color:complementary" min="0" max="100" step="10" />
-            *   </label>
-            * `;
-            })
-            .join('\n')}
-        *
-        ${finalParams.shapes
-            .map((shape) => {
-                return ` * @example        html       ${shape}
-            *   <label class="s-mbe:30 s-label:responsive">
-            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
-            *     <input type="range" class="s-range${
-                finalParams.defaultShape === shape ? '' : `:${shape}`
-            }" min="0" max="100" step="10" />
-            *   </label>
-            *   <label class="s-mbe:30 s-label:responsive">
-            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
-            *     <input type="range" class="s-range${
-                finalParams.defaultShape === shape ? '' : `:${shape}`
-            } s-color:accent" min="0" max="100" step="10" />
-            *   </label>
-            *   <label class="s-mbe:30 s-label:responsive">
-            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
-            *     <input type="range" class="s-range${
-                finalParams.defaultShape === shape ? '' : `:${shape}`
-            } s-color:complementary" min="0" max="100" step="10" />
-            *   </label>
-            *   <label class="s-mbe:30 s-label:responsive">
-            *     <span>I'm disabled</span>
-            *     <input type="range" disabled class="s-range${
-                finalParams.defaultShape === shape ? '' : `:${shape}`
+                finalParams.defaultLnf === lnf ? '' : `:${lnf}`
             } s-color:complementary" min="0" max="100" step="10" />
             *   </label>
             * `;
@@ -291,10 +229,10 @@ export default function ({
     }
 
     if (finalParams.scope.includes('lnf')) {
-        finalParams.styles.forEach((style) => {
+        finalParams.lnfs.forEach((lnf) => {
             let cls = `s-range`;
-            if (style !== finalParams.defaultStyle) {
-                cls += `--${style}`;
+            if (lnf !== finalParams.defaultLnf) {
+                cls += `--${lnf}`;
             }
 
             vars.comment(
@@ -303,11 +241,11 @@ export default function ({
             * @namespace          sugar.style.ui.range
             * @type           CssClass
             * 
-            * This class represent a(n) "<s-color="accent">${style}</s-color>" range
+            * This class represent a(n) "<s-color="accent">${lnf}</s-color>" range
             * 
             * @example        html
             * <input type="range" class="s-range${
-                finalParams.defaultStyle === style ? '' : `:${style}`
+                finalParams.defaultLnf === lnf ? '' : `:${lnf}`
             }" min="0" max="100" step="10" />
             * 
             * @since    2.0.0
@@ -317,59 +255,12 @@ export default function ({
             ).code(
                 `
             .${cls} {
-                @sugar.ui.range($style: ${style}, $scope: lnf);
+                @sugar.ui.range($lnf: ${lnf}, $scope: lnf);
             }
             `,
                 { type: 'CssClass' },
             );
         });
-    }
-
-    if (finalParams.scope.includes('shape')) {
-        finalParams.shapes.forEach((shape) => {
-            let cls = `s-range`;
-            if (shape !== finalParams.defaultShape) {
-                cls += `--${shape}`;
-            }
-
-            vars.comment(
-                () => `/**
-            * @name           ${cls}
-            * @namespace          sugar.style.ui.range
-            * @type           CssClass
-            * 
-            * This class represent a(n) "<s-color="accent">${shape}</s-color>" range
-            * 
-            * @example        html
-            * <input type="range" class="s-range${
-                finalParams.defaultShape === shape ? '' : `:${shape}`
-            }" min="0" max="100" step="10" />
-            * 
-            * @since    2.0.0
-            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */
-       `,
-            ).code(
-                `
-            .${cls} {
-                @sugar.ui.range($shape: ${shape}, $scope: shape);
-            }
-            `,
-                { type: 'CssClass' },
-            );
-        });
-    }
-
-    // default color
-    if (finalParams.scope.includes('lnf')) {
-        vars.code(
-            () => `
-            .s-range:not(.s-color) {
-                @sugar.color(${finalParams.defaultColor});
-            }
-        `,
-            { type: 'CssClass' },
-        );
     }
 
     return vars;

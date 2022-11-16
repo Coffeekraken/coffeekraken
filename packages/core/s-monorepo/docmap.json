@@ -3,12 +3,10 @@
     "extends": [],
     "generated": {
         "extends": [
-            "01-basic",
-            "02-basic",
             "@coffeekraken/cli",
-            "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-asset-picker-component",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
@@ -19,6 +17,7 @@
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
+            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
@@ -36,6 +35,7 @@
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
+            "@coffeekraken/s-dropzone-component",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -49,13 +49,16 @@
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-glob",
+            "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
@@ -73,6 +76,7 @@
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
             "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -420,41 +424,90 @@
                     "definition": {
                         "packagesGlob": {
                             "description": "Specify some globs to search for packages relative to the monorepo root directory",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "packages/*/*",
                             "alias": "p"
                         },
                         "build": {
                             "description": "Specify if you want to build your files like the .ts ones or not",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true,
                             "alias": "b"
                         },
                         "buildInitial": {
                             "description": "Specify if you want to build the files at launch before the watch process take care of the rest",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "test": {
                             "description": "Specify if you want to run the tests on saved files or not",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false,
                             "alias": "t"
                         },
                         "testInitial": {
                             "description": "Specify if you want to test the files at launch before the watch process take care of the rest",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "format": {
                             "description": "Specify if you want to run the code formatter (SCodeFormatter) on your packages or not",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true,
                             "alias": "f"
                         },
                         "formatInitial": {
                             "description": "Specify if you want to format your files at launch before the watch process take care of the rest",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         }
                     }
@@ -496,12 +549,26 @@
                     "definition": {
                         "command": {
                             "description": "Specify the command you want to run on the monorepo",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "required": true
                         },
                         "packagesGlob": {
                             "description": "Specify some globs to search for packages relative to the monorepo root directory",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "packages/*/*"
                         }
                     }
@@ -543,19 +610,40 @@
                     "definition": {
                         "packagesGlob": {
                             "description": "Specify some globs to search for packages relative to the monorepo root directory",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "packages/*/*",
                             "alias": "g"
                         },
                         "json": {
                             "description": "Specify if you want the list into a json object",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false,
                             "alias": "j"
                         },
                         "publish": {
                             "description": "Specigy if you want the packages that will be published, not published or both by letting this undefined",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "alias": "p"
                         }
                     }
@@ -597,13 +685,27 @@
                     "definition": {
                         "packagesGlob": {
                             "description": "Specify some globs to search for packages relative to the monorepo root directory",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "packages/*/*",
                             "alias": "g"
                         },
                         "yes": {
                             "description": "Specify if you want to answer yes to all the questions of the process",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false,
                             "alias": "y"
                         }
@@ -646,11 +748,25 @@
                     "definition": {
                         "rootDir": {
                             "description": "Specify the monorepo root directory",
-                            "type": "string"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "string"
+                                    }
+                                ],
+                                "raw": "string"
+                            }
                         },
                         "packagesGlob": {
                             "description": "Specify a glob relative to the rootDir to search for packages",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "packages/*/*"
                         }
                     }
@@ -692,12 +808,29 @@
                     "definition": {
                         "packagesGlob": {
                             "description": "Specify some globs to search for packages relative to the monorepo root directory",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "packages/*/*"
                         },
                         "files": {
                             "description": "Specify the files to upgrade when doing a monorepo.upgrade call.",
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "default": [
                                 "package.json",
                                 "composer.json"
@@ -705,7 +838,17 @@
                         },
                         "fields": {
                             "description": "Specify the fields to upgrade when doing a monorepo.upgrade call.",
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "default": [
                                 "version",
                                 "homepage"

@@ -11,7 +11,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the label style to any element
  *
- * @param       {'inline'|'block'|'float'}                           [style='theme.ui.label.defaultStyle']         The style you want to generate
+ * @param       {'inline'|'block'|'float'}                           [lnf='theme.ui.label.defaultLnf']         The style you want to generate
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
@@ -27,10 +27,10 @@ import __STheme from '@coffeekraken/s-theme';
 class postcssSugarPluginUiLabelInterface extends __SInterface {
     static get _definition() {
         return {
-            style: {
+            lnf: {
                 type: 'String',
                 values: ['inline', 'block', 'float'],
-                default: __STheme.get('ui.label.defaultStyle'),
+                default: __STheme.get('ui.label.defaultLnf'),
             },
             scope: {
                 type: {
@@ -45,7 +45,7 @@ class postcssSugarPluginUiLabelInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiLabelParams {
-    style: 'inline' | 'block' | 'float';
+    lnf: 'inline' | 'block' | 'float';
     scope: ('bare' | 'lnf')[];
 }
 
@@ -60,7 +60,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiLabelParams = {
-        style: __STheme.get('ui.label.defaultStyle'),
+        lnf: __STheme.get('ui.label.defaultLnf'),
         scope: ['bare', 'lnf'],
         ...params,
     };
@@ -80,7 +80,7 @@ export default function ({
           }
     `);
 
-        switch (finalParams.style) {
+        switch (finalParams.lnf) {
             case 'float':
                 vars.push(`
                   display: block;
@@ -204,7 +204,7 @@ export default function ({
 
     // style
     if (finalParams.scope.indexOf('lnf') !== -1) {
-        switch (finalParams.style) {
+        switch (finalParams.lnf) {
             case 'float':
                 vars.push(`
                   width: 100%;  

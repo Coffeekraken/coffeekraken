@@ -11,9 +11,8 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the range style to any HTMLInputElement
  *
- * @param       {'solid'}                           [style='theme.ui.range.defaultStyle']         The style you want to generate
- * @param       {'default'|'square'|'pill'|'circle'}             [shape='ui.range.defaultShape']         The shape you want to generate
- * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
+ * @param       {'default'}                           [style='theme.ui.form.defaultLnf']         The style you want to generate
+ * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css
@@ -28,32 +27,26 @@ import __STheme from '@coffeekraken/s-theme';
 class postcssSugarPluginUiRangeInterface extends __SInterface {
     static get _definition() {
         return {
-            style: {
+            lnf: {
                 type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.range.defaultStyle'),
-            },
-            shape: {
-                type: 'String',
-                values: ['default', 'square', 'pull', 'circle'],
-                default: __STheme.get('ui.range.defaultShape'),
+                values: ['default'],
+                default: __STheme.get('ui.form.defaultLnf'),
             },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'shape'],
-                default: ['bare', 'lnf', 'shape'],
+                values: ['bare', 'lnf'],
+                default: ['bare', 'lnf'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiButtonParams {
-    style: 'solid';
-    shape: 'default' | 'square' | 'pill' | 'circle';
-    scope: ('bare' | 'lnf' | 'shape')[];
+    lnf: 'default';
+    scope: ('bare' | 'lnf')[];
 }
 
 export { postcssSugarPluginUiRangeInterface as interface };
@@ -67,9 +60,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiButtonParams = {
-        style: 'solid',
-        shape: 'default',
-        scope: ['bare', 'lnf', 'shape'],
+        lnf: 'default',
+        scope: ['bare', 'lnf'],
         ...params,
     };
 
@@ -83,15 +75,15 @@ export default function ({
         --thumb-radius: 50%;
         --thumb-height: 1em;
         --thumb-width: 1em;
-        --thumb-border-width: sugar.theme(ui.range.borderWidth);
+        --thumb-border-width: sugar.theme(ui.form.borderWidth);
         --thumb-border-color: sugar.color(current, border);
 
         --track-width: 100%;
         --track-height: 0.5em;
-        --track-border-width: sugar.theme(ui.range.borderWidth);
+        --track-border-width: sugar.theme(ui.form.borderWidth);
         --track-border-color: sugar.color(current, border);
 
-        --track-radius: sugar.border.radius(ui.range.borderRadius);
+        --track-radius: sugar.border.radius(ui.form.borderRadius);
         --contrast: 5%;
 
         --ie-bottom-track-color: darken($track-color, $contrast);
@@ -99,7 +91,7 @@ export default function ({
     ];
 
     const trackCss = `
-        transition: sugar.theme(ui.range.transition);
+        transition: sugar.theme(ui.form.transition);
     `;
     const trackCssBare = `
         height: var(--track-height);
@@ -108,7 +100,7 @@ export default function ({
     `;
     const thumbCss = `
         background: var(--thumb-color);
-        border: var(--thumb-border-width) solid var(--thumb-border-color);
+        border: var(--thumb-border-width) default var(--thumb-border-color);
         border-radius: var(--thumb-radius);
         box-shadow: 0 0 0 0 var(--thumb-border-color);
     `;
@@ -162,13 +154,13 @@ export default function ({
             &::-webkit-slider-runnable-track {
                 ${trackCss}
                 background: var(--track-color);
-                border: var(--track-border-width) solid var(--track-border-color);
+                border: var(--track-border-width) default var(--track-border-color);
                 border-radius: var(--track-radius);
             }
             &::-moz-range-track {
                 ${trackCss}
                 background: var(--track-color);
-                border: var(--track-border-width) solid var(--track-border-color);
+                border: var(--track-border-width) default var(--track-border-color);
                 border-radius: var(--track-radius);
             }
             &::-ms-track {
@@ -180,12 +172,12 @@ export default function ({
             }
             &::-ms-fill-lower {
                 background: var(--ie-bottom-track-color);
-                border: var(--track-border-width) solid var(--track-border-color);
+                border: var(--track-border-width) default var(--track-border-color);
                 border-radius: calc(var(--track-radius) * 2);
             }
             &::-ms-fill-upper {
                 background: var(--track-color);
-                border: var(--track-border-width) solid var(--track-border-color);
+                border: var(--track-border-width) default var(--track-border-color);
                 border-radius: calc(var(--track-radius) * 2);
             }
     `);
@@ -256,35 +248,9 @@ export default function ({
 
     // style
     if (finalParams.scope.indexOf('lnf') !== -1) {
-        switch (finalParams.style) {
-            case 'solid':
+        switch (finalParams.lnf) {
             default:
                 vars.push(`
-                `);
-                break;
-        }
-    }
-
-    // shapes
-    if (finalParams.scope.includes('shape')) {
-        switch (finalParams.shape) {
-            case 'square':
-                vars.push(`
-                    --thumb-radius: 0;
-                    --track-radius: 0;
-                `);
-                break;
-            case 'pill':
-            case 'circle':
-                vars.push(`
-                    --thumb-radius: 9999px;
-                    --track-radius: 9999px;
-                `);
-                break;
-            default:
-                vars.push(`
-                    --thumb-radius: sugar.border.radius(ui.range.borderRadius);
-                    --track-radius: sugar.border.radius(ui.range.borderRadius);
                 `);
                 break;
         }

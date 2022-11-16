@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          checkbox
- * @namespace     node.mixin.ui.checkbox
+ * @namespace     node.mixin.ui.form
  * @type               PostcssMixin
  * @interface     ./checkbox          interface
  * @platform      postcss
@@ -11,14 +11,13 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the checkbox style to any element
  *
- * @param       {'solid'}                           [style='theme.ui.checkbox.defaultStyle']         The style(s) you want to generate
- * @param       {'default'|'square'|'circle'}             [shape='theme.ui.checkbox.defaultShape']         The shape you want to generate
- * @param       {'bare'|'lnf'|'shape'}        [scope=['bare', 'lnf', 'shape']]      The scope you want to generate
+ * @param       {'defaut'}                           [lnf='theme.ui.form.defaultLnf']         The style(s) you want to generate
+ * @param       {'bare'|'lnf'}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css
  * .my-checkbox {
- *    @sugar.ui.checkbox;
+ *    @sugar.ui.form;
  * }
  *
  * @since      2.0.0
@@ -28,32 +27,26 @@ import __STheme from '@coffeekraken/s-theme';
 class postcssSugarPluginUiCheckboxInterface extends __SInterface {
     static get _definition() {
         return {
-            style: {
+            lnf: {
                 type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.checkbox.defaultStyle'),
-            },
-            shape: {
-                type: 'String',
-                values: ['default', 'square', 'circle'],
-                default: __STheme.get('ui.checkbox.defaultShape'),
+                values: ['default'],
+                default: __STheme.get('ui.form.defaultLnf'),
             },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'shape'],
-                default: ['bare', 'lnf', 'shape'],
+                values: ['bare', 'lnf'],
+                default: ['bare', 'lnf'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiCheckboxParams {
-    style: 'solid';
-    shape: 'default' | 'square' | 'circle';
-    scope: ('bare' | 'lnf' | 'shape')[];
+    lnf: 'default';
+    scope: ('bare' | 'lnf')[];
 }
 
 export { postcssSugarPluginUiCheckboxInterface as interface };
@@ -67,16 +60,15 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiCheckboxParams = {
-        style: 'solid',
-        shape: 'default',
-        scope: ['bare', 'lnf', 'shape'],
+        lnf: 'default',
+        scope: ['bare', 'lnf'],
         ...params,
     };
 
     const vars: string[] = [``];
 
-    switch (finalParams.style) {
-        case 'solid':
+    switch (finalParams.lnf) {
+        default:
             // bare
             if (finalParams.scope.indexOf('bare') !== -1) {
                 vars.push(`
@@ -100,10 +92,10 @@ export default function ({
             if (finalParams.scope.indexOf('lnf') !== -1) {
                 vars.push(`
                 
-                    transition: sugar.theme(ui.checkbox.transition);
-                    border: sugar.theme(ui.checkbox.borderWidth) solid sugar.color(current);
+                    transition: sugar.theme(ui.form.transition);
+                    border: sugar.theme(ui.form.borderWidth) default sugar.color(current);
                     background-color: transparent;
-                    transition: sugar.theme(ui.checkbox.transition);
+                    transition: sugar.theme(ui.form.transition);
                     box-shadow: 0 0 0 0 sugar.color(current, --alpha 0.2);
 
                     &:after {
@@ -114,7 +106,7 @@ export default function ({
                         transform: translate(-50%, -50%);
                         background: sugar.color(current);
                         opacity: 0;
-                        transition: sugar.theme(ui.checkbox.transition);
+                        transition: sugar.theme(ui.form.transition);
                     }
                     label:hover > &:not(:disabled):after,
                     &:hover:not(:disabled):after {
@@ -130,26 +122,6 @@ export default function ({
  
         `);
             }
-    }
-
-    if (finalParams.scope.includes('shape')) {
-        switch (finalParams.shape) {
-            case 'square':
-                vars.push(`
-                    border-radius: 0;
-                `);
-                break;
-            case 'circle':
-                vars.push(`
-                    border-radius: 9999px;
-                `);
-                break;
-            default:
-                vars.push(`
-                    border-radius: sugar.border.radius(ui.checkbox.borderRadius);
-                `);
-                break;
-        }
     }
 
     return vars;

@@ -61,8 +61,8 @@ const cliParams = __SSugarCliParamsInterface.apply(
     process.argv.slice(2).join(' '),
 );
 
-if (cliParams.bench) {
-    __SBench.filter(cliParams.bench === true ? '*' : cliParams.bench);
+if (!cliParams.bench) {
+    __SBench.disable();
 }
 
 if (!__SLog[`PRESET_${cliParams.logPreset.toUpperCase()}`]) {
@@ -97,6 +97,7 @@ export default class SSugarCli {
     static _eventEmitter: __SEventEmitter;
     static _treatAsMain: boolean;
     static _sugarJsons: any;
+    static _bench: __SBench;
 
     static args: ISSugarCliArgs;
 
@@ -147,7 +148,9 @@ export default class SSugarCli {
         // hook base console functions
         this._proxyConsole();
 
-        __SBench.start('sugar.cli');
+        this._bench = new __SBench('sugar.cli', {
+            bubbles: false,
+        });
 
         if (process.env.TREAT_AS_MAIN) {
             this._treatAsMain = true;
@@ -161,7 +164,7 @@ export default class SSugarCli {
 
         this._setNodeEnv();
 
-        __SBench.step('sugar.cli', 'beforeLoadConfig');
+        this._bench.step('beforeLoadConfig');
 
         await __wait(10);
 
@@ -192,10 +195,10 @@ export default class SSugarCli {
             }
         }
 
-        __SBench.step('sugar.cli', 'afterLoadConfig');
+        this._bench.step('afterLoadConfig');
 
-        __SBench.step('sugar.cli', 'beforeClearTmpDir');
-        __SBench.step('sugar.cli', 'afterClearTmpDir');
+        this._bench.step('beforeClearTmpDir');
+        this._bench.step('afterClearTmpDir');
 
         // init stdio and event emitter
         this._eventEmitter = new __SEventEmitter({
@@ -213,20 +216,20 @@ export default class SSugarCli {
             this.writeLog(logObj.value);
         });
 
-        __SBench.step('sugar.cli', 'beforeLoadSugarJson');
+        this._bench.step('beforeLoadSugarJson');
 
         // reading sugarJsons
         const sugarJsonInstance = new __SSugarJson();
         this._sugarJsons = await sugarJsonInstance.read();
 
-        __SBench.step('sugar.cli', 'afterLoadSugarJson');
+        this._bench.step('afterLoadSugarJson');
 
-        __SBench.step('sugar.cli', 'beforeLoadAvailableCli');
+        this._bench.step('beforeLoadAvailableCli');
 
         // init available cli
         await this._getAvailableCli();
 
-        __SBench.step('sugar.cli', 'afterLoadAvailableCli');
+        this._bench.step('afterLoadAvailableCli');
 
         // help
         if (this.args.isHelp) {
@@ -240,15 +243,13 @@ export default class SSugarCli {
             return;
         }
 
-        __SBench.step('sugar.cli', 'beforeProcess');
-        __SBench.end('sugar.cli', {
-            log: true,
-        });
+        this._bench.step('beforeProcess');
+        this._bench.end();
 
         // normal process
         await this._process();
 
-        __SBench.step('sugar.cli', 'afterProcess');
+        this._bench.step('afterProcess');
     }
 
     static _setNodeEnv() {

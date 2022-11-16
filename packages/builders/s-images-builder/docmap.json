@@ -3,20 +3,20 @@
     "extends": [],
     "generated": {
         "extends": [
-            "01-basic",
-            "02-basic",
             "@coffeekraken/cli",
-            "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-code-formatter-prettier",
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
+            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
@@ -47,12 +47,15 @@
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-glob",
+            "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
@@ -69,6 +72,9 @@
             "@coffeekraken/s-request",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -439,14 +445,31 @@
                     "definition": {
                         "glob": {
                             "description": "Specify a glob pattern relative to the \"inDir\" to target images you want to process",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "required": true,
                             "default": "**/*",
                             "alias": "g"
                         },
                         "compressExts": {
                             "description": "Specify the file extensions you want to compress",
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "required": true,
                             "default": [
                                 "jpg",
@@ -457,45 +480,97 @@
                         },
                         "inDir": {
                             "description": "Specify the absolute path to the folder where your images stands",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "required": true,
                             "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-images-builder/src/img",
                             "alias": "i"
                         },
                         "outDir": {
                             "description": "Specify the absolute path to the folder you want to save your images. \"inDir\" folder structure is kept.",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "required": true,
                             "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-images-builder/dist/img",
                             "alias": "o"
                         },
                         "quality": {
                             "description": "Specify the quality percentage you want to target without the \"%\" sign",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "required": true,
                             "default": 80,
                             "alias": "q"
                         },
                         "webp": {
                             "description": "Specify if you want to generate \".webp\" versions of your images or not",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         },
                         "width": {
                             "description": "Specify the maximum width you want to target for your images",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": null,
                             "alias": "w"
                         },
                         "height": {
                             "description": "Specify the maximum height you want to target for your images",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": null,
                             "alias": "h"
                         },
                         "resolution": {
                             "description": "Specify some resolutions you want to generate. The targeted \"width\" and \"height\" is considered as the resolution 1 and all others resolutions are declined from this",
-                            "type": "Array<Integer>",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Array",
+                                        "of": [
+                                            "Integer"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Array<Integer>"
+                            },
                             "default": [
                                 1,
                                 2
@@ -504,13 +579,27 @@
                         },
                         "clear": {
                             "description": "Specify if you want to clear the \"outDir\" before generate new images or not",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true,
                             "alias": "c"
                         },
                         "specificParams": {
                             "description": "Allows you to specify some custom params depending on folder globs like \"myCoolFolder/*.jpg\" used as object property. Override every settings you want in this new object for the specified folder(s)",
-                            "type": "Object",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
                             "default": {}
                         }
                     }
@@ -572,14 +661,31 @@
                     "definition": {
                         "glob": {
                             "description": "Specify a glob pattern relative to the \"inDir\" to target images you want to process",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "required": true,
                             "default": "**/*",
                             "alias": "g"
                         },
                         "compressExts": {
                             "description": "Specify the file extensions you want to compress",
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "required": true,
                             "default": [
                                 "jpg",
@@ -590,45 +696,97 @@
                         },
                         "inDir": {
                             "description": "Specify the absolute path to the folder where your images stands",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "required": true,
                             "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-images-builder/src/img",
                             "alias": "i"
                         },
                         "outDir": {
                             "description": "Specify the absolute path to the folder you want to save your images. \"inDir\" folder structure is kept.",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "required": true,
                             "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-images-builder/dist/img",
                             "alias": "o"
                         },
                         "quality": {
                             "description": "Specify the quality percentage you want to target without the \"%\" sign",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "required": true,
                             "default": 80,
                             "alias": "q"
                         },
                         "webp": {
                             "description": "Specify if you want to generate \".webp\" versions of your images or not",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         },
                         "width": {
                             "description": "Specify the maximum width you want to target for your images",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": null,
                             "alias": "w"
                         },
                         "height": {
                             "description": "Specify the maximum height you want to target for your images",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": null,
                             "alias": "h"
                         },
                         "resolution": {
                             "description": "Specify some resolutions you want to generate. The targeted \"width\" and \"height\" is considered as the resolution 1 and all others resolutions are declined from this",
-                            "type": "Array<Integer>",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Array",
+                                        "of": [
+                                            "Integer"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Array<Integer>"
+                            },
                             "default": [
                                 1,
                                 2
@@ -637,13 +795,27 @@
                         },
                         "clear": {
                             "description": "Specify if you want to clear the \"outDir\" before generate new images or not",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true,
                             "alias": "c"
                         },
                         "specificParams": {
                             "description": "Allows you to specify some custom params depending on folder globs like \"myCoolFolder/*.jpg\" used as object property. Override every settings you want in this new object for the specified folder(s)",
-                            "type": "Object",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
                             "default": {}
                         }
                     }
@@ -685,7 +857,14 @@
                     "definition": {
                         "resolveGlob": {
                             "description": "Specify some settings to use for the [resolveGlob function](/api/@coffeekraken.sugar.node.glob.resolveGlob)",
-                            "type": "IResolveGlobSettings",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "IResolveGlobSettings"
+                                    }
+                                ],
+                                "raw": "IResolveGlobSettings"
+                            },
                             "default": {}
                         }
                     }

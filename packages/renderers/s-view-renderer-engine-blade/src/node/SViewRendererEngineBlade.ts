@@ -2,10 +2,10 @@ import __SBench from '@coffeekraken/s-bench';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import { ISViewRendererSettings } from '@coffeekraken/s-view-renderer';
+import { __unique } from '@coffeekraken/sugar/array';
+import { __execPhp } from '@coffeekraken/sugar/exec';
 import { __dirname } from '@coffeekraken/sugar/fs';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
-import { __execPhp } from '@coffeekraken/sugar/exec';
-import { __unique } from '@coffeekraken/sugar/array';
 import __fs from 'fs';
 import __path from 'path';
 import __SViewRendererBladeEngineSettingsInterface from './interface/SViewRendererEngineBladeSettingsInterface';
@@ -48,12 +48,14 @@ export default class SViewRendererEngineBlade {
                         `It seems that the view you passed "<cyan>${viewPath}</cyan>" does not exists...`,
                     );
                 }
-                __SBench.start('SViewRendererEngineBlade.render');
-
-                __SBench.step(
-                    'SViewRendererEngineBlade.render',
-                    `beforeRender.${viewPath}`,
+                const bench = new __SBench(
+                    `SViewRendererEngineBlade.render.${viewPath.replace(
+                        __packageRootDir(),
+                        '',
+                    )}`,
                 );
+
+                bench.step(`beforeRender`);
 
                 if (!__fs.existsSync(viewRendererSettings.cacheDir)) {
                     __fs.mkdirSync(viewRendererSettings.cacheDir, {
@@ -97,12 +99,7 @@ export default class SViewRendererEngineBlade {
 
                         // if (res.match(//))
 
-                        __SBench.step(
-                            'SViewRendererEngineBlade.render',
-                            `afterRender.${viewPath}`,
-                        );
-
-                        __SBench.end('SViewRendererEngineBlade.render').log();
+                        bench.end();
                     },
                     (e) => {
                         // @TODO            make the 'log' event displayed on the terminal
@@ -115,12 +112,7 @@ export default class SViewRendererEngineBlade {
                             error: e,
                         });
 
-                        __SBench.step(
-                            'SViewRendererEngineBlade.render',
-                            `afterRender.${viewPath}`,
-                        );
-
-                        __SBench.end('SViewRendererEngineBlade.render').log();
+                        bench.end();
                     },
                 );
             },

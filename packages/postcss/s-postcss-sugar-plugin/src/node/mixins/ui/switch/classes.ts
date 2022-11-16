@@ -12,16 +12,13 @@ import __faker from 'faker';
  *
  * Generate the switch classes
  *
- * @param       {('solid')[]}                           [styles=['solid']]         The style(s) you want to generate
- * @param       {('default'|'square'|'pill')[]}             [shape=['default','square','pill']]         The shape(s) you want to generate
- * @param       {'solid'}                [defaultStyle='theme.ui.switch.defaultStyle']           The default style you want
- * @param       {'default'|'square'|'pill'}        [defaultShape='theme.ui.switch.defaultShape']           The default shape you want
- * @param       {String}                            [defaultColor=theme.ui.switch.defaultColor]            The default color you want
- * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
+ * @param       {('default')[]}                           [lnfs=['default']]         The style(s) you want to generate
+ * @param       {'default'}                [defaultLnf='theme.ui.form.defaultLnf']           The default style you want
+ * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css
- * @sugar.ui.switch.classes;
+ * @sugar.ui.form.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -30,60 +27,35 @@ import __faker from 'faker';
 class postcssSugarPluginUiSwitchClassesMixinInterface extends __SInterface {
     static get _definition() {
         return {
-            styles: {
+            lnfs: {
                 type: 'String[]',
-                values: ['solid'],
-                default: ['solid'],
+                values: ['default'],
+                default: ['default'],
             },
-            shapes: {
-                type: 'String[]',
-                values: ['default', 'square', 'pill'],
-                default: ['default', 'square', 'pill'],
-            },
-            defaultStyle: {
+            defaultLnf: {
                 type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.switch.defaultStyle') ?? 'solid',
-            },
-            defaultShape: {
-                type: 'String',
-                values: ['default', 'square', 'pill'],
-                default: __STheme.get('ui.switch.defaultShape'),
-            },
-            defaultColor: {
-                type: 'String',
-                values: Object.keys(__STheme.get('color')),
-                default: __STheme.get('ui.switch.defaultColor'),
+                values: ['default'],
+                default: __STheme.get('ui.form.defaultLnf') ?? 'default',
             },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'shape', 'tf'],
-                default: ['bare', 'lnf', 'shape', 'tf'],
+                values: ['bare', 'lnf', 'tf'],
+                default: ['bare', 'lnf', 'tf'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiSwitchClassesMixinParams {
-    styles: 'solid'[];
-    shapes: ('default' | 'square' | 'pill')[];
-    defaultStyle: 'solid';
-    defaultShape: 'default' | 'square' | 'pill';
-    defaultColor: string;
-    scope: ('bare' | 'lnf' | 'shape' | 'vr' | 'tf')[];
+    lnfs: 'default'[];
+    defaultLnf: 'default';
+    scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
 }
 
 export { postcssSugarPluginUiSwitchClassesMixinInterface as interface };
-
-import { __dirname } from '@coffeekraken/sugar/fs';
-export function dependencies() {
-    return {
-        files: [`${__dirname()}/switch.js`],
-    };
-}
 
 export default function ({
     params,
@@ -97,11 +69,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiSwitchClassesMixinParams = {
-        styles: [],
-        shapes: [],
-        defaultStyle: 'solid',
-        defaultShape: 'default',
-        defaultColor: 'main',
+        lnfs: [],
+        defaultLnf: 'default',
         scope: [],
         ...params,
     };
@@ -128,53 +97,27 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
-        ${finalParams.styles
-            .map((style) => {
+        ${finalParams.lnfs
+            .map((lnf) => {
                 return ` * @cssClass     s-switch${
-                    style === finalParams.defaultStyle ? '' : `:${style}`
-                }           Apply the ${style} switch style`;
-            })
-            .join('\n')}
-        ${finalParams.shapes
-            .map((shape) => {
-                return ` * @cssClass     s-switch${
-                    shape === finalParams.defaultShape ? '' : `:${shape}`
-                }           Apply the ${shape} switch shape`;
+                    lnf === finalParams.defaultLnf ? '' : `:${lnf}`
+                }           Apply the ${lnf} switch lnf`;
             })
             .join('\n')}
         * 
-        ${finalParams.styles
-            .map((style) => {
-                return ` * @example        html       ${style} style
+        ${finalParams.lnfs
+            .map((lnf) => {
+                return ` * @example        html       ${lnf} lnf
             *   <label class="s-mbe:30 s-label">
             *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *     <input type="checkbox" class="s-switch${
-                style === finalParams.defaultStyle ? '' : `:${style}`
+                lnf === finalParams.defaultLnf ? '' : `:${lnf}`
             }" />
             *   </label>
                 <label class="s-mbe:30 s-label">
             *     <span>I'm disabled</span>
             *     <input type="checkbox" disabled class="s-switch${
-                style === finalParams.defaultStyle ? '' : `:${style}`
-            }" />
-            *   </label>
-            * `;
-            })
-            .join('\n')}
-        *
-        ${finalParams.shapes
-            .map((shape) => {
-                return ` * @example        html       ${shape} shape
-            *   <label class="s-mbe:30 s-label">
-            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
-            *     <input type="checkbox" class="s-switch${
-                shape === finalParams.defaultShape ? '' : `:${shape}`
-            }" />
-            *   </label>
-                <label class="s-mbe:30 s-label">
-            *     <span>I'm disabled</span>
-            *     <input type="checkbox" disabled class="s-switch${
-                shape === finalParams.defaultShape ? '' : `:${shape}`
+                lnf === finalParams.defaultLnf ? '' : `:${lnf}`
             }" />
             *   </label>
             * `;
@@ -257,10 +200,10 @@ export default function ({
     }
 
     if (finalParams.scope.includes('lnf')) {
-        finalParams.styles.forEach((style) => {
+        finalParams.lnfs.forEach((lnf) => {
             let cls = `s-switch`;
-            if (style !== finalParams.defaultStyle) {
-                cls += `\n${style}`;
+            if (lnf !== finalParams.defaultLnf) {
+                cls += `\n${lnf}`;
             }
 
             vars.comment(
@@ -269,7 +212,7 @@ export default function ({
                 * @namespace          sugar.style.ui.switch
                 * @type           CssClass
                 * 
-                * This class represent a(n) "<s-color="accent">${style}</s-color>" switch
+                * This class represent a(n) "<s-color="accent">${lnf}</s-color>" switch
                 * 
                 * @feature      Vertical rhythm
                 * 
@@ -288,60 +231,12 @@ export default function ({
             ).code(
                 `
             .${cls.replace('\n', '--')} {
-                @sugar.ui.switch($style: ${style}, $scope: lnf);
+                @sugar.ui.switch($lnf: ${lnf}, $scope: lnf);
             }
         `,
                 { type: 'CssClass' },
             );
         });
-    }
-
-    if (finalParams.scope.includes('shape')) {
-        finalParams.shapes.forEach((shape) => {
-            let cls = `s-switch`;
-            if (shape !== finalParams.defaultShape) {
-                cls += `\n${shape}`;
-            }
-
-            vars.comment(
-                () => `/**
-        * @name           ${cls}
-        * @namespace          sugar.style.ui.switch
-        * @type           CssClass
-        * 
-        * This class represent a(n) "<s-color="accent">${shape}</s-color>" switch
-        * 
-        * @example        html
-        * <label class="s-label">
-        *   <span>${__faker.name.findName()}</span>
-        *   <input type="checkbox" class="${cls.replace(/\./gm, ' ').trim()}" />
-        * </label>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-      */
-     `,
-            ).code(
-                `
-      .${cls.replace('\n', '--')} {
-        @sugar.ui.switch($shape: ${shape}, $scope: shape);
-      }
-    `,
-                { type: 'CssClass' },
-            );
-        });
-    }
-
-    // default color
-    if (finalParams.scope.includes('lnf')) {
-        vars.code(
-            () => `
-            .s-switch:not(.s-color) {
-                @sugar.color(${finalParams.defaultColor});
-            }
-        `,
-            { type: 'CssClass' },
-        );
     }
 
     return vars;

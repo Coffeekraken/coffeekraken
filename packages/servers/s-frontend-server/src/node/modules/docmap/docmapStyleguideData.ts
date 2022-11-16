@@ -14,9 +14,9 @@ export default function docmapStyleguideData({ req, res, pageConfig }) {
             );
         }
 
-        __SBench.start('data.docmapStyleguideData');
+        const bench = new __SBench('data.docmapStyleguideData');
 
-        __SBench.step('data.docmapStyleguideData', 'beforeDocmapRead');
+        bench.step('beforeDocmapRead');
 
         const docmap = new __SDocmap();
         const docmapJson = await docmap.read();
@@ -33,7 +33,7 @@ export default function docmapStyleguideData({ req, res, pageConfig }) {
                 ];
         }
 
-        __SBench.step('data.docmapStyleguideData', 'afterDocmapRead');
+        bench.step('afterDocmapRead');
 
         if (!styleguideObj || !__fs.existsSync(styleguideObj.docmap.path)) {
             return reject(
@@ -43,7 +43,7 @@ export default function docmapStyleguideData({ req, res, pageConfig }) {
 
         const finalReqPath = `/styleguide/${req.params.path}`;
 
-        __SBench.step('data.docmapStyleguideData', 'beforeDocblockParsing');
+        bench.step('beforeDocblockParsing');
 
         const slugsStack: string[] = [];
         const docblocksInstance = new __SDocblock(styleguideObj.docmap.path, {
@@ -78,7 +78,8 @@ export default function docmapStyleguideData({ req, res, pageConfig }) {
             }
         }
 
-        __SBench.step('data.docmapStyleguideData', 'afterDocblockParsing');
+        bench.step('afterDocblockParsing');
+        bench.end();
 
         resolve({
             docblocks,

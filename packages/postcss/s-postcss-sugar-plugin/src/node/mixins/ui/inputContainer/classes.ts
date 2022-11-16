@@ -11,9 +11,9 @@ import __faker from 'faker';
  *
  * Generate the input container classes
  *
- * @param       {('group'|'addon')[]}                           [styles=['group','addon']]         The style(s) you want to generate
- * @param       {'group'|'addon'}                [defaultStyle='group']           The default style you want
- * @param       {('bare'|'lnf''|'vr'|'tf')[]}        [scope=['bare', 'lnf'', 'vr', 'tf']]      The scope you want to generate
+ * @param       {('group'|'addon')[]}                           [lnfs=['group','addon']]         The style(s) you want to generate
+ * @param       {'group'|'addon'}                [defaultLnf='group']           The default style you want
+ * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css
@@ -26,11 +26,11 @@ import __faker from 'faker';
 class postcssSugarPluginUiFormClassesInterface extends __SInterface {
     static get _definition() {
         return {
-            styles: {
+            lnfs: {
                 type: 'String[]',
                 default: ['group', 'addon'],
             },
-            defaultStyle: {
+            defaultLnf: {
                 type: 'String',
                 default: 'group',
             },
@@ -39,17 +39,17 @@ class postcssSugarPluginUiFormClassesInterface extends __SInterface {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'vr', 'tf'],
-                default: ['bare', 'lnf', 'vr', 'tf'],
+                values: ['bare', 'lnf'],
+                default: ['bare', 'lnf'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiFormClassesParams {
-    styles: ('group' | 'addon')[];
-    defaultStyle: 'group';
-    scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
+    lnfs: ('group' | 'addon')[];
+    defaultLnf: 'group';
+    scope: ('bare' | 'lnf')[];
 }
 
 export { postcssSugarPluginUiFormClassesInterface as interface };
@@ -66,8 +66,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiFormClassesParams = {
-        styles: ['group', 'addon'],
-        defaultStyle: 'group',
+        lnfs: ['group', 'addon'],
+        defaultLnf: 'group',
         scope: [],
         ...params,
     };
@@ -84,13 +84,13 @@ export default function ({
         * @platform       css
         * @status       beta
         * 
-        * These classes allows you to apply some styles to input container
+        * These classes allows you to apply some lnfs to input container
         * 
-        ${finalParams.styles
-            .map((style) => {
+        ${finalParams.lnfs
+            .map((lnf) => {
                 return ` * @cssClass     s-input-container${
-                    finalParams.defaultStyle === style ? '' : `:${style}`
-                }           Apply the ${style} input container style`;
+                    finalParams.defaultLnf === lnf ? '' : `:${lnf}`
+                }           Apply the ${lnf} input container lnf`;
             })
             .join('\n')}
         * 
@@ -189,7 +189,7 @@ export default function ({
      `,
         ).code(`
         .s-input-container--group {
-            @sugar.ui.inputContainer($style: group, $scope: bare);
+            @sugar.ui.inputContainer($lnf: group, $scope: bare);
         }
         `);
     }
@@ -197,7 +197,7 @@ export default function ({
         vars.code(
             `
         .s-input-container--group {
-            @sugar.ui.inputContainer($style: group, $scope: lnf);
+            @sugar.ui.inputContainer($lnf: group, $scope: lnf);
         }
         `,
             {
@@ -233,7 +233,7 @@ export default function ({
         ).code(
             `
         .s-input-container--addon {
-            @sugar.ui.inputContainer($style: addon, $scope: bare);
+            @sugar.ui.inputContainer($lnf: addon, $scope: bare);
         }
         `,
             {
@@ -245,7 +245,7 @@ export default function ({
         vars.code(
             `
         .s-input-container--addon {
-            @sugar.ui.inputContainer($style: addon, $scope: lnf);
+            @sugar.ui.inputContainer($lnf: addon, $scope: lnf);
         }
         `,
             {

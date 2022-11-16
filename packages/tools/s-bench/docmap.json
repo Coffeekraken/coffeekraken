@@ -3,12 +3,10 @@
     "extends": [],
     "generated": {
         "extends": [
-            "01-basic",
-            "02-basic",
             "@coffeekraken/cli",
-            "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-asset-picker-component",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
@@ -18,6 +16,7 @@
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
+            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
@@ -35,6 +34,7 @@
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
+            "@coffeekraken/s-dropzone-component",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -48,6 +48,7 @@
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-glob",
+            "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
@@ -56,6 +57,7 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
@@ -74,6 +76,7 @@
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
             "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -99,6 +102,55 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-bench.config.bench.filters.min": {
+                "id": "@coffeekraken.s-bench.config.bench.filters.min",
+                "name": "min",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Number"
+                        }
+                    ],
+                    "raw": "Number"
+                },
+                "default": "40",
+                "description": "Specify the benches to filters out when under a certain duration in ms",
+                "namespace": "@coffeekraken.s-bench.config.bench.filters",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "bench.config.ts",
+                "extension": "config",
+                "relPath": "src/config/bench.config.ts"
+            },
+            "@coffeekraken.s-bench.config.bench.filters.max": {
+                "id": "@coffeekraken.s-bench.config.bench.filters.max",
+                "name": "max",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Number"
+                        }
+                    ],
+                    "raw": "Number"
+                },
+                "default": "99999999999",
+                "description": "Specify the benches to filters out when above a certain duration in ms",
+                "namespace": "@coffeekraken.s-bench.config.bench.filters",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "bench.config.ts",
+                "extension": "config",
+                "relPath": "src/config/bench.config.ts",
+                "children": {}
+            },
             "@coffeekraken.s-bench.doc.README": {
                 "id": "@coffeekraken.s-bench.doc.README",
                 "name": "README",
@@ -134,6 +186,67 @@
                 "extension": "md",
                 "relPath": "src/doc/README.md",
                 "children": {}
+            },
+            "@coffeekraken.s-bench.node.SBench": {
+                "id": "@coffeekraken.s-bench.node.SBench",
+                "name": "SBench",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to perform some simple benchmarking actions\nlike dividing a process into multiple \"steps\" and track the timing\nbetween these, etc...",
+                "namespace": "@coffeekraken.s-bench.node",
+                "status": "alpha",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SBench from '@coffeekraken/s-bench';\n\nSBench.start('myCoolProcess');\n// some code...\nSBench.step('myCoolProcess', 'Before compilation');\n// compilation code...\nSBench.step('myCoolProcess', 'After compilation');\nSBench.end('myCoolProcess');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SBench.ts",
+                "extension": "ts",
+                "relPath": "src/node/SBench.ts",
+                "children": {
+                    "constructor": {
+                        "id": "sbb1735b97f3fba675df35746468b8f603c66eda322c124ca0dde9e338924e3e9",
+                        "name": "constructor",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    }
+                }
             },
             "@coffeekraken.s-bench.shared.SBench": {
                 "id": "@coffeekraken.s-bench.shared.SBench",
@@ -175,9 +288,9 @@
                 "extension": "ts",
                 "relPath": "src/shared/SBench.ts",
                 "children": {
-                    "benchenv": {
-                        "id": "s5425ea7b97275a1ef8849982413d8f8bdbe28ea869632fe299ee304340ac4255",
-                        "name": "benchEnv",
+                    "disable": {
+                        "id": "sac3271218a97271adbd957c3fb1993eff28934511e0cc36b9fa8ef42f5f30f67",
+                        "name": "disable",
                         "type": {
                             "types": [
                                 {
@@ -186,21 +299,7 @@
                             ],
                             "raw": "Function"
                         },
-                        "description": "This static method allows you to get the current bench environment\nthe process is running in. The bench environment",
-                        "static": "true"
-                    },
-                    "filter": {
-                        "id": "scacf45682e3993d97dcddf47dd4528ee5d295d48adb30faeadaf1a38bf2743ad",
-                        "name": "filter",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ],
-                            "raw": "Function"
-                        },
-                        "description": "This method allows you to activate a list of bench id(s).\nYou can specify \"\" for wildcard",
+                        "description": "This method allows you to disable the bench in you process",
                         "static": "true",
                         "since": "2.0.0",
                         "author": {
@@ -209,9 +308,9 @@
                             "url": "https://coffeekraken.io"
                         }
                     },
-                    "filtered": {
-                        "id": "sff9cf7419b22c3e1886bd53af1efcd428626c7b1010e0818e04f5e18f839be29",
-                        "name": "filtered",
+                    "isdisabled": {
+                        "id": "see2482a9acaf59838028029e77069ee1bc87d38b383595e1eddefccee860e019",
+                        "name": "isDisabled",
                         "type": {
                             "types": [
                                 {
@@ -220,7 +319,7 @@
                             ],
                             "raw": "Function"
                         },
-                        "description": "This method allows you to get back the list of activated bench(s)",
+                        "description": "This method allows you to check if the bench are disabled in your process or not",
                         "static": "true",
                         "since": "2.0.0",
                         "author": {
@@ -229,9 +328,9 @@
                             "url": "https://coffeekraken.io"
                         }
                     },
-                    "isbenchactive": {
-                        "id": "sfad422daf2d1e48d207e378372b48fcce395ea995846f96013b41ae8e6096bc9",
-                        "name": "isBenchActive",
+                    "stats": {
+                        "id": "s64be8736dd8f2d39b35611f788219dd64b3918865f66727a47a136f89f3c5330",
+                        "name": "stats",
                         "type": {
                             "types": [
                                 {
@@ -240,7 +339,7 @@
                             ],
                             "raw": "Function"
                         },
-                        "description": "This method allows you to check if a particular bench id is active",
+                        "description": "This method allows you to log some stats about the gathered benches",
                         "static": "true",
                         "since": "2.0.0",
                         "author": {
@@ -249,9 +348,9 @@
                             "url": "https://coffeekraken.io"
                         }
                     },
-                    "getbenchinstancebyid": {
-                        "id": "se81bdaf6e9fe2f5727fee876731216c5774344fb9a3444c5200c7ed0bd642f90",
-                        "name": "getBenchInstanceById",
+                    "constructor": {
+                        "id": "sbb1735b97f3fba675df35746468b8f603c66eda322c124ca0dde9e338924e3e9",
+                        "name": "constructor",
                         "type": {
                             "types": [
                                 {
@@ -260,8 +359,7 @@
                             ],
                             "raw": "Function"
                         },
-                        "description": "This static method allows you to get back a current SBench instance by it's id,\nor get back a new instance that you can use directly",
-                        "static": "true",
+                        "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -345,44 +443,6 @@
                             "url": "https://coffeekraken.io"
                         }
                     },
-                    "constructor": {
-                        "id": "sbb1735b97f3fba675df35746468b8f603c66eda322c124ca0dde9e338924e3e9",
-                        "name": "constructor",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ],
-                            "raw": "Function"
-                        },
-                        "description": "Constructor",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
-                    "isactive": {
-                        "id": "sa2bfc3f9582507e0f5c56520826c61676737768e093fde2931eb43d815d62bd6",
-                        "name": "isActive",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ],
-                            "raw": "Function"
-                        },
-                        "description": "This method allows you to check if the current bench is active or not.",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
                     "tostring": {
                         "id": "s6c223293a615820244213740345b08f62662f9b6599a6c89a4ae2ccf25969b46",
                         "name": "toString",
@@ -434,11 +494,25 @@
                     "definition": {
                         "title": {
                             "description": "Specify a title for your bench that will be used in the log",
-                            "type": "String"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            }
                         },
                         "body": {
                             "description": "Specify a body for your bench that will be used in the log",
-                            "type": "String"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            }
                         }
                     }
                 },

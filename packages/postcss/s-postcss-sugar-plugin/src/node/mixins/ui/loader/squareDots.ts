@@ -13,8 +13,8 @@ import { __uniqid } from '@coffeekraken/sugar/string';
  * Apply the squareDots style to any element
  *
  * @param        {String}           [name='s-loader-square-dots']               A name for your squareDots
- * @param       {String}            [duration='theme.ui.loaderSquareDots.duration']        The duration of your squareDots animation
- * @param        {String}           [easing='theme.ui.loaderSquareDots.easing']            The easing you want for your squareDots animation
+ * @param       {String}            [duration='theme.ui.loader.duration']        The duration of your squareDots animation
+ * @param        {String}           [easing='theme.ui.loader.easing']            The easing you want for your squareDots animation
  * @return      {String}            The generated css
  *
  * @example     css
@@ -35,7 +35,7 @@ class postcssSugarPluginUiLoaderSquareDotsMixinInterface extends __SInterface {
             },
             duration: {
                 type: 'String',
-                default: __STheme.get('ui.loaderSquareDots.duration'),
+                default: __STheme.get('ui.loader.duration'),
             },
         };
     }

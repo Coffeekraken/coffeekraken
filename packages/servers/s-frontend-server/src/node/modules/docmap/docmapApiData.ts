@@ -4,7 +4,6 @@ import __SDocmap from '@coffeekraken/s-docmap';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __scrapeUrl from '@coffeekraken/sugar/node/og/scrapeUrl';
-import __namespaceCompliant from '@coffeekraken/sugar/shared/string/namespaceCompliant';
 import { __packageJsonSync } from '@coffeekraken/sugar/package';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 
@@ -16,9 +15,9 @@ export default function docmapApiData({ req, res, pageConfig }) {
             );
         }
 
-        __SBench.start('data.docmapApiData');
+        const bench = new __SBench('data.docmapApiData');
 
-        __SBench.step('data.docmapApiData', 'beforeDocmapRead');
+        bench.step('beforeDocmapRead');
 
         const docmap = new __SDocmap();
         const docmapJson = await docmap.read();
@@ -30,7 +29,7 @@ export default function docmapApiData({ req, res, pageConfig }) {
             );
         }
 
-        __SBench.step('data.docmapApiData', 'afterDocmapRead');
+        bench.step('afterDocmapRead');
 
         let firstBlockWithNamespace, nextBlockWithNamespace;
 
@@ -78,7 +77,7 @@ export default function docmapApiData({ req, res, pageConfig }) {
             }
         }
 
-        __SBench.step('data.docmapApiData', 'afterDocblockParsing');
+        bench.step('afterDocblockParsing');
 
         resolve({
             docblocks,

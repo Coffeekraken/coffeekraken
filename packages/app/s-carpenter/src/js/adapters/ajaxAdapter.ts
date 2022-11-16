@@ -42,8 +42,8 @@ export default {
     },
 
     async getProps({ $elm }): Promise<any> {
-        if ($elm.hasAttribute('values')) {
-            const data = JSON.parse($elm.getAttribute('values'));
+        if ($elm.hasAttribute('s-specs-values')) {
+            const data = JSON.parse($elm.getAttribute('s-specs-values'));
             return data;
         }
 

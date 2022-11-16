@@ -55,9 +55,9 @@ export default function genericHandler({
         //     return resolve();
         // }
 
-        __SBench.start('handlers.generic');
+        const bench = new __SBench('handlers.generic');
 
-        __SBench.step('handlers.generic', 'beforeViewsRendering');
+        bench.step('beforeViewsRendering');
 
         const renderedViews: string[] = [];
 
@@ -65,9 +65,8 @@ export default function genericHandler({
             let data = Object.assign({}, res.templateData ?? {}),
                 viewPath = viewObj.path;
 
-            __SBench.step(
-                `handlers.generic`,
-                `beforeViewRendering.${viewPath}`,
+            const viewBench = new __SBench(
+                `handlers.generic.${viewObj.path ?? viewObj}`,
             );
 
             if (typeof viewObj === 'string') {
@@ -127,6 +126,8 @@ export default function genericHandler({
                     }
                 }
 
+                viewBench.step(`afterDataLoaded`);
+
                 const dataFnResult = await dataFn({
                     req,
                     res,
@@ -161,12 +162,12 @@ export default function genericHandler({
                 renderedViews.push(viewRes.value);
             }
 
-            __SBench.step(`handlers.generic`, `afterViewRendering.${viewPath}`);
+            viewBench.end();
         }
 
-        __SBench.step('handlers.generic', 'afterViewsRendering');
+        bench.step('afterViewsRendering');
 
-        __SBench.step('handlers.generic', 'beforeLayoutRendering');
+        bench.step('beforeLayoutRendering');
 
         let layoutPath = pageConfig.layout ?? 'layouts.main';
 
@@ -205,9 +206,9 @@ export default function genericHandler({
                 .join(`\n\n`);
         }
 
-        __SBench.step('handlers.generic', 'afterLayoutRendering');
+        bench.step('afterLayoutRendering');
 
-        __SBench.end('handlers.generic').log();
+        bench.end();
 
         res.status(200);
         res.type(

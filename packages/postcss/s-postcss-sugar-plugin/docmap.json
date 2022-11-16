@@ -3,12 +3,10 @@
     "extends": [],
     "generated": {
         "extends": [
-            "01-basic",
-            "02-basic",
             "@coffeekraken/cli",
-            "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-asset-picker-component",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
@@ -19,6 +17,7 @@
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
+            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
@@ -36,6 +35,7 @@
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
+            "@coffeekraken/s-dropzone-component",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -49,6 +49,7 @@
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-glob",
+            "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
@@ -57,6 +58,7 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
@@ -74,6 +76,7 @@
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
             "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -297,7 +300,14 @@
                     "definition": {
                         "ui": {
                             "description": "Specify if you want the UI classes to be generated or not",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         }
                     }
@@ -369,7 +379,14 @@
                     "description": "",
                     "definition": {
                         "radius": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "0",
                                 "10",
@@ -388,7 +405,14 @@
                             "required": true
                         },
                         "scalable": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         }
                     }
@@ -435,7 +459,14 @@
                     "description": "",
                     "definition": {
                         "width": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "0",
                                 "10",
@@ -454,7 +485,14 @@
                             "required": true
                         },
                         "scalable": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         }
                     }
@@ -501,15 +539,36 @@
                     "description": "",
                     "definition": {
                         "color": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "alias": "c"
                         },
                         "schema": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "alias": "v"
                         },
                         "modifier": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "alias": "m"
                         }
                     }
@@ -556,7 +615,17 @@
                     "description": "",
                     "definition": {
                         "depth": {
-                            "type": "Number|String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    },
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "Number|String"
+                            },
                             "required": true
                         }
                     }
@@ -603,17 +672,38 @@
                     "description": "",
                     "definition": {
                         "frequency": {
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "required": true,
                             "default": 0.65
                         },
                         "width": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "required": true,
                             "default": "5000px"
                         },
                         "height": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "required": true,
                             "default": "5000px"
                         }
@@ -661,7 +751,14 @@
                     "description": "",
                     "definition": {
                         "name": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "required": true,
                             "alias": "n"
                         }
@@ -709,12 +806,26 @@
                     "description": "",
                     "definition": {
                         "size": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "required": true,
                             "alias": "s"
                         },
                         "scalable": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         }
                     }
@@ -761,7 +872,14 @@
                     "description": "",
                     "definition": {
                         "margin": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "0",
                                 "10",
@@ -780,7 +898,14 @@
                             "required": true
                         },
                         "scalable": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         }
                     }
@@ -827,7 +952,14 @@
                     "description": "",
                     "definition": {
                         "offsize": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "0",
                                 "10",
@@ -846,7 +978,14 @@
                             "required": true
                         },
                         "scalable": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         }
                     }
@@ -893,7 +1032,14 @@
                     "description": "",
                     "definition": {
                         "opacity": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "0",
                                 "10",
@@ -954,7 +1100,14 @@
                     "description": "",
                     "definition": {
                         "padding": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "0",
                                 "10",
@@ -973,7 +1126,14 @@
                             "required": true
                         },
                         "scalable": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         }
                     }
@@ -1006,7 +1166,7 @@
                         "description": ""
                     }
                 ],
-                "description": "This function allows you to get value that will be scaled using the \"--s-scale\" variable.\nThis allows you to make your components aware of classes like \"s-scale-10\", etc...",
+                "description": "This function allows you to get value that will be scaled using the \"--s-scale\" variable.\nThis allows you to make your components aware of classes like \"s-scale-10\", etc...\nThe resulting value of this will be affected by the --s-scale-global variable that you can change\nusing the `@sugar.scale.global(0.9)` mixin...",
                 "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.function.scalable",
                 "status": "beta",
                 "example": [
@@ -1020,7 +1180,17 @@
                     "description": "",
                     "definition": {
                         "value": {
-                            "type": "String|Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    },
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "String|Number"
+                            },
                             "required": true
                         }
                     }
@@ -1067,7 +1237,14 @@
                     "description": "",
                     "definition": {
                         "space": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "0",
                                 "10",
@@ -1129,15 +1306,36 @@
                     "description": "",
                     "definition": {
                         "dotPath": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "required": true
                         },
                         "scalable": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "return": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "var",
                                 "value"
@@ -1145,7 +1343,14 @@
                             "default": "var"
                         },
                         "fallback": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         }
                     }
@@ -1192,15 +1397,36 @@
                     "description": "",
                     "definition": {
                         "dotPath": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "required": true
                         },
                         "scalable": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "fallback": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         }
                     }
@@ -1247,15 +1473,36 @@
                     "description": "",
                     "definition": {
                         "dotPath": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "required": true
                         },
                         "scalable": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "fallback": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         }
                     }
@@ -1302,7 +1549,14 @@
                     "description": "",
                     "definition": {
                         "name": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "slow",
                                 "default",
@@ -4057,6 +4311,60 @@
                 "relPath": "src/node/mixins/scale/classes.ts",
                 "children": {}
             },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scale.global": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scale.global",
+                "name": "global",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ],
+                    "raw": "PostcssMixin"
+                },
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to set the --s-scale-global variable to whatever you want",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scale",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-element {\n   @sugar.scale.global(1.2);\n}"
+                    }
+                ],
+                "interface": {
+                    "name": "postcssSugarPluginScaleMixinInterface",
+                    "description": "",
+                    "definition": {
+                        "value": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
+                            "required": true
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "global.ts",
+                "extension": "ts",
+                "relPath": "src/node/mixins/scale/global.ts",
+                "children": {}
+            },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scale.scale": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.scale.scale",
                 "name": "scale",
@@ -4088,7 +4396,14 @@
                     "description": "",
                     "definition": {
                         "value": {
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "required": true
                         }
                     }
@@ -4838,14 +5153,28 @@
                     "description": "",
                     "definition": {
                         "state": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "mounted"
                             ],
                             "required": true
                         },
                         "sibling": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         }
                     }
@@ -4934,14 +5263,41 @@
                     "description": "",
                     "definition": {
                         "dotPath": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "required": true
                         },
                         "exclude": {
-                            "type": "Array<String>"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Array<String>"
+                            }
                         },
                         "only": {
-                            "type": "Array<String>"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Array<String>"
+                            }
                         }
                     }
                 },
@@ -4951,9 +5307,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "configToCss.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/utils/configToCss.ts",
+                "filename": "configToCss.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/utils/configToCss.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.visibility.classes": {
@@ -5187,7 +5543,14 @@
                     "description": "",
                     "definition": {
                         "state": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "mounted",
                                 "active",
@@ -5197,7 +5560,14 @@
                             "required": true
                         },
                         "context": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "self",
                                 "sibling",
@@ -5294,14 +5664,28 @@
                     "description": "",
                     "definition": {
                         "style": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "value": [
                                 "solid"
                             ],
                             "default": "solid"
                         },
                         "shape": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -5375,7 +5759,17 @@
                     "description": "",
                     "definition": {
                         "styles": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "values": [
                                 "solid"
                             ],
@@ -5384,7 +5778,17 @@
                             ]
                         },
                         "shapes": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -5397,14 +5801,28 @@
                             ]
                         },
                         "defaultStyle": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "solid"
                             ],
                             "default": "solid"
                         },
                         "defaultShape": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -5413,7 +5831,14 @@
                             "default": "rounded"
                         },
                         "defaultColor": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "current",
                                 "base",
@@ -5531,7 +5956,17 @@
                     "description": "",
                     "definition": {
                         "styles": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "values": [
                                 "solid"
                             ],
@@ -5540,14 +5975,28 @@
                             ]
                         },
                         "defaultStyle": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "solid"
                             ],
                             "default": "solid"
                         },
                         "defaultColor": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "current",
                                 "base",
@@ -5622,7 +6071,14 @@
                     "description": "",
                     "definition": {
                         "style": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "solid",
                                 "outline"
@@ -5630,7 +6086,14 @@
                             "default": "solid"
                         },
                         "shape": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -5701,7 +6164,17 @@
                     "description": "",
                     "definition": {
                         "styles": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "values": [
                                 "solid",
                                 "outline"
@@ -5712,7 +6185,17 @@
                             ]
                         },
                         "shapes": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -5725,7 +6208,14 @@
                             ]
                         },
                         "defaultStyle": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "solid",
                                 "outline"
@@ -5733,7 +6223,14 @@
                             "default": "solid"
                         },
                         "defaultShape": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -5742,7 +6239,14 @@
                             "default": "default"
                         },
                         "defaultColor": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "current",
                                 "base",
@@ -5823,18 +6327,39 @@
                     "description": "",
                     "definition": {
                         "color": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "accent"
                         },
                         "style": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "solid"
                             ],
                             "default": "solid"
                         },
                         "shape": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "default",
                                 "square"
@@ -5906,7 +6431,17 @@
                     "description": "",
                     "definition": {
                         "styles": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "values": [
                                 "solid"
                             ],
@@ -5915,7 +6450,17 @@
                             ]
                         },
                         "shapes": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -5928,14 +6473,28 @@
                             ]
                         },
                         "defaultStyle": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "solid"
                             ],
                             "default": "solid"
                         },
                         "defaultShape": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -5944,7 +6503,14 @@
                             "default": "default"
                         },
                         "defaultColor": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "current",
                                 "base",
@@ -6025,7 +6591,14 @@
                     "description": "",
                     "definition": {
                         "style": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "solid",
                                 "gradient",
@@ -6035,7 +6608,14 @@
                             "default": "solid"
                         },
                         "shape": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -6105,7 +6685,14 @@
                     "description": "",
                     "definition": {
                         "style": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "solid",
                                 "gradient",
@@ -6115,7 +6702,14 @@
                             "default": "solid"
                         },
                         "shape": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -6186,7 +6780,17 @@
                     "description": "",
                     "definition": {
                         "styles": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "values": [
                                 "solid",
                                 "gradient",
@@ -6201,7 +6805,17 @@
                             ]
                         },
                         "shapes": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -6214,7 +6828,14 @@
                             ]
                         },
                         "defaultStyle": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "solid",
                                 "gradient",
@@ -6224,7 +6845,14 @@
                             "default": "solid"
                         },
                         "defaultShape": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -6233,7 +6861,14 @@
                             "default": "default"
                         },
                         "defaultColor": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "current",
                                 "base",
@@ -6314,14 +6949,28 @@
                     "description": "",
                     "definition": {
                         "style": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "solid"
                             ],
                             "default": "solid"
                         },
                         "shape": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -6392,7 +7041,17 @@
                     "description": "",
                     "definition": {
                         "styles": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "values": [
                                 "solid"
                             ],
@@ -6401,7 +7060,17 @@
                             ]
                         },
                         "shapes": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -6414,14 +7083,28 @@
                             ]
                         },
                         "defaultStyle": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "solid"
                             ],
                             "default": "solid"
                         },
                         "defaultShape": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -6430,7 +7113,14 @@
                             "default": "default"
                         },
                         "defaultColor": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "current",
                                 "base",
@@ -6506,13 +7196,33 @@
                     "description": "",
                     "definition": {
                         "styles": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "default": [
                                 "solid"
                             ]
                         },
                         "shape": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -6525,14 +7235,28 @@
                             ]
                         },
                         "defaultStyle": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "solid"
                             ],
                             "default": "solid"
                         },
                         "defaultShape": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -6541,7 +7265,14 @@
                             "default": "default"
                         },
                         "defaultColor": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "current",
                                 "base",
@@ -6622,14 +7353,28 @@
                     "description": "",
                     "definition": {
                         "style": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "solid"
                             ],
                             "default": "solid"
                         },
                         "shape": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -6638,7 +7383,14 @@
                             "default": "default"
                         },
                         "position": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "top",
                                 "top-start",
@@ -6709,7 +7461,17 @@
                     "description": "",
                     "definition": {
                         "styles": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "values": [
                                 "solid"
                             ],
@@ -6718,7 +7480,17 @@
                             ]
                         },
                         "shapes": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -6731,14 +7503,28 @@
                             ]
                         },
                         "defaultStyle": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "solid"
                             ],
                             "default": "solid"
                         },
                         "defaultColor": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "current",
                                 "base",
@@ -6783,9 +7569,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "classes.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/fsTree/classes.ts",
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/fsTree/classes.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.fsTree.fsTree": {
@@ -6819,14 +7605,28 @@
                     "description": "",
                     "definition": {
                         "style": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "solid"
                             ],
                             "default": "solid"
                         },
                         "shape": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -6892,13 +7692,33 @@
                     "description": "",
                     "definition": {
                         "styles": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "default": [
                                 "solid"
                             ]
                         },
                         "shapes": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -6911,15 +7731,36 @@
                             ]
                         },
                         "defaultStyle": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "solid"
                         },
                         "defaultShape": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "default"
                         },
                         "defaultColor": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "current",
                                 "base",
@@ -7000,14 +7841,28 @@
                     "description": "",
                     "definition": {
                         "style": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "solid"
                             ],
                             "default": "solid"
                         },
                         "shape": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -7016,7 +7871,14 @@
                             "default": "default"
                         },
                         "outline": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         },
                         "scope": {
@@ -7077,14 +7939,31 @@
                     "description": "",
                     "definition": {
                         "styles": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "default": [
                                 "group",
                                 "addon"
                             ]
                         },
                         "defaultStyle": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "group"
                         },
                         "scope": {
@@ -7184,7 +8063,17 @@
                     "description": "",
                     "definition": {
                         "styles": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "values": [
                                 "inline",
                                 "block",
@@ -7197,7 +8086,14 @@
                             ]
                         },
                         "defaultStyle": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "inline",
                                 "block",
@@ -7206,7 +8102,14 @@
                             "default": "inline"
                         },
                         "defaultColor": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "current",
                                 "base",
@@ -7287,7 +8190,14 @@
                     "description": "",
                     "definition": {
                         "style": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "inline",
                                 "block",
@@ -7350,7 +8260,17 @@
                     "description": "",
                     "definition": {
                         "styles": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "values": [
                                 "dl",
                                 "ul",
@@ -7365,7 +8285,14 @@
                             ]
                         },
                         "defaultStyle": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "dl",
                                 "ul",
@@ -7375,7 +8302,14 @@
                             "default": "dl"
                         },
                         "defaultColor": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "current",
                                 "base",
@@ -7454,7 +8388,14 @@
                     "description": "",
                     "definition": {
                         "style": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "dl",
                                 "ul",
@@ -7541,7 +8482,14 @@
                             ]
                         },
                         "defaultColor": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "current",
                                 "base",
@@ -7599,15 +8547,36 @@
                     "description": "",
                     "definition": {
                         "name": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "s-loader-drop"
                         },
                         "duration": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "1s"
                         },
                         "easing": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "linear"
                         }
                     }
@@ -7654,15 +8623,36 @@
                     "description": "",
                     "definition": {
                         "name": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "s-loader-round"
                         },
                         "duration": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "1s"
                         },
                         "easing": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "linear"
                         }
                     }
@@ -7709,15 +8699,36 @@
                     "description": "",
                     "definition": {
                         "name": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "s-loader-spinner"
                         },
                         "duration": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "1s"
                         },
                         "easing": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "linear"
                         }
                     }
@@ -7764,11 +8775,25 @@
                     "description": "",
                     "definition": {
                         "name": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "s-loader-square-dots"
                         },
                         "duration": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "1s"
                         }
                     }
@@ -7810,7 +8835,17 @@
                     "description": "",
                     "definition": {
                         "styles": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "values": [
                                 "solid"
                             ],
@@ -7819,7 +8854,17 @@
                             ]
                         },
                         "shapes": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -7832,14 +8877,28 @@
                             ]
                         },
                         "defaultStyle": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "solid"
                             ],
                             "default": "solid"
                         },
                         "defaultShape": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -7848,7 +8907,14 @@
                             "default": "default"
                         },
                         "defaultColor": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "current",
                                 "base",
@@ -7893,9 +8959,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "classes.ts",
-                "extension": "ts",
-                "relPath": "src/node/mixins/ui/radio/classes.ts",
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/radio/classes.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.radio.radio": {
@@ -7929,14 +8995,28 @@
                     "description": "",
                     "definition": {
                         "style": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "solid"
                             ],
                             "default": "solid"
                         },
                         "shape": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -8005,7 +9085,17 @@
                     "description": "",
                     "definition": {
                         "styles": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "values": [
                                 "solid"
                             ],
@@ -8014,7 +9104,17 @@
                             ]
                         },
                         "shapes": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -8029,14 +9129,28 @@
                             ]
                         },
                         "defaultStyle": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "solid"
                             ],
                             "default": "solid"
                         },
                         "defaultShape": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -8046,7 +9160,14 @@
                             "default": "default"
                         },
                         "defaultColor": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "current",
                                 "base",
@@ -8127,14 +9248,28 @@
                     "description": "",
                     "definition": {
                         "style": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "solid"
                             ],
                             "default": "solid"
                         },
                         "shape": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -8201,13 +9336,33 @@
                     "description": "",
                     "definition": {
                         "styles": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "default": [
                                 "solid"
                             ]
                         },
                         "shapes": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -8220,14 +9375,28 @@
                             ]
                         },
                         "defaultStyle": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "solid"
                             ],
                             "default": "solid"
                         },
                         "defaultShape": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -8236,7 +9405,14 @@
                             "default": "default"
                         },
                         "defaultColor": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "current",
                                 "base",
@@ -8317,14 +9493,28 @@
                     "description": "",
                     "definition": {
                         "style": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "solid"
                             ],
                             "default": "solid"
                         },
                         "shape": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -8390,7 +9580,17 @@
                     "description": "",
                     "definition": {
                         "styles": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "values": [
                                 "solid"
                             ],
@@ -8399,7 +9599,17 @@
                             ]
                         },
                         "shapes": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -8412,14 +9622,28 @@
                             ]
                         },
                         "defaultStyle": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "solid"
                             ],
                             "default": "solid"
                         },
                         "defaultShape": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -8428,7 +9652,14 @@
                             "default": "default"
                         },
                         "defaultColor": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "current",
                                 "base",
@@ -8507,14 +9738,28 @@
                     "description": "",
                     "definition": {
                         "style": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "solid"
                             ],
                             "default": "default"
                         },
                         "shape": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -8580,13 +9825,33 @@
                     "description": "",
                     "definition": {
                         "styles": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "default": [
                                 "solid"
                             ]
                         },
                         "shapes": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "values": [
                                 "default",
                                 "square"
@@ -8597,14 +9862,28 @@
                             ]
                         },
                         "defaultStyle": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "solid"
                             ],
                             "default": "solid"
                         },
                         "defaultShape": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "default",
                                 "square"
@@ -8612,7 +9891,14 @@
                             "default": "default"
                         },
                         "defaultColor": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "current",
                                 "base",
@@ -8693,14 +9979,28 @@
                     "description": "",
                     "definition": {
                         "style": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "solid"
                             ],
                             "default": "solid"
                         },
                         "shape": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "default",
                                 "square"
@@ -8767,7 +10067,17 @@
                     "description": "",
                     "definition": {
                         "lnfs": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "values": [
                                 "solid"
                             ],
@@ -8776,7 +10086,17 @@
                             ]
                         },
                         "shapes": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -8789,14 +10109,28 @@
                             ]
                         },
                         "defaultLnf": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "solid"
                             ],
                             "default": "solid"
                         },
                         "defaultShape": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -8805,7 +10139,14 @@
                             "default": "default"
                         },
                         "defaultColor": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "current",
                                 "base",
@@ -8886,7 +10227,14 @@
                     "description": "",
                     "definition": {
                         "lnf": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "description": "Specify the look and feel you want for your tabs",
                             "values": [
                                 "solid"
@@ -8894,7 +10242,14 @@
                             "default": "solid"
                         },
                         "shape": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "description": "Specify the shape you want for your tabs",
                             "values": [
                                 "default",
@@ -8904,17 +10259,38 @@
                             "default": "default"
                         },
                         "grow": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "description": "Specify if you want your tabs to take all the available place of not",
                             "default": false
                         },
                         "fill": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "description": "Specify if you want your tabs to be filled with a background color or not",
                             "default": false
                         },
                         "direction": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "description": "Specigy the direction of your tabs",
                             "values": [
                                 "vertical",
@@ -8923,7 +10299,14 @@
                             "default": "horizontal"
                         },
                         "outline": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "description": "Specify if you want your tabs to have an outline on focus",
                             "default": true
                         },
@@ -8997,7 +10380,17 @@
                     "description": "",
                     "definition": {
                         "types": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "values": [
                                 "burger"
                             ],
@@ -9049,7 +10442,14 @@
                     "description": "",
                     "definition": {
                         "type": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "burger"
                             ],
@@ -9094,7 +10494,17 @@
                     "description": "",
                     "definition": {
                         "styles": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "values": [
                                 "solid"
                             ],
@@ -9103,7 +10513,17 @@
                             ]
                         },
                         "shapes": {
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -9116,14 +10536,28 @@
                             ]
                         },
                         "defaultStyle": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "solid"
                             ],
                             "default": "solid"
                         },
                         "defaultShape": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -9132,7 +10566,14 @@
                             "default": "default"
                         },
                         "defaultColor": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "current",
                                 "base",
@@ -9213,14 +10654,28 @@
                     "description": "",
                     "definition": {
                         "style": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "solid"
                             ],
                             "default": "default"
                         },
                         "shape": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "default",
                                 "square",
@@ -9229,7 +10684,14 @@
                             "default": "default"
                         },
                         "position": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "top",
                                 "right",
@@ -9239,7 +10701,14 @@
                             "default": "top"
                         },
                         "interactive": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "scope": {

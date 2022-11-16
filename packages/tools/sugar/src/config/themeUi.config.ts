@@ -243,34 +243,6 @@ export default function (api) {
             },
 
             /**
-             * @name          defaultLnf
-             * @namespace     config.themeUi.card
-             * @type          Number
-             * @default      [theme.ui.default.defaultStyle]
-             *
-             * Specify the default look and feel for your menus
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            get defaultLnf() {
-                return api.theme.ui.default.defaultStyle;
-            },
-
-            /**
-             * @name          defaultType
-             * @namespace     config.themeUi.card
-             * @type          Number
-             * @default      primary
-             *
-             * Specify the default look and feel for your menus
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            defaultType: 'primary',
-
-            /**
              * @name          depth
              * @namespace     config.themeUi.card
              * @type          String
@@ -283,21 +255,6 @@ export default function (api) {
              */
             get depth() {
                 return api.theme.ui.default.depth;
-            },
-
-            /**
-             * @name          spacing
-             * @namespace     config.themeUi.card
-             * @type          Object
-             * @default      [theme.ui.default.spacing]
-             *
-             * Specify the default vertical rhythm for your code ui
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            get spacing() {
-                return api.theme.ui.default.spacing;
             },
         },
     };

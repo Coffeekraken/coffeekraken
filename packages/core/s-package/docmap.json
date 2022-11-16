@@ -3,12 +3,10 @@
     "extends": [],
     "generated": {
         "extends": [
-            "01-basic",
-            "02-basic",
             "@coffeekraken/cli",
-            "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-asset-picker-component",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
@@ -19,6 +17,7 @@
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
+            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
@@ -36,6 +35,7 @@
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
+            "@coffeekraken/s-dropzone-component",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -49,13 +49,16 @@
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-glob",
+            "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
@@ -73,6 +76,7 @@
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
             "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -534,7 +538,14 @@
                     "definition": {
                         "path": {
                             "description": "Specify the README.md path where to save it",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/core/s-package/README.md"
                         }
                     }
@@ -612,7 +623,17 @@
                     "definition": {
                         "dirs": {
                             "description": "Specify the directories in which to check for dependencies issues, etc...",
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "default": [
                                 "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/core/s-package/src/js",
                                 "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/core/s-package/src/node",
@@ -623,12 +644,26 @@
                         },
                         "installMissing": {
                             "description": "Specify if you would like to install missing dependencies.",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "alias": "i"
                         },
                         "packagesMap": {
                             "description": "Specify some package name patterns to add in package.json without installin them. Usefull for monorepo with packages that are not published yet.",
-                            "type": "Object",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
                             "default": {
                                 "^@coffeekraken/": "^2.0.0"
                             }
@@ -672,7 +707,17 @@
                     "definition": {
                         "glob": {
                             "description": "Sppecify some globs relative to the inDir to find the files you want to exports",
-                            "type": "Array<String>",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Array<String>"
+                            },
                             "default": [
                                 "dist/**/exports.js"
                             ],
@@ -680,13 +725,27 @@
                         },
                         "buildInitial": {
                             "description": "Specify if you want to process to the export at start even with the \"watch\" parameter to true",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false,
                             "alias": "b"
                         },
                         "folderModuleMap": {
                             "description": "Specify some folders you want to map to a specific package type like \"module\" or \"commonjs\"",
-                            "type": "Object",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
                             "default": {
                                 "esm": "import",
                                 "cjs": "require"
@@ -695,7 +754,14 @@
                         },
                         "folderPlatformMap": {
                             "description": "Specify some folders you want to map to a specific platform like \"node\" or \"browser\", etc...",
-                            "type": "Object",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
                             "default": {
                                 "node": "node",
                                 "shared": "shared",
@@ -742,7 +808,14 @@
                     "definition": {
                         "manager": {
                             "description": "Specify which package manager you want to use to install the dependencies. Can be \"npm\" or \"yarn\"",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "npm",
                                 "yarn"
@@ -788,11 +861,25 @@
                     "definition": {
                         "name": {
                             "description": "Specify the new name for your package",
-                            "type": "String"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            }
                         },
                         "folder": {
                             "description": "Specify if the folder has to be renames as well",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         }
                     }
@@ -834,7 +921,14 @@
                     "definition": {
                         "manager": {
                             "description": "Specify th package manager to use",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "yarn",
                                 "npm"

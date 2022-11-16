@@ -10,7 +10,8 @@
         "@coffeekraken/s-env": "^2.0.0-alpha.20",
         "@coffeekraken/s-interface": "^2.0.0-alpha.20",
         "@coffeekraken/s-promise": "^2.0.0-alpha.20",
-        "@coffeekraken/sugar": "^2.0.0-alpha.20"
+        "@coffeekraken/sugar": "^2.0.0-alpha.20",
+        "micromatch": "^4.0.5"
     },
     "main": "dist/pkg/cjs/node/exports.js",
     "module": "dist/pkg/esm/node/exports.js",

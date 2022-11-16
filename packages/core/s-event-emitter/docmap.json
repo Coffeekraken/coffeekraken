@@ -3,12 +3,10 @@
     "extends": [],
     "generated": {
         "extends": [
-            "01-basic",
-            "02-basic",
             "@coffeekraken/cli",
-            "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-asset-picker-component",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
@@ -19,6 +17,7 @@
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
+            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
@@ -36,6 +35,7 @@
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
+            "@coffeekraken/s-dropzone-component",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-favicon-builder",
@@ -48,13 +48,16 @@
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-glob",
+            "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
@@ -73,6 +76,7 @@
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
             "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -390,21 +394,52 @@
                     "definition": {
                         "events": {
                             "description": "Specify some events to pipe. Default it pipe everything using `*`",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "*"
                         },
                         "overrideEmitter": {
                             "description": "Specify if the emitter of the event that will be piped has to be overrided by the instance that pipe the event",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "processor": {
                             "description": "Specify a function that will be called before piping the event value. If you return only 1 value, it will set the value only, otherwise you can return an object with `value` and `metas` property to update also the metas",
-                            "type": "Function"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Function"
+                                    }
+                                ],
+                                "raw": "Function"
+                            }
                         },
                         "exclude": {
                             "description": "Specify some event(s) to not pipe at all like `resolve`, `reject`, etc...",
-                            "type": "Array<String>",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Array<String>"
+                            },
                             "default": [
                                 "finally",
                                 "resolve",
@@ -415,7 +450,14 @@
                         },
                         "filter": {
                             "description": "Specify a function that will receive the value and the metas object and MUST return `true` or `false` to tell if you want to pipe this current event",
-                            "type": "Function"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Function"
+                                    }
+                                ],
+                                "raw": "Function"
+                            }
                         }
                     }
                 },
@@ -456,27 +498,62 @@
                     "definition": {
                         "asyncStart": {
                             "description": "Specify if you want to start the event emitting process by yourself using the `start()` method",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "bufferTimeout": {
                             "description": "Specify how many ms to wait when the emitter is started to emit the buffered events",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 1000
                         },
                         "defaults": {
                             "description": "Specify some default object values for events. The property define the event name (of minimatch pattern) and the value is the default that will be applied at each emit",
-                            "type": "Object",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
                             "default": {}
                         },
                         "castByEvent": {
                             "description": "Specify a class by event name in which the value will be casted automatically. For example, the \"log\" event value is casted into an SLog instance",
-                            "type": "Object",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
                             "default": {}
                         },
                         "bind": {
                             "description": "Specify another object that will be used as the event emitter in the events metas. This do the same as using the `emitter.bind(...)` method",
-                            "type": "Object"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            }
                         }
                     }
                 },

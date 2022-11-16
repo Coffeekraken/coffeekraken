@@ -5,26 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
-const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
 class postcssUiCardClassesInterface extends s_interface_1.default {
     static get _definition() {
-        var _a;
         return {
-            lnfs: {
-                type: 'String[]',
-                values: ['solid'],
-                default: ['solid'],
-            },
-            defaultLnf: {
-                type: 'String',
-                values: ['solid'],
-                default: (_a = s_theme_1.default.get('ui.card.defaultLnf')) !== null && _a !== void 0 ? _a : 'solid',
-            },
-            defaultColor: {
-                type: 'String',
-                values: Object.keys(s_theme_1.default.get('color')),
-                default: s_theme_1.default.get('ui.card.defaultColor'),
-            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -38,8 +21,82 @@ class postcssUiCardClassesInterface extends s_interface_1.default {
 }
 exports.interface = postcssUiCardClassesInterface;
 function default_1({ params, atRule, CssVars, replaceWith, }) {
-    const finalParams = Object.assign({ lnfs: ['solid'], defaultLnf: 'solid', defaultColor: 'main', scope: ['bare', 'lnf'] }, params);
+    const finalParams = Object.assign({ scope: ['bare', 'lnf'] }, params);
     const vars = new CssVars();
+    function cardTpl(params) {
+        return `*   <div class="${params.class}">
+                *     <div class="s-card__media">
+                *         <img class="s-card__img" src="https://picsum.photos/1600/900" title="..." alt="..." />
+                *     </div>
+                *     <div class="s-card__content s-spacing:30">
+                *         <h1 class="s-card__title s-typo:h3">
+                *             Hello world
+                *         </h1>
+                *         <p class="s-card__lead s-typo:lead s-tc:accent">
+                *             Lorem ipsum dolor sit amet
+                *         </p>
+                *         <p class="s-card__text s-typo:p">
+                *             Ullamco aute ex mollit enim eu exercitation excepteur consequat laborum. Incididunt eiusmod commodo officia minim consequat enim occaecat est elit cillum. Incididunt pariatur duis ex sint. Qui aliqua pariatur cupidatat exercitation quis ea eu officia. Deserunt esse magna occaecat consectetur. Irure qui velit dolor ipsum qui cillum adipisicing reprehenderit.
+                *         </p>
+                *         <div class="s-card__cta">
+                *            <a class="s-btn s-color:accent">Click me!</a> 
+                *         </div>
+                *     </div>
+                * </div>`;
+    }
+    vars.comment(() => `
+      /**
+        * @name          Card
+        * @namespace          sugar.style.ui
+        * @type               Styleguide
+        * @menu           Styleguide / UI        /styleguide/ui/card
+        * @platform       css
+        * @status       beta
+        * 
+        * These classes allows to display nice card with options like direction, spacing, etc...
+        * 
+        * @support      chromium
+        * @support      firefox
+        * @support      safari
+        * @support      edge
+        * 
+        * @install          css
+        * \\@sugar.ui.card.classes;
+        * 
+        * .my-card {
+        *   \\@sugar.ui.card;
+        * }
+        * 
+        * @cssClass             s-card                       Specify that the card has to be displayed verticaly
+        * @cssClass             s-card:vertical            Specify that the card has to be displayed verticaly
+        * @cssClass             s-card:horizontal            Specify that the card has to be displayed horizontaly
+        * @cssClass             s-card:vertical-reverse            Specify that the card has to be displayed verticaly reversed
+        * @cssClass             s-card:horizontal-reverse            Specify that the card has to be displayed horizontaly reverses
+        * 
+        * @example          html            Default vertical
+        ${cardTpl({
+        class: 's-card',
+    })}
+        * 
+        * @example          html            Horizontal
+        ${cardTpl({
+        class: 's-card:horizontal',
+    })}
+        *
+        * @example          html            Vertical reverse
+        ${cardTpl({
+        class: 's-card:vertical-reverse',
+    })}
+        *
+        * @example          html            Horizontal reverse
+        ${cardTpl({
+        class: 's-card:horizontal-reverse',
+    })}
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+        */
+    `);
     if (finalParams.scope.includes('bare')) {
         vars.code(`
                 .s-card {
@@ -49,8 +106,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             type: 'CssClass',
         });
     }
-    if (finalParams.lnfs.includes(finalParams.defaultLnf) &&
-        finalParams.scope.includes('lnf')) {
+    if (finalParams.scope.includes('lnf')) {
         vars.comment(`/**
             * @name           .s-card:not(.s-bare)
             * @namespace          sugar.ui.card
@@ -59,30 +115,20 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             * This class represent a(n) "<s-color="accent">default</s-color> card
             * 
             * @example        html
-            * <s-menu>
-            *   <template lang="js">
-            *       console.log('hello world');
-            *   </template>
-            * </s-menu>
+            ${cardTpl({
+            class: 's-card',
+        })}
             * 
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code(`
             .s-card:not(.s-bare) {
-                @sugar.ui.card($scope: lnf, $lnf: ${finalParams.defaultLnf});
+                @sugar.ui.card($scope: lnf);
             }`, {
             type: 'CssClass',
         });
     }
-    // default color
-    if (finalParams.scope.includes('lnf')) {
-        vars.code(`
-            .s-card:not(.s-bare) {
-                @sugar.color(${finalParams.defaultColor});
-            }
-        `, { type: 'CssClass' });
-    }
     return vars;
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUNyRCxvRUFBNkM7QUFFN0MsTUFBTSw2QkFBOEIsU0FBUSxxQkFBWTtJQUNwRCxNQUFNLEtBQUssV0FBVzs7UUFDbEIsT0FBTztZQUNILElBQUksRUFBRTtnQkFDRixJQUFJLEVBQUUsVUFBVTtnQkFDaEIsTUFBTSxFQUFFLENBQUMsT0FBTyxDQUFDO2dCQUNqQixPQUFPLEVBQUUsQ0FBQyxPQUFPLENBQUM7YUFDckI7WUFDRCxVQUFVLEVBQUU7Z0JBQ1IsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsTUFBTSxFQUFFLENBQUMsT0FBTyxDQUFDO2dCQUNqQixPQUFPLEVBQUUsTUFBQSxpQkFBUSxDQUFDLEdBQUcsQ0FBQyxvQkFBb0IsQ0FBQyxtQ0FBSSxPQUFPO2FBQ3pEO1lBQ0QsWUFBWSxFQUFFO2dCQUNWLElBQUksRUFBRSxRQUFRO2dCQUNkLE1BQU0sRUFBRSxNQUFNLENBQUMsSUFBSSxDQUFDLGlCQUFRLENBQUMsR0FBRyxDQUFDLE9BQU8sQ0FBQyxDQUFDO2dCQUMxQyxPQUFPLEVBQUUsaUJBQVEsQ0FBQyxHQUFHLENBQUMsc0JBQXNCLENBQUM7YUFDaEQ7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFO29CQUNGLElBQUksRUFBRSxlQUFlO29CQUNyQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDO2lCQUN6QjtnQkFDRCxNQUFNLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxFQUFFLElBQUksQ0FBQztnQkFDN0IsT0FBTyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxJQUFJLENBQUM7YUFDakM7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBU3lDLGtEQUFTO0FBRW5ELG1CQUF5QixFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLE9BQU8sRUFDUCxXQUFXLEdBTWQ7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsSUFBSSxFQUFFLENBQUMsT0FBTyxDQUFDLEVBQ2YsVUFBVSxFQUFFLE9BQU8sRUFDbkIsWUFBWSxFQUFFLE1BQU0sRUFDcEIsS0FBSyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssQ0FBQyxJQUNuQixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFHLElBQUksT0FBTyxFQUFFLENBQUM7SUFFM0IsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxNQUFNLENBQUMsRUFBRTtRQUNwQyxJQUFJLENBQUMsSUFBSSxDQUNMOzs7O2FBSUMsRUFDRDtZQUNJLElBQUksRUFBRSxVQUFVO1NBQ25CLENBQ0osQ0FBQztLQUNMO0lBRUQsSUFDSSxXQUFXLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxXQUFXLENBQUMsVUFBVSxDQUFDO1FBQ2pELFdBQVcsQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLEtBQUssQ0FBQyxFQUNuQztRQUNFLElBQUksQ0FBQyxPQUFPLENBQ1I7Ozs7Ozs7Ozs7Ozs7Ozs7V0FnQkQsQ0FDRixDQUFDLElBQUksQ0FDRjs7b0RBRXdDLFdBQVcsQ0FBQyxVQUFVO2NBQzVELEVBQ0Y7WUFDSSxJQUFJLEVBQUUsVUFBVTtTQUNuQixDQUNKLENBQUM7S0FDTDtJQUVELGdCQUFnQjtJQUNoQixJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLEtBQUssQ0FBQyxFQUFFO1FBQ25DLElBQUksQ0FBQyxJQUFJLENBQ0w7OytCQUVtQixXQUFXLENBQUMsWUFBWTs7U0FFOUMsRUFDRyxFQUFFLElBQUksRUFBRSxVQUFVLEVBQUUsQ0FDdkIsQ0FBQztLQUNMO0lBRUQsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQztBQWhGRCw0QkFnRkMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRCxNQUFNLDZCQUE4QixTQUFRLHFCQUFZO0lBQ3BELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFO29CQUNGLElBQUksRUFBRSxlQUFlO29CQUNyQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDO2lCQUN6QjtnQkFDRCxNQUFNLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxFQUFFLElBQUksQ0FBQztnQkFDN0IsT0FBTyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxJQUFJLENBQUM7YUFDakM7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBTXlDLGtEQUFTO0FBRW5ELG1CQUF5QixFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLE9BQU8sRUFDUCxXQUFXLEdBTWQ7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsS0FBSyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssQ0FBQyxJQUNuQixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFHLElBQUksT0FBTyxFQUFFLENBQUM7SUFFM0IsU0FBUyxPQUFPLENBQUMsTUFBTTtRQUNuQixPQUFPLG1CQUFtQixNQUFNLENBQUMsS0FBSzs7Ozs7Ozs7Ozs7Ozs7Ozs7O3lCQWtCckIsQ0FBQztJQUN0QixDQUFDO0lBRUQsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O1VBOEJKLE9BQU8sQ0FBQztRQUNOLEtBQUssRUFBRSxRQUFRO0tBQ2xCLENBQUM7OztVQUdBLE9BQU8sQ0FBQztRQUNOLEtBQUssRUFBRSxtQkFBbUI7S0FDN0IsQ0FBQzs7O1VBR0EsT0FBTyxDQUFDO1FBQ04sS0FBSyxFQUFFLHlCQUF5QjtLQUNuQyxDQUFDOzs7VUFHQSxPQUFPLENBQUM7UUFDTixLQUFLLEVBQUUsMkJBQTJCO0tBQ3JDLENBQUM7Ozs7O0tBS0wsQ0FDQSxDQUFDO0lBRUYsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxNQUFNLENBQUMsRUFBRTtRQUNwQyxJQUFJLENBQUMsSUFBSSxDQUNMOzs7O2FBSUMsRUFDRDtZQUNJLElBQUksRUFBRSxVQUFVO1NBQ25CLENBQ0osQ0FBQztLQUNMO0lBRUQsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxLQUFLLENBQUMsRUFBRTtRQUNuQyxJQUFJLENBQUMsT0FBTyxDQUNSOzs7Ozs7OztjQVFFLE9BQU8sQ0FBQztZQUNOLEtBQUssRUFBRSxRQUFRO1NBQ2xCLENBQUM7Ozs7V0FJSCxDQUNGLENBQUMsSUFBSSxDQUNGOzs7Y0FHRSxFQUNGO1lBQ0ksSUFBSSxFQUFFLFVBQVU7U0FDbkIsQ0FDSixDQUFDO0tBQ0w7SUFFRCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDO0FBMUlELDRCQTBJQyJ9

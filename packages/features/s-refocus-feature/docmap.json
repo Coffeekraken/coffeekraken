@@ -3,12 +3,10 @@
     "extends": [],
     "generated": {
         "extends": [
-            "01-basic",
-            "02-basic",
             "@coffeekraken/cli",
-            "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-asset-picker-component",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
@@ -19,6 +17,7 @@
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
+            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
@@ -36,6 +35,7 @@
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
+            "@coffeekraken/s-dropzone-component",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -49,6 +49,7 @@
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-glob",
+            "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
@@ -57,6 +58,7 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
@@ -74,6 +76,7 @@
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
             "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -191,32 +194,81 @@
                         },
                         "timeout": {
                             "description": "Specify a timeout to wait before refocus the element",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 500
                         },
                         "duration": {
                             "description": "Specify the duration of the refocus animation",
-                            "type": "Number"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            }
                         },
                         "easing": {
                             "description": "Specify the easing function of the refocus animation",
-                            "type": "Function"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Function"
+                                    }
+                                ],
+                                "raw": "Function"
+                            }
                         },
                         "offset": {
                             "description": "Specify the offset of the refocus animation in px",
-                            "type": "Number"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            }
                         },
                         "offsetX": {
                             "description": "Specify the offset x of the refocus animation in px",
-                            "type": "Number"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            }
                         },
                         "offsetY": {
                             "description": "Specify the offset y of the refocus animation in px",
-                            "type": "Number"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            }
                         },
                         "align": {
                             "description": "Specify the alignment of the refocus animation",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "start",
                                 "center",
@@ -225,7 +277,14 @@
                         },
                         "justify": {
                             "description": "Specify the justification of the refocus animation",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "start",
                                 "center",
@@ -286,32 +345,81 @@
                         },
                         "timeout": {
                             "description": "Specify a timeout to wait before refocus the element",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 500
                         },
                         "duration": {
                             "description": "Specify the duration of the refocus animation",
-                            "type": "Number"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            }
                         },
                         "easing": {
                             "description": "Specify the easing function of the refocus animation",
-                            "type": "Function"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Function"
+                                    }
+                                ],
+                                "raw": "Function"
+                            }
                         },
                         "offset": {
                             "description": "Specify the offset of the refocus animation in px",
-                            "type": "Number"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            }
                         },
                         "offsetX": {
                             "description": "Specify the offset x of the refocus animation in px",
-                            "type": "Number"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            }
                         },
                         "offsetY": {
                             "description": "Specify the offset y of the refocus animation in px",
-                            "type": "Number"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            }
                         },
                         "align": {
                             "description": "Specify the alignment of the refocus animation",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "start",
                                 "center",
@@ -320,7 +428,14 @@
                         },
                         "justify": {
                             "description": "Specify the justification of the refocus animation",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "start",
                                 "center",

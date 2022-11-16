@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-import __SBench from '@coffeekraken/s-bench';
 import __SFile from '@coffeekraken/s-file';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __filter } from '@coffeekraken/sugar/object';
@@ -73,7 +72,7 @@ function configMiddleware(settings = {}) {
             ];
         }
 
-        __SBench.step('request', 'configMiddleware');
+        res.bench?.step('configMiddleware');
 
         return next();
     };

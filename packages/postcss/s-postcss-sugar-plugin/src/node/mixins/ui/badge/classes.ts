@@ -1,5 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          classes
@@ -11,12 +10,9 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Generate the badge classes
  *
- * @param       {('solid'|'outline')[]}                           [styles=['solid','outline']]         The style(s) you want to generate
- * @param       {('default'|'square'|'pill')[]}             [shape=['default','square','pill']]         The shape(s) you want to generate
- * @param       {'solid'|'outline'}                [defaultStyle='theme.ui.badge.defaultStyle']           The default style you want
- * @param       {'default'|'square'|'pill'}        [defaultShape='theme.ui.badge.defaultShape']           The default shape you want
- * @param       {String}                            [defaultColor=theme.ui.badge.defaultColor]            The default color you want
- * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
+ * @param       {('default'|'outline')[]}                           [lnfs=['default','outline']]         The lnf(s) you want to generate
+ * @param       {'default'|'outline'}                [defaultLnf='theme.ui.badge.defaultLnf']           The default lnf you want
+ * @param       {('bare'|'lnf'|'vr')[]}        [scope=['bare', 'lnf', 'vr']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
  * @example       css
@@ -29,59 +25,35 @@ import __STheme from '@coffeekraken/s-theme';
 class postcssSugarPluginUiBadgeClassesInterface extends __SInterface {
     static get _definition() {
         return {
-            styles: {
+            lnfs: {
                 type: 'String[]',
-                values: ['solid', 'outline'],
-                default: ['solid', 'outline'],
+                values: ['default', 'outline'],
+                default: ['default', 'outline'],
             },
-            shapes: {
-                type: 'String[]',
-                values: ['default', 'square', 'pill'],
-                default: ['default', 'square', 'pill'],
-            },
-            defaultStyle: {
+            defaultLnf: {
                 type: 'String',
-                values: ['solid', 'outline'],
-                default: __STheme.get('ui.badge.defaultStyle') ?? 'solid',
-            },
-            defaultShape: {
-                type: 'String',
-                values: ['default', 'square', 'pill'],
-                default: __STheme.get('ui.badge.defaultShape'),
-            },
-            defaultColor: {
-                type: 'String',
-                values: Object.keys(__STheme.get('color')),
-                default: __STheme.get('ui.badge.defaultColor'),
+                values: ['default', 'outline'],
+                default: 'default',
             },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'shape', 'vr', 'tf'],
-                default: ['bare', 'lnf', 'shape', 'vr', 'tf'],
+                values: ['bare', 'lnf', 'vr'],
+                default: ['bare', 'lnf', 'vr'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiBadgeClassesParams {
-    styles: ('solid' | 'outline')[];
-    shapes: ('default' | 'square' | 'pill')[];
-    defaultStyle: 'solid' | 'outline';
-    defaultShape: 'default' | 'square' | 'pill';
-    scope: ('bare' | 'lnf' | 'shape' | 'vr' | 'tf')[];
+    lnfs: ('default' | 'outline')[];
+    defaultLnf: 'default' | 'outline';
+    scope: ('bare' | 'lnf' | 'vr')[];
 }
 
 export { postcssSugarPluginUiBadgeClassesInterface as interface };
-
-import { __dirname } from '@coffeekraken/sugar/fs';
-export function dependencies() {
-    return {
-        files: [`${__dirname()}/badge.js`],
-    };
-}
 
 export default function ({
     params,
@@ -95,10 +67,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiBadgeClassesParams = {
-        styles: [],
-        shapes: [],
-        defaultStyle: 'solid',
-        defaultShape: 'default',
+        lnfs: [],
+        defaultLnf: 'default',
         scope: [],
         ...params,
     };
@@ -117,61 +87,40 @@ export default function ({
         * 
         * These classes allows you to display any HTMLElement as a badge
         * 
-        ${finalParams.styles
-            .map((style) => {
+        ${finalParams.lnfs
+            .map((lnf) => {
                 return ` * @cssClass     s-badge${
-                    style === finalParams.defaultStyle ? '' : `:${style}`
-                }           Apply the ${style} badge style`;
-            })
-            .join('\n')}
-        ${finalParams.shapes
-            .map((shape) => {
-                return ` * @cssClass     s-badge${
-                    shape === finalParams.defaultShape ? '' : `:${shape}`
-                }           Apply the ${shape} badge shape`;
+                    lnf === finalParams.defaultLnf ? '' : `:${lnf}`
+                }           Apply the ${lnf} badge style`;
             })
             .join('\n')}
         * 
         * @cssClass         s-badge:square       Display your badge with squared corners
         * @cssClass         s-badge:pill         Display your badge with rounded corners
         * 
-        ${finalParams.styles
-            .map((style) => {
-                return ` * @example        html       ${style}
+        ${finalParams.lnfs
+            .map((lnf) => {
+                return ` * @example        html       ${lnf}
             *   <a class="s-badge${
-                finalParams.defaultStyle === style ? '' : `:${style}`
+                finalParams.defaultLnf === lnf ? '' : `:${lnf}`
             } s-mie:20">Say hello!</a>
             *   <a class="s-badge${
-                finalParams.defaultStyle === style ? '' : `:${style}`
+                finalParams.defaultLnf === lnf ? '' : `:${lnf}`
             } s-mie:20 s-color:accent">Say hello!</a>
             *   <a class="s-badge${
-                finalParams.defaultStyle === style ? '' : `:${style}`
+                finalParams.defaultLnf === lnf ? '' : `:${lnf}`
             } s-mie:20 s-color:complementary">Say hello!</a>
             *   <a class="s-badge${
-                finalParams.defaultStyle === style ? '' : `:${style}`
+                finalParams.defaultLnf === lnf ? '' : `:${lnf}`
             } s-color:error">Say hello!</a>
             * `;
             })
             .join('\n')}
-        *
-        ${finalParams.shapes
-            .map((shape) => {
-                return ` * @example        html       ${shape}
-            *   <a class="s-badge${
-                finalParams.defaultShape === shape ? '' : `:${shape}`
-            } s-mie:20">Say hello!</a>
-            *   <a class="s-badge${
-                finalParams.defaultShape === shape ? '' : `:${shape}`
-            } s-mie:20 s-color:accent">Say hello!</a>
-            *   <a class="s-badge${
-                finalParams.defaultShape === shape ? '' : `:${shape}`
-            } s-mie:20 s-color:complementary">Say hello!</a>
-            *   <a class="s-badge${
-                finalParams.defaultShape === shape ? '' : `:${shape}`
-            } s-color:error">Say hello!</a>
-            * `;
-            })
-            .join('\n')}
+        * 
+        * @example          html        Shapes
+        * <a class="s-badge s-mie:20 s-mbe:20">Say hello!</a>
+        * <a class="s-badge:pill s-mie:20 s-mbe:20">Say hello!</a>
+        * <a class="s-badge:square s-mie:20 s-mbe:20">Say hello!</a>
         * 
         * @example        html       Scales
         *   <a class="s-badge s-scale:05 s-mie:20 s-mbe:20">Say hello!</a>
@@ -212,29 +161,29 @@ export default function ({
     }
 
     if (finalParams.scope.includes('lnf')) {
-        finalParams.styles.forEach((style) => {
+        finalParams.lnfs.forEach((lnf) => {
             vars.comment(
                 () => `/**
             * @name           s-badge${
-                finalParams.defaultStyle === style ? '' : `:${style}`
+                finalParams.defaultLnf === lnf ? '' : `:${lnf}`
             }
-            * @namespace          sugar.style.ui.badge
+            * @namespace          sugar.ui.badge
             * @type           CssClass
             * 
             * This class represent a(n) "<s-color="accent">outline</s-color>" badge
             * 
             * @example        html
             * <a class="s-badge${
-                finalParams.defaultStyle === style ? '' : `:${style}`
-            }">I'm a cool ${style} badge</a>
+                finalParams.defaultLnf === lnf ? '' : `:${lnf}`
+            }">I'm a cool ${lnf} badge</a>
             * 
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
             ).code(
                 `
-            .s-badge${style === finalParams.defaultStyle ? '' : `--${style}`} {
-                @sugar.ui.badge($style: ${style}, $scope: lnf);
+            .s-badge${lnf === finalParams.defaultLnf ? '' : `--${lnf}`} {
+                @sugar.ui.badge($lnf: ${lnf}, $scope: lnf);
             }
         `,
                 { type: 'CssClass' },
@@ -242,36 +191,53 @@ export default function ({
         });
     }
 
-    if (finalParams.scope.includes('shape')) {
-        finalParams.shapes.forEach((shape) => {
-            vars.comment(
-                () => `/**
-        * @name           s-badge${
-            finalParams.defaultShape === shape ? '' : `:${shape}`
-        }
-        * @namespace          sugar.style.ui.badge
-        * @type           CssClass
-        * 
-        * This class represent a(n) "<s-color="accent">outline</s-color>" badge
-        * 
-        * @example        html
-        * <a class="s-badge${
-            finalParams.defaultShape === shape ? '' : `:${shape}`
-        }">I'm a cool ${shape} badge</a>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-      */`,
-            ).code(
-                `
-        .s-badge${shape === finalParams.defaultShape ? '' : `--${shape}`} {
-            @sugar.ui.badge($shape: ${shape}, $scope: shape);
-        }
-    `,
-                { type: 'CssClass' },
-            );
-        });
+    vars.comment(
+        () => `/**
+    * @name           s-badge:pill
     }
+    * @namespace          sugar.ui.badge
+    * @type           CssClass
+    * 
+    * This class represent a(n) "<s-color="accent">pill</s-color>" badge
+    * 
+    * @example        html
+    * <a class="s-badge:pill">I'm a cool pill badge</a>
+    * 
+    * @since    2.0.0
+    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+*/`,
+    ).code(
+        `
+    .s-badge--pill {
+        border-radius: 9999px;
+    }
+`,
+        { type: 'CssClass' },
+    );
+
+    vars.comment(
+        () => `/**
+    * @name           s-badge:square
+    }
+    * @namespace          sugar.ui.badge
+    * @type           CssClass
+    * 
+    * This class represent a(n) "<s-color="accent">square</s-color>" badge
+    * 
+    * @example        html
+    * <a class="s-badge:square">I'm a cool square badge</a>
+    * 
+    * @since    2.0.0
+    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+*/`,
+    ).code(
+        `
+    .s-badge--square {
+        border-radius: 0;
+    }
+`,
+        { type: 'CssClass' },
+    );
 
     return vars;
 }

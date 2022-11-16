@@ -11,11 +11,10 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the tooltip style to any element
  *
- * @param       {'solid'}                           [style='theme.ui.tooltip.defaultStyle']         The style you want to generate
- * @param       {'default'|'square'|'pill'}             [shape='theme.ui.tooltip.defaultShape']         The shape you want to generate
+ * @param       {'default'}                           [style='theme.ui.tooltip.defaultLnf']         The style you want to generate
  * @param       {''top'|'right'|'bottom'|'left'}            [position='theme.ui.tooltip.defaultPosition']         The position you want to generate
  * @param      {Boolean}                                [interactive=false]                 Specify if the tooltip is interactive or not
- * @param       {('bare'|'lnf'|'shape')[]}        [scope=['bare', 'lnf', 'shape']]      The scope you want to generate
+ * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css
@@ -30,20 +29,15 @@ import __STheme from '@coffeekraken/s-theme';
 class postcssSugarPluginUiTooltipInterface extends __SInterface {
     static get _definition() {
         return {
-            style: {
+            lnf: {
                 type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.tooltip.defaultShape'),
-            },
-            shape: {
-                type: 'String',
-                values: ['default', 'square', 'pill'],
-                default: __STheme.get('ui.tooltip.defaultShape'),
+                values: ['default'],
+                default: __STheme.get('ui.tooltip.defaultLnf'),
             },
             position: {
                 type: 'String',
                 values: ['top', 'right', 'bottom', 'left'],
-                default: 'top',
+                default: __STheme.get('ui.tooltip.defaultPosition'),
             },
             interactive: {
                 type: 'Boolean',
@@ -54,19 +48,18 @@ class postcssSugarPluginUiTooltipInterface extends __SInterface {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'shape', 'position', 'interactive'],
-                default: ['bare', 'lnf', 'shape', 'position', 'interactive'],
+                values: ['bare', 'lnf', 'position', 'interactive'],
+                default: ['bare', 'lnf', 'position', 'interactive'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiTooltipParams {
-    style: 'solid';
-    shape: 'default' | 'square' | 'pill';
-    scope: ('bare' | 'lnf' | 'shape' | 'position' | 'interactive' | 'vr')[];
+    lnf: 'default';
     position: 'top' | 'right' | 'bottom' | 'left';
     interactive: Boolean;
+    scope: ('bare' | 'lnf' | 'position' | 'interactive' | 'vr')[];
 }
 
 export { postcssSugarPluginUiTooltipInterface as interface };
@@ -80,11 +73,10 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiTooltipParams = {
-        style: 'solid',
-        shape: 'default',
+        lnf: 'default',
         position: 'top',
         interactive: false,
-        scope: ['bare', 'lnf', 'shape', 'position', 'interactive'],
+        scope: ['bare', 'lnf', 'position', 'interactive'],
         ...params,
     };
 
@@ -136,13 +128,14 @@ export default function ({
           transition-property: opacity;
           padding-inline: sugar.padding(ui.tooltip.paddingInline);
           padding-block: sugar.padding(ui.tooltip.paddingBlock);
+          @sugar.border.radius(ui.tooltip.borderRadius);
           @sugar.depth(ui.tooltip.depth);
 
             &:not([s-floating]) {
                 &:after {
                     content: " ";
                     position: absolute;
-                    border-style: solid;
+                    border-style: default;
                     border-color: sugar.color(current) transparent transparent transparent;
                 }
             }
@@ -283,26 +276,6 @@ export default function ({
                   left: 0;
                 }
             `);
-                break;
-        }
-    }
-
-    if (finalParams.scope.includes('shape')) {
-        switch (finalParams.shape) {
-            case 'square':
-                vars.push(`
-                    border-radius: 0;
-                `);
-                break;
-            case 'pill':
-                vars.push(`
-                    border-radius: 9999px;
-                `);
-                break;
-            default:
-                vars.push(`
-                    border-radius: sugar.border.radius(ui.tooltip.borderRadius);
-                `);
                 break;
         }
     }

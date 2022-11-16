@@ -3,12 +3,10 @@
     "extends": [],
     "generated": {
         "extends": [
-            "01-basic",
-            "02-basic",
             "@coffeekraken/cli",
-            "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-asset-picker-component",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
@@ -19,6 +17,7 @@
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
+            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
@@ -35,6 +34,7 @@
             "@coffeekraken/s-deps-feature",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-dropzone-component",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -48,13 +48,16 @@
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-glob",
+            "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
@@ -73,6 +76,7 @@
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
             "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -98,6 +102,54 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-docmap.config.docmap.noExtends": {
+                "id": "@coffeekraken.s-docmap.config.docmap.noExtends",
+                "name": "noExtends",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Boolean"
+                        }
+                    ],
+                    "raw": "Boolean"
+                },
+                "default": "false",
+                "description": "Specify if you want to disable the extends search process that will result in the \"extends\" array in the docmap.json file",
+                "namespace": "@coffeekraken.s-docmap.config.docmap",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "docmap.config.ts",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.ts"
+            },
+            "@coffeekraken.s-docmap.config.docmap.excludePackages": {
+                "id": "@coffeekraken.s-docmap.config.docmap.excludePackages",
+                "name": "excludePackages",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Boolean"
+                        }
+                    ],
+                    "raw": "Boolean"
+                },
+                "default": "['@website/*', '@example/*']",
+                "description": "Specify some package(s) name(s) (glob) to avoid extending.",
+                "namespace": "@coffeekraken.s-docmap.config.docmap",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "docmap.config.ts",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.ts"
+            },
             "@coffeekraken.s-docmap.config.docmap.read.input": {
                 "id": "@coffeekraken.s-docmap.config.docmap.read.input",
                 "name": "input",
@@ -267,30 +319,6 @@
                 },
                 "default": "['**\\/__tests__/**\\/*','**\\/__tests__.wip/**\\/*','**\\/__wip__/**\\/*']",
                 "description": "Specify some regex to apply on different docblock and path properties\nto exclude some files from the buildd docMap json",
-                "namespace": "@coffeekraken.s-docmap.config.docmap.build",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "docmap.config.ts",
-                "extension": "config",
-                "relPath": "src/config/docmap.config.ts"
-            },
-            "@coffeekraken.s-docmap.config.docmap.build.noExtends": {
-                "id": "@coffeekraken.s-docmap.config.docmap.build.noExtends",
-                "name": "noExtends",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Boolean"
-                        }
-                    ],
-                    "raw": "Boolean"
-                },
-                "default": "false",
-                "description": "Specify if you want to disable the extends search process that will result in the \"extends\" array in the docmap.json file",
                 "namespace": "@coffeekraken.s-docmap.config.docmap.build",
                 "since": "2.0.0",
                 "author": {
@@ -655,7 +683,17 @@
                     "description": "",
                     "definition": {
                         "globs": {
-                            "type": "Array<String>",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Array<String>"
+                            },
                             "description": "Specify some globs to use to search docblocks to use in docmap generation",
                             "default": [
                                 "*",
@@ -664,7 +702,17 @@
                             ]
                         },
                         "exclude": {
-                            "type": "Array<String>",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Array<String>"
+                            },
                             "description": "Specify some regexp used to exclude files from resulting docMap",
                             "default": [
                                 "**/__tests__/**/*",
@@ -674,7 +722,17 @@
                             "level": 1
                         },
                         "tags": {
-                            "type": "Array<String>",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Array<String>"
+                            },
                             "description": "Specify which docblock tags you want in your final docmap.json file",
                             "alias": "f",
                             "default": [
@@ -697,7 +755,17 @@
                             ]
                         },
                         "filters": {
-                            "type": "Object<RegExp>",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object",
+                                        "of": [
+                                            "RegExp"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Object<RegExp>"
+                            },
                             "description": "Specify some properties and regex to use to filter docblocks",
                             "default": {
                                 "namespace": {},
@@ -712,14 +780,42 @@
                             "description": "Specify if you want to avoid searching for docmap.json files in the dependency packages",
                             "default": false
                         },
+                        "excludePackages": {
+                            "type": {
+                                "type": "String[]",
+                                "splitChars": [
+                                    " ",
+                                    ","
+                                ]
+                            },
+                            "description": "Specify some package(s) name(s) (glob) to exclude",
+                            "default": [
+                                "@website/*",
+                                "@example/*"
+                            ]
+                        },
                         "save": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "alias": "s",
                             "description": "Specify if you want to save the generated file under the ```outPath``` path",
                             "default": true
                         },
                         "outPath": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "alias": "o",
                             "description": "Specify where you want to save the builded file. Usually saved in package root with the name docmap.json",
                             "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/core/s-docmap/docmap.json"
@@ -763,7 +859,14 @@
                     "definition": {
                         "glob": {
                             "description": "Specify a glob pattern where to find the snapshots to install",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/core/s-docmap/.docmap/*"
                         }
                     }
@@ -805,22 +908,64 @@
                     "definition": {
                         "input": {
                             "description": "Specify the input path to the docmap.json file to read",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/core/s-docmap/docmap.json",
                             "alias": "i"
                         },
                         "sort": {
                             "description": "Specify which of the docmap entries has to be sorted alphabetically.",
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "default": [
                                 "menu.packages"
                             ]
                         },
                         "sortDeep": {
                             "description": "Specify which of the docmap entries has to be sorted alphabetically AND deeply.",
-                            "type": "String[]",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
                             "default": [
-                                "menu.custom.styleguide"
+                                "menu.custom.styleguide",
+                                "menu.custom.specs"
+                            ]
+                        },
+                        "excludePackages": {
+                            "type": {
+                                "type": "String[]",
+                                "splitChars": [
+                                    " ",
+                                    ","
+                                ]
+                            },
+                            "description": "Specify some package(s) name(s) (glob) to exclude",
+                            "default": [
+                                "@website/*",
+                                "@example/*"
                             ]
                         }
                     }
@@ -862,12 +1007,26 @@
                     "definition": {
                         "customMenu": {
                             "description": "Specify some custom menu to generate for the docmap.",
-                            "type": "Object",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
                             "default": {}
                         },
                         "tagsProxy": {
                             "description": "Specify some proxy by tags. A proxy is a function that will be called with the corresponding tag data and return new data for the docmap.json file.",
-                            "type": "Object",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
                             "default": {}
                         }
                     }
@@ -909,7 +1068,14 @@
                     "definition": {
                         "outDir": {
                             "description": "Specify the directory path where to store your snapshots",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "path": {
                                 "absolute": true,
                                 "tokens": true

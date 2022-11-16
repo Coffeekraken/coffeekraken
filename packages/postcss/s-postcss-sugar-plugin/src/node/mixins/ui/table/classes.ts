@@ -12,12 +12,9 @@ import __faker from 'faker';
  *
  * Generate the table classes
  *
- * @param       {('solid')[]}                           [styles=['solid']]         The style(s) you want to generate
- * @param       {('default'|'square')[]}             [shape=['default','square']]         The shape(s) you want to generate
- * @param       {'solid'}                [defaultStyle='theme.ui.table.defaultStyle']           The default style you want
- * @param       {'default'|'square'}        [defaultShape='theme.ui.table.defaultShape']           The default shape you want
- * @param       {String}                            [defaultColor=theme.ui.table.defaultColor]            The default color you want
- * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
+ * @param       {('default')[]}                           [lnfs=['default']]         The style(s) you want to generate
+ * @param       {'default'}                [defaultLnf='theme.ui.table.defaultLnf']           The default style you want
+ * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css
@@ -30,59 +27,34 @@ import __faker from 'faker';
 class postcssSugarPluginUiTableClassesInterface extends __SInterface {
     static get _definition() {
         return {
-            styles: {
+            lnfs: {
                 type: 'String[]',
-                default: ['solid'],
+                default: ['default'],
             },
-            shapes: {
-                type: 'String[]',
-                values: ['default', 'square'],
-                default: ['default', 'square'],
-            },
-            defaultStyle: {
+            defaultLnf: {
                 type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.table.defaultStyle'),
-            },
-            defaultShape: {
-                type: 'String',
-                values: ['default', 'square'],
-                default: __STheme.get('ui.table.defaultShape'),
-            },
-            defaultColor: {
-                type: 'String',
-                values: Object.keys(__STheme.get('color')),
-                default: __STheme.get('ui.table.defaultColor'),
+                values: ['default'],
+                default: __STheme.get('ui.table.defaultLnf'),
             },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'shape', 'tf', 'vr'],
-                default: ['bare', 'lnf', 'shape', 'tf', 'vr'],
+                values: ['bare', 'lnf', 'tf', 'vr'],
+                default: ['bare', 'lnf', 'tf', 'vr'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiTableClassesParams {
-    styles: 'solid'[];
-    shapes: ('default' | 'square')[];
-    defaultStyle: 'solid';
-    defaultShape: 'default' | 'square';
-    defaultColor: string;
-    scope: ('bare' | 'lnf' | 'shape' | 'vr' | 'tf')[];
+    lnfs: 'default'[];
+    defaultLnf: 'default';
+    scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
 }
 
 export { postcssSugarPluginUiTableClassesInterface as interface };
-
-import { __dirname } from '@coffeekraken/sugar/fs';
-export function dependencies() {
-    return {
-        files: [`${__dirname()}/table.js`],
-    };
-}
 
 export default function ({
     params,
@@ -96,11 +68,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiTableClassesParams = {
-        styles: [],
-        shapes: [],
-        defaultStyle: 'solid',
-        defaultShape: 'default',
-        defaultColor: 'main',
+        lnfs: [],
+        defaultLnf: 'default',
         scope: [],
         ...params,
     };
@@ -127,60 +96,23 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
-        ${finalParams.styles
-            .map((style) => {
+        ${finalParams.lnfs
+            .map((lnf) => {
                 return ` * @cssClass     s-table${
-                    style === finalParams.defaultStyle ? '' : `:${style}`
-                }           Apply the ${style} table style`;
-            })
-            .join('\n')}
-        ${finalParams.shapes
-            .map((shape) => {
-                return ` * @cssClass     s-table${
-                    shape === finalParams.defaultShape ? '' : `:${shape}`
-                }           Apply the ${shape} table shape`;
+                    lnf === finalParams.defaultLnf ? '' : `:${lnf}`
+                }           Apply the ${lnf} table lnf`;
             })
             .join('\n')}
         * 
-        ${finalParams.styles
-            .map((style) => {
-                return ` * @example        html       ${style} style ${
-                    finalParams.defaultStyle === style
+        ${finalParams.lnfs
+            .map((lnf) => {
+                return ` * @example        html       ${lnf} lnf ${
+                    finalParams.defaultLnf === lnf
                         ? '<span class="s-badge:outline s-scale:05">default</span>'
                         : ''
                 }
             *   <table class="s-table${
-                style === finalParams.defaultStyle ? '' : `:${style}`
-            } s-mbe:30">
-            *       <tr>
-            *           <th>${__faker.name.findName()}</th>
-            *           <th>${__faker.name.findName()}</th>
-            *           <th>${__faker.name.findName()}</th>
-            *       </tr>
-            *       <tr>
-            *           <td>${__faker.name.findName()}</td>
-            *           <td>${__faker.name.findName()}</td>
-            *           <td>${__faker.name.findName()}</td>
-            *       </tr>
-            *       <tr>
-            *           <td>${__faker.name.findName()}</td>
-            *           <td>${__faker.name.findName()}</td>
-            *           <td>${__faker.name.findName()}</td>
-            *       </tr>
-            *   </table>
-            * `;
-            })
-            .join('\n')}
-        *
-        ${finalParams.shapes
-            .map((shape) => {
-                return ` * @example        html       ${shape} shape ${
-                    finalParams.defaultShape === shape
-                        ? '<span class="s-badge:outline s-scale:05">default</span>'
-                        : ''
-                }
-            *   <table class="s-table${
-                shape === finalParams.defaultShape ? '' : `:${shape}`
+                lnf === finalParams.defaultLnf ? '' : `:${lnf}`
             } s-mbe:30">
             *       <tr>
             *           <th>${__faker.name.findName()}</th>
@@ -318,22 +250,22 @@ export default function ({
     }
 
     if (finalParams.scope.includes('lnf')) {
-        finalParams.styles.forEach((style) => {
-            const isDefaultStyle = finalParams.defaultStyle === style;
+        finalParams.lnfs.forEach((lnf) => {
+            const isDefaultStyle = finalParams.defaultLnf === lnf;
 
-            const styleCls = isDefaultStyle ? '' : `.s-table--${style}`;
+            const styleCls = isDefaultStyle ? '' : `.s-table--${lnf}`;
             const cls = `.s-table${styleCls}`;
 
             vars.comment(
                 () => `/**
-            * @name           s-table${isDefaultStyle ? '' : `:${style}`}
+            * @name           s-table${isDefaultStyle ? '' : `:${lnf}`}
             * @namespace          sugar.style.ui.table
             * @type           CssClass
             * 
-            * This class represent a(n) "<yellow>${style}</yellow>" table
+            * This class represent a(n) "<yellow>${lnf}</yellow>" table
             * 
             * @example        html
-            * <table class="s-table${isDefaultStyle ? '' : `:${style}`}">
+            * <table class="s-table${isDefaultStyle ? '' : `:${lnf}`}">
             *   <tr>
             *       <th>Hello</th>
             *       <th>World</th>
@@ -355,68 +287,11 @@ export default function ({
             vars.code(
                 () => `
                 ${cls} {
-                    @sugar.ui.table($style: ${style}, $scope: lnf);
+                    @sugar.ui.table($lnf: ${lnf}, $scope: lnf);
                 }`,
                 { type: 'CssClass' },
             );
         });
-    }
-
-    if (finalParams.scope.includes('shape')) {
-        finalParams.shapes.forEach((shape) => {
-            const isDefaultShape = finalParams.defaultShape === shape;
-
-            const shapeCls = isDefaultShape ? '' : `.s-table--${shape}`;
-            const cls = `.s-table${shapeCls}`;
-
-            vars.comment(
-                () => `/**
-            * @name           s-table${isDefaultShape ? '' : `:${shape}`}
-            * @namespace          sugar.style.ui.table
-            * @type           CssClass
-            * 
-            * This class represent a(n) "<yellow>${shape}</yellow>" table
-            * 
-            * @example        html
-            * <table class="s-table${isDefaultShape ? '' : `:${shape}`}">
-            *   <tr>
-            *       <th>Hello</th>
-            *       <th>World</th>
-            *   </tr>
-            *   <tr>
-            *       <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
-            *       <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
-            *   </tr>
-            *   <tr>
-            *       <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
-            *       <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
-            *   </tr>
-            * </table>
-            * 
-            * @since      2.0.0
-            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */`,
-            );
-            vars.code(
-                () => `
-                ${cls} {
-                    @sugar.ui.table($shape: ${shape}, $scope: shape);
-                }`,
-                { type: 'CssClass' },
-            );
-        });
-    }
-
-    // default color
-    if (finalParams.scope.includes('lnf')) {
-        vars.code(
-            () => `
-            .s-table:not(.s-color) {
-                @sugar.color(${finalParams.defaultColor});
-            }
-        `,
-            { type: 'CssClass' },
-        );
     }
 
     vars.comment(

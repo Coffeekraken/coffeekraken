@@ -3,12 +3,10 @@
     "extends": [],
     "generated": {
         "extends": [
-            "01-basic",
-            "02-basic",
             "@coffeekraken/cli",
-            "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-asset-picker-component",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
@@ -19,6 +17,7 @@
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
+            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
@@ -36,6 +35,7 @@
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
+            "@coffeekraken/s-dropzone-component",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -48,13 +48,16 @@
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-glob",
+            "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
@@ -71,6 +74,9 @@
             "@coffeekraken/s-request",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -427,35 +433,90 @@
                     "definition": {
                         "items": {
                             "description": "Specify an array of items to use in your filtrable list. Can be a JSON string, a function that take an object with the \"value\" property and must return an array of items to use",
-                            "type": "String|Function"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    },
+                                    {
+                                        "type": "Function"
+                                    }
+                                ],
+                                "raw": "String|Function"
+                            }
                         },
                         "value": {
                             "description": "Specify the attribute in your items to use as a value. Can be also a function that will be called with an object containing the selected item and must return the string you want to use as value",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "value"
                         },
                         "label": {
                             "description": "Specify the attribute in your items to use as a label. Can be also a function that will be called with an object containing the selected item and must return the string you want to use as label",
-                            "type": "String|Function",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    },
+                                    {
+                                        "type": "Function"
+                                    }
+                                ],
+                                "raw": "String|Function"
+                            },
                             "default": "value"
                         },
                         "emptyText": {
                             "description": "Specify the text to use for the default \"empty\" (no result) state",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "No item to display"
                         },
                         "searchValuePreprocess": {
                             "description": "Specify a function used to preprocess the value just before actually searching through the items",
-                            "type": "Function"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Function"
+                                    }
+                                ],
+                                "raw": "Function"
+                            }
                         },
                         "loadingText": {
                             "description": "Specify the text to use for the default \"loading\" state",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "Loading please wait..."
                         },
                         "filter": {
                             "description": "Specify a function to use to filter the items. Must return the filtered list of items",
-                            "type": "Function"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Function"
+                                    }
+                                ],
+                                "raw": "Function"
+                            }
                         },
                         "filtrable": {
                             "description": "Specify all the properties of your \"item\" to use as source for the filtrable process",
@@ -469,51 +530,124 @@
                         },
                         "showKeywords": {
                             "description": "Specify if you want to display the \"keywords\" section on top of the list results",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "templates": {
                             "description": "Specify either an object with properties like \"item\", \"empty\" and \"loading\", or a function returning the good template depending on tne \"type\" argument property",
-                            "type": "Object|Function"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    },
+                                    {
+                                        "type": "Function"
+                                    }
+                                ],
+                                "raw": "Object|Function"
+                            }
                         },
                         "closeTimeout": {
                             "description": "Specify the duration before closing the list when having selected an item",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 100
                         },
                         "interactive": {
                             "description": "Specify if your items in the list are interactive or not to let the user click and interact with them",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "closeOnSelect": {
                             "description": "Specify if you wantr to close the list when selecting an item",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "resetOnSelect": {
                             "description": "Specify if you want your filtrable input to be reseted on select",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         },
                         "notSelectable": {
                             "description": "Specify if you want the items to be not selectable",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "maxItems": {
                             "description": "Specify the maximum number of items to display at first in the list",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 25
                         },
                         "classes": {
                             "description": "Specify some additional classes to add to the component elements",
-                            "type": "Object",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
                             "default": {}
                         },
                         "inline": {
                             "description": "Specify if you want the filterable input list to be always displayed and inline in the html",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false,
                             "physical": true
                         }
@@ -576,35 +710,90 @@
                     "definition": {
                         "items": {
                             "description": "Specify an array of items to use in your filtrable list. Can be a JSON string, a function that take an object with the \"value\" property and must return an array of items to use",
-                            "type": "String|Function"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    },
+                                    {
+                                        "type": "Function"
+                                    }
+                                ],
+                                "raw": "String|Function"
+                            }
                         },
                         "value": {
                             "description": "Specify the attribute in your items to use as a value. Can be also a function that will be called with an object containing the selected item and must return the string you want to use as value",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "value"
                         },
                         "label": {
                             "description": "Specify the attribute in your items to use as a label. Can be also a function that will be called with an object containing the selected item and must return the string you want to use as label",
-                            "type": "String|Function",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    },
+                                    {
+                                        "type": "Function"
+                                    }
+                                ],
+                                "raw": "String|Function"
+                            },
                             "default": "value"
                         },
                         "emptyText": {
                             "description": "Specify the text to use for the default \"empty\" (no result) state",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "No item to display"
                         },
                         "searchValuePreprocess": {
                             "description": "Specify a function used to preprocess the value just before actually searching through the items",
-                            "type": "Function"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Function"
+                                    }
+                                ],
+                                "raw": "Function"
+                            }
                         },
                         "loadingText": {
                             "description": "Specify the text to use for the default \"loading\" state",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "Loading please wait..."
                         },
                         "filter": {
                             "description": "Specify a function to use to filter the items. Must return the filtered list of items",
-                            "type": "Function"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Function"
+                                    }
+                                ],
+                                "raw": "Function"
+                            }
                         },
                         "filtrable": {
                             "description": "Specify all the properties of your \"item\" to use as source for the filtrable process",
@@ -618,51 +807,124 @@
                         },
                         "showKeywords": {
                             "description": "Specify if you want to display the \"keywords\" section on top of the list results",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "templates": {
                             "description": "Specify either an object with properties like \"item\", \"empty\" and \"loading\", or a function returning the good template depending on tne \"type\" argument property",
-                            "type": "Object|Function"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    },
+                                    {
+                                        "type": "Function"
+                                    }
+                                ],
+                                "raw": "Object|Function"
+                            }
                         },
                         "closeTimeout": {
                             "description": "Specify the duration before closing the list when having selected an item",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 100
                         },
                         "interactive": {
                             "description": "Specify if your items in the list are interactive or not to let the user click and interact with them",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "closeOnSelect": {
                             "description": "Specify if you wantr to close the list when selecting an item",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "resetOnSelect": {
                             "description": "Specify if you want your filtrable input to be reseted on select",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         },
                         "notSelectable": {
                             "description": "Specify if you want the items to be not selectable",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "maxItems": {
                             "description": "Specify the maximum number of items to display at first in the list",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 25
                         },
                         "classes": {
                             "description": "Specify some additional classes to add to the component elements",
-                            "type": "Object",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
                             "default": {}
                         },
                         "inline": {
                             "description": "Specify if you want the filterable input list to be always displayed and inline in the html",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false,
                             "physical": true
                         }

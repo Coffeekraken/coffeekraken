@@ -1,5 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
 import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 
 /**
@@ -13,7 +12,6 @@ import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
  * Generate the loader classes
  *
  * @param       {('spinner'|'round'|'drop'|'square-dots')}                [loaders=['spinner','round','drop','square-dots']]         The loader(s) you want to generate
- * @param       {String}                            [defaultColor=theme.ui.loader.defaultColor]            The default color you want
  * @return      {String}            The generated css
  *
  * @example     css
@@ -35,18 +33,12 @@ class postcssSugarPluginUiLoaderClassesClassesInterface extends __SInterface {
                 values: ['spinner', 'round', 'drop', 'square-dots'],
                 default: ['spinner', 'round', 'drop', 'square-dots'],
             },
-            defaultColor: {
-                type: 'String',
-                values: Object.keys(__STheme.get('color')),
-                default: __STheme.get('ui.loader.defaultColor'),
-            },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiLoaderClassesParams {
     loaders: ('spinner' | 'round' | 'drop' | 'square-dots')[];
-    defaultColor: string;
 }
 
 export { postcssSugarPluginUiLoaderClassesClassesInterface as interface };
@@ -64,7 +56,6 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiLoaderClassesParams = {
         loaders: ['spinner', 'round', 'drop', 'square-dots'],
-        defaultColor: 'main',
         ...params,
     };
 
@@ -153,16 +144,6 @@ export default function ({
             },
         );
     });
-
-    // default color
-    vars.code(
-        () => `
-        .s-loader:not(.s-color) {
-            @sugar.color(${finalParams.defaultColor});
-        }
-    `,
-        { type: 'CssClass' },
-    );
 
     return vars;
 }

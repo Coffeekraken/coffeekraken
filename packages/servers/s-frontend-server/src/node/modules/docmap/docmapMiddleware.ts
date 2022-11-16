@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-import __SBench from '@coffeekraken/s-bench';
 import __SDocmap from '@coffeekraken/s-docmap';
 
 /**
@@ -51,7 +50,7 @@ function docmapMiddleware(settings = {}) {
         };
         docmapCache = docmapJson;
 
-        __SBench.step('request', 'docmapMiddleware');
+        res.bench?.step('docmapMiddleware');
 
         return next();
     };

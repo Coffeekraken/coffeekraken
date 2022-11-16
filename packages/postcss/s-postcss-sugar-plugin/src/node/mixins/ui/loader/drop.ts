@@ -12,8 +12,8 @@ import __STheme from '@coffeekraken/s-theme';
  * Apply the drop style to any element
  *
  * @param        {String}           [name='s-loader-drop']               A name for your drop
- * @param       {String}            [duration='theme.ui.loaderDrop.duration']        The duration of your drop animation
- * @param        {String}           [easing='theme.ui.loaderDrop.easing']            The easing you want for your drop animation
+ * @param       {String}            [duration='theme.ui.loader.duration']        The duration of your drop animation
+ * @param        {String}           [easing='theme.ui.loader.easing']            The easing you want for your drop animation
  * @return      {String}            The generated css
  *
  * @example     css
@@ -34,11 +34,11 @@ class postcssSugarPluginUiLoaderDropMixinInterface extends __SInterface {
             },
             duration: {
                 type: 'String',
-                default: __STheme.get('ui.loaderDrop.duration'),
+                default: __STheme.get('ui.loader.duration'),
             },
             easing: {
                 type: 'String',
-                default: __STheme.get('ui.loaderDrop.easing'),
+                default: __STheme.get('ui.loader.easing'),
             },
         };
     }

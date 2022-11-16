@@ -12,8 +12,8 @@ import __STheme from '@coffeekraken/s-theme';
  * Apply the round style to any element
  *
  * @param        {String}           [name='s-loader-round']               A name for your round
- * @param       {String}            [duration='theme.ui.loaderRound.duration']        The duration of your round animation
- * @param        {String}           [easing='theme.ui.loaderRound.easing']            The easing you want for your round animation
+ * @param       {String}            [duration='theme.ui.loader.duration']        The duration of your round animation
+ * @param        {String}           [easing='theme.ui.loader.easing']            The easing you want for your round animation
  * @return      {String}            The generated css
  *
  * @example     css
@@ -34,11 +34,11 @@ class postcssSugarPluginUiloaderRoundMixinInterface extends __SInterface {
             },
             duration: {
                 type: 'String',
-                default: __STheme.get('ui.loaderRound.duration'),
+                default: __STheme.get('ui.loader.duration'),
             },
             easing: {
                 type: 'String',
-                default: __STheme.get('ui.loaderRound.easing'),
+                default: __STheme.get('ui.loader.easing'),
             },
         };
     }

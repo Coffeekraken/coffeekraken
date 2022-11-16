@@ -1891,6 +1891,7 @@ __metadata:
     "@coffeekraken/s-interface": ^2.0.0-alpha.20
     "@coffeekraken/s-promise": ^2.0.0-alpha.20
     "@coffeekraken/sugar": ^2.0.0-alpha.20
+    micromatch: ^4.0.5
   languageName: unknown
   linkType: soft
 

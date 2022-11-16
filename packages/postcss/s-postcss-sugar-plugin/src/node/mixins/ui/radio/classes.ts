@@ -12,16 +12,13 @@ import __faker from 'faker';
  *
  * Generate the radio classes
  *
- * @param       {('solid')[]}                           [styles=['solid']]         The style(s) you want to generate
- * @param       {('default'|'square'|'circle')[]}             [shape=['default','square','circle']]         The shape(s) you want to generate
- * @param       {'solid'}                [defaultStyle='theme.ui.radio.defaultStyle']           The default style you want
- * @param       {'default'|'square'|'circle'}        [defaultShape='theme.ui.radio.defaultShape']           The default shape you want
- * @param       {String}                            [defaultColor=theme.ui.radio.defaultColor]            The default color you want
- * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
+ * @param       {('default')[]}                           [lnfs=['default']]         The style(s) you want to generate
+ * @param       {'default'}                [defaultLnf='theme.ui.form.defaultLnf']           The default style you want
+ * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css
- * @sugar.ui.radio.classes;
+ * @sugar.ui.form.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -30,60 +27,35 @@ import __faker from 'faker';
 class postcssSugarPluginUiRadioClassesInterface extends __SInterface {
     static get _definition() {
         return {
-            styles: {
+            lnfs: {
                 type: 'String[]',
-                values: ['solid'],
-                default: ['solid'],
+                values: ['default'],
+                default: ['default'],
             },
-            shapes: {
-                type: 'String[]',
-                values: ['default', 'square', 'circle'],
-                default: ['default', 'square', 'circle'],
-            },
-            defaultStyle: {
+            defaultLnf: {
                 type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.radio.defaultStyle'),
-            },
-            defaultShape: {
-                type: 'String',
-                values: ['default', 'square', 'circle'],
-                default: __STheme.get('ui.radio.defaultShape'),
-            },
-            defaultColor: {
-                type: 'String',
-                values: Object.keys(__STheme.get('color')),
-                default: __STheme.get('ui.radio.defaultColor'),
+                values: ['default'],
+                default: __STheme.get('ui.form.defaultLnf'),
             },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'shape', 'vr', 'tf'],
-                default: ['bare', 'lnf', 'shape', 'vr', 'tf'],
+                values: ['bare', 'lnf', 'vr', 'tf'],
+                default: ['bare', 'lnf', 'vr', 'tf'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiRangeClassesParams {
-    styles: 'solid'[];
-    shapes: ('default' | 'square' | 'circle')[];
-    defaultStyle: 'solid';
-    defaultShape: 'default' | 'square' | 'circle';
-    defaultColor: string;
-    scope: ('bare' | 'lnf' | 'shape' | 'vr' | 'tf')[];
+    lnfs: 'default'[];
+    defaultLnf: 'default';
+    scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
 }
 
 export { postcssSugarPluginUiRadioClassesInterface as interface };
-
-import { __dirname } from '@coffeekraken/sugar/fs';
-export function dependencies() {
-    return {
-        files: [`${__dirname()}/radio.js`],
-    };
-}
 
 export default function ({
     params,
@@ -97,11 +69,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiRangeClassesParams = {
-        styles: [],
-        shapes: [],
-        defaultStyle: 'solid',
-        defaultShape: 'default',
-        defaultColor: 'main',
+        lnfs: [],
+        defaultLnf: 'default',
         scope: [],
         ...params,
     };
@@ -128,50 +97,24 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
-        ${finalParams.styles
-            .map((style) => {
+        ${finalParams.lnfs
+            .map((lnf) => {
                 return ` * @cssClass     s-radio${
-                    style === finalParams.defaultStyle ? '' : `:${style}`
-                }           Apply the ${style} radio style`;
-            })
-            .join('\n')}
-        ${finalParams.shapes
-            .map((shape) => {
-                return ` * @cssClass     s-radio${
-                    shape === finalParams.defaultShape ? '' : `:${shape}`
-                }           Apply the ${shape} radio shape`;
+                    lnf === finalParams.defaultLnf ? '' : `:${lnf}`
+                }           Apply the ${lnf} radio lnf`;
             })
             .join('\n')}
         * 
-        ${finalParams.styles
-            .map((style) => {
-                return ` * @example        html       ${style} style
+        ${finalParams.lnfs
+            .map((lnf) => {
+                return ` * @example        html       ${lnf} lnf
             *   <label class="s-mbe:30 s-label">
             *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
-            *     <input type="radio" checked class="s-radio" name="radio-style-${style}" value="hello 1" checked />
+            *     <input type="radio" checked class="s-radio" name="radio-lnf-${lnf}" value="hello 1" checked />
             *   </label>
             *   <label class="s-mbe:30 s-label">
             *     <span>I'm disabled</span>
-            *     <input type="radio" disabled class="s-radio" name="radio-style-${style}" value="hello 3" />
-            *   </label>
-            * `;
-            })
-            .join('\n')}
-        *
-        ${finalParams.shapes
-            .map((shape) => {
-                return ` * @example        html       ${shape} shape
-            *   <label class="s-mbe:30 s-label">
-            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
-            *     <input type="radio" checked class="s-radio${
-                finalParams.defaultShape === shape ? '' : `:${shape}`
-            }" name="radio-shape-${shape}" value="hello 1" checked />
-            *   </label>
-            *   <label class="s-mbe:30 s-label">
-            *     <span>I'm disabled</span>
-            *     <input type="radio" disabled class="s-radio${
-                finalParams.defaultShape === shape ? '' : `:${shape}`
-            }" name="radio-shape-${shape}" value="hello 1" />
+            *     <input type="radio" disabled class="s-radio" name="radio-lnf-${lnf}" value="hello 3" />
             *   </label>
             * `;
             })
@@ -258,10 +201,10 @@ export default function ({
     }
 
     if (finalParams.scope.includes('lnf')) {
-        finalParams.styles.forEach((style) => {
+        finalParams.lnfs.forEach((lnf) => {
             let cls = `s-radio`;
-            if (style !== finalParams.defaultStyle) {
-                cls += `--${style}`;
+            if (lnf !== finalParams.defaultLnf) {
+                cls += `--${lnf}`;
             }
 
             vars.comment(
@@ -270,17 +213,17 @@ export default function ({
             * @namespace          sugar.style.ui.radio
             * @type           CssClass
             * 
-            * This class represent a(n) "<s-color="accent">${style}</s-color>" radio
+            * This class represent a(n) "<s-color="accent">${lnf}</s-color>" radio
             * 
             * @example        html
             * <input type="radio" class="s-radio${
-                style === finalParams.defaultStyle ? '' : `:${style}`
+                lnf === finalParams.defaultLnf ? '' : `:${lnf}`
             }" value="something" name="myRadioItem1" />
             * <input type="radio" class="s-radio${
-                style === finalParams.defaultStyle ? '' : `:${style}`
+                lnf === finalParams.defaultLnf ? '' : `:${lnf}`
             }" value="something" name="myRadioItem2" />
             <input type="radio" class="s-radio${
-                style === finalParams.defaultStyle ? '' : `:${style}`
+                lnf === finalParams.defaultLnf ? '' : `:${lnf}`
             }" value="something" name="myRadioItem3" />
             * 
             * @since    2.0.0
@@ -290,50 +233,7 @@ export default function ({
             ).code(
                 `
             .${cls} {
-                @sugar.ui.radio($style: ${style}, $scope: lnf);
-            }
-            `,
-                {
-                    type: 'CssClass',
-                },
-            );
-        });
-    }
-
-    if (finalParams.scope.includes('shape')) {
-        finalParams.shapes.forEach((shape) => {
-            let cls = `s-radio`;
-            if (shape !== finalParams.defaultShape) {
-                cls += `--${shape}`;
-            }
-
-            vars.comment(
-                () => `/**
-            * @name           ${cls}
-            * @namespace          sugar.style.ui.radio
-            * @type           CssClass
-            * 
-            * This class represent a(n) "<s-color="accent">${shape}</s-color>" radio
-            * 
-            * @example        html
-            * <input type="radio" class="s-radio${
-                shape === finalParams.defaultShape ? '' : `:${shape}`
-            }" value="something" name="myRadioItem1" />
-            * <input type="radio" class="s-radio${
-                shape === finalParams.defaultShape ? '' : `:${shape}`
-            }" value="something" name="myRadioItem2" />
-            <input type="radio" class="s-radio${
-                shape === finalParams.defaultShape ? '' : `:${shape}`
-            }" value="something" name="myRadioItem3" />
-            * 
-            * @since    2.0.0
-            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */
-       `,
-            ).code(
-                `
-            .${cls} {
-                @sugar.ui.radio($shape: ${shape}, $scope: shape);
+                @sugar.ui.radio($lnf: ${lnf}, $scope: lnf);
             }
             `,
                 {
@@ -377,18 +277,6 @@ export default function ({
         );
     }
 
-    // default color
-    if (finalParams.scope.includes('lnf')) {
-        vars.code(
-            () => `
-            .s-radio:not(.s-color) {
-                @sugar.color(${finalParams.defaultColor});
-            }
-        `,
-            { type: 'CssClass' },
-        );
-    }
-
     if (finalParams.scope.indexOf('vr') !== -1) {
         vars.comment(
             () => `/**
@@ -416,7 +304,7 @@ export default function ({
             @sugar.rhythm.vertical {
                 input[type="radio"], .s-radio {
                     ${__STheme.jsObjectToCssProperties(
-                        __STheme.get('ui.radio.rhythmVertical'),
+                        __STheme.get('ui.form.rhythmVertical'),
                     )}
                 } 
             }

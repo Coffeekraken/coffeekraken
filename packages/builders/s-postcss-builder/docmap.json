@@ -3,20 +3,20 @@
     "extends": [],
     "generated": {
         "extends": [
-            "01-basic",
-            "02-basic",
             "@coffeekraken/cli",
-            "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-code-formatter-prettier",
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
+            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
@@ -47,13 +47,16 @@
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-glob",
+            "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
@@ -69,6 +72,9 @@
             "@coffeekraken/s-request",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -363,37 +369,79 @@
                     "definition": {
                         "input": {
                             "description": "Specify the input css file for your build",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "required": true,
                             "alias": "i",
                             "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-postcss-builder/src/css/index.css"
                         },
                         "output": {
                             "description": "Specify the output file path you want to save your build",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "alias": "o",
                             "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-postcss-builder/dist/css/index.css"
                         },
                         "prod": {
                             "description": "Shorthand to set a production ready build",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false,
                             "alias": "p"
                         },
                         "minify": {
                             "description": "Specify if you want to minify your output css",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "alias": "m",
                             "default": false
                         },
                         "purge": {
                             "description": "Specify if you want to purge your output css. See the config.purgecss configuration file for more control",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "saveDev": {
                             "description": "Specify if you want to save a .dev.css file that will not be purged or minified",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         }
                     }
@@ -429,45 +477,6 @@
                 "description": "This class represent the interface that describe settings of the SPostcssBuilder class",
                 "namespace": "@coffeekraken.s-postcss-builder.node.interface",
                 "status": "beta",
-                "interface": {
-                    "name": "SPostcssBuilderSettingsInterface",
-                    "description": "",
-                    "definition": {
-                        "postcss": {
-                            "description": "Specify some postcss configurations",
-                            "type": "Object",
-                            "default": {
-                                "plugins": [
-                                    "@coffeekraken/s-postcss-sugar-plugin",
-                                    "postcss-import",
-                                    "postcss-nested",
-                                    "postcss-atroot",
-                                    "postcss-extend-rule",
-                                    "postcss-property-lookup",
-                                    "autoprefixer"
-                                ],
-                                "pluginsOptions": {}
-                            }
-                        },
-                        "purgecss": {
-                            "description": "Specify some purgecss configurations",
-                            "type": "Object",
-                            "default": {
-                                "content": [
-                                    "index.html",
-                                    "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-postcss-builder/**/*.js",
-                                    "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-postcss-builder/**/*.jsx",
-                                    "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-postcss-builder/**/*.html",
-                                    "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-postcss-builder/**/*.vue",
-                                    "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-postcss-builder/**/*.riot",
-                                    "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-postcss-builder/**/*.svelte",
-                                    "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-postcss-builder/*/*.ladephp",
-                                    "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-postcss-builder/*/*.wi"
-                                ]
-                            }
-                        }
-                    }
-                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

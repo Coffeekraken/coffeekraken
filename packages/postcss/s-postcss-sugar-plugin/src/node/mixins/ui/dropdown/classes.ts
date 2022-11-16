@@ -1,5 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 /**
@@ -12,12 +11,7 @@ import __faker from 'faker';
  *
  * Generate the dropdown classes
  *
- * @param       {('solid')[]}                           [styles=['solid']]         The style(s) you want to generate
- * @param       {('default'|'square'|'pill')[]}             [shape=['default','square','pill']]         The shape(s) you want to generate
- * @param       {'solid'}                [defaultStyle='theme.ui.dropdown.defaultStyle']           The default style you want
- * @param       {'default'|'square'|'pill'}        [defaultShape='theme.ui.dropdown.defaultShape']           The default shape you want
- * @param       {String}                            [defaultColor=theme.ui.dropdown.defaultColor]            The default color you want
- * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
+ * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css
@@ -30,59 +24,23 @@ import __faker from 'faker';
 class postcssSugarPluginUiDropdownClassesInterface extends __SInterface {
     static get _definition() {
         return {
-            styles: {
-                type: 'String[]',
-                default: ['solid'],
-            },
-            shape: {
-                type: 'String[]',
-                values: ['default', 'square', 'pill'],
-                default: ['default', 'square', 'pill'],
-            },
-            defaultStyle: {
-                type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.dropdown.defaultStyle'),
-            },
-            defaultShape: {
-                type: 'String',
-                values: ['default', 'square', 'pill'],
-                default: __STheme.get('ui.dropdown.defaultShape'),
-            },
-            defaultColor: {
-                type: 'String',
-                values: Object.keys(__STheme.get('color')),
-                default: __STheme.get('ui.dropdown.defaultColor'),
-            },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'shape', 'vr', 'tf'],
-                default: ['bare', 'lnf', 'shape', 'vr', 'tf'],
+                values: ['bare', 'lnf'],
+                default: ['bare', 'lnf'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiDropdownClassesParams {
-    styles: 'solid'[];
-    shapes: ('default' | 'square' | 'pill')[];
-    defaultStyle: 'solid';
-    defaultShape: 'default' | 'square' | 'pill';
-    defaultColor: string;
-    scope: ('bare' | 'lnf' | 'shape' | 'vr' | 'tf')[];
+    scope: ('bare' | 'lnf')[];
 }
 
 export { postcssSugarPluginUiDropdownClassesInterface as interface };
-
-import { __dirname } from '@coffeekraken/sugar/fs';
-export function dependencies() {
-    return {
-        files: [`${__dirname()}/dropdown.js`],
-    };
-}
 
 export default function ({
     params,
@@ -96,12 +54,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiDropdownClassesParams = {
-        styles: ['solid'],
-        shapes: ['default', 'square', 'pill'],
-        defaultStyle: 'solid',
-        defaultShape: 'default',
-        defaultColor: 'main',
-        scope: ['bare', 'lnf', 'shape', 'tf', 'vr'],
+        scope: ['bare', 'lnf'],
         ...params,
     };
 
@@ -128,20 +81,7 @@ export default function ({
         * @support          edge
         * 
         * @cssClass             s-dropdown-container        The container of the dropdown that will trigger the display, hide, etc...
-        ${finalParams.styles
-            .map((style) => {
-                return ` * @cssClass     s-dropdown${
-                    style === finalParams.defaultStyle ? '' : `:${style}`
-                }           Apply the ${style} dropdown style`;
-            })
-            .join('\n')}
-        ${finalParams.shapes
-            .map((shape) => {
-                return ` * @cssClass     s-dropdown${
-                    shape === finalParams.defaultShape ? '' : `:${shape}`
-                }           Apply the ${shape} dropdown shape`;
-            })
-            .join('\n')}
+        * @cssClass             s-dropdown                  Apply the dropdown styling
         * @cssClass       s-dropdown:bottom      Apply the bottom dropdown position
         * @cssClass       s-dropdown:bottom-start        Apply the bottom start dropdown position
         * @cssClass       s-dropdown:bottom-end        Apply the bottom end dropdown position
@@ -149,45 +89,16 @@ export default function ({
         * @cssClass       s-dropdown:top-start        Apply the top start dropdown position
         * @cssClass       s-dropdown:top-end        Apply the top end dropdown position
         * 
-        ${finalParams.styles
-            .map((style) => {
-                return ` * @example        html       ${style} style ${
-                    finalParams.defaultStyle === style
-                        ? '<span class="s-badge:outline s-scale:05">default</span>'
-                        : ''
-                }
-            * <div class="s-dropdown-container">
-            *   <button class="s-btn s-color:accent">
-            *      Click me!
-            *   </button>
-            *   <div class="s-dropdown s-bg:base s-p:30 s-radius">
-            *      <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *      <a class="s-btn s-color:accent">You find me!</a>
-            *   </div>
-            * </div>
-            * `;
-            })
-            .join('\n')}
-        *
-        ${finalParams.shapes
-            .map((shape) => {
-                return ` * @example        html       ${shape} style ${
-                    finalParams.defaultShape === shape
-                        ? '<span class="s-badge:outline s-scale:05">default</span>'
-                        : ''
-                }
-            * <div class="s-dropdown-container">
-            *   <button class="s-btn s-color:accent">
-            *       Click me!
-            *   </button>
-            *   <div class="s-dropdown:${shape}">
-            *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-color:accent">You find me!</a>
-            *       </div>
-            * </div>
-            * `;
-            })
-            .join('\n')}
+        * @example        html       Simple dropdown
+        * <div class="s-dropdown-container">
+        *   <button class="s-btn s-color:accent">
+        *      Click me!
+        *   </button>
+        *   <div class="s-dropdown s-bg:base s-p:30 s-radius">
+        *      <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+        *      <a class="s-btn s-color:accent">You find me!</a>
+        *   </div>
+        * </div>
         * 
         * @example        html       Position
         * <div class="s-dropdown-container s-mie:20">
@@ -315,23 +226,18 @@ export default function ({
     }
 
     if (finalParams.scope.includes('lnf')) {
-        finalParams.styles.forEach((style) => {
-            vars.comment(
-                () => `/**
-            * @name           s-dropdown${
-                finalParams.defaultStyle === style ? '' : `:${style}`
-            }
+        vars.comment(
+            () => `/**
+            * @name           s-dropdown
             * @namespace          sugar.style.ui.dropdown
             * @type           CssClass
             * 
-            * This class represent a(n) "<yellow>${style}</yellow>" dropdown
+            * This class represent a(n) dropdown
             * 
             * @example        html
             * <span class="s-dropdown-container">
             *     <button class="s-btn">Click me!</button>
-            *     <div class="s-dropdown${
-                finalParams.defaultStyle === style ? '' : `:${style}`
-            }">
+            *     <div class="s-dropdown">
             *         <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
             *         <a class="s-btn s-color:accent">You find me!</a>
             *     </div>
@@ -341,59 +247,16 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-            ).code(
-                `
-            .s-dropdown${
-                finalParams.defaultStyle === style ? '' : `--${style}`
-            } {
-                @sugar.ui.dropdown($style: ${style}, $scope: lnf);
+        ).code(
+            `
+            .s-dropdown {
+                @sugar.ui.dropdown($scope: lnf);
             }
             `,
-                {
-                    type: 'CssClass',
-                },
-            );
-        });
-    }
-
-    if (finalParams.scope.includes('shape')) {
-        finalParams.shapes.forEach((shape) => {
-            vars.comment(
-                () => `/**
-        * @name           s-dropdown${
-            finalParams.defaultShape === shape ? '' : `:${shape}`
-        }
-        * @namespace          sugar.style.ui.dropdown
-        * @type           CssClass
-        * 
-        * This class represent a(n) "<yellow>${shape}</yellow>" dropdown
-        * 
-        * @example        html
-        * <span class="s-dropdown-container">
-        *     <button class="s-btn">Click me!</button>
-        *     <div class="s-dropdown${
-            finalParams.defaultShape === shape ? '' : `:${shape}`
-        }">
-        *         <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *         <a class="s-btn s-color:accent">You find me!</a>
-        *     </div>
-        * </span>
-        * 
-        * @since      2.0.0
-        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-      */
-     `,
-            ).code(
-                `
-        .s-dropdown${finalParams.defaultShape === shape ? '' : `--${shape}`} {
-            @sugar.ui.dropdown($shape: ${shape}, $scope: shape);
-        }
-        `,
-                {
-                    type: 'CssClass',
-                },
-            );
-        });
+            {
+                type: 'CssClass',
+            },
+        );
     }
 
     vars.comment(
@@ -428,18 +291,6 @@ export default function ({
             type: 'CssClass',
         },
     );
-
-    // default color
-    if (finalParams.scope.includes('lnf')) {
-        vars.code(
-            () => `
-            .s-dropdown:not(.s-color) {
-                @sugar.color(${finalParams.defaultColor});
-            }
-        `,
-            { type: 'CssClass' },
-        );
-    }
 
     vars.comment(
         () => `/**

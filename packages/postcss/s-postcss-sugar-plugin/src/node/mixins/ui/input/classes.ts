@@ -13,16 +13,13 @@ import __faker from 'faker';
  *
  * Generate the input classes
  *
- * @param       {('solid')[]}                           [styles=['solid']]         The style(s) you want to generate
- * @param       {('default'|'square'|'pill')[]}             [shape=['default','square','pill']]         The shape(s) you want to generate
- * @param       {'solid'}                [defaultStyle='theme.ui.input.defaultStyle']           The default style you want
- * @param       {'default'|'square'|'pill'}        [defaultShape='theme.ui.input.defaultShape']           The default shape you want
- * @param       {String}                            [defaultColor=theme.ui.input.defaultColor]            The default color you want
- * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
+ * @param       {('default')[]}                           [lnfs=['default']]         The style(s) you want to generate
+ * @param       {'default'}                [defaultLnf='theme.ui.form.defaultLnf']           The default style you want
+ * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css
- * @sugar.ui.input.classes;
+ * @sugar.ui.form.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -31,57 +28,33 @@ import __faker from 'faker';
 class postcssSugarPluginUiFormClassesInterface extends __SInterface {
     static get _definition() {
         return {
-            styles: {
+            lnfs: {
                 type: 'String[]',
-                default: ['solid'],
+                default: ['default'],
             },
-            shapes: {
-                type: 'String[]',
-                values: ['default', 'square', 'pill'],
-                default: ['default', 'square', 'pill'],
-            },
-            defaultStyle: {
+            defaultLnf: {
                 type: 'String',
-                default: __STheme.get('ui.input.defaultStyle'),
-            },
-            defaultShape: {
-                type: 'String',
-                default: __STheme.get('ui.input.defaultShape'),
-            },
-            defaultColor: {
-                type: 'String',
-                values: Object.keys(__STheme.get('color')),
-                default: __STheme.get('ui.input.defaultColor'),
+                default: __STheme.get('ui.form.defaultLnf'),
             },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'shape', 'vr', 'tf'],
-                default: ['bare', 'lnf', 'shape', 'vr', 'tf'],
+                values: ['bare', 'lnf', 'vr', 'tf'],
+                default: ['bare', 'lnf', 'vr', 'tf'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiFormClassesParams {
-    styles: string[];
-    shapes: ('default' | 'square' | 'pill')[];
-    defaultStyle: 'solid';
-    defaultShape: 'default' | 'square' | 'pill';
-    defaultColor: string;
-    scope: ('bare' | 'lnf' | 'shape' | 'vr' | 'tf')[];
+    lnfs: string[];
+    defaultLnf: 'default';
+    scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
 }
 
 export { postcssSugarPluginUiFormClassesInterface as interface };
-
-import { __dirname } from '@coffeekraken/sugar/fs';
-export function dependencies() {
-    return {
-        files: [`${__dirname()}/text.js`],
-    };
-}
 
 export default function ({
     params,
@@ -95,11 +68,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiFormClassesParams = {
-        styles: [],
-        shapes: [],
-        defaultStyle: 'solid',
-        defaultShape: 'default',
-        defaultColor: 'main',
+        lnfs: [],
+        defaultLnf: 'default',
         scope: [],
         ...params,
     };
@@ -116,54 +86,32 @@ export default function ({
         * @platform       css
         * @status       beta
         * 
-        * These classes allows you to apply some styles to your text input
+        * These classes allows you to apply some lnfs to your text input
         * 
-        ${finalParams.styles
-            .map((style) => {
+        ${finalParams.lnfs
+            .map((lnf) => {
                 return ` * @cssClass     s-input${
-                    finalParams.defaultStyle === style ? '' : `:${style}`
-                }           Apply the ${style} input style`;
-            })
-            .join('\n')}
-        ${finalParams.shapes
-            .map((shape) => {
-                return ` * @cssClass     s-input${
-                    finalParams.defaultShape === shape ? '' : `:${shape}`
-                }           Apply the ${shape} input shape`;
+                    finalParams.defaultLnf === lnf ? '' : `:${lnf}`
+                }           Apply the ${lnf} input lnf`;
             })
             .join('\n')}
         * 
-        ${__keysFirst(finalParams.styles, ['default'])
-            .map((style) => {
-                return ` * @example        html       ${style} style
+        ${__keysFirst(finalParams.lnfs, ['default'])
+            .map((lnf) => {
+                return ` * @example        html       ${lnf} lnf
             *   <label class="s-label:responsive s-mbe:30">
             *       <span>${__faker.name.findName()}</span>
-            *       <input type="text" placeholder="Type something!" class="s-input\:${style} s-width:40" />
+            *       <input type="text" placeholder="Type something!" class="s-input\:${lnf} s-width:40" />
             *  </label>
             *   <label class="s-label:responsive s-mbe:30">
             *        <span>I'm disabled</span>
-            *       <input type="text" disabled placeholder="Type something!" class="s-input\:${style} s-width:40" />
+            *       <input type="text" disabled placeholder="Type something!" class="s-input\:${lnf} s-width:40" />
             *   </label>
             *   <label dir="rtl" class="s-label:responsive s-mbe:30">
             *       <span>Support RTL</span>
-            *       <input type="text" placeholder="Type something! (RTL)" class="s-input\:${style} s-width:40" />
+            *       <input type="text" placeholder="Type something! (RTL)" class="s-input\:${lnf} s-width:40" />
             *   </label>
             * 
-            * `;
-            })
-            .join('\n')}
-        *
-        ${__keysFirst(finalParams.shapes, ['default'])
-            .map((shape) => {
-                return ` * @example        html       ${shape} shape
-            *   <label class="s-label:responsive s-mbe:30">
-            *       <span>${__faker.name.findName()}</span>
-            *       <input type="text" placeholder="Type something!" class="s-input\:${shape} s-width:40" />
-            *   </label>
-            *   <label class="s-label:responsive s-mbe:30">
-            *        <span>I'm disabled</span>
-            *       <input type="text" disabled placeholder="Type something!" class="s-input\:${shape} s-width:40" />
-            *   </label>
             * `;
             })
             .join('\n')}
@@ -227,10 +175,10 @@ export default function ({
     }
 
     if (finalParams.scope.includes('lnf')) {
-        finalParams.styles.forEach((style) => {
-            const isDefaultStyle = finalParams.defaultStyle === style;
+        finalParams.lnfs.forEach((lnf) => {
+            const isDefaultStyle = finalParams.defaultLnf === lnf;
 
-            const styleCls = isDefaultStyle ? '' : `.s-input--${style}`;
+            const styleCls = isDefaultStyle ? '' : `.s-input--${lnf}`;
             const cls = `.s-input${styleCls}`;
 
             vars.comment(
@@ -239,7 +187,7 @@ export default function ({
             * @namespace          sugar.style.ui.input
             * @type           CssClass
             * 
-            * This class represent a(n) "<yellow>${style}</yellow>" input
+            * This class represent a(n) "<yellow>${lnf}</yellow>" input
             * 
             * @example        html
             * <input type="text" class="${cls.trim()}" placeholder="Hello world" />
@@ -250,7 +198,7 @@ export default function ({
             ).code(
                 [
                     `${cls} {`,
-                    ` @sugar.ui.input($style: ${style}, $scope: lnf);`,
+                    ` @sugar.ui.input($lnf: ${lnf}, $scope: lnf);`,
                     `}`,
                 ].join('\n'),
                 {
@@ -258,52 +206,6 @@ export default function ({
                 },
             );
         });
-    }
-
-    if (finalParams.scope.includes('shape')) {
-        finalParams.shapes.forEach((shape) => {
-            const isDefaultShape = finalParams.defaultShape === shape;
-
-            const shapeCls = isDefaultShape ? '' : `.s-input--${shape}`;
-            const cls = `.s-input${shapeCls}`;
-
-            vars.comment(
-                () => `/**
-            * @name           ${cls}
-            * @namespace          sugar.style.ui.input
-            * @type           CssClass
-            * 
-            * This class represent a(n) "<yellow>${shape}</yellow>" input
-            * 
-            * @example        html
-            * <input type="text" class="${cls.trim()}" placeholder="Hello world" />
-            * 
-            * @since      2.0.0
-            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */`,
-            ).code(
-                [
-                    `${cls} {`,
-                    ` @sugar.ui.input($shape: ${shape}, $scope: shape);`,
-                    `}`,
-                ].join('\n'),
-                {
-                    type: 'CssClass',
-                },
-            );
-        });
-    }
-
-    // default color
-    if (finalParams.scope.includes('lnf')) {
-        vars.code(
-            () => `
-            .s-input:not(.s-color) {
-                @sugar.color(${finalParams.defaultColor});
-            }
-        `,
-            { type: 'CssClass' },
-        );
     }
 
     return vars;

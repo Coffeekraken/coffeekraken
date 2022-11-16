@@ -3,12 +3,10 @@
     "extends": [],
     "generated": {
         "extends": [
-            "01-basic",
-            "02-basic",
             "@coffeekraken/cli",
-            "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-asset-picker-component",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
@@ -19,6 +17,7 @@
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
+            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
@@ -36,6 +35,7 @@
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
+            "@coffeekraken/s-dropzone-component",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -48,6 +48,7 @@
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-glob",
+            "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
@@ -56,6 +57,7 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
@@ -74,6 +76,7 @@
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
             "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -601,6 +604,53 @@
                 "extension": "config",
                 "relPath": "src/config/frontendServer.config.ts"
             },
+            "@coffeekraken.s-frontend-server.config.frontendServer.modules.upload.description": {
+                "id": "@coffeekraken.s-frontend-server.config.frontendServer.modules.upload.description",
+                "name": "description",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "description": "Specify the module description",
+                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.upload",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "frontendServer.config.ts",
+                "extension": "config",
+                "relPath": "src/config/frontendServer.config.ts"
+            },
+            "@coffeekraken.s-frontend-server.config.frontendServer.modules.upload.path": {
+                "id": "@coffeekraken.s-frontend-server.config.frontendServer.modules.upload.path",
+                "name": "path",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "${__dirname()}/../node/modules/upload/upload",
+                "description": "Specify where to find the \"upload\" module",
+                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.upload",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "frontendServer.config.ts",
+                "extension": "config",
+                "relPath": "src/config/frontendServer.config.ts"
+            },
             "@coffeekraken.s-frontend-server.config.frontendServer.modules.generic.description": {
                 "id": "@coffeekraken.s-frontend-server.config.frontendServer.modules.generic.description",
                 "name": "description",
@@ -1106,9 +1156,9 @@
                 "relPath": "src/node/handlers/doc.ts",
                 "children": {}
             },
-            "@coffeekraken.s-frontend-server.sugar.node.server.frontend.handlers.docMap": {
-                "id": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.handlers.docMap",
-                "name": "docMap",
+            "@coffeekraken.s-frontend-server.sugar.node.server.frontend.handlers.docmap": {
+                "id": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.handlers.docmap",
+                "name": "docmap",
                 "type": {
                     "types": [
                         {
@@ -1117,7 +1167,7 @@
                     ],
                     "raw": "Function"
                 },
-                "description": "This function is responsible of responding to express requests made on the docMap url",
+                "description": "This function is responsible of responding to express requests made on the docmap url",
                 "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.handlers",
                 "status": "wip",
                 "since": "2.0.0",
@@ -1207,18 +1257,39 @@
                     "definition": {
                         "yes": {
                             "description": "Answer yes to all the potential questions",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false,
                             "alias": "y"
                         },
                         "viewsDir": {
                             "description": "Server views directory",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server/src/views"
                         },
                         "pagesDir": {
                             "description": "Server pages directory",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server/src/pages"
                         }
                     }
@@ -1260,17 +1331,38 @@
                     "definition": {
                         "port": {
                             "description": "Specify the port on which to run the proxy",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 9999
                         },
                         "targetUrlHeaderName": {
                             "description": "Specifyheader name to use as the target url",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "TargetUrl"
                         },
                         "limit": {
                             "description": "Specify the limit request size to process",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "12mb"
                         }
                     }
@@ -1312,41 +1404,90 @@
                     "definition": {
                         "hostname": {
                             "description": "Server hostname",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "alias": "o",
                             "required": true,
                             "default": "127.0.0.1"
                         },
                         "port": {
                             "description": "Server port",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "alias": "p",
                             "default": 8080
                         },
                         "listen": {
                             "description": "Specify if you want the server to listen on specified hostname and port for requests or not",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "alias": "l",
                             "default": true
                         },
                         "rootDir": {
                             "description": "Server root directory",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server"
                         },
                         "viewsDir": {
                             "description": "Server views directory",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server/src/views"
                         },
                         "pagesDir": {
                             "description": "Server pages directory",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/servers/s-frontend-server/src/pages"
                         },
                         "logLevel": {
                             "description": "Specify the log level you want for your server",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "values": [
                                 "silent",
                                 "error",
@@ -1360,7 +1501,14 @@
                         },
                         "prod": {
                             "description": "Specify that we want the server to act \"like\" a production one with compression etc...",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         }
                     }

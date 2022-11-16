@@ -2,12 +2,10 @@
     "map": {},
     "generated": {
         "extends": [
-            "01-basic",
-            "02-basic",
             "@coffeekraken/cli",
-            "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-asset-picker-component",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
@@ -36,6 +34,7 @@
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
+            "@coffeekraken/s-dropzone-component",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -49,6 +48,7 @@
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-glob",
+            "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
@@ -635,17 +635,38 @@
                     "description": "",
                     "definition": {
                         "command": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "description": "Specify the command you want to execute",
                             "alias": "c"
                         },
                         "directory": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "description": "Specify where you want to execute this command. Can be a glob to execute command into multiple directories at once",
                             "alias": "d"
                         },
                         "verbose": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "description": "Specify if you want each process to log or not",
                             "default": false,
                             "alias": "v"
@@ -3299,13 +3320,13 @@
                         "description": ""
                     }
                 ],
-                "description": "Calculate the size of the passed folder and return it through a promise, either in raw format, either in human readdable one...",
+                "description": "Calculate the size of the passed folder and return it through a promise in bytes format",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __folderSize } from '@coffeekraken/sugar/fs';\nawait __folderSize('my/cool/folder');\nawait __folderSize('my/cool/folder', false); // no formatting"
+                        "code": "import { __folderSize } from '@coffeekraken/sugar/fs';\nawait __folderSize('my/cool/folder');"
                     }
                 ],
                 "async": "true",
@@ -7155,7 +7176,7 @@
                 "example": [
                     {
                         "language": "php",
-                        "code": "\\Sugar\\frontspec\\assets($frontspec->assets);"
+                        "code": "\\Sugar\\frontspec\\assets($frontspec);"
                     }
                 ],
                 "since": "2.0.0",
@@ -7192,7 +7213,7 @@
                 "example": [
                     {
                         "language": "php",
-                        "code": "\\Sugar\\frontspec\\metas($frontspec->metas, 'production');"
+                        "code": "\\Sugar\\frontspec\\metas($frontspec, 'production');"
                     }
                 ],
                 "since": "2.0.0",
@@ -7229,7 +7250,7 @@
                 "example": [
                     {
                         "language": "php",
-                        "code": "\\Sugar\\frontspec\\og($frontspec->og);"
+                        "code": "\\Sugar\\frontspec\\og($frontspec);"
                     }
                 ],
                 "since": "2.0.0",
@@ -7265,8 +7286,8 @@
                 "status": "beta",
                 "example": [
                     {
-                        "language": "twig",
-                        "code": "<code>\n {{ readFrontspec() }}\n</code>"
+                        "language": "php",
+                        "code": "\\Sugar\\frontspec\\readFrontspec();"
                     }
                 ],
                 "since": "2.0.0",
@@ -7278,6 +7299,43 @@
                 "filename": "readFrontspec.php",
                 "extension": "php",
                 "relPath": "src/php/frontspec/readFrontspec.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.frontspec.sortMedia": {
+                "id": "@coffeekraken.sugar.php.frontspec.sortMedia",
+                "name": "sortMedia",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This function take as input the \"media\" property of the `frontspec.json` file and return\na new object mostly the same but with the \"queries\" object|array sorted depending on the\n\"defaultAction\" property.",
+                "namespace": "@coffeekraken.sugar.php.frontspec",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "\\Sugar\\frontspec\\sortMedia($frontspec->media);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "sortMedia.php",
+                "extension": "php",
+                "relPath": "src/php/frontspec/sortMedia.php",
                 "children": {}
             },
             "@coffeekraken.sugar.php.gravatar.url": {
@@ -7574,6 +7632,43 @@
                 "filename": "deepMerge.php",
                 "extension": "php",
                 "relPath": "src/php/object/deepMerge.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.object.sort": {
+                "id": "@coffeekraken.sugar.php.object.sort",
+                "name": "sort",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "Sort an object properties the same way Array.sort made it in js.",
+                "namespace": "@coffeekraken.sugar.php.object",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { __sort } from '@coffeekraken/sugar/object';\n__sort({\n   coco: { weight: 10 },\n   lolo: { weight: 2 },\n   plop: { weight: 5 }\n}, (a, b) => {\n  return a.value.weight - b.value.weight;\n});\n// {\n//   lolo: { weight: 2 },\n//   plop: { weight: 5 },\n//   coco: { weight: 10 }\n// }"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "sort.php",
+                "extension": "php",
+                "relPath": "src/php/object/sort.php",
                 "children": {}
             },
             "@coffeekraken.sugar.php.path.extension": {
@@ -12556,6 +12651,47 @@
                 "filename": "isGlob.ts",
                 "extension": "ts",
                 "relPath": "src/shared/is/isGlob.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.shared.is.isImageUrl": {
+                "id": "@coffeekraken.sugar.shared.is.isImageUrl",
+                "name": "isImageUrl",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Check if the passed string path is an image url",
+                "namespace": "@coffeekraken.sugar.shared.is",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { __isImageUrl } from '@coffeekraken/sugar/is';\n__isImageUrl('something.jpg); // => true\n__isImageUrl('other.pdf); // => false"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "isImageUrl.ts",
+                "extension": "ts",
+                "relPath": "src/shared/is/isImageUrl.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.shared.is.isInteger": {
@@ -17665,32 +17801,74 @@
                     "definition": {
                         "pointerover": {
                             "description": "Specify if the pointerover event has to be used",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         },
                         "pointerout": {
                             "description": "Specify if the pointerout event has to be used",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         },
                         "click": {
                             "description": "Specify if the click event has to be used",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         },
                         "touchstart": {
                             "description": "Specify if the touchstart event has to be used",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         },
                         "touchend": {
                             "description": "Specify if the touchend event has to be used",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         },
                         "focus": {
                             "description": "Specify if the focus event has to be used",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         }
                     }
@@ -18341,6 +18519,80 @@
                 "filename": "dispatchEvent.ts",
                 "extension": "ts",
                 "relPath": "src/js/dom/event/dispatchEvent.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.dom.form.isFileAccepted": {
+                "id": "@coffeekraken.sugar.js.dom.form.isFileAccepted",
+                "name": "isFileAccepted",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Check if the passed file is accepted relative to the passed \"accept\" string.\nThe \"accept\" string does not supports the extension based accept check simply cause it will be\ntoo big to maintain mimeType to extension map and will take too much weight for no reason.",
+                "namespace": "@coffeekraken.sugar.js.dom.form",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { __isFileAccepted } from '@coffeekraken/sugar/dom'\n__isFileAccepted(myFile, 'image/png');\n__isFileAccepted(myFile, 'image/png, application/json');\n__isFileAccepted(myFile, ['image/','text/html'])"
+                    }
+                ],
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "isFileAccepted.ts",
+                "extension": "ts",
+                "relPath": "src/js/dom/form/isFileAccepted.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.dom.form.resetFileInput": {
+                "id": "@coffeekraken.sugar.js.dom.form.resetFileInput",
+                "name": "resetFileInput",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Correctly reset an input[type=\"file\"]",
+                "namespace": "@coffeekraken.sugar.js.dom.form",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { __resetFileInput } from '@coffeekraken/sugar/dom'\n __resetFileInput($myInpuit);"
+                    }
+                ],
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "resetFileInput.ts",
+                "extension": "ts",
+                "relPath": "src/js/dom/form/resetFileInput.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.js.dom.html.nodeToString": {
@@ -21589,32 +21841,74 @@
                     "definition": {
                         "pointerover": {
                             "description": "Specify if the pointerover event has to be used",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         },
                         "pointerout": {
                             "description": "Specify if the pointerout event has to be used",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         },
                         "click": {
                             "description": "Specify if the click event has to be used",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         },
                         "touchstart": {
                             "description": "Specify if the touchstart event has to be used",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         },
                         "touchend": {
                             "description": "Specify if the touchend event has to be used",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         },
                         "focus": {
                             "description": "Specify if the focus event has to be used",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         }
                     }
@@ -21702,6 +21996,43 @@
                 "filename": "toObject.php",
                 "extension": "php",
                 "relPath": "src/php/twig/filters/cast/toObject.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.twig.filters.json.cleanContext": {
+                "id": "@coffeekraken.sugar.php.twig.filters.json.cleanContext",
+                "name": "cleanContext",
+                "type": {
+                    "types": [
+                        {
+                            "type": "TwigFilter"
+                        }
+                    ],
+                    "raw": "TwigFilter"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This twig filter allows you to clean the \"_context\" variable to get only the values you actually passed",
+                "namespace": "@coffeekraken.sugar.php.twig.filters.json",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "<div data=\"{{ _context|cleanContext|json_encode }}\"></div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "cleanContext.php",
+                "extension": "php",
+                "relPath": "src/php/twig/filters/object/cleanContext.php",
                 "children": {}
             },
             "@coffeekraken.sugar.php.twig.filters.string.idCompliant": {
@@ -22109,6 +22440,43 @@
                 "filename": "readSpec.php",
                 "extension": "php",
                 "relPath": "src/php/twig/functions/specs/readSpec.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.twig.functions.specs.specsValues": {
+                "id": "@coffeekraken.sugar.php.twig.functions.specs.specsValues",
+                "name": "specsValues",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "twig",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to print the `s-specs-values=\"{...}\"` attribute only if the $_ENV['S-SPECS-VALUES'] is setted to true.",
+                "namespace": "@coffeekraken.sugar.php.twig.functions.specs",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "<div {{ specsValues(_context) }}>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "specsValues.php",
+                "extension": "php",
+                "relPath": "src/php/twig/functions/specs/specsValues.php",
                 "children": {}
             },
             "@coffeekraken.sugar.php.twig.functions.string.idCompliant": {

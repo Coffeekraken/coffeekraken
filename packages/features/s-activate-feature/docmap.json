@@ -3,11 +3,9 @@
     "extends": [],
     "generated": {
         "extends": [
-            "01-basic",
-            "02-basic",
             "@coffeekraken/cli",
-            "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-asset-picker-component",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
@@ -18,6 +16,7 @@
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
+            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
@@ -35,6 +34,7 @@
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
+            "@coffeekraken/s-dropzone-component",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -48,13 +48,16 @@
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-glob",
+            "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
@@ -73,6 +76,7 @@
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
             "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -185,12 +189,26 @@
                     "definition": {
                         "href": {
                             "description": "Specify the target element(s) to activate/unactivate",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": ""
                         },
                         "group": {
                             "description": "Specify a group id for your element. This is used for things like tabs, etc...",
-                            "type": "String"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            }
                         },
                         "toggle": {
                             "description": "Specify if you want to be able to click on the same element to activate/unactivate it.",
@@ -219,32 +237,74 @@
                         },
                         "activeClass": {
                             "description": "Specify the class applied on target(s) when active. Default is \"active\"",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "active"
                         },
                         "activeAttribute": {
                             "description": "Specify the attribute name applied on target(s) when active.",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "active"
                         },
                         "saveState": {
                             "description": "Specify if you want to save state in localStorage to restore it on page reload, etc...",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "activateTimeout": {
                             "description": "Specify a timeout before actiavting the target(s)",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 0
                         },
                         "unactivateTimeout": {
                             "description": "Specify a timeout before unactivate the target(s)",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 0
                         },
                         "triggerer": {
                             "description": "Specify an element selector that will be used as the triggerer instead of this current element",
-                            "type": "String"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            }
                         },
                         "trigger": {
                             "description": "Specify what trigger an activate/unactivate action. Can be \"click\", \"mouseover\", \"mouseout\" and/or \"anchor\"",
@@ -268,7 +328,17 @@
                         },
                         "unactivateOn": {
                             "description": "Specify some event(s) catched on the body tag that will unactivate the target(s)",
-                            "type": "Array<String>"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Array<String>"
+                            }
                         }
                     }
                 },
@@ -366,12 +436,26 @@
                     "definition": {
                         "href": {
                             "description": "Specify the target element(s) to activate/unactivate",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": ""
                         },
                         "group": {
                             "description": "Specify a group id for your element. This is used for things like tabs, etc...",
-                            "type": "String"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            }
                         },
                         "toggle": {
                             "description": "Specify if you want to be able to click on the same element to activate/unactivate it.",
@@ -400,32 +484,74 @@
                         },
                         "activeClass": {
                             "description": "Specify the class applied on target(s) when active. Default is \"active\"",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "active"
                         },
                         "activeAttribute": {
                             "description": "Specify the attribute name applied on target(s) when active.",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "active"
                         },
                         "saveState": {
                             "description": "Specify if you want to save state in localStorage to restore it on page reload, etc...",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "activateTimeout": {
                             "description": "Specify a timeout before actiavting the target(s)",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 0
                         },
                         "unactivateTimeout": {
                             "description": "Specify a timeout before unactivate the target(s)",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 0
                         },
                         "triggerer": {
                             "description": "Specify an element selector that will be used as the triggerer instead of this current element",
-                            "type": "String"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            }
                         },
                         "trigger": {
                             "description": "Specify what trigger an activate/unactivate action. Can be \"click\", \"mouseover\", \"mouseout\" and/or \"anchor\"",
@@ -449,7 +575,17 @@
                         },
                         "unactivateOn": {
                             "description": "Specify some event(s) catched on the body tag that will unactivate the target(s)",
-                            "type": "Array<String>"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Array<String>"
+                            }
                         }
                     }
                 },

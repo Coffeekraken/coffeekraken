@@ -11,7 +11,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the list style to any element
  *
- * @param       {('dl'|'ul'|'ol'|'icon')[]}                           [style='ui.list.defaultStyle']         The style you want to generate
+ * @param       {('dl'|'ul'|'ol'|'icon')[]}                           [lnf='ui.list.defaultLnf']         The style you want to generate
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
@@ -27,10 +27,10 @@ import __STheme from '@coffeekraken/s-theme';
 class postcssSugarPluginUiListInterface extends __SInterface {
     static get _definition() {
         return {
-            style: {
+            lnf: {
                 type: 'String',
                 values: ['dl', 'ul', 'ol', 'icon'],
-                default: __STheme.get('ui.list.defaultStyle'),
+                default: __STheme.get('ui.list.defaultLnf'),
             },
             scope: {
                 type: {
@@ -45,7 +45,7 @@ class postcssSugarPluginUiListInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiListParams {
-    style: 'dl' | 'ul' | 'ol' | 'icon';
+    lnf: 'dl' | 'ul' | 'ol' | 'icon';
     scope: string[];
 }
 
@@ -61,7 +61,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiListParams = {
-        style: 'dl',
+        lnf: 'dl',
         scope: ['bare', 'lnf'],
         ...params,
     };
@@ -69,7 +69,7 @@ export default function ({
     const vars: string[] = [];
 
     let bulletSelector = '&:before';
-    if (finalParams.style === 'icon') {
+    if (finalParams.lnf === 'icon') {
         bulletSelector = '& > i:first-child';
     }
 
@@ -78,7 +78,7 @@ export default function ({
         position: relative;
         font-size: sugar.font.size(30);
 
-        ${finalParams.style === 'ol' ? 'counter-reset: s-ol-list;' : ''}
+        ${finalParams.lnf === 'ol' ? 'counter-reset: s-ol-list;' : ''}
 
         & > * {
             display: block !important;
@@ -117,7 +117,7 @@ export default function ({
 
         `);
 
-        switch (finalParams.style) {
+        switch (finalParams.lnf) {
             case 'ol':
                 vars.push(`
                     & > * {

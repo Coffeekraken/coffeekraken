@@ -1,7 +1,5 @@
 // @ts-nocheck
 
-import __SBench from '@coffeekraken/s-bench';
-
 /**
  * @name            requestMiddleware
  * @namespace       sugar.node.server.frontend.middleware
@@ -50,7 +48,7 @@ function requestMiddleware(settings = {}) {
             // xhr: req.xhr,
         };
 
-        __SBench.step('request', 'requestMiddleware');
+        res.bench?.step('request', 'requestMiddleware');
 
         return next();
     };

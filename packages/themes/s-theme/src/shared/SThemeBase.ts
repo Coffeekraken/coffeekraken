@@ -1287,6 +1287,15 @@ export default class SThemeBase extends __SEventEmitter {
     get(dotPath, preventThrow: boolean = false): any {
         let value = __get(this._config, dotPath);
 
+        // if the dotpath starts with "ui...." and that we don't have
+        // a value for now, try to get the value from "ui.default..." instead
+        if (value === undefined && dotPath.match(/^ui\.[a-zA-Z0-9]+\./)) {
+            value = __get(
+                this._config,
+                dotPath.replace(/^ui\.[a-zA-Z0-9]+\./, 'ui.default.'),
+            );
+        }
+
         if (value && dotPath === 'media') {
             // sort the media requested
             // @ts-ignore

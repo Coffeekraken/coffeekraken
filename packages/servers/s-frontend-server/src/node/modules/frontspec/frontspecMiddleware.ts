@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-import __SBench from '@coffeekraken/s-bench';
 import __SFrontspec from '@coffeekraken/s-frontspec';
 
 /**
@@ -41,7 +40,7 @@ function frontspecMiddleware(settings = {}) {
             ...(res.templateData.shared.frontspec ?? {}),
         };
 
-        __SBench.step('request', 'frontspecMiddleware');
+        res.bench?.step('frontspecMiddleware');
 
         return next();
     };

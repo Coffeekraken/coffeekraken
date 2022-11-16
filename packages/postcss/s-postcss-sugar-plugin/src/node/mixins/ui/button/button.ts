@@ -11,9 +11,8 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * This mixin allows you to generate the "button" UI component css.
  *
- * @param       {'solid'|'gradient'|'outline'|'text'}                           [style='theme.ui.button.defaultStyle']         The style you want to generate
- * @param       {'default'|'square'|'pill'}             [shape='theme.ui.button.defaultShape']         The shape you want to generate
- * @param       {('bare'|'lnf'|'shape')[]}        [scope=['bare', 'lnf', 'shape']]      The scope you want to generate
+ * @param       {'default'|'gradient'|'outline'|'text'}                           [style='theme.ui.button.defaultLnf']         The style you want to generate
+ * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
  * @example       css
@@ -28,32 +27,26 @@ import __STheme from '@coffeekraken/s-theme';
 class postcssSugarPluginUiButtonInterface extends __SInterface {
     static get _definition() {
         return {
-            style: {
+            lnf: {
                 type: 'String',
-                values: ['solid', 'gradient', 'outline', 'text'],
-                default: __STheme.get('ui.button.defaultStyle'),
-            },
-            shape: {
-                type: 'String',
-                values: ['default', 'square', 'pill'],
-                default: __STheme.get('ui.button.defaultShape'),
+                values: ['default', 'gradient', 'outline', 'text'],
+                default: __STheme.get('ui.button.defaultLnf'),
             },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'shape'],
-                default: ['bare', 'lnf', 'shape'],
+                values: ['bare', 'lnf'],
+                default: ['bare', 'lnf'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiButtonParams {
-    style: 'solid' | 'gradient' | 'outline' | 'text';
-    shape: 'default' | 'square' | 'pill';
-    scope: ('bare' | 'lnf' | 'shape')[];
+    lnf: 'default' | 'gradient' | 'outline' | 'text';
+    scope: ('bare' | 'lnf')[];
 }
 
 export { postcssSugarPluginUiButtonInterface as interface };
@@ -89,9 +82,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiButtonParams = {
-        style: 'solid',
-        shape: 'default',
-        scope: ['bare', 'lnf', 'shape'],
+        lnf: 'default',
+        scope: ['bare', 'lnf'],
         ...params,
     };
 
@@ -125,9 +117,10 @@ export default function ({
         vars.push(`
           font-size: sugar.scalable(1rem);
           text-decoration: none;
+          @sugar.border.radius(ui.button.borderRadius);
         `);
 
-        switch (finalParams.style) {
+        switch (finalParams.lnf) {
             case 'gradient':
                 vars.push(`
                     background: none !important;
@@ -203,7 +196,6 @@ export default function ({
                   }
                 `);
                 break;
-            case 'solid':
             default:
                 vars.push(`
                   background-color: sugar.color(current);
@@ -228,41 +220,6 @@ export default function ({
                 @sugar.outline;
               }
           `);
-    }
-
-    if (finalParams.scope.includes('shape')) {
-        switch (finalParams.shape) {
-            case 'square':
-                vars.push(`
-                    border-radius: 0;
-
-                    &:before,
-                    &:after {
-                      border-radius: 0;
-                    }
-                  `);
-                break;
-            case 'pill':
-                vars.push(`
-                    border-radius: 9999px;
-
-                    &:before,
-                    &:after {
-                      border-radius: 9999px;
-                    }
-                  `);
-                break;
-            default:
-                vars.push(`
-                    border-radius: sugar.border.radius(ui.button.borderRadius);
-
-                    &:before,
-                    &:after {
-                      border-radius: sugar.border.radius(ui.button.borderRadius);
-                    }
-                  `);
-                break;
-        }
     }
 
     return vars;

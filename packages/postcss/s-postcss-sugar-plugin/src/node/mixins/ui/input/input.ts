@@ -11,9 +11,8 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the input style to any element
  *
- * @param       {'solid'}                           [style='theme.ui.input.defaultStyle']         The style you want to generate
- * @param       {'default'|'square'|'pill'}             [shape='theme.ui.input.defaultShape']         The shape you want to generate
- * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
+ * @param       {'default'}                           [style='theme.ui.form.defaultLnf']         The style you want to generate
+ * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css
@@ -28,35 +27,29 @@ import __STheme from '@coffeekraken/s-theme';
 class postcssSugarPluginUiFormInputInterface extends __SInterface {
     static get _definition() {
         return {
-            style: {
+            lnf: {
                 type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.input.defaultStyle'),
-            },
-            shape: {
-                type: 'String',
-                values: ['default', 'square', 'pill'],
-                default: __STheme.get('ui.input.defaultShape'),
+                values: ['default'],
+                default: __STheme.get('ui.form.defaultLnf'),
             },
             outline: {
                 type: 'Boolean',
-                default: __STheme.get('ui.input.outline'),
+                default: __STheme.get('ui.form.outline'),
             },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'shape'],
-                default: ['bare', 'lnf', 'shape'],
+                values: ['bare', 'lnf'],
+                default: ['bare', 'lnf'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiFormInputParams {
-    style: 'solid';
-    shape: 'default' | 'square' | 'pill';
+    lnf: 'default';
     outline: boolean;
     scope: string[];
 }
@@ -73,8 +66,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiFormInputParams = {
-        style: 'solid',
-        shape: 'default',
+        lnf: 'default',
         outline: true,
         scope: [],
         ...params,
@@ -100,7 +92,7 @@ export default function ({
         `);
     }
 
-    switch (finalParams.style) {
+    switch (finalParams.lnf) {
         // case 'underline':
         //     if (finalParams.scope.indexOf('lnf') !== -1) {
         //         vars.push(`
@@ -108,7 +100,7 @@ export default function ({
         //             border-top: none !important;
         //             border-left: none !important;
         //             border-right: none !important;
-        //             border-bottom: sugar.color(current) solid sugar.theme(ui.input.borderWidth) !important;
+        //             border-bottom: sugar.color(current) default sugar.theme(ui.form.borderWidth) !important;
         //             border-radius: 0;
         //             padding-inline: 0 !important;
 
@@ -118,29 +110,8 @@ export default function ({
         //         `);
         //     }
         //     break;
-        case 'solid':
         default:
             break;
-    }
-
-    if (finalParams.scope.includes('shape')) {
-        switch (finalParams.shape) {
-            case 'square':
-                vars.push(`
-                    border-radius: 0;
-                `);
-                break;
-            case 'pill':
-                vars.push(`
-                    border-radius: 9999px;
-                `);
-                break;
-            default:
-                vars.push(`
-                    border-radius: sugar.border.radius(ui.input.borderRadius);
-                `);
-                break;
-        }
     }
 
     return vars;

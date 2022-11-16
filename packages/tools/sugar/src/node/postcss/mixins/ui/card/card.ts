@@ -1,14 +1,8 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
 
 class postcssUiCardInterface extends __SInterface {
     static get _definition() {
         return {
-            lnf: {
-                type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.card.defaultLnf'),
-            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -22,7 +16,6 @@ class postcssUiCardInterface extends __SInterface {
 }
 
 export interface IPostcssUiCardParams {
-    lnf: 'solid';
     scope: ('bare' | 'lnf')[];
 }
 
@@ -58,7 +51,6 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiCardParams = {
-        lnf: __STheme.get('ui.card.defaultLnf'),
         scope: ['bare', 'lnf'],
         ...params,
     };
@@ -71,9 +63,21 @@ export default function ({
             display: flex;
             flex-direction: column;
             align-items: center;
+            max-width: 500px;
 
             &.s-card--horizontal {
                 flex-direction: row;
+                max-width: none;
+                
+                .s-card__media {
+                    align-self: stretch;
+                    width: 50%;
+                }
+                .s-card__img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
 
                 @sugar.media mobile {
                     flex-direction: column;
@@ -81,6 +85,17 @@ export default function ({
             }
             &.s-card--horizontal-reverse {
                 flex-direction: row-reverse;
+                max-width: none;
+
+                .s-card__media {
+                    align-self: stretch;
+                    width: 50%;
+                }
+                .s-card__img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
 
                 @sugar.media mobile {
                     flex-direction: column-reverse;
@@ -99,28 +114,23 @@ export default function ({
     // lnf
     if (finalParams.scope.includes('lnf')) {
         vars.push(`
+            background: sugar.color(base, surface);
+            @sugar.border.radius(ui.card.borderRadius);
+            @sugar.depth (ui.card.depth);
 
+            .s-card__media {
+                @sugar.border.radius(ui.card.borderRadius);
+            }
+
+            .s-card__img {
+                @sugar.border.radius(ui.card.borderRadius);
+            }
+
+            .s-card__content {
+                padding-block: sugar.padding(ui.card.paddingBlock);
+                padding-inline: sugar.padding(ui.card.paddingInline);
+            }
         `);
-
-        switch (finalParams.lnf) {
-            case 'solid':
-            default:
-                vars.push(`
-                    background: sugar.color(base, surface);
-                    @sugar.border.radius();
-                    @sugar.depth (100);
-
-                    .s-card__img {
-                        @sugar.border.radius();
-                    }
-
-                    .s-card__content {
-                        padding-block: sugar.padding(ui.card.paddingBlock);
-                        padding-inline: sugar.padding(ui.card.paddingInline);
-                    }
-                `);
-                break;
-        }
     }
 
     return vars;

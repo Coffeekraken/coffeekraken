@@ -3,12 +3,10 @@
     "extends": [],
     "generated": {
         "extends": [
-            "01-basic",
-            "02-basic",
             "@coffeekraken/cli",
-            "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-asset-picker-component",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
@@ -19,6 +17,7 @@
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
+            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
@@ -36,6 +35,7 @@
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
+            "@coffeekraken/s-dropzone-component",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -49,13 +49,16 @@
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-glob",
+            "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
@@ -72,6 +75,8 @@
             "@coffeekraken/s-request",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -363,13 +368,27 @@
                                 "horizontal",
                                 "vertical"
                             ],
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "physical": true,
                             "default": "horizontal"
                         },
                         "behaviors": {
                             "description": "Specify the available behaviors for the slider",
-                            "type": "Object"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            }
                         },
                         "behavior": {
                             "description": "Specify which behavior your want to use for your slider. Behavior are like \"presets\" with different animations, etc...",
@@ -377,85 +396,204 @@
                                 "none",
                                 "default"
                             ],
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "default",
                             "physical": true
                         },
                         "nextIconClass": {
                             "description": "Specify the class of the next icon",
-                            "type": "String"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            }
                         },
                         "previousIconClass": {
                             "description": "Specify the class of the previous icon",
-                            "type": "String"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            }
                         },
                         "controls": {
                             "description": "Specify if you want to display the controls or not. Controls are the previous and next icons",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "nav": {
                             "description": "Specify if you want to display the nav or not. Nav are the dots",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "swipe": {
                             "description": "Specify if you want your slider to support swipe navigation or not",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "mousewheel": {
                             "description": "Specify if you want to enable the mousewheel event on the slider or not",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "clickOnSlide": {
                             "description": "Specify if you want to enable the click on the slides to navigate or not",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "loop": {
                             "description": "Specify if you want to enable the loop behavior or not",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "slide": {
                             "description": "Specify the active slide id",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 0,
                             "physical": true
                         },
                         "progress": {
                             "description": "Specify if you want to display the progress bar or not",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "timer": {
                             "description": "Specify a timer that will be applied on each slides and go to the next one after the timer is over. For custom timer by slide, specify the `timer=\"1200\"` attribute on the slides you want",
-                            "type": "Number"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            }
                         },
                         "autoplay": {
                             "description": "Specify if you want the slider to auto play itself when some timer(s) has been set",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         },
                         "intersectionClasses": {
                             "description": "Specify if you want the classes that describe each slide intersection classes like \"in-10\", \"in-20\", etc...",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "transitionDuration": {
                             "description": "Specify the transition duration of the slider in ms",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 500
                         },
                         "transitionEasing": {
                             "description": "Specify the transition easing of the slider",
-                            "type": "Function"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Function"
+                                    }
+                                ],
+                                "raw": "Function"
+                            }
                         },
                         "transitionHandler": {
                             "description": "Specify a function that will take care of transitioning the slider from the current item to the next/previous",
-                            "type": "Function"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Function"
+                                    }
+                                ],
+                                "raw": "Function"
+                            }
                         }
                     }
                 },
@@ -1090,13 +1228,27 @@
                                 "horizontal",
                                 "vertical"
                             ],
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "physical": true,
                             "default": "horizontal"
                         },
                         "behaviors": {
                             "description": "Specify the available behaviors for the slider",
-                            "type": "Object"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            }
                         },
                         "behavior": {
                             "description": "Specify which behavior your want to use for your slider. Behavior are like \"presets\" with different animations, etc...",
@@ -1104,85 +1256,204 @@
                                 "none",
                                 "default"
                             ],
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "default",
                             "physical": true
                         },
                         "nextIconClass": {
                             "description": "Specify the class of the next icon",
-                            "type": "String"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            }
                         },
                         "previousIconClass": {
                             "description": "Specify the class of the previous icon",
-                            "type": "String"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            }
                         },
                         "controls": {
                             "description": "Specify if you want to display the controls or not. Controls are the previous and next icons",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "nav": {
                             "description": "Specify if you want to display the nav or not. Nav are the dots",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "swipe": {
                             "description": "Specify if you want your slider to support swipe navigation or not",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "mousewheel": {
                             "description": "Specify if you want to enable the mousewheel event on the slider or not",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "clickOnSlide": {
                             "description": "Specify if you want to enable the click on the slides to navigate or not",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "loop": {
                             "description": "Specify if you want to enable the loop behavior or not",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "slide": {
                             "description": "Specify the active slide id",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 0,
                             "physical": true
                         },
                         "progress": {
                             "description": "Specify if you want to display the progress bar or not",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "timer": {
                             "description": "Specify a timer that will be applied on each slides and go to the next one after the timer is over. For custom timer by slide, specify the `timer=\"1200\"` attribute on the slides you want",
-                            "type": "Number"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            }
                         },
                         "autoplay": {
                             "description": "Specify if you want the slider to auto play itself when some timer(s) has been set",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": true
                         },
                         "intersectionClasses": {
                             "description": "Specify if you want the classes that describe each slide intersection classes like \"in-10\", \"in-20\", etc...",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "transitionDuration": {
                             "description": "Specify the transition duration of the slider in ms",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 500
                         },
                         "transitionEasing": {
                             "description": "Specify the transition easing of the slider",
-                            "type": "Function"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Function"
+                                    }
+                                ],
+                                "raw": "Function"
+                            }
                         },
                         "transitionHandler": {
                             "description": "Specify a function that will take care of transitioning the slider from the current item to the next/previous",
-                            "type": "Function"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Function"
+                                    }
+                                ],
+                                "raw": "Function"
+                            }
                         }
                     }
                 },
@@ -1259,7 +1530,14 @@
                     "definition": {
                         "friction": {
                             "description": "Specify the friction to apply when you release the pointer. 1 mean full friction, 0 mean no friction",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 0.7
                         }
                     }

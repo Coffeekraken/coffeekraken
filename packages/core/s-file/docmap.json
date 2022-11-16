@@ -3,12 +3,10 @@
     "extends": [],
     "generated": {
         "extends": [
-            "01-basic",
-            "02-basic",
             "@coffeekraken/cli",
-            "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-asset-picker-component",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
@@ -19,6 +17,7 @@
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
+            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
@@ -36,6 +35,7 @@
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
+            "@coffeekraken/s-dropzone-component",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -48,13 +48,16 @@
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-glob",
+            "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
@@ -73,6 +76,7 @@
             "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-slider-component",
             "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -842,27 +846,62 @@
                     "definition": {
                         "checkExistence": {
                             "description": "Specify if the file must exists on the filesystem at the instanciation",
-                            "type": "boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "boolean"
+                                    }
+                                ],
+                                "raw": "boolean"
+                            },
                             "default": true
                         },
                         "cwd": {
                             "description": "Specify the current working directory",
-                            "type": "string",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "string"
+                                    }
+                                ],
+                                "raw": "string"
+                            },
                             "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/core/s-file"
                         },
                         "shrinkSizeTo": {
                             "description": "Specify how many decimals to keep for the size",
-                            "type": "number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "number"
+                                    }
+                                ],
+                                "raw": "number"
+                            },
                             "default": 4
                         },
                         "watch": {
                             "description": "Specify if you want to watch the file for changes or not",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "writeSettings": {
                             "description": "Specify the write settings (https://nodejs.org/api/fs.html#fs_fs_writefilesync_file_data_options)",
-                            "type": "Object",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
                             "default": {
                                 "encoding": "utf8",
                                 "mode": 1638,
@@ -871,7 +910,14 @@
                         },
                         "readSettings": {
                             "description": "Specify the read settings (https://nodejs.org/api/fs.html#filehandlereadfileoptions)",
-                            "type": "Object",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
                             "default": {
                                 "encoding": "utf8",
                                 "cast": true
@@ -879,7 +925,14 @@
                         },
                         "processors": {
                             "description": "Specify some functions to execute on the file content before accessing the \"content\", and saving it \"save\". Each \"content\" and \"save\" property stores an Array of functions that will be executed once after the other",
-                            "type": "Object",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
                             "default": {
                                 "content": [],
                                 "save": []

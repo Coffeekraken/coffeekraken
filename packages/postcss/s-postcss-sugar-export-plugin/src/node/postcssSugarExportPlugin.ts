@@ -1,5 +1,4 @@
 // import __postcss from 'postcss';
-import __SBench from '@coffeekraken/s-bench';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __writeFileSync } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
@@ -151,7 +150,6 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
     return {
         postcssPlugin: 'sugar-export',
         async Once(root) {
-            __SBench.start('postcssSugarExportPlugin');
             await _load();
         },
         async OnceExit(root) {

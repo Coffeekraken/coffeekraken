@@ -112,7 +112,9 @@ export default class SSugarJson extends __SClass {
     async read(
         settings?: Partial<ISSugarJsonSettings>,
     ): Record<string, ISSugarJsonFile> | ISSugarJsonFile {
-        __SBench.start('SSugarJson.read');
+        const bench = new __SBench('SSugarJson.read', {
+            bubbles: false,
+        });
 
         // const SSugarJsonSettingsInterface = await import('./interface/SSugarJsonSettingsInterface');
         const finalSettings = <ISSugarJsonSettings>{
@@ -150,7 +152,7 @@ export default class SSugarJson extends __SClass {
             results[packageJson.name] = resultJson;
         });
 
-        __SBench.end('SSugarJson.read');
+        bench.end();
 
         return results;
     }
@@ -196,7 +198,9 @@ export default class SSugarJson extends __SClass {
             ...(settings ?? {}),
         };
 
-        __SBench.start('SSugarJson.search');
+        const bench = new __SBench('SSugarJson.search', {
+            bubbles: false,
+        });
 
         // get global node modules directory path
         const globalNodeModulesPath = __globalNodeModulesPath();
@@ -306,7 +310,7 @@ export default class SSugarJson extends __SClass {
             return false;
         });
 
-        __SBench.end('SSugarJson.search');
+        bench.end();
 
         const finalFiles = __unique(
             files

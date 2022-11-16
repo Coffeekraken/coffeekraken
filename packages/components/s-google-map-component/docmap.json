@@ -6,6 +6,7 @@
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-asset-picker-component",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
@@ -34,6 +35,7 @@
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
+            "@coffeekraken/s-dropzone-component",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -307,68 +309,160 @@
                     "description": "",
                     "definition": {
                         "apiKey": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "description": "Specify the google api key to use. You can specify it in the config.google.map.apiKey configuration for your project if you prefer",
+                            "default": null,
                             "required": true
                         },
                         "mapId": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "description": "Specify your mapId that you can create [here](https://console.cloud.google.com/google/maps-apis/studio/maps)",
                             "required": true
                         },
                         "lat": {
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "description": "Specify the map latitude",
                             "required": true
                         },
                         "lng": {
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "description": "Specify the map longitude",
                             "required": true
                         },
                         "zoom": {
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "description": "Specify the google map zoom"
                         },
                         "bounds": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "description": "Specify if you want your map to be bounds on current markers",
                             "default": true
                         },
                         "icons": {
-                            "type": "Object",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
                             "description": "Specify some icons to be used across your maps",
                             "default": {
                                 "marker": "<i class=\"fa-solid fa-location-dot\"></i>"
                             }
                         },
                         "zoomControl": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "description": "Specify if you want the zom control or not",
                             "default": false
                         },
                         "mapTypeControl": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "description": "Specify if you want the map type control or not",
                             "default": false
                         },
                         "scaleControl": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "description": "Specify if you want the map scale control or not",
                             "default": false
                         },
                         "streetViewControl": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "description": "Specify if you want the streeview control or not",
                             "default": false
                         },
                         "rotateControl": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "description": "Specify if you want the rotate control or not",
                             "default": false
                         },
                         "fullscreenControl": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "description": "Specify if you want the fullscreen control or not",
                             "default": false
                         }
@@ -410,68 +504,160 @@
                     "description": "",
                     "definition": {
                         "apiKey": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "description": "Specify the google api key to use. You can specify it in the config.google.map.apiKey configuration for your project if you prefer",
+                            "default": null,
                             "required": true
                         },
                         "mapId": {
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "description": "Specify your mapId that you can create [here](https://console.cloud.google.com/google/maps-apis/studio/maps)",
                             "required": true
                         },
                         "lat": {
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "description": "Specify the map latitude",
                             "required": true
                         },
                         "lng": {
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "description": "Specify the map longitude",
                             "required": true
                         },
                         "zoom": {
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "description": "Specify the google map zoom"
                         },
                         "bounds": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "description": "Specify if you want your map to be bounds on current markers",
                             "default": true
                         },
                         "icons": {
-                            "type": "Object",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
                             "description": "Specify some icons to be used across your maps",
                             "default": {
                                 "marker": "<i class=\"fa-solid fa-location-dot\"></i>"
                             }
                         },
                         "zoomControl": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "description": "Specify if you want the zom control or not",
                             "default": false
                         },
                         "mapTypeControl": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "description": "Specify if you want the map type control or not",
                             "default": false
                         },
                         "scaleControl": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "description": "Specify if you want the map scale control or not",
                             "default": false
                         },
                         "streetViewControl": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "description": "Specify if you want the streeview control or not",
                             "default": false
                         },
                         "rotateControl": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "description": "Specify if you want the rotate control or not",
                             "default": false
                         },
                         "fullscreenControl": {
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "description": "Specify if you want the fullscreen control or not",
                             "default": false
                         }

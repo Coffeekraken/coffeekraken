@@ -11,12 +11,9 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Generate the button classes
  *
- * @param       {('solid'|'gradient'|'outline'|'text')[]}                           [styles=['solid','gradient','outline','text']]         The style(s) you want to generate
- * @param       {('default'|'square'|'pill')[]}             [shape=['default','square','pill']]         The shape(s) you want to generate
- * @param       {'solid'|'gradient'|'outline'|'text'}                [defaultStyle='theme.ui.button.defaultStyle']           The default style you want
- * @param       {'default'|'square'|'pill'}        [defaultShape='theme.ui.button.defaultShape']           The default shape you want
- * @param       {String}                       [defaultColor='theme.ui.button.defaultColor']           The default color you want
- * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
+ * @param       {('default'|'gradient'|'outline'|'text')[]}                           [lnfs=['default','gradient','outline','text']]         The style(s) you want to generate
+ * @param       {'default'|'gradient'|'outline'|'text'}                [defaultLnf='theme.ui.button.defaultLnf']           The default style you want
+ * @param       {('bare'|'lnf'|'vr')[]}        [scope=['bare', 'lnf', 'vr']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
  * @example       css
@@ -29,60 +26,35 @@ import __STheme from '@coffeekraken/s-theme';
 class postcssSugarPluginUiButtonClassesInterface extends __SInterface {
     static get _definition() {
         return {
-            styles: {
+            lnfs: {
                 type: 'String[]',
-                values: ['solid', 'gradient', 'outline', 'text'],
-                default: ['solid', 'gradient', 'outline', 'text'],
+                values: ['default', 'gradient', 'outline', 'text'],
+                default: ['default', 'gradient', 'outline', 'text'],
             },
-            shapes: {
-                type: 'String[]',
-                values: ['default', 'square', 'pill'],
-                default: ['default', 'square', 'pill'],
-            },
-            defaultStyle: {
+            defaultLnf: {
                 type: 'String',
-                values: ['solid', 'gradient', 'outline', 'text'],
-                default: __STheme.get('ui.button.defaultStyle') ?? 'solid',
-            },
-            defaultShape: {
-                type: 'String',
-                values: ['default', 'square', 'pill'],
-                default: __STheme.get('ui.button.defaultShape'),
-            },
-            defaultColor: {
-                type: 'String',
-                values: Object.keys(__STheme.get('color')),
-                default: __STheme.get('ui.button.defaultColor'),
+                values: ['default', 'gradient', 'outline', 'text'],
+                default: __STheme.get('ui.button.defaultLnf') ?? 'default',
             },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'shape', 'tf', 'vr'],
-                default: ['bare', 'lnf', 'shape', 'tf', 'vr'],
+                values: ['bare', 'lnf', 'vr', 'tf'],
+                default: ['bare', 'lnf', 'vr', 'tf'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiButtonClassesParams {
-    styles: ('solid' | 'gradient' | 'outline' | 'text')[];
-    shapes: ('default' | 'square' | 'pill')[];
-    defaultStyle: 'solid' | 'gradient' | 'outline' | 'text';
-    defaultShape: 'default' | 'square' | 'pill';
-    defaultColor: string;
-    scope: ('bare' | 'lnf' | 'bare' | 'shape' | 'tf' | 'vr')[];
+    lnfs: ('default' | 'gradient' | 'outline' | 'text')[];
+    defaultLnf: 'default' | 'gradient' | 'outline' | 'text';
+    scope: ('bare' | 'lnf' | 'bare' | 'vr' | 'tf')[];
 }
 
 export { postcssSugarPluginUiButtonClassesInterface as interface };
-
-import { __dirname } from '@coffeekraken/sugar/fs';
-export function dependencies() {
-    return {
-        files: [`${__dirname()}/button.js`],
-    };
-}
 
 export default function ({
     params,
@@ -96,12 +68,9 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiButtonClassesParams = {
-        styles: ['solid', 'gradient', 'outline', 'text'],
-        shapes: [],
-        defaultStyle: 'solid',
-        defaultShape: 'default',
-        defaultColor: 'main',
-        scope: ['bare', 'lnf', 'shape', 'tf', 'vr'],
+        lnfs: ['default', 'gradient', 'outline', 'text'],
+        defaultLnf: 'default',
+        scope: ['bare', 'lnf', 'vr', 'tf'],
         ...params,
     };
 
@@ -129,80 +98,50 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
-        ${finalParams.styles
-            .map((style) => {
+        ${finalParams.lnfs
+            .map((lnf) => {
                 return ` * @cssClass     s-btn${
-                    style === finalParams.defaultStyle ? '' : `:${style}`
-                }           Apply the ${style} button style`;
+                    lnf === finalParams.defaultLnf ? '' : `:${lnf}`
+                }           Apply the ${lnf} button lnf`;
             })
             .join('\n')}
-        ${finalParams.shapes
-            .map((shape) => {
-                return ` * @cssClass     s-btn${
-                    shape === finalParams.defaultShape ? '' : `:${shape}`
-                }           Apply the ${shape} button shape`;
-            })
-            .join('\n')}
+        * @cssClass             s-btn:pill                  Apply the pill shape
+        * @cssClass             s-btn:square                Apply the square shape
         * @cssClass            s-format:text button             Apply the button style on button tags inside the s-format:text scope 
         * @cssClass            s-rhythm:vertical              Apply the default vertical rhythm on scoped button(s)
         * 
-        ${finalParams.styles
-            .map((style) => {
-                return ` * @example        html       ${style} style ${
-                    finalParams.defaultStyle === style
+        ${finalParams.lnfs
+            .map((lnf) => {
+                return ` * @example        html       ${lnf} lnf ${
+                    finalParams.defaultLnf === lnf
                         ? '<span class="s-badge:outline s-scale:05">default</span>'
                         : ''
                 }
             *   <a tabindex="0" class="s-btn:${
-                finalParams.defaultStyle === style ? '' : `:${style}`
+                finalParams.defaultLnf === lnf ? '' : `:${lnf}`
             } s-mie:20 s-mbe:20"><span>Click me!</span></a>
             *   <a tabindex="0" class="s-btn:${
-                finalParams.defaultStyle === style ? '' : `:${style}`
+                finalParams.defaultLnf === lnf ? '' : `:${lnf}`
             } s-mie:20 s-mbe:20 s-color:accent"><span>Click me!</span></a>
             *   <a tabindex="0" class="s-btn:${
-                finalParams.defaultStyle === style ? '' : `:${style}`
+                finalParams.defaultLnf === lnf ? '' : `:${lnf}`
             } s-mie:20 s-mbe:20 s-color:complementary"><span>Click me!</span></a>
             *   <a tabindex="0" class="s-btn:${
-                finalParams.defaultStyle === style ? '' : `:${style}`
+                finalParams.defaultLnf === lnf ? '' : `:${lnf}`
             } s-mie:20 s-mbe:20 s-color:info"><span>Click me!</span></a>
             *   <a tabindex="0" class="s-btn:${
-                finalParams.defaultStyle === style ? '' : `:${style}`
+                finalParams.defaultLnf === lnf ? '' : `:${lnf}`
             } s-mie:20 s-mbe:20 s-color:error"><span>Click me!</span></a>
             *   <a tabindex="0" disabled class="s-btn:${
-                finalParams.defaultStyle === style ? '' : `:${style}`
+                finalParams.defaultLnf === lnf ? '' : `:${lnf}`
             } s-mie:20 s-mbe:20"><span>Click me!</span></a>
             * `;
             })
             .join('\n')}
-        *
-        ${finalParams.shapes
-            .map((shape) => {
-                return ` * @example        html       ${shape} shape ${
-                    finalParams.defaultShape === shape
-                        ? '<span class="s-badge:outline s-scale:05">default</span>'
-                        : ''
-                }
-            *   <a tabindex="0" class="s-btn:${
-                finalParams.defaultShape === shape ? '' : `:${shape}`
-            } s-mie:20 s-mbe:20">Click me!</a>
-            *   <a tabindex="0" class="s-btn:${
-                finalParams.defaultShape === shape ? '' : `:${shape}`
-            } s-mie:20 s-mbe:20 s-color:accent">Click me!</a>
-            *   <a tabindex="0" class="s-btn:${
-                finalParams.defaultShape === shape ? '' : `:${shape}`
-            } s-mie:20 s-mbe:20 s-color:complementary">Click me!</a>
-            *   <a tabindex="0" class="s-btn:${
-                finalParams.defaultShape === shape ? '' : `:${shape}`
-            } s-mie:20 s-mbe:20 s-color:info">Click me!</a>
-            *   <a tabindex="0" class="s-btn:${
-                finalParams.defaultShape === shape ? '' : `:${shape}`
-            } s-mie:20 s-mbe:20 s-color:error">Click me!</a>
-            *   <a tabindex="0" disabled class="s-btn:${
-                finalParams.defaultShape === shape ? '' : `:${shape}`
-            } s-mie:20 s-mbe:20">Click me!</a>
-            * `;
-            })
-            .join('\n')}
+        * 
+        * @example       html       Shapes
+        *   <a tabindex="0" class="s-btn:pill s-mie:20">Click me!</a>
+        *   <a tabindex="0" class="s-btn:square s-mie:20">Click me!</a>
         * 
         * @example       html       Scales
         *   <a tabindex="0" class="s-btn s-scale:07 s-mie:20">Click me!</a>
@@ -244,10 +183,10 @@ export default function ({
     }
 
     if (finalParams.scope.includes('lnf')) {
-        finalParams.styles.forEach((style) => {
+        finalParams.lnfs.forEach((lnf) => {
             let cls = `s-btn`;
-            if (style !== finalParams.defaultStyle) {
-                cls += `--${style}`;
+            if (lnf !== finalParams.defaultLnf) {
+                cls += `--${lnf}`;
             }
 
             vars.comment(
@@ -256,7 +195,7 @@ export default function ({
             * @namespace          sugar.style.ui.button
             * @type           CssClass
             * 
-            * This class represent a(n) "<s-color="accent">${style}</s-color>" button
+            * This class represent a(n) "<s-color="accent">${lnf}</s-color>" button
             * 
             * @example        html
             * <a class="${cls
@@ -270,7 +209,7 @@ export default function ({
             ).code(
                 `
         .${cls} {
-            @sugar.ui.button($style: ${style}, $scope: lnf);
+            @sugar.ui.button($lnf: ${lnf}, $scope: lnf);
         }`,
                 {
                     type: 'CssClass',
@@ -279,41 +218,65 @@ export default function ({
         });
     }
 
-    if (finalParams.scope.includes('shape')) {
-        finalParams.shapes.forEach((shape) => {
-            let cls = `s-btn`;
-            if (shape !== finalParams.defaultShape) {
-                cls += `--${shape}`;
-            }
+    vars.comment(
+        () => `/**
+        * @name           s-btn:pill
+        * @namespace          sugar.style.ui.button
+        * @type           CssClass
+        * 
+        * Apply the pill shape to a button
+        * 
+        * @example        html
+        * <div class="s-format:text">
+        *   <button>
+        *       Hello world
+        *   </button>
+        * </div>
+        * 
+        * @since      2.0.0
+        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+    */
+   `,
+    ).code(
+        `
+            s-btn--pill {
+                border-radius: 9999px;
+            } 
+    `,
+        {
+            type: 'CssClass',
+        },
+    );
 
-            vars.comment(
-                () => `/**
-            * @name           ${cls}
-            * @namespace          sugar.style.ui.button
-            * @type           CssClass
-            * 
-            * This class represent a(n) "<s-color="accent">${shape}</s-color>" button
-            * 
-            * @example        html
-            * <a class="${cls
-                .replace(/\./gm, ' ')
-                .trim()}">I'm a cool button</a>
-            * 
-            * @since    2.0.0
-            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */
-       `,
-            ).code(
-                `
-        .${cls} {
-            @sugar.ui.button($shape: ${shape}, $scope: shape);
-        }`,
-                {
-                    type: 'CssClass',
-                },
-            );
-        });
-    }
+    vars.comment(
+        () => `/**
+        * @name           s-btn:square
+        * @namespace          sugar.style.ui.button
+        * @type           CssClass
+        * 
+        * Apply the square shape to a button
+        * 
+        * @example        html
+        * <div class="s-format:text">
+        *   <button>
+        *       Hello world
+        *   </button>
+        * </div>
+        * 
+        * @since      2.0.0
+        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+    */
+   `,
+    ).code(
+        `
+            s-btn--square {
+                border-radius: 0;
+            } 
+    `,
+        {
+            type: 'CssClass',
+        },
+    );
 
     vars.comment(
         () => `/**
@@ -372,18 +335,6 @@ export default function ({
             {
                 type: 'CssClass',
             },
-        );
-    }
-
-    // default color
-    if (finalParams.scope.includes('lnf')) {
-        vars.code(
-            () => `
-            .s-btn:not(.s-color) {
-                @sugar.color(${finalParams.defaultColor});
-            }
-        `,
-            { type: 'CssClass' },
         );
     }
 

@@ -14,9 +14,9 @@ export default function docmapDocumentationData({ req, res, pageConfig }) {
             );
         }
 
-        __SBench.start('data.docmapDocumentationData');
+        const bench = new __SBench('data.docmapDocumentationData');
 
-        __SBench.step('data.docmapDocumentationData', 'beforeDocmapRead');
+        bench.step('beforeDocmapRead');
 
         const docmap = new __SDocmap();
         const docmapJson = await docmap.read();
@@ -36,7 +36,7 @@ export default function docmapDocumentationData({ req, res, pageConfig }) {
             );
         }
 
-        __SBench.step('data.docmapDocumentationData', 'afterDocmapRead');
+        bench.step('afterDocmapRead');
 
         let packageJson;
         if (docObj.docmap?.package?.name) {

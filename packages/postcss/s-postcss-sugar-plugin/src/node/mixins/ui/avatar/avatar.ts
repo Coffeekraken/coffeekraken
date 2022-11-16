@@ -1,5 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          avatar
@@ -11,9 +10,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * This mixin allows you to generate the "avatar" UI component css.
  *
- * @param       {'solid'}                                                [style='theme.ui.avatar.defaultStyle']         The style you want to generate
- * @param       {'default'|'square'|'pill'|'circle'}                 [shape='theme.ui.avatar.defaultShape']         The shape you want to generate
- * @param       {('bare'|'lnf'|'shape'|'interactive'|'notifications')[]}        [scope=['bare','lnf','shape','interactive','notifications']]      The scope you want to generate
+ * @param       {('bare'|'lnf'|'interactive'|'notifications')[]}        [scope=['bare','lnf','interactive','notifications']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
  * @example       css
@@ -28,38 +25,20 @@ import __STheme from '@coffeekraken/s-theme';
 class postcssSugarPluginUiAvatarInterface extends __SInterface {
     static get _definition() {
         return {
-            style: {
-                type: 'String',
-                value: ['solid'],
-                default: __STheme.get('ui.avatar.defaultStyle'),
-            },
-            shape: {
-                type: 'String',
-                values: ['default', 'square', 'rounded'],
-                default: __STheme.get('ui.avatar.defaultShape'),
-            },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: [
-                    'bare',
-                    'lnf',
-                    'shape',
-                    'interactive',
-                    'notifications',
-                ],
-                default: ['bare', 'lnf', 'shape', 'notifications'],
+                values: ['bare', 'lnf', 'interactive', 'notifications'],
+                default: ['bare', 'lnf', 'interactive', 'notifications'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiBadgeParams {
-    shape: 'default' | 'square' | 'rounded';
-    style: 'solid';
-    scope: ('bare' | 'lnf' | 'shape' | 'interactive' | 'notifications')[];
+    scope: ('bare' | 'lnf' | 'interactive' | 'notifications')[];
 }
 
 export { postcssSugarPluginUiAvatarInterface as interface };
@@ -73,9 +52,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiBadgeParams = {
-        shape: 'square',
-        style: 'solid',
-        scope: ['bare', 'lnf', 'shape'],
+        scope: ['bare', 'lnf', 'interactive', 'notifications'],
         ...params,
     };
 
@@ -102,19 +79,15 @@ export default function ({
 
     // lnf
     if (finalParams.scope.indexOf('lnf') !== -1) {
-        switch (finalParams.style) {
-            case 'solid':
-                vars.push(`
-                    img {
-                        background-color: sugar.color(current);
-                        border-width: sugar.theme(ui.avatar.borderWidth);
-                        border-color: sugar.color(current);
-                        border-style: solid;
-                        @sugar.depth(ui.avatar.depth);
-                    }
-                `);
-                break;
-        }
+        vars.push(`
+            img {
+                background-color: sugar.color(current);
+                border-color: sugar.color(current);
+                border-style: solid;
+                border-width: sugar.theme(ui.avatar.borderWidth);
+                border-radius: 9999px;
+            }
+        `);
     }
 
     // interactive
@@ -123,16 +96,12 @@ export default function ({
             cursor: pointer;
         `);
 
-        switch (finalParams.style) {
-            case 'solid':
-                vars.push(`
-                    &:hover img {
-                        @sugar.outline($where: element);
-                        position: absolute;
-                    }
-                `);
-                break;
-        }
+        vars.push(`
+            &:hover img {
+                @sugar.outline($where: element);
+                position: absolute;
+            }
+        `);
     }
 
     // notifications
@@ -161,38 +130,9 @@ export default function ({
                         border-radius: 9999px;
                         padding: 0.33em;
                         font-weight: bold;
-                        @sugar.depth(ui.avatar.depth);
                     }
                 }
             `);
-        }
-    }
-
-    // shape
-    if (finalParams.scope.indexOf('shape') !== -1) {
-        switch (finalParams.shape) {
-            case 'square':
-                vars.push(`
-                    img {
-                        border-radius: 0;
-                    }
-                `);
-                break;
-            case 'rounded':
-                vars.push(`
-                    img {
-                        border-radius: 9999px;
-                    }
-                    `);
-                break;
-            case 'default':
-            default:
-                vars.push(`
-                    img {
-                        border-radius: sugar.border.radius(ui.avatar.borderRadius)m;
-                    }
-                `);
-                break;
         }
     }
 

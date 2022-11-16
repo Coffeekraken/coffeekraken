@@ -33,10 +33,12 @@ function benchEndMiddleware(settings = {}) {
     return function (req, res, next) {
         return new __SPromise(({ resolve, reject, pipe }) => {
             // console.log('___ST');
-            __SBench.start('request');
+            const bench = new __SBench('request');
+
+            res.bench = bench;
 
             function afterResponse() {
-                __SBench.end('request', {}).log();
+                bench.end();
             }
 
             res.on('finish', afterResponse);

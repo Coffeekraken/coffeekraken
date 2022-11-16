@@ -11,9 +11,8 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the select style to any HTMLSelectElement
  *
- * @param       {'solid'}                           [style='theme.ui.select.defaultStyle']         The style you want to generate
- * @param       {'default'|'square'|'pill'}             [shape='theme.ui.select.defaultShape']         The shape you want to generate
- * @param       {('bare'|'lnf'|'shape')[]}        [scope=['bare', 'lnf', 'shape']]      The scope you want to generate
+ * @param       {'default'}                           [style='theme.ui.form.defaultLnf']         The style you want to generate
+ * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css
@@ -28,32 +27,26 @@ import __STheme from '@coffeekraken/s-theme';
 class postcssSugarPluginUiFormSelectInterface extends __SInterface {
     static get _definition() {
         return {
-            style: {
+            lnf: {
                 type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.select.defaultStyle'),
-            },
-            shape: {
-                type: 'String',
-                values: ['default', 'square', 'pill'],
-                default: __STheme.get('ui.select.defaultShape'),
+                values: ['default'],
+                default: __STheme.get('ui.form.defaultLnf'),
             },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'shape'],
-                default: ['bare', 'lnf', 'shape'],
+                values: ['bare', 'lnf'],
+                default: ['bare', 'lnf'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiFormSelectParams {
-    style: 'solid';
-    shape: 'default' | 'square' | 'pill';
-    scope: ('bare' | 'lnf' | 'shape')[];
+    lnf: 'default';
+    scope: ('bare' | 'lnf')[];
 }
 
 export { postcssSugarPluginUiFormSelectInterface as interface };
@@ -68,9 +61,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiFormSelectParams = {
-        style: 'solid',
-        shape: 'default',
-        scope: ['bare', 'lnf', 'shape'],
+        style: 'default',
+        scope: ['bare', 'lnf'],
         ...params,
     };
 
@@ -87,8 +79,8 @@ export default function ({
       `);
     }
 
-    switch (finalParams.style) {
-        case 'solid':
+    switch (finalParams.lnf) {
+        case 'default':
         default:
             if (finalParams.scope.indexOf('lnf') !== -1) {
                 vars.push(`
@@ -113,9 +105,9 @@ export default function ({
                 }
 
                 &:not([multiple]) {
-                    padding-inline-end: calc(sugar.padding(ui.select.paddingInline) + 1.5em);
+                    padding-inline-end: calc(sugar.padding(ui.form.paddingInline) + 1.5em);
 
-                    --padding-inline: sugar.padding(ui.select.paddingInline);
+                    --padding-inline: sugar.padding(ui.form.paddingInline);
 
                     background-repeat: no-repeat;
                     background-image: linear-gradient(45deg, transparent 50%, sugar.color(current) 50%), linear-gradient(135deg, sugar.color(current) 50%, transparent 50%);
@@ -132,26 +124,6 @@ export default function ({
 
                 break;
             }
-    }
-
-    if (finalParams.scope.includes('shape')) {
-        switch (finalParams.shape) {
-            case 'square':
-                vars.push(`
-                    border-radius: 0;
-                `);
-                break;
-            case 'pill':
-                vars.push(`
-                    border-radius: 9999px;
-                `);
-                break;
-            default:
-                vars.push(`
-                    border-radius: sugar.border.radius(ui.select.borderRadius);
-                `);
-                break;
-        }
     }
 
     return vars;

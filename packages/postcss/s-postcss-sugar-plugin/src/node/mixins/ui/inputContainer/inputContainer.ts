@@ -10,7 +10,7 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * Apply an input container style like "button", "addon", etc...
  *
- * @param       {'addon'|'group'}                           style         The style you want to apply
+ * @param       {'addon'|'group'}                           lnf         The style you want to apply
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
@@ -26,7 +26,7 @@ import __SInterface from '@coffeekraken/s-interface';
 class postcssSugarPluginUiFormInputInterface extends __SInterface {
     static get _definition() {
         return {
-            style: {
+            lnf: {
                 type: 'String',
                 values: ['addon', 'group'],
                 required: true,
@@ -44,7 +44,7 @@ class postcssSugarPluginUiFormInputInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiFormInputParams {
-    style: 'addon' | 'group';
+    lnf: 'addon' | 'group';
     scope: string[];
 }
 
@@ -60,7 +60,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiFormInputParams = {
-        style: 'group',
+        lnf: 'group',
         scope: [],
         ...params,
     };
@@ -74,7 +74,7 @@ export default function ({
         `);
     }
 
-    switch (finalParams.style) {
+    switch (finalParams.lnf) {
         case 'addon':
             if (finalParams.scope.includes('bare')) {
                 vars.push(`

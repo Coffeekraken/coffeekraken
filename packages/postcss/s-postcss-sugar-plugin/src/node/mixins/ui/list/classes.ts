@@ -10,11 +10,10 @@ import __faker from 'faker';
  * @platform      postcss
  * @status        beta
  *
- *Generate the list classes
+ * Generate the list classes
  *
- * @param       {('dl'|'ul'|'ol'|'icon')[]}                           [styles=['dl','ul','ol','icon']]         The style(s) you want to generate
- * @param       {'dl'|'ul'|'ol'|'icon'}                [defaultStyle='theme.ui.list.defaultStyle']           The default style you want
- * @param       {String}                            [defaultColor=theme.ui.list.defaultColor]            The default color you want
+ * @param       {('dl'|'ul'|'ol'|'icon')[]}                           [lnfs=['dl','ul','ol','icon']]         The style(s) you want to generate
+ * @param       {'dl'|'ul'|'ol'|'icon'}                [defaultLnf='theme.ui.list.defaultLnf']           The default style you want
  * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
@@ -28,20 +27,15 @@ import __faker from 'faker';
 class postcssSugarPluginUiListClassesInterface extends __SInterface {
     static get _definition() {
         return {
-            styles: {
+            lnfs: {
                 type: 'String[]',
                 values: ['dl', 'ul', 'ol', 'icon'],
                 default: ['dl', 'ul', 'ol', 'icon'],
             },
-            defaultStyle: {
+            defaultLnf: {
                 type: 'String',
                 values: ['dl', 'ul', 'ol', 'icon'],
-                default: __STheme.get('ui.list.defaultStyle') ?? 'dl',
-            },
-            defaultColor: {
-                type: 'String',
-                values: Object.keys(__STheme.get('color')),
-                default: __STheme.get('ui.list.defaultColor'),
+                default: __STheme.get('ui.list.defaultLnf') ?? 'dl',
             },
             scope: {
                 type: {
@@ -56,9 +50,8 @@ class postcssSugarPluginUiListClassesInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiListClassesParams {
-    styles: ('dl' | 'ul' | 'ol' | 'icon')[];
-    defaultStyle: 'dl' | 'ul' | 'ol' | 'icon';
-    defaultColor: string;
+    lnfs: ('dl' | 'ul' | 'ol' | 'icon')[];
+    defaultLnf: 'dl' | 'ul' | 'ol' | 'icon';
     scope: ('bare' | 'lnf' | 'tf' | 'vr')[];
 }
 
@@ -76,9 +69,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiListClassesParams = {
-        styles: [],
-        defaultStyle: 'dl',
-        defaultColor: 'main',
+        lnfs: [],
+        defaultLnf: 'dl',
         scope: [],
         ...params,
     };
@@ -95,7 +87,7 @@ export default function ({
         * @platform       css
         * @status       beta
         * 
-        * These classes allows you to apply list styles to any ul, ol, dl, etc...
+        * These classes allows you to apply list lnfs to any ul, ol, dl, etc...
         * 
         * @feature          Support for vertical rhythm through the \`s-rhythm:vertical\` class
         * @feature          Support for text formatting through the \`s-format:text\` class
@@ -107,34 +99,34 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
-        ${finalParams.styles
-            .map((style) => {
+        ${finalParams.lnfs
+            .map((lnf) => {
                 return ` * @cssClass     s-list${
-                    style === finalParams.defaultStyle ? '' : `:${style}`
-                }           Apply the ${style} list style`;
+                    lnf === finalParams.defaultLnf ? '' : `:${lnf}`
+                }           Apply the ${lnf} list lnf`;
             })
             .join('\n')}
         * 
-        ${finalParams.styles
-            .map((style) => {
-                return ` * @example        html       ${style} style ${
-                    params.defaultStyle === style
+        ${finalParams.lnfs
+            .map((lnf) => {
+                return ` * @example        html       ${lnf} lnf ${
+                    params.defaultLnf === lnf
                         ? '<span class="s-badge:outline s-scale:05">default</span>'
                         : ''
                 }
-            *   <ul class="s-list:${style} ${
-                    style === 'ol' ? 's-color:accent s-scale:15' : ''
+            *   <ul class="s-list:${lnf} ${
+                    lnf === 'ol' ? 's-color:accent s-scale:15' : ''
                 }">
             *     <li>${
-                style === 'icon' ? `<i class="s-icon:user"></i>` : ''
+                lnf === 'icon' ? `<i class="s-icon:user"></i>` : ''
             }${__faker.name.title()} ${__faker.name.findName()}</li>
             *     <li>${
-                style === 'icon'
+                lnf === 'icon'
                     ? `<i class="s-icon:heart s-color:accent"></i>`
                     : ''
             }${__faker.name.title()} ${__faker.name.findName()}</li>
             *     <li>${
-                style === 'icon'
+                lnf === 'icon'
                     ? `<i class="s-icon:fire s-color:error"></i>`
                     : ''
             }${__faker.name.title()} ${__faker.name.findName()}</li>
@@ -206,22 +198,22 @@ export default function ({
     }
 
     if (finalParams.scope.includes('lnf')) {
-        finalParams.styles.forEach((style) => {
+        finalParams.lnfs.forEach((lnf) => {
             vars.comment(
                 () => `/**
                 * @name           s-list${
-                    finalParams.defaultStyle === style ? '' : `:${style}`
+                    finalParams.defaultLnf === lnf ? '' : `:${lnf}`
                 }
                 * @namespace          sugar.style.ui.list
                 * @type           CssClass
                 * 
-                * This class represent an "<yellow>${style}</yellow>" list
+                * This class represent an "<yellow>${lnf}</yellow>" list
                 * 
                 * @feature       Support vertical rhythm
                 * 
                 * @example        html
                 * <ul class="s-list${
-                    finalParams.defaultStyle === style ? '' : `:${style}`
+                    finalParams.defaultLnf === lnf ? '' : `:${lnf}`
                 }">
                 *   <li>Hello</li>
                 *   <li>World</li>
@@ -233,7 +225,7 @@ export default function ({
            `,
             ).code(
                 `
-            .s-list${finalParams.defaultStyle === style ? '' : `--${style}`} {
+            .s-list${finalParams.defaultLnf === lnf ? '' : `--${lnf}`} {
                 @sugar.ui.list($scope: lnf);
             }
         `,
@@ -242,18 +234,6 @@ export default function ({
                 },
             );
         });
-    }
-
-    // default color
-    if (finalParams.scope.includes('lnf')) {
-        vars.code(
-            () => `
-            .s-list:not(.s-color) {
-                @sugar.color(${finalParams.defaultColor});
-            }
-        `,
-            { type: 'CssClass' },
-        );
     }
 
     // ul
@@ -280,7 +260,7 @@ export default function ({
     ).code(
         `
       .s-list--ul {
-        @sugar.ui.list($style: ul, $scope: '${finalParams.scope.join(',')}');
+        @sugar.ui.list($lnf: ul, $scope: '${finalParams.scope.join(',')}');
       }
   `,
         {
@@ -312,9 +292,7 @@ export default function ({
     vars.code(
         () => `
       .s-list--icon {
-          @sugar.ui.list($style: icon, $scope: '${finalParams.scope.join(
-              ',',
-          )}');
+          @sugar.ui.list($lnf: icon, $scope: '${finalParams.scope.join(',')}');
       }`,
         {
             type: 'CssClass',
@@ -345,7 +323,7 @@ export default function ({
     ).code(
         `
       .s-list--ol {
-        @sugar.ui.list($style: ol, $scope: '${finalParams.scope.join(',')}');
+        @sugar.ui.list($lnf: ol, $scope: '${finalParams.scope.join(',')}');
       }   
   `,
         {
@@ -377,7 +355,7 @@ export default function ({
     ).code(
         `
       .s-list--dl {
-        @sugar.ui.list($style: dl, $scope: '${finalParams.scope.join(',')}');
+        @sugar.ui.list($lnf: dl, $scope: '${finalParams.scope.join(',')}');
       }   
   `,
         {
@@ -411,7 +389,7 @@ export default function ({
             `
             @sugar.format.text {
                 ul {
-                    @sugar.ui.list($style: ul, $scope: '${finalParams.scope.join(
+                    @sugar.ui.list($lnf: ul, $scope: '${finalParams.scope.join(
                         ',',
                     )}');
                 } 
@@ -447,7 +425,7 @@ export default function ({
             `
             @sugar.format.text {
                 ol {
-                    @sugar.ui.list($style: ol, $scope: '${finalParams.scope.join(
+                    @sugar.ui.list($lnf: ol, $scope: '${finalParams.scope.join(
                         ',',
                     )}');
                 } 

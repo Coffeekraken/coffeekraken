@@ -12,16 +12,13 @@ import __faker from 'faker';
  *
  * Generate the select classes
  *
- * @param       {('solid')[]}                           [styles=['solid']]         The style(s) you want to generate
- * @param       {('default'|'square'|'pill')[]}             [shape=['default','square','pill']]         The shape(s) you want to generate
- * @param       {'solid'}                [defaultStyle='theme.ui.select.defaultStyle']           The default style you want
- * @param       {'default'|'square'|'pill'}        [defaultShape='theme.ui.select.defaultShape']           The default shape you want
- * @param       {String}                            [defaultColor=theme.ui.select.defaultColor]            The default color you want
- * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
+ * @param       {('default')[]}                           [lnfs=['default']]         The style(s) you want to generate
+ * @param       {'default'}                [defaultLnf='theme.ui.form.defaultLnf']           The default style you want
+ * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css
- * @sugar.ui.select.classes;
+ * @sugar.ui.form.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -30,59 +27,34 @@ import __faker from 'faker';
 class postcssSugarPluginUiFormSelectClassesInterface extends __SInterface {
     static get _definition() {
         return {
-            styles: {
+            lnfs: {
                 type: 'String[]',
-                default: ['solid'],
+                default: ['default'],
             },
-            shapes: {
-                type: 'String[]',
-                values: ['default', 'square', 'pill'],
-                default: ['default', 'square', 'pill'],
-            },
-            defaultStyle: {
+            defaultLnf: {
                 type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.select.defaultStyle'),
-            },
-            defaultShape: {
-                type: 'String',
-                values: ['default', 'square', 'pill'],
-                default: __STheme.get('ui.select.defaultShape'),
-            },
-            defaultColor: {
-                type: 'String',
-                values: Object.keys(__STheme.get('color')),
-                default: __STheme.get('ui.select.defaultColor'),
+                values: ['default'],
+                default: __STheme.get('ui.form.defaultLnf'),
             },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'shape', 'vr', 'tf'],
-                default: ['bare', 'lnf', 'shape', 'vr', 'tf'],
+                values: ['bare', 'lnf', 'vr', 'tf'],
+                default: ['bare', 'lnf', 'vr', 'tf'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiFormSelectClassesParams {
-    styles: 'solid'[];
-    shapes: ('default' | 'square' | 'pill')[];
-    defaultStyle: 'solid';
-    defaultShape: 'default' | 'square' | 'pill';
-    defaultColor: string;
-    scope: ('bare' | 'lnf' | 'shape' | 'tf' | 'vr')[];
+    lnfs: 'default'[];
+    defaultLnf: 'default';
+    scope: ('bare' | 'lnf' | 'tf' | 'vr')[];
 }
 
 export { postcssSugarPluginUiFormSelectClassesInterface as interface };
-
-import { __dirname } from '@coffeekraken/sugar/fs';
-export function dependencies() {
-    return {
-        files: [`${__dirname()}/select.js`],
-    };
-}
 
 export default function ({
     params,
@@ -96,11 +68,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiFormSelectClassesParams = {
-        styles: [],
-        shapes: [],
-        defaultStyle: 'solid',
-        defaultShape: 'default',
-        defaultColor: 'main',
+        lnfs: [],
+        defaultLnf: 'default',
         scope: [],
         ...params,
     };
@@ -127,29 +96,22 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
-        ${finalParams.styles
-            .map((style) => {
+        ${finalParams.lnfs
+            .map((lnf) => {
                 return ` * @cssClass     s-select${
-                    style === finalParams.defaultStyle ? '' : `:${style}`
-                }           Apply the ${style} select style`;
-            })
-            .join('\n')}
-        ${finalParams.shapes
-            .map((shape) => {
-                return ` * @cssClass     s-select${
-                    shape === finalParams.defaultShape ? '' : `:${shape}`
-                }           Apply the ${shape} select shape`;
+                    lnf === finalParams.defaultLnf ? '' : `:${lnf}`
+                }           Apply the ${lnf} select lnf`;
             })
             .join('\n')}
         * 
-        ${finalParams.styles
-            .map((style) => {
-                return ` * @example        html       ${style} style
+        ${finalParams.lnfs
+            .map((lnf) => {
+                return ` * @example        html       ${lnf} lnf
             *   <label class="s-mbe:30 s-label:responsive">
             *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *     <select class="s-select${
-                finalParams.defaultStyle === style ? '' : `:${style}`
-            } s-width:40" name="select-style-${style}">
+                finalParams.defaultLnf === lnf ? '' : `:${lnf}`
+            } s-width:40" name="select-lnf-${lnf}">
             *       <option value="value1">${__faker.name.findName()}</option>
             *       <option value="value2">${__faker.name.findName()}</option>
             *       <option value="value3">${__faker.name.findName()}</option>
@@ -158,35 +120,8 @@ export default function ({
             *   <label class="s-mbe:30 s-label:responsive">
             *     <span>I'm disabled</span>
             *     <select disabled class="s-select${
-                finalParams.defaultStyle === style ? '' : `:${style}`
-            } s-width:40" name="select-style-${style}">
-            *       <option value="value1">${__faker.name.findName()}</option>
-            *       <option value="value2">${__faker.name.findName()}</option>
-            *       <option value="value3">${__faker.name.findName()}</option>
-            *     </select>
-            *   </label>
-            * `;
-            })
-            .join('\n')}
-        *
-        ${finalParams.shapes
-            .map((shape) => {
-                return ` * @example        html       ${shape} shape
-            *   <label class="s-mbe:30 s-label:responsive">
-            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
-            *     <select class="s-select${
-                finalParams.defaultShape === shape ? '' : `:${shape}`
-            } s-width:40" name="select-shape-${shape}">
-            *       <option value="value1">${__faker.name.findName()}</option>
-            *       <option value="value2">${__faker.name.findName()}</option>
-            *       <option value="value3">${__faker.name.findName()}</option>
-            *     </select>
-            *   </label>
-            *   <label class="s-mbe:30 s-label:responsive">
-            *    <span>I'm disabled</span>
-            *     <select disabled class="s-select${
-                finalParams.defaultShape === shape ? '' : `:${shape}`
-            } s-width:40" name="select-shape-${shape}">
+                finalParams.defaultLnf === lnf ? '' : `:${lnf}`
+            } s-width:40" name="select-lnf-${lnf}">
             *       <option value="value1">${__faker.name.findName()}</option>
             *       <option value="value2">${__faker.name.findName()}</option>
             *       <option value="value3">${__faker.name.findName()}</option>
@@ -321,22 +256,22 @@ export default function ({
     }
 
     if (finalParams.scope.includes('lnf')) {
-        finalParams.styles.forEach((style) => {
-            const isDefaultStyle = finalParams.defaultStyle === style;
+        finalParams.lnfs.forEach((lnf) => {
+            const isDefaultStyle = finalParams.defaultLnf === lnf;
 
-            const styleCls = isDefaultStyle ? '' : `.s-select--${style}`;
+            const styleCls = isDefaultStyle ? '' : `.s-select--${lnf}`;
             const cls = `.s-select${styleCls}`;
 
             vars.comment(
                 () => `/**
-            * @name           s-select${isDefaultStyle ? '' : `:${style}`}
+            * @name           s-select${isDefaultStyle ? '' : `:${lnf}`}
             * @namespace          sugar.style.ui.select
             * @type           CssClass
             * 
-            * This class represent a(n) "<yellow>${style}</yellow>" select
+            * This class represent a(n) "<yellow>${lnf}</yellow>" select
             * 
             * @example        html
-            * <select class="s-select${isDefaultStyle ? '' : `:${style}`}">
+            * <select class="s-select${isDefaultStyle ? '' : `:${lnf}`}">
             *   <option value="value 1">Hello</option>
             *   <option value="value 2">World</option>
             * </select>
@@ -348,43 +283,8 @@ export default function ({
             vars.code(
                 () => `
                 ${cls} {
-                    @sugar.ui.select($style: ${style}, $scope: lnf);
+                    @sugar.ui.select($lnf: ${lnf}, $scope: lnf);
                 }`,
-                { type: 'CssClass' },
-            );
-        });
-    }
-
-    if (finalParams.scope.includes('shape')) {
-        finalParams.shapes.forEach((shape) => {
-            const isDefaultShape = finalParams.defaultShape === shape;
-
-            const styleCls = isDefaultShape ? '' : `.s-select--${shape}`;
-            const cls = `.s-select${styleCls}`;
-
-            vars.comment(
-                () => `/**
-        * @name           s-select${isDefaultShape ? '' : `:${shape}`}
-        * @namespace          sugar.style.ui.select
-        * @type           CssClass
-        * 
-        * This class represent a(n) "<yellow>${shape}</yellow>" select
-        * 
-        * @example        html
-        * <select class="s-select${isDefaultShape ? '' : `:${shape}`}">
-        *   <option value="value 1">Hello</option>
-        *   <option value="value 2">World</option>
-        * </select>
-        * 
-        * @since      2.0.0
-        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-      */`,
-            );
-            vars.code(
-                () => `
-            ${cls} {
-                @sugar.ui.select($shape: ${shape}, $scope: shape);
-            }`,
                 { type: 'CssClass' },
             );
         });
@@ -418,18 +318,6 @@ export default function ({
                 select {
                     @sugar.ui.select($scope: '${finalParams.scope.join(',')}');
                 } 
-            }
-        `,
-            { type: 'CssClass' },
-        );
-    }
-
-    // default color
-    if (finalParams.scope.includes('lnf')) {
-        vars.code(
-            () => `
-            .s-select:not(.s-color) {
-                @sugar.color(${finalParams.defaultColor});
             }
         `,
             { type: 'CssClass' },
@@ -475,7 +363,7 @@ export default function ({
             @sugar.rhythm.vertical {
                 select, .s-select {
                     ${__STheme.jsObjectToCssProperties(
-                        __STheme.get('ui.select.rhythmVertical'),
+                        __STheme.get('ui.form.rhythmVertical'),
                     )}
                 } 
             }

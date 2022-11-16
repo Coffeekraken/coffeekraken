@@ -6,9 +6,9 @@ import { __packageRootDir } from '@coffeekraken/sugar/path';
 
 export default function sitemapXmlHandler({ req, res, pageConfig }) {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
-        __SBench.start('data.sitemapXmlHandler');
+        const bench = new __SBench('data.sitemapXmlHandler');
 
-        __SBench.step('data.sitemapXmlHandler', 'beforeSitemapRead');
+        bench.step('beforeSitemapRead');
 
         const sitemapPath = __grabFirstExisting([
             `${__packageRootDir()}/sitemap.xml`,
@@ -24,9 +24,9 @@ export default function sitemapXmlHandler({ req, res, pageConfig }) {
 
         const json = __readXmlSync(sitemapPath);
 
-        __SBench.step('data.sitemapXmlHandler', 'afterSitemapRead');
+        bench.step('afterSitemapRead');
 
-        __SBench.end('data.sitemapXmlHandler').log();
+        bench.end();
 
         res.status(200);
         res.type('application/json');

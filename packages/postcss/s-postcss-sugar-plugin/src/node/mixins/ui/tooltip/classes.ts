@@ -12,11 +12,8 @@ import __faker from 'faker';
  *
  * Generate the tooltip classes
  *
- * @param       {('solid')[]}                           [styles=['solid']]         The style(s) you want to generate
- * @param       {('default'|'square'|'pill')[]}             [shape=['default','square','pill']]         The shape(s) you want to generate
- * @param       {'solid'}                [defaultStyle='theme.ui.tooltip.defaultStyle']           The default style you want
- * @param       {'default'|'square'|'pill'}        [defaultShape='theme.ui.tooltip.defaultShape']           The default shape you want
- * @param       {String}                            [defaultColor=theme.ui.blockquote.defaultColor]            The default color you want
+ * @param       {('default')[]}                           [lnfs=['default']]         The style(s) you want to generate
+ * @param       {'default'}                [defaultLnf='theme.ui.tooltip.defaultLnf']           The default style you want
  * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
@@ -30,60 +27,35 @@ import __faker from 'faker';
 class postcssSugarPluginUiTooltipClassesInterface extends __SInterface {
     static get _definition() {
         return {
-            styles: {
+            lnfs: {
                 type: 'String[]',
-                values: ['solid'],
-                default: ['solid'],
+                values: ['default'],
+                default: ['default'],
             },
-            shapes: {
-                type: 'String[]',
-                values: ['default', 'square', 'pill'],
-                default: ['default', 'square', 'pill'],
-            },
-            defaultStyle: {
+            defaultLnf: {
                 type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.tooltip.defaultStyle'),
-            },
-            defaultShape: {
-                type: 'String',
-                values: ['default', 'square', 'pill'],
-                default: __STheme.get('ui.tooltip.defaultShape'),
-            },
-            defaultColor: {
-                type: 'String',
-                values: Object.keys(__STheme.get('color')),
-                default: __STheme.get('ui.tooltip.defaultColor'),
+                values: ['default'],
+                default: __STheme.get('ui.tooltip.defaultLnf'),
             },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'shape', 'vr', 'tf'],
-                default: ['bare', 'lnf', 'shape', 'vr', 'tf'],
+                values: ['bare', 'lnf'],
+                default: ['bare', 'lnf'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiTooltipClassesParams {
-    styles: 'solid'[];
-    shapes: ('default' | 'square' | 'pill')[];
-    defaultStyle: 'solid';
-    defaultShape: 'default' | 'square' | 'pill';
-    defaultColor: string;
-    scope: ('bare' | 'lnf' | 'shape' | 'vr' | 'tf')[];
+    lnfs: 'default'[];
+    defaultLnf: 'default';
+    scope: ('bare' | 'lnf')[];
 }
 
 export { postcssSugarPluginUiTooltipClassesInterface as interface };
-
-import { __dirname } from '@coffeekraken/sugar/fs';
-export function dependencies() {
-    return {
-        files: [`${__dirname()}/tooltip.js`],
-    };
-}
 
 export default function ({
     params,
@@ -97,11 +69,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiTooltipClassesParams = {
-        styles: [],
-        shapes: [],
-        defaultStyle: 'solid',
-        defaultShape: 'default',
-        defaultColor: 'main',
+        lnfs: [],
+        defaultLnf: 'default',
         scope: [],
         ...params,
     };
@@ -123,18 +92,11 @@ export default function ({
         * @cssClass             s-tooltip-container             Allows to hide and show your tooltip on hover (focus)
         * @cssClass             s-tooltip-container:active     Allow to display a tooltip without having the need of the user interaction
         * @cssClass             s-tooltip                       Apply on the element you want as a tooltip
-        ${finalParams.styles
-            .map((style) => {
+        ${finalParams.lnfs
+            .map((lnf) => {
                 return ` * @cssClass     s-tooltip${
-                    style === finalParams.defaultStyle ? '' : `:${style}`
-                }           Apply the ${style} tooltip style`;
-            })
-            .join('\n')}
-        ${finalParams.shapes
-            .map((shape) => {
-                return ` * @cssClass     s-tooltip${
-                    shape === finalParams.defaultShape ? '' : `:${shape}`
-                }           Apply the ${shape} tooltip shape`;
+                    lnf === finalParams.defaultLnf ? '' : `:${lnf}`
+                }           Apply the ${lnf} tooltip lnf`;
             })
             .join('\n')}
         * @cssClass             s-tooltip:top                 Align your tooltip at "top". This is the default. Only then not using the "s-floating" feature       
@@ -143,12 +105,12 @@ export default function ({
         * @cssClass             s-tooltip:bottom               Align your tooltip at "bottom". Only then not using the "s-floating" feature
         * @cssClass             s-tooltip:interactive          Allow the user to interact with the tooltip. Only then not using the "s-floating" feature
         * 
-        ${finalParams.styles.map((style) => {
-            return ` * @example        html       ${style}
+        ${finalParams.lnfs.map((lnf) => {
+            return ` * @example        html       ${lnf}
                 *   <span class="s-tooltip-container">
                 *       <a class="s-btn s-mie:20">Hover me!</a>
                 *       <div class="s-white-space:nowrap s-tooltip${
-                    finalParams.defaultStyle === style ? '' : `:${style}`
+                    finalParams.defaultLnf === lnf ? '' : `:${lnf}`
                 } s-color:accent" s-floating>
                 *           ${__faker.name.title()} ${__faker.name.findName()}
                 *       </div>
@@ -156,7 +118,7 @@ export default function ({
                 *   <span class="s-tooltip-container">
                 *       <a class="s-btn s-mie:20">Hover me!</a>
                 *       <div class="s-white-space:nowrap s-tooltip${
-                    finalParams.defaultStyle === style ? '' : `:${style}`
+                    finalParams.defaultLnf === lnf ? '' : `:${lnf}`
                 } s-color:complementary" s-floating>
                 *           ${__faker.name.title()} ${__faker.name.findName()}
                 *       </div>
@@ -164,36 +126,7 @@ export default function ({
                 *   <span class="s-tooltip-container">
                 *       <a class="s-btn s-mie:20">Hover me!</a>
                 *       <div class="s-white-space:nowrap s-tooltip${
-                    finalParams.defaultStyle === style ? '' : `:${style}`
-                } s-color:info" s-floating>
-                *           ${__faker.name.title()} ${__faker.name.findName()}
-                *       </div>
-                *   </span>
-            `;
-        })}
-        *
-        ${finalParams.shapes.map((shape) => {
-            return ` * @example        html       ${shape}
-                *   <span class="s-tooltip-container">
-                *       <a class="s-btn s-mie:20">Hover me!</a>
-                *       <div class="s-white-space:nowrap s-tooltip${
-                    finalParams.defaultShape === shape ? '' : `:${shape}`
-                } s-color:accent" s-floating>
-                *           ${__faker.name.title()} ${__faker.name.findName()}
-                *       </div>
-                *   </span>
-                *   <span class="s-tooltip-container">
-                *       <a class="s-btn s-mie:20">Hover me!</a>
-                *       <div class="s-white-space:nowrap s-tooltip${
-                    finalParams.defaultShape === shape ? '' : `:${shape}`
-                } s-color:complementary" s-floating>
-                *           ${__faker.name.title()} ${__faker.name.findName()}
-                *       </div>
-                *   </span>
-                *   <span class="s-tooltip-container">
-                *       <a class="s-btn s-mie:20">Hover me!</a>
-                *       <div class="s-white-space:nowrap s-tooltip${
-                    finalParams.defaultShape === shape ? '' : `:${shape}`
+                    finalParams.defaultLnf === lnf ? '' : `:${lnf}`
                 } s-color:info" s-floating>
                 *           ${__faker.name.title()} ${__faker.name.findName()}
                 *       </div>
@@ -373,22 +306,22 @@ export default function ({
     }
 
     if (finalParams.scope.includes('lnf')) {
-        finalParams.styles.forEach((style) => {
+        finalParams.lnfs.forEach((lnf) => {
             vars.comment(
                 () => `/**
                 * @name           s-tooltip${
-                    finalParams.defaultStyle === style ? '' : `:${style}`
+                    finalParams.defaultLnf === lnf ? '' : `:${lnf}`
                 }
                 * @namespace          sugar.style.ui.tooltip
                 * @type           CssClass
                 * 
-                * This class represent a ${style} tooltip
+                * This class represent a ${lnf} tooltip
                 * 
                 * @example        html
                 * <a class="s-tooltip-container s-btn">
                 *   I'm a cool button
                 *   <div class="s-tooltip${
-                    finalParams.defaultStyle === style ? '' : `:${style}`
+                    finalParams.defaultLnf === lnf ? '' : `:${lnf}`
                 }">Something cool</div>
                 * </a>
                 * 
@@ -398,64 +331,13 @@ export default function ({
             );
             vars.code(
                 () => `
-                .s-tooltip${
-                    finalParams.defaultStyle === style ? '' : `--${style}`
-                } {
-                    @sugar.ui.tooltip($style: ${style}, $scope: lnf);
+                .s-tooltip${finalParams.defaultLnf === lnf ? '' : `--${lnf}`} {
+                    @sugar.ui.tooltip($lnf: ${lnf}, $scope: lnf);
                 }
             `,
                 { type: 'CssClass' },
             );
         });
-    }
-
-    if (finalParams.scope.includes('shape')) {
-        finalParams.shapes.forEach((shape) => {
-            vars.comment(
-                () => `/**
-                * @name           s-tooltip${
-                    finalParams.defaultShape === shape ? '' : `:${shape}`
-                }
-                * @namespace          sugar.style.ui.tooltip
-                * @type           CssClass
-                * 
-                * This class represent a ${shape} tooltip
-                * 
-                * @example        html
-                * <a class="s-tooltip-container s-btn">
-                *   I'm a cool button
-                *   <div class="s-tooltip${
-                    finalParams.defaultShape === shape ? '' : `:${shape}`
-                }">Something cool</div>
-                * </a>
-                * 
-                * @since    2.0.0
-                * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                */`,
-            );
-            vars.code(
-                () => `
-                .s-tooltip${
-                    finalParams.defaultShape === shape ? '' : `--${shape}`
-                } {
-                    @sugar.ui.tooltip($shape: ${shape}, $scope: shape);
-                }
-            `,
-                { type: 'CssClass' },
-            );
-        });
-    }
-
-    // default color
-    if (finalParams.scope.includes('lnf')) {
-        vars.code(
-            () => `
-            .s-tooltip:not(.s-color) {
-                @sugar.color(${finalParams.defaultColor});
-            }
-        `,
-            { type: 'CssClass' },
-        );
     }
 
     // Interactive

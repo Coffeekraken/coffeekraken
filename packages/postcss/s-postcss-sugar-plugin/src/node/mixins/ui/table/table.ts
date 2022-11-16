@@ -11,9 +11,8 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the table style to any element
  *
- * @param       {'solid'}                           [style='theme.ui.table.defaultStyle']         The style you want to generate
- * @param       {'default'|'square'}             [shape='theme.ui.table.defaultShape']         The shape you want to generate
- * @param       {('bare'|'lnf'|'shape')[]}        [scope=['bare', 'lnf', 'shape']]      The scope you want to generate
+ * @param       {'default'}                           [style='theme.ui.table.defaultLnf']         The style you want to generate
+ * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css
@@ -28,32 +27,26 @@ import __STheme from '@coffeekraken/s-theme';
 class postcssSugarPluginUiTableInterface extends __SInterface {
     static get _definition() {
         return {
-            style: {
+            lnf: {
                 type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.table.defaultStyle'),
-            },
-            shape: {
-                type: 'String',
-                values: ['default', 'square'],
-                default: __STheme.get('ui.table.defaultShape'),
+                values: ['default'],
+                default: __STheme.get('ui.table.defaultLnf'),
             },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'shape', 'vr'],
-                default: ['bare', 'lnf', 'shape', 'vr'],
+                values: ['bare', 'lnf'],
+                default: ['bare', 'lnf'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiTableParams {
-    style: 'solid';
-    shape: 'default' | 'square';
-    scope: ('bare' | 'lnf' | 'shape' | 'vr')[];
+    lnf: 'default';
+    scope: ('bare' | 'lnf')[];
 }
 
 export { postcssSugarPluginUiTableInterface as interface };
@@ -68,9 +61,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiTableParams = {
-        style: 'solid',
-        shape: 'default',
-        scope: ['bare', 'lnf', 'shape', 'vr'],
+        lnf: 'default',
+        scope: ['bare', 'lnf'],
         ...params,
     };
 
@@ -104,8 +96,7 @@ export default function ({
     }
 
     if (finalParams.scope.includes('lnf')) {
-        switch (finalParams.style) {
-            case 'solid':
+        switch (finalParams.lnf) {
             default:
                 vars.push(`
                     @sugar.depth(ui.table.depth);
@@ -125,21 +116,6 @@ export default function ({
                     }
 
   `);
-                break;
-        }
-    }
-
-    if (finalParams.scope.includes('shape')) {
-        switch (finalParams.shape) {
-            case 'square':
-                vars.push(`
-    border-radius: 0;
-        `);
-                break;
-            default:
-                vars.push(`
-    border-radius: sugar.border.radius(ui.table.borderRadius);
-        `);
                 break;
         }
     }

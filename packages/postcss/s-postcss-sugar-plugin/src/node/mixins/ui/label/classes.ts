@@ -12,10 +12,9 @@ import __faker from 'faker';
  *
  * Generate the label classes
  *
- * @param       {('inline'|'block'|'float')[]}                           [styles=['inline','block','float']]         The style(s) you want to generate
- * @param       {'inline'|'block'|'float'}                [defaultStyle='theme.ui.label.defaultStyle']           The default style you want
- * @param       {String}                            [defaultColor=theme.ui.label.defaultColor]            The default color you want
- * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
+ * @param       {('inline'|'block'|'float')[]}                           [lnfs=['inline','block','float']]         The style(s) you want to generate
+ * @param       {'inline'|'block'|'float'}                [defaultLnf='theme.ui.label.defaultLnf']           The default style you want
+ * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css
@@ -28,49 +27,35 @@ import __faker from 'faker';
 class postcssSugarPluginUiLabelClassesInterface extends __SInterface {
     static get _definition() {
         return {
-            styles: {
+            lnfs: {
                 type: 'String[]',
                 values: ['inline', 'block', 'float'],
                 default: ['inline', 'block', 'float'],
             },
-            defaultStyle: {
+            defaultLnf: {
                 type: 'String',
                 values: ['inline', 'block', 'float'],
-                default: __STheme.get('ui.label.defaultStyle'),
-            },
-            defaultColor: {
-                type: 'String',
-                values: Object.keys(__STheme.get('color')),
-                default: __STheme.get('ui.label.defaultColor'),
+                default: __STheme.get('ui.label.defaultLnf'),
             },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'shape', 'vr', 'tf'],
-                default: ['bare', 'lnf', 'shape', 'vr', 'tf'],
+                values: ['bare', 'lnf', 'vr', 'tf'],
+                default: ['bare', 'lnf', 'vr', 'tf'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiLabelClassesParams {
-    styles: ('inline' | 'float')[];
-    // shapes: ('default' | 'square' | 'pill')[];
-    defaultStyle: 'inline' | 'float';
-    defaultColor: string;
-    scope: ('bare' | 'lnf' | 'shape' | 'vr' | 'tf')[];
+    lnfs: ('inline' | 'float')[];
+    defaultLnf: 'inline' | 'float';
+    scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
 }
 
 export { postcssSugarPluginUiLabelClassesInterface as interface };
-
-import { __dirname } from '@coffeekraken/sugar/fs';
-export function dependencies() {
-    return {
-        files: [`${__dirname()}/label.js`],
-    };
-}
 
 export default function ({
     params,
@@ -84,10 +69,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiLabelClassesParams = {
-        styles: [],
-        // shapes: [],
-        defaultStyle: 'inline',
-        defaultColor: 'main',
+        lnfs: [],
+        defaultLnf: 'inline',
         scope: [],
         ...params,
     };
@@ -106,55 +89,55 @@ export default function ({
         * 
         * These classes allows you to structure forms using labels.
         * 
-        ${finalParams.styles
-            .map((style) => {
+        ${finalParams.lnfs
+            .map((lnf) => {
                 return ` * @cssClass     s-label${
-                    style === finalParams.defaultStyle ? '' : `:${style}`
-                }           Apply the ${style} label style`;
+                    lnf === finalParams.defaultLnf ? '' : `:${lnf}`
+                }           Apply the ${lnf} label lnf`;
             })
             .join('\n')}
         * @cssClass         s-label:inline          Make sure the input and label stay inline even on mobile. Usefull for checkbox and radio for example.
         * 
-        ${finalParams.styles
-            .map((style) => {
-                return ` * @example        html       ${style} style
+        ${finalParams.lnfs
+            .map((lnf) => {
+                return ` * @example        html       ${lnf} lnf
             *   <label class="s-mbe:30 s-label${
-                style === finalParams.defaultStyle ? '' : `:${style}`
+                lnf === finalParams.defaultLnf ? '' : `:${lnf}`
             }">
             *     <input type="text" class="s-input ${
-                style !== 'block' ? 's-width:40' : ''
+                lnf !== 'block' ? 's-width:40' : ''
             }" placeholder="Type something!" />
             *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *   </label>
             *   <label class="s-mbe:30 s-label${
-                style === finalParams.defaultStyle ? '' : `:${style}`
+                lnf === finalParams.defaultLnf ? '' : `:${lnf}`
             }">
             *     <textarea class="s-input ${
-                style !== 'block' ? 's-width:40' : ''
+                lnf !== 'block' ? 's-width:40' : ''
             }" placeholder="Type something!" rows="3"></textarea>
             *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *   </label>
         *   <label class="s-mbe:30 s-label${
-            style === finalParams.defaultStyle ? '' : `:${style}`
+            lnf === finalParams.defaultLnf ? '' : `:${lnf}`
         }">
         *     <input type="text" disabled class="s-input ${
-            style !== 'block' ? 's-width:40' : ''
+            lnf !== 'block' ? 's-width:40' : ''
         }" placeholder="Type something!" />
         *     <span>I'm disabled</span>
     *   </label>
     *   <label dir="rtl" class="s-mbe:30 s-label${
-        style === finalParams.defaultStyle ? '' : `:${style}`
+        lnf === finalParams.defaultLnf ? '' : `:${lnf}`
     }">
     *     <input type="text" class="s-input ${
-        style !== 'block' ? 's-width:40' : ''
+        lnf !== 'block' ? 's-width:40' : ''
     }" placeholder="Type something!" />
     *     <span>Support RTL</span>
     *   </label>
     *   <label class="s-mbe:30 s-label${
-        style === finalParams.defaultStyle ? '' : `:${style}`
+        lnf === finalParams.defaultLnf ? '' : `:${lnf}`
     } s-color:accent">
     *     <input type="text" class="s-input ${
-        style !== 'block' ? 's-width:40' : ''
+        lnf !== 'block' ? 's-width:40' : ''
     }" placeholder="Type something!" />
     *     <span>With the accent color</span>
     *   </label>
@@ -168,10 +151,10 @@ export default function ({
     `,
     );
 
-    finalParams.styles.forEach((style) => {
+    finalParams.lnfs.forEach((lnf) => {
         let cls = `s-label`;
-        if (style !== finalParams.defaultStyle) {
-            cls += `:${style}`;
+        if (lnf !== finalParams.defaultLnf) {
+            cls += `:${lnf}`;
         }
 
         vars.comment(
@@ -180,7 +163,7 @@ export default function ({
                 * @namespace          sugar.style.ui.label
                 * @type           CssClass
                 * 
-                * This class represent a(n) "<s-color="accent">${style}</s-color>" label
+                * This class represent a(n) "<s-color="accent">${lnf}</s-color>" label
                 * 
                 * @example        html
                 * <label class="${cls.replace(':', ':')}">
@@ -196,10 +179,8 @@ export default function ({
 
         if (finalParams.scope.includes('bare')) {
             vars.code(
-                `.s-label${
-                    finalParams.defaultStyle === style ? '' : `--${style}`
-                } {
-                @sugar.ui.label($style: ${style}, $scope: bare);
+                `.s-label${finalParams.defaultLnf === lnf ? '' : `--${lnf}`} {
+                @sugar.ui.label($lnf: ${lnf}, $scope: bare);
             } 
             `,
                 {
@@ -212,7 +193,7 @@ export default function ({
             vars.code(
                 () => `
                 .${cls.replace(':', '--')} {
-                    @sugar.ui.label($style: ${style}, $scope: lnf);
+                    @sugar.ui.label($lnf: ${lnf}, $scope: lnf);
                 } 
             `,
                 {
@@ -221,18 +202,6 @@ export default function ({
             );
         }
     });
-
-    // default color
-    if (finalParams.scope.includes('lnf')) {
-        vars.code(
-            () => `
-            .s-label:not(.s-color) {
-                @sugar.color(${finalParams.defaultColor});
-            }
-        `,
-            { type: 'CssClass' },
-        );
-    }
 
     vars.comment(
         () => `/**

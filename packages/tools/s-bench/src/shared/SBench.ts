@@ -1,12 +1,13 @@
 import __SClass from '@coffeekraken/s-class';
-import __SEnv from '@coffeekraken/s-env';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __formatDuration, __utcTime } from '@coffeekraken/sugar/datetime';
 import { __isChildProcess } from '@coffeekraken/sugar/is';
 import { __hotkey } from '@coffeekraken/sugar/keyboard';
 import { __clamp } from '@coffeekraken/sugar/math';
-import { __deepMerge, __sort } from '@coffeekraken/sugar/object';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __onProcessExit } from '@coffeekraken/sugar/process';
-import __minimatch from 'minimatch';
+import { __countLine } from '@coffeekraken/sugar/string';
+import __micromatch from 'micromatch';
 import __nodeIpc from 'node-ipc';
 
 // import __SBenchSettingsInterface from './interface/SBenchSettingsInterface';
@@ -41,8 +42,35 @@ import __nodeIpc from 'node-ipc';
  */
 
 export interface ISBenchSettings {
-    title: string;
-    body: string;
+    filters: Partial<ISBenchFilters>;
+    bubbles: boolean;
+}
+
+export interface ISBenchResult {
+    id: string;
+    duration: number;
+    steps: ISBenchStep[];
+    stats: ISBenchResultStat[];
+}
+
+export interface ISBenchFilters {
+    id: string;
+    min: number;
+    max: number;
+}
+
+export interface ISBenchStatsDisplaySettings {
+    compact: boolean;
+}
+
+export interface ISBenchResultStat {
+    id: string;
+    startTime: number;
+    endTime: number;
+    duration: number;
+    startPercent: number;
+    endPercent: number;
+    percent: number;
 }
 
 export interface ISBenchGlobalStepsBench {
@@ -86,28 +114,7 @@ export default class SBench extends __SClass {
      * @since       2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    private static _globalSteps: ISBenchGlobalSteps = {};
-
-    /**
-     * @name            _benchInstancesById
-     * @type            Record<string, SBench>
-     * @private
-     *
-     * Store all the instances started using a static methods
-     *
-     * @since           2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    private static _benchInstancesById: Record<string, SBench> = {};
-
-    /**
-     * @name            benchEnv
-     * @type            Function
-     * @static
-     *
-     * This static method allows you to get the current bench environment
-     * the process is running in. The bench environment
-     */
+    private static _benches: ISBenchResult[] = [];
 
     /**
      * @name        _ipc
@@ -123,156 +130,32 @@ export default class SBench extends __SClass {
     private static _ipc;
 
     /**
-     * @name        filter
+     * @name        disable
      * @type        Function
      * @static
      *
-     * This method allows you to activate a list of bench id(s).
-     * You can specify "*" for wildcard
-     *
-     * @param           {String|String[]}           benchId         One or more bench id(s) to activate
+     * This method allows you to disable the bench in you process
      *
      * @since       2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static filter(benchId: string | string[]): void {
-        let currentBenchs = __SEnv.get('s-bench-filtered-ids') ?? [];
-        currentBenchs = [...currentBenchs, ...Array.from(benchId)];
-        __SEnv.set('s-bench-filtered-ids', currentBenchs);
+    private static _disabled = false;
+    static disable() {
+        this._disabled = true;
     }
 
     /**
-     * @name        filtered
+     * @name        isDisabled
      * @type        Function
      * @static
      *
-     * This method allows you to get back the list of activated bench(s)
-     *
-     * @return      {String[]}          The list of activated bench id(s)
+     * This method allows you to check if the bench are disabled in your process or not
      *
      * @since       2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static filtered(): string[] {
-        return __SEnv.get('s-bench-filtered-ids') ?? [];
-    }
-
-    /**
-     * @name        isBenchActive
-     * @type        Function
-     * @static
-     *
-     * This method allows you to check if a particular bench id is active
-     *
-     * @param        {String}               benchId             The bench id to check
-     * @return      {Boolean}           true if is active, false if not
-     *
-     * @since       2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static isBenchActive(benchId: string): boolean {
-        if (this.filtered().indexOf('*') !== -1) return true;
-        for (let i = 0; i < this.filtered().length; i++) {
-            const filteredId = this.filtered()[i];
-            if (__minimatch(benchId, filteredId)) return true;
-        }
-    }
-
-    /**
-     * @name            getBenchInstanceById
-     * @type            Function
-     * @static
-     *
-     * This static method allows you to get back a current SBench instance by it's id,
-     * or get back a new instance that you can use directly
-     *
-     * @param       {String}            id          The id of the instance you want to get back
-     * @return      {SBench}                        A current SBench instance or a new one to use
-     *
-     * @since       2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static getBenchInstanceById(id: string): SBench {
-        const instance = this._benchInstancesById[id];
-        if (!instance)
-            throw new Error(
-                `<red>[bench]</red> Sorry but the requested SBench instance with the id "<yellow>${id}</yellow>" does not exists... Make sure to initiate it correctly using "<cyan>SBench.start('${id}');</cyan>"`,
-            );
-        return instance;
-    }
-
-    /**
-     * @name            start
-     * @type            Function
-     * @static
-     *
-     * This method allows you to start a new bench "session"
-     *
-     * @param       {String}        id          The "bench" id to use during the whole benchmark
-     * @return      {SBench}                    The SBench instance for this bench
-     *
-     * @since           2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static start(id: string): SBench {
-        this._benchInstancesById[id] = new this(id);
-
-        const instance = this._benchInstancesById[id];
-        return instance.start();
-    }
-
-    /**
-     * @name            step
-     * @type            Function
-     * @static
-     *
-     * This method allows you to step a new bench "session"
-     *
-     * @param       {String}        id          The "bench" id to use during the whole benchmark
-     * @return      {SBench}                    The SBench instance for this bench
-     *
-     * @since           2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static step(id: string, stepId: string, description = ''): SBench {
-        const instance = this.getBenchInstanceById(id);
-        return instance.step(stepId, description);
-    }
-
-    /**
-     * @name            end
-     * @type            Function
-     * @static
-     *
-     * This method allows you to end a new bench "session"
-     *
-     * @param       {String}        id          The "bench" id to use during the whole benchmark
-     * @return      {SBench}                    The SBench instance for this bench
-     *
-     * @since           2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static end(id: string, settings?: Partial<ISBenchSettings>): SBench {
-        const instance = this.getBenchInstanceById(id);
-        return instance.end(settings);
-    }
-
-    /**
-     * @name            log
-     * @type            Function
-     * @static
-     *
-     * This method allows you to log a new bench "session" if this one is active
-     *
-     * @param       {String}        id          The "bench" id to use during the whole benchmark
-     * @return      {SBench}                    The SBench instance for this bench
-     *
-     * @since           2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static log(id: string, settings?: Partial<ISBenchSettings>): SBench {
-        const instance = this.getBenchInstanceById(id);
-        return instance.log();
+    static isDisabled() {
+        return this._disabled;
     }
 
     /**
@@ -288,88 +171,126 @@ export default class SBench extends __SClass {
      * @since           2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static stats(id: string, settings?: Partial<ISBenchSettings>): SBench {
-        let sortedBenches = __sort(this._globalSteps, (a, b) => {
+    static stats(
+        filters: Partial<ISBenchFilters> = {},
+        displaySettings: Partial<ISBenchStatsDisplaySettings> = {},
+    ): SBench {
+        if (this.isDisabled()) {
+            return;
+        }
+
+        displaySettings = __deepMerge(
+            {
+                compact: false,
+            },
+            displaySettings,
+        );
+
+        filters = __deepMerge(
+            __SSugarConfig.get('bench.filters') ?? {},
+            filters,
+        );
+
+        let filteredBenches = this._benches.filter((benchResult) => {
+            if (filters.id) {
+                if (!__micromatch.isMatch(benchResult.id, filters.id)) {
+                    return false;
+                }
+            }
+            if (filters.min) {
+                if (benchResult.duration < filters.min) {
+                    return false;
+                }
+            }
+            if (filters.max) {
+                if (benchResult.duration > filters.max) {
+                    return false;
+                }
+            }
+
+            return true;
+        });
+
+        let sortedBenches = filteredBenches.sort((a, b) => {
             if (a.duration > b.duration) return -1;
             return 1;
         });
 
-        for (let [benchId, benchObj] of Object.entries(sortedBenches)) {
-            benchObj.times = 0;
-            benchObj.steps.forEach((step) => {
-                if (step.type === 'start') {
-                    benchObj.times++;
-                }
-            });
-        }
-
         const logsAr: string[] = [];
 
-        for (let [benchId, benchObj] of Object.entries(sortedBenches)) {
-            logsAr.push(' ');
-            logsAr.push(
-                `<yellow>${'-'.repeat(process.stdout.columns)}</yellow>`,
-            );
-            let repeat = logsAr.push(
-                `<yellow>${benchId}</yellow>${' '.repeat(
-                    __clamp(20 - benchId.length, 0, 9999),
-                )} Executed <cyan>${benchObj.times}</cyan> time${
-                    benchObj.times > 1 ? 's' : ''
-                } - Total duration: <yellow>${__formatDuration(
-                    benchObj.duration,
-                )}</yellow>`,
-            );
-            logsAr.push(`<grey>${'-'.repeat(process.stdout.columns)}</grey>`);
-            logsAr.push(' ');
+        sortedBenches.forEach((benchObj) => {
+            const globalColor =
+                benchObj.duration <= 200
+                    ? 'green'
+                    : benchObj.duration <= 1000
+                    ? 'yellow'
+                    : 'red';
 
-            const stepsStats = {};
-
-            benchObj.steps.forEach((step) => {
-                const stepId = `${step.type}-${step.description}`;
-
-                if (!stepsStats[stepId]) {
-                    stepsStats[stepId] = {
-                        type: step.type,
-                        id: step.id,
-                        times: [],
-                        durations: [],
-                    };
-                }
-                if (stepsStats[stepId].times.length) {
-                    stepsStats[stepId].durations.push(
-                        step.time - stepsStats[stepId].times.at(-1),
-                    );
-                }
-                stepsStats[stepId].times.push(step.time);
-            });
-
-            for (let [type, obj] of Object.entries(stepsStats)) {
-                if (!obj.id) {
-                    continue;
-                }
-
+            if (!displaySettings.compact) {
+                logsAr.push(' ');
                 logsAr.push(
-                    `<cyan>${obj.id}</cyan>${' '.repeat(
-                        __clamp(20 - obj.id.length, 0, 999),
-                    )}${obj.durations
-                        .map(
-                            (d) =>
-                                `${' '.repeat(
-                                    __clamp(4 - `${d}`.length, 0, 999),
-                                )}${
-                                    d >= 1000
-                                        ? `<red>${d}</red>`
-                                        : d >= 100
-                                        ? `<yellow>${d}</yellow>`
-                                        : `${d}`
-                                }`,
-                        )
-                        .join(' ')}`,
+                    `<yellow>${'-'.repeat(process.stdout.columns)}</yellow>`,
                 );
             }
+            const metas = `${
+                    !displaySettings.compact ? 'Total duration: ' : ''
+                }<${globalColor}>${__formatDuration(
+                    benchObj.duration,
+                )}</${globalColor}>`,
+                title = `<${globalColor}>${benchObj.id}</${globalColor}>`;
 
-            logsAr.push(' ');
-        }
+            logsAr.push(
+                `${title}${' '.repeat(
+                    __clamp(
+                        process.stdout.columns -
+                            __countLine(title) -
+                            __countLine(metas),
+                        0,
+                        9999,
+                    ),
+                )}${metas}`,
+            );
+
+            if (!displaySettings.compact) {
+                logsAr.push(
+                    `<grey>${'-'.repeat(process.stdout.columns)}</grey>`,
+                );
+                logsAr.push(' ');
+
+                const idMaxLength = 20,
+                    columns = process.stdout.columns - idMaxLength;
+
+                benchObj.stats.forEach((stat) => {
+                    // const stepId = `${step.type}-${step.description}`;
+                    let timelineStr = '';
+
+                    if (stat.percent <= 0) {
+                        return;
+                    }
+
+                    const color =
+                        stat.duration <= 50
+                            ? 'green'
+                            : stat.duration <= 200
+                            ? 'yellow'
+                            : 'red';
+
+                    timelineStr = `${stat.id}${' '.repeat(
+                        __clamp(idMaxLength - stat.id.length, 0, 999),
+                    )}`;
+                    timelineStr += `${' '.repeat(
+                        Math.floor((columns / 100) * stat.startPercent),
+                    )}`;
+                    timelineStr += `<${color}>${'#'.repeat(
+                        (columns / 100) * stat.percent,
+                    )}</${color}>`;
+
+                    logsAr.push(timelineStr);
+                });
+
+                logsAr.push(' ');
+            }
+        });
 
         console.log(logsAr.join('\n'));
     }
@@ -377,15 +298,18 @@ export default class SBench extends __SClass {
     /**
      * Emit some data through the IPC connection
      */
-    static _emit(id: string, data: any): void {
+    static _emit(benchResult: ISBenchResult): void {
+        if (this.isDisabled()) {
+            return;
+        }
+
         if (!__isChildProcess()) {
             return;
         }
 
         // @ts-ignore
         this._ipc.of[`ipc-s-bench-${process.ppid}`].emit('message', {
-            id,
-            data,
+            ...benchResult,
         });
     }
 
@@ -406,6 +330,8 @@ export default class SBench extends __SClass {
                     metas: {
                         id,
                     },
+                    bubbles: true,
+                    filters: {},
                     // do not use interface directly to avoir circular dependency with JEST
                     // @todo        find a way to fix this
                     // bench: __SBenchSettingsInterface.defaults(),
@@ -413,6 +339,10 @@ export default class SBench extends __SClass {
                 settings ?? {},
             ),
         );
+
+        if (this.constructor.isDisabled()) {
+            return;
+        }
 
         // init ipc communication if needed
         if (!this.constructor._ipc) {
@@ -426,36 +356,23 @@ export default class SBench extends __SClass {
                     `ipc-s-bench-${process.ppid}`,
                     () => {
                         // console.log('UPC ready', process.ppid);
+                        // start when IPC is ready
+                        this.start();
                     },
                 );
             } else {
+                // start our IPC server
                 this.constructor._ipc.serve(() => {
                     this.constructor._ipc.server.on(
                         'message',
                         (data, socket) => {
-                            if (!this.constructor._globalSteps[data.id]) {
-                                this.constructor._globalSteps[data.id] = {
-                                    duration: 0,
-                                    steps: [],
+                            if (!this.constructor._benches[data.id]) {
+                                this.constructor._benches[data.id] = {
+                                    id: data.id,
+                                    benches: [],
                                 };
                             }
-                            if (
-                                this.constructor._globalSteps[data.id].steps
-                                    .length >= 2
-                            ) {
-                                this.constructor._globalSteps[
-                                    data.id
-                                ].duration +=
-                                    this.constructor._globalSteps[
-                                        data.id
-                                    ].steps.at(-1).time -
-                                    this.constructor._globalSteps[
-                                        data.id
-                                    ].steps.at(-2).time;
-                            }
-                            this.constructor._globalSteps[data.id].steps.push(
-                                data.data,
-                            );
+                            this.constructor._benches.push(data);
                         },
                     );
                 });
@@ -463,7 +380,7 @@ export default class SBench extends __SClass {
 
                 // log the stats at process exit
                 __onProcessExit(() => {
-                    this.constructor.stats();
+                    this.constructor.stats(this.settings.filters);
                 });
 
                 // some usefull hotkeys
@@ -472,30 +389,26 @@ export default class SBench extends __SClass {
                     console.log(
                         `<yellow>[clear]</yellow> Clearing global gathered benches data...`,
                     );
-                    this.constructor._globalSteps = {};
+                    this.constructor._benches = [];
                 });
                 __hotkey('shift+s').on('press', () => {
                     // loging actual data
-                    this.constructor.stats();
+                    this.constructor.stats(this.settings.filters);
                 });
-            }
-        }
-    }
+                __hotkey('shift+f').on('press', async () => {
+                    // loging actual data
+                    this.constructor.stats(this.settings.filters, {
+                        compact: true,
+                    });
+                });
 
-    /**
-     * @name            isActive
-     * @type            Function
-     *
-     * This method allows you to check if the current bench is active or not.
-     *
-     * @return          {Boolean}           true if is active, false if not
-     *
-     * @since       2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    isActive(): boolean {
-        // @ts-ignore
-        return this.constructor.isBenchActive(this.metas.id);
+                // start our bench
+                this.start();
+            }
+        } else {
+            // start bench directly
+            this.start();
+        }
     }
 
     /**
@@ -510,7 +423,9 @@ export default class SBench extends __SClass {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     start(settings?: Partial<ISBenchSettings>): SBench {
-        if (!this.isActive()) return this;
+        if (this.constructor.isDisabled()) {
+            return this;
+        }
 
         const finalSettings = __deepMerge(this.settings, settings ?? {});
 
@@ -526,10 +441,6 @@ export default class SBench extends __SClass {
                 }]</yellow> Starting bench session at <magenta>${__utcTime()}</magenta>`,
             ],
         });
-
-        if (__isChildProcess()) {
-            this.constructor._emit(this.metas.id, this._steps.at(-1));
-        }
 
         return this;
     }
@@ -551,7 +462,9 @@ export default class SBench extends __SClass {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     step(id: string, description = ''): SBench {
-        if (!this.isActive()) return this;
+        if (this.constructor.isDisabled()) {
+            return this;
+        }
 
         const keys = Object.keys(this._steps);
 
@@ -578,10 +491,6 @@ export default class SBench extends __SClass {
             ],
         });
 
-        if (__isChildProcess()) {
-            this.constructor._emit(this.metas.id, this._steps.at(-1));
-        }
-
         return this;
     }
 
@@ -598,7 +507,9 @@ export default class SBench extends __SClass {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     end(settings?: Partial<ISBenchSettings>): SBench {
-        if (!this.isActive()) return this;
+        if (this.constructor.isDisabled()) {
+            return this;
+        }
 
         const finalSettings = <ISBenchSettings>(
             __deepMerge(this.settings, settings ?? {})
@@ -623,9 +534,45 @@ export default class SBench extends __SClass {
             ],
         });
 
+        const benchResult: ISBenchResult = {
+            id: this.metas.id,
+            duration: this._steps.at(-1).time - this._steps[0].time,
+            steps: this._steps,
+            stats: [],
+        };
+
+        this._steps.forEach((step, i) => {
+            if (i <= 0) {
+                return;
+            }
+
+            let startTime = this._steps[i - 1].time,
+                endTime = step.time,
+                duration = step.time - this._steps[i - 1].time,
+                startPercent =
+                    i === 1 ? 0 : benchResult.stats.at(-1).endPercent,
+                percent = Math.floor(
+                    (100 / benchResult.duration) *
+                        (step.time - this._steps[i - 1].time),
+                ),
+                endPercent = startPercent + percent;
+
+            benchResult.stats.push({
+                id: step.id,
+                startTime,
+                endTime,
+                duration,
+                startPercent,
+                endPercent,
+                percent,
+            });
+        });
+
         // this.resolve(this);
-        if (__isChildProcess()) {
-            this.constructor._emit(this.metas.id, this._steps.at(-1));
+        if (__isChildProcess() && this.settings.bubbles) {
+            this.constructor._emit(benchResult);
+        } else {
+            this.constructor._benches.push(benchResult);
         }
 
         return this;
@@ -643,7 +590,10 @@ export default class SBench extends __SClass {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     log(settings?: Partial<ISBenchSettings>): SBench {
-        if (!this.isActive()) return this;
+        if (this.constructor.isDisabled()) {
+            return this;
+        }
+
         const finalSettings = <ISBenchSettings>(
             __deepMerge(this.settings, settings ?? {})
         );

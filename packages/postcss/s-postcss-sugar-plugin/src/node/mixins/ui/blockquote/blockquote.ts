@@ -1,5 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          blockquote
@@ -11,14 +10,12 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * This mixin allows you to generate the "blockquote" UI component css.
  *
- * @param       {'solid'}                           [style'theme.ui.blockquote.defaultStyle']         The style you want to generate
- * @param       {'default'|'square'|'pill'}             [shape='theme.ui.blockquote.defaultShape']         The shape you want to generate
- * @param       {('bare'|'lnf'|'color'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'col0r^'shape']]      The scope you want to generate
+ * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf'']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
  * @example       css
  * .my-element {
- *      \@sugar.ui.badge();
+ *      \@sugar.ui.blockquote();
  * }
  *
  * @since     2.0.0
@@ -28,37 +25,20 @@ import __STheme from '@coffeekraken/s-theme';
 class postcssSugarPluginUiBlockquoteInterface extends __SInterface {
     static get _definition() {
         return {
-            color: {
-                type: 'String',
-                default: __STheme.get('ui.blockquote.defaultColor'),
-            },
-            style: {
-                type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.blockquote.defaultStyle'),
-            },
-            shape: {
-                type: 'String',
-                values: ['default', 'square'],
-                default: __STheme.get('ui.blockquote.defaultShape'),
-            },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'shape', 'color'],
-                default: ['bare', 'lnf', 'shape', 'color'],
+                values: ['bare', 'lnf', 'color'],
+                default: ['bare', 'lnf', 'color'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiBlockquoteParams {
-    color: string;
-    style: 'solid';
-    shape: 'default' | 'square';
-    scope: ('bare' | 'lnf' | 'shape' | 'color' | 'vr')[];
+    scope: ('bare' | 'lnf')[];
 }
 
 export { postcssSugarPluginUiBlockquoteInterface as interface };
@@ -73,10 +53,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiBlockquoteParams = {
-        color: 'main',
-        style: 'solid',
-        shape: 'default',
-        scope: ['bare', 'lnf', 'shape', 'color'],
+        scope: ['bare', 'lnf'],
         ...params,
     };
 
@@ -88,49 +65,21 @@ export default function ({
         `);
     }
 
-    if (finalParams.scope.includes('color')) {
+    if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
-            @sugar.color(${finalParams.color});
-        `);
+            display: block;
+            padding-inline: sugar.padding(ui.blockquote.paddingInline);
+            padding-block: sugar.padding(ui.blockquote.paddingBlock);
+    `);
     }
-
-    switch (finalParams.style) {
-        case 'solid':
-        default:
-            if (finalParams.scope.indexOf('bare') !== -1) {
-                vars.push(`
-                            display: block;
-                            padding-inline: sugar.padding(ui.blockquote.paddingInline);
-                            padding-block: sugar.padding(ui.blockquote.paddingBlock);
-                    `);
-            }
-            if (finalParams.scope.indexOf('lnf') !== -1) {
-                vars.push(`
-                            border-inline-start: sugar.theme(ui.blockquote.borderWidth) solid sugar.color(current);
-                            color: sugar.color(current, surfaceForeground);
-                            background-color: sugar.color(current, surface);
-                            @sugar.depth(ui.blockquote.depth);
-                            font-size: sugar.scalable(1rem);
-
-                            @sugar.font.family(quote);
-                    `);
-            }
-            break;
-    }
-
-    if (finalParams.scope.includes('shape')) {
-        switch (finalParams.shape) {
-            case 'square':
-                vars.push(`
-                    border-radius: 0;
-                `);
-                break;
-            default:
-                vars.push(`
-                    border-radius: sugar.border.radius(ui.blockquote.borderRadius);
-                `);
-                break;
-        }
+    if (finalParams.scope.indexOf('lnf') !== -1) {
+        vars.push(`
+            border-inline-start: sugar.theme(ui.blockquote.borderWidth) solid sugar.color(current);
+            color: sugar.color(current, surfaceForeground);
+            background-color: sugar.color(current, surface);
+            font-size: sugar.scalable(1rem);
+            @sugar.font.family(quote);
+    `);
     }
 
     return vars;

@@ -105,7 +105,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
         settings,
     );
 
-    let themeHash, cacheDir, fromCache;
+    let themeHash, cacheDir, fromCache, bench;
 
     if (_configLoaded) {
         updateConfig();
@@ -366,7 +366,20 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
 
             function themeValueProxy(dotPathOrValue: string): any {
                 const value = __STheme.getSafe(dotPathOrValue);
-                if (value !== undefined) return value;
+                if (value !== undefined) {
+                    return value;
+                }
+                if (dotPathOrValue.match(/^ui\.[a-zA-Z0-9]+\./)) {
+                    const defaultValue = __STheme.getSafe(
+                        dotPathOrValue.replace(
+                            /^ui\.[a-zA-Z0-9]+\./,
+                            'ui.default.',
+                        ),
+                    );
+                    if (defaultValue !== undefined) {
+                        return defaultValue;
+                    }
+                }
                 return dotPathOrValue;
             }
 
@@ -575,7 +588,16 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
     const pluginObj = {
         postcssPlugin: 'sugar',
         async Once(root) {
-            __SBench.start('postcssSugarPlugin');
+            bench = new __SBench(
+                `postcssSugarPlugin.${root.source.input.file
+                    ?.replace(__packageRootDir(), '')
+                    .replace(
+                        __packageRootDir(process.cwd(), {
+                            highest: true,
+                        }),
+                        '',
+                    )}`,
+            );
             await _load();
 
             clearTimeout(compileFileTimeout);
@@ -688,12 +710,13 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                 }
             });
 
-            __SBench.end('postcssSugarPlugin').log({
-                body: `File: <cyan>${__path.relative(
-                    __packageRootDir(),
-                    root.source?.input?.from,
-                )}</cyan>`,
-            });
+            bench.end();
+            // __SBench.end('postcssSugarPlugin').log({
+            //     body: `File: <cyan>${__path.relative(
+            //         __packageRootDir(),
+            //         root.source?.input?.from,
+            //     )}</cyan>`,
+            // });
         },
         async AtRule(atRule, postcssApi) {
             if (atRule.name.match(/^sugar\./)) {

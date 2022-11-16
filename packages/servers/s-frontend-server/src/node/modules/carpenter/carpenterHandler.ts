@@ -5,9 +5,9 @@ import __SSpecs from '@coffeekraken/s-specs';
 
 export default function carpenterHandler({ req, res, pageConfig }) {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
-        __SBench.start('data.carpenterHandler');
+        const bench = new __SBench('data.carpenterHandler');
 
-        __SBench.step('data.carpenterHandler', 'beforeSitemapRead');
+        bench.step('beforeSitemapRead');
 
         // load current component/section/... specs
         const specsInstance = new __SSpecs();

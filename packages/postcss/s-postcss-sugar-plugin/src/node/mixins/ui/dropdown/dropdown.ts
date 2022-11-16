@@ -1,5 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          dropdown
@@ -11,9 +10,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the dropdown style to any element
  *
- * @param       {'solid'}                           [style='theme.ui.dropdown.defaultStyle']         The style you want to generate
- * @param       {'default'|'square'|'pill'}             [shape='theme.ui.dropdown.defaultShape']         The shape you want to generate
- * @param       {('bare'|'lnf'|'shape')[]}        [scope=['bare', 'lnf', 'shape']]      The scope you want to generate
+ * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css
@@ -28,16 +25,6 @@ import __STheme from '@coffeekraken/s-theme';
 class postcssSugarPluginUiDropdownInterface extends __SInterface {
     static get _definition() {
         return {
-            style: {
-                type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.dropdown.defaultStyle'),
-            },
-            shape: {
-                type: 'String',
-                values: ['default', 'square', 'pill'],
-                default: __STheme.get('ui.dropdown.defaultShape'),
-            },
             position: {
                 type: 'String',
                 values: [
@@ -55,16 +42,14 @@ class postcssSugarPluginUiDropdownInterface extends __SInterface {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'shape', 'position'],
-                default: ['bare', 'lnf', 'shape', 'position'],
+                values: ['bare', 'lnf', 'position'],
+                default: ['bare', 'lnf', 'position'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiDropdownParams {
-    style: 'solid';
-    shape: 'default' | 'square' | 'pill';
     position:
         | 'top'
         | 'top-start'
@@ -72,7 +57,7 @@ export interface IPostcssSugarPluginUiDropdownParams {
         | 'bottom'
         | 'bottom-start'
         | 'bottom-end';
-    scope: ('bare' | 'lnf' | 'shape' | 'position')[];
+    scope: ('bare' | 'lnf' | 'position')[];
 }
 
 export { postcssSugarPluginUiDropdownInterface as interface };
@@ -87,8 +72,6 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiDropdownParams = {
-        style: 'solid',
-        shape: 'default',
         position: 'bottom',
         scope: [],
         ...params,
@@ -119,55 +102,29 @@ export default function ({
         vars.push(`
         `);
 
-        switch (finalParams.style) {
-            case 'solid':
-            default:
-                vars.push(`
-                    background-color: sugar.color(main, background);
-                    border: sugar.theme(ui.dropdown.borderWidth) solid sugar.color(current, border);
-                    @sugar.border.radius(ui.dropdown.borderRadius);
-                    padding-inline: sugar.padding(ui.dropdown.paddingInline);
-                    padding-block: sugar.padding(ui.dropdown.paddingBlock);
-                    @sugar.depth(ui.dropdown.depth);
-                    @sugar.transition(fast);
+        vars.push(`
+            background-color: sugar.color(main, background);
+            border: sugar.theme(ui.dropdown.borderWidth) solid sugar.color(current, border);
+            @sugar.border.radius(ui.dropdown.borderRadius);
+            padding-inline: sugar.padding(ui.dropdown.paddingInline);
+            padding-block: sugar.padding(ui.dropdown.paddingBlock);
+            @sugar.depth(ui.dropdown.depth);
+            @sugar.transition(fast);
 
-                    &-item {
-                        padding-inline: sugar.padding(ui.dropdown.itemPaddingInline);
-                        padding-block: sugar.padding(ui.dropdown.itemPaddingBlock);
-                        background-color: sugar.color(current, --alpha 0);
-                        @sugar.border.radius(ui.dropdown.borderRadius);
-                        @sugar.transition(fast);
+            &-item {
+                padding-inline: sugar.padding(ui.dropdown.itemPaddingInline);
+                padding-block: sugar.padding(ui.dropdown.itemPaddingBlock);
+                background-color: sugar.color(current, --alpha 0);
+                @sugar.border.radius(ui.dropdown.borderRadius);
+                @sugar.transition(fast);
 
-                        &:hover, &:focus {
-                            background-color: sugar.color(current, --alpha 1 --darken 10%);
-                        }
+                &:hover, &:focus {
+                    background-color: sugar.color(current, --alpha 1 --darken 10%);
+                }
 
-                    }
+            }
 
-                `);
-
-                break;
-        }
-    }
-
-    if (finalParams.scope.includes('shape')) {
-        switch (finalParams.shape) {
-            case 'square':
-                vars.push(`
-                    border-radius: 0;
-                `);
-                break;
-            case 'pill':
-                vars.push(`
-                    border-radius: 9999px;
-                `);
-                break;
-            default:
-                vars.push(`
-                    border-radius: sugar.border.radius(ui.dropdown.borderRadius);
-                `);
-                break;
-        }
+        `);
     }
 
     if (finalParams.scope.indexOf('position') !== -1) {

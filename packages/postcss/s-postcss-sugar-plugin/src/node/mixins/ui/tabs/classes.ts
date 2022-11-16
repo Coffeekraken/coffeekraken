@@ -12,12 +12,9 @@ import __faker from 'faker';
  *
  * Generate the tabs classes
  *
- * @param       {('solid')[]}                           [lnfs=['solid']]         The style(s) you want to generate
- * @param       {('default'|'square'|'pill')[]}             [shape=['default','square','pill']]         The shape(s) you want to generate
- * @param       {'solid'}                [defaultLnf='theme.ui.tabs.defaultLnf']           The default style you want
- * @param       {'default'|'square'|'pill'}        [defaultShape='theme.ui.tabs.defaultShape']           The default shape you want
- * @param       {String}                            [defaultColor=theme.ui.tabs.defaultColor]            The default color you want
- * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
+ * @param       {('default')[]}                           [lnfs=['default']]         The style(s) you want to generate
+ * @param       {'default'}                [defaultLnf='theme.ui.tabs.defaultLnf']           The default style you want
+ * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css
@@ -32,48 +29,30 @@ class postcssSugarPluginUiListClassesInterface extends __SInterface {
         return {
             lnfs: {
                 type: 'String[]',
-                values: ['solid'],
-                default: ['solid'],
-            },
-            shapes: {
-                type: 'String[]',
-                values: ['default', 'square', 'pill'],
-                default: ['default', 'square', 'pill'],
+                values: ['default'],
+                default: ['default'],
             },
             defaultLnf: {
                 type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.tabs.defaultLnf') ?? 'solid',
-            },
-            defaultShape: {
-                type: 'String',
-                values: ['default', 'square', 'pill'],
-                default: __STheme.get('ui.tabs.defaultShape'),
-            },
-            defaultColor: {
-                type: 'String',
-                values: Object.keys(__STheme.get('color')),
-                default: __STheme.get('ui.tabs.defaultColor'),
+                values: ['default'],
+                default: __STheme.get('ui.tabs.defaultLnf') ?? 'default',
             },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'shape', 'vr', 'tf'],
-                default: ['bare', 'lnf', 'shape', 'vr', 'tf'],
+                values: ['bare', 'lnf', 'vr', 'tf'],
+                default: ['bare', 'lnf', 'vr', 'tf'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiListClassesParams {
-    lnfs: 'solid'[];
-    shapes: ('default' | 'square' | 'pill')[];
-    defaultLnf: 'solid';
-    defaultShape: 'default' | 'square' | 'pill';
-    defaultColor: string;
-    scope: ('bare' | 'lnf' | 'shape' | 'vr' | 'tf')[];
+    lnfs: 'default'[];
+    defaultLnf: 'default';
+    scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
 }
 
 export { postcssSugarPluginUiListClassesInterface as interface };
@@ -98,10 +77,7 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiListClassesParams = {
         lnfs: [],
-        shapes: [],
-        defaultLnf: 'solid',
-        defaultShape: 'default',
-        defaultColor: 'main',
+        defaultLnf: 'default',
         scope: [],
         ...params,
     };
@@ -133,13 +109,6 @@ export default function ({
                 }           Apply the ${lnf} tabs lnf`;
             })
             .join('\n')}
-        ${finalParams.shapes
-            .map((shape) => {
-                return ` * @cssClass     s-tabs${
-                    shape === finalParams.defaultShape ? '' : `:${shape}`
-                }           Apply the ${shape} tabs shape`;
-            })
-            .join('\n')}
         * @cssClass       s-tabs:grow        Make the tabs items grow and take the available space
         * @cssClass       s-tabs:fill       Add a background to the tabs
         * @cssClass       s-tabs:vertical    Display the tabs horizontally
@@ -153,20 +122,6 @@ export default function ({
                 }
             *   <ul class="s-tabs${
                 lnf === finalParams.defaultLnf ? '' : `:${lnf}`
-            } s-color:accent">
-            *     <li tabindex="0" active>${__faker.name.findName()}</li>
-            *     <li tabindex="0">${__faker.name.findName()}</li>
-            *     <li tabindex="0">${__faker.name.findName()}</li>
-            *   </ul>
-            * `;
-            })
-            .join('\n')}
-        *
-        ${finalParams.shapes
-            .map((shape) => {
-                return ` * @example        html       ${shape}
-            *   <ul class="s-tabs${
-                shape === finalParams.defaultShape ? '' : `:${shape}`
             } s-color:accent">
             *     <li tabindex="0" active>${__faker.name.findName()}</li>
             *     <li tabindex="0">${__faker.name.findName()}</li>
@@ -278,56 +233,6 @@ export default function ({
                 { type: 'CssClass' },
             );
         });
-    }
-
-    if (finalParams.scope.includes('shape')) {
-        finalParams.shapes.forEach((shape) => {
-            vars.comment(
-                () => `/**
-            * @name           s-tabs${
-                finalParams.defaultShape === shape ? '' : `:${shape}`
-            }
-            * @namespace          sugar.style.ui.tabs
-            * @type           CssClass
-            * 
-            * This class represent a "<yellow>${shape}</yellow>" tabs
-            * 
-            * @example        html
-            * <div class="s-tabs${
-                finalParams.defaultShape === shape ? '' : `:${shape}`
-            }">
-            *    <div class="active">An active tab</div>
-            *    <div>A tab</div>
-            * </div>
-          */
-         `,
-            ).code(
-                `
-        .s-tabs${
-            finalParams.defaultShape === shape ? '' : `--${shape}`
-        }:not(.s-bare) {
-          @sugar.ui.tabs($shape: ${shape}, $scope: shape);
-
-          &.s-tabs--vertical {
-                @sugar.ui.tabs($direction: vertical, $shape: ${shape}, $scope: 'shape');
-            }
-        }
-      `,
-                { type: 'CssClass' },
-            );
-        });
-    }
-
-    // default color
-    if (finalParams.scope.includes('lnf')) {
-        vars.code(
-            () => `
-            .s-tabs:not(.s-color):not(.s-bare) {
-                @sugar.color(${finalParams.defaultColor});
-            }
-        `,
-            { type: 'CssClass' },
-        );
     }
 
     vars.comment(

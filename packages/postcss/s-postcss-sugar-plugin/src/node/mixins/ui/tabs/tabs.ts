@@ -11,8 +11,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the tabs style to any element
  *
- * @param       {'solid'}           [style='theme.ui.tabs.defaultStyle']        The style you want for your tabs
- * @param       {'default'|'square'|'pill'}     [shape=theme.ui.tabs.defaultShape]      The shape you want for your tabs
+ * @param       {'default'}           [style='theme.ui.tabs.defaultLnf']        The style you want for your tabs
  * @param       {Boolean}           [grow=false]                  Specify if you want your tabs to grow and take all the available place or not
  * @param       {'vertical'|'horizontal'}       [direction='horizontal']                Specify if you want your tabs to be vertical or horizontal
  * @param       {Boolean}           [outline=true]                      Specify if you want your tabs to have an outline on focus or not
@@ -34,14 +33,8 @@ class postcssSugarPluginUiTabInterface extends __SInterface {
             lnf: {
                 type: 'String',
                 description: 'Specify the look and feel you want for your tabs',
-                values: ['solid'],
+                values: ['default'],
                 default: __STheme.get('ui.tabs.defaultLnf'),
-            },
-            shape: {
-                type: 'String',
-                description: 'Specify the shape you want for your tabs',
-                values: ['default', 'square', 'pill'],
-                default: __STheme.get('ui.tabs.defaultShape'),
             },
             grow: {
                 type: 'Boolean',
@@ -73,21 +66,20 @@ class postcssSugarPluginUiTabInterface extends __SInterface {
                     splitChars: [',', ' '],
                 },
                 description: 'Specify the scope(s) you want to generate',
-                values: ['bare', 'lnf', 'shape', 'grow', 'fill', 'direction'],
-                default: ['bare', 'lnf', 'shape', 'grow', 'fill', 'direction'],
+                values: ['bare', 'lnf', 'grow', 'fill', 'direction'],
+                default: ['bare', 'lnf', 'grow', 'fill', 'direction'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiTabParams {
-    lnf: 'solid';
-    shape: 'default' | 'square' | 'pill';
+    lnf: 'default';
     grow: boolean;
     fill: boolean;
     direction: 'horizontal' | 'vertical';
     outline: boolean;
-    scope: ('bare' | 'lnf' | 'shape' | 'grow' | 'fill' | 'direction' | 'vr')[];
+    scope: ('bare' | 'lnf' | 'grow' | 'fill' | 'direction')[];
 }
 
 export { postcssSugarPluginUiTabInterface as interface };
@@ -102,8 +94,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiTabParams = {
-        lnf: 'solid',
-        shape: 'default',
+        lnf: 'default',
         grow: false,
         fill: false,
         direction: 'horizontal',
@@ -184,7 +175,7 @@ export default function ({
 
     if (finalParams.scope.indexOf('lnf') !== -1) {
         switch (finalParams.lnf) {
-            case 'solid':
+            case 'default':
             default:
                 vars.push(`
           & > * {
@@ -232,148 +223,148 @@ export default function ({
         `);
     }
 
-    if (finalParams.scope.includes('shape')) {
-        switch (finalParams.shape) {
-            case 'square':
-                vars.push(`
-                border-radius: 0 !important;
-                & > * {
-                  border-radius: 0 !important;
-                }
-              `);
+    // if (finalParams.scope.includes('shape')) {
+    //     switch (finalParams.shape) {
+    //         case 'square':
+    //             vars.push(`
+    //             border-radius: 0 !important;
+    //             & > * {
+    //               border-radius: 0 !important;
+    //             }
+    //           `);
 
-                break;
-            case 'pill':
-                vars.push(`
+    //             break;
+    //         case 'pill':
+    //             vars.push(`
 
-                border-radius: 9999px;
+    //             border-radius: 9999px;
 
-                & > *:first-child,
-                & > template + * {
-                  border-top-left-radius: 9999px;
-                  border-bottom-left-radius: 9999px;
-                  border-top-right-radius: 0;
-                  border-bottom-right-radius: 0;
-                }
-                & > *:last-child {
-                  border-top-left-radius: 0;
-                  border-bottom-left-radius: 0;
-                  border-top-right-radius: 9999px;
-                  border-bottom-right-radius: 9999px;
-                }
+    //             & > *:first-child,
+    //             & > template + * {
+    //               border-top-left-radius: 9999px;
+    //               border-bottom-left-radius: 9999px;
+    //               border-top-right-radius: 0;
+    //               border-bottom-right-radius: 0;
+    //             }
+    //             & > *:last-child {
+    //               border-top-left-radius: 0;
+    //               border-bottom-left-radius: 0;
+    //               border-top-right-radius: 9999px;
+    //               border-bottom-right-radius: 9999px;
+    //             }
 
-                [dir="rtl"] & > *:first-child,
-                &[dir="rtl"] > *:first-child,
-                [dir="rtl"] & > template + *,
-                &[dir="rtl"] > template + * {
-                  border-top-left-radius: 0;
-                  border-bottom-left-radius: 0;
-                  border-top-right-radius: 9999px;
-                  border-bottom-right-radius: 9999px;
-                }
-                [dir="rtl"] & > *:last-child,
-                &[dir="rtl"] > *:last-child {
-                  border-top-left-radius: 9999px;
-                  border-bottom-left-radius: 9999px;
-                  border-top-right-radius: 0;
-                  border-bottom-right-radius: 0;
-                }
+    //             [dir="rtl"] & > *:first-child,
+    //             &[dir="rtl"] > *:first-child,
+    //             [dir="rtl"] & > template + *,
+    //             &[dir="rtl"] > template + * {
+    //               border-top-left-radius: 0;
+    //               border-bottom-left-radius: 0;
+    //               border-top-right-radius: 9999px;
+    //               border-bottom-right-radius: 9999px;
+    //             }
+    //             [dir="rtl"] & > *:last-child,
+    //             &[dir="rtl"] > *:last-child {
+    //               border-top-left-radius: 9999px;
+    //               border-bottom-left-radius: 9999px;
+    //               border-top-right-radius: 0;
+    //               border-bottom-right-radius: 0;
+    //             }
 
-                & > *:first-child:last-child,
-                & > template + *:last-child {
-                  border-top-left-radius: 9999px !important;
-                  border-bottom-left-radius: 9999px !important;
-                  border-top-right-radius: 9999px !important;
-                  border-bottom-right-radius: 9999px !important;
-                }
+    //             & > *:first-child:last-child,
+    //             & > template + *:last-child {
+    //               border-top-left-radius: 9999px !important;
+    //               border-bottom-left-radius: 9999px !important;
+    //               border-top-right-radius: 9999px !important;
+    //               border-bottom-right-radius: 9999px !important;
+    //             }
 
-              `);
+    //           `);
 
-                if (finalParams.direction === 'vertical') {
-                    vars.push(`
-                    & > *:first-child,
-                    & > template + * {
-                      border-top-left-radius: 9999px !important;
-                      border-bottom-left-radius: 0 !important;
-                      border-top-right-radius: 9999px !important;
-                      border-bottom-right-radius: 0 !important;
-                    }
-                    & > *:last-child {
-                      border-top-left-radius: 0 !important;
-                      border-bottom-left-radius: 9999px !important;
-                      border-top-right-radius: 0 !important;
-                      border-bottom-right-radius: 9999px !important;
-                    }
-                  `);
-                }
+    //             if (finalParams.direction === 'vertical') {
+    //                 vars.push(`
+    //                 & > *:first-child,
+    //                 & > template + * {
+    //                   border-top-left-radius: 9999px !important;
+    //                   border-bottom-left-radius: 0 !important;
+    //                   border-top-right-radius: 9999px !important;
+    //                   border-bottom-right-radius: 0 !important;
+    //                 }
+    //                 & > *:last-child {
+    //                   border-top-left-radius: 0 !important;
+    //                   border-bottom-left-radius: 9999px !important;
+    //                   border-top-right-radius: 0 !important;
+    //                   border-bottom-right-radius: 9999px !important;
+    //                 }
+    //               `);
+    //             }
 
-                break;
-            default:
-                vars.push(`
+    //             break;
+    //         default:
+    //             vars.push(`
 
-                border-radius: sugar.border.radius(ui.tabs.borderRadius);
+    //             border-radius: sugar.border.radius(ui.tabs.borderRadius);
 
-                & > *:first-child,
-                & > template + * {
-                  border-top-left-radius: sugar.border.radius(ui.tabs.borderRadius);
-                  border-bottom-left-radius: sugar.border.radius(ui.tabs.borderRadius);
-                  border-top-right-radius: 0;
-                  border-bottom-right-radius: 0;
-                }
-                & > *:last-child {
-                  border-top-left-radius: 0;
-                  border-bottom-left-radius: 0;
-                  border-top-right-radius: sugar.border.radius(ui.tabs.borderRadius);
-                  border-bottom-right-radius: sugar.border.radius(ui.tabs.borderRadius);
-                }
+    //             & > *:first-child,
+    //             & > template + * {
+    //               border-top-left-radius: sugar.border.radius(ui.tabs.borderRadius);
+    //               border-bottom-left-radius: sugar.border.radius(ui.tabs.borderRadius);
+    //               border-top-right-radius: 0;
+    //               border-bottom-right-radius: 0;
+    //             }
+    //             & > *:last-child {
+    //               border-top-left-radius: 0;
+    //               border-bottom-left-radius: 0;
+    //               border-top-right-radius: sugar.border.radius(ui.tabs.borderRadius);
+    //               border-bottom-right-radius: sugar.border.radius(ui.tabs.borderRadius);
+    //             }
 
-                [dir="rtl"] & > *:first-child,
-                &[dir="rtl"] > *:first-child,
-                [dir="rtl"] & > template + *,
-                &[dir="rtl"] > template + * {
-                  border-top-left-radius: 0;
-                  border-bottom-left-radius: 0;
-                  border-top-right-radius: sugar.border.radius(ui.tabs.borderRadius);
-                  border-bottom-right-radius: sugar.border.radius(ui.tabs.borderRadius);
-                }
-                [dir="rtl"] & > *:last-child,
-                &[dir="rtl"] > *:last-child {
-                  border-top-left-radius: sugar.border.radius(ui.tabs.borderRadius);
-                  border-bottom-left-radius: sugar.border.radius(ui.tabs.borderRadius);
-                  border-top-right-radius: 0;
-                  border-bottom-right-radius: 0;
-                }
+    //             [dir="rtl"] & > *:first-child,
+    //             &[dir="rtl"] > *:first-child,
+    //             [dir="rtl"] & > template + *,
+    //             &[dir="rtl"] > template + * {
+    //               border-top-left-radius: 0;
+    //               border-bottom-left-radius: 0;
+    //               border-top-right-radius: sugar.border.radius(ui.tabs.borderRadius);
+    //               border-bottom-right-radius: sugar.border.radius(ui.tabs.borderRadius);
+    //             }
+    //             [dir="rtl"] & > *:last-child,
+    //             &[dir="rtl"] > *:last-child {
+    //               border-top-left-radius: sugar.border.radius(ui.tabs.borderRadius);
+    //               border-bottom-left-radius: sugar.border.radius(ui.tabs.borderRadius);
+    //               border-top-right-radius: 0;
+    //               border-bottom-right-radius: 0;
+    //             }
 
-                & > *:first-child:last-child,
-                & > template + *:last-child {
-                  border-top-left-radius: sugar.border.radius(ui.tabs.borderRadius) !important;
-                  border-bottom-left-radius: sugar.border.radius(ui.tabs.borderRadius) !important;
-                  border-top-right-radius: sugar.border.radius(ui.tabs.borderRadius) !important;
-                  border-bottom-right-radius: sugar.border.radius(ui.tabs.borderRadius) !important;
-                }
-              `);
+    //             & > *:first-child:last-child,
+    //             & > template + *:last-child {
+    //               border-top-left-radius: sugar.border.radius(ui.tabs.borderRadius) !important;
+    //               border-bottom-left-radius: sugar.border.radius(ui.tabs.borderRadius) !important;
+    //               border-top-right-radius: sugar.border.radius(ui.tabs.borderRadius) !important;
+    //               border-bottom-right-radius: sugar.border.radius(ui.tabs.borderRadius) !important;
+    //             }
+    //           `);
 
-                if (finalParams.direction === 'vertical') {
-                    vars.push(`
-                    & > *:first-child,
-                    & > template + * {
-                      border-top-left-radius: sugar.border.radius(ui.tabs.borderRadius) !important;
-                      border-bottom-left-radius: 0 !important;
-                      border-top-right-radius: sugar.border.radius(ui.tabs.borderRadius) !important;
-                      border-bottom-right-radius: 0 !important;
-                    }
-                    & > *:last-child {
-                      border-top-left-radius: 0 !important;
-                      border-bottom-left-radius: sugar.border.radius(ui.tabs.borderRadius) !important;
-                      border-top-right-radius: 0 !important;
-                      border-bottom-right-radius: sugar.border.radius(ui.tabs.borderRadius) !important;
-                    }
-                  `);
-                }
+    //             if (finalParams.direction === 'vertical') {
+    //                 vars.push(`
+    //                 & > *:first-child,
+    //                 & > template + * {
+    //                   border-top-left-radius: sugar.border.radius(ui.tabs.borderRadius) !important;
+    //                   border-bottom-left-radius: 0 !important;
+    //                   border-top-right-radius: sugar.border.radius(ui.tabs.borderRadius) !important;
+    //                   border-bottom-right-radius: 0 !important;
+    //                 }
+    //                 & > *:last-child {
+    //                   border-top-left-radius: 0 !important;
+    //                   border-bottom-left-radius: sugar.border.radius(ui.tabs.borderRadius) !important;
+    //                   border-top-right-radius: 0 !important;
+    //                   border-bottom-right-radius: sugar.border.radius(ui.tabs.borderRadius) !important;
+    //                 }
+    //               `);
+    //             }
 
-                break;
-        }
-    }
+    //             break;
+    //     }
+    // }
 
     return vars;
 }

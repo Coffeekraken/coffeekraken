@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          switch
- * @namespace     node.mixin.ui.switch
+ * @namespace     node.mixin.ui.form
  * @type               PostcssMixin
  * @interface     ./switch          interface
  * @platform      postcss
@@ -11,14 +11,13 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the switch style to any element
  *
- * @param       {'solid'}                           [style='theme.ui.switch.defaultStyle']         The style you want to generate
- * @param       {'default'|'square'|'pill'}             [shape='theme.ui.switch.defaultShape']         The shape you want to generate
- * @param       {('bare'|'lnf'|'shape')[]}        [scope=['bare', 'lnf', 'shape']]      The scope you want to generate
+ * @param       {'default'}                           [style='theme.ui.form.defaultLnf']         The style you want to generate
+ * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @example     css
  * .my-switch {
- *    @sugar.ui.switch;
+ *    @sugar.ui.form;
  * }
  *
  * @since      2.0.0
@@ -28,32 +27,26 @@ import __STheme from '@coffeekraken/s-theme';
 class postcssSugarPluginUiSwitchMixinInterface extends __SInterface {
     static get _definition() {
         return {
-            style: {
+            lnf: {
                 type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.switch.defaultShape'),
-            },
-            shape: {
-                type: 'String',
-                values: ['default', 'square', 'pill'],
-                default: __STheme.get('ui.switch.defaultShape'),
+                values: ['default'],
+                default: __STheme.get('ui.form.defaultLnf'),
             },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'shape'],
-                default: ['bare', 'lnf', 'shape'],
+                values: ['bare', 'lnf'],
+                default: ['bare', 'lnf'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiSwitchMixinParams {
-    style: 'solid';
-    shape: 'default' | 'square' | 'pill';
-    scope: ('bare' | 'lnf' | 'shape')[];
+    lnf: 'default';
+    scope: ('bare' | 'lnf')[];
 }
 
 export { postcssSugarPluginUiSwitchMixinInterface as interface };
@@ -68,9 +61,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiSwitchMixinParams = {
-        style: 'solid',
-        shape: 'default',
-        scope: ['bare', 'lnf', 'shape'],
+        lnf: 'default',
+        scope: ['bare', 'lnf'],
         ...params,
     };
 
@@ -171,18 +163,18 @@ export default function ({
     `);
     }
 
-    switch (finalParams.style) {
-        case 'solid':
+    switch (finalParams.lnf) {
+        default:
             if (finalParams.scope.indexOf('lnf') !== -1) {
                 vars.push(`
         
                     font-size: sugar.scalable(0.8rem);        
                     background: var(--track-color-inactive);
 
-                    border: sugar.color(current, border) solid sugar.theme(ui.switch.borderWidth);
+                    border: sugar.color(current, border) default sugar.theme(ui.form.borderWidth);
                     outline-offset: 5px;
                     
-                    transition: sugar.theme(ui.switch.transition);
+                    transition: sugar.theme(ui.form.transition);
 
                     &:checked {
                         &::before {
@@ -198,13 +190,13 @@ export default function ({
                         background: var(--thumb-color-inactive);
                         box-shadow: 0 0 0 var(--highlight-size) var(--thumb-color-highlight);
                         transform: translateX(var(--thumb-position));
-                        transition: sugar.theme(ui.switch.transition);
+                        transition: sugar.theme(ui.form.transition);
                     }
 
                     &::after {
                         background: rgba(255,255,25,0);
                         box-shadow: 0;
-                        transition: sugar.theme(ui.switch.transition);
+                        transition: sugar.theme(ui.form.transition);
                     }
 
                     &:not(:disabled):hover::before {
@@ -222,41 +214,6 @@ export default function ({
             }
 
             break;
-    }
-
-    if (finalParams.scope.includes('shape')) {
-        switch (finalParams.shape) {
-            case 'square':
-                vars.push(`
-                    border-radius: 0;
-
-                    &:after,
-                    &:before {
-                        border-radius: 0;
-                    }
-                `);
-                break;
-            case 'pill':
-                vars.push(`
-                    border-radius: 9999px;
-
-                    &:after,
-                    &:before {
-                        border-radius: 9999px;
-                    }
-                `);
-                break;
-            default:
-                vars.push(`
-                    border-radius: sugar.border.radius(ui.switch.borderRadius);
-
-                    &:after,
-                    &:before {
-                        border-radius: sugar.border.radius(ui.switch.borderRadius);
-                    }
-                `);
-                break;
-        }
     }
 
     return vars;

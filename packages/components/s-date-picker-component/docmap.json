@@ -3,12 +3,10 @@
     "extends": [],
     "generated": {
         "extends": [
-            "01-basic",
-            "02-basic",
             "@coffeekraken/cli",
-            "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-asset-picker-component",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
@@ -19,6 +17,7 @@
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
+            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
@@ -48,13 +47,16 @@
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-glob",
+            "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
@@ -71,6 +73,9 @@
             "@coffeekraken/s-request",
             "@coffeekraken/s-scroll-component",
             "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
             "@coffeekraken/s-state",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
@@ -440,12 +445,26 @@
                     "definition": {
                         "name": {
                             "description": "Specify the name that will be assigned to the injected input if you don't provide one yourself",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "color"
                         },
                         "value": {
                             "description": "Specify the initial value for your picker",
-                            "type": "String"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            }
                         },
                         "updateInput": {
                             "description": "Specify when you want to updat the attached input. Can be \"pointermove\", \"pointerup\", \"pointerdown\", \"input\", \"validate\", \"close\"",
@@ -472,24 +491,52 @@
                         },
                         "format": {
                             "description": "Specify the format of the color you want as end in the input value. Can be \"hex\", \"hexa\", \"rgb\", \"rgba\", \"hsl\" or \"hsla\"",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "YYYY-MM-DD"
                         },
                         "inline": {
                             "description": "Specify if you want to initalize the color picker inline or if you want it to be displayed only when the focus is in the input",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false,
                             "physical": true
                         },
                         "calendar": {
                             "description": "Specify if you want to display a calendar or not",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false,
                             "physical": true
                         },
                         "i18n": {
                             "description": "Specify some translations for the color picker. You can translate the \"reset\", \"clear\" and \"validate\" buttons",
-                            "type": "Object",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
                             "default": {
                                 "reset": "Reset",
                                 "clear": "Clear",
@@ -512,43 +559,99 @@
                         },
                         "placeholder": {
                             "description": "Specify the placeholder that will be assigned to the injected input if you don't provide one yourself",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "Select a color"
                         },
                         "input": {
                             "description": "Specify if you dont want an automatically injected text input when you dont provide yours",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "button": {
                             "description": "Specify if you want to display the button or not",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false,
                             "physical": true
                         },
                         "floatSettings": {
                             "description": "Specify some float settings to pass to the \"makeFloat\" function of the sugar toolkit",
-                            "type": "Object",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
                             "default": {}
                         },
                         "copyIconClass": {
                             "description": "Specify the class you want to apply on the \"i\" that display the \"copy\" icon",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "s-icon s-icon--copy"
                         },
                         "copiedIconClass": {
                             "description": "Specify the class you want to apply on the \"i\" that display the \"copy\" icon when the color has been copied",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "s-icon s-icon--copied"
                         },
                         "buttonIconClass": {
                             "description": "Specify the class you want to apply on the injected button icon",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "s-icon s-icon--color"
                         },
                         "backdropClass": {
                             "description": "Specify the class to apply on the backdrop when the \"backdrop\" prop is true",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "s-backdrop"
                         },
                         "disable": {
@@ -564,12 +667,26 @@
                         },
                         "disabled": {
                             "description": "Specify if the color picker is disabled",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "backdrop": {
                             "description": "Specify if you want the \".s-backdrop\" element or not",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "actions": {
@@ -593,7 +710,17 @@
                         },
                         "hours": {
                             "description": "Specify the hours you want in the time selector",
-                            "type": "Array<Number>",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Array",
+                                        "of": [
+                                            "Number"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Array<Number>"
+                            },
                             "default": [
                                 0,
                                 1,
@@ -623,7 +750,17 @@
                         },
                         "minutes": {
                             "description": "Specify the minutes you want in the time selector",
-                            "type": "Array<Number>",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Array",
+                                        "of": [
+                                            "Number"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Array<Number>"
+                            },
                             "default": [
                                 0,
                                 5,
@@ -641,12 +778,26 @@
                         },
                         "fromYear": {
                             "description": "Specify the first year to allow selection from",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 1922
                         },
                         "toYear": {
                             "description": "Specify the last year to allow selection from",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 2122
                         }
                     }
@@ -688,12 +839,26 @@
                     "definition": {
                         "name": {
                             "description": "Specify the name that will be assigned to the injected input if you don't provide one yourself",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "color"
                         },
                         "value": {
                             "description": "Specify the initial value for your picker",
-                            "type": "String"
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            }
                         },
                         "updateInput": {
                             "description": "Specify when you want to updat the attached input. Can be \"pointermove\", \"pointerup\", \"pointerdown\", \"input\", \"validate\", \"close\"",
@@ -720,24 +885,52 @@
                         },
                         "format": {
                             "description": "Specify the format of the color you want as end in the input value. Can be \"hex\", \"hexa\", \"rgb\", \"rgba\", \"hsl\" or \"hsla\"",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "YYYY-MM-DD"
                         },
                         "inline": {
                             "description": "Specify if you want to initalize the color picker inline or if you want it to be displayed only when the focus is in the input",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false,
                             "physical": true
                         },
                         "calendar": {
                             "description": "Specify if you want to display a calendar or not",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false,
                             "physical": true
                         },
                         "i18n": {
                             "description": "Specify some translations for the color picker. You can translate the \"reset\", \"clear\" and \"validate\" buttons",
-                            "type": "Object",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
                             "default": {
                                 "reset": "Reset",
                                 "clear": "Clear",
@@ -760,43 +953,99 @@
                         },
                         "placeholder": {
                             "description": "Specify the placeholder that will be assigned to the injected input if you don't provide one yourself",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "Select a color"
                         },
                         "input": {
                             "description": "Specify if you dont want an automatically injected text input when you dont provide yours",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "button": {
                             "description": "Specify if you want to display the button or not",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false,
                             "physical": true
                         },
                         "floatSettings": {
                             "description": "Specify some float settings to pass to the \"makeFloat\" function of the sugar toolkit",
-                            "type": "Object",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
                             "default": {}
                         },
                         "copyIconClass": {
                             "description": "Specify the class you want to apply on the \"i\" that display the \"copy\" icon",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "s-icon s-icon--copy"
                         },
                         "copiedIconClass": {
                             "description": "Specify the class you want to apply on the \"i\" that display the \"copy\" icon when the color has been copied",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "s-icon s-icon--copied"
                         },
                         "buttonIconClass": {
                             "description": "Specify the class you want to apply on the injected button icon",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "s-icon s-icon--color"
                         },
                         "backdropClass": {
                             "description": "Specify the class to apply on the backdrop when the \"backdrop\" prop is true",
-                            "type": "String",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
                             "default": "s-backdrop"
                         },
                         "disable": {
@@ -812,12 +1061,26 @@
                         },
                         "disabled": {
                             "description": "Specify if the color picker is disabled",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "backdrop": {
                             "description": "Specify if you want the \".s-backdrop\" element or not",
-                            "type": "Boolean",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
                             "default": false
                         },
                         "actions": {
@@ -841,7 +1104,17 @@
                         },
                         "hours": {
                             "description": "Specify the hours you want in the time selector",
-                            "type": "Array<Number>",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Array",
+                                        "of": [
+                                            "Number"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Array<Number>"
+                            },
                             "default": [
                                 0,
                                 1,
@@ -871,7 +1144,17 @@
                         },
                         "minutes": {
                             "description": "Specify the minutes you want in the time selector",
-                            "type": "Array<Number>",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Array",
+                                        "of": [
+                                            "Number"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Array<Number>"
+                            },
                             "default": [
                                 0,
                                 5,
@@ -889,12 +1172,26 @@
                         },
                         "fromYear": {
                             "description": "Specify the first year to allow selection from",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 1922
                         },
                         "toYear": {
                             "description": "Specify the last year to allow selection from",
-                            "type": "Number",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
                             "default": 2122
                         }
                     }

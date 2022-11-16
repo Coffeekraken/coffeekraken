@@ -12,16 +12,13 @@ import __faker from 'faker';
  *
  * Generate the checkbox classes
  *
- * @param       {('solid')[]}                           [styles=['solid']]         The style(s) you want to generate
- * @param       {('default'|'square'|'circle')[]}             [shape=['default','square','circle']]         The shape(s) you want to generate
- * @param       {'solid'}                [defaultStyle='theme.ui.button.defaultStyle']           The default style you want
- * @param       {'default'|'square'|'circle'}        [defaultShape='theme.ui.button.defaultShape']           The default shape you want
- * @param       {String}                            [defaultColor=theme.ui.button.defaultColor]            The default color you want
- * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
+ * @param       {('default')[]}                           [lnfs=['default']]         The style(s) you want to generate
+ * @param       {'default'}                [defaultLnf='theme.ui.form.defaultLnf']           The default style you want
+ * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
  * @example       css
- * \@sugar.ui.checkbox.classes();
+ * \@sugar.ui.form.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -30,60 +27,35 @@ import __faker from 'faker';
 class postcssSugarPluginUiCheckboxClassesInterface extends __SInterface {
     static get _definition() {
         return {
-            styles: {
+            lnfs: {
                 type: 'String[]',
-                values: ['solid'],
-                default: ['solid'],
+                values: ['default'],
+                default: ['default'],
             },
-            shapes: {
-                type: 'String[]',
-                values: ['default', 'square', 'circle'],
-                default: ['default', 'square', 'circle'],
-            },
-            defaultStyle: {
+            defaultLnf: {
                 type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.checkbox.defaultStyle'),
-            },
-            defaultShape: {
-                type: 'String',
-                values: ['default', 'square', 'circle'],
-                default: __STheme.get('ui.checkbox.defaultShape'),
-            },
-            defaultColor: {
-                type: 'String',
-                values: Object.keys(__STheme.get('color')),
-                default: __STheme.get('ui.checkbox.defaultColor'),
+                values: ['default'],
+                default: __STheme.get('ui.form.defaultLnf'),
             },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'shape', 'tf', 'vr'],
-                default: ['bare', 'lnf', 'shape', 'tf', 'vr'],
+                values: ['bare', 'lnf', 'tf', 'vr'],
+                default: ['bare', 'lnf', 'tf', 'vr'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiCheckboxClassesParams {
-    styles: 'solid'[];
-    shapes: ('default' | 'square' | 'circle')[];
-    defaultStyle: 'solid';
-    defaultShape: 'default' | 'square' | 'circle';
-    defaultColor: string;
-    scope: ('bare' | 'lnf' | 'shape' | 'tf' | 'vr')[];
+    lnfs: 'default'[];
+    defaultLnf: 'default';
+    scope: ('bare' | 'lnf' | 'tf' | 'vr')[];
 }
 
 export { postcssSugarPluginUiCheckboxClassesInterface as interface };
-
-import { __dirname } from '@coffeekraken/sugar/fs';
-export function dependencies() {
-    return {
-        files: [`${__dirname()}/checkbox.js`],
-    };
-}
 
 export default function ({
     params,
@@ -97,11 +69,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiCheckboxClassesParams = {
-        styles: ['solid'],
-        shapes: ['default', 'square', 'circle'],
-        defaultStyle: 'solid',
-        defaultShape: 'default',
-        defaultColor: 'main',
+        lnfs: ['default'],
+        defaultLnf: 'default',
         scope: [],
         ...params,
     };
@@ -128,31 +97,24 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
-        ${finalParams.styles
-            .map((style) => {
+        ${finalParams.lnfs
+            .map((lnf) => {
                 return ` * @cssClass     s-checkbox${
-                    style === finalParams.defaultStyle ? '' : `:${style}`
-                }           Apply the ${style} checkbox style`;
-            })
-            .join('\n')}
-        ${finalParams.shapes
-            .map((shape) => {
-                return ` * @cssClass     s-checkbox${
-                    shape === finalParams.defaultShape ? '' : `:${shape}`
-                }           Apply the ${shape} checkbox shape`;
+                    lnf === finalParams.defaultLnf ? '' : `:${lnf}`
+                }           Apply the ${lnf} checkbox lnf`;
             })
             .join('\n')}
         * 
-        ${finalParams.styles
-            .map((style) => {
-                return ` * @example        html       ${style}
+        ${finalParams.lnfs
+            .map((lnf) => {
+                return ` * @example        html       ${lnf}
             *   <label class="s-mbe:30 s-label">
             *     ${__faker.name.title()} ${__faker.name.findName()}
-            *     <input type="checkbox" checked class="s-checkbox" name="checkbox-style-${style}-1" value="hello 1" />
+            *     <input type="checkbox" checked class="s-checkbox" name="checkbox-lnf-${lnf}-1" value="hello 1" />
             *   </label>
             *   <label class="s-mbe:30 s-label">
             *     <span>I'm disabled</span>
-            *     <input type="checkbox" disabled class="s-checkbox s-color:accent" name="checkbox-style-${style}-3" value="hello 3" />
+            *     <input type="checkbox" disabled class="s-checkbox s-color:accent" name="checkbox-lnf-${lnf}-3" value="hello 3" />
             *   </label>
             * `;
             })
@@ -171,21 +133,6 @@ export default function ({
         *     <span>I'm disabled</span>
         *     <input type="checkbox" disabled class="s-checkbox s-color:error" name="checkbox-style-color-4" value="hello 4" />
         *   </label>
-        * 
-        ${finalParams.shapes
-            .map((shape) => {
-                return ` * @example        html       ${shape}
-            *   <label class="s-mbe:30 s-label">
-            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
-            *     <input type="checkbox" checked class="s-checkbox:${shape}" name="checkbox-shape-${shape}-1" value="hello 1" />
-            *   </label>
-            *   <label class="s-mbe:30 s-label">
-            *     <span>I'm disabled</span>
-            *     <input type="checkbox" disabled class="s-checkbox:${shape}" name="checkbox-shape-${shape}-3" value="hello 3" />
-            *   </label>
-            * `;
-            })
-            .join('\n')}
         * 
         * @example          html        RTL
         * <div dir="rtl">
@@ -254,10 +201,10 @@ export default function ({
         );
     }
 
-    finalParams.styles.forEach((style) => {
+    finalParams.lnfs.forEach((lnf) => {
         let cls = `s-checkbox`;
-        if (style !== finalParams.defaultStyle) {
-            cls += `--${style}`;
+        if (lnf !== finalParams.defaultLnf) {
+            cls += `--${lnf}`;
         }
 
         vars.comment(
@@ -266,17 +213,17 @@ export default function ({
         * @namespace          sugar.style.ui.checkbox
         * @type           CssClass
         * 
-        * This class represent a(n) "<s-color="accent">${style}</s-color>" checkbox
+        * This class represent a(n) "<s-color="accent">${lnf}</s-color>" checkbox
         * 
         * @example        html
         * <input type="checkbox" class="s-checkbox${
-            style === finalParams.defaultStyle ? '' : `:${style}`
+            lnf === finalParams.defaultLnf ? '' : `:${lnf}`
         }" value="something" name="mycheckboxItem1" />
         * <input type="checkbox" class="s-checkbox${
-            style === finalParams.defaultStyle ? '' : `:${style}`
+            lnf === finalParams.defaultLnf ? '' : `:${lnf}`
         }" value="something" name="mycheckboxItem2" />
         <input type="checkbox" class="s-checkbox${
-            style === finalParams.defaultStyle ? '' : `:${style}`
+            lnf === finalParams.defaultLnf ? '' : `:${lnf}`
         }" value="something" name="mycheckboxItem3" />
         * 
         * @since    2.0.0
@@ -286,7 +233,7 @@ export default function ({
         ).code(
             `
         .${cls} {
-            @sugar.ui.checkbox($style: ${style}, $scope: lnf);
+            @sugar.ui.checkbox($lnf: ${lnf}, $scope: lnf);
         }
         `,
             {
@@ -294,61 +241,6 @@ export default function ({
             },
         );
     });
-
-    if (finalParams.scope.includes('shape')) {
-        finalParams.shapes.forEach((shape) => {
-            let cls = `s-checkbox`;
-            if (shape !== finalParams.defaultShape) {
-                cls += `--${shape}`;
-            }
-
-            vars.comment(
-                () => `/**
-                * @name           ${cls}
-                * @namespace          sugar.style.ui.checkbox
-                * @type           CssClass
-                * 
-                * This class represent a(n) "<s-color="accent">${shape}</s-color>" checkbox
-                * 
-                * @example        html
-                * <input type="checkbox" class="s-checkbox${
-                    shape === finalParams.defaultShape ? '' : `:${shape}`
-                }" value="something" name="mycheckboxItem1" />
-                * <input type="checkbox" class="s-checkbox${
-                    shape === finalParams.defaultShape ? '' : `:${shape}`
-                }" value="something" name="mycheckboxItem2" />
-                <input type="checkbox" class="s-checkbox${
-                    shape === finalParams.defaultShape ? '' : `:${shape}`
-                }" value="something" name="mycheckboxItem3" />
-                * 
-                * @since    2.0.0
-                * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-            */
-           `,
-            ).code(
-                `
-            .${cls} {
-                @sugar.ui.checkbox($shape: ${shape}, $scope: shape);
-            }
-        `,
-                {
-                    type: 'CssClass',
-                },
-            );
-        });
-    }
-
-    // default color
-    if (finalParams.scope.includes('lnf')) {
-        vars.code(
-            () => `
-            .s-checkbox:not(.s-color) {
-                @sugar.color(${finalParams.defaultColor});
-            }
-        `,
-            { type: 'CssClass' },
-        );
-    }
 
     if (finalParams.scope.indexOf('tf') !== -1) {
         vars.comment(
@@ -413,7 +305,7 @@ export default function ({
             @sugar.rhythm.vertical {
                 input[type="checkbox"], .s-checkbox {
                     ${__STheme.jsObjectToCssProperties(
-                        __STheme.get('ui.checkbox.rhythmVertical'),
+                        __STheme.get('ui.form.rhythmVertical'),
                     )}
                 } 
             }

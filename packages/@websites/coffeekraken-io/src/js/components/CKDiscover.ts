@@ -47,7 +47,11 @@ export default class CKDiscover extends __SLitComponent {
         const newMap = __filterObject(this._docmap.map, (key, item) => {
             if (!item.platform) return false;
             if (!item.example?.[0]?.code) return false;
-            if (item.platform[0].name !== this.props.platform) return false;
+            if (
+                this.props.platform &&
+                item.platform[0].name !== this.props.platform
+            )
+                return false;
             return true;
         });
 

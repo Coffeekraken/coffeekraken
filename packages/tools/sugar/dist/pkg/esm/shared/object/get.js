@@ -23,7 +23,7 @@ import __unquote from '../string/unquote';
  *
  * @example             js
  * import { __get } from '@coffeekraken/sugar/object';
- * __get('myObject.cool.value'); // => 'Hello world'
+ * __get(myObject, 'my.cool.value'); // => 'Hello world'
  *
  * @since     2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

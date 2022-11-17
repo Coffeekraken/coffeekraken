@@ -1,52 +1,52 @@
 /* @sugar.partial (opensource) { */
 @keyframes opensource-animation {
-  0% {
-    padding: 20px 10px;
-    opacity: 1;
-    transform: translate(150px, 0) rotateZ(10deg) scale(1);
-  }
-  50% {
-    opacity: 0.2;
-    transform: translate(50px, 0) scale(1.2);
-  }
-  100% {
-    padding: 20px 30px;
-    opacity: 0;
-    transform: translate(-150px, 0) rotateZ(-180deg) scale(0.5);
-  }
+    0% {
+        padding: 20px 10px;
+        opacity: 1;
+        transform: translate(150px, 0) rotateZ(10deg) scale(1);
+    }
+    50% {
+        opacity: 0.2;
+        transform: translate(50px, 0) scale(1.2);
+    }
+    100% {
+        padding: 20px 30px;
+        opacity: 0;
+        transform: translate(-150px, 0) rotateZ(-180deg) scale(0.5);
+    }
 }
 
 #features-opensource {
-  .__illustration svg {
-    height: 450px;
+    .__illustration svg {
+        height: 450px;
 
-    @sugar.media mobile {
-      height: auto;
-      width: 100%;
-      margin-block-end: sugar.margin(20);
-    }
-  }
-
-  .__box {
-    position: relative;
-    background: sugar.color(main, surface);
-    /* @sugar.depth (100); */
-
-    @sugar.theme.when dark {
-      @sugar.depth (100);
-      /* background: sugar.color(main, background, --lighten 5%); */
-      background-image: linear-gradient(
-        -45deg,
-        sugar.color(base, surface, --alpha 0),
-        sugar.color(base, --alpha 0.2)
-      );
+        @sugar.media mobile {
+            height: auto;
+            width: 100%;
+            margin-block-end: sugar.margin(20);
+        }
     }
 
-    @sugar.media mobile {
-      margin-top: 0;
-    }
+    .__box {
+        position: relative;
+        background: sugar.color(main, surface);
+        /* @sugar.depth (100); */
 
-    &:before,
+        @sugar.theme.when dark {
+            @sugar.depth (100);
+            /* background: sugar.color(main, background, --lighten 5%); */
+            background-image: linear-gradient(
+                -45deg,
+                sugar.color(base, surface, --alpha 0),
+                sugar.color(base, --alpha 0.2)
+            );
+        }
+
+        @sugar.media mobile {
+            margin-top: 0;
+        }
+
+        /* &:before,
     &:after {
       content: '';
       display: block;
@@ -73,7 +73,7 @@
       &:after {
         right: sugar.margin(30);
       }
+    } */
     }
-  }
 }
 /* } */

@@ -4,17 +4,29 @@
 
         <div s-slider-slide>
 
-            <div class="__content">
+            <div class="__content s-layout:12 s-gap:100">
 
                 <div>
                     @include('pages.homepage.welcome.partials.content')
                 </div>
 
+                <div class="__discovers">
+                    <div class="__discover-01">
+                        <ck-discover-welcome></ck-discover-welcome>
+                    </div>
+                    <div class="__discover-03">
+                        <ck-discover-welcome></ck-discover-welcome>
+                    </div>
+                    <div class="__discover-02">
+                        <ck-discover-welcome></ck-discover-welcome>
+                    </div>
+                </div>
 
-                <i class="s-icon:file-js __icon-1"></i>
+
+                {{-- <i class="s-icon:file-js __icon-1"></i>
                 <i class="s-icon:file-ts __icon-2"></i>
                 <i class="s-icon:file-css __icon-3"></i>
-                <i class="s-icon:file-md __icon-4"></i>
+                <i class="s-icon:file-md __icon-4"></i> --}}
 
                 {{-- <i class="__icon-1 s-icon:calendar s-tc:complementary s-font:80"></i>
                 <i class="__icon-2 s-icon:color s-tc:accent s-font:80"></i>

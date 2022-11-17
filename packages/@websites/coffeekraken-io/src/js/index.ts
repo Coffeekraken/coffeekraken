@@ -18,6 +18,7 @@ import { define as __STemplateFeatureDefine } from '@coffeekraken/s-template-fea
 // Website specific
 import { define as __CKDiscoverComponent } from './components/CKDiscover';
 import { define as __CKDiscoverTabedComponent } from './components/CKDiscoverTabed';
+import { define as __CKDiscoverWelcomeComponent } from './components/CKDiscoverWelcome';
 import { define as __CKSearchComponent } from './components/CKSearch';
 import { define as __CKSettingsComponent } from './components/CkSettings';
 // import { define as __CKRatingsComponent } from './components/CKRating';
@@ -104,6 +105,7 @@ const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
   __CKSearchComponent();
   __CKSettingsComponent();
   __CKDiscoverComponent();
+  __CKDiscoverWelcomeComponent();
   __CKDiscoverTabedComponent();
 
   // dashboard

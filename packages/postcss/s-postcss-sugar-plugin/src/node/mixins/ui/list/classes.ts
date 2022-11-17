@@ -99,6 +99,13 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
+        * @install          css
+        * \\@sugar.ui.list.classes;
+        * 
+        * .my-list {
+        *   \\@sugar.ui.list;
+        * }
+        * 
         ${finalParams.lnfs
             .map((lnf) => {
                 return ` * @cssClass     s-list${

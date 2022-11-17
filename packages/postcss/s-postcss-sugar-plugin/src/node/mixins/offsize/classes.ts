@@ -71,6 +71,9 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
+        * @install          css
+        * \\@sugar.offsize.classes;
+        * 
         ${offsizeKeys
             .map((spaceName) => {
                 if (spaceName === 'default') return '';

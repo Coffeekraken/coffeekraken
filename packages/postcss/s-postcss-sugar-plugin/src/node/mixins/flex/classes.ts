@@ -59,10 +59,13 @@ export default function ({
         * These classes allows you to apply some flex attributes on any HTMLElement and with
         * that you can **create some layouts directly in your HTML**.
         * 
-        * @support      chromium
-        * @support      firefox
-        * @support      safari
-        * @support      edge
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.flex.classes;
         * 
         * @cssClass                 s-flex              Apply a display "flex" on any HTMLElement
         * @cssClass                 s-flex:row          Apply the flex direction to "row"

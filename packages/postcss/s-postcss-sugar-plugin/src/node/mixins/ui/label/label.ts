@@ -78,6 +78,11 @@ export default function ({
             order: -1;
             cursor: pointer;
           }
+
+          &[disabled] {
+            @sugar.disabled();
+          }
+
     `);
 
         switch (finalParams.lnf) {

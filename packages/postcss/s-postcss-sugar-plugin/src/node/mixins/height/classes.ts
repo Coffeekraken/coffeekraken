@@ -62,10 +62,13 @@ export default function ({
         * These classes allows to apply some height to any HTMLElement.
         * These widths are defined in the \`theme.height\` theme settings.
         * 
-        * @support      chromium
-        * @support      firefox
-        * @support      safari
-        * @support      edge
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.height.classes; 
         * 
         ${Object.keys(heightObj).map((height) => {
             return ` * @cssClass             s-height:${height}            Apply the \`${height}\` height`;

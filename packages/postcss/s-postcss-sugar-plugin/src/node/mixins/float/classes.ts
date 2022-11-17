@@ -57,10 +57,13 @@ export default function ({
         * 
         * These classes allows you to apply some float styling into your html.
         * 
-        * @support      chromium
-        * @support      firefox
-        * @support      safari
-        * @support      edge
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.float.classes;
         * 
         * @cssClass     s-float:left         Apply the left float style
         * @cssClass     s-float:right         Apply the right float style

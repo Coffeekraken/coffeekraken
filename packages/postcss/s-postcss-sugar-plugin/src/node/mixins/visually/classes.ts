@@ -57,10 +57,17 @@ export default function ({
         * 
         * These classes allows you to apply a visually style on any HTMLElement
         * 
-        * @support      chromium
-        * @support      firefox
-        * @support      safari
-        * @support      edge
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.visually.classes;
+        * 
+        * .my-element {
+        *   \\@sugar.visually.hidden;
+        * } 
         * 
         * @cssClass         s-visually:hidden             Make the element hidden in the ui
         * @cssClass         s-visually:visible            Make the element visible in the ui

@@ -96,6 +96,13 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
+        * @install          css
+        * \\@sugar.ui.table.classes;
+        * 
+        * .my-table {
+        *   \\@sugar.ui.table;
+        * }
+        * 
         ${finalParams.lnfs
             .map((lnf) => {
                 return ` * @cssClass     s-table${

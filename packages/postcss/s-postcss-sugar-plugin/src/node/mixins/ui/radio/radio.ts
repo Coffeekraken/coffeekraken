@@ -97,10 +97,11 @@ export default function ({
                 vars.push(`
                 
                     transition: sugar.theme(ui.form.transition);
-                    border: sugar.theme(ui.form.borderWidth) default sugar.color(current);
+                    border: sugar.theme(ui.form.borderWidth) solid sugar.color(current);
                     background-color: transparent;
                     transition: sugar.theme(ui.form.transition);
                     box-shadow: 0 0 0 0 sugar.color(current, --alpha 0.2);
+                    border-radius: 999px;
 
                     &:after {
                         content: '';

@@ -62,10 +62,18 @@ export default function ({
         * 
         * These classes allows you to apply border radius on any HTMLElement
         * 
-        * @support      chromium        
-        * @support      firefox         
-        * @support      safari          
-        * @support      edge           
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.border.classes;
+        * 
+        * .my-element {
+        *   \\@sugar.border.radius(40);
+        *   \\@sugar.border.width(10);
+        * }         
         * 
         * @cssClass             s-radius            Apply the default border radius to any HTMLElement
         ${radiusesKeys

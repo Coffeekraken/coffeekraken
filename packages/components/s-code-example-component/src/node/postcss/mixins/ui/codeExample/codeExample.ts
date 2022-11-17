@@ -97,8 +97,6 @@ export default function ({
     `);
     }
 
-    console.log(finalParams);
-
     // lnf
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
@@ -107,8 +105,6 @@ export default function ({
         switch (finalParams.style) {
             case 'solid':
             default:
-                console.log('COCOOCC');
-
                 vars.push(`
 
 

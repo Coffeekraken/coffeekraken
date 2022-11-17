@@ -88,18 +88,6 @@ export default class SColorPickerComponentInterface extends __SInterface {
                 type: 'String',
                 default: 'Select a color',
             },
-            input: {
-                description:
-                    'Specify if you dont want an automatically injected text input when you dont provide yours',
-                type: 'Boolean',
-                default: false,
-            },
-            button: {
-                description: 'Specify if you want to display the button or not',
-                type: 'Boolean',
-                default: false,
-                physical: true,
-            },
             backdrop: {
                 description:
                     'Specify if you want the ".s-backdrop" element or not',

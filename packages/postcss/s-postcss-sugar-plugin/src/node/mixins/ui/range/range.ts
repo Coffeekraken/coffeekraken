@@ -72,7 +72,7 @@ export default function ({
 
         --focus-spread: sugar.theme(ui.outline.borderWidth);
 
-        --thumb-radius: 50%;
+        --thumb-radius: sugar.border.radius(ui.form.borderRadius);
         --thumb-height: 1em;
         --thumb-width: 1em;
         --thumb-border-width: sugar.theme(ui.form.borderWidth);

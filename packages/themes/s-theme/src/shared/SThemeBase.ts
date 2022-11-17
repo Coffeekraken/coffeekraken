@@ -55,6 +55,11 @@ export interface ISThemeUi {
     [key: string]: any;
 }
 
+export interface ISThemeGetSettings {
+    preventThrow: boolean;
+    defaultFallback: boolean;
+}
+
 export interface ISThemeMediaQuery {
     'min-width'?: string | number;
     'max-width'?: string | number;
@@ -470,7 +475,13 @@ export default class SThemeBase extends __SEventEmitter {
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static cssVar(dotPath: string, fallback = true): string {
-        let fb = this.getTheme().get(dotPath);
+        // get the theme instance
+        const theme = this.getTheme();
+
+        // proxy non existint dotPath
+        dotPath = theme.proxyNonExistingUiDotpath(dotPath);
+
+        let fb = theme.get(dotPath);
         if (!fallback || (typeof fb === 'string' && fb.includes(','))) fb = 0;
 
         const v = `var(${__compressVarName(
@@ -1174,7 +1185,9 @@ export default class SThemeBase extends __SEventEmitter {
      */
     static getSafe(dotPath: string, theme?: string, variant?: string): any {
         const instance = this.getTheme(theme, variant);
-        return instance.get(dotPath, true);
+        return instance.get(dotPath, {
+            preventThrow: true,
+        });
     }
 
     /**
@@ -1257,6 +1270,34 @@ export default class SThemeBase extends __SEventEmitter {
     }
 
     /**
+     * @name          proxyNonExistingUiDotpath
+     * @type          Function
+     *
+     * This method alloes you to get the actual dotpath for the passed one.
+     * If you try to get "ui.range.borderRadius" and that this config does not exists in the
+     * themeUi file(s), it will fallback to "ui.default.borderRadius"
+     *
+     * @param         {String}        dotPath         The dot path of the config you want to get
+     * @return        {String}                           The actual correct dotpath
+     *
+     * @since         2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    proxyNonExistingUiDotpath(dotPath: string): string {
+        // try to get the value
+        let value = __get(this._config, dotPath);
+
+        // if the dotpath starts with "ui...." and that we don't have
+        // a value for now, try to get the value from "ui.default..." instead
+        if (value === undefined && dotPath.match(/^ui\.[a-zA-Z0-9]+\./)) {
+            dotPath = dotPath.replace(/^ui\.[a-zA-Z0-9]+\./, 'ui.default.');
+        }
+
+        // return the dotPath
+        return dotPath;
+    }
+
+    /**
      * @name          get
      * @type          Function
      *
@@ -1284,17 +1325,20 @@ export default class SThemeBase extends __SEventEmitter {
         );
         return this._cachedConfig;
     }
-    get(dotPath, preventThrow: boolean = false): any {
-        let value = __get(this._config, dotPath);
+    get(dotPath, settings: Partial<ISThemeGetSettings> = {}): any {
+        const finalSettings: ISThemeGetSettings = __deepMerge(
+            {
+                preventThrow: false,
+                defaultFallback: true,
+            },
+            settings,
+        );
 
-        // if the dotpath starts with "ui...." and that we don't have
-        // a value for now, try to get the value from "ui.default..." instead
-        if (value === undefined && dotPath.match(/^ui\.[a-zA-Z0-9]+\./)) {
-            value = __get(
-                this._config,
-                dotPath.replace(/^ui\.[a-zA-Z0-9]+\./, 'ui.default.'),
-            );
-        }
+        // proxy non existing ui configs
+        dotPath = this.proxyNonExistingUiDotpath(dotPath);
+
+        // get the value
+        let value = __get(this._config, dotPath);
 
         if (value && dotPath === 'media') {
             // sort the media requested
@@ -1302,7 +1346,7 @@ export default class SThemeBase extends __SEventEmitter {
             value = this.constructor.sortMedia(value);
         }
 
-        if (value === undefined && !preventThrow) {
+        if (value === undefined && !finalSettings.preventThrow) {
             throw new Error(
                 `<red>[${this.constructor.name}]</red> Sorry but the requested "<yellow>${this.id}</yellow>" theme config "<cyan>${dotPath}</cyan>" does not exists...`,
             );

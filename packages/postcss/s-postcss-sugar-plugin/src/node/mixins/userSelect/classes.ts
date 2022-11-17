@@ -59,10 +59,13 @@ export default function ({
         * 
         * These classes allows you to apply some user-select style on any HTMLElement
         * 
-        * @support      chromium
-        * @support      firefox
-        * @support      safari
-        * @support      edge
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.userSelect.classes;
         * 
         * @cssClass         s-user-select:all             Apply the \`user-select\` to \`all\`
         * @cssClass         s-user-select:auto             Apply the \`user-select\` to \`auto\`

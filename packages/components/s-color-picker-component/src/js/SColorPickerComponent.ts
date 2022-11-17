@@ -38,8 +38,6 @@ export interface ISColorPickerComponentProps {
     )[];
     format: 'hex' | 'hexa' | 'rgb' | 'rgba' | 'hsl' | 'hsla';
     inline: boolean;
-    input: boolean;
-    button: boolean;
     eyeDropper: boolean;
     actions: ('clear' | 'reset' | 'validate')[];
     backdrop: boolean;
@@ -85,67 +83,36 @@ export interface ISColorPickerComponentProps {
  * import { define } from '@coffeekraken/s-color-picker-component';
  * define();
  *
- * @example         html            Simple input
- * <label class="s-label:responsive">
- *      <span>Choose a color</span>
- *      <s-color-picker value="#FABB03" placeholder="Choose a color" input></s-color-picker>
- * </label>
- *
- * @example         html            With an input and a button
- * <label class="s-label:responsive">
- *      <span>Choose a color</span>
- *      <s-color-picker value="#5101FF" placeholder="Choose a color" input button></s-color-picker>
- * </label>
- *
  * @example         html            With a different format (hsla)
  * <label class="s-label:responsive">
  *      <span>Choose a color</span>
- *      <s-color-picker value="#5101FF" format="hsla" placeholder="Choose a color" input button></s-color-picker>
+ *      <s-color-picker value="#5101FF" format="hsla" placeholder="Choose a color">
+ *          <input type="text" name="color" class="s-input" placeholder="Choose a color" />
+ *      </s-color-picker>
  * </label>
  *
  * @example         html            Just a button
  * <label class="s-label:responsive">
  *      <span>Choose a color</span>
- *      <s-color-picker value="#55FFFF" button></s-color-picker>
- * </label>
- *
- * @example         html            With a custom input
- * <label class="s-label:responsive">
- *      <span>Choose a color</span>
- *      <s-color-picker>
- *          <input type="text" class="s-input" placeholder="Choose a color" value="#FABB03" />
- *      </s-color-picker>
- * </label>
- *
- * @example         html            With a custom button
- * <label class="s-label:responsive">
- *      <span>Choose a color</span>
- *      <s-color-picker>
- *          <button class="s-btn s-color:error">Choose a color</button>
- *      </s-color-picker>
- * </label>
- *
- * @example         html            With a custom input and button
- * <label class="s-label:responsive">
- *      <span>Choose a color</span>
- *      <s-color-picker>
- *          <div class="s-group">
- *              <input type="text" class="s-input" placeholder="Choose a color" value="#FABB03" />
- *              <button class="s-btn s-color:error">Choose a color</button>
- *          </div>
+ *      <s-color-picker value="#55FFFF">
+ *          <button class="s-btn">Choose a color</button>
  *      </s-color-picker>
  * </label>
  *
  * @example         html            Disabled
  * <label class="s-label:responsive">
  *      <span>Choose a color</span>
- *      <s-color-picker disabled input button></s-color-picker>
+ *      <s-color-picker>
+ *          <input type="text" disabled name="color" class="s-input" placeholder="Choose a color" />
+ *      </s-color-picker>
  * </label>
  *
  * @example         html            RTL Support
  * <label class="s-label:responsive" dir="rtl">
  *      <span>Choose a color</span>
- *      <s-color-picker value="#FABB03" placeholder="Choose a color" input button dir="rtl"></s-color-picker>
+ *      <s-color-picker value="#FABB03" placeholder="Choose a color" dir="rtl">
+ *          <input type="text" name="color" class="s-input" placeholder="Choose a color" />
+ *      </s-color-picker>
  * </label>
  *
  * @since           2.0.0
@@ -775,64 +742,6 @@ export default class SColorPickerComponent extends __SLitComponent {
                     ? 'is-hue-interacting'
                     : ''}"
             >
-                ${!this._hasInput && !this.props.input
-                    ? html`
-                          <input
-                              ?disabled=${this.props.disabled}
-                              type="hidden"
-                              name="${this.props.name}"
-                              value="${this.state.value ?? this.props.value}"
-                          />
-                      `
-                    : ''}
-
-                <div
-                    class="${this.componentUtils.className(
-                        '__injected',
-                        's-group',
-                    )}"
-                >
-                    ${!this._hasInput && this.props.input
-                        ? html`
-                              <input
-                                  ?disabled=${this.props.disabled}
-                                  type="text"
-                                  autocomplete="off"
-                                  name="${this.props.name}"
-                                  value="${this.state.value ??
-                                  this.props.value}"
-                                  placeholder="${this.props.placeholder}"
-                                  class="${this.componentUtils.className(
-                                      '__input',
-                                      's-input',
-                                  )}"
-                              />
-                          `
-                        : !this._hasInput
-                        ? ''
-                        : ``}
-                    ${!this._hasButton && this.props.button
-                        ? html`
-                              <button
-                                  ?disabled=${this.props.disabled}
-                                  onclick="return false"
-                                  class="${this.componentUtils.className(
-                                      '__button',
-                                      's-btn',
-                                  )}"
-                              >
-                                  ${this.props.buttonIconClass
-                                      ? html`
-                                            <i
-                                                class="${this.props
-                                                    .buttonIconClass}"
-                                            ></i>
-                                        `
-                                      : ''}
-                              </button>
-                          `
-                        : ''}
-                </div>
                 ${this.props.backdrop
                     ? html`
                           <div

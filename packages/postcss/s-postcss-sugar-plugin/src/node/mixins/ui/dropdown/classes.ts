@@ -80,6 +80,13 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
+        * @install          css
+        * \\@sugar.ui.dropdown.classes;
+        * 
+        * .my-dropdown {
+        *   \\@sugar.ui.dropdown;
+        * }
+        * 
         * @cssClass             s-dropdown-container        The container of the dropdown that will trigger the display, hide, etc...
         * @cssClass             s-dropdown                  Apply the dropdown styling
         * @cssClass       s-dropdown:bottom      Apply the bottom dropdown position

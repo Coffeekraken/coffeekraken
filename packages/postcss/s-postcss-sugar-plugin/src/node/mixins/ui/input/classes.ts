@@ -88,6 +88,18 @@ export default function ({
         * 
         * These classes allows you to apply some lnfs to your text input
         * 
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.ui.input.classes;
+        * 
+        * .my-input {
+        *   \\@sugar.ui.input;
+        * }
+        * 
         ${finalParams.lnfs
             .map((lnf) => {
                 return ` * @cssClass     s-input${

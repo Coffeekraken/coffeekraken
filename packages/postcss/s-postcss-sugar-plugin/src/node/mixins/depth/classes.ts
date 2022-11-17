@@ -63,10 +63,17 @@ export default function ({
         * These classes allows you to apply some depth shadows to any HTMLElement.
         * These depths are defined in the theme configuration under \`theme.depth\` namespace.
         * 
-        * @support      chromium        
-        * @support      firefox         
-        * @support      safari          
-        * @support      edge           
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.depth.classes;
+        * 
+        * .my-element {
+        *   \\@sugar.depth(100);
+        * }          
         * 
         ${depthsArray
             .map((depthName) => {

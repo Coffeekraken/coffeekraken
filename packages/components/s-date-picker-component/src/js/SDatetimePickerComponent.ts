@@ -32,8 +32,6 @@ export interface ISDatetimePickerComponentProps {
     )[];
     format: 'hex' | 'hexa' | 'rgb' | 'rgba' | 'hsl' | 'hsla';
     inline: boolean;
-    input: boolean;
-    button: boolean;
     calendar: boolean;
     floatSettings: Partial<IFloatSettings>;
     copyIconClass: string;
@@ -81,76 +79,57 @@ export interface ISDatetimePickerComponentProps {
  * @example         html            Simple input
  * <label class="s-label:responsive s-color:accent">
  *     <span>Choose a date</span>
- *      <s-datetime-picker calendar placeholder="Choose a date" input></s-datetime-picker>
+ *      <s-datetime-picker calendar placeholder="Choose a date">
+ *          <input type="text" class="s-input" placeholder="Choose a date" />
+ *      </s-datetime-picker>
  * </label>
  *
  * @example         html            With a calendar
  * <label class="s-label:responsive s-color:accent">
  *      <span>Choose a date</span>
- *      <s-datetime-picker calendar placeholder="Choose a date" input></s-datetime-picker>
+ *      <s-datetime-picker calendar placeholder="Choose a date">
+ *          <input type="text" class="s-input" placeholder="Choose a date" />
+ *      </s-datetime-picker>
  * </label>
  *
  * @example         html            With a backdrop
  * <label class="s-label:responsive s-color:accent">
  *      <span>Choose a date</span>
- *      <s-datetime-picker calendar backdrop placeholder="Choose a date" input></s-datetime-picker>
- * </label>
- *
- * @example         html            With an input and a button
- * <label class="s-label:responsive s-color:accent">
- *      <span>Choose a date</span>
- *      <s-datetime-picker placeholder="Choose a date" input button></s-datetime-picker>
+ *      <s-datetime-picker calendar backdrop placeholder="Choose a date">
+ *          <input type="text" class="s-input" placeholder="Choose a date" />
+ *      </s-datetime-picker>
  * </label>
  *
  * @example         html            With a different format and a calendar
  * <label class="s-label:responsive s-color:accent">
  *      <span>Choose a date</span>
- *      <s-datetime-picker calendar format="yyyy-mm-dd:HH:MM" placeholder="Choose a date" input button></s-datetime-picker>
+ *      <s-datetime-picker calendar format="yyyy-mm-dd:HH:MM" placeholder="Choose a date">
+ *          <input type="text" class="s-input" placeholder="Choose a date" />
+ *      </s-datetime-picker>
  * </label>
  *
  * @example         html            Just a button with disabled weekend
  * <label class="s-label:responsive s-color:accent">
  *      <span>Choose a date</span>
- *      <s-datetime-picker calendar disable="weekend" button></s-datetime-picker>
- * </label>
- *
- * @example         html            With a custom input
- * <label class="s-label:responsive s-color:accent">
- *      <span>Choose a date</span>
- *      <s-datetime-picker>
- *          <input type="text" class="s-input" placeholder="Choose a date" />
- *      </s-datetime-picker>
- * </label>
- *
- * @example         html            With a custom button
- * <label class="s-label:responsive s-color:accent">
- *      <span>Choose a date</span>
- *      <s-datetime-picker>
- *          <button class="s-btn s-color:error">Choose a date</button>
- *      </s-datetime-picker>
- * </label>
- *
- * @example         html            With a custom input and button
- * <label class="s-label:responsive s-color:accent">
- *      <span>Choose a date</span>
- *      <s-datetime-picker>
- *          <div class="s-group">
- *              <input type="text" class="s-input" placeholder="Choose a date" />
- *              <button class="s-btn s-color:error">Choose a date</button>
- *          </div>
+ *      <s-datetime-picker calendar disable="weekend">
+ *          <button class="s-btn">Choose a date</button>
  *      </s-datetime-picker>
  * </label>
  *
  * @example         html            Disabled
  * <label class="s-label:responsive s-color:accent">
  *      <span>Choose a date</span>
- *      <s-datetime-picker disabled input button></s-datetime-picker>
+ *      <s-datetime-picker>
+ *          <input type="text" disabled class="s-input" placeholder="Choose a date" />
+ *      </s-datetime-picker>
  * </label>
  *
  * @example         html            RTL Support
  * <label class="s-label:responsive s-color:accent" dir="rtl">
  *      <span>Choose a date</span>
- *      <s-datetime-picker placeholder="Choose a date" input button dir="rtl"></s-datetime-picker>
+ *      <s-datetime-picker placeholder="Choose a date" dir="rtl">
+ *          <input type="text" class="s-input" placeholder="Choose a date" />
+ *      </s-datetime-picker>
  * </label>
  *
  * @see         https://www.npmjs.com/package/date-format-parse
@@ -712,64 +691,6 @@ export default class SDatetimePickerComponent extends __SLitComponent {
                     ? 'is-interacting'
                     : ''}"
             >
-                ${!this._hasInput && !this.props.input
-                    ? html`
-                          <input
-                              ?disabled=${this.props.disabled}
-                              type="hidden"
-                              name="${this.props.name}"
-                              value="${this.state.value ?? this.props.value}"
-                          />
-                      `
-                    : ''}
-
-                <div
-                    class="${this.componentUtils.className(
-                        '__injected',
-                        's-group',
-                    )}"
-                >
-                    ${!this._hasInput && this.props.input
-                        ? html`
-                              <input
-                                  ?disabled=${this.props.disabled}
-                                  type="text"
-                                  autocomplete="off"
-                                  name="${this.props.name}"
-                                  value="${this.state.value ??
-                                  this.props.value}"
-                                  placeholder="${this.props.placeholder}"
-                                  class="${this.componentUtils.className(
-                                      '__input',
-                                      's-input',
-                                  )}"
-                              />
-                          `
-                        : !this._hasInput
-                        ? ''
-                        : ``}
-                    ${!this._hasButton && this.props.button
-                        ? html`
-                              <button
-                                  ?disabled=${this.props.disabled}
-                                  onclick="return false"
-                                  class="${this.componentUtils.className(
-                                      '__button',
-                                      's-btn',
-                                  )}"
-                              >
-                                  ${this.props.buttonIconClass
-                                      ? html`
-                                            <i
-                                                class="${this.props
-                                                    .buttonIconClass}"
-                                            ></i>
-                                        `
-                                      : ''}
-                              </button>
-                          `
-                        : ''}
-                </div>
                 ${this.props.backdrop
                     ? html`
                           <div

@@ -84,6 +84,13 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
+        * @install          css
+        * \\@sugar.ui.blockquote.classes;
+        * 
+        * .my-blockquote {
+        *   \\@sugar.ui.blockquote;
+        * }
+        * 
         * @cssClass         s-blockquote            Apply the blockquote styling
         * @cssClass         s-format:text blockquote            Apply the s-blockquote styling on plain blockquotes
         * @cssClass         s-rhythm:vertical &                 Apply the vertical rhythm on the blockquote

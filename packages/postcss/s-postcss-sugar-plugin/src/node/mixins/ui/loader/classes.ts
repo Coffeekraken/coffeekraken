@@ -78,6 +78,13 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
+        * @install          css
+        * \\@sugar.ui.loader.classes;
+        * 
+        * .my-loader {
+        *   \\@sugar.ui.loader;
+        * }
+        * 
         ${finalParams.loaders
             .map(
                 (loaderName) => `

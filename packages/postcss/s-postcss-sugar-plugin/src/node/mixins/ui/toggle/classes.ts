@@ -75,6 +75,18 @@ export default function ({
         * 
         * These classes allows you to display any HTMLElement as a toggle
         * 
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.ui.toggle.classes;
+        * 
+        * .my-toggle {
+        *   \\@sugar.ui.toggle;
+        * }
+        * 
         ${finalParams.types
             .map((type) => {
                 return ` * @cssClass     s-toggle:${type}}           Apply the ${type} toggle style`;

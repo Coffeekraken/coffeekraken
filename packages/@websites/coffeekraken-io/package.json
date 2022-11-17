@@ -61,6 +61,7 @@
         "@coffeekraken/s-lit-component": "^2.0.0-alpha.20",
         "@coffeekraken/s-log": "^2.0.0-alpha.20",
         "@coffeekraken/s-markdown-builder": "^2.0.0-alpha.20",
+        "@coffeekraken/s-pack-essentials": "^2.0.0-alpha.20",
         "@coffeekraken/s-page-transition-feature": "^2.0.0-alpha.20",
         "@coffeekraken/s-panel-component": "^2.0.0-alpha.20",
         "@coffeekraken/s-parallax-feature": "^2.0.0-alpha.20",

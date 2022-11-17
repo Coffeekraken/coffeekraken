@@ -161,6 +161,13 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
+        * @install          css
+        * \\@sugar.ui.fsTree.classes;
+        * 
+        * .my-fsTree {
+        *   \\@sugar.ui.fsTree;
+        * }
+        * 
         ${finalParams.lnfs
             .map((lnf) => {
                 return ` * @cssClass     s-fs-tree${

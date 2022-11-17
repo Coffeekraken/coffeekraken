@@ -70,6 +70,9 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
+        * @install          css
+        * \\@sugar.margin.classes;
+        * 
         ${marginsKeys
             .map((spaceName) => {
                 if (spaceName === 'default') return '';

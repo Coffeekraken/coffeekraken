@@ -98,10 +98,13 @@ export default function ({
         * 
         * These classes allows you to apply a specific cursor on any HTMLElement
         * 
-        * @support      chromium
-        * @support      firefox
-        * @support      safari
-        * @support      edge
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.cursor.classes; 
         * 
         ${cursors
             .map((cursor) => {

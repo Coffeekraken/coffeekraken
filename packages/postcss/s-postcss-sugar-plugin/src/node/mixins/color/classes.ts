@@ -41,10 +41,17 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
         * 
         * These classes allows you to set text and background colors easily to any HTMLElement
         * 
-        * @support      chromium        
-        * @support      firefox         
-        * @support      safari          
-        * @support      edge           
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.color.classes;
+        * 
+        * .my-element {
+        *   \\@sugar.color(accent);
+        * }                   
         * 
         ${Object.keys(__STheme.getTheme().baseColors())
             .map((colorName) => {

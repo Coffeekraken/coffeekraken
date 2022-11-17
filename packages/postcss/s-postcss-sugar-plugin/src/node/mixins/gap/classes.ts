@@ -62,10 +62,13 @@ export default function ({
         * 
         * These classes allows you to apply some gap attributes on any HTMLElement and with
         * 
-        * @support      chromium
-        * @support      firefox
-        * @support      safari
-        * @support      edge
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.gap.classes;
         * 
         * @cssClass                 s-gap              Apply the default gap to any HTMLElement
         * @cssClass                s-gap:row          Apply the default row gap to any HTMLElement

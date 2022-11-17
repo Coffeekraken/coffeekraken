@@ -57,10 +57,13 @@ export default function ({
         * 
         * These classes allows you to apply some overflow attributes on any HTMLElement.
         * 
-        * @support      chromium
-        * @support      firefox
-        * @support      safari
-        * @support      edge
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.overflow.classes;
         * 
         * @cssClass         s-overflow:auto             Apply the "auto" overflow attribute
         * @cssClass         s-overflow:hidden             Apply the "hidden" overflow attribute

@@ -79,6 +79,10 @@ export default function ({
                 background-color: sugar.color(current);
             }
 
+            &[disabled] {
+                @sugar.disabled();
+            }
+
             @sugar.state.hover {
                 border: sugar.color(current, --alpha 0.7) solid 1px;
             }

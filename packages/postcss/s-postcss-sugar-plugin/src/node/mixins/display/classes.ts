@@ -59,10 +59,13 @@ export default function ({
         * These classes allows you to apply the some display like \`inline\`, \`inline-block\`, \`block\`, etc...
         * on any HTMLElement
         * 
-        * @support      chromium
-        * @support      firefox
-        * @support      safari
-        * @support      edge
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.display.classes;
         * 
         * @cssClass                 s-display:block           Apply the display \`block\` to any HTMLElement
         * @cssClass                 s-display:inline-block           Apply the display \`inline-block\` to any HTMLElement

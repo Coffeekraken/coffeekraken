@@ -62,10 +62,13 @@ export default function ({
         * These classes allows to apply some width to any HTMLElement.
         * These widths are defined in the \`theme.width\` theme settings.
         * 
-        * @support      chromium
-        * @support      firefox
-        * @support      safari
-        * @support      edge
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.width.classes;
         * 
         ${Object.keys(widthObj).map((width) => {
             return ` * @cssClass             s-width:${width}            Apply the \`${width}\` width`;

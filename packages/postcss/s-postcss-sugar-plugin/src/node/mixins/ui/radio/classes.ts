@@ -97,6 +97,13 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
+        * @install          css
+        * \\@sugar.ui.radio.classes;
+        * 
+        * .my-radio {
+        *   \\@sugar.ui.radio;
+        * }
+        * 
         ${finalParams.lnfs
             .map((lnf) => {
                 return ` * @cssClass     s-radio${

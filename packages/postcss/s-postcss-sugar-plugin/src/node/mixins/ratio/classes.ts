@@ -65,10 +65,17 @@ export default function ({
         * These classes allows you to apply some ratio to any HTMLElement.
         * **These classes make use of the \`aspect-ratio\` css property**
         * 
-        * @support      chromium
-        * @support      firefox
-        * @support      safari
-        * @support      edge
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.ratio.classes;
+        * 
+        * .my-element {
+        *   \\@sugar.ratio(16/9);
+        * } 
         * 
         ${Object.keys(ratioObj)
             .map((ratioName) => {

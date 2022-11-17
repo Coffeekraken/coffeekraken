@@ -97,6 +97,13 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
+        * @install          css
+        * \\@sugar.ui.switch.classes;
+        * 
+        * .my-switch {
+        *   \\@sugar.ui.switch;
+        * }
+        * 
         ${finalParams.lnfs
             .map((lnf) => {
                 return ` * @cssClass     s-switch${

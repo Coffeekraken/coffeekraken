@@ -68,10 +68,17 @@ export default function ({
         * On image and video, uses \`object-fit\` property, on all others,
         * simply fill the element using an absolute position, top: 0, left: 0 and width/height: 100%.
         * 
-        * @support      chromium
-        * @support      firefox
-        * @support      safari
-        * @support      edge
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.fit.classes;
+        * 
+        * .my-element {
+        *   \\@sugar.fit(fill);
+        * }  
         * 
         ${fitSizes
             .map((fitSizeName) => {

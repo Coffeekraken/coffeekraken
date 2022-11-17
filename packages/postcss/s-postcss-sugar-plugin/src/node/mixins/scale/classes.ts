@@ -66,10 +66,13 @@ export default function ({
         * It's usually a good practice to set the \`font-size\` of your UI element to \`sugar.scalable(1rem)\`
         * and then to set inner values using \`em\` unit.
         * 
-        * @support      chromium
-        * @support      firefox
-        * @support      safari
-        * @support      edge
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.scale.classes;
         * 
         ${Object.keys(scaleObj)
             .map((scaleName) => {

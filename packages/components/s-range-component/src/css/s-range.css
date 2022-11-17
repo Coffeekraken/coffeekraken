@@ -2,7 +2,7 @@
     display: block;
     width: 100%;
 
-    &:not([status='mounted']) > * {
+    &:not([mounted]) > * {
         display: none;
     }
 

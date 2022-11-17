@@ -63,10 +63,18 @@ export default function ({
         * These classes allows to apply a custom scrollbar that follows your theme settings.
         * It is based on the \`theme.ui.scrollbar\` settings.
         * 
-        * @support      chromium
-        * @support      firefox
-        * @support      safari
-        * @support      edge
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.scrollbar.classes;
+        * 
+        * .my-element {
+        *   \\@sugar.scrollbar.hide;
+        *   \\@sugar.scrollbar;
+        * } 
         * 
         * @cssClass     s-scrollbar         Apply the custom scrollbar
         * 

@@ -57,10 +57,13 @@ export default function ({
         * 
         * These classes allows you to apply some positions like \`absolute\`, \`fixed\`, etc... on any HTMLElement
         * 
-        * @support      chromium
-        * @support      firefox
-        * @support      safari
-        * @support      edge
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.position.classes;
         * 
         * @cssClass       s-position:absolute       Apply the \`absolute\` position
         * @cssClass       s-position:relative       Apply the \`relative\` position

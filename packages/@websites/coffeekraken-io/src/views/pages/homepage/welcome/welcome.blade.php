@@ -39,7 +39,7 @@
                     Our theme switcher allows you to easily <span class="s-tc:accent">change from one theme to another</span> with a nice dropdown, or like in this example, just the <span class="s-tc:complementary">light/dark mode switcher</span>...
                 </p>
 
-                <s-theme-switcher></s-theme-switcher>
+                <s-theme-switcher class="s-color:accent"></s-theme-switcher>
 
                 <br />
 

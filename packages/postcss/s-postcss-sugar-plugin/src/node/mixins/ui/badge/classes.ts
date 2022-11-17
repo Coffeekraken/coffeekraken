@@ -87,6 +87,18 @@ export default function ({
         * 
         * These classes allows you to display any HTMLElement as a badge
         * 
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.ui.badge.classes;
+        * 
+        * .my-badge {
+        *   \\@sugar.ui.badge;
+        * }
+        * 
         ${finalParams.lnfs
             .map((lnf) => {
                 return ` * @cssClass     s-badge${

@@ -89,6 +89,18 @@ export default function ({
         * 
         * These classes allows you to structure forms using labels.
         * 
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.ui.label.classes;
+        * 
+        * .my-label {
+        *   \\@sugar.ui.label;
+        * } 
+        *
         ${finalParams.lnfs
             .map((lnf) => {
                 return ` * @cssClass     s-label${

@@ -72,10 +72,17 @@ export default function ({
         * 
         * These classes allows you to apply a clearfix on any HTMLElement
         * 
-        * @support      chromium
-        * @support      firefox
-        * @support      safari
-        * @support      edge
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.clearfix.classes;
+        * 
+        * .my-element {
+        *   \\@sugar.clearfix;
+        * }         
         * 
         ${clearfixes
             .map((clearfixName) => {

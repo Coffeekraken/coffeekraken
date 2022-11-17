@@ -86,6 +86,18 @@ export default function ({
         * 
         * These classes allows you to apply some lnfs to input container
         * 
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.ui.inputContainer.classes;
+        * 
+        * .my-inputContainer {
+        *   \\@sugar.ui.inputContainer;
+        * }
+        * 
         ${finalParams.lnfs
             .map((lnf) => {
                 return ` * @cssClass     s-input-container${

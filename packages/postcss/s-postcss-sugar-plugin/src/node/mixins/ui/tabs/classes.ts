@@ -96,11 +96,17 @@ export default function ({
         * 
         * These classes allows you to style list (or any others) HTMLElement as tabs
         * 
-        * @support          rtl
-        * @support          chromium            
+        * @support          chromium
         * @support          firefox
         * @support          safari
         * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.ui.tabs.classes;
+        * 
+        * .my-tabs {
+        *   \\@sugar.ui.tabs;
+        * }
         * 
         ${finalParams.lnfs
             .map((lnf) => {

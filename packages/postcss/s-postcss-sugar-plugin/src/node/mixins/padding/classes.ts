@@ -70,6 +70,9 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
+        * @install          css
+        * \\@sugar.padding.classes;
+        * 
         ${paddingsKeys
             .map((spaceName) => {
                 if (spaceName === 'default') return '';

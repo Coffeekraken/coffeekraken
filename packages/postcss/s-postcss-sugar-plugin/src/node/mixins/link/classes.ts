@@ -57,10 +57,17 @@ export default function ({
         * 
         * These classes allows to apply some link styling utils to any HTMLElement.
         * 
-        * @support      chromium
-        * @support      firefox
-        * @support      safari
-        * @support      edge
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.link.classes;
+        * 
+        * .my-element {
+        *   \\@sugar.link.stretch;
+        * } 
         * 
         * @cssClass             s-link:stretch                  Stretch a link clickable area without changing his actual size and style
         * 

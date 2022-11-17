@@ -68,6 +68,9 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
+        * @install          css
+        * \\@sugar.spacing.classes;
+        * 
         ${spacingsKeys
             .map((spaceName) => {
                 if (spaceName === 'default') return '';

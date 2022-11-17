@@ -2659,6 +2659,24 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@coffeekraken/s-pack-essentials@^2.0.0-alpha.20, @coffeekraken/s-pack-essentials@workspace:packages/packs/s-pack-essentials":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/s-pack-essentials@workspace:packages/packs/s-pack-essentials"
+  dependencies:
+    "@coffeekraken/s-activate-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-appear-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-clipboard-copy-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-floating-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-form-validate-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-inline-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-panel-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-range-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-refocus-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-scroll-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-feature": ^2.0.0-alpha.20
+  languageName: unknown
+  linkType: soft
+
 "@coffeekraken/s-package@^2.0.0-alpha.20, @coffeekraken/s-package@workspace:packages/core/s-package":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-package@workspace:packages/core/s-package"
@@ -6550,6 +6568,7 @@ __metadata:
     "@coffeekraken/s-lit-component": ^2.0.0-alpha.20
     "@coffeekraken/s-log": ^2.0.0-alpha.20
     "@coffeekraken/s-markdown-builder": ^2.0.0-alpha.20
+    "@coffeekraken/s-pack-essentials": ^2.0.0-alpha.20
     "@coffeekraken/s-page-transition-feature": ^2.0.0-alpha.20
     "@coffeekraken/s-panel-component": ^2.0.0-alpha.20
     "@coffeekraken/s-parallax-feature": ^2.0.0-alpha.20

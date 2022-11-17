@@ -61,10 +61,13 @@ export default function ({
         * These classes allows to apply some text styling like \`text-align: left\`, \`text-align: right\`, \`text-decoration: underline\`, etc...
         * directly inside your HTML.
         * 
-        * @support      chromium
-        * @support      firefox
-        * @support      safari
-        * @support      edge
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.text.classes; 
         * 
         * @cssClass             s-text:left             Align the text to the left
         * @cssClass             s-text:right             Align the text to the right

@@ -58,10 +58,17 @@ export default function ({
         * These classes allows you to apply the disabled style on any HTMLElement.
         * This make sure **no pointer events** stays active as well as displaying the **not-allowed cursor**.
         * 
-        * @support      chromium
-        * @support      firefox
-        * @support      safari
-        * @support      edge
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.disabled.classes;
+        * 
+        * .my-element {
+        *   \\@sugar.disabled;
+        * }  
         * 
         * @cssClass                 s-disabled              Apply the disabled styling on any HTMLElement
         * 

@@ -59,10 +59,13 @@ export default function ({
         * 
         * These classes allows you to apply some order attributes on any HTMLElement.
         * 
-        * @support      chromium
-        * @support      firefox
-        * @support      safari
-        * @support      edge
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.order.classes;
         * 
         ${Array.from(Array(count))
             .map(

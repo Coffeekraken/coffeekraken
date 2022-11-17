@@ -98,6 +98,13 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
+        * @install          css
+        * \\@sugar.ui.button.classes;
+        * 
+        * .my-button {
+        *   \\@sugar.ui.button;
+        * }
+        * 
         ${finalParams.lnfs
             .map((lnf) => {
                 return ` * @cssClass     s-btn${

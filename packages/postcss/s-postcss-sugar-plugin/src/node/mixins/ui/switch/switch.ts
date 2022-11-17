@@ -216,5 +216,15 @@ export default function ({
             break;
     }
 
+    if (finalParams.scope.indexOf('lnf') !== -1) {
+        vars.push(`
+                    border-radius: sugar.border.radius(ui.switch.borderRadius);
+                    &:after,
+                    &:before {
+                        border-radius: sugar.border.radius(ui.switch.borderRadius);
+                    }
+                `);
+    }
+
     return vars;
 }

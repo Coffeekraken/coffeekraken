@@ -68,10 +68,13 @@ export default function ({
         * 
         * These classes allows you to **truncate texts to a number of lines** on any HTMLElement
         * 
-        * @support      chromium        14+
-        * @support      firefox         68+    
-        * @support      safari          5+
-        * @support      edge            17+
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.truncate.classes;
         * 
         ${[...Array(finalParams.count).keys()].map((i) => {
             return ` * @cssClass        s-truncate:${

@@ -63,10 +63,13 @@ export default function ({
         * These classes allows you to apply basic typo styles like \`sub\`, \`strong\`, etc... on any HTMLElement
         * These styles are defined in the \`theme.typo\` theme settings.
         * 
-        * @support      chromium        14+
-        * @support      firefox         68+    
-        * @support      safari          5+
-        * @support      edge            17+
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.typo.classes;
         * 
         ${Object.keys(typosObj)
             .map((typoName) => {

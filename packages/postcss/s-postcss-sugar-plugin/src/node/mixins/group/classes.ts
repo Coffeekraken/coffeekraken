@@ -64,6 +64,9 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
+        * @install          css
+        * \\@sugar.group.classes;
+        * 
         * @cssClass             s-group             Group some elements (button, inputs, etc...) together
         * 
         * @example       html       Button group

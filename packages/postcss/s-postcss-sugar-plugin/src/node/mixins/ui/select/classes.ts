@@ -96,6 +96,13 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
+        * @install          css
+        * \\@sugar.ui.select.classes;
+        * 
+        * .my-select {
+        *   \\@sugar.ui.select;
+        * }
+        * 
         ${finalParams.lnfs
             .map((lnf) => {
                 return ` * @cssClass     s-select${

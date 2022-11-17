@@ -63,10 +63,13 @@ export default function ({
         * These classes allows to apply some transitions on any HTMLElement.
         * These transitions are defined in the \`theme.transition\` theme settings.
         * 
-        * @support      chromium
-        * @support      firefox
-        * @support      safari
-        * @support      edge
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.transition.classes;
         * 
         ${Object.keys(transitionObj).map((transition) => {
             return ` * @cssClass             s-transition${

@@ -97,6 +97,13 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
+        * @install          css
+        * \\@sugar.ui.range.classes;
+        * 
+        * .my-range {
+        *   \\@sugar.ui.range;
+        * }
+        * 
         ${finalParams.lnfs
             .map((lnf) => {
                 return ` * @cssClass     s-range${

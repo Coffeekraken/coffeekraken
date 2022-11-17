@@ -97,6 +97,13 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
+        * @install          css
+        * \\@sugar.ui.checkbox.classes;
+        * 
+        * .my-checkbox {
+        *   \\@sugar.ui.checkbox;
+        * }
+        * 
         ${finalParams.lnfs
             .map((lnf) => {
                 return ` * @cssClass     s-checkbox${

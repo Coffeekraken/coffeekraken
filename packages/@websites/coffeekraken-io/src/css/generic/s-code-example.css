@@ -45,7 +45,7 @@ s-code-example:not([status="mounted"]) {
   display: block;
   position: relative;
 
-  &:before,
+  /* &:before,
   &:after {
     content: '';
     display: block;
@@ -72,7 +72,7 @@ s-code-example:not([status="mounted"]) {
     &:after {
       right: sugar.margin(30);
     }
-  }
+  } */
 }
 
 .s-code-example__tabs {
@@ -96,7 +96,8 @@ s-code-example:not([status="mounted"]) {
 }
 
 .s-code-example__content .hljs {
-  background-color: sugar.color(main, surface, --darken 2);
+  /* background-color: sugar.color(main, surface, --darken 2); */
+  border: 1px solid sugar.color(base, border, --alpha 0.1);
 
   @sugar.theme.when dark {
     background-image: linear-gradient(

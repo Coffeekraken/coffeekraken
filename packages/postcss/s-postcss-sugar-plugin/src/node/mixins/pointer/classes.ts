@@ -59,10 +59,13 @@ export default function ({
         * 
         * These classes allows you to apply some pointer attributes on any HTMLElement.
         * 
-        * @support      chromium
-        * @support      firefox
-        * @support      safari
-        * @support      edge
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.pointer.classes;
         * 
         * @cssClass         s-pointer-events:none           Apply the pointer-events "none" attribute
         * @cssClass         s-pointer-events:all           Apply the pointer-events "all" attribute

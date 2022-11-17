@@ -57,10 +57,17 @@ export default function ({
         * 
         * These classes allows you to apply a visibility style on any HTMLElement
         * 
-        * @support      chromium
-        * @support      firefox
-        * @support      safari
-        * @support      edge
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.visibility.classes;
+        * 
+        * .my-element {
+        *   \\@sugar.visibility.hidden;
+        * } 
         * 
         * @cssClass         s-visibility:hidden             Make the element hidden in the ui
         * @cssClass         s-visibility:visible            Make the element visible in the ui

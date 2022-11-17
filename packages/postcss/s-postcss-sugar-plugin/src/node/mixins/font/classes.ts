@@ -86,10 +86,18 @@ export default function ({
         * 
         * This class allows you to apply a font to any HTMLElement
         * 
-        * @support      chromium
-        * @support      firefox
-        * @support      safari
-        * @support      edge
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.font.classes;
+        * 
+        * .my-element {
+        *   \\@sugar.font.family(title);
+        *   \\@sugar.font.size(30);
+        * }  
         * 
         ${Object.keys(fontsFamiliesObj)
             .map((fontName) => {

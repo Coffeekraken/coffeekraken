@@ -59,10 +59,13 @@ export default function ({
         * 
         * These classes allows you to apply some white-space style on any HTMLElement
         * 
-        * @support      chromium
-        * @support      firefox
-        * @support      safari
-        * @support      edge
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.whiteSpace.classes;
         * 
         * @cssClass         s-white-space:wrap             Apply the \`white-space\` to \`wrap\`
         * @cssClass         s-white-space:nowrap             Apply the \`white-space\` to \`nowrap\`

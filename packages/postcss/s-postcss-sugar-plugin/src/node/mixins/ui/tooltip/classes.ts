@@ -89,6 +89,18 @@ export default function ({
         * 
         * These classes allows you display nice tooltips on any HTMLElement
         * 
+        * @support          chromium
+        * @support          firefox
+        * @support          safari
+        * @support          edge
+        * 
+        * @install          css
+        * \\@sugar.ui.tooltip.classes;
+        * 
+        * .my-tooltip {
+        *   \\@sugar.ui.tooltip;
+        * }
+        * 
         * @cssClass             s-tooltip-container             Allows to hide and show your tooltip on hover (focus)
         * @cssClass             s-tooltip-container:active     Allow to display a tooltip without having the need of the user interaction
         * @cssClass             s-tooltip                       Apply on the element you want as a tooltip

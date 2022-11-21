@@ -55,14 +55,12 @@ export default class SParallaxFeature extends __SFeature implements ISFeature {
                 settings ?? {},
             ),
         );
-
-        if (!this._originalTransform) {
-            const style = window.getComputedStyle(this.node);
-            const transformStr = style.transform;
-            this._originalTransform = transformStr;
-        }
     }
     mount() {
+        const style = window.getComputedStyle(this.node);
+        const transformStr = style.transform;
+        this._originalTransform = transformStr;
+
         document.addEventListener('mousemove', (e) => {
             if (!this.componentUtils.isInViewport()) return;
 

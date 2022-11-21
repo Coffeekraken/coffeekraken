@@ -24,7 +24,7 @@
         <div class="__ts" s-parallax amount="0.05">
             <img s-inline src="/dist/img/welcome/ts.svg" />
         </div>
-        <div class="__css" s-parallax amount="0.05">
+        <div class="__css" s-parallax amount="0.05" id="_css">
             <img s-inline src="/dist/img/welcome/css.svg" />
         </div>
         <div class="__ui" s-parallax amount="0.15">

@@ -6,7 +6,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const s_type_1 = __importDefault(require("@coffeekraken/s-type"));
 /**
- * @name              ofType
+ * @name              isOfType
  * @namespace            shared.is
  * @type              Function
  * @platform          js

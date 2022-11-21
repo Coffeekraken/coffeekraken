@@ -485,54 +485,6 @@
                 "extension": "config",
                 "relPath": "src/config/themeUi.config.ts"
             },
-            "@coffeekraken.sugar.config.themeUi.card.defaultLnf": {
-                "id": "@coffeekraken.sugar.config.themeUi.card.defaultLnf",
-                "name": "defaultLnf",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Number"
-                        }
-                    ],
-                    "raw": "Number"
-                },
-                "default": "[theme.ui.default.defaultStyle]",
-                "description": "Specify the default look and feel for your menus",
-                "namespace": "@coffeekraken.sugar.config.themeUi.card",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.sugar.config.themeUi.card.defaultType": {
-                "id": "@coffeekraken.sugar.config.themeUi.card.defaultType",
-                "name": "defaultType",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Number"
-                        }
-                    ],
-                    "raw": "Number"
-                },
-                "default": "primary",
-                "description": "Specify the default look and feel for your menus",
-                "namespace": "@coffeekraken.sugar.config.themeUi.card",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
             "@coffeekraken.sugar.config.themeUi.card.depth": {
                 "id": "@coffeekraken.sugar.config.themeUi.card.depth",
                 "name": "depth",
@@ -546,30 +498,6 @@
                 },
                 "default": "[theme.ui.default.depth]",
                 "description": "Specify the default depth for code items",
-                "namespace": "@coffeekraken.sugar.config.themeUi.card",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.sugar.config.themeUi.card.spacing": {
-                "id": "@coffeekraken.sugar.config.themeUi.card.spacing",
-                "name": "spacing",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Object"
-                        }
-                    ],
-                    "raw": "Object"
-                },
-                "default": "[theme.ui.default.spacing]",
-                "description": "Specify the default vertical rhythm for your code ui",
                 "namespace": "@coffeekraken.sugar.config.themeUi.card",
                 "since": "2.0.0",
                 "author": {
@@ -1903,7 +1831,7 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isMobile } from 'coffeekraken-sugar/is'\nif (__isMobile()) {\n  // do something cool...\n}"
+                        "code": "import { __isMobile } from 'coffeekraken/sugar/is'\nif (__isMobile()) {\n  // do something cool...\n}"
                     }
                 ],
                 "since": "1.0.0",
@@ -2480,8 +2408,8 @@
                 "relPath": "src/node/coffeekraken/getCoffeekrakenMetas.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.node.zip.unzip": {
-                "id": "@coffeekraken.sugar.node.zip.unzip",
+            "@coffeekraken.sugar.node.compression.unzip": {
+                "id": "@coffeekraken.sugar.node.compression.unzip",
                 "name": "unzip",
                 "type": {
                     "types": [
@@ -2498,7 +2426,7 @@
                     }
                 ],
                 "description": "This function allows you to unzip quickly a zip file\nto a particular destination.\nNote that the zip filename will be used as folder name",
-                "namespace": "@coffeekraken.sugar.node.zip",
+                "namespace": "@coffeekraken.sugar.node.compression",
                 "status": "beta",
                 "example": [
                     {
@@ -6466,9 +6394,9 @@
                 "relPath": "src/node/process/kill.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.node.process.onProcessExit222": {
-                "id": "@coffeekraken.sugar.node.process.onProcessExit222",
-                "name": "onProcessExit222",
+            "@coffeekraken.sugar.node.process.onProcessExit": {
+                "id": "@coffeekraken.sugar.node.process.onProcessExit",
+                "name": "onProcessExit",
                 "type": {
                     "types": [
                         {
@@ -9375,8 +9303,8 @@
                 "relPath": "src/shared/convert/xmlTojson.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.crypto.aes": {
-                "id": "@coffeekraken.sugar.js.crypto.aes",
+            "@coffeekraken.sugar.shared.crypto.aes": {
+                "id": "@coffeekraken.sugar.shared.crypto.aes",
                 "name": "aes",
                 "type": {
                     "types": [
@@ -9397,7 +9325,7 @@
                     }
                 ],
                 "description": "Expose two function named \"encrypt\" and \"decrypt\" that you can use to process your content using the aes algorithm\n\nimport { __aes } from '@coffeekraken/sugar/crypto';\n__aes.encrypt('hello world');",
-                "namespace": "@coffeekraken.sugar.js.crypto",
+                "namespace": "@coffeekraken.sugar.shared.crypto",
                 "status": "beta",
                 "since": "1.0.0",
                 "author": {
@@ -9447,8 +9375,8 @@
                     }
                 }
             },
-            "@coffeekraken.sugar.js.crypto.base64": {
-                "id": "@coffeekraken.sugar.js.crypto.base64",
+            "@coffeekraken.sugar.shared.crypto.base64": {
+                "id": "@coffeekraken.sugar.shared.crypto.base64",
                 "name": "base64",
                 "type": {
                     "types": [
@@ -9469,7 +9397,7 @@
                     }
                 ],
                 "description": "Expose two function named \"encrypt\" and \"decrypt\" that you can use to process your content using the base64 algorithm\n\nimport { __base64 } from '@coffeekraken/sugar/crypto';\n__base64.encrypt('hello world');",
-                "namespace": "@coffeekraken.sugar.js.crypto",
+                "namespace": "@coffeekraken.sugar.shared.crypto",
                 "status": "beta",
                 "since": "2.0.0",
                 "author": {
@@ -9521,8 +9449,8 @@
                     }
                 }
             },
-            "@coffeekraken.sugar.js.crypto.md5": {
-                "id": "@coffeekraken.sugar.js.crypto.md5",
+            "@coffeekraken.sugar.shared.crypto.md5": {
+                "id": "@coffeekraken.sugar.shared.crypto.md5",
                 "name": "md5",
                 "type": {
                     "types": [
@@ -9543,7 +9471,7 @@
                     }
                 ],
                 "description": "Expose two function named \"encrypt\" and \"decrypt\" that you can use to process your content using the md5 algorithm\n\nimport { __md5 } from '@coffeekraken/sugar/crypto';\n__md5.encrypt('hello world');",
-                "namespace": "@coffeekraken.sugar.js.crypto",
+                "namespace": "@coffeekraken.sugar.shared.crypto",
                 "status": "beta",
                 "since": "2.0.0",
                 "author": {
@@ -9665,8 +9593,8 @@
                     }
                 }
             },
-            "@coffeekraken.sugar.js.crypto.sha256": {
-                "id": "@coffeekraken.sugar.js.crypto.sha256",
+            "@coffeekraken.sugar.shared.crypto.sha256": {
+                "id": "@coffeekraken.sugar.shared.crypto.sha256",
                 "name": "sha256",
                 "type": {
                     "types": [
@@ -9687,7 +9615,7 @@
                     }
                 ],
                 "description": "Expose two function named \"encrypt\" and \"decrypt\" that you can use to process your content using the sha256 algorithm\n\nimport { __sha256 } from '@coffeekraken/sugar/crypto';\n__sha256.encrypt('hello world');",
-                "namespace": "@coffeekraken.sugar.js.crypto",
+                "namespace": "@coffeekraken.sugar.shared.crypto",
                 "status": "beta",
                 "since": "2.0.0",
                 "author": {
@@ -11275,6 +11203,47 @@
                 "relPath": "src/shared/extension/commonTextFileExtensions.ts",
                 "children": {}
             },
+            "@coffeekraken.sugar.shared.extension.commonVideoFileExtensions": {
+                "id": "@coffeekraken.sugar.shared.extension.commonVideoFileExtensions",
+                "name": "commonVideoFileExtensions",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to get an array of common text file extensions with or without the dot",
+                "namespace": "@coffeekraken.sugar.shared.extension",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { __commonVideoFileExtensions } from '@coffeekraken/sugar/extension';\nconst extensions = __commonVideoFileExtensions();"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "commonVideoFileExtensions.ts",
+                "extension": "ts",
+                "relPath": "src/shared/extension/commonVideoFileExtensions.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.shared.extension.commonWebFileExtensions": {
                 "id": "@coffeekraken.sugar.shared.extension.commonWebFileExtensions",
                 "name": "commonWebFileExtensions",
@@ -12735,9 +12704,9 @@
                 "relPath": "src/shared/is/isInteger.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.shared.is.isoDate": {
-                "id": "@coffeekraken.sugar.shared.is.isoDate",
-                "name": "isoDate",
+            "@coffeekraken.sugar.shared.is.isIsoDate": {
+                "id": "@coffeekraken.sugar.shared.is.isIsoDate",
+                "name": "isIsoDate",
                 "type": {
                     "types": [
                         {
@@ -12776,9 +12745,9 @@
                 "relPath": "src/shared/is/isIsoDate.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.shared.is.isoDateTime": {
-                "id": "@coffeekraken.sugar.shared.is.isoDateTime",
-                "name": "isoDateTime",
+            "@coffeekraken.sugar.shared.is.isIsoDateTime": {
+                "id": "@coffeekraken.sugar.shared.is.isIsoDateTime",
+                "name": "isIsoDateTime",
                 "type": {
                     "types": [
                         {
@@ -12817,9 +12786,9 @@
                 "relPath": "src/shared/is/isIsoDateTime.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.shared.is.isoTime": {
-                "id": "@coffeekraken.sugar.shared.is.isoTime",
-                "name": "isoTime",
+            "@coffeekraken.sugar.shared.is.isIsoTime": {
+                "id": "@coffeekraken.sugar.shared.is.isIsoTime",
+                "name": "isIsoTime",
                 "type": {
                     "types": [
                         {
@@ -12899,9 +12868,9 @@
                 "relPath": "src/shared/is/isJson.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.shared.is.linux": {
-                "id": "@coffeekraken.sugar.shared.is.linux",
-                "name": "linux",
+            "@coffeekraken.sugar.shared.is.isLinux": {
+                "id": "@coffeekraken.sugar.shared.is.isLinux",
+                "name": "isLinux",
                 "type": {
                     "types": [
                         {
@@ -13022,9 +12991,9 @@
                 "relPath": "src/shared/is/isMmddyyyyDate.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.shared.is.isSystem": {
-                "id": "@coffeekraken.sugar.shared.is.isSystem",
-                "name": "isSystem",
+            "@coffeekraken.sugar.shared.is.isModuleSystem": {
+                "id": "@coffeekraken.sugar.shared.is.isModuleSystem",
+                "name": "isModuleSystem",
                 "type": {
                     "types": [
                         {
@@ -13227,9 +13196,9 @@
                 "relPath": "src/shared/is/isOdd.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.shared.is.ofType": {
-                "id": "@coffeekraken.sugar.shared.is.ofType",
-                "name": "ofType",
+            "@coffeekraken.sugar.shared.is.isOfType": {
+                "id": "@coffeekraken.sugar.shared.is.isOfType",
+                "name": "isOfType",
                 "type": {
                     "types": [
                         {
@@ -13268,9 +13237,9 @@
                 "relPath": "src/shared/is/isOfType.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.shared.is.osx": {
-                "id": "@coffeekraken.sugar.shared.is.osx",
-                "name": "osx",
+            "@coffeekraken.sugar.shared.is.isOsx": {
+                "id": "@coffeekraken.sugar.shared.is.isOsx",
+                "name": "isOsx",
                 "type": {
                     "types": [
                         {
@@ -13309,9 +13278,9 @@
                 "relPath": "src/shared/is/isOsx.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.shared.is.path": {
-                "id": "@coffeekraken.sugar.shared.is.path",
-                "name": "path",
+            "@coffeekraken.sugar.shared.is.isPath": {
+                "id": "@coffeekraken.sugar.shared.is.isPath",
+                "name": "isPath",
                 "type": {
                     "types": [
                         {
@@ -13350,9 +13319,9 @@
                 "relPath": "src/shared/is/isPath.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.shared.is.plainObject": {
-                "id": "@coffeekraken.sugar.shared.is.plainObject",
-                "name": "plainObject",
+            "@coffeekraken.sugar.shared.is.isPlainObject": {
+                "id": "@coffeekraken.sugar.shared.is.isPlainObject",
+                "name": "isPlainObject",
                 "type": {
                     "types": [
                         {
@@ -13596,9 +13565,9 @@
                 "relPath": "src/shared/is/isUrl.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.shared.is.windows": {
-                "id": "@coffeekraken.sugar.shared.is.windows",
-                "name": "windows",
+            "@coffeekraken.sugar.shared.is.isWindows": {
+                "id": "@coffeekraken.sugar.shared.is.isWindows",
+                "name": "isWindows",
                 "type": {
                     "types": [
                         {
@@ -14771,7 +14740,7 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __get } from '@coffeekraken/sugar/object';\n__get('myObject.cool.value'); // => 'Hello world'"
+                        "code": "import { __get } from '@coffeekraken/sugar/object';\n__get(myObject, 'my.cool.value'); // => 'Hello world'"
                     }
                 ],
                 "since": "2.0.0",
@@ -21435,8 +21404,8 @@
                 "relPath": "src/shared/console/html/tagsMap.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.css.cssEasingStrToJsFunction": {
-                "id": "@coffeekraken.sugar.js.css.cssEasingStrToJsFunction",
+            "@coffeekraken.sugar.shared.css.easing.cssEasingStrToJsFunction": {
+                "id": "@coffeekraken.sugar.shared.css.easing.cssEasingStrToJsFunction",
                 "name": "cssEasingStrToJsFunction",
                 "type": {
                     "types": [
@@ -21453,7 +21422,7 @@
                     }
                 ],
                 "description": "Convert a css easing string line \"cubic-bezier(.17,.67,.83,.67)\" to a js easing function",
-                "namespace": "@coffeekraken.sugar.js.css",
+                "namespace": "@coffeekraken.sugar.shared.css.easing",
                 "status": "beta",
                 "example": [
                     {

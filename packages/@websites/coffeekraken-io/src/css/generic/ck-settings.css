@@ -1,16 +1,14 @@
-/* @sugar.partial (ckSettings) { */
 .ck-settings {
 }
 #settings .s-panel__container {
-  background-color: sugar.color(main, background);
-  min-width: 300px;
-  width: 33vw;
-  overflow-y: scroll;
-  @sugar.scrollbar();
-  /* @sugar.depth (100); */
+    background-color: sugar.color(main, background);
+    min-width: 300px;
+    width: 33vw;
+    overflow-y: scroll;
+    @sugar.scrollbar();
+    /* @sugar.depth (100); */
 
-  @sugar.media mobile {
-    min-width: 80%;
-  }
+    @sugar.media mobile {
+        min-width: 80%;
+    }
 }
-/* } */

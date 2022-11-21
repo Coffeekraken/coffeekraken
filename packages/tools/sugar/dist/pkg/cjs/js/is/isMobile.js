@@ -22,7 +22,7 @@ const mobile_detect_1 = __importDefault(require("mobile-detect"));
  * @todo      tests
  *
  * @example 	js
- * import { __isMobile } from 'coffeekraken-sugar/is'
+ * import { __isMobile } from 'coffeekraken/sugar/is'
  * if (__isMobile()) {
  *   // do something cool...
  * }

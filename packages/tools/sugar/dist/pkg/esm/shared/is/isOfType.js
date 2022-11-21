@@ -1,7 +1,7 @@
 // @ts-nocheck
 import __SType from '@coffeekraken/s-type';
 /**
- * @name              ofType
+ * @name              isOfType
  * @namespace            shared.is
  * @type              Function
  * @platform          js

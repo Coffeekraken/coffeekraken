@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import __terminalKit from 'terminal-kit';
 /**
- * @name            onProcessExit222
+ * @name            onProcessExit
  * @namespace            node.process
  * @type            Function
  * @platform        node

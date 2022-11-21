@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // TODO tests
 /**
- * @name                            linux
+ * @name                            isLinux
  * @namespace            shared.is
  * @type                            Function
  * @platform          js

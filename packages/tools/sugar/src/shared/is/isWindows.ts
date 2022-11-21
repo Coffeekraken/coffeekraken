@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 /**
- * @name                            windows
+ * @name                            isWindows
  * @namespace            shared.is
  * @type                            Function
  * @platform          js

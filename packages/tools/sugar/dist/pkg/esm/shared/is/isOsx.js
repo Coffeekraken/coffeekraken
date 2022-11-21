@@ -1,7 +1,7 @@
 // @ts-nocheck
 // TODO tests
 /**
- * @name                            osx
+ * @name                            isOsx
  * @namespace            shared.is
  * @type                            Function
  * @platform          js

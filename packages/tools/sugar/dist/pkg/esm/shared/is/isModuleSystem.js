@@ -1,7 +1,7 @@
 import __isCjs from './isCjs';
 import __isEsm from './isEsm';
 /**
- * @name          isSystem
+ * @name          isModuleSystem
  * @namespace            shared.is
  * @type          Function
  * @platform          js

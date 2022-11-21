@@ -4,22 +4,6 @@ import __STheme from '@coffeekraken/s-theme';
 class postcssUiThemeSwitcherClassesInterface extends __SInterface {
     static get _definition() {
         return {
-            styles: {
-                type: 'String[]',
-                values: ['solid'],
-                default: ['solid'],
-            },
-            defaultStyle: {
-                type: 'String',
-                values: ['solid'],
-                default:
-                    __STheme.get('ui.themeSwitcher.defaultStyle') ?? 'solid',
-            },
-            defaultColor: {
-                type: 'String',
-                values: Object.keys(__STheme.get('color')),
-                default: __STheme.get('ui.themeSwitcher.defaultColor'),
-            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -33,9 +17,6 @@ class postcssUiThemeSwitcherClassesInterface extends __SInterface {
 }
 
 export interface IPostcssUiThemeSwitcherClassesParams {
-    styles: 'solid'[];
-    defaultStyle: 'solid';
-    defaultColor: string;
     scope: ('bare' | 'lnf' | 'vr')[];
 }
 
@@ -53,9 +34,6 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiThemeSwitcherClassesParams = {
-        styles: ['solid'],
-        defaultStyle: 'solid',
-        defaultColor: 'main',
         scope: ['bare', 'lnf'],
         ...params,
     };
@@ -75,10 +53,7 @@ export default function ({
         );
     }
 
-    if (
-        finalParams.styles.includes(finalParams.defaultStyle) &&
-        finalParams.scope.includes('lnf')
-    ) {
+    if (finalParams.scope.includes('lnf')) {
         vars.comment(
             `/**
             * @name          .s-theme-switcher[lnf="default"]
@@ -96,23 +71,11 @@ export default function ({
         ).code(
             `
             .s-theme-switcher[lnf="default"] {
-                @sugar.ui.themeSwitcher($style: ${finalParams.defaultStyle}, $scope: lnf);
+                @sugar.ui.themeSwitcher($scope: lnf);
             }`,
             {
                 type: 'CssClass',
             },
-        );
-    }
-
-    // default color
-    if (finalParams.scope.includes('lnf')) {
-        vars.code(
-            () => `
-            .s-theme-switcher:not(.s-color) {
-                @sugar.color(${finalParams.defaultColor});
-            }
-        `,
-            { type: 'CssClass' },
         );
     }
 

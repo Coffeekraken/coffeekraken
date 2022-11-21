@@ -3,7 +3,7 @@
 import __isValidPath from 'is-valid-path';
 
 /**
- * @name                            path
+ * @name                            isPath
  * @namespace           shared.is
  * @type                            Function
  * @platform          js

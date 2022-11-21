@@ -4,22 +4,6 @@ import __STheme from '@coffeekraken/s-theme';
 class postcssUiFiltrableInputClassesInterface extends __SInterface {
     static get _definition() {
         return {
-            styles: {
-                type: 'String[]',
-                values: ['solid'],
-                default: ['solid'],
-            },
-            defaultStyle: {
-                type: 'String',
-                values: ['solid'],
-                default:
-                    __STheme.get('ui.filtrableInput.defaultStyle') ?? 'solid',
-            },
-            defaultColor: {
-                type: 'String',
-                values: Object.keys(__STheme.get('color')),
-                default: __STheme.get('ui.filtrableInput.defaultColor'),
-            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -33,9 +17,6 @@ class postcssUiFiltrableInputClassesInterface extends __SInterface {
 }
 
 export interface IPostcssUiFiltrableInputClassesParams {
-    styles: 'solid'[];
-    defaultStyle: 'solid';
-    defaultColor: string;
     scope: ('bare' | 'lnf' | 'vr')[];
 }
 
@@ -53,9 +34,6 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiFiltrableInputClassesParams = {
-        styles: ['solid'],
-        defaultStyle: 'solid',
-        defaultColor: 'main',
         scope: ['bare', 'lnf', 'vr'],
         ...params,
     };
@@ -73,10 +51,9 @@ export default function ({
         },
     );
 
-    if (finalParams.styles.includes(finalParams.defaultStyle)) {
-        // @TODO            example
-        vars.comment(
-            `/**
+    // @TODO            example
+    vars.comment(
+        `/**
             * @name           [lnf="default"] > .s-filtrable-input
             * @namespace          sugar.style.ui.filtrableInput
             * @type           CssClass
@@ -89,28 +66,15 @@ export default function ({
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
-        ).code(
-            `
+    ).code(
+        `
                 [lnf="default"] > .s-filtrable-input {
                     @sugar.ui.filtrableInput($style: solid, $scope: lnf);
                 }`,
-            {
-                type: 'CssClass',
-            },
-        );
-    }
-
-    // default color
-    if (finalParams.scope.includes('lnf')) {
-        vars.code(
-            () => `
-            .s-filtrable-input:not(.s-color) {
-                @sugar.color(${finalParams.defaultColor});
-            }
-        `,
-            { type: 'CssClass' },
-        );
-    }
+        {
+            type: 'CssClass',
+        },
+    );
 
     if (finalParams.scope.indexOf('vr') !== -1) {
         // @TODO            example

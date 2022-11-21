@@ -4,21 +4,6 @@ import __STheme from '@coffeekraken/s-theme';
 class postcssUiCodeExampleClassesInterface extends __SInterface {
     static get _definition() {
         return {
-            styles: {
-                type: 'String[]',
-                values: ['solid'],
-                default: ['solid'],
-            },
-            defaultStyle: {
-                type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.codeExample.defaultStyle') ?? 'solid',
-            },
-            defaultColor: {
-                type: 'String',
-                values: Object.keys(__STheme.get('color')),
-                default: __STheme.get('ui.codeExample.defaultColor'),
-            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -32,9 +17,6 @@ class postcssUiCodeExampleClassesInterface extends __SInterface {
 }
 
 export interface IPostcssUiCodeExampleClassesParams {
-    styles: 'solid'[];
-    defaultStyle: 'solid';
-    defaultColor: string;
     scope: ('bare' | 'lnf' | 'vr' | 'theme')[];
 }
 
@@ -52,9 +34,6 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiCodeExampleClassesParams = {
-        styles: ['solid'],
-        defaultStyle: 'solid',
-        defaultColor: 'main',
         scope: ['bare', 'lnf', 'theme'],
         ...params,
     };
@@ -74,10 +53,7 @@ export default function ({
         );
     }
 
-    if (
-        finalParams.styles.includes(finalParams.defaultStyle) &&
-        finalParams.scope.includes('lnf')
-    ) {
+    if (finalParams.scope.includes('lnf')) {
         vars.comment(
             `/**
             * @name           .s-code-example[lnf="default"]
@@ -98,7 +74,7 @@ export default function ({
         */`,
         ).code(
             `.s-code-example[lnf="default"] {
-                @sugar.ui.codeExample($style: ${finalParams.defaultStyle}, $scope: lnf);
+                @sugar.ui.codeExample($scope: lnf);
             }`,
             {
                 type: 'CssClass',
@@ -116,18 +92,6 @@ export default function ({
             {
                 type: 'CssClass',
             },
-        );
-    }
-
-    // default color
-    if (finalParams.scope.includes('lnf')) {
-        vars.code(
-            () => `
-            .s-code-example:not(.s-color) {
-                @sugar.color(${finalParams.defaultColor});
-            }
-        `,
-            { type: 'CssClass' },
         );
     }
 

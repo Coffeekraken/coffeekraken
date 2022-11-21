@@ -2,7 +2,7 @@ import __bezierEasing from 'bezier-easing';
 
 /**
  * @name      cssEasingStrToJsFunction
- * @namespace            js.css
+ * @namespace            shared.css.easing
  * @type      Function
  * @platform          js
  * @status          beta

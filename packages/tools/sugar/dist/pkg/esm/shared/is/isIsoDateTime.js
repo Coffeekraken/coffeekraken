@@ -1,6 +1,6 @@
 // @ts-nocheck
 /**
- * @name        isoDateTime
+ * @name        isIsoDateTime
  * @namespace            shared.is
  * @type      Function
  * @platform          js

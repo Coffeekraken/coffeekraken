@@ -435,6 +435,9 @@ export default class SSliderComponent extends __SLitComponent {
         // actions
         this._initAttributesActions();
 
+        // go to first slide
+        this.goTo(this.props.slide, true);
+
         // timer
         if (this.props.autoplay && this.props.timer) {
             this.play();
@@ -1019,10 +1022,11 @@ export default class SSliderComponent extends __SLitComponent {
      */
     async goTo(
         slideIdIdxOrElement: number | string | HTMLElement,
-        userAction: boolean = true,
+        force: boolean = false,
     ): SSliderComponent {
         const nextSlide = this.getSlide(slideIdIdxOrElement);
-        if (!nextSlide || nextSlide.idx === this.currentSlide.idx) return;
+        if (!force && (!nextSlide || nextSlide.idx === this.currentSlide.idx))
+            return;
         const currentSlide = this.getCurrentSlide();
         this.state.currentSlideIdx = nextSlide.idx;
         this.props.slide = nextSlide.idx;
@@ -1044,7 +1048,23 @@ export default class SSliderComponent extends __SLitComponent {
             nextSlide,
         });
 
+        this.$slides.forEach(($slide, i) => {
+            if ($slide === nextSlide.$slide) {
+                $slide.classList.add('active');
+            } else {
+                $slide.classList.remove('active');
+            }
+        });
+
+        currentSlide.$slide.classList.add('post-active');
+        currentSlide.$slide.classList.remove('active');
+        nextSlide.$slide.classList.add('pre-active');
+
         await this._transitionHandler(currentSlide.$slide, nextSlide.$slide);
+
+        currentSlide.$slide.classList.remove('post-active');
+        nextSlide.$slide.classList.remove('pre-active');
+        nextSlide.$slide.classList.add('active');
 
         this._dispatch('goto-end', {
             currentSlide,
@@ -1069,11 +1089,11 @@ export default class SSliderComponent extends __SLitComponent {
      * @since       2.0.0
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    next(userAction: boolean): SSliderComponent {
+    next(): SSliderComponent {
         if (this.props.loop && this.isLast()) {
-            return this.goTo(0, userAction);
+            return this.goTo(0);
         }
-        return this.goTo(this.nextSlideIdx, userAction);
+        return this.goTo(this.nextSlideIdx);
     }
 
     /**
@@ -1087,11 +1107,11 @@ export default class SSliderComponent extends __SLitComponent {
      * @since       2.0.0
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    previous(userAction: boolean): SSliderComponent {
+    previous(): SSliderComponent {
         if (this.props.loop && this.isFirst()) {
-            return this.goTo(this.getLastSlide().id, userAction);
+            return this.goTo(this.getLastSlide().id);
         }
-        return this.goTo(this.getPreviousSlideIdx(), userAction);
+        return this.goTo(this.getPreviousSlideIdx());
     }
 
     /**
@@ -1229,55 +1249,60 @@ export default class SSliderComponent extends __SLitComponent {
      * of simply changing the current slide.
      */
     _transitionHandler($from, $to) {
-        if (this.props.transitionHandler) {
-            this.props.transitionHandler($from, $to);
-            return;
-        }
-
-        if (this.props.behavior?.goTo) {
-            this.props.behavior.goTo($from, $to);
-            return;
-        }
-
-        // default
-        if (this.props.behavior === 'default') {
-            if (this.props.direction === 'vertical') {
-                this.$slidesWrapper.style.overflowY = 'auto';
-            } else {
-                this.$slidesWrapper.style.overflowX = 'auto';
+        return new Promise(async (resolve, reject) => {
+            if (this.props.transitionHandler) {
+                await this.props.transitionHandler($from, $to);
+                return resolve();
             }
 
-            const $slidesWrapper = this.$slidesWrapper;
+            if (this.props.behavior?.goTo) {
+                await this.props.behavior.goTo($from, $to);
+                return resolve();
+            }
 
-            const toRect = $to.getBoundingClientRect();
-            let startX = this.$slidesWrapper.scrollLeft,
-                startY = this.$slidesWrapper.scrollTop;
-            const dist =
-                this.props.direction === 'vertical' ? toRect.y : toRect.x;
-            const _this = this;
-            __easeInterval(
-                this.props.transitionDuration,
-                (percentage) => {
-                    const offset = (dist / 100) * percentage;
-                    // console.log(offset);
-                    if (this.props.direction === 'vertical') {
-                        this.$slidesWrapper.scroll(0, startY + offset);
-                    } else {
-                        this.$slidesWrapper.scroll(startX + offset, 0);
-                    }
-                },
-                {
-                    easing: this.props.transitionEasing,
-                    onEnd() {
-                        if (_this.props.direction === 'vertical') {
-                            $slidesWrapper.style.overflowY = 'hidden';
+            // default
+            if (this.props.behavior === 'default') {
+                if (this.props.direction === 'vertical') {
+                    this.$slidesWrapper.style.overflowY = 'auto';
+                } else {
+                    this.$slidesWrapper.style.overflowX = 'auto';
+                }
+
+                const $slidesWrapper = this.$slidesWrapper;
+
+                const toRect = $to.getBoundingClientRect();
+                let startX = this.$slidesWrapper.scrollLeft,
+                    startY = this.$slidesWrapper.scrollTop;
+                const dist =
+                    this.props.direction === 'vertical' ? toRect.y : toRect.x;
+                const _this = this;
+
+                __easeInterval(
+                    this.props.transitionDuration,
+                    (percentage) => {
+                        const offset = (dist / 100) * percentage;
+
+                        // console.log(offset);
+                        if (this.props.direction === 'vertical') {
+                            this.$slidesWrapper.scroll(0, startY + offset);
                         } else {
-                            $slidesWrapper.style.overflowX = 'hidden';
+                            this.$slidesWrapper.scroll(startX + offset, 0);
                         }
                     },
-                },
-            );
-        }
+                    {
+                        easing: this.props.transitionEasing,
+                        onEnd() {
+                            if (_this.props.direction === 'vertical') {
+                                $slidesWrapper.style.overflowY = 'hidden';
+                            } else {
+                                $slidesWrapper.style.overflowX = 'hidden';
+                            }
+                            resolve();
+                        },
+                    },
+                );
+            }
+        });
     }
     render() {
         if (!this.$slides.length) return;

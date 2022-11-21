@@ -2,7 +2,7 @@
 // @ts-nocheck
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
- * @name        isoDateTime
+ * @name        isIsoDateTime
  * @namespace            shared.is
  * @type      Function
  * @platform          js

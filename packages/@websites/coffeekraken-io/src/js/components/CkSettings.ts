@@ -28,6 +28,7 @@ export default class CkSettings extends __SLitComponent {
         super({
             shadowDom: false,
         });
+        console.log('SETTIN');
     }
 
     async firstUpdated() {
@@ -61,7 +62,7 @@ export default class CkSettings extends __SLitComponent {
 
     render() {
         return html`
-            <div class="ck-settings" s-deps css="ckSettings">
+            <div s-deps css="ckSettings">
                 <div class="s-p:50 s-mbe:40 @mobile s-p:40 s-mbe:10">
                     <h1 class="s-typo:h3 s-mbe:40 @mobile s-mbe:0">Settings</h1>
                     <p class="s-typo:p @mobile s-hide">
@@ -73,7 +74,7 @@ export default class CkSettings extends __SLitComponent {
 
                 <form>
                     <ul class="__settings s-bg:odd">
-                        <li class="s-bg:main-surface">
+                        <!-- <li class="s-bg:main-surface">
                             <label
                                 class="s-label s-pi:50 s-pb:30 @mobile s-pi:40"
                             >
@@ -82,7 +83,7 @@ export default class CkSettings extends __SLitComponent {
                                     class="s-color:accent"
                                 ></s-theme-switcher>
                             </label>
-                        </li>
+                        </li> -->
                         <li class="s-bg:main-surface">
                             <label
                                 class="s-label:responsive s-pi:50 s-pb:30 @mobile s-pi:40"

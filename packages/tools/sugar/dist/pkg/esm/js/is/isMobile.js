@@ -17,7 +17,7 @@ import MobileDetect from 'mobile-detect';
  * @todo      tests
  *
  * @example 	js
- * import { __isMobile } from 'coffeekraken-sugar/is'
+ * import { __isMobile } from 'coffeekraken/sugar/is'
  * if (__isMobile()) {
  *   // do something cool...
  * }

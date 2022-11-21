@@ -1,14 +1,8 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
 
 class postcssUiSliderInterface extends __SInterface {
     static get _definition() {
         return {
-            style: {
-                type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.slider.defaultStyle'),
-            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -22,7 +16,6 @@ class postcssUiSliderInterface extends __SInterface {
 }
 
 export interface IPostcssUiSliderParams {
-    style: 'solid';
     scope: ('bare' | 'lnf' | 'behavior')[];
 }
 
@@ -58,7 +51,6 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiSliderParams = {
-        style: __STheme.get('ui.slider.defaultStyle'),
         scope: ['bare', 'lnf'],
         ...params,
     };
@@ -93,10 +85,7 @@ export default function ({
 
         `);
 
-        switch (finalParams.style) {
-            case 'solid':
-            default:
-                vars.push(`
+        vars.push(`
 
             &[lnf*='tight'][direction='horizontal'][controls] {
                 padding-left: calc(sugar.margin(30) + 1em);
@@ -273,8 +262,6 @@ export default function ({
             }
 
         `);
-                break;
-        }
     }
 
     return vars;

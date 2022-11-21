@@ -4,21 +4,6 @@ import __STheme from '@coffeekraken/s-theme';
 class postcssUiSpecsEditorClassesInterface extends __SInterface {
     static get _definition() {
         return {
-            styles: {
-                type: 'String[]',
-                values: ['solid'],
-                default: ['solid'],
-            },
-            defaultStyle: {
-                type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.specsEditor.defaultStyle') ?? 'solid',
-            },
-            defaultColor: {
-                type: 'String',
-                values: Object.keys(__STheme.get('color')),
-                default: __STheme.get('ui.specsEditor.defaultColor'),
-            },
             scope: {
                 type: {
                     type: 'Array<String>',

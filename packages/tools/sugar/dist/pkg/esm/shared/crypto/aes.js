@@ -5,7 +5,7 @@ import parse from '../string/parse';
 import toString from '../string/toString';
 /**
  * @name            aes
- * @namespace            js.crypto
+ * @namespace            shared.crypto
  * @type            Object
  * @platform          js
  * @platform          node

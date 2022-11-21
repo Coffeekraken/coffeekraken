@@ -1,14 +1,8 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
 
 class postcssUiRatingInterface extends __SInterface {
     static get _definition() {
         return {
-            style: {
-                type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.rating.defaultStyle'),
-            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -22,7 +16,6 @@ class postcssUiRatingInterface extends __SInterface {
 }
 
 export interface IPostcssUiRatingParams {
-    style: 'solid';
     scope: ('bare' | 'lnf')[];
 }
 
@@ -58,7 +51,6 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiRatingParams = {
-        style: __STheme.get('ui.rating.defaultStyle'),
         scope: ['bare', 'lnf'],
         ...params,
     };
@@ -93,14 +85,6 @@ export default function ({
             }
 
         `);
-
-        switch (finalParams.style) {
-            case 'solid':
-            default:
-                vars.push(`
-        `);
-                break;
-        }
     }
 
     return vars;

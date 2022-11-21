@@ -1,14 +1,8 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
 
 class postcssUiThemeSwitcherInterface extends __SInterface {
     static get _definition() {
         return {
-            style: {
-                type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.themeSwitcher.defaultStyle'),
-            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -22,7 +16,6 @@ class postcssUiThemeSwitcherInterface extends __SInterface {
 }
 
 export interface IPostcssUiThemeSwitcherParams {
-    style: 'solid';
     scope: ('bare' | 'lnf')[];
 }
 
@@ -58,7 +51,6 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiThemeSwitcherParams = {
-        style: __STheme.get('ui.themeSwitcher.defaultStyle'),
         scope: ['bare', 'lnf'],
         ...params,
     };
@@ -78,10 +70,7 @@ export default function ({
 
         `);
 
-        switch (finalParams.style) {
-            case 'solid':
-            default:
-                vars.push(`
+        vars.push(`
 
             .s-theme-switcher__dropdown-item {
                 gap: sugar.margin(30);
@@ -104,8 +93,6 @@ export default function ({
             }
 
         `);
-                break;
-        }
     }
 
     return vars;

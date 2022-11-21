@@ -43,21 +43,23 @@
       --max-height: 60vh;
 
       position: absolute;
-      top: 60px;
+      top: 80px;
       left: 50%;
       height: calc(var(--max-height) + 96px);
       max-width: 100vw;
-      transform: translateX(-50%);
+      transform: translateX(-50%) translateY(-200%);
       z-index: 10;
       background-color: sugar.color(main, surface);
       background-position: 0 0;
       background-size: contain;
       text-align: left;
-      display: none;
+      /* display: none; */
       overflow: hidden;
       border-radius: sugar.border.radius();
       @sugar.depth (10);
       @sugar.container (default);
+      opacity: 0;
+      transition: opacity 0.1s ease-out, top 0.1s ease-out;
 
       @sugar.media (>=wide) {
         @sugar.container (wide);
@@ -73,8 +75,13 @@
         flex-direction: column;
       }
     }
-    [active] .__subnav {
-      display: block;
+
+    .subnav-active .__subnav {
+      /* display: block; */
+      /* pointer-events: all; */
+      opacity: 1;
+      top: 60px;
+      transform: translateX(-50%) translateY(0);
 
       @sugar.media mobile {
         display: flex;

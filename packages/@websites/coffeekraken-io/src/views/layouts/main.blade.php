@@ -25,7 +25,7 @@
 
     <s-panel id="settings" position="right" backdrop s-scope>
         <template>
-            <ck-settings mount-when="inViewport"></ck-settings>
+            <ck-settings></ck-settings>
         </template>
     </s-panel>
 

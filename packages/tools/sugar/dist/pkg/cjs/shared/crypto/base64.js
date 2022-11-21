@@ -10,7 +10,7 @@ const parse_1 = __importDefault(require("../string/parse"));
 const toString_1 = __importDefault(require("../string/toString"));
 /**
  * @name            base64
- * @namespace            js.crypto
+ * @namespace            shared.crypto
  * @type            Object
  * @platform          js
  * @platform          node

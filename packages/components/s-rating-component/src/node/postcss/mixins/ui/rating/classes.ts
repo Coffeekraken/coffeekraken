@@ -4,21 +4,6 @@ import __STheme from '@coffeekraken/s-theme';
 class postcssUiRatingClassesInterface extends __SInterface {
     static get _definition() {
         return {
-            styles: {
-                type: 'String[]',
-                values: ['solid'],
-                default: ['solid'],
-            },
-            defaultStyle: {
-                type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.rating.defaultStyle') ?? 'solid',
-            },
-            defaultColor: {
-                type: 'String',
-                values: Object.keys(__STheme.get('color')),
-                default: __STheme.get('ui.rating.defaultColor'),
-            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -32,9 +17,6 @@ class postcssUiRatingClassesInterface extends __SInterface {
 }
 
 export interface IPostcssUiRatingClassesParams {
-    styles: 'solid'[];
-    defaultStyle: 'solid';
-    defaultColor: string;
     scope: ('bare' | 'lnf' | 'vr')[];
 }
 
@@ -52,9 +34,6 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiRatingClassesParams = {
-        styles: ['solid'],
-        defaultStyle: 'solid',
-        defaultColor: 'main',
         scope: ['bare', 'lnf'],
         ...params,
     };
@@ -74,10 +53,7 @@ export default function ({
         );
     }
 
-    if (
-        finalParams.styles.includes(finalParams.defaultStyle) &&
-        finalParams.scope.includes('lnf')
-    ) {
+    if (finalParams.scope.includes('lnf')) {
         vars.comment(
             `/**
             * @name          .s-rating[lnf="default"]
@@ -95,23 +71,11 @@ export default function ({
         ).code(
             `
             .s-rating[lnf="default"] {
-                @sugar.ui.rating($style: ${finalParams.defaultStyle}, $scope: lnf);
+                @sugar.ui.rating($scope: lnf);
             }`,
             {
                 type: 'CssClass',
             },
-        );
-    }
-
-    // default color
-    if (finalParams.scope.includes('lnf')) {
-        vars.code(
-            () => `
-            .s-rating:not(.s-color) {
-                @sugar.color(${finalParams.defaultColor});
-            }
-        `,
-            { type: 'CssClass' },
         );
     }
 

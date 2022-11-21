@@ -4,21 +4,6 @@ import __STheme from '@coffeekraken/s-theme';
 class postcssUiSliderClassesInterface extends __SInterface {
     static get _definition() {
         return {
-            styles: {
-                type: 'String[]',
-                values: ['solid'],
-                default: ['solid'],
-            },
-            defaultStyle: {
-                type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.slider.defaultStyle') ?? 'solid',
-            },
-            defaultColor: {
-                type: 'String',
-                values: Object.keys(__STheme.get('color')),
-                default: __STheme.get('ui.slider.defaultColor'),
-            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -32,9 +17,6 @@ class postcssUiSliderClassesInterface extends __SInterface {
 }
 
 export interface IPostcssUiSliderClassesParams {
-    styles: 'solid'[];
-    defaultStyle: 'solid';
-    defaultColor: string;
     scope: ('bare' | 'lnf' | 'behavior' | 'vr')[];
 }
 
@@ -52,9 +34,6 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiSliderClassesParams = {
-        styles: ['solid'],
-        defaultStyle: 'solid',
-        defaultColor: 'main',
         scope: ['bare', 'lnf', 'behavior'],
         ...params,
     };
@@ -74,10 +53,7 @@ export default function ({
         );
     }
 
-    if (
-        finalParams.styles.includes(finalParams.defaultStyle) &&
-        finalParams.scope.includes('lnf')
-    ) {
+    if (finalParams.scope.includes('lnf')) {
         vars.comment(
             `/**
             * @name          .s-slider[lnf="default"]
@@ -95,7 +71,7 @@ export default function ({
         ).code(
             `
             .s-slider[lnf="default"] {
-                @sugar.ui.slider($style: ${finalParams.defaultStyle}, $scope: lnf);
+                @sugar.ui.slider($scope: lnf);
             }
             `,
             {
@@ -104,14 +80,11 @@ export default function ({
         );
     }
 
-    if (
-        finalParams.styles.includes(finalParams.defaultStyle) &&
-        finalParams.scope.includes('behavior')
-    ) {
+    if (finalParams.scope.includes('behavior')) {
         vars.code(
             `
             .s-slider[behavior="default"] {
-                @sugar.ui.slider($style: ${finalParams.defaultStyle}, $scope: behavior);
+                @sugar.ui.slider($scope: behavior);
             }`,
             {
                 type: 'CssClass',

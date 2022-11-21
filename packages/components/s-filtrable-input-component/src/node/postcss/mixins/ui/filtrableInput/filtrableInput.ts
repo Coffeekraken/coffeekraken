@@ -1,18 +1,8 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
 
 class postcssUiFiltrableInputInterface extends __SInterface {
     static get _definition() {
         return {
-            style: {
-                type: 'String',
-                values: ['solid', 'gradient', 'outline', 'text'],
-                default: __STheme.get('ui.button.defaultStyle'),
-            },
-            outline: {
-                type: 'Boolean',
-                default: __STheme.get('ui.button.outline'),
-            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -26,8 +16,6 @@ class postcssUiFiltrableInputInterface extends __SInterface {
 }
 
 export interface IPostcssUiFiltrableInputParams {
-    style: 'solid';
-    outline: boolean;
     scope: ('bare' | 'lnf')[];
 }
 
@@ -64,8 +52,6 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiFiltrableInputParams = {
-        style: __STheme.get('ui.button.defaultStyle'),
-        outline: true,
         scope: ['bare', 'lnf'],
         ...params,
     };
@@ -101,10 +87,7 @@ export default function ({
             }
         `);
 
-        switch (finalParams.style) {
-            case 'solid':
-            default:
-                vars.push(`
+        vars.push(`
 
                 .s-filtrable-input__dropdown {
                     background-color: sugar.color(base, background);
@@ -141,15 +124,6 @@ export default function ({
                     }
                 }
         `);
-                break;
-        }
-
-        if (finalParams.outline) {
-            vars.push(`
-            
-
-          `);
-        }
     }
 
     return vars;

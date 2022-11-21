@@ -1,0 +1,9 @@
+.ck-discover-welcome {
+  .__refresh {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: all;
+  }
+}

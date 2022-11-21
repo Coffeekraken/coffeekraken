@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const isCjs_1 = __importDefault(require("./isCjs"));
 const isEsm_1 = __importDefault(require("./isEsm"));
 /**
- * @name          isSystem
+ * @name          isModuleSystem
  * @namespace            shared.is
  * @type          Function
  * @platform          js

@@ -1,14 +1,8 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
 
 class postcssUiSpecsEditorInterface extends __SInterface {
     static get _definition() {
         return {
-            style: {
-                type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.specsEditor.defaultStyle'),
-            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -22,7 +16,6 @@ class postcssUiSpecsEditorInterface extends __SInterface {
 }
 
 export interface IPostcssUiSpecsEditorParams {
-    style: 'solid';
     scope: ('bare' | 'lnf')[];
 }
 
@@ -58,7 +51,6 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiSpecsEditorParams = {
-        style: __STheme.get('ui.specsEditor.defaultStyle'),
         scope: ['bare', 'lnf'],
         ...params,
     };
@@ -77,15 +69,6 @@ export default function ({
         vars.push(`
 
         `);
-
-        switch (finalParams.style) {
-            case 'solid':
-            default:
-                vars.push(`
-
-        `);
-                break;
-        }
     }
 
     return vars;

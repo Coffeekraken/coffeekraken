@@ -1,6 +1,6 @@
 // @ts-nocheck
 /**
- * @name                      plainObject
+ * @name                      isPlainObject
  * @namespace            shared.is
  * @type                      Function
  * @platform          js

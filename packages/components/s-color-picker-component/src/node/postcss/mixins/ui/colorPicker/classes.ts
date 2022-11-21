@@ -4,21 +4,6 @@ import __STheme from '@coffeekraken/s-theme';
 class postcssUiColorPickerClassesInterface extends __SInterface {
     static get _definition() {
         return {
-            styles: {
-                type: 'String[]',
-                values: ['solid'],
-                default: ['solid'],
-            },
-            defaultStyle: {
-                type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.colorPicker.defaultStyle') ?? 'solid',
-            },
-            defaultColor: {
-                type: 'String',
-                values: Object.keys(__STheme.get('color')),
-                default: __STheme.get('ui.colorPicker.defaultColor'),
-            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -32,9 +17,6 @@ class postcssUiColorPickerClassesInterface extends __SInterface {
 }
 
 export interface IPostcssUiColorPickerClassesParams {
-    styles: 'solid'[];
-    defaultStyle: 'solid';
-    defaultColor: string;
     scope: ('bare' | 'lnf' | 'vr')[];
 }
 
@@ -53,7 +35,6 @@ export default function ({
 }) {
     const finalParams: IPostcssUiColorPickerClassesParams = {
         scope: ['bare', 'lnf'],
-        defaultColor: 'main',
         ...params,
     };
 
@@ -72,10 +53,7 @@ export default function ({
         );
     }
 
-    if (
-        finalParams.styles.includes(finalParams.defaultStyle) &&
-        finalParams.scope.includes('lnf')
-    ) {
+    if (finalParams.scope.includes('lnf')) {
         vars.comment(
             `/**
             * @name           .s-color-picker[lnf="default"]
@@ -92,23 +70,11 @@ export default function ({
         */`,
         ).code(
             `.s-color-picker[lnf="default"] {
-                @sugar.ui.colorPicker($style: ${finalParams.defaultStyle}, $scope: lnf);
+                @sugar.ui.colorPicker($scope: lnf);
             }`,
             {
                 type: 'CssClass',
             },
-        );
-    }
-
-    // default color
-    if (finalParams.scope.includes('lnf')) {
-        vars.code(
-            () => `
-            .s-color-picker:not(.s-color) {
-                @sugar.color(${finalParams.defaultColor});
-            }
-        `,
-            { type: 'CssClass' },
         );
     }
 

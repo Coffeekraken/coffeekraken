@@ -1,7 +1,7 @@
 // @ts-nocheck
 // TODO tests
 /**
- * @name                            linux
+ * @name                            isLinux
  * @namespace            shared.is
  * @type                            Function
  * @platform          js

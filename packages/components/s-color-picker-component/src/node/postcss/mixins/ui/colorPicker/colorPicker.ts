@@ -1,14 +1,8 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
 
 class postcssUiColorPickerInterface extends __SInterface {
     static get _definition() {
         return {
-            style: {
-                type: 'String',
-                values: ['solid'],
-                default: __STheme.get('ui.colorPicker.defaultStyle'),
-            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -22,7 +16,6 @@ class postcssUiColorPickerInterface extends __SInterface {
 }
 
 export interface IPostcssUiColorPickerParams {
-    style: 'solid';
     scope: ('bare' | 'lnf')[];
 }
 
@@ -58,7 +51,6 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiColorPickerParams = {
-        style: __STheme.get('ui.colorPicker.defaultStyle'),
         scope: ['bare', 'lnf'],
         ...params,
     };
@@ -160,10 +152,7 @@ export default function ({
             color: sugar.color(text);
         `);
 
-        switch (finalParams.style) {
-            case 'solid':
-            default:
-                vars.push(`
+        vars.push(`
 
                 .s-color-picker__picker {
                     @sugar.depth (100);
@@ -375,15 +364,6 @@ export default function ({
                 }
 
         `);
-                break;
-        }
-
-        if (finalParams.outline) {
-            vars.push(`
-            
-
-          `);
-        }
     }
 
     return vars;

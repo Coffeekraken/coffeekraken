@@ -1,47 +1,77 @@
 <section id="homepage-welcome" s-scope>
 
+    <div class="__illustration">
+        <svg xmlns="http://www.w3.org/2000/svg">
+            <linearGradient id="gradient-accent">
+                <stop class="__gradient-accent-start" offset="0"/>
+                <stop class="__gradient-accent-end" offset="100%"/>
+            </linearGradient>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg">
+            <linearGradient id="gradient-complementary">
+                <stop class="__gradient-complementary-start" offset="0"/>
+                <stop class="__gradient-complementary-end" offset="100%"/>
+            </linearGradient>
+        </svg>
+        <div class="__cup" s-parallax amount="0.05" amount-y="0">
+            <img src="/dist/img/welcome/cup.png" />
+        </div>
+        <div class="__smoke" s-parallax amount="0.05" amount-y="0">
+            <video playsinline autoplay muted loop>
+                <source src="/dist/img/cup-smoke.webm" type="video/webm">
+            </video>
+        </div>
+        <div class="__ts" s-parallax amount="0.05">
+            <img s-inline src="/dist/img/welcome/ts.svg" />
+        </div>
+        <div class="__css" s-parallax amount="0.05">
+            <img s-inline src="/dist/img/welcome/css.svg" />
+        </div>
+        <div class="__ui" s-parallax amount="0.15">
+            <img s-inline src="/dist/img/welcome/ui.svg" />
+        </div>
+        <div class="__node" s-parallax amount="0.2">
+            <img s-inline src="/dist/img/welcome/node.svg" />
+        </div>
+        <div class="__cli" s-parallax amount="0.15">
+            <img s-inline src="/dist/img/welcome/cli.svg" />
+        </div>
+        <div class="__php" s-parallax amount="0.1">
+            <img s-inline src="/dist/img/welcome/php.svg" />
+        </div>
+
+        <div class="__deco-01" s-parallax amount="0.15">
+            <img s-inline src="/dist/img/welcome/deco-01.svg" />
+        </div>
+        <div class="__deco-02" s-parallax amount="0.4">
+            <img s-inline src="/dist/img/welcome/deco-02.svg" />
+        </div>
+        <div class="__deco-03" s-parallax amount="0.1">
+            <img s-inline src="/dist/img/welcome/deco-03.svg" />
+        </div>
+
+        <div class="__shadow"></div>
+        <div class="__discover-02">
+            <ck-discover-welcome></ck-discover-welcome>
+        </div>
+
+    </div>
+
     <s-slider lnf="welcome-header" loop>
 
         <div s-slider-slide>
 
-            <div class="__content s-layout:12 s-gap:100">
+            <div class="__content">
 
                 <div>
                     @include('pages.homepage.welcome.partials.content')
                 </div>
 
-                <div class="__discovers">
-                    <div class="__discover-01">
-                        <ck-discover-welcome></ck-discover-welcome>
-                    </div>
-                    <div class="__discover-03">
-                        <ck-discover-welcome></ck-discover-welcome>
-                    </div>
-                    <div class="__discover-02">
-                        <ck-discover-welcome></ck-discover-welcome>
-                    </div>
-                </div>
-
-
-                {{-- <i class="s-icon:file-js __icon-1"></i>
-                <i class="s-icon:file-ts __icon-2"></i>
-                <i class="s-icon:file-css __icon-3"></i>
-                <i class="s-icon:file-md __icon-4"></i> --}}
-
-                {{-- <i class="__icon-1 s-icon:calendar s-tc:complementary s-font:80"></i>
-                <i class="__icon-2 s-icon:color s-tc:accent s-font:80"></i>
-                <i class="__icon-3 s-icon:github s-font:80"></i>
-                <i class="__icon-4 s-icon:vite s-tc:complementary s-font:80"></i>
-                <i class="__icon-5 s-icon:user s-tc:accent s-font:80"></i>
-                <i class="__icon-6 s-icon:npm s-font:80"></i> --}}
-
-                {{-- <ck-welcome-ratings></ck-welcome-ratings> --}}
-
             </div>
 
         </div>
 
-        <div s-slider-slide>
+        {{-- <div s-slider-slide>
 
              <div class="__content">
 
@@ -72,7 +102,7 @@
 
             </div>
 
-        </div>
+        </div> --}}
 
         <div s-slider-slide>
 
@@ -96,9 +126,9 @@
 
                 <br />
 
-                <div class="s-flex:justify-center s-gap:20 @mobile s-flex:column">
+                <div class="s-flex s-gap:20 @mobile s-flex:column">
                     <a class="s-btn s-color:accent" s-slider-previous title="Discover our components!">
-                        <i class="s-icon:arrow-left s-mie:10"></i> Theme switcher
+                        <i class="s-icon:arrow-left s-mie:10"></i> Welcome
                     </a>
                     <a class="s-btn s-color:complementary" s-slider-next title="Discover our components!">
                         Color picker <i class="s-icon:arrow-right s-mis:10"></i>
@@ -131,7 +161,7 @@
 
                 <br />
 
-                <div class="s-flex:justify-center s-gap:20 @mobile s-flex:column">
+                <div class="s-flex s-gap:20 @mobile s-flex:column">
                     <a class="s-btn s-color:accent" s-slider-previous title="Discover our components!">
                         <i class="s-icon:arrow-left s-mie:10"></i> Datetime picker
                     </a>
@@ -154,7 +184,7 @@
                     Icons are often a pain to manage. Here's our clean solution to make use of <span class="s-tc:complementary">Fontawesome</span> icons, as well as <span class="s-tc:accent">SVG</span> files. More sources can be added depending on the community needs...
                 </p>
 
-                <div class="s-mi:auto s-width:50 @mobile s-width:100 s-mbe:30">
+                <div class="@mobile s-mbe:30">
                     <s-code-example s-deps css="codeExample">
                         <template lang="css">
 @sugar.icon.classes {
@@ -183,7 +213,7 @@ independantly of the source -->
 
                 <br />
 
-                <div class="s-flex:justify-center s-gap:20 @mobile s-flex:column">
+                <div class="s-flex s-gap:20 @mobile s-flex:column">
                     <a class="s-btn s-color:accent" s-slider-previous title="Discover our components!">
                         <i class="s-icon:arrow-left s-mie:10"></i> Icons management
                     </a>
@@ -256,7 +286,7 @@ independantly of the source -->
                     We have a lot of form components for your to discover but here's a simple example of a login/signin form <span class="s-tc:accent">with validations</span> and responsive labels.
                 </p>
 
-                <form class="s-display:inline-block s-width:50 @mobile s-width:100">
+                <form>
 
                     <label class="s-label:responsive" s-form-validate email required>
                         <span>Email</span>
@@ -318,7 +348,7 @@ independantly of the source -->
                 <br />
 
 
-                <div class="s-flex:justify-center s-gap:20 @mobile s-flex:column">
+                <div class="s-flex s-gap:20 @mobile s-flex:column">
                     <a class="s-btn s-color:accent" s-slider-previous title="Discover our components!">
                         <i class="s-icon:arrow-left s-mie:10"></i> Icons management
                     </a>
@@ -341,7 +371,7 @@ independantly of the source -->
                     Ranges can be used for a lot of purposes. However, <span class="s-tc:accent">it often lacks of clear information about the value you are selecting</span>. Here's our ranges that handle that problem:
                 </p>
 
-                <div class="s-display:inline-block s-width:50 @mobile s-width:100">
+                <div>
                     <s-range name="myCoolRange" value="90" class="s-color:accent s-mbe:30"></s-range>
                     <s-range name="myOtherRanfe" class="s-mbe:30 s-color:complementary" tooltip></s-range>
                     <s-range name="myOtherRanfe" class="s-mbe:30 s-color:accent" tooltip step="10"></s-range>
@@ -359,7 +389,7 @@ independantly of the source -->
 
                 <br />
 
-                <div class="s-flex:justify-center s-gap:20 @mobile s-flex:column">
+                <div class="s-flex s-gap:20 @mobile s-flex:column">
                     <a class="s-btn s-color:accent" s-slider-previous title="Discover our components!">
                         <i class="s-icon:arrow-left s-mie:10"></i> Forms
                     </a>
@@ -386,7 +416,7 @@ independantly of the source -->
                     CSS classes (postcss)
                 </h3>
                 <p class="s-font:50 s-mbe:30 s-color:accent">
-                    <span class="s-badge:outline s-mie:10">Margins</span> <span class="s-badge:outline s-mie:10">Paddings</span> <span class="s-badge:outline s-mie:10">Colors</span> <span class="s-badge:outline s-mie:10">Flexbox</span> <span class="s-badge:outline s-mie:10">Typography</span> <span class="s-badge:outline s-mie:10">And more...</span>
+                    <span class="s-badge:outline s-mie:10 s-mbe:20">Margins</span> <span class="s-badge:outline s-mie:10 s-mbe:20">Paddings</span> <span class="s-badge:outline s-mie:10 s-mbe:20">Colors</span> <span class="s-badge:outline s-mie:10 s-mbe:20">Flexbox</span> <span class="s-badge:outline s-mie:10 s-mbe:20">Typography</span> <span class="s-badge:outline s-mie:10 s-mbe:20">And more...</span>
                 </p>
 
                 <br />
@@ -395,32 +425,35 @@ independantly of the source -->
                     JS (browser)
                 </h3>
                 <p class="s-font:50 s-mbe:30 s-color:accent">
-                    <span class="s-badge:outline s-mie:10">querySelectorLive</span> <span class="s-badge:outline s-mie:10">whenInViewport</span> <span class="s-badge:outline s-mie:10">deepMerge</span> <span class="s-badge:outline s-mie:10">deepProxy</span> <span class="s-badge:outline s-mie:10">isMobile</span> <span class="s-badge:outline s-mie:10">And more...</span>
+                    <span class="s-badge:outline s-mie:10 s-mbe:20">querySelectorLive</span> <span class="s-badge:outline s-mie:10 s-mbe:20">whenInViewport</span> <span class="s-badge:outline s-mie:10 s-mbe:20">deepMerge</span> <span class="s-badge:outline s-mie:10 s-mbe:20">deepProxy</span> <span class="s-badge:outline s-mie:10 s-mbe:20">isMobile</span> <span class="s-badge:outline s-mie:10 s-mbe:20">And more...</span>
                 </p>
 
-                <br />
+                {{-- <br />
 
                 <div class="@mobile s-hide">
                     <h3 class="s-typo:h5 s-mbe:20 s-display:inline-block">
                         Node JS
                     </h3>
                     <p class="s-font:50 s-mbe:50 s-color:accent">
-                        <span class="s-badge:outline s-mie:10">getFreePort</span> <span class="s-badge:outline s-mie:10">isChildProcess</span> <span class="s-badge:outline s-mie:10">hotkey</span> <span class="s-badge:outline s-mie:10">packageRoot</span> <span class="s-badge:outline s-mie:10">onProcessExit</span> <span class="s-badge:outline s-mie:10">And more...</span>
+                        <span class="s-badge:outline s-mie:10 s-mbe:20">getFreePort</span> <span class="s-badge:outline s-mie:10 s-mbe:20">isChildProcess</span> <span class="s-badge:outline s-mie:10 s-mbe:20">hotkey</span> <span class="s-badge:outline s-mie:10 s-mbe:20">packageRoot</span> <span class="s-badge:outline s-mie:10 s-mbe:20">onProcessExit</span> <span class="s-badge:outline s-mie:10 s-mbe:20">And more...</span>
                     </p>
 
                     <br />
-                </div>
+                </div> --}}
 
                 <p class="s-font:30 s-mbe:50">
                     And a lot more...
                 </p>
 
-                <div class="s-flex:justify-center s-gap:20 @mobile s-flex:column">
+                <div class="s-flex s-gap:20 @mobile s-flex:column">
                     <a class="s-btn s-color:accent" s-slider-previous title="Discover our components!">
                         <i class="s-icon:arrow-left s-mie:10"></i> Ranges
                     </a>
-                    <a class="s-btn s-color:complementary" s-slider-next title="Discover our components!">
+                    {{-- <a class="s-btn s-color:complementary" s-slider-next title="Discover our components!">
                         And more... <i class="s-icon:arrow-right s-mis:10"></i>
+                    </a> --}}
+                    <a class="s-btn s-color:complementary" href="/doc/get-started/get-started"  title="Discover our components!">
+                        Get started!</i>
                     </a>
                 </div>
 
@@ -428,7 +461,7 @@ independantly of the source -->
 
         </div>
         
-        <div s-slider-slide>
+        {{-- <div s-slider-slide>
 
              <div class="__content">
 
@@ -454,7 +487,7 @@ independantly of the source -->
 
                 <br />
 
-                <div class="s-flex:justify-center s-gap:20 @mobile s-flex:column">
+                <div class="s-flex s-gap:20 @mobile s-flex:column">
                     <a class="s-btn s-color:accent" s-slider-previous title="Discover our components!">
                         <i class="s-icon:arrow-left s-mie:10"></i> Helpers
                     </a>
@@ -465,7 +498,7 @@ independantly of the source -->
 
             </div>
 
-        </div>
+        </div> --}}
 
 
     </s-slider>

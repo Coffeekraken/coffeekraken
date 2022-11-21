@@ -10,7 +10,7 @@ const toString_1 = __importDefault(require("../string/toString"));
 const __encryptedMessages = {};
 /**
  * @name            sha256
- * @namespace            js.crypto
+ * @namespace            shared.crypto
  * @type            Object
  * @platform          js
  * @platform          node

@@ -12,7 +12,7 @@
         pointer-events: all;
     }
 
-    &:not([status='mounted']) > * {
+    &:not([mounted]) > * {
         display: none;
     }
 }
@@ -46,7 +46,7 @@
         max-width: auto;
     }
 
-    [status='mounted'] & {
+    [mounted] & {
         display: block;
     }
 

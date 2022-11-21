@@ -15,7 +15,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const terminal_kit_1 = __importDefault(require("terminal-kit"));
 /**
- * @name            onProcessExit222
+ * @name            onProcessExit
  * @namespace            node.process
  * @type            Function
  * @platform        node

@@ -1,5 +1,5 @@
 /**
- * @name            commonProgrammingFileExtensions
+ * @name            commonVideoFileExtensions
  * @namespace       shared.extension
  * @type            Function
  * @platform       node

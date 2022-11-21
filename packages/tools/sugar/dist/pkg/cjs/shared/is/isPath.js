@@ -6,7 +6,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const is_valid_path_1 = __importDefault(require("is-valid-path"));
 /**
- * @name                            path
+ * @name                            isPath
  * @namespace           shared.is
  * @type                            Function
  * @platform          js

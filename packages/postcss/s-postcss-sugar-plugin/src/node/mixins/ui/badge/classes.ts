@@ -107,9 +107,6 @@ export default function ({
             })
             .join('\n')}
         * 
-        * @cssClass         s-badge:square       Display your badge with squared corners
-        * @cssClass         s-badge:pill         Display your badge with rounded corners
-        * 
         ${finalParams.lnfs
             .map((lnf) => {
                 return ` * @example        html       ${lnf}
@@ -131,8 +128,8 @@ export default function ({
         * 
         * @example          html        Shapes
         * <a class="s-badge s-mie:20 s-mbe:20">Say hello!</a>
-        * <a class="s-badge:pill s-mie:20 s-mbe:20">Say hello!</a>
-        * <a class="s-badge:square s-mie:20 s-mbe:20">Say hello!</a>
+        * <a class="s-badge s-shape:pill s-mie:20 s-mbe:20">Say hello!</a>
+        * <a class="s-badge s-shape:square s-mie:20 s-mbe:20">Say hello!</a>
         * 
         * @example        html       Scales
         *   <a class="s-badge s-scale:05 s-mie:20 s-mbe:20">Say hello!</a>
@@ -202,54 +199,6 @@ export default function ({
             );
         });
     }
-
-    vars.comment(
-        () => `/**
-    * @name           s-badge:pill
-    }
-    * @namespace          sugar.ui.badge
-    * @type           CssClass
-    * 
-    * This class represent a(n) "<s-color="accent">pill</s-color>" badge
-    * 
-    * @example        html
-    * <a class="s-badge:pill">I'm a cool pill badge</a>
-    * 
-    * @since    2.0.0
-    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-*/`,
-    ).code(
-        `
-    .s-badge--pill {
-        border-radius: 9999px;
-    }
-`,
-        { type: 'CssClass' },
-    );
-
-    vars.comment(
-        () => `/**
-    * @name           s-badge:square
-    }
-    * @namespace          sugar.ui.badge
-    * @type           CssClass
-    * 
-    * This class represent a(n) "<s-color="accent">square</s-color>" badge
-    * 
-    * @example        html
-    * <a class="s-badge:square">I'm a cool square badge</a>
-    * 
-    * @since    2.0.0
-    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-*/`,
-    ).code(
-        `
-    .s-badge--square {
-        border-radius: 0;
-    }
-`,
-        { type: 'CssClass' },
-    );
 
     return vars;
 }

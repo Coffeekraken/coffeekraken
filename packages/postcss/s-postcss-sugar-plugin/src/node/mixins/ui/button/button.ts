@@ -117,7 +117,7 @@ export default function ({
         vars.push(`
           font-size: sugar.scalable(1rem);
           text-decoration: none;
-          @sugar.border.radius(ui.button.borderRadius);
+          @sugar.shape;
         `);
 
         switch (finalParams.lnf) {

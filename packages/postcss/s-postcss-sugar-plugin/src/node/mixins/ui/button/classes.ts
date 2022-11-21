@@ -112,8 +112,6 @@ export default function ({
                 }           Apply the ${lnf} button lnf`;
             })
             .join('\n')}
-        * @cssClass             s-btn:pill                  Apply the pill shape
-        * @cssClass             s-btn:square                Apply the square shape
         * @cssClass            s-format:text button             Apply the button style on button tags inside the s-format:text scope 
         * @cssClass            s-rhythm:vertical              Apply the default vertical rhythm on scoped button(s)
         * 
@@ -147,8 +145,9 @@ export default function ({
             .join('\n')}
         * 
         * @example       html       Shapes
-        *   <a tabindex="0" class="s-btn:pill s-mie:20">Click me!</a>
-        *   <a tabindex="0" class="s-btn:square s-mie:20">Click me!</a>
+        *   <a tabindex="0" class="s-btn s-shape:default s-mie:20">Click me!</a>
+        *   <a tabindex="0" class="s-btn s-shape:pill s-mie:20">Click me!</a>
+        *   <a tabindex="0" class="s-btn s-shape:square s-mie:20">Click me!</a>
         * 
         * @example       html       Scales
         *   <a tabindex="0" class="s-btn s-scale:07 s-mie:20">Click me!</a>
@@ -224,66 +223,6 @@ export default function ({
             );
         });
     }
-
-    vars.comment(
-        () => `/**
-        * @name           s-btn:pill
-        * @namespace          sugar.style.ui.button
-        * @type           CssClass
-        * 
-        * Apply the pill shape to a button
-        * 
-        * @example        html
-        * <div class="s-format:text">
-        *   <button>
-        *       Hello world
-        *   </button>
-        * </div>
-        * 
-        * @since      2.0.0
-        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-    */
-   `,
-    ).code(
-        `
-            s-btn--pill {
-                border-radius: 9999px;
-            } 
-    `,
-        {
-            type: 'CssClass',
-        },
-    );
-
-    vars.comment(
-        () => `/**
-        * @name           s-btn:square
-        * @namespace          sugar.style.ui.button
-        * @type           CssClass
-        * 
-        * Apply the square shape to a button
-        * 
-        * @example        html
-        * <div class="s-format:text">
-        *   <button>
-        *       Hello world
-        *   </button>
-        * </div>
-        * 
-        * @since      2.0.0
-        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-    */
-   `,
-    ).code(
-        `
-            s-btn--square {
-                border-radius: 0;
-            } 
-    `,
-        {
-            type: 'CssClass',
-        },
-    );
 
     vars.comment(
         () => `/**

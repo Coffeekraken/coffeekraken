@@ -29,7 +29,10 @@ class postcssSugarPluginBorderRadiusFunctionInterface extends __SInterface {
         return {
             radius: {
                 type: 'String',
-                values: Object.keys(__STheme.get('border.radius')),
+                values: [
+                    ...Object.keys(__STheme.get('border.radius')),
+                    'shape',
+                ],
                 default: 'default',
                 required: true,
             },
@@ -74,7 +77,9 @@ export default function ({
         }
 
         // default return simply his value
-        if (`${s}`.match(/[a-zA-Z]+$/)) {
+        if (s === 'shape') {
+            return `var(--s-shape, sugar.theme(border.radius.default, ${finalParams.scalable}))`;
+        } else if (`${s}`.match(/[a-zA-Z]+$/)) {
             // @ts-ignore
             if (finalParams.scalable) {
                 return `sugar.scalable(${s})`;

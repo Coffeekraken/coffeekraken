@@ -127,6 +127,8 @@
         "cwd": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@examples/01-basic"
     },
     "google": {
+        "gtm": null,
+        "ga": null,
         "map": {
             "apiKey": "AIzaSyDzFfEzhmYXRTlONUCtMWQ88uHJhsbtXY4"
         }

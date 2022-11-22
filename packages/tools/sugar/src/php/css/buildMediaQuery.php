@@ -74,6 +74,7 @@ function buildMediaQuery($media, $frontspecMedia = null)
 
     // sort the media
     $finalParams = \Sugar\frontspec\sortMedia($finalParams);
+    $sortedMedias = array_keys(get_object_vars($finalParams->queries));
 
     $queries = [];
 
@@ -84,7 +85,7 @@ function buildMediaQuery($media, $frontspecMedia = null)
 
     $fullQueriesList = [];
 
-    foreach ($queries as $query) {
+    foreach ($queries as $queryKey => $query) {
         $currentQueryList = [];
 
         if ($query == 'and' || $query == 'or') {
@@ -126,45 +127,39 @@ function buildMediaQuery($media, $frontspecMedia = null)
         }
 
         $queryList = [];
-        foreach (array_keys((array) $mediaQueryConfig) as $prop) {
+        foreach (array_keys((array) $mediaQueryConfig) as $key => $prop) {
             $value = $mediaQueryConfig->$prop;
 
             if ($value == null) {
-                continue;
+                if ($prop == 'minWidth') {
+                    $value = 0;
+                } elseif ($prop == 'maxWidth') {
+                    $value = 99999;
+                }
             }
 
             $camelToDashMap = [
                 'minWidth' => 'min-width',
-                'maxWidth' => 'max-width',
-                'minDeviceWidth' => 'min-device-width',
-                'maxDeviceWidth' => 'max-device-width',
+                'maxWidth' => 'max-width'
             ];
 
             if (
                 in_array($prop, [
                     'minWidth',
-                    'maxWidth',
-                    'minDeviceWidth',
-                    'maxDeviceWidth',
+                    'maxWidth'
                 ])
             ) {
                 if ($action == '>') {
-                    if ($prop == 'maxWidth' || $prop == 'maxDeviceWidth') {
+                    if ($prop == 'maxWidth') {
                         $argName = 'min-width';
-                        if (str_contains($prop, 'Device')) {
-                            $argName = 'min-device-width';
-                        }
                         array_push(
                             $queryList,
                             '(' . $argName . ': ' . ($value + 1) . 'px)'
                         );
                     }
                 } elseif ($action == '<') {
-                    if ($prop == 'minWidth' || $prop == 'minDeviceWidth') {
+                    if ($prop == 'minWidth') {
                         $argName = 'max-width';
-                        if (str_contains($prop, 'Device')) {
-                            $argName = 'max-device-width';
-                        }
                         array_push(
                             $queryList,
                             '(' . $argName . ': ' . $value . 'px)'
@@ -176,33 +171,26 @@ function buildMediaQuery($media, $frontspecMedia = null)
                         '(' . $camelToDashMap[$prop] . ': ' . $value . 'px)'
                     );
                 } elseif ($action == '>=') {
-                    if ($prop == 'minWidth' || $prop == 'minDeviceWidth') {
+
+                    if (end($sortedMedias) == $media) {
+                        continue;
+                    }
+
+                    if ($prop == 'minWidth') {
                         $argName = 'min-width';
-                        if (str_contains($prop, 'Device')) {
-                            $argName = 'min-device-width';
-                        }
                         array_push(
                             $queryList,
                             '(' . $argName . ': ' . $value . 'px)'
                         );
                     }
                 } elseif ($action == '<=') {
-                    if ($prop == 'maxWidth' || $prop == 'maxDeviceWidth') {
-                        $argName = 'max-width';
-                        if (str_contains($prop, 'Device')) {
-                            $argName = 'max-device-width';
-                        }
-                        array_push(
-                            $queryList,
-                            '(' . $argName . ': ' . $value . 'px)'
-                        );
+
+                    if ($sortedMedias[0] == $media) {
+                        continue;
                     }
-                } elseif ($action == '>=') {
-                    if ($prop == 'minWidth' || $prop == 'minDeviceWidth') {
-                        $argName = 'min-width';
-                        if (str_contains($prop, 'Device')) {
-                            $argName = 'min-device-width';
-                        }
+
+                    if ($prop == 'maxWidth') {
+                        $argName = 'max-width';
                         array_push(
                             $queryList,
                             '(' . $argName . ': ' . $value . 'px)'

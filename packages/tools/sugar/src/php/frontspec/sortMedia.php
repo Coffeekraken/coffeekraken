@@ -50,15 +50,15 @@ function sortMedia($media)
     $sortedQueries = (object) [];
 
     // add the "defaultMedia" first if exists
-    if (isset($queries->$defaultMedia)) {
-        $sortedQueries->$defaultMedia = $queries->$defaultMedia;
-    }
+    // if (isset($queries->$defaultMedia)) {
+    //     $sortedQueries->$defaultMedia = $queries->$defaultMedia;
+    // }
 
     // add all the others queries next
     foreach ((array) $queries as $m => $query) {
-        if ($m == $defaultMedia) {
-            continue;
-        }
+        // if ($m == $defaultMedia) {
+        //     continue;
+        // }
         $sortedQueries->$m = $query;
     }
 

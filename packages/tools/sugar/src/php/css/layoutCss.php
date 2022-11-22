@@ -77,10 +77,6 @@ function layoutCss($layout, $settings = [])
             }
         }
 
-        if (isset($layout['default'])) {
-            $orderedLayouts['default'] = $layout['default'];
-        }
-
         foreach ($orderedLayouts as $media => $lay) {
             array_push(
                 $finalCss,
@@ -100,10 +96,6 @@ function layoutCss($layout, $settings = [])
     // it is setted to null to avoid creating media query for it
     if ($finalParams->media == 'default') {
         $finalParams->media = null;
-    } elseif (isset($finalParams->mediaSettings->defaultMedia)) {
-        if ($finalParams->media == $finalParams->mediaSettings->defaultMedia) {
-            $finalParams->media = null;
-        }
     }
 
     $areas = [];

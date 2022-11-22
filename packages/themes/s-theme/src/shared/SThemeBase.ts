@@ -513,6 +513,9 @@ export default class SThemeBase extends __SEventEmitter {
     static buildMediaQuery(queryString: string): string {
         let currentQueryList: string[] = [];
 
+        const mediaConfig = this.sortMedia(this.get('media')),
+            sortedMedia = Object.keys(mediaConfig.queries);
+
         const queryAr = queryString
             .split(' ')
             .map((l) => l.trim())
@@ -566,51 +569,42 @@ export default class SThemeBase extends __SEventEmitter {
                 // dash case
                 const dashProp = __dashCase(prop);
 
-                const value = mediaQueryConfig[prop];
-                if (!value) return;
+                let value = mediaQueryConfig[prop];
+                if (!value) {
+                    if (prop === 'minWidth') {
+                        value = 0;
+                    } else if (prop === 'maxWidth') {
+                        value = 99999;
+                    }
+                }
 
-                if (
-                    [
-                        'min-width',
-                        'max-width',
-                        'min-device-width',
-                        'max-device-width',
-                    ].indexOf(dashProp) !== -1
-                ) {
+                if (['min-width', 'max-width'].indexOf(dashProp) !== -1) {
                     if (action === '>') {
-                        if (
-                            dashProp === 'max-width' ||
-                            dashProp === 'max-device-width'
-                        ) {
+                        if (dashProp === 'max-width') {
                             let argName = 'min-width';
-                            if (dashProp.includes('-device'))
-                                argName = 'min-device-width';
                             queryList.push(`(${argName}: ${value + 1}px)`);
                         }
                     } else if (action === '<') {
-                        if (
-                            dashProp === 'min-width' ||
-                            dashProp === 'min-device-width'
-                        ) {
+                        if (dashProp === 'min-width') {
                             let argName = 'max-width';
-                            if (dashProp.includes('-device'))
-                                argName = 'max-device-width';
                             queryList.push(`(${argName}: ${value}px)`);
                         }
                     } else if (action === '=') {
                         queryList.push(`(${dashProp}: ${value}px)`);
                     } else if (action === '>=') {
-                        if (
-                            dashProp === 'min-width' ||
-                            dashProp === 'min-device-width'
-                        ) {
+                        if (sortedMedia.at(-1) === mediaName) {
+                            return;
+                        }
+
+                        if (dashProp === 'min-width') {
                             queryList.push(`(${dashProp}: ${value}px)`);
                         }
                     } else if (action === '<=') {
-                        if (
-                            dashProp === 'max-width' ||
-                            dashProp === 'max-device-width'
-                        ) {
+                        if (sortedMedia[0] === mediaName) {
+                            return;
+                        }
+
+                        if (dashProp === 'max-width') {
                             queryList.push(`(${dashProp}: ${value}px)`);
                         }
                     } else {

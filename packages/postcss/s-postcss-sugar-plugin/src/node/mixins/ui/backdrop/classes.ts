@@ -80,7 +80,7 @@ export default function ({
         * \\@sugar.ui.backdrop.classes;
         * 
         * .my-backdrop {
-        *   \\@sugar.ui.backdrop;
+        *   \@sugar.ui.backdrop;
         * }
         * 
         * @cssClass                 s-backdrop          Apply the backdrop styling

@@ -68,7 +68,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * \\@sugar.ui.badge.classes;
         * 
         * .my-badge {
-        *   \\@sugar.ui.badge;
+        *   \@sugar.ui.badge;
         * }
         * 
         ${finalParams.lnfs

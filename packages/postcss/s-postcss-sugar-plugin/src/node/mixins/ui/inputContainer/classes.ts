@@ -95,7 +95,7 @@ export default function ({
         * \\@sugar.ui.inputContainer.classes;
         * 
         * .my-inputContainer {
-        *   \\@sugar.ui.inputContainer;
+        *   \@sugar.ui.inputContainer;
         * }
         * 
         ${finalParams.lnfs

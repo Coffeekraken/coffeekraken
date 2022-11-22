@@ -88,7 +88,7 @@ export default function ({
         * \\@sugar.ui.blockquote.classes;
         * 
         * .my-blockquote {
-        *   \\@sugar.ui.blockquote;
+        *   \@sugar.ui.blockquote;
         * }
         * 
         * @cssClass         s-blockquote            Apply the blockquote styling
@@ -108,6 +108,17 @@ export default function ({
         *
         * @example    html       RTL Support
         *   <p class="s-blockquote s-mbe:30" dir="rtl">
+        *       ${__faker.lorem.paragraph()}
+        *   </p>
+        * 
+        * @example          html        Shapes
+        * <p class="s-blockquote s-shape:default s-mbe:30">
+        *       ${__faker.lorem.paragraph()}
+        *   </p>
+        *   <p class="s-blockquote s-shape:pill s-mbe:30">
+        *       ${__faker.lorem.paragraph()}
+        *   </p>
+        * <p class="s-blockquote s-shape:square s-mbe:30">
         *       ${__faker.lorem.paragraph()}
         *   </p>
         * 

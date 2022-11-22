@@ -1,5 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          table
@@ -27,11 +26,6 @@ import __STheme from '@coffeekraken/s-theme';
 class postcssSugarPluginUiTableInterface extends __SInterface {
     static get _definition() {
         return {
-            lnf: {
-                type: 'String',
-                values: ['default'],
-                default: __STheme.get('ui.table.defaultLnf'),
-            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -45,7 +39,6 @@ class postcssSugarPluginUiTableInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiTableParams {
-    lnf: 'default';
     scope: ('bare' | 'lnf')[];
 }
 
@@ -61,7 +54,6 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiTableParams = {
-        lnf: 'default',
         scope: ['bare', 'lnf'],
         ...params,
     };
@@ -96,28 +88,24 @@ export default function ({
     }
 
     if (finalParams.scope.includes('lnf')) {
-        switch (finalParams.lnf) {
-            default:
-                vars.push(`
-                    @sugar.depth(ui.table.depth);
-                    position: relative;
-                    box-shadow: 0 0 0 sugar.theme(ui.table.borderWidth) sugar.color(current, border);
-                    overflow: hidden;
+        vars.push(`
+            @sugar.depth(ui.table.depth);
+            position: relative;
+            box-shadow: 0 0 0 sugar.theme(ui.table.borderWidth) sugar.color(current, border);
+            overflow: hidden;
+            @sugar.shape();
 
-                    &, th, td {
+            &, th, td {
 
-                    }
-                    th {
-                        background-color: sugar.color(current, surface);
-                        font-weight: bold;
-                    }
-                    td, th {
-                    
-                    }
-
-  `);
-                break;
-        }
+            }
+            th {
+                background-color: sugar.color(current, surface);
+                font-weight: bold;
+            }
+            td, th {
+            
+            }
+        `);
     }
 
     return vars;

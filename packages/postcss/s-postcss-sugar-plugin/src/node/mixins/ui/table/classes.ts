@@ -12,8 +12,6 @@ import __faker from 'faker';
  *
  * Generate the table classes
  *
- * @param       {('default')[]}                           [lnfs=['default']]         The style(s) you want to generate
- * @param       {'default'}                [defaultLnf='theme.ui.table.defaultLnf']           The default style you want
  * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
@@ -27,15 +25,6 @@ import __faker from 'faker';
 class postcssSugarPluginUiTableClassesInterface extends __SInterface {
     static get _definition() {
         return {
-            lnfs: {
-                type: 'String[]',
-                default: ['default'],
-            },
-            defaultLnf: {
-                type: 'String',
-                values: ['default'],
-                default: __STheme.get('ui.table.defaultLnf'),
-            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -49,8 +38,6 @@ class postcssSugarPluginUiTableClassesInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiTableClassesParams {
-    lnfs: 'default'[];
-    defaultLnf: 'default';
     scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
 }
 
@@ -68,8 +55,6 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiTableClassesParams = {
-        lnfs: [],
-        defaultLnf: 'default',
         scope: [],
         ...params,
     };
@@ -100,46 +85,29 @@ export default function ({
         * \\@sugar.ui.table.classes;
         * 
         * .my-table {
-        *   \\@sugar.ui.table;
+        *   \@sugar.ui.table;
         * }
         * 
-        ${finalParams.lnfs
-            .map((lnf) => {
-                return ` * @cssClass     s-table${
-                    lnf === finalParams.defaultLnf ? '' : `:${lnf}`
-                }           Apply the ${lnf} table lnf`;
-            })
-            .join('\n')}
+        * @cssClass     s-table            Apply the table lnf
         * 
-        ${finalParams.lnfs
-            .map((lnf) => {
-                return ` * @example        html       ${lnf} lnf ${
-                    finalParams.defaultLnf === lnf
-                        ? '<span class="s-badge:outline s-scale:05">default</span>'
-                        : ''
-                }
-            *   <table class="s-table${
-                lnf === finalParams.defaultLnf ? '' : `:${lnf}`
-            } s-mbe:30">
-            *       <tr>
-            *           <th>${__faker.name.findName()}</th>
-            *           <th>${__faker.name.findName()}</th>
-            *           <th>${__faker.name.findName()}</th>
-            *       </tr>
-            *       <tr>
-            *           <td>${__faker.name.findName()}</td>
-            *           <td>${__faker.name.findName()}</td>
-            *           <td>${__faker.name.findName()}</td>
-            *       </tr>
-            *       <tr>
-            *           <td>${__faker.name.findName()}</td>
-            *           <td>${__faker.name.findName()}</td>
-            *           <td>${__faker.name.findName()}</td>
-            *       </tr>
-            *   </table>
-            * `;
-            })
-            .join('\n')}
+        * @example        html       Default
+        *   <table class="s-table s-mbe:30">
+        *       <tr>
+        *           <th>${__faker.name.findName()}</th>
+        *           <th>${__faker.name.findName()}</th>
+        *           <th>${__faker.name.findName()}</th>
+        *       </tr>
+        *       <tr>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *       </tr>
+        *       <tr>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *       </tr>
+        *   </table>
         *
         * @example      html        RTL Support
         * <div dir="rtl">
@@ -162,11 +130,48 @@ export default function ({
         *   </table>
         * </div>
         * 
+        * @example      html        Shapes
+        *   <table class="s-table s-shape:square s-mbe:30">
+        *       <tr>
+        *           <th>${__faker.name.findName()}</th>
+        *           <th>${__faker.name.findName()}</th>
+        *           <th>${__faker.name.findName()}</th>
+        *       </tr>
+        *       <tr>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *       </tr>
+        *       <tr>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *           <td>${__faker.name.findName()}</td>
+        *       </tr>
+        *   </table>
+        * 
+        * <table class="s-table s-shape:pill">
+       *       <tr>
+       *           <th>${__faker.name.findName()}</th>
+       *           <th>${__faker.name.findName()}</th>
+       *           <th>${__faker.name.findName()}</th>
+       *       </tr>
+       *       <tr>
+       *           <td>${__faker.name.findName()}</td>
+       *           <td>${__faker.name.findName()}</td>
+       *           <td>${__faker.name.findName()}</td>
+       *       </tr>
+       *       <tr>
+       *           <td>${__faker.name.findName()}</td>
+       *           <td>${__faker.name.findName()}</td>
+       *           <td>${__faker.name.findName()}</td>
+       *       </tr>
+       *   </table>
+        * 
         * @example      html        Scales
         ${['07', '1', '13', '16']
             .map(
                 (scale) => `
-        *   <table class="s-table s-scale:${scale}">
+        *   <table class="s-table s-scale:${scale} s-mbe:30">
         *       <tr>
         *           <th>${__faker.name.findName()}</th>
         *           <th>${__faker.name.findName()}</th>
@@ -191,7 +196,7 @@ export default function ({
         ${['main', 'accent', 'complementary', 'error']
             .map(
                 (color) => `
-        *   <table class="s-table s-color:${color}">
+        *   <table class="s-table s-color:${color} s-mbe:30">
         *       <tr>
         *           <th>${__faker.name.findName()}</th>
         *           <th>${__faker.name.findName()}</th>
@@ -257,22 +262,16 @@ export default function ({
     }
 
     if (finalParams.scope.includes('lnf')) {
-        finalParams.lnfs.forEach((lnf) => {
-            const isDefaultStyle = finalParams.defaultLnf === lnf;
-
-            const styleCls = isDefaultStyle ? '' : `.s-table--${lnf}`;
-            const cls = `.s-table${styleCls}`;
-
-            vars.comment(
-                () => `/**
-            * @name           s-table${isDefaultStyle ? '' : `:${lnf}`}
+        vars.comment(
+            () => `/**
+            * @name           s-table
             * @namespace          sugar.style.ui.table
             * @type           CssClass
             * 
-            * This class represent a(n) "<yellow>${lnf}</yellow>" table
+            * This class represent a(n) table
             * 
             * @example        html
-            * <table class="s-table${isDefaultStyle ? '' : `:${lnf}`}">
+            * <table class="s-table">
             *   <tr>
             *       <th>Hello</th>
             *       <th>World</th>
@@ -290,15 +289,14 @@ export default function ({
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
-            );
-            vars.code(
-                () => `
-                ${cls} {
-                    @sugar.ui.table($lnf: ${lnf}, $scope: lnf);
+        );
+        vars.code(
+            () => `
+                .s-table {
+                    @sugar.ui.table($scope: lnf);
                 }`,
-                { type: 'CssClass' },
-            );
-        });
+            { type: 'CssClass' },
+        );
     }
 
     vars.comment(

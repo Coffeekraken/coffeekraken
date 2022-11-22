@@ -64,7 +64,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * \\@sugar.ui.loader.classes;
         * 
         * .my-loader {
-        *   \\@sugar.ui.loader;
+        *   \@sugar.ui.loader;
         * }
         * 
         ${finalParams.loaders

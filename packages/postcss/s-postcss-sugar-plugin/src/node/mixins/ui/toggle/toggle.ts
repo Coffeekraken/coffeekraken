@@ -54,13 +54,16 @@ export default function ({
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars: string[] = [
+        `
+            display: inline-block;
+        `,
+    ];
 
     switch (finalParams.type) {
         case 'burger':
             vars.push(`
                 position: relative;
-                top: 0.5em;
                 width: 1em;
                 height: 0.1em;
                 background-color: currentColor;
@@ -95,6 +98,7 @@ export default function ({
                 &:focus-within,
                 input:checked + &,
                 input:checked + .s-menu + &,
+                &:has(input:checked),
                 :active > &,
                 :focus > &,
                 :focus-within > &,

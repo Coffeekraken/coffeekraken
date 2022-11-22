@@ -72,7 +72,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * \\@sugar.ui.select.classes;
         * 
         * .my-select {
-        *   \\@sugar.ui.select;
+        *   \@sugar.ui.select;
         * }
         * 
         ${finalParams.lnfs

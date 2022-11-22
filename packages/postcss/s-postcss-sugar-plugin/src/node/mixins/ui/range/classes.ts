@@ -101,7 +101,7 @@ export default function ({
         * \\@sugar.ui.range.classes;
         * 
         * .my-range {
-        *   \\@sugar.ui.range;
+        *   \@sugar.ui.range;
         * }
         * 
         ${finalParams.lnfs

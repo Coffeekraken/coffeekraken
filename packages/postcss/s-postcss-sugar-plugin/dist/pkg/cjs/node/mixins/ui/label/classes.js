@@ -76,7 +76,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * \\@sugar.ui.label.classes;
         * 
         * .my-label {
-        *   \\@sugar.ui.label;
+        *   \@sugar.ui.label;
         * } 
         *
         ${finalParams.lnfs

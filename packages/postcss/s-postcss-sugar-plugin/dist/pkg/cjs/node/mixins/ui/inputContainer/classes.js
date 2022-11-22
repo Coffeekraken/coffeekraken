@@ -73,7 +73,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * \\@sugar.ui.inputContainer.classes;
         * 
         * .my-inputContainer {
-        *   \\@sugar.ui.inputContainer;
+        *   \@sugar.ui.inputContainer;
         * }
         * 
         ${finalParams.lnfs

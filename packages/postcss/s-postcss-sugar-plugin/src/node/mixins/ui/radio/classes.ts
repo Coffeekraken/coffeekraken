@@ -101,7 +101,7 @@ export default function ({
         * \\@sugar.ui.radio.classes;
         * 
         * .my-radio {
-        *   \\@sugar.ui.radio;
+        *   \@sugar.ui.radio;
         * }
         * 
         ${finalParams.lnfs

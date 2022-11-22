@@ -74,7 +74,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * \\@sugar.ui.switch.classes;
         * 
         * .my-switch {
-        *   \\@sugar.ui.switch;
+        *   \@sugar.ui.switch;
         * }
         * 
         ${finalParams.lnfs

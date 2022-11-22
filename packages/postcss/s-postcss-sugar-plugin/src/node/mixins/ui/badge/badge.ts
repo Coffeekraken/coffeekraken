@@ -81,7 +81,7 @@ export default function ({
             padding-inline: sugar.padding(20);
             padding-block: sugar.padding(10);
             vertical-align: baseline;
-            @sugar.shape;
+            @sugar.shape();
 
             & > * {
                 @sugar.color(main);

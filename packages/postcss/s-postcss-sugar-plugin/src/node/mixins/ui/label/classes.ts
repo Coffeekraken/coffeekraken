@@ -98,7 +98,7 @@ export default function ({
         * \\@sugar.ui.label.classes;
         * 
         * .my-label {
-        *   \\@sugar.ui.label;
+        *   \@sugar.ui.label;
         * } 
         *
         ${finalParams.lnfs

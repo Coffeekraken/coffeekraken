@@ -27,16 +27,6 @@ import __faker from 'faker';
 class postcssSugarPluginUiFsTreeClassesInterface extends __SInterface {
     static get _definition() {
         return {
-            lnfs: {
-                type: 'String[]',
-                values: ['default'],
-                default: ['default'],
-            },
-            defaultLnf: {
-                type: 'String',
-                values: ['default'],
-                default: __STheme.get('ui.fsTree.defaultLnf') ?? 'default',
-            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -50,8 +40,6 @@ class postcssSugarPluginUiFsTreeClassesInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiFsTreelassesParams {
-    lnfs: 'default'[];
-    defaultLnf: 'default';
     scope: ('bare' | 'lnf')[];
 }
 
@@ -69,8 +57,6 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiFsTreelassesParams = {
-        lnfs: [],
-        defaultLnf: 'default',
         scope: [],
         ...params,
     };
@@ -165,27 +151,21 @@ export default function ({
         * \\@sugar.ui.fsTree.classes;
         * 
         * .my-fsTree {
-        *   \\@sugar.ui.fsTree;
+        *   \@sugar.ui.fsTree;
         * }
         * 
-        ${finalParams.lnfs
-            .map((lnf) => {
-                return ` * @cssClass     s-fs-tree${
-                    lnf === finalParams.defaultLnf ? '' : `:${lnf}`
-                }           Apply the ${lnf} filesystem tree lnf`;
-            })
-            .join('\n')}
+        * @cssClass     s-fs-tree       Apply the filesystem tree lnf
         * 
-        ${finalParams.lnfs
-            .map((lnf) => {
-                return ` * @example        html       ${lnf} lnf ${
-                    finalParams.defaultLnf === lnf
-                        ? '<span class="s-badge:outline s-scale:05">default</span>'
-                        : ''
-                }
-                    ${_example(lnf, params.defaultLnf === lnf)}`;
-            })
-            .join('\n')}
+        * @example        html       Default
+        ${_example('')}
+        *
+        * @example        html       Shapes
+        * <div class="s-shape:pill">
+        ${_example('')}
+        * </div>
+        * <div class="s-shape:square">
+        ${_example('')}
+        * </div>
         *
         * @example        html       RTL
         * <div dir="rtl">
@@ -242,21 +222,16 @@ export default function ({
     }
 
     if (finalParams.scope.includes('lnf')) {
-        finalParams.lnfs.forEach((lnf) => {
-            vars.comment(
-                () => `/**
-                * @name           s-fs-tree${
-                    lnf === finalParams.defaultLnf ? '' : `:${lnf}`
-                }
+        vars.comment(
+            () => `/**
+                * @name           s-fs-tree
                 * @namespace          sugar.style.ui.list
                 * @type           CssClass
                 * 
-                * This class represent an "<yellow>${lnf}</yellow>" filesystem tree
+                * This class represent an filesystem tree
                 * 
                 * @example        html
-                * <ul class="s-fs-tree${
-                    lnf === finalParams.defaultLnf ? '' : `:${lnf}`
-                }">
+                * <ul class="s-fs-tree">
                 *       <li>
                 *          <i class="s-icon:folder"></i> ${__faker.name.findName()}
                 *          <ul>
@@ -273,17 +248,16 @@ export default function ({
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
            `,
-            ).code(
-                `
-            .s-fs-tree${lnf === finalParams.defaultLnf ? '' : `--${lnf}`} {
-                @sugar.ui.fsTree($lnf: ${lnf}, $scope: lnf);
+        ).code(
+            `
+            .s-fs-tree {
+                @sugar.ui.fsTree($scope: lnf);
             }
         `,
-                {
-                    type: 'CssClass',
-                },
-            );
-        });
+            {
+                type: 'CssClass',
+            },
+        );
     }
 
     return vars;

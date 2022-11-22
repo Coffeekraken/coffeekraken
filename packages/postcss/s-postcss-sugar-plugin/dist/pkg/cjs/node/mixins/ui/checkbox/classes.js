@@ -79,7 +79,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * \\@sugar.ui.checkbox.classes;
         * 
         * .my-checkbox {
-        *   \\@sugar.ui.checkbox;
+        *   \@sugar.ui.checkbox;
         * }
         * 
         ${finalParams.lnfs

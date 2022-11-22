@@ -58,7 +58,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * \\@sugar.ui.card.classes;
         * 
         * .my-card {
-        *   \\@sugar.ui.card;
+        *   \@sugar.ui.card;
         * }
         * 
         * @cssClass             s-card                       Specify that the card has to be displayed verticaly

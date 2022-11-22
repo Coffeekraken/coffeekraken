@@ -101,7 +101,7 @@ export default function ({
         * \\@sugar.ui.switch.classes;
         * 
         * .my-switch {
-        *   \\@sugar.ui.switch;
+        *   \@sugar.ui.switch;
         * }
         * 
         ${finalParams.lnfs

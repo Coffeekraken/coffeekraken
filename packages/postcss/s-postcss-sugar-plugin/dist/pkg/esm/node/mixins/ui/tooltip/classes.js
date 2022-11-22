@@ -70,7 +70,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * \\@sugar.ui.tooltip.classes;
         * 
         * .my-tooltip {
-        *   \\@sugar.ui.tooltip;
+        *   \@sugar.ui.tooltip;
         * }
         * 
         * @cssClass             s-tooltip-container             Allows to hide and show your tooltip on hover (focus)

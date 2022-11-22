@@ -51,7 +51,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginShapeParams = {
-        shape: 'default',
+        shape: null,
         ...params,
     };
 

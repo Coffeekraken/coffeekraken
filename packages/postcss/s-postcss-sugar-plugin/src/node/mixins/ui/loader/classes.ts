@@ -82,7 +82,7 @@ export default function ({
         * \\@sugar.ui.loader.classes;
         * 
         * .my-loader {
-        *   \\@sugar.ui.loader;
+        *   \@sugar.ui.loader;
         * }
         * 
         ${finalParams.loaders

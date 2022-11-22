@@ -97,7 +97,7 @@ export default function ({
         * \\@sugar.ui.input.classes;
         * 
         * .my-input {
-        *   \\@sugar.ui.input;
+        *   \@sugar.ui.input;
         * }
         * 
         ${finalParams.lnfs

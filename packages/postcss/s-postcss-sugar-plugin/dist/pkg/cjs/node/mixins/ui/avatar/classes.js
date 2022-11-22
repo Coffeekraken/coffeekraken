@@ -67,7 +67,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * \\@sugar.ui.avatar.classes;
         * 
         * .my-avatar {
-        *   \\@sugar.ui.avatar;
+        *   \@sugar.ui.avatar;
         * }
         * 
         * @cssClass             s-avatar                Apply the avatar style

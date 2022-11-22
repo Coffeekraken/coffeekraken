@@ -85,7 +85,7 @@ export default function ({
         * \\@sugar.ui.avatar.classes;
         * 
         * .my-avatar {
-        *   \\@sugar.ui.avatar;
+        *   \@sugar.ui.avatar;
         * }
         * 
         * @cssClass             s-avatar                Apply the avatar style

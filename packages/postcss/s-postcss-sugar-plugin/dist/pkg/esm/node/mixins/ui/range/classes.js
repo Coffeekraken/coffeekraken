@@ -73,7 +73,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * \\@sugar.ui.range.classes;
         * 
         * .my-range {
-        *   \\@sugar.ui.range;
+        *   \@sugar.ui.range;
         * }
         * 
         ${finalParams.lnfs

@@ -38,13 +38,6 @@ export interface IPostcssSugarPluginUiToggleClassesParams {
 
 export { postcssSugarPluginUiToggleClassesInterface as interface };
 
-import { __dirname } from '@coffeekraken/sugar/fs';
-export function dependencies() {
-    return {
-        files: [`${__dirname()}/toggle.js`],
-    };
-}
-
 export default function ({
     params,
     atRule,
@@ -73,7 +66,21 @@ export default function ({
         * @platform       css
         * @status       beta
         * 
-        * These classes allows you to display any HTMLElement as a toggle
+        * These classes allows you to display any HTMLElement as a toggle.
+        * Toggles are element that have at least 2 states. Active and unactive.
+        * This active state respect these rules:
+        * 
+        * - &:active
+        * - &:focus
+        * - &:focus-within
+        * - input:checked + &
+        * - input:checked + .s-menu + &
+        * - :active > &
+        * - :focus > &
+        * - :focus-within > &
+        * - &:has(input:checked)
+        * - input:checked + * > &
+        * - input:checked + .s-menu + * > &
         * 
         * @support          chromium
         * @support          firefox
@@ -84,25 +91,48 @@ export default function ({
         * \\@sugar.ui.toggle.classes;
         * 
         * .my-toggle {
-        *   \\@sugar.ui.toggle;
+        *   \@sugar.ui.toggle;
         * }
         * 
         ${finalParams.types
             .map((type) => {
-                return ` * @cssClass     s-toggle:${type}}           Apply the ${type} toggle style`;
+                return ` * @cssClass     s-toggle:${type}           Apply the ${type} toggle style`;
             })
             .join('\n')}
         * 
+
+        * @example        html          Toggles
+        *   <div class="s-grid:5 @mobile s-grid:2">
         ${finalParams.types
             .map((type) => {
-                return ` * @example        html       ${type}
-            * <label class="s-toggle:${type}"></label>`;
+                return ` *
+        *   <div class="s-p:30 s-text:center s-ratio:1" style="padding-block-start: 30%">
+        *     <label class="s-font:70">
+        *       <input type="checkbox" hidden />
+        *       <div class="s-toggle:${type}"></div>
+        *     </label>
+        *     <p class="s-typo:p s-mbs:30">${type}</p>
+        *   </div>`;
             })
             .join('\n')}
+        *   </div>
         *
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
+    `,
+    );
+
+    vars.code(
+        () => `
+            .s-toggle-container,
+            label:has(> .s-toggle) {
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                width: 1em;
+                height: 1em;
+            }
     `,
     );
 
@@ -123,7 +153,7 @@ export default function ({
         */`,
         ).code(
             `
-            .s-toggle:${type} {
+            .s-toggle--${type} {
                 @sugar.ui.toggle(${type});
             }
         `,

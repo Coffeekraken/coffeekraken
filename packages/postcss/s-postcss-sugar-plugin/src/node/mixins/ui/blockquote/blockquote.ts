@@ -78,6 +78,7 @@ export default function ({
             color: sugar.color(current, surfaceForeground);
             background-color: sugar.color(current, surface);
             font-size: sugar.scalable(1rem);
+            @sugar.shape();
             @sugar.font.family(quote);
     `);
     }

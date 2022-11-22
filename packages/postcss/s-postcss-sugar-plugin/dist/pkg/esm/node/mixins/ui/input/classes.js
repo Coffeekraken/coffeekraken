@@ -69,7 +69,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * \\@sugar.ui.input.classes;
         * 
         * .my-input {
-        *   \\@sugar.ui.input;
+        *   \@sugar.ui.input;
         * }
         * 
         ${finalParams.lnfs

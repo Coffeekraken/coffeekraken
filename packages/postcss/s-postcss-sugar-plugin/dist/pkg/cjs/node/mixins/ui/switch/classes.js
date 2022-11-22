@@ -80,7 +80,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * \\@sugar.ui.switch.classes;
         * 
         * .my-switch {
-        *   \\@sugar.ui.switch;
+        *   \@sugar.ui.switch;
         * }
         * 
         ${finalParams.lnfs

@@ -75,7 +75,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * \\@sugar.ui.button.classes;
         * 
         * .my-button {
-        *   \\@sugar.ui.button;
+        *   \@sugar.ui.button;
         * }
         * 
         ${finalParams.lnfs

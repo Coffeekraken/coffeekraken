@@ -62,7 +62,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * \\@sugar.ui.backdrop.classes;
         * 
         * .my-backdrop {
-        *   \\@sugar.ui.backdrop;
+        *   \@sugar.ui.backdrop;
         * }
         * 
         * @cssClass                 s-backdrop          Apply the backdrop styling

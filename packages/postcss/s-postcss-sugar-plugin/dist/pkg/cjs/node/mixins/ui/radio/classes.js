@@ -79,7 +79,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * \\@sugar.ui.radio.classes;
         * 
         * .my-radio {
-        *   \\@sugar.ui.radio;
+        *   \@sugar.ui.radio;
         * }
         * 
         ${finalParams.lnfs

@@ -84,7 +84,7 @@ export default function ({
         * \\@sugar.ui.dropdown.classes;
         * 
         * .my-dropdown {
-        *   \\@sugar.ui.dropdown;
+        *   \@sugar.ui.dropdown;
         * }
         * 
         * @cssClass             s-dropdown-container        The container of the dropdown that will trigger the display, hide, etc...

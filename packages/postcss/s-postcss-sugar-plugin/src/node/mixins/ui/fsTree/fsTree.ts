@@ -1,5 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          fsTree
@@ -27,11 +26,6 @@ import __STheme from '@coffeekraken/s-theme';
 class postcssSugarPluginUiFsTreeInterface extends __SInterface {
     static get _definition() {
         return {
-            lnf: {
-                type: 'String',
-                values: ['default'],
-                default: __STheme.get('ui.fsTree.defaultLnf'),
-            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -45,7 +39,6 @@ class postcssSugarPluginUiFsTreeInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiFsTreeParams {
-    lnf: 'default';
     scope: string[];
 }
 
@@ -63,7 +56,6 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiFsTreeParams = {
-        lnf: 'default',
         scope: ['bare', 'lnf'],
         ...params,
     };
@@ -130,8 +122,8 @@ export default function ({
                 > div {
                     padding-inline: sugar.padding(ui.fsTree.paddingInline);
                     padding-block: sugar.padding(ui.fsTree.paddingBlock);
-                    border-radius: sugar.border.radius(ui.fsTree.borderRadius);
                     text-overflow: ellipsis;
+                    @sugar.shape();
                 }
 
                 &:not(.s-disabled &) {
@@ -208,17 +200,13 @@ export default function ({
             
         `);
 
-        switch (finalParams.lnf) {
-            default:
-                vars.push(`
-                    li:not(.s-disabled) {
-                        > div:hover {
-                            background-color: sugar.color(current, surface);
-                        }
-                    }
-                `);
-                break;
-        }
+        vars.push(`
+            li:not(.s-disabled) {
+                > div:hover {
+                    background-color: sugar.color(current, surface);
+                }
+            }
+        `);
     }
 
     return vars;

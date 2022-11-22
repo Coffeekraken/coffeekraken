@@ -76,7 +76,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * \\@sugar.ui.list.classes;
         * 
         * .my-list {
-        *   \\@sugar.ui.list;
+        *   \@sugar.ui.list;
         * }
         * 
         ${finalParams.lnfs

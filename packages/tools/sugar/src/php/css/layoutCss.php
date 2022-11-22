@@ -66,6 +66,11 @@ function layoutCss($layout, $settings = [])
 
         $sortedMedia = \Sugar\frontspec\sortMedia($finalParams->mediaSettings);
 
+        $defaultAction = '<=';
+        if (isset($finalParams->mediaSettings->defaultAction)) {
+            $defaultAction = $finalParams->mediaSettings->defaultAction;
+        }
+
         $queries = (array) $sortedMedia->queries;
         $keys = array_keys($queries);
 
@@ -77,7 +82,15 @@ function layoutCss($layout, $settings = [])
             }
         }
 
+        $i = 0;
         foreach ($orderedLayouts as $media => $lay) {
+            if ($defaultAction == '>=' && $i >= count($keys) - 1) {
+                $media = null;
+            } elseif ($defaultAction == '<=' && $i == 0) {
+                $media = null;
+            }
+            $i++;
+
             array_push(
                 $finalCss,
                 layoutCss(

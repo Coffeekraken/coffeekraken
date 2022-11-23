@@ -15,12 +15,13 @@
 * that depends on your theme configuration
 */
 @sugar.media.classes ('mobile,tablet') {
-  /* @sugar.margin.classes(); */
-  @sugar.padding.classes();
+    /* @sugar.margin.classes(); */
+    @sugar.padding.classes();
 }
 
 /* @sugar.ui.menu.classes(); */
 
+@sugar.ui.slider.classes();
 @sugar.ui.googleMap.classes();
 @sugar.ui.googleMapMarker.classes();
 

@@ -25,7 +25,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 // import { define as __SDatetimePickerComponent } from '@coffeekraken/s-datetime-picker-component';
 // import { define as __SFiltrableInputComponent } from '@coffeekraken/s-filtrable-input-component';
 // import { define as __SScrollComponent } from '@coffeekraken/s-scroll-component';
-// import { define as __SSliderComponent } from '@coffeekraken/s-slider-component';
+import { define as __SSliderComponentDefine } from '@coffeekraken/s-slider-component';
 // import { define as __SSidePanelWebcomponent } from '@coffeekraken/s-panel-component';
 // import { define as __SRangeWebcomponent } from '@coffeekraken/s-range-component';
 
@@ -72,14 +72,7 @@ __SConductor.setup({
   // __SDatetimePickerComponent();
   // __SScrollComponent();
   // __SRangeWebcomponent();
-  // __SSliderComponent({
-  //   // behaviors: {
-  //   //   slideable: {
-  //   //     class: SSliderSlideableBehavior,
-  //   //     settings: {},
-  //   //   },
-  //   // },
-  // });
+  __SSliderComponentDefine();
   __sGoogleMapComponentDefine();
   __sCarpenterComponentDefine();
 

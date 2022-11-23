@@ -326,6 +326,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
 
             let potentialPath;
             let matches = __glob.sync(potentialViewGlob1);
+
             if (matches && matches.length) {
                 for (let j = 0; j < matches.length; j++) {
                     potentialPath = matches[j];
@@ -477,6 +478,15 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
 
             // try to get the final view path
             const finalViewPath = this._getFinalViewPath(viewDotPath);
+
+            // make sure the view has been found
+            if (!finalViewPath) {
+                throw new Error(
+                    `<red>[SViewRenderer]</red> Sorry but the requested view "<cyan>${viewDotPath}</cyan>" does not exists in any of these folders:\n${this.settings.rootDirs
+                        .map((dir) => `- <cyan>${dir}</cyan>`)
+                        .join('\n')}`,
+                );
+            }
 
             // get the view renderer engine class for the passed view
             // try to get the engine class from the final view part

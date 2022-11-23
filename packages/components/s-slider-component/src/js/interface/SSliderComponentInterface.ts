@@ -34,13 +34,14 @@ export default class SSliderComponentInterface extends __SInterface {
             behaviors: {
                 description: 'Specify the available behaviors for the slider',
                 type: 'Object',
+                default: {},
             },
             behavior: {
                 description:
                     'Specify which behavior your want to use for your slider. Behavior are like "presets" with different animations, etc...',
-                values: ['none', 'default'],
+                values: ['none', 'scroll', 'transform'],
                 type: 'String',
-                default: 'default',
+                default: 'scroll',
                 physical: true,
             },
             nextIconClass: {

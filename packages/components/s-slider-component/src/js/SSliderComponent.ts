@@ -9,6 +9,7 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
 // @ts-ignore
 import {
+    __getTranslateProperties,
     __querySelectorLive,
     __querySelectorUp,
 } from '@coffeekraken/sugar/dom';
@@ -259,7 +260,7 @@ import __SSliderBehavior from './SSliderBehavior';
 export interface ISSliderComponentProps extends ISLitComponentDefaultProps {
     direction: 'horizontal' | 'vertical';
     behaviors: __SSliderBehavior[];
-    behavior: __SSliderBehavior | string | 'none' | 'default';
+    behavior: __SSliderBehavior | string | 'none' | 'scroll' | 'transform';
     controls: boolean;
     nav: boolean;
     mousewheel: boolean;
@@ -308,6 +309,7 @@ export default class SSliderComponent extends __SLitComponent {
 
     static get state() {
         return {
+            previousSlideIdx: 0,
             currentSlideIdx: 0,
             playing: true,
         };
@@ -352,7 +354,9 @@ export default class SSliderComponent extends __SLitComponent {
         });
 
         // set the initial slide idx from properties
-        this.state.currentSlideIdx = this.props.slide;
+        if (this.props.slide) {
+            this.setCurrentSlide(this.props.slide);
+        }
     }
     async firstUpdated() {
         // bare elements
@@ -379,11 +383,12 @@ export default class SSliderComponent extends __SLitComponent {
         // default behavior
         if (
             this.props.behavior &&
-            this.props.behavior !== 'none' &&
-            this.props.behavior !== 'default'
+            this.props.behavior !== 'scroll' &&
+            this.props.behavior !== 'transform'
         ) {
             if (typeof this.props.behavior === 'string') {
                 let behavior;
+
                 for (let [behaviorId, behaviorObj] of Object.entries(
                     this.props.behaviors,
                 )) {
@@ -424,7 +429,9 @@ export default class SSliderComponent extends __SLitComponent {
         this.props.intersectionClasses && this._handleIntersections();
 
         // listen for mousewheel
-        this.props.mousewheel && this._handleMousewheel();
+        this._handleMousewheel();
+
+        console.log(this.props);
 
         // click on slide
         this.props.clickOnSlide && this._handleClickOnSlide();
@@ -471,7 +478,7 @@ export default class SSliderComponent extends __SLitComponent {
     _preventUserScrollForDefaultBehavior() {
         return;
         // default
-        if (this.props.behavior === 'default') {
+        if (this.props.behavior === 'scroll') {
             // prevent scroll and touchmove events
             let pastScrollLeft = this.$slidesWrapper.scrollLeft,
                 pastScrollTop = this.$slidesWrapper.scrollTop;
@@ -499,13 +506,25 @@ export default class SSliderComponent extends __SLitComponent {
      * This function listen for mousewheel events and will handle the scroll
      */
     _handleMousewheel() {
-        this.addEventListener('wheel', (e) => {
-            e.preventDefault();
-            if (e.deltaY < 0) {
-                this.previous();
-            } else if (e.deltaY > 0) {
-                this.next();
+        this.$slidesWrapper.addEventListener('wheel', (e) => {
+            if (!this.props.mousewheel) {
+                if (
+                    this.props.direction === 'horizontal' &&
+                    Math.abs(e.deltaX) > 0
+                ) {
+                    e.preventDefault();
+                } else if (
+                    this.props.direction === 'vertical' &&
+                    Math.abs(e.deltaY) > 0
+                ) {
+                    e.preventDefault();
+                }
             }
+            // if (e.deltaY < 0) {
+            //     this.previous();
+            // } else if (e.deltaY > 0) {
+            //     this.next();
+            // }
         });
     }
 
@@ -517,7 +536,8 @@ export default class SSliderComponent extends __SLitComponent {
             for (let [i, $slide] of this.$slides.entries()) {
                 if ($slide.contains(e.target) || $slide === e.target) {
                     if (this.currentSlide !== $slide) {
-                        this.goTo($slide);
+                        const slide = this.getSlide($slide);
+                        this.goTo(slide.idx);
                     }
                 }
             }
@@ -675,6 +695,9 @@ export default class SSliderComponent extends __SLitComponent {
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     setCurrentSlideByIdx(idx: number): void {
+        // save the previous slide idx
+        this.state.previousSlideIdx = this.state.currentSlideIdx;
+        // set the new slide idx
         this.props.slide = idx;
         this.state.currentSlideIdx = idx;
     }
@@ -1025,10 +1048,11 @@ export default class SSliderComponent extends __SLitComponent {
         force: boolean = false,
     ): SSliderComponent {
         const nextSlide = this.getSlide(slideIdIdxOrElement);
-        if (!force && (!nextSlide || nextSlide.idx === this.currentSlide.idx))
+        if (!force && (!nextSlide || nextSlide.idx === this.currentSlide.idx)) {
             return;
+        }
         const currentSlide = this.getCurrentSlide();
-        this.state.currentSlideIdx = nextSlide.idx;
+        this.setCurrentSlideByIdx(nextSlide.idx);
         this.props.slide = nextSlide.idx;
 
         if (currentSlide.idx + 1 === nextSlide.idx) {
@@ -1109,7 +1133,7 @@ export default class SSliderComponent extends __SLitComponent {
      */
     previous(): SSliderComponent {
         if (this.props.loop && this.isFirst()) {
-            return this.goTo(this.getLastSlide().id);
+            return this.goTo(this.getLastSlide().idx);
         }
         return this.goTo(this.getPreviousSlideIdx());
     }
@@ -1261,20 +1285,19 @@ export default class SSliderComponent extends __SLitComponent {
             }
 
             // default
-            if (this.props.behavior === 'default') {
-                if (this.props.direction === 'vertical') {
-                    this.$slidesWrapper.style.overflowY = 'auto';
-                } else {
-                    this.$slidesWrapper.style.overflowX = 'auto';
-                }
-
-                const $slidesWrapper = this.$slidesWrapper;
+            if (this.props.behavior === 'scroll') {
+                // disable scroll snaping during transition
+                this.$slidesWrapper.style.scrollSnapType = 'none';
 
                 const toRect = $to.getBoundingClientRect();
                 let startX = this.$slidesWrapper.scrollLeft,
                     startY = this.$slidesWrapper.scrollTop;
+
                 const dist =
-                    this.props.direction === 'vertical' ? toRect.y : toRect.x;
+                    (this.props.direction === 'vertical'
+                        ? toRect.height
+                        : toRect.width) *
+                    (this.state.currentSlideIdx - this.state.previousSlideIdx);
                 const _this = this;
 
                 __easeInterval(
@@ -1284,19 +1307,67 @@ export default class SSliderComponent extends __SLitComponent {
 
                         // console.log(offset);
                         if (this.props.direction === 'vertical') {
-                            this.$slidesWrapper.scroll(0, startY + offset);
+                            this.$slidesWrapper.scroll(
+                                0,
+                                Math.round(startY + offset),
+                            );
                         } else {
-                            this.$slidesWrapper.scroll(startX + offset, 0);
+                            this.$slidesWrapper.scroll(
+                                Math.round(startX + offset),
+                                0,
+                            );
                         }
                     },
                     {
                         easing: this.props.transitionEasing,
                         onEnd() {
                             if (_this.props.direction === 'vertical') {
-                                $slidesWrapper.style.overflowY = 'hidden';
+                                _this.$slidesWrapper.style.scrollSnapType =
+                                    'y mandatory';
                             } else {
-                                $slidesWrapper.style.overflowX = 'hidden';
+                                _this.$slidesWrapper.style.scrollSnapType =
+                                    'x mandatory';
                             }
+                            resolve();
+                        },
+                    },
+                );
+            } else if (this.props.behavior === 'transform') {
+                const toRect = $to.getBoundingClientRect(),
+                    sliderWrapperRect =
+                        this.$slidesWrapper.getBoundingClientRect(),
+                    fromRect = $from.getBoundingClientRect(),
+                    sliderRect = this.getBoundingClientRect();
+
+                const translates = __getTranslateProperties(
+                    this.$slidesWrapper,
+                );
+
+                const _this = this;
+
+                const fromOffset = (sliderRect.width - fromRect.width) * 0.5;
+                const toOffset = (sliderRect.width - toRect.width) * 0.5;
+                const dist = toRect.x - fromRect.x - toOffset + fromOffset;
+
+                __easeInterval(
+                    this.props.transitionDuration,
+                    (percentage) => {
+                        const offset = (dist / 100) * percentage * -1;
+
+                        // console.log(offset);
+                        if (this.props.direction === 'vertical') {
+                            _this.$slidesWrapper.style.transform = `translateY(${
+                                translates.y + offset
+                            }px)`;
+                        } else {
+                            _this.$slidesWrapper.style.transform = `translateX(${
+                                translates.x + offset
+                            }px)`;
+                        }
+                    },
+                    {
+                        easing: this.props.transitionEasing,
+                        onEnd() {
                             resolve();
                         },
                     },

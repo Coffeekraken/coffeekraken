@@ -107,6 +107,17 @@ export default {
       },
     },
     {
+      path: 'sugar.components.slider.slider',
+      async data() {
+        const d = (
+          await import(
+            `../views/components/slider/slider.data.js?${__uniqid()}`
+          )
+        ).default;
+        return d;
+      },
+    },
+    {
       path: 'sections.separator.separator',
       data() {
         return {

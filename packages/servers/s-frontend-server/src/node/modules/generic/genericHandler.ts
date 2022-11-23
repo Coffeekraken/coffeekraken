@@ -1,6 +1,8 @@
 // @ts-nocheck
 
 import __SBench from '@coffeekraken/s-bench';
+import __SDuration from '@coffeekraken/s-duration';
+import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import { __isPlainObject } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
@@ -64,6 +66,8 @@ export default function genericHandler({
         for (let [idx, viewObj] of pageConfig.views.entries()) {
             let data = Object.assign({}, res.templateData ?? {}),
                 viewPath = viewObj.path;
+
+            const duration = new __SDuration();
 
             const viewBench = new __SBench(
                 `handlers.generic.${viewObj.path ?? viewObj}`,
@@ -148,6 +152,15 @@ export default function genericHandler({
                 }
             }
 
+            // @TODO        find out why when using the "emit" function, nothing is logged...
+            // emit('log', {
+            //     type: __SLog.TYPE_ERROR,
+            //     value: `<yellow>[genericHandler]</yellow> Rendering the view "<cyan>${viewPath}</cyan>"`,
+            // });
+            console.log(
+                `<yellow>[genericHandler]</yellow> Rendering the view "<cyan>${viewPath}</cyan>"`,
+            );
+
             // rendering view using data
             const viewResPro = res.viewRenderer.render(viewPath, data);
             pipe(viewResPro);
@@ -161,6 +174,12 @@ export default function genericHandler({
             } else {
                 renderedViews.push(viewRes.value);
             }
+
+            console.log(
+                `<yellow>[genericHandler]</yellow> View "<cyan>${viewPath}</cyan>" rendered <green>successfully</green> in <yellow>${
+                    duration.end().formatedDuration
+                }</yellow>`,
+            );
 
             viewBench.end();
         }

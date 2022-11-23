@@ -1,0 +1,29 @@
+<div class="{{ attributes.class }} {{ container ? 's-container:' ~ container : '' }} {{ marginClasses(margin, frontspec) }} {{ paddingClasses(padding, frontspec) }}"
+    {{ attrs(attributes, ['class'])|raw }}
+    s-specs="views.components.slider"
+    {{ specsValues(_context)|raw }}
+>
+
+<s-slider 
+    direction="{{ direction ? direction : 'horizontal' }}"
+    {{ lnf ? 'lnf=' ~ lnf : '' }}
+    {{ behavior ? 'behavior=' ~ behavior : '' }}
+    {{ controls ? 'controls' : '' }}
+    {{ nav ? 'nav' : '' }}
+    {{ swipe ? 'swipe' : '' }}
+    {{ mousewheel ? 'mousewheel' : '' }}
+    {{ clickOnSlide ? 'click-on-slide' : '' }}
+    {{ loop ? 'loop' : '' }}
+    {{ slide ? 'slide=' ~ slide : '' }}
+    {{ progress ? 'progress' : '' }}
+    {{ timer ? 'timer=' ~ timer : '' }}
+    {{ autoplay ? 'autoplay' : '' }}
+>
+    {% for slide in slides %}
+        <div s-slider-slide>
+            {{ slide|raw }}
+        </div>
+    {% endfor %}
+</s-slider>
+
+</div>

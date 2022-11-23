@@ -706,15 +706,16 @@ export default class SFrontendServer extends __SClass {
                                 }
                             }
 
-                            const handlerPro = handlerFn({
-                                req,
-                                res,
-                                next,
-                                pageConfig: _pageConfig,
-                                pageFile,
-                                frontendServerConfig: this._config,
-                            });
-                            pipe(handlerPro);
+                            pipe(
+                                handlerFn({
+                                    req,
+                                    res,
+                                    next,
+                                    pageConfig: _pageConfig,
+                                    pageFile,
+                                    frontendServerConfig: this._config,
+                                }),
+                            );
                         });
                     }
 

@@ -15,6 +15,7 @@ import toString from '../string/toString';
  *
  * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the aes algorithm
  *
+ * @example         js
  * import { __aes } from '@coffeekraken/sugar/crypto';
  * __aes.encrypt('hello world');
  *

@@ -76,7 +76,7 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
         vars.push(`
         `);
         vars.push(`
-
+            @sugar.color(main);
 
                 .s-code-example__content {
                     transition: sugar.transition(ui.codeExample.transition);

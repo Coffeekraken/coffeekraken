@@ -29,7 +29,7 @@ class postcssSugarPluginUiFormSelectClassesInterface extends __SInterface {
         return {
             lnfs: {
                 type: 'String[]',
-                default: ['default'],
+                default: ['default', 'underline'],
             },
             defaultLnf: {
                 type: 'String',
@@ -49,7 +49,7 @@ class postcssSugarPluginUiFormSelectClassesInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiFormSelectClassesParams {
-    lnfs: 'default'[];
+    lnfs: ('default' | 'underline')[];
     defaultLnf: 'default';
     scope: ('bare' | 'lnf' | 'tf' | 'vr')[];
 }
@@ -88,6 +88,7 @@ export default function ({
         * 
         * These classes allows you to display nice select in your forms
         * 
+        * @feature          Support for shaping through the \`s-shape:...\` class
         * @feature          Support for scaling through the \`s-scale:...\` class
         * @feature          Support for colorizing through the \`s-color:...\` class
         * 
@@ -137,6 +138,32 @@ export default function ({
             * `;
             })
             .join('\n')}
+        * 
+        * @example      html            Shapes
+        *   <label class="s-mbe:30 s-label:responsive">
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     <select class="s-select s-shape:default s-width:40" name="select-color-accent">
+        *       <option value="value1">${__faker.name.findName()}</option>
+        *       <option value="value2">${__faker.name.findName()}</option>
+        *       <option value="value3">${__faker.name.findName()}</option>
+        *     </select>
+        * </label>
+        * <label class="s-mbe:30 s-label:responsive">
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     <select class="s-select s-shape:square s-width:40" name="select-color-accent">
+        *       <option value="value1">${__faker.name.findName()}</option>
+        *       <option value="value2">${__faker.name.findName()}</option>
+        *       <option value="value3">${__faker.name.findName()}</option>
+        *     </select>
+        * </label>
+        * <label class="s-mbe:30 s-label:responsive">
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     <select class="s-select s-shape:pill s-width:40" name="select-color-accent">
+        *       <option value="value1">${__faker.name.findName()}</option>
+        *       <option value="value2">${__faker.name.findName()}</option>
+        *       <option value="value3">${__faker.name.findName()}</option>
+        *     </select>
+        * </label>
         * 
         * @example      html            Colors (none-exhaustive)
         *   <label class="s-mbe:30 s-label:responsive">

@@ -57,18 +57,18 @@ function default_1({ params, atRule, replaceWith, }) {
 
         --focus-spread: sugar.theme(ui.outline.borderWidth);
 
-        --thumb-radius: sugar.border.radius(ui.form.borderRadius);
-        --thumb-height: 1em;
-        --thumb-width: 1em;
+        --thumb-radius: var(--s-shape, sugar.border.radius(ui.form.borderRadius));
+        --thumb-height: sugar.scalable(1em);
+        --thumb-width: sugar.scalable(1em);
         --thumb-border-width: sugar.theme(ui.form.borderWidth);
         --thumb-border-color: sugar.color(current, border);
 
         --track-width: 100%;
-        --track-height: 0.5em;
+        --track-height: sugar.scalable(0.5em);
         --track-border-width: sugar.theme(ui.form.borderWidth);
         --track-border-color: sugar.color(current, border);
 
-        --track-radius: sugar.border.radius(ui.form.borderRadius);
+        --track-radius: var(--s-shape, sugar.border.radius(ui.form.borderRadius));
         --contrast: 5%;
 
         --ie-bottom-track-color: darken($track-color, $contrast);
@@ -84,7 +84,7 @@ function default_1({ params, atRule, replaceWith, }) {
     `;
     const thumbCss = `
         background: var(--thumb-color);
-        border: var(--thumb-border-width) default var(--thumb-border-color);
+        border: var(--thumb-border-width) solid var(--thumb-border-color);
         border-radius: var(--thumb-radius);
         box-shadow: 0 0 0 0 var(--thumb-border-color);
     `;
@@ -137,13 +137,13 @@ function default_1({ params, atRule, replaceWith, }) {
             &::-webkit-slider-runnable-track {
                 ${trackCss}
                 background: var(--track-color);
-                border: var(--track-border-width) default var(--track-border-color);
+                border: var(--track-border-width) solid var(--track-border-color);
                 border-radius: var(--track-radius);
             }
             &::-moz-range-track {
                 ${trackCss}
                 background: var(--track-color);
-                border: var(--track-border-width) default var(--track-border-color);
+                border: var(--track-border-width) solid var(--track-border-color);
                 border-radius: var(--track-radius);
             }
             &::-ms-track {
@@ -155,12 +155,12 @@ function default_1({ params, atRule, replaceWith, }) {
             }
             &::-ms-fill-lower {
                 background: var(--ie-bottom-track-color);
-                border: var(--track-border-width) default var(--track-border-color);
+                border: var(--track-border-width) solid var(--track-border-color);
                 border-radius: calc(var(--track-radius) * 2);
             }
             &::-ms-fill-upper {
                 background: var(--track-color);
-                border: var(--track-border-width) default var(--track-border-color);
+                border: var(--track-border-width) solid var(--track-border-color);
                 border-radius: calc(var(--track-radius) * 2);
             }
     `);

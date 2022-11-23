@@ -101,7 +101,13 @@ export default function ({
                     background-color: transparent;
                     transition: sugar.theme(ui.form.transition);
                     box-shadow: 0 0 0 0 sugar.color(current, --alpha 0.2);
-                    border-radius: 999px;
+                    
+                    &.s-shape {
+                        @sugar.shape();
+                    }
+                    &:not(.s-shape) {
+                        border-radius: 999px;
+                    }
 
                     &:after {
                         content: '';

@@ -147,7 +147,7 @@ export default function ({ params, atRule, replaceWith, }) {
                     font-size: sugar.scalable(0.8rem);        
                     background: var(--track-color-inactive);
 
-                    border: sugar.color(current, border) default sugar.theme(ui.form.borderWidth);
+                    border: sugar.color(current, border) solid sugar.border.width(ui.form.borderWidth);
                     outline-offset: 5px;
                     
                     transition: sugar.theme(ui.form.transition);
@@ -192,10 +192,10 @@ export default function ({ params, atRule, replaceWith, }) {
     }
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
-                    border-radius: sugar.border.radius(ui.switch.borderRadius);
+                    @sugar.shape();
                     &:after,
                     &:before {
-                        border-radius: sugar.border.radius(ui.switch.borderRadius);
+                        @sugar.shape();
                     }
                 `);
     }

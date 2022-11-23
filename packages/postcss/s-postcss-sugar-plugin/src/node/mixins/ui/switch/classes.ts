@@ -89,6 +89,7 @@ export default function ({
         * 
         * These classes allows you to style checkbox HTMLElement as switches
         * 
+        * @feature          Support for shaping through the \`s-shape:...\` class
         * @feature          Support for scaling through the \`s-scale:...\` class
         * @feature          Support for colorizing through the \`s-color:...\` class
         * 
@@ -130,6 +131,20 @@ export default function ({
             * `;
             })
             .join('\n')}
+        *
+        * @example      html            Shapes
+        *   <label class="s-mbe:30 s-label">
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     <input type="checkbox" class="s-switch s-shape:default" />
+        *   </label>
+        * <label class="s-mbe:30 s-label">
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     <input type="checkbox" class="s-switch s-shape:square" />
+        *   </label>
+        * <label class="s-mbe:30 s-label">
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     <input type="checkbox" class="s-switch s-shape:pill" />
+        *   </label>
         *
         * @example      html            RTL Support
         * <div dir="rtl">

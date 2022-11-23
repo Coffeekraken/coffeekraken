@@ -89,6 +89,7 @@ export default function ({
         * 
         * These classes allows you to display nice radio in your forms
         * 
+        * @feature          Support for shaping through the \`s-shape:...\` class
         * @feature          Support for scaling through the \`s-scale:...\` class
         * @feature          Support for colorizing through the \`s-color:...\` class
         * 
@@ -142,6 +143,20 @@ export default function ({
             * `;
             })
             .join('\n')}
+        * 
+        * @example        html          Shapes
+        *   <label class="s-mbe:30 s-label:responsive">
+        *     <input type="range" class="s-range s-shape:default" min="0" max="100" step="10" />
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        * </label>
+        * <label class="s-mbe:30 s-label:responsive">
+        *     <input type="range" class="s-range s-shape:square" min="0" max="100" step="10" />
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        * </label>
+        * <label class="s-mbe:30 s-label:responsive">
+        *     <input type="range" class="s-range s-shape:pill" min="0" max="100" step="10" />
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        * </label>
         * 
         * @example        html          Colors (none-exclusive)
         *   <label class="s-mbe:30 s-label:responsive">

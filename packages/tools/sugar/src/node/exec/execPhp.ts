@@ -14,6 +14,11 @@ import __childProcess from 'child_process';
  * from nodejs.
  * Note that you MUST have php installed on your system and available a global command.
  *
+ * @example         js
+ * import { __execPhp } from '@coffeekraken/sugar/exec';
+ * await __execPhp('/my/cool/script.php', {
+ *    some: 'data'
+ * });
  *
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

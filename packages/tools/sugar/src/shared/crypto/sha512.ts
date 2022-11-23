@@ -16,6 +16,7 @@ const __encryptedMessages = {};
  *
  * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the sha512 algorithm
  *
+ * @example         js
  * import { __sha512 } from '@coffeekraken/sugar/crypto';
  * __sha512.encrypt('hello world');
  *

@@ -73,6 +73,7 @@ export default function ({
         * 
         * These classes allows you to display nice blockquote with simple class.
         * 
+        * @feature          Support for shaping through the \`s-shape:...\` class
         * @feature          Support for vertical rhythm through the \`s-rhythm:vertical\` class
         * @feature          Support for text formatting through the \`s-format:text\` class
         * @feature          Full RTL support

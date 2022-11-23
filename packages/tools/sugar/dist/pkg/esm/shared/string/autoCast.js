@@ -17,10 +17,10 @@
  * @todo      tests
  *
  * @example    js
- * import autoCast from '@coffeekraken/sugar/js/string/autoCast'
- * autoCast('12') // => 12
- * autoCast('window.HTMLElement') // => HTMLElement
- * autoCast('{"hello":"world"}') // {hello:'world'}
+ * import { __autoCast } from '@coffeekraken/sugar/string'
+ * __autoCast('12') // => 12
+ * __autoCast('window.HTMLElement') // => HTMLElement
+ * __autoCast('{"hello":"world"}') // {hello:'world'}
  *
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

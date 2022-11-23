@@ -89,6 +89,7 @@ export default function ({
         * 
         * These classes allows you to display nice checkbox in your forms
         * 
+        * @feature          Support for shaping through the \`s-shape:...\` class
         * @feature          Support for scaling through the \`s-scale:...\` class
         * @feature          Support for colorizing through the \`s-color:...\` class
         * 
@@ -126,6 +127,20 @@ export default function ({
             * `;
             })
             .join('\n')}
+        * 
+        * @example      html       Shapes
+        *   <label class="s-mbe:30 s-label">
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     <input type="checkbox" class="s-checkbox s-shape:default s-color:accent" name="checkbox-style-color-2" value="hello 2" />
+        *   </label>
+        * <label class="s-mbe:30 s-label">
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     <input type="checkbox" class="s-checkbox s-shape:square s-color:accent" name="checkbox-style-color-2" value="hello 2" />
+        *   </label>
+        * <label class="s-mbe:30 s-label">
+        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     <input type="checkbox" class="s-checkbox s-shape:pill s-color:accent" name="checkbox-style-color-2" value="hello 2" />
+        *   </label>
         * 
         * @example      html       Colors (none-exhaustive)
         *   <label class="s-mbe:30 s-label">

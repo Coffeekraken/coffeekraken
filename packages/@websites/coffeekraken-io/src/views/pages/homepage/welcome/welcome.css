@@ -270,6 +270,7 @@
         [fill='#F7C032'] {
             fill: url(#gradient-accent);
         }
+        [fill='#5929FB'],
         [fill='#4D1AF9'] {
             fill: url(#gradient-complementary);
         }

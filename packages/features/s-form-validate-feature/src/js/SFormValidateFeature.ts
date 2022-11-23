@@ -10,6 +10,7 @@ import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 import __css from '../../../../src/css/s-form-validate.css'; // relative to /dist/pkg/esm/js
 import __SFormValidateFeatureInterface from './interface/SFormValidateFeatureInterface';
 
+import { __format } from '@coffeekraken/sugar/string';
 import __define from './define';
 
 /**
@@ -25,6 +26,7 @@ import __define from './define';
  * This package expose a simple `SFormValidateFeature` class that allows you to validate
  * your forms before sending them to your backend.
  *
+ * @feature         Support for input value formatting using the `__format` function from '@coffeekraken/sugar/string' package
  * @feature         Validate your field and display an error message if needed
  * @feature         Prevent your form to be submited when an error occurs
  * @feature         Built-in validators like `email`, `min`, `max`, `pattern`, etc...
@@ -137,6 +139,20 @@ import __define from './define';
  *    <s-range class="s-width:60" min="0" max="100" tooltip></s-range>
  * </label>
  *
+ * @example         html            Format
+ * <label class="s-label:responsive s-mbe:30" s-form-validate format="isoDate">
+ *    <span>ISO Date</span>
+ *    <input type="text" class="s-input" name="my-cool-date" placeholder="2021-09-16" class="s-width:60" />
+ * </label>
+ * <label class="s-label:responsive s-mbe:30" s-form-validate format="creditCard">
+ *    <span>Credit card</span>
+ *    <input type="text" class="s-input" name="my-cool-date" placeholder="#### #### #### ####" class="s-width:60" />
+ * </label>
+ * <label class="s-label:responsive s-mbe:30" s-form-validate format="hex">
+ *    <span>Hexa color</span>
+ *    <input type="text" class="s-input" name="my-cool-date" placeholder="#FFFFFF" class="s-width:60" />
+ * </label>
+ *
  * @example        html            Checkboxes min / max
  * <label class="s-label" s-form-validate min="2" max="2">
  *      <span>Choose at least 2 items</span>
@@ -184,6 +200,7 @@ export interface ISFormValidateFeatureProps {
     errorContainerAttr: string;
     nodes: string;
     handlers: Record<string, Function>;
+    format: string | true;
     [key: string]: any;
 }
 
@@ -382,6 +399,27 @@ export default class SFormValidateFeature extends __SFeature {
             });
         });
 
+        // format the value if needed
+        ['keydown', 'change'].forEach((eventType) => {
+            this._$field.addEventListener(eventType, (e) => {
+                if (
+                    this.props.format &&
+                    (e.target.type === 'text' ||
+                        e.target.tagName.toLowerCase() === 'textarea')
+                ) {
+                    setTimeout(() => {
+                        const newValue = this.format(
+                            e.target.value ?? '',
+                            this.props.format,
+                        );
+                        if (newValue !== e.target.value) {
+                            this._$field.value = newValue;
+                        }
+                    });
+                }
+            });
+        });
+
         // listen for events
         this.props.on.forEach((on) => {
             if (on === 'enter') {
@@ -430,11 +468,19 @@ export default class SFormValidateFeature extends __SFeature {
         });
     }
 
+    format(value: string, format: string): void {
+        const newValue = __format(value, format);
+        return newValue;
+    }
+
     _isValidating = false;
     validate(event?) {
         if (!this._$field) {
             throw new Error(`No $field has been found to be validated...`);
         }
+
+        // grab the value from the field (select, checkbox, etc...)
+        let value = this._getFieldValue();
 
         // stop form send action
         if (
@@ -461,9 +507,6 @@ export default class SFormValidateFeature extends __SFeature {
                 validatorRules[validator] = this.props[validator];
             }
         }
-
-        // grab the value from the field (select, checkbox, etc...)
-        const value = this._getFieldValue();
 
         // validate our value with the SValidator class
         resultObj = this._validator.validate(value, validatorRules);

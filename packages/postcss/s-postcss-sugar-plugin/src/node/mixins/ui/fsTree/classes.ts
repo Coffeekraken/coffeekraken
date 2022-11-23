@@ -139,6 +139,7 @@ export default function ({
         * 
         * These classes allows you to display a nice filesystem tree
         * 
+        * @feature          Support for shaping through the \`s-shape:...\` class
         * @feature          Support for scaling through the \`s-scale:...\` class
         * @feature          Support for colorizing through the \`s-color:...\` class
         * 

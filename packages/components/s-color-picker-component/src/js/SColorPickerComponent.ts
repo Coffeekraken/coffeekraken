@@ -181,6 +181,7 @@ export default class SColorPickerComponent extends __SLitComponent {
         this._$input = this.querySelector('input');
         this._hasInput = this._$input !== null;
         this._$button = this.querySelector('button');
+        this._$button?.addEventListener('click', (e) => e.preventDefault());
         this._$button?.addEventListener('pointerup', (e) => e.preventDefault());
         this._hasButton = this._$button !== null;
     }

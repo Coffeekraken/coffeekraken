@@ -2503,6 +2503,12 @@
                 "description": "This function allows you to execute quickly and efficiently some php\nfrom nodejs.\nNote that you MUST have php installed on your system and available a global command.",
                 "namespace": "@coffeekraken.sugar.node.exec",
                 "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { __execPhp } from '@coffeekraken/sugar/exec';\nawait __execPhp('/my/cool/script.php', {\n   some: 'data'\n});"
+                    }
+                ],
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -9324,9 +9330,15 @@
                         "description": ""
                     }
                 ],
-                "description": "Expose two function named \"encrypt\" and \"decrypt\" that you can use to process your content using the aes algorithm\n\nimport { __aes } from '@coffeekraken/sugar/crypto';\n__aes.encrypt('hello world');",
+                "description": "Expose two function named \"encrypt\" and \"decrypt\" that you can use to process your content using the aes algorithm",
                 "namespace": "@coffeekraken.sugar.shared.crypto",
                 "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { __aes } from '@coffeekraken/sugar/crypto';\n__aes.encrypt('hello world');"
+                    }
+                ],
                 "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -9396,9 +9408,15 @@
                         "description": ""
                     }
                 ],
-                "description": "Expose two function named \"encrypt\" and \"decrypt\" that you can use to process your content using the base64 algorithm\n\nimport { __base64 } from '@coffeekraken/sugar/crypto';\n__base64.encrypt('hello world');",
+                "description": "Expose two function named \"encrypt\" and \"decrypt\" that you can use to process your content using the base64 algorithm",
                 "namespace": "@coffeekraken.sugar.shared.crypto",
                 "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { __base64 } from '@coffeekraken/sugar/crypto';\n__base64.encrypt('hello world');"
+                    }
+                ],
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -9470,9 +9488,15 @@
                         "description": ""
                     }
                 ],
-                "description": "Expose two function named \"encrypt\" and \"decrypt\" that you can use to process your content using the md5 algorithm\n\nimport { __md5 } from '@coffeekraken/sugar/crypto';\n__md5.encrypt('hello world');",
+                "description": "Expose two function named \"encrypt\" and \"decrypt\" that you can use to process your content using the md5 algorithm",
                 "namespace": "@coffeekraken.sugar.shared.crypto",
                 "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { __md5 } from '@coffeekraken/sugar/crypto';\n__md5.encrypt('hello world');"
+                    }
+                ],
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -9614,9 +9638,15 @@
                         "description": ""
                     }
                 ],
-                "description": "Expose two function named \"encrypt\" and \"decrypt\" that you can use to process your content using the sha256 algorithm\n\nimport { __sha256 } from '@coffeekraken/sugar/crypto';\n__sha256.encrypt('hello world');",
+                "description": "Expose two function named \"encrypt\" and \"decrypt\" that you can use to process your content using the sha256 algorithm",
                 "namespace": "@coffeekraken.sugar.shared.crypto",
                 "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { __sha256 } from '@coffeekraken/sugar/crypto';\n__sha256.encrypt('hello world');"
+                    }
+                ],
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -9686,9 +9716,15 @@
                         "description": ""
                     }
                 ],
-                "description": "Expose two function named \"encrypt\" and \"decrypt\" that you can use to process your content using the sha512 algorithm\n\nimport { __sha512 } from '@coffeekraken/sugar/crypto';\n__sha512.encrypt('hello world');",
+                "description": "Expose two function named \"encrypt\" and \"decrypt\" that you can use to process your content using the sha512 algorithm",
                 "namespace": "@coffeekraken.sugar.shared.crypto",
                 "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { __sha512 } from '@coffeekraken/sugar/crypto';\n__sha512.encrypt('hello world');"
+                    }
+                ],
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -15457,7 +15493,7 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import autoCast from '@coffeekraken/sugar/js/string/autoCast'\nautoCast('12') // => 12\nautoCast('window.HTMLElement') // => HTMLElement\nautoCast('{\"hello\":\"world\"}') // {hello:'world'}"
+                        "code": "import { __autoCast } from '@coffeekraken/sugar/string'\n__autoCast('12') // => 12\n__autoCast('window.HTMLElement') // => HTMLElement\n__autoCast('{\"hello\":\"world\"}') // {hello:'world'}"
                     }
                 ],
                 "since": "2.0.0",
@@ -15756,6 +15792,47 @@
                 "filename": "extractSame.ts",
                 "extension": "ts",
                 "relPath": "src/shared/string/extractSame.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.js.string.format": {
+                "id": "@coffeekraken.sugar.js.string.format",
+                "name": "format",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Format the passed string using the requested format. Available formats are:\n- isoDate",
+                "namespace": "@coffeekraken.sugar.js.string",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { __format } from '@coffeekraken/sugar/string'"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "format.ts",
+                "extension": "ts",
+                "relPath": "src/shared/string/format.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.shared.string.idCompliant": {

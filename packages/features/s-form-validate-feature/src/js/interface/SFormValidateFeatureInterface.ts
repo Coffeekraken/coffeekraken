@@ -1,6 +1,8 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __SValidator from '@coffeekraken/s-validator';
 
+import { __format } from '@coffeekraken/sugar/string';
+
 /**
  * @name                SFormValidateFeatureInterface
  * @namespace           js.interface
@@ -47,6 +49,12 @@ export default class SFormValidateFeatureInterface extends __SInterface {
                 type: 'Array<String>',
                 values: ['keyup', 'change', 'submit', 'enter', 'reset'],
                 default: ['keyup', 'change', 'submit', 'enter', 'reset'],
+            },
+            format: {
+                description:
+                    'Specify if you want your value to be formatted a certain way. You can specify every "import { __format } from `@coffeekraken/sugar/string`" supported formats',
+                type: 'String',
+                values: __format.formats,
             },
             errorClass: {
                 description: 'Specify the class to apply when theres an error',

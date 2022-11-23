@@ -2673,6 +2673,7 @@ __metadata:
     "@coffeekraken/s-range-component": ^2.0.0-alpha.20
     "@coffeekraken/s-refocus-feature": ^2.0.0-alpha.20
     "@coffeekraken/s-scroll-component": ^2.0.0-alpha.20
+    "@coffeekraken/s-slider-component": ^2.0.0-alpha.20
     "@coffeekraken/s-sugar-feature": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
@@ -3350,6 +3351,7 @@ __metadata:
     fast-safe-stringify: ^2.1.1
     fast-xml-parser: ^4.0.9
     fastdom: ^1.0.11
+    fecha: ^4.2.3
     filesize: ^6.4.0
     find-package-json: ^1.2.0
     fkill: ^7.2.1
@@ -11148,6 +11150,13 @@ __metadata:
     setimmediate: ^1.0.5
     ua-parser-js: ^0.7.30
   checksum: 668731b946a765908c9cbe51d5160f973abb78004b3d122587c3e930e3e1ddcc0ce2b17f2a8637dc9d733e149aa580f8d3035a35cc2d3bc78b78f1b19aab90e2
+  languageName: node
+  linkType: hard
+
+"fecha@npm:^4.2.3":
+  version: 4.2.3
+  resolution: "fecha@npm:4.2.3"
+  checksum: f94e2fb3acf5a7754165d04549460d3ae6c34830394d20c552197e3e000035d69732d74af04b9bed3283bf29fe2a9ebdcc0085e640b0be3cc3658b9726265e31
   languageName: node
   linkType: hard
 

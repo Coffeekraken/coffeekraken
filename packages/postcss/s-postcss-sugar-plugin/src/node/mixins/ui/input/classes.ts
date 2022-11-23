@@ -30,7 +30,7 @@ class postcssSugarPluginUiFormClassesInterface extends __SInterface {
         return {
             lnfs: {
                 type: 'String[]',
-                default: ['default'],
+                default: ['default', 'underline'],
             },
             defaultLnf: {
                 type: 'String',
@@ -50,7 +50,7 @@ class postcssSugarPluginUiFormClassesInterface extends __SInterface {
 
 export interface IPostcssSugarPluginUiFormClassesParams {
     lnfs: string[];
-    defaultLnf: 'default';
+    defaultLnf: 'default' | 'underline';
     scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
 }
 
@@ -88,6 +88,10 @@ export default function ({
         * 
         * These classes allows you to apply some lnfs to your text input
         * 
+        * @feature          Support for shaping through the \`s-shape:...\` class
+        * @feature          Support for scaling through the \`s-scale:...\` class
+        * @feature          Support for colorizing through the \`s-color:...\` class
+        * 
         * @support          chromium
         * @support          firefox
         * @support          safari
@@ -124,6 +128,25 @@ export default function ({
             *       <input type="text" placeholder="Type something! (RTL)" class="s-input\:${lnf} s-width:40" />
             *   </label>
             * 
+            * `;
+            })
+            .join('\n')}
+        *
+        ${__keysFirst(finalParams.lnfs, ['default'])
+            .map((lnf) => {
+                return ` * @example        html       Shapes
+            *   <label class="s-label:responsive s-mbe:30">
+            *       <span>${__faker.name.findName()}</span>
+            *       <input type="text" placeholder="Type something!" class="s-input\:${lnf} s-shape:default s-width:40" />
+            *  </label>
+            *   <label class="s-label:responsive s-mbe:30">
+            *       <span>${__faker.name.findName()}</span>
+            *       <input type="text" placeholder="Type something!" class="s-input\:${lnf} s-shape:square s-width:40" />
+            *  </label>
+            * <label class="s-label:responsive s-mbe:30">
+            *       <span>${__faker.name.findName()}</span>
+            *       <input type="text" placeholder="Type something!" class="s-input\:${lnf} s-shape:pill s-width:40" />
+            *  </label>
             * `;
             })
             .join('\n')}

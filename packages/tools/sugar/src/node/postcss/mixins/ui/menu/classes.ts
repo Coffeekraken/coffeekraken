@@ -121,17 +121,5 @@ export default function ({
         );
     }
 
-    // default color
-    if (finalParams.scope.includes('lnf')) {
-        vars.code(
-            `
-            .s-menu:not(.s-bare) {
-                @sugar.color(${finalParams.defaultColor});
-            }
-        `,
-            { type: 'CssClass' },
-        );
-    }
-
     return vars;
 }

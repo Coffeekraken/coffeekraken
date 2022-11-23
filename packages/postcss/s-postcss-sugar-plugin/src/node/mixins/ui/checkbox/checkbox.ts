@@ -97,7 +97,7 @@ export default function ({
                     background-color: transparent;
                     transition: sugar.theme(ui.form.transition);
                     box-shadow: 0 0 0 0 sugar.color(current, --alpha 0.2);
-                    border-radius: sugar.border.radius(ui.checkbox.borderRadius);
+                    @sugar.shape();
 
                     &:after {
                         content: '';
@@ -108,6 +108,7 @@ export default function ({
                         background: sugar.color(current);
                         opacity: 0;
                         transition: sugar.theme(ui.form.transition);
+                        @sugar.shape();
                     }
                     label:hover > &:not(:disabled):after,
                     &:hover:not(:disabled):after {

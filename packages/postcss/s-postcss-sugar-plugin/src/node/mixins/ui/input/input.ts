@@ -29,7 +29,7 @@ class postcssSugarPluginUiFormInputInterface extends __SInterface {
         return {
             lnf: {
                 type: 'String',
-                values: ['default'],
+                values: ['default', 'underline'],
                 default: __STheme.get('ui.form.defaultLnf'),
             },
             outline: {
@@ -49,7 +49,7 @@ class postcssSugarPluginUiFormInputInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiFormInputParams {
-    lnf: 'default';
+    lnf: 'default' | 'underline';
     outline: boolean;
     scope: string[];
 }
@@ -83,6 +83,7 @@ export default function ({
 
         vars.push(`
             @sugar.ui.base(input);
+            @sugar.shape();
   `);
     }
 
@@ -93,23 +94,23 @@ export default function ({
     }
 
     switch (finalParams.lnf) {
-        // case 'underline':
-        //     if (finalParams.scope.indexOf('lnf') !== -1) {
-        //         vars.push(`
-        //             background-color: sugar.color(current, --alpha 0);
-        //             border-top: none !important;
-        //             border-left: none !important;
-        //             border-right: none !important;
-        //             border-bottom: sugar.color(current) default sugar.theme(ui.form.borderWidth) !important;
-        //             border-radius: 0;
-        //             padding-inline: 0 !important;
+        case 'underline':
+            if (finalParams.scope.indexOf('lnf') !== -1) {
+                vars.push(`
+                    background-color: sugar.color(current, --alpha 0);
+                    border-top: none !important;
+                    border-left: none !important;
+                    border-right: none !important;
+                    border-bottom: sugar.color(current, --alpha 0.3) solid sugar.border.width(ui.form.borderWidth) !important;
+                    padding-inline: 1ch !important;
 
-        //             &:hover, &:focus {
-        //                 background-color: sugar.color(current, --alpha 0.1);
-        //             }
-        //         `);
-        //     }
-        //     break;
+                    &:hover, &:focus {
+                        border-bottom: sugar.color(current, --alpha 1) solid sugar.border.width(ui.form.borderWidth) !important;
+                        background-color: sugar.color(current, --alpha 0.1);
+                    }
+                `);
+            }
+            break;
         default:
             break;
     }

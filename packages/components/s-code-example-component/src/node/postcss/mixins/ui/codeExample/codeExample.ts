@@ -95,7 +95,7 @@ export default function ({
         `);
 
         vars.push(`
-
+            @sugar.color(main);
 
                 .s-code-example__content {
                     transition: sugar.transition(ui.codeExample.transition);

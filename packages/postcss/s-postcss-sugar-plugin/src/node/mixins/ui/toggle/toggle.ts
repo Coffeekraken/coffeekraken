@@ -64,6 +64,7 @@ export default function ({
         case 'burger':
             vars.push(`
                 position: relative;
+                top: 0.5em;
                 width: 1em;
                 height: 0.1em;
                 background-color: currentColor;

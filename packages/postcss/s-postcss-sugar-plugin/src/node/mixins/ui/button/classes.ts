@@ -88,6 +88,7 @@ export default function ({
         * 
         * These classes allows you to display any HTMLElement as a button
         * 
+        * @feature          Support for shaping through the \`s-shape:...\` class
         * @feature          Support for vertical rhythm through the \`s-rhythm:vertical\` class
         * @feature          Support for text formatting through the \`s-format:text\` class
         * @feature          Support for scaling through the \`s-scale:...\` class

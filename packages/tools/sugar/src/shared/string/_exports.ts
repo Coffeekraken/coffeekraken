@@ -6,6 +6,7 @@ import __crop from './crop';
 import __dashCase from './dashCase';
 import __dedupe from './dedupe';
 import __extractSame from './extractSame';
+import __format from './format';
 import __idCompliant from './idCompliant';
 import __lowerFirst from './lowerFirst';
 import __ltrim from './ltrim';
@@ -40,6 +41,7 @@ export {
     __dashCase,
     __dedupe,
     __extractSame,
+    __format,
     __idCompliant,
     __lowerFirst,
     __ltrim,

@@ -44,6 +44,12 @@ export default class SSliderComponentInterface extends __SInterface {
                 default: 'scroll',
                 physical: true,
             },
+            pad: {
+                type: 'Boolean',
+                description:
+                    'Specify if you want to pad the slides if for example the first slide does not take the while width of the slider, a padding-(block|inline)-start will be applied to center this first slide. Same for the last one',
+                default: true,
+            },
             nextIconClass: {
                 description: 'Specify the class of the next icon',
                 type: 'String',

@@ -7,6 +7,7 @@ export default {
   mousewheel: true,
   clickOnSlide: true,
   loop: true,
+  direction: 'vertical',
   container: true,
-  behavior: 'transform',
+  behavior: 'scroll',
 };

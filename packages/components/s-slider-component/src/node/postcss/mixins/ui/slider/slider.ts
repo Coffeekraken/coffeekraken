@@ -128,12 +128,12 @@ export default function ({
                 }
             }
 
-            &[lnf*='contained'] .s-slider__root > .s-slider__nav {
+            &[lnf*='contained'] .s-slider__root > .s-slider__ui > .s-slider__nav {
                 top: auto;
                 bottom: calc(sugar.margin(30) - 0.5em);
                 transform: translate(-50%, -100%);
             }
-            &[direction='vertical'] .s-slider__root > .s-slider__nav {
+            &[direction='vertical'] .s-slider__root > .s-slider__ui > .s-slider__nav {
                 top: 50%;
                 left: calc(100% + sugar.margin(30));
                 transform: translate(0, -50%);
@@ -141,14 +141,14 @@ export default function ({
                 gap: sugar.margin(10);
             }
             &[lnf*='contained'][direction='vertical']
-                .s-slider__root > .s-slider__nav {
+                .s-slider__root > .s-slider__ui > .s-slider__nav {
                 bottom: auto;
                 left: auto;
                 right: calc(sugar.margin(30));
                 transform: translate(0, -50%);
             }
 
-            > .s-slider__root > .s-slider__progress {
+            > .s-slider__root > .s-slider__ui > .s-slider__progress {
                 position: absolute;
                 bottom: sugar.margin(30);
                 left: sugar.margin(30);
@@ -167,7 +167,7 @@ export default function ({
                 }
             }
 
-            > .s-slider__root > .s-slider__controls {
+            > .s-slider__root > .s-slider__ui > .s-slider__controls {
                 .s-slider__controls-next,
                 .s-slider__controls-previous {
                     transition: sugar.theme(ui.slider.transition);
@@ -180,11 +180,11 @@ export default function ({
                 }
             }
 
-            &[lnf*='contained'] > .s-slider__root > .s-slider__controls .s-slider__controls-previous {
+            &[lnf*='contained'] > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-previous {
                 left: calc(sugar.margin(30));
                 transform: translate(0, -50%);
             }
-            &[lnf*='contained'] > .s-slider__root > .s-slider__controls .s-slider__controls-next {
+            &[lnf*='contained'] > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-next {
                 left: auto;
                 right: calc(sugar.margin(30));
                 transform: translate(0, -50%);
@@ -192,6 +192,7 @@ export default function ({
 
             &[direction='vertical']
                 > .s-slider__root
+                > .s-slider__ui
                 > .s-slider__controls
                 .s-slider__controls-next {
                 left: 50%;
@@ -200,6 +201,7 @@ export default function ({
             }
             &[direction='vertical']
                 > .s-slider__root
+                > .s-slider__ui
                 > .s-slider__controls
                 .s-slider__controls-previous {
                 left: 50%;
@@ -209,20 +211,22 @@ export default function ({
             }
             &[direction='vertical'][lnf*='contained']
                 > .s-slider__root
+                > .s-slider__ui
                 > .s-slider__controls
                 .s-slider__controls-previous {
                 top: calc(sugar.margin(30));
             }
             &[direction='vertical'][lnf*='contained']
                 > .s-slider__root
+                > .s-slider__ui
                 > .s-slider__controls
                 .s-slider__controls-next {
                 top: auto;
                 bottom: calc(sugar.margin(30));
             }
 
-            > .s-slider__root > .s-slider__controls .s-slider__controls-next-arrow,
-            > .s-slider__root > .s-slider__controls .s-slider__controls-previous-arrow {
+            > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-next-arrow,
+            > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-previous-arrow {
                 width: 1em;
                 height: 1em;
                 position: absolute;
@@ -249,12 +253,12 @@ export default function ({
                     transform: rotate(-45deg);
                 }
             }
-            > .s-slider__root > .s-slider__controls .s-slider__controls-next-arrow {
+            > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-next-arrow {
                 transform: rotate(180deg);
             }
 
-            > .s-slider__root > .s-slider__controls .s-slider__controls-next-arrow,
-            > .s-slider__root > .s-slider__controls .s-slider__controls-previous-arrow {
+            > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-next-arrow,
+            > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-previous-arrow {
                 &:before,
                 &:after {
                     background: sugar.color(current);

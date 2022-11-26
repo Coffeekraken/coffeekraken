@@ -101,12 +101,12 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
                 }
             }
 
-            &[lnf*='contained'] .s-slider__root > .s-slider__nav {
+            &[lnf*='contained'] .s-slider__root > .s-slider__ui > .s-slider__nav {
                 top: auto;
                 bottom: calc(sugar.margin(30) - 0.5em);
                 transform: translate(-50%, -100%);
             }
-            &[direction='vertical'] .s-slider__root > .s-slider__nav {
+            &[direction='vertical'] .s-slider__root > .s-slider__ui > .s-slider__nav {
                 top: 50%;
                 left: calc(100% + sugar.margin(30));
                 transform: translate(0, -50%);
@@ -114,14 +114,14 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
                 gap: sugar.margin(10);
             }
             &[lnf*='contained'][direction='vertical']
-                .s-slider__root > .s-slider__nav {
+                .s-slider__root > .s-slider__ui > .s-slider__nav {
                 bottom: auto;
                 left: auto;
                 right: calc(sugar.margin(30));
                 transform: translate(0, -50%);
             }
 
-            > .s-slider__root > .s-slider__progress {
+            > .s-slider__root > .s-slider__ui > .s-slider__progress {
                 position: absolute;
                 bottom: sugar.margin(30);
                 left: sugar.margin(30);
@@ -140,7 +140,7 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
                 }
             }
 
-            > .s-slider__root > .s-slider__controls {
+            > .s-slider__root > .s-slider__ui > .s-slider__controls {
                 .s-slider__controls-next,
                 .s-slider__controls-previous {
                     transition: sugar.theme(ui.slider.transition);
@@ -153,11 +153,11 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
                 }
             }
 
-            &[lnf*='contained'] > .s-slider__root > .s-slider__controls .s-slider__controls-previous {
+            &[lnf*='contained'] > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-previous {
                 left: calc(sugar.margin(30));
                 transform: translate(0, -50%);
             }
-            &[lnf*='contained'] > .s-slider__root > .s-slider__controls .s-slider__controls-next {
+            &[lnf*='contained'] > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-next {
                 left: auto;
                 right: calc(sugar.margin(30));
                 transform: translate(0, -50%);
@@ -165,6 +165,7 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
 
             &[direction='vertical']
                 > .s-slider__root
+                > .s-slider__ui
                 > .s-slider__controls
                 .s-slider__controls-next {
                 left: 50%;
@@ -173,6 +174,7 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
             }
             &[direction='vertical']
                 > .s-slider__root
+                > .s-slider__ui
                 > .s-slider__controls
                 .s-slider__controls-previous {
                 left: 50%;
@@ -182,20 +184,22 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
             }
             &[direction='vertical'][lnf*='contained']
                 > .s-slider__root
+                > .s-slider__ui
                 > .s-slider__controls
                 .s-slider__controls-previous {
                 top: calc(sugar.margin(30));
             }
             &[direction='vertical'][lnf*='contained']
                 > .s-slider__root
+                > .s-slider__ui
                 > .s-slider__controls
                 .s-slider__controls-next {
                 top: auto;
                 bottom: calc(sugar.margin(30));
             }
 
-            > .s-slider__root > .s-slider__controls .s-slider__controls-next-arrow,
-            > .s-slider__root > .s-slider__controls .s-slider__controls-previous-arrow {
+            > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-next-arrow,
+            > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-previous-arrow {
                 width: 1em;
                 height: 1em;
                 position: absolute;
@@ -222,12 +226,12 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
                     transform: rotate(-45deg);
                 }
             }
-            > .s-slider__root > .s-slider__controls .s-slider__controls-next-arrow {
+            > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-next-arrow {
                 transform: rotate(180deg);
             }
 
-            > .s-slider__root > .s-slider__controls .s-slider__controls-next-arrow,
-            > .s-slider__root > .s-slider__controls .s-slider__controls-previous-arrow {
+            > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-next-arrow,
+            > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-previous-arrow {
                 &:before,
                 &:after {
                     background: sugar.color(current);
@@ -238,4 +242,4 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
     }
     return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBRXJELE1BQU0sd0JBQXlCLFNBQVEsWUFBWTtJQUMvQyxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsS0FBSyxFQUFFO2dCQUNILElBQUksRUFBRTtvQkFDRixJQUFJLEVBQUUsZUFBZTtvQkFDckIsVUFBVSxFQUFFLENBQUMsR0FBRyxFQUFFLEdBQUcsQ0FBQztpQkFDekI7Z0JBQ0QsTUFBTSxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxVQUFVLENBQUM7Z0JBQ25DLE9BQU8sRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLEVBQUUsVUFBVSxDQUFDO2FBQ3ZDO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQU1ELE9BQU8sRUFBRSx3QkFBd0IsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUVqRDs7Ozs7Ozs7Ozs7Ozs7OztHQWdCRztBQUVILE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixVQUFVLEVBQ1YsV0FBVyxHQU1kO0lBQ0csTUFBTSxXQUFXLG1CQUNiLEtBQUssRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLENBQUMsSUFDbkIsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsT0FBTztJQUNQLElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7UUFDMUMsSUFBSSxDQUFDLElBQUksQ0FBQzs7S0FFYixDQUFDLENBQUM7S0FDRjtJQUVELFdBQVc7SUFDWCxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLFVBQVUsQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQzlDLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7OztTQU1ULENBQUMsQ0FBQztLQUNOO0lBRUQsNEZBQTRGO0lBQzVGLDJCQUEyQjtJQUMzQixJQUFJO0lBRUosTUFBTTtJQUNOLElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7UUFDekMsSUFBSSxDQUFDLElBQUksQ0FBQzs7U0FFVCxDQUFDLENBQUM7UUFFSCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztTQWdMVCxDQUFDLENBQUM7S0FDTjtJQUVELE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBRXJELE1BQU0sd0JBQXlCLFNBQVEsWUFBWTtJQUMvQyxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsS0FBSyxFQUFFO2dCQUNILElBQUksRUFBRTtvQkFDRixJQUFJLEVBQUUsZUFBZTtvQkFDckIsVUFBVSxFQUFFLENBQUMsR0FBRyxFQUFFLEdBQUcsQ0FBQztpQkFDekI7Z0JBQ0QsTUFBTSxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxVQUFVLENBQUM7Z0JBQ25DLE9BQU8sRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLEVBQUUsVUFBVSxDQUFDO2FBQ3ZDO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQU1ELE9BQU8sRUFBRSx3QkFBd0IsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUVqRDs7Ozs7Ozs7Ozs7Ozs7OztHQWdCRztBQUVILE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixVQUFVLEVBQ1YsV0FBVyxHQU1kO0lBQ0csTUFBTSxXQUFXLG1CQUNiLEtBQUssRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLENBQUMsSUFDbkIsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsT0FBTztJQUNQLElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7UUFDMUMsSUFBSSxDQUFDLElBQUksQ0FBQzs7S0FFYixDQUFDLENBQUM7S0FDRjtJQUVELFdBQVc7SUFDWCxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLFVBQVUsQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQzlDLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7OztTQU1ULENBQUMsQ0FBQztLQUNOO0lBRUQsNEZBQTRGO0lBQzVGLDJCQUEyQjtJQUMzQixJQUFJO0lBRUosTUFBTTtJQUNOLElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7UUFDekMsSUFBSSxDQUFDLElBQUksQ0FBQzs7U0FFVCxDQUFDLENBQUM7UUFFSCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7U0FvTFQsQ0FBQyxDQUFDO0tBQ047SUFFRCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDIn0=

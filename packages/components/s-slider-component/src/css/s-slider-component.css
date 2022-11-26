@@ -7,6 +7,19 @@
     > .s-slider__root > .s-slider__slides-wrapper > .s-slider__slides {
         height: 100%;
     }
+
+    &[direction='vertical'] > .s-slider__root {
+        > .s-slider__slides-wrapper > .s-slider__slides {
+            padding-block-start: var(--s-slider-pad-start, 0);
+            padding-block-end: var(--s-slider-pad-end, 0);
+        }
+    }
+    &[direction='horizontal'] > .s-slider__root {
+        > .s-slider__slides-wrapper > .s-slider__slides {
+            padding-inline-start: var(--s-slider-pad-start, 0);
+            padding-inline-end: var(--s-slider-pad-end, 0);
+        }
+    }
 }
 
 .s-slider[behavior='transform'] {
@@ -24,10 +37,26 @@
             overflow: auto;
             scroll-snap-type: x mandatory;
 
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
             > .s-slider__slides {
                 > .s-slider__slide {
                     scroll-snap-align: center;
                 }
+            }
+        }
+    }
+
+    &[direction='vertical'] {
+        > .s-slider__root {
+            > .s-slider__slides-wrapper {
+                overflow: auto;
+                scroll-snap-type: y mandatory;
             }
         }
     }
@@ -54,20 +83,20 @@
             height: 100%;
 
             > .s-slider__slides {
-                display: flex;
-                flex-basis: 100%;
+                display: inline-block;
                 user-select: none;
-                width: 100%;
                 height: 100%;
+                white-space: nowrap;
 
                 > .s-slider__slide {
-                    flex-shrink: 0;
-                    width: calc(100% - var(--s-slider-inline-reveal, 0%) * 2);
-                    height: calc(100% - var(--s-slider-block-reveal, 0%) * 2);
+                    display: inline-block;
+                    width: 100%;
+                    height: 100%;
                     scroll-snap-align: center;
 
                     &:nth-child(1) {
                         background: red;
+                        width: 500px !important;
                     }
                     &:nth-child(2) {
                         background: yellow;
@@ -75,33 +104,36 @@
                     }
                     &:nth-child(3) {
                         background: blue;
+                        width: 80vw !important;
                     }
                 }
             }
         }
 
-        > .s-slider__nav {
-            position: absolute;
-            top: calc(100% + var(--s-slider-space));
-            left: 50%;
-            transform: translate(-50%);
-            display: flex;
-            gap: calc(var(--s-slider-space) * 0.5);
+        > .s-slider__ui {
+            > .s-slider__nav {
+                position: absolute;
+                top: calc(100% + var(--s-slider-space));
+                left: 50%;
+                transform: translate(-50%);
+                display: flex;
+                gap: calc(var(--s-slider-space) * 0.5);
 
-            > * {
-                border-radius: 50%;
-                display: block;
-                width: 0.5em;
-                height: 0.5em;
-                background: currentColor;
-                opacity: 0.3;
-                cursor: pointer;
+                > * {
+                    border-radius: 50%;
+                    display: block;
+                    width: 0.5em;
+                    height: 0.5em;
+                    background: currentColor;
+                    opacity: 0.3;
+                    cursor: pointer;
 
-                &:hover {
-                    opacity: 0.6;
-                }
-                &.active {
-                    opacity: 1;
+                    &:hover {
+                        opacity: 0.6;
+                    }
+                    &.active {
+                        opacity: 1;
+                    }
                 }
             }
         }
@@ -111,22 +143,45 @@
         > .s-slider__root
         > .s-slider__slides-wrapper
         > .s-slider__slides {
-        flex-direction: column;
+        display: block;
+        width: 100%;
+        height: auto;
+
+        > .s-slider__slide {
+            display: block;
+            width: 100% !important;
+
+            &:nth-child(1) {
+                background: red;
+                height: 500px !important;
+            }
+            &:nth-child(2) {
+                background: yellow;
+                height: 800px !important;
+            }
+            &:nth-child(3) {
+                background: blue;
+                height: 400px !important;
+            }
+        }
     }
 
-    &[lnf*='contained'] .s-slider__root > .s-slider__nav {
+    &[lnf*='contained'] .s-slider__root > .s-slider__ui > .s-slider__nav {
         top: auto;
         bottom: calc(var(--s-slider-space) - 0.5em);
         transform: translate(-50%, -100%);
     }
-    &[direction='vertical'] .s-slider__root > .s-slider__nav {
+    &[direction='vertical'] .s-slider__root > .s-slider__ui > .s-slider__nav {
         top: 50%;
         left: calc(100% + var(--s-slider-space));
         transform: translate(0, -50%);
         flex-direction: column;
         gap: sugar.margin(10);
     }
-    &[lnf*='contained'][direction='vertical'] .s-slider__root > .s-slider__nav {
+    &[lnf*='contained'][direction='vertical']
+        .s-slider__root
+        > .s-slider__ui
+        > .s-slider__nav {
         bottom: auto;
         left: auto;
         right: calc(var(--s-slider-space));
@@ -149,7 +204,7 @@
         padding-right: calc(var(--s-slider-space) + 1em);
     }
 
-    > .s-slider__root > .s-slider__progress {
+    > .s-slider__root > .s-slider__ui > .s-slider__progress {
         position: absolute;
         bottom: var(--s-slider-space);
         left: var(--s-slider-space);
@@ -180,7 +235,7 @@
         }
     }
 
-    > .s-slider__root > .s-slider__controls {
+    > .s-slider__root > .s-slider__ui > .s-slider__controls {
         .s-slider__controls-next,
         .s-slider__controls-previous {
             width: 1em;
@@ -207,6 +262,7 @@
     }
     &[lnf*='contained']
         > .s-slider__root
+        > .s-slider__ui
         > .s-slider__controls
         .s-slider__controls-previous {
         left: var(--s-slider-space);
@@ -214,6 +270,7 @@
     }
     &[lnf*='contained']
         > .s-slider__root
+        > .s-slider__ui
         > .s-slider__controls
         .s-slider__controls-next {
         left: auto;
@@ -223,6 +280,7 @@
 
     &[direction='vertical']
         > .s-slider__root
+        > .s-slider__ui
         > .s-slider__controls
         .s-slider__controls-next {
         left: 50%;
@@ -231,6 +289,7 @@
     }
     &[direction='vertical']
         > .s-slider__root
+        > .s-slider__ui
         > .s-slider__controls
         .s-slider__controls-previous {
         left: 50%;
@@ -240,20 +299,28 @@
     }
     &[direction='vertical'][lnf*='contained']
         > .s-slider__root
+        > .s-slider__ui
         > .s-slider__controls
         .s-slider__controls-previous {
         top: calc(var(--s-slider-space));
     }
     &[direction='vertical'][lnf*='contained']
         > .s-slider__root
+        > .s-slider__ui
         > .s-slider__controls
         .s-slider__controls-next {
         top: auto;
         bottom: calc(var(--s-slider-space));
     }
 
-    > .s-slider__root > .s-slider__controls .s-slider__controls-next-arrow,
-    > .s-slider__root > .s-slider__controls .s-slider__controls-previous-arrow {
+    > .s-slider__root
+        > .s-slider__ui
+        > .s-slider__controls
+        .s-slider__controls-next-arrow,
+    > .s-slider__root
+        > .s-slider__ui
+        > .s-slider__controls
+        .s-slider__controls-previous-arrow {
         width: 1em;
         height: 1em;
         position: absolute;
@@ -280,7 +347,10 @@
             transform: rotate(-45deg);
         }
     }
-    > .s-slider__root > .s-slider__controls .s-slider__controls-next-arrow {
+    > .s-slider__root
+        > .s-slider__ui
+        > .s-slider__controls
+        .s-slider__controls-next-arrow {
         transform: rotate(180deg);
     }
 }

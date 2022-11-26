@@ -9,15 +9,14 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
 // @ts-ignore
 import {
-    __getTranslateProperties,
     __querySelectorLive,
     __querySelectorUp,
 } from '@coffeekraken/sugar/dom';
-import { __easeInterval } from '@coffeekraken/sugar/function';
 import { __uniqid } from '@coffeekraken/sugar/string';
 import __css from '../../../../src/css/s-slider-component.css'; // relative to /dist/pkg/esm/js
 import __SSliderComponentInterface from './interface/SSliderComponentInterface';
-import __SSliderBehavior from './SSliderBehavior';
+
+import __scrollBehavior from './behaviors/scrollBehavior';
 
 /**
  * @name                SSliderComponent
@@ -257,10 +256,18 @@ import __SSliderBehavior from './SSliderBehavior';
  * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
+export interface ISSliderComponentBehavior {
+    setup?(): Promise<void>;
+    firstUpdated?(): Promise<void>;
+    pad?(): Promise<void>;
+    transition?($from: HTMLElement, $to: HTMLElement): Promise<void>;
+}
+
 export interface ISSliderComponentProps extends ISLitComponentDefaultProps {
     direction: 'horizontal' | 'vertical';
-    behaviors: __SSliderBehavior[];
+    behaviors: Record<string, ISSliderComponentBehavior>;
     behavior: __SSliderBehavior | string | 'none' | 'scroll' | 'transform';
+    pad: boolean;
     controls: boolean;
     nav: boolean;
     mousewheel: boolean;
@@ -336,6 +343,9 @@ export default class SSliderComponent extends __SLitComponent {
         );
     }
     async mount() {
+        // register "built-in" behaviors
+        this.props.behaviors.scroll = __scrollBehavior;
+
         // assign a uniqid if not already setted
         if (!this.id) {
             this.setAttribute('id', `s-slider-${__uniqid()}`);
@@ -353,10 +363,25 @@ export default class SSliderComponent extends __SLitComponent {
             return false;
         });
 
+        // setup through behavior
+        await this.getBehavior().setup?.();
+
         // set the initial slide idx from properties
         if (this.props.slide) {
             this.setCurrentSlide(this.props.slide);
         }
+
+        // listen for resizing and apply things like pad, etc...
+        let resizeTimeout;
+        window.addEventListener('resize', (e) => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(async () => {
+                // pad
+                await this.applyPad();
+                // transition to current slide again
+                this.goTo(this.getCurrentSlideIdx(), true);
+            }, 200);
+        });
     }
     async firstUpdated() {
         // bare elements
@@ -418,9 +443,11 @@ export default class SSliderComponent extends __SLitComponent {
                     `Invalid behavior type, must be a string, an SSliderBehavior extended class or an SSliderBehavior instance`,
                 );
             }
-            this.behavior.$slider = this;
             this.behavior.firstUpdated?.();
         }
+
+        // pad
+        this.applyPad();
 
         // prevent user scroll for default behavior
         this._preventUserScrollForDefaultBehavior();
@@ -430,8 +457,6 @@ export default class SSliderComponent extends __SLitComponent {
 
         // listen for mousewheel
         this._handleMousewheel();
-
-        console.log(this.props);
 
         // click on slide
         this.props.clickOnSlide && this._handleClickOnSlide();
@@ -449,6 +474,51 @@ export default class SSliderComponent extends __SLitComponent {
         if (this.props.autoplay && this.props.timer) {
             this.play();
         }
+    }
+
+    /**
+     * @name        applyPad
+     * @type        Function
+     * @async
+     *
+     * This method apply the "pad" start and end on the slides wrapper
+     *
+     * @since       2.0.0
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    async applyPad() {
+        // pad through behavior
+        if (this.getBehavior().pad) {
+            await this.getBehavior().pad();
+        } else {
+            await this._pad();
+        }
+    }
+
+    /**
+     * Default pad function if not specified in the behavior
+     */
+    _pad() {
+        const firstSlide = this.getFirstSlide(),
+            lastSlide = this.getLastSlide(),
+            firstRect = firstSlide.$slide.getBoundingClientRect(),
+            lastRect = lastSlide.$slide.getBoundingClientRect(),
+            sliderRect = this.getBoundingClientRect();
+        let padStart = 0,
+            padEnd = 0;
+        if (this.props.direction === 'vertical') {
+            padStart = (sliderRect.height - firstRect.height) * 0.5;
+            padEnd = (sliderRect.height - lastRect.height) * 0.5;
+        } else {
+            padStart = (sliderRect.width - firstRect.width) * 0.5;
+            console.log(sliderRect.width, lastRect.width);
+            padEnd = (sliderRect.width - lastRect.width) * 0.5;
+        }
+        this.style.setProperty(
+            '--s-slider-pad-start',
+            `${Math.round(padStart)}px`,
+        );
+        this.style.setProperty('--s-slider-pad-end', `${Math.round(padEnd)}px`);
     }
 
     /**
@@ -1032,6 +1102,40 @@ export default class SSliderComponent extends __SLitComponent {
     }
 
     /**
+     * @name            getBehavior
+     * @type            Function
+     *
+     * This method allows you to get the behavior object with all his functions binded
+     * to this current slider instance
+     *
+     * @since       2.0.0
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    _bindedBehaviors = {};
+    getBehavior(): ISSliderComponentBehavior {
+        if (this._bindedBehaviors[this.props.behavior]) {
+            return this._bindedBehaviors[this.props.behavior];
+        }
+        const behavior = this.props.behaviors[this.props.behavior];
+        if (!behavior) {
+            throw new Error(
+                `[SSliderComponent] The requested "${
+                    this.props.behavior
+                }" does not exists. Here's the available ones:\n${Object.keys(
+                    this.props.behaviors,
+                ).map((b) => `\n- ${b}`)}`,
+            );
+        }
+        Object.keys(behavior).forEach((fnName) => {
+            if (typeof behavior[fnName] === 'function') {
+                behavior[fnName] = behavior[fnName].bind(this);
+            }
+        });
+        this._bindedBehaviors[this.props.behavior] = behavior;
+        return behavior;
+    }
+
+    /**
      * @name        goTo
      * @type    Function
      *
@@ -1084,6 +1188,7 @@ export default class SSliderComponent extends __SLitComponent {
         currentSlide.$slide.classList.remove('active');
         nextSlide.$slide.classList.add('pre-active');
 
+        console.log('transition0', currentSlide, nextSlide);
         await this._transitionHandler(currentSlide.$slide, nextSlide.$slide);
 
         currentSlide.$slide.classList.remove('post-active');
@@ -1284,95 +1389,55 @@ export default class SSliderComponent extends __SLitComponent {
                 return resolve();
             }
 
+            // call the behavior transition function
+            await this.getBehavior().transition?.($from, $to);
+
+            // resolve
+            resolve();
+
             // default
-            if (this.props.behavior === 'scroll') {
-                // disable scroll snaping during transition
-                this.$slidesWrapper.style.scrollSnapType = 'none';
+            // if (this.props.behavior === 'scroll') {
+            // } else if (this.props.behavior === 'transform') {
+            //     const toRect = $to.getBoundingClientRect(),
+            //         sliderWrapperRect =
+            //             this.$slidesWrapper.getBoundingClientRect(),
+            //         fromRect = $from.getBoundingClientRect(),
+            //         sliderRect = this.getBoundingClientRect();
 
-                const toRect = $to.getBoundingClientRect();
-                let startX = this.$slidesWrapper.scrollLeft,
-                    startY = this.$slidesWrapper.scrollTop;
+            //     const translates = __getTranslateProperties(
+            //         this.$slidesWrapper,
+            //     );
 
-                const dist =
-                    (this.props.direction === 'vertical'
-                        ? toRect.height
-                        : toRect.width) *
-                    (this.state.currentSlideIdx - this.state.previousSlideIdx);
-                const _this = this;
+            //     const _this = this;
 
-                __easeInterval(
-                    this.props.transitionDuration,
-                    (percentage) => {
-                        const offset = (dist / 100) * percentage;
+            //     const fromOffset = (sliderRect.width - fromRect.width) * 0.5;
+            //     const toOffset = (sliderRect.width - toRect.width) * 0.5;
+            //     const dist = toRect.x - fromRect.x - toOffset + fromOffset;
 
-                        // console.log(offset);
-                        if (this.props.direction === 'vertical') {
-                            this.$slidesWrapper.scroll(
-                                0,
-                                Math.round(startY + offset),
-                            );
-                        } else {
-                            this.$slidesWrapper.scroll(
-                                Math.round(startX + offset),
-                                0,
-                            );
-                        }
-                    },
-                    {
-                        easing: this.props.transitionEasing,
-                        onEnd() {
-                            if (_this.props.direction === 'vertical') {
-                                _this.$slidesWrapper.style.scrollSnapType =
-                                    'y mandatory';
-                            } else {
-                                _this.$slidesWrapper.style.scrollSnapType =
-                                    'x mandatory';
-                            }
-                            resolve();
-                        },
-                    },
-                );
-            } else if (this.props.behavior === 'transform') {
-                const toRect = $to.getBoundingClientRect(),
-                    sliderWrapperRect =
-                        this.$slidesWrapper.getBoundingClientRect(),
-                    fromRect = $from.getBoundingClientRect(),
-                    sliderRect = this.getBoundingClientRect();
+            //     __easeInterval(
+            //         this.props.transitionDuration,
+            //         (percentage) => {
+            //             const offset = (dist / 100) * percentage * -1;
 
-                const translates = __getTranslateProperties(
-                    this.$slidesWrapper,
-                );
-
-                const _this = this;
-
-                const fromOffset = (sliderRect.width - fromRect.width) * 0.5;
-                const toOffset = (sliderRect.width - toRect.width) * 0.5;
-                const dist = toRect.x - fromRect.x - toOffset + fromOffset;
-
-                __easeInterval(
-                    this.props.transitionDuration,
-                    (percentage) => {
-                        const offset = (dist / 100) * percentage * -1;
-
-                        // console.log(offset);
-                        if (this.props.direction === 'vertical') {
-                            _this.$slidesWrapper.style.transform = `translateY(${
-                                translates.y + offset
-                            }px)`;
-                        } else {
-                            _this.$slidesWrapper.style.transform = `translateX(${
-                                translates.x + offset
-                            }px)`;
-                        }
-                    },
-                    {
-                        easing: this.props.transitionEasing,
-                        onEnd() {
-                            resolve();
-                        },
-                    },
-                );
-            }
+            //             // console.log(offset);
+            //             if (this.props.direction === 'vertical') {
+            //                 _this.$slidesWrapper.style.transform = `translateY(${
+            //                     translates.y + offset
+            //                 }px)`;
+            //             } else {
+            //                 _this.$slidesWrapper.style.transform = `translateX(${
+            //                     translates.x + offset
+            //                 }px)`;
+            //             }
+            //         },
+            //         {
+            //             easing: this.props.transitionEasing,
+            //             onEnd() {
+            //                 resolve();
+            //             },
+            //         },
+            //     );
+            // }
         });
     }
     render() {
@@ -1404,85 +1469,89 @@ export default class SSliderComponent extends __SLitComponent {
                         })}
                     </div>
                 </div>
-                ${this.props.progress
-                    ? html`
-                          <div
-                              class="${this.componentUtils.className(
-                                  '__progress',
-                              )}"
-                          >
+                <div class="${this.componentUtils.className('__ui')}">
+                    ${this.props.progress
+                        ? html`
                               <div
                                   class="${this.componentUtils.className(
-                                      '__progress-bar',
+                                      '__progress',
                                   )}"
-                              ></div>
-                          </div>
-                      `
-                    : ''}
-                <div class="${this.componentUtils.className('__nav')}">
-                    ${this.$slides.map(($slide, idx) => {
-                        return html`
-                            <div
-                                class="${this.componentUtils.className(
-                                    '__nav-item',
-                                )} ${idx === currentSlide.idx ? 'active' : ''}"
-                                @pointerup=${() => this.goTo(idx)}
-                            ></div>
-                        `;
-                    })}
+                              >
+                                  <div
+                                      class="${this.componentUtils.className(
+                                          '__progress-bar',
+                                      )}"
+                                  ></div>
+                              </div>
+                          `
+                        : ''}
+                    <div class="${this.componentUtils.className('__nav')}">
+                        ${this.$slides.map(($slide, idx) => {
+                            return html`
+                                <div
+                                    class="${this.componentUtils.className(
+                                        '__nav-item',
+                                    )} ${idx === currentSlide.idx
+                                        ? 'active'
+                                        : ''}"
+                                    @pointerup=${() => this.goTo(idx)}
+                                ></div>
+                            `;
+                        })}
+                    </div>
+                    ${this.props.controls
+                        ? html`
+                              <div
+                                  class="${this.componentUtils.className(
+                                      '__controls',
+                                  )}"
+                              >
+                                  <div
+                                      class="${this.componentUtils.className(
+                                          '__controls-previous',
+                                      )} ${this.isFirst() && !this.props.loop
+                                          ? ''
+                                          : 'active'}"
+                                      @pointerup=${() => this.previous()}
+                                  >
+                                      ${this.props.previousIconClass
+                                          ? html`
+                                                <i
+                                                    class="${this.props
+                                                        .previousIconClass}"
+                                                ></i>
+                                            `
+                                          : html`<div
+                                                class="${this.componentUtils.className(
+                                                    '__controls-previous-arrow',
+                                                )}"
+                                            ></div>`}
+                                  </div>
+                                  <div
+                                      class="${this.componentUtils.className(
+                                          '__controls-next',
+                                      )} ${this.isLast() && !this.props.loop
+                                          ? ''
+                                          : 'active'}"
+                                      @pointerup=${() => this.next()}
+                                  >
+                                      ${this.props.nextIconClass
+                                          ? html`
+                                                <i
+                                                    class="${this.props
+                                                        .nextIconClass}"
+                                                ></i>
+                                            `
+                                          : html`<div
+                                                class="${this.componentUtils.className(
+                                                    '__controls-next-arrow',
+                                                )}"
+                                            ></div>`}
+                                  </div>
+                              </div>
+                          `
+                        : ''}
                 </div>
-                ${this.props.controls
-                    ? html`
-                          <div
-                              class="${this.componentUtils.className(
-                                  '__controls',
-                              )}"
-                          >
-                              <div
-                                  class="${this.componentUtils.className(
-                                      '__controls-previous',
-                                  )} ${this.isFirst() && !this.props.loop
-                                      ? ''
-                                      : 'active'}"
-                                  @pointerup=${() => this.previous()}
-                              >
-                                  ${this.props.previousIconClass
-                                      ? html`
-                                            <i
-                                                class="${this.props
-                                                    .previousIconClass}"
-                                            ></i>
-                                        `
-                                      : html`<div
-                                            class="${this.componentUtils.className(
-                                                '__controls-previous-arrow',
-                                            )}"
-                                        ></div>`}
-                              </div>
-                              <div
-                                  class="${this.componentUtils.className(
-                                      '__controls-next',
-                                  )} ${this.isLast() && !this.props.loop
-                                      ? ''
-                                      : 'active'}"
-                                  @pointerup=${() => this.next()}
-                              >
-                                  ${this.props.nextIconClass
-                                      ? html`
-                                            <i
-                                                class="${this.props
-                                                    .nextIconClass}"
-                                            ></i>
-                                        `
-                                      : html`<div
-                                            class="${this.componentUtils.className(
-                                                '__controls-next-arrow',
-                                            )}"
-                                        ></div>`}
-                              </div>
-                          </div>
-                      `
-                    : ''}
             </div>
         `;
     }

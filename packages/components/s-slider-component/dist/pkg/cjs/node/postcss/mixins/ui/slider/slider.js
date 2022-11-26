@@ -107,12 +107,12 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                 }
             }
 
-            &[lnf*='contained'] .s-slider__root > .s-slider__nav {
+            &[lnf*='contained'] .s-slider__root > .s-slider__ui > .s-slider__nav {
                 top: auto;
                 bottom: calc(sugar.margin(30) - 0.5em);
                 transform: translate(-50%, -100%);
             }
-            &[direction='vertical'] .s-slider__root > .s-slider__nav {
+            &[direction='vertical'] .s-slider__root > .s-slider__ui > .s-slider__nav {
                 top: 50%;
                 left: calc(100% + sugar.margin(30));
                 transform: translate(0, -50%);
@@ -120,14 +120,14 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                 gap: sugar.margin(10);
             }
             &[lnf*='contained'][direction='vertical']
-                .s-slider__root > .s-slider__nav {
+                .s-slider__root > .s-slider__ui > .s-slider__nav {
                 bottom: auto;
                 left: auto;
                 right: calc(sugar.margin(30));
                 transform: translate(0, -50%);
             }
 
-            > .s-slider__root > .s-slider__progress {
+            > .s-slider__root > .s-slider__ui > .s-slider__progress {
                 position: absolute;
                 bottom: sugar.margin(30);
                 left: sugar.margin(30);
@@ -146,7 +146,7 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                 }
             }
 
-            > .s-slider__root > .s-slider__controls {
+            > .s-slider__root > .s-slider__ui > .s-slider__controls {
                 .s-slider__controls-next,
                 .s-slider__controls-previous {
                     transition: sugar.theme(ui.slider.transition);
@@ -159,11 +159,11 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                 }
             }
 
-            &[lnf*='contained'] > .s-slider__root > .s-slider__controls .s-slider__controls-previous {
+            &[lnf*='contained'] > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-previous {
                 left: calc(sugar.margin(30));
                 transform: translate(0, -50%);
             }
-            &[lnf*='contained'] > .s-slider__root > .s-slider__controls .s-slider__controls-next {
+            &[lnf*='contained'] > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-next {
                 left: auto;
                 right: calc(sugar.margin(30));
                 transform: translate(0, -50%);
@@ -171,6 +171,7 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
 
             &[direction='vertical']
                 > .s-slider__root
+                > .s-slider__ui
                 > .s-slider__controls
                 .s-slider__controls-next {
                 left: 50%;
@@ -179,6 +180,7 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
             }
             &[direction='vertical']
                 > .s-slider__root
+                > .s-slider__ui
                 > .s-slider__controls
                 .s-slider__controls-previous {
                 left: 50%;
@@ -188,20 +190,22 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
             }
             &[direction='vertical'][lnf*='contained']
                 > .s-slider__root
+                > .s-slider__ui
                 > .s-slider__controls
                 .s-slider__controls-previous {
                 top: calc(sugar.margin(30));
             }
             &[direction='vertical'][lnf*='contained']
                 > .s-slider__root
+                > .s-slider__ui
                 > .s-slider__controls
                 .s-slider__controls-next {
                 top: auto;
                 bottom: calc(sugar.margin(30));
             }
 
-            > .s-slider__root > .s-slider__controls .s-slider__controls-next-arrow,
-            > .s-slider__root > .s-slider__controls .s-slider__controls-previous-arrow {
+            > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-next-arrow,
+            > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-previous-arrow {
                 width: 1em;
                 height: 1em;
                 position: absolute;
@@ -228,12 +232,12 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                     transform: rotate(-45deg);
                 }
             }
-            > .s-slider__root > .s-slider__controls .s-slider__controls-next-arrow {
+            > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-next-arrow {
                 transform: rotate(180deg);
             }
 
-            > .s-slider__root > .s-slider__controls .s-slider__controls-next-arrow,
-            > .s-slider__root > .s-slider__controls .s-slider__controls-previous-arrow {
+            > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-next-arrow,
+            > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-previous-arrow {
                 &:before,
                 &:after {
                     background: sugar.color(current);
@@ -245,4 +249,4 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
     return vars;
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRCxNQUFNLHdCQUF5QixTQUFRLHFCQUFZO0lBQy9DLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFO29CQUNGLElBQUksRUFBRSxlQUFlO29CQUNyQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDO2lCQUN6QjtnQkFDRCxNQUFNLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxFQUFFLFVBQVUsQ0FBQztnQkFDbkMsT0FBTyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxVQUFVLENBQUM7YUFDdkM7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBTW9DLDZDQUFTO0FBRTlDOzs7Ozs7Ozs7Ozs7Ozs7O0dBZ0JHO0FBRUgsbUJBQXlCLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sVUFBVSxFQUNWLFdBQVcsR0FNZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixLQUFLLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxDQUFDLElBQ25CLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLE9BQU87SUFDUCxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQzFDLElBQUksQ0FBQyxJQUFJLENBQUM7O0tBRWIsQ0FBQyxDQUFDO0tBQ0Y7SUFFRCxXQUFXO0lBQ1gsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxVQUFVLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUM5QyxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7U0FNVCxDQUFDLENBQUM7S0FDTjtJQUVELDRGQUE0RjtJQUM1RiwyQkFBMkI7SUFDM0IsSUFBSTtJQUVKLE1BQU07SUFDTixJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQ3pDLElBQUksQ0FBQyxJQUFJLENBQUM7O1NBRVQsQ0FBQyxDQUFDO1FBRUgsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7U0FnTFQsQ0FBQyxDQUFDO0tBQ047SUFFRCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDO0FBbE9ELDRCQWtPQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRCxNQUFNLHdCQUF5QixTQUFRLHFCQUFZO0lBQy9DLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFO29CQUNGLElBQUksRUFBRSxlQUFlO29CQUNyQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDO2lCQUN6QjtnQkFDRCxNQUFNLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxFQUFFLFVBQVUsQ0FBQztnQkFDbkMsT0FBTyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxVQUFVLENBQUM7YUFDdkM7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBTW9DLDZDQUFTO0FBRTlDOzs7Ozs7Ozs7Ozs7Ozs7O0dBZ0JHO0FBRUgsbUJBQXlCLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sVUFBVSxFQUNWLFdBQVcsR0FNZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixLQUFLLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxDQUFDLElBQ25CLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLE9BQU87SUFDUCxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQzFDLElBQUksQ0FBQyxJQUFJLENBQUM7O0tBRWIsQ0FBQyxDQUFDO0tBQ0Y7SUFFRCxXQUFXO0lBQ1gsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxVQUFVLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUM5QyxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7U0FNVCxDQUFDLENBQUM7S0FDTjtJQUVELDRGQUE0RjtJQUM1RiwyQkFBMkI7SUFDM0IsSUFBSTtJQUVKLE1BQU07SUFDTixJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQ3pDLElBQUksQ0FBQyxJQUFJLENBQUM7O1NBRVQsQ0FBQyxDQUFDO1FBRUgsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O1NBb0xULENBQUMsQ0FBQztLQUNOO0lBRUQsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQztBQXRPRCw0QkFzT0MifQ==

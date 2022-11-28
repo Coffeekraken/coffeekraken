@@ -54,6 +54,7 @@
         "@coffeekraken/s-glob": "^2.0.0-alpha.20",
         "@coffeekraken/s-google-map-component": "^2.0.0-alpha.20",
         "@coffeekraken/s-handlebars": "^2.0.0-alpha.20",
+        "@coffeekraken/s-highlight-feature": "^2.0.0-alpha.20",
         "@coffeekraken/s-images-builder": "^2.0.0-alpha.20",
         "@coffeekraken/s-inline-feature": "^2.0.0-alpha.20",
         "@coffeekraken/s-interface": "^2.0.0-alpha.20",

@@ -30,6 +30,8 @@ export interface IAreaStatsResult {
     percentage: number;
     percentageX: number;
     percentageY: number;
+    centerOffsetX: number;
+    centerOffsetY: number;
     width: number;
     height: number;
     top: number;
@@ -193,6 +195,12 @@ export default function __elementAreaStats(
         percentage,
         percentageX: percentageY > 0 ? percentageX : 0,
         percentageY: percentageX > 0 ? percentageY : 0,
+        centerOffsetX:
+            (rootBoundingRect.width * 0.5 - left - boundingRect.width * 0.5) *
+            -1,
+        centerOffsetY:
+            (rootBoundingRect.height * 0.5 - top - boundingRect.height * 0.5) *
+            -1,
         width: percentageX > 0 && percentageY > 0 ? surfaceX : 0,
         height: percentageY > 0 && percentageX > 0 ? surfaceY : 0,
         left: boundingRect.left,

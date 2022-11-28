@@ -4,6 +4,10 @@
     "description": "The available containers",
     "options": [
         {
+            "name": "None",
+            "value": false
+        },
+        {
             "name": "Default",
             "value": "default"
         },

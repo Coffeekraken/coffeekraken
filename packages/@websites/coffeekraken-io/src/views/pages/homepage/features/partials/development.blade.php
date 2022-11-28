@@ -116,7 +116,8 @@ sugar dev'
         </div>
 
         <div
-            class="s-layout:123 s-gap:50 s-p:80 s-mbe:100 s-bg:main-surface s-radius s-depth @mobile s-layout:1_2_3 s-depth:0 s-osi:30 s-p:50">
+            class="s-layout:123 s-gap:50 s-p:80 s-mbe:100 s-bg:main-surface s-radius s-depth @mobile s-layout:1_2_3 s-depth:0 s-osi:30 s-p:50"
+            s-highlight="light" size="2000">
             <div>
                 <div class="s-flex s-gap:30 s-mbe:30">
                     <div>

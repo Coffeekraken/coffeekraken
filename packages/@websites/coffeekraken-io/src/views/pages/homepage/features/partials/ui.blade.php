@@ -9,122 +9,106 @@
                 library. This gives you access to components like:
             </p>
 
-            <ul class="__webcomponents-grid s-mbe:50">
-                <li>
-                    <a href="/styleguide/ui/button" title="Coffeekraken buttons">
-                        <div class="icon-card s-color:accent" 
-                            >
-                            <div class="icon-card__content">
-                                <i class="s-icon:ui-button"></i>
-                                <p class="s-p">Buttons</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="/styleguide/ui/dropdown" title="Coffeekraken dropdowns">
-                        <div class="icon-card s-color:complementary" 
-                            >
-                            <div class="icon-card__content">
-                                <i class="s-icon:ui-dropdown"></i>
-                                <p class="s-p">Dropdowns</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="/styleguide/ui/tooltip" title="Coffeekraken tooltips">
-                        <div class="icon-card s-color:accent" 
-                            >
-                            <div class="icon-card__content">
-                                <i class="s-icon:ui-tooltip"></i>
-                                <p class="s-p">Tooltips</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="/styleguide/form/switch" title="Coffeekraken switch">
-                        <div class="icon-card s-color:complementary" 
-                            >
-                            <div class="icon-card__content">
-                                <i class="s-icon:ui-switch"></i>
-                                <p class="s-p">Switches</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="/package/@coffeekraken/s-datetime-picker-component/styleguide/form/s-datetime-picker"
-                        title="Coffeekraken date picker">
-                        <div class="icon-card s-color:accent" 
-                            >
-                            <div class="icon-card__content">
-                                <i class="s-icon:ui-datepicker"></i>
-                                <p class="s-p">Date Picker</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="/package/@coffeekraken/s-filtrable-input-component/styleguide/ui/s-filtrable-einput"
-                        title="Coffeekraken filtrable input">
-                        <div class="icon-card s-color:complementary" 
-                            >
-                            <div class="icon-card__content">
-                                <i class="s-icon:ui-autocomplete"></i>
-                                <p class="s-p">Filtrable Input</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="/styleguide/ui/loaders" title="Coffeekraken loaders">
-                        <div class="icon-card s-color:accent" 
-                            >
-                            <div class="icon-card__content">
-                                <i class="s-icon:ui-loader"></i>
-                                <p class="s-p">Loaders</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="/package/@coffeekraken/s-range-component/styleguide/form/s-range" title="Coffeekraken range input">
-                        <div class="icon-card s-color:complementary" 
-                            >
-                            <div class="icon-card__content">
-                                <i class="s-icon:ui-range"></i>
-                                <p class="s-p">Range Input</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="/package/@coffeekraken/s-code-example-component/styleguide/ui/s-code-example"
-                        title="Coffeekraken code example">
-                        <div class="icon-card s-color:accent" 
-                            >
-                            <div class="icon-card__content">
-                                <i class="s-icon:ui-code"></i>
-                                <p class="s-p">Code Example</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="/styleguide/ui/avatar" title="Coffeekraken avatar">
-                        <div class="icon-card s-color:complementary" 
-                            >
-                            <div class="icon-card__content">
-                                <i class="s-icon:ui-avatar"></i>
-                                <p class="s-p">Avatar</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-            </ul>
+        </div>
 
+        @php
+            $uiCards = [
+                [
+                    (object) [
+                        "title" => "Buttons",
+                        "icon" => "ui-button",
+                        "url" => "/styleguide/ui/button",
+                        "image" => "https://picsum.photos/600/600?343ff6"
+                    ],
+                    (object) [
+                        "title" => "Dropdowns",
+                        "icon" => "ui-dropdown",
+                        "url" => "/styleguide/ui/dropdown",
+                        "image" => "https://picsum.photos/600/600?232323"
+                    ],
+                    (object) [
+                        "title" => "Tooltip",
+                        "icon" => "ui-tooltip",
+                        "url" => "/styleguide/ui/tooltip",
+                        "image" => "https://picsum.photos/600/600?343ff612s"
+                    ]
+                ],
+                [
+                    (object) [
+                        "title" => "Switches",
+                        "icon" => "ui-switch",
+                        "url" => "/styleguide/form/switch",
+                        "image" => "https://picsum.photos/600/600?3212ff6"
+                    ],
+                    (object) [
+                        "title" => "Date picker",
+                        "icon" => "ui-datepicker",
+                        "url" => "/package/@coffeekraken/s-datetime-picker-component/styleguide/form/s-datetime-picker",
+                        "image" => "https://picsum.photos/600/600?3111"
+                    ],
+                    (object) [
+                        "title" => "Filtrable input",
+                        "icon" => "ui-autocomplete",
+                        "url" => "/package/@coffeekraken/s-filtrable-input-component/styleguide/ui/s-filtrable-input",
+                        "image" => "https://picsum.photos/600/600?34wwqd2"
+                    ]
+                ],
+                [
+                    (object) [
+                        "title" => "Loaders",
+                        "icon" => "ui-loader",
+                        "url" => "/styleguide/ui/loaders",
+                        "image" => "https://picsum.photos/600/600?343ff6"
+                    ],
+                    (object) [
+                        "title" => "Range input",
+                        "icon" => "ui-range",
+                        "url" => "/package/@coffeekraken/s-range-component/styleguide/form/s-range",
+                        "image" => "https://picsum.photos/600/600?32e2e2e"
+                    ],
+                    (object) [
+                        "title" => "Code example",
+                        "icon" => "ui-code",
+                        "url" => "/package/@coffeekraken/s-code-example-component/styleguide/ui/s-code-example",
+                        "image" => "https://picsum.photos/600/600?3ewff"
+                    ],
+                ],
+                [
+                    (object) [
+                        "title" => "Avatar",
+                        "icon" => "ui-avatar",
+                        "url" => "/styleguide/ui/avatar",
+                        "image" => "https://picsum.photos/600/600?343dda"
+                    ]
+                ]
+            ];
+        @endphp
+
+        <s-slider controls nav loop pad class="s-mbe:100 s-ratio:none ui-card-slider">
+            
+
+            @foreach ($uiCards as $section)
+
+                <div s-slider-slide>
+                    <div class="ui-card-container">
+
+                        @foreach ($section as $card)
+                            <a class="ui-card s-color:accent" href="{{ $card->url }}" title="Coffeekraken buttons" s-highlight="light" style="--image: url({{ $card->image }})" opacity="0.6">
+                                <div class="ui-card__content">
+                                    <i class="s-icon:{{ $card->icon }}"></i>
+                                    <p class="s-p">{{ $card->title }}</p>
+                                </div>
+                            </a>
+                        @endforeach
+            
+                    </div>
+                </div>
+
+            @endforeach
+
+        </s-slider>
+
+        <div class="s-container">
 
             <div class="s-text:center s-pt:50">
                 <p class="s-typo:lead s-mi:auto s-mbe:30">

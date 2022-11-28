@@ -13,119 +13,105 @@
                     helper do the job</span>!.
             </p>
 
-            <ul class="__webcomponents-grid s-mbe:50">
-                <li>
-                    <a href="/styleguide/helpers/text" title="Coffeekraken text align helpers">
-                        <div class="icon-card s-color:accent" 
-                        >
-                            <div class="icon-card__content">
-                                <i class="s-icon:ui-align"></i>
-                                <p class="s-p">Text aligns</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="/styleguide/helpers/typography" title="Coffeekraken typography helpers">
-                        <div class="icon-card s-color:complementary" 
-                        >
-                            <div class="icon-card__content">
-                                <i class="s-icon:ui-typography"></i>
-                                <p class="s-p">Typography</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="/styleguide/helpers/colors" title="Coffeekraken color helpers">
-                        <div class="icon-card s-color:accent" 
-                        >
-                            <div class="icon-card__content">
-                                <i class="s-icon:theme-colors"></i>
-                                <p class="s-p">Colors</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="/styleguide/helpers/flexbox" title="Coffeekraken flexbox helpers">
-                        <div class="icon-card s-color:complementary" 
-                        >
-                            <div class="icon-card__content">
-                                <i class="s-icon:css-flex"></i>
-                                <p class="s-p">Flexbox</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="/styleguide/helpers/ratio" title="Coffeekraken ratio helpers">
-                        <div class="icon-card s-color:accent" 
-                        >
-                            <div class="icon-card__content">
-                                <i class="s-icon:layout-ratio"></i>
-                                <p class="s-p">Ratios</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="/styleguide/helpers/radius" title="Coffeekraken radius helpers">
-                        <div class="icon-card s-color:complementary" 
-                        >
-                            <div class="icon-card__content">
-                                <i class="s-icon:css-radius"></i>
-                                <p class="s-p">Radius</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="/styleguide/helpers/transition" title="Coffeekraken transition helpers">
-                        <div class="icon-card s-color:accent" 
-                        >
-                            <div class="icon-card__content">
-                                <i class="s-icon:animation-easing"></i>
-                                <p class="s-p">Transitions</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="/styleguide/helpers/margin" title="Coffeekraken space helpers">
-                        <div class="icon-card s-color:complementary" 
-                        >
-                            <div class="icon-card__content">
-                                <i class="s-icon:layout-space"></i>
-                                <p class="s-p">Spaces</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="/styleguide/helpers/visibility" title="Coffeekraken visibility helpers">
-                        <div class="icon-card s-color:accent" 
-                        >
-                            <div class="icon-card__content">
-                                <i class="s-icon:misc-eye"></i>
-                                <p class="s-p">Visibility</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="/styleguide/tools/scale" title="Coffeekraken scale helpers">
-                        <div class="icon-card s-color:complementary" 
-                        >
-                            <div class="icon-card__content">
-                                <i class="s-icon:layout-scale"></i>
-                                <p class="s-p">Scales</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-            </ul>
+        </div>
 
+        @php
+            $uiCards = [
+                [
+                    (object) [
+                        "title" => "Text align",
+                        "icon" => "ui-align",
+                        "url" => "/styleguide/helpers/text",
+                        "image" => "https://picsum.photos/600/600?align"
+                    ],
+                    (object) [
+                        "title" => "Typography",
+                        "icon" => "ui-typography",
+                        "url" => "/styleguide/helpers/typography",
+                        "image" => "https://picsum.photos/600/600?typo"
+                    ],
+                    (object) [
+                        "title" => "Colors",
+                        "icon" => "theme-colors",
+                        "url" => "/styleguide/helpers/colors",
+                        "image" => "https://picsum.photos/600/600?color"
+                    ]
+                ],
+                [
+                    (object) [
+                        "title" => "Flexbox",
+                        "icon" => "css-flex",
+                        "url" => "/styleguide/helpers/flexbox",
+                        "image" => "https://picsum.photos/600/600?flexbox"
+                    ],
+                    (object) [
+                        "title" => "Ratios",
+                        "icon" => "layout-ratio",
+                        "url" => "/styleguide/helpers/ratio",
+                        "image" => "https://picsum.photos/600/600?ratio"
+                    ],
+                    (object) [
+                        "title" => "Border radius",
+                        "icon" => "css-radius",
+                        "url" => "/styleguide/helpers/radius",
+                        "image" => "https://picsum.photos/600/600?radius"
+                    ]
+                ],
+                [
+                    (object) [
+                        "title" => "Transitions",
+                        "icon" => "animation-easing",
+                        "url" => "/styleguide/helpers/transition",
+                        "image" => "https://picsum.photos/600/600?transition"
+                    ],
+                    (object) [
+                        "title" => "Spaces",
+                        "icon" => "layout-space",
+                        "url" => "/styleguide/helpers/margin",
+                        "image" => "https://picsum.photos/600/600?space"
+                    ],
+                    (object) [
+                        "title" => "Visibility",
+                        "icon" => "misc-eye",
+                        "url" => "/styleguide/helpers/visibility",
+                        "image" => "https://picsum.photos/600/600?visibility"
+                    ],
+                ],
+                [
+                    (object) [
+                        "title" => "Scales",
+                        "icon" => "layout-scale",
+                        "url" => "/styleguide/tools/scale",
+                        "image" => "https://picsum.photos/600/600?scale"
+                    ]
+                ]
+            ];
+        @endphp
+
+        <s-slider controls nav loop pad class="s-mbe:100 s-ratio:none ui-card-slider">
+            
+            @foreach ($uiCards as $section)
+
+                <div s-slider-slide>
+                    <div class="ui-card-container">
+
+                        @foreach ($section as $card)
+                            <a class="ui-card s-color:complementary" href="{{ $card->url }}" title="Coffeekraken buttons" s-highlight="light" style="--image: url({{ $card->image }})" opacity="0.6">
+                                <div class="ui-card__content">
+                                    <i class="s-icon:{{ $card->icon }}"></i>
+                                    <p class="s-p">{{ $card->title }}</p>
+                                </div>
+                            </a>
+                        @endforeach
+            
+                    </div>
+                </div>
+
+            @endforeach
+
+        </s-slider>
+
+        <div class="s-container">
 
             <div class="s-text:center s-pt:50 s-mis:-50 @mobile s-mis:0">
                 <p class="s-typo:lead s-mi:auto s-mbe:30">

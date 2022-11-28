@@ -56,7 +56,7 @@ export default function ({
     if (finalParams.scope.includes('lnf')) {
         vars.comment(
             `/**
-            * @name          .s-slider[lnf="default"]
+            * @name          .s-slider[lnf*="default"]
             * @namespace          sugar.style.ui.slider
             * @type           CssClass
             * 
@@ -70,7 +70,7 @@ export default function ({
         */`,
         ).code(
             `
-            .s-slider[lnf="default"] {
+            .s-slider[lnf*="default"] {
                 @sugar.ui.slider($scope: lnf);
             }
             `,
@@ -83,7 +83,7 @@ export default function ({
     if (finalParams.scope.includes('behavior')) {
         vars.code(
             `
-            .s-slider[behavior="default"] {
+            .s-slider[behavior*="default"] {
                 @sugar.ui.slider($scope: behavior);
             }`,
             {

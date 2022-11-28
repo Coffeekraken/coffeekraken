@@ -267,6 +267,7 @@ export interface ISSliderComponentProps extends ISLitComponentDefaultProps {
     direction: 'horizontal' | 'vertical';
     behaviors: Record<string, ISSliderComponentBehavior>;
     behavior: __SSliderBehavior | string | 'none' | 'scroll' | 'transform';
+    uiContainer: boolean | 'default' | 'wide' | 'full';
     pad: boolean;
     controls: boolean;
     nav: boolean;
@@ -351,7 +352,7 @@ export default class SSliderComponent extends __SLitComponent {
             this.setAttribute('id', `s-slider-${__uniqid()}`);
         }
         this.$slides = Array.from(
-            this.querySelectorAll(`[s-slider-slide]`),
+            this.querySelectorAll(`[s-slider-slide],s-slider-slide`),
         ).filter(($slide) => {
             const $parentSlider = __querySelectorUp($slide, '.s-slider');
             if (!$parentSlider || $parentSlider === this) {
@@ -362,9 +363,6 @@ export default class SSliderComponent extends __SLitComponent {
             }
             return false;
         });
-
-        // setup through behavior
-        await this.getBehavior().setup?.();
 
         // set the initial slide idx from properties
         if (this.props.slide) {
@@ -445,6 +443,9 @@ export default class SSliderComponent extends __SLitComponent {
             }
             this.behavior.firstUpdated?.();
         }
+
+        // setup through behavior
+        await this.getBehavior().setup?.();
 
         // pad
         this.applyPad();
@@ -765,11 +766,18 @@ export default class SSliderComponent extends __SLitComponent {
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     setCurrentSlideByIdx(idx: number): void {
+        // prevent from setting the same slide that the current one
+        if (idx === this.state.currentSlideIdx) {
+            return;
+        }
         // save the previous slide idx
         this.state.previousSlideIdx = this.state.currentSlideIdx;
         // set the new slide idx
         this.props.slide = idx;
         this.state.currentSlideIdx = idx;
+
+        // update the slides classes
+        this.updateSlidesClasses();
     }
 
     /**
@@ -1116,7 +1124,10 @@ export default class SSliderComponent extends __SLitComponent {
         if (this._bindedBehaviors[this.props.behavior]) {
             return this._bindedBehaviors[this.props.behavior];
         }
-        const behavior = this.props.behaviors[this.props.behavior];
+        const behavior = Object.assign(
+            {},
+            this.props.behaviors[this.props.behavior],
+        );
         if (!behavior) {
             throw new Error(
                 `[SSliderComponent] The requested "${
@@ -1133,6 +1144,27 @@ export default class SSliderComponent extends __SLitComponent {
         });
         this._bindedBehaviors[this.props.behavior] = behavior;
         return behavior;
+    }
+
+    /**
+     * @name        updateSlidesClasses
+     * @type        Function
+     *
+     * This method allows you to update the slides "active" class accordingly to the
+     * slider state. This can be used inside of a custom behavior for example.
+     *
+     * @since       2.0.0
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    updateSlidesClasses(): void {
+        const currentSlide = this.getCurrentSlide();
+        this.$slides.forEach(($slide, i) => {
+            if ($slide === currentSlide.$slide) {
+                $slide.classList.add('active');
+            } else {
+                $slide.classList.remove('active');
+            }
+        });
     }
 
     /**
@@ -1176,19 +1208,12 @@ export default class SSliderComponent extends __SLitComponent {
             nextSlide,
         });
 
-        this.$slides.forEach(($slide, i) => {
-            if ($slide === nextSlide.$slide) {
-                $slide.classList.add('active');
-            } else {
-                $slide.classList.remove('active');
-            }
-        });
+        this.updateSlidesClasses();
 
         currentSlide.$slide.classList.add('post-active');
         currentSlide.$slide.classList.remove('active');
         nextSlide.$slide.classList.add('pre-active');
 
-        console.log('transition0', currentSlide, nextSlide);
         await this._transitionHandler(currentSlide.$slide, nextSlide.$slide);
 
         currentSlide.$slide.classList.remove('post-active');
@@ -1379,6 +1404,21 @@ export default class SSliderComponent extends __SLitComponent {
      */
     _transitionHandler($from, $to) {
         return new Promise(async (resolve, reject) => {
+            // set current slide width/height variable
+            this.style.setProperty(
+                '--s-slider-slide-height',
+                `${Math.round(
+                    this.getCurrentSlide().$slide.getBoundingClientRect()
+                        .height,
+                )}px`,
+            );
+            this.style.setProperty(
+                '--s-slider-slide-width',
+                `${Math.round(
+                    this.getCurrentSlide().$slide.getBoundingClientRect().width,
+                )}px`,
+            );
+
             if (this.props.transitionHandler) {
                 await this.props.transitionHandler($from, $to);
                 return resolve();
@@ -1444,32 +1484,47 @@ export default class SSliderComponent extends __SLitComponent {
         if (!this.$slides.length) return;
         const currentSlide = this.getCurrentSlide();
         let slide = this.getCurrentSlide();
+
+        this.style.setProperty('--s-slider-slide', this.state.currentSlideIdx);
+        this.style.setProperty('--s-slider-total', this.$slides.length);
+        this.style.setProperty(
+            '--s-slider-slide-timer-total',
+            `${slide.timer.total ?? 0 / 1000}s`,
+        );
+
         return html`
-            <div
-                class="${this.componentUtils.className('__root')}"
-                behavior="${this.props.behavior?.id}"
-                style="
-                    --s-slider-slide: ${this.state.currentSlideIdx};
-                    --s-slider-total: ${this.$slides.length};
-                    ${slide
-                    ? `
-                        --s-slider-slide-timer-total: ${
-                            slide.timer.total / 1000
-                        }s;
-                    `
-                    : ''}
-                "
-            >
+            <div class="${this.componentUtils.className('__root')}">
                 <div
                     class="${this.componentUtils.className('__slides-wrapper')}"
                 >
                     <div class="${this.componentUtils.className('__slides')}">
+                        <div
+                            class="${this.componentUtils.className(
+                                '__pad __pad-start',
+                            )}"
+                        ></div>
                         ${this.$slides.map(($slide) => {
                             return $slide;
                         })}
+                        <div
+                            class="${this.componentUtils.className(
+                                '__pad __pad-end',
+                            )}"
+                        ></div>
                     </div>
                 </div>
-                <div class="${this.componentUtils.className('__ui')}">
+                <div
+                    class="${this.componentUtils.className(
+                        '__ui',
+                        `${
+                            typeof this.props.uiContainer === 'string'
+                                ? `s-container--${this.props.uiContainer}`
+                                : this.props.uiContainer === true
+                                ? 's-container'
+                                : ''
+                        }`,
+                    )}"
+                >
                     ${this.props.progress
                         ? html`
                               <div

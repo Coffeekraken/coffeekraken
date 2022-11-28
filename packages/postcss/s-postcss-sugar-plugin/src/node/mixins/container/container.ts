@@ -75,6 +75,7 @@ export default function ({
     }
 
     vars.code(`
+        --s-container-max-width: sugar.theme(layout.container.${finalParams.name}, true);
         width: 100%;
         max-width: sugar.theme(layout.container.${finalParams.name}, true);
     `);

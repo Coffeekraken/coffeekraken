@@ -68,6 +68,9 @@ function registerFunctions($twig)
     $idCompliant = require __DIR__ . '/string/idCompliant.php';
     $twig->addFunction($idCompliant);
 
+    $replace = require __DIR__ . '/string/replace.php';
+    $twig->addFunction($replace);
+
     $uniqid = require __DIR__ . '/string/uniqid.php';
     $twig->addFunction($uniqid);
 

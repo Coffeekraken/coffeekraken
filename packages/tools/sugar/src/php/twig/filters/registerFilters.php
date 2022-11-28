@@ -31,5 +31,11 @@ function registerFilters($twig)
     $cleanContext = require __DIR__ . '/object/cleanContext.php';
     $twig->addFilter($cleanContext);
 
+    $idCompliant = require __DIR__ . '/string/idCompliant.php';
+    $twig->addFilter($idCompliant);
+
+    $replace = require __DIR__ . '/string/replace.php';
+    $twig->addFilter($replace);
+
     return $twig;
 }

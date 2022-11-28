@@ -9,9 +9,11 @@ import { define as __SGoogleMapComponentDefine } from '@coffeekraken/s-google-ma
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { define as __SSidePanelComponentDefine } from '@coffeekraken/s-panel-component';
 import { define as __SRatingComponentDefine } from '@coffeekraken/s-rating-component';
+import { define as __SSliderComponentDefine } from '@coffeekraken/s-slider-component';
 import { define as __SThemeSwitcherComponentDefine } from '@coffeekraken/s-theme-switcher-component';
 
 import __SFeature from '@coffeekraken/s-feature';
+import { define as __SHighlightFeatureDefine } from '@coffeekraken/s-highlight-feature';
 import { define as __SPageTransitionFeatureDefine } from '@coffeekraken/s-page-transition-feature';
 import { define as __SParallaxFeatureDefine } from '@coffeekraken/s-parallax-feature';
 import { define as __STemplateFeatureDefine } from '@coffeekraken/s-template-feature';
@@ -24,6 +26,8 @@ import { define as __CKSearchComponent } from './components/CKSearch';
 import { define as __CKSettingsComponent } from './components/CkSettings';
 // import { define as __CKRatingsComponent } from './components/CKRating';
 // import { define as __CKWelcomeRatingsComponent } from './components/CKWelcomeRatings';
+
+import { __querySelectorLive } from '@coffeekraken/sugar/dom';
 
 // Libs
 import __STheme from '@coffeekraken/s-theme';
@@ -40,6 +44,9 @@ const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
     __SFeature.setDefaultProps('*', {
         mountWhen: 'nearViewport',
         // verbose: !__SEnv.is('devsCut'),
+    });
+    __SFeature.setDefaultProps(['s-highlight'], {
+        opacity: 0.3,
     });
     __SFeature.setDefaultProps(['s-form-validate'], {
         customValidations: {
@@ -90,11 +97,13 @@ const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
     __SPageTransitionFeatureDefine();
     __STemplateFeatureDefine();
     __SParallaxFeatureDefine();
+    __SHighlightFeatureDefine();
 
     // components
     __SCodeExampleComponentDefine({
         cssDeps: ['global', '/dist/css/partials/sCodeExample.css'],
     });
+    __SSliderComponentDefine();
     __SFiltrableInputComponentDefine();
     __SSidePanelComponentDefine();
     __SRatingComponentDefine();
@@ -129,5 +138,10 @@ const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
                 },
             },
         },
+    });
+
+    // code example highlight
+    __querySelectorLive('.s-code-example__content', ($elm) => {
+        $elm.setAttribute('s-highlight', 'light');
     });
 })();

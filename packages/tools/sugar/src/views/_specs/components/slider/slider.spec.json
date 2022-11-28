@@ -60,6 +60,22 @@
             ],
             "default": "horizontal"
         },
+        "slide": {
+            "type": "Number",
+            "title": "Slide",
+            "description": "Specify the first slide to display",
+            "default": 0
+        },
+        "ratio": {
+            "extends": "sugar.views.props.ratio",
+            "title": "Ratio",
+            "description": "Specify a ratio to be used to display your slider"
+        },
+        "uiContainer": {
+            "extends": "sugar.views.props.container",
+            "title": "UI Container",
+            "description": "Specify if you want to apply a container on the UI (arrows, etc...)"
+        },
         "controls": {
             "type": "Boolean",
             "title": "Controls",
@@ -71,6 +87,12 @@
             "title": "Navigation",
             "description": "Specify if you want the navigation (dots) or not",
             "default": true
+        },
+        "progress": {
+            "type": "Boolean",
+            "title": "Progress",
+            "description": "Specify if you want to display a progressbar on your slider or not",
+            "default": false
         },
         "swipe": {
             "type": "Boolean",
@@ -96,16 +118,11 @@
             "description": "Specify if you want your slider to be in loop mode or not",
             "default": false
         },
-        "slide": {
-            "type": "Number",
-            "title": "Slide",
-            "description": "Specify the first slide to display"
-        },
-        "progress": {
+        "pad": {
             "type": "Boolean",
-            "title": "Progress",
-            "description": "Specify if you want to display a progressbar on your slider or not",
-            "default": false
+            "title": "Pad",
+            "description": "Specify if you want to pad your slider before the first slide AND after the last one. By setting this to true, your first and last slide will be centered even if they don't make the full slider width",
+            "default": true
         },
         "timer": {
             "type": "Number",

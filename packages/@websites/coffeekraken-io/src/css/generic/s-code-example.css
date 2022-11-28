@@ -79,6 +79,7 @@ s-code-example:not([status="mounted"]) {
   margin-bottom: calc(sugar.margin(20) * -1);
   margin-left: calc(sugar.margin(20));
   position: relative;
+  @sugar.depth (100);
 }
 
 .s-code-example__toolbar {
@@ -93,6 +94,10 @@ s-code-example:not([status="mounted"]) {
 
 .s-code-example {
   /* filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.05)); */
+}
+
+.s-code-example__content {
+  @sugar.depth (100);
 }
 
 .s-code-example__content .hljs {

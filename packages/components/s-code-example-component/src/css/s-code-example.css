@@ -28,7 +28,7 @@
 
 .s-code-example__nav {
     position: relative;
-    z-index: 1;
+    z-index: 20;
 }
 
 .s-code-example__tabs {

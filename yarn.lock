@@ -2502,6 +2502,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@coffeekraken/s-highlight-feature@^2.0.0-alpha.20, @coffeekraken/s-highlight-feature@workspace:packages/features/s-highlight-feature":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/s-highlight-feature@workspace:packages/features/s-highlight-feature"
+  dependencies:
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-component-utils": ^2.0.0-alpha.20
+    "@coffeekraken/s-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-element": ^2.0.0-alpha.20
+    "@coffeekraken/s-theme": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
+  languageName: unknown
+  linkType: soft
+
 "@coffeekraken/s-images-builder@^2.0.0-alpha.20, @coffeekraken/s-images-builder@workspace:packages/builders/s-images-builder":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-images-builder@workspace:packages/builders/s-images-builder"
@@ -6563,6 +6578,7 @@ __metadata:
     "@coffeekraken/s-glob": ^2.0.0-alpha.20
     "@coffeekraken/s-google-map-component": ^2.0.0-alpha.20
     "@coffeekraken/s-handlebars": ^2.0.0-alpha.20
+    "@coffeekraken/s-highlight-feature": ^2.0.0-alpha.20
     "@coffeekraken/s-images-builder": ^2.0.0-alpha.20
     "@coffeekraken/s-inline-feature": ^2.0.0-alpha.20
     "@coffeekraken/s-interface": ^2.0.0-alpha.20

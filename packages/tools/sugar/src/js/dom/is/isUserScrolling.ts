@@ -47,6 +47,10 @@ try {
 } catch (e) {}
 
 export default function __isUserScrolling($elm) {
+    if ($elm._isUserInteractive !== undefined) {
+        return $elm._isUserInteractive && _isUserScrolling;
+    }
+
     $elm.addEventListener('mouseover', (e) => {
         $elm._isUserInteractive = true;
     });
@@ -60,8 +64,5 @@ export default function __isUserScrolling($elm) {
         $elm._isUserInteractive = false;
     });
 
-    if ($elm._isUserInteractive && _isUserScrolling) {
-        return true;
-    }
-    return false;
+    return $elm._isUserInteractive && _isUserScrolling;
 }

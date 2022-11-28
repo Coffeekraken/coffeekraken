@@ -58,6 +58,11 @@ export default class SSliderComponentInterface extends __SInterface {
                 description: 'Specify the class of the previous icon',
                 type: 'String',
             },
+            uiContainer: {
+                description:
+                    'Specify if you want an "s-container:..." class applied on the .s-slider__ui element',
+                type: 'String|Boolean',
+            },
             controls: {
                 description:
                     'Specify if you want to display the controls or not. Controls are the previous and next icons',

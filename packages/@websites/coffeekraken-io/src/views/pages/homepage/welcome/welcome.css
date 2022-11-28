@@ -388,7 +388,7 @@
             left: 0;
             width: calc(100% - 100px);
             transform: translateX(-100px) translateY(-50%);
-            z-index: 20;
+            z-index: 100;
         }
 
         .__shadow {
@@ -411,9 +411,14 @@
 
     .__content {
         /* width: 50%; */
+        pointer-events: none;
         padding-right: 35%;
         /* text-align: center; */
         /* padding-top: 200px; */
+
+        > * {
+            pointer-events: all;
+        }
 
         .s-typo--h3,
         .s-typo--p,

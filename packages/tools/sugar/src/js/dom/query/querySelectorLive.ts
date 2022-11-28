@@ -50,6 +50,7 @@ export interface IQuerySelectorLiveSettings {
     scopes: boolean;
     firstOnly: boolean;
     when: TWhenTrigger;
+    attributes: string[];
 }
 
 export default function __querySelectorLive(
@@ -76,14 +77,11 @@ export default function __querySelectorLive(
             afterFirst: null,
             scopes: true,
             firstOnly: false,
+            attributes: [],
             when: undefined,
         },
         settings,
     );
-
-    if (selector === 's-clipboard-copy') {
-        console.log('SE', settings);
-    }
 
     const innerPromises = [];
 
@@ -262,7 +260,7 @@ export default function __querySelectorLive(
         observer = new MutationObserver((mutations, obs) => {
             mutations.forEach((mutation) => {
                 if (mutation.attributeName) {
-                    processNode(node, selector);
+                    processNode(mutation.target, selector);
                 }
                 if (mutation.addedNodes) {
                     mutation.addedNodes.forEach((node) => {
@@ -272,14 +270,40 @@ export default function __querySelectorLive(
             });
         });
 
-        observer.observe(settings.rootNode, {
+        let observeSettings = {
             childList: true,
             subtree: true,
-        });
+        };
 
-        if (selector === 's-clipboard-copy') {
-            console.log('SE', settings);
+        selector
+            .split(',')
+            .map((l) => l.trim())
+            .forEach((sel) => {
+                const attrMatches = sel.match(/\[[^\]]+\]/gm);
+                if (attrMatches?.length) {
+                    attrMatches.forEach((attrStr) => {
+                        const attrName = attrStr
+                            .split('=')[0]
+                            .replace(/^\[/, '')
+                            .replace(/\]$/, '');
+                        if (!settings.attributes?.includes(attrName)) {
+                            settings.attributes?.push(attrName);
+                        }
+                    });
+                }
+            });
+
+        if (settings.attributes?.length) {
+            observeSettings = {
+                ...observeSettings,
+                attributes: settings.attributes?.length,
+                attributeFilter: settings.attributes.length
+                    ? settings.attributes
+                    : null,
+            };
         }
+
+        observer.observe(settings.rootNode, observeSettings);
 
         // first query
         findAndProcess(settings.rootNode, selector);

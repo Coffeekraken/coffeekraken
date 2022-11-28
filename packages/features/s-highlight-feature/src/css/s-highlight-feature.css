@@ -1,0 +1,46 @@
+[s-highlight='light'] {
+    position: relative;
+}
+
+[s-highlight='light']::before,
+[s-highlight='light']::after {
+    border-radius: inherit;
+    content: '';
+    display: block;
+    height: 100%;
+    left: 0px;
+    opacity: 0;
+    position: absolute;
+    top: 0px;
+    transition: opacity 500ms;
+    width: 100%;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+}
+
+[s-highlight='light']::before {
+    background: radial-gradient(
+        var(--s-highlight-size, 1000px) circle at var(--s-highlight-mouse-x)
+            var(--s-highlight-mouse-y),
+        rgba(255, 255, 255, 0.06),
+        transparent 40%
+    );
+    z-index: 3;
+}
+
+[s-highlight='light']::after {
+    background: radial-gradient(
+        var(--s-highlight-size, 1000px) circle at var(--s-highlight-mouse-x)
+            var(--s-highlight-mouse-y),
+        rgba(255, 255, 255, 0.4),
+        transparent 40%
+    );
+    z-index: 1;
+}
+
+[s-highlight='light'].highlight {
+    &:before,
+    &:after {
+        opacity: var(--s-highlight-opacity, 0.6);
+    }
+}

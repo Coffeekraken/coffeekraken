@@ -5,9 +5,11 @@
 >
 
 <s-slider 
+    class="{{ ratio ? 's-ratio--' ~ ratio|replace('/','-') : '' }}"
     direction="{{ direction ? direction : 'horizontal' }}"
     {{ lnf ? 'lnf=' ~ lnf : '' }}
     {{ behavior ? 'behavior=' ~ behavior : '' }}
+    pad="{{ pad ? 'true' : 'false' }}"
     {{ controls ? 'controls' : '' }}
     {{ nav ? 'nav' : '' }}
     {{ swipe ? 'swipe' : '' }}
@@ -18,6 +20,7 @@
     {{ progress ? 'progress' : '' }}
     {{ timer ? 'timer=' ~ timer : '' }}
     {{ autoplay ? 'autoplay' : '' }}
+    {{ uiContainer ? 'ui-container' : '' }}
 >
     {% for slide in slides %}
         <div s-slider-slide>

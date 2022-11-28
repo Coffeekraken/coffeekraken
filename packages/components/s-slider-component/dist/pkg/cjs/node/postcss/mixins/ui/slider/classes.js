@@ -35,7 +35,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     }
     if (finalParams.scope.includes('lnf')) {
         vars.comment(`/**
-            * @name          .s-slider[lnf="default"]
+            * @name          .s-slider[lnf*="default"]
             * @namespace          sugar.style.ui.slider
             * @type           CssClass
             * 
@@ -47,7 +47,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code(`
-            .s-slider[lnf="default"] {
+            .s-slider[lnf*="default"] {
                 @sugar.ui.slider($scope: lnf);
             }
             `, {
@@ -56,7 +56,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     }
     if (finalParams.scope.includes('behavior')) {
         vars.code(`
-            .s-slider[behavior="default"] {
+            .s-slider[behavior*="default"] {
                 @sugar.ui.slider($scope: behavior);
             }`, {
             type: 'CssClass',

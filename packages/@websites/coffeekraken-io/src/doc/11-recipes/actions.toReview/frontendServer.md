@@ -55,4 +55,4 @@ Here's the parameters that you can pass to this action:
 
 {{> interface namespace='@coffeekraken.s-frontend-server.node.interface.SFrontendServerStartParamsInterface' }}
 
-{{/layout-doc }}
+{% endblock %}

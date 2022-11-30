@@ -1,3 +1,6 @@
+{% extends 'sugar/readme/layouts/main/main.twig' %}
+{% block body %}
+
 <!--
 /**
  * @name            Overview
@@ -11,8 +14,6 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 -->
-
-{{#> layout-doc }}
 
 # Dependencies
 
@@ -42,4 +43,4 @@ First of all, we want to **thanks all of these AMAZING packages authors/contribu
 
 <!-- og:https://github.com/EFTEC/BladeOne -->
 
-{{/layout-doc }}
+{% endblock %}

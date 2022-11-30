@@ -38,12 +38,6 @@ export default class SViewRendererEngineLit {
     ) {
         return new __SPromise(
             async ({ resolve, reject, emit }) => {
-                if (!__fs.existsSync(viewPath)) {
-                    return reject(
-                        `It seems that the view you passed "<cyan>${viewPath}</cyan>" does not exists...`,
-                    );
-                }
-
                 if (!__fs.existsSync(viewRendererSettings.cacheDir)) {
                     __fs.mkdirSync(viewRendererSettings.cacheDir, {
                         recursive: true,
@@ -59,10 +53,7 @@ export default class SViewRendererEngineLit {
                     .join('.')
                     .replace('.js', '');
 
-                console.log('SSS', viewDotPath);
-
                 const component = (await import(viewPath)).default;
-                console.log('comp', component);
 
                 async function readableToString2(readable) {
                     let result = '';

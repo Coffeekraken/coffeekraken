@@ -57,6 +57,13 @@ function registerFunctions($twig)
     $attrs = require __DIR__ . '/html/attrs.php';
     $twig->addFunction($attrs);
 
+    // Object
+    $filter = require __DIR__ . '/object/filter.php';
+    $twig->addFunction($filter);
+
+    $get = require __DIR__ . '/object/get.php';
+    $twig->addFunction($get);
+
     // specs
     $readSpec = require __DIR__ . '/specs/readSpec.php';
     $twig->addFunction($readSpec);

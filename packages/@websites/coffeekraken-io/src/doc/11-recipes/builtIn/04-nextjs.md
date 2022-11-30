@@ -16,4 +16,4 @@
 
 {{> recipe config.kitchen.recipes.nextJs id='nextJs' }}
 
-{{/layout-doc }}
+{% endblock %}

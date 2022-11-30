@@ -50,4 +50,4 @@ This `layout` view handle the base html structure with the `html`, `body` and `h
 
 {{> spec path='sugar.views.layouts.main' }}
 
-{{/layout-doc }}
+{% endblock %}

@@ -10,7 +10,7 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __unique } from '@coffeekraken/sugar/array';
 import { __writeJsonSync } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import { __packageTmpDir } from '@coffeekraken/sugar/path';
+import { __packageRootDir, __packageTmpDir } from '@coffeekraken/sugar/path';
 import { __uniqid } from '@coffeekraken/sugar/string';
 import __fs from 'fs';
 import __glob from 'glob';
@@ -38,13 +38,11 @@ import __SViewRendererSettingsInterface from './interface/SViewRendererSettingsI
  * @todo      tests
  *
  * @example       js
- * import SViews from '@coffeekraken/sugar/node/template/SViews';
- * const myTemplate = new SViews('my.cool.view', {
- *    title: 'Hello'
- * }, {
- *    engine: 'blade'
+ * import SViewRenderer from '@coffeekraken/s-view-renderer';
+ * const myTemplate = new SViewRenderer({
+ *      rootDirs: ['/my/cool/folder/where/to/search/for/views']
  * });
- * const result = await myTemplate.render({
+ * const result = await myTemplate.render('my.view', {
  *    title: 'World'
  * });
  *
@@ -149,7 +147,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
     static render(
         viewPath: string,
         data: any = null,
-        settings: Partial<ISViewSettings>,
+        settings: Partial<ISViewRendererSettings>,
     ) {
         return new __SPromise(async ({ resolve, reject, pipe }) => {
             const viewInstance = new SViewRenderer(__deepMerge(settings ?? {}));
@@ -232,7 +230,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
      * @since     2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: ISViewSettings) {
+    constructor(settings?: ISViewRendererSettings) {
         // save the settings
         super(
             __deepMerge(
@@ -447,11 +445,22 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
         settings?: Partial<ISViewRendererSettings>,
     ): Promise<ISViewRendererRenderResult> {
         return new __SPromise(async ({ resolve, reject, pipe }) => {
+            let finalViewPath, finalViewRelPath;
+
             // ensure all is loaded
             await this._load();
 
             // load shared data
             await this._loadSharedData();
+
+            if (__fs.existsSync(viewDotPath)) {
+                // absolute view path
+                finalViewPath = viewDotPath;
+                finalViewRelPath = viewDotPath.replace(
+                    `${__packageRootDir()}/`,
+                    '',
+                );
+            }
 
             // ensure viewDotPath is a dotPath and not something line path/my/view.twig
             viewDotPath = viewDotPath
@@ -477,7 +486,15 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
             }
 
             // try to get the final view path
-            const finalViewPath = this._getFinalViewPath(viewDotPath);
+            if (!finalViewPath) {
+                finalViewPath = this._getFinalViewPath(viewDotPath);
+            }
+
+            if (!__fs.existsSync(finalViewPath)) {
+                return reject(
+                    `It seems that the view you passed "<cyan>${finalViewPath}</cyan>" does not exists...`,
+                );
+            }
 
             // make sure the view has been found
             if (!finalViewPath) {
@@ -535,9 +552,8 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
             const rendererInstance = new RendererEngineClass(engineSettings);
 
             let renderPromise, result, error;
-
             renderPromise = rendererInstance.render(
-                finalViewPath,
+                finalViewRelPath,
                 Object.assign({}, data),
                 this._sharedDataFilePath,
                 viewRendererSettings,
@@ -545,14 +561,28 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
             pipe(renderPromise);
             result = await renderPromise;
 
+            // stringify js errors
+            if (result.error && result.error instanceof Error) {
+                result.error = [
+                    result.error.toString(),
+                    ' ',
+                    result.error.stack,
+                ].join('\n');
+            }
+
             // resolve the render process
             const resObj: Partial<ISViewRendererRenderResult> = {
                 // engine: this._engineInstance.engineMetas,
                 ...duration.end(),
                 value: result.value,
-                error: result.error,
+                error: result.error?.toString?.() ?? result.error,
             };
-            resolve(resObj);
+
+            if (resObj.error) {
+                reject(resObj);
+            } else {
+                resolve(resObj);
+            }
         });
     }
 }

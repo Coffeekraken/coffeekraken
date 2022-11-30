@@ -74,4 +74,4 @@ The goal of this view is to wrap your sections and either centers it or make it 
 
 {{> spec path='sugar.views.bare.container' }}
 
-{{/layout-doc }}
+{% endblock %}

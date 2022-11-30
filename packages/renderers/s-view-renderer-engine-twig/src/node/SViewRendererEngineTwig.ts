@@ -56,6 +56,10 @@ export default class SViewRendererEngineTwig {
                 // pass the shared data file path through the data
                 data._sharedDataFilePath = sharedDataFilePath;
 
+                if (__fs.existsSync(viewDotPath)) {
+                    viewDotPath = viewDotPath;
+                }
+
                 const resPro = __execPhp(
                     __path.resolve(
                         __packageRootDir(__dirname()),
@@ -84,9 +88,16 @@ export default class SViewRendererEngineTwig {
                     });
                 });
                 const res = await resPro;
-                resolve({
-                    value: res,
-                });
+
+                if (res.match(/^Twig\\Error\\[a-zA-Z]+Error/)) {
+                    resolve({
+                        error: res,
+                    });
+                } else {
+                    resolve({
+                        value: res,
+                    });
+                }
             },
             {
                 eventEmitter: {

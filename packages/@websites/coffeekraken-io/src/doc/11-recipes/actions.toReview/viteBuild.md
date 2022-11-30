@@ -58,4 +58,4 @@ Here's the parameters that you can pass to this action:
 
 {{> interface namespace='@coffeekraken.s-vite.node.interface.SViteBuildParamsInterface' }}
 
-{{/layout-doc }}
+{% endblock %}

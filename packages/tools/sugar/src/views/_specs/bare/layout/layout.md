@@ -81,4 +81,4 @@ This view allows you to generate quickly and efficiently fully responsive layout
 
 {{> spec path='sugar.views.bare.layout' }}
 
-{{/layout-doc }}
+{% endblock %}

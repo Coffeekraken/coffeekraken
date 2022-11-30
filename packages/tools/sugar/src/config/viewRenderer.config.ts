@@ -20,6 +20,7 @@ export default function (api) {
         get rootDirs() {
             if (api.config.viewRenderer.defaultEngine === 'twig') {
                 return [
+                    __packageRootDir(),
                     ...(api.parent.rootDirs ?? []),
                     `${__path.resolve(
                         __packageRootDir(__dirname()),
@@ -28,6 +29,7 @@ export default function (api) {
                 ];
             }
             return [
+                __packageRootDir(),
                 ...(api.parent.rootDirs ?? []),
                 `${__path.resolve(
                     __packageRootDir(__dirname()),

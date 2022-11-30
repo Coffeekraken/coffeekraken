@@ -1,0 +1,49 @@
+{% extends 'sugar/readme/layouts/main/main.twig' %}
+{% block body %}
+
+<!--
+/**
+ * @name            Official components
+ * @namespace       doc.components
+ * @type            Markdown
+ * @platform        md
+ * @status          stable
+ * @menu            Documentation / Components           /doc/components/official
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+-->
+
+# Official components
+
+Coffeekraken comes with everything you need to create nice and clean UI's. Here's the lists of our CSS ui's components and the list of our `web`components:
+
+## CSS UI's
+
+> For a more visual discovery of our UI's components, please check out our **styleguide**
+
+{% for key, map in docmap.map %}
+{% if 'css.ui' in key %}
+{% if map.key == 'Styleguide' %}
+
+-   [**{{map.name}}**]({{map.menu.slug}})
+    -   {{map.description}}
+    -   {{map.menu.tree}}
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+
+## `Web`components
+
+> For a more visual discovery of our UI's components, please check out our **styleguide**
+
+{% for key, map in docmap.map %}
+{% if map.type == 'CustomElement' %}
+-   [**{{map.name}}**]({{map.menu.slug}})
+    -   {{map.description}}
+    -   {{map.menu.tree}}
+{% endif %}
+{% endfor %}
+
+{% endblock %}

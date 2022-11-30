@@ -43,11 +43,6 @@ export default class SViewRendererEngineBlade {
     ) {
         return new __SPromise(
             ({ resolve, reject, emit }) => {
-                if (!__fs.existsSync(viewPath)) {
-                    return reject(
-                        `It seems that the view you passed "<cyan>${viewPath}</cyan>" does not exists...`,
-                    );
-                }
                 const bench = new __SBench(
                     `SViewRendererEngineBlade.render.${viewPath.replace(
                         __packageRootDir(),

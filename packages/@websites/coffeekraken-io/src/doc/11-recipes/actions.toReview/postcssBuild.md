@@ -55,4 +55,4 @@ Here's the parameters that you can pass to this action:
 
 {{> interface namespace='@coffeekraken.s-postcss-builder.node.interface.SPostcssBuilderBuildParamsInterface' }}
 
-{{/layout-doc }}
+{% endblock %}

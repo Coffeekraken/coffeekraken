@@ -15,6 +15,6 @@ export default {
     id: 'error',
     render(logObj, settings = {}) {
         const value = logObj.value !== undefined ? logObj.value : logObj;
-        return `⚠️  ${__parseHtml(__toString(value))}`;
+        return `⚠️  ${__parseHtml(__toString(value.error ?? value))}`;
     },
 };

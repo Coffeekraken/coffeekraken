@@ -1,18 +1,39 @@
+
+<!-- header -->
+# @website/coffeekraken-io
+
+###### [MIT](./license) 2.0.0-alpha.20 - [Git repository]()
+
+<!-- shields -->
+[![size](https://shields.io/bundlephobia/min/@website/coffeekraken-io?style=for-the-badge)](https://www.npmjs.com/package/@website/coffeekraken-io)
+[![downloads](https://shields.io/npm/dm/@website/coffeekraken-io?style=for-the-badge)](https://www.npmjs.com/package/@website/coffeekraken-io)
+[![license](https://shields.io/npm/l/@website/coffeekraken-io?style=for-the-badge)](./LICENSE)
+[![discord](https://img.shields.io/discord/940362961682333767?color=5100FF&amp;label=Join%20us%20on%20Discord&amp;style=for-the-badge)](https://discord.gg/HzycksDJ)
+
+<!-- description -->
+The frontend toolkit that works for everyone. Experts, professionals and new-comers
+
+<!-- install -->
+### Install
+
+```shell
+npm i @website/coffeekraken-io
+```
+
+<!-- body -->
 <!--
 /**
- * @name            Overview
- * @namespace       doc
- * @type            Markdown
- * @platform        md
- * @status          stable
- * @menu            Documentation / Overview           /doc/get-started/overview
- *
- * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+* @name            Overview
+* @namespace       doc
+* @type            Markdown
+* @platform        md
+* @status          stable
+* @menu            Documentation / Get Started           /doc/get-started/overview
+*
+* @since           2.0.0
+* @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+*/
 -->
-
-{{#> layout-doc }}
 
 # What is Coffeekraken
 
@@ -22,14 +43,6 @@ Coffeekraken is an "organisation" that publish packages around web development f
 
 First, Coffeekraken gives you access to a bunch of UI components ready to use like basic styling (h1, h2, p, blockquote, list, etc...) and some more advanced ones like **slider**, **form validation**, **panels (modal)**, **range inputs** and more...
 
-{{#each docmap.map}}
-{{#ifEqual (get this 'type') 'CustomElement'}}
-
-- [**{{this.name}}**]({{this.menu.slug}})
-  - {{this.description}}
-  - {{this.menu.tree}}
-    {{/ifEqual}}
-    {{/each}}
 
 > For a more visual discovery of our UI's components, please check out our **styleguide**
 
@@ -41,11 +54,11 @@ This plugin allows you to make use of mixins and functions like these:
 
 ```css
 .my-button {
-  padding: sugar.padding(10) sugar.passing(30);
-  font-size: sugar.font.size(30);
-  background-color: sugar.color(accent);
-  color: sugar.color(accent, foreground);
-  /* and a lot more */
+padding: sugar.padding(10) sugar.passing(30);
+font-size: sugar.font.size(30);
+background-color: sugar.color(accent);
+color: sugar.color(accent, foreground);
+/* and a lot more */
 }
 ```
 
@@ -80,7 +93,8 @@ All the different project types like **generic**, **Nextjs**, **litElement**, et
 
 #### Built-in recipes
 
-{{> recipesList }}
+-   [**generic**](/doc/recipes/built-in/generic): Generic s-kitchen recipe
+-   [**nextJs**](/doc/recipes/built-in/nextJs): Create easily a next.js app with coffeekraken tools support
 
 ## Sugar toolkit
 
@@ -132,4 +146,16 @@ These packages are the bones of our development suite but they can be used as st
 
 > For more info about our available packages, check out our [packages](/package/@coffeekraken/sugar/doc/readme) documentation.
 
-{{/layout-doc }}
+
+<!-- license -->
+### License
+
+Distributed under the **MIT** License. See **[LICENSE](./license)** for more information.
+
+<!-- contact -->
+### Contact
+
+Here's all the ways you can contact us listed:
+
+[![discord](https://img.shields.io/badge/Join%20us%20on%20discord-Join-blueviolet?style=[config.shieldsio.style]&amp;logo=discord)](https://discord.gg/HzycksDJ)
+[![email](https://img.shields.io/badge/Email%20us-Go-green?style=[config.shieldsio.style]&amp;logo=Mail.Ru)](mailto:olivier.bossel@gmail.com)

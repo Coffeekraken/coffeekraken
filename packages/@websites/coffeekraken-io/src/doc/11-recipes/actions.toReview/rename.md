@@ -64,4 +64,4 @@ Here's the parameters that you can pass to this action:
 
 > If you don't specify some parameters in your recipe, the user will be prompted for them...
 
-{{/layout-doc }}
+{% endblock %}

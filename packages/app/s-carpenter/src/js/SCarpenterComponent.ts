@@ -47,7 +47,7 @@ __sSpecsEditorComponentDefine();
 /**
  * @name                SCarpenterComponent
  * @as                  Carpenter
- * @___namespace           js
+ * @namespace           js
  * @type                CustomElement
  * @interface           ./interface/SCarpenterComponentInterface.ts
  * @platform            html

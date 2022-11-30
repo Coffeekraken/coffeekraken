@@ -1,5 +1,0 @@
-import { define as __sugarFeatureDefine } from '@coffeekraken/s-sugar-feature';
-// sugar feature
-document.body.setAttribute('s-sugar', 'true');
-__sugarFeatureDefine();
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSxNQUFNLElBQUksb0JBQW9CLEVBQUUsTUFBTSwrQkFBK0IsQ0FBQztBQUUvRSxnQkFBZ0I7QUFDaEIsUUFBUSxDQUFDLElBQUksQ0FBQyxZQUFZLENBQUMsU0FBUyxFQUFFLE1BQU0sQ0FBQyxDQUFDO0FBQzlDLG9CQUFvQixFQUFFLENBQUMifQ==

@@ -1,16 +1,16 @@
 import type { ISBuilderSettings } from '@coffeekraken/s-builder';
 import __SBuilder from '@coffeekraken/s-builder';
-import __SDataFileGeneric from '@coffeekraken/s-data-file-generic';
 import __SDocmap from '@coffeekraken/s-docmap';
 import __SFile from '@coffeekraken/s-file';
 import __SGlob from '@coffeekraken/s-glob';
-import { registerHelpers } from '@coffeekraken/s-handlebars';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+
+import __SViewRenderer from '@coffeekraken/s-view-renderer';
+
 import { __getCoffeekrakenMetas } from '@coffeekraken/sugar/coffeekraken';
 import {
-    __extension,
     __folderPath,
     __writeFileSync,
     __writeTmpFileSync,
@@ -88,14 +88,9 @@ export interface ISMarkdownBuilderBuildParams {
     save: boolean;
     target: 'html' | 'markdown';
     preset: string[];
-    protectedTags: string[];
 }
 
 export default class SMarkdownBuilder extends __SBuilder {
-    static _registeredHelpers: any = {};
-    static _registeredLayouts: any = {};
-    static _registeredPartials: any = {};
-    static _registeredSections: any = {};
     static _registeredTransformers: any = {};
 
     /**
@@ -114,97 +109,6 @@ export default class SMarkdownBuilder extends __SBuilder {
     static _registerTransformer(name: string, transformerPath: string): void {
         // @ts-ignore
         this._registeredTransformers[name] = transformerPath;
-    }
-
-    /**
-     * @name              registerHelper
-     * @type                Function
-     * @static
-     *
-     * This static method allows you to register a new token function that returns an ISMarkdownBuilderToken object
-     * used to transform your passed markdown
-     *
-     * @param           {String}         name           A name for your helper
-     * @param           {String}                   helperPath                    The path to your helper file that MUST export a simple js function similar to [handlebars custom helper function](https://handlebarsjs.com/guide/#custom-helpers)
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static registerHelper(name: string, helperPath: string): void {
-        // @ts-ignore
-        this._registeredHelpers[name] = helperPath;
-    }
-
-    /**
-     * @name              registerLayout
-     * @type                Function
-     * @static
-     *
-     * This static method allows you to register a new token function that returns an ISMarkdownBuilderToken object
-     * used to transform your passed markdown
-     *
-     * @param           {String}         name           A name for your layout
-     * @param           { Record<'markdown' | 'html', string>}                   paths                    An object with your layout paths for "markdown" and/or "html"
-     * @param           {Any}           data            An object with your layout data
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static registerLayout(
-        name: string,
-        paths: Record<'markdown' | 'html', string>,
-        data: any,
-    ): void {
-        // @ts-ignore
-        this._registeredLayouts[name] = {
-            ...paths,
-            data,
-        };
-    }
-
-    /**
-     * @name              registerPartial
-     * @type                Function
-     * @static
-     *
-     * This static method allows you to register a new token function that returns an ISMarkdownBuilderToken object
-     * used to transform your passed markdown
-     *
-     * @param           {String}            name            The name of your partial
-     * @param           {Record<'markdown'|'html',string>}      partial     The partial object with the targets properties like markdown and html that point to their proper handlebar syntax files
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static registerPartial(
-        name: string,
-        partial: Record<'markdown' | 'html', string>,
-    ): void {
-        // @ts-ignore
-        this._registeredPartials[name] = partial;
-    }
-
-    /**
-     * @name              registerSection
-     * @type                Function
-     * @static
-     *
-     * This static method allows you to register a new section
-     *
-     * @param               {String}            name            The section name that will be used inside the templates
-     * @param               {Record<'markdown'|'html', string>}     sectionObj          The section object with the targets properties like markdown and html that point to their proper handlebar syntax files
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static registerSection(
-        name: string,
-        section: Record<'markdown' | 'html', string>,
-    ): void {
-        // @ts-ignore
-        this._registeredSections[name] = {
-            ...section,
-        };
     }
 
     /**
@@ -244,34 +148,6 @@ export default class SMarkdownBuilder extends __SBuilder {
                     transformerName,
                     transformerPath,
                 );
-            });
-        }
-        if (config.helpers) {
-            Object.keys(config.helpers).forEach((helperName) => {
-                const helperPath = config.helpers[helperName];
-                // @ts-ignore
-                this.constructor.registerHelper(helperName, helperPath);
-            });
-        }
-        if (config.layouts) {
-            Object.keys(config.layouts).forEach((layoutName) => {
-                const layoutObj = config.layouts[layoutName];
-                // @ts-ignore
-                this.constructor.registerLayout(layoutName, layoutObj);
-            });
-        }
-        if (config.sections) {
-            Object.keys(config.sections).forEach((sectionName) => {
-                const sectionObj = config.sections[sectionName];
-                // @ts-ignore
-                this.constructor.registerSection(sectionName, sectionObj);
-            });
-        }
-        if (config.partials) {
-            Object.keys(config.partials).forEach((partialName) => {
-                const partialObj = config.partials[partialName];
-                // @ts-ignore
-                this.constructor.registerPartial(partialName, partialObj);
             });
         }
     }
@@ -344,9 +220,6 @@ export default class SMarkdownBuilder extends __SBuilder {
                     // load
                     await this._load();
 
-                    // helpers
-                    registerHelpers(handlebars);
-
                     const finalParams: ISMarkdownBuilderBuildParams =
                         __deepMerge(
                             // @ts-ignore
@@ -372,127 +245,6 @@ export default class SMarkdownBuilder extends __SBuilder {
                         );
                         // @ts-ignore
                         delete finalParams.inPath;
-                    }
-
-                    // register helpers and layouts in handlebars
-                    // @ts-ignore
-                    Object.keys(
-                        // @ts-ignore
-                        this.constructor._registeredLayouts ?? [],
-                    ).forEach((layoutName) => {
-                        // @ts-ignore
-                        if (
-                            // @ts-ignore
-                            !this.constructor._registeredLayouts[layoutName]?.[
-                                finalParams.target
-                            ]
-                        ) {
-                            throw new Error(
-                                `<red>[${this.constructor.name}]</red> Sorry but the requested layout "<yellow>${layoutName}</yellow>" does not have a "<cyan>${finalParams.target}</cyan>" target option...`,
-                            );
-                        }
-                        // @ts-ignore
-                        const layoutStr = __fs
-                            // @ts-ignore
-                            .readFileSync(
-                                // @ts-ignore
-                                this.constructor._registeredLayouts[layoutName][
-                                    finalParams.target
-                                ],
-                                'utf8',
-                            )
-                            .toString();
-                        handlebars.registerPartial(
-                            `layout-${layoutName}`,
-                            layoutStr,
-                        );
-                    });
-                    // @ts-ignore
-                    Object.keys(
-                        // @ts-ignore
-                        this.constructor._registeredSections ?? [],
-                    ).forEach((sectionName) => {
-                        // @ts-ignore
-                        if (
-                            // @ts-ignore
-                            !this.constructor._registeredSections[
-                                sectionName
-                            ]?.[finalParams.target]
-                        ) {
-                            throw new Error(
-                                `<red>[${this.constructor.name}]</red> Sorry but the requested section "<yellow>${sectionName}</yellow>" does not have a "<cyan>${finalParams.target}</cyan>" target option...`,
-                            );
-                        }
-                        // @ts-ignore
-                        const sectionStr = __fs
-                            // @ts-ignore
-                            .readFileSync(
-                                // @ts-ignore
-                                this.constructor._registeredSections[
-                                    sectionName
-                                ][finalParams.target],
-                                'utf8',
-                            )
-                            .toString();
-                        handlebars.registerPartial(
-                            `section-${sectionName}`,
-                            sectionStr,
-                        );
-                    });
-                    // @ts-ignore
-                    Object.keys(
-                        // @ts-ignore
-                        this.constructor._registeredPartials ?? [],
-                    ).forEach((partialName) => {
-                        // @ts-ignore
-                        if (
-                            // @ts-ignore
-                            !this.constructor._registeredPartials[
-                                partialName
-                            ]?.[finalParams.target]
-                        ) {
-                            throw new Error(
-                                `<red>[${this.constructor.name}]</red> Sorry but the requested partial "<yellow>${partialName}</yellow>" does not have a "<cyan>${finalParams.target}</cyan>" target option...`,
-                            );
-                        }
-                        // @ts-ignore
-                        const partialStr = __fs
-                            // @ts-ignore
-                            .readFileSync(
-                                // @ts-ignore
-                                this.constructor._registeredPartials[
-                                    partialName
-                                ][finalParams.target],
-                                'utf8',
-                            )
-                            .toString();
-                        handlebars.registerPartial(partialName, partialStr);
-                    });
-                    // @ts-ignore
-                    for (
-                        let i = 0;
-                        i <
-                        // @ts-ignore
-                        Object.keys(this.constructor._registeredHelpers ?? [])
-                            .length;
-                        i++
-                    ) {
-                        // @ts-ignore
-                        const helperName = Object.keys(
-                            // @ts-ignore
-                            this.constructor._registeredHelpers ?? [],
-                        )[i];
-                        // @ts-ignore
-                        const helperFn = // @ts-ignore
-                            (
-                                await import(
-                                    // @ts-ignore
-                                    this.constructor._registeredHelpers[
-                                        helperName
-                                    ]
-                                )
-                            ).default;
-                        handlebars.registerHelper(helperName, helperFn);
                     }
 
                     // save with no output
@@ -615,25 +367,6 @@ export default class SMarkdownBuilder extends __SBuilder {
                             output: '',
                         };
 
-                        const dataHandlerData = await __SDataFileGeneric.load(
-                            filePath,
-                        );
-
-                        const finalViewData = __deepMerge(
-                            Object.assign({}, viewData),
-                            dataHandlerData,
-                        );
-
-                        if (__extension(filePath) === 'js') {
-                            // @ts-ignore
-                            const fn = (await import(filePath)).default;
-                            buildObj.data = fn(finalViewData);
-                        } else {
-                            buildObj.data = __fs
-                                .readFileSync(filePath, 'utf8')
-                                .toString();
-                        }
-
                         if (sourceObj.outPath) {
                             buildObj.output = sourceObj.outPath;
                         } else if (sourceObj.inDir && sourceObj.outDir) {
@@ -642,14 +375,15 @@ export default class SMarkdownBuilder extends __SBuilder {
                             }/${__path.relative(sourceObj.inDir, filePath)}`;
                         }
 
-                        let currentTransformedString = buildObj.data;
-
-                        // compile template
-                        const tplFn = handlebars.compile(
-                            currentTransformedString,
+                        // remplace the extension in the output
+                        const outputExtension =
+                            finalParams.target === 'html' ? 'html' : 'md';
+                        buildObj.output = buildObj.output.replace(
+                            /\.(md)(\..*)?/,
+                            `.${outputExtension}`,
                         );
 
-                        currentTransformedString = tplFn(finalViewData);
+                        let currentTransformedString = buildObj.data;
 
                         // processing transformers
                         // @ts-ignore
@@ -670,61 +404,45 @@ export default class SMarkdownBuilder extends __SBuilder {
 
                             if (!matches.length) continue;
 
-                            const transformerStr = __fs
-                                .readFileSync(
-                                    transformerObj[finalParams.target],
-                                    'utf8',
-                                )
-                                .toString();
+                            // const transformerStr = __fs
+                            //     .readFileSync(
+                            //         transformerObj[finalParams.target],
+                            //         'utf8',
+                            //     )
+                            //     .toString();
 
-                            const tplFn = handlebars.compile(transformerStr);
+                            // const tplFn = handlebars.compile(transformerStr);
 
-                            for (let i = 0; i < matches.length; i++) {
-                                const match = matches[i];
-                                let preprocessedData = match;
-                                // @ts-ignore
-                                if (transformerObj.preprocessor) {
-                                    const preprocessorFn = await import(
-                                        transformerObj.preprocessor
-                                    );
-                                    preprocessedData =
-                                        await preprocessorFn.default(match);
-                                }
+                            // for (let i = 0; i < matches.length; i++) {
+                            //     const match = matches[i];
+                            //     let preprocessedData = match;
+                            //     // @ts-ignore
+                            //     if (transformerObj.preprocessor) {
+                            //         const preprocessorFn = await import(
+                            //             transformerObj.preprocessor
+                            //         );
+                            //         preprocessedData =
+                            //             await preprocessorFn.default(match);
+                            //     }
 
-                                const result = tplFn({
-                                    data: preprocessedData,
-                                });
-                                currentTransformedString =
-                                    currentTransformedString.replace(
-                                        match[0],
-                                        result,
-                                    );
-                            }
+                            //     const result = tplFn({
+                            //         data: preprocessedData,
+                            //     });
+                            //     currentTransformedString =
+                            //         currentTransformedString.replace(
+                            //             match[0],
+                            //             result,
+                            //         );
+                            // }
                         }
 
-                        // protected tags like "template"
-                        let protectedTagsMatches: string[] = [];
-                        finalParams.protectedTags.forEach((tag) => {
-                            const tagReg = new RegExp(
-                                `<${tag}[^>]*>[\\w\\W\\n]+?(?=<\\/${tag}>)<\\/${tag}>`,
-                                'gm',
-                            );
-                            const tagMatches =
-                                currentTransformedString.match(tagReg);
-                            if (tagMatches) {
-                                protectedTagsMatches = [
-                                    ...protectedTagsMatches,
-                                    ...tagMatches,
-                                ];
-                            }
-                        });
-                        protectedTagsMatches?.forEach((match, i) => {
-                            currentTransformedString =
-                                currentTransformedString.replace(
-                                    match,
-                                    `{match:${i}}`,
-                                );
-                        });
+                        const viewRenderer = new __SViewRenderer();
+                        const viewRendererRes = await viewRenderer.render(
+                            filePath,
+                            viewData,
+                        );
+
+                        currentTransformedString = viewRendererRes.value ?? '';
 
                         // marked if html is the target
                         if (finalParams.target === 'html') {
@@ -732,16 +450,23 @@ export default class SMarkdownBuilder extends __SBuilder {
                                 currentTransformedString,
                                 {},
                             );
+                        } else if (finalParams.target === 'markdown') {
+                            // currentTransformedString = currentTransformedString
+                            //     // .split('\n')
+                            //     // .map((line) => {
+                            //     //     return line.trim();
+                            //     // })
+                            //     // .join('\n');
                         }
 
-                        // puth protected tags back
-                        protectedTagsMatches?.forEach((match, i) => {
-                            currentTransformedString =
-                                currentTransformedString.replace(
-                                    `{match:${i}}`,
-                                    match,
-                                );
-                        });
+                        // add the "warning" on top of the file
+                        currentTransformedString = [
+                            `<!-- This file has been generated using`,
+                            `     the "@coffeekraken/s-markdown-builder" package.`,
+                            '     !!! Do not edit it directly... -->',
+                            '',
+                            currentTransformedString,
+                        ].join('\n');
 
                         if (finalParams.save) {
                             __writeFileSync(

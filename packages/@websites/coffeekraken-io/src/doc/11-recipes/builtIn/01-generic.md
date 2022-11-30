@@ -16,4 +16,4 @@
 
 {{> recipe config.kitchen.recipes.generic id='generic' }}
 
-{{/layout-doc }}
+{% endblock %}

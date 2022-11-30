@@ -9,11 +9,11 @@ import __css from '../../../../src/css/s-highlight-feature.css'; // relative to 
 
 /**
  * @name            SHighlightFeature
- * @as              Highlight feature
+ * @as              Highlight
  * @namespace       js
  * @type            Feature
  * @interface       ./interface/SHighlightFeatureInterface.ts
- * @menu            Styleguide / Features               /styleguide/feature/s-highlight-feature
+ * @menu            Styleguide / Effects               /styleguide/effect/s-highlight-feature
  * @platform        js
  * @status          beta
  *
@@ -24,9 +24,12 @@ import __css from '../../../../src/css/s-highlight-feature.css'; // relative to 
  * @support          safari
  * @support          edge
  *
- * @example         html            Simple partial
- * <section class="s-ratio:1 s-bkg:accent" s-highlight>
- *      Hello world
+ * @example         html            Highlight
+ * <section class="s-ratio:16-9 s-radius s-bkg:accent s-mbe:30" s-highlight>
+ * </section>
+ * <section class="s-ratio:16-9 s-radius s-bkg:complementary s-mbe:30" s-highlight>
+ * </section>
+ * <section class="s-ratio:16-9 s-radius s-bkg:error" s-highlight>
  * </section>
  *
  * @see         https://codepen.io/Hyperplexed/pen/MWQeYLW

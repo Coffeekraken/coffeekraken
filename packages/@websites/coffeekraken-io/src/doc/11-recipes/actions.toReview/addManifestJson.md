@@ -56,4 +56,4 @@ Here's the parameters that you can pass to this action:
 
 {{> interface namespace='@coffeekraken.cli.node.add.interface.SCliAddManifestJsonParamsInterface' }}
 
-{{/layout-doc }}
+{% endblock %}

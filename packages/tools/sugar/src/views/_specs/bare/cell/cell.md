@@ -64,4 +64,4 @@ Simple cell that can be used inside a layout, etc...
 
 {{> spec path='sugar.views.bare.cell' }}
 
-{{/layout-doc }}
+{% endblock %}

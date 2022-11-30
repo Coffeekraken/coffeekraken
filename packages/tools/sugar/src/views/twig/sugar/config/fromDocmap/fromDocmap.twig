@@ -1,0 +1,22 @@
+{# <span class="s-file s-mb:30">
+    <i class="s-icon:file"></i>&nbsp;&nbsp;{{config.filename}}
+</span> #}
+
+<dl>
+    {% for key, config in configs %}
+    <dt class="s-font:40 s-mbe:30">
+        <header class="s-flex s-bg:main-surface s-radius">
+            <div class="s-flex-item:grow s-tc:accent s-p:30 s-typo:strong">
+                {{ key }}
+            </div>
+            <div class="s-typo:bold s-p:30 s-tc:info">{{ config.type }}</div>
+        </header>
+        {% if config.default %}
+        <div class="s-pi:30 s-mbs:40">
+            <div class="s-typo:code">{{ config.default }}</div>
+        </div>
+        {% endif %}
+        <p class="s-typo:p s-p:30">{{ config.description }}</p>
+    </dt>
+    {% endfor %}
+</dl>

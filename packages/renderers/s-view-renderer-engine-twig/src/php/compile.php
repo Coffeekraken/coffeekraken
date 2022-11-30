@@ -22,9 +22,6 @@ if ($data->_sharedDataFilePath) {
     $data = array_merge((array) $sharedData, (array) $data);
 }
 
-// preparing the paths
-$viewName = str_replace('.twig', '', $params->viewDotPath);
-
 $loader = new \Twig\Loader\FilesystemLoader();
 foreach ($params->rootDirs as $dir) {
     if (file_exists($dir)) {
@@ -46,7 +43,7 @@ $data = \Sugar\convert\toArray($data);
 
 try {
     print \Sugar\html\expandPleasantCssClassnames(
-        $twig->render(str_replace('.', '/', $viewName) . '.twig', $data)
+        $twig->render($params->viewDotPath, $data)
     );
 } catch (Exception $e) {
     print $e;

@@ -1,0 +1,13 @@
+{
+    "type": "Bare",
+    "title": "Slide",
+    "description": "Simple slide usable in a slider",
+    "props": {
+        "attributes": "@sugar.views.props.attributes",
+        "content": {
+            "type": "Html",
+            "description": "The content to print in the slide",
+            "required": true
+        }
+    }
+}

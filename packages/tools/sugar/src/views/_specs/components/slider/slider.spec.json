@@ -8,6 +8,10 @@
             "title": "Slides",
             "description": "The slider slides"
         },
+        "content": {
+            "type": "Text",
+            "description": "The slider content to print. Used only if no 'slides' have been provided"
+        },
         "lnf": {
             "type": "Select",
             "title": "Look and feel",

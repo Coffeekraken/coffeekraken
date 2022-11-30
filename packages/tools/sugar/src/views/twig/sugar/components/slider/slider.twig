@@ -22,11 +22,16 @@
     {{ autoplay ? 'autoplay' : '' }}
     {{ uiContainer ? 'ui-container' : '' }}
 >
-    {% for slide in slides %}
-        <div s-slider-slide>
-            {{ slide|raw }}
-        </div>
-    {% endfor %}
+    {% if slides and slides|length > 0 %}
+        {% for slide in slides %}
+            <div s-slider-slide>
+                {{ slide|raw }}
+            </div>
+        {% endfor %}
+    {% else %}
+        {{ content|raw }}
+    {% endif %}
+
 </s-slider>
 
 </div>

@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -41,15 +46,16 @@ npm i @website/coffeekraken-io
 To register some new configuration files for your package, you just need to create a `sugar.json` file at your package root directory and specify where are stored your configuration files like so:
 
 ```js
-{
-"config": {
-"folders": [
-{
-"path": "./dist/pkg/%moduleSystem/config"
-}
-]
-}
-}
+export default {
+  config: {
+    folders: [
+      {
+        path: './dist/pkg/%moduleSystem/config',
+      },
+    ],
+  },
+};
+
 ```
 
 

@@ -17,9 +17,7 @@
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
-            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config-adapter",
             "@coffeekraken/s-config-folder-adapter",
@@ -51,6 +49,7 @@
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-highlight-feature",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
@@ -58,8 +57,8 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
+            "@coffeekraken/s-pack-essentials",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
@@ -232,42 +231,6 @@
                 "relPath": "src/config/postcssSugarPlugin.config.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.doc.README": {
-                "id": "@coffeekraken.s-postcss-sugar-plugin.doc.README",
-                "name": "README",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Markdown"
-                        }
-                    ],
-                    "raw": "Markdown"
-                },
-                "menu": {
-                    "tree": [
-                        "Documentation"
-                    ],
-                    "slug": "/doc/readme"
-                },
-                "platform": [
-                    {
-                        "name": "md",
-                        "description": ""
-                    }
-                ],
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.doc",
-                "status": "wip",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "README.md",
-                "extension": "md",
-                "relPath": "src/doc/README.md",
-                "children": {}
-            },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.classes.classes": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.classes.classes",
                 "name": "classes",
@@ -399,7 +362,8 @@
                                 "80",
                                 "90",
                                 "100",
-                                "default"
+                                "default",
+                                "shape"
                             ],
                             "default": "default",
                             "required": true
@@ -582,6 +546,43 @@
                 "filename": "color.ts",
                 "extension": "ts",
                 "relPath": "src/node/functions/color/color.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.function.color.maxWidth": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.function.color.maxWidth",
+                "name": "maxWidth",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssFunction"
+                        }
+                    ],
+                    "raw": "PostcssFunction"
+                },
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to get the max-width value of the nearest container either applied using\nthe `@sugar.container()` mixin, of by applying the `s-container:...` classes...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.function.color",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-element {\n   max-width: sugar.container.maxWidth();\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "width.ts",
+                "extension": "ts",
+                "relPath": "src/node/functions/container/width.ts",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.function.depth.depth": {
@@ -4601,7 +4602,44 @@
                 },
                 "filename": "classes.ts",
                 "extension": "ts",
-                "relPath": "src/node/mixins/spacing/classes.ts",
+                "relPath": "src/node/mixins/shape/classes.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.shape.shape": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.shape.shape",
+                "name": "shape",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ],
+                    "raw": "PostcssMixin"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to apply a shape to any element that support it\nby using the `border-radius: sugar.border.radius(shape)` statement like the buttons,\nbadges, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.shape",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".btn {\n   @sugar.shape(square);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "shape.ts",
+                "extension": "ts",
+                "relPath": "src/node/mixins/shape/shape.ts",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.state.focus": {
@@ -5307,9 +5345,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "configToCss.js",
-                "extension": "js",
-                "relPath": "src/node/mixins/utils/configToCss.js",
+                "filename": "configToCss.ts",
+                "extension": "ts",
+                "relPath": "src/node/mixins/utils/configToCss.ts",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.visibility.classes": {
@@ -5663,36 +5701,6 @@
                     "name": "postcssSugarPluginUiAvatarInterface",
                     "description": "",
                     "definition": {
-                        "style": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "value": [
-                                "solid"
-                            ],
-                            "default": "solid"
-                        },
-                        "shape": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "rounded"
-                            ],
-                            "default": "rounded"
-                        },
                         "scope": {
                             "type": {
                                 "type": "Array<String>",
@@ -5704,14 +5712,13 @@
                             "values": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "interactive",
                                 "notifications"
                             ],
                             "default": [
                                 "bare",
                                 "lnf",
-                                "shape",
+                                "interactive",
                                 "notifications"
                             ]
                         }
@@ -5758,100 +5765,6 @@
                     "name": "postcssSugarPluginUiAvatarClassesInterface",
                     "description": "",
                     "definition": {
-                        "styles": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "array",
-                                        "of": [
-                                            "String"
-                                        ]
-                                    }
-                                ],
-                                "raw": "String[]"
-                            },
-                            "values": [
-                                "solid"
-                            ],
-                            "default": [
-                                "solid"
-                            ]
-                        },
-                        "shapes": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "array",
-                                        "of": [
-                                            "String"
-                                        ]
-                                    }
-                                ],
-                                "raw": "String[]"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "rounded"
-                            ],
-                            "default": [
-                                "default",
-                                "square",
-                                "rounded"
-                            ]
-                        },
-                        "defaultStyle": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "solid"
-                            ],
-                            "default": "solid"
-                        },
-                        "defaultShape": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "rounded"
-                            ],
-                            "default": "rounded"
-                        },
-                        "defaultColor": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "current",
-                                "base",
-                                "main",
-                                "accent",
-                                "complementary",
-                                "success",
-                                "warning",
-                                "error",
-                                "info"
-                            ],
-                            "default": "main"
-                        },
                         "scope": {
                             "type": {
                                 "type": "Array<String>",
@@ -5863,14 +5776,12 @@
                             "values": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "interactive",
                                 "notifications"
                             ],
                             "default": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "interactive",
                                 "notifications"
                             ]
@@ -5905,7 +5816,7 @@
                         "description": ""
                     }
                 ],
-                "description": "This mixin allows you to apply the backdrop style to any HTMLEment",
+                "description": "This mixin allows you to apply the backdrop lnf to any HTMLEment",
                 "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.backdrop",
                 "status": "beta",
                 "example": [
@@ -5955,61 +5866,6 @@
                     "name": "PostcssSugarPluginUiBackdropClassesInterface",
                     "description": "",
                     "definition": {
-                        "styles": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "array",
-                                        "of": [
-                                            "String"
-                                        ]
-                                    }
-                                ],
-                                "raw": "String[]"
-                            },
-                            "values": [
-                                "solid"
-                            ],
-                            "default": [
-                                "solid"
-                            ]
-                        },
-                        "defaultStyle": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "solid"
-                            ],
-                            "default": "solid"
-                        },
-                        "defaultColor": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "current",
-                                "base",
-                                "main",
-                                "accent",
-                                "complementary",
-                                "success",
-                                "warning",
-                                "error",
-                                "info"
-                            ],
-                            "default": "main"
-                        },
                         "scope": {
                             "type": {
                                 "type": "Array<String>",
@@ -6070,22 +5926,7 @@
                     "name": "postcssSugarPluginUiBadgeInterface",
                     "description": "",
                     "definition": {
-                        "style": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "solid",
-                                "outline"
-                            ],
-                            "default": "solid"
-                        },
-                        "shape": {
+                        "lnf": {
                             "type": {
                                 "types": [
                                     {
@@ -6096,8 +5937,7 @@
                             },
                             "values": [
                                 "default",
-                                "square",
-                                "pill"
+                                "outline"
                             ],
                             "default": "default"
                         },
@@ -6111,13 +5951,11 @@
                             },
                             "values": [
                                 "bare",
-                                "lnf",
-                                "shape"
+                                "lnf"
                             ],
                             "default": [
                                 "bare",
-                                "lnf",
-                                "shape"
+                                "lnf"
                             ]
                         }
                     }
@@ -6163,28 +6001,7 @@
                     "name": "postcssSugarPluginUiBadgeClassesInterface",
                     "description": "",
                     "definition": {
-                        "styles": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "array",
-                                        "of": [
-                                            "String"
-                                        ]
-                                    }
-                                ],
-                                "raw": "String[]"
-                            },
-                            "values": [
-                                "solid",
-                                "outline"
-                            ],
-                            "default": [
-                                "solid",
-                                "outline"
-                            ]
-                        },
-                        "shapes": {
+                        "lnfs": {
                             "type": {
                                 "types": [
                                     {
@@ -6198,31 +6015,14 @@
                             },
                             "values": [
                                 "default",
-                                "square",
-                                "pill"
+                                "outline"
                             ],
                             "default": [
                                 "default",
-                                "square",
-                                "pill"
+                                "outline"
                             ]
                         },
-                        "defaultStyle": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "solid",
-                                "outline"
-                            ],
-                            "default": "solid"
-                        },
-                        "defaultShape": {
+                        "defaultLnf": {
                             "type": {
                                 "types": [
                                     {
@@ -6233,32 +6033,9 @@
                             },
                             "values": [
                                 "default",
-                                "square",
-                                "pill"
+                                "outline"
                             ],
                             "default": "default"
-                        },
-                        "defaultColor": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "current",
-                                "base",
-                                "main",
-                                "accent",
-                                "complementary",
-                                "success",
-                                "warning",
-                                "error",
-                                "info"
-                            ],
-                            "default": "main"
                         },
                         "scope": {
                             "type": {
@@ -6271,16 +6048,12 @@
                             "values": [
                                 "bare",
                                 "lnf",
-                                "shape",
-                                "vr",
-                                "tf"
+                                "vr"
                             ],
                             "default": [
                                 "bare",
                                 "lnf",
-                                "shape",
-                                "vr",
-                                "tf"
+                                "vr"
                             ]
                         }
                     }
@@ -6319,53 +6092,13 @@
                 "example": [
                     {
                         "language": "css",
-                        "code": ".my-element {\n     @sugar.ui.badge();\n}"
+                        "code": ".my-element {\n     @sugar.ui.blockquote();\n}"
                     }
                 ],
                 "interface": {
                     "name": "postcssSugarPluginUiBlockquoteInterface",
                     "description": "",
                     "definition": {
-                        "color": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "default": "accent"
-                        },
-                        "style": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "solid"
-                            ],
-                            "default": "solid"
-                        },
-                        "shape": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "default",
-                                "square"
-                            ],
-                            "default": "default"
-                        },
                         "scope": {
                             "type": {
                                 "type": "Array<String>",
@@ -6377,13 +6110,11 @@
                             "values": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "color"
                             ],
                             "default": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "color"
                             ]
                         }
@@ -6430,100 +6161,6 @@
                     "name": "postcssSugarPluginUiBlockquoteClassesInterface",
                     "description": "",
                     "definition": {
-                        "styles": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "array",
-                                        "of": [
-                                            "String"
-                                        ]
-                                    }
-                                ],
-                                "raw": "String[]"
-                            },
-                            "values": [
-                                "solid"
-                            ],
-                            "default": [
-                                "solid"
-                            ]
-                        },
-                        "shapes": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "array",
-                                        "of": [
-                                            "String"
-                                        ]
-                                    }
-                                ],
-                                "raw": "String[]"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "pill"
-                            ],
-                            "default": [
-                                "default",
-                                "square",
-                                "pill"
-                            ]
-                        },
-                        "defaultStyle": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "solid"
-                            ],
-                            "default": "solid"
-                        },
-                        "defaultShape": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "pill"
-                            ],
-                            "default": "default"
-                        },
-                        "defaultColor": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "current",
-                                "base",
-                                "main",
-                                "accent",
-                                "complementary",
-                                "success",
-                                "warning",
-                                "error",
-                                "info"
-                            ],
-                            "default": "accent"
-                        },
                         "scope": {
                             "type": {
                                 "type": "Array<String>",
@@ -6535,14 +6172,12 @@
                             "values": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "vr",
                                 "tf"
                             ],
                             "default": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "vr",
                                 "tf"
                             ]
@@ -6590,24 +6225,7 @@
                     "name": "postcssSugarPluginUiButtonInterface",
                     "description": "",
                     "definition": {
-                        "style": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "solid",
-                                "gradient",
-                                "outline",
-                                "text"
-                            ],
-                            "default": "solid"
-                        },
-                        "shape": {
+                        "lnf": {
                             "type": {
                                 "types": [
                                     {
@@ -6618,8 +6236,9 @@
                             },
                             "values": [
                                 "default",
-                                "square",
-                                "pill"
+                                "gradient",
+                                "outline",
+                                "text"
                             ],
                             "default": "default"
                         },
@@ -6633,13 +6252,11 @@
                             },
                             "values": [
                                 "bare",
-                                "lnf",
-                                "shape"
+                                "lnf"
                             ],
                             "default": [
                                 "bare",
-                                "lnf",
-                                "shape"
+                                "lnf"
                             ]
                         }
                     }
@@ -6684,24 +6301,7 @@
                     "name": "postcssSugarPluginUiButtonInterface",
                     "description": "",
                     "definition": {
-                        "style": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "solid",
-                                "gradient",
-                                "outline",
-                                "text"
-                            ],
-                            "default": "solid"
-                        },
-                        "shape": {
+                        "lnf": {
                             "type": {
                                 "types": [
                                     {
@@ -6712,8 +6312,9 @@
                             },
                             "values": [
                                 "default",
-                                "square",
-                                "pill"
+                                "gradient",
+                                "outline",
+                                "text"
                             ],
                             "default": "default"
                         },
@@ -6727,13 +6328,11 @@
                             },
                             "values": [
                                 "bare",
-                                "lnf",
-                                "shape"
+                                "lnf"
                             ],
                             "default": [
                                 "bare",
-                                "lnf",
-                                "shape"
+                                "lnf"
                             ]
                         }
                     }
@@ -6779,32 +6378,7 @@
                     "name": "postcssSugarPluginUiButtonClassesInterface",
                     "description": "",
                     "definition": {
-                        "styles": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "array",
-                                        "of": [
-                                            "String"
-                                        ]
-                                    }
-                                ],
-                                "raw": "String[]"
-                            },
-                            "values": [
-                                "solid",
-                                "gradient",
-                                "outline",
-                                "text"
-                            ],
-                            "default": [
-                                "solid",
-                                "gradient",
-                                "outline",
-                                "text"
-                            ]
-                        },
-                        "shapes": {
+                        "lnfs": {
                             "type": {
                                 "types": [
                                     {
@@ -6818,33 +6392,18 @@
                             },
                             "values": [
                                 "default",
-                                "square",
-                                "pill"
-                            ],
-                            "default": [
-                                "default",
-                                "square",
-                                "pill"
-                            ]
-                        },
-                        "defaultStyle": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "solid",
                                 "gradient",
                                 "outline",
                                 "text"
                             ],
-                            "default": "solid"
+                            "default": [
+                                "default",
+                                "gradient",
+                                "outline",
+                                "text"
+                            ]
                         },
-                        "defaultShape": {
+                        "defaultLnf": {
                             "type": {
                                 "types": [
                                     {
@@ -6855,32 +6414,11 @@
                             },
                             "values": [
                                 "default",
-                                "square",
-                                "pill"
+                                "gradient",
+                                "outline",
+                                "text"
                             ],
                             "default": "default"
-                        },
-                        "defaultColor": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "current",
-                                "base",
-                                "main",
-                                "accent",
-                                "complementary",
-                                "success",
-                                "warning",
-                                "error",
-                                "info"
-                            ],
-                            "default": "main"
                         },
                         "scope": {
                             "type": {
@@ -6893,16 +6431,14 @@
                             "values": [
                                 "bare",
                                 "lnf",
-                                "shape",
-                                "tf",
-                                "vr"
+                                "vr",
+                                "tf"
                             ],
                             "default": [
                                 "bare",
                                 "lnf",
-                                "shape",
-                                "tf",
-                                "vr"
+                                "vr",
+                                "tf"
                             ]
                         }
                     }
@@ -6918,8 +6454,8 @@
                 "relPath": "src/node/mixins/ui/button/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.checkbox.checkbox": {
-                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.checkbox.checkbox",
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.form.checkbox": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.form.checkbox",
                 "name": "checkbox",
                 "type": {
                     "types": [
@@ -6936,19 +6472,19 @@
                     }
                 ],
                 "description": "Apply the checkbox style to any element",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.checkbox",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.form",
                 "status": "beta",
                 "example": [
                     {
                         "language": "css",
-                        "code": ".my-checkbox {\n   @sugar.ui.checkbox;\n}"
+                        "code": ".my-checkbox {\n   @sugar.ui.form;\n}"
                     }
                 ],
                 "interface": {
                     "name": "postcssSugarPluginUiCheckboxInterface",
                     "description": "",
                     "definition": {
-                        "style": {
+                        "lnf": {
                             "type": {
                                 "types": [
                                     {
@@ -6958,23 +6494,7 @@
                                 "raw": "String"
                             },
                             "values": [
-                                "solid"
-                            ],
-                            "default": "solid"
-                        },
-                        "shape": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "circle"
+                                "default"
                             ],
                             "default": "default"
                         },
@@ -6988,13 +6508,11 @@
                             },
                             "values": [
                                 "bare",
-                                "lnf",
-                                "shape"
+                                "lnf"
                             ],
                             "default": [
                                 "bare",
-                                "lnf",
-                                "shape"
+                                "lnf"
                             ]
                         }
                     }
@@ -7033,14 +6551,14 @@
                 "example": [
                     {
                         "language": "css",
-                        "code": "@sugar.ui.checkbox.classes();"
+                        "code": "@sugar.ui.form.classes();"
                     }
                 ],
                 "interface": {
                     "name": "postcssSugarPluginUiCheckboxClassesInterface",
                     "description": "",
                     "definition": {
-                        "styles": {
+                        "lnfs": {
                             "type": {
                                 "types": [
                                     {
@@ -7053,36 +6571,13 @@
                                 "raw": "String[]"
                             },
                             "values": [
-                                "solid"
+                                "default"
                             ],
                             "default": [
-                                "solid"
+                                "default"
                             ]
                         },
-                        "shapes": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "array",
-                                        "of": [
-                                            "String"
-                                        ]
-                                    }
-                                ],
-                                "raw": "String[]"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "circle"
-                            ],
-                            "default": [
-                                "default",
-                                "square",
-                                "circle"
-                            ]
-                        },
-                        "defaultStyle": {
+                        "defaultLnf": {
                             "type": {
                                 "types": [
                                     {
@@ -7092,47 +6587,9 @@
                                 "raw": "String"
                             },
                             "values": [
-                                "solid"
-                            ],
-                            "default": "solid"
-                        },
-                        "defaultShape": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "circle"
+                                "default"
                             ],
                             "default": "default"
-                        },
-                        "defaultColor": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "current",
-                                "base",
-                                "main",
-                                "accent",
-                                "complementary",
-                                "success",
-                                "warning",
-                                "error",
-                                "info"
-                            ],
-                            "default": "accent"
                         },
                         "scope": {
                             "type": {
@@ -7145,14 +6602,12 @@
                             "values": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "tf",
                                 "vr"
                             ],
                             "default": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "tf",
                                 "vr"
                             ]
@@ -7195,97 +6650,6 @@
                     "name": "postcssSugarPluginUiDropdownClassesInterface",
                     "description": "",
                     "definition": {
-                        "styles": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "array",
-                                        "of": [
-                                            "String"
-                                        ]
-                                    }
-                                ],
-                                "raw": "String[]"
-                            },
-                            "default": [
-                                "solid"
-                            ]
-                        },
-                        "shape": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "array",
-                                        "of": [
-                                            "String"
-                                        ]
-                                    }
-                                ],
-                                "raw": "String[]"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "pill"
-                            ],
-                            "default": [
-                                "default",
-                                "square",
-                                "pill"
-                            ]
-                        },
-                        "defaultStyle": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "solid"
-                            ],
-                            "default": "solid"
-                        },
-                        "defaultShape": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "pill"
-                            ],
-                            "default": "default"
-                        },
-                        "defaultColor": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "current",
-                                "base",
-                                "main",
-                                "accent",
-                                "complementary",
-                                "success",
-                                "warning",
-                                "error",
-                                "info"
-                            ],
-                            "default": "main"
-                        },
                         "scope": {
                             "type": {
                                 "type": "Array<String>",
@@ -7296,17 +6660,11 @@
                             },
                             "values": [
                                 "bare",
-                                "lnf",
-                                "shape",
-                                "vr",
-                                "tf"
+                                "lnf"
                             ],
                             "default": [
                                 "bare",
-                                "lnf",
-                                "shape",
-                                "vr",
-                                "tf"
+                                "lnf"
                             ]
                         }
                     }
@@ -7352,36 +6710,6 @@
                     "name": "postcssSugarPluginUiDropdownInterface",
                     "description": "",
                     "definition": {
-                        "style": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "solid"
-                            ],
-                            "default": "solid"
-                        },
-                        "shape": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "pill"
-                            ],
-                            "default": "default"
-                        },
                         "position": {
                             "type": {
                                 "types": [
@@ -7412,13 +6740,11 @@
                             "values": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "position"
                             ],
                             "default": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "position"
                             ]
                         }
@@ -7460,84 +6786,6 @@
                     "name": "postcssSugarPluginUiFsTreeClassesInterface",
                     "description": "",
                     "definition": {
-                        "styles": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "array",
-                                        "of": [
-                                            "String"
-                                        ]
-                                    }
-                                ],
-                                "raw": "String[]"
-                            },
-                            "values": [
-                                "solid"
-                            ],
-                            "default": [
-                                "solid"
-                            ]
-                        },
-                        "shapes": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "array",
-                                        "of": [
-                                            "String"
-                                        ]
-                                    }
-                                ],
-                                "raw": "String[]"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "pill"
-                            ],
-                            "default": [
-                                "default",
-                                "square",
-                                "pill"
-                            ]
-                        },
-                        "defaultStyle": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "solid"
-                            ],
-                            "default": "solid"
-                        },
-                        "defaultColor": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "current",
-                                "base",
-                                "main",
-                                "accent",
-                                "complementary",
-                                "success",
-                                "warning",
-                                "error",
-                                "info"
-                            ],
-                            "default": "main"
-                        },
                         "scope": {
                             "type": {
                                 "type": "Array<String>",
@@ -7548,17 +6796,11 @@
                             },
                             "values": [
                                 "bare",
-                                "lnf",
-                                "shape",
-                                "tf",
-                                "vr"
+                                "lnf"
                             ],
                             "default": [
                                 "bare",
-                                "lnf",
-                                "shape",
-                                "tf",
-                                "vr"
+                                "lnf"
                             ]
                         }
                     }
@@ -7569,9 +6811,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "classes.js",
-                "extension": "js",
-                "relPath": "src/node/mixins/ui/fsTree/classes.js",
+                "filename": "classes.ts",
+                "extension": "ts",
+                "relPath": "src/node/mixins/ui/fsTree/classes.ts",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.fsTree.fsTree": {
@@ -7604,36 +6846,6 @@
                     "name": "postcssSugarPluginUiFsTreeInterface",
                     "description": "",
                     "definition": {
-                        "style": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "solid"
-                            ],
-                            "default": "solid"
-                        },
-                        "shape": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "pill"
-                            ],
-                            "default": "default"
-                        },
                         "scope": {
                             "type": {
                                 "type": "Array<String>",
@@ -7644,13 +6856,11 @@
                             },
                             "values": [
                                 "bare",
-                                "lnf",
-                                "shape"
+                                "lnf"
                             ],
                             "default": [
                                 "bare",
-                                "lnf",
-                                "shape"
+                                "lnf"
                             ]
                         }
                     }
@@ -7691,7 +6901,7 @@
                     "name": "postcssSugarPluginUiFormClassesInterface",
                     "description": "",
                     "definition": {
-                        "styles": {
+                        "lnfs": {
                             "type": {
                                 "types": [
                                     {
@@ -7704,44 +6914,11 @@
                                 "raw": "String[]"
                             },
                             "default": [
-                                "solid"
+                                "default",
+                                "underline"
                             ]
                         },
-                        "shapes": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "array",
-                                        "of": [
-                                            "String"
-                                        ]
-                                    }
-                                ],
-                                "raw": "String[]"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "pill"
-                            ],
-                            "default": [
-                                "default",
-                                "square",
-                                "pill"
-                            ]
-                        },
-                        "defaultStyle": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "default": "solid"
-                        },
-                        "defaultShape": {
+                        "defaultLnf": {
                             "type": {
                                 "types": [
                                     {
@@ -7751,28 +6928,6 @@
                                 "raw": "String"
                             },
                             "default": "default"
-                        },
-                        "defaultColor": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "current",
-                                "base",
-                                "main",
-                                "accent",
-                                "complementary",
-                                "success",
-                                "warning",
-                                "error",
-                                "info"
-                            ],
-                            "default": "accent"
                         },
                         "scope": {
                             "type": {
@@ -7785,14 +6940,12 @@
                             "values": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "vr",
                                 "tf"
                             ],
                             "default": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "vr",
                                 "tf"
                             ]
@@ -7840,21 +6993,7 @@
                     "name": "postcssSugarPluginUiFormInputInterface",
                     "description": "",
                     "definition": {
-                        "style": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "solid"
-                            ],
-                            "default": "solid"
-                        },
-                        "shape": {
+                        "lnf": {
                             "type": {
                                 "types": [
                                     {
@@ -7865,8 +7004,7 @@
                             },
                             "values": [
                                 "default",
-                                "square",
-                                "pill"
+                                "underline"
                             ],
                             "default": "default"
                         },
@@ -7891,13 +7029,11 @@
                             },
                             "values": [
                                 "bare",
-                                "lnf",
-                                "shape"
+                                "lnf"
                             ],
                             "default": [
                                 "bare",
-                                "lnf",
-                                "shape"
+                                "lnf"
                             ]
                         }
                     }
@@ -7938,7 +7074,7 @@
                     "name": "postcssSugarPluginUiFormClassesInterface",
                     "description": "",
                     "definition": {
-                        "styles": {
+                        "lnfs": {
                             "type": {
                                 "types": [
                                     {
@@ -7955,7 +7091,7 @@
                                 "addon"
                             ]
                         },
-                        "defaultStyle": {
+                        "defaultLnf": {
                             "type": {
                                 "types": [
                                     {
@@ -7976,15 +7112,11 @@
                             },
                             "values": [
                                 "bare",
-                                "lnf",
-                                "vr",
-                                "tf"
+                                "lnf"
                             ],
                             "default": [
                                 "bare",
-                                "lnf",
-                                "vr",
-                                "tf"
+                                "lnf"
                             ]
                         }
                     }
@@ -8062,7 +7194,7 @@
                     "name": "postcssSugarPluginUiLabelClassesInterface",
                     "description": "",
                     "definition": {
-                        "styles": {
+                        "lnfs": {
                             "type": {
                                 "types": [
                                     {
@@ -8085,7 +7217,7 @@
                                 "float"
                             ]
                         },
-                        "defaultStyle": {
+                        "defaultLnf": {
                             "type": {
                                 "types": [
                                     {
@@ -8101,28 +7233,6 @@
                             ],
                             "default": "inline"
                         },
-                        "defaultColor": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "current",
-                                "base",
-                                "main",
-                                "accent",
-                                "complementary",
-                                "success",
-                                "warning",
-                                "error",
-                                "info"
-                            ],
-                            "default": "main"
-                        },
                         "scope": {
                             "type": {
                                 "type": "Array<String>",
@@ -8134,14 +7244,12 @@
                             "values": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "vr",
                                 "tf"
                             ],
                             "default": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "vr",
                                 "tf"
                             ]
@@ -8189,7 +7297,7 @@
                     "name": "postcssSugarPluginUiLabelInterface",
                     "description": "",
                     "definition": {
-                        "style": {
+                        "lnf": {
                             "type": {
                                 "types": [
                                     {
@@ -8252,6 +7360,7 @@
                         "description": ""
                     }
                 ],
+                "description": "Generate the list classes",
                 "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.list",
                 "status": "beta",
                 "example": [],
@@ -8259,7 +7368,7 @@
                     "name": "postcssSugarPluginUiListClassesInterface",
                     "description": "",
                     "definition": {
-                        "styles": {
+                        "lnfs": {
                             "type": {
                                 "types": [
                                     {
@@ -8284,7 +7393,7 @@
                                 "icon"
                             ]
                         },
-                        "defaultStyle": {
+                        "defaultLnf": {
                             "type": {
                                 "types": [
                                     {
@@ -8300,28 +7409,6 @@
                                 "icon"
                             ],
                             "default": "dl"
-                        },
-                        "defaultColor": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "current",
-                                "base",
-                                "main",
-                                "accent",
-                                "complementary",
-                                "success",
-                                "warning",
-                                "error",
-                                "info"
-                            ],
-                            "default": "main"
                         },
                         "scope": {
                             "type": {
@@ -8387,7 +7474,7 @@
                     "name": "postcssSugarPluginUiListInterface",
                     "description": "",
                     "definition": {
-                        "style": {
+                        "lnf": {
                             "type": {
                                 "types": [
                                     {
@@ -8480,28 +7567,6 @@
                                 "drop",
                                 "square-dots"
                             ]
-                        },
-                        "defaultColor": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "current",
-                                "base",
-                                "main",
-                                "accent",
-                                "complementary",
-                                "success",
-                                "warning",
-                                "error",
-                                "info"
-                            ],
-                            "default": "main"
                         }
                     }
                 },
@@ -8834,7 +7899,7 @@
                     "name": "postcssSugarPluginUiRadioClassesInterface",
                     "description": "",
                     "definition": {
-                        "styles": {
+                        "lnfs": {
                             "type": {
                                 "types": [
                                     {
@@ -8847,36 +7912,13 @@
                                 "raw": "String[]"
                             },
                             "values": [
-                                "solid"
+                                "default"
                             ],
                             "default": [
-                                "solid"
+                                "default"
                             ]
                         },
-                        "shapes": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "array",
-                                        "of": [
-                                            "String"
-                                        ]
-                                    }
-                                ],
-                                "raw": "String[]"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "circle"
-                            ],
-                            "default": [
-                                "default",
-                                "square",
-                                "circle"
-                            ]
-                        },
-                        "defaultStyle": {
+                        "defaultLnf": {
                             "type": {
                                 "types": [
                                     {
@@ -8886,47 +7928,9 @@
                                 "raw": "String"
                             },
                             "values": [
-                                "solid"
-                            ],
-                            "default": "solid"
-                        },
-                        "defaultShape": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "circle"
+                                "default"
                             ],
                             "default": "default"
-                        },
-                        "defaultColor": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "current",
-                                "base",
-                                "main",
-                                "accent",
-                                "complementary",
-                                "success",
-                                "warning",
-                                "error",
-                                "info"
-                            ],
-                            "default": "accent"
                         },
                         "scope": {
                             "type": {
@@ -8939,14 +7943,12 @@
                             "values": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "vr",
                                 "tf"
                             ],
                             "default": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "vr",
                                 "tf"
                             ]
@@ -8959,9 +7961,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "classes.js",
-                "extension": "js",
-                "relPath": "src/node/mixins/ui/radio/classes.js",
+                "filename": "classes.ts",
+                "extension": "ts",
+                "relPath": "src/node/mixins/ui/radio/classes.ts",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.radio.radio": {
@@ -8994,7 +7996,7 @@
                     "name": "postcssSugarPluginUiRadioInterface",
                     "description": "",
                     "definition": {
-                        "style": {
+                        "lnf": {
                             "type": {
                                 "types": [
                                     {
@@ -9004,24 +8006,7 @@
                                 "raw": "String"
                             },
                             "values": [
-                                "solid"
-                            ],
-                            "default": "solid"
-                        },
-                        "shape": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "pill",
-                                "circle"
+                                "default"
                             ],
                             "default": "default"
                         },
@@ -9035,15 +8020,11 @@
                             },
                             "values": [
                                 "bare",
-                                "lnf",
-                                "shape",
-                                "vr"
+                                "lnf"
                             ],
                             "default": [
                                 "bare",
-                                "lnf",
-                                "shape",
-                                "vr"
+                                "lnf"
                             ]
                         }
                     }
@@ -9084,7 +8065,7 @@
                     "name": "postcssSugarPluginUiRangeClassesInterface",
                     "description": "",
                     "definition": {
-                        "styles": {
+                        "lnfs": {
                             "type": {
                                 "types": [
                                     {
@@ -9097,38 +8078,13 @@
                                 "raw": "String[]"
                             },
                             "values": [
-                                "solid"
+                                "default"
                             ],
                             "default": [
-                                "solid"
+                                "default"
                             ]
                         },
-                        "shapes": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "array",
-                                        "of": [
-                                            "String"
-                                        ]
-                                    }
-                                ],
-                                "raw": "String[]"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "pill",
-                                "circle"
-                            ],
-                            "default": [
-                                "default",
-                                "square",
-                                "pill",
-                                "circle"
-                            ]
-                        },
-                        "defaultStyle": {
+                        "defaultLnf": {
                             "type": {
                                 "types": [
                                     {
@@ -9138,48 +8094,9 @@
                                 "raw": "String"
                             },
                             "values": [
-                                "solid"
-                            ],
-                            "default": "solid"
-                        },
-                        "defaultShape": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "pill",
-                                "circle"
+                                "default"
                             ],
                             "default": "default"
-                        },
-                        "defaultColor": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "current",
-                                "base",
-                                "main",
-                                "accent",
-                                "complementary",
-                                "success",
-                                "warning",
-                                "error",
-                                "info"
-                            ],
-                            "default": "accent"
                         },
                         "scope": {
                             "type": {
@@ -9192,14 +8109,12 @@
                             "values": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "vr",
                                 "tf"
                             ],
                             "default": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "vr",
                                 "tf"
                             ]
@@ -9247,7 +8162,7 @@
                     "name": "postcssSugarPluginUiRangeInterface",
                     "description": "",
                     "definition": {
-                        "style": {
+                        "lnf": {
                             "type": {
                                 "types": [
                                     {
@@ -9257,24 +8172,7 @@
                                 "raw": "String"
                             },
                             "values": [
-                                "solid"
-                            ],
-                            "default": "solid"
-                        },
-                        "shape": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "pull",
-                                "circle"
+                                "default"
                             ],
                             "default": "default"
                         },
@@ -9288,13 +8186,11 @@
                             },
                             "values": [
                                 "bare",
-                                "lnf",
-                                "shape"
+                                "lnf"
                             ],
                             "default": [
                                 "bare",
-                                "lnf",
-                                "shape"
+                                "lnf"
                             ]
                         }
                     }
@@ -9335,7 +8231,7 @@
                     "name": "postcssSugarPluginUiFormSelectClassesInterface",
                     "description": "",
                     "definition": {
-                        "styles": {
+                        "lnfs": {
                             "type": {
                                 "types": [
                                     {
@@ -9348,33 +8244,11 @@
                                 "raw": "String[]"
                             },
                             "default": [
-                                "solid"
+                                "default",
+                                "underline"
                             ]
                         },
-                        "shapes": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "array",
-                                        "of": [
-                                            "String"
-                                        ]
-                                    }
-                                ],
-                                "raw": "String[]"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "pill"
-                            ],
-                            "default": [
-                                "default",
-                                "square",
-                                "pill"
-                            ]
-                        },
-                        "defaultStyle": {
+                        "defaultLnf": {
                             "type": {
                                 "types": [
                                     {
@@ -9384,47 +8258,9 @@
                                 "raw": "String"
                             },
                             "values": [
-                                "solid"
-                            ],
-                            "default": "solid"
-                        },
-                        "defaultShape": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "pill"
+                                "default"
                             ],
                             "default": "default"
-                        },
-                        "defaultColor": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "current",
-                                "base",
-                                "main",
-                                "accent",
-                                "complementary",
-                                "success",
-                                "warning",
-                                "error",
-                                "info"
-                            ],
-                            "default": "accent"
                         },
                         "scope": {
                             "type": {
@@ -9437,14 +8273,12 @@
                             "values": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "vr",
                                 "tf"
                             ],
                             "default": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "vr",
                                 "tf"
                             ]
@@ -9492,7 +8326,7 @@
                     "name": "postcssSugarPluginUiFormSelectInterface",
                     "description": "",
                     "definition": {
-                        "style": {
+                        "lnf": {
                             "type": {
                                 "types": [
                                     {
@@ -9502,23 +8336,7 @@
                                 "raw": "String"
                             },
                             "values": [
-                                "solid"
-                            ],
-                            "default": "solid"
-                        },
-                        "shape": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "pill"
+                                "default"
                             ],
                             "default": "default"
                         },
@@ -9532,13 +8350,11 @@
                             },
                             "values": [
                                 "bare",
-                                "lnf",
-                                "shape"
+                                "lnf"
                             ],
                             "default": [
                                 "bare",
-                                "lnf",
-                                "shape"
+                                "lnf"
                             ]
                         }
                     }
@@ -9579,7 +8395,7 @@
                     "name": "postcssSugarPluginUiSwitchClassesMixinInterface",
                     "description": "",
                     "definition": {
-                        "styles": {
+                        "lnfs": {
                             "type": {
                                 "types": [
                                     {
@@ -9592,36 +8408,13 @@
                                 "raw": "String[]"
                             },
                             "values": [
-                                "solid"
+                                "default"
                             ],
                             "default": [
-                                "solid"
+                                "default"
                             ]
                         },
-                        "shapes": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "array",
-                                        "of": [
-                                            "String"
-                                        ]
-                                    }
-                                ],
-                                "raw": "String[]"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "pill"
-                            ],
-                            "default": [
-                                "default",
-                                "square",
-                                "pill"
-                            ]
-                        },
-                        "defaultStyle": {
+                        "defaultLnf": {
                             "type": {
                                 "types": [
                                     {
@@ -9631,47 +8424,9 @@
                                 "raw": "String"
                             },
                             "values": [
-                                "solid"
-                            ],
-                            "default": "solid"
-                        },
-                        "defaultShape": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "pill"
+                                "default"
                             ],
                             "default": "default"
-                        },
-                        "defaultColor": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "current",
-                                "base",
-                                "main",
-                                "accent",
-                                "complementary",
-                                "success",
-                                "warning",
-                                "error",
-                                "info"
-                            ],
-                            "default": "accent"
                         },
                         "scope": {
                             "type": {
@@ -9684,13 +8439,11 @@
                             "values": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "tf"
                             ],
                             "default": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "tf"
                             ]
                         }
@@ -9707,8 +8460,8 @@
                 "relPath": "src/node/mixins/ui/switch/classes.ts",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.switch.switch": {
-                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.switch.switch",
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.form.switch": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.form.switch",
                 "name": "switch",
                 "type": {
                     "types": [
@@ -9725,19 +8478,19 @@
                     }
                 ],
                 "description": "Apply the switch style to any element",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.switch",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.ui.form",
                 "status": "beta",
                 "example": [
                     {
                         "language": "css",
-                        "code": ".my-switch {\n   @sugar.ui.switch;\n}"
+                        "code": ".my-switch {\n   @sugar.ui.form;\n}"
                     }
                 ],
                 "interface": {
                     "name": "postcssSugarPluginUiSwitchMixinInterface",
                     "description": "",
                     "definition": {
-                        "style": {
+                        "lnf": {
                             "type": {
                                 "types": [
                                     {
@@ -9747,23 +8500,7 @@
                                 "raw": "String"
                             },
                             "values": [
-                                "solid"
-                            ],
-                            "default": "default"
-                        },
-                        "shape": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "pill"
+                                "default"
                             ],
                             "default": "default"
                         },
@@ -9777,13 +8514,11 @@
                             },
                             "values": [
                                 "bare",
-                                "lnf",
-                                "shape"
+                                "lnf"
                             ],
                             "default": [
                                 "bare",
-                                "lnf",
-                                "shape"
+                                "lnf"
                             ]
                         }
                     }
@@ -9824,94 +8559,6 @@
                     "name": "postcssSugarPluginUiTableClassesInterface",
                     "description": "",
                     "definition": {
-                        "styles": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "array",
-                                        "of": [
-                                            "String"
-                                        ]
-                                    }
-                                ],
-                                "raw": "String[]"
-                            },
-                            "default": [
-                                "solid"
-                            ]
-                        },
-                        "shapes": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "array",
-                                        "of": [
-                                            "String"
-                                        ]
-                                    }
-                                ],
-                                "raw": "String[]"
-                            },
-                            "values": [
-                                "default",
-                                "square"
-                            ],
-                            "default": [
-                                "default",
-                                "square"
-                            ]
-                        },
-                        "defaultStyle": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "solid"
-                            ],
-                            "default": "solid"
-                        },
-                        "defaultShape": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "default",
-                                "square"
-                            ],
-                            "default": "default"
-                        },
-                        "defaultColor": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "current",
-                                "base",
-                                "main",
-                                "accent",
-                                "complementary",
-                                "success",
-                                "warning",
-                                "error",
-                                "info"
-                            ],
-                            "default": "main"
-                        },
                         "scope": {
                             "type": {
                                 "type": "Array<String>",
@@ -9923,14 +8570,12 @@
                             "values": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "tf",
                                 "vr"
                             ],
                             "default": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "tf",
                                 "vr"
                             ]
@@ -9978,35 +8623,6 @@
                     "name": "postcssSugarPluginUiTableInterface",
                     "description": "",
                     "definition": {
-                        "style": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "solid"
-                            ],
-                            "default": "solid"
-                        },
-                        "shape": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "default",
-                                "square"
-                            ],
-                            "default": "default"
-                        },
                         "scope": {
                             "type": {
                                 "type": "Array<String>",
@@ -10017,15 +8633,11 @@
                             },
                             "values": [
                                 "bare",
-                                "lnf",
-                                "shape",
-                                "vr"
+                                "lnf"
                             ],
                             "default": [
                                 "bare",
-                                "lnf",
-                                "shape",
-                                "vr"
+                                "lnf"
                             ]
                         }
                     }
@@ -10066,100 +8678,6 @@
                     "name": "postcssSugarPluginUiListClassesInterface",
                     "description": "",
                     "definition": {
-                        "lnfs": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "array",
-                                        "of": [
-                                            "String"
-                                        ]
-                                    }
-                                ],
-                                "raw": "String[]"
-                            },
-                            "values": [
-                                "solid"
-                            ],
-                            "default": [
-                                "solid"
-                            ]
-                        },
-                        "shapes": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "array",
-                                        "of": [
-                                            "String"
-                                        ]
-                                    }
-                                ],
-                                "raw": "String[]"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "pill"
-                            ],
-                            "default": [
-                                "default",
-                                "square",
-                                "pill"
-                            ]
-                        },
-                        "defaultLnf": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "solid"
-                            ],
-                            "default": "solid"
-                        },
-                        "defaultShape": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "pill"
-                            ],
-                            "default": "default"
-                        },
-                        "defaultColor": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "current",
-                                "base",
-                                "main",
-                                "accent",
-                                "complementary",
-                                "success",
-                                "warning",
-                                "error",
-                                "info"
-                            ],
-                            "default": "main"
-                        },
                         "scope": {
                             "type": {
                                 "type": "Array<String>",
@@ -10171,14 +8689,12 @@
                             "values": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "vr",
                                 "tf"
                             ],
                             "default": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "vr",
                                 "tf"
                             ]
@@ -10226,38 +8742,6 @@
                     "name": "postcssSugarPluginUiTabInterface",
                     "description": "",
                     "definition": {
-                        "lnf": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "description": "Specify the look and feel you want for your tabs",
-                            "values": [
-                                "solid"
-                            ],
-                            "default": "solid"
-                        },
-                        "shape": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "description": "Specify the shape you want for your tabs",
-                            "values": [
-                                "default",
-                                "square",
-                                "pill"
-                            ],
-                            "default": "default"
-                        },
                         "grow": {
                             "type": {
                                 "types": [
@@ -10322,7 +8806,6 @@
                             "values": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "grow",
                                 "fill",
                                 "direction"
@@ -10330,7 +8813,6 @@
                             "default": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "grow",
                                 "fill",
                                 "direction"
@@ -10493,7 +8975,7 @@
                     "name": "postcssSugarPluginUiTooltipClassesInterface",
                     "description": "",
                     "definition": {
-                        "styles": {
+                        "lnfs": {
                             "type": {
                                 "types": [
                                     {
@@ -10506,36 +8988,13 @@
                                 "raw": "String[]"
                             },
                             "values": [
-                                "solid"
+                                "default"
                             ],
                             "default": [
-                                "solid"
+                                "default"
                             ]
                         },
-                        "shapes": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "array",
-                                        "of": [
-                                            "String"
-                                        ]
-                                    }
-                                ],
-                                "raw": "String[]"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "pill"
-                            ],
-                            "default": [
-                                "default",
-                                "square",
-                                "pill"
-                            ]
-                        },
-                        "defaultStyle": {
+                        "defaultLnf": {
                             "type": {
                                 "types": [
                                     {
@@ -10545,47 +9004,9 @@
                                 "raw": "String"
                             },
                             "values": [
-                                "solid"
-                            ],
-                            "default": "solid"
-                        },
-                        "defaultShape": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "pill"
+                                "default"
                             ],
                             "default": "default"
-                        },
-                        "defaultColor": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "current",
-                                "base",
-                                "main",
-                                "accent",
-                                "complementary",
-                                "success",
-                                "warning",
-                                "error",
-                                "info"
-                            ],
-                            "default": "main"
                         },
                         "scope": {
                             "type": {
@@ -10597,17 +9018,11 @@
                             },
                             "values": [
                                 "bare",
-                                "lnf",
-                                "shape",
-                                "vr",
-                                "tf"
+                                "lnf"
                             ],
                             "default": [
                                 "bare",
-                                "lnf",
-                                "shape",
-                                "vr",
-                                "tf"
+                                "lnf"
                             ]
                         }
                     }
@@ -10653,7 +9068,7 @@
                     "name": "postcssSugarPluginUiTooltipInterface",
                     "description": "",
                     "definition": {
-                        "style": {
+                        "lnf": {
                             "type": {
                                 "types": [
                                     {
@@ -10663,23 +9078,7 @@
                                 "raw": "String"
                             },
                             "values": [
-                                "solid"
-                            ],
-                            "default": "default"
-                        },
-                        "shape": {
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "default",
-                                "square",
-                                "pill"
+                                "default"
                             ],
                             "default": "default"
                         },
@@ -10722,14 +9121,12 @@
                             "values": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "position",
                                 "interactive"
                             ],
                             "default": [
                                 "bare",
                                 "lnf",
-                                "shape",
                                 "position",
                                 "interactive"
                             ]

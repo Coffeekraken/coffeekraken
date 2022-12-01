@@ -3,41 +3,42 @@
      !!! Do not edit it directly... -->
 
 
-    <!-- header -->
-    # @coffeekraken/s-kitchen
+<!-- header -->
+# @coffeekraken/s-kitchen
 
-    ###### [MIT](./license) 2.0.0-alpha.20 - [Git repository]()
+###### [MIT](./license) 2.0.0-alpha.20 - [Git repository]()
 
-            <!-- shields -->
-                [![size](https://shields.io/bundlephobia/min/@coffeekraken/s-kitchen?style=for-the-badge)](https://www.npmjs.com/package/@coffeekraken/s-kitchen)
-                [![downloads](https://shields.io/npm/dm/@coffeekraken/s-kitchen?style=for-the-badge)](https://www.npmjs.com/package/@coffeekraken/s-kitchen)
-                [![license](https://shields.io/npm/l/@coffeekraken/s-kitchen?style=for-the-badge)](./LICENSE)
-                [![discord](https://img.shields.io/discord/940362961682333767?color=5100FF&amp;label=Join%20us%20on%20Discord&amp;style=for-the-badge)](https://discord.gg/HzycksDJ)
-            
-    <!-- description -->
-    Central coffeekraken piece that handle project creation, development stack launch, and more.
+<!-- shields -->
+[![size](https://shields.io/bundlephobia/min/@coffeekraken/s-kitchen?style=for-the-badge)](https://www.npmjs.com/package/@coffeekraken/s-kitchen)
+[![downloads](https://shields.io/npm/dm/@coffeekraken/s-kitchen?style=for-the-badge)](https://www.npmjs.com/package/@coffeekraken/s-kitchen)
+[![license](https://shields.io/npm/l/@coffeekraken/s-kitchen?style=for-the-badge)](./LICENSE)
+[![discord](https://img.shields.io/discord/940362961682333767?color=5100FF&amp;label=Join%20us%20on%20Discord&amp;style=for-the-badge)](https://discord.gg/HzycksDJ)
 
-    <!-- install -->
-    ### Install
+<!-- description -->
+Central coffeekraken piece that handle project creation, development stack launch, and more.
 
-    ```shell
-    npm i @coffeekraken/s-kitchen
-    ```
+<!-- install -->
+### Install
+
+```shell
+npm i @coffeekraken/s-kitchen
+
+```
 
 <!-- body -->
 
 <!--
 /**
- * @name            README
- * @namespace       doc
- * @type            Markdown
- * @platform        md
- * @status          stable
- * @menu            Documentation           /doc/readme
- *
- * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+* @name            README
+* @namespace       doc
+* @type            Markdown
+* @platform        md
+* @status          stable
+* @menu            Documentation           /doc/readme
+*
+* @since           2.0.0
+* @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+*/
 -->
 
 ## What is this?
@@ -61,6 +62,7 @@ sugar kitchen.new
 # Run the "dev" recipe
 sugar kitchen.recipe dev
 # etc...
+
 ```
 
 > Note that no recipe is specified in these commands. The "recipe" is usually defined in the `sugar.json` file at the root of your project.
@@ -71,6 +73,7 @@ To list the available recipes, simply execute this command:
 
 ```shell
 sugar kitchen.list
+
 ```
 
 ## Create your recipe
@@ -82,16 +85,15 @@ To create a new recipe, simply follow [this documentation](/doc/recipes/create-y
 To understand and create your own action, simply follow [this documentation](/doc/recipes/create-your-recipe4)
 
 
-    <!-- license -->    
-    ### License
+<!-- license -->
+### License
 
-    Distributed under the **MIT** License. See **[LICENSE](./license)** for more information.
+Distributed under the **MIT** License. See **[LICENSE](./license)** for more information.
 
-    <!-- contact -->
-    ### Contact
+<!-- contact -->
+### Contact
 
-    Here's all the ways you can contact us listed:
+Here's all the ways you can contact us listed:
 
-        [![discord](https://img.shields.io/badge/Join%20us%20on%20discord-Join-blueviolet?style=[config.shieldsio.style]&amp;logo=discord)](https://discord.gg/HzycksDJ)
-        [![email](https://img.shields.io/badge/Email%20us-Go-green?style=[config.shieldsio.style]&amp;logo=Mail.Ru)](mailto:olivier.bossel@gmail.com)
-    
+[![discord](https://img.shields.io/badge/Join%20us%20on%20discord-Join-blueviolet?style=[config.shieldsio.style]&amp;logo=discord)](https://discord.gg/HzycksDJ)
+[![email](https://img.shields.io/badge/Email%20us-Go-green?style=[config.shieldsio.style]&amp;logo=Mail.Ru)](mailto:olivier.bossel@gmail.com)

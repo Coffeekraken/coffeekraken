@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -48,10 +53,10 @@ To register your own handler, the easiest way is to register it through a module
 
 ```js
 export default function myModule(express, settings, config) {
-config.middlewares.myMiddleware = {
-path: `/absolute/path/to/my/middleware`,
-settings: {},
-};
+  config.middlewares.myMiddleware = {
+    path: `/absolute/path/to/my/middleware`,
+    settings: {},
+  };
 }
 ```
 
@@ -61,14 +66,15 @@ Here's some base code that you can use for your handler:
 
 ```js
 export default function myMiddleware(settings = {}) {
-return async function (req, res, next) {
-// do something for your middleware...
-if (!res.templateData) res.templateData = {};
-res.templateData.hello = 'world';
-// tell express to go next when finished
-next();
-};
+  return async function (req, res, next) {
+    // do something for your middleware...
+    if (!res.templateData) res.templateData = {};
+    res.templateData.hello = 'world';
+    // tell express to go next when finished
+    next();
+  };
 }
+
 ```
 
 

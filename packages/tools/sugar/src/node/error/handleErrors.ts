@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import __parseHtml from '../../shared/console/parseHtml';
 import { __isChildProcess } from '@coffeekraken/sugar/is';
+import __parseHtml from '../../shared/console/parseHtml';
 import __toString from '../../shared/string/toString';
 
 /**
@@ -57,12 +57,12 @@ function __handleChildProcessErrors(error) {
 }
 
 function __handleMainProcessErrors(error) {
-    if (error.toString().includes(`Cannot read property 'itop' of null`))
+    if (error.toString?.().includes(`Cannot read property 'itop' of null`))
         return;
     if (error.instanceId) return;
 
     if (error instanceof Buffer) {
-        error = error.toString();
+        error = error.toString?.();
     }
 
     setTimeout(() => {

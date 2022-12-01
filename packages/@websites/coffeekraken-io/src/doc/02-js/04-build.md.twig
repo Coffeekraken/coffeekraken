@@ -26,7 +26,7 @@ It has some defaults config that you can check out bellow and you can as well ov
 Here's basically the default [ViteJS](https://vitejs.dev) configurations setted by Coffeekraken:
 
 ```js
-{{ viteConfig|json_encode() }}
+export default {{ viteConfig|json_encode()|raw }}
 ```
 
 ## Overriding config

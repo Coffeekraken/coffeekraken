@@ -16,9 +16,7 @@
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
-            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config-adapter",
             "@coffeekraken/s-config-folder-adapter",
@@ -57,7 +55,6 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
@@ -102,42 +99,6 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-activate-feature.doc.README": {
-                "id": "@coffeekraken.s-activate-feature.doc.README",
-                "name": "README",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Markdown"
-                        }
-                    ],
-                    "raw": "Markdown"
-                },
-                "menu": {
-                    "tree": [
-                        "Documentation"
-                    ],
-                    "slug": "/doc/readme"
-                },
-                "platform": [
-                    {
-                        "name": "md",
-                        "description": ""
-                    }
-                ],
-                "namespace": "@coffeekraken.s-activate-feature.doc",
-                "status": "wip",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "README.md",
-                "extension": "md",
-                "relPath": "src/doc/README.md",
-                "children": {}
-            },
             "@coffeekraken.s-activate-feature.js.SActivateFeature": {
                 "id": "@coffeekraken.s-activate-feature.js.SActivateFeature",
                 "name": "SActivateFeature",

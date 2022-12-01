@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -46,41 +51,42 @@ This file is separated by purpose in an global object like so:
 
 
 -   **Metas**: Specify some metas data like the title, description, opengraph, etc...
-
+    
 -   **Assets**: Specify the assets to load like the css, js, etc...
-
+    
 -   **Media**: Specify the responsive specifications like the queries (breakpoints), default action, etc...
-
+    
 -   **Views**: Specify the views specifications like where to find them, etc...
-
+    
 -   **Specs**: Specify some specs related specifications like where to find them, etc...
-
+    
 -   **Google**: Specify some google specifications like the GTM/GA to use, etc...
-
+    
 -   **Margin**: Specify the margins available in the project.
-
+    
 -   **Padding**: Specify the paddings available in the project.
-
+    
 -   **Font**: Specify the fonts specifications like the font-faces available, sizes, etc...
-
+    
 -   **Typo**: Specify some typo specifications like which are the available typo classes/tags, etc...
-
+    
 -   **Layout**: Specify some layout specifications like the available containers, layouts and grids.
-
+    
 ```js
-{
-metas: {},
-assets: {},
-media: {},
-views: {},
-specs: {},
-google: {},
-margin: {},
-padding: {},
-font: {},
-typo: {},
-layout: {},
-}
+export default {
+  metas: {},
+  assets: {},
+  media: {},
+  views: {},
+  specs: {},
+  google: {},
+  margin: {},
+  padding: {},
+  font: {},
+  typo: {},
+  layout: {},
+};
+
 ```
 
 
@@ -89,7 +95,8 @@ layout: {},
 Specify some metas data like the title, description, opengraph, etc...
 
 ```js
-null
+export default null;
+
 ```
 
 
@@ -98,7 +105,8 @@ null
 Specify the assets to load like the css, js, etc...
 
 ```js
-null
+export default null;
+
 ```
 
 
@@ -107,7 +115,8 @@ null
 Specify the responsive specifications like the queries (breakpoints), default action, etc...
 
 ```js
-null
+export default null;
+
 ```
 
 
@@ -116,7 +125,8 @@ null
 Specify the views specifications like where to find them, etc...
 
 ```js
-null
+export default null;
+
 ```
 
 
@@ -125,7 +135,8 @@ null
 Specify some specs related specifications like where to find them, etc...
 
 ```js
-null
+export default null;
+
 ```
 
 
@@ -134,7 +145,8 @@ null
 Specify some google specifications like the GTM/GA to use, etc...
 
 ```js
-null
+export default null;
+
 ```
 
 
@@ -143,7 +155,8 @@ null
 Specify the margins available in the project.
 
 ```js
-null
+export default null;
+
 ```
 
 
@@ -152,7 +165,8 @@ null
 Specify the paddings available in the project.
 
 ```js
-null
+export default null;
+
 ```
 
 
@@ -161,7 +175,8 @@ null
 Specify the fonts specifications like the font-faces available, sizes, etc...
 
 ```js
-null
+export default null;
+
 ```
 
 
@@ -170,7 +185,8 @@ null
 Specify some typo specifications like which are the available typo classes/tags, etc...
 
 ```js
-null
+export default null;
+
 ```
 
 
@@ -179,7 +195,8 @@ null
 Specify some layout specifications like the available containers, layouts and grids.
 
 ```js
-null
+export default null;
+
 ```
 
 

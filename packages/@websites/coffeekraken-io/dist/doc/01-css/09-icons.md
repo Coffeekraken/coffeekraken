@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -52,12 +57,13 @@ To register some icons, simply call the `@sugar.icon.classes` mixin with the lis
 
 ```css
 @sugar.icon.classes (
-fab:vuejs
-fa:tasks
-fa:hammer:todo
-fs:src/icons/read-direction.svg:support-rtl
-fs:src/icons/ *.svg
+    fab:vuejs
+    fa:tasks
+    fa:hammer:todo
+    fs:src/icons/read-direction.svg:support-rtl
+    fs:src/icons/ *.svg
 );
+
 ```
 
 Each line define an icon using this syntax:
@@ -74,7 +80,7 @@ For now, we support 2 protocols that are:
 
 -   `fa|fab|fas|fad|fal`: These are [Font awesome](https://fontawesome.com) icons
 -   `fs`: This is `filesystem` plain SVG icons
--   Support glob paths like `src/icons/*.svg`
+    -   Support glob paths like `src/icons/*.svg`
 
 > These are the supported protocols that we have for now. We can as well add some depending on your needs and requests through our different communication channels.
 
@@ -86,6 +92,7 @@ To use your registered icons, simply reference them inside your html like so:
 <i class="s-icon s-icon--vuejs"></i>
 <i class="s-icon s-icon--support-rtl"></i>
 <!-- etc... -->
+
 ```
 
 

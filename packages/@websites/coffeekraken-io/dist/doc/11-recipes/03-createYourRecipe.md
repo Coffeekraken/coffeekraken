@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -46,18 +51,18 @@ To register a new recipe, you have to create a new file called `kitchen.config.t
 
 ```js
 export default function (env, config) {
-return {
-recipes: {
-myCoolRecipe: {
-title: 'My cool recipe',
-description:
-'A recipe that will beat the dark side of the force',
-defaultStack: 'dev',
-stacks: {},
-},
-},
-};
+  return {
+    recipes: {
+      myCoolRecipe: {
+        title: 'My cool recipe',
+        description: 'A recipe that will beat the dark side of the force',
+        defaultStack: 'dev',
+        stacks: {},
+      },
+    },
+  };
 }
+
 ```
 
 By doing this, we just registered a new recipe called `myCoolRecipe`.
@@ -65,9 +70,10 @@ By doing this, we just registered a new recipe called `myCoolRecipe`.
 We just need to tell the `@coffeekraken/cli` CLI that our project make use of our new `myCoolRecipe`. To do so, simply create a `sugar.json` file at your project root with this content:
 
 ```js
-{
-"recipe": "myCoolRecipe"
-}
+export default {
+  recipe: 'myCoolRecipe',
+};
+
 ```
 
 We need to understand a little bit more what a recipe is made of...
@@ -98,26 +104,26 @@ Back to our recipe. Here's how to register a new `dev` stack into our recipe:
 
 ```js
 export default function (env, config) {
-return {
-recipes: {
-myCoolRecipe: {
-title: 'My cool recipe',
-description:
-'A recipe that will beat the dark side of the force',
-defaultStack: 'dev',
-stacks: {
-dev: {
-title: 'Development stack',
-description: 'Start our development environment',
-runInParallel: false,
-sharedParams: {},
-actions: {},
-},
-},
-},
-},
-};
+  return {
+    recipes: {
+      myCoolRecipe: {
+        title: 'My cool recipe',
+        description: 'A recipe that will beat the dark side of the force',
+        defaultStack: 'dev',
+        stacks: {
+          dev: {
+            title: 'Development stack',
+            description: 'Start our development environment',
+            runInParallel: false,
+            sharedParams: {},
+            actions: {},
+          },
+        },
+      },
+    },
+  };
 }
+
 ```
 
 ### Register a new action
@@ -131,41 +137,40 @@ Back to our recipe. We will integrate `2` actions which will be a simple command
 
 ```js
 export default function (env, config) {
-return {
-recipes: {
-myCoolRecipe: {
-title: 'My cool recipe',
-description:
-'A recipe that will beat the dark side of the force',
-defaultStack: 'dev',
-stacks: {
-dev: {
-title: 'Development stack',
-description: 'Start our development environment',
-runInParallel: false,
-sharedParams: {},
-actions: {
-installDeps: {
-title: 'Install dependencies',
-description:
-'Install our node dependencies using npm',
-command: 'npm install',
-},
-customProcess: {
-title: 'Custom process',
-description: 'My cool custom process',
-process: '/absolute/path/to/myProcess.js',
-params: {
-something: 'cool',
-},
-},
-},
-},
-},
-},
-},
-};
+  return {
+    recipes: {
+      myCoolRecipe: {
+        title: 'My cool recipe',
+        description: 'A recipe that will beat the dark side of the force',
+        defaultStack: 'dev',
+        stacks: {
+          dev: {
+            title: 'Development stack',
+            description: 'Start our development environment',
+            runInParallel: false,
+            sharedParams: {},
+            actions: {
+              installDeps: {
+                title: 'Install dependencies',
+                description: 'Install our node dependencies using npm',
+                command: 'npm install',
+              },
+              customProcess: {
+                title: 'Custom process',
+                description: 'My cool custom process',
+                process: '/absolute/path/to/myProcess.js',
+                params: {
+                  something: 'cool',
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  };
 }
+
 ```
 
 ### Testing your stack
@@ -176,6 +181,7 @@ To test our new recipe `dev` stack, simply type in your cmd
 
 ```shell
 sugar dev
+
 ```
 
 At this point, your recipe `dev` stack has to run and throw an error because we don't have created our node process action file...
@@ -186,13 +192,14 @@ A node process file is a simply nodejs file that exports a function that will be
 
 ```js
 export default function (params) {
-return new Promise((resolve, reject) => {
-console.log('Hello world');
-console.log(params); // { something: 'cool' }
-// do something...
-resolve();
-});
+  return new Promise((resolve, reject) => {
+    console.log('Hello world');
+    console.log(params); // { something: 'cool' }
+    // do something...
+    resolve();
+  });
 }
+
 ```
 
 This function **MUST** return a `Promise`. Inside it, you can do whatever you need.
@@ -203,14 +210,15 @@ This function **MUST** return a `Promise`. Inside it, you can do whatever you ne
 import __SPromise from '@coffeekraken/s-promise';
 
 export default function (params) {
-return new __SPromise(({ resolve, reject, emit }) => {
-emit('log', {
-value: 'Hello world',
-});
-// do something...
-resolve();
-});
+  return new __SPromise(({ resolve, reject, emit }) => {
+    emit('log', {
+      value: 'Hello world',
+    });
+    // do something...
+    resolve();
+  });
 }
+
 ```
 
 

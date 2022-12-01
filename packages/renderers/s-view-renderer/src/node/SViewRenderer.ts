@@ -553,7 +553,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
 
             let renderPromise, result, error;
             renderPromise = rendererInstance.render(
-                finalViewRelPath,
+                finalViewRelPath ?? viewDotPath,
                 Object.assign({}, data),
                 this._sharedDataFilePath,
                 viewRendererSettings,

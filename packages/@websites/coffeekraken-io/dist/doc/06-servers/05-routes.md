@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -54,16 +59,17 @@ To register your own route(e), the easiest way is to register it through a modul
 
 ```js
 export default function myModule(express, settings, config) {
-// registering a new route to use the "styleguide" handler
-config.routes['/my/route'] = {
-handler: 'styleguide',
-};
-// you can as well register route with some "glob" patterns like so:
-config.routes['/something/*'] = {
-handler: 'view',
-};
-// etc...
+  // registering a new route to use the "styleguide" handler
+  config.routes['/my/route'] = {
+    handler: 'styleguide',
+  };
+  // you can as well register route with some "glob" patterns like so:
+  config.routes['/something/*'] = {
+    handler: 'view',
+  };
+  // etc...
 }
+
 ```
 
 

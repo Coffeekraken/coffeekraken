@@ -52,6 +52,7 @@ export default function __commonProgrammingFileExtensions(
         'tsx',
         'rs',
         'dart',
+        'twig',
     ]
         .filter((ext) => !finalSettings.exclude.includes(ext))
         .map((ext) => (finalSettings.dot ? `.${ext}` : ext));

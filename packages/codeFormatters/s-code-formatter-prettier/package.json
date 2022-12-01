@@ -15,7 +15,8 @@
         "@coffeekraken/s-sugar-config": "^2.0.0-alpha.20",
         "@coffeekraken/sugar": "^2.0.0-alpha.20",
         "@prettier/plugin-php": "^0.18.9",
-        "prettier": "^2.7.1"
+        "prettier": "^2.7.1",
+        "prettier-plugin-sh": "^0.12.8"
     },
     "main": "dist/pkg/cjs/node/exports.js",
     "module": "dist/pkg/esm/node/exports.js",

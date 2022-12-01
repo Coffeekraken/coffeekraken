@@ -16,9 +16,7 @@
             "@coffeekraken/s-code-formatter-prettier",
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color",
-            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config-adapter",
             "@coffeekraken/s-config-folder-adapter",
@@ -34,6 +32,7 @@
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
+            "@coffeekraken/s-dropzone-component",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -56,7 +55,6 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
@@ -101,235 +99,6 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-color-picker-component.config.themeUi.colorPicker.paddingInline": {
-                "id": "@coffeekraken.s-color-picker-component.config.themeUi.colorPicker.paddingInline",
-                "name": "paddingInline",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.paddingInline]",
-                "description": "Specify the default padding inline for filtrable input ui",
-                "namespace": "@coffeekraken.s-color-picker-component.config.themeUi.colorPicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-color-picker-component.config.themeUi.colorPicker.paddingBlock": {
-                "id": "@coffeekraken.s-color-picker-component.config.themeUi.colorPicker.paddingBlock",
-                "name": "paddingBlock",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.paddingBlock]",
-                "description": "Specify the default padding block for filtrable input ui",
-                "namespace": "@coffeekraken.s-color-picker-component.config.themeUi.colorPicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-color-picker-component.config.themeUi.colorPicker.borderRadius": {
-                "id": "@coffeekraken.s-color-picker-component.config.themeUi.colorPicker.borderRadius",
-                "name": "borderRadius",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.borderRadius]",
-                "description": "Specify the default border radius for filtrable input ui",
-                "namespace": "@coffeekraken.s-color-picker-component.config.themeUi.colorPicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-color-picker-component.config.themeUi.colorPicker.transition": {
-                "id": "@coffeekraken.s-color-picker-component.config.themeUi.colorPicker.transition",
-                "name": "transition",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.transition]",
-                "description": "Specify the default transition for filtrable input ui",
-                "namespace": "@coffeekraken.s-color-picker-component.config.themeUi.colorPicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-color-picker-component.config.themeUi.colorPicker.defaultStyle": {
-                "id": "@coffeekraken.s-color-picker-component.config.themeUi.colorPicker.defaultStyle",
-                "name": "defaultStyle",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Number"
-                        }
-                    ],
-                    "raw": "Number"
-                },
-                "default": "[theme.ui.default.defaultStyle]",
-                "description": "Specify the default style for your filtrable input ui",
-                "namespace": "@coffeekraken.s-color-picker-component.config.themeUi.colorPicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-color-picker-component.config.themeUi.colorPicker.defaultColor": {
-                "id": "@coffeekraken.s-color-picker-component.config.themeUi.colorPicker.defaultColor",
-                "name": "defaultColor",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.form.defaultColor]",
-                "description": "Specify the default style for your colorPicker ui",
-                "namespace": "@coffeekraken.s-color-picker-component.config.themeUi.colorPicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-color-picker-component.config.themeUi.colorPicker.depth": {
-                "id": "@coffeekraken.s-color-picker-component.config.themeUi.colorPicker.depth",
-                "name": "depth",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "100",
-                "description": "Specify the default depth for input items",
-                "namespace": "@coffeekraken.s-color-picker-component.config.themeUi.colorPicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-color-picker-component.config.themeUi.colorPicker.rhythmVertical": {
-                "id": "@coffeekraken.s-color-picker-component.config.themeUi.colorPicker.rhythmVertical",
-                "name": "rhythmVertical",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Object"
-                        }
-                    ],
-                    "raw": "Object"
-                },
-                "default": "[theme.ui.default.rhythmVertical]",
-                "description": "Specify the default vertical rhythm for your color picker ui",
-                "namespace": "@coffeekraken.s-color-picker-component.config.themeUi.colorPicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-color-picker-component.doc.README": {
-                "id": "@coffeekraken.s-color-picker-component.doc.README",
-                "name": "README",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Markdown"
-                        }
-                    ],
-                    "raw": "Markdown"
-                },
-                "menu": {
-                    "tree": [
-                        "Documentation"
-                    ],
-                    "slug": "/doc/readme"
-                },
-                "platform": [
-                    {
-                        "name": "md",
-                        "description": ""
-                    }
-                ],
-                "namespace": "@coffeekraken.s-color-picker-component.doc",
-                "status": "stable",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "README.md",
-                "extension": "md",
-                "relPath": "src/doc/README.md",
-                "children": {}
-            },
             "@coffeekraken.s-color-picker-component.js.SColorPickerComponent": {
                 "id": "@coffeekraken.s-color-picker-component.js.SColorPickerComponent",
                 "name": "SColorPickerComponent",
@@ -361,48 +130,23 @@
                 "example": [
                     {
                         "language": "html",
-                        "title": "Simple input",
-                        "code": "<label class=\"s-label:responsive\">\n     <span>Choose a color</span>\n     <s-color-picker value=\"#FABB03\" placeholder=\"Choose a color\" input></s-color-picker>\n</label>"
-                    },
-                    {
-                        "language": "html",
-                        "title": "With an input and a button",
-                        "code": "<label class=\"s-label:responsive\">\n     <span>Choose a color</span>\n     <s-color-picker value=\"#5101FF\" placeholder=\"Choose a color\" input button></s-color-picker>\n</label>"
-                    },
-                    {
-                        "language": "html",
                         "title": "With a different format (hsla)",
-                        "code": "<label class=\"s-label:responsive\">\n     <span>Choose a color</span>\n     <s-color-picker value=\"#5101FF\" format=\"hsla\" placeholder=\"Choose a color\" input button></s-color-picker>\n</label>"
+                        "code": "<label class=\"s-label:responsive\">\n     <span>Choose a color</span>\n     <s-color-picker value=\"#5101FF\" format=\"hsla\" placeholder=\"Choose a color\">\n         <input type=\"text\" name=\"color\" class=\"s-input\" placeholder=\"Choose a color\" />\n     </s-color-picker>\n</label>"
                     },
                     {
                         "language": "html",
                         "title": "Just a button",
-                        "code": "<label class=\"s-label:responsive\">\n     <span>Choose a color</span>\n     <s-color-picker value=\"#55FFFF\" button></s-color-picker>\n</label>"
-                    },
-                    {
-                        "language": "html",
-                        "title": "With a custom input",
-                        "code": "<label class=\"s-label:responsive\">\n     <span>Choose a color</span>\n     <s-color-picker>\n         <input type=\"text\" class=\"s-input\" placeholder=\"Choose a color\" value=\"#FABB03\" />\n     </s-color-picker>\n</label>"
-                    },
-                    {
-                        "language": "html",
-                        "title": "With a custom button",
-                        "code": "<label class=\"s-label:responsive\">\n     <span>Choose a color</span>\n     <s-color-picker>\n         <button class=\"s-btn s-color:error\">Choose a color</button>\n     </s-color-picker>\n</label>"
-                    },
-                    {
-                        "language": "html",
-                        "title": "With a custom input and button",
-                        "code": "<label class=\"s-label:responsive\">\n     <span>Choose a color</span>\n     <s-color-picker>\n         <div class=\"s-group\">\n             <input type=\"text\" class=\"s-input\" placeholder=\"Choose a color\" value=\"#FABB03\" />\n             <button class=\"s-btn s-color:error\">Choose a color</button>\n         </div>\n     </s-color-picker>\n</label>"
+                        "code": "<label class=\"s-label:responsive\">\n     <span>Choose a color</span>\n     <s-color-picker value=\"#55FFFF\">\n         <button class=\"s-btn\">Choose a color</button>\n     </s-color-picker>\n</label>"
                     },
                     {
                         "language": "html",
                         "title": "Disabled",
-                        "code": "<label class=\"s-label:responsive\">\n     <span>Choose a color</span>\n     <s-color-picker disabled input button></s-color-picker>\n</label>"
+                        "code": "<label class=\"s-label:responsive\">\n     <span>Choose a color</span>\n     <s-color-picker>\n         <input type=\"text\" disabled name=\"color\" class=\"s-input\" placeholder=\"Choose a color\" />\n     </s-color-picker>\n</label>"
                     },
                     {
                         "language": "html",
                         "title": "RTL Support",
-                        "code": "<label class=\"s-label:responsive\" dir=\"rtl\">\n     <span>Choose a color</span>\n     <s-color-picker value=\"#FABB03\" placeholder=\"Choose a color\" input button dir=\"rtl\"></s-color-picker>\n</label>"
+                        "code": "<label class=\"s-label:responsive\" dir=\"rtl\">\n     <span>Choose a color</span>\n     <s-color-picker value=\"#FABB03\" placeholder=\"Choose a color\" dir=\"rtl\">\n         <input type=\"text\" name=\"color\" class=\"s-input\" placeholder=\"Choose a color\" />\n     </s-color-picker>\n</label>"
                     }
                 ],
                 "interface": {
@@ -519,31 +263,6 @@
                                 "raw": "String"
                             },
                             "default": "Select a color"
-                        },
-                        "input": {
-                            "description": "Specify if you dont want an automatically injected text input when you dont provide yours",
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "Boolean"
-                                    }
-                                ],
-                                "raw": "Boolean"
-                            },
-                            "default": false
-                        },
-                        "button": {
-                            "description": "Specify if you want to display the button or not",
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "Boolean"
-                                    }
-                                ],
-                                "raw": "Boolean"
-                            },
-                            "default": false,
-                            "physical": true
                         },
                         "backdrop": {
                             "description": "Specify if you want the \".s-backdrop\" element or not",
@@ -826,31 +545,6 @@
                                 "raw": "String"
                             },
                             "default": "Select a color"
-                        },
-                        "input": {
-                            "description": "Specify if you dont want an automatically injected text input when you dont provide yours",
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "Boolean"
-                                    }
-                                ],
-                                "raw": "Boolean"
-                            },
-                            "default": false
-                        },
-                        "button": {
-                            "description": "Specify if you want to display the button or not",
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "Boolean"
-                                    }
-                                ],
-                                "raw": "Boolean"
-                            },
-                            "default": false,
-                            "physical": true
                         },
                         "backdrop": {
                             "description": "Specify if you want the \".s-backdrop\" element or not",

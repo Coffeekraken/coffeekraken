@@ -298,6 +298,18 @@ export default class SStdio extends __SClass implements ISStdio {
             ),
         );
 
+        // proxy console.log to filter empty logs
+        const _nativeLog = console.log;
+        console.log = (...args) => {
+            args = args.filter((log) => {
+                if (typeof log === 'string' && log.trim() === '') {
+                    return false;
+                }
+                return true;
+            });
+            _nativeLog(...args);
+        };
+
         // save id
         this._id = id;
 

@@ -1,0 +1,57 @@
+{% extends 'sugar/readme/layouts/main/main.twig' %}
+{% block body %}
+
+<!--
+/**
+ * @name            README
+ * @namespace       doc
+ * @type            Markdown
+ * @platform        md
+ * @status          stable
+ * @menu            Documentation           /doc/readme
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+-->
+
+## SColor
+
+This `SColor` class allows you to manipulate and convert colors with ease. Here's some of the features supported:
+
+-   Instanciate a color with any of these formats: **hex**, **hsl(a)** and **rgb(a)**
+-   Get color values like **r**, **g**, **b**, **a**, **h**, **s** and **l**
+-   Convert your color from and to any of these formats listed above.
+-   Get back your color in any format using the `toRgbaString`, `toHexString`, etc...
+-   Manipulate your color using these methods:
+    -   `apply`: Apply some modifiers like "--darken 30 --alpha 0.2"
+    -   `desaturate`: Desaturate your color by **x** [0,100]
+    -   `saturate`: Saturate your color by **x** [0,100]
+    -   `greyscale`: Transform your color to greyscale
+    -   `spin`: Update the **hue** by **x** [-100,100]
+    -   `darken`: Darken your color by **x** [0,100]
+    -   `lighten`: Lighten your color by **x** [0,100]
+    -   `invert`: Invert your color
+
+## Usage
+
+Here's how to use our implementation:
+
+```js
+import __SConductor from '@coffeekraken/s-color';
+const color = new __SColor('#ff0000').darken(20).invert();
+console.log(color.toHexString());
+console.log(color.toHslString());
+```
+
+## API
+
+For more information about the API of this class, please check [our API documentation](/api/@coffeekraken.s-color.shared.SColor)
+
+#### Settings
+
+{% include 'sugar/interface/fromDocmap/fromDocmap.twig' with {
+    docmapItem: docmap.map['@coffeekraken.s-color.shared.interface.SColorSettingsInterface']
+} only %}
+
+{% endblock %}

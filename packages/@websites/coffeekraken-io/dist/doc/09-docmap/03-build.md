@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -42,6 +47,7 @@ To build your docmap, the easiest wait is to use the `sugar` CLI like so:
 
 ```shell
 sugar docmap.build
+
 ```
 
 > Make sure to launch this command in your project root directory.
@@ -55,31 +61,32 @@ As you may doubt, the builder will not take a look inside the `node_modules` dir
 
 
 - `*`
-
-- `src/!(css)/*{0,4}/*.+(txt|htm|html|md|json|csv|rss|xhtml|asp|c|cgi|cfm|pl|class|cpp|cs|h|java|php|py|sh|swift|vb|js|jsp|jsx|css|ts|tsx|rs|dart)`
-
+  
+- `src/!(css)/*{0,4}/*.+(txt|htm|html|md|json|csv|rss|xhtml|asp|c|cgi|cfm|pl|class|cpp|cs|h|java|php|py|sh|swift|vb|js|jsp|jsx|css|ts|tsx|rs|dart|twig)`
+  
 - `dist/+(css)/*`
-
+  
 Here's are the excluded folders:
 
 
 - `**/__tests__/**/*`
-
+  
 - `**/__tests__.wip/**/*`
-
+  
 - `**/__wip__/**/*`
-
+  
 If you need to update or add some globs to search in, simply create a file under `.sugar/docmap.config.ts` and fill it like so:
 
 ```js
 export default function (env, config) {
-if (env.platform !== 'node') return {};
-return {
-build: {
-globs: [...(config.docmap.build.globs ?? []), 'something/**/*'],
-},
-};
+  if (env.platform !== 'node') return {};
+  return {
+    build: {
+      globs: [...(config.docmap.build.globs ?? []), 'something/**/*'],
+    },
+  };
 }
+
 ```
 
 ## Output

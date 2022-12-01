@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -47,14 +52,15 @@ Coffeekraken uses simple routing strategy.
 
 ```js
 export default {
-views: [
-{
-path: 'hello.hello',
-},
-],
-// works too:
-// views: ['hello.hello']
+  views: [
+    {
+      path: 'hello.hello',
+    },
+  ],
+  // works too:
+  // views: ['hello.hello']
 };
+
 ```
 
 - Create your view `hello.blade.php` (twig is also supported) unto the `src/views/hello` folder
@@ -68,15 +74,16 @@ Obviously, you can specify a custom slug for your page. Here's how:
 
 ```js
 export default {
-slugs: ['/my-cool-page'],
-views: [
-{
-path: 'hello.hello',
-},
-],
-// works too:
-// views: ['hello.hello']
+  slugs: ['/my-cool-page'],
+  views: [
+    {
+      path: 'hello.hello',
+    },
+  ],
+  // works too:
+  // views: ['hello.hello']
 };
+
 ```
 
 ## Views

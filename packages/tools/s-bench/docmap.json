@@ -16,9 +16,7 @@
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
-            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config-adapter",
             "@coffeekraken/s-config-folder-adapter",
@@ -50,6 +48,7 @@
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-highlight-feature",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
@@ -57,8 +56,8 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
+            "@coffeekraken/s-pack-essentials",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
@@ -151,103 +150,6 @@
                 "relPath": "src/config/bench.config.ts",
                 "children": {}
             },
-            "@coffeekraken.s-bench.doc.README": {
-                "id": "@coffeekraken.s-bench.doc.README",
-                "name": "README",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Markdown"
-                        }
-                    ],
-                    "raw": "Markdown"
-                },
-                "menu": {
-                    "tree": [
-                        "Documentation"
-                    ],
-                    "slug": "/doc/readme"
-                },
-                "platform": [
-                    {
-                        "name": "md",
-                        "description": ""
-                    }
-                ],
-                "namespace": "@coffeekraken.s-bench.doc",
-                "status": "stable",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "README.md",
-                "extension": "md",
-                "relPath": "src/doc/README.md",
-                "children": {}
-            },
-            "@coffeekraken.s-bench.node.SBench": {
-                "id": "@coffeekraken.s-bench.node.SBench",
-                "name": "SBench",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Class"
-                        }
-                    ],
-                    "raw": "Class"
-                },
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    },
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This class allows you to perform some simple benchmarking actions\nlike dividing a process into multiple \"steps\" and track the timing\nbetween these, etc...",
-                "namespace": "@coffeekraken.s-bench.node",
-                "status": "alpha",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import SBench from '@coffeekraken/s-bench';\n\nSBench.start('myCoolProcess');\n// some code...\nSBench.step('myCoolProcess', 'Before compilation');\n// compilation code...\nSBench.step('myCoolProcess', 'After compilation');\nSBench.end('myCoolProcess');"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "SBench.ts",
-                "extension": "ts",
-                "relPath": "src/node/SBench.ts",
-                "children": {
-                    "constructor": {
-                        "id": "sbb1735b97f3fba675df35746468b8f603c66eda322c124ca0dde9e338924e3e9",
-                        "name": "constructor",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ],
-                            "raw": "Function"
-                        },
-                        "description": "Constructor",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    }
-                }
-            },
             "@coffeekraken.s-bench.shared.SBench": {
                 "id": "@coffeekraken.s-bench.shared.SBench",
                 "name": "SBench",
@@ -275,7 +177,7 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import SBench from '@coffeekraken/s-bench';\n\nSBench.start('myCoolProcess');\n// some code...\nSBench.step('myCoolProcess', 'Before compilation');\n// compilation code...\nSBench.step('myCoolProcess', 'After compilation');\nSBench.end('myCoolProcess');"
+                        "code": "import __SBench from '@coffeekraken/s-bench';\nconst bench = new __SBench('myCoolProcess');\n// something...\nbench.step('afterSomething');\n// something else...\nbench.end().log();"
                     }
                 ],
                 "since": "2.0.0",

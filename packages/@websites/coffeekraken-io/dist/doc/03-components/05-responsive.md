@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -49,24 +54,23 @@ Use with the `themeMedia.queries` configuration:
 ```html
 <!-- using the <responsive> special tag -->
 <my-cool-component title="hello">
-<responsive media="tablet" title="world"></responsive>
+  <responsive media="tablet" title="world"></responsive>
 </my-cool-component>
 <!-- passing a json with the "responsive" attribute -->
 <my-cool-component
-title="hello"
-responsive='{"tablet":{"title":"world"}}'
+  title="hello"
+  responsive='{"tablet":{"title":"world"}}'
 ></my-cool-component>
+
 ```
 
 You can also specify directly a media query like this:
 
 ```html
 <my-cool-component title="hello">
-<responsive
-media="screen and (max-width:1280px)"
-title="world"
-></responsive>
+  <responsive media="screen and (max-width:1280px)" title="world"></responsive>
 </my-cool-component>
+
 ```
 
 

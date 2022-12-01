@@ -1,12 +1,14 @@
 import __SClass from '@coffeekraken/s-class';
 import __SCodeFormatterPrettier from '@coffeekraken/s-code-formatter-prettier';
 import __SDuration from '@coffeekraken/s-duration';
+import __SFile from '@coffeekraken/s-file';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import { __unique } from '@coffeekraken/sugar/array';
-import { __getFiles } from '@coffeekraken/sugar/fs';
+import { __getFiles, __writeFileSync } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import { __packageRootDir } from '@coffeekraken/sugar/path';
+import { __packageRootDir, __systemTmpDir } from '@coffeekraken/sugar/path';
+import { __uniqid } from '@coffeekraken/sugar/string';
 import __fs from 'fs';
 import __path from 'path';
 import __SCodeFormatterFormatParamsInterface from './interface/SCodeFormatterFormatParamsInterface';
@@ -45,7 +47,7 @@ export interface ISCodeFormatterFormatParams {
     formatInitial: boolean;
 }
 
-export interface ISCodeFormatterFormatResult {}
+export type ISCodeFormatterFormatResult = []:__SFile;
 
 export interface ISCodeFormatterFormatterMetas {
     filePath: string;
@@ -59,6 +61,7 @@ export interface ISCodeFormatterFormatterFormatResult {
 export interface ISCodeFormatterFormatter {
     id: string;
     extensions: string[];
+    languagesToExtensionsMap?: Record<string, string>;
     format(
         code: string,
         metas: ISCodeFormatterFormatterMetas,
@@ -149,7 +152,7 @@ class SCodeFormatter extends __SClass {
             if (
                 (<ISCodeFormatterFormatter>formatter).extensions.includes(
                     extension,
-                )
+                ) || (<ISCodeFormatterFormatter>formatter).languagesToExtensionsMap?.[extension]
             ) {
                 return <ISCodeFormatterFormatter>formatter;
             }
@@ -178,6 +181,44 @@ class SCodeFormatter extends __SClass {
     }
 
     /**
+     * @name            formatInline
+     * @type            Function
+     * @async
+     *
+     * This method allows you to format a passed string
+     *
+     * @param           {String}                code            The code to format
+     * @param           {String}                language       The language of the passed code
+     * @param           {Partial<ISCodeFormatterSettings>}                        [settings={}]       Specify an object of settings to configure your format process
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    formatInline(
+        code: string,
+        language: string,
+        settings?: Partial<ISCodeFormatterSettings>,
+    ): Promise<String> {
+        return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+            // write the file in tmp folder
+            const tmpFilePath = `${__systemTmpDir()}/s-code-formatter/${__uniqid()}.${language}`;
+            __writeFileSync(tmpFilePath, code);
+
+            // format the code
+            const formatResult = await 
+                this.format({
+                    glob: __path.basename(tmpFilePath),
+                    inDir: __path.dirname(tmpFilePath),
+                    watch: false,
+                }, settings);
+
+            // resolve with formatted code
+            // @ts-ignore
+            resolve(formatResult[0].content);
+        });
+    }
+
+    /**
      * @name            format
      * @type            Function
      * @async
@@ -203,6 +244,8 @@ class SCodeFormatter extends __SClass {
                 );
                 const finalParams: ISCodeFormatterFormatParams =
                     __SCodeFormatterFormatParamsInterface.apply(params);
+
+                const formattedFiles = [];
 
                 let finalGlob = finalParams.glob;
 
@@ -252,7 +295,9 @@ class SCodeFormatter extends __SClass {
                 });
 
                 // handle no watch
-                filesPromise.then(resolve);
+                filesPromise.then(() => {
+                    resolve(formattedFiles);
+                });
 
                 // save all the file paths that has just been savec by the formatter
                 // to avoid process it over and over...
@@ -261,17 +306,26 @@ class SCodeFormatter extends __SClass {
                 // listen for files change and add
                 filesPromise.on(
                     'add,change',
-                    async ({ file, resolve: resolveFile }) => {
+                    async ({ file: filePath, resolve: resolveFile }) => {
                         // avoid to process in loop the same file saved over and over
-                        const savedFileIdx = savedStack.indexOf(file);
+                        const savedFileIdx = savedStack.indexOf(filePath);
                         if (savedFileIdx !== -1) {
                             return;
                         }
 
-                        const relFilePath = __path.relative(
+                        // get the file extension
+                        let extension = __path
+                            .extname(filePath)
+                            .replace(/^\./, '');
+
+                        // get the relative to the package root file path 
+                        let relFilePath = __path.relative(
                             __packageRootDir(),
-                            file,
+                            filePath,
                         );
+
+                        // get the formatter for this file
+                        const formatter = SCodeFormatter.getFormatterForExtension(extension);
 
                         const duration = new __SDuration();
 
@@ -279,24 +333,24 @@ class SCodeFormatter extends __SClass {
 
                         // grab the file content
                         try {
-                            code = __fs.readFileSync(file, 'utf-8').toString();
+                            code = __fs
+                                .readFileSync(filePath, 'utf-8')
+                                .toString();
                         } catch (e) {
                             return resolveFile();
                         }
 
-                        // get the file extension
-                        const extension = __path
-                            .extname(file)
-                            .replace(/^\./, '');
                         // get the appropriate formatter for this extension
-                        const formatter =
-                            SCodeFormatter.getFormatterForExtension(extension);
                         if (!formatter) {
                             emit('log', {
                                 type: __SLog.TYPE_WARN,
                                 value: `<yellow>[format]</yellow> No formatter registered for the "<magenta>.${extension}</magenta>" files`,
                             });
-                            // resole file
+
+                            // add in stach
+                            formattedFiles.push(__SFile.new(filePath));
+
+                            // resolve file
                             resolveFile();
                         } else {
                             emit('log', {
@@ -304,19 +358,20 @@ class SCodeFormatter extends __SClass {
                                 value: `<yellow>[format]</yellow> Formatting file "<cyan>${relFilePath}</cyan>"`,
                             });
                             try {
+
                                 // apply the formatter on the file content
                                 const result = await formatter.format(code, {
-                                    filePath: file,
+                                    filePath: filePath,
                                     extension,
                                 });
 
                                 // avoid process the same file more than 1x by second
                                 // this is to avoid issues with multiple formatt process that might
                                 // save each in their corner and enter in a loop of formatting...
-                                savedStack.push(file);
+                                savedStack.push(filePath);
                                 setTimeout(() => {
                                     const savedFileIdx =
-                                        savedStack.indexOf(file);
+                                        savedStack.indexOf(filePath);
                                     if (savedFileIdx !== -1) {
                                         // remove the file for next process
                                         savedStack.splice(savedFileIdx, 1);
@@ -324,7 +379,14 @@ class SCodeFormatter extends __SClass {
                                 }, finalSettings.timeoutBetweenSameFileProcess);
 
                                 // write file back with formatted code
-                                __fs.writeFileSync(file, result.code, 'utf-8');
+                                __fs.writeFileSync(
+                                    filePath,
+                                    result.code,
+                                    'utf-8',
+                                );
+
+                                // add in stach
+                                formattedFiles.push(__SFile.new(filePath));
 
                                 emit('log', {
                                     clear: 1,
@@ -334,6 +396,7 @@ class SCodeFormatter extends __SClass {
                                     }</yellow>`,
                                 });
                             } catch (e) {
+                                console.error(e);
                                 emit('log', {
                                     type: __SLog.TYPE_ERROR,
                                     value: e.toString(),

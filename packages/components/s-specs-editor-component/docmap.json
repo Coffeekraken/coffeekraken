@@ -17,9 +17,7 @@
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
-            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config-adapter",
             "@coffeekraken/s-config-folder-adapter",
@@ -58,7 +56,6 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
@@ -102,151 +99,6 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor.borderRadius": {
-                "id": "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor.borderRadius",
-                "name": "borderRadius",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.borderRadius]",
-                "description": "Specify the default border radius for button ui",
-                "namespace": "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor.defaultColor": {
-                "id": "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor.defaultColor",
-                "name": "defaultColor",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.defaultColor]",
-                "description": "Specify the default color for datetime picker ui",
-                "namespace": "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor.defaultStyle": {
-                "id": "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor.defaultStyle",
-                "name": "defaultStyle",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Number"
-                        }
-                    ],
-                    "raw": "Number"
-                },
-                "default": "[theme.ui.default.defaultStyle]",
-                "description": "Specify the default style for your filtrable input ui",
-                "namespace": "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor.transition": {
-                "id": "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor.transition",
-                "name": "transition",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "all .5s ease-in-out",
-                "description": "Specify the default transition for button ui",
-                "namespace": "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor.depth": {
-                "id": "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor.depth",
-                "name": "depth",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Number"
-                        }
-                    ],
-                    "raw": "Number"
-                },
-                "default": "[theme.ui.default.depth]",
-                "description": "Specify the default depth for your button ui",
-                "namespace": "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor.rhythmVertical": {
-                "id": "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor.rhythmVertical",
-                "name": "rhythmVertical",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Object"
-                        }
-                    ],
-                    "raw": "Object"
-                },
-                "default": "[theme.ui.default.rhythmVertical]",
-                "description": "Specify the default vertical rhythm for your datetime picker ui",
-                "namespace": "@coffeekraken.s-specs-editor-component.config.themeUi.specsEditor",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts",
-                "children": {}
-            },
             "@coffeekraken.s-specs-editor-component.js.interface.SSpecsEditorComponentInterface": {
                 "id": "@coffeekraken.s-specs-editor-component.js.interface.SSpecsEditorComponentInterface",
                 "name": "SSpecsEditorComponentInterface",

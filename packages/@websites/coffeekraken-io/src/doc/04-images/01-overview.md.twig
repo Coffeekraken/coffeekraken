@@ -47,7 +47,7 @@ Don't worry, if our default configuration does not suits your needs, you can as 
 To do so, simply create a file `.sugar/imageBuilder.config.js` and override the settings you want.
 
 {% include 'sugar/config/fromDocmap/fromDocmap.twig' with {
-  configs: filter(docmap.map, '^@coffeekraken.s-images-builder.config.imagesBuilder')
+  docmapItems: filter(docmap.map, '^@coffeekraken.s-images-builder.config.imagesBuilder')
 } only %}
 
 {% endblock %}

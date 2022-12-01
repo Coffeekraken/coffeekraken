@@ -19,6 +19,7 @@ export default function (api) {
     return __deepMerge(
         {
             singleQuote: true,
+            plugins: ['prettier-plugin-sh'],
         },
         api.config.prettier ?? {},
     );

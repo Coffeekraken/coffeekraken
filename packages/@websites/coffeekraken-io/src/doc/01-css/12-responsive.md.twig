@@ -41,7 +41,7 @@ This(ese) "breakpoints" comes from your theme configuration as all other setting
 `themeMedia.config.ts`
 
 ```js
-export default {{ media|json_encode() }};
+export default {{ media|json_encode()|raw }};
 ```
 
 These settings gives us a "mobile first" approach and 5 breakpoints that are `mobile`, `tablet`, `desktop`, `wide` and `dwarf`. The role of the `defaultAction` property will be more obvious right bellow.

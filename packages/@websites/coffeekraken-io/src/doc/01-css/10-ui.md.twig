@@ -32,7 +32,7 @@ All of these UI elements are customizable using plain CSS as well but the main p
 2. Override the theme UI configurations like so:
 
 ```js
-{
+export default {
     button: {
         defaultColor: 'accent',
         defaultStyle: 'outline',
@@ -56,7 +56,7 @@ To see exactly what are these properties, check out the [configuration explorer]
 In order to keep all of these configurations clean and easy to override, some of theme uses the [SConfig reference capability](/doc/config/references) to specify another value to use in your configuration. This allows you to have a central value for all the `defaultColor` used in each UI elements config like so:
 
 ```js
-{
+export default {
     default: {
         defaultColor: 'accent'
         // etc...

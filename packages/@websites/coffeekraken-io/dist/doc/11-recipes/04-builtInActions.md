@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -42,59 +47,59 @@ Some common actions are already built-in so you can reference them inside your r
 
 
 -   `copy`: Copy file/directory
-
+    
 -   `rename`: Rename project
-
+    
 -   `initNpm`: Init npm package
-
+    
 -   `addSugarJson`: Adding sugar.json file
-
+    
 -   `addSugar`: Adding sugar
-
+    
 -   `addNvmrc`: Adding .nvmrc file
-
+    
 -   `addFrontspecJson`: Adding frontspec.json file
-
+    
 -   `addManifestJson`: Adding manifest.json file
-
+    
 -   `addFavicon`: Adding source favicon file
-
+    
 -   `addReadme`: Adding source README.md file
-
+    
 -   `addDefaultPages`: Adding default pages/views file
-
+    
 -   `addDefaultScripts`: Adding default script files
-
+    
 -   `addDefaultPackageJson`: Adding default package.json file
-
+    
 -   `addSugarPostcss`: Adding sugar postcss plugin
-
+    
 -   `installDependencies`: Install dependencies
-
+    
 -   `frontendServer`: Frontend server
-
+    
 -   `corsProxy`: Cors Proxy
-
+    
 -   `postcssBuild`: PostCSS build action
-
+    
 -   `typescriptBuild`: Typescript builder build action
-
+    
 -   `imagesBuild`: Images build action
-
+    
 -   `vite`: Vite development stack
-
+    
 -   `viteBuild`: Vite build stack
-
+    
 -   `docmapBuild`: Docmap build action
-
+    
 -   `sitemapBuild`: Sitemap build action
-
+    
 -   `faviconBuild`: Docmap build action
-
+    
 -   `markdownBuild`: Docmap build action
-
+    
 -   `format`: SCodeFormatter format action
-
+    
 
 <!-- license -->
 ### License

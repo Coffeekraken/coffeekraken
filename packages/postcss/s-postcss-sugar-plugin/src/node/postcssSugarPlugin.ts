@@ -3,14 +3,14 @@ import __SBench from '@coffeekraken/s-bench';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 import __STheme from '@coffeekraken/s-theme';
-import { __sha256 } from '@coffeekraken/sugar/crypto';
+import { __base64 } from '@coffeekraken/sugar/crypto';
 import {
     __dirname,
     __folderHash,
     __readJsonSync,
     __writeFileSync,
 } from '@coffeekraken/sugar/fs';
-import { __deepMerge } from '@coffeekraken/sugar/object';
+import { __deepMerge, __objectHash } from '@coffeekraken/sugar/object';
 import { __packageCacheDir, __packageRootDir } from '@coffeekraken/sugar/path';
 import { __unquote } from '@coffeekraken/sugar/string';
 import { __replaceTokens } from '@coffeekraken/sugar/token';
@@ -25,11 +25,8 @@ import __CssVars from './CssVars';
 
 const mixinsStack = {},
     functionsStack = {};
-let pluginHash = __folderHash(__path.resolve(__dirname(), '../../..'), {
-    include: {
-        ctime: true,
-    },
-});
+const externalPackagesHashes: string[] = [];
+let packageHash = __folderHash(__path.dirname(__dirname()));
 let loadedPromise,
     compileFileTimeout,
     cacheBustedWarningDisplayed = false;
@@ -105,7 +102,9 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
         settings,
     );
 
-    let themeHash, cacheDir, fromCache, bench;
+    const cacheHashFilePath = `${settings.cacheDir}/cacheHash.txt`;
+
+    let themeHash, cacheDir, cacheHash, settingsHash, fromCache, bench;
 
     if (_configLoaded) {
         updateConfig();
@@ -130,6 +129,9 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
         if (settings.cache === undefined && settings.target !== 'vite') {
             settings.cache = false;
         }
+
+        // set the settings hash
+        settingsHash = __objectHash(settings);
 
         // set theme hash
         themeHash = __STheme.hash();
@@ -226,15 +228,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
         folderPath = __replaceTokens(folderPath);
 
         // update plugin hash with these new folders hash
-        const hashes = [
-            pluginHash,
-            __folderHash(folderPath, {
-                include: {
-                    ctime: true,
-                },
-            }),
-        ];
-        pluginHash = __sha256.encrypt(hashes.join('-'));
+        externalPackagesHashes.push(__folderHash(folderPath));
 
         const paths = __glob.sync(`${folderPath}/**/*.js`, {
             // cwd: __dirname(),
@@ -389,7 +383,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                     atRule,
                     settings,
                     cacheDir,
-                    pluginHash,
+                    packageHash,
                     themeHash,
                     themeValueProxy,
                 });
@@ -480,20 +474,19 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
     }
 
     function isCachedPluginHashValid(): boolean {
-        const pluginHashFilePath = `${settings.cacheDir}/pluginHash.txt`;
-
         // check plugin hash
-        if (__fs.existsSync(pluginHashFilePath)) {
+        if (__fs.existsSync(cacheHashFilePath)) {
             const cachedPluginHash = __fs
-                .readFileSync(pluginHashFilePath)
+                .readFileSync(cacheHashFilePath)
                 .toString();
-            if (cachedPluginHash !== pluginHash) {
+            if (cachedPluginHash !== cacheHash) {
                 return false;
             }
         } else {
             // no plugin hash cached so cache invalid
             return false;
         }
+        return true;
     }
 
     function isCacheValid(filePath: string): boolean {
@@ -600,6 +593,11 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             );
             await _load();
 
+            // calculate the final hash depending on the
+            // packageHash, settingsHash and themeHash
+            cacheHash = `${packageHash}-${settingsHash}-${themeHash}-${__base64.encrypt(
+                externalPackagesHashes.join('-'),
+            )}`;
             clearTimeout(compileFileTimeout);
             compileFileTimeout = setTimeout(() => {
                 console.log(
@@ -640,7 +638,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                     !cacheBustedWarningDisplayed
                 ) {
                     console.log(
-                        `<magenta>[cache]</magenta> Cache invalidated by plugin update. First compilation may take some times...`,
+                        `<magenta>[cache]</magenta> Cache invalidated by "<yellow>@coffeekraken/s-postcss-sugar-plugin</yellow>" package update. First compilation may take some times...`,
                     );
                     cacheBustedWarningDisplayed = true;
                 }
@@ -659,8 +657,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                 fromCache = false; // reset the variable for next compile
 
                 // update the cached plugin hash
-                const pluginHashFilePath = `${settings.cacheDir}/pluginHash.txt`;
-                __writeFileSync(pluginHashFilePath, pluginHash);
+                __writeFileSync(cacheHashFilePath, cacheHash);
             }
 
             for (let i = 0; i < postProcessorsRegisteredFn.length; i++) {
@@ -680,7 +677,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                 );
                 await processorFn({
                     CssVars: __CssVars,
-                    pluginHash,
+                    packageHash,
                     themeHash,
                     cacheDir,
                     getRoot: __getRoot,
@@ -757,7 +754,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                     findUp,
                     nodesToString,
                     CssVars: __CssVars,
-                    pluginHash,
+                    packageHash,
                     themeHash,
                     cacheDir,
                     getRoot: __getRoot,

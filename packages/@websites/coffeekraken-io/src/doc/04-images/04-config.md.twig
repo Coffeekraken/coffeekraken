@@ -18,7 +18,7 @@
 # Images configurations
 
 {% include 'sugar/config/fromDocmap/fromDocmap.twig' with {
-  configs: filter(docmap.map, '^@coffeekraken.s-images-builder.config.imagesBuilder')
+  docmapItems: filter(docmap.map, '^@coffeekraken.s-images-builder.config.imagesBuilder')
 } only %}
 
 {% endblock %}

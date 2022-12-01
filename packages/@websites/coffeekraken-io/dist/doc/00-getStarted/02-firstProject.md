@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -42,6 +47,7 @@ To create a new project, simply enter this command:
 
 ```shell
 sugar new
+
 ```
 
 This will launch a quick and easy step by step creation process that will ask you for the project name, the [recipe](#recipes) to use, etc...
@@ -52,6 +58,7 @@ Once this process is done, you can start working on your project. If you choose 
 
 ```shell
 sugar dev
+
 ```
 
 ## Start developing
@@ -60,6 +67,7 @@ In order to start developing your newly created project, you just need to enter 
 
 ```shell
 sugar dev
+
 ```
 
 That will launch some processes like:
@@ -82,6 +90,7 @@ Each recipes comes with full production ready build stack. To build your project
 
 ```shell
 sugar build
+
 ```
 
 

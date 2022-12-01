@@ -1,5 +1,0 @@
-import __defaultPropsPlugin from './plugins/defaultPropsPlugin';
-// import __sugarPlugins from './plugins/sugarPlugins';
-import __defaultSugarOptions from './defaultSugarOptions';
-export { __defaultSugarOptions, __defaultPropsPlugin };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sb0JBQW9CLE1BQU0sOEJBQThCLENBQUM7QUFDaEUsdURBQXVEO0FBQ3ZELE9BQU8scUJBQXFCLE1BQU0sdUJBQXVCLENBQUM7QUFFMUQsT0FBTyxFQUFFLHFCQUFxQixFQUFFLG9CQUFvQixFQUFFLENBQUMifQ==

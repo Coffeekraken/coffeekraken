@@ -28,14 +28,12 @@ import __nodeIpc from 'node-ipc';
  * @feature         Add "steps" into your processes and get back a performance report from that
  *
  * @example         js
- * import SBench from '@coffeekraken/s-bench';
- *
- * SBench.start('myCoolProcess');
- * // some code...
- * SBench.step('myCoolProcess', 'Before compilation');
- * // compilation code...
- * SBench.step('myCoolProcess', 'After compilation');
- * SBench.end('myCoolProcess');
+ * import __SBench from '@coffeekraken/s-bench';
+ * const bench = new __SBench('myCoolProcess');
+ * // something...
+ * bench.step('afterSomething');
+ * // something else...
+ * bench.end().log();
  *
  * @since       2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -51,6 +56,7 @@ You can easily launch your image processing using the sugar CLI like so:
 
 ```shell
 sugar images.build
+
 ```
 
 ## Under the hood
@@ -69,15 +75,18 @@ You can as well make use of our `@coffeekraken/s-images-builder` package that ex
 
 ```shell
 npm i @coffeekraken/s-images-builder --save-dev
+
 ```
 
 ```js
-{
-{
-get(docmap, '@coffeekraken.s-images-builder.node.SImagesBuilder').example[0]
-.code;
-}
-}
+import SImagesBuilder from '@coffeekraken/s-image-builder';
+const builder = new SImagesBuilder({
+  imagesBuilder: {
+    // some settings...
+  },
+});
+await builder.build('src /.jpg');
+
 ```
 
 

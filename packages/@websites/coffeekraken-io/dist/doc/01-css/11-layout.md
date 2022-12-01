@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -85,17 +90,19 @@ First possibility to apply layouts using this technique is to use the `@sugar.la
 
 ```css
 .my-layout {
-@sugar.layout ('1 2 _ 3 4');
+  @sugar.layout ('1 2 _ 3 4');
 }
+
 ```
 
 ```html
 <div class="my-layout">
-<div>Area 1</div>
-<div>Area 2</div>
-<div>Area 3</div>
-<div>Area 4</div>
+  <div>Area 1</div>
+  <div>Area 2</div>
+  <div>Area 3</div>
+  <div>Area 4</div>
 </div>
+
 ```
 
 > Note that the order of `div` areas in your html is just linked to area "id" like `1`, `2`, etc... This mean that you can have the first area in the html that is displayed at the end, etc...
@@ -108,90 +115,91 @@ Here's the built-in layout classes:
 
 
 -   **s-layout:1**
-
+    
 -   **s-layout:12**
-
+    
 -   **s-layout:21**
-
+    
 -   **s-layout:112**
-
+    
 -   **s-layout:122**
-
+    
 -   **s-layout:123**
-
+    
 -   **s-layout:211**
-
+    
 -   **s-layout:221**
-
+    
 -   **s-layout:321**
-
+    
 -   **s-layout:1112**
-
+    
 -   **s-layout:1222**
-
+    
 -   **s-layout:1234**
-
+    
 -   **s-layout:2221**
-
+    
 -   **s-layout:11112**
-
+    
 -   **s-layout:12222**
-
+    
 -   **s-layout:12345**
-
+    
 -   **s-layout:22221**
-
+    
 -   **s-layout:111112**
-
+    
 -   **s-layout:122222**
-
+    
 -   **s-layout:123456**
-
+    
 -   **s-layout:1_2**
-
+    
 -   **s-layout:2_1**
-
+    
 -   **s-layout:12_33**
-
+    
 -   **s-layout:1_23**
-
+    
 -   **s-layout:1_2_3**
-
+    
 -   **s-layout:32_1**
-
+    
 -   **s-layout:3_21**
-
+    
 -   **s-layout:12_34**
-
+    
 -   **s-layout:123_4**
-
+    
 -   **s-layout:1_234**
-
+    
 -   **s-layout:1_2_3_4**
-
+    
 -   **s-layout:123_45**
-
+    
 -   **s-layout:12_345**
-
+    
 -   **s-layout:1_2345**
-
+    
 -   **s-layout:1234_5**
-
+    
 -   **s-layout:1_2_3_4_5**
-
+    
 These classes are generated depending on your `theme.layout.layout` configuration.
 
 ```js
-{
-layout: {
-layout: {
-12: '1 2',
-123: '1 2 3',
-112: '1 1 2',
-// etc...
-}
-}
-}
+export default {
+  layout: {
+    layout: {
+      12: '1 2',
+      123: '1 2 3',
+      112: '1 1 2',
+      // etc...
+    },
+  },
+};
+
 ```
 
 > Note that the `themeLayout.config.ts` configuration file provide already some generic layouts. To check more on that, take a look at our [configuration explorer](/doc/config/explorer)

@@ -17,9 +17,7 @@
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
-            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config-adapter",
             "@coffeekraken/s-config-folder-adapter",
@@ -57,7 +55,6 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
@@ -102,163 +99,6 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-google-map-component.config.themeUi.googleMap.borderRadius": {
-                "id": "@coffeekraken.s-google-map-component.config.themeUi.googleMap.borderRadius",
-                "name": "borderRadius",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.borderRadius]",
-                "description": "Specify the default borderRadius for google map",
-                "namespace": "@coffeekraken.s-google-map-component.config.themeUi.googleMap",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-google-map-component.config.themeUi.googleMap.transition": {
-                "id": "@coffeekraken.s-google-map-component.config.themeUi.googleMap.transition",
-                "name": "transition",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.transition]",
-                "description": "Specify the default transition for google map",
-                "namespace": "@coffeekraken.s-google-map-component.config.themeUi.googleMap",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-google-map-component.config.themeUi.googleMap.depth": {
-                "id": "@coffeekraken.s-google-map-component.config.themeUi.googleMap.depth",
-                "name": "depth",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.depth]",
-                "description": "Specify the default depth for google map",
-                "namespace": "@coffeekraken.s-google-map-component.config.themeUi.googleMap",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-google-map-component.config.themeUi.googleMap.rhythmVertical": {
-                "id": "@coffeekraken.s-google-map-component.config.themeUi.googleMap.rhythmVertical",
-                "name": "rhythmVertical",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Object"
-                        }
-                    ],
-                    "raw": "Object"
-                },
-                "default": "[theme.ui.default.rhythmVertical]",
-                "description": "Specify the default vertical rhythm for your google map",
-                "namespace": "@coffeekraken.s-google-map-component.config.themeUi.googleMap",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-google-map-component.config.themeUi.googleMapMarker.transition": {
-                "id": "@coffeekraken.s-google-map-component.config.themeUi.googleMapMarker.transition",
-                "name": "transition",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.transition]",
-                "description": "Specify the default transition for google map marker",
-                "namespace": "@coffeekraken.s-google-map-component.config.themeUi.googleMapMarker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-google-map-component.doc.README": {
-                "id": "@coffeekraken.s-google-map-component.doc.README",
-                "name": "README",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Markdown"
-                        }
-                    ],
-                    "raw": "Markdown"
-                },
-                "menu": {
-                    "tree": [
-                        "Documentation"
-                    ],
-                    "slug": "/doc/readme"
-                },
-                "platform": [
-                    {
-                        "name": "md",
-                        "description": ""
-                    }
-                ],
-                "namespace": "@coffeekraken.s-google-map-component.doc",
-                "status": "stable",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "README.md",
-                "extension": "md",
-                "relPath": "src/doc/README.md",
-                "children": {}
-            },
             "@coffeekraken.s-google-map-component.js.SGoogleMapComponent": {
                 "id": "@coffeekraken.s-google-map-component.js.SGoogleMapComponent",
                 "name": "SGoogleMapComponent",

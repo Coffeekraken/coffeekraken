@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -46,12 +51,13 @@ You can specify a `params` object in your page file like so:
 
 ```js
 export default {
-params: {
-something: true, // required param
-else: false, // optional param
-},
-views: ['hello.hello'],
+  params: {
+    something: true, // required param
+    else: false, // optional param
+  },
+  views: ['hello.hello'],
 };
+
 ```
 
 This will generate an [express route](https://expressjs.com/en/guide/routing.html) like `/:something/:else?`
@@ -62,9 +68,10 @@ You can also use directly the [express route](https://expressjs.com/en/guide/rou
 
 ```js
 export default {
-slugs: ['/:something/:else?'],
-views: ['hello.hello'],
+  slugs: ['/:something/:else?'],
+  views: ['hello.hello'],
 };
+
 ```
 
 This will also generate an [express route](https://expressjs.com/en/guide/routing.html) like `/:something/:else?`

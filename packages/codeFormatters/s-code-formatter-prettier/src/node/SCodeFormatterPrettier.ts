@@ -1,10 +1,10 @@
 import type {
     ISCodeFormatterFormatter,
     ISCodeFormatterFormatterMetas,
-    ISCodeFormatterFormatterResult
+    ISCodeFormatterFormatterResult,
 } from '@coffeekraken/s-code-formatter';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __prettier from 'prettier';
+import * as __prettier from 'prettier';
 
 /**
  * @name                SCodeFormatterPrettier
@@ -34,15 +34,31 @@ const formatter: ISCodeFormatterFormatter = {
         'hbs',
         'php',
         'html',
+        'shell',
+        'sh',
+        'bash',
     ],
+    languagesToExtensionsMap: {
+        shell: 'sh',
+        bash: 'sh',
+    },
     format(
         code: string,
         metas: ISCodeFormatterFormatterMetas,
     ): ISCodeFormatterFormatterResult {
         const prettierConfig = __SSugarConfig.get('prettier');
+        let filePathForPrettier = metas.filePath;
+
+        if (this.languagesToExtensionsMap[metas.extension]) {
+            filePathForPrettier = filePathForPrettier.replace(
+                /\.[a-zA-Z0-9]+$/,
+                `.${this.languagesToExtensionsMap[metas.extension]}`,
+            );
+        }
+
         const formattedCode = __prettier.format(code, {
             ...prettierConfig,
-            filepath: metas.filePath,
+            filepath: filePathForPrettier,
         });
         return {
             code: formattedCode,

@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -41,6 +46,7 @@ To start using Coffeekraken tools, the easier way is to install the **@coffeekra
 
 ```shell
 npm i @coffeekraken/cli -g
+
 ```
 
 This will give you access to the **sugar** CLI and will give you the ability to generate new projects
@@ -50,7 +56,7 @@ that directly integrate all access to your toolchain power like:
 -   Built-in support for **[PostCss](https://postcss.org/)** as well as the **[PostCss sugar plugin](https://coffeekraken.io/doc/@coffeekraken/s-postcss-sugar-plugin/README)**
 -   Production ready build process
 -   Instant access to the actual packages documentation
--   Check out our [VSCode extension](https://coffeekraken.io/doc/@coffeekraken/s-vscode-extension/README)
+    -   Check out our [VSCode extension](https://coffeekraken.io/doc/@coffeekraken/s-vscode-extension/README)
 
 ## Start using the CLI
 
@@ -62,6 +68,7 @@ sugar
 sugar -h
 # or
 sugar --help
+
 ```
 
 

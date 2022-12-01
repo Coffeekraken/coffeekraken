@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -60,13 +65,14 @@ The main one is the `theme.config.ts` file that looks something like this:
 
 ```js
 export default function (env, config) {
-return {
-// Specify the theme name to use by default
-theme: 'default',
-// Specify the theme variant to use by default
-variant: 'light',
-};
+  return {
+    // Specify the theme name to use by default
+    theme: 'default',
+    // Specify the theme variant to use by default
+    variant: 'light',
+  };
 }
+
 ```
 
 This configuration assume that the theme `default` exists and has a `light` variant defined.
@@ -83,18 +89,19 @@ Create a file call `.sugar/themeColor.config.ts` and update the colors like so:
 
 ```js
 export default (env, config) => {
-return {
-// supported syntax: hex/hexa/hsl/hsla
-base: '...',
-main: '...',
-accent: '...',
-complementary: '...',
-success: '...',
-info: '...',
-warning: '...',
-error: '...',
+  return {
+    // supported syntax: hex/hexa/hsl/hsla
+    base: '...',
+    main: '...',
+    accent: '...',
+    complementary: '...',
+    success: '...',
+    info: '...',
+    warning: '...',
+    error: '...',
+  };
 };
-};
+
 ```
 
 #### Updating the color schemas
@@ -103,15 +110,16 @@ Create a file called `.sugar/themeColorSchema(Light|Dark).config.ts` and update 
 
 ```js
 export default (env, config) => {
-return {
-text: {
-darken: 20,
-},
-surface: {
-lighten: 40,
-},
+  return {
+    text: {
+      darken: 20,
+    },
+    surface: {
+      lighten: 40,
+    },
+  };
 };
-};
+
 ```
 
 ## Defining a new theme
@@ -120,28 +128,29 @@ To define a new theme, simply create a new configuration file under `.sugar/myTh
 
 ```js
 export default function (env, config) {
-return {
-// specify the theme name that you will use to active it for your website
-themeName: 'mytheme',
-// specify some variants like dark, light, etc...
-variants: {
-dark: {
-// specify that your theme is based on the themeDarkBase (optional)
-extends: 'themeDarkBase'
-// specify the transitions you want for your theme
-transition: {
-slow: 'all .6s easeInOut',
-default: 'all .3s easeInOut',
-fast: 'all .1s easeInOut',
-},
-// ...all the others configuration you want to override from themeDarkBase
-},
-light: {
-// ...theme light configurations
+  return {
+    // specify the theme name that you will use to active it for your website
+    themeName: 'mytheme',
+    // specify some variants like dark, light, etc...
+    variants: {
+      dark: {
+        // specify that your theme is based on the themeDarkBase (optional)
+        extends: 'themeDarkBase',
+        // specify the transitions you want for your theme
+        transition: {
+          slow: 'all .6s easeInOut',
+          default: 'all .3s easeInOut',
+          fast: 'all .1s easeInOut',
+        },
+        // ...all the others configuration you want to override from themeDarkBase
+      },
+      light: {
+        // ...theme light configurations
+      },
+    },
+  };
 }
-},
-};
-}
+
 ```
 
 > Note that the theming system is based on the [@coffeekraken/s-sugar-config](/package/@coffeekraken/s-sugar-config/doc/readme) package used across the entire echosystem...

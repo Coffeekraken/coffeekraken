@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -50,23 +55,24 @@ It may look like this:
 
 ```js
 /**
-* @name            unique
-* @namespace       js.array
-* @type            Function
-* @platform        js
-* @status          stable
-*
-* This function will return a filtered array without any duplicated
-*
-* @param       {any[]}           ar                The array you want to filter
-* @return      {any[]}                             The filtered array
-*
-* @since       2.0.0
-* @author      Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-*/
+ * @name            unique
+ * @namespace       js.array
+ * @type            Function
+ * @platform        js
+ * @status          stable
+ *
+ * This function will return a filtered array without any duplicated
+ *
+ * @param       {any[]}           ar                The array you want to filter
+ * @return      {any[]}                             The filtered array
+ *
+ * @since       2.0.0
+ * @author      Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
 export default function (ar: any[]): any[] {
-// ...
+  // ...
 }
+
 ```
 
 ## What a `docmap.json` file looks like?
@@ -74,42 +80,43 @@ export default function (ar: any[]): any[] {
 A `docmap.json` file will look like something like this:
 
 ```js
-{
-"map": {},
-"extends": [],
-"generated": {
-"extends": [
-"@coffeekraken/cli",
-"@coffeekraken/sugar",
-// etc...
-],
-"map": {
-"js.array.unique": {
-"name": "unique",
-"type": "Function",
-"platform": [
-{
-"name": "js",
-"description": ""
-}
-],
-"namespace": "js.array",
-"status": "stable",
-"since": "2.0.0",
-"author": {
-"name": "Olivier Bossel",
-"email": "olivier.bossel@gmail.com",
-"url": "https://coffeekraken.io"
-},
-"filename": "01-whatAreRecipes.md",
-"extension": "js",
-"relPath": "src/js/array/unique.js",
-"children": {}
-}
-// etc...
-}
-}
-}
+export default {
+  map: {},
+  extends: [],
+  generated: {
+    extends: [
+      '@coffeekraken/cli',
+      '@coffeekraken/sugar',
+      // etc...
+    ],
+    map: {
+      'js.array.unique': {
+        name: 'unique',
+        type: 'Function',
+        platform: [
+          {
+            name: 'js',
+            description: '',
+          },
+        ],
+        namespace: 'js.array',
+        status: 'stable',
+        since: '2.0.0',
+        author: {
+          name: 'Olivier Bossel',
+          email: 'olivier.bossel@gmail.com',
+          url: 'https://coffeekraken.io',
+        },
+        filename: '01-whatAreRecipes.md',
+        extension: 'js',
+        relPath: 'src/js/array/unique.js',
+        children: {},
+      },
+      // etc...
+    },
+  },
+};
+
 ```
 
 You can see that we have a lot of informations about our documentation.
@@ -130,6 +137,7 @@ To build a `docmap.json` file, you can use either our [@coffeekraken/s-docmap](/
 
 ```shell
 sugar docmap.build
+
 ```
 
 This will search for files in your `src` folder as well as in your generated `dist/css/index.css` file for docblock that have a `@namespace` tag AND a `@name` one.

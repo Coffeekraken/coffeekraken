@@ -1,0 +1,130 @@
+{% extends 'sugar/readme/layouts/main/main.twig' %}
+{% block body %}
+
+<!--
+/**
+ * @name            README
+ * @namespace       doc
+ * @type            Markdown
+ * @platform        md
+ * @status          stable
+ * @menu            Documentation           /doc/readme
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+-->
+
+## SFiltrableInputComponent
+
+This package expose a simple `SFiltrableInputComponent` custom element that you can define and use in your pages easily.
+
+## Features
+
+-   Framework agnostic. Simply webcomponent.
+-   Fully customizable
+-   Built-in search
+-   Responsive props [see more](/doc/components/responsive)
+-   And more...
+
+## Usage
+
+First, simply import and define the component in your js/ts file:
+
+```js
+import { define } from '@coffeekraken/s-filtrable-input-component';
+define();
+```
+
+Make use of it in your pages:
+
+```html
+<s-filtrable-input
+    items="[{title:'Hello',value:'hello'},{title:'world',value:'world'}]"
+>
+    <input type="text" class="s-input" />
+</s-filtrable-input>
+```
+
+## More complex example
+
+First, define your filtrable input with a specific tag name like so:
+
+```js
+import { define } from '@coffeekraken/s-filtrable-input-component';
+define({}, 'my-cool-filtrable-input');
+```
+
+Then, specify some settings like an `items` function that will be responsible to provide your list items:
+
+```js
+import { define } from '@coffeekraken/s-filtrable-input-component';
+define(
+    {
+        items: async () => {
+            const request = await fetch('...');
+            const items = await request.json();
+            return items;
+        },
+    },
+    'my-cool-filtrable-input',
+);
+```
+
+You can as well specify the templates you want for each of the component states like so:
+
+```js
+import { define } from '@coffeekraken/s-filtrable-input-component';
+define(
+    {
+        templates: ({ type, item, html }) => {
+            switch (type) {
+                case 'item':
+                    return html` <li class="__item">${item.title}</li> `;
+                    break;
+                case 'loading':
+                    return html`
+                        <li class="__loading">Loading, please wait...</li>
+                    `;
+                    break;
+                case 'empty':
+                    return html` <li class="__empty">No items found...</li> `;
+                    break;
+            }
+        },
+    },
+    'my-cool-filtrable-input',
+);
+```
+
+Use it then in your html:
+
+```html
+<my-cool-filtrable-input>
+    <input type="text" class="s-input" />
+</my-cool-filtrable-input>
+```
+
+> Note that the provided `html` function came from the AMAZING [lit-element](https://lit.dev) library used under the hood as template engine.
+
+## Items
+
+Each items have to be a simple javascript object. You can specify every properties you want but here's some special properties you can specify that will be used by the component:
+
+-   `value`: Specify the property name of your item you want to use as value. By default it will use `value`.
+-   `label`: Specify the property name of your item you want to use as label in the default item template.
+-   `preventSet`: Set it to true if you want to prevent the `input` to be filled with the selected item value
+-   `preventClose`: Set it to true if you want to prevent your filtrable list to close when the `closeOnSelect` prop is set to true
+-   `preventReset`: Set it to true if you want to prevent your filtrable list to be reseted when the `resetOnSelect` prop is set to true
+
+## Attributes
+
+{% include 'sugar/interface/fromDocmap/fromDocmap.twig' with {
+    docmapItem: docmap.map['@coffeekraken.s-filtrable-input-component.js.interface.SFiltrableInputComponentInterface']
+} only %}
+
+## API
+
+For more information about the API, please check out [the API documentation](/api/@coffeekraken.s-filtrable-input-component.js.SFiltrableInputComponent)
+
+{% endblock %}

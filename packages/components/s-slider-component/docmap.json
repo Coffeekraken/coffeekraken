@@ -17,9 +17,7 @@
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
-            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config-adapter",
             "@coffeekraken/s-config-folder-adapter",
@@ -58,7 +56,6 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
@@ -102,187 +99,6 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-slider-component.config.themeUi.button.borderRadius": {
-                "id": "@coffeekraken.s-slider-component.config.themeUi.button.borderRadius",
-                "name": "borderRadius",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.borderRadius]",
-                "description": "Specify the default border radius for button ui",
-                "namespace": "@coffeekraken.s-slider-component.config.themeUi.button",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-slider-component.config.themeUi.slider.defaultColor": {
-                "id": "@coffeekraken.s-slider-component.config.themeUi.slider.defaultColor",
-                "name": "defaultColor",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.defaultColor]",
-                "description": "Specify the default color for datetime picker ui",
-                "namespace": "@coffeekraken.s-slider-component.config.themeUi.slider",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-slider-component.config.themeUi.slider.defaultStyle": {
-                "id": "@coffeekraken.s-slider-component.config.themeUi.slider.defaultStyle",
-                "name": "defaultStyle",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Number"
-                        }
-                    ],
-                    "raw": "Number"
-                },
-                "default": "[theme.ui.default.defaultStyle]",
-                "description": "Specify the default style for your filtrable input ui",
-                "namespace": "@coffeekraken.s-slider-component.config.themeUi.slider",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-slider-component.config.themeUi.button.transition": {
-                "id": "@coffeekraken.s-slider-component.config.themeUi.button.transition",
-                "name": "transition",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "all .5s ease-in-out",
-                "description": "Specify the default transition for button ui",
-                "namespace": "@coffeekraken.s-slider-component.config.themeUi.button",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-slider-component.config.themeUi.button.depth": {
-                "id": "@coffeekraken.s-slider-component.config.themeUi.button.depth",
-                "name": "depth",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Number"
-                        }
-                    ],
-                    "raw": "Number"
-                },
-                "default": "[theme.ui.default.depth]",
-                "description": "Specify the default depth for your button ui",
-                "namespace": "@coffeekraken.s-slider-component.config.themeUi.button",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-slider-component.config.themeUi.slider.rhythmVertical": {
-                "id": "@coffeekraken.s-slider-component.config.themeUi.slider.rhythmVertical",
-                "name": "rhythmVertical",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Object"
-                        }
-                    ],
-                    "raw": "Object"
-                },
-                "default": "[theme.ui.default.rhythmVertical]",
-                "description": "Specify the default vertical rhythm for your datetime picker ui",
-                "namespace": "@coffeekraken.s-slider-component.config.themeUi.slider",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-slider-component.doc.README": {
-                "id": "@coffeekraken.s-slider-component.doc.README",
-                "name": "README",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Markdown"
-                        }
-                    ],
-                    "raw": "Markdown"
-                },
-                "menu": {
-                    "tree": [
-                        "Documentation"
-                    ],
-                    "slug": "/doc/readme"
-                },
-                "platform": [
-                    {
-                        "name": "md",
-                        "description": ""
-                    }
-                ],
-                "namespace": "@coffeekraken.s-slider-component.doc",
-                "status": "stable",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "README.md",
-                "extension": "md",
-                "relPath": "src/doc/README.md",
-                "children": {}
-            },
             "@coffeekraken.s-slider-component.js.SSliderComponent": {
                 "id": "@coffeekraken.s-slider-component.js.SSliderComponent",
                 "name": "SSliderComponent",
@@ -388,13 +204,15 @@
                                     }
                                 ],
                                 "raw": "Object"
-                            }
+                            },
+                            "default": {}
                         },
                         "behavior": {
                             "description": "Specify which behavior your want to use for your slider. Behavior are like \"presets\" with different animations, etc...",
                             "values": [
                                 "none",
-                                "default"
+                                "scroll",
+                                "transform"
                             ],
                             "type": {
                                 "types": [
@@ -404,8 +222,20 @@
                                 ],
                                 "raw": "String"
                             },
-                            "default": "default",
+                            "default": "scroll",
                             "physical": true
+                        },
+                        "pad": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "Specify if you want to pad the slides if for example the first slide does not take the while width of the slider, a padding-(block|inline)-start will be applied to center this first slide. Same for the last one",
+                            "default": true
                         },
                         "nextIconClass": {
                             "description": "Specify the class of the next icon",
@@ -427,6 +257,20 @@
                                     }
                                 ],
                                 "raw": "String"
+                            }
+                        },
+                        "uiContainer": {
+                            "description": "Specify if you want an \"s-container:...\" class applied on the .s-slider__ui element",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    },
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "String|Boolean"
                             }
                         },
                         "controls": {
@@ -607,6 +451,26 @@
                 "extension": "ts",
                 "relPath": "src/js/SSliderComponent.ts",
                 "children": {
+                    "applypad": {
+                        "id": "sfd2688349e47477e844883d0013dd799c76a88d08fd4128404cf2d891530c59f",
+                        "name": "applyPad",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This method apply the \"pad\" start and end on the slides wrapper",
+                        "async": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
                     "islast": {
                         "id": "sc68c13129f95c336c467707b3778dc2d1c3deac9c41d4e25c78691f2a91d8cb5",
                         "name": "isLast",
@@ -1044,6 +908,44 @@
                             "url": "https://coffeekraken.io"
                         }
                     },
+                    "getbehavior": {
+                        "id": "s59ab407a4721cdd454c4a957b4faf58defc4f0b764f9ef0735b88db4c85a8238",
+                        "name": "getBehavior",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This method allows you to get the behavior object with all his functions binded\nto this current slider instance",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "updateslidesclasses": {
+                        "id": "s8374548a139b4fc05a183dca560ee47d724daec5108401191226de1a834389fe",
+                        "name": "updateSlidesClasses",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This method allows you to update the slides \"active\" class accordingly to the\nslider state. This can be used inside of a custom behavior for example.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
                     "goto": {
                         "id": "sd44fb896f9684392446a6c6fbfd0b0f2250188dd4e4b928bc6e4363773d640df",
                         "name": "goTo",
@@ -1248,13 +1150,15 @@
                                     }
                                 ],
                                 "raw": "Object"
-                            }
+                            },
+                            "default": {}
                         },
                         "behavior": {
                             "description": "Specify which behavior your want to use for your slider. Behavior are like \"presets\" with different animations, etc...",
                             "values": [
                                 "none",
-                                "default"
+                                "scroll",
+                                "transform"
                             ],
                             "type": {
                                 "types": [
@@ -1264,8 +1168,20 @@
                                 ],
                                 "raw": "String"
                             },
-                            "default": "default",
+                            "default": "scroll",
                             "physical": true
+                        },
+                        "pad": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "Specify if you want to pad the slides if for example the first slide does not take the while width of the slider, a padding-(block|inline)-start will be applied to center this first slide. Same for the last one",
+                            "default": true
                         },
                         "nextIconClass": {
                             "description": "Specify the class of the next icon",
@@ -1287,6 +1203,20 @@
                                     }
                                 ],
                                 "raw": "String"
+                            }
+                        },
+                        "uiContainer": {
+                            "description": "Specify if you want an \"s-container:...\" class applied on the .s-slider__ui element",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    },
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "String|Boolean"
                             }
                         },
                         "controls": {
@@ -1466,91 +1396,6 @@
                 "filename": "SSliderComponentInterface.ts",
                 "extension": "ts",
                 "relPath": "src/js/interface/SSliderComponentInterface.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-slider-component.js.behaviors.interface.SSliderCssAnimationBehaviorInterface": {
-                "id": "@coffeekraken.s-slider-component.js.behaviors.interface.SSliderCssAnimationBehaviorInterface",
-                "name": "SSliderCssAnimationBehaviorInterface",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Class"
-                        }
-                    ],
-                    "raw": "Class"
-                },
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    }
-                ],
-                "description": "This class represent the interface that describe parameters of the SSliderCssAnimationBehavior behavior",
-                "namespace": "@coffeekraken.s-slider-component.js.behaviors.interface",
-                "status": "beta",
-                "interface": {
-                    "name": "SSliderCssAnimationBehaviorInterface",
-                    "description": "",
-                    "definition": {}
-                },
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "SSliderCssAnimationBehaviorInterface.ts",
-                "extension": "ts",
-                "relPath": "src/js/behaviors/interface/SSliderCssAnimationBehaviorInterface.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-slider-component.js.behaviors.interface.SSliderSlideableBehaviorInterface": {
-                "id": "@coffeekraken.s-slider-component.js.behaviors.interface.SSliderSlideableBehaviorInterface",
-                "name": "SSliderSlideableBehaviorInterface",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Class"
-                        }
-                    ],
-                    "raw": "Class"
-                },
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    }
-                ],
-                "description": "This class represent the interface that describe parameters of the SSliderSlideableBehavior behavior",
-                "namespace": "@coffeekraken.s-slider-component.js.behaviors.interface",
-                "status": "beta",
-                "interface": {
-                    "name": "SSliderSlideableBehaviorInterface",
-                    "description": "",
-                    "definition": {
-                        "friction": {
-                            "description": "Specify the friction to apply when you release the pointer. 1 mean full friction, 0 mean no friction",
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "Number"
-                                    }
-                                ],
-                                "raw": "Number"
-                            },
-                            "default": 0.7
-                        }
-                    }
-                },
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "SSliderSlideableBehaviorInterface.ts",
-                "extension": "ts",
-                "relPath": "src/js/behaviors/interface/SSliderSlideableBehaviorInterface.ts",
                 "children": {}
             },
             "@coffeekraken.s-slider-component.ui.slider.slider": {

@@ -16,9 +16,7 @@
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
-            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config-adapter",
             "@coffeekraken/s-config-folder-adapter",
@@ -34,6 +32,7 @@
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
+            "@coffeekraken/s-dropzone-component",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -56,7 +55,6 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
@@ -147,211 +145,7 @@
                 },
                 "filename": "themeUi.config.ts",
                 "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-code-example-component.config.themeUi.codeExample.borderRadius": {
-                "id": "@coffeekraken.s-code-example-component.config.themeUi.codeExample.borderRadius",
-                "name": "borderRadius",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.borderRadius]",
-                "description": "Specify the default border radius for code ui",
-                "namespace": "@coffeekraken.s-code-example-component.config.themeUi.codeExample",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-code-example-component.config.themeUi.codeExample.borderWidth": {
-                "id": "@coffeekraken.s-code-example-component.config.themeUi.codeExample.borderWidth",
-                "name": "borderWidth",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.borderWidth]",
-                "description": "Specify the default border width for code ui",
-                "namespace": "@coffeekraken.s-code-example-component.config.themeUi.codeExample",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-code-example-component.config.themeUi.codeExample.transition": {
-                "id": "@coffeekraken.s-code-example-component.config.themeUi.codeExample.transition",
-                "name": "transition",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.transition]",
-                "description": "Specify the default transition for code ui",
-                "namespace": "@coffeekraken.s-code-example-component.config.themeUi.codeExample",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-code-example-component.config.themeUi.codeExample.defaultColor": {
-                "id": "@coffeekraken.s-code-example-component.config.themeUi.codeExample.defaultColor",
-                "name": "defaultColor",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.defaultColor]",
-                "description": "Specify the default color for code ui",
-                "namespace": "@coffeekraken.s-code-example-component.config.themeUi.codeExample",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-code-example-component.config.themeUi.codeExample.defaultStyle": {
-                "id": "@coffeekraken.s-code-example-component.config.themeUi.codeExample.defaultStyle",
-                "name": "defaultStyle",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Number"
-                        }
-                    ],
-                    "raw": "Number"
-                },
-                "default": "[theme.ui.default.defaultStyle]",
-                "description": "Specify the default style for your code ui",
-                "namespace": "@coffeekraken.s-code-example-component.config.themeUi.codeExample",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-code-example-component.config.themeUi.codeExample.depth": {
-                "id": "@coffeekraken.s-code-example-component.config.themeUi.codeExample.depth",
-                "name": "depth",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.depth]",
-                "description": "Specify the default depth for code items",
-                "namespace": "@coffeekraken.s-code-example-component.config.themeUi.codeExample",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-code-example-component.config.themeUi.codeExample.rhythmVertical": {
-                "id": "@coffeekraken.s-code-example-component.config.themeUi.codeExample.rhythmVertical",
-                "name": "rhythmVertical",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Object"
-                        }
-                    ],
-                    "raw": "Object"
-                },
-                "default": "[theme.ui.default.rhythmVertical]",
-                "description": "Specify the default vertical rhythm for your code ui",
-                "namespace": "@coffeekraken.s-code-example-component.config.themeUi.codeExample",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
                 "relPath": "src/config/themeUi.config.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-code-example-component.doc.README": {
-                "id": "@coffeekraken.s-code-example-component.doc.README",
-                "name": "README",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Markdown"
-                        }
-                    ],
-                    "raw": "Markdown"
-                },
-                "menu": {
-                    "tree": [
-                        "Documentation"
-                    ],
-                    "slug": "/doc/readme"
-                },
-                "platform": [
-                    {
-                        "name": "md",
-                        "description": ""
-                    }
-                ],
-                "namespace": "@coffeekraken.s-code-example-component.doc",
-                "status": "stable",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "README.md",
-                "extension": "md",
-                "relPath": "src/doc/README.md",
                 "children": {}
             },
             "@coffeekraken.s-code-example-component.js.SCodeExampleComponent": {

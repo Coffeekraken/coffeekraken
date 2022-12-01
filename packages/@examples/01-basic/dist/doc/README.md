@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @example/01-basic
@@ -18,6 +22,7 @@
 
 ```shell
 npm i @example/01-basic
+
 ```
 
 <!-- body -->
@@ -52,6 +57,7 @@ How to make use of it...
 ```js
 import __myCoolPackage from '@coffeekraken/my-cool-package';
 // etc...
+
 ```
 
 

@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -54,12 +59,13 @@ This plugin allows you to make use of mixins and functions like these:
 
 ```css
 .my-button {
-padding: sugar.padding(10) sugar.passing(30);
-font-size: sugar.font.size(30);
-background-color: sugar.color(accent);
-color: sugar.color(accent, foreground);
-/* and a lot more */
+  padding: sugar.padding(10) sugar.passing(30);
+  font-size: sugar.font.size(30);
+  background-color: sugar.color(accent);
+  color: sugar.color(accent, foreground);
+  /* and a lot more */
 }
+
 ```
 
 In addition to this, you will have access to a lot of helper classes for things like **paddings**, **margin**, **typography**, **flex** and more...
@@ -75,6 +81,7 @@ In addition to this, you will have access to a lot of helper classes for things 
 @sugar.margin.classes();
 @sugar.color.classes();
 /* etc... */
+
 ```
 
 > For more info about using the theming suite, please check out our [theming documentation](/doc/css/theming)
@@ -116,6 +123,7 @@ Coffeekraken provides a CLI called `sugar` through which you will be able to sca
 npm i @coffeekraken/cli -g
 # Show the cli help
 sugar -h
+
 ```
 
 > For more info about how to use our CLI, check out our [@coffeekraken/cli](/package/@coffeekraken/cli/doc/README) package documentation.

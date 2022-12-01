@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -49,10 +54,11 @@ To read your `docmap.json` file, simply use this code:
 ```js
 import __SDocmap from '@coffeekraken/s-docmap';
 (async () => {
-const docmapInstance = new __SDocmap();
-const docmap = await docmapInstance.read();
-// do something with your docmap...
+  const docmapInstance = new __SDocmap();
+  const docmap = await docmapInstance.read();
+  // do something with your docmap...
 })();
+
 ```
 
 ## Read docmap structure
@@ -60,20 +66,21 @@ const docmap = await docmapInstance.read();
 From the `read` method of the `SDocmap` class, you will get back an object that is structured like so:
 
 ```js
-{
-map: {
-'@coffeekraken.sugar.js.dom.query.querySelectorLive': {
-// all the docblock tags for this item
-},
-// all the documentation items...
-},
-menu: {
-packages: {}, // same as "tree" but for every dependencies (packages)
-tree: {}, // menu items organized by tree
-slug: {}, // menu items listed by slug
-custom: {} // custom menu. See the @coffeekraken/s-docmap package documentation for more infos
-}
-}
+export default {
+  map: {
+    '@coffeekraken.sugar.js.dom.query.querySelectorLive': {
+      // all the docblock tags for this item
+    },
+    // all the documentation items...
+  },
+  menu: {
+    packages: {}, // same as "tree" but for every dependencies (packages)
+    tree: {}, // menu items organized by tree
+    slug: {}, // menu items listed by slug
+    custom: {}, // custom menu. See the @coffeekraken/s-docmap package documentation for more infos
+  },
+};
+
 ```
 
 

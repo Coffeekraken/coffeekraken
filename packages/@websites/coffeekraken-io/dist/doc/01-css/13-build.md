@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -50,6 +55,7 @@ To compile your CSS, you can simply run one of these commands in your terminal a
 sugar postcss.build
 # Launch the development environment with local server, CSS compilation, JS compilation, etc...
 sugar dev
+
 ```
 
 > Note that you can make use of the [@coffeekraken/s-postcss-sugar-plugin](/package/@coffeekraken/s-postcss-sugar-plugin/doc/readme) postcss plugin to use all the Coffeekraken power in standelone mode...

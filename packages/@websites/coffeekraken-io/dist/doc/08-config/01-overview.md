@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -61,10 +66,10 @@ This configuration system has as it's center principles these points:
 #### Each configurations are simple js files:
 
 - Depending on the `level`, the storage path is different:
-- **default**: `src/config/*.config.js`
-- **module**: `node_modules/*/src/config/*.config.js`
-- **repo/package**: `.sugar/*.config.js`
-- **user**: `.local/.sugar/*.config.js`
+  - **default**: `src/config/*.config.js`
+  - **module**: `node_modules/*/src/config/*.config.js`
+  - **repo/package**: `.sugar/*.config.js`
+  - **user**: `.local/.sugar/*.config.js`
 - Each file is a simple `.js` file that export a configuration object
 
 > The configurations are accessible through the `@coffeekraken/s-sugar-config` package
@@ -74,11 +79,11 @@ This configuration system has as it's center principles these points:
 Here's a simple package structure that integrate the configurations files.
 
 - Some packages defines the somePackage.config.js
-- `node_modules`
+  - `node_modules`
 - User only override.
-- `.local/.sugar/somePackage.config.js`
+  - `.local/.sugar/somePackage.config.js`
 - Package level override
-- `.sugar/somePackage.config.js`
+  - `.sugar/somePackage.config.js`
 
 ## Access your configurations
 
@@ -89,6 +94,7 @@ To access your configuration, simply install the `@coffeekraken/s-sugar-config` 
 npm i @coffeekraken/s-sugar-config
 # Using yarn
 yarn add @coffeekraken/s-sugar-config
+
 ```
 
 Then, here's an example to access the "storage" configurations. (more on built-in configurations on the [@coffeekraken/s-sugar-config](https:/www.npmjs.com/package/@coffeekraken/s-sugar-config) package page)
@@ -102,6 +108,7 @@ await __SSugarConfig.load();
 __SSugarConfig.get('storage.package.rootDir');
 __SSugarConfig.get('storage.src.jsDir');
 // etc...
+
 ```
 
 

@@ -17,9 +17,7 @@
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
-            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config-adapter",
             "@coffeekraken/s-config-folder-adapter",
@@ -34,6 +32,7 @@
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
             "@coffeekraken/s-docmap",
+            "@coffeekraken/s-dropzone-component",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -56,7 +55,6 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
@@ -101,259 +99,6 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker.paddingInline": {
-                "id": "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker.paddingInline",
-                "name": "paddingInline",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.paddingInline]",
-                "description": "Specify the default padding inline for filtrable input ui",
-                "namespace": "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker.paddingBlock": {
-                "id": "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker.paddingBlock",
-                "name": "paddingBlock",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.paddingBlock]",
-                "description": "Specify the default padding block for filtrable input ui",
-                "namespace": "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker.borderRadius": {
-                "id": "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker.borderRadius",
-                "name": "borderRadius",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.borderRadius]",
-                "description": "Specify the default border radius for filtrable input ui",
-                "namespace": "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker.borderWidth": {
-                "id": "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker.borderWidth",
-                "name": "borderWidth",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.borderWidth]",
-                "description": "Specify the default border width for filtrable input ui",
-                "namespace": "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker.transition": {
-                "id": "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker.transition",
-                "name": "transition",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.transition]",
-                "description": "Specify the default transition for filtrable input ui",
-                "namespace": "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker.defaultStyle": {
-                "id": "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker.defaultStyle",
-                "name": "defaultStyle",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Number"
-                        }
-                    ],
-                    "raw": "Number"
-                },
-                "default": "[theme.ui.default.defaultStyle]",
-                "description": "Specify the default style for your filtrable input ui",
-                "namespace": "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker.defaultColor": {
-                "id": "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker.defaultColor",
-                "name": "defaultColor",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.form.defaultColor]",
-                "description": "Specify the default style for your datetimePicker ui",
-                "namespace": "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker.depth": {
-                "id": "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker.depth",
-                "name": "depth",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "100",
-                "description": "Specify the default depth for input items",
-                "namespace": "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker.rhythmVertical": {
-                "id": "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker.rhythmVertical",
-                "name": "rhythmVertical",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Object"
-                        }
-                    ],
-                    "raw": "Object"
-                },
-                "default": "[theme.ui.default.rhythmVertical]",
-                "description": "Specify the default vertical rhythm for your datetime picker ui",
-                "namespace": "@coffeekraken.s-datetime-picker-component.config.themeUi.datetimePicker",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-datetime-picker-component.doc.README": {
-                "id": "@coffeekraken.s-datetime-picker-component.doc.README",
-                "name": "README",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Markdown"
-                        }
-                    ],
-                    "raw": "Markdown"
-                },
-                "menu": {
-                    "tree": [
-                        "Documentation"
-                    ],
-                    "slug": "/doc/readme"
-                },
-                "platform": [
-                    {
-                        "name": "md",
-                        "description": ""
-                    }
-                ],
-                "namespace": "@coffeekraken.s-datetime-picker-component.doc",
-                "status": "stable",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "README.md",
-                "extension": "md",
-                "relPath": "src/doc/README.md",
-                "children": {}
-            },
             "@coffeekraken.s-datetime-picker-component.js.SDatetimePickerComponent": {
                 "id": "@coffeekraken.s-datetime-picker-component.js.SDatetimePickerComponent",
                 "name": "SDatetimePickerComponent",
@@ -386,57 +131,37 @@
                     {
                         "language": "html",
                         "title": "Simple input",
-                        "code": "<label class=\"s-label:responsive s-color:accent\">\n    <span>Choose a date</span>\n     <s-datetime-picker calendar placeholder=\"Choose a date\" input></s-datetime-picker>\n</label>"
+                        "code": "<label class=\"s-label:responsive s-color:accent\">\n    <span>Choose a date</span>\n     <s-datetime-picker calendar placeholder=\"Choose a date\">\n         <input type=\"text\" class=\"s-input\" placeholder=\"Choose a date\" />\n     </s-datetime-picker>\n</label>"
                     },
                     {
                         "language": "html",
                         "title": "With a calendar",
-                        "code": "<label class=\"s-label:responsive s-color:accent\">\n     <span>Choose a date</span>\n     <s-datetime-picker calendar placeholder=\"Choose a date\" input></s-datetime-picker>\n</label>"
+                        "code": "<label class=\"s-label:responsive s-color:accent\">\n     <span>Choose a date</span>\n     <s-datetime-picker calendar placeholder=\"Choose a date\">\n         <input type=\"text\" class=\"s-input\" placeholder=\"Choose a date\" />\n     </s-datetime-picker>\n</label>"
                     },
                     {
                         "language": "html",
                         "title": "With a backdrop",
-                        "code": "<label class=\"s-label:responsive s-color:accent\">\n     <span>Choose a date</span>\n     <s-datetime-picker calendar backdrop placeholder=\"Choose a date\" input></s-datetime-picker>\n</label>"
-                    },
-                    {
-                        "language": "html",
-                        "title": "With an input and a button",
-                        "code": "<label class=\"s-label:responsive s-color:accent\">\n     <span>Choose a date</span>\n     <s-datetime-picker placeholder=\"Choose a date\" input button></s-datetime-picker>\n</label>"
+                        "code": "<label class=\"s-label:responsive s-color:accent\">\n     <span>Choose a date</span>\n     <s-datetime-picker calendar backdrop placeholder=\"Choose a date\">\n         <input type=\"text\" class=\"s-input\" placeholder=\"Choose a date\" />\n     </s-datetime-picker>\n</label>"
                     },
                     {
                         "language": "html",
                         "title": "With a different format and a calendar",
-                        "code": "<label class=\"s-label:responsive s-color:accent\">\n     <span>Choose a date</span>\n     <s-datetime-picker calendar format=\"yyyy-mm-dd:HH:MM\" placeholder=\"Choose a date\" input button></s-datetime-picker>\n</label>"
+                        "code": "<label class=\"s-label:responsive s-color:accent\">\n     <span>Choose a date</span>\n     <s-datetime-picker calendar format=\"yyyy-mm-dd:HH:MM\" placeholder=\"Choose a date\">\n         <input type=\"text\" class=\"s-input\" placeholder=\"Choose a date\" />\n     </s-datetime-picker>\n</label>"
                     },
                     {
                         "language": "html",
                         "title": "Just a button with disabled weekend",
-                        "code": "<label class=\"s-label:responsive s-color:accent\">\n     <span>Choose a date</span>\n     <s-datetime-picker calendar disable=\"weekend\" button></s-datetime-picker>\n</label>"
-                    },
-                    {
-                        "language": "html",
-                        "title": "With a custom input",
-                        "code": "<label class=\"s-label:responsive s-color:accent\">\n     <span>Choose a date</span>\n     <s-datetime-picker>\n         <input type=\"text\" class=\"s-input\" placeholder=\"Choose a date\" />\n     </s-datetime-picker>\n</label>"
-                    },
-                    {
-                        "language": "html",
-                        "title": "With a custom button",
-                        "code": "<label class=\"s-label:responsive s-color:accent\">\n     <span>Choose a date</span>\n     <s-datetime-picker>\n         <button class=\"s-btn s-color:error\">Choose a date</button>\n     </s-datetime-picker>\n</label>"
-                    },
-                    {
-                        "language": "html",
-                        "title": "With a custom input and button",
-                        "code": "<label class=\"s-label:responsive s-color:accent\">\n     <span>Choose a date</span>\n     <s-datetime-picker>\n         <div class=\"s-group\">\n             <input type=\"text\" class=\"s-input\" placeholder=\"Choose a date\" />\n             <button class=\"s-btn s-color:error\">Choose a date</button>\n         </div>\n     </s-datetime-picker>\n</label>"
+                        "code": "<label class=\"s-label:responsive s-color:accent\">\n     <span>Choose a date</span>\n     <s-datetime-picker calendar disable=\"weekend\">\n         <button class=\"s-btn\">Choose a date</button>\n     </s-datetime-picker>\n</label>"
                     },
                     {
                         "language": "html",
                         "title": "Disabled",
-                        "code": "<label class=\"s-label:responsive s-color:accent\">\n     <span>Choose a date</span>\n     <s-datetime-picker disabled input button></s-datetime-picker>\n</label>"
+                        "code": "<label class=\"s-label:responsive s-color:accent\">\n     <span>Choose a date</span>\n     <s-datetime-picker>\n         <input type=\"text\" disabled class=\"s-input\" placeholder=\"Choose a date\" />\n     </s-datetime-picker>\n</label>"
                     },
                     {
                         "language": "html",
                         "title": "RTL Support",
-                        "code": "<label class=\"s-label:responsive s-color:accent\" dir=\"rtl\">\n     <span>Choose a date</span>\n     <s-datetime-picker placeholder=\"Choose a date\" input button dir=\"rtl\"></s-datetime-picker>\n</label>"
+                        "code": "<label class=\"s-label:responsive s-color:accent\" dir=\"rtl\">\n     <span>Choose a date</span>\n     <s-datetime-picker placeholder=\"Choose a date\" dir=\"rtl\">\n         <input type=\"text\" class=\"s-input\" placeholder=\"Choose a date\" />\n     </s-datetime-picker>\n</label>"
                     }
                 ],
                 "interface": {
@@ -568,31 +293,6 @@
                                 "raw": "String"
                             },
                             "default": "Select a color"
-                        },
-                        "input": {
-                            "description": "Specify if you dont want an automatically injected text input when you dont provide yours",
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "Boolean"
-                                    }
-                                ],
-                                "raw": "Boolean"
-                            },
-                            "default": false
-                        },
-                        "button": {
-                            "description": "Specify if you want to display the button or not",
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "Boolean"
-                                    }
-                                ],
-                                "raw": "Boolean"
-                            },
-                            "default": false,
-                            "physical": true
                         },
                         "floatSettings": {
                             "description": "Specify some float settings to pass to the \"makeFloat\" function of the sugar toolkit",
@@ -962,31 +662,6 @@
                                 "raw": "String"
                             },
                             "default": "Select a color"
-                        },
-                        "input": {
-                            "description": "Specify if you dont want an automatically injected text input when you dont provide yours",
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "Boolean"
-                                    }
-                                ],
-                                "raw": "Boolean"
-                            },
-                            "default": false
-                        },
-                        "button": {
-                            "description": "Specify if you want to display the button or not",
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "Boolean"
-                                    }
-                                ],
-                                "raw": "Boolean"
-                            },
-                            "default": false,
-                            "physical": true
                         },
                         "floatSettings": {
                             "description": "Specify some float settings to pass to the \"makeFloat\" function of the sugar toolkit",

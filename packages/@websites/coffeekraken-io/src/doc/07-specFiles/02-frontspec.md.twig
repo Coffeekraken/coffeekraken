@@ -29,7 +29,7 @@ This file is separated by purpose in an global object like so:
     {% endfor %}
 
 ```js
-{
+export default {
     {% for key, source in config.frontspec.build.sources %}
         {{key}}: {},
     {% endfor %}
@@ -43,7 +43,7 @@ This file is separated by purpose in an global object like so:
 {{source.description}}
 
 ```js
-{{ frontspec[key]|json_encode() }}
+export default {{ frontspec[key]|json_encode()|raw }}
 ```
 
 {% endfor %}

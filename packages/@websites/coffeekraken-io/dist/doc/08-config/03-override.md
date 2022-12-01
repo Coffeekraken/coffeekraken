@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -49,12 +54,13 @@ To illustrate this, we will take as example of overriding the javascript sources
 
 ```js
 export default (env, config) => {
-return {
-src: {
-jsDir: 'your new absolute directory path',
-},
+  return {
+    src: {
+      jsDir: 'your new absolute directory path',
+    },
+  };
 };
-};
+
 ```
 
 ### User level overriding
@@ -64,12 +70,13 @@ jsDir: 'your new absolute directory path',
 
 ```js
 export default (env, config) => {
-return {
-src: {
-jsDir: 'your new absolute directory path',
-},
+  return {
+    src: {
+      jsDir: 'your new absolute directory path',
+    },
+  };
 };
-};
+
 ```
 
 > You'll see that the process is the same. The only difference is where are stored files. Note that the `.local` folder MUST be added in your **.gitignore file** if you're not using our development toolchain.

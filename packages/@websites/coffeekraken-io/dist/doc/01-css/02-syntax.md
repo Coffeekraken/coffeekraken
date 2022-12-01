@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -42,15 +47,18 @@ Pleasant syntax is a way to write your classes into your HTML that let you apply
 
 ```html
 <!-- this statement -->
-<div class="s-font s-font--20 s-font--bold s-font--italic s-p s-p--40 s-typo s-typo--h2 s-typo___tablet s-typo--h5___tablet">
-Hello world
+<div
+  class="s-font s-font--20 s-font--bold s-font--italic s-p s-p--40 s-typo s-typo--h2 s-typo___tablet s-typo--h5___tablet"
+>
+  Hello world
 </div>
 <!-- will be transformed into -->
 <div
-class="s-font s-font--20 s-font--bold s-font--italic s-p s-p--40 s-typo s-typo--h2 s-typo--h5___tablet"
+  class="s-font s-font--20 s-font--bold s-font--italic s-p s-p--40 s-typo s-typo--h2 s-typo--h5___tablet"
 >
-Hello world
+  Hello world
 </div>
+
 ```
 
 ## Preprocessors
@@ -64,6 +72,7 @@ In order for this transformation to happen, you'll need to use one of these tran
 ```js
 import __expandPleasantCssClassnames from '@coffeekraken/sugar/shared/html/__expandPleasantCssClassnames';
 __expandPleasantCssClassnames('...');
+
 ```
 
 #### Js
@@ -73,6 +82,7 @@ __expandPleasantCssClassnames('...');
 ```js
 import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/__expandPleasantCssClassnamesLive';
 __expandPleasantCssClassnamesLive();
+
 ```
 
 > This behavior is builted-in the [@coffeekraken/s-sugar-feature](/package/@coffeekraken/s-sugar-feature/doc/readme) feature with other convinient stuffs...
@@ -81,8 +91,10 @@ __expandPleasantCssClassnamesLive();
 
 **\Sugar\html\expandPleasantCssClassnames**: This will transform all the classes from the HTML string passed.
 
-```js
+```php
+
 $processed = \Sugar\html\expandPleasantCssClassnames('...');
+
 ```
 
 #### Specifications
@@ -91,11 +103,11 @@ Here's the specification that a transformer MUST integrate in order to be consid
 
 1. Transform `:` with `--`
 2. Repeat base class like so:
-- From: `s-font:bold:italic`
-- To: `s-font s-font--bold s-font--italic`
+    - From: `s-font:bold:italic`
+    - To: `s-font s-font--bold s-font--italic`
 3. Support the `@mediaName` syntax like so:
-- From: `s-font:bold @mobile s-font:italic`
-- To: `s-font s-font--bold s-font--italic___mobile`
+    - From: `s-font:bold @mobile s-font:italic`
+    - To: `s-font s-font--bold s-font--italic___mobile`
 
 
 <!-- license -->

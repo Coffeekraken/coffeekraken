@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -50,11 +55,11 @@ On top of that, we make use of our own `SLitComponent` class that extends the `L
 
 1. Support for `SInterface` interfaces through the `SLitComponent.properties` static method
 2. Access to a `componentUtils` property that store a `SComponentUtils` instance and gives you access to methods like:
-- `className`: Get classname linked to the component name
-- Adopting root style when has a shadowRoot
-- `SComponentDefaultInterface` exposed
-- System to delaying the `firstUpdated` method execution when the component enter in viewport, etc...
-- Utils method like `isMounted`, `isInViewport`, etc...
+    - `className`: Get classname linked to the component name
+    - Adopting root style when has a shadowRoot
+    - `SComponentDefaultInterface` exposed
+    - System to delaying the `firstUpdated` method execution when the component enter in viewport, etc...
+    - Utils method like `isMounted`, `isInViewport`, etc...
 3. And more.
 
 ## Creating your component project
@@ -63,6 +68,7 @@ To create a new component project, simply launch this command:
 
 ```shell
 sugar new litElement
+
 ```
 
 > You need to have the `sugar` CLI installed using `npm i @coffeekraken/cli -g`
@@ -73,12 +79,14 @@ Once that is finished, simple cd into your project directory and launch
 
 ```shell
 sugar dev
+
 ```
 
 This will start the **development environment** in which you can implement and test your component. Once your component is ready, launch this command to build it for production
 
 ```shell
 sugar build
+
 ```
 
 

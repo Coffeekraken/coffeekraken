@@ -2,6 +2,7 @@
     "name": "@coffeekraken/s-specs-editor-component",
     "version": "2.0.0-alpha.20",
     "description": "",
+    "type": "module",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "storybook": "start-storybook -p 6006",
@@ -12,7 +13,6 @@
     "dependencies": {
         "@coffeekraken/s-asset-picker-component": "^2.0.0-alpha.20",
         "@coffeekraken/s-clipboard-copy-component": "^2.0.0-alpha.20",
-        "@coffeekraken/s-component": "^2.0.0-alpha.20",
         "@coffeekraken/s-dropzone-component": "^2.0.0-alpha.20",
         "@coffeekraken/s-interface": "^2.0.0-alpha.20",
         "@coffeekraken/s-theme": "^2.0.0-alpha.20",

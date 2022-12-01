@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -58,17 +63,19 @@ Let's create a new `src/views/hello/hello.data.js` file with this content:
 
 ```js
 export default async function ({ req, res, pageConfig }) {
-// return variables to our view
-return {
-hello: 'world',
-};
+  // return variables to our view
+  return {
+    hello: 'world',
+  };
 }
+
 ```
 
 This will provide the `hello` variable to your view. You can use it like so:
 
 ```html
 <h1>&lcub;&lcub; $hello &rcub;&rcub;</h1>
+
 ```
 
 ## Passing parameters
@@ -77,12 +84,13 @@ To access your parameters from your `.data.js` file, assume we have this page co
 
 ```js
 export default {
-params: {
-something: true, // required param
-else: false, // optional param
-},
-views: ['hello.hello'],
+  params: {
+    something: true, // required param
+    else: false, // optional param
+  },
+  views: ['hello.hello'],
 };
+
 ```
 
 Assume we access our page with this url: `/hello/coco/world`
@@ -91,13 +99,14 @@ In your newly created `src/views/hello/hello.data.js` data file, access your par
 
 ```js
 export default async function ({ req, res, pageConfig }) {
-// log our parameters
-console.log(res.params); // { something: 'coco', else: 'world' }
-// return variables to our view
-return {
-hello: req.params.something,
-};
+  // log our parameters
+  console.log(res.params); // { something: 'coco', else: 'world' }
+  // return variables to our view
+  return {
+    hello: req.params.something,
+  };
 }
+
 ```
 
 From this point, you can handle pretty much all your data needs.

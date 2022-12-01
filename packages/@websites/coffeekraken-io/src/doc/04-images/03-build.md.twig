@@ -39,7 +39,7 @@ To compress, resize, etc... your images, we use the more than awesome [Sharp](ht
 ## Default configurations
 
 {% include 'sugar/config/fromDocmap/fromDocmap.twig' with {
-  configs: filter(docmap.map, '^@coffeekraken.s-images-builder.config.imagesBuilder')
+  docmapItems: filter(docmap.map, '^@coffeekraken.s-images-builder.config.imagesBuilder')
 } only %}
 
 ## `@coffeekraken/s-images-builder` package
@@ -51,12 +51,7 @@ npm i @coffeekraken/s-images-builder --save-dev
 ```
 
 ```js
-{
-  {
-    get(docmap, '@coffeekraken.s-images-builder.node.SImagesBuilder').example[0]
-      .code;
-  }
-}
+{{ docmap.map['@coffeekraken.s-images-builder.node.SImagesBuilder'].example[0].code|raw }}
 ```
 
 {% endblock %}

@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -51,11 +56,11 @@ A specification file has to be named with `.spec.json` at his end. Usually this 
 
 ```
 | src
-| views
-| components
-| card
-| card.twig
-| card.spec.json
+  | views
+    | components
+      | card
+        | card.twig
+        | card.spec.json
 ```
 
 ## Structure
@@ -63,54 +68,56 @@ A specification file has to be named with `.spec.json` at his end. Usually this 
 Here's an example of the card.spec.json file and how it can be written:
 
 ```js
-{
-"type": "Component",
-"title": "Card",
-"description": "Display a nice card with some infos like \"image\", \"title\", \"intro\", \"description\" and \"cta\"",
-"props": {
-"title": {
-"type": "Text",
-"title": "Title",
-"description": "The card title"
-},
-"intro": {
-"type": "Text",
-"title": "Intro",
-"description": "The card intro"
-},
-"text": {
-"type": "Text",
-"title": "Text",
-"description": "The card text"
-},
-"image": {
-"type": "Image",
-"title": "Image",
-"description": "A simple image with title and alt properties",
-"props": {
-"url": {
-"type": "Text",
-"title": "Url",
-"description": "The image url",
-"required": true
-},
-"title": {
-"type": "Text",
-"title": "Title",
-"description": "The image title",
-"required": true
-},
-"alt": {
-"type": "Text",
-"title": "Alternative text",
-"description": "The image alternative text",
-"required": true
-}
-},
-},
-"cta": "@sugar.views.components.cta"
-}
-}
+export default {
+  type: 'Component',
+  title: 'Card',
+  description:
+    'Display a nice card with some infos like "image", "title", "intro", "description" and "cta"',
+  props: {
+    title: {
+      type: 'Text',
+      title: 'Title',
+      description: 'The card title',
+    },
+    intro: {
+      type: 'Text',
+      title: 'Intro',
+      description: 'The card intro',
+    },
+    text: {
+      type: 'Text',
+      title: 'Text',
+      description: 'The card text',
+    },
+    image: {
+      type: 'Image',
+      title: 'Image',
+      description: 'A simple image with title and alt properties',
+      props: {
+        url: {
+          type: 'Text',
+          title: 'Url',
+          description: 'The image url',
+          required: true,
+        },
+        title: {
+          type: 'Text',
+          title: 'Title',
+          description: 'The image title',
+          required: true,
+        },
+        alt: {
+          type: 'Text',
+          title: 'Alternative text',
+          description: 'The image alternative text',
+          required: true,
+        },
+      },
+    },
+    cta: '@sugar.views.components.cta',
+  },
+};
+
 ```
 
 > Note that the "cta" property is set to `@sugar.views.components.cta`. This is a link to another existing spec file that is available from the [@coffeekraken/sugar](/package/@coffeekraken/sugar/doc/readme) package. To read a spec file, make use of the [@coffeekraken/s-specs](/package/@coffeekraken/s-specs/doc/readme) package that will resolve these links for you.
@@ -126,9 +133,9 @@ Here's the main data types that we think cover a lot of situations. Note that th
 - `Number`: Simple number
 - `Integer`: Simple integer number
 - `Image`: Simple image data
-- `src`: The source of the image
-- `alt`: The alternative text
-- `title`: The image title
+  - `src`: The source of the image
+  - `alt`: The alternative text
+  - `title`: The image title
 - `Object`: An object described by his own `props`
 
 ## Repeatable types `array`
@@ -138,14 +145,15 @@ To define a prop as **repeatable**, simply suffix his `type` with `[]`.
 Here's a simple example
 
 ```js
-{
-"props": {
-"images": {
-"type": "Image[]",
-"label": "Images"
-}
-}
-}
+export default {
+  props: {
+    images: {
+      type: 'Image[]',
+      label: 'Images',
+    },
+  },
+};
+
 ```
 
 ## Resulting data
@@ -153,25 +161,27 @@ Here's a simple example
 If we take the overview example above, the resulting data that has to be injected into the view at his render phase could be something like this:
 
 ```php
+
 return [
-'title' => 'Hello world',
-'author' => [
-'name' => 'Olivier Bossel',
-'email' => 'something@gmail.com',
-],
-'images' => [
-[
-'src' => 'https://picsum.photos/200/300',
-'title' => 'Hello',
-'alt' => 'world',
-],
-[
-'src' => 'https://picsum.photos/200/300',
-'title' => 'Hello',
-'alt' => 'world',
-],
-],
+  'title' => 'Hello world',
+  'author' => [
+    'name' => 'Olivier Bossel',
+    'email' => 'something@gmail.com',
+  ],
+  'images' => [
+    [
+      'src' => 'https://picsum.photos/200/300',
+      'title' => 'Hello',
+      'alt' => 'world',
+    ],
+    [
+      'src' => 'https://picsum.photos/200/300',
+      'title' => 'Hello',
+      'alt' => 'world',
+    ],
+  ],
 ];
+
 ```
 
 

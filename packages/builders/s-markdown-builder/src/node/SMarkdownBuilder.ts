@@ -9,13 +9,23 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 import __SViewRenderer from '@coffeekraken/s-view-renderer';
 
+import __SCodeFormatter from '@coffeekraken/s-code-formatter';
 import { __getCoffeekrakenMetas } from '@coffeekraken/sugar/coffeekraken';
+
+import { __packageCacheDir, __packageRootDir } from '@coffeekraken/sugar/path';
+
 import {
+    __fileHash,
     __folderPath,
+    __readJsonSync,
     __writeFileSync,
     __writeTmpFileSync,
 } from '@coffeekraken/sugar/fs';
-import { __deepMerge, __flatten } from '@coffeekraken/sugar/object';
+import {
+    __deepMerge,
+    __flatten,
+    __objectHash,
+} from '@coffeekraken/sugar/object';
 import { __packageJsonSync } from '@coffeekraken/sugar/package';
 import __fs from 'fs';
 import __handlebars from 'handlebars';
@@ -52,7 +62,9 @@ import __SMarkdownBuilderBuildParamsInterface from './interface/SMarkdownBuilder
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISMarkdownBuilderSettings extends ISBuilderSettings {}
+export interface ISMarkdownBuilderSettings extends ISBuilderSettings {
+    cache: boolean;
+}
 
 export interface ISMarkdownBuilderResult {
     inputFile?: __SFile;
@@ -92,6 +104,10 @@ export interface ISMarkdownBuilderBuildParams {
 
 export default class SMarkdownBuilder extends __SBuilder {
     static _registeredTransformers: any = {};
+
+    /**
+     * Store the package hash to rebuild files
+     */
 
     /**
      * @name              _registerTransformer
@@ -135,7 +151,12 @@ export default class SMarkdownBuilder extends __SBuilder {
      */
     constructor(settings?: Partial<ISMarkdownBuilderSettings>) {
         super(
-            __deepMerge(__SSugarConfig.get('markdownBuilder'), settings ?? {}),
+            __deepMerge(
+                {
+                    cache: true,
+                },
+                settings ?? {},
+            ),
         );
 
         // register layouts from config
@@ -214,7 +235,7 @@ export default class SMarkdownBuilder extends __SBuilder {
             );
         } else {
             return new __SPromise(
-                async ({ resolve, reject, emit }) => {
+                async ({ resolve, reject, emit, pipe }) => {
                     const handlebars = __handlebars.create();
 
                     // load
@@ -227,8 +248,27 @@ export default class SMarkdownBuilder extends __SBuilder {
                             params ?? {},
                         );
 
+                    // calculate final settings and params hash
+                    const hashSettings = Object.assign({}, this.settings);
+                    delete hashSettings.metas;
+                    const settingsHash = __objectHash(hashSettings),
+                        paramsHash = __objectHash(finalParams);
+
+                    // cache file path
+                    const cacheFilePath = `${__packageCacheDir()}/s-markdown-builder/cacheHashes.json`;
+
+                    // load cache file if wanted
+                    let cacheHashes = {};
+                    if (this.settings.cache) {
+                        if (!__fs.existsSync(cacheFilePath)) {
+                            __writeFileSync(cacheFilePath, '{}');
+                        }
+                        cacheHashes = __readJsonSync(cacheFilePath);
+                    }
+
                     const buildedFiles: ISMarkdownBuilderResult[] = [];
 
+                    // handle raw code passed
                     if (finalParams.inRaw) {
                         finalParams.inPath = __writeTmpFileSync(
                             finalParams.inRaw,
@@ -237,6 +277,7 @@ export default class SMarkdownBuilder extends __SBuilder {
                         delete finalParams.inRaw;
                     }
 
+                    // handle in path
                     if (finalParams.inPath) {
                         finalParams.inDir = __folderPath(finalParams.inPath);
                         finalParams.glob = __path.relative(
@@ -245,17 +286,6 @@ export default class SMarkdownBuilder extends __SBuilder {
                         );
                         // @ts-ignore
                         delete finalParams.inPath;
-                    }
-
-                    // save with no output
-                    if (
-                        finalParams.save &&
-                        !finalParams.outPath &&
-                        !finalParams.outDir
-                    ) {
-                        throw new Error(
-                            `<red>[${this.constructor.name}]</red> The param "<yellow>save</yellow>" MUST be used alongside the params "<yellow>outPath</yellow>" or "<yellow>outDir</yellow>"`,
-                        );
                     }
 
                     // inDir with no glob
@@ -278,22 +308,22 @@ export default class SMarkdownBuilder extends __SBuilder {
 
                     let path = `${finalParams.inDir}/${finalParams.glob}`;
                     const sourceObj = {
-                        inputStr: '',
-                        outputStr: '',
+                        inRelPath: '',
+                        outRelDir: '',
                         files: [],
                         inDir: finalParams.inDir,
                         outDir: finalParams.outDir,
                         outPath: finalParams.outPath,
                     };
                     if (__fs.existsSync(path)) {
-                        sourceObj.inputStr = __path.relative(
+                        sourceObj.inRelPath = __path.relative(
                             process.cwd(),
                             path,
                         );
                         // @ts-ignore
                         sourceObj.files.push(path);
                     } else if (__SGlob.isGlob(path)) {
-                        sourceObj.inputStr = __path.relative(
+                        sourceObj.inRelPath = __path.relative(
                             process.cwd(),
                             path,
                         );
@@ -307,11 +337,11 @@ export default class SMarkdownBuilder extends __SBuilder {
                         );
                     }
                     if (sourceObj.outPath) {
-                        sourceObj.outputStr =
+                        sourceObj.outRelDir =
                             __path.relative(process.cwd(), sourceObj.outPath) ||
                             '.';
                     } else if (sourceObj.outDir) {
-                        sourceObj.outputStr =
+                        sourceObj.outRelDir =
                             __path.relative(process.cwd(), sourceObj.outDir) ||
                             '.';
                     }
@@ -323,13 +353,13 @@ export default class SMarkdownBuilder extends __SBuilder {
 
                     emit('log', {
                         type: __SLog.TYPE_INFO,
-                        value: `<yellow>○</yellow> Input       : <cyan>${sourceObj.inputStr}</cyan>`,
+                        value: `<yellow>○</yellow> Input       : <cyan>${sourceObj.inRelPath}</cyan>`,
                     });
 
-                    if (sourceObj.outputStr) {
+                    if (sourceObj.outRelDir) {
                         emit('log', {
                             type: __SLog.TYPE_INFO,
-                            value: `<yellow>○</yellow> Output      : <cyan>${sourceObj.outputStr}</cyan>`,
+                            value: `<yellow>○</yellow> Output      : <cyan>${sourceObj.outRelDir}</cyan>`,
                         });
                     }
 
@@ -356,85 +386,89 @@ export default class SMarkdownBuilder extends __SBuilder {
                     );
 
                     if (!sourceObj.files.length) {
-                        return reject();
+                        emit('log', {
+                            type: __SLog.TYPE_INFO,
+                            value: `<yellow>[build]</yellow> No files to build...`,
+                        });
+                        return resolve([]);
                     }
 
                     for (let j = 0; j < sourceObj.files.length; j++) {
                         const filePath = <string>sourceObj.files[j];
 
+                        const fileHash = __fileHash(filePath),
+                            finalFileHash = `${fileHash}-${paramsHash}-${settingsHash}`;
+
                         const buildObj = {
                             data: '',
-                            output: '',
+                            outPath: sourceObj.outPath,
                         };
 
-                        if (sourceObj.outPath) {
-                            buildObj.output = sourceObj.outPath;
-                        } else if (sourceObj.inDir && sourceObj.outDir) {
-                            buildObj.output = `${
+                        // if no outPath in the sourceObj
+                        // AND that we have a inDir and an outDir
+                        // set the outPath with that
+                        if (
+                            !buildObj.outPath &&
+                            sourceObj.inDir &&
+                            sourceObj.outDir
+                        ) {
+                            buildObj.outPath = `${
                                 sourceObj.outDir
                             }/${__path.relative(sourceObj.inDir, filePath)}`;
+                        }
+
+                        // if no outPath in the sourceObj
+                        // AND that we don't want to save the file
+                        // set the outPath to the temp directory
+                        if (!finalParams.save) {
+                            buildObj.outPath = `${__packageCacheDir()}/s-markdown-builder/${
+                                sourceObj.inRelPath
+                            }`;
                         }
 
                         // remplace the extension in the output
                         const outputExtension =
                             finalParams.target === 'html' ? 'html' : 'md';
-                        buildObj.output = buildObj.output.replace(
+                        buildObj.outPath = buildObj.outPath.replace(
                             /\.(md)(\..*)?/,
                             `.${outputExtension}`,
                         );
 
-                        let currentTransformedString = buildObj.data;
+                        // check if need to rebuild the file or not
+                        if (
+                            cacheHashes[`${filePath}-${outputExtension}`] ===
+                            finalFileHash
+                        ) {
+                            emit('log', {
+                                type: __SLog.TYPE_INFO,
+                                value: `<magenta>[cache]</magenta> No need to rebuild the file "<cyan>${__path.relative(
+                                    __packageRootDir(),
+                                    filePath,
+                                )}</cyan>" for the "<yellow>${
+                                    finalParams.target
+                                }</yellow>" target`,
+                            });
 
-                        // processing transformers
-                        // @ts-ignore
-                        for (let [
-                            transformerId,
-                            transformerObj,
-                        ] of Object.entries(
-                            this.constructor._registeredTransformers,
-                        )) {
-                            // @ts-ignore
-                            if (!transformerObj[finalParams.target]) return;
+                            const outputFile = __SFile.new(buildObj.outPath);
+                            const res: ISMarkdownBuilderResult = {
+                                inputFile: __SFile.new(filePath),
+                                outputFile: __SFile.new(buildObj.outPath),
+                                code: outputFile.content,
+                            };
 
-                            const matches = [
-                                ...currentTransformedString.matchAll(
-                                    transformerObj.match,
-                                ),
-                            ];
+                            // add the file in the builded stack
+                            buildedFiles.push(res);
 
-                            if (!matches.length) continue;
-
-                            // const transformerStr = __fs
-                            //     .readFileSync(
-                            //         transformerObj[finalParams.target],
-                            //         'utf8',
-                            //     )
-                            //     .toString();
-
-                            // const tplFn = handlebars.compile(transformerStr);
-
-                            // for (let i = 0; i < matches.length; i++) {
-                            //     const match = matches[i];
-                            //     let preprocessedData = match;
-                            //     // @ts-ignore
-                            //     if (transformerObj.preprocessor) {
-                            //         const preprocessorFn = await import(
-                            //             transformerObj.preprocessor
-                            //         );
-                            //         preprocessedData =
-                            //             await preprocessorFn.default(match);
-                            //     }
-
-                            //     const result = tplFn({
-                            //         data: preprocessedData,
-                            //     });
-                            //     currentTransformedString =
-                            //         currentTransformedString.replace(
-                            //             match[0],
-                            //             result,
-                            //         );
-                            // }
+                            continue;
+                        } else {
+                            // save the file hash
+                            // it will be saved at the end only if the build
+                            // is a success...
+                            cacheHashes[`${filePath}-${outputExtension}`] =
+                                finalFileHash;
                         }
+
+                        let currentTransformedString = buildObj.data;
 
                         const viewRenderer = new __SViewRenderer();
                         const viewRendererRes = await viewRenderer.render(
@@ -443,6 +477,80 @@ export default class SMarkdownBuilder extends __SBuilder {
                         );
 
                         currentTransformedString = viewRendererRes.value ?? '';
+
+                        // format codes
+                        const codeFormatter = new __SCodeFormatter();
+                        const codeMatches = currentTransformedString.match(
+                            /```[a-zA-Z0-9]+[^```]*```/gm,
+                        );
+                        if (codeMatches.length) {
+                            for (let [i, value] of codeMatches.entries()) {
+                                const language = value
+                                        .trim()
+                                        .match(/^```([a-zA-Z0-9]+)/)[1],
+                                    code = value
+                                        .trim()
+                                        .replace(/^```[a-zA-Z0-9]+/, '')
+                                        .replace(/```$/, '');
+                                const formatedCode =
+                                    await codeFormatter.formatInline(
+                                        code,
+                                        language,
+                                    );
+                                // replacing the code
+                                currentTransformedString =
+                                    currentTransformedString.replace(
+                                        value,
+                                        [
+                                            `\`\`\`${language}`,
+                                            formatedCode,
+                                            '```',
+                                        ].join('\n'),
+                                    );
+                            }
+                        }
+
+                        // handle spaces at line start
+                        let doNotTouchline = false,
+                            inList = false;
+                        currentTransformedString = currentTransformedString
+                            .split('\n')
+                            .map((line) => {
+                                const trimedLine = line.trim();
+
+                                // end of protected lines
+                                if (
+                                    doNotTouchline &&
+                                    trimedLine.match(/^[\`]{3}$/)
+                                ) {
+                                    doNotTouchline = false;
+                                    return trimedLine;
+                                }
+                                if (
+                                    inList &&
+                                    !trimedLine.match(/^(\-|[0-9]+\.)\s/)
+                                ) {
+                                    inList = false;
+                                    return line;
+                                }
+
+                                // check if dont want to touch line
+                                if (doNotTouchline || inList) {
+                                    return line;
+                                }
+
+                                // start of protected lines
+                                if (trimedLine.match(/^[\`]{3}/)) {
+                                    doNotTouchline = true;
+                                }
+                                if (trimedLine.match(/^(\-|[0-9]+\.)\s/)) {
+                                    inList = true;
+                                }
+
+                                // return the trimed line
+                                return trimedLine;
+                            })
+                            .join('\n');
 
                         // marked if html is the target
                         if (finalParams.target === 'html') {
@@ -468,12 +576,13 @@ export default class SMarkdownBuilder extends __SBuilder {
                             currentTransformedString,
                         ].join('\n');
 
+                        // write file on disk
+                        __writeFileSync(
+                            buildObj.outPath,
+                            currentTransformedString,
+                        );
                         if (finalParams.save) {
-                            __writeFileSync(
-                                buildObj.output,
-                                currentTransformedString,
-                            );
-                            const file = new __SFile(buildObj.output);
+                            const file = new __SFile(buildObj.outPath);
                             emit('log', {
                                 value: `<green>[save]</green> File "<yellow>${file.relPath}</yellow>" <yellow>${file.stats.kbytes}kb</yellow> saved <green>successfully</green>`,
                             });
@@ -481,12 +590,18 @@ export default class SMarkdownBuilder extends __SBuilder {
 
                         const res: ISMarkdownBuilderResult = {
                             inputFile: __SFile.new(filePath),
-                            outputFile: finalParams.save
-                                ? __SFile.new(buildObj.output)
-                                : undefined,
+                            outputFile: __SFile.new(buildObj.outPath),
                             code: currentTransformedString,
                         };
 
+                        // write the cache only at the end if the build
+                        // is a success
+                        __writeFileSync(
+                            cacheFilePath,
+                            JSON.stringify(cacheHashes, null, 4),
+                        );
+
+                        // add the file in the builded stack
                         buildedFiles.push(res);
                     }
 

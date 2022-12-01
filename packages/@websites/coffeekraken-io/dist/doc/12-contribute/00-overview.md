@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -46,6 +51,7 @@ Our toolchain is stored in a monorepository that you can find [HERE](https://git
 
 ```bash
 git clone ...
+
 ```
 
 > For more informations about how to work on Coffeekraken and send your code back to the main project, please [check this page](/doc/contribute/git).
@@ -54,41 +60,43 @@ git clone ...
 
 Now that you have the files, let's take a look at the folder structure:
 
-```bash
+```txt
+
 | package.json
 | src # monorepo sources
 | packages
-----
-| {category} # group packages into categories
-----
-| {package} # each packages
-----
-| package.json
-| docmap.json
-| sugar.json
-| .local # local files like cache, etc...
-| dist # same as the "src" but with builded files
-| src
-----
-| cli # optional
-| config #optional
-| css # optional
-| doc # optional
-| favicon # optional
-| fonts # optional
-| icons # optional
-| img # optional
-| js # browser js
-----
-| exports.ts # entry point for your browser stuffs
-| node # node js
-----
-| exports.ts # entry point for your node struffs
-| shared # shared node/browser stuffs
-----
-| exports.ts # entry point for your shared struffs
-| pages # optional
-| views # optional
+ ----
+     | {category} # group packages into categories
+      ----
+          | {package} # each packages
+           ----
+               | package.json
+               | docmap.json
+               | sugar.json
+               | .local # local files like cache, etc...
+               | dist # same as the "src" but with builded files
+               | src
+                ----
+                    | cli # optional
+                    | config #optional
+                    | css # optional
+                    | doc # optional
+                    | favicon # optional
+                    | fonts # optional
+                    | icons # optional
+                    | img # optional
+                    | js # browser js
+                     ----
+                         | exports.ts # entry point for your browser stuffs
+                    | node # node js
+                     ----
+                         | exports.ts # entry point for your node struffs
+                    | shared # shared node/browser stuffs
+                     ----
+                         | exports.ts # entry point for your shared struffs
+                    | pages # optional
+                    | views # optional
+
 ```
 
 Each packages are stored inside a structure of 3 levels. **/packages/{category}/{package}**.
@@ -110,6 +118,7 @@ Then, simply run this command in the monorepo root directory:
 
 ```bash
 yarn
+
 ```
 
 Once that's done, you are pretty much ready to go...
@@ -128,6 +137,7 @@ cd /usr/local/bin
 ln -s %pathToMonorepoRoot/packages/core/cli/dist/pkg/esm/cli/sugar.cli.js sugard
 # you will be able to use our "sugard" CLI
 sugard -h
+
 ```
 
 ## Typescript
@@ -138,6 +148,7 @@ Don't worry. Our CLI is here to help! In the monorepo root folder, just run this
 
 ```bash
 sugard mono.dev
+
 ```
 
 This will start some processes to handle the Typescript compilation.

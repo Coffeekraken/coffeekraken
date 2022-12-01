@@ -52,7 +52,7 @@ This component works with some specification data that you have to provide it ei
 The specifications JSON must follow this structure:
 
 ```js
-{
+export default {
    specsMap: {
      'components.card.card': {},
      'components.cta.cta': {}
@@ -81,7 +81,7 @@ The specifications JSON must follow this structure:
 Here's an example of specification for a card:
 
 ```js
-{
+export default {
     type: 'Component',
     title: 'Card',
     description: 'Wonderfull card component',
@@ -100,7 +100,7 @@ Here's an example of specification for a card:
             required: true
         },
         image: '@sugar.views.props.image', // make use of pre-written specs from the @coffeekraken/sugar package
-        cta: '@sugar.views.components.cta
+        cta: '@sugar.views.components.cta'
     }
 }
 ```

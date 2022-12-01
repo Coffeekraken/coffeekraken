@@ -52,7 +52,7 @@ export default function docmapDocumentationData({ req, res, pageConfig }) {
                 },
                 inPath: docObj.docmap.path,
                 target: 'html',
-                save: false,
+                save: false
             }),
         );
         if (markdownRes instanceof Error) {

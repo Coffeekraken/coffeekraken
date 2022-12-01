@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -45,17 +50,17 @@ To be quick and as descriptive as possible, `scopes` are simply the whole style 
 Here's the base list of `scopes` that a component **MUST** use:
 
 1. `bare`: This scope named `bare` represent all the structural CSS of the component. For a button, this will contain:
-- `font-size` property
-- `display` property
-- `padding` property(ies)
-- `cursor` property
-- etc...
+   - `font-size` property
+   - `display` property
+   - `padding` property(ies)
+   - `cursor` property
+   - etc...
 2. `lnf`: This scope named `lnf` (look and feel) represent all the visual CSS of the component. This can be:
-- `color` property
-- `background` property
-- `border` property
-- `font-family` property
-- etc...
+   - `color` property
+   - `background` property
+   - `border` property
+   - `font-family` property
+   - etc...
 
 > With these scopes defined, you can choose if you want integrate a component with all his CSS, only the `bare` scope and apply your own visual style to it, or take only the `lnf` scope which it less meaningful alone...
 

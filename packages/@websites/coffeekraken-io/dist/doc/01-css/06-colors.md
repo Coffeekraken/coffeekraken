@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -45,12 +50,13 @@ Here's a simple example of a config file that define your colors:
 
 ```js
 export default function (env, config) {
-return {
-base: 'hsl(156,50,50)',
-main: 'hsl(156,50,50)',
-accent: '#ffbb00',
-};
+  return {
+    base: 'hsl(156,50,50)',
+    main: 'hsl(156,50,50)',
+    accent: '#ffbb00',
+  };
 }
+
 ```
 
 ## Syntax
@@ -73,44 +79,46 @@ In your theme file, colors are defined as an object. Each color has the `color` 
 
 ```js
 export default function (env, config) {
-return {
-text: {
-lighten: 0,
-},
-placeholder: {
-lighten: 50,
-alpha: 0.4,
-},
-};
+  return {
+    text: {
+      lighten: 0,
+    },
+    placeholder: {
+      lighten: 50,
+      alpha: 0.4,
+    },
+  };
 }
+
 ```
 
 You have the possibility to specify some color schema specificaly to a particular color like so:
 
 ```js
 export default function (env, config) {
-return {
-text: {
-lighten: 0,
-// wrap your color specific schema in this "color" property
-color: {
-base: {
-lighten: 30,
-},
-main: {
-lighten: 46,
-},
-complementary: {
-lighten: 15,
-},
-},
-},
-placeholder: {
-lighten: 50,
-alpha: 0.4,
-},
-};
+  return {
+    text: {
+      lighten: 0,
+      // wrap your color specific schema in this "color" property
+      color: {
+        base: {
+          lighten: 30,
+        },
+        main: {
+          lighten: 46,
+        },
+        complementary: {
+          lighten: 15,
+        },
+      },
+    },
+    placeholder: {
+      lighten: 50,
+      alpha: 0.4,
+    },
+  };
 }
+
 ```
 
 These variants are the same color defined in the `color` property, but with some tweaks like:
@@ -144,22 +152,24 @@ Take an example when we want to create a button that uses this `current` color, 
 
 ```css
 .btn {
-background: sugar.color(current);
-color: sugar.color(current, foreground);
+  background: sugar.color(current);
+  color: sugar.color(current, foreground);
 }
 .my-section {
-@sugar.color (accent);
+  @sugar.color (accent);
 }
 .my-button {
-@sugar.color (error);
+  @sugar.color (error);
 }
+
 ```
 
 ```html
 <div class="my-section">
-<a class="btn">Hello world</a>
+  <a class="btn">Hello world</a>
 </div>
 <a class="my-button btn">Other button</a>
+
 ```
 
 > Note that behind the scene the colors are applied using variables. This mean that the CSS cascading feature works here as well.

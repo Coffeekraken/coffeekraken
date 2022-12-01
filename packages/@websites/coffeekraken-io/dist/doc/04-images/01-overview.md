@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -45,21 +50,21 @@ Coffeekraken comes with a simple, elegant and fully customizable solution. Here'
 ## Our solution
 
 1. Images are in multiple formats like `.jpg`, `.png`, etc...
-- Our solution handles:
-- `.jpg`
-- `.png`
-- `.gif`
-- `.svg`
-- `.webp`
+   - Our solution handles:
+     - `.jpg`
+     - `.png`
+     - `.gif`
+     - `.svg`
+     - `.webp`
 2. Sometimes (everytime), images are not optimized for the web
-- Too big images
-- You can specify some `max-width` and `max-height` for your images
-- They are not compressed
-- You can simply set a `quality` target percentage
-- We need different `resolution`
-- Simply specify the resolution(s) you want to have multiple images outputs like `[1,2,3]` that will generate images for these 3 resolutions
+   - Too big images
+     - You can specify some `max-width` and `max-height` for your images
+   - They are not compressed
+     - You can simply set a `quality` target percentage
+   - We need different `resolution`
+     - Simply specify the resolution(s) you want to have multiple images outputs like `[1,2,3]` that will generate images for these 3 resolutions
 3. Free `.webp` output if you want
-- Simply set the `webp` setting to `true`
+   - Simply set the `webp` setting to `true`
 
 ## Fully customizable
 

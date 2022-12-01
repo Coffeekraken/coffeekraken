@@ -16,9 +16,7 @@
             "@coffeekraken/s-code-formatter",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
-            "@coffeekraken/s-component-proxy",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-component",
             "@coffeekraken/s-conductor",
             "@coffeekraken/s-config-adapter",
             "@coffeekraken/s-config-folder-adapter",
@@ -50,6 +48,7 @@
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-highlight-feature",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
@@ -57,8 +56,8 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-mitosis",
             "@coffeekraken/s-monorepo",
+            "@coffeekraken/s-pack-essentials",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
@@ -6754,6 +6753,66 @@
                 "relPath": "src/php/array/deepMerge.php",
                 "children": {}
             },
+            "@coffeekraken.sugar.php.ar.filter": {
+                "id": "@coffeekraken.sugar.php.ar.filter",
+                "name": "filter",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "description": "This function allows you filter some array items either by:\n- `^...`: The keys that starts with the passed string\n- `...$`: The keys that ends with the passed string\n- `function($key, $value) { retur true; }`: A function that must return true or false",
+                "namespace": "@coffeekraken.sugar.php.ar",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "$obj = [\n  \"hello\" => 'world',\n  \"yop\" => 'plop',\n  \"helloPlop\" => true\n];\n\\Sugar\\ar\\filter($obj, '^hel'); // [\"hello\" => 'world', \"helloPlop\" => true]\n\\Sugar\\ar\\filter($obj, function($key, $value) {\n  return false;\n}); // []"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "filter.php",
+                "extension": "php",
+                "relPath": "src/php/array/filter.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.ar.get": {
+                "id": "@coffeekraken.sugar.php.ar.get",
+                "name": "get",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "description": "This function allows you to get a value from the passed object using the passed dotpath",
+                "namespace": "@coffeekraken.sugar.php.ar",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "$obj = [\n  \"hello\" => [\n     \"world\" => \"plop\"\n  ]\n];\n\\Sugar\\ar\\get($obj, 'hello.world'); // \"plop\""
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "get.php",
+                "extension": "php",
+                "relPath": "src/php/array/get.php",
+                "children": {}
+            },
             "@coffeekraken.sugar.php.ar.pickRandom": {
                 "id": "@coffeekraken.sugar.php.ar.pickRandom",
                 "name": "pickRandom",
@@ -7566,6 +7625,66 @@
                 "filename": "deepMerge.php",
                 "extension": "php",
                 "relPath": "src/php/object/deepMerge.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.object.filter": {
+                "id": "@coffeekraken.sugar.php.object.filter",
+                "name": "filter",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "description": "This function allows you filter some object items either by:\n- `^...`: The keys that starts with the passed string\n- `...$`: The keys that ends with the passed string\n- `function($key, $value) { retur true; }`: A function that must return true or false",
+                "namespace": "@coffeekraken.sugar.php.object",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "$obj = (object) [\n  \"hello\" => 'world',\n  \"yop\" => 'plop',\n  \"helloPlop\" => true\n];\n\\Sugar\\object\\filter($obj, '^hel'); // (object) [\"hello\" => 'world', \"helloPlop\" => true]\n\\Sugar\\object\\filter($obj, function($key, $value) {\n  return false;\n}); // (object) []"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "filter.php",
+                "extension": "php",
+                "relPath": "src/php/object/filter.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.object.get": {
+                "id": "@coffeekraken.sugar.php.object.get",
+                "name": "get",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "description": "This function allows you to get a value from the passed object using the passed dotpath.\nY",
+                "namespace": "@coffeekraken.sugar.php.object",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "$obj = (object) [\n  \"hello\" => (object) [\n     \"world\" => \"plop\"\n  ]\n];\n\\Sugar\\object\\get($obj, 'hello.world'); // \"plop\""
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "get.php",
+                "extension": "php",
+                "relPath": "src/php/object/get.php",
                 "children": {}
             },
             "@coffeekraken.sugar.php.object.sort": {
@@ -22118,6 +22237,43 @@
                 "relPath": "src/php/twig/filters/string/idCompliant.php",
                 "children": {}
             },
+            "@coffeekraken.sugar.php.twig.filters.string.replace": {
+                "id": "@coffeekraken.sugar.php.twig.filters.string.replace",
+                "name": "replace",
+                "type": {
+                    "types": [
+                        {
+                            "type": "TwigFunction"
+                        }
+                    ],
+                    "raw": "TwigFunction"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This twig function allows you to replace a value by another in your string",
+                "namespace": "@coffeekraken.sugar.php.twig.filters.string",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "{{ 'hello world'|replace('world', 'coco') }}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "replace.php",
+                "extension": "php",
+                "relPath": "src/php/twig/filters/string/replace.php",
+                "children": {}
+            },
             "@coffeekraken.sugar.php.twig.functions.cast.toArray": {
                 "id": "@coffeekraken.sugar.php.twig.functions.cast.toArray",
                 "name": "toArray",
@@ -22451,6 +22607,36 @@
                 "relPath": "src/php/twig/functions/html/attrs.php",
                 "children": {}
             },
+            "@coffeekraken.sugar.php.twig.functions.object.get": {
+                "id": "@coffeekraken.sugar.php.twig.functions.object.get",
+                "name": "get",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "description": "This function allows you to get a value from the passed object using the passed dotpath",
+                "namespace": "@coffeekraken.sugar.php.twig.functions.object",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "{% set obj = {\n  hello: {\n     world : \"plop\"\n  }\n} %}\n{{ get(obj, 'hello.world') }}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "get.php",
+                "extension": "php",
+                "relPath": "src/php/twig/functions/object/get.php",
+                "children": {}
+            },
             "@coffeekraken.sugar.php.twig.functions.specs.readSpec": {
                 "id": "@coffeekraken.sugar.php.twig.functions.specs.readSpec",
                 "name": "readSpec",
@@ -22560,6 +22746,43 @@
                 "filename": "idCompliant.php",
                 "extension": "php",
                 "relPath": "src/php/twig/functions/string/idCompliant.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.twig.functions.string.replace": {
+                "id": "@coffeekraken.sugar.php.twig.functions.string.replace",
+                "name": "replace",
+                "type": {
+                    "types": [
+                        {
+                            "type": "TwigFunction"
+                        }
+                    ],
+                    "raw": "TwigFunction"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This twig function allows you to replace a value by another in your string",
+                "namespace": "@coffeekraken.sugar.php.twig.functions.string",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "{% set str = 'hello world' %}\n{% set id = replace(str, 'world', 'coco') %}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "replace.php",
+                "extension": "php",
+                "relPath": "src/php/twig/functions/string/replace.php",
                 "children": {}
             },
             "@coffeekraken.sugar.php.twig.functions.string.uniqid": {

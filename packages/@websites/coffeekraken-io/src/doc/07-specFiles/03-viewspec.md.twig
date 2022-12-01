@@ -42,7 +42,7 @@ A specification file has to be named with `.spec.json` at his end. Usually this 
 Here's an example of the card.spec.json file and how it can be written:
 
 ```js
-{
+export default {
     "type": "Component",
     "title": "Card",
     "description": "Display a nice card with some infos like \"image\", \"title\", \"intro\", \"description\" and \"cta\"",
@@ -117,7 +117,7 @@ To define a prop as **repeatable**, simply suffix his `type` with `[]`.
 Here's a simple example
 
 ```js
-{
+export default {
     "props": {
         "images": {
             "type": "Image[]",

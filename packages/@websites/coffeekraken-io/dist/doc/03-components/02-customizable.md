@@ -1,3 +1,7 @@
+<!-- This file has been generated using
+     the "@coffeekraken/s-markdown-builder" package.
+     !!! Do not edit it directly... -->
+
 
 <!-- header -->
 # @website/coffeekraken-io
@@ -18,6 +22,7 @@ The frontend toolkit that works for everyone. Experts, professionals and new-com
 
 ```shell
 npm i @website/coffeekraken-io
+
 ```
 
 <!-- body -->
@@ -54,7 +59,7 @@ To integrate the `button` component inside your stylesheet with all his `scopes`
 @sugar.ui.button.classes;
 /* Applying button style on a custom element */
 .my-button {
-@sugar.ui.button;
+    @sugar.ui.button;
 }
 ```
 
@@ -62,6 +67,7 @@ To integrate the `button` component inside your stylesheet with all his `scopes`
 <a class="s-btn">Hello world</a>
 <br />
 <a class="my-button">Hello world</a>
+
 ```
 
 ## Example of custom styling `button` integration:
@@ -73,14 +79,14 @@ To integrate the `button` component inside your stylesheet with only the `bare` 
 @sugar.ui.button.classes ($scope: bare);
 /* Applying button style on a custom element */
 .my-button {
-@sugar.ui.button ($scope: bare);
+    @sugar.ui.button ($scope: bare);
 }
 .s-btn,
 .my-button {
-background: red;
-color: white;
-background: red;
-color: white;
+    background: red;
+    color: white;
+    background: red;
+    color: white;
 }
 ```
 
@@ -88,6 +94,7 @@ color: white;
 <a class="s-btn">Hello world</a>
 <br />
 <a class="my-button">Hello world</a>
+
 ```
 
 ## Customize `web`components
@@ -103,7 +110,7 @@ If you want to have only the `bare` style and make your own visual display for a
 import { define } from '@coffeekraken/s-date-picker-component';
 // define our component with the `bare` prop
 define({
-bare: true,
+    bare: true,
 });
 // registering our component with another tag name without the `bare` prop applied by default
 define({}, 'my-cool-date-picker');
@@ -114,6 +121,7 @@ define({}, 'my-cool-date-picker');
 <s-date-picker></s-date-picker>
 <!-- using our none bare component and apply it the bare prop -->
 <my-cool-date-picker bare></my-cool-date-picker>
+
 ```
 
 

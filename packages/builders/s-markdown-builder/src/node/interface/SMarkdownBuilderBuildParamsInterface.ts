@@ -75,6 +75,12 @@ export default class SMarkdownBuilderBuildParamsInterface extends __SInterface {
                 alias: 's',
                 default: __SSugarConfig.get('markdownBuilder.default.save'),
             },
+            cache: {
+                description: 'Specify if you want to use the cache of not',
+                type: 'Boolean',
+                alias: 'c',
+                default: true,
+            },
             target: {
                 description:
                     'Specify the target format of the build. Supported values are "html" and "markdown"',

@@ -22858,9 +22858,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "cell.md",
+                "filename": "cell.md.twig",
                 "extension": "md",
-                "relPath": "src/views/_specs/bare/cell/cell.md",
+                "relPath": "src/views/_specs/bare/cell/cell.md.twig",
                 "children": {}
             },
             "@coffeekraken.sugar.specs.views.bare.container.Container": {
@@ -22899,9 +22899,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "container.md",
+                "filename": "container.md.twig",
                 "extension": "md",
-                "relPath": "src/views/_specs/bare/container/container.md",
+                "relPath": "src/views/_specs/bare/container/container.md.twig",
                 "children": {}
             },
             "@coffeekraken.sugar.specs.views.bare.layout.Layout": {
@@ -22940,9 +22940,50 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "layout.md",
+                "filename": "layout.md.twig",
                 "extension": "md",
-                "relPath": "src/views/_specs/bare/layout/layout.md",
+                "relPath": "src/views/_specs/bare/layout/layout.md.twig",
+                "children": {}
+            },
+            "@coffeekraken.sugar.specs.views.components.card.Card": {
+                "id": "@coffeekraken.sugar.specs.views.components.card.Card",
+                "name": "Card",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Specs",
+                        "Views"
+                    ],
+                    "slug": "/specs/sugar.views.components.card"
+                },
+                "platform": [
+                    {
+                        "name": "blade",
+                        "description": ""
+                    },
+                    {
+                        "name": "twig",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.sugar.specs.views.components.card",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "card.md.twig",
+                "extension": "md",
+                "relPath": "src/views/_specs/components/card/card.md.twig",
                 "children": {}
             },
             "@coffeekraken.sugar.views.layout.Main": {

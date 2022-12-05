@@ -26,8 +26,5 @@ return new \Twig\TwigFunction('readSpec', function (
     $jsonDotPath,
     $sJsonSettings = []
 ) {
-    return json_encode(
-        \Sugar\specs\readSpec($jsonDotPath, $sJsonSettings),
-        JSON_PRETTY_PRINT
-    );
+    return \Sugar\specs\readSpec($jsonDotPath, $sJsonSettings);
 });

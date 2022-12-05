@@ -1,6 +1,7 @@
 import type { ISBuilderSettings } from '@coffeekraken/s-builder';
 import __SBuilder from '@coffeekraken/s-builder';
 import __SDocmap from '@coffeekraken/s-docmap';
+import __SEnv from '@coffeekraken/s-env';
 import __SFile from '@coffeekraken/s-file';
 import __SGlob from '@coffeekraken/s-glob';
 import __SLog from '@coffeekraken/s-log';
@@ -33,6 +34,9 @@ import { marked as __marked } from 'marked';
 import __path from 'path';
 import __SMarkdownBuilderBuildParamsInterface from './interface/SMarkdownBuilderBuildParamsInterface';
 
+import __codeTransformer from './transformers/code';
+import __ogTransformer from './transformers/og';
+
 /**
  * @name                SMarkdownBuilder
  * @namespace           node
@@ -62,14 +66,28 @@ import __SMarkdownBuilderBuildParamsInterface from './interface/SMarkdownBuilder
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISMarkdownBuilderSettings extends ISBuilderSettings {
+export interface ISMarkdownBuilderLogSettings {
+    summary: boolean;
+    preset: boolean;
     cache: boolean;
+    verbose: boolean;
+}
+
+export interface ISMarkdownBuilderTransformer {
+    reg: RegExp;
+    transform(data: any, target: 'html' | 'markdown'): string;
+}
+
+export interface ISMarkdownBuilderSettings extends ISBuilderSettings {
+    transformers: ISMarkdownBuilderTransformer[];
+    log: Partial<ISMarkdownBuilderLogSettings>;
 }
 
 export interface ISMarkdownBuilderResult {
     inputFile?: __SFile;
     outputFile?: __SFile;
     code: string;
+    error?: string;
 }
 
 export interface ISMarkdownBuilderTokenExtractResult {
@@ -98,6 +116,7 @@ export interface ISMarkdownBuilderBuildParams {
     outPath: string;
     data: any;
     save: boolean;
+    cache: boolean;
     target: 'html' | 'markdown';
     preset: string[];
 }
@@ -153,24 +172,26 @@ export default class SMarkdownBuilder extends __SBuilder {
         super(
             __deepMerge(
                 {
-                    cache: true,
+                    transformers: [__ogTransformer, __codeTransformer],
+                    log: {
+                        summary: true,
+                        preset: true,
+                        cache: false,
+                        verbose: __SEnv.is('verbose'),
+                    },
                 },
                 settings ?? {},
             ),
         );
 
-        // register layouts from config
-        const config = __SSugarConfig.get('markdownBuilder');
-        if (config.transformers) {
-            Object.keys(config.transformers).forEach((transformerName) => {
-                const transformerPath = config.transformers[transformerName];
-                // @ts-ignore
-                this.constructor._registerTransformer(
-                    transformerName,
-                    transformerPath,
-                );
-            });
-        }
+        // // load package transformers
+        // const transformersFolderPath = `${__dirname()}/transformers`;
+        // __fs.readdirSync(transformersFolderPath).forEach(async (path) => {
+        //     const transformerPath = `${transformersFolderPath}/${path}`;
+        //     const transformer = await import(transformerPath);
+        //     this.settings.transformers.push(transformer);
+        //     console.log(this.settings.transformers);
+        // });
     }
 
     _loaded = false;
@@ -205,10 +226,12 @@ export default class SMarkdownBuilder extends __SBuilder {
                     for (let i = 0; i < params.preset.length; i++) {
                         const preset = params.preset[i];
 
-                        emit('log', {
-                            type: __SLog.TYPE_INFO,
-                            value: `<cyan>[preset]</cyan> Start "<yellow>${preset}</yellow>" preset markdown build`,
-                        });
+                        if (this.settings.log.preset) {
+                            emit('log', {
+                                type: __SLog.TYPE_INFO,
+                                value: `<cyan>[preset]</cyan> Start "<yellow>${preset}</yellow>" preset markdown build`,
+                            });
+                        }
 
                         const newParams = <ISMarkdownBuilderBuildParams>(
                             __deepMerge(
@@ -259,7 +282,7 @@ export default class SMarkdownBuilder extends __SBuilder {
 
                     // load cache file if wanted
                     let cacheHashes = {};
-                    if (this.settings.cache) {
+                    if (finalParams.cache) {
                         if (!__fs.existsSync(cacheFilePath)) {
                             __writeFileSync(cacheFilePath, '{}');
                         }
@@ -346,21 +369,26 @@ export default class SMarkdownBuilder extends __SBuilder {
                             '.';
                     }
 
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `<yellow>[build]</yellow> Starting markdown Build`,
-                    });
-
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `<yellow>○</yellow> Input       : <cyan>${sourceObj.inRelPath}</cyan>`,
-                    });
-
-                    if (sourceObj.outRelDir) {
+                    if (this.settings.log.summary) {
                         emit('log', {
                             type: __SLog.TYPE_INFO,
-                            value: `<yellow>○</yellow> Output      : <cyan>${sourceObj.outRelDir}</cyan>`,
+                            value: `<yellow>[build]</yellow> Starting markdown Build`,
                         });
+
+                        emit('log', {
+                            type: __SLog.TYPE_INFO,
+                            value: `<yellow>○</yellow> Input       : <cyan>${sourceObj.inRelPath.replace(
+                                /\.\.\//gm,
+                                '',
+                            )}</cyan>`,
+                        });
+
+                        if (sourceObj.outRelDir) {
+                            emit('log', {
+                                type: __SLog.TYPE_INFO,
+                                value: `<yellow>○</yellow> Output      : <cyan>${sourceObj.outRelDir}</cyan>`,
+                            });
+                        }
                     }
 
                     const docmap = await new __SDocmap().read();
@@ -421,9 +449,10 @@ export default class SMarkdownBuilder extends __SBuilder {
                         // AND that we don't want to save the file
                         // set the outPath to the temp directory
                         if (!finalParams.save) {
-                            buildObj.outPath = `${__packageCacheDir()}/s-markdown-builder/${
-                                sourceObj.inRelPath
-                            }`;
+                            buildObj.outPath = `${__packageCacheDir()}/s-markdown-builder/${sourceObj.inRelPath.replace(
+                                /\.\.\//gm,
+                                '',
+                            )}`;
                         }
 
                         // remplace the extension in the output
@@ -436,18 +465,26 @@ export default class SMarkdownBuilder extends __SBuilder {
 
                         // check if need to rebuild the file or not
                         if (
+                            finalParams.cache &&
                             cacheHashes[`${filePath}-${outputExtension}`] ===
-                            finalFileHash
+                                finalFileHash
                         ) {
-                            emit('log', {
-                                type: __SLog.TYPE_INFO,
-                                value: `<magenta>[cache]</magenta> No need to rebuild the file "<cyan>${__path.relative(
-                                    __packageRootDir(),
-                                    filePath,
-                                )}</cyan>" for the "<yellow>${
-                                    finalParams.target
-                                }</yellow>" target`,
-                            });
+                            if (
+                                this.settings.log.cache ||
+                                this.settings.log.verbose
+                            ) {
+                                emit('log', {
+                                    type: __SLog.TYPE_INFO,
+                                    value: `<magenta>[cache]</magenta> No need to rebuild the file "<cyan>${__path
+                                        .relative(__packageRootDir(), filePath)
+                                        .replace(
+                                            /\.\.\//gm,
+                                            '',
+                                        )}</cyan>" for the "<yellow>${
+                                        finalParams.target
+                                    }</yellow>" target`,
+                                });
+                            }
 
                             const outputFile = __SFile.new(buildObj.outPath);
                             const res: ISMarkdownBuilderResult = {
@@ -470,11 +507,26 @@ export default class SMarkdownBuilder extends __SBuilder {
 
                         let currentTransformedString = buildObj.data;
 
+                        // init the res object
+                        const res: ISMarkdownBuilderResult = {
+                            inputFile: __SFile.new(filePath),
+                            outputFile: __SFile.new(buildObj.outPath, {
+                                checkExistence: false,
+                            }),
+                            code: '',
+                        };
+
                         const viewRenderer = new __SViewRenderer();
-                        const viewRendererRes = await viewRenderer.render(
-                            filePath,
-                            viewData,
+                        const viewRendererRes = await pipe(
+                            viewRenderer.render(filePath, viewData),
                         );
+
+                        // handle error in render
+                        if (viewRendererRes.error) {
+                            res.error = viewRendererRes.error;
+                            buildedFiles.push(res);
+                            continue;
+                        }
 
                         currentTransformedString = viewRendererRes.value ?? '';
 
@@ -483,7 +535,8 @@ export default class SMarkdownBuilder extends __SBuilder {
                         const codeMatches = currentTransformedString.match(
                             /```[a-zA-Z0-9]+[^```]*```/gm,
                         );
-                        if (codeMatches.length) {
+                        if (codeMatches?.length) {
+                            // @ts-ignore
                             for (let [i, value] of codeMatches.entries()) {
                                 const language = value
                                         .trim()
@@ -552,6 +605,33 @@ export default class SMarkdownBuilder extends __SBuilder {
                             })
                             .join('\n');
 
+                        // transformers
+                        const transformersResults = [];
+                        for (let transformerObj of this.settings.transformers) {
+                            let m;
+                            while (
+                                (m = transformerObj.reg.exec(
+                                    currentTransformedString,
+                                ))
+                            ) {
+                                const transformerResult =
+                                    await transformerObj.transform(
+                                        m.slice(1),
+                                        finalParams.target,
+                                    );
+                                if (transformerResult) {
+                                    transformersResults.push(transformerResult);
+                                    currentTransformedString =
+                                        currentTransformedString.replace(
+                                            m[0],
+                                            `<!-- transformer:${
+                                                transformersResults.length - 1
+                                            } -->`,
+                                        );
+                                }
+                            }
+                        }
+
                         // marked if html is the target
                         if (finalParams.target === 'html') {
                             currentTransformedString = __marked(
@@ -567,6 +647,17 @@ export default class SMarkdownBuilder extends __SBuilder {
                             //     // .join('\n');
                         }
 
+                        // replace the transformers results by the actual result
+                        transformersResults.forEach(
+                            (transformerResultStr, i) => {
+                                currentTransformedString =
+                                    currentTransformedString.replace(
+                                        `<!-- transformer:${i} -->`,
+                                        transformersResults[i],
+                                    );
+                            },
+                        );
+
                         // add the "warning" on top of the file
                         currentTransformedString = [
                             `<!-- This file has been generated using`,
@@ -575,6 +666,9 @@ export default class SMarkdownBuilder extends __SBuilder {
                             '',
                             currentTransformedString,
                         ].join('\n');
+
+                        // set the code in the res object
+                        res.code = currentTransformedString;
 
                         // write file on disk
                         __writeFileSync(
@@ -587,12 +681,6 @@ export default class SMarkdownBuilder extends __SBuilder {
                                 value: `<green>[save]</green> File "<yellow>${file.relPath}</yellow>" <yellow>${file.stats.kbytes}kb</yellow> saved <green>successfully</green>`,
                             });
                         }
-
-                        const res: ISMarkdownBuilderResult = {
-                            inputFile: __SFile.new(filePath),
-                            outputFile: __SFile.new(buildObj.outPath),
-                            code: currentTransformedString,
-                        };
 
                         // write the cache only at the end if the build
                         // is a success

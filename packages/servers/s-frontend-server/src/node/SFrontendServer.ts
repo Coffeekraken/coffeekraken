@@ -245,12 +245,14 @@ export default class SFrontendServer extends __SClass {
                 if (this._config.staticDirs) {
                     Object.keys(this._config.staticDirs).forEach((dir) => {
                         const fsPath = this._config.staticDirs[dir];
-                        emit('log', {
-                            value: `<cyan>[static]</cyan> Exposing static folder "<cyan>${__path.relative(
-                                process.cwd(),
-                                fsPath,
-                            )}</cyan>" behind "<yellow>${dir}</yellow>" url`,
-                        });
+                        if (__SEnv.is('verbose')) {
+                            emit('log', {
+                                value: `<cyan>[static]</cyan> Exposing static folder "<cyan>${__path.relative(
+                                    process.cwd(),
+                                    fsPath,
+                                )}</cyan>" behind "<yellow>${dir}</yellow>" url`,
+                            });
+                        }
                         this._express.use(
                             dir,
                             __express.static(fsPath, { dotfiles: 'allow' }),
@@ -301,13 +303,15 @@ export default class SFrontendServer extends __SClass {
                         const duration = new __SDuration();
 
                         function afterResponse() {
-                            emit('log', {
-                                value: `<cyan>[request]</cyan> Request on "<cyan>${
-                                    req.url
-                                }</cyan>" served in <yellow>${
-                                    duration.end().formatedDuration
-                                }</yellow>`,
-                            });
+                            if (__SEnv.is('verbose')) {
+                                emit('log', {
+                                    value: `<cyan>[request]</cyan> Request on "<cyan>${
+                                        req.url
+                                    }</cyan>" served in <yellow>${
+                                        duration.end().formatedDuration
+                                    }</yellow>`,
+                                });
+                            }
                         }
 
                         res.on('finish', afterResponse);
@@ -476,18 +480,20 @@ export default class SFrontendServer extends __SClass {
                 app.set('port', finalParams.port);
 
                 app.listen(app.get('port'), function () {
-                    emit('log', {
-                        value: `<yellow>[corsProxy]</yellow> Cors proxy server running on port <cyan>${app.get(
-                            'port',
-                        )}</cyan>...`,
-                    });
-                    emit('log', {
-                        value: `<yellow>[corsProxy]</yellow> Call "<cyan>http://${__SSugarConfig.get(
-                            'frontendServer.hostname',
-                        )}:${finalParams.port}</cyan>" with the "<magenta>${
-                            finalParams.targetUrlHeaderName
-                        }</magenta>" header to use it...`,
-                    });
+                    if (__SEnv.is('verbose')) {
+                        emit('log', {
+                            value: `<yellow>[corsProxy]</yellow> Cors proxy server running on port <cyan>${app.get(
+                                'port',
+                            )}</cyan>...`,
+                        });
+                        emit('log', {
+                            value: `<yellow>[corsProxy]</yellow> Call "<cyan>http://${__SSugarConfig.get(
+                                'frontendServer.hostname',
+                            )}:${finalParams.port}</cyan>" with the "<magenta>${
+                                finalParams.targetUrlHeaderName
+                            }</magenta>" header to use it...`,
+                        });
+                    }
                 });
             },
             {
@@ -670,14 +676,16 @@ export default class SFrontendServer extends __SClass {
                 }
 
                 slugs.forEach((slug) => {
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `<yellow>[route]</yellow> <cyan>${slug}</cyan> route registered <green>successfully</green> from ${
-                            pageFile
-                                ? `<magenta>${pageFile.relPath}</magenta>`
-                                : `<magenta>config.pages.${configId}</magenta>`
-                        }`,
-                    });
+                    if (__SEnv.is('verbose')) {
+                        emit('log', {
+                            type: __SLog.TYPE_INFO,
+                            value: `<yellow>[route]</yellow> <cyan>${slug}</cyan> route registered <green>successfully</green> from ${
+                                pageFile
+                                    ? `<magenta>${pageFile.relPath}</magenta>`
+                                    : `<magenta>config.pages.${configId}</magenta>`
+                            }`,
+                        });
+                    }
 
                     // register the route only once by slug
                     if (!this._getPageConfigBySlug(slug)) {
@@ -706,16 +714,17 @@ export default class SFrontendServer extends __SClass {
                                 }
                             }
 
-                            pipe(
-                                handlerFn({
-                                    req,
-                                    res,
-                                    next,
-                                    pageConfig: _pageConfig,
-                                    pageFile,
-                                    frontendServerConfig: this._config,
-                                }),
-                            );
+                            const handlerPromise = handlerFn({
+                                req,
+                                res,
+                                next,
+                                pageConfig: _pageConfig,
+                                pageFile,
+                                frontendServerConfig: this._config,
+                            });
+                            handlerPromise.on('log', (value) => {
+                                console.log(value.value ?? value);
+                            });
                         });
                     }
 

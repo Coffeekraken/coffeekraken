@@ -1,5 +1,6 @@
 // import __postcss from 'postcss';
 import __SBench from '@coffeekraken/s-bench';
+import __SEnv from '@coffeekraken/s-env';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 import __STheme from '@coffeekraken/s-theme';
@@ -42,6 +43,7 @@ export interface IPostcssSugarPluginSettings {
     inlineImport?: boolean;
     target?: 'development' | 'production' | 'vite';
     partials: boolean;
+    verbose: boolean;
 }
 
 export function getFunctionsList() {
@@ -97,6 +99,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             cacheDir: `${__packageCacheDir()}/postcssSugarPlugin`,
             cacheTtl: 1000 * 60 * 60 * 24 * 7,
             partials: true,
+            verbose: __SEnv.is('verbose'),
             // @ts-ignore
         },
         settings,
@@ -670,14 +673,16 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             ) {
                 const cachedDataStr = getCachedData(root.source.input.file);
                 if (cachedDataStr) {
-                    // console.log(
-                    //     `<green>[cache]</green> Data resolved from cache for file "<cyan>${__path
-                    //         .relative(
-                    //             __packageRootDir(),
-                    //             root.source.input.file,
-                    //         )
-                    //         .replace(/\.\.\//gm, '')}</cyan>"`,
-                    // );
+                    if (settings.verbose) {
+                        console.log(
+                            `<green>[cache]</green> Data resolved from cache for file "<cyan>${__path
+                                .relative(
+                                    __packageRootDir(),
+                                    root.source.input.file,
+                                )
+                                .replace(/\.\.\//gm, '')}</cyan>"`,
+                        );
+                    }
                     fromCache = true;
                     const ast = __postcss.parse(cachedDataStr, {
                         from: root.source.input.file,
@@ -693,21 +698,23 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                     !isCachedPluginHashValid() &&
                     !cacheBustedWarningDisplayed
                 ) {
-                    console.log(
-                        `<magenta>[cache]</magenta> Cache invalidated by "<yellow>@coffeekraken/s-postcss-sugar-plugin</yellow>" package update. First compilation may take some times...`,
-                    );
+                    if (settings.verbose) {
+                        console.log(
+                            `<magenta>[cache]</magenta> Cache invalidated by "<yellow>@coffeekraken/s-postcss-sugar-plugin</yellow>" package update. First compilation may take some times...`,
+                        );
+                    }
                     cacheBustedWarningDisplayed = true;
                 }
 
-                if (!fromCache) {
-                    // console.log(
-                    //     `<magenta>[cache]</magenta> Save data in cache for file "<cyan>${__path
-                    //         .relative(
-                    //             __packageRootDir(),
-                    //             root.source.input.file,
-                    //         )
-                    //         .replace(/\.\.\//gm, '')}</cyan>"`,
-                    // );
+                if (!fromCache && settings.verbose) {
+                    console.log(
+                        `<magenta>[cache]</magenta> Save data in cache for file "<cyan>${__path
+                            .relative(
+                                __packageRootDir(),
+                                root.source.input.file,
+                            )
+                            .replace(/\.\.\//gm, '')}</cyan>"`,
+                    );
                 }
                 setCacheData(root.source.input.file, nodesToString(root.nodes));
                 fromCache = false; // reset the variable for next compile

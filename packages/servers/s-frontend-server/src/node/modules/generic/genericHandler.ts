@@ -2,6 +2,7 @@
 
 import __SBench from '@coffeekraken/s-bench';
 import __SDuration from '@coffeekraken/s-duration';
+import __SEnv from '@coffeekraken/s-env';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import { __isPlainObject } from '@coffeekraken/sugar/is';
@@ -132,16 +133,20 @@ export default function genericHandler({
 
                 viewBench.step(`afterDataLoaded`);
 
-                const dataFnResult = await dataFn({
-                    req,
-                    res,
-                    viewRenderer: res.viewRenderer,
-                    params: dataParams,
-                    settings: dataSettings,
-                    pageConfig,
-                    pageFile,
-                    frontendServerConfig,
-                });
+                const dataFnResultPromise = pipe(
+                    dataFn({
+                        req,
+                        res,
+                        viewRenderer: res.viewRenderer,
+                        params: dataParams,
+                        settings: dataSettings,
+                        pageConfig,
+                        pageFile,
+                        frontendServerConfig,
+                    }),
+                );
+                const dataFnResult = await dataFnResultPromise;
+
                 if (dataFnResult instanceof Error) {
                     emit('log', {
                         type: __SLog.TYPE_ERROR,
@@ -157,9 +162,11 @@ export default function genericHandler({
             //     type: __SLog.TYPE_ERROR,
             //     value: `<yellow>[genericHandler]</yellow> Rendering the view "<cyan>${viewPath}</cyan>"`,
             // });
-            console.log(
-                `<yellow>[genericHandler]</yellow> Rendering the view "<cyan>${viewPath}</cyan>"`,
-            );
+            if (__SEnv.is('verbose')) {
+                console.log(
+                    `<yellow>[genericHandler]</yellow> Rendering the view "<cyan>${viewPath}</cyan>"`,
+                );
+            }
 
             // rendering view using data
             const viewResPro = res.viewRenderer.render(viewPath, data);
@@ -175,11 +182,13 @@ export default function genericHandler({
                 renderedViews.push(viewRes.value);
             }
 
-            console.log(
-                `<yellow>[genericHandler]</yellow> View "<cyan>${viewPath}</cyan>" rendered <green>successfully</green> in <yellow>${
-                    duration.end().formatedDuration
-                }</yellow>`,
-            );
+            if (__SEnv.is('verbose')) {
+                console.log(
+                    `<yellow>[genericHandler]</yellow> View "<cyan>${viewPath}</cyan>" rendered <green>successfully</green> in <yellow>${
+                        duration.end().formatedDuration
+                    }</yellow>`,
+                );
+            }
 
             viewBench.end();
         }

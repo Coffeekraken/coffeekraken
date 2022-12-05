@@ -259,11 +259,17 @@ export default class STypescriptBuilder extends __SBuilder {
                     });
                     emit('log', {
                         type: __SLog.TYPE_INFO,
-                        value: `<yellow>○</yellow> Input directory   : <cyan>${finalParams.inDir}</cyan>`,
+                        value: `<yellow>○</yellow> Input directory   : <cyan>${finalParams.inDir.replace(
+                            `${__packageRootDir()}/`,
+                            '',
+                        )}</cyan>`,
                     });
                     emit('log', {
                         type: __SLog.TYPE_INFO,
-                        value: `<yellow>○</yellow> Output directory  : <cyan>${finalParams.outDir}</cyan>`,
+                        value: `<yellow>○</yellow> Output directory  : <cyan>${finalParams.outDir.replace(
+                            `${__packageRootDir()}/`,
+                            '',
+                        )}</cyan>`,
                     });
                     emit('log', {
                         type: __SLog.TYPE_INFO,

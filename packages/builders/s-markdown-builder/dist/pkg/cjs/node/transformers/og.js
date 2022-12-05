@@ -8,16 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const scrapeUrl_1 = __importDefault(require("@coffeekraken/sugar/node/og/scrapeUrl"));
-function default_1(data) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const og = yield (0, scrapeUrl_1.default)(data[1]);
-        return og !== null && og !== void 0 ? og : {};
-    });
-}
-exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsc0ZBQWdFO0FBRWhFLG1CQUErQixJQUFJOztRQUMvQixNQUFNLEVBQUUsR0FBRyxNQUFNLElBQUEsbUJBQVcsRUFBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUN0QyxPQUFPLEVBQUUsYUFBRixFQUFFLGNBQUYsRUFBRSxHQUFJLEVBQUUsQ0FBQztJQUNwQixDQUFDO0NBQUE7QUFIRCw0QkFHQyJ9
+exports.default = {
+    reg: /<!-- og:(.*) -->/g,
+    transform(data, target) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return;
+            // const og = await __scrapeUrl(data[1]);
+            // return og ?? {};
+        });
+    },
+};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7O0FBQUEsa0JBQWU7SUFDWCxHQUFHLEVBQUUsbUJBQW1CO0lBQ2xCLFNBQVMsQ0FBQyxJQUFJLEVBQUUsTUFBTTs7WUFDeEIsT0FBTztZQUNQLHlDQUF5QztZQUN6QyxtQkFBbUI7UUFDdkIsQ0FBQztLQUFBO0NBQ0osQ0FBQyJ9

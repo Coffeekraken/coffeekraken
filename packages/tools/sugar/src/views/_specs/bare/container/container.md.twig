@@ -1,3 +1,6 @@
+{% extends 'sugar/readme/layouts/main/main.twig' %}
+{% block body %}
+
 <!--
 /**
  * @name            Container
@@ -13,7 +16,7 @@
  */
 -->
 
-{{#> layout-doc }}
+{% set specs = readSpec('sugar.views.bare.container') %}
 
 # Container
 
@@ -21,10 +24,9 @@ The goal of this view is to wrap your sections and either centers it or make it 
 
 ## Features
 
--   Multiple `type` available like `wide`, `full` or `tight`
--   Support of responsive `paddings`
--   Support of responsive `margins`
--   Full support for `layout.container` configs specified in your `frontspec.json` file
+{% for spec in props(specs.props) %}
+- `{{ spec }}`
+{% endfor %}
 
 ## Usage
 
@@ -53,7 +55,7 @@ The goal of this view is to wrap your sections and either centers it or make it 
 #### Twig
 
 ```twig
-{% include 'sugar.bare.container.container' with {
+{{ '{%' }} include 'sugar.bare.container.container' with {
     type: {
         default: '',
         wide: 'full'
@@ -67,11 +69,13 @@ The goal of this view is to wrap your sections and either centers it or make it 
             bottom: '20'
         }
     }
-} %}
+} {{ '%}' }}
 ```
 
 ## Specifications
 
-{{> spec path='sugar.views.bare.container' }}
+```js
+export default {{ specs|json_encode|raw }}
+```
 
 {% endblock %}

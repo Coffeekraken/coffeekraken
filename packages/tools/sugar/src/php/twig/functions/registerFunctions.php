@@ -57,12 +57,19 @@ function registerFunctions($twig)
     $attrs = require __DIR__ . '/html/attrs.php';
     $twig->addFunction($attrs);
 
+    // json
+    $jsonDecode = require __DIR__ . '/json/jsonDecode.php';
+    $twig->addFunction($jsonDecode);
+
     // Object
     $filter = require __DIR__ . '/object/filter.php';
     $twig->addFunction($filter);
 
     $get = require __DIR__ . '/object/get.php';
     $twig->addFunction($get);
+
+    $props = require __DIR__ . '/object/props.php';
+    $twig->addFunction($props);
 
     // specs
     $readSpec = require __DIR__ . '/specs/readSpec.php';

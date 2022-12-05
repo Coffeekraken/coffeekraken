@@ -49,7 +49,7 @@ export default function __fileHash(
             algo: 'sha256',
             digest: 'base64',
             include: {
-                ctime: false,
+                ctime: true,
             },
         },
         settings ?? {},

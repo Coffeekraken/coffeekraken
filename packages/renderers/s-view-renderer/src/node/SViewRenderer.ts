@@ -10,7 +10,7 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __unique } from '@coffeekraken/sugar/array';
 import { __writeJsonSync } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import { __packageRootDir, __packageTmpDir } from '@coffeekraken/sugar/path';
+import { __packageTmpDir } from '@coffeekraken/sugar/path';
 import { __uniqid } from '@coffeekraken/sugar/string';
 import __fs from 'fs';
 import __glob from 'glob';
@@ -76,7 +76,8 @@ export interface ISViewRendererEngine {}
 
 export interface ISViewRendererRenderResult extends ISDurationObject {
     view: ISViewViewMetas;
-    value: string;
+    value?: string;
+    error?: string;
 }
 
 export interface ISViewRenderer {
@@ -456,10 +457,13 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
             if (__fs.existsSync(viewDotPath)) {
                 // absolute view path
                 finalViewPath = viewDotPath;
-                finalViewRelPath = viewDotPath.replace(
-                    `${__packageRootDir()}/`,
-                    '',
-                );
+                finalViewRelPath = __path.basename(viewDotPath);
+                // finalViewRelPath = viewDotPath.replace(
+                //     `${__packageRootDir()}/`,
+                //     '',
+                // );
+                // add a rootDir to handle absolute path
+                this.settings.rootDirs.unshift(__path.dirname(viewDotPath));
             }
 
             // ensure viewDotPath is a dotPath and not something line path/my/view.twig
@@ -575,14 +579,10 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
                 // engine: this._engineInstance.engineMetas,
                 ...duration.end(),
                 value: result.value,
-                error: result.error?.toString?.() ?? result.error,
+                error: result.error,
             };
 
-            if (resObj.error) {
-                reject(resObj);
-            } else {
-                resolve(resObj);
-            }
+            resolve(resObj);
         });
     }
 }

@@ -86,6 +86,7 @@ export default class SEnv extends __SEnv {
         document.env.ENV = finalEnv;
         document.env.PLATFORM = 'browser';
         document.env.DEVS_CUT = queryStringObj.devsCut !== undefined;
+        document.env.VERBOSE = queryStringObj.verbose !== undefined;
         this._env = document.env;
         return document.env;
     }

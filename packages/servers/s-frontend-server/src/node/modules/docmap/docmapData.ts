@@ -1,4 +1,5 @@
 import __SDocmap from '@coffeekraken/s-docmap';
+import __SEnv from '@coffeekraken/s-env';
 import __SMarkdownBuilder from '@coffeekraken/s-markdown-builder';
 import __SPromise from '@coffeekraken/s-promise';
 
@@ -36,26 +37,37 @@ export default function docmapData({ req, res, pageConfig }) {
         let htmlAr = [];
 
         // Markdown builder
-        const builder = new __SMarkdownBuilder();
+        const builder = new __SMarkdownBuilder({
+            log: {
+                summary: false,
+            },
+        });
 
         // loop on each results to build them in html
         for (let [namespace, item] of Object.entries(result.items)) {
             // markdown
-            if (item.path.match(/\.md$/)) {
-                const markdownRes = await pipe(
-                    builder.build({
-                        inPath: item.path,
-                        target: 'html',
-                        save: false,
-                    }),
-                );
+            if (item.path.match(/\.md(\.[a-zA-Z0-9]+)?$/)) {
+                const markdownResPromise = builder.build({
+                    inPath: item.path,
+                    target: 'html',
+                    save: false,
+                });
+                if (__SEnv.is('verbose')) {
+                    pipe(markdownResPromise);
+                }
+                const markdownRes = await markdownResPromise;
 
                 if (!markdownRes.length) {
                     htmlAr.push(
                         `Error when building the markdown file "${item.path}"`,
                     );
                 } else {
-                    htmlAr.push(markdownRes[0].code);
+                    if (markdownRes[0].error) {
+                        console.log(markdownRes[0].error);
+                        htmlAr.push(markdownRes[0].error);
+                    } else {
+                        htmlAr.push(markdownRes[0].code);
+                    }
                 }
             }
         }

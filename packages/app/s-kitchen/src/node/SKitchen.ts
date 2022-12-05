@@ -621,6 +621,9 @@ class SKitchen extends __SClass {
                                     if (key.toLowerCase() === 'devscut') {
                                         return true;
                                     }
+                                    if (key.toLowerCase() === 'verbose') {
+                                        return true;
+                                    }
                                     return (
                                         InterfaceClass.definition[key] !==
                                         undefined

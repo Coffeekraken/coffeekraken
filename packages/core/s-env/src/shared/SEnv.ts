@@ -56,6 +56,13 @@ export default class SEnv {
     static is(env: string): boolean {
         env = env.toLowerCase();
 
+        // verbose
+        if (env === 'verbose') {
+            if (this.get('verbose')) {
+                return true;
+            }
+        }
+
         // developers cut
         if (env === 'devscut') {
             if (this.get('devsCut')) {

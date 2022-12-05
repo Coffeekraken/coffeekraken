@@ -1,10 +1,9 @@
-import { __packageRootDir } from '@coffeekraken/sugar/path';
-import __fs from 'fs';
-import { __isDirectory } from '@coffeekraken/sugar/is';
-import __express from 'express';
+import __SEnv from '@coffeekraken/s-env';
+import __SGlob from '@coffeekraken/s-glob';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __SGlob from '@coffeekraken/s-glob';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
+import __express from 'express';
 
 export default function rootFiles(express, settings, config) {
     return new __SPromise(
@@ -15,14 +14,18 @@ export default function rootFiles(express, settings, config) {
                 cwd: publicDir,
             });
 
-            emit('log', {
-                value: `<yellow>[publicDir]</yellow> Exposing <magenta>${files.length}</magenta> file(s) from public directory`,
-            });
+            if (__SEnv.is('verbose')) {
+                emit('log', {
+                    value: `<yellow>[publicDir]</yellow> Exposing <magenta>${files.length}</magenta> file(s) from public directory`,
+                });
+            }
 
             files.forEach((file) => {
-                emit('log', {
-                    value: `<yellow>[publicDir]</yellow> Exposing file "<yellow>${file.relPath}</yellow>"`,
-                });
+                if (__SEnv.is('verbose')) {
+                    emit('log', {
+                        value: `<yellow>[publicDir]</yellow> Exposing file "<yellow>${file.relPath}</yellow>"`,
+                    });
+                }
                 express.get(
                     `/${file.relPath}`,
                     __express.static(file.dirPath, {

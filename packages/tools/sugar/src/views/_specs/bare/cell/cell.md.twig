@@ -1,3 +1,6 @@
+{% extends 'sugar/readme/layouts/main/main.twig' %}
+{% block body %}
+
 <!--
 /**
  * @name            Cell
@@ -13,7 +16,7 @@
  */
 -->
 
-{{#> layout-doc }}
+{% set specs = readSpec('sugar.views.bare.cell') %}
 
 # Cell
 
@@ -21,8 +24,9 @@ Simple cell that can be used inside a layout, etc...
 
 ## Features
 
--   Support of responsive `paddings`
--   Support of responsive `margins`
+{% for spec in props(specs.props) %}
+- `{{ spec }}`
+{% endfor %}
 
 ## Usage
 
@@ -47,7 +51,7 @@ Simple cell that can be used inside a layout, etc...
 #### Twig
 
 ```twig
-{% include 'sugar.bare.cell.cell' with {
+{{ '{%' }} include 'sugar.bare.cell.cell' with {
     content: '<h2>Hello world</h2>',
     margin: {
         default: {
@@ -57,11 +61,13 @@ Simple cell that can be used inside a layout, etc...
             bottom: '20'
         }
     }
-} %}
+} {{ '%}' }}
 ```
 
 ## Specifications
 
-{{> spec path='sugar.views.bare.cell' }}
+```js
+export default {{ specs|json_encode|raw }}
+```
 
 {% endblock %}

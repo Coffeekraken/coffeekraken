@@ -1,0 +1,69 @@
+{% extends 'sugar/readme/layouts/main/main.twig' %}
+{% block body %}
+
+<!--
+/**
+ * @name            Card
+ * @namespace       specs.views.components.card
+ * @type            Markdown
+ * @platform        blade
+ * @platform        twig
+ * @status          stable
+ * @menu            Specs / Views           /specs/sugar.views.components.card
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+-->
+
+{% set specs = readSpec('sugar.views.components.card') %}
+
+# Card
+
+Simple card component that support things like:
+
+## Features
+
+{% for spec in props(specs.props) %}
+- `{{ spec }}`
+{% endfor %}
+
+## Usage
+
+#### Blade
+
+```php
+@include('sugar.components.card.card', [
+    'title' => '...',
+    'intro' => '...',
+    'text' => '...'
+    'image' => [
+        'url' => '...',
+        'title' => '...',
+        'alt' => '...'
+    ]
+])
+```
+
+#### Twig
+
+```twig
+{{ '{%' }} include 'sugar.components.card.card' with {
+    title: '...',
+    intro: '...',
+    text: '...'
+    image: {
+        'url': '...',
+        'title': '...',
+        'alt': '...'
+    }
+} {{ '%}' }}
+```
+
+## Specifications
+
+```js
+export default {{ specs|json_encode|raw }}
+```
+
+{% endblock %}

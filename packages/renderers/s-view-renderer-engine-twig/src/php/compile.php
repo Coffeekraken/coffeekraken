@@ -28,6 +28,7 @@ foreach ($params->rootDirs as $dir) {
         $loader->addPath($dir);
     }
 }
+$loader->addPath('/');
 $twig = new \Twig\Environment($loader, [
     // 'cache' => $params->cacheDir . '/twig',
     'debug' => true,

@@ -256,8 +256,14 @@ export default class SSugarCli {
         // do not touch if is jest
         if (process.env.JEST_WORKER_ID) return;
 
+        // devsCut
         if (!process.env.DEVS_CUT && this.args.params.devsCut) {
             process.env.DEVS_CUT = true;
+        }
+
+        // verbose
+        if (!process.env.VERBOSE && this.args.params.verbose) {
+            process.env.VERBOSE = 'true';
         }
 
         if (this.args.params.env) {

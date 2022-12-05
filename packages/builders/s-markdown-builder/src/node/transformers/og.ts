@@ -1,6 +1,8 @@
-import __scrapeUrl from '@coffeekraken/sugar/node/og/scrapeUrl';
-
-export default async function (data) {
-    const og = await __scrapeUrl(data[1]);
-    return og ?? {};
-}
+export default {
+    reg: /<!-- og:(.*) -->/g,
+    async transform(data, target) {
+        return;
+        // const og = await __scrapeUrl(data[1]);
+        // return og ?? {};
+    },
+};

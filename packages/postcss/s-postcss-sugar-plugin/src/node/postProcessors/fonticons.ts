@@ -1,4 +1,5 @@
 import __SDuration from '@coffeekraken/s-duration';
+import __SEnv from '@coffeekraken/s-env';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import {
     __ensureDirSync,
@@ -24,9 +25,11 @@ export default async function ({ root, sharedData, settings }) {
 
     // fontawesome
     if (sourceStr.match(/Font Awesome/)) {
-        console.log(
-            '<yellow>[FontAwesome]</yellow> Fontawesome has been addedd <green>successfully</green>',
-        );
+        if (__SEnv.is('verbose')) {
+            console.log(
+                '<yellow>[FontAwesome]</yellow> Fontawesome has been addedd <green>successfully</green>',
+            );
+        }
         root.nodes.unshift(
             __postcss.parse(`
                 @import url('${__SSugarConfig.get('icons.fontawesome.url')}');
@@ -82,7 +85,11 @@ export default async function ({ root, sharedData, settings }) {
             .toString();
         if (cachedFolderHash === folderHash) {
             // same icons, nothing to generate again
-            console.log(`<green>[fonticons]</green> Fonticons are up to date`);
+            if (__SEnv.is('verbose')) {
+                console.log(
+                    `<green>[fonticons]</green> Fonticons are up to date`,
+                );
+            }
             return;
         }
     }

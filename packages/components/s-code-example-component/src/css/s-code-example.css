@@ -44,7 +44,7 @@
 
     .s-code-example[lines] & {
         max-height: calc(
-            1.5em * var(--max-lines) + (var(--paddingBlock, 1em) * 2)
+            2em * var(--max-lines) + (var(--paddingBlock, 1em) * 2)
         );
     }
     .s-code-example--more & {

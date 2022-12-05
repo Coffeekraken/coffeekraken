@@ -1,6 +1,7 @@
 import __SClass from '@coffeekraken/s-class';
 import __SCodeFormatterPrettier from '@coffeekraken/s-code-formatter-prettier';
 import __SDuration from '@coffeekraken/s-duration';
+import __SEnv from '@coffeekraken/s-env';
 import __SFile from '@coffeekraken/s-file';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
@@ -36,8 +37,14 @@ import __SCodeFormatterFormatParamsInterface from './interface/SCodeFormatterFor
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
+export interface ISCodeFormatterLogSettings {
+    summary: boolean;
+    verbose: boolean;
+}
+
 export interface ISCodeFormatterSettings {
     timeoutBetweenSameFileProcess: number;
+    log: Partial<ISCodeFormatterLogSettings>;
 }
 
 export interface ISCodeFormatterFormatParams {
@@ -47,7 +54,7 @@ export interface ISCodeFormatterFormatParams {
     formatInitial: boolean;
 }
 
-export type ISCodeFormatterFormatResult = []:__SFile;
+export type ISCodeFormatterFormatResult = [];
 
 export interface ISCodeFormatterFormatterMetas {
     filePath: string;
@@ -152,7 +159,9 @@ class SCodeFormatter extends __SClass {
             if (
                 (<ISCodeFormatterFormatter>formatter).extensions.includes(
                     extension,
-                ) || (<ISCodeFormatterFormatter>formatter).languagesToExtensionsMap?.[extension]
+                ) ||
+                (<ISCodeFormatterFormatter>formatter)
+                    .languagesToExtensionsMap?.[extension]
             ) {
                 return <ISCodeFormatterFormatter>formatter;
             }
@@ -174,6 +183,10 @@ class SCodeFormatter extends __SClass {
             __deepMerge(
                 {
                     timeoutBetweenSameFileProcess: 1000,
+                    log: {
+                        summary: true,
+                        verbose: __SEnv.is('verbose'),
+                    },
                 },
                 settings ?? {},
             ),
@@ -205,12 +218,14 @@ class SCodeFormatter extends __SClass {
             __writeFileSync(tmpFilePath, code);
 
             // format the code
-            const formatResult = await 
-                this.format({
+            const formatResult = await this.format(
+                {
                     glob: __path.basename(tmpFilePath),
                     inDir: __path.dirname(tmpFilePath),
                     watch: false,
-                }, settings);
+                },
+                settings,
+            );
 
             // resolve with formatted code
             // @ts-ignore
@@ -255,36 +270,41 @@ class SCodeFormatter extends __SClass {
                     finalGlob += `.{${handledExtensions.join(',')}}`;
                 }
 
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>○</yellow> Glob              : <yellow>${finalGlob}</yellow>`,
-                });
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>○</yellow> Input directory   : <cyan>${finalParams.inDir}</cyan>`,
-                });
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>○</yellow> Watch             : ${
-                        finalParams.watch
-                            ? `<green>true</green>`
-                            : `<red>false</red>`
-                    }`,
-                });
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>○</yellow> Format initial    : ${
-                        finalParams.formatInitial
-                            ? `<green>true</green>`
-                            : `<red>false</red>`
-                    }`,
-                });
-
-                if (finalParams.watch) {
+                if (finalSettings.log.summary) {
                     emit('log', {
                         type: __SLog.TYPE_INFO,
-                        value: `<yellow>[watch]</yellow> Watching for file changes...`,
+                        value: `<yellow>○</yellow> Glob              : <yellow>${finalGlob}</yellow>`,
                     });
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>○</yellow> Input directory   : <cyan>${finalParams.inDir.replace(
+                            `${__packageRootDir()}/`,
+                            '',
+                        )}</cyan>`,
+                    });
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>○</yellow> Watch             : ${
+                            finalParams.watch
+                                ? `<green>true</green>`
+                                : `<red>false</red>`
+                        }`,
+                    });
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>○</yellow> Format initial    : ${
+                            finalParams.formatInitial
+                                ? `<green>true</green>`
+                                : `<red>false</red>`
+                        }`,
+                    });
+
+                    if (finalParams.watch) {
+                        emit('log', {
+                            type: __SLog.TYPE_INFO,
+                            value: `<yellow>[watch]</yellow> Watching for file changes...`,
+                        });
+                    }
                 }
 
                 // watch using chokidar
@@ -318,14 +338,15 @@ class SCodeFormatter extends __SClass {
                             .extname(filePath)
                             .replace(/^\./, '');
 
-                        // get the relative to the package root file path 
+                        // get the relative to the package root file path
                         let relFilePath = __path.relative(
                             __packageRootDir(),
                             filePath,
                         );
 
                         // get the formatter for this file
-                        const formatter = SCodeFormatter.getFormatterForExtension(extension);
+                        const formatter =
+                            SCodeFormatter.getFormatterForExtension(extension);
 
                         const duration = new __SDuration();
 
@@ -353,12 +374,13 @@ class SCodeFormatter extends __SClass {
                             // resolve file
                             resolveFile();
                         } else {
-                            emit('log', {
-                                type: __SLog.TYPE_INFO,
-                                value: `<yellow>[format]</yellow> Formatting file "<cyan>${relFilePath}</cyan>"`,
-                            });
+                            if (finalSettings.log.verbose) {
+                                emit('log', {
+                                    type: __SLog.TYPE_INFO,
+                                    value: `<yellow>[format]</yellow> Formatting file "<cyan>${relFilePath}</cyan>"`,
+                                });
+                            }
                             try {
-
                                 // apply the formatter on the file content
                                 const result = await formatter.format(code, {
                                     filePath: filePath,
@@ -388,13 +410,15 @@ class SCodeFormatter extends __SClass {
                                 // add in stach
                                 formattedFiles.push(__SFile.new(filePath));
 
-                                emit('log', {
-                                    clear: 1,
-                                    type: __SLog.TYPE_INFO,
-                                    value: `<green>[format]</green> File "<cyan>${relFilePath}</cyan>" formatted <green>successfully</green> in <yellow>${
-                                        duration.end().formatedDuration
-                                    }</yellow>`,
-                                });
+                                if (finalSettings.log.verbose) {
+                                    emit('log', {
+                                        clear: 1,
+                                        type: __SLog.TYPE_INFO,
+                                        value: `<green>[format]</green> File "<cyan>${relFilePath}</cyan>" formatted <green>successfully</green> in <yellow>${
+                                            duration.end().formatedDuration
+                                        }</yellow>`,
+                                    });
+                                }
                             } catch (e) {
                                 console.error(e);
                                 emit('log', {

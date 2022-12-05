@@ -30,6 +30,11 @@ export default class SSugarCliParamsInterface extends __SInterface {
                 default: false,
                 explicit: true,
             },
+            verbose: {
+                type: 'Boolean',
+                default: false,
+                explicit: true,
+            },
             logPreset: {
                 type: 'String',
                 values: __SLog.PRESETS,

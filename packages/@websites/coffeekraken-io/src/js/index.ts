@@ -41,107 +41,105 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
 const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
 
 (async () => {
-    __SFeature.setDefaultProps('*', {
-        mountWhen: 'nearViewport',
-        // verbose: !__SEnv.is('devsCut'),
-    });
-    __SFeature.setDefaultProps(['s-highlight'], {
-        opacity: 0.3,
-    });
-    __SFeature.setDefaultProps(['s-form-validate'], {
-        customValidations: {
-            coffeekraken: (value, helpers) => {
-                if (value === 'coffeekraken') {
-                    return helpers.message(
-                        'Are you sure? Krakens are dangerous...',
-                    );
-                }
-                return value;
-            },
+  __SFeature.setDefaultProps('*', {
+    mountWhen: 'nearViewport',
+    // verbose: !__SEnv.is('devsCut'),
+  });
+  __SFeature.setDefaultProps(['s-highlight'], {
+    opacity: 0.3,
+  });
+  __SFeature.setDefaultProps(['s-form-validate'], {
+    customValidations: {
+      coffeekraken: (value, helpers) => {
+        if (value === 'coffeekraken') {
+          return helpers.message('Are you sure? Krakens are dangerous...');
+        }
+        return value;
+      },
+    },
+  });
+  __SLitComponent.setDefaultProps('*', {
+    mountWhen: 'nearViewport',
+    // verbose: !__SEnv.is('devsCut'),
+  });
+  __SLitComponent.setDefaultProps(
+    ['ck-search-input', 's-color-picker', 's-datetime-picker'],
+    {
+      mountWhen: 'interact',
+      // verbose: !__SEnv.is('devsCut'),
+    }
+  );
+  __SLitComponent.setDefaultProps(['s-panel', 'ck-settings'], {
+    mountWhen: 'direct',
+  });
+  __SLitComponent.setDefaultProps(['s-code-example'], {
+    scrollToSettings: {
+      offset: 100,
+    },
+    responsive: {
+      mobile: {
+        lines: 5,
+      },
+    },
+  });
+
+  // init theme
+  __STheme.init({
+    variant: 'dark',
+  });
+
+  // essentials
+  __SPackEssentials();
+
+  // features
+  __SPageTransitionFeatureDefine();
+  __STemplateFeatureDefine();
+  __SParallaxFeatureDefine();
+  __SHighlightFeatureDefine();
+
+  // components
+  __SCodeExampleComponentDefine({
+    cssDeps: ['global', '/dist/css/partials/sCodeExample.css'],
+  });
+  __SSliderComponentDefine();
+  __SFiltrableInputComponentDefine();
+  __SSidePanelComponentDefine();
+  __SRatingComponentDefine();
+  __SColorPickerComponentDefine();
+  __SDatetimePickerComponentDefine();
+  __SGoogleMapComponentDefine();
+  __SThemeSwitcherComponentDefine();
+
+  // Website specific
+  // __CKRatingsComponent();
+  // __CKWelcomeRatingsComponent();
+  __CKSearchComponent();
+  __CKSettingsComponent();
+  __CKDiscoverComponent();
+  __CKDiscoverWelcomeComponent();
+  __CKDiscoverTabedComponent();
+
+  // dashboard
+  const dashboard = new __SDashboard({
+    dashboard: {
+      components: {
+        's-dashboard-pages': {
+          onSelect: (page) => {
+            dashboard.close();
+            document.dispatchEvent(
+              new CustomEvent('location.href', {
+                detail: page.item.loc,
+                bubbles: true,
+              })
+            );
+          },
         },
-    });
-    __SLitComponent.setDefaultProps('*', {
-        mountWhen: 'nearViewport',
-        // verbose: !__SEnv.is('devsCut'),
-    });
-    __SLitComponent.setDefaultProps(
-        ['ck-search-input', 's-color-picker', 's-datetime-picker'],
-        {
-            mountWhen: 'interact',
-            // verbose: !__SEnv.is('devsCut'),
-        },
-    );
-    __SLitComponent.setDefaultProps(['s-panel', 'ck-settings'], {
-        mountWhen: 'direct',
-    });
-    __SLitComponent.setDefaultProps(['s-code-example'], {
-        scrollToSettings: {
-            offset: 100,
-        },
-        responsive: {
-            mobile: {
-                lines: 5,
-            },
-        },
-    });
+      },
+    },
+  });
 
-    // init theme
-    __STheme.init({
-        variant: 'dark',
-    });
-
-    // essentials
-    __SPackEssentials();
-
-    // features
-    __SPageTransitionFeatureDefine();
-    __STemplateFeatureDefine();
-    __SParallaxFeatureDefine();
-    __SHighlightFeatureDefine();
-
-    // components
-    __SCodeExampleComponentDefine({
-        cssDeps: ['global', '/dist/css/partials/sCodeExample.css'],
-    });
-    __SSliderComponentDefine();
-    __SFiltrableInputComponentDefine();
-    __SSidePanelComponentDefine();
-    __SRatingComponentDefine();
-    __SColorPickerComponentDefine();
-    __SDatetimePickerComponentDefine();
-    __SGoogleMapComponentDefine();
-    __SThemeSwitcherComponentDefine();
-
-    // Website specific
-    // __CKRatingsComponent();
-    // __CKWelcomeRatingsComponent();
-    __CKSearchComponent();
-    __CKSettingsComponent();
-    __CKDiscoverComponent();
-    __CKDiscoverWelcomeComponent();
-    __CKDiscoverTabedComponent();
-
-    // dashboard
-    const dashboard = new __SDashboard({
-        dashboard: {
-            components: {
-                's-dashboard-pages': {
-                    onSelect: (page) => {
-                        dashboard.close();
-                        document.dispatchEvent(
-                            new CustomEvent('location.href', {
-                                detail: page.item.loc,
-                                bubbles: true,
-                            }),
-                        );
-                    },
-                },
-            },
-        },
-    });
-
-    // code example highlight
-    __querySelectorLive('.s-code-example__content', ($elm) => {
-        $elm.setAttribute('s-highlight', 'light');
-    });
+  // code example highlight
+  __querySelectorLive('.s-code-example__content', ($elm) => {
+    $elm.setAttribute('s-highlight', 'light');
+  });
 })();

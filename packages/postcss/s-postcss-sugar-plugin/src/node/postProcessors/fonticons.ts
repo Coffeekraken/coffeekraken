@@ -19,9 +19,14 @@ import __postcss from 'postcss';
 
 export default async function ({ root, sharedData, settings }) {
     const duration = new __SDuration();
+    const fantasticonConfig = __SSugarConfig.get('icons.fantasticon');
+    const sourceStr = root.toString();
 
     // fontawesome
-    if (sharedData.isFontawesomeNeeded) {
+    if (sourceStr.match(/Font Awesome/)) {
+        console.log(
+            '<yellow>[FontAwesome]</yellow> Fontawesome has been addedd <green>successfully</green>',
+        );
         root.nodes.unshift(
             __postcss.parse(`
                 @import url('${__SSugarConfig.get('icons.fontawesome.url')}');
@@ -29,21 +34,21 @@ export default async function ({ root, sharedData, settings }) {
         );
     }
 
-    if (!sharedData.icons || !sharedData.icons.length) return;
-
-    const fantasticonConfig = __SSugarConfig.get('icons.fantasticon');
-
     // prepend the icons import
     const importFontUrl = __path.relative(
         __srcCssDir(),
         fantasticonConfig.outputDir,
     );
 
-    root.nodes.unshift(
-        __postcss.parse(`
-        @import url(${importFontUrl}/${fantasticonConfig.name}.css);
-    `),
-    );
+    if (sourceStr.match(/S-SUGAR-FS-ICON:/)) {
+        root.nodes.unshift(
+            __postcss.parse(`
+            @import url(${importFontUrl}/${fantasticonConfig.name}.css);
+        `),
+        );
+    }
+
+    if (!sharedData.icons || !sharedData.icons.length) return;
 
     const inputDir = `${__packageCacheDir()}/icons/sugarIcons`;
 

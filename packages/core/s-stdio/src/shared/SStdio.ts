@@ -301,12 +301,16 @@ export default class SStdio extends __SClass implements ISStdio {
         // proxy console.log to filter empty logs
         const _nativeLog = console.log;
         console.log = (...args) => {
-            args = args.filter((log) => {
-                if (typeof log === 'string' && log.trim() === '') {
-                    return false;
-                }
-                return true;
-            });
+            args = args
+                .filter((log) => {
+                    if (typeof log === 'string' && log.trim() === '') {
+                        return false;
+                    }
+                    return true;
+                })
+                .map((log) => {
+                    return log.trim().replace(/\\n$/, '');
+                });
             _nativeLog(...args);
         };
 

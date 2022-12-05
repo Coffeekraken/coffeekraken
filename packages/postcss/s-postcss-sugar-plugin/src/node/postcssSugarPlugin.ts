@@ -578,6 +578,62 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
         __writeFileSync(cacheFilePath, data);
     }
 
+    /**
+     * Run the postProcessors on the passed AST
+     *
+     * @async
+     */
+    async function postProcessors(root) {
+        for (let i = 0; i < postProcessorsRegisteredFn.length; i++) {
+            const fn = postProcessorsRegisteredFn[i];
+            await fn(root);
+        }
+
+        const postProcessorsPaths = __glob.sync('**/*.js', {
+            cwd: `${__dirname()}/postProcessors`,
+        });
+
+        for (let i = 0; i < postProcessorsPaths.length; i++) {
+            const path = postProcessorsPaths[i];
+
+            const { default: processorFn } = await import(
+                `${__dirname()}/postProcessors/${path}`
+            );
+            await processorFn({
+                CssVars: __CssVars,
+                packageHash,
+                themeHash,
+                cacheDir,
+                getRoot: __getRoot,
+                settings,
+                root,
+                sharedData,
+            });
+        }
+
+        // compress --s-theme-... variables
+        root.walkDecls((node) => {
+            if (node.variable) {
+                if (node.prop.match(/--s-theme/)) {
+                    const compressedProp = __compressVarName(node.prop);
+                    node.prop = compressedProp;
+                }
+            }
+
+            const valueMatches = node.value.match(/--s-theme-[^,\)]+/gm);
+            if (valueMatches) {
+                valueMatches.forEach((match) => {
+                    node.value = node.value.replace(
+                        match,
+                        __compressVarName(match),
+                    );
+                });
+            }
+        });
+
+        return root;
+    }
+
     const pluginObj = {
         postcssPlugin: 'sugar',
         async Once(root) {
@@ -609,8 +665,8 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             }, 3000);
 
             if (
-                root.source.input.file.match(/\.css$/) &&
-                !root.source.input.file.match(/index\.css$/)
+                root.source.input.file.match(/\.css$/)
+                // !root.source.input.file.match(/index\.css$/)
             ) {
                 const cachedDataStr = getCachedData(root.source.input.file);
                 if (cachedDataStr) {
@@ -660,52 +716,8 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                 __writeFileSync(cacheHashFilePath, cacheHash);
             }
 
-            for (let i = 0; i < postProcessorsRegisteredFn.length; i++) {
-                const fn = postProcessorsRegisteredFn[i];
-                await fn(root);
-            }
-
-            const postProcessorsPaths = __glob.sync('**/*.js', {
-                cwd: `${__dirname()}/postProcessors`,
-            });
-
-            for (let i = 0; i < postProcessorsPaths.length; i++) {
-                const path = postProcessorsPaths[i];
-
-                const { default: processorFn } = await import(
-                    `${__dirname()}/postProcessors/${path}`
-                );
-                await processorFn({
-                    CssVars: __CssVars,
-                    packageHash,
-                    themeHash,
-                    cacheDir,
-                    getRoot: __getRoot,
-                    settings,
-                    root,
-                    sharedData,
-                });
-            }
-
-            // compress --s-theme-... variables
-            root.walkDecls((node) => {
-                if (node.variable) {
-                    if (node.prop.match(/--s-theme/)) {
-                        const compressedProp = __compressVarName(node.prop);
-                        node.prop = compressedProp;
-                    }
-                }
-
-                const valueMatches = node.value.match(/--s-theme-[^,\)]+/gm);
-                if (valueMatches) {
-                    valueMatches.forEach((match) => {
-                        node.value = node.value.replace(
-                            match,
-                            __compressVarName(match),
-                        );
-                    });
-                }
-            });
+            // post processors
+            await postProcessors(root);
 
             bench.end();
             // __SBench.end('postcssSugarPlugin').log({
@@ -789,6 +801,10 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
 
                 // do not take care of imported assets using url('...');
                 if (atRule.params.match(/^url\(/)) return;
+
+                // do not take care of imported assets that are not "local"
+                // and that starts by https?
+                if (atRule.params.match(/^https?:\/\//)) return;
 
                 if (!atRule.source?.input) {
                     throw new Error(

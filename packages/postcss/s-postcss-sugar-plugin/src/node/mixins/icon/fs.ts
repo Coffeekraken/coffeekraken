@@ -79,5 +79,5 @@ export default function ({
         );
     }
 
-    replaceWith([]);
+    return replaceWith([`/** S-SUGAR-FS-ICON:${as} */`]);
 }

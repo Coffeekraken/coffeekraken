@@ -48,6 +48,7 @@ export default function ({
     const vars = new CssVars();
 
     const fontsFamiliesObj = __STheme.get('font.family');
+
     Object.keys(fontsFamiliesObj).forEach((fontName) => {
         const fontObj = fontsFamiliesObj[fontName];
 
@@ -66,9 +67,12 @@ export default function ({
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
-            ).code(`
+            ).code(
+                `
         @import url("${fontObj.import}");
-      `);
+      `,
+                { type: 'CssClass' },
+            );
         }
     });
 

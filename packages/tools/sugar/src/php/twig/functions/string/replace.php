@@ -25,5 +25,8 @@ return new \Twig\TwigFunction('replace', function (
     string $search,
     string $replaceBy
 ): string {
+    if (!is_string($replaceBy)) {
+        return $string;
+    }
     return str_replace($search, $replaceBy, $string);
 });

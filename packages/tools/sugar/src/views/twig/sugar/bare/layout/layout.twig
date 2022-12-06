@@ -13,7 +13,7 @@
         <div class="s-container:{{ container }}">
     {% endif %}
     <div class="s-layout {{ gap ? 's-gap:' ~ gap : '' }}" id="{{ finalId }}-layout">
-        {{ content|raw }}
+        {{ html|raw }}
     </div>
     {% if container %}
     </div>

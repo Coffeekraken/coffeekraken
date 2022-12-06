@@ -19,12 +19,15 @@ import {
 } from '@coffeekraken/sugar/fs';
 import { __isChildProcess } from '@coffeekraken/sugar/is';
 import { __packageJsonSync } from '@coffeekraken/sugar/package';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import {
     __onProcessExit,
     __processSugar,
     __spawn,
 } from '@coffeekraken/sugar/process';
+import __chalk from 'chalk';
 import __dotenv from 'dotenv';
+import * as __Enquirer from 'enquirer';
 import __fs from 'fs';
 import __fsExtra from 'fs-extra';
 import __path from 'path';
@@ -121,13 +124,45 @@ export default class SSugarCli {
                 __fs.readFileSync(this._lockFilePath).toString(),
             );
             if (processId !== process.pid) {
-                console.log('lockec!!!');
+                console.log('locked!!!');
                 return true;
             }
             return false;
         } catch (e) {
             return false;
         }
+    }
+
+    static async _checkIfWeAreInPackage() {
+        // check if a packageRootDir exist
+        // if not, we are not in a package folder...
+        if (!__packageRootDir()) {
+            // ask the user if he want to continue at his own risk...
+            const result = await __Enquirer.default.prompt({
+                type: 'confirm',
+                name: 'question',
+                default: false,
+                message: [
+                    `${__chalk.bold(__chalk.yellow('!!! SUGAR   !!!'))}`,
+                    `${__chalk.bold(__chalk.red('  !!! WARNING !!!'))}`,
+                    `${__chalk.bold(
+                        __chalk.red('  !!!'),
+                    )} It seems that ${__chalk.cyan(
+                        'you are not in a package folder',
+                    )}...`,
+                    `${__chalk.bold(
+                        __chalk.red('  !!!'),
+                    )} Would you like to continue at your own risk?`,
+                    `${__chalk.bold(__chalk.red('  !!! WARNING !!!'))}`,
+                ].join('\n'),
+            });
+            if (!result.question) {
+                return process.exit(0);
+            }
+        }
+
+        // all is find
+        return true;
     }
 
     /**
@@ -144,6 +179,9 @@ export default class SSugarCli {
         // singleton
         if (global._sugarCli) return global._sugarCli;
         global._sugarCli = SSugarCli;
+
+        // make sure we are in a package
+        await this._checkIfWeAreInPackage();
 
         // hook base console functions
         this._proxyConsole();
@@ -635,6 +673,11 @@ export default class SSugarCli {
     }
 
     static _newStep() {
+        const packageRootDir = __packageRootDir(),
+            monoPackageRootDir = __packageRootDir(process.cwd(), {
+                highest: true,
+            });
+
         [
             ...__sugarBanner({
                 borders: false,
@@ -642,17 +685,23 @@ export default class SSugarCli {
                 paddingBottom: 1,
                 version: `CLI <cyan>v${this.cliPackageJson.version}</cyan>`,
             }).split('\n'),
-            `This process is running in the ${
+            `Environment            : ${
                 process.env.NODE_ENV === 'production'
                     ? '<green>production</green>'
                     : process.env.NODE_ENV === 'test'
                     ? '<cyan>test</cyan>'
                     : '<yellow>development</yellow>'
-            } environment`,
-            `<cyan>ENV</cyan> variable(s) loaded using <magenta>dotenv</magenta>`,
-            process.env.DEVS_CUT
-                ? `This process is running in <green>devsCut</green> mode`
+            }`,
+            `Package directory      : <cyan>${packageRootDir}</cyan>`,
+            packageRootDir !== monoPackageRootDir
+                ? `Monorepo directory     : <cyan>${monoPackageRootDir}</cyan>`
                 : '',
+            `Environment variables  : <magenta>dotenv</magenta>`,
+            `Devscut                : ${
+                process.env.DEVS_CUT
+                    ? `<green>true</green>`
+                    : `<red>false</red>`
+            }`,
             ' ',
         ]
             .filter((l) => l !== '')

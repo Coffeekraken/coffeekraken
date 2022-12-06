@@ -30,8 +30,8 @@
 </a> --}}
 
 <p class="s-typo:p s-mbs:50 @dwarf hide">
-    Version: <span class="s-tc:accent">{{ $packageJson->version }}</span> - License <a class="s-tc:accent"
-        href="https://opensource.org/licenses/MIT" target="_blank">{{ $packageJson->license }}</a>
+    Version: <span class="s-tc:accent">{{ $config->package->version }}</span> - License <a class="s-tc:accent"
+        href="https://opensource.org/licenses/MIT" target="_blank">{{ $config->package->license }}</a>
     <br />Fully open source
     <i class="s-icon:logo-opensource s-tc:accent"></i>
 </p>

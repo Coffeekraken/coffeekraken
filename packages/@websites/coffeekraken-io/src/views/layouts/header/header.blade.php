@@ -19,12 +19,12 @@
             <div class="__version">
                 @php
                     $color = 'complementary';
-                    if (strpos($packageJson->version, 'alpha')) {
+                    if (strpos($config->package->version, 'alpha')) {
                         $color = 'error';
                     }
                 @endphp
                 <span class="s-badge s-color:{{ $color }}">
-                    {{ $packageJson->version }}
+                    {{ $config->package->version }}
                 </span>
             </div>
             <nav id="nav" class="__nav s-until:media:mobile">

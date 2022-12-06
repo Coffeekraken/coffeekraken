@@ -10,9 +10,9 @@
         },
         "type": "@sugar.views.props.container",
         "attributes": "@sugar.views.props.attributes",
-        "content": {
+        "html": {
             "type": "Html",
-            "description": "Specify the content tu put in the container",
+            "description": "Specify the html tu put in the container",
             "required": true
         },
         "margin": "@sugar.views.props.margin",

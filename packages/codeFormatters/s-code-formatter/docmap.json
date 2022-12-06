@@ -48,6 +48,7 @@
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-highlight-feature",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
@@ -56,6 +57,7 @@
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-monorepo",
+            "@coffeekraken/s-pack-essentials",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
@@ -144,6 +146,42 @@
                 "filename": "codeFormatter.config.ts",
                 "extension": "config",
                 "relPath": "src/config/codeFormatter.config.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-code-formatter.doc.README": {
+                "id": "@coffeekraken.s-code-formatter.doc.README",
+                "name": "README",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-code-formatter.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md.twig",
+                "extension": "md",
+                "relPath": "src/doc/README.md.twig",
                 "children": {}
             },
             "@coffeekraken.s-code-formatter.node.SCodeFormatter": {
@@ -248,6 +286,26 @@
                             "raw": "Function"
                         },
                         "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "formatinline": {
+                        "id": "s8e3316cdc55eaef7876de0b704862d54d76af628e525cc788b2a628916051e5e",
+                        "name": "formatInline",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This method allows you to format a passed string",
+                        "async": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",

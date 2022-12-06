@@ -72,6 +72,9 @@ function registerFunctions($twig)
     $twig->addFunction($props);
 
     // specs
+    $markdownSpecsList = require __DIR__ . '/specs/markdownSpecsList.php';
+    $twig->addFunction($markdownSpecsList);
+
     $readSpec = require __DIR__ . '/specs/readSpec.php';
     $twig->addFunction($readSpec);
 

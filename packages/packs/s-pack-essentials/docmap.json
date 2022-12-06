@@ -101,6 +101,42 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-pack-essentials.doc.README": {
+                "id": "@coffeekraken.s-pack-essentials.doc.README",
+                "name": "README",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-pack-essentials.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md.twig",
+                "extension": "md",
+                "relPath": "src/doc/README.md.twig",
+                "children": {}
+            },
             "@coffeekraken.s-pack-essentials.js.SPackEssentials": {
                 "id": "@coffeekraken.s-pack-essentials.js.SPackEssentials",
                 "name": "SPackEssentials",

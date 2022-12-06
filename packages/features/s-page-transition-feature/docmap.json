@@ -58,6 +58,7 @@
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-monorepo",
+            "@coffeekraken/s-pack-essentials",
             "@coffeekraken/s-package",
             "@coffeekraken/s-panel-component",
             "@coffeekraken/s-parallax-feature",

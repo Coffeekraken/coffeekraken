@@ -119,7 +119,7 @@ export default function (api) {
              * @name            websiteUrl
              * @namespace       config.markdownBuilder
              * @type            String
-             * @default         config.packageJson.homepage
+             * @default         config.package.homepage
              *
              * Specify the website url that will be used for things like "absoluteLinks" conversion, etc...
              *
@@ -127,7 +127,7 @@ export default function (api) {
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get websiteUrl() {
-                return api.config.packageJson.homepage;
+                return api.config.package.homepage;
             },
         },
 

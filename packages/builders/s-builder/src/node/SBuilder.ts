@@ -1,6 +1,7 @@
 import type { ISClass } from '@coffeekraken/s-class';
 import __SClass from '@coffeekraken/s-class';
 import __SDuration from '@coffeekraken/s-duration';
+import __SEnv from '@coffeekraken/s-env';
 import __SInterface from '@coffeekraken/s-interface';
 import __SLog from '@coffeekraken/s-log';
 import { __deepMerge } from '@coffeekraken/sugar/object';
@@ -35,8 +36,13 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
+export interface ISBuilderLogSettings {
+    verbose: boolean;
+}
+
 export interface ISBuilderSettings {
     interface: typeof __SInterface;
+    log: Partial<ISBuilderLogSettings>;
 }
 
 export interface ISBuilder extends ISClass {
@@ -59,6 +65,9 @@ class SBuilder extends __SClass implements ISBuilder {
             __deepMerge(
                 {
                     interface: undefined,
+                    log: {
+                        verbose: __SEnv.is('verbose'),
+                    },
                 },
                 settings || {},
             ),
@@ -99,21 +108,25 @@ class SBuilder extends __SClass implements ISBuilder {
         // @ts-ignore
         const promise = this._build(finalParams, settings);
 
-        promise.emit('log', {
-            type: __SLog.TYPE_INFO,
-            value: `<yellow>[build]</yellow> Start ${this.constructor.name} build`,
-        });
-
-        promise.then(() => {
+        if (this.settings.log.verbose) {
             promise.emit('log', {
                 type: __SLog.TYPE_INFO,
-                value: `<green>[success]</green> Build ${
-                    this.constructor.name
-                } finished <green>successfully</green> in <yellow>${
-                    duration.end().formatedDuration
-                }</yellow>`,
+                value: `<yellow>[build]</yellow> Start ${this.constructor.name} build`,
             });
-        });
+        }
+
+        if (this.settings.log.verbose) {
+            promise.then(() => {
+                promise.emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<green>[success]</green> Build ${
+                        this.constructor.name
+                    } finished <green>successfully</green> in <yellow>${
+                        duration.end().formatedDuration
+                    }</yellow>`,
+                });
+            });
+        }
 
         return promise;
     }

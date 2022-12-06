@@ -47,7 +47,6 @@ This `SMarkdownBuilder` package allows you to easily build markdown files using 
 
 -   Access some useful data like:
     -   `config`: The entire [SSugarConfig](/package/@coffeekraken/s-sugar-config) configuration object
-    -   `flatConfig`: Same as `config` but flatten
     -   `settings`: The markdown builder settings used to build your markdown file
     -   `params`: The markdown builder `build` parameters
     -   `packageJson`: The package.json object

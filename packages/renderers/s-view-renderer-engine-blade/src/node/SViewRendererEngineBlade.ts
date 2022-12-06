@@ -42,7 +42,7 @@ export default class SViewRendererEngineBlade {
         viewRendererSettings: ISViewRendererSettings,
     ) {
         return new __SPromise(
-            ({ resolve, reject, emit }) => {
+            ({ resolve, reject, emit, pipe }) => {
                 const bench = new __SBench(
                     `SViewRendererEngineBlade.render.${viewPath.replace(
                         __packageRootDir(),
@@ -70,20 +70,24 @@ export default class SViewRendererEngineBlade {
                 // pass the shared data file path through the data
                 data._sharedDataFilePath = sharedDataFilePath;
 
-                const resPro = __execPhp(
-                    __path.resolve(
-                        __packageRootDir(__dirname()),
-                        'src/php/compile.php',
+                const resPro = pipe(
+                    __execPhp(
+                        __path.resolve(
+                            __packageRootDir(__dirname()),
+                            'src/php/compile.php',
+                        ),
+                        {
+                            rootDirs: __unique([
+                                ...viewRendererSettings.rootDirs,
+                            ]),
+                            viewDotPath,
+                            data,
+                            cacheDir: viewRendererSettings.cacheDir,
+                        },
+                        {
+                            paramsThroughFile: true,
+                        },
                     ),
-                    {
-                        rootDirs: __unique([...viewRendererSettings.rootDirs]),
-                        viewDotPath,
-                        data,
-                        cacheDir: viewRendererSettings.cacheDir,
-                    },
-                    {
-                        paramsThroughFile: true,
-                    },
                 );
 
                 resPro.then(

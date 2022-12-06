@@ -975,6 +975,42 @@
                     }
                 }
             },
+            "@coffeekraken.s-frontend-server.doc.README": {
+                "id": "@coffeekraken.s-frontend-server.doc.README",
+                "name": "README",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-frontend-server.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md.twig",
+                "extension": "md",
+                "relPath": "src/doc/README.md.twig",
+                "children": {}
+            },
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.express": {
                 "id": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.express",
                 "name": "express",

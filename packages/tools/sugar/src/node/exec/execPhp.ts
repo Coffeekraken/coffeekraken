@@ -1,7 +1,13 @@
+import __SDuration from '@coffeekraken/s-duration';
+import __SEnv from '@coffeekraken/s-env';
+import __SLog from '@coffeekraken/s-log';
+import __SPromise from '@coffeekraken/s-promise';
 import { __writeJsonSync } from '@coffeekraken/sugar/fs';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __packageTmpDir } from '@coffeekraken/sugar/path';
 import { __uniqid } from '@coffeekraken/sugar/string';
 import __childProcess from 'child_process';
+import __fs from 'fs';
 
 /**
  * @name            execPhp
@@ -24,9 +30,14 @@ import __childProcess from 'child_process';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
+export interface IExecPhpLogSettings {
+    verbose: boolean;
+}
+
 export interface IExecPhpSettings {
     encryptParams: boolean;
     paramsThroughFile: boolean;
+    log: Partial<IExecPhpLogSettings>;
 }
 
 export default function __execPhp(
@@ -34,14 +45,21 @@ export default function __execPhp(
     params: any,
     settings?: Partial<IExecPhpSettings>,
 ) {
-    return new Promise((resolve, reject) => {
-        settings = {
-            paramsThroughFile: false,
-            ...(settings ?? {}),
-        };
+    return new __SPromise(({ resolve, reject, emit }) => {
+        const finalSettings: IExecPhpSettings = __deepMerge(
+            {
+                paramsThroughFile: false,
+                log: {
+                    verbose: __SEnv.is('verbose'),
+                },
+            },
+            settings ?? {},
+        );
         let paramsFilePath, paramsStr;
 
-        if (settings.paramsThroughFile) {
+        const duration = new __SDuration();
+
+        if (finalSettings.paramsThroughFile) {
             paramsFilePath = `${__packageTmpDir()}/exec-php/${__uniqid()}-${Math.round(
                 Math.random() * 99999999999,
             )}.json`;
@@ -62,14 +80,23 @@ export default function __execPhp(
         // quicker with execSync than spawnSync
         let result;
 
+        if (finalSettings?.log?.verbose) {
+            emit('log', {
+                type: __SLog.TYPE_INFO,
+                value: `<yellow>[execPhp]</yellow> Executing php command "<magenta>${`php ${scriptPath} "${
+                    paramsFilePath ?? paramsStr
+                }"`}</magenta>"`,
+            });
+        }
+
         result = __childProcess.exec(
             `php ${scriptPath} "${paramsFilePath ?? paramsStr}"`,
             (error, stdout, stderr) => {
-                // if (paramsFilePath) {
-                //     try {
-                //         // __fs.unlinkSync(paramsFilePath);
-                //     } catch (e) {}
-                // }
+                if (paramsFilePath) {
+                    try {
+                        __fs.unlinkSync(paramsFilePath);
+                    } catch (e) {}
+                }
 
                 if (error) {
                     return reject(
@@ -80,6 +107,16 @@ export default function __execPhp(
                         ].join('\n'),
                     );
                 }
+
+                if (finalSettings?.log?.verbose) {
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<green>[execPhp]</green> Command executed <green>successfully</green> in <yellow>${
+                            duration.end().formatedDuration
+                        }</yellow>`,
+                    });
+                }
+
                 resolve(stdout);
             },
         );

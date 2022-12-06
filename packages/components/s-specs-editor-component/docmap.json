@@ -49,6 +49,7 @@
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-highlight-feature",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
@@ -57,6 +58,7 @@
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-monorepo",
+            "@coffeekraken/s-pack-essentials",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
@@ -119,6 +121,84 @@
                 "description": "This class represent the interface that describe parameters of the SSpecsEditorComponent",
                 "namespace": "@coffeekraken.s-specs-editor-component.js.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SSpecsEditorComponentInterface",
+                    "description": "",
+                    "definition": {
+                        "id": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "title": "Id",
+                            "description": "Specify an id for your specs editor to be able to save his state"
+                        },
+                        "specs": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
+                            "title": "Specs",
+                            "description": "Specify the SSpecs resulting json to use for the editor",
+                            "required": true
+                        },
+                        "frontspec": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
+                            "title": "Frontspec",
+                            "description": "Specify the frontspec json to make use of it for things like media, etc..."
+                        },
+                        "media": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "title": "Specs",
+                            "description": "Specify the media on which the specs editor is currently working"
+                        },
+                        "icons": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
+                            "title": "Icons",
+                            "description": "Specify some icons html used across the interface",
+                            "default": {
+                                "clear": "<i class=\"fa-solid fa-xmark\"></i>",
+                                "add": "<i class=\"fa-solid fa-plus\"></i>",
+                                "expand": "<i class=\"fa-solid fa-plus\"></i>",
+                                "remove": "<i class=\"fa-solid fa-minus\"></i>",
+                                "collapse": "<i class=\"fa-solid fa-minus\"></i>",
+                                "mobile": "<i class=\"fa-solid fa-mobile-screen-button\"></i>",
+                                "tablet": "<i class=\"fa-solid fa-tablet-screen-button\"></i>",
+                                "desktop": "<i class=\"fa-solid fa-desktop\"></i>",
+                                "wide": "<i class=\"fa-solid fa-arrows-left-right\"></i>"
+                            }
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

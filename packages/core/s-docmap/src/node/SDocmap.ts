@@ -244,8 +244,9 @@ class SDocmap extends __SClass implements ISDocmap {
                             if (
                                 key.split('/').length > 1 &&
                                 key.match(/^([a-zA-Z0-9-_@\/]+)?\/styleguide\//)
-                            )
+                            ) {
                                 return true;
+                            }
                             if (key === 'styleguide') return true;
                             return false;
                         },
@@ -253,8 +254,9 @@ class SDocmap extends __SClass implements ISDocmap {
                             if (
                                 key.split('/').length > 1 &&
                                 key.match(/^([a-zA-Z0-9-_@\/]+)?\/views\//)
-                            )
+                            ) {
                                 return true;
+                            }
                             if (key === 'specs') return true;
                             return false;
                         },

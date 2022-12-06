@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import __findPkgJson from 'find-package-json';
 import { __isFile } from '@coffeekraken/sugar/is';
+import __findPkgJson from 'find-package-json';
 import __objectHash from '../../shared/object/objectHash';
 
 /**
@@ -67,8 +67,10 @@ export default function __packageRootDir(
     let finalFile,
         upCountIdx = 0;
 
-    // no file found
-    if (!file || !file.filename) return false;
+    // no file found so return the process cwd
+    if (!file || !file.filename) {
+        return false;
+    }
 
     while (!file.done) {
         if (file.done) {
@@ -109,7 +111,9 @@ export default function __packageRootDir(
         file = f.next();
     }
 
-    if (!finalFile) return false;
+    if (!finalFile) {
+        return false;
+    }
 
     const finalPath = finalFile.filename.split('/').slice(0, -1).join('/');
     __packageRootDirsCache[storageKey] = finalPath;

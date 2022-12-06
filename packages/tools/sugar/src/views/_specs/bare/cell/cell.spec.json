@@ -4,9 +4,9 @@
     "description": "Simple cell that can be used inside a layout, etc...",
     "props": {
         "attributes": "@sugar.views.props.attributes",
-        "content": {
+        "html": {
             "type": "Html",
-            "description": "The content to print in the cell",
+            "description": "The html to print in the cell",
             "required": true
         },
         "margin": "@sugar.views.props.margin",

@@ -1,25 +1,25 @@
 {% if settings.layouts.readme.data.headerImageUrl %}
 <!-- image -->
-![{{ packageJson.name }}]({{ settings.layouts.readme.data.headerImageUrl }})
+![{{ config.package.name }}]({{ settings.layouts.readme.data.headerImageUrl }})
 {% endif %}
 
 {% if not sections or 'header' in sections|keys %}
     <!-- header -->
-    # {{ packageJson.name }}
+    # {{ config.package.name }}
 
-    ###### [{{ packageJson.license }}](./license) {{ packageJson.version }} - [Git repository]({{ git.repo.url }})
+    ###### [{{ config.package.license }}](./license) {{ config.package.version }} - [Git repository]({{ git.repo.url }})
 
     {% if config.readme.shields %}
         <!-- shields -->
         {% for key, shield in config.readme.shields %}
-        [![{{ key }}]({{ shield.url|replace('%packageName',  packageJson.name) }})]({{ shield.href|replace('%packageName', packageJson.name) }})
+        [![{{ key }}]({{ shield.url|replace('%packageName',  config.package.name) }})]({{ shield.href|replace('%packageName', config.package.name) }})
         {% endfor %}
     {% endif %}
 {% endif %}
 
 {% if not sections or 'description' in sections|keys %}
     <!-- description -->
-    {{ packageJson.description }}
+    {{ config.package.description }}
 {% endif %}
 
 {% if not sections or 'install' in sections|keys %}
@@ -27,7 +27,7 @@
     ### Install
 
     ```shell
-    npm i {{ packageJson.name }}
+    npm i {{ config.package.name }}
     ```
 {% endif %}
 
@@ -38,7 +38,7 @@
     <!-- license -->    
     ### License
 
-    Distributed under the **{{packageJson.license }}** License. See **[LICENSE](./license)** for more information.
+    Distributed under the **{{config.package.license }}** License. See **[LICENSE](./license)** for more information.
 {% endif %}
 
 {% if not sections or 'contact' in sections|keys %}

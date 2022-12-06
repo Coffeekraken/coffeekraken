@@ -94,7 +94,9 @@
         "@coffeekraken/s-vite-postcss-plugin": "^2.0.0-alpha.20",
         "@coffeekraken/s-vite-sugar-plugin": "^2.0.0-alpha.20",
         "@coffeekraken/sugar": "^2.0.0-alpha.20",
+        "chalk": "^5.1.2",
         "dotenv": "^16.0.1",
+        "enquire": "^0.0.2",
         "fs-extra": "^10.1.0"
     },
     "main": "dist/pkg/cjs/node/exports.js",

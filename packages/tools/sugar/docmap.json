@@ -22607,6 +22607,43 @@
                 "relPath": "src/php/twig/functions/html/attrs.php",
                 "children": {}
             },
+            "@coffeekraken.sugar.php.twig.functions.json.jsonDecode": {
+                "id": "@coffeekraken.sugar.php.twig.functions.json.jsonDecode",
+                "name": "jsonDecode",
+                "type": {
+                    "types": [
+                        {
+                            "type": "TwigFilter"
+                        }
+                    ],
+                    "raw": "TwigFilter"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This twig function allows you to decode a json string into a usable twig object",
+                "namespace": "@coffeekraken.sugar.php.twig.functions.json",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "<div data=\"{{ myJson|jsonDecode }}\"></div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "jsonDecode.php",
+                "extension": "php",
+                "relPath": "src/php/twig/functions/json/jsonDecode.php",
+                "children": {}
+            },
             "@coffeekraken.sugar.php.twig.functions.object.get": {
                 "id": "@coffeekraken.sugar.php.twig.functions.object.get",
                 "name": "get",
@@ -22635,6 +22672,43 @@
                 "filename": "get.php",
                 "extension": "php",
                 "relPath": "src/php/twig/functions/object/get.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.twig.functions.object.props": {
+                "id": "@coffeekraken.sugar.php.twig.functions.object.props",
+                "name": "props",
+                "type": {
+                    "types": [
+                        {
+                            "type": "TwigFilter"
+                        }
+                    ],
+                    "raw": "TwigFilter"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This twig filter allows you to get back an array of object properties",
+                "namespace": "@coffeekraken.sugar.php.twig.functions.object",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "<div data=\"{{ myObject|props }}\"></div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "props.php",
+                "extension": "php",
+                "relPath": "src/php/twig/functions/object/props.php",
                 "children": {}
             },
             "@coffeekraken.sugar.php.twig.functions.specs.readSpec": {

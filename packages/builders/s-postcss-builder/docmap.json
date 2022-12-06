@@ -49,6 +49,7 @@
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-highlight-feature",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
@@ -57,6 +58,7 @@
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-monorepo",
+            "@coffeekraken/s-pack-essentials",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
@@ -247,6 +249,42 @@
                 "filename": "purgecss.config.ts",
                 "extension": "config",
                 "relPath": "src/config/purgecss.config.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-builder.doc.README": {
+                "id": "@coffeekraken.s-postcss-builder.doc.README",
+                "name": "README",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-postcss-builder.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md.twig",
+                "extension": "md",
+                "relPath": "src/doc/README.md.twig",
                 "children": {}
             },
             "@coffeekraken.s-postcss-builder.node.SPostcssBuilder": {

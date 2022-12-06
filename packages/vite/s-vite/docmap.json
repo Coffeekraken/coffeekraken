@@ -492,6 +492,42 @@
                 "relPath": "src/config/vite.config.ts",
                 "children": {}
             },
+            "@coffeekraken.s-vite.doc.README": {
+                "id": "@coffeekraken.s-vite.doc.README",
+                "name": "README",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-vite.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md.twig",
+                "extension": "md",
+                "relPath": "src/doc/README.md.twig",
+                "children": {}
+            },
             "@coffeekraken.s-vite.node.interface.SViteBuildParamsInterface": {
                 "id": "@coffeekraken.s-vite.node.interface.SViteBuildParamsInterface",
                 "name": "SViteBuildParamsInterface",

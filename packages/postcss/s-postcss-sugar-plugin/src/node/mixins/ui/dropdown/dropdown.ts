@@ -89,7 +89,7 @@ export default function ({
           outline: 0;
           white-space: nowrap;
           cursor: auto;
-          z-index: 10;
+          z-index: 50;
 
             @sugar.state.disabled {
                 @sugar.disabled;

@@ -24,9 +24,7 @@ Simple cell that can be used inside a layout, etc...
 
 ## Features
 
-{% for spec in props(specs.props) %}
-- `{{ spec }}`
-{% endfor %}
+{{ markdownSpecsList(props(specs.props)) }}
 
 ## Usage
 
@@ -34,7 +32,7 @@ Simple cell that can be used inside a layout, etc...
 
 ```php
 @include('sugar.bare.cell.cell', [
-    'content' => '
+    'html' => '
         <h2>Hello world</h2>
     ',
     'margin' => [
@@ -52,7 +50,7 @@ Simple cell that can be used inside a layout, etc...
 
 ```twig
 {{ '{%' }} include 'sugar.bare.cell.cell' with {
-    content: '<h2>Hello world</h2>',
+    html: '<h2>Hello world</h2>',
     margin: {
         default: {
             bottom: '50'

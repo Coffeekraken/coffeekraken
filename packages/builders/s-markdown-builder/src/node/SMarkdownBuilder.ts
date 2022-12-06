@@ -3,6 +3,7 @@ import __SBuilder from '@coffeekraken/s-builder';
 import __SDocmap from '@coffeekraken/s-docmap';
 import __SEnv from '@coffeekraken/s-env';
 import __SFile from '@coffeekraken/s-file';
+import __SFrontspec from '@coffeekraken/s-frontspec';
 import __SGlob from '@coffeekraken/s-glob';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
@@ -22,12 +23,7 @@ import {
     __writeFileSync,
     __writeTmpFileSync,
 } from '@coffeekraken/sugar/fs';
-import {
-    __deepMerge,
-    __flatten,
-    __objectHash,
-} from '@coffeekraken/sugar/object';
-import { __packageJsonSync } from '@coffeekraken/sugar/package';
+import { __deepMerge, __objectHash } from '@coffeekraken/sugar/object';
 import __fs from 'fs';
 import __handlebars from 'handlebars';
 import { marked as __marked } from 'marked';
@@ -183,15 +179,6 @@ export default class SMarkdownBuilder extends __SBuilder {
                 settings ?? {},
             ),
         );
-
-        // // load package transformers
-        // const transformersFolderPath = `${__dirname()}/transformers`;
-        // __fs.readdirSync(transformersFolderPath).forEach(async (path) => {
-        //     const transformerPath = `${transformersFolderPath}/${path}`;
-        //     const transformer = await import(transformerPath);
-        //     this.settings.transformers.push(transformer);
-        //     console.log(this.settings.transformers);
-        // });
     }
 
     _loaded = false;
@@ -270,6 +257,8 @@ export default class SMarkdownBuilder extends __SBuilder {
                             __SMarkdownBuilderBuildParamsInterface.defaults(),
                             params ?? {},
                         );
+
+                    finalParams.cache = false;
 
                     // calculate final settings and params hash
                     const hashSettings = Object.assign({}, this.settings);
@@ -391,18 +380,21 @@ export default class SMarkdownBuilder extends __SBuilder {
                         }
                     }
 
+                    // read docmap
                     const docmap = await new __SDocmap().read();
+
+                    // read frontspec
+                    const frontspec = await new __SFrontspec().read();
 
                     // take some datas like packagejson, etc...
                     const viewData = __deepMerge(
                         {
                             config: __SSugarConfig.get('.'),
-                            flatConfig: __flatten(__SSugarConfig.get('.')),
                             settings: this.settings,
                             params,
-                            packageJson: __packageJsonSync(),
                             docMenu: docmap.menu,
                             docmap,
+                            frontspec,
                             ck: __getCoffeekrakenMetas(),
                             time: {
                                 year: new Date().getFullYear(),
@@ -496,13 +488,8 @@ export default class SMarkdownBuilder extends __SBuilder {
                             // add the file in the builded stack
                             buildedFiles.push(res);
 
+                            // next file
                             continue;
-                        } else {
-                            // save the file hash
-                            // it will be saved at the end only if the build
-                            // is a success...
-                            cacheHashes[`${filePath}-${outputExtension}`] =
-                                finalFileHash;
                         }
 
                         let currentTransformedString = buildObj.data;
@@ -670,6 +657,15 @@ export default class SMarkdownBuilder extends __SBuilder {
                         // set the code in the res object
                         res.code = currentTransformedString;
 
+                        // add the file in the builded stack
+                        buildedFiles.push(res);
+
+                        // make sure we have something to write
+                        if (!currentTransformedString) {
+                            // pass to the next file
+                            continue;
+                        }
+
                         // write file on disk
                         __writeFileSync(
                             buildObj.outPath,
@@ -682,15 +678,18 @@ export default class SMarkdownBuilder extends __SBuilder {
                             });
                         }
 
+                        // save the file hash
+                        // it will be saved at the end only if the build
+                        // is a success...
+                        cacheHashes[`${filePath}-${outputExtension}`] =
+                            finalFileHash;
+
                         // write the cache only at the end if the build
                         // is a success
                         __writeFileSync(
                             cacheFilePath,
                             JSON.stringify(cacheHashes, null, 4),
                         );
-
-                        // add the file in the builded stack
-                        buildedFiles.push(res);
                     }
 
                     resolve(buildedFiles);

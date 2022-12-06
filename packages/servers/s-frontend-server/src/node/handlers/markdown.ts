@@ -42,7 +42,11 @@ export default function markdown(req, res, settings = {}) {
         }
 
         if (slugObj) {
-            const builder = new __SMarkdownBuilder();
+            const builder = new __SMarkdownBuilder({
+                log: {
+                    summary: false,
+                },
+            });
             const res = await pipe(
                 builder.build({
                     // inRaw: markdownStr,

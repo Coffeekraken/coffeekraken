@@ -49,6 +49,7 @@
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-highlight-feature",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
@@ -56,6 +57,7 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-monorepo",
+            "@coffeekraken/s-pack-essentials",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
@@ -302,7 +304,7 @@
                     ],
                     "raw": "String"
                 },
-                "default": "config.packageJson.homepage",
+                "default": "config.package.homepage",
                 "description": "Specify the website url that will be used for things like \"absoluteLinks\" conversion, etc...",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder",
                 "since": "2.0.0",
@@ -314,6 +316,42 @@
                 "filename": "markdownBuilder.config.ts",
                 "extension": "config",
                 "relPath": "src/config/markdownBuilder.config.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-markdown-builder.doc.README": {
+                "id": "@coffeekraken.s-markdown-builder.doc.README",
+                "name": "README",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-markdown-builder.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md.twig",
+                "extension": "md",
+                "relPath": "src/doc/README.md.twig",
                 "children": {}
             },
             "@coffeekraken.s-markdown-builder.node.SMarkdownBuilder": {
@@ -511,6 +549,19 @@
                                 "raw": "Boolean"
                             },
                             "alias": "s",
+                            "default": true
+                        },
+                        "cache": {
+                            "description": "Specify if you want to use the cache of not",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "alias": "c",
                             "default": true
                         },
                         "target": {

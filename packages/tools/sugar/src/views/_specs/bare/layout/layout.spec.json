@@ -19,9 +19,9 @@
             "required": true,
             "responsive": true
         },
-        "content": {
+        "html": {
             "type": "Html",
-            "description": "The grid content to print. Must have the same count of div(s) as your layout cells",
+            "description": "The grid html to print. Must have the same count of div(s) as your layout cells",
             "required": true
         },
         "gap": "@sugar.views.props.spacing",

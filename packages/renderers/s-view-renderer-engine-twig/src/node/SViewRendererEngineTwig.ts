@@ -41,7 +41,7 @@ export default class SViewRendererEngineTwig {
         viewRendererSettings: ISViewRendererSettings,
     ) {
         return new __SPromise(
-            async ({ resolve, reject, emit }) => {
+            async ({ resolve, reject, emit, pipe }) => {
                 if (!__fs.existsSync(viewRendererSettings.cacheDir)) {
                     __fs.mkdirSync(viewRendererSettings.cacheDir, {
                         recursive: true,
@@ -60,20 +60,24 @@ export default class SViewRendererEngineTwig {
                     viewDotPath = viewDotPath;
                 }
 
-                const resPro = __execPhp(
-                    __path.resolve(
-                        __packageRootDir(__dirname()),
-                        'src/php/compile.php',
+                const resPro = pipe(
+                    __execPhp(
+                        __path.resolve(
+                            __packageRootDir(__dirname()),
+                            'src/php/compile.php',
+                        ),
+                        {
+                            rootDirs: __unique([
+                                ...viewRendererSettings.rootDirs,
+                            ]),
+                            viewDotPath,
+                            data,
+                            cacheDir: viewRendererSettings.cacheDir,
+                        },
+                        {
+                            paramsThroughFile: true,
+                        },
                     ),
-                    {
-                        rootDirs: __unique([...viewRendererSettings.rootDirs]),
-                        viewDotPath,
-                        data,
-                        cacheDir: viewRendererSettings.cacheDir,
-                    },
-                    {
-                        paramsThroughFile: true,
-                    },
                 );
 
                 resPro.catch((e) => {

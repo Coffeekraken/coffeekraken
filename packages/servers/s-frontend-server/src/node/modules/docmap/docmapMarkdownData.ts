@@ -29,7 +29,11 @@ export default function docmapMarkdownData({ req, res, pageConfig }) {
         const docmap = new __SDocmap();
         const docmapJson = await docmap.read();
 
-        const builder = new __SMarkdownBuilder();
+        const builder = new __SMarkdownBuilder({
+            log: {
+                summary: false,
+            },
+        });
 
         const markdownRes = await pipe(
             builder.build({

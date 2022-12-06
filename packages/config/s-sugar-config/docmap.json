@@ -49,6 +49,7 @@
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-highlight-feature",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
@@ -57,6 +58,7 @@
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-monorepo",
+            "@coffeekraken/s-pack-essentials",
             "@coffeekraken/s-package",
             "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-panel-component",
@@ -1230,7 +1232,7 @@
                     ],
                     "raw": "String"
                 },
-                "default": "config.packageJson.title ?? config.packageJson.name",
+                "default": "config.package.title ?? config.package.name",
                 "description": "Specify the title of the project",
                 "namespace": "@coffeekraken.s-sugar-config.config.metas",
                 "since": "2.0.0",
@@ -1254,7 +1256,7 @@
                     ],
                     "raw": "String"
                 },
-                "default": "config.packageJson.homepage",
+                "default": "config.package.homepage",
                 "description": "Specify the homepage url of the project",
                 "namespace": "@coffeekraken.s-sugar-config.config.metas",
                 "since": "2.0.0",
@@ -1278,7 +1280,7 @@
                     ],
                     "raw": "String"
                 },
-                "default": "config.packageJson.description",
+                "default": "config.package.description",
                 "description": "Specify the description of the project",
                 "namespace": "@coffeekraken.s-sugar-config.config.metas",
                 "since": "2.0.0",
@@ -1326,7 +1328,7 @@
                     ],
                     "raw": "String"
                 },
-                "default": "config.packageJson.author",
+                "default": "config.package.author",
                 "description": "Specify the author of the project.\nMust be an object with the \"name\", \"email\" and \"url\" properties",
                 "namespace": "@coffeekraken.s-sugar-config.config.metas",
                 "since": "2.0.0",
@@ -1350,7 +1352,7 @@
                     ],
                     "raw": "String"
                 },
-                "default": "config.packageJson.author",
+                "default": "config.package.author",
                 "description": "Specify the opengraph metas for the project\nMust be an object with the \"title\", \"description\", \"type\", \"url\" and \"image\" properties",
                 "namespace": "@coffeekraken.s-sugar-config.config.metas",
                 "since": "2.0.0",
@@ -2711,6 +2713,42 @@
                         }
                     }
                 }
+            },
+            "@coffeekraken.s-sugar-config.doc.README": {
+                "id": "@coffeekraken.s-sugar-config.doc.README",
+                "name": "README",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-sugar-config.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md.twig",
+                "extension": "md",
+                "relPath": "src/doc/README.md.twig",
+                "children": {}
             },
             "@coffeekraken.s-sugar-config.js.SSugarConfig": {
                 "id": "@coffeekraken.s-sugar-config.js.SSugarConfig",

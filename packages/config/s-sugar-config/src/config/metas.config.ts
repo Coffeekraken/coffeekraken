@@ -19,7 +19,7 @@ export default function (api) {
          * @name            title
          * @namespace       config.metas
          * @type            String
-         * @default         config.packageJson.title ?? config.packageJson.name
+         * @default         config.package.title ?? config.package.name
          *
          * Specify the title of the project
          *
@@ -27,14 +27,14 @@ export default function (api) {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get title() {
-            return api.config.packageJson.title ?? api.config.packageJson.name;
+            return api.config.package.title ?? api.config.package.name;
         },
 
         /**
          * @name            homepage
          * @namespace       config.metas
          * @type            String
-         * @default         config.packageJson.homepage
+         * @default         config.package.homepage
          *
          * Specify the homepage url of the project
          *
@@ -42,14 +42,14 @@ export default function (api) {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get homepage() {
-            return api.config.packageJson.homepage;
+            return api.config.package.homepage;
         },
 
         /**
          * @name            description
          * @namespace       config.metas
          * @type            String
-         * @default         config.packageJson.description
+         * @default         config.package.description
          *
          * Specify the description of the project
          *
@@ -57,7 +57,7 @@ export default function (api) {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get description() {
-            return api.config.packageJson.description;
+            return api.config.package.description;
         },
 
         /**
@@ -79,7 +79,7 @@ export default function (api) {
          * @name            author
          * @namespace       config.metas
          * @type            String
-         * @default         config.packageJson.author
+         * @default         config.package.author
          *
          * Specify the author of the project.
          * Must be an object with the "name", "email" and "url" properties
@@ -88,7 +88,7 @@ export default function (api) {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get author() {
-            let author = api.config.packageJson.author;
+            let author = api.config.package.author;
             if (typeof author === 'string') {
                 author = __parseAuthorString(author);
             }
@@ -99,7 +99,7 @@ export default function (api) {
          * @name            ob
          * @namespace       config.metas
          * @type            String
-         * @default         config.packageJson.author
+         * @default         config.package.author
          *
          * Specify the opengraph metas for the project
          * Must be an object with the "title", "description", "type", "url" and "image" properties

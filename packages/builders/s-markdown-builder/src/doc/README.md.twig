@@ -21,10 +21,8 @@ This `SMarkdownBuilder` package allows you to easily build markdown files using 
 
 -   Access some useful data like:
     -   `config`: The entire [SSugarConfig](/package/@coffeekraken/s-sugar-config) configuration object
-    -   `flatConfig`: Same as `config` but flatten
     -   `settings`: The markdown builder settings used to build your markdown file
     -   `params`: The markdown builder `build` parameters
-    -   `packageJson`: The package.json object
     -   `docmap`: The [SDocmap](/package/@coffeekraken/s-docmap) object
     -   `ck`: The coffeekraken metas grabed using the [getCoffeekrakenMetas](/api/@coffeekraken.sugar.node.coffeekraken.getCoffeekrakenMetas) function
     -   `time`: A simple time object with `year`, `month` and `day` values
@@ -54,7 +52,7 @@ await builder.build({
 
 // Raw value
 await builder.build({
-    inRaw: '# Hello {{packageJson.name}}',
+    inRaw: '# Hello {{config.package.name}}',
     outPath: '/my/cool/build.md',
 });
 ```

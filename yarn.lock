@@ -1431,7 +1431,9 @@ __metadata:
     "@coffeekraken/s-vite-postcss-plugin": ^2.0.0-alpha.20
     "@coffeekraken/s-vite-sugar-plugin": ^2.0.0-alpha.20
     "@coffeekraken/sugar": ^2.0.0-alpha.20
+    chalk: ^5.1.2
     dotenv: ^16.0.1
+    enquire: ^0.0.2
     fs-extra: ^10.1.0
   bin:
     sugar: dist/pkg/esm/cli/sugar.cli.js
@@ -1634,6 +1636,7 @@ __metadata:
     "@coffeekraken/s-class": ^2.0.0-alpha.20
     "@coffeekraken/s-code-formatter-prettier": ^2.0.0-alpha.20
     "@coffeekraken/s-duration": ^2.0.0-alpha.20
+    "@coffeekraken/s-env": ^2.0.0-alpha.20
     "@coffeekraken/s-file": ^2.0.0-alpha.20
     "@coffeekraken/s-interface": ^2.0.0-alpha.20
     "@coffeekraken/s-log": ^2.0.0-alpha.20
@@ -2224,6 +2227,7 @@ __metadata:
     "@coffeekraken/s-code-formatter": ^2.0.0-alpha.20
     "@coffeekraken/s-data-file-generic": ^2.0.0-alpha.20
     "@coffeekraken/s-docmap": ^2.0.0-alpha.20
+    "@coffeekraken/s-env": ^2.0.0-alpha.20
     "@coffeekraken/s-event-emitter": ^2.0.0-alpha.20
     "@coffeekraken/s-file": ^2.0.0-alpha.20
     "@coffeekraken/s-glob": ^2.0.0-alpha.20
@@ -7332,6 +7336,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"chalk@npm:^5.1.2":
+  version: 5.1.2
+  resolution: "chalk@npm:5.1.2"
+  checksum: 804d7485e33531abe45b14e91026ceb5615974a8c04259ab0806f214a7666f6ea03e39ab124f7d5a0c78a83fda89005f236db3c5f10c2abe9ae875f7aa56bcb5
+  languageName: node
+  linkType: hard
+
 "change-case@npm:^4.1.2":
   version: 4.1.2
   resolution: "change-case@npm:4.1.2"
@@ -9110,6 +9121,13 @@ __metadata:
     graceful-fs: ^4.2.4
     tapable: ^2.2.0
   checksum: 0bb9830704db271610f900e8d79d70a740ea16f251263362b0c91af545576d09fe50103496606c1300a05e588372d6f9780a9bc2e30ce8ef9b827ec8f44687ff
+  languageName: node
+  linkType: hard
+
+"enquire@npm:^0.0.2":
+  version: 0.0.2
+  resolution: "enquire@npm:0.0.2"
+  checksum: 08c1b8a367195dfa1226b495fc9aaa6f60e823e5aabd058f084b60ae025dbe65b3501c3221d01e93217fb7c4e759b5c455363db624b8649d9cf05062150ae08e
   languageName: node
   linkType: hard
 

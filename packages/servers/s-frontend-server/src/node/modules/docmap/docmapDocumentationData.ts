@@ -43,7 +43,11 @@ export default function docmapDocumentationData({ req, res, pageConfig }) {
             packageJson = __packageJsonSync(docObj.docmap.package.name);
         }
 
-        const builder = new __SMarkdownBuilder();
+        const builder = new __SMarkdownBuilder({
+            log: {
+                summary: false,
+            },
+        });
 
         const markdownRes = await pipe(
             builder.build({
@@ -52,7 +56,7 @@ export default function docmapDocumentationData({ req, res, pageConfig }) {
                 },
                 inPath: docObj.docmap.path,
                 target: 'html',
-                save: false
+                save: false,
             }),
         );
         if (markdownRes instanceof Error) {

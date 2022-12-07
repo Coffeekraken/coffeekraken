@@ -1,0 +1,33 @@
+{% if type == 'lead' or type == 'p' %}
+    <p class="s-type--{{ type }}">
+        {{ html|raw }}
+    </p>
+{% elseif type == 'pre' or type == 'code' %}
+    <{{ type }} class="s-typo:{{ type }}">
+        {{ html|raw }}
+    </{{ type }}>
+{% elseif type == 'quote' or type == 'blockquote' %}
+    <blockquote class="s-typo:{{ type }}">
+        {{ html|raw }}
+    </blockquote>
+{% elseif type == 'bold' or type == 'b' or type == 'strong' %}
+    <strong class="s-typo:{{ type }}">
+        {{ html|raw }}
+    </strong>
+{% elseif type == 'italic' or type == 'i' %}
+    <em class="s-typo:{{ type }}">
+        {{ html|raw }}
+    </em>
+{% elseif type == 'mark' or type == 'del' or type == 'ins' or 'type' == 'sub' or type == 'sup' %}
+    <{{ type }} class="s-typo:{{ type }}">
+        {{ html|raw }}
+    </{{ type }}>
+{% elseif type|slice(0,1) == 'h' and type|length == 2 %}
+    <{{ type }} class="s-typo:{{ type }}">
+        {{ html|raw }}
+    </{{ type }}>
+{% else %}
+    <span class="s-typo:{{ type }}">
+        {{ html|raw }}
+    </span>
+{% endif %}

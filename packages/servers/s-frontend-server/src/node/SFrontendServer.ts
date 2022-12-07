@@ -185,7 +185,8 @@ export default class SFrontendServer extends __SClass {
                     'silly',
                 ].indexOf(finalParams.logLevel);
 
-                this._config = __SSugarConfig.get('frontendServer');
+                this._frontendServerConfig =
+                    __SSugarConfig.get('frontendServer');
 
                 this._express.use((req, res, next) => {
                     if (req.path.substr(-1) == '/' && req.path.length > 1) {
@@ -201,14 +202,18 @@ export default class SFrontendServer extends __SClass {
                     pipe(__viewRendererMiddleware()(req, res, next));
                 });
 
-                if (this._config.modules) {
+                if (this._frontendServerConfig.modules) {
                     for (
                         let i = 0;
-                        i < Object.keys(this._config.modules).length;
+                        i <
+                        Object.keys(this._frontendServerConfig.modules).length;
                         i++
                     ) {
-                        const moduleId = Object.keys(this._config.modules)[i];
-                        const moduleObj = this._config.modules[moduleId];
+                        const moduleId = Object.keys(
+                            this._frontendServerConfig.modules,
+                        )[i];
+                        const moduleObj =
+                            this._frontendServerConfig.modules[moduleId];
                         let module;
 
                         try {
@@ -223,54 +228,64 @@ export default class SFrontendServer extends __SClass {
                             module.default(
                                 this._express,
                                 moduleObj.settings,
-                                this._config,
+                                this._frontendServerConfig,
                             ),
                         );
                     }
                 }
 
-                if (this._config.proxy) {
-                    Object.keys(this._config.proxy).forEach((proxyId) => {
-                        const proxyObj = this._config.proxy[proxyId];
-                        // @ts-ignore
-                        this._express.use(
-                            createProxyMiddleware(proxyObj.route, {
-                                logLevel: 'silent',
-                                ...(proxyObj.settings ?? {}),
-                            }),
-                        );
-                    });
+                if (this._frontendServerConfig.proxy) {
+                    Object.keys(this._frontendServerConfig.proxy).forEach(
+                        (proxyId) => {
+                            const proxyObj =
+                                this._frontendServerConfig.proxy[proxyId];
+                            // @ts-ignore
+                            this._express.use(
+                                createProxyMiddleware(proxyObj.route, {
+                                    logLevel: 'silent',
+                                    ...(proxyObj.settings ?? {}),
+                                }),
+                            );
+                        },
+                    );
                 }
 
-                if (this._config.staticDirs) {
-                    Object.keys(this._config.staticDirs).forEach((dir) => {
-                        const fsPath = this._config.staticDirs[dir];
-                        if (__SEnv.is('verbose')) {
-                            emit('log', {
-                                value: `<cyan>[static]</cyan> Exposing static folder "<cyan>${__path.relative(
-                                    process.cwd(),
-                                    fsPath,
-                                )}</cyan>" behind "<yellow>${dir}</yellow>" url`,
-                            });
-                        }
-                        this._express.use(
-                            dir,
-                            __express.static(fsPath, { dotfiles: 'allow' }),
-                        );
-                    });
+                if (this._frontendServerConfig.staticDirs) {
+                    Object.keys(this._frontendServerConfig.staticDirs).forEach(
+                        (dir) => {
+                            const fsPath =
+                                this._frontendServerConfig.staticDirs[dir];
+                            if (__SEnv.is('verbose')) {
+                                emit('log', {
+                                    value: `<cyan>[static]</cyan> Exposing static folder "<cyan>${__path.relative(
+                                        process.cwd(),
+                                        fsPath,
+                                    )}</cyan>" behind "<yellow>${dir}</yellow>" url`,
+                                });
+                            }
+                            this._express.use(
+                                dir,
+                                __express.static(fsPath, { dotfiles: 'allow' }),
+                            );
+                        },
+                    );
                 }
 
-                if (this._config.middlewares) {
+                if (this._frontendServerConfig.middlewares) {
                     for (
                         let i = 0;
-                        i < Object.keys(this._config.middlewares).length;
+                        i <
+                        Object.keys(this._frontendServerConfig.middlewares)
+                            .length;
                         i++
                     ) {
                         const middlewareName = Object.keys(
-                            this._config.middlewares,
+                            this._frontendServerConfig.middlewares,
                         )[i];
                         const middlewareObj =
-                            this._config.middlewares[middlewareName];
+                            this._frontendServerConfig.middlewares[
+                                middlewareName
+                            ];
 
                         if (
                             !middlewareObj.path ||
@@ -321,9 +336,9 @@ export default class SFrontendServer extends __SClass {
                 }
 
                 // routes pages from config
-                if (this._config.pages) {
+                if (this._frontendServerConfig.pages) {
                     for (let [id, pageConfig] of Object.entries(
-                        this._config.pages,
+                        this._frontendServerConfig.pages,
                     )) {
                         await pipe(
                             this._registerPageConfig(
@@ -338,10 +353,10 @@ export default class SFrontendServer extends __SClass {
                 // "pages" folder routes
                 await pipe(this._registerPagesRoutes());
 
-                if (!(await __isPortFree(this._config.port))) {
+                if (!(await __isPortFree(this._frontendServerConfig.port))) {
                     emit('log', {
                         type: __SLog.TYPE_ERROR,
-                        value: `Port <yellow>${this._config.port}</yellow> already in use. Please make sure to make it free before retrying...`,
+                        value: `Port <yellow>${this._frontendServerConfig.port}</yellow> already in use. Please make sure to make it free before retrying...`,
                     });
                     process.kill(1);
                 }
@@ -355,7 +370,7 @@ export default class SFrontendServer extends __SClass {
                     resolve();
                 } else {
                     const server = this._express.listen(
-                        this._config.port,
+                        this._frontendServerConfig.port,
                         async () => {
                             await __wait(100);
 
@@ -512,7 +527,7 @@ export default class SFrontendServer extends __SClass {
             // @ts-ignore
             return (await import(pageConfig.handler)).default;
         } else {
-            const handlersInConfig = this._config.handlers;
+            const handlersInConfig = this._frontendServerConfig.handlers;
             if (!handlersInConfig[handlerNameOrPath]) {
                 throw new Error(
                     `[SFrontendServer] Sorry but the handler named "<yellow>${handlerNameOrPath}</yellow>" seems to not exists or is missconfigured...`,
@@ -638,7 +653,11 @@ export default class SFrontendServer extends __SClass {
                     !pageConfig.slugs &&
                     pageFile.nameWithoutExt !== 'index'
                 ) {
-                    slug = `/${pageFile.relPath
+                    slug = `/${pageFile.path
+                        .replace(
+                            `${__SSugarConfig.get('storage.src.pagesDir')}/`,
+                            '',
+                        )
                         .split('/')
                         .slice(0, -1)
                         .join('/')
@@ -720,7 +739,8 @@ export default class SFrontendServer extends __SClass {
                                 next,
                                 pageConfig: _pageConfig,
                                 pageFile,
-                                frontendServerConfig: this._config,
+                                frontendServerConfig:
+                                    this._frontendServerConfig,
                             });
                             handlerPromise.on('log', (value) => {
                                 console.log(value.value ?? value);

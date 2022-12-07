@@ -1,6 +1,4 @@
-/* @sugar.cache (sugar) { */
-@sugar.init;
-@sugar.theme (dark, null, true);
+@sugar.init ($variant: dark);
 
 @sugar.classes;
 

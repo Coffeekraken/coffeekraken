@@ -30,7 +30,7 @@
             @endif
         </div>
         <div class="@mobile s-mbs:10">
-            Since&nbsp;&nbsp;<span class="s-typo:bold s-tc:accent">{{ $block->since }}</span>
+            Since&nbsp;&nbsp;<span class="s-typo:bold s-tc:accent">{{ @$block->since }}</span>
         </div>
         <div class="@mobile s-display:none">
             <span class="s-tc:base s-opacity:20">&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;</span>

@@ -16,15 +16,20 @@ exports.default = (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         h1: {
-            'font-family': 'title',
-            'font-size': 90,
-            'line-height': 1.3,
-            'max-width': '55ch',
-            rhythmVertical: {
-                'margin-bottom': 50,
+            label: 'H1',
+            group: 'styles',
+            style: {
+                display: 'block',
+                fontFamily: 'title',
+                fontSize: 90,
+                lineHeight: 1.3,
+                maxWidth: '55ch',
+                mobile: {
+                    fontSize: 70,
+                },
             },
-            mobile: {
-                'font-size': 70,
+            rhythmVertical: {
+                marginBottom: 50,
             },
         },
         /**
@@ -39,15 +44,20 @@ exports.default = (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         h2: {
-            'font-family': 'title',
-            'font-size': 80,
-            'line-height': 1.3,
-            'max-width': '55ch',
-            rhythmVertical: {
-                'margin-bottom': 50,
+            label: 'H2',
+            group: 'styles',
+            style: {
+                display: 'block',
+                fontFamily: 'title',
+                fontSize: 80,
+                lineHeight: 1.3,
+                maxWidth: '55ch',
+                mobile: {
+                    fontSize: 60,
+                },
             },
-            mobile: {
-                'font-size': 60,
+            rhythmVertical: {
+                marginBottom: 50,
             },
         },
         /**
@@ -62,15 +72,20 @@ exports.default = (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         h3: {
-            'font-family': 'title',
-            'font-size': 70,
-            'line-height': 1.3,
-            'max-width': '55ch',
-            rhythmVertical: {
-                'margin-bottom': 50,
+            label: 'H3',
+            group: 'styles',
+            style: {
+                display: 'block',
+                fontFamily: 'title',
+                fontSize: 70,
+                lineHeight: 1.3,
+                maxWidth: '55ch',
+                mobile: {
+                    fontSize: 50,
+                },
             },
-            mobile: {
-                'font-size': 50,
+            rhythmVertical: {
+                marginBottom: 50,
             },
         },
         /**
@@ -85,15 +100,20 @@ exports.default = (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         h4: {
-            'font-family': 'title',
-            'font-size': 60,
-            'line-height': 1.3,
-            'max-width': '55ch',
-            rhythmVertical: {
-                'margin-bottom': 50,
+            label: 'H4',
+            group: 'styles',
+            style: {
+                display: 'block',
+                fontFamily: 'title',
+                fontSize: 60,
+                lineHeight: 1.3,
+                maxWidth: '55ch',
+                mobile: {
+                    fontSize: 40,
+                },
             },
-            mobile: {
-                'font-size': 40,
+            rhythmVertical: {
+                marginBottom: 50,
             },
         },
         /**
@@ -108,15 +128,20 @@ exports.default = (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         h5: {
-            'font-family': 'title',
-            'font-size': 50,
-            'line-height': 1.3,
-            'max-width': '55ch',
-            rhythmVertical: {
-                'margin-bottom': 40,
+            label: 'H5',
+            group: 'styles',
+            style: {
+                display: 'block',
+                fontFamily: 'title',
+                fontSize: 50,
+                lineHeight: 1.3,
+                maxWidth: '55ch',
+                mobile: {
+                    fontSize: 30,
+                },
             },
-            mobile: {
-                'font-size': 30,
+            rhythmVertical: {
+                marginBottom: 40,
             },
         },
         /**
@@ -131,15 +156,20 @@ exports.default = (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         h6: {
-            'font-family': 'title',
-            'font-size': 40,
-            'line-height': 1.3,
-            'max-width': '55ch',
-            rhythmVertical: {
-                'margin-bottom': 40,
+            label: 'H6',
+            group: 'styles',
+            style: {
+                display: 'block',
+                fontFamily: 'title',
+                fontSize: 40,
+                lineHeight: 1.3,
+                maxWidth: '55ch',
+                mobile: {
+                    fontSize: 30,
+                },
             },
-            mobile: {
-                'font-size': 30,
+            hythmVertical: {
+                marginBottom: 40,
             },
         },
         /**
@@ -154,12 +184,17 @@ exports.default = (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         p: {
-            'font-family': 'default',
-            'font-size': 30,
-            'line-height': 1.8,
-            'max-width': '55ch',
+            label: 'Paragraph',
+            group: 'styles',
+            style: {
+                display: 'block',
+                fontFamily: 'default',
+                fontSize: 30,
+                lineHeight: 1.8,
+                maxWidth: '55ch',
+            },
             rhythmVertical: {
-                'margin-bottom': 50,
+                marginBottom: 50,
             },
         },
         /**
@@ -174,15 +209,20 @@ exports.default = (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         lead: {
-            'font-family': 'default',
-            'font-size': 50,
-            'line-height': 1.6,
-            'max-width': '55ch',
-            rhythmVertical: {
-                'margin-bottom': 50,
+            label: 'Lead paragraph',
+            group: 'styles',
+            style: {
+                display: 'block',
+                fontFamily: 'default',
+                fontSize: 50,
+                lineHeight: 1.6,
+                maxWidth: '55ch',
+                mobile: {
+                    fontSize: 40,
+                },
             },
-            mobile: {
-                'font-size': 40,
+            rhythmVertical: {
+                marginBottom: 50,
             },
         },
         /**
@@ -197,12 +237,17 @@ exports.default = (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         hr: {
-            get color() {
-                return api.theme.color.main;
+            label: '------',
+            group: 'text',
+            style: {
+                display: 'block',
+                get color() {
+                    return api.theme.color.main;
+                },
+                opacity: 0.2,
             },
-            opacity: 0.2,
             rhythmVertical: {
-                'margin-bottom': 50,
+                marginBottom: 50,
             },
         },
         /**
@@ -217,24 +262,29 @@ exports.default = (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         'pre:not([class])': {
-            'font-family': 'code',
-            color: ['main', 'text'],
-            'background-color': ['main', 'surface'],
-            'line-height': 1.5,
-            get paddingInline() {
-                return api.theme.ui.default.paddingInline;
-            },
-            get paddingBlock() {
-                return api.theme.ui.default.paddingBlock;
-            },
-            get borderRadius() {
-                return api.theme.ui.default.borderRadius;
-            },
-            get depth() {
-                return api.theme.ui.default.depth;
+            label: 'Pre',
+            group: 'text',
+            style: {
+                display: 'block',
+                fontFamily: 'code',
+                color: ['main', 'text'],
+                backgroundColor: ['main', 'surface'],
+                lineHeight: 1.5,
+                get paddingInline() {
+                    return api.theme.ui.default.paddingInline;
+                },
+                get paddingBlock() {
+                    return api.theme.ui.default.paddingBlock;
+                },
+                get borderRadius() {
+                    return api.theme.ui.default.borderRadius;
+                },
+                get depth() {
+                    return api.theme.ui.default.depth;
+                },
             },
             rhythmVertical: {
-                'margin-bottom': 50,
+                marginBottom: 50,
             },
         },
         /**
@@ -249,14 +299,18 @@ exports.default = (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         'code:not(pre > code)': {
-            display: 'inline-block',
-            'font-family': 'code',
-            color: ['main', 'text'],
-            'line-height': 1.1,
-            'background-color': ['accent', 'surface'],
-            borderRadius: 10,
-            paddingInline: 10,
-            paddingBlock: 0,
+            label: 'Code',
+            group: 'text',
+            style: {
+                display: 'inline-block',
+                fontFamily: 'code',
+                color: ['main', 'text'],
+                lineHeight: 1.1,
+                backgroundColor: ['accent', 'surface'],
+                borderRadius: 10,
+                paddingInline: 10,
+                paddingBlock: 0,
+            },
         },
         /**
          * @name          a
@@ -270,8 +324,12 @@ exports.default = (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         a: {
-            color: 'accent',
-            'text-decoration': 'underline',
+            label: 'Link',
+            group: 'text',
+            style: {
+                color: 'accent',
+                textDecoration: 'underline',
+            },
         },
         /**
          * @name          quote
@@ -285,21 +343,15 @@ exports.default = (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         quote: {
-            'font-family': 'quote',
-        },
-        /**
-         * @name          b
-         * @namespace     config.themeTypo
-         * @type          Object
-         * @default      {}
-         *
-         * Specify the css object for the b typo element
-         *
-         * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-         */
-        b: {
-            'font-weight': 'bold',
+            label: 'Quote',
+            group: 'block',
+            style: {
+                display: 'block',
+                fontFamily: 'quote',
+            },
+            rhythmVertical: {
+                marginBottom: 50,
+            },
         },
         /**
          * @name          bold
@@ -313,35 +365,11 @@ exports.default = (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         bold: {
-            'font-weight': 'bold',
-        },
-        /**
-         * @name          strong
-         * @namespace     config.themeTypo
-         * @type          Object
-         * @default      {}
-         *
-         * Specify the css object for the strong typo element
-         *
-         * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-         */
-        strong: {
-            'font-weight': 'bold',
-        },
-        /**
-         * @name          i
-         * @namespace     config.themeTypo
-         * @type          Object
-         * @default      {}
-         *
-         * Specify the css object for the i typo element
-         *
-         * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-         */
-        i: {
-            'font-style': 'italic',
+            label: 'Bold',
+            group: 'text',
+            style: {
+                fontWeight: 'bold',
+            },
         },
         /**
          * @name          italic
@@ -355,21 +383,11 @@ exports.default = (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         italic: {
-            'font-style': 'italic',
-        },
-        /**
-         * @name          em
-         * @namespace     config.themeTypo
-         * @type          Object
-         * @default      {}
-         *
-         * Specify the css object for the em typo element
-         *
-         * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-         */
-        em: {
-            'font-style': 'italic',
+            label: 'Italic',
+            group: 'text',
+            style: {
+                fontStyle: 'italic',
+            },
         },
         /**
          * @name          large
@@ -383,7 +401,11 @@ exports.default = (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         large: {
-            'font-size': '1.1em',
+            label: 'Large',
+            group: 'text',
+            style: {
+                fontSize: '1.1em',
+            },
         },
         /**
          * @name          larger
@@ -397,7 +419,11 @@ exports.default = (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         larger: {
-            'font-size': '1.2em',
+            label: 'Larger',
+            group: 'text',
+            style: {
+                fontSize: '1.2em',
+            },
         },
         /**
          * @name          largest
@@ -411,7 +437,11 @@ exports.default = (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         largest: {
-            'font-size': '1.3em',
+            label: 'Largest',
+            group: 'text',
+            style: {
+                fontSize: '1.3em',
+            },
         },
         /**
          * @name          small
@@ -425,7 +455,11 @@ exports.default = (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         small: {
-            'font-size': '0.9em',
+            label: 'Small',
+            group: 'text',
+            style: {
+                fontSize: '0.9em',
+            },
         },
         /**
          * @name          smaller
@@ -439,7 +473,11 @@ exports.default = (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         smaller: {
-            'font-size': '0.8em',
+            label: 'Smaller',
+            group: 'text',
+            style: {
+                fontSize: '0.8em',
+            },
         },
         /**
          * @name          smallest
@@ -453,7 +491,11 @@ exports.default = (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         smallest: {
-            'font-size': '0.7em',
+            label: 'Smallest',
+            group: 'text',
+            style: {
+                fontSize: '0.7em',
+            },
         },
         /**
          * @name          mark
@@ -467,14 +509,13 @@ exports.default = (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         mark: {
-            get 'background-color'() {
-                return api.theme.color.accent;
+            label: 'Mark',
+            group: 'text',
+            style: {
+                get backgroundColor() {
+                    return api.theme.color.accent;
+                },
             },
-            // @TODO        check to enable this
-            // get color() {
-            //     return api.theme.color.accent.
-            // }
-            // color: '[theme.color.accent.foreground]',
         },
         /**
          * @name          del
@@ -488,7 +529,11 @@ exports.default = (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         del: {
-            'text-decoration': 'line-through',
+            label: 'Del',
+            group: 'text',
+            style: {
+                textDecoration: 'line-through',
+            },
         },
         /**
          * @name          ins
@@ -502,7 +547,11 @@ exports.default = (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         ins: {
-            'text-decoration': 'underline',
+            label: 'Ins',
+            group: 'text',
+            style: {
+                textDecoration: 'underline',
+            },
         },
         /**
          * @name          sub
@@ -516,8 +565,12 @@ exports.default = (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         sub: {
-            'vertical-align': 'sub',
-            'font-size': '0.6em',
+            label: 'Sub',
+            group: 'text',
+            style: {
+                verticalAlign: 'sub',
+                fontSize: '0.6em',
+            },
         },
         /**
          * @name          sup
@@ -531,9 +584,13 @@ exports.default = (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         sup: {
-            'vertical-align': 'sup',
-            'font-size': '0.6em',
+            label: 'Sup',
+            group: 'text',
+            style: {
+                verticalAlign: 'sup',
+                fontSize: '0.6em',
+            },
         },
     };
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsa0JBQWUsQ0FBQyxHQUFHLEVBQUUsRUFBRTtJQUNuQixJQUFJLEdBQUcsQ0FBQyxHQUFHLENBQUMsUUFBUSxLQUFLLE1BQU07UUFBRSxPQUFPO0lBRXhDLE9BQU87UUFDSDs7Ozs7Ozs7OztXQVVHO1FBQ0gsRUFBRSxFQUFFO1lBQ0EsYUFBYSxFQUFFLE9BQU87WUFDdEIsV0FBVyxFQUFFLEVBQUU7WUFDZixhQUFhLEVBQUUsR0FBRztZQUNsQixXQUFXLEVBQUUsTUFBTTtZQUNuQixjQUFjLEVBQUU7Z0JBQ1osZUFBZSxFQUFFLEVBQUU7YUFDdEI7WUFDRCxNQUFNLEVBQUU7Z0JBQ0osV0FBVyxFQUFFLEVBQUU7YUFDbEI7U0FDSjtRQUNEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxFQUFFLEVBQUU7WUFDQSxhQUFhLEVBQUUsT0FBTztZQUN0QixXQUFXLEVBQUUsRUFBRTtZQUNmLGFBQWEsRUFBRSxHQUFHO1lBQ2xCLFdBQVcsRUFBRSxNQUFNO1lBQ25CLGNBQWMsRUFBRTtnQkFDWixlQUFlLEVBQUUsRUFBRTthQUN0QjtZQUNELE1BQU0sRUFBRTtnQkFDSixXQUFXLEVBQUUsRUFBRTthQUNsQjtTQUNKO1FBQ0Q7Ozs7Ozs7Ozs7V0FVRztRQUNILEVBQUUsRUFBRTtZQUNBLGFBQWEsRUFBRSxPQUFPO1lBQ3RCLFdBQVcsRUFBRSxFQUFFO1lBQ2YsYUFBYSxFQUFFLEdBQUc7WUFDbEIsV0FBVyxFQUFFLE1BQU07WUFDbkIsY0FBYyxFQUFFO2dCQUNaLGVBQWUsRUFBRSxFQUFFO2FBQ3RCO1lBQ0QsTUFBTSxFQUFFO2dCQUNKLFdBQVcsRUFBRSxFQUFFO2FBQ2xCO1NBQ0o7UUFDRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsRUFBRSxFQUFFO1lBQ0EsYUFBYSxFQUFFLE9BQU87WUFDdEIsV0FBVyxFQUFFLEVBQUU7WUFDZixhQUFhLEVB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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsa0JBQWUsQ0FBQyxHQUFHLEVBQUUsRUFBRTtJQUNuQixJQUFJLEdBQUcsQ0FBQyxHQUFHLENBQUMsUUFBUSxLQUFLLE1BQU07UUFBRSxPQUFPO0lBRXhDLE9BQU87UUFDSDs7Ozs7Ozs7OztXQVVHO1FBQ0gsRUFBRSxFQUFFO1lBQ0EsS0FBSyxFQUFFLElBQUk7WUFDWCxLQUFLLEVBQUUsUUFBUTtZQUNmLEtBQUssRUFBRTtnQkFDSCxPQUFPLEVBQUUsT0FBTztnQkFDaEIsVUFBVSxFQUFFLE9BQU87Z0JBQ25CLFFBQVEsRUFBRSxFQUFFO2dCQUNaLFVBQVUsRUFBRSxHQUFHO2dCQUNmLFFBQVEsRUFBRSxNQUFNO2dCQUNoQixNQUFNLEVBQUU7b0JBQ0osUUFBUSxFQUFFLEVBQUU7aUJBQ2Y7YUFDSjtZQUNELGNBQWMsRUFBRTtnQkFDWixZQUFZLEVBQUUsRUFBRTthQUNuQjtTQUNKO1FBQ0Q7Ozs7Ozs7Ozs7V0FVRztRQUNILEVBQUUsRUFBRTtZQUNBLEtBQUssRUFBRSxJQUFJO1lBQ1gsS0FBSyxFQUFFLFFBQVE7WUFDZixLQUFLLEVBQUU7Z0JBQ0gsT0FBTyxFQUFFLE9BQU87Z0JBQ2hCLFVBQVUsRUFBRSxPQUFPO2dCQUNuQixRQUFRLEVBQUUsRUFBRTtnQkFDWixVQUFVLEVBQUUsR0FBRztnQkFDZixRQUFRLEVBQUUsTUFBTTtnQkFDaEIsTUFBTSxFQUFFO29CQUNKLFFBQVEsRUFBRSxFQUFFO2lCQUNmO2FBQ0o7WUFDRCxjQUFjLEVBQUU7Z0JBQ1osWUFBWSxFQUFFLEVBQUU7YUFDbkI7U0FDSjtRQUNEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxFQUFFLEVBQUU7WUFDQSxLQUFLLEVBQUUsSUFBSTtZQUNYLEtBQUssRUFBRSxRQUFRO1lBQ2YsS0FBSyxFQUFFO2dCQUNILE9BQU8sRUFBRSxPQUFPO2dCQUNoQixVQUFV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

@@ -6,5 +6,28 @@
         "color": "@sugar.views.props.color",
         "attributes": "@sugar.views.props.attributes",
         "link": "@sugar.views.props.link"
+    },
+    "examples": {
+        "twig": {
+            "title": "Twig",
+            "description": "Here's a twig sample of how to use the card view",
+            "code": [
+                "{{ include 'sugar.bare.container.container' with {",
+                "   type: {",
+                "       default: '',",
+                "       wide: 'full'",
+                "   },",
+                "   html: 'Hello world',",
+                "   margin: {",
+                "       default: {",
+                "           bottom: '50'",
+                "       },",
+                "       mobile: {",
+                "           bottom: '20'",
+                "       }",
+                "   }",
+                "} }}"
+            ]
+        }
     }
 }

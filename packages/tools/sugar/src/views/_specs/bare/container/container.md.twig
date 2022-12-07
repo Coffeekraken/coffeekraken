@@ -1,4 +1,4 @@
-{% extends 'sugar/readme/layouts/main/main.twig' %}
+{% extends 'sugar/readme/layouts/doc/doc.twig' %}
 {% block body %}
 
 <!--
@@ -17,71 +17,13 @@
 -->
 
 {% set specs = readSpec('sugar.views.bare.container') %}
-
-# Container
-
-The goal of this view is to wrap your sections and either centers it or make it full width depending on the selected container `type`.
-
-## Features
-
-{% set containers = props(frontspec.layout.container) %}
-{% set details = {
-    type: {
-        title: 'Type',
-        description: 'The container type you want. **' ~ containers|join(', ') ~ '**' 
-    }
-} %}
-
-{{ markdownSpecsList(props(specs.props), details) }}
-
-## Usage
-
-#### Blade
-
-```php
-@include('sugar.bare.container.container', [
-    'type' => [
-        'default' => '',
-        'wide' => 'full'
-    ],
-    'html' => '
-        <h2>Hello world</h2>
-    ',
-    'margin' => [
-        'default' => [
-            'bottom' => '50'
-        ],
-        'mobile' => [
-            'bottom' => '20'
-        ]
-    ]
-])
-```
-
-#### Twig
-
-```twig
-{{ '{%' }} include 'sugar.bare.container.container' with {
-    type: {
-        default: '',
-        wide: 'full'
-    },
-    html: '<h2>Hello world</h2>',
-    margin: {
-        default: {
-            bottom: '50'
-        },
-        mobile: {
-            bottom: '20'
-        }
-    }
-} {{ '%}' }}
-```
-
-## Specifications
-
-```js
-export default {{ specs|json_encode|raw }}
-```
+{{ specsToMarkdown(specs, {
+    features: {
+        type: {
+            title: 'Type',
+            description: 'The container type you want. **' ~ containers|join(', ') ~ '**' 
+        }   
+    }   
+})|raw }}
 
 {% endblock %}

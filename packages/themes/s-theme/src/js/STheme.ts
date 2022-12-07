@@ -236,13 +236,20 @@ export default class STheme extends __SThemeBase {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static init(settings?: Partial<ISThemeInitSettings>): STheme {
+    static async init(settings?: Partial<ISThemeInitSettings>): STheme {
         const finalSettings = <ISThemeInitSettings>{
             $context: document.querySelector('html'),
             theme: undefined,
             variant: undefined,
             ...(settings ?? {}),
         };
+
+        let themeInstance;
+
+        // wait for css to be applied
+        const themeMetas = this.getThemeMetas(finalSettings.$context);
+
+        console.log('META', themeMetas);
 
         // save default theme metas
         STheme.defaultThemeMetas = {
@@ -251,7 +258,7 @@ export default class STheme extends __SThemeBase {
         };
 
         // set the current theme in the env.SUGAR.theme property
-        const themeInstance = this.getCurrentTheme(finalSettings.$context);
+        themeInstance = this.getCurrentTheme(finalSettings.$context);
         if (!document.env) document.env = {};
         if (!document.env.SUGAR) document.env.SUGAR = {};
         document.env.SUGAR.theme = themeInstance;
@@ -294,19 +301,31 @@ export default class STheme extends __SThemeBase {
             variant = defaultVariant;
 
         // restore theme if needed
-        const savedTheme = localStorage.getItem('s-theme');
-        if (savedTheme && savedTheme.split('-').length === 2) {
-            const parts = savedTheme.split('-');
-            theme = parts[0];
-            variant = parts[1];
-        } else if ($context.hasAttribute('theme')) {
-            let attr = $context.getAttribute('theme') ?? '',
-                parts = attr.split('-').map((l) => l.trim());
-            (theme = parts[0]), (variant = parts[1]);
+        // const savedTheme = localStorage.getItem('s-theme');
+        // if (savedTheme && savedTheme.split('-').length === 2) {
+        //     const parts = savedTheme.split('-');
+        //     theme = parts[0];
+        //     variant = parts[1];
+        // } else if ($context.hasAttribute('theme')) {
+        //     let attr = $context.getAttribute('theme') ?? '',
+        //         parts = attr.split('-').map((l) => l.trim());
+        //     (theme = parts[0]), (variant = parts[1]);
+        // } else
+        if ($context) {
+            const computedStyle = getComputedStyle($context);
+            // get the css setted --s-theme and --s-theme-variant variable from the $context
+            const cssDefinedTheme = computedStyle.getPropertyValue('--s-theme'),
+                cssDefinedVariant =
+                    computedStyle.getPropertyValue('--s-theme-variant');
+            if (cssDefinedTheme) {
+                theme = cssDefinedTheme.trim();
+            }
+            if (cssDefinedVariant) {
+                variant = cssDefinedVariant.trim();
+            }
         }
 
         const name = `${theme ?? defaultTheme}-${variant ?? defaultVariant}`;
-
         const metas = __SSugarConfig.get(`theme.themes.${name}.metas`) ?? {};
 
         return __deepMerge(
@@ -336,7 +355,10 @@ export default class STheme extends __SThemeBase {
         $context: HTMLElement = document.querySelector('html'),
     ): STheme {
         const themeMetas = STheme.getThemeMetas($context);
-        return <STheme>this.getTheme(themeMetas.theme, themeMetas.variant);
+        return <STheme>this.getTheme({
+            theme: themeMetas.theme,
+            variant: themeMetas.variant,
+        });
     }
 
     /**

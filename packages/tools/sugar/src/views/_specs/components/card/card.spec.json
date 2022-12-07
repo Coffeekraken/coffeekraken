@@ -47,5 +47,23 @@
         "attributes": "@sugar.views.props.attributes",
         "margin": "@sugar.views.props.margin",
         "padding": "@sugar.views.props.padding"
+    },
+    "examples": {
+        "twig": {
+            "title": "Twig",
+            "description": "Here's a twig sample of how to use the card view",
+            "code": [
+                "{{ include('sugar.components.card.card') with {",
+                "   title: '...',",
+                "   intro: '...',",
+                "   text: '...',",
+                "   image: {",
+                "       url: '...',",
+                "       title: '...',",
+                "       alt: '...'",
+                "   }",
+                "} }}"
+            ]
+        }
     }
 }

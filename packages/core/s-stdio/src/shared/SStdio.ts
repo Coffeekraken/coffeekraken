@@ -303,13 +303,19 @@ export default class SStdio extends __SClass implements ISStdio {
         console.log = (...args) => {
             args = args
                 .filter((log) => {
-                    if (typeof log === 'string' && log.trim() === '') {
+                    if (!log) {
+                        return false;
+                    }
+                    if (typeof log === 'string' && log.trim?.() === '') {
                         return false;
                     }
                     return true;
                 })
                 .map((log) => {
-                    return log.trim().replace(/\\n$/, '');
+                    if (typeof log === 'string') {
+                        return log.trim().replace(/\\n$/, '');
+                    }
+                    return log;
                 });
             _nativeLog(...args);
         };

@@ -5,29 +5,29 @@ export default function (api) {
         family: {
             default: {
                 /**
-                 * @name            font-family
+                 * @name            fontFamily
                  * @namespace       config.themeFont.family.default
                  * @type            String
                  * @default         "Titillium Web"
                  *
-                 * Declare the "default" font-family
+                 * Declare the "default" fontFamily
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                'font-family': '"Titillium Web"',
+                fontFamily: '"Titillium Web"',
                 /**
-                 * @name            font-weight
+                 * @name            fontWeight
                  * @namespace       config.themeFont.family.default
                  * @type            Number
                  * @default         400
                  *
-                 * Declare the "default" font-weight
+                 * Declare the "default" fontWeight
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                'font-weight': 400,
+                fontWeight: 400,
                 /**
                  * @name            import
                  * @namespace       config.themeFont.family.default
@@ -44,29 +44,29 @@ export default function (api) {
 
             title: {
                 /**
-                 * @name            font-family
+                 * @name            fontFamily
                  * @namespace       config.themeFont.family.title
                  * @type            String
                  * @default         https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap
                  *
-                 * Declare the "default" font-family
+                 * Declare the "default" fontFamily
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                'font-family': '"Titillium Web"',
+                fontFamily: '"Titillium Web"',
                 /**
-                 * @name            font-weight
+                 * @name            fontWeight
                  * @namespace       config.themeFont.family.title
                  * @type            String
                  * @default         600
                  *
-                 * Declare the "default" font-weight
+                 * Declare the "default" fontWeight
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                'font-weight': 600,
+                fontWeight: 600,
                 /**
                  * @name            import
                  * @namespace       config.themeFont.family.title
@@ -83,53 +83,53 @@ export default function (api) {
 
             quote: {
                 /**
-                 * @name            font-family
+                 * @name            fontFamily
                  * @namespace       config.themeFont.family.quote
                  * @type            String
                  * @default         "Palatino, Times, Georgia, serif"
                  *
-                 * Declare the "quote" font-family
+                 * Declare the "quote" fontFamily
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                'font-family': '"Palatino, Times, Georgia, serif"',
+                fontFamily: '"Palatino, Times, Georgia, serif"',
                 /**
-                 * @name            font-weight
+                 * @name            fontWeight
                  * @namespace       config.themeFont.family.quote
                  * @type            String
                  * @default         normal
                  *
-                 * Declare the "quote" font-weight
+                 * Declare the "quote" fontWeight
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                'font-weight': 'normal',
+                fontWeight: 'normal',
                 /**
-                 * @name            font-style
+                 * @name            fontStyle
                  * @namespace       config.themeFont.family.quote
                  * @type            String
                  * @default         normal"
                  *
-                 * Declare the "quote" font-style
+                 * Declare the "quote" fontStyle
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                'font-style': 'normal',
+                fontStyle: 'normal',
                 /**
-                 * @name            font-display
+                 * @name            fontDisplay
                  * @namespace       config.themeFont.family.quote
                  * @type            String
                  * @default         auto
                  *
-                 * Declare the "quote" font-display
+                 * Declare the "quote" fontDisplay
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                'font-display': 'auto',
+                fontDisplay: 'auto',
                 /**
                  * @name            cap-height
                  * @namespace       config.themeFont.family.quote
@@ -141,59 +141,58 @@ export default function (api) {
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                'cap-height': 0.65,
+                capHeight: 0.65,
             },
 
             code: {
                 /**
-                 * @name            font-family
+                 * @name            fontFamily
                  * @namespace       config.themeFont.family.code
                  * @type            String
                  * @default         "Menlo, Monaco, Consolas, Courier New, monospace"
                  *
-                 * Declare the "code" font-family
+                 * Declare the "code" fontFamily
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                'font-family':
-                    'Menlo, Monaco, Consolas, Courier New, monospace',
+                fontFamily: 'Menlo, Monaco, Consolas, Courier New, monospace',
                 /**
-                 * @name            font-weight
+                 * @name            fontWeight
                  * @namespace       config.themeFont.family.code
                  * @type            String
                  * @default         normal
                  *
-                 * Declare the "code" font-weight
+                 * Declare the "code" fontWeight
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                'font-weight': 'normal',
+                fontWeight: 'normal',
                 /**
-                 * @name            font-style
+                 * @name            fontStyle
                  * @namespace       config.themeFont.family.code
                  * @type            String
                  * @default         normal
                  *
-                 * Declare the "code" font-style
+                 * Declare the "code" fontStyle
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                'font-style': 'normal',
+                fontStyle: 'normal',
                 /**
-                 * @name            font-display
+                 * @name            fontDisplay
                  * @namespace       config.themeFont.family.code
                  * @type            String
                  * @default         auto
                  *
-                 * Declare the "code" font-display
+                 * Declare the "code" fontDisplay
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                'font-display': 'auto',
+                fontDisplay: 'auto',
                 /**
                  * @name            cap-height
                  * @namespace       config.themeFont.family.code
@@ -205,7 +204,7 @@ export default function (api) {
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                'cap-height': 0.65,
+                capHeight: 0.65,
             },
         },
 

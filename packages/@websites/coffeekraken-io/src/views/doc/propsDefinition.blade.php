@@ -23,17 +23,25 @@
                         @if (isset($param->values))
                             <ul class="s-dropdown:bottom-end">    
                                 @foreach ($param->values as $value)
-                                    <li class="s-dropdown-item">{{ $value }}<i class="s-mis:10 s-float:right s-icon:ui-copy"></i></li>
+                                    <li class="s-dropdown-item" onclick="navigator.clipboard.writeText('{{ $value }}');">{{ $value }}<i class="s-mis:10 s-icon:ui-copy"></i></li>
                                 @endforeach
                             </ul>
                         @endif
                     </div>
                 </div>
                 <div class="s-typo:bold s-p:30 s-tc:info">
-                    {{ \Sugar\string\toString($param->type->raw) }}
+                    @if (isset($param->type->raw))
+                        {{ \Sugar\string\toString($param->type->raw) }}
+                    @elseif (isset($param->type->type))
+                        {{ \Sugar\string\toString($param->type->type) }}
+                    @endif
                 </div>
             </header>
-            <p class="s-typo:p s-format:text s-p:30">{!! \Sugar\markdown\toHtml($param->description) !!}</p>
+            @if (isset($param->description))
+                <p class="s-typo:p s-format:text s-p:30">{!! \Sugar\markdown\toHtml($param->description) !!}</p>
+            @else
+                <p class="s-typo:p s-format:text s-p:30">No description for now...</p>
+            @endif
         </li>
     @endforeach
 </ol>

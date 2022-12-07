@@ -621,6 +621,12 @@ export default class SMarkdownBuilder extends __SBuilder {
 
                         // marked if html is the target
                         if (finalParams.target === 'html') {
+                            // __marked.setOptions({
+                            //     // disable escaping code
+                            //     highlight: function (code, lang) {
+                            //         return code;
+                            //     },
+                            // });
                             currentTransformedString = __marked(
                                 currentTransformedString,
                                 {},

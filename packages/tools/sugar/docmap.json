@@ -4381,6 +4381,7 @@
                         "code": "import { __isInPackage } from '@coffeekraken/sugar/is';\nconst root = __isInPackage();"
                     }
                 ],
+                "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -7796,6 +7797,43 @@
                 "filename": "listSpecs.php",
                 "extension": "php",
                 "relPath": "src/php/specs/listSpecs.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.specs.markdownSpecsList": {
+                "id": "@coffeekraken.sugar.php.specs.markdownSpecsList",
+                "name": "markdownSpecsList",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to display a markdown specs list with some default specifications info like \"margin\", \"padding\", \"gap\", etc...\nYou can abviously override the defaults with your own details object that MUST contains an \"title\" and \"description\" property for each spec",
+                "namespace": "@coffeekraken.sugar.php.specs",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "$markdown = \\Sugar\\specs\\markdownSpecsList(['margin','padding'], [\n  \"margin\" => [\n     \"title\" => \"Margin\",\n     \"description\" => \"Manage the margins with ease\n  ]\n]);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "markdownSpecsList.php",
+                "extension": "php",
+                "relPath": "src/php/specs/markdownSpecsList.php",
                 "children": {}
             },
             "@coffeekraken.sugar.php.specs.readSpec": {
@@ -22711,6 +22749,43 @@
                 "relPath": "src/php/twig/functions/object/props.php",
                 "children": {}
             },
+            "@coffeekraken.sugar.php.twig.functions.specs.markdownSpecsList": {
+                "id": "@coffeekraken.sugar.php.twig.functions.specs.markdownSpecsList",
+                "name": "markdownSpecsList",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to display a markdown specs list with some default specifications info like \"margin\", \"padding\", \"gap\", etc...\nYou can abviously override the defaults with your own details object that MUST contains an \"title\" and \"description\" property for each spec",
+                "namespace": "@coffeekraken.sugar.php.twig.functions.specs",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "{{ markdownSpecsList(['margin','padding'], {\n     margin: {\n         title: 'Margin',\n         description: 'Manage the margins with ease\n     }\n}) }}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "markdownSpecsList.php",
+                "extension": "php",
+                "relPath": "src/php/twig/functions/specs/markdownSpecsList.php",
+                "children": {}
+            },
             "@coffeekraken.sugar.php.twig.functions.specs.readSpec": {
                 "id": "@coffeekraken.sugar.php.twig.functions.specs.readSpec",
                 "name": "readSpec",
@@ -23058,6 +23133,47 @@
                 "filename": "card.md.twig",
                 "extension": "md",
                 "relPath": "src/views/_specs/components/card/card.md.twig",
+                "children": {}
+            },
+            "@coffeekraken.sugar.specs.views.components.cta.Cta": {
+                "id": "@coffeekraken.sugar.specs.views.components.cta.Cta",
+                "name": "Cta",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Specs",
+                        "Views"
+                    ],
+                    "slug": "/specs/sugar.views.components.cta"
+                },
+                "platform": [
+                    {
+                        "name": "blade",
+                        "description": ""
+                    },
+                    {
+                        "name": "twig",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.sugar.specs.views.components.cta",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "cta.md.twig",
+                "extension": "md",
+                "relPath": "src/views/_specs/components/cta/cta.md.twig",
                 "children": {}
             },
             "@coffeekraken.sugar.views.layout.Main": {

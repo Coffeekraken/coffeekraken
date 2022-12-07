@@ -94,7 +94,6 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             excludeCommentByTypes: [],
             excludeCodeByTypes: [],
             target: 'production',
-            inlineImport: true,
             cache: false,
             cacheDir: `${__packageCacheDir()}/postcssSugarPlugin`,
             cacheTtl: 1000 * 60 * 60 * 24 * 7,
@@ -804,7 +803,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                 }
             } else if (atRule.name.match(/^import/)) {
                 // check settings
-                if (!settings.inlineImport) return;
+                if (settings.target === 'vite') return;
 
                 // do not take care of imported assets using url('...');
                 if (atRule.params.match(/^url\(/)) return;

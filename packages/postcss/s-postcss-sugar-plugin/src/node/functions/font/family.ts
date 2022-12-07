@@ -56,5 +56,5 @@ export default function ({
         return name;
     }
 
-    return `sugar.theme(font.family.${name}.font-family)`;
+    return `sugar.theme(font.family.${name}.fontFamily)`;
 }

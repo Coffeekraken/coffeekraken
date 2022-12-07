@@ -1,5 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginMediaMixinInterface extends __SInterface {
     static get _definition() {
@@ -47,9 +48,17 @@ export default function ({
     atRule: any;
     replaceWith: Function;
 }) {
+    const finalParams = {
+        theme: __STheme.theme,
+        variant: __STheme.variant,
+        ...(params ?? {}),
+    };
+
+    console.log('fin', finalParams);
+
     const cssArray = [
         '@sugar.reset;',
-        `@sugar.theme(${params.variant}, ${params.theme});`,
+        `@sugar.theme(${finalParams.variant}, ${finalParams.theme});`,
         '@sugar.font.faces;',
         '@sugar.lnf.selection;',
         // '@sugar.lnf.base;', called in the "@sugar.theme" mixin

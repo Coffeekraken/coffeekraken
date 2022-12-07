@@ -99,9 +99,7 @@ export default function ({
         const typoObj = typosObj[typoName];
         const cls = `s-typo:${typoName}`;
 
-        const css = __STheme.jsObjectToCssProperties(typoObj, {
-            exclude: ['rhythmVertical'],
-        });
+        const css = __STheme.jsObjectToCssProperties(typoObj.style ?? {}, {});
 
         vars.comment(
             () => `/**

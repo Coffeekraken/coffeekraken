@@ -78,6 +78,9 @@ function registerFunctions($twig)
     $readSpec = require __DIR__ . '/specs/readSpec.php';
     $twig->addFunction($readSpec);
 
+    $specsToMarkdown = require __DIR__ . '/specs/specsToMarkdown.php';
+    $twig->addFunction($specsToMarkdown);
+
     $specsValues = require __DIR__ . '/specs/specsValues.php';
     $twig->addFunction($specsValues);
 

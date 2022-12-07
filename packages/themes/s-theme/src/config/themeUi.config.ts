@@ -430,6 +430,34 @@ export default (api) => {
         },
         dropdown: {
             /**
+             * @name          paddingInline
+             * @namespace     config.themeUi.dropdown
+             * @type          String
+             * @default      [theme.ui.default.paddingBlock]
+             *
+             * Specify the default padding inline for dropdown ui item
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get paddingInline() {
+                return api.theme.ui.default.paddingBlock;
+            },
+            /**
+             * @name          paddingBlock
+             * @namespace     config.themeUi.dropdown
+             * @type          String
+             * @default      [theme.ui.default.paddingBlock]
+             *
+             * Specify the default padding block for dropdown ui item
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get paddingBlock() {
+                return api.theme.ui.default.paddingBlock;
+            },
+            /**
              * @name          itemPaddingInline
              * @namespace     config.themeUi.dropdown
              * @type          String

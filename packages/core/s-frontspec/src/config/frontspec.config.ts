@@ -105,9 +105,29 @@ export default function (api) {
                         for (let [key, value] of Object.entries(
                             api.theme.typo,
                         )) {
+                            const finalStyle = Object.assign(
+                                {},
+                                value.style ?? {},
+                            );
+                            for (let [media, mediaObj] of Object.entries(
+                                api.theme.media.queries,
+                            )) {
+                                delete finalStyle[media];
+                            }
+
                             const finalKey = key.split(':')[0];
                             finalObj[finalKey] = {
-                                class: `s-typo:${finalKey}`,
+                                label: value.label ?? finalKey,
+                                group: value.group,
+                                style: {
+                                    ...__STheme.resolveCssObjectPropertiesValues(
+                                        finalStyle,
+                                    ),
+                                    ...__STheme.resolveCssObjectPropertiesValues(
+                                        value.rhythmVertical ?? {},
+                                    ),
+                                },
+                                nestable: value.nestable ?? true,
                             };
                         }
                         return finalObj;

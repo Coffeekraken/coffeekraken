@@ -1,7 +1,7 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css');
 
 @sugar.init();
-@sugar.theme();
+/* @sugar.theme(); */
 @sugar.ui.specsEditor.classes();
 @sugar.ui.input.classes();
 @sugar.ui.label.classes();

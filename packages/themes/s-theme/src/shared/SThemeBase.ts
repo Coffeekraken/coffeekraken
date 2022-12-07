@@ -4,6 +4,7 @@ import { __get, __sort } from '@coffeekraken/sugar/object';
 import __set from '@coffeekraken/sugar/shared/object/set';
 // import __micromatch from 'micromatch';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
+import __SInterface from '@coffeekraken/s-interface';
 import { __compressVarName } from '@coffeekraken/sugar/css';
 import { __isColor } from '@coffeekraken/sugar/is';
 import { __deepMerge, __flatten } from '@coffeekraken/sugar/object';
@@ -33,6 +34,47 @@ import __objectHash from 'object-hash';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
+
+class colorSchemaNameInterface extends __SInterface {
+    static get _definition() {
+        return {
+            saturate: {
+                type: 'Number|String',
+                default: 0,
+            },
+            desaturate: {
+                type: 'Number',
+                default: 0,
+            },
+            darken: {
+                type: 'Number',
+                default: 0,
+            },
+            lighten: {
+                type: 'Number',
+                default: 0,
+            },
+            spin: {
+                type: 'Number',
+                default: 0,
+            },
+            alpha: {
+                type: 'Number',
+                default: 1,
+            },
+        };
+    }
+}
+
+export interface ISThemeDefaultStaticSettings {
+    theme: string;
+    variant: string;
+}
+
+export interface ISThemeResolveColorSettings
+    extends ISThemeDefaultStaticSettings {
+    return: 'value' | 'var';
+}
 
 export interface ISThemeFontFamilyStack {
     [key: string]: ISThemeFontFamily;
@@ -410,8 +452,13 @@ export default class SThemeBase extends __SEventEmitter {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static _instanciatedThemes: Record<string, SThemeBase> = {};
-    static getTheme(theme?: string, variant?: string): SThemeBase {
+    static getTheme(
+        settings?: Partial<ISThemeDefaultStaticSettings> = {},
+    ): SThemeBase {
         const themesNames = Object.keys(__SSugarConfig.get('theme.themes'));
+
+        let theme = settings.theme,
+            variant = settings.variant;
 
         if (!theme) {
             theme = __SSugarConfig.get('theme.theme');
@@ -452,9 +499,166 @@ export default class SThemeBase extends __SEventEmitter {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static hash(dotPath: string = ''): string {
-        const config = this.get(dotPath);
+    static hash(
+        dotPath: string = '',
+        settings?: Partial<ISThemeDefaultStaticSettings>,
+    ): string {
+        const config = this.get(dotPath, settings);
         return __objectHash(config);
+    }
+
+    /**
+     * @name        resolveFontSize
+     * @type        Function
+     * @static
+     *
+     * This method allows you to get back the actual final font-size value of the passed one
+     *
+     * @param       {any}           size        The size you want to resolve
+     * @return      {any}                       The final resolved size
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static resolveFontSize(
+        size: any,
+        settings?: Partial<ISThemeDefaultStaticSettings>,
+    ): any {
+        // get the theme instance
+        const theme = this.getTheme(settings);
+
+        // resolve font size
+        return theme.resolveFontSize(size);
+    }
+
+    /**
+     * @name        resolvePadding
+     * @type        Function
+     * @static
+     *
+     * This method allows you to get back the actual final padding value of the passed one
+     *
+     * @param       {any}           size        The size you want to resolve
+     * @return      {any}                       The final resolved size
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static resolvePadding(
+        size: any,
+        settings?: Partial<ISThemeDefaultStaticSettings>,
+    ): any {
+        // get the theme instance
+        const theme = this.getTheme(settings);
+
+        // resolve font size
+        return theme.resolvePadding(size);
+    }
+
+    /**
+     * @name        resolveMargin
+     * @type        Function
+     * @static
+     *
+     * This method allows you to get back the actual final margin value of the passed one
+     *
+     * @param       {any}           size        The size you want to resolve
+     * @return      {any}                       The final resolved size
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static resolveMargin(
+        size: any,
+        settings?: Partial<ISThemeDefaultStaticSettings>,
+    ): any {
+        // get the theme instance
+        const theme = this.getTheme(settings);
+
+        // resolve font size
+        return theme.resolveMargin(size);
+    }
+
+    /**
+     * @name        resolveBorderRadius
+     * @type        Function
+     * @static
+     *
+     * This method allows you to get back the actual final border-radius value of the passed one
+     *
+     * @param       {any}           size        The size you want to resolve
+     * @return      {any}                       The final resolved size
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static resolveBorderRadius(
+        size: any,
+        settings?: Partial<ISThemeDefaultStaticSettings>,
+    ): any {
+        // get the theme instance
+        const theme = this.getTheme(settings);
+
+        // resolve font size
+        return theme.resolveBorderRadius(size);
+    }
+
+    /**
+     * @name        resolveBorderWidth
+     * @type        Function
+     * @static
+     *
+     * This method allows you to get back the actual final border-width value of the passed one
+     *
+     * @param       {any}           size        The size you want to resolve
+     * @return      {any}                       The final resolved size
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static resolveBorderWidth(
+        size: any,
+        settings?: Partial<ISThemeDefaultStaticSettings>,
+    ): any {
+        // get the theme instance
+        const theme = this.getTheme(settings);
+
+        // resolve font size
+        return theme.resolveBorderWidth(size);
+    }
+
+    /**
+     * @name        resolveColor
+     * @type        Function
+     * @static
+     *
+     * This method allows you to get back the actual final value of a color with
+     * his schema and modifier.
+     * You can get back either a css variable or the actual color value by specifying
+     * the "settings.return" setting.
+     *
+     * @param       {String}            color       The color you want to resolve
+     * @param       {String}            [schema=null]      The color schema you want
+     * @param       {String}            [modifier=null]     The modifier you want to apply. Can be something like "--darken 30%", etc...
+     * @param       {ISThemeColorResolveColorSettings}      [settings={}]           Some settings
+     * @return      {any}                       The final resolved color
+     *
+     * @setting         {'var'|'value'}         [return='value']        The return format you want
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static resolveColor(
+        color: string,
+        schema?: string,
+        modifier?: string,
+        settings?: Partial<ISThemeResolveColorSettings>,
+    ): string {
+        const theme = this.getTheme({
+            theme: settings.theme,
+            variant: settings.variant,
+        });
+        return theme.resolveColor(color, schema, modifier, settings);
     }
 
     /**
@@ -474,9 +678,13 @@ export default class SThemeBase extends __SEventEmitter {
      * @since       2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static cssVar(dotPath: string, fallback = true): string {
+    static cssVar(
+        dotPath: string,
+        fallback = true,
+        settings?: Partial<ISThemeDefaultStaticSettings>,
+    ): string {
         // get the theme instance
-        const theme = this.getTheme();
+        const theme = this.getTheme(settings);
 
         // proxy non existint dotPath
         dotPath = theme.proxyNonExistingUiDotpath(dotPath);
@@ -635,6 +843,125 @@ export default class SThemeBase extends __SEventEmitter {
     }
 
     /**
+     * @name                resolveCssPropertyValue
+     * @type                Function
+     * @static
+     *
+     * This static method allows you to pass a css property with a value and get back his final value
+     * resolved depending on the theme configuration.
+     *
+     * @param       {String}            property        The css property to resolve
+     * @param       {any}               value           The css property value to resolve
+     * @return      {any}                               The resolved css value
+     *
+     * @since       2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static resolveCssPropertyValue(
+        property: string,
+        value: any,
+        settings?: Partial<ISThemeDefaultStaticSettings>,
+    ): any {
+        const dashProp = __dashCase(property);
+
+        switch (dashProp) {
+            case 'font-family':
+                const fontObj = this.get(`font.family.${value}`);
+                return fontObj?.fontFamily ?? value;
+                break;
+            case 'font-size':
+                return this.resolveFontSize(value, settings) ?? value;
+                break;
+            case 'color':
+            case 'background-color':
+                let color = value,
+                    schema,
+                    modifier;
+                if (Array.isArray(value) && value.length === 2) {
+                    color = value[0];
+                    schema = value[1];
+                }
+                return (
+                    this.resolveColor(color, schema, null, {
+                        ...(settings ?? {}),
+                        return: 'value',
+                    }) ?? value
+                );
+                break;
+            case 'border-radius':
+            case 'border-top-left-radius':
+            case 'border-top-right-radius':
+            case 'border-bottom-right-radius':
+            case 'border-bottom-left-radius':
+                return this.resolveBorderRadius(value) ?? value;
+                break;
+            case 'border-width':
+                return this.resolveBorderWidth(value) ?? value;
+                break;
+            case 'transition':
+                return this.getSafe(`transition.${value}`) ?? value;
+                break;
+            case 'margin-inline':
+            case 'margin-block':
+            case 'margin-inline-start':
+            case 'margin-inline-end':
+            case 'margin-block-start':
+            case 'margin-block-end':
+            case 'margin':
+            case 'margin-top':
+            case 'margin-bottom':
+            case 'margin-left':
+            case 'margin-right':
+                return this.resolveMargin(value) ?? value;
+                break;
+            case 'padding-inline':
+            case 'padding-block':
+            case 'padding-inline-start':
+            case 'padding-inline-end':
+            case 'padding-block-start':
+            case 'padding-block-end':
+            case 'padding':
+            case 'padding-top':
+            case 'padding-bottom':
+            case 'padding-left':
+            case 'padding-right':
+                return this.resolvePadding(value) ?? value;
+                break;
+            case 'depth':
+                return this.getSafe(`depth.${value}`, settings) ?? value;
+                break;
+        }
+
+        // by default, return the passed value
+        return value;
+    }
+
+    /**
+     * @name                resolveCssObjectPropertiesValues
+     * @type                Function
+     * @static
+     *
+     * This static method allows you to passe a js object with some css properties and to
+     * resolve each of these properties values using the `resolveCssPropertyValue` method
+     *
+     * @param       {Object}            object      The css properties object to resolve values from
+     * @return      {Object}                        The css properties object with resolved values
+     *
+     * @since       2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static resolveCssObjectPropertiesValues(
+        object: any,
+        settings?: Partial<ISThemeDefaultStaticSettings>,
+    ): any {
+        const newObj = Object.assign({}, object);
+        for (let [prop, value] of Object.entries(newObj)) {
+            newObj[prop] = this.resolveCssPropertyValue(prop, value, settings);
+        }
+        return newObj;
+    }
+
+    /**
      * @name                jsObjectToCssProperties
      * @type                Function
      * @status              beta
@@ -696,7 +1023,7 @@ export default class SThemeBase extends __SEventEmitter {
             const value = jsObject[originalProp];
             if (!value) return;
 
-            let color, modifier;
+            let color, schema;
 
             // media queries
             const medias = Object.keys(this.get('media.queries'));
@@ -716,24 +1043,24 @@ export default class SThemeBase extends __SEventEmitter {
                         break;
                     case 'color':
                         color = value;
-                        modifier = '';
+                        schema = '';
                         if (Array.isArray(value)) {
                             color = value[0];
-                            modifier = value[1];
+                            schema = value[1];
                         }
                         propsStack.push(
-                            `color: sugar.color(${color}, ${modifier});`,
+                            `color: sugar.color(${color}, ${schema});`,
                         );
                         break;
                     case 'background-color':
                         color = value;
-                        modifier = '';
+                        schema = '';
                         if (Array.isArray(value)) {
                             color = value[0];
-                            modifier = value[1];
+                            schema = value[1];
                         }
                         propsStack.push(
-                            `background-color: sugar.color(${color}, ${modifier});`,
+                            `background-color: sugar.color(${color}, ${schema});`,
                         );
                         break;
                     case 'border-radius':
@@ -843,7 +1170,11 @@ export default class SThemeBase extends __SEventEmitter {
      * @since       2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static remapCssColor(from: string, to: string): ISThemeRemapColorResult {
+    static remapCssColor(
+        from: string,
+        to: string,
+        settings?: Partial<ISThemeDefaultStaticSettings>,
+    ): ISThemeRemapColorResult {
         const result: ISThemeRemapColorResult = {
             vars: [],
             properties: {},
@@ -885,7 +1216,7 @@ export default class SThemeBase extends __SEventEmitter {
             let fromVariable = `--s-theme-color-${fromColorName}`,
                 toVariable = `--s-theme-color-${toColorName}`;
 
-            this.getTheme().loopOnColors((colorObj) => {
+            this.getTheme(settings).loopOnColors((colorObj) => {
                 if (colorObj.name === toColorName) {
                     if (toColorVariant) {
                         if (colorObj.schema === toColorVariant) {
@@ -1024,16 +1355,23 @@ export default class SThemeBase extends __SEventEmitter {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static toCssVars(theme?: string, variant?: string): string[] {
+    static toCssVars(
+        settings?: Partial<ISThemeDefaultStaticSettings>,
+    ): string[] {
         // @ts-ignore
 
-        const themeInstance = this.getTheme(theme, variant);
+        const themeInstance = this.getTheme(settings);
         if (!themeInstance)
             throw new Error(
-                `Sorry but the requested theme "<yellow>${theme}-${variant}</yellow>" does not exists...`,
+                `Sorry but the requested theme "<yellow>${settings.theme}-${settings.variant}</yellow>" does not exists...`,
             );
 
-        let vars: string[] = [];
+        let vars: string[] = [
+            `--s-theme: ${themeInstance.theme};`,
+            `--s-theme-variant: ${themeInstance.variant};`,
+        ];
+
+        console.trace('set', settings);
 
         // handle colors
         themeInstance.loopOnColors((colorObj) => {
@@ -1177,8 +1515,11 @@ export default class SThemeBase extends __SEventEmitter {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static getSafe(dotPath: string, theme?: string, variant?: string): any {
-        const instance = this.getTheme(theme, variant);
+    static getSafe(
+        dotPath: string,
+        settings?: Partial<ISThemeDefaultStaticSettings>,
+    ): any {
+        const instance = this.getTheme(settings);
         return instance.get(dotPath, {
             preventThrow: true,
         });
@@ -1197,8 +1538,11 @@ export default class SThemeBase extends __SEventEmitter {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static get(dotPath: string, theme?: string, variant?: string): any {
-        const instance = this.getTheme(theme, variant);
+    static get(
+        dotPath: string,
+        settings?: Partial<ISThemeDefaultStaticSettings>,
+    ): any {
+        const instance = this.getTheme(settings);
         return instance.get(dotPath);
     }
 
@@ -1219,10 +1563,9 @@ export default class SThemeBase extends __SEventEmitter {
     static set(
         dotPath: string,
         value: any,
-        theme?: string,
-        variant?: string,
+        settings?: Partial<ISThemeDefaultStaticSettings>,
     ): any {
-        const instance = this.getTheme(theme, variant);
+        const instance = this.getTheme(settings);
         return instance.set(dotPath, value);
     }
 
@@ -1289,6 +1632,26 @@ export default class SThemeBase extends __SEventEmitter {
 
         // return the dotPath
         return dotPath;
+    }
+
+    /**
+     * @name          getSafe
+     * @type          Function
+     *
+     * This method allows you to access a value of the current theme
+     * using a dot path like "color.accent", etc...
+     * This method will not throw an error if nothing's found
+     *
+     * @param         {String}        dotPath         The dot path of the config you want to get
+     * @return        {Any}                           The value of the getted configuration
+     *
+     * @since         2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    getSafe(dotPath: string): any {
+        return this.get(dotPath, {
+            preventThrow: true,
+        });
     }
 
     /**
@@ -1522,6 +1885,359 @@ export default class SThemeBase extends __SEventEmitter {
             };
         }
         return map;
+    }
+
+    /**
+     * @name        resolveFontSize
+     * @type        Function
+     *
+     * This method allows you to get back the actual final font-size value of the passed one
+     *
+     * @param       {any}           size        The size you want to resolve
+     * @return      {any}                       The final resolved size
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    resolveFontSize(size: any): any {
+        const defaultSizeStr = this.get('font.size.default'),
+            defaultSizeUnit = defaultSizeStr.replace(/[0-9]+/gm, ''),
+            defaultSize = parseInt(defaultSizeStr);
+
+        // try to get the padding with the pased
+        const registeredValue = this.getSafe(`font.size.${size}`);
+
+        // if we have a registered value corresponding
+        if (registeredValue !== undefined) {
+            // int
+            if (typeof registeredValue === 'number') {
+                return `${defaultSize * registeredValue}${defaultSizeUnit}`;
+            }
+        } else if (typeof size === 'number') {
+            return `${defaultSize * size}${defaultSizeUnit}`;
+        }
+
+        // by default, return the passed size
+        return registeredValue ?? size;
+    }
+
+    /**
+     * @name        resolvePadding
+     * @type        Function
+     *
+     * This method allows you to get back the actual final padding value of the passed one
+     *
+     * @param       {any}           size        The size you want to resolve
+     * @return      {any}                       The final resolved size
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    resolvePadding(size: any): any {
+        const defaultSizeStr = this.get('padding.default'),
+            defaultSizeUnit = defaultSizeStr.replace(/[0-9]+/gm, ''),
+            defaultSize = parseInt(defaultSizeStr);
+
+        // try to get the padding with the pased
+        const registeredValue = this.getSafe(`padding.${size}`);
+
+        // if we have a registered value corresponding
+        if (registeredValue !== undefined) {
+            // int
+            if (typeof registeredValue === 'number') {
+                return `${defaultSize * registeredValue}${defaultSizeUnit}`;
+            }
+        } else if (typeof size === 'number') {
+            return `${defaultSize * size}${defaultSizeUnit}`;
+        }
+
+        // by default, return the passed size
+        return registeredValue ?? size;
+    }
+
+    /**
+     * @name        resolveMargin
+     * @type        Function
+     *
+     * This method allows you to get back the actual final margin value of the passed one
+     *
+     * @param       {any}           size        The size you want to resolve
+     * @return      {any}                       The final resolved size
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    resolveMargin(size: any): any {
+        const defaultSizeStr = this.get('margin.default'),
+            defaultSizeUnit = defaultSizeStr.replace(/[0-9]+/gm, ''),
+            defaultSize = parseInt(defaultSizeStr);
+
+        // try to get the padding with the pased
+        const registeredValue = this.getSafe(`margin.${size}`);
+
+        // if we have a registered value corresponding
+        if (registeredValue !== undefined) {
+            // int
+            if (typeof registeredValue === 'number') {
+                return `${defaultSize * registeredValue}${defaultSizeUnit}`;
+            }
+        } else if (typeof size === 'number') {
+            return `${defaultSize * size}${defaultSizeUnit}`;
+        }
+
+        // by default, return the passed size
+        return registeredValue ?? size;
+    }
+
+    /**
+     * @name        resolveBorderRadius
+     * @type        Function
+     *
+     * This method allows you to get back the actual final border-radius value of the passed one
+     *
+     * @param       {any}           size        The size you want to resolve
+     * @return      {any}                       The final resolved size
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    resolveBorderRadius(size: any): any {
+        const defaultSizeStr = this.get('border.radius.default'),
+            defaultSizeUnit = defaultSizeStr.replace(/[0-9]+/gm, ''),
+            defaultSize = parseInt(defaultSizeStr);
+
+        // try to get the padding with the pased
+        const registeredValue = this.getSafe(`border.radius.${size}`);
+
+        // if we have a registered value corresponding
+        if (registeredValue !== undefined) {
+            // int
+            if (typeof registeredValue === 'number') {
+                return `${defaultSize * registeredValue}${defaultSizeUnit}`;
+            }
+        } else if (typeof size === 'number') {
+            return `${defaultSize * size}${defaultSizeUnit}`;
+        }
+
+        // by default, return the passed size
+        return registeredValue ?? size;
+    }
+
+    /**
+     * @name        resolveBorderWidth
+     * @type        Function
+     *
+     * This method allows you to get back the actual final border-radius value of the passed one
+     *
+     * @param       {any}           size        The size you want to resolve
+     * @return      {any}                       The final resolved size
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    resolveBorderWidth(size: any): any {
+        const defaultSizeStr = this.get('border.width.default'),
+            defaultSizeUnit = defaultSizeStr.replace(/[0-9]+/gm, ''),
+            defaultSize = parseInt(defaultSizeStr);
+
+        // try to get the padding with the pased
+        const registeredValue = this.getSafe(`border.width.${size}`);
+
+        // if we have a registered value corresponding
+        if (registeredValue !== undefined) {
+            // int
+            if (typeof registeredValue === 'number') {
+                return `${defaultSize * registeredValue}${defaultSizeUnit}`;
+            }
+        } else if (typeof size === 'number') {
+            return `${defaultSize * size}${defaultSizeUnit}`;
+        }
+
+        // by default, return the passed size
+        return registeredValue ?? size;
+    }
+
+    /**
+     * @name        resolveColor
+     * @type        Function
+     *
+     * This method allows you to get back the actual final value of a color with
+     * his schema and modifier.
+     * You can get back either a css variable or the actual color value by specifying
+     * the "settings.return" setting.
+     *
+     * @param       {String}            color       The color you want to resolve
+     * @param       {String}            [schema=null]      The color schema you want
+     * @param       {String}            [modifier=null]     The modifier you want to apply. Can be something like "--darken 30%", etc...
+     * @param       {ISThemeColorResolveColorSettings}      [settings={}]           Some settings
+     * @return      {any}                       The final resolved color
+     *
+     * @setting         {'var'|'value'}         [return='value']        The return format you want
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    resolveColor(
+        color: string,
+        schema?: string,
+        modifier?: string,
+        settings?: Partial<ISThemeResolveColorSettings>,
+    ): string {
+        // concrete color string
+        if (color.match(/^(hsla?|rgba?|hsv)\(/)) return color;
+        if (color.match(/^var\(--/)) return color;
+
+        const finalSettings = {
+            return: 'value',
+            ...(settings ?? {}),
+        };
+
+        let colorName = color;
+        let colorSchemaName = schema ?? '';
+        let colorModifier = modifier ?? '';
+
+        if (colorSchemaName.match(/^--[a-z]+/)) {
+            colorModifier = colorSchemaName;
+            colorSchemaName = undefined;
+        }
+
+        let modifierParams = {};
+        if (colorModifier) {
+            modifierParams = colorSchemaNameInterface.apply(colorModifier);
+        }
+
+        let finalValue;
+
+        // is is a color, return it
+        if (__isColor(colorName)) {
+            const color = new __SColor(colorName);
+            if (colorModifier) {
+                color.apply(colorModifier);
+            }
+            return color.toString();
+        } else {
+            // check what we want back
+            // it can be either a "var" or a "value"
+            switch (finalSettings.return) {
+                case 'var':
+                    const colorVar = `--s-theme-color-${colorName}`;
+
+                    let colorSchemaNameVar = `s-theme-color-${colorName}`;
+                    if (colorSchemaName) {
+                        colorSchemaNameVar += `-${colorSchemaName}`;
+                    }
+
+                    colorSchemaNameVar =
+                        '--' + colorSchemaNameVar.replace(/-{2,999}/gm, '-');
+
+                    finalValue = colorVar;
+
+                    const hParts = [
+                        `var(${colorVar}-h, 0)`,
+                        `var(${colorSchemaNameVar}-spin ,${
+                            modifierParams.spin ?? 0
+                        })`,
+                    ];
+
+                    const sParts = [`var(${colorVar}-s, 0)`];
+                    if (colorSchemaName) {
+                        sParts.push(
+                            `var(${colorSchemaNameVar}-saturation-offset, 0)`,
+                        );
+                    }
+                    let saturationOffset = modifierParams.saturate
+                        ? modifierParams.saturate
+                        : modifierParams.desaturate
+                        ? modifierParams.desaturate * -1
+                        : undefined;
+                    if (saturationOffset !== undefined) {
+                        sParts.push(saturationOffset);
+                    }
+
+                    const lParts = [`var(${colorVar}-l, 0)`];
+                    if (colorSchemaName) {
+                        lParts.push(
+                            `var(${colorSchemaNameVar}-lightness-offset, 0)`,
+                        );
+                    }
+                    let lightnessOffset = modifierParams.lighten
+                        ? modifierParams.lighten
+                        : modifierParams.darken
+                        ? modifierParams.darken * -1
+                        : undefined;
+                    if (lightnessOffset !== undefined) {
+                        lParts.push(lightnessOffset);
+                    }
+
+                    let alpha =
+                        modifierParams.alpha !== undefined
+                            ? modifierParams.alpha
+                            : 1;
+
+                    finalValue = `hsla(
+                    calc(
+                        ${hParts.join(' + ')}
+                    ),
+                    calc(
+                        (${sParts.join(' + ')}) * 1%
+                    ),
+                    calc(
+                        (${lParts.join(' + ')}) * 1%
+                    ),
+                    ${
+                        modifierParams.alpha !== undefined
+                            ? modifierParams.alpha
+                            : `var(${colorSchemaNameVar}-a, 1)`
+                    }
+                    )`;
+
+                    finalValue = finalValue
+                        .replace(/(\n|\s{2,99999999})/gm, '')
+                        .replace(/\t/gm, ' ')
+                        .replace(/\s?\+\s?/gm, ' + ')
+                        .replace(/\)\-\s?/gm, ') - ')
+                        .replace(/\s?\*\s?/gm, ' * ')
+                        .replace(/\s?\/\s?/gm, ' / ');
+                    break;
+                case 'value':
+                default:
+                    const colorValue = this.getSafe(`color.${color}`) ?? color;
+
+                    // nothing to apply on the color
+                    if (!schema && !modifier) {
+                        finalValue = colorValue;
+                    }
+
+                    // init a new SColor instance
+                    let colorInstance = new __SColor(colorValue);
+
+                    if (schema) {
+                        let finalSchema = schema;
+                        if (typeof schema === 'string') {
+                            finalSchema = this.getSafe(
+                                `colorSchema.${schema}.color.${color}`,
+                            );
+                            if (!finalSchema) {
+                                finalSchema = this.getSafe(
+                                    `colorSchema.${schema}`,
+                                );
+                            }
+                        }
+                        if (finalSchema) {
+                            colorInstance = colorInstance.apply(finalSchema);
+                        }
+                    }
+                    if (modifier) {
+                        colorInstance = colorInstance.apply(modifier);
+                    }
+
+                    finalValue = colorInstance.toString();
+
+                    break;
+            }
+        }
+
+        return finalValue;
     }
 
     /**

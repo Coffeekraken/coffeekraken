@@ -1,5 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
+import { __dashCase } from '@coffeekraken/sugar/string';
 
 /**
  * @name           family
@@ -62,12 +63,14 @@ export default function ({
     const fontFamilyObj = __STheme.get(`font.family.${finalParams.font}`);
 
     Object.keys(fontFamilyObj).forEach((prop) => {
+        const dashProp = __dashCase(prop);
+
         switch (prop) {
-            case 'font-family':
-            case 'font-weight':
-            case 'font-style':
+            case 'fontFamily':
+            case 'fontWeight':
+            case 'fontStyle':
                 vars.code(
-                    `${prop}: var(${`--s-theme-font-family-${finalParams.font}-${prop}`}, ${
+                    `${dashProp}: var(${`--s-theme-font-family-${finalParams.font}-${dashProp}`}, ${
                         fontFamilyObj[prop]
                     });`,
                 );

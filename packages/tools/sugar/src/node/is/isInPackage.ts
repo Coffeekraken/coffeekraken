@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import __readJsonSync from '../fs/readJsonSync';
 import __fs from 'fs';
+import __readJsonSync from '../fs/readJsonSync';
 import __packageRootDir from '../path/packageRootDir';
 
 /**
@@ -23,6 +23,7 @@ import __packageRootDir from '../path/packageRootDir';
  * const root = __isInPackage();
  *
  * @see       https://www.npmjs.com/package/find-package-json
+ * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __isInPackage(

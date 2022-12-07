@@ -17,5 +17,27 @@
         },
         "margin": "@sugar.views.props.margin",
         "padding": "@sugar.views.props.padding"
+    },
+    "examples": {
+        "twig": {
+            "title": "Twig",
+            "description": "Here's a twig sample of how to use the card view",
+            "code": [
+                "{{ include 'sugar.bare.container.container' with {",
+                "   type: {",
+                "       default: '',",
+                "       wide: 'full'",
+                "   }",
+                "   html: '<h2>Hello world</h2>',",
+                "   margin: {",
+                "       default: {",
+                "           bottom: '50'",
+                "   },",
+                "   mobile: {",
+                "       bottom: '20'",
+                "   }",
+                "} }}"
+            ]
+        }
     }
 }

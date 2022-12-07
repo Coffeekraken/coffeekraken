@@ -1,5 +1,4 @@
-@sugar.init;
-@sugar.theme (dark, null, true);
+/* @sugar.init; */
 
 /* @sugar.media.classes ('mobile,tablet') { */
 @sugar.classes;

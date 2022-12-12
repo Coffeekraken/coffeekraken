@@ -286,7 +286,8 @@
                 "lineHeight": 1.8,
                 "maxWidth": "55ch",
                 "marginBottom": "3.25rem"
-            }
+            },
+            "default": true
         },
         "lead": {
             "label": "Lead paragraph",

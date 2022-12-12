@@ -32,8 +32,5 @@ export default function objectHash(
     settings = <IObjectHashSettings>{
         ...settings,
     };
-    // if (!__isPlainObject(obj)) {
-    //     console.trace('object hash', obj);
-    // }
     return __objectHash(obj);
 }

@@ -16,12 +16,12 @@ import __define from './define';
 /**
  * @name            SDepsFeature
  * @as              Dependencies feature
- * @namespace       js
+ * @__namespace       js
  * @type            Feature
  * @interface       ./interface/SDepsFeatureInterface.ts
- * @menu            Styleguide / Features               /styleguide/feature/s-deps-feature
+ * @__menu            Styleguide / Features               /styleguide/feature/s-deps-feature
  * @platform        js
- * @status          beta
+ * @status          wip
  *
  * This feature allows you to load a partial css or js files linked to a section/component only when it
  * will enters the viewport. This is good for your site performance as well as for SEO purposes.

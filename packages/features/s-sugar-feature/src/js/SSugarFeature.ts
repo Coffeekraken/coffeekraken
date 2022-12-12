@@ -43,6 +43,18 @@ export interface ISSugarFeatureProps {
  * value of the `--vh` variable if it exists.
  * More feature can be added in the future depending on the needs.
  *
+ * @support          chromium
+ * @support          firefox
+ * @support          safari
+ * @support          edge
+ *
+ * @install         bash
+ * yarn add @coffeekraken/s-sugar-feature
+ *
+ * @install         js
+ * import { define } from '@coffeekraken/s-sugar-feature';
+ * define();
+ *
  * @feature         Support for "pleasant css" syntax like "s-btn:outline"
  * @feature         Polyfill for container queries if needed
  * @feature        `scrolled` class applied on the body when the user has scrolled the page
@@ -52,11 +64,6 @@ export interface ISSugarFeatureProps {
  * @feature         Add state attributes to links like `actual` and `actual-child` depending on the document location url
  * @feature         Prevent the scroll restoration behavior on chrome that can usually be anoying
  * @feature         Remove some classes at page loading end: "initial-loading", "loading"
- *
- * @support          chromium
- * @support          firefox
- * @support          safari
- * @support          edge
  *
  * @example         html        Simple usage        Simply add the `s-sugar` property on your body tag
  * <bodyTag s-sugar>

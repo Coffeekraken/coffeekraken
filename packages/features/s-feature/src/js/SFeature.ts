@@ -2,7 +2,7 @@ import __SClass from '@coffeekraken/s-class';
 import type { ISComponentUtilsSettings } from '@coffeekraken/s-component-utils';
 import __SComponentUtils from '@coffeekraken/s-component-utils';
 import __SInterface from '@coffeekraken/s-interface';
-import { __querySelectorLive } from '@coffeekraken/sugar/dom';
+import { __injectStyle, __querySelectorLive } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 
 /**
@@ -158,6 +158,13 @@ export default class SFeature extends __SClass implements ISFeature {
         settings?: Partial<ISFeatureSettings>,
     ) {
         super(__deepMerge({}, settings));
+
+        // inject style if needed
+        if (this.settings.style) {
+            __injectStyle(this.settings.style, {
+                id: `s-feature-${name}`,
+            });
+        }
 
         this.componentUtils = new __SComponentUtils(node, {
             ...(this.settings ?? {}),

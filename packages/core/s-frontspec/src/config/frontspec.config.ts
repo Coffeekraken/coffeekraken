@@ -127,8 +127,18 @@ export default function (api) {
                                         value.rhythmVertical ?? {},
                                     ),
                                 },
-                                nestable: value.nestable ?? true,
                             };
+
+                            if (value.default) {
+                                finalObj[finalKey].default = value.default;
+                            }
+
+                            if (value.editorStyle) {
+                                finalObj[finalKey].editorStyle =
+                                    __STheme.resolveCssObjectPropertiesValues(
+                                        value.editorStyle,
+                                    );
+                            }
                         }
                         return finalObj;
                     },

@@ -2,7 +2,7 @@ import __SPackEssentials from '@coffeekraken/s-pack-essentials';
 
 import { define as __SCodeExampleComponentDefine } from '@coffeekraken/s-code-example-component';
 import { define as __SColorPickerComponentDefine } from '@coffeekraken/s-color-picker-component';
-import __SDashboard from '@coffeekraken/s-dashboard';
+// import __SDashboard from '@coffeekraken/s-dashboard';
 import { define as __SDatetimePickerComponentDefine } from '@coffeekraken/s-datetime-picker-component';
 import { define as __SFiltrableInputComponentDefine } from '@coffeekraken/s-filtrable-input-component';
 import { define as __SGoogleMapComponentDefine } from '@coffeekraken/s-google-map-component';
@@ -14,9 +14,9 @@ import { define as __SThemeSwitcherComponentDefine } from '@coffeekraken/s-theme
 
 import __SFeature from '@coffeekraken/s-feature';
 import { define as __SHighlightFeatureDefine } from '@coffeekraken/s-highlight-feature';
+import { define as __SLazyFeatureDefine } from '@coffeekraken/s-lazy-feature';
 import { define as __SPageTransitionFeatureDefine } from '@coffeekraken/s-page-transition-feature';
 import { define as __SParallaxFeatureDefine } from '@coffeekraken/s-parallax-feature';
-import { define as __STemplateFeatureDefine } from '@coffeekraken/s-template-feature';
 
 // Website specific
 import { define as __CKDiscoverComponent } from './components/CKDiscover';
@@ -93,14 +93,12 @@ const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
 
   // features
   __SPageTransitionFeatureDefine();
-  __STemplateFeatureDefine();
+  __SLazyFeatureDefine();
   __SParallaxFeatureDefine();
   __SHighlightFeatureDefine();
 
   // components
-  __SCodeExampleComponentDefine({
-    cssDeps: ['global', '/dist/css/partials/sCodeExample.css'],
-  });
+  __SCodeExampleComponentDefine();
   __SSliderComponentDefine();
   __SFiltrableInputComponentDefine();
   __SSidePanelComponentDefine();
@@ -120,23 +118,23 @@ const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
   __CKDiscoverTabedComponent();
 
   // dashboard
-  const dashboard = new __SDashboard({
-    dashboard: {
-      components: {
-        's-dashboard-pages': {
-          onSelect: (page) => {
-            dashboard.close();
-            document.dispatchEvent(
-              new CustomEvent('location.href', {
-                detail: page.item.loc,
-                bubbles: true,
-              })
-            );
-          },
-        },
-      },
-    },
-  });
+  // const dashboard = new __SDashboard({
+  //   dashboard: {
+  //     components: {
+  //       's-dashboard-pages': {
+  //         onSelect: (page) => {
+  //           dashboard.close();
+  //           document.dispatchEvent(
+  //             new CustomEvent('location.href', {
+  //               detail: page.item.loc,
+  //               bubbles: true,
+  //             })
+  //           );
+  //         },
+  //       },
+  //     },
+  //   },
+  // });
 
   // code example highlight
   __querySelectorLive('.s-code-example__content', ($elm) => {

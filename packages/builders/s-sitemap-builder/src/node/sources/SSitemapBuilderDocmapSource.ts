@@ -81,6 +81,11 @@ export default class SSitemapBuilderDocmapSource extends __SSitemapBuilderSource
                     2,
                 )}-${__pad(date.getDate(), 2)}`;
 
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>[docmap]</yellow> Start generating sitemap from the project "<cyan>docmap.json</cyan>"`,
+                });
+
                 // @ts-ignore
                 for (let [slug, docmapObj] of Object.entries(
                     docmap.menu.slug,
@@ -129,6 +134,11 @@ export default class SSitemapBuilderDocmapSource extends __SSitemapBuilderSource
                         }
                     }
                 }
+
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<green>[docmap]</green> <magenta>${items.length}</magenta> sitemap entrie(s) gathered from the "<cyan>docmap.json</cyan>" file`,
+                });
 
                 resolve(items);
             },

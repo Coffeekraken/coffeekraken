@@ -54,8 +54,6 @@ export default function ({
         ...(params ?? {}),
     };
 
-    console.log('fin', finalParams);
-
     const cssArray = [
         '@sugar.reset;',
         `@sugar.theme(${finalParams.variant}, ${finalParams.theme});`,

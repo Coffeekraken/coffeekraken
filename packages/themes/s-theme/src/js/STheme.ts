@@ -249,8 +249,6 @@ export default class STheme extends __SThemeBase {
         // wait for css to be applied
         const themeMetas = this.getThemeMetas(finalSettings.$context);
 
-        console.log('META', themeMetas);
-
         // save default theme metas
         STheme.defaultThemeMetas = {
             theme: finalSettings.theme,

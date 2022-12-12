@@ -22,6 +22,12 @@ import __SInterface from '@coffeekraken/s-interface';
 export default class SHighlightFeatureInterface extends __SInterface {
     static get _definition() {
         return {
+            type: {
+                type: 'String',
+                description: 'Specify the type of highlight you want',
+                default: 'light',
+                physical: true,
+            },
             size: {
                 type: 'Number',
                 description: 'Specify the size of the highlight in px',

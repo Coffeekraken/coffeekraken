@@ -25,12 +25,14 @@ import __css from '../../../../src/css/s-highlight-feature.css'; // relative to 
  * @support          edge
  *
  * @example         html            Highlight
- * <section class="s-ratio:16-9 s-radius s-bkg:accent s-mbe:30" s-highlight>
- * </section>
- * <section class="s-ratio:16-9 s-radius s-bkg:complementary s-mbe:30" s-highlight>
- * </section>
- * <section class="s-ratio:16-9 s-radius s-bkg:error" s-highlight>
- * </section>
+ * <div class="s-radius s-bg:main s-depth s-mbe:30" style="height:100px" s-highlight>
+ * </div>
+ * <div class="s-radius s-bg:accent s-depth s-mbe:30" style="height:100px" s-highlight opacity="1">
+ * </div>
+ * <div class="s-radius s-bg:complementary s-depth s-mbe:30" style="height:100px" s-highlight opacity="1">
+ * </div>
+ * <div class="s-radius s-bg:error s-depth" style="height:100px" s-highlight opacity="1">
+ * </div>
  *
  * @see         https://codepen.io/Hyperplexed/pen/MWQeYLW
  * @since       2.0.0
@@ -38,6 +40,7 @@ import __css from '../../../../src/css/s-highlight-feature.css'; // relative to 
  */
 
 export interface ISHighlightFeatureProps {
+    type: 'light';
     size: number;
     opacity: number;
 }
@@ -85,7 +88,7 @@ export default class SHighlightFeature extends __SFeature {
         });
 
         ['mousemove', 'touchmove'].forEach((eventName) => {
-            document.addEventListener(eventName, (e) => {
+            this.node.addEventListener(eventName, (e) => {
                 const rect = this.node.getBoundingClientRect(),
                     x = e.clientX - rect.left,
                     y = e.clientY - rect.top;

@@ -1,0 +1,51 @@
+{% extends 'sugar/readme/layouts/doc/doc.twig' %}
+{% block body %}
+
+<!--
+/**
+ * @name            Frontspec
+ * @namespace       doc.specFiles
+ * @type            Markdown
+ * @platform        md
+ * @status          stable
+ * @menu            Documentation / Spec files           /doc/specfiles/frontspec
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+-->
+
+# `frontspec.json`
+
+> Spec version **1.0.0-alpha.0**
+
+The `frontspec.json` has to live in your project root. It has as goal to describe what your project has to offers (css, js, typos, etc...), and where to find them.
+
+This file is separated by purpose in an global object like so:
+
+{% for key, source in config.frontspec.build.sources %}
+
+-   **{{source.title}}**: {{source.description}}
+    {% endfor %}
+
+```js
+export default {
+    {% for key, source in config.frontspec.build.sources %}
+        {{key}}: {},
+    {% endfor %}
+}
+```
+
+{% for key, source in config.frontspec.build.sources %}
+
+## {{source.title}}
+
+{{source.description}}
+
+```js
+export default {{ frontspec[key]|json_encode()|raw }}
+```
+
+{% endfor %}
+
+{% endblock %}

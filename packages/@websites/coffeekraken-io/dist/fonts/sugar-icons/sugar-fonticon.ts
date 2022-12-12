@@ -1,13 +1,16 @@
 export type SugarFonticonId =
   | 'animation-easing'
+  | 'chrome'
   | 'css-flex'
   | 'css-radius'
+  | 'edge'
   | 'file-css'
   | 'file-html'
   | 'file-js'
   | 'file-md'
   | 'file-php'
   | 'file-ts'
+  | 'firefox'
   | 'folder-add'
   | 'folder-opened'
   | 'folder-remove'
@@ -45,6 +48,8 @@ export type SugarFonticonId =
   | 'misc-eye'
   | 'misc-ring'
   | 'misc-tools'
+  | 'read-direction'
+  | 'safari'
   | 'support-chromium'
   | 'support-edge'
   | 'support-firefox'
@@ -72,18 +77,22 @@ export type SugarFonticonId =
   | 'ui-switch'
   | 'ui-tooltip'
   | 'ui-typography'
-  | 'vue';
+  | 'vue'
+  | 'vuejs';
 
 export type SugarFonticonKey =
   | 'AnimationEasing'
+  | 'Chrome'
   | 'CssFlex'
   | 'CssRadius'
+  | 'Edge'
   | 'FileCss'
   | 'FileHtml'
   | 'FileJs'
   | 'FileMd'
   | 'FilePhp'
   | 'FileTs'
+  | 'Firefox'
   | 'FolderAdd'
   | 'FolderOpened'
   | 'FolderRemove'
@@ -121,6 +130,8 @@ export type SugarFonticonKey =
   | 'MiscEye'
   | 'MiscRing'
   | 'MiscTools'
+  | 'ReadDirection'
+  | 'Safari'
   | 'SupportChromium'
   | 'SupportEdge'
   | 'SupportFirefox'
@@ -148,18 +159,22 @@ export type SugarFonticonKey =
   | 'UiSwitch'
   | 'UiTooltip'
   | 'UiTypography'
-  | 'Vue';
+  | 'Vue'
+  | 'Vuejs';
 
 export enum SugarFonticon {
   AnimationEasing = 'animation-easing',
+  Chrome = 'chrome',
   CssFlex = 'css-flex',
   CssRadius = 'css-radius',
+  Edge = 'edge',
   FileCss = 'file-css',
   FileHtml = 'file-html',
   FileJs = 'file-js',
   FileMd = 'file-md',
   FilePhp = 'file-php',
   FileTs = 'file-ts',
+  Firefox = 'firefox',
   FolderAdd = 'folder-add',
   FolderOpened = 'folder-opened',
   FolderRemove = 'folder-remove',
@@ -197,6 +212,8 @@ export enum SugarFonticon {
   MiscEye = 'misc-eye',
   MiscRing = 'misc-ring',
   MiscTools = 'misc-tools',
+  ReadDirection = 'read-direction',
+  Safari = 'safari',
   SupportChromium = 'support-chromium',
   SupportEdge = 'support-edge',
   SupportFirefox = 'support-firefox',
@@ -225,81 +242,88 @@ export enum SugarFonticon {
   UiTooltip = 'ui-tooltip',
   UiTypography = 'ui-typography',
   Vue = 'vue',
+  Vuejs = 'vuejs',
 }
 
 export const SUGAR_FONTICON_CODEPOINTS: { [key in SugarFonticon]: string } = {
   [SugarFonticon.AnimationEasing]: '61697',
-  [SugarFonticon.CssFlex]: '61698',
-  [SugarFonticon.CssRadius]: '61699',
-  [SugarFonticon.FileCss]: '61700',
-  [SugarFonticon.FileHtml]: '61701',
-  [SugarFonticon.FileJs]: '61702',
-  [SugarFonticon.FileMd]: '61703',
-  [SugarFonticon.FilePhp]: '61704',
-  [SugarFonticon.FileTs]: '61705',
-  [SugarFonticon.FolderAdd]: '61706',
-  [SugarFonticon.FolderOpened]: '61707',
-  [SugarFonticon.FolderRemove]: '61708',
-  [SugarFonticon.Folder]: '61709',
-  [SugarFonticon.LangCss_1]: '61710',
-  [SugarFonticon.LangCss]: '61711',
-  [SugarFonticon.LangHtml_1]: '61712',
-  [SugarFonticon.LangHtml]: '61713',
-  [SugarFonticon.LangJs_1]: '61714',
-  [SugarFonticon.LangJs]: '61715',
-  [SugarFonticon.LangMd_1]: '61716',
-  [SugarFonticon.LangMd]: '61717',
-  [SugarFonticon.LangNode]: '61718',
-  [SugarFonticon.LangPhp_1]: '61719',
-  [SugarFonticon.LangPhp]: '61720',
-  [SugarFonticon.LangTs_1]: '61721',
-  [SugarFonticon.LangTs]: '61722',
-  [SugarFonticon.LayoutRatio]: '61723',
-  [SugarFonticon.LayoutScale]: '61724',
-  [SugarFonticon.LayoutSpace]: '61725',
-  [SugarFonticon.Layout]: '61726',
-  [SugarFonticon.LinkBrokenSolid]: '61727',
-  [SugarFonticon.LinkBroken]: '61728',
-  [SugarFonticon.LogoCoffeekraken]: '61729',
-  [SugarFonticon.LogoLitSolid]: '61730',
-  [SugarFonticon.LogoLit]: '61731',
-  [SugarFonticon.LogoNextjsSolid]: '61732',
-  [SugarFonticon.LogoNextjs]: '61733',
-  [SugarFonticon.LogoOpensource]: '61734',
-  [SugarFonticon.LogoViteSolid]: '61735',
-  [SugarFonticon.LogoVite]: '61736',
-  [SugarFonticon.MiscBubbles]: '61737',
-  [SugarFonticon.MiscBuildSolid]: '61738',
-  [SugarFonticon.MiscBuild]: '61739',
-  [SugarFonticon.MiscEye]: '61740',
-  [SugarFonticon.MiscRing]: '61741',
-  [SugarFonticon.MiscTools]: '61742',
-  [SugarFonticon.SupportChromium]: '61743',
-  [SugarFonticon.SupportEdge]: '61744',
-  [SugarFonticon.SupportFirefox]: '61745',
-  [SugarFonticon.SupportRtl]: '61746',
-  [SugarFonticon.SupportSafari]: '61747',
-  [SugarFonticon.ThemeColors]: '61748',
-  [SugarFonticon.Theme]: '61749',
-  [SugarFonticon.UiAlign]: '61750',
-  [SugarFonticon.UiAutocomplete]: '61751',
-  [SugarFonticon.UiAvatar]: '61752',
-  [SugarFonticon.UiButton]: '61753',
-  [SugarFonticon.UiCode]: '61754',
-  [SugarFonticon.UiCopy]: '61755',
-  [SugarFonticon.UiDatepicker]: '61756',
-  [SugarFonticon.UiDisplayPreview]: '61757',
-  [SugarFonticon.UiDropdown]: '61758',
-  [SugarFonticon.UiLinkBrokenSolid]: '61759',
-  [SugarFonticon.UiLinkBroken]: '61760',
-  [SugarFonticon.UiLoaderSolid]: '61761',
-  [SugarFonticon.UiLoader]: '61762',
-  [SugarFonticon.UiMoreSolid]: '61763',
-  [SugarFonticon.UiMore]: '61764',
-  [SugarFonticon.UiRange]: '61765',
-  [SugarFonticon.UiRefresh]: '61766',
-  [SugarFonticon.UiSwitch]: '61767',
-  [SugarFonticon.UiTooltip]: '61768',
-  [SugarFonticon.UiTypography]: '61769',
-  [SugarFonticon.Vue]: '61770',
+  [SugarFonticon.Chrome]: '61698',
+  [SugarFonticon.CssFlex]: '61699',
+  [SugarFonticon.CssRadius]: '61700',
+  [SugarFonticon.Edge]: '61701',
+  [SugarFonticon.FileCss]: '61702',
+  [SugarFonticon.FileHtml]: '61703',
+  [SugarFonticon.FileJs]: '61704',
+  [SugarFonticon.FileMd]: '61705',
+  [SugarFonticon.FilePhp]: '61706',
+  [SugarFonticon.FileTs]: '61707',
+  [SugarFonticon.Firefox]: '61708',
+  [SugarFonticon.FolderAdd]: '61709',
+  [SugarFonticon.FolderOpened]: '61710',
+  [SugarFonticon.FolderRemove]: '61711',
+  [SugarFonticon.Folder]: '61712',
+  [SugarFonticon.LangCss_1]: '61713',
+  [SugarFonticon.LangCss]: '61714',
+  [SugarFonticon.LangHtml_1]: '61715',
+  [SugarFonticon.LangHtml]: '61716',
+  [SugarFonticon.LangJs_1]: '61717',
+  [SugarFonticon.LangJs]: '61718',
+  [SugarFonticon.LangMd_1]: '61719',
+  [SugarFonticon.LangMd]: '61720',
+  [SugarFonticon.LangNode]: '61721',
+  [SugarFonticon.LangPhp_1]: '61722',
+  [SugarFonticon.LangPhp]: '61723',
+  [SugarFonticon.LangTs_1]: '61724',
+  [SugarFonticon.LangTs]: '61725',
+  [SugarFonticon.LayoutRatio]: '61726',
+  [SugarFonticon.LayoutScale]: '61727',
+  [SugarFonticon.LayoutSpace]: '61728',
+  [SugarFonticon.Layout]: '61729',
+  [SugarFonticon.LinkBrokenSolid]: '61730',
+  [SugarFonticon.LinkBroken]: '61731',
+  [SugarFonticon.LogoCoffeekraken]: '61732',
+  [SugarFonticon.LogoLitSolid]: '61733',
+  [SugarFonticon.LogoLit]: '61734',
+  [SugarFonticon.LogoNextjsSolid]: '61735',
+  [SugarFonticon.LogoNextjs]: '61736',
+  [SugarFonticon.LogoOpensource]: '61737',
+  [SugarFonticon.LogoViteSolid]: '61738',
+  [SugarFonticon.LogoVite]: '61739',
+  [SugarFonticon.MiscBubbles]: '61740',
+  [SugarFonticon.MiscBuildSolid]: '61741',
+  [SugarFonticon.MiscBuild]: '61742',
+  [SugarFonticon.MiscEye]: '61743',
+  [SugarFonticon.MiscRing]: '61744',
+  [SugarFonticon.MiscTools]: '61745',
+  [SugarFonticon.ReadDirection]: '61746',
+  [SugarFonticon.Safari]: '61747',
+  [SugarFonticon.SupportChromium]: '61748',
+  [SugarFonticon.SupportEdge]: '61749',
+  [SugarFonticon.SupportFirefox]: '61750',
+  [SugarFonticon.SupportRtl]: '61751',
+  [SugarFonticon.SupportSafari]: '61752',
+  [SugarFonticon.ThemeColors]: '61753',
+  [SugarFonticon.Theme]: '61754',
+  [SugarFonticon.UiAlign]: '61755',
+  [SugarFonticon.UiAutocomplete]: '61756',
+  [SugarFonticon.UiAvatar]: '61757',
+  [SugarFonticon.UiButton]: '61758',
+  [SugarFonticon.UiCode]: '61759',
+  [SugarFonticon.UiCopy]: '61760',
+  [SugarFonticon.UiDatepicker]: '61761',
+  [SugarFonticon.UiDisplayPreview]: '61762',
+  [SugarFonticon.UiDropdown]: '61763',
+  [SugarFonticon.UiLinkBrokenSolid]: '61764',
+  [SugarFonticon.UiLinkBroken]: '61765',
+  [SugarFonticon.UiLoaderSolid]: '61766',
+  [SugarFonticon.UiLoader]: '61767',
+  [SugarFonticon.UiMoreSolid]: '61768',
+  [SugarFonticon.UiMore]: '61769',
+  [SugarFonticon.UiRange]: '61770',
+  [SugarFonticon.UiRefresh]: '61771',
+  [SugarFonticon.UiSwitch]: '61772',
+  [SugarFonticon.UiTooltip]: '61773',
+  [SugarFonticon.UiTypography]: '61774',
+  [SugarFonticon.Vue]: '61775',
+  [SugarFonticon.Vuejs]: '61776',
 };

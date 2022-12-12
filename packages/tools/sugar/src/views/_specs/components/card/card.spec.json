@@ -53,7 +53,7 @@
             "title": "Twig",
             "description": "Here's a twig sample of how to use the card view",
             "code": [
-                "{{ include('sugar.components.card.card') with {",
+                "{% include('sugar.components.card.card') with {",
                 "   title: '...',",
                 "   intro: '...',",
                 "   text: '...',",
@@ -62,7 +62,7 @@
                 "       title: '...',",
                 "       alt: '...'",
                 "   }",
-                "} }}"
+                "} %}"
             ]
         }
     }

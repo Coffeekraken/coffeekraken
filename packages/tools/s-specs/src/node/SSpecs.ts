@@ -2,7 +2,12 @@ import __SClass from '@coffeekraken/s-class';
 import __SInterface from '@coffeekraken/s-interface';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __isPlainObject } from '@coffeekraken/sugar/is';
-import { __deepMap, __deepMerge, __get } from '@coffeekraken/sugar/object';
+import {
+    __deepMap,
+    __deepMerge,
+    __get,
+    __toPlainObject,
+} from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
 import __glob from 'glob';
@@ -203,10 +208,7 @@ export default class SSpecs extends __SClass {
     constructor(settings: Partial<ISSpecsSettings>) {
         super(
             __deepMerge(
-                {
-                    read: {},
-                },
-                __SSugarConfig.get('specs') ?? {},
+                __toPlainObject(__SSugarConfig.get('specs') ?? {}),
                 settings ?? {},
             ),
         );
@@ -243,22 +245,41 @@ export default class SSpecs extends __SClass {
      *
      * This method allows you to read a spec file and/or a value inside the passed spec file.
      *
-     * @param       {String}        specDotPath        A dotpath that point to a json spec file relative to one of the registered "$settings.namespaces" folders. You can then specify an internal dotpath to get a specific value inside the passed file like so "sugar.views.props.attributes:title"
+     * @param       {String}        specDotPath        A dotpath that point to a json spec file relative to one of the registered "$settings.namespaces" folders. You can then specify an internal dotpath to get a specific value inside the passed file like so "sugar.views.props.attributes:title. Can also be an absolute path."
      * @return      {Any}                               The requested spec value
      *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    read(specDotPath: string, settings?: Partial<ISSpecsReadSettings>) {
+    read(specDotPath: string, settings: Partial<ISSpecsReadSettings> = {}) {
         let finalSpecFilePath;
+
+        // handle absolute file path
+        if (specDotPath.startsWith('/')) {
+            const fileName = __path.basename(specDotPath),
+                dir = __path.dirname(specDotPath);
+
+            // add the "absolute" namespace in the settings
+            if (!settings.namespaces) {
+                settings.namespaces = {};
+            }
+            settings.namespaces.absolute = [dir];
+
+            // call the read method with this time the absolute namespace
+            // prefix the fileName with the absolute namespace
+            return this.read(
+                `absolute.${fileName.replace('.spec.json', '')}`,
+                settings,
+            );
+        }
 
         const finalSettings: ISSpecsReadSettings = __deepMerge(
             // @ts-ignore
-            this.settings.read ?? {},
-            settings ?? {},
+            this.settings,
+            settings,
         );
 
-        let definedNamespaces = this.settings.namespaces;
+        let definedNamespaces = finalSettings.namespaces;
         let definesNamespacesKeys = Object.keys(definedNamespaces);
 
         let currentNamespace = '';
@@ -272,7 +293,7 @@ export default class SSpecs extends __SClass {
 
         if (!currentNamespace) {
             throw new Error(
-                `[SSpecs.read] The passed dotpath ${specDotPath}" does not correspond to any registered namespaces which are: ${definesNamespacesKeys.join(
+                `[SSpecs.read] The passed dotpath "<cyan>${specDotPath}</cyan>" does not correspond to any registered namespaces which are: ${definesNamespacesKeys.join(
                     '\n',
                 )}`,
             );
@@ -295,7 +316,7 @@ export default class SSpecs extends __SClass {
 
         // loop on each registered namespaces directories to check if the specDotPath
         // correspond to a file in one of them...
-        const dirs = this.settings.namespaces[currentNamespace];
+        const dirs = finalSettings.namespaces[currentNamespace];
         for (let i = 0; i < dirs.length; i++) {
             const dir = dirs[i];
 

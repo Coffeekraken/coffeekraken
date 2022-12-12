@@ -1,4 +1,5 @@
 import __SGlob from '@coffeekraken/s-glob';
+import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __STypescriptBuilder from '@coffeekraken/s-typescript-builder';
 import { __deepMerge } from '@coffeekraken/sugar/object';
@@ -70,15 +71,34 @@ export default class SSitemapBuilderFileSource extends __SSitemapBuilderSource {
     ): Promise<ISSitemapBuilderResultItem[]> {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>[file]</yellow> Search for sitemap files using "<cyan>${this.settings.glob.join(
+                        ', ',
+                    )}</cyan>" glob...`,
+                });
+
                 const files = __SGlob.resolve(this.settings.glob, {
                     cwd: this.settings.inDir,
+                });
+
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>[file]</yellow> Found <yellow>${files.length}</yellow> file(s)`,
+                });
+                files.forEach((file) => {
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>[file]</yellow> - <cyan>${file.relPath}</cyan>`,
+                    });
                 });
 
                 let items: ISSitemapBuilderResultItem[] = [];
 
                 for (let [key, file] of Object.entries(files)) {
                     // @ts-ignore
-                    let filePath = file.path;
+                    let filePath = file.path,
+                        itemsCount = 0;
 
                     if (filePath.match(/\.ts$/)) {
                         const buildedFile =
@@ -93,15 +113,22 @@ export default class SSitemapBuilderFileSource extends __SSitemapBuilderSource {
                     const fn = (await import(filePath)).default;
                     if (typeof fn === 'function') {
                         const fileItems = await fn(params);
+                        itemsCount = fileItems.length;
                         items = [...items, ...fileItems];
                     } else if (Array.isArray(fn)) {
                         items = [...items, ...fn];
+                        itemsCount = fn.length;
                     } else {
                         throw new Error(
                             // @ts-ignore
                             `Your sitemap file "<cyan>${file.relPath}</cyan>" MUST return either a function that returns an <yellow>ISSitemapBuilderResultItem</yellow> array, or just an <yellow>ISSitemapBuilderResultItem</yellow> array...`,
                         );
                     }
+
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<green>[file]</green> "<cyan>${file.relPath}</cyan>" generated <magenta>${itemsCount}</magenta> sitemap entrie(s)`,
+                    });
                 }
 
                 resolve(items);

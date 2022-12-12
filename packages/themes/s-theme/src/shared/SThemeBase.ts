@@ -863,7 +863,6 @@ export default class SThemeBase extends __SEventEmitter {
         settings?: Partial<ISThemeDefaultStaticSettings>,
     ): any {
         const dashProp = __dashCase(property);
-
         switch (dashProp) {
             case 'font-family':
                 const fontObj = this.get(`font.family.${value}`);
@@ -1370,8 +1369,6 @@ export default class SThemeBase extends __SEventEmitter {
             `--s-theme: ${themeInstance.theme};`,
             `--s-theme-variant: ${themeInstance.variant};`,
         ];
-
-        console.trace('set', settings);
 
         // handle colors
         themeInstance.loopOnColors((colorObj) => {

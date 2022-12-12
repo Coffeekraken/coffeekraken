@@ -26,7 +26,7 @@ namespace Sugar\object;
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function deepMerge($obj1, $obj2)
+function _deepMerge($obj1, $obj2)
 {
     if (is_object($obj2)) {
         $keys = array_keys(get_object_vars($obj2));
@@ -56,4 +56,16 @@ function deepMerge($obj1, $obj2)
     }
 
     return $obj1;
+}
+function deepMerge(...$args)
+{
+    $current = $args[0];
+    $obj2 = $args[1];
+
+    for ($i = 1; $i < count($args); $i++) {
+        $current = _deepMerge($current, $obj2);
+        $obj2 = $args[1];
+    }
+
+    return $current;
 }

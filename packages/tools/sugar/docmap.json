@@ -83,7 +83,7 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-template-feature",
+            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -7871,6 +7871,43 @@
                 "filename": "readSpec.php",
                 "extension": "php",
                 "relPath": "src/php/specs/readSpec.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.specs.specsToMarkdown": {
+                "id": "@coffeekraken.sugar.php.specs.specsToMarkdown",
+                "name": "specsToMarkdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to display a markdown specs list with some default specifications info like \"margin\", \"padding\", \"gap\", etc...\nYou can abviously override the defaults with your own details object that MUST contains an \"title\" and \"description\" property for each spec",
+                "namespace": "@coffeekraken.sugar.php.specs",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "$markdown = \\Sugar\\specs\\specsToMarkdown(['margin','padding'], [\n  \"margin\" => [\n     \"title\" => \"Margin\",\n     \"description\" => \"Manage the margins with ease\n  ]\n]);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "specsToMarkdown.php",
+                "extension": "php",
+                "relPath": "src/php/specs/specsToMarkdown.php",
                 "children": {}
             },
             "@coffeekraken.sugar.php.string.generateRandomString": {
@@ -22823,6 +22860,43 @@
                 "relPath": "src/php/twig/functions/specs/readSpec.php",
                 "children": {}
             },
+            "@coffeekraken.sugar.php.twig.functions.specs.specsToMarkdown": {
+                "id": "@coffeekraken.sugar.php.twig.functions.specs.specsToMarkdown",
+                "name": "specsToMarkdown",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows display a spec in the markdown with all the available informations available in the passed spec json",
+                "namespace": "@coffeekraken.sugar.php.twig.functions.specs",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "{{ specsToMarkdown(mySpecs) }}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "specsToMarkdown.php",
+                "extension": "php",
+                "relPath": "src/php/twig/functions/specs/specsToMarkdown.php",
+                "children": {}
+            },
             "@coffeekraken.sugar.php.twig.functions.specs.specsValues": {
                 "id": "@coffeekraken.sugar.php.twig.functions.specs.specsValues",
                 "name": "specsValues",
@@ -22985,7 +23059,7 @@
                 "menu": {
                     "tree": [
                         "Specs",
-                        "Views"
+                        "Bare"
                     ],
                     "slug": "/specs/sugar.views.bare.cell"
                 },
@@ -23026,7 +23100,7 @@
                 "menu": {
                     "tree": [
                         "Specs",
-                        "Views"
+                        "Bare"
                     ],
                     "slug": "/specs/sugar.views.bare.container"
                 },
@@ -23067,7 +23141,7 @@
                 "menu": {
                     "tree": [
                         "Specs",
-                        "Views"
+                        "Bare"
                     ],
                     "slug": "/specs/sugar.views.bare.layout"
                 },
@@ -23094,6 +23168,47 @@
                 "relPath": "src/views/_specs/bare/layout/layout.md.twig",
                 "children": {}
             },
+            "@coffeekraken.sugar.specs.views.bare.typo.Typo": {
+                "id": "@coffeekraken.sugar.specs.views.bare.typo.Typo",
+                "name": "Typo",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Specs",
+                        "Bare"
+                    ],
+                    "slug": "/specs/sugar.views.bare.typo"
+                },
+                "platform": [
+                    {
+                        "name": "blade",
+                        "description": ""
+                    },
+                    {
+                        "name": "twig",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.sugar.specs.views.bare.typo",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "typo.md.twig",
+                "extension": "md",
+                "relPath": "src/views/_specs/bare/typo/typo.md.twig",
+                "children": {}
+            },
             "@coffeekraken.sugar.specs.views.components.card.Card": {
                 "id": "@coffeekraken.sugar.specs.views.components.card.Card",
                 "name": "Card",
@@ -23108,7 +23223,7 @@
                 "menu": {
                     "tree": [
                         "Specs",
-                        "Views"
+                        "Components"
                     ],
                     "slug": "/specs/sugar.views.components.card"
                 },
@@ -23149,7 +23264,7 @@
                 "menu": {
                     "tree": [
                         "Specs",
-                        "Views"
+                        "Components"
                     ],
                     "slug": "/specs/sugar.views.components.cta"
                 },
@@ -23174,6 +23289,88 @@
                 "filename": "cta.md.twig",
                 "extension": "md",
                 "relPath": "src/views/_specs/components/cta/cta.md.twig",
+                "children": {}
+            },
+            "@coffeekraken.sugar.specs.views.components.slide.Slide": {
+                "id": "@coffeekraken.sugar.specs.views.components.slide.Slide",
+                "name": "Slide",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Specs",
+                        "Components"
+                    ],
+                    "slug": "/specs/sugar.views.components.slide"
+                },
+                "platform": [
+                    {
+                        "name": "blade",
+                        "description": ""
+                    },
+                    {
+                        "name": "twig",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.sugar.specs.views.components.slide",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "slide.md.twig",
+                "extension": "md",
+                "relPath": "src/views/_specs/components/slide/slide.md.twig",
+                "children": {}
+            },
+            "@coffeekraken.sugar.specs.views.components.slider.Slider": {
+                "id": "@coffeekraken.sugar.specs.views.components.slider.Slider",
+                "name": "Slider",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Specs",
+                        "Components"
+                    ],
+                    "slug": "/specs/sugar.views.components.slider"
+                },
+                "platform": [
+                    {
+                        "name": "blade",
+                        "description": ""
+                    },
+                    {
+                        "name": "twig",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.sugar.specs.views.components.slider",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "slider.md.twig",
+                "extension": "md",
+                "relPath": "src/views/_specs/components/slider/slider.md.twig",
                 "children": {}
             },
             "@coffeekraken.sugar.views.layout.Main": {

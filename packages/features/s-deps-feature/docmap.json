@@ -83,7 +83,7 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-template-feature",
+            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -101,52 +101,6 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-deps-feature.js.SDepsFeature": {
-                "id": "@coffeekraken.s-deps-feature.js.SDepsFeature",
-                "name": "SDepsFeature",
-                "as": "Dependencies feature",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Feature"
-                        }
-                    ],
-                    "raw": "Feature"
-                },
-                "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Features"
-                    ],
-                    "slug": "/styleguide/feature/s-deps-feature"
-                },
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    }
-                ],
-                "description": "This feature allows you to load a partial css or js files linked to a section/component only when it\nwill enters the viewport. This is good for your site performance as well as for SEO purposes.",
-                "namespace": "@coffeekraken.s-deps-feature.js",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "title": "Simple partial",
-                        "code": "<section s-deps css=\"welcome\">\n     <!-- something here... -->\n</section>"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "SDepsFeature.ts",
-                "extension": "ts",
-                "relPath": "src/js/SDepsFeature.ts",
-                "children": {}
-            },
             "@coffeekraken.s-deps-feature.js.interface.SDepsFeatureInterface": {
                 "id": "@coffeekraken.s-deps-feature.js.interface.SDepsFeatureInterface",
                 "name": "SDepsFeatureInterface",
@@ -167,6 +121,23 @@
                 "description": "This interface represent the attributes of the SCssPartial feature",
                 "namespace": "@coffeekraken.s-deps-feature.js.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SDepsFeatureInterface",
+                    "description": "",
+                    "definition": {
+                        "css": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "description": "Specify the \"partial\" css you want to load. This is relative to the \"rootPath\" property and can be a simple id like \"welcome\" that will resolve to \"${cssPartialsPath}/welcome.css\" or directly a path"
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

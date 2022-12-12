@@ -2,6 +2,10 @@
 
 @sugar.classes;
 
+body {
+  /* display: none; */
+}
+
 @sugar.ui.codeexample.classes;
 
 @sugar.ui.filtrableinput.classes;

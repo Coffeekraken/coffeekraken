@@ -71,9 +71,11 @@ export default function docmapStyleguideData({ req, res, pageConfig }) {
                         type: __SLog.TYPE_INFO,
                         value: `<yellow>[og]</yellow> Scraping opengraph from url "<cyan>${docblocks[0].see[i].url}</cyan>"`,
                     });
-                    docblocks[0].see[i].og = await __scrapeUrl(
-                        docblocks[0].see[i].url,
-                    );
+                    try {
+                        docblocks[0].see[i].og = await __scrapeUrl(
+                            docblocks[0].see[i].url,
+                        );
+                    } catch (e) {}
                 }
             }
         }

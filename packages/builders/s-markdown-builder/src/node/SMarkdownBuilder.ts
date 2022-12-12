@@ -8,6 +8,7 @@ import __SGlob from '@coffeekraken/s-glob';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __STheme from '@coffeekraken/s-theme';
 
 import __SViewRenderer from '@coffeekraken/s-view-renderer';
 
@@ -389,6 +390,7 @@ export default class SMarkdownBuilder extends __SBuilder {
                     // take some datas like packagejson, etc...
                     const viewData = __deepMerge(
                         {
+                            theme: __STheme.get('.'),
                             config: __SSugarConfig.get('.'),
                             settings: this.settings,
                             params,
@@ -445,6 +447,19 @@ export default class SMarkdownBuilder extends __SBuilder {
                                 /\.\.\//gm,
                                 '',
                             )}`;
+                        }
+
+                        // load the specs alongside the view if exists
+                        const specsDir = __path.dirname(filePath),
+                            specsFileName = `${
+                                __path.basename(filePath).split('.')[0]
+                            }.spec.json`;
+                        const specsFilePath = `${specsDir}/${specsFileName}`;
+                        if (__fs.existsSync(specsFilePath)) {
+                            // const specsInstance = new __SSpecs();
+                            // viewData.specs = await specsInstance.read(
+                            //     specsFilePath,
+                            // );
                         }
 
                         // remplace the extension in the output
@@ -596,21 +611,25 @@ export default class SMarkdownBuilder extends __SBuilder {
                         const transformersResults = [];
                         for (let transformerObj of this.settings.transformers) {
                             let m;
-                            while (
-                                (m = transformerObj.reg.exec(
-                                    currentTransformedString,
-                                ))
-                            ) {
+
+                            const matches = [
+                                ...currentTransformedString.matchAll(
+                                    transformerObj.reg,
+                                ),
+                            ];
+
+                            for (let match of matches) {
                                 const transformerResult =
                                     await transformerObj.transform(
-                                        m.slice(1),
+                                        match.slice(1),
                                         finalParams.target,
                                     );
+
                                 if (transformerResult) {
                                     transformersResults.push(transformerResult);
                                     currentTransformedString =
                                         currentTransformedString.replace(
-                                            m[0],
+                                            match[0],
                                             `<!-- transformer:${
                                                 transformersResults.length - 1
                                             } -->`,

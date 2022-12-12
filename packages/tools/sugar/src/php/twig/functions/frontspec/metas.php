@@ -9,15 +9,15 @@
  *
  * This twig function allows you to print out the frontspec.json "metas" property
  *
- * @param       {Object}            $metas      The metas you want to print out
+ * @param       {Object}            [$frontspec=null]      The frontspec object from where to take the metas. If not specified, try to get it from the frontspec.json at the root of your project
  * @return      {Array}                        The html representing the metas
  *
  * @example       twig
- * {% frontspecMetas(fronspec.metas) %}
+ * {% frontspecMetas(fronspec) %}
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-return new \Twig\TwigFunction('frontspecMetas', function ($metas) {
-    return \Sugar\frontspec\metas($metas);
+return new \Twig\TwigFunction('frontspecMetas', function ($frontspec = null) {
+    return \Sugar\frontspec\metas($frontspec);
 });

@@ -296,7 +296,7 @@
         },
         "hr": {
             "label": "------",
-            "group": "text",
+            "group": "block",
             "style": {
                 "display": "block",
                 "color": "hsla(212,14,50,1)",
@@ -357,9 +357,8 @@
         },
         "quote": {
             "label": "Quote",
-            "group": "block",
+            "group": "text",
             "style": {
-                "display": "block",
                 "fontFamily": "\"Palatino, Times, Georgia, serif\"",
                 "marginBottom": "3.25rem"
             }

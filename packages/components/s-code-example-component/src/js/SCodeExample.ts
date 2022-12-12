@@ -4,6 +4,7 @@ import { __wait } from '@coffeekraken/sugar/datetime';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __hljs from 'highlight.js/lib/core';
 import __langBash from 'highlight.js/lib/languages/bash';
+import __langTwig from 'highlight.js/lib/languages/twig';
 import __langCss from './languages/css';
 // import __langCss from 'highlight.js/lib/languages/css';
 import { __scrollTo } from '@coffeekraken/sugar/dom';
@@ -146,6 +147,7 @@ export default class SCodeExample extends __SLitComponent {
     async mount() {
         const languages = {
             html: __langHtml,
+            twig: __langTwig,
             javascript: __langJavascript,
             js: __langJavascript,
             php: __langPhp,

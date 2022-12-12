@@ -8,8 +8,8 @@
             "title": "Slides",
             "description": "The slider slides"
         },
-        "content": {
-            "type": "Text",
+        "html": {
+            "type": "Html",
             "description": "The slider content to print. Used only if no 'slides' have been provided"
         },
         "lnf": {
@@ -30,7 +30,8 @@
                     "value": "default-contained"
                 }
             ],
-            "default": "default"
+            "default": "default",
+            "required": true
         },
         "behavior": {
             "type": "Select",
@@ -46,7 +47,8 @@
                     "value": "transform"
                 }
             ],
-            "default": "scroll"
+            "default": "scroll",
+            "required": true
         },
         "direction": {
             "type": "Select",
@@ -62,7 +64,8 @@
                     "value": "horizontal"
                 }
             ],
-            "default": "horizontal"
+            "default": "horizontal",
+            "required": true
         },
         "slide": {
             "type": "Number",
@@ -148,5 +151,22 @@
         "attributes": "@sugar.views.props.attributes",
         "margin": "@sugar.views.props.margin",
         "padding": "@sugar.views.props.padding"
+    },
+    "examples": {
+        "twig": {
+            "title": "Twig",
+            "description": "Here's a twig sample of how to use the slider view",
+            "code": [
+                "{% include('sugar.components.slider.slider') with {",
+                "   slides: [",
+                "       '<h1>Hello</h1>',",
+                "       '<h1>World</h1>',",
+                "   ],",
+                "   direction: 'horizontal',",
+                "   controls: false,",
+                "   nav: false",
+                "} %}"
+            ]
+        }
     }
 }

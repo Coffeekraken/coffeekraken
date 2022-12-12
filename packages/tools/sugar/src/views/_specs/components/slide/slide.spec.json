@@ -4,10 +4,21 @@
     "description": "Simple slide usable in a slider",
     "props": {
         "attributes": "@sugar.views.props.attributes",
-        "content": {
+        "html": {
             "type": "Html",
             "description": "The content to print in the slide",
             "required": true
+        }
+    },
+    "examples": {
+        "twig": {
+            "title": "Twig",
+            "description": "Here's a twig sample of how to use the slide view",
+            "code": [
+                "{% include('sugar.components.slide.slide') with {",
+                "   html: '...'",
+                "} %}"
+            ]
         }
     }
 }

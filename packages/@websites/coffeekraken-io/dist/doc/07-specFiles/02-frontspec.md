@@ -3,28 +3,6 @@
      !!! Do not edit it directly... -->
 
 
-<!-- header -->
-# @website/coffeekraken-io
-
-###### [MIT](./license) 2.0.0-alpha.20 - [Git repository]()
-
-<!-- shields -->
-[![size](https://shields.io/bundlephobia/min/@website/coffeekraken-io?style=for-the-badge)](https://www.npmjs.com/package/@website/coffeekraken-io)
-[![downloads](https://shields.io/npm/dm/@website/coffeekraken-io?style=for-the-badge)](https://www.npmjs.com/package/@website/coffeekraken-io)
-[![license](https://shields.io/npm/l/@website/coffeekraken-io?style=for-the-badge)](./LICENSE)
-[![discord](https://img.shields.io/discord/940362961682333767?color=5100FF&amp;label=Join%20us%20on%20Discord&amp;style=for-the-badge)](https://discord.gg/HzycksDJ)
-
-<!-- description -->
-The frontend toolkit that works for everyone. Experts, professionals and new-comers
-
-<!-- install -->
-### Install
-
-```shell
-npm i @website/coffeekraken-io
-
-```
-
 <!-- body -->
 
 <!--
@@ -95,7 +73,27 @@ export default {
 Specify some metas data like the title, description, opengraph, etc...
 
 ```js
-export default null;
+export default {
+  lang: 'en',
+  title: 'Coffeekraken',
+  homepage: 'https://coffeekraken.io',
+  description:
+    'The frontend toolkit that works for everyone. Experts, professionals and new-comers',
+  themeColor: '#ffbb00',
+  author: {
+    name: 'Olivier Bossel',
+    email: 'olivier.bossel@gmail.com',
+    url: 'https://coffeekraken.io',
+  },
+  og: {
+    title: 'Coffeekraken',
+    description:
+      'The frontend toolkit that works for everyone. Experts, professionals and new-comers',
+    type: 'website',
+    url: 'https://coffeekraken.io',
+    image: 'https://cdnv2.coffeekraken.io/coffeekraken-og.png',
+  },
+};
 
 ```
 
@@ -105,7 +103,18 @@ export default null;
 Specify the assets to load like the css, js, etc...
 
 ```js
-export default null;
+export default {
+  viteClient: {
+    src: '\n            <script>\n            document.addEventListener("DOMContentLoaded", function() {\n                var $script = document.createElement("script");\n                var ip = "192.168.201.109";\n                $script.setAttribute("type", "module");\n                $script.setAttribute("src", "http://0.0.0.0:3000/@vite/client");\n                document.body.appendChild($script);\n            });\n            </script>\n        ',
+  },
+  dev: {
+    type: 'module',
+    defer: true,
+    src: '/src/js/index.ts',
+    env: 'development',
+  },
+  style: { id: 'global', defer: true, src: '/dist/css/index.css' },
+};
 
 ```
 
@@ -115,7 +124,18 @@ export default null;
 Specify the responsive specifications like the queries (breakpoints), default action, etc...
 
 ```js
-export default null;
+export default {
+  defaultAction: '<=',
+  defaultMedia: 'desktop',
+  defaultQuery: 'screen',
+  queries: {
+    dwarf: { minHeight: 0, maxHeight: 950 },
+    wide: { minWidth: 2048, maxWidth: null },
+    desktop: { minWidth: 1280, maxWidth: 2047 },
+    tablet: { minWidth: 640, maxWidth: 1279 },
+    mobile: { minWidth: 0, maxWidth: 639 },
+  },
+};
 
 ```
 
@@ -125,7 +145,21 @@ export default null;
 Specify the views specifications like where to find them, etc...
 
 ```js
-export default null;
+export default {
+  layouts: {
+    main: {
+      name: 'Default (main)',
+      viewPath: { twig: 'layouts/main.twig', blade: null },
+    },
+  },
+  rootDirs: {
+    twig: ['./src/views', './node_modules/@coffeekraken/sugar/src/views/twig'],
+    blade: [
+      './src/views',
+      './node_modules/@coffeekraken/sugar/src/views/blade',
+    ],
+  },
+};
 
 ```
 
@@ -135,7 +169,25 @@ export default null;
 Specify some specs related specifications like where to find them, etc...
 
 ```js
-export default null;
+export default {
+  namespaces: {
+    views: ['./src/views'],
+    'views.bare': ['./src/views/bare'],
+    'views.sections': ['./src/views/sections'],
+    'views.components': ['./src/views/components'],
+    'sugar.views': ['./node_modules/@coffeekraken/sugar/src/views/_specs'],
+    'sugar.views.bare': [
+      './node_modules/@coffeekraken/sugar/src/views/_specs/bare',
+    ],
+    'sugar.views.sections': [
+      './node_modules/@coffeekraken/sugar/src/views/_specs/sections',
+    ],
+    'sugar.views.components': [
+      './node_modules/@coffeekraken/sugar/src/views/_specs/components',
+    ],
+  },
+  cwd: '/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/coffeekraken-io',
+};
 
 ```
 
@@ -145,7 +197,11 @@ export default null;
 Specify some google specifications like the GTM/GA to use, etc...
 
 ```js
-export default null;
+export default {
+  gtm: null,
+  ga: 'UA-91271113-1',
+  map: { apiKey: 'AIzaSyDzFfEzhmYXRTlONUCtMWQ88uHJhsbtXY4' },
+};
 
 ```
 
@@ -155,7 +211,20 @@ export default null;
 Specify the margins available in the project.
 
 ```js
-export default null;
+export default {
+  0: 0,
+  10: 0.375,
+  20: 0.75,
+  30: 1.5,
+  40: 2.25,
+  50: 3.25,
+  60: 4.25,
+  70: 5.5,
+  80: 7,
+  90: 9,
+  100: 11,
+  default: '1rem',
+};
 
 ```
 
@@ -165,7 +234,20 @@ export default null;
 Specify the paddings available in the project.
 
 ```js
-export default null;
+export default {
+  0: 0,
+  10: 0.375,
+  20: 0.75,
+  30: 1.5,
+  40: 2.25,
+  50: 3.25,
+  60: 4.25,
+  70: 5.5,
+  80: 7,
+  90: 9,
+  100: 11,
+  default: '1rem',
+};
 
 ```
 
@@ -175,7 +257,51 @@ export default null;
 Specify the fonts specifications like the font-faces available, sizes, etc...
 
 ```js
-export default null;
+export default {
+  family: {
+    default: {
+      fontFamily: '"Titillium Web"',
+      fontWeight: 400,
+      import:
+        'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap',
+    },
+    title: {
+      fontFamily: '"Titillium Web"',
+      fontWeight: 600,
+      import:
+        'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap',
+    },
+    quote: {
+      fontFamily: '"Palatino, Times, Georgia, serif"',
+      fontWeight: 'normal',
+      fontStyle: 'normal',
+      fontDisplay: 'auto',
+      capHeight: 0.65,
+    },
+    code: {
+      fontFamily: 'Menlo, Monaco, Consolas, Courier New, monospace',
+      fontWeight: 'normal',
+      fontStyle: 'normal',
+      fontDisplay: 'auto',
+      capHeight: 0.65,
+    },
+  },
+  size: {
+    0: 0,
+    5: '0.5',
+    10: 0.65,
+    20: 0.75,
+    30: 1.1,
+    40: 1.25,
+    50: 1.5,
+    60: 2,
+    70: 2.5,
+    80: 3,
+    90: 4,
+    100: 5,
+    default: '16px',
+  },
+};
 
 ```
 
@@ -185,7 +311,222 @@ export default null;
 Specify some typo specifications like which are the available typo classes/tags, etc...
 
 ```js
-export default null;
+export default {
+  h1: {
+    label: 'H1',
+    group: 'styles',
+    style: {
+      fontFamily: '"Titillium Web"',
+      fontSize: '64px',
+      lineHeight: 1.3,
+      maxWidth: '55ch',
+    },
+    nestable: true,
+  },
+  h2: {
+    label: 'H2',
+    group: 'styles',
+    style: {
+      fontFamily: '"Titillium Web"',
+      fontSize: '48px',
+      lineHeight: 1.3,
+      maxWidth: '55ch',
+    },
+    nestable: true,
+  },
+  h3: {
+    label: 'H3',
+    group: 'styles',
+    style: {
+      fontFamily: '"Titillium Web"',
+      fontSize: '40px',
+      lineHeight: 1.3,
+      maxWidth: '55ch',
+    },
+    nestable: true,
+  },
+  h4: {
+    label: 'H4',
+    group: 'styles',
+    style: {
+      fontFamily: '"Titillium Web"',
+      fontSize: '32px',
+      lineHeight: 1.3,
+      maxWidth: '55ch',
+    },
+    nestable: true,
+  },
+  h5: {
+    label: 'H5',
+    group: 'styles',
+    style: {
+      fontFamily: '"Titillium Web"',
+      fontSize: '24px',
+      lineHeight: 1.3,
+      maxWidth: '55ch',
+    },
+    nestable: true,
+  },
+  h6: {
+    label: 'H6',
+    group: 'styles',
+    style: {
+      fontFamily: '"Titillium Web"',
+      fontSize: '20px',
+      lineHeight: 1.3,
+      maxWidth: '55ch',
+    },
+    nestable: true,
+  },
+  p: {
+    label: 'Paragraph',
+    group: 'styles',
+    style: {
+      fontFamily: '"Titillium Web"',
+      fontSize: '17.6px',
+      lineHeight: 1.8,
+      maxWidth: '55ch',
+    },
+    nestable: true,
+  },
+  lead: {
+    label: 'Lead paragraph',
+    group: 'styles',
+    style: {
+      fontFamily: '"Titillium Web"',
+      fontSize: '24px',
+      lineHeight: 1.6,
+      maxWidth: '55ch',
+    },
+    nestable: true,
+  },
+  hr: {
+    label: '------',
+    group: 'text',
+    style: { color: 'hsla(212,14,50,1)', opacity: 0.2 },
+    nestable: true,
+  },
+  pre: {
+    label: 'Pre',
+    group: 'text',
+    style: {
+      fontFamily: 'Menlo, Monaco, Consolas, Courier New, monospace',
+      color: '#596573',
+      backgroundColor: '#FCFCFD',
+      lineHeight: 1.5,
+      paddingInline: '1.5rem',
+      paddingBlock: '0.75rem',
+      borderRadius: '5px',
+      depth: '0',
+    },
+    nestable: true,
+  },
+  code: {
+    label: 'Code',
+    group: 'text',
+    style: {
+      display: 'inline-block',
+      fontFamily: 'Menlo, Monaco, Consolas, Courier New, monospace',
+      color: '#596573',
+      lineHeight: 1.1,
+      backgroundColor: '#FFFEFA',
+      borderRadius: '4px',
+      paddingInline: '0.375rem',
+      paddingBlock: '0rem',
+    },
+    nestable: true,
+  },
+  a: {
+    label: 'Link',
+    group: 'text',
+    style: { color: '#FFBB00', textDecoration: 'underline' },
+    nestable: true,
+  },
+  quote: {
+    label: 'Quote',
+    group: 'block',
+    style: { fontFamily: '"Palatino, Times, Georgia, serif"' },
+    nestable: true,
+  },
+  bold: {
+    label: 'Bold',
+    group: 'text',
+    style: { fontWeight: 'bold' },
+    nestable: true,
+  },
+  italic: {
+    label: 'Italic',
+    group: 'text',
+    style: { fontStyle: 'italic' },
+    nestable: true,
+  },
+  large: {
+    label: 'Large',
+    group: 'text',
+    style: { fontSize: '1.1em' },
+    nestable: true,
+  },
+  larger: {
+    label: 'Larger',
+    group: 'text',
+    style: { fontSize: '1.2em' },
+    nestable: true,
+  },
+  largest: {
+    label: 'Largest',
+    group: 'text',
+    style: { fontSize: '1.3em' },
+    nestable: true,
+  },
+  small: {
+    label: 'Small',
+    group: 'text',
+    style: { fontSize: '0.9em' },
+    nestable: true,
+  },
+  smaller: {
+    label: 'Smaller',
+    group: 'text',
+    style: { fontSize: '0.8em' },
+    nestable: true,
+  },
+  smallest: {
+    label: 'Smallest',
+    group: 'text',
+    style: { fontSize: '0.7em' },
+    nestable: true,
+  },
+  mark: {
+    label: 'Mark',
+    group: 'text',
+    style: { backgroundColor: '#FFBB00' },
+    nestable: true,
+  },
+  del: {
+    label: 'Del',
+    group: 'text',
+    style: { textDecoration: 'line-through' },
+    nestable: true,
+  },
+  ins: {
+    label: 'Ins',
+    group: 'text',
+    style: { textDecoration: 'underline' },
+    nestable: true,
+  },
+  sub: {
+    label: 'Sub',
+    group: 'text',
+    style: { verticalAlign: 'sub', fontSize: '0.6em' },
+    nestable: true,
+  },
+  sup: {
+    label: 'Sup',
+    group: 'text',
+    style: { verticalAlign: 'sup', fontSize: '0.6em' },
+    nestable: true,
+  },
+};
 
 ```
 
@@ -195,21 +536,63 @@ export default null;
 Specify some layout specifications like the available containers, layouts and grids.
 
 ```js
-export default null;
+export default {
+  offset: { top: 100, right: 0, bottom: 0, left: 0 },
+  container: { default: '1280px', wide: '1440px', full: 'none' },
+  grid: {
+    1: 1,
+    2: 2,
+    3: 3,
+    4: 4,
+    5: 5,
+    6: 6,
+    7: 7,
+    8: 8,
+    9: 9,
+    10: 10,
+    11: 11,
+    12: 12,
+  },
+  layout: {
+    1: '1',
+    12: '1 2',
+    21: '2 1',
+    112: '1 1 2',
+    122: '1 2 2',
+    123: '1 2 3',
+    211: '2 1 1',
+    221: '2 2 1',
+    321: '3 2 1',
+    1112: '1 1 1 2',
+    1222: '1 2 2 2',
+    1234: '1 2 3 4',
+    2221: '2 2 2 1',
+    11112: '1 1 1 1 2',
+    12222: '1 2 2 2 2',
+    12345: '1 2 3 4 5',
+    22221: '2 2 2 2 1',
+    111112: '1 1 1 1 1 2',
+    122222: '1 2 2 2 2 2',
+    123456: '1 2 3 4 5 6',
+    '1_2': '1 _ 2',
+    '2_1': '2 _ 1',
+    '12_33': '1 2 _ 3 3',
+    '1_23': '1 _ 2 3',
+    '1_2_3': '1 _ 2 _ 3',
+    '32_1': '3 2 _ 1',
+    '3_21': '3 _ 2 1',
+    '12_34': '1 2 _ 3 4',
+    '123_4': '1 2 3 _ 4',
+    '1_234': '1 _ 2 3 4',
+    '1_2_3_4': '1 _ 2 _ 3 _ 4',
+    '123_45': '1 2 3 _ 4 5',
+    '12_345': '1 2 _ 3 4 5',
+    '1_2345': '1 _ 2 3 4 5',
+    '1234_5': '1 2 3 4 _ 5',
+    '1_2_3_4_5': '1 _ 2 _ 3 _ 4 _ 5',
+  },
+};
 
 ```
 
 
-
-<!-- license -->
-### License
-
-Distributed under the **MIT** License. See **[LICENSE](./license)** for more information.
-
-<!-- contact -->
-### Contact
-
-Here's all the ways you can contact us listed:
-
-[![discord](https://img.shields.io/badge/Join%20us%20on%20discord-Join-blueviolet?style=[config.shieldsio.style]&amp;logo=discord)](https://discord.gg/HzycksDJ)
-[![email](https://img.shields.io/badge/Email%20us-Go-green?style=[config.shieldsio.style]&amp;logo=Mail.Ru)](mailto:olivier.bossel@gmail.com)

@@ -83,7 +83,7 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-template-feature",
+            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -132,7 +132,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<div s-parallax amount=\"0.1\">I will move on mousemove</div>\n<div s-parallax amount=\"0.3\">I will move on mousemove</div>\n<div s-parallax amount=\"0.5\">I will move on mousemove</div>"
+                        "code": "<div class=\"s-position:relative\" style=\"width:150px; height:150px;\">\n     <div s-parallax amount=\"0.1\" class=\"s-ratio:1 s-radius s-bg:error\" style=\"position:absolute; top:0; width:150px\"></div>\n     <div s-parallax amount=\"0.3\" class=\"s-ratio:1 s-radius s-bg:complementary\" style=\"position:absolute; top:0; width:150px\"></div>\n     <div s-parallax amount=\"0.5\" class=\"s-ratio:1 s-radius s-bg:accent\" style=\"position:absolute; top:0; width:150px\"></div>\n</div>"
                     }
                 ],
                 "interface": {
@@ -209,7 +209,7 @@
                                 ],
                                 "raw": "Number"
                             },
-                            "default": 1
+                            "default": 0
                         },
                         "amountRotateY": {
                             "description": "Specify the amount of parallax you want for the rotate y axis. This will be applied on top of the global amount",
@@ -221,7 +221,7 @@
                                 ],
                                 "raw": "Number"
                             },
-                            "default": 1
+                            "default": 0
                         }
                     }
                 },
@@ -330,7 +330,7 @@
                                 ],
                                 "raw": "Number"
                             },
-                            "default": 1
+                            "default": 0
                         },
                         "amountRotateY": {
                             "description": "Specify the amount of parallax you want for the rotate y axis. This will be applied on top of the global amount",
@@ -342,7 +342,7 @@
                                 ],
                                 "raw": "Number"
                             },
-                            "default": 1
+                            "default": 0
                         }
                     }
                 },

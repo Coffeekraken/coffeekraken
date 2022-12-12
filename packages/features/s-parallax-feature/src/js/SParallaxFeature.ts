@@ -32,9 +32,11 @@ export interface ISParallaxFeatureProps {
  * @support          edge
  *
  * @example         html
- * <div s-parallax amount="0.1">I will move on mousemove</div>
- * <div s-parallax amount="0.3">I will move on mousemove</div>
- * <div s-parallax amount="0.5">I will move on mousemove</div>
+ * <div class="s-position:relative" style="width:150px; height:150px;">
+ *      <div s-parallax amount="0.1" class="s-ratio:1 s-radius s-bg:error" style="position:absolute; top:0; width:150px"></div>
+ *      <div s-parallax amount="0.3" class="s-ratio:1 s-radius s-bg:complementary" style="position:absolute; top:0; width:150px"></div>
+ *      <div s-parallax amount="0.5" class="s-ratio:1 s-radius s-bg:accent" style="position:absolute; top:0; width:150px"></div>
+ * </div>
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -82,21 +84,25 @@ export default class SParallaxFeature extends __SFeature implements ISFeature {
             rotateY *
             parseFloat(amount) *
             parseFloat(this.props.amountY) *
+            parseFloat(this.props.amountRotate) *
             parseFloat(this.props.amountRotateY);
         const finalRotateX =
             rotateX *
             parseFloat(amount) *
             parseFloat(this.props.amountX) *
+            parseFloat(this.props.amountRotate) *
             parseFloat(this.props.amountRotateX);
         const finalOffsetX =
             offsetX *
             parseFloat(amount) *
             parseFloat(this.props.amountX) *
+            parseFloat(this.props.amountTranslate) *
             parseFloat(this.props.amountTranslateX);
         const finalOffsetY =
             offsetY *
             parseFloat(amount) *
             parseFloat(this.props.amountY) *
+            parseFloat(this.props.amountTranslate) *
             parseFloat(this.props.amountTranslateY);
 
         const tx = __rematrix.translateX(finalOffsetX),

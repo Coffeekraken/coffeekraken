@@ -4,56 +4,55 @@
 @sugar.import ('./generic/**/*.css');
 
 html {
-  overflow-x: hidden;
-  content: '';
+    overflow-x: hidden;
+    /* content: ''; */
 }
 
 body {
-  width: 100vw;
-  display: block;
+    width: 100vw;
 
-  @sugar.theme.when (dark) {
-    background-color: sugar.color(main, --darken 30);
+    @sugar.theme.when (dark) {
+        background-color: sugar.color(main, --darken 30);
 
-    background-image: radial-gradient(
-      ellipse at top left,
-      sugar.color(main, --darken 25),
-      sugar.color(main, --darken 35)
-    );
-    background-attachment: fixed;
-  }
+        background-image: radial-gradient(
+            ellipse at top left,
+            sugar.color(main, --darken 25),
+            sugar.color(main, --darken 35)
+        );
+        background-attachment: fixed;
+    }
 
-  @sugar.media mobile {
-    background-image: none !important;
-  }
+    @sugar.media mobile {
+        background-image: none !important;
+    }
 }
 
 body {
-  @sugar.media dwarf {
-    @sugar.scale.global (0.9);
-  }
+    @sugar.media dwarf {
+        @sugar.scale.global (0.9);
+    }
 }
 
-.s-template,
+.s-lazy,
 [s-scope] {
-  opacity: 0;
-  padding: sugar.padding(50) 0;
-  transition: all 0.2s ease-out 0.35s;
-  transform: translateY(25px);
+    opacity: 0;
+    padding: sugar.padding(50) 0;
+    transition: all 0.2s ease-out 0.35s;
+    transform: translateY(25px);
 
-  &[ready] {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    &[ready] {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .hljs > * {
-  display: inline-block !important;
+    display: inline-block !important;
 }
 
-[s-template]:not([status='mounted']) {
-  display: block;
-  height: 100vh;
+[s-lazy]:not([mounted]):not(img, video) {
+    display: block;
+    height: 100vh;
 }
 
 /* [class*='s-btn']:not(s-date-picker [class*='s-btn']):not(.preview
@@ -62,36 +61,36 @@ body {
 } */
 
 .s-container {
-  @sugar.media (>=wide) {
-    @sugar.container (wide);
-  }
+    @sugar.media (>=wide) {
+        @sugar.container (wide);
+    }
 }
 
 .s-page-transition.loading * {
-  user-select: none;
-  pointer-events: none !important;
+    user-select: none;
+    pointer-events: none !important;
 }
 
 .sticky {
-  @sugar.media (>=desktop) {
-    position: sticky;
-    top: 100px;
-  }
+    @sugar.media (>=desktop) {
+        position: sticky;
+        top: 100px;
+    }
 }
 
 [s-form-validate][password] {
-  .__levels * {
-    display: none;
-    margin-inline-end: sugar.margin(20);
-  }
+    .__levels * {
+        display: none;
+        margin-inline-end: sugar.margin(20);
+    }
 
-  &.password-weak .__levels .__weak {
-    display: inline-block;
-  }
-  &.password-medium .__levels .__medium {
-    display: inline-block;
-  }
-  &.password-strong .__levels .__strong {
-    display: inline-block;
-  }
+    &.password-weak .__levels .__weak {
+        display: inline-block;
+    }
+    &.password-medium .__levels .__medium {
+        display: inline-block;
+    }
+    &.password-strong .__levels .__strong {
+        display: inline-block;
+    }
 }

@@ -9,7 +9,7 @@
  * @platform        blade
  * @platform        twig
  * @status          stable
- * @menu            Specs / Views           /specs/sugar.views.bare.cell
+ * @menu            Specs / Bare           /specs/sugar.views.bare.cell
  *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -17,55 +17,6 @@
 -->
 
 {% set specs = readSpec('sugar.views.bare.cell') %}
-
-# Cell
-
-Simple cell that can be used inside a layout, etc...
-
-## Features
-
-{{ markdownSpecsList(props(specs.props)) }}
-
-## Usage
-
-#### Blade
-
-```php
-@include('sugar.bare.cell.cell', [
-    'html' => '
-        <h2>Hello world</h2>
-    ',
-    'margin' => [
-        'default' => [
-            'bottom' => '50'
-        ],
-        'mobile' => [
-            'bottom' => '20'
-        ]
-    ]
-])
-```
-
-#### Twig
-
-```twig
-{{ '{%' }} include 'sugar.bare.cell.cell' with {
-    html: '<h2>Hello world</h2>',
-    margin: {
-        default: {
-            bottom: '50'
-        },
-        mobile: {
-            bottom: '20'
-        }
-    }
-} {{ '%}' }}
-```
-
-## Specifications
-
-```js
-export default {{ specs|json_encode|raw }}
-```
+{{ specsToMarkdown(specs, {})|raw }}
 
 {% endblock %}

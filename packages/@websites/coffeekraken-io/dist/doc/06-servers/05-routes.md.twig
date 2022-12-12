@@ -1,0 +1,48 @@
+{% extends 'sugar/readme/layouts/doc/doc.twig' %}
+{% block body %}
+
+<!--
+/**
+ * @name            Routes
+ * @namespace       doc.servers
+ * @type            Markdown
+ * @platform        md
+ * @status          stable
+ * @menu            Documentation / Servers           /doc/servers/routes
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+-->
+
+# Servers routes
+
+Routes are patterns (or simple path string) that are telling express how to handle a particular request.
+
+You can check the [express routing documentation](https://expressjs.com/en/guide/routing.html) for more information about valid routes patterns, etc...
+
+## Handlers
+
+Each registered routes have to be linked to a particular [handler](/doc/servers/handlers). I let you check the documentation to register and create new handlers.
+
+## Registering a new route
+
+To register your own route(e), the easiest way is to register it through a module.
+
+> To check how to register a module, check the [modules documentation page](/doc/servers/modules).
+
+```js
+export default function myModule(express, settings, config) {
+    // registering a new route to use the "styleguide" handler
+    config.routes['/my/route'] = {
+        handler: 'styleguide',
+    };
+    // you can as well register route with some "glob" patterns like so:
+    config.routes['/something/*'] = {
+        handler: 'view',
+    };
+    // etc...
+}
+```
+
+{% endblock %}

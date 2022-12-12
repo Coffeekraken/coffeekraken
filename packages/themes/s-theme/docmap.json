@@ -84,7 +84,7 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-template-feature",
+            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",

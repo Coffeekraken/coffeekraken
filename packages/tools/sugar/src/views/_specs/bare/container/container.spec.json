@@ -23,7 +23,7 @@
             "title": "Twig",
             "description": "Here's a twig sample of how to use the card view",
             "code": [
-                "{{ include 'sugar.bare.container.container' with {",
+                "{% include 'sugar.bare.container.container' with {",
                 "   type: {",
                 "       default: '',",
                 "       wide: 'full'",
@@ -36,7 +36,7 @@
                 "   mobile: {",
                 "       bottom: '20'",
                 "   }",
-                "} }}"
+                "} %}"
             ]
         }
     }

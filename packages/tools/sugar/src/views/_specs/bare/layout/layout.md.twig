@@ -9,7 +9,7 @@
  * @platform        blade
  * @platform        twig
  * @status          stable
- * @menu            Specs / Views           /specs/sugar.views.bare.layout
+ * @menu            Specs / Bare           /specs/sugar.views.bare.layout
  *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -17,80 +17,6 @@
 -->
 
 {% set specs = readSpec('sugar.views.bare.layout') %}
-
-# Layout
-
-This view allows you to generate quickly and efficiently fully responsive layout (section).
-
-## Features
-
-{% set details = {
-    layout: {
-        title: 'Layout',
-        description: 'The layout you want like `1 2 _ 3 3` with responsive capabilities'
-    }
-} %}
-
--   Generate fully responsive layouts
--   Easy and nice layout string notation like `1 1 2 _ 1 1 3`
--   Full support for medias specified in your `frontspec.json` file
-{{ markdownSpecsList(props(specs.props), details) }}
-
-## Usage
-
-#### Blade
-
-```php
-@include('sugar.bare.layout.layout', [
-    'id' => 'my-cool-layout',
-    'layout' => [
-        'desktop' => '1 1 2 _ 1 1 3'
-        'mobile' => '1 _ 2 _ 3'
-    ],
-    'html' => '
-        <div>Cell #1</div>
-        <div>Cell #2</div>
-        <div>Cell #3</div>
-    ',
-    'margin' => [
-        'default' => [
-            'bottom' => '50'
-        ],
-        'mobile' => [
-            'bottom' => '20'
-        ]
-    ]
-])
-```
-
-#### Twig
-
-```twig
-{{ '{%' }} include 'sugar.bare.layout.layout' with {
-    layout: {
-        desktop: '1 1 2 _ 1 1 3'
-        mobile: '1 _ 2 _ 3'
-    },
-    html: '
-        <div>Cell #1</div>
-        <div>Cell #2</div>
-        <div>Cell #3</div>
-    ',
-    margin: {
-        default: {
-            bottom: '50'
-        },
-        mobile: {
-            bottom: '20'
-        }
-    }
-} {{ '%}' }}
-```
-
-## Specifications
-
-```js
-export default {{ specs|json_encode|raw }}
-```
+{{ specsToMarkdown(specs, {})|raw }}
 
 {% endblock %}

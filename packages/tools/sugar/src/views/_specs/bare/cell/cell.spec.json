@@ -11,5 +11,16 @@
         },
         "margin": "@sugar.views.props.margin",
         "padding": "@sugar.views.props.padding"
+    },
+    "examples": {
+        "twig": {
+            "title": "Twig",
+            "description": "Here's a twig sample of how to use the cell view",
+            "code": [
+                "{% include 'sugar.bare.cell.cell' with {",
+                "   html: '<h1>Hello world</h1>',",
+                "} %}"
+            ]
+        }
     }
 }

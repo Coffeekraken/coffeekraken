@@ -184,6 +184,7 @@ export default (api) => {
         p: {
             label: 'Paragraph',
             group: 'styles',
+            default: true,
             style: {
                 display: 'block',
                 fontFamily: 'default',
@@ -236,7 +237,7 @@ export default (api) => {
          */
         hr: {
             label: '------',
-            group: 'text',
+            group: 'block',
             style: {
                 display: 'block',
                 get color() {
@@ -311,6 +312,36 @@ export default (api) => {
             },
         },
         /**
+         * @name          blockquote
+         * @namespace     config.themeTypo
+         * @type          Object
+         * @default      {}
+         *
+         * Specify the css object for the blockquote typo element
+         *
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        blockquote: {
+            label: 'Blockquote',
+            group: 'block',
+            style: {
+                display: 'block',
+                fontFamily: 'quote',
+            },
+            editorStyle: {
+                get paddingInlineStart() {
+                    return api.theme.ui.default.paddingInline;
+                },
+                get borderLeft() {
+                    return `1px solid #000`;
+                },
+            },
+            rhythmVertical: {
+                marginBottom: 50,
+            },
+        },
+        /**
          * @name          a
          * @namespace     config.themeTypo
          * @type          Object
@@ -342,9 +373,8 @@ export default (api) => {
          */
         quote: {
             label: 'Quote',
-            group: 'block',
+            group: 'text',
             style: {
-                display: 'block',
                 fontFamily: 'quote',
             },
             rhythmVertical: {

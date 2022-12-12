@@ -1,7 +1,7 @@
 {
-  "name": "@coffeekraken/coffeekraken-io",
-  "short_name": "@coffeekraken/coffeekraken-io",
-  "description": "Official coffeekraken.io website",
+  "name": "@website/coffeekraken-io",
+  "short_name": "@website/coffeekraken-io",
+  "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
   "dir": "auto",
   "lang": "en-US",
   "display": "standalone",

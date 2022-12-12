@@ -1,0 +1,29 @@
+{% extends 'sugar/readme/layouts/doc/doc.twig' %}
+{% block body %}
+
+<!--
+/**
+ * @name            Typo
+ * @namespace       specs.views.bare.typo
+ * @type            Markdown
+ * @platform        blade
+ * @platform        twig
+ * @status          stable
+ * @menu            Specs / Bare           /specs/sugar.views.bare.typo
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+-->
+
+{% set specs = readSpec('sugar.views.bare.typo') %}
+{{ specsToMarkdown(specs, {
+    features: {
+        type: {
+            title: 'Type',
+            description: 'Specify the type of typo you want. Can be one of these: **' ~ props(theme.typo)|join(', ') ~ '**'
+        }
+    }
+})|raw }}
+
+{% endblock %}

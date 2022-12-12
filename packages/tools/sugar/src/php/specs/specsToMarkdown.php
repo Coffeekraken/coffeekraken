@@ -13,7 +13,7 @@ namespace Sugar\specs;
  * You can abviously override the defaults with your own details object that MUST contains an "title" and "description" property for each spec
  *
  * @param       {String[]}          $specs                  The list of specs you want to display
- * @param       {Object}            [$details=[]]           An associative array or an object that specify each specs details like `{margin:{title:'Margin',description':'Manage margins'}}`
+ * @param       {Object}            [$override=[]]           An associative array or an object that specify each specs details like `{margin:{title:'Margin',description':'Manage margins'}}`
  * @return      {String}                                    The markdown list string
  *
  * @example       php
@@ -27,12 +27,14 @@ namespace Sugar\specs;
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function specsToMarkdown($specs, $details = [])
+function specsToMarkdown($specs, $override = [])
 {
+    // make sure we have objects
     $specs = \Sugar\convert\toObject($specs);
+    $override = \Sugar\convert\toObject($override);
 
-    // // make sure we have an associative array for the details
-    $details = \Sugar\convert\toObject($details);
+    // override the specs with the override object
+    $specs = \Sugar\object\deepMerge($specs, $override);
 
     $lines = [];
 
@@ -48,13 +50,10 @@ function specsToMarkdown($specs, $details = [])
         array_push($lines, '');
     }
 
-    // features
+    // properties
     if (isset($specs->props)) {
-        array_push($lines, '## Features');
-        $list = \Sugar\specs\markdownSpecsList(
-            array_keys((array) $specs->props),
-            isset($details->features) ? $details->features : []
-        );
+        array_push($lines, '## Properties');
+        $list = \Sugar\specs\markdownSpecsList($specs);
         array_push($lines, $list);
         array_push($lines, '');
     }
@@ -94,7 +93,7 @@ function specsToMarkdown($specs, $details = [])
     }
 
     // specification
-    array_push($lines, '## Specifications');
+    array_push($lines, '## JSON Specifications');
 
     $code = implode(PHP_EOL, [
         '```js',

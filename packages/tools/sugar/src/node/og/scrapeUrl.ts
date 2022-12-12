@@ -1,8 +1,8 @@
-import __deepMerge from '../../shared/object/deepMerge';
-import __openGraphScraper from 'open-graph-scraper';
-import { __packageCacheDir } from '@coffeekraken/sugar/path';
 import { __readJsonSync, __writeJsonSync } from '@coffeekraken/sugar/fs';
+import { __packageCacheDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
+import __openGraphScraper from 'open-graph-scraper';
+import __deepMerge from '../../shared/object/deepMerge';
 
 /**
  * @name            scrapeUrl
@@ -21,6 +21,7 @@ import __fs from 'fs';
  * @setting        {String}         [id=undefined]          Specify an id used for the cache
  * @setting        {Any}            [scraper={}]            Specify settings for the sraper. See https://www.npmjs.com/package/open-graph-scraper for more infos
  * @setting         {ISCacheSettings}       [cache={}]      Specify some settings for the caching behavior. Default ttl set to 1 week
+ * @setting         {Number}        [timeout=2000]          Specigy a timeout after which to consider the url as unreachable
  *
  * @param       {String}        url             The url to scrape
  * @param       {IScrapeUrlSettings}        [settings={}]       Some settings to tweak scraping behavior
@@ -37,9 +38,9 @@ import __fs from 'fs';
  */
 
 export interface IScrapeUrlSettings {
-    id: string;
     scraper: any;
     cache: Partial<ISCacheSettings>;
+    timeout: number;
 }
 
 export interface IScrapeUrlResult {
@@ -64,18 +65,20 @@ export default function srapeUrl(
     return new Promise(async (resolve, reject) => {
         const finalSettings = <IScrapeUrlSettings>__deepMerge(
             {
-                id: undefined,
                 scraper: {},
                 cache: {
                     ttl: '1w',
                 },
+                timeout: 2000,
             },
             settings,
         );
 
         const cacheFilePath = `${__packageCacheDir()}/sugar/scrapeUrl.json`;
 
-        let cacheJson = {};
+        let cacheJson = {},
+            timeout,
+            rejected = false;
 
         // leverage cache
         if (finalSettings.cache && __fs.existsSync(cacheFilePath)) {
@@ -85,11 +88,26 @@ export default function srapeUrl(
             }
         }
 
+        // init timeout
+        if (finalSettings.timeout) {
+            timeout = setTimeout(() => {
+                rejected = true;
+                reject({
+                    error: `The url "${url}" is unreachable...`,
+                });
+            }, finalSettings.timeout);
+        }
+
         // process to actual scraping
-        const data = await __openGraphScraper({
+        let data = await __openGraphScraper({
             ...finalSettings.scraper,
             url,
         });
+
+        clearTimeout(timeout);
+
+        // if rejected
+        if (rejected) return;
 
         // check if got some results
         if (data.error) {

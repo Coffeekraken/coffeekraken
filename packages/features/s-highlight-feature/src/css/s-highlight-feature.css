@@ -1,9 +1,9 @@
-[s-highlight='light'] {
+[s-highlight][type='light'] {
     position: relative;
 }
 
-[s-highlight='light']::before,
-[s-highlight='light']::after {
+[s-highlight][type='light']::before,
+[s-highlight][type='light']::after {
     border-radius: inherit;
     content: '';
     display: block;
@@ -18,7 +18,7 @@
     pointer-events: none;
 }
 
-[s-highlight='light']::before {
+[s-highlight][type='light']::before {
     background: radial-gradient(
         var(--s-highlight-size, 1000px) circle at var(--s-highlight-mouse-x)
             var(--s-highlight-mouse-y),
@@ -28,7 +28,7 @@
     z-index: 3;
 }
 
-[s-highlight='light']::after {
+[s-highlight][type='light']::after {
     background: radial-gradient(
         var(--s-highlight-size, 1000px) circle at var(--s-highlight-mouse-x)
             var(--s-highlight-mouse-y),
@@ -38,7 +38,7 @@
     z-index: 1;
 }
 
-[s-highlight='light'].highlight {
+[s-highlight][type='light'].highlight {
     &:before,
     &:after {
         opacity: var(--s-highlight-opacity, 0.6);

@@ -13,5 +13,17 @@
             "description": "Specify the html to use as the typo content",
             "required": true
         }
+    },
+    "examples": {
+        "twig": {
+            "title": "Twig",
+            "description": "Here's a twig sample of how to use the typo view",
+            "code": [
+                "{% include 'sugar.bare.typo.typo' with {",
+                "   type: 'h1',",
+                "   html: 'Hello world'",
+                "} %}"
+            ]
+        }
     }
 }

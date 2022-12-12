@@ -1543,6 +1543,7 @@ __metadata:
   dependencies:
     "@coffeekraken/s-class": ^2.0.0-alpha.20
     "@coffeekraken/s-duration": ^2.0.0-alpha.20
+    "@coffeekraken/s-env": ^2.0.0-alpha.20
     "@coffeekraken/s-interface": ^2.0.0-alpha.20
     "@coffeekraken/s-log": ^2.0.0-alpha.20
     "@coffeekraken/s-promise": ^2.0.0-alpha.20
@@ -1814,7 +1815,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-deps-feature@^2.0.0-alpha.20, @coffeekraken/s-deps-feature@workspace:packages/features/s-deps-feature":
+"@coffeekraken/s-deps-feature@workspace:packages/features/s-deps-feature":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-deps-feature@workspace:packages/features/s-deps-feature"
   dependencies:
@@ -2198,6 +2199,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@coffeekraken/s-lazy-feature@^2.0.0-alpha.20, @coffeekraken/s-lazy-feature@workspace:packages/features/s-lazy-feature":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/s-lazy-feature@workspace:packages/features/s-lazy-feature"
+  dependencies:
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-env": ^2.0.0-alpha.20
+    "@coffeekraken/s-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
+  languageName: unknown
+  linkType: soft
+
 "@coffeekraken/s-lit-component@^2.0.0-alpha.20, @coffeekraken/s-lit-component@workspace:packages/components/s-lit-component":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-lit-component@workspace:packages/components/s-lit-component"
@@ -2230,13 +2243,16 @@ __metadata:
     "@coffeekraken/s-env": ^2.0.0-alpha.20
     "@coffeekraken/s-event-emitter": ^2.0.0-alpha.20
     "@coffeekraken/s-file": ^2.0.0-alpha.20
+    "@coffeekraken/s-frontspec": ^2.0.0-alpha.20
     "@coffeekraken/s-glob": ^2.0.0-alpha.20
     "@coffeekraken/s-handlebars": ^2.0.0-alpha.20
     "@coffeekraken/s-interface": ^2.0.0-alpha.20
     "@coffeekraken/s-log": ^2.0.0-alpha.20
     "@coffeekraken/s-postcss-sugar-plugin": ^2.0.0-alpha.20
     "@coffeekraken/s-promise": ^2.0.0-alpha.20
+    "@coffeekraken/s-specs": ^2.0.0-alpha.20
     "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/s-theme": ^2.0.0-alpha.20
     "@coffeekraken/s-view-renderer": ^2.0.0-alpha.20
     "@coffeekraken/sugar": ^2.0.0-alpha.20
     marked: ^4.0.18
@@ -2698,18 +2714,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-template-feature@^2.0.0-alpha.20, @coffeekraken/s-template-feature@workspace:packages/features/s-template-feature":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/s-template-feature@workspace:packages/features/s-template-feature"
-  dependencies:
-    "@coffeekraken/s-class": ^2.0.0-alpha.20
-    "@coffeekraken/s-env": ^2.0.0-alpha.20
-    "@coffeekraken/s-feature": ^2.0.0-alpha.20
-    "@coffeekraken/s-interface": ^2.0.0-alpha.20
-    "@coffeekraken/sugar": ^2.0.0-alpha.20
-  languageName: unknown
-  linkType: soft
-
 "@coffeekraken/s-theme-switcher-component@^2.0.0-alpha.20, @coffeekraken/s-theme-switcher-component@workspace:packages/components/s-theme-switcher-component":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-theme-switcher-component@workspace:packages/components/s-theme-switcher-component"
@@ -2730,6 +2734,7 @@ __metadata:
     "@coffeekraken/s-color": ^2.0.0-alpha.20
     "@coffeekraken/s-env": ^2.0.0-alpha.20
     "@coffeekraken/s-event-emitter": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
     "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
     "@coffeekraken/s-sugar-json": ^2.0.0-alpha.20
     "@coffeekraken/sugar": ^2.0.0-alpha.20
@@ -2922,6 +2927,7 @@ __metadata:
   resolution: "@coffeekraken/sugar@workspace:packages/tools/sugar"
   dependencies:
     "@coffeekraken/s-duration": ^2.0.0-alpha.20
+    "@coffeekraken/s-env": ^2.0.0-alpha.20
     "@coffeekraken/s-event-emitter": ^2.0.0-alpha.20
     "@coffeekraken/s-file": ^2.0.0-alpha.20
     "@coffeekraken/s-interface": ^2.0.0-alpha.20
@@ -3005,6 +3011,7 @@ __metadata:
     temp-dir: ^2.0.0
     terminal-kit: ^1.49.4
     to-regex: ^3.0.2
+    tunnel: ^0.0.6
     unescape: ^1.0.1
     unzipper: ^0.10.11
     url-parse: ^1.5.10
@@ -5940,7 +5947,6 @@ __metadata:
     "@coffeekraken/s-config": ^2.0.0-alpha.20
     "@coffeekraken/s-dashboard": ^2.0.0-alpha.20
     "@coffeekraken/s-datetime-picker-component": ^2.0.0-alpha.20
-    "@coffeekraken/s-deps-feature": ^2.0.0-alpha.20
     "@coffeekraken/s-descriptor": ^2.0.0-alpha.20
     "@coffeekraken/s-docblock": ^2.0.0-alpha.20
     "@coffeekraken/s-docmap": ^2.0.0-alpha.20
@@ -5963,6 +5969,7 @@ __metadata:
     "@coffeekraken/s-inline-feature": ^2.0.0-alpha.20
     "@coffeekraken/s-interface": ^2.0.0-alpha.20
     "@coffeekraken/s-kitchen": ^2.0.0-alpha.20
+    "@coffeekraken/s-lazy-feature": ^2.0.0-alpha.20
     "@coffeekraken/s-lit-component": ^2.0.0-alpha.20
     "@coffeekraken/s-log": ^2.0.0-alpha.20
     "@coffeekraken/s-markdown-builder": ^2.0.0-alpha.20
@@ -5986,7 +5993,6 @@ __metadata:
     "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
     "@coffeekraken/s-sugar-feature": ^2.0.0-alpha.20
     "@coffeekraken/s-sugar-json": ^2.0.0-alpha.20
-    "@coffeekraken/s-template-feature": ^2.0.0-alpha.20
     "@coffeekraken/s-theme": ^2.0.0-alpha.20
     "@coffeekraken/s-theme-switcher-component": ^2.0.0-alpha.20
     "@coffeekraken/s-timer": ^2.0.0-alpha.20
@@ -19325,6 +19331,13 @@ __metadata:
   dependencies:
     safe-buffer: ^5.0.1
   checksum: 05f6510358f8afc62a057b8b692f05d70c1782b70db86d6a1e0d5e28a32389e52fa6e7707b6c5ecccacc031462e4bc35af85ecfe4bbc341767917b7cf6965711
+  languageName: node
+  linkType: hard
+
+"tunnel@npm:^0.0.6":
+  version: 0.0.6
+  resolution: "tunnel@npm:0.0.6"
+  checksum: c362948df9ad34b649b5585e54ce2838fa583aa3037091aaed66793c65b423a264e5229f0d7e9a95513a795ac2bd4cb72cda7e89a74313f182c1e9ae0b0994fa
   languageName: node
   linkType: hard
 

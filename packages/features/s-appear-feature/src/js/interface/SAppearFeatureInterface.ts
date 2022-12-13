@@ -26,7 +26,7 @@ export default class SAppearFeatureInterface extends __SInterface {
                 description:
                     'Specify the animation you want to use to display your element',
                 type: 'String',
-                default: 'fade',
+                default: 'bottom',
                 physical: true,
             },
             out: {
@@ -42,7 +42,7 @@ export default class SAppearFeatureInterface extends __SInterface {
                     type: 'Array<Number>',
                     splitChars: [','],
                 },
-                default: [0],
+                default: [500],
             },
             duration: {
                 description:

@@ -5,6 +5,9 @@ import __SLazyFeatureInterface from './interface/SLazyFeatureInterface';
 
 import __define from './define';
 
+// @ts-ignore
+import __css from '../../../../src/css/s-lazy-feature.css'; // relative to /dist/pkg/esm/js
+
 export interface ISLazyFeatureProps {}
 
 /**
@@ -41,6 +44,7 @@ export default class SLazyFeature extends __SFeature implements ISFeature {
                 {
                     name: 's-lazy',
                     interface: __SLazyFeatureInterface,
+                    style: __css,
                 },
                 settings ?? {},
             ),
@@ -62,9 +66,6 @@ export default class SLazyFeature extends __SFeature implements ISFeature {
 
         this.componentUtils.fastdom.mutate(() => {
             this.node.parentNode.insertBefore($content, this.node);
-            $container?.classList.add('s-lazy');
-            $container?.classList.add('ready');
-            $container?.setAttribute('ready', 'true');
             this.node.remove();
         });
     }

@@ -119,6 +119,7 @@ export default function (api) {
                             finalObj[finalKey] = {
                                 label: value.label ?? finalKey,
                                 group: value.group,
+                                type: value.type,
                                 style: {
                                     ...__STheme.resolveCssObjectPropertiesValues(
                                         finalStyle,

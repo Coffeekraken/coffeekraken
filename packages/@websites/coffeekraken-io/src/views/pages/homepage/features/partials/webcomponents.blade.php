@@ -1,4 +1,4 @@
-    <section id="features-webcomponents" class="section">
+    <section id="features-webcomponents" class="section" s-appear>
 
         <div class="s-container">
 

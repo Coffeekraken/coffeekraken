@@ -1,5 +1,6 @@
 /* @sugar.partial (sidemenu) { */
 .sidemenu {
+<<<<<<< Updated upstream
     position: sticky;
     top: 80px;
     max-height: calc(100vh - 80px);
@@ -14,6 +15,22 @@
     margin: 0 !important;
     overflow: auto;
     @sugar.scrollbar();
+=======
+  position: sticky;
+  top: 80px;
+  max-height: calc(100vh - 80px);
+  background-image: linear-gradient(
+    90deg,
+    sugar.color(base, surface, --alpha 0),
+    sugar.color(base, --alpha 0.08)
+  );
+  display: flex;
+  flex-direction: column;
+  padding: sugar.padding(50) 0 !important;
+  margin: 0 !important;
+  overflow: auto;
+  @sugar.scrollbar();
+>>>>>>> Stashed changes
 
     .sidemenu-main {
         flex-grow: 1;

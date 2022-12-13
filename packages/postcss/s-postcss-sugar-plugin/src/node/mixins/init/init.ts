@@ -59,6 +59,7 @@ export default function ({
         `@sugar.theme(${finalParams.variant}, ${finalParams.theme});`,
         '@sugar.font.faces;',
         '@sugar.lnf.selection;',
+        // '@sugar.autoload;', // Check if it's a good idea or not...
         // '@sugar.lnf.base;', called in the "@sugar.theme" mixin
     ];
 

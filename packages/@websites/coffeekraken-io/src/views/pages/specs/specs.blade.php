@@ -2,7 +2,7 @@
 
     <section class="s-container markdown">
 
-        <div class="s-layout:1222 s-gap:column:50 @mobile s-layout:1_2 s-mi:30 s-gap:0">
+        <div class="s-layout:12222 s-gap:column:50 @mobile s-layout:1_2 s-mi:30 s-gap:0">
 
             <nav s-scope class="sidemenu @mobile s-display:none" >
 

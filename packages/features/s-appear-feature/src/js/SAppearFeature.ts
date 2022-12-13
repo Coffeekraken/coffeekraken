@@ -13,7 +13,7 @@ import __SAppearFeatureInterface from './interface/SAppearFeatureInterface';
 import __define from './define';
 
 // @ts-ignore
-import __css from '../../../../src/css/s-appear-feature.css'; // relative to /dist/pkg/esm/js
+import __css from '../../../../src/css/autoload.css'; // relative to /dist/pkg/esm/js
 
 /**
  * @name            SAppearFeature

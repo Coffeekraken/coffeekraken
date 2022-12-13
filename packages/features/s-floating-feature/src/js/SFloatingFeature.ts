@@ -35,6 +35,7 @@ import __css from '../../../../src/css/s-floating-feature.css'; // relative to /
  * </div>
  * <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
  *
+ * @see         https://www.npmjs.com/package/@floating-ui/dom
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */

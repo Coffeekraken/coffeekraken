@@ -812,14 +812,14 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                 // and that starts by https?
                 if (atRule.params.match(/^https?:\/\//)) return;
 
-                if (!atRule.source?.input) {
-                    throw new Error(
-                        `Make sure to import your stylesheets using the "<cyan>@import url(...);</cyan>" syntax and not the "<red>@import '...';</red>" one...`,
-                    );
-                }
+                // if (!atRule.source?.input) {
+                //     throw new Error(
+                //         `Make sure to import your stylesheets using the "<cyan>@import url(...);</cyan>" syntax and not the "<red>@import '...';</red>" one...`,
+                //     );
+                // }
 
                 const dirName =
-                    typeof atRule.source.input.file === 'string'
+                    typeof atRule.source?.input?.file === 'string'
                         ? __path.dirname(atRule.source.input.file)
                         : __dirname();
 

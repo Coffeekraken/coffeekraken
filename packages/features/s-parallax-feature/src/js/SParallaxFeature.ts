@@ -80,35 +80,42 @@ export default class SParallaxFeature extends __SFeature implements ISFeature {
 
         const matrix = __rematrix.fromString(this._originalTransform);
 
-        const finalRotateY =
-            rotateY *
-            parseFloat(amount) *
-            parseFloat(this.props.amountY) *
-            parseFloat(this.props.amountRotate) *
-            parseFloat(this.props.amountRotateY);
         const finalRotateX =
             rotateX *
             parseFloat(amount) *
             parseFloat(this.props.amountX) *
-            parseFloat(this.props.amountRotate) *
-            parseFloat(this.props.amountRotateX);
+            parseFloat(this.props.amountR) *
+            parseFloat(this.props.amountRx);
+        const finalRotateY =
+            rotateY *
+            parseFloat(amount) *
+            parseFloat(this.props.amountY) *
+            parseFloat(this.props.amountR) *
+            parseFloat(this.props.amountRy);
+        const finalRotateZ =
+            rotateY *
+            parseFloat(amount) *
+            parseFloat(this.props.amountZ) *
+            parseFloat(this.props.amountR) *
+            parseFloat(this.props.amountRz);
         const finalOffsetX =
             offsetX *
             parseFloat(amount) *
             parseFloat(this.props.amountX) *
-            parseFloat(this.props.amountTranslate) *
-            parseFloat(this.props.amountTranslateX);
+            parseFloat(this.props.amountT) *
+            parseFloat(this.props.amountTx);
         const finalOffsetY =
             offsetY *
             parseFloat(amount) *
             parseFloat(this.props.amountY) *
-            parseFloat(this.props.amountTranslate) *
-            parseFloat(this.props.amountTranslateY);
+            parseFloat(this.props.amountT) *
+            parseFloat(this.props.amountTy);
 
         const tx = __rematrix.translateX(finalOffsetX),
             ty = __rematrix.translateY(finalOffsetY),
             rx = __rematrix.rotateX(finalRotateX),
-            ry = __rematrix.rotateY(finalRotateY);
+            ry = __rematrix.rotateY(finalRotateY),
+            rz = __rematrix.rotateZ(finalRotateZ);
 
         let newMatrix = [matrix, tx, ty, rx, ry].reduce(__rematrix.multiply);
 

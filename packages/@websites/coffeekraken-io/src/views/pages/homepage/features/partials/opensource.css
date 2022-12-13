@@ -17,6 +17,9 @@
 }
 
 #features-opensource {
+    position: relative;
+    z-index: 20;
+
     .__illustration svg {
         height: 450px;
 

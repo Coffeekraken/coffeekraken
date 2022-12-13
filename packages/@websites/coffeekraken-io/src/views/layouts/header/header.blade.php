@@ -1,4 +1,4 @@
-<header id="header">
+<header id="header" s-highlight>
 
     <div class="s-container">
 

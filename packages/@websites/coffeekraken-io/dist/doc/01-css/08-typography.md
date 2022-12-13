@@ -74,6 +74,8 @@ Some classes will be generated from your theme configuration like these:
     
 -   **s-typo:code:not(pre &gt; code)**
     
+-   **s-typo:blockquote**
+    
 -   **s-typo:a**
     
 -   **s-typo:quote**

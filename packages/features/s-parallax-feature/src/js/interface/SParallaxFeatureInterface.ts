@@ -39,41 +39,47 @@ export default class SParallaxFeatureInterface extends __SInterface {
                 type: 'Number',
                 default: 1,
             },
-            amountTranslate: {
+            amountT: {
                 description:
                     'Specify the amount of parallax you want for the translate x and y axis. This will be applied on top of the global amount',
                 type: 'Number',
                 default: 1,
             },
-            amountTranslateX: {
+            amountTx: {
                 description:
                     'Specify the amount of parallax you want for the translate x axis. This will be applied on top of the global amount',
                 type: 'Number',
                 default: 1,
             },
-            amountTranslateY: {
+            amountTy: {
                 description:
                     'Specify the amount of parallax you want for the translate y axis. This will be applied on top of the global amount',
                 type: 'Number',
                 default: 1,
             },
-            amountRotate: {
+            amountR: {
                 description:
                     'Specify the amount of parallax you want for the rotate x and y axis. This will be applied on top of the global amount',
                 type: 'Number',
                 default: 1,
             },
-            amountRotateX: {
+            amountRx: {
                 description:
                     'Specify the amount of parallax you want for the rotate x axis. This will be applied on top of the global amount',
                 type: 'Number',
-                default: 0,
+                default: 1,
             },
-            amountRotateY: {
+            amountRy: {
                 description:
                     'Specify the amount of parallax you want for the rotate y axis. This will be applied on top of the global amount',
                 type: 'Number',
-                default: 0,
+                default: 1,
+            },
+            amountRz: {
+                description:
+                    'Specify the amount of parallax you want for the rotate z axis. This will be applied on top of the global amount',
+                type: 'Number',
+                default: 1,
             },
         };
     }

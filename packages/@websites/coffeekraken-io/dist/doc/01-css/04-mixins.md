@@ -30,6 +30,8 @@ The `postcssSugarPlugin` gives you access to a tone of useful mixins that can he
 
 -   [`@sugar.align.abs(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.align.abs)
     
+-   [`@sugar.autoload(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.autoload.autoload)
+    
 -   [`@sugar.border.classes(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.border.classes)
     
 -   [`@sugar.border.radius(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.border.radius)

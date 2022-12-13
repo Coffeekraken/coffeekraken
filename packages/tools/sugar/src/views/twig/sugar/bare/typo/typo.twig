@@ -2,7 +2,7 @@
     <span class="s-tc--{{ id }}">
         {{ html|raw }}
     </span>
-{% if id == 'lead' or id == 'p' %}
+{% elseif id == 'lead' or id == 'p' %}
     <p class="s-typo--{{ id }}">
         {{ html|raw }}
     </p>

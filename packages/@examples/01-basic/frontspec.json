@@ -207,7 +207,7 @@
     "typo": {
         "h1": {
             "label": "H1",
-            "group": "styles",
+            "group": "style",
             "style": {
                 "display": "block",
                 "fontFamily": "\"Titillium Web\"",
@@ -219,7 +219,7 @@
         },
         "h2": {
             "label": "H2",
-            "group": "styles",
+            "group": "style",
             "style": {
                 "display": "block",
                 "fontFamily": "\"Titillium Web\"",
@@ -231,7 +231,7 @@
         },
         "h3": {
             "label": "H3",
-            "group": "styles",
+            "group": "style",
             "style": {
                 "display": "block",
                 "fontFamily": "\"Titillium Web\"",
@@ -243,7 +243,7 @@
         },
         "h4": {
             "label": "H4",
-            "group": "styles",
+            "group": "style",
             "style": {
                 "display": "block",
                 "fontFamily": "\"Titillium Web\"",
@@ -255,7 +255,7 @@
         },
         "h5": {
             "label": "H5",
-            "group": "styles",
+            "group": "style",
             "style": {
                 "display": "block",
                 "fontFamily": "\"Titillium Web\"",
@@ -267,7 +267,7 @@
         },
         "h6": {
             "label": "H6",
-            "group": "styles",
+            "group": "style",
             "style": {
                 "display": "block",
                 "fontFamily": "\"Titillium Web\"",
@@ -278,7 +278,7 @@
         },
         "p": {
             "label": "Paragraph",
-            "group": "styles",
+            "group": "style",
             "style": {
                 "display": "block",
                 "fontFamily": "\"Titillium Web\"",
@@ -291,7 +291,7 @@
         },
         "lead": {
             "label": "Lead paragraph",
-            "group": "styles",
+            "group": "style",
             "style": {
                 "display": "block",
                 "fontFamily": "\"Titillium Web\"",
@@ -461,6 +461,62 @@
             "style": {
                 "verticalAlign": "sup",
                 "fontSize": "0.6em"
+            }
+        },
+        "base": {
+            "label": "Base",
+            "group": "color",
+            "style": {
+                "color": "hsla(212,14,50,1)"
+            }
+        },
+        "main": {
+            "label": "Main",
+            "group": "color",
+            "style": {
+                "color": "hsla(212,14,50,1)"
+            }
+        },
+        "accent": {
+            "label": "Accent",
+            "group": "color",
+            "style": {
+                "color": "#FFBB00"
+            }
+        },
+        "complementary": {
+            "label": "Complementary",
+            "group": "color",
+            "style": {
+                "color": "#5100FF"
+            }
+        },
+        "success": {
+            "label": "Success",
+            "group": "color",
+            "style": {
+                "color": "#91FF00"
+            }
+        },
+        "warning": {
+            "label": "Warning",
+            "group": "color",
+            "style": {
+                "color": "#FFD500"
+            }
+        },
+        "error": {
+            "label": "Error",
+            "group": "color",
+            "style": {
+                "color": "#FF003C"
+            }
+        },
+        "info": {
+            "label": "Info",
+            "group": "color",
+            "style": {
+                "color": "#00FFFF"
             }
         }
     },

@@ -1,3 +1,29 @@
+import { __upperFirst } from '@coffeekraken/sugar/string';
+
+export function preprocess(api) {
+    if (!api.config.themeTypo) {
+        api.config.themeTypo = {};
+    }
+
+    if (api.theme.color) {
+        for (let [name, value] of Object.entries(api.theme.color)) {
+            if (name === 'current') {
+                continue;
+            }
+
+            api.config.themeTypo[name] = {
+                label: __upperFirst(name),
+                group: 'color',
+                style: {
+                    color: value,
+                },
+            };
+        }
+    }
+
+    return api.this;
+}
+
 export default (api) => {
     if (api.env.platform !== 'node') return;
 
@@ -15,7 +41,7 @@ export default (api) => {
          */
         h1: {
             label: 'H1',
-            group: 'styles',
+            group: 'style',
             style: {
                 display: 'block',
                 fontFamily: 'title',
@@ -43,7 +69,7 @@ export default (api) => {
          */
         h2: {
             label: 'H2',
-            group: 'styles',
+            group: 'style',
             style: {
                 display: 'block',
                 fontFamily: 'title',
@@ -71,7 +97,7 @@ export default (api) => {
          */
         h3: {
             label: 'H3',
-            group: 'styles',
+            group: 'style',
             style: {
                 display: 'block',
                 fontFamily: 'title',
@@ -99,7 +125,7 @@ export default (api) => {
          */
         h4: {
             label: 'H4',
-            group: 'styles',
+            group: 'style',
             style: {
                 display: 'block',
                 fontFamily: 'title',
@@ -127,7 +153,7 @@ export default (api) => {
          */
         h5: {
             label: 'H5',
-            group: 'styles',
+            group: 'style',
             style: {
                 display: 'block',
                 fontFamily: 'title',
@@ -155,7 +181,7 @@ export default (api) => {
          */
         h6: {
             label: 'H6',
-            group: 'styles',
+            group: 'style',
             style: {
                 display: 'block',
                 fontFamily: 'title',
@@ -183,7 +209,7 @@ export default (api) => {
          */
         p: {
             label: 'Paragraph',
-            group: 'styles',
+            group: 'style',
             default: true,
             style: {
                 display: 'block',
@@ -209,7 +235,7 @@ export default (api) => {
          */
         lead: {
             label: 'Lead paragraph',
-            group: 'styles',
+            group: 'style',
             style: {
                 display: 'block',
                 fontFamily: 'default',

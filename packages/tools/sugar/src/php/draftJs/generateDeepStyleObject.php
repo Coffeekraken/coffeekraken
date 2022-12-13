@@ -9,7 +9,7 @@ namespace Sugar\draftJs;
  * @platform        php
  * @status          beta
  *
- * Create deep object used to render DraftJs HTML
+ * Create deep object used to render DraftJs output (HTML, markdown, etc...)
  *
  * @param       {Array}         $block                      DraftJs JSON object
  * @param       {String}        $style                      Typo to render

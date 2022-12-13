@@ -31,6 +31,9 @@ function renderContent($deepStyleObject, callable $renderFunction)
                             $subContent['type'] != null
                                 ? $subContent['type']
                                 : null,
+                        'group' => isset($subContent['group'])
+                            ? $subContent['group']
+                            : null,
                         'html' => renderContent(
                             $subContent['content'],
                             $renderFunction

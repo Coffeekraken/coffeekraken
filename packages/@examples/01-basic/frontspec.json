@@ -466,6 +466,7 @@
         "base": {
             "label": "Base",
             "group": "color",
+            "type": "color",
             "style": {
                 "color": "hsla(212,14,50,1)"
             }
@@ -473,6 +474,7 @@
         "main": {
             "label": "Main",
             "group": "color",
+            "type": "color",
             "style": {
                 "color": "hsla(212,14,50,1)"
             }
@@ -480,6 +482,7 @@
         "accent": {
             "label": "Accent",
             "group": "color",
+            "type": "color",
             "style": {
                 "color": "#FFBB00"
             }
@@ -487,6 +490,7 @@
         "complementary": {
             "label": "Complementary",
             "group": "color",
+            "type": "color",
             "style": {
                 "color": "#5100FF"
             }
@@ -494,6 +498,7 @@
         "success": {
             "label": "Success",
             "group": "color",
+            "type": "color",
             "style": {
                 "color": "#91FF00"
             }
@@ -501,6 +506,7 @@
         "warning": {
             "label": "Warning",
             "group": "color",
+            "type": "color",
             "style": {
                 "color": "#FFD500"
             }
@@ -508,6 +514,7 @@
         "error": {
             "label": "Error",
             "group": "color",
+            "type": "color",
             "style": {
                 "color": "#FF003C"
             }
@@ -515,6 +522,7 @@
         "info": {
             "label": "Info",
             "group": "color",
+            "type": "color",
             "style": {
                 "color": "#00FFFF"
             }

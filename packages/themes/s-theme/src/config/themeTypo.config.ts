@@ -14,6 +14,7 @@ export function preprocess(api) {
             api.config.themeTypo[name] = {
                 label: __upperFirst(name),
                 group: 'color',
+                type: 'color',
                 style: {
                     color: value,
                 },

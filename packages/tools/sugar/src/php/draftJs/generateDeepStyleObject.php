@@ -13,6 +13,7 @@ namespace Sugar\draftJs;
  *
  * @param       {Array}         $block                      DraftJs JSON object
  * @param       {String}        $style                      Typo to render
+ * @param       {String}        $type                       Type of typo to render
  * @param       {Integer}       $char_position              Position in content treatment - Start to 0
  * @param       {Integer}       $keyInlineStylePosition     Index of current InlineStyle treatment
  * @param       {Array}         $breakPoint                 Contains deep elements to close
@@ -24,6 +25,7 @@ namespace Sugar\draftJs;
 function generateDeepStyleObject(
     $block,
     $style = null,
+    $type = null,
     &$char_position = 0,
     &$keyInlineStylePosition = -1,
     &$breakPoint = []
@@ -54,6 +56,7 @@ function generateDeepStyleObject(
                 $content[] = generateDeepStyleObject(
                     $block,
                     $inlineStyle['style'],
+                    $inlineStyle['type'],
                     $char_position,
                     $keyInlineStyle,
                     $breakPoint
@@ -88,7 +91,8 @@ function generateDeepStyleObject(
     }
 
     return [
-        'type' => $style,
+        'id' => $style,
+        'type' => $type,
         'content' => $content,
     ];
 }

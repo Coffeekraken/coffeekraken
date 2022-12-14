@@ -26,6 +26,11 @@ function renderContent($deepStyleObject, callable $renderFunction)
             if (is_array($subContent) && isset($subContent['content'])) {
                 $html .= call_user_func_array($renderFunction, [
                     [
+                        'id' =>
+                            isset($subContent['id']) &&
+                            $subContent['id'] != null
+                                ? $subContent['id']
+                                : null,
                         'type' =>
                             isset($subContent['type']) &&
                             $subContent['type'] != null

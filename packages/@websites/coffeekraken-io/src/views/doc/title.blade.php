@@ -5,7 +5,7 @@ if (isset($block->get)) {
 }
 @endphp
 
-<h1 class="s-typo:h1 s-mbe:30 s-tc:accent">
+<h1 class="s-typo:h1 s-mbe:30">
 
     @if (isset($block->type) && $block->type->raw == 'Function')
         {!! $titleStr !!}()

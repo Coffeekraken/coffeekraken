@@ -20,13 +20,74 @@
     position: relative;
     z-index: 20;
 
-    .__illustration svg {
-        height: 450px;
+    .__illustration {
+        height: calc(100% + sugar.padding(50) * 2);
+        position: absolute;
+        top: calc(sugar.padding(50) * -1);
+        right: calc(sugar.padding(50) * -1);
 
-        @sugar.media mobile {
-            height: auto;
-            width: 100%;
-            margin-block-end: sugar.margin(20);
+        svg {
+            transform: translate(-50%, -50%);
+        }
+
+        .__desk {
+            height: 100%;
+
+            svg {
+                transform: none;
+            }
+        }
+
+        .__heart,
+        .__heart-back {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+        }
+        .__heart-back {
+            left: 60%;
+        }
+        .__heart {
+            scale: 1.2;
+            [fill] {
+                fill: sugar.color(accent);
+            }
+        }
+
+        .__bubble-01,
+        .__bubble-02,
+        .__bubble-03 {
+            position: absolute;
+        }
+        .__bubble-01 {
+            top: 0;
+            left: 20%;
+        }
+        .__bubble-02 {
+            top: 50%;
+            left: 100%;
+        }
+        .__bubble-03 {
+            top: calc(100% + 30px);
+            left: 30%;
+        }
+
+        .__bubble-emoji-01,
+        .__bubble-emoji-02,
+        .__bubble-emoji-03 {
+            position: absolute;
+        }
+        .__bubble-emoji-01 {
+            top: 5%;
+            left: 80%;
+        }
+        .__bubble-emoji-02 {
+            top: 80%;
+            left: 75%;
+        }
+        .__bubble-emoji-03 {
+            top: 55%;
+            left: 10%;
         }
     }
 
@@ -79,4 +140,3 @@
     } */
     }
 }
-/* } */

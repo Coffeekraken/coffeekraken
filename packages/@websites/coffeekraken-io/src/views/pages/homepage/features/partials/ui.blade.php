@@ -1,7 +1,7 @@
     <section id="features-ui" class="section:diagonal" s-appear>
         <div class="s-container">
 
-            <h3 class="s-typo:h2 s-mbe:30 @mobile s-typo:h4">Full premium <span class="s-tc:accent">UI<br>Components</span>
+            <h3 class="s-typo:h2 s-mbe:30 @mobile s-typo:h4">Full premium <span class="s-gradient:text:accent">UI<br>Components</span>
                 library</h3>
             <p class="s-typo:lead s-mbe:50">
                 As part of our ecosystem, you will have access to a nice list of <span class="s-tc:complementary">fully

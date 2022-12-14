@@ -7,7 +7,7 @@
                 </div>
             </div>
             <div class="s-pb:100">
-                <h3 class="s-typo:h2 s-mbe:30">Built-in<br /><span class="s-tc:accent">development<br>stack</span></h3>
+                <h3 class="s-typo:h2 s-mbe:30">Built-in<br /><span class="s-gradient:text:accent">development<br>stack</span></h3>
                 <p class="s-typo:lead s-mbe:30">
                     Coffeekraken has a <span class="s-tc:complementary">built-in</span> <span
                         class="s-tc:accent">development stack environment</span> make to simplify and speed up your
@@ -26,7 +26,7 @@
         <div class="code-example-section" ">
             <div>
                 <h5 class="s-typo:h4 s-mbe:30">
-                    <span class="s-tc:accent">Speed up</span><br />your process
+                    <span class="s-gradient:text:accent">Speed up</span><br />your process
                 </h5>
                 <p class="s-typo:p s-mbe:30">
                     Create projects using our totally customizable <span class="s-typo:code">recipes</span> that let
@@ -55,7 +55,7 @@
         <div class="code-example-section:right" ">   
             <div>
                 <h5 class="s-typo:h4 s-mbe:30">
-                    All the <span class="s-tc:accent">sugar</span> power<br />ready to go!
+                    All the <span class="s-gradient:text:accent">sugar</span> power<br />ready to go!
                 </h5>
                 <p class="s-typo:p s-mbe:30">
                     Make use of the power of the <span class="s-typo:code">Sugar</span> toolkit to enhance your <span
@@ -91,7 +91,7 @@
         <div class="code-example-section" ">
             <div>
                 <h5 class="s-typo:h4 s-mbe:30">
-                    Development<br /><span class="s-tc:accent">server</span>
+                    Development<br /><span class="s-gradient:text:accent">server</span>
                 </h5>
                 <p class="s-typo:p s-mbe:30">
                     Start working as soon as possible with our development server that will gives you the power of the
@@ -125,7 +125,7 @@ sugar dev'
                     </div>
                     <h5 class="s-typo:h5 s-mbe:30">
                         Under<br />
-                        <span class="s-tc:complementary">the hood</span>
+                        <span class="s-gradient:text:accent">the hood</span>
                     </h5>
                 </div>
                 <p class="s-typo:p">
@@ -140,7 +140,7 @@ sugar dev'
                         <i class="s-icon:logo-vite-solid s-font:90 s-opacity:30"></i>
                     </div>
                     <h5 class="s-typo:h5 s-mbe:30">
-                        <span class="s-tc:accent">ViteJS</span><br />server
+                        <span class="s-gradient:text:accent">ViteJS</span><br />server
                     </h5>
                 </div>
                 <p class="s-typo:p">
@@ -156,7 +156,7 @@ sugar dev'
                         <i class="s-icon:server s-font:90 s-opacity:30"></i>
                     </div>
                      <h5 class="s-typo:h5 s-mbe:30">
-                        <span class="s-tc:complementary">Internal</span><br />server
+                        <span class="s-gradient:text:accent">Internal</span><br />server
                     </h5>
                 </div>
                 <p class="s-typo:p ">
@@ -170,7 +170,7 @@ sugar dev'
         <div class="code-example-section:right" "> 
             <div>
                 <h5 class="s-typo:h4 s-mbe:30">
-                    <span class="s-tc:accent">Build</span><br />for production
+                    <span class="s-gradient:text:accent">Build</span><br />for production
                 </h5>
                 <p class="s-typo:p ">
                     Generate all the needed assets for production like bundling your <span
@@ -194,7 +194,7 @@ sugar build'
         <div class="s-layout:122 s-gap:column:50 s-pb:80 @mobile s-layout:1_2">
             <div class="@mobile s-mbe:50">
                 <h4 class="s-typo:h4 s-mbe:30">
-                    Built-in<br /><span class="s-tc:accent">recipes</span>
+                    Built-in<br /><span class="s-gradient:text:accent">recipes</span>
                 </h4>
                 <p class="s-typo:lead s-mbe:30">
                     <span class="s-tc:accent">Recipe</span> is our term to define <span

@@ -6,7 +6,7 @@
 
                 <div class="s-layout:1112 s-position:relative @mobile s-layout:2_1">
                     <div class="@mobile s-text:center">
-                        <h3 class="s-typo:h2 s-mbe:30"><span class="s-tc:accent">Open</span> Source</h3>
+                        <h3 class="s-typo:h2 s-mbe:30"><span class="s-gradient:text:accent">Open</span> Source</h3>
                         <p class="s-typo:lead s-mbe:50 @mobile s-typo:p">
                             Note that this project is all open sourced. This mean <span class="s-tc:complementary">it
                                 needs your support</span> as well as <span class="s-tc:accent">your good
@@ -29,9 +29,45 @@
                         </div>
                         
                     </div>
-                    <div class="__illustration adaptive-color">
-                        <img s-inline src="/dist/img/illustrations/opensource.svg"></s-inline>
+
+                    <div class="__illustration">
+
+                        <div class="__desk">
+                            <img s-inline src="/dist/img/illustrations/opensource/desk.svg" />
+                        </div>
+
+                        <div class="__heart-back" s-parallax amount="0.05">
+                            <img s-inline src="/dist/img/illustrations/opensource/heart.svg" />
+                        </div>
+                        <div class="__heart"  s-parallax amount="0.1">
+                            <img s-inline src="/dist/img/illustrations/opensource/heart.svg" />
+                        </div>
+
+                        <div class="__bubble-01" s-parallax amount="0.1">
+                            <img s-inline src="/dist/img/illustrations/opensource/bubble-01.svg" />
+                        </div>
+                        <div class="__bubble-02" s-parallax amount="0.2">
+                            <img s-inline src="/dist/img/illustrations/opensource/bubble-02.svg" />
+                        </div>
+                        <div class="__bubble-03" s-parallax amount="0.05">
+                            <img s-inline src="/dist/img/illustrations/opensource/bubble-03.svg" />
+                        </div>
+
+                        <div class="__bubble-emoji-01" s-parallax amount="0.05"> 
+                            <img s-inline src="/dist/img/illustrations/opensource/bubble-emoji-01.svg" />
+                        </div>
+                        <div class="__bubble-emoji-02" s-parallax amount="0.1">
+                            <img s-inline src="/dist/img/illustrations/opensource/bubble-emoji-02.svg" />
+                        </div>
+                        <div class="__bubble-emoji-03" s-parallax amount="0.2">
+                            <img s-inline src="/dist/img/illustrations/opensource/bubble-emoji-03.svg" />
+                        </div>
+
                     </div>
+
+                    {{-- <div class="__illustration adaptive-color">
+                        <img s-inline src="/dist/img/illustrations/opensource.svg"></s-inline>
+                    </div> --}}
                 </div>
 
             </div>

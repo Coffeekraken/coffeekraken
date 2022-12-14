@@ -10,7 +10,7 @@
                 <div class="s-mbe:80">
                     <h3 class="s-typo:h3 s-mbe:30">
                         Sugar toolkit
-                        <br>to <span class="s-tc:accent">serve you</span>
+                        <br>to <span class="s-gradient:text:accent">serve you</span>
                     </h3>
                     <p class="s-typo:lead s-mbe:30">
                         We all know as developer that a lot of our <span class="s-tc:accent">precious time</span> is
@@ -33,7 +33,7 @@
             <div class="code-example-section" ">
                 <div>
                     <h5 class="s-typo:h4 s-mbe:30 @mobile s-typo:h5">
-                        A coherant <span class="s-tc:accent">CLI</span><br />with some cool features
+                        A coherant <span class="s-gradient:text:accent">CLI</span><br />with some cool features
                     </h5>
                     <p class="s-typo:p">
                         The <span class="s-typo:code">@@coffeekraken/cli</span> package is the one that provides
@@ -66,7 +66,7 @@
             <div class="code-example-section:right" ">
                 <div>
                     <h5 class="s-typo:h4 s-mbe:30 @mobile s-typo:h5">
-                        querySelector<span class="s-tc:accent">Live</span>
+                        querySelector<span class="s-gradient:text:accent">Live</span>
                     </h5>
                     <p class="s-typo:p">
                         This function allows you to do exactly the same as the <span
@@ -101,7 +101,7 @@
             <div class="code-example-section" ">
                 <div>
                     <h5 class="s-typo:h4 s-mbe:30 @mobile s-typo:h5">
-                        sha256,<span class="s-tc:accent">base64</span>/etc...
+                        sha256,<span class="s-gradient:text:accent">base64</span>/etc...
                     </h5>
                     <p class="s-typo:p">
                         These crypt functions allows you to encrypt strings with ease. Sugar support some encryption
@@ -128,8 +128,8 @@
             <div class="code-example-section:right" "> 
                 <div>
                     <h5 class="s-typo:h4 s-mbe:30 @mobile s-typo:h5">
-                        is(<span class="s-tc:accent">Mobile</span>,<span class="s-tc:accent">Color</span>,<span
-                            class="s-tc:accent">PlainObject</span>, etc...)
+                        is(<span class="s-gradient:text:accent">Mobile</span>,<span class="s-gradient:text:accent">Color</span>,<span
+                            class="s-gradient:text:accent">PlainObject</span>, etc...)
                     </h5>
                     <p class="s-typo:p">
                         These functions are made to check if your user is on mobile, if your javascript is executed into

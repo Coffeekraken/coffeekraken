@@ -4,7 +4,7 @@
 
             <div class="section-top-background"></div>
 
-            <h3 class="s-typo:h2 s-mbe:30 @mobile s-typo:h4">All the <span class="s-tc:accent">helpers<br></span> you ever
+            <h3 class="s-typo:h2 s-mbe:30 @mobile s-typo:h4">All the <span class="s-gradient:text:accent">helpers<br></span> you ever
                 need</h3>
             <p class="s-typo:lead s-mbe:50">
                 Helpers are a nice way to <span class="s-tc:accent">speed up your workflow</span> as well as keeping your

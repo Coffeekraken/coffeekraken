@@ -16,7 +16,7 @@
             "required": true
         },
         "text": {
-            "type": "Text",
+            "type": "Wysiwyg",
             "title": "Text",
             "description": "Heading text",
             "required": true

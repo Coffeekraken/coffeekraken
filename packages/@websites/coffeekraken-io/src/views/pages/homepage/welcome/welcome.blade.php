@@ -93,10 +93,10 @@
             <img s-inline src="/dist/img/illustrations/welcome/tentacule-07.svg" />
         </div>
 
-        <div class="__cup" s-parallax amount-tx="0.05" amount-ty="0" amount-r="0">
+        <div class="__cup">
             <img src="/dist/img/welcome/cup.png" />
         </div>
-        <div class="__smoke" s-parallax amount-tx="0.05" amount-ty="0" amount-r="0">
+        <div class="__smoke">
             <video playsinline autoplay muted loop>
                 <source src="/dist/img/cup-smoke.webm" type="video/webm">
             </video>

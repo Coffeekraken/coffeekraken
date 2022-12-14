@@ -322,7 +322,7 @@
             }
         },
         "code": {
-            "label": "Code",
+            "label": "</>",
             "group": "text",
             "style": {
                 "display": "inline-block",
@@ -365,16 +365,22 @@
             }
         },
         "bold": {
-            "label": "Bold",
+            "label": "B",
             "group": "text",
             "style": {
                 "fontWeight": "bold"
+            },
+            "buttonStyle": {
+                "fontWeight": "bolder"
             }
         },
         "italic": {
-            "label": "Italic",
+            "label": "I",
             "group": "text",
             "style": {
+                "fontStyle": "italic"
+            },
+            "buttonStyle": {
                 "fontStyle": "italic"
             }
         },
@@ -383,6 +389,9 @@
             "group": "text",
             "style": {
                 "fontSize": "1.1em"
+            },
+            "buttonStyle": {
+                "fontSize": "1.01em"
             }
         },
         "larger": {
@@ -390,6 +399,9 @@
             "group": "text",
             "style": {
                 "fontSize": "1.2em"
+            },
+            "buttonStyle": {
+                "fontSize": "1.02em"
             }
         },
         "largest": {
@@ -397,6 +409,9 @@
             "group": "text",
             "style": {
                 "fontSize": "1.3em"
+            },
+            "buttonStyle": {
+                "fontSize": "1.03em"
             }
         },
         "small": {
@@ -404,6 +419,9 @@
             "group": "text",
             "style": {
                 "fontSize": "0.9em"
+            },
+            "buttonStyle": {
+                "fontSize": "0.99em"
             }
         },
         "smaller": {
@@ -411,6 +429,9 @@
             "group": "text",
             "style": {
                 "fontSize": "0.8em"
+            },
+            "buttonStyle": {
+                "fontSize": "0.98em"
             }
         },
         "smallest": {
@@ -418,6 +439,9 @@
             "group": "text",
             "style": {
                 "fontSize": "0.7em"
+            },
+            "buttonStyle": {
+                "fontSize": "0.97em"
             }
         },
         "mark": {
@@ -432,12 +456,18 @@
             "group": "text",
             "style": {
                 "textDecoration": "line-through"
+            },
+            "buttonStyle": {
+                "textDecoration": "line-through"
             }
         },
         "ins": {
-            "label": "Ins",
+            "label": "U",
             "group": "text",
             "style": {
+                "textDecoration": "underline"
+            },
+            "buttonStyle": {
                 "textDecoration": "underline"
             }
         },
@@ -447,12 +477,20 @@
             "style": {
                 "verticalAlign": "sub",
                 "fontSize": "0.6em"
+            },
+            "buttonStyle": {
+                "verticalAlign": "sub",
+                "fontSize": "0.6em"
             }
         },
         "sup": {
             "label": "Sup",
             "group": "text",
             "style": {
+                "verticalAlign": "sup",
+                "fontSize": "0.6em"
+            },
+            "buttonStyle": {
                 "verticalAlign": "sup",
                 "fontSize": "0.6em"
             }

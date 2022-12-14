@@ -140,6 +140,13 @@ export default function (api) {
                                         value.editorStyle,
                                     );
                             }
+
+                            if (value.buttonStyle) {
+                                finalObj[finalKey].buttonStyle =
+                                    __STheme.resolveCssObjectPropertiesValues(
+                                        value.buttonStyle,
+                                    );
+                            }
                         }
                         return finalObj;
                     },

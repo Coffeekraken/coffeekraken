@@ -343,7 +343,7 @@ export default (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         'code:not(pre > code)': {
-            label: 'Code',
+            label: '</>',
             group: 'text',
             style: {
                 display: 'inline-block',
@@ -438,10 +438,13 @@ export default (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         bold: {
-            label: 'Bold',
+            label: 'B',
             group: 'text',
             style: {
                 fontWeight: 'bold',
+            },
+            buttonStyle: {
+                fontWeight: 'bolder',
             },
         },
         /**
@@ -456,9 +459,12 @@ export default (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         italic: {
-            label: 'Italic',
+            label: 'I',
             group: 'text',
             style: {
+                fontStyle: 'italic',
+            },
+            buttonStyle: {
                 fontStyle: 'italic',
             },
         },
@@ -479,6 +485,9 @@ export default (api) => {
             style: {
                 fontSize: '1.1em',
             },
+            buttonStyle: {
+                fontSize: '1.01em',
+            },
         },
         /**
          * @name          larger
@@ -496,6 +505,9 @@ export default (api) => {
             group: 'text',
             style: {
                 fontSize: '1.2em',
+            },
+            buttonStyle: {
+                fontSize: '1.02em',
             },
         },
         /**
@@ -515,6 +527,9 @@ export default (api) => {
             style: {
                 fontSize: '1.3em',
             },
+            buttonStyle: {
+                fontSize: '1.03em',
+            },
         },
         /**
          * @name          small
@@ -532,6 +547,9 @@ export default (api) => {
             group: 'text',
             style: {
                 fontSize: '0.9em',
+            },
+            buttonStyle: {
+                fontSize: '0.99em',
             },
         },
         /**
@@ -551,6 +569,9 @@ export default (api) => {
             style: {
                 fontSize: '0.8em',
             },
+            buttonStyle: {
+                fontSize: '0.98em',
+            },
         },
         /**
          * @name          smallest
@@ -568,6 +589,9 @@ export default (api) => {
             group: 'text',
             style: {
                 fontSize: '0.7em',
+            },
+            buttonStyle: {
+                fontSize: '0.97em',
             },
         },
         /**
@@ -607,6 +631,9 @@ export default (api) => {
             style: {
                 textDecoration: 'line-through',
             },
+            buttonStyle: {
+                textDecoration: 'line-through',
+            },
         },
         /**
          * @name          ins
@@ -620,9 +647,12 @@ export default (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         ins: {
-            label: 'Ins',
+            label: 'U',
             group: 'text',
             style: {
+                textDecoration: 'underline',
+            },
+            buttonStyle: {
                 textDecoration: 'underline',
             },
         },
@@ -644,6 +674,10 @@ export default (api) => {
                 verticalAlign: 'sub',
                 fontSize: '0.6em',
             },
+            buttonStyle: {
+                verticalAlign: 'sub',
+                fontSize: '0.6em',
+            },
         },
         /**
          * @name          sup
@@ -660,6 +694,10 @@ export default (api) => {
             label: 'Sup',
             group: 'text',
             style: {
+                verticalAlign: 'sup',
+                fontSize: '0.6em',
+            },
+            buttonStyle: {
                 verticalAlign: 'sup',
                 fontSize: '0.6em',
             },

@@ -465,12 +465,38 @@
                 "color": "hsla(212,14,50,1)"
             }
         },
+        "baseGradient": {
+            "label": "Base gradient",
+            "group": "color",
+            "type": "color",
+            "style": {
+                "backgroundSize": "100%",
+                "-webkitBackgroundClip": "text",
+                "-mozBackgroundClip": "text",
+                "-webkitTextFillColor": "transparent",
+                "-mozTextFillColor": "transparent",
+                "backgroundImage": "linear-gradient(90deg, hsla(212,14,50,1) 0%, #A9B2BC 100%)"
+            }
+        },
         "main": {
             "label": "Main",
             "group": "color",
             "type": "color",
             "style": {
                 "color": "hsla(212,14,50,1)"
+            }
+        },
+        "mainGradient": {
+            "label": "Main gradient",
+            "group": "color",
+            "type": "color",
+            "style": {
+                "backgroundSize": "100%",
+                "-webkitBackgroundClip": "text",
+                "-mozBackgroundClip": "text",
+                "-webkitTextFillColor": "transparent",
+                "-mozTextFillColor": "transparent",
+                "backgroundImage": "linear-gradient(90deg, hsla(212,14,50,1) 0%, #A9B2BC 100%)"
             }
         },
         "accent": {
@@ -481,12 +507,38 @@
                 "color": "#FFBB00"
             }
         },
+        "accentGradient": {
+            "label": "Accent gradient",
+            "group": "color",
+            "type": "color",
+            "style": {
+                "backgroundSize": "100%",
+                "-webkitBackgroundClip": "text",
+                "-mozBackgroundClip": "text",
+                "-webkitTextFillColor": "transparent",
+                "-mozTextFillColor": "transparent",
+                "backgroundImage": "linear-gradient(90deg, #ffbb00 0%, #FFD666 100%)"
+            }
+        },
         "complementary": {
             "label": "Complementary",
             "group": "color",
             "type": "color",
             "style": {
                 "color": "#5100FF"
+            }
+        },
+        "complementaryGradient": {
+            "label": "Complementary gradient",
+            "group": "color",
+            "type": "color",
+            "style": {
+                "backgroundSize": "100%",
+                "-webkitBackgroundClip": "text",
+                "-mozBackgroundClip": "text",
+                "-webkitTextFillColor": "transparent",
+                "-mozTextFillColor": "transparent",
+                "backgroundImage": "linear-gradient(90deg, #5100ff 0%, #9666FF 100%)"
             }
         },
         "success": {
@@ -497,12 +549,38 @@
                 "color": "#91FF00"
             }
         },
+        "successGradient": {
+            "label": "Success gradient",
+            "group": "color",
+            "type": "color",
+            "style": {
+                "backgroundSize": "100%",
+                "-webkitBackgroundClip": "text",
+                "-mozBackgroundClip": "text",
+                "-webkitTextFillColor": "transparent",
+                "-mozTextFillColor": "transparent",
+                "backgroundImage": "linear-gradient(90deg, #91ff00 0%, #BDFF66 100%)"
+            }
+        },
         "warning": {
             "label": "Warning",
             "group": "color",
             "type": "color",
             "style": {
                 "color": "#FFD500"
+            }
+        },
+        "warningGradient": {
+            "label": "Warning gradient",
+            "group": "color",
+            "type": "color",
+            "style": {
+                "backgroundSize": "100%",
+                "-webkitBackgroundClip": "text",
+                "-mozBackgroundClip": "text",
+                "-webkitTextFillColor": "transparent",
+                "-mozTextFillColor": "transparent",
+                "backgroundImage": "linear-gradient(90deg, #ffd500 0%, #FFE666 100%)"
             }
         },
         "error": {
@@ -513,12 +591,38 @@
                 "color": "#FF003C"
             }
         },
+        "errorGradient": {
+            "label": "Error gradient",
+            "group": "color",
+            "type": "color",
+            "style": {
+                "backgroundSize": "100%",
+                "-webkitBackgroundClip": "text",
+                "-mozBackgroundClip": "text",
+                "-webkitTextFillColor": "transparent",
+                "-mozTextFillColor": "transparent",
+                "backgroundImage": "linear-gradient(90deg, #ff003b 0%, #FF668A 100%)"
+            }
+        },
         "info": {
             "label": "Info",
             "group": "color",
             "type": "color",
             "style": {
                 "color": "#00FFFF"
+            }
+        },
+        "infoGradient": {
+            "label": "Info gradient",
+            "group": "color",
+            "type": "color",
+            "style": {
+                "backgroundSize": "100%",
+                "-webkitBackgroundClip": "text",
+                "-mozBackgroundClip": "text",
+                "-webkitTextFillColor": "transparent",
+                "-mozTextFillColor": "transparent",
+                "backgroundImage": "linear-gradient(90deg, #00ffff 0%, #66FFFF 100%)"
             }
         }
     },

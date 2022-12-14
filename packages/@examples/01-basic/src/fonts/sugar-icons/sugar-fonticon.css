@@ -1,40 +1,40 @@
 @font-face {
-  font-display: swap;
+    font-display: swap;
 
-  font-family: 'sugar-fonticon';
-  src: url('/dist/fonts/sugar-icons/sugar-fonticon.eot?c83a2a5a5296704c27128a8a4f88535b#iefix')
-      format('embedded-opentype'),
-    url('/dist/fonts/sugar-icons/sugar-fonticon.woff2?c83a2a5a5296704c27128a8a4f88535b')
-      format('woff2'),
-    url('/dist/fonts/sugar-icons/sugar-fonticon.woff?c83a2a5a5296704c27128a8a4f88535b')
-      format('woff');
+    font-family: 'sugar-fonticon';
+    src: url('/dist/fonts/sugar-icons/sugar-fonticon.eot?c83a2a5a5296704c27128a8a4f88535b#iefix')
+            format('embedded-opentype'),
+        url('/dist/fonts/sugar-icons/sugar-fonticon.woff2?c83a2a5a5296704c27128a8a4f88535b')
+            format('woff2'),
+        url('/dist/fonts/sugar-icons/sugar-fonticon.woff?c83a2a5a5296704c27128a8a4f88535b')
+            format('woff');
 }
 
 .s-icon--drop-file:before,
 .s-icon--help:before {
-  position: relative;
+    position: relative;
 
-  font-family: sugar-fonticon !important;
-  font-style: normal;
-  font-weight: normal !important;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font-family: sugar-fonticon !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .s-icon--drop-file:before {
-  content: '\f101';
+    content: '\f101';
 }
 .s-icon--help:before {
-  content: '\f102';
+    content: '\f102';
 }
 .s-icon--drop-file,
 .s-icon--help {
-  display: inline-block;
-  line-height: 1;
-  width: 1em;
-  height: 1em;
-  vertical-align: middle;
+    display: inline-block;
+    line-height: 1;
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
 }

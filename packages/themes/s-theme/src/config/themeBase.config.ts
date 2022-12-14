@@ -89,6 +89,21 @@ export default function (api) {
         },
 
         /**
+         * @name            gradient
+         * @namespace       config.themeBase
+         * @type            Object
+         * @default         {}
+         *
+         * Reference the "themegradient" config
+         *
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        get gradient() {
+            return api.config.themeGradient;
+        },
+
+        /**
          * @name            helpers
          * @namespace       config.themeBase
          * @type            Object

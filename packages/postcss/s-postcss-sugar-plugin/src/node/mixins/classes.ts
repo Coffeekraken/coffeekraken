@@ -55,6 +55,7 @@ export default async function ({
         '@sugar.container.classes;',
         '@sugar.grid.classes;',
         '@sugar.group.classes;',
+        '@sugar.gradient.classes;',
         '@sugar.layout.classes;',
         '@sugar.clearfix.classes;',
         '@sugar.cursor.classes;',

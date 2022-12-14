@@ -41,17 +41,19 @@ class postcssSugarPluginGradientInterface extends __SInterface {
             },
             x: {
                 type: 'String',
+                default: __STheme.get('gradient.defaultX'),
             },
             y: {
                 type: 'String',
+                default: __STheme.get('gradient.defaultY'),
             },
             angle: {
                 type: 'Number | String',
-                default: 0,
+                default: __STheme.get('gradient.defaultAngle'),
             },
             size: {
                 type: 'String',
-                default: 'farthest-side',
+                default: 'farthest-corner',
             },
         };
     }
@@ -62,7 +64,7 @@ export interface IPostcssSugarPluginGradientParams {
     end: string;
     x: string;
     y: string;
-    type: string | 'linear' | 'radial';
+    type: 'linear' | 'radial';
     angle: string | number;
     size: string;
 }
@@ -84,37 +86,42 @@ export default function ({
         x: '50%',
         y: '50%',
         type: 'linear',
-        angle: 0,
-        size: 'farthest-side',
+        angle: '90deg',
+        size: 'circle',
         ...params,
     };
 
-    let startColorVar = finalParams.start,
-        endColorVar = finalParams.end;
+    let startColorValue = finalParams.start,
+        endColorValue = finalParams.end;
 
     const themeColorsObj = __STheme.get('color');
 
     if (
-        startColorVar.match(/^[a-zA-Z0-9:_-]+$/) &&
-        themeColorsObj[startColorVar]
+        startColorValue.match(/^[a-zA-Z0-9:_-]+$/) &&
+        themeColorsObj[startColorValue]
     ) {
-        startColorVar = `sugar.color(${startColorVar})`;
+        startColorValue = `sugar.color(${startColorValue})`;
     }
-    if (endColorVar.match(/^[a-zA-Z0-9:_-]+$/) && themeColorsObj[endColorVar]) {
-        endColorVar = `sugar.color(${endColorVar})`;
+    if (
+        endColorValue.match(/^[a-zA-Z0-9:_-]+$/) &&
+        themeColorsObj[endColorValue]
+    ) {
+        endColorValue = `sugar.color(${endColorValue})`;
     }
 
-    const angleVar =
-        typeof finalParams.angle === 'number'
-            ? `${finalParams.angle}deg`
-            : finalParams.angle;
+    const variables = [];
 
-    let gradientCss = `background: linear-gradient(${angleVar}, ${startColorVar} 0%, ${endColorVar} 100%);`;
+    let gradientCss = [...variables];
 
-    if (finalParams.type === 'radial') {
-        gradientCss = `background: radial-gradient(${finalParams.size} at ${finalParams.x} ${finalParams.y}, ${startColorVar} 0%, ${endColorVar} 100%);`;
+    if (finalParams.type === 'linear') {
+        gradientCss.push(
+            `background-image: linear-gradient(var(--s-gradient-angle, ${finalParams.angle}), var(--s-gradient-start, ${startColorValue}) 0%, var(--s-gradient-end, ${endColorValue}) 100%);`,
+        );
+    } else if (finalParams.type === 'radial') {
+        gradientCss.push(
+            `background-image: radial-gradient(${finalParams.size} at var(--s-gradient-x, ${finalParams.x}) var(--s-gradient-y, ${finalParams.y}), var(--s-gradient-start, ${startColorValue}) 0%, var(--s-gradient-end, ${endColorValue}) 100%);`,
+        );
     }
-    const vars: string[] = [gradientCss];
 
-    return vars;
+    return gradientCss;
 }

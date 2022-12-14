@@ -1,3 +1,4 @@
+import __SColor from '@coffeekraken/s-color';
 import { __upperFirst } from '@coffeekraken/sugar/string';
 
 export function preprocess(api) {
@@ -17,6 +18,23 @@ export function preprocess(api) {
                 type: 'color',
                 style: {
                     color: value,
+                },
+            };
+
+            const endGradientColor = new __SColor(value);
+            api.config.themeTypo[`${name}Gradient`] = {
+                label: `${__upperFirst(name)} gradient`,
+                group: 'color',
+                type: 'color',
+                style: {
+                    backgroundSize: '100%',
+                    '-webkitBackgroundClip': 'text',
+                    '-mozBackgroundClip': 'text',
+                    '-webkitTextFillColor': 'transparent',
+                    '-mozTextFillColor': 'transparent',
+                    backgroundImage: `linear-gradient(90deg, ${value} 0%, ${endGradientColor.apply(
+                        api.theme.gradient.defaultTextModifierEnd,
+                    )} 100%)`,
                 },
             };
         }

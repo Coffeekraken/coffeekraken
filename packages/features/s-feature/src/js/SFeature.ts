@@ -169,6 +169,7 @@ export default class SFeature extends __SClass implements ISFeature {
         this.componentUtils = new __SComponentUtils(node, {
             ...(this.settings ?? {}),
             ...(this.settings.componentUtils ?? {}),
+            useTagNameForClassName: false,
             name,
         });
 

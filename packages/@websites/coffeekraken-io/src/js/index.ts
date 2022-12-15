@@ -13,6 +13,7 @@ import { define as __SSliderComponentDefine } from '@coffeekraken/s-slider-compo
 import { define as __SThemeSwitcherComponentDefine } from '@coffeekraken/s-theme-switcher-component';
 
 import __SFeature from '@coffeekraken/s-feature';
+import { define as __SGlitchFeatureDefine } from '@coffeekraken/s-glitch-feature';
 import { define as __SHighlightFeatureDefine } from '@coffeekraken/s-highlight-feature';
 import { define as __SLazyFeatureDefine } from '@coffeekraken/s-lazy-feature';
 import { define as __SPageTransitionFeatureDefine } from '@coffeekraken/s-page-transition-feature';
@@ -96,6 +97,7 @@ const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
   __SLazyFeatureDefine();
   __SParallaxFeatureDefine();
   __SHighlightFeatureDefine();
+  __SGlitchFeatureDefine();
 
   // components
   __SCodeExampleComponentDefine();

@@ -1990,6 +1990,7 @@ __metadata:
     "@coffeekraken/s-class": ^2.0.0-alpha.20
     "@coffeekraken/s-feature": ^2.0.0-alpha.20
     "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-timer": ^2.0.0-alpha.20
     "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
   linkType: soft
@@ -2074,6 +2075,23 @@ __metadata:
     "@coffeekraken/s-theme": ^2.0.0-alpha.20
     "@coffeekraken/sugar": ^2.0.0-alpha.20
     glob: ^7.2.3
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/s-glitch-feature@^2.0.0-alpha.20, @coffeekraken/s-glitch-feature@workspace:packages/features/s-glitch-feature":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/s-glitch-feature@workspace:packages/features/s-glitch-feature"
+  dependencies:
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-component-utils": ^2.0.0-alpha.20
+    "@coffeekraken/s-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-element": ^2.0.0-alpha.20
+    "@coffeekraken/s-theme": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
+    html2canvas: ^1.4.1
+    three-full: ^11.3.2
   languageName: unknown
   linkType: soft
 
@@ -5963,6 +5981,7 @@ __metadata:
     "@coffeekraken/s-form-validate-feature": ^2.0.0-alpha.20
     "@coffeekraken/s-frontend-server": ^2.0.0-alpha.20
     "@coffeekraken/s-frontspec": ^2.0.0-alpha.20
+    "@coffeekraken/s-glitch-feature": ^2.0.0-alpha.20
     "@coffeekraken/s-glob": ^2.0.0-alpha.20
     "@coffeekraken/s-google-map-component": ^2.0.0-alpha.20
     "@coffeekraken/s-handlebars": ^2.0.0-alpha.20
@@ -6779,6 +6798,13 @@ __metadata:
   version: 1.0.2
   resolution: "balanced-match@npm:1.0.2"
   checksum: 9706c088a283058a8a99e0bf91b0a2f75497f185980d9ffa8b304de1d9e58ebda7c72c07ebf01dadedaac5b2907b2c6f566f660d62bd336c3468e960403b9d65
+  languageName: node
+  linkType: hard
+
+"base64-arraybuffer@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "base64-arraybuffer@npm:1.0.2"
+  checksum: 15e6400d2d028bf18be4ed97702b11418f8f8779fb8c743251c863b726638d52f69571d4cc1843224da7838abef0949c670bde46936663c45ad078e89fee5c62
   languageName: node
   linkType: hard
 
@@ -8149,6 +8175,15 @@ __metadata:
     hyphenate-style-name: ^1.0.2
     isobject: ^3.0.1
   checksum: c9964c4708216954c468b69bbee2d971fd759ada4f40637b8ca4d3f79caba4818d0532a4f190ac560227c08742ad063ffec7a30afddc4d96b66a18c3a008f0d8
+  languageName: node
+  linkType: hard
+
+"css-line-break@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "css-line-break@npm:2.1.0"
+  dependencies:
+    utrie: ^1.0.2
+  checksum: 37b1fe632b03be7a287cd394cef8b5285666343443125c510df9cfb6a4734a2c71e154ec8f7bbff72d7c339e1e5872989b1c52d86162aed27d6cc114725bb4d0
   languageName: node
   linkType: hard
 
@@ -11364,6 +11399,16 @@ __metadata:
   version: 3.2.0
   resolution: "html-tags@npm:3.2.0"
   checksum: a0c9e96ac26c84adad9cc66d15d6711a17f60acda8d987218f1d4cbaacd52864939b230e635cce5a1179f3ddab2a12b9231355617dfbae7945fcfec5e96d2041
+  languageName: node
+  linkType: hard
+
+"html2canvas@npm:^1.4.1":
+  version: 1.4.1
+  resolution: "html2canvas@npm:1.4.1"
+  dependencies:
+    css-line-break: ^2.1.0
+    text-segmentation: ^1.0.3
+  checksum: c134324af57f3262eecf982e436a4843fded3c6cf61954440ffd682527e4dd350e0c2fafd217c0b6f9a455fe345d0c67b4505689796ab160d4ca7c91c3766739
   languageName: node
   linkType: hard
 
@@ -18951,6 +18996,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"text-segmentation@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "text-segmentation@npm:1.0.3"
+  dependencies:
+    utrie: ^1.0.2
+  checksum: 2e24632d59567c55ab49ac324815e2f7a8043e63e26b109636322ac3e30692cee8679a448fd5d0f0598a345f407afd0e34ba612e22524cf576d382d84058c013
+  languageName: node
+  linkType: hard
+
 "then-request@npm:^2.0.1":
   version: 2.2.0
   resolution: "then-request@npm:2.2.0"
@@ -18999,6 +19053,13 @@ __metadata:
   dependencies:
     any-promise: ^1.0.0
   checksum: 84e1b804bfec49f3531215f17b4a6e50fd4397b5f7c1bccc427b9c656e1ecfb13ea79d899930184f78bc2f57285c54d9a50a590c8868f4f0cef5c1d9f898b05e
+  languageName: node
+  linkType: hard
+
+"three-full@npm:^11.3.2":
+  version: 11.3.3
+  resolution: "three-full@npm:11.3.3"
+  checksum: e42d5f2060ffc1d2a6afd442e38342d73342c590e8381af1c2c4f6857fff64d023638252ccac1c10ba3d61a43c998bdda17c36475f8433214228b161fa22c78f
   languageName: node
   linkType: hard
 
@@ -19836,6 +19897,15 @@ __metadata:
   version: 1.0.1
   resolution: "utils-merge@npm:1.0.1"
   checksum: c81095493225ecfc28add49c106ca4f09cdf56bc66731aa8dabc2edbbccb1e1bfe2de6a115e5c6a380d3ea166d1636410b62ef216bb07b3feb1cfde1d95d5080
+  languageName: node
+  linkType: hard
+
+"utrie@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "utrie@npm:1.0.2"
+  dependencies:
+    base64-arraybuffer: ^1.0.2
+  checksum: c96fbb7d4d8855a154327da0b18e39b7511cc70a7e4bcc3658e24f424bb884312d72b5ba777500b8858e34d365dc6b1a921dc5ca2f0d341182519c6b78e280a5
   languageName: node
   linkType: hard
 

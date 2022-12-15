@@ -22,6 +22,11 @@ import __SInterface from '@coffeekraken/s-interface';
 export default class SComponentUtilsSettingsInterface extends __SInterface {
     static get _definition() {
         return {
+            name: {
+                type: 'String',
+                description:
+                    'The name of the component/feature that will be used to generate className, etc...',
+            },
             interface: {
                 description:
                     'Specify an SInterface class to use as our properties definition',
@@ -41,6 +46,12 @@ export default class SComponentUtilsSettingsInterface extends __SInterface {
                 description:
                     'Pass an object that act as the default properties value for our component',
                 type: 'Object',
+            },
+            useTagNameForClassName: {
+                type: 'Boolean',
+                description:
+                    'Specify if the method "className" will generate a class using the node tagName additionaly to the passed "name" setting',
+                default: true,
             },
         };
     }

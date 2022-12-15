@@ -1,0 +1,16 @@
+.s-glitch {
+    display: block;
+    position: relative;
+}
+.s-glitch__canvas {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    pointer-events: none;
+}
+.s-glitch.glitch .s-glitch__canvas {
+    display: block;
+}

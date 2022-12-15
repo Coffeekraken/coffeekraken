@@ -29,6 +29,7 @@ export interface ISComponentUtilsSettings {
     state: ISComponentUtilsStateSettings;
     defaultProps?: any;
     prefixEvent: boolean;
+    useTagNameForClassName: boolean;
 }
 
 export interface ISComponentUtilsStateSettings {
@@ -824,12 +825,14 @@ export default class SComponentUtils extends __SClass {
             .split(' ')
             .map((clsName) => {
                 let clses: string[] = [];
-                // class from the component tagname
-                clses.push(
-                    `${this.node.tagName.toLowerCase()}${
-                        clsName && !clsName.match(/^(__|-)/) ? '-' : ''
-                    }${clsName}`,
-                );
+                // class from the component tagname if wanted
+                if (this.settings.useTagNameForClassName) {
+                    clses.push(
+                        `${this.node.tagName.toLowerCase()}${
+                            clsName && !clsName.match(/^(__|-)/) ? '-' : ''
+                        }${clsName}`,
+                    );
+                }
                 // class from the passed "name" in the settings
                 if (
                     this.settings.name &&

@@ -32,25 +32,41 @@
 
         .__desk {
             height: 100%;
+            opacity: 0;
 
             svg {
                 transform: none;
             }
         }
 
-        .__heart,
-        .__heart-back {
+        .__logo,
+        .__logo-back,
+        .__logo-draw {
             position: absolute;
             top: 50%;
-            left: 50%;
+            left: 55%;
         }
-        .__heart-back {
+        .__logo-back {
             left: 60%;
+
+            path {
+                fill: sugar.color(main, background);
+            }
         }
-        .__heart {
+        .__logo {
             scale: 1.2;
+
             [fill] {
                 fill: sugar.color(accent);
+            }
+        }
+        .__logo-draw {
+            scale: 1.8;
+            transform-origin: 0% 0%;
+
+            path {
+                stroke: sugar.color(base, foreground, --alpha 0.2);
+                fill: none;
             }
         }
 
@@ -76,14 +92,19 @@
         .__bubble-emoji-02,
         .__bubble-emoji-03 {
             position: absolute;
+
+            path {
+                stroke: sugar.color(base, foreground, --alpha 0.2);
+                fill: none;
+            }
         }
         .__bubble-emoji-01 {
             top: 5%;
             left: 80%;
         }
         .__bubble-emoji-02 {
-            top: 80%;
-            left: 75%;
+            top: 83%;
+            left: 85%;
         }
         .__bubble-emoji-03 {
             top: 55%;

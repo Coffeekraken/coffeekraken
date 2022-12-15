@@ -36,11 +36,14 @@
                             <img s-inline src="/dist/img/illustrations/opensource/desk.svg" />
                         </div>
 
-                        <div class="__heart-back" s-parallax amount="0.05">
-                            <img s-inline src="/dist/img/illustrations/opensource/heart.svg" />
+                        <div class="__logo-draw" s-parallax amount="0.01">
+                            <img s-inline src="/dist/img/illustrations/opensource/opensource-logo.svg" />
                         </div>
-                        <div class="__heart"  s-parallax amount="0.1">
-                            <img s-inline src="/dist/img/illustrations/opensource/heart.svg" />
+                        <div class="__logo-back" s-parallax amount="0.05">
+                            <img s-inline src="/dist/img/illustrations/opensource/opensource-logo.svg" />
+                        </div>
+                        <div class="__logo"  s-parallax amount="0.1">
+                            <img s-inline src="/dist/img/illustrations/opensource/opensource-logo.svg" />
                         </div>
 
                         <div class="__bubble-01" s-parallax amount="0.1">

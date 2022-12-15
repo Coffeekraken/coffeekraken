@@ -25,6 +25,10 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 class SComponentUtilsSettingsInterface extends s_interface_1.default {
     static get _definition() {
         return {
+            name: {
+                type: 'String',
+                description: 'The name of the component/feature that will be used to generate className, etc...',
+            },
             interface: {
                 description: 'Specify an SInterface class to use as our properties definition',
                 type: 'SInterface',
@@ -41,8 +45,13 @@ class SComponentUtilsSettingsInterface extends s_interface_1.default {
                 description: 'Pass an object that act as the default properties value for our component',
                 type: 'Object',
             },
+            useTagNameForClassName: {
+                type: 'Boolean',
+                description: 'Specify if the method "className" will generate a class using the node tagName additionaly to the passed "name" setting',
+                default: true,
+            },
         };
     }
 }
 exports.default = SComponentUtilsSettingsInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsNEVBQXFEO0FBRXJEOzs7Ozs7Ozs7Ozs7Ozs7OztHQWlCRztBQUVILE1BQXFCLGdDQUFpQyxTQUFRLHFCQUFZO0lBQ3RFLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxTQUFTLEVBQUU7Z0JBQ1AsV0FBVyxFQUNQLGlFQUFpRTtnQkFDckUsSUFBSSxFQUFFLFlBQVk7YUFDckI7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsV0FBVyxFQUNQLGlFQUFpRTtnQkFDckUsSUFBSSxFQUFFLFFBQVE7YUFDakI7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsV0FBVyxFQUNQLG9FQUFvRTtnQkFDeEUsSUFBSSxFQUFFLFFBQVE7YUFDakI7WUFDRCxZQUFZLEVBQUU7Z0JBQ1YsV0FBVyxFQUNQLDJFQUEyRTtnQkFDL0UsSUFBSSxFQUFFLFFBQVE7YUFDakI7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBekJELG1EQXlCQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsNEVBQXFEO0FBRXJEOzs7Ozs7Ozs7Ozs7Ozs7OztHQWlCRztBQUVILE1BQXFCLGdDQUFpQyxTQUFRLHFCQUFZO0lBQ3RFLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxJQUFJLEVBQUU7Z0JBQ0YsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsV0FBVyxFQUNQLG1GQUFtRjthQUMxRjtZQUNELFNBQVMsRUFBRTtnQkFDUCxXQUFXLEVBQ1AsaUVBQWlFO2dCQUNyRSxJQUFJLEVBQUUsWUFBWTthQUNyQjtZQUNELEtBQUssRUFBRTtnQkFDSCxXQUFXLEVBQ1AsaUVBQWlFO2dCQUNyRSxJQUFJLEVBQUUsUUFBUTthQUNqQjtZQUNELEtBQUssRUFBRTtnQkFDSCxXQUFXLEVBQ1Asb0VBQW9FO2dCQUN4RSxJQUFJLEVBQUUsUUFBUTthQUNqQjtZQUNELFlBQVksRUFBRTtnQkFDVixXQUFXLEVBQ1AsMkVBQTJFO2dCQUMvRSxJQUFJLEVBQUUsUUFBUTthQUNqQjtZQUNELHNCQUFzQixFQUFFO2dCQUNwQixJQUFJLEVBQUUsU0FBUztnQkFDZixXQUFXLEVBQ1AseUhBQXlIO2dCQUM3SCxPQUFPLEVBQUUsSUFBSTthQUNoQjtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFwQ0QsbURBb0NDIn0=

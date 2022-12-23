@@ -2091,7 +2091,8 @@ __metadata:
     "@coffeekraken/s-theme": ^2.0.0-alpha.20
     "@coffeekraken/sugar": ^2.0.0-alpha.20
     html2canvas: ^1.4.1
-    three-full: ^11.3.2
+    powerglitch: ^2.3.2
+    three-full: 11.3.2
   languageName: unknown
   linkType: soft
 
@@ -16655,6 +16656,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"powerglitch@npm:^2.3.2":
+  version: 2.3.2
+  resolution: "powerglitch@npm:2.3.2"
+  checksum: c8f4feea749872eec40114ccc75865af55c50b276d26a4cd78cc8e422c5d0a2afbfa94e43a1ec4c6688f5fe515c57bffa141521078bf1e3d3ec7a47be89fed1b
+  languageName: node
+  linkType: hard
+
 "prebuild-install@npm:^6.1.1, prebuild-install@npm:^6.1.2":
   version: 6.1.4
   resolution: "prebuild-install@npm:6.1.4"
@@ -19056,10 +19064,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"three-full@npm:^11.3.2":
-  version: 11.3.3
-  resolution: "three-full@npm:11.3.3"
-  checksum: e42d5f2060ffc1d2a6afd442e38342d73342c590e8381af1c2c4f6857fff64d023638252ccac1c10ba3d61a43c998bdda17c36475f8433214228b161fa22c78f
+"three-full@npm:11.3.2":
+  version: 11.3.2
+  resolution: "three-full@npm:11.3.2"
+  checksum: 11421a8c976b1ec25d88bb516293595fa123e15f65bf131514e3ead615beca3ae3e2fd2f37c6221b546de08c195b05d3f5b020b0169ec537bdb97c019e0a6dc0
   languageName: node
   linkType: hard
 

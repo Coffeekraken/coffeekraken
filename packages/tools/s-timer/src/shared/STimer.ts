@@ -220,7 +220,7 @@ export default class STimer extends __SPromise {
         }
 
         // loop on each ticks functions
-        if (this.isStarted()) this.emit('tick', this);
+        this.emit('tick', this);
     }
 
     /**

@@ -57,91 +57,93 @@
 
     </div> --}}
 
-    <div class="welcome-illustration-kraken">
-        <svg xmlns="http://www.w3.org/2000/svg">
-            <linearGradient id="gradient-accent">
-                <stop class="__gradient-accent-start" offset="0"/>
-                <stop class="__gradient-accent-end" offset="100%"/>
-            </linearGradient>
-        </svg>
-        <svg xmlns="http://www.w3.org/2000/svg">
-            <linearGradient id="gradient-complementary">
-                <stop class="__gradient-complementary-start" offset="0"/>
-                <stop class="__gradient-complementary-end" offset="100%"/>
-            </linearGradient>
-        </svg>
+    <div>
+        <div class="welcome-illustration-kraken">
+            <svg xmlns="http://www.w3.org/2000/svg">
+                <linearGradient id="gradient-accent">
+                    <stop class="__gradient-accent-start" offset="0"/>
+                    <stop class="__gradient-accent-end" offset="100%"/>
+                </linearGradient>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg">
+                <linearGradient id="gradient-complementary">
+                    <stop class="__gradient-complementary-start" offset="0"/>
+                    <stop class="__gradient-complementary-end" offset="100%"/>
+                </linearGradient>
+            </svg>
 
-        <div class="__tentacule-01" s-parallax amount-tx="0.05" amount-ty="0.05" amount-r="0.2">
-            <img s-inline src="/dist/img/illustrations/welcome/tentacule-01.svg" />
-        </div>
-        <div class="__tentacule-02" s-parallax amount-tx="0.1" amount-ty="0.3" amount-r="0.2">
-            <img s-inline src="/dist/img/illustrations/welcome/tentacule-02.svg" />
-        </div>
-        <div class="__tentacule-03" s-parallax amount-tx="0.2" amount-ty="0.05" amount-r="0.2">
-            <img s-inline src="/dist/img/illustrations/welcome/tentacule-03.svg" />
-        </div>
-        <div class="__tentacule-04" s-parallax amount-tx="0.05" amount-ty="0.1" amount-r="0.2">
-            <img s-inline src="/dist/img/illustrations/welcome/tentacule-04.svg" />
-        </div>
-        <div class="__tentacule-05" s-parallax amount-tx="0.1" amount-ty="0.05" amount-r="0.2">
-            <img s-inline src="/dist/img/illustrations/welcome/tentacule-05.svg" />
-        </div>
-        <div class="__tentacule-06" s-parallax amount-tx="0.05" amount-ty="0.1" amount-r="0.2">
-            <img s-inline src="/dist/img/illustrations/welcome/tentacule-06.svg" />
-        </div>
-        <div class="__tentacule-07" s-parallax amount-tx="0.1" amount-ty="0" amount-r="0.2">
-            <img s-inline src="/dist/img/illustrations/welcome/tentacule-07.svg" />
-        </div>
+            <div class="__tentacule-01" s-parallax amount-tx="0.05" amount-ty="0.05" amount-r="0.2">
+                <img s-inline src="/dist/img/illustrations/welcome/tentacule-01.svg" />
+            </div>
+            <div class="__tentacule-02" s-parallax amount-tx="0.1" amount-ty="0.3" amount-r="0.2">
+                <img s-inline src="/dist/img/illustrations/welcome/tentacule-02.svg" />
+            </div>
+            <div class="__tentacule-03" s-parallax amount-tx="0.2" amount-ty="0.05" amount-r="0.2">
+                <img s-inline src="/dist/img/illustrations/welcome/tentacule-03.svg" />
+            </div>
+            <div class="__tentacule-04" s-parallax amount-tx="0.05" amount-ty="0.1" amount-r="0.2">
+                <img s-inline src="/dist/img/illustrations/welcome/tentacule-04.svg" />
+            </div>
+            <div class="__tentacule-05" s-parallax amount-tx="0.1" amount-ty="0.05" amount-r="0.2">
+                <img s-inline src="/dist/img/illustrations/welcome/tentacule-05.svg" />
+            </div>
+            <div class="__tentacule-06" s-parallax amount-tx="0.05" amount-ty="0.1" amount-r="0.2">
+                <img s-inline src="/dist/img/illustrations/welcome/tentacule-06.svg" />
+            </div>
+            <div class="__tentacule-07" s-parallax amount-tx="0.1" amount-ty="0" amount-r="0.2">
+                <img s-inline src="/dist/img/illustrations/welcome/tentacule-07.svg" />
+            </div>
 
-        <div class="__cup">
-            <img src="/dist/img/welcome/cup.png" />
-        </div>
-        <div class="__smoke">
-            <video playsinline autoplay muted loop>
-                <source src="/dist/img/cup-smoke.webm" type="video/webm">
-            </video>
-        </div>
-        
-        <div class="__waves-cup" s-parallax amount-tx="0.06" amount-ty="0" amount-r="0">
-            <img s-inline src="/dist/img/illustrations/welcome/waves-cup.svg" />
-        </div>
+            <div class="__cup" s-glitch>
+                <img src="/dist/img/welcome/cup.png" />
+            </div>
+            <div class="__smoke">
+                <video playsinline autoplay muted loop>
+                    <source src="/dist/img/cup-smoke.webm" type="video/webm">
+                </video>
+            </div>
+            
+            <div class="__waves-cup" s-parallax amount-tx="0.06" amount-ty="0" amount-r="0">
+                <img s-inline src="/dist/img/illustrations/welcome/waves-cup.svg" />
+            </div>
 
-        <div class="__waves-01" s-parallax amount-tx="0.1" amount-ty="0" amount-r="0">
-            <img s-inline src="/dist/img/illustrations/welcome/waves-01.svg" />
-        </div>
-        <div class="__waves-02" s-parallax amount-tx="0.07" amount-ty="0" amount-r="0">
-            <img s-inline src="/dist/img/illustrations/welcome/waves-02.svg" />
-        </div>
-        <div class="__waves-03" s-parallax amount-tx="0.1" amount-ty="0" amount-r="0">
-            <img s-inline src="/dist/img/illustrations/welcome/waves-03.svg" />
-        </div>
-        <div class="__waves-04" s-parallax amount-tx="0.1" amount-ty="0" amount-r="0">
-            <img s-inline src="/dist/img/illustrations/welcome/waves-04.svg" />
-        </div>
-        <div class="__waves-05" s-parallax amount-tx="0.1" amount-ty="0" amount-r="0">
-            <img s-inline src="/dist/img/illustrations/welcome/waves-05.svg" />
-        </div>
-        <div class="__waves-06" s-parallax amount-tx="0.07" amount-ty="0" amount-r="0">
-            <img s-inline src="/dist/img/illustrations/welcome/waves-06.svg" />
-        </div>
-        <div class="__waves-07" s-parallax amount-tx="0.1" amount-ty="0" amount-r="0">
-            <img s-inline src="/dist/img/illustrations/welcome/waves-07.svg" />
-        </div>
-        <div class="__waves-08" s-parallax amount-tx="0.07" amount-ty="0" amount-r="0">
-            <img s-inline src="/dist/img/illustrations/welcome/waves-08.svg" />
-        </div>
-        <div class="__waves-09" s-parallax amount-tx="0.1" amount-ty="0" amount-r="0">
-            <img s-inline src="/dist/img/illustrations/welcome/waves-09.svg" />
-        </div>
-        <div class="__waves-10" s-parallax amount-tx="0.07" amount-ty="0" amount-r="0">
-            <img s-inline src="/dist/img/illustrations/welcome/waves-10.svg" />
-        </div>
+            <div class="__waves-01" s-parallax amount-tx="0.1" amount-ty="0" amount-r="0">
+                <img s-inline src="/dist/img/illustrations/welcome/waves-01.svg" />
+            </div>
+            <div class="__waves-02" s-parallax amount-tx="0.07" amount-ty="0" amount-r="0">
+                <img s-inline src="/dist/img/illustrations/welcome/waves-02.svg" />
+            </div>
+            <div class="__waves-03" s-parallax amount-tx="0.1" amount-ty="0" amount-r="0">
+                <img s-inline src="/dist/img/illustrations/welcome/waves-03.svg" />
+            </div>
+            <div class="__waves-04" s-parallax amount-tx="0.1" amount-ty="0" amount-r="0">
+                <img s-inline src="/dist/img/illustrations/welcome/waves-04.svg" />
+            </div>
+            <div class="__waves-05" s-parallax amount-tx="0.1" amount-ty="0" amount-r="0">
+                <img s-inline src="/dist/img/illustrations/welcome/waves-05.svg" />
+            </div>
+            <div class="__waves-06" s-parallax amount-tx="0.07" amount-ty="0" amount-r="0">
+                <img s-inline src="/dist/img/illustrations/welcome/waves-06.svg" />
+            </div>
+            <div class="__waves-07" s-parallax amount-tx="0.1" amount-ty="0" amount-r="0">
+                <img s-inline src="/dist/img/illustrations/welcome/waves-07.svg" />
+            </div>
+            <div class="__waves-08" s-parallax amount-tx="0.07" amount-ty="0" amount-r="0">
+                <img s-inline src="/dist/img/illustrations/welcome/waves-08.svg" />
+            </div>
+            <div class="__waves-09" s-parallax amount-tx="0.1" amount-ty="0" amount-r="0">
+                <img s-inline src="/dist/img/illustrations/welcome/waves-09.svg" />
+            </div>
+            <div class="__waves-10" s-parallax amount-tx="0.07" amount-ty="0" amount-r="0">
+                <img s-inline src="/dist/img/illustrations/welcome/waves-10.svg" />
+            </div>
 
-        <div class="__shadow"></div>
-        <div class="__discover-02">
-            <ck-discover-welcome></ck-discover-welcome>
-        </div>
+            <div class="__shadow"></div>
+            <div class="__discover-02">
+                <ck-discover-welcome></ck-discover-welcome>
+            </div>
 
+        </div>
     </div>
 
     <s-slider lnf="welcome-header" loop>
@@ -150,7 +152,7 @@
 
             <div class="__content">
 
-                <div>
+                <div s-glitch>
                     @include('pages.homepage.welcome.partials.content')
                 </div>
 

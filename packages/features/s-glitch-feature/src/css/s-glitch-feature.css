@@ -1,4 +1,10 @@
 .s-glitch {
+    canvas {
+        mix-blend-mode: lighten;
+    }
+}
+
+/* .s-glitch {
     display: block;
     position: relative;
 }
@@ -13,4 +19,4 @@
 }
 .s-glitch.glitch .s-glitch__canvas {
     display: block;
-}
+} */

@@ -40,7 +40,7 @@ class SGlitchFeatureInterface extends s_interface_1.default {
                 description: 'Specify the max timeout between the glitches phase in ms',
                 default: 5000,
             },
-            minDiration: {
+            minDuration: {
                 type: 'Number',
                 description: 'Specify the min glitch duration in ms',
                 default: 100,

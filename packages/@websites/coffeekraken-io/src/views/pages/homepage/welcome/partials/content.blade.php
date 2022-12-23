@@ -1,3 +1,5 @@
+<div>
+
 <div class="s-mbe:50 __logo">
     @include ('generic.logo')
 </div>
@@ -35,3 +37,5 @@
     <br />Fully open source
     <i class="s-icon:logo-opensource s-tc:accent"></i>
 </p>
+
+</div>

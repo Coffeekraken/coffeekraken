@@ -18,7 +18,8 @@
         "@coffeekraken/s-theme": "^2.0.0-alpha.20",
         "@coffeekraken/sugar": "^2.0.0-alpha.20",
         "html2canvas": "^1.4.1",
-        "three-full": "^11.3.2"
+        "powerglitch": "^2.3.2",
+        "three-full": "11.3.2"
     },
     "main": "dist/pkg/cjs/js/exports.js",
     "module": "dist/pkg/esm/js/exports.js",

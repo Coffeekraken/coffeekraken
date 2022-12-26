@@ -1,26 +1,36 @@
+/* init theme */
 @sugar.init ($variant: dark);
 
+/* main sugar classes */
 @sugar.classes;
 
-body {
-  /* display: none; */
-}
-
+/* UI's */
 @sugar.ui.codeexample.classes;
-
 @sugar.ui.filtrableinput.classes;
 @sugar.ui.colorpicker.classes;
 @sugar.ui.datetimepicker.classes;
 @sugar.ui.codeexample.classes;
 @sugar.ui.rating.classes;
 @sugar.ui.slider.classes;
-@sugar.ui.themeswitcher.classes;
-
 @sugar.ui.googlemap.classes;
 @sugar.ui.googlemapmarker.classes;
-
+@sugar.ui.themeswitcher.classes;
 @sugar.platform.classes;
 
+/* mobile specific classes */
+@sugar.media.classes mobile {
+  @sugar.margin.classes;
+  @sugar.padding.classes;
+  @sugar.display.classes;
+  @sugar.layout.classes;
+  @sugar.hide.classes;
+  @sugar.flex.classes;
+  @sugar.text.classes;
+  @sugar.gap.classes;
+  @sugar.ui.button.classes;
+}
+
+/* icons */
 @sugar.icon.classes (
   fa:user:user
   fa:heart:heart

@@ -667,7 +667,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             }, 3000);
 
             if (
-                root.source.input.file.match(/\.css$/)
+                root.source.input.file.match(/\.css(\?.*)?$/)
                 // !root.source.input.file.match(/index\.css$/)
             ) {
                 const cachedDataStr = getCachedData(root.source.input.file);

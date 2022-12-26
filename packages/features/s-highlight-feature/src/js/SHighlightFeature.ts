@@ -27,11 +27,11 @@ import __css from '../../../../src/css/s-highlight-feature.css'; // relative to 
  * @example         html            Highlight
  * <div class="s-radius s-bg:main s-depth s-mbe:30" style="height:100px" s-highlight>
  * </div>
- * <div class="s-radius s-bg:accent s-depth s-mbe:30" style="height:100px" s-highlight opacity="1">
+ * <div class="s-radius s-bg:accent s-depth s-mbe:30" style="height:100px" s-highlight intensity="1">
  * </div>
- * <div class="s-radius s-bg:complementary s-depth s-mbe:30" style="height:100px" s-highlight opacity="1">
+ * <div class="s-radius s-bg:complementary s-depth s-mbe:30" style="height:100px" s-highlight intensity="1">
  * </div>
- * <div class="s-radius s-bg:error s-depth" style="height:100px" s-highlight opacity="1">
+ * <div class="s-radius s-bg:error s-depth" style="height:100px" s-highlight intensity="1">
  * </div>
  *
  * @see         https://codepen.io/Hyperplexed/pen/MWQeYLW
@@ -42,7 +42,7 @@ import __css from '../../../../src/css/s-highlight-feature.css'; // relative to 
 export interface ISHighlightFeatureProps {
     type: 'light';
     size: number;
-    opacity: number;
+    intensity: number;
 }
 
 export default class SHighlightFeature extends __SFeature {
@@ -69,10 +69,10 @@ export default class SHighlightFeature extends __SFeature {
                 `${this.props.size}px`,
             );
         }
-        if (this.props.opacity) {
+        if (this.props.intensity) {
             this.node.style.setProperty(
-                '--s-highlight-opacity',
-                this.props.opacity,
+                '--s-highlight-intensity',
+                this.props.intensity,
             );
         }
 

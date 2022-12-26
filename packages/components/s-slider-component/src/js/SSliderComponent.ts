@@ -274,6 +274,7 @@ export interface ISSliderComponentProps extends ISLitComponentDefaultProps {
     mousewheel: boolean;
     clickOnSlide: boolean;
     slide: number;
+    slidesByPage: number;
     loop: boolean;
     progress: boolean;
     timer: number;
@@ -289,8 +290,20 @@ export interface ISSliderComponentProps extends ISLitComponentDefaultProps {
 export interface ISSliderComponentSlide {
     id: string;
     idx: number;
+    page: number;
     $slide: HTMLElement;
     timer: ISSliderComponentTimer;
+}
+
+export interface ISSliderPageRect {
+    top: number;
+    left: number;
+    right: number;
+    bottom: number;
+    width: number;
+    height: number;
+    x: number;
+    y: number;
 }
 
 export interface ISSliderComponentTimer {
@@ -317,6 +330,7 @@ export default class SSliderComponent extends __SLitComponent {
 
     static get state() {
         return {
+            currentPage: 0,
             previousSlideIdx: 0,
             currentSlideIdx: 0,
             playing: true,
@@ -488,33 +502,39 @@ export default class SSliderComponent extends __SLitComponent {
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     async applyPad() {
-        // pad through behavior
-        if (this.getBehavior().pad) {
-            await this.getBehavior().pad();
-        } else {
-            await this._pad();
-        }
+        setTimeout(async () => {
+            // pad through behavior
+            if (this.getBehavior().pad) {
+                await this.getBehavior().pad();
+            } else {
+                await this._pad();
+            }
+        }, 20);
     }
 
     /**
      * Default pad function if not specified in the behavior
      */
     _pad() {
-        const firstSlide = this.getFirstSlide(),
-            lastSlide = this.getLastSlide(),
-            firstRect = firstSlide.$slide.getBoundingClientRect(),
-            lastRect = lastSlide.$slide.getBoundingClientRect(),
-            sliderRect = this.getBoundingClientRect();
+        const sliderRect = this.getBoundingClientRect(),
+            firstPageRect = this.getFirstPageRect(),
+            lastPageRect = this.getLastPageRect();
+
         let padStart = 0,
             padEnd = 0;
+
+        // different calculation depending on direction
         if (this.props.direction === 'vertical') {
-            padStart = (sliderRect.height - firstRect.height) * 0.5;
-            padEnd = (sliderRect.height - lastRect.height) * 0.5;
+            // calculate padStart
+            padStart = (sliderRect.height - firstPageRect.height) * 0.5;
+            padEnd = (sliderRect.height - lastPageRect.height) * 0.5;
         } else {
-            padStart = (sliderRect.width - firstRect.width) * 0.5;
-            console.log(sliderRect.width, lastRect.width);
-            padEnd = (sliderRect.width - lastRect.width) * 0.5;
+            // calculate padStart
+            padStart = (sliderRect.width - firstPageRect.width) * 0.5;
+            padEnd = (sliderRect.width - lastPageRect.width) * 0.5;
         }
+
+        // set the css property
         this.style.setProperty(
             '--s-slider-pad-start',
             `${Math.round(padStart)}px`,
@@ -710,6 +730,30 @@ export default class SSliderComponent extends __SLitComponent {
     }
 
     /**
+     * @name        isSlideInPage
+     * @type        Function
+     *
+     * This method allows you to check if the passed slide is in the current "page" or not
+     *
+     * @param       {String|HTMLElement}        slide           A slide idx of the slide element
+     * @param       {Number}                [page=this.state.currentPage]       The page to check the slide against
+     * @return      {Boolean}           true if the actual slide is the last one, false otherwise
+     *
+     * @since       2.0.0
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    isSlideInPage(
+        slide: String | HTMLElement,
+        page: number = this.state.currentPage,
+    ): boolean {
+        const slideObj = this.getSlide(slide);
+        return (
+            slideObj.idx >= page * this.props.slidesByPage &&
+            slideObj.idx < (page + 1) * this.props.slidesByPage
+        );
+    }
+
+    /**
      * @name        isLast
      * @type        Function
      *
@@ -720,7 +764,7 @@ export default class SSliderComponent extends __SLitComponent {
      * @since       2.0.0
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    isLast() {
+    isLast(): boolean {
         return this.state.currentSlideIdx >= this.$slides.length - 1;
     }
 
@@ -735,7 +779,7 @@ export default class SSliderComponent extends __SLitComponent {
      * @since       2.0.0
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    isFirst() {
+    isFirst(): boolean {
         return this.state.currentSlideIdx <= 0;
     }
 
@@ -775,6 +819,9 @@ export default class SSliderComponent extends __SLitComponent {
         // set the new slide idx
         this.props.slide = idx;
         this.state.currentSlideIdx = idx;
+
+        // update the current page
+        this.state.currentPage = Math.ceil(idx / this.props.slidesByPage);
 
         // update the slides classes
         this.updateSlidesClasses();
@@ -1022,6 +1069,170 @@ export default class SSliderComponent extends __SLitComponent {
     }
 
     /**
+     * @name            getLastPage
+     * @type            Function
+     *
+     * Get the last page idx
+     *
+     * @return      {Number}            The last page idx
+     *
+     * @since       2.0.0
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    getLastPage(): number {
+        return Math.ceil(this.$slides.length / this.props.slidesByPage) - 1;
+    }
+
+    /**
+     * @name        getFirstPageSlides
+     * @type        Function
+     *
+     * This method allows you to get all first page slides.
+     *
+     * @return      {ISSliderComponentSlide[]}          An array of slides
+     *
+     * @since       2.0.0
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    getFirstPageSlides(): ISSliderComponentSlide[] {
+        return this.getPageSlides(0);
+    }
+
+    /**
+     * @name        getLastPageSlides
+     * @type        Function
+     *
+     * This method allows you to get all last page slides.
+     *
+     * @return      {ISSliderComponentSlide[]}          An array of slides
+     *
+     * @since       2.0.0
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    getLastPageSlides(): ISSliderComponentSlide[] {
+        return this.getPageSlides(this.getLastPage());
+    }
+
+    /**
+     * @name        getPageRect
+     * @type        Function
+     *
+     * This method allows you to get a page rect just like the getBoundingClientRect native function
+     *
+     * @param       {Number}               [pageOrSlideElement=this.state.currentPage]        The page you want the rect object from
+     * @return      {ISSliderPageRect}          The page rect object
+     *
+     * @since       2.0.0
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    getPageRect(
+        pageOrSlideElement: number | HTMLElement = this.state.currentPage,
+    ): ISSliderPageRect {
+        let page = pageOrSlideElement;
+
+        // if the passed page parameter is an HTMLElement
+        if (pageOrSlideElement instanceof HTMLElement) {
+            const slide = this.getSlide(pageOrSlideElement);
+            page = slide.page;
+        }
+
+        // get the slides of the page
+        const slides = this.getPageSlides(page);
+
+        const rect = {
+            top: -1,
+            left: -1,
+            right: -1,
+            bottom: -1,
+            width: -1,
+            height: -1,
+            x: -1,
+            y: -1,
+        };
+
+        slides.forEach((slide) => {
+            const slideRect = slide.$slide.getBoundingClientRect();
+            if (rect.top === -1 || slideRect.top < rect.top) {
+                rect.top = slideRect.top;
+            }
+            if (rect.left === -1 || slideRect.left < rect.left) {
+                rect.left = slideRect.left;
+            }
+            if (rect.right === -1 || slideRect.right > rect.right) {
+                rect.right = slideRect.right;
+            }
+            if (rect.bottom === -1 || slideRect.bottom > rect.bottom) {
+                rect.bottom = slideRect.bottom;
+            }
+        });
+
+        rect.width = rect.right - rect.left;
+        rect.height = rect.bottom - rect.top;
+        rect.x = rect.left;
+        rect.y = rect.top;
+
+        return rect;
+    }
+
+    /**
+     * @name        getFirstPageRect
+     * @type        Function
+     *
+     * This method allows you to get the first page rect just like the getBoundingClientRect native function
+     *
+     * @return      {ISSliderPageRect}          The page rect object
+     *
+     * @since       2.0.0
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    getFirstPageRect(): ISSliderPageRect {
+        return this.getPageRect(0);
+    }
+
+    /**
+     * @name        getLastPageRect
+     * @type        Function
+     *
+     * This method allows you to get the last page rect just like the getBoundingClientRect native function
+     *
+     * @return      {ISSliderPageRect}          The page rect object
+     *
+     * @since       2.0.0
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    getLastPageRect(): ISSliderPageRect {
+        return this.getPageRect(this.getLastPage());
+    }
+
+    /**
+     * @name        getPageSlides
+     * @type        Function
+     *
+     * This method allows you to get all the slides in a particular "page".
+     *
+     * @param       {Number}        page        The page you want to get slides from
+     * @return      {ISSliderComponentSlide[]}          An array of slides
+     *
+     * @since       2.0.0
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    getPageSlides(page: number): ISSliderComponentSlide[] {
+        const slides: ISSliderComponentSlide[] = [];
+
+        for (
+            let i = page * this.props.slidesByPage;
+            i < (page + 1) * this.props.slidesByPage;
+            i++
+        ) {
+            if (i < this.$slides.length) {
+                slides.push(this.getSlide(i));
+            }
+        }
+
+        return slides;
+    }
+
+    /**
      * @name        getSlide
      * @type        Function
      *
@@ -1074,6 +1285,7 @@ export default class SSliderComponent extends __SLitComponent {
         return {
             id,
             idx,
+            page: Math.ceil(idx / this.props.slidesByPage),
             $slide,
             timer,
         };
@@ -1159,7 +1371,10 @@ export default class SSliderComponent extends __SLitComponent {
     updateSlidesClasses(): void {
         const currentSlide = this.getCurrentSlide();
         this.$slides.forEach(($slide, i) => {
-            if ($slide === currentSlide.$slide) {
+            // multiple slides by page
+            if (this.props.slidesByPage > 1 && this.isSlideInPage($slide)) {
+                $slide.classList.add('active');
+            } else if ($slide === currentSlide.$slide) {
                 $slide.classList.add('active');
             } else {
                 $slide.classList.remove('active');
@@ -1486,7 +1701,16 @@ export default class SSliderComponent extends __SLitComponent {
         let slide = this.getCurrentSlide();
 
         this.style.setProperty('--s-slider-slide', this.state.currentSlideIdx);
-        this.style.setProperty('--s-slider-total', this.$slides.length);
+        this.style.setProperty('--s-slider-total-slides', this.$slides.length);
+        this.style.setProperty('--s-slider-page', this.state.currentPage);
+        this.style.setProperty(
+            '--s-slider-total-pages',
+            Math.ceil(this.$slides.length / this.props.slidesByPage),
+        );
+        this.style.setProperty(
+            '--s-slider-slides-by-page',
+            this.props.slidesByPage,
+        );
         this.style.setProperty(
             '--s-slider-slide-timer-total',
             `${slide.timer.total ?? 0 / 1000}s`,
@@ -1541,15 +1765,28 @@ export default class SSliderComponent extends __SLitComponent {
                           `
                         : ''}
                     <div class="${this.componentUtils.className('__nav')}">
-                        ${this.$slides.map(($slide, idx) => {
+                        ${[
+                            ...Array(
+                                Math.ceil(
+                                    this.$slides.length /
+                                        this.props.slidesByPage,
+                                ),
+                            ),
+                        ].map((i, idx) => {
                             return html`
                                 <div
                                     class="${this.componentUtils.className(
                                         '__nav-item',
-                                    )} ${idx === currentSlide.idx
+                                    )} ${this.isSlideInPage(
+                                        currentSlide.idx,
+                                        idx,
+                                    )
                                         ? 'active'
                                         : ''}"
-                                    @pointerup=${() => this.goTo(idx)}
+                                    @pointerup=${() =>
+                                        this.goTo(
+                                            idx * this.props.slidesByPage,
+                                        )}
                                 ></div>
                             `;
                         })}

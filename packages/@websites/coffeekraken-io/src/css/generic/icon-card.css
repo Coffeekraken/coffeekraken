@@ -64,7 +64,7 @@
   }
 
   i {
-    font-size: 100px;
+    font-size: 80px;
     position: absolute;
     z-index: 1;
     bottom: calc(50% + 20px);
@@ -106,9 +106,8 @@
     }
   }
 
-  &[style] {
+  /* &[style] {
     &:hover i {
-      /* transform: translate(-100%); */
       transform: scale(0.4) translate(0, 0);
       bottom: 7%;
       left: 7%;
@@ -122,6 +121,6 @@
     &:hover .icon-card__content:after {
       transform: translateX(-25%) translateY(0%) rotateZ(45deg);
     }
-  }
+  } */
 }
 /* } */

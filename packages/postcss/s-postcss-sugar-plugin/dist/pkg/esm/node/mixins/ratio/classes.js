@@ -13,7 +13,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return        {Css}         The generated css
  *
  * @example        css
- * \@sugar.ratio.classes;
+ * @sugar.ratio.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

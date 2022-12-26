@@ -38,7 +38,7 @@ exports.interface = postcssSugarPluginMediaMixinInterface;
  * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
  *
  * @example        css
- * \@sugar.init;
+ * @sugar.init;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

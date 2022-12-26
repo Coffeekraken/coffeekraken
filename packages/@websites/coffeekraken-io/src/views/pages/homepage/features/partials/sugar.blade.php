@@ -151,7 +151,7 @@
                 </div>
             </div>
 
-            <div class="s-text:center">
+            <div class="s-text:center @mobile s-mbs:50 s-text:left">
                 <p class="s-typo:lead s-mi:auto s-mbe:30">
                     This is <span class="s-tc:accent">just a sneak peak</span> of what you can leverage in the sugar
                     toolkit.<br>

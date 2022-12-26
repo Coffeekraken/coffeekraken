@@ -15,7 +15,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return      {Css}                   The corresponding css
  *
  * @example       css
- * \@sugar.ui.badge.classes();
+ * @sugar.ui.badge.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

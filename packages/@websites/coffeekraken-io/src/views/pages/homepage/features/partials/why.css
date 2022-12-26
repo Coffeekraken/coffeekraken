@@ -1,4 +1,5 @@
-#feature-why {
-  .__illustration {
+#features-why {
+  &:after {
+    display: none;
   }
 }

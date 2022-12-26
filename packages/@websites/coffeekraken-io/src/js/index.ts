@@ -13,7 +13,7 @@ import { define as __SSliderComponentDefine } from '@coffeekraken/s-slider-compo
 import { define as __SThemeSwitcherComponentDefine } from '@coffeekraken/s-theme-switcher-component';
 
 import __SFeature from '@coffeekraken/s-feature';
-import { define as __SGlitchFeatureDefine } from '@coffeekraken/s-glitch-feature';
+// import { define as __SGlitchFeatureDefine } from '@coffeekraken/s-glitch-feature';
 import { define as __SHighlightFeatureDefine } from '@coffeekraken/s-highlight-feature';
 import { define as __SLazyFeatureDefine } from '@coffeekraken/s-lazy-feature';
 import { define as __SPageTransitionFeatureDefine } from '@coffeekraken/s-page-transition-feature';
@@ -28,7 +28,10 @@ import { define as __CKSettingsComponent } from './components/CkSettings';
 // import { define as __CKRatingsComponent } from './components/CKRating';
 // import { define as __CKWelcomeRatingsComponent } from './components/CKWelcomeRatings';
 
-import { __querySelectorLive } from '@coffeekraken/sugar/dom';
+import {
+  __querySelectorLive,
+  __reloadStylesheets,
+} from '@coffeekraken/sugar/dom';
 
 // Libs
 import __STheme from '@coffeekraken/s-theme';
@@ -40,6 +43,14 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
 // For doc specific
 // @ts-ignore
 const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
+
+if (import.meta.hot) {
+  import.meta.hot.on('sugar.update.css', (data) => {
+    console.log('RELOAD', data);
+    // perform custom update
+    __reloadStylesheets();
+  });
+}
 
 (async () => {
   __SFeature.setDefaultProps('*', {
@@ -97,7 +108,7 @@ const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
   __SLazyFeatureDefine();
   __SParallaxFeatureDefine();
   __SHighlightFeatureDefine();
-  __SGlitchFeatureDefine();
+  // __SGlitchFeatureDefine();
 
   // components
   __SCodeExampleComponentDefine();
@@ -140,6 +151,7 @@ const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
 
   // code example highlight
   __querySelectorLive('.s-code-example__content', ($elm) => {
+    $elm.setAttribute('intensity', '0.2');
     $elm.setAttribute('s-highlight', 'light');
   });
 })();

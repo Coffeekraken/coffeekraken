@@ -182,7 +182,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             }
 
             @sugar.media(<=mobile) {
-                @sugar.ui.label($style: block, $scope: bare);
+                @sugar.ui.label($lnf: block, $scope: bare);
 
                 > span,
                 > input:not([type="radio"][type="checkbox"]),

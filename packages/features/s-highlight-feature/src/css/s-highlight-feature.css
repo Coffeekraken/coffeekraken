@@ -41,6 +41,6 @@
 [s-highlight][type='light'].highlight {
     &:before,
     &:after {
-        opacity: var(--s-highlight-opacity, 0.6);
+        opacity: var(--s-highlight-intensity, 0.6);
     }
 }

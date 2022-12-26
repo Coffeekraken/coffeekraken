@@ -14,7 +14,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return        {Css}         The generated css
  *
  * @example        css
- * \@sugar.reset.destyle;
+ * @sugar.reset.destyle;
  *
  * @see       https://github.com/nicolas-cusan/destyle.css
  * @since       2.0.0
@@ -76,7 +76,7 @@ export default function ({
         * @support      edge
         * 
         * @example        css
-        * \@sugar.reset.destyle;
+        * @sugar.reset.destyle;
         * 
         * @see          https://github.com/nicolas-cusan/destyle.css
         * @since      2.0.0

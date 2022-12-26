@@ -19,7 +19,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return      {Css}                   The corresponding css
  *
  * @example       css
- * \@sugar.ui.avatar.classes();
+ * @sugar.ui.avatar.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

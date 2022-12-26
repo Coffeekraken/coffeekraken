@@ -20,7 +20,7 @@ const string_1 = require("@coffeekraken/sugar/string");
  * @return        {Css}         The generated css
  *
  * @example        css
- * \@sugar.transition.classes;
+ * @sugar.transition.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

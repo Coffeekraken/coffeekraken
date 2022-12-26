@@ -261,7 +261,8 @@
             left: 0;
             height: 100%;
             width: calc(
-                100% / (var(--s-slider-total)) * (var(--s-slider-slide) + 1)
+                100% / (var(--s-slider-total-pages)) *
+                    (var(--s-slider-page) + 1)
             );
             background: currentColor;
         }

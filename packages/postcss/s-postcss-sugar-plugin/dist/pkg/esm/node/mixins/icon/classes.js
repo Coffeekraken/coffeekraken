@@ -42,7 +42,7 @@ import { __unquote } from '@coffeekraken/sugar/string';
  * @return        {Css}         The generated css
  *
  * @example        css
- * \@sugar.icon.classes(
+ * @sugar.icon.classes(
  *    fa:user:user
  *    fa:heart:heart
  *    fs:src/icons/vuejs.svg:vue

@@ -17,103 +17,86 @@
 
         @php
             $uiCards = [
-                [
-                    (object) [
-                        "title" => "Text align",
-                        "icon" => "ui-align",
-                        "url" => "/styleguide/helpers/text",
-                        "image" => "https://picsum.photos/600/600?align"
-                    ],
-                    (object) [
-                        "title" => "Typography",
-                        "icon" => "ui-typography",
-                        "url" => "/styleguide/helpers/typography",
-                        "image" => "https://picsum.photos/600/600?typo"
-                    ],
-                    (object) [
-                        "title" => "Colors",
-                        "icon" => "theme-colors",
-                        "url" => "/styleguide/helpers/colors",
-                        "image" => "https://picsum.photos/600/600?color"
-                    ]
+                (object) [
+                    "title" => "Text align",
+                    "icon" => "ui-align",
+                    "url" => "/styleguide/helpers/text",
+                    "image" => "https://picsum.photos/600/600?align"
                 ],
-                [
-                    (object) [
-                        "title" => "Flexbox",
-                        "icon" => "css-flex",
-                        "url" => "/styleguide/helpers/flexbox",
-                        "image" => "https://picsum.photos/600/600?flexbox"
-                    ],
-                    (object) [
-                        "title" => "Ratios",
-                        "icon" => "layout-ratio",
-                        "url" => "/styleguide/helpers/ratio",
-                        "image" => "https://picsum.photos/600/600?ratio"
-                    ],
-                    (object) [
-                        "title" => "Border radius",
-                        "icon" => "css-radius",
-                        "url" => "/styleguide/helpers/radius",
-                        "image" => "https://picsum.photos/600/600?radius"
-                    ]
+                (object) [
+                    "title" => "Typography",
+                    "icon" => "ui-typography",
+                    "url" => "/styleguide/helpers/typography",
+                    "image" => "https://picsum.photos/600/600?typo"
                 ],
-                [
-                    (object) [
-                        "title" => "Transitions",
-                        "icon" => "animation-easing",
-                        "url" => "/styleguide/helpers/transition",
-                        "image" => "https://picsum.photos/600/600?transition"
-                    ],
-                    (object) [
-                        "title" => "Spaces",
-                        "icon" => "layout-space",
-                        "url" => "/styleguide/helpers/margin",
-                        "image" => "https://picsum.photos/600/600?space"
-                    ],
-                    (object) [
-                        "title" => "Visibility",
-                        "icon" => "misc-eye",
-                        "url" => "/styleguide/helpers/visibility",
-                        "image" => "https://picsum.photos/600/600?visibility"
-                    ],
+                (object) [
+                    "title" => "Colors",
+                    "icon" => "theme-colors",
+                    "url" => "/styleguide/helpers/colors",
+                    "image" => "https://picsum.photos/600/600?color"
                 ],
-                [
-                    (object) [
-                        "title" => "Scales",
-                        "icon" => "layout-scale",
-                        "url" => "/styleguide/tools/scale",
-                        "image" => "https://picsum.photos/600/600?scale"
-                    ]
+                (object) [
+                    "title" => "Flexbox",
+                    "icon" => "css-flex",
+                    "url" => "/styleguide/helpers/flexbox",
+                    "image" => "https://picsum.photos/600/600?flexbox"
+                ],
+                (object) [
+                    "title" => "Ratios",
+                    "icon" => "layout-ratio",
+                    "url" => "/styleguide/helpers/ratio",
+                    "image" => "https://picsum.photos/600/600?ratio"
+                ],
+                (object) [
+                    "title" => "Border radius",
+                    "icon" => "css-radius",
+                    "url" => "/styleguide/helpers/radius",
+                    "image" => "https://picsum.photos/600/600?radius"
+                ],
+                (object) [
+                    "title" => "Transitions",
+                    "icon" => "animation-easing",
+                    "url" => "/styleguide/helpers/transition",
+                    "image" => "https://picsum.photos/600/600?transition"
+                ],
+                (object) [
+                    "title" => "Spaces",
+                    "icon" => "layout-space",
+                    "url" => "/styleguide/helpers/margin",
+                    "image" => "https://picsum.photos/600/600?space"
+                ],
+                (object) [
+                    "title" => "Visibility",
+                    "icon" => "misc-eye",
+                    "url" => "/styleguide/helpers/visibility",
+                    "image" => "https://picsum.photos/600/600?visibility"
+                ],
+                (object) [
+                    "title" => "Scales",
+                    "icon" => "layout-scale",
+                    "url" => "/styleguide/tools/scale",
+                    "image" => "https://picsum.photos/600/600?scale"
                 ]
             ];
         @endphp
 
-        <s-slider controls nav loop pad class="s-mbe:100 s-ratio:none ui-card-slider">
-            
-            @foreach ($uiCards as $section)
-
+        <s-slider controls slides-by-page="3" pad nav loop class="s-mbe:100 s-ratio:none ui-card-slider">
+            <responsive media="mobile" slides-by-page="1"></responsive>
+            @foreach ($uiCards as $card)
                 <div s-slider-slide>
-                    <div class="ui-card-container">
-
-                        @foreach ($section as $card)
-                            <a class="ui-card s-color:complementary" href="{{ $card->url }}" title="Coffeekraken buttons" s-highlight="light" style="--image: url({{ $card->image }})" opacity="0.6">
-                                <div class="ui-card__content">
-                                    <i class="s-icon:{{ $card->icon }}"></i>
-                                    <p class="s-p">{{ $card->title }}</p>
-                                </div>
-                            </a>
-                        @endforeach
-            
-                    </div>
+                    <a class="ui-card s-color:complementary" href="{{ $card->url }}" title="Coffeekraken buttons" s-highlight="light" style="--image: url({{ $card->image }})" intensity="0.6">
+                        <div class="ui-card__content">
+                            <i class="s-icon:{{ $card->icon }}"></i>
+                            <p class="s-p">{{ $card->title }}</p>
+                        </div>
+                    </a>
                 </div>
-
             @endforeach
-
         </s-slider>
 
         <div class="s-container">
 
-            <div class="s-text:center s-pt:50 s-mis:-50 @mobile s-mis:0">
+            <div class="s-text:center s-pt:50 s-mis:-50 @mobile s-mis:0 s-text:left">
                 <p class="s-typo:lead s-mi:auto s-mbe:30">
                     Keep in mind that <span class="s-tc:accent">all of these features are
                         optional</span>.

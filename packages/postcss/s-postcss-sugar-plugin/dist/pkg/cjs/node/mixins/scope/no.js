@@ -34,7 +34,7 @@ exports.interface = postcssSugarPluginScopeNoMixinInterface;
  * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
  *
  * @example        css
- * \@sugar.scope.no(lnf) {
+ * @sugar.scope.no(lnf) {
  *      // ...
  * }
  *

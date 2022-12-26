@@ -48,7 +48,7 @@ export default class SSliderComponentInterface extends __SInterface {
                 type: 'Boolean',
                 description:
                     'Specify if you want to pad the slides if for example the first slide does not take the while width of the slider, a padding-(block|inline)-start will be applied to center this first slide. Same for the last one',
-                default: true,
+                default: false,
             },
             nextIconClass: {
                 description: 'Specify the class of the next icon',
@@ -104,6 +104,12 @@ export default class SSliderComponentInterface extends __SInterface {
                 type: 'Number',
                 default: 0,
                 physical: true,
+            },
+            slidesByPage: {
+                description:
+                    'Specify how many slides you want by page. Pages are what is used to construct the dot nav and will determine how many slides will be passed on "next" and "previous"',
+                type: 'Number',
+                default: 1,
             },
             progress: {
                 description:

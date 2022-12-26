@@ -16,7 +16,7 @@ import { __dirname } from '@coffeekraken/sugar/fs';
  * @return        {Css}         The generated css
  *
  * @example        css
- * \@sugar.reset;
+ * @sugar.reset;
  *
  * @see       https://github.com/nicolas-cusan/destyle.css
  * @since       2.0.0
@@ -58,7 +58,7 @@ export default function ({ params, CssVars, atRule, replaceWith, }) {
         * @support      edge
         * 
         * @example        css
-        * \@sugar.reset;
+        * @sugar.reset;
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

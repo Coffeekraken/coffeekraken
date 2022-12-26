@@ -11,7 +11,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return        {Css}        The generated css
  *
  * @example        css
- * \@sugar.disabled.classes;
+ * @sugar.disabled.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

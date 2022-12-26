@@ -20,7 +20,7 @@ const faker_1 = __importDefault(require("faker"));
  * @return        {Css}         The generated css
  *
  * @example        css
- * \@sugar.typo.classes;
+ * @sugar.typo.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

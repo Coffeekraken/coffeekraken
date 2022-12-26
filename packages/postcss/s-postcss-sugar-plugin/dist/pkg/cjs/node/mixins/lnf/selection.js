@@ -26,7 +26,7 @@ exports.interface = postcssSugarPluginLiikAndFeelSelectionInterface;
  * @return      {Css}                   The corresponding grid css
  *
  * @example       css
- * \@sugar.lnf.selection;
+ * @sugar.lnf.selection;
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

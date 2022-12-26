@@ -30,6 +30,10 @@ export default {
                     // }
                     // isScrollFromUser = false;
 
+                    if (this.props.slidesByPage > 1) {
+                        return;
+                    }
+
                     let $elm,
                         lowerToCenter = 999999999999;
                     for (let [key, $slide] of this.$slides.entries()) {
@@ -65,8 +69,8 @@ export default {
             // disable scroll snaping during transition
             this.$slidesWrapper.style.scrollSnapType = 'none';
 
-            const toRect = $to.getBoundingClientRect(),
-                fromRect = $from.getBoundingClientRect(),
+            const toRect = this.getPageRect($to),
+                fromRect = this.getPageRect($from),
                 sliderRect = this.getBoundingClientRect(),
                 _this = this;
             let startX = this.$slidesWrapper.scrollLeft,

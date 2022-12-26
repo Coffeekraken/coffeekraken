@@ -1,10 +1,13 @@
 .footer {
   background-color: sugar.color(main, surface);
   padding-block: sugar.padding(100);
-
   padding-inline: sugar.padding(50);
   position: relative;
   z-index: 20;
+
+  @sugar.media mobile {
+    padding-block: sugar.padding(70);
+  }
 
   svg {
     height: 60px;
@@ -33,6 +36,7 @@
 
     @sugar.media mobile {
       flex-wrap: wrap;
+      display: none;
 
       > div {
         width: 100%;

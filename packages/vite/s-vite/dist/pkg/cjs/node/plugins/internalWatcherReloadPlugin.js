@@ -1,14 +1,9 @@
 "use strict";
 // @ts-nocheck
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const s_event_emitter_1 = __importDefault(require("@coffeekraken/s-event-emitter"));
-const s_sugar_config_1 = __importDefault(require("@coffeekraken/s-sugar-config"));
-const object_1 = require("@coffeekraken/sugar/object");
-const chokidar_1 = __importDefault(require("chokidar"));
-const picomatch_1 = __importDefault(require("picomatch"));
+const path_1 = require("@coffeekraken/sugar/path");
+const _hmrFilesPaths = [];
+let _hmrTimeout;
 /**
  * Allows to automatically reload the page when a watched file changes.
  */
@@ -19,36 +14,85 @@ exports.default = (config = {}) => ({
     config: () => ({
         server: { watch: { disableGlobbing: false, followSymlinks: true } },
     }),
-    configureServer({ watcher, ws, config: { logger } }) {
-        config = (0, object_1.__deepMerge)({
-            config: true,
-            css: true,
-        }, config);
-        const configFiles = s_sugar_config_1.default.foldersRealPaths.map((p) => `${p}/*.config.js`);
-        const shouldReloadConfigs = (0, picomatch_1.default)(configFiles);
-        const checkReload = (path) => {
-            if (!path.match(/\.config\.js$/) && !path.match(/\.css$/))
-                return;
-            let passChecks = false;
-            if (shouldReloadConfigs(path) && config.config)
-                passChecks = true;
-            if (!passChecks && path.match(/\.css$/) && config.css)
-                passChecks = true;
-            if (!passChecks)
-                return;
-            // setTimeout(() => ws.send({ type: 'full-reload' }, path ), 100);
-        };
-        s_event_emitter_1.default.global.on('s-postcss-sugar-plugin-import-update', (e) => {
-            checkReload(e.path);
-        });
-        const localWatcher = chokidar_1.default.watch(configFiles, {
-            ignoreInitial: true,
-        });
-        // Ensure Vite keeps track of the files and triggers HMR as needed.
-        // watcher.add(configFiles)
-        // Do a full page reload if any of the watched files changes.
-        localWatcher.on('add', checkReload);
-        localWatcher.on('change', checkReload);
+    handleHotUpdate(api) {
+        // console.log('___UP', api);
+        // handle only css reload
+        if (!api.file.match(/\.css$/)) {
+            return;
+        }
+        // if the file is not in the _hmrFilesPaths stack
+        // it means that it's the first time we see this file
+        // so we just add it to the stack and stop here...
+        // the file will be handled the next time
+        if (!_hmrFilesPaths.includes(api.file)) {
+            _hmrFilesPaths.push(api.file);
+            return;
+        }
+        // make use of timeout to avoid multiple
+        // hmr reload
+        clearTimeout(_hmrTimeout);
+        _hmrTimeout = setTimeout(() => {
+            const servePath = api.file
+                .replace(`${(0, path_1.__packageRootDir)()}`, '')
+                .replace(/^\/src/, '/dist');
+            // notify the frontend
+            api.server.ws.send({
+                type: 'custom',
+                event: 'sugar.update.css',
+                data: {
+                    filePath: api.file,
+                    path: servePath,
+                },
+            });
+        }, 100);
+        // server.ws.send({
+        //   type: 'custom',
+        //   event: 'special-update',
+        //   data: {}
+        // })
+        return [];
     },
+    // configureServer({ watcher, ws, config: { logger } }: ViteDevServer) {
+    //     config = __deepMerge(
+    //         {
+    //             config: true,
+    //             css: true,
+    //         },
+    //         config,
+    //     );
+    //     const configFiles = __SugarConfig.foldersRealPaths.map(
+    //         (p) => `${p}/*.config.js`,
+    //     );
+    //     const shouldReloadConfigs = __picomatch(configFiles);
+    //     const checkReload = (path: string) => {
+    //         if (!path.match(/\.config\.js$/) && !path.match(/\.css$/)) return;
+    //         // let passChecks = false;
+    //         // if (shouldReloadConfigs(path) && config.config) passChecks = true;
+    //         // if (!passChecks && path.match(/\.css$/) && config.css)
+    //         //     passChecks = true;
+    //         // if (!passChecks) return;
+    //         let type = 'update';
+    //         if (path.match(/\.css$/)) {
+    //             type = 'css.update';
+    //         }
+    //         console.log('up', type, path);
+    //         setTimeout(() => ws.send({ type, event: 'sugar' }, path), 100);
+    //     };
+    //     __SEventEmitter.global.on(
+    //         's-postcss-sugar-plugin-import-update',
+    //         (e) => {
+    //             console.log('PPP', e);
+    //             checkReload(e.path);
+    //         },
+    //     );
+    //     const localWatcher = __chokidar.watch(configFiles, {
+    //         ignoreInitial: true,
+    //     });
+    //     // Ensure Vite keeps track of the files and triggers HMR as needed.
+    //     // watcher.add(configFiles)
+    //     // Do a full page reload if any of the watched files changes.
+    //     localWatcher.on('add', checkReload);
+    //     localWatcher.on('change', checkReload);
+    // },
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLG9GQUE0RDtBQUM1RCxrRkFBeUQ7QUFDekQsdURBQXlEO0FBQ3pELHdEQUFrQztBQUNsQywwREFBb0M7QUFVcEM7O0dBRUc7QUFDSCxrQkFBZSxDQUFDLFNBQWlCLEVBQUUsRUFBZ0IsRUFBRSxDQUFDLENBQUM7SUFDbkQsSUFBSSxFQUFFLHVDQUF1QztJQUU3QyxLQUFLLEVBQUUsT0FBTztJQUVkLHdFQUF3RTtJQUN4RSxNQUFNLEVBQUUsR0FBRyxFQUFFLENBQUMsQ0FBQztRQUNYLE1BQU0sRUFBRSxFQUFFLEtBQUssRUFBRSxFQUFFLGVBQWUsRUFBRSxLQUFLLEVBQUUsY0FBYyxFQUFFLElBQUksRUFBRSxFQUFFO0tBQ3RFLENBQUM7SUFFRixlQUFlLENBQUMsRUFBRSxPQUFPLEVBQUUsRUFBRSxFQUFFLE1BQU0sRUFBRSxFQUFFLE1BQU0sRUFBRSxFQUFpQjtRQUM5RCxNQUFNLEdBQUcsSUFBQSxvQkFBVyxFQUNoQjtZQUNJLE1BQU0sRUFBRSxJQUFJO1lBQ1osR0FBRyxFQUFFLElBQUk7U0FDWixFQUNELE1BQU0sQ0FDVCxDQUFDO1FBRUYsTUFBTSxXQUFXLEdBQUcsd0JBQWEsQ0FBQyxnQkFBZ0IsQ0FBQyxHQUFHLENBQ2xELENBQUMsQ0FBQyxFQUFFLEVBQUUsQ0FBQyxHQUFHLENBQUMsY0FBYyxDQUM1QixDQUFDO1FBRUYsTUFBTSxtQkFBbUIsR0FBRyxJQUFBLG1CQUFXLEVBQUMsV0FBVyxDQUFDLENBQUM7UUFDckQsTUFBTSxXQUFXLEdBQUcsQ0FBQyxJQUFZLEVBQUUsRUFBRTtZQUNqQyxJQUFJLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxlQUFlLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDO2dCQUFFLE9BQU87WUFFbEUsSUFBSSxVQUFVLEdBQUcsS0FBSyxDQUFDO1lBRXZCLElBQUksbUJBQW1CLENBQUMsSUFBSSxDQUFDLElBQUksTUFBTSxDQUFDLE1BQU07Z0JBQUUsVUFBVSxHQUFHLElBQUksQ0FBQztZQUNsRSxJQUFJLENBQUMsVUFBVSxJQUFJLElBQUksQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLElBQUksTUFBTSxDQUFDLEdBQUc7Z0JBQ2pELFVBQVUsR0FBRyxJQUFJLENBQUM7WUFFdEIsSUFBSSxDQUFDLFVBQVU7Z0JBQUUsT0FBTztZQUV4QixrRUFBa0U7UUFDdEUsQ0FBQyxDQUFDO1FBRUYseUJBQWUsQ0FBQyxNQUFNLENBQUMsRUFBRSxDQUNyQixzQ0FBc0MsRUFDdEMsQ0FBQyxDQUFDLEVBQUUsRUFBRTtZQUNGLFdBQVcsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDeEIsQ0FBQyxDQUNKLENBQUM7UUFFRixNQUFNLFlBQVksR0FBRyxrQkFBVSxDQUFDLEtBQUssQ0FBQyxXQUFXLEVBQUU7WUFDL0MsYUFBYSxFQUFFLElBQUk7U0FDdEIsQ0FBQyxDQUFDO1FBRUgsbUVBQW1FO1FBQ25FLDJCQUEyQjtRQUUzQiw2REFBNkQ7UUFDN0QsWUFBWSxDQUFDLEVBQUUsQ0FBQyxLQUFLLEVBQUUsV0FBVyxDQUFDLENBQUM7UUFDcEMsWUFBWSxDQUFDLEVBQUUsQ0FBQyxRQUFRLEVBQUUsV0FBVyxDQUFDLENBQUM7SUFDM0MsQ0FBQztDQUNKLENBQUMsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkLG1EQUE0RDtBQVU1RCxNQUFNLGNBQWMsR0FBYSxFQUFFLENBQUM7QUFDcEMsSUFBSSxXQUFXLENBQUM7QUFFaEI7O0dBRUc7QUFDSCxrQkFBZSxDQUFDLFNBQWlCLEVBQUUsRUFBZ0IsRUFBRSxDQUFDLENBQUM7SUFDbkQsSUFBSSxFQUFFLHVDQUF1QztJQUU3QyxLQUFLLEVBQUUsT0FBTztJQUVkLHdFQUF3RTtJQUN4RSxNQUFNLEVBQUUsR0FBRyxFQUFFLENBQUMsQ0FBQztRQUNYLE1BQU0sRUFBRSxFQUFFLEtBQUssRUFBRSxFQUFFLGVBQWUsRUFBRSxLQUFLLEVBQUUsY0FBYyxFQUFFLElBQUksRUFBRSxFQUFFO0tBQ3RFLENBQUM7SUFFRixlQUFlLENBQUMsR0FBRztRQUNmLDZCQUE2QjtRQUU3Qix5QkFBeUI7UUFDekIsSUFBSSxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxFQUFFO1lBQzNCLE9BQU87U0FDVjtRQUVELGlEQUFpRDtRQUNqRCxxREFBcUQ7UUFDckQsa0RBQWtEO1FBQ2xELHlDQUF5QztRQUN6QyxJQUFJLENBQUMsY0FBYyxDQUFDLFFBQVEsQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLEVBQUU7WUFDcEMsY0FBYyxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDOUIsT0FBTztTQUNWO1FBRUQsd0NBQXdDO1FBQ3hDLGFBQWE7UUFDYixZQUFZLENBQUMsV0FBVyxDQUFDLENBQUM7UUFDMUIsV0FBVyxHQUFHLFVBQVUsQ0FBQyxHQUFHLEVBQUU7WUFDMUIsTUFBTSxTQUFTLEdBQUcsR0FBRyxDQUFDLElBQUk7aUJBQ3JCLE9BQU8sQ0FBQyxHQUFHLElBQUEsdUJBQWdCLEdBQUUsRUFBRSxFQUFFLEVBQUUsQ0FBQztpQkFDcEMsT0FBTyxDQUFDLFFBQVEsRUFBRSxPQUFPLENBQUMsQ0FBQztZQUVoQyxzQkFBc0I7WUFDdEIsR0FBRyxDQUFDLE1BQU0sQ0FBQyxFQUFFLENBQUMsSUFBSSxDQUFDO2dCQUNmLElBQUksRUFBRSxRQUFRO2dCQUNkLEtBQUssRUFBRSxrQkFBa0I7Z0JBQ3pCLElBQUksRUFBRTtvQkFDRixRQUFRLEVBQUUsR0FBRyxDQUFDLElBQUk7b0JBQ2xCLElBQUksRUFBRSxTQUFTO2lCQUNsQjthQUNKLENBQUMsQ0FBQztRQUNQLENBQUMsRUFBRSxHQUFHLENBQUMsQ0FBQztRQUVSLG1CQUFtQjtRQUNuQixvQkFBb0I7UUFDcEIsNkJBQTZCO1FBQzdCLGFBQWE7UUFDYixLQUFLO1FBQ0wsT0FBTyxFQUFFLENBQUM7SUFDZCxDQUFDO0lBRUQsd0VBQXdFO0lBQ3hFLDRCQUE0QjtJQUM1QixZQUFZO0lBQ1osNEJBQTRCO0lBQzVCLHlCQUF5QjtJQUN6QixhQUFhO0lBQ2Isa0JBQWtCO0lBQ2xCLFNBQVM7SUFFVCw4REFBOEQ7SUFDOUQscUNBQXFDO0lBQ3JDLFNBQVM7SUFFVCw0REFBNEQ7SUFDNUQsOENBQThDO0lBQzlDLDZFQUE2RTtJQUU3RSxxQ0FBcUM7SUFFckMsZ0ZBQWdGO0lBQ2hGLG9FQUFvRTtJQUNwRSxvQ0FBb0M7SUFFcEMsc0NBQXNDO0lBRXRDLCtCQUErQjtJQUMvQixzQ0FBc0M7SUFDdEMsbUNBQW1DO0lBQ25DLFlBQVk7SUFFWix5Q0FBeUM7SUFFekMsMEVBQTBFO0lBQzFFLFNBQVM7SUFFVCxpQ0FBaUM7SUFDakMsa0RBQWtEO0lBQ2xELG1CQUFtQjtJQUNuQixxQ0FBcUM7SUFDckMsbUNBQW1DO0lBQ25DLGFBQWE7SUFDYixTQUFTO0lBRVQsMkRBQTJEO0lBQzNELCtCQUErQjtJQUMvQixVQUFVO0lBRVYsMEVBQTBFO0lBQzFFLGtDQUFrQztJQUVsQyxvRUFBb0U7SUFDcEUsMkNBQTJDO0lBQzNDLDhDQUE4QztJQUM5QyxLQUFLO0NBQ1IsQ0FBQyxDQUFDIn0=

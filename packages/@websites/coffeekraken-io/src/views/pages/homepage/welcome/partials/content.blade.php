@@ -1,5 +1,7 @@
 <div>
 
+<img s-inline src="/dist/img/welcome/kraken-mobile.svg" class="s-hide s-mbe:20 @mobile s-display:inline-block" />
+
 <div class="s-mbe:50 __logo">
     @include ('generic.logo')
 </div>
@@ -14,11 +16,11 @@
         target="_blank">Vite JS</a>. All of this with <span class="s-tc:accent">extreme customization</span>
     capabilities!</p> --}}
 
-<a class="s-btn s-color:accent @mobile s-btn:block" href="/doc/get-started/get-started" title="Coffeekraken get started!">
+<a class="s-btn s-color:accent @mobile s-display:block" href="/doc/get-started/get-started" title="Coffeekraken get started!">
     <i class="s-icon:fire s-mie:10"></i> Get started!
 </a>
 &nbsp;
-<a class="s-btn s-color:complementary @mobile s-btn:block" s-slider-next title="Discover our components!">
+<a class="s-btn s-color:complementary @mobile s-display:none" s-slider-next title="Discover our components!">
     Take a quick features tour <i class="s-icon:arrow-right s-mis:10"></i>
 </a>
 
@@ -32,7 +34,7 @@
 </a> --}}
 
 <p class="s-typo:p s-mbs:50 @dwarf hide">
-    Version: <span class="s-tc:accent">{{ $config->package->version }}</span> - License <a class="s-tc:accent"
+    Version: <span class="s-tc:{{ str_contains($config->package->version, 'alpha') ? 'error' : 'accent' }}">{{ $config->package->version }}</span> - License <a class="s-tc:accent"
         href="https://opensource.org/licenses/MIT" target="_blank">{{ $config->package->license }}</a>
     <br />Fully open source
     <i class="s-icon:logo-opensource s-tc:accent"></i>

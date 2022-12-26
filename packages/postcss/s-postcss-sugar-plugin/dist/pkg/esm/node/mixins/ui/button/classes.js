@@ -16,7 +16,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return      {Css}                   The corresponding css
  *
  * @example       css
- * \@sugar.ui.button.classes();
+ * @sugar.ui.button.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

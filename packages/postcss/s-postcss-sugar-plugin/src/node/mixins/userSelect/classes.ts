@@ -15,7 +15,7 @@ import __faker from 'faker';
  * @return        {Css}         The generated css
  *
  * @example        css
- * \@sugar.userSelect.classes;
+ * @sugar.userSelect.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

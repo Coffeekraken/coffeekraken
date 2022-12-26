@@ -416,7 +416,7 @@ export default class SLitComponent extends LitElement {
         Object.assign(this.props, finalProps);
 
         // make props responsive
-        // this.componentUtils.makePropsResponsive(this.props);
+        this.componentUtils.makePropsResponsive(this.props);
 
         // verbose
         if (this.props.verbose) {

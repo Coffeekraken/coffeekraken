@@ -3,7 +3,7 @@
     <div class="s-container">
 
         <h3 class="s-typo:h2 s-mbe:30 @mobile s-typo:h4">Frontend<br><span class="s-gradient:text:accent">Sugar</span></h3>
-        <p class="s-typo:lead s-mbe:80">
+        <p class="s-typo:lead s-mbe:80 @mobile s-mbe:30">
             The goal of Coffeekraken is to help having a <span class="s-tc:complementary">better development
                 experience</span>
             with a <span class="s-tc:accent">production ready quality grade</span>. Here's some areas where we can
@@ -152,7 +152,7 @@
                     </li>
                 </ol>
             </div>
-            <div class="s-layout:12 s-gap:30">
+            <div class="s-layout:12 s-gap:30 @mobile s-layout:1">
                 <div>
                     @include('generic.code.example', ['examples' => [
                     'css' => '/* defining some layouts */

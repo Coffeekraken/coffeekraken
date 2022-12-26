@@ -21,7 +21,7 @@ export { postcssSugarPluginLiikAndFeelBaseInterface as interface };
  * @return      {Css}                   The corresponding grid css
  *
  * @example       css
- * \@sugar.lnf.base;
+ * @sugar.lnf.base;
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

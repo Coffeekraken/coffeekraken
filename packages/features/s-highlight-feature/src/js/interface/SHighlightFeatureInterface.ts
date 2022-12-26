@@ -32,10 +32,10 @@ export default class SHighlightFeatureInterface extends __SInterface {
                 type: 'Number',
                 description: 'Specify the size of the highlight in px',
             },
-            opacity: {
+            intensity: {
                 type: 'Number',
                 description:
-                    'Specify the opacity of the highlight beetween 0 and 1',
+                    'Specify the intensity of the highlight beetween 0 and 1',
             },
         };
     }

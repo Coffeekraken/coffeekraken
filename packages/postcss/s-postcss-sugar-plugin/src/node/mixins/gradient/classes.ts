@@ -16,7 +16,7 @@ import { __argsToString } from '@coffeekraken/sugar/cli';
  * @return        {Css}         The generated css
  *
  * @example        css
- * \@sugar.gradient.classes;
+ * @sugar.gradient.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

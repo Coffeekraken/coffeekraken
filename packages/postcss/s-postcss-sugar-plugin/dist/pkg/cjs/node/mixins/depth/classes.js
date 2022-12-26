@@ -19,7 +19,7 @@ const array_1 = require("@coffeekraken/sugar/array");
  * @return        {Css}        The generated css
  *
  * @example        css
- * \@sugar.depth.classes;
+ * @sugar.depth.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

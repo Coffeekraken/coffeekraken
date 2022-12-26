@@ -13,7 +13,7 @@ import { __unique } from '@coffeekraken/sugar/array';
  * @return        {Css}         The generated css
  *
  * @example        css
- * \@sugar.layout.classes;
+ * @sugar.layout.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

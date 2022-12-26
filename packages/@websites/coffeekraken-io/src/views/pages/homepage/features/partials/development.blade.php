@@ -2,7 +2,7 @@
     <div class="s-container">
         <div class="s-layout:21 s-gap:column:50 @mobile s-layout:1_2">
             <div>
-                <div class="adaptive-color">
+                <div class="adaptive-color @mobile s-hide">
                     <img s-inline src="/dist/img/illustrations/stack.svg" />
                 </div>
             </div>
@@ -117,7 +117,7 @@ sugar dev'
 
         <div
             class="s-layout:123 s-gap:50 s-p:80 s-mbe:100 s-bg:main-surface s-radius s-depth @mobile s-layout:1_2_3 s-depth:0 s-osi:30 s-p:50"
-            s-highlight="light" size="2000">
+            s-highlight="light" size="2000" intensity="0.2">
             <div>
                 <div class="s-flex s-gap:30 s-mbe:30">
                     <div>
@@ -212,7 +212,7 @@ sugar build'
                     <li>
                         <a href="/doc/recipes/built-in/default" title="Coffeekraken generic recipe">
                         {{-- style="--image: url(https://media.giphy.com/media/eIm624c8nnNbiG0V3g/giphy.gif);" --}}
-                            <div class="icon-card s-color:accent">
+                            <div class="icon-card s-color:accent" s-highlight intensity="0.6">
                                 <div class="icon-card__content">
                                     <i class="s-icon:logo-coffeekraken"></i>
                                     <p class="s-p">Generic<br />(default)</p>
@@ -223,7 +223,7 @@ sugar build'
                     <li>
                         <a href="/doc/recipes/built-in/nextjs" title="Coffeekraken NextJs recipe">
                         {{-- style="--image: url(https://media.giphy.com/media/vfyN4sCz1QBR6/giphy.gif);" --}}
-                            <div class="icon-card s-color:complementary">
+                            <div class="icon-card s-color:complementary" s-highlight intensity="0.6">
                                 <div class="icon-card__content">
                                     <i class="s-icon:logo-nextjs"></i>
                                     <p class="s-p">NextJS</p>
@@ -234,7 +234,7 @@ sugar build'
                     <li>
                         <a href="https://discord.com/channels/940362961682333767/940362962223378494" target="_blank" title="Coffeekraken NextJs recipe">
                         {{-- style="--image: url(https://media0.giphy.com/media/3ohs7SYIm3yiUbL0yc/giphy.gif?cid=ecf05e476vhwqgevpq5exoat1ejppi1qk9xp4jgig9j38wck&rid=giphy.gif&ct=g);" --}}
-                            <div class="icon-card s-color:accent">
+                            <div class="icon-card s-color:accent" s-highlight intensity="0.6">
                                 <div class="icon-card__content">
                                     <i class="s-icon:misc-ring"></i>
                                     <p class="s-p">Propose</p>
@@ -245,7 +245,7 @@ sugar build'
                     <li>
                         <a href="/doc/recipes/create-your-recipe" title="Create your own recipe">
                         {{-- style="--image: url(https://media.giphy.com/media/9W6X9HzEX73VbjR2WV/giphy.gif);" --}}
-                            <div class="icon-card s-color:complementary">
+                            <div class="icon-card s-color:complementary" s-highlight intensity="0.6">
                                 <div class="icon-card__content">
                                     <i class="s-icon:misc-build"></i>
                                     <p class="s-p">Build your<br />own</p>
@@ -265,7 +265,7 @@ sugar new'
             </div>
         </div>
 
-        <div class="s-text:center s-pbs:50">
+        <div class="s-text:center s-pbs:50 @mobile s-text:left">
             <p class="s-typo:lead s-mi:auto s-mbe:30">
                 This is <span class="s-tc:complementary">just a sneak peak</span> of what our built-in development stack
                 has to offer. Don't be afraid, as usual

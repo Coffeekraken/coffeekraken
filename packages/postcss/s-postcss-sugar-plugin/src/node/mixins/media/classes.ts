@@ -15,15 +15,14 @@ import __STheme from '@coffeekraken/s-theme';
  * Take this as an example:
  *
  * ```css
- * \@sugar.media.classes {
+ * @sugar.media.classes(mobile) {
  *    .my-cool-element {
  *      color: green;
  *    }
  * }
  * ```
  *
- * This wil generate these two classes:
- * - .my-cool-element: Always available
+ * This wil generate these classes:
  * - .my-cool-element___mobile: Available only in the mobile media query context
  * - etc...
  *
@@ -33,8 +32,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return        {Css}         The generated css
  *
  * @example         css
- * \@sugar.media.classes {
- *    // any classes you want to "duplicate" and generate
+ * @sugar.media.classes(mobile) {
  *    // only for this media context...
  * }
  *
@@ -58,9 +56,6 @@ export interface IPostcssSugarPluginMediaMixinClassesParams {
 }
 
 export { postcssSugarPluginMediaClassesMixinInterface as interface };
-
-const _mediasObj = {};
-let _postProcessorRegistered = false;
 
 export default function ({
     params,
@@ -97,40 +92,36 @@ export default function ({
         if (medias.includes(m)) {
             sortedMedias.push(m);
         }
-    })
+    });
 
-    if (!_postProcessorRegistered) {
-        _postProcessorRegistered = true;
-
-        registerPostProcessor((root) => {
-            root.nodes.forEach((node) => {
-                if (node._sMediaRule) {
-                    // node.remove();
-                }
-                if (node.name === 'media' && node._sMedia) {
-                    node.nodes = [...node.nodes.map(n => {
-                        if (!n.selector) {
-                            return n;
-                        }
-                        let sels = n.selector.split(',').map((l) => l.trim());
-                        sels = sels.map((sel) => {
-                            const selectors = sel.match(/\.[a-zA-Z0-9_-]+/gm);
-                            if (!selectors) return sel;
-                            selectors.forEach((selector) => {
-                                sel = sel.replace(
-                                    selector,
-                                    `${selector}___${node._sMedia}`,
-                                );
-                            });
-                            return sel;
-                        });
-                        n.selector = sels.join(',');
-                        return n;
-                    })]
-                }
+    registerPostProcessor((root) => {
+        root.nodes.forEach((node) => {
+            if (node._sMediaRule) {
+                // node.remove();
             }
-        });
-    }
+            if (node.name === 'media' && node._sMedia) {
+                node.nodes = [...node.nodes.map(n => {
+                    if (!n.selector) {
+                        return n;
+                    }
+                    let sels = n.selector.split(',').map((l) => l.trim());
+                    sels = sels.map((sel) => {
+                        const selectors = sel.match(/\.[a-zA-Z0-9_-]+/gm);
+                        if (!selectors) return sel;
+                        selectors.forEach((selector) => {
+                            sel = sel.replace(
+                                selector,
+                                `${selector}___${node._sMedia}`,
+                            );
+                        });
+                        return sel;
+                    });
+                    n.selector = sels.join(',');
+                    return n;
+                })]
+            }
+        }
+    });
 
     let refNode = atRule;
     atRule._sMediaRule = true;

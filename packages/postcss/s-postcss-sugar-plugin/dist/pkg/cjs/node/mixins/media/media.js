@@ -50,10 +50,10 @@ exports.interface = postcssSugarPluginMediaMixinInterface;
  * @return      {Css}         The generated css
  *
  * @example        css
- * \@sugar.media >=desktop {
+ * @sugar.media >=desktop {
  *      // ...
  * }
- * \@sugar.media tablet {
+ * @sugar.media tablet {
  *      // ...
  * }
  *

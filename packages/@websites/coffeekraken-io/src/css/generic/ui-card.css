@@ -1,151 +1,142 @@
 /* @sugar.partial (iconCard) { */
 
 .ui-card-slider {
-  /* transform: translateX(calc(sugar.margin(30) * -1));
-    width: calc(100% + sugar.margin(30)); */
+    /* transform: translateX(calc(sugar.margin(30) * -1)); */
+    width: 100vw;
+    transform: translateX(calc(sugar.margin(30) * -1));
 
-  .s-slider__slides {
-    /* gap: calc(sugar.margin(30) * 3); */
-  }
-
-  .s-slider__ui {
-    width: calc(sugar.container.width() + sugar.padding(30) * 2) !important;
-
+    --ui-card-card-width: calc(
+        sugar.container.width() / var(--s-slider-slides-by-page, 1)
+    );
     @sugar.media wide {
-      width: calc(
-        sugar.container.width(wide) + sugar.padding(30) * 2
-      ) !important;
+        --ui-card-card-width: calc(
+            sugar.container.width(wide) / var(--s-slider-slides-by-page, 1)
+        );
     }
-  }
-
-  .s-slider__slide {
-    max-width: sugar.container.width();
-    opacity: 0.1;
-    pointer-events: none;
-    @sugar.transition();
-
-    &.active {
-      opacity: 1;
-      pointer-events: all;
+    @sugar.media mobile {
+        --ui-card-card-width: calc(100% - sugar.margin(30) * 2);
     }
 
-    @sugar.media wide {
-      max-width: sugar.container.width(wide);
+    .s-slider__slides-wrapper {
     }
-  }
-}
 
-.ui-card-container {
-  /* max-width: 1280px; */
-  display: flex;
-  gap: sugar.margin(30);
-  /* padding-inline: sugar.margin(30); */
-  /* height: 200px; */
+    .s-slider__slides {
+        display: flex;
+        gap: sugar.margin(30);
+    }
 
-  /* margin-inline: calc(sugar.margin(30) * -2); */
+    .s-slider__slide {
+        opacity: 0.1;
+        pointer-events: none;
+        /* margin-inline-end: sugar.margin(30); */
+        @sugar.transition();
 
-  .ui-card {
-    width: calc(33.33% - sugar.margin(30));
-    flex-shrink: 0;
-    flex-grow: 0;
-  }
+        width: calc(
+            var(--ui-card-card-width) - sugar.margin(30) * 0.5
+        ) !important;
+
+        &.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        @sugar.media wide {
+            max-width: sugar.container.width(wide);
+        }
+        @sugar.media mobile {
+            width: calc(
+                var(--ui-card-card-width) - sugar.margin(30)
+            ) !important;
+        }
+    }
 }
 
 .ui-card {
-  position: relative;
-  aspect-ratio: 16/9;
-  display: block;
-  border-radius: sugar.border.radius();
-  transition: sugar.transition();
-  z-index: 10;
-  background: sugar.color(current);
-  @sugar.border.radius();
-
-  /* @sugar.theme.when dark {
-    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-
-    &:hover {
-      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
-      z-index: 0;
-    }
-  } */
-
-  .ui-card__content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    position: relative;
+    aspect-ratio: 16/9;
+    display: block;
     border-radius: sugar.border.radius();
-    @sugar.depth (100, $type: text);
-    background-size: cover;
-    background-position: 50% 50%;
-    overflow: hidden;
+    transition: sugar.transition();
+    z-index: 10;
+    background: sugar.color(current);
+    @sugar.border.radius();
 
-    &:before {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: sugar.border.radius();
-      background-size: cover;
-      background-position: 50% 50%;
-      filter: grayscale(1);
-      overflow: hidden;
-      background-image: var(--image);
-      opacity: 0.3;
+    .ui-card__content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: sugar.border.radius();
+        @sugar.depth (100, $type: text);
+        background-size: cover;
+        background-position: 50% 50%;
+        overflow: hidden;
+
+        &:before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: sugar.border.radius();
+            background-size: cover;
+            background-position: 50% 50%;
+            filter: grayscale(1);
+            overflow: hidden;
+            background-image: var(--image);
+            opacity: 0.3;
+        }
+        &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: sugar.border.radius();
+            background-size: cover;
+            background-position: 50% 50%;
+            background: sugar.color(current);
+            opacity: 0.8;
+        }
     }
-    &:after {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: sugar.border.radius();
-      background-size: cover;
-      background-position: 50% 50%;
-      background: sugar.color(current);
-      opacity: 0.8;
+
+    i,
+    p {
+        transition: all 0.3s sugar.theme(easing.default);
+        transform-origin: -100% 100%;
+        text-align: center;
+        color: sugar.color(current, foreground);
     }
-  }
 
-  i,
-  p {
-    transition: all 0.3s sugar.theme(easing.default);
-    transform-origin: -100% 100%;
-    text-align: center;
-    color: sugar.color(current, foreground);
-  }
+    i {
+        font-size: 100px;
+        position: absolute;
+        z-index: 1;
+        bottom: calc(50% + 20px);
+        left: 50%;
+        transform: translate(-50%, 50%);
+        transform-origin: 0 100%;
 
-  i {
-    font-size: 100px;
-    position: absolute;
-    z-index: 1;
-    bottom: calc(50% + 20px);
-    left: 50%;
-    transform: translate(-50%, 50%);
-    transform-origin: 0 100%;
-
-    @sugar.media mobile {
-      font-size: 50px;
+        @sugar.media mobile {
+            font-size: 50px;
+        }
     }
-  }
-  p {
-    position: absolute;
-    z-index: 1;
-    top: calc(50% + 50px);
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transition-duration: 0.3s;
-    transition-delay: 0.15s;
+    p {
+        position: absolute;
+        z-index: 1;
+        top: calc(50% + 50px);
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition-duration: 0.3s;
+        transition-delay: 0.15s;
 
-    @sugar.media mobile {
-      top: calc(50% + 30px);
+        @sugar.media mobile {
+            top: calc(50% + 30px);
+        }
     }
-  }
 }

@@ -20,10 +20,10 @@
                         
                         <div class="s-flex s-gap:20 @mobile s-flex:column">
                             <a href="https://discord.com/channels/940362961682333767/940362962223378494" target="_blank"
-                                class="s-btn s-color:complementary s-mie:20 @mobile s-mbe:20 s-mie:0">
+                                class="s-btn s-color:complementary s-mie:20 @mobile s-display:block s-mbe:20 s-mie:0">
                                 <i class="s-icon:discord"></i> Join us on Discord
                             </a>
-                            <a href="https://github.com/Coffeekraken/coffeekraken" target="_blank" class="s-btn s-color:accent">
+                            <a href="https://github.com/Coffeekraken/coffeekraken" target="_blank" class="s-btn s-color:accent @mobile s-display:block">
                                 <i class="s-icon:github"></i> Join us on Github
                             </a>
                         </div>

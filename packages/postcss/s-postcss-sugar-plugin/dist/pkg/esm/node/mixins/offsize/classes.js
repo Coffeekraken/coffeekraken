@@ -13,7 +13,7 @@ import { __keysFirst } from '@coffeekraken/sugar/array';
  * @return        {Css}         The generated css
  *
  * @example        css
- * \@sugar.offsize.classes;
+ * @sugar.offsize.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

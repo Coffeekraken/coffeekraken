@@ -19,7 +19,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @return      {Css}                   The corresponding css
  *
  * @example       css
- * \@sugar.ui.toggle.classes();
+ * @sugar.ui.toggle.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

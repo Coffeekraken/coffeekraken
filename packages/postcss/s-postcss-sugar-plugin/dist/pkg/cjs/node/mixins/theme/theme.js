@@ -20,7 +20,7 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  * @return        {Css}         The generated css
  *
  * @example        css
- * \@sugar.theme(light);
+ * @sugar.theme(light);
  * .my-cool-element {
  *    \@sugar.theme(dark);
  * }

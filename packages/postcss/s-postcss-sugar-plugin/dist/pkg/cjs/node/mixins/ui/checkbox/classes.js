@@ -23,7 +23,7 @@ const faker_1 = __importDefault(require("faker"));
  * @return      {Css}                   The corresponding css
  *
  * @example       css
- * \@sugar.ui.form.classes();
+ * @sugar.ui.form.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

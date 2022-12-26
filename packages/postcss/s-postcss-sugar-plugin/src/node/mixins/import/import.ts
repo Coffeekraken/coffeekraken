@@ -19,8 +19,8 @@ import __path from 'path';
  * @return        {Css}         The generated css
  *
  * @example        css
- * \@sugar.import('./my-cool-file.css');
- * \@sugar.import('../views/** /*.css');
+ * @sugar.import('./my-cool-file.css');
+ * @sugar.import('../views/** /*.css');
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -58,12 +58,12 @@ export { postcssSugarPluginImportInterface as interface };
  * @return      {Css}                   The corresponding imported css
  *
  * @example       css
- * \@sugar.import('./** /*.css');
+ * @sugar.import('./** /*.css');
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-let _watcher;
+let _watcherByPath = {};
 export default function ({
     params,
     atRule,
@@ -95,16 +95,14 @@ export default function ({
         cwd: dirName,
     });
 
+    function triggerUpdate(path) {
+        __SEventEmitter.global.emit('s-postcss-sugar-plugin-import-update', {
+            path: __path.resolve(dirName, path),
+        });
+    }
+
     // watch for new / deleted files
-    if (!_watcher) {
-        function triggerUpdate(path) {
-            __SEventEmitter.global.emit(
-                's-postcss-sugar-plugin-import-update',
-                {
-                    path: __path.resolve(dirName, path),
-                },
-            );
-        }
+    if (!_watcherByPath[finalParams.path]) {
         const watcher = __chokidar.watch(finalParams.path, {
             cwd: dirName,
             ignoreInitial: true,
@@ -118,6 +116,7 @@ export default function ({
         watcher.on('unlink', (path) => {
             triggerUpdate(path);
         });
+        _watcherByPath[finalParams.path] = watcher;
     }
 
     files.forEach((file) => {

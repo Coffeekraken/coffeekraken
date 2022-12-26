@@ -244,7 +244,7 @@ export default function (api) {
             proxy: {
                 // all exported css in the /css/exports folder
                 // @TODO            find a better way...
-                '^\\/dist\\/css\\/partials\\/.*\\.css$': {
+                '^\\/dist\\/css\\/partials\\/.*\\.css(\\?.*)?$': {
                     target: `http://${api.config.frontendServer.hostname}:${api.config.frontendServer.port}`,
                     changeOrigin: true,
                     rewrite: (path) => {
@@ -253,7 +253,7 @@ export default function (api) {
                 },
                 // all files that match /dist/...css|ts|tsx|etc...
                 // have to target the "src" directory
-                '^\\/dist\\/.*(\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs)$':
+                '^\\/dist\\/.*(\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs)(\\?.*)?$':
                     {
                         target: `http://localhost:3000`,
                         changeOrigin: true,
@@ -272,7 +272,7 @@ export default function (api) {
                 },
                 // all none css, js, ts, etc...
                 // have to go to frontend server
-                get '^\\/dist\\/(?:(?!\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs).)*$'() {
+                get '^\\/dist\\/(?:(?!\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs).)*(\\?.*)?$'() {
                     return {
                         target: `http://${api.config.frontendServer.hostname}:${api.config.frontendServer.port}`,
                         changeOrigin: true,

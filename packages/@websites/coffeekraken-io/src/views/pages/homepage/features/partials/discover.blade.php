@@ -14,7 +14,7 @@
                     Here's a simple component that <span class="s-tc:accent">let you discover some of what Coffeekraken has to offer</span>...
                 </p>
 
-                <img s-inline class="illustration adaptive-color @mobile s-hide" src="/dist/img/illustrations/discoverApi.svg" />
+                <img s-inline class="illustration adaptive-color s-mbs:60 @mobile s-hide" src="/dist/img/illustrations/discover/discover.svg" />
             </div>
             <div class="@mobile s-mbs:30">
                 <ck-discover-tabed></ck-discover-tabed>

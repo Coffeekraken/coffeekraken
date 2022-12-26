@@ -1,4 +1,4 @@
-<header id="header" s-highlight>
+<header id="header" s-highlight intensity="0.3">
 
     <div class="s-container">
 
@@ -155,7 +155,7 @@
 
     </div>
 
-    {{-- <nav id="nav-mobile" class="__nav-mobile s-when:media:mobile">
+    <nav id="nav-mobile" class="__nav-mobile s-when:media:mobile">
         @php
             $documentationMenu = array_merge((array) $docmap->menu->tree->documentation, []);
             $packagesMenu = (object) [
@@ -211,6 +211,6 @@
             <api-nav></api-nav>
         </div>
 
-    </nav> --}}
+    </nav>
 
 </header>

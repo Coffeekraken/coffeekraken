@@ -25,7 +25,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @return        {Css}         The generated css
  *
  * @example        css
- * \@sugar.reset.sugar;
+ * @sugar.reset.sugar;
  *
  * @see       https://github.com/nicolas-cusan/destyle.css
  * @since       2.0.0
@@ -64,7 +64,7 @@ function default_1({ params, CssVars, replaceWith, }) {
         * @support      edge
         * 
         * @example        css       Simple usage
-        * \@sugar.reset.sugar;
+        * @sugar.reset.sugar;
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

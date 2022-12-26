@@ -7,6 +7,8 @@ import __SPromise from '@coffeekraken/s-promise';
 import __SState from '@coffeekraken/s-state';
 import __STheme from '@coffeekraken/s-theme';
 
+import { __camelCase } from '@coffeekraken/sugar/string';
+
 import __fastdom from 'fastdom';
 
 import { __adoptStyleInShadowRoot } from '@coffeekraken/sugar/dom';
@@ -17,7 +19,6 @@ import { __debounce } from '@coffeekraken/sugar/function';
 import __inViewportStatusChange from '@coffeekraken/sugar/js/dom/detect/inViewportStatusChange';
 import __injectStyle from '@coffeekraken/sugar/js/dom/inject/injectStyle';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
 import __SComponentUtilsDefaultPropsInterface from './interface/SComponentUtilsDefaultPropsInterface';
 import __SComponentUtilsSettingsInterface from './interface/SComponentUtilsSettingsInterface';
@@ -373,7 +374,7 @@ export default class SComponentUtils extends __SClass {
     ): void {
         const finalSettings: ISComponentUtilsPropsSettings = {
             reflectAttributes: true,
-            responsive: false,
+            responsive: true,
             ...(settings ?? {}),
         };
 
@@ -463,38 +464,39 @@ export default class SComponentUtils extends __SClass {
         });
 
         // check for "<responsive>" tags
-        // const $responsives = Array.from(this.node.children).filter(
-        //     ($child) => $child.tagName === 'RESPONSIVE',
-        // );
-        // if ($responsives.length) {
-        //     $responsives.forEach(($responsive) => {
-        //         const attrs = $responsive.attributes,
-        //             responsiveProps = {};
-        //         let media;
+        const $responsives = Array.from(this.node.children).filter(
+            ($child) => $child.tagName === 'RESPONSIVE',
+        );
 
-        //         Object.keys(attrs).forEach((key) => {
-        //             let value;
-        //             if (attrs[key]?.nodeValue !== undefined) {
-        //                 if (attrs[key].nodeValue === '') value = true;
-        //                 else value = attrs[key].nodeValue;
-        //             }
-        //             if (!value) return;
+        if ($responsives.length) {
+            $responsives.forEach(($responsive) => {
+                const attrs = $responsive.attributes,
+                    responsiveProps = {};
+                let media;
 
-        //             const propName = attrs[key]?.name ?? key;
-        //             if (propName === 'media') {
-        //                 media = value;
-        //             } else {
-        //                 responsiveProps[propName] = value;
-        //             }
-        //         });
-        //         if (media) {
-        //             if (!props.responsive[media]) {
-        //                 props.responsive[media] = {};
-        //             }
-        //             props.responsive[media] = responsiveProps;
-        //         }
-        //     });
-        // }
+                Object.keys(attrs).forEach((key) => {
+                    let value;
+                    if (attrs[key]?.nodeValue !== undefined) {
+                        if (attrs[key].nodeValue === '') value = true;
+                        else value = attrs[key].nodeValue;
+                    }
+                    if (!value) return;
+
+                    const propName = attrs[key]?.name ?? key;
+                    if (propName === 'media') {
+                        media = value;
+                    } else {
+                        responsiveProps[__camelCase(propName)] = value;
+                    }
+                });
+                if (media) {
+                    if (!props.responsive[media]) {
+                        props.responsive[media] = {};
+                    }
+                    props.responsive[media] = responsiveProps;
+                }
+            });
+        }
 
         if (
             Object.keys(props.responsive).length === 1 &&

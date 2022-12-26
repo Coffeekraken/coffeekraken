@@ -18,7 +18,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @return        {Css}         The generated css
  *
  * @example        css
- * \@sugar.highlightjs.theme;
+ * @sugar.highlightjs.theme;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

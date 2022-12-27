@@ -117,6 +117,7 @@ export default function ({
         vars.push(`
           font-size: sugar.scalable(1rem);
           text-decoration: none;
+          font-weight: bold;
           @sugar.shape;
         `);
 
@@ -127,6 +128,7 @@ export default function ({
                     color: sugar.color(current, foreground) !important;
                     transition: sugar.theme(ui.button.transition);
                     border: sugar.color(current, border) solid sugar.theme(ui.button.borderWidth);
+                    text-shadow: 0 0 1em sugar.color(current, --darken 40% --alpha 0.6);
 
                     --borderWidth: sugar.theme(ui.button.borderWidth);
 
@@ -201,6 +203,7 @@ export default function ({
                   background-color: sugar.color(current);
                   border: sugar.color(current, border) solid sugar.theme(ui.button.borderWidth);
                   color: sugar.color(current, foreground) !important;
+                  text-shadow: 0 0 1em sugar.color(current, --darken 40% --alpha 0.6);
 
                   &:hover, &:focus {
                     background-color: sugar.color(current, --darken 6);

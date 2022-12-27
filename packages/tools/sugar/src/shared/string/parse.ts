@@ -25,13 +25,19 @@
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function (value) {
+    // if the value is not a string
+    // return it as he's
     if (typeof value !== 'string') return value;
+
+    // small dirty hack
     value = value.split('⠀').join('').trim();
+
+    // try to parse the string into a native value
     try {
         return Function(`
-      "use strict";
-      return (${value});
-    `)();
+            "use strict";
+            return (${value});
+        `)();
     } catch (e) {
         return value;
     }

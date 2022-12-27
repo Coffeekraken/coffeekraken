@@ -6,9 +6,9 @@
     "type": "module",
     "private": true,
     "scripts": {
-        "dev": "sugar dev",
-        "prod": "sugar prod",
-        "build": "sugar build",
+        "dev": "sugard kitchen.run dev",
+        "prod": "sugard kitchen.run prod",
+        "build": "sugard kitchen.run build",
         "deploy": "rsync -avzh --delete --progress --stats ./static fe0mt_coffeekraken@fe0mt.ftp.infomaniak.com:~/sites/coffeekraken.io",
         "deploy.bogdanov": "rsync -avzh --delete --progress --stats ./static fe0mt_bogdanov_ssh@fe0mt.ftp.infomaniak.com:~/sites/bogdanov.coffeekraken.io"
     },

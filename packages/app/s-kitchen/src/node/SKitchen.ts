@@ -18,11 +18,10 @@ import { __sharedContext } from '@coffeekraken/sugar/process';
 import type { IDetectProjectTypeResult } from '@coffeekraken/sugar/project';
 import { __detectProjectType } from '@coffeekraken/sugar/project';
 import __stripAnsi from '@coffeekraken/sugar/shared/string/stripAnsi';
-import __SKitchenActionInterface from './interface/SKitchenActionInterface';
 import __SKitchenAddParamsInterface from './interface/SKitchenAddParamsInterface';
 import __SKitchenListParamsInterface from './interface/SKitchenListParamsInterface';
 import __SFronstackNewParamsInterface from './interface/SKitchenNewParamsInterface';
-import __SKitchenRecipeParamsInterface from './interface/SKitchenRecipeParamsInterface';
+import __SKitchenRunParamsInterface from './interface/SKitchenRunParamsInterface';
 
 import __lowerFirst from '@coffeekraken/sugar/shared/string/lowerFirst';
 import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
@@ -127,6 +126,12 @@ export interface ISKitchenRecipeParams {
     recipe: string;
     stack: string;
     exclude: string[];
+}
+
+export interface ISKitchenRunParams {
+    recipe: string;
+    action: string;
+    stack: string;
 }
 
 export interface ISKitchenListParams {
@@ -252,7 +257,7 @@ class SKitchen extends __SClass {
 
                 resolve(
                     pipe(
-                        this.recipe({
+                        this.run({
                             recipe,
                             stack: 'new',
                         }),
@@ -268,111 +273,35 @@ class SKitchen extends __SClass {
     }
 
     /**
-     * @name        action
+     * @name        run
      * @type        Function
      * @async
      *
-     * This method allows you to action a kitchen process
+     * This method allows you to run a kitchen process
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    action(params: ISKitchenActionParams | string) {
-        return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
-            const kitchenConfig = __SSugarConfig.get('kitchen');
-            const actionsObj = kitchenConfig.actions;
-
-            const finalParams: ISKitchenActionParams =
-                __SKitchenActionInterface.apply(params);
-
-            const availableActions = Object.keys(actionsObj);
-
-            if (availableActions.indexOf(finalParams.action) === -1) {
-                throw new Error(
-                    `<red>[${
-                        this.constructor.name
-                    }.action]</red> Sorry but the requested action "<yellow>${
-                        finalParams.action
-                    }</yellow>" does not exists. Here's the list of available action(s):\n${availableActions
-                        .map((r) => `- <yellow>${r}</yellow>`)
-                        .join('\n')}`,
-                );
-            }
-
-            emit('log', {
-                type: __SLog.TYPE_INFO,
-                value: `Starting kitchen process using "<yellow>${finalParams.action}</yellow>" action`,
-            });
-
-            // get the recipe object and treat it
-            const actionObj: Partial<ISKitchenAction> =
-                // @ts-ignore
-                actionsObj[finalParams.action];
-
-            // instanciate the process manager
-            const processManager = new __SProcessManager({
-                //     runInParallel: false
-            });
-            pipe(processManager);
-            // loop on each actions for this recipe
-
-            const finalCommand = __replaceCommandTokens(
-                // @ts-ignore
-                actionObj.command ?? actionObj.process,
-                // params
-            );
-
-            const actionId = actionObj.id ?? finalParams.action;
-            // create a process from the recipe object
-            const pro = await __SProcess.from(finalCommand);
-            // add the process to the process manager
-            // @TODO    integrate log filter feature
-            processManager.attachProcess(actionId, pro, {
-                // log: {
-                //   filter: undefined
-                // }
-            });
-
-            processManager.run(
-                actionId,
-                finalParams.params ?? actionObj.params ?? {},
-                actionObj.settings?.process ?? {},
-            );
-        }, {}).bind(this);
-    }
-
-    /**
-     * @name        recipe
-     * @type        Function
-     * @async
-     *
-     * This method allows you to exec a kitchen process
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    recipe(params: Partial<ISKitchenRecipeParams> | string) {
+    run(params: Partial<ISKitchenRunParams> | string) {
         const processesPromises: any[] = [];
 
         const duration = new __SDuration();
 
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
-                const kitchenConfig = __SSugarConfig.get('kitchen');
-                const recipesObj = kitchenConfig.recipes;
-                const actionsObj = kitchenConfig.actions;
-
-                const sugarJson = new __SSugarJson().current();
+                const kitchenConfig = __SSugarConfig.get('kitchen'),
+                    recipesObj = kitchenConfig.recipes,
+                    actionsObj = kitchenConfig.actions,
+                    sugarJson = new __SSugarJson().current();
 
                 // initalise final params.
                 // it will be merged with the "stackObj.sharedParams" later...
-                let finalParams = __SKitchenRecipeParamsInterface.apply(params);
+                let finalParams = __SKitchenRunParamsInterface.apply(params);
 
+                // handle default recipe
                 if (!finalParams.recipe) {
-                    if (sugarJson.recipe) finalParams.recipe = sugarJson.recipe;
-                }
-                if (!finalParams.recipe) {
-                    finalParams.recipe = kitchenConfig.defaultRecipe;
+                    finalParams.recipe =
+                        sugarJson.recipe ?? kitchenConfig.defaultRecipe;
                 }
 
                 if (!finalParams.recipe) {
@@ -524,6 +453,12 @@ class SKitchen extends __SClass {
                 });
                 emit('log', {
                     type: __SLog.TYPE_INFO,
+                    value: `<yellow>○</yellow> Action : <magenta>${
+                        finalParams.action ?? '*'
+                    }</magenta>`,
+                });
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
                     value: `<yellow>○</yellow> Run in parallel : ${
                         finalParams.runInParallel
                             ? '<green>true</green>'
@@ -551,6 +486,19 @@ class SKitchen extends __SClass {
                         i++
                     ) {
                         const actionName = Object.keys(stackObj.actions)[i];
+
+                        // if an action is setted in the finalParams, make sure we run only this one
+                        if (
+                            finalParams.action &&
+                            actionName !== finalParams.action
+                        ) {
+                            emit('log', {
+                                type: __SLog.TYPE_WARN,
+                                value: `<red>[action]</red> The requested action "<magenta>${finalParams.action}</magenta>" does not exists in the "<yellow>${finalParams.recipe}</yellow>.<cyan>${finalParams.stack}</cyan>" stack`,
+                            });
+                            continue;
+                        }
+
                         let actionObj = stackObj.actions[actionName];
                         let actionParams = __deepMerge(
                             actionObj.params ?? {},

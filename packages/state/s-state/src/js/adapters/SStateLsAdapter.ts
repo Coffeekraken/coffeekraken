@@ -13,26 +13,17 @@ import { ISStateAdapter } from '../../shared/SState';
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 export default class SStateLsAdapter implements ISStateAdapter {
+    async = false;
     _id;
     constructor(id: string) {
         this._id = id;
     }
-    save(state: any): Promise<void> {
-        return new Promise((resolve) => {
-            window.localStorage.setItem(
-                `state-${this._id}`,
-                JSON.stringify(state),
-            );
-            resolve();
-        });
+    save(state: any): void {
+        window.localStorage.setItem(`state-${this._id}`, JSON.stringify(state));
     }
-    load(): Promise<any> {
-        return new Promise((resolve) => {
-            resolve(
-                JSON.parse(
-                    window.localStorage.getItem(`state-${this._id}`) ?? '{}',
-                ),
-            );
-        });
+    load(): any {
+        return JSON.parse(
+            window.localStorage.getItem(`state-${this._id}`) ?? '{}',
+        );
     }
 }

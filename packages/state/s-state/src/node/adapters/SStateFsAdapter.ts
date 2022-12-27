@@ -18,6 +18,7 @@ export interface ISStateFsAdapterSettings {
 }
 
 export default class SStateFsAdapter implements ISStateAdapter {
+    async = true;
     _id;
     _statesDir;
     _stateFile;

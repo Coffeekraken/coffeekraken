@@ -256,7 +256,7 @@ export default function ({
        `,
         ).code(
             `
-            .s-dropdown {
+            .s-dropdown:not(.s-bare) {
                 @sugar.ui.dropdown($scope: lnf);
             }
             `,
@@ -472,7 +472,16 @@ export default function ({
             * @type           CssClass
             * 
             * This class represent the tooltip container in which you have to put your actual .s-tooltip element
-            * and anything you want as a tooltip activator. Can be a button, an image, really anything
+            * and anything you want as a tooltip activator. Can be a button, an image, really anything.
+            * The dopdown will be visible depending on these rules:
+            * 
+            * - &.active > .s-dropdown
+            * - &[active] > .s-dropdown
+            * - &:focus > .s-dropdown
+            * - &:focus-within > .s-dropdown
+            * - & > .s-dropdown:hover
+            * - & > .s-dropdown:focus
+            * - & > .s-dropdown:focus-within
             * 
             * @example        html
             * <div class="s-tooltip-container">
@@ -496,6 +505,8 @@ export default function ({
                     pointer-events: none;
                 }
 
+                &.active > .s-dropdown,
+                &[active] > .s-dropdown,
                 &:focus > .s-dropdown,
                 &:focus-within > .s-dropdown,
                 & > .s-dropdown:hover,
@@ -510,25 +521,6 @@ export default function ({
                 type: 'CssClass',
             },
         );
-        vars.comment(
-            () => `/**
-            * @name           s-dropdown-container:active
-            * @namespace          sugar.style.ui.dropdown
-            * @type           CssClass
-            * 
-            * This class allows you to display a dropdown inside a dropdown container without needing hover by the user
-            * 
-            * @example        html
-            * <div class="s-dropdown-container:active">
-            *   <img src="..." />
-            *   <div class="s-dropdown">Something cool</div>
-            * </div>
-            * 
-            * @since    2.0.0
-            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-            */`,
-        );
-        // no need to write a class here cause this is handled in the dropdown.ts file directly...
     }
 
     return vars;

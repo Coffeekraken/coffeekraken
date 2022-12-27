@@ -52,11 +52,12 @@ export interface ISStateSettings {
     save: boolean;
     adapter: ISStateAdapter;
     watchDeep: boolean;
+    exclude: String[];
 }
 
 export interface ISStateAdapter {
-    save(id: string, state: any): Promise<void>;
-    load(id: string): Promise<any>;
+    save(id: string, state: any): Promise<void> | void;
+    load(id: string): Promise<any> | void;
 }
 
 export default class SState extends __SClass {
@@ -99,6 +100,7 @@ export default class SState extends __SClass {
                 {
                     watchDeep: false,
                     save: false,
+                    exclude: [],
                 },
                 settings ?? {},
             ),
@@ -143,9 +145,15 @@ export default class SState extends __SClass {
                 if (this.settings.save) {
                     clearTimeout(saveTimeout);
                     saveTimeout = setTimeout(() => {
-                        this.settings.adapter.save(
-                            JSON.parse(JSON.stringify(proxy)),
-                        );
+                        // create a plain object copy
+                        const stateToSave = JSON.parse(JSON.stringify(proxy));
+
+                        // filter the excludes properties
+                        this.settings.exclude.forEach((prop) => {
+                            delete stateToSave[prop];
+                        });
+
+                        this.settings.adapter.save(stateToSave);
                     });
                 }
             },
@@ -183,12 +191,18 @@ export default class SState extends __SClass {
         });
 
         // restoring state if wanted
-        (async () => {
-            if (this.settings.save) {
-                const restoredState = await this.settings.adapter.load();
+        if (this.settings.save) {
+            // handle async adapter
+            if (this.settings.adapter.async) {
+                (async () => {
+                    const restoredState = await this.settings.adapter.load();
+                    __deepAssign(proxy, restoredState);
+                })();
+            } else {
+                const restoredState = this.settings.adapter.load();
                 __deepAssign(proxy, restoredState);
             }
-        })();
+        }
 
         this._proxy = proxy;
 

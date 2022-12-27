@@ -2,7 +2,7 @@
 .sidemenu {
   position: sticky;
   top: 80px;
-  max-height: calc(100vh - 80px);
+  height: calc(100vh - 80px);
   background-image: linear-gradient(
     90deg,
     sugar.color(base, surface, --alpha 0),

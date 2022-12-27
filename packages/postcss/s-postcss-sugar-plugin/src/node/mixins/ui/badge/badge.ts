@@ -81,6 +81,8 @@ export default function ({
             padding-inline: sugar.padding(20);
             padding-block: sugar.padding(10);
             vertical-align: baseline;
+            font-weight: bold;
+            text-rendering: optimizeLegibility;
             @sugar.shape();
 
             & > * {
@@ -112,6 +114,7 @@ export default function ({
                 vars.push(`
                      color: sugar.color(current, foreground);
                      background-color: sugar.color(current);
+                     text-shadow: 0 0 1em sugar.color(current, --darken 40% --alpha 0.6);
                 `);
                 break;
         }

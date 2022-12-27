@@ -65,9 +65,9 @@ export default function (api) {
          */
         defaultPackageJson: {
             scripts: {
-                dev: 'sugar dev',
-                prod: 'sugar prod',
-                build: 'sugar build',
+                dev: 'sugar kitchen.run dev',
+                prod: 'sugar kitchen.run prod',
+                build: 'sugar kitchen.run build',
             },
             dependencies: {
                 get '@coffeekraken/sugar'() {

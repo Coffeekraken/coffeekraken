@@ -2,7 +2,7 @@ import __SClass from '@coffeekraken/s-class';
 import __SDescriptor, {
     ISDescriptorResult,
     ISDescriptorRules,
-    ISDescriptorSettings
+    ISDescriptorSettings,
 } from '@coffeekraken/s-descriptor';
 import { __parseArgs } from '@coffeekraken/sugar/cli';
 import { __deepMerge } from '@coffeekraken/sugar/object';
@@ -47,7 +47,7 @@ try {
     if (global) global._registeredInterfacesTypes = {};
     // @ts-ignore
     else window._registeredInterfacesTypes = {};
-} catch(e) {}
+} catch (e) {}
 
 /**
  * @name            SInterface

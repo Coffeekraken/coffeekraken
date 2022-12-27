@@ -276,10 +276,10 @@ export default class SSugarCli {
         }
 
         // interactive
-        if (!this.args.stack && !this.args.action && !this.args.params) {
-            this._interactivePrompt();
-            return;
-        }
+        // if (!this.args.stack && !this.args.action && !this.args.params) {
+        //     this._interactivePrompt();
+        //     return;
+        // }
 
         this._bench.step('beforeProcess');
         this._bench.end();
@@ -461,7 +461,7 @@ export default class SSugarCli {
             );
 
             // init stdio
-            this._initStdio(true, true);
+            this._initStdio(true);
 
             await __wait(100);
 
@@ -490,12 +490,10 @@ export default class SSugarCli {
 
             await proPromise;
             await __wait(1000);
-            // if (!__isChildProcess()) {
             process.exit(0);
-            // }
         } else if (cliObj.command) {
             // init stdio
-            this._initStdio(true, true);
+            this._initStdio(true);
 
             const promise = __spawn(
                 __replaceCommandTokens(cliObj.command),
@@ -503,10 +501,8 @@ export default class SSugarCli {
                 {},
             );
             this._eventEmitter.pipe(promise);
-            const res = await promise;
-            // if (!__isChildProcess()) {
+            await promise;
             process.exit(0);
-            // }
         }
     }
 
@@ -745,9 +741,9 @@ export default class SSugarCli {
 
     static async _displayHelp() {
         // init stdop
-        this._initStdio(true, false);
+        this._initStdio(true);
 
-        await __wait(100);
+        await __wait(500);
 
         this._newStep();
 

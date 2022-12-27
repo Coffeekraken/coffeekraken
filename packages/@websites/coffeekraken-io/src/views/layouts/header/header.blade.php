@@ -17,15 +17,7 @@
                 </a>
             </div>
             <div class="__version">
-                @php
-                    $color = 'complementary';
-                    if (strpos($config->package->version, 'alpha')) {
-                        $color = 'error';
-                    }
-                @endphp
-                <span class="s-badge s-color:{{ $color }}">
-                    {{ $config->package->version }}
-                </span>
+                <ck-version-selector versions='{!! json_encode($versions) !!}'></ck-version-selector>
             </div>
             <nav id="nav" class="__nav s-until:media:mobile">
                 <a class="s-typo:bold __main-link" href="/doc/get-started/get-started" title="Get Started">

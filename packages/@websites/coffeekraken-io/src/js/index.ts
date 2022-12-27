@@ -25,6 +25,7 @@ import { define as __CKDiscoverTabedComponent } from './components/CKDiscoverTab
 import { define as __CKDiscoverWelcomeComponent } from './components/CKDiscoverWelcome';
 import { define as __CKSearchComponent } from './components/CKSearch';
 import { define as __CKSettingsComponent } from './components/CkSettings';
+import { define as __CKVersionSelector } from './components/CKVersionSelector';
 // import { define as __CKRatingsComponent } from './components/CKRating';
 // import { define as __CKWelcomeRatingsComponent } from './components/CKWelcomeRatings';
 
@@ -129,6 +130,7 @@ if (import.meta.hot) {
   __CKDiscoverComponent();
   __CKDiscoverWelcomeComponent();
   __CKDiscoverTabedComponent();
+  __CKVersionSelector();
 
   // dashboard
   // const dashboard = new __SDashboard({

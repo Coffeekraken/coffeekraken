@@ -386,13 +386,16 @@ export default class SLitComponent extends LitElement {
                     return _this[prop];
                 },
                 set(value) {
-                    // ensure to have parsed object when the _this[prop].value is a string
-                    if (value?.value && typeof value.value === 'string') {
+                    // get the value
+                    value = value?.value ?? value;
+                    // try to parse JSON if the value is a string
+                    if (value && typeof value === 'string') {
                         try {
-                            _this[prop] = JSON.parse(value.value);
+                            _this[prop] = JSON.parse(value);
                             return;
                         } catch (e) {}
                     }
+                    // set the value
                     _this[prop] = value;
                 },
             });

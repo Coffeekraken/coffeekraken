@@ -438,7 +438,12 @@ export default class SComponentUtils extends __SClass {
             _state = new __SState(Object.assign({}, state), {
                 id: finalStateSettings.id,
                 save: finalStateSettings.save,
+                exclude: ['status'],
             });
+        }
+
+        if (this.node.id === 'version-selector') {
+            console.log('this', Object.assign({}, _state));
         }
 
         return _state;

@@ -6,10 +6,10 @@ export const sugarCliSettings = {
     stdio: __SStdio.UI_TERMINAL,
 };
 
-export default function recipe(stringArgs = '') {
+export default function run(stringArgs = '') {
     return new __SPromise(async ({ resolve, pipe }) => {
         const kitchen = new __SKitchen();
-        const promise = kitchen.recipe(stringArgs);
+        const promise = kitchen.run(stringArgs);
         pipe(promise);
         await promise;
         resolve(promise);

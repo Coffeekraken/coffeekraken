@@ -1,13 +1,13 @@
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
- * @name                SKitchenRecipeParamsInterface
+ * @name                SKitchenRunInterface
  * @namespace           node.interface
  * @type                      Class
  * @extends             SInterface
- * @interface
  * @status              beta
  * @platform             node
+ * @interface
  *
  * This class represent the interface that describe parameters of the SKitchen.action method
  *
@@ -18,34 +18,33 @@ import __SInterface from '@coffeekraken/s-interface';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-class SKitchenRecipeParamsInterface extends __SInterface {
+class SKitchenRunInterface extends __SInterface {
     static get _definition() {
         return {
             stack: {
-                description:
-                    'Specify the stack you want to execute like "dev", "build", etc...',
+                description: 'Specify the recipe stack you want to launch',
                 type: 'String',
                 alias: 's',
             },
+            action: {
+                description: 'Specify the action you want to launch',
+                type: 'String',
+                alias: 'a',
+            },
             recipe: {
                 description:
-                    'Specify the recipe you want to execute the stack from',
+                    'Specify the recipe you want to launch. If not specified, will take the one from the "sugar.json" file, or the default setted in the "kitchen.config.ts" file...',
                 type: 'String',
                 alias: 'r',
             },
-            runInParallel: {
+            params: {
                 description:
-                    'Specify if you want the recipe actions to run in parallel of not',
-                type: 'Boolean',
-                alias: 'p',
-            },
-            env: {
-                description:
-                    'Specify the environment in which to execute your recipe',
+                    'Specify the action parameters using the cli "--param value" syntax',
                 type: 'String',
+                alias: 'p',
             },
         };
     }
 }
 
-export default SKitchenRecipeParamsInterface;
+export default SKitchenRunInterface;

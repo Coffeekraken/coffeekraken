@@ -1,24 +1,24 @@
-import { __deepMerge } from '@coffeekraken/sugar/object';
-import { __uniqid } from '@coffeekraken/sugar/string';
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const object_1 = require("@coffeekraken/sugar/object");
+const string_1 = require("@coffeekraken/sugar/string");
 let newFolderName;
-
-export default function (api) {
-    if (api.env.platform !== 'node') return;
-
+function default_1(api) {
+    if (api.env.platform !== 'node')
+        return;
     return {
         /**
          * @name            title
          * @namespace       config.kitchenRecipeNextJs
          * @type            String
-         * @default         Default
+         * @default         NextJs 12
          *
          * Specify the recipe name
          *
          * @since       2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        title: 'NextJs',
+        title: 'NextJs 12',
         /**
          * @name            description
          * @namespace       config.kitchenRecipeNextJs
@@ -30,8 +30,7 @@ export default function (api) {
          * @since       2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        description:
-            'Create easily a next.js app with coffeekraken tools support',
+        description: 'Create easily a next.js 12 app with coffeekraken tools support',
         /**
          * @name            requirements
          * @namespace       config.kitchenRecipeNextJs
@@ -73,7 +72,7 @@ export default function (api) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                description: 'Init a new next.js project',
+                description: 'Init a new next.js 12 project',
                 actions: {
                     /**
                      * @name            createApp
@@ -86,18 +85,15 @@ export default function (api) {
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     get createApp() {
-                        return __deepMerge({
+                        return (0, object_1.__deepMerge)({
                             title: 'Create the app',
-                            description:
-                                'Create the app using the create-next-app utility',
+                            description: 'Create the app using the create-next-app utility',
                             get command() {
-                                newFolderName = __uniqid();
+                                newFolderName = (0, string_1.__uniqid)();
                                 return `npx create-next-app ${newFolderName} --typescript`;
                             },
                             after() {
-                                process.chdir(
-                                    `${process.cwd()}/${newFolderName}`,
-                                );
+                                process.chdir(`${process.cwd()}/${newFolderName}`);
                             },
                             params: {},
                             settings: {
@@ -116,7 +112,7 @@ export default function (api) {
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     get rename() {
-                        return __deepMerge(api.config.kitchen.actions.rename, {
+                        return (0, object_1.__deepMerge)(api.config.kitchen.actions.rename, {
                             params: {},
                         });
                     },
@@ -131,14 +127,11 @@ export default function (api) {
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     get addSugarJson() {
-                        return __deepMerge(
-                            api.config.kitchen.actions.addSugarJson,
-                            {
-                                params: {
-                                    recipe: 'nextJs',
-                                },
+                        return (0, object_1.__deepMerge)(api.config.kitchen.actions.addSugarJson, {
+                            params: {
+                                recipe: 'nextJs12',
                             },
-                        );
+                        });
                     },
                     /**
                      * @name            addSugar
@@ -180,14 +173,10 @@ export default function (api) {
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     get addManifestJson() {
-                        return __deepMerge(
-                            api.config.kitchen.actions.addManifestJson,
-                            {
-                                params: {},
-                            },
-                        );
+                        return (0, object_1.__deepMerge)(api.config.kitchen.actions.addManifestJson, {
+                            params: {},
+                        });
                     },
-
                     /**
                      * @name            addSugarPostcss
                      * @namespace       config.kitchenRecipeNextJs.stacks.new.actions
@@ -199,14 +188,10 @@ export default function (api) {
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     get addSugarPostcss() {
-                        return __deepMerge(
-                            api.config.kitchen.actions.addSugarPostcss,
-                            {
-                                params: {},
-                            },
-                        );
+                        return (0, object_1.__deepMerge)(api.config.kitchen.actions.addSugarPostcss, {
+                            params: {},
+                        });
                     },
-
                     /**
                      * @name            installDependencies
                      * @namespace       config.kitchenRecipeNextJs.stacks.new.actions
@@ -217,12 +202,9 @@ export default function (api) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    installDependencies: __deepMerge(
-                        api.config.kitchen.actions.installDependencies,
-                        {
-                            params: {},
-                        },
-                    ),
+                    installDependencies: (0, object_1.__deepMerge)(api.config.kitchen.actions.installDependencies, {
+                        params: {},
+                    }),
                 },
             },
             dev: {
@@ -356,3 +338,5 @@ export default function (api) {
         },
     };
 }
+exports.default = default_1;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsdURBQXlEO0FBQ3pELHVEQUFzRDtBQUV0RCxJQUFJLGFBQWEsQ0FBQztBQUVsQixtQkFBeUIsR0FBRztJQUN4QixJQUFJLEdBQUcsQ0FBQyxHQUFHLENBQUMsUUFBUSxLQUFLLE1BQU07UUFBRSxPQUFPO0lBRXhDLE9BQU87UUFDSDs7Ozs7Ozs7OztXQVVHO1FBQ0gsS0FBSyxFQUFFLFdBQVc7UUFDbEI7Ozs7Ozs7Ozs7V0FVRztRQUNILFdBQVcsRUFDUCxnRUFBZ0U7UUFDcEU7Ozs7Ozs7Ozs7V0FVRztRQUNILFlBQVksRUFBRTtZQUNWLElBQUksUUFBUTtnQkFDUixPQUFPLENBQUMsR0FBRyxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDLENBQUM7WUFDeEMsQ0FBQztTQUNKO1FBQ0Q7Ozs7Ozs7Ozs7V0FVRztRQUNILFlBQVksRUFBRSxLQUFLO1FBQ25CLE1BQU0sRUFBRTtZQUNKLEdBQUcsRUFBRTtnQkFDRDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxXQUFXLEVBQUUsK0JBQStCO2dCQUM1QyxPQUFPLEVBQUU7b0JBQ0w7Ozs7Ozs7Ozt1QkFTRztvQkFDSCxJQUFJLFNBQVM7d0JBQ1QsT0FBTyxJQUFBLG9CQUFXLEVBQUM7NEJBQ2YsS0FBSyxFQUFFLGdCQUFnQjs0QkFDdkIsV0FBVyxFQUNQLGtEQUFrRDs0QkFDdEQsSUFBSSxPQUFPO2dDQUNQLGFBQWEsR0FBRyxJQUFBLGlCQUFRLEdBQUUsQ0FBQztnQ0FDM0IsT0FBTyx1QkFBdUIsYUFBYSxlQUFlLENBQUM7NEJBQy9ELENBQUM7NEJBQ0QsS0FBSztnQ0FDRCxPQUFPLENBQUMsS0FBSyxDQUNULEdBQUcsT0FBTyxDQUFDLEdBQUcsRUFBRSxJQUFJLGFBQWEsRUFBRSxDQUN0QyxDQUFDOzRCQUNOLENBQUM7NEJBQ0QsTUFBTSxFQUFFLEVBQUU7NEJB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

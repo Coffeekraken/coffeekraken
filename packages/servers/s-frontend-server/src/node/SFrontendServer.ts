@@ -345,6 +345,7 @@ export default class SFrontendServer extends __SClass {
                                 <ISFrontendServerPageConfig>pageConfig,
                                 null,
                                 id,
+                                id,
                             ),
                         );
                     }
@@ -599,6 +600,11 @@ export default class SFrontendServer extends __SClass {
                 const { default: pageConfig } = await import(
                     `${finalPagePath}?${__uniqid()}`
                 );
+                if (!pageConfig) {
+                    throw new Error(
+                        `[frontendServer] Sorry but the given "<cyan>${finalPagePath}</cyan>" page file seems to be broken. Make sure to export the page config correctly fron this file...`,
+                    );
+                }
                 await pipe(this._registerPageConfig(pageConfig, file));
             });
 

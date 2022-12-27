@@ -27,7 +27,7 @@
                 "start": {
                     "scope": "package",
                     "description": "Start the development stack",
-                    "command": "sugar kitchen.recipe dev"
+                    "command": "sugar kitchen.recipe -s dev"
                 }
             }
         },
@@ -39,7 +39,7 @@
                 "start": {
                     "scope": "package",
                     "description": "Start the production testing stack",
-                    "command": "sugar kitchen.recipe prod"
+                    "command": "sugar kitchen.recipe -s prod"
                 }
             }
         },
@@ -51,7 +51,7 @@
                 "prod": {
                     "scope": "package",
                     "description": "Build for production",
-                    "command": "sugar kitchen.recipe build"
+                    "command": "sugar kitchen.recipe -s build"
                 }
             }
         },

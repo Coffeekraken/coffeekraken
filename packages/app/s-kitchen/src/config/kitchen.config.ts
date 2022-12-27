@@ -22,18 +22,18 @@ export default function (api) {
             },
 
             /**
-             * @name            nextJs
+             * @name            nextJs12
              * @namespace       config.kitchen.recipes
              * @type            String
-             * @default         [config.kitchenRecipeNextJs]
+             * @default         [config.kitchenRecipeNextJs12]
              *
              * Specify the next.js recipe
              *
              * @since       2.0.0
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            get nextJs() {
-                return api.config.kitchenRecipeNextJs;
+            get nextJs12() {
+                return api.config.kitchenRecipeNextJs12;
             },
         },
 

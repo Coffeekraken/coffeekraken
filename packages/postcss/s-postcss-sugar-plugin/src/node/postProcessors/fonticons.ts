@@ -23,6 +23,26 @@ export default async function ({ root, sharedData, settings }) {
     const fantasticonConfig = __SSugarConfig.get('icons.fantasticon');
     const sourceStr = root.toString();
 
+    // make sure we have icons to generate
+    if (!sourceStr.match(/S-SUGAR-FS-ICON:/)) {
+        return;
+    }
+
+    function injectIconsCss() {
+        const iconsCss = __fs
+            .readFileSync(
+                `${fantasticonConfig.outputDir}/${fantasticonConfig.name}.css`,
+            )
+            .toString();
+
+        const iconsAst = __postcss.parse(iconsCss ?? '');
+        iconsAst.walkRules((rule) => {
+            // @ts-ignore
+            rule._preventScopes = true;
+        });
+        root.nodes.push(iconsAst);
+    }
+
     // fontawesome
     if (sourceStr.match(/Font Awesome/)) {
         if (__SEnv.is('verbose')) {
@@ -42,14 +62,6 @@ export default async function ({ root, sharedData, settings }) {
         __srcCssDir(),
         fantasticonConfig.outputDir,
     );
-
-    if (sourceStr.match(/S-SUGAR-FS-ICON:/)) {
-        root.nodes.unshift(
-            __postcss.parse(`
-            @import url(${importFontUrl}/${fantasticonConfig.name}.css);
-        `),
-        );
-    }
 
     if (!sharedData.icons || !sharedData.icons.length) return;
 
@@ -90,6 +102,11 @@ export default async function ({ root, sharedData, settings }) {
                     `<green>[fonticons]</green> Fonticons are up to date`,
                 );
             }
+
+            // inject css
+            injectIconsCss();
+
+            // stop here
             return;
         }
     }
@@ -160,6 +177,9 @@ export default async function ({ root, sharedData, settings }) {
     if (settings.target === 'vite') {
         __writeFileSync(hashCacheFilePath, folderHash);
     }
+
+    // inject css
+    injectIconsCss();
 
     console.log(
         `<green>[fonticons]</green> Fonticons generated <green>successfully</green> in <cyan>${

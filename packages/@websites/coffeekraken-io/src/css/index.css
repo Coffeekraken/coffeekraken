@@ -10,10 +10,9 @@ html {
 
 body {
   width: 100vw;
+  background-color: sugar.color(main, --darken 30);
 
   @sugar.theme.when (dark) {
-    background-color: sugar.color(main, --darken 30);
-
     background-image: radial-gradient(
       ellipse at top left,
       sugar.color(main, --darken 25),

@@ -34,10 +34,8 @@ export default function ({
     const vars: string[] = [
         `
         background-size: 100%;
-        -webkit-background-clip: text;
-        -moz-background-clip: text;
-        -webkit-text-fill-color: transparent; 
-        -moz-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
         @sugar.gradient ${atRule.params};
     `,
     ];

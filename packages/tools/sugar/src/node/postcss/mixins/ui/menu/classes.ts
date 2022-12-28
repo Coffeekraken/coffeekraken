@@ -94,7 +94,7 @@ export default function ({
     ) {
         vars.comment(
             `/**
-            * @name           .s-menu:not(.s-bare)
+            * @name           .s-menu
             * @namespace          sugar.ui.menu
             * @type           CssClass
             * 
@@ -112,7 +112,7 @@ export default function ({
         */`,
         ).code(
             `
-            .s-menu:not(.s-bare) {
+            .s-menu {
                 @sugar.ui.menu($scope: lnf, $lnf: ${finalParams.defaultLnf}, $type: ${finalParams.defaultType});
             }`,
             {

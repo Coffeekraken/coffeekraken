@@ -140,7 +140,7 @@ if (import.meta.hot) {
     // });
     // code example highlight
     __querySelectorLive('.s-code-example__content', ($elm) => {
-        $elm.setAttribute('intensity', '0.2');
+        $elm.setAttribute('intensity', '0.1');
         $elm.setAttribute('s-highlight', 'light');
     });
 }))();

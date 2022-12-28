@@ -93,6 +93,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             excludeByTypes: [],
             excludeCommentByTypes: [],
             excludeCodeByTypes: [],
+            scopes: {},
             target: 'production',
             cache: false,
             cacheDir: `${__packageCacheDir()}/postcssSugarPlugin`,
@@ -124,6 +125,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             excludeCodeByTypes: __SSugarConfig.get(
                 'postcssSugarPlugin.excludeCodeByTypes',
             ),
+            scopes: __SSugarConfig.get('postcssSugarPlugin.scopes'),
             cache: __SSugarConfig.get('postcssSugarPlugin.cache'),
         });
 
@@ -591,9 +593,17 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             await fn(root);
         }
 
-        const postProcessorsPaths = __glob.sync('**/*.js', {
-            cwd: `${__dirname()}/postProcessors`,
-        });
+        const postProcessorsPaths = __glob
+            .sync('**/*.js', {
+                cwd: `${__dirname()}/postProcessors`,
+            })
+            // just to ensure scopes are last
+            .sort((a, b) => {
+                if (a.includes('scopes')) {
+                    return 1;
+                }
+                return 0;
+            });
 
         for (let i = 0; i < postProcessorsPaths.length; i++) {
             const path = postProcessorsPaths[i];
@@ -606,6 +616,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                 packageHash,
                 themeHash,
                 cacheDir,
+                postcssApi: __postcss,
                 getRoot: __getRoot,
                 settings,
                 root,

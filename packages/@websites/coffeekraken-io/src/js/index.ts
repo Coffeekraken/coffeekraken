@@ -30,8 +30,8 @@ import { define as __CKVersionSelector } from './components/CKVersionSelector';
 // import { define as __CKWelcomeRatingsComponent } from './components/CKWelcomeRatings';
 
 import {
-  __querySelectorLive,
-  __reloadStylesheets,
+    __querySelectorLive,
+    __reloadStylesheets,
 } from '@coffeekraken/sugar/dom';
 
 // Libs
@@ -46,114 +46,116 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
 const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
 
 if (import.meta.hot) {
-  import.meta.hot.on('sugar.update.css', (data) => {
-    console.log('RELOAD', data);
-    // perform custom update
-    __reloadStylesheets();
-  });
+    import.meta.hot.on('sugar.update.css', (data) => {
+        console.log('RELOAD', data);
+        // perform custom update
+        __reloadStylesheets();
+    });
 }
 
 (async () => {
-  __SFeature.setDefaultProps('*', {
-    mountWhen: 'nearViewport',
-    // verbose: !__SEnv.is('devsCut'),
-  });
-  __SFeature.setDefaultProps(['s-highlight'], {
-    opacity: 0.3,
-  });
-  __SFeature.setDefaultProps(['s-form-validate'], {
-    customValidations: {
-      coffeekraken: (value, helpers) => {
-        if (value === 'coffeekraken') {
-          return helpers.message('Are you sure? Krakens are dangerous...');
-        }
-        return value;
-      },
-    },
-  });
-  __SLitComponent.setDefaultProps('*', {
-    mountWhen: 'nearViewport',
-    // verbose: !__SEnv.is('devsCut'),
-  });
-  __SLitComponent.setDefaultProps(
-    ['ck-search-input', 's-color-picker', 's-datetime-picker'],
-    {
-      mountWhen: 'interact',
-      // verbose: !__SEnv.is('devsCut'),
-    }
-  );
-  __SLitComponent.setDefaultProps(['s-panel', 'ck-settings'], {
-    mountWhen: 'direct',
-  });
-  __SLitComponent.setDefaultProps(['s-code-example'], {
-    scrollToSettings: {
-      offset: 100,
-    },
-    responsive: {
-      mobile: {
-        lines: 5,
-      },
-    },
-  });
+    __SFeature.setDefaultProps('*', {
+        mountWhen: 'nearViewport',
+        // verbose: !__SEnv.is('devsCut'),
+    });
+    __SFeature.setDefaultProps(['s-highlight'], {
+        opacity: 0.3,
+    });
+    __SFeature.setDefaultProps(['s-form-validate'], {
+        customValidations: {
+            coffeekraken: (value, helpers) => {
+                if (value === 'coffeekraken') {
+                    return helpers.message(
+                        'Are you sure? Krakens are dangerous...',
+                    );
+                }
+                return value;
+            },
+        },
+    });
+    __SLitComponent.setDefaultProps('*', {
+        mountWhen: 'nearViewport',
+        // verbose: !__SEnv.is('devsCut'),
+    });
+    __SLitComponent.setDefaultProps(
+        ['ck-search-input', 's-color-picker', 's-datetime-picker'],
+        {
+            mountWhen: 'interact',
+            // verbose: !__SEnv.is('devsCut'),
+        },
+    );
+    __SLitComponent.setDefaultProps(['s-panel', 'ck-settings'], {
+        mountWhen: 'direct',
+    });
+    __SLitComponent.setDefaultProps(['s-code-example'], {
+        scrollToSettings: {
+            offset: 100,
+        },
+        responsive: {
+            mobile: {
+                lines: 5,
+            },
+        },
+    });
 
-  // init theme
-  __STheme.init({
-    variant: 'dark',
-  });
+    // init theme
+    __STheme.init({
+        variant: 'dark',
+    });
 
-  // essentials
-  __SPackEssentials();
+    // essentials
+    __SPackEssentials();
 
-  // features
-  __SPageTransitionFeatureDefine();
-  __SLazyFeatureDefine();
-  __SParallaxFeatureDefine();
-  __SHighlightFeatureDefine();
-  // __SGlitchFeatureDefine();
+    // features
+    __SPageTransitionFeatureDefine();
+    __SLazyFeatureDefine();
+    __SParallaxFeatureDefine();
+    __SHighlightFeatureDefine();
+    // __SGlitchFeatureDefine();
 
-  // components
-  __SCodeExampleComponentDefine();
-  __SSliderComponentDefine();
-  __SFiltrableInputComponentDefine();
-  __SSidePanelComponentDefine();
-  __SRatingComponentDefine();
-  __SColorPickerComponentDefine();
-  __SDatetimePickerComponentDefine();
-  __SGoogleMapComponentDefine();
-  __SThemeSwitcherComponentDefine();
+    // components
+    __SCodeExampleComponentDefine();
+    __SSliderComponentDefine();
+    __SFiltrableInputComponentDefine();
+    __SSidePanelComponentDefine();
+    __SRatingComponentDefine();
+    __SColorPickerComponentDefine();
+    __SDatetimePickerComponentDefine();
+    __SGoogleMapComponentDefine();
+    __SThemeSwitcherComponentDefine();
 
-  // Website specific
-  // __CKRatingsComponent();
-  // __CKWelcomeRatingsComponent();
-  __CKSearchComponent();
-  __CKSettingsComponent();
-  __CKDiscoverComponent();
-  __CKDiscoverWelcomeComponent();
-  __CKDiscoverTabedComponent();
-  __CKVersionSelector();
+    // Website specific
+    // __CKRatingsComponent();
+    // __CKWelcomeRatingsComponent();
+    __CKSearchComponent();
+    __CKSettingsComponent();
+    __CKDiscoverComponent();
+    __CKDiscoverWelcomeComponent();
+    __CKDiscoverTabedComponent();
+    __CKVersionSelector();
 
-  // dashboard
-  // const dashboard = new __SDashboard({
-  //   dashboard: {
-  //     components: {
-  //       's-dashboard-pages': {
-  //         onSelect: (page) => {
-  //           dashboard.close();
-  //           document.dispatchEvent(
-  //             new CustomEvent('location.href', {
-  //               detail: page.item.loc,
-  //               bubbles: true,
-  //             })
-  //           );
-  //         },
-  //       },
-  //     },
-  //   },
-  // });
+    // dashboard
+    // const dashboard = new __SDashboard({
+    //   dashboard: {
+    //     components: {
+    //       's-dashboard-pages': {
+    //         onSelect: (page) => {
+    //           dashboard.close();
+    //           document.dispatchEvent(
+    //             new CustomEvent('location.href', {
+    //               detail: page.item.loc,
+    //               bubbles: true,
+    //             })
+    //           );
+    //         },
+    //       },
+    //     },
+    //   },
+    // });
 
-  // code example highlight
-  __querySelectorLive('.s-code-example__content', ($elm) => {
-    $elm.setAttribute('intensity', '0.2');
-    $elm.setAttribute('s-highlight', 'light');
-  });
+    // code example highlight
+    __querySelectorLive('.s-code-example__content', ($elm) => {
+        $elm.setAttribute('intensity', '0.1');
+        $elm.setAttribute('s-highlight', 'light');
+    });
 })();

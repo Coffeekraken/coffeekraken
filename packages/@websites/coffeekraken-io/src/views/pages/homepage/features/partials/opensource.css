@@ -119,7 +119,7 @@
   .__box {
     position: relative;
     background: sugar.color(main, surface);
-    /* @sugar.depth (100); */
+    @sugar.border.radius();
 
     @sugar.theme.when dark {
       @sugar.depth (100);

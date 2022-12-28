@@ -142,5 +142,10 @@ export default async function ({
     }
   `);
 
-    return vars;
+    const ast = postcssApi.parse(vars.join('\n'));
+    ast.walkRules((rule) => {
+        rule._preventScopes = true;
+    });
+
+    atRule.replaceWith(ast);
 }

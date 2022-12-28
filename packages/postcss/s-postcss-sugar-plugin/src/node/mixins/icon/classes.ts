@@ -283,9 +283,11 @@ export default function ({
                 `,
                 ).code(
                     `
-                  .s-icon--${iconObj.as} {
-                    @sugar.icon.fa(${iconObj.name}, ${iconObj.protocol});
-                  }
+                    @sugar.scope.prevent {
+                        .s-icon--${iconObj.as} {
+                            @sugar.icon.fa(${iconObj.name}, ${iconObj.protocol});
+                        }
+                    }
               `,
                     { type: 'CssClass' },
                 );
@@ -315,8 +317,10 @@ export default function ({
                         `,
                 ).code(
                     `
-                        .s-icon--${iconObj.as} {
-                            @sugar.icon.fs(${iconObj.path}, ${iconObj.as});
+                        @sugar.scope.prevent {
+                            .s-icon--${iconObj.as} {
+                                @sugar.icon.fs(${iconObj.path}, ${iconObj.as});
+                            }
                         }
                     `,
                     { type: 'CssClass' },
@@ -347,9 +351,11 @@ export default function ({
                             `,
                 ).code(
                     `
+                        @sugar.scope.prevent {
                             .s-icon--${iconObj.as} {
                                 @sugar.icon.sugar(${iconObj.path}, ${iconObj.as});
                             }
+                        }
                         `,
                     { type: 'CssClass' },
                 );

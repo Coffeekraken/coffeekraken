@@ -108,7 +108,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     }
     if (finalParams.scope.includes('lnf')) {
         vars.comment(`/**
-            * @name           .s-card:not(.s-bare)
+            * @name           .s-card
             * @namespace          sugar.ui.card
             * @type           CssClass
             * 
@@ -122,7 +122,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code(`
-            .s-card:not(.s-bare) {
+            .s-card {
                 @sugar.ui.card($scope: lnf);
             }`, {
             type: 'CssClass',

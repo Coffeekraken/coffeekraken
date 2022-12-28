@@ -116,9 +116,11 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             )
             .code(
                 `
-      .s-color--${colorName} {
-        @sugar.color(${colorName});
-      }
+                @sugar.scope.prevent {
+                    .s-color--${colorName} {
+                        @sugar.color(${colorName});
+                    }
+                }
     `,
                 { type: 'CssClass' },
             );
@@ -144,8 +146,8 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             )
             .code(
                 `
-            .s-bg--${colorName} {
-                   background-color: sugar.color(${colorName}) !important;
+                .s-bg--${colorName} {
+                    background-color: sugar.color(${colorName}) !important;
                 }
         `,
                 { type: 'CssClass' },
@@ -182,11 +184,13 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             )
             .code(
                 `
-            .s-tc--${colorName}${
+                .s-tc--${colorName}${
                     colorObj.schema === 'text' ? '' : modifierStr
                 } {
-            color: sugar.color(${colorName}, ${colorObj.schema}) !important;
-        }
+                    color: sugar.color(${colorName}, ${
+                    colorObj.schema
+                }) !important;
+                }
         `,
                 { type: 'CssClass' },
             );
@@ -212,8 +216,8 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             )
             .code(
                 `
-            .s-bg--${colorName}${modifierStr} {
-                   background-color: sugar.color(${colorName}, ${colorObj.schema}) !important;
+                .s-bg--${colorName}${modifierStr} {
+                    background-color: sugar.color(${colorName}, ${colorObj.schema}) !important;
                 }
         `,
                 { type: 'CssClass' },
@@ -243,7 +247,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
         )
         .code(
             `
-        .s-bg--odd > *:nth-child(even) {
+            .s-bg--odd > *:nth-child(even) {
               background-color: transparent !important;
             }
     `,

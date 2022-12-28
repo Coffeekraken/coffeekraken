@@ -83,53 +83,56 @@ export default function ({
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
     ).code(`
-            /* purgecss start ignore */
 
 
-            /**
-             * Body height
-             */
-            html {
-                height: fill-available;
-            }
-            body {
-                min-height: 100vh;
-                min-height: -webkit-fill-available;
-            }
+    /* purgecss start ignore */
 
-            /**
-             * Add the correct display in IE 10+.
-             */
-            template {
-                display: none;
-            }
+    /**
+     * Body height
+     */
+    html {
+        height: fill-available;
+    }
+    body {
+        min-height: 100vh;
+        min-height: -webkit-fill-available;
+    }
 
-            /**
-             * Add the correct display in IE 10.
-             */
-            [hidden] {
-                display: none;
-            }
+    /**
+     * Add the correct display in IE 10+.
+     */
+    template {
+        display: none;
+    }
 
-            /**
-             * Set box sizing to berder box
-             * Set the webkit highlight color to transparent color
-             * Remote outline on every elements
-             */
-            * {
-                box-sizing: border-box;
-                -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-                outline: none;
-            }
+    /**
+     * Add the correct display in IE 10.
+     */
+    [hidden] {
+        display: none;
+    }
 
-            /**
-             * Max width 100% for images
-             */
-            img {
-                max-width: 100%;
-            }
+    /**
+     * Set box sizing to berder box
+     * Set the webkit highlight color to transparent color
+     * Remote outline on every elements
+     */
+    * {
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        outline: none;
+    }
 
-            /* purgecss end ignore */
+    /**
+     * Max width 100% for images
+     */
+    img {
+        max-width: 100%;
+    }
+
+    /* purgecss end ignore */
+
+
   `);
 
     return vars;

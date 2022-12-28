@@ -133,7 +133,7 @@ export default function ({
     if (finalParams.scope.includes('lnf')) {
         vars.comment(
             `/**
-            * @name           .s-card:not(.s-bare)
+            * @name           .s-card
             * @namespace          sugar.ui.card
             * @type           CssClass
             * 
@@ -149,7 +149,7 @@ export default function ({
         */`,
         ).code(
             `
-            .s-card:not(.s-bare) {
+            .s-card {
                 @sugar.ui.card($scope: lnf);
             }`,
             {

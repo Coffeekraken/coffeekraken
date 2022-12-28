@@ -1,6 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import { IPostcssSugarPluginColorParams } from '../../functions/color/color';
-
 class postcssSugarPluginScopeNoMixinInterface extends __SInterface {
     static get _definition() {
         return {
@@ -15,11 +13,6 @@ class postcssSugarPluginScopeNoMixinInterface extends __SInterface {
     }
 }
 export { postcssSugarPluginScopeNoMixinInterface as interface };
-
-export interface postcssSugarPluginScopeNoMixinParams {
-    scopes: string[];
-}
-
 /**
  * @name           no
  * @namespace      node.mixin.scope
@@ -42,31 +35,13 @@ export interface postcssSugarPluginScopeNoMixinParams {
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-const _noScopesStack: string[] = [];
-export default function ({
-    params,
-    sharedData,
-    atRule,
-    replaceWith,
-    postcssApi,
-}: {
-    params: Partial<IPostcssSugarPluginColorParams>;
-    sharedData: any;
-    atRule: any;
-    replaceWith: Function;
-    postcssApi: any;
-}) {
-    const finalParams = <postcssSugarPluginScopeNoMixinParams>{
-        scopes: [],
-        ...(params ?? {}),
-    };
-
+const _noScopesStack = [];
+export default function ({ params, sharedData, atRule, replaceWith, postcssApi, }) {
+    const finalParams = Object.assign({ scopes: [] }, (params !== null && params !== void 0 ? params : {}));
     // _noScopesStack.push(finalParams.scopes.join(','));
     // sharedData.noScopes = finalParams.scopes;
-
     // console.log(finalParams);
     // atRule.replaceWith(atRule.nodes);
-
     // console.log('RESTORE');
     // _noScopesStack.pop();
     // if (_noScopesStack.length) {
@@ -76,3 +51,4 @@ export default function ({
     //     sharedData.noScopes = [];
     // }
 }
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBR3JELE1BQU0sdUNBQXdDLFNBQVEsWUFBWTtJQUM5RCxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsTUFBTSxFQUFFO2dCQUNKLElBQUksRUFBRTtvQkFDRixJQUFJLEVBQUUsZUFBZTtvQkFDckIsVUFBVSxFQUFFLENBQUMsR0FBRyxFQUFFLEdBQUcsQ0FBQztpQkFDekI7Z0JBQ0QsUUFBUSxFQUFFLElBQUk7YUFDakI7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBQ0QsT0FBTyxFQUFFLHVDQUF1QyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBTWhFOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FxQkc7QUFDSCxNQUFNLGNBQWMsR0FBYSxFQUFFLENBQUM7QUFDcEMsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sVUFBVSxFQUNWLE1BQU0sRUFDTixXQUFXLEVBQ1gsVUFBVSxHQU9iO0lBQ0csTUFBTSxXQUFXLEdBQUcsZ0JBQ2hCLE1BQU0sRUFBRSxFQUFFLElBQ1AsQ0FBQyxNQUFNLGFBQU4sTUFBTSxjQUFOLE1BQU0sR0FBSSxFQUFFLENBQUMsQ0FDcEIsQ0FBQztJQUVGLHFEQUFxRDtJQUNyRCw0Q0FBNEM7SUFFNUMsNEJBQTRCO0lBQzVCLG9DQUFvQztJQUVwQywwQkFBMEI7SUFDMUIsd0JBQXdCO0lBQ3hCLCtCQUErQjtJQUMvQixvQkFBb0I7SUFDcEIsaUVBQWlFO0lBQ2pFLFdBQVc7SUFDWCxnQ0FBZ0M7SUFDaEMsSUFBSTtBQUNSLENBQUMifQ==

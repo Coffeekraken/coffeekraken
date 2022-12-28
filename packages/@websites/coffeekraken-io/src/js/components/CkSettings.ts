@@ -4,25 +4,16 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 import __STheme from '@coffeekraken/s-theme';
 import { html } from 'lit';
 
-import __state from '../state/state';
-
 export default class CkSettings extends __SLitComponent {
-  _settings = {
-    darkMode: true,
-    colors: {
-      accent: undefined,
-      complementary: undefined,
-    },
-  };
-
   _theme = __STheme.getCurrentTheme();
-  state = __state.define('ck-settings', {
-    darkMode: false,
-  });
 
   static get properties() {
     return __SLitComponent.propertiesFromInterface();
   }
+
+  static state = {
+    bareMore: false,
+  };
 
   constructor() {
     super({
@@ -56,6 +47,24 @@ export default class CkSettings extends __SLitComponent {
     });
   }
 
+  async mount() {
+    // restore bare mode
+    this._setBareMode(this.state.bareMode);
+  }
+
+  _setBareMode(status: boolean): void {
+    this.state.bareMode = status;
+    if (status) {
+      document.body.classList.add(
+        ...['s-scope', 's-scope--deep', 's-scope--bare']
+      );
+    } else {
+      document.body.classList.remove(
+        ...['s-scope', 's-scope--deep', 's-scope--bare']
+      );
+    }
+  }
+
   render() {
     return html`
       <div s-deps css="ckSettings">
@@ -80,6 +89,19 @@ export default class CkSettings extends __SLitComponent {
                                 ></s-theme-switcher>
                             </label>
                         </li> -->
+            <li class="s-bg:main-surface">
+              <label class="s-label s-pi:50 s-pb:30 @mobile s-pi:40">
+                <span> Bare mode </span>
+                <input
+                  type="checkbox"
+                  class="s-switch s-color:accent"
+                  @change=${(e) => {
+                    this._setBareMode(e.target.checked);
+                  }}
+                  ?checked=${this.state.bareMode}
+                />
+              </label>
+            </li>
             <li class="s-bg:main-surface">
               <label
                 class="s-label:responsive s-pi:50 s-pb:30 @mobile s-pi:40"
@@ -206,5 +228,9 @@ export default class CkSettings extends __SLitComponent {
 }
 
 export function define(props: any = {}, tagName = 'ck-settings') {
-  __SLitComponent.define(tagName, CkSettings, props);
+  __SLitComponent.define(tagName, CkSettings, {
+    id: 'ck-settings',
+    // saveState: true,
+    ...props,
+  });
 }

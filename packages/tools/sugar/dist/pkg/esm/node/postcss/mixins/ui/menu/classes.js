@@ -56,7 +56,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     if (finalParams.lnfs.includes(finalParams.defaultLnf) &&
         finalParams.scope.includes('lnf')) {
         vars.comment(`/**
-            * @name           .s-menu:not(.s-bare)
+            * @name           .s-menu
             * @namespace          sugar.ui.menu
             * @type           CssClass
             * 
@@ -72,7 +72,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code(`
-            .s-menu:not(.s-bare) {
+            .s-menu {
                 @sugar.ui.menu($scope: lnf, $lnf: ${finalParams.defaultLnf}, $type: ${finalParams.defaultType});
             }`, {
             type: 'CssClass',

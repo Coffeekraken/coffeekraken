@@ -31,6 +31,91 @@ export default function (api) {
          */
         cache: false,
 
+        scopes: {
+            bare: {
+                /**
+                 * @name            properties
+                 * @namespace       config.postcssSugarPlugin.scopes.bare
+                 * @type            Boolean
+                 * @default         [...]
+                 *
+                 * Specify all the css properties that are to be considered "bare" scope.
+                 * You can prefix them by "^" to tell "starts with", or suffix them by "$" to tell "ends with".
+                 *
+                 * @since           2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                properties: [
+                    '^align-',
+                    'appearance$',
+                    'aspect-ratio',
+                    'backface-visibility',
+                    '^background',
+                    'bottom',
+                    'box-sizing',
+                    'clear',
+                    '^clip-',
+                    'color',
+                    'column-count',
+                    'column-fill',
+                    'column-gap',
+                    'column-span',
+                    'column-width',
+                    'columns',
+                    'content',
+                    'cursor',
+                    'direction',
+                    'display',
+                    'empty-cells',
+                    'fill',
+                    '^flex-',
+                    'float',
+                    'font-size',
+                    'gap',
+                    '^grid',
+                    'height',
+                    'justify-content',
+                    'left',
+                    'line-height',
+                    'list-style',
+                    '^margin',
+                    '^max-',
+                    '^min-',
+                    'opacity',
+                    'order',
+                    '^overflow',
+                    '^padding',
+                    '^page-',
+                    '^perspective',
+                    'pointer-events',
+                    'position',
+                    'resize',
+                    'right',
+                    'rotate',
+                    'row-gap',
+                    'scale',
+                    'stroke',
+                    '^scroll',
+                    'table-layout',
+                    '^text-align',
+                    'text-justify',
+                    'text-overflow',
+                    'top',
+                    '^transform',
+                    'translate',
+                    'user-select',
+                    'vertical-align',
+                    'visibility',
+                    'white-space',
+                    'width',
+                    'word-break',
+                    'word-wrap',
+                    'writing-mode',
+                    'z-index',
+                ],
+            },
+        },
+
         /**
          * @name            excludeByTypes
          * @namespace       config.postcssSugarPlugin

@@ -74,8 +74,8 @@ export default function ({
         ).code(
             `
       .${cls.replace(':', '--')} {
-          @sugar.container(${containerName});
-      }`,
+                @sugar.container(${containerName});
+        }`,
             { type: 'CssClass' },
         );
     });

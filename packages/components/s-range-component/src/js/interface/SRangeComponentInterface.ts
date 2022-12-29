@@ -31,6 +31,11 @@ export default class SRangeComponentInterface extends __SInterface {
                 type: 'Number',
                 description: 'Specify the initial range value',
             },
+            values: {
+                type: 'Object',
+                description:
+                    'Specify some values in array like ["hello","world"] that will be used for tooltip. Your range steps MUST be integers for this to work properly',
+            },
             min: {
                 type: 'Number',
                 description: 'Specify the minimal value or the range',

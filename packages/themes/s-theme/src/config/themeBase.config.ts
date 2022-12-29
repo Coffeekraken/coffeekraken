@@ -19,13 +19,28 @@ export default function (api) {
          * @type            String
          * @default         [config.themeColor]
          *
-         * Specify the color schema to be used in the dark theme
+         * Specify the color schema to be used in the theme
          *
          * @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get color() {
             return api.config.themeColor;
+        },
+
+        /**
+         * @name            lod
+         * @namespace        config.themeBase
+         * @type            String
+         * @default         [config.themeLod]
+         *
+         * Specify the level of details to be used in the theme
+         *
+         * @since           2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        get lod() {
+            return api.config.themeLod;
         },
 
         /**

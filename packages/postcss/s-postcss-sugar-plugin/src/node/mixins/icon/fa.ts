@@ -144,7 +144,7 @@ export default async function ({
 
     const ast = postcssApi.parse(vars.join('\n'));
     ast.walkRules((rule) => {
-        rule._preventScopes = true;
+        rule._preventLod = true;
     });
 
     atRule.replaceWith(ast);

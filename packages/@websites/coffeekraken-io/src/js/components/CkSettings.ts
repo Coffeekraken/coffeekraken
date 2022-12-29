@@ -55,14 +55,14 @@ export default class CkSettings extends __SLitComponent {
   _setBareMode(status: boolean): void {
     this.state.bareMode = status;
     if (status) {
-      document.body.classList.add(
-        ...['s-scope', 's-scope--deep', 's-scope--bare']
-      );
+      document.body.classList.add(...['s-lod', 's-lod--deep', 's-lod--1']);
     } else {
-      document.body.classList.remove(
-        ...['s-scope', 's-scope--deep', 's-scope--bare']
-      );
+      document.body.classList.remove(...['s-lod', 's-lod--deep', 's-lod--1']);
     }
+  }
+
+  _setLod(level: number) {
+    __STheme.setLod(level);
   }
 
   render() {
@@ -100,6 +100,28 @@ export default class CkSettings extends __SLitComponent {
                   }}
                   ?checked=${this.state.bareMode}
                 />
+              </label>
+            </li>
+            <li class="s-bg:main-surface">
+              <label
+                class="s-label:responsive s-pi:50 s-pb:30 @mobile s-pi:40"
+                for="setting-font-size"
+              >
+                <span>Level of details</span>
+                <s-range
+                  class="s-color:accent"
+                  id="setting-lod"
+                  min="0"
+                  max="4"
+                  value="2"
+                  values='["Bare","Low","Medium","High","Extrem"]'
+                  tooltip
+                  step="1"
+                  @change=${(e) => {
+                    this._setLod(e.target.value);
+                  }}
+                >
+                </s-range>
               </label>
             </li>
             <li class="s-bg:main-surface">

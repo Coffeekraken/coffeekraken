@@ -93,7 +93,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             excludeByTypes: [],
             excludeCommentByTypes: [],
             excludeCodeByTypes: [],
-            scopes: {},
+            lod: {},
             target: 'production',
             cache: false,
             cacheDir: `${__packageCacheDir()}/postcssSugarPlugin`,
@@ -125,7 +125,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             excludeCodeByTypes: __SSugarConfig.get(
                 'postcssSugarPlugin.excludeCodeByTypes',
             ),
-            scopes: __SSugarConfig.get('postcssSugarPlugin.scopes'),
+            lod: __STheme.get('lod'),
             cache: __SSugarConfig.get('postcssSugarPlugin.cache'),
         });
 
@@ -597,9 +597,9 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             .sync('**/*.js', {
                 cwd: `${__dirname()}/postProcessors`,
             })
-            // just to ensure scopes are last
+            // just to ensure lod are last
             .sort((a, b) => {
-                if (a.includes('scopes')) {
+                if (a.includes('lod')) {
                     return 1;
                 }
                 return 0;

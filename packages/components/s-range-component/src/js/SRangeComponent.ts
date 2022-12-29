@@ -71,9 +71,15 @@ import __css from '../../../../src/css/s-range.css'; // relative to /dist/pkg/es
  * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
+export interface ISRangeComponentValuesProp {
+    name: string;
+    value: any;
+}
+
 export interface ISRangeComponentProps extends ISLitComponentDefaultProps {
     name: string;
     value: string;
+    values: ISRangeComponentValuesProp[];
     min: number;
     max: number;
     step: number;
@@ -155,7 +161,11 @@ export default class SRangeComponent extends __SLitComponent {
         this._$tooltip.style.left = `calc(${newVal}% + (${
             8 - newVal * 0.15
         }px))`;
-        this._$tooltip.innerHTML = val;
+        let tooltipValue = val;
+        if (this.props.values && this.props.values[val]) {
+            tooltipValue = this.props.values[val];
+        }
+        this._$tooltip.innerHTML = tooltipValue;
     }
     render() {
         return html`

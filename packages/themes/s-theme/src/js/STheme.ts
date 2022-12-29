@@ -36,6 +36,11 @@ export interface ISThemeInitSettings {
     variant: string;
 }
 
+export interface ISThemeSetLodSettings {
+    $context: HTMLElement;
+    deep: boolean;
+}
+
 export default class STheme extends __SThemeBase {
     static defaultThemeMetas = {};
 
@@ -73,6 +78,69 @@ export default class STheme extends __SThemeBase {
             return __SSugarConfig.get('theme.variant');
         }
         return themeAttr.split('-')[1];
+    }
+
+    /**
+     * @name            setLod
+     * @type            Function
+     * @static
+     *
+     * This method allows you to set the level of details you want on any HTMLElement context
+     *
+     * @param               {String|Number}     level           The level you want to set
+     * @param               {Partial<ISThemeSetLodSettings>}        Some settings to configure your action
+     * @return          {STheme}                                    The STheme instance that represent the current applied theme
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static setLod(
+        level: string | number,
+        settings?: Partial<ISThemeSetLodSettings>,
+    ): STheme {
+        const finalSettings = <ISThemeSetLodSettings>{
+            $context: document.body,
+            deep: true,
+            ...(settings ?? {}),
+        };
+
+        // @ts-ignore
+        level = parseInt(`${level}`);
+
+        // remove all the lod classes above the wanted level
+        for (let i = 0; i <= 10; i++) {
+            if (i > level) {
+                finalSettings.$context.classList.remove(`s-lod--${i}`);
+            }
+        }
+
+        // deep class
+        if (finalSettings.deep) {
+            finalSettings.$context.classList.add('s-lod--deep');
+        } else {
+            finalSettings.$context.classList.remove('s-lod--deep');
+        }
+
+        // add the new classes
+        for (let i = 0; i <= level; i++) {
+            finalSettings.$context.classList.add('s-lod', `s-lod--${i}`);
+        }
+
+        // get the current theme instance
+        const currentTheme = this.getCurrentTheme();
+
+        // dispatch a change event
+        document.dispatchEvent(
+            new CustomEvent('s-theme.lod.change', {
+                detail: {
+                    level,
+                    theme: currentTheme,
+                },
+            }),
+        );
+
+        // return the current theme
+        return currentTheme;
     }
 
     /**

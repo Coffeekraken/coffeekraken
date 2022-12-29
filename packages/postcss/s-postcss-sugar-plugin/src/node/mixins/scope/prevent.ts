@@ -50,12 +50,12 @@ export default function ({
         ...(params ?? {}),
     };
     atRule.walkRules((rule) => {
-        rule._preventScopes = true;
-        if (!sharedData._preventScopesSelectors) {
-            sharedData._preventScopesSelectors = [];
+        rule._preventLod = true;
+        if (!sharedData._preventLodSelectors) {
+            sharedData._preventLodSelectors = [];
         }
-        sharedData._preventScopesSelectors = [
-            ...sharedData._preventScopesSelectors,
+        sharedData._preventLodSelectors = [
+            ...sharedData._preventLodSelectors,
             ...rule.selectors,
         ];
     });

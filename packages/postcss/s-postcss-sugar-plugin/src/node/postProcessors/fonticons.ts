@@ -38,7 +38,7 @@ export default async function ({ root, sharedData, settings }) {
         const iconsAst = __postcss.parse(iconsCss ?? '');
         iconsAst.walkRules((rule) => {
             // @ts-ignore
-            rule._preventScopes = true;
+            rule._preventLod = true;
         });
         root.nodes.push(iconsAst);
     }

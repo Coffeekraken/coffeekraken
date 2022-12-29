@@ -69,7 +69,7 @@ function default_1({ params, CssVars, atRule, replaceWith, }) {
         */
     `).code(`
     
-@sugar.scope.prevent() {
+@sugar.lod.prevent() {
       
   /* purgecss start ignore */
 

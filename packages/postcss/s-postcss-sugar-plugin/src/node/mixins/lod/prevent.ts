@@ -24,7 +24,7 @@ export interface postcssSugarPluginScopePreventMixinParams {}
  * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
  *
  * @example        css
- * @sugar.scope.prevent() {
+ * @sugar.lod.prevent() {
  *      // ...
  * }
  *

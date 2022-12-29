@@ -194,7 +194,8 @@ export default function ({
     });
 
     atRule.nodes?.forEach((node) => {
-        mediaRule.append(node);
+        mediaRule.append(node.clone());
+        node.remove();
     });
 
     atRule.replaceWith(mediaRule);

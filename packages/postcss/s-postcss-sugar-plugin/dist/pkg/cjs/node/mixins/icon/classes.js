@@ -246,7 +246,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
                   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                   */
                 `).code(`
-                    @sugar.scope.prevent {
+                    @sugar.lod.prevent {
                         .s-icon--${iconObj.as} {
                             @sugar.icon.fa(${iconObj.name}, ${iconObj.protocol});
                         }
@@ -275,7 +275,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
                          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                          */
                         `).code(`
-                        @sugar.scope.prevent {
+                        @sugar.lod.prevent {
                             .s-icon--${iconObj.as} {
                                 @sugar.icon.fs(${iconObj.path}, ${iconObj.as});
                             }
@@ -304,7 +304,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
                              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                              */
                             `).code(`
-                        @sugar.scope.prevent {
+                        @sugar.lod.prevent {
                             .s-icon--${iconObj.as} {
                                 @sugar.icon.sugar(${iconObj.path}, ${iconObj.as});
                             }

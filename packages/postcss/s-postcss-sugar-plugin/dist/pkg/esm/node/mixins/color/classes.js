@@ -107,7 +107,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
        */
       `)
             .code(`
-                @sugar.scope.prevent {
+                @sugar.lod.prevent {
                     .s-color--${colorName} {
                         @sugar.color(${colorName});
                     }

@@ -85,7 +85,7 @@ export default function ({
     `,
     ).code(`
     
-@sugar.scope.prevent() {
+@sugar.lod.prevent() {
       
   /* purgecss start ignore */
 

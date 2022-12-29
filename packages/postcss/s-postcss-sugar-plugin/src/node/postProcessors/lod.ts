@@ -6,73 +6,120 @@ interface IScopesPostProcessorNodeToTreat {
     _lod: Record<string, IScopesPostProcessorNodeToTreatLods>;
 }
 
+interface IScopesPostProcessorLodRuleSelectorsSettings {
+    local: boolean;
+    deep: boolean;
+}
+
 export default async function ({ root, sharedData, postcssApi, settings }) {
-    function processSelector(sel: string, lod?: string): string[] {
-        // handle pseudo classes ":after", etc...
-        const pseudoMatch = sel.match(/(\:{1,2})[a-z-]+$/);
-        let pseudo = '',
-            theme = '';
-        if (pseudoMatch) {
-            pseudo = pseudoMatch[0];
-            sel = sel.replace(pseudo, '');
-        }
+    function getLodRuleSelectors(
+        rule: any,
+        levelStr?: string,
+        settings?: Partial<IScopesPostProcessorLodRuleSelectorsSettings>,
+    ): string[] {
+        const finalSettings: IScopesPostProcessorLodRuleSelectorsSettings = {
+            local: true,
+            deep: true,
+            ...(settings ?? {}),
+        };
 
-        // split the selector to construct it
-        const selParts = sel.split(' '),
-            newSelParts = [];
+        const newSelectors: string[] = [];
 
-        // theme attribute (@sugar.theme.when)
-        if (selParts[0].startsWith('[theme')) {
-            theme = selParts[0];
+        rule.selectors.forEach((sel) => {
+            // handle pseudo classes ":after", etc...
+            const pseudoMatch = sel.match(/(\:{1,2})[a-z-]+$/);
+            let pseudo = '',
+                theme = '';
+            if (pseudoMatch) {
+                pseudo = pseudoMatch[0];
+                sel = sel.replace(pseudo, '');
+            }
+
+            // split the selector to construct it
+            const selParts = sel.split(' '),
+                newSelParts = [];
+
+            // theme attribute (@sugar.theme.when)
+            if (selParts[0].startsWith('[theme')) {
+                theme = selParts[0];
+                selParts.shift();
+            }
+
+            // add the first selector part
+            newSelParts.push(selParts[0]);
             selParts.shift();
+
+            // scope related
+            if (finalSettings.local) {
+                if (levelStr) {
+                    newSelParts.push(`:is(.s-lod--${levelStr},:not(.s-lod))`);
+                } else {
+                    newSelParts.push(`:not(.s-lod)`);
+                }
+            }
+
+            // middle selector part
+            if (selParts.length) {
+                newSelParts.push(` ${selParts.join(' ')}`);
+            }
+
+            const finalSelectorStr = newSelParts.join('');
+
+            let finalSelector = [];
+
+            // deep support
+            if (finalSettings.deep) {
+                finalSelector.push(
+                    `${finalSelectorStr}:not(.s-lod--deep ${finalSelectorStr})`,
+                );
+                if (levelStr) {
+                    // select all deep lodd elements
+                    finalSelector.push(
+                        `${finalSelectorStr}:is(.s-lod--deep.s-lod--${levelStr} ${finalSelectorStr})`,
+                    );
+                }
+            }
+
+            // add theme if needed
+            if (theme) {
+                finalSelector = finalSelector.map((s) => {
+                    return `${theme} ${s}`;
+                });
+            }
+
+            // add pseudo
+            if (pseudo) {
+                finalSelector = finalSelector.map((s) => {
+                    return `${s}${pseudo}`;
+                });
+            }
+
+            for (let s of finalSelector) {
+                if (!newSelectors.includes(s)) {
+                    newSelectors.push(s);
+                }
+            }
+        });
+
+        return newSelectors;
+    }
+
+    function processRuleDecl(rule: any, decl: any, levelStr: string): void {
+        if (!rule._lod) {
+            rule._lod = {};
         }
 
-        // add the first selector part
-        newSelParts.push(selParts[0]);
-        selParts.shift();
-
-        // scope related
-        if (lod) {
-            newSelParts.push(`:is(.s-lod--${lod},:not(.s-lod))`);
-        } else {
-            newSelParts.push(`:not(.s-lod)`);
+        if (!rule._lod[levelStr]) {
+            rule._lod[levelStr] = {
+                properties: [],
+            };
         }
 
-        // middle selector part
-        if (selParts.length) {
-            newSelParts.push(` ${selParts.join(' ')}`);
+        if (!rule._lod[levelStr].properties.includes(decl)) {
+            rule._lod[levelStr].properties.push(decl);
         }
 
-        const finalSelectorStr = newSelParts.join('');
-
-        let finalSelector = [];
-
-        // deep support
-        finalSelector.push(
-            `${finalSelectorStr}:not(.s-lod--deep ${finalSelectorStr})`,
-        );
-        if (lod) {
-            // select all deep lodd elements
-            finalSelector.push(
-                `${finalSelectorStr}:is(.s-lod--deep.s-lod--${lod} ${finalSelectorStr})`,
-            );
-        }
-
-        // add theme if needed
-        if (theme) {
-            finalSelector = finalSelector.map((s) => {
-                return `${theme} ${s}`;
-            });
-        }
-
-        // add pseudo
-        if (pseudo) {
-            finalSelector = finalSelector.map((s) => {
-                return `${s}${pseudo}`;
-            });
-        }
-
-        return finalSelector;
+        decl.remove();
     }
 
     const cssPropertiesObj = settings.lod.cssProperties,
@@ -111,8 +158,77 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
             continue;
         }
 
+        // process then "@sugar.lod.when" noted rules
+        root.walkRules(/^.s-lod-when--[0-9]{1,2}/, (rule) => {
+            // make sure we handle the same rule only once
+            // if (!rule._sLodWhen || rule._sLodWhen._handled) {
+            //     return;
+            // }
+            // rule._sLodWhen._handled = true;
+
+            let level = 0,
+                method = 'class';
+
+            try {
+                level = parseInt(
+                    rule.selector.match(/.s-lod-when--([0-9]{1,2})/)[1],
+                );
+                method = rule.selector.match(/.s-lod-method--([a-z]+)/)[1];
+            } catch (e) {}
+
+            // remove the special internal s-log-when--... class
+            rule.selector = rule.selector
+                .replace(/.s-lod-when--[0-9]{1,2}/gm, '')
+                .replace(/.s-lod-method--[a-z]+/gm, '');
+
+            switch (method) {
+                case 'remove':
+                    break;
+                case 'file':
+                    break;
+                case 'class':
+                    // get lod selectors
+                    const lodSelectors = getLodRuleSelectors(rule, `${level}`, {
+                        local: false,
+                    });
+
+                    // create the new class scoped rule
+                    const newRule = postcssApi.rule({
+                        selectors: rule.selectors,
+                        nodes: rule.nodes,
+                    });
+                    rule.parent.insertAfter(rule, newRule);
+
+                    // hide rule
+                    const hideRule = postcssApi.rule({
+                        selectors: rule.selectors.map((s) => {
+                            return `${s}:not(.s-lod--deep.s-lod--${level} ${s})`;
+                        }),
+                        nodes: [
+                            postcssApi.decl({
+                                prop: 'display',
+                                value: 'none !important',
+                            }),
+                        ],
+                    });
+                    rule.parent.insertAfter(rule, hideRule);
+
+                    // remove the rule itself
+                    // cause it has been replaced with the lod scoped one
+                    rule.remove();
+
+                    break;
+                default:
+                    throw new Error(
+                        `<red>[postcssSugarPlugin.lod]</red> The specified "<yellow>${rule._sLodWhen.method}</yellow>" lod (level of details) method does not exists... Use one of these: <yellow>remove</yellow>, <yellow>file</yellow> or <yellow>class</yellow>`,
+                    );
+                    break;
+            }
+        });
+
+        //
         root.walkDecls(propertiesReg, (decl) => {
-            // support for @sugar.scopes.prevent mixin
+            // support for @sugar.lods.prevent mixin
             if (decl.parent._preventLod) {
                 return;
             }
@@ -122,39 +238,21 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
                 return;
             }
 
-            try {
-                for (let s of decl.parent.selectors) {
-                    if (sharedData._preventLodSelectors?.includes(s)) {
-                        return;
-                    }
+            for (let s of decl.parent.selectors) {
+                if (sharedData._preventLodSelectors?.includes(s)) {
+                    return;
                 }
-            } catch (e) {
-                throw e;
             }
 
-            if (!decl.parent._lod) {
-                decl.parent._lod = {};
-            }
-
-            if (!decl.parent._lod[levelStr]) {
-                decl.parent._lod[levelStr] = {
-                    properties: [],
-                };
-            }
-
-            if (!decl.parent._lod[levelStr].properties.includes(decl)) {
-                decl.parent._lod[levelStr].properties.push(decl);
-            }
-
-            decl.remove();
+            processRuleDecl(decl.parent, decl, levelStr);
         });
     }
 
     // clean empty rules
-    root.walkRules((node) => {
-        // support for @sugar.scopes.prevent mixin
+    root.walkRules((rule) => {
+        // support for @sugar.lods.prevent mixin
         // @ts-ignore
-        if (node._preventLod) {
+        if (rule._preventLod) {
             return;
         }
 
@@ -164,30 +262,21 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
         //     return;
         // }
 
-        for (let [levelStr, obj] of Object.entries(node._lod ?? {})) {
+        for (let [levelStr, obj] of Object.entries(rule._lod ?? {})) {
             const level = parseInt(levelStr),
                 lodObj = <IScopesPostProcessorNodeToTreatLods>obj;
 
-            let newSelectors: string[] = [];
-
             // @ts-ignore
             if (lodObj.properties.length) {
-                node.selectors.forEach((sel) => {
-                    const classSelectors = processSelector(sel, levelStr);
-                    for (let s of classSelectors) {
-                        if (!newSelectors.includes(s)) {
-                            newSelectors.push(s);
-                        }
-                    }
-                });
+                const lodSelectors = getLodRuleSelectors(rule, levelStr);
 
                 const newRule = postcssApi.rule({
-                    selectors: newSelectors,
+                    selectors: lodSelectors,
                     nodes: lodObj.properties,
                 });
 
                 // @ts-ignore
-                node.parent.insertAfter(node, newRule);
+                rule.parent.insertAfter(rule, newRule);
             }
         }
 
@@ -211,27 +300,11 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
 
         // empty rules
         if (
-            !node.nodes?.length ||
-            !node.nodes.filter((n) => n.type !== 'comment').length
+            !rule.nodes?.length ||
+            !rule.nodes.filter((n) => n.type !== 'comment').length
         ) {
-            node.remove();
+            rule.remove();
             return;
         }
-
-        // process selector
-        // let newSelectors: string[] = [];
-        // node.selectors.forEach((s) => {
-        //     if (s.includes('.s-lod')) {
-        //         newSelectors.push(s);
-        //         return;
-        //     }
-        //     const classSelectors = processSelector(s);
-        //     for (let s of classSelectors) {
-        //         if (!newSelectors.includes(s)) {
-        //             newSelectors.push(s);
-        //         }
-        //     }
-        // });
-        // node.selectors = newSelectors;
     });
 }

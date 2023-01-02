@@ -46,4 +46,6 @@ $blade = new BladeOne(
     // BladeOne::MODE_DEBUG
 );
 // $blade->setMode(BladeOne::MODE_DEBUG);
-print $blade->run($viewName, (array) $data);
+print \Sugar\html\expandPleasantCssClassnames(
+    $blade->run($viewName, (array) $data)
+);

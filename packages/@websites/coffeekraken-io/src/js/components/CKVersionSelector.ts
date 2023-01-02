@@ -82,7 +82,7 @@ export default class CKVersionSelector extends __SLitComponent {
             ? 'error'
             : 'complementary';
 
-        return html`
+        const h = html`
             <span class="s-dropdown-container" tabindex="0">
                 <span class="s-badge s-color--${color}">
                     ${this._currentVersionObj.codename
@@ -202,6 +202,8 @@ export default class CKVersionSelector extends __SLitComponent {
                 </div>
             </span>
         `;
+
+        return h;
     }
 }
 

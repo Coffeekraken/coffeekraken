@@ -155,6 +155,17 @@
         "100": 11,
         "default": "1rem"
     },
+    "lod": {
+        "enabled": true,
+        "defaultLevel": 3,
+        "levels": {
+            "0": "bare",
+            "1": "low",
+            "2": "medium",
+            "3": "high",
+            "4": "extrem"
+        }
+    },
     "font": {
         "family": {
             "default": {

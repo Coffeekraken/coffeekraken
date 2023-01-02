@@ -15,6 +15,7 @@ import {
     __whenEntersViewport,
     __whenInteract,
     __whenInViewport,
+    __whenLod,
     __whenNearViewport,
     __whenOutOfViewport,
     __whenStylesheetsReady,
@@ -80,7 +81,12 @@ export type TWhenTrigger =
     | 'visible'
     | 'domReady'
     | 'stylesheetsReady'
-    | 'animationEnd';
+    | 'animationEnd'
+    | 'lod:0'
+    | 'lod:1'
+    | 'lod:2'
+    | 'lod:3'
+    | 'lod:4';
 
 export const triggers = [
     'direct',
@@ -94,6 +100,11 @@ export const triggers = [
     'stylesheetsReady',
     'domReady',
     'animationEnd',
+    'lod:0',
+    'lod:1',
+    'lod:2',
+    'lod:3',
+    'lod:4',
 ];
 
 export default function __when(
@@ -120,6 +131,14 @@ export default function __when(
 
         // adding watchers
         trigger.forEach((t) => {
+            // lod (level of defails)
+            const lodMatches = t.match(/^lod\:([0-9]{1,2})/);
+            if (lodMatches && lodMatches[1]) {
+                const level = parseInt(lodMatches[1]);
+                promises.push(__whenLod(level));
+                return;
+            }
+
             switch (t) {
                 case 'inViewport':
                     promises.push(
@@ -157,7 +176,10 @@ export default function __when(
                     break;
                 case 'visible':
                     promises.push(
-                        __whenVisible($elm, finalSettings.whenVisible),
+                        __whenVisible($elm, {
+                            whenVisible: finalSettings.whenVisible,
+                            once: true,
+                        }),
                     );
                     break;
                 case 'domReady':

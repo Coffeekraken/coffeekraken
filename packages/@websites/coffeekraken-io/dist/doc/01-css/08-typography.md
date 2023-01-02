@@ -106,3 +106,35 @@ Some classes will be generated from your theme configuration like these:
     
 -   **s-typo:sup**
     
+-   **s-typo:base**
+    
+-   **s-typo:baseGradient**
+    
+-   **s-typo:main**
+    
+-   **s-typo:mainGradient**
+    
+-   **s-typo:accent**
+    
+-   **s-typo:accentGradient**
+    
+-   **s-typo:complementary**
+    
+-   **s-typo:complementaryGradient**
+    
+-   **s-typo:success**
+    
+-   **s-typo:successGradient**
+    
+-   **s-typo:warning**
+    
+-   **s-typo:warningGradient**
+    
+-   **s-typo:error**
+    
+-   **s-typo:errorGradient**
+    
+-   **s-typo:info**
+    
+-   **s-typo:infoGradient**
+    

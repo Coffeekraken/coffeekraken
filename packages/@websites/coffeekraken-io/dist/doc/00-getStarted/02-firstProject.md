@@ -35,7 +35,7 @@ This will launch a quick and easy step by step creation process that will ask yo
 Once this process is done, you can start working on your project. If you choose to **not launch the development process** at the end of the step by step creation process, simply enter this command:
 
 ```shell
-sugar dev
+npm run dev
 
 ```
 
@@ -44,7 +44,7 @@ sugar dev
 In order to start developing your newly created project, you just need to enter this simple command:
 
 ```shell
-sugar dev
+npm run dev
 
 ```
 
@@ -67,7 +67,7 @@ We use this package under the hood to add built-in support for things ike [PostC
 Each recipes comes with full production ready build stack. To build your project, simply launch thie simply command:
 
 ```shell
-sugar build
+npm run build
 
 ```
 

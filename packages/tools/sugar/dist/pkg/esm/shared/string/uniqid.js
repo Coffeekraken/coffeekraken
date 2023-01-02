@@ -1,5 +1,6 @@
 // @ts-nocheck
-import { v4 as __uuidv4 } from 'uuid';
+// import { v4 as __uuidv4 } from 'uuid';
+import __hyperid from 'hyperid';
 /**
  * @name          uniqid
  * @namespace            shared.string
@@ -24,7 +25,14 @@ import { v4 as __uuidv4 } from 'uuid';
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
+let _hyperidInstance;
 export default function __uniqid() {
-    return __uuidv4();
+    if (!_hyperidInstance) {
+        _hyperidInstance = __hyperid({
+            urlSafe: true,
+        });
+    }
+    return `s-${_hyperidInstance()}`;
+    // return __uuidv4();
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLEVBQUUsRUFBRSxJQUFJLFFBQVEsRUFBRSxNQUFNLE1BQU0sQ0FBQztBQUN0Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxNQUFNLENBQUMsT0FBTyxVQUFVLFFBQVE7SUFDNUIsT0FBTyxRQUFRLEVBQUUsQ0FBQztBQUN0QixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCx5Q0FBeUM7QUFFekMsT0FBTyxTQUFTLE1BQU0sU0FBUyxDQUFDO0FBRWhDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUVILElBQUksZ0JBQWdCLENBQUM7QUFDckIsTUFBTSxDQUFDLE9BQU8sVUFBVSxRQUFRO0lBQzVCLElBQUksQ0FBQyxnQkFBZ0IsRUFBRTtRQUNuQixnQkFBZ0IsR0FBRyxTQUFTLENBQUM7WUFDekIsT0FBTyxFQUFFLElBQUk7U0FDaEIsQ0FBQyxDQUFDO0tBQ047SUFDRCxPQUFPLEtBQUssZ0JBQWdCLEVBQUUsRUFBRSxDQUFDO0lBRWpDLHFCQUFxQjtBQUN6QixDQUFDIn0=

@@ -28,19 +28,31 @@ export default class SComponentUtilsDefaultPropsInterface extends __SInterface {
                 type: 'String',
                 physical: true,
             },
-            status: {
-                description:
-                    'Specify the status of the component. Can be "pending", "mounting" or "mounted"',
-                type: 'String',
-                values: ['pending', 'mounting', 'mounted'],
-                default: 'pending',
-                physical: true,
-            },
+            // status: {
+            //     description:
+            //         'Specify the status of the component. Can be "pending", "mounting" or "mounted"',
+            //     type: 'String',
+            //     values: ['pending', 'mounting', 'mounted'],
+            //     default: 'pending',
+            //     physical: true,
+            // },
             mountWhen: {
                 description: 'Specify when your component will be mounted',
                 type: 'String',
                 values: triggers,
                 default: 'direct',
+            },
+            activeWhen: {
+                description:
+                    'Specify when your component is active and when it is not',
+                type: 'String[]',
+                values: ['inViewport', 'lod'],
+                default: ['inViewport', 'lod'],
+            },
+            lod: {
+                description:
+                    'Specify the minimum lod (level of details) from when this component is active',
+                type: 'Number',
             },
             adoptStyle: {
                 description:

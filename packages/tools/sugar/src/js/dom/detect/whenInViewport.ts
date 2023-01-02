@@ -1,5 +1,6 @@
 // @ts-nocheck
 import __SPromise from '@coffeekraken/s-promise';
+import { __uniqid } from '@coffeekraken/sugar/string';
 
 /**
  * @name      whenInViewport
@@ -36,38 +37,89 @@ import __SPromise from '@coffeekraken/s-promise';
 
 export interface IWhenInViewportSettings {
     offset: string;
+    whenIn: Function;
+    whenOut: Function;
+    once: boolean;
 }
 
 export default function __whenInViewport(
-    elm: HTMLElement,
+    $elm: HTMLElement,
     settings: Partials<IWhenInViewportSettings> = {},
 ): Promise<HTMLElement> {
     settings = {
         offset: '10px',
+        once: true,
+        whenIn: null,
+        whenOut: null,
         ...settings,
     };
 
     let observer;
 
-    const pro = new __SPromise(({ resolve }) => {
+    // generate a uniqid for this listener
+    const id = __uniqid();
+
+    const pro = new __SPromise(({ resolve, emit }) => {
         const options = {
             root: null, // relative to document viewport
             rootMargin: settings.offset, // margin around root. Values are similar to css property. Unitless values not allowed
             threshold: 0, // visible amount of item shown in relation to root
         };
 
+        // store status for all listeners
+        if (!$elm._whenInViewportStatus) {
+            $elm._whenInViewportStatus = {};
+        }
+
         function onChange(changes) {
             changes.forEach((change) => {
-                if (change.intersectionRatio > 0) {
-                    // your observer logic
-                    observer.disconnect?.();
-                    resolve(elm);
+                if (change.intersectionRatio === 0) {
+                    // prevent from triggering multiple times the callback
+                    // for this listener if already invisible
+                    if (!$elm._whenInViewportStatus[id]) {
+                        return;
+                    }
+
+                    // set the listener status on the element
+                    $elm._whenInViewportStatus[id] = false;
+
+                    // process callbacks
+                    settings.whenOut?.($elm);
+
+                    // event
+                    emit('out', $elm);
+                } else {
+                    // "once" settings support
+                    if (settings.once) {
+                        observer.disconnect();
+                    }
+
+                    // prevent from triggering multiple times the callback
+                    // for this listener if already visible
+                    if ($elm._whenInViewportStatus[id]) {
+                        return;
+                    }
+
+                    // set the listener status on the element
+                    $elm._whenInViewportStatus[id] = true;
+
+                    // process callbacks
+                    settings.whenIn?.($elm);
+
+                    // event
+                    emit('in', $elm);
+
+                    // resolve the promise only if the "once"
+                    // setting is true
+                    if (settings.once) {
+                        resolve($elm);
+                    }
                 }
             });
         }
 
         observer = new IntersectionObserver(onChange, options);
-        observer.observe(elm);
+        observer.observe($elm);
     });
 
     pro.on('cancel', () => {

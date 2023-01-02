@@ -1,5 +1,31 @@
 export default function (api) {
     return {
+        /**
+         * @name                enabled
+         * @namespace           config.themeLod
+         * @type                Boolean
+         * @default             false
+         *
+         * Specify if your project make uses of the lod (level of details) feature or not
+         *
+         * @since               2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        enabled: false,
+
+        /**
+         * @name                defaultLevel
+         * @namespace           config.themeLod
+         * @type                Boolean
+         * @default             false
+         *
+         * Specify the default lod level to use
+         *
+         * @since               2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        defaultLevel: 3,
+
         levels: {
             0: 'bare',
             1: 'low',

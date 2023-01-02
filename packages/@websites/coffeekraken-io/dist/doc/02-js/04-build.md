@@ -60,7 +60,7 @@ export default {
     port: 3000,
     hostname: 'http://0.0.0.0:3000',
     proxy: {
-      '^\\/dist\\/css\\/partials\\/.*\\.css
+      '^\\/dist\\/css\\/partials\\/.*\\.css(\\?.*)?
 
 ## Overriding config
 
@@ -75,7 +75,7 @@ To override the default config, you have two choices:
         target: 'http://127.0.0.1:8080',
         changeOrigin: true,
       },
-      '^\\/dist\\/.*(\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs)
+      '^\\/dist\\/.*(\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs)(\\?.*)?
 
 ## Overriding config
 
@@ -105,7 +105,7 @@ To override the default config, you have two choices:
         target: 'http://127.0.0.1:8080',
         changeOrigin: true,
       },
-      '^\\/dist\\/(?:(?!\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs).)*
+      '^\\/dist\\/(?:(?!\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs).)*(\\?.*)?
 
 ## Overriding config
 
@@ -116,10 +116,8 @@ To override the default config, you have two choices:
 
 > The second solution make part of the `@coffeekraken/s-sugar-config` configuration system that check and loads the `vite.config.js` file at your project root. The choice is yours.
 
-: {
-        target: 'http://127.0.0.1:8080',
-        changeOrigin: true,
-      },
+:
+        { target: 'http://127.0.0.1:8080', changeOrigin: true },
       '^(?:(?!\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs|@vite|\\.local|\\@fs|\\@id|__vite_ping|index.html).)*
 
 ## Overriding config

@@ -11,13 +11,15 @@ export default class CkSettings extends __SLitComponent {
     return __SLitComponent.propertiesFromInterface();
   }
 
-  static state = {
-    bareMore: false,
-  };
+  static state = {};
 
   constructor() {
     super({
       shadowDom: false,
+    });
+
+    __STheme.whenLodChange((e) => {
+      // console.log('CHANGe', e.detail);
     });
   }
 
@@ -47,19 +49,7 @@ export default class CkSettings extends __SLitComponent {
     });
   }
 
-  async mount() {
-    // restore bare mode
-    this._setBareMode(this.state.bareMode);
-  }
-
-  _setBareMode(status: boolean): void {
-    this.state.bareMode = status;
-    if (status) {
-      document.body.classList.add(...['s-lod', 's-lod--deep', 's-lod--1']);
-    } else {
-      document.body.classList.remove(...['s-lod', 's-lod--deep', 's-lod--1']);
-    }
-  }
+  async mount() {}
 
   _setLod(level: number) {
     __STheme.setLod(level);
@@ -90,19 +80,6 @@ export default class CkSettings extends __SLitComponent {
                             </label>
                         </li> -->
             <li class="s-bg:main-surface">
-              <label class="s-label s-pi:50 s-pb:30 @mobile s-pi:40">
-                <span> Bare mode </span>
-                <input
-                  type="checkbox"
-                  class="s-switch s-color:accent"
-                  @change=${(e) => {
-                    this._setBareMode(e.target.checked);
-                  }}
-                  ?checked=${this.state.bareMode}
-                />
-              </label>
-            </li>
-            <li class="s-bg:main-surface">
               <label
                 class="s-label:responsive s-pi:50 s-pb:30 @mobile s-pi:40"
                 for="setting-font-size"
@@ -113,7 +90,7 @@ export default class CkSettings extends __SLitComponent {
                   id="setting-lod"
                   min="0"
                   max="4"
-                  value="2"
+                  value=${__STheme.lod}
                   values='["Bare","Low","Medium","High","Extrem"]'
                   tooltip
                   step="1"

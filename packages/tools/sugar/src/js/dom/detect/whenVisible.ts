@@ -1,6 +1,8 @@
 // @ts-nocheck
+import __SPromise from '@coffeekraken/s-promise';
+import { __uniqid } from '@coffeekraken/sugar/string';
 
-import { __isVisible, __closestNotVisible } from '@coffeekraken/sugar/dom';
+import { __closestNotVisible, __isVisible } from '@coffeekraken/sugar/dom';
 
 /**
  * @name      whenVisible
@@ -30,11 +32,30 @@ import { __isVisible, __closestNotVisible } from '@coffeekraken/sugar/dom';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
+
+export interface IWhenVisibleSettings {
+    whenVisible?: Function;
+    whenInvisible?: Function;
+    once?: boolean;
+}
+
 export default function __whenVisible(
     $elm: HTMLElement,
-    cb: Function = null,
+    settings?: Partial<IWhenVisibleSettings>,
 ): Promise<HTMLElement> {
-    return new Promise((resolve, reject) => {
+    const pro = new __SPromise(({ resolve, reject, emit }) => {
+        const finalSettings: IWhenVisibleSettings = {
+            whenVisible: null,
+            whenInvisible: null,
+            once: true,
+            ...(settings ?? {}),
+        };
+
+        // store status for all listeners
+        if (!$elm._whenVisibleStatus) {
+            $elm._whenVisibleStatus = {};
+        }
+
         // variables
         let isSelfVisible = false,
             areParentsVisible = false,
@@ -42,42 +63,131 @@ export default function __whenVisible(
             selfObserver = null,
             parentObserver = null;
 
+        // generate a uniqid for this listener
+        const id = __uniqid();
+
+        var observer = new IntersectionObserver(function (entries) {
+            if (entries[0]['intersectionRatio'] == 0) {
+                // prevent from triggering multiple times the callback
+                // for this listener if already invisible
+                if (!$elm._whenVisibleStatus[id]) {
+                    return;
+                }
+
+                // set the listener status on the element
+                $elm._whenVisibleStatus[id] = false;
+
+                // process callbacks
+                finalSettings.whenInvisible?.($elm);
+
+                // event
+                emit('invisible', $elm);
+            } else {
+                // "once" settings support
+                if (finalSettings.once) {
+                    observer.disconnect();
+                }
+
+                // prevent from triggering multiple times the callback
+                // for this listener if already visible
+                if ($elm._whenVisibleStatus[id]) {
+                    return;
+                }
+
+                // set the listener status on the element
+                $elm._whenVisibleStatus[id] = true;
+
+                // process callbacks
+                finalSettings.whenVisible?.($elm);
+
+                // event
+                emit('visible', $elm);
+
+                // resolve the promise only if the "once"
+                // setting is true
+                if (finalSettings.once) {
+                    resolve($elm);
+                }
+            }
+        });
+
+        observer.observe($elm);
+
+        pro.on('cancel', () => {
+            observer?.disconnect();
+        });
+
+        return pro;
+
         const _cb = () => {
             if (isSelfVisible) {
-                selfObserver?.disconnect?.();
-                // remove the event listeners
-                $elm.removeEventListener('transitionend', _eventCb);
-                $elm.removeEventListener('animationstart', _eventCb);
-                $elm.removeEventListener('animationend', _eventCb);
+                // "once" settings support
+                if (finalSettings.once) {
+                    selfObserver?.disconnect?.();
+
+                    // remove the event listeners
+                    $elm.removeEventListener('transitionend', _eventCb);
+                    $elm.removeEventListener('animationstart', _eventCb);
+                    $elm.removeEventListener('animationend', _eventCb);
+                }
             }
 
             if (areParentsVisible) {
-                parentObserver?.disconnect?.();
-                // remove the event listeners
-                if (closestNotVisible) {
-                    closestNotVisible.removeEventListener(
-                        'transitionend',
-                        _eventCb,
-                    );
-                    closestNotVisible.removeEventListener(
-                        'animationstart',
-                        _eventCb,
-                    );
-                    closestNotVisible.removeEventListener(
-                        'animationend',
-                        _eventCb,
-                    );
+                // "once" settings support
+                if (finalSettings.once) {
+                    parentObserver?.disconnect?.();
+                    // remove the event listeners
+                    if (closestNotVisible) {
+                        closestNotVisible.removeEventListener(
+                            'transitionend',
+                            _eventCb,
+                        );
+                        closestNotVisible.removeEventListener(
+                            'animationstart',
+                            _eventCb,
+                        );
+                        closestNotVisible.removeEventListener(
+                            'animationend',
+                            _eventCb,
+                        );
+                    }
                 }
             }
 
             if (isSelfVisible && areParentsVisible) {
+                // prevent from triggering multiple times the callback
+                // for this listener if already visible
+                if ($elm._whenVisibleStatus[id]) {
+                    return;
+                }
+
+                // set the listener status on the element
+                $elm._whenVisibleStatus[id] = true;
+
                 // process callbacks
-                cb?.($elm);
-                resolve($elm);
-                // remove the event listeners
-                $elm.removeEventListener('transitionend', _eventCb);
-                $elm.removeEventListener('animationstart', _eventCb);
-                $elm.removeEventListener('animationend', _eventCb);
+                whenVisible?.($elm);
+
+                // event
+                emit('visible', $elm);
+
+                if (finalSettings.once) {
+                    resolve($elm);
+                }
+            } else {
+                // prevent from triggering multiple times the callback
+                // for this listener if already invisible
+                if (!$elm._whenVisibleStatus[id]) {
+                    return;
+                }
+
+                // set the listener status on the element
+                $elm._whenVisibleStatus[id] = false;
+
+                // process callbacks
+                finalSettings.whenInvisible?.($elm);
+
+                // event
+                emit('invisible', $elm);
             }
         };
 
@@ -108,8 +218,6 @@ export default function __whenVisible(
                             isSelfVisible = true;
                             // callback
                             _cb($elm);
-                            // stop observe
-                            selfObserver.disconnect();
                         }
                     }
                 });
@@ -141,8 +249,6 @@ export default function __whenVisible(
                             areParentsVisible = true;
                             // callback
                             _cb($elm);
-                            // stop observe
-                            parentObserver.disconnect();
                         }
                     }
                 });

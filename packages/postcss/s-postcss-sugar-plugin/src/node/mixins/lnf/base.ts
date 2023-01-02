@@ -47,6 +47,7 @@ export default function ({
     const vars: string[] = [];
 
     const css = `
+    content: 'bbb';
         color: sugar.color(main, text);
         @sugar.font.family(default);
         @sugar.font.size(default);

@@ -68,9 +68,9 @@ In addition to this, you will have access to a lot of helper classes for things 
 
 In order to make your daily work experience as smooth as possible, we've built a complete development stack that will scaffold your project folder, install all the needed dependencies and expose simple commands to work with like:
 
-- `sugar dev`: Start the development environnment
-- `sugar build`: Generate a production ready package
-- `sugar prod`: Preview your website using the production generated assets
+- `npm run dev`: Start the development environnment
+- `npm run build`: Generate a production ready package
+- `npm run prod`: Preview your website using the production generated assets
 
 Our stack is as well modular and can be updated as you want through our [configuration system](/doc/config/overview).
 
@@ -79,7 +79,7 @@ All the different project types like **generic**, **Nextjs**, **litElement**, et
 #### Built-in recipes
 
 -   [**generic**](/doc/recipes/built-in/generic): Generic s-kitchen recipe
--   [**nextJs**](/doc/recipes/built-in/nextJs): Create easily a next.js app with coffeekraken tools support
+-   [**nextJs12**](/doc/recipes/built-in/nextJs12): Create easily a next.js 12 app with coffeekraken tools support
 
 ## Sugar toolkit
 

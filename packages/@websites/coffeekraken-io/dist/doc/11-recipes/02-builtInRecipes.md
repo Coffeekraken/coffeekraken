@@ -26,7 +26,7 @@ Coffeekraken provides you some built-in recipes that you can use directly out of
 Here's the list:
 
 -   [**generic**](/doc/recipes/built-in/generic): Generic s-kitchen recipe
--   [**nextJs**](/doc/recipes/built-in/nextJs): Create easily a next.js app with coffeekraken tools support
+-   [**nextJs12**](/doc/recipes/built-in/nextJs12): Create easily a next.js 12 app with coffeekraken tools support
 
 > You can find more documentation on each recipes in the `Built-in` folder.
 

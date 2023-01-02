@@ -3,7 +3,6 @@
 
 import __SClass from '@coffeekraken/s-class';
 import __SInterface from '@coffeekraken/s-interface';
-import __SPromise from '@coffeekraken/s-promise';
 import __SState from '@coffeekraken/s-state';
 import __STheme from '@coffeekraken/s-theme';
 
@@ -13,10 +12,8 @@ import __fastdom from 'fastdom';
 
 import { __adoptStyleInShadowRoot } from '@coffeekraken/sugar/dom';
 
-import { __wait } from '@coffeekraken/sugar/datetime';
-import { __when } from '@coffeekraken/sugar/dom';
+import { __when, __whenInViewport } from '@coffeekraken/sugar/dom';
 import { __debounce } from '@coffeekraken/sugar/function';
-import __inViewportStatusChange from '@coffeekraken/sugar/js/dom/detect/inViewportStatusChange';
 import __injectStyle from '@coffeekraken/sugar/js/dom/inject/injectStyle';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
@@ -59,6 +56,7 @@ export interface ISComponentUtilsDefaultProps {
         | 'inViewport'
         | 'nearViewport'
         | 'interact';
+    activeWhen: 'inViewport' | 'lod';
     mountDelay: number;
     adoptStyle: boolean;
     responsive: any;
@@ -244,12 +242,15 @@ export default class SComponentUtils extends __SClass {
 
         this.node = node;
 
-        // listen viewport status update
-        this.inViewportStatusChange
-            .on('enter', () => {
+        // monitor if the component is in viewport or not
+        const whenInViewportPromise = __whenInViewport(this.node, {
+            once: false,
+        });
+        whenInViewportPromise
+            .on('in', () => {
                 this._isInViewport = true;
             })
-            .on('leave', () => {
+            .on('out', () => {
                 this._isInViewport = false;
             });
 
@@ -442,10 +443,6 @@ export default class SComponentUtils extends __SClass {
             });
         }
 
-        if (this.node.id === 'version-selector') {
-            console.log('this', Object.assign({}, _state));
-        }
-
         return _state;
     }
 
@@ -584,29 +581,6 @@ export default class SComponentUtils extends __SClass {
     }
 
     /**
-     * @name           inViewportStatusChange
-     * @type            SPromise
-     * @get
-     * @async
-     *
-     * Detect when the component enters and leave the viewport
-     *
-     * @return          {SPromise}          An SPromise instance through which you want subscribe for events like "enter" and "exit"
-     *
-     * @since           2.0.0
-     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-     */
-    _inViewportStatusChangePromise;
-    get inViewportStatusChange(): __SPromise<HTMLElement> {
-        if (this._inViewportStatusChangePromise)
-            return this._inViewportStatusChangePromise;
-        this._inViewportStatusChangePromise = __inViewportStatusChange(
-            this.node,
-        );
-        return this._inViewportStatusChangePromise;
-    }
-
-    /**
      * @name           waitAndExecute
      * @type            Function
      * @async
@@ -615,14 +589,14 @@ export default class SComponentUtils extends __SClass {
      * his "mount" state. This state depends fully on the "mountWhen" property.
      * When the state has been reached, the passed callback will be executed.
      *
-     * @param       {String}            when            When you want to execute the callback. Can be "direct", "inViewport", "nearViewport", "outOfViewport", "interact", "visible" or "stylesheetReady"
+     * @param       {String|String[]}            when            When you want to execute the callback. Can be "direct", "inViewport", "nearViewport", "outOfViewport", "interact", "visible" or "stylesheetReady"
      * @param       {Function}          callback            The callback to execute
      * @return          {Promise}           A promise fullfilled when the component (node) has reached his "mount" state
      *
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    waitAndExecute(when: string, callback: Function): Promise<any> {
+    waitAndExecute(when: string | string[], callback: Function): Promise<any> {
         return new Promise(async (resolve, reject) => {
             // // check if we are in a custom element
             // const $closestCustomElement = __traverseUp(this.node, ($elm) => {
@@ -637,11 +611,20 @@ export default class SComponentUtils extends __SClass {
             //     await __whenAttribute($closestCustomElement, 'mounted');
             // }
 
-            if (!when || when === 'direct' || when === 'directly') {
-                await __wait();
-            } else {
-                await __when(this.node, when);
+            if (!Array.isArray(when)) {
+                when = [when];
             }
+
+            // handle lod (level of details)
+            if (this.props.lod !== undefined) {
+                await __when(this.node, `lod:${this.props.lod}`);
+            }
+
+            // make sure the theme is inited
+            __STheme.ensureIsInited();
+
+            // wait
+            await __when(this.node, when);
 
             callback?.(this.node);
             resolve(this.node);
@@ -931,5 +914,31 @@ export default class SComponentUtils extends __SClass {
      */
     isInViewport(): boolean {
         return this._isInViewport;
+    }
+
+    /**
+     * @name            isActive
+     * @type            Function
+     *
+     * true if the component is active or not. A component is active when
+     *
+     * @since   2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    isActive(): boolean {
+        if (
+            this.props.activeWhen.includes('lod') &&
+            this.props.lod !== undefined &&
+            __STheme.lod < this.props.lod
+        ) {
+            return false;
+        }
+        if (
+            this.props.activeWhen.includes('inViewport') &&
+            !this._isInViewport
+        ) {
+            return false;
+        }
+        return true;
     }
 }

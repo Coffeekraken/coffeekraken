@@ -44,6 +44,8 @@ This file is separated by purpose in an global object like so:
     
 -   **Padding**: Specify the paddings available in the project.
     
+-   **Lod**: Specify the lod (level of details) settings
+    
 -   **Font**: Specify the fonts specifications like the font-faces available, sizes, etc...
     
 -   **Typo**: Specify some typo specifications like which are the available typo classes/tags, etc...
@@ -60,6 +62,7 @@ export default {
   google: {},
   margin: {},
   padding: {},
+  lod: {},
   font: {},
   typo: {},
   layout: {},
@@ -105,7 +108,7 @@ Specify the assets to load like the css, js, etc...
 ```js
 export default {
   viteClient: {
-    src: '\n            <script>\n            document.addEventListener("DOMContentLoaded", function() {\n                var $script = document.createElement("script");\n                var ip = "192.168.1.104";\n                $script.setAttribute("type", "module");\n                $script.setAttribute("src", "http://0.0.0.0:3000/@vite/client");\n                document.body.appendChild($script);\n            });\n            </script>\n        ',
+    src: '\n            <script>\n            document.addEventListener("DOMContentLoaded", function() {\n                var $script = document.createElement("script");\n                var ip = "192.168.201.109";\n                $script.setAttribute("type", "module");\n                $script.setAttribute("src", "http://0.0.0.0:3000/@vite/client");\n                document.body.appendChild($script);\n            });\n            </script>\n        ',
   },
   dev: {
     type: 'module',
@@ -252,6 +255,20 @@ export default {
 ```
 
 
+## Lod
+
+Specify the lod (level of details) settings
+
+```js
+export default {
+  enabled: true,
+  defaultLevel: 3,
+  levels: ['bare', 'low', 'medium', 'high', 'extrem'],
+};
+
+```
+
+
 ## Font
 
 Specify the fonts specifications like the font-faces available, sizes, etc...
@@ -314,7 +331,7 @@ Specify some typo specifications like which are the available typo classes/tags,
 export default {
   h1: {
     label: 'H1',
-    group: 'styles',
+    group: 'style',
     style: {
       display: 'block',
       fontFamily: '"Titillium Web"',
@@ -326,7 +343,7 @@ export default {
   },
   h2: {
     label: 'H2',
-    group: 'styles',
+    group: 'style',
     style: {
       display: 'block',
       fontFamily: '"Titillium Web"',
@@ -338,7 +355,7 @@ export default {
   },
   h3: {
     label: 'H3',
-    group: 'styles',
+    group: 'style',
     style: {
       display: 'block',
       fontFamily: '"Titillium Web"',
@@ -350,7 +367,7 @@ export default {
   },
   h4: {
     label: 'H4',
-    group: 'styles',
+    group: 'style',
     style: {
       display: 'block',
       fontFamily: '"Titillium Web"',
@@ -362,7 +379,7 @@ export default {
   },
   h5: {
     label: 'H5',
-    group: 'styles',
+    group: 'style',
     style: {
       display: 'block',
       fontFamily: '"Titillium Web"',
@@ -374,7 +391,7 @@ export default {
   },
   h6: {
     label: 'H6',
-    group: 'styles',
+    group: 'style',
     style: {
       display: 'block',
       fontFamily: '"Titillium Web"',
@@ -385,7 +402,7 @@ export default {
   },
   p: {
     label: 'Paragraph',
-    group: 'styles',
+    group: 'style',
     style: {
       display: 'block',
       fontFamily: '"Titillium Web"',
@@ -394,10 +411,11 @@ export default {
       maxWidth: '55ch',
       marginBottom: '3.25rem',
     },
+    default: true,
   },
   lead: {
     label: 'Lead paragraph',
-    group: 'styles',
+    group: 'style',
     style: {
       display: 'block',
       fontFamily: '"Titillium Web"',
@@ -434,7 +452,7 @@ export default {
     },
   },
   code: {
-    label: 'Code',
+    label: '</>',
     group: 'text',
     style: {
       display: 'inline-block',
@@ -470,30 +488,232 @@ export default {
       marginBottom: '3.25rem',
     },
   },
-  bold: { label: 'Bold', group: 'text', style: { fontWeight: 'bold' } },
-  italic: { label: 'Italic', group: 'text', style: { fontStyle: 'italic' } },
-  large: { label: 'Large', group: 'text', style: { fontSize: '1.1em' } },
-  larger: { label: 'Larger', group: 'text', style: { fontSize: '1.2em' } },
-  largest: { label: 'Largest', group: 'text', style: { fontSize: '1.3em' } },
-  small: { label: 'Small', group: 'text', style: { fontSize: '0.9em' } },
-  smaller: { label: 'Smaller', group: 'text', style: { fontSize: '0.8em' } },
-  smallest: { label: 'Smallest', group: 'text', style: { fontSize: '0.7em' } },
+  bold: {
+    label: 'B',
+    group: 'text',
+    style: { fontWeight: 'bold' },
+    buttonStyle: { fontWeight: 'bolder' },
+  },
+  italic: {
+    label: 'I',
+    group: 'text',
+    style: { fontStyle: 'italic' },
+    buttonStyle: { fontStyle: 'italic' },
+  },
+  large: {
+    label: 'Large',
+    group: 'text',
+    style: { fontSize: '1.1em' },
+    buttonStyle: { fontSize: '1.01em' },
+  },
+  larger: {
+    label: 'Larger',
+    group: 'text',
+    style: { fontSize: '1.2em' },
+    buttonStyle: { fontSize: '1.02em' },
+  },
+  largest: {
+    label: 'Largest',
+    group: 'text',
+    style: { fontSize: '1.3em' },
+    buttonStyle: { fontSize: '1.03em' },
+  },
+  small: {
+    label: 'Small',
+    group: 'text',
+    style: { fontSize: '0.9em' },
+    buttonStyle: { fontSize: '0.99em' },
+  },
+  smaller: {
+    label: 'Smaller',
+    group: 'text',
+    style: { fontSize: '0.8em' },
+    buttonStyle: { fontSize: '0.98em' },
+  },
+  smallest: {
+    label: 'Smallest',
+    group: 'text',
+    style: { fontSize: '0.7em' },
+    buttonStyle: { fontSize: '0.97em' },
+  },
   mark: { label: 'Mark', group: 'text', style: { backgroundColor: '#FFBB00' } },
   del: {
     label: 'Del',
     group: 'text',
     style: { textDecoration: 'line-through' },
+    buttonStyle: { textDecoration: 'line-through' },
   },
-  ins: { label: 'Ins', group: 'text', style: { textDecoration: 'underline' } },
+  ins: {
+    label: 'U',
+    group: 'text',
+    style: { textDecoration: 'underline' },
+    buttonStyle: { textDecoration: 'underline' },
+  },
   sub: {
     label: 'Sub',
     group: 'text',
     style: { verticalAlign: 'sub', fontSize: '0.6em' },
+    buttonStyle: { verticalAlign: 'sub', fontSize: '0.6em' },
   },
   sup: {
     label: 'Sup',
     group: 'text',
     style: { verticalAlign: 'sup', fontSize: '0.6em' },
+    buttonStyle: { verticalAlign: 'sup', fontSize: '0.6em' },
+  },
+  base: {
+    label: 'Base',
+    group: 'color',
+    type: 'color',
+    style: { color: 'hsla(212,14,50,1)' },
+  },
+  baseGradient: {
+    label: 'Base gradient',
+    group: 'color',
+    type: 'color',
+    style: {
+      backgroundSize: '100%',
+      '-webkitBackgroundClip': 'text',
+      '-mozBackgroundClip': 'text',
+      '-webkitTextFillColor': 'transparent',
+      '-mozTextFillColor': 'transparent',
+      backgroundImage:
+        'linear-gradient(90deg, hsla(212,14,50,1) 0%, #A9B2BC 100%)',
+    },
+  },
+  main: {
+    label: 'Main',
+    group: 'color',
+    type: 'color',
+    style: { color: 'hsla(212,14,50,1)' },
+  },
+  mainGradient: {
+    label: 'Main gradient',
+    group: 'color',
+    type: 'color',
+    style: {
+      backgroundSize: '100%',
+      '-webkitBackgroundClip': 'text',
+      '-mozBackgroundClip': 'text',
+      '-webkitTextFillColor': 'transparent',
+      '-mozTextFillColor': 'transparent',
+      backgroundImage:
+        'linear-gradient(90deg, hsla(212,14,50,1) 0%, #A9B2BC 100%)',
+    },
+  },
+  accent: {
+    label: 'Accent',
+    group: 'color',
+    type: 'color',
+    style: { color: '#FFBB00' },
+  },
+  accentGradient: {
+    label: 'Accent gradient',
+    group: 'color',
+    type: 'color',
+    style: {
+      backgroundSize: '100%',
+      '-webkitBackgroundClip': 'text',
+      '-mozBackgroundClip': 'text',
+      '-webkitTextFillColor': 'transparent',
+      '-mozTextFillColor': 'transparent',
+      backgroundImage: 'linear-gradient(90deg, #ffbb00 0%, #FFD666 100%)',
+    },
+  },
+  complementary: {
+    label: 'Complementary',
+    group: 'color',
+    type: 'color',
+    style: { color: '#5100FF' },
+  },
+  complementaryGradient: {
+    label: 'Complementary gradient',
+    group: 'color',
+    type: 'color',
+    style: {
+      backgroundSize: '100%',
+      '-webkitBackgroundClip': 'text',
+      '-mozBackgroundClip': 'text',
+      '-webkitTextFillColor': 'transparent',
+      '-mozTextFillColor': 'transparent',
+      backgroundImage: 'linear-gradient(90deg, #5100ff 0%, #9666FF 100%)',
+    },
+  },
+  success: {
+    label: 'Success',
+    group: 'color',
+    type: 'color',
+    style: { color: '#91FF00' },
+  },
+  successGradient: {
+    label: 'Success gradient',
+    group: 'color',
+    type: 'color',
+    style: {
+      backgroundSize: '100%',
+      '-webkitBackgroundClip': 'text',
+      '-mozBackgroundClip': 'text',
+      '-webkitTextFillColor': 'transparent',
+      '-mozTextFillColor': 'transparent',
+      backgroundImage: 'linear-gradient(90deg, #91ff00 0%, #BDFF66 100%)',
+    },
+  },
+  warning: {
+    label: 'Warning',
+    group: 'color',
+    type: 'color',
+    style: { color: '#FFD500' },
+  },
+  warningGradient: {
+    label: 'Warning gradient',
+    group: 'color',
+    type: 'color',
+    style: {
+      backgroundSize: '100%',
+      '-webkitBackgroundClip': 'text',
+      '-mozBackgroundClip': 'text',
+      '-webkitTextFillColor': 'transparent',
+      '-mozTextFillColor': 'transparent',
+      backgroundImage: 'linear-gradient(90deg, #ffd500 0%, #FFE666 100%)',
+    },
+  },
+  error: {
+    label: 'Error',
+    group: 'color',
+    type: 'color',
+    style: { color: '#FF003C' },
+  },
+  errorGradient: {
+    label: 'Error gradient',
+    group: 'color',
+    type: 'color',
+    style: {
+      backgroundSize: '100%',
+      '-webkitBackgroundClip': 'text',
+      '-mozBackgroundClip': 'text',
+      '-webkitTextFillColor': 'transparent',
+      '-mozTextFillColor': 'transparent',
+      backgroundImage: 'linear-gradient(90deg, #ff003b 0%, #FF668A 100%)',
+    },
+  },
+  info: {
+    label: 'Info',
+    group: 'color',
+    type: 'color',
+    style: { color: '#00FFFF' },
+  },
+  infoGradient: {
+    label: 'Info gradient',
+    group: 'color',
+    type: 'color',
+    style: {
+      backgroundSize: '100%',
+      '-webkitBackgroundClip': 'text',
+      '-mozBackgroundClip': 'text',
+      '-webkitTextFillColor': 'transparent',
+      '-mozTextFillColor': 'transparent',
+      backgroundImage: 'linear-gradient(90deg, #00ffff 0%, #66FFFF 100%)',
+    },
   },
 };
 

@@ -9,7 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @status        beta
  *
  * Check if the passed HTMLElement is visible or not.
- * Visible mean that it has not an opacity of 0, not a visibility of hidden and not a display of none
+ * Visible mean that it has not an opacity of 0, not a visibility of hidden and not a display of none and `return !!(e.offsetWidth || e.offsetHeight || e.getClientRects().length);`
  *
  * @param 		{HTMLElement} 				elm  		The element to check
  * @return 		{Boolean}								If the element is visible or not
@@ -24,16 +24,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * 		// i'm visible
  * }
  *
+ * @see             https://stackoverflow.com/questions/19669786/check-if-element-is-visible-in-dom
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
+function _isVisible(e) {
+    return !!(e.offsetWidth || e.offsetHeight || e.getClientRects().length);
+}
 function isVisible(elm) {
     // assume that the script tag is always visible
     if (elm.nodeName.toLowerCase() === 'script')
         return true;
+    // check if visible through offsets and clientRects
+    if (!_isVisible(elm)) {
+        return false;
+    }
     // get style
-    const style = window.getComputedStyle(elm, null), opacity = style['opacity'], visibility = style['visibility'], display = style['display'];
+    const style = window.getComputedStyle(elm, null), opacity = style.opacity, visibility = style.visibility, display = style.display;
     return '0' !== opacity && 'none' !== display && 'hidden' !== visibility;
 }
 exports.default = isVisible;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBeUJHO0FBQ0gsU0FBd0IsU0FBUyxDQUFDLEdBQWdCO0lBQzlDLCtDQUErQztJQUMvQyxJQUFJLEdBQUcsQ0FBQyxRQUFRLENBQUMsV0FBVyxFQUFFLEtBQUssUUFBUTtRQUFFLE9BQU8sSUFBSSxDQUFDO0lBRXpELFlBQVk7SUFDWixNQUFNLEtBQUssR0FBRyxNQUFNLENBQUMsZ0JBQWdCLENBQUMsR0FBRyxFQUFFLElBQUksQ0FBQyxFQUM1QyxPQUFPLEdBQUcsS0FBSyxDQUFDLFNBQVMsQ0FBQyxFQUMxQixVQUFVLEdBQUcsS0FBSyxDQUFDLFlBQVksQ0FBQyxFQUNoQyxPQUFPLEdBQUcsS0FBSyxDQUFDLFNBQVMsQ0FBQyxDQUFDO0lBQy9CLE9BQU8sR0FBRyxLQUFLLE9BQU8sSUFBSSxNQUFNLEtBQUssT0FBTyxJQUFJLFFBQVEsS0FBSyxVQUFVLENBQUM7QUFDNUUsQ0FBQztBQVZELDRCQVVDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTBCRztBQUVILFNBQVMsVUFBVSxDQUFDLENBQUM7SUFDakIsT0FBTyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsV0FBVyxJQUFJLENBQUMsQ0FBQyxZQUFZLElBQUksQ0FBQyxDQUFDLGNBQWMsRUFBRSxDQUFDLE1BQU0sQ0FBQyxDQUFDO0FBQzVFLENBQUM7QUFFRCxTQUF3QixTQUFTLENBQUMsR0FBZ0I7SUFDOUMsK0NBQStDO0lBQy9DLElBQUksR0FBRyxDQUFDLFFBQVEsQ0FBQyxXQUFXLEVBQUUsS0FBSyxRQUFRO1FBQUUsT0FBTyxJQUFJLENBQUM7SUFFekQsbURBQW1EO0lBQ25ELElBQUksQ0FBQyxVQUFVLENBQUMsR0FBRyxDQUFDLEVBQUU7UUFDbEIsT0FBTyxLQUFLLENBQUM7S0FDaEI7SUFFRCxZQUFZO0lBQ1osTUFBTSxLQUFLLEdBQUcsTUFBTSxDQUFDLGdCQUFnQixDQUFDLEdBQUcsRUFBRSxJQUFJLENBQUMsRUFDNUMsT0FBTyxHQUFHLEtBQUssQ0FBQyxPQUFPLEVBQ3ZCLFVBQVUsR0FBRyxLQUFLLENBQUMsVUFBVSxFQUM3QixPQUFPLEdBQUcsS0FBSyxDQUFDLE9BQU8sQ0FBQztJQUM1QixPQUFPLEdBQUcsS0FBSyxPQUFPLElBQUksTUFBTSxLQUFLLE9BQU8sSUFBSSxRQUFRLEtBQUssVUFBVSxDQUFDO0FBQzVFLENBQUM7QUFmRCw0QkFlQyJ9

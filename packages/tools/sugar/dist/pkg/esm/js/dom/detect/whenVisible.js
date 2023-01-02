@@ -1,63 +1,113 @@
 // @ts-nocheck
-import { __isVisible, __closestNotVisible } from '@coffeekraken/sugar/dom';
-/**
- * @name      whenVisible
- * @namespace            js.dom.detect
- * @type      Function
- * @async
- * @platform          js
- * @status          stable
- *
- * Monitor an HTMLElement to be notified when it is visible
- *
- * @feature       Promise based API
- * @feature       Callback support
- *
- * @param 		{HTMLElement} 				$elm 		The element to monitor
- * @param 		{Function} 					[cb=null] 	An optional callback to call when the element is visible
- * @return 		(Promise<HTMLElement>) 								The promise that will be resolved when the element is visible
- *
- * @todo      tests
- *
- * @example 	js
- * import { __whenVisible } from '@coffeekraken/sugar/js/dom/whenVisible'
- * __whenVisible(myCoolHTMLElement).then((elm) => {
- * 		// do something with your element that is now visible
- * });
- *
- * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function __whenVisible($elm, cb = null) {
-    return new Promise((resolve, reject) => {
+import __SPromise from '@coffeekraken/s-promise';
+import { __uniqid } from '@coffeekraken/sugar/string';
+import { __closestNotVisible, __isVisible } from '@coffeekraken/sugar/dom';
+export default function __whenVisible($elm, settings) {
+    const pro = new __SPromise(({ resolve, reject, emit }) => {
+        const finalSettings = Object.assign({ whenVisible: null, whenInvisible: null, once: true }, (settings !== null && settings !== void 0 ? settings : {}));
+        // store status for all listeners
+        if (!$elm._whenVisibleStatus) {
+            $elm._whenVisibleStatus = {};
+        }
         // variables
         let isSelfVisible = false, areParentsVisible = false, closestNotVisible = null, selfObserver = null, parentObserver = null;
-        const _cb = () => {
+        // generate a uniqid for this listener
+        const id = __uniqid();
+        var observer = new IntersectionObserver(function (entries) {
             var _a, _b;
+            if (entries[0]['intersectionRatio'] == 0) {
+                // prevent from triggering multiple times the callback
+                // for this listener if already invisible
+                if (!$elm._whenVisibleStatus[id]) {
+                    return;
+                }
+                // set the listener status on the element
+                $elm._whenVisibleStatus[id] = false;
+                // process callbacks
+                (_a = finalSettings.whenInvisible) === null || _a === void 0 ? void 0 : _a.call(finalSettings, $elm);
+                // event
+                emit('invisible', $elm);
+            }
+            else {
+                // "once" settings support
+                if (finalSettings.once) {
+                    observer.disconnect();
+                }
+                // prevent from triggering multiple times the callback
+                // for this listener if already visible
+                if ($elm._whenVisibleStatus[id]) {
+                    return;
+                }
+                // set the listener status on the element
+                $elm._whenVisibleStatus[id] = true;
+                // process callbacks
+                (_b = finalSettings.whenVisible) === null || _b === void 0 ? void 0 : _b.call(finalSettings, $elm);
+                // event
+                emit('visible', $elm);
+                // resolve the promise only if the "once"
+                // setting is true
+                if (finalSettings.once) {
+                    resolve($elm);
+                }
+            }
+        });
+        observer.observe($elm);
+        pro.on('cancel', () => {
+            observer === null || observer === void 0 ? void 0 : observer.disconnect();
+        });
+        return pro;
+        const _cb = () => {
+            var _a, _b, _c;
             if (isSelfVisible) {
-                (_a = selfObserver === null || selfObserver === void 0 ? void 0 : selfObserver.disconnect) === null || _a === void 0 ? void 0 : _a.call(selfObserver);
-                // remove the event listeners
-                $elm.removeEventListener('transitionend', _eventCb);
-                $elm.removeEventListener('animationstart', _eventCb);
-                $elm.removeEventListener('animationend', _eventCb);
+                // "once" settings support
+                if (finalSettings.once) {
+                    (_a = selfObserver === null || selfObserver === void 0 ? void 0 : selfObserver.disconnect) === null || _a === void 0 ? void 0 : _a.call(selfObserver);
+                    // remove the event listeners
+                    $elm.removeEventListener('transitionend', _eventCb);
+                    $elm.removeEventListener('animationstart', _eventCb);
+                    $elm.removeEventListener('animationend', _eventCb);
+                }
             }
             if (areParentsVisible) {
-                (_b = parentObserver === null || parentObserver === void 0 ? void 0 : parentObserver.disconnect) === null || _b === void 0 ? void 0 : _b.call(parentObserver);
-                // remove the event listeners
-                if (closestNotVisible) {
-                    closestNotVisible.removeEventListener('transitionend', _eventCb);
-                    closestNotVisible.removeEventListener('animationstart', _eventCb);
-                    closestNotVisible.removeEventListener('animationend', _eventCb);
+                // "once" settings support
+                if (finalSettings.once) {
+                    (_b = parentObserver === null || parentObserver === void 0 ? void 0 : parentObserver.disconnect) === null || _b === void 0 ? void 0 : _b.call(parentObserver);
+                    // remove the event listeners
+                    if (closestNotVisible) {
+                        closestNotVisible.removeEventListener('transitionend', _eventCb);
+                        closestNotVisible.removeEventListener('animationstart', _eventCb);
+                        closestNotVisible.removeEventListener('animationend', _eventCb);
+                    }
                 }
             }
             if (isSelfVisible && areParentsVisible) {
+                // prevent from triggering multiple times the callback
+                // for this listener if already visible
+                if ($elm._whenVisibleStatus[id]) {
+                    return;
+                }
+                // set the listener status on the element
+                $elm._whenVisibleStatus[id] = true;
                 // process callbacks
-                cb === null || cb === void 0 ? void 0 : cb($elm);
-                resolve($elm);
-                // remove the event listeners
-                $elm.removeEventListener('transitionend', _eventCb);
-                $elm.removeEventListener('animationstart', _eventCb);
-                $elm.removeEventListener('animationend', _eventCb);
+                whenVisible === null || whenVisible === void 0 ? void 0 : whenVisible($elm);
+                // event
+                emit('visible', $elm);
+                if (finalSettings.once) {
+                    resolve($elm);
+                }
+            }
+            else {
+                // prevent from triggering multiple times the callback
+                // for this listener if already invisible
+                if (!$elm._whenVisibleStatus[id]) {
+                    return;
+                }
+                // set the listener status on the element
+                $elm._whenVisibleStatus[id] = false;
+                // process callbacks
+                (_c = finalSettings.whenInvisible) === null || _c === void 0 ? void 0 : _c.call(finalSettings, $elm);
+                // event
+                emit('invisible', $elm);
             }
         };
         // function called on each transitionend, start, etc...
@@ -83,8 +133,6 @@ export default function __whenVisible($elm, cb = null) {
                             isSelfVisible = true;
                             // callback
                             _cb($elm);
-                            // stop observe
-                            selfObserver.disconnect();
                         }
                     }
                 });
@@ -113,8 +161,6 @@ export default function __whenVisible($elm, cb = null) {
                             areParentsVisible = true;
                             // callback
                             _cb($elm);
-                            // stop observe
-                            parentObserver.disconnect();
                         }
                     }
                 });
@@ -132,4 +178,4 @@ export default function __whenVisible($elm, cb = null) {
         _cb($elm);
     });
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLEVBQUUsV0FBVyxFQUFFLG1CQUFtQixFQUFFLE1BQU0seUJBQXlCLENBQUM7QUFFM0U7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTJCRztBQUNILE1BQU0sQ0FBQyxPQUFPLFVBQVUsYUFBYSxDQUNqQyxJQUFpQixFQUNqQixLQUFlLElBQUk7SUFFbkIsT0FBTyxJQUFJLE9BQU8sQ0FBQyxDQUFDLE9BQU8sRUFBRSxNQUFNLEVBQUUsRUFBRTtRQUNuQyxZQUFZO1FBQ1osSUFBSSxhQUFhLEdBQUcsS0FBSyxFQUNyQixpQkFBaUIsR0FBRyxLQUFLLEVBQ3pCLGlCQUFpQixHQUFHLElBQUksRUFDeEIsWUFBWSxHQUFHLElBQUksRUFDbkIsY0FBYyxHQUFHLElBQUksQ0FBQztRQUUxQixNQUFNLEdBQUcsR0FBRyxHQUFHLEVBQUU7O1lBQ2IsSUFBSSxhQUFhLEVBQUU7Z0JBQ2YsTUFBQSxZQUFZLGFBQVosWUFBWSx1QkFBWixZQUFZLENBQUUsVUFBVSw0REFBSSxDQUFDO2dCQUM3Qiw2QkFBNkI7Z0JBQzdCLElBQUksQ0FBQyxtQkFBbUIsQ0FBQyxlQUFlLEVBQUUsUUFBUSxDQUFDLENBQUM7Z0JBQ3BELElBQUksQ0FBQyxtQkFBbUIsQ0FBQyxnQkFBZ0IsRUFBRSxRQUFRLENBQUMsQ0FBQztnQkFDckQsSUFBSSxDQUFDLG1CQUFtQixDQUFDLGNBQWMsRUFBRSxRQUFRLENBQUMsQ0FBQzthQUN0RDtZQUVELElBQUksaUJBQWlCLEVBQUU7Z0JBQ25CLE1BQUEsY0FBYyxhQUFkLGNBQWMsdUJBQWQsY0FBYyxDQUFFLFVBQVUsOERBQUksQ0FBQztnQkFDL0IsNkJBQTZCO2dCQUM3QixJQUFJLGlCQUFpQixFQUFFO29CQUNuQixpQkFBaUIsQ0FBQyxtQkFBbUIsQ0FDakMsZUFBZSxFQUNmLFFBQVEs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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxPQUFPLFVBQVUsTUFBTSx5QkFBeUIsQ0FBQztBQUNqRCxPQUFPLEVBQUUsUUFBUSxFQUFFLE1BQU0sNEJBQTRCLENBQUM7QUFFdEQsT0FBTyxFQUFFLG1CQUFtQixFQUFFLFdBQVcsRUFBRSxNQUFNLHlCQUF5QixDQUFDO0FBcUMzRSxNQUFNLENBQUMsT0FBTyxVQUFVLGFBQWEsQ0FDakMsSUFBaUIsRUFDakIsUUFBd0M7SUFFeEMsTUFBTSxHQUFHLEdBQUcsSUFBSSxVQUFVLENBQUMsQ0FBQyxFQUFFLE9BQU8sRUFBRSxNQUFNLEVBQUUsSUFBSSxFQUFFLEVBQUUsRUFBRTtRQUNyRCxNQUFNLGFBQWEsbUJBQ2YsV0FBVyxFQUFFLElBQUksRUFDakIsYUFBYSxFQUFFLElBQUksRUFDbkIsSUFBSSxFQUFFLElBQUksSUFDUCxDQUFDLFFBQVEsYUFBUixRQUFRLGNBQVIsUUFBUSxHQUFJLEVBQUUsQ0FBQyxDQUN0QixDQUFDO1FBRUYsaUNBQWlDO1FBQ2pDLElBQUksQ0FBQyxJQUFJLENBQUMsa0JBQWtCLEVBQUU7WUFDMUIsSUFBSSxDQUFDLGtCQUFrQixHQUFHLEVBQUUsQ0FBQztTQUNoQztRQUVELFlBQVk7UUFDWixJQUFJLGFBQWEsR0FBRyxLQUFLLEVBQ3JCLGlCQUFpQixHQUFHLEtBQUssRUFDekIsaUJBQWlCLEdBQUcsSUFBSSxFQUN4QixZQUFZLEdBQUcsSUFBSSxFQUNuQixjQUFjLEdBQUcsSUFBSSxDQUFDO1FBRTFCLHNDQUFzQztRQUN0QyxNQUFNLEVBQUUsR0FBRyxRQUFRLEVBQUUsQ0FBQztRQUV0QixJQUFJLFFBQVEsR0FBRyxJQUFJLG9CQUFvQixDQUFDLFVBQVUsT0FBTzs7WUFDckQsSUFBSSxPQUFPLENBQUMsQ0FBQyxDQUFDLENBQUMsbUJBQW1CLENBQUMsSUFBSSxDQUFDLEVBQUU7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

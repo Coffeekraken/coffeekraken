@@ -83,6 +83,8 @@ export default function __querySelectorLive(
         settings,
     );
 
+    // settings.scopes = false;
+
     const innerPromises = [];
 
     // process selectors when scopes are true

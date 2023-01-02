@@ -1,6 +1,9 @@
 // @ts-nocheck
 
-import { v4 as __uuidv4 } from 'uuid';
+// import { v4 as __uuidv4 } from 'uuid';
+
+import __hyperid from 'hyperid';
+
 /**
  * @name          uniqid
  * @namespace            shared.string
@@ -25,6 +28,15 @@ import { v4 as __uuidv4 } from 'uuid';
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
+
+let _hyperidInstance;
 export default function __uniqid() {
-    return __uuidv4();
+    if (!_hyperidInstance) {
+        _hyperidInstance = __hyperid({
+            urlSafe: true,
+        });
+    }
+    return `s-${_hyperidInstance()}`;
+
+    // return __uuidv4();
 }

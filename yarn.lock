@@ -2957,6 +2957,7 @@ __metadata:
     "@coffeekraken/s-promise": ^2.0.0-alpha.20
     "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
     "@coffeekraken/s-sugar-element": ^2.0.0-alpha.20
+    "@coffeekraken/s-theme": ^2.0.0-alpha.20
     "@coffeekraken/sugar": ^2.0.0-alpha.20
     "@floating-ui/dom": ^0.5.4
     "@types/blessed": ^0.1.19
@@ -2997,6 +2998,7 @@ __metadata:
     glob-parent: ^5.1.2
     hash-obj: ^4.0.0
     hotkeys-js: ^3.9.4
+    hyperid: ^3.0.1
     inline-style-prefixer: ^6.0.1
     ip: ^1.1.8
     is-class: ^0.0.9
@@ -11610,6 +11612,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"hyperid@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "hyperid@npm:3.0.1"
+  dependencies:
+    uuid: ^8.3.2
+    uuid-parse: ^1.1.0
+  checksum: a500f2e9bc85ccb9314edf0bdf6efb9c148d885b3122e22441675b89b10c4dc71b0fbbcdc7695ee21164df7ff476d7278dcadcadabf8c5a2ee44a005f260221e
+  languageName: node
+  linkType: hard
+
 "hyphenate-style-name@npm:^1.0.2":
   version: 1.0.4
   resolution: "hyphenate-style-name@npm:1.0.4"
@@ -19914,6 +19926,13 @@ __metadata:
   dependencies:
     base64-arraybuffer: ^1.0.2
   checksum: c96fbb7d4d8855a154327da0b18e39b7511cc70a7e4bcc3658e24f424bb884312d72b5ba777500b8858e34d365dc6b1a921dc5ca2f0d341182519c6b78e280a5
+  languageName: node
+  linkType: hard
+
+"uuid-parse@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "uuid-parse@npm:1.1.0"
+  checksum: e522c23c2c348eacd880ec78a832f59c1feaccce6c062a5c7127af2f9e7d6cb079d3f06f059fd7e4779cd332091aa038a3bfa26c35d06d23c6f58be21b6461d5
   languageName: node
   linkType: hard
 

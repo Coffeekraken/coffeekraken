@@ -1,5 +1,4 @@
 import type { ISInterface } from '@coffeekraken/s-interface';
-import __getColorFor from '@coffeekraken/sugar/shared/dev/color/getColorFor';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __toJson from '@coffeekraken/sugar/shared/object/toJson';
 
@@ -185,10 +184,11 @@ function setSettings(ctx: any, settings: any = {}) {
     if (!ctx.settings.metas) ctx.settings.metas = {};
     // make sure we have an id
     if (!ctx.settings.metas?.id) ctx.settings.metas.id = ctx.constructor.name;
-    if (!ctx.constructor.name.match(/^SConfig/)) {
-        if (!ctx.settings.metas.color)
-            ctx.settings.metas.color = __getColorFor(ctx.constructor.name, {
-                scope: 'class',
-            });
-    } else if (!ctx.settings.metas.color) ctx.settings.metas.color = 'yellow';
+    // if (!ctx.constructor.name.match(/^SConfig/)) {
+    //     if (!ctx.settings.metas.color)
+    //         ctx.settings.metas.color = __getColorFor(ctx.constructor.name, {
+    //             scope: 'class',
+    //         });
+    // } else if (!ctx.settings.metas.color) ctx.settings.metas.color = 'yellow';
+    ctx.settings.metas.color = 'yellow';
 }

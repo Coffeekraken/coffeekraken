@@ -6,26 +6,32 @@ interface IScopesPostProcessorNodeToTreat {
     _lod: Record<string, IScopesPostProcessorNodeToTreatLods>;
 }
 
-interface IScopesPostProcessorLodRuleSelectorsSettings {
-    local: boolean;
-    deep: boolean;
-}
+interface IScopesPostProcessorLodRuleSelectorsSettings {}
 
 export default async function ({ root, sharedData, postcssApi, settings }) {
-    function getLodRuleSelectors(
+    // check if the lod feature is enabled or not
+    if (!settings.lod?.enabled) {
+        return;
+    }
+
+    function generateLodRuleSelectors(
         rule: any,
         levelStr?: string,
         settings?: Partial<IScopesPostProcessorLodRuleSelectorsSettings>,
     ): string[] {
         const finalSettings: IScopesPostProcessorLodRuleSelectorsSettings = {
-            local: true,
-            deep: true,
             ...(settings ?? {}),
         };
 
         const newSelectors: string[] = [];
 
         rule.selectors.forEach((sel) => {
+            // protect some selectors like ":root", etc...
+            if (sel.trim().match(/^(\:){1,2}[a-z]+$/)) {
+                newSelectors.push(sel);
+                return;
+            }
+
             // handle pseudo classes ":after", etc...
             const pseudoMatch = sel.match(/(\:{1,2})[a-z-]+$/);
             let pseudo = '',
@@ -49,15 +55,6 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
             newSelParts.push(selParts[0]);
             selParts.shift();
 
-            // scope related
-            if (finalSettings.local) {
-                if (levelStr) {
-                    newSelParts.push(`:is(.s-lod--${levelStr},:not(.s-lod))`);
-                } else {
-                    newSelParts.push(`:not(.s-lod)`);
-                }
-            }
-
             // middle selector part
             if (selParts.length) {
                 newSelParts.push(` ${selParts.join(' ')}`);
@@ -68,14 +65,16 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
             let finalSelector = [];
 
             // deep support
-            if (finalSettings.deep) {
-                finalSelector.push(
-                    `${finalSelectorStr}:not(.s-lod--deep ${finalSelectorStr})`,
-                );
-                if (levelStr) {
-                    // select all deep lodd elements
+            if (levelStr) {
+                if (finalSelectorStr.endsWith('body')) {
+                    // apply the lod on the body
                     finalSelector.push(
-                        `${finalSelectorStr}:is(.s-lod--deep.s-lod--${levelStr} ${finalSelectorStr})`,
+                        `${finalSelectorStr}.s-lod--${levelStr}`,
+                    );
+                } else {
+                    // scope the element into the lod class
+                    finalSelector.push(
+                        `.s-lod--${levelStr} ${finalSelectorStr}`,
                     );
                 }
             }
@@ -187,10 +186,14 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
                 case 'file':
                     break;
                 case 'class':
-                    // get lod selectors
-                    const lodSelectors = getLodRuleSelectors(rule, `${level}`, {
-                        local: false,
-                    });
+                    // // get lod selectors
+                    // const lodSelectors = generateLodRuleSelectors(
+                    //     rule,
+                    //     `${level}`,
+                    //     {
+                    //         local: false,
+                    //     },
+                    // );
 
                     // create the new class scoped rule
                     const newRule = postcssApi.rule({
@@ -202,7 +205,7 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
                     // hide rule
                     const hideRule = postcssApi.rule({
                         selectors: rule.selectors.map((s) => {
-                            return `${s}:not(.s-lod--deep.s-lod--${level} ${s})`;
+                            return `${s}:not(.s-lod--${level} ${s})`;
                         }),
                         nodes: [
                             postcssApi.decl({
@@ -268,7 +271,7 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
 
             // @ts-ignore
             if (lodObj.properties.length) {
-                const lodSelectors = getLodRuleSelectors(rule, levelStr);
+                const lodSelectors = generateLodRuleSelectors(rule, levelStr);
 
                 const newRule = postcssApi.rule({
                     selectors: lodSelectors,

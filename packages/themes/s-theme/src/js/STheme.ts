@@ -34,6 +34,7 @@ export interface ISThemeInitSettings {
     $context: HTMLElement;
     theme: string;
     variant: string;
+    lod: number;
 }
 
 export interface ISThemeSetLodSettings {
@@ -81,6 +82,21 @@ export default class STheme extends __SThemeBase {
     }
 
     /**
+     * @name      lod
+     * @type      Number
+     * @static
+     *
+     * Get the current theme lod (level of details)
+     *
+     * @since     2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static get lod(): number {
+        const currentTheme = this.getCurrentTheme();
+        return currentTheme.lod;
+    }
+
+    /**
      * @name            setLod
      * @type            Function
      * @static
@@ -98,49 +114,29 @@ export default class STheme extends __SThemeBase {
         level: string | number,
         settings?: Partial<ISThemeSetLodSettings>,
     ): STheme {
-        const finalSettings = <ISThemeSetLodSettings>{
-            $context: document.body,
-            deep: true,
-            ...(settings ?? {}),
-        };
-
-        // @ts-ignore
-        level = parseInt(`${level}`);
-
-        // remove all the lod classes above the wanted level
-        for (let i = 0; i <= 10; i++) {
-            if (i > level) {
-                finalSettings.$context.classList.remove(`s-lod--${i}`);
-            }
-        }
-
-        // deep class
-        if (finalSettings.deep) {
-            finalSettings.$context.classList.add('s-lod--deep');
-        } else {
-            finalSettings.$context.classList.remove('s-lod--deep');
-        }
-
-        // add the new classes
-        for (let i = 0; i <= level; i++) {
-            finalSettings.$context.classList.add('s-lod', `s-lod--${i}`);
-        }
-
         // get the current theme instance
         const currentTheme = this.getCurrentTheme();
-
-        // dispatch a change event
-        document.dispatchEvent(
-            new CustomEvent('s-theme.lod.change', {
-                detail: {
-                    level,
-                    theme: currentTheme,
-                },
-            }),
-        );
-
-        // return the current theme
+        currentTheme.setLod(level, settings);
         return currentTheme;
+    }
+
+    /**
+     * @name            whenLodChange
+     * @type            Function
+     * @static
+     *
+     * This method allows you to subscribe at the lod "level of details" changes
+     *
+     * @param           {Function}              cb              The callback to call when the lod change
+     * @return          {Function}                                    A function to remove the event listener
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static whenLodChange(cb: Function): Function {
+        // get the current theme instance
+        const currentTheme = this.getCurrentTheme();
+        return currentTheme.whenLodChange(cb);
     }
 
     /**
@@ -309,13 +305,14 @@ export default class STheme extends __SThemeBase {
             $context: document.querySelector('html'),
             theme: undefined,
             variant: undefined,
+            lod: undefined,
             ...(settings ?? {}),
         };
 
         let themeInstance;
 
         // wait for css to be applied
-        const themeMetas = this.getThemeMetas(finalSettings.$context);
+        // const themeMetas = this.getThemeMetas(finalSettings.$context);
 
         // save default theme metas
         STheme.defaultThemeMetas = {
@@ -338,6 +335,32 @@ export default class STheme extends __SThemeBase {
 
         // return the current theme
         return themeInstance;
+    }
+
+    /**
+     * @name            ensureIsInited
+     * @type            Function
+     * @static
+     *
+     * This method allows you to make sure the theme has been inited using the `__STheme.init()` static method.
+     * If it's not the case, it will throw an error to make sure the developer knows why it's not working...
+     *
+     * @param           {Boolean}               [throwError=true]               Specify if you want this method to throw an error when the theme is not correctly inited
+     * @return          {Boolean}                                    True if inited, false if not (and will thro)
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static ensureIsInited(throwError = true): boolean {
+        if (!document.env.SUGAR.theme) {
+            if (throwError) {
+                throw new Error(
+                    `<red>[STheme]</red> You must init your theme using the __STheme.init() static method...`,
+                );
+            }
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -452,6 +475,33 @@ export default class STheme extends __SThemeBase {
     }
 
     /**
+     * @name        state
+     * @type        Object
+     *
+     * Store the current theme state
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    state = {
+        lod: undefined,
+        overridedConfigs: {},
+    };
+
+    /**
+     * @name      lod
+     * @type      Number
+     *
+     * Get the current theme lod (level of details)
+     *
+     * @since     2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get lod(): number {
+        return this.state.lod || this.get('lod.defaultLevel');
+    }
+
+    /**
      * @name        constructor
      * @type        Function
      * @constructor
@@ -463,8 +513,6 @@ export default class STheme extends __SThemeBase {
      */
     constructor(theme?: string, variant?: string) {
         super(theme, variant);
-        // apply the theme on dom element
-        // this.constructor.setTheme(this.theme, this.variant);
         // restore the theme
         this.restore();
     }
@@ -487,6 +535,61 @@ export default class STheme extends __SThemeBase {
     }
 
     /**
+     * @name            setLod
+     * @type            Function
+     *
+     * This method allows you to set the level of details you want on any HTMLElement context
+     *
+     * @param               {String|Number}     level           The level you want to set
+     * @param               {Partial<ISThemeSetLodSettings>}        Some settings to configure your action
+     * @return          {STheme}                                    The STheme instance that represent the current applied theme
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    setLod(
+        level: string | number,
+        settings?: Partial<ISThemeSetLodSettings>,
+    ): STheme {
+        const finalSettings = <ISThemeSetLodSettings>{
+            $context: document.body,
+            ...(settings ?? {}),
+        };
+
+        // @ts-ignore
+        level = parseInt(`${level}`);
+
+        // save in state
+        this.state.lod = level;
+        this.save();
+
+        // remove all the lod classes above the wanted level
+        for (let i = 0; i <= 10; i++) {
+            if (i > level) {
+                finalSettings.$context.classList.remove(`s-lod--${i}`);
+            }
+        }
+
+        // add the new classes
+        for (let i = 0; i <= level; i++) {
+            finalSettings.$context.classList.add('s-lod', `s-lod--${i}`);
+        }
+
+        // dispatch a change event
+        document.dispatchEvent(
+            new CustomEvent('s-theme.lod.change', {
+                detail: {
+                    level,
+                    theme: this,
+                },
+            }),
+        );
+
+        // return the current theme
+        return this;
+    }
+
+    /**
      * @name            set
      * @type            Function
      *
@@ -504,11 +607,52 @@ export default class STheme extends __SThemeBase {
         // set in super class
         super.set(dotPath, value);
         // apply overrided configs
-        this.applyOverridedConfigs();
+        this.applyState();
         // save the config
         this.save();
         // maintain chainability
         return this;
+    }
+
+    /**
+     * @name            whenLod
+     * @type            Function
+     *
+     * This method allows you to have a promise back that will be resolved when the actuel theme lod meet the requested one
+     *
+     * @param           {Number}                level           The level you want to wait on
+     * @return          {Promise}                                    A promise that will be resolved once the correct level has been reached
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    whenLod(level: number): Promise<void> {
+        return new Promise((resolve) => {
+            if (document.body.classList.contains(`s-lod--${level}`)) {
+                return resolve();
+            }
+        });
+    }
+
+    /**
+     * @name            whenLodChange
+     * @type            Function
+     *
+     * This method allows you to subscribe at the lod "level of details" changes
+     *
+     * @param           {Function}              cb              The callback to call when the lod change
+     * @return          {Function}                                    A function to remove the event listener
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    whenLodChange(cb: Function): Function {
+        // @ts-ignore
+        document.addEventListener('s-theme.lod.change', cb);
+        return () => {
+            // @ts-ignore
+            document.removeEventListener('s-theme.lod.change', cb);
+        };
     }
 
     /**
@@ -546,7 +690,7 @@ export default class STheme extends __SThemeBase {
     }
 
     /**
-     * @name            applyOverridedConfigs
+     * @name            applyState
      * @type            Function
      *
      * This method allows you to apply the overrided configs on your dom context.
@@ -555,19 +699,33 @@ export default class STheme extends __SThemeBase {
      * @return      {STheme}              The current instance
      *
      * @since       2.0.0
-     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    applyOverridedConfigs(
-        $context: HTMLElement = document.querySelector('html'),
-    ): STheme {
+    applyState($context: HTMLElement = document.querySelector('html')): STheme {
+        // overrided configs (css)
         const properties = __SThemeBase.jsConfigObjectToCssProperties(
             this.getOverridedConfig(),
         );
+        this._applyOverridedConfigs(properties, $context);
 
+        // lod
+        if (this.state.lod !== undefined) {
+            this.setLod(this.state.lod);
+        }
+
+        return this;
+    }
+
+    /**
+     * Apply the overrided configs from the state
+     */
+    _applyOverridedConfigs(
+        properties,
+        $context: HTMLElement = document.querySelector('html'),
+    ): void {
         if (!$context._sThemeOverridedConfigs) {
             $context._sThemeOverridedConfigs = {};
         }
-
         if (!$context._sThemeOverridedConfigs[this.id]) {
             $context._sThemeOverridedConfigs[this.id] =
                 document.createElement('style');
@@ -577,14 +735,11 @@ export default class STheme extends __SThemeBase {
             );
             $context.appendChild($context._sThemeOverridedConfigs[this.id]);
         }
-
         $context._sThemeOverridedConfigs[this.id].innerHTML = `
             [theme="${this.theme}-${this.variant}"] {
                 ${properties.join('\n')}
             }
         `;
-
-        return this;
     }
 
     /**
@@ -605,8 +760,8 @@ export default class STheme extends __SThemeBase {
         this._saveTimeout = setTimeout(() => {
             // save in localStorage
             localStorage.setItem(
-                `s-theme`,
-                JSON.stringify(this.getOverridedConfig()),
+                `s-theme-${this.theme}`,
+                JSON.stringify(this.state),
             );
             // emit saved event
             this.emitSavedEvent();
@@ -627,19 +782,23 @@ export default class STheme extends __SThemeBase {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     restore(): STheme {
-        let savedConfigs = {};
+        let savedState = {};
         // get from localStorage
         try {
-            savedConfigs = JSON.parse(
+            savedState = JSON.parse(
                 // @ts-ignore
-                localStorage.getItem(`s-theme`),
+                localStorage.getItem(`s-theme-${this.theme}`) ?? '{}',
             );
-        } catch (e) {}
-
+            // @ts-ignore
+            this.state = savedState ?? {};
+        } catch (e) {
+            savedState = {};
+        }
         // restore configs
-        super.restore(savedConfigs);
+        // @ts-ignore
+        super.restore(savedState.overridedConfigs);
         // apply the configs
-        this.applyOverridedConfigs();
+        this.applyState();
         // maintain chainability
         return this;
     }
@@ -657,12 +816,16 @@ export default class STheme extends __SThemeBase {
      */
     clear(): STheme {
         // delete the local storage
-        localStorage.removeItem(`s-theme`);
+        localStorage.removeItem(`s-theme-${this.theme}`);
         // clear in super class
         super.clear();
+        // clear the state
+        // @ts-ignore
+        this.state = {};
         // apply the configs
-        this.applyOverridedConfigs();
+        this.applyState();
         // set theme again to dispatch event
+        // @ts-ignore
         this.constructor.setTheme();
         // maintain chainability
         return this;

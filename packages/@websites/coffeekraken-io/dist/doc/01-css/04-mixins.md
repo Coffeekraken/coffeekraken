@@ -108,6 +108,8 @@ The `postcssSugarPlugin` gives you access to a tone of useful mixins that can he
     
 -   [`@sugar.gradient(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.gradient.gradient)
     
+-   [`@sugar.gradient.text(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.gradient.text)
+    
 -   [`@sugar.grid.classes(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.grid.classes)
     
 -   [`@sugar.group.classes(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.group.classes)
@@ -145,6 +147,12 @@ The `postcssSugarPlugin` gives you access to a tone of useful mixins that can he
 -   [`@sugar.lnf.base(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.lnf.base)
     
 -   [`@sugar.lnf.selection(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.lnf.selection)
+    
+-   [`@sugar.lod(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.lod.lod)
+    
+-   [`@sugar.lod.prevent(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.lod.prevent)
+    
+-   [`@sugar.lod.when(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.lod.when)
     
 -   [`@sugar.margin.classes(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.margin.classes)
     
@@ -194,7 +202,11 @@ The `postcssSugarPlugin` gives you access to a tone of useful mixins that can he
     
 -   [`@sugar.scale(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.scale.scale)
     
+-   [`@sugar.scope.disable(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.scope.disable)
+    
 -   [`@sugar.scope.no(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.scope.no)
+    
+-   [`@sugar.scope.prevent(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.scope.prevent)
     
 -   [`@sugar.scrollbar.classes(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.scrollbar.classes)
     

@@ -143,15 +143,11 @@ Here's a list of the available commands:
   - Create a new project from a recipe (template) like the default one or for example the litElement one, etc...
 
 
-- `sugar kitchen.action [arguments]`
-  - Exec an action of the kitchen application into the current working directory
+- `sugar kitchen.run [arguments]`
+  - Run a recipe (or action) of the kitchen application into the current working directory
 
 
-- `sugar kitchen.recipe [arguments]`
-  - Exec a recipe of the kitchen application into the current working directory
-
-
-- `sugar kitchen.list [arguments]`
+- `sugar kitchen.ls [arguments]`
   - List either all the recipes available or particular recipe actions stack
 
 

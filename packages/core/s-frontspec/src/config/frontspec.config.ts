@@ -86,6 +86,16 @@ export default function (api) {
                         return api.theme.padding;
                     },
                 },
+                lod: {
+                    title: 'Lod',
+                    description: 'Specify the lod (level of details) settings',
+                    type: 'object',
+                    get value() {
+                        const lodConfig = Object.assign({}, api.theme.lod);
+                        delete lodConfig.cssProperties;
+                        return lodConfig;
+                    },
+                },
                 font: {
                     title: 'Font',
                     description:

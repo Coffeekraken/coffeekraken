@@ -69,6 +69,15 @@ export default class SLitComponent extends LitElement {
         Object.assign(this._state, state);
     }
 
+    _expandPleasantCssClassnamesLiveInited = false;
+    updated() {
+        // if (this._expandPleasantCssClassnamesLiveInited) {
+        //     return;
+        // }
+        // this._expandPleasantCssClassnamesLiveInited = true;
+        // __expandPleasantCssClassnamesLive(this);
+    }
+
     /**
      * @name            define
      * @type            Function

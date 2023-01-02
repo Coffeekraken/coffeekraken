@@ -32,7 +32,7 @@ To compile your CSS, you can simply run one of these commands in your terminal a
 # Compile only the CSS
 sugar postcss.build
 # Launch the development environment with local server, CSS compilation, JS compilation, etc...
-sugar dev
+sugar kitchen.run dev
 
 ```
 

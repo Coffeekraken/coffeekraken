@@ -76,7 +76,7 @@ $frontspec->metas->og = $ogObj;
 
 </head>
 
-<body @if (isset($bodyAttributes)) @foreach ($bodyAttributes as $key => $value){{ $key }}="{{ $value }}" @endforeach @endif>
+<body class="{{ \Sugar\lod\lodClasses(2) }}" @if (isset($bodyAttributes)) @foreach ($bodyAttributes as $key => $value){{ $key }}="{{ $value }}" @endforeach @endif>
 
     @if (isset($config->google->gtm))
     <!-- GTM noscript -->

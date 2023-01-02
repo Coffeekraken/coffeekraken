@@ -14,6 +14,7 @@ import __whenImagesLoaded from './whenImagesLoaded';
 import __whenInteract from './whenInteract';
 import __whenInViewport from './whenInViewport';
 import __whenLinkLoaded from './whenLinkLoaded';
+import __whenLod from './whenLod';
 import __whenNearViewport from './whenNearViewport';
 import __whenOutOfViewport from './whenOutOfViewport';
 import __whenRemoved from './whenRemoved';
@@ -38,6 +39,7 @@ export {
     __whenInteract,
     __whenInViewport,
     __whenLinkLoaded,
+    __whenLod,
     __whenNearViewport,
     __whenOutOfViewport,
     __whenRemoved,

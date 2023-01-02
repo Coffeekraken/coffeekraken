@@ -158,7 +158,7 @@ To test our new recipe `dev` stack, simply type in your cmd
 > Make sure you have create the `sugar.json` file as described above before testing your recipe...
 
 ```shell
-sugar dev
+npm run dev
 
 ```
 

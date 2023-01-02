@@ -1,4 +1,4 @@
-<div class="__subnav-accordion">
+{{-- <div class="__subnav-accordion">
     @foreach ($menuItem as $item)
         @if (isset($item->name))
             <div class="__subnav-title" s-activate href="#subnav-mobile-{{ \Sugar\string\idCompliant($item->name) }}"
@@ -36,4 +36,4 @@
             </div>
         @endif
     @endforeach
-</div>
+</div> --}}

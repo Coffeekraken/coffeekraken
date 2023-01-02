@@ -8,39 +8,42 @@ namespace Sugar\html;
  * @type        Function
  * @platform        php
  * @status          beta
- * 
+ *
  * This method will look for classes like something:cool and transform it into
  * something like this: something something--cool
- * 
+ *
  * @param       {String}        $html           The html to process
  * @return      {String}                       The processed html
- * 
+ *
  * @example      php
  * Sugar\html\expandPleasantCssClassnames('...html');
- * 
+ *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function get_tag( $tag, $xml ) {
-  $tag = preg_quote($tag);
-  preg_match_all('{<'.$tag.'[^>]*>(.*?)</'.$tag.'>'.'}',
-                   $xml,
-                   $matches,
-                   PREG_PATTERN_ORDER);
+function get_tag($tag, $xml)
+{
+    $tag = preg_quote($tag);
+    preg_match_all(
+        '{<' . $tag . '[^>]*>(.*?)</' . $tag . '>' . '}',
+        $xml,
+        $matches,
+        PREG_PATTERN_ORDER
+    );
 
-  return $matches;
+    return $matches;
 }
 
-function expandPleasantCssClassnames($html) {
-
+function expandPleasantCssClassnames($html)
+{
     // grab do not touch tags
     preg_match_all('/<code[^>]*>(.*?)<\/code>/s', $html, $doNotTouchTagCode);
-    foreach($doNotTouchTagCode[0] as $idx => $tag) {
-        $html = str_replace($tag, '[sExpandColonClassesTagCode:'.$idx.']', $html);
-    }
-    preg_match_all('/<template[^>]*>(.*?)<\/template>/s', $html, $doNotTouchTagTemplate);
-    foreach($doNotTouchTagTemplate[0] as $idx => $tag) {
-        $html = str_replace($tag, '[sExpandColonClassesTagTemplate:'.$idx.']', $html);
+    foreach ($doNotTouchTagCode[0] as $idx => $tag) {
+        $html = str_replace(
+            $tag,
+            '[sExpandColonClassesTagCode:' . $idx . ']',
+            $html
+        );
     }
 
     $reg = '/class="[a-zA-Z0-9_\-:@\s]+"/';
@@ -48,7 +51,7 @@ function expandPleasantCssClassnames($html) {
     $matches = preg_match_all($reg, $html, $parts);
 
     foreach ($parts[0] as $class) {
-        $classes = str_replace(['class="','"'], '', $class);
+        $classes = str_replace(['class="', '"'], '', $class);
 
         $classNames = explode(' ', $classes);
 
@@ -56,7 +59,7 @@ function expandPleasantCssClassnames($html) {
 
         $currentMedia = '';
 
-        foreach($classNames as $className) {
+        foreach ($classNames as $className) {
             if (substr($className, 0, 1) == '@') {
                 $currentMedia = str_replace('@', '___', $className);
                 continue;
@@ -65,21 +68,26 @@ function expandPleasantCssClassnames($html) {
             $parts = explode(':', $className);
             if (count($parts) === 1) {
                 $name = $className;
-                if ($currentMedia !== '') $name = $className . $currentMedia;
+                if ($currentMedia !== '') {
+                    $name = $className . $currentMedia;
+                }
                 array_push($classesArray, $name);
             } else {
                 $firstClass = $parts[0];
 
                 $name = $firstClass;
-                if ($currentMedia !== '') $name = $firstClass . $currentMedia;
+                if ($currentMedia !== '') {
+                    $name = $firstClass . $currentMedia;
+                }
 
                 array_push($classesArray, $name);
 
-                foreach($parts as $index => $part) {
+                foreach ($parts as $index => $part) {
                     if ($index > 0) {
-
-                        $name = $firstClass . '--' . $part;                       
-                        if ($currentMedia !== '') $name = $name . $currentMedia;
+                        $name = $firstClass . '--' . $part;
+                        if ($currentMedia !== '') {
+                            $name = $name . $currentMedia;
+                        }
 
                         array_push($classesArray, $name);
                     }
@@ -87,8 +95,11 @@ function expandPleasantCssClassnames($html) {
             }
         }
 
-        $html = str_replace($class, 'class="' . implode(' ', $classesArray) . '"', $html);
-
+        $html = str_replace(
+            $class,
+            'class="' . implode(' ', $classesArray) . '"',
+            $html
+        );
     }
 
     $escapedParts = [];
@@ -96,20 +107,28 @@ function expandPleasantCssClassnames($html) {
     $escapedMatches = preg_match_all($escapedReg, $html, $escapedParts);
 
     if (count($escapedParts)) {
-        foreach($escapedParts[0] as $class) {
+        foreach ($escapedParts[0] as $class) {
             $newClass = str_replace('\:', ':', $class);
             $html = str_replace($class, $newClass, $html);
         }
     }
 
     // restore do not touch tags
-    preg_match_all('/\[sExpandColonClassesTagCode:[0-9]{1,999}\]/ms', $html, $restoreTagCode);
-    preg_match_all('/\[sExpandColonClassesTagTemplate\:[0-9]{1,999}\]/ms', $html, $restoreTagTemplate);
+    preg_match_all(
+        '/\[sExpandColonClassesTagCode:[0-9]{1,999}\]/ms',
+        $html,
+        $restoreTagCode
+    );
+    preg_match_all(
+        '/\[sExpandColonClassesTagTemplate\:[0-9]{1,999}\]/ms',
+        $html,
+        $restoreTagTemplate
+    );
 
-    foreach($restoreTagCode[0] as $idx => $tag) {
+    foreach ($restoreTagCode[0] as $idx => $tag) {
         $html = str_replace($tag, $doNotTouchTagCode[0][$idx], $html);
     }
-    foreach($restoreTagTemplate[0] as $idx => $tag) {
+    foreach ($restoreTagTemplate[0] as $idx => $tag) {
         $html = str_replace($tag, $doNotTouchTagTemplate[0][$idx], $html);
     }
 

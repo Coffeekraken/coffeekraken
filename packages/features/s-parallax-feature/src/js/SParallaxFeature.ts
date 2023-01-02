@@ -64,8 +64,10 @@ export default class SParallaxFeature extends __SFeature implements ISFeature {
         this._originalTransform = transformStr;
 
         document.addEventListener('mousemove', (e) => {
-            if (!this.componentUtils.isInViewport()) return;
-
+            if (!this.componentUtils.isActive()) {
+                return;
+            }
+            // console.log('PARA', this.node);
             const percentage = this._getPositionPercentages(e);
             this._setLayerTransform(percentage);
         });

@@ -54,8 +54,8 @@ Sugar provide the `sugar` CLI that expose some features like:
 
 -   `sugar`: Launch an interactive process to execute a sugar feature
 -   `sugar --help`: Display the CLI help
--   `sugar dev`: Start the development environment in the current project
--   `sugar build`: Build your project for production
+-   `sugar kitchen.run dev`: Start the development environment in the current project
+-   `sugar kitchen.run build`: Build your project for production
 -   `sugar postcss.build`: Build your postcss for production
 -   Etc...
 

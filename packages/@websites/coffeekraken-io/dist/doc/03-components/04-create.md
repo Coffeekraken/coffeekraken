@@ -45,7 +45,7 @@ On top of that, we make use of our own `SLitComponent` class that extends the `L
 To create a new component project, simply launch this command:
 
 ```shell
-sugar new litElement
+sugar new generic
 
 ```
 
@@ -56,14 +56,14 @@ You will have to answers some questions around your project like his name, etc..
 Once that is finished, simple cd into your project directory and launch
 
 ```shell
-sugar dev
+npm run dev
 
 ```
 
 This will start the **development environment** in which you can implement and test your component. Once your component is ready, launch this command to build it for production
 
 ```shell
-sugar build
+npm run build
 
 ```
 

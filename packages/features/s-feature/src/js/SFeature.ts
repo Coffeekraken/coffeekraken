@@ -179,11 +179,6 @@ export default class SFeature extends __SClass implements ISFeature {
         // node
         this.node = node;
 
-        // add the base class on the feature
-        this.node.classList.add(
-            ...this.componentUtils.className('').split(' '),
-        );
-
         // assign props
         this.props = this.componentUtils.handleProps(
             {},
@@ -192,6 +187,11 @@ export default class SFeature extends __SClass implements ISFeature {
                     this.settings.interface ??
                     this.settings.componentUtils?.interface,
             },
+        );
+
+        // add the base class on the feature
+        this.node.classList.add(
+            ...this.componentUtils.className('').split(' '),
         );
 
         this.componentUtils.waitAndExecute(

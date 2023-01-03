@@ -452,13 +452,15 @@ export default class SThemeBase extends __SEventEmitter {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static _instanciatedThemes: Record<string, SThemeBase> = {};
+    static _firstGetedThemeSettings: any;
     static getTheme(
-        settings?: Partial<ISThemeDefaultStaticSettings> = {},
+        settings: Partial<ISThemeDefaultStaticSettings> = {},
     ): SThemeBase {
         const themesNames = Object.keys(__SSugarConfig.get('theme.themes'));
 
-        let theme = settings.theme,
-            variant = settings.variant;
+        let theme = settings.theme ?? this._firstGetedThemeSettings?.theme,
+            variant =
+                settings.variant ?? this._firstGetedThemeSettings?.variant;
 
         if (!theme) {
             theme = __SSugarConfig.get('theme.theme');
@@ -470,6 +472,13 @@ export default class SThemeBase extends __SEventEmitter {
         if (!themesNames.includes(`${theme}-${variant}`)) {
             theme = __SSugarConfig.get('theme.theme');
             variant = __SSugarConfig.get('theme.variant');
+        }
+
+        if (!this._firstGetedThemeSettings) {
+            this._firstGetedThemeSettings = {
+                theme,
+                variant,
+            };
         }
 
         if (this._instanciatedThemes[`${theme}-${variant}`]) {
@@ -2258,22 +2267,10 @@ export default class SThemeBase extends __SEventEmitter {
     ): Promise<boolean> {
         const colorsObj = this.get('color'),
             colorSchemasObj = this.get('colorSchema');
-        // let triggeredStop = false;
 
         for (let [colorName, colorValue] of Object.entries(colorsObj)) {
-            // if (triggeredStop) return;
-
-            // const defaultColorObj = Object.assign({}, colorObj.default ?? {});
-
-            // if (!colorObj.color) {
-            //     throw new Error(
-            //         `Sorry but your color "<yellow>${colorName}</yellow>" does not provide a "<cyan>color</cyan>" property and this is required...`,
-            //     );
-            // }
-
             const c = new __SColor(colorValue);
-
-            const _res = callback({
+            callback({
                 name: colorName,
                 schema: '',
                 // @ts-ignore
@@ -2294,7 +2291,7 @@ export default class SThemeBase extends __SEventEmitter {
                 colorSchemasObj,
             )) {
                 const newColor = c.apply(schemaObj, true);
-                const res = callback(<ISThemeLoopOnColorsColor>{
+                callback(<ISThemeLoopOnColorsColor>{
                     name: colorName,
                     schema: schemaName,
                     value: {

@@ -150,6 +150,8 @@ The `postcssSugarPlugin` gives you access to a tone of useful mixins that can he
     
 -   [`@sugar.lod(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.lod.lod)
     
+-   [`@sugar.lod.log(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.lod.log)
+    
 -   [`@sugar.lod.prevent(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.lod.prevent)
     
 -   [`@sugar.lod.when(...);`](/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.lod.when)

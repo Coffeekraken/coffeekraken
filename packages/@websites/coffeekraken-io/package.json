@@ -9,6 +9,7 @@
         "dev": "sugard kitchen.run dev",
         "prod": "sugard kitchen.run prod",
         "build": "sugard kitchen.run build",
+        "static": "live-server static",
         "deploy": "rsync -avzh --delete --progress --stats ./static fe0mt_coffeekraken@fe0mt.ftp.infomaniak.com:~/sites/coffeekraken.io",
         "deploy.bogdanov": "rsync -avzh --delete --progress --stats ./static fe0mt_bogdanov_ssh@fe0mt.ftp.infomaniak.com:~/sites/bogdanov.coffeekraken.io"
     },
@@ -19,7 +20,6 @@
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@builder.io/html-to-figma": "^0.0.3",
         "@coffeekraken/cli": "^2.0.0-alpha.20",
         "@coffeekraken/s-activate-feature": "^2.0.0-alpha.20",
         "@coffeekraken/s-appear-feature": "^2.0.0-alpha.20",

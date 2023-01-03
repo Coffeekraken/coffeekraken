@@ -34,12 +34,14 @@ import __rgbaToHsla from './rgbaToHsla';
  */
 export default function __parse(color, format = 'rgba') {
     color = color.replace(/\s/g, '');
-    if (color.indexOf('rgb') != -1) {
+    if (color.startsWith('rgb')) {
         color = __parseRgba(color);
-    } else if (color.indexOf('hsl') != -1) {
+    } else if (color.startsWith('hsl')) {
         color = __parseHsla(color);
+        // console.log('CC__CC', color);
         color = __hslaToRgba(color.h, color.s, color.l);
-    } else if (color.substring(0, 1) == '#') {
+    } else if (color.startsWith('#')) {
+        // console.log('parseHEx0, col', color);
         color = __hexToRgba(color);
     }
 

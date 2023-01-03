@@ -235,6 +235,10 @@ export default class SPageTransitionFeature extends __SFeature {
                 const $newBody = dom.querySelector('body');
                 if ($inPageBody && $newBody) {
                     const newAttrNames: string[] = [];
+
+                    // keep the lod (level of details classes)
+                    const lodClasses = $inPageBody.classList.toString().split(' ').filter(cls => cls.startsWith('s-lod--'));
+
                     // @ts-ignore
                     for (let attr of $newBody.attributes) {
                         $inPageBody.setAttribute(attr.name, attr.value);
@@ -246,6 +250,9 @@ export default class SPageTransitionFeature extends __SFeature {
                             $inPageBody.removeAttribute(attr.name);
                         }
                     }
+                    
+                    // set the lod classes on the new body
+                    $newBody.classList.add(...lodClasses);
                 }
             }
 

@@ -1,4 +1,4 @@
-<section id="homepage-welcome" s-scope s-appear in="bottom" delay="600">
+<section id="homepage-welcome">
 
     {{-- <div class="welcome-illustration-shapes">
         <svg xmlns="http://www.w3.org/2000/svg">

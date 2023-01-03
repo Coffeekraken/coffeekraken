@@ -1,5 +1,5 @@
 
-    <section id="features-sugar" class="section:diagonal" s-appear>
+    <section id="features-sugar" class="section:diagonal">
 
         <div class="s-container">
 

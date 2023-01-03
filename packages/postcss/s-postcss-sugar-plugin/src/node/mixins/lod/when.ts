@@ -28,7 +28,7 @@ class postcssSugarPluginLodWhenMixinInterface extends __SInterface {
     static get _definition() {
         return {
             level: {
-                type: 'Number',
+                type: 'Number|String',
                 required: true,
             },
             method: {
@@ -42,7 +42,7 @@ class postcssSugarPluginLodWhenMixinInterface extends __SInterface {
 export { postcssSugarPluginLodWhenMixinInterface as interface };
 
 export interface postcssSugarPluginLodWhendMixinParams {
-    level: number;
+    level: number | string;
     method: 'remove' | 'file' | 'class';
 }
 export default function ({
@@ -60,19 +60,32 @@ export default function ({
         ...(params ?? {}),
     };
 
-    atRule.nodes.forEach((node) => {
-        // handle only rules
-        if (!node.selector) {
-            return;
-        }
-        // mark the rule with the level
-        // that will be processed in the "lod" postprocessor
-        // node._sLodWhen = finalParams;
-        if (!node.selector.includes(`.s-lod-when--${finalParams.level}`)) {
-            node.selector = `.s-lod-when--${finalParams.level}.s-lod-method--${finalParams.method} ${node.selector}`;
-        }
-    });
+    const levels: number[] = [];
 
-    atRule.parent.insertAfter(atRule, atRule.nodes);
-    atRule.remove();
+    if (typeof finalParams.level === 'number') {
+        levels.push(finalParams.level);
+    } else if (typeof finalParams.level === 'string') {
+        let startLevel,
+            endLevel,
+            levelInt = parseInt(finalParams.level.replace(/^(><)\=?/, ''));
+        if (finalParams.level.startsWith('>=')) {
+            startLevel = levelInt;
+        }
+    }
+
+    // atRule.nodes.forEach((node) => {
+    //     // handle only rules
+    //     if (!node.selector) {
+    //         return;
+    //     }
+    //     // mark the rule with the level
+    //     // that will be processed in the "lod" postprocessor
+    //     // node._sLodWhen = finalParams;
+    //     if (!node.selector.includes(`.s-lod-when--${finalParams.level}`)) {
+    //         node.selector = `.s-lod-when--${finalParams.level}.s-lod-method--${finalParams.method} ${node.selector}`;
+    //     }
+    // });
+
+    // atRule.parent.insertAfter(atRule, atRule.nodes);
+    // atRule.remove();
 }

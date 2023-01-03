@@ -1,5 +1,5 @@
 
-<section id="features-frontend" class="section:diagonal" s-appear>
+<section id="features-frontend" class="section:diagonal">
     <div class="s-container">
 
         <h3 class="s-typo:h2 s-mbe:30 @mobile s-typo:h4">Frontend<br><span class="s-gradient:text:accent">Sugar</span></h3>

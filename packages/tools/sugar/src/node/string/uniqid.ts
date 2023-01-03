@@ -1,12 +1,9 @@
 // @ts-nocheck
-
-// import { v4 as __uuidv4 } from 'uuid';
-
-import __hyperid from 'hyperid';
+import __crypto from 'crypto';
 
 /**
  * @name          uniqid
- * @namespace            shared.string
+ * @namespace            node.string
  * @type          Function
  * @platform          js
  * @platform          node
@@ -24,19 +21,10 @@ import __hyperid from 'hyperid';
  * import { __uniqid } from '@coffeekraken/sugar/string';
  * console.log(__uniqid()); // => 1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed
  *
- * @see       https://www.npmjs.com/package/uuid
+ * @see       https://geshan.com.np/blog/2022/01/nodejs-uuid/
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-
-let _hyperidInstance;
 export default function __uniqid() {
-    if (!_hyperidInstance) {
-        _hyperidInstance = __hyperid({
-            urlSafe: true,
-        });
-    }
-    return `s-${_hyperidInstance()}`;
-
-    // return __uuidv4();
+    return `s-${__crypto.randomUUID()}`;
 }

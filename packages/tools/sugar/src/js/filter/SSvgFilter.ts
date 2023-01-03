@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import uniqid from '../../shared/string/uniqid';
+import uniqid from '../../js/string/uniqid';
 
 /**
  * @name 		           __SSvgFilter

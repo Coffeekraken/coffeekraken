@@ -108,7 +108,7 @@ Specify the assets to load like the css, js, etc...
 ```js
 export default {
   viteClient: {
-    src: '\n            <script>\n            document.addEventListener("DOMContentLoaded", function() {\n                var $script = document.createElement("script");\n                var ip = "192.168.201.109";\n                $script.setAttribute("type", "module");\n                $script.setAttribute("src", "http://0.0.0.0:3000/@vite/client");\n                document.body.appendChild($script);\n            });\n            </script>\n        ',
+    src: '\n            <script>\n            document.addEventListener("DOMContentLoaded", function() {\n                var $script = document.createElement("script");\n                var ip = "192.168.1.104";\n                $script.setAttribute("type", "module");\n                $script.setAttribute("src", "http://0.0.0.0:3000/@vite/client");\n                document.body.appendChild($script);\n            });\n            </script>\n        ',
   },
   dev: {
     type: 'module',

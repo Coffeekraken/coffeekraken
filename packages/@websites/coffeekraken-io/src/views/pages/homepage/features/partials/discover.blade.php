@@ -1,4 +1,4 @@
-<section id="discover-discover" class="section" s-appear>
+<section id="discover-discover" class="section">
     <div class="s-container">
 
         <div class="s-layout:12 s-gap:column:50 @mobile s-layout:1_2">

@@ -1,4 +1,4 @@
-// import { define as __SActivateFeatureDefine } from '@coffeekraken/s-activate-feature';
+import { define as __SActivateFeatureDefine } from '@coffeekraken/s-activate-feature';
 import { define as __SAppearFeatureDefine } from '@coffeekraken/s-appear-feature';
 import { define as __SClipboardCopyComponentDefine } from '@coffeekraken/s-clipboard-copy-component';
 import { define as __SFloatingFeatureDefine } from '@coffeekraken/s-floating-feature';
@@ -53,7 +53,7 @@ export default function SPackEssentials(): void {
 
     // features
     __SSugarFeatureDefine();
-    // __SActivateFeatureDefine();
+    __SActivateFeatureDefine();
     __SAppearFeatureDefine();
     __SFloatingFeatureDefine();
     __SFormValidateFeatureDefine();

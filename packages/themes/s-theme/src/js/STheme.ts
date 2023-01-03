@@ -1,7 +1,9 @@
 import __SColor from '@coffeekraken/s-color';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __clearTransmations } from '@coffeekraken/sugar/dom';
+import { __isCrawler } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
+import { __speedIndex } from '@coffeekraken/sugar/perf';
 import __fastdom from 'fastdom';
 import __SThemeBase from '../shared/SThemeBase';
 
@@ -322,8 +324,11 @@ export default class STheme extends __SThemeBase {
 
         // set the current theme in the env.SUGAR.theme property
         themeInstance = this.getCurrentTheme(finalSettings.$context);
+        // @ts-ignore
         if (!document.env) document.env = {};
+        // @ts-ignore
         if (!document.env.SUGAR) document.env.SUGAR = {};
+        // @ts-ignore
         document.env.SUGAR.theme = themeInstance;
 
         // apply the theme
@@ -352,6 +357,7 @@ export default class STheme extends __SThemeBase {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static ensureIsInited(throwError = true): boolean {
+        // @ts-ignore
         if (!document.env.SUGAR.theme) {
             if (throwError) {
                 throw new Error(
@@ -502,6 +508,23 @@ export default class STheme extends __SThemeBase {
     }
 
     /**
+     * @name      lodConfig
+     * @type      Number
+     *
+     * Get the current theme lod (level of details) config
+     *
+     * @since     2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    _lodConfig: any;
+    get lodConfig(): any {
+        if (!this._lodConfig) {
+            this._lodConfig = this.get('lod');
+        }
+        return this._lodConfig;
+    }
+
+    /**
      * @name        constructor
      * @type        Function
      * @constructor
@@ -513,8 +536,49 @@ export default class STheme extends __SThemeBase {
      */
     constructor(theme?: string, variant?: string) {
         super(theme, variant);
+
         // restore the theme
         this.restore();
+
+        // handle lod
+        if (this.lodConfig.enabled) {
+            this._initLod();
+        }
+    }
+
+    /**
+     * This method takes care of initializing the lod (level of details) features
+     * like the "botLevel", lod by speedIndex, etc...
+     */
+    private _initLod() {
+        // check if is a crawler
+        const isCrawler = __isCrawler();
+
+        // if the user does not have selected a specific lod
+        // we check which lod is the most suited for his
+        // computer using the "speedIndex" calculated value
+        if (!isCrawler && this.state.lod === undefined) {
+            const speedIndex = __speedIndex();
+            let suitedLod = 0;
+
+            // get the higher lod depending on the speedIndex
+            for (let [lod, lodObj] of Object.entries(
+                this.lodConfig.levels ?? {},
+            )) {
+                if (lodObj.speedIndex > speedIndex) {
+                    break;
+                }
+                suitedLod = parseInt(lod);
+            }
+
+            // set the suited calculated lod
+            this.setLod(suitedLod);
+        }
+
+        // check if is a crawler and that we have a botLevel config
+        if (isCrawler && this.lodConfig.botLevel !== undefined) {
+            this.setLod(this.lodConfig.botLevel);
+        }
     }
 
     /**

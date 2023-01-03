@@ -1,4 +1,4 @@
-<div s-appear in="top">
+<div>
     @include('generic.logo')
 
     <h1 class="s-typo:h3 s-mb:20">

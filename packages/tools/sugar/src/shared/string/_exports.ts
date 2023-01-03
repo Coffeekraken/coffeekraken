@@ -27,7 +27,6 @@ import __stripSourcemap from './stripSourcemap';
 import __toString from './toString';
 import __trimLines from './trimLines';
 import __uncamelize from './uncamelize';
-import __uniqid from './uniqid';
 import __unquote from './unquote';
 import __upperFirst from './upperFirst';
 import __urlCompliant from './urlCompliant';
@@ -62,7 +61,6 @@ export {
     __toString,
     __trimLines,
     __uncamelize,
-    __uniqid,
     __unquote,
     __upperFirst,
     __urlCompliant,

@@ -17,10 +17,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.__replaceTokens = exports.__decodeHtmlEntities = void 0;
+exports.__uniqid = exports.__replaceTokens = exports.__decodeHtmlEntities = void 0;
 const decodeHtmlEntities_1 = __importDefault(require("./decodeHtmlEntities"));
 exports.__decodeHtmlEntities = decodeHtmlEntities_1.default;
 const replaceTokens_1 = __importDefault(require("./replaceTokens"));
 exports.__replaceTokens = replaceTokens_1.default;
+const uniqid_1 = __importDefault(require("./uniqid"));
+exports.__uniqid = uniqid_1.default;
 __exportStar(require("../../shared/string/_exports"), exports);
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsOEVBQXdEO0FBSy9DLCtCQUxGLDRCQUFvQixDQUtFO0FBSjdCLG9FQUE4QztBQUlmLDBCQUp4Qix1QkFBZSxDQUl3QjtBQUY5QywrREFBNkMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsOEVBQXdEO0FBSy9DLCtCQUxGLDRCQUFvQixDQUtFO0FBSjdCLG9FQUE4QztBQUlmLDBCQUp4Qix1QkFBZSxDQUl3QjtBQUg5QyxzREFBZ0M7QUFHZ0IsbUJBSHpDLGdCQUFRLENBR3lDO0FBRHhELCtEQUE2QyJ9

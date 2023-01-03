@@ -1,4 +1,4 @@
-    <section id="features-why" class="section:diagonal" s-appear>
+    <section id="features-why" class="section:diagonal">
 
         <div class="s-container">
 

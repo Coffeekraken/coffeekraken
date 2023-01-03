@@ -1,5 +1,4 @@
-// @ts-nocheck
-import { rgbaToHex } from 'colors-convert';
+import __parseRgba from './parseRgba';
 
 /**
  * @name                rgba2hex
@@ -11,7 +10,7 @@ import { rgbaToHex } from 'colors-convert';
  *
  * RGBA to HEX
  *
- * @param       	{Number|Object}        	r	          	The red value between 0-255 or an object representing r, g, b, a
+ * @param       	{Number|String|Object}        	r	          	The red value between 0-255 or an object representing r, g, b, a or a string representing the rgba(...) color
  * @param       	{Number}        	g	          	The green value between 0-255
  * @param       	{Number}        	b	          	The blue value between 0-255
  * @param       	{Number}        	a	          	The alpha value between 0-100|0-1
@@ -29,24 +28,40 @@ import { rgbaToHex } from 'colors-convert';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function __rgbaToHex(r, g, b, a = 1) {
+function RGBToHex(r, g, b) {
+    r = r.toString(16);
+    g = g.toString(16);
+    b = b.toString(16);
+
+    if (r.length == 1) r = '0' + r;
+    if (g.length == 1) g = '0' + g;
+    if (b.length == 1) b = '0' + b;
+
+    return '#' + r + g + b;
+}
+
+export default function __rgbaToHex(
+    r: string | number | any,
+    g: number,
+    b: number,
+    a = 1,
+): string {
+    // string support
+    if (typeof r === 'string') {
+        if (!r.match(/^rgba?\(/)) {
+            throw new Error(
+                '<red>[rgbaToHex]</red> When passing a string to the first parameter, it MUST be formatted like: rgba?(.*)',
+            );
+        }
+        r = __parseRgba(r);
+    }
+
+    // object support
     if (typeof r === 'object') {
+        r = r.r;
         g = r.g;
         b = r.b;
-        a = r.a;
-        r = r.r;
     }
 
-    let res = rgbaToHex({
-        r,
-        g,
-        b,
-        a,
-    });
-
-    if (res.length === 9) {
-        res = res.slice(0, -2);
-    }
-
-    return res;
+    return RGBToHex(r, g, b);
 }

@@ -32,6 +32,12 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
                 return;
             }
 
+            // handle already lod scoped rules
+            if (sel.startsWith('.s-lod--')) {
+                newSelectors.push(sel);
+                return;
+            }
+
             // handle pseudo classes ":after", etc...
             const pseudoMatch = sel.match(/(\:{1,2})[a-z-]+$/);
             let pseudo = '',
@@ -124,10 +130,9 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
     const cssPropertiesObj = settings.lod.cssProperties,
         cssProperties = Object.keys(cssPropertiesObj);
 
-    for (let [levelStr, id] of Object.entries(settings.lod.levels)) {
+    for (let [levelStr, levelObj] of Object.entries(settings.lod.levels)) {
         // cast level into number
-        const level = parseInt(levelStr),
-            levelId = <string>id;
+        const level = parseInt(levelStr);
 
         // the level 0 is the base
         if (level === 0) {
@@ -157,77 +162,79 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
             continue;
         }
 
-        // process then "@sugar.lod.when" noted rules
-        root.walkRules(/^.s-lod-when--[0-9]{1,2}/, (rule) => {
-            // make sure we handle the same rule only once
-            // if (!rule._sLodWhen || rule._sLodWhen._handled) {
-            //     return;
-            // }
-            // rule._sLodWhen._handled = true;
+        // // process then "@sugar.lod.when" noted rules
+        // root.walkRules(/.s-lod-when--[0-9]{1,2}/, (rule) => {
+        //     // make sure we handle the same rule only once
+        //     // if (!rule._sLodWhen || rule._sLodWhen._handled) {
+        //     //     return;
+        //     // }
+        //     // rule._sLodWhen._handled = true;
 
-            let level = 0,
-                method = 'class';
+        //     let level = 0,
+        //         method = 'class';
 
-            try {
-                level = parseInt(
-                    rule.selector.match(/.s-lod-when--([0-9]{1,2})/)[1],
-                );
-                method = rule.selector.match(/.s-lod-method--([a-z]+)/)[1];
-            } catch (e) {}
+        //     try {
+        //         level = parseInt(
+        //             rule.selector.match(/.s-lod-when--([0-9]{1,2})/)[1],
+        //         );
+        //         method = rule.selector.match(/.s-lod-method--([a-z]+)/)[1];
+        //     } catch (e) {}
 
-            // remove the special internal s-log-when--... class
-            rule.selector = rule.selector
-                .replace(/.s-lod-when--[0-9]{1,2}/gm, '')
-                .replace(/.s-lod-method--[a-z]+/gm, '');
+        //     // remove the special internal s-log-when--... class
+        //     rule.selector = rule.selector
+        //         .replace(/.s-lod-when--[0-9]{1,2}/gm, '')
+        //         .replace(/.s-lod-method--[a-z]+/gm, '');
 
-            switch (method) {
-                case 'remove':
-                    break;
-                case 'file':
-                    break;
-                case 'class':
-                    // // get lod selectors
-                    // const lodSelectors = generateLodRuleSelectors(
-                    //     rule,
-                    //     `${level}`,
-                    //     {
-                    //         local: false,
-                    //     },
-                    // );
+        //     switch (method) {
+        //         case 'remove':
+        //             break;
+        //         case 'file':
+        //             break;
+        //         case 'class':
+        //             // // get lod selectors
+        //             // const lodSelectors = generateLodRuleSelectors(
+        //             //     rule,
+        //             //     `${level}`,
+        //             //     {
+        //             //         local: false,
+        //             //     },
+        //             // );
 
-                    // create the new class scoped rule
-                    const newRule = postcssApi.rule({
-                        selectors: rule.selectors,
-                        nodes: rule.nodes,
-                    });
-                    rule.parent.insertAfter(rule, newRule);
+        //             // create the new class scoped rule
+        //             const newRule = postcssApi.rule({
+        //                 selectors: rule.selectors.map((sel) => {
+        //                     return `.s-lod--${level} ${sel}`;
+        //                 }),
+        //                 nodes: rule.nodes,
+        //             });
+        //             rule.parent.insertAfter(rule, newRule);
 
-                    // hide rule
-                    const hideRule = postcssApi.rule({
-                        selectors: rule.selectors.map((s) => {
-                            return `${s}:not(.s-lod--${level} ${s})`;
-                        }),
-                        nodes: [
-                            postcssApi.decl({
-                                prop: 'display',
-                                value: 'none !important',
-                            }),
-                        ],
-                    });
-                    rule.parent.insertAfter(rule, hideRule);
+        //             // // hide rule
+        //             // const hideRule = postcssApi.rule({
+        //             //     selectors: rule.selectors.map((s) => {
+        //             //         return `${s}:not(.s-lod--${level} ${s})`;
+        //             //     }),
+        //             //     nodes: [
+        //             //         postcssApi.decl({
+        //             //             prop: 'display',
+        //             //             value: 'none !important',
+        //             //         }),
+        //             //     ],
+        //             // });
+        //             // rule.parent.insertAfter(rule, hideRule);
 
-                    // remove the rule itself
-                    // cause it has been replaced with the lod scoped one
-                    rule.remove();
+        //             // remove the rule itself
+        //             // cause it has been replaced with the lod scoped one
+        //             rule.remove();
 
-                    break;
-                default:
-                    throw new Error(
-                        `<red>[postcssSugarPlugin.lod]</red> The specified "<yellow>${rule._sLodWhen.method}</yellow>" lod (level of details) method does not exists... Use one of these: <yellow>remove</yellow>, <yellow>file</yellow> or <yellow>class</yellow>`,
-                    );
-                    break;
-            }
-        });
+        //             break;
+        //         default:
+        //             throw new Error(
+        //                 `<red>[postcssSugarPlugin.lod]</red> The specified "<yellow>${rule._sLodWhen.method}</yellow>" lod (level of details) method does not exists... Use one of these: <yellow>remove</yellow>, <yellow>file</yellow> or <yellow>class</yellow>`,
+        //             );
+        //             break;
+        //     }
+        // });
 
         //
         root.walkDecls(propertiesReg, (decl) => {

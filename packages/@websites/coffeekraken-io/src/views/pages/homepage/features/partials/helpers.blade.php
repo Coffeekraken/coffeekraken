@@ -1,5 +1,5 @@
 
-    <section id="features-helpers" class="section" s-appear>
+    <section id="features-helpers" class="section">
         <div class="s-container">
 
             <div class="section-top-background"></div>

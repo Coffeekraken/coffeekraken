@@ -1,4 +1,5 @@
 import __isChrome from './isChrome';
+import __isCrawler from './isCrawler';
 import __isEdge from './isEdge';
 import __isFirefox from './isFirefox';
 import __isIe from './isIe';
@@ -13,6 +14,7 @@ import __isUcBrowser from './isUcBrowser';
 export * from '../../shared/is/_exports';
 export {
     __isChrome,
+    __isCrawler,
     __isEdge,
     __isFirefox,
     __isIe,
@@ -24,4 +26,3 @@ export {
     __isTablet,
     __isUcBrowser,
 };
-

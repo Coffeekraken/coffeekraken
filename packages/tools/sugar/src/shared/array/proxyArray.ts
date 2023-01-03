@@ -1,7 +1,5 @@
 // @ts-nocheck
 
-import __uniqid from '../string/uniqid';
-
 /**
  * @name                  proxyArray
  * @namespace            shared.array
@@ -113,7 +111,7 @@ export default function __proxyArray(array) {
         enumerable: false,
         value: (methods, handlerFn) => {
             // create a watch id that we send back to the caller
-            const watchId = __uniqid();
+            const watchId = `s-${Date.now()}-${Math.round(Math.random() * 9999999999999)}`;
             // append this watch process
             watchStack[watchId] = {
                 methods,

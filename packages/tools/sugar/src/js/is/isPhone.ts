@@ -1,6 +1,5 @@
-// @ts-nocheck
+import __isMobile from './isMobile';
 
-import MobileDetect from 'mobile-detect';
 /**
  * @name        isPhone
  * @namespace            js.is
@@ -10,7 +9,6 @@ import MobileDetect from 'mobile-detect';
  *
  * Detect if is a phone device
  *
- * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
  * @return    {Boolean}    true if is a phone, false if not
  *
  * @todo      interface
@@ -23,11 +21,8 @@ import MobileDetect from 'mobile-detect';
  *   // do something cool...
  * }
  *
- * @see       https://www.npmjs.com/package/mobile-detect
+ * @see       https://blog.devgenius.io/4-ways-to-detect-mobile-browsers-in-javascript-943b66657524
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function __isPhone(ua: string = navigator.userAgent): boolean {
-    const md = new MobileDetect(ua);
-    return md.phone() !== null;
-}
+export default __isMobile;

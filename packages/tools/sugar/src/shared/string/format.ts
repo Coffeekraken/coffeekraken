@@ -27,7 +27,7 @@ import { format } from 'fecha';
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-type format =
+type tFormat =
     | 'isoDate'
     | 'isoDateTime'
     | 'isoTime'
@@ -38,7 +38,7 @@ type format =
     | 'hexa'
     | 'creditCard';
 
-function format(string: string, format: format): string {
+function format(string: string, format: tFormat): string {
     let schema = [];
 
     switch (format) {

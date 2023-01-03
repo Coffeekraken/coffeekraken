@@ -190,17 +190,23 @@
         </nav>
 
         <div class="__subnav" id="menu-mobile-doc">
-            @include('layouts.header.partials.menuMobileItem', ['menuItem' => $documentationMenu, 'class' =>
-            '__subnav-doc'])
+            <template>
+                @include('layouts.header.partials.menuMobileItem', ['menuItem' => $documentationMenu, 'class' =>
+                '__subnav-doc'])
+            </template>
         </div>
 
         <div class="__subnav" id="menu-mobile-styleguide">
-            @include('layouts.header.partials.menuMobileItem', ['menuItem' =>
-            $docmap->menu->custom->styleguide->tree->styleguide, 'class' => ''])
+            <template>
+                @include('layouts.header.partials.menuMobileItem', ['menuItem' =>
+                $docmap->menu->custom->styleguide->tree->styleguide, 'class' => ''])
+            </template>
         </div>
 
         <div class="__subnav" id="menu-mobile-api">
-            <api-nav></api-nav>
+            <template>
+                <api-nav></api-nav>
+            </template>
         </div>
 
     </nav>

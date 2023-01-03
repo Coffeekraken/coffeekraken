@@ -1,9 +1,9 @@
 // @ts-nocheck
 
-import __path from 'path';
-import __uniqid from '../../shared/string/uniqid';
-import { __packageTmpDir } from '@coffeekraken/sugar/path';
 import { __writeFileSync } from '@coffeekraken/sugar/fs';
+import { __packageTmpDir } from '@coffeekraken/sugar/path';
+import __path from 'path';
+import __uniqid from '../../node/string/uniqid';
 
 /**
  * @name        writeTmpFile

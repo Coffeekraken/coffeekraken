@@ -1,6 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __SPromise from '@coffeekraken/s-promise';
-import __uniqid from '../../shared/string/uniqid';
+import __uniqid from '../../node/string/uniqid';
 // import __SIpc from '../ipc/SIpc';
 import { __isChildProcess } from '@coffeekraken/sugar/is';
 import __keypress from 'keypress';

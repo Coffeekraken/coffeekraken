@@ -1,5 +1,5 @@
 
-    <section id="features-opensource" class="section s-scope:deep:bare " style="padding-inline: 0 !important;" s-appear delay="1000">
+    <section id="features-opensource" class="section s-scope:deep:bare " style="padding-inline: 0 !important;">
         <div class="s-container">
 
             <div class="__box s-p:50 s-mi:-50 @mobile s-mi:0" s-highlight="light" intensity="0.2" size="3000">

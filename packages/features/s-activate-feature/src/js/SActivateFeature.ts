@@ -1,6 +1,6 @@
 import __SFeature from '@coffeekraken/s-feature';
 import { __unique } from '@coffeekraken/sugar/array';
-import { __querySelectorLive } from '@coffeekraken/sugar/dom';
+import { __expandTemplate, __querySelectorLive } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SActivateFeatureInterface from './interface/SActivateFeatureInterface';
 
@@ -43,11 +43,15 @@ export interface ISActivateActivateParams {
  * @feature          Support the `history` mode
  * @feature         Allows you to `save state` to `restore them` on page load
  * @feature         Available trigger: `click`, `mouseover`, `mouseout`, `anchor` and more to come
+ * @feature         Expand the HTMLTemplateElement that stands as direct child of the dom feature itself AND of the targets
  *
  * @support          chromium
  * @support          firefox
  * @support          safari
  * @support          edge
+ *
+ * @event           s-activate.activate             Dispatched from each targets when they are activated
+ * @event           s-activate.unactivate           Dispatched from each targets when they are unactivated
  *
  * @example         html            Simple click activation
  * <a class="s-btn s-color:accent" href="#my-element" s-activate>Click me!</a>
@@ -138,8 +142,8 @@ export default class SActivateFeature extends __SFeature {
         let targets;
         if (this._hrefSelector)
             targets = Array.from(document.querySelectorAll(this._hrefSelector));
-        if (targets?.length) this._$targets = targets;
-        else this._$targets = [this.node];
+        // targets are the node itself AND the targeted ones through the "href" attribute
+        this._$targets = [this.node, ...(targets ?? [])];
 
         if (this.props.group) {
             __querySelectorLive(
@@ -356,51 +360,37 @@ export default class SActivateFeature extends __SFeature {
             this.state.active = true;
             this.props.active = true;
 
-            // add the "active" class
-            this.node.classList.add(this.props.activeClass);
-
             // loop on targets to activate them
-            if (this._$targets) {
-                // @ts-ignore
-                this._$targets.forEach(($target) => {
-                    if (this.props.activeClass) {
-                        $target.classList.add(this.props.activeClass);
-                    }
-                    if (this.props.activeAttribute) {
-                        this.componentUtils.fastdom.mutate(() => {
-                            $target.setAttribute(
-                                this.props.activeAttribute,
-                                'true',
-                            );
-                        });
-                    }
-
-                    // handle if the direct child is a template
-                    if (
-                        $target.children.length === 1 &&
-                        $target.children[0].tagName === 'TEMPLATE'
-                    ) {
-                        const $template: HTMLTemplateElement =
-                            $target.children[0];
-                        const $container = document.createElement('div');
-                        const html = [];
-                        Array.from($template.content.childNodes).forEach(
-                            ($child) => {
-                                if ($child.tagName === 'SCRIPT') {
-                                    document.head.appendChild($child);
-                                } else {
-                                    html.push(
-                                        $child.outerHTML ?? $child.textContent,
-                                    );
-                                }
-                            },
+            // @ts-ignore
+            this._$targets.forEach(($target) => {
+                if (this.props.activeClass) {
+                    $target.classList.add(this.props.activeClass);
+                }
+                if (this.props.activeAttribute) {
+                    this.componentUtils.fastdom.mutate(() => {
+                        $target.setAttribute(
+                            this.props.activeAttribute,
+                            'true',
                         );
-                        $container.innerHTML = html.join('\n');
-                        $target.appendChild($container);
-                        $template.remove();
-                    }
-                });
-            }
+                    });
+                }
+
+                // handle if a direct child is a template
+                if ($target.children.length) {
+                    Array.from($target.children).forEach(($child) => {
+                        if ($child instanceof HTMLTemplateElement) {
+                            __expandTemplate($child);
+                        }
+                    });
+                }
+
+                // activate event
+                this.node.dispatchEvent(
+                    new CustomEvent('s-activate.activate', {
+                        bubbles: true,
+                    }),
+                );
+            });
         }, this.props.activateTimeout);
     }
 
@@ -428,21 +418,22 @@ export default class SActivateFeature extends __SFeature {
             this.state.active = false;
             this.props.active = false;
 
-            // add the "active" class
-            this.node.classList.remove(this.props.activeClass);
-
             // loop on targets to unactivate them
-            if (this._$targets) {
-                // @ts-ignore
-                this._$targets.forEach(($target) => {
-                    if (this.props.activeClass) {
-                        $target.classList.remove(this.props.activeClass);
-                    }
-                    if (this.props.activeAttribute) {
-                        $target.removeAttribute(this.props.activeAttribute);
-                    }
-                });
-            }
+            // @ts-ignore
+            this._$targets.forEach(($target) => {
+                if (this.props.activeClass) {
+                    $target.classList.remove(this.props.activeClass);
+                }
+                if (this.props.activeAttribute) {
+                    $target.removeAttribute(this.props.activeAttribute);
+                }
+                // unactivate event
+                this.node.dispatchEvent(
+                    new CustomEvent('s-activate.unactivate', {
+                        bubbles: true,
+                    }),
+                );
+            });
         }, this.props.unactivateTimeout);
     }
 }

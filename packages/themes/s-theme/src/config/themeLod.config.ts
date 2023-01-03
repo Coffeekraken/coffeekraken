@@ -26,13 +26,58 @@ export default function (api) {
          */
         defaultLevel: 3,
 
+        /**
+         * @name                botLevel
+         * @namespace           config.themeLod
+         * @type                Boolean
+         * @default             false
+         *
+         * Specify the lod level to use when the request come from a bot (google, amazon, etc...)
+         *
+         * @since               2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        botLevel: 1,
+
         levels: {
-            0: 'bare',
-            1: 'low',
-            2: 'medium',
-            3: 'high',
-            4: 'extrem',
+            0: {
+                name: 'bare',
+                speedIndex: 0,
+            },
+            1: {
+                name: 'low',
+                speedIndex: 30,
+            },
+            2: {
+                name: 'medium',
+                speedIndex: 40,
+            },
+            3: {
+                name: 'high',
+                speedIndex: 50,
+            },
+            4: {
+                name: 'extrem',
+                speedIndex: 60,
+            },
         },
+
+        /**
+         * @name              defaultAction
+         * @namespace         config.themeLod
+         * @type              String
+         * @values            >,<,=,>=,<=
+         * @default           >=
+         *
+         * Specify the default action to apply if you don't specify one in your lod
+         * mixin call like ```@sugar.lod(2) {...}```. If the defaultAction is set to ">=",
+         * the above lod query will be the same as ```@sugar.lod('>=2') {...}```
+         * Note that by default it is set to ">="
+         *
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        defaultAction: '>=',
 
         get cssProperties() {
             if (api.env.platform !== 'node') return {};
@@ -52,6 +97,7 @@ export default function (api) {
                 // 'appearance': 0,
                 // 'aspect-ratio': 0,
                 // 'backface-visibility': 0,
+                'backdrop-filter': 3,
                 background: 1,
                 'background-attachment': 1,
                 'background-blend-mode': 2,

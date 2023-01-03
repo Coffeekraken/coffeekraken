@@ -2,6 +2,7 @@ import type { ISFeature } from '@coffeekraken/s-feature';
 import __SFeature from '@coffeekraken/s-feature';
 import {
     __clearTransmations,
+    __expandPleasantCssClassnamesLive,
     __preventScrollRestoration,
 } from '@coffeekraken/sugar/dom';
 import {
@@ -54,6 +55,7 @@ export interface ISSugarFeatureProps {
  * import { define } from '@coffeekraken/s-sugar-feature';
  * define();
  *
+ * @feature         Support for "pleasant css" syntax like "s-btn:outline"
  * @feature         Polyfill for container queries if needed
  * @feature        `scrolled` class applied on the body when the user has scrolled the page
  * @feature         Access to a `--vh` css variable that represent the exact viewport innerHeight and avoid having issues with mobile different viewport height values
@@ -99,7 +101,7 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
         // }
 
         // pleasant css
-        // if (this.props.pleasantCss) this._pleasantCss();
+        if (this.props.pleasantCss) this._pleasantCss();
         // scrolled
         if (this.props.scrolled) this._scrolled();
         // vhvar
@@ -143,17 +145,17 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
             }, 100);
         });
     }
-    // _pleasantCss() {
-    //     // layout related
-    //     __expandPleasantCssClassnamesLive({
-    //         afterFirst() {
-    //             setTimeout(() => {
-    //                 document.body.classList.remove('initial-loading');
-    //                 document.body.classList.remove('loading');
-    //             }, 500);
-    //         },
-    //     });
-    // }
+    _pleasantCss() {
+        // layout related
+        __expandPleasantCssClassnamesLive({
+            afterFirst() {
+                setTimeout(() => {
+                    document.body.classList.remove('initial-loading');
+                    document.body.classList.remove('loading');
+                }, 500);
+            },
+        });
+    }
     _scrolled() {
         document.addEventListener('scroll', (e) => {
             if (window.scrollY >= this.props.scrolledDelta) {

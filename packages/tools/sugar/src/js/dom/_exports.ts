@@ -18,6 +18,7 @@ export * from './query/_exports';
 export * from './scroll/_exports';
 export * from './slide/_exports';
 export * from './style/_exports';
+export * from './template/_exports';
 export * from './touch/_exports';
 export * from './transmation/_exports';
 export * from './traverse/_exports';

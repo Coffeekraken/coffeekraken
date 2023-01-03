@@ -1,5 +1,5 @@
 // @ts-nocheck
-import __uniqid from '../../../shared/string/uniqid';
+import __uniqid from '../../../js/string/uniqid';
 
 /**
  * @name            injectStyle

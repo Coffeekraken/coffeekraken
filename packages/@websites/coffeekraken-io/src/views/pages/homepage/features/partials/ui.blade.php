@@ -1,4 +1,4 @@
-    <section id="features-ui" class="section:diagonal" s-appear>
+    <section id="features-ui" class="section:diagonal">
         <div class="s-container">
 
             <h3 class="s-typo:h2 s-mbe:30 @mobile s-typo:h4">Full premium <span class="s-gradient:text:accent">UI<br>Components</span>

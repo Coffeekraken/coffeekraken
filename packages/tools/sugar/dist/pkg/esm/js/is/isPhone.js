@@ -1,5 +1,4 @@
-// @ts-nocheck
-import MobileDetect from 'mobile-detect';
+import __isMobile from './isMobile';
 /**
  * @name        isPhone
  * @namespace            js.is
@@ -9,7 +8,6 @@ import MobileDetect from 'mobile-detect';
  *
  * Detect if is a phone device
  *
- * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
  * @return    {Boolean}    true if is a phone, false if not
  *
  * @todo      interface
@@ -22,12 +20,9 @@ import MobileDetect from 'mobile-detect';
  *   // do something cool...
  * }
  *
- * @see       https://www.npmjs.com/package/mobile-detect
+ * @see       https://blog.devgenius.io/4-ways-to-detect-mobile-browsers-in-javascript-943b66657524
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function __isPhone(ua = navigator.userAgent) {
-    const md = new MobileDetect(ua);
-    return md.phone() !== null;
-}
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFlBQVksTUFBTSxlQUFlLENBQUM7QUFDekM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F5Qkc7QUFDSCxNQUFNLENBQUMsT0FBTyxVQUFVLFNBQVMsQ0FBQyxLQUFhLFNBQVMsQ0FBQyxTQUFTO0lBQzlELE1BQU0sRUFBRSxHQUFHLElBQUksWUFBWSxDQUFDLEVBQUUsQ0FBQyxDQUFDO0lBQ2hDLE9BQU8sRUFBRSxDQUFDLEtBQUssRUFBRSxLQUFLLElBQUksQ0FBQztBQUMvQixDQUFDIn0=
+export default __isMobile;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sVUFBVSxNQUFNLFlBQVksQ0FBQztBQUVwQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsZUFBZSxVQUFVLENBQUMifQ==

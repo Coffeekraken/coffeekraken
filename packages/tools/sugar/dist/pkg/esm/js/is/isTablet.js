@@ -1,5 +1,4 @@
 // @ts-nocheck
-import MobileDetect from 'mobile-detect';
 /**
  * @name        isTablet
  * @namespace            js.is
@@ -9,7 +8,6 @@ import MobileDetect from 'mobile-detect';
  *
  * Detect if is a tablet device
  *
- * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test
  * @return    {Boolean}    true if is a tablet, false if not
  *
  * @todo      interface
@@ -22,12 +20,29 @@ import MobileDetect from 'mobile-detect';
  *   // do something cool...
  * }
  *
- * @see       https://www.npmjs.com/package/mobile-detect
+ * @see       https://blog.devgenius.io/4-ways-to-detect-mobile-browsers-in-javascript-943b66657524
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function __isTablet(ua = navigator.userAgent) {
-    const md = new MobileDetect(ua);
-    return md.tablet() !== null;
+export default function __isTablet() {
+    var _a, _b, _c, _d, _e, _f, _g, _h;
+    // touch event
+    if (!('ontouchstart' in document.documentElement))
+        return false;
+    // orientation
+    if (window.orientation === undefined)
+        return false;
+    // match media
+    const minWidth = (_d = (_c = (_b = (_a = document.env) === null || _a === void 0 ? void 0 : _a.SUGAR) === null || _b === void 0 ? void 0 : _b.theme) === null || _c === void 0 ? void 0 : _c.get('media.queries.tablet.minWidth')) !== null && _d !== void 0 ? _d : 640, maxWidth = 
+    // @ts-ignore
+    (_h = (_g = (_f = (_e = document.env) === null || _e === void 0 ? void 0 : _e.SUGAR) === null || _f === void 0 ? void 0 : _f.theme) === null || _g === void 0 ? void 0 : _g.get('media.queries.tablet.maxWidth')) !== null && _h !== void 0 ? _h : 1279;
+    if (!window.matchMedia(`only screen and (min-width: ${minWidth}px) and (max-width: ${maxWidth}px)`).matches) {
+        return false;
+    }
+    // limited accuracy
+    if (!window.matchMedia('(pointer: coarse)').matches)
+        return false;
+    // it seems that it's a tablet
+    return true;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFlBQVksTUFBTSxlQUFlLENBQUM7QUFDekM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F5Qkc7QUFDSCxNQUFNLENBQUMsT0FBTyxVQUFVLFVBQVUsQ0FBQyxLQUFhLFNBQVMsQ0FBQyxTQUFTO0lBQy9ELE1BQU0sRUFBRSxHQUFHLElBQUksWUFBWSxDQUFDLEVBQUUsQ0FBQyxDQUFDO0lBQ2hDLE9BQU8sRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLElBQUksQ0FBQztBQUNoQyxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSxVQUFVOztJQUM5QixjQUFjO0lBQ2QsSUFBSSxDQUFDLENBQUMsY0FBYyxJQUFJLFFBQVEsQ0FBQyxlQUFlLENBQUM7UUFBRSxPQUFPLEtBQUssQ0FBQztJQUNoRSxjQUFjO0lBQ2QsSUFBSSxNQUFNLENBQUMsV0FBVyxLQUFLLFNBQVM7UUFBRSxPQUFPLEtBQUssQ0FBQztJQUNuRCxjQUFjO0lBQ2QsTUFBTSxRQUFRLEdBQ04sTUFBQSxNQUFBLE1BQUEsTUFBQSxRQUFRLENBQUMsR0FBRywwQ0FBRSxLQUFLLDBDQUFFLEtBQUssMENBQUUsR0FBRyxDQUFDLCtCQUErQixDQUFDLG1DQUNoRSxHQUFHLEVBQ1AsUUFBUTtJQUNKLGFBQWE7SUFDYixNQUFBLE1BQUEsTUFBQSxNQUFBLFFBQVEsQ0FBQyxHQUFHLDBDQUFFLEtBQUssMENBQUUsS0FBSywwQ0FBRSxHQUFHLENBQUMsK0JBQStCLENBQUMsbUNBQ2hFLElBQUksQ0FBQztJQUNiLElBQ0ksQ0FBQyxNQUFNLENBQUMsVUFBVSxDQUNkLCtCQUErQixRQUFRLHVCQUF1QixRQUFRLEtBQUssQ0FDOUUsQ0FBQyxPQUFPLEVBQ1g7UUFDRSxPQUFPLEtBQUssQ0FBQztLQUNoQjtJQUNELG1CQUFtQjtJQUNuQixJQUFJLENBQUMsTUFBTSxDQUFDLFVBQVUsQ0FBQyxtQkFBbUIsQ0FBQyxDQUFDLE9BQU87UUFBRSxPQUFPLEtBQUssQ0FBQztJQUNsRSw4QkFBOEI7SUFDOUIsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQyJ9

@@ -89,13 +89,13 @@ export default class CkSettings extends __SLitComponent {
                   class="s-color:accent"
                   id="setting-lod"
                   min="0"
-                  max="4"
-                  value=${__STheme.lod}
-                  values='["Bare","Low","Medium","High","Extrem"]'
+                  max="3"
+                  value=${__STheme.lod - 1}
+                  values='["Low","Medium","High","Extrem"]'
                   tooltip
                   step="1"
                   @change=${(e) => {
-                    this._setLod(e.target.value);
+                    this._setLod(parseInt(e.target.value) + 1);
                   }}
                 >
                 </s-range>

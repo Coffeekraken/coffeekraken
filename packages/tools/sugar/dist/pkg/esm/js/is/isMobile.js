@@ -1,5 +1,3 @@
-// @ts-nocheck
-import MobileDetect from 'mobile-detect';
 /**
  * @name        isMobile
  * @namespace            js.is
@@ -9,8 +7,9 @@ import MobileDetect from 'mobile-detect';
  *
  * Detect if is a mobile device (phone or tablet)
  *
- * @param       {String}        [ua=navigator.userAgent]         The user agent on which to make the test *
  * @return    {Boolean}    true if is a mobile, false if not
+ *
+ * @feature         Take the theme.media.queries.mobile.maxWidth in consideration if accessible
  *
  * @todo      interface
  * @todo      doc
@@ -22,12 +21,29 @@ import MobileDetect from 'mobile-detect';
  *   // do something cool...
  * }
  *
- * @see       https://www.npmjs.com/package/mobile-detect
+ * @see       https://blog.devgenius.io/4-ways-to-detect-mobile-browsers-in-javascript-943b66657524
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function __isMobile(ua = navigator.userAgent) {
-    const md = new MobileDetect(ua);
-    return md.mobile() !== null;
+export default function __isMobile() {
+    var _a, _b, _c, _d;
+    // touch event
+    if (!('ontouchstart' in document.documentElement))
+        return false;
+    // orientation
+    if (window.orientation === undefined)
+        return false;
+    // match media
+    const maxWidth = 
+    // @ts-ignore
+    (_d = (_c = (_b = (_a = document.env) === null || _a === void 0 ? void 0 : _a.SUGAR) === null || _b === void 0 ? void 0 : _b.theme) === null || _c === void 0 ? void 0 : _c.get('media.queries.mobile.maxWidth')) !== null && _d !== void 0 ? _d : 639;
+    if (!window.matchMedia(`only screen and (max-width: ${maxWidth}px)`).matches) {
+        return false;
+    }
+    // limited accuracy
+    if (!window.matchMedia('(pointer: coarse)').matches)
+        return false;
+    // it seems that it's a mobile
+    return true;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFlBQVksTUFBTSxlQUFlLENBQUM7QUFDekM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F5Qkc7QUFDSCxNQUFNLENBQUMsT0FBTyxVQUFVLFVBQVUsQ0FBQyxLQUFhLFNBQVMsQ0FBQyxTQUFTO0lBQy9ELE1BQU0sRUFBRSxHQUFHLElBQUksWUFBWSxDQUFDLEVBQUUsQ0FBQyxDQUFDO0lBQ2hDLE9BQU8sRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLElBQUksQ0FBQztBQUNoQyxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTBCRztBQUNILE1BQU0sQ0FBQyxPQUFPLFVBQVUsVUFBVTs7SUFDOUIsY0FBYztJQUNkLElBQUksQ0FBQyxDQUFDLGNBQWMsSUFBSSxRQUFRLENBQUMsZUFBZSxDQUFDO1FBQUUsT0FBTyxLQUFLLENBQUM7SUFDaEUsY0FBYztJQUNkLElBQUksTUFBTSxDQUFDLFdBQVcsS0FBSyxTQUFTO1FBQUUsT0FBTyxLQUFLLENBQUM7SUFDbkQsY0FBYztJQUNkLE1BQU0sUUFBUTtJQUNWLGFBQWE7SUFDYixNQUFBLE1BQUEsTUFBQSxNQUFBLFFBQVEsQ0FBQyxHQUFHLDBDQUFFLEtBQUssMENBQUUsS0FBSywwQ0FBRSxHQUFHLENBQUMsK0JBQStCLENBQUMsbUNBQUksR0FBRyxDQUFDO0lBQzVFLElBQ0ksQ0FBQyxNQUFNLENBQUMsVUFBVSxDQUFDLCtCQUErQixRQUFRLEtBQUssQ0FBQyxDQUFDLE9BQU8sRUFDMUU7UUFDRSxPQUFPLEtBQUssQ0FBQztLQUNoQjtJQUNELG1CQUFtQjtJQUNuQixJQUFJLENBQUMsTUFBTSxDQUFDLFVBQVUsQ0FBQyxtQkFBbUIsQ0FBQyxDQUFDLE9BQU87UUFBRSxPQUFPLEtBQUssQ0FBQztJQUNsRSw4QkFBOEI7SUFDOUIsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQyJ9

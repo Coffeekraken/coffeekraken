@@ -18,15 +18,15 @@ import { query } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import __SCodeExampleComponentInterface from './interface/SCodeExampleComponentInterface';
 
+// // // @ts-ignore
+// import __prettier from 'prettier/esm/standalone.mjs';
 // // @ts-ignore
-import __prettier from 'prettier/esm/standalone.mjs';
-// @ts-ignore
-import __prettierJs from 'prettier/esm/parser-babel.mjs';
-// @ts-ignore
-import __prettierHtml from 'prettier/esm/parser-html.mjs';
-// @ts-ignore
-import __prettierPhp from '@prettier/plugin-php/standalone';
-import __prettierCss from 'prettier/esm/parser-postcss.mjs';
+// import __prettierJs from 'prettier/esm/parser-babel.mjs';
+// // @ts-ignore
+// import __prettierHtml from 'prettier/esm/parser-html.mjs';
+// // @ts-ignore
+// import __prettierPhp from '@prettier/plugin-php/standalone';
+// import __prettierCss from 'prettier/esm/parser-postcss.mjs';
 
 import __define from './define';
 
@@ -193,15 +193,15 @@ export default class SCodeExample extends __SLitComponent {
             );
             let formatedCode = rawCode;
             try {
-                formatedCode = __prettier.format(rawCode, {
-                    parser,
-                    plugins: [
-                        __prettierCss,
-                        __prettierHtml,
-                        __prettierJs,
-                        __prettierPhp,
-                    ],
-                });
+                // formatedCode = __prettier.format(rawCode, {
+                //     parser,
+                //     plugins: [
+                //         __prettierCss,
+                //         __prettierHtml,
+                //         __prettierJs,
+                //         __prettierPhp,
+                //     ],
+                // });
             } catch (e) {}
             this.props.items = [
                 ...this.props.items,

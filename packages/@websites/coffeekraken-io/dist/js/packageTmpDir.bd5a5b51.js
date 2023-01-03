@@ -1,4 +1,4 @@
-import { S as SSugarConfig } from "./index.a1692393.js";
+import { S as SSugarConfig } from "./index.15bd0725.js";
 function __packageTmpDir() {
   return SSugarConfig.get("storage.package.tmpDir");
 }

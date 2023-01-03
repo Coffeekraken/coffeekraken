@@ -1,8 +1,8 @@
 // @ts-nocheck
 
 import { __emptyNode, __injectStyle } from '@coffeekraken/sugar/dom';
+import __uniqid from '../../../js/string/uniqid';
 import __convertTime from '../../../shared/datetime/convertTime';
-import __uniqid from '../../../shared/string/uniqid';
 
 /**
  * @name            animatedInnerHtml

@@ -30,7 +30,7 @@ export default (config: Config = {}): PluginOption => ({
         // console.log('___UP', api);
 
         // handle only css reload
-        if (!api.file.match(/\.css$/)) {
+        if (!api.file.match(/\.css$/) || !api.file.match(/\/src/)) {
             return;
         }
 

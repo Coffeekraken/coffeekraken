@@ -120,9 +120,9 @@
     }
 
     display: none;
-    @sugar.lod (4) {
+    /* @sugar.lod (4) {
       display: block;
-    }
+    } */
   }
 
   .__tentacule-01 {

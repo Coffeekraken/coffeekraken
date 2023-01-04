@@ -1,4 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
+import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           lod
@@ -33,8 +34,8 @@ class postcssSugarPluginLodMixinInterface extends __SInterface {
             },
             method: {
                 type: 'String',
-                values: ['remove', 'file', 'class'],
-                default: 'class',
+                values: ['file', 'class'],
+                default: __STheme.get('lod.defaultMethod'),
             },
         };
     }
@@ -43,7 +44,7 @@ export { postcssSugarPluginLodMixinInterface as interface };
 
 export interface postcssSugarPluginLodMixinParams {
     level: number | string;
-    method: 'remove' | 'file' | 'class';
+    method: 'file' | 'class';
 }
 export default function ({
     params,
@@ -58,7 +59,7 @@ export default function ({
 }) {
     const finalParams = <postcssSugarPluginLodMixinParams>{
         level: 0,
-        method: 'class',
+        method: 'file',
         ...(params ?? {}),
     };
 
@@ -105,7 +106,11 @@ export default function ({
     const newSelectors: string[] = [];
 
     levels.forEach((lod) => {
-        newSelectors.push(`.s-lod--${lod} &`);
+        let cls = `.s-lod--${lod}`;
+        if (finalParams.method === 'file') {
+            cls += `.s-lod-method--${finalParams.method}`;
+        }
+        newSelectors.push(`${cls} &`);
     });
 
     const newRule = postcssApi.rule({

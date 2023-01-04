@@ -151,9 +151,9 @@ export default class SFrontendServer extends __SClass {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe, on }) => {
                 // enable compression if prod
-                if (finalParams.prod || __SEnv.is('production')) {
-                    this._express.use(__compression());
-                }
+                // if (finalParams.prod || __SEnv.is('production')) {
+                this._express.use(__compression());
+                // }
 
                 // save metas
                 this.serverMetas = {

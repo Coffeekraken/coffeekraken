@@ -1,5 +1,7 @@
 import __SPackEssentials from '@coffeekraken/s-pack-essentials';
 
+import __STheme from '@coffeekraken/s-theme';
+
 import { define as __SCodeExampleComponentDefine } from '@coffeekraken/s-code-example-component';
 import { define as __SColorPickerComponentDefine } from '@coffeekraken/s-color-picker-component';
 // import __SDashboard from '@coffeekraken/s-dashboard';
@@ -37,7 +39,6 @@ import {
 } from '@coffeekraken/sugar/dom';
 
 // Libs
-import __STheme from '@coffeekraken/s-theme';
 
 // Views specific
 // @ts-ignore
@@ -105,6 +106,10 @@ if (import.meta.hot) {
   // init theme
   __STheme.init({
     variant: 'dark',
+    lod: {
+      enabled: true,
+      level: 3,
+    },
   });
 
   //   console.log(__isMobile());

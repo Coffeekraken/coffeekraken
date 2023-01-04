@@ -32,6 +32,8 @@ let loadedPromise,
     compileFileTimeout,
     cacheBustedWarningDisplayed = false;
 
+const sharedData = {};
+
 export interface IPostcssSugarPluginSettings {
     outDir: string;
     cache?: boolean;
@@ -222,9 +224,6 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
         atRule.remove();
     }
 
-    const sharedData = {
-        noScopes: [],
-    };
     const postProcessorsRegisteredFn: Function[] = [];
 
     async function _loadFolder(folderPath, type: 'mixins' | 'functions') {
@@ -393,7 +392,8 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                 });
                 value = value.replace(sugarStatement, result);
             } catch (e) {
-                console.error(e.message);
+                console.log(e.message);
+                throw e;
             }
         }
         return value;
@@ -650,6 +650,12 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
     const pluginObj = {
         postcssPlugin: 'sugar',
         async Once(root) {
+            // save the rootFilePath in shared data
+            // for use in mixins, postcss, etc...
+            if (!sharedData.rootFilePath) {
+                sharedData.rootFilePath = root.source?.input?.file;
+            }
+
             bench = new __SBench(
                 `postcssSugarPlugin.${root.source.input.file
                     ?.replace(__packageRootDir(), '')
@@ -677,29 +683,29 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                 );
             }, 3000);
 
-            if (
-                root.source.input.file.match(/\.css(\?.*)?$/)
-                // !root.source.input.file.match(/index\.css$/)
-            ) {
-                const cachedDataStr = getCachedData(root.source.input.file);
-                if (cachedDataStr) {
-                    if (settings.verbose) {
-                        console.log(
-                            `<green>[cache]</green> Data resolved from cache for file "<cyan>${__path
-                                .relative(
-                                    __packageRootDir(),
-                                    root.source.input.file,
-                                )
-                                .replace(/\.\.\//gm, '')}</cyan>"`,
-                        );
-                    }
-                    fromCache = true;
-                    const ast = __postcss.parse(cachedDataStr, {
-                        from: root.source.input.file,
-                    });
-                    root.nodes = ast.nodes;
-                }
-            }
+            // if (
+            //     root.source.input.file.match(/\.css(\?.*)?$/)
+            //     // !root.source.input.file.match(/index\.css$/)
+            // ) {
+            //     const cachedDataStr = getCachedData(root.source.input.file);
+            //     if (cachedDataStr) {
+            //         if (settings.verbose) {
+            //             console.log(
+            //                 `<green>[cache]</green> Data resolved from cache for file "<cyan>${__path
+            //                     .relative(
+            //                         __packageRootDir(),
+            //                         root.source.input.file,
+            //                     )
+            //                     .replace(/\.\.\//gm, '')}</cyan>"`,
+            //             );
+            //         }
+            //         fromCache = true;
+            //         const ast = __postcss.parse(cachedDataStr, {
+            //             from: root.source.input.file,
+            //         });
+            //         root.nodes = ast.nodes;
+            //     }
+            // }
         },
 
         async OnceExit(root) {

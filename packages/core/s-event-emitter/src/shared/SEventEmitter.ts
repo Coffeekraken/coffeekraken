@@ -5,7 +5,7 @@ import {
     __isChildProcess,
     __isClass,
     __isNode,
-    __isPlainObject
+    __isPlainObject,
 } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __getColorFor from '@coffeekraken/sugar/shared/dev/color/getColorFor';
@@ -364,17 +364,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
      *
      * Constructor
      *
-     * @param         {Function}          executor          The executor function that will receive the resolve and reject ones...
      * @param         {Object}            [settings={}]     An object of settings for this particular SEventEmitter instance. Here's the available settings:
-     *
-     * @example       js
-     * const promise = new SEventEmitter(({ resolve, reject, emit }) => {
-     *    // do something...
-     * }).then(value => {
-     *    // do something...
-     * }).finally(value => {
-     *    // do something...
-     * });
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */

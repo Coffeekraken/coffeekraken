@@ -1,0 +1,82 @@
+/* header banner */
+.flrmnt-header-banner {
+    display: none;
+}
+.flrmnt-header-banner .img-responsive {
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}
+.flrmnt-header-banner .fusion-column-wrapper {
+    border: none !important;
+}
+
+/* footer */
+.flrmt-pre-footer .img-responsive {
+    width: 200px;
+    height: 200px;
+}
+.flrmt-pre-footer * {
+    text-align: left;
+}
+.flrmt-pre-footer .fusion-layout-column:first-child,
+.flrmt-pre-footer .fusion-layout-column:nth-child(2) {
+    align-self: center !important;
+}
+@media screen and (max-width: 630px) {
+    .flrmt-pre-footer .fusion-layout-column:first-child,
+    .flrmt-pre-footer .fusion-layout-column:nth-child(2) {
+        display: none !important;
+    }
+}
+.flrmt-pre-footer i[class^="fa"] {
+    font-size: 20px;
+    margin-inline-end: 10px;
+}
+.flrmt-pre-footer .subtitle {
+    font-weight: bold;
+}
+.flrmt-pre-footer .fusion-text a {
+    color: white;
+}
+
+/* entretien modal */
+.fusion-modal.demande-entretien .modal-header {
+    padding: 50px;
+    padding-bottom: 0;
+    border: none;
+}
+.fusion-modal.demande-entretien .modal-dialog {
+    width: 90vw;
+    max-width: 1000px;
+}
+@media screen and (max-width: 630px) {
+    .fusion-modal.demande-entretien .modal-dialog {
+        width: auto;
+    }
+}
+.fusion-modal.demande-entretien .fusion-modal-content .modal-body {
+    padding: 50px;
+}
+.fusion-modal.demande-entretien .fusion-modal-content .modal-footer {
+    display: none;
+}
+.fusion-modal.demande-entretien .modal-title {
+    color: white;
+}
+.fusion-modal.demande-entretien .modal-dialog::-webkit-scrollbar {
+    width: 5px;
+}
+.fusion-modal.demande-entretien .modal-dialog::-webkit-scrollbar-track {
+    background-color: #233B89;
+}
+.fusion-modal.demande-entretien .modal-dialog::-webkit-scrollbar-thumb {
+
+    background-color: rgba(255,255,255,0.6);
+}
+.fusion-modal.demande-entretien .hr-wrap {
+    display: none;
+}
+.fusion-modal.demande-entretien .nf-form-content {
+    padding: 0;
+    max-width: none;
+}

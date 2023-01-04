@@ -66,6 +66,18 @@ class colorSchemaNameInterface extends __SInterface {
     }
 }
 
+export interface ISThemeLodSettings {
+    enabled: boolean;
+    level: number;
+    botLevel: number;
+    method: 'class' | 'file';
+    stylesheet: string | HTMLLinkElement;
+}
+
+export interface ISThemeSettings {
+    lod: Partial<ISThemeLodSettings>;
+}
+
 export interface ISThemeDefaultStaticSettings {
     theme: string;
     variant: string;
@@ -454,13 +466,14 @@ export default class SThemeBase extends __SEventEmitter {
     static _instanciatedThemes: Record<string, SThemeBase> = {};
     static _firstGetedThemeSettings: any;
     static getTheme(
-        settings: Partial<ISThemeDefaultStaticSettings> = {},
+        theme: string,
+        variant: string,
+        settings?: Partial<ISThemeSettings>,
     ): SThemeBase {
         const themesNames = Object.keys(__SSugarConfig.get('theme.themes'));
 
-        let theme = settings.theme ?? this._firstGetedThemeSettings?.theme,
-            variant =
-                settings.variant ?? this._firstGetedThemeSettings?.variant;
+        theme = theme ?? this._firstGetedThemeSettings?.theme;
+        variant = variant ?? this._firstGetedThemeSettings?.variant;
 
         if (!theme) {
             theme = __SSugarConfig.get('theme.theme');
@@ -478,6 +491,7 @@ export default class SThemeBase extends __SEventEmitter {
             this._firstGetedThemeSettings = {
                 theme,
                 variant,
+                settings,
             };
         }
 
@@ -489,6 +503,7 @@ export default class SThemeBase extends __SEventEmitter {
             this._instanciatedThemes[`${theme}-${variant}`] = new this(
                 theme,
                 variant,
+                settings,
             );
         }
         return this._instanciatedThemes[`${theme}-${variant}`];
@@ -534,7 +549,7 @@ export default class SThemeBase extends __SEventEmitter {
         settings?: Partial<ISThemeDefaultStaticSettings>,
     ): any {
         // get the theme instance
-        const theme = this.getTheme(settings);
+        const theme = this.getTheme(settings?.theme, settings?.variant);
 
         // resolve font size
         return theme.resolveFontSize(size);
@@ -558,7 +573,7 @@ export default class SThemeBase extends __SEventEmitter {
         settings?: Partial<ISThemeDefaultStaticSettings>,
     ): any {
         // get the theme instance
-        const theme = this.getTheme(settings);
+        const theme = this.getTheme(settings?.theme, settings?.variant);
 
         // resolve font size
         return theme.resolvePadding(size);
@@ -582,7 +597,7 @@ export default class SThemeBase extends __SEventEmitter {
         settings?: Partial<ISThemeDefaultStaticSettings>,
     ): any {
         // get the theme instance
-        const theme = this.getTheme(settings);
+        const theme = this.getTheme(settings?.theme, settings?.variant);
 
         // resolve font size
         return theme.resolveMargin(size);
@@ -606,7 +621,7 @@ export default class SThemeBase extends __SEventEmitter {
         settings?: Partial<ISThemeDefaultStaticSettings>,
     ): any {
         // get the theme instance
-        const theme = this.getTheme(settings);
+        const theme = this.getTheme(settings?.theme, settings?.variant);
 
         // resolve font size
         return theme.resolveBorderRadius(size);
@@ -630,7 +645,7 @@ export default class SThemeBase extends __SEventEmitter {
         settings?: Partial<ISThemeDefaultStaticSettings>,
     ): any {
         // get the theme instance
-        const theme = this.getTheme(settings);
+        const theme = this.getTheme(settings?.theme, settings?.variant);
 
         // resolve font size
         return theme.resolveBorderWidth(size);
@@ -663,10 +678,7 @@ export default class SThemeBase extends __SEventEmitter {
         modifier?: string,
         settings?: Partial<ISThemeResolveColorSettings>,
     ): string {
-        const theme = this.getTheme({
-            theme: settings.theme,
-            variant: settings.variant,
-        });
+        const theme = this.getTheme(settings?.theme, settings?.variant);
         return theme.resolveColor(color, schema, modifier, settings);
     }
 
@@ -693,7 +705,7 @@ export default class SThemeBase extends __SEventEmitter {
         settings?: Partial<ISThemeDefaultStaticSettings>,
     ): string {
         // get the theme instance
-        const theme = this.getTheme(settings);
+        const theme = this.getTheme(settings?.theme, settings?.variant);
 
         // proxy non existint dotPath
         dotPath = theme.proxyNonExistingUiDotpath(dotPath);
@@ -1224,126 +1236,134 @@ export default class SThemeBase extends __SEventEmitter {
             let fromVariable = `--s-theme-color-${fromColorName}`,
                 toVariable = `--s-theme-color-${toColorName}`;
 
-            this.getTheme(settings).loopOnColors((colorObj) => {
-                if (colorObj.name === toColorName) {
-                    if (toColorVariant) {
-                        if (colorObj.schema === toColorVariant) {
-                            result.vars.push(
-                                `${__compressVarName(
-                                    `${fromVariable}-saturation-offset`,
-                                )}: var(${__compressVarName(
+            this.getTheme(settings?.theme, settings?.variant).loopOnColors(
+                (colorObj) => {
+                    if (colorObj.name === toColorName) {
+                        if (toColorVariant) {
+                            if (colorObj.schema === toColorVariant) {
+                                result.vars.push(
+                                    `${__compressVarName(
+                                        `${fromVariable}-saturation-offset`,
+                                    )}: var(${__compressVarName(
+                                        `${toVariable}-${colorObj.schema}-saturation-offset`,
+                                    )}, 0);`,
+                                );
+                                result.properties[
+                                    `${__compressVarName(
+                                        `${fromVariable}-saturation-offset`,
+                                    )}`
+                                ] = `var(${__compressVarName(
                                     `${toVariable}-${colorObj.schema}-saturation-offset`,
-                                )}, 0);`,
-                            );
-                            result.properties[
-                                `${__compressVarName(
-                                    `${fromVariable}-saturation-offset`,
-                                )}`
-                            ] = `var(${__compressVarName(
-                                `${toVariable}-${colorObj.schema}-saturation-offset`,
-                            )}, 0)`;
-                            result.vars.push(
-                                `${__compressVarName(
-                                    `${fromVariable}-lightness-offset`,
-                                )}: var(${__compressVarName(
+                                )}, 0)`;
+                                result.vars.push(
+                                    `${__compressVarName(
+                                        `${fromVariable}-lightness-offset`,
+                                    )}: var(${__compressVarName(
+                                        `${toVariable}-${colorObj.schema}-lightness-offset`,
+                                    )}, 0);`,
+                                );
+                                result.properties[
+                                    `${__compressVarName(
+                                        `${fromVariable}-lightness-offset`,
+                                    )}`
+                                ] = `var(${__compressVarName(
                                     `${toVariable}-${colorObj.schema}-lightness-offset`,
-                                )}, 0);`,
-                            );
-                            result.properties[
-                                `${__compressVarName(
-                                    `${fromVariable}-lightness-offset`,
-                                )}`
-                            ] = `var(${__compressVarName(
-                                `${toVariable}-${colorObj.schema}-lightness-offset`,
-                            )}, 0)`;
-                            result.vars.push(
-                                `${__compressVarName(
-                                    `${fromVariable}-a`,
-                                )}: var(${__compressVarName(
+                                )}, 0)`;
+                                result.vars.push(
+                                    `${__compressVarName(
+                                        `${fromVariable}-a`,
+                                    )}: var(${__compressVarName(
+                                        `${toVariable}-a`,
+                                    )}, 1);`,
+                                );
+                                result.properties[
+                                    `${__compressVarName(`${fromVariable}-a`)}`
+                                ] = `var(${__compressVarName(
                                     `${toVariable}-a`,
-                                )}, 1);`,
-                            );
-                            result.properties[
-                                `${__compressVarName(`${fromVariable}-a`)}`
-                            ] = `var(${__compressVarName(
-                                `${toVariable}-a`,
-                            )}, 1)`;
-                        }
-                    } else {
-                        if (!colorObj.schema && colorObj.value.color) {
-                            result.vars.push(
-                                `${__compressVarName(
-                                    `${fromVariable}-h`,
-                                )}: var(${__compressVarName(
-                                    `${toVariable}-h`,
-                                )});`,
-                            );
-                            result.properties[
-                                `${__compressVarName(`${fromVariable}-h`)}`
-                            ] = `var(${__compressVarName(`${toVariable}-h`)})`;
-                            result.vars.push(
-                                `${__compressVarName(
-                                    `${fromVariable}-s`,
-                                )}: var(${__compressVarName(
-                                    `${toVariable}-s`,
-                                )});`,
-                            );
-                            result.properties[
-                                `${__compressVarName(`${fromVariable}-s`)}`
-                            ] = `var(${__compressVarName(`${toVariable}-s`)})`;
-                            result.vars.push(
-                                `${__compressVarName(
-                                    `${fromVariable}-l`,
-                                )}: var(${__compressVarName(
-                                    `${toVariable}-l`,
-                                )});`,
-                            );
-                            result.properties[
-                                `${__compressVarName(`${fromVariable}-l`)}`
-                            ] = `var(${__compressVarName(`${toVariable}-l`)})`;
+                                )}, 1)`;
+                            }
                         } else {
-                            result.vars.push(
-                                `${__compressVarName(
-                                    `${fromVariable}-${colorObj.schema}-saturation-offset`,
-                                )}: var(${__compressVarName(
+                            if (!colorObj.schema && colorObj.value.color) {
+                                result.vars.push(
+                                    `${__compressVarName(
+                                        `${fromVariable}-h`,
+                                    )}: var(${__compressVarName(
+                                        `${toVariable}-h`,
+                                    )});`,
+                                );
+                                result.properties[
+                                    `${__compressVarName(`${fromVariable}-h`)}`
+                                ] = `var(${__compressVarName(
+                                    `${toVariable}-h`,
+                                )})`;
+                                result.vars.push(
+                                    `${__compressVarName(
+                                        `${fromVariable}-s`,
+                                    )}: var(${__compressVarName(
+                                        `${toVariable}-s`,
+                                    )});`,
+                                );
+                                result.properties[
+                                    `${__compressVarName(`${fromVariable}-s`)}`
+                                ] = `var(${__compressVarName(
+                                    `${toVariable}-s`,
+                                )})`;
+                                result.vars.push(
+                                    `${__compressVarName(
+                                        `${fromVariable}-l`,
+                                    )}: var(${__compressVarName(
+                                        `${toVariable}-l`,
+                                    )});`,
+                                );
+                                result.properties[
+                                    `${__compressVarName(`${fromVariable}-l`)}`
+                                ] = `var(${__compressVarName(
+                                    `${toVariable}-l`,
+                                )})`;
+                            } else {
+                                result.vars.push(
+                                    `${__compressVarName(
+                                        `${fromVariable}-${colorObj.schema}-saturation-offset`,
+                                    )}: var(${__compressVarName(
+                                        `${toVariable}-${colorObj.schema}-saturation-offset`,
+                                    )}, 0);`,
+                                );
+                                result.properties[
+                                    `${__compressVarName(
+                                        `${fromVariable}-${colorObj.schema}-saturation-offset`,
+                                    )}`
+                                ] = `var(${__compressVarName(
                                     `${toVariable}-${colorObj.schema}-saturation-offset`,
-                                )}, 0);`,
-                            );
-                            result.properties[
-                                `${__compressVarName(
-                                    `${fromVariable}-${colorObj.schema}-saturation-offset`,
-                                )}`
-                            ] = `var(${__compressVarName(
-                                `${toVariable}-${colorObj.schema}-saturation-offset`,
-                            )}, 0)`;
-                            result.vars.push(
-                                `${__compressVarName(
-                                    `${fromVariable}-${colorObj.schema}-lightness-offset`,
-                                )}: var(${__compressVarName(
+                                )}, 0)`;
+                                result.vars.push(
+                                    `${__compressVarName(
+                                        `${fromVariable}-${colorObj.schema}-lightness-offset`,
+                                    )}: var(${__compressVarName(
+                                        `${toVariable}-${colorObj.schema}-lightness-offset`,
+                                    )}, 0);`,
+                                );
+                                result.properties[
+                                    `${__compressVarName(
+                                        `${fromVariable}-${colorObj.schema}-lightness-offset`,
+                                    )}`
+                                ] = `var(${__compressVarName(
                                     `${toVariable}-${colorObj.schema}-lightness-offset`,
-                                )}, 0);`,
-                            );
-                            result.properties[
-                                `${__compressVarName(
-                                    `${fromVariable}-${colorObj.schema}-lightness-offset`,
-                                )}`
-                            ] = `var(${__compressVarName(
-                                `${toVariable}-${colorObj.schema}-lightness-offset`,
-                            )}, 0)`;
-                            result.vars.push(
-                                `${__compressVarName(
-                                    `${fromVariable}-a: var(${toVariable}-a`,
-                                )}, 1);`,
-                            );
-                            result.properties[
-                                `${__compressVarName(`${fromVariable}-a`)}`
-                            ] = `var(${__compressVarName(
-                                `${toVariable}-a`,
-                            )}, 1)`;
+                                )}, 0)`;
+                                result.vars.push(
+                                    `${__compressVarName(
+                                        `${fromVariable}-a: var(${toVariable}-a`,
+                                    )}, 1);`,
+                                );
+                                result.properties[
+                                    `${__compressVarName(`${fromVariable}-a`)}`
+                                ] = `var(${__compressVarName(
+                                    `${toVariable}-a`,
+                                )}, 1)`;
+                            }
                         }
                     }
-                }
-            });
+                },
+            );
         }
 
         return result;
@@ -1368,7 +1388,7 @@ export default class SThemeBase extends __SEventEmitter {
     ): string[] {
         // @ts-ignore
 
-        const themeInstance = this.getTheme(settings);
+        const themeInstance = this.getTheme(settings?.theme, settings?.variant);
         if (!themeInstance)
             throw new Error(
                 `Sorry but the requested theme "<yellow>${settings.theme}-${settings.variant}</yellow>" does not exists...`,
@@ -1525,7 +1545,7 @@ export default class SThemeBase extends __SEventEmitter {
         dotPath: string,
         settings?: Partial<ISThemeDefaultStaticSettings>,
     ): any {
-        const instance = this.getTheme(settings);
+        const instance = this.getTheme(settings?.theme, settings?.variant);
         return instance.get(dotPath, {
             preventThrow: true,
         });
@@ -1548,7 +1568,7 @@ export default class SThemeBase extends __SEventEmitter {
         dotPath: string,
         settings?: Partial<ISThemeDefaultStaticSettings>,
     ): any {
-        const instance = this.getTheme(settings);
+        const instance = this.getTheme(settings?.theme, settings?.variant);
         return instance.get(dotPath);
     }
 
@@ -1571,7 +1591,7 @@ export default class SThemeBase extends __SEventEmitter {
         value: any,
         settings?: Partial<ISThemeDefaultStaticSettings>,
     ): any {
-        const instance = this.getTheme(settings);
+        const instance = this.getTheme(settings?.theme, settings?.variant);
         return instance.set(dotPath, value);
     }
 
@@ -1585,8 +1605,12 @@ export default class SThemeBase extends __SEventEmitter {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(theme?: string, variant?: string) {
-        super({});
+    constructor(
+        theme?: string,
+        variant?: string,
+        settings?: Partial<ISThemeSettings>,
+    ) {
+        super(__deepMerge({}, settings ?? {}));
 
         this.theme = theme ?? __SSugarConfig.get('theme.theme');
         this.variant = variant ?? __SSugarConfig.get('theme.variant');

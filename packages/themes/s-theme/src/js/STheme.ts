@@ -5,6 +5,10 @@ import { __isCrawler } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __speedIndex } from '@coffeekraken/sugar/perf';
 import __fastdom from 'fastdom';
+import type {
+    ISThemeLodSettings,
+    ISThemeSettings as __ISThemeSettings,
+} from '../shared/SThemeBase';
 import __SThemeBase from '../shared/SThemeBase';
 
 /**
@@ -36,16 +40,19 @@ export interface ISThemeInitSettings {
     $context: HTMLElement;
     theme: string;
     variant: string;
-    lod: number;
+    lod: Partial<ISThemeLodSettings>;
 }
+
+export interface ISThemeSettings
+    extends ISThemeInitSettings,
+        __ISThemeSettings {}
 
 export interface ISThemeSetLodSettings {
     $context: HTMLElement;
-    deep: boolean;
 }
 
 export default class STheme extends __SThemeBase {
-    static defaultThemeMetas = {};
+    static _defaultThemeMetas = {};
 
     /**
      * @name      theme
@@ -307,28 +314,29 @@ export default class STheme extends __SThemeBase {
             $context: document.querySelector('html'),
             theme: undefined,
             variant: undefined,
-            lod: undefined,
+            lod: {
+                enabled: false,
+            },
             ...(settings ?? {}),
         };
 
         let themeInstance;
 
-        // wait for css to be applied
-        // const themeMetas = this.getThemeMetas(finalSettings.$context);
-
         // save default theme metas
-        STheme.defaultThemeMetas = {
+        STheme._defaultThemeMetas = {
             theme: finalSettings.theme,
             variant: finalSettings.variant,
         };
 
+        // get the current theme instance
+        themeInstance = this.getCurrentTheme(
+            finalSettings.$context,
+            finalSettings,
+        );
+
         // set the current theme in the env.SUGAR.theme property
-        themeInstance = this.getCurrentTheme(finalSettings.$context);
-        // @ts-ignore
         if (!document.env) document.env = {};
-        // @ts-ignore
         if (!document.env.SUGAR) document.env.SUGAR = {};
-        // @ts-ignore
         document.env.SUGAR.theme = themeInstance;
 
         // apply the theme
@@ -386,26 +394,15 @@ export default class STheme extends __SThemeBase {
         $context: HTMLElement = document.querySelector('html'),
     ): any {
         let defaultTheme =
-                STheme.defaultThemeMetas.theme ??
+                STheme._defaultThemeMetas.theme ??
                 __SSugarConfig.get('theme.theme'),
             defaultVariant =
-                STheme.defaultThemeMetas.variant ??
+                STheme._defaultThemeMetas.variant ??
                 __SSugarConfig.get('theme.variant');
 
         let theme = defaultTheme,
             variant = defaultVariant;
 
-        // restore theme if needed
-        // const savedTheme = localStorage.getItem('s-theme');
-        // if (savedTheme && savedTheme.split('-').length === 2) {
-        //     const parts = savedTheme.split('-');
-        //     theme = parts[0];
-        //     variant = parts[1];
-        // } else if ($context.hasAttribute('theme')) {
-        //     let attr = $context.getAttribute('theme') ?? '',
-        //         parts = attr.split('-').map((l) => l.trim());
-        //     (theme = parts[0]), (variant = parts[1]);
-        // } else
         if ($context) {
             const computedStyle = getComputedStyle($context);
             // get the css setted --s-theme and --s-theme-variant variable from the $context
@@ -448,12 +445,12 @@ export default class STheme extends __SThemeBase {
     // @ts-ignore
     static getCurrentTheme(
         $context: HTMLElement = document.querySelector('html'),
+        settings?: Partial<ISThemeSettings>,
     ): STheme {
         const themeMetas = STheme.getThemeMetas($context);
-        return <STheme>this.getTheme({
-            theme: themeMetas.theme,
-            variant: themeMetas.variant,
-        });
+        return <STheme>(
+            this.getTheme(themeMetas.theme, themeMetas.variant, settings)
+        );
     }
 
     /**
@@ -534,14 +531,28 @@ export default class STheme extends __SThemeBase {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(theme?: string, variant?: string) {
-        super(theme, variant);
+    constructor(
+        theme?: string,
+        variant?: string,
+        settings?: Partial<ISThemeSettings>,
+    ) {
+        super(theme, variant, settings);
+
+        this.settings.lod = __deepMerge(
+            {
+                level: this.get('lod.defaultLevel'),
+                method: this.get('lod.defaultMethod'),
+                botLevel: this.get('lod.botLevel'),
+                stylesheet: 'link#global',
+            },
+            settings?.lod ?? {},
+        );
 
         // restore the theme
         this.restore();
 
         // handle lod
-        if (this.lodConfig.enabled) {
+        if (this.settings.lod.enabled) {
             this._initLod();
         }
     }
@@ -551,34 +562,54 @@ export default class STheme extends __SThemeBase {
      * like the "botLevel", lod by speedIndex, etc...
      */
     private _initLod() {
-        // check if is a crawler
-        const isCrawler = __isCrawler();
+        setTimeout(() => {
+            // check if is a crawler
+            const isCrawler = __isCrawler();
 
-        // if the user does not have selected a specific lod
-        // we check which lod is the most suited for his
-        // computer using the "speedIndex" calculated value
-        if (!isCrawler && this.state.lod === undefined) {
-            const speedIndex = __speedIndex();
-            let suitedLod = 0;
+            console.log(this.settings, this.state);
 
-            // get the higher lod depending on the speedIndex
-            for (let [lod, lodObj] of Object.entries(
-                this.lodConfig.levels ?? {},
-            )) {
-                if (lodObj.speedIndex > speedIndex) {
-                    break;
-                }
-                suitedLod = parseInt(lod);
+            // check if is a crawler and that we have a botLevel config
+            if (isCrawler && this.lodConfig.botLevel !== undefined) {
+                this.setLod(this.lodConfig.botLevel);
             }
 
-            // set the suited calculated lod
-            this.setLod(suitedLod);
-        }
+            // is a lod is saved in state
+            if (this.state.lod !== undefined) {
+                this.setLod(this.state.lod);
+                return;
+            }
 
-        // check if is a crawler and that we have a botLevel config
-        if (isCrawler && this.lodConfig.botLevel !== undefined) {
-            this.setLod(this.lodConfig.botLevel);
-        }
+            //
+            if (this.settings.lod.level !== undefined) {
+                this.setLod(this.settings.lod.level);
+            }
+
+            // if the user does not have selected a specific lod
+            // we check which lod is the most suited for his
+            // computer using the "speedIndex" calculated value
+            if (
+                !isCrawler &&
+                this.state.lod === undefined &&
+                this.settings.lod.level === undefined
+            ) {
+                const speedIndex = __speedIndex();
+                let suitedLod = 0;
+
+                // get the higher lod depending on the speedIndex
+                for (let [lod, lodObj] of Object.entries(
+                    this.lodConfig.levels ?? {},
+                )) {
+                    if (lodObj.speedIndex > speedIndex) {
+                        break;
+                    }
+                    suitedLod = parseInt(lod);
+                }
+
+                // set the suited calculated lod
+                this.setLod(suitedLod);
+                return;
+            }
+        });
     }
 
     /**
@@ -627,6 +658,17 @@ export default class STheme extends __SThemeBase {
         this.state.lod = level;
         this.save();
 
+        const lodStylesheets = Array.from(
+            document.querySelectorAll('link[s-lod]'),
+        );
+
+        let $stylesheet;
+        if (this.settings.lod.stylesheet instanceof HTMLLinkElement) {
+            $stylesheet = this.settings.lod.stylesheet;
+        } else if (typeof this.settings.lod.stylesheet === 'string') {
+            $stylesheet = document.querySelector(this.settings.lod.stylesheet);
+        }
+
         // remove all the lod classes above the wanted level
         for (let i = 0; i <= 10; i++) {
             if (i > level) {
@@ -634,9 +676,39 @@ export default class STheme extends __SThemeBase {
             }
         }
 
+        // remove all none used stylesheets
+        lodStylesheets.forEach(($link) => {
+            const l = parseInt($link.getAttribute('s-lod'));
+            if (l > level) {
+                $link.remove();
+            }
+        });
+
         // add the new classes
         for (let i = 0; i <= level; i++) {
             finalSettings.$context.classList.add('s-lod', `s-lod--${i}`);
+
+            // check if already have the stylesheet in the dom
+            if (
+                i > 0 &&
+                !lodStylesheets.filter(($link) => {
+                    const l = parseInt($link.getAttribute('s-lod'));
+                    return l === i;
+                }).length
+            ) {
+                const $lodLink = $stylesheet.cloneNode();
+                $lodLink.setAttribute(
+                    'href',
+                    $stylesheet
+                        .getAttribute('href')
+                        .replace(
+                            /([a-zA-Z0-9_-]+)\.css(\?.*)?/,
+                            `lod/$1.lod-${i}.css`,
+                        ),
+                );
+                $lodLink.setAttribute('s-lod', i);
+                document.head.appendChild($lodLink);
+            }
         }
 
         // dispatch a change event

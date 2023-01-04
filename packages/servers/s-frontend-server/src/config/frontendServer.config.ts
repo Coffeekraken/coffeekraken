@@ -59,6 +59,7 @@ export default function (api) {
         get staticDirs() {
             return {
                 '/tmp': `${__packageTmpDir()}`,
+                '/dist/css/lod': `${api.config.storage.dist.cssDir}/lod`,
                 '/dist/css/partials': `${api.config.storage.dist.cssDir}/partials`,
                 '/dist':
                     api.env.env === 'production'

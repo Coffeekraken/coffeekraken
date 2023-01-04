@@ -63,6 +63,24 @@ export default function (api) {
         },
 
         /**
+         * @name              defaultMethod
+         * @namespace         config.themeLod
+         * @type              String
+         * @values            class,file
+         * @default           file
+         *
+         * Specify the default method to generate the lod (level of details).
+         * The "class" one let all the css in the same output file and scope each lod things (properties, rules, etc...) into
+         * a "s-lod--%level" class.
+         * The "file" one exports all the lod things into an external file that will be called "${source.input.filename}.lod-%level.css"
+         * You can override this method for each of your `@sugar.lod...` mixin calls.
+         *
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        defaultMethod: 'file',
+
+        /**
          * @name              defaultAction
          * @namespace         config.themeLod
          * @type              String

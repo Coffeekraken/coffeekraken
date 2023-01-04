@@ -19,6 +19,7 @@ import __path from 'path';
 import __rollupAnalyzerPlugin from 'rollup-plugin-analyzer';
 import { uglify as __uglifyPlugin } from 'rollup-plugin-uglify';
 import { build as __viteBuild, createServer as __viteServer } from 'vite';
+import { compression as __compression2 } from 'vite-plugin-compression2';
 import __SViteBuildParamsInterface from './interface/SViteBuildParamsInterface';
 import __SViteStartParamsInterface from './interface/SViteStartParamsInterface';
 import __SViteTestParamsInterface from './interface/SViteTestParamsInterface';
@@ -121,6 +122,13 @@ export default class SVite extends __SClass {
                         plugins.push(p);
                     }
                 }
+
+                config.plugins.push(
+                    __compression2({
+                        include: /.*\.(css|js|jsx|ts|tsx)(\?.*)?/,
+                    }),
+                );
+
                 config.plugins = plugins;
 
                 if (!(await __isPortFree(config.server.port))) {

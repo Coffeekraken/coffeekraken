@@ -4,7 +4,7 @@
     "description": "We are a young collectve of front-end creative developers with one goal in mind. Build tools to make every team working day life better",
     "type": "module",
     "scripts": {
-        "dev": "sugar mono.dev",
+        "dev": "sugard mono.dev",
         "container": "docker exec --workdir /workspaces/coffeekraken -it coffeekraken /bin/bash"
     },
     "private": true,

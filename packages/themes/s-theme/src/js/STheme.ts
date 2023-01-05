@@ -541,7 +541,7 @@ export default class STheme extends __SThemeBase {
         this.settings.lod = __deepMerge(
             {
                 level: this.get('lod.defaultLevel'),
-                method: this.get('lod.defaultMethod'),
+                method: this.get('lod.method'),
                 botLevel: this.get('lod.botLevel'),
                 stylesheet: 'link#global',
             },

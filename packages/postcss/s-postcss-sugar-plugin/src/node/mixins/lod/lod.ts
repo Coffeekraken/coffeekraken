@@ -35,7 +35,7 @@ class postcssSugarPluginLodMixinInterface extends __SInterface {
             method: {
                 type: 'String',
                 values: ['file', 'class'],
-                default: __STheme.get('lod.defaultMethod'),
+                default: __STheme.get('lod.method'),
             },
         };
     }

@@ -4,15 +4,9 @@ import __SEnv from '@coffeekraken/s-env';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 import __STheme from '@coffeekraken/s-theme';
-import { __base64 } from '@coffeekraken/sugar/crypto';
-import {
-    __dirname,
-    __folderHash,
-    __readJsonSync,
-    __writeFileSync,
-} from '@coffeekraken/sugar/fs';
+import { __dirname, __folderHash } from '@coffeekraken/sugar/fs';
 import { __deepMerge, __objectHash } from '@coffeekraken/sugar/object';
-import { __packageCacheDir, __packageRootDir } from '@coffeekraken/sugar/path';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import { __unquote } from '@coffeekraken/sugar/string';
 import { __replaceTokens } from '@coffeekraken/sugar/token';
 import __fs from 'fs';
@@ -32,13 +26,21 @@ let loadedPromise,
     compileFileTimeout,
     cacheBustedWarningDisplayed = false;
 
-const sharedData = {};
+const sharedData = {
+    isPristine: true,
+};
+
+export interface IPostcssSugarPluginLodSettings {
+    enabled: boolean;
+    method: 'class' | 'file';
+}
 
 export interface IPostcssSugarPluginSettings {
     outDir: string;
-    cache?: boolean;
-    cacheDir: string;
-    cacheTtl: number;
+    // cache?: boolean;
+    lod: IPostcssSugarPluginLodSettings;
+    // cacheDir: string;
+    // cacheTtl: number;
     excludeByTypes?: string[];
     excludeCommentByTypes?: string[];
     excludeCodeByTypes?: string[];
@@ -97,9 +99,9 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             excludeCodeByTypes: [],
             lod: {},
             target: 'production',
-            cache: false,
-            cacheDir: `${__packageCacheDir()}/postcssSugarPlugin`,
-            cacheTtl: 1000 * 60 * 60 * 24 * 7,
+            // cache: false,
+            // cacheDir: `${__packageCacheDir()}/postcssSugarPlugin`,
+            // cacheTtl: 1000 * 60 * 60 * 24 * 7,
             partials: true,
             verbose: __SEnv.is('verbose'),
             // @ts-ignore
@@ -107,9 +109,14 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
         settings,
     );
 
-    const cacheHashFilePath = `${settings.cacheDir}/cacheHash.txt`;
+    // const cacheHashFilePath = `${settings.cacheDir}/cacheHash.txt`;
 
-    let themeHash, cacheDir, cacheHash, settingsHash, fromCache, bench;
+    let themeHash,
+        // cacheDir,
+        // cacheHash,
+        // fromCache,
+        settingsHash,
+        bench;
 
     if (_configLoaded) {
         updateConfig();
@@ -128,12 +135,26 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                 'postcssSugarPlugin.excludeCodeByTypes',
             ),
             lod: __STheme.get('lod'),
-            cache: __SSugarConfig.get('postcssSugarPlugin.cache'),
+            // cache: __SSugarConfig.get('postcssSugarPlugin.cache'),
         });
 
-        // remove cache if not for vite target
-        if (settings.cache === undefined && settings.target !== 'vite') {
-            settings.cache = false;
+        // // remove cache if not for vite target
+        // if (settings.cache === undefined && settings.target !== 'vite') {
+        //     settings.cache = false;
+        // }
+
+        // lod method if the target is not production
+        if (settings.target !== 'production') {
+            if (
+                settings.lod.method !== 'class' &&
+                !_configLoaded &&
+                sharedData.isPristine
+            ) {
+                console.log(
+                    `<yellow>[postcssSugarPlugin]</yellow> You're lod.method setting has been updated to "<magenta>class</magenta>" cause the "<yellow>${settings.lod.method}</yellow>" method is only available for "<cyan>production</cyan>" target...`,
+                );
+            }
+            settings.lod.method = 'class';
         }
 
         // set the settings hash
@@ -143,7 +164,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
         themeHash = __STheme.hash();
 
         // set cache directory
-        cacheDir = `${__packageCacheDir()}/postcssSugarPlugin`;
+        // cacheDir = `${__packageCacheDir()}/postcssSugarPlugin`;
 
         if (settings.excludeByTypes?.length) {
             __CssVars.excludeByTypes(settings.excludeByTypes);
@@ -158,11 +179,11 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
 
     async function _loadConfig() {
         await __SSugarConfig.load();
-        _configLoaded = true;
 
         // update config
         updateConfig();
 
+        _configLoaded = true;
         return true;
     }
 
@@ -385,7 +406,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                     params,
                     atRule,
                     settings,
-                    cacheDir,
+                    // cacheDir,
                     packageHash,
                     themeHash,
                     themeValueProxy,
@@ -460,127 +481,127 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
         return loadedPromise;
     }
 
-    function markAsCached(filePath: string): void {
-        let cachemapFilePath = `${settings.cacheDir}/cachemap.json`,
-            cachemap = {};
-        // relative path
-        if (!filePath.match(/^\//)) {
-            filePath = `${__packageRootDir()}/${filePath}`;
-        }
-        // read the cachemap file
-        if (__fs.existsSync(cachemapFilePath)) {
-            cachemap = __readJsonSync(cachemapFilePath);
-        }
-        // save the timestamp for the passed file
-        cachemap[filePath] = Date.now();
-        // write the new data on disk
-        __writeFileSync(cachemapFilePath, JSON.stringify(cachemap, null, 4));
-    }
+    // function markAsCached(filePath: string): void {
+    //     let cachemapFilePath = `${settings.cacheDir}/cachemap.json`,
+    //         cachemap = {};
+    //     // relative path
+    //     if (!filePath.match(/^\//)) {
+    //         filePath = `${__packageRootDir()}/${filePath}`;
+    //     }
+    //     // read the cachemap file
+    //     if (__fs.existsSync(cachemapFilePath)) {
+    //         cachemap = __readJsonSync(cachemapFilePath);
+    //     }
+    //     // save the timestamp for the passed file
+    //     cachemap[filePath] = Date.now();
+    //     // write the new data on disk
+    //     __writeFileSync(cachemapFilePath, JSON.stringify(cachemap, null, 4));
+    // }
 
-    function isCachedPluginHashValid(): boolean {
-        // check plugin hash
-        if (__fs.existsSync(cacheHashFilePath)) {
-            const cachedPluginHash = __fs
-                .readFileSync(cacheHashFilePath)
-                .toString();
-            if (cachedPluginHash !== cacheHash) {
-                return false;
-            }
-        } else {
-            // no plugin hash cached so cache invalid
-            return false;
-        }
-        return true;
-    }
+    // function isCachedPluginHashValid(): boolean {
+    //     // check plugin hash
+    //     if (__fs.existsSync(cacheHashFilePath)) {
+    //         const cachedPluginHash = __fs
+    //             .readFileSync(cacheHashFilePath)
+    //             .toString();
+    //         if (cachedPluginHash !== cacheHash) {
+    //             return false;
+    //         }
+    //     } else {
+    //         // no plugin hash cached so cache invalid
+    //         return false;
+    //     }
+    //     return true;
+    // }
 
-    function isCacheValid(filePath: string): boolean {
-        let cachemapFilePath = `${settings.cacheDir}/cachemap.json`,
-            cachemap = {};
+    // function isCacheValid(filePath: string): boolean {
+    //     let cachemapFilePath = `${settings.cacheDir}/cachemap.json`,
+    //         cachemap = {};
 
-        // check plugin hash cached
-        if (!isCachedPluginHashValid()) {
-            return false;
-        }
+    //     // check plugin hash cached
+    //     if (!isCachedPluginHashValid()) {
+    //         return false;
+    //     }
 
-        // relative path
-        if (!filePath.match(/^\//)) {
-            filePath = `${__packageRootDir()}/${filePath}`;
-        }
-        // if the file does not exists
-        // the cache if invalid
-        if (!__fs.existsSync(filePath)) {
-            return false;
-        }
-        // read the cachemap file
-        if (__fs.existsSync(cachemapFilePath)) {
-            cachemap = __readJsonSync(cachemapFilePath);
-        }
-        // if the filepath is not in the cachemap
-        // the cache is invalid
-        if (!cachemap[filePath]) {
-            return false;
-        }
-        // get the file stats to compare with the cache timestamp
-        const stats = __fs.statSync(filePath);
-        if (stats.mtime > cachemap[filePath]) {
-            return false;
-        }
-        // otherwise, the cache if ok
-        return true;
-    }
+    //     // relative path
+    //     if (!filePath.match(/^\//)) {
+    //         filePath = `${__packageRootDir()}/${filePath}`;
+    //     }
+    //     // if the file does not exists
+    //     // the cache if invalid
+    //     if (!__fs.existsSync(filePath)) {
+    //         return false;
+    //     }
+    //     // read the cachemap file
+    //     if (__fs.existsSync(cachemapFilePath)) {
+    //         cachemap = __readJsonSync(cachemapFilePath);
+    //     }
+    //     // if the filepath is not in the cachemap
+    //     // the cache is invalid
+    //     if (!cachemap[filePath]) {
+    //         return false;
+    //     }
+    //     // get the file stats to compare with the cache timestamp
+    //     const stats = __fs.statSync(filePath);
+    //     if (stats.mtime > cachemap[filePath]) {
+    //         return false;
+    //     }
+    //     // otherwise, the cache if ok
+    //     return true;
+    // }
 
-    function getCachedData(filePath: string): string {
-        let cacheFilePath = `${settings.cacheDir}/${filePath}`;
+    // function getCachedData(filePath: string): string {
+    //     let cacheFilePath = `${settings.cacheDir}/${filePath}`;
 
-        if (filePath.match(/^\//)) {
-            cacheFilePath = `${settings.cacheDir}/${__path.relative(
-                __packageRootDir(),
-                filePath,
-            )}`;
-        }
+    //     if (filePath.match(/^\//)) {
+    //         cacheFilePath = `${settings.cacheDir}/${__path.relative(
+    //             __packageRootDir(),
+    //             filePath,
+    //         )}`;
+    //     }
 
-        // remove "../" in path
-        cacheFilePath = cacheFilePath.replace(/\.\.\//gm, '');
+    //     // remove "../" in path
+    //     cacheFilePath = cacheFilePath.replace(/\.\.\//gm, '');
 
-        // check if the cache is valid or not
-        if (!isCacheValid(filePath)) {
-            return '';
-        }
-        // relative path
-        if (!filePath.match(/^\//)) {
-            filePath = `${__packageRootDir()}/${filePath}`;
-        }
-        // if the file does not exists
-        // the cache if invalid
-        if (!__fs.existsSync(cacheFilePath)) {
-            return '';
-        }
-        // read and return the cached content
-        return __fs.readFileSync(cacheFilePath).toString();
-    }
+    //     // check if the cache is valid or not
+    //     if (!isCacheValid(filePath)) {
+    //         return '';
+    //     }
+    //     // relative path
+    //     if (!filePath.match(/^\//)) {
+    //         filePath = `${__packageRootDir()}/${filePath}`;
+    //     }
+    //     // if the file does not exists
+    //     // the cache if invalid
+    //     if (!__fs.existsSync(cacheFilePath)) {
+    //         return '';
+    //     }
+    //     // read and return the cached content
+    //     return __fs.readFileSync(cacheFilePath).toString();
+    // }
 
-    function setCacheData(filePath: string, data: string): void {
-        let cacheFilePath = `${settings.cacheDir}/${filePath}`;
+    // function setCacheData(filePath: string, data: string): void {
+    //     let cacheFilePath = `${settings.cacheDir}/${filePath}`;
 
-        if (filePath.match(/^\//)) {
-            cacheFilePath = `${settings.cacheDir}/${__path.relative(
-                __packageRootDir(),
-                filePath,
-            )}`;
-        }
+    //     if (filePath.match(/^\//)) {
+    //         cacheFilePath = `${settings.cacheDir}/${__path.relative(
+    //             __packageRootDir(),
+    //             filePath,
+    //         )}`;
+    //     }
 
-        // remove "../" in path
-        cacheFilePath = cacheFilePath.replace(/\.\.\//gm, '');
+    //     // remove "../" in path
+    //     cacheFilePath = cacheFilePath.replace(/\.\.\//gm, '');
 
-        // relative path
-        if (!filePath.match(/^\//)) {
-            filePath = `${__packageRootDir()}/${filePath}`;
-        }
-        // mark the file as cached
-        markAsCached(filePath);
-        // write the cache file
-        __writeFileSync(cacheFilePath, data);
-    }
+    //     // relative path
+    //     if (!filePath.match(/^\//)) {
+    //         filePath = `${__packageRootDir()}/${filePath}`;
+    //     }
+    //     // mark the file as cached
+    //     markAsCached(filePath);
+    //     // write the cache file
+    //     __writeFileSync(cacheFilePath, data);
+    // }
 
     /**
      * Run the postProcessors on the passed AST
@@ -615,7 +636,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                 CssVars: __CssVars,
                 packageHash,
                 themeHash,
-                cacheDir,
+                // cacheDir,
                 postcssApi: __postcss,
                 getRoot: __getRoot,
                 settings,
@@ -670,9 +691,11 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
 
             // calculate the final hash depending on the
             // packageHash, settingsHash and themeHash
-            cacheHash = `${packageHash}-${settingsHash}-${themeHash}-${__base64.encrypt(
-                externalPackagesHashes.join('-'),
-            )}`;
+            // cacheHash = `${packageHash}-${settingsHash}-${themeHash}-${__base64.encrypt(
+            //     externalPackagesHashes.join('-'),
+            // )}`;
+
+            // message when a file takes time to compile
             clearTimeout(compileFileTimeout);
             compileFileTimeout = setTimeout(() => {
                 console.log(
@@ -709,46 +732,44 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
         },
 
         async OnceExit(root) {
-            if (settings.cache) {
-                if (
-                    !isCachedPluginHashValid() &&
-                    !cacheBustedWarningDisplayed
-                ) {
-                    if (settings.verbose) {
-                        console.log(
-                            `<magenta>[cache]</magenta> Cache invalidated by "<yellow>@coffeekraken/s-postcss-sugar-plugin</yellow>" package update. First compilation may take some times...`,
-                        );
-                    }
-                    cacheBustedWarningDisplayed = true;
-                }
+            // if (settings.cache) {
+            //     if (
+            //         !isCachedPluginHashValid() &&
+            //         !cacheBustedWarningDisplayed
+            //     ) {
+            //         if (settings.verbose) {
+            //             console.log(
+            //                 `<magenta>[cache]</magenta> Cache invalidated by "<yellow>@coffeekraken/s-postcss-sugar-plugin</yellow>" package update. First compilation may take some times...`,
+            //             );
+            //         }
+            //         cacheBustedWarningDisplayed = true;
+            //     }
 
-                if (!fromCache && settings.verbose) {
-                    console.log(
-                        `<magenta>[cache]</magenta> Save data in cache for file "<cyan>${__path
-                            .relative(
-                                __packageRootDir(),
-                                root.source.input.file,
-                            )
-                            .replace(/\.\.\//gm, '')}</cyan>"`,
-                    );
-                }
-                setCacheData(root.source.input.file, nodesToString(root.nodes));
-                fromCache = false; // reset the variable for next compile
+            //     if (!fromCache && settings.verbose) {
+            //         console.log(
+            //             `<magenta>[cache]</magenta> Save data in cache for file "<cyan>${__path
+            //                 .relative(
+            //                     __packageRootDir(),
+            //                     root.source.input.file,
+            //                 )
+            //                 .replace(/\.\.\//gm, '')}</cyan>"`,
+            //         );
+            //     }
+            //     setCacheData(root.source.input.file, nodesToString(root.nodes));
+            //     fromCache = false; // reset the variable for next compile
 
-                // update the cached plugin hash
-                __writeFileSync(cacheHashFilePath, cacheHash);
-            }
+            //     // update the cached plugin hash
+            //     __writeFileSync(cacheHashFilePath, cacheHash);
+            // }
 
             // post processors
             await postProcessors(root);
 
+            // end the bench
             bench.end();
-            // __SBench.end('postcssSugarPlugin').log({
-            //     body: `File: <cyan>${__path.relative(
-            //         __packageRootDir(),
-            //         root.source?.input?.from,
-            //     )}</cyan>`,
-            // });
+
+            // mark the plugin as not pristine anymore... slut... :)
+            sharedData.isPristine = false;
         },
         async AtRule(atRule, postcssApi) {
             if (atRule.name.match(/^sugar\./)) {
@@ -791,7 +812,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                     CssVars: __CssVars,
                     packageHash,
                     themeHash,
-                    cacheDir,
+                    // cacheDir,
                     getRoot: __getRoot,
                     replaceWith(nodes) {
                         replaceWith(atRule, nodes);

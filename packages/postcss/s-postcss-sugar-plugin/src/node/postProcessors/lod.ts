@@ -4,7 +4,7 @@ import {
     __packageRootDir,
     __srcCssDir,
 } from '@coffeekraken/sugar/path';
-import __fs from 'fs';
+import * as __csso from 'csso';
 
 import { __writeFileSync } from '@coffeekraken/sugar/fs';
 
@@ -20,8 +20,7 @@ interface IScopesPostProcessorLodRuleSelectorsSettings {}
 
 let _timeoutsByLevel = {};
 // const sharedData.lodRulesByLevels = {};
-const lodRootsByFile = {};
-let currentCssByLevel = {};
+const _lodRulesByLevels = {};
 
 export default async function ({
     root,
@@ -189,6 +188,11 @@ export default async function ({
                 return;
             }
 
+            // protect the keyframes declarations
+            if (decl.parent.parent?.name === 'keyframes') {
+                return;
+            }
+
             // do not process decl that does not have a parent with some selectors
             if (!decl.parent.selectors) {
                 return;
@@ -204,35 +208,21 @@ export default async function ({
         });
     }
 
-    const filePath = root.source.input.file;
-
-    // create a stack by level to store each rules
-    // by each level
-    Object.keys(settings.lod.levels).forEach((level) => {
-        if (!sharedData.lodRulesByLevels) {
-            sharedData.lodRulesByLevels = {};
-        }
-        // make sure we have a "root" for the actual level and filePath
-        if (!sharedData.lodRulesByLevels[level]) {
-            sharedData.lodRulesByLevels[level] = {};
-        }
-        // reset filePath leveled rules
-        sharedData.lodRulesByLevels[level][filePath] = postcssApi.root();
-    });
-
-    // handle "file" method
-    root.walkRules(/\.s-lod-method--[a-z]+/, (rule) => {
-        const method = rule.selector.match(/\.s-lod-method--([a-z]+)/)[1],
-            level = parseInt(rule.selector.match(/\.s-lod--([0-9]{1,2})/)[1]);
+    // handle "file" method on rule
+    root.walkRules(/\.s-lod-method--file/, (rule) => {
+        const level = parseInt(rule.selector.match(/\.s-lod--([0-9]{1,2})/)[1]);
 
         // remove the .s-lod-method--%method... class from the selector
-        rule.selector = rule.selector.replace(/\.s-lod-method--[a-z\s]+/gm, '');
+        rule.selector = rule.selector.replace(/\.s-lod-method--file\s?/gm, '');
 
         // remove the .s-lod--%level... class from the selector
         rule.selector = rule.selector.replace(/\.s-lod--[0-9\s]{1,2}/gm, '');
 
         // add the rule in the root
-        sharedData.lodRulesByLevels[level][filePath].nodes.push(rule.clone());
+        if (!_lodRulesByLevels[level]) {
+            _lodRulesByLevels[level] = postcssApi.root();
+        }
+        _lodRulesByLevels[level].nodes.push(rule.clone());
 
         // remove the rule from the actual css
         rule.remove();
@@ -241,13 +231,13 @@ export default async function ({
     // clean empty rules
     root.walkRules((rule) => {
         // empty rules
-        // if (
-        //     !rule.nodes?.length ||
-        //     !rule.nodes.filter((n) => n.type !== 'comment').length
-        // ) {
-        //     rule.remove();
-        //     return;
-        // }
+        if (
+            !rule.nodes?.length ||
+            !rule.nodes.filter((n) => n.type !== 'comment').length
+        ) {
+            rule.remove();
+            return;
+        }
 
         // support for @sugar.lods.prevent mixin
         // @ts-ignore
@@ -255,18 +245,16 @@ export default async function ({
             return;
         }
 
-        // nodes that have no "_lod" properties are nodes
-        // that does not have to be treated
-        // if (!node._lod || !Object.keys(node._lod).length) {
-        //     return;
-        // }
-
         for (let [levelStr, obj] of Object.entries(rule._lod ?? {})) {
             const level = parseInt(levelStr),
                 lodObj = <IScopesPostProcessorNodeToTreatLods>obj;
 
+            if (!_lodRulesByLevels[level]) {
+                _lodRulesByLevels[level] = postcssApi.root();
+            }
+
             if (lodObj.properties.length) {
-                switch (settings.lod.defaultMethod) {
+                switch (settings.lod.method) {
                     case 'class':
                         // @ts-ignore
                         const lodSelectors = generateLodRuleSelectors(
@@ -289,123 +277,59 @@ export default async function ({
                             selectors: rule.selectors,
                             nodes: lodObj.properties,
                         });
-                        sharedData.lodRulesByLevels[level][filePath].nodes.push(
-                            newRule,
-                        );
+                        _lodRulesByLevels[level].nodes.push(newRule);
                         break;
                 }
             }
         }
-        // grab all variables in the node to
-        // extract them in the "none-lod" rule
-        const vars: any[] = [];
-        rule.nodes = rule.nodes.filter((n) => {
-            if (n.variable) {
-                vars.push(n);
-                return false;
-            }
-            return true;
-        });
-        if (vars.length) {
-            const varsRule = postcssApi.rule({
-                selectors: rule.selectors,
-                nodes: vars,
-            });
-            rule.parent.insertBefore(rule, varsRule);
-        }
     });
 
-    // write lod files for files names "index.css", "style.css" or "app.css"
-    // if (filePath.match(/(index|style|app)\.css$/)) {
-    for (let [level, levelObj] of Object.entries(sharedData.lodRulesByLevels)) {
-        if (parseInt(level) === 0) {
-            continue;
-        }
+    if (settings.lod.method === 'file') {
+        const filePath = root.source.input.file;
 
-        const outPath = sharedData.rootFilePath
-                .replace(/\.css$/, `.lod-${level}.css`)
-                .replace(__srcCssDir(), `${__distCssDir()}/lod`),
-            outPathRel = outPath.replace(`${__packageRootDir()}/`, ''),
-            filePath = root.source.input.file,
-            filePathRel = filePath.replace(`${__packageRootDir()}/`, '');
+        for (let [level, lodRoot] of Object.entries(_lodRulesByLevels)) {
+            if (parseInt(level) === 0) {
+                continue;
+            }
 
-        let finalCss = '';
+            const outPath = filePath
+                    .replace(/\.css$/, `.lod-${level}.css`)
+                    .replace(__srcCssDir(), `${__distCssDir()}/lod`),
+                outPathRel = outPath.replace(`${__packageRootDir()}/`, ''),
+                filePathRel = filePath.replace(`${__packageRootDir()}/`, '');
 
-        for (let [path, lodRoot] of Object.entries(levelObj)) {
+            let finalCss = '';
+
             // build final css (minify, etc...)
             finalCss += `\n${lodRoot.toString()}`;
-        }
 
-        // clean css
-        // @ts-ignore
-        const filteredRoot = postcssApi.parse(finalCss);
-        filteredRoot.walkRules((r) => {
-            if (
-                !r.nodes?.length ||
-                !r.nodes.filter((n) => n.type !== 'comment').length
-            ) {
-                r.remove();
+            // clean css (empty rules)
+            // @ts-ignore
+            const filteredRoot = postcssApi.parse(finalCss);
+            filteredRoot.walkRules((r) => {
+                if (
+                    !r.nodes?.length ||
+                    !r.nodes.filter((n) => n.type !== 'comment').length
+                ) {
+                    r.remove();
+                }
+            });
+            finalCss = filteredRoot.toString().trim();
+
+            // minify if needed
+            if (settings.minify) {
+                finalCss = __csso.minify(finalCss, {
+                    restructure: false,
+                    comments: true, // leave all exlamation comments /*! ... */
+                }).css;
             }
-        });
-        finalCss = filteredRoot.toString().trim();
 
-        // if (settings.target === 'production') {
-        //     finalCss = __csso.minify(finalCss, {
-        //         restructure: false,
-        //         comments: true, // leave all exlamation comments /*! ... */
-        //     }).css;
-        // }
-
-        // get the current css from the file if exists
-        if (!currentCssByLevel[level]) {
-            if (__fs.existsSync(outPath)) {
-                currentCssByLevel[level] = __fs
-                    .readFileSync(outPath)
-                    .toString();
-            } else {
-                currentCssByLevel[level] = '';
-            }
-        }
-
-        // replace the current css or add it to the file
-        const cssFileMatchReg = new RegExp(
-                `\/\\* S-LOD\:${filePathRel
-                    .replace(/\//gm, '\\/')
-                    .replace(
-                        /\./,
-                        '\\.',
-                    )} \\*\/[\\w\\W]+\/\\* S-LOD-END\:${filePathRel
-                    .replace(/\//gm, '\\/')
-                    .replace(/\./, '\\.')} \\*\/`,
-                'gm',
-            ),
-            cssFileMatch = currentCssByLevel[level].match(cssFileMatchReg);
-
-        // creating the scoped css to put in the file
-        const newCss = `
-/* S-LOD:${filePathRel} */                
-${finalCss}
-/* S-LOD-END:${filePathRel} */                
-`;
-
-        // add it or replace it
-        if (cssFileMatch) {
-            currentCssByLevel[level] = currentCssByLevel[level].replace(
-                cssFileMatch[0],
-                finalCss ? newCss : '',
+            // write file on disk
+            __writeFileSync(outPath, finalCss);
+            const file = new __SFile(outPath);
+            console.log(
+                `<green>[save]</green> Lod (level of details) file "<yellow>${file.relPath}</yellow>" <yellow>${file.stats.kbytes}kb</yellow> saved <green>successfully</green>`,
             );
-        } else if (finalCss) {
-            currentCssByLevel[level] += newCss;
         }
-
-        // clearTimeout(_timeoutsByLevel[level]);
-        // _timeoutsByLevel[level] = setTimeout(() => {
-        // write file on disk
-        __writeFileSync(outPath, currentCssByLevel[level]);
-        const file = new __SFile(outPath);
-        console.log(
-            `<green>[save]</green> Lod (level of details) file "<yellow>${file.relPath}</yellow>" <yellow>${file.stats.kbytes}kb</yellow> saved <green>successfully</green>`,
-        );
-        // }, 500);
     }
 }

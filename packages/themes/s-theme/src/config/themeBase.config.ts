@@ -29,6 +29,21 @@ export default function (api) {
         },
 
         /**
+         * @name            classmap
+         * @namespace        config.themeBase
+         * @type            String
+         * @default         [config.themeClassmap]
+         *
+         * Specify classmap settings to be used in the theme
+         *
+         * @since           2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        get classmap() {
+            return api.config.themeClassmap;
+        },
+
+        /**
          * @name            lod
          * @namespace        config.themeBase
          * @type            String

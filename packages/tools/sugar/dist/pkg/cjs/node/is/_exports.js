@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.__isSymlink = exports.__isInPackage = exports.__isFolder = exports.__isFile = exports.__isDirectory = exports.__isCommandExists = void 0;
+exports.__isSymlink = exports.__isMonorepo = exports.__isInPackage = exports.__isFolder = exports.__isFile = exports.__isDirectory = exports.__isCommandExists = void 0;
 const isCommandExists_1 = __importDefault(require("./isCommandExists"));
 exports.__isCommandExists = isCommandExists_1.default;
 const isDirectory_1 = __importDefault(require("./isDirectory"));
@@ -28,7 +28,9 @@ const isFolder_1 = __importDefault(require("./isFolder"));
 exports.__isFolder = isFolder_1.default;
 const isInPackage_1 = __importDefault(require("./isInPackage"));
 exports.__isInPackage = isInPackage_1.default;
+const isMonorepo_1 = __importDefault(require("./isMonorepo"));
+exports.__isMonorepo = isMonorepo_1.default;
 const isSymlink_1 = __importDefault(require("./isSymlink"));
 exports.__isSymlink = isSymlink_1.default;
 __exportStar(require("../../shared/is/_exports"), exports);
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsd0VBQWtEO0FBVTlDLDRCQVZHLHlCQUFpQixDQVVIO0FBVHJCLGdFQUEwQztBQVV0Qyx3QkFWRyxxQkFBYSxDQVVIO0FBVGpCLHNEQUFnQztBQVU1QixtQkFWRyxnQkFBUSxDQVVIO0FBVFosMERBQW9DO0FBVWhDLHFCQVZHLGtCQUFVLENBVUg7QUFUZCxnRUFBMEM7QUFVdEMsd0JBVkcscUJBQWEsQ0FVSDtBQVRqQiw0REFBc0M7QUFVbEMsc0JBVkcsbUJBQVcsQ0FVSDtBQVJmLDJEQUF5QyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsd0VBQWtEO0FBVTlDLDRCQVZHLHlCQUFpQixDQVVIO0FBVHJCLGdFQUEwQztBQVV0Qyx3QkFWRyxxQkFBYSxDQVVIO0FBVGpCLHNEQUFnQztBQVU1QixtQkFWRyxnQkFBUSxDQVVIO0FBVFosMERBQW9DO0FBVWhDLHFCQVZHLGtCQUFVLENBVUg7QUFUZCxnRUFBMEM7QUFVdEMsd0JBVkcscUJBQWEsQ0FVSDtBQVRqQiw4REFBd0M7QUFVcEMsdUJBVkcsb0JBQVksQ0FVSDtBQVRoQiw0REFBc0M7QUFVbEMsc0JBVkcsbUJBQVcsQ0FVSDtBQVJmLDJEQUF5QyJ9

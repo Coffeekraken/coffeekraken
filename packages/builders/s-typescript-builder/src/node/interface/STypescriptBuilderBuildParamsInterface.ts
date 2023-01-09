@@ -72,6 +72,11 @@ export default class STypescriptBuilderBuildParamsInterface extends __SInterface
                 },
                 alias: 'p',
             },
+            declarationFiles:  {
+                description: 'Specify if you want the ".d.ts" files to be generated or not',
+                type: 'Boolean',
+                default: true
+            },
             watch: {
                 description:
                     'Specify if the files have to be build again at each update',

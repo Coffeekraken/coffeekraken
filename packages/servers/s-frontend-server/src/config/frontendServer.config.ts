@@ -388,6 +388,33 @@ export default function (api) {
                 path: `${__dirname()}/../node/modules/docmap/docmap`,
                 settings: {},
             },
+            classmap: {
+                /**
+                 * @name            description
+                 * @namespace       config.frontendServer.modules.classmap
+                 * @type            String
+                 *
+                 * Specify the module description
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                description:
+                    'This module gives you access to the /classmap.json url',
+                /**
+                 * @name            path
+                 * @namespace       config.frontendServer.modules.classmap
+                 * @type            String
+                 * @default             ${__dirname()}/../node/modules/classmap/classmap
+                 *
+                 * Specify where to find the "classmap" module
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                path: `${__dirname()}/../node/modules/classmap/classmap`,
+                settings: {},
+            },
             // sitemap: {
             //     /**
             //      * @name            description

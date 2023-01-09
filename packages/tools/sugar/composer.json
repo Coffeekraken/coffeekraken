@@ -8,12 +8,17 @@
     "require": {
         "twig/twig": "^3.4",
         "coffeekraken/s-specs": "^2.0@alpha",
+        "coffeekraken/s-classmap": "^2.0@alpha",
         "coffeekraken/s-frontspec": "^2.0@alpha"
     },
     "repositories": [
         {
             "type": "path",
             "url": "../s-specs"
+        },
+        {
+            "type": "path",
+            "url": "../s-classmap"
         },
         {
             "type": "path",

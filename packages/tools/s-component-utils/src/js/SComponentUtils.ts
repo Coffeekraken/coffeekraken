@@ -836,6 +836,14 @@ export default class SComponentUtils extends __SClass {
                 }
                 // replace '---' by '--'
                 clses = clses.map((c) => c.replace('---', '--'));
+
+                // classmap
+                if (document.env?.SUGAR?.classmap) {
+                    clses = clses.map((cls) => {
+                        return document.env.SUGAR.classmap[cls] ?? cls;
+                    });
+                }
+
                 return clses.join(' ');
             })
             .join(' ');

@@ -7,10 +7,11 @@ namespace Composer\Autoload;
 class ComposerStaticInit5aef4cc0e6aac9deed5e06d11b23cebe
 {
     public static $files = array (
+        'b6f94fb995301019218f723f8403405c' => __DIR__ . '/..' . '/coffeekraken/s-frontspec/src/php/autoload.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        '8a6c2366948df41621974fde19c9cd0c' => __DIR__ . '/..' . '/coffeekraken/s-classmap/src/php/autoload.php',
         '31bdba050b493691ea7e5abf38d35f40' => __DIR__ . '/..' . '/coffeekraken/s-specs/src/php/autoload.php',
-        'b6f94fb995301019218f723f8403405c' => __DIR__ . '/..' . '/coffeekraken/s-frontspec/src/php/autoload.php',
         '78db8c28b14c7bfed69e96ff3e40df7b' => __DIR__ . '/../..' . '/src/php/autoload.php',
     );
 

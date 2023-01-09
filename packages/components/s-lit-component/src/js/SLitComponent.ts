@@ -11,6 +11,70 @@ import { __querySelectorLive } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
 import { LitElement } from 'lit';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+
+String.prototype.interpolate = function (params) {
+    const names = Object.keys(params);
+    const vals = Object.values(params);
+    return new Function(...names, `return \`${this}\`;`)(...vals);
+};
+
+export function html(strings, ...expressions) {
+    // let finalString = ''
+
+    // // Loop through all expressions
+    // expressions.forEach((value, i) => {
+    //   finalString += `${strings[i]}<strong>${value}</strong>`
+    // })
+
+    // // Add the last string literal
+    // finalString += strings[strings.length - 1]
+
+    // return finalString
+
+    function interpolate(strs, ...exprs) {
+        // console.log('trss', exprs);
+
+        // if (typeof strs === 'string') {
+        //     return 'plop';
+        //     return strs ?? exprs[0];
+        // }
+
+        return strs
+            .map((string, i) => {
+                // if (exprs[i] !== undefined && typeof exprs[i] !== 'string') {
+                //     console.log('SS', exprs[i]);
+                //     return interpolate(string, ...(string.values ?? []));
+                // }
+                const ret = interpolate`${string}`;
+                return `${ret} ${exprs[i]}`;
+            })
+            .join('\n');
+
+        // let finalString = '';
+
+        // // Loop through all expressions
+        // exprs.forEach((value, i) => {
+        //     finalString += `${strs[i]}<strong>${value}</strong>`;
+        // });
+
+        // // Add the last string literal
+        // finalString += strings[strings.length - 1];
+
+        // return finalString;
+    }
+
+    // console.log('s', strings, 'c', expressions);
+
+    const str = interpolate(strings, ...expressions);
+
+    return unsafeHTML(str);
+
+    console.log('SSS', strings);
+    // console.log('ÊX', ...expressions);
+
+    // return __html.apply(strings, expressions);
+}
 
 export interface ISLitComponentSettings extends ISComponentUtilsSettings {
     interface?: typeof __SInterface;
@@ -68,6 +132,20 @@ export default class SLitComponent extends LitElement {
     set state(state) {
         Object.assign(this._state, state);
     }
+
+    // static expand(tpl) {
+    //     // console.log('PL', `${tpl}`);
+
+    //     console.log(tpl);
+
+    //     for (let [key, str] of Object.entries(tpl.strings)) {
+    //         console.log('jey', key);
+
+    //         tpl.strings[key] = 'coco';
+    //     }
+
+    //     return tpl;
+    // }
 
     /**
      * @name            define

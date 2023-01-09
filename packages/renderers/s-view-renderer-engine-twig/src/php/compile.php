@@ -43,9 +43,12 @@ $twig = \Sugar\twig\initTwig($twig, $loader);
 $data = \Sugar\convert\toArray($data);
 
 try {
-    print \Sugar\html\expandPleasantCssClassnames(
+    $html = \Sugar\html\expandPleasantCssClassnames(
         $twig->render($params->viewDotPath, $data)
     );
+    $html = \Sugar\classname\patchHtml($html);
+    print 'coco';
+    print $html;
 } catch (Exception $e) {
     print $e;
 }

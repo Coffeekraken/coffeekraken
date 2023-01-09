@@ -1,5 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           lod
@@ -35,7 +34,6 @@ class postcssSugarPluginLodMixinInterface extends __SInterface {
             method: {
                 type: 'String',
                 values: ['file', 'class'],
-                default: __STheme.get('lod.method'),
             },
         };
     }
@@ -59,12 +57,11 @@ export default function ({
 }) {
     const finalParams = <postcssSugarPluginLodMixinParams>{
         level: 0,
-        method: 'file',
+        method: settings.lod.method ?? 'class',
         ...(params ?? {}),
     };
 
     const levels: number[] = [];
-
     let action = settings.lod.defaultAction;
 
     if (typeof finalParams.level === 'number') {

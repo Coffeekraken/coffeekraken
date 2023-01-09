@@ -46,6 +46,10 @@ $blade = new BladeOne(
     // BladeOne::MODE_DEBUG
 );
 // $blade->setMode(BladeOne::MODE_DEBUG);
-print \Sugar\html\expandPleasantCssClassnames(
+
+$html = \Sugar\html\expandPleasantCssClassnames(
     $blade->run($viewName, (array) $data)
 );
+$html = \Sugar\classname\patchHtml($html);
+print 'coco';
+print $html;

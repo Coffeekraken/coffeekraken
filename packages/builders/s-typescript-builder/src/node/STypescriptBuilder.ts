@@ -1,5 +1,6 @@
 import type { ISBuilderSettings } from '@coffeekraken/s-builder';
 import __SBuilder from '@coffeekraken/s-builder';
+import __SEnv from '@coffeekraken/s-env';
 import __SFile from '@coffeekraken/s-file';
 import __SGlob from '@coffeekraken/s-glob';
 import __SLog from '@coffeekraken/s-log';
@@ -7,12 +8,18 @@ import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __dirname, __getFiles } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import { __packageRootDir } from '@coffeekraken/sugar/path';
+import {
+    __packageCacheDir,
+    __packageRootDir,
+    __srcRootDir,
+} from '@coffeekraken/sugar/path';
 import { __onProcessExit } from '@coffeekraken/sugar/process';
 import __currentModuleSystem from '@coffeekraken/sugar/shared/module/currentModuleSystem';
 import __fs, { promises as __fsPromise } from 'fs';
 import __path from 'path';
 import __ts from 'typescript';
+
+import * as __tsMorph from 'ts-morph';
 
 // import __STypescriptBuilderSettingsInterface from './interface/STypescriptBuilderSettingsInterface';
 // import __STypescriptBuilderBuildParamsInterface from './interface/STypescriptBuilderBuildParamsInterface';
@@ -56,6 +63,7 @@ export interface ISTypescriptBuilderFileToBuild {
     path: string;
     format: 'esm' | 'cjs';
     platform: 'node' | 'browser';
+    declarationFile: boolean;
     outDir: string;
 }
 
@@ -63,6 +71,7 @@ export interface ISTypescriptBuilderResultFile {
     input: ISTypescriptBuilderFileToBuild;
     format: 'esm' | 'cjs';
     platform: 'node' | 'browser';
+    declarationFiles: boolean;
     module:
         | 'commonjs'
         | 'amd'
@@ -108,6 +117,7 @@ export interface ISTypescriptBuilderBuildParams {
     packageRoot?: string;
     formats: ('esm' | 'cjs')[];
     platform: 'node' | 'browser';
+    declarationFiles: boolean;
     watch: boolean;
     buildInitial: boolean;
     customSettings: ISTypescriptBuilderCustomSettings;
@@ -120,6 +130,8 @@ export default class STypescriptBuilder extends __SBuilder {
      * Store the chokidar watchers in an object where the key is the glob
      */
     _watchersByGlob: Record<string, any> = {};
+
+    _tsHost: any;
 
     /**
      * @name            buildTemporary
@@ -327,6 +339,7 @@ export default class STypescriptBuilder extends __SBuilder {
                         outDir: finalParams.outDir,
                         format: finalParams.formats,
                         platform: finalParams.platform,
+                        declarationFiles: finalParams.declarationFiles,
                         files: buildedFiles,
                     });
                 });
@@ -387,6 +400,8 @@ export default class STypescriptBuilder extends __SBuilder {
                                             path: filePath,
                                             format,
                                             platform: finalParams.platform,
+                                            declarationFile:
+                                                finalParams.declarationFiles,
                                             outDir: finalParams.outDir,
                                         },
                                         buildParams,
@@ -415,6 +430,88 @@ export default class STypescriptBuilder extends __SBuilder {
                 },
             },
         );
+    }
+
+    _tsProject;
+    _createTsProgramIfNeeded(
+        compilerOptions: __ts.CompilerOptions,
+        packageRoot = process.cwd(),
+    ): __tsMorph.Project {
+        if (this._tsProject) {
+            return this._tsProject;
+        }
+        const relSrcRootDir = __srcRootDir().replace(
+                `${__packageRootDir()}/`,
+                '',
+            ),
+            globs = [`${packageRoot}/${relSrcRootDir}/**/*.ts`];
+
+        this._tsProject = new __tsMorph.Project({
+            skipAddingFilesFromTsConfig: true,
+            // useInMemoryFileSystem: true,
+            compilerOptions,
+        });
+
+        this._tsProject.addSourceFilesAtPaths(globs);
+
+        return this._tsProject;
+    }
+
+    _buildDeclarationFile(
+        filePath: string,
+        outputFilePath: string,
+        packageRoot = process.cwd(),
+    ): __SPromise<string> {
+        return new __SPromise(async ({ resolve, emit }) => {
+            const compilerOptions = {
+                allowJs: true,
+                declaration: true,
+                emitDeclarationOnly: true,
+                outDir: `${__packageCacheDir()}/s-typescript-builder`,
+            };
+
+            if (__SEnv.is('verbose')) {
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>[d.ts]</yellow> Generating .d.ts file for "<cyan>${__path.relative(
+                        __packageRootDir(),
+                        outputFilePath,
+                    )}</cyan>"`,
+                });
+            }
+
+            const project = this._createTsProgramIfNeeded(
+                compilerOptions,
+                packageRoot,
+            );
+            const sourceFile = project.getSourceFile(filePath);
+
+            if (!sourceFile) {
+                return resolve('');
+            }
+
+            const emitOutput = sourceFile.getEmitOutput(),
+                outputFile = emitOutput.getOutputFiles()[0];
+
+            if (!outputFile || !outputFile.getText) {
+                return resolve('');
+            }
+
+            const text = outputFile
+                .getText()
+                .replace(/\/\*[\s\S]*?\*\/|\/\/.*/g, '');
+
+            if (__SEnv.is('verbose')) {
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<green>[d.ts]</green> .d.ts file generated <green>successfully</green> for "<cyan>${__path.relative(
+                        __packageRootDir(),
+                        outputFilePath,
+                    )}</cyan>"`,
+                });
+            }
+            resolve(text);
+        });
     }
 
     _buildFile(
@@ -469,6 +566,7 @@ export default class STypescriptBuilder extends __SBuilder {
                 source,
                 __deepMerge(tsconfig, {
                     compilerOptions: {
+                        declaration: true,
                         lib:
                             tsconfig.lib ?? file.platform === 'node'
                                 ? ['esnext']
@@ -479,12 +577,35 @@ export default class STypescriptBuilder extends __SBuilder {
                 }),
             );
 
+            // generating .d.ts file
+            if (file.declarationFile && outFilePath.match(/\/dist\//)) {
+                const declarationPromise = pipe(
+                    this._buildDeclarationFile(
+                        file.path,
+                        outFilePath.replace(/\.js$/, '.d.ts'),
+                        params.packageRoot,
+                    ),
+                );
+                declarationPromise.then(async (declarationStr) => {
+                    // prevent empty file
+                    if (!declarationStr) {
+                        return;
+                    }
+                    // save declaration file if needed
+                    await __fsPromise.writeFile(
+                        outFilePath.replace(/\.js$/, '.d.ts'),
+                        declarationStr,
+                    );
+                });
+            }
+
             if (params.save && result.outputText) {
                 // write the output file
                 if (!__fs.existsSync(outPath)) {
                     __fs.mkdirSync(outPath, { recursive: true });
                 }
 
+                // save js file
                 await __fsPromise.writeFile(outFilePath, result.outputText);
 
                 // dirty hash to make the bin file(s) executable

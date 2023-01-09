@@ -1,8 +1,9 @@
+import __SClassmap from '@coffeekraken/s-classmap';
 import __SColor from '@coffeekraken/s-color';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __clearTransmations } from '@coffeekraken/sugar/dom';
 import { __isCrawler } from '@coffeekraken/sugar/is';
-import { __deepMerge } from '@coffeekraken/sugar/object';
+import { __deepMerge, __set } from '@coffeekraken/sugar/object';
 import { __speedIndex } from '@coffeekraken/sugar/perf';
 import __fastdom from 'fastdom';
 import type {
@@ -41,13 +42,22 @@ export interface ISThemeInitSettings {
     theme: string;
     variant: string;
     lod: Partial<ISThemeLodSettings>;
+    classmap: Partial<ISThemeClassmapSettings>;
+}
+
+export interface ISThemeClassmapSettings {
+    enabled: boolean;
+    url: string;
 }
 
 export interface ISThemeSettings
     extends ISThemeInitSettings,
-        __ISThemeSettings {}
+        __ISThemeSettings {
+    onReady: Function;
+}
 
 export interface ISThemeSetLodSettings {
+    enabled: boolean;
     $context: HTMLElement;
 }
 
@@ -329,10 +339,12 @@ export default class STheme extends __SThemeBase {
         };
 
         // get the current theme instance
-        themeInstance = this.getCurrentTheme(
-            finalSettings.$context,
-            finalSettings,
-        );
+        themeInstance = this.getCurrentTheme(finalSettings.$context, {
+            ...finalSettings,
+            onReady() {
+                console.log('READING');
+            },
+        });
 
         // set the current theme in the env.SUGAR.theme property
         if (!document.env) document.env = {};
@@ -538,6 +550,14 @@ export default class STheme extends __SThemeBase {
     ) {
         super(theme, variant, settings);
 
+        this.settings.classmap = __deepMerge(
+            {
+                enabled: this.get('classmap.enabled'),
+                url: this.get('classmap.url'),
+            },
+            settings.classmap ?? {},
+        );
+
         this.settings.lod = __deepMerge(
             {
                 level: this.get('lod.defaultLevel'),
@@ -551,10 +571,40 @@ export default class STheme extends __SThemeBase {
         // restore the theme
         this.restore();
 
-        // handle lod
-        if (this.settings.lod.enabled) {
-            this._initLod();
-        }
+        (async () => {
+            // handle lod
+            if (this.settings.lod.enabled) {
+                this._initLod();
+            }
+            console.log('INI', this.settings);
+            // classmap
+            if (this.settings.classmap.enabled) {
+                await this._initClassmap();
+            }
+
+            if (settings.onReady) {
+                settings.onReady();
+            }
+        })();
+    }
+
+    /**
+     * This method take care to init the classmap feature by loading the classmap
+     * from the settings specified url, patching native methods, etc...
+     */
+    private _initClassmap(): Promise<void> {
+        return new Promise(async (resolve) => {
+            const classmap = new __SClassmap();
+            const classmapJson = await classmap.loadFromUrl(
+                this.settings.classmap.url,
+            );
+            classmap.patchNativeMethods();
+
+            // save the classmap un the document.env.SUGAR.classmap property
+            __set(document, 'env.SUGAR.classmap', classmapJson);
+
+            resolve();
+        });
     }
 
     /**

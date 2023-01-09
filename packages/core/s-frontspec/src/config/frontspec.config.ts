@@ -4,6 +4,7 @@ import { __ipAddress } from '@coffeekraken/sugar/network';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
+import __path from 'path';
 
 export async function prepare(config) {
     const potentialFrontspecJsonFilePath = `${__packageRootDir()}/frontspec.json`;
@@ -94,6 +95,20 @@ export default function (api) {
                         const lodConfig = Object.assign({}, api.theme.lod);
                         delete lodConfig.cssProperties;
                         return lodConfig;
+                    },
+                },
+                classmap: {
+                    title: 'Classmap',
+                    description: 'Specify the classmap settings',
+                    type: 'object',
+                    get value() {
+                        return {
+                            ...Object.assign({}, api.theme.classmap),
+                            path: `./${__path.relative(
+                                __packageRootDir(),
+                                api.config.classmap.path,
+                            )}`,
+                        };
                     },
                 },
                 font: {

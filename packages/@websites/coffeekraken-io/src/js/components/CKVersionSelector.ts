@@ -1,8 +1,8 @@
 // @ts-nocheck
 
 import __SInterface from '@coffeekraken/s-interface';
-import __SLitComponent from '@coffeekraken/s-lit-component';
-import { html } from 'lit';
+import __SLitComponent, { html } from '@coffeekraken/s-lit-component';
+// import { html } from 'lit';
 
 class SCKVersionSelectorPropsInterface extends __SInterface {
   static get _definition() {
@@ -69,14 +69,14 @@ export default class CKVersionSelector extends __SLitComponent {
 
     let $dropdownContainer, $dropdown;
 
-    setTimeout(() => {
-      $dropdownContainer = this.querySelector('.s-dropdown-container');
-      $dropdown = $dropdownContainer.querySelector('.s-dropdown');
+    // setTimeout(() => {
+    //     $dropdownContainer = this.querySelector('.s-dropdown-container');
+    //     $dropdown = $dropdownContainer.querySelector('.s-dropdown');
 
-      if (this.isNewVersion()) {
-        $dropdownContainer.focus();
-      }
-    });
+    //     if (this.isNewVersion()) {
+    //         $dropdownContainer.focus();
+    //     }
+    // });
 
     const color = this._versions[0].includes('alpha')
       ? 'error'

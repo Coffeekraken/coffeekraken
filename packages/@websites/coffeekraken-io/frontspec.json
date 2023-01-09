@@ -158,13 +158,36 @@
     "lod": {
         "enabled": true,
         "defaultLevel": 3,
+        "botLevel": 1,
         "levels": {
-            "0": "bare",
-            "1": "low",
-            "2": "medium",
-            "3": "high",
-            "4": "extrem"
-        }
+            "0": {
+                "name": "bare",
+                "speedIndex": 0
+            },
+            "1": {
+                "name": "low",
+                "speedIndex": 30
+            },
+            "2": {
+                "name": "medium",
+                "speedIndex": 40
+            },
+            "3": {
+                "name": "high",
+                "speedIndex": 50
+            },
+            "4": {
+                "name": "extrem",
+                "speedIndex": 60
+            }
+        },
+        "method": "file",
+        "defaultAction": ">="
+    },
+    "classmap": {
+        "enabled": true,
+        "url": "/classmap.json",
+        "path": "./classmap.json"
     },
     "font": {
         "family": {
@@ -323,7 +346,7 @@
                 "display": "block",
                 "fontFamily": "Menlo, Monaco, Consolas, Courier New, monospace",
                 "color": "#596573",
-                "backgroundColor": "#FCFCFD",
+                "backgroundColor": "#fcfcfd",
                 "lineHeight": 1.5,
                 "paddingInline": "1.5rem",
                 "paddingBlock": "0.75rem",
@@ -340,7 +363,7 @@
                 "fontFamily": "Menlo, Monaco, Consolas, Courier New, monospace",
                 "color": "#596573",
                 "lineHeight": 1.1,
-                "backgroundColor": "#FFFEFA",
+                "backgroundColor": "#fffefa",
                 "borderRadius": "4px",
                 "paddingInline": "0.375rem",
                 "paddingBlock": "0rem"
@@ -363,7 +386,7 @@
             "label": "Link",
             "group": "text",
             "style": {
-                "color": "#FFBB00",
+                "color": "#ffbb00",
                 "textDecoration": "underline"
             }
         },
@@ -459,7 +482,7 @@
             "label": "Mark",
             "group": "text",
             "style": {
-                "backgroundColor": "#FFBB00"
+                "backgroundColor": "#ffbb00"
             }
         },
         "del": {
@@ -524,7 +547,7 @@
                 "-mozBackgroundClip": "text",
                 "-webkitTextFillColor": "transparent",
                 "-mozTextFillColor": "transparent",
-                "backgroundImage": "linear-gradient(90deg, hsla(212,14,50,1) 0%, #A9B2BC 100%)"
+                "backgroundImage": "linear-gradient(90deg, hsla(212,14,50,1) 0%, #a9b2bc 100%)"
             }
         },
         "main": {
@@ -545,7 +568,7 @@
                 "-mozBackgroundClip": "text",
                 "-webkitTextFillColor": "transparent",
                 "-mozTextFillColor": "transparent",
-                "backgroundImage": "linear-gradient(90deg, hsla(212,14,50,1) 0%, #A9B2BC 100%)"
+                "backgroundImage": "linear-gradient(90deg, hsla(212,14,50,1) 0%, #a9b2bc 100%)"
             }
         },
         "accent": {
@@ -553,7 +576,7 @@
             "group": "color",
             "type": "color",
             "style": {
-                "color": "#FFBB00"
+                "color": "#ffbb00"
             }
         },
         "accentGradient": {
@@ -566,7 +589,7 @@
                 "-mozBackgroundClip": "text",
                 "-webkitTextFillColor": "transparent",
                 "-mozTextFillColor": "transparent",
-                "backgroundImage": "linear-gradient(90deg, #ffbb00 0%, #FFD666 100%)"
+                "backgroundImage": "linear-gradient(90deg, #ffbb00 0%, #ffd666 100%)"
             }
         },
         "complementary": {
@@ -574,7 +597,7 @@
             "group": "color",
             "type": "color",
             "style": {
-                "color": "#5100FF"
+                "color": "#5100ff"
             }
         },
         "complementaryGradient": {
@@ -587,7 +610,7 @@
                 "-mozBackgroundClip": "text",
                 "-webkitTextFillColor": "transparent",
                 "-mozTextFillColor": "transparent",
-                "backgroundImage": "linear-gradient(90deg, #5100ff 0%, #9666FF 100%)"
+                "backgroundImage": "linear-gradient(90deg, #5100ff 0%, #9666ff 100%)"
             }
         },
         "success": {
@@ -595,7 +618,7 @@
             "group": "color",
             "type": "color",
             "style": {
-                "color": "#91FF00"
+                "color": "#91ff00"
             }
         },
         "successGradient": {
@@ -608,7 +631,7 @@
                 "-mozBackgroundClip": "text",
                 "-webkitTextFillColor": "transparent",
                 "-mozTextFillColor": "transparent",
-                "backgroundImage": "linear-gradient(90deg, #91ff00 0%, #BDFF66 100%)"
+                "backgroundImage": "linear-gradient(90deg, #91ff00 0%, #bdff66 100%)"
             }
         },
         "warning": {
@@ -616,7 +639,7 @@
             "group": "color",
             "type": "color",
             "style": {
-                "color": "#FFD500"
+                "color": "#ffd500"
             }
         },
         "warningGradient": {
@@ -629,7 +652,7 @@
                 "-mozBackgroundClip": "text",
                 "-webkitTextFillColor": "transparent",
                 "-mozTextFillColor": "transparent",
-                "backgroundImage": "linear-gradient(90deg, #ffd500 0%, #FFE666 100%)"
+                "backgroundImage": "linear-gradient(90deg, #ffd500 0%, #ffe666 100%)"
             }
         },
         "error": {
@@ -637,7 +660,7 @@
             "group": "color",
             "type": "color",
             "style": {
-                "color": "#FF003C"
+                "color": "#ff003c"
             }
         },
         "errorGradient": {
@@ -650,7 +673,7 @@
                 "-mozBackgroundClip": "text",
                 "-webkitTextFillColor": "transparent",
                 "-mozTextFillColor": "transparent",
-                "backgroundImage": "linear-gradient(90deg, #ff003b 0%, #FF668A 100%)"
+                "backgroundImage": "linear-gradient(90deg, #ff003b 0%, #ff668a 100%)"
             }
         },
         "info": {
@@ -658,7 +681,7 @@
             "group": "color",
             "type": "color",
             "style": {
-                "color": "#00FFFF"
+                "color": "#00ffff"
             }
         },
         "infoGradient": {
@@ -671,7 +694,7 @@
                 "-mozBackgroundClip": "text",
                 "-webkitTextFillColor": "transparent",
                 "-mozTextFillColor": "transparent",
-                "backgroundImage": "linear-gradient(90deg, #00ffff 0%, #66FFFF 100%)"
+                "backgroundImage": "linear-gradient(90deg, #00ffff 0%, #66ffff 100%)"
             }
         }
     },

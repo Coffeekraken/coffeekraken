@@ -1,9 +1,5 @@
 import __SFile from '@coffeekraken/s-file';
-import {
-    __distCssDir,
-    __packageRootDir,
-    __srcCssDir,
-} from '@coffeekraken/sugar/path';
+import { __distCssDir, __srcCssDir } from '@coffeekraken/sugar/path';
 import * as __csso from 'csso';
 
 import { __writeFileSync } from '@coffeekraken/sugar/fs';
@@ -27,12 +23,14 @@ export default async function ({
     sharedData,
     postcssApi,
     settings,
+    applyClassmap,
     getRoot,
 }) {
     // check if the lod feature is enabled or not
     if (!settings.lod?.enabled) {
         return;
     }
+
     function generateLodRuleSelectors(
         rule: any,
         levelStr?: string,
@@ -209,36 +207,37 @@ export default async function ({
     }
 
     // handle "file" method on rule
-    root.walkRules(/\.s-lod-method--file/, (rule) => {
-        const level = parseInt(rule.selector.match(/\.s-lod--([0-9]{1,2})/)[1]);
+    if (settings.lod.method === 'file') {
+        root.walkRules(/\.s-lod-method--file/, (rule) => {
+            const level = parseInt(
+                rule.selector.match(/\.s-lod--([0-9]{1,2})/)[1],
+            );
 
-        // remove the .s-lod-method--%method... class from the selector
-        rule.selector = rule.selector.replace(/\.s-lod-method--file\s?/gm, '');
+            // remove the .s-lod-method--%method... class from the selector
+            rule.selector = rule.selector.replace(
+                /\.s-lod-method--file\s?/gm,
+                '',
+            );
 
-        // remove the .s-lod--%level... class from the selector
-        rule.selector = rule.selector.replace(/\.s-lod--[0-9\s]{1,2}/gm, '');
+            // remove the .s-lod--%level... class from the selector
+            rule.selector = rule.selector.replace(
+                /\.s-lod--[0-9\s]{1,2}/gm,
+                '',
+            );
 
-        // add the rule in the root
-        if (!_lodRulesByLevels[level]) {
-            _lodRulesByLevels[level] = postcssApi.root();
-        }
-        _lodRulesByLevels[level].nodes.push(rule.clone());
+            // add the rule in the root
+            if (!_lodRulesByLevels[level]) {
+                _lodRulesByLevels[level] = postcssApi.root();
+            }
+            _lodRulesByLevels[level].nodes.push(rule.clone());
 
-        // remove the rule from the actual css
-        rule.remove();
-    });
+            // remove the rule from the actual css
+            rule.remove();
+        });
+    }
 
     // clean empty rules
     root.walkRules((rule) => {
-        // empty rules
-        if (
-            !rule.nodes?.length ||
-            !rule.nodes.filter((n) => n.type !== 'comment').length
-        ) {
-            rule.remove();
-            return;
-        }
-
         // support for @sugar.lods.prevent mixin
         // @ts-ignore
         if (rule._preventLod) {
@@ -284,6 +283,20 @@ export default async function ({
         }
     });
 
+    // empty rules
+    root.walkRules((rule) => {
+        if (
+            !rule.nodes?.length ||
+            !rule.nodes.filter((n) => n.type !== 'comment').length
+        ) {
+            rule.remove();
+            return;
+        }
+    });
+
+    // classmap
+    applyClassmap(root);
+
     if (settings.lod.method === 'file') {
         const filePath = root.source.input.file;
 
@@ -293,10 +306,8 @@ export default async function ({
             }
 
             const outPath = filePath
-                    .replace(/\.css$/, `.lod-${level}.css`)
-                    .replace(__srcCssDir(), `${__distCssDir()}/lod`),
-                outPathRel = outPath.replace(`${__packageRootDir()}/`, ''),
-                filePathRel = filePath.replace(`${__packageRootDir()}/`, '');
+                .replace(/\.css$/, `.lod-${level}.css`)
+                .replace(__srcCssDir(), `${__distCssDir()}/lod`);
 
             let finalCss = '';
 
@@ -316,11 +327,25 @@ export default async function ({
             });
             finalCss = filteredRoot.toString().trim();
 
+            // resolve plugins
+            const plugins: Function[] = [];
+            for (let i = 0; i < settings.plugins.length; i++) {
+                const p = settings.plugins[i];
+                if (typeof p === 'string') {
+                    const { default: plugin } = await import(p);
+                    const fn = plugin.default ?? plugin;
+                    plugins.push(fn);
+                }
+            }
+
+            // apply plugins on resulting css
+            finalCss = (await postcssApi(plugins).process(finalCss)).css;
+
             // minify if needed
-            if (settings.minify) {
+            if (settings.target === 'production') {
                 finalCss = __csso.minify(finalCss, {
                     restructure: false,
-                    comments: true, // leave all exlamation comments /*! ... */
+                    comments: false,
                 }).css;
             }
 

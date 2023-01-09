@@ -192,6 +192,9 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                     .slice(-1)[0]
                     .replace(/\.config\.(t|j)s(on)?$/, '');
 
+                // exclude .d.ts files
+                if (filePath.match(/\.d\.ts$/)) continue;
+                // make sure it's a js, ts or json file
                 if (!filePath.match(/\.(j|t)s(on)?$/)) continue;
 
                 if (

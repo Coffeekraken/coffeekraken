@@ -259,6 +259,11 @@ export default class SPostcssBuilder extends __SBuilder {
                             this.settings.postcss.pluginsOptions[p] ?? {};
                         plugins.push(
                             fn({
+                                plugins: this.settings.postcss.plugins.filter(
+                                    (p) =>
+                                        p !==
+                                        '@coffeekraken/s-postcss-sugar-plugin',
+                                ),
                                 target: params.prod
                                     ? 'production'
                                     : 'development',

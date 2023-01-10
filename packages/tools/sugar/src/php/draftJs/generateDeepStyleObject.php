@@ -26,6 +26,7 @@ function generateDeepStyleObject(
     $block,
     $style = null,
     $type = null,
+    $data = null,
     &$char_position = 0,
     &$keyInlineStylePosition = -1,
     &$breakPoint = []
@@ -55,8 +56,9 @@ function generateDeepStyleObject(
                 $keyInlineStylePosition = $keyInlineStyle;
                 $content[] = generateDeepStyleObject(
                     $block,
-                    $inlineStyle['style'],
-                    $inlineStyle['type'],
+                    ( isset($inlineStyle['style']) ) ? $inlineStyle['style'] : null,
+                    ( isset($inlineStyle['type']) ) ? $inlineStyle['type'] : null,
+                    ( isset($inlineStyle['data']) ) ? $inlineStyle['data'] : null,
                     $char_position,
                     $keyInlineStyle,
                     $breakPoint
@@ -94,5 +96,6 @@ function generateDeepStyleObject(
         'id' => $style,
         'type' => $type,
         'content' => $content,
+        'data' => $data,
     ];
 }

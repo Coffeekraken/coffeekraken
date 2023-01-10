@@ -43,6 +43,11 @@ function renderContent($deepStyleObject, callable $renderFunction)
                             $subContent['content'],
                             $renderFunction
                         ),
+                        'data' =>
+                            isset($subContent['data']) &&
+                            $subContent['data'] != null
+                                ? $subContent['data']
+                                : null,
                     ],
                 ]);
             } else {

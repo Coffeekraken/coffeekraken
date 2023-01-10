@@ -30,6 +30,10 @@
     <{{ id }} class="s-typo--{{ id }}">
         {{ html|raw }}
     </{{ id }}>
+{% elseif id == 'a' and data.url and data.target is defined %}
+    <a href="{{ data.url }}" target="{{ data.target }}">
+        {{ html|raw }}
+    </a>
 {% else %}
     {{ html|raw }}
 {% endif %}

@@ -79,7 +79,63 @@ export default class SClassmapBase extends __SClass {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
+    // patchHtml(html: string): string {
+    //     console.log('patch', html);
+    // }
+
+    /**
+     * @name            patchHtml
+     * @type            Function
+     * @platform        php
+     * @status          beta
+     *
+     * This method allows you to patch the passed html and replace in it all the available
+     * classes in the map
+     *
+     * @param       {String}            $html           The html to patch
+     * @return      {String}                            The patched html
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
     patchHtml(html: string): string {
-        console.log('patch', html);
+        let reg = /class="[a-zA-Z0-9_\-:@\s]+"/gm,
+            needClassAttr = true;
+        if (html.trim().match(/class="[a-zA-Z0-9_\-:@\s]+$/)) {
+            reg = /class="[a-zA-Z0-9_\-:@\s]+"?/gm;
+        } else if (html.trim().match(/^[a-zA-Z0-9_\-:@\s]+$/)) {
+            reg = /[a-zA-Z0-9_\-:@\s]+/gm;
+            needClassAttr = false;
+        }
+
+        const matches = html.match(reg);
+        if (!matches) return html;
+
+        // @ts-ignore
+        matches.forEach((match) => {
+            const endQuote = match.match(/"$/) ? '"' : '';
+            const classesStr = match
+                // .trim()
+                .replace('class="', '')
+                .replace('"', '');
+
+            const newClassesNames = classesStr.split(' ').map((cls) => {
+                return this.map[cls] ?? cls;
+            });
+
+            if (needClassAttr) {
+                html = html.replace(
+                    match,
+                    `class="${newClassesNames.join(' ')}${endQuote}`,
+                );
+            } else {
+                html = html.replace(
+                    match,
+                    `${newClassesNames.join(' ')}${endQuote}`,
+                );
+            }
+        });
+
+        return html;
     }
 }

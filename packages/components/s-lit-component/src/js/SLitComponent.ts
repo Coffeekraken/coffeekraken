@@ -8,72 +8,96 @@ import __SComponentUtils, {
 import __SInterface from '@coffeekraken/s-interface';
 import { __wait } from '@coffeekraken/sugar/datetime';
 import { __querySelectorLive } from '@coffeekraken/sugar/dom';
+import { __expandPleasantCssClassnames } from '@coffeekraken/sugar/html';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
-import { LitElement } from 'lit';
-import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+import { html as __html, LitElement } from 'lit';
 
-String.prototype.interpolate = function (params) {
-    const names = Object.keys(params);
-    const vals = Object.values(params);
-    return new Function(...names, `return \`${this}\`;`)(...vals);
-};
-
-export function html(strings, ...expressions) {
-    // let finalString = ''
-
-    // // Loop through all expressions
-    // expressions.forEach((value, i) => {
-    //   finalString += `${strings[i]}<strong>${value}</strong>`
-    // })
-
-    // // Add the last string literal
-    // finalString += strings[strings.length - 1]
-
-    // return finalString
-
-    function interpolate(strs, ...exprs) {
-        // console.log('trss', exprs);
-
-        // if (typeof strs === 'string') {
-        //     return 'plop';
-        //     return strs ?? exprs[0];
-        // }
-
-        return strs
-            .map((string, i) => {
-                // if (exprs[i] !== undefined && typeof exprs[i] !== 'string') {
-                //     console.log('SS', exprs[i]);
-                //     return interpolate(string, ...(string.values ?? []));
-                // }
-                const ret = interpolate`${string}`;
-                return `${ret} ${exprs[i]}`;
-            })
-            .join('\n');
-
-        // let finalString = '';
-
-        // // Loop through all expressions
-        // exprs.forEach((value, i) => {
-        //     finalString += `${strs[i]}<strong>${value}</strong>`;
-        // });
-
-        // // Add the last string literal
-        // finalString += strings[strings.length - 1];
-
-        // return finalString;
+function tplToStr(tpl) {
+    if (!tpl) {
+        return '';
     }
 
-    // console.log('s', strings, 'c', expressions);
+    if (typeof tpl === 'string') {
+        return tpl;
+    } else if (tpl.strings && tpl.values) {
+        let str = tpl.strings[0];
+        for (let i = 1; i < tpl.strings.length; i++) {
+            const val = tpl.values?.[i - 1] ?? '';
+            if (typeof val === 'string') {
+                str += val;
+            } else if (Array.isArray(val)) {
+                val.forEach((v) => {
+                    str += tplToStr(v);
+                });
+            } else if (val.values) {
+                str += tplToStr(val);
+            }
 
-    const str = interpolate(strings, ...expressions);
+            str += tpl.strings[i] ?? '';
+        }
+        return str;
+    } else if (tpl.values) {
+        let str = '';
+        tpl.values.forEach((val) => {
+            str += val;
+        });
+        return str;
+    }
+}
 
-    return unsafeHTML(str);
+export function html(strings, ...values) {
+    const newStrings = [];
+    newStrings.raw = strings.raw;
+    const newValues = [];
 
-    console.log('SSS', strings);
-    // console.log('ÊX', ...expressions);
+    const classmap = document.env?.SUGAR?.classmap;
 
-    // return __html.apply(strings, expressions);
+    let inClass = false,
+        newClasses = [];
+
+    for (let i = 0; i < strings.length; i++) {
+        let newStr = strings[i],
+            newVal = values[i];
+
+        // patch html if a classmap is available
+        // and expand classnames
+        newStr = __expandPleasantCssClassnames(newStr);
+        // if (classmap && (inClass || newStr.match(/class="/))) {
+        //     newStr = classmap.patchHtml(newStr);
+        // }
+
+        // patch html in the value if possible
+        // and expand classnames
+        if (newVal && typeof newVal === 'string') {
+            newVal = __expandPleasantCssClassnames(newVal);
+            // if (classmap && (inClass || newStr.match(/class="/))) {
+            //     newVal = classmap.patchHtml(newVal);
+            // }
+        }
+
+        // // check if the newStr ends with some classes like `class="my-class ${something}`
+        // const classesMatches = newStr.match(/class="([a-zA-Z0-9_-\s]+)$/m);
+        // if (inClass && typeof values[i] === 'string') {
+        //     newClasses.push(values[i]);
+        // } else if (classesMatches?.[1]) {
+        //     inClass = true;
+        // } else if (i > 0 && inClass && newStr.match(/^"/)) {
+        //     newStrings[i - 1] += ` ${newClasses.join(' ')}`;
+        //     newClasses = [];
+        //     inClass = false;
+        // }
+
+        // add the new string into the template string
+        newStrings.push(newStr);
+
+        // add the new value
+        newValues.push(newVal);
+    }
+
+    // console.log(newStrings);
+
+    return __html(newStrings, ...newValues);
 }
 
 export interface ISLitComponentSettings extends ISComponentUtilsSettings {

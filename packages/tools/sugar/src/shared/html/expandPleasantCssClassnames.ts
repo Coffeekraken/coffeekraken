@@ -23,7 +23,14 @@ import __expandPleasantCssClassname from './expandPleasantCssClassname';
  */
 
 export default function __expandPleasantCssClassnames(html: string): string {
-    const reg = /class="[a-zA-Z0-9_\-:@\s]+"/gm;
+    let reg = /class="[a-zA-Z0-9_\-:@\s]+"/gm,
+        needClassAttr = true;
+    if (html.trim().match(/class="[a-zA-Z0-9_\-:@\s]+$/)) {
+        reg = /class="[a-zA-Z0-9_\-:@\s]+"?/gm;
+    } else if (html.trim().match(/^[a-zA-Z0-9_\-:@\s]+$/)) {
+        reg = /[a-zA-Z0-9_\-:@\s]+/gm;
+        needClassAttr = false;
+    }
 
     const matches = html.match(reg);
 
@@ -31,9 +38,18 @@ export default function __expandPleasantCssClassnames(html: string): string {
 
     // @ts-ignore
     matches.forEach((match) => {
+        const endQuote = match.match(/"$/) ? '"' : '';
         const classesStr = match.trim().replace('class="', '').replace('"', '');
         const newClassesStr = __expandPleasantCssClassname(classesStr);
-        html = html.replace(match, `class="${newClassesStr}"`);
+
+        if (needClassAttr) {
+            html = html.replace(
+                match,
+                `class="${newClassesStr.trim()}${endQuote}`,
+            );
+        } else {
+            html = html.replace(match, ` ${newClassesStr.trim()}${endQuote}`);
+        }
     });
 
     const escapedReg = /class=".*\\:.*/gm;

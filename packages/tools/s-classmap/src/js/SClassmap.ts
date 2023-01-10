@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __SClassmapBase from '../shared/SClassmap';
+import __SClassmapBase from '../shared/SClassmapBase';
 
 /**
  * @name                SClassmap
@@ -43,6 +43,7 @@ export default class SClassmap extends __SClassmapBase {
      */
     constructor(settings?: Partial<ISClassmapJsSettings>) {
         super({
+            map: document.env?.SUGAR?.classmap,
             ...(settings ?? {}),
         });
     }
@@ -101,7 +102,6 @@ export default class SClassmap extends __SClassmapBase {
             });
             const res = nativeQuerySelector.call(this, sels);
             if (!res) {
-                console.log('RE', res, sels);
             }
             return res;
         };

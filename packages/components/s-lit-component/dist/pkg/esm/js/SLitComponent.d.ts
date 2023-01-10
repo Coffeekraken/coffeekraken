@@ -2,6 +2,7 @@ import type { ISComponentUtilsSettings } from '@coffeekraken/s-component-utils';
 import __SComponentUtils from '@coffeekraken/s-component-utils';
 import __SInterface from '@coffeekraken/s-interface';
 import { LitElement } from 'lit';
+export declare function html(...args: any[]): import("lit-html").TemplateResult<1>;
 export interface ISLitComponentSettings extends ISComponentUtilsSettings {
     interface?: typeof __SInterface;
     rootNode?: HTMLElement;
@@ -31,7 +32,6 @@ export default class SLitComponent extends LitElement {
     _state: {};
     get state(): {};
     set state(state: {});
-    html(str: any): import("lit-html").TemplateResult<1>;
     
     static define(tagName: string, Cls: SLitComponent, props?: any, settings?: Partial<ISLitComponentDefineSettings>): void;
     

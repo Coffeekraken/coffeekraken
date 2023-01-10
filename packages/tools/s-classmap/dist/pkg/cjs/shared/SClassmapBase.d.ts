@@ -9,5 +9,6 @@ export default class SClassmapBase extends __SClass {
     
     constructor(settings?: Partial<ISClassmapSettings>);
     
+    
     patchHtml(html: string): string;
 }

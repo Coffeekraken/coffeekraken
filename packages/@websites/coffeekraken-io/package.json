@@ -10,6 +10,7 @@
         "prod": "sugard kitchen.run prod",
         "build": "sugard kitchen.run build",
         "static": "live-server static",
+        "stat": "DIR=./static gzip-server",
         "deploy": "rsync -avzh --delete --progress --stats ./static fe0mt_coffeekraken@fe0mt.ftp.infomaniak.com:~/sites/coffeekraken.io",
         "deploy.bogdanov": "rsync -avzh --delete --progress --stats ./static fe0mt_bogdanov_ssh@fe0mt.ftp.infomaniak.com:~/sites/bogdanov.coffeekraken.io"
     },

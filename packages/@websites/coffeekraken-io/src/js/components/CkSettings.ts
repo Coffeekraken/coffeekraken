@@ -1,8 +1,7 @@
 // @ts-nocheck
 
-import __SLitComponent from '@coffeekraken/s-lit-component';
+import __SLitComponent, { html } from '@coffeekraken/s-lit-component';
 import __STheme from '@coffeekraken/s-theme';
-import { html } from 'lit';
 
 export default class CkSettings extends __SLitComponent {
   _theme = __STheme.getCurrentTheme();

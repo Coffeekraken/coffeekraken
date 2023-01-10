@@ -92,3 +92,28 @@
     padding: 0;
     max-width: none;
 }
+
+/* header button */
+[data-target=".fusion-modal.demande-entretien"] {
+    position: relative;
+    top: 15px;
+    border-color: #1b3c8d;
+    border-width: 1px 1px 1px 1px;
+    border-radius: 4px 4px 4px 4px;
+    background: rgba(255,255,255,0);
+    white-space: nowrap;
+    font-size: 12px;
+    font-family: "Open Sans";
+    font-weight: bold;
+    padding: 15px 15px 15px 15px;
+    background-color: #002c77!important;
+    border: 1px solid transparent;
+    color: #fff;
+    line-height: var(--button_line_height, 1);
+    text-transform: uppercase;
+    text-align: center;
+}
+[data-target=".fusion-modal.demande-entretien"]:hover {
+    background-color: white !important;
+    border-color: #002c77;
+}

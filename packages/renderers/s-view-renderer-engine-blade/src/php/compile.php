@@ -50,6 +50,5 @@ $blade = new BladeOne(
 $html = \Sugar\html\expandPleasantCssClassnames(
     $blade->run($viewName, (array) $data)
 );
-$html = \Sugar\classname\patchHtml($html);
-print 'coco';
+// $html = \Sugar\classname\patchHtml($html);
 print $html;

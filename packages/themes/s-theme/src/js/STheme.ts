@@ -1,9 +1,8 @@
-import __SClassmap from '@coffeekraken/s-classmap';
 import __SColor from '@coffeekraken/s-color';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __clearTransmations } from '@coffeekraken/sugar/dom';
 import { __isCrawler } from '@coffeekraken/sugar/is';
-import { __deepMerge, __set } from '@coffeekraken/sugar/object';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __speedIndex } from '@coffeekraken/sugar/perf';
 import __fastdom from 'fastdom';
 import type {
@@ -558,6 +557,7 @@ export default class STheme extends __SThemeBase {
             settings.classmap ?? {},
         );
 
+        // default lod (level of details) settings
         this.settings.lod = __deepMerge(
             {
                 level: this.get('lod.defaultLevel'),
@@ -576,11 +576,11 @@ export default class STheme extends __SThemeBase {
             if (this.settings.lod.enabled) {
                 this._initLod();
             }
-            console.log('INI', this.settings);
-            // classmap
-            if (this.settings.classmap.enabled) {
-                await this._initClassmap();
-            }
+
+            // classmap (not supported for now...)
+            // if (this.settings.classmap.enabled) {
+            //     await this._initClassmap();
+            // }
 
             if (settings.onReady) {
                 settings.onReady();
@@ -592,20 +592,20 @@ export default class STheme extends __SThemeBase {
      * This method take care to init the classmap feature by loading the classmap
      * from the settings specified url, patching native methods, etc...
      */
-    private _initClassmap(): Promise<void> {
-        return new Promise(async (resolve) => {
-            const classmap = new __SClassmap();
-            const classmapJson = await classmap.loadFromUrl(
-                this.settings.classmap.url,
-            );
-            classmap.patchNativeMethods();
+    // private _initClassmap(): Promise<void> {
+    //     return new Promise(async (resolve) => {
+    //         const classmap = new __SClassmap();
+    //         const classmapJson = await classmap.loadFromUrl(
+    //             this.settings.classmap.url,
+    //         );
+    //         classmap.patchNativeMethods();
 
-            // save the classmap un the document.env.SUGAR.classmap property
-            __set(document, 'env.SUGAR.classmap', classmapJson);
+    //         // save the classmap un the document.env.SUGAR.classmap property
+    //         __set(document, 'env.SUGAR.classmap', classmap);
 
-            resolve();
-        });
-    }
+    //         resolve();
+    //     });
+    // }
 
     /**
      * This method takes care of initializing the lod (level of details) features
@@ -615,8 +615,6 @@ export default class STheme extends __SThemeBase {
         setTimeout(() => {
             // check if is a crawler
             const isCrawler = __isCrawler();
-
-            console.log(this.settings, this.state);
 
             // check if is a crawler and that we have a botLevel config
             if (isCrawler && this.lodConfig.botLevel !== undefined) {

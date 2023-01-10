@@ -1,28 +1,5 @@
 "use strict";
 // @ts-nocheck
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -38,8 +15,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.define = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
-const s_lit_component_1 = __importStar(require("@coffeekraken/s-lit-component"));
-// import { html } from 'lit';
+const s_lit_component_1 = __importDefault(require("@coffeekraken/s-lit-component"));
+const lit_1 = require("lit");
 class SCKVersionSelectorPropsInterface extends s_interface_1.default {
     static get _definition() {
         return {
@@ -88,21 +65,21 @@ class CKVersionSelector extends s_lit_component_1.default {
             this.state.lastViewedVersion = this._currentVersion;
         }
         let $dropdownContainer, $dropdown;
-        // setTimeout(() => {
-        //     $dropdownContainer = this.querySelector('.s-dropdown-container');
-        //     $dropdown = $dropdownContainer.querySelector('.s-dropdown');
-        //     if (this.isNewVersion()) {
-        //         $dropdownContainer.focus();
-        //     }
-        // });
+        setTimeout(() => {
+            $dropdownContainer = this.querySelector('.s-dropdown-container');
+            $dropdown = $dropdownContainer.querySelector('.s-dropdown');
+            if (this.isNewVersion()) {
+                $dropdownContainer.focus();
+            }
+        });
         const color = this._versions[0].includes('alpha')
-            ? 'error'
-            : 'complementary';
-        return (0, s_lit_component_1.html) `
+            ? 's-color--error'
+            : 's-color--complementary';
+        return (0, lit_1.html) `
       <span class="s-dropdown-container" tabindex="0">
-        <span class="s-badge s-color--${color}">
+        <span class="s-badge ${color}">
           ${this._currentVersionObj.codename
-            ? (0, s_lit_component_1.html) ` <span class="s-typo:bold s-text:uppercase"
+            ? (0, lit_1.html) ` <span class="s-typo:bold s-text:uppercase"
                 >${this._currentVersionObj.codename}</span
               >`
             : `${this._versions[0]}`}
@@ -110,11 +87,15 @@ class CKVersionSelector extends s_lit_component_1.default {
         <div class="s-dropdown:bottom s-bare">
           <div class="__inner">
             ${this.isNewVersion()
-            ? (0, s_lit_component_1.html) `
+            ? (0, lit_1.html) `
                   <div class="__new s-p:30">
                     <h3 class="s-typo:h3 s-gradient:text:accent s-mbe:20">
                       Hell Yeaaah!
                     </h3>
+                    <code>
+                      Hello world
+                    </code>
+                    </code>
                     <p class="s-typo--p s-mbe:20">
                       A new version has been released<br />since your latest
                       visite on the<br />
@@ -150,7 +131,7 @@ class CKVersionSelector extends s_lit_component_1.default {
             <div class="__versions">
               ${this._versions.map((version, i) => {
             // if (i === 0) return;
-            return (0, s_lit_component_1.html) `
+            return (0, lit_1.html) `
                   <div class="__version">
                     <a
                       href="https://${version
@@ -164,10 +145,10 @@ class CKVersionSelector extends s_lit_component_1.default {
                     </a>
                     <span class="__actions">
                       ${this.props.versions[version].codename
-                ? (0, s_lit_component_1.html) ` <span
-                            class="s-badge s-typo:bold s-text:uppercase s-color--${version.includes('alpha')
-                    ? 'error'
-                    : 'complementary'} s-mis--20"
+                ? (0, lit_1.html) ` <span
+                            class="s-badge s-typo:bold s-text:uppercase ${version.includes('alpha')
+                    ? 's-color--error'
+                    : 's-color--complementary'} s-mis--20"
                           >
                             ${this.props.versions[version].codename}
                           </span>`
@@ -210,4 +191,4 @@ function define(props = {}, tagName = 'ck-version-selector') {
     s_lit_component_1.default.define(tagName, CKVersionSelector, Object.assign(Object.assign({}, props), { id: 'version-selector', saveState: true }));
 }
 exports.define = define;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUVkLDRFQUFxRDtBQUNyRCxpRkFBc0U7QUFDdEUsOEJBQThCO0FBRTlCLE1BQU0sZ0NBQWlDLFNBQVEscUJBQVk7SUFDekQsTUFBTSxLQUFLLFdBQVc7UUFDcEIsT0FBTztZQUNMLFFBQVEsRUFBRTtnQkFDUixJQUFJLEVBQUUsUUFBUTtnQkFDZCxRQUFRLEVBQUUsSUFBSTthQUNmO1NBQ0YsQ0FBQztJQUNKLENBQUM7Q0FDRjtBQUVELE1BQXFCLGlCQUFrQixTQUFRLHlCQUFlO0lBaUI1RDtRQUNFLEtBQUssQ0FBQztZQUNKLFNBQVMsRUFBRSxLQUFLO1NBQ2pCLENBQUMsQ0FBQztJQUNMLENBQUM7SUFwQkQsTUFBTSxLQUFLLFVBQVU7UUFDbkIsT0FBTyx5QkFBZSxDQUFDLHVCQUF1QixDQUM1QyxFQUFFLEVBQ0YsZ0NBQWdDLENBQ2pDLENBQUM7SUFDSixDQUFDO0lBaUJLLFlBQVk7OERBQUksQ0FBQztLQUFBO0lBRWpCLEtBQUs7OztZQUNULDBCQUEwQjtZQUMxQixJQUFJLENBQUMsU0FBUyxHQUFHLE1BQU0sQ0FBQyxJQUFJLENBQUMsTUFBQSxJQUFJLENBQUMsS0FBSyxDQUFDLFFBQVEsbUNBQUksRUFBRSxDQUFDLENBQUM7WUFDeEQsSUFBSSxDQUFDLGVBQWUsR0FBRyxJQUFJLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQyxDQUFDO1lBQ3pDLElBQUksQ0FBQyxrQkFBa0IsR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsZUFBZSxDQUFDLENBQUM7O0tBQ3JFO0lBRUQsWUFBWTtRQUNWLGVBQWU7UUFDZixPQUFPLENBQ0wsSUFBSSxDQUFDLEtBQUssQ0FBQyxpQkFBaUI7WUFDNUIsSUFBSSxDQUFDLEtBQUssQ0FBQyxpQkFBaUIsS0FBSyxJQUFJLENBQUMsZUFBZSxDQUN0RCxDQUFDO0lBQ0osQ0FBQztJQUVELE1BQU07UUFDSixJQUFJLENBQUMsSUFBSSxDQUFDLFNBQVMsRUFBRTtZQUNuQixPQUFPO1NBQ1I7UUFFRCxzRUFBc0U7UUFDdEUsSUFBSSxJQUFJLENBQUMsWUFBWSxFQUFFLEVBQUU7WUFDdkIsSUFBSSxDQUFDLGtCQUFrQixHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsaUJBQWlCLENBQUM7U0FDeEQ7YUFBTTtZQUNMLElBQUksQ0FBQyxLQUFLLENBQUMsaUJBQWlCLEdBQUcsSUFBSSxDQUFDLGVBQWUsQ0FBQztTQUNyRDtRQUVELElBQUksa0JBQWtCLEVBQUUsU0FBUyxDQUFDO1FBRWxDLHFCQUFxQjtRQUNyQix3RUFBd0U7UUFDeEUsbUVBQW1FO1FBRW5FLGlDQUFpQztRQUNqQyxzQ0FBc0M7UUFDdEMsUUFBUTtRQUNSLE1BQU07UUFFTixNQUFNLEtBQUssR0FBRyxJQUFJLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQyxDQUFDLFFBQVEsQ0FBQyxPQUFPLENBQUM7WUFDL0MsQ0FBQyxDQUFDLE9BQU87WUFDVCxDQUFDLENBQUMsZUFBZSxDQUFDO1FBRXBCLE9BQU8sSUFBQSxzQkFBSSxFQUFBOzt3Q0FFeUIsS0FBSztZQUNqQyxJQUFJLENBQUMsa0JBQWtCLENBQUMsUUFBUTtZQUNoQyxDQUFDLENBQUMsSUFBQSxzQkFBSSxFQUFBO21CQUNDLElBQUksQ0FBQyxrQkFBa0IsQ0FBQyxRQUFRO2dCQUNuQztZQUNKLENBQUMsQ0FBQyxHQUFHLElBQUksQ0FBQyxTQUFTLENBQUMsQ0FBQyxDQUFDLEVBQUU7Ozs7Y0FJdEIsSUFBSSxDQUFDLFlBQVksRUFBRTtZQUNuQixDQUFDLENBQUMsSUFBQSxzQkFBSSxFQUFBOzs7Ozs7Ozs7MkJBU08sSUFBSSxDQUFDLGtCQUFrQjs7Ozs7a0RBS0EsSUFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUM7OzswQkFHekMsSUFBSSxDQUFDLGtCQUFrQixDQUFDLFFBQVE7Ozs7OytCQUszQixHQUFHLEVBQUU7Z0JBQ1osU0FBUyxDQUFDLEtBQUssQ0FBQyxPQUFPLEdBQUcsTUFBTSxDQUFDO2dCQUNqQyxRQUFRLENBQUMsYUFBYSxDQUFDLElBQUksRUFBRSxDQUFDO2dCQUM5QixVQUFVLENBQUMsR0FBRyxFQUFFO29CQUNkLFNBQVMsQ0FBQyxLQUFLLENBQUMsT0FBTyxHQUFHLE9BQU8sQ0FBQztnQkFDcEMsQ0FBQyxDQUFDLENBQUM7Z0JBQ0gsSUFBSSxDQUFDLEtBQUssQ0FBQyxpQkFBaUIsR0FBRyxJQUFJLENBQUMsZUFBZSxDQUFDO1lBQ3RELENBQUM7Ozs7O2lCQUtOO1lBQ0gsQ0FBQyxDQUFDLEVBQUU7OztnQkFHRixJQUFJLENBQUMsU0FBUyxDQUFDLEdBQUcsQ0FBQyxDQUFDLE9BQU8sRUFBRSxDQUFDLEVBQUUsRUFBRTtZQUNsQyx1QkFBdUI7WUFDdkIsT0FBTyxJQUFBLHNCQUFJLEVBQUE7OztzQ0FHVyxPQUFPO2lCQUNwQixLQUFLLENBQUMsR0FBRyxDQUFDO2lCQUNWLElBQUksQ0FBQyxFQUFFLENBQUM7O29EQUVtQixPQUFPOzs7d0JBR25DLE9BQU87Ozt3QkFHUCxJQUFJLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxPQUFPLENBQUMsQ0FBQyxRQUFRO2dCQUNyQyxDQUFDLENBQUMsSUFBQSxzQkFBSSxFQUFBO21GQUNxRCxPQUFPLENBQUMsUUFBUSxDQUNyRSxPQUFPLENBQ1I7b0JBQ0MsQ0FBQyxDQUFDLE9BQU87b0JBQ1QsQ0FBQyxDQUFDLGVBQWU7OzhCQUVqQixJQUFJLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxPQUFPLENBQUMsQ0FBQyxRQUFRO2tDQUNqQztnQkFDVixDQUFDLENBQUMsRUFBRTs7OzZDQUdpQixPQUFPOztnREFFSixPQUFPO21DQUNwQixHQUFHLEVBQUU7Z0JBQ1osU0FBUyxDQUFDLEtBQUssQ0FBQyxPQUFPLEdBQUcsTUFBTSxDQUFDO2dCQUNqQyxRQUFRLENBQUMsYUFBYSxDQUFDLElBQUksRUFBRSxDQUFDO2dCQUM5QixVQUFVLENBQUMsR0FBRyxFQUFFO29CQUNkLFNBQVMsQ0FBQyxLQUFLLENBQUMsT0FBTyxHQUFHLE9BQU8sQ0FBQztnQkFDcEMsQ0FBQyxDQUFDLENBQUM7WUFDTCxDQUFDOzs7Ozs7Ozs7O2lCQVVWLENBQUM7UUFDSixDQUFDLENBQUM7Ozs7O0tBS1gsQ0FBQztJQUNKLENBQUM7O0FBM0tILG9DQTRLQztBQXBLUSx1QkFBSyxHQUFHO0lBQ2IsaUJBQWlCLEVBQUUsSUFBSTtDQUN4QixDQUFDO0FBb0tKLFNBQWdCLE1BQU0sQ0FBQyxRQUFhLEVBQUUsRUFBRSxPQUFPLEdBQUcscUJBQXFCO0lBQ3JFLHlCQUFlLENBQUMsTUFBTSxDQUFDLE9BQU8sRUFBRSxpQkFBaUIsa0NBQzVDLEtBQUssS0FDUixFQUFFLEVBQUUsa0JBQWtCLEVBQ3RCLFNBQVMsRUFBRSxJQUFJLElBQ2YsQ0FBQztBQUNMLENBQUM7QUFORCx3QkFNQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7QUFFZCw0RUFBcUQ7QUFDckQsb0ZBQTREO0FBQzVELDZCQUEyQjtBQUUzQixNQUFNLGdDQUFpQyxTQUFRLHFCQUFZO0lBQ3pELE1BQU0sS0FBSyxXQUFXO1FBQ3BCLE9BQU87WUFDTCxRQUFRLEVBQUU7Z0JBQ1IsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsUUFBUSxFQUFFLElBQUk7YUFDZjtTQUNGLENBQUM7SUFDSixDQUFDO0NBQ0Y7QUFFRCxNQUFxQixpQkFBa0IsU0FBUSx5QkFBZTtJQWlCNUQ7UUFDRSxLQUFLLENBQUM7WUFDSixTQUFTLEVBQUUsS0FBSztTQUNqQixDQUFDLENBQUM7SUFDTCxDQUFDO0lBcEJELE1BQU0sS0FBSyxVQUFVO1FBQ25CLE9BQU8seUJBQWUsQ0FBQyx1QkFBdUIsQ0FDNUMsRUFBRSxFQUNGLGdDQUFnQyxDQUNqQyxDQUFDO0lBQ0osQ0FBQztJQWlCSyxZQUFZOzhEQUFJLENBQUM7S0FBQTtJQUVqQixLQUFLOzs7WUFDVCwwQkFBMEI7WUFDMUIsSUFBSSxDQUFDLFNBQVMsR0FBRyxNQUFNLENBQUMsSUFBSSxDQUFDLE1BQUEsSUFBSSxDQUFDLEtBQUssQ0FBQyxRQUFRLG1DQUFJLEVBQUUsQ0FBQyxDQUFDO1lBQ3hELElBQUksQ0FBQyxlQUFlLEdBQUcsSUFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUMsQ0FBQztZQUN6QyxJQUFJLENBQUMsa0JBQWtCLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLGVBQWUsQ0FBQyxDQUFDOztLQUNyRTtJQUVELFlBQVk7UUFDVixlQUFlO1FBQ2YsT0FBTyxDQUNMLElBQUksQ0FBQyxLQUFLLENBQUMsaUJBQWlCO1lBQzVCLElBQUksQ0FBQyxLQUFLLENBQUMsaUJBQWlCLEtBQUssSUFB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

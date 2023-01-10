@@ -1,8 +1,8 @@
 // @ts-nocheck
 
 import __SInterface from '@coffeekraken/s-interface';
-import __SLitComponent, { html } from '@coffeekraken/s-lit-component';
-// import { html } from 'lit';
+import __SLitComponent from '@coffeekraken/s-lit-component';
+import { html } from 'lit';
 
 class SCKVersionSelectorPropsInterface extends __SInterface {
   static get _definition() {
@@ -69,22 +69,22 @@ export default class CKVersionSelector extends __SLitComponent {
 
     let $dropdownContainer, $dropdown;
 
-    // setTimeout(() => {
-    //     $dropdownContainer = this.querySelector('.s-dropdown-container');
-    //     $dropdown = $dropdownContainer.querySelector('.s-dropdown');
+    setTimeout(() => {
+      $dropdownContainer = this.querySelector('.s-dropdown-container');
+      $dropdown = $dropdownContainer.querySelector('.s-dropdown');
 
-    //     if (this.isNewVersion()) {
-    //         $dropdownContainer.focus();
-    //     }
-    // });
+      if (this.isNewVersion()) {
+        $dropdownContainer.focus();
+      }
+    });
 
     const color = this._versions[0].includes('alpha')
-      ? 'error'
-      : 'complementary';
+      ? 's-color--error'
+      : 's-color--complementary';
 
     return html`
       <span class="s-dropdown-container" tabindex="0">
-        <span class="s-badge s-color--${color}">
+        <span class="s-badge ${color}">
           ${this._currentVersionObj.codename
             ? html` <span class="s-typo:bold s-text:uppercase"
                 >${this._currentVersionObj.codename}</span
@@ -99,6 +99,10 @@ export default class CKVersionSelector extends __SLitComponent {
                     <h3 class="s-typo:h3 s-gradient:text:accent s-mbe:20">
                       Hell Yeaaah!
                     </h3>
+                    <code>
+                      Hello world
+                    </code>
+                    </code>
                     <p class="s-typo--p s-mbe:20">
                       A new version has been released<br />since your latest
                       visite on the<br />
@@ -149,11 +153,11 @@ export default class CKVersionSelector extends __SLitComponent {
                     <span class="__actions">
                       ${this.props.versions[version].codename
                         ? html` <span
-                            class="s-badge s-typo:bold s-text:uppercase s-color--${version.includes(
+                            class="s-badge s-typo:bold s-text:uppercase ${version.includes(
                               'alpha'
                             )
-                              ? 'error'
-                              : 'complementary'} s-mis--20"
+                              ? 's-color--error'
+                              : 's-color--complementary'} s-mis--20"
                           >
                             ${this.props.versions[version].codename}
                           </span>`

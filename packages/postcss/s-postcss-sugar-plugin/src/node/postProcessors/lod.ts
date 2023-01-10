@@ -23,7 +23,7 @@ export default async function ({
     sharedData,
     postcssApi,
     settings,
-    applyClassmap,
+    classmap,
     getRoot,
 }) {
     // check if the lod feature is enabled or not
@@ -227,7 +227,7 @@ export default async function ({
 
             // add the rule in the root
             if (!_lodRulesByLevels[level]) {
-                _lodRulesByLevels[level] = postcssApi.root();
+                _lodRulesByLevels[level] = postcssApi.root({});
             }
             _lodRulesByLevels[level].nodes.push(rule.clone());
 
@@ -294,8 +294,9 @@ export default async function ({
         }
     });
 
-    // classmap
-    applyClassmap(root);
+    // // classmap
+    // classmap.applyOnAst(root);
+    // classmap.save();
 
     if (settings.lod.method === 'file') {
         const filePath = root.source.input.file;
@@ -339,7 +340,11 @@ export default async function ({
             }
 
             // apply plugins on resulting css
-            finalCss = (await postcssApi(plugins).process(finalCss)).css;
+            finalCss = (
+                await postcssApi(plugins).process(finalCss, {
+                    from: filePath,
+                })
+            ).css;
 
             // minify if needed
             if (settings.target === 'production') {

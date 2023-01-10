@@ -12,6 +12,6 @@ export default class CKVersionSelector extends __SLitComponent {
     firstUpdated(): Promise<void>;
     mount(): Promise<void>;
     isNewVersion(): boolean;
-    render(): any;
+    render(): import("lit-html").TemplateResult<1>;
 }
 export declare function define(props?: any, tagName?: string): void;

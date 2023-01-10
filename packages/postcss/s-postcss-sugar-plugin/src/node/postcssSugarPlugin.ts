@@ -28,7 +28,6 @@ let loadedPromise,
 
 const sharedData = {
     isPristine: true,
-    classmap: {},
 };
 
 export interface IPostcssSugarPluginLodSettings {
@@ -113,6 +112,8 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
     );
     // const cacheHashFilePath = `${settings.cacheDir}/cacheHash.txt`;
 
+    // const classmap = new __SClassmap();
+
     let themeHash,
         // cacheDir,
         // cacheHash,
@@ -187,75 +188,6 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
 
         _configLoaded = true;
         return true;
-    }
-
-    function applyClassmap(node, map = sharedData.classmap) {
-        function getToken(name: string): string {
-            if (name.match(/(--)?s[0-9]+/)) {
-                return name.replace(/^--/, '');
-            }
-            if (map[name]) {
-                return map[name];
-            }
-            map[name] = `s${Object.keys(map).length}`;
-            return map[name];
-        }
-
-        if (!map?.['s-lod--0']) {
-            map['s-lod--0'] = 's0';
-            map['s-lod--1'] = 's1';
-            map['s-lod--2'] = 's2';
-            map['s-lod--3'] = 's3';
-            map['s-lod--4'] = 's4';
-            map['s-lod--5'] = 's5';
-            map['s-lod--6'] = 's6';
-            map['s-lod--7'] = 's7';
-            map['s-lod--8'] = 's8';
-            map['s-lod--9'] = 's9';
-            map['s-lod--10'] = 's10';
-        }
-
-        node.walkDecls((decl) => {
-            if (decl.variable) {
-                // get the variable token and replace it's prop
-                const token = `--${getToken(decl.prop)}`;
-                decl.prop = token;
-            }
-
-            // replace variables in value
-            const varsMatches = decl.value.match(/\-\-[a-zA-Z0-9_-]+/gm);
-            if (varsMatches) {
-                varsMatches.forEach((varName) => {
-                    const varToken = getToken(varName);
-                    decl.value = decl.value.replace(varName, `--${varToken}`);
-                });
-            }
-        });
-
-        node.walkRules((rule) => {
-            if (!rule.selectors) {
-                return;
-            }
-            rule.selectors = rule.selectors.map((sel) => {
-                sel = sel
-                    .split(' ')
-                    .map((part) => {
-                        const classMatches = part.match(/\.[a-zA-Z0-9_-]+/gm);
-                        if (classMatches) {
-                            classMatches.forEach((cls) => {
-                                const clsWithoutDot = cls.slice(1);
-                                let clsToken = getToken(clsWithoutDot);
-                                part = part.replace(cls, `.${clsToken}`);
-                            });
-                        }
-                        return part;
-                    })
-                    .join(' ');
-                return sel;
-            });
-        });
-
-        return map;
     }
 
     function contentToArray(content) {
@@ -477,6 +409,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                     params,
                     atRule,
                     settings,
+                    // classmap,
                     // cacheDir,
                     packageHash,
                     themeHash,
@@ -707,7 +640,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                 CssVars: __CssVars,
                 packageHash,
                 themeHash,
-                applyClassmap,
+                // classmap
                 // cacheDir,
                 postcssApi: __postcss,
                 getRoot: __getRoot,
@@ -884,6 +817,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                     CssVars: __CssVars,
                     packageHash,
                     themeHash,
+                    // classmap,
                     // cacheDir,
                     getRoot: __getRoot,
                     replaceWith(nodes) {

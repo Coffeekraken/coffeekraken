@@ -46,8 +46,7 @@ try {
     $html = \Sugar\html\expandPleasantCssClassnames(
         $twig->render($params->viewDotPath, $data)
     );
-    $html = \Sugar\classname\patchHtml($html);
-    print 'coco';
+    // $html = \Sugar\classname\patchHtml($html);
     print $html;
 } catch (Exception $e) {
     print $e;

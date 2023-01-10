@@ -95,9 +95,9 @@ export default class SComponentUtils extends __SClass {
     
     exposeApi(apiObj: any, ctx?: any): void;
     
-    className(cls?: string, style?: string): string;
+    cls(cls?: string, style?: string): string;
     
-    uniqueClassName(cls?: string, style?: string): string;
+    uCls(cls?: string, style?: string): string;
     
     isMounted(): boolean;
     

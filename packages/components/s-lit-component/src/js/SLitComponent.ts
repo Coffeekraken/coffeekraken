@@ -3,7 +3,7 @@
 
 import type { ISComponentUtilsSettings } from '@coffeekraken/s-component-utils';
 import __SComponentUtils, {
-    SComponentUtilsDefaultPropsInterface,
+    SComponentUtilsDefaultPropsInterface
 } from '@coffeekraken/s-component-utils';
 import __SInterface from '@coffeekraken/s-interface';
 import { __wait } from '@coffeekraken/sugar/datetime';
@@ -147,6 +147,7 @@ export default class SLitComponent extends LitElement {
      */
     props: any = {};
     componentUtils: __SComponentUtils;
+    cu: __SComponentUtils;
     _shouldUpdate = false;
 
     _state = {};
@@ -417,7 +418,7 @@ export default class SLitComponent extends LitElement {
             return this._shouldUpdate;
         };
 
-        this.componentUtils = new __SComponentUtils(this, {
+        this.cu = new __SComponentUtils(this, {
             ...(this.settings ?? {}),
             ...(this.settings.componentUtils ?? {}),
             style:
@@ -426,6 +427,7 @@ export default class SLitComponent extends LitElement {
                 this.settings.componentUtils?.style ??
                 '',
         });
+        this.componentUtils = this.cu;
 
         (async () => {
             const defaultProps = __SComponentUtils.getDefaultProps(
@@ -437,13 +439,13 @@ export default class SLitComponent extends LitElement {
                 'direct';
 
             // component class
-            this.classList.add(...this.componentUtils.className('').split(' '));
+            this.classList.add(...this.cu.cls('').split(' '));
 
             await __wait();
             await __wait();
             if (!mountWhen.match(/^direct(ly)?$/)) {
                 // wait until mount
-                await this.componentUtils.waitAndExecute(mountWhen, () => {
+                await this.cu.waitAndExecute(mountWhen, () => {
                     this._mount();
                 });
             } else {
@@ -521,7 +523,7 @@ export default class SLitComponent extends LitElement {
         Object.assign(this.props, finalProps);
 
         // make props responsive
-        this.componentUtils.makePropsResponsive(this.props);
+        this.cu.makePropsResponsive(this.props);
 
         // verbose
         if (this.props.verbose) {
@@ -538,7 +540,7 @@ export default class SLitComponent extends LitElement {
             delete this.state;
             Object.defineProperty(this, 'state', {
                 enumerable: true,
-                value: this.componentUtils.handleState(state, {
+                value: this.cu.handleState(state, {
                     save: this.props.saveState,
                 }),
             });
@@ -557,13 +559,13 @@ export default class SLitComponent extends LitElement {
         // @ts-ignore
         this.requestUpdate();
         await this.updateComplete;
-        this.componentUtils.injectStyle(
+        this.cu.injectStyle(
             this.constructor.styles?.cssText ?? '',
             this.tagName,
         );
         await __wait();
         if (this.props.adoptStyle && this.shadowRoot) {
-            await this.componentUtils.adoptStyleInShadowRoot(this.shadowRoot);
+            await this.cu.adoptStyleInShadowRoot(this.shadowRoot);
         }
 
         return true;

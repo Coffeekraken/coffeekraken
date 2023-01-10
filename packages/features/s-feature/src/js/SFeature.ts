@@ -85,6 +85,7 @@ export default class SFeature extends __SClass implements ISFeature {
     props: any;
 
     componentUtils: __SComponentUtils;
+    cu: __SComponentUtils;
 
     /**
      * @name            setDefaultProps
@@ -166,12 +167,13 @@ export default class SFeature extends __SClass implements ISFeature {
             });
         }
 
-        this.componentUtils = new __SComponentUtils(node, {
+        this.cu = new __SComponentUtils(node, {
             ...(this.settings ?? {}),
             ...(this.settings.componentUtils ?? {}),
             useTagNameForClassName: false,
             name,
         });
+        this.componentUtils = this.cu;
 
         // name
         this.name = name;
@@ -180,7 +182,7 @@ export default class SFeature extends __SClass implements ISFeature {
         this.node = node;
 
         // assign props
-        this.props = this.componentUtils.handleProps(
+        this.props = this.cu.handleProps(
             {},
             {
                 interface:
@@ -190,11 +192,9 @@ export default class SFeature extends __SClass implements ISFeature {
         );
 
         // add the base class on the feature
-        this.node.classList.add(
-            ...this.componentUtils.className('').split(' '),
-        );
+        this.node.classList.add(...this.cu.cls('').split(' '));
 
-        this.componentUtils.waitAndExecute(
+        this.cu.waitAndExecute(
             this.props.mountWhen,
             // @ts-ignore
             async () => {

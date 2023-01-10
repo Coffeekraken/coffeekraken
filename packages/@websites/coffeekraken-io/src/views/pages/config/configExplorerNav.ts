@@ -142,7 +142,7 @@
 //         }
 
 //         return html`
-//             <div class="${this.componentUtils.className('')}">
+//             <div class="${this.cu.cls('')}">
 //                 ${this._renderList(this._menuStack)}
 //             </div>
 //         `;

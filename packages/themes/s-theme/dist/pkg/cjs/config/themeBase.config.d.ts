@@ -4,6 +4,8 @@ export default function (api: any): {
     
     readonly color: any;
     
+    readonly classmap: any;
+    
     readonly lod: any;
     
     readonly easing: any;

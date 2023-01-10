@@ -308,7 +308,7 @@ export default class SFormValidateFeature extends __SFeature {
         }
 
         // expose the api on node
-        this.componentUtils.exposeApi(
+        this.cu.exposeApi(
             {
                 validate: this.validate,
             },
@@ -377,7 +377,7 @@ export default class SFormValidateFeature extends __SFeature {
         if ($insideField) this._$field = $insideField;
 
         // add the "novalidate" attribute on the field cause we take care
-        this.componentUtils.fastdom.mutate(() => {
+        this.cu.fastdom.mutate(() => {
             this._$field.setAttribute('novalidate', 'true');
 
             // get some validations directly from the $field
@@ -652,7 +652,7 @@ export default class SFormValidateFeature extends __SFeature {
 
             // dispatch en error event
             // @ts-ignore
-            this.componentUtils.dispatchEvent('error', {
+            this.cu.dispatchEvent('error', {
                 detail: res,
             });
         } else {
@@ -687,7 +687,7 @@ export default class SFormValidateFeature extends __SFeature {
             }
 
             // dispatch en error event
-            this.componentUtils.dispatchEvent('valid', {
+            this.cu.dispatchEvent('valid', {
                 detail: res,
             });
         }

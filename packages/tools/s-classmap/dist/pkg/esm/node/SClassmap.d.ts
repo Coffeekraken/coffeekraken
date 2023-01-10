@@ -8,5 +8,9 @@ export default class SClassmap extends __SClassmapBase {
     
     constructor(settings?: Partial<ISClassmapNodeSettings>);
     
-    read(): Promise<any>;
+    read(): any;
+    
+    save(): void;
+    
+    applyOnAst(node: any, map?: any): any;
 }

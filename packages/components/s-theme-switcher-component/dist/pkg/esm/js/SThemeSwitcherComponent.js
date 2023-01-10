@@ -67,7 +67,7 @@ export default class SThemeSwitcherComponent extends __SLitComponent {
         else {
             __STheme.setThemeVariant('dark');
         }
-        this.componentUtils.dispatchEvent('change', {
+        this.cu.dispatchEvent('change', {
             detail: __STheme,
         });
         this.requestUpdate();
@@ -79,39 +79,40 @@ export default class SThemeSwitcherComponent extends __SLitComponent {
     render() {
         const themesKeys = Object.keys(this._themes), themeMetas = __STheme.getThemeMetas(), activeTheme = __STheme.theme;
         return html `
-            <div class="${this.componentUtils.className('__root')}">
+            <div class="${this.cu.cls('__root')}">
                 ${themesKeys.length === 1
             ? html `
                           <input
                               type="checkbox"
                               @change=${() => this._toggleDarkMode()}
-                              class="${this.componentUtils.className('__switch', 's-switch')}"
+                              class="${this.cu.cls('__switch', 's-switch')}"
                               ?checked=${__STheme.isDark()}
                           />
                           ${this.props.darkModeIcon
                 ? html `
                                     <i
-                                        class="${this.componentUtils.className('__icon')} ${this.props.darkModeIconClass}"
+                                        class="${this.cu.cls('__icon')} ${this
+                    .props.darkModeIconClass}"
                                     ></i>
                                 `
                 : ''}
                       `
             : html `
                           <div
-                              class="${this.componentUtils.className('__dropdown-container')} s-dropdown-container"
+                              class="${this.cu.cls('__dropdown-container')} s-dropdown-container"
                               tabindex="0"
                           >
                               <span class="s-typo:p">
                                   ${themeMetas.title} (${themeMetas.variant})
                               </span>
                               <div
-                                  class="${this.componentUtils.className('__dropdown')} s-dropdown"
+                                  class="${this.cu.cls('__dropdown')} s-dropdown"
                               >
                                   ${themesKeys.map((theme) => {
                 const themeObj = this._themes[theme];
                 return html `
                                           <div
-                                              class="${this.componentUtils.className('__dropdown-item', 's-dropdown-item')} ${activeTheme === theme
+                                              class="${this.cu.cls('__dropdown-item', 's-dropdown-item')} ${activeTheme === theme
                     ? 'active'
                     : ''}"
                                               @click=${(e) => {
@@ -120,12 +121,12 @@ export default class SThemeSwitcherComponent extends __SLitComponent {
                 }}
                                           >
                                               <div
-                                                  class="${this.componentUtils.className('__theme-name')}"
+                                                  class="${this.cu.cls('__theme-name')}"
                                               >
                                                   ${themeObj.metas.title}
                                               </div>
                                               <div
-                                                  class="${this.componentUtils.className('__dark-mode')} ${activeTheme === theme
+                                                  class="${this.cu.cls('__dark-mode')} ${activeTheme === theme
                     ? 'visible'
                     : ''}"
                                               >
@@ -135,13 +136,13 @@ export default class SThemeSwitcherComponent extends __SLitComponent {
                     e.stopPropagation();
                     this._toggleDarkMode();
                 }}
-                                                      class="${this.componentUtils.className('__switch', 's-switch')}"
+                                                      class="${this.cu.cls('__switch', 's-switch')}"
                                                       ?checked=${__STheme.isDark()}
                                                   />
                                                   ${this.props.darkModeIcon
                     ? html `
                                                             <i
-                                                                class="${this.componentUtils.className('__icon')} ${this.props
+                                                                class="${this.cu.cls('__icon')} ${this.props
                         .darkModeIconClass}"
                                                             ></i>
                                                         `
@@ -158,4 +159,4 @@ export default class SThemeSwitcherComponent extends __SLitComponent {
     }
 }
 export { __define as define };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sZUFBZSxNQUFNLCtCQUErQixDQUFDO0FBQzVELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBQzdDLE9BQU8sRUFBRSxHQUFHLEVBQUUsSUFBSSxFQUFFLFNBQVMsRUFBRSxNQUFNLEtBQUssQ0FBQztBQUMzQyxPQUFPLGtDQUFrQyxNQUFNLDhDQUE4QyxDQUFDO0FBRTlGLGFBQWE7QUFDYixPQUFPLEtBQUssTUFBTSwwQ0FBMEMsQ0FBQyxDQUFDLCtCQUErQjtBQUU3RixPQUFPLFFBQVEsTUFBTSxVQUFVLENBQUM7QUFPaEM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW9DRztBQUVILE1BQU0sQ0FBQyxPQUFPLE9BQU8sdUJBQXdCLFNBQVEsZUFBZTtJQWdCaEU7UUFDSSxLQUFLLENBQUM7WUFDRixJQUFJLEVBQUUsa0JBQWtCO1lBQ3hCLFNBQVMsRUFBRSxrQ0FBa0M7U0FDaEQsQ0FBQyxDQUFDO1FBRUgsSUFBSSxDQUFDLE9BQU8sR0FBRyxRQUFRLENBQUMsTUFBTSxDQUFDO1FBQy9CLCtDQUErQztRQUMvQywrQ0FBK0M7SUFDbkQsQ0FBQztJQXhCRCxNQUFNLEtBQUssVUFBVTtRQUNqQixPQUFPLGVBQWUsQ0FBQyx1QkFBdUIsQ0FDMUMsRUFBRSxFQUNGLGtDQUFrQyxDQUNyQyxDQUFDO0lBQ04sQ0FBQztJQUVELE1BQU0sS0FBSyxNQUFNO1FBQ2IsT0FBTyxHQUFHLENBQUE7Y0FDSixTQUFTLENBQUMsS0FBSyxDQUFDO1NBQ3JCLENBQUM7SUFDTixDQUFDO0lBZUQsZUFBZTtRQUNYLElBQUksUUFBUSxDQUFDLE1BQU0sRUFBRSxFQUFFO1lBQ25CLFFBQVEsQ0FBQyxlQUFlLENBQUMsT0FBTyxDQUFDLENBQUM7U0FDckM7YUFBTTtZQUNILFFBQVEsQ0FBQyxlQUFlLENBQUMsTUFB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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sZUFBZSxNQUFNLCtCQUErQixDQUFDO0FBQzVELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBQzdDLE9BQU8sRUFBRSxHQUFHLEVBQUUsSUFBSSxFQUFFLFNBQVMsRUFBRSxNQUFNLEtBQUssQ0FBQztBQUMzQyxPQUFPLGtDQUFrQyxNQUFNLDhDQUE4QyxDQUFDO0FBRTlGLGFBQWE7QUFDYixPQUFPLEtBQUssTUFBTSwwQ0FBMEMsQ0FBQyxDQUFDLCtCQUErQjtBQUU3RixPQUFPLFFBQVEsTUFBTSxVQUFVLENBQUM7QUFPaEM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW9DRztBQUVILE1BQU0sQ0FBQyxPQUFPLE9BQU8sdUJBQXdCLFNBQVEsZUFBZTtJQWdCaEU7UUFDSSxLQUFLLENBQUM7WUFDRixJQUFJLEVBQUUsa0JBQWtCO1lBQ3hCLFNBQVMsRUFBRSxrQ0FBa0M7U0FDaEQsQ0FBQyxDQUFDO1FBRUgsSUFBSSxDQUFDLE9BQU8sR0FBRyxRQUFRLENBQUMsTUFBTSxDQUFDO1FBQy9CLCtDQUErQztRQUMvQywrQ0FBK0M7SUFDbkQsQ0FBQztJQXhCRCxNQUFNLEtBQUssVUFBVTtRQUNqQixPQUFPLGVBQWUsQ0FBQyx1QkFBdUIsQ0FDMUMsRUFBRSxFQUNGLGtDQUFrQyxDQUNyQyxDQUFDO0lBQ04sQ0FBQztJQUVELE1BQU0sS0FBSyxNQUFNO1FBQ2IsT0FBTyxHQUFHLENBQUE7Y0FDSixTQUFTLENBQUMsS0FBSyxDQUFDO1NBQ3JCLENBQUM7SUFDTixDQUFDO0lBZUQsZUFBZTtRQUNYLElBQUksUUFBUSxDQUFDLE1BQU0sRUFBRSxFQUFFO1lBQ25CLFFBQVEsQ0FBQyxlQUFlLENBQUMsT0FBTyxDQUFDLENBQUM7U0FDckM7YUFBTTtZQUNILFFBQVEsQ0FBQyxlQUFlLENBQUMsTUFB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

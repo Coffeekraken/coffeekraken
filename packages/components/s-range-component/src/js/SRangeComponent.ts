@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __SLitComponent, {
-    ISLitComponentDefaultProps,
+    ISLitComponentDefaultProps
 } from '@coffeekraken/s-lit-component';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
@@ -169,17 +169,9 @@ export default class SRangeComponent extends __SLitComponent {
     }
     render() {
         return html`
-            <div
-                class="${this.componentUtils.className(
-                    '__root',
-                    's-tooltip-container',
-                )}"
-            >
+            <div class="${this.cu.cls('__root', 's-tooltip-container')}">
                 <input
-                    class="${this.componentUtils.className(
-                        '__input',
-                        's-range',
-                    )}"
+                    class="${this.cu.cls('__input', 's-range')}"
                     type="range"
                     ?disabled="${this.props.disabled}"
                     name="${this.props.name}"
@@ -191,10 +183,7 @@ export default class SRangeComponent extends __SLitComponent {
                 ${this.props.tooltip
                     ? html`
                           <div
-                              class="${this.componentUtils.className(
-                                  '__tooltip',
-                                  's-tooltip',
-                              )}"
+                              class="${this.cu.cls('__tooltip', 's-tooltip')}"
                           ></div>
                       `
                     : ''}

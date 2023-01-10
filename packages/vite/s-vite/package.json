@@ -36,6 +36,7 @@
         "rollup-plugin-analyzer": "^4.0.0",
         "rollup-plugin-import-css": "^3.0.3",
         "rollup-plugin-uglify": "^6.0.4",
+        "terser": "^5.16.1",
         "url-parse": "^1.5.10",
         "vite": "^3.0.0",
         "vite-plugin-compress": "^2.1.1",

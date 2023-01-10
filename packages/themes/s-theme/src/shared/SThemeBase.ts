@@ -7,10 +7,13 @@ import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import __SInterface from '@coffeekraken/s-interface';
 import { __compressVarName } from '@coffeekraken/sugar/css';
 import { __isColor } from '@coffeekraken/sugar/is';
-import { __deepMerge, __flatten } from '@coffeekraken/sugar/object';
+import {
+    __deepMerge,
+    __flatten,
+    __objectHash,
+} from '@coffeekraken/sugar/object';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
 import __knownCssProperties from 'known-css-properties';
-import __objectHash from 'object-hash';
 
 /**
  * @name            SThemeBase

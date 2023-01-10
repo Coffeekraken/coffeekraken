@@ -26,6 +26,7 @@ export default class SFeature extends __SClass implements ISFeature {
     
     props: any;
     componentUtils: __SComponentUtils;
+    cu: __SComponentUtils;
     
     static setDefaultProps(selector: string | string[], props: any): void;
     

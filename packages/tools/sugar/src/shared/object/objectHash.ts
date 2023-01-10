@@ -1,5 +1,6 @@
-import __objectHash from 'object-hash';
+// import __objectHash from 'object-hash';
 // import __objectHash from 'hash-obj';
+import __hashSum from 'hash-sum';
 /**
  * @name            objectHash
  * @namespace       shared.object
@@ -32,5 +33,5 @@ export default function objectHash(
     settings = <IObjectHashSettings>{
         ...settings,
     };
-    return __objectHash(obj);
+    return __hashSum(obj);
 }

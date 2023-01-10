@@ -207,9 +207,7 @@ export default class SCarpenterComponent extends __SLitComponent {
                 .replace(/<\/s-carpenter>/gm, '</s-nothing>');
 
             // add the correct class on the iframe
-            this._$iframe.classList.add(
-                this.componentUtils.className('__iframe'),
-            );
+            this._$iframe.classList.add(this.cu.cls('__iframe'));
 
             // make sure we don't have any src on the iframe
             this._$iframe.setAttribute('src', 'about:blank');
@@ -240,9 +238,7 @@ export default class SCarpenterComponent extends __SLitComponent {
             });
 
             // add the "in-iframe" class
-            this._$document.body.classList.add(
-                this.componentUtils.className('-in-iframe'),
-            );
+            this._$document.body.classList.add(this.cu.cls('-in-iframe'));
         }
 
         // get the first s-spec element that we can find
@@ -568,27 +564,15 @@ export default class SCarpenterComponent extends __SLitComponent {
         }
 
         return html`
-            <div class="${this.componentUtils.className('', null, 's-bare')}">
+            <div class="${this.cu.cls('', null, 's-bare')}">
                 ${this.props.sidebar
                     ? html`
-                          <nav
-                              class="${this.componentUtils.className(
-                                  '__sidebar',
-                              )}"
-                          >
-                              <div
-                                  class="${this.componentUtils.className(
-                                      '__logo',
-                                  )}"
-                              >
+                          <nav class="${this.cu.cls('__sidebar')}">
+                              <div class="${this.cu.cls('__logo')}">
                                   ${unsafeHTML(this.props.logo)}
                               </div>
 
-                              <div
-                                  class="${this.componentUtils.className(
-                                      '__navigation',
-                                  )}"
-                              >
+                              <div class="${this.cu.cls('__navigation')}">
                                   <ul class="s-fs-tree">
                                       ${Object.keys(
                                           this._data.specsBySources,
@@ -716,13 +700,9 @@ export default class SCarpenterComponent extends __SLitComponent {
                                       : '100vw'};
                               }
                           </style>
-                          <nav
-                              class="${this.componentUtils.className(
-                                  '__media',
-                              )}"
-                          >
+                          <nav class="${this.cu.cls('__media')}">
                               <ul
-                                  class="${this.componentUtils.className(
+                                  class="${this.cu.cls(
                                       '__queries',
                                       's-tabs',
                                       's-bare',
@@ -738,7 +718,7 @@ export default class SCarpenterComponent extends __SLitComponent {
                                               class="s-color s-color--accent ${query ===
                                               this.state.activeMedia
                                                   ? 'active'
-                                                  : ''} ${this.componentUtils.className(
+                                                  : ''} ${this.cu.cls(
                                                   '__query __item',
                                               )}"
                                           >

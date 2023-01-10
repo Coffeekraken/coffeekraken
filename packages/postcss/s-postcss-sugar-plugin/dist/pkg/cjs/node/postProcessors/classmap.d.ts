@@ -1,7 +1,7 @@
-export default function ({ root, sharedData, settings, cacheDir, applyClassmap, }: {
+export default function ({ root, sharedData, settings, cacheDir, classmap, }: {
     root: any;
     sharedData: any;
     settings: any;
     cacheDir: any;
-    applyClassmap: any;
+    classmap: any;
 }): Promise<void>;

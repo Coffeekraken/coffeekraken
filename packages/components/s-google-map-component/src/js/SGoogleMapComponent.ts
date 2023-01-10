@@ -250,12 +250,8 @@ export default class SGoogleMapComponent extends __SLitComponent {
                 const domParser = new DOMParser(),
                     markerDocument = domParser.parseFromString(
                         `
-                        <div class="${this.componentUtils.className(
-                            '-marker',
-                        )}">
-                            <div class="${this.componentUtils.className(
-                                '-marker__icon',
-                            )}">
+                        <div class="${this.cu.cls('-marker')}">
+                            <div class="${this.cu.cls('-marker__icon')}">
                                 ${this.props.icons.marker}
                             </div>
                         </div>

@@ -62,9 +62,7 @@ export default function (api: any): {
                 title: string;
                 description: string;
                 type: string;
-                readonly value: {
-                    path: any;
-                };
+                readonly value: any;
             };
             font: {
                 title: string;

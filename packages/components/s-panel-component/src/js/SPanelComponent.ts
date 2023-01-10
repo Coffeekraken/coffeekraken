@@ -209,10 +209,10 @@ export default class SPanelComponent extends __SLitComponent {
     }
     firstUpdated() {
         this._$container = this.querySelector(
-            `.${this.componentUtils.uniqueClassName('__container')}`,
+            `.${this.cu.uCls('__container')}`,
         );
         this._$backdrop = this.querySelector(
-            `.${this.componentUtils.uniqueClassName('__backdrop')}`,
+            `.${this.cu.uCls('__backdrop')}`,
         );
         this._containerTransitionProps = __getTransitionProperties(
             this._$container,
@@ -316,7 +316,7 @@ export default class SPanelComponent extends __SLitComponent {
             this.props.active = true;
             this.requestUpdate();
             // dispatch an open event
-            this.componentUtils.dispatchEvent('open');
+            this.cu.dispatchEvent('open');
         });
     }
     // s-activate support
@@ -333,7 +333,7 @@ export default class SPanelComponent extends __SLitComponent {
         this.props.active = false;
         this.requestUpdate();
         // dispatch a close event
-        this.componentUtils.dispatchEvent('close');
+        this.cu.dispatchEvent('close');
 
         let duration = 0;
         if (this._containerTransitionProps.totalDuration > duration)
@@ -353,20 +353,14 @@ export default class SPanelComponent extends __SLitComponent {
     render() {
         return html`
             <div
-                class="${this.componentUtils.className(
-                    '__root',
-                )} ${this.componentUtils.className(`--${this.props.position}`)}"
+                class="${this.cu.cls('__root')} ${this.cu.cls(
+                    `--${this.props.position}`,
+                )}"
             >
                 ${this.props.backdrop
-                    ? html`
-                          <div
-                              class="${this.componentUtils.className(
-                                  '__backdrop',
-                              )}"
-                          ></div>
-                      `
+                    ? html` <div class="${this.cu.cls('__backdrop')}"></div> `
                     : ''}
-                <div class="${this.componentUtils.className('__container')}">
+                <div class="${this.cu.cls('__container')}">
                     ${this._template ?? ''}
                 </div>
             </div>

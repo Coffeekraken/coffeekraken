@@ -1,4 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
+import __SLog from '@coffeekraken/s-log';
 
 export default class SEventEmitterSettingsInterface extends __SInterface {
     static get _definition(): {
@@ -21,7 +22,7 @@ export default class SEventEmitterSettingsInterface extends __SInterface {
             description: string;
             type: string;
             default: {
-                log: any;
+                log: typeof __SLog;
             };
         };
         bind: {

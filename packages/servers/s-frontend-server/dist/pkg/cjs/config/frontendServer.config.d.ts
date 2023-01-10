@@ -89,6 +89,13 @@ export default function (api: any): {
             path: string;
             settings: {};
         };
+        classmap: {
+            
+            description: string;
+            
+            path: string;
+            settings: {};
+        };
         carpenter: {
             
             description: string;

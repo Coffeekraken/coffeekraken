@@ -9,7 +9,6 @@ declare class postcssSugarPluginLodMixinInterface extends __SInterface {
         method: {
             type: string;
             values: string[];
-            default: any;
         };
     };
 }

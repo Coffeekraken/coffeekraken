@@ -106,12 +106,12 @@ export default class SActivateFeature extends __SFeature {
                 settings ?? {},
             ),
         );
-        this.state = this.componentUtils.handleState(this.state, {
+        this.state = this.cu.handleState(this.state, {
             save: this.props.saveState,
         });
 
         if (this.props.group) {
-            this.componentUtils.handleState(this.groupState, {
+            this.cu.handleState(this.groupState, {
                 save: this.props.saveState,
                 id: `s-activate-feature-group-${this.props.group}`,
             });
@@ -126,7 +126,7 @@ export default class SActivateFeature extends __SFeature {
         }
 
         // expose the api on node
-        this.componentUtils.exposeApi(
+        this.cu.exposeApi(
             {
                 activate: this.activate,
                 unactivate: this.unactivate,
@@ -367,7 +367,7 @@ export default class SActivateFeature extends __SFeature {
                     $target.classList.add(this.props.activeClass);
                 }
                 if (this.props.activeAttribute) {
-                    this.componentUtils.fastdom.mutate(() => {
+                    this.cu.fastdom.mutate(() => {
                         $target.setAttribute(
                             this.props.activeAttribute,
                             'true',

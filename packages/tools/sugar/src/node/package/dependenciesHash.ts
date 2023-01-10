@@ -1,5 +1,5 @@
 import { __extension, __fileHash } from '@coffeekraken/sugar/fs';
-import __objectHash from 'object-hash';
+import { __objectHash } from '@coffeekraken/sugar/object';
 import __sha256 from '../../shared/crypto/sha256';
 
 /**

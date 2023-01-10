@@ -1,6 +1,8 @@
-import __objectHash from 'object-hash';
+// import __objectHash from 'object-hash';
+// import __objectHash from 'hash-obj';
+import __hashSum from 'hash-sum';
 export default function objectHash(obj, settings = {}) {
     settings = Object.assign({}, settings);
-    return __objectHash(obj);
+    return __hashSum(obj);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLGFBQWEsQ0FBQztBQTJCdkMsTUFBTSxDQUFDLE9BQU8sVUFBVSxVQUFVLENBQzlCLEdBQVEsRUFDUixXQUF5QyxFQUFFO0lBRTNDLFFBQVEsR0FBRyxrQkFDSixRQUFRLENBQ2QsQ0FBQztJQUNGLE9BQU8sWUFBWSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0FBQzdCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLDBDQUEwQztBQUMxQyx1Q0FBdUM7QUFDdkMsT0FBTyxTQUFTLE1BQU0sVUFBVSxDQUFDO0FBMEJqQyxNQUFNLENBQUMsT0FBTyxVQUFVLFVBQVUsQ0FDOUIsR0FBUSxFQUNSLFdBQXlDLEVBQUU7SUFFM0MsUUFBUSxHQUFHLGtCQUNKLFFBQVEsQ0FDZCxDQUFDO0lBQ0YsT0FBTyxTQUFTLENBQUMsR0FBRyxDQUFDLENBQUM7QUFDMUIsQ0FBQyJ9

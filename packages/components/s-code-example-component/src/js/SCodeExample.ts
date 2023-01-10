@@ -306,9 +306,8 @@ export default class SCodeExample extends __SLitComponent {
         const currentItem = this.currentItem;
         return html`
             <div
-                class="${this.componentUtils.className('__root')} ${this.props
-                    .more
-                    ? this.componentUtils.className('more')
+                class="${this.cu.cls('__root')} ${this.props.more
+                    ? this.cu.cls('more')
                     : ''}"
                 ?lines="${
                     // @ts-ignore
@@ -325,19 +324,12 @@ export default class SCodeExample extends __SLitComponent {
             >
                 <div class="templates"></div>
 
-                <header class="${this.componentUtils.className('__nav')}">
-                    <div
-                        class="${this.componentUtils.className(
-                            '__tabs',
-                            's-tabs',
-                        )}"
-                    >
+                <header class="${this.cu.cls('__nav')}">
+                    <div class="${this.cu.cls('__tabs', 's-tabs')}">
                         ${(this.props.items ?? []).map(
                             (item) => html`
                                 <div
-                                    class="${this.componentUtils.className(
-                                        '__tab',
-                                    )}"
+                                    class="${this.cu.cls('__tab')}"
                                     id="${item.id}"
                                     ?active="${this.state.activeTabId ===
                                     item.id}"
@@ -352,11 +344,7 @@ export default class SCodeExample extends __SLitComponent {
                         // @ts-ignore
                         this.toolbarPosition === 'nav'
                             ? html`
-                                  <div
-                                      class="${this.componentUtils.className(
-                                          '__toolbar',
-                                      )}"
-                                  >
+                                  <div class="${this.cu.cls('__toolbar')}">
                                       <s-clipboard-copy
                                           @click="${this.copy}"
                                       ></s-clipboard-copy>
@@ -366,18 +354,14 @@ export default class SCodeExample extends __SLitComponent {
                     }
                 </header>
                 <div
-                    class="${this.componentUtils.className('__content')}"
+                    class="${this.cu.cls('__content')}"
                     style="--max-lines: ${this.props.lines ?? 99999999};"
                 >
                     ${
                         // @ts-ignore
                         this.toolbarPosition !== 'nav'
                             ? html`
-                                  <div
-                                      class="${this.componentUtils.className(
-                                          '__toolbar',
-                                      )}"
-                                  >
+                                  <div class="${this.cu.cls('__toolbar')}">
                                       <s-clipboard-copy
                                           @click="${this.copy}"
                                       ></s-clipboard-copy>
@@ -388,9 +372,7 @@ export default class SCodeExample extends __SLitComponent {
                     ${(this.props.items ?? []).map(
                         (item) => html`
                             <pre
-                                class="${this.componentUtils.className(
-                                    '__code',
-                                )}"
+                                class="${this.cu.cls('__code')}"
                                 style="line-height:0;"
                                 id="${item.id ?? item.lang}"
                                 ?active="${this.state.activeTabId ===
@@ -411,15 +393,13 @@ export default class SCodeExample extends __SLitComponent {
                     )}
                     ${this.props.lines && currentItem.lines > this.props.lines
                         ? html`
-                        <div class="${this.componentUtils.className(
-                            '__more-bar',
-                        )}">
+                        <div class="${this.cu.cls('__more-bar')}">
                             ${
                                 // @ts-ignore
                                 this.moreAction === 'toggle'
                                     ? html`
                                           <a
-                                              class="${this.componentUtils.className(
+                                              class="${this.cu.cls(
                                                   '__more-button',
                                                   's-btn',
                                               )}"
@@ -444,7 +424,7 @@ export default class SCodeExample extends __SLitComponent {
                                       `
                                     : html`
                                           <a
-                                              class="${this.componentUtils.className(
+                                              class="${this.cu.cls(
                                                   '__more-button',
                                                   's-btn s-color--accent',
                                               )}"

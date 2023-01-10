@@ -799,10 +799,10 @@ export default class SComponentUtils extends __SClass {
     }
 
     /**
-     * @name          className
+     * @name          cls
      * @type          Function
      *
-     * This method allows you to get a component ready className like my-component__something, etc...
+     * This method allows you to get a component ready class like my-component__something, etc...
      *
      * @param         {String}        cls         The class you want to process. Can be multiple classes separated by a space
      * @return        {String}                    The generated class that you can apply
@@ -810,7 +810,7 @@ export default class SComponentUtils extends __SClass {
      * @since         2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    className(cls = '', style = '') {
+    cls(cls = '', style = '') {
         let clsString = cls
             .split(' ')
             .map((clsName) => {
@@ -856,7 +856,7 @@ export default class SComponentUtils extends __SClass {
     }
 
     /**
-     * @name          uniqueClassName
+     * @name          uCls
      * @type          Function
      *
      * This method returns you only 1 class that is based on the passed "name" and not on the "tagName".
@@ -867,7 +867,7 @@ export default class SComponentUtils extends __SClass {
      * @since         2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    uniqueClassName(cls = '', style = '') {
+    uCls(cls = '', style = '') {
         let clsString = cls
             .split(' ')
             .map((clsName) => {

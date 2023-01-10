@@ -326,6 +326,34 @@ export default class SVite extends __SClass {
                             target: buildParams.target ?? 'modules',
                             write: false,
                             minify: buildParams.minify,
+                            terserOptions: {
+                                ecma: 2016,
+                                module: true,
+                                toplevel: true,
+                                compress: {
+                                    arguments: true,
+                                    booleans_as_integers: true,
+                                    drop_console: true,
+                                    keep_fargs: false,
+                                    toplevel: true,
+                                    ecma: 2016,
+                                    hoist_funs: true,
+                                    passes: 2,
+                                    unsafe: true,
+                                    unsafe_methods: true,
+                                    unsafe_proto: true,
+                                },
+                                // format: {
+                                //     comments: false,
+                                // },
+                                mangle: {
+                                    toplevel: true,
+                                    properties: {
+                                        regex: /^_/,
+                                    },
+                                },
+                                // toplevel: true,
+                            },
                             cssCodeSplit: false,
                             rollupOptions: {
                                 input: buildParams.input,

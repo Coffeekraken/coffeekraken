@@ -510,7 +510,7 @@ export default class CKBlob extends __SLitComponent {
     //     });
     // }
     animate() {
-        if (!this.cu.isInViewport()) {
+        if (!this.utils.isInViewport()) {
             setTimeout(() => {
                 this.animate();
             }, 100);

@@ -24,10 +24,10 @@
     },
     "contributors": [],
     "scripts": {
-        "dev": "sugar dev",
-        "test": "",
-        "prod": "sugar prod",
-        "build": "sugar build"
+        "dev": "sugard kitchen.run dev",
+        "prod": "sugard kitchen.run prod",
+        "build": "sugard kitchen.run build",
+        "static": "live-server static"
     },
     "dependencies": {
         "@coffeekraken/s-activate-feature": "^2.0.0-alpha.20",

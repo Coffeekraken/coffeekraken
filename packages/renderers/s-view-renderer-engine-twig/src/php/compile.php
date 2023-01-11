@@ -44,7 +44,7 @@ $data = \Sugar\convert\toArray($data);
 
 try {
     $html = \Sugar\html\expandPleasantCssClassnames(
-        $twig->render($params->viewDotPath, $data)
+        $twig->render($params->viewPath, $data)
     );
     // $html = \Sugar\classname\patchHtml($html);
     print $html;

@@ -209,10 +209,10 @@ export default class SPanelComponent extends __SLitComponent {
     }
     firstUpdated() {
         this._$container = this.querySelector(
-            `.${this.cu.uCls('__container')}`,
+            `.${this.utils.uCls('__container')}`,
         );
         this._$backdrop = this.querySelector(
-            `.${this.cu.uCls('__backdrop')}`,
+            `.${this.utils.uCls('__backdrop')}`,
         );
         this._containerTransitionProps = __getTransitionProperties(
             this._$container,
@@ -316,7 +316,7 @@ export default class SPanelComponent extends __SLitComponent {
             this.props.active = true;
             this.requestUpdate();
             // dispatch an open event
-            this.cu.dispatchEvent('open');
+            this.utils.dispatchEvent('open');
         });
     }
     // s-activate support
@@ -333,7 +333,7 @@ export default class SPanelComponent extends __SLitComponent {
         this.props.active = false;
         this.requestUpdate();
         // dispatch a close event
-        this.cu.dispatchEvent('close');
+        this.utils.dispatchEvent('close');
 
         let duration = 0;
         if (this._containerTransitionProps.totalDuration > duration)
@@ -353,14 +353,16 @@ export default class SPanelComponent extends __SLitComponent {
     render() {
         return html`
             <div
-                class="${this.cu.cls('__root')} ${this.cu.cls(
+                class="${this.utils.cls('__root')} ${this.utils.cls(
                     `--${this.props.position}`,
                 )}"
             >
                 ${this.props.backdrop
-                    ? html` <div class="${this.cu.cls('__backdrop')}"></div> `
+                    ? html`
+                          <div class="${this.utils.cls('__backdrop')}"></div>
+                      `
                     : ''}
-                <div class="${this.cu.cls('__container')}">
+                <div class="${this.utils.cls('__container')}">
                     ${this._template ?? ''}
                 </div>
             </div>

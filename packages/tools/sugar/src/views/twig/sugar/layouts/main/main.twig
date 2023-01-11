@@ -82,7 +82,8 @@
 
     {% if SUGAR %}
     <script id="sugar-override">
-        document.SUGAR = {{ SUGAR|json_encode()|raw }};
+        if (!document.env) document.env = {};
+        document.env.SUGAR = {{ SUGAR|json_encode()|raw }};
     </script>
     {% endif %}
 

@@ -4,7 +4,7 @@ export default function (component) {
     return {
         html(props: any, values: any) {
             return html`
-                <div class="${component.cu.className('__dropzone')}">
+                <div class="${component.utils.cls('__dropzone')}">
                     <s-dropzone
                         accept="image/*"
                         files="${values.url}"

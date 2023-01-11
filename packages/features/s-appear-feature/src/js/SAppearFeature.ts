@@ -91,7 +91,7 @@ export default class SAppearFeature extends __SFeature {
         );
 
         // add the s-appear attribute if not present
-        this.cu.fastdom.mutate(() => {
+        this.utils.fastdom.mutate(() => {
             if (!this.node.hasAttribute('s-appear')) {
                 this.node.setAttribute('s-appear', true);
             }

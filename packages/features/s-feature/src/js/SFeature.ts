@@ -25,8 +25,8 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
  * @example             js
  * import SFeature from '@coffeekraken/s-lit-component';
  * const component = new SFeature('my-cool-component');
- * component.className('__something'); // => my-cool-component__something
- * component.className('hello'); // => my-cool-component-hello
+ * component.utils.cls('__something'); // => my-cool-component__something
+ * component.utils.cls('hello'); // => my-cool-component-hello
  *
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
@@ -167,13 +167,12 @@ export default class SFeature extends __SClass implements ISFeature {
             });
         }
 
-        this.cu = new __SComponentUtils(node, {
+        this.utils = new __SComponentUtils(node, {
             ...(this.settings ?? {}),
             ...(this.settings.componentUtils ?? {}),
             useTagNameForClassName: false,
             name,
         });
-        this.componentUtils = this.cu;
 
         // name
         this.name = name;
@@ -182,7 +181,7 @@ export default class SFeature extends __SClass implements ISFeature {
         this.node = node;
 
         // assign props
-        this.props = this.cu.handleProps(
+        this.props = this.utils.handleProps(
             {},
             {
                 interface:
@@ -192,9 +191,9 @@ export default class SFeature extends __SClass implements ISFeature {
         );
 
         // add the base class on the feature
-        this.node.classList.add(...this.cu.cls('').split(' '));
+        this.node.classList.add(...this.utils.cls('').split(' '));
 
-        this.cu.waitAndExecute(
+        this.utils.waitAndExecute(
             this.props.mountWhen,
             // @ts-ignore
             async () => {

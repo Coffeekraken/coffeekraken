@@ -127,6 +127,10 @@ export default async function ({
     }
 
     function processRuleDecl(rule: any, decl: any, levelStr: string): void {
+        if (rule.selector.match(/\.s-lod--prevent/)) {
+            return;
+        }
+
         if (!rule._lod) {
             rule._lod = {};
         }
@@ -182,7 +186,7 @@ export default async function ({
         //
         root.walkDecls(propertiesReg, (decl) => {
             // support for @sugar.lods.prevent mixin
-            if (decl.parent._preventLod) {
+            if (decl.parent?.selector?.match(/\.s-lod--prevent/)) {
                 return;
             }
 
@@ -208,16 +212,16 @@ export default async function ({
 
     // handle "file" method on rule
     if (settings.lod.method === 'file') {
-        root.walkRules(/\.s-lod-method--file/, (rule) => {
+        root.walkRules(/\.s-lod--[0-9]{1,2}/, (rule) => {
             const level = parseInt(
                 rule.selector.match(/\.s-lod--([0-9]{1,2})/)[1],
             );
 
-            // remove the .s-lod-method--%method... class from the selector
-            rule.selector = rule.selector.replace(
-                /\.s-lod-method--file\s?/gm,
-                '',
-            );
+            // // remove the .s-lod-method--%method... class from the selector
+            // rule.selector = rule.selector.replace(
+            //     /\.s-lod-method--file\s?/gm,
+            //     '',
+            // );
 
             // remove the .s-lod--%level... class from the selector
             rule.selector = rule.selector.replace(
@@ -292,6 +296,13 @@ export default async function ({
             rule.remove();
             return;
         }
+    });
+
+    // remove .s-lod--prevent in selectors
+    root.walkRules(/\.s-lod--prevent/, (rule) => {
+        rule.selectors = rule.selectors.map((sel) => {
+            return sel.replace(/\.s-lod--prevent\s?/gm, '');
+        });
     });
 
     // // classmap

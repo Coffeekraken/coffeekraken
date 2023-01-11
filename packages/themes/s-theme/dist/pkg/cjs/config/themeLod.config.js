@@ -116,7 +116,7 @@ function default_1(api) {
                 background: 1,
                 'background-attachment': 1,
                 'background-blend-mode': 2,
-                'background-clip': 2,
+                'background-clip': 1,
                 'background-color': 1,
                 'background-image': 2,
                 'background-origin': 2,

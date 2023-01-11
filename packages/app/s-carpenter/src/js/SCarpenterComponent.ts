@@ -207,7 +207,7 @@ export default class SCarpenterComponent extends __SLitComponent {
                 .replace(/<\/s-carpenter>/gm, '</s-nothing>');
 
             // add the correct class on the iframe
-            this._$iframe.classList.add(this.cu.cls('__iframe'));
+            this._$iframe.classList.add(this.utils.cls('__iframe'));
 
             // make sure we don't have any src on the iframe
             this._$iframe.setAttribute('src', 'about:blank');
@@ -238,7 +238,7 @@ export default class SCarpenterComponent extends __SLitComponent {
             });
 
             // add the "in-iframe" class
-            this._$document.body.classList.add(this.cu.cls('-in-iframe'));
+            this._$document.body.classList.add(this.utils.cls('-in-iframe'));
         }
 
         // get the first s-spec element that we can find
@@ -564,15 +564,15 @@ export default class SCarpenterComponent extends __SLitComponent {
         }
 
         return html`
-            <div class="${this.cu.cls('', null, 's-bare')}">
+            <div class="${this.utils.cls('', null, 's-bare')}">
                 ${this.props.sidebar
                     ? html`
-                          <nav class="${this.cu.cls('__sidebar')}">
-                              <div class="${this.cu.cls('__logo')}">
+                          <nav class="${this.utils.cls('__sidebar')}">
+                              <div class="${this.utils.cls('__logo')}">
                                   ${unsafeHTML(this.props.logo)}
                               </div>
 
-                              <div class="${this.cu.cls('__navigation')}">
+                              <div class="${this.utils.cls('__navigation')}">
                                   <ul class="s-fs-tree">
                                       ${Object.keys(
                                           this._data.specsBySources,
@@ -700,9 +700,9 @@ export default class SCarpenterComponent extends __SLitComponent {
                                       : '100vw'};
                               }
                           </style>
-                          <nav class="${this.cu.cls('__media')}">
+                          <nav class="${this.utils.cls('__media')}">
                               <ul
-                                  class="${this.cu.cls(
+                                  class="${this.utils.cls(
                                       '__queries',
                                       's-tabs',
                                       's-bare',
@@ -718,7 +718,7 @@ export default class SCarpenterComponent extends __SLitComponent {
                                               class="s-color s-color--accent ${query ===
                                               this.state.activeMedia
                                                   ? 'active'
-                                                  : ''} ${this.cu.cls(
+                                                  : ''} ${this.utils.cls(
                                                   '__query __item',
                                               )}"
                                           >

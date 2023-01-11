@@ -94,7 +94,7 @@ export default class SRatingComponent extends __SLitComponent {
         this.state.value = rating;
 
         // dispatch en update event
-        this.cu.dispatchEvent('change', {
+        this.utils.dispatchEvent('change', {
             detail: this.state,
         });
     }
@@ -102,7 +102,7 @@ export default class SRatingComponent extends __SLitComponent {
     render() {
         return html`
             <div
-                class="${this.cu.cls('__root')}"
+                class="${this.utils.cls('__root')}"
                 style="--s-rating-rate: ${this.state
                     .value}; --s-rating-min: ${this.props
                     .min}; --s-rating-max: ${this.props
@@ -115,7 +115,7 @@ export default class SRatingComponent extends __SLitComponent {
                     value="${this.state.value}"
                 />
                 <div
-                    class="${this.cu.cls('__base')} ${this.cu.cls(
+                    class="${this.utils.cls('__base')} ${this.utils.cls(
                         '__icons-wrapper',
                     )}"
                 >
@@ -130,7 +130,7 @@ export default class SRatingComponent extends __SLitComponent {
                     )}
                 </div>
                 <div
-                    class="${this.cu.cls('__rate')} ${this.cu.cls(
+                    class="${this.utils.cls('__rate')} ${this.utils.cls(
                         '__icons-wrapper',
                     )}"
                 >

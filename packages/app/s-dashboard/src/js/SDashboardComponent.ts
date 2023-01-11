@@ -13,7 +13,7 @@ import { define as __SDashboardFrontendCheckerComponent } from './partials/s-das
 import { define as __SDashboardGoogleComponent } from './partials/s-dashboard-google-component/SDashboardGoogleComponent';
 import {
     define as __SDashboardPagesComponent,
-    events as __SDashboardPagesComponentEvents
+    events as __SDashboardPagesComponentEvents,
 } from './partials/s-dashboard-pages-component/SDashboardPagesComponent';
 import { define as __SDashboardProjectComponent } from './partials/s-dashboard-project-component/SDashboardProjectComponent';
 import { define as __SDashboardResponsiveComponent } from './partials/s-dashboard-responsive-component/SDashboardResponsiveComponent';
@@ -120,7 +120,7 @@ export default class SDashboardComponent extends __SLitComponent {
 
     render() {
         return html`
-            <div class="${this.cu.cls('')}">
+            <div class="${this.utils.cls('')}">
                 <header class="header">
                     <div class="s-container:wide">
                         <div class="__toolbar">

@@ -108,9 +108,9 @@ if (import.meta.hot) {
     // init theme
     await __STheme.init({
         variant: 'dark',
-        classmap: {
-            enabled: true,
-        },
+        // classmap: {
+        //     enabled: true,
+        // },
         lod: {
             enabled: true,
             level: 3,

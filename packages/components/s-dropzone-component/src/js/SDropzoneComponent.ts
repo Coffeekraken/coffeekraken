@@ -117,7 +117,7 @@ export default class SDropzoneComponent extends __SLitComponent {
             }
 
             // dispatch an update
-            this.cu.dispatchEvent('change', {
+            this.utils.dispatchEvent('change', {
                 detail: [...this.state.files],
             });
             this.requestUpdate();
@@ -133,11 +133,11 @@ export default class SDropzoneComponent extends __SLitComponent {
         // reset files
         this.state.files = [];
         // remove classname
-        this.classList.remove(this.cu.cls('--over'));
-        this.classList.remove(this.cu.cls('--files'));
+        this.classList.remove(this.utils.cls('--over'));
+        this.classList.remove(this.utils.cls('--files'));
         // dispatch an update
         if (dispatchEvent) {
-            this.cu.dispatchEvent('clear', {
+            this.utils.dispatchEvent('clear', {
                 detail: [...this.state.files],
             });
         }
@@ -171,7 +171,7 @@ export default class SDropzoneComponent extends __SLitComponent {
                 resolve(data);
 
                 // dispatch an "file" event
-                this.cu.dispatchEvent('file', {
+                this.utils.dispatchEvent('file', {
                     detail: data,
                 });
 
@@ -192,7 +192,7 @@ export default class SDropzoneComponent extends __SLitComponent {
         e.preventDefault();
 
         // add classname
-        this.classList.add(this.cu.cls('--over'));
+        this.classList.add(this.utils.cls('--over'));
     }
 
     /**
@@ -203,7 +203,7 @@ export default class SDropzoneComponent extends __SLitComponent {
         e.preventDefault();
 
         // remove classname
-        this.classList.remove(this.cu.cls('--over'));
+        this.classList.remove(this.utils.cls('--over'));
     }
 
     /**
@@ -258,7 +258,7 @@ export default class SDropzoneComponent extends __SLitComponent {
             this.state.uploadTotalPercent = 0;
 
             //  put the component in "upload" state
-            this.classList.add(this.cu.cls('--upload'));
+            this.classList.add(this.utils.cls('--upload'));
 
             for (let [idx, file] of files.entries()) {
                 const uploadResultPromise = this._uploadFile(file);
@@ -283,7 +283,7 @@ export default class SDropzoneComponent extends __SLitComponent {
             }
 
             // put the component in "upload" state
-            this.classList.remove(this.cu.cls('--upload'));
+            this.classList.remove(this.utils.cls('--upload'));
 
             // resolve the upload process with all the uploaded files
             resolve(uploadedFilesResults);
@@ -295,10 +295,10 @@ export default class SDropzoneComponent extends __SLitComponent {
      */
     async _handleDropedFiles(files: any[], filesList: FileList): Promise<void> {
         // remove classname
-        this.classList.remove(this.cu.cls('--over'));
+        this.classList.remove(this.utils.cls('--over'));
 
         // add the loading classname
-        this.classList.add(this.cu.cls('--loading'));
+        this.classList.add(this.utils.cls('--loading'));
 
         // wait until all the file(s) have been processed
         await new Promise((resolve, reject) => {
@@ -375,21 +375,21 @@ export default class SDropzoneComponent extends __SLitComponent {
             // set the files in the input field
             this._$input.files = filesList;
             // add classname
-            this.classList.add(this.cu.cls('--files'));
+            this.classList.add(this.utils.cls('--files'));
 
             // dispatch an update
-            this.cu.dispatchEvent('change', {
+            this.utils.dispatchEvent('change', {
                 detail: [...this.state.files],
             });
         } else {
             // add error class
-            this.classList.add(this.cu.cls('--error'));
+            this.classList.add(this.utils.cls('--error'));
             setTimeout(() => {
-                this.classList.remove(this.cu.cls('--error'));
+                this.classList.remove(this.utils.cls('--error'));
             }, this.props.errorTimeout);
 
             // dispatch an error
-            this.cu.dispatchEvent('error', {
+            this.utils.dispatchEvent('error', {
                 detail: [...this.state.files],
             });
         }
@@ -398,7 +398,7 @@ export default class SDropzoneComponent extends __SLitComponent {
     render() {
         return html`
             <div
-                class="${this.cu.cls('__root')}"
+                class="${this.utils.cls('__root')}"
                 @dragover=${(e) => this._onDragover(e)}
                 @dragleave=${(e) => this._onDragleave(e)}
                 @drop=${(e) => this._onDrop(e)}
@@ -407,21 +407,21 @@ export default class SDropzoneComponent extends __SLitComponent {
                     ? html`
                           <label
                               for="${this.props.name}"
-                              class="${this.cu.cls('__drop')}"
+                              class="${this.utils.cls('__drop')}"
                           >
                               ${unsafeHTML(this.props.dropFileIcon)}
-                              <p class="${this.cu.cls('__text')}">
+                              <p class="${this.utils.cls('__text')}">
                                   ${this.props.i18n.clickOrDrag}
                               </p>
                           </label>
                       `
                     : html`
-                          <div class="${this.cu.cls('__droped')}">
-                              <div class="${this.cu.cls('__files')}">
+                          <div class="${this.utils.cls('__droped')}">
+                              <div class="${this.utils.cls('__files')}">
                                   ${this.state.files.map(
                                       (file) => html`
                                           <div
-                                              class="${this.cu.cls(
+                                              class="${this.utils.cls(
                                                   `__file __file--image __file--${
                                                       file.type?.replace?.(
                                                           '/',
@@ -452,7 +452,7 @@ export default class SDropzoneComponent extends __SLitComponent {
                               ${this.state.status !== 'upload'
                                   ? html`
                                         <button
-                                            class="${this.cu.cls(
+                                            class="${this.utils.cls(
                                                 '__clear-btn',
                                                 's-btn s-color s-color--error',
                                             )}"
@@ -480,14 +480,14 @@ export default class SDropzoneComponent extends __SLitComponent {
                 ${this.props.accept ?? this.props.help
                     ? html`
                           <div
-                              class="${this.cu.cls(
+                              class="${this.utils.cls(
                                   '__help',
                                   's-tooltip-container',
                               )}"
                           >
                               ${unsafeHTML(this.props.helpIcon)}
                               <div
-                                  class="${this.cu.cls(
+                                  class="${this.utils.cls(
                                       '__tooltip',
                                       's-tooltip:left s-color s-color--accent',
                                   )}"

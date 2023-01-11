@@ -377,7 +377,7 @@ export default class STheme extends __SThemeBase {
      */
     static ensureIsInited(throwError = true): boolean {
         // @ts-ignore
-        if (!document.env.SUGAR.theme) {
+        if (!document.env?.SUGAR?.theme) {
             if (throwError) {
                 throw new Error(
                     `<red>[STheme]</red> You must init your theme using the __STheme.init() static method...`,

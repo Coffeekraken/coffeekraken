@@ -104,9 +104,9 @@ export default function ({
 
     levels.forEach((lod) => {
         let cls = `.s-lod--${lod}`;
-        if (finalParams.method === 'file') {
-            cls += `.s-lod-method--${finalParams.method}`;
-        }
+        // if (finalParams.method === 'file') {
+        //     cls += `.s-lod-method--${finalParams.method}`;
+        // }
         newSelectors.push(`${cls} &`);
     });
 

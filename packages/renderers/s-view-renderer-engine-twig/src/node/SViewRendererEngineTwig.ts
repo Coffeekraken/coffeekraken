@@ -48,17 +48,19 @@ export default class SViewRendererEngineTwig {
                     });
                 }
 
-                let viewDotPath = viewPath;
+                if (!viewPath.includes('/')) {
+                    viewPath = viewPath.replace(/\./gm, '/');
+                }
+                if (!viewPath.match(/\.twig$/)) {
+                    viewPath += '.twig';
+                }
+
                 __unique([...viewRendererSettings.rootDirs]).forEach((path) => {
-                    viewDotPath = viewDotPath.replace(`${path}/`, '');
+                    viewPath = viewPath.replace(`${path}/`, '');
                 });
 
                 // pass the shared data file path through the data
                 data._sharedDataFilePath = sharedDataFilePath;
-
-                if (__fs.existsSync(viewDotPath)) {
-                    viewDotPath = viewDotPath;
-                }
 
                 const resPro = pipe(
                     __execPhp(
@@ -70,7 +72,7 @@ export default class SViewRendererEngineTwig {
                             rootDirs: __unique([
                                 ...viewRendererSettings.rootDirs,
                             ]),
-                            viewDotPath,
+                            viewPath,
                             data,
                             cacheDir: viewRendererSettings.cacheDir,
                         },

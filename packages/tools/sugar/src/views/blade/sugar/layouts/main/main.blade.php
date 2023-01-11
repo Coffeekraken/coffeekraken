@@ -85,7 +85,8 @@ $frontspec->metas->og = $ogObj;
 
     @if (isset($SUGAR))
     <script id="sugar-override">
-        document.SUGAR = {!! json_encode($SUGAR) !!};
+        if (!document.env) document.env = {};
+        document.env.SUGAR = {!! json_encode($SUGAR) !!};
     </script>
     @endif
 

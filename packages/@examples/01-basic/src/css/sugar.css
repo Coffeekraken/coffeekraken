@@ -20,14 +20,9 @@
 }
 
 /* @sugar.ui.menu.classes(); */
-
 @sugar.ui.slider.classes();
 @sugar.ui.googleMap.classes();
 @sugar.ui.googleMapMarker.classes();
-
-/* @sugar.partial ('slider') { */
-/* @sugar.ui.slider.classes(); */
-/* } */
 
 /**
  * Define some icons to be used with classes like "s-icon:github", etc...

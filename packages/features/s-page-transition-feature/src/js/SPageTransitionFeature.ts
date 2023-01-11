@@ -160,7 +160,7 @@ export default class SPageTransitionFeature extends __SFeature {
         return new Promise(async (resolve, reject) => {
 
             // dispatch an event
-            this.cu.dispatchEvent('start', {
+            this.utils.dispatchEvent('start', {
                 $elm: $source,
                 detail: {
                     url
@@ -168,7 +168,7 @@ export default class SPageTransitionFeature extends __SFeature {
             })
 
             // add classes
-            this.cu.fastdom.mutate(() => {
+            this.utils.fastdom.mutate(() => {
                 document.body.classList.add('loading');
                 document.body.setAttribute('loading', 'true');
                 $source.classList.add('s-page-transition-source');
@@ -340,7 +340,7 @@ export default class SPageTransitionFeature extends __SFeature {
                 $source.innerHTML = `${$source.innerHTML}${this.props.brokenLinkIcon.replace(/^\<([a-z]+)/, '<$1 s-page-transition-broken-link-icon')}`;
             }
             // dispatch an error event
-            this.cu.dispatchEvent('error', {
+            this.utils.dispatchEvent('error', {
                 $elm: $source,
                 detail: {
                     code,
@@ -363,7 +363,7 @@ export default class SPageTransitionFeature extends __SFeature {
         }
 
         // dispatch an event
-        this.cu.dispatchEvent('end', {
+        this.utils.dispatchEvent('end', {
             $elm: $source,
             detail: {
                 code,

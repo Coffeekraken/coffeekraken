@@ -24,7 +24,7 @@ export default class SSugarConfig {
         if (SSugarConfig._finalConfig) return SSugarConfig._finalConfig;
         SSugarConfig._finalConfig = __deepMerge(
             // @ts-ignore
-            document.env.SUGAR?.config ?? {},
+            document.env?.SUGAR?.config ?? {},
         );
         return SSugarConfig._finalConfig;
     }

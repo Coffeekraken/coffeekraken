@@ -64,7 +64,7 @@ export default class SLazyFeature extends __SFeature implements ISFeature {
             $container = $content.children[0];
         }
 
-        this.cu.fastdom.mutate(() => {
+        this.utils.fastdom.mutate(() => {
             this.node.parentNode.insertBefore($content, this.node);
             this.node.remove();
         });

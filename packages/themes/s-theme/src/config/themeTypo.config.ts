@@ -281,8 +281,11 @@ export default (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         hr: {
-            label: '------',
+            label: '--',
             group: 'block',
+            button: {
+                label: '--',
+            },
             style: {
                 display: 'block',
                 get color() {
@@ -343,8 +346,11 @@ export default (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         'code:not(pre > code)': {
-            label: '</>',
+            label: 'Code',
             group: 'text',
+            button: {
+                label: '</>',
+            },
             style: {
                 display: 'inline-block',
                 fontFamily: 'code',
@@ -370,16 +376,21 @@ export default (api) => {
         blockquote: {
             label: 'Blockquote',
             group: 'block',
+            button: {
+                label: '<svg viewBox="0 0 20 20"><path d="M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z"></path></svg>',
+            },
             style: {
                 display: 'block',
                 fontFamily: 'quote',
             },
-            editorStyle: {
-                get paddingInlineStart() {
-                    return api.theme.ui.default.paddingInline;
-                },
-                get borderLeft() {
-                    return `1px solid #000`;
+            editor: {
+                style: {
+                    get paddingInlineStart() {
+                        return api.theme.ui.default.paddingInline;
+                    },
+                    get borderLeft() {
+                        return `1px solid #000`;
+                    },
                 },
             },
             rhythmVertical: {
@@ -400,6 +411,9 @@ export default (api) => {
         a: {
             label: 'Link',
             group: 'text',
+            button: {
+                label: '<svg viewBox="0 0 20 20"><path d="m11.077 15 .991-1.416a.75.75 0 1 1 1.229.86l-1.148 1.64a.748.748 0 0 1-.217.206 5.251 5.251 0 0 1-8.503-5.955.741.741 0 0 1 .12-.274l1.147-1.639a.75.75 0 1 1 1.228.86L4.933 10.7l.006.003a3.75 3.75 0 0 0 6.132 4.294l.006.004zm5.494-5.335a.748.748 0 0 1-.12.274l-1.147 1.639a.75.75 0 1 1-1.228-.86l.86-1.23a3.75 3.75 0 0 0-6.144-4.301l-.86 1.229a.75.75 0 0 1-1.229-.86l1.148-1.64a.748.748 0 0 1 .217-.206 5.251 5.251 0 0 1 8.503 5.955zm-4.563-2.532a.75.75 0 0 1 .184 1.045l-3.155 4.505a.75.75 0 1 1-1.229-.86l3.155-4.506a.75.75 0 0 1 1.045-.184z"></path></svg>',
+            },
             style: {
                 color: 'accent',
                 textDecoration: 'underline',
@@ -419,6 +433,9 @@ export default (api) => {
         quote: {
             label: 'Quote',
             group: 'text',
+            button: {
+                label: '<svg viewBox="0 0 20 20"><path d="M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z"></path></svg>',
+            },
             style: {
                 fontFamily: 'quote',
             },
@@ -438,13 +455,16 @@ export default (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         bold: {
-            label: 'B',
+            label: 'Bold',
             group: 'text',
             style: {
                 fontWeight: 'bold',
             },
-            buttonStyle: {
-                fontWeight: 'bolder',
+            button: {
+                label: 'B',
+                style: {
+                    fontWeight: 'bolder',
+                },
             },
         },
         /**
@@ -459,13 +479,16 @@ export default (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         italic: {
-            label: 'I',
+            label: 'Italic',
             group: 'text',
             style: {
                 fontStyle: 'italic',
             },
-            buttonStyle: {
-                fontStyle: 'italic',
+            button: {
+                label: 'I',
+                style: {
+                    fontStyle: 'italic',
+                },
             },
         },
         /**
@@ -485,8 +508,11 @@ export default (api) => {
             style: {
                 fontSize: '1.1em',
             },
-            buttonStyle: {
-                fontSize: '1.01em',
+            button: {
+                label: 'A',
+                style: {
+                    fontSize: '1.01em',
+                },
             },
         },
         /**
@@ -506,8 +532,11 @@ export default (api) => {
             style: {
                 fontSize: '1.2em',
             },
-            buttonStyle: {
-                fontSize: '1.02em',
+            button: {
+                label: 'A',
+                style: {
+                    fontSize: '1.02em',
+                },
             },
         },
         /**
@@ -527,8 +556,11 @@ export default (api) => {
             style: {
                 fontSize: '1.3em',
             },
-            buttonStyle: {
-                fontSize: '1.03em',
+            button: {
+                label: 'A',
+                style: {
+                    fontSize: '1.03em',
+                },
             },
         },
         /**
@@ -548,8 +580,11 @@ export default (api) => {
             style: {
                 fontSize: '0.9em',
             },
-            buttonStyle: {
-                fontSize: '0.99em',
+            button: {
+                label: 'A',
+                style: {
+                    fontSize: '0.99em',
+                },
             },
         },
         /**
@@ -569,8 +604,11 @@ export default (api) => {
             style: {
                 fontSize: '0.8em',
             },
-            buttonStyle: {
-                fontSize: '0.98em',
+            button: {
+                label: 'A',
+                style: {
+                    fontSize: '0.98em',
+                },
             },
         },
         /**
@@ -590,8 +628,11 @@ export default (api) => {
             style: {
                 fontSize: '0.7em',
             },
-            buttonStyle: {
-                fontSize: '0.97em',
+            button: {
+                label: 'A',
+                style: {
+                    fontSize: '0.97em',
+                },
             },
         },
         /**
@@ -608,6 +649,9 @@ export default (api) => {
         mark: {
             label: 'Mark',
             group: 'text',
+            button: {
+                label: 'M',
+            },
             style: {
                 get backgroundColor() {
                     return api.theme.color.accent;
@@ -626,13 +670,16 @@ export default (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         del: {
-            label: 'Del',
+            label: 'Deleted',
             group: 'text',
             style: {
                 textDecoration: 'line-through',
             },
-            buttonStyle: {
-                textDecoration: 'line-through',
+            button: {
+                label: 'D',
+                style: {
+                    textDecoration: 'line-through',
+                },
             },
         },
         /**
@@ -647,13 +694,16 @@ export default (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         ins: {
-            label: 'U',
+            label: 'Inserted',
             group: 'text',
             style: {
                 textDecoration: 'underline',
             },
-            buttonStyle: {
-                textDecoration: 'underline',
+            button: {
+                label: 'U',
+                style: {
+                    textDecoration: 'underline',
+                },
             },
         },
         /**
@@ -668,15 +718,18 @@ export default (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         sub: {
-            label: 'Sub',
+            label: 'Subscript',
             group: 'text',
             style: {
                 verticalAlign: 'sub',
                 fontSize: '0.6em',
             },
-            buttonStyle: {
-                verticalAlign: 'sub',
-                fontSize: '0.6em',
+            button: {
+                label: 'Sub',
+                style: {
+                    verticalAlign: 'sub',
+                    fontSize: '0.6em',
+                },
             },
         },
         /**
@@ -691,15 +744,18 @@ export default (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         sup: {
-            label: 'Sup',
+            label: 'Superscript',
             group: 'text',
             style: {
                 verticalAlign: 'sup',
                 fontSize: '0.6em',
             },
-            buttonStyle: {
-                verticalAlign: 'sup',
-                fontSize: '0.6em',
+            button: {
+                label: 'Sup',
+                style: {
+                    verticalAlign: 'sup',
+                    fontSize: '0.6em',
+                },
             },
         },
     };

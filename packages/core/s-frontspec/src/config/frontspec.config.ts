@@ -145,6 +145,8 @@ export default function (api) {
                                 label: value.label ?? finalKey,
                                 group: value.group,
                                 type: value.type,
+                                button: value.button ?? {},
+                                editor: value.editor ?? {},
                                 style: {
                                     ...__STheme.resolveCssObjectPropertiesValues(
                                         finalStyle,

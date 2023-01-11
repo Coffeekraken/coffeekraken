@@ -279,7 +279,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                 this.addEventListener(event, (e) => {
                     e.$scope = __querySelectorUp(e.target, ($elm) => {
                         return $elm.classList.contains(
-                            this.cu.cls('__child'),
+                            this.utils.cls('__child'),
                         );
                     });
                     this._widgets[type].events[event](e);
@@ -313,7 +313,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             }
         }
 
-        this.cu.dispatchEvent('update', {
+        this.utils.dispatchEvent('update', {
             detail: {
                 propsSpecs: Object.assign({}, this.props.specs),
                 values: Object.assign({}, this.props.specs.values),
@@ -367,7 +367,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
      */
     _changeMedia(media: string): void {
         this.props.media = media;
-        this.cu.dispatchEvent('changeMedia', {
+        this.utils.dispatchEvent('changeMedia', {
             detail: media,
         });
     }
@@ -381,7 +381,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                 ${propObj.description
                     ? html`
                           <span
-                              class="${this.cu.cls(
+                              class="${this.utils.cls(
                                   '__help-icon',
                               )} s-tooltip-container"
                           >
@@ -396,7 +396,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                 ${this.props.frontspec?.media?.queries &&
                 this.isPathResponsive(path)
                     ? html`
-                          <div class="${this.cu.cls('__media-icons')}">
+                          <div class="${this.utils.cls('__media-icons')}">
                               ${Object.keys(
                                   __STheme.sortMedia(this.props.frontspec.media)
                                       .queries,
@@ -411,7 +411,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                       );
                                       return html`
                                           <span
-                                              class="${this.cu.cls(
+                                              class="${this.utils.cls(
                                                   '__media-icon',
                                               )} ${mediaValue !== undefined &&
                                               mediaValue !== null
@@ -432,12 +432,12 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                               ${mediaValue !== undefined
                                                   ? html`
                                                         <div
-                                                            class="s-tooltip s-tooltip--interactive s-color s-color--accent ${this.cu.cls(
+                                                            class="s-tooltip s-tooltip--interactive s-color s-color--accent ${this.utils.cls(
                                                                 '__actions',
                                                             )}"
                                                         >
                                                             <button
-                                                                class="${this.cu.cls(
+                                                                class="${this.utils.cls(
                                                                     '__action',
                                                                 )}"
                                                                 @pointerup=${() =>
@@ -470,9 +470,9 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     _renderSelectElement(propObj, path) {
         const value = this.getValueFromPath(path) ?? propObj.default;
         return html`
-            <div class="${this.cu.cls('__prop--select')}">
+            <div class="${this.utils.cls('__prop--select')}">
                 <label
-                    class="${this.cu.cls(
+                    class="${this.utils.cls(
                         '__label',
                         's-label s-label--block',
                     )}"
@@ -480,7 +480,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                     <select
                         @change=${(e) => this._update(path, propObj, e)}
                         name="${path.at(-1)}"
-                        class="${this.cu.cls('__select', 's-select')}"
+                        class="${this.utils.cls('__select', 's-select')}"
                         placeholder="${propObj.default ??
                         propObj.title ??
                         propObj.id}"
@@ -512,13 +512,13 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     _renderCheckboxElement(propObj, path) {
         const value = this.getValueFromPath(path) ?? propObj.default;
         return html`
-            <div class="${this.cu.cls('__prop--checkbox')}">
-                <label class="${this.cu.cls('__label', 's-label')}">
+            <div class="${this.utils.cls('__prop--checkbox')}">
+                <label class="${this.utils.cls('__label', 's-label')}">
                     <input
                         @change=${(e) => this._update(path, propObj, e)}
                         type="checkbox"
                         name="${path.at(-1)}"
-                        class="${this.cu.cls('__checkbox', 's-switch')}"
+                        class="${this.utils.cls('__checkbox', 's-switch')}"
                         path="${path.join('.')}"
                         ?checked=${value !== false &&
                         value !== null &&
@@ -534,9 +534,9 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     _renderTextElement(propObj, path) {
         const value = this.getValueFromPath(path) ?? propObj.default;
         return html`
-            <div class="${this.cu.cls('__prop--text')}">
+            <div class="${this.utils.cls('__prop--text')}">
                 <label
-                    class="${this.cu.cls(
+                    class="${this.utils.cls(
                         '__label',
                         's-label s-label--block',
                     )}"
@@ -545,7 +545,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                         @change=${(e) => this._update(path, propObj, e)}
                         type="text"
                         name="${path.at(-1)}"
-                        class="${this.cu.cls('__input', 's-input')}"
+                        class="${this.utils.cls('__input', 's-input')}"
                         placeholder="${propObj.default ??
                         propObj.title ??
                         propObj.id}"
@@ -589,14 +589,14 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             const loopOn = this.getValueFromPath(path) ?? [];
 
             return html`
-                <div class="${this.cu.cls('__repeatable')}">
+                <div class="${this.utils.cls('__repeatable')}">
                     ${loopOn.map(
                         (v, i) => html`
                             <div
                                 tabindex="0"
                                 @pointerup=${() =>
                                     this._toggle(`${path.join('.')}-${i}`)}
-                                class="${this.cu.cls(
+                                class="${this.utils.cls(
                                     '__repeatable-title',
                                 )} ${this._isActive(`${path.join('.')}-${i}`)
                                     ? 'active'
@@ -618,14 +618,14 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                             </div>
                             <div
                                 tabindex="0"
-                                class="${this.cu.cls(
+                                class="${this.utils.cls(
                                     '__repeatable-item',
                                 )} ${this._isActive(`${path.join('.')}-${i}`)
                                     ? 'active'
                                     : ''}"
                             >
                                 <div
-                                    class="${this.cu.cls(
+                                    class="${this.utils.cls(
                                         '__repeatable-item-actions',
                                     )} ${this._isActive(
                                         `${path.join('.')}-${i}`,
@@ -636,7 +636,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                     <button
                                         @pointerup=${() =>
                                             this._removeItem(loopOn, v, _specs)}
-                                        class="${this.cu.cls(
+                                        class="${this.utils.cls(
                                             '__repeatable-remove',
                                             's-badge s-color s-color--error',
                                         )}"
@@ -646,7 +646,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                 </div>
 
                                 <div
-                                    class="${this.cu.cls(
+                                    class="${this.utils.cls(
                                         '__repeatable-item-props',
                                     )}"
                                 >
@@ -660,10 +660,10 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                         `,
                     )}
 
-                    <div class="${this.cu.cls('__repeatable-actions')}">
+                    <div class="${this.utils.cls('__repeatable-actions')}">
                         <button
                             @pointerup=${() => this._addItem(loopOn, _specs)}
-                            class="${this.cu.cls('__btn', 's-btn')}"
+                            class="${this.utils.cls('__btn', 's-btn')}"
                         >
                             Add a
                             ${__lowerFirst(_specs.title).replace(/s$/, '')}
@@ -678,9 +678,9 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                     const propObj = _specs.props[prop];
                     if (propObj.props) {
                         return html`
-                            <div class="${this.cu.cls('__child')}">
+                            <div class="${this.utils.cls('__child')}">
                                 <h3
-                                    class="${this.cu.cls(
+                                    class="${this.utils.cls(
                                         '__child-title',
                                         's-typo--h5',
                                     )}"
@@ -688,7 +688,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                     ${propObj.title}
                                 </h3>
                                 <p
-                                    class="${this.cu.cls(
+                                    class="${this.utils.cls(
                                         '__child-description',
                                         's-typo--p',
                                     )}"
@@ -713,7 +713,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                         return html`
                             <div
                                 prop="${propObj.id}"
-                                class="${this.cu.cls('__prop')}"
+                                class="${this.utils.cls('__prop')}"
                             >
                                 ${this._renderElement(propObj, [
                                     ...path,
@@ -731,16 +731,16 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     render() {
         return html`
             <div
-                class="${this.cu?.className('', null, 's-bare')}"
+                class="${this.cu?.cls('', null, 's-bare')}"
                 id="${this.props.id}"
                 status="${this.state.status}"
             >
                 ${this.props.specs
                     ? html`
-                          <div class="${this.cu.cls('__root')}">
-                              <div class="${this.cu.cls('__metas')}">
+                          <div class="${this.utils.cls('__root')}">
+                              <div class="${this.utils.cls('__metas')}">
                                   <h3
-                                      class="${this.cu.cls(
+                                      class="${this.utils.cls(
                                           '__child-title',
                                           's-typo--h3',
                                       )}"
@@ -748,7 +748,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                       ${this.props.specs.title}
                                   </h3>
                                   <p
-                                      class="${this.cu.cls(
+                                      class="${this.utils.cls(
                                           '__child-description',
                                           's-typo--p',
                                       )}"

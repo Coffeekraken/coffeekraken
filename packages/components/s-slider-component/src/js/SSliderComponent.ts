@@ -370,7 +370,7 @@ export default class SSliderComponent extends __SLitComponent {
         ).filter(($slide) => {
             const $parentSlider = __querySelectorUp($slide, '.s-slider');
             if (!$parentSlider || $parentSlider === this) {
-                $slide.classList.add(...this.cu.cls('__slide').split(' '));
+                $slide.classList.add(...this.utils.cls('__slide').split(' '));
                 return true;
             }
             return false;
@@ -395,18 +395,18 @@ export default class SSliderComponent extends __SLitComponent {
     }
     async firstUpdated() {
         // bare elements
-        this.$root = this.querySelector(`.${this.cu.uCls('__root')}`);
+        this.$root = this.querySelector(`.${this.utils.uCls('__root')}`);
 
         // slides
         this.$slidesWrapper = this.querySelector(
-            `.${this.cu.uCls('__slides-wrapper')}:not(s-slider#${
+            `.${this.utils.uCls('__slides-wrapper')}:not(s-slider#${
                 this.id
-            } s-slider .${this.cu.uCls('__slides-wrapper')})`,
+            } s-slider .${this.utils.uCls('__slides-wrapper')})`,
         );
         this.$slidesContainer = this.querySelector(
-            `.${this.cu.uCls('__slides')}:not(s-slider#${
+            `.${this.utils.uCls('__slides')}:not(s-slider#${
                 this.id
-            } s-slider .${this.cu.uCls('__slides')})`,
+            } s-slider .${this.utils.uCls('__slides')})`,
         );
 
         // default behavior
@@ -716,7 +716,7 @@ export default class SSliderComponent extends __SLitComponent {
      * This function is just to dispatch event easier with just the name and the details you want...
      */
     _dispatch(name: string, detail: any = {}) {
-        this.cu.dispatchEvent(name, {
+        this.utils.dispatchEvent(name, {
             detail,
         });
     }
@@ -1541,7 +1541,7 @@ export default class SSliderComponent extends __SLitComponent {
      */
     play(): SSliderComponent {
         if (!this.props.timer) return;
-        this.cu.dispatchEvent('play', {
+        this.utils.dispatchEvent('play', {
             detail: this,
         });
         this.state.playing = true;
@@ -1561,7 +1561,7 @@ export default class SSliderComponent extends __SLitComponent {
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     stop(): SSliderComponent {
-        this.cu.dispatchEvent('stop', {
+        this.utils.dispatchEvent('stop', {
             detail: this,
         });
         this.state.playing = false;
@@ -1665,18 +1665,20 @@ export default class SSliderComponent extends __SLitComponent {
         );
 
         return html`
-            <div class="${this.cu.cls('__root')}">
-                <div class="${this.cu.cls('__slides-wrapper')}">
-                    <div class="${this.cu.cls('__slides')}">
-                        <div class="${this.cu.cls('__pad __pad-start')}"></div>
+            <div class="${this.utils.cls('__root')}">
+                <div class="${this.utils.cls('__slides-wrapper')}">
+                    <div class="${this.utils.cls('__slides')}">
+                        <div
+                            class="${this.utils.cls('__pad __pad-start')}"
+                        ></div>
                         ${this.$slides.map(($slide) => {
                             return $slide;
                         })}
-                        <div class="${this.cu.cls('__pad __pad-end')}"></div>
+                        <div class="${this.utils.cls('__pad __pad-end')}"></div>
                     </div>
                 </div>
                 <div
-                    class="${this.cu.cls(
+                    class="${this.utils.cls(
                         '__ui',
                         `${
                             typeof this.props.uiContainer === 'string'
@@ -1689,14 +1691,16 @@ export default class SSliderComponent extends __SLitComponent {
                 >
                     ${this.props.progress
                         ? html`
-                              <div class="${this.cu.cls('__progress')}">
+                              <div class="${this.utils.cls('__progress')}">
                                   <div
-                                      class="${this.cu.cls('__progress-bar')}"
+                                      class="${this.utils.cls(
+                                          '__progress-bar',
+                                      )}"
                                   ></div>
                               </div>
                           `
                         : ''}
-                    <div class="${this.cu.cls('__nav')}">
+                    <div class="${this.utils.cls('__nav')}">
                         ${[
                             ...Array(
                                 Math.ceil(
@@ -1707,7 +1711,7 @@ export default class SSliderComponent extends __SLitComponent {
                         ].map((i, idx) => {
                             return html`
                                 <div
-                                    class="${this.cu.cls(
+                                    class="${this.utils.cls(
                                         '__nav-item',
                                     )} ${this.isSlideInPage(
                                         currentSlide.idx,
@@ -1725,9 +1729,9 @@ export default class SSliderComponent extends __SLitComponent {
                     </div>
                     ${this.props.controls
                         ? html`
-                              <div class="${this.cu.cls('__controls')}">
+                              <div class="${this.utils.cls('__controls')}">
                                   <div
-                                      class="${this.cu.cls(
+                                      class="${this.utils.cls(
                                           '__controls-previous',
                                       )} ${this.isFirst() && !this.props.loop
                                           ? ''
@@ -1742,13 +1746,13 @@ export default class SSliderComponent extends __SLitComponent {
                                                 ></i>
                                             `
                                           : html`<div
-                                                class="${this.cu.cls(
+                                                class="${this.utils.cls(
                                                     '__controls-previous-arrow',
                                                 )}"
                                             ></div>`}
                                   </div>
                                   <div
-                                      class="${this.cu.cls(
+                                      class="${this.utils.cls(
                                           '__controls-next',
                                       )} ${this.isLast() && !this.props.loop
                                           ? ''
@@ -1763,7 +1767,7 @@ export default class SSliderComponent extends __SLitComponent {
                                                 ></i>
                                             `
                                           : html`<div
-                                                class="${this.cu.cls(
+                                                class="${this.utils.cls(
                                                     '__controls-next-arrow',
                                                 )}"
                                             ></div>`}

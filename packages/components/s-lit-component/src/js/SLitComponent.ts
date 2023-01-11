@@ -3,7 +3,7 @@
 
 import type { ISComponentUtilsSettings } from '@coffeekraken/s-component-utils';
 import __SComponentUtils, {
-    SComponentUtilsDefaultPropsInterface
+    SComponentUtilsDefaultPropsInterface,
 } from '@coffeekraken/s-component-utils';
 import __SInterface from '@coffeekraken/s-interface';
 import { __wait } from '@coffeekraken/sugar/datetime';
@@ -418,7 +418,7 @@ export default class SLitComponent extends LitElement {
             return this._shouldUpdate;
         };
 
-        this.cu = new __SComponentUtils(this, {
+        this.utils = new __SComponentUtils(this, {
             ...(this.settings ?? {}),
             ...(this.settings.componentUtils ?? {}),
             style:
@@ -427,7 +427,6 @@ export default class SLitComponent extends LitElement {
                 this.settings.componentUtils?.style ??
                 '',
         });
-        this.componentUtils = this.cu;
 
         (async () => {
             const defaultProps = __SComponentUtils.getDefaultProps(
@@ -439,13 +438,13 @@ export default class SLitComponent extends LitElement {
                 'direct';
 
             // component class
-            this.classList.add(...this.cu.cls('').split(' '));
+            this.classList.add(...this.utils.cls('').split(' '));
 
             await __wait();
             await __wait();
             if (!mountWhen.match(/^direct(ly)?$/)) {
                 // wait until mount
-                await this.cu.waitAndExecute(mountWhen, () => {
+                await this.utils.waitAndExecute(mountWhen, () => {
                     this._mount();
                 });
             } else {
@@ -523,7 +522,7 @@ export default class SLitComponent extends LitElement {
         Object.assign(this.props, finalProps);
 
         // make props responsive
-        this.cu.makePropsResponsive(this.props);
+        this.utils.makePropsResponsive(this.props);
 
         // verbose
         if (this.props.verbose) {
@@ -540,7 +539,7 @@ export default class SLitComponent extends LitElement {
             delete this.state;
             Object.defineProperty(this, 'state', {
                 enumerable: true,
-                value: this.cu.handleState(state, {
+                value: this.utils.handleState(state, {
                     save: this.props.saveState,
                 }),
             });
@@ -559,13 +558,13 @@ export default class SLitComponent extends LitElement {
         // @ts-ignore
         this.requestUpdate();
         await this.updateComplete;
-        this.cu.injectStyle(
+        this.utils.injectStyle(
             this.constructor.styles?.cssText ?? '',
             this.tagName,
         );
         await __wait();
         if (this.props.adoptStyle && this.shadowRoot) {
-            await this.cu.adoptStyleInShadowRoot(this.shadowRoot);
+            await this.utils.adoptStyleInShadowRoot(this.shadowRoot);
         }
 
         return true;

@@ -1,3 +1,4 @@
+// import __SDashboard from '@coffeekraken/s-dashboard';
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,40 +8,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import './sugar';
-// Coffeekraken others
-import __SConductor from '@coffeekraken/s-conductor';
-// import __SDashboard from '@coffeekraken/s-dashboard';
+import __SPackEssentials from '@coffeekraken/s-pack-essentials';
 import __STheme from '@coffeekraken/s-theme';
-// Coffeekraken features
-import { define as __sActivateFeature } from '@coffeekraken/s-activate-feature';
-import { define as __sAppearFeature } from '@coffeekraken/s-appear-feature';
+import { define as __sugarFeatureDefine } from '@coffeekraken/s-sugar-feature';
 // import { define as __sFloatingFeature } from '@coffeekraken/s-floating-feature';
 import { define as __sFormValidateFeature } from '@coffeekraken/s-form-validate-feature';
 // import { define as __sInlineFeature } from '@coffeekraken/s-inline-feature';
 // import { define as __sPageTransitionFeature } from '@coffeekraken/s-page-transition-feature';
 // import { define as __sRefocusFeature } from '@coffeekraken/s-refocus-feature';
 import __SFeature from '@coffeekraken/s-feature';
-// Coffeekraken components
 import __SCarpenterComponent, { define as __sCarpenterComponentDefine, } from '@coffeekraken/s-carpenter';
 import { define as __sGoogleMapComponentDefine } from '@coffeekraken/s-google-map-component';
 import __SLitComponent from '@coffeekraken/s-lit-component';
-// import { define as __SCodeExampleWebcomponent } from '@coffeekraken/s-code-example-component';
-// import { define as __SColorPickerComponent } from '@coffeekraken/s-color-picker-component';
-// import { define as __SDatetimePickerComponent } from '@coffeekraken/s-datetime-picker-component';
-// import { define as __SFiltrableInputComponent } from '@coffeekraken/s-filtrable-input-component';
-// import { define as __SScrollComponent } from '@coffeekraken/s-scroll-component';
 import { define as __SSliderComponentDefine } from '@coffeekraken/s-slider-component';
-// import { define as __SSidePanelWebcomponent } from '@coffeekraken/s-panel-component';
-// import { define as __SRangeWebcomponent } from '@coffeekraken/s-range-component';
-// Project level components
-// ...
 // Views related
 const viewsRelated = import.meta.globEager('../views/**/*.ts');
-// setup conductor
-__SConductor.setup({
-    log: true,
-});
 // Init script
 (() => __awaiter(void 0, void 0, void 0, function* () {
     // Set some features defaults
@@ -48,26 +30,23 @@ __SConductor.setup({
     // Set some components defaults
     __SLitComponent.setDefaultProps('*', {});
     // Init theme
-    __STheme.init();
+    yield __STheme.init({
+        variant: 'dark',
+        lod: {
+            enabled: true,
+            level: 3,
+        },
+    });
+    // sugar feature
+    document.body.setAttribute('s-sugar', 'true');
+    __sugarFeatureDefine();
+    // essentials
+    __SPackEssentials();
     // features
-    __sActivateFeature();
-    __sAppearFeature();
-    // __sFloatingFeature();
-    // __sRefocusFeature();
-    // __sInlineFeature();
-    // __sParallaxFeature();
     __sFormValidateFeature({});
-    // __sPageTransitionFeature();
     // Project related components
     // ...
     // Components
-    // __SCodeExampleWebcomponent();
-    // __SFiltrableInputComponent();
-    // __SSidePanelWebcomponent();
-    // __SColorPickerComponent();
-    // __SDatetimePickerComponent();
-    // __SScrollComponent();
-    // __SRangeWebcomponent();
     __SSliderComponentDefine();
     __sGoogleMapComponentDefine();
     __sCarpenterComponentDefine();
@@ -85,4 +64,4 @@ __SConductor.setup({
     //     },
     // });
 }))();
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sU0FBUyxDQUFDO0FBQ2pCLHNCQUFzQjtBQUN0QixPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUNyRCx3REFBd0Q7QUFDeEQsT0FBTyxRQUFRLE1BQU0sdUJBQXVCLENBQUM7QUFFN0Msd0JBQXdCO0FBQ3hCLE9BQU8sRUFBRSxNQUFNLElBQUksa0JBQWtCLEVBQUUsTUFBTSxrQ0FBa0MsQ0FBQztBQUNoRixPQUFPLEVBQUUsTUFBTSxJQUFJLGdCQUFnQixFQUFFLE1BQU0sZ0NBQWdDLENBQUM7QUFDNUUsbUZBQW1GO0FBQ25GLE9BQU8sRUFBRSxNQUFNLElBQUksc0JBQXNCLEVBQUUsTUFBTSx1Q0FBdUMsQ0FBQztBQUN6RiwrRUFBK0U7QUFDL0UsZ0dBQWdHO0FBQ2hHLGlGQUFpRjtBQUNqRixPQUFPLFVBQVUsTUFBTSx5QkFBeUIsQ0FBQztBQUVqRCwwQkFBMEI7QUFDMUIsT0FBTyxxQkFBcUIsRUFBRSxFQUM1QixNQUFNLElBQUksMkJBQTJCLEdBQ3RDLE1BQU0sMkJBQTJCLENBQUM7QUFDbkMsT0FBTyxFQUFFLE1BQU0sSUFBSSwyQkFBMkIsRUFBRSxNQUFNLHNDQUFzQyxDQUFDO0FBQzdGLE9BQU8sZUFBZSxNQUFNLCtCQUErQixDQUFDO0FBQzVELGlHQUFpRztBQUNqRyw4RkFBOEY7QUFDOUYsb0dBQW9HO0FBQ3BHLG9HQUFvRztBQUNwRyxtRkFBbUY7QUFDbkYsT0FBTyxFQUFFLE1BQU0sSUFBSSx3QkFBd0IsRUFBRSxNQUFNLGtDQUFrQyxDQUFDO0FBQ3RGLHdGQUF3RjtBQUN4RixvRkFBb0Y7QUFFcEYsMkJBQTJCO0FBQzNCLE1BQU07QUFFTixnQkFBZ0I7QUFDaEIsTUFBTSxZQUFZLEdBQUcsTUFBTSxDQUFDLElBQUksQ0FBQyxTQUFTLENBQUMsa0JBQWtCLENBQUMsQ0FBQztBQUUvRCxrQkFBa0I7QUFDbEIsWUFBWSxDQUFDLEtBQUssQ0FBQztJQUNqQixHQUFHLEVBQUUsSUFBSTtDQUNWLENBQUMsQ0FBQztBQUVILGNBQWM7QUFDZCxDQUFDLEdBQVMsRUFBRTtJQUNWLDZCQUE2QjtJQUM3QixVQUFVLENBQUMsZUFBZSxDQUFDLEdBQUcsRUFBRSxFQUFFLENBQUMsQ0FBQztJQUVwQywrQkFBK0I7SUFDL0IsZUFBZSxDQUFDLGVBQWUsQ0FBQyxHQUFHLEVBQUUsRUFBRSxDQUFDLENBQUM7SUFFekMsYUFBYTtJQUNiLFFBQVEsQ0FBQyxJQUFJLEVBQUUsQ0FBQztJQUVoQixXQUFXO0lBQ1gsa0JBQWtCLEVBQUUsQ0FBQztJQUNyQixnQkFBZ0IsRUFBRSxDQUFDO0lBQ25CLHdCQUF3QjtJQUN4Qix1QkFBdUI7SUFDdkIsc0JBQXNCO0lBQ3RCLHdCQUF3QjtJQUN4QixzQkFBc0IsQ0FBQyxFQUFFLENBQUMsQ0FBQztJQUMzQiw4QkFBOEI7SUFFOUIsNkJBQTZCO0lBQzdCLE1BQU07SUFFTixhQUFhO0lBQ2IsZ0NBQWdDO0lBQ2hDLGdDQUFnQztJQUNoQyw4QkFBOEI7SUFDOUIsNkJBQTZCO0lBQzdCLGdDQUFnQztJQUNoQyx3QkFBd0I7SUFDeEIsMEJBQTBCO0lBQzFCLHdCQUF3QixFQUFFLENBQUM7SUFDM0IsMkJBQTJCLEVBQUUsQ0FBQztJQUM5QiwyQkFBMkIsRUFBRSxDQUFDO0lBRTlCLHFCQUFxQixDQUFDLE1BQU0sRUFBRSxDQUFDO0lBRS9CLFlBQVk7SUFDWixxQkFBcUI7SUFDckIsbUJBQW1CO0lBQ25CLHdCQUF3QjtJQUN4QixxQ0FBcUM7SUFDckMsd0NBQXdDO0lBQ3hDLDhEQUE4RDtJQUM5RCxxQkFBcUI7SUFDckIsaUJBQWlCO0lBQ2pCLGFBQWE7SUFDYixTQUFTO0lBQ1QsTUFBTTtBQUNSLENBQUMsQ0FBQSxDQUFDLEVBQUUsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLHdEQUF3RDs7Ozs7Ozs7OztBQUV4RCxPQUFPLGlCQUFpQixNQUFNLGlDQUFpQyxDQUFDO0FBQ2hFLE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBRTdDLE9BQU8sRUFBRSxNQUFNLElBQUksb0JBQW9CLEVBQUUsTUFBTSwrQkFBK0IsQ0FBQztBQUUvRSxtRkFBbUY7QUFDbkYsT0FBTyxFQUFFLE1BQU0sSUFBSSxzQkFBc0IsRUFBRSxNQUFNLHVDQUF1QyxDQUFDO0FBQ3pGLCtFQUErRTtBQUMvRSxnR0FBZ0c7QUFDaEcsaUZBQWlGO0FBQ2pGLE9BQU8sVUFBVSxNQUFNLHlCQUF5QixDQUFDO0FBRWpELE9BQU8scUJBQXFCLEVBQUUsRUFDNUIsTUFBTSxJQUFJLDJCQUEyQixHQUN0QyxNQUFNLDJCQUEyQixDQUFDO0FBQ25DLE9BQU8sRUFBRSxNQUFNLElBQUksMkJBQTJCLEVBQUUsTUFBTSxzQ0FBc0MsQ0FBQztBQUM3RixPQUFPLGVBQWUsTUFBTSwrQkFBK0IsQ0FBQztBQUM1RCxPQUFPLEVBQUUsTUFBTSxJQUFJLHdCQUF3QixFQUFFLE1BQU0sa0NBQWtDLENBQUM7QUFFdEYsZ0JBQWdCO0FBQ2hCLE1BQU0sWUFBWSxHQUFHLE1BQU0sQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLGtCQUFrQixDQUFDLENBQUM7QUFFL0QsY0FBYztBQUNkLENBQUMsR0FBUyxFQUFFO0lBQ1YsNkJBQTZCO0lBQzdCLFVBQVUsQ0FBQyxlQUFlLENBQUMsR0FBRyxFQUFFLEVBQUUsQ0FBQyxDQUFDO0lBRXBDLCtCQUErQjtJQUMvQixlQUFlLENBQUMsZUFBZSxDQUFDLEdBQUcsRUFBRSxFQUFFLENBQUMsQ0FBQztJQUV6QyxhQUFhO0lBQ2IsTUFBTSxRQUFRLENBQUMsSUFBSSxDQUFDO1FBQ2xCLE9BQU8sRUFBRSxNQUFNO1FBQ2YsR0FBRyxFQUFFO1lBQ0gsT0FBTyxFQUFFLElBQUk7WUFDYixLQUFLLEVBQUUsQ0FBQztTQUNUO0tBQ0YsQ0FBQyxDQUFDO0lBRUgsZ0JBQWdCO0lBQ2hCLFFBQVEsQ0FBQyxJQUFJLENBQUMsWUFBWSxDQUFDLFNBQVMsRUFBRSxNQUFNLENBQUMsQ0FBQztJQUM5QyxvQkFBb0IsRUFBRSxDQUFDO0lBRXZCLGFBQWE7SUFDYixpQkFBaUIsRUFBRSxDQUFDO0lBRXBCLFdBQVc7SUFDWCxzQkFBc0IsQ0FBQyxFQUFFLENBQUMsQ0FBQztJQUUzQiw2QkFBNkI7SUFDN0IsTUFBTTtJQUVOLGFBQWE7SUFDYix3QkFBd0IsRUFBRSxDQUFDO0lBQzNCLDJCQUEyQixFQUFFLENBQUM7SUFDOUIsMkJBQTJCLEVBQUUsQ0FBQztJQUU5QixxQkFBcUIsQ0FBQyxNQUFNLEVBQUUsQ0FBQztJQUUvQixZQUFZO0lBQ1oscUJBQXFCO0lBQ3JCLG1CQUFtQjtJQUNuQix3QkFBd0I7SUFDeEIscUNBQXFDO0lBQ3JDLHdDQUF3QztJQUN4Qyw4REFBOEQ7SUFDOUQscUJBQXFCO0lBQ3JCLGlCQUFpQjtJQUNqQixhQUFhO0lBQ2IsU0FBUztJQUNULE1BQU07QUFDUixDQUFDLENBQUEsQ0FBQyxFQUFFLENBQUMifQ==

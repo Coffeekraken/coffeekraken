@@ -209,7 +209,7 @@ export class ApiNav extends __SLitComponent {
         }
 
         return html`
-            <div class="${this.cu.cls('')}">
+            <div class="${this.utils.cls('')}">
                 ${this._renderList(this._menuStack)}
             </div>
         `;

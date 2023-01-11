@@ -64,7 +64,7 @@ export default class SParallaxFeature extends __SFeature implements ISFeature {
         this._originalTransform = transformStr;
 
         document.addEventListener('mousemove', (e) => {
-            if (!this.cu.isActive()) {
+            if (!this.utils.isActive()) {
                 return;
             }
             // console.log('PARA', this.node);

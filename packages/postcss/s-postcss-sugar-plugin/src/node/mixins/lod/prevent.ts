@@ -50,14 +50,11 @@ export default function ({
         ...(params ?? {}),
     };
     atRule.walkRules((rule) => {
-        rule._preventLod = true;
-        if (!sharedData._preventLodSelectors) {
-            sharedData._preventLodSelectors = [];
-        }
-        sharedData._preventLodSelectors = [
-            ...sharedData._preventLodSelectors,
-            ...rule.selectors,
-        ];
+        rule.selectors = rule.selectors.map((sel) => {
+            if (sel.match(/\.s-lod--prevent/)) return sel;
+            return `.s-lod--prevent ${sel}`;
+        });
     });
+
     atRule.replaceWith(atRule.nodes);
 }

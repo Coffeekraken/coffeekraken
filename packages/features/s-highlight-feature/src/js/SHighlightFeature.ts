@@ -78,7 +78,7 @@ export default class SHighlightFeature extends __SFeature {
 
         ['mouseover', 'pointerover'].forEach((eventName) => {
             this.node.addEventListener(eventName, (e) => {
-                if (!this.cu.isActive()) {
+                if (!this.utils.isActive()) {
                     return;
                 }
                 this.node.classList.add('highlight');
@@ -86,7 +86,7 @@ export default class SHighlightFeature extends __SFeature {
         });
         ['mouseout', 'pointerout'].forEach((eventName) => {
             this.node.addEventListener(eventName, (e) => {
-                if (!this.cu.isActive()) {
+                if (!this.utils.isActive()) {
                     return;
                 }
                 this.node.classList.remove('highlight');
@@ -95,7 +95,7 @@ export default class SHighlightFeature extends __SFeature {
 
         ['mousemove', 'touchmove'].forEach((eventName) => {
             this.node.addEventListener(eventName, (e) => {
-                if (!this.cu.isActive()) {
+                if (!this.utils.isActive()) {
                     return;
                 }
                 const rect = this.node.getBoundingClientRect(),

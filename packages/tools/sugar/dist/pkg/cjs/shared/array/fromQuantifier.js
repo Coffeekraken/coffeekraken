@@ -1,44 +1,56 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
 // @ts-nocheck
-const unique_1 = __importDefault(require("./unique"));
-/**
- * @name        fromQuantifier
- * @namespace            shared.array
- * @type      Function
- * @platform          js
- * @platform          node
- * @status            beta
- *
- * This function allows you to generate an array from a certain passed quantifier like "2", "<10", ">10", etc...
- *
- * @param       {String|Number}     quantifier          The quantifier to generate
- * @param    {Array}    keys    The keys to start the array with
- * @return    {Array}    The processed array
- *
- * @example    js
- * import { __keysFirst } from '@coffeekraken/sugar/array'
- * __keysFirst(['a','b','d','g','c'], ['d','g'])
- * // ['d','g','a','b','c']
- *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-function __keysFirst(array, keys) {
-    // all the keys has to exist in the array stack
-    // otherwise we filter it out
-    keys = keys.filter((key) => {
-        return array.indexOf(key) !== -1;
-    });
-    // add the keys at start
-    const empty = [];
-    let res = empty.concat(keys).concat(array);
-    // remove double items
-    res = (0, unique_1.default)(res);
-    // return the result
-    return res;
+Object.defineProperty(exports, "__esModule", { value: true });
+function __fromQuantifier(quantifier, settings) {
+    const finalSettings = Object.assign({ action: '<=' }, (settings !== null && settings !== void 0 ? settings : {}));
+    let action = finalSettings.action;
+    const finalArray = [];
+    if (typeof quantifier === 'number') {
+        quantifier = `${action}${quantifier}`;
+    }
+    if (action.startsWith('>') && finalSettings.max === undefined) {
+        throw new Error(`<red>[fromQuantifier]</red> When using the action ">" or ">=", you MUST specify a settings.max value`);
+    }
+    const actionMatch = quantifier.match(/^((>|<)?\=?)/);
+    if (actionMatch[0]) {
+        action = actionMatch[0];
+    }
+    let startLevel, endLevel, levelInt = parseInt(quantifier.replace(/^(>|<)?\=?/, ''));
+    if (quantifier.match(/[0-9]+\-[0-9]+/)) {
+        const parts = quantifier.split('-');
+        startLevel = parseInt(parts[0]);
+        endLevel = parseInt(parts[1]);
+    }
+    else if (action === '>=') {
+        startLevel = levelInt;
+        endLevel = finalSettings.max;
+    }
+    else if (action === '<=') {
+        startLevel = 0;
+        endLevel = levelInt;
+    }
+    else if (action === '=') {
+        startLevel = levelInt;
+        endLevel = levelInt;
+    }
+    else if (action === '<') {
+        startLevel = 0;
+        endLevel = levelInt - 1;
+    }
+    else if (action === '>') {
+        startLevel = levelInt + 1;
+        endLevel = finalSettings.max;
+    }
+    // add the wanted level(s) in the stack
+    for (let i = startLevel; i <= endLevel; i++) {
+        if (finalSettings.value) {
+            finalArray.push(finalSettings.value(i));
+        }
+        else {
+            finalArray.push(i);
+        }
+    }
+    return finalArray;
 }
-exports.default = __keysFirst;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsY0FBYztBQUNkLHNEQUFnQztBQUVoQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FvQkc7QUFDSCxTQUF3QixXQUFXLENBQUMsS0FBWSxFQUFFLElBQVc7SUFDekQsK0NBQStDO0lBQy9DLDZCQUE2QjtJQUM3QixJQUFJLEdBQUcsSUFBSSxDQUFDLE1BQU0sQ0FBQyxDQUFDLEdBQUcsRUFBRSxFQUFFO1FBQ3ZCLE9BQU8sS0FBSyxDQUFDLE9BQU8sQ0FBQyxHQUFHLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQztJQUNyQyxDQUFDLENBQUMsQ0FBQztJQUNILHdCQUF3QjtJQUN4QixNQUFNLEtBQUssR0FBVSxFQUFFLENBQUM7SUFDeEIsSUFBSSxHQUFHLEdBQUcsS0FBSyxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLENBQUM7SUFDM0Msc0JBQXNCO0lBQ3RCLEdBQUcsR0FBRyxJQUFBLGdCQUFRLEVBQUMsR0FBRyxDQUFDLENBQUM7SUFDcEIsb0JBQW9CO0lBQ3BCLE9BQU8sR0FBRyxDQUFDO0FBQ2YsQ0FBQztBQWJELDhCQWFDIn0=
+exports.default = __fromQuantifier;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQXNDZCxTQUF3QixnQkFBZ0IsQ0FDcEMsVUFBMkIsRUFDM0IsUUFBMkM7SUFFM0MsTUFBTSxhQUFhLG1CQUNmLE1BQU0sRUFBRSxJQUFJLElBQ1QsQ0FBQyxRQUFRLGFBQVIsUUFBUSxjQUFSLFFBQVEsR0FBSSxFQUFFLENBQUMsQ0FDdEIsQ0FBQztJQUNGLElBQUksTUFBTSxHQUFHLGFBQWEsQ0FBQyxNQUFNLENBQUM7SUFFbEMsTUFBTSxVQUFVLEdBQVUsRUFBRSxDQUFDO0lBRTdCLElBQUksT0FBTyxVQUFVLEtBQUssUUFBUSxFQUFFO1FBQ2hDLFVBQVUsR0FBRyxHQUFHLE1BQU0sR0FBRyxVQUFVLEVBQUUsQ0FBQztLQUN6QztJQUVELElBQUksTUFBTSxDQUFDLFVBQVUsQ0FBQyxHQUFHLENBQUMsSUFBSSxhQUFhLENBQUMsR0FBRyxLQUFLLFNBQVMsRUFBRTtRQUMzRCxNQUFNLElBQUksS0FBSyxDQUNYLHNHQUFzRyxDQUN6RyxDQUFDO0tBQ0w7SUFFRCxNQUFNLFdBQVcsR0FBRyxVQUFVLENBQUMsS0FBSyxDQUFDLGNBQWMsQ0FBQyxDQUFDO0lBQ3JELElBQUksV0FBVyxDQUFDLENBQUMsQ0FBQyxFQUFFO1FBQ2hCLE1BQU0sR0FBRyxXQUFXLENBQUMsQ0FBQyxDQUFDLENBQUM7S0FDM0I7SUFFRCxJQUFJLFVBQVUsRUFDVixRQUFRLEVBQ1IsUUFBUSxHQUFHLFFBQVEsQ0FBQyxVQUFVLENBQUMsT0FBTyxDQUFDLFlBQVksRUFBRSxFQUFFLENBQUMsQ0FBQyxDQUFDO0lBQzlELElBQUksVUFBVSxDQUFDLEtBQUssQ0FBQyxnQkFBZ0IsQ0FBQyxFQUFFO1FBQ3BDLE1BQU0sS0FBSyxHQUFHLFVBQVUsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUM7UUFDcEMsVUFBVSxHQUFHLFFBQVEsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUNoQyxRQUFRLEdBQUcsUUFBUSxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDO0tBQ2pDO1NBQU0sSUFBSSxNQUFNLEtBQUssSUFBSSxFQUFFO1FBQ3hCLFVBQVUsR0FBRyxRQUFRLENBQUM7UUFDdEIsUUFBUSxHQUFHLGFBQWEsQ0FBQyxHQUFHLENBQUM7S0FDaEM7U0FBTSxJQUFJLE1BQU0sS0FBSyxJQUFJLEVBQUU7UUFDeEIsVUFBVSxHQUFHLENBQUMsQ0FBQztRQUNmLFFBQVEsR0FBRyxRQUFRLENBQUM7S0FDdkI7U0FBTSxJQUFJLE1BQU0sS0FBSyxHQUFHLEVBQUU7UUFDdkIsVUFBVSxHQUFHLFFBQVEsQ0FBQztRQUN0QixRQUFRLEdBQUcsUUFBUSxDQUFDO0tBQ3ZCO1NBQU0sSUFBSSxNQUFNLEtBQUssR0FBRyxFQUFFO1FBQ3ZCLFVBQVUsR0FBRyxDQUFDLENBQUM7UUFDZixRQUFRLEdBQUcsUUFBUSxHQUFHLENBQUMsQ0FBQztLQUMzQjtTQUFNLElBQUksTUFBTSxLQUFLLEdBQUcsRUFBRTtRQUN2QixVQUFVLEdBQUcsUUFBUSxHQUFHLENBQUMsQ0FBQztRQUMxQixRQUFRLEdBQUcsYUFBYSxDQUFDLEdBQUcsQ0FBQztLQUNoQztJQUVELHVDQUF1QztJQUN2QyxLQUFLLElBQUksQ0FBQyxHQUFHLFVBQVUsRUFBRSxDQUFDLElBQUksUUFBUSxFQUFFLENBQUMsRUFBRSxFQUFFO1FBQ3pDLElBQUksYUFBYSxDQUFDLEtBQUssRUFBRTtZQUNyQixVQUFVLENBQUMsSUFBSSxDQUFDLGFBQWEsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQztTQUMzQzthQUFNO1lBQ0gsVUFBVSxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUMsQ0FBQztTQUN0QjtLQUNKO0lBRUQsT0FBTyxVQUFVLENBQUM7QUFDdEIsQ0FBQztBQTdERCxtQ0E2REMifQ==

@@ -1,4 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
+import { __fromQuantifier } from '@coffeekraken/sugar/array';
 
 /**
  * @name           only
@@ -55,61 +56,14 @@ export default function ({
         ...(params ?? {}),
     };
 
-    const levels: number[] = [];
-    let action = settings.lod.defaultAction;
-
-    if (typeof finalParams.level === 'number') {
-        levels.push(finalParams.level);
-    } else if (typeof finalParams.level === 'string') {
-        const actionMatch = finalParams.level.match(/^((>|<)?\=?)/);
-        if (actionMatch[0]) {
-            action = actionMatch[0];
-        }
-
-        let startLevel,
-            endLevel,
-            levelInt = parseInt(finalParams.level.replace(/^(>|<)?\=?/, ''));
-        if (action === '>=') {
-            startLevel = levelInt;
-            endLevel = Object.keys(settings.lod.levels).length - 1;
-        } else if (action === '<=') {
-            startLevel = 0;
-            endLevel = levelInt;
-        } else if (action === '=') {
-            startLevel = levelInt;
-            endLevel = levelInt;
-        } else if (action === '<') {
-            startLevel = 0;
-            endLevel = levelInt - 1;
-        } else if (action === '>') {
-            startLevel = levelInt + 1;
-            endLevel = Object.keys(settings.lod.levels).length - 1;
-        }
-
-        // add the wanted level(s) in the stack
-        for (let i = startLevel; i <= endLevel; i++) {
-            levels.push(i);
-        }
-    }
-
-    // create a new rule that will wrap
-    // the lod scoped ones
-    const newSelectors: string[] = [];
-
-    levels.forEach((lod) => {
-        let cls = `.s-lod--${lod}`;
-        if (finalParams.method === 'file') {
-            cls += `.s-lod-method--${finalParams.method}`;
-        }
-        newSelectors.push(`${cls} &`);
+    const levels: number[] = __fromQuantifier(finalParams.level, {
+        max: Object.keys(settings.lod.levels).length - 1,
+        action: '<=',
     });
 
     const newRule = postcssApi.rule({
-        selector: newSelectors.join(','),
-    });
-
-    atRule.nodes.forEach((node) => {
-        newRule.append(node);
+        selector: `.s-lod-only--${levels.join('-')}`,
+        nodes: atRule.nodes,
     });
 
     atRule.replaceWith(newRule);

@@ -131,6 +131,17 @@ export default async function ({
             return;
         }
 
+        // support for @sugar.lod.only mixin
+        const onlyLevelMatch = rule.selector.match(/\.s-lod-only--([0-9\-]+)/);
+        if (onlyLevelMatch?.[1]) {
+            const onlyLevels = onlyLevelMatch[1].split('-');
+            if (!onlyLevels.includes(levelStr)) {
+                // remove the declaration and stop here
+                decl.remove();
+                return;
+            }
+        }
+
         if (!rule._lod) {
             rule._lod = {};
         }
@@ -296,6 +307,13 @@ export default async function ({
             rule.remove();
             return;
         }
+    });
+
+    // remove .s-lod-only-... in selectors
+    root.walkRules(/\.s-lod-only--[0-9\-]+/, (rule) => {
+        rule.selectors = rule.selectors.map((sel) => {
+            return sel.replace(/\.s-lod-only--[0-9\-]+\s?/gm, '');
+        });
     });
 
     // remove .s-lod--prevent in selectors

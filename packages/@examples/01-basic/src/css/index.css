@@ -20,6 +20,10 @@ body {
     opacity: 1;
 }
 
+.content.nude {
+    padding: sugar.padding(50);
+}
+
 /* logo */
 .logo {
     svg [fill='white'] {

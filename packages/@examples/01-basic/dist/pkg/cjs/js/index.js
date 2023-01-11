@@ -1,28 +1,5 @@
 "use strict";
 // import __SDashboard from '@coffeekraken/s-dashboard';
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -45,10 +22,12 @@ const s_form_validate_feature_1 = require("@coffeekraken/s-form-validate-feature
 // import { define as __sPageTransitionFeature } from '@coffeekraken/s-page-transition-feature';
 // import { define as __sRefocusFeature } from '@coffeekraken/s-refocus-feature';
 const s_feature_1 = __importDefault(require("@coffeekraken/s-feature"));
-const s_carpenter_1 = __importStar(require("@coffeekraken/s-carpenter"));
 const s_google_map_component_1 = require("@coffeekraken/s-google-map-component");
 const s_lit_component_1 = __importDefault(require("@coffeekraken/s-lit-component"));
 const s_slider_component_1 = require("@coffeekraken/s-slider-component");
+// import __SCarpenterComponent, {
+// define as __sCarpenterComponentDefine,
+// } from '@coffeekraken/s-carpenter';
 // Views related
 const viewsRelated = import.meta.globEager('../views/**/*.ts');
 // Init script
@@ -77,8 +56,8 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
     // Components
     (0, s_slider_component_1.define)();
     (0, s_google_map_component_1.define)();
-    (0, s_carpenter_1.define)();
-    s_carpenter_1.default.create();
+    // __sCarpenterComponentDefine();
+    // __SCarpenterComponent.create();
     // Dashboard
     // new __SDashboard({
     //     dashboard: {
@@ -92,4 +71,4 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
     //     },
     // });
 }))();
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSx3REFBd0Q7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFFeEQsd0ZBQWdFO0FBQ2hFLG9FQUE2QztBQUU3QyxtRUFBK0U7QUFFL0UsbUZBQW1GO0FBQ25GLG1GQUF5RjtBQUN6RiwrRUFBK0U7QUFDL0UsZ0dBQWdHO0FBQ2hHLGlGQUFpRjtBQUNqRix3RUFBaUQ7QUFFakQseUVBRW1DO0FBQ25DLGlGQUE2RjtBQUM3RixvRkFBNEQ7QUFDNUQseUVBQXNGO0FBRXRGLGdCQUFnQjtBQUNoQixNQUFNLFlBQVksR0FBRyxNQUFNLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxrQkFBa0IsQ0FBQyxDQUFDO0FBRS9ELGNBQWM7QUFDZCxDQUFDLEdBQVMsRUFBRTtJQUNWLDZCQUE2QjtJQUM3QixtQkFBVSxDQUFDLGVBQWUsQ0FBQyxHQUFHLEVBQUUsRUFBRSxDQUFDLENBQUM7SUFFcEMsK0JBQStCO0lBQy9CLHlCQUFlLENBQUMsZUFBZSxDQUFDLEdBQUcsRUFBRSxFQUFFLENBQUMsQ0FBQztJQUV6QyxhQUFhO0lBQ2IsTUFBTSxpQkFBUSxDQUFDLElBQUksQ0FBQztRQUNsQixPQUFPLEVBQUUsTUFBTTtRQUNmLEdBQUcsRUFBRTtZQUNILE9BQU8sRUFBRSxJQUFJO1lBQ2IsS0FBSyxFQUFFLENBQUM7U0FDVDtLQUNGLENBQUMsQ0FBQztJQUVILGdCQUFnQjtJQUNoQixRQUFRLENBQUMsSUFBSSxDQUFDLFlBQVksQ0FBQyxTQUFTLEVBQUUsTUFBTSxDQUFDLENBQUM7SUFDOUMsSUFBQSx3QkFBb0IsR0FBRSxDQUFDO0lBRXZCLGFBQWE7SUFDYixJQUFBLDJCQUFpQixHQUFFLENBQUM7SUFFcEIsV0FBVztJQUNYLElBQUEsZ0NBQXNCLEVBQUMsRUFBRSxDQUFDLENBQUM7SUFFM0IsNkJBQTZCO0lBQzdCLE1BQU07SUFFTixhQUFhO0lBQ2IsSUFBQSwyQkFBd0IsR0FBRSxDQUFDO0lBQzNCLElBQUEsK0JBQTJCLEdBQUUsQ0FBQztJQUM5QixJQUFBLG9CQUEyQixHQUFFLENBQUM7SUFFOUIscUJBQXFCLENBQUMsTUFBTSxFQUFFLENBQUM7SUFFL0IsWUFBWTtJQUNaLHFCQUFxQjtJQUNyQixtQkFBbUI7SUFDbkIsd0JBQXdCO0lBQ3hCLHFDQUFxQztJQUNyQyx3Q0FBd0M7SUFDeEMsOERBQThEO0lBQzlELHFCQUFxQjtJQUNyQixpQkFBaUI7SUFDakIsYUFBYTtJQUNiLFNBQVM7SUFDVCxNQUFNO0FBQ1IsQ0FBQyxDQUFBLENBQUMsRUFBRSxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSx3REFBd0Q7Ozs7Ozs7Ozs7Ozs7O0FBRXhELHdGQUFnRTtBQUNoRSxvRUFBNkM7QUFFN0MsbUVBQStFO0FBRS9FLG1GQUFtRjtBQUNuRixtRkFBeUY7QUFDekYsK0VBQStFO0FBQy9FLGdHQUFnRztBQUNoRyxpRkFBaUY7QUFDakYsd0VBQWlEO0FBQ2pELGlGQUE2RjtBQUM3RixvRkFBNEQ7QUFDNUQseUVBQXNGO0FBRXRGLGtDQUFrQztBQUNsQyx5Q0FBeUM7QUFDekMsc0NBQXNDO0FBRXRDLGdCQUFnQjtBQUNoQixNQUFNLFlBQVksR0FBRyxNQUFNLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxrQkFBa0IsQ0FBQyxDQUFDO0FBRS9ELGNBQWM7QUFDZCxDQUFDLEdBQVMsRUFBRTtJQUNSLDZCQUE2QjtJQUM3QixtQkFBVSxDQUFDLGVBQWUsQ0FBQyxHQUFHLEVBQUUsRUFBRSxDQUFDLENBQUM7SUFFcEMsK0JBQStCO0lBQy9CLHlCQUFlLENBQUMsZUFBZSxDQUFDLEdBQUcsRUFBRSxFQUFFLENBQUMsQ0FBQztJQUV6QyxhQUFhO0lBQ2IsTUFBTSxpQkFBUSxDQUFDLElBQUksQ0FBQztRQUNoQixPQUFPLEVBQUUsTUFBTTtRQUNmLEdBQUcsRUFBRTtZQUNELE9BQU8sRUFBRSxJQUFJO1lBQ2IsS0FBSyxFQUFFLENBQUM7U0FDWDtLQUNKLENBQUMsQ0FBQztJQUVILGdCQUFnQjtJQUNoQixRQUFRLENBQUMsSUFBSSxDQUFDLFlBQVksQ0FBQyxTQUFTLEVBQUUsTUFBTSxDQUFDLENBQUM7SUFDOUMsSUFBQSx3QkFBb0IsR0FBRSxDQUFDO0lBRXZCLGFBQWE7SUFDYixJQUFBLDJCQUFpQixHQUFFLENBQUM7SUFFcEIsV0FBVztJQUNYLElBQUEsZ0NBQXNCLEVBQUMsRUFBRSxDQUFDLENBQUM7SUFFM0IsNkJBQTZCO0lBQzdCLE1BQU07SUFFTixhQUFhO0lBQ2IsSUFBQSwyQkFBd0IsR0FBRSxDQUFDO0lBQzNCLElBQUEsK0JBQTJCLEdBQUUsQ0FBQztJQUM5QixpQ0FBaUM7SUFFakMsa0NBQWtDO0lBRWxDLFlBQVk7SUFDWixxQkFBcUI7SUFDckIsbUJBQW1CO0lBQ25CLHdCQUF3QjtJQUN4QixxQ0FBcUM7SUFDckMsd0NBQXdDO0lBQ3hDLDhEQUE4RDtJQUM5RCxxQkFBcUI7SUFDckIsaUJBQWlCO0lBQ2pCLGFBQWE7SUFDYixTQUFTO0lBQ1QsTUFBTTtBQUNWLENBQUMsQ0FBQSxDQUFDLEVBQUUsQ0FBQyJ9

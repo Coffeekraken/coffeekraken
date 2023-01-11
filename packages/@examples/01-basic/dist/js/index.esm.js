@@ -4409,32 +4409,6 @@ function __deepProxy(object, handlerFn, settings = {}) {
   }
   return proxify(object, []);
 }
-function del(object, dotPath) {
-  const parentDotPath = dotPath.split(".").slice(0, -1).join(".");
-  if (!dotPath || dotPath === "" || dotPath === ".")
-    return object;
-  dotPath = dotPath.replace(/\[(\w+)\]/g, ".$1");
-  dotPath = dotPath.replace(/^\./, "");
-  const a2 = dotPath.split(".");
-  let o = object;
-  while (a2.length) {
-    const n = a2.shift();
-    if (a2.length < 1) {
-      if (Array.isArray(o)) {
-        const valueToDelete = o[n];
-        o = o.filter((v) => {
-          return v !== valueToDelete;
-        });
-      } else {
-        delete o[n];
-      }
-      __set(object, parentDotPath, o);
-    } else {
-      o = o[n];
-    }
-  }
-  return object;
-}
 var ERROR_MESSAGE = "Function.prototype.bind called on incompatible ";
 var slice$1 = Array.prototype.slice;
 var toStr$a = Object.prototype.toString;
@@ -6037,13 +6011,13 @@ var shim$8 = function shimName() {
   });
   return polyfill2;
 };
-var define$l = defineProperties_1;
+var define$h = defineProperties_1;
 var callBind$1 = callBind$3.exports;
 var implementation$6 = implementation$8;
 var getPolyfill$2 = polyfill$3;
 var shim$7 = shim$8;
 var bound$1 = callBind$1(implementation$6);
-define$l(bound$1, {
+define$h(bound$1, {
   getPolyfill: getPolyfill$2,
   implementation: implementation$6,
   shim: shim$7
@@ -6219,10 +6193,10 @@ var polyfill$2 = function getPolyfill3() {
   }
   return implementation$4;
 };
-var define$k = defineProperties_1;
+var define$g = defineProperties_1;
 var getPolyfill$1 = polyfill$2;
 var shim$6 = function shimGetPrototypeOf() {
-  define$k(
+  define$g(
     commonjsGlobal,
     { Reflect: {} },
     { Reflect: function() {
@@ -6230,7 +6204,7 @@ var shim$6 = function shimGetPrototypeOf() {
     } }
   );
   var polyfill2 = getPolyfill$1();
-  define$k(
+  define$g(
     Reflect,
     { getPrototypeOf: polyfill2 },
     { getPrototypeOf: function() {
@@ -6240,12 +6214,12 @@ var shim$6 = function shimGetPrototypeOf() {
   return polyfill2;
 };
 var callBind = callBind$3.exports;
-var define$j = defineProperties_1;
+var define$f = defineProperties_1;
 var implementation$3 = implementation$5;
 var getPolyfill = polyfill$2;
 var shim$5 = shim$6;
 var bound = callBind(getPolyfill(), typeof Reflect === "object" ? Reflect : Object);
-define$j(bound, {
+define$f(bound, {
   getPolyfill,
   implementation: implementation$3,
   shim: shim$5
@@ -7976,32 +7950,6 @@ var isGlob = function isGlob2(str2, options) {
 function __isGlob(string2) {
   return isGlob(string2);
 }
-function __commonImageFileExtensions(settings = {}) {
-  const finalSettings = Object.assign({ dot: false, exclude: [] }, settings);
-  return [
-    "ai",
-    "bmp",
-    "gif",
-    "ico",
-    "jpeg",
-    "jpg",
-    "png",
-    "ps",
-    "psd",
-    "svg",
-    "tif",
-    "tiff",
-    "webp"
-  ].filter((ext2) => !finalSettings.exclude.includes(ext2)).map((ext2) => finalSettings.dot ? `.${ext2}` : ext2);
-}
-function __isImageUrl(string2) {
-  const imagesExtensions = __commonImageFileExtensions(), passedUrlExtension = string2.split(".").slice(-1)[0];
-  const pathParts = passedUrlExtension.split("/");
-  if (!pathParts.slice(-1)[0].includes(".")) {
-    return true;
-  }
-  return imagesExtensions.includes(passedUrlExtension);
-}
 function __isIsoDate(value) {
   return value.match(/^([0-9]{4})-(1[0-2]|0[1-9])$/) || value.match(/^([0-9]{4})-?(1[0-2]|0[1-9])-?(3[01]|0[1-9]|[12][0-9])$/) || value.match(/^([0-9]{4})(-?)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$/) || value.match(/^([0-9]{4})-?(36[0-6]|3[0-5][0-9]|[12][0-9]{2}|0[1-9][0-9]|00[1-9])$/);
 }
@@ -8785,7 +8733,7 @@ var isDescriptor$1 = function isDescriptor2(obj2, key) {
  */
 var isobject = isobject$1;
 var isDescriptor = isDescriptor$1;
-var define$i = typeof Reflect !== "undefined" && Reflect.defineProperty ? Reflect.defineProperty : Object.defineProperty;
+var define$e = typeof Reflect !== "undefined" && Reflect.defineProperty ? Reflect.defineProperty : Object.defineProperty;
 var defineProperty = function defineProperty2(obj2, key, val) {
   if (!isobject(obj2) && typeof obj2 !== "function" && !Array.isArray(obj2)) {
     throw new TypeError("expected an object, function, or array");
@@ -8794,10 +8742,10 @@ var defineProperty = function defineProperty2(obj2, key, val) {
     throw new TypeError('expected "key" to be a string');
   }
   if (isDescriptor(val)) {
-    define$i(obj2, key, val);
+    define$e(obj2, key, val);
     return obj2;
   }
-  define$i(obj2, key, {
+  define$e(obj2, key, {
     configurable: true,
     enumerable: false,
     writable: true,
@@ -8945,7 +8893,7 @@ toRegex$1.create = function(pattern2, options) {
 };
 var regexNot = toRegex$1;
 var safe = safeRegex;
-var define$h = defineProperty;
+var define$d = defineProperty;
 var extend$1 = extendShallow$1;
 var not = regexNot;
 var MAX_LENGTH = 1024 * 64;
@@ -9021,10 +8969,10 @@ function makeRe(pattern2, options) {
   return regex2;
 }
 function memoize(regex2, key, pattern2, options) {
-  define$h(regex2, "cached", true);
-  define$h(regex2, "pattern", pattern2);
-  define$h(regex2, "options", options);
-  define$h(regex2, "key", key);
+  define$d(regex2, "cached", true);
+  define$d(regex2, "pattern", pattern2);
+  define$d(regex2, "options", options);
+  define$d(regex2, "key", key);
   cache[key] = regex2;
 }
 function createKey(pattern2, options) {
@@ -9172,9 +9120,6 @@ format$1.formats = [
   "hexa",
   "creditCard"
 ];
-function __lowerFirst(string2) {
-  return string2.charAt(0).toLowerCase() + string2.slice(1);
-}
 var sprintf = {};
 (function(exports) {
   !function() {
@@ -9451,7 +9396,7 @@ var globToRegexp = function(glob, opts) {
   }
   return new RegExp(reStr, flags2);
 };
-var __awaiter$r = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$o = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -9509,7 +9454,7 @@ class SEventEmitter$1 extends SClass {
     if (!sourceSEventEmitter || !sourceSEventEmitter.on || typeof sourceSEventEmitter.on !== "function") {
       return sourceSEventEmitter;
     }
-    sourceSEventEmitter.on(set.events || "*", (value, metas) => __awaiter$r(this, void 0, void 0, function* () {
+    sourceSEventEmitter.on(set.events || "*", (value, metas) => __awaiter$o(this, void 0, void 0, function* () {
       var _a3, _b2, _c2, _d2, _e, _f, _g;
       if (!metas || !value) {
         return;
@@ -9602,7 +9547,7 @@ class SEventEmitter$1 extends SClass {
     }, metas !== null && metas !== void 0 ? metas : {});
   }
   emit(event, value, metas) {
-    return new Promise((resolve, reject) => __awaiter$r(this, void 0, void 0, function* () {
+    return new Promise((resolve, reject) => __awaiter$o(this, void 0, void 0, function* () {
       let metasObj = this._createMetas(event, metas);
       const isFirstLevel = !metasObj.level;
       if (__isPlainObject(value)) {
@@ -9643,7 +9588,7 @@ class SEventEmitter$1 extends SClass {
     }));
   }
   _emit(logObj) {
-    return __awaiter$r(this, void 0, void 0, function* () {
+    return __awaiter$o(this, void 0, void 0, function* () {
       logObj.metas.uid = __uniqid();
       if (logObj.event === "ask") {
         this.constructor.global.on(`answer.${logObj.metas.askId}`, (answer, metas) => {
@@ -9709,7 +9654,7 @@ class SEventEmitter$1 extends SClass {
     }
   }
   _emitEventStack(event, initialValue, metasObj) {
-    return __awaiter$r(this, void 0, void 0, function* () {
+    return __awaiter$o(this, void 0, void 0, function* () {
       let currentCallbackReturnedValue = initialValue;
       if (!this._eventsStacks || Object.keys(this._eventsStacks).length === 0)
         return currentCallbackReturnedValue;
@@ -9771,7 +9716,7 @@ class SEventEmitter$1 extends SClass {
     });
   }
   _emitEvents(events, initialValue, metas) {
-    return new Promise((resolve, reject) => __awaiter$r(this, void 0, void 0, function* () {
+    return new Promise((resolve, reject) => __awaiter$o(this, void 0, void 0, function* () {
       if (!events)
         return this;
       if (typeof events === "string")
@@ -9941,7 +9886,7 @@ const fn = function treatAsValue(promise, settings = {}) {
     return promise;
   }
 };
-var __awaiter$q = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$n = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -10031,7 +9976,7 @@ class SPromise extends SClass.extends(Promise) {
           return;
         api[func] = this[func].bind(this);
       });
-      (() => __awaiter$q(this, void 0, void 0, function* () {
+      (() => __awaiter$n(this, void 0, void 0, function* () {
         yield __wait(0);
         try {
           yield executorFn(api);
@@ -10058,10 +10003,10 @@ class SPromise extends SClass.extends(Promise) {
     }
   }
   static queue(promises, before, after) {
-    return new SPromise(({ resolve, reject, pipe }) => __awaiter$q(this, void 0, void 0, function* () {
+    return new SPromise(({ resolve, reject, pipe }) => __awaiter$n(this, void 0, void 0, function* () {
       const results = {};
       function next() {
-        return __awaiter$q(this, void 0, void 0, function* () {
+        return __awaiter$n(this, void 0, void 0, function* () {
           const firstKey = Object.keys(promises)[0];
           let promise = promises[firstKey];
           if (typeof promise === "function")
@@ -10147,7 +10092,7 @@ class SPromise extends SClass.extends(Promise) {
     return this._resolve(arg, stacksOrder);
   }
   _resolve(arg, stacksOrder = "resolve,finally") {
-    return __awaiter$q(this, void 0, void 0, function* () {
+    return __awaiter$n(this, void 0, void 0, function* () {
       if (this._promiseState === "destroyed")
         return;
       this._promiseState = "resolved";
@@ -10167,7 +10112,7 @@ class SPromise extends SClass.extends(Promise) {
     return this._reject(arg, stacksOrder);
   }
   _reject(arg, stacksOrder = `catch,reject,finally`) {
-    return __awaiter$q(this, void 0, void 0, function* () {
+    return __awaiter$n(this, void 0, void 0, function* () {
       if (this._promiseState === "destroyed")
         return;
       this._promiseState = "rejected";
@@ -10189,7 +10134,7 @@ class SPromise extends SClass.extends(Promise) {
   _cancel(arg, stacksOrder = "cancel,finally") {
     if (this._promiseState === "destroyed")
       return;
-    return new Promise((resolve, reject) => __awaiter$q(this, void 0, void 0, function* () {
+    return new Promise((resolve, reject) => __awaiter$n(this, void 0, void 0, function* () {
       this._promiseState = "canceled";
       const stacksOrderArray = stacksOrder.split(",").map((l) => l.trim());
       for (let i = 0; i < stacksOrderArray.length; i++) {
@@ -11442,7 +11387,7 @@ const __vitePreload = function preload(baseModule, deps, importerUrl) {
     }
   })).then(() => baseModule());
 };
-var __awaiter$p = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$m = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -11477,14 +11422,14 @@ class SStateFsAdapter {
   }
   _init() {
     var _a3, _b2;
-    return __awaiter$p(this, void 0, void 0, function* () {
-      const _packageTmpDir = (yield __vitePreload(() => import("./packageTmpDir.a7197cd5.js"), true ? [] : void 0)).default;
+    return __awaiter$m(this, void 0, void 0, function* () {
+      const _packageTmpDir = (yield __vitePreload(() => import("./packageTmpDir.fed73780.js"), true ? [] : void 0)).default;
       this._statesDir = (_b2 = (_a3 = this._settings) === null || _a3 === void 0 ? void 0 : _a3.folder) !== null && _b2 !== void 0 ? _b2 : `${_packageTmpDir()}/states`;
       this._stateFile = `${this._statesDir}/${this._id}.state.json`;
     });
   }
   save(state) {
-    return new Promise((resolve) => __awaiter$p(this, void 0, void 0, function* () {
+    return new Promise((resolve) => __awaiter$m(this, void 0, void 0, function* () {
       const _fs = yield __vitePreload(() => import("./__vite-browser-external_fs.addc2852.js"), true ? [] : void 0);
       yield this._init();
       if (!_fs.existsSync(this._statesDir)) {
@@ -11498,7 +11443,7 @@ class SStateFsAdapter {
     }));
   }
   load() {
-    return new Promise((resolve) => __awaiter$p(this, void 0, void 0, function* () {
+    return new Promise((resolve) => __awaiter$m(this, void 0, void 0, function* () {
       const _fs = yield __vitePreload(() => import("./__vite-browser-external_fs.addc2852.js"), true ? [] : void 0);
       yield this._init();
       let fileContent = "{}";
@@ -11509,7 +11454,7 @@ class SStateFsAdapter {
     }));
   }
 }
-var __awaiter$o = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$l = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -11602,7 +11547,7 @@ class SState extends SClass {
     });
     if (this.settings.save) {
       if (this.settings.adapter.async) {
-        (() => __awaiter$o(this, void 0, void 0, function* () {
+        (() => __awaiter$l(this, void 0, void 0, function* () {
           const restoredState = yield this.settings.adapter.load();
           __deepAssign(proxy, restoredState);
         }))();
@@ -12421,7 +12366,7 @@ globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator
     step((generator = generator.apply(thisArg, _arguments || [])).next());
   });
 };
-var __awaiter$n = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$k = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -12449,10 +12394,10 @@ var __awaiter$n = globalThis && globalThis.__awaiter || function(thisArg, _argum
   });
 };
 function __adoptStyleInShadowRoot($shadowRoot, $context = document) {
-  return __awaiter$n(this, void 0, void 0, function* () {
+  return __awaiter$k(this, void 0, void 0, function* () {
     const $links = $context.querySelectorAll('link[rel="stylesheet"]');
     if ($links && $shadowRoot) {
-      Array.from($links).forEach(($link) => __awaiter$n(this, void 0, void 0, function* () {
+      Array.from($links).forEach(($link) => __awaiter$k(this, void 0, void 0, function* () {
         $shadowRoot === null || $shadowRoot === void 0 ? void 0 : $shadowRoot.appendChild($link.cloneNode());
       }));
     }
@@ -12663,7 +12608,7 @@ function __onSwipe(elm, cb, settings = {}) {
     }
   }
 }
-var __awaiter$m = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$j = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -12710,7 +12655,7 @@ const triggers = [
 ];
 function __when($elm, trigger2, settings) {
   const finalSettings = Object.assign({ whenInViewport: {}, whenNearViewport: {}, whenOutOfViewport: {}, whenInteract: {}, whenVisible: {}, whenStylesheetsReady: {} }, settings !== null && settings !== void 0 ? settings : {});
-  return new SPromise(({ resolve, reject }) => __awaiter$m(this, void 0, void 0, function* () {
+  return new SPromise(({ resolve, reject }) => __awaiter$j(this, void 0, void 0, function* () {
     if (!Array.isArray(trigger2))
       trigger2 = trigger2.split(",").map((t) => t.trim());
     const promises = [];
@@ -12809,7 +12754,7 @@ function __whenDomReady() {
     }
   });
 }
-var __awaiter$l = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$i = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -12847,7 +12792,7 @@ function __whenEntersViewport(elm, settings = {}) {
   }
   settings = Object.assign({}, settings);
   let observer, resizeTimeout;
-  return new Promise((resolve) => __awaiter$l(this, void 0, void 0, function* () {
+  return new Promise((resolve) => __awaiter$i(this, void 0, void 0, function* () {
     var _a3;
     const options = {
       root: null,
@@ -13110,7 +13055,7 @@ function whenLod(level) {
     });
   });
 }
-var __awaiter$k = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$h = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -13151,7 +13096,7 @@ function __whenNearViewport(elm, settings = {}) {
   let $closest = __closestScrollable(elm);
   if (($closest === null || $closest === void 0 ? void 0 : $closest.tagName) === "HTML")
     $closest = null;
-  return new SPromise(({ resolve }) => __awaiter$k(this, void 0, void 0, function* () {
+  return new SPromise(({ resolve }) => __awaiter$h(this, void 0, void 0, function* () {
     var _a3;
     const options = {
       root: $closest,
@@ -13438,37 +13383,6 @@ function __addEventListenerOnce($elm, eventNames, callback = null, useCapture = 
   });
   return globalPromise;
 }
-function __isFileAccepted(file, accept) {
-  if (!Array.isArray(accept)) {
-    accept = accept.replace(/\s/gm, "").split(/,/);
-  }
-  const fileTypeCategory = file.type.split("/")[0];
-  file.type.split("/")[1];
-  for (let mimeType of accept) {
-    if (mimeType.startsWith(".")) {
-      throw new Error(`[isFileAccepted] The extension based check that you've passed "${mimeType}" is not supported. Make use of mime types like "text/html", "image/*", etc...`);
-    } else {
-      if (mimeType === file.type) {
-        return true;
-      } else if (mimeType.match(/\/\*$/) && fileTypeCategory === mimeType.replace("/*", "")) {
-        return true;
-      }
-    }
-  }
-  return false;
-}
-function __resetFileInput($input) {
-  $input.value = "";
-  if (!/safari/i.test(navigator.userAgent)) {
-    $input.type = "";
-    $input.type = "file";
-  }
-}
-function __injectIframeContent($iframe, html2) {
-  $iframe.contentWindow.document.open();
-  $iframe.contentWindow.document.write(html2);
-  $iframe.contentWindow.document.close();
-}
 function __injectStyle(style, settings) {
   var _a3;
   const finalSettings = Object.assign({ id: `injected-style-${__uniqid()}`, rootNode: void 0 }, settings !== null && settings !== void 0 ? settings : {});
@@ -13489,13 +13403,6 @@ function __injectStyle(style, settings) {
     }
   }
   return $tag;
-}
-function __isInIframe() {
-  try {
-    return window.self !== window.top;
-  } catch (e) {
-    return true;
-  }
 }
 function __isInViewport(elm, settings = {}) {
   settings = Object.assign({}, settings);
@@ -13589,7 +13496,7 @@ function __matches(el, selector) {
   };
   return f.call(el, selector);
 }
-var __awaiter$j = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$g = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -13668,7 +13575,7 @@ function __querySelectorLive(selector, cb = null, settings = {}, _isFirstLevel =
     }
   }
   function processNode(node, sel) {
-    return __awaiter$j(this, void 0, void 0, function* () {
+    return __awaiter$g(this, void 0, void 0, function* () {
       if (!node.matches || isCanceled()) {
         return;
       }
@@ -13697,7 +13604,7 @@ function __querySelectorLive(selector, cb = null, settings = {}, _isFirstLevel =
   }
   if (settings.scopes && (settings.rootNode === document || !((_a3 = settings.rootNode) === null || _a3 === void 0 ? void 0 : _a3.hasAttribute("s-scope")))) {
     let isAfterCalledByScopeId = {};
-    innerPromises.push(__querySelectorLive("[s-scope]", ($scope) => __awaiter$j(this, void 0, void 0, function* () {
+    innerPromises.push(__querySelectorLive("[s-scope]", ($scope) => __awaiter$g(this, void 0, void 0, function* () {
       const scopeId = $scope.id || `s-scope-${__uniqid()}`;
       if ($scope.id !== scopeId) {
         $scope.setAttribute("id", scopeId);
@@ -15460,7 +15367,7 @@ const computePosition = (reference, floating, options) => computePosition$1(refe
   platform,
   ...options
 });
-var __awaiter$i = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$f = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -15515,7 +15422,7 @@ function __makeFloat($elm, $depending, settings) {
   if (finalSettings.arrowSize) {
     $elm.style.setProperty(`--arrow-size`, `${finalSettings.arrowSize}px`);
   }
-  const update = () => __awaiter$i(this, void 0, void 0, function* () {
+  const update = () => __awaiter$f(this, void 0, void 0, function* () {
     yield computePosition($depending, $elm, {
       placement: finalSettings.position,
       middleware: middlewares
@@ -16848,7 +16755,7 @@ const require$$0 = {
   properties
 };
 knownCssProperties.all = require$$0.properties;
-var __awaiter$h = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$e = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -17697,7 +17604,7 @@ class SThemeBase extends SEventEmitter {
     return finalValue;
   }
   loopOnColors(callback) {
-    return __awaiter$h(this, void 0, void 0, function* () {
+    return __awaiter$e(this, void 0, void 0, function* () {
       const colorsObj = this.get("color"), colorSchemasObj = this.get("colorSchema");
       for (let [colorName2, colorValue] of Object.entries(colorsObj)) {
         const c = new SColor(colorValue);
@@ -17745,7 +17652,7 @@ class SThemeBase extends SEventEmitter {
   }
 }
 SThemeBase._instanciatedThemes = {};
-var __awaiter$g = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$d = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -17791,7 +17698,7 @@ class STheme extends SThemeBase {
       stylesheet: "link#global"
     }, (_b2 = settings === null || settings === void 0 ? void 0 : settings.lod) !== null && _b2 !== void 0 ? _b2 : {});
     this.restore();
-    (() => __awaiter$g(this, void 0, void 0, function* () {
+    (() => __awaiter$d(this, void 0, void 0, function* () {
       if (this.settings.lod.enabled) {
         this._initLod();
       }
@@ -17873,7 +17780,7 @@ class STheme extends SThemeBase {
     return this.setTheme(void 0, variant, $context);
   }
   static init(settings) {
-    return __awaiter$g(this, void 0, void 0, function* () {
+    return __awaiter$d(this, void 0, void 0, function* () {
       const finalSettings = Object.assign({ $context: document.querySelector("html"), theme: void 0, variant: void 0, lod: {
         enabled: false
       } }, settings !== null && settings !== void 0 ? settings : {});
@@ -19089,7 +18996,7 @@ class SComponentUtilsSettingsInterface extends SInterface {
     };
   }
 }
-var __awaiter$f = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$c = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -19332,7 +19239,7 @@ class SComponentUtils extends SClass {
     props.responsive = responsiveObj;
   }
   waitAndExecute(when, callback) {
-    return new Promise((resolve, reject) => __awaiter$f(this, void 0, void 0, function* () {
+    return new Promise((resolve, reject) => __awaiter$c(this, void 0, void 0, function* () {
       if (!Array.isArray(when)) {
         when = [when];
       }
@@ -19455,7 +19362,7 @@ class SComponentUtils extends SClass {
 SComponentUtils.fastdom = __fastdom;
 SComponentUtils._defaultProps = {};
 SComponentUtils._injectedStyles = [];
-var __awaiter$e = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$b = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -19500,7 +19407,7 @@ class SFeature extends SClass {
     this.node.classList.add(...this.utils.cls("").split(" "));
     this.utils.waitAndExecute(
       this.props.mountWhen,
-      () => __awaiter$e(this, void 0, void 0, function* () {
+      () => __awaiter$b(this, void 0, void 0, function* () {
         var _e;
         yield (_e = this.mount) === null || _e === void 0 ? void 0 : _e.call(this);
         this.props.mounted = true;
@@ -19606,10 +19513,10 @@ class SActivateFeatureInterface extends SInterface {
     };
   }
 }
-function define$g(props = {}, name2 = "s-activate") {
+function define$c(props = {}, name2 = "s-activate") {
   SActivateFeature.define(name2, SActivateFeature, props);
 }
-var __awaiter$d = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$a = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -19794,7 +19701,7 @@ class SActivateFeature extends SFeature {
     });
   }
   activate(params) {
-    return __awaiter$d(this, void 0, void 0, function* () {
+    return __awaiter$a(this, void 0, void 0, function* () {
       const finalParams = Object.assign({ force: false, preventSave: false }, params !== null && params !== void 0 ? params : {});
       clearTimeout(this._unactivateTimeout);
       if (!finalParams.force && this.isActive())
@@ -19838,7 +19745,7 @@ class SActivateFeature extends SFeature {
     });
   }
   unactivate(params) {
-    return __awaiter$d(this, void 0, void 0, function* () {
+    return __awaiter$a(this, void 0, void 0, function* () {
       const finalParams = Object.assign({ force: false, preventSave: false }, params !== null && params !== void 0 ? params : {});
       if (!finalParams.force && !this.isActive())
         return;
@@ -19907,11 +19814,11 @@ class SAppearFeatureInterface extends SInterface {
     };
   }
 }
-function define$f(props = {}, name2 = "s-appear") {
+function define$b(props = {}, name2 = "s-appear") {
   SAppearFeature.define(name2, SAppearFeature, Object.assign({ mountWhen: "entersViewport" }, props));
 }
-const __css$c = "/* [s-appear] {\n    opacity: 0;\n\n    &[appear] {\n        opacity: 1;\n    }\n} */\n";
-var __awaiter$c = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+const __css$8 = "/* [s-appear] {\n    opacity: 0;\n\n    &[appear] {\n        opacity: 1;\n    }\n} */\n";
+var __awaiter$9 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -19943,7 +19850,7 @@ class SAppearFeature extends SFeature {
     super(name2, node, __deepMerge({
       name: "s-appear",
       interface: SAppearFeatureInterface,
-      style: __css$c
+      style: __css$8
     }, settings !== null && settings !== void 0 ? settings : {}));
     this.utils.fastdom.mutate(() => {
       if (!this.node.hasAttribute("s-appear")) {
@@ -19952,7 +19859,7 @@ class SAppearFeature extends SFeature {
     });
   }
   mount() {
-    return __awaiter$c(this, void 0, void 0, function* () {
+    return __awaiter$9(this, void 0, void 0, function* () {
       switch (this.node.tagName.toLowerCase()) {
         case "img":
           yield __whenImageLoaded(this.node);
@@ -20890,7 +20797,7 @@ const QUOTE_CHAR = 3;
 const singleQuoteAttrEndRegex = /'/g;
 const doubleQuoteAttrEndRegex = /"/g;
 const rawTextElement = /^(?:script|style|textarea|title)$/i;
-const HTML_RESULT$1 = 1;
+const HTML_RESULT = 1;
 const SVG_RESULT = 2;
 const ATTRIBUTE_PART = 1;
 const CHILD_PART = 2;
@@ -20909,7 +20816,7 @@ const tag = (type) => (strings, ...values) => {
     values
   };
 };
-const html = tag(HTML_RESULT$1);
+const html = tag(HTML_RESULT);
 const noChange = Symbol.for("lit-noChange");
 const nothing = Symbol.for("lit-nothing");
 const templateCache = /* @__PURE__ */ new WeakMap();
@@ -21716,7 +21623,7 @@ polyfillSupport === null || polyfillSupport === void 0 ? void 0 : polyfillSuppor
 if (globalThis.litElementVersions.length > 1) {
   issueWarning("multiple-versions", `Multiple versions of Lit loaded. Loading multiple versions is not recommended.`);
 }
-var __awaiter$b = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$8 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -21784,7 +21691,7 @@ class SLitComponent extends LitElement {
       SLitComponent._keepInjectedCssBeforeStylesheetLinksInited = true;
     }
     const nodeFirstUpdated = (_b2 = this.firstUpdated) === null || _b2 === void 0 ? void 0 : _b2.bind(this);
-    this.firstUpdated = () => __awaiter$b(this, void 0, void 0, function* () {
+    this.firstUpdated = () => __awaiter$8(this, void 0, void 0, function* () {
       if (nodeFirstUpdated) {
         yield nodeFirstUpdated();
       }
@@ -21800,7 +21707,7 @@ class SLitComponent extends LitElement {
       return this._shouldUpdate;
     };
     this.utils = new SComponentUtils(this, Object.assign(Object.assign(Object.assign({}, (_d2 = this.settings) !== null && _d2 !== void 0 ? _d2 : {}), (_e = this.settings.componentUtils) !== null && _e !== void 0 ? _e : {}), { style: (_k = (_h = (_g = (_f = this.constructor.styles) === null || _f === void 0 ? void 0 : _f.cssText) !== null && _g !== void 0 ? _g : this.settings.style) !== null && _h !== void 0 ? _h : (_j = this.settings.componentUtils) === null || _j === void 0 ? void 0 : _j.style) !== null && _k !== void 0 ? _k : "" }));
-    (() => __awaiter$b(this, void 0, void 0, function* () {
+    (() => __awaiter$8(this, void 0, void 0, function* () {
       var _l, _m;
       const defaultProps = SComponentUtils.getDefaultProps(this.tagName.toLowerCase());
       const mountWhen = (_m = (_l = this.getAttribute("mount-when")) !== null && _l !== void 0 ? _l : defaultProps.mountWhen) !== null && _m !== void 0 ? _m : "direct";
@@ -21906,7 +21813,7 @@ class SLitComponent extends LitElement {
   }
   _mount() {
     var _a3, _b2, _c2;
-    return __awaiter$b(this, void 0, void 0, function* () {
+    return __awaiter$8(this, void 0, void 0, function* () {
       const _this = this, defaultProps = SComponentUtils.getDefaultProps(this.tagName.toLowerCase());
       let properties2 = this.constructor.properties;
       if (!properties2) {
@@ -22075,8 +21982,8 @@ class SClipboardCopyComponentInterface extends SInterface {
     };
   }
 }
-const __css$b = ".s-clipboard-copy {\n    display: inline-block;\n    width: 1em;\n    height: 1em;\n    position: relative;\n    cursor: pointer;\n}\n\n    .s-clipboard-copy:not([mounted]) > * {\n        opacity: 0.001;\n        pointer-events: none;\n    }\n\n    .s-clipboard-copy .s-clipboard-copy__root[state='pending'] .icon-copy {\n            opacity: 1;\n        }\n\n    .s-clipboard-copy .s-clipboard-copy__root[state='copy'] .icon-copy {\n            opacity: 1;\n        }\n\n    .s-lod--1 .s-clipboard-copy .s-clipboard-copy__root[state='success'] {\n        color: hsla(calc(var(--s-theme-color-success-h, 0) + var(--s-theme-color-success-spin ,0)),calc((var(--s-theme-color-success-s, 0)) * 1%),calc((var(--s-theme-color-success-l, 0)) * 1%),var(--s-theme-color-success-a, 1));\n}\n\n    .s-clipboard-copy .s-clipboard-copy__root[state='success'] .icon-success {\n            opacity: 1;\n        }\n\n    .s-lod--1 .s-clipboard-copy .s-clipboard-copy__root[state='error'] {\n        color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0)) * 1%),calc((var(--s-theme-color-error-l, 0)) * 1%),var(--s-theme-color-error-a, 1));\n}\n\n    .s-clipboard-copy .s-clipboard-copy__root[state='error'] .icon-error {\n            opacity: 1;\n        }\n\n    .s-clipboard-copy svg {\n        position: absolute;\n        top: 50%;\n        left: 50%;\n        transform: translate(-50%, -50%);\n        display: block;\n        width: 1em;\n        height: 1em;\n        opacity: 0;\n        pointer-events: none;\n    }\n\n    .s-lod--2 .s-clipboard-copy svg {\n        background-size: contain;\n}\n";
-function define$e(props = {}, tagName = "s-clipboard-copy") {
+const __css$7 = ".s-clipboard-copy {\n    display: inline-block;\n    width: 1em;\n    height: 1em;\n    position: relative;\n    cursor: pointer;\n}\n\n    .s-clipboard-copy:not([mounted]) > * {\n        opacity: 0.001;\n        pointer-events: none;\n    }\n\n    .s-clipboard-copy .s-clipboard-copy__root[state='pending'] .icon-copy {\n            opacity: 1;\n        }\n\n    .s-clipboard-copy .s-clipboard-copy__root[state='copy'] .icon-copy {\n            opacity: 1;\n        }\n\n    .s-lod--1 .s-clipboard-copy .s-clipboard-copy__root[state='success'] {\n        color: hsla(calc(var(--s-theme-color-success-h, 0) + var(--s-theme-color-success-spin ,0)),calc((var(--s-theme-color-success-s, 0)) * 1%),calc((var(--s-theme-color-success-l, 0)) * 1%),var(--s-theme-color-success-a, 1));\n}\n\n    .s-clipboard-copy .s-clipboard-copy__root[state='success'] .icon-success {\n            opacity: 1;\n        }\n\n    .s-lod--1 .s-clipboard-copy .s-clipboard-copy__root[state='error'] {\n        color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0)) * 1%),calc((var(--s-theme-color-error-l, 0)) * 1%),var(--s-theme-color-error-a, 1));\n}\n\n    .s-clipboard-copy .s-clipboard-copy__root[state='error'] .icon-error {\n            opacity: 1;\n        }\n\n    .s-clipboard-copy svg {\n        position: absolute;\n        top: 50%;\n        left: 50%;\n        transform: translate(-50%, -50%);\n        display: block;\n        width: 1em;\n        height: 1em;\n        opacity: 0;\n        pointer-events: none;\n    }\n\n    .s-lod--2 .s-clipboard-copy svg {\n        background-size: contain;\n}\n";
+function define$a(props = {}, tagName = "s-clipboard-copy") {
   SClipboardCopyComponent.define(tagName, SClipboardCopyComponent, props);
 }
 class SClipboardCopyComponent extends SLitComponent {
@@ -22094,7 +22001,7 @@ class SClipboardCopyComponent extends SLitComponent {
   }
   static get styles() {
     return css`
-            ${unsafeCSS(__css$b)}
+            ${unsafeCSS(__css$7)}
         `;
   }
   _copyFromTarget() {
@@ -22252,16 +22159,16 @@ class SFloatingFeatureInterface extends SInterface {
     };
   }
 }
-function define$d(props = {}, name2 = "s-floating") {
+function define$9(props = {}, name2 = "s-floating") {
   SFloatingFeature.define(name2, SFloatingFeature, Object.assign({}, props));
 }
-const __css$a = ".s-floating {\n    transform: none;\n}\n\n.s-lod--2 .s-floating {\n    transition: none;\n}\n\n    .s-floating:before {\n        content: none;\n    }\n\n    .s-floating:after {\n        content: none;\n    }\n\n    .s-floating .s-floating__arrow {\n        position: absolute;\n        width: var(--arrow-size, 8px);\n        height: var(--arrow-size, 8px);\n        transform: rotate(45deg);\n    }\n\n    .s-lod--1 .s-floating .s-floating__arrow {\n        background: hsla(calc(var(--s-theme-color-current-h, 0) + var(--s-theme-color-current-spin ,0)),calc((var(--s-theme-color-current-s, 0)) * 1%),calc((var(--s-theme-color-current-l, 0)) * 1%),var(--s-theme-color-current-a, 1));\n}";
+const __css$6 = ".s-floating {\n    transform: none;\n}\n\n.s-lod--2 .s-floating {\n    transition: none;\n}\n\n    .s-floating:before {\n        content: none;\n    }\n\n    .s-floating:after {\n        content: none;\n    }\n\n    .s-floating .s-floating__arrow {\n        position: absolute;\n        width: var(--arrow-size, 8px);\n        height: var(--arrow-size, 8px);\n        transform: rotate(45deg);\n    }\n\n    .s-lod--1 .s-floating .s-floating__arrow {\n        background: hsla(calc(var(--s-theme-color-current-h, 0) + var(--s-theme-color-current-spin ,0)),calc((var(--s-theme-color-current-s, 0)) * 1%),calc((var(--s-theme-color-current-l, 0)) * 1%),var(--s-theme-color-current-a, 1));\n}";
 class SFloatingFeature extends SFeature {
   constructor(name2, node, settings) {
     super(name2, node, __deepMerge({
       name: "s-floating",
       interface: SFloatingFeatureInterface,
-      style: __css$a
+      style: __css$6
     }, settings !== null && settings !== void 0 ? settings : {}));
     if (!this.props.ref) {
       this._$ref = this.node.parentElement;
@@ -22984,7 +22891,7 @@ SValidator.registerValidator("hex", hex, {
 SValidator.registerValidator("password", password, {
   definition: definition$3
 });
-const __css$9 = "@-webkit-keyframes error-message-appear {\n    from {\n        line-height: 1;\n        max-height: 0;\n    }\n    to {\n        max-height: 2em;\n        line-height: 2;\n    }\n}\n\n@keyframes error-message-appear {\n    from {\n        line-height: 1;\n        max-height: 0;\n    }\n    to {\n        max-height: 2em;\n        line-height: 2;\n    }\n}\n\n.s-form-validate + .s-form-validate-error-message {\n    text-align: end;\n    color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0)) * 1%),calc((var(--s-theme-color-error-l, 0)) * 1%),var(--s-theme-color-error-a, 1));\n    overflow: hidden;\n    max-height: 0;\n    line-height: 1;\n    margin: 0;\n    -webkit-animation: 0.2s error-message-appear var(--s-theme-easing-default, 0) forwards;\n            animation: 0.2s error-message-appear var(--s-theme-easing-default, 0) forwards;\n}\n";
+const __css$5 = "@-webkit-keyframes error-message-appear {\n    from {\n        line-height: 1;\n        max-height: 0;\n    }\n    to {\n        max-height: 2em;\n        line-height: 2;\n    }\n}\n\n@keyframes error-message-appear {\n    from {\n        line-height: 1;\n        max-height: 0;\n    }\n    to {\n        max-height: 2em;\n        line-height: 2;\n    }\n}\n\n.s-form-validate + .s-form-validate-error-message {\n    text-align: end;\n    overflow: hidden;\n    max-height: 0;\n    margin: 0;\n}\n\n.s-lod--3 .s-form-validate + .s-form-validate-error-message {\n    -webkit-animation: 0.2s error-message-appear var(--s-theme-easing-default, 0) forwards;\n            animation: 0.2s error-message-appear var(--s-theme-easing-default, 0) forwards;\n}\n\n.s-lod--1 .s-form-validate + .s-form-validate-error-message {\n    color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0)) * 1%),calc((var(--s-theme-color-error-l, 0)) * 1%),var(--s-theme-color-error-a, 1));\n    line-height: 1;\n}\n";
 const validatorsDefinition = SValidator.getValidatorsDefinition(), validatorsMessagesDefinition = {};
 for (let [validator, definition2] of Object.entries(validatorsDefinition)) {
   validatorsMessagesDefinition[`${validator}Message`] = {
@@ -23037,10 +22944,10 @@ class SFormValidateFeatureInterface extends SInterface {
     } });
   }
 }
-function define$c(props = {}, name2 = "s-form-validate") {
+function define$8(props = {}, name2 = "s-form-validate") {
   SFormValidateFeature.define(name2, SFormValidateFeature, Object.assign({ mountWhen: "interact" }, props));
 }
-var __awaiter$a = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$7 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -23080,7 +22987,7 @@ class SFormValidateFeature extends SFeature {
     super(name2, node, __deepMerge({
       name: "s-form-validate",
       interface: SFormValidateFeatureInterface,
-      style: __css$9
+      style: __css$5
     }, settings !== null && settings !== void 0 ? settings : {}));
     this._nodeByValidator = {};
     this._isDirty = false;
@@ -23318,7 +23225,7 @@ class SFormValidateFeature extends SFeature {
   }
   _applyResult(res, event) {
     var _a3, _b2, _c2, _d2, _e, _f;
-    return __awaiter$a(this, void 0, void 0, function* () {
+    return __awaiter$7(this, void 0, void 0, function* () {
       for (let [validator, definition2] of Object.entries(SValidator.getValidatorsDefinition())) {
         if (!this.props[validator]) {
           continue;
@@ -23398,11 +23305,11 @@ class SInlineFeatureInterface extends SInterface {
     return {};
   }
 }
-function define$b(props = {}, name2 = "s-inline") {
+function define$7(props = {}, name2 = "s-inline") {
   SInlineFeature.define(name2, SInlineFeature, props);
 }
 const sInlineFeature = "";
-var __awaiter$9 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$6 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -23445,7 +23352,7 @@ class SInlineFeature extends SFeature {
     }
   }
   _inlineImg(src2) {
-    return __awaiter$9(this, void 0, void 0, function* () {
+    return __awaiter$6(this, void 0, void 0, function* () {
       const r = yield fetch(src2);
       const text = yield r.text();
       const parser = new DOMParser();
@@ -23963,8 +23870,8 @@ class SPanelComponentInterface extends SInterface {
     };
   }
 }
-const __css$8 = ".s-panel {\n    display: block;\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    z-index: 99999;\n    pointer-events: none;\n}\n\n    .s-panel[active] {\n        pointer-events: all;\n    }\n\n    .s-panel:not([mounted]) > * {\n        display: none;\n    }\n\n.s-pane__root {\n    display: block;\n    position: fixed;\n    top: 0;\n    left: 0;\n}\n\n.s-panel__backdrop {\n    /* position: absolute;\n    top: 0;\n    left: 0;\n    z-index: 0;\n    width: 100%;\n    height: 100%; */position: fixed;\n        top: 0;\n        left: 0;\n        width: 200vw;\n        height: calc(200 * var(--vh,1vh)) ;\n        z-index: 100;\n        transform: translate(-50%, -50%);\n    z-index: 0;\n}\n\n.s-lod--3 .s-panel__backdrop {\n                    -webkit-backdrop-filter: blur(5px);\n                            backdrop-filter: blur(5px);\n}\n\n.s-lod--1 .s-panel__backdrop {\n     \n \n                    background: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-background-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-background-lightness-offset, 0)) * 1%),0.7);\n}\n\n.s-panel__container {\n    display: none;\n    position: absolute;\n    z-index: 1;\n    overflow: auto;\n}\n\n.s-panel__container::-webkit-scrollbar {\n          width: 2px;\n          height: 2px;\n      }\n\n.s-lod--1 .s-panel__container::-webkit-scrollbar-track {\n            \n                background-color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),0.1);\n}\n\n.s-lod--1 .s-panel__container::-webkit-scrollbar-thumb {\n          \n            background-color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n}\n\n@media screen and (max-width: 639px) {\n\n.s-panel__container {\n        width: 90vw;\n        min-width: auto;\n        max-width: auto;\n}\n}\n\n[mounted] .s-panel__container {\n        display: block;\n    }\n\n[position='left'] .s-panel__container {\n        left: 0;\n        top: 0;\n        height: 100%;\n        min-width: 40px;\n        max-width: 90vw;\n        transform: translateX(-100%);\n    }\n\n[position='top'] .s-panel__container {\n        left: 0;\n        top: 0;\n        width: 100%;\n        min-height: 40px;\n        max-height: calc(90 * var(--vh,1vh)) ;\n        transform: translateY(-100%);\n    }\n\n[position='right'] .s-panel__container {\n        right: 0;\n        top: 0;\n        height: 100%;\n        min-width: 40px;\n        max-width: 90vw;\n        transform: translateX(100%);\n    }\n\n[position='bottom'] .s-panel__container {\n        left: 0;\n        bottom: 0;\n        width: 100%;\n        min-height: 40px;\n        max-height: calc(90 * var(--vh,1vh)) ;\n        transform: translateY(100%);\n    }\n\n[position='modal'] .s-panel__container {\n        max-width: 90vw;\n        max-height: calc(90 * var(--vh,1vh)) ;\n        top: 50%;\n        left: 50%;\n        transform: translate(-50%, -40%);\n    }\n\n[active][position='modal'] .s-panel__container {\n        transform: translate(-50%, -50%);\n    }\n\n[active] .s-panel__container {\n        transform: translateX(0) translateY(0);\n    }\n\n.s-panel__root {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n}\n\n.s-panel[lnf='default'] .s-panel__backdrop {\n        opacity: 0;\n    }\n\n.s-lod--2 .s-panel[lnf='default'] .s-panel__backdrop {\n        transition: var(--s-theme-ui-panel-transition, 0);\n}\n\n.s-lod--1 .s-panel[lnf='default'] .s-panel__backdrop {\n        background: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-surface-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-surface-lightness-offset, 0)) * 1%),0.6);\n}\n\n.s-panel[lnf='default'] .s-panel__container {\n        opacity: 0;\n    }\n\n.s-lod--3 .s-panel[lnf='default'] .s-panel__container {box-shadow: var(--s-theme-depth-5, 0);\n}\n\n.s-lod--2 .s-panel[lnf='default'] .s-panel__container {\n        transition: var(--s-theme-ui-panel-transition, 0);border-radius: calc(calc(var(--s-theme-border-radius-default, 5px) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 1);\n}\n\n.s-lod--1 .s-panel[lnf='default'] .s-panel__container {\n        background: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-background-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-background-lightness-offset, 0)) * 1%),var(--s-theme-color-main-background-a, 1));\n}\n\n.s-panel[lnf='default'][active] .s-panel__container,\n        .s-panel[lnf='default'][active] .s-panel__backdrop {\n            opacity: 1;\n        }\n";
-var __awaiter$8 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+const __css$4 = ".s-panel {\n    display: block;\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    z-index: 99999;\n    pointer-events: none;\n}\n\n    .s-panel[active] {\n        pointer-events: all;\n    }\n\n    .s-panel:not([mounted]) > * {\n        display: none;\n    }\n\n.s-pane__root {\n    display: block;\n    position: fixed;\n    top: 0;\n    left: 0;\n}\n\n.s-panel__backdrop {\n    /* position: absolute;\n    top: 0;\n    left: 0;\n    z-index: 0;\n    width: 100%;\n    height: 100%; */position: fixed;\n        top: 0;\n        left: 0;\n        width: 200vw;\n        height: calc(200 * var(--vh,1vh)) ;\n        z-index: 100;\n        transform: translate(-50%, -50%);\n    z-index: 0;\n}\n\n.s-lod--3 .s-panel__backdrop {\n                    -webkit-backdrop-filter: blur(5px);\n                            backdrop-filter: blur(5px);\n}\n\n.s-lod--1 .s-panel__backdrop {\n     \n \n                    background: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-background-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-background-lightness-offset, 0)) * 1%),0.7);\n}\n\n.s-panel__container {\n    display: none;\n    position: absolute;\n    z-index: 1;\n    overflow: auto;\n}\n\n.s-panel__container::-webkit-scrollbar {\n          width: 2px;\n          height: 2px;\n      }\n\n.s-lod--1 .s-panel__container::-webkit-scrollbar-track {\n            \n                background-color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),0.1);\n}\n\n.s-lod--1 .s-panel__container::-webkit-scrollbar-thumb {\n          \n            background-color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n}\n\n@media screen and (max-width: 639px) {\n\n.s-panel__container {\n        width: 90vw;\n        min-width: auto;\n        max-width: auto;\n}\n}\n\n[mounted] .s-panel__container {\n        display: block;\n    }\n\n[position='left'] .s-panel__container {\n        left: 0;\n        top: 0;\n        height: 100%;\n        min-width: 40px;\n        max-width: 90vw;\n        transform: translateX(-100%);\n    }\n\n[position='top'] .s-panel__container {\n        left: 0;\n        top: 0;\n        width: 100%;\n        min-height: 40px;\n        max-height: calc(90 * var(--vh,1vh)) ;\n        transform: translateY(-100%);\n    }\n\n[position='right'] .s-panel__container {\n        right: 0;\n        top: 0;\n        height: 100%;\n        min-width: 40px;\n        max-width: 90vw;\n        transform: translateX(100%);\n    }\n\n[position='bottom'] .s-panel__container {\n        left: 0;\n        bottom: 0;\n        width: 100%;\n        min-height: 40px;\n        max-height: calc(90 * var(--vh,1vh)) ;\n        transform: translateY(100%);\n    }\n\n[position='modal'] .s-panel__container {\n        max-width: 90vw;\n        max-height: calc(90 * var(--vh,1vh)) ;\n        top: 50%;\n        left: 50%;\n        transform: translate(-50%, -40%);\n    }\n\n[active][position='modal'] .s-panel__container {\n        transform: translate(-50%, -50%);\n    }\n\n[active] .s-panel__container {\n        transform: translateX(0) translateY(0);\n    }\n\n.s-panel__root {\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n}\n\n.s-panel[lnf='default'] .s-panel__backdrop {\n        opacity: 0;\n    }\n\n.s-lod--2 .s-panel[lnf='default'] .s-panel__backdrop {\n        transition: var(--s-theme-ui-panel-transition, 0);\n}\n\n.s-lod--1 .s-panel[lnf='default'] .s-panel__backdrop {\n        background: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-surface-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-surface-lightness-offset, 0)) * 1%),0.6);\n}\n\n.s-panel[lnf='default'] .s-panel__container {\n        opacity: 0;\n    }\n\n.s-lod--3 .s-panel[lnf='default'] .s-panel__container {box-shadow: var(--s-theme-depth-5, 0);\n}\n\n.s-lod--2 .s-panel[lnf='default'] .s-panel__container {\n        transition: var(--s-theme-ui-panel-transition, 0);border-radius: calc(calc(var(--s-theme-border-radius-default, 5px) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 1);\n}\n\n.s-lod--1 .s-panel[lnf='default'] .s-panel__container {\n        background: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-background-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-background-lightness-offset, 0)) * 1%),var(--s-theme-color-main-background-a, 1));\n}\n\n.s-panel[lnf='default'][active] .s-panel__container,\n        .s-panel[lnf='default'][active] .s-panel__backdrop {\n            opacity: 1;\n        }\n";
+var __awaiter$5 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -24007,11 +23914,11 @@ class SPanelComponent extends SLitComponent {
   }
   static get styles() {
     return css`
-            ${unsafeCSS(__css$8)}
+            ${unsafeCSS(__css$4)}
         `;
   }
   mount() {
-    return __awaiter$8(this, void 0, void 0, function* () {
+    return __awaiter$5(this, void 0, void 0, function* () {
       if (this.props.active) {
         this.constructor._activePanels.push(this);
       }
@@ -24156,7 +24063,7 @@ class SPanelComponent extends SLitComponent {
   }
 }
 SPanelComponent._activePanels = [];
-function define$a(props = {}, tagName = "s-panel") {
+function define$6(props = {}, tagName = "s-panel") {
   SLitComponent.define(tagName, SPanelComponent, props);
 }
 class SRangeComponentInterface extends SInterface {
@@ -24205,8 +24112,8 @@ class SRangeComponentInterface extends SInterface {
     };
   }
 }
-const __css$7 = ".s-range {\n    display: block;\n    width: 100%;\n}\n\n    .s-range:not([mounted]) > * {\n        display: none;\n    }\n\n    .s-range[disabled] {\n        pointer-events: none;\n    }\n.s-range__root {\n    display: flex;\n    width: 100%;\n}\n.s-range__input {\n    flex-grow: 1;\n    opacity: 1 !important;\n}\n.s-range__input:hover + .s-range__tooltip,\n.s-range__input:focus + .s-range__tooltip {\n    opacity: 1 !important;\n}\n.s-lod--2 .s-range__tooltip {\n    transition: none;\n}\n";
-var __awaiter$7 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+const __css$3 = ".s-range {\n    display: block;\n    width: 100%;\n}\n\n    .s-range:not([mounted]) > * {\n        display: none;\n    }\n\n    .s-range[disabled] {\n        pointer-events: none;\n    }\n.s-range__root {\n    display: flex;\n    width: 100%;\n}\n.s-range__input {\n    flex-grow: 1;\n    opacity: 1 !important;\n}\n.s-range__input:hover + .s-range__tooltip,\n.s-range__input:focus + .s-range__tooltip {\n    opacity: 1 !important;\n}\n.s-lod--2 .s-range__tooltip {\n    transition: none;\n}\n";
+var __awaiter$4 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -24240,7 +24147,7 @@ class SRangeComponent extends SLitComponent {
   static get styles() {
     return css`
             ${unsafeCSS(`
-                ${__css$7}
+                ${__css$3}
             `)}
         `;
   }
@@ -24252,7 +24159,7 @@ class SRangeComponent extends SLitComponent {
   }
   firstUpdated() {
     var _a3;
-    return __awaiter$7(this, void 0, void 0, function* () {
+    return __awaiter$4(this, void 0, void 0, function* () {
       this._$input = this.querySelector("input");
       this._$tooltip = this.querySelector(".s-range__tooltip");
       this._$input.addEventListener("input", (e) => {
@@ -24319,7 +24226,7 @@ class SRangeComponent extends SLitComponent {
         `;
   }
 }
-function define$9(props = {}, tagName = "s-range") {
+function define$5(props = {}, tagName = "s-range") {
   SLitComponent.define(tagName, SRangeComponent, props);
 }
 class SRefocusFeatureInterface extends SInterface {
@@ -24372,7 +24279,7 @@ class SRefocusFeatureInterface extends SInterface {
     };
   }
 }
-function define$8(props = {}, name2 = "s-refocus") {
+function define$4(props = {}, name2 = "s-refocus") {
   SRefocusFeature.define(name2, SRefocusFeature, Object.assign({}, props));
 }
 class SRefocusFeature extends SFeature {
@@ -24476,11 +24383,11 @@ class SScrollComponentInterface extends SInterface {
     };
   }
 }
-function define$7(props = {}, tagName = "s-scroll") {
+function define$3(props = {}, tagName = "s-scroll") {
   SScrollComponent.define(tagName, SScrollComponent, props);
 }
-const __css$6 = "s-scroll {\n    display: inline-block;\n    cursor: pointer;\n}\n";
-var __awaiter$6 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+const __css$2 = "s-scroll {\n    display: inline-block;\n    cursor: pointer;\n}\n";
+var __awaiter$3 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -24514,7 +24421,7 @@ class SScrollComponent extends SLitComponent {
   static get styles() {
     return css`
             ${unsafeCSS(`
-                ${__css$6}
+                ${__css$2}
             `)}
         `;
   }
@@ -24525,7 +24432,7 @@ class SScrollComponent extends SLitComponent {
     }));
   }
   firstUpdated() {
-    return __awaiter$6(this, void 0, void 0, function* () {
+    return __awaiter$3(this, void 0, void 0, function* () {
       this.addEventListener("click", (e) => {
         e.preventDefault();
         this._scrollTo(this.props.to);
@@ -24572,7 +24479,7 @@ class SScrollComponent extends SLitComponent {
     return html``;
   }
 }
-const __css$5 = ".s-slider {\n    display: block;\n    font-size: calc(1rem * var(--s-scale, 1) * var(--s-scale-global, 1));\n    --s-slider-space: 20px;\n}\n\n    .s-slider > .s-slider__root,\n    .s-slider > .s-slider__root > .s-slider__slides-wrapper,\n    .s-slider > .s-slider__root > .s-slider__slides-wrapper > .s-slider__slides {\n        height: 100%;\n        width: 100%;\n    }\n\n    .s-slider[direction='vertical'][pad] > .s-slider__root > .s-slider__slides-wrapper > .s-slider__slides > .s-slider__pad-start {\n                    height: var(--s-slider-pad-start, 0);\n                }\n\n    .s-slider[direction='vertical'][pad] > .s-slider__root > .s-slider__slides-wrapper > .s-slider__slides > .s-slider__pad-end {\n                    height: var(--s-slider-pad-end, 0);\n                }\n\n    .s-slider[direction='horizontal'][pad] > .s-slider__root > .s-slider__slides-wrapper > .s-slider__slides > .s-slider__pad-start {\n                    width: var(--s-slider-pad-start, 0);\n                }\n\n    .s-slider[direction='horizontal'][pad] > .s-slider__root > .s-slider__slides-wrapper > .s-slider__slides > .s-slider__pad-end {\n                    width: var(--s-slider-pad-end, 0);\n                }\n\n.s-slider[behavior='scroll'] > .s-slider__root > .s-slider__slides-wrapper {\n            overflow: auto;\n            scroll-snap-type: x mandatory;\n\n            /* hide scrollbar */\n            -ms-overflow-style: none;\n            scrollbar-width: none;\n        }\n\n.s-slider[behavior='scroll'] > .s-slider__root > .s-slider__slides-wrapper::-webkit-scrollbar {\n                display: none;\n            }\n\n.s-slider[behavior='scroll'] > .s-slider__root > .s-slider__slides-wrapper > .s-slider__slides > .s-slider__slide {\n                    scroll-snap-align: center;\n                }\n\n.s-slider[behavior='scroll'][direction='vertical'] > .s-slider__root > .s-slider__slides-wrapper {\n                scroll-snap-type: y mandatory;\n            }\n\n.s-slider[lnf^='default'] {\n    position: relative;\n    --s-slider-space: 20px;\n}\n\n.s-slider[lnf^='default']:not([class*='s-ratio']) {\n        aspect-ratio: 16/9;\n    }\n\n.s-slider[lnf^='default']:not([mounted]) {\n        opacity: 0;\n    }\n\n.s-slider[lnf^='default'] .s-slider__ui {\n        position: absolute;\n        top: 50%;\n        left: 50%;\n        width: 100%;\n        height: 100%;\n        transform: translate(-50%, -50%);\n        pointer-events: none;\n    }\n\n.s-slider[lnf^='default'] .s-slider__ui * {\n            pointer-events: all;\n        }\n\n.s-slider[lnf^='default'][pad] > .s-slider__root > .s-slider__slides-wrapper > .s-slider__slides > .s-slider__pad {\n                    flex-shrink: 0;\n                    flex-grow: 0;\n                }\n\n.s-slider[lnf^='default'] > .s-slider__root {\n        position: relative;\n    }\n\n.s-slider[lnf^='default'] > .s-slider__root > .s-slider__slides-wrapper {\n            /* position: absolute;\n            top: 0;\n            left: 0; */\n            width: 100%;\n            height: 100%;\n        }\n\n.s-slider[lnf^='default'] > .s-slider__root > .s-slider__slides-wrapper > .s-slider__slides {\n                display: inline-flex;\n                -webkit-user-select: none;\n                   -moz-user-select: none;\n                        user-select: none;\n                height: 100%;\n            }\n\n/* white-space: nowrap; */\n\n.s-slider[lnf^='default'] > .s-slider__root > .s-slider__slides-wrapper > .s-slider__slides > .s-slider__slide {\n                    display: block;\n                    flex-shrink: 0;\n                    flex-grow: 0;\n                    width: 100%;\n                    height: 100%;\n                    scroll-snap-align: center;\n\n                    /* &:nth-child(1) {\n                        background: red;\n                        width: 500px !important;\n                    }\n                    &:nth-child(2) {\n                        background: yellow;\n                        width: 800px !important;\n                    }\n                    &:nth-child(3) {\n                        background: blue;\n                        width: 80vw !important;\n                    } */\n                }\n\n.s-slider[lnf^='default'] > .s-slider__root > .s-slider__ui > .s-slider__nav {\n                position: absolute;\n                top: calc(100% + var(--s-slider-space));\n                left: 50%;\n                transform: translate(-50%);\n                display: flex;\n                gap: calc(var(--s-slider-space) * 0.5);\n            }\n\n.s-slider[lnf^='default'] > .s-slider__root > .s-slider__ui > .s-slider__nav > * {\n                    border-radius: 50%;\n                    display: block;\n                    width: 0.5em;\n                    height: 0.5em;\n                    background: currentColor;\n                    opacity: 0.3;\n                    cursor: pointer;\n                }\n\n.s-slider[lnf^='default'] > .s-slider__root > .s-slider__ui > .s-slider__nav > *:hover {\n                        opacity: 0.6;\n                    }\n\n.s-slider[lnf^='default'] > .s-slider__root > .s-slider__ui > .s-slider__nav > *.active {\n                        opacity: 1;\n                    }\n\n.s-slider[lnf^='default'][direction='vertical']\n        > .s-slider__root\n        > .s-slider__slides-wrapper\n        > .s-slider__slides {\n        display: block;\n        width: 100%;\n        height: auto;\n    }\n\n.s-slider[lnf^='default'][direction='vertical']\n        > .s-slider__root\n        > .s-slider__slides-wrapper\n        > .s-slider__slides > .s-slider__slide {\n            display: block;\n            width: 100% !important;\n\n            /* &:nth-child(1) {\n                background: red;\n                height: 500px !important;\n            }\n            &:nth-child(2) {\n                background: yellow;\n                height: 800px !important;\n            }\n            &:nth-child(3) {\n                background: blue;\n                height: 400px !important;\n            } */\n        }\n\n.s-slider[lnf^='default'][lnf*='contained'] .s-slider__root > .s-slider__ui > .s-slider__nav {\n        top: auto;\n        bottom: calc(var(--s-slider-space) - 0.5em);\n        transform: translate(-50%, -100%);\n    }\n\n.s-slider[lnf^='default'][direction='vertical'] .s-slider__root > .s-slider__ui > .s-slider__nav {\n        top: 50%;\n        left: calc(100% + var(--s-slider-space));\n        transform: translate(0, -50%);\n        flex-direction: column;\n    }\n\n.s-slider[lnf^='default'][lnf*='contained'][direction='vertical']\n        .s-slider__root\n        > .s-slider__ui\n        > .s-slider__nav {\n        bottom: auto;\n        left: auto;\n        right: calc(var(--s-slider-space));\n        transform: translate(0, -50%);\n    }\n\n.s-slider[lnf^='default'][lnf*='tight'][direction='horizontal'][controls] {\n        padding-left: calc(var(--s-slider-space) + 1em);\n        padding-right: calc(var(--s-slider-space) + 1em);\n    }\n\n.s-slider[lnf^='default'][lnf*='tight'][direction='horizontal'][nav] {\n        padding-bottom: calc(var(--s-slider-space) + 1em);\n    }\n\n.s-slider[lnf^='default'][lnf*='tight'][direction='vertical'][controls] {\n        padding-top: calc(var(--s-slider-space) + 1em);\n        padding-bottom: calc(var(--s-slider-space) + 1em);\n    }\n\n.s-slider[lnf^='default'][lnf*='tight'][direction='vertical'][nav] {\n        padding-right: calc(var(--s-slider-space) + 1em);\n    }\n\n.s-slider[lnf^='default'] > .s-slider__root > .s-slider__ui > .s-slider__progress {\n        position: absolute;\n        bottom: var(--s-slider-space);\n        left: var(--s-slider-space);\n        right: var(--s-slider-space);\n        height: 0.5em;\n    }\n\n.s-slider[lnf^='default'] > .s-slider__root > .s-slider__ui > .s-slider__progress:before {\n            content: '';\n            display: block;\n            position: absolute;\n            top: 0;\n            left: 0;\n            width: 100%;\n            height: 100%;\n            background: currentColor;\n            opacity: 0.3;\n        }\n\n.s-slider[lnf^='default'] > .s-slider__root > .s-slider__ui > .s-slider__progress > .s-slider__progress-bar {\n            position: absolute;\n            top: 0;\n            left: 0;\n            height: 100%;\n            width: calc(\n                100% / (var(--s-slider-total-pages)) *\n                    (var(--s-slider-page) + 1)\n            );\n            background: currentColor;\n        }\n\n.s-slider[lnf^='default'][lnf*='contained'] .s-slider__root > .s-slider__ui > .s-slider__progress {\n        bottom: calc(var(--s-slider-space) * 2);\n    }\n\n.s-slider[lnf^='default'] > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-next,\n        .s-slider[lnf^='default'] > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-previous {\n            width: 1em;\n            height: 1em;\n            position: absolute;\n            top: 50%;\n            transform: translateY(-50%);\n            cursor: pointer;\n            opacity: 0.3;\n            pointer-events: none;\n            color: currentColor;\n        }\n\n.s-slider[lnf^='default'] > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-next.active, .s-slider[lnf^='default'] > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-previous.active {\n                pointer-events: all;\n                opacity: 1;\n            }\n\n.s-slider[lnf^='default'] > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-previous {\n            right: calc(100% + var(--s-slider-space));\n        }\n\n.s-slider[lnf^='default'] > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-next {\n            left: calc(100% + var(--s-slider-space));\n        }\n\n.s-slider[lnf^='default'][lnf*='contained']\n        > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-previous {\n        left: var(--s-slider-space);\n        transform: translate(0, -50%);\n    }\n\n.s-slider[lnf^='default'][lnf*='contained']\n        > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-next {\n        left: auto;\n        right: var(--s-slider-space);\n        transform: translate(0, -50%);\n    }\n\n.s-slider[lnf^='default'][direction='vertical']\n        > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-next {\n        left: 50%;\n        top: calc(100% + var(--s-slider-space));\n        transform: translate(-50%, 0) rotate(90deg);\n    }\n\n.s-slider[lnf^='default'][direction='vertical']\n        > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-previous {\n        left: 50%;\n        bottom: calc(100% + var(--s-slider-space));\n        top: auto;\n        transform: translate(-50%, 0) rotate(90deg);\n    }\n\n.s-slider[lnf^='default'][direction='vertical'][lnf*='contained']\n        > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-previous {\n        top: calc(var(--s-slider-space));\n    }\n\n.s-slider[lnf^='default'][direction='vertical'][lnf*='contained']\n        > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-next {\n        top: auto;\n        bottom: calc(var(--s-slider-space));\n    }\n\n.s-slider[lnf^='default'] > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-next-arrow,\n    .s-slider[lnf^='default'] > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-previous-arrow {\n        width: 1em;\n        height: 1em;\n        position: absolute;\n        top: 0;\n        left: 0;\n    }\n\n.s-slider[lnf^='default'] > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-next-arrow:before,\n        .s-slider[lnf^='default'] > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-next-arrow:after,\n        .s-slider[lnf^='default'] > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-previous-arrow:before,\n        .s-slider[lnf^='default'] > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-previous-arrow:after {\n            display: block;\n            content: '';\n            position: absolute;\n            top: calc(50% - 0.1em);\n            left: 0;\n            background: currentColor;\n            width: 100%;\n            height: 0.2em;\n        }\n\n.s-slider[lnf^='default'] > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-next-arrow:before, .s-slider[lnf^='default'] > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-previous-arrow:before {\n            transform-origin: 0 0;\n            transform: rotate(45deg);\n        }\n\n.s-slider[lnf^='default'] > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-next-arrow:after, .s-slider[lnf^='default'] > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-previous-arrow:after {\n            transform-origin: 0 100%;\n            transform: rotate(-45deg);\n        }\n\n.s-slider[lnf^='default'] > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-next-arrow {\n        transform: rotate(180deg);\n    }\n";
+const __css$1 = ".s-slider {\n    display: block;\n    font-size: calc(1rem * var(--s-scale, 1) * var(--s-scale-global, 1));\n    --s-slider-space: 20px;\n}\n\n    .s-slider > .s-slider__root,\n    .s-slider > .s-slider__root > .s-slider__slides-wrapper,\n    .s-slider > .s-slider__root > .s-slider__slides-wrapper > .s-slider__slides {\n        height: 100%;\n        width: 100%;\n    }\n\n    .s-slider[direction='vertical'][pad] > .s-slider__root > .s-slider__slides-wrapper > .s-slider__slides > .s-slider__pad-start {\n                    height: var(--s-slider-pad-start, 0);\n                }\n\n    .s-slider[direction='vertical'][pad] > .s-slider__root > .s-slider__slides-wrapper > .s-slider__slides > .s-slider__pad-end {\n                    height: var(--s-slider-pad-end, 0);\n                }\n\n    .s-slider[direction='horizontal'][pad] > .s-slider__root > .s-slider__slides-wrapper > .s-slider__slides > .s-slider__pad-start {\n                    width: var(--s-slider-pad-start, 0);\n                }\n\n    .s-slider[direction='horizontal'][pad] > .s-slider__root > .s-slider__slides-wrapper > .s-slider__slides > .s-slider__pad-end {\n                    width: var(--s-slider-pad-end, 0);\n                }\n\n.s-slider[behavior='scroll'] > .s-slider__root > .s-slider__slides-wrapper {\n            overflow: auto;\n            scroll-snap-type: x mandatory;\n\n            /* hide scrollbar */\n            -ms-overflow-style: none;\n            scrollbar-width: none;\n        }\n\n.s-slider[behavior='scroll'] > .s-slider__root > .s-slider__slides-wrapper::-webkit-scrollbar {\n                display: none;\n            }\n\n.s-slider[behavior='scroll'] > .s-slider__root > .s-slider__slides-wrapper > .s-slider__slides > .s-slider__slide {\n                    scroll-snap-align: center;\n                }\n\n.s-slider[behavior='scroll'][direction='vertical'] > .s-slider__root > .s-slider__slides-wrapper {\n                scroll-snap-type: y mandatory;\n            }\n\n.s-slider[lnf^='default'] {\n    position: relative;\n    --s-slider-space: 20px;\n}\n\n.s-slider[lnf^='default']:not([class*='s-ratio']) {\n        aspect-ratio: 16/9;\n    }\n\n.s-slider[lnf^='default']:not([mounted]) {\n        opacity: 0;\n    }\n\n.s-slider[lnf^='default'] .s-slider__ui {\n        position: absolute;\n        top: 50%;\n        left: 50%;\n        width: 100%;\n        height: 100%;\n        transform: translate(-50%, -50%);\n        pointer-events: none;\n    }\n\n.s-slider[lnf^='default'] .s-slider__ui * {\n            pointer-events: all;\n        }\n\n.s-slider[lnf^='default'][pad] > .s-slider__root > .s-slider__slides-wrapper > .s-slider__slides > .s-slider__pad {\n                    flex-shrink: 0;\n                    flex-grow: 0;\n                }\n\n.s-slider[lnf^='default'] > .s-slider__root {\n        position: relative;\n    }\n\n.s-slider[lnf^='default'] > .s-slider__root > .s-slider__slides-wrapper {\n            /* position: absolute;\n            top: 0;\n            left: 0; */\n            width: 100%;\n            height: 100%;\n        }\n\n.s-slider[lnf^='default'] > .s-slider__root > .s-slider__slides-wrapper > .s-slider__slides {\n                display: inline-flex;\n                -webkit-user-select: none;\n                   -moz-user-select: none;\n                        user-select: none;\n                height: 100%;\n            }\n\n/* white-space: nowrap; */\n\n.s-slider[lnf^='default'] > .s-slider__root > .s-slider__slides-wrapper > .s-slider__slides > .s-slider__slide {\n                    display: block;\n                    flex-shrink: 0;\n                    flex-grow: 0;\n                    width: 100%;\n                    height: 100%;\n                    scroll-snap-align: center;\n\n                    /* &:nth-child(1) {\n                        background: red;\n                        width: 500px !important;\n                    }\n                    &:nth-child(2) {\n                        background: yellow;\n                        width: 800px !important;\n                    }\n                    &:nth-child(3) {\n                        background: blue;\n                        width: 80vw !important;\n                    } */\n                }\n\n.s-slider[lnf^='default'] > .s-slider__root > .s-slider__ui > .s-slider__nav {\n                position: absolute;\n                top: calc(100% + var(--s-slider-space));\n                left: 50%;\n                transform: translate(-50%);\n                display: flex;\n                gap: calc(var(--s-slider-space) * 0.5);\n            }\n\n.s-slider[lnf^='default'] > .s-slider__root > .s-slider__ui > .s-slider__nav > * {\n                    border-radius: 50%;\n                    display: block;\n                    width: 0.5em;\n                    height: 0.5em;\n                    background: currentColor;\n                    opacity: 0.3;\n                    cursor: pointer;\n                }\n\n.s-slider[lnf^='default'] > .s-slider__root > .s-slider__ui > .s-slider__nav > *:hover {\n                        opacity: 0.6;\n                    }\n\n.s-slider[lnf^='default'] > .s-slider__root > .s-slider__ui > .s-slider__nav > *.active {\n                        opacity: 1;\n                    }\n\n.s-slider[lnf^='default'][direction='vertical']\n        > .s-slider__root\n        > .s-slider__slides-wrapper\n        > .s-slider__slides {\n        display: block;\n        width: 100%;\n        height: auto;\n    }\n\n.s-slider[lnf^='default'][direction='vertical']\n        > .s-slider__root\n        > .s-slider__slides-wrapper\n        > .s-slider__slides > .s-slider__slide {\n            display: block;\n            width: 100% !important;\n\n            /* &:nth-child(1) {\n                background: red;\n                height: 500px !important;\n            }\n            &:nth-child(2) {\n                background: yellow;\n                height: 800px !important;\n            }\n            &:nth-child(3) {\n                background: blue;\n                height: 400px !important;\n            } */\n        }\n\n.s-slider[lnf^='default'][lnf*='contained'] .s-slider__root > .s-slider__ui > .s-slider__nav {\n        top: auto;\n        bottom: calc(var(--s-slider-space) - 0.5em);\n        transform: translate(-50%, -100%);\n    }\n\n.s-slider[lnf^='default'][direction='vertical'] .s-slider__root > .s-slider__ui > .s-slider__nav {\n        top: 50%;\n        left: calc(100% + var(--s-slider-space));\n        transform: translate(0, -50%);\n        flex-direction: column;\n    }\n\n.s-slider[lnf^='default'][lnf*='contained'][direction='vertical']\n        .s-slider__root\n        > .s-slider__ui\n        > .s-slider__nav {\n        bottom: auto;\n        left: auto;\n        right: calc(var(--s-slider-space));\n        transform: translate(0, -50%);\n    }\n\n.s-slider[lnf^='default'][lnf*='tight'][direction='horizontal'][controls] {\n        padding-left: calc(var(--s-slider-space) + 1em);\n        padding-right: calc(var(--s-slider-space) + 1em);\n    }\n\n.s-slider[lnf^='default'][lnf*='tight'][direction='horizontal'][nav] {\n        padding-bottom: calc(var(--s-slider-space) + 1em);\n    }\n\n.s-slider[lnf^='default'][lnf*='tight'][direction='vertical'][controls] {\n        padding-top: calc(var(--s-slider-space) + 1em);\n        padding-bottom: calc(var(--s-slider-space) + 1em);\n    }\n\n.s-slider[lnf^='default'][lnf*='tight'][direction='vertical'][nav] {\n        padding-right: calc(var(--s-slider-space) + 1em);\n    }\n\n.s-slider[lnf^='default'] > .s-slider__root > .s-slider__ui > .s-slider__progress {\n        position: absolute;\n        bottom: var(--s-slider-space);\n        left: var(--s-slider-space);\n        right: var(--s-slider-space);\n        height: 0.5em;\n    }\n\n.s-slider[lnf^='default'] > .s-slider__root > .s-slider__ui > .s-slider__progress:before {\n            content: '';\n            display: block;\n            position: absolute;\n            top: 0;\n            left: 0;\n            width: 100%;\n            height: 100%;\n            background: currentColor;\n            opacity: 0.3;\n        }\n\n.s-slider[lnf^='default'] > .s-slider__root > .s-slider__ui > .s-slider__progress > .s-slider__progress-bar {\n            position: absolute;\n            top: 0;\n            left: 0;\n            height: 100%;\n            width: calc(\n                100% / (var(--s-slider-total-pages)) *\n                    (var(--s-slider-page) + 1)\n            );\n            background: currentColor;\n        }\n\n.s-slider[lnf^='default'][lnf*='contained'] .s-slider__root > .s-slider__ui > .s-slider__progress {\n        bottom: calc(var(--s-slider-space) * 2);\n    }\n\n.s-slider[lnf^='default'] > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-next,\n        .s-slider[lnf^='default'] > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-previous {\n            width: 1em;\n            height: 1em;\n            position: absolute;\n            top: 50%;\n            transform: translateY(-50%);\n            cursor: pointer;\n            opacity: 0.3;\n            pointer-events: none;\n            color: currentColor;\n        }\n\n.s-slider[lnf^='default'] > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-next.active, .s-slider[lnf^='default'] > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-previous.active {\n                pointer-events: all;\n                opacity: 1;\n            }\n\n.s-slider[lnf^='default'] > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-previous {\n            right: calc(100% + var(--s-slider-space));\n        }\n\n.s-slider[lnf^='default'] > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-next {\n            left: calc(100% + var(--s-slider-space));\n        }\n\n.s-slider[lnf^='default'][lnf*='contained']\n        > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-previous {\n        left: var(--s-slider-space);\n        transform: translate(0, -50%);\n    }\n\n.s-slider[lnf^='default'][lnf*='contained']\n        > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-next {\n        left: auto;\n        right: var(--s-slider-space);\n        transform: translate(0, -50%);\n    }\n\n.s-slider[lnf^='default'][direction='vertical']\n        > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-next {\n        left: 50%;\n        top: calc(100% + var(--s-slider-space));\n        transform: translate(-50%, 0) rotate(90deg);\n    }\n\n.s-slider[lnf^='default'][direction='vertical']\n        > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-previous {\n        left: 50%;\n        bottom: calc(100% + var(--s-slider-space));\n        top: auto;\n        transform: translate(-50%, 0) rotate(90deg);\n    }\n\n.s-slider[lnf^='default'][direction='vertical'][lnf*='contained']\n        > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-previous {\n        top: calc(var(--s-slider-space));\n    }\n\n.s-slider[lnf^='default'][direction='vertical'][lnf*='contained']\n        > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-next {\n        top: auto;\n        bottom: calc(var(--s-slider-space));\n    }\n\n.s-slider[lnf^='default'] > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-next-arrow,\n    .s-slider[lnf^='default'] > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-previous-arrow {\n        width: 1em;\n        height: 1em;\n        position: absolute;\n        top: 0;\n        left: 0;\n    }\n\n.s-slider[lnf^='default'] > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-next-arrow:before,\n        .s-slider[lnf^='default'] > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-next-arrow:after,\n        .s-slider[lnf^='default'] > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-previous-arrow:before,\n        .s-slider[lnf^='default'] > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-previous-arrow:after {\n            display: block;\n            content: '';\n            position: absolute;\n            top: calc(50% - 0.1em);\n            left: 0;\n            background: currentColor;\n            width: 100%;\n            height: 0.2em;\n        }\n\n.s-slider[lnf^='default'] > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-next-arrow:before, .s-slider[lnf^='default'] > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-previous-arrow:before {\n            transform-origin: 0 0;\n            transform: rotate(45deg);\n        }\n\n.s-slider[lnf^='default'] > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-next-arrow:after, .s-slider[lnf^='default'] > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-previous-arrow:after {\n            transform-origin: 0 100%;\n            transform: rotate(-45deg);\n        }\n\n.s-slider[lnf^='default'] > .s-slider__root\n        > .s-slider__ui\n        > .s-slider__controls\n        .s-slider__controls-next-arrow {\n        transform: rotate(180deg);\n    }\n";
 class SSliderComponentInterface extends SInterface {
   static get _definition() {
     return {
@@ -24756,7 +24663,7 @@ const __scrollBehavior = {
     });
   }
 };
-var __awaiter$5 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$2 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -24802,7 +24709,7 @@ class SSliderComponent extends SLitComponent {
   static get styles() {
     return css`
             ${unsafeCSS(`
-                ${__css$5}
+                ${__css$1}
             `)}
         `;
   }
@@ -24815,7 +24722,7 @@ class SSliderComponent extends SLitComponent {
     };
   }
   mount() {
-    return __awaiter$5(this, void 0, void 0, function* () {
+    return __awaiter$2(this, void 0, void 0, function* () {
       this.props.behaviors.scroll = __scrollBehavior;
       if (!this.id) {
         this.setAttribute("id", `s-slider-${__uniqid()}`);
@@ -24834,7 +24741,7 @@ class SSliderComponent extends SLitComponent {
       let resizeTimeout;
       window.addEventListener("resize", (e) => {
         clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => __awaiter$5(this, void 0, void 0, function* () {
+        resizeTimeout = setTimeout(() => __awaiter$2(this, void 0, void 0, function* () {
           yield this.applyPad();
           this.goTo(this.getCurrentSlideIdx(), true);
         }), 200);
@@ -24843,7 +24750,7 @@ class SSliderComponent extends SLitComponent {
   }
   firstUpdated() {
     var _a3, _b2, _c2, _d2, _e, _f, _g;
-    return __awaiter$5(this, void 0, void 0, function* () {
+    return __awaiter$2(this, void 0, void 0, function* () {
       this.$root = this.querySelector(`.${this.utils.uCls("__root")}`);
       this.$slidesWrapper = this.querySelector(`.${this.utils.uCls("__slides-wrapper")}:not(s-slider#${this.id} s-slider .${this.utils.uCls("__slides-wrapper")})`);
       this.$slidesContainer = this.querySelector(`.${this.utils.uCls("__slides")}:not(s-slider#${this.id} s-slider .${this.utils.uCls("__slides")})`);
@@ -24888,8 +24795,8 @@ class SSliderComponent extends SLitComponent {
     });
   }
   applyPad() {
-    return __awaiter$5(this, void 0, void 0, function* () {
-      setTimeout(() => __awaiter$5(this, void 0, void 0, function* () {
+    return __awaiter$2(this, void 0, void 0, function* () {
+      setTimeout(() => __awaiter$2(this, void 0, void 0, function* () {
         if (this.getBehavior().pad) {
           yield this.getBehavior().pad();
         } else {
@@ -25246,7 +25153,7 @@ ${Object.keys(this.props.behaviors).map((b) => `
     });
   }
   goTo(slideIdIdxOrElement, force = false) {
-    return __awaiter$5(this, void 0, void 0, function* () {
+    return __awaiter$2(this, void 0, void 0, function* () {
       const nextSlide = this.getSlide(slideIdIdxOrElement);
       if (!force && (!nextSlide || nextSlide.idx === this.currentSlide.idx)) {
         return;
@@ -25364,7 +25271,7 @@ ${Object.keys(this.props.behaviors).map((b) => `
     return this;
   }
   _transitionHandler($from, $to) {
-    return new Promise((resolve, reject) => __awaiter$5(this, void 0, void 0, function* () {
+    return new Promise((resolve, reject) => __awaiter$2(this, void 0, void 0, function* () {
       var _a3, _b2, _c2;
       this.style.setProperty("--s-slider-slide-height", `${Math.round(this.getCurrentSlide().$slide.getBoundingClientRect().height)}px`);
       this.style.setProperty("--s-slider-slide-width", `${Math.round(this.getCurrentSlide().$slide.getBoundingClientRect().width)}px`);
@@ -25460,7 +25367,7 @@ ${Object.keys(this.props.behaviors).map((b) => `
         `;
   }
 }
-function define$6(props = {}, tagName = "s-slider") {
+function define$2(props = {}, tagName = "s-slider") {
   SLitComponent.define(tagName, SSliderComponent, props);
 }
 function __inputAdditionalAttributes(settings = {}) {
@@ -25699,10 +25606,10 @@ class SSugarFeatureInterface extends SInterface {
     };
   }
 }
-function define$5(props = {}, name2 = "s-sugar") {
+function define$1(props = {}, name2 = "s-sugar") {
   SSugarFeature.define(name2, SSugarFeature, Object.assign({ mountWhen: "direct" }, props));
 }
-var __awaiter$4 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$1 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -25738,7 +25645,7 @@ class SSugarFeature extends SFeature {
     this._isResizing = false;
   }
   mount() {
-    return __awaiter$4(this, void 0, void 0, function* () {
+    return __awaiter$1(this, void 0, void 0, function* () {
       if (this.props.pleasantCss)
         this._pleasantCss();
       if (this.props.scrolled)
@@ -25813,1606 +25720,19 @@ class SSugarFeature extends SFeature {
   }
 }
 function SPackEssentials() {
-  define$e();
   define$a();
-  define$9();
-  define$7();
   define$6();
   define$5();
-  define$g();
-  define$f();
-  define$d();
+  define$3();
+  define$2();
+  define$1();
   define$c();
   define$b();
+  define$9();
   define$8();
+  define$7();
+  define$4();
 }
-class SAssetPickerComponentInterface extends SInterface {
-  static get _definition() {
-    return {};
-  }
-}
-const __css$4 = ".s-asset-picker {\n    padding: 10px;\n}\n.s-lod--1 .s-asset-picker {\n    background: red;\n}\n";
-function define$4(props = {}, tagName = "s-asset-picker") {
-  SAssetPickerComponent.define(tagName, SAssetPickerComponent, props);
-}
-class SAssetPickerComponent extends SLitComponent {
-  constructor() {
-    super(__deepMerge({
-      name: "s-asset-picker",
-      interface: SAssetPickerComponentInterface
-    }));
-    this.state = {
-      status: "pending"
-    };
-  }
-  static get properties() {
-    return SLitComponent.propertiesFromInterface({}, SAssetPickerComponentInterface);
-  }
-  static get styles() {
-    return css`
-            ${unsafeCSS(__css$4)}
-        `;
-  }
-  render() {
-    return html` <div>Hello</div> `;
-  }
-}
-/**
- * @license
- * Copyright 2017 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */
-const PartType = {
-  ATTRIBUTE: 1,
-  CHILD: 2,
-  PROPERTY: 3,
-  BOOLEAN_ATTRIBUTE: 4,
-  EVENT: 5,
-  ELEMENT: 6
-};
-const directive = (c) => (...values) => ({
-  ["_$litDirective$"]: c,
-  values
-});
-class Directive {
-  constructor(_partInfo) {
-  }
-  get _$isConnected() {
-    return this._$parent._$isConnected;
-  }
-  _$initialize(part, parent, attributeIndex) {
-    this.__part = part;
-    this._$parent = parent;
-    this.__attributeIndex = attributeIndex;
-  }
-  _$resolve(part, props) {
-    return this.update(part, props);
-  }
-  update(_part, props) {
-    return this.render(...props);
-  }
-}
-/**
- * @license
- * Copyright 2017 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */
-const HTML_RESULT = 1;
-class UnsafeHTMLDirective extends Directive {
-  constructor(partInfo) {
-    super(partInfo);
-    this._value = nothing;
-    if (partInfo.type !== PartType.CHILD) {
-      throw new Error(`${this.constructor.directiveName}() can only be used in child bindings`);
-    }
-  }
-  render(value) {
-    if (value === nothing || value == null) {
-      this._templateResult = void 0;
-      return this._value = value;
-    }
-    if (value === noChange) {
-      return value;
-    }
-    if (typeof value != "string") {
-      throw new Error(`${this.constructor.directiveName}() called with a non-string value`);
-    }
-    if (value === this._value) {
-      return this._templateResult;
-    }
-    this._value = value;
-    const strings = [value];
-    strings.raw = strings;
-    return this._templateResult = {
-      ["_$litType$"]: this.constructor.resultType,
-      strings,
-      values: []
-    };
-  }
-}
-UnsafeHTMLDirective.directiveName = "unsafeHTML";
-UnsafeHTMLDirective.resultType = HTML_RESULT;
-const unsafeHTML = directive(UnsafeHTMLDirective);
-class SDropzoneComponentInterface extends SInterface {
-  static get _definition() {
-    return {
-      maxFiles: {
-        type: "Number",
-        description: "Specify the maximum files that can be droped on the dropzone at once",
-        default: 1
-      },
-      maxSize: {
-        type: "Number",
-        description: "Specify the maximum file size accepted by the dropzone"
-      },
-      files: {
-        type: {
-          type: "String[]",
-          splitChars: [",", " "]
-        },
-        description: 'Specify some initial file(s) to be used and displayed in the UI. MUST contain at least a "src" attribute by file passed'
-      },
-      accept: {
-        type: {
-          type: "String[]",
-          splitChars: [" ", ","]
-        },
-        description: 'Specify which file types are accepted. Exactly the same as the "accept" attribute of the input[type="file"]'
-      },
-      input: {
-        type: "Boolean",
-        description: 'Specify if you want an input[type="file"] or not',
-        default: true
-      },
-      name: {
-        type: "String",
-        description: 'Specify a name for the input[type="file"] input that will be created if you set the "input" property to true',
-        default: "files"
-      },
-      upload: {
-        type: "Boolean",
-        description: "Specify if you want the droped file(s) to be uploaded or not",
-        default: false
-      },
-      uploadUrl: {
-        type: "String",
-        description: "Specify the url where to upload the file(s)",
-        default: "/upload"
-      },
-      errorTimeout: {
-        type: "Number",
-        description: "Specify how many ms the error class is applied on the dropzone when something goes wrong",
-        default: 1e3
-      },
-      helpIcon: {
-        type: "String",
-        description: 'Specify the html to be used for the "help" icon',
-        default: '<i class="s-icon s-icon--help"></i>'
-      },
-      dropFileIcon: {
-        type: "String",
-        description: 'Specify the html to be used for the "drop" icon when no file have been droped',
-        default: '<i class="s-icon s-icon--drop-file"></i>'
-      },
-      i18n: {
-        type: "Object",
-        description: "Specify some words/sentences to be translated",
-        default: {
-          clear: "Clear",
-          clickOrDrag: "Click or drag file(s) here..."
-        }
-      }
-    };
-  }
-}
-const __css$3 = ".s-dropzone {\n    position: relative;\n    min-width: 100px;\n    display: flex;\n    justify-content: stretch;\n    align-items: stretch;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n            user-select: none;\n}\n\n    .s-dropzone .s-dropzone__root {\n        flex-grow: 1;\n        display: flex;\n    }\n\n    .s-dropzone .s-dropzone__drop {\n        position: relative;\n        flex-grow: 1;\n        display: flex;\n        flex-direction: column;\n        gap: calc(var(--s-theme-margin-default, 1rem) * 0.75);\n        align-items: center;\n        justify-content: center;\n    }\n\n    .s-dropzone .s-dropzone__files {\n        flex-grow: 1;\n        display: flex;\n        align-items: center;\n        justify-content: center;\n    }\n\n    .s-dropzone .s-dropzone__file {\n        flex-grow: 1;\n        width: 100%;\n        height: 100%;\n    }\n\n    .s-dropzone .s-dropzone__help {\n        position: absolute;\n        top: calc(var(--s-theme-margin-default, 1rem) * 0.375);\n        right: calc(var(--s-theme-margin-default, 1rem) * 0.375);\n    }\n\n@-webkit-keyframes s-dropzone-file-drop {\n    0% {\n        transform: scale(1);\n    }\n    30% {\n        transform: scale(0.96);\n    }\n    90% {\n        transform: scale(1.02);\n    }\n    100% {\n        transform: scale(1);\n    }\n}\n\n@keyframes s-dropzone-file-drop {\n    0% {\n        transform: scale(1);\n    }\n    30% {\n        transform: scale(0.96);\n    }\n    90% {\n        transform: scale(1.02);\n    }\n    100% {\n        transform: scale(1);\n    }\n}\n\n.s-dropzone {\n    aspect-ratio: 16/9;\n}\n\n.s-lod--2 .s-dropzone {\n    border: solid 1px hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-border-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-border-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-border-a, 1));transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995) !important;border-radius: calc(5px * var(--s-scale, 1) * var(--s-scale-global, 1));\n}\n\n.s-lod--1 .s-dropzone {\n    background: hsla(calc(var(--s-theme-color-base-h, 0) + var(--s-theme-color-base-surface-spin ,0)),calc((var(--s-theme-color-base-s, 0) + var(--s-theme-color-base-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-base-l, 0) + var(--s-theme-color-base-surface-lightness-offset, 0)) * 1%),var(--s-theme-color-base-surface-a, 1));\n}\n\n.s-lod--1 .s-dropzone:hover, .s-lod--1 .s-dropzone--over {\n        background: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-background-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-background-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-background-a, 1));\n}\n\n.s-dropzone:hover .s-dropzone__drop i, .s-dropzone--over .s-dropzone__drop i {\n                opacity: 0.6 !important;\n            }\n\n.s-lod--1 .s-dropzone--files {\n        background: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),var(--s-theme-color-accent-a, 1)) !important;\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-foreground-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-foreground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-foreground-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-foreground-a, 1));\n}\n\n.s-lod--2 .s-dropzone--error {\n        border: solid 1px hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-border-spin ,0)),calc((var(--s-theme-color-error-s, 0) + var(--s-theme-color-error-border-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-error-l, 0) + var(--s-theme-color-error-border-lightness-offset, 0)) * 1%),var(--s-theme-color-error-border-a, 1));\n}\n\n.s-lod--1 .s-dropzone--error {\n        background: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0)) * 1%),calc((var(--s-theme-color-error-l, 0)) * 1%),var(--s-theme-color-error-a, 1));\n        color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-foreground-spin ,0)),calc((var(--s-theme-color-error-s, 0) + var(--s-theme-color-error-foreground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-error-l, 0) + var(--s-theme-color-error-foreground-lightness-offset, 0)) * 1%),var(--s-theme-color-error-foreground-a, 1));\n}\n\n.s-lod--1 .s-dropzone--upload {\n        background: hsla(calc(var(--s-theme-color-complementary-h, 0) + var(--s-theme-color-complementary-spin ,0)),calc((var(--s-theme-color-complementary-s, 0)) * 1%),calc((var(--s-theme-color-complementary-l, 0)) * 1%),var(--s-theme-color-complementary-a, 1)) !important;\n        color: hsla(calc(var(--s-theme-color-complementary-h, 0) + var(--s-theme-color-complementary-foreground-spin ,0)),calc((var(--s-theme-color-complementary-s, 0) + var(--s-theme-color-complementary-foreground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-complementary-l, 0) + var(--s-theme-color-complementary-foreground-lightness-offset, 0)) * 1%),var(--s-theme-color-complementary-foreground-a, 1));\n}\n\n.s-dropzone--upload:after {\n            transform: scale(1) translate(-50%, -50%) !important;\n        }\n\n.s-dropzone--upload:before {\n            opacity: 1 !important;\n        }\n\n.s-dropzone:before {\n        display: block;\n        width: 100%;\n        height: 100%;\n        position: absolute;\n        content: '';\n        top: 0;\n        left: 0;\n        pointer-events: none;\n        opacity: 0;\n        z-index: 1;\n    }\n\n.s-lod--2 .s-dropzone:before {transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995) !important;\n}\n\n.s-lod--1 .s-dropzone:before {\n        background: hsla(calc(var(--s-theme-color-complementary-h, 0) + var(--s-theme-color-complementary-spin ,0)),calc((var(--s-theme-color-complementary-s, 0)) * 1%),calc((var(--s-theme-color-complementary-l, 0)) * 1%),0.3);\n}\n\n.s-dropzone:after {\n        display: flex;\n        align-items: center;\n        justify-content: center;\n        width: 4em;\n        height: 4em;\n        padding: calc(calc(var(--s-theme-padding-default, 1rem) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 1.5);\n        content: attr(upload-percent);\n        position: absolute;\n        top: 50%;\n        left: 50%;\n        pointer-events: none;\n        transform: translate(-50%, -50%) scale(0);\n        z-index: 2;\n    }\n\n.s-lod--2 .s-dropzone:after {\n        border-radius: 999px;transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995) !important;\n}\n\n.s-lod--1 .s-dropzone:after {\n        background: hsla(calc(var(--s-theme-color-complementary-h, 0) + var(--s-theme-color-complementary-spin ,0)),calc((var(--s-theme-color-complementary-s, 0)) * 1%),calc((var(--s-theme-color-complementary-l, 0)) * 1%),var(--s-theme-color-complementary-a, 1));\n}\n\n.s-dropzone .s-dropzone__drop i {\n            opacity: 0.3;\n        }\n\n.s-lod--1 .s-dropzone .s-dropzone__drop i {\n            font-size: calc(var(--s-theme-font-size-default, 16px) * calc(var(--s-theme-font-size-70, 2.5) * var(--s-scale, 1) * var(--s-scale-global, 1)));\n}\n\n.s-lod--1 .s-dropzone .s-dropzone__text {\n        color: hsla(calc(var(--s-theme-color-base-h, 0) + var(--s-theme-color-base-text-spin ,0)),calc((var(--s-theme-color-base-s, 0) + var(--s-theme-color-base-text-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-base-l, 0) + var(--s-theme-color-base-text-lightness-offset, 0)) * 1%),0.5);\n}\n\n.s-dropzone .s-dropzone__droped {\n        position: relative;\n        width: 100%;\n        height: 100%;\n    }\n\n.s-dropzone .s-dropzone__clear-btn {\n        position: absolute;\n        bottom: calc(var(--s-theme-margin-default, 1rem) * 0.75);\n        right: calc(var(--s-theme-margin-default, 1rem) * 0.75);\n    }\n\n.s-dropzone .s-dropzone__files {\n        width: 100%;\n        height: 100%;\n        overflow: hidden;\n    }\n\n.s-lod--2 .s-dropzone .s-dropzone__files {border-radius: calc(5px * var(--s-scale, 1) * var(--s-scale-global, 1));\n}\n\n.s-lod--3 .s-dropzone .s-dropzone__file {\n        -webkit-animation: 0.3s ease-in-out s-dropzone-file-drop;\n                animation: 0.3s ease-in-out s-dropzone-file-drop;\n}\n\n.s-dropzone .s-dropzone__file--image img {\n                width: 100%;\n                height: 100%;\n                -o-object-fit: cover;\n                   object-fit: cover;\n            }\n\n.s-dropzone .s-dropzone__help i {\n            opacity: 0.5;\n        }\n\n.s-lod--2 .s-dropzone .s-dropzone__help i {transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995) !important;\n}\n\n.s-dropzone .s-dropzone__help:hover i {\n                opacity: 1;\n            }\n";
-function define$3(props = {}, tagName = "s-dropzone") {
-  SDropzoneComponent.define(tagName, SDropzoneComponent, props);
-}
-var __awaiter$3 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
-  function adopt(value) {
-    return value instanceof P ? value : new P(function(resolve) {
-      resolve(value);
-    });
-  }
-  return new (P || (P = Promise))(function(resolve, reject) {
-    function fulfilled(value) {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-    function rejected(value) {
-      try {
-        step(generator["throw"](value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-    function step(result2) {
-      result2.done ? resolve(result2.value) : adopt(result2.value).then(fulfilled, rejected);
-    }
-    step((generator = generator.apply(thisArg, _arguments || [])).next());
-  });
-};
-class SDropzoneComponent extends SLitComponent {
-  constructor() {
-    super(__deepMerge({
-      name: "s-dropzone",
-      interface: SDropzoneComponentInterface
-    }));
-    this.state = {
-      files: [],
-      uploadPercent: 0,
-      uploadTotalPercent: 0
-    };
-  }
-  static get properties() {
-    return SLitComponent.propertiesFromInterface({}, SDropzoneComponentInterface);
-  }
-  static get styles() {
-    return css`
-            ${unsafeCSS(__css$3)}
-        `;
-  }
-  firstUpdated() {
-    return __awaiter$3(this, void 0, void 0, function* () {
-      this._$input = this.querySelector('input[type="file"]');
-      if (this.props.files) {
-        for (let url of this.props.files) {
-          this.state.files.push({
-            type: "url",
-            src: url
-          });
-        }
-        this.utils.dispatchEvent("change", {
-          detail: [...this.state.files]
-        });
-        this.requestUpdate();
-      }
-    });
-  }
-  clear(dispatchEvent2 = true) {
-    __resetFileInput(this._$input);
-    this.state.files = [];
-    this.classList.remove(this.utils.cls("--over"));
-    this.classList.remove(this.utils.cls("--files"));
-    if (dispatchEvent2) {
-      this.utils.dispatchEvent("clear", {
-        detail: [...this.state.files]
-      });
-    }
-  }
-  _uploadFile(file) {
-    return new SPromise(({ resolve, reject, emit }) => __awaiter$3(this, void 0, void 0, function* () {
-      const formData = new FormData();
-      formData.append("file", file);
-      const request = new XMLHttpRequest();
-      request.open("POST", this.props.uploadUrl);
-      this.state.status = "upload";
-      request.upload.addEventListener("progress", function(e) {
-        emit("progress", {
-          value: e.loaded / e.total * 100
-        });
-      });
-      request.addEventListener("load", (e) => {
-        const data = JSON.parse(request.response);
-        resolve(data);
-        this.utils.dispatchEvent("file", {
-          detail: data
-        });
-        this.state.status = "idle";
-      });
-      request.send(formData);
-    }));
-  }
-  _onDragover(e) {
-    e.preventDefault();
-    this.classList.add(this.utils.cls("--over"));
-  }
-  _onDragleave(e) {
-    e.preventDefault();
-    this.classList.remove(this.utils.cls("--over"));
-  }
-  _onDrop(e) {
-    e.preventDefault();
-    this.clear(false);
-    const files = [];
-    if (e.dataTransfer.items) {
-      [...e.dataTransfer.items].forEach((item, i) => {
-        if (item.kind === "file") {
-          files.push(item.getAsFile());
-        }
-      });
-    } else {
-      [...e.dataTransfer.files].forEach((file, i) => {
-        files.push(file);
-      });
-    }
-    this._handleDropedFiles(files, e.dataTransfer.files);
-  }
-  _onInputChange(e) {
-    this._handleDropedFiles([...e.currentTarget.files], e.currentTarget.files);
-  }
-  _handleUpload(files) {
-    return new Promise((resolve, reject) => __awaiter$3(this, void 0, void 0, function* () {
-      const uploadedFilesResults = [];
-      this.state.uploadTotalPercent = 0;
-      this.classList.add(this.utils.cls("--upload"));
-      for (let [idx, file] of files.entries()) {
-        const uploadResultPromise = this._uploadFile(file);
-        uploadResultPromise.on("progress", (data) => {
-          this.state.uploadPercent = Math.round(100 / (files.length * 100) * (idx * 100 + data.value));
-          this.style.setProperty("--s-dropzone-upload-percent", `${this.state.uploadPercent}%`);
-          this.setAttribute("upload-percent", `${this.state.uploadPercent}%`);
-        });
-        const uploadResult = yield uploadResultPromise;
-        uploadedFilesResults.push(uploadResult);
-      }
-      this.classList.remove(this.utils.cls("--upload"));
-      resolve(uploadedFilesResults);
-    }));
-  }
-  _handleDropedFiles(files, filesList) {
-    return __awaiter$3(this, void 0, void 0, function* () {
-      this.classList.remove(this.utils.cls("--over"));
-      this.classList.add(this.utils.cls("--loading"));
-      yield new Promise((resolve, reject) => {
-        var _a3, _b2;
-        let processedFilesCount = 0;
-        const fileProcessed = () => {
-          processedFilesCount++;
-          if (processedFilesCount >= this.state.files.length) {
-            resolve(null);
-          }
-        };
-        for (let [idx, file] of files.entries()) {
-          if (idx >= this.props.maxFiles) {
-            break;
-          }
-          if (this.props.accept && !__isFileAccepted(file, this.props.accept)) {
-            fileProcessed();
-            continue;
-          }
-          if ((_b2 = (_a3 = file.type) === null || _a3 === void 0 ? void 0 : _a3.match) === null || _b2 === void 0 ? void 0 : _b2.call(_a3, /^image\//)) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-              const fileData = e.target.result;
-              const fileName = file.name;
-              if (fileData.startsWith("data:image")) {
-                const image = new Image();
-                image.src = fileData;
-                image.onload = () => {
-                  this.state.files.push({
-                    type: file.type,
-                    src: image.src,
-                    alt: fileName
-                  });
-                  fileProcessed();
-                  this.requestUpdate();
-                };
-              }
-            };
-            reader.readAsDataURL(file);
-          } else {
-            this.state.files.push({
-              type: file.type
-            });
-            fileProcessed();
-          }
-        }
-      });
-      this._handleUpload(files);
-      if (this.state.files.length) {
-        this._$input.files = filesList;
-        this.classList.add(this.utils.cls("--files"));
-        this.utils.dispatchEvent("change", {
-          detail: [...this.state.files]
-        });
-      } else {
-        this.classList.add(this.utils.cls("--error"));
-        setTimeout(() => {
-          this.classList.remove(this.utils.cls("--error"));
-        }, this.props.errorTimeout);
-        this.utils.dispatchEvent("error", {
-          detail: [...this.state.files]
-        });
-      }
-    });
-  }
-  render() {
-    var _a3, _b2, _c2;
-    return html`
-            <div
-                class="${this.utils.cls("__root")}"
-                @dragover=${(e) => this._onDragover(e)}
-                @dragleave=${(e) => this._onDragleave(e)}
-                @drop=${(e) => this._onDrop(e)}
-            >
-                ${!this.state.files.length ? html`
-                          <label
-                              for="${this.props.name}"
-                              class="${this.utils.cls("__drop")}"
-                          >
-                              ${unsafeHTML(this.props.dropFileIcon)}
-                              <p class="${this.utils.cls("__text")}">
-                                  ${this.props.i18n.clickOrDrag}
-                              </p>
-                          </label>
-                      ` : html`
-                          <div class="${this.utils.cls("__droped")}">
-                              <div class="${this.utils.cls("__files")}">
-                                  ${this.state.files.map((file) => {
-      var _a4, _b3, _c3, _d2, _e;
-      return html`
-                                          <div
-                                              class="${this.utils.cls(`__file __file--image __file--${(_c3 = (_b3 = (_a4 = file.type) === null || _a4 === void 0 ? void 0 : _a4.replace) === null || _b3 === void 0 ? void 0 : _b3.call(_a4, "/", "-")) !== null && _c3 !== void 0 ? _c3 : "unknown"}`)}"
-                                          >
-                                              ${((_e = (_d2 = file.type) === null || _d2 === void 0 ? void 0 : _d2.match) === null || _e === void 0 ? void 0 : _e.call(_d2, /^image\//)) ? html`
-                                                        <img
-                                                            src="${file.src}"
-                                                            alt="${file.alt}"
-                                                        />
-                                                    ` : file.type === "url" && __isImageUrl(file.src) ? html`
-                                                        <img
-                                                            src="${file.src}"
-                                                        />
-                                                    ` : ``}
-                                          </div>
-                                      `;
-    })}
-                              </div>
-                              ${this.state.status !== "upload" ? html`
-                                        <button
-                                            class="${this.utils.cls("__clear-btn", "s-btn s-color s-color--error")}"
-                                            @click=${() => this.clear()}
-                                        >
-                                            ${this.props.i18n.clear}
-                                        </button>
-                                    ` : ""}
-                          </div>
-                      `}
-                ${this.props.input ? html`
-                          <input
-                              @change=${(e) => this._onInputChange(e)}
-                              type="file"
-                              id="${this.props.name}"
-                              name="${this.props.name}[]"
-                              hidden
-                              accept=${(_a3 = this.props.accept) !== null && _a3 !== void 0 ? _a3 : "*"}
-                              ?multiple=${this.props.maxFiles > 1}
-                          />
-                      ` : ""}
-                ${((_b2 = this.props.accept) !== null && _b2 !== void 0 ? _b2 : this.props.help) ? html`
-                          <div
-                              class="${this.utils.cls("__help", "s-tooltip-container")}"
-                          >
-                              ${unsafeHTML(this.props.helpIcon)}
-                              <div
-                                  class="${this.utils.cls("__tooltip", "s-tooltip:left s-color s-color--accent")}"
-                              >
-                                  ${(_c2 = this.props.help) !== null && _c2 !== void 0 ? _c2 : unsafeHTML(this.props.accept.join("<br />"))}
-                                  <div></div>
-                              </div>
-                          </div>
-                      ` : ""}
-            </div>
-        `;
-  }
-}
-class SSpecsEditorComponentInterface extends SInterface {
-  static get _definition() {
-    return {
-      id: {
-        type: "String",
-        title: "Id",
-        description: "Specify an id for your specs editor to be able to save his state"
-      },
-      specs: {
-        type: "Object",
-        title: "Specs",
-        description: "Specify the SSpecs resulting json to use for the editor",
-        required: true
-      },
-      frontspec: {
-        type: "Object",
-        title: "Frontspec",
-        description: "Specify the frontspec json to make use of it for things like media, etc..."
-      },
-      media: {
-        type: "String",
-        title: "Specs",
-        description: "Specify the media on which the specs editor is currently working"
-      },
-      icons: {
-        type: "Object",
-        title: "Icons",
-        description: "Specify some icons html used across the interface",
-        default: {
-          clear: '<i class="fa-solid fa-xmark"></i>',
-          add: '<i class="fa-solid fa-plus"></i>',
-          expand: '<i class="fa-solid fa-plus"></i>',
-          remove: '<i class="fa-solid fa-minus"></i>',
-          collapse: '<i class="fa-solid fa-minus"></i>',
-          mobile: '<i class="fa-solid fa-mobile-screen-button"></i>',
-          tablet: '<i class="fa-solid fa-tablet-screen-button"></i>',
-          desktop: '<i class="fa-solid fa-desktop"></i>',
-          wide: '<i class="fa-solid fa-arrows-left-right"></i>'
-        }
-      }
-    };
-  }
-}
-const __css$2 = ".s-specs-editor {\n    -webkit-user-select: none;\n       -moz-user-select: none;\n            user-select: none;\n}\n\n    .s-specs-editor .s-specs-editor__dropzone {\n        padding-inline: calc(calc(var(--s-theme-padding-default, 1rem) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 2.25);\n    }\n\n    .s-specs-editor .s-tooltip-container {\n        float: right;\n    }\n\n    .s-specs-editor .s-specs-editor__actions {\n        padding: calc(calc(var(--s-theme-padding-default, 1rem) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 0.375);\n    }\n\n    .s-specs-editor .s-specs-editor__action {\n        display: block;\n        aspect-ratio: 1;\n        width: 2em;\n        text-align: center;\n    }\n\n    .s-lod--2 .s-specs-editor .s-specs-editor__action {transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995) !important;border-radius: calc(5px * var(--s-scale, 1) * var(--s-scale-global, 1));\n}\n\n    .s-lod--1 .s-specs-editor .s-specs-editor__action {\n        background: hsla(calc(var(--s-theme-color-current-h, 0) + var(--s-theme-color-current-spin ,0)),calc((var(--s-theme-color-current-s, 0)) * 1%),calc((var(--s-theme-color-current-l, 0)) * 1%),0);\n}\n\n    .s-lod--1 .s-specs-editor .s-specs-editor__action:hover {\n            background: hsla(calc(var(--s-theme-color-current-h, 0) + var(--s-theme-color-current-spin ,0)),calc((var(--s-theme-color-current-s, 0)) * 1%),calc((var(--s-theme-color-current-l, 0) + -10) * 1%),1);\n}\n\n    .s-specs-editor .s-specs-editor__action i {\n            opacity: 1;\n        }\n\n    .s-specs-editor .s-specs-editor__prop--checkbox {\n        -webkit-margin-before: calc(var(--s-theme-margin-default, 1rem) * 1.5);\n                margin-block-start: calc(var(--s-theme-margin-default, 1rem) * 1.5);\n    }\n\n    .s-specs-editor .s-specs-editor__prop--checkbox .s-specs-editor__label > span {\n                flex-grow: 1;\n            }\n\n    .s-lod--1 .s-specs-editor .s-specs-editor__repeatable {\n        background: hsla(calc(var(--s-theme-color-base-h, 0) + var(--s-theme-color-base-background-spin ,0)),calc((var(--s-theme-color-base-s, 0) + var(--s-theme-color-base-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-base-l, 0) + var(--s-theme-color-base-background-lightness-offset, 0) + -5) * 1%),1);\n}\n\n    .s-specs-editor .s-specs-editor__repeatable-title {\n        padding: calc(calc(var(--s-theme-padding-default, 1rem) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 1.5) calc(calc(var(--s-theme-padding-default, 1rem) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 2.25);\n        cursor: pointer;\n    }\n\n    .s-lod--3 .s-specs-editor .s-specs-editor__repeatable-title {box-shadow: 0px 1.4px 1.4px rgba(0, 0, 0, 0.011),\n  0px 3.3px 3.5px rgba(0, 0, 0, 0.016),\n  0px 6.1px 6.5px rgba(0, 0, 0, 0.02),\n  0px 10.9px 11.6px rgba(0, 0, 0, 0.024),\n  0px 20.5px 21.7px rgba(0, 0, 0, 0.029),\n  0px 49px 52px rgba(0, 0, 0, 0.04);\n}\n\n    .s-lod--2 .s-specs-editor .s-specs-editor__repeatable-title {\n        background-image: linear-gradient(\n            -25deg,\n            hsla(calc(var(--s-theme-color-base-h, 0) + var(--s-theme-color-base-background-spin ,0)),calc((var(--s-theme-color-base-s, 0) + var(--s-theme-color-base-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-base-l, 0) + var(--s-theme-color-base-background-lightness-offset, 0)) * 1%),var(--s-theme-color-base-background-a, 1)),\n            hsla(calc(var(--s-theme-color-base-h, 0) + var(--s-theme-color-base-background-spin ,0)),calc((var(--s-theme-color-base-s, 0) + var(--s-theme-color-base-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-base-l, 0) + var(--s-theme-color-base-background-lightness-offset, 0) + 5) * 1%),1)\n        );\n}\n\n    .s-lod--1 .s-specs-editor .s-specs-editor__repeatable-title {\n        background: hsla(calc(var(--s-theme-color-base-h, 0) + var(--s-theme-color-base-surface-spin ,0)),calc((var(--s-theme-color-base-s, 0) + var(--s-theme-color-base-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-base-l, 0) + var(--s-theme-color-base-surface-lightness-offset, 0)) * 1%),var(--s-theme-color-base-surface-a, 1));\n}\n\n    .s-lod--2 .s-specs-editor .s-specs-editor__repeatable-title.active, .s-lod--2 .s-specs-editor .s-specs-editor__repeatable-title:hover {\n            background-image: linear-gradient(\n                -45deg,\n                hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),var(--s-theme-color-accent-a, 1)),\n                hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + -3) * 1%),1)\n            );\n}\n\n    .s-lod--2 .s-specs-editor .s-specs-editor__repeatable-title.active {\n            background-image: linear-gradient(\n                45deg,\n                hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),var(--s-theme-color-accent-a, 1)),\n                hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + -3) * 1%),1)\n            );\n}\n\n    .s-specs-editor .s-specs-editor__repeatable-title .s-specs-editor__repeatable-remove {\n            float: right;\n            display: none;\n            -webkit-margin-end: calc(var(--s-theme-margin-default, 1rem) * 0.375);\n                    margin-inline-end: calc(var(--s-theme-margin-default, 1rem) * 0.375);\n        }\n\n    .s-specs-editor .s-specs-editor__repeatable-title:hover .s-specs-editor__repeatable-remove {\n            display: block;\n        }\n\n    .s-specs-editor .s-specs-editor__repeatable-title:hover .s-specs-editor__repeatable-remove i {\n                -webkit-margin-start: calc(var(--s-theme-margin-default, 1rem) * 0.375);\n                        margin-inline-start: calc(var(--s-theme-margin-default, 1rem) * 0.375);\n            }\n\n    .s-specs-editor .s-specs-editor__repeatable-title i {\n            float: right;\n        }\n\n    .s-specs-editor .s-specs-editor__repeatable-item {\n        display: none;\n    }\n\n    .s-specs-editor .s-specs-editor__repeatable-item.active {\n        display: block;\n    }\n\n    .s-specs-editor .s-specs-editor__repeatable-item-actions {\n        text-align: end;\n        padding: calc(calc(var(--s-theme-padding-default, 1rem) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 1.5) calc(calc(var(--s-theme-padding-default, 1rem) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 2.25);\n    }\n\n    .s-lod--1 .s-specs-editor .s-specs-editor__repeatable-item-actions {\n        background: hsla(calc(var(--s-theme-color-base-h, 0) + var(--s-theme-color-base-background-spin ,0)),calc((var(--s-theme-color-base-s, 0) + var(--s-theme-color-base-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-base-l, 0) + var(--s-theme-color-base-background-lightness-offset, 0) + -5) * 1%),1);\n}\n\n    .s-specs-editor .s-specs-editor__repeatable-item-props {\n        padding: calc(calc(var(--s-theme-padding-default, 1rem) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 1.5) 0;\n    }\n\n    .s-specs-editor .s-specs-editor__repeatable-actions {\n        padding: calc(calc(var(--s-theme-padding-default, 1rem) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 1.5) calc(calc(var(--s-theme-padding-default, 1rem) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 1.5);\n        text-align: end;\n    }\n\n    .s-specs-editor .s-specs-editor__help-icon {\n        -webkit-margin-start: calc(var(--s-theme-margin-default, 1rem) * 0.375);\n                margin-inline-start: calc(var(--s-theme-margin-default, 1rem) * 0.375);\n    }\n\n    .s-specs-editor .s-specs-editor__help-icon .s-tooltip {\n            min-width: 200px;\n        }\n\n    .s-specs-editor .s-specs-editor__media-icons {\n        float: right;\n    }\n\n    .s-specs-editor .s-specs-editor__media-icon {\n        padding-inline: calc(calc(var(--s-theme-padding-default, 1rem) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 0.375);\n    }\n\n    .s-lod--1 .s-specs-editor .s-specs-editor__media-icon.active {\n            color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n}\n\n    .s-specs-editor .s-specs-editor__media-icon.current i {\n            opacity: 1;\n        }\n";
-function define$2(props = {}, tagName = "s-specs-editor") {
-  SSpecsEditorComponent.define(tagName, SSpecsEditorComponent, props);
-}
-function __imageWidget(component) {
-  return {
-    html(props, values) {
-      return html`
-                <div class="${component.utils.cls("__dropzone")}">
-                    <s-dropzone
-                        accept="image/*"
-                        files="${values.url}"
-                        upload
-                    ></s-dropzone>
-                </div>
-            `;
-    },
-    events: {
-      "s-dropzone.clear": (e) => {
-        const $url = e.$scope.querySelector(`input[name="url"]`);
-        if ($url) {
-          $url.removeAttribute("value");
-          $url.value = "";
-          $url.dispatchEvent(new CustomEvent("change", {
-            bubbles: true
-          }));
-        }
-      },
-      "s-dropzone.file": (e) => {
-        const $url = e.$scope.querySelector(`input[name="url"]`);
-        if ($url) {
-          $url.value = e.detail[0].url;
-          $url.dispatchEvent(new CustomEvent("change", {
-            bubbles: true
-          }));
-        }
-      }
-    }
-  };
-}
-define$4();
-define$3();
-class SSpecsEditorComponent extends SLitComponent {
-  constructor() {
-    super(__deepMerge({
-      name: "s-specs-editor",
-      interface: SSpecsEditorComponentInterface
-    }));
-    this._widgets = {};
-  }
-  static get properties() {
-    return SLitComponent.propertiesFromInterface({}, SSpecsEditorComponentInterface);
-  }
-  static get styles() {
-    return css`
-            ${unsafeCSS(__css$2)}
-        `;
-  }
-  updated(changedProperties) {
-    if (changedProperties.has("media")) {
-      this.requestUpdate();
-    }
-  }
-  mount() {
-  }
-  isPathResponsive(path2) {
-    const currentPath = [];
-    for (let i = 0; i < path2.length; i++) {
-      const part = path2[i];
-      currentPath.push(part);
-      const propObj = get(this.props.specs, currentPath.join("."));
-      if (propObj.responsive) {
-        return true;
-      }
-    }
-    return false;
-  }
-  getValuePathFromPath(path2, settings) {
-    var _a3, _b2, _c2;
-    const finalSettings = Object.assign({ media: null, force: false }, settings !== null && settings !== void 0 ? settings : {});
-    const currentPath = [], noneMediaValuePath = [], mediaValuePath = [], defaultMediaValuePath = [];
-    for (let i = 0; i < path2.length; i++) {
-      const part = path2[i];
-      if (part !== "props") {
-        noneMediaValuePath.push(part);
-        mediaValuePath.push(part);
-        defaultMediaValuePath.push(part);
-      }
-      currentPath.push(part);
-      const propObj = get(this.props.specs, currentPath.join("."));
-      if (propObj.responsive) {
-        if (finalSettings.media) {
-          mediaValuePath.push("media");
-          mediaValuePath.push(finalSettings.media);
-        }
-        defaultMediaValuePath.push("media");
-        defaultMediaValuePath.push((_c2 = (_b2 = (_a3 = this.props.frontspec) === null || _a3 === void 0 ? void 0 : _a3.media) === null || _b2 === void 0 ? void 0 : _b2.defaultMedia) !== null && _c2 !== void 0 ? _c2 : "desktop");
-      }
-    }
-    if (finalSettings.media) {
-      const mediaScopedValue = get(this.props.specs.values, mediaValuePath.join("."));
-      if (finalSettings.force || mediaScopedValue !== void 0) {
-        return mediaValuePath;
-      }
-    } else {
-      const noneMediaValue = get(this.props.specs.values, noneMediaValuePath.join("."));
-      if (finalSettings.force || noneMediaValue !== void 0) {
-        return noneMediaValuePath;
-      }
-    }
-  }
-  getValueFromPath(path2, settings) {
-    if (this.isPathResponsive(path2)) {
-      const finalSettings = Object.assign({ media: this.props.media }, settings !== null && settings !== void 0 ? settings : {});
-      const valuePath = this.getValuePathFromPath(path2, finalSettings);
-      if (valuePath !== void 0) {
-        return get(this.props.specs.values, valuePath.join("."));
-      }
-    } else {
-      const valuePath = this.getValuePathFromPath(path2, settings);
-      if (valuePath !== void 0) {
-        return get(this.props.specs.values, valuePath.join("."));
-      }
-    }
-  }
-  clearValueFromPath(path2, settings) {
-    var _a3;
-    if (this.isPathResponsive(path2)) {
-      const valuePath = this.getValuePathFromPath(path2, Object.assign({ media: this.props.media }, settings !== null && settings !== void 0 ? settings : {}));
-      del((_a3 = this.props.specs.values) !== null && _a3 !== void 0 ? _a3 : {}, valuePath.join("."));
-    } else {
-      const valuePath = path2.filter((p) => p !== "props").join(".");
-      del(this.props.specs.values, valuePath);
-    }
-    this._update(path2);
-    this.requestUpdate();
-  }
-  setValueFromPath(path2, value, settings) {
-    var _a3;
-    if (this.isPathResponsive(path2)) {
-      const valuePath = this.getValuePathFromPath(path2, Object.assign({ media: this.props.media, force: true }, settings !== null && settings !== void 0 ? settings : {}));
-      __set((_a3 = this.props.specs.values) !== null && _a3 !== void 0 ? _a3 : {}, valuePath.join("."), value);
-    } else {
-      const valuePath = path2.filter((p) => p !== "props").join(".");
-      __set(this.props.specs.values, valuePath, value);
-    }
-    this.requestUpdate();
-  }
-  getWidget(type) {
-    if (!SSpecsEditorComponent.widgetMap[type]) {
-      return;
-    }
-    if (!this._widgets[type]) {
-      this._widgets[type] = SSpecsEditorComponent.widgetMap[type](this);
-    }
-    if (!this._widgets[type]._eventsInited && this._widgets[type].events) {
-      for (let [event, cb] of Object.entries(this._widgets[type].events)) {
-        this.addEventListener(event, (e) => {
-          e.$scope = __querySelectorUp(e.target, ($elm) => {
-            return $elm.classList.contains(this.utils.cls("__child"));
-          });
-          this._widgets[type].events[event](e);
-        });
-      }
-      this._widgets[type]._eventsInited = true;
-    }
-    return this._widgets[type];
-  }
-  _update(path2, propSpecs = null, e = null) {
-    path2.filter((v) => v !== "props").join(".");
-    if (e) {
-      let finalValue = e.target.value;
-      if (e.currentTarget.type === "checkbox") {
-        finalValue = e.currentTarget.checked;
-      }
-      switch (e.target.tagName.toLowerCase()) {
-        default:
-          this.setValueFromPath(path2, finalValue);
-          break;
-      }
-    }
-    this.utils.dispatchEvent("update", {
-      detail: {
-        propsSpecs: Object.assign({}, this.props.specs),
-        values: Object.assign({}, this.props.specs.values)
-      }
-    });
-    this.requestUpdate();
-  }
-  _toggle(id) {
-    if (!this.state.actives[id]) {
-      this.state.actives[id] = true;
-    } else {
-      this.state.actives[id] = false;
-    }
-    this.requestUpdate();
-  }
-  _isActive(id) {
-    return this.state.actives[id];
-  }
-  _addItem(stack, specs) {
-    switch (specs.type.toLowerCase()) {
-      case "object{}":
-      default:
-        stack.push({});
-        break;
-    }
-    this.requestUpdate();
-  }
-  _removeItem(stack, item, specs) {
-    if (Array.isArray(stack)) {
-      stack.splice(stack.indexOf(item), 1);
-    }
-    this.requestUpdate();
-  }
-  _changeMedia(media) {
-    this.props.media = media;
-    this.utils.dispatchEvent("changeMedia", {
-      detail: media
-    });
-  }
-  _renderLabel(propObj, path2) {
-    var _a3, _b2, _c2;
-    return html`
-            <span>
-                ${propObj.description ? html`
-                          <span
-                              class="${this.utils.cls("__help-icon")} s-tooltip-container"
-                          >
-                              <i class="fa-solid fa-circle-question"></i>
-                              <div class="s-tooltip s-tooltip--left">
-                                  ${propObj.description}
-                              </div>
-                          </span>
-                      ` : ""}
-                ${(_a3 = propObj.title) !== null && _a3 !== void 0 ? _a3 : propObj.id}
-                ${((_c2 = (_b2 = this.props.frontspec) === null || _b2 === void 0 ? void 0 : _b2.media) === null || _c2 === void 0 ? void 0 : _c2.queries) && this.isPathResponsive(path2) ? html`
-                          <div class="${this.utils.cls("__media-icons")}">
-                              ${Object.keys(STheme.sortMedia(this.props.frontspec.media).queries).reverse().map((media) => {
-      const mediaValue = this.getValueFromPath(path2, {
-        media
-      });
-      return html`
-                                          <span
-                                              class="${this.utils.cls("__media-icon")} ${mediaValue !== void 0 && mediaValue !== null ? "active" : ""} ${this.props.media === media ? "current" : ""} s-tooltip-container"
-                                          >
-                                              <span
-                                                  @pointerup=${() => this._changeMedia(media)}
-                                              >
-                                                  ${unsafeHTML(this.props.icons[media])}
-                                              </span>
-                                              ${mediaValue !== void 0 ? html`
-                                                        <div
-                                                            class="s-tooltip s-tooltip--interactive s-color s-color--accent ${this.utils.cls("__actions")}"
-                                                        >
-                                                            <button
-                                                                class="${this.utils.cls("__action")}"
-                                                                @pointerup=${() => this.clearValueFromPath(path2, {
-        media
-      })}
-                                                            >
-                                                                ${unsafeHTML(this.props.icons.clear)}
-                                                            </button>
-                                                        </div>
-                                                    ` : ""}
-                                          </span>
-                                      `;
-    })}
-                          </div>
-                      ` : ""}
-            </span>
-        `;
-  }
-  _renderSelectElement(propObj, path2) {
-    var _a3, _b2, _c2;
-    const value = (_a3 = this.getValueFromPath(path2)) !== null && _a3 !== void 0 ? _a3 : propObj.default;
-    return html`
-            <div class="${this.utils.cls("__prop--select")}">
-                <label
-                    class="${this.utils.cls("__label", "s-label s-label--block")}"
-                >
-                    <select
-                        @change=${(e) => this._update(path2, propObj, e)}
-                        name="${path2.at(-1)}"
-                        class="${this.utils.cls("__select", "s-select")}"
-                        placeholder="${(_c2 = (_b2 = propObj.default) !== null && _b2 !== void 0 ? _b2 : propObj.title) !== null && _c2 !== void 0 ? _c2 : propObj.id}"
-                        path="${path2.join(".")}"
-                        .value="${value}"
-                        value="${value}"
-                    >
-                        ${propObj.options.map((option) => html`
-                                <option
-                                    .value="${option.value}"
-                                    value="${option.value}"
-                                    ?selected=${!value && option.value === null || option.value === String(value)}
-                                >
-                                    ${option.name}
-                                </option>
-                            `)}
-                    </select>
-
-                    ${this._renderLabel(propObj, path2)}
-                </label>
-            </div>
-        `;
-  }
-  _renderCheckboxElement(propObj, path2) {
-    var _a3;
-    const value = (_a3 = this.getValueFromPath(path2)) !== null && _a3 !== void 0 ? _a3 : propObj.default;
-    return html`
-            <div class="${this.utils.cls("__prop--checkbox")}">
-                <label class="${this.utils.cls("__label", "s-label")}">
-                    <input
-                        @change=${(e) => this._update(path2, propObj, e)}
-                        type="checkbox"
-                        name="${path2.at(-1)}"
-                        class="${this.utils.cls("__checkbox", "s-switch")}"
-                        path="${path2.join(".")}"
-                        ?checked=${value !== false && value !== null && value !== void 0}
-                    />
-
-                    ${this._renderLabel(propObj, path2)}
-                </label>
-            </div>
-        `;
-  }
-  _renderTextElement(propObj, path2) {
-    var _a3, _b2, _c2;
-    const value = (_a3 = this.getValueFromPath(path2)) !== null && _a3 !== void 0 ? _a3 : propObj.default;
-    return html`
-            <div class="${this.utils.cls("__prop--text")}">
-                <label
-                    class="${this.utils.cls("__label", "s-label s-label--block")}"
-                >
-                    <input
-                        @change=${(e) => this._update(path2, propObj, e)}
-                        type="text"
-                        name="${path2.at(-1)}"
-                        class="${this.utils.cls("__input", "s-input")}"
-                        placeholder="${(_c2 = (_b2 = propObj.default) !== null && _b2 !== void 0 ? _b2 : propObj.title) !== null && _c2 !== void 0 ? _c2 : propObj.id}"
-                        path="${path2.join(".")}"
-                        value="${value}"
-                    />
-                    ${this._renderLabel(propObj, path2)}
-                </label>
-            </div>
-        `;
-  }
-  _renderEditWidget(propObj, path2) {
-    var _a3;
-    const type = propObj.type.toLowerCase(), widget = this.getWidget(type);
-    if (!widget) {
-      return "";
-    }
-    return widget.html(propObj, (_a3 = this.getValueFromPath(path2)) !== null && _a3 !== void 0 ? _a3 : {});
-  }
-  _renderElement(propObj, path2) {
-    return html`
-            ${propObj.type.toLowerCase() === "text" ? this._renderTextElement(propObj, path2) : propObj.type.toLowerCase() === "select" ? this._renderSelectElement(propObj, path2) : propObj.type.toLowerCase() === "checkbox" ? this._renderCheckboxElement(propObj, path2) : ""}
-        `;
-  }
-  _renderElements(specs, path2 = [], forceNoRepeat = false) {
-    var _a3;
-    const _specs = specs;
-    if (!forceNoRepeat && _specs.type.match(/(\{\}|\[\])/)) {
-      const loopOn = (_a3 = this.getValueFromPath(path2)) !== null && _a3 !== void 0 ? _a3 : [];
-      return html`
-                <div class="${this.utils.cls("__repeatable")}">
-                    ${loopOn.map((v, i) => {
-        var _a4, _b2, _c2;
-        return html`
-                            <div
-                                tabindex="0"
-                                @pointerup=${() => this._toggle(`${path2.join(".")}-${i}`)}
-                                class="${this.utils.cls("__repeatable-title")} ${this._isActive(`${path2.join(".")}-${i}`) ? "active" : ""}"
-                            >
-                                ${(_c2 = (_b2 = (_a4 = v.title) !== null && _a4 !== void 0 ? _a4 : v.name) !== null && _b2 !== void 0 ? _b2 : v.id) !== null && _c2 !== void 0 ? _c2 : `${_specs.title} #${i}`}
-                                ${this._isActive(`${path2.join(".")}-${i}`) ? html`
-                                          ${unsafeHTML(this.props.icons.collapse)}
-                                      ` : html`
-                                          ${unsafeHTML(this.props.icons.expand)}
-                                      `}
-                            </div>
-                            <div
-                                tabindex="0"
-                                class="${this.utils.cls("__repeatable-item")} ${this._isActive(`${path2.join(".")}-${i}`) ? "active" : ""}"
-                            >
-                                <div
-                                    class="${this.utils.cls("__repeatable-item-actions")} ${this._isActive(`${path2.join(".")}-${i}`) ? "active" : ""}"
-                                >
-                                    <button
-                                        @pointerup=${() => this._removeItem(loopOn, v, _specs)}
-                                        class="${this.utils.cls("__repeatable-remove", "s-badge s-color s-color--error")}"
-                                    >
-                                        Remove
-                                    </button>
-                                </div>
-
-                                <div
-                                    class="${this.utils.cls("__repeatable-item-props")}"
-                                >
-                                    ${this._renderElements(specs, [...path2, i], true)}
-                                </div>
-                            </div>
-                        `;
-      })}
-
-                    <div class="${this.utils.cls("__repeatable-actions")}">
-                        <button
-                            @pointerup=${() => this._addItem(loopOn, _specs)}
-                            class="${this.utils.cls("__btn", "s-btn")}"
-                        >
-                            Add a
-                            ${__lowerFirst(_specs.title).replace(/s$/, "")}
-                            ${unsafeHTML(this.props.icons.add)}
-                        </button>
-                    </div>
-                </div>
-            `;
-    } else {
-      return html`
-                ${Object.keys(_specs.props).map((prop) => {
-        const propObj = _specs.props[prop];
-        if (propObj.props) {
-          return html`
-                            <div class="${this.utils.cls("__child")}">
-                                <h3
-                                    class="${this.utils.cls("__child-title", "s-typo--h5")}"
-                                >
-                                    ${propObj.title}
-                                </h3>
-                                <p
-                                    class="${this.utils.cls("__child-description", "s-typo--p")}"
-                                >
-                                    ${propObj.description}
-                                </p>
-
-                                ${this._renderEditWidget(propObj, !forceNoRepeat ? [...path2, "props", prop] : path2)}
-                                ${this._renderElements(propObj, [...path2, "props", prop], forceNoRepeat)}
-                            </div>
-                        `;
-        } else {
-          return html`
-                            <div
-                                prop="${propObj.id}"
-                                class="${this.utils.cls("__prop")}"
-                            >
-                                ${this._renderElement(propObj, [
-            ...path2,
-            "props",
-            prop
-          ])}
-                            </div>
-                        `;
-        }
-      })}
-            `;
-    }
-  }
-  render() {
-    var _a3;
-    return html`
-            <div
-                class="${(_a3 = this.cu) === null || _a3 === void 0 ? void 0 : _a3.cls("", null, "s-bare")}"
-                id="${this.props.id}"
-                status="${this.state.status}"
-            >
-                ${this.props.specs ? html`
-                          <div class="${this.utils.cls("__root")}">
-                              <div class="${this.utils.cls("__metas")}">
-                                  <h3
-                                      class="${this.utils.cls("__child-title", "s-typo--h3")}"
-                                  >
-                                      ${this.props.specs.title}
-                                  </h3>
-                                  <p
-                                      class="${this.utils.cls("__child-description", "s-typo--p")}"
-                                  >
-                                      ${this.props.specs.description}
-                                  </p>
-                              </div>
-                              ${this._renderElements(this.props.specs, [])}
-                          </div>
-                      ` : ""}
-            </div>
-        `;
-  }
-}
-SSpecsEditorComponent.widgetMap = {
-  image: __imageWidget
-};
-SSpecsEditorComponent.state = {
-  actives: {}
-};
-class SCarpenterComponentInterface extends SInterface {
-  static get _definition() {
-    return {
-      specs: {
-        type: "String",
-        description: "Specify a url from where to get the carpenter data back, directly the JSON data or a simple id pointing to a HTMLTemplate tag that host the JSON data",
-        default: "/carpenter.json",
-        required: true
-      },
-      adapter: {
-        type: "String",
-        description: "Specify the adapter to use in order to apply the updated properties on a component/section/etc... Must be a registered adapter id",
-        default: "ajax",
-        required: true
-      },
-      sidebar: {
-        type: "Boolean",
-        description: "Specify if you want the left sidebar to jump across all the components/sections/etc...",
-        default: false
-      },
-      pagesLink: {
-        type: "String",
-        description: "Specify the link to use to change page. You have access to the %dotpath token that will be replaced by the actual component/section specs dotpath",
-        default: "/carpenter/%dotpath"
-      },
-      iframe: {
-        type: "Boolean|String",
-        description: "Specify if you want to put the page content inside an iframe to allow responsive resizing of your viewport. Can be either a boolean in which an iframe will be created automatically, or an iframe id to use",
-        default: false
-      },
-      logo: {
-        type: "String",
-        description: "Specify an image to be used as logo on top left of the interface",
-        default: `<svg class="logo" viewBox="0 0 1166 276" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M227.657 271.609V245.856H253.808V67.964H228.437V42.6074H292.058V188.012L353.337 140.468H327.576V114.715H411.493V140.468H390.806L331.089 188.408L386.903 245.856H412.664V271.609H364.656L292.058 194.747V245.856H315.086V271.609H227.657Z" fill="white"/>
-                <path d="M395.096 271.609V245.856H421.637V140.468H395.096V114.715H459.887V161.863H454.033C457.415 149.184 461.449 139.279 466.132 132.148C471.076 125.016 476.541 119.998 482.525 117.092C488.51 113.923 494.495 112.338 500.48 112.338C505.944 112.338 511.148 112.998 516.092 114.319C521.296 115.64 526.37 117.489 531.314 119.866L522.727 153.939C518.304 151.033 513.62 148.92 508.676 147.6C503.992 146.015 499.048 145.222 493.844 145.222C485.257 145.222 477.451 148.656 470.426 155.523C463.66 162.391 460.278 172.56 460.278 186.031L459.887 245.856H485.648V271.609H395.096Z" fill="white"/>
-                <path d="M556.684 275.967C540.812 275.967 528.061 271.609 518.434 262.893C509.066 253.912 504.383 242.819 504.383 229.612C504.383 217.462 507.245 207.821 512.969 200.69C518.694 193.558 526.24 188.408 535.607 185.238C544.975 182.069 555.123 180.484 566.052 180.484C575.159 180.484 584.006 181.276 592.593 182.861C601.18 184.446 609.246 186.427 616.792 188.804L605.863 190.389V172.56C605.863 160.938 602.871 152.354 596.886 146.807C590.901 141.26 582.575 138.487 571.906 138.487C564.621 138.487 556.294 139.676 546.926 142.053C537.819 144.43 528.5 148.5 522.727 153.939L509.457 128.582C519.865 122.507 531.054 118.017 543.023 115.111C555.253 112.206 566.572 110.753 576.98 110.753C591.292 110.753 603.391 113.13 613.279 117.885C623.427 122.639 631.103 129.507 636.307 138.487C641.512 147.203 644.114 157.504 644.114 169.39V245.856H666.361V271.609H611.328L607.034 248.63L619.963 268.043C610.595 277.288 599.748 264.742 589.861 269.232C580.233 273.722 569.174 275.967 556.684 275.967ZM566.442 252.195C574.769 252.195 582.965 250.346 591.032 246.649C599.358 242.951 607.815 237.14 616.402 229.216L605.863 243.875V200.294L614.45 207.821C608.726 205.708 602.22 203.991 594.935 202.671C587.649 201.35 580.103 200.69 572.297 200.69C563.97 200.69 556.424 202.539 549.659 206.237C543.153 209.934 539.901 216.934 539.901 227.235C539.901 234.367 542.243 240.31 546.926 245.064C551.61 249.818 558.115 252.195 566.442 252.195Z" fill="white"/>
-                <path d="M644.894 271.609V245.856H671.045V67.964H645.675V42.6074H709.296V188.012L770.573 140.468H744.813V114.715H828.73V140.468H808.043L748.326 188.408L804.14 245.856H877.128L901.718 275.967L781.893 271.609L709.296 194.747V245.856H732.324V271.609H644.894Z" fill="white"/>
-                <path d="M901.718 275.967C884.804 275.967 869.712 272.666 856.442 266.062C843.171 259.195 832.763 249.554 825.217 237.14C817.671 224.726 813.898 210.066 813.898 193.162C813.898 176.522 817.541 161.995 824.827 149.58C832.112 137.166 841.87 127.658 854.1 121.054C866.59 114.187 880.641 110.753 896.253 110.753C912.126 110.753 925.787 114.187 937.236 121.054C948.685 127.658 957.402 137.034 963.387 149.184C969.632 161.334 972.754 175.465 972.754 191.577V200.69H841.61L842 179.691H935.675C935.675 170.975 933.983 163.447 930.601 157.108C927.218 150.769 922.534 146.015 916.55 142.845C910.565 139.411 903.669 137.695 895.863 137.695C887.276 137.695 879.6 139.808 872.835 144.034C866.33 148.26 861.125 154.203 857.222 161.863C853.579 169.522 851.758 178.899 851.758 189.993C851.758 201.614 853.84 211.651 858.003 220.103C862.427 228.556 868.541 235.027 876.347 239.517C884.154 244.007 893.131 246.252 903.279 246.252C914.208 246.252 924.356 244.139 933.723 239.913C943.091 235.687 951.287 230.405 958.313 224.065L970.412 247.837C962.866 255.761 953.239 262.497 941.529 268.043C930.08 273.326 916.81 275.967 901.718 275.967Z" fill="white"/>
-                <path d="M901.718 275.967L903.279 246.252L996.563 245.856V140.468H970.022V114.715H1033.64L1034.03 135.714L1021.93 138.091C1032.86 130.167 1043.79 123.696 1054.72 118.677C1065.65 113.395 1076.97 110.753 1088.68 110.753C1103.77 110.753 1116.13 115.508 1125.76 125.016C1135.38 134.525 1140.2 147.599 1140.2 164.24V245.856H1165.96V271.609H1079.31V245.856H1101.56V170.975C1101.56 161.202 1099.21 153.542 1094.53 147.996C1089.85 142.449 1083.34 139.676 1075.02 139.676C1066.95 139.676 1058.62 141.524 1050.04 145.222C1041.71 148.92 1032.86 154.071 1023.49 160.674L1035.2 144.034V245.856H1059.01V271.609L901.718 275.967Z" fill="white"/>
-                <mask id="mask0_1850_4891" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="64" y="9" width="136" height="130">
-                <path d="M64.7529 9.38086H199.46V138.231H64.7529V9.38086Z" fill="white"/>
-                </mask>
-                <g mask="url(#mask0_1850_4891)">
-                <path d="M136.13 73.2245C134.012 75.6727 127.782 75.5601 122.216 72.973C116.649 70.3859 113.853 66.3039 115.971 63.8558C118.088 61.4076 124.318 61.5202 129.885 64.1073C135.451 66.6944 138.247 70.7764 136.13 73.2245Z" fill="#FEBD0F"/>
-                <path d="M133.278 107.11C127.907 106.221 125.192 100.181 127.214 93.6202C129.235 87.059 135.228 82.4609 140.599 83.35C145.97 84.2391 148.685 90.2786 146.663 96.8397C144.641 103.401 138.649 107.999 133.278 107.11Z" fill="#FEBD0F"/>
-                <path d="M99.8947 117.04C92.5409 123.667 90.9768 131.661 96.4012 134.895C101.826 138.129 112.184 135.379 119.538 128.752C126.892 122.125 128.456 114.132 123.031 110.898C117.607 107.664 107.248 110.414 99.8947 117.04Z" fill="#FEBD0F"/>
-                </g>
-                <path d="M84.1257 127.554C84.5174 124.638 84.2591 117.286 90.7631 113.57C100.316 108.111 102.493 104.854 102.388 103.907C102.125 105.226 99.2657 108.264 89.9285 109.86C88.8877 110.038 87.9244 110.198 87.0298 110.346C80.3297 111.457 77.4782 111.93 74.7132 114.683C75.6251 108.807 75.8026 102.764 73.9116 99.9094C69.5672 93.3525 67.5887 93.0185 58.4557 91.4765C57.5618 91.3255 56.5985 91.1629 55.5585 90.9818C46.2261 89.3571 43.3757 86.3113 43.117 84.9915C43.0086 85.9375 45.176 89.2012 54.7128 94.6885C66.6337 101.548 65.7794 104.846 61.2471 112.592C58.8392 115 56 114 52 115C53.3795 113.992 66.6655 122.538 68.09 122.128C71.4674 121.156 72.9994 121.856 75.5808 122.835C79.1101 124.175 83.4548 127.309 84.1257 127.554Z" fill="white"/>
-                <path d="M109.15 52.7953C112.375 51.2767 116.036 50.8524 118.919 50.9073C123.611 50.9965 128.395 52.2655 132.54 54.2931C136.684 56.3206 140.212 59.1184 142.318 62.3544C144.104 65.0991 145.451 69.266 143.106 73.32C150.187 75.246 153.999 80.0437 155.673 83.9638C157.593 88.4594 157.69 93.619 156.248 98.5464C154.805 103.474 151.844 108.101 147.606 111.523C144.516 114.02 142.318 114.5 132 114.5C132.47 116.787 134.279 121.538 133.905 123.548C132.895 128.984 129.516 134.489 124.573 139.178C119.63 143.867 113.333 147.54 106.641 149.41C105.73 149.665 104.766 149.896 103.762 150.091L144.179 130.562C151.05 129.756 133.905 119.5 187.922 115C174.422 107.5 200.922 90 179.922 60.5C161.422 40 134.878 46.3276 116.072 41.4439C109.854 39.8289 104.987 38.565 102.706 37.6805C95.3641 34.8331 83.349 22.3346 98.9106 0C68.5532 21.4054 84.1967 37.6597 91.5 44.2837C93.7378 46.3134 98.922 48.4905 105.175 51.1164C106.46 51.6562 107.791 52.215 109.15 52.7953Z" fill="white"/>
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M56.1359 114.234H183.325C192.231 114.234 199.451 121.454 199.451 130.36V241.426C199.451 259.238 185.011 273.677 167.2 273.677H72.2616C54.4496 273.677 40.0102 259.238 40.0102 241.426V233.815H32.3999C14.5879 233.815 0.148438 219.375 0.148438 201.563V182.36C0.148438 164.548 14.5879 150.108 32.3999 150.108H40.0102V130.36C40.0102 121.454 47.2299 114.234 56.1359 114.234ZM181.8 139.45C186.629 149.039 185.102 159.552 178.39 162.932C171.678 166.312 162.323 161.279 157.494 151.69C152.666 142.102 154.193 131.589 160.905 128.209C167.616 124.829 176.972 129.862 181.8 139.45ZM22.9709 186.593C22.9709 177.687 30.1906 170.467 39.0966 170.467H45.5469C54.4529 170.467 61.6727 177.687 61.6727 186.593V193.043C61.6727 201.949 54.4529 209.169 45.5469 209.169H39.0966C30.1906 209.169 22.9709 201.949 22.9709 193.043V186.593ZM185.861 187.958C186.421 195.836 182.404 202.54 176.89 202.932C171.375 203.324 166.451 197.255 165.891 189.377C165.331 181.499 168.745 179.743 174.259 179.351C179.774 178.96 185.301 180.08 185.861 187.958Z" fill="#FEBD0F"/>
-                <mask id="mask1_1850_4891" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="40" y="95" width="163" height="179">
-                <rect x="40" y="95" width="163" height="179" fill="#D9D9D9"/>
-                </mask>
-                <g mask="url(#mask1_1850_4891)">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M56.2842 114H170.517C178.516 114 185 120.475 185 128.463V237.075C185 253.05 172.031 266 156.034 266H68.7672C52.7697 266 39.8011 261.05 39.8011 245.075V229.249H32.966C16.9685 229.249 6 216.298 6 200.323V183.1C6 167.125 16.9685 154.174 32.9661 154.174H39.8011V130.463C39.8011 122.475 46.7738 114 56.2842 114ZM169.147 136.616C173.484 145.215 172.113 154.644 166.085 157.675C160.057 160.707 151.654 156.193 147.317 147.593C142.981 138.994 144.352 129.565 150.38 126.534C156.408 123.502 164.811 128.016 169.147 136.616ZM26.4976 186.896C26.4976 178.909 10.5 170.434 44.9806 170.434L48 170.5L50.7738 171.5C57 174 61.5 178.909 61.5 186.896V192.682C61.5 200.669 57 205.5 50.7738 208.259L47.5 209.144H44.9806C20.5 209.144 26.4976 200.669 26.4976 192.682V186.896ZM172.795 180.121C173.297 187.186 169.69 193.199 164.737 193.551C159.784 193.902 155.361 188.459 154.859 181.394C154.356 174.328 157.422 172.753 162.374 172.402C167.327 172.05 172.292 173.055 172.795 180.121Z" fill="url(#paint0_linear_1850_4891)"/>
-                </g>
-                <path d="M433.313 64.5643C434.782 66.263 439.105 66.1849 442.967 64.3898C446.83 62.5946 448.77 59.7623 447.301 58.0635C445.831 56.3648 441.509 56.4429 437.646 58.2381C433.783 60.0332 431.843 62.8656 433.313 64.5643Z" fill="#FEBD0F"/>
-                <path d="M435.291 88.0766C439.018 87.4597 440.902 83.269 439.499 78.7164C438.096 74.1638 433.938 70.9732 430.212 71.5901C426.485 72.207 424.601 76.3977 426.004 80.9503C427.407 85.5029 431.565 88.6935 435.291 88.0766Z" fill="#FEBD0F"/>
-                <path d="M458.455 94.9671C463.558 99.5651 464.643 105.112 460.879 107.356C457.116 109.6 449.928 107.692 444.825 103.094C439.723 98.4955 438.637 92.9489 442.401 90.7048C446.165 88.4607 453.353 90.369 458.455 94.9671Z" fill="#FEBD0F"/>
-                <path d="M451.202 50.2274C448.83 49.5245 446.48 49.1355 444.479 49.1736C441.224 49.2355 437.904 50.116 435.029 51.5229C432.153 52.9298 429.705 54.8711 428.244 57.1165C427.004 59.021 426.069 61.9123 427.697 64.7253C422.783 66.0617 420.138 69.3907 418.977 72.1108C417.645 75.2301 417.577 78.8103 418.578 82.2293C419.579 85.6483 421.634 88.8587 424.574 91.2336C426.719 92.9657 430.038 94.7386 434.098 95.0248C433.772 96.6118 433.822 98.183 434.081 99.5772C434.782 103.349 437.126 107.169 440.556 110.422C443.986 113.676 445.382 114.711 458.609 116.364C460.263 116.364 427.001 116.229 427.697 116.364L332.947 116.364C328.18 115.806 409.98 116.769 400.738 103.137C385.162 79.7246 394.319 67.7162 403 58.001C409.524 50.7001 419.106 45.3488 432.154 41.9601C436.469 40.8395 448.689 38.6516 460.263 40.1795C470.234 41.4959 487.885 49.1741 490.025 61.7988C480.105 56.8412 476.798 50.2274 465.224 50.2274C458.61 50.3517 457.164 53.6942 456.956 53.5314C455 52 452.944 50.7438 451.202 50.2274Z" fill="white"/>
-                <path d="M529 120C554.283 114.738 558.358 100.633 550.276 92.5562C538.407 80.6938 536.528 74.9988 537.073 73.6341C536.919 75.6973 539.896 81.3333 553.032 87.3721C554.496 88.0453 555.854 88.6607 557.114 89.2324C566.555 93.5134 570.573 95.3355 573.526 100.512C574.592 91.4221 579.99 83.1215 583.955 79.6228C591.279 73.16 599.125 71.6831 607.067 72.4109C608.45 72.5376 609.939 72.6742 611.55 72.8134C626.001 74.0632 631.462 70.6564 632.386 68.7968C632.158 70.245 629.097 77.168 604.182 82.1511C591.54 84.6795 591.2 93.5895 591.2 100.512C591.2 107.434 599.125 112.491 624.408 125.132C622.784 123.093 585.891 118.716 583.955 117.547C579.365 114.777 570.472 117.105 566.257 117.547C560.494 118.152 530.091 119.899 529 120Z" fill="white"/>
-                <path d="M1016.47 95.0878C1014.67 95.1515 1012.35 92.5638 1011.3 89.3079C1010.24 86.0521 1010.85 83.3611 1012.65 83.2974C1014.46 83.2337 1016.77 85.8215 1017.83 89.0773C1018.88 92.3332 1018.28 95.0242 1016.47 95.0878Z" fill="#FEBD0F"/>
-                <path d="M1001.55 106.779C999.873 104.248 1001.31 100.847 1004.76 99.1837C1008.21 97.5202 1012.36 98.2239 1014.03 100.755C1015.71 103.287 1014.27 106.688 1010.82 108.351C1007.37 110.015 1003.22 109.311 1001.55 106.779Z" fill="#FEBD0F"/>
-                <path d="M1014.85 75.8047C1016.7 76.5517 1018.28 77.8964 1019.36 79.1044C1021.11 81.0699 1022.42 83.5247 1023.17 86.006C1023.92 88.4873 1024.12 91.0093 1023.59 93.1134C1023.14 94.8979 1021.94 97.0457 1019.38 97.63C1021.29 101.282 1020.77 104.685 1019.8 106.873C1018.68 109.382 1016.6 111.394 1014.02 112.684C1011.44 113.975 1008.4 114.524 1005.37 114.088C1003.16 113.77 1000.28 112.778 997.875 110.527C997.112 111.595 996.153 112.431 995.183 113.045C992.559 114.708 989.001 115.421 985.181 115.179C981.361 114.937 980.5 115.5 970.5 116C970.047 115.722 983.964 123.838 983.5 123.5L996.223 119.956C999.182 122.477 1023.5 149.5 1062 116.5C1046.5 125 1034.5 110.527 1040 98.4995C1046.5 86.006 1040 76.9995 1034.5 74.9995C1029.54 73.1973 1021.45 70.1531 1019 64C1017.37 59.8889 1018.86 48.1326 1034 46C1013.58 41.6864 1009.93 58.9608 1010 64.4998C1010 68.9998 1010.19 68.9217 1011.5 72.4998C1011.77 73.2353 1014.56 75.0232 1014.85 75.8047Z" fill="white"/>
-                <defs>
-                <linearGradient id="paint0_linear_1850_4891" x1="42.8234" y1="185.75" x2="134.433" y2="185.75" gradientUnits="userSpaceOnUse">
-                <stop stop-opacity="0.1"/>
-                <stop offset="1" stop-opacity="0"/>
-                </linearGradient>
-                </defs>
-                </svg>
-                `
-      },
-      icons: {
-        type: "Object",
-        description: "Specify some icons html to be used across the UI",
-        default: {
-          mobile: '<i class="fa-solid fa-mobile-screen-button"></i>',
-          tablet: '<i class="fa-solid fa-tablet-screen-button"></i>',
-          desktop: '<i class="fa-solid fa-desktop"></i>',
-          wide: '<i class="fa-solid fa-arrows-left-right"></i>',
-          folderOpen: '<i class="fa-regular fa-folder-open"></i>',
-          folderClose: '<i class="fa-solid fa-folder"></i>'
-        }
-      }
-    };
-  }
-}
-function define$1(props = {}, tagName = "s-carpenter") {
-  SCarpenterComponent.define(tagName, SCarpenterComponent, props);
-}
-var __awaiter$2 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
-  function adopt(value) {
-    return value instanceof P ? value : new P(function(resolve) {
-      resolve(value);
-    });
-  }
-  return new (P || (P = Promise))(function(resolve, reject) {
-    function fulfilled(value) {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-    function rejected(value) {
-      try {
-        step(generator["throw"](value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-    function step(result2) {
-      result2.done ? resolve(result2.value) : adopt(result2.value).then(fulfilled, rejected);
-    }
-    step((generator = generator.apply(thisArg, _arguments || [])).next());
-  });
-};
-const __ajaxAdapter = {
-  load({ dotpath, props, component }) {
-    return __awaiter$2(this, void 0, void 0, function* () {
-      const rawResponse = yield fetch(component.props.pagesLink.replace("%dotpath", dotpath), {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(props)
-      });
-      const responseHtml = yield rawResponse.text();
-      const doc = new DOMParser().parseFromString(responseHtml, "text/html"), $newComponent = doc.body.firstChild;
-      return $newComponent;
-    });
-  },
-  change({ dotpath, props, component, $elm }) {
-    return __awaiter$2(this, void 0, void 0, function* () {
-      const $newComponent = yield this.load({
-        dotpath,
-        props,
-        component
-      });
-      if ($elm) {
-        $elm.after($newComponent);
-        $elm.remove();
-      }
-      return $newComponent;
-    });
-  },
-  getProps({ $elm }) {
-    return __awaiter$2(this, void 0, void 0, function* () {
-      if ($elm.hasAttribute("s-specs-values")) {
-        const data = JSON.parse($elm.getAttribute("s-specs-values"));
-        return data;
-      }
-      return {};
-    });
-  },
-  setProps({ $elm, props, component }) {
-    return __awaiter$2(this, void 0, void 0, function* () {
-      const $newComponent = yield this.load({
-        dotpath: component.currentSpecs.metas.dotpath,
-        props,
-        component
-      });
-      $newComponent.id = $elm.id;
-      $elm.after($newComponent);
-      $elm.remove();
-      return $newComponent;
-    });
-  }
-};
-const __css$1 = ":root {\n    --s-carpenter-navigation-width: 300px;\n    --s-carpenter-editor-width: 0px;\n    --s-carpenter-content-margin-inline: calc(var(--s-theme-margin-default, 1rem) * 3.25);\n    --s-carpenter-content-margin-block: calc(var(--s-theme-margin-default, 1rem) * 3.25);\n    --s-carpenter-offset-top: calc(var(--s-theme-margin-default, 1rem) * 3.25);\n\n    --s-carpenter-content-max-width: calc(\n        100vw - var(--s-carpenter-navigation-width) -\n            var(--s-carpenter-editor-width) -\n            var(--s-carpenter-content-margin-inline) * 2\n    );\n}\n\nbody.s-carpenter--in-iframe {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    padding: calc(calc(var(--s-theme-padding-default, 1rem) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 3.25);\n}\n\n/* background: red; */\n\nbody.s-carpenter--in-iframe::-webkit-scrollbar {\n          width: 2px;\n          height: 2px;\n      }\n\n.s-lod--1 body.s-carpenter--in-iframe::-webkit-scrollbar-track {\n            \n                background-color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),0.1);\n}\n\n.s-lod--1 body.s-carpenter--in-iframe::-webkit-scrollbar-thumb {\n          \n            background-color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n}\n\n.s-lod--1 body:not(.s-carpenter--in-iframe) {\n    background: hsla(calc(var(--s-theme-color-base-h, 0) + var(--s-theme-color-base-surface-spin ,0)),calc((var(--s-theme-color-base-s, 0) + var(--s-theme-color-base-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-base-l, 0) + var(--s-theme-color-base-surface-lightness-offset, 0)) * 1%),var(--s-theme-color-base-surface-a, 1));\n}\n\n.s-carpenter--editor {\n    --s-carpenter-navigation-width: 300px;\n    --s-carpenter-editor-width: 500px;\n\n    --s-carpenter-content-max-width: calc(\n        100vw - var(--s-carpenter-navigation-width) -\n            var(--s-carpenter-editor-width) -\n            var(--s-carpenter-content-margin-inline) * 2\n    );\n}\n\n.s-carpenter {\n    position: fixed;\n    top: 0;\n    right: 0;\n    z-index: 500;\n    width: 100vw;\n    height: calc(100 * var(--vh,1vh)) ;\n    pointer-events: none;\n}\n\n.s-carpenter .__navigation,\n    .s-carpenter .__editor {\n        position: absolute;\n        top: 0;\n        right: 0;\n        width: var(--s-carpenter-editor-width);\n        height: 100%;\n        transform: translateX(100%);\n        opacity: 0;\n        -webkit-padding-after: calc(calc(var(--s-theme-padding-default, 1rem) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 3.25);\n                padding-block-end: calc(calc(var(--s-theme-padding-default, 1rem) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 3.25);\n        pointer-events: none;\n        overflow-y: auto;\n    }\n\n.s-lod--3 .s-carpenter .__navigation, .s-lod--3 .s-carpenter .__editor {box-shadow: 0px 1.4px 1.4px rgba(0, 0, 0, 0.011),\n  0px 3.3px 3.5px rgba(0, 0, 0, 0.016),\n  0px 6.1px 6.5px rgba(0, 0, 0, 0.02),\n  0px 10.9px 11.6px rgba(0, 0, 0, 0.024),\n  0px 20.5px 21.7px rgba(0, 0, 0, 0.029),\n  0px 49px 52px rgba(0, 0, 0, 0.04);\n}\n\n.s-lod--2 .s-carpenter .__navigation, .s-lod--2 .s-carpenter .__editor {transition: all .3s cubic-bezier(0.700, 0.000, 0.305, 0.995);\n}\n\n.s-lod--1 .s-carpenter .__navigation, .s-lod--1 .s-carpenter .__editor {\n        background: hsla(calc(var(--s-theme-color-base-h, 0) + var(--s-theme-color-base-background-spin ,0)),calc((var(--s-theme-color-base-s, 0) + var(--s-theme-color-base-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-base-l, 0) + var(--s-theme-color-base-background-lightness-offset, 0)) * 1%),var(--s-theme-color-base-background-a, 1));\n}\n\n.s-carpenter .__navigation::-webkit-scrollbar, .s-carpenter .__editor::-webkit-scrollbar {\n          width: 2px;\n          height: 2px;\n      }\n\n.s-lod--1 .s-carpenter .__navigation::-webkit-scrollbar-track, .s-lod--1 .s-carpenter .__editor::-webkit-scrollbar-track {\n            \n                background-color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),0.1);\n}\n\n.s-lod--1 .s-carpenter .__navigation::-webkit-scrollbar-thumb, .s-lod--1 .s-carpenter .__editor::-webkit-scrollbar-thumb {\n          \n            background-color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n}\n\n.s-carpenter--editor .s-carpenter .__editor {\n            transform: translateX(0);\n            opacity: 1;\n            pointer-events: all;\n        }\n\n.s-carpenter .s-carpenter__sidebar {\n        display: flex;\n        flex-direction: column;\n        right: auto;\n        left: 0;\n        width: 300px;\n        transform: translateX(0);\n        opacity: 1;\n        pointer-events: all;\n        height: calc(100 * var(--vh,1vh)) ;\n    }\n\n.s-lod--1 .s-carpenter .s-carpenter__sidebar {\n        background: hsla(calc(var(--s-theme-color-base-h, 0) + var(--s-theme-color-base-background-spin ,0)),calc((var(--s-theme-color-base-s, 0) + var(--s-theme-color-base-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-base-l, 0) + var(--s-theme-color-base-background-lightness-offset, 0) + -2) * 1%),1);\n}\n\n.s-carpenter .s-carpenter__sidebar i {\n            -webkit-margin-end: calc(var(--s-theme-margin-default, 1rem) * 0.375);\n                    margin-inline-end: calc(var(--s-theme-margin-default, 1rem) * 0.375);\n        }\n\n.s-lod--1 .s-carpenter .s-carpenter__sidebar .active > div > i {\n            color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n}\n\n.s-carpenter .s-carpenter__sidebar .s-carpenter__logo {\n            flex-grow: 0;\n            padding: calc(calc(var(--s-theme-padding-default, 1rem) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 3.25);\n            -webkit-margin-after: calc(var(--s-theme-margin-default, 1rem) * 1.5);\n                    margin-block-end: calc(var(--s-theme-margin-default, 1rem) * 1.5);\n        }\n\n.s-lod--3 .s-carpenter .s-carpenter__sidebar .s-carpenter__logo {box-shadow: 0px 1.4px 1.4px rgba(0, 0, 0, 0.011),\n  0px 3.3px 3.5px rgba(0, 0, 0, 0.016),\n  0px 6.1px 6.5px rgba(0, 0, 0, 0.02),\n  0px 10.9px 11.6px rgba(0, 0, 0, 0.024),\n  0px 20.5px 21.7px rgba(0, 0, 0, 0.029),\n  0px 49px 52px rgba(0, 0, 0, 0.04);\n}\n\n.s-lod--2 .s-carpenter .s-carpenter__sidebar .s-carpenter__logo {\n            background-image: linear-gradient(\n                -45deg,\n                hsla(calc(var(--s-theme-color-base-h, 0) + var(--s-theme-color-base-background-spin ,0)),calc((var(--s-theme-color-base-s, 0) + var(--s-theme-color-base-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-base-l, 0) + var(--s-theme-color-base-background-lightness-offset, 0)) * 1%),var(--s-theme-color-base-background-a, 1)),\n                hsla(calc(var(--s-theme-color-base-h, 0) + var(--s-theme-color-base-background-spin ,0)),calc((var(--s-theme-color-base-s, 0) + var(--s-theme-color-base-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-base-l, 0) + var(--s-theme-color-base-background-lightness-offset, 0) + 5) * 1%),1)\n            );\n}\n\n.s-carpenter .s-carpenter__sidebar .s-carpenter__navigation {\n            flex-grow: 1;\n            padding: calc(calc(var(--s-theme-padding-default, 1rem) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 1.5);\n            overflow-y: auto;\n        }\n\n.s-carpenter .s-carpenter__sidebar .s-carpenter__navigation::-webkit-scrollbar {\n          width: 2px;\n          height: 2px;\n      }\n\n.s-lod--1 .s-carpenter .s-carpenter__sidebar .s-carpenter__navigation::-webkit-scrollbar-track {\n            \n                background-color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),0.1);\n}\n\n.s-lod--1 .s-carpenter .s-carpenter__sidebar .s-carpenter__navigation::-webkit-scrollbar-thumb {\n          \n            background-color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n}\n\n.s-carpenter .s-specs-editor__prop {\n        padding-inline: calc(calc(var(--s-theme-padding-default, 1rem) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 2.25);\n    }\n\n.s-carpenter .s-specs-editor__child-title {\n        -webkit-padding-before: calc(calc(var(--s-theme-padding-default, 1rem) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 1.5);\n                padding-block-start: calc(calc(var(--s-theme-padding-default, 1rem) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 1.5);\n        padding-inline: calc(calc(var(--s-theme-padding-default, 1rem) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 2.25);\n    }\n\n.s-lod--1 .s-carpenter .s-specs-editor__child-title {\n        color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n}\n\n.s-carpenter .s-specs-editor__child-description {\n        -webkit-padding-after: calc(calc(var(--s-theme-padding-default, 1rem) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 1.5);\n                padding-block-end: calc(calc(var(--s-theme-padding-default, 1rem) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 1.5);\n        padding-inline: calc(calc(var(--s-theme-padding-default, 1rem) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 2.25);\n    }\n\n.s-carpenter .s-specs-editor__label {\n        -webkit-margin-after: calc(var(--s-theme-margin-default, 1rem) * 0.75);\n                margin-block-end: calc(var(--s-theme-margin-default, 1rem) * 0.75);\n    }\n\n.s-carpenter .s-specs-editor__label i {\n            opacity: 0.4;\n        }\n\n.s-lod--2 .s-carpenter .s-specs-editor__label i {transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995) !important;\n}\n\n.s-carpenter .s-specs-editor__label i:hover {\n                opacity: 0.8;\n            }\n\n.s-carpenter .s-specs-editor__metas {\n        padding-block: calc(calc(var(--s-theme-padding-default, 1rem) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 1.5);\n        -webkit-margin-after: calc(var(--s-theme-margin-default, 1rem) * 1.5);\n                margin-block-end: calc(var(--s-theme-margin-default, 1rem) * 1.5);\n    }\n\n.s-lod--3 .s-carpenter .s-specs-editor__metas {box-shadow: 0px 1.4px 1.4px rgba(0, 0, 0, 0.011),\n  0px 3.3px 3.5px rgba(0, 0, 0, 0.016),\n  0px 6.1px 6.5px rgba(0, 0, 0, 0.02),\n  0px 10.9px 11.6px rgba(0, 0, 0, 0.024),\n  0px 20.5px 21.7px rgba(0, 0, 0, 0.029),\n  0px 49px 52px rgba(0, 0, 0, 0.04);\n}\n\n.s-lod--2 .s-carpenter .s-specs-editor__metas {\n        background-image: linear-gradient(\n            45deg,\n            hsla(calc(var(--s-theme-color-base-h, 0) + var(--s-theme-color-base-background-spin ,0)),calc((var(--s-theme-color-base-s, 0) + var(--s-theme-color-base-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-base-l, 0) + var(--s-theme-color-base-background-lightness-offset, 0)) * 1%),var(--s-theme-color-base-background-a, 1)),\n            hsla(calc(var(--s-theme-color-base-h, 0) + var(--s-theme-color-base-background-spin ,0)),calc((var(--s-theme-color-base-s, 0) + var(--s-theme-color-base-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-base-l, 0) + var(--s-theme-color-base-background-lightness-offset, 0) + 5) * 1%),1)\n        );\n}\n\n.s-lod--1 .s-carpenter .s-specs-editor__metas .s-typo--h3 {\n            color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n}\n\n/* background: sugar.color(base, background, --darken 5% --alpha 0.3); */\n\n.s-carpenter .s-specs-editor__child:not(:first-child) {\n            -webkit-margin-before: calc(var(--s-theme-margin-default, 1rem) * 2.25);\n                    margin-block-start: calc(var(--s-theme-margin-default, 1rem) * 2.25);\n        }\n\n/* padding: sugar.padding(40); */\n\n.s-carpenter .s-specs-editor__child:not(:last-child) {\n            -webkit-margin-after: calc(var(--s-theme-margin-default, 1rem) * 2.25);\n                    margin-block-end: calc(var(--s-theme-margin-default, 1rem) * 2.25);\n        }\n\n.s-carpenter__media {\n    position: absolute;\n    bottom: var(--s-carpenter-offset-top);\n    left: calc(\n        var(--s-carpenter-navigation-width) +\n            var(--s-carpenter-content-margin-inline) +\n            var(--s-carpenter-content-max-width) * 0.5\n    );\n    transform: translateX(-50%);\n    pointer-events: all;\n}\n\n.s-lod--3 .s-carpenter__media {box-shadow: 0px 1.4px 1.4px rgba(0, 0, 0, 0.011),\n  0px 3.3px 3.5px rgba(0, 0, 0, 0.016),\n  0px 6.1px 6.5px rgba(0, 0, 0, 0.02),\n  0px 10.9px 11.6px rgba(0, 0, 0, 0.024),\n  0px 20.5px 21.7px rgba(0, 0, 0, 0.029),\n  0px 49px 52px rgba(0, 0, 0, 0.04);\n}\n\n.s-lod--2 .s-carpenter__media {transition: all .3s cubic-bezier(0.700, 0.000, 0.305, 0.995);\n}\n\n.s-lod--3 .s-carpenter__media .s-carpenter__queries {box-shadow: 0px 1.4px 1.4px rgba(0, 0, 0, 0.011),\n  0px 3.3px 3.5px rgba(0, 0, 0, 0.016),\n  0px 6.1px 6.5px rgba(0, 0, 0, 0.02),\n  0px 10.9px 11.6px rgba(0, 0, 0, 0.024),\n  0px 20.5px 21.7px rgba(0, 0, 0, 0.029),\n  0px 49px 52px rgba(0, 0, 0, 0.04);\n}\n\n.s-lod--2 .s-carpenter__media .s-carpenter__queries {\n        border-bottom-left-radius: calc(5px * var(--s-scale, 1) * var(--s-scale-global, 1));\n}\n\n.s-lod--1 .s-carpenter__media .s-carpenter__queries {\n        background: hsla(calc(var(--s-theme-color-base-h, 0) + var(--s-theme-color-base-background-spin ,0)),calc((var(--s-theme-color-base-s, 0) + var(--s-theme-color-base-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-base-l, 0) + var(--s-theme-color-base-background-lightness-offset, 0)) * 1%),var(--s-theme-color-base-background-a, 1));\n}\n\n.s-carpenter__media .s-carpenter__queries .s-carpenter__query i {\n            -webkit-margin-end: calc(var(--s-theme-margin-default, 1rem) * 0.375);\n                    margin-inline-end: calc(var(--s-theme-margin-default, 1rem) * 0.375);\n        }\n\n.s-carpenter__iframe {\n    position: absolute;\n    top: 50%;\n    left: calc(\n        var(--s-carpenter-navigation-width) +\n            var(--s-carpenter-content-margin-inline) +\n            var(--s-carpenter-content-max-width) * 0.5\n    );\n    transform: translate(-50%, -50%);\n    max-width: var(--s-carpenter-content-max-width);\n    max-height: calc(calc(100  * var(--vh,1vh)) - var(--s-carpenter-content-margin-block) * 2);\n    width: var(\n        --s-carpenter-content-width,\n        var(--s-carpenter-content-max-width)\n    );\n\n    height: var(\n        --s-carpenter-content-height,\n        calc(calc(100  * var(--vh,1vh)) - var(--s-carpenter-content-margin-block))\n    );\n}\n\n.s-lod--3 .s-carpenter__iframe {box-shadow: 0px 1.4px 1.4px rgba(0, 0, 0, 0.011),\n  0px 3.3px 3.5px rgba(0, 0, 0, 0.016),\n  0px 6.1px 6.5px rgba(0, 0, 0, 0.02),\n  0px 10.9px 11.6px rgba(0, 0, 0, 0.024),\n  0px 20.5px 21.7px rgba(0, 0, 0, 0.029),\n  0px 49px 52px rgba(0, 0, 0, 0.04);\n}\n\n.s-lod--2 .s-carpenter__iframe {\n    border: 1px solid hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),0.3);transition: all .3s cubic-bezier(0.700, 0.000, 0.305, 0.995);border-radius: calc(5px * var(--s-scale, 1) * var(--s-scale-global, 1));\n}\n\n.s-carpenter-toolbar {\n    position: absolute;\n    z-index: 500;\n    display: inline-block;\n    padding: calc(calc(var(--s-theme-padding-default, 1rem) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 1.5);\n    transform: translateX(calc(-100% + calc(var(--s-theme-margin-default, 1rem) * 0.375)))\n        translateY(calc(calc(var(--s-theme-margin-default, 1rem) * 0.375) * -1)) scale(1);\n    pointer-events: none;\n    opacity: 0;\n    cursor: pointer;\n}\n\n.s-lod--3 .s-carpenter-toolbar {\n    text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);box-shadow: 0px 1.4px 1.4px rgba(0, 0, 0, 0.011),\n  0px 3.3px 3.5px rgba(0, 0, 0, 0.016),\n  0px 6.1px 6.5px rgba(0, 0, 0, 0.02),\n  0px 10.9px 11.6px rgba(0, 0, 0, 0.024),\n  0px 20.5px 21.7px rgba(0, 0, 0, 0.029),\n  0px 49px 52px rgba(0, 0, 0, 0.04);\n}\n\n.s-lod--2 .s-carpenter-toolbar {transition: all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995) !important;\n}\n\n.s-lod--1 .s-carpenter-toolbar {\n    background: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),var(--s-theme-color-accent-a, 1));\n    color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-foreground-spin ,0)),calc((var(--s-theme-color-accent-s, 0) + var(--s-theme-color-accent-foreground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0) + var(--s-theme-color-accent-foreground-lightness-offset, 0)) * 1%),var(--s-theme-color-accent-foreground-a, 1));\n    font-size: calc(var(--s-theme-font-size-default, 16px) * calc(var(--s-theme-font-size-50, 1.5) * var(--s-scale, 1) * var(--s-scale-global, 1)));\n}\n\n.s-carpenter-toolbar:hover {\n        transform: translateX(calc(-100% + calc(var(--s-theme-margin-default, 1rem) * 0.375)))\n            translateY(calc(calc(var(--s-theme-margin-default, 1rem) * 0.375) * -1)) scale(1.2);\n    }\n\nbody:has([s-specs]:hover) .s-carpenter-toolbar,\n.s-carpenter-toolbar:hover {\n    opacity: 1;\n    pointer-events: all;\n}\n";
-var __awaiter$1 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
-  function adopt(value) {
-    return value instanceof P ? value : new P(function(resolve) {
-      resolve(value);
-    });
-  }
-  return new (P || (P = Promise))(function(resolve, reject) {
-    function fulfilled(value) {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-    function rejected(value) {
-      try {
-        step(generator["throw"](value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-    function step(result2) {
-      result2.done ? resolve(result2.value) : adopt(result2.value).then(fulfilled, rejected);
-    }
-    step((generator = generator.apply(thisArg, _arguments || [])).next());
-  });
-};
-define$2();
-class SCarpenterComponent extends SLitComponent {
-  constructor() {
-    super(__deepMerge({
-      name: "s-carpenter",
-      interface: SCarpenterComponentInterface,
-      carpenter: SSugarConfig.get("carpenter")
-    }));
-    this.currentSpecs = null;
-    this._values = {};
-  }
-  static create(attributes = {}, to = document.body) {
-    if (__isInIframe() || document.querySelector("s-carpenter")) {
-      return;
-    }
-    const domParser = new DOMParser(), $carpenter = domParser.parseFromString(`<s-carpenter ${Object.keys(attributes).map((attr) => {
-      const value = attributes[attr];
-      return ` ${attr}="${value}" `;
-    })}></s-carpenter>`, "text/html");
-    to.appendChild($carpenter.body.children[0]);
-  }
-  static get properties() {
-    return SLitComponent.propertiesFromInterface({}, SCarpenterComponentInterface);
-  }
-  static get styles() {
-    return css`
-            ${unsafeCSS(__css$1)}
-        `;
-  }
-  static registerAdapter(id, adapter) {
-    if (SCarpenterComponent._registeredAdapters[id]) {
-      throw new Error(`[SCarpenterComponent] Sorry but the "${id}" adapter already exists...`);
-    }
-    SCarpenterComponent._registeredAdapters[id] = adapter;
-  }
-  mount() {
-    return __awaiter$1(this, void 0, void 0, function* () {
-      if (__isInIframe()) {
-        return;
-      }
-      this._data = yield this._getData(this.props.specs);
-      if (!this._data) {
-        throw new Error(`[SCarpenter] Sorry but no valid specs have been specified...`);
-      }
-      if (!this.state.activeMedia) {
-        this.state.activeMedia = this._data.frontspec.media.defaultMedia;
-      }
-      if (!SCarpenterComponent._registeredAdapters[this.props.adapter]) {
-        throw new Error(`[SCarpenterComponent] Sorry but the specified "${this.props.adapter}" is not registered...`);
-      }
-      this._$document = document;
-      if (this.props.iframe) {
-        if (typeof this.props.iframe === "string") {
-          this._$iframe = document.querySelector(this.props.iframe);
-          if (!this._$iframe) {
-            throw new Error(`[SCarpenterComponent] You've set an iframe selector to be used but it resolves to nothing...`);
-          }
-        } else {
-          this._$iframe = document.createElement("iframe");
-        }
-        const iframeHtml = document.documentElement.outerHTML.replace(/<s-carpenter/gm, "<s-nothing").replace(/<\/s-carpenter>/gm, "</s-nothing>");
-        this._$iframe.classList.add(this.utils.cls("__iframe"));
-        this._$iframe.setAttribute("src", "about:blank");
-        this.remove();
-        document.body.innerHTML = "";
-        document.body.appendChild(this._$iframe);
-        document.body.appendChild(this);
-        yield __wait(500);
-        __injectIframeContent(this._$iframe, iframeHtml);
-        this._$document = this._$iframe.contentWindow.document;
-        this._$document.addEventListener("keyup", (e) => {
-          if (e.keyCode == 27) {
-            this._closeEditor();
-          }
-        });
-        this._$document.body.classList.add(this.utils.cls("-in-iframe"));
-      }
-      let $firstSpecsElement = this._$document.querySelector("[s-specs]");
-      if (!$firstSpecsElement) {
-        $firstSpecsElement = this._$document.body.children[0];
-      }
-      this.state.$currentElement = $firstSpecsElement;
-      __hotkey("escape").on("press", () => {
-        this._closeEditor();
-      });
-      this._getToolbarElement();
-      __querySelectorLive(`[s-specs]`, ($elm) => {
-        $elm.addEventListener("pointerover", (e) => {
-          var _a3, _b2;
-          this._setToolbarPosition(e.currentTarget);
-          if (e.currentTarget.id && e.currentTarget.id === ((_a3 = this.state.$currentElement) === null || _a3 === void 0 ? void 0 : _a3.id)) {
-            return;
-          }
-          if ((_b2 = this._$toolbar) === null || _b2 === void 0 ? void 0 : _b2.parent) {
-            return;
-          }
-          this._positionToolbarOnElement(e.currentTarget);
-          this.state.hoveredElement = $elm;
-          this.state.hoveredDotpath = $elm.getAttribute("s-specs");
-        });
-      }, {
-        rootNode: this._$document.body
-      });
-      this.addEventListener("s-specs-editor.update", (e) => __awaiter$1(this, void 0, void 0, function* () {
-        var _a3, _b2;
-        const adapterResult = yield SCarpenterComponent._registeredAdapters[this.props.adapter].setProps({
-          $elm: this.state.$currentElement,
-          props: (_a3 = e.detail.values) !== null && _a3 !== void 0 ? _a3 : {},
-          component: this
-        });
-        this._values[this.state.$currentElement.id] = (_b2 = e.detail.values) !== null && _b2 !== void 0 ? _b2 : {};
-        if (adapterResult) {
-          this.state.$currentElement = adapterResult;
-        }
-      }));
-      this.addEventListener("s-specs-editor.changeMedia", (e) => {
-        this._activateMedia(e.detail);
-      });
-      this._$toolbar.addEventListener("pointerup", (e) => __awaiter$1(this, void 0, void 0, function* () {
-        var _c2;
-        if (((_c2 = this.state.$currentElement.id) === null || _c2 === void 0 ? void 0 : _c2.trim()) && this.state.$currentElement.id === this.state.$hoveredElement.id) {
-          this._openEditor();
-          return;
-        }
-        this.currentSpecs = null;
-        this.requestUpdate();
-        yield __wait();
-        let potentialDotpath = this.state.hoveredDotpath;
-        if (this._data.specsMap[potentialDotpath]) {
-          this.currentSpecs = this._data.specsMap[potentialDotpath];
-        } else {
-          potentialDotpath = `${potentialDotpath}.${potentialDotpath.split(".").slice(-1)[0]}`;
-          if (this._data.specsMap[potentialDotpath]) {
-            this.currentSpecs = this._data.specsMap[potentialDotpath];
-          }
-        }
-        if (!this.currentSpecs) {
-          return;
-        }
-        this._setCurrentElement(this.state.$hoveredElement);
-        this._openEditor();
-        this.requestUpdate();
-      }));
-      window.addEventListener("popstate", (e) => {
-        this._changePage(e.state.dotpath, false);
-      });
-    });
-  }
-  _openEditor() {
-    document.body.classList.add("s-carpenter--editor");
-  }
-  _closeEditor() {
-    document.body.classList.remove("s-carpenter--editor");
-  }
-  _getToolbarElement() {
-    if (this._$toolbar) {
-      return this._$toolbar;
-    }
-    const $toolbar = document.createElement("div");
-    $toolbar.classList.add("s-carpenter-toolbar");
-    this._$toolbar = $toolbar;
-    const $i = document.createElement("i");
-    $i.classList.add("fa-regular", "fa-pen-to-square");
-    $toolbar.appendChild($i);
-    this._$document.body.appendChild($toolbar);
-    return $toolbar;
-  }
-  _setCurrentElement($elm) {
-    var _a3;
-    return __awaiter$1(this, void 0, void 0, function* () {
-      if (!$elm.id.trim()) {
-        $elm.setAttribute("id", __uniqid());
-      }
-      if (this.state.$currentElement.id === $elm.id) {
-        return;
-      }
-      const values = (_a3 = this._values[$elm.id]) !== null && _a3 !== void 0 ? _a3 : yield SCarpenterComponent._registeredAdapters[this.props.adapter].getProps({
-        $elm,
-        component: this
-      });
-      if (values) {
-        this.currentSpecs.values = values;
-      }
-      this.state.$currentElement = $elm;
-    });
-  }
-  _positionToolbarOnElement($elm) {
-    var _a3;
-    if ($elm.id && ((_a3 = this.state.$currentElement) === null || _a3 === void 0 ? void 0 : _a3.id) === $elm.id) {
-      return;
-    }
-    this.state.$hoveredElement = $elm;
-    this._setToolbarPosition($elm);
-  }
-  _setToolbarPosition($from) {
-    const $toolbar = this._getToolbarElement();
-    const targetRect = $from.getBoundingClientRect();
-    $toolbar.style.top = `${targetRect.top + window.scrollY}px`;
-    $toolbar.style.left = `${targetRect.left + targetRect.width + window.scrollX}px`;
-  }
-  _activateMedia(media) {
-    this.state.activeMedia = media;
-  }
-  _changePage(dotpath, pushState = true) {
-    return __awaiter$1(this, void 0, void 0, function* () {
-      const adapterResult = yield SCarpenterComponent._registeredAdapters[this.props.adapter].change({
-        dotpath,
-        $elm: this.props.specs ? this._$document.body.children[0] : this.state.$currentElement,
-        props: this.props,
-        component: this
-      });
-      if (adapterResult) {
-        this.state.$currentElement = adapterResult;
-      }
-      if (pushState) {
-        window.history.pushState({
-          dotpath
-        }, document.title, this.props.pagesLink.replace("%dotpath", dotpath));
-      }
-      const newSpecs = this._data.specsMap[dotpath];
-      if (newSpecs !== this.currentSpecs) {
-        this.currentSpecs = null;
-        this.requestUpdate();
-        yield __wait();
-        this.currentSpecs = newSpecs;
-        this.requestUpdate();
-      }
-    });
-  }
-  _toggleNavigationFolder(folderId) {
-    if (this.state.activeNavigationFolders.includes(folderId)) {
-      this.state.activeNavigationFolders.splice(this.state.activeNavigationFolders.indexOf(folderId), 1);
-    } else {
-      this.state.activeNavigationFolders.push(folderId);
-    }
-    this.requestUpdate();
-  }
-  _getData(source2) {
-    return __awaiter$1(this, void 0, void 0, function* () {
-      let data;
-      try {
-        if (source2.startsWith("{")) {
-          data = JSON.parse(source2);
-        } else if (source2.startsWith("/") || source2.match(/^https?\:\/\//)) {
-          data = yield fetch(source2).then((response) => response.json());
-        } else {
-          const $template = document.querySelectorAll(`template#${source2}`);
-          if ($template) {
-            data = JSON.parse($template.content.textContent);
-          }
-        }
-      } catch (e) {
-      }
-      if (!data) {
-        throw new Error(`[SCarpenterComponent] The passed source "${source2}" does not provide any valid data...`);
-      }
-      return data;
-    });
-  }
-  render() {
-    var _a3, _b2, _c2;
-    if (!this._data) {
-      return "";
-    }
-    return html`
-            <div class="${this.utils.cls("", null, "s-bare")}">
-                ${this.props.sidebar ? html`
-                          <nav class="${this.utils.cls("__sidebar")}">
-                              <div class="${this.utils.cls("__logo")}">
-                                  ${unsafeHTML(this.props.logo)}
-                              </div>
-
-                              <div class="${this.utils.cls("__navigation")}">
-                                  <ul class="s-fs-tree">
-                                      ${Object.keys(this._data.specsBySources).map((sourceId) => {
-      var _a4;
-      const sourceObj = this._data.specsBySources[sourceId];
-      if (typeof sourceObj === "function") {
-        return "";
-      }
-      return html`
-                                              <li
-                                                  class="${this.state.activeNavigationFolders.includes(sourceId) ? "active" : ""}"
-                                              >
-                                                  <div
-                                                      @pointerup=${() => this._toggleNavigationFolder(sourceId)}
-                                                  >
-                                                      ${this.state.activeNavigationFolders.includes(sourceId) ? html`
-                                                                ${unsafeHTML(this.props.icons.folderOpen)}
-                                                            ` : html`
-                                                                ${unsafeHTML(this.props.icons.folderClose)}
-                                                            `}
-                                                      <span tabindex="0"
-                                                          >${(_a4 = sourceObj.title) !== null && _a4 !== void 0 ? _a4 : sourceId}</span
-                                                      >
-                                                  </div>
-                                                  <ul>
-                                                      ${Object.keys(sourceObj.specs).map((dotpath) => {
-        var _a5;
-        const specObj = sourceObj.specs[dotpath];
-        return html`
-                                                              <li
-                                                                  class="${document.location.href.includes(specObj.metas.dotpath) ? "active" : ""}"
-                                                                  tabindex="0"
-                                                                  @pointerup=${() => this._changePage(specObj.metas.dotpath)}
-                                                              >
-                                                                  <div>
-                                                                      <i
-                                                                          class="fa-regular fa-file"
-                                                                      ></i>
-                                                                      <a
-                                                                          >${(_a5 = specObj.title) !== null && _a5 !== void 0 ? _a5 : specObj.name}</a
-                                                                      >
-                                                                  </div>
-                                                              </li>
-                                                          `;
-      })}
-                                                  </ul>
-                                              </li>
-                                          `;
-    })}
-                                  </ul>
-                              </div>
-                          </nav>
-                      ` : ""}
-
-                <nav class="__editor ${this.currentSpecs ? "active" : ""}">
-                    ${this.currentSpecs ? html`
-                              <s-specs-editor
-                                  media="${this.state.activeMedia}"
-                                  specs="${JSON.stringify(this.currentSpecs)}"
-                                  frontspec="${JSON.stringify((_a3 = this._data.frontspec) !== null && _a3 !== void 0 ? _a3 : {})}"
-                              >
-                              </s-specs-editor>
-                          ` : ""}
-                </nav>
-
-                ${((_c2 = (_b2 = this._data.frontspec) === null || _b2 === void 0 ? void 0 : _b2.media) === null || _c2 === void 0 ? void 0 : _c2.queries) && this.props.iframe ? html`
-                          <style>
-                              :root {
-                                  --s-carpenter-content-width: ${this._data.frontspec.media.queries[this.state.activeMedia].maxWidth ? `${this._data.frontspec.media.queries[this.state.activeMedia].maxWidth / 100 * 75}px` : "100vw"};
-                              }
-                          </style>
-                          <nav class="${this.utils.cls("__media")}">
-                              <ul
-                                  class="${this.utils.cls("__queries", "s-tabs", "s-bare")}"
-                              >
-                                  ${Object.keys(this._data.frontspec.media.queries).map((query) => {
-      return html`
-                                          <li
-                                              @pointerup=${() => this._activateMedia(query)}
-                                              class="s-color s-color--accent ${query === this.state.activeMedia ? "active" : ""} ${this.utils.cls("__query __item")}"
-                                          >
-                                              ${unsafeHTML(this.props.specs[query])}
-                                              ${__upperFirst(query)}
-                                          </li>
-                                      `;
-    })}
-                              </ul>
-                          </nav>
-                      ` : ""}
-            </div>
-        `;
-  }
-}
-SCarpenterComponent._registeredAdapters = {
-  ajax: __ajaxAdapter
-};
-SCarpenterComponent.state = {
-  activeNavigationFolders: [],
-  hoveredDotpath: null,
-  $currentElement: null,
-  $hoveredElement: null,
-  activeMedia: null
-};
 class SGoogleMapComponentInterface extends SInterface {
   static get _definition() {
     return {
@@ -27664,13 +25984,11 @@ document.env = window.___deepMerge(JSON.parse(`{"PLATFORM":"browser","ENV":"deve
     }
   });
   document.body.setAttribute("s-sugar", "true");
-  define$5();
-  SPackEssentials();
-  define$c({});
-  define$6();
-  define();
   define$1();
-  SCarpenterComponent.create();
+  SPackEssentials();
+  define$8({});
+  define$2();
+  define();
 })();
 export {
   SSugarConfig as S

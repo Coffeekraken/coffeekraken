@@ -30,7 +30,7 @@ class postcssSugarPluginLodOnlyMixinInterface extends __SInterface {
             level: {
                 type: 'Number|String',
                 required: true,
-            }
+            },
         };
     }
 }

@@ -1,6 +1,7 @@
 import __SClass from '@coffeekraken/s-class';
 import type { ISConfigSettings } from '@coffeekraken/s-config';
 import __SConfig from '@coffeekraken/s-config';
+import type { ISSugarConfig } from '../shared/types';
 
 export interface ISSugarConfigLoadedObj {
     id: string;
@@ -26,6 +27,8 @@ export default class SSugarConfig extends __SClass {
     static _registeredConfigFilesPaths: any[];
     
     static registerFolder(path: string, scope?: 'default' | 'module' | 'repo' | 'package' | 'user', packageName?: string): void;
+    
+    static get config(): ISSugarConfig;
     
     static get filesRealPaths(): string[];
     

@@ -13,6 +13,7 @@
         "@coffeekraken/s-sugar-json": "^2.0.0-alpha.20",
         "@coffeekraken/sugar": "^2.0.0-alpha.20"
     },
+    "types": "./dist/pkg/esm/shared/types.d.ts",
     "main": "dist/pkg/cjs/js/exports.js",
     "module": "dist/pkg/esm/js/exports.js",
     "exports": {

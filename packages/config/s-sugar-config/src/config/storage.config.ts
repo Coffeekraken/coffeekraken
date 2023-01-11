@@ -1,7 +1,24 @@
 import { __dirname } from '@coffeekraken/sugar/fs';
 import { __packageRootDir, __systemTmpDir } from '@coffeekraken/sugar/path';
 
-export default function (api) {
+export interface IStorageSystemConfig {
+    tmpDir: string;
+}
+
+export interface IStoragePackageConfig {
+    rootDir: string;
+    localDir: string;
+    cacheDir: string;
+    tmpDir: string;
+    nodeModulesDir: string;
+}
+
+export interface IStorageConfig {
+    system: IStorageConfig;
+    package: IStoragePackageConfig;
+}
+
+export default function (api): IStorageConfig {
     // if (api.env.platform !== 'node') return;
 
     return {

@@ -1,6 +1,8 @@
 import { __deepMerge, __get } from '@coffeekraken/sugar/object';
 import __set from '@coffeekraken/sugar/shared/object/set';
 
+import type { ISSugarConfig } from '../shared/types';
+
 /**
  * @name                SSugarConfig
  * @namespace           js
@@ -20,13 +22,27 @@ import __set from '@coffeekraken/sugar/shared/object/set';
  */
 export default class SSugarConfig {
     static _finalConfig;
-    static get finalConfig(): any {
+    static get finalConfig(): ISSugarConfig {
         if (SSugarConfig._finalConfig) return SSugarConfig._finalConfig;
         SSugarConfig._finalConfig = __deepMerge(
             // @ts-ignore
             document.env?.SUGAR?.config ?? {},
         );
         return SSugarConfig._finalConfig;
+    }
+
+    /**
+     * @name        config
+     * @type        ISSugarConfig
+     * @get
+     *
+     * Simple config accessor to access directly the config object
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static get config(): ISSugarConfig {
+        return this.get('.');
     }
 
     /**

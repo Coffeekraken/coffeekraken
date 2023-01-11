@@ -448,7 +448,6 @@ export default class STypescriptBuilder extends __SBuilder {
 
         this._tsProject = new __tsMorph.Project({
             skipAddingFilesFromTsConfig: true,
-            // useInMemoryFileSystem: true,
             compilerOptions,
         });
 
@@ -485,6 +484,9 @@ export default class STypescriptBuilder extends __SBuilder {
                 packageRoot,
             );
             const sourceFile = project.getSourceFile(filePath);
+
+            // update the file in memory with the one on the filesystem
+            await sourceFile.refreshFromFileSystem();
 
             if (!sourceFile) {
                 return resolve('');
@@ -579,6 +581,10 @@ export default class STypescriptBuilder extends __SBuilder {
 
             // generating .d.ts file
             if (file.declarationFile && outFilePath.match(/\/dist\//)) {
+                try {
+                    __fs.unlinkSync(outFilePath.replace(/\.js$/, '.d.ts'));
+                } catch (e) {}
+
                 const declarationPromise = pipe(
                     this._buildDeclarationFile(
                         file.path,
@@ -591,8 +597,15 @@ export default class STypescriptBuilder extends __SBuilder {
                     if (!declarationStr) {
                         return;
                     }
+
+                    // try {
+                    //     __fs.unlinkSync(outFilePath.replace(/\.js$/, '.d.ts'));
+                    // } catch (e) {
+                    //     console.log(e);
+                    // }
+
                     // save declaration file if needed
-                    await __fsPromise.writeFile(
+                    __fs.writeFileSync(
                         outFilePath.replace(/\.js$/, '.d.ts'),
                         declarationStr,
                     );

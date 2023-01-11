@@ -13,6 +13,8 @@ import __replaceTokens from '@coffeekraken/sugar/shared/token/replaceTokens';
 import __fs from 'fs';
 import __path from 'path';
 
+import type { ISSugarConfig } from '../shared/types';
+
 /**
  * @name                  SSugarConfig
  * @namespace           node
@@ -111,6 +113,20 @@ export default class SSugarConfig extends __SClass {
                     return `${path}/${p}`;
                 }),
         ];
+    }
+
+    /**
+     * @name        config
+     * @type        ISSugarConfig
+     * @get
+     *
+     * Simple config accessor to access directly the config object
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static get config(): ISSugarConfig {
+        return this.get('.');
     }
 
     /**

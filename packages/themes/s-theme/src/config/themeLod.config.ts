@@ -198,7 +198,7 @@ export default function (api) {
                 font: 1,
                 'font-family': 1,
                 'font-kerning': 1,
-                'font-size': 1,
+                // 'font-size': 0,
                 'font-stretch': 1,
                 'font-style': 1,
                 'font-variant': 1,

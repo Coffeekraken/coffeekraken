@@ -74,19 +74,19 @@ export default class SDashboardProjectComponent extends __SLitComponent {
                             `,
                         )}
                     </div>
-                    <div class="__details">
+                    <div class="_details">
                         <span class="ck-branch"
                             >${this._activeEnvironment.branch}</span
                         >
-                        <span class="__commit-time">
+                        <span class="_commit-time">
                             ${this._activeEnvironment.commit?.time
                                 ? html`
-                                      <span class="__commit-time-time"
+                                      <span class="_commit-time-time"
                                           >${new Date(
                                               this._activeEnvironment.commit.time,
                                           ).toLocaleTimeString()}</span
                                       >
-                                      <span class="__commit-time-date"
+                                      <span class="_commit-time-date"
                                           >${new Date(
                                               this._activeEnvironment.commit.time,
                                           ).toLocaleDateString()}</span

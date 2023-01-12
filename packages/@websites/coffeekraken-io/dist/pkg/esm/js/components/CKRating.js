@@ -276,7 +276,7 @@ export default class CKRatings extends __SLitComponent {
                           Here's what people think about Coffeekraken...
                       </h4>
 
-                      <div class="__list">
+                      <div class="_list">
                           ${this.state.ratings.map((ratingObj) => html ` ${this.renderRating(ratingObj)} `)}
                       </div>
                   `

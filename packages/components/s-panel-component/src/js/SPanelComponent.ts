@@ -209,10 +209,10 @@ export default class SPanelComponent extends __SLitComponent {
     }
     firstUpdated() {
         this._$container = this.querySelector(
-            `.${this.utils.uCls('__container')}`,
+            `.${this.utils.uCls('_container')}`,
         );
         this._$backdrop = this.querySelector(
-            `.${this.utils.uCls('__backdrop')}`,
+            `.${this.utils.uCls('_backdrop')}`,
         );
         this._containerTransitionProps = __getTransitionProperties(
             this._$container,
@@ -353,16 +353,14 @@ export default class SPanelComponent extends __SLitComponent {
     render() {
         return html`
             <div
-                class="${this.utils.cls('__root')} ${this.utils.cls(
+                class="${this.utils.cls('_root')} ${this.utils.cls(
                     `--${this.props.position}`,
                 )}"
             >
                 ${this.props.backdrop
-                    ? html`
-                          <div class="${this.utils.cls('__backdrop')}"></div>
-                      `
+                    ? html` <div class="${this.utils.cls('_backdrop')}"></div> `
                     : ''}
-                <div class="${this.utils.cls('__container')}">
+                <div class="${this.utils.cls('_container')}">
                     ${this._template ?? ''}
                 </div>
             </div>

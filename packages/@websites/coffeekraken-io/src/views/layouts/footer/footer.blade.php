@@ -25,7 +25,7 @@
             </div>
 
 
-            <div class="__columns">
+            <div class="_columns">
                 <div>
                     <h3 class="s-typo:h5 s-mbe:30">
                         Links

@@ -19,20 +19,20 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     const vars = new CssVars();
     function cardTpl(params) {
         return `*   <div class="${params.class}">
-                *     <div class="s-card__media">
-                *         <img class="s-card__img" src="https://picsum.photos/1600/900" title="..." alt="..." />
+                *     <div class="s-card_media">
+                *         <img class="s-card_img" src="https://picsum.photos/1600/900" title="..." alt="..." />
                 *     </div>
-                *     <div class="s-card__content s-spacing:30">
-                *         <h1 class="s-card__title s-typo:h3">
+                *     <div class="s-card_content s-spacing:30">
+                *         <h1 class="s-card_title s-typo:h3">
                 *             Hello world
                 *         </h1>
-                *         <p class="s-card__lead s-typo:lead s-tc:accent">
+                *         <p class="s-card_lead s-typo:lead s-tc:accent">
                 *             Lorem ipsum dolor sit amet
                 *         </p>
-                *         <p class="s-card__text s-typo:p">
+                *         <p class="s-card_text s-typo:p">
                 *             Ullamco aute ex mollit enim eu exercitation excepteur consequat laborum. Incididunt eiusmod commodo officia minim consequat enim occaecat est elit cillum. Incididunt pariatur duis ex sint. Qui aliqua pariatur cupidatat exercitation quis ea eu officia. Deserunt esse magna occaecat consectetur. Irure qui velit dolor ipsum qui cillum adipisicing reprehenderit.
                 *         </p>
-                *         <div class="s-card__cta">
+                *         <div class="s-card_cta">
                 *            <a class="s-btn s-color:accent">Click me!</a> 
                 *         </div>
                 *     </div>

@@ -21,19 +21,19 @@
     width: 100%;
   }
 
-  .s-filtrable-input__keywords {
+  .s-filtrable-input_keywords {
     padding-inline: sugar.padding(30);
     padding-block: sugar.padding(30);
   }
 
-  .s-filtrable-input__dropdown {
+  .s-filtrable-input_dropdown {
     background: sugar.color(main, surface);
     width: 300% !important;
     left: auto !important;
     right: 0 !important;
   }
 
-  .s-filtrable-input__list-item {
+  .s-filtrable-input_list-item {
     padding-inline: sugar.padding(30) !important;
     padding-block: sugar.padding(30) !important;
   }

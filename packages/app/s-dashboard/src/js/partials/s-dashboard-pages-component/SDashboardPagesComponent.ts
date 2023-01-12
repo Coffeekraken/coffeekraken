@@ -27,19 +27,19 @@ __sFiltrableInputDefine(
         templates: ({ type, item, html, unsafeHTML }) => {
             if (type === 'item') {
                 return html`
-                    <div class="s-dashboard-pages__list-item">
+                    <div class="s-dashboard-pages_list-item">
                         ${item.title
                             ? html`
                                   <div class="s-mbe:10">
                                       <h4
-                                          class="s-dashboard-pages__list-item-title s-typo:bold s-tc:accent s-flex-item:grow"
+                                          class="s-dashboard-pages_list-item-title s-typo:bold s-tc:accent s-flex-item:grow"
                                       >
                                           ${unsafeHTML(item.title)}
                                       </h4>
                                   </div>
                               `
                             : ''}
-                        <p class="__description s-typo:p s-truncate:1">
+                        <p class="_description s-typo:p s-truncate:1">
                             ${unsafeHTML(item.loc ?? '')}
                         </p>
                     </div>

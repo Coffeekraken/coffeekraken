@@ -74,8 +74,8 @@
                 }
                 }',
                 'js' => '
-                import __querySelectorLive from \'@coffeekraken/sugar/js/dom/query/querySelectorLive\';
-                __querySelectorLive(\'.my-element\', ($elm) => {
+                import _querySelectorLive from \'@coffeekraken/sugar/js/dom/query/querySelectorLive\';
+                _querySelectorLive(\'.my-element\', ($elm) => {
                 // do something with your element
                 });
                 '
@@ -208,12 +208,12 @@ sugar build'
                 </p>
             </div>
             <div>
-                <ul class="__recipes-grid s-mbe:50">
+                <ul class="_recipes-grid s-mbe:50">
                     <li>
                         <a href="/doc/recipes/built-in/default" title="Coffeekraken generic recipe">
                         {{-- style="--image: url(https://media.giphy.com/media/eIm624c8nnNbiG0V3g/giphy.gif);" --}}
                             <div class="icon-card s-color:accent" s-highlight intensity="0.6">
-                                <div class="icon-card__content">
+                                <div class="icon-card_content">
                                     <i class="s-icon:logo-coffeekraken"></i>
                                     <p class="s-p">Generic<br />(default)</p>
                                 </div>
@@ -224,7 +224,7 @@ sugar build'
                         <a href="/doc/recipes/built-in/nextjs" title="Coffeekraken NextJs recipe">
                         {{-- style="--image: url(https://media.giphy.com/media/vfyN4sCz1QBR6/giphy.gif);" --}}
                             <div class="icon-card s-color:complementary" s-highlight intensity="0.6">
-                                <div class="icon-card__content">
+                                <div class="icon-card_content">
                                     <i class="s-icon:logo-nextjs"></i>
                                     <p class="s-p">NextJS</p>
                                 </div>
@@ -235,7 +235,7 @@ sugar build'
                         <a href="https://discord.com/channels/940362961682333767/940362962223378494" target="_blank" title="Coffeekraken NextJs recipe">
                         {{-- style="--image: url(https://media0.giphy.com/media/3ohs7SYIm3yiUbL0yc/giphy.gif?cid=ecf05e476vhwqgevpq5exoat1ejppi1qk9xp4jgig9j38wck&rid=giphy.gif&ct=g);" --}}
                             <div class="icon-card s-color:accent" s-highlight intensity="0.6">
-                                <div class="icon-card__content">
+                                <div class="icon-card_content">
                                     <i class="s-icon:misc-ring"></i>
                                     <p class="s-p">Propose</p>
                                 </div>
@@ -246,7 +246,7 @@ sugar build'
                         <a href="/doc/recipes/create-your-recipe" title="Create your own recipe">
                         {{-- style="--image: url(https://media.giphy.com/media/9W6X9HzEX73VbjR2WV/giphy.gif);" --}}
                             <div class="icon-card s-color:complementary" s-highlight intensity="0.6">
-                                <div class="icon-card__content">
+                                <div class="icon-card_content">
                                     <i class="s-icon:misc-build"></i>
                                     <p class="s-p">Build your<br />own</p>
                                 </div>

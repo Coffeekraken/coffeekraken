@@ -35,7 +35,7 @@ import { define as __CKVersionSelector } from './components/CKVersionSelector';
 
 import {
     __querySelectorLive,
-    __reloadStylesheets,
+    __reloadStylesheets
 } from '@coffeekraken/sugar/dom';
 
 // Libs
@@ -168,7 +168,7 @@ if (import.meta.hot) {
     // });
 
     // code example highlight
-    __querySelectorLive('.s-code-example__content', ($elm) => {
+    __querySelectorLive('.s-code-example_content', ($elm) => {
         $elm.setAttribute('intensity', '0.3');
         $elm.setAttribute('s-highlight', 'light');
     });

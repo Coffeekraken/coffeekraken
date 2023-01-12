@@ -1,8 +1,6 @@
-export default function ({ root, sharedData, postcssApi, settings, classmap, getRoot, }: {
+export default function ({ root, sharedData, postcssApi, settings }: {
     root: any;
     sharedData: any;
     postcssApi: any;
     settings: any;
-    classmap: any;
-    getRoot: any;
 }): Promise<void>;

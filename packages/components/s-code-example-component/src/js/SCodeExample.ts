@@ -235,10 +235,10 @@ export default class SCodeExample extends __SLitComponent {
 
         // await __wait(500);
         // this._$content = this.shadowRoot?.querySelector(
-        //     '.s-code-example__content',
+        //     '.s-code-example_content',
         // );
-        this._$pre = this.querySelector('.s-code-example__code');
-        this._$root = this.querySelector('.s-code-example__root');
+        this._$pre = this.querySelector('.s-code-example_code');
+        this._$root = this.querySelector('.s-code-example_root');
         return true;
     }
     setActiveTabByTab(e) {
@@ -306,7 +306,7 @@ export default class SCodeExample extends __SLitComponent {
         const currentItem = this.currentItem;
         return html`
             <div
-                class="${this.utils.cls('__root')} ${this.props.more
+                class="${this.utils.cls('_root')} ${this.props.more
                     ? this.utils.cls('more')
                     : ''}"
                 ?lines="${
@@ -324,12 +324,12 @@ export default class SCodeExample extends __SLitComponent {
             >
                 <div class="templates"></div>
 
-                <header class="${this.utils.cls('__nav')}">
-                    <div class="${this.utils.cls('__tabs', 's-tabs')}">
+                <header class="${this.utils.cls('_nav')}">
+                    <div class="${this.utils.cls('_tabs', 's-tabs')}">
                         ${(this.props.items ?? []).map(
                             (item) => html`
                                 <div
-                                    class="${this.utils.cls('__tab')}"
+                                    class="${this.utils.cls('_tab')}"
                                     id="${item.id}"
                                     ?active="${this.state.activeTabId ===
                                     item.id}"
@@ -344,7 +344,7 @@ export default class SCodeExample extends __SLitComponent {
                         // @ts-ignore
                         this.toolbarPosition === 'nav'
                             ? html`
-                                  <div class="${this.utils.cls('__toolbar')}">
+                                  <div class="${this.utils.cls('_toolbar')}">
                                       <s-clipboard-copy
                                           @click="${this.copy}"
                                       ></s-clipboard-copy>
@@ -354,14 +354,14 @@ export default class SCodeExample extends __SLitComponent {
                     }
                 </header>
                 <div
-                    class="${this.utils.cls('__content')}"
+                    class="${this.utils.cls('_content')}"
                     style="--max-lines: ${this.props.lines ?? 99999999};"
                 >
                     ${
                         // @ts-ignore
                         this.toolbarPosition !== 'nav'
                             ? html`
-                                  <div class="${this.utils.cls('__toolbar')}">
+                                  <div class="${this.utils.cls('_toolbar')}">
                                       <s-clipboard-copy
                                           @click="${this.copy}"
                                       ></s-clipboard-copy>
@@ -372,7 +372,7 @@ export default class SCodeExample extends __SLitComponent {
                     ${(this.props.items ?? []).map(
                         (item) => html`
                             <pre
-                                class="${this.utils.cls('__code')}"
+                                class="${this.utils.cls('_code')}"
                                 style="line-height:0;"
                                 id="${item.id ?? item.lang}"
                                 ?active="${this.state.activeTabId ===
@@ -393,14 +393,14 @@ export default class SCodeExample extends __SLitComponent {
                     )}
                     ${this.props.lines && currentItem.lines > this.props.lines
                         ? html`
-                        <div class="${this.utils.cls('__more-bar')}">
+                        <div class="${this.utils.cls('_more-bar')}">
                             ${
                                 // @ts-ignore
                                 this.moreAction === 'toggle'
                                     ? html`
                                           <a
                                               class="${this.utils.cls(
-                                                  '__more-button',
+                                                  '_more-button',
                                                   's-btn',
                                               )}"
                                               @click="${() =>
@@ -425,7 +425,7 @@ export default class SCodeExample extends __SLitComponent {
                                     : html`
                                           <a
                                               class="${this.utils.cls(
-                                                  '__more-button',
+                                                  '_more-button',
                                                   's-btn s-color--accent',
                                               )}"
                                               href="${

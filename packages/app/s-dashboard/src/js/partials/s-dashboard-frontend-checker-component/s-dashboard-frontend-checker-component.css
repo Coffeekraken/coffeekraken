@@ -9,13 +9,13 @@ s-dashboard-frontend-checker {
     display: flex;
     flex-direction: column;
 
-    .__header {
+    ._header {
         background: sugar.color(base, background);
         padding: sugar.padding(30);
         @sugar.border.radius (10);
     }
 
-    .__filters {
+    ._filters {
         display: flex;
         @sugar.border.radius (10);
         margin-block-start: sugar.margin(20);
@@ -26,7 +26,7 @@ s-dashboard-frontend-checker {
             background: sugar.color(main, --alpha 0.1);
         }
     }
-    .__filter {
+    ._filter {
         padding: sugar.padding(20) sugar.padding(20);
         flex-grow: 1;
         width: 33.3%;
@@ -47,16 +47,16 @@ s-dashboard-frontend-checker {
         }
     }
 
-    .ck-list__item:focus-within {
+    .ck-list_item:focus-within {
         background: sugar.color(main, --alpha 0.1);
         color: sugar.color(main, text);
     }
 
-    .__details {
+    ._details {
         @sugar.border.radius();
         display: none;
     }
-    .ck-list__item:focus-within .__details {
+    .ck-list_item:focus-within ._details {
         display: block;
     }
 
@@ -72,20 +72,20 @@ s-dashboard-frontend-checker {
     .s-icon--success {
         font-size: 0.8em;
     }
-    .ck-list__item {
+    .ck-list_item {
         .s-icon--success {
             font-size: 0.5em;
         }
     }
 
-    .__more-link {
+    ._more-link {
         color: sugar.color(main, text);
         text-decoration: underline;
     }
 
-    .__list-item:focus,
-    .__list-item:focus-within {
-        .__details {
+    ._list-item:focus,
+    ._list-item:focus-within {
+        ._details {
             display: block;
         }
     }

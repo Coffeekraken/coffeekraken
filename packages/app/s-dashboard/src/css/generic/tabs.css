@@ -5,7 +5,7 @@
     justify-content: space-between;
 
     &-urls {
-        .__list-item {
+        ._list-item {
             flex-grow: 0;
             padding: 0 sugar.padding(30);
 
@@ -19,7 +19,7 @@
         }
     }
 
-    &__item {
+    &_item {
         display: flex;
         align-items: center;
         justify-content: center;

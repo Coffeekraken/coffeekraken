@@ -22,7 +22,7 @@ if ($firstBlock->status == 'wip') {
             <nav s-scope class="sidemenu @mobile s-display:none" >
 
                 {{-- <div class="sidemenu-sub">
-                    <ck-doc-sub-nav source=".__content"></ck-doc-sub-nav>
+                    <ck-doc-sub-nav source="._content"></ck-doc-sub-nav>
                     <div class="s-loader:square-dots s-color:accent s-until:sibling:active"></div>
                 </div> --}}
 
@@ -41,7 +41,7 @@ if ($firstBlock->status == 'wip') {
 
             <div s-page-transition-container="styleguide">
 
-                <div s-scope class="__content s-pb:50">
+                <div s-scope class="_content s-pb:50">
 
                     @if (!count((array) $docblocks))
 

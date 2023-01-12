@@ -1,5 +1,5 @@
 .s-dashboard-responsive {
-    .__details {
+    ._details {
         display: flex;
         width: 100%;
         line-height: 1.5;
@@ -16,7 +16,7 @@
             background: sugar.color(main, background, --lighten 5);
         }
     }
-    .__switch {
+    ._switch {
         position: absolute !important;
         top: sugar.margin(20);
         right: sugar.margin(20);

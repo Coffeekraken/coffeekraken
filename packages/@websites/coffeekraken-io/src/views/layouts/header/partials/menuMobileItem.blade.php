@@ -1,7 +1,7 @@
-<div class="__subnav-accordion">
+<div class="_subnav-accordion">
     @foreach ($menuItem as $item)
         @if (isset($item->name))
-            <div class="__subnav-title" s-activate href="#subnav-mobile-{{ \Sugar\string\idCompliant($item->name) }}"
+            <div class="_subnav-title" s-activate href="#subnav-mobile-{{ \Sugar\string\idCompliant($item->name) }}"
                 {!! $loop->index == 1 ? 'active="true"' : '' !!} id="subnav-mobile-item-{{ \Sugar\string\idCompliant($item->name) }}"
                 trigger="click" mount-when="direct" toggle save-state>
                 <i class="s-icon:arrow-down"></i>
@@ -9,7 +9,7 @@
             </div>
         @endif
         @if (is_object($item))
-            <div class="__subnav-content" id="subnav-mobile-{{ \Sugar\string\idCompliant($item->name) }}">
+            <div class="_subnav-content" id="subnav-mobile-{{ \Sugar\string\idCompliant($item->name) }}">
                 <template>
                     @if (isset($item->content))
                         {!! $item->content !!}

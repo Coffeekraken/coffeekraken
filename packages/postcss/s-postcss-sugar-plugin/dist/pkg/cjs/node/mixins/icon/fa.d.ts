@@ -17,10 +17,11 @@ export interface IPostcssSugarPluginIconFaParams {
     style: string;
 }
 export { postcssSugarPluginIconFaInterface as interface };
-export default function ({ params, atRule, replaceWith, postcssApi, sharedData, }: {
+export default function ({ params, atRule, replaceWith, postcssApi, sharedData, getRoot, }: {
     params: Partial<IPostcssSugarPluginIconFaParams>;
     atRule: any;
     replaceWith: Function;
     postcssApi: any;
     sharedData: any;
+    getRoot: Function;
 }): Promise<void>;

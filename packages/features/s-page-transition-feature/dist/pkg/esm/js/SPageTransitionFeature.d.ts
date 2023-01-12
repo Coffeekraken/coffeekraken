@@ -14,6 +14,8 @@ export interface ISPageTransitionFeatureProps {
 export default class SPageTransitionFeature extends __SFeature {
     
     _currentUrl: string;
+    
+    _currentRequestedUrl: string;
     constructor(name: string, node: HTMLElement, settings: any);
     mount(): void;
     _isEligibleLink($link: HTMLElement): boolean;

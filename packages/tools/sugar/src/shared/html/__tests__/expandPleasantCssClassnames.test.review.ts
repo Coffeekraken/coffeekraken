@@ -29,7 +29,7 @@ describe('sugar.shared.html.expandPleasantCssClassnames', () => {
         ).toBe(true);
         expect(
             processed.includes(
-                '"s-typo s-typo--p s-font s-font--20 s-typo___desktop s-typo--h2___desktop s-typo--bold___desktop',
+                '"s-typo s-typo--p s-font s-font--20 s-typo_desktop s-typo--h2__desktop s-typo--bold__desktop',
             ),
         ).toBe(true);
     });

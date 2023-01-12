@@ -394,14 +394,14 @@ export default class SSugarConfig extends __SClass {
      * that is assigned to your configuration by passing it through the static ```load``` method
      * or assigned automatically depending on the ```env``` parameter passed to the static ```load``` method.
      *
-     * @param       {String}        dotpath         The dotpath that specify the configuration you want to get
+     * @param       {String}        [dotpath='.']         The dotpath that specify the configuration you want to get
      * @param       {String}        [id="default"]      The configuration id you want to get the config from
      * @return      {any}                           The getted configuration
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static get(dotPath: string, id = 'default'): any {
+    static get(dotPath: string = '.', id = 'default'): any {
         if (!this._sSugarConfigInstances[id]) {
             throw new Error(
                 `<red>[${this.name}]</red> You MUST load the configuration before accessing them by calling the SSugarConfig.load() async static method`,
@@ -535,13 +535,13 @@ export default class SSugarConfig extends __SClass {
      * This hash function gives you access to the actual configuration hash.
      * You can specify a dot path to get the hash of a sub configuration
      *
-     * @param           {String}            [dotPath='']            The dot path of the config you want to hash
+     * @param           {String}            [dotPath='.']            The dot path of the config you want to hash
      * @return          {String}                                    The generated hash for this config
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    hash(dotPath: string = ''): string {
+    hash(dotPath: string = '.'): string {
         const config = this.get(dotPath);
         return __objectHash(config);
     }
@@ -552,13 +552,13 @@ export default class SSugarConfig extends __SClass {
      *
      * This method allows you to get a configuration back by passing a dotpath like "something.else"
      *
-     * @param       {String}        dotpath         The dotpath that specify the config you want to get back
+     * @param       {String}        [dotpath='.']         The dotpath that specify the config you want to get back
      * @return      {any}                           The getted configuration
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    get(dotpath: string, settings?: Partial<ISConfigSettings>): any {
+    get(dotpath: string = '.', settings?: Partial<ISConfigSettings>): any {
         return this._configInstance.get(dotpath, settings);
     }
 

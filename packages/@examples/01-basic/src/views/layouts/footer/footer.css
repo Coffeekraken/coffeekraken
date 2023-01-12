@@ -24,19 +24,19 @@
     }
   }
 
-  .s-menu__link--level-0 {
+  .s-menu_link--level-0 {
     display: block;
     font-weight: bold;
     font-size: sugar.font.size(50);
     margin-block-end: sugar.margin(50);
   }
-  .s-menu__item.s-menu__item--level-0:not(:first-child) {
+  .s-menu_item.s-menu_item--level-0:not(:first-child) {
     @sugar.media <=mobile {
       margin-block-start: sugar.margin(50);
     }
   }
 
-  .s-menu__link--level-1 {
+  .s-menu_link--level-1 {
     display: block;
     font-size: sugar.font.size(40);
     margin-block-end: sugar.margin(30);

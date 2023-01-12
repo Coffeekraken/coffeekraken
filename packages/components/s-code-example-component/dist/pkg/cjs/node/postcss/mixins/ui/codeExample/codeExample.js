@@ -44,7 +44,7 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
 
-            .s-code-example__content {
+            .s-code-example_content {
                 --paddingBlock: sugar.padding(ui.codeExample.paddingBlock);
 
                 @sugar.media (mobile) {
@@ -52,19 +52,19 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                 }
             }
 
-            .s-code-example__more-bar {
+            .s-code-example_more-bar {
                 padding-inline: sugar.padding(ui.default.paddingInline);
                 padding-block: sugar.padding(ui.default.paddingBlock);
             }
 
 
-            .s-code-example__toolbar {
+            .s-code-example_toolbar {
                 position: absolute;
                 right: sugar.margin(20);
                 top: sugar.margin(20);
             }
 
-            [toolbar-position='nav'] .s-code-example__toolbar {
+            [toolbar-position='nav'] .s-code-example_toolbar {
                 right: sugar.margin(20);
                 top: sugar.margin(20);
             }
@@ -78,13 +78,13 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
         vars.push(`
             @sugar.color(main);
 
-                .s-code-example__content {
+                .s-code-example_content {
                     transition: sugar.transition(ui.codeExample.transition);
                     border-radius: sugar.border.radius(ui.codeExample.borderRadius);
                     @sugar.depth (ui.codeExample.depth);
                 }
 
-                .s-code-example__code {
+                .s-code-example_code {
                     &:not(:has(.hljs)) {
                         padding: sugar.padding(ui.codeExample.paddingBlock) sugar.padding(ui.codeExample.paddingInline);
                     }
@@ -93,7 +93,7 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                     }
                 }
 
-                .s-code-example__more-bar {
+                .s-code-example_more-bar {
                     &:before {
                         transition: sugar.transition(ui.codeExample.transition);
 
@@ -101,7 +101,7 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                     }
                 }
 
-                .s-code-example__toolbar {
+                .s-code-example_toolbar {
                     & > * {
                         color: sugar.color(current);
                         font-size: 20px;

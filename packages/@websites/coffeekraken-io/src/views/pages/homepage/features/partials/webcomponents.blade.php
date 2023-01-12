@@ -52,7 +52,7 @@
                     Some of our <span class="s-tc:accent">webcomponents</span>
                 </h4>
 
-                <ul class="__webcomponents-grid s-mbe:50">
+                <ul class="_webcomponents-grid s-mbe:50">
                     <li>
                         <a href="/" title="">
                             <div class="icon-card s-color:accent"

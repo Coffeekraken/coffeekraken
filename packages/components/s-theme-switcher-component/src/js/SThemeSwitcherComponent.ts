@@ -103,20 +103,20 @@ export default class SThemeSwitcherComponent extends __SLitComponent {
             activeTheme = __STheme.theme;
 
         return html`
-            <div class="${this.utils.cls('__root')}">
+            <div class="${this.utils.cls('_root')}">
                 ${themesKeys.length === 1
                     ? html`
                           <input
                               type="checkbox"
                               @change=${() => this._toggleDarkMode()}
-                              class="${this.utils.cls('__switch', 's-switch')}"
+                              class="${this.utils.cls('_switch', 's-switch')}"
                               ?checked=${__STheme.isDark()}
                           />
                           ${this.props.darkModeIcon
                               ? html`
                                     <i
                                         class="${this.utils.cls(
-                                            '__icon',
+                                            '_icon',
                                         )} ${this.props.darkModeIconClass}"
                                     ></i>
                                 `
@@ -125,7 +125,7 @@ export default class SThemeSwitcherComponent extends __SLitComponent {
                     : html`
                           <div
                               class="${this.utils.cls(
-                                  '__dropdown-container',
+                                  '_dropdown-container',
                               )} s-dropdown-container"
                               tabindex="0"
                           >
@@ -134,7 +134,7 @@ export default class SThemeSwitcherComponent extends __SLitComponent {
                               </span>
                               <div
                                   class="${this.utils.cls(
-                                      '__dropdown',
+                                      '_dropdown',
                                   )} s-dropdown"
                               >
                                   ${themesKeys.map((theme) => {
@@ -142,7 +142,7 @@ export default class SThemeSwitcherComponent extends __SLitComponent {
                                       return html`
                                           <div
                                               class="${this.utils.cls(
-                                                  '__dropdown-item',
+                                                  '_dropdown-item',
                                                   's-dropdown-item',
                                               )} ${activeTheme === theme
                                                   ? 'active'
@@ -154,14 +154,14 @@ export default class SThemeSwitcherComponent extends __SLitComponent {
                                           >
                                               <div
                                                   class="${this.utils.cls(
-                                                      '__theme-name',
+                                                      '_theme-name',
                                                   )}"
                                               >
                                                   ${themeObj.metas.title}
                                               </div>
                                               <div
                                                   class="${this.utils.cls(
-                                                      '__dark-mode',
+                                                      '_dark-mode',
                                                   )} ${activeTheme === theme
                                                       ? 'visible'
                                                       : ''}"
@@ -173,7 +173,7 @@ export default class SThemeSwitcherComponent extends __SLitComponent {
                                                           this._toggleDarkMode();
                                                       }}
                                                       class="${this.utils.cls(
-                                                          '__switch',
+                                                          '_switch',
                                                           's-switch',
                                                       )}"
                                                       ?checked=${__STheme.isDark()}
@@ -182,7 +182,7 @@ export default class SThemeSwitcherComponent extends __SLitComponent {
                                                       ? html`
                                                             <i
                                                                 class="${this.utils.cls(
-                                                                    '__icon',
+                                                                    '_icon',
                                                                 )} ${this.props
                                                                     .darkModeIconClass}"
                                                             ></i>

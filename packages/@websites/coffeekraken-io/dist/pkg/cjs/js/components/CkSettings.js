@@ -84,19 +84,19 @@ class CkSettings extends s_lit_component_1.default {
     }
     render() {
         return (0, s_lit_component_1.html) `
-      <div s-deps css="ckSettings">
-        <div class="s-p:50 s-mbe:40 @mobile s-p:40 s-mbe:10">
-          <h1 class="s-typo:h3 s-mbe:40 @mobile s-mbe:0">Settings</h1>
-          <p class="s-typo:p @mobile s-hide">
-            These settings allows you to customize your Coffeekraken experience
-            as well as feature some of the capabilities that our toolkit has to
-            offer.
-          </p>
-        </div>
+            <div s-deps css="ckSettings">
+                <div class="s-p:50 s-mbe:40 @mobile s-p:40 s-mbe:10">
+                    <h1 class="s-typo:h3 s-mbe:40 @mobile s-mbe:0">Settings</h1>
+                    <p class="s-typo:p @mobile s-hide">
+                        These settings allows you to customize your Coffeekraken
+                        experience as well as feature some of the capabilities
+                        that our toolkit has to offer.
+                    </p>
+                </div>
 
-        <form>
-          <ul class="__settings s-bg:odd">
-            <!-- <li class="s-bg:main-surface">
+                <form>
+                    <ul class="_settings s-bg:odd">
+                        <!-- <li class="s-bg:main-surface">
                             <label
                                 class="s-label s-pi:50 s-pb:30 @mobile s-pi:40"
                             >
@@ -106,150 +106,162 @@ class CkSettings extends s_lit_component_1.default {
                                 ></s-theme-switcher>
                             </label>
                         </li> -->
-            <li class="s-bg:main-surface">
-              <label
-                class="s-label:responsive s-pi:50 s-pb:30 @mobile s-pi:40"
-                for="setting-font-size"
-              >
-                <span>Level of details</span>
-                <s-range
-                  class="s-color:accent"
-                  id="setting-lod"
-                  min="0"
-                  max="3"
-                  value=${s_theme_1.default.lod - 1}
-                  values='["Low","Medium","High","Extrem"]'
-                  tooltip
-                  step="1"
-                  @change=${(e) => {
+                        <li class="s-bg:main-surface">
+                            <label
+                                class="s-label:responsive s-pi:50 s-pb:30 @mobile s-pi:40"
+                                for="setting-font-size"
+                            >
+                                <span>Level of details</span>
+                                <s-range
+                                    class="s-color:accent"
+                                    id="setting-lod"
+                                    min="0"
+                                    max="3"
+                                    value=${s_theme_1.default.lod - 1}
+                                    values='["Low","Medium","High","Extrem"]'
+                                    tooltip
+                                    step="1"
+                                    @change=${(e) => {
             this._setLod(parseInt(e.target.value) + 1);
         }}
-                >
-                </s-range>
-              </label>
-            </li>
-            <li class="s-bg:main-surface">
-              <label
-                class="s-label:responsive s-pi:50 s-pb:30 @mobile s-pi:40"
-                for="setting-base-color"
-              >
-                <span> Base color </span>
-                <s-color-picker id="setting-base-color">
-                  <div class="s-group">
-                    <input
-                      type="text"
-                      class="s-input"
-                      value="${this._theme.getColor('base').toHex()}"
-                    />
-                    <button class="s-btn s-color:base">
-                      <i class="s-icon:color"></i>
-                    </button>
-                  </div>
-                </s-color-picker>
-              </label>
-            </li>
-            <li class="s-bg:main-surface">
-              <label
-                class="s-label:responsive s-pi:50 s-pb:30 @mobile s-pi:40"
-                for="setting-main-color"
-              >
-                <span> Main color </span>
-                <s-color-picker id="setting-main-color">
-                  <div class="s-group">
-                    <input
-                      type="text"
-                      class="s-input"
-                      value="${this._theme.getColor('main').toHex()}"
-                    />
-                    <button class="s-btn s-color:main">
-                      <i class="s-icon:color"></i>
-                    </button>
-                  </div>
-                </s-color-picker>
-              </label>
-            </li>
-            <li class="s-bg:main-surface">
-              <label
-                class="s-label:responsive s-pi:50 s-pb:30 @mobile s-pi:40"
-                for="setting-accent-color"
-              >
-                <span> Accent color </span>
-                <s-color-picker
-                  style="position:relative"
-                  id="setting-accent-color"
-                >
-                  <div class="s-group">
-                    <input
-                      type="text"
-                      class="s-input"
-                      value="${this._theme.getColor('accent').toHex()}"
-                    />
-                    <button class="s-btn s-color:accent">
-                      <i class="s-icon:color"></i>
-                    </button>
-                  </div>
-                </s-color-picker>
-              </label>
-            </li>
-            <li class="s-bg:main-surface">
-              <label
-                class="s-label:responsive s-pi:50 s-pb:30 @mobile s-pi:40"
-                for="setting-complementary-color"
-              >
-                <span> Complementary color </span>
-                <s-color-picker id="setting-complementary-color">
-                  <div class="s-group">
-                    <input
-                      type="text"
-                      class="s-input"
-                      value="${this._theme.getColor('complementary').toHex()}"
-                    />
-                    <button class="s-btn s-color:complementary">
-                      <i class="s-icon:color"></i>
-                    </button>
-                  </div>
-                </s-color-picker>
-              </label>
-            </li>
-            <li class="s-bg:main-surface">
-              <label
-                class="s-label:responsive s-pi:50 s-pb:30 @mobile s-pi:40"
-                for="setting-font-size"
-              >
-                <span>Document scale</span>
-                <s-range
-                  class="s-color:accent"
-                  id="setting-font-size"
-                  min="0.5"
-                  max="1.5"
-                  value="1"
-                  tooltip
-                  step="0.1"
-                >
-                </s-range>
-              </label>
-            </li>
-            <li class="s-bg:main-surface">
-              <label
-                class="s-label s-pi:50 s-pb:30 @mobile s-pi:40"
-                for="setting-complementary-color"
-              >
-                Restore default settings!
-                <button
-                  type="reset"
-                  class="s-btn s-color:accent"
-                  @click=${() => {
+                                >
+                                </s-range>
+                            </label>
+                        </li>
+                        <li class="s-bg:main-surface">
+                            <label
+                                class="s-label:responsive s-pi:50 s-pb:30 @mobile s-pi:40"
+                                for="setting-base-color"
+                            >
+                                <span> Base color </span>
+                                <s-color-picker id="setting-base-color">
+                                    <div class="s-group">
+                                        <input
+                                            type="text"
+                                            class="s-input"
+                                            value="${this._theme
+            .getColor('base')
+            .toHex()}"
+                                        />
+                                        <button class="s-btn s-color:base">
+                                            <i class="s-icon:color"></i>
+                                        </button>
+                                    </div>
+                                </s-color-picker>
+                            </label>
+                        </li>
+                        <li class="s-bg:main-surface">
+                            <label
+                                class="s-label:responsive s-pi:50 s-pb:30 @mobile s-pi:40"
+                                for="setting-main-color"
+                            >
+                                <span> Main color </span>
+                                <s-color-picker id="setting-main-color">
+                                    <div class="s-group">
+                                        <input
+                                            type="text"
+                                            class="s-input"
+                                            value="${this._theme
+            .getColor('main')
+            .toHex()}"
+                                        />
+                                        <button class="s-btn s-color:main">
+                                            <i class="s-icon:color"></i>
+                                        </button>
+                                    </div>
+                                </s-color-picker>
+                            </label>
+                        </li>
+                        <li class="s-bg:main-surface">
+                            <label
+                                class="s-label:responsive s-pi:50 s-pb:30 @mobile s-pi:40"
+                                for="setting-accent-color"
+                            >
+                                <span> Accent color </span>
+                                <s-color-picker
+                                    style="position:relative"
+                                    id="setting-accent-color"
+                                >
+                                    <div class="s-group">
+                                        <input
+                                            type="text"
+                                            class="s-input"
+                                            value="${this._theme
+            .getColor('accent')
+            .toHex()}"
+                                        />
+                                        <button class="s-btn s-color:accent">
+                                            <i class="s-icon:color"></i>
+                                        </button>
+                                    </div>
+                                </s-color-picker>
+                            </label>
+                        </li>
+                        <li class="s-bg:main-surface">
+                            <label
+                                class="s-label:responsive s-pi:50 s-pb:30 @mobile s-pi:40"
+                                for="setting-complementary-color"
+                            >
+                                <span> Complementary color </span>
+                                <s-color-picker
+                                    id="setting-complementary-color"
+                                >
+                                    <div class="s-group">
+                                        <input
+                                            type="text"
+                                            class="s-input"
+                                            value="${this._theme
+            .getColor('complementary')
+            .toHex()}"
+                                        />
+                                        <button
+                                            class="s-btn s-color:complementary"
+                                        >
+                                            <i class="s-icon:color"></i>
+                                        </button>
+                                    </div>
+                                </s-color-picker>
+                            </label>
+                        </li>
+                        <li class="s-bg:main-surface">
+                            <label
+                                class="s-label:responsive s-pi:50 s-pb:30 @mobile s-pi:40"
+                                for="setting-font-size"
+                            >
+                                <span>Document scale</span>
+                                <s-range
+                                    class="s-color:accent"
+                                    id="setting-font-size"
+                                    min="0.5"
+                                    max="1.5"
+                                    value="1"
+                                    tooltip
+                                    step="0.1"
+                                >
+                                </s-range>
+                            </label>
+                        </li>
+                        <li class="s-bg:main-surface">
+                            <label
+                                class="s-label s-pi:50 s-pb:30 @mobile s-pi:40"
+                                for="setting-complementary-color"
+                            >
+                                Restore default settings!
+                                <button
+                                    type="reset"
+                                    class="s-btn s-color:accent"
+                                    @click=${() => {
             this._theme.clear();
         }}
-                >
-                  Restore!
-                </button>
-              </label>
-            </li>
-          </ul>
-        </form>
-      </div>
-    `;
+                                >
+                                    Restore!
+                                </button>
+                            </label>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        `;
     }
 }
 exports.default = CkSettings;
@@ -258,4 +270,4 @@ function define(props = {}, tagName = 'ck-settings') {
     s_lit_component_1.default.define(tagName, CkSettings, Object.assign({ id: 'ck-settings' }, props));
 }
 exports.define = define;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUVkLGlGQUFzRTtBQUN0RSxvRUFBNkM7QUFFN0MsTUFBcUIsVUFBVyxTQUFRLHlCQUFlO0lBU3JEO1FBQ0UsS0FBSyxDQUFDO1lBQ0osU0FBUyxFQUFFLEtBQUs7U0FDakIsQ0FBQyxDQUFDO1FBWEwsV0FBTSxHQUFHLGlCQUFRLENBQUMsZUFBZSxFQUFFLENBQUM7UUFhbEMsaUJBQVEsQ0FBQyxhQUFhLENBQUMsQ0FBQyxDQUFDLEVBQUUsRUFBRTtZQUMzQixtQ0FBbUM7UUFDckMsQ0FBQyxDQUFDLENBQUM7SUFDTCxDQUFDO0lBZEQsTUFBTSxLQUFLLFVBQVU7UUFDbkIsT0FBTyx5QkFBZSxDQUFDLHVCQUF1QixFQUFFLENBQUM7SUFDbkQsQ0FBQztJQWNLLFlBQVk7O1lBQ2hCLE1BQU0sZ0JBQWdCLEdBQUcsSUFBSSxDQUFDLGFBQWEsQ0FBQyxxQkFBcUIsQ0FBQyxDQUFDO1lBQ25FLE1BQU0sZ0JBQWdCLEdBQUcsSUFBSSxDQUFDLGFBQWEsQ0FBQyxxQkFBcUIsQ0FBQyxDQUFDO1lBQ25FLE1BQU0sa0JBQWtCLEdBQUcsSUFBSSxDQUFDLGFBQWEsQ0FBQyx1QkFBdUIsQ0FBQyxDQUFDO1lBQ3ZFLE1BQU0seUJBQXlCLEdBQUcsSUFBSSxDQUFDLGFBQWEsQ0FDbEQsOEJBQThCLENBQy9CLENBQUM7WUFDRixNQUFNLGNBQWMsR0FBRyxJQUFJLENBQUMsYUFBYSxDQUFDLG9CQUFvQixDQUFDLENBQUM7WUFFaEUsZ0JBQWdCLENBQUMsZ0JBQWdCLENBQUMsdUJBQXVCLEVBQUUsQ0FBQyxDQUFDLEVBQUUsRUFBRTtnQkFDL0QsSUFBSSxDQUFDLE1BQU0sQ0FBQyxRQUFRLENBQUMsTUFBTSxFQUFFLENBQUMsQ0FBQyxNQUFNLENBQUMsR0FBRyxD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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUVkLGlGQUFzRTtBQUN0RSxvRUFBNkM7QUFFN0MsTUFBcUIsVUFBVyxTQUFRLHlCQUFlO0lBU25EO1FBQ0ksS0FBSyxDQUFDO1lBQ0YsU0FBUyxFQUFFLEtBQUs7U0FDbkIsQ0FBQyxDQUFDO1FBWFAsV0FBTSxHQUFHLGlCQUFRLENBQUMsZUFBZSxFQUFFLENBQUM7UUFhaEMsaUJBQVEsQ0FBQyxhQUFhLENBQUMsQ0FBQyxDQUFDLEVBQUUsRUFBRTtZQUN6QixtQ0FBbUM7UUFDdkMsQ0FBQyxDQUFDLENBQUM7SUFDUCxDQUFDO0lBZEQsTUFBTSxLQUFLLFVBQVU7UUFDakIsT0FBTyx5QkFBZSxDQUFDLHVCQUF1QixFQUFFLENBQUM7SUFDckQsQ0FBQztJQWNLLFlBQVk7O1lBQ2QsTUFBTSxnQkFBZ0IsR0FBRyxJQUFJLENBQUMsYUFBYSxDQUFDLHFCQUFxQixDQUFDLENBQUM7WUFDbkUsTUFBTSxnQkFBZ0IsR0FBRyxJQUFJLENBQUMsYUFBYSxDQUFDLHFCQUFxQixDQUFDLENBQUM7WUFDbkUsTUFBTSxrQkFBa0IsR0FBRyxJQUFJLENBQUMsYUFBYSxDQUFDLHVCQUF1QixDQUFDLENBQUM7WUFDdkUsTUFBTSx5QkFBeUIsR0FBRyxJQUFJLENBQUMsYUFBYSxDQUNoRCw4QkFBOEIsQ0FDakMsQ0FBQztZQUNGLE1BQU0sY0FBYyxHQUFHLElBQUksQ0FBQyxhQUFhLENBQUMsb0JBQW9CLENBQUMsQ0FBQztZQUVoRSxnQkFBZ0IsQ0FBQyxnQkFBZ0IsQ0FBQyx1QkFBdUIsRUFBRSxDQUFDLENBQUMsRUFBRSxFQUFFO2dCQUM3RCxJQUFJLENBQUMsTUFBTSxDQUFDLFFBQVEsQ0FBQyxNQUFNLEVBQUUsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxHQUFHLENB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

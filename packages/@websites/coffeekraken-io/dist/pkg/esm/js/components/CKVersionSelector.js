@@ -70,19 +70,19 @@ export default class CKVersionSelector extends __SLitComponent {
             ? 's-color--error'
             : 's-color--complementary';
         return html `
-      <span class="s-dropdown-container" tabindex="0">
-        <span class="s-badge ${color}">
-          ${this._currentVersionObj.codename
+            <span class="s-dropdown-container" tabindex="0">
+                <span class="s-badge ${color}">
+                    ${this._currentVersionObj.codename
             ? html ` <span class="s-typo:bold s-text:uppercase"
-                >${this._currentVersionObj.codename}</span
-              >`
+                              >${this._currentVersionObj.codename}</span
+                          >`
             : `${this._versions[0]}`}
-        </span>
-        <div class="s-dropdown:bottom s-bare">
-          <div class="__inner">
-            ${this.isNewVersion()
+                </span>
+                <div class="s-dropdown:bottom s-bare">
+                    <div class="_inner">
+                        ${this.isNewVersion()
             ? html `
-                  <div class="__new s-p:30">
+                  <div class="_new s-p:30">
                     <h3 class="s-typo:h3 s-gradient:text:accent s-mbe:20">
                       Hell Yeaaah!
                     </h3>
@@ -98,7 +98,7 @@ export default class CKVersionSelector extends __SLitComponent {
                       >
                       one.
                     </p>
-                    <blockquote class="__codename s-mbs:30">
+                    <blockquote class="_codename s-mbs:30">
                       <span class="s-tc:accent">${this._versions[0]}</span>
                       codename
                       <div class="s-typo:h5 s-text:uppercase s-mbs:20">
@@ -122,59 +122,64 @@ export default class CKVersionSelector extends __SLitComponent {
                 `
             : ''}
 
-            <div class="__versions">
-              ${this._versions.map((version, i) => {
+                        <div class="_versions">
+                            ${this._versions.map((version, i) => {
             // if (i === 0) return;
             return html `
-                  <div class="__version">
-                    <a
-                      href="https://${version
+                                    <div class="_version">
+                                        <a
+                                            href="https://${version
                 .split('.')
                 .join('')}.coffeekraken.io"
-                      target="_blank"
-                      title="Coffeekraken version ${version}"
-                      class="__number"
-                    >
-                      ${version}
-                    </a>
-                    <span class="__actions">
-                      ${this.props.versions[version].codename
+                                            target="_blank"
+                                            title="Coffeekraken version ${version}"
+                                            class="_number"
+                                        >
+                                            ${version}
+                                        </a>
+                                        <span class="_actions">
+                                            ${this.props.versions[version]
+                .codename
                 ? html ` <span
-                            class="s-badge s-typo:bold s-text:uppercase ${version.includes('alpha')
+                                                      class="s-badge s-typo:bold s-text:uppercase ${version.includes('alpha')
                     ? 's-color--error'
                     : 's-color--complementary'} s-mis--20"
-                          >
-                            ${this.props.versions[version].codename}
-                          </span>`
+                                                  >
+                                                      ${this.props.versions[version].codename}
+                                                  </span>`
                 : ''}
-                      <div class="s-tooltip-container">
-                        <a
-                          href="/changelog/${version}"
-                          class="s-badge s-mis:10"
-                          title="Coffeekraken ${version} changelog"
-                          @click=${() => {
-                $dropdown.style.display = 'none';
+                                            <div class="s-tooltip-container">
+                                                <a
+                                                    href="/changelog/${version}"
+                                                    class="s-badge s-mis:10"
+                                                    title="Coffeekraken ${version} changelog"
+                                                    @click=${() => {
+                $dropdown.style.display =
+                    'none';
                 document.activeElement.blur();
                 setTimeout(() => {
-                    $dropdown.style.display = 'unset';
+                    $dropdown.style.display =
+                        'unset';
                 });
             }}
-                        >
-                          <i class="s-icon:write"></i>
-                        </a>
-                        <div class="s-tooltip s-color:complementary">
-                          View the changelog
-                        </div>
-                      </div>
-                    </span>
-                  </div>
-                `;
+                                                >
+                                                    <i class="s-icon:write"></i>
+                                                </a>
+                                                <div
+                                                    class="s-tooltip s-color:complementary"
+                                                >
+                                                    View the changelog
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </div>
+                                `;
         })}
-            </div>
-          </div>
-        </div>
-      </span>
-    `;
+                        </div>
+                    </div>
+                </div>
+            </span>
+        `;
     }
 }
 CKVersionSelector.state = {
@@ -183,4 +188,4 @@ CKVersionSelector.state = {
 export function define(props = {}, tagName = 'ck-version-selector') {
     __SLitComponent.define(tagName, CKVersionSelector, Object.assign(Object.assign({}, props), { id: 'version-selector', saveState: true }));
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7QUFFZCxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUNyRCxPQUFPLGVBQWUsTUFBTSwrQkFBK0IsQ0FBQztBQUM1RCxPQUFPLEVBQUUsSUFBSSxFQUFFLE1BQU0sS0FBSyxDQUFDO0FBRTNCLE1BQU0sZ0NBQWlDLFNBQVEsWUFBWTtJQUN6RCxNQUFNLEtBQUssV0FBVztRQUNwQixPQUFPO1lBQ0wsUUFBUSxFQUFFO2dCQUNSLElBQUksRUFBRSxRQUFRO2dCQUNkLFFBQVEsRUFBRSxJQUFJO2FBQ2Y7U0FDRixDQUFDO0lBQ0osQ0FBQztDQUNGO0FBRUQsTUFBTSxDQUFDLE9BQU8sT0FBTyxpQkFBa0IsU0FBUSxlQUFlO0lBaUI1RDtRQUNFLEtBQUssQ0FBQztZQUNKLFNBQVMsRUFBRSxLQUFLO1NBQ2pCLENBQUMsQ0FBQztJQUNMLENBQUM7SUFwQkQsTUFBTSxLQUFLLFVBQVU7UUFDbkIsT0FBTyxlQUFlLENBQUMsdUJBQXVCLENBQzVDLEVBQUUsRUFDRixnQ0FBZ0MsQ0FDakMsQ0FBQztJQUNKLENBQUM7SUFpQkssWUFBWTs4REFBSSxDQUFDO0tBQUE7SUFFakIsS0FBSzs7O1lBQ1QsMEJBQTBCO1lBQzFCLElBQUksQ0FBQyxTQUFTLEdBQUcsTUFBTSxDQUFDLElBQUksQ0FBQyxNQUFBLElBQUksQ0FBQyxLQUFLLENBQUMsUUFBUSxtQ0FBSSxFQUFFLENBQUMsQ0FBQztZQUN4RCxJQUFJLENBQUMsZUFBZSxHQUFHLElBQUksQ0FBQyxTQUFTLENBQUMsQ0FBQyxDQUFDLENBQUM7WUFDekMsSUFBSSxDQUFDLGtCQUFrQixHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxlQUFlLENBQUMsQ0FBQzs7S0FDckU7SUFFRCxZQUFZO1FBQ1YsZUFBZTtRQUNmLE9BQU8s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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7QUFFZCxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUNyRCxPQUFPLGVBQWUsTUFBTSwrQkFBK0IsQ0FBQztBQUM1RCxPQUFPLEVBQUUsSUFBSSxFQUFFLE1BQU0sS0FBSyxDQUFDO0FBRTNCLE1BQU0sZ0NBQWlDLFNBQVEsWUFBWTtJQUN2RCxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsUUFBUSxFQUFFO2dCQUNOLElBQUksRUFBRSxRQUFRO2dCQUNkLFFBQVEsRUFBRSxJQUFJO2FBQ2pCO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQUVELE1BQU0sQ0FBQyxPQUFPLE9BQU8saUJBQWtCLFNBQVEsZUFBZTtJQWlCMUQ7UUFDSSxLQUFLLENBQUM7WUFDRixTQUFTLEVBQUUsS0FBSztTQUNuQixDQUFDLENBQUM7SUFDUCxDQUFDO0lBcEJELE1BQU0sS0FBSyxVQUFVO1FBQ2pCLE9BQU8sZUFBZSxDQUFDLHVCQUF1QixDQUMxQyxFQUFFLEVBQ0YsZ0NBQWdDLENBQ25DLENBQUM7SUFDTixDQUFDO0lBaUJLLFlBQVk7OERBQUksQ0FBQztLQUFBO0lBRWpCLEtBQUs7OztZQUNQLDBCQUEwQjtZQUMxQixJQUFJLENBQUMsU0FBUyxHQUFHLE1BQU0sQ0FBQyxJQUFJLENBQUMsTUFBQSxJQUFJLENBQUMsS0FBSyxDQUFDLFFBQVEsbUNBQUksRUFBRSxDQUFDLENBQUM7WUFDeEQsSUFBSSxDQUFDLGVBQWUsR0FBRyxJQUFJLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQyxDQUFDO1lBQ3pDLElBQUksQ0FBQyxrQkFBa0IsR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsZUFBZSxDQUFDLENBQUM7O0tBQ3ZFO0lBRUQsWUFBWTtRQUNSLGVBQWU7UUFDZixPQUFP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

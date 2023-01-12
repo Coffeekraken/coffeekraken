@@ -51,7 +51,7 @@ export default class SSugarConfig extends __SClass {
     
     static hash(dotPath?: string): string;
     
-    static get(dotPath: string, id?: string): any;
+    static get(dotPath?: string, id?: string): any;
     
     static getSafe(dotPath: string, id?: string): any;
     
@@ -64,7 +64,7 @@ export default class SSugarConfig extends __SClass {
     
     hash(dotPath?: string): string;
     
-    get(dotpath: string, settings?: Partial<ISConfigSettings>): any;
+    get(dotpath?: string, settings?: Partial<ISConfigSettings>): any;
     
     set(dotpath: string, value: any): any;
     

@@ -21,27 +21,27 @@
         mix-blend-mode: multiply !important;
     }
 
-    .__gradient-accent-start {
+    ._gradient-accent-start {
         stop-color: sugar.color(accent);
     }
-    .__gradient-accent-end {
+    ._gradient-accent-end {
         stop-color: sugar.color(accent, --lighten 5%);
     }
-    .__gradient-complementary-start {
+    ._gradient-complementary-start {
         stop-color: sugar.color(complementary);
     }
-    .__gradient-complementary-end {
+    ._gradient-complementary-end {
         stop-color: sugar.color(complementary, --lighten 10%);
     }
 
-    .__cup {
+    ._cup {
         position: absolute;
         left: 50%;
         top: 90%;
         transform: translateX(-50%) translateY(-100%);
         z-index: 10;
     }
-    .__smoke {
+    ._smoke {
         position: absolute;
         left: 50%;
         top: -150px;
@@ -58,13 +58,13 @@
         }
     }
 
-    .__tentacule-01 {
+    ._tentacule-01 {
         position: absolute;
         bottom: 0;
         left: 0;
     }
 
-    .__discover-02 {
+    ._discover-02 {
         position: absolute;
         top: 70%;
         left: 0;
@@ -73,7 +73,7 @@
         z-index: 100;
     }
 
-    .__shadow {
+    ._shadow {
         display: block;
         position: absolute;
         top: 92%;

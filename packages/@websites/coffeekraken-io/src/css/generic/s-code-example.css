@@ -75,14 +75,14 @@ s-code-example:not([status="mounted"]) {
   } */
 }
 
-.s-code-example__tabs {
+.s-code-example_tabs {
   margin-bottom: calc(sugar.margin(20) * -1);
   margin-left: calc(sugar.margin(20));
   position: relative;
   @sugar.depth (100);
 }
 
-.s-code-example__toolbar {
+.s-code-example_toolbar {
   color: rgba(0, 0, 0, 0.3);
   position: relative;
   top: calc(sugar.margin(10) * -1) !important;
@@ -96,11 +96,11 @@ s-code-example:not([status="mounted"]) {
   /* filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.05)); */
 }
 
-.s-code-example__content {
+.s-code-example_content {
   @sugar.depth (100);
 }
 
-.s-code-example__content .hljs {
+.s-code-example_content .hljs {
   /* background-color: sugar.color(main, surface, --darken 2); */
   border: 1px solid sugar.color(base, border, --alpha 0.1);
 

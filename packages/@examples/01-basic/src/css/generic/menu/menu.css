@@ -1,7 +1,7 @@
 .s-menu#primary-menu {
   @sugar.ui.menu();
 
-  .s-menu__link {
+  .s-menu_link {
     background: none !important;
   }
 
@@ -34,24 +34,24 @@
       @sugar.transition (slow);
     }
 
-    .s-menu__inner {
+    .s-menu_inner {
       background: sugar.color(base, background, --darken 5%);
       padding-block-start: sugar.padding(20);
       padding-block-end: sugar.padding(100);
     }
 
-    .s-menu__item:not(:last-child) {
+    .s-menu_item:not(:last-child) {
       border-bottom: 1px solid sugar.color(accent, --alpha 0.3);
     }
   }
 }
 
-#primary-menu .s-menu__item {
+#primary-menu .s-menu_item {
   background: none !important;
   position: relative;
   perspective: 800px;
 
-  &:has(> .s-menu__link) {
+  &:has(> .s-menu_link) {
     &:before {
       opacity: 0;
       pointer-events: none;

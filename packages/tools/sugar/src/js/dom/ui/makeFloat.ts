@@ -6,7 +6,7 @@ import {
     flip,
     inline,
     offset,
-    shift,
+    shift
 } from '@floating-ui/dom';
 
 import { __whenRemoved } from '@coffeekraken/sugar/dom';
@@ -105,7 +105,7 @@ export default function __makeFloat(
     let $arrow;
     if (finalSettings.arrow) {
         $arrow = document.createElement('div');
-        $arrow.classList.add('s-floating__arrow');
+        $arrow.classList.add('s-floating_arrow');
         $elm.append($arrow);
         middlewares.push(
             arrow({

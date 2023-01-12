@@ -10,21 +10,21 @@
         pointer-events: none;
     }
 }
-.s-range__root {
+.s-range_root {
     display: flex;
     width: 100%;
 }
 
-.s-range__input {
+.s-range_input {
     flex-grow: 1;
     opacity: 1 !important;
 }
 
-.s-range__input:hover + .s-range__tooltip,
-.s-range__input:focus + .s-range__tooltip {
+.s-range_input:hover + .s-range_tooltip,
+.s-range_input:focus + .s-range_tooltip {
     opacity: 1 !important;
 }
 
-.s-range__tooltip {
+.s-range_tooltip {
     transition: none;
 }

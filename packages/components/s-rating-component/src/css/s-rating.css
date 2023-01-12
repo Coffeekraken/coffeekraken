@@ -3,24 +3,24 @@
     position: relative;
     cursor: pointer;
 
-    .s-rating__icons-wrapper {
+    .s-rating_icons-wrapper {
         display: flex;
     }
 
-    .s-rating__base {
+    .s-rating_base {
         opacity: 0.3;
     }
-    .s-rating__rate {
+    .s-rating_rate {
         position: absolute;
         top: 0;
         left: 0;
     }
 
-    &:hover .s-rating__rate {
+    &:hover .s-rating_rate {
         clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     }
 
-    .s-rating__rate {
+    .s-rating_rate {
         clip-path: polygon(
             0 0,
             calc(var(--s-rating-percent) * 1%) 0,

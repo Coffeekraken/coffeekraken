@@ -38,10 +38,10 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * <s-google-map>
             *   <s-google-map-marker lat="10" lng="9">
             *       <div class="s-google-map-marker">
-            *          <div class="s-google-map-marker__icon">
+            *          <div class="s-google-map-marker_icon">
             *               <i class="fa-solid fa-location-dot"></i>
             *           </div>
-            *           <div class="s-google-map-marker__content">
+            *           <div class="s-google-map-marker_content">
             *               <h3>Hello world...</h3>
             *           </div>
             *       </div>

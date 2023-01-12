@@ -36,7 +36,7 @@ export default class SDashboardWebVitalsComponent extends __SLitComponent {
                 <h2 class="s-typo:h6 s-mbe:20">Web Vitals</h2>
 
                 <div class="ck-panel">
-                    <div class="__stats">
+                    <div class="_stats">
                         <div class="ck-stat">
                             <h3 class="ck-stat__label">LCP</h3>
                             ${this._webVitals.lcp

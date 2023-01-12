@@ -26,7 +26,7 @@
         <p class="s-p s-p:30"><i class="s-icon:search s-tc:accent"></i>&nbsp;&nbsp;Searching. Please wait...</p>
     </template>
     <template id="item">
-        <div class="__bg"></div>
+        <div class="_bg"></div>
         <div class="s-flex">
             <div style="width:40%" class="s-p:50">
                 <div class="s-font:40 s-mbe:30">
@@ -47,7 +47,7 @@
             </div>
             @{{#if example}}
                 @{{#with example.[0]}}
-                    <div style="width: 60%" class="__code s-p:50 s-flex:align-center">
+                    <div style="width: 60%" class="_code s-p:50 s-flex:align-center">
                         <s-code-example style="max-width:100%;" class="s-depth:50 s-flex-item:grow:shrink" >
                             <template lang="@{{ this.language }}">
                                 @{{ this.code }}                    

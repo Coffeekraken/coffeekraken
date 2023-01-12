@@ -1,10 +1,10 @@
 <section class="section-tabs {{ paddingClasses(padding) }} {{ marginClasses(margin) }}" s-specs="views.sections.tabs" {{ specsValues(_context)|raw }}>
     <div class="s-container">
-        <div class="__layout">
+        <div class="_layout">
             <div s-appear in="left" delay="400">
-                <div class="__tabs">
+                <div class="_tabs">
                     {% for tab in tabs %}
-                        <a class="__tabs-item" href="#{{ tab.id }}" s-activate group="tabs">
+                        <a class="_tabs-item" href="#{{ tab.id }}" s-activate group="tabs">
                             {{ tab.title }}
                         </a>
                     {% endfor %}
@@ -14,7 +14,7 @@
             <div s-appear in="right" delay="600">
 
                 {% for tab in tabs %}
-                    <div class="__content" id="{{ tab.id }}">
+                    <div class="_content" id="{{ tab.id }}">
                         <h1 class="s-typo:h3 s-mbe:30">{{ tab.title|raw }}</h1>
                         <p class="s-typo:lead s-mbe:20 s-tc:accent">{{ tab.intro|raw }}</p>
                         <p class="s-typo:p">{{ tab.text|raw }}</p>

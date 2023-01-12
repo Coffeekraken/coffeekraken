@@ -17,14 +17,14 @@
     }
 }
 
-.s-pane__root {
+.s-panel_root {
     display: block;
     position: fixed;
     top: 0;
     left: 0;
 }
 
-.s-panel__backdrop {
+.s-panel_backdrop {
     /* position: absolute;
     top: 0;
     left: 0;
@@ -35,7 +35,7 @@
     z-index: 0;
 }
 
-.s-panel__container {
+.s-panel_container {
     display: none;
     position: absolute;
     z-index: 1;
@@ -100,7 +100,7 @@
     }
 }
 
-.s-panel__root {
+.s-panel_root {
     position: absolute;
     top: 0;
     left: 0;
@@ -109,13 +109,13 @@
 }
 
 .s-panel[lnf='default'] {
-    .s-panel__backdrop {
+    .s-panel_backdrop {
         background: sugar.color(main, surface, --alpha 0.6);
         transition: sugar.theme(ui.panel.transition);
         opacity: 0;
     }
 
-    .s-panel__container {
+    .s-panel_container {
         transition: sugar.theme(ui.panel.transition);
         background: sugar.color(main, background);
         @sugar.depth (ui.panel.depth);
@@ -124,8 +124,8 @@
     }
 
     &[active] {
-        .s-panel__container,
-        .s-panel__backdrop {
+        .s-panel_container,
+        .s-panel_backdrop {
             opacity: 1;
         }
     }

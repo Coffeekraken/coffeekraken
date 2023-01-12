@@ -4,23 +4,23 @@
 >
 
     {% if image and image.url %}
-        <div class="s-card__media">
-            <img class="s-card__img" src="{{ image.url }}" alt="{{ image.alt }}" title="{{ image.title }}" />
+        <div class="s-card_media">
+            <img class="s-card_img" src="{{ image.url }}" alt="{{ image.alt }}" title="{{ image.title }}" />
         </div>
     {% endif %}
 
-    <div class="s-card__content s-spacing:{{ spacing ? spacing : '30' }}">
+    <div class="s-card_content s-spacing:{{ spacing ? spacing : '30' }}">
         {% if title %}
-            <h1 class="s-card__title s-typo:h3">{{ title|raw }}</h1>
+            <h1 class="s-card_title s-typo:h3">{{ title|raw }}</h1>
         {% endif %}
         {% if intro %}
-            <p class="s-card__lead s-typo:lead s-tc:{{ color ? color : 'accent' }}">{{ intro|raw }}</p>
+            <p class="s-card_lead s-typo:lead s-tc:{{ color ? color : 'accent' }}">{{ intro|raw }}</p>
         {% endif %}
         {% if text %}
-            <p class="s-card__text s-typo:p">{{ text|raw }}</p>
+            <p class="s-card_text s-typo:p">{{ text|raw }}</p>
         {% endif %}
         {% if cta %}
-            <div class="s-card__cta">
+            <div class="s-card_cta">
                 {% set override = {} %}
                 {% if color and not cta.color %}
                     {% set override = {

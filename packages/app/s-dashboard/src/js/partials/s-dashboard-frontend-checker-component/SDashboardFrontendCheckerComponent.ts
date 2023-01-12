@@ -90,9 +90,9 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                             <i class="s-icon:high"></i> <span>High</span>
                         </div>
                     </div>
-                    <div class="__filters">
+                    <div class="_filters">
                         <div
-                            class="__filter ${this._displayStatus.includes(
+                            class="_filter ${this._displayStatus.includes(
                                 'success',
                             )
                                 ? 'active'
@@ -110,7 +110,7 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                             >
                         </div>
                         <div
-                            class="__filter ${this._displayStatus.includes(
+                            class="_filter ${this._displayStatus.includes(
                                 'warning',
                             )
                                 ? 'active'
@@ -128,7 +128,7 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                             >
                         </div>
                         <div
-                            class="__filter ${this._displayStatus.includes(
+                            class="_filter ${this._displayStatus.includes(
                                 'error',
                             )
                                 ? 'active'
@@ -186,9 +186,9 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                                                     : 'HIGH'}
                                             </span>
                                         </h2>
-                                        <div class="__details">
+                                        <div class="_details">
                                             <p
-                                                class="__description s-typo:p s-mbs:10"
+                                                class="_description s-typo:p s-mbs:10"
                                             >
                                                 ${check.description}
                                             </p>
@@ -217,7 +217,7 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                                                                       .result
                                                                       .moreLink}"
                                                                   alt="More info"
-                                                                  class="__more-link"
+                                                                  class="_more-link"
                                                                   target="_blank"
                                                                   rel="noopener"
                                                                   >More info</a

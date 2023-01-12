@@ -4,7 +4,7 @@
     z-index: 10;
     perspective: 800px;
 
-    .__layout {
+    ._layout {
         @sugar.layout ('1 2 2');
 
         @sugar.media mobile {
@@ -12,14 +12,14 @@
         }
     }
 
-    .__tabs {
+    ._tabs {
         background-color: sugar.color(base, surface);
         transform: rotateX(-5deg) rotateY(15deg) translateX(0%) translateY(-10%);
         position: relative;
         z-index: 10;
     }
 
-    .__tabs-item {
+    ._tabs-item {
         display: block;
         padding: sugar.padding(30) sugar.padding(50);
         background: linear-gradient(
@@ -54,7 +54,7 @@
         }
     }
 
-    .__content {
+    ._content {
         padding: sugar.padding(50);
         background-color: sugar.color(base, surface);
         background-image: linear-gradient(

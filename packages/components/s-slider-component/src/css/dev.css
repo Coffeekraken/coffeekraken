@@ -27,7 +27,7 @@ s-slider[status='mounted'] .s-slider {
     display: block;
 }
 
-.s-slider__slide {
+.s-slider_slide {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -44,6 +44,6 @@ s-slider[lnf*='contained'] {
     @sugar.color.current (#ffffff);
 }
 
-.s-slider__progress {
+.s-slider_progress {
     @sugar.color.current (#ffffff);
 }

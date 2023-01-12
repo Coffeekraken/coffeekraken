@@ -14,18 +14,9 @@ interface IScopesPostProcessorNodeToTreat {
 
 interface IScopesPostProcessorLodRuleSelectorsSettings {}
 
-let _timeoutsByLevel = {};
-// const sharedData.lodRulesByLevels = {};
 const _lodRulesByLevels = {};
 
-export default async function ({
-    root,
-    sharedData,
-    postcssApi,
-    settings,
-    classmap,
-    getRoot,
-}) {
+export default async function ({ root, sharedData, postcssApi, settings }) {
     // check if the lod feature is enabled or not
     if (!settings.lod?.enabled) {
         return;
@@ -127,6 +118,12 @@ export default async function ({
     }
 
     function processRuleDecl(rule: any, decl: any, levelStr: string): void {
+        // do not touch s-icons...
+        if (rule.selector.match(/^\.s-icon/)) {
+            return;
+        }
+
+        // support for @sugar.lod.prevent mixin
         if (rule.selector.match(/\.s-lod--prevent/)) {
             return;
         }
@@ -196,6 +193,11 @@ export default async function ({
 
         //
         root.walkDecls(propertiesReg, (decl) => {
+            // do not touch s-icons...
+            if (decl.parent?.selector?.match(/^\.s-icon/)) {
+                return;
+            }
+
             // support for @sugar.lods.prevent mixin
             if (decl.parent?.selector?.match(/\.s-lod--prevent/)) {
                 return;
@@ -227,12 +229,6 @@ export default async function ({
             const level = parseInt(
                 rule.selector.match(/\.s-lod--([0-9]{1,2})/)[1],
             );
-
-            // // remove the .s-lod-method--%method... class from the selector
-            // rule.selector = rule.selector.replace(
-            //     /\.s-lod-method--file\s?/gm,
-            //     '',
-            // );
 
             // remove the .s-lod--%level... class from the selector
             rule.selector = rule.selector.replace(

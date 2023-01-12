@@ -6,7 +6,7 @@ export default class SSugarConfig {
     
     static get config(): ISSugarConfig;
     
-    static get(dotpath: string): any;
+    static get(dotpath?: string): any;
     
     static set(dotpath: string, value: any): any;
 }

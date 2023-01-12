@@ -14,16 +14,16 @@
             width: 100%;
         }
 
-        .__toolbar {
+        ._toolbar {
             display: flex;
             align-items: end;
 
-            .__grow {
+            ._grow {
                 flex-grow: 1;
             }
         }
 
-        .__logo {
+        ._logo {
             width: 140px;
             margin-inline-end: sugar.margin(20);
             cursor: pointer;

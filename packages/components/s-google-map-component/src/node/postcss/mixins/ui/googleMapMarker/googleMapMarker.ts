@@ -62,7 +62,7 @@ export default function ({
         vars.push(`
             position: relative;
 
-            .s-google-map-marker__icon {
+            .s-google-map-marker_icon {
                 font-size: 50px;
                 transform-origin: 50% 100%;
                 position: absolute;
@@ -71,12 +71,12 @@ export default function ({
                 transform: translateX(-50%);
             }
 
-            &:hover .s-google-map-marker__icon:has(+ .s-google-map-marker__content),
-            &:hover .s-google-map-marker__content + .s-google-map-marker__icon {
+            &:hover .s-google-map-marker_icon:has(+ .s-google-map-marker_content),
+            &:hover .s-google-map-marker_content + .s-google-map-marker_icon {
                 font-size: 20px;
             }
 
-            .s-google-map-marker__content {
+            .s-google-map-marker_content {
                 position: absolute;
                 bottom: 30px;
                 left: 50%;
@@ -85,7 +85,7 @@ export default function ({
                 transform: translateX(-50%) translateY(-20px);
             }
 
-            &:hover .s-google-map-marker__content {
+            &:hover .s-google-map-marker_content {
                 opacity: 1;
                 pointer-events: all;
                 transform: translateX(-50%) translateY(0);
@@ -96,10 +96,10 @@ export default function ({
     // lnf
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
-            .s-google-map-marker__content {
+            .s-google-map-marker_content {
                 @sugar.transition (ui.googleMapMarker.transition);
             }
-            .s-google-map-marker__icon {
+            .s-google-map-marker_icon {
                 color: sugar.color(current);
                 @sugar.transition (ui.googleMapMarker.transition);
             }

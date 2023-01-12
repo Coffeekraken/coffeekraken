@@ -15,17 +15,17 @@ import __wait from '@coffeekraken/sugar/shared/datetime/wait';
                 switch (type) {
                     case 'item':
                         return html`
-                            <li class="__item">My title: ${item.title}</li>
+                            <li class="_item">My title: ${item.title}</li>
                         `;
                         break;
                     case 'loading':
                         return html`
-                            <li class="__loading">Loading, please wait...</li>
+                            <li class="_loading">Loading, please wait...</li>
                         `;
                         break;
                     case 'empty':
                         return html`
-                            <li class="__empty">No items found...</li>
+                            <li class="_empty">No items found...</li>
                         `;
                         break;
                 }

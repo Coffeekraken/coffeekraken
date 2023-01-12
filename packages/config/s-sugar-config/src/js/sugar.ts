@@ -52,13 +52,13 @@ export default class SSugarConfig {
      *
      * This static method allows you to access your configurations
      *
-     * @param       {String}            dotpath             The dotpath representing the configuration you want to access
+     * @param       {String}            [dotpath='.']             The dotpath representing the configuration you want to access
      * @return      {any}                                   The getted configuration
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static get(dotpath: string): any {
+    static get(dotpath: string = '.'): any {
         // @ts-ignore
         return __get(SSugarConfig.finalConfig, dotpath);
     }

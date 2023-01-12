@@ -1,6 +1,6 @@
 <div class="tools s-until:media:mobile" theme="default-dark">
 
-    <div class="tools__issue s-tooltip-container">
+    <div class="tools_issue s-tooltip-container">
         <a class="s-btn:block s-color:error" title="Share the love" target="_blank">
             <i class="s-icon:fire"></i>
         </a>
@@ -27,7 +27,7 @@
             </div>
         </div>
     </div>
-    <div class="tools__share s-tooltip-container">
+    <div class="tools_share s-tooltip-container">
         <a class="s-btn:block s-color:accent" title="Share the love" target="_blank">
             <i class="s-icon:heart"></i>
         </a>
@@ -65,7 +65,7 @@
             </div>
         </div>
     </div>
-    <div class="tools__share s-tooltip-container">
+    <div class="tools_share s-tooltip-container">
         <a class="s-btn:block s-color:complementary" title="Join us on Discord" target="_blank">
             <i class="s-icon:user"></i>
         </a>
@@ -86,7 +86,7 @@
             </div>
         </div>
     </div>
-    <div class="tools__opensource s-tooltip-container">
+    <div class="tools_opensource s-tooltip-container">
         <a class="s-btn:block s-bg:main-surface" title="We love open source!" target="_blank">
             <i class="s-icon:logo-opensource"></i>
         </a>

@@ -36,7 +36,7 @@
 
         </nav>
 
-        <div class="__content s-pb:50">
+        <div class="_content s-pb:50">
 
             @if (isset($shared->requestedConfig))
                 @php

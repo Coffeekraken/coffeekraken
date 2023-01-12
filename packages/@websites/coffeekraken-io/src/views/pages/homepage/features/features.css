@@ -2,7 +2,7 @@
 #homepage-features {
     position: relative;
 
-    .__bg {
+    ._bg {
         display: block;
         width: 100vw;
         height: 100%;
@@ -28,16 +28,16 @@
         }
     }
 
-    .__header {
+    ._header {
         position: relative;
     }
 
-    .__tabs {
+    ._tabs {
         display: flex;
         position: relative;
         top: -33px;
 
-        .__item {
+        ._item {
             text-align: center;
             flex-grow: 1;
             padding: sugar.space(20);
@@ -55,11 +55,11 @@
             }
         }
     }
-    .__contents {
+    ._contents {
         position: relative;
     }
 
-    .__recipes-grid {
+    ._recipes-grid {
         @sugar.layout (
       1 2 3 4
       5 6 7 8
@@ -75,7 +75,7 @@
         }
     }
 
-    .__webcomponents-grid {
+    ._webcomponents-grid {
         @sugar.layout (
       1 2 3 4 5
       6 7 8 9 10
@@ -111,7 +111,7 @@
     }
 
     #features-development {
-        .__illustration {
+        ._illustration {
             @sugar.media mobile {
                 width: 60%;
                 position: relative;
@@ -121,7 +121,7 @@
     }
 
     #features-sugar {
-        .__illustration {
+        ._illustration {
             transform-origin: 0 0;
             transform: scale(1.3);
 

@@ -67,7 +67,7 @@ class SDashboardResponsiveComponent extends s_lit_component_1.default {
                                 </div>
                             `)}
                     </div>
-                    <div class="__details">
+                    <div class="_details">
                         <p>
                             ${this._displayType !== 'sugar'
             ? (0, lit_1.html) `
@@ -79,7 +79,7 @@ class SDashboardResponsiveComponent extends s_lit_component_1.default {
                                   `}
                         </p>
                         <button
-                            class="__switch ck-action"
+                            class="_switch ck-action"
                             @click=${() => {
             if (this._displayType === 'sugar') {
                 this._displayType = '';

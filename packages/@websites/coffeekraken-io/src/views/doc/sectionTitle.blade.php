@@ -1,6 +1,6 @@
 {{-- {!! \Sugar\debug\pre($block) !!} --}}
 
-<a class="__section-title s-flex" s-activate toggle trigger="click,anchor"
+<a class="_section-title s-flex" s-activate toggle trigger="click,anchor"
     href="#{{ \Sugar\string\idCompliant($block->id) }}">
     <div class="s-flex-item:grow">
         @if (isset($block->type) && $block->type->raw == 'Function')

@@ -1,153 +1,153 @@
 .welcome-illustration-shapes {
-  position: absolute;
-  top: 50%;
-  right: 50%;
-  transform: translateX(100%) translateY(-50%);
-  width: 900px;
-  height: 100%;
-  pointer-events: none;
-  user-select: none;
-  z-index: 10;
-
-  [fill='#F7C032'] {
-    fill: url(#gradient-accent);
-  }
-  [fill='#5929FB'],
-  [fill='#4D1AF9'] {
-    fill: url(#gradient-complementary);
-  }
-  [fill='white'] {
-    fill: sugar.color(base, --alpha 0.2);
-    mix-blend-mode: multiply !important;
-  }
-
-  .__gradient-accent-start {
-    stop-color: sugar.color(accent);
-  }
-  .__gradient-accent-end {
-    stop-color: sugar.color(accent, --lighten 5%);
-  }
-  .__gradient-complementary-start {
-    stop-color: sugar.color(complementary);
-  }
-  .__gradient-complementary-end {
-    stop-color: sugar.color(complementary, --lighten 10%);
-  }
-
-  .__cup {
     position: absolute;
-    left: 50%;
-    top: 90%;
-    transform: translateX(-50%) translateY(-100%);
+    top: 50%;
+    right: 50%;
+    transform: translateX(100%) translateY(-50%);
+    width: 900px;
+    height: 100%;
+    pointer-events: none;
+    user-select: none;
     z-index: 10;
-  }
-  .__smoke {
-    position: absolute;
-    left: 50%;
-    top: -150px;
-    transform: translateX(calc(-50% - 50px)) translateY(0);
-    z-index: 5;
 
-    video {
-      position: absolute;
-      top: 0;
-      left: calc(50% + 50px);
-      transform: translate(-50%, 0);
-      height: 750px;
-      opacity: 0.6;
+    [fill='#F7C032'] {
+        fill: url(#gradient-accent);
     }
-  }
-  .__ts {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(calc(-50% - 200px), calc(-50% - 50px));
-    filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.2));
-  }
-  .__css {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(calc(-50% + 200px), calc(-50% - 50px));
-    filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.2));
-  }
-  .__ui {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(calc(-50% + 100px), calc(-50% - 50px));
-    filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.2));
-    z-index: 20;
-  }
-  .__node {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(calc(-50% - 150px), calc(-50% + 150px));
-    filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.2));
-  }
-  .__cli {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(calc(-50% + 150px), calc(-50% + 150px));
-    filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.2));
-  }
-  .__php {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(calc(-50% + 120px), calc(-50% + 250px));
-    filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.2));
-    z-index: 20;
-  }
-  .__deco-01 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(calc(-50% - 350px), calc(-50% + 0px));
-    filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.2));
-  }
-  .__deco-02 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(calc(-50% + 320px), calc(-50% + 100px));
-    filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.2));
-    z-index: 30;
-  }
-  .__deco-03 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(calc(-50% + 0px), calc(-50% - 200px));
-    filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.2));
-  }
+    [fill='#5929FB'],
+    [fill='#4D1AF9'] {
+        fill: url(#gradient-complementary);
+    }
+    [fill='white'] {
+        fill: sugar.color(base, --alpha 0.2);
+        mix-blend-mode: multiply !important;
+    }
 
-  .__discover-02 {
-    position: absolute;
-    top: 70%;
-    left: 0;
-    width: calc(100% - 100px);
-    transform: translateX(-100px) translateY(-50%);
-    z-index: 100;
-    display: none;
-  }
+    ._gradient-accent-start {
+        stop-color: sugar.color(accent);
+    }
+    ._gradient-accent-end {
+        stop-color: sugar.color(accent, --lighten 5%);
+    }
+    ._gradient-complementary-start {
+        stop-color: sugar.color(complementary);
+    }
+    ._gradient-complementary-end {
+        stop-color: sugar.color(complementary, --lighten 10%);
+    }
 
-  .__shadow {
-    display: block;
-    position: absolute;
-    top: 92%;
-    left: 0;
-    width: calc(100% - 100px);
-    height: 10px;
-    transform: translateX(-100px);
-    background: linear-gradient(
-      90deg,
-      rgba(0, 0, 0, 0),
-      rgba(0, 0, 0, 0.7),
-      rgba(0, 0, 0, 0)
-    );
-    filter: blur(10px);
-  }
+    ._cup {
+        position: absolute;
+        left: 50%;
+        top: 90%;
+        transform: translateX(-50%) translateY(-100%);
+        z-index: 10;
+    }
+    ._smoke {
+        position: absolute;
+        left: 50%;
+        top: -150px;
+        transform: translateX(calc(-50% - 50px)) translateY(0);
+        z-index: 5;
+
+        video {
+            position: absolute;
+            top: 0;
+            left: calc(50% + 50px);
+            transform: translate(-50%, 0);
+            height: 750px;
+            opacity: 0.6;
+        }
+    }
+    ._ts {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(calc(-50% - 200px), calc(-50% - 50px));
+        filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.2));
+    }
+    ._css {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(calc(-50% + 200px), calc(-50% - 50px));
+        filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.2));
+    }
+    ._ui {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(calc(-50% + 100px), calc(-50% - 50px));
+        filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.2));
+        z-index: 20;
+    }
+    ._node {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(calc(-50% - 150px), calc(-50% + 150px));
+        filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.2));
+    }
+    ._cli {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(calc(-50% + 150px), calc(-50% + 150px));
+        filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.2));
+    }
+    ._php {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(calc(-50% + 120px), calc(-50% + 250px));
+        filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.2));
+        z-index: 20;
+    }
+    ._deco-01 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(calc(-50% - 350px), calc(-50% + 0px));
+        filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.2));
+    }
+    ._deco-02 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(calc(-50% + 320px), calc(-50% + 100px));
+        filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.2));
+        z-index: 30;
+    }
+    ._deco-03 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(calc(-50% + 0px), calc(-50% - 200px));
+        filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.2));
+    }
+
+    ._discover-02 {
+        position: absolute;
+        top: 70%;
+        left: 0;
+        width: calc(100% - 100px);
+        transform: translateX(-100px) translateY(-50%);
+        z-index: 100;
+        display: none;
+    }
+
+    ._shadow {
+        display: block;
+        position: absolute;
+        top: 92%;
+        left: 0;
+        width: calc(100% - 100px);
+        height: 10px;
+        transform: translateX(-100px);
+        background: linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0),
+            rgba(0, 0, 0, 0.7),
+            rgba(0, 0, 0, 0)
+        );
+        filter: blur(10px);
+    }
 }

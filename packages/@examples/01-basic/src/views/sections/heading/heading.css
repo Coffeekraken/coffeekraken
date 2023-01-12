@@ -5,7 +5,7 @@
         padding-inline: sugar.padding(30);
     }
 
-    .__bkg {
+    ._bkg {
         pointer-events: none;
         position: absolute;
         top: 50%;
@@ -28,7 +28,7 @@
         }
     }
 
-    .__layout {
+    ._layout {
         @sugar.layout ('1 2');
         position: relative;
         z-index: 10;

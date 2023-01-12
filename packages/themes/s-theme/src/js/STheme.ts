@@ -549,13 +549,13 @@ export default class STheme extends __SThemeBase {
     ) {
         super(theme, variant, settings);
 
-        this.settings.classmap = __deepMerge(
-            {
-                enabled: this.get('classmap.enabled'),
-                url: this.get('classmap.url'),
-            },
-            settings.classmap ?? {},
-        );
+        // this.settings.classmap = __deepMerge(
+        //     {
+        //         enabled: this.get('classmap.enabled'),
+        //         url: this.get('classmap.url'),
+        //     },
+        //     settings.classmap ?? {},
+        // );
 
         // default lod (level of details) settings
         this.settings.lod = __deepMerge(

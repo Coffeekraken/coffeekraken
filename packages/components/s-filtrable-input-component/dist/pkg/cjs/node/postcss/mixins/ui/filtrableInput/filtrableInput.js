@@ -50,36 +50,36 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
 
-            .s-filtrable-input__dropdown {
+            .s-filtrable-input_dropdown {
                 @sugar.depth(ui.filtrableInput.depth);
                 transition: sugar.theme(ui.filtrableInput.transition);
             }
 
-            .s-filtrable-input__keywords {
+            .s-filtrable-input_keywords {
                 padding: sugar.padding(ui.filtrableInput.paddingBlock) sugar.padding(ui.filtrableInput.paddingInline);
             }
 
-            .s-filtrable-input__list {
+            .s-filtrable-input_list {
                 width: 100%;
                 transition: sugar.theme(ui.filtrableInput.transition);
                 @sugar.scrollbar;
             }
-            .s-filtrable-input__list-item {
+            .s-filtrable-input_list-item {
                 transition: sugar.theme(ui.filtrableInput.transition);
             }
         `);
         vars.push(`
 
-                .s-filtrable-input__dropdown {
+                .s-filtrable-input_dropdown {
                     background-color: sugar.color(base, background);
                     border-radius: sugar.border.radius(ui.filtrableInput.borderRadius);
                 }
 
-                .s-filtrable-input__keywords {
+                .s-filtrable-input_keywords {
                     background: sugar.color(main, background);
                 }
 
-                .s-filtrable-input__list-item {
+                .s-filtrable-input_list-item {
                     padding-inline: sugar.padding(ui.filtrableInput.paddingInline);
                     padding-block: sugar.padding(ui.filtrableInput.paddingBlock);
                     border-top: 1px solid sugar.color(base, background, --lighten 5);
@@ -88,7 +88,7 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                     &:focus,
                     &:focus:not(.active),
                     &:focus:not(:active) {
-                        &:not(.s-filtrable-input__list-no-item):not(.s-filtrable-input__list-loading) {
+                        &:not(.s-filtrable-input_list-no-item):not(.s-filtrable-input_list-loading) {
                             border-top: 1px solid sugar.color(base, --alpha 0);
                             background-color: sugar.color(base, --alpha 0.6);
                             color: sugar.color(base, foreground);
@@ -97,7 +97,7 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
 
                     &.active,
                     &:active {
-                        &:not(.s-filtrable-input__list-no-item):not(.s-filtrable-input__list-loading) {
+                        &:not(.s-filtrable-input_list-no-item):not(.s-filtrable-input_list-loading) {
                             border-top: 1px solid sugar.color(accent) !important;
                             background-color: sugar.color(accent) !important;
                             color: sugar.color(accent, foreground) !important;

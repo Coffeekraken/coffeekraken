@@ -1,16 +1,16 @@
 .s-dashboard-browserstack {
-    .__browsers {
+    ._browsers {
         display: flex;
         justify-content: space-between;
         gap: sugar.margin(20);
     }
 
-    .__browser-svg {
+    ._browser-svg {
         width: 32px;
         height: 32px;
     }
 
-    .ck-list__item {
+    .ck-list_item {
         text-align: center;
         padding: sugar.padding(30);
     }

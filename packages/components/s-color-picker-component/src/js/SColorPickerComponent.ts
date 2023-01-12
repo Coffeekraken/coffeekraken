@@ -5,12 +5,12 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 import { __copy } from '@coffeekraken/sugar/clipboard';
 import {
     __makeFloat,
-    __preventViewportMovement,
+    __preventViewportMovement
 } from '@coffeekraken/sugar/dom';
 import { __isMobile } from '@coffeekraken/sugar/is';
 import type {
     IFloatApi,
-    IFloatSettings,
+    IFloatSettings
 } from '@coffeekraken/sugar/js/dom/ui/makeFloat';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
@@ -193,25 +193,25 @@ export default class SColorPickerComponent extends __SLitComponent {
         // save the original state
         Object.assign(this._originalState, this.state);
 
-        this._$root = this.querySelector(`.${this.utils.uCls('__root')}`);
+        this._$root = this.querySelector(`.${this.utils.uCls('_root')}`);
 
-        this._$picker = this.querySelector(`.${this.utils.uCls('__picker')}`);
+        this._$picker = this.querySelector(`.${this.utils.uCls('_picker')}`);
 
         // metas input
         this._$colorInput = this.querySelector(
-            `.${this.utils.uCls('__color-input')}`,
+            `.${this.utils.uCls('_color-input')}`,
         );
 
         // shade
-        this._$shade = this.querySelector(`.${this.utils.uCls(`__shade`)}`);
+        this._$shade = this.querySelector(`.${this.utils.uCls(`_shade`)}`);
         this._shadeCtx = this._$shade.getContext('2d');
 
         // hue
-        this._$hue = this.querySelector(`.${this.utils.uCls(`__hue`)}`);
+        this._$hue = this.querySelector(`.${this.utils.uCls(`_hue`)}`);
         this._hueCtx = this._$hue.getContext('2d');
 
         // alpha
-        this._$alpha = this.querySelector(`.${this.utils.uCls(`__alpha`)}`);
+        this._$alpha = this.querySelector(`.${this.utils.uCls(`_alpha`)}`);
         this._alphaCtx = this._$alpha.getContext('2d');
 
         // input
@@ -244,9 +244,9 @@ export default class SColorPickerComponent extends __SLitComponent {
         });
 
         __preventViewportMovement(
-            this.querySelector('.s-color-picker__selectors'),
+            this.querySelector('.s-color-picker_selectors'),
         );
-        __preventViewportMovement(this.querySelector('.s-color-picker__metas'));
+        __preventViewportMovement(this.querySelector('.s-color-picker_metas'));
 
         // handle form reset
         // this._$input?.form?.addEventListener('reset', () => {
@@ -722,7 +722,7 @@ export default class SColorPickerComponent extends __SLitComponent {
     render() {
         return html`
             <div
-                class="${this.utils.cls('__root')} ${this.utils.cls('')}--${this
+                class="${this.utils.cls('_root')} ${this.utils.cls('')}--${this
                     .props.floatSettings.position} ${this._isShadeInInteraction
                     ? 'is-shade-interacting'
                     : ''} ${this._isAlphaInInteraction
@@ -734,42 +734,42 @@ export default class SColorPickerComponent extends __SLitComponent {
                 ${this.props.backdrop
                     ? html`
                           <div
-                              class="${this.utils.cls('__backdrop')} ${this
-                                  .props.backdropClass}"
+                              class="${this.utils.cls('_backdrop')} ${this.props
+                                  .backdropClass}"
                           ></div>
                       `
                     : ''}
-                <div class="${this.utils.cls('__picker')}" tabindex="-1">
-                    <div class="${this.utils.cls('__selectors')}">
-                        <div class="${this.utils.cls('__shade-wrapper')}">
-                            <div class="${this.utils.cls('__chest')}"></div>
+                <div class="${this.utils.cls('_picker')}" tabindex="-1">
+                    <div class="${this.utils.cls('_selectors')}">
+                        <div class="${this.utils.cls('_shade-wrapper')}">
+                            <div class="${this.utils.cls('_chest')}"></div>
                             <canvas
-                                class="${this.utils.cls('__shade')}"
+                                class="${this.utils.cls('_shade')}"
                                 style="opacity: ${this._color.a}"
                             ></canvas>
                         </div>
-                        <div class="${this.utils.cls('__hue-wrapper')}">
-                            <div class="${this.utils.cls('__chest')}"></div>
-                            <canvas class="${this.utils.cls('__hue')}"></canvas>
+                        <div class="${this.utils.cls('_hue-wrapper')}">
+                            <div class="${this.utils.cls('_chest')}"></div>
+                            <canvas class="${this.utils.cls('_hue')}"></canvas>
                         </div>
                         <div
                             class="${this.utils.cls(
-                                '__alpha-wrapper',
+                                '_alpha-wrapper',
                             )} ${this._isAlphaWanted() ? 'active' : ''}"
                         >
-                            <div class="${this.utils.cls('__chest')}"></div>
+                            <div class="${this.utils.cls('_chest')}"></div>
                             <canvas
-                                class="${this.utils.cls('__alpha')}"
+                                class="${this.utils.cls('_alpha')}"
                             ></canvas>
                         </div>
                     </div>
 
-                    <div class="${this.utils.cls('__metas')}">
-                        <div class="${this.utils.cls('__formats')}">
+                    <div class="${this.utils.cls('_metas')}">
+                        <div class="${this.utils.cls('_formats')}">
                             <button
                                 class="${this.utils.cls(
-                                    '__btn',
-                                )} ${this.utils.cls('__hex-btn')} ${this.state
+                                    '_btn',
+                                )} ${this.utils.cls('_hex-btn')} ${this.state
                                     .metasFormat === 'hex'
                                     ? 'active'
                                     : ''}"
@@ -783,8 +783,8 @@ export default class SColorPickerComponent extends __SLitComponent {
                             </button>
                             <button
                                 class="${this.utils.cls(
-                                    '__btn',
-                                )} ${this.utils.cls('__rgb-btn')} ${this.state
+                                    '_btn',
+                                )} ${this.utils.cls('_rgb-btn')} ${this.state
                                     .metasFormat === 'rgb'
                                     ? 'active'
                                     : ''}"
@@ -798,8 +798,8 @@ export default class SColorPickerComponent extends __SLitComponent {
                             </button>
                             <button
                                 class="${this.utils.cls(
-                                    '__btn',
-                                )} ${this.utils.cls('__hsl-btn')} ${this.state
+                                    '_btn',
+                                )} ${this.utils.cls('_hsl-btn')} ${this.state
                                     .metasFormat === 'hsl'
                                     ? 'active'
                                     : ''}"
@@ -812,11 +812,11 @@ export default class SColorPickerComponent extends __SLitComponent {
                                 HSL${this._isAlphaWanted() ? 'A' : ''}
                             </button>
                         </div>
-                        <div class="${this.utils.cls('__color')}">
+                        <div class="${this.utils.cls('_color')}">
                             <input
                                 type="text"
                                 readonly
-                                class="${this.utils.cls('__color-input')}"
+                                class="${this.utils.cls('_color-input')}"
                                 value="${this.state.metasFormat === 'hex'
                                     ? this._isAlphaWanted()
                                         ? this._color.toHexaString()
@@ -830,7 +830,7 @@ export default class SColorPickerComponent extends __SLitComponent {
                                     : this._color.toHslString()}"
                             />
                             <div
-                                class="${this.utils.cls('__preview')} "
+                                class="${this.utils.cls('_preview')} "
                                 @pointerup=${() => this._copy()}
                             >
                                 ${this.props.copyIconClass
@@ -846,7 +846,7 @@ export default class SColorPickerComponent extends __SLitComponent {
                                 ? html`
                                       <div
                                           class="${this.utils.cls(
-                                              '__eye-dropper',
+                                              '_eye-dropper',
                                           )} "
                                           @pointerup=${() => this._eyeDropper()}
                                       >
@@ -865,12 +865,12 @@ export default class SColorPickerComponent extends __SLitComponent {
                     </div>
                     ${this.props.actions.length
                         ? html`
-                              <div class="${this.utils.cls('__actions')}">
+                              <div class="${this.utils.cls('_actions')}">
                                   ${this.props.actions.includes('clear')
                                       ? html`
                                             <button
                                                 class="${this.utils.cls(
-                                                    '__clear',
+                                                    '_clear',
                                                     's-btn s-color--error',
                                                 )}"
                                                 @click=${(e) =>
@@ -889,7 +889,7 @@ export default class SColorPickerComponent extends __SLitComponent {
                                       ? html`
                                             <button
                                                 class="${this.utils.cls(
-                                                    '__reset',
+                                                    '_reset',
                                                     's-btn s-color--complementary',
                                                 )}"
                                                 @click=${(e) =>
@@ -908,7 +908,7 @@ export default class SColorPickerComponent extends __SLitComponent {
                                       ? html`
                                             <button
                                                 class="${this.utils.cls(
-                                                    '__validate',
+                                                    '_validate',
                                                     's-btn s-color--accent',
                                                 )}"
                                                 @click=${(e) =>

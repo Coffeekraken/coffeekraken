@@ -28,7 +28,7 @@
                 transparent;
         }
 
-        .s-floating__arrow {
+        .s-floating_arrow {
             background: sugar.color(main, surface);
         }
     }

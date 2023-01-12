@@ -44,7 +44,7 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
 
-            .s-rating__icons-wrapper {
+            .s-rating_icons-wrapper {
                 font-size: sugar.scalable(1em);
 
                 i {
@@ -52,11 +52,11 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
                 }
             }
 
-            .s-rating__base {
+            .s-rating_base {
                 color: sugar.color(main);
             }
             
-            .s-rating__rate {
+            .s-rating_rate {
                 color: sugar.color(current);
             }
 

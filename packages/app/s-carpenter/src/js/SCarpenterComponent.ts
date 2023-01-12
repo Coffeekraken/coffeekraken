@@ -207,7 +207,7 @@ export default class SCarpenterComponent extends __SLitComponent {
                 .replace(/<\/s-carpenter>/gm, '</s-nothing>');
 
             // add the correct class on the iframe
-            this._$iframe.classList.add(this.utils.cls('__iframe'));
+            this._$iframe.classList.add(this.utils.cls('_iframe'));
 
             // make sure we don't have any src on the iframe
             this._$iframe.setAttribute('src', 'about:blank');
@@ -567,12 +567,12 @@ export default class SCarpenterComponent extends __SLitComponent {
             <div class="${this.utils.cls('', null, 's-bare')}">
                 ${this.props.sidebar
                     ? html`
-                          <nav class="${this.utils.cls('__sidebar')}">
-                              <div class="${this.utils.cls('__logo')}">
+                          <nav class="${this.utils.cls('_sidebar')}">
+                              <div class="${this.utils.cls('_logo')}">
                                   ${unsafeHTML(this.props.logo)}
                               </div>
 
-                              <div class="${this.utils.cls('__navigation')}">
+                              <div class="${this.utils.cls('_navigation')}">
                                   <ul class="s-fs-tree">
                                       ${Object.keys(
                                           this._data.specsBySources,
@@ -667,7 +667,7 @@ export default class SCarpenterComponent extends __SLitComponent {
                       `
                     : ''}
 
-                <nav class="__editor ${this.currentSpecs ? 'active' : ''}">
+                <nav class="_editor ${this.currentSpecs ? 'active' : ''}">
                     ${this.currentSpecs
                         ? html`
                               <s-specs-editor
@@ -700,10 +700,10 @@ export default class SCarpenterComponent extends __SLitComponent {
                                       : '100vw'};
                               }
                           </style>
-                          <nav class="${this.utils.cls('__media')}">
+                          <nav class="${this.utils.cls('_media')}">
                               <ul
                                   class="${this.utils.cls(
-                                      '__queries',
+                                      '_queries',
                                       's-tabs',
                                       's-bare',
                                   )}"
@@ -719,7 +719,7 @@ export default class SCarpenterComponent extends __SLitComponent {
                                               this.state.activeMedia
                                                   ? 'active'
                                                   : ''} ${this.utils.cls(
-                                                  '__query __item',
+                                                  '_query _item',
                                               )}"
                                           >
                                               ${unsafeHTML(

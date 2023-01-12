@@ -1,5 +1,5 @@
 .ck-list {
-    &__item {
+    &_item {
         /* border-inline-start: 1px solid sugar.color(accent); */
         padding: sugar.padding(20) sugar.padding(20);
         border-color: sugar.color(current);

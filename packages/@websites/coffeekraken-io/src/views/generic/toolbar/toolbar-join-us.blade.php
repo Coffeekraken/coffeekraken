@@ -4,7 +4,7 @@
     </a>
     &nbsp;
     &nbsp;
-    <div class="toolbar__issue s-tooltip-container">
+    <div class="toolbar_issue s-tooltip-container">
         <a class="s-btn s-color:error" href="https://olivierbossel.com" title="Share the love" target="_blank">
             <i class="s-icon:fire"></i>
         </a>

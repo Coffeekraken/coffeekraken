@@ -23,7 +23,7 @@
                 </header>
                 <p class="s-typo:p s-format:text s-pi:30 s-pb:20">{!! \Sugar\markdown\toHtml($param->description) !!}</p>
                 @if (isset($param->type->interface))
-                    <section class="__toggle-content">
+                    <section class="_toggle-content">
                         @include('doc.interfaceDefinition', ['interface' => $param->type->interface])
                         </section>
                 @endif

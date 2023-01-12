@@ -4,17 +4,17 @@
     flex-direction: column;
     position: relative;
 
-    .s-filtrable-input__input {
+    .s-filtrable-input_input {
     }
 
-    .s-filtrable-input__keywords,
-    .s-filtrable-input__before,
-    .s-filtrable-input__after {
+    .s-filtrable-input_keywords,
+    .s-filtrable-input_before,
+    .s-filtrable-input_after {
         flex-grow: 0;
         width: 100%;
     }
 
-    .s-filtrable-input__dropdown {
+    .s-filtrable-input_dropdown {
         position: absolute;
         z-index: 10;
         top: 100%;
@@ -29,36 +29,36 @@
         flex-direction: column;
     }
 
-    &:focus-within .s-filtrable-input__dropdown {
+    &:focus-within .s-filtrable-input_dropdown {
         pointer-events: all;
         opacity: 1;
     }
 
     &.s-filtrable-input--top {
-        .s-filtrable-input__dropdown {
+        .s-filtrable-input_dropdown {
             top: auto;
             bottom: 100%;
         }
     }
 
-    .s-filtrable-input__input:focus + .s-filtrable-input__dropdown,
-    .s-filtrable-input__dropdown:focus,
-    .s-filtrable-input__dropdown:focus-within {
+    .s-filtrable-input_input:focus + .s-filtrable-input_dropdown,
+    .s-filtrable-input_dropdown:focus,
+    .s-filtrable-input_dropdown:focus-within {
         opacity: 1;
         pointer-events: all !important;
     }
 
-    .s-filtrable-input__list {
+    .s-filtrable-input_list {
         overflow-x: hidden;
         overflow-y: auto;
     }
 
-    .s-filtrable-input__list-item {
+    .s-filtrable-input_list-item {
         position: relative;
         user-select: none;
     }
 
-    &:not([interactive]) .s-filtrable-input__list-item {
+    &:not([interactive]) .s-filtrable-input_list-item {
         cursor: pointer;
         * {
             pointer-events: none;
@@ -67,7 +67,7 @@
 }
 
 .s-filtrable-input[inline] {
-    .s-filtrable-input__dropdown {
+    .s-filtrable-input_dropdown {
         position: static;
         margin: 0;
         max-width: 100%;

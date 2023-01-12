@@ -9,7 +9,7 @@
         content: none;
     }
 
-    .s-floating__arrow {
+    .s-floating_arrow {
         position: absolute;
         background: sugar.color(current);
         width: var(--arrow-size, 8px);

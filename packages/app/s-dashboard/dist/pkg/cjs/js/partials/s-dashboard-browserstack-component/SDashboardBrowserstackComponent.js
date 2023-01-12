@@ -110,7 +110,7 @@ class SDashboardBrowserstackComponent extends s_lit_component_1.default {
             <div class="s-dashboard-browserstack s-width:100">
                 <h2 class="s-typo:h6 s-mbe:20">Browserstack</h2>
 
-                <div class="__browsers ck-panel">
+                <div class="_browsers ck-panel">
                     ${Object.keys(this._browsers).length
             ? (0, lit_1.html) `
                               ${Object.entries(this._browsers).map(([browser, browserObj]) => (0, lit_1.html) `
@@ -120,7 +120,7 @@ class SDashboardBrowserstackComponent extends s_lit_component_1.default {
                                       >
                                           <div class="s-tooltip-container">
                                               <img
-                                                  class="__browser-svg"
+                                                  class="_browser-svg"
                                                   alt="${browser}"
                                                   src="${this._browserSvgs[browser]}"
                                               />

@@ -41,7 +41,7 @@
                         <i class="s-icon:github"></i> Browse our codebase
                     </a>
                 </div>
-                <div class="__illustration @mobile s-hide">
+                <div class="_illustration @mobile s-hide">
                     <img s-inline class="adaptive-color" src="/dist/img/illustrations/opensource.svg" />
                 </div>
             </div>

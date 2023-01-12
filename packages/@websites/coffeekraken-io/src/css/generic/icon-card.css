@@ -17,7 +17,7 @@
     }
   }
 
-  .icon-card__content {
+  .icon-card_content {
     aspect-ratio: 1;
     position: absolute;
     top: 0;
@@ -90,7 +90,7 @@
     }
   }
 
-  .icon-card__content {
+  .icon-card_content {
     &:after {
       opacity: 1;
       content: '';
@@ -118,7 +118,7 @@
       top: calc(50% + 70px);
       transition-delay: 0s;
     }
-    &:hover .icon-card__content:after {
+    &:hover .icon-card_content:after {
       transform: translateX(-25%) translateY(0%) rotateZ(45deg);
     }
   } */

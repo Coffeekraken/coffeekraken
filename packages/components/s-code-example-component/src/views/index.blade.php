@@ -10,7 +10,7 @@ const glob = require('glob');
 
 const jsonPath = './packages/tools/sugar/package.json';
 const packageJson = require(jsonPath);
-const files = glob.sync(`${__dirname}/packages/tools/sugar/src/**/*.ts`);
+const files = glob.sync(`${_dirname}/packages/tools/sugar/src/**/*.ts`);
 const deps = packageJson.dependencies;
 
 const usedPackages = [];

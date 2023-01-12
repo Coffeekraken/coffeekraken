@@ -112,21 +112,21 @@ export interface ISFiltrableInputState {
  *         switch (type) {
  *             case 'item':
  *                 return html`
- *                     <li class="__item">
+ *                     <li class="_item">
  *                         My title: ${item.title}
  *                     </li>
  *                 `;
  *                 break;
  *             case 'loading':
  *                 return html`
- *                     <li class="__loading">
+ *                     <li class="_loading">
  *                         Loading, please wait...
  *                     </li>
  *                 `;
  *                 break;
  *             case 'empty':
  *                 return html`
- *                     <li class="__empty">
+ *                     <li class="_empty">
  *                         No items found...
  *                     </li>
  *                 `;
@@ -220,7 +220,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
             switch (type) {
                 case 'item':
                     return html`
-                        <div class="${this.utils.cls('__item')}">
+                        <div class="${this.utils.cls('_item')}">
                             ${unsafeHTML(
                                 typeof this.props.label === 'function'
                                     ? this.props.label({ item })
@@ -232,7 +232,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
                 case 'empty':
                     return html`
                         <div
-                            class="${this.utils.cls('__empty')}"
+                            class="${this.utils.cls('_empty')}"
                         >
                             ${this.props.emptyText}
                         </div>
@@ -242,7 +242,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
                     return html`
                         <div
                             class="${this.utils.cls(
-                                '__loading',
+                                '_loading',
                             )}"
                         >
                             ${this.props.loadingText}
@@ -310,7 +310,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
 
         // @ts-ignore
         this.$input.classList.add(
-            ...this.utils.cls('__input').split(' '),
+            ...this.utils.cls('_input').split(' '),
         );
         if (this.props.classes.input) {
             this.$input.classList.add(this.props.classes.input);
@@ -327,7 +327,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
         // @ts-ignore
         this.$list = this.querySelector('ul');
         // @ts-ignore
-        this.$dropdown = this.querySelector(`.s-filtrable-input__dropdown`);
+        this.$dropdown = this.querySelector(`.s-filtrable-input_dropdown`);
 
         this.prepend(this.$input);
         this.filterItems();
@@ -631,7 +631,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
                                     reg,
                                     (str) => {
                                         return `<span class="${this.utils.cls(
-                                            '__list-item-highlight',
+                                            '_list-item-highlight',
                                         )} s-highlight"
                                                     >${str}</span>`;
                                     },
@@ -720,12 +720,12 @@ export default class SFiltrableInputComponent extends __SLitComponent {
         return html`
             <div class="${this.utils.cls('')}">
                 <div
-                    class="${this.utils.cls('__dropdown')} ${this
+                    class="${this.utils.cls('_dropdown')} ${this
                         .props.classes.dropdown}"
                 >
                     <div
                         class="${this.utils.cls(
-                            '__before',
+                            '_before',
                         )} ${this.props.classes.before}"
                         tabindex="-1"
                     >
@@ -738,7 +738,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
                               <div
                                   tabindex="-1"
                                   class="${this.utils.cls(
-                                      '__keywords',
+                                      '_keywords',
                                   )} ${this.props.classes.keywords}"
                               >
                                   ${this.$input.value
@@ -753,7 +753,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
                                                           keyword,
                                                       )}
                                                   class="${this.utils.cls(
-                                                      '__keyword',
+                                                      '_keyword',
                                                       's-badge',
                                                   )}"
                                                   >${keyword}</span
@@ -764,17 +764,17 @@ export default class SFiltrableInputComponent extends __SLitComponent {
                           `
                         : ''}
                     <ul
-                        class="${this.utils.cls('__list')} ${this
+                        class="${this.utils.cls('_list')} ${this
                             .props.classes.list}"
                     >
                         ${this.state.isLoading
                             ? html`
                                   <li
                                       class="${this.utils.cls(
-                                          '__list-item',
+                                          '_list-item',
                                       )} ${this.props.classes
                                           .listItem} ${this.utils.cls(
-                                          '__list-loading',
+                                          '_list-loading',
                                       )}"
                                   >
                                       ${this.props.templates?.({
@@ -793,10 +793,10 @@ export default class SFiltrableInputComponent extends __SLitComponent {
                             ? html`
                                   <li
                                       class="${this.utils.cls(
-                                          '__list-item',
+                                          '_list-item',
                                       )} ${this.props.classes
                                           .listItem} ${this.utils.cls(
-                                          '__list-no-item',
+                                          '_list-no-item',
                                       )}"
                                   >
                                       ${this.props.templates?.({
@@ -831,7 +831,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
                                                 idx}"
                                                 tabindex="-1"
                                                 class="${this.utils.cls(
-                                                    '__list-item',
+                                                    '_list-item',
                                                 )} ${this.props.classes
                                                     .listItem} ${this.selectedItems.includes(
                                                     item,
@@ -863,7 +863,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
                     </ul>
                     <div
                         class="${this.utils.cls(
-                            '__after',
+                            '_after',
                         )} ${this.props.classes.after}"
                         tabindex="-1"
                     >

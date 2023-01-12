@@ -21,7 +21,7 @@
             </p>
         </div>
         <div>
-           <ul class="__tabs s-tabs:vertical">
+           <ul class="_tabs s-tabs:vertical">
                 <li class="s-p:30">
                     <div class="s-flex">
                         <div class="s-flex-item:grow">

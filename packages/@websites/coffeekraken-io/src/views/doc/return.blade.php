@@ -22,7 +22,7 @@
         </div>
     @endif
     @if (isset($block->return->type->interface))
-        <section class="__toggle-content">
+        <section class="_toggle-content">
             @include('doc.interfaceDefinition', ['interface' => $block->return->type->interface])
             </section>
     @endif

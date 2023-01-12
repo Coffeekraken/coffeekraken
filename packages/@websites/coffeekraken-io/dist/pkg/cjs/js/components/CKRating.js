@@ -282,7 +282,7 @@ class CKRatings extends s_lit_component_1.default {
                           Here's what people think about Coffeekraken...
                       </h4>
 
-                      <div class="__list">
+                      <div class="_list">
                           ${this.state.ratings.map((ratingObj) => (0, lit_1.html) ` ${this.renderRating(ratingObj)} `)}
                       </div>
                   `

@@ -1,5 +1,5 @@
 <div id="homepage-features" s-deps css="features">
-    <div class="__contents">
+    <div class="_contents">
         <template s-lazy>
         {{-- <div s-scope> --}}
             @include('pages.homepage.features.partials.openSource')

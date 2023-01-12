@@ -78,9 +78,9 @@
                 </div>
                 <div>
                     @include('generic.code.example', ['examples' => [
-                    'js' => 'import __querySelectorLive from
+                    'js' => 'import _querySelectorLive from
                     \'@@coffeekraken/sugar/js/dom/query/querySelectorLive\';
-                    __querySelectorLive(\'.my-cool-component\', (elm) => {
+                    _querySelectorLive(\'.my-cool-component\', (elm) => {
                     // do something with your element..
                     });'
                     ]])
@@ -112,10 +112,10 @@
                 </div>
                 <div>
                     @include('generic.code.example', ['examples' => [
-                    'js' => 'import __base64 from \'@@coffeekraken/sugar/shared/crypt/base64\';
-                    import __md5 from \'@@coffeekraken/sugar/shared/crypt/md5\';
-                    __base64.encrypt(\'Hello world\'); // SGVsbG8gd29ybGQ=
-                    __md5.encrypt(\'Hello world\'); // 3e25960a79dbc69b674cd4ec67a72c62'
+                    'js' => 'import _base64 from \'@@coffeekraken/sugar/shared/crypt/base64\';
+                    import _md5 from \'@@coffeekraken/sugar/shared/crypt/md5\';
+                    _base64.encrypt(\'Hello world\'); // SGVsbG8gd29ybGQ=
+                    _md5.encrypt(\'Hello world\'); // 3e25960a79dbc69b674cd4ec67a72c62'
                     ]])
                 </div>
                 <div>
@@ -138,10 +138,10 @@
                 </div>
                 <div>
                     @include('generic.code.example', ['examples' => [
-                    'js' => 'import __isEmail from \'@@coffeekraken/sugar/shared/is/email\';
-                    import __isColor from \'@@coffeekraken/sugar/shared/is/color\';
-                    __isEmail(\'hello@world.com\'); // true
-                    __isColor(\'rgba(10,20,30,1)\'); // true'
+                    'js' => 'import _isEmail from \'@@coffeekraken/sugar/shared/is/email\';
+                    import _isColor from \'@@coffeekraken/sugar/shared/is/color\';
+                    _isEmail(\'hello@world.com\'); // true
+                    _isColor(\'rgba(10,20,30,1)\'); // true'
                             ]])
                 </div>
                 <div>

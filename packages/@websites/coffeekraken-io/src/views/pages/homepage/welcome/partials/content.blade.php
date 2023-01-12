@@ -2,7 +2,7 @@
 
 <img s-inline src="/dist/img/welcome/kraken-mobile.svg" class="s-hide s-mbe:20 @mobile s-display:inline-block" />
 
-<div class="s-mbe:50 __logo">
+<div class="s-mbe:50 _logo">
     @include ('generic.logo')
 </div>
 

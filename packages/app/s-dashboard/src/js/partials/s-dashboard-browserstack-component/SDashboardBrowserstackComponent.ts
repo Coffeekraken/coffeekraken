@@ -144,7 +144,7 @@ export default class SDashboardBrowserstackComponent extends __SLitComponent {
             <div class="s-dashboard-browserstack s-width:100">
                 <h2 class="s-typo:h6 s-mbe:20">Browserstack</h2>
 
-                <div class="__browsers ck-panel">
+                <div class="_browsers ck-panel">
                     ${Object.keys(this._browsers).length
                         ? html`
                               ${Object.entries(this._browsers).map(
@@ -155,7 +155,7 @@ export default class SDashboardBrowserstackComponent extends __SLitComponent {
                                       >
                                           <div class="s-tooltip-container">
                                               <img
-                                                  class="__browser-svg"
+                                                  class="_browser-svg"
                                                   alt="${browser}"
                                                   src="${this._browserSvgs[
                                                       browser

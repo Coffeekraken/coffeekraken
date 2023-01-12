@@ -25,7 +25,7 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
  * @example             js
  * import SFeature from '@coffeekraken/s-lit-component';
  * const component = new SFeature('my-cool-component');
- * component.utils.cls('__something'); // => my-cool-component__something
+ * component.utils.cls('_something'); // => my-cool-component__something
  * component.utils.cls('hello'); // => my-cool-component-hello
  *
  * @since           2.0.0

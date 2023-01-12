@@ -55,7 +55,7 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
             }
 
             &:focus-within {
-                .s-datetime-picker__picker {
+                .s-datetime-picker_picker {
 
                     @sugar.media <=mobile {
                         transform: translate(0, 0);
@@ -63,7 +63,7 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                 }
             }
 
-            .s-datetime-picker__calendar-item {
+            .s-datetime-picker_calendar-item {
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -76,7 +76,7 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                 }
             }
 
-            .s-datetime-picker__selector {
+            .s-datetime-picker_selector {
                 position: relative;
                 overflow-y: auto;
                 scroll-snap-type: y mandatory;
@@ -88,12 +88,12 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                     display: none;
                 }
 
-                &.scrolling .s-datetime-picker__selector-item {
+                &.scrolling .s-datetime-picker_selector-item {
                     opacity: 1;
                 }
             }
 
-            .s-datetime-picker__selector-item {
+            .s-datetime-picker_selector-item {
                 scroll-snap-align: center;
                 text-align: center;
                 opacity: 0.6;
@@ -126,11 +126,11 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
 
                     color: sugar.color(text);
 
-                    .s-datetime-picker__actions {
+                    .s-datetime-picker_actions {
                         gap: sugar.margin(20);
                     }
 
-                    .s-datetime-picker__picker {
+                    .s-datetime-picker_picker {
                         @sugar.depth (ui.datetimePicker.depth);
                         background: sugar.color(main, background);
                         padding: sugar.padding(30);
@@ -143,21 +143,21 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                             border-radius: 0;
                         }
                     }
-                    &[inline] .s-datetime-picker__picker {
+                    &[inline] .s-datetime-picker_picker {
                         box-shadow: none;
                     }
 
-                    .s-datetime-picker__calendar {
+                    .s-datetime-picker_calendar {
                         margin-block-end: sugar.margin(30);
                         color: sugar.color(base, text);
                     }
 
-                    .s-datetime-picker__calendar-day {
+                    .s-datetime-picker_calendar-day {
                         padding: sugar.padding(10);
                         font-weight: bold;
                     }
 
-                    .s-datetime-picker__calendar-item {
+                    .s-datetime-picker_calendar-item {
                         padding: sugar.padding(10);
                         border-radius: sugar.border.radius(ui.datetimePicker.borderRadius);
                         
@@ -193,8 +193,8 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                         }
                     }
 
-                    .s-datetime-picker__date-selectors,
-                    .s-datetime-picker__time-selectors {
+                    .s-datetime-picker_date-selectors,
+                    .s-datetime-picker_time-selectors {
                         border: 1px solid sugar.color(main, border);
                         border-radius: sugar.border.radius(ui.datetimePicker.borderRadius);
                         margin-block-end: sugar.margin(30);
@@ -232,8 +232,8 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                         }
                     }
 
-                    .s-datetime-picker__time-selectors {
-                        .s-datetime-picker__selector-item {
+                    .s-datetime-picker_time-selectors {
+                        .s-datetime-picker_selector-item {
                             font-size: 2em;
 
                             span {
@@ -242,19 +242,19 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                         }
                     }
 
-                    .s-datetime-picker__selector {
+                    .s-datetime-picker_selector {
                         border-inline-end: 1px solid sugar.color(main, border);
 
                         &:last-child {
                             border-inline-end: none;
                         }
 
-                        &.scrolling .s-datetime-picker__selector-item {
+                        &.scrolling .s-datetime-picker_selector-item {
                             opacity: 1;
                         }
                     }
 
-                    .s-datetime-picker__selector-item {
+                    .s-datetime-picker_selector-item {
                         color: sugar.color(base, text);
                         font-weight: bold;
 

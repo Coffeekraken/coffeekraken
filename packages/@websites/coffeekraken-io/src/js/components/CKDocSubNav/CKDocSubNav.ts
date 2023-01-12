@@ -71,11 +71,11 @@ export default class CKDocSubNav extends __SLitComponent {
     render() {
         return html`
             <div class="ck-doc-sub-nav" s-deps css="ckDocSubNav">
-                <div class="__list">
+                <div class="_list">
                     ${this._$items.map(
                         ($item, i) => html`
-                            <s-scroll class="__list-item" to="#${$item.id}">
-                                    <span class="s-tc:accent class="__index"
+                            <s-scroll class="_list-item" to="#${$item.id}">
+                                    <span class="s-tc:accent class="_index"
                                         >${(i + 1)
                                             .toString()
                                             .padStart(2, 0)}</span

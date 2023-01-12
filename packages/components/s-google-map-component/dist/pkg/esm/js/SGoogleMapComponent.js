@@ -59,10 +59,10 @@ import __define from './define';
  * <s-google-map class="s-ratio:16-9" map-id="7bfb2f702a07e548" lat="46.618038" lng="7.057280" zoom="10">
  *   <s-google-map-marker lat="46.148038" lng="7.257280">
  *       <div class="s-google-map-marker">
- *           <div class="s-google-map-marker__icon">
+ *           <div class="s-google-map-marker_icon">
  *               <i class="fa-solid fa-location-dot s-tc:accent"></i>
  *           </div>
- *           <div class="s-google-map-marker__content">
+ *           <div class="s-google-map-marker_content">
  *               <h1 class="s-typo:h1">
  *                  Hello google!
  *              </h1>
@@ -75,10 +75,10 @@ import __define from './define';
  * <s-google-map class="s-ratio:16-9" map-id="7bfb2f702a07e548" lat="46.618038" lng="7.057280">
  *   <s-google-map-marker lat="46.148038" lng="7.257280">
  *       <div class="s-google-map-marker">
- *           <div class="s-google-map-marker__icon">
+ *           <div class="s-google-map-marker_icon">
  *               <i class="fa-solid fa-location-dot s-tc:accent"></i>
  *           </div>
- *           <div class="s-google-map-marker__content">
+ *           <div class="s-google-map-marker_content">
  *               <h1 class="s-typo:h1">
  *                  Hello google! #1
  *              </h1>
@@ -87,10 +87,10 @@ import __define from './define';
  *   </s-google-map-marker>
  *   <s-google-map-marker lat="46.248038" lng="7.457280">
  *       <div class="s-google-map-marker">
- *           <div class="s-google-map-marker__icon">
+ *           <div class="s-google-map-marker_icon">
  *               <i class="fa-solid fa-location-dot s-tc:accent"></i>
  *           </div>
- *           <div class="s-google-map-marker__content">
+ *           <div class="s-google-map-marker_content">
  *               <h1 class="s-typo:h1">
  *                  Hello google! #2
  *              </h1>

@@ -8,10 +8,10 @@ s-dashboard-pages {
     .s-filtrable-input {
         height: calc(100% - sugar.margin(20) * 4);
 
-        &__dropdown {
+        &_dropdown {
             margin-block-start: sugar.margin(20);
         }
-        &__list {
+        &_list {
             @sugar.scrollbar();
         }
     }
@@ -22,7 +22,7 @@ s-dashboard-pages {
         border-radius: sugar.border.radius(10);
     }
 
-    .__description {
+    ._description {
         font-size: 14px;
     }
 }

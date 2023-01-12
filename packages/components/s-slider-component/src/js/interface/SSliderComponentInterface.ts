@@ -60,7 +60,7 @@ export default class SSliderComponentInterface extends __SInterface {
             },
             uiContainer: {
                 description:
-                    'Specify if you want an "s-container:..." class applied on the .s-slider__ui element',
+                    'Specify if you want an "s-container:..." class applied on the .s-slider_ui element',
                 type: 'String|Boolean',
             },
             controls: {

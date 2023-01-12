@@ -1,6 +1,6 @@
 .ck-settings {
 }
-#settings .s-panel__container {
+#settings .s-panel_container {
     background-color: sugar.color(main, background);
     min-width: 300px;
     width: 33vw;

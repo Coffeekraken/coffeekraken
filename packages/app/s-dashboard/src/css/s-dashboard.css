@@ -16,7 +16,7 @@ body:has(.s-dashboard) {
 }
 
 .s-dashboard {
-    .s-layout .__column {
+    .s-layout ._column {
         /* height: calc(100vh - 80px); */
         /* overflow-y: auto;
         overflow-x: visible; */

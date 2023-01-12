@@ -18,11 +18,11 @@
                         Changelogs
                     </h5>   
 
-                    <ol class="__list">
+                    <ol class="_list">
                         @foreach (array_keys((array) $versions) as $version)
                             <li>
                                 <a href="/changelog{{ $version == $currentVersion ? '' : '/' . $version }}" title="Coffeekraken {{ $version }} changelog">
-                                    <span class="__version">{{ $version }}</span>
+                                    <span class="_version">{{ $version }}</span>
                                     @if (isset($versions->$version->codename))
                                         <span class="s-badge s-color:complementary s-text:uppercase">
                                             {{ $versions->$version->codename }}
@@ -39,7 +39,7 @@
 
             <div s-page-transition-container="changelog">
 
-                <div s-scope class="__content s-rhythm:vertical s-pb:50">
+                <div s-scope class="_content s-rhythm:vertical s-pb:50">
 
                     @if (isset($requestedVersion->changelog))
                         <h1 class="s-typo:h1">

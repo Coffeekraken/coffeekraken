@@ -72,22 +72,22 @@ export default function ({
 
         vars.push(`
 
-            .s-theme-switcher__dropdown-item {
+            .s-theme-switcher_dropdown-item {
                 gap: sugar.margin(30);
 
                 &.active {
                     @sugar.color (accent);
 
-                    > .s-theme-switcher__theme-name {
+                    > .s-theme-switcher_theme-name {
                         color: sugar.color(accent, text);
                     }
                 }
 
-                .s-theme-switcher__dark-mode {
+                .s-theme-switcher_dark-mode {
                     gap: sugar.margin(10);
                 }
 
-                .s-theme-switcher__switch {
+                .s-theme-switcher_switch {
                     @sugar.scale (0.7);
                 }
             }

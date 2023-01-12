@@ -80,15 +80,15 @@ define(
         templates: ({ type, item, html }) => {
             switch (type) {
                 case 'item':
-                    return html` <li class="__item">${item.title}</li> `;
+                    return html` <li class="_item">${item.title}</li> `;
                     break;
                 case 'loading':
                     return html`
-                        <li class="__loading">Loading, please wait...</li>
+                        <li class="_loading">Loading, please wait...</li>
                     `;
                     break;
                 case 'empty':
-                    return html` <li class="__empty">No items found...</li> `;
+                    return html` <li class="_empty">No items found...</li> `;
                     break;
             }
         },

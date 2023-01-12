@@ -101,7 +101,7 @@ export default function ({
                         }
                     }
 
-                    .s-menu__inner {
+                    .s-menu_inner {
                         display: flex;
                         position: relative;
                         align-items: center;
@@ -118,17 +118,17 @@ export default function ({
                             text-align: inherit;
                         }
 
-                        .s-menu__item > .s-menu__children {
+                        .s-menu_item > .s-menu_children {
                             opacity: 1;
                             pointer-events: all;
                         }
-                        .s-menu__item:not(:hover,:focus,:focus-within) > .s-menu__children {
+                        .s-menu_item:not(:hover,:focus,:focus-within) > .s-menu_children {
                             @sugar.visually.hidden();
                             pointer-events: none;
                         }
 
 
-                        .s-menu__item {
+                        .s-menu_item {
                             position: relative;
 
                             @sugar.media <=mobile {
@@ -137,11 +137,11 @@ export default function ({
                             }
 
                         }
-                        .s-menu__item .s-menu__item {
+                        .s-menu_item .s-menu_item {
                             text-align: initial;
                         }
 
-                        .s-menu__link {
+                        .s-menu_link {
                             display: block;
                         }
 
@@ -152,7 +152,7 @@ export default function ({
                             left: 50%;
                             transform: translateX(-50%);
 
-                            & > .s-menu__item {
+                            & > .s-menu_item {
                                 display: block;
                             }
 
@@ -174,17 +174,17 @@ export default function ({
     // lnf
     if (finalParams.scope.includes('lnf')) {
         vars.push(`
-            .s-menu__item {
+            .s-menu_item {
                 font-size: sugar.font.size(50);
             }
 
-            .s-menu--level-1 .s-menu__item,
-            .s-menu--level-1 .s-menu__link {
+            .s-menu--level-1 .s-menu_item,
+            .s-menu--level-1 .s-menu_link {
                 display: block;
                 font-size: sugar.font.size(40);
                 @sugar.border.radius();
             }
-            .s-menu--level-1 .s-menu__link {
+            .s-menu--level-1 .s-menu_link {
                 padding: sugar.padding(ui.menu.paddingBlock) sugar.padding(ui.menu.paddingInline);
             }
 
@@ -203,7 +203,7 @@ export default function ({
                         @sugar.transition();
                     }
 
-                    .s-menu__inner {
+                    .s-menu_inner {
                         @sugar.media <=mobile {
                             background: sugar.color(base, background);
                             padding-inline: sugar.padding(30);
@@ -217,15 +217,15 @@ export default function ({
                                 transform: translate(0, 0) !important;
                             }
                         }
-                        .s-menu__item:not(:hover,:focus,:focus-within) > .s-menu--level-1 {
+                        .s-menu_item:not(:hover,:focus,:focus-within) > .s-menu--level-1 {
                             transform: translateX(-50%) translateY(-25px);
                         }
 
-                        .s-menu__item > .s-menu__children {
+                        .s-menu_item > .s-menu_children {
                             @sugar.transition(fast);
                         }
 
-                        .s-menu__link {
+                        .s-menu_link {
                             border-radius: sugar.border.radius(ui.menu.borderRadius);
                             padding: sugar.padding(ui.menu.paddingBlock) sugar.padding(ui.menu.paddingInline);
                             @sugar.transition(fast);
@@ -236,11 +236,11 @@ export default function ({
                             }
                         }
 
-                        .s-menu__item {
+                        .s-menu_item {
 
                             &:hover,
                             &:active {
-                                > .s-menu__link {
+                                > .s-menu_link {
                                     @sugar.media <=mobile {
                                         padding: sugar.padding(ui.menu.paddingBlock) sugar.padding(ui.menu.paddingInline);
                                         width: 100%;
@@ -249,26 +249,26 @@ export default function ({
                             }
                         }
 
-                        > .s-menu__item {
+                        > .s-menu_item {
                             
                             &:hover,
                             &:active {
-                                > .s-menu__link {
+                                > .s-menu_link {
                                     background: sugar.color(accent);
                                     color: sugar.color(accent, foreground);
                                 }
                             }
 
-                            > .s-menu__children {
+                            > .s-menu_children {
                                 background: sugar.color(base, background);
                                 padding: sugar.padding(20);
                                 @sugar.depth(100);
                                 @sugar.border.radius();
 
-                                .s-menu__item {
+                                .s-menu_item {
                                     background: sugar.color(accent, --alpha 0);
 
-                                    &:has(> .s-menu__link):hover {
+                                    &:has(> .s-menu_link):hover {
                                         background: sugar.color(accent);
                                         color: sugar.color(accent, foreground);
                                     }

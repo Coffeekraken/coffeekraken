@@ -38,18 +38,39 @@ export default async function ({
     replaceWith,
     postcssApi,
     sharedData,
+    getRoot,
 }: {
     params: Partial<IPostcssSugarPluginIconFaParams>;
     atRule: any;
     replaceWith: Function;
     postcssApi: any;
     sharedData: any;
+    getRoot: Function;
 }) {
     const finalParams: IPostcssSugarPluginIconFaParams = {
         icon: '',
         style: 'fas',
         ...params,
     };
+
+    if (!sharedData.fontawesomeBaseRule) {
+        sharedData.fontawesomeBaseRule = postcssApi.rule({
+            selector: '',
+            nodes: postcssApi.parse(`
+                -webkit-font-smoothing: antialiased;
+                display: inline-block;
+                font-style: normal;
+                font-variant: normal;
+                text-rendering: auto;
+                line-height: 1;
+
+                &:before {
+                    display: inline-block;
+                }
+            `).nodes,
+        });
+        getRoot(atRule).nodes.push(sharedData.fontawesomeBaseRule);
+    }
 
     if (finalParams.style === 'fa') {
         finalParams.style = 'fas';
@@ -126,26 +147,49 @@ export default async function ({
             fab: 400,
         };
 
-    vars.push(`
-    -webkit-font-smoothing: antialiased;
-    display: inline-block;
-    font-style: normal;
-    font-variant: normal;
-    text-rendering: auto;
-    line-height: 1;
-    font-family: "Font Awesome 6 ${__upperFirst(fontNames[finalParams.style])}";
-    font-weight: ${fontWeight[finalParams.style]};
-    
-    &:before {
-      content: ${_fontawesomeAvailableIcons[finalParams.icon]};
-      display: inline-block;
+    const fontFamily = `Font Awesome 6 ${__upperFirst(
+        fontNames[finalParams.style],
+    )}`;
+
+    if (!sharedData.fontawesomeStyleRules) {
+        sharedData.fontawesomeStyleRules = {};
     }
-  `);
+    if (!sharedData.fontawesomeStyleRules[finalParams.style]) {
+        sharedData.fontawesomeStyleRules[finalParams.style] = postcssApi.rule({
+            selector: '',
+            nodes: postcssApi.parse(`
+                font-family: "${fontFamily}";
+                font-weight: ${fontWeight[finalParams.style]};
+            `).nodes,
+        });
+        getRoot(atRule).nodes.push(
+            sharedData.fontawesomeStyleRules[finalParams.style],
+        );
+    }
+
+    vars.push(`    
+        &:before {
+            content: ${_fontawesomeAvailableIcons[finalParams.icon]};
+        }
+    `);
+
+    // add the parent selector to the sharedData.fontawesomeBaseRule
+    atRule.parent?.selectors.forEach((sel) => {
+        if (!sharedData.fontawesomeBaseRule.selectors.includes(sel)) {
+            sharedData.fontawesomeBaseRule.selector += `, ${sel}`;
+        }
+        if (
+            !sharedData.fontawesomeStyleRules[
+                finalParams.style
+            ].selectors.includes(sel)
+        ) {
+            sharedData.fontawesomeStyleRules[
+                finalParams.style
+            ].selector += `, ${sel}`;
+        }
+    });
 
     const ast = postcssApi.parse(vars.join('\n'));
-    ast.walkRules((rule) => {
-        rule._preventLod = true;
-    });
 
     atRule.replaceWith(ast);
 }

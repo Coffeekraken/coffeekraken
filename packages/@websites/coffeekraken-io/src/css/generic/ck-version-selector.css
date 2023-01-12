@@ -1,62 +1,63 @@
 .ck-version-selector {
-  .s-dropdown {
-    &:before {
-      content: '';
-      @sugar.ui.backdrop;
-      z-index: -1;
-      pointer-events: none;
+    .s-dropdown {
+        &:before {
+            content: '';
+            @sugar.ui.backdrop;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        ._inner {
+            @sugar.border.radius;
+            @sugar.depth (100);
+        }
     }
 
-    .__inner {
-      @sugar.border.radius;
-      @sugar.depth (100);
+    ._new {
+        background: sugar.color(base, background, --lighten 10);
+
+        span {
+            font-weight: bold;
+        }
     }
-  }
 
-  .__new {
-    background: sugar.color(base, background, --lighten 10);
+    ._codename {
+        background-image: linear-gradient(
+            90deg,
+            sugar.color(base, background),
+            sugar.color(base, background, --darken 5)
+        );
 
-    span {
-      font-weight: bold;
+        padding: sugar.padding(40);
+        margin-inline: calc(sugar.padding(40) * -1);
+        @sugar.depth (100);
     }
-  }
 
-  .__codename {
-    background-image: linear-gradient(
-      90deg,
-      sugar.color(base, background),
-      sugar.color(base, background, --darken 5)
-    );
+    ._versions {
+        background: sugar.color(base, background);
+        max-height: calc(100vh - 300px);
+        /* overflow-y: auto; */
+        min-width: 200px;
+        @sugar.scrollbar;
 
-    padding: sugar.padding(40);
-    margin-inline: calc(sugar.padding(40) * -1);
-    @sugar.depth (100);
-  }
+        ._version {
+            padding: sugar.padding(30) sugar.padding(30);
+            display: flex;
+            align-items: center;
 
-  .__versions {
-    background: sugar.color(base, background);
-    max-height: calc(100vh - 300px);
-    /* overflow-y: auto; */
-    min-width: 200px;
-    @sugar.scrollbar;
+            &:not(:last-child) {
+                border-bottom: 1px solid
+                    sugar.color(base, background, --lighten 5);
+            }
 
-    .__version {
-      padding: sugar.padding(30) sugar.padding(30);
-      display: flex;
-      align-items: center;
+            &:hover {
+                background: sugar.color(base, background, --lighten 5);
+            }
 
-      &:not(:last-child) {
-        border-bottom: 1px solid sugar.color(base, background, --lighten 5);
-      }
-
-      &:hover {
-        background: sugar.color(base, background, --lighten 5);
-      }
-
-      .__number {
-        flex-grow: 1;
-        padding-inline-end: sugar.padding(20);
-      }
+            ._number {
+                flex-grow: 1;
+                padding-inline-end: sugar.padding(20);
+            }
+        }
     }
-  }
 }

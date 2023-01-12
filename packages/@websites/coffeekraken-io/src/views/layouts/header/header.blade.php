@@ -3,24 +3,24 @@
     <div class="s-container">
 
         <div class="s-flex:align-center" style="position: relative">
-            <div class="__actions s-display:none @mobile s-display:inline-block">
+            <div class="_actions s-display:none @mobile s-display:inline-block">
                 <div class="s-mis:30">
-                    <a s-activate class="__menu-icon" href="#nav-mobile" toggle unactivate-on="event:s-page-transition.start">
-                        <i class="s-icon:menu __open"></i>
-                        <i class="s-icon:cross __close"></i>
+                    <a s-activate class="_menu-icon" href="#nav-mobile" toggle unactivate-on="event:s-page-transition.start">
+                        <i class="s-icon:menu _open"></i>
+                        <i class="s-icon:cross _close"></i>
                     </a>
                 </div>
             </div>
-            <div class="__logo">
+            <div class="_logo">
                 <a href="/" title="Coffeekraken.io" class="s-text:center">
                     @include ('generic.logo')
                 </a>
             </div>
-            <div class="__version">
+            <div class="_version">
                 <ck-version-selector versions='{!! json_encode($versions) !!}'></ck-version-selector>
             </div>
-            <nav id="nav" class="__nav s-until:media:mobile">
-                <a class="s-typo:bold __main-link" href="/doc/get-started/get-started" title="Get Started">
+            <nav id="nav" class="_nav s-until:media:mobile">
+                <a class="s-typo:bold _main-link" href="/doc/get-started/get-started" title="Get Started">
                     <span>Get started</span>
                 </a>
 
@@ -51,7 +51,7 @@
 
                 {{-- Documentation --}}
                 @include('layouts.header.partials.menuItem', ['menuItem' => $documentationMenu, 'class' =>
-                '__subnav-doc'])
+                '_subnav-doc'])
 
                 {{-- Styleguide --}}
                 @include('layouts.header.partials.menuItem', ['menuItem' =>
@@ -147,7 +147,7 @@
 
     </div>
 
-    <nav id="nav-mobile" class="__nav-mobile s-when:media:mobile">
+    <nav id="nav-mobile" class="_nav-mobile s-when:media:mobile">
         @php
             $documentationMenu = array_merge((array) $docmap->menu->tree->documentation, []);
             $packagesMenu = (object) [
@@ -174,36 +174,36 @@
         @endphp
 
 
-        <nav class="__links">
-            <a class="s-typo:bold __main-link" id="menu-mobile-doc" s-activate active href="#menu-mobile-doc" save-state
+        <nav class="_links">
+            <a class="s-typo:bold _main-link" id="menu-mobile-doc" s-activate active href="#menu-mobile-doc" save-state
                 group="menu-mobile" title="Documentation">
                 <span>Documentation</span>
             </a>
-            <a class="s-typo:bold __main-link" id="menu-mobile-styleguide" s-activate href="#menu-mobile-styleguide"
+            <a class="s-typo:bold _main-link" id="menu-mobile-styleguide" s-activate href="#menu-mobile-styleguide"
                 save-state group="menu-mobile" title="Styleguide">
                 <span>Styleguide</span>
             </a>
-            <a class="s-typo:bold __main-link" id="menu-mobile-api" s-activate href="#menu-mobile-api" save-state
+            <a class="s-typo:bold _main-link" id="menu-mobile-api" s-activate href="#menu-mobile-api" save-state
                 group="menu-mobile" title="Api">
                 <span>Api</span>
             </a>
         </nav>
 
-        <div class="__subnav" id="menu-mobile-doc">
+        <div class="_subnav" id="menu-mobile-doc">
             <template>
                 @include('layouts.header.partials.menuMobileItem', ['menuItem' => $documentationMenu, 'class' =>
-                '__subnav-doc'])
+                '_subnav-doc'])
             </template>
         </div>
 
-        <div class="__subnav" id="menu-mobile-styleguide">
+        <div class="_subnav" id="menu-mobile-styleguide">
             <template>
                 @include('layouts.header.partials.menuMobileItem', ['menuItem' =>
                 $docmap->menu->custom->styleguide->tree->styleguide, 'class' => ''])
             </template>
         </div>
 
-        <div class="__subnav" id="menu-mobile-api">
+        <div class="_subnav" id="menu-mobile-api">
             <template>
                 <api-nav></api-nav>
             </template>

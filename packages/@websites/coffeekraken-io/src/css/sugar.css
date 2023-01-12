@@ -32,62 +32,62 @@
 
 /* icons */
 @sugar.icon.classes (
-  fa:user:user
-  fa:heart:heart
+  fa:user
+  fa:heart
   fa:circle-nodes:api
-  fa:fire:fire
+  fa:fire
   fa:eye:preview
   fab:css3-alt:css
   fa:calendar-alt:calendar
-  fa:angle-down:arrow-down
-  fa:angle-up:arrow-up
-  fa:angle-left:arrow-left
-  fa:angle-right:arrow-right
+  fa:angle-down
+  fa:angle-up
+  fa:angle-left
+  fa:angle-right
   fa:user-graduate:documentation
   fa:box-open:box
   fa:angle-up
   fa:palette:color
   fa:eye-dropper
-  fa:info:info
+  fa:info
   fa:bars:menu
   fa:times-circle:close
   fa:times:cross
-  fab:npm:npm
+  fab:npm
   fa:chalkboard-teacher:example
-  fa:list-ul:list-ul
+  fa:list-ul
   fa:cogs:setting
   fa:th:return
-  fa:link:link
-  fa:copy:copy
-  fa:check:check
+  fa:link
+  fa:copy
+  fa:check
   fa:check:copied
-  fa:search:search
+  fa:search
   fa:radiation:nothing
   fa:download:import
   fa:moon:dark-mode
-  fa:star:star
-  fa:bugs:bugs
+  fa:star
+  fa:bugs
   fa:pen-nib:write
-  fab:google:google
-  fab:github:github
-  fab:discord:discord
-  fab:github:github
-  fab:facebook:facebook
-  fab:patreon:patreon
-  fab:twitter:twitter
-  fab:instagram:instagram
+  fab:google
+  fab:github
+  fab:discord
+  fab:github
+  fab:facebook
+  fab:patreon
+  fab:twitter
+  fab:instagram
   fa:cloud-download-alt:install
   fa:cogs:settings
-  fab:vuejs:vuejs
-  fa:tasks:tasks
+  fab:vuejs
+  fa:tasks
   fa:hammer:todo
   fa:file-pdf
   fa:file-image
   fa:file-code
   fa:file-archive
   fa:file
-  fa:computer:computer
-  fa:server:server
+  fa:computer
+  fa:server
   fs:src/icons/read-direction.svg:support-rtl
   fs:src/icons/edge.svg:support-edge
   fs:src/icons/chrome.svg:support-chromium

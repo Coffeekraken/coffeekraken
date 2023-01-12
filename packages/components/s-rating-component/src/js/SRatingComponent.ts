@@ -102,7 +102,7 @@ export default class SRatingComponent extends __SLitComponent {
     render() {
         return html`
             <div
-                class="${this.utils.cls('__root')}"
+                class="${this.utils.cls('_root')}"
                 style="--s-rating-rate: ${this.state
                     .value}; --s-rating-min: ${this.props
                     .min}; --s-rating-max: ${this.props
@@ -115,8 +115,8 @@ export default class SRatingComponent extends __SLitComponent {
                     value="${this.state.value}"
                 />
                 <div
-                    class="${this.utils.cls('__base')} ${this.utils.cls(
-                        '__icons-wrapper',
+                    class="${this.utils.cls('_base')} ${this.utils.cls(
+                        '_icons-wrapper',
                     )}"
                 >
                     ${[...Array(this.props.max).keys()].map(
@@ -130,8 +130,8 @@ export default class SRatingComponent extends __SLitComponent {
                     )}
                 </div>
                 <div
-                    class="${this.utils.cls('__rate')} ${this.utils.cls(
-                        '__icons-wrapper',
+                    class="${this.utils.cls('_rate')} ${this.utils.cls(
+                        '_icons-wrapper',
                     )}"
                 >
                     ${[...Array(this.props.max).keys()].map(

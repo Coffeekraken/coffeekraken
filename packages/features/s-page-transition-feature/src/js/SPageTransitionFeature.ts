@@ -71,6 +71,12 @@ export default class SPageTransitionFeature extends __SFeature {
      */
     _currentUrl: string;
 
+    /**
+     * Store the current loading page url to avoid triggering multiple
+     * same requests during a page load
+     */
+    _currentRequestedUrl: string;
+
     constructor(name: string, node: HTMLElement, settings: any) {
         super(
             name,
@@ -159,6 +165,15 @@ export default class SPageTransitionFeature extends __SFeature {
     transitionTo(url: string, $source): Promise<void> {
         return new Promise(async (resolve, reject) => {
 
+            // prevent loading same page multiple times
+            // during a request
+            if (this._currentRequestedUrl === url) {
+                return;
+            }
+
+            // set the current requested url
+            this._currentRequestedUrl = url;
+
             // dispatch an event
             this.utils.dispatchEvent('start', {
                 $elm: $source,
@@ -192,6 +207,9 @@ export default class SPageTransitionFeature extends __SFeature {
             } catch (e) {
                 response = e;
             }
+
+            // reset the current requested url
+            this._currentRequestedUrl = null;
 
             // handle error
             if (!response || response.status !== 200) {
@@ -236,23 +254,51 @@ export default class SPageTransitionFeature extends __SFeature {
                 if ($inPageBody && $newBody) {
                     const newAttrNames: string[] = [];
 
-                    // keep the lod (level of details classes)
-                    const lodClasses = $inPageBody.classList.toString().split(' ').filter(cls => cls.startsWith('s-lod--'));
+                    // handle the classes differently than the others attributes
+                    const inPageBodyClasses = $inPageBody.classList.toString().split(' ').map(l => l.trim()),
+                        newBodyClasses = $newBody.classList.toString().split(' ').map(l => l.trim());
 
-                    // @ts-ignore
-                    for (let attr of $newBody.attributes) {
-                        $inPageBody.setAttribute(attr.name, attr.value);
-                        newAttrNames.push(attr.name);
-                    }
+                    // remove classes that are not in the new page body classes
+                    inPageBodyClasses.forEach(cls => {
+                        // do not touch lod (level of details) classes
+                        if (cls.match(/^s-lod/)) {
+                            return;
+                        }
+                        // if the class is not in the new page one
+                        if (!newBodyClasses.includes(cls)) {
+                            $inPageBody.classList.remove(cls);
+                        }
+                    });
+
+                    // add the new classes that are not in the page already
+                    newBodyClasses.forEach(cls => {
+                        // do not touch lod (level of details) classes
+                        if (cls.match(/^s-lod/)) {
+                            return;
+                        }
+                        // if the class is not already in the body classes,
+                        // add it
+                        if (!$inPageBody.classList.contains(cls)) {
+                            $inPageBody.classList.add(cls);
+                        }
+                    });
+
+                    // remove the attributes that are not in the new page
                     // @ts-ignore
                     for (let attr of $inPageBody.attributes) {
+                        if (attr.name === 'class') continue;
                         if (!newAttrNames.includes(attr.name)) {
                             $inPageBody.removeAttribute(attr.name);
                         }
                     }
-                    
-                    // set the lod classes on the new body
-                    $newBody.classList.add(...lodClasses);
+
+                    // add the attributes that are in the new page
+                    // @ts-ignore
+                    for (let attr of $newBody.attributes) {
+                        if (attr.name === 'class') continue;
+                        $inPageBody.setAttribute(attr.name, attr.value);
+                        newAttrNames.push(attr.name);
+                    }
                 }
             }
 

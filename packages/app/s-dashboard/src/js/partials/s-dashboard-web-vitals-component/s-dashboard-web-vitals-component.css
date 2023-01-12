@@ -1,5 +1,5 @@
 .s-dashboard-web-vitals {
-    .__stats {
+    ._stats {
         display: flex;
         flex-wrap: wrap;
         row-gap: sugar.margin(20);

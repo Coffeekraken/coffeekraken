@@ -48,7 +48,7 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
             position: unset;
         }
 
-        .s-color-picker__picker {
+        .s-color-picker_picker {
             @sugar.media <=mobile {
                 position: fixed;
                 bottom: 0;
@@ -61,7 +61,7 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
         }
 
         &:focus-within {
-            .s-color-picker__picker {
+            .s-color-picker_picker {
                 @sugar.media <=mobile {
                     transform: translate(0, 0);
                 }
@@ -69,46 +69,46 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
         }
         
 
-        .s-color-picker__picker {
+        .s-color-picker_picker {
 
-            .s-color-picker__shade-wrapper {
+            .s-color-picker_shade-wrapper {
                 @sugar.media <=mobile {
                     position: relative;
                     aspect-ratio: unset;
                 }
             }
 
-            .s-color-picker__selectors {
+            .s-color-picker_selectors {
                 gap: sugar.margin(20);
             }
 
-            .s-color-picker__btn,
-            .s-color-picker__color-input {
+            .s-color-picker_btn,
+            .s-color-picker_color-input {
                 padding: sugar.padding(20) sugar.padding(30);
             }
 
             @sugar.media <=mobile {
-                .s-color-picker__metas {
+                .s-color-picker_metas {
                     flex-wrap: wrap;
                 }
 
-                .s-color-picker__color {
+                .s-color-picker_color {
                     margin-block-start: sugar.margin(20);
                 }
 
-                .s-color-picker__formats,
-                .s-color-picker__color {
+                .s-color-picker_formats,
+                .s-color-picker_color {
                     width: 100%;
 
-                    .s-color-picker__btn {
+                    .s-color-picker_btn {
                         text-align: center;
                         flex-grow: 1 !important;
                     }
                 }
             }
 
-            .s-color-picker__metas,
-            .s-color-picker__actions {
+            .s-color-picker_metas,
+            .s-color-picker_actions {
                 padding-block-start: sugar.padding(20);
 
                 @sugar.media <=mobile {
@@ -116,11 +116,11 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                 }
             }
 
-            .s-color-picker__eye-dropper {
+            .s-color-picker_eye-dropper {
                 color: sugar.color(main, text);
             }
 
-            .s-color-picker__actions {
+            .s-color-picker_actions {
                 gap: sugar.margin(20);
             }
         
@@ -135,7 +135,7 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
         `);
         vars.push(`
 
-                .s-color-picker__picker {
+                .s-color-picker_picker {
                     @sugar.depth (100);
                     background: sugar.color(main, background);
                     padding: sugar.padding(30);
@@ -149,15 +149,15 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                         overflow: visible;
                     }
                 }
-                &[inline] .s-color-picker__picker {
+                &[inline] .s-color-picker_picker {
                     background: none;
                     box-shadow: none;
                     padding: 0;
                 }
 
-                .s-color-picker__shade-wrapper,
-                .s-color-picker__hue-wrapper,
-                .s-color-picker__alpha-wrapper {
+                .s-color-picker_shade-wrapper,
+                .s-color-picker_hue-wrapper,
+                .s-color-picker_alpha-wrapper {
                     border-radius: sugar.border.radius();
 
                     canvas {
@@ -183,7 +183,7 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
 
                 }
 
-                .s-color-picker__alpha-wrapper {
+                .s-color-picker_alpha-wrapper {
                     &:after {
                         background: hsla(
                             0,
@@ -193,8 +193,8 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                         );
                     }
                 }
-                .s-color-picker__root.is-alpha-interacting {
-                    .s-color-picker__alpha-wrapper {
+                .s-color-picker_root.is-alpha-interacting {
+                    .s-color-picker_alpha-wrapper {
                         &:after {
                             border-width: 3px;
                             width: 60px;
@@ -209,7 +209,7 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                     }
                 }
 
-                .s-color-picker__shade-wrapper {
+                .s-color-picker_shade-wrapper {
                     &:after {
                         background: hsla(
                             var(--s-color-picker-h),
@@ -220,8 +220,8 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                     }
                 }
 
-                .s-color-picker__root.is-shade-interacting {
-                    .s-color-picker__shade-wrapper {
+                .s-color-picker_root.is-shade-interacting {
+                    .s-color-picker_shade-wrapper {
                         &:after {
                             border-width: 3px;
                             width: 60px;
@@ -236,13 +236,13 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                     }
                 }
 
-                .s-color-picker__hue-wrapper {
+                .s-color-picker_hue-wrapper {
                     &:after {
                         background: hsla(var(--s-color-picker-h), 100%, 50%, 1);
                     }
                 }
-                .s-color-picker__root.is-hue-interacting {
-                    .s-color-picker__hue-wrapper {
+                .s-color-picker_root.is-hue-interacting {
+                    .s-color-picker_hue-wrapper {
                         &:after {
                             border-width: 3px;
                             width: 60px;
@@ -257,8 +257,8 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                     }
                 }
 
-                .s-color-picker__formats {
-                    .s-color-picker__btn {
+                .s-color-picker_formats {
+                    .s-color-picker_btn {
                         border: 1px solid sugar.color(main, border);
                         color: sugar.color(main, text);
                         font-size: 0.8em;
@@ -303,29 +303,29 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                 }
 
                 @sugar.media <=mobile {
-                    .s-color-picker__color-input {
+                    .s-color-picker_color-input {
                         border-top: none;
                         border-top-left-radius: sugar.border.radius();
                         border-bottom-left-radius: sugar.border.radius();
                     }
-                    .s-color-picker__preview {
+                    .s-color-picker_preview {
                     }
                 }
 
-                .s-color-picker__actions {
-                    .s-color-picker__btn {
+                .s-color-picker_actions {
+                    .s-color-picker_btn {
                         background: sugar.color(current);
                         color: sugar.color(current, foreground);
                         border-radius: sugar.border.radius();
                     }
                 }
 
-                .s-color-picker__color-input {
+                .s-color-picker_color-input {
                     color: sugar.color(main, text);
                     border: solid 1px sugar.color(main, border);
                     border-right: none;
                 }
-                .s-color-picker__preview {
+                .s-color-picker_preview {
                     position: relative;
                     border: solid 1px
                         hsla(

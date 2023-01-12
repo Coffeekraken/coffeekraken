@@ -55,10 +55,10 @@ import __define from './define';
  *    <div class="s-width:60">
  *      <div class="s-input-container:addon">
  *          <input type="text" class="s-input" required placeholder="olivierbossel" />
- *          <div class="__levels">
- *              <div class="__weak s-badge s-color:error">Weak</div>
- *              <div class="__medium s-badge s-color:warning">Medium</div>
- *              <div class="__strong s-badge s-color:success">Strong</div>
+ *          <div class="_levels">
+ *              <div class="_weak s-badge s-color:error">Weak</div>
+ *              <div class="_medium s-badge s-color:warning">Medium</div>
+ *              <div class="_strong s-badge s-color:success">Strong</div>
  *          </div>
  *      </div>
  *   </div>

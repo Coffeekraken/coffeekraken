@@ -3,55 +3,55 @@
     {{-- <div class="welcome-illustration-shapes">
         <svg xmlns="http://www.w3.org/2000/svg">
             <linearGradient id="gradient-accent">
-                <stop class="__gradient-accent-start" offset="0"/>
-                <stop class="__gradient-accent-end" offset="100%"/>
+                <stop class="_gradient-accent-start" offset="0"/>
+                <stop class="_gradient-accent-end" offset="100%"/>
             </linearGradient>
         </svg>
         <svg xmlns="http://www.w3.org/2000/svg">
             <linearGradient id="gradient-complementary">
-                <stop class="__gradient-complementary-start" offset="0"/>
-                <stop class="__gradient-complementary-end" offset="100%"/>
+                <stop class="_gradient-complementary-start" offset="0"/>
+                <stop class="_gradient-complementary-end" offset="100%"/>
             </linearGradient>
         </svg>
-        <div class="__cup" s-parallax amount="0.05" amount-y="0">
+        <div class="_cup" s-parallax amount="0.05" amount-y="0">
             <img src="/dist/img/welcome/cup.png" />
         </div>
-        <div class="__smoke" s-parallax amount="0.05" amount-y="0">
+        <div class="_smoke" s-parallax amount="0.05" amount-y="0">
             <video playsinline autoplay muted loop>
                 <source src="/dist/img/cup-smoke.webm" type="video/webm">
             </video>
         </div>
-        <div class="__ts" s-parallax amount="0.05">
+        <div class="_ts" s-parallax amount="0.05">
             <img s-inline src="/dist/img/welcome/ts.svg" />
         </div>
-        <div class="__css" s-parallax amount="0.05" id="_css">
+        <div class="_css" s-parallax amount="0.05" id="_css">
             <img s-inline src="/dist/img/welcome/css.svg" />
         </div>
-        <div class="__ui" s-parallax amount="0.15">
+        <div class="_ui" s-parallax amount="0.15">
             <img s-inline src="/dist/img/welcome/ui.svg" />
         </div>
-        <div class="__node" s-parallax amount="0.2">
+        <div class="_node" s-parallax amount="0.2">
             <img s-inline src="/dist/img/welcome/node.svg" />
         </div>
-        <div class="__cli" s-parallax amount="0.15">
+        <div class="_cli" s-parallax amount="0.15">
             <img s-inline src="/dist/img/welcome/cli.svg" />
         </div>
-        <div class="__php" s-parallax amount="0.1">
+        <div class="_php" s-parallax amount="0.1">
             <img s-inline src="/dist/img/welcome/php.svg" />
         </div>
 
-        <div class="__deco-01" s-parallax amount="0.15">
+        <div class="_deco-01" s-parallax amount="0.15">
             <img s-inline src="/dist/img/welcome/deco-01.svg" />
         </div>
-        <div class="__deco-02" s-parallax amount="0.4">
+        <div class="_deco-02" s-parallax amount="0.4">
             <img s-inline src="/dist/img/welcome/deco-02.svg" />
         </div>
-        <div class="__deco-03" s-parallax amount="0.1">
+        <div class="_deco-03" s-parallax amount="0.1">
             <img s-inline src="/dist/img/welcome/deco-03.svg" />
         </div>
 
-        <div class="__shadow"></div>
-        <div class="__discover-02">
+        <div class="_shadow"></div>
+        <div class="_discover-02">
             <ck-discover-welcome></ck-discover-welcome>
         </div>
 
@@ -61,85 +61,85 @@
         <div class="welcome-illustration-kraken">
             <svg xmlns="http://www.w3.org/2000/svg">
                 <linearGradient id="gradient-accent">
-                    <stop class="__gradient-accent-start" offset="0"/>
-                    <stop class="__gradient-accent-end" offset="100%"/>
+                    <stop class="_gradient-accent-start" offset="0"/>
+                    <stop class="_gradient-accent-end" offset="100%"/>
                 </linearGradient>
             </svg>
             <svg xmlns="http://www.w3.org/2000/svg">
                 <linearGradient id="gradient-complementary">
-                    <stop class="__gradient-complementary-start" offset="0"/>
-                    <stop class="__gradient-complementary-end" offset="100%"/>
+                    <stop class="_gradient-complementary-start" offset="0"/>
+                    <stop class="_gradient-complementary-end" offset="100%"/>
                 </linearGradient>
             </svg>
 
-            <div class="__tentacule-01" s-parallax amount-tx="0.05" amount-ty="0.05" amount-r="0.2">
+            <div class="_tentacule-01" s-parallax amount-tx="0.05" amount-ty="0.05" amount-r="0.2">
                 <img s-inline src="/dist/img/illustrations/welcome/tentacule-01.svg" />
             </div>
-            <div class="__tentacule-02" s-parallax amount-tx="0.1" amount-ty="0.3" amount-r="0.2">
+            <div class="_tentacule-02" s-parallax amount-tx="0.1" amount-ty="0.3" amount-r="0.2">
                 <img s-inline src="/dist/img/illustrations/welcome/tentacule-02.svg" />
             </div>
-            <div class="__tentacule-03" s-parallax amount-tx="0.2" amount-ty="0.05" amount-r="0.2">
+            <div class="_tentacule-03" s-parallax amount-tx="0.2" amount-ty="0.05" amount-r="0.2">
                 <img s-inline src="/dist/img/illustrations/welcome/tentacule-03.svg" />
             </div>
-            <div class="__tentacule-04" s-parallax amount-tx="0.05" amount-ty="0.1" amount-r="0.2">
+            <div class="_tentacule-04" s-parallax amount-tx="0.05" amount-ty="0.1" amount-r="0.2">
                 <img s-inline src="/dist/img/illustrations/welcome/tentacule-04.svg" />
             </div>
-            <div class="__tentacule-05" s-parallax amount-tx="0.1" amount-ty="0.05" amount-r="0.2">
+            <div class="_tentacule-05" s-parallax amount-tx="0.1" amount-ty="0.05" amount-r="0.2">
                 <img s-inline src="/dist/img/illustrations/welcome/tentacule-05.svg" />
             </div>
-            <div class="__tentacule-06" s-parallax amount-tx="0.05" amount-ty="0.1" amount-r="0.2">
+            <div class="_tentacule-06" s-parallax amount-tx="0.05" amount-ty="0.1" amount-r="0.2">
                 <img s-inline src="/dist/img/illustrations/welcome/tentacule-06.svg" />
             </div>
-            <div class="__tentacule-07" s-parallax amount-tx="0.1" amount-ty="0" amount-r="0.2">
+            <div class="_tentacule-07" s-parallax amount-tx="0.1" amount-ty="0" amount-r="0.2">
                 <img s-inline src="/dist/img/illustrations/welcome/tentacule-07.svg" />
             </div>
 
-            <div class="__cup" s-glitch>
+            <div class="_cup" s-glitch>
                 <img src="/dist/img/welcome/cup.png" />
             </div>
-            <div class="__smoke">
+            <div class="_smoke">
                 <video playsinline autoplay muted loop>
                     <source src="/dist/img/cup-smoke.webm" type="video/webm">
                 </video>
             </div>
             
-            <div class="__waves-cup" s-parallax amount-tx="0.06" amount-ty="0" amount-r="0">
+            <div class="_waves-cup" s-parallax amount-tx="0.06" amount-ty="0" amount-r="0">
                 <img s-inline src="/dist/img/illustrations/welcome/waves-cup.svg" />
             </div>
 
-            <div class="__waves-01" s-parallax amount-tx="0.1" amount-ty="0" amount-r="0">
+            <div class="_waves-01" s-parallax amount-tx="0.1" amount-ty="0" amount-r="0">
                 <img s-inline src="/dist/img/illustrations/welcome/waves-01.svg" />
             </div>
-            <div class="__waves-02" s-parallax amount-tx="0.07" amount-ty="0" amount-r="0">
+            <div class="_waves-02" s-parallax amount-tx="0.07" amount-ty="0" amount-r="0">
                 <img s-inline src="/dist/img/illustrations/welcome/waves-02.svg" />
             </div>
-            <div class="__waves-03" s-parallax amount-tx="0.1" amount-ty="0" amount-r="0">
+            <div class="_waves-03" s-parallax amount-tx="0.1" amount-ty="0" amount-r="0">
                 <img s-inline src="/dist/img/illustrations/welcome/waves-03.svg" />
             </div>
-            <div class="__waves-04" s-parallax amount-tx="0.1" amount-ty="0" amount-r="0">
+            <div class="_waves-04" s-parallax amount-tx="0.1" amount-ty="0" amount-r="0">
                 <img s-inline src="/dist/img/illustrations/welcome/waves-04.svg" />
             </div>
-            <div class="__waves-05" s-parallax amount-tx="0.1" amount-ty="0" amount-r="0">
+            <div class="_waves-05" s-parallax amount-tx="0.1" amount-ty="0" amount-r="0">
                 <img s-inline src="/dist/img/illustrations/welcome/waves-05.svg" />
             </div>
-            <div class="__waves-06" s-parallax amount-tx="0.07" amount-ty="0" amount-r="0">
+            <div class="_waves-06" s-parallax amount-tx="0.07" amount-ty="0" amount-r="0">
                 <img s-inline src="/dist/img/illustrations/welcome/waves-06.svg" />
             </div>
-            <div class="__waves-07" s-parallax amount-tx="0.1" amount-ty="0" amount-r="0">
+            <div class="_waves-07" s-parallax amount-tx="0.1" amount-ty="0" amount-r="0">
                 <img s-inline src="/dist/img/illustrations/welcome/waves-07.svg" />
             </div>
-            <div class="__waves-08" s-parallax amount-tx="0.07" amount-ty="0" amount-r="0">
+            <div class="_waves-08" s-parallax amount-tx="0.07" amount-ty="0" amount-r="0">
                 <img s-inline src="/dist/img/illustrations/welcome/waves-08.svg" />
             </div>
-            <div class="__waves-09" s-parallax amount-tx="0.1" amount-ty="0" amount-r="0">
+            <div class="_waves-09" s-parallax amount-tx="0.1" amount-ty="0" amount-r="0">
                 <img s-inline src="/dist/img/illustrations/welcome/waves-09.svg" />
             </div>
-            <div class="__waves-10" s-parallax amount-tx="0.07" amount-ty="0" amount-r="0">
+            <div class="_waves-10" s-parallax amount-tx="0.07" amount-ty="0" amount-r="0">
                 <img s-inline src="/dist/img/illustrations/welcome/waves-10.svg" />
             </div>
 
-            <div class="__shadow"></div>
-            <div class="__discover-02">
+            <div class="_shadow"></div>
+            <div class="_discover-02">
                 <ck-discover-welcome></ck-discover-welcome>
             </div>
 
@@ -150,7 +150,7 @@
 
         <div s-slider-slide>
 
-            <div class="__content">
+            <div class="_content">
 
                 <div s-glitch>
                     @include('pages.homepage.welcome.partials.content')
@@ -162,7 +162,7 @@
 
         {{-- <div s-slider-slide>
 
-             <div class="__content">
+             <div class="_content">
 
                 <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5 s-mbe:30">Our <span class="s-tc:complementary">clean</span><br /><span class="s-tc:accent">Theme Switcher</span></h1>
 
@@ -195,7 +195,7 @@
 
         <div s-slider-slide>
 
-             <div class="__content">
+             <div class="_content">
 
                 <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5 s-mbe:30">Our <span class="s-tc:complementary">clean</span><br /><span class="s-tc:accent">Datetime picker</span></h1>
 
@@ -230,7 +230,7 @@
 
         <div s-slider-slide>
 
-             <div class="__content">
+             <div class="_content">
 
                 <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5 s-mbe:30">Our <span class="s-tc:complementary">clean</span><br /><span class="s-tc:accent">Color picker</span></h1>
 
@@ -265,7 +265,7 @@
 
         <div s-slider-slide>
 
-             <div class="__content">
+             <div class="_content">
 
                 <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5 s-mbe:30">Our <span class="s-tc:complementary">clean</span><br /><span class="s-tc:accent">Icons management</span></h1>
 
@@ -317,7 +317,7 @@ independantly of the source -->
 
         {{-- <div s-slider-slide>
 
-             <div class="__content">
+             <div class="_content">
 
                 <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5 s-mbe:30">Our <span class="s-tc:complementary">clean</span><br /><span class="s-tc:accent">Slider</span></h1>
 
@@ -367,7 +367,7 @@ independantly of the source -->
 
         <div s-slider-slide>
 
-             <div class="__content">
+             <div class="_content">
 
                 <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5 s-mbe:30">Our <span class="s-tc:complementary">clean</span><br /><span class="s-tc:accent">Forms</span></h1>
 
@@ -398,10 +398,10 @@ independantly of the source -->
                                     required=""
                                     placeholder="olivierbossel"
                                 />
-                                <div class="__levels">
-                                    <div class="__weak s-badge s-color:error">Weak</div>
-                                    <div class="__medium s-badge s-color:warning">Medium</div>
-                                    <div class="__strong s-badge s-color:success">Strong</div>
+                                <div class="_levels">
+                                    <div class="_weak s-badge s-color:error">Weak</div>
+                                    <div class="_medium s-badge s-color:warning">Medium</div>
+                                    <div class="_strong s-badge s-color:success">Strong</div>
                                 </div>
                             </div>
                         </div>
@@ -452,7 +452,7 @@ independantly of the source -->
 
         <div s-slider-slide>
 
-             <div class="__content">
+             <div class="_content">
 
                 <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5 s-mbe:30">Our <span class="s-tc:complementary">clean</span><br /><span class="s-tc:accent">Ranges</span></h1>
 
@@ -493,7 +493,7 @@ independantly of the source -->
 
         <div s-slider-slide>
 
-             <div class="__content">
+             <div class="_content">
 
                 <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5 s-mbe:30">A lot<br />of <span class="s-tc:accent">Helpers</span></h1>
 
@@ -552,7 +552,7 @@ independantly of the source -->
         
         {{-- <div s-slider-slide>
 
-             <div class="__content">
+             <div class="_content">
 
                 <h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5 s-mbe:30">And<br /><span class="s-tc:accent">Many more!</span></h1>
 

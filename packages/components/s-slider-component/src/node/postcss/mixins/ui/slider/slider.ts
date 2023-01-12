@@ -70,7 +70,7 @@ export default function ({
         `);
     }
 
-    // &[behavior='default'] > .s-slider__root > .s-slider__slides-wrapper > .s-slider__slides {
+    // &[behavior='default'] > .s-slider_root > .s-slider_slides-wrapper > .s-slider_slides {
     //     @sugar.transition();
     // }
 
@@ -80,14 +80,14 @@ export default function ({
 
             --s-slider-space: calc(sugar.margin(30) + 1em);
 
-            > .s-slider__root {
-                > .s-slider__slides-wrapper {
+            > .s-slider_root {
+                > .s-slider_slides-wrapper {
                     @sugar.border.radius(ui.slider.borderRadius);
                 }
 
-                > .s-slider__ui {
+                > .s-slider_ui {
 
-                    > .s-slider__nav {
+                    > .s-slider_nav {
 
                         > * {
                             background: sugar.color(current, uiForeground);
@@ -97,7 +97,7 @@ export default function ({
                 }
             }
 
-            > .s-slider__root > .s-slider__ui > .s-slider__progress {
+            > .s-slider_root > .s-slider_ui > .s-slider_progress {
                 @sugar.border.radius(ui.slider.borderRadius);
             
                 &:before {
@@ -105,22 +105,22 @@ export default function ({
                     background: sugar.color(current, uiForeground, --alpha 0.3);
                 }
 
-                > .s-slider__progress-bar {
+                > .s-slider_progress-bar {
                     @sugar.border.radius(ui.slider.borderRadius);
                     background: sugar.color(current, uiForeground);
                     transition: sugar.theme(ui.slider.transition);
                 }
             }
 
-            > .s-slider__root > .s-slider__ui > .s-slider__controls {
-                .s-slider__controls-next,
-                .s-slider__controls-previous {
+            > .s-slider_root > .s-slider_ui > .s-slider_controls {
+                .s-slider_controls-next,
+                .s-slider_controls-previous {
                     transition: sugar.theme(ui.slider.transition);
                 }
             }
 
-            > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-next-arrow,
-            > .s-slider__root > .s-slider__ui > .s-slider__controls .s-slider__controls-previous-arrow {
+            > .s-slider_root > .s-slider_ui > .s-slider_controls .s-slider_controls-next-arrow,
+            > .s-slider_root > .s-slider_ui > .s-slider_controls .s-slider_controls-previous-arrow {
                 &:before,
                 &:after {
                     background: sugar.color(current, uiForeground);

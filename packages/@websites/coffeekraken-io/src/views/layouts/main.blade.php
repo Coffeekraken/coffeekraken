@@ -45,10 +45,10 @@
         <p class="s-typo--p">
             Welcome on
         </p>
-        <div class="__logo">
+        <div class="_logo">
             @include ('generic.logo')
         </div>
-        <div class="__spinner"></div>
+        <div class="_spinner"></div>
     </div>
     <div class="top-loader"></div>
 

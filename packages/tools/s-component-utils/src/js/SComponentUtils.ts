@@ -819,7 +819,7 @@ export default class SComponentUtils extends __SClass {
                 if (this.settings.useTagNameForClassName) {
                     clses.push(
                         `${this.node.tagName.toLowerCase()}${
-                            clsName && !clsName.match(/^(__|-)/) ? '-' : ''
+                            clsName && !clsName.match(/^(_{1,2}|-)/) ? '-' : ''
                         }${clsName}`,
                     );
                 }
@@ -830,7 +830,7 @@ export default class SComponentUtils extends __SClass {
                 ) {
                     clses.push(
                         `${this.settings.name.toLowerCase()}${
-                            clsName && !clsName.match(/^(__|-)/) ? '-' : ''
+                            clsName && !clsName.match(/^(_{1,2}|-)/) ? '-' : ''
                         }${clsName}`,
                     );
                 }
@@ -879,13 +879,13 @@ export default class SComponentUtils extends __SClass {
                 ) {
                     clses.push(
                         `${this.settings.name.toLowerCase()}${
-                            clsName && !clsName.match(/^__/) ? '-' : ''
+                            clsName && !clsName.match(/^_{1,2}/) ? '-' : ''
                         }${clsName}`,
                     );
                 } else {
                     clses.push(
                         `${this.node.tagName.toLowerCase()}${
-                            clsName && !clsName.match(/^__/) ? '-' : ''
+                            clsName && !clsName.match(/^_{1,2}/) ? '-' : ''
                         }${clsName}`,
                     );
                 }

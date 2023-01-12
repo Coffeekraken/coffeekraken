@@ -52,11 +52,11 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                 flex-direction: row;
                 max-width: none;
                 
-                .s-card__media {
+                .s-card_media {
                     align-self: stretch;
                     width: 50%;
                 }
-                .s-card__img {
+                .s-card_img {
                     width: 100%;
                     height: 100%;
                     object-fit: cover;
@@ -70,11 +70,11 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                 flex-direction: row-reverse;
                 max-width: none;
 
-                .s-card__media {
+                .s-card_media {
                     align-self: stretch;
                     width: 50%;
                 }
-                .s-card__img {
+                .s-card_img {
                     width: 100%;
                     height: 100%;
                     object-fit: cover;
@@ -88,7 +88,7 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                 flex-direction: column-reverse;
             }
 
-            .s-card__content {
+            .s-card_content {
                 align-items: unset;
             }
         `);
@@ -100,15 +100,15 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
             @sugar.border.radius(ui.card.borderRadius);
             @sugar.depth (ui.card.depth);
 
-            .s-card__media {
+            .s-card_media {
                 @sugar.border.radius(ui.card.borderRadius);
             }
 
-            .s-card__img {
+            .s-card_img {
                 @sugar.border.radius(ui.card.borderRadius);
             }
 
-            .s-card__content {
+            .s-card_content {
                 padding-block: sugar.padding(ui.card.paddingBlock);
                 padding-inline: sugar.padding(ui.card.paddingInline);
             }

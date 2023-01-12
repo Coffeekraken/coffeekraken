@@ -7,7 +7,7 @@
             <nav s-scope class="sidemenu @mobile s-display:none" >
 
                 <div class="sidemenu-sub">
-                    <ck-doc-sub-nav source=".__content"></ck-doc-sub-nav>
+                    <ck-doc-sub-nav source="._content"></ck-doc-sub-nav>
                 </div>
 
                 <div class="sidemenu-main" s-refocus offset-y="100" trigger="event:actual">
@@ -54,7 +54,7 @@
 
             <div s-page-transition-container="markdown">
                 
-                <div s-scope class="__content s-pb:50 s-pis:50 s-rhythm:vertical s-format:text @mobile s-pis:0">
+                <div s-scope class="_content s-pb:50 s-pis:50 s-rhythm:vertical s-format:text @mobile s-pis:0">
 
                     @if (!isset($body))
 

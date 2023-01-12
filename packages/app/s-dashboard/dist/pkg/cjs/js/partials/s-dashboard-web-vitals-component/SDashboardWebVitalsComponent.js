@@ -42,7 +42,7 @@ class SDashboardWebVitalsComponent extends s_lit_component_1.default {
                 <h2 class="s-typo:h6 s-mbe:20">Web Vitals</h2>
 
                 <div class="ck-panel">
-                    <div class="__stats">
+                    <div class="_stats">
                         <div class="ck-stat">
                             <h3 class="ck-stat__label">LCP</h3>
                             ${this._webVitals.lcp

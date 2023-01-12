@@ -49,7 +49,7 @@ export default class SViewRendererEngineTwig {
                 }
 
                 if (!viewPath.includes('/')) {
-                    viewPath = viewPath.replace(/\./gm, '/');
+                    viewPath = viewPath.replace(/\.(?!md|twig)/gm, '/');
                 }
                 if (!viewPath.match(/\.twig$/)) {
                     viewPath += '.twig';

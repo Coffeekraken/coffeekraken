@@ -398,7 +398,7 @@ export default class SDropzoneComponent extends __SLitComponent {
     render() {
         return html`
             <div
-                class="${this.utils.cls('__root')}"
+                class="${this.utils.cls('_root')}"
                 @dragover=${(e) => this._onDragover(e)}
                 @dragleave=${(e) => this._onDragleave(e)}
                 @drop=${(e) => this._onDrop(e)}
@@ -407,17 +407,17 @@ export default class SDropzoneComponent extends __SLitComponent {
                     ? html`
                           <label
                               for="${this.props.name}"
-                              class="${this.utils.cls('__drop')}"
+                              class="${this.utils.cls('_drop')}"
                           >
                               ${unsafeHTML(this.props.dropFileIcon)}
-                              <p class="${this.utils.cls('__text')}">
+                              <p class="${this.utils.cls('_text')}">
                                   ${this.props.i18n.clickOrDrag}
                               </p>
                           </label>
                       `
                     : html`
-                          <div class="${this.utils.cls('__droped')}">
-                              <div class="${this.utils.cls('__files')}">
+                          <div class="${this.utils.cls('_droped')}">
+                              <div class="${this.utils.cls('_files')}">
                                   ${this.state.files.map(
                                       (file) => html`
                                           <div
@@ -453,7 +453,7 @@ export default class SDropzoneComponent extends __SLitComponent {
                                   ? html`
                                         <button
                                             class="${this.utils.cls(
-                                                '__clear-btn',
+                                                '_clear-btn',
                                                 's-btn s-color s-color--error',
                                             )}"
                                             @click=${() => this.clear()}
@@ -481,15 +481,15 @@ export default class SDropzoneComponent extends __SLitComponent {
                     ? html`
                           <div
                               class="${this.utils.cls(
-                                  '__help',
+                                  '_help',
                                   's-tooltip-container',
                               )}"
                           >
                               ${unsafeHTML(this.props.helpIcon)}
                               <div
                                   class="${this.utils.cls(
-                                      '__tooltip',
-                                      's-tooltip:left s-color s-color--accent',
+                                      '_tooltip',
+                                      's-tooltip s-tooltip--left s-color s-color--accent',
                                   )}"
                               >
                                   ${this.props.help ??

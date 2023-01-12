@@ -11,7 +11,7 @@
         opacity: 0;
     }
 
-    .s-datetime-picker__root {
+    .s-datetime-picker_root {
         width: 100%;
 
         &.is-interacting * {
@@ -19,7 +19,7 @@
         }
     }
 
-    .s-datetime-picker__picker {
+    .s-datetime-picker_picker {
         position: absolute;
         top: 100%;
         left: 0;
@@ -40,7 +40,7 @@
             transform: translate(0, 100%);
         }
     }
-    &[inline] .s-datetime-picker__picker {
+    &[inline] .s-datetime-picker_picker {
         position: unset;
         top: unset;
         left: unset;
@@ -49,7 +49,7 @@
         opacity: 1;
     }
 
-    .s-datetime-picker__actions {
+    .s-datetime-picker_actions {
         display: flex;
 
         button {
@@ -59,7 +59,7 @@
     }
 
     &:focus-within {
-        .s-datetime-picker__picker {
+        .s-datetime-picker_picker {
             opacity: 1;
             pointer-events: all;
         }
@@ -70,7 +70,7 @@
         }
     }
 
-    .s-datetime-picker__calendar {
+    .s-datetime-picker_calendar {
         &:not(.active) {
             display: none !important;
         }
@@ -79,7 +79,7 @@
             width: 100%;
         }
     }
-    .s-datetime-picker__calendar-item {
+    .s-datetime-picker_calendar-item {
         cursor: pointer;
         touch-action: manipulation;
 
@@ -88,13 +88,13 @@
         }
     }
 
-    .s-datetime-picker__selector {
+    .s-datetime-picker_selector {
         height: 8em;
         overflow-y: auto;
         scroll-snap-type: y mandatory;
         flex-grow: 1;
     }
-    .s-datetime-picker__selector-item {
+    .s-datetime-picker_selector-item {
         scroll-snap-align: center;
 
         &:first-child {
@@ -109,18 +109,18 @@
         }
     }
 
-    .s-datetime-picker__date-selectors {
+    .s-datetime-picker_date-selectors {
         &:not(.active) {
             display: none !important;
         }
     }
 
-    .s-datetime-picker__time-selectors {
+    .s-datetime-picker_time-selectors {
         &:not(.active) {
             display: none !important;
         }
 
-        .s-datetime-picker__selector-item {
+        .s-datetime-picker_selector-item {
             scroll-snap-align: center;
 
             &:first-child {
@@ -132,14 +132,14 @@
         }
     }
 
-    .s-datetime-picker__date-selectors,
-    .s-datetime-picker__time-selectors {
+    .s-datetime-picker_date-selectors,
+    .s-datetime-picker_time-selectors {
         position: relative;
         display: flex;
     }
 
-    .s-datetime-picker__days {
+    .s-datetime-picker_days {
     }
-    .s-datetime-picker__day {
+    .s-datetime-picker_day {
     }
 }

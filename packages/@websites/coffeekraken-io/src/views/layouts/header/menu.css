@@ -1,5 +1,5 @@
 #header {
-    .__nav {
+    ._nav {
         display: flex;
         user-select: none;
         flex-grow: 1;
@@ -7,7 +7,7 @@
         text-align: center;
         font-size: sugar.font.size(40);
 
-        .__main-link {
+        ._main-link {
             & > *:first-child {
                 position: relative;
             }
@@ -39,7 +39,7 @@
             }
         }
 
-        .__subnav {
+        ._subnav {
             --max-height: 60vh;
 
             position: absolute;
@@ -76,7 +76,7 @@
             }
         }
 
-        .subnav-active .__subnav {
+        .subnav-active ._subnav {
             /* display: block; */
             /* pointer-events: all; */
             opacity: 1;
@@ -90,7 +90,7 @@
             /* border-bottom: 1px solid sugar.color(accent, border); */
         }
 
-        .__subnav-footer {
+        ._subnav-footer {
             background: sugar.color(main, --lighten 43);
             padding: sugar.padding(30);
 
@@ -99,7 +99,7 @@
             }
         }
 
-        .__subnav-chapters {
+        ._subnav-chapters {
             overflow-y: auto;
             height: var(--max-height);
             padding: sugar.padding(50);
@@ -150,7 +150,7 @@
             }
         }
 
-        .__subnav-stories {
+        ._subnav-stories {
             position: relative;
             overflow-y: auto;
             height: var(--max-height);
@@ -176,7 +176,7 @@
             } */
         }
 
-        .__subnav-story {
+        ._subnav-story {
             width: 100%;
 
             ul {
@@ -206,11 +206,11 @@
                 }
             }
         }
-        /* .__subnav-doc .__subnav-story li {
+        /* ._subnav-doc ._subnav-story li {
             width: 50%;
         } */
 
-        .__subnav-story {
+        ._subnav-story {
             display: none;
             position: relative;
 

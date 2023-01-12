@@ -123,12 +123,12 @@ export default class SDashboardComponent extends __SLitComponent {
             <div class="${this.utils.cls('')}">
                 <header class="header">
                     <div class="s-container:wide">
-                        <div class="__toolbar">
-                            <div class="__logo" @click=${() => this.close()}>
+                        <div class="_toolbar">
+                            <div class="_logo" @click=${() => this.close()}>
                                 ${unsafeHTML(__logoSvg)}
                             </div>
                             <h1 class="s-typo:h5">Dashboard</h1>
-                            <div class="__grow"></div>
+                            <div class="_grow"></div>
                         </div>
                     </div>
                 </header>
@@ -146,7 +146,7 @@ export default class SDashboardComponent extends __SLitComponent {
                             ${this._dashboardConfig.layout.map(
                                 (column) => html`
                                     <div
-                                        class="__column __column-${column.length}"
+                                        class="_column __column-${column.length}"
                                     >
                                         ${column.map((component) =>
                                             component === 's-dashboard-pages'

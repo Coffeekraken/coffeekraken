@@ -71,17 +71,17 @@ class SDashboardProjectComponent extends s_lit_component_1.default {
                                 </div>
                             `)}
                     </div>
-                    <div class="__details">
+                    <div class="_details">
                         <span class="ck-branch"
                             >${this._activeEnvironment.branch}</span
                         >
-                        <span class="__commit-time">
+                        <span class="_commit-time">
                             ${((_b = this._activeEnvironment.commit) === null || _b === void 0 ? void 0 : _b.time)
             ? (0, lit_1.html) `
-                                      <span class="__commit-time-time"
+                                      <span class="_commit-time-time"
                                           >${new Date(this._activeEnvironment.commit.time).toLocaleTimeString()}</span
                                       >
-                                      <span class="__commit-time-date"
+                                      <span class="_commit-time-date"
                                           >${new Date(this._activeEnvironment.commit.time).toLocaleDateString()}</span
                                       >
                                   `

@@ -24,7 +24,7 @@
             margin-block-end: -100px;
             @sugar.transition();
 
-            .s-card__img {
+            .s-card_img {
                 @sugar.transition();
             }
 

@@ -18,7 +18,7 @@
     @endif
 
     @if (!isset($isFirst))
-        <section class="__toggle-content">
+        <section class="_toggle-content">
     @endif
 
     @if (isset($isFirst))

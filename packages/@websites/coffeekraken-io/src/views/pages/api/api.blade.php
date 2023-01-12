@@ -25,7 +25,7 @@ if (isset($firstBlock->status)) {
             <nav s-scope class="sidemenu @mobile s-display:none" >
 
                 <div class="sidemenu-sub">
-                    <ck-doc-sub-nav source=".__content"></ck-doc-sub-nav>
+                    <ck-doc-sub-nav source="._content"></ck-doc-sub-nav>
                 </div>
 
                 <div class="sidemenu-main" s-refocus offset-y="100" trigger="event:actual">
@@ -42,7 +42,7 @@ if (isset($firstBlock->status)) {
 
             <div s-page-transition-container="api">
 
-                <div s-scope class="__content s-pb:50">
+                <div s-scope class="_content s-pb:50">
 
                     @if (!count((array) $docblocks))
 

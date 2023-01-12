@@ -22,22 +22,22 @@
     white-space: pre-wrap;
 }
 
-.s-code-example__slot {
+.s-code-example_slot {
     display: none;
 }
 
-.s-code-example__nav {
+.s-code-example_nav {
     position: relative;
     z-index: 20;
 }
 
-.s-code-example__tabs {
+.s-code-example_tabs {
     list-style: none;
 }
-.s-code-example__tab {
+.s-code-example_tab {
 }
 
-.s-code-example__content {
+.s-code-example_content {
     position: relative;
     /* this variable comes from the @sugar.codeExample mixin */
     overflow: hidden;
@@ -52,7 +52,7 @@
     }
 }
 
-.s-code-example__more-bar {
+.s-code-example_more-bar {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -68,7 +68,7 @@
         pointer-events: all;
     }
 }
-.s-code-example__more-bar {
+.s-code-example_more-bar {
     text-align: center;
     justify-content: center;
 
@@ -82,13 +82,13 @@
     }
 }
 
-.s-code-example--more .s-code-example__more-bar {
+.s-code-example--more .s-code-example_more-bar {
     &:before {
         height: 0;
     }
 }
 
-.s-code-example__code {
+.s-code-example_code {
     display: none;
     line-height: 0;
 
@@ -101,7 +101,7 @@
     }
 }
 
-.s-code-example__toolbar {
+.s-code-example_toolbar {
     position: absolute;
     right: sugar.margin(20);
     top: sugar.margin(20);
@@ -117,7 +117,7 @@
     }
 }
 
-[toolbar-position='nav'] .s-code-example__toolbar {
+[toolbar-position='nav'] .s-code-example_toolbar {
     right: sugar.margin(20);
     top: sugar.margin(20);
 }

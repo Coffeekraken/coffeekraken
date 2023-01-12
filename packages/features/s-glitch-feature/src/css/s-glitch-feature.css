@@ -8,7 +8,7 @@
     display: block;
     position: relative;
 }
-.s-glitch__canvas {
+.s-glitch_canvas {
     display: none;
     position: absolute;
     top: 0;
@@ -17,6 +17,6 @@
     height: 100% !important;
     pointer-events: none;
 }
-.s-glitch.glitch .s-glitch__canvas {
+.s-glitch.glitch .s-glitch_canvas {
     display: block;
 } */

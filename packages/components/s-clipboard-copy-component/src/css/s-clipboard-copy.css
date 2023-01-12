@@ -10,24 +10,24 @@
         pointer-events: none;
     }
 
-    .s-clipboard-copy__root[state='pending'] {
+    .s-clipboard-copy_root[state='pending'] {
         .icon-copy {
             opacity: 1;
         }
     }
-    .s-clipboard-copy__root[state='copy'] {
+    .s-clipboard-copy_root[state='copy'] {
         .icon-copy {
             opacity: 1;
         }
     }
-    .s-clipboard-copy__root[state='success'] {
+    .s-clipboard-copy_root[state='success'] {
         color: sugar.color(success);
 
         .icon-success {
             opacity: 1;
         }
     }
-    .s-clipboard-copy__root[state='error'] {
+    .s-clipboard-copy_root[state='error'] {
         color: sugar.color(error);
 
         .icon-error {

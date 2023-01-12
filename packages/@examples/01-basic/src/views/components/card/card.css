@@ -17,7 +17,7 @@
     max-width: 1280px;
   }
 
-  .s-card__img-container {
+  .s-card_img-container {
     perspective: 800px;
 
     img {
@@ -27,38 +27,38 @@
     }
   }
 
-  .s-card__img {
+  .s-card_img {
     margin-block-end: -10%;
     transform: rotateX(-5deg) rotateY(35deg) translateX(10%) translateY(-10%);
     @sugar.border.radius();
     @sugar.depth (100);
     @sugar.transition();
   }
-  &:hover .s-card__img {
+  &:hover .s-card_img {
     transform: rotateX(-5deg) rotateY(-25deg) rotateZ(-5deg) translateX(-5%)
       translateY(-10%) scale(0.9);
   }
 
   :nth-child(2) > & {
-    .s-card__img {
+    .s-card_img {
       transform: rotateX(10deg) rotateY(10deg) rotateZ(2deg) translateX(2%)
         translateY(-10%) scale(0.85);
     }
   }
   :nth-child(2) > &:hover {
-    .s-card__img {
+    .s-card_img {
       transform: rotateX(-5deg) rotateY(35deg) translateX(10%) translateY(-10%);
     }
   }
 
   :nth-child(3) > & {
-    .s-card__img {
+    .s-card_img {
       transform: rotateX(-5deg) rotateY(-35deg) translateX(-10%)
         translateY(-10%);
     }
   }
   :nth-child(3) > &:hover {
-    .s-card__img {
+    .s-card_img {
       transform: rotateX(10deg) rotateY(10deg) rotateZ(2deg) translateX(2%)
         translateY(-10%) scale(0.85);
     }

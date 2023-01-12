@@ -1,13 +1,13 @@
-<span s-activate class="__main-link s-display:inline-block" href="body" trigger="mouseover,mouseout"
+<span s-activate class="_main-link s-display:inline-block" href="body" trigger="mouseover,mouseout"
     active-class="subnav-active" active-attribute="subnav-active" unactivate-timeout="150"
     unactivate-on="event:s-page-transition.start">
 
     <span class="s-depth:text:100">{{ isset($menuItem->as) ? $menuItem->as : $menuItem->name }}</span>
 
     <template>
-        <div class="__subnav {{ $class }}">
+        <div class="_subnav {{ $class }}">
             <div class="s-container s-layout:122">
-                <ul class="__subnav-chapters">
+                <ul class="_subnav-chapters">
                     @foreach ($menuItem as $item)
                         @if (isset($item->name))
                             <li s-activate href="#header-subnav-{{ isset($item->id) ? $item->id : \Sugar\string\idCompliant($item->name) }}"
@@ -21,10 +21,10 @@
                         @endif
                     @endforeach
                 </ul>
-                <div class="__subnav-stories">
+                <div class="_subnav-stories">
                     @foreach ($menuItem as $item)
                         @if (is_object($item))
-                            <div class="__subnav-story" id="header-subnav-{{ isset($item->id) ? $item->id : \Sugar\string\idCompliant($item->name) }}">
+                            <div class="_subnav-story" id="header-subnav-{{ isset($item->id) ? $item->id : \Sugar\string\idCompliant($item->name) }}">
                                     <template>
                                     @if (isset($item->content))
                                         {!! $item->content !!}
@@ -57,15 +57,15 @@
 
             </div>
 
-            <div class="__subnav-footer s-layout:12">
+            <div class="_subnav-footer s-layout:12">
 
-                <div class="__subnav-footer-body">
+                <div class="_subnav-footer-body">
                     <p class="s-typo:p">Need something that <span class="s-tc:accent">you don't find?</span> Don't
                         hesite to <span class="s-tc:accent">join us through our channels</span> like discord, github,
                         etc...</p>
                 </div>
 
-                <div class="__subnav-footer-links s-text:right">
+                <div class="_subnav-footer-links s-text:right">
                     <a class="s-btn s-color:error" href="https://olivierbossel.com" title="Share the love" target="_blank">
                         Github
                     </a>

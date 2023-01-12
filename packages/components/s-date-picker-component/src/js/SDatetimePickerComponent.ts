@@ -4,12 +4,12 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 import { __isUserScrolling, __makeFloat } from '@coffeekraken/sugar/dom';
 import type {
     IFloatApi,
-    IFloatSettings,
+    IFloatSettings
 } from '@coffeekraken/sugar/js/dom/ui/makeFloat';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import {
     format as __formatDate,
-    parse as __parseDate,
+    parse as __parseDate
 } from 'date-format-parse';
 import { css, html, unsafeCSS } from 'lit';
 import __SDatetimePickerComponentInterface from './interface/SDatetimePickerComponentInterface';
@@ -206,9 +206,9 @@ export default class SDatetimePickerComponent extends __SLitComponent {
         // save the original state
         Object.assign(this._originalState, this.state);
 
-        this._$root = this.querySelector(`.${this.utils.uCls('__root')}`);
+        this._$root = this.querySelector(`.${this.utils.uCls('_root')}`);
 
-        this._$picker = this.querySelector(`.${this.utils.uCls('__picker')}`);
+        this._$picker = this.querySelector(`.${this.utils.uCls('_picker')}`);
 
         // input
         if (!this._$input) {
@@ -235,11 +235,11 @@ export default class SDatetimePickerComponent extends __SLitComponent {
         });
 
         // selectors
-        this._$days = this.querySelector('.s-datetime-picker__days');
-        this._$months = this.querySelector('.s-datetime-picker__months');
-        this._$years = this.querySelector('.s-datetime-picker__years');
-        this._$hours = this.querySelector('.s-datetime-picker__hours');
-        this._$minutes = this.querySelector('.s-datetime-picker__minutes');
+        this._$days = this.querySelector('.s-datetime-picker_days');
+        this._$months = this.querySelector('.s-datetime-picker_months');
+        this._$years = this.querySelector('.s-datetime-picker_years');
+        this._$hours = this.querySelector('.s-datetime-picker_hours');
+        this._$minutes = this.querySelector('.s-datetime-picker_minutes');
 
         // update float on focus
         this.addEventListener('focusin', (e) => {
@@ -680,7 +680,7 @@ export default class SDatetimePickerComponent extends __SLitComponent {
 
         return html`
             <div
-                class="${this.utils.cls('__root')} ${this.utils.cls('')}--${this
+                class="${this.utils.cls('_root')} ${this.utils.cls('')}--${this
                     .props.floatSettings.position} ${this._isInInteraction
                     ? 'is-interacting'
                     : ''}"
@@ -688,15 +688,15 @@ export default class SDatetimePickerComponent extends __SLitComponent {
                 ${this.props.backdrop
                     ? html`
                           <div
-                              class="${this.utils.cls('__backdrop')} ${this
-                                  .props.backdropClass}"
+                              class="${this.utils.cls('_backdrop')} ${this.props
+                                  .backdropClass}"
                           ></div>
                       `
                     : ''}
-                <div class="${this.utils.cls('__picker')}" tabindex="-1">
+                <div class="${this.utils.cls('_picker')}" tabindex="-1">
                     <div
                         class="${this.utils.cls(
-                            '__calendar',
+                            '_calendar',
                         )} ${this._isDateNeeded() && this.props.calendar
                             ? 'active'
                             : ''}"
@@ -707,7 +707,7 @@ export default class SDatetimePickerComponent extends __SLitComponent {
                                     <th>
                                         <div
                                             class="${this.utils.cls(
-                                                '__calendar-day',
+                                                '_calendar-day',
                                             )}"
                                         >
                                             Mon
@@ -716,7 +716,7 @@ export default class SDatetimePickerComponent extends __SLitComponent {
                                     <th>
                                         <div
                                             class="${this.utils.cls(
-                                                '__calendar-day',
+                                                '_calendar-day',
                                             )}"
                                         >
                                             Tue
@@ -725,7 +725,7 @@ export default class SDatetimePickerComponent extends __SLitComponent {
                                     <th>
                                         <div
                                             class="${this.utils.cls(
-                                                '__calendar-day',
+                                                '_calendar-day',
                                             )}"
                                         >
                                             Wed
@@ -734,7 +734,7 @@ export default class SDatetimePickerComponent extends __SLitComponent {
                                     <th>
                                         <div
                                             class="${this.utils.cls(
-                                                '__calendar-day',
+                                                '_calendar-day',
                                             )}"
                                         >
                                             Thu
@@ -743,7 +743,7 @@ export default class SDatetimePickerComponent extends __SLitComponent {
                                     <th>
                                         <div
                                             class="${this.utils.cls(
-                                                '__calendar-day',
+                                                '_calendar-day',
                                             )}"
                                         >
                                             Fri
@@ -752,7 +752,7 @@ export default class SDatetimePickerComponent extends __SLitComponent {
                                     <th>
                                         <div
                                             class="${this.utils.cls(
-                                                '__calendar-day',
+                                                '_calendar-day',
                                             )}"
                                         >
                                             Sat
@@ -761,7 +761,7 @@ export default class SDatetimePickerComponent extends __SLitComponent {
                                     <th>
                                         <div
                                             class="${this.utils.cls(
-                                                '__calendar-day',
+                                                '_calendar-day',
                                             )}"
                                         >
                                             Sun
@@ -791,7 +791,7 @@ export default class SDatetimePickerComponent extends __SLitComponent {
                                                                               day,
                                                                           )}
                                                                       class="${this.utils.cls(
-                                                                          '__calendar-item',
+                                                                          '_calendar-item',
                                                                       )} ${date ===
                                                                           today.getDate() &&
                                                                       today.getMonth() ===
@@ -804,7 +804,7 @@ export default class SDatetimePickerComponent extends __SLitComponent {
                                                                               .displayedYear
                                                                           ? 'today'
                                                                           : ''} ${this.utils.cls(
-                                                                          '__calendar-item',
+                                                                          '_calendar-item',
                                                                       )} ${date ===
                                                                           this
                                                                               .state
@@ -850,21 +850,21 @@ export default class SDatetimePickerComponent extends __SLitComponent {
                     </div>
                     <div
                         class="${this.utils.cls(
-                            '__date-selectors',
+                            '_date-selectors',
                         )} ${this._isDateNeeded() ? 'active' : ''}"
                     >
                         <div
                             class="${this.utils.cls(
-                                '__selector',
-                            )} ${this.utils.cls('__days')}"
+                                '_selector',
+                            )} ${this.utils.cls('_days')}"
                         >
                             ${this._getDays().map(
                                 (i) => html`
                                     <div
                                         @click=${() => this._setDay(i + 1)}
                                         class="${this.utils.cls(
-                                            '__selector-item',
-                                        )} ${this.utils.cls('__day')} ${this
+                                            '_selector-item',
+                                        )} ${this.utils.cls('_day')} ${this
                                             .state.day ===
                                         i + 1
                                             ? 'active'
@@ -881,16 +881,16 @@ export default class SDatetimePickerComponent extends __SLitComponent {
                         </div>
                         <div
                             class="${this.utils.cls(
-                                '__selector',
-                            )} ${this.utils.cls('__months')}"
+                                '_selector',
+                            )} ${this.utils.cls('_months')}"
                         >
                             ${this._getMonths().map(
                                 (month, i) => html`
                                     <div
                                         @click=${() => this._setMonth(i)}
                                         class="${this.utils.cls(
-                                            '__selector-item',
-                                        )} ${this.utils.cls('__month')} ${this
+                                            '_selector-item',
+                                        )} ${this.utils.cls('_month')} ${this
                                             .state.displayedMonth === i
                                             ? 'active'
                                             : ''} ${this._isDateDisabled(-1, i)
@@ -904,16 +904,16 @@ export default class SDatetimePickerComponent extends __SLitComponent {
                         </div>
                         <div
                             class="${this.utils.cls(
-                                '__selector',
-                            )} ${this.utils.cls('__years')}"
+                                '_selector',
+                            )} ${this.utils.cls('_years')}"
                         >
                             ${this._getYears().map(
                                 (year, j) => html`
                                     <div
                                         @click=${() => this._setYear(year)}
                                         class="${this.utils.cls(
-                                            '__selector-item',
-                                        )} ${this.utils.cls('__year')} ${this
+                                            '_selector-item',
+                                        )} ${this.utils.cls('_year')} ${this
                                             .state.displayedYear === year
                                             ? 'active'
                                             : ''} ${this._isDateDisabled(
@@ -932,21 +932,21 @@ export default class SDatetimePickerComponent extends __SLitComponent {
                     </div>
                     <div
                         class="${this.utils.cls(
-                            '__time-selectors',
+                            '_time-selectors',
                         )} ${this._isTimeNeeded() ? 'active' : ''}"
                     >
                         <div
                             class="${this.utils.cls(
-                                '__selector',
-                            )} ${this.utils.cls('__hours')}"
+                                '_selector',
+                            )} ${this.utils.cls('_hours')}"
                         >
                             ${this._getHours().map(
                                 (hour) => html`
                                     <div
                                         @click=${() => this._setHour(hour)}
                                         class="${this.utils.cls(
-                                            '__selector-item',
-                                        )} ${this.utils.cls('__hour')} ${this
+                                            '_selector-item',
+                                        )} ${this.utils.cls('_hour')} ${this
                                             .state.hour === hour
                                             ? 'active'
                                             : ''}"
@@ -960,16 +960,16 @@ export default class SDatetimePickerComponent extends __SLitComponent {
                         </div>
                         <div
                             class="${this.utils.cls(
-                                '__selector',
-                            )} ${this.utils.cls('__minutes')}"
+                                '_selector',
+                            )} ${this.utils.cls('_minutes')}"
                         >
                             ${this._getMinutes().map(
                                 (minute, i) => html`
                                     <div
                                         @click=${() => this._setMinutes(minute)}
                                         class="${this.utils.cls(
-                                            '__selector-item',
-                                        )} ${this.utils.cls('__minutes')} ${this
+                                            '_selector-item',
+                                        )} ${this.utils.cls('_minutes')} ${this
                                             .state.minutes === minute
                                             ? 'active'
                                             : ''}"
@@ -984,12 +984,12 @@ export default class SDatetimePickerComponent extends __SLitComponent {
                     </div>
                     ${this.props.actions.length
                         ? html`
-                              <div class="${this.utils.cls('__actions')}">
+                              <div class="${this.utils.cls('_actions')}">
                                   ${this.props.actions.includes('clear')
                                       ? html`
                                             <button
                                                 class="${this.utils.cls(
-                                                    '__clear',
+                                                    '_clear',
                                                     's-btn s-color--error',
                                                 )}"
                                                 @click=${(e) => {
@@ -1006,7 +1006,7 @@ export default class SDatetimePickerComponent extends __SLitComponent {
                                       ? html`
                                             <button
                                                 class="${this.utils.cls(
-                                                    '__reset',
+                                                    '_reset',
                                                     's-btn s-color--complementary',
                                                 )}"
                                                 @click=${(e) => {
@@ -1024,7 +1024,7 @@ export default class SDatetimePickerComponent extends __SLitComponent {
                                             <button
                                                 ?disabled=${!this._isSelectedDatetimeValid()}
                                                 class="${this.utils.cls(
-                                                    '__validate',
+                                                    '_validate',
                                                     's-btn s-color--accent',
                                                 )}"
                                                 @click=${(e) => {

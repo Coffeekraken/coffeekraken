@@ -81,7 +81,7 @@
             @foreach ($uiCards as $card)
                 <div s-slider-slide>
                     <a class="ui-card s-color:accent" href="{{ $card->url }}" title="Coffeekraken buttons" s-highlight="light" style="--image: url({{ $card->image }})" intensity="0.6">
-                        <div class="ui-card__content">
+                        <div class="ui-card_content">
                             <i class="s-icon:{{ $card->icon }}"></i>
                             <p class="s-p">{{ $card->title }}</p>
                         </div>

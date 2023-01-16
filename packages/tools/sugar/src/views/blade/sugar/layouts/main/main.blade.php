@@ -65,50 +65,28 @@ $frontspec->metas->og = $ogObj;
 
     @yield('head')
 
-    @if (isset($config->google->gtm))
-    <!-- GTM -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','{{ $config->google->gtm }}');</script>
-    @endif
-
 </head>
 
-<body class="{{ \Sugar\lod\lodClasses(2) }}" @if (isset($bodyAttributes)) @foreach ($bodyAttributes as $key => $value){{ $key }}="{{ $value }}" @endforeach @endif>
+<body class="{{ \Sugar\lod\lodClasses(2) }} {{ isset($bodyAttributes['class']) ? $bodyAttributes['class'] : '' }}" {{ \Sugar\html\attrs($bodyAttributes, ['class']) }}>
 
-    @if (isset($config->google->gtm))
-    <!-- GTM noscript -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ $config->google->gtm }}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    @endif
+    <script>
+        document.body.classList.add('initial-loading');
+        document.body.classList.add('loading');
+    </script>
 
-    @if (isset($SUGAR))
+    @if (isset($SUGAR) || isset($frontspec))
     <script id="sugar-override">
         if (!document.env) document.env = {};
-        document.env.SUGAR = {!! json_encode($SUGAR) !!};
+        @if (isset($SUGAR))
+            document.env.SUGAR = {!! json_encode($SUGAR) !!};
+        @endif
+        @if (isset($frontspec))
+            document.env.FRONTSPEC = {!! json_encode($frontspec) !!};
+        @endif
     </script>
     @endif
 
     @yield('body')
-
-    @if (isset($config->google->ga))
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{ $config->google->ga }}"></script>
-    <script>
-        function gtag(){dataLayer.push(arguments);}
-        document.addEventListener('DOMContentLoaded', () => {
-            if ((document.env && document.env.ENV && document.env.ENV === 'production')
-                || (!document.env && !document.env.ENV)) {
-                window.dataLayer = window.dataLayer || [];
-                gtag('js', new Date());
-                gtag('config', '{{ $config->google->ga }}');
-            } else {
-                console.log(`%c[GA] Google analytics installed with the id "{{ $config->google->ga }}" but does not track anything in this environment...`, 'color: orange');
-            }
-        });
-    </script>
-    @endif
 
 </body>
 

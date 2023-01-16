@@ -23,6 +23,25 @@ export default function (api) {
             return api.config.serve ?? {};
         },
 
+        /**
+         * @name        removeForFrontend
+         * @type        String[]
+         * @default     ['frontspec', 'assets', 'views', 'specs', 'margin', 'padding']
+         *
+         * Specify some sources you want to remove from the frontend js file
+         *
+         * @since       2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        removeForFrontend: [
+            'frontspec',
+            'assets',
+            'views',
+            'specs',
+            'margin',
+            'padding',
+        ],
+
         build: {
             sources: {
                 metas: {
@@ -95,6 +114,20 @@ export default function (api) {
                         const lodConfig = Object.assign({}, api.theme.lod);
                         delete lodConfig.cssProperties;
                         return lodConfig;
+                    },
+                },
+                partytown: {
+                    title: 'Partytown',
+                    description:
+                        'Specify if the project make uses of "partytown" and his settings',
+                    type: 'object',
+                    get value() {
+                        const partytownConfig = Object.assign(
+                            {},
+                            api.theme.partytown,
+                        );
+                        delete partytownConfig.cssProperties;
+                        return partytownConfig;
                     },
                 },
                 classmap: {

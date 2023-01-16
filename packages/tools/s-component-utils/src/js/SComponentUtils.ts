@@ -937,7 +937,7 @@ export default class SComponentUtils extends __SClass {
         if (
             this.props.activeWhen.includes('lod') &&
             this.props.lod !== undefined &&
-            __STheme.lod < this.props.lod
+            __STheme.lodLevel < this.props.lod
         ) {
             return false;
         }

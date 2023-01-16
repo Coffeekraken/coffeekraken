@@ -1,5 +1,9 @@
+import { partytownSnippet } from '@builder.io/partytown/integration';
 import __SColor from '@coffeekraken/s-color';
+import __SEnv from '@coffeekraken/s-env';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import { __parseHtml } from '@coffeekraken/sugar/console';
+import { __getCookie, __setCookie } from '@coffeekraken/sugar/cookie';
 import { __clearTransmations } from '@coffeekraken/sugar/dom';
 import { __isCrawler } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
@@ -10,6 +14,8 @@ import type {
     ISThemeSettings as __ISThemeSettings,
 } from '../shared/SThemeBase';
 import __SThemeBase from '../shared/SThemeBase';
+
+import __SFrontspec from '@coffeekraken/s-frontspec';
 
 /**
  * @name            STheme
@@ -31,16 +37,32 @@ import __SThemeBase from '../shared/SThemeBase';
  * });
  *
  * @event       s-theme.change          Dispatched when the theme has been changed
+ * @event       s-theme.legal.agree         Dispatched when the user has agree the legal terms throug the `theme.agreeLegal` method
+ * @event       s-theme.legal.disagree         Dispatched when the user has disagree the legal terms throug the `theme.disagreeLegal` method
+ * @event       s-theme.legal.change             Dispatched when the user legal has been changed
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
+export interface ISThemeLegalSettings {
+    cookieName: string;
+    defaultMetas: any;
+}
+
+export interface ISThemePartytownSettings {
+    enabled: boolean;
+    [key: string]: any;
+}
+
 export interface ISThemeInitSettings {
     $context: HTMLElement;
     theme: string;
     variant: string;
+    gtm: string;
     lod: Partial<ISThemeLodSettings>;
+    partytown: Partial<ISThemePartytownSettings>;
+    legal: Partial<ISThemeLegalSettings>;
     classmap: Partial<ISThemeClassmapSettings>;
 }
 
@@ -100,7 +122,7 @@ export default class STheme extends __SThemeBase {
     }
 
     /**
-     * @name      lod
+     * @name      lodLevel
      * @type      Number
      * @static
      *
@@ -109,9 +131,9 @@ export default class STheme extends __SThemeBase {
      * @since     2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static get lod(): number {
+    static get lodLevel(): number {
         const currentTheme = this.getCurrentTheme();
-        return currentTheme.lod;
+        return currentTheme.lodLevel;
     }
 
     /**
@@ -323,9 +345,9 @@ export default class STheme extends __SThemeBase {
             $context: document.querySelector('html'),
             theme: undefined,
             variant: undefined,
-            lod: {
-                enabled: false,
-            },
+            lod: {},
+            legal: {},
+            partytown: {},
             ...(settings ?? {}),
         };
 
@@ -341,7 +363,9 @@ export default class STheme extends __SThemeBase {
         themeInstance = this.getCurrentTheme(finalSettings.$context, {
             ...finalSettings,
             onReady() {
-                console.log('READING');
+                console.log(
+                    `<yellow>[STheme]</yellow> Theme initialized <green>successfully</green>`,
+                );
             },
         });
 
@@ -498,12 +522,27 @@ export default class STheme extends __SThemeBase {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     state = {
-        lod: undefined,
+        lodLevel: undefined,
         overridedConfigs: {},
     };
 
     /**
-     * @name      lod
+     * @name        legal
+     * @type        Object
+     *
+     * Store the legal state like the "agree" flag and the "metas" optional object.
+     * This will be stored in the "legal" cookie.
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    legal = {
+        agree: false,
+        metas: {},
+    };
+
+    /**
+     * @name      lodLevel
      * @type      Number
      *
      * Get the current theme lod (level of details)
@@ -511,8 +550,8 @@ export default class STheme extends __SThemeBase {
      * @since     2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    get lod(): number {
-        return this.state.lod || this.get('lod.defaultLevel');
+    get lodLevel(): number {
+        return this.state.lodLevel || __SFrontspec.get('lod.defaultLevel');
     }
 
     /**
@@ -547,7 +586,48 @@ export default class STheme extends __SThemeBase {
         variant?: string,
         settings?: Partial<ISThemeSettings>,
     ) {
-        super(theme, variant, settings);
+        super(
+            theme,
+            variant,
+            __deepMerge(
+                {
+                    google: __SFrontspec.get('google') ?? {},
+                    partytown: __SFrontspec.get('partytown') ?? {},
+                    lod: __SFrontspec.get('lod') ?? {},
+                    legal: {
+                        cookieName: 's-legal',
+                        defaultMetas: {},
+                    },
+                },
+                settings ?? {},
+            ),
+        );
+
+        // proxy console
+        this._proxyConsole();
+
+        if (!__SEnv.is('production')) {
+            const color =
+                __SEnv.env.ENV === 'production'
+                    ? 'red'
+                    : __SEnv.env.ENV === 'staging'
+                    ? 'cyan'
+                    : 'green';
+
+            console.log(
+                `<yellow>[STheme]</yellow> Current environment is "<${color}>${__SEnv.env.ENV}</${color}>"`,
+            );
+
+            if (document.env?.PACKAGE) {
+                console.log(
+                    `<yellow>[STheme]</yellow> Project "<cyan>${document.env.PACKAGE.name}</cyan>" in version "<yellow>${document.env.PACKAGE.version}</yellow>"`,
+                );
+            }
+
+            console.log(
+                `<yellow>[STheme]</yellow> Initializing theme <cyan>${theme}</cyan> in <cyan>${variant}</cyan> variant`,
+            );
+        }
 
         // this.settings.classmap = __deepMerge(
         //     {
@@ -560,13 +640,18 @@ export default class STheme extends __SThemeBase {
         // default lod (level of details) settings
         this.settings.lod = __deepMerge(
             {
-                level: this.get('lod.defaultLevel'),
-                method: this.get('lod.method'),
-                botLevel: this.get('lod.botLevel'),
                 stylesheet: 'link#global',
             },
-            settings?.lod ?? {},
+            this.settings.lod ?? {},
         );
+
+        // listen for legal changes
+        document.addEventListener('s-theme.legal.agree', () => {
+            // init tracking when the user agree with the terms
+            if (this.isLegalAgree()) {
+                this._initTracking();
+            }
+        });
 
         // restore the theme
         this.restore();
@@ -577,6 +662,9 @@ export default class STheme extends __SThemeBase {
                 this._initLod();
             }
 
+            // init the tracking
+            this._initTracking();
+
             // classmap (not supported for now...)
             // if (this.settings.classmap.enabled) {
             //     await this._initClassmap();
@@ -586,6 +674,26 @@ export default class STheme extends __SThemeBase {
                 settings.onReady();
             }
         })();
+    }
+
+    /**
+     * Proxy console methods
+     */
+    private _proxyConsole() {
+        const nativeConsole = {};
+
+        for (let key of ['log', 'error', 'warn']) {
+            nativeConsole[key] = console[key];
+            console[key] = function (...args) {
+                for (let log of args) {
+                    if (typeof log === 'string') {
+                        nativeConsole[key](__parseHtml(log));
+                    } else {
+                        nativeConsole[key](log);
+                    }
+                }
+            };
+        }
     }
 
     /**
@@ -608,56 +716,313 @@ export default class STheme extends __SThemeBase {
     // }
 
     /**
+     * Check if the tracking has been inited or not
+     */
+    private _isTrackingInited(): boolean {
+        return document.querySelector('script#s-theme-gtm') !== null;
+    }
+
+    /**
+     * Init the tracking (google, partytown, etc...)
+     */
+    private _initTracking() {
+        // make sure the user has agreed the legal terms
+        if (!this.isLegalAgree()) {
+            if (!__SEnv.is('production')) {
+                console.log(
+                    `<yellow>[STheme]</yellow> You have a <magenta>google tag manager (gtm)</magenta> setted but the <cyan>legal terms</cyan> are not agreed. Disable tracking.`,
+                );
+            }
+            return;
+        }
+
+        if (this._isTrackingInited()) {
+            if (!__SEnv.is('production')) {
+                console.log(
+                    `<yellow>[STheme]</yellow> Tracking <magenta>google tag manager</magenta> already inited.`,
+                );
+            }
+            return;
+        }
+
+        // init google tag manager
+        if (this.settings.google?.gtm) {
+            this._initGtm();
+        }
+
+        // partytown
+        if (this.settings.partytown.enabled) {
+            this._initPartytown();
+        }
+    }
+
+    /**
+     * Init google tag manager
+     */
+    private _initGtm() {
+        if (!__SEnv.is('production')) {
+            console.log(
+                `<yellow>[STheme]</yellow> Initializing <magenta>google tag manager</magenta> with this id "<cyan>${this.settings.google.gtm}</cyan>"`,
+            );
+        }
+
+        const gtmScript = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${this.settings.google.gtm}');`;
+
+        // create the actual script tag
+        const $script = document.createElement('script');
+        $script.innerHTML = gtmScript;
+        $script.setAttribute('id', 's-theme-gtm');
+        // @ts-ignore
+        $script.setAttribute(
+            'type',
+            this.settings.partytown?.enabled
+                ? 'text/partytown'
+                : 'text/javascript',
+        );
+        document.head.appendChild($script);
+    }
+
+    /**
+     * This method takes care of initializing the partytoen feature.
+     */
+    private _initPartytown() {
+        // make sure we have all we need for partytown
+        if (!this.settings.google.gtm) {
+            if (!__SEnv.is('production')) {
+                console.log(
+                    `<yellow>[STheme]</yellow> You have enabled <magenta>partytown</magenta> but you don't have specified any "<cyan>settings.google.gtm</cyan>" tag manager id...'`,
+                );
+                return;
+            }
+        }
+
+        // set the partytown settings
+        // @ts-ignore
+        window.partytown = this.settings.partytown;
+
+        if (!__SEnv.is('production')) {
+            console.log(
+                '<yellow>[STheme]</yellow> Initializing <magenta>partytown</magenta> with these settings',
+                this.settings.partytown,
+            );
+        }
+
+        // create and inject the partytown snippet
+        const snippetText = partytownSnippet();
+        const $partytownScript = document.createElement('script');
+        $partytownScript.innerHTML = snippetText;
+        $partytownScript.setAttribute('type', 'text/javascript');
+        document.body.appendChild($partytownScript);
+    }
+
+    /**
      * This method takes care of initializing the lod (level of details) features
      * like the "botLevel", lod by speedIndex, etc...
      */
     private _initLod() {
-        setTimeout(() => {
-            // check if is a crawler
-            const isCrawler = __isCrawler();
+        // setTimeout(() => {
+        if (!__SEnv.is('production')) {
+            console.log(
+                '<yellow>[STheme]</yellow> Initializing <magenta>lod</magenta> (level of details) with these settings',
+                this.settings.lod,
+            );
+        }
 
-            // check if is a crawler and that we have a botLevel config
-            if (isCrawler && this.lodConfig.botLevel !== undefined) {
-                this.setLod(this.lodConfig.botLevel);
-            }
+        // check if is a crawler
+        const isCrawler = __isCrawler();
 
-            // is a lod is saved in state
-            if (this.state.lod !== undefined) {
-                this.setLod(this.state.lod);
-                return;
-            }
+        // check if is a crawler and that we have a botLevel config
+        if (isCrawler && this.lodConfig.botLevel !== undefined) {
+            this.setLod(this.lodConfig.botLevel);
+        }
 
-            //
-            if (this.settings.lod.level !== undefined) {
-                this.setLod(this.settings.lod.level);
-            }
+        // is a lod is saved in state
+        if (this.state.lodLevel !== undefined) {
+            this.setLod(this.state.lodLevel);
+            return;
+        }
 
-            // if the user does not have selected a specific lod
-            // we check which lod is the most suited for his
-            // computer using the "speedIndex" calculated value
-            if (
-                !isCrawler &&
-                this.state.lod === undefined &&
-                this.settings.lod.level === undefined
-            ) {
-                const speedIndex = __speedIndex();
-                let suitedLod = 0;
+        // set lod level
+        this.setLod(this.settings.lod.level);
 
-                // get the higher lod depending on the speedIndex
-                for (let [lod, lodObj] of Object.entries(
-                    this.lodConfig.levels ?? {},
-                )) {
-                    if (lodObj.speedIndex > speedIndex) {
-                        break;
-                    }
-                    suitedLod = parseInt(lod);
+        // if the user does not have selected a specific lod
+        // we check which lod is the most suited for his
+        // computer using the "speedIndex" calculated value
+        if (
+            !isCrawler &&
+            this.state.lodLevel === undefined &&
+            this.settings.lod.level === undefined
+        ) {
+            const speedIndex = __speedIndex();
+            let suitedLod = 0;
+
+            // get the higher lod depending on the speedIndex
+            for (let [lod, lodObj] of Object.entries(
+                this.lodConfig.levels ?? {},
+            )) {
+                if (lodObj.speedIndex > speedIndex) {
+                    break;
                 }
-
-                // set the suited calculated lod
-                this.setLod(suitedLod);
-                return;
+                suitedLod = parseInt(lod);
             }
-        });
+
+            // set the suited calculated lod
+            this.setLod(suitedLod);
+            return;
+        }
+        // });
+    }
+
+    /**
+     * @name            agreeLegal
+     * @type            Function
+     *
+     * This method alows you to agree the legal of the website (cookies, etc...)
+     * It will flag the state.legal.agree to "true" and save some legals settings
+     * in the state.legal.metas object
+     *
+     * @event       s-theme.legal.agree             Dispatched when the user agree the legal terms
+     * @event       s-theme.legal.change             Dispatched when the user legal has been changed
+     *
+     * @param       {Any}           metas           Some metas to save alongside the agree flag
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    agreeLegal(metas?: any): void {
+        // set the agree flag to true
+        this.legal.agree = true;
+        // save the metas if some
+        if (metas) {
+            this.legal.metas = metas;
+        }
+        // save the cookie
+        __setCookie(
+            this.settings.legal.cookieName,
+            Object.assign({}, this.legal),
+        );
+
+        // dispatch an event
+        document.dispatchEvent(
+            new CustomEvent('s-theme.legal.agree', {
+                detail: this.legal,
+            }),
+        );
+        document.dispatchEvent(
+            new CustomEvent('s-theme.legal.change', {
+                detail: {
+                    prop: 'agree',
+                    ...this.legal,
+                },
+            }),
+        );
+    }
+
+    /**
+     * @name            disagreeLegal
+     * @type            Function
+     *
+     * This method alows you to disagree the legal of the website (cookies, etc...)
+     * It will flag the state.legal.agree to "false" without touching the "metas" to keep
+     * the potential user legal settings saved for next time
+     *
+     * @event       s-theme.legal.disagree             Dispatched when the user agree the legal terms
+     * @event       s-theme.legal.change             Dispatched when the user legal has been changed
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    disagreeLegal(): void {
+        // set the agree flag to false
+        this.legal.agree = false;
+        // save the cookie
+        __setCookie(
+            this.settings.legal.cookieName,
+            Object.assign({}, this.legal),
+        );
+
+        // dispatch an event
+        document.dispatchEvent(
+            new CustomEvent('s-theme.legal.disagree', {
+                detail: {
+                    theme: this,
+                },
+            }),
+        );
+        document.dispatchEvent(
+            new CustomEvent('s-theme.legal.change', {
+                detail: {
+                    prop: 'agree',
+                    ...this.legal,
+                },
+            }),
+        );
+    }
+
+    /**
+     * @name            setLegalMetas
+     * @type            Function
+     *
+     * This method allows you to set some legal metas.
+     * Note that this will make a deepMerge of the current metas and the passed ones.
+     *
+     * @event       s-theme.legal.change             Dispatched when the user legal has been changed
+     *
+     * @param       {Any}           metas           Some metas to set
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    setLegalMetas(metas: any): void {
+        // save the metas if some
+        this.legal.metas = __deepMerge(this.legal.metas, metas);
+        // save the cookie
+        __setCookie(
+            this.settings.legal.cookieName,
+            Object.assign({}, this.legal),
+        );
+        document.dispatchEvent(
+            new CustomEvent('s-theme.legal.change', {
+                detail: {
+                    prop: 'metas',
+                    ...this.legal,
+                },
+            }),
+        );
+    }
+
+    /**
+     * @name            getLegalMetas
+     * @type            Function
+     *
+     * This method allows you to get the legal saved metas
+     *
+     * @return      {Any}               The legal metas saved
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    getLegalMetas(): any {
+        return __getCookie(this.settings.legal.cookieName)?.metas ?? {};
+    }
+
+    /**
+     * @name            isLegalAgree
+     * @type            Function
+     *
+     * This method allows you to check if the legal are agree or not
+     *
+     * @return      {Boolean}       true if agree, false if not
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    isLegalAgree(): any {
+        return __getCookie(this.settings.legal.cookieName)?.agree;
     }
 
     /**
@@ -703,7 +1068,7 @@ export default class STheme extends __SThemeBase {
         level = parseInt(`${level}`);
 
         // save in state
-        this.state.lod = level;
+        this.state.lodLevel = level;
         this.save();
 
         const lodStylesheets = Array.from(
@@ -893,8 +1258,8 @@ export default class STheme extends __SThemeBase {
         this._applyOverridedConfigs(properties, $context);
 
         // lod
-        if (this.state.lod !== undefined) {
-            this.setLod(this.state.lod);
+        if (this.state.lodLevel !== undefined) {
+            this.setLod(this.state.lodLevel);
         }
 
         return this;
@@ -981,6 +1346,7 @@ export default class STheme extends __SThemeBase {
         // restore configs
         // @ts-ignore
         super.restore(savedState.overridedConfigs);
+
         // apply the configs
         this.applyState();
         // maintain chainability

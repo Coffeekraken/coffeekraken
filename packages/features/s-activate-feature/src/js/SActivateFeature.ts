@@ -1,8 +1,10 @@
 import __SFeature from '@coffeekraken/s-feature';
 import { __unique } from '@coffeekraken/sugar/array';
 import { __expandTemplate, __querySelectorLive } from '@coffeekraken/sugar/dom';
-import { __deepMerge } from '@coffeekraken/sugar/object';
+import { __deepMerge, __get } from '@coffeekraken/sugar/object';
 import __SActivateFeatureInterface from './interface/SActivateFeatureInterface';
+
+import { __getCookie } from '@coffeekraken/sugar/cookie';
 
 import __define from './define';
 
@@ -170,8 +172,38 @@ export default class SActivateFeature extends __SFeature {
             ]);
 
             triggers.forEach((trigger) => {
-                if (trigger.match(/^event:/)) {
-                    this.node.addEventListener('actual', (e) => {
+                if (trigger.match(/^\!?cookie:/)) {
+                    const isNegative = trigger.startsWith('!'),
+                        cookiePath = trigger.replace(/^\!?cookie:/, ''),
+                        cookieName = cookiePath.split('.')[0],
+                        cookieDotPath = cookiePath
+                            .split('.')
+                            .slice(1)
+                            .join('.');
+                    let cookieValue = __getCookie(cookieName);
+
+                    if (cookieValue && cookieDotPath) {
+                        cookieValue = __get(cookieValue, cookieDotPath);
+                    }
+
+                    if (isNegative && !cookieValue) {
+                        this.activate({
+                            preventSave: true,
+                        });
+                    } else if (!isNegative && cookieValue) {
+                        this.activate({
+                            preventSave: true,
+                        });
+                    }
+                } else if (trigger.match(/^event:/)) {
+                    const eventStr = trigger.replace(/^event:/, ''),
+                        eventName = eventStr.split(':')[0],
+                        listenerElm =
+                            eventStr.split(':').pop() === 'document'
+                                ? document
+                                : this.node;
+
+                    listenerElm.addEventListener(eventName, (e) => {
                         this.activate({
                             preventSave: true,
                         });
@@ -231,12 +263,15 @@ export default class SActivateFeature extends __SFeature {
         if (this.props.unactivateOn) {
             this.props.unactivateOn.forEach((what) => {
                 if (what.match(/^event:/)) {
-                    document.body.addEventListener(
-                        what.replace(/^event:/, ''),
-                        (e) => {
-                            this.unactivate();
-                        },
-                    );
+                    const eventStr = what.replace(/^event:/, ''),
+                        eventName = eventStr.split(':')[0],
+                        listenerElm: any =
+                            eventStr.split(':').pop() === 'document'
+                                ? document
+                                : this.node;
+                    listenerElm.addEventListener(eventName, (e) => {
+                        this.unactivate();
+                    });
                 } else {
                     switch (what) {
                         case 'click':

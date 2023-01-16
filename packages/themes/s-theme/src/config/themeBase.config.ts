@@ -89,6 +89,21 @@ export default function (api) {
         },
 
         /**
+         * @name            partytown
+         * @namespace       config.themeBase
+         * @type            Object
+         * @default         {}
+         *
+         * Reference the "themePartytown" config
+         *
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        get partytown() {
+            return api.config.themePartytown;
+        },
+
+        /**
          * @name            timing
          * @namespace       config.themeBase
          * @type            Object

@@ -459,6 +459,12 @@ export default class SFrontendServer extends __SClass {
                         req.header('access-control-request-headers'),
                     );
 
+                    res.header(
+                        'Cross-Origin-Embedder-Policy',
+                        'credentialless',
+                    );
+                    res.header('Cross-Origin-Opener-Policy', 'same-origin');
+
                     if (req.method === 'OPTIONS') {
                         // CORS Preflight
                         res.send();

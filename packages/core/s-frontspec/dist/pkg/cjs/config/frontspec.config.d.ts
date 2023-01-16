@@ -2,6 +2,8 @@ export declare function prepare(config: any): Promise<any>;
 export default function (api: any): {
     readonly storage: any;
     readonly serve: any;
+    
+    removeForFrontend: string[];
     build: {
         sources: {
             metas: {
@@ -53,6 +55,12 @@ export default function (api: any): {
                 readonly value: any;
             };
             lod: {
+                title: string;
+                description: string;
+                type: string;
+                readonly value: any;
+            };
+            partytown: {
                 title: string;
                 description: string;
                 type: string;

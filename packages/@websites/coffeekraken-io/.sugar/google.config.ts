@@ -1,6 +1,6 @@
 export default function(api) {
     return {
-        ga: api.env.devsCut ? null : 'UA-91271113-1',
+        gtm: 'GTM-K4LMN8Q',
         map: {
             apiKey: 'AIzaSyDzFfEzhmYXRTlONUCtMWQ88uHJhsbtXY4'
         }

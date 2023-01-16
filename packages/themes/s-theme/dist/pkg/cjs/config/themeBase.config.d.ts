@@ -12,6 +12,8 @@ export default function (api: any): {
     
     readonly scroll: any;
     
+    readonly partytown: any;
+    
     readonly timing: any;
     
     readonly transition: any;

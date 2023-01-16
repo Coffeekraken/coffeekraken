@@ -61,6 +61,10 @@ function registerFunctions($twig)
     $jsonDecode = require __DIR__ . '/json/jsonDecode.php';
     $twig->addFunction($jsonDecode);
 
+    // lod (level of details)
+    $lodClasses = require __DIR__ . '/lod/lodClasses.php';
+    $twig->addFuncti0on($lodClasses);
+
     // Object
     $filter = require __DIR__ . '/object/filter.php';
     $twig->addFunction($filter);

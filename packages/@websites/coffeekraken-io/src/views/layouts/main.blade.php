@@ -8,11 +8,6 @@
 
 @section('body')
 
-    <script>
-        document.body.classList.add('initial-loading');
-        document.body.classList.add('loading');
-    </script>
-
     @include('layouts.header.header')
 
     <div class="bkg"></div>
@@ -32,6 +27,12 @@
     <s-panel id="ratings" position="right" backdrop s-scope>
         <template>
             <ck-ratings></ck-ratings>
+        </template>
+    </s-panel>
+
+    <s-panel id="legal" position="bottom"  s-activate mount-when="direct" trigger="!cookie:s-legal" unactivate-on="event:s-theme.legal.agree:document,event:s-theme.legal.disagree:document">
+        <template>
+            @include('generic.legal.legal')
         </template>
     </s-panel>
 

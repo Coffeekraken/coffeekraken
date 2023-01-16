@@ -241,6 +241,11 @@ export default function (api) {
             get hostname() {
                 return `http://${api.config.vite.server.host}:${api.config.vite.server.port}`;
             },
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Cross-Origin-Embedder-Policy': 'credentialless',
+                'Cross-Origin-Opener-Policy': 'same-origin',
+            },
             proxy: {
                 // all exported css in the /css/exports folder
                 // @TODO            find a better way...

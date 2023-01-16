@@ -1,4 +1,5 @@
 import __SEnv from '@coffeekraken/s-env';
+import __SFrontspec from '@coffeekraken/s-frontspec';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __sanitizeJsonString } from '@coffeekraken/sugar/json';
 import { __packageJsonSync } from '@coffeekraken/sugar/package';
@@ -31,6 +32,14 @@ export default function sVitePluginSugar(settings: any = {}) {
         });
         const browserConfig = await c.instance.toObject();
 
+        // frontspec
+        const frontspec = new __SFrontspec(),
+            frontspecJson = frontspec.read();
+        // removing some data for the frontend
+        for (let key of __SSugarConfig.get('frontspec.removeForFrontend')) {
+            delete frontspecJson[key];
+        }
+
         let envJsonStr = JSON.stringify({
             // @ts-ignore
             PLATFORM: 'browser',
@@ -38,6 +47,7 @@ export default function sVitePluginSugar(settings: any = {}) {
             ENVIRONMENT: __SEnv.get('env'),
             SUGAR: {
                 config: browserConfig,
+                frontspec: frontspecJson,
             },
             PACKAGE: __packageJsonSync(),
         });
@@ -70,9 +80,12 @@ export default function sVitePluginSugar(settings: any = {}) {
                     }
                 }
             `.replace('\n', ''),
-            `document.env = window.___deepMerge(JSON.parse(\`${envJsonStr}\`), {
-                SUGAR: document.SUGAR ?? {}
-            })`,
+            `document.env = window.___deepMerge(
+                JSON.parse(\`${envJsonStr}\`),
+                {
+                    SUGAR: document.SUGAR ?? {}
+                }
+            )`,
         ];
         return [code.join('\n'), src].join('\n');
     }

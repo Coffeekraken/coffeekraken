@@ -97,10 +97,10 @@ export default class SActivateFeatureInterface extends __SInterface {
             },
             trigger: {
                 description:
-                    'Specify what trigger an activate/unactivate action. Can be "click", "mouseover", "mouseout" and/or "anchor"',
+                    'Specify what trigger an activate/unactivate action. Can be "click", "mouseover", "mouseout" ,"anchor", "event:%eventName" "and/or" "cookie:%cookieName.%optionalDotPath". When using the "event:", the listener will be the node itself by default but you can specify the "document" like so "event:%eventName:document". When using "cookie", you can negate the assertion like so "!cookie:myCookie.myValue"',
                 type: {
                     type: 'Array<String>',
-                    splitChars: [','],
+                    splitChars: [',', ' '],
                 },
                 values: [
                     'click',
@@ -115,7 +115,10 @@ export default class SActivateFeatureInterface extends __SInterface {
             unactivateOn: {
                 description:
                     'Specify some event(s) catched on the body tag that will unactivate the target(s)',
-                type: 'Array<String>',
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' '],
+                },
             },
         };
     }

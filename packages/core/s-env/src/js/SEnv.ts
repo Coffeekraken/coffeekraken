@@ -64,23 +64,9 @@ export default class SEnv extends __SEnv {
             }
         } else {
             console.log(
-                `%c[SEnv] The environment cannot be determined. Either set the config.env.env configuration or specify some environments by setting the config.env.envFromLocation object of {env}:{regex} environments`,
-                'color: orange',
+                `<red>[SEnv]</red> The environment cannot be determined. Either set the config.env.env configuration or specify some environments by setting the config.env.envFromLocation object of {env}:{regex} environments`,
             );
         }
-
-        console.log(
-            `%c[SEnv] Current environment is "${finalEnv}"${
-                queryStringObj.devsCut ? " developer's cut (devsCut)" : ''
-            }`,
-            `color: ${
-                finalEnv === 'production'
-                    ? 'red'
-                    : finalEnv === 'staging'
-                    ? 'cyan'
-                    : 'lightGreen'
-            }`,
-        );
 
         document.env.ENVIRONMENT = finalEnv;
         document.env.ENV = finalEnv;

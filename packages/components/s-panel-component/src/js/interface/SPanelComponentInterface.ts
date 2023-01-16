@@ -48,7 +48,7 @@ export default class SPanelComponentInterface extends __SInterface {
             },
             closeOn: {
                 description:
-                    'Specify which "action(s)" close the panel. Valid values are "click" or/and "escape" or/and "event:%eventName',
+                    'Specify which "action(s)" close the panel. Valid values are "click" or/and "escape" or/and "event:%eventName". When using the "event:", the listener will be the node itself by default but you can specify the "document" like so "event:%eventName:document',
                 type: {
                     type: 'Array<String>',
                     splitChars: [','],

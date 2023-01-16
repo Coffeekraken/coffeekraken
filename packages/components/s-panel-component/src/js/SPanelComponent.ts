@@ -236,8 +236,14 @@ export default class SPanelComponent extends __SLitComponent {
                     this.isTopPanel() && this.close();
                 });
             } else if (what.match(/^event\:/)) {
-                const event = what.split(':').pop();
-                this.addEventListener(event, (e) => {
+                const eventStr = what.replace(/^event:/, ''),
+                    eventName = eventStr.split(':')[0],
+                    listenerElm =
+                        eventStr.split(':').pop() === 'document'
+                            ? document
+                            : this;
+
+                listenerElm.addEventListener(eventName, (e) => {
                     this.close();
                 });
             }

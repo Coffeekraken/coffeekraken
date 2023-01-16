@@ -1,6 +1,7 @@
 import __SLitComponent from '@coffeekraken/s-lit-component';
+import __STheme from '@coffeekraken/s-theme';
 export default class CkSettings extends __SLitComponent {
-    _theme: any;
+    _theme: __STheme;
     static get properties(): any;
     static state: {};
     constructor();

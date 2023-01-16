@@ -1,11 +1,8 @@
 // @ts-nocheck
 
-import __chalk from 'chalk';
-__chalk.level = 3;
-
 /**
  * @name        tagsMap
- * @namespace            js.console.html
+ * @namespace            js.console
  * @type        Object
  * @platform          js
  * @platform          node
@@ -17,46 +14,31 @@ __chalk.level = 3;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 const tagsMap = {
-    black: (tag, content) => __chalk.black(content),
-    red: (tag, content) => __chalk.red(content),
-    green: (tag, content) => __chalk.green(content),
-    yellow: (tag, content) => __chalk.yellow(content),
-    blue: (tag, content) => __chalk.blue(content),
-    magenta: (tag, content) => __chalk.magenta(content),
-    cyan: (tag, content) => __chalk.cyan(content),
-    white: (tag, content) => __chalk.white(content),
-    grey: (tag, content) => __chalk.grey(content),
+    black: (tag, content) => content,
+    red: (tag, content) => `\x1b[1;31m${content}\x1b[0m`,
+    green: (tag, content) => `\x1b[1;32m${content}\x1b[0m`,
+    yellow: (tag, content) => `\x1b[1;33m${content}\x1b[0m`,
+    blue: (tag, content) => `\x1b[1;34m${content}\x1b[0m`,
+    magenta: (tag, content) => `\x1b[1;35m${content}\x1b[0m`,
+    cyan: (tag, content) => `\x1b[1;36m${content}\x1b[0m`,
+    white: (tag, content) => `\x1b[1;37m${content}\x1b[0m`,
+    grey: (tag, content) => `\x1b[1;30m${content}\x1b[0m`,
 
-    bgBlack: (tag, content) => __chalk.bgBlack(content),
-    bgRed: (tag, content) => __chalk.bgRed(content),
-    bgGreen: (tag, content) => __chalk.bgGreen(content),
-    bgYellow: (tag, content) => __chalk.bgYellow(content),
-    bgBlue: (tag, content) => __chalk.bgBlue(content),
-    bgMagenta: (tag, content) => __chalk.bgMagenta(content),
-    bgCyan: (tag, content) => __chalk.bgCyan(content),
-    bgWhite: (tag, content) => __chalk.bgWhite(content),
+    bgBlack: (tag, content) => content,
+    bgRed: (tag, content) => `\x1b[0;31m${content}\x1b[0m`,
+    bgGreen: (tag, content) => `\x1b[0;32m${content}\x1b[0m`,
+    bgYellow: (tag, content) => `\x1b[0;33m${content}\x1b[0m`,
+    bgBlue: (tag, content) => `\x1b[0;34m${content}\x1b[0m`,
+    bgMagenta: (tag, content) => `\x1b[0;35m${content}\x1b[0m`,
+    bgCyan: (tag, content) => `\x1b[0;36m${content}\x1b[0m`,
+    bgWhite: (tag, content) => `\x1b[0;37m${content}\x1b[0m`,
+    bgGrey: (tag, content) => `\x1b[0;30m${content}\x1b[0m`,
 
-    bold: (tag, content) => __chalk.bold(content),
-    dim: (tag, content) => __chalk.dim(content),
-    italic: (tag, content) => __chalk.italic(content),
-    underline: (tag, content) => __chalk.underline(content),
-    strike: (tag, content) => __chalk.strike(content),
-
-    h1: (tag, content) => {
-        return __chalk.underline(__chalk.bold(content)) + '\n\n';
-    },
-
-    h2: (tag, content) => {
-        return __chalk.bold(content) + '\n';
-    },
-
-    // iWarn: (tag, content) => __parseHtml('<yellow>⚠</yellow>'),
-    // iCheck: (tag, content) => __parseHtml(`<green>✓</green>`),
-    // iSuccess: (tag, content) => __parseHtml(`<green>✓</green>`),
-    // iError: (tag, content) => __parseHtml(`<red>✖</red>`),
-    // iCross: (tag, content) => __parseHtml(`<red>✖</red>`),
-    // iClose: (tag, content) => `✖`,
-    // iStart: (tag, content) => __parseHtml(`<green>‣</green>`),
+    bold: (tag, content) => content,
+    dim: (tag, content) => content,
+    italic: (tag, content) => content,
+    underline: (tag, content) => content,
+    strike: (tag, content) => content,
 
     date: (tag, content) =>
         new Date().getDate().toString().padStart('0', 2) +

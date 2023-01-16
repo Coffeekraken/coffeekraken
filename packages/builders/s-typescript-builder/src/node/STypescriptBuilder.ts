@@ -485,6 +485,10 @@ export default class STypescriptBuilder extends __SBuilder {
             );
             const sourceFile = project.getSourceFile(filePath);
 
+            // if (!sourceFile) {
+            //     return resolve('');
+            // }
+
             // update the file in memory with the one on the filesystem
             await sourceFile.refreshFromFileSystem();
 

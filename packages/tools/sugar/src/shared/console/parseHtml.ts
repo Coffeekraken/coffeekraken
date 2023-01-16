@@ -1,7 +1,8 @@
 // @ts-nocheck
 
 import __replaceTags from '../html/replaceTags';
-import __tagsMap from './html/tagsMap';
+
+import { __tagsMap } from '@coffeekraken/sugar/console';
 
 /**
  * @name                                parseHtml

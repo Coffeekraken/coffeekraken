@@ -148,8 +148,14 @@
             "import": "./dist/pkg/esm/shared/color/_exports.js"
         },
         "./console": {
-            "require": "./dist/pkg/cjs/shared/console/_exports.js",
-            "import": "./dist/pkg/esm/shared/console/_exports.js"
+            "node": {
+                "require": "./dist/pkg/cjs/node/console/_exports.js",
+                "import": "./dist/pkg/esm/node/console/_exports.js"
+            },
+            "default": {
+                "require": "./dist/pkg/cjs/js/console/_exports.js",
+                "import": "./dist/pkg/esm/js/console/_exports.js"
+            }
         },
         "./convert": {
             "node": {
@@ -160,6 +166,10 @@
                 "require": "./dist/pkg/cjs/js/convert/_exports.js",
                 "import": "./dist/pkg/esm/js/convert/_exports.js"
             }
+        },
+        "./cookie": {
+            "require": "./dist/pkg/cjs/js/cookie/_exports.js",
+            "import": "./dist/pkg/esm/js/cookie/_exports.js"
         },
         "./crypto": {
             "require": "./dist/pkg/cjs/shared/crypto/_exports.js",

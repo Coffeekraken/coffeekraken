@@ -76,7 +76,10 @@ export default class SActivateFeatureInterface extends __SInterface {
         };
         unactivateOn: {
             description: string;
-            type: string;
+            type: {
+                type: string;
+                splitChars: string[];
+            };
         };
     };
 }

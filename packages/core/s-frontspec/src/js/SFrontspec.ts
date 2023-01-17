@@ -33,7 +33,39 @@ import { __deepMerge, __get } from '@coffeekraken/sugar/object';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
+export interface ISFrontspecInitSettings {}
+
 export default class SFrontspec extends __SClass {
+    _defaultFrontspecInstance;
+
+    /**
+     * @name            init
+     * @type            Function
+     * @static
+     *
+     * This method allows you to init the your SFrontspec instance and store it into the document.env.SUGAR.frontspec property
+     *
+     * @return          {SFrontspec}                                    The SFrontspec instance that represent the frontspec.json file
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static init(): SFront {
+        const finalSettings = <ISFrontspecInitSettings>{
+            ...(settings ?? {}),
+        };
+
+        let frontspecInstance = new this(finalSettings);
+
+        // set the front in the env.SUGAR.front property
+        if (!document.env) document.env = {};
+        if (!document.env.SUGAR) document.env.SUGAR = {};
+        document.env.SUGAR.frontspec = frontspecInstance;
+
+        // return the current theme
+        return frontspecInstance;
+    }
+
     /**
      * @name        get
      * @type        Function
@@ -47,10 +79,9 @@ export default class SFrontspec extends __SClass {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    _defaultFrontspecInstance;
     static get(dotpath: string = '.'): any {
         if (!this._defaultFrontspecInstance) {
-            this._defaultFrontspecInstance = new this();
+            this._defaultFrontspecInstance = SFrontspec.init();
         }
         return this._defaultFrontspecInstance.get(dotpath);
     }
@@ -77,7 +108,7 @@ export default class SFrontspec extends __SClass {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(frontspec = window.frontspec ?? {}, settings = {}) {
+    constructor(frontspec = {}) {
         super(
             __deepMerge(
                 {
@@ -88,8 +119,13 @@ export default class SFrontspec extends __SClass {
                 settings,
             ),
         );
+
+        this.constructor._defaultFrontspecInstance = this;
         this._frontspec = __deepMerge(
-            document.env?.SUGAR?.frontspec ?? {},
+            document.env?.SUGAR?.frontspec &&
+                !(document.env.SUGAR.frontspec instanceof SFrontspec)
+                ? document.env.SUGAR.frontspec
+                : {},
             document.env?.FRONTSPEC ?? {},
             frontspec,
         );

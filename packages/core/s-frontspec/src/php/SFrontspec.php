@@ -11,7 +11,7 @@
  *
  * @param       {Object|Array}              [$settings=[]]              Some settings to configure your frontspec instance
  *
- * @setting        {String}                 [$path=$_ENV['S_FRONTSPEC_PATH']]       The frontspec path. If not specified, it will try to find it by looking for the nearest `frontspec.json` file from the cwd
+ * @setting        {String}                 [$path=$_ENV['S_FRONTSPEC_PATH'] || $_ENV['S_FRONTEND_PATH'] . '/frontspec.json']       The frontspec path. If not specified, it will try to find it by looking for the nearest `frontspec.json` file from the cwd
  *
  * @example         php
  * $frontspec = new SFrontspec();
@@ -41,8 +41,10 @@ class SFrontspec
     {
         $this->settings = (object) array_merge_recursive(
             [
-                'path' => isset($_ENV['S_FRONTSPEC_PATH'])
-                    ? $_ENV['S_FRONTSPEC_PATH']
+                'path' => (isset($_ENV['S_FRONTSPEC_PATH'])
+                        ? $_ENV['S_FRONTSPEC_PATH']
+                        : isset($_ENV['S_FRONTEND_PATH']))
+                    ? $_ENV['S_SFRONTEND_PATH'] . '/frontspec.json'
                     : null,
             ],
             (array) $settings

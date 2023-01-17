@@ -19,7 +19,9 @@ export interface IStorageConfig {
 }
 
 export default function (api): IStorageConfig {
-    // if (api.env.platform !== 'node') return;
+    if (api.env.platform !== 'node') {
+        return;
+    }
 
     return {
         system: {

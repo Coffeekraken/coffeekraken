@@ -67,7 +67,7 @@ $frontspec->metas->og = $ogObj;
 
 </head>
 
-<body class="{{ \Sugar\lod\lodClasses(2) }} {{ isset($bodyAttributes['class']) ? $bodyAttributes['class'] : '' }}" {{ \Sugar\html\attrs($bodyAttributes, ['class']) }}>
+<body class="{{ \Sugar\lod\lodClasses(2) }} {{ isset($bodyAttributes['class']) ? $bodyAttributes['class'] : '' }}" {!! \Sugar\html\attrs($bodyAttributes, ['class']) !!}>
 
     <script>
         document.body.classList.add('initial-loading');
@@ -81,7 +81,7 @@ $frontspec->metas->og = $ogObj;
             document.env.SUGAR = {!! json_encode($SUGAR) !!};
         @endif
         @if (isset($frontspec))
-            document.env.FRONTSPEC = {!! json_encode($frontspec) !!};
+            document.env.FRONTSPEC = {!! json_encode(\Sugar\object\deepDiff(\Sugar\frontspec\readFrontspec(), $frontspec)) !!};
         @endif
     </script>
     @endif

@@ -2,6 +2,10 @@ import { __dirname } from '@coffeekraken/sugar/fs';
 import { __packageTmpDir } from '@coffeekraken/sugar/path';
 
 export default function (api) {
+    if (api.env.platform !== 'node') {
+        return;
+    }
+
     return {
         /**
          * @name              port

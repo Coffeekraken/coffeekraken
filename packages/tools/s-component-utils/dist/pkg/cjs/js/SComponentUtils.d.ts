@@ -71,6 +71,12 @@ export default class SComponentUtils extends __SClass {
     
     initProps(props: any, settings: ISComponentUtilsPropsSettings): any;
     
+    private _isThemeAvailable;
+    
+    private _isFrontAvailable;
+    
+    private _isFrontspecAvailable;
+    
     handleProps(props: any, settings?: Partial<ISComponentUtilsPropsSettings>): void;
     
     handleState(state: any, settings?: Partial<ISComponentUtilsStateSettings>): void;

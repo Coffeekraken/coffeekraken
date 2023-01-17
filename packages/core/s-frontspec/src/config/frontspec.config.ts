@@ -4,7 +4,6 @@ import { __ipAddress } from '@coffeekraken/sugar/network';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
-import __path from 'path';
 
 export async function prepare(config) {
     const potentialFrontspecJsonFilePath = `${__packageRootDir()}/frontspec.json`;
@@ -57,6 +56,30 @@ export default function (api) {
                         'Specify the assets to load like the css, js, etc...',
                     type: 'config',
                     config: 'assets',
+                },
+                theme: {
+                    title: 'Theme',
+                    description: 'Specify the theme used by default',
+                    type: 'object',
+                    get value() {
+                        const themesObj = {};
+                        Object.keys(api.config.theme.themes).forEach((name) => {
+                            themesObj[name] = {
+                                title:
+                                    api.config.theme.themes[name].metas
+                                        ?.title ?? name,
+                                description:
+                                    api.config.theme.themes[name].metas
+                                        ?.description ?? '',
+                            };
+                        });
+
+                        return {
+                            theme: api.config.theme.theme,
+                            variant: api.config.theme.variant,
+                            themes: themesObj,
+                        };
+                    },
                 },
                 media: {
                     title: 'Media',
@@ -130,20 +153,20 @@ export default function (api) {
                         return partytownConfig;
                     },
                 },
-                classmap: {
-                    title: 'Classmap',
-                    description: 'Specify the classmap settings',
-                    type: 'object',
-                    get value() {
-                        return {
-                            ...Object.assign({}, api.theme.classmap),
-                            path: `./${__path.relative(
-                                __packageRootDir(),
-                                api.config.classmap.path,
-                            )}`,
-                        };
-                    },
-                },
+                // classmap: {
+                //     title: 'Classmap',
+                //     description: 'Specify the classmap settings',
+                //     type: 'object',
+                //     get value() {
+                //         return {
+                //             ...Object.assign({}, api.theme.classmap),
+                //             path: `./${__path.relative(
+                //                 __packageRootDir(),
+                //                 api.config.classmap.path,
+                //             )}`,
+                //         };
+                //     },
+                // },
                 font: {
                     title: 'Font',
                     description:

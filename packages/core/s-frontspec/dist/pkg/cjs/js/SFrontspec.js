@@ -6,35 +6,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const s_class_1 = __importDefault(require("@coffeekraken/s-class"));
 const object_1 = require("@coffeekraken/sugar/object");
-/**
- * @name                SFrontspec
- * @namespace           js
- * @type                Class
- * @extends             SClass
- * @status              wip
- *
- * This class represent the ```frontspec.json``` json that must be either in:
- * 1. The `window.env.SUGAR.frontspec` object
- * 2. The `window.env.FRONTSPEC` object
- * 3. The "frontspec" param of the constructor
- * Each level will be overrided by the upper one using a deepMerge.
- *
- * @param           {Object}        [frontspec={}]          A frontspec formated object
- *
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example             js
- * import __SFrontspec from '@coffeekraken/s-frontspec';
- * const frontspec = new SFrontspec();
- * frontspec.get('partytown.enabled');
- * __SFrontspec.get('partytown.enabled');
- *
- * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
 class SFrontspec extends s_class_1.default {
     /**
      * @name            constructor
@@ -46,10 +17,8 @@ class SFrontspec extends s_class_1.default {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(frontspec, settings) {
-        var _a, _b, _c, _d, _e, _f;
-        if (frontspec === void 0) { frontspec = (_a = window.frontspec) !== null && _a !== void 0 ? _a : {}; }
-        if (settings === void 0) { settings = {}; }
+    constructor(frontspec = {}) {
+        var _a, _b, _c, _d;
         super((0, object_1.__deepMerge)({
             metas: {
                 id: 'SFrontspec',
@@ -66,11 +35,52 @@ class SFrontspec extends s_class_1.default {
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         this._frontspec = {};
-        this._frontspec = (0, object_1.__deepMerge)((_d = (_c = (_b = document.env) === null || _b === void 0 ? void 0 : _b.SUGAR) === null || _c === void 0 ? void 0 : _c.frontspec) !== null && _d !== void 0 ? _d : {}, (_f = (_e = document.env) === null || _e === void 0 ? void 0 : _e.FRONTSPEC) !== null && _f !== void 0 ? _f : {}, frontspec);
+        this.constructor._defaultFrontspecInstance = this;
+        this._frontspec = (0, object_1.__deepMerge)(((_b = (_a = document.env) === null || _a === void 0 ? void 0 : _a.SUGAR) === null || _b === void 0 ? void 0 : _b.frontspec) &&
+            !(document.env.SUGAR.frontspec instanceof SFrontspec)
+            ? document.env.SUGAR.frontspec
+            : {}, (_d = (_c = document.env) === null || _c === void 0 ? void 0 : _c.FRONTSPEC) !== null && _d !== void 0 ? _d : {}, frontspec);
     }
+    /**
+     * @name            init
+     * @type            Function
+     * @static
+     *
+     * This method allows you to init the your SFrontspec instance and store it into the document.env.SUGAR.frontspec property
+     *
+     * @return          {SFrontspec}                                    The SFrontspec instance that represent the frontspec.json file
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static init() {
+        const finalSettings = Object.assign({}, (settings !== null && settings !== void 0 ? settings : {}));
+        let frontspecInstance = new this(finalSettings);
+        // set the front in the env.SUGAR.front property
+        if (!document.env)
+            document.env = {};
+        if (!document.env.SUGAR)
+            document.env.SUGAR = {};
+        document.env.SUGAR.frontspec = frontspecInstance;
+        // return the current theme
+        return frontspecInstance;
+    }
+    /**
+     * @name        get
+     * @type        Function
+     * @static
+     *
+     * Access a frontspec value by passing a dotpath like "partytown.enabled", or by accessing the full frontspec object by using `.get()` call.
+     *
+     * @param       {String}        [dotpah="."]            The dotpath of the frontspec value you want to access
+     * @return      {Any}                                   The getted frontspec value
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
     static get(dotpath = '.') {
         if (!this._defaultFrontspecInstance) {
-            this._defaultFrontspecInstance = new this();
+            this._defaultFrontspecInstance = SFrontspec.init();
         }
         return this._defaultFrontspecInstance.get(dotpath);
     }
@@ -91,4 +101,4 @@ class SFrontspec extends s_class_1.default {
     }
 }
 exports.default = SFrontspec;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLG9FQUE2QztBQUM3Qyx1REFBZ0U7QUFFaEU7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0E0Qkc7QUFFSCxNQUFxQixVQUFXLFNBQVEsaUJBQVE7SUFrQzVDOzs7Ozs7Ozs7T0FTRztJQUNILFlBQVksU0FBa0MsRUFBRSxRQUFhOztrQ0FBakQsRUFBQSxrQkFBWSxNQUFNLENBQUMsU0FBUyxtQ0FBSSxFQUFFO2lDQUFFLEVBQUEsYUFBYTtRQUN6RCxLQUFLLENBQ0QsSUFBQSxvQkFBVyxFQUNQO1lBQ0ksS0FBSyxFQUFFO2dCQUNILEVBQUUsRUFBRSxZQUFZO2FBQ25CO1NBQ0osRUFDRCxRQUFRLENBQ1gsQ0FDSixDQUFDO1FBaENOOzs7Ozs7Ozs7V0FTRztRQUNLLGVBQVUsR0FBRyxFQUFFLENBQUM7UUF1QnBCLElBQUksQ0FBQyxVQUFVLEdBQUcsSUFBQSxvQkFBVyxFQUN6QixNQUFBLE1BQUEsTUFBQSxRQUFRLENBQUMsR0FBRywwQ0FBRSxLQUFLLDBDQUFFLFNBQVMsbUNBQUksRUFBRSxFQUNwQyxNQUFBLE1BQUEsUUFBUSxDQUFDLEdBQUcsMENBQUUsU0FBUyxtQ0FBSSxFQUFFLEVBQzdCLFNBQVMsQ0FDWixDQUFDO0lBQ04sQ0FBQztJQTdDRCxNQUFNLENBQUMsR0FBRyxDQUFDLFVBQWtCLEdBQUc7UUFDNUIsSUFBSSxDQUFDLElBQUksQ0FBQyx5QkFBeUIsRUFBRTtZQUNqQyxJQUFJLENBQUMseUJBQXlCLEdBQUcsSUFBSSxJQUFJLEVBQUUsQ0FBQztTQUMvQztRQUNELE9BQU8sSUFBSSxDQUFDLHlCQUF5QixDQUFDLEdBQUcsQ0FBQyxPQUFPLENBQUMsQ0FBQztJQUN2RCxDQUFDO0lBMENEOzs7Ozs7Ozs7OztPQVdHO0lBQ0gsR0FBRyxDQUFDLFVBQWtCLEdBQUc7UUFDckIsT0FBTyxJQUFBLGNBQUssRUFBQyxJQUFJLENBQUMsVUFBVSxFQUFFLE9BQU8sQ0FBQyxDQUFDO0lBQzNDLENBQUM7Q0FDSjtBQTdFRCw2QkE2RUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLG9FQUE2QztBQUM3Qyx1REFBZ0U7QUFrQ2hFLE1BQXFCLFVBQVcsU0FBUSxpQkFBUTtJQStENUM7Ozs7Ozs7OztPQVNHO0lBQ0gsWUFBWSxTQUFTLEdBQUcsRUFBRTs7UUFDdEIsS0FBSyxDQUNELElBQUEsb0JBQVcsRUFDUDtZQUNJLEtBQUssRUFBRTtnQkFDSCxFQUFFLEVBQUUsWUFBWTthQUNuQjtTQUNKLEVBQ0QsUUFBUSxDQUNYLENBQ0osQ0FBQztRQWhDTjs7Ozs7Ozs7O1dBU0c7UUFDSyxlQUFVLEdBQUcsRUFBRSxDQUFDO1FBd0JwQixJQUFJLENBQUMsV0FBVyxDQUFDLHlCQUF5QixHQUFHLElBQUksQ0FBQztRQUNsRCxJQUFJLENBQUMsVUFBVSxHQUFHLElBQUEsb0JBQVcsRUFDekIsQ0FBQSxNQUFBLE1BQUEsUUFBUSxDQUFDLEdBQUcsMENBQUUsS0FBSywwQ0FBRSxTQUFTO1lBQzFCLENBQUMsQ0FBQyxRQUFRLENBQUMsR0FBRyxDQUFDLEtBQUssQ0FBQyxTQUFTLFlBQVksVUFBVSxDQUFDO1lBQ3JELENBQUMsQ0FBQyxRQUFRLENBQUMsR0FBRyxDQUFDLEtBQUssQ0FBQyxTQUFTO1lBQzlCLENBQUMsQ0FBQyxFQUFFLEVBQ1IsTUFBQSxNQUFBLFFBQVEsQ0FBQyxHQUFHLDBDQUFFLFNBQVMsbUNBQUksRUFBRSxFQUM3QixTQUFTLENBQ1osQ0FBQztJQUNOLENBQUM7SUEzRkQ7Ozs7Ozs7Ozs7O09BV0c7SUFDSCxNQUFNLENBQUMsSUFBSTtRQUNQLE1BQU0sYUFBYSxHQUFHLGtCQUNmLENBQUMsUUFBUSxhQUFSLFFBQVEsY0FBUixRQUFRLEdBQUksRUFBRSxDQUFDLENBQ3RCLENBQUM7UUFFRixJQUFJLGlCQUFpQixHQUFHLElBQUksSUFBSSxDQUFDLGFBQWEsQ0FBQyxDQUFDO1FBRWhELGdEQUFnRDtRQUNoRCxJQUFJLENBQUMsUUFBUSxDQUFDLEdBQUc7WUFBRSxRQUFRLENBQUMsR0FBRyxHQUFHLEVBQUUsQ0FBQztRQUNyQyxJQUFJLENBQUMsUUFBUSxDQUFDLEdBQUcsQ0FBQyxLQUFLO1lBQUUsUUFBUSxDQUFDLEdBQUcsQ0FBQyxLQUFLLEdBQUcsRUFBRSxDQUFDO1FBQ2pELFFBQVEsQ0FBQyxHQUFHLENBQUMsS0FBSyxDQUFDLFNBQVMsR0FBRyxpQkFBaUIsQ0FBQztRQUVqRCwyQkFBMkI7UUFDM0IsT0FBTyxpQkFBaUIsQ0FBQztJQUM3QixDQUFDO0lBRUQ7Ozs7Ozs7Ozs7OztPQVlHO0lBQ0gsTUFBTSxDQUFDLEdBQUcsQ0FBQyxVQUFrQixHQUFHO1FBQzVCLElBQUksQ0FBQyxJQUFJLENBQUMseUJBQXlCLEVBQUU7WUFDakMsSUFBSSxDQUFDLHlCQUF5QixHQUFHLFVBQVUsQ0FBQyxJQUFJLEVBQUUsQ0FBQztTQUN0RDtRQUNELE9BQU8sSUFBSSxDQUFDLHlCQUF5QixDQUFDLEdBQUcsQ0FBQyxPQUFPLENBQUMsQ0FBQztJQUN2RCxDQUFDO0lBK0NEOzs7Ozs7Ozs7OztPQVdHO0lBQ0gsR0FBRyxDQUFDLFVBQWtCLEdBQUc7UUFDckIsT0FBTyxJQUFBLGNBQUssRUFBQyxJQUFJLENBQUMsVUFBVSxFQUFFLE9BQU8sQ0FBQyxDQUFDO0lBQzNDLENBQUM7Q0FDSjtBQS9HRCw2QkErR0MifQ==

@@ -2012,6 +2012,27 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@coffeekraken/s-front@^2.0.0-alpha.20, @coffeekraken/s-front@workspace:packages/frontend/s-front":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/s-front@workspace:packages/frontend/s-front"
+  dependencies:
+    "@builder.io/partytown": ^0.7.4
+    "@coffeekraken/s-class": ^2.0.0-alpha.20
+    "@coffeekraken/s-classmap": ^2.0.0-alpha.20
+    "@coffeekraken/s-color": ^2.0.0-alpha.20
+    "@coffeekraken/s-env": ^2.0.0-alpha.20
+    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.20
+    "@coffeekraken/s-frontspec": ^2.0.0-alpha.20
+    "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
+    "@coffeekraken/s-sugar-json": ^2.0.0-alpha.20
+    "@coffeekraken/sugar": ^2.0.0-alpha.20
+    fastdom: ^1.0.11
+    known-css-properties: ^0.25.0
+    micromatch: ^4.0.5
+  languageName: unknown
+  linkType: soft
+
 "@coffeekraken/s-frontend-checker@^2.0.0-alpha.20, @coffeekraken/s-frontend-checker@workspace:packages/tools/s-frontend-checker":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-frontend-checker@workspace:packages/tools/s-frontend-checker"
@@ -2751,9 +2772,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-theme@^2.0.0-alpha.20, @coffeekraken/s-theme@workspace:packages/themes/s-theme":
+"@coffeekraken/s-theme@^2.0.0-alpha.20, @coffeekraken/s-theme@workspace:packages/frontend/s-theme":
   version: 0.0.0-use.local
-  resolution: "@coffeekraken/s-theme@workspace:packages/themes/s-theme"
+  resolution: "@coffeekraken/s-theme@workspace:packages/frontend/s-theme"
   dependencies:
     "@builder.io/partytown": ^0.7.4
     "@coffeekraken/s-class": ^2.0.0-alpha.20
@@ -2761,6 +2782,7 @@ __metadata:
     "@coffeekraken/s-color": ^2.0.0-alpha.20
     "@coffeekraken/s-env": ^2.0.0-alpha.20
     "@coffeekraken/s-event-emitter": ^2.0.0-alpha.20
+    "@coffeekraken/s-frontspec": ^2.0.0-alpha.20
     "@coffeekraken/s-interface": ^2.0.0-alpha.20
     "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
     "@coffeekraken/s-sugar-json": ^2.0.0-alpha.20
@@ -2906,6 +2928,7 @@ __metadata:
   resolution: "@coffeekraken/s-vite-sugar-plugin@workspace:packages/vite/s-vite-sugar-plugin"
   dependencies:
     "@coffeekraken/s-env": ^2.0.0-alpha.20
+    "@coffeekraken/s-frontspec": ^2.0.0-alpha.20
     "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
     "@coffeekraken/sugar": ^2.0.0-alpha.20
   languageName: unknown
@@ -5832,6 +5855,7 @@ __metadata:
     "@coffeekraken/s-filtrable-input-component": ^2.0.0-alpha.20
     "@coffeekraken/s-floating-feature": ^2.0.0-alpha.20
     "@coffeekraken/s-form-validate-feature": ^2.0.0-alpha.20
+    "@coffeekraken/s-front": ^2.0.0-alpha.20
     "@coffeekraken/s-frontend-server": ^2.0.0-alpha.20
     "@coffeekraken/s-frontspec": ^2.0.0-alpha.20
     "@coffeekraken/s-glitch-feature": ^2.0.0-alpha.20

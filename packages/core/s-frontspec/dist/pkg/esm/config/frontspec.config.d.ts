@@ -18,6 +18,16 @@ export default function (api: any): {
                 type: string;
                 config: string;
             };
+            theme: {
+                title: string;
+                description: string;
+                type: string;
+                readonly value: {
+                    theme: any;
+                    variant: any;
+                    themes: {};
+                };
+            };
             media: {
                 title: string;
                 description: string;
@@ -61,12 +71,6 @@ export default function (api: any): {
                 readonly value: any;
             };
             partytown: {
-                title: string;
-                description: string;
-                type: string;
-                readonly value: any;
-            };
-            classmap: {
                 title: string;
                 description: string;
                 type: string;

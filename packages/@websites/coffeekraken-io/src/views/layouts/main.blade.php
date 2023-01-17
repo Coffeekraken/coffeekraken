@@ -10,6 +10,7 @@
 
     @include('layouts.header.header')
 
+
     <div class="bkg"></div>
 
     <div s-page-transition class="content">
@@ -30,7 +31,7 @@
         </template>
     </s-panel>
 
-    <s-panel id="legal" position="bottom"  s-activate mount-when="direct" trigger="!cookie:s-legal" unactivate-on="event:s-theme.legal.agree:document,event:s-theme.legal.disagree:document">
+    <s-panel id="legal" position="bottom"  s-activate mount-when="direct" trigger="!cookie:s-legal" unactivate-on="event:s-front.legal.agree:document,event:s-front.legal.disagree:document">
         <template>
             @include('generic.legal.legal')
         </template>

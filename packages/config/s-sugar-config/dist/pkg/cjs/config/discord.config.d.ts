@@ -1,4 +1,4 @@
-declare const _default: {
+export default function (api: any): {
     server: {
         
         id: string;
@@ -6,4 +6,3 @@ declare const _default: {
         url: string;
     };
 };
-export default _default;

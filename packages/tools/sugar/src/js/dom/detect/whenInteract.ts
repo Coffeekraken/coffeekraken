@@ -55,8 +55,6 @@ export default function __whenInteract(
         );
 
         function interacted(interaction) {
-            console.log('interacted', interaction);
-
             // resolving the promise
             resolve(interaction);
 

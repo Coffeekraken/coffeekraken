@@ -43,6 +43,20 @@
             "src": "/dist/css/index.css"
         }
     },
+    "theme": {
+        "theme": "default",
+        "variant": "dark",
+        "themes": {
+            "default-light": {
+                "title": "Default light",
+                "description": "Nice and elegant light theme"
+            },
+            "default-dark": {
+                "title": "Default dark",
+                "description": "Nice and elegant dark theme"
+            }
+        }
+    },
     "media": {
         "defaultAction": "<=",
         "defaultMedia": "desktop",
@@ -122,7 +136,6 @@
     },
     "google": {
         "gtm": "GTM-K4LMN8Q",
-        "ga": null,
         "map": {
             "apiKey": "AIzaSyDzFfEzhmYXRTlONUCtMWQ88uHJhsbtXY4"
         }
@@ -200,11 +213,6 @@
             "ttq.load",
             "mixpanel.track"
         ]
-    },
-    "classmap": {
-        "enabled": true,
-        "url": "/classmap.json",
-        "path": "./classmap.json"
     },
     "font": {
         "family": {
@@ -384,8 +392,8 @@
             "style": {
                 "display": "block",
                 "fontFamily": "Menlo, Monaco, Consolas, Courier New, monospace",
-                "color": "#596573",
-                "backgroundColor": "#fcfcfd",
+                "color": "#f3f5f6",
+                "backgroundColor": "#373f48",
                 "lineHeight": 1.5,
                 "paddingInline": "1.5rem",
                 "paddingBlock": "0.75rem",
@@ -404,9 +412,9 @@
             "style": {
                 "display": "inline-block",
                 "fontFamily": "Menlo, Monaco, Consolas, Courier New, monospace",
-                "color": "#596573",
+                "color": "#f3f5f6",
                 "lineHeight": 1.1,
-                "backgroundColor": "#fffefa",
+                "backgroundColor": "#805e00",
                 "borderRadius": "4px",
                 "paddingInline": "0.375rem",
                 "paddingBlock": "0rem"

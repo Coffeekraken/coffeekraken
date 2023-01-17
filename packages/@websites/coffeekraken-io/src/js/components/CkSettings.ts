@@ -1,10 +1,10 @@
 // @ts-nocheck
 
+import __SFront from '@coffeekraken/s-front';
 import __SLitComponent, { html } from '@coffeekraken/s-lit-component';
-import __STheme from '@coffeekraken/s-theme';
 
 export default class CkSettings extends __SLitComponent {
-  _theme = __STheme.getCurrentTheme();
+  _front = __SFront.instance;
 
   static get properties() {
     return __SLitComponent.propertiesFromInterface();
@@ -17,7 +17,7 @@ export default class CkSettings extends __SLitComponent {
       shadowDom: false,
     });
 
-    document.addEventListener('s-theme.legal.change', () => {
+    document.addEventListener('s-front.legal.change', () => {
       this.requestUpdate();
     });
   }
@@ -32,26 +32,26 @@ export default class CkSettings extends __SLitComponent {
     const $fontSizeRange = this.querySelector('#setting-font-size');
 
     $baseColorPicker.addEventListener('s-color-picker.change', (e) => {
-      this._theme.setColor('base', e.detail.hex);
+      this._front.theme.setColor('base', e.detail.hex);
     });
     $mainColorPicker.addEventListener('s-color-picker.change', (e) => {
-      this._theme.setColor('main', e.detail.hex);
+      this._front.theme.setColor('main', e.detail.hex);
     });
     $accentColorPicker.addEventListener('s-color-picker.change', (e) => {
-      this._theme.setColor('accent', e.detail.hex);
+      this._front.theme.setColor('accent', e.detail.hex);
     });
     $complementaryColorPicker.addEventListener('s-color-picker.change', (e) => {
-      this._theme.setColor('complementary', e.detail.hex);
+      this._front.theme.setColor('complementary', e.detail.hex);
     });
     $fontSizeRange.addEventListener('change', (e) => {
-      this._theme.set('scale.default', `${e.target.value}`);
+      this._front.theme.set('scale.default', `${e.target.value}`);
     });
   }
 
   async mount() {}
 
   _setLod(level: number) {
-    __STheme.setLod(level);
+    this._front.setLod(level);
   }
 
   render() {
@@ -89,7 +89,7 @@ export default class CkSettings extends __SLitComponent {
                   id="setting-lod"
                   min="0"
                   max="3"
-                  value=${__STheme.lodLevel - 1}
+                  value=${this._front.lod.level - 1}
                   values='["Low","Medium","High","Extrem"]'
                   tooltip
                   step="1"
@@ -111,7 +111,7 @@ export default class CkSettings extends __SLitComponent {
                     <input
                       type="text"
                       class="s-input"
-                      value="${this._theme.getColor('base').toHex()}"
+                      value="${this._front.theme.getColor('base').toHex()}"
                     />
                     <button class="s-btn s-color:base">
                       <i class="s-icon:color"></i>
@@ -131,7 +131,7 @@ export default class CkSettings extends __SLitComponent {
                     <input
                       type="text"
                       class="s-input"
-                      value="${this._theme.getColor('main').toHex()}"
+                      value="${this._front.theme.getColor('main').toHex()}"
                     />
                     <button class="s-btn s-color:main">
                       <i class="s-icon:color"></i>
@@ -154,7 +154,7 @@ export default class CkSettings extends __SLitComponent {
                     <input
                       type="text"
                       class="s-input"
-                      value="${this._theme.getColor('accent').toHex()}"
+                      value="${this._front.theme.getColor('accent').toHex()}"
                     />
                     <button class="s-btn s-color:accent">
                       <i class="s-icon:color"></i>
@@ -174,7 +174,9 @@ export default class CkSettings extends __SLitComponent {
                     <input
                       type="text"
                       class="s-input"
-                      value="${this._theme.getColor('complementary').toHex()}"
+                      value="${this._front.theme
+                        .getColor('complementary')
+                        .toHex()}"
                     />
                     <button class="s-btn s-color:complementary">
                       <i class="s-icon:color"></i>
@@ -211,7 +213,7 @@ export default class CkSettings extends __SLitComponent {
                   type="reset"
                   class="s-btn s-color:accent"
                   @click=${() => {
-                    this._theme.clear();
+                    this._front.theme.clear();
                   }}
                 >
                   Restore!
@@ -224,7 +226,7 @@ export default class CkSettings extends __SLitComponent {
               >
                 <span>
                     Legals condition agreement&nbsp;&nbsp;${
-                      this._theme.isLegalAgree()
+                      this._front.isLegalAgree()
                         ? html`
                             <span class="s-badge s-color:success">
                               Agreed
@@ -260,7 +262,6 @@ export default class CkSettings extends __SLitComponent {
 export function define(props: any = {}, tagName = 'ck-settings') {
   __SLitComponent.define(tagName, CkSettings, {
     id: 'ck-settings',
-    // saveState: true,
     ...props,
   });
 }

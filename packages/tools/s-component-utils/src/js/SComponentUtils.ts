@@ -2,6 +2,8 @@
 // @TODO            check how to override private static methods
 
 import __SClass from '@coffeekraken/s-class';
+import __SFront from '@coffeekraken/s-front';
+import __SFrontspec from '@coffeekraken/s-frontspec';
 import __SInterface from '@coffeekraken/s-interface';
 import __SState from '@coffeekraken/s-state';
 import __STheme from '@coffeekraken/s-theme';
@@ -352,6 +354,27 @@ export default class SComponentUtils extends __SClass {
         return finalProps;
     }
 
+    /**
+     * Check if an STheme instance has been instanciated
+     */
+    private _isThemeAvailable(): boolean {
+        return document.env?.SUGAR?.theme !== undefined;
+    }
+
+    /**
+     * Check if an sFront instance has been instanciated
+     */
+    private _isFrontAvailable(): boolean {
+        return document.env?.SUGAR?.front !== undefined;
+    }
+
+    /**
+     * Check if an SFrontspec instance has been instanciated
+     */
+    private _isFrontspecAvailable(): boolean {
+        return document.env?.SUGAR?.frontspec !== undefined;
+    }
+
     // /**
     //  * Init the cssPartial feature
     //  */
@@ -451,6 +474,16 @@ export default class SComponentUtils extends __SClass {
      * to adapt properties depending on the viewport size.
      */
     makePropsResponsive(props: any) {
+        if (
+            !this._isFrontAvailable() ||
+            !document.env.SUGAR.frontspec.get('media.queries')
+        ) {
+            console.log(document.env.SUGAR.frontspec._frontspec);
+            console.log(
+                `<red>[SComponentUtils]</red> To use responsive props on components and features, you MUST call the SFront.init() method in your main entry file...`,
+            );
+        }
+
         // ensure we have a responsive object
         props.responsive = __deepMerge(
             {
@@ -528,7 +561,7 @@ export default class SComponentUtils extends __SClass {
         // search for the good media
         for (let [media, responsiveProps] of Object.entries(props.responsive)) {
             // media query name
-            const queries = __STheme.get(`media.queries`),
+            const queries = __SFrontspec.get(`media.queries`),
                 nudeMedia = media.replace(/(<|>|=|\|)/gm, '');
 
             if (media === 'toResetResponsiveProps') {
@@ -619,9 +652,6 @@ export default class SComponentUtils extends __SClass {
             if (this.props.lod !== undefined) {
                 await __when(this.node, `lod:${this.props.lod}`);
             }
-
-            // make sure the theme is inited
-            __STheme.ensureIsInited();
 
             // wait
             await __when(this.node, when);
@@ -937,7 +967,8 @@ export default class SComponentUtils extends __SClass {
         if (
             this.props.activeWhen.includes('lod') &&
             this.props.lod !== undefined &&
-            __STheme.lodLevel < this.props.lod
+            this._isFrontAvailable() &&
+            __SFront.instance.lod.level < this.props.lod
         ) {
             return false;
         }

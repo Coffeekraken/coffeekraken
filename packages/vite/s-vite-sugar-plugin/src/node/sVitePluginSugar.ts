@@ -32,6 +32,14 @@ export default function sVitePluginSugar(settings: any = {}) {
         });
         const browserConfig = await c.instance.toObject();
 
+        // filtering out all the "theme..." properties cause they are already
+        // in the "theme" one...
+        for (let [configId, value] of Object.entries(browserConfig)) {
+            if (configId !== 'theme' && configId.startsWith('theme')) {
+                delete browserConfig[configId];
+            }
+        }
+
         // frontspec
         const frontspec = new __SFrontspec(),
             frontspecJson = frontspec.read();
@@ -82,9 +90,7 @@ export default function sVitePluginSugar(settings: any = {}) {
             `.replace('\n', ''),
             `document.env = window.___deepMerge(
                 JSON.parse(\`${envJsonStr}\`),
-                {
-                    SUGAR: document.SUGAR ?? {}
-                }
+                document.env || {}
             )`,
         ];
         return [code.join('\n'), src].join('\n');

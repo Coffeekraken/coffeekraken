@@ -278,7 +278,7 @@ export default class SPageTransitionFeature extends __SFeature {
                         }
                         // if the class is not already in the body classes,
                         // add it
-                        if (!$inPageBody.classList.contains(cls)) {
+                        if (cls && !$inPageBody.classList.contains(cls)) {
                             $inPageBody.classList.add(cls);
                         }
                     });

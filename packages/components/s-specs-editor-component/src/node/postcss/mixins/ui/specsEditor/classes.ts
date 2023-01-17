@@ -1,5 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
 
 class postcssUiSpecsEditorClassesInterface extends __SInterface {
     static get _definition() {
@@ -22,7 +21,6 @@ export interface IPostcssUiSpecsEditorClassesParams {
     defaultColor: string;
     scope: ('bare' | 'lnf' | 'behavior' | 'vr')[];
 }
-
 export { postcssUiSpecsEditorClassesInterface as interface };
 
 export default function ({

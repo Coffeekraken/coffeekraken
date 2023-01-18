@@ -41,6 +41,8 @@ import ISLog from './ISLog';
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 
+const _nativeLog = console.log;
+
 export default class SLog {
     /**
      * @name            TYPE_LOG
@@ -392,6 +394,9 @@ export default class SLog {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static isTypeEnabled(types: ISLogType | ISLogType[]): boolean {
+        if (!this._filteredTypes.length) {
+            return true;
+        }
         if (!Array.isArray(types)) types = [types];
         for (const type of types) {
             if (!this._filteredTypes.includes(type)) return false;
@@ -480,6 +485,28 @@ export default class SLog {
     }
 
     /**
+     * @name        group
+     * @type        String
+     * @get
+     *
+     * Access the "group" property of the SLog object
+     * The group can be used to display logs in a stack or whatever...
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get group(): string {
+        // @ts-ignore
+        return this._logObj.group;
+    }
+    set group(value) {
+        if (typeof value !== 'string') {
+            throw new Error(`<red>[SLog]</red> The "<cyan>group</cyan>" property MUST be a string. You've passed a "${typeof value}"...`);
+        }
+        this._logObj.group = value;
+    }
+
+    /**
      * @name        active
      * @type        Boolean
      * @get
@@ -494,6 +521,12 @@ export default class SLog {
     get active(): boolean {
         // logs that does not have types are always active
         if (!this._logObj.type) return true;
+
+        // if no filters have been setted
+        // @ts-ignore
+        if (!this.constructor._filteredTypes.length) {
+            return true;
+        }
 
         // check type
         // @ts-ignore
@@ -624,4 +657,21 @@ export default class SLog {
         // @ts-ignore
         return this._logObj.as;
     }
+
+    /**
+     * @name        logger
+     * @type        Function
+     * @get
+     *
+     * Access the "logger" property of the SLog object.
+     * This represent a function that will be used to actually log the message.
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get logger(): Function {
+        // @ts-ignore
+        return this._logObj.logger;
+    }
+
 }

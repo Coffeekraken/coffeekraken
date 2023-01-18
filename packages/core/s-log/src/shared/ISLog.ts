@@ -55,4 +55,5 @@ export default interface ISLog {
     as?: string;
     value: any;
     active?: boolean;
+    logger?: Function;
 }

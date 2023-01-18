@@ -63,7 +63,7 @@
 
 </head>
 
-<body class="{{ lodClasses(2) }} {{ bodyAttributes.class }}" {{ attrs(bodyAttributes, ['class'])|raw }}>
+<body class="{{ lodClasses(2) }} {{ bodyAttributes.class }}" s-sugar {{ attrs(bodyAttributes, ['class'])|raw }}>
 
     <script>
         document.body.classList.add('initial-loading');
@@ -77,7 +77,7 @@
             document.env.SUGAR = {{ SUGAR|json_encode()|raw }};
         {% endif %}
         {% if frontspec %}
-            document.env.FRONTSPEC = {{ frontspec|json_encode()|raw }};
+            document.env.FRONTSPEC = {{ deepDiff(readFrontspec(), frontspec)|json_encode()|raw }};
         {% endif %}
     </script>
     {% endif %}

@@ -14,7 +14,7 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 const tagsMap = {
-    black: (tag, content) => content,
+    black: (tag, content) => `\u001b[30m${content}\x1b[0m`,
     red: (tag, content) => `\x1b[1;31m${content}\x1b[0m`,
     green: (tag, content) => `\x1b[1;32m${content}\x1b[0m`,
     yellow: (tag, content) => `\x1b[1;33m${content}\x1b[0m`,
@@ -24,15 +24,15 @@ const tagsMap = {
     white: (tag, content) => `\x1b[1;37m${content}\x1b[0m`,
     grey: (tag, content) => `\x1b[1;30m${content}\x1b[0m`,
 
-    bgBlack: (tag, content) => content,
-    bgRed: (tag, content) => `\x1b[0;31m${content}\x1b[0m`,
-    bgGreen: (tag, content) => `\x1b[0;32m${content}\x1b[0m`,
-    bgYellow: (tag, content) => `\x1b[0;33m${content}\x1b[0m`,
-    bgBlue: (tag, content) => `\x1b[0;34m${content}\x1b[0m`,
-    bgMagenta: (tag, content) => `\x1b[0;35m${content}\x1b[0m`,
-    bgCyan: (tag, content) => `\x1b[0;36m${content}\x1b[0m`,
-    bgWhite: (tag, content) => `\x1b[0;37m${content}\x1b[0m`,
-    bgGrey: (tag, content) => `\x1b[0;30m${content}\x1b[0m`,
+    bgBlack: (tag, content) => `\u001b[40m${content}\u001b[0m`,
+    bgRed: (tag, content) => `\u001b[41m${content}\u001b[0m`,
+    bgGreen: (tag, content) => `\u001b[42m${content}\u001b[0m`,
+    bgYellow: (tag, content) => `\u001b[43m${content}\u001b[0m`,
+    bgBlue: (tag, content) => `\u001b[44m${content}\u001b[0m`,
+    bgMagenta: (tag, content) => `\u001b[45m${content}\u001b[0m`,
+    bgCyan: (tag, content) => `\u001b[46m${content}\u001b[0m`,
+    bgWhite: (tag, content) => `\u001b[47m${content}\u001b[0m`,
+    bgGrey: (tag, content) => `\u001b[48m${content}\u001b[0m`,
 
     bold: (tag, content) => content,
     dim: (tag, content) => content,

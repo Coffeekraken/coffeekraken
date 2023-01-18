@@ -1,7 +1,8 @@
 import { __isNode } from '@coffeekraken/sugar/is';
-import __SBasicStdio from '../node/basic/SBasicStdio';
-import type { ISStdioUi } from './SStdio';
+import type { ISStdioSettings } from './SStdio';
 import __SStdio from './SStdio';
+import type { ISStdioAdapter } from './SStdioAdapter';
+import type { ISStdioSource } from './SStdioSource';
 
 /**
  * @name            new
@@ -32,21 +33,17 @@ import __SStdio from './SStdio';
  */
 export default async function _new(
     id: string,
-    sources,
-    stdio?: ISStdioUi,
-    settings?: any,
+    sources: ISStdioSource[],
+    adapters: ISStdioAdapter[],
+    settings?: ISStdioSettings,
 ) {
     if (!Array.isArray(sources)) sources = [sources];
 
     let stdioInstance: any;
 
     if (__isNode()) {
-        switch (stdio) {
-            case __SStdio.UI_BASIC:
-            default:
-                stdioInstance = new __SBasicStdio(id, sources, settings);
-                break;
-        }
+
+        stdioInstance = new __SStdio(id, sources, adapters, settings);
     } else {
         throw new Error(
             `No stdio implementation found for the current "browser" environment...`,

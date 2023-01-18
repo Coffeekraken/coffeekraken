@@ -2,6 +2,7 @@
 
 import __SPackEssentials from '@coffeekraken/s-pack-essentials';
 import __STheme from '@coffeekraken/s-theme';
+import __SFront from '@coffeekraken/s-front';
 
 import { define as __sugarFeatureDefine } from '@coffeekraken/s-sugar-feature';
 
@@ -24,51 +25,43 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
 
 // Init script
 (async () => {
-    // Set some features defaults
-    __SFeature.setDefaultProps('*', {});
+  // Set some features defaults
+  __SFeature.setDefaultProps('*', {});
 
-    // Set some components defaults
-    __SLitComponent.setDefaultProps('*', {});
+  // Set some components defaults
+  __SLitComponent.setDefaultProps('*', {});
 
-    // Init theme
-    await __STheme.init({
-        variant: 'dark',
-        lod: {
-            enabled: true,
-            level: 3,
-        },
-    });
+  __SFront.init({});
 
-    // sugar feature
-    document.body.setAttribute('s-sugar', 'true');
-    __sugarFeatureDefine();
+  // sugar feature
+  __sugarFeatureDefine();
 
-    // essentials
-    __SPackEssentials();
+  // essentials
+  __SPackEssentials();
 
-    // features
-    __sFormValidateFeature({});
+  // features
+  __sFormValidateFeature({});
 
-    // Project related components
-    // ...
+  // Project related components
+  // ...
 
-    // Components
-    __SSliderComponentDefine();
-    __sGoogleMapComponentDefine();
-    // __sCarpenterComponentDefine();
+  // Components
+  __SSliderComponentDefine();
+  __sGoogleMapComponentDefine();
+  // __sCarpenterComponentDefine();
 
-    // __SCarpenterComponent.create();
+  // __SCarpenterComponent.create();
 
-    // Dashboard
-    // new __SDashboard({
-    //     dashboard: {
-    //         components: {
-    //             's-dashboard-pages': {
-    //                 onSelect: (page) => {
-    //                     document.location.href = page.item.loc;
-    //                 },
-    //             },
-    //         },
-    //     },
-    // });
+  // Dashboard
+  // new __SDashboard({
+  //     dashboard: {
+  //         components: {
+  //             's-dashboard-pages': {
+  //                 onSelect: (page) => {
+  //                     document.location.href = page.item.loc;
+  //                 },
+  //             },
+  //         },
+  //     },
+  // });
 })();

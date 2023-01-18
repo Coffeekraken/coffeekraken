@@ -51,9 +51,7 @@ export default class SFrontspec extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static init(): SFront {
-        const finalSettings = <ISFrontspecInitSettings>{
-            ...(settings ?? {}),
-        };
+        const finalSettings = <ISFrontspecInitSettings>{};
 
         let frontspecInstance = new this(finalSettings);
 
@@ -116,7 +114,6 @@ export default class SFrontspec extends __SClass {
                         id: 'SFrontspec',
                     },
                 },
-                settings,
             ),
         );
 

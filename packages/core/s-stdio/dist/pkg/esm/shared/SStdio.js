@@ -8,7 +8,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import __SClass from '@coffeekraken/s-class';
-import __SLog from '@coffeekraken/s-log';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SStdioSettingsInterface from './interface/SStdioSettingsInterface';
 /**
@@ -38,6 +37,7 @@ import __SStdioSettingsInterface from './interface/SStdioSettingsInterface';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
+const _nativeLog = console.log;
 export default class SStdio extends __SClass {
     /**
      * @name      constructor
@@ -49,7 +49,7 @@ export default class SStdio extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(id, sources, settings) {
+    constructor(id, sources, adapters, settings) {
         super(__deepMerge(
         // @ts-ignore
         __SStdioSettingsInterface.defaults(), settings !== null && settings !== void 0 ? settings : {}));
@@ -87,25 +87,11 @@ export default class SStdio extends __SClass {
          */
         this._id = '';
         /**
-         * @name          registerSource
-         * @type          Function
-         *
-         * This method simply listen to the process and log the values getted
-         * from it into the panel
-         *
-         * @param     {SPromise}      source        The source to register
-         * @param     {ISBlessedStdioSettings}     [settings={}]
-         *
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-         */
-        this._tmpPrintedLogs = [];
-        /**
          * @name      log
          * @type      Function
          *
          * This method is the one called to log something.
-         * It will call the ```_log``` method that each implementation of the
-         * SStdio class MUST have
+         * It will call the ```log``` method on each registered adapters
          *
          * @param         {ISLog[]}        ...logObj      The log object(s) you want to log
          *
@@ -113,31 +99,31 @@ export default class SStdio extends __SClass {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         this._isClearing = false;
-        this._hashBuffer = [];
-        // proxy console.log to filter empty logs
-        const _nativeLog = console.log;
-        console.log = (...args) => {
-            args = args
-                .filter((log) => {
-                var _a;
-                if (!log) {
-                    return false;
-                }
-                if (typeof log === 'string' && ((_a = log.trim) === null || _a === void 0 ? void 0 : _a.call(log)) === '') {
-                    return false;
-                }
-                return true;
-            })
-                .map((log) => {
-                if (typeof log === 'string') {
-                    return log.trim().replace(/\\n$/, '');
-                }
-                return log;
-            });
-            _nativeLog(...args);
-        };
+        // // proxy console.log to filter empty logs
+        // const _nativeLog = console.log;
+        // console.log = (...args) => {
+        //     args = args
+        //         .filter((log) => {
+        //             if (!log) {
+        //                 return false;
+        //             }
+        //             if (typeof log === 'string' && log.trim?.() === '') {
+        //                 return false;
+        //             }
+        //             return true;
+        //         })
+        //         .map((log) => {
+        //             if (typeof log === 'string') {
+        //                 return log.trim().replace(/\\n$/, '');
+        //             }
+        //             return log;
+        //         });
+        //     _nativeLog(...args);
+        // };
         // save id
         this._id = id;
+        // save adapters
+        this.adapters = Array.isArray(adapters) ? adapters : [adapters];
         // save sources
         this.sources = Array.isArray(sources) ? sources : [sources];
         // store this instance reference
@@ -151,37 +137,6 @@ export default class SStdio extends __SClass {
             // subscribe to the process
             this.registerSource(s);
         });
-    }
-    /**
-     * @name          registerComponent
-     * @type          Function
-     * @static
-     *
-     * This static method allows you to register a new Stdio component
-     * that you will be able to use then through the "type" property of
-     * the logObj passed to the STerminalStdio instance.
-     *
-     * @param     {ISStdioComponentCtor}      component     The component you want to register
-     * @param     {string}      [as=null]           Specify the id you want to use for this component. Overrides the static "id" property of the component itself
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static registerComponent(component, settings, as) {
-        // make sure this component has an "id" specified
-        if (component.id === undefined && as === null) {
-            throw `Sorry but you try to register a component that does not have a built-in static "id" property and you don't have passed the "as" argument to override it...`;
-        }
-        if (!this.registeredComponents[this.name])
-            // @ts-ignore
-            this.registeredComponents[this.name] = {};
-        // save the component inside the stack
-        this.registeredComponents[this.name][as || component.id || 'default'] =
-            {
-                component,
-                settings: settings || {},
-                as,
-            };
     }
     /**
      * @name            existingOrNew
@@ -202,11 +157,11 @@ export default class SStdio extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static existingOrNew(id, sources, stdio = SStdio.UI_BASIC, settings = {}) {
+    static existingOrNew(id, sources, adapters, settings = {}) {
         // @ts-ignore
         if (this._instanciatedStdio[id])
             return this._instanciatedStdio[id];
-        return this.new(id, sources, stdio, settings);
+        return this.new(id, sources, adapters, settings);
     }
     /**
      * @name            new
@@ -239,12 +194,12 @@ export default class SStdio extends __SClass {
      * @since     2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static new(id, sources, stdio, settings = {}) {
+    static new(id, sources, adapters, settings = {}) {
         return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
             // @ts-ignore
             const __new = (yield import('./new')).default;
             // @ts-ignore
-            return __new(id, sources, stdio, settings);
+            return __new(id, sources, adapters, settings);
         }));
     }
     get id() {
@@ -278,7 +233,6 @@ export default class SStdio extends __SClass {
     display() {
         // update the status
         this._isDisplayed = true;
-        // if (this.isDisplayed()) return;
         // log the buffered logs
         this._logBuffer();
     }
@@ -294,51 +248,70 @@ export default class SStdio extends __SClass {
     hide() {
         this._isDisplayed = false;
     }
-    registerSource(source, settings) {
-        const set = (__deepMerge(this.settings.stdio || {}, settings !== null && settings !== void 0 ? settings : {}));
+    /**
+     * @name          registerSource
+     * @type          Function
+     *
+     * This method simply listen to the process and log the values getted
+     * from it into the panel
+     *
+     * @param     {SPromise}      source        The source to register
+     * @param     {ISBlessedStdioSettings}     [settings={}]
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    registerSource(source) {
+        // listen for logs
+        source.on('log', this.log.bind(this));
+        source.on('ready', () => {
+            this.display();
+        });
         // subscribe to data
-        // "ask" event
-        source.on('ask', (askObj, metas, answer) => __awaiter(this, void 0, void 0, function* () {
-            // @ts-ignore
-            askObj.metas = metas;
-            const res = yield this.ask(askObj);
-            answer === null || answer === void 0 ? void 0 : answer(res);
-        }));
-        source.on('log', (data, metas) => {
-            // @TODO        find why some logs are printed x times... It seems that it's linked to number of actions theirs in a recipe in the SKitchen class...
-            if (this._tmpPrintedLogs.includes(data.value)) {
-                return;
-            }
-            this._tmpPrintedLogs.push(data.value);
-            setTimeout(() => {
-                this._tmpPrintedLogs.splice(this._tmpPrintedLogs.indexOf(data.value), 1);
-            }, 100);
-            if (data === undefined || data === null)
-                return;
-            // save metas into logObj
-            data.metas = metas;
-            this.log(data);
-        }, {
-            filter: set.filter,
-            processor: set.processor,
+        // // "ask" event
+        // source.on('ask', async (askObj: ISLogAsk, metas, answer) => {
+        //     // @ts-ignore
+        //     askObj.metas = metas;
+        //     const res = await this.ask(askObj);
+        //     answer?.(res);
+        // });
+        // source.on(
+        //     'log',
+        //     (data, metas) => {
+        //         // @TODO        find why some logs are printed x times... It seems that it's linked to number of actions theirs in a recipe in the SKitchen class...
+        //         if (this._tmpPrintedLogs.includes(data.value)) {
+        //             return;
+        //         }
+        //         this._tmpPrintedLogs.push(data.value);
+        //         setTimeout(() => {
+        //             this._tmpPrintedLogs.splice(
+        //                 this._tmpPrintedLogs.indexOf(data.value),
+        //                 1,
+        //             );
+        //         }, 100);
+        //         if (data === undefined || data === null) return;
+        //         // save metas into logObj
+        //         data.metas = metas;
+        //         this.log(data);
+        //     },
+        //     {
+        //         filter: set.filter,
+        //         processor: set.processor,
+        //     },
+        // );
+    }
+    /**
+     * Apply a callback function on each adapters
+     */
+    _applyOnAdapters(callback) {
+        this.adapters.forEach(adapter => {
+            callback(adapter);
         });
     }
-    // _isCleared = true;
     log(...logObj) {
-        var _a;
         for (let i = 0; i < logObj.length; i++) {
             let log = logObj[i];
             if (!log.active)
                 continue;
-            // if (!log.hash) {
-            //     const hash = __objectHash({ value: log.value, type: log.type });
-            //     log.hash = hash;
-            // }
-            // if (this._hashBuffer.includes(log.hash)) return;
-            // this._hashBuffer.push(log.hash);
-            // setTimeout(() => {
-            //     this._hashBuffer.shift();
-            // }, 0);
             // put in buffer if not displayed
             if (!this.isDisplayed() || this._isClearing) {
                 this._logsBuffer.push(log);
@@ -352,8 +325,11 @@ export default class SStdio extends __SClass {
                     // @ts-ignore
                     if (!this.clearLast)
                         return;
+                    this._applyOnAdapters(adapter => {
+                        var _a;
+                        (_a = adapter.clearLast) === null || _a === void 0 ? void 0 : _a.call(adapter);
+                    });
                     // @ts-ignore
-                    yield this.clearLast();
                     this._logBuffer();
                 }))();
             }
@@ -362,49 +338,24 @@ export default class SStdio extends __SClass {
                 // @ts-ignore
                 if (!this.clear || typeof this.clear !== 'function')
                     throw new Error(`You try to clear the "<yellow>${this.constructor.name}</yellow>" stdio but it does not implements the "<cyan>clear</cyan>" method`);
-                // this._logsBuffer.push(log);
                 (() => __awaiter(this, void 0, void 0, function* () {
-                    // @ts-ignore
-                    if (!this.clear)
-                        return;
-                    // @ts-ignore
-                    yield this.clear();
+                    this._applyOnAdapters(adapter => {
+                        var _a;
+                        (_a = adapter.clear) === null || _a === void 0 ? void 0 : _a.call(adapter);
+                    });
                     this._isClearing = false;
-                    // this._isCleared = true;
                     this._logBuffer();
                 }))();
             }
-            else {
-                // console.log(log.type);
+            const e = new Error();
+            let formattedError = e.stack.toString().split('\n').filter(str => str.trim().match(/^at\s/));
+            if (!log.group) {
+                log.group = 'Sugar ♥';
             }
-            // get the correct component to pass to the _log method
-            let logType = log.type === 'log' ? 'default' : (_a = log.type) !== null && _a !== void 0 ? _a : 'default';
-            let componentObj = this.constructor.registeredComponents[this.constructor.name][logType];
-            if (!componentObj) {
-                if (__SLog.isTypeEnabled([
-                    __SLog.TYPE_VERBOSE,
-                    __SLog.TYPE_VERBOSER,
-                ])) {
-                    // @ts-ignore
-                    this._log({
-                        type: __SLog.TYPE_VERBOSE,
-                        metas: {},
-                        group: this.constructor.name,
-                        value: `The requested "<yellow>${log.type || 'default'}</yellow>" component in the "<cyan>${this.constructor.name}</cyan>" stdio class does not exists...`,
-                    }, {
-                        id: 'default',
-                        render(logObj) {
-                            return `⚠️  ${logObj.value}`;
-                        },
-                    });
-                }
-                componentObj = this.constructor.registeredComponents[this.constructor.name].default;
-            }
-            if (typeof componentObj.component.render !== 'function') {
-                throw new Error(`Your "<yellow>${componentObj.component.id}</yellow>" stdio "<cyan>${this.constructor.name}</cyan>" component does not expose the required function "<magenta>render</magenta>"`);
-            }
-            // @ts-ignore
-            this._log(log, componentObj.component);
+            // actual log through adapter
+            this._applyOnAdapters(adapter => {
+                adapter.log(log);
+            });
             // save the last log object
             this._lastLogObj = log;
         }
@@ -456,26 +407,4 @@ export default class SStdio extends __SClass {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 SStdio._instanciatedStdio = {};
-/**
- * @name    registeredComponents
- * @type    ISStdioRegisteredComponents
- * @static
- *
- * Store the registered stdio components
- *
- * @since     2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-SStdio.registeredComponents = {};
-/**
- * @name      UI_BASIC
- * @type      ISStdioUi
- * @static
- *
- * Represent the "basic" stdio
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-SStdio.UI_BASIC = -1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUNBLE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBRzdDLE9BQU8sTUFBTSxNQUFNLHFCQUFxQixDQUFDO0FBRXpDLE9BQU8sRUFBRSxXQUFXLEVBQUUsTUFBTSw0QkFBNEIsQ0FBQztBQUN6RCxPQUFPLHlCQUF5QixNQUFNLHFDQUFxQyxDQUFDO0FBbUM1RTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EwQkc7QUFDSCxNQUFNLENBQUMsT0FBTyxPQUFPLE1BQU8sU0FBUSxRQUFRO0lBZ054Qzs7Ozs7Ozs7O09BU0c7SUFDSCxZQUNJLEVBQVUsRUFDVixPQUEwQyxFQUMxQyxRQUFtQztRQUVuQyxLQUFLLENBQ0QsV0FBVztRQUNQLGFBQWE7UUFDYix5QkFBeUIsQ0FBQyxRQUFRLEVBQUUsRUFDcEMsUUFBUSxhQUFSLFFBQVEsY0FBUixRQUFRLEdBQUksRUFBRSxDQUNqQixDQUNKLENBQUM7UUF4S047Ozs7Ozs7OztXQVNHO1FBQ0gsZ0JBQVcsR0FBWSxFQUFFLENBQUM7UUFFMUI7Ozs7Ozs7OztXQVNHO1FBQ0ssaUJBQVksR0FBRyxLQUFLLENBQUM7UUE4RzdCOzs7Ozs7Ozs7V0FTRztRQUNILFFBQUcsR0FBVyxFQUFFLENBQUM7UUF1SGpCOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsb0JBQWUsR0FBYSxFQUFFLENBQUM7UUE0Qy9COzs7Ozs7Ozs7Ozs7V0FZRztRQUNILGdCQUFXLEdBQUcsS0FBSyxDQUFDO1FBQ3BCLGdCQUFXLEdBQWEsRUFBRSxDQUFDO1FBakt2Qix5Q0FBeUM7UUFDekMsTUFBTSxVQUFVLEdBQUcsT0FBTyxDQUFDLEdBQUcsQ0FBQztRQUMvQixPQUFPLENBQUMsR0FBRyxHQUFHLENBQUMsR0FBRyxJQUFJLEVBQUUsRUFBRTtZQUN0QixJQUFJLEdBQUcsSUFBSTtpQkFDTixNQUFNLENBQUMs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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBRTdDLE9BQU8sRUFBRSxXQUFXLEVBQUUsTUFBTSw0QkFBNEIsQ0FBQztBQUN6RCxPQUFPLHlCQUF5QixNQUFNLHFDQUFxQyxDQUFDO0FBZTVFOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTBCRztBQUVILE1BQU0sVUFBVSxHQUFHLE9BQU8sQ0FBQyxHQUFHLENBQUM7QUFFL0IsTUFBTSxDQUFDLE9BQU8sT0FBTyxNQUFPLFNBQVEsUUFBUTtJQStKeEM7Ozs7Ozs7OztPQVNHO0lBQ0gsWUFDSSxFQUFVLEVBQ1YsT0FBd0IsRUFDeEIsUUFBMEIsRUFDMUIsUUFBbUM7UUFFbkMsS0FBSyxDQUNELFdBQVc7UUFDUCxhQUFhO1FBQ2IseUJBQXlCLENBQUMsUUFBUSxFQUFFLEVBQ3BDLFFBQVEsYUFBUixRQUFRLGNBQVIsUUFBUSxHQUFJLEVBQUUsQ0FDakIsQ0FDSixDQUFDO1FBbklOOzs7Ozs7Ozs7V0FTRztRQUNILGdCQUFXLEdBQVksRUFBRSxDQUFDO1FBRTFCOzs7Ozs7Ozs7V0FTRztRQUNLLGlCQUFZLEdBQUcsS0FBSyxDQUFDO1FBd0U3Qjs7Ozs7Ozs7O1dBU0c7UUFDSCxRQUFHLEdBQVcsRUFBRSxDQUFDO1FBK0xqQjs7Ozs7Ozs7Ozs7V0FXRztRQUNILGdCQUFXLEdBQUcsS0FBSyxDQUFDO1FBOUtoQiw0Q0FBNEM7UUFDNUMsa0NBQWtDO1FBQ2xDLCtCQUErQjtRQUMvQixrQkFBa0I7UUFDbEIsNkJBQTZCO1FBQzdCLDBCQUEwQjtRQUMxQixnQ0FBZ0M7UUFDaEMsZ0JBQWdCO1FBQ2hCLG9FQUFvRTtRQUNwRSxnQ0FBZ0M7UUFDaEMsZ0JBQWdCO1FBQ2hCLDJCQUEyQjtRQUMzQixhQUFhO1FBQ2IsMEJBQTBCO1FBQzFCLDZDQUE2QztRQUM3Qyx5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

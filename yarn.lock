@@ -1680,6 +1680,8 @@ __metadata:
   dependencies:
     "@coffeekraken/s-class": ^2.0.0-alpha.20
     "@coffeekraken/s-conductor": ^2.0.0-alpha.20
+    "@coffeekraken/s-front": ^2.0.0-alpha.20
+    "@coffeekraken/s-frontspec": ^2.0.0-alpha.20
     "@coffeekraken/s-interface": ^2.0.0-alpha.20
     "@coffeekraken/s-promise": ^2.0.0-alpha.20
     "@coffeekraken/s-state": ^2.0.0-alpha.20
@@ -2012,7 +2014,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-front@^2.0.0-alpha.20, @coffeekraken/s-front@workspace:packages/frontend/s-front":
+"@coffeekraken/s-front@2.0.0-alpha.20, @coffeekraken/s-front@^2.0.0-alpha.20, @coffeekraken/s-front@workspace:packages/frontend/s-front":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-front@workspace:packages/frontend/s-front"
   dependencies:
@@ -2024,6 +2026,7 @@ __metadata:
     "@coffeekraken/s-event-emitter": ^2.0.0-alpha.20
     "@coffeekraken/s-frontspec": ^2.0.0-alpha.20
     "@coffeekraken/s-interface": ^2.0.0-alpha.20
+    "@coffeekraken/s-stdio": ^2.0.0-alpha.20
     "@coffeekraken/s-sugar-config": ^2.0.0-alpha.20
     "@coffeekraken/s-sugar-json": ^2.0.0-alpha.20
     "@coffeekraken/sugar": ^2.0.0-alpha.20
@@ -3142,6 +3145,7 @@ __metadata:
   dependencies:
     "@coffeekraken/s-activate-feature": ^2.0.0-alpha.20
     "@coffeekraken/s-carpenter": 2.0.0-alpha.20
+    "@coffeekraken/s-front": 2.0.0-alpha.20
     "@coffeekraken/s-google-map-component": 2.0.0-alpha.20
     "@coffeekraken/s-postcss-sugar-plugin": 2.0.0-alpha.20
     "@coffeekraken/s-sugar-feature": 2.0.0-alpha.20

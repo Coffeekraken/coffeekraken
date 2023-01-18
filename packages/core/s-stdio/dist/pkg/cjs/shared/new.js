@@ -13,7 +13,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const is_1 = require("@coffeekraken/sugar/is");
-const SBasicStdio_1 = __importDefault(require("../node/basic/SBasicStdio"));
 const SStdio_1 = __importDefault(require("./SStdio"));
 /**
  * @name            new
@@ -42,18 +41,13 @@ const SStdio_1 = __importDefault(require("./SStdio"));
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function _new(id, sources, stdio, settings) {
+function _new(id, sources, adapters, settings) {
     return __awaiter(this, void 0, void 0, function* () {
         if (!Array.isArray(sources))
             sources = [sources];
         let stdioInstance;
         if ((0, is_1.__isNode)()) {
-            switch (stdio) {
-                case SStdio_1.default.UI_BASIC:
-                default:
-                    stdioInstance = new SBasicStdio_1.default(id, sources, settings);
-                    break;
-            }
+            stdioInstance = new SStdio_1.default(id, sources, adapters, settings);
         }
         else {
             throw new Error(`No stdio implementation found for the current "browser" environment...`);
@@ -62,4 +56,4 @@ function _new(id, sources, stdio, settings) {
     });
 }
 exports.default = _new;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsK0NBQWtEO0FBQ2xELDRFQUFzRDtBQUV0RCxzREFBZ0M7QUFFaEM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMEJHO0FBQ0gsU0FBOEIsSUFBSSxDQUM5QixFQUFVLEVBQ1YsT0FBTyxFQUNQLEtBQWlCLEVBQ2pCLFFBQWM7O1FBRWQsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDO1lBQUUsT0FBTyxHQUFHLENBQUMsT0FBTyxDQUFDLENBQUM7UUFFakQsSUFBSSxhQUFrQixDQUFDO1FBRXZCLElBQUksSUFBQSxhQUFRLEdBQUUsRUFBRTtZQUNaLFFBQVEsS0FBSyxFQUFFO2dCQUNYLEtBQUssZ0JBQVEsQ0FBQyxRQUFRLENBQUM7Z0JBQ3ZCO29CQUNJLGFBQWEsR0FBRyxJQUFJLHFCQUFhLENBQUMsRUFBRSxFQUFFLE9BQU8sRUFBRSxRQUFRLENBQUMsQ0FBQztvQkFDekQsTUFBTTthQUNiO1NBQ0o7YUFBTTtZQUNILE1BQU0sSUFBSSxLQUFLLENBQ1gsd0VBQXdFLENBQzNFLENBQUM7U0FDTDtRQUNELE9BQU8sYUFBYSxDQUFDO0lBQ3pCLENBQUM7Q0FBQTtBQXZCRCx1QkF1QkMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsK0NBQWtEO0FBRWxELHNEQUFnQztBQUloQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EwQkc7QUFDSCxTQUE4QixJQUFJLENBQzlCLEVBQVUsRUFDVixPQUF3QixFQUN4QixRQUEwQixFQUMxQixRQUEwQjs7UUFFMUIsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDO1lBQUUsT0FBTyxHQUFHLENBQUMsT0FBTyxDQUFDLENBQUM7UUFFakQsSUFBSSxhQUFrQixDQUFDO1FBRXZCLElBQUksSUFBQSxhQUFRLEdBQUUsRUFBRTtZQUVaLGFBQWEsR0FBRyxJQUFJLGdCQUFRLENBQUMsRUFBRSxFQUFFLE9BQU8sRUFBRSxRQUFRLEVBQUUsUUFBUSxDQUFDLENBQUM7U0FDakU7YUFBTTtZQUNILE1BQU0sSUFBSSxLQUFLLENBQ1gsd0VBQXdFLENBQzNFLENBQUM7U0FDTDtRQUNELE9BQU8sYUFBYSxDQUFDO0lBQ3pCLENBQUM7Q0FBQTtBQW5CRCx1QkFtQkMifQ==

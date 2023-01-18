@@ -6,6 +6,8 @@ import { __getCookie, __setCookie } from '@coffeekraken/sugar/cookie';
 import { __isCrawler } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 
+import __SStdio, { __SStdioBasicAdapter, __SStdioConsoleSource } from '@coffeekraken/s-stdio';
+
 import { __speedIndex } from '@coffeekraken/sugar/perf';
 
 import __SFrontspec from '@coffeekraken/s-frontspec';
@@ -65,24 +67,6 @@ export interface ISFrontSettings extends ISFrontInitSettings {}
 export interface ISThemeSetLodSettings {
     enabled: boolean;
     $context: HTMLElement;
-}
-
-// proxy console
-function _proxyConsole() {
-    const nativeConsole = {};
-
-    for (let key of ['log', 'error', 'warn']) {
-        nativeConsole[key] = console[key];
-        console[key] = function (...args) {
-            for (let log of args) {
-                if (typeof log === 'string') {
-                    nativeConsole[key](__parseHtml(log));
-                } else {
-                    nativeConsole[key](log);
-                }
-            }
-        };
-    }
 }
 
 export default class SFront extends __SClass {
@@ -237,8 +221,8 @@ export default class SFront extends __SClass {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings?: Partial<ISFrontSettings>) {
-        // proxy console
-        _proxyConsole();
+        // Stdio
+        const stdio = new __SStdio('default', new __SStdioConsoleSource(), new __SStdioBasicAdapter());
 
         if (!__SEnv.is('production')) {
             const color =
@@ -366,6 +350,8 @@ export default class SFront extends __SClass {
             $context: document.body,
             ...(settings ?? {}),
         };
+
+        console.verbose?.(`<yellow>[lod]</yellow> Set lod (level of details) to <cyan>${level}</cyan>`);
 
         // @ts-ignore
         level = parseInt(`${level}`);

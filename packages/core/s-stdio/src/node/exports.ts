@@ -1,8 +1,7 @@
 import __SStdio from '../shared/SStdio';
-import SBasicStdio from './basic/SBasicStdio';
+import __SStdioBasicAdapter from './adapters/SStdioBasicAdapter';
 
-export * from './basic/SBasicStdio';
-export * from '../shared/SStdio';
-
-export { SBasicStdio };
+export * from '../shared/exports';
+export * from './adapters/SStdioBasicAdapter';
+export { __SStdioBasicAdapter };
 export default __SStdio;

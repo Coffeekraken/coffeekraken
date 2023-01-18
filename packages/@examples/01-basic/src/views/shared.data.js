@@ -1,7 +1,4 @@
 export default {
-  SUGAR: {
-    config: {},
-  },
   menus: {
     primary: {
       items: [

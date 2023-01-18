@@ -63,9 +63,12 @@ function registerFunctions($twig)
 
     // lod (level of details)
     $lodClasses = require __DIR__ . '/lod/lodClasses.php';
-    $twig->addFuncti0on($lodClasses);
+    $twig->addFunction($lodClasses);
 
     // Object
+    $deepDiff = require __DIR__ . '/object/deepDiff.php';
+    $twig->addFunction($deepDiff);
+
     $filter = require __DIR__ . '/object/filter.php';
     $twig->addFunction($filter);
 

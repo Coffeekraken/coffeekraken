@@ -5,7 +5,7 @@ import __SBench from '@coffeekraken/s-bench';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import __SLog from '@coffeekraken/s-log';
 import type { ISStdio } from '@coffeekraken/s-stdio';
-import __SStdio from '@coffeekraken/s-stdio';
+import __SStdio, { __SStdioBasicAdapter, __SStdioConsoleSource, __SStdioEventEmitterSource } from '@coffeekraken/s-stdio';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 import { __sugarBanner } from '@coffeekraken/sugar/ascii';
@@ -15,7 +15,7 @@ import { __wait } from '@coffeekraken/sugar/datetime';
 import {
     __dirname,
     __readJsonSync,
-    __writeFileSync,
+    __writeFileSync
 } from '@coffeekraken/sugar/fs';
 import { __isChildProcess } from '@coffeekraken/sugar/is';
 import { __packageJsonSync } from '@coffeekraken/sugar/package';
@@ -23,7 +23,7 @@ import { __packageRootDir } from '@coffeekraken/sugar/path';
 import {
     __onProcessExit,
     __processSugar,
-    __spawn,
+    __spawn
 } from '@coffeekraken/sugar/process';
 import __chalk from 'chalk';
 import __dotenv from 'dotenv';
@@ -184,7 +184,7 @@ export default class SSugarCli {
         await this._checkIfWeAreInPackage();
 
         // hook base console functions
-        this._proxyConsole();
+        // this._proxyConsole();
 
         this._bench = new __SBench('sugar.cli', {
             bubbles: false,
@@ -398,10 +398,13 @@ export default class SSugarCli {
     static _initStdio(def = true) {
         if (this._isStdioNeeded()) {
             if (def) {
-                this._stdio = __SStdio.existingOrNew(
+                this._stdio = new __SStdio(
                     'default',
-                    this._eventEmitter,
-                    __SStdio.NO_UI,
+                    [
+                        new __SStdioEventEmitterSource(this._eventEmitter),
+                        new __SStdioConsoleSource()
+                    ],
+                    new __SStdioBasicAdapter()
                 );
             }
         }
@@ -480,7 +483,7 @@ export default class SSugarCli {
             const proPromise = processFn(args);
             this._eventEmitter.pipe(proPromise, {});
 
-            proPromise.on('chdir', (directory) => {
+            proPromise.on?.('chdir', (directory) => {
                 if (!__fs.existsSync(directory)) return;
                 proPromise.emit('log', {
                     value: `<yellow>[process]</yellow> Changing directory to <cyan>${directory}</cyan>`,
@@ -660,7 +663,7 @@ export default class SSugarCli {
         const promise = __spawn(command, [], {
             shell: true,
         });
-        promise.on('*', (data) => {
+        promise.on?.('*', (data) => {
             this.log(data.value);
         });
 

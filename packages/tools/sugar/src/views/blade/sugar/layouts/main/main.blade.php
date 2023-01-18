@@ -67,7 +67,7 @@ $frontspec->metas->og = $ogObj;
 
 </head>
 
-<body class="{{ \Sugar\lod\lodClasses(2) }} {{ isset($bodyAttributes['class']) ? $bodyAttributes['class'] : '' }}" {!! \Sugar\html\attrs($bodyAttributes, ['class']) !!}>
+<body class="{{ \Sugar\lod\lodClasses(2) }} {{ isset($bodyAttributes['class']) ? $bodyAttributes['class'] : '' }}" s-sugar {!! \Sugar\html\attrs($bodyAttributes, ['class']) !!}>
 
     <script>
         document.body.classList.add('initial-loading');

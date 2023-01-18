@@ -14,6 +14,7 @@
         "@coffeekraken/s-event-emitter": "^2.0.0-alpha.20",
         "@coffeekraken/s-frontspec": "^2.0.0-alpha.20",
         "@coffeekraken/s-interface": "^2.0.0-alpha.20",
+        "@coffeekraken/s-stdio": "^2.0.0-alpha.20",
         "@coffeekraken/s-sugar-config": "^2.0.0-alpha.20",
         "@coffeekraken/s-sugar-json": "^2.0.0-alpha.20",
         "@coffeekraken/sugar": "^2.0.0-alpha.20",

@@ -32,6 +32,12 @@ namespace Sugar\object;
  */
 function deepDiff($object1, $object2)
 {
+
+    // print '<pre>';
+    // print_r($object1);
+    // print 'COCO';
+    // print_r($object2);
+
     $object1 = (object) $object1;
     $object2 = (object) $object2;
 

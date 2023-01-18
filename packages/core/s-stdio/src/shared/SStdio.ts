@@ -1,11 +1,9 @@
-import type { ISClass } from '@coffeekraken/s-class';
 import __SClass from '@coffeekraken/s-class';
-import type { ISEventEmitter } from '@coffeekraken/s-event-emitter';
 import type { ISLog, ISLogAsk } from '@coffeekraken/s-log';
-import __SLog from '@coffeekraken/s-log';
-import type { ISPromise } from '@coffeekraken/s-promise';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SStdioSettingsInterface from './interface/SStdioSettingsInterface';
+import type { ISStdioAdapter } from './SStdioAdapter';
+import type { ISStdioSource } from './SStdioSource';
 
 export interface ISStdioSettings {
     filter: typeof Function;
@@ -14,30 +12,8 @@ export interface ISStdioSettings {
     defaultAskObj: Partial<ISLogAsk>;
 }
 
-export interface ISStdioCtor {
-    new (
-        sources: ISPromise | ISPromise[],
-        settings: Partial<ISStdioSettings>,
-    ): ISStdio;
-}
-
-export interface ISStdioRegisteredComponents {
-    [key: string]: ISStdioComponent;
-}
-export interface ISStdioComponent {
-    id: string;
-    render(logObj: ISLog, settings: any);
-}
-
-export type ISStdioUi = -1 | 'websocket';
-
 export interface ISStdioLogFn {
     (...logObj: ISLog[]): void;
-}
-
-export interface ISStdio extends ISClass {
-    sources: ISEventEmitter[];
-    log: ISStdioLogFn;
 }
 
 /**
@@ -67,10 +43,13 @@ export interface ISStdio extends ISClass {
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default class SStdio extends __SClass implements ISStdio {
+
+const _nativeLog = console.log;
+
+export default class SStdio extends __SClass {
     /**
      * @name      sources
-     * @type      Array<SPromise>
+     * @type      ISStdioSource[]
      * @private
      *
      * Store sources passed in the contructor
@@ -78,7 +57,20 @@ export default class SStdio extends __SClass implements ISStdio {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    sources: ISEventEmitter[];
+    sources: ISStdioSource[];
+
+    /**
+     * @name      adapters
+     * @type      ISStdioAdapter[]
+     * @private
+     *
+     * Store adapters passed in the contructor
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    adapters: ISStdioAdapter[];
+
 
     /**
      * @name    _instanciatedStdio
@@ -93,18 +85,6 @@ export default class SStdio extends __SClass implements ISStdio {
     static _instanciatedStdio = {};
 
     /**
-     * @name    registeredComponents
-     * @type    ISStdioRegisteredComponents
-     * @static
-     *
-     * Store the registered stdio components
-     *
-     * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static registeredComponents: ISStdioRegisteredComponents = {};
-
-    /**
      * @name      _lastLogObj
      * @type      ISLog
      * @private
@@ -115,18 +95,6 @@ export default class SStdio extends __SClass implements ISStdio {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _lastLogObj?: ISLog;
-
-    /**
-     * @name      UI_BASIC
-     * @type      ISStdioUi
-     * @static
-     *
-     * Represent the "basic" stdio
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static UI_BASIC: ISStdioUi = -1;
 
     /**
      * @name      _logsBuffer
@@ -153,44 +121,6 @@ export default class SStdio extends __SClass implements ISStdio {
     private _isDisplayed = false;
 
     /**
-     * @name          registerComponent
-     * @type          Function
-     * @static
-     *
-     * This static method allows you to register a new Stdio component
-     * that you will be able to use then through the "type" property of
-     * the logObj passed to the STerminalStdio instance.
-     *
-     * @param     {ISStdioComponentCtor}      component     The component you want to register
-     * @param     {string}      [as=null]           Specify the id you want to use for this component. Overrides the static "id" property of the component itself
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static registerComponent(
-        component: ISStdioComponent,
-        settings?: any,
-        as?: string,
-    ) {
-        // make sure this component has an "id" specified
-        if (component.id === undefined && as === null) {
-            throw `Sorry but you try to register a component that does not have a built-in static "id" property and you don't have passed the "as" argument to override it...`;
-        }
-
-        if (!this.registeredComponents[this.name])
-            // @ts-ignore
-            this.registeredComponents[this.name] = {};
-
-        // save the component inside the stack
-        this.registeredComponents[this.name][as || component.id || 'default'] =
-            {
-                component,
-                settings: settings || {},
-                as,
-            };
-    }
-
-    /**
      * @name            existingOrNew
      * @type            Function
      * @async
@@ -211,13 +141,13 @@ export default class SStdio extends __SClass implements ISStdio {
      */
     static existingOrNew(
         id: string,
-        sources,
-        stdio: ISStdioUi = SStdio.UI_BASIC,
+        sources: ISStdioSource[],
+        adapters: ISStdioAdapter[],
         settings = {},
     ) {
         // @ts-ignore
         if (this._instanciatedStdio[id]) return this._instanciatedStdio[id];
-        return this.new(id, sources, stdio, settings);
+        return this.new(id, sources, adapters, settings);
     }
 
     /**
@@ -251,12 +181,12 @@ export default class SStdio extends __SClass implements ISStdio {
      * @since     2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static new(id: string, sources, stdio: ISStdioUi, settings = {}) {
+    static new(id: string, sources: ISStdioSource[], adapters: ISStdioAdapter, settings: Partial<ISStdioSettings> = {}) {
         return new Promise(async (resolve) => {
             // @ts-ignore
             const __new = (await import('./new')).default;
             // @ts-ignore
-            return __new(id, sources, stdio, settings);
+            return __new(id, sources, adapters, settings);
         });
     }
 
@@ -287,7 +217,8 @@ export default class SStdio extends __SClass implements ISStdio {
      */
     constructor(
         id: string,
-        sources: ISEventEmitter | ISEventEmitter[],
+        sources: ISStdioSource[],
+        adapters: ISStdioAdapter[],
         settings?: Partial<ISStdioSettings>,
     ) {
         super(
@@ -298,30 +229,33 @@ export default class SStdio extends __SClass implements ISStdio {
             ),
         );
 
-        // proxy console.log to filter empty logs
-        const _nativeLog = console.log;
-        console.log = (...args) => {
-            args = args
-                .filter((log) => {
-                    if (!log) {
-                        return false;
-                    }
-                    if (typeof log === 'string' && log.trim?.() === '') {
-                        return false;
-                    }
-                    return true;
-                })
-                .map((log) => {
-                    if (typeof log === 'string') {
-                        return log.trim().replace(/\\n$/, '');
-                    }
-                    return log;
-                });
-            _nativeLog(...args);
-        };
+        // // proxy console.log to filter empty logs
+        // const _nativeLog = console.log;
+        // console.log = (...args) => {
+        //     args = args
+        //         .filter((log) => {
+        //             if (!log) {
+        //                 return false;
+        //             }
+        //             if (typeof log === 'string' && log.trim?.() === '') {
+        //                 return false;
+        //             }
+        //             return true;
+        //         })
+        //         .map((log) => {
+        //             if (typeof log === 'string') {
+        //                 return log.trim().replace(/\\n$/, '');
+        //             }
+        //             return log;
+        //         });
+        //     _nativeLog(...args);
+        // };
 
         // save id
         this._id = id;
+
+        // save adapters
+        this.adapters = Array.isArray(adapters) ? adapters : [adapters];
 
         // save sources
         this.sources = Array.isArray(sources) ? sources : [sources];
@@ -371,7 +305,6 @@ export default class SStdio extends __SClass implements ISStdio {
     display() {
         // update the status
         this._isDisplayed = true;
-        // if (this.isDisplayed()) return;
         // log the buffered logs
         this._logBuffer();
     }
@@ -401,48 +334,61 @@ export default class SStdio extends __SClass implements ISStdio {
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    _tmpPrintedLogs: string[] = [];
-    registerSource(source, settings?: Partial<ISStdioSettings>) {
-        const set = (<ISStdioSettings>(
-            __deepMerge(this.settings.stdio || {}, settings ?? {})
-        )) as ISStdioSettings;
-        // subscribe to data
+    registerSource(source: ISStdioSource) {
+        // listen for logs
 
-        // "ask" event
-        source.on('ask', async (askObj: ISLogAsk, metas, answer) => {
-            // @ts-ignore
-            askObj.metas = metas;
-            const res = await this.ask(askObj);
-            answer?.(res);
+        
+        source.on('log', this.log.bind(this));
+        source.on('ready', () => {
+            this.display();
         });
 
-        source.on(
-            'log',
-            (data, metas) => {
-                // @TODO        find why some logs are printed x times... It seems that it's linked to number of actions theirs in a recipe in the SKitchen class...
-                if (this._tmpPrintedLogs.includes(data.value)) {
-                    return;
-                }
-                this._tmpPrintedLogs.push(data.value);
-                setTimeout(() => {
-                    this._tmpPrintedLogs.splice(
-                        this._tmpPrintedLogs.indexOf(data.value),
-                        1,
-                    );
-                }, 100);
+        // subscribe to data
 
-                if (data === undefined || data === null) return;
+        // // "ask" event
+        // source.on('ask', async (askObj: ISLogAsk, metas, answer) => {
+        //     // @ts-ignore
+        //     askObj.metas = metas;
+        //     const res = await this.ask(askObj);
+        //     answer?.(res);
+        // });
 
-                // save metas into logObj
-                data.metas = metas;
+        // source.on(
+        //     'log',
+        //     (data, metas) => {
+        //         // @TODO        find why some logs are printed x times... It seems that it's linked to number of actions theirs in a recipe in the SKitchen class...
+        //         if (this._tmpPrintedLogs.includes(data.value)) {
+        //             return;
+        //         }
+        //         this._tmpPrintedLogs.push(data.value);
+        //         setTimeout(() => {
+        //             this._tmpPrintedLogs.splice(
+        //                 this._tmpPrintedLogs.indexOf(data.value),
+        //                 1,
+        //             );
+        //         }, 100);
 
-                this.log(data);
-            },
-            {
-                filter: set.filter,
-                processor: set.processor,
-            },
-        );
+        //         if (data === undefined || data === null) return;
+
+        //         // save metas into logObj
+        //         data.metas = metas;
+
+        //         this.log(data);
+        //     },
+        //     {
+        //         filter: set.filter,
+        //         processor: set.processor,
+        //     },
+        // );
+    }
+
+    /**
+     * Apply a callback function on each adapters
+     */
+    _applyOnAdapters(callback: Function): void {
+        this.adapters.forEach(adapter => {
+            callback(adapter);
+        });
     }
 
     /**
@@ -450,8 +396,7 @@ export default class SStdio extends __SClass implements ISStdio {
      * @type      Function
      *
      * This method is the one called to log something.
-     * It will call the ```_log``` method that each implementation of the
-     * SStdio class MUST have
+     * It will call the ```log``` method on each registered adapters
      *
      * @param         {ISLog[]}        ...logObj      The log object(s) you want to log
      *
@@ -459,24 +404,12 @@ export default class SStdio extends __SClass implements ISStdio {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _isClearing = false;
-    _hashBuffer: string[] = [];
-    // _isCleared = true;
     log(...logObj: ISLog[]) {
+
         for (let i = 0; i < logObj.length; i++) {
             let log = <ISLog>logObj[i];
 
             if (!log.active) continue;
-
-            // if (!log.hash) {
-            //     const hash = __objectHash({ value: log.value, type: log.type });
-            //     log.hash = hash;
-            // }
-
-            // if (this._hashBuffer.includes(log.hash)) return;
-            // this._hashBuffer.push(log.hash);
-            // setTimeout(() => {
-            //     this._hashBuffer.shift();
-            // }, 0);
 
             // put in buffer if not displayed
             if (!this.isDisplayed() || this._isClearing) {
@@ -493,8 +426,12 @@ export default class SStdio extends __SClass implements ISStdio {
                 (async () => {
                     // @ts-ignore
                     if (!this.clearLast) return;
+
+                    this._applyOnAdapters(adapter => {
+                        adapter.clearLast?.();
+                    })
+
                     // @ts-ignore
-                    await this.clearLast();
                     this._logBuffer();
                 })();
             }
@@ -506,67 +443,26 @@ export default class SStdio extends __SClass implements ISStdio {
                     throw new Error(
                         `You try to clear the "<yellow>${this.constructor.name}</yellow>" stdio but it does not implements the "<cyan>clear</cyan>" method`,
                     );
-                // this._logsBuffer.push(log);
                 (async () => {
-                    // @ts-ignore
-                    if (!this.clear) return;
-                    // @ts-ignore
-                    await this.clear();
+                    this._applyOnAdapters(adapter => {
+                        adapter.clear?.();
+                    });
                     this._isClearing = false;
-                    // this._isCleared = true;
                     this._logBuffer();
                 })();
-            } else {
-                // console.log(log.type);
             }
 
-            // get the correct component to pass to the _log method
-            let logType =
-                log.type === 'log' ? 'default' : log.type ?? 'default';
+            const e = new Error();
+            let formattedError = e.stack.toString().split('\n').filter(str => str.trim().match(/^at\s/));
 
-            let componentObj = (<any>this).constructor.registeredComponents[
-                this.constructor.name
-            ][logType];
-            if (!componentObj) {
-                if (
-                    __SLog.isTypeEnabled([
-                        __SLog.TYPE_VERBOSE,
-                        __SLog.TYPE_VERBOSER,
-                    ])
-                ) {
-                    // @ts-ignore
-                    this._log(
-                        {
-                            type: __SLog.TYPE_VERBOSE,
-                            metas: {},
-                            group: this.constructor.name,
-                            value: `The requested "<yellow>${
-                                log.type || 'default'
-                            }</yellow>" component in the "<cyan>${
-                                this.constructor.name
-                            }</cyan>" stdio class does not exists...`,
-                        },
-                        {
-                            id: 'default',
-                            render(logObj) {
-                                return `⚠️  ${logObj.value}`;
-                            },
-                        },
-                    );
-                }
-                componentObj = (<any>this).constructor.registeredComponents[
-                    this.constructor.name
-                ].default;
+            if (!log.group) {
+                log.group = 'Sugar ♥';
             }
 
-            if (typeof componentObj.component.render !== 'function') {
-                throw new Error(
-                    `Your "<yellow>${componentObj.component.id}</yellow>" stdio "<cyan>${this.constructor.name}</cyan>" component does not expose the required function "<magenta>render</magenta>"`,
-                );
-            }
-
-            // @ts-ignore
-            this._log(log, componentObj.component);
+            // actual log through adapter
+            this._applyOnAdapters(adapter => {
+                adapter.log(log);
+            });
 
             // save the last log object
             this._lastLogObj = log;

@@ -23,8 +23,5 @@
 return new \Twig\TwigFunction('readFrontspec', function (
     $sFrontspecSettings = []
 ) {
-    return json_encode(
-        \Sugar\frontspec\readFrontspec($sFrontspecSettings),
-        JSON_PRETTY_PRINT
-    );
+    return \Sugar\frontspec\readFrontspec($sFrontspecSettings);
 });

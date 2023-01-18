@@ -1,0 +1,44 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const s_log_1 = __importDefault(require("@coffeekraken/s-log"));
+const SStdioSource_1 = __importDefault(require("../SStdioSource"));
+class SStdioConsoleSource extends SStdioSource_1.default {
+    constructor(settings) {
+        var _a;
+        super(settings);
+        this._tmpPrintedLogs = [];
+        const nativeConsole = {};
+        for (let key of ['log', 'error', 'warn', 'verbose']) {
+            nativeConsole[key] = (_a = console[key]) !== null && _a !== void 0 ? _a : nativeConsole.log;
+            console[key] = (...args) => {
+                var _a;
+                const e = new Error();
+                const stack = e.stack.toString().split('\n').slice(2).map(str => str.trim());
+                const callerStr = (_a = stack[0]) !== null && _a !== void 0 ? _a : '';
+                let group = callerStr.split(' ')[callerStr.match(/^at new/) ? 2 : 1].split('.')[0];
+                args = args.map(log => {
+                    var _a, _b;
+                    return new s_log_1.default({
+                        type: s_log_1.default[`TYPE_${key.toUpperCase()}`],
+                        value: (_a = log.value) !== null && _a !== void 0 ? _a : log,
+                        group: (_b = log.group) !== null && _b !== void 0 ? _b : group,
+                        // @ts-ignore
+                        logger: nativeConsole[key]
+                    });
+                });
+                args.forEach(log => {
+                    this.log(log);
+                });
+            };
+        }
+        // source ready
+        setTimeout(() => {
+            this.ready();
+        }, 1000);
+    }
+}
+exports.default = SStdioConsoleSource;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsZ0VBQXlDO0FBRXpDLG1FQUE2QztBQVM3QyxNQUFxQixtQkFBb0IsU0FBUSxzQkFBYztJQUkzRCxZQUFZLFFBQWdEOztRQUN4RCxLQUFLLENBQUMsUUFBUSxDQUFDLENBQUM7UUFIcEIsb0JBQWUsR0FBRyxFQUFFLENBQUM7UUFLakIsTUFBTSxhQUFhLEdBQUcsRUFBRSxDQUFDO1FBQ3pCLEtBQUssSUFBSSxHQUFHLElBQUksQ0FBQyxLQUFLLEVBQUUsT0FBTyxFQUFFLE1BQU0sRUFBQyxTQUFTLENBQUMsRUFBRTtZQUNoRCxhQUFhLENBQUMsR0FBRyxDQUFDLEdBQUcsTUFBQSxPQUFPLENBQUMsR0FBRyxDQUFDLG1DQUFJLGFBQWEsQ0FBQyxHQUFHLENBQUM7WUFFdkQsT0FBTyxDQUFDLEdBQUcsQ0FBQyxHQUFHLENBQUMsR0FBRyxJQUFJLEVBQUUsRUFBRTs7Z0JBRXZCLE1BQU0sQ0FBQyxHQUFHLElBQUksS0FBSyxFQUFFLENBQUM7Z0JBQ3RCLE1BQU0sS0FBSyxHQUFHLENBQUMsQ0FBQyxLQUFLLENBQUMsUUFBUSxFQUFFLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQyxHQUFHLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxHQUFHLENBQUMsSUFBSSxFQUFFLENBQUMsQ0FBQztnQkFDN0UsTUFBTSxTQUFTLEdBQUcsTUFBQSxLQUFLLENBQUMsQ0FBQyxDQUFDLG1DQUFJLEVBQUUsQ0FBQztnQkFDakMsSUFBSSxLQUFLLEdBQUcsU0FBUyxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQyxTQUFTLENBQUMsS0FBSyxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQztnQkFFbkYsSUFBSSxHQUFHLElBQUksQ0FBQyxHQUFHLENBQUMsR0FBRyxDQUFDLEVBQUU7O29CQUNsQixPQUFPLElBQUksZUFBTSxDQUFDO3dCQUNkLElBQUksRUFBRSxlQUFNLENBQUMsUUFBUSxHQUFHLENBQUMsV0FBVyxFQUFFLEVBQUUsQ0FBQzt3QkFDekMsS0FBSyxFQUFFLE1BQUEsR0FBRyxDQUFDLEtBQUssbUNBQUksR0FBRzt3QkFDdkIsS0FBSyxFQUFFLE1BQUEsR0FBRyxDQUFDLEtBQUssbUNBQUksS0FBSzt3QkFDekIsYUFBYTt3QkFDYixNQUFNLEVBQUUsYUFBYSxDQUFDLEdBQUcsQ0FBQztxQkFDN0IsQ0FBQyxDQUFDO2dCQUNQLENBQUMsQ0FBQyxDQUFDO2dCQUNILElBQUksQ0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDLEVBQUU7b0JBQ2YsSUFBSSxDQUFDLEdBQUcsQ0FBQyxHQUFHLENBQUMsQ0FBQztnQkFDbEIsQ0FBQyxDQUFDLENBQUM7WUFDUCxDQUFDLENBQUM7U0FDTDtRQUVELGVBQWU7UUFDZixVQUFVLENBQUMsR0FBRyxFQUFFO1lBQ1osSUFBSSxDQUFDLEtBQUssRUFBRSxDQUFDO1FBQ2pCLENBQUMsRUFBRSxJQUFJLENBQUMsQ0FBQztJQUNiLENBQUM7Q0FFSjtBQXZDRCxzQ0F1Q0MifQ==

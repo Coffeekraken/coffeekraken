@@ -7,6 +7,9 @@
             "footer": {
                 "name": "Footer menu"
             }
+        },
+        "metas": {
+            "backgroundColor": "rgba(44,50,50,1)"
         }
     },
     "metas": {
@@ -26,7 +29,8 @@
             "type": "website",
             "url": "",
             "image": "https://cdnv2.coffeekraken.io/coffeekraken-og.png"
-        }
+        },
+        "backgroundColor": "rgba(44,50,50,1)"
     },
     "assets": {
         "dev": {
@@ -51,6 +55,20 @@
             "id": "global",
             "defer": true,
             "src": "/dist/css/index.css"
+        }
+    },
+    "theme": {
+        "theme": "default",
+        "variant": "light",
+        "themes": {
+            "default-light": {
+                "title": "Default light",
+                "description": "Nice and elegant light theme"
+            },
+            "default-dark": {
+                "title": "Default dark",
+                "description": "Nice and elegant dark theme"
+            }
         }
     },
     "media": {
@@ -127,8 +145,7 @@
         "cwd": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@examples/01-basic"
     },
     "google": {
-        "gtm": null,
-        "ga": null,
+        "gtm": "GTM-K4LMN8Q",
         "map": {
             "apiKey": "AIzaSyDzFfEzhmYXRTlONUCtMWQ88uHJhsbtXY4"
         }
@@ -190,10 +207,22 @@
         "method": "file",
         "defaultAction": ">="
     },
-    "classmap": {
+    "partytown": {
         "enabled": false,
-        "url": "/classmap.json",
-        "path": "./classmap.json"
+        "forward": [
+            "dataLayer.push",
+            "fbq",
+            "freshpaint.addPageviewProperties",
+            "freshpaint.identify",
+            "freshpaint.track",
+            "_hsq.push",
+            "Intercom",
+            "_learnq.push",
+            "ttq.track",
+            "ttq.page",
+            "ttq.load",
+            "mixpanel.track"
+        ]
     },
     "font": {
         "family": {

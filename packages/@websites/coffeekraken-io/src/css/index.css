@@ -10,7 +10,7 @@ html {
 
 body {
   width: 100vw;
-  background-color: sugar.color(main, --darken 30);
+  background-color: sugar.color(main, background);
 
   @sugar.theme.when (dark) {
     background-image: radial-gradient(

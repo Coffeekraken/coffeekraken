@@ -37,7 +37,7 @@ export default {
 
         const cardsHtml: string[] = [];
 
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 6; i++) {
           cardData.image.url = imgPath.replace('%i', i + 1);
           const result = await viewRenderer.render(
             'sugar.components.card.card',
@@ -62,9 +62,14 @@ export default {
           },
           layout: {
             media: {
-              desktop: '1 2 3',
-              tablet: '1 _ 2 3',
-              mobile: '1 _ 2 _ 3',
+              wide: '1 2 3 _ 4 5 6',
+              desktop: '1 2 3 _ 4 5 6',
+              tablet: '1 2 _ 3 4 _ 5 6',
+              mobile: '2 _ x _ 3 _ 4 _ 5 _ 6',
+
+              // desktop: '1 2 3',
+              // tablet: '1 _ 2 3',
+              // mobile: '1 _ 2 _ 3',
 
               // wide: '1 2 3 4 5 6',
               // desktop: '1 2 3 _ 4 5 6',

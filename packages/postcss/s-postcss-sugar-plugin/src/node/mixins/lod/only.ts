@@ -56,6 +56,12 @@ export default function ({
         ...(params ?? {}),
     };
 
+    // check if the lod feature is enabled or not
+    if (!settings.lod?.enabled) {
+        atRule.replaceWith(atRule.nodes);
+        return;
+    }
+
     const levels: number[] = __fromQuantifier(finalParams.level, {
         max: Object.keys(settings.lod.levels).length - 1,
         action: '<=',

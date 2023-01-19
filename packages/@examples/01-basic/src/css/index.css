@@ -5,40 +5,40 @@
 @sugar.import ('./generic/**/*.css');
 
 body {
-    background: sugar.color(base, background);
-    overflow-x: hidden;
+  background: sugar.color(base, background);
+  overflow-x: hidden;
 
-    &.initial-loading .content {
-        display: none;
-    }
+  &.initial-loading .content {
+    display: none;
+  }
 }
 
 [s-appear] {
-    opacity: 0;
+  opacity: 0;
 }
 [s-appear][appear] {
-    opacity: 1;
+  opacity: 1;
 }
 
 .content.nude {
-    padding: sugar.padding(50);
+  padding: sugar.padding(50);
 }
 
 /* logo */
 .logo {
+  svg [fill='white'] {
+    fill: sugar.color(main, --darken 10);
+  }
+  svg [fill='#FEBD0F'] {
+    fill: sugar.color(accent);
+  }
+
+  @sugar.theme.when (dark) {
     svg [fill='white'] {
-        fill: sugar.color(main, --darken 10);
+      fill: sugar.color(main, text);
     }
     svg [fill='#FEBD0F'] {
-        fill: sugar.color(accent);
+      fill: sugar.color(accent);
     }
-
-    @sugar.theme.when (dark) {
-        svg [fill='white'] {
-            fill: sugar.color(main, text);
-        }
-        svg [fill='#FEBD0F'] {
-            fill: sugar.color(accent);
-        }
-    }
+  }
 }

@@ -61,6 +61,12 @@ export default function ({
         ...(params ?? {}),
     };
 
+    // check if the lod feature is enabled or not
+    if (!settings.lod?.enabled) {
+        atRule.replaceWith(atRule.nodes);
+        return;
+    }
+
     const levels: number[] = [];
     let action = settings.lod.defaultAction;
 

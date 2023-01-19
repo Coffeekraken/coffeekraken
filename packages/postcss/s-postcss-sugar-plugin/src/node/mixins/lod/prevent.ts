@@ -36,19 +36,28 @@ export default function ({
     params,
     sharedData,
     atRule,
-    replaceWith,
+    settings,
     postcssApi,
 }: {
     params: Partial<IPostcssSugarPluginColorParams>;
     sharedData: any;
     atRule: any;
-    replaceWith: Function;
+    settings: any;
     postcssApi: any;
 }) {
+    
     const finalParams = <postcssSugarPluginScopePreventMixinParams>{
         scopes: [],
         ...(params ?? {}),
     };
+
+    // check if the lod feature is enabled or not
+    if (!settings.lod?.enabled) {
+        atRule.replaceWith(atRule.nodes);
+        return;
+    }
+
+    // check if the lod feature is enabled or not
     atRule.walkRules((rule) => {
         rule.selectors = rule.selectors.map((sel) => {
             if (sel.match(/\.s-lod--prevent/)) return sel;

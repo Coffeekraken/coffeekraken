@@ -11,8 +11,8 @@ import { __deepMerge, __get } from '@coffeekraken/sugar/object';
  * @status              wip
  *
  * This class represent the ```frontspec.json``` json that must be either in:
- * 1. The `window.env.SUGAR.frontspec` object
- * 2. The `window.env.FRONTSPEC` object
+ * 1. The `document.env.SUGAR.frontspec` object
+ * 2. The `document.env.FRONTSPEC` object
  * 3. The "frontspec" param of the constructor
  * Each level will be overrided by the upper one using a deepMerge.
  *

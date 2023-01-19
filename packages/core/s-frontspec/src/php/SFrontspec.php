@@ -44,7 +44,7 @@ class SFrontspec
                 'path' => (isset($_ENV['S_FRONTSPEC_PATH'])
                         ? $_ENV['S_FRONTSPEC_PATH']
                         : isset($_ENV['S_FRONTEND_PATH']))
-                    ? $_ENV['S_SFRONTEND_PATH'] . '/frontspec.json'
+                    ? $_ENV['S_FRONTEND_PATH'] . '/frontspec.json'
                     : null,
             ],
             (array) $settings

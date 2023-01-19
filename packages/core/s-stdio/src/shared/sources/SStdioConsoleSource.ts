@@ -19,15 +19,7 @@ export default class SStdioConsoleSource extends __SStdioSource implements ISStd
         const nativeConsole = {};
         for (let key of ['log', 'error', 'warn','verbose']) {
             nativeConsole[key] = console[key] ?? nativeConsole.log;
-
-
-            
-
-
-            console.log.bind(weifjwiofej)
-
             console[key] = (...args) => {
-
                 const e = new Error();
                 const stack = e.stack.toString().split('\n').slice(2).map(str => str.trim());
                 const callerStr = stack[0] ?? '';

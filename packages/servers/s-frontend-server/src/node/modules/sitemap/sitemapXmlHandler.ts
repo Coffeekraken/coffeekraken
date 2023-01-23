@@ -1,11 +1,10 @@
 import __SBench from '@coffeekraken/s-bench';
-import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __grabFirstExisting, __readXmlSync } from '@coffeekraken/sugar/fs';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 
 export default function sitemapXmlHandler({ req, res, pageConfig }) {
-    return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+    return new Promise(async (resolve) => {
         const bench = new __SBench('data.sitemapXmlHandler');
 
         bench.step('beforeSitemapRead');

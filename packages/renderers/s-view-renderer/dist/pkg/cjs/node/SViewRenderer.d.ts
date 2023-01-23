@@ -42,7 +42,7 @@ declare class SViewRenderer extends __SClass implements ISViewRenderer {
     
     static getRootDirs(rootDirs?: any[]): string[];
     
-    static render(viewPath: string, data: any, settings: Partial<ISViewRendererSettings>): any;
+    static render(viewPath: string, data: any, settings: Partial<ISViewRendererSettings>): Promise<unknown>;
     
     static registerEngine(EngineClass: string, extensions?: string | string[]): void;
     

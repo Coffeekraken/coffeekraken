@@ -1,12 +1,9 @@
-import __SPromise from '@coffeekraken/s-promise';
 import __SFrontendServer from '../node/SFrontendServer';
-import __SEnv from '@coffeekraken/s-env';
 
 export default function start(stringArgs = '') {
-    return new __SPromise(async ({ resolve, pipe, emit }) => {
+    return new Promise(async (resolve) => {
         const server = new __SFrontendServer();
-        const promise = server.start(stringArgs);
-        pipe(promise);
-        resolve(await promise);
+        const result = await server.start(stringArgs);
+        resolve(result);
     });
 }

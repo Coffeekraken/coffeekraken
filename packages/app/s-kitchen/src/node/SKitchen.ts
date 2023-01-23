@@ -8,7 +8,6 @@ import __SProcess, {
     ISProcessSettings,
     SProcessManager as __SProcessManager,
 } from '@coffeekraken/s-process';
-import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 import { __isCommandExists } from '@coffeekraken/sugar/is';
@@ -55,8 +54,6 @@ export interface ISKitchenIngredientContext {
 export interface ISKitchenIngredientAddApi {
     ask(askObj: ISLogAsk): Promise<any>;
     log(message: string): void;
-    emit(type: 'log' | 'ask', what: any): void;
-    pipe: Function;
     context: ISKitchenIngredientContext;
 }
 
@@ -206,70 +203,59 @@ class SKitchen extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     new(params: ISKitchenNewParams | string) {
-        return new __SPromise(
-            async ({ resolve, reject, emit, pipe }) => {
-                const kitchenConfig = __SSugarConfig.get('kitchen');
-                const recipesObj = __filter(
-                    kitchenConfig.recipes,
-                    (key, recipeObj) => {
-                        return recipeObj.stacks?.new !== undefined;
-                    },
-                );
-
-                const finalParams: ISKitchenNewParams =
-                    __SFronstackNewParamsInterface.apply(params);
-
-                const availableRecipes = Object.keys(recipesObj).map(
-                    (recipeId) => {
-                        return `- ${__upperFirst(recipeId)}${' '.repeat(
-                            10 - recipeId.length,
-                        )}: ${recipesObj[recipeId].description}`;
-                    },
-                );
-
-                let recipe = await emit('ask', {
-                    type: 'autocomplete',
-                    message: 'Please select one of the available recipes',
-                    choices: availableRecipes,
-                });
-
-                if (!recipe) process.exit();
-
-                // process recipe to get only the id
-                recipe = __lowerFirst(
-                    recipe.split(':')[0].replace(/^-\s+/, '').trim(),
-                );
-
-                // set the shared context
-                __sharedContext({
-                    recipe,
-                });
-
-                const recipeObj = recipesObj[recipe];
-
-                emit('log', {
-                    margin: {
-                        bottom: 1,
-                    },
-                    type: __SLog.TYPE_INFO,
-                    value: `Starting project creation using the "<yellow>${recipe}</yellow>" recipe...`,
-                });
-
-                resolve(
-                    pipe(
-                        this.run({
-                            recipe,
-                            stack: 'new',
-                        }),
-                    ),
-                );
-            },
-            {
-                metas: {
-                    id: this.constructor.name,
+        return new Promise(async (resolve) => {
+            const kitchenConfig = __SSugarConfig.get('kitchen');
+            const recipesObj = __filter(
+                kitchenConfig.recipes,
+                (key, recipeObj) => {
+                    return recipeObj.stacks?.new !== undefined;
                 },
-            },
-        );
+            );
+
+            const finalParams: ISKitchenNewParams =
+                __SFronstackNewParamsInterface.apply(params);
+
+            const availableRecipes = Object.keys(recipesObj).map((recipeId) => {
+                return `- ${__upperFirst(recipeId)}${' '.repeat(
+                    10 - recipeId.length,
+                )}: ${recipesObj[recipeId].description}`;
+            });
+
+            let recipe = await console.ask?.({
+                type: 'autocomplete',
+                message: 'Please select one of the available recipes',
+                choices: availableRecipes,
+            });
+
+            if (!recipe) process.exit();
+
+            // process recipe to get only the id
+            recipe = __lowerFirst(
+                recipe.split(':')[0].replace(/^-\s+/, '').trim(),
+            );
+
+            // set the shared context
+            __sharedContext({
+                recipe,
+            });
+
+            const recipeObj = recipesObj[recipe];
+
+            console.log({
+                margin: {
+                    bottom: 1,
+                },
+                type: __SLog.TYPE_INFO,
+                value: `Starting project creation using the "<yellow>${recipe}</yellow>" recipe...`,
+            });
+
+            resolve(
+                this.run({
+                    recipe,
+                    stack: 'new',
+                }),
+            );
+        });
     }
 
     /**
@@ -287,368 +273,323 @@ class SKitchen extends __SClass {
 
         const duration = new __SDuration();
 
-        return new __SPromise(
-            async ({ resolve, reject, emit, pipe }) => {
-                const kitchenConfig = __SSugarConfig.get('kitchen'),
-                    recipesObj = kitchenConfig.recipes,
-                    actionsObj = kitchenConfig.actions,
-                    sugarJson = new __SSugarJson().current();
+        return new Promise(async (resolve) => {
+            const kitchenConfig = __SSugarConfig.get('kitchen'),
+                recipesObj = kitchenConfig.recipes,
+                actionsObj = kitchenConfig.actions,
+                sugarJson = new __SSugarJson().current();
 
-                // initalise final params.
-                // it will be merged with the "stackObj.sharedParams" later...
-                let finalParams = __SKitchenRunParamsInterface.apply(params);
+            // initalise final params.
+            // it will be merged with the "stackObj.sharedParams" later...
+            let finalParams = __SKitchenRunParamsInterface.apply(params);
 
-                // handle default recipe
-                if (!finalParams.recipe) {
-                    finalParams.recipe =
-                        sugarJson.recipe ?? kitchenConfig.defaultRecipe;
-                }
+            // handle default recipe
+            if (!finalParams.recipe) {
+                finalParams.recipe =
+                    sugarJson.recipe ?? kitchenConfig.defaultRecipe;
+            }
 
-                if (!finalParams.recipe) {
+            if (!finalParams.recipe) {
+                throw new Error(
+                    `<red>[recipe]</red> Sorry but it seems that you missed to pass a recipe to use or that you don't have any "<cyan>sugar.json</cyan>" file at the root of your project with a "<yellow>recipe</yellow>" property that define which recipe to use for this project...`,
+                );
+            }
+
+            if (!recipesObj[finalParams.recipe]) {
+                throw new Error(
+                    `<red>[recipe]</red> Sorry but the specified "<yellow>${
+                        finalParams.recipe
+                    }</yellow>" recipe does not exists. Here's the available ones: <green>${Object.keys(
+                        recipesObj,
+                    ).join(', ')}</green>`,
+                );
+            }
+
+            if (!finalParams.stack) {
+                if (!recipesObj[finalParams.recipe].defaultStack) {
                     throw new Error(
-                        `<red>[recipe]</red> Sorry but it seems that you missed to pass a recipe to use or that you don't have any "<cyan>sugar.json</cyan>" file at the root of your project with a "<yellow>recipe</yellow>" property that define which recipe to use for this project...`,
+                        `<red>[recipe]</red> Sorry but you MUST specify a "<yellow>stack</yellow>" to use in the requested "<cyan>${finalParams.recipe}</cyan>" recipe`,
                     );
                 }
+                finalParams.stack = recipesObj[finalParams.recipe].defaultStack;
+            }
 
-                if (!recipesObj[finalParams.recipe]) {
-                    throw new Error(
-                        `<red>[recipe]</red> Sorry but the specified "<yellow>${
-                            finalParams.recipe
-                        }</yellow>" recipe does not exists. Here's the available ones: <green>${Object.keys(
-                            recipesObj,
-                        ).join(', ')}</green>`,
-                    );
-                }
+            // get the recipe object and treat it
+            const recipeObj: ISKitchenRecipe =
+                // @ts-ignore
+                recipesObj[finalParams.recipe];
 
-                if (!finalParams.stack) {
-                    if (!recipesObj[finalParams.recipe].defaultStack) {
+            const stackObj: Partial<ISKitchenRecipeStack> =
+                recipeObj.stacks[finalParams.stack];
+
+            // merge the finalParams with the stackObj.sharedParams object if exists...
+            finalParams = __deepMerge(stackObj.sharedParams ?? {}, finalParams);
+
+            // defined actions in the sugar.jcon file
+            if (sugarJson.kitchen?.[finalParams.stack]) {
+                for (let [key, value] of Object.entries(
+                    sugarJson.kitchen?.[finalParams.stack],
+                )) {
+                    if (!kitchenConfig.actions[value.action]) {
                         throw new Error(
-                            `<red>[recipe]</red> Sorry but you MUST specify a "<yellow>stack</yellow>" to use in the requested "<cyan>${finalParams.recipe}</cyan>" recipe`,
+                            `The requested action "<yellow>${
+                                value.action
+                            }</yellow>" does not exists in the config.kitchen.actions stack... Here's the available ones: <green>${Object.keys(
+                                kitchenConfig.actions,
+                            ).join(',')}</green>`,
                         );
                     }
-                    finalParams.stack =
-                        recipesObj[finalParams.recipe].defaultStack;
-                }
-
-                // get the recipe object and treat it
-                const recipeObj: ISKitchenRecipe =
                     // @ts-ignore
-                    recipesObj[finalParams.recipe];
+                    recipeObj.stacks[finalParams.stack].actions[
+                        `sugarJson-${value.action}`
+                    ] = __deepMerge(
+                        Object.assign(
+                            {},
+                            kitchenConfig.actions[value.action],
+                            value,
+                        ),
+                    );
+                    delete recipeObj.stacks[finalParams.stack].actions[
+                        `sugarJson-${value.action}`
+                    ].action;
+                }
+            }
 
-                const stackObj: Partial<ISKitchenRecipeStack> =
-                    recipeObj.stacks[finalParams.stack];
-
-                // merge the finalParams with the stackObj.sharedParams object if exists...
-                finalParams = __deepMerge(
-                    stackObj.sharedParams ?? {},
-                    finalParams,
+            // check the recipe stacks
+            if (!recipeObj.stacks || !Object.keys(recipeObj.stacks).length) {
+                throw new Error(
+                    `<red>[recipe]</red> Sorry but the requested "<yellow>${finalParams.recipe}</yellow>" configuration object missed the requested "<yellow>stacks</yellow>" property that list the stacks to execute`,
                 );
+            }
+            if (!recipeObj.stacks[finalParams.stack]) {
+                throw new Error(
+                    `<red>[recipe]</red> Sorry but the requested "<yellow>${finalParams.recipe}.stacks</yellow>" configuration object missed the requested "<yellow>${finalParams.stack}</yellow>" stack`,
+                );
+            }
 
-                // defined actions in the sugar.jcon file
-                if (sugarJson.kitchen?.[finalParams.stack]) {
-                    for (let [key, value] of Object.entries(
-                        sugarJson.kitchen?.[finalParams.stack],
-                    )) {
-                        if (!kitchenConfig.actions[value.action]) {
+            // make sure this recipe has some actions
+            if (
+                !recipeObj.stacks[finalParams.stack].actions ||
+                !Object.keys(recipeObj.stacks[finalParams.stack].actions).length
+            ) {
+                throw new Error(
+                    `<red>[recipe]</red> Sorry but the requested "<yellow>${finalParams.recipe}.stacks.${finalParams.stack}.actions</yellow>" configuration object missed the requested "<yellow>actions</yellow>" property that list the actions to execute`,
+                );
+            }
+
+            // requirements
+            if (recipeObj.requirements) {
+                if (recipeObj.requirements.commands) {
+                    for (
+                        let i = 0;
+                        i < recipeObj.requirements.commands.length;
+                        i++
+                    ) {
+                        console.log(
+                            `<yellow>[requirements]</yellow> Checking for the "<magenta>${recipeObj.requirements.commands[i]}</magenta>" command to exists...`,
+                        );
+                        const version = await __isCommandExists(
+                            recipeObj.requirements.commands[i],
+                        );
+
+                        if (!version) {
                             throw new Error(
-                                `The requested action "<yellow>${
-                                    value.action
-                                }</yellow>" does not exists in the config.kitchen.actions stack... Here's the available ones: <green>${Object.keys(
-                                    kitchenConfig.actions,
+                                `<red>[requirements]</red> Sorry but the command "<yellow>${recipeObj.requirements.commands[i]}</yellow>" is required but it does not exists.`,
+                            );
+                        } else {
+                            console.log(
+                                `<green>[requirements]</green> Command "<magenta>${
+                                    recipeObj.requirements.commands[i]
+                                }</magenta>" available in version <cyan>${__stripAnsi(
+                                    String(version).replace('\n', ''),
+                                )}</cyan>.`,
+                            );
+                        }
+                    }
+                }
+            }
+
+            // set runInParallel if not specified
+            if (finalParams.runInParallel === undefined) {
+                finalParams.runInParallel = stackObj.runInParallel ?? false;
+            }
+
+            // some info logs
+            console.log(`Starting kitchen process`);
+            console.log(
+                `<yellow>○</yellow> Recipe : <yellow>${finalParams.recipe}</yellow>`,
+            );
+            console.log(
+                `<yellow>○</yellow> Stack  : <cyan>${finalParams.stack}</cyan>`,
+            );
+            console.log(
+                `<yellow>○</yellow> Action : <magenta>${
+                    finalParams.action ?? '*'
+                }</magenta>`,
+            );
+            console.log(
+                `<yellow>○</yellow> Run in parallel : ${
+                    finalParams.runInParallel
+                        ? '<green>true</green>'
+                        : '<red>false</red>'
+                }`,
+            );
+
+            // build shared params to pass to every sub-processes
+            let sharedParams = Object.assign({}, finalParams);
+            delete sharedParams.recipe;
+            delete sharedParams.stack;
+            delete sharedParams.help;
+
+            // instanciate the process manager
+            const processManager = new __SProcessManager({
+                // @ts-ignore
+                runInParallel: finalParams.runInParallel,
+            });
+
+            // loop on each actions for this recipe
+            if (stackObj.actions) {
+                for (let i = 0; i < Object.keys(stackObj.actions).length; i++) {
+                    const actionName = Object.keys(stackObj.actions)[i];
+
+                    // if an action is setted in the finalParams, make sure we run only this one
+                    if (
+                        finalParams.action &&
+                        actionName !== finalParams.action
+                    ) {
+                        console.log(
+                            `<red>[action]</red> The requested action "<magenta>${finalParams.action}</magenta>" does not exists in the "<yellow>${finalParams.recipe}</yellow>.<cyan>${finalParams.stack}</cyan>" stack`,
+                        );
+                        continue;
+                    }
+
+                    let actionObj = stackObj.actions[actionName];
+                    let actionParams = __deepMerge(
+                        actionObj.params ?? {},
+                        Object.assign({}, sharedParams),
+                    );
+
+                    // do not execute the action if it has benn excluded
+                    if (
+                        finalParams.exclude &&
+                        finalParams.exclude.indexOf(actionName) !== -1
+                    ) {
+                        console.log(
+                            `Excluding the action "<yellow>${actionName}</yellow>"`,
+                        );
+                        return;
+                    }
+
+                    // check `extends` property
+                    if (actionObj.extends) {
+                        if (!actionsObj[actionObj.extends]) {
+                            throw new Error(
+                                `<red>[action]</red> Your action "<yellow>${actionName}</yellow>" tries to extends the "<cyan>${
+                                    actionObj.extends
+                                }</cyan>" action that does not exists... Here's the available actions at this time: <green>${Object.keys(
+                                    actionsObj,
                                 ).join(',')}</green>`,
                             );
                         }
-                        // @ts-ignore
-                        recipeObj.stacks[finalParams.stack].actions[
-                            `sugarJson-${value.action}`
-                        ] = __deepMerge(
-                            Object.assign(
-                                {},
-                                kitchenConfig.actions[value.action],
-                                value,
-                            ),
+                        console.log(
+                            `<yellow>○</yellow> <magenta>extends</magenta> : Your action "<yellow>${actionName}</yellow>" extends the "<cyan>${actionObj.extends}</cyan>" one`,
                         );
-                        delete recipeObj.stacks[finalParams.stack].actions[
-                            `sugarJson-${value.action}`
-                        ].action;
+                        actionObj = <ISKitchenAction>(
+                            __deepMerge(
+                                Object.assign(
+                                    {},
+                                    actionsObj[actionObj.extends],
+                                ),
+                                actionObj,
+                            )
+                        );
                     }
-                }
 
-                // check the recipe stacks
-                if (
-                    !recipeObj.stacks ||
-                    !Object.keys(recipeObj.stacks).length
-                ) {
-                    throw new Error(
-                        `<red>[recipe]</red> Sorry but the requested "<yellow>${finalParams.recipe}</yellow>" configuration object missed the requested "<yellow>stacks</yellow>" property that list the stacks to execute`,
-                    );
-                }
-                if (!recipeObj.stacks[finalParams.stack]) {
-                    throw new Error(
-                        `<red>[recipe]</red> Sorry but the requested "<yellow>${finalParams.recipe}.stacks</yellow>" configuration object missed the requested "<yellow>${finalParams.stack}</yellow>" stack`,
-                    );
-                }
-
-                // make sure this recipe has some actions
-                if (
-                    !recipeObj.stacks[finalParams.stack].actions ||
-                    !Object.keys(recipeObj.stacks[finalParams.stack].actions)
-                        .length
-                ) {
-                    throw new Error(
-                        `<red>[recipe]</red> Sorry but the requested "<yellow>${finalParams.recipe}.stacks.${finalParams.stack}.actions</yellow>" configuration object missed the requested "<yellow>actions</yellow>" property that list the actions to execute`,
-                    );
-                }
-
-                // requirements
-                if (recipeObj.requirements) {
-                    if (recipeObj.requirements.commands) {
-                        for (
-                            let i = 0;
-                            i < recipeObj.requirements.commands.length;
-                            i++
-                        ) {
-                            emit('log', {
-                                type: __SLog.TYPE_VERBOSE,
-                                value: `<yellow>[requirements]</yellow> Checking for the "<magenta>${recipeObj.requirements.commands[i]}</magenta>" command to exists...`,
-                            });
-                            const version = await __isCommandExists(
-                                recipeObj.requirements.commands[i],
-                            );
-                            if (!version) {
-                                throw new Error(
-                                    `<red>[requirements]</red> Sorry but the command "<yellow>${recipeObj.requirements.commands[i]}</yellow>" is required but it does not exists.`,
-                                );
-                            } else {
-                                emit('log', {
-                                    type: __SLog.TYPE_VERBOSE,
-                                    value: `<green>[requirements]</green> Command "<magenta>${
-                                        recipeObj.requirements.commands[i]
-                                    }</magenta>" available in version <cyan>${__stripAnsi(
-                                        String(version).replace('\n', ''),
-                                    )}</cyan>.`,
-                                });
-                            }
+                    // specific passed params like "--frontendServer.buildInitial"
+                    for (let [key, value] of Object.entries(sharedParams)) {
+                        if (key.startsWith(`${actionName}.`)) {
+                            actionParams[key.replace(`${actionName}.`, '')] =
+                                value;
                         }
                     }
-                }
 
-                // set runInParallel if not specified
-                if (finalParams.runInParallel === undefined) {
-                    finalParams.runInParallel = stackObj.runInParallel ?? false;
-                }
-
-                // some info logs
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `Starting kitchen process`,
-                });
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>○</yellow> Recipe : <yellow>${finalParams.recipe}</yellow>`,
-                });
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>○</yellow> Stack  : <cyan>${finalParams.stack}</cyan>`,
-                });
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>○</yellow> Action : <magenta>${
-                        finalParams.action ?? '*'
-                    }</magenta>`,
-                });
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>○</yellow> Run in parallel : ${
-                        finalParams.runInParallel
-                            ? '<green>true</green>'
-                            : '<red>false</red>'
-                    }`,
-                });
-
-                // build shared params to pass to every sub-processes
-                let sharedParams = Object.assign({}, finalParams);
-                delete sharedParams.recipe;
-                delete sharedParams.stack;
-                delete sharedParams.help;
-
-                // instanciate the process manager
-                const processManager = new __SProcessManager({
-                    // @ts-ignore
-                    runInParallel: finalParams.runInParallel,
-                });
-
-                // loop on each actions for this recipe
-                if (stackObj.actions) {
-                    for (
-                        let i = 0;
-                        i < Object.keys(stackObj.actions).length;
-                        i++
-                    ) {
-                        const actionName = Object.keys(stackObj.actions)[i];
-
-                        // if an action is setted in the finalParams, make sure we run only this one
-                        if (
-                            finalParams.action &&
-                            actionName !== finalParams.action
-                        ) {
-                            emit('log', {
-                                type: __SLog.TYPE_WARN,
-                                value: `<red>[action]</red> The requested action "<magenta>${finalParams.action}</magenta>" does not exists in the "<yellow>${finalParams.recipe}</yellow>.<cyan>${finalParams.stack}</cyan>" stack`,
-                            });
-                            continue;
-                        }
-
-                        let actionObj = stackObj.actions[actionName];
-                        let actionParams = __deepMerge(
-                            actionObj.params ?? {},
-                            Object.assign({}, sharedParams),
-                        );
-
-                        // do not execute the action if it has benn excluded
-                        if (
-                            finalParams.exclude &&
-                            finalParams.exclude.indexOf(actionName) !== -1
-                        ) {
-                            emit('log', {
-                                type: __SLog.TYPE_VERBOSE,
-                                value: `Excluding the action "<yellow>${actionName}</yellow>"`,
-                            });
-                            return;
-                        }
-
-                        // check `extends` property
-                        if (actionObj.extends) {
-                            if (!actionsObj[actionObj.extends]) {
-                                throw new Error(
-                                    `<red>[action]</red> Your action "<yellow>${actionName}</yellow>" tries to extends the "<cyan>${
-                                        actionObj.extends
-                                    }</cyan>" action that does not exists... Here's the available actions at this time: <green>${Object.keys(
-                                        actionsObj,
-                                    ).join(',')}</green>`,
-                                );
+                    // filter action params depending on each action interface if specified
+                    let InterfaceClass;
+                    if (actionObj.interface) {
+                        InterfaceClass = await __import(actionObj.interface);
+                        // filter shared params using each action "interface"
+                        actionParams = __filter(actionParams, (key, value) => {
+                            if (key === 'env') return true;
+                            if (key.toLowerCase() === 'bench') {
+                                return true;
                             }
-                            emit('log', {
-                                type: __SLog.TYPE_VERBOSE,
-                                value: `<yellow>○</yellow> <magenta>extends</magenta> : Your action "<yellow>${actionName}</yellow>" extends the "<cyan>${actionObj.extends}</cyan>" one`,
-                            });
-                            actionObj = <ISKitchenAction>(
-                                __deepMerge(
-                                    Object.assign(
-                                        {},
-                                        actionsObj[actionObj.extends],
-                                    ),
-                                    actionObj,
-                                )
-                            );
-                        }
-
-                        // specific passed params like "--frontendServer.buildInitial"
-                        for (let [key, value] of Object.entries(sharedParams)) {
-                            if (key.startsWith(`${actionName}.`)) {
-                                actionParams[
-                                    key.replace(`${actionName}.`, '')
-                                ] = value;
+                            if (key.toLowerCase() === 'devscut') {
+                                return true;
                             }
-                        }
-
-                        // filter action params depending on each action interface if specified
-                        let InterfaceClass;
-                        if (actionObj.interface) {
-                            InterfaceClass = await __import(
-                                actionObj.interface,
-                            );
-                            // filter shared params using each action "interface"
-                            actionParams = __filter(
-                                actionParams,
-                                (key, value) => {
-                                    if (key === 'env') return true;
-                                    if (key.toLowerCase() === 'bench') {
-                                        return true;
-                                    }
-                                    if (key.toLowerCase() === 'devscut') {
-                                        return true;
-                                    }
-                                    if (key.toLowerCase() === 'verbose') {
-                                        return true;
-                                    }
-                                    return (
-                                        InterfaceClass.definition[key] !==
-                                        undefined
-                                    );
-                                },
-                            );
-                        }
-
-                        const actionId = actionObj.id ?? actionName;
-                        // create a process from the recipe object
-                        let finalCommand = __replaceCommandTokens(
-                            (actionObj.command ?? actionObj.process).trim(),
-                            actionParams,
-                        );
-
-                        emit('log', {
-                            type: __SLog.TYPE_INFO,
-                            value: `<yellow>○</yellow> <yellow>${actionName}</yellow> : <cyan>${finalCommand}</cyan>`,
+                            if (key.toLowerCase() === 'verbose') {
+                                return true;
+                            }
+                            return InterfaceClass.definition[key] !== undefined;
                         });
+                    }
 
-                        const pro = await __SProcess.from(finalCommand, {
-                            before: actionObj.before,
-                            after: actionObj.after,
-                        });
+                    const actionId = actionObj.id ?? actionName;
+                    // create a process from the recipe object
+                    let finalCommand = __replaceCommandTokens(
+                        (actionObj.command ?? actionObj.process).trim(),
+                        actionParams,
+                    );
 
-                        const finalProcessManagerParams = {
-                            ...sharedParams,
-                            ...(actionObj.params ?? {}),
-                        };
+                    console.log(
+                        `<yellow>○</yellow> <yellow>${actionName}</yellow> : <cyan>${finalCommand}</cyan>`,
+                    );
 
-                        // add the process to the process manager
-                        // @TODO    integrate log filter feature
-                        processManager.attachProcess(actionId, pro, {});
+                    const pro = await __SProcess.from(finalCommand, {
+                        before: actionObj.before,
+                        after: actionObj.after,
+                    });
 
-                        try {
-                            const processPro = processManager.run(
-                                actionId,
-                                finalProcessManagerParams,
-                                {
-                                    ...(actionObj.settings?.process ?? {}),
-                                },
-                            );
+                    const finalProcessManagerParams = {
+                        ...sharedParams,
+                        ...(actionObj.params ?? {}),
+                    };
 
-                            if (!actionObj.settings?.silent) {
-                                pipe(processPro);
-                            }
+                    // add the process to the process manager
+                    // @TODO    integrate log filter feature
+                    processManager.attachProcess(actionId, pro, {});
 
-                            if (!processesPromises.includes(processPro)) {
-                                processesPromises.push(processPro);
-                            }
+                    try {
+                        const processPro = processManager.run(
+                            actionId,
+                            finalProcessManagerParams,
+                            {
+                                ...(actionObj.settings?.process ?? {}),
+                            },
+                        );
 
-                            if (!finalParams.runInParallel) {
-                                await processPro;
-                            }
-                        } catch (e) {
-                            // console.log(e);
+                        if (!processesPromises.includes(processPro)) {
+                            processesPromises.push(processPro);
                         }
+
+                        if (!finalParams.runInParallel) {
+                            await processPro;
+                        }
+                    } catch (e) {
+                        // console.log(e);
                     }
                 }
+            }
 
-                await Promise.all(processesPromises);
+            await Promise.all(processesPromises);
 
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<green>[success]</green> All actions have been executed <green>successfully</green> in <yellow>${
-                        duration.end().formatedDuration
-                    }</yellow>`,
-                });
+            console.log(
+                `<green>[success]</green> All actions have been executed <green>successfully</green> in <yellow>${
+                    duration.end().formatedDuration
+                }</yellow>`,
+            );
 
-                resolve(processesPromises);
-            },
-            {
-                eventEmitter: {
-                    bind: this,
-                },
-            },
-        ).bind(this);
+            resolve(processesPromises);
+        });
     }
 
     /**
@@ -679,149 +620,129 @@ class SKitchen extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    list(params: ISKitchenListParams | string): Promise<any> {
-        return new __SPromise(
-            ({ resolve, reject, emit }) => {
-                const recipes = this.listRecipes();
+    list(params: ISKitchenListParams | string): Promise<any | void> {
+        return new Promise((resolve) => {
+            const recipes = this.listRecipes();
 
-                const finalParams: ISKitchenL =
-                    __SKitchenListParamsInterface.apply(params);
+            const finalParams: ISKitchenL =
+                __SKitchenListParamsInterface.apply(params);
 
-                let recipe, stack;
-                if (finalParams.recipe) {
-                    recipe = finalParams.recipe.split('.')[0];
-                    stack = finalParams.recipe.split('.')[1];
-                }
+            let recipe, stack;
+            if (finalParams.recipe) {
+                recipe = finalParams.recipe.split('.')[0];
+                stack = finalParams.recipe.split('.')[1];
+            }
 
-                // list the ingredients
-                if (finalParams.ingredients) {
-                    emit('log', {
+            // list the ingredients
+            if (finalParams.ingredients) {
+                console.log(`Available ingredient(s) list:`);
+
+                for (let [id, ingredientObj] of Object.entries(
+                    SKitchen._registeredIngredients,
+                )) {
+                    console.log(
+                        `- <magenta>${id}</magenta>${' '.repeat(
+                            30 - id.length,
+                        )}: ${ingredientObj.description}`,
+                    );
+                    console.log(
+                        `   - Project type(s)${' '.repeat(
+                            12,
+                        )}: <cyan>${ingredientObj.projectTypes.join(
+                            ',',
+                        )}</cyan>`,
+                    );
+                    console.log({
+                        margin: {
+                            bottom: 1,
+                        },
                         type: __SLog.TYPE_INFO,
-                        value: `Available ingredient(s) list:`,
+                        value: `   - Command ${' '.repeat(
+                            19,
+                        )}: <yellow>sugar kitchen.add <magenta>${id}</magenta></yellow>`,
                     });
-
-                    for (let [id, ingredientObj] of Object.entries(
-                        SKitchen._registeredIngredients,
-                    )) {
-                        emit('log', {
-                            type: __SLog.TYPE_INFO,
-                            value: `- <magenta>${id}</magenta>${' '.repeat(
-                                30 - id.length,
-                            )}: ${ingredientObj.description}`,
-                        });
-                        emit('log', {
-                            type: __SLog.TYPE_INFO,
-                            value: `   - Project type(s)${' '.repeat(
-                                12,
-                            )}: <cyan>${ingredientObj.projectTypes.join(
-                                ',',
-                            )}</cyan>`,
-                        });
-                        emit('log', {
-                            margin: {
-                                bottom: 1,
-                            },
-                            type: __SLog.TYPE_INFO,
-                            value: `   - Command ${' '.repeat(
-                                19,
-                            )}: <yellow>sugar kitchen.add <magenta>${id}</magenta></yellow>`,
-                        });
-                    }
-
-                    return resolve();
                 }
 
-                // available recipes
-                if (!recipe) {
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `Available recipe(s) list:`,
-                    });
+                return resolve();
+            }
 
-                    let largerName = '';
-                    for (const name in recipes) {
-                        if (name.length > largerName.length) largerName = name;
-                    }
-                    for (const [name, obj] of Object.entries(recipes)) {
-                        emit('log', {
-                            type: __SLog.TYPE_INFO,
-                            value: `- <cyan>${name}</cyan>${' '.repeat(
-                                largerName.length - name.length,
-                            )} : ${obj.description}`,
-                        });
-                    }
+            // available recipes
+            if (!recipe) {
+                console.log(`Available recipe(s) list:`);
 
-                    return resolve(recipes);
+                let largerName = '';
+                for (const name in recipes) {
+                    if (name.length > largerName.length) largerName = name;
+                }
+                for (const [name, obj] of Object.entries(recipes)) {
+                    console.log(
+                        `- <cyan>${name}</cyan>${' '.repeat(
+                            largerName.length - name.length,
+                        )} : ${obj.description}`,
+                    );
                 }
 
-                if (recipe) {
-                    if (!recipes[recipe]) {
-                        throw new Error(
-                            `<red>[SKitchen.list]</red> Sorry but the recipe "<yellow>${recipe}</yellow> does not exists...`,
-                        );
-                    }
+                return resolve(recipes);
+            }
+
+            if (recipe) {
+                if (!recipes[recipe]) {
+                    throw new Error(
+                        `<red>[SKitchen.list]</red> Sorry but the recipe "<yellow>${recipe}</yellow> does not exists...`,
+                    );
+                }
+            }
+
+            if (recipe && !stack) {
+                console.log(
+                    `Stacks list for the recipe "<yellow>${recipe}</yellow>":`,
+                );
+                let largerName = '';
+                for (const name in recipes[recipe].stacks) {
+                    if (name.length > largerName.length) largerName = name;
+                }
+                for (const [name, obj] of Object.entries(
+                    recipes[recipe].stacks,
+                )) {
+                    console.log(
+                        `- <cyan>${name}</cyan>${' '.repeat(
+                            largerName.length - name.length,
+                        )} : ${obj.description}`,
+                    );
                 }
 
-                if (recipe && !stack) {
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `Stacks list for the recipe "<yellow>${recipe}</yellow>":`,
-                    });
-                    let largerName = '';
-                    for (const name in recipes[recipe].stacks) {
-                        if (name.length > largerName.length) largerName = name;
-                    }
-                    for (const [name, obj] of Object.entries(
-                        recipes[recipe].stacks,
-                    )) {
-                        emit('log', {
-                            type: __SLog.TYPE_INFO,
-                            value: `- <cyan>${name}</cyan>${' '.repeat(
-                                largerName.length - name.length,
-                            )} : ${obj.description}`,
-                        });
-                    }
+                return resolve(recipes[recipe]);
+            }
 
-                    return resolve(recipes[recipe]);
+            if (stack) {
+                if (!recipes[recipe].stacks[stack]) {
+                    throw new Error(
+                        `<red>[SKitchen.list]</red> Sorry but the stack "<yellow>${stack}</yellow> does not exists in the recipe "<cyan>${recipe}</cyan>"...`,
+                    );
+                }
+            }
+
+            if (recipe && stack) {
+                console.log(
+                    `Actions list for the recipe "<yellow>${recipe}</yellow> and the stack "<cyan>${stack}</cyan>":`,
+                );
+                let largerName = '';
+                for (const name in recipes[recipe].stacks[stack].actions) {
+                    if (name.length > largerName.length) largerName = name;
+                }
+                for (const [name, obj] of Object.entries(
+                    recipes[recipe].stacks[stack].actions,
+                )) {
+                    console.log(
+                        `- <cyan>${name}</cyan>${' '.repeat(
+                            largerName.length - name.length,
+                        )} : ${obj.description}`,
+                    );
                 }
 
-                if (stack) {
-                    if (!recipes[recipe].stacks[stack]) {
-                        throw new Error(
-                            `<red>[SKitchen.list]</red> Sorry but the stack "<yellow>${stack}</yellow> does not exists in the recipe "<cyan>${recipe}</cyan>"...`,
-                        );
-                    }
-                }
-
-                if (recipe && stack) {
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `Actions list for the recipe "<yellow>${recipe}</yellow> and the stack "<cyan>${stack}</cyan>":`,
-                    });
-                    let largerName = '';
-                    for (const name in recipes[recipe].stacks[stack].actions) {
-                        if (name.length > largerName.length) largerName = name;
-                    }
-                    for (const [name, obj] of Object.entries(
-                        recipes[recipe].stacks[stack].actions,
-                    )) {
-                        emit('log', {
-                            type: __SLog.TYPE_INFO,
-                            value: `- <cyan>${name}</cyan>${' '.repeat(
-                                largerName.length - name.length,
-                            )} : ${obj.description}`,
-                        });
-                    }
-
-                    return resolve(recipes[recipe].stacks[stack]);
-                }
-            },
-            {
-                metas: {
-                    id: 'SKitchen.list',
-                },
-            },
-        );
+                return resolve(recipes[recipe].stacks[stack]);
+            }
+        });
     }
 
     /**
@@ -836,92 +757,80 @@ class SKitchen extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    add(params: ISKitchenListParams | string): Promise<any> {
-        return new __SPromise(
-            async ({ resolve, reject, emit, pipe }) => {
-                // @ts-ignore
-                const finalParams: ISKitchenAddParams =
-                    __SKitchenAddParamsInterface.apply(params);
+    add(params: ISKitchenListParams | string): Promise<any | void> {
+        return new Promise(async (resolve) => {
+            // @ts-ignore
+            const finalParams: ISKitchenAddParams =
+                __SKitchenAddParamsInterface.apply(params);
 
-                for (let i = 0; i < finalParams.ingredients.length; i++) {
-                    const id = finalParams.ingredients[i];
+            for (let i = 0; i < finalParams.ingredients.length; i++) {
+                const id = finalParams.ingredients[i];
 
-                    if (!SKitchen._registeredIngredients[id]) {
-                        emit('log', {
-                            type: __SLog.TYPE_WARNING,
-                            value: `<magenta>[add]</magenta> No ingredient with the id "<yellow>${id}</yellow>" does exists...`,
-                        });
-                        continue;
-                    }
-
-                    const ingredientObj = SKitchen._registeredIngredients[id];
-
-                    let context = {
-                        ...__sharedContext(),
-                        projectType: __detectProjectType(),
-                    };
-
-                    // check project type compatibility
-                    if (
-                        !ingredientObj.projectTypes.includes('*') &&
-                        !ingredientObj.projectTypes.includes(
-                            context.projectType.type,
-                        )
-                    ) {
-                        emit('log', {
-                            type: __SLog.TYPE_WARNING,
-                            value: `<magenta>[${ingredientObj.id}]</magenta> The "<yellow>${ingredientObj.id}</yellow>" is not compatible with your project type "<cyan>${context.projectType.type}</cyan>"`,
-                        });
-                        continue;
-                    }
-
-                    // check if the process is a "new" installation one or
-                    // the add process has been called after the installation
-                    context.new = context.recipe !== undefined;
-
-                    // make sure we have a recipe
-                    if (!context.recipe) {
-                        const sugarJson = new __SSugarJson().current();
-                        if (sugarJson.recipe) {
-                            context.recipe = sugarJson.recipe;
-                        }
-                    }
-
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `<yellow>[${ingredientObj.id}]</yellow> Adding the "<yellow>${ingredientObj.id}</yellow>" ingredient to your "<cyan>${context.projectType.type}</cyan>" project...`,
-                    });
-
-                    await ingredientObj.add({
-                        ask(askObj: ISLogAsk) {
-                            return emit('ask', askObj);
-                        },
-                        log(message: string) {
-                            return emit('log', {
-                                value: `<yellow>[add.${id}]</yellow> ${message}`,
-                            });
-                        },
-                        pipe(...args) {
-                            return pipe(...args);
-                        },
-                        emit,
-                        context,
-                    });
-
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `<yellow>[${ingredientObj.id}]</yellow> Ingredient added <green>successfully</green>!`,
-                    });
+                if (!SKitchen._registeredIngredients[id]) {
+                    console.log(
+                        `<magenta>[add]</magenta> No ingredient with the id "<yellow>${id}</yellow>" does exists...`,
+                    );
+                    continue;
                 }
 
-                resolve();
-            },
-            {
-                metas: {
-                    id: 'SKitchen.add',
-                },
-            },
-        );
+                const ingredientObj = SKitchen._registeredIngredients[id];
+
+                let context = {
+                    ...__sharedContext(),
+                    projectType: __detectProjectType(),
+                };
+
+                // check project type compatibility
+                if (
+                    !ingredientObj.projectTypes.includes('*') &&
+                    !ingredientObj.projectTypes.includes(
+                        context.projectType.type,
+                    )
+                ) {
+                    console.log(
+                        `<magenta>[${ingredientObj.id}]</magenta> The "<yellow>${ingredientObj.id}</yellow>" is not compatible with your project type "<cyan>${context.projectType.type}</cyan>"`,
+                    );
+                    continue;
+                }
+
+                // check if the process is a "new" installation one or
+                // the add process has been called after the installation
+                context.new = context.recipe !== undefined;
+
+                // make sure we have a recipe
+                if (!context.recipe) {
+                    const sugarJson = new __SSugarJson().current();
+                    if (sugarJson.recipe) {
+                        context.recipe = sugarJson.recipe;
+                    }
+                }
+
+                console.log(
+                    `<yellow>[${ingredientObj.id}]</yellow> Adding the "<yellow>${ingredientObj.id}</yellow>" ingredient to your "<cyan>${context.projectType.type}</cyan>" project...`,
+                );
+
+                await ingredientObj.add({
+                    ask(askObj: ISLogAsk) {
+                        return console.ask?.(askObj);
+                    },
+                    log(message: string) {
+                        return console.log(
+                            `<yellow>[add.${id}]</yellow> ${message}`,
+                        );
+                    },
+                    // pipe(...args) {
+                    //     return pipe(...args);
+                    // },
+                    context,
+                });
+
+                console.log(
+                    `<yellow>[${ingredientObj.id}]</yellow> Ingredient added <green>successfully</green>!`,
+                );
+            }
+
+            resolve();
+        });
     }
 }
 

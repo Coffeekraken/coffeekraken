@@ -1,4 +1,4 @@
-import type { IAvailableColorsSettings } from './availableColors';
+import type { IAvailableColorsSettings } from '../../../shared/dev/color/availableColors';
 
 export interface IGetColorForSettings extends IAvailableColorsSettings {
     scope: string;

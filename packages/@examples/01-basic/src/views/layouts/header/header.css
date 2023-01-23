@@ -70,6 +70,10 @@
                 opacity: 1;
                 background: sugar.color(base, surface, --darken 5%);
             }
+
+            @sugar.media mobile {
+                display: none;
+            }
         }
     }
 }

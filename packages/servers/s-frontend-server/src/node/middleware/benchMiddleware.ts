@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 import __SBench from '@coffeekraken/s-bench';
-import __SPromise from '@coffeekraken/s-promise';
 
 /**
  * @name            benchEndMiddleware
@@ -31,22 +30,20 @@ import __SPromise from '@coffeekraken/s-promise';
  */
 function benchEndMiddleware(settings = {}) {
     return function (req, res, next) {
-        return new __SPromise(({ resolve, reject, pipe }) => {
-            // console.log('___ST');
-            const bench = new __SBench('request');
+        // console.log('___ST');
+        const bench = new __SBench('request');
 
-            res.bench = bench;
+        res.bench = bench;
 
-            function afterResponse() {
-                bench.end();
-            }
+        function afterResponse() {
+            bench.end();
+        }
 
-            res.on('finish', afterResponse);
+        res.on('finish', afterResponse);
 
-            setTimeout(() => {
-                next();
-            }, 100);
-        });
+        setTimeout(() => {
+            next();
+        }, 100);
     };
 }
 export default benchEndMiddleware;

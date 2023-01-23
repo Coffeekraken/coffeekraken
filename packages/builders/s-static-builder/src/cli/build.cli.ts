@@ -1,14 +1,12 @@
-import __SPromise from '@coffeekraken/s-promise';
-import __SStaticBuilder from '../node/SStaticBuilder';
 import __SStaticBuilderBuildParamsInterface from '../node/interface/SStaticBuilderBuildParamsInterface';
+import __SStaticBuilder from '../node/SStaticBuilder';
 
 export default function build(stringArgs = '') {
-    return new __SPromise(async ({ resolve, reject, pipe }) => {
+    return new Promise(async (resolve) => {
         const builder = new __SStaticBuilder({
             interface: __SStaticBuilderBuildParamsInterface,
         });
-        await pipe(builder.build(stringArgs));
-        resolve();
-        process.exit();
+        const result = await builder.build(stringArgs);
+        resolve(result);
     });
 }

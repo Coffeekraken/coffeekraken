@@ -1,2 +1,3 @@
 import __countLines from './countLines';
-export { __countLines };
+import __termSize from './termSize';
+export { __countLines, __termSize };

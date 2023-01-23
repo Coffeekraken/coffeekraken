@@ -1,8 +1,7 @@
-import __SPromise from '@coffeekraken/s-promise';
 import { __dirname } from '@coffeekraken/sugar/fs';
 
 export default function sitemap(express, settings, config) {
-    return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+    return new Promise(async (resolve) => {
         // handlers
         config.handlers.sitemapJson = {
             description: 'Serve the sitemap.xml in JSON',

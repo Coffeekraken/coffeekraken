@@ -1,17 +1,9 @@
-import __SPromise from '@coffeekraken/s-promise';
-import __SStdio from '@coffeekraken/s-stdio';
 import __SKitchen from '../node/SKitchen';
 
-export const sugarCliSettings = {
-    stdio: __SStdio.UI_TERMINAL,
-};
-
 export default function run(stringArgs = '') {
-    return new __SPromise(async ({ resolve, pipe }) => {
+    return new Promise(async (resolve) => {
         const kitchen = new __SKitchen();
-        const promise = kitchen.run(stringArgs);
-        pipe(promise);
-        await promise;
-        resolve(promise);
+        const result = kitchen.run(stringArgs);
+        resolve(result);
     });
 }

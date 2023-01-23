@@ -12,7 +12,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const s_log_1 = __importDefault(require("@coffeekraken/s-log"));
 const packagePath_1 = __importDefault(require("@coffeekraken/sugar/node/npm/packagePath"));
 const path_1 = require("@coffeekraken/sugar/path");
 const fs_1 = __importDefault(require("fs"));
@@ -31,7 +30,7 @@ const nvmrcIngredient = {
     id: 'nvmrc',
     description: 'Add the default <cyan>.nvmrc</cyan> file into your project',
     projectTypes: ['unknown', 'sugar', 'next'],
-    add({ ask, log, emit }) {
+    add() {
         return __awaiter(this, void 0, void 0, function* () {
             const packageRoot = (0, path_1.__packageRootDir)();
             const cliPackagePath = (0, packagePath_1.default)('@coffeekraken/cli');
@@ -41,10 +40,7 @@ const nvmrcIngredient = {
             if (fs_1.default.existsSync(`${cliPackagePath}/.nvmrc`)) {
                 nvmrc = fs_1.default.readFileSync(`${cliPackagePath}/.nvmrc`).toString();
                 fs_1.default.writeFileSync(`${packageRoot}/.nvmrc`, nvmrc);
-                emit('log', {
-                    type: s_log_1.default.TYPE_INFO,
-                    value: `<green>[nvmrc]</green> Default <cyan>.nvmrc</cyan> file addedd <green>successfully</green> with node version <magenta>${nvmrc}</magenta>`,
-                });
+                console.log(`<green>[nvmrc]</green> Default <cyan>.nvmrc</cyan> file addedd <green>successfully</green> with node version <magenta>${nvmrc}</magenta>`);
                 return true;
             }
             return false;
@@ -52,4 +48,4 @@ const nvmrcIngredient = {
     },
 };
 exports.default = nvmrcIngredient;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsZ0VBQXlDO0FBQ3pDLDJGQUFxRTtBQUNyRSxtREFBNEQ7QUFDNUQsNENBQXNCO0FBR3RCOzs7Ozs7Ozs7O0dBVUc7QUFDSCxNQUFNLGVBQWUsR0FBd0I7SUFDekMsRUFBRSxFQUFFLE9BQU87SUFDWCxXQUFXLEVBQUUsNERBQTREO0lBQ3pFLFlBQVksRUFBRSxDQUFDLFNBQVMsRUFBRSxPQUFPLEVBQUUsTUFBTSxDQUFDO0lBQ3BDLEdBQUcsQ0FBQyxFQUFFLEdBQUcsRUFBRSxHQUFHLEVBQUUsSUFBSSxFQUFFOztZQUN4QixNQUFNLFdBQVcsR0FBRyxJQUFBLHVCQUFnQixHQUFFLENBQUM7WUFFdkMsTUFBTSxjQUFjLEdBQUcsSUFBQSxxQkFBYSxFQUFDLG1CQUFtQixDQUFDLENBQUM7WUFDMUQsSUFBSSxDQUFDLGNBQWM7Z0JBQUUsT0FBTyxLQUFLLENBQUM7WUFFbEMsSUFBSSxLQUFLLENBQUM7WUFDVixJQUFJLFlBQUksQ0FBQyxVQUFVLENBQUMsR0FBRyxjQUFjLFNBQVMsQ0FBQyxFQUFFO2dCQUM3QyxLQUFLLEdBQUcsWUFBSSxDQUFDLFlBQVksQ0FBQyxHQUFHLGNBQWMsU0FBUyxDQUFDLENBQUMsUUFBUSxFQUFFLENBQUM7Z0JBQ2pFLFlBQUksQ0FBQyxhQUFhLENBQUMsR0FBRyxXQUFXLFNBQVMsRUFBRSxLQUFLLENBQUMsQ0FBQztnQkFFbkQsSUFBSSxDQUFDLEtBQUssRUFBRTtvQkFDUixJQUFJLEVBQUUsZUFBTSxDQUFDLFNBQVM7b0JBQ3RCLEtBQUssRUFBRSx5SEFBeUgsS0FBSyxZQUFZO2lCQUNwSixDQUFDLENBQUM7Z0JBQ0gsT0FBTyxJQUFJLENBQUM7YUFDZjtZQUVELE9BQU8sS0FBSyxDQUFDO1FBQ2pCLENBQUM7S0FBQTtDQUNKLENBQUM7QUFDRixrQkFBZSxlQUFlLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsMkZBQXFFO0FBQ3JFLG1EQUE0RDtBQUM1RCw0Q0FBc0I7QUFHdEI7Ozs7Ozs7Ozs7R0FVRztBQUNILE1BQU0sZUFBZSxHQUF3QjtJQUN6QyxFQUFFLEVBQUUsT0FBTztJQUNYLFdBQVcsRUFBRSw0REFBNEQ7SUFDekUsWUFBWSxFQUFFLENBQUMsU0FBUyxFQUFFLE9BQU8sRUFBRSxNQUFNLENBQUM7SUFDcEMsR0FBRzs7WUFDTCxNQUFNLFdBQVcsR0FBRyxJQUFBLHVCQUFnQixHQUFFLENBQUM7WUFFdkMsTUFBTSxjQUFjLEdBQUcsSUFBQSxxQkFBYSxFQUFDLG1CQUFtQixDQUFDLENBQUM7WUFDMUQsSUFBSSxDQUFDLGNBQWM7Z0JBQUUsT0FBTyxLQUFLLENBQUM7WUFFbEMsSUFBSSxLQUFLLENBQUM7WUFDVixJQUFJLFlBQUksQ0FBQyxVQUFVLENBQUMsR0FBRyxjQUFjLFNBQVMsQ0FBQyxFQUFFO2dCQUM3QyxLQUFLLEdBQUcsWUFBSSxDQUFDLFlBQVksQ0FBQyxHQUFHLGNBQWMsU0FBUyxDQUFDLENBQUMsUUFBUSxFQUFFLENBQUM7Z0JBQ2pFLFlBQUksQ0FBQyxhQUFhLENBQUMsR0FBRyxXQUFXLFNBQVMsRUFBRSxLQUFLLENBQUMsQ0FBQztnQkFFbkQsT0FBTyxDQUFDLEdBQUcsQ0FDUCx5SEFBeUgsS0FBSyxZQUFZLENBQzdJLENBQUM7Z0JBQ0YsT0FBTyxJQUFJLENBQUM7YUFDZjtZQUVELE9BQU8sS0FBSyxDQUFDO1FBQ2pCLENBQUM7S0FBQTtDQUNKLENBQUM7QUFDRixrQkFBZSxlQUFlLENBQUMifQ==

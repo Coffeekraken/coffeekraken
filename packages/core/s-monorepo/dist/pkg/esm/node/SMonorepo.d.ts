@@ -62,7 +62,7 @@ export default class SMonorepo extends __SClass {
     
     publish(params: Partial<ISMonorepoPublishParams>): Promise<ISMonorepoPublishResult[] | false>;
     
-    dev(params: Partial<ISMonorepoDevParams>): Promise<ISMonorepoListResult[]>;
+    dev(params: Partial<ISMonorepoDevParams>): Promise<ISMonorepoListResult[] | void>;
     
     upgrade(params?: ISMonorepoUpgradeParams): Promise<ISMonorepoUpgradeResult | boolean>;
 }

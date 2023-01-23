@@ -29,25 +29,23 @@ const sugarIngredient: ISKitchenIngredient = {
     description:
         'Add the <yellow>@coffeekraken/sugar</yellow> package to your project',
     projectTypes: ['unknown', 'sugar', 'next'],
-    async add({ ask, log, emit, pipe, context }) {
+    async add({ context }) {
         const rootPath = __packageRootDir(process.cwd()),
             thisPackageRootPath = __packageRootDir(__dirname());
 
         // installing the actual package
-        emit('log', {
-            value: `<yellow>[sugar]</yellow> Installing the actual <cyan>@coffeekraken/sugar</cyan> and <cyan>@coffeekraken/s-sugar-feature</cyan> packages...`,
-        });
+        console.log(
+            `<yellow>[sugar]</yellow> Installing the actual <cyan>@coffeekraken/sugar</cyan> and <cyan>@coffeekraken/s-sugar-feature</cyan> packages...`,
+        );
         try {
-            await pipe(
-                __npmInstall([
-                    '@coffeekraken/sugar',
-                    '@coffeekraken/s-sugar-feature',
-                ]),
-            );
+            await __npmInstall([
+                '@coffeekraken/sugar',
+                '@coffeekraken/s-sugar-feature',
+            ]);
         } catch (e) {
-            emit('log', {
-                value: `<red>sugar</red> Something went wrong when installing the @coffeekraken packages. Please try to install it manually.`,
-            });
+            console.error(
+                `<red>sugar</red> Something went wrong when installing the @coffeekraken packages. Please try to install it manually.`,
+            );
         }
 
         switch (context.projectType.type) {
@@ -90,9 +88,9 @@ const sugarIngredient: ISKitchenIngredient = {
                 break;
         }
 
-        emit('log', {
-            value: `<yellow>[sugar]</yellow> Added <green>successfully</green> in your project. Have fun!`,
-        });
+        console.log(
+            `<yellow>[sugar]</yellow> Added <green>successfully</green> in your project. Have fun!`,
+        );
 
         return true;
     },

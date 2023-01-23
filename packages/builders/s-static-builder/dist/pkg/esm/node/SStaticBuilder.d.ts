@@ -38,5 +38,5 @@ export default class SStaticBuilder extends __SBuilder {
     
     constructor(settings?: Partial<ISStaticBuilderSettings>);
     
-    _build(params: ISStaticBuilderBuildParams): Promise<ISStaticBuilderResult>;
+    _build(params: ISStaticBuilderBuildParams): Promise<ISStaticBuilderResult | void>;
 }

@@ -141,7 +141,7 @@ export default class SFrontspec extends __SPromise {
      * This static method allows you to build the frontspec.json file from the configs specifies in the config.frontspec.build.sources stack.
      *
      * @param         {Partial<ISFrontspecBuildParams>}          params        The params to use to build your frontspec
-     * @return        {SPromise}                                     A promise resolved once the scan process has been finished
+     * @return        {Promise}                                     A promise resolved once the scan process has been finished
      *
      * @since         2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -150,84 +150,75 @@ export default class SFrontspec extends __SPromise {
         const finalParams = <ISFrontspecBuildParams>(
             __deepMerge(__SFrontspecBuildParamsInterface.defaults(), params)
         );
-        return new __SPromise(
-            async ({ resolve, reject, emit, pipe }) => {
-                const frontspecPath = `${__packageRootDir()}/frontspec.json`;
+        return new Promise(async (resolve) => {
+            const frontspecPath = `${__packageRootDir()}/frontspec.json`;
 
-                emit('log', {
-                    value: `<yellow>[build]</yellow> Building <cyan>frontspec.json</cyan>...`,
-                });
+            console.log(
+                `<yellow>[build]</yellow> Building <cyan>frontspec.json</cyan>...`,
+            );
 
-                let finalFrontspecJson = {};
+            let finalFrontspecJson = {};
 
-                let frontspecJson = {};
-                try {
-                    frontspecJson = __readJsonSync(frontspecPath);
-                } catch (e) {
-                    console.log(e);
-                }
+            let frontspecJson = {};
+            try {
+                frontspecJson = __readJsonSync(frontspecPath);
+            } catch (e) {
+                console.log(e);
+            }
 
-                for (let [prop, sourceObj] of Object.entries(
-                    finalParams.sources,
-                )) {
-                    emit('log', {
-                        value: `<yellow>[build]</yellow> Gathering frontspec property "<yellow>${prop}</yellow>" of type "<magenta>${sourceObj.type}</magenta>"`,
-                    });
-
-                    switch (sourceObj.type) {
-                        case 'config':
-                            finalFrontspecJson[prop] = __SSugarConfig.get(prop);
-                            break;
-                        case 'object':
-                            finalFrontspecJson[prop] = sourceObj.value;
-                            break;
-                        default:
-                            throw new Error(
-                                `[SFrontspec.build] Sorry but the "${sourceObj.type}" source type does not exists...`,
-                            );
-                            break;
-                    }
-
-                    // process if specified
-                    if (sourceObj.process) {
-                        finalFrontspecJson[prop] = sourceObj.process(
-                            finalFrontspecJson[prop],
-                        );
-                    }
-                }
-
-                if (frontspecJson.$custom) {
-                    finalFrontspecJson = __deepMerge(
-                        {
-                            $custom: frontspecJson.$custom,
-                        },
-                        finalFrontspecJson,
-                        frontspecJson.$custom,
-                    );
-                }
-
-                // write the file onto fs
-                __fs.writeFileSync(
-                    frontspecPath,
-                    JSON.stringify(finalFrontspecJson, null, 4),
+            for (let [prop, sourceObj] of Object.entries(finalParams.sources)) {
+                console.log(
+                    `<yellow>[build]</yellow> Gathering frontspec property "<yellow>${prop}</yellow>" of type "<magenta>${sourceObj.type}</magenta>"`,
                 );
 
-                emit('log', {
-                    value: `<green>[save]</green> File saved <green>successfully</green> under "<cyan>${frontspecPath.replace(
-                        __packageRootDir() + '/',
-                        '',
-                    )}</cyan>"`,
-                });
+                switch (sourceObj.type) {
+                    case 'config':
+                        finalFrontspecJson[prop] = __SSugarConfig.get(prop);
+                        break;
+                    case 'object':
+                        finalFrontspecJson[prop] = sourceObj.value;
+                        break;
+                    default:
+                        throw new Error(
+                            `[SFrontspec.build] Sorry but the "${sourceObj.type}" source type does not exists...`,
+                        );
+                        break;
+                }
 
-                // resolve the process
-                resolve();
-            },
-            {
-                metas: {
-                    id: this.constructor.name,
-                },
-            },
-        );
+                // process if specified
+                if (sourceObj.process) {
+                    finalFrontspecJson[prop] = sourceObj.process(
+                        finalFrontspecJson[prop],
+                    );
+                }
+            }
+
+            if (frontspecJson.$custom) {
+                finalFrontspecJson = __deepMerge(
+                    {
+                        $custom: frontspecJson.$custom,
+                    },
+                    finalFrontspecJson,
+                    frontspecJson.$custom,
+                );
+            }
+
+            // write the file onto fs
+            __fs.writeFileSync(
+                frontspecPath,
+                JSON.stringify(finalFrontspecJson, null, 4),
+            );
+
+            console.log(
+                `<green>[save]</green> File saved <green>successfully</green> under "<cyan>${frontspecPath.replace(
+                    __packageRootDir() + '/',
+                    '',
+                )}</cyan>"`,
+            );
+
+            // resolve the process
+            resolve();
+        });
     }
 
     /**

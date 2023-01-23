@@ -1,13 +1,11 @@
 // @ts-nocheck
 
-import __SPromise from '@coffeekraken/s-promise';
 import __SSitemapBuilder from '../node/SSitemapBuilder';
 
 export default (stringArgs = '') => {
-    return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+    return new Promise(async (resolve) => {
         const sitemap = new __SSitemapBuilder();
-        const buildPromise = sitemap.build(stringArgs);
-        pipe(buildPromise);
-        resolve(await buildPromise);
+        const result = await sitemap.build(stringArgs);
+        resolve(result);
     });
 };

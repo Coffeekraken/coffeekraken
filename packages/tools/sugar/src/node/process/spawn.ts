@@ -2,12 +2,11 @@
 
 import __SDuration from '@coffeekraken/s-duration';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
-import __SLog from '@coffeekraken/s-log';
 import type { ISPromise } from '@coffeekraken/s-promise';
 import __SPromise from '@coffeekraken/s-promise';
+import { __onProcessExit } from '@coffeekraken/sugar/process';
 import { spawn as __spawn, SpawnOptions } from 'child_process';
 import __deepMerge from '../../shared/object/deepMerge';
-import { __onProcessExit } from '@coffeekraken/sugar/process';
 
 /**
  * @name            spawn
@@ -89,7 +88,7 @@ export default function spawn(
 
         childProcess = __spawn(command, [], {
             shell: true,
-            stdio: ['pipe', 'pipe', 'pipe'],
+            stdio: ['inherit', 'inherit', 'inherit'],
             // stdio: 'inherit',
             // detached: true,
             cwd: settings.cwd || process.cwd(),
@@ -115,46 +114,38 @@ export default function spawn(
         __onProcessExit(() => {
             new Promise((resolve) => {
                 childProcessExitPromiseResolve = resolve;
-                emit('log', {
-                    value: `<red>[kill]</red> Gracefully killing child process "<cyan>${command}</cyan>"`,
-                });
+                console.log(
+                    `<red>[kill]</red> Gracefully killing child process "<cyan>${command}</cyan>"`,
+                );
                 childProcess.kill('SIGINT');
             });
         });
 
-        // listen for errors etc...
-        if (childProcess.stdout) {
-            childProcess.stdout.on('data', (data) => {
-                if (!data) return;
-                stdout.push(data.toString());
-                if (process.env.NODE_ENV === 'test') {
-                    console.log(data.toString());
-                } else {
-                    emit('log', {
-                        type: __SLog.TYPE_CHILD_PROCESS,
-                        value: data.toString(),
-                    });
-                }
-            });
-        }
-        if (childProcess.stderr) {
-            childProcess.stderr.on('data', (data) => {
-                if (!data) return;
-                stderr.push(data.toString());
-                if (process.env.NODE_ENV === 'test') {
-                    console.error(data.toString());
-                } else {
-                    emit('log', {
-                        type: __SLog.TYPE_CHILD_PROCESS,
-                        value: data.toString(),
-                    });
-                    emit('error', {
-                        type: __SLog.TYPE_CHILD_PROCESS,
-                        value: data.toString(),
-                    });
-                }
-            });
-        }
+        // // listen for errors etc...
+        // if (childProcess.stdout) {
+        //     childProcess.stdout.on('data', (data) => {
+        //         if (!data || data.toString().trim() === '') return;
+        //         data = data.toString();
+        //         stdout.push(data);
+        //         try {
+        //             data = JSON.parse(data);
+        //         } catch (e) {}
+        //         const logger = console[data.type] ?? console.log;
+        //         logger(data);
+        //     });
+        // }
+        // if (childProcess.stderr) {
+        //     childProcess.stderr.on('data', (data) => {
+        //         if (!data || data.toString().trim() === '') return;
+        //         data = data.toString();
+        //         stderr.push(data);
+        //         try {
+        //             data = JSON.parse(data);
+        //         } catch (e) {}
+        //         const logger = console[data.type] ?? console.log;
+        //         logger(data);
+        //     });
+        // }
 
         let isEnded = false;
         childProcess.on('close', (code, signal) => {

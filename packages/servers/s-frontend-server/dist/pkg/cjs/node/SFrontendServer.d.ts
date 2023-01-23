@@ -44,13 +44,13 @@ export default class SFrontendServer extends __SClass {
     constructor();
     _config: any;
     
-    start(params: Partial<ISFrontendServerStartParams> | string): Promise<any>;
+    start(params: Partial<ISFrontendServerStartParams> | string): Promise<void | any>;
     request(url: string): any;
     corsProxy(params: Partial<ISFrontendServerCorsProxyParams> | string): Promise<any>;
     
     _getHandlerFn(handlerNameOrPath: string): Promise<any>;
     
-    _registerPagesRoutes(): any;
+    _registerPagesRoutes(): Promise<unknown>;
     
     _pagesConfigsBySlug: {};
     _getPageConfigBySlug(slug: any): any;

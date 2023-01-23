@@ -2,7 +2,6 @@
 
 import __SDocmap from '@coffeekraken/s-docmap';
 import __SMarkdownBuilder from '@coffeekraken/s-markdown-builder';
-import __SPromise from '@coffeekraken/s-promise';
 import { page404 } from '@coffeekraken/s-view-renderer';
 
 /**
@@ -25,7 +24,7 @@ import { page404 } from '@coffeekraken/s-view-renderer';
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function markdown(req, res, settings = {}) {
-    return new __SPromise(async ({ resolve, reject, pipe, pipeErrors }) => {
+    return new Promise(async (resolve) => {
         const docmap = new __SDocmap();
         const docmapJson = await docmap.read();
         const menu = docmapJson.menu;
@@ -47,14 +46,12 @@ export default function markdown(req, res, settings = {}) {
                     summary: false,
                 },
             });
-            const res = await pipe(
-                builder.build({
-                    // inRaw: markdownStr,
-                    inPath: slugObj.docmap.path,
-                    target: 'html',
-                    save: false,
-                }),
-            );
+            const res = await builder.build({
+                // inRaw: markdownStr,
+                inPath: slugObj.docmap.path,
+                target: 'html',
+                save: false,
+            });
             if (res instanceof Error) {
                 throw res;
             }

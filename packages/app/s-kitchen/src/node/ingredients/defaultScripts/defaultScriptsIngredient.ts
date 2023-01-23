@@ -21,7 +21,7 @@ const defaultScriptsIngredient: ISKitchenIngredient = {
     description:
         'Add default scripts ("<cyan>index.ts</cyan>") to your <magenta>sugar<magenta> project',
     projectTypes: ['sugar', 'unknown'],
-    async add({ ask, log, emit, context }) {
+    async add({ ask, log, context }) {
         // source file path
         const sourceFilePath = __path.resolve(
             __packageRootDir(__dirname()),

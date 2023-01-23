@@ -1,10 +1,11 @@
 // import __SDashboard from '@coffeekraken/s-dashboard';
 
-import __SPackEssentials from '@coffeekraken/s-pack-essentials';
-import __STheme from '@coffeekraken/s-theme';
 import __SFront from '@coffeekraken/s-front';
+import __SPackEssentials from '@coffeekraken/s-pack-essentials';
 
 import { define as __sugarFeatureDefine } from '@coffeekraken/s-sugar-feature';
+
+import { __reloadStylesheets } from '@coffeekraken/sugar/dom';
 
 // import { define as __sFloatingFeature } from '@coffeekraken/s-floating-feature';
 import { define as __sFormValidateFeature } from '@coffeekraken/s-form-validate-feature';
@@ -22,6 +23,14 @@ import { define as __SSliderComponentDefine } from '@coffeekraken/s-slider-compo
 
 // Views related
 const viewsRelated = import.meta.globEager('../views/**/*.ts');
+
+if (import.meta.hot) {
+  import.meta.hot.on('sugar.update.css', (data) => {
+    console.log('RELOAD', data);
+    // perform custom update
+    __reloadStylesheets();
+  });
+}
 
 // Init script
 (async () => {

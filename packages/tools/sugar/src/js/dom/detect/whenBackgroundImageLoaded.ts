@@ -1,8 +1,7 @@
 // @ts-nocheck
 
-import __SPromise from '@coffeekraken/s-promise';
+import { __getStyleProperty, __whenImageLoaded } from '@coffeekraken/sugar/dom';
 import __unquote from '../../../shared/string/unquote';
-import { __whenImageLoaded, __getStyleProperty } from '@coffeekraken/sugar/dom';
 
 /**
  * @name        whenBackgroundImageLoaded
@@ -36,11 +35,11 @@ import { __whenImageLoaded, __getStyleProperty } from '@coffeekraken/sugar/dom';
 export default function __whenBackgroundImageLoaded(
     $elm: HTMLElement,
     cb = null,
-): __SPromise<HTMLElement> {
+): Promise<HTMLElement> {
     let isCancelled = false,
         $img;
-    const promise = new __SPromise(
-        ({ resolve, reject, emit }) => {
+    const promise = new Promise(
+        (resolve, reject) => {
             // get the background-image property from computed style
             const backgroundImage = __getStyleProperty(
                 $elm,
@@ -67,9 +66,12 @@ export default function __whenBackgroundImageLoaded(
         {
             id: 'whenBackgroundImageLoaded',
         },
-    ).on('finally', () => {
+    );
+
+    promise.then(() => {
         isCancelled = true;
     });
+
     promise.__$img = $img;
     return promise;
 }

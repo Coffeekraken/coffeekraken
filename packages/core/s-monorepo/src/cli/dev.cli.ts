@@ -1,18 +1,12 @@
 // @ts-nocheck
-import __SPromise from '@coffeekraken/s-promise';
 import __SMonorepoDevParamsInterface from '../node/interface/SMonorepoDevParamsInterface';
-import __SGlob from '@coffeekraken/s-glob';
-import { __packageRootDir } from '@coffeekraken/sugar/path';
-import { __readJsonSync } from '@coffeekraken/sugar/fs';
 import __SMonorepo from '../node/SMonorepo';
 
 export default (stringArgs = '') => {
-    return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+    return new Promise(async (resolve) => {
         const finalParams = __SMonorepoDevParamsInterface.apply(stringArgs);
-
         const monorepo = new __SMonorepo();
-        await pipe(monorepo.dev(finalParams));
-
-        resolve();
+        const result = await monorepo.dev(finalParams);
+        resolve(result);
     });
 };

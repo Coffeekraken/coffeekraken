@@ -4,7 +4,6 @@ import __SDuration from '@coffeekraken/s-duration';
 import __SEnv from '@coffeekraken/s-env';
 import __SFile from '@coffeekraken/s-file';
 import __SLog from '@coffeekraken/s-log';
-import __SPromise from '@coffeekraken/s-promise';
 import { __unique } from '@coffeekraken/sugar/array';
 import { __getFiles, __writeFileSync } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
@@ -212,7 +211,7 @@ class SCodeFormatter extends __SClass {
         language: string,
         settings?: Partial<ISCodeFormatterSettings>,
     ): Promise<String> {
-        return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+        return new Promise(async (resolve) => {
             // write the file in tmp folder
             const tmpFilePath = `${__systemTmpDir()}/s-code-formatter/${__uniqid()}.${language}`;
             __writeFileSync(tmpFilePath, code);
@@ -251,193 +250,166 @@ class SCodeFormatter extends __SClass {
         params: any = {},
         settings: any = {},
     ): Promise<ISCodeFormatterFormatResult> {
-        return new __SPromise(
-            async ({ resolve, reject, emit, pipe }) => {
-                const finalSettings: ISCodeFormatterSettings = __deepMerge(
-                    this.settings,
-                    settings,
+        return new Promise(async (resolve) => {
+            const finalSettings: ISCodeFormatterSettings = __deepMerge(
+                this.settings,
+                settings,
+            );
+            const finalParams: ISCodeFormatterFormatParams =
+                __SCodeFormatterFormatParamsInterface.apply(params);
+
+            const formattedFiles = [];
+
+            let finalGlob = finalParams.glob;
+
+            const handledExtensions = this.constructor.getHandledExtensions();
+            if (finalParams.glob.match(/\/\*$/)) {
+                finalGlob += `.{${handledExtensions.join(',')}}`;
+            }
+
+            if (finalSettings.log.summary) {
+                console.log(
+                    `<yellow>○</yellow> Glob              : <yellow>${finalGlob}</yellow>`,
                 );
-                const finalParams: ISCodeFormatterFormatParams =
-                    __SCodeFormatterFormatParamsInterface.apply(params);
+                console.log(
+                    `<yellow>○</yellow> Input directory   : <cyan>${finalParams.inDir.replace(
+                        `${__packageRootDir()}/`,
+                        '',
+                    )}</cyan>`,
+                );
+                console.log(
+                    `<yellow>○</yellow> Watch             : ${
+                        finalParams.watch
+                            ? `<green>true</green>`
+                            : `<red>false</red>`
+                    }`,
+                );
+                console.log(
+                    `<yellow>○</yellow> Format initial    : ${
+                        finalParams.formatInitial
+                            ? `<green>true</green>`
+                            : `<red>false</red>`
+                    }`,
+                );
 
-                const formattedFiles = [];
-
-                let finalGlob = finalParams.glob;
-
-                const handledExtensions =
-                    this.constructor.getHandledExtensions();
-                if (finalParams.glob.match(/\/\*$/)) {
-                    finalGlob += `.{${handledExtensions.join(',')}}`;
+                if (finalParams.watch) {
+                    console.log(
+                        `<yellow>[watch]</yellow> Watching for file changes...`,
+                    );
                 }
+            }
 
-                if (finalSettings.log.summary) {
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `<yellow>○</yellow> Glob              : <yellow>${finalGlob}</yellow>`,
-                    });
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `<yellow>○</yellow> Input directory   : <cyan>${finalParams.inDir.replace(
-                            `${__packageRootDir()}/`,
-                            '',
-                        )}</cyan>`,
-                    });
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `<yellow>○</yellow> Watch             : ${
-                            finalParams.watch
-                                ? `<green>true</green>`
-                                : `<red>false</red>`
-                        }`,
-                    });
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `<yellow>○</yellow> Format initial    : ${
-                            finalParams.formatInitial
-                                ? `<green>true</green>`
-                                : `<red>false</red>`
-                        }`,
-                    });
+            // watch using chokidar
+            const filesPromise = __getFiles(finalGlob, {
+                cwd: finalParams.inDir,
+                ignoreInitial: !finalParams.formatInitial,
+                watch: finalParams.watch,
+            });
 
-                    if (finalParams.watch) {
-                        emit('log', {
-                            type: __SLog.TYPE_INFO,
-                            value: `<yellow>[watch]</yellow> Watching for file changes...`,
-                        });
+            // handle no watch
+            filesPromise.then(() => {
+                resolve(formattedFiles);
+            });
+
+            // save all the file paths that has just been savec by the formatter
+            // to avoid process it over and over...
+            const savedStack: string[] = [];
+
+            // listen for files change and add
+            filesPromise.on(
+                'add,change',
+                async ({ file: filePath, resolve: resolveFile }) => {
+                    // avoid to process in loop the same file saved over and over
+                    const savedFileIdx = savedStack.indexOf(filePath);
+                    if (savedFileIdx !== -1) {
+                        return;
                     }
-                }
 
-                // watch using chokidar
-                const filesPromise = __getFiles(finalGlob, {
-                    cwd: finalParams.inDir,
-                    ignoreInitial: !finalParams.formatInitial,
-                    watch: finalParams.watch,
-                });
+                    // get the file extension
+                    let extension = __path.extname(filePath).replace(/^\./, '');
 
-                // handle no watch
-                filesPromise.then(() => {
-                    resolve(formattedFiles);
-                });
+                    // get the relative to the package root file path
+                    let relFilePath = __path.relative(
+                        __packageRootDir(),
+                        filePath,
+                    );
 
-                // save all the file paths that has just been savec by the formatter
-                // to avoid process it over and over...
-                const savedStack: string[] = [];
+                    // get the formatter for this file
+                    const formatter =
+                        SCodeFormatter.getFormatterForExtension(extension);
 
-                // listen for files change and add
-                filesPromise.on(
-                    'add,change',
-                    async ({ file: filePath, resolve: resolveFile }) => {
-                        // avoid to process in loop the same file saved over and over
-                        const savedFileIdx = savedStack.indexOf(filePath);
-                        if (savedFileIdx !== -1) {
-                            return;
-                        }
+                    const duration = new __SDuration();
 
-                        // get the file extension
-                        let extension = __path
-                            .extname(filePath)
-                            .replace(/^\./, '');
+                    let code;
 
-                        // get the relative to the package root file path
-                        let relFilePath = __path.relative(
-                            __packageRootDir(),
-                            filePath,
+                    // grab the file content
+                    try {
+                        code = __fs.readFileSync(filePath, 'utf-8').toString();
+                    } catch (e) {
+                        return resolveFile();
+                    }
+
+                    // get the appropriate formatter for this extension
+                    if (!formatter) {
+                        console.log(
+                            `<yellow>[format]</yellow> No formatter registered for the "<magenta>.${extension}</magenta>" files`,
                         );
 
-                        // get the formatter for this file
-                        const formatter =
-                            SCodeFormatter.getFormatterForExtension(extension);
+                        // add in stach
+                        formattedFiles.push(__SFile.new(filePath));
 
-                        const duration = new __SDuration();
-
-                        let code;
-
-                        // grab the file content
-                        try {
-                            code = __fs
-                                .readFileSync(filePath, 'utf-8')
-                                .toString();
-                        } catch (e) {
-                            return resolveFile();
+                        // resolve file
+                        resolveFile();
+                    } else {
+                        if (finalSettings.log.verbose) {
+                            console.log(
+                                `<yellow>[format]</yellow> Formatting file "<cyan>${relFilePath}</cyan>"`,
+                            );
                         }
-
-                        // get the appropriate formatter for this extension
-                        if (!formatter) {
-                            emit('log', {
-                                type: __SLog.TYPE_WARN,
-                                value: `<yellow>[format]</yellow> No formatter registered for the "<magenta>.${extension}</magenta>" files`,
+                        try {
+                            // apply the formatter on the file content
+                            const result = await formatter.format(code, {
+                                filePath: filePath,
+                                extension,
                             });
+
+                            // avoid process the same file more than 1x by second
+                            // this is to avoid issues with multiple formatt process that might
+                            // save each in their corner and enter in a loop of formatting...
+                            savedStack.push(filePath);
+                            setTimeout(() => {
+                                const savedFileIdx =
+                                    savedStack.indexOf(filePath);
+                                if (savedFileIdx !== -1) {
+                                    // remove the file for next process
+                                    savedStack.splice(savedFileIdx, 1);
+                                }
+                            }, finalSettings.timeoutBetweenSameFileProcess);
+
+                            // write file back with formatted code
+                            __fs.writeFileSync(filePath, result.code, 'utf-8');
 
                             // add in stach
                             formattedFiles.push(__SFile.new(filePath));
 
-                            // resolve file
-                            resolveFile();
-                        } else {
                             if (finalSettings.log.verbose) {
-                                emit('log', {
+                                console.log({
+                                    clear: 1,
                                     type: __SLog.TYPE_INFO,
-                                    value: `<yellow>[format]</yellow> Formatting file "<cyan>${relFilePath}</cyan>"`,
+                                    value: `<green>[format]</green> File "<cyan>${relFilePath}</cyan>" formatted <green>successfully</green> in <yellow>${
+                                        duration.end().formatedDuration
+                                    }</yellow>`,
                                 });
                             }
-                            try {
-                                // apply the formatter on the file content
-                                const result = await formatter.format(code, {
-                                    filePath: filePath,
-                                    extension,
-                                });
-
-                                // avoid process the same file more than 1x by second
-                                // this is to avoid issues with multiple formatt process that might
-                                // save each in their corner and enter in a loop of formatting...
-                                savedStack.push(filePath);
-                                setTimeout(() => {
-                                    const savedFileIdx =
-                                        savedStack.indexOf(filePath);
-                                    if (savedFileIdx !== -1) {
-                                        // remove the file for next process
-                                        savedStack.splice(savedFileIdx, 1);
-                                    }
-                                }, finalSettings.timeoutBetweenSameFileProcess);
-
-                                // write file back with formatted code
-                                __fs.writeFileSync(
-                                    filePath,
-                                    result.code,
-                                    'utf-8',
-                                );
-
-                                // add in stach
-                                formattedFiles.push(__SFile.new(filePath));
-
-                                if (finalSettings.log.verbose) {
-                                    emit('log', {
-                                        clear: 1,
-                                        type: __SLog.TYPE_INFO,
-                                        value: `<green>[format]</green> File "<cyan>${relFilePath}</cyan>" formatted <green>successfully</green> in <yellow>${
-                                            duration.end().formatedDuration
-                                        }</yellow>`,
-                                    });
-                                }
-                            } catch (e) {
-                                console.error(e);
-                                emit('log', {
-                                    type: __SLog.TYPE_ERROR,
-                                    value: e.toString(),
-                                });
-                            }
-                            // resole file
-                            resolveFile();
+                        } catch (e) {
+                            console.error(e);
                         }
-                    },
-                );
-            },
-            {
-                eventEmitter: {
-                    bind: this,
+                        // resole file
+                        resolveFile();
+                    }
                 },
-            },
-        );
+            );
+        });
     }
 }
 

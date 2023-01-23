@@ -1,7 +1,5 @@
 // @ts-nocheck
 
-import __SPromise from '@coffeekraken/s-promise';
-
 import { __addEventListenerOnce } from '@coffeekraken/sugar/dom';
 
 /**
@@ -15,7 +13,7 @@ import { __addEventListenerOnce } from '@coffeekraken/sugar/dom';
  * Detect when animation ends
  *
  * @param    {HTMLElement}    elm    The element to listen on
- * @return   {SPromise<HTMLElement>}                  A promise that will be resolved once the animation has ended
+ * @return   {Promise<HTMLElement>}                  A promise that will be resolved once the animation has ended
  *
  * @todo      tests
  *
@@ -28,8 +26,8 @@ import { __addEventListenerOnce } from '@coffeekraken/sugar/dom';
  */
 export default function __whenAnimationEnd(
     $elm: HTMLElement,
-): __SPromise<HTMLElement> {
-    return new __SPromise(({ resolve }) => {
+): Promise<HTMLElement> {
+    return new Promise((resolve) => {
         __addEventListenerOnce($elm, 'animationend', (e) => {
             resolve($elm);
         });

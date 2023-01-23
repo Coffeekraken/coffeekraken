@@ -1,14 +1,12 @@
 import __SBench from '@coffeekraken/s-bench';
 import __SDocblock from '@coffeekraken/s-docblock';
 import __SDocmap from '@coffeekraken/s-docmap';
-import __SLog from '@coffeekraken/s-log';
-import __SPromise from '@coffeekraken/s-promise';
 import __scrapeUrl from '@coffeekraken/sugar/node/og/scrapeUrl';
 import { __packageJsonSync } from '@coffeekraken/sugar/package';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 
 export default function docmapApiData({ req, res, pageConfig }) {
-    return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+    return new Promise(async (resolve, reject) => {
         if (!req.params.namespace) {
             throw new Error(
                 `[SFrontendServer.docmapApiData] Missing "namespace" parameter from the url...`,
@@ -66,10 +64,9 @@ export default function docmapApiData({ req, res, pageConfig }) {
         if (docblocks.length) {
             if (docblocks[0].see) {
                 for (let i = 0; i < docblocks[0].see.length; i++) {
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `<yellow>[og]</yellow> Scraping opengraph from url "<cyan>${docblocks[0].see[i].url}</cyan>"`,
-                    });
+                    console.log(
+                        `<yellow>[og]</yellow> Scraping opengraph from url "<cyan>${docblocks[0].see[i].url}</cyan>"`,
+                    );
                     docblocks[0].see[i].og = await __scrapeUrl(
                         docblocks[0].see[i].url,
                     );

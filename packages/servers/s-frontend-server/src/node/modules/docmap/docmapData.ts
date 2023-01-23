@@ -1,10 +1,8 @@
 import __SDocmap from '@coffeekraken/s-docmap';
-import __SEnv from '@coffeekraken/s-env';
 import __SMarkdownBuilder from '@coffeekraken/s-markdown-builder';
-import __SPromise from '@coffeekraken/s-promise';
 
 export default function docmapData({ req, res, pageConfig }) {
-    return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+    return new Promise(async (resolve) => {
         // building the namespace with the passed
         // :organisation and :package params in the url
         let namespaceAr = [];
@@ -52,9 +50,6 @@ export default function docmapData({ req, res, pageConfig }) {
                     target: 'html',
                     save: false,
                 });
-                if (__SEnv.is('verbose')) {
-                    pipe(markdownResPromise);
-                }
                 const markdownRes = await markdownResPromise;
 
                 if (!markdownRes.length) {

@@ -133,7 +133,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
 
     /**
      * @name      _processPromise
-     * @type      ISPromise
+     * @type      Promise
      * @private
      *
      * Store the current process promise returned by the ```spawn``` function
@@ -141,7 +141,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * @since     2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    _processPromise?: __SPromise;
+    _processPromise?: Promise;
 
     /**
      * @name					from
@@ -152,13 +152,13 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * This static method allows you to pass arguments like:
      * - file path: Will require it, check what's returned from and instanciate an SProcess depending on that
      * - command string: Will instanciate a new SCommandProcess instance and returns it for you to run it
-     * - function: Will execute the function and instanciate the proper SPromise instance type depending on the returned value
-     * - SPromise instance: Will simply wrap the SPromise  instance inside an SProcess one and returns you this new SProcess instance
+     * - function: Will execute the function and instanciate the proper Promise instance type depending on the returned value
+     * - Promise instance: Will simply wrap the Promise  instance inside an SProcess one and returns you this new SProcess instance
      * - SProcess based class: This make not so much sens but at least you can rely on this method to instanciate event an SProcess based class
      * Once you get the proper instance back, you can use it the same as an SProcess based class instance and use the ```run``` method to
      * execute your process
      *
-     * @param         {string|function|SPromise|SProcess}       what      The value with which you want to get an SProcess based instance back
+     * @param         {string|function|Promise|SProcess}       what      The value with which you want to get an SProcess based instance back
      * @param         {Partial<ISProcessSettings>}      [settings={}]     Some settings to configure your new SProcess based class instance
      * @return        {SProcess}              An SProcess based class instance that you can use to execute your process
      *
@@ -166,7 +166,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static async from(
-        what: string | Function | Promise<any> | __SPromise | SProcess,
+        what: string | Function | Promise<any> | SProcess,
         settings?: Partial<ISProcessSettings>,
     ): Promise<SProcess> {
         if (__isClass(what) && __extendsStack(what)['SProcess']) {
@@ -245,8 +245,8 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
                 `<red>[SProcess.from]</red> Sorry but the passed "<magenta>what</magenta>" argument must be either:`,
                 `- A <green>command string</green> like "<cyan>ls -la</cyan>"`,
                 `- A valid <green>file path</green> that exports <green>one of these accepted types</green>`,
-                `- A <yellow>function</yellow> that return a valid <green>Promise</green> instance or a valid <green>SPromise</green> instance`,
-                `- A <green>Promise</green> or <green>SPromise</green> instance`,
+                `- A <yellow>function</yellow> that return a valid <green>Promise</green> instance or a valid <green>Promise</green> instance`,
+                `- A <green>Promise</green> instance`,
                 `- An <green>SProcess</green> based class`,
             ].join('\n'),
         );
@@ -288,7 +288,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      *
      * @param     {String|Record<string, any>}        [paramsOrStringArgs={}]     Either a cli string arguments like "--arg1 value1 --arg2 value2" that will be transformed to an object using the "params" interface, or directly an object representing your parameters
      * @param     {Partial<ISProcessSettings>}        [settings={}]             Some process settings to override if needed
-     * @return    {SPromise}                                                  An SPromise instance through which you can listen for logs, and that will be resolved once the process is over
+     * @return    {Promise}                                                  An Promise instance through which you can listen for logs, and that will be resolved once the process is over
      *
      * @since     2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -377,8 +377,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      *
      * This is the method you have to implement in you SProcess class. It will be called
      * when you call the ```run``` method with the params, etc...
-     * You have to return an SPromise instance in order that the SProcess class is able to keep
-     * track of your process state, logs, etc...
+     * You have to return an Promise instance
      *
      * @since     2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -410,7 +409,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      *
      * @param     {String|Record<string, any>}        [paramsOrStringArgs={}]     Either a cli string arguments like "--arg1 value1 --arg2 value2" that will be transformed to an object using the "params" interface, or directly an object representing your parameters
      * @param     {Partial<ISProcessSettings>}        [settings={}]             Some process settings to override if needed
-     * @return    {SPromise}                                                  An SPromise instance through which you can listen for logs, and that will be resolved once the process is over
+     * @return    {Promise}                                                  An Promise instance through which you can listen for logs, and that will be resolved once the process is over
      *
      * @since     2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

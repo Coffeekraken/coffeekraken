@@ -1,9 +1,8 @@
 import __SBench from '@coffeekraken/s-bench';
 import __SDocmap from '@coffeekraken/s-docmap';
-import __SPromise from '@coffeekraken/s-promise';
 
 export default function docmapJsonHandler({ req, res, pageConfig }) {
-    return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+    return new Promise(async (resolve) => {
         const bench = new __SBench('data.docmapJsonData');
 
         bench.step('beforeDocmapRead');

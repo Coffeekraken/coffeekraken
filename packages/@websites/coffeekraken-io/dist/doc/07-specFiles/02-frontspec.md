@@ -32,6 +32,8 @@ This file is separated by purpose in an global object like so:
     
 -   **Assets**: Specify the assets to load like the css, js, etc...
     
+-   **Theme**: Specify the theme used by default
+    
 -   **Media**: Specify the responsive specifications like the queries (breakpoints), default action, etc...
     
 -   **Views**: Specify the views specifications like where to find them, etc...
@@ -46,7 +48,7 @@ This file is separated by purpose in an global object like so:
     
 -   **Lod**: Specify the lod (level of details) settings
     
--   **Classmap**: Specify the classmap settings
+-   **Partytown**: Specify if the project make uses of &quot;partytown&quot; and his settings
     
 -   **Font**: Specify the fonts specifications like the font-faces available, sizes, etc...
     
@@ -58,6 +60,7 @@ This file is separated by purpose in an global object like so:
 export default {
   metas: {},
   assets: {},
+  theme: {},
   media: {},
   views: {},
   specs: {},
@@ -65,7 +68,7 @@ export default {
   margin: {},
   padding: {},
   lod: {},
-  classmap: {},
+  partytown: {},
   font: {},
   typo: {},
   layout: {},
@@ -111,7 +114,7 @@ Specify the assets to load like the css, js, etc...
 ```js
 export default {
   viteClient: {
-    src: '\n            <script>\n            document.addEventListener("DOMContentLoaded", function() {\n                var $script = document.createElement("script");\n                var ip = "192.168.1.104";\n                $script.setAttribute("type", "module");\n                $script.setAttribute("src", "http://0.0.0.0:3000/@vite/client");\n                document.body.appendChild($script);\n            });\n            </script>\n        ',
+    src: '\n            <script>\n            document.addEventListener("DOMContentLoaded", function() {\n                var $script = document.createElement("script");\n                var ip = "192.168.201.109";\n                $script.setAttribute("type", "module");\n                $script.setAttribute("src", "http://0.0.0.0:3000/@vite/client");\n                document.body.appendChild($script);\n            });\n            </script>\n        ',
   },
   dev: {
     type: 'module',
@@ -120,6 +123,29 @@ export default {
     env: 'development',
   },
   style: { id: 'global', defer: true, src: '/dist/css/index.css' },
+};
+
+```
+
+
+## Theme
+
+Specify the theme used by default
+
+```js
+export default {
+  theme: 'default',
+  variant: 'dark',
+  themes: {
+    'default-light': {
+      title: 'Default light',
+      description: 'Nice and elegant light theme',
+    },
+    'default-dark': {
+      title: 'Default dark',
+      description: 'Nice and elegant dark theme',
+    },
+  },
 };
 
 ```
@@ -204,8 +230,7 @@ Specify some google specifications like the GTM/GA to use, etc...
 
 ```js
 export default {
-  gtm: null,
-  ga: 'UA-91271113-1',
+  gtm: 'GTM-K4LMN8Q',
   map: { apiKey: 'AIzaSyDzFfEzhmYXRTlONUCtMWQ88uHJhsbtXY4' },
 };
 
@@ -281,15 +306,27 @@ export default {
 ```
 
 
-## Classmap
+## Partytown
 
-Specify the classmap settings
+Specify if the project make uses of &quot;partytown&quot; and his settings
 
 ```js
 export default {
   enabled: true,
-  url: '/classmap.json',
-  path: './classmap.json',
+  forward: [
+    'dataLayer.push',
+    'fbq',
+    'freshpaint.addPageviewProperties',
+    'freshpaint.identify',
+    'freshpaint.track',
+    '_hsq.push',
+    'Intercom',
+    '_learnq.push',
+    'ttq.track',
+    'ttq.page',
+    'ttq.load',
+    'mixpanel.track',
+  ],
 };
 
 ```
@@ -358,6 +395,8 @@ export default {
   h1: {
     label: 'H1',
     group: 'style',
+    button: [],
+    editor: [],
     style: {
       display: 'block',
       fontFamily: '"Titillium Web"',
@@ -370,6 +409,8 @@ export default {
   h2: {
     label: 'H2',
     group: 'style',
+    button: [],
+    editor: [],
     style: {
       display: 'block',
       fontFamily: '"Titillium Web"',
@@ -382,6 +423,8 @@ export default {
   h3: {
     label: 'H3',
     group: 'style',
+    button: [],
+    editor: [],
     style: {
       display: 'block',
       fontFamily: '"Titillium Web"',
@@ -394,6 +437,8 @@ export default {
   h4: {
     label: 'H4',
     group: 'style',
+    button: [],
+    editor: [],
     style: {
       display: 'block',
       fontFamily: '"Titillium Web"',
@@ -406,6 +451,8 @@ export default {
   h5: {
     label: 'H5',
     group: 'style',
+    button: [],
+    editor: [],
     style: {
       display: 'block',
       fontFamily: '"Titillium Web"',
@@ -418,6 +465,8 @@ export default {
   h6: {
     label: 'H6',
     group: 'style',
+    button: [],
+    editor: [],
     style: {
       display: 'block',
       fontFamily: '"Titillium Web"',
@@ -429,6 +478,8 @@ export default {
   p: {
     label: 'Paragraph',
     group: 'style',
+    button: [],
+    editor: [],
     style: {
       display: 'block',
       fontFamily: '"Titillium Web"',
@@ -442,6 +493,8 @@ export default {
   lead: {
     label: 'Lead paragraph',
     group: 'style',
+    button: [],
+    editor: [],
     style: {
       display: 'block',
       fontFamily: '"Titillium Web"',
@@ -452,8 +505,10 @@ export default {
     },
   },
   hr: {
-    label: '------',
+    label: '--',
     group: 'block',
+    button: { label: '--' },
+    editor: [],
     style: {
       display: 'block',
       color: 'hsla(212,14,50,1)',
@@ -464,11 +519,13 @@ export default {
   pre: {
     label: 'Pre',
     group: 'text',
+    button: [],
+    editor: [],
     style: {
       display: 'block',
       fontFamily: 'Menlo, Monaco, Consolas, Courier New, monospace',
-      color: '#596573',
-      backgroundColor: '#fcfcfd',
+      color: '#f3f5f6',
+      backgroundColor: '#373f48',
       lineHeight: 1.5,
       paddingInline: '1.5rem',
       paddingBlock: '0.75rem',
@@ -478,14 +535,16 @@ export default {
     },
   },
   code: {
-    label: '</>',
+    label: 'Code',
     group: 'text',
+    button: { label: '</>' },
+    editor: [],
     style: {
       display: 'inline-block',
       fontFamily: 'Menlo, Monaco, Consolas, Courier New, monospace',
-      color: '#596573',
+      color: '#f3f5f6',
       lineHeight: 1.1,
-      backgroundColor: '#fffefa',
+      backgroundColor: '#805e00',
       borderRadius: '4px',
       paddingInline: '0.375rem',
       paddingBlock: '0rem',
@@ -494,109 +553,153 @@ export default {
   blockquote: {
     label: 'Blockquote',
     group: 'block',
+    button: {
+      label:
+        '<svg viewBox="0 0 20 20"><path d="M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z"></path></svg>',
+    },
+    editor: {
+      style: { paddingInlineStart: 1.5, borderLeft: '1px solid #000' },
+    },
     style: {
       display: 'block',
       fontFamily: '"Palatino, Times, Georgia, serif"',
       marginBottom: '3.25rem',
     },
-    editorStyle: { paddingInlineStart: '1.5rem', borderLeft: '1px solid #000' },
   },
   a: {
     label: 'Link',
     group: 'text',
+    button: {
+      label:
+        '<svg viewBox="0 0 20 20"><path d="m11.077 15 .991-1.416a.75.75 0 1 1 1.229.86l-1.148 1.64a.748.748 0 0 1-.217.206 5.251 5.251 0 0 1-8.503-5.955.741.741 0 0 1 .12-.274l1.147-1.639a.75.75 0 1 1 1.228.86L4.933 10.7l.006.003a3.75 3.75 0 0 0 6.132 4.294l.006.004zm5.494-5.335a.748.748 0 0 1-.12.274l-1.147 1.639a.75.75 0 1 1-1.228-.86l.86-1.23a3.75 3.75 0 0 0-6.144-4.301l-.86 1.229a.75.75 0 0 1-1.229-.86l1.148-1.64a.748.748 0 0 1 .217-.206 5.251 5.251 0 0 1 8.503 5.955zm-4.563-2.532a.75.75 0 0 1 .184 1.045l-3.155 4.505a.75.75 0 1 1-1.229-.86l3.155-4.506a.75.75 0 0 1 1.045-.184z"></path></svg>',
+    },
+    editor: [],
     style: { color: '#ffbb00', textDecoration: 'underline' },
   },
   quote: {
     label: 'Quote',
     group: 'text',
+    button: {
+      label:
+        '<svg viewBox="0 0 20 20"><path d="M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z"></path></svg>',
+    },
+    editor: [],
     style: {
       fontFamily: '"Palatino, Times, Georgia, serif"',
       marginBottom: '3.25rem',
     },
   },
   bold: {
-    label: 'B',
+    label: 'Bold',
     group: 'text',
+    button: { label: 'B', style: { fontWeight: 'bolder' } },
+    editor: [],
     style: { fontWeight: 'bold' },
-    buttonStyle: { fontWeight: 'bolder' },
   },
   italic: {
-    label: 'I',
+    label: 'Italic',
     group: 'text',
+    button: { label: 'I', style: { fontStyle: 'italic' } },
+    editor: [],
     style: { fontStyle: 'italic' },
-    buttonStyle: { fontStyle: 'italic' },
   },
   large: {
     label: 'Large',
     group: 'text',
+    button: { label: 'A', style: { fontSize: '1.01em' } },
+    editor: [],
     style: { fontSize: '1.1em' },
-    buttonStyle: { fontSize: '1.01em' },
   },
   larger: {
     label: 'Larger',
     group: 'text',
+    button: { label: 'A', style: { fontSize: '1.02em' } },
+    editor: [],
     style: { fontSize: '1.2em' },
-    buttonStyle: { fontSize: '1.02em' },
   },
   largest: {
     label: 'Largest',
     group: 'text',
+    button: { label: 'A', style: { fontSize: '1.03em' } },
+    editor: [],
     style: { fontSize: '1.3em' },
-    buttonStyle: { fontSize: '1.03em' },
   },
   small: {
     label: 'Small',
     group: 'text',
+    button: { label: 'A', style: { fontSize: '0.99em' } },
+    editor: [],
     style: { fontSize: '0.9em' },
-    buttonStyle: { fontSize: '0.99em' },
   },
   smaller: {
     label: 'Smaller',
     group: 'text',
+    button: { label: 'A', style: { fontSize: '0.98em' } },
+    editor: [],
     style: { fontSize: '0.8em' },
-    buttonStyle: { fontSize: '0.98em' },
   },
   smallest: {
     label: 'Smallest',
     group: 'text',
+    button: { label: 'A', style: { fontSize: '0.97em' } },
+    editor: [],
     style: { fontSize: '0.7em' },
-    buttonStyle: { fontSize: '0.97em' },
   },
-  mark: { label: 'Mark', group: 'text', style: { backgroundColor: '#ffbb00' } },
-  del: {
-    label: 'Del',
+  mark: {
+    label: 'Mark',
     group: 'text',
+    button: { label: 'M' },
+    editor: [],
+    style: { backgroundColor: '#ffbb00' },
+  },
+  del: {
+    label: 'Deleted',
+    group: 'text',
+    button: { label: 'D', style: { textDecoration: 'line-through' } },
+    editor: [],
     style: { textDecoration: 'line-through' },
-    buttonStyle: { textDecoration: 'line-through' },
   },
   ins: {
-    label: 'U',
+    label: 'Inserted',
     group: 'text',
+    button: { label: 'U', style: { textDecoration: 'underline' } },
+    editor: [],
     style: { textDecoration: 'underline' },
-    buttonStyle: { textDecoration: 'underline' },
   },
   sub: {
-    label: 'Sub',
+    label: 'Subscript',
     group: 'text',
+    button: {
+      label: 'Sub',
+      style: { verticalAlign: 'sub', fontSize: '0.6em' },
+    },
+    editor: [],
     style: { verticalAlign: 'sub', fontSize: '0.6em' },
-    buttonStyle: { verticalAlign: 'sub', fontSize: '0.6em' },
   },
   sup: {
-    label: 'Sup',
+    label: 'Superscript',
     group: 'text',
+    button: {
+      label: 'Sup',
+      style: { verticalAlign: 'sup', fontSize: '0.6em' },
+    },
+    editor: [],
     style: { verticalAlign: 'sup', fontSize: '0.6em' },
-    buttonStyle: { verticalAlign: 'sup', fontSize: '0.6em' },
   },
   base: {
     label: 'Base',
     group: 'color',
     type: 'color',
+    button: [],
+    editor: [],
     style: { color: 'hsla(212,14,50,1)' },
   },
   baseGradient: {
     label: 'Base gradient',
     group: 'color',
     type: 'color',
+    button: [],
+    editor: [],
     style: {
       backgroundSize: '100%',
       '-webkitBackgroundClip': 'text',
@@ -611,12 +714,16 @@ export default {
     label: 'Main',
     group: 'color',
     type: 'color',
+    button: [],
+    editor: [],
     style: { color: 'hsla(212,14,50,1)' },
   },
   mainGradient: {
     label: 'Main gradient',
     group: 'color',
     type: 'color',
+    button: [],
+    editor: [],
     style: {
       backgroundSize: '100%',
       '-webkitBackgroundClip': 'text',
@@ -631,12 +738,16 @@ export default {
     label: 'Accent',
     group: 'color',
     type: 'color',
+    button: [],
+    editor: [],
     style: { color: '#ffbb00' },
   },
   accentGradient: {
     label: 'Accent gradient',
     group: 'color',
     type: 'color',
+    button: [],
+    editor: [],
     style: {
       backgroundSize: '100%',
       '-webkitBackgroundClip': 'text',
@@ -650,12 +761,16 @@ export default {
     label: 'Complementary',
     group: 'color',
     type: 'color',
+    button: [],
+    editor: [],
     style: { color: '#5100ff' },
   },
   complementaryGradient: {
     label: 'Complementary gradient',
     group: 'color',
     type: 'color',
+    button: [],
+    editor: [],
     style: {
       backgroundSize: '100%',
       '-webkitBackgroundClip': 'text',
@@ -669,12 +784,16 @@ export default {
     label: 'Success',
     group: 'color',
     type: 'color',
+    button: [],
+    editor: [],
     style: { color: '#91ff00' },
   },
   successGradient: {
     label: 'Success gradient',
     group: 'color',
     type: 'color',
+    button: [],
+    editor: [],
     style: {
       backgroundSize: '100%',
       '-webkitBackgroundClip': 'text',
@@ -688,12 +807,16 @@ export default {
     label: 'Warning',
     group: 'color',
     type: 'color',
+    button: [],
+    editor: [],
     style: { color: '#ffd500' },
   },
   warningGradient: {
     label: 'Warning gradient',
     group: 'color',
     type: 'color',
+    button: [],
+    editor: [],
     style: {
       backgroundSize: '100%',
       '-webkitBackgroundClip': 'text',
@@ -707,12 +830,16 @@ export default {
     label: 'Error',
     group: 'color',
     type: 'color',
+    button: [],
+    editor: [],
     style: { color: '#ff003c' },
   },
   errorGradient: {
     label: 'Error gradient',
     group: 'color',
     type: 'color',
+    button: [],
+    editor: [],
     style: {
       backgroundSize: '100%',
       '-webkitBackgroundClip': 'text',
@@ -726,12 +853,16 @@ export default {
     label: 'Info',
     group: 'color',
     type: 'color',
+    button: [],
+    editor: [],
     style: { color: '#00ffff' },
   },
   infoGradient: {
     label: 'Info gradient',
     group: 'color',
     type: 'color',
+    button: [],
+    editor: [],
     style: {
       backgroundSize: '100%',
       '-webkitBackgroundClip': 'text',

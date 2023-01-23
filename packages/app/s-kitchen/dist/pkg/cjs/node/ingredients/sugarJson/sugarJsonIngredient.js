@@ -12,7 +12,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const s_log_1 = __importDefault(require("@coffeekraken/s-log"));
 const fs_1 = require("@coffeekraken/sugar/fs");
 const path_1 = require("@coffeekraken/sugar/path");
 const fs_2 = __importDefault(require("fs"));
@@ -31,7 +30,7 @@ const sugarJsonIngredient = {
     id: 'sugarJson',
     description: 'Add the default <cyan>sugar.json</cyan> in your project',
     projectTypes: ['*'],
-    add({ ask, log, emit, context }) {
+    add({ context }) {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function* () {
             const packageRoot = (0, path_1.__packageRootDir)();
@@ -45,13 +44,10 @@ const sugarJsonIngredient = {
                     recipe: (_b = context.recipe) !== null && _b !== void 0 ? _b : 'generic',
                 });
             }
-            emit('log', {
-                type: s_log_1.default.TYPE_INFO,
-                value: `<yellow>[sugarJson]</yellow> "<cyan>sugar.json</cyan>" file added <green>successfully</green> with the recipe <cyan>generic</cyan>`,
-            });
+            console.log(`<yellow>[sugarJson]</yellow> "<cyan>sugar.json</cyan>" file added <green>successfully</green> with the recipe <cyan>generic</cyan>`);
             return true;
         });
     },
 };
 exports.default = sugarJsonIngredient;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsZ0VBQXlDO0FBQ3pDLCtDQUF5RTtBQUN6RSxtREFBNEQ7QUFDNUQsNENBQXNCO0FBR3RCOzs7Ozs7Ozs7O0dBVUc7QUFDSCxNQUFNLG1CQUFtQixHQUF3QjtJQUM3QyxFQUFFLEVBQUUsV0FBVztJQUNmLFdBQVcsRUFBRSx5REFBeUQ7SUFDdEUsWUFBWSxFQUFFLENBQUMsR0FBRyxDQUFDO0lBQ2IsR0FBRyxDQUFDLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxJQUFJLEVBQUUsT0FBTyxFQUFFOzs7WUFDakMsTUFBTSxXQUFXLEdBQUcsSUFBQSx1QkFBZ0IsR0FBRSxDQUFDO1lBRXZDLElBQUksWUFBSSxDQUFDLFVBQVUsQ0FBQyxHQUFHLFdBQVcsYUFBYSxDQUFDLEVBQUU7Z0JBQzlDLE1BQU0sSUFBSSxHQUFHLElBQUEsbUJBQWMsRUFBQyxHQUFHLFdBQVcsYUFBYSxDQUFDLENBQUM7Z0JBQ3pELElBQUksQ0FBQyxNQUFNLEdBQUcsTUFBQSxPQUFPLENBQUMsTUFBTSxtQ0FBSSxTQUFTLENBQUM7Z0JBQzFDLElBQUEsb0JBQWUsRUFBQyxHQUFHLFdBQVcsYUFBYSxFQUFFLElBQUksQ0FBQyxDQUFDO2FBQ3REO2lCQUFNO2dCQUNILElBQUEsb0JBQWUsRUFBQyxHQUFHLFdBQVcsYUFBYSxFQUFFO29CQUN6QyxNQUFNLEVBQUUsTUFBQSxPQUFPLENBQUMsTUFBTSxtQ0FBSSxTQUFTO2lCQUN0QyxDQUFDLENBQUM7YUFDTjtZQUVELElBQUksQ0FBQyxLQUFLLEVBQUU7Z0JBQ1IsSUFBSSxFQUFFLGVBQU0sQ0FBQyxTQUFTO2dCQUN0QixLQUFLLEVBQUUsb0lBQW9JO2FBQzlJLENBQUMsQ0FBQztZQUVILE9BQU8sSUFBSSxDQUFDOztLQUNmO0NBQ0osQ0FBQztBQUNGLGtCQUFlLG1CQUFtQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsK0NBQXlFO0FBQ3pFLG1EQUE0RDtBQUM1RCw0Q0FBc0I7QUFHdEI7Ozs7Ozs7Ozs7R0FVRztBQUNILE1BQU0sbUJBQW1CLEdBQXdCO0lBQzdDLEVBQUUsRUFBRSxXQUFXO0lBQ2YsV0FBVyxFQUFFLHlEQUF5RDtJQUN0RSxZQUFZLEVBQUUsQ0FBQyxHQUFHLENBQUM7SUFDYixHQUFHLENBQUMsRUFBRSxPQUFPLEVBQUU7OztZQUNqQixNQUFNLFdBQVcsR0FBRyxJQUFBLHVCQUFnQixHQUFFLENBQUM7WUFFdkMsSUFBSSxZQUFJLENBQUMsVUFBVSxDQUFDLEdBQUcsV0FBVyxhQUFhLENBQUMsRUFBRTtnQkFDOUMsTUFBTSxJQUFJLEdBQUcsSUFBQSxtQkFBYyxFQUFDLEdBQUcsV0FBVyxhQUFhLENBQUMsQ0FBQztnQkFDekQsSUFBSSxDQUFDLE1BQU0sR0FBRyxNQUFBLE9BQU8sQ0FBQyxNQUFNLG1DQUFJLFNBQVMsQ0FBQztnQkFDMUMsSUFBQSxvQkFBZSxFQUFDLEdBQUcsV0FBVyxhQUFhLEVBQUUsSUFBSSxDQUFDLENBQUM7YUFDdEQ7aUJBQU07Z0JBQ0gsSUFBQSxvQkFBZSxFQUFDLEdBQUcsV0FBVyxhQUFhLEVBQUU7b0JBQ3pDLE1BQU0sRUFBRSxNQUFBLE9BQU8sQ0FBQyxNQUFNLG1DQUFJLFNBQVM7aUJBQ3RDLENBQUMsQ0FBQzthQUNOO1lBRUQsT0FBTyxDQUFDLEdBQUcsQ0FDUCxvSUFBb0ksQ0FDdkksQ0FBQztZQUVGLE9BQU8sSUFBSSxDQUFDOztLQUNmO0NBQ0osQ0FBQztBQUNGLGtCQUFlLG1CQUFtQixDQUFDIn0=

@@ -1,10 +1,9 @@
 // @ts-nocheck
 
-import __SPromise from '@coffeekraken/s-promise';
-import { __dirname } from '@coffeekraken/sugar/fs';
 import { __execPhp } from '@coffeekraken/sugar/exec';
-import __path from 'path';
+import { __dirname } from '@coffeekraken/sugar/fs';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
+import __path from 'path';
 
 /**
  * @name          SDataFilePhp
@@ -49,7 +48,7 @@ export default class SDataFilePhp {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static load(filePath) {
-        return new __SPromise(async ({ resolve }) => {
+        return new Promise(async (resolve) => {
             const data = await __execPhp(
                 __path.resolve(
                     __packageRootDir(__dirname()),

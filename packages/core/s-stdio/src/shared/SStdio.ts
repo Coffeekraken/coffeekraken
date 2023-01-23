@@ -71,7 +71,6 @@ export default class SStdio extends __SClass {
      */
     adapters: ISStdioAdapter[];
 
-
     /**
      * @name    _instanciatedStdio
      * @type    Record<string, SStdio>
@@ -181,7 +180,12 @@ export default class SStdio extends __SClass {
      * @since     2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static new(id: string, sources: ISStdioSource[], adapters: ISStdioAdapter, settings: Partial<ISStdioSettings> = {}) {
+    static new(
+        id: string,
+        sources: ISStdioSource[],
+        adapters: ISStdioAdapter,
+        settings: Partial<ISStdioSettings> = {},
+    ) {
         return new Promise(async (resolve) => {
             // @ts-ignore
             const __new = (await import('./new')).default;
@@ -337,8 +341,8 @@ export default class SStdio extends __SClass {
     registerSource(source: ISStdioSource) {
         // listen for logs
 
-        
         source.on('log', this.log.bind(this));
+        source.on('ask', this.ask.bind(this));
         source.on('ready', () => {
             this.display();
         });
@@ -386,7 +390,7 @@ export default class SStdio extends __SClass {
      * Apply a callback function on each adapters
      */
     _applyOnAdapters(callback: Function): void {
-        this.adapters.forEach(adapter => {
+        this.adapters.forEach((adapter) => {
             callback(adapter);
         });
     }
@@ -405,11 +409,10 @@ export default class SStdio extends __SClass {
      */
     _isClearing = false;
     log(...logObj: ISLog[]) {
-
         for (let i = 0; i < logObj.length; i++) {
             let log = <ISLog>logObj[i];
 
-            if (!log.active) continue;
+            if (!log || !log.active) continue;
 
             // put in buffer if not displayed
             if (!this.isDisplayed() || this._isClearing) {
@@ -427,9 +430,9 @@ export default class SStdio extends __SClass {
                     // @ts-ignore
                     if (!this.clearLast) return;
 
-                    this._applyOnAdapters(adapter => {
+                    this._applyOnAdapters((adapter) => {
                         adapter.clearLast?.();
-                    })
+                    });
 
                     // @ts-ignore
                     this._logBuffer();
@@ -444,7 +447,7 @@ export default class SStdio extends __SClass {
                         `You try to clear the "<yellow>${this.constructor.name}</yellow>" stdio but it does not implements the "<cyan>clear</cyan>" method`,
                     );
                 (async () => {
-                    this._applyOnAdapters(adapter => {
+                    this._applyOnAdapters((adapter) => {
                         adapter.clear?.();
                     });
                     this._isClearing = false;
@@ -452,15 +455,12 @@ export default class SStdio extends __SClass {
                 })();
             }
 
-            const e = new Error();
-            let formattedError = e.stack.toString().split('\n').filter(str => str.trim().match(/^at\s/));
-
             if (!log.group) {
                 log.group = 'Sugar ♥';
             }
 
             // actual log through adapter
-            this._applyOnAdapters(adapter => {
+            this._applyOnAdapters((adapter) => {
                 adapter.log(log);
             });
 
@@ -488,7 +488,7 @@ export default class SStdio extends __SClass {
         let ask = <ISLogAsk>__deepMerge(this.settings.defaultAskObj, askObj);
 
         // @ts-ignore
-        const answer = await this._ask(ask);
+        const answer = await this.adapters[0].ask(ask);
         return answer;
     }
 

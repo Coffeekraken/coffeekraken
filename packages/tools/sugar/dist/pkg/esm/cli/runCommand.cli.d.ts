@@ -1,1 +1,1 @@
-export default function runCommand(stringArgs?: string): any;
+export default function runCommand(stringArgs?: string): Promise<unknown>;

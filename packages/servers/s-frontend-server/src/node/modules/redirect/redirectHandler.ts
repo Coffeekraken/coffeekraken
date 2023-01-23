@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 import __SBench from '@coffeekraken/s-bench';
-import __SPromise from '@coffeekraken/s-promise';
 
 /**
  * @name                redirectHandler
@@ -23,7 +22,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function redirectHandler({ req, res }) {
-    return new __SPromise(async ({ resolve, reject, emit }) => {
+    return new Promise(async (resolve) => {
         const bench = new __SBench('handlers.redirect');
         res.redirect(req.redirect);
         resolve(req.redirect);

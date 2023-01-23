@@ -17,7 +17,7 @@
     max-width: 1280px;
   }
 
-  .s-card_img-container {
+  .s-card_media {
     perspective: 800px;
 
     img {

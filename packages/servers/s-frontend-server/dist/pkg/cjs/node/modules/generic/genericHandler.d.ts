@@ -5,4 +5,4 @@ export default function genericHandler({ req, res, pageConfig, pageFile, fronten
     pageConfig: any;
     pageFile: any;
     frontendServerConfig: any;
-}): any;
+}): Promise<unknown>;

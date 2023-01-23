@@ -40,5 +40,5 @@ export default class SFaviconBuilder extends __SBuilder {
     
     constructor(settings?: Partial<ISFaviconBuilderSettings>);
     
-    _build(params: ISFaviconBuilderBuildParams, settings?: Partial<ISFaviconBuilderSettings>): Promise<ISFaviconBuilderResult>;
+    _build(params: ISFaviconBuilderBuildParams, settings?: Partial<ISFaviconBuilderSettings>): Promise<ISFaviconBuilderResult | void>;
 }

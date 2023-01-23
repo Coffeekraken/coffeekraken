@@ -1,7 +1,5 @@
 // @ts-nocheck
 
-import __SPromise from '@coffeekraken/s-promise';
-
 /**
  * @name      whenScriptLoaded
  * @namespace            js.dom.detect
@@ -34,45 +32,43 @@ import __SPromise from '@coffeekraken/s-promise';
 export default function __whenScriptLoaded(
     $script: HTMLScriptElement,
     cb = null,
-): __SPromise<HTMLScriptElement> {
-    return new __SPromise(
-        ({ resolve, reject, emit }) => {
-            let done = false;
+): Promise<HTMLScriptElement> {
+    const promise = new Promise((resolve, reject) => {
+        let done = false;
 
-            $script.onload = handleLoad;
-            $script.onreadystatechange = handleReadyStateChange;
-            $script.onerror = handleError;
+        $script.onload = handleLoad;
+        $script.onreadystatechange = handleReadyStateChange;
+        $script.onerror = handleError;
 
-            function handleLoad() {
-                if (!done) {
-                    done = true;
-                    if (cb) cb($script);
-                    resolve($script);
+        function handleLoad() {
+            if (!done) {
+                done = true;
+                if (cb) cb($script);
+                resolve($script);
+            }
+        }
+
+        function handleReadyStateChange() {
+            let state;
+            if (!done) {
+                state = $script.readyState;
+                if (state === 'complete') {
+                    handleLoad();
                 }
             }
-
-            function handleReadyStateChange() {
-                let state;
-                if (!done) {
-                    state = $script.readyState;
-                    if (state === 'complete') {
-                        handleLoad();
-                    }
-                }
+        }
+        function handleError(e) {
+            if (!done) {
+                done = true;
+                reject(new Error(e));
             }
-            function handleError(e) {
-                if (!done) {
-                    done = true;
-                    reject(new Error(e));
-                }
-            }
-        },
-        {
-            id: 'whenScriptLoaded',
-        },
-    ).on('finally', () => {
+        }
+    });
+    promise.finally(() => {
         $script.onload = null;
         $script.onreadystatechange = null;
         $script.onerror = null;
     });
+
+    return promise;
 }

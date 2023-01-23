@@ -3069,6 +3069,7 @@ __metadata:
     striptags: ^3.2.0
     tcp-port-used: ^1.0.2
     temp-dir: ^2.0.0
+    term-size: ^3.0.2
     terminal-kit: ^1.49.4
     to-regex: ^3.0.2
     tunnel: ^0.0.6
@@ -19943,6 +19944,13 @@ __metadata:
     temp-dir: ^1.0.0
     uuid: ^3.0.1
   checksum: 8a92a0f57e0ae457dfbc156b14c427b42048a86ca6bade311835cc2aeda61b25b82d688f71f2d663dde6f172f479ed07293b53f7981e41cb6f9120a3eb4fe797
+  languageName: node
+  linkType: hard
+
+"term-size@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "term-size@npm:3.0.2"
+  checksum: 41847f8d7c1d1f80ed6bd2da60281e04901057ea113299873eae30033fbff43840f700feee26679ce66cf168d7eacb8773a78e742bbae46ddaf794a33ff0b0dd
   languageName: node
   linkType: hard
 

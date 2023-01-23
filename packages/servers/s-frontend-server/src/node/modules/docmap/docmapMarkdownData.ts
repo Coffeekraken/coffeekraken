@@ -1,9 +1,8 @@
 import __SDocmap from '@coffeekraken/s-docmap';
 import __SMarkdownBuilder from '@coffeekraken/s-markdown-builder';
-import __SPromise from '@coffeekraken/s-promise';
 
 export default function docmapMarkdownData({ req, res, pageConfig }) {
-    return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+    return new Promise(async (resolve) => {
         let html;
 
         let namespace = req.params.namespace;
@@ -35,13 +34,11 @@ export default function docmapMarkdownData({ req, res, pageConfig }) {
             },
         });
 
-        const markdownRes = await pipe(
-            builder.build({
-                inPath: docmapJson.map[req.params.namespace].path,
-                target: 'html',
-                save: false,
-            }),
-        );
+        const markdownRes = await builder.build({
+            inPath: docmapJson.map[req.params.namespace].path,
+            target: 'html',
+            save: false,
+        });
         if (markdownRes instanceof Error) {
             throw markdownRes;
         }

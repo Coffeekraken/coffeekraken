@@ -1,10 +1,7 @@
 import type { ISBuilderSettings } from '@coffeekraken/s-builder';
 import __SBuilder from '@coffeekraken/s-builder';
-import __SEnv from '@coffeekraken/s-env';
 import __SFile from '@coffeekraken/s-file';
 import __SGlob from '@coffeekraken/s-glob';
-import __SLog from '@coffeekraken/s-log';
-import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __dirname, __getFiles } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
@@ -119,6 +116,7 @@ export interface ISTypescriptBuilderBuildParams {
     platform: 'node' | 'browser';
     declarationFiles: boolean;
     watch: boolean;
+    silent: boolean;
     buildInitial: boolean;
     customSettings: ISTypescriptBuilderCustomSettings;
     exclude: string[];
@@ -154,12 +152,13 @@ export default class STypescriptBuilder extends __SBuilder {
         params?: Partial<ISTypescriptBuilderBuildParams>,
         settings: Partial<ISTypescriptBuilderSettings> = {},
     ): Promise<ISTypescriptBuildTemporaryResult> {
-        return new Promise(async (resolve, reject) => {
+        return new Promise(async (resolve) => {
             if (path.match(/\.ts$/)) {
                 const builder = new STypescriptBuilder(settings ?? {});
 
                 let res;
 
+                // @ts-ignore
                 function remove() {
                     try {
                         __fs.unlinkSync(res.files[0].file.path);
@@ -178,6 +177,7 @@ export default class STypescriptBuilder extends __SBuilder {
                     outDir: __path.dirname(path),
                     formats: [__currentModuleSystem()],
                     buildInitial: true,
+                    silent: true,
                     ...(params ?? {}),
                 });
 
@@ -233,203 +233,175 @@ export default class STypescriptBuilder extends __SBuilder {
     _build(
         params: ISTypescriptBuilderBuildParams,
     ): Promise<ISTypescriptBuilderResult> {
-        return new __SPromise(
-            async ({ resolve, reject, emit, pipe }) => {
-                const {
-                    default: __STypescriptBuilderBuildParamsInterface,
-                    // @ts-ignore
-                } = await import(
-                    `${__dirname()}/interface/STypescriptBuilderBuildParamsInterface`
+        return new Promise(async (resolve) => {
+            const {
+                default: __STypescriptBuilderBuildParamsInterface,
+                // @ts-ignore
+            } = await import(
+                `${__dirname()}/interface/STypescriptBuilderBuildParamsInterface`
+            );
+
+            const buildedFiles: ISTypescriptBuilderResultFile[] = [];
+
+            // // @ts-ignore
+            // const finalParams: ISTypescriptBuilderBuildParams =
+            //     __monorepoToPackageAbsolutePathDeepMap(
+            //         __STypescriptBuilderBuildParamsInterface.apply(params),
+            //         params.packageRoot ?? process.cwd(),
+            //     );
+            const finalParams: ISTypescriptBuilderBuildParams =
+                __STypescriptBuilderBuildParamsInterface.apply(params);
+
+            // this can be overrided by customSettings bellow
+            let formats = Array.isArray(finalParams.formats)
+                ? finalParams.formats
+                : [finalParams.formats];
+
+            const globs = Array.isArray(finalParams.glob)
+                ? finalParams.glob
+                : [finalParams.glob];
+
+            if (!finalParams.silent) {
+                console.log(
+                    `<yellow>○</yellow> Globs              : <yellow>${globs.join(
+                        ',',
+                    )}</yellow>`,
                 );
+                console.log(
+                    `<yellow>○</yellow> Input directory   : <cyan>${finalParams.inDir.replace(
+                        `${__packageRootDir()}/`,
+                        '',
+                    )}</cyan>`,
+                );
+                console.log(
+                    `<yellow>○</yellow> Output directory  : <cyan>${finalParams.outDir.replace(
+                        `${__packageRootDir()}/`,
+                        '',
+                    )}</cyan>`,
+                );
+                console.log(
+                    `<yellow>○</yellow> Formats           : <yellow>${formats.join(
+                        ',',
+                    )}</yellow>`,
+                );
+                console.log(
+                    `<yellow>○</yellow> Platform          : <yellow>${finalParams.platform}</yellow>`,
+                );
+                console.log(
+                    `<yellow>○</yellow> Watch             : ${
+                        finalParams.watch
+                            ? `<green>true</green>`
+                            : `<red>false</red>`
+                    }`,
+                );
+                console.log(
+                    `<yellow>○</yellow> Build initial     : ${
+                        finalParams.buildInitial
+                            ? `<green>true</green>`
+                            : `<red>false</red>`
+                    }`,
+                );
+            }
 
-                const buildedFiles: ISTypescriptBuilderResultFile[] = [];
+            // watch getFiles
+            const filesPromise = __getFiles(globs, {
+                cwd: finalParams.inDir,
+                ignoreInitial: finalParams.watch && !finalParams.buildInitial,
+                watch: finalParams.watch,
+            });
 
-                // // @ts-ignore
-                // const finalParams: ISTypescriptBuilderBuildParams =
-                //     __monorepoToPackageAbsolutePathDeepMap(
-                //         __STypescriptBuilderBuildParamsInterface.apply(params),
-                //         params.packageRoot ?? process.cwd(),
-                //     );
-                const finalParams: ISTypescriptBuilderBuildParams =
-                    __STypescriptBuilderBuildParamsInterface.apply(params);
-
-                // this can be overrided by customSettings bellow
-                let formats = Array.isArray(finalParams.formats)
-                    ? finalParams.formats
-                    : [finalParams.formats];
-
-                const globs = Array.isArray(finalParams.glob)
-                    ? finalParams.glob
-                    : [finalParams.glob];
-
-                if (!finalParams.silent) {
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `<yellow>○</yellow> Globs              : <yellow>${globs.join(
-                            ',',
-                        )}</yellow>`,
-                    });
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `<yellow>○</yellow> Input directory   : <cyan>${finalParams.inDir.replace(
-                            `${__packageRootDir()}/`,
-                            '',
-                        )}</cyan>`,
-                    });
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `<yellow>○</yellow> Output directory  : <cyan>${finalParams.outDir.replace(
-                            `${__packageRootDir()}/`,
-                            '',
-                        )}</cyan>`,
-                    });
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `<yellow>○</yellow> Formats           : <yellow>${formats.join(
-                            ',',
-                        )}</yellow>`,
-                    });
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `<yellow>○</yellow> Platform          : <yellow>${finalParams.platform}</yellow>`,
-                    });
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `<yellow>○</yellow> Watch             : ${
-                            finalParams.watch
-                                ? `<green>true</green>`
-                                : `<red>false</red>`
-                        }`,
-                    });
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `<yellow>○</yellow> Build initial     : ${
-                            finalParams.buildInitial
-                                ? `<green>true</green>`
-                                : `<red>false</red>`
-                        }`,
-                    });
-                }
-
-                // @TODO        replace the __getFiles by the cleaner __pool function
-                // const filesPromise1 = __pool(globs, {
-                //     cwd: finalParams.inDir,
-                //     watch: finalParams.watch,
-                // });
-
-                // filesPromise1.on('add,change', (f) => {
-                //     console.log('FILE', f);
-                // });
-
-                // await filesPromise1.ready;
-
-                // watch using chokidar
-                const filesPromise = __getFiles(globs, {
-                    cwd: finalParams.inDir,
-                    ignoreInitial:
-                        finalParams.watch && !finalParams.buildInitial,
-                    watch: finalParams.watch,
+            // handle no watch
+            filesPromise.then(() => {
+                resolve({
+                    glob: finalParams.glob,
+                    inDir: finalParams.inDir,
+                    outDir: finalParams.outDir,
+                    format: finalParams.formats,
+                    platform: finalParams.platform,
+                    declarationFiles: finalParams.declarationFiles,
+                    files: buildedFiles,
                 });
+            });
 
-                // handle no watch
-                filesPromise.then(() => {
-                    resolve({
-                        glob: finalParams.glob,
-                        inDir: finalParams.inDir,
-                        outDir: finalParams.outDir,
-                        format: finalParams.formats,
-                        platform: finalParams.platform,
-                        declarationFiles: finalParams.declarationFiles,
-                        files: buildedFiles,
-                    });
-                });
+            // save all the file paths that has just been savec by the formatter
+            // to avoid process it over and over...
+            const buildedStack: string[] = [];
 
-                // save all the file paths that has just been savec by the formatter
-                // to avoid process it over and over...
-                const buildedStack: string[] = [];
+            // listen for files change and add
+            filesPromise.on(
+                'add,change',
+                async ({ file: filePath, resolve: resolveFile }) => {
+                    // avoid to process in loop the same file saved over and over
+                    const savedFileIdx = buildedStack.indexOf(filePath);
+                    if (savedFileIdx !== -1) {
+                        return;
+                    }
 
-                // listen for files change and add
-                filesPromise.on(
-                    'add,change',
-                    async ({ file: filePath, resolve: resolveFile }) => {
-                        // avoid to process in loop the same file saved over and over
-                        const savedFileIdx = buildedStack.indexOf(filePath);
-                        if (savedFileIdx !== -1) {
-                            return;
-                        }
+                    const relPath = __path.relative(
+                        finalParams.inDir,
+                        filePath,
+                    );
 
-                        const relPath = __path.relative(
-                            finalParams.inDir,
-                            filePath,
-                        );
+                    let buildParams = Object.assign({}, finalParams);
 
-                        let buildParams = Object.assign({}, finalParams);
-
-                        for (let [id, customSettings] of Object.entries(
-                            __SSugarConfig.getSafe(
-                                'typescriptBuilder.customSettings',
-                            ) ?? {},
-                        )) {
-                            if (__SGlob.match(filePath, customSettings.glob)) {
-                                formats =
-                                    customSettings.settings?.formats ?? formats;
-                                buildParams = __deepMerge(
-                                    buildParams,
-                                    customSettings.settings ?? {},
-                                );
-                                break;
-                            }
-                        }
-
-                        // "localize" the file paths to the current package root
-                        // buildParams = __monorepoToPackageAbsolutePathDeepMap(
-                        //     buildParams,
-                        //     finalParams.packageRoot ?? process.cwd(),
-                        // );
-
-                        // generate all the requested formats
-
-                        for (let i = 0; i < formats.length; i++) {
-                            const format = formats[i];
-                            const buildedFilePromise = pipe(
-                                this._buildFile(
-                                    __deepMerge(
-                                        {
-                                            cwd: finalParams.inDir,
-                                            relPath,
-                                            path: filePath,
-                                            format,
-                                            platform: finalParams.platform,
-                                            declarationFile:
-                                                finalParams.declarationFiles,
-                                            outDir: finalParams.outDir,
-                                        },
-                                        buildParams,
-                                        {
-                                            watch: false,
-                                        },
-                                    ),
-                                    finalParams,
-                                ),
+                    for (let [id, customSettings] of Object.entries(
+                        __SSugarConfig.getSafe(
+                            'typescriptBuilder.customSettings',
+                        ) ?? {},
+                    )) {
+                        if (__SGlob.match(filePath, customSettings.glob)) {
+                            formats =
+                                customSettings.settings?.formats ?? formats;
+                            buildParams = __deepMerge(
+                                buildParams,
+                                customSettings.settings ?? {},
                             );
-                            const buildedFileRes = await buildedFilePromise;
-
-                            if (!buildedFiles.includes(buildedFileRes)) {
-                                buildedFiles.push(buildedFileRes);
-                            }
+                            break;
                         }
+                    }
 
-                        // set the file as resolved
-                        resolveFile();
-                    },
-                );
-            },
-            {
-                metas: {
-                    id: this.constructor.name,
+                    // "localize" the file paths to the current package root
+                    // buildParams = __monorepoToPackageAbsolutePathDeepMap(
+                    //     buildParams,
+                    //     finalParams.packageRoot ?? process.cwd(),
+                    // );
+
+                    // generate all the requested formats
+
+                    for (let i = 0; i < formats.length; i++) {
+                        const format = formats[i];
+                        const buildedFilePromise = this._buildFile(
+                            __deepMerge(
+                                {
+                                    cwd: finalParams.inDir,
+                                    relPath,
+                                    path: filePath,
+                                    format,
+                                    silent: finalParams.silent,
+                                    platform: finalParams.platform,
+                                    declarationFile:
+                                        finalParams.declarationFiles,
+                                    outDir: finalParams.outDir,
+                                },
+                                buildParams,
+                                {
+                                    watch: false,
+                                },
+                            ),
+                            finalParams,
+                        );
+                        const buildedFileRes = await buildedFilePromise;
+
+                        if (!buildedFiles.includes(buildedFileRes)) {
+                            buildedFiles.push(buildedFileRes);
+                        }
+                    }
+
+                    // set the file as resolved
+                    resolveFile();
                 },
-            },
-        );
+            );
+        });
     }
 
     _tsProject;
@@ -460,8 +432,8 @@ export default class STypescriptBuilder extends __SBuilder {
         filePath: string,
         outputFilePath: string,
         packageRoot = process.cwd(),
-    ): __SPromise<string> {
-        return new __SPromise(async ({ resolve, emit }) => {
+    ): Promise<string> {
+        return new Promise(async (resolve) => {
             const compilerOptions = {
                 allowJs: true,
                 declaration: true,
@@ -469,15 +441,12 @@ export default class STypescriptBuilder extends __SBuilder {
                 outDir: `${__packageCacheDir()}/s-typescript-builder`,
             };
 
-            if (__SEnv.is('verbose')) {
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>[d.ts]</yellow> Generating .d.ts file for "<cyan>${__path.relative(
-                        __packageRootDir(),
-                        outputFilePath,
-                    )}</cyan>"`,
-                });
-            }
+            console.verbose?.(
+                `<yellow>[d.ts]</yellow> Generating .d.ts file for "<cyan>${__path.relative(
+                    __packageRootDir(),
+                    outputFilePath,
+                )}</cyan>"`,
+            );
 
             const project = this._createTsProgramIfNeeded(
                 compilerOptions,
@@ -507,15 +476,12 @@ export default class STypescriptBuilder extends __SBuilder {
                 .getText()
                 .replace(/\/\*[\s\S]*?\*\/|\/\/.*/g, '');
 
-            if (__SEnv.is('verbose')) {
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<green>[d.ts]</green> .d.ts file generated <green>successfully</green> for "<cyan>${__path.relative(
-                        __packageRootDir(),
-                        outputFilePath,
-                    )}</cyan>"`,
-                });
-            }
+            console.verbose?.(
+                `<green>[d.ts]</green> .d.ts file generated <green>successfully</green> for "<cyan>${__path.relative(
+                    __packageRootDir(),
+                    outputFilePath,
+                )}</cyan>"`,
+            );
             resolve(text);
         });
     }
@@ -524,7 +490,7 @@ export default class STypescriptBuilder extends __SBuilder {
         file: ISTypescriptBuilderFileToBuild,
         params: ISTypescriptBuilderBuildParams,
     ): Promise<ISTypescriptBuilderResultFile> {
-        return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+        return new Promise(async (resolve) => {
             const packageRoot = params.packageRoot;
             const module = file.format === 'cjs' ? 'commonjs' : 'es6';
             const outPath = __path.dirname(
@@ -557,16 +523,17 @@ export default class STypescriptBuilder extends __SBuilder {
                 filePath = __path.relative(packageRoot, file.path);
             }
 
-            emit('log', {
-                type: __SLog.TYPE_INFO,
-                value: `Compiling "<cyan>${filePath}</cyan>" to <yellow>${
-                    file.format
-                }</yellow> format, <magenta>${
-                    tsconfig.module ?? module
-                }</magenta> module system and <cyan>${
-                    tsconfig.target ?? 'es6'
-                }</cyan> as target...`,
-            });
+            if (!params.silent) {
+                console.log(
+                    `Compiling "<cyan>${filePath}</cyan>" to <yellow>${
+                        file.format
+                    }</yellow> format, <magenta>${
+                        tsconfig.module ?? module
+                    }</magenta> module system and <cyan>${
+                        tsconfig.target ?? 'es6'
+                    }</cyan> as target...`,
+                );
+            }
 
             let result = __ts.transpileModule(
                 source,
@@ -589,12 +556,10 @@ export default class STypescriptBuilder extends __SBuilder {
                     __fs.unlinkSync(outFilePath.replace(/\.js$/, '.d.ts'));
                 } catch (e) {}
 
-                const declarationPromise = pipe(
-                    this._buildDeclarationFile(
-                        file.path,
-                        outFilePath.replace(/\.js$/, '.d.ts'),
-                        params.packageRoot,
-                    ),
+                const declarationPromise = this._buildDeclarationFile(
+                    file.path,
+                    outFilePath.replace(/\.js$/, '.d.ts'),
+                    params.packageRoot,
                 );
                 declarationPromise.then(async (declarationStr) => {
                     // prevent empty file
@@ -660,6 +625,7 @@ export default class STypescriptBuilder extends __SBuilder {
                 input: file,
                 format: file.format,
                 platform: file.platform,
+                declarationFiles: file.declarationFile,
                 module: tsconfig.module ?? module,
                 js: result.outputText,
                 file: params.save ? new __SFile(outFilePath) : undefined,

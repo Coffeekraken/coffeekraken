@@ -1,6 +1,4 @@
 import __SClass from '@coffeekraken/s-class';
-import __SLog from '@coffeekraken/s-log';
-import __SPromise from '@coffeekraken/s-promise';
 import __SSpecs from '@coffeekraken/s-specs';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __dirname } from '@coffeekraken/sugar/fs';
@@ -85,7 +83,7 @@ class SCarpenter extends __SClass {
      *
      * This method allows you to load the specs specified in the config.carpenter.sources configuration
      *
-     * @return        {SPromise}                                     A promise resolved with the corresponding specs loaded
+     * @return        {Promise}                                     A promise resolved with the corresponding specs loaded
      *
      * @since         2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -93,7 +91,7 @@ class SCarpenter extends __SClass {
     loadSpecs(settings?: Partial<ISCarpenterSettings>): Promise<any> {
         const finalSettings = __deepMerge(this.settings, settings ?? {});
 
-        return new __SPromise(({ resolve, reject, emit, pipe }) => {
+        return new Promise((resolve) => {
             const specsMap = {},
                 specsBySources = {};
 
@@ -130,7 +128,7 @@ class SCarpenter extends __SClass {
      * This method allows you to start a server in order display your components library in a nice and coherent interface
      *
      * @param         {Partial<ISCarpenterStartParams>}          params        The params to use to start your mitosis env
-     * @return        {SPromise}                                     A promise resolved once the scan process has been finished
+     * @return        {Promise}                                     A promise resolved once the scan process has been finished
      *
      * @since         2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -140,11 +138,10 @@ class SCarpenter extends __SClass {
             __deepMerge(__SCarpenterStartParamsInterface.defaults(), params)
         );
 
-        return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
-            emit('log', {
-                type: __SLog.TYPE_INFO,
-                value: `<yellow>[start]</yellow> Starting a new carpenter server...`,
-            });
+        return new Promise(async (resolve) => {
+            console.log(
+                `<yellow>[start]</yellow> Starting a new carpenter server...`,
+            );
 
             const app: any = __express(),
                 watchers = {};
@@ -191,19 +188,17 @@ class SCarpenter extends __SClass {
                 });
             });
 
-            emit('log', {
-                type: __SLog.TYPE_INFO,
-                value: `<green>[start]</green> Your carpenter server is available at:`,
-            });
-            emit('log', {
-                type: __SLog.TYPE_INFO,
-                value: `<green>[start]</green> <cyan>http://127.0.0.1:${finalParams.port}</cyan>`,
-            });
+            console.log(
+                `<green>[start]</green> Your carpenter server is available at:`,
+            );
+            console.log(
+                `<green>[start]</green> <cyan>http://127.0.0.1:${finalParams.port}</cyan>`,
+            );
 
             __onProcessExit(() => {
-                emit('log', {
-                    value: `<red>[kill]</red> Gracefully killing the <cyan>mitosis server</cyan>...`,
-                });
+                console.log(
+                    `<red>[kill]</red> Gracefully killing the <cyan>mitosis server</cyan>...`,
+                );
                 return new Promise((resolve) => {
                     server.close(async () => {
                         // @ts-ignore

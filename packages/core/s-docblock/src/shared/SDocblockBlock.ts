@@ -1,6 +1,4 @@
 import __SClass from '@coffeekraken/s-class';
-import __SLog from '@coffeekraken/s-log';
-import __SPromise from '@coffeekraken/s-promise';
 import { __sha256 } from '@coffeekraken/sugar/crypto';
 import { __isPlainObject } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
@@ -208,7 +206,7 @@ class SDocblockBlock extends __SClass {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     parse(): Promise<any> {
-        return new __SPromise(async ({ resolve, reject, emit }) => {
+        return new Promise(async (resolve) => {
             // some variables
             let currentTag: string;
             let currentContent: string[] = [];
@@ -314,10 +312,9 @@ class SDocblockBlock extends __SClass {
                             this.settings,
                         );
                     } catch (e) {
-                        emit('log', {
-                            type: __SLog.TYPE_WARN,
-                            value: `<red>[SDocblockBlock]</red> An error occured during the parsing of the docblock bellow on the tag <yellow>${prop}</yellow>:\n\n${this._source}\n\n${e.stack}`,
-                        });
+                        console.error(
+                            `<red>[SDocblockBlock]</red> An error occured during the parsing of the docblock bellow on the tag <yellow>${prop}</yellow>:\n\n${this._source}\n\n${e.stack}`,
+                        );
                     }
                     if (res?.tags) {
                         for (let [key, value] of Object.entries(res.tags)) {

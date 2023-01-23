@@ -30,13 +30,13 @@ export default async function __isCommandExists(
     const where = isWin ? 'where' : 'whereis';
 
     // check by version
-    const versionOut = spawnSync(`${command} --version`, ['/?'], {
+    const versionOut = spawnSync(`${command} --version`, [], {
         encoding: 'utf-8',
         shell: true,
     });
     if (versionOut.stdout) return versionOut.stdout;
 
-    const out = spawnSync(where + ' ' + command, ['/?'], {
+    const out = spawnSync(where + ' ' + command, [], {
         encoding: 'utf8',
         shell: true,
     });

@@ -21,7 +21,7 @@ const defaultPackageJsonIngredient: ISKitchenIngredient = {
     description:
         'Apply the <yellow>config.package.defaultPackageJson</yellow> object on your <cyan>package.json</cyan> file',
     projectTypes: ['unknown', 'sugar'],
-    async add({ ask, log, emit, context }) {
+    async add({ ask, log, context }) {
         const packageRoot = __packageRootDir();
 
         let json = {};

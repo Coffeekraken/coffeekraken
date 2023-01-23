@@ -2,7 +2,6 @@
 
 import __SDataFileJs from '@coffeekraken/s-data-file-js';
 import __SDataFilePhp from '@coffeekraken/s-data-file-php';
-import __SPromise from '@coffeekraken/s-promise';
 import {
     __checkPathWithMultipleExtensions,
     __extension
@@ -47,13 +46,13 @@ export default class SDataFileGeneric {
      * This static method allows you to actually load a data file
      *
      * @param       {String}      filePath      The file path to take care
-     * @return      {SPromise}                  An SPromise instance that will be resolved with the resulting object
+     * @return      {Promise}                  An Promise instance that will be resolved with the resulting object
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static load(filePath) {
-        return new __SPromise(async ({ resolve, reject }) => {
+        return new Promise(async (resolve) => {
             const extension = __extension(filePath),
                 filePathWithoutExtension = filePath
                     .replace(`.${extension}`, '')

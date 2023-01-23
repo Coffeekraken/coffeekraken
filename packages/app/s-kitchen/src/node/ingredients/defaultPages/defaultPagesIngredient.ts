@@ -21,7 +21,7 @@ const defaultPagesIngredient: ISKitchenIngredient = {
     description:
         'Add default pages like index, 404, etc in a <magenta>sugar</magenta> project',
     projectTypes: ['sugar'],
-    async add({ ask, log, emit, context }) {
+    async add({ ask, log, context }) {
         // source file path
         const sourceFilePath = __path.resolve(
             __packageRootDir(__dirname()),

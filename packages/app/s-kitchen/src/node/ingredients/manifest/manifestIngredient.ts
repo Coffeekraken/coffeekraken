@@ -1,4 +1,3 @@
-import __SLog from '@coffeekraken/s-log';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import {
     __dirname,
@@ -26,7 +25,7 @@ const manifestIngredient: ISKitchenIngredient = {
     description:
         'Add the default <cyan>manifest.json</cyan> into your <magenta>sugar</magenta> project',
     projectTypes: ['unknown', 'sugar', 'next'],
-    async add({ ask, log, emit }) {
+    async add() {
         const packageJson = __packageJsonSync();
 
         const publicDir = __SSugarConfig.get('storage.src.publicDir');
@@ -47,10 +46,9 @@ const manifestIngredient: ISKitchenIngredient = {
             __writeJsonSync(`${publicDir}/manifest.json`, json);
         }
 
-        emit('log', {
-            type: __SLog.TYPE_INFO,
-            value: `<green>[manifest]</green> Default <cyan>manifest.json</cyan> file addedd <green>successfully</green>`,
-        });
+        console.log(
+            `<green>[manifest]</green> Default <cyan>manifest.json</cyan> file addedd <green>successfully</green>`,
+        );
 
         return true;
     },

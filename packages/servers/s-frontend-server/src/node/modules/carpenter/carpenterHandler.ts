@@ -1,10 +1,9 @@
 import __SBench from '@coffeekraken/s-bench';
 import __SCarpenter from '@coffeekraken/s-carpenter';
-import __SPromise from '@coffeekraken/s-promise';
 import __SSpecs from '@coffeekraken/s-specs';
 
 export default function carpenterHandler({ req, res, pageConfig }) {
-    return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+    return new Promise(async (resolve) => {
         const bench = new __SBench('data.carpenterHandler');
 
         bench.step('beforeSitemapRead');
@@ -43,7 +42,6 @@ export default function carpenterHandler({ req, res, pageConfig }) {
                 carpenter: carpenterSpecs,
                 body: currentViewResult.value,
             });
-            pipe(layoutPromise);
             const layoutRes = await layoutPromise;
 
             if (layoutRes.error) {
@@ -55,7 +53,7 @@ export default function carpenterHandler({ req, res, pageConfig }) {
                 finalResult = layoutRes.value;
             }
         } catch (e) {
-            console.log(e);
+            console.error(e);
         }
 
         if (errors.views.length || errors.layout) {

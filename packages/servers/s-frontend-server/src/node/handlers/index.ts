@@ -1,9 +1,5 @@
 // @ts-nocheck
 
-import __SPromise from '@coffeekraken/s-promise';
-import __SViewRenderer, { page404 } from '@coffeekraken/s-view-renderer';
-import __SBench from '@coffeekraken/s-bench';
-
 /**
  * @name                index
  * @namespace           sugar.node.server.frontend.handlers
@@ -24,7 +20,7 @@ import __SBench from '@coffeekraken/s-bench';
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function doc(req, res, settings = {}) {
-    return new __SPromise(async ({ resolve, reject, pipe, emit }) => {
+    return new Promise(async (resolve) => {
         // render the proper template
         const pageHtml = await res.viewRenderer.render({
             body: 'Hello world',

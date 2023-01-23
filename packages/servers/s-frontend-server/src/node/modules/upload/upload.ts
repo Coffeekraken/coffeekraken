@@ -1,9 +1,8 @@
-import __SPromise from '@coffeekraken/s-promise';
 import { __ensureDirSync } from '@coffeekraken/sugar/fs';
 import { __packageTmpDir } from '@coffeekraken/sugar/path';
 
 export default function upload(app, settings, config) {
-    return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+    return new Promise(async (resolve) => {
         // register the "upload" post handler
         app.post('/upload', async (req, res) => {
             if (!req.files || Object.keys(req.files).length === 0) {
@@ -24,9 +23,9 @@ export default function upload(app, settings, config) {
                 file.mv(filePath);
 
                 // log
-                emit('log', {
-                    value: `[SFrontendServer] File "<yellow>${file.name}</yellow>" uploaded <green>successfully</green> and available at url "<cyan>/tmp/upload/${file.name}</cyan>"`,
-                });
+                console.log(
+                    `[SFrontendServer] File "<yellow>${file.name}</yellow>" uploaded <green>successfully</green> and available at url "<cyan>/tmp/upload/${file.name}</cyan>"`,
+                );
 
                 uploadResult.push({
                     url: `/tmp/upload/${file.name}`,

@@ -1,1 +1,1 @@
-export default function action(stringArgs?: string): any;
+export default function action(stringArgs?: string): Promise<unknown>;

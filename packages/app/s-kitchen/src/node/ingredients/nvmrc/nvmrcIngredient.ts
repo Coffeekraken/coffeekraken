@@ -1,4 +1,3 @@
-import __SLog from '@coffeekraken/s-log';
 import __packagePath from '@coffeekraken/sugar/node/npm/packagePath';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
@@ -19,7 +18,7 @@ const nvmrcIngredient: ISKitchenIngredient = {
     id: 'nvmrc',
     description: 'Add the default <cyan>.nvmrc</cyan> file into your project',
     projectTypes: ['unknown', 'sugar', 'next'],
-    async add({ ask, log, emit }) {
+    async add() {
         const packageRoot = __packageRootDir();
 
         const cliPackagePath = __packagePath('@coffeekraken/cli');
@@ -30,10 +29,9 @@ const nvmrcIngredient: ISKitchenIngredient = {
             nvmrc = __fs.readFileSync(`${cliPackagePath}/.nvmrc`).toString();
             __fs.writeFileSync(`${packageRoot}/.nvmrc`, nvmrc);
 
-            emit('log', {
-                type: __SLog.TYPE_INFO,
-                value: `<green>[nvmrc]</green> Default <cyan>.nvmrc</cyan> file addedd <green>successfully</green> with node version <magenta>${nvmrc}</magenta>`,
-            });
+            console.log(
+                `<green>[nvmrc]</green> Default <cyan>.nvmrc</cyan> file addedd <green>successfully</green> with node version <magenta>${nvmrc}</magenta>`,
+            );
             return true;
         }
 

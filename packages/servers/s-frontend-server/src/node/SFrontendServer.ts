@@ -1,6 +1,5 @@
 import __SClass from '@coffeekraken/s-class';
 import __SEnv from '@coffeekraken/s-env';
-import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __wait } from '@coffeekraken/sugar/datetime';
@@ -144,281 +143,258 @@ export default class SFrontendServer extends __SClass {
      * @since       2.0.0
      * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    start(params: Partial<ISFrontendServerStartParams> | string): Promise<any> {
+    start(
+        params: Partial<ISFrontendServerStartParams> | string,
+    ): Promise<void | any> {
         const finalParams: ISFrontendServerStartParams =
             __SFrontendServerStartParamsInterface.apply(params);
 
-        return new __SPromise(
-            async ({ resolve, reject, emit, pipe, on }) => {
-                // enable compression if prod
-                // if (finalParams.prod || __SEnv.is('production')) {
-                this._express.use(__compression());
-                // }
+        return new Promise(async (resolve) => {
+            // enable compression if prod
+            // if (finalParams.prod || __SEnv.is('production')) {
+            this._express.use(__compression());
+            // }
 
-                // save metas
-                this.serverMetas = {
-                    hostname: finalParams.hostname,
-                    port: finalParams.port,
-                    sessionId:
-                        finalParams.prod || __SEnv.is('production')
-                            ? `${(Math.random() + 1).toString(36).substring(2)}`
-                            : '',
-                };
+            // save metas
+            this.serverMetas = {
+                hostname: finalParams.hostname,
+                port: finalParams.port,
+                sessionId:
+                    finalParams.prod || __SEnv.is('production')
+                        ? `${(Math.random() + 1).toString(36).substring(2)}`
+                        : '',
+            };
 
-                this._express.use(__bodyParser.json({ limit: '120mb' }));
-                this._express.use(__fileUpload());
+            this._express.use(__bodyParser.json({ limit: '120mb' }));
+            this._express.use(__fileUpload());
 
+            this._express.use((req, res, next) => {
+                if (!res.templateData) res.templateData = {};
+                if (!res.templateData.shared) res.templateData.shared = {};
+                res.templateData.shared.server = this.serverMetas;
+                next();
+            });
+
+            const logLevelInt = [
+                'silent',
+                'error',
+                'warn',
+                'debug',
+                'info',
+                'verbose',
+                'silly',
+            ].indexOf(finalParams.logLevel);
+
+            this._frontendServerConfig = __SSugarConfig.get('frontendServer');
+
+            this._express.use((req, res, next) => {
+                if (req.path.substr(-1) == '/' && req.path.length > 1) {
+                    const query = req.url.slice(req.path.length);
+                    res.redirect(301, req.path.slice(0, -1) + query);
+                } else {
+                    next();
+                }
+            });
+
+            // viewRendererMiddleware
+            this._express.use((req, res, next) => {
+                __viewRendererMiddleware()(req, res, next);
+            });
+
+            if (this._frontendServerConfig.modules) {
+                for (
+                    let i = 0;
+                    i < Object.keys(this._frontendServerConfig.modules).length;
+                    i++
+                ) {
+                    const moduleId = Object.keys(
+                        this._frontendServerConfig.modules,
+                    )[i];
+                    const moduleObj =
+                        this._frontendServerConfig.modules[moduleId];
+                    let module;
+
+                    try {
+                        module = await import(moduleObj.path);
+                    } catch (e) {
+                        console.log(e);
+                        throw new Error(
+                            `<red>${this.constructor.name}</red> Sorry but a module called "<yellow>startServer.${moduleId}</yellow>" has been registered but does not exists under "<cyan>${moduleObj.path}</cyan>"`,
+                        );
+                    }
+                    await module.default(
+                        this._express,
+                        moduleObj.settings,
+                        this._frontendServerConfig,
+                    );
+                }
+            }
+
+            if (this._frontendServerConfig.proxy) {
+                Object.keys(this._frontendServerConfig.proxy).forEach(
+                    (proxyId) => {
+                        const proxyObj =
+                            this._frontendServerConfig.proxy[proxyId];
+                        // @ts-ignore
+                        this._express.use(
+                            createProxyMiddleware(proxyObj.route, {
+                                logLevel: 'silent',
+                                ...(proxyObj.settings ?? {}),
+                            }),
+                        );
+                    },
+                );
+            }
+
+            if (this._frontendServerConfig.staticDirs) {
+                Object.keys(this._frontendServerConfig.staticDirs).forEach(
+                    (dir) => {
+                        const fsPath =
+                            this._frontendServerConfig.staticDirs[dir];
+                        console.verbose?.(
+                            `<cyan>[static]</cyan> Exposing static folder "<cyan>${__path.relative(
+                                process.cwd(),
+                                fsPath,
+                            )}</cyan>" behind "<yellow>${dir}</yellow>" url`,
+                        );
+                        this._express.use(
+                            dir,
+                            __express.static(fsPath, { dotfiles: 'allow' }),
+                        );
+                    },
+                );
+            }
+
+            if (this._frontendServerConfig.middlewares) {
+                for (
+                    let i = 0;
+                    i <
+                    Object.keys(this._frontendServerConfig.middlewares).length;
+                    i++
+                ) {
+                    const middlewareName = Object.keys(
+                        this._frontendServerConfig.middlewares,
+                    )[i];
+                    const middlewareObj =
+                        this._frontendServerConfig.middlewares[middlewareName];
+
+                    if (
+                        !middlewareObj.path ||
+                        __fs.existsSync(middlewareObj.path)
+                    ) {
+                        throw new Error(
+                            `<red>[${this.constructor.name}.start]</red> Sorry but the middleware named "<yellow>${middlewareName}</yellow>" seems to not exists or is missconfigured...`,
+                        );
+                    }
+
+                    // @ts-ignore
+                    const { default: middlewareWrapperFn } = await import(
+                        middlewareObj.path
+                    ); // eslint-disable-line
+                    const middleware = middlewareWrapperFn(
+                        middlewareObj.settings ?? {},
+                    );
+
+                    // register the middleware inside the express configuration
+                    // @ts-ignore
+                    this._express.use((req, res, next) => {
+                        middleware(req, res, next);
+                    });
+                }
+            }
+
+            // logging requests
+            if (logLevelInt >= 4) {
                 this._express.use((req, res, next) => {
-                    if (!res.templateData) res.templateData = {};
-                    if (!res.templateData.shared) res.templateData.shared = {};
-                    res.templateData.shared.server = this.serverMetas;
+                    const duration = new __SDuration();
+
+                    function afterResponse() {
+                        console.verbose?.(
+                            `<cyan>[request]</cyan> Request on "<cyan>${
+                                req.url
+                            }</cyan>" served in <yellow>${
+                                duration.end().formatedDuration
+                            }</yellow>`,
+                        );
+                    }
+
+                    res.on('finish', afterResponse);
+
                     next();
                 });
+            }
 
-                const logLevelInt = [
-                    'silent',
-                    'error',
-                    'warn',
-                    'debug',
-                    'info',
-                    'verbose',
-                    'silly',
-                ].indexOf(finalParams.logLevel);
-
-                this._frontendServerConfig =
-                    __SSugarConfig.get('frontendServer');
-
-                this._express.use((req, res, next) => {
-                    if (req.path.substr(-1) == '/' && req.path.length > 1) {
-                        const query = req.url.slice(req.path.length);
-                        res.redirect(301, req.path.slice(0, -1) + query);
-                    } else {
-                        next();
-                    }
-                });
-
-                // viewRendererMiddleware
-                this._express.use((req, res, next) => {
-                    pipe(__viewRendererMiddleware()(req, res, next));
-                });
-
-                if (this._frontendServerConfig.modules) {
-                    for (
-                        let i = 0;
-                        i <
-                        Object.keys(this._frontendServerConfig.modules).length;
-                        i++
-                    ) {
-                        const moduleId = Object.keys(
-                            this._frontendServerConfig.modules,
-                        )[i];
-                        const moduleObj =
-                            this._frontendServerConfig.modules[moduleId];
-                        let module;
-
-                        try {
-                            module = await import(moduleObj.path);
-                        } catch (e) {
-                            console.log(e);
-                            throw new Error(
-                                `<red>${this.constructor.name}</red> Sorry but a module called "<yellow>startServer.${moduleId}</yellow>" has been registered but does not exists under "<cyan>${moduleObj.path}</cyan>"`,
-                            );
-                        }
-                        await pipe(
-                            module.default(
-                                this._express,
-                                moduleObj.settings,
-                                this._frontendServerConfig,
-                            ),
-                        );
-                    }
+            // routes pages from config
+            if (this._frontendServerConfig.pages) {
+                for (let [id, pageConfig] of Object.entries(
+                    this._frontendServerConfig.pages,
+                )) {
+                    await this._registerPageConfig(
+                        <ISFrontendServerPageConfig>pageConfig,
+                        null,
+                        id,
+                        id,
+                    );
                 }
+            }
 
-                if (this._frontendServerConfig.proxy) {
-                    Object.keys(this._frontendServerConfig.proxy).forEach(
-                        (proxyId) => {
-                            const proxyObj =
-                                this._frontendServerConfig.proxy[proxyId];
+            // "pages" folder routes
+            await this._registerPagesRoutes();
+
+            if (!(await __isPortFree(this._frontendServerConfig.port))) {
+                console.log(
+                    `Port <yellow>${this._frontendServerConfig.port}</yellow> already in use. Please make sure to make it free before retrying...`,
+                );
+                process.kill(1);
+            }
+
+            if (!finalParams.listen) {
+                // server started successfully
+                console.log(
+                    `<yellow>Frontend server</yellow> started <green>successfully</green>`,
+                );
+                // when no listen, we just resolve the promise to say that the server has started
+                resolve();
+            } else {
+                const server = this._express.listen(
+                    this._frontendServerConfig.port,
+                    async () => {
+                        await __wait(100);
+
+                        // 404
+                        this._express.get('*', function (req, res) {
+                            res.status(404).send('what???');
+                        });
+
+                        // server started successfully
+                        console.log(
+                            `<yellow>Frontend server</yellow> started <green>successfully</green>`,
+                        );
+                        console.log(
+                            `<yellow>http://${finalParams.hostname}</yellow>:<cyan>${finalParams.port}</cyan>`,
+                        );
+                        console.verbose?.(
+                            `Root directory: <cyan>${finalParams.rootDir}</cyan>`,
+                        );
+                        console.verbose?.(
+                            `Log level: <yellow>${finalParams.logLevel}</yellow>`,
+                        );
+                    },
+                );
+
+                __onProcessExit(() => {
+                    console.log(
+                        `<red>[kill]</red> Gracefully killing the <cyan>frontend server</cyan>...`,
+                    );
+                    return new Promise((resolve) => {
+                        server.close(() => {
                             // @ts-ignore
-                            this._express.use(
-                                createProxyMiddleware(proxyObj.route, {
-                                    logLevel: 'silent',
-                                    ...(proxyObj.settings ?? {}),
-                                }),
-                            );
-                        },
-                    );
-                }
-
-                if (this._frontendServerConfig.staticDirs) {
-                    Object.keys(this._frontendServerConfig.staticDirs).forEach(
-                        (dir) => {
-                            const fsPath =
-                                this._frontendServerConfig.staticDirs[dir];
-                            if (__SEnv.is('verbose')) {
-                                emit('log', {
-                                    value: `<cyan>[static]</cyan> Exposing static folder "<cyan>${__path.relative(
-                                        process.cwd(),
-                                        fsPath,
-                                    )}</cyan>" behind "<yellow>${dir}</yellow>" url`,
-                                });
-                            }
-                            this._express.use(
-                                dir,
-                                __express.static(fsPath, { dotfiles: 'allow' }),
-                            );
-                        },
-                    );
-                }
-
-                if (this._frontendServerConfig.middlewares) {
-                    for (
-                        let i = 0;
-                        i <
-                        Object.keys(this._frontendServerConfig.middlewares)
-                            .length;
-                        i++
-                    ) {
-                        const middlewareName = Object.keys(
-                            this._frontendServerConfig.middlewares,
-                        )[i];
-                        const middlewareObj =
-                            this._frontendServerConfig.middlewares[
-                                middlewareName
-                            ];
-
-                        if (
-                            !middlewareObj.path ||
-                            __fs.existsSync(middlewareObj.path)
-                        ) {
-                            throw new Error(
-                                `<red>[${this.constructor.name}.start]</red> Sorry but the middleware named "<yellow>${middlewareName}</yellow>" seems to not exists or is missconfigured...`,
-                            );
-                        }
-
-                        // @ts-ignore
-                        const { default: middlewareWrapperFn } = await import(
-                            middlewareObj.path
-                        ); // eslint-disable-line
-                        const middleware = middlewareWrapperFn(
-                            middlewareObj.settings ?? {},
-                        );
-
-                        // register the middleware inside the express configuration
-                        // @ts-ignore
-                        this._express.use((req, res, next) => {
-                            pipe(middleware(req, res, next));
-                        });
-                    }
-                }
-
-                // logging requests
-                if (logLevelInt >= 4) {
-                    this._express.use((req, res, next) => {
-                        const duration = new __SDuration();
-
-                        function afterResponse() {
-                            if (__SEnv.is('verbose')) {
-                                emit('log', {
-                                    value: `<cyan>[request]</cyan> Request on "<cyan>${
-                                        req.url
-                                    }</cyan>" served in <yellow>${
-                                        duration.end().formatedDuration
-                                    }</yellow>`,
-                                });
-                            }
-                        }
-
-                        res.on('finish', afterResponse);
-
-                        next();
-                    });
-                }
-
-                // routes pages from config
-                if (this._frontendServerConfig.pages) {
-                    for (let [id, pageConfig] of Object.entries(
-                        this._frontendServerConfig.pages,
-                    )) {
-                        await pipe(
-                            this._registerPageConfig(
-                                <ISFrontendServerPageConfig>pageConfig,
-                                null,
-                                id,
-                                id,
-                            ),
-                        );
-                    }
-                }
-
-                // "pages" folder routes
-                await pipe(this._registerPagesRoutes());
-
-                if (!(await __isPortFree(this._frontendServerConfig.port))) {
-                    emit('log', {
-                        type: __SLog.TYPE_ERROR,
-                        value: `Port <yellow>${this._frontendServerConfig.port}</yellow> already in use. Please make sure to make it free before retrying...`,
-                    });
-                    process.kill(1);
-                }
-
-                if (!finalParams.listen) {
-                    // server started successfully
-                    emit('log', {
-                        value: `<yellow>Frontend server</yellow> started <green>successfully</green>`,
-                    });
-                    // when no listen, we just resolve the promise to say that the server has started
-                    resolve();
-                } else {
-                    const server = this._express.listen(
-                        this._frontendServerConfig.port,
-                        async () => {
-                            await __wait(100);
-
-                            // 404
-                            this._express.get('*', function (req, res) {
-                                res.status(404).send('what???');
-                            });
-
-                            // server started successfully
-                            emit('log', {
-                                value: `<yellow>Frontend server</yellow> started <green>successfully</green>`,
-                            });
-                            emit('log', {
-                                value: `<yellow>http://${finalParams.hostname}</yellow>:<cyan>${finalParams.port}</cyan>`,
-                            });
-                            emit('log', {
-                                type: __SLog.TYPE_VERBOSE,
-                                // group: `s-frontend-server-${this.metas.id}`,
-                                value: `Root directory: <cyan>${finalParams.rootDir}</cyan>`,
-                            });
-                            emit('log', {
-                                type: __SLog.TYPE_VERBOSE,
-                                // group: `s-frontend-server-${this.metas.id}`,
-                                value: `Log level: <yellow>${finalParams.logLevel}</yellow>`,
-                            });
-                        },
-                    );
-
-                    __onProcessExit(() => {
-                        emit('log', {
-                            value: `<red>[kill]</red> Gracefully killing the <cyan>frontend server</cyan>...`,
-                        });
-                        return new Promise((resolve) => {
-                            server.close(() => {
-                                // @ts-ignore
-                                resolve();
-                            });
+                            resolve();
                         });
                     });
-                }
-            },
-            {
-                eventEmitter: {
-                    id: this.constructor.name,
-                },
-            },
-        );
+                });
+            }
+        });
     }
 
     request(url: string) {
@@ -437,93 +413,76 @@ export default class SFrontendServer extends __SClass {
         const finalParams: ISFrontendServerCorsProxyParams =
             __SFrontendServerCorsProxyParamsInterface.apply(params);
 
-        return new __SPromise(
-            ({ resolve, reject, emit, pipe }) => {
-                const app = __express();
+        return new Promise((resolve) => {
+            const app = __express();
 
-                var myLimit = __SSugarConfig.get(
-                    'frontendServer.corsProxy.limit',
+            var myLimit = __SSugarConfig.get('frontendServer.corsProxy.limit');
+
+            app.use(__bodyParser.json({ limit: myLimit }));
+
+            app.all('*', function (req, res, next) {
+                // Set CORS headers: allow all origins, methods, and headers: you may want to lock this down in a production environment
+                res.header('Access-Control-Allow-Origin', '*');
+                res.header(
+                    'Access-Control-Allow-Methods',
+                    'GET, PUT, PATCH, POST, DELETE',
+                );
+                res.header(
+                    'Access-Control-Allow-Headers',
+                    req.header('access-control-request-headers'),
                 );
 
-                app.use(__bodyParser.json({ limit: myLimit }));
+                res.header('Cross-Origin-Embedder-Policy', 'credentialless');
+                res.header('Cross-Origin-Opener-Policy', 'same-origin');
 
-                app.all('*', function (req, res, next) {
-                    // Set CORS headers: allow all origins, methods, and headers: you may want to lock this down in a production environment
-                    res.header('Access-Control-Allow-Origin', '*');
-                    res.header(
-                        'Access-Control-Allow-Methods',
-                        'GET, PUT, PATCH, POST, DELETE',
-                    );
-                    res.header(
-                        'Access-Control-Allow-Headers',
-                        req.header('access-control-request-headers'),
-                    );
-
-                    res.header(
-                        'Cross-Origin-Embedder-Policy',
-                        'credentialless',
-                    );
-                    res.header('Cross-Origin-Opener-Policy', 'same-origin');
-
-                    if (req.method === 'OPTIONS') {
-                        // CORS Preflight
-                        res.send();
-                    } else {
-                        var targetURL = req.header(
-                            finalParams.targetUrlHeaderName,
-                        );
-                        if (!targetURL) {
-                            res.send(500, {
-                                error: `There is no "${finalParams.targetUrlHeaderName}" header in the request`,
-                            });
-                            return;
-                        }
-                        __request(
-                            {
-                                url: targetURL + req.url,
-                                method: req.method,
-                                json: req.body,
-                                headers: {
-                                    Authorization: req.header('Authorization'),
-                                },
-                            },
-                            function (error, response, body) {
-                                if (error) {
-                                    emit('log', {
-                                        type: __SLog.TYPE_ERROR,
-                                        value: error,
-                                    });
-                                }
-                            },
-                        ).pipe(res);
-                    }
-                });
-
-                app.set('port', finalParams.port);
-
-                app.listen(app.get('port'), function () {
-                    if (__SEnv.is('verbose')) {
-                        emit('log', {
-                            value: `<yellow>[corsProxy]</yellow> Cors proxy server running on port <cyan>${app.get(
-                                'port',
-                            )}</cyan>...`,
+                if (req.method === 'OPTIONS') {
+                    // CORS Preflight
+                    res.send();
+                } else {
+                    var targetURL = req.header(finalParams.targetUrlHeaderName);
+                    if (!targetURL) {
+                        res.send(500, {
+                            error: `There is no "${finalParams.targetUrlHeaderName}" header in the request`,
                         });
-                        emit('log', {
-                            value: `<yellow>[corsProxy]</yellow> Call "<cyan>http://${__SSugarConfig.get(
-                                'frontendServer.hostname',
-                            )}:${finalParams.port}</cyan>" with the "<magenta>${
-                                finalParams.targetUrlHeaderName
-                            }</magenta>" header to use it...`,
-                        });
+                        return;
                     }
-                });
-            },
-            {
-                eventEmitter: {
-                    bind: this,
-                },
-            },
-        );
+                    __request(
+                        {
+                            url: targetURL + req.url,
+                            method: req.method,
+                            json: req.body,
+                            headers: {
+                                Authorization: req.header('Authorization'),
+                            },
+                        },
+                        function (error, response, body) {
+                            if (error) {
+                                console.error(error);
+                            }
+                        },
+                    ).pipe(res);
+                }
+            });
+
+            app.set('port', finalParams.port);
+
+            app.listen(app.get('port'), function () {
+                if (__SEnv.is('verbose')) {
+                    console.log(
+                        `<yellow>[corsProxy]</yellow> Cors proxy server running on port <cyan>${app.get(
+                            'port',
+                        )}</cyan>...`,
+                    );
+                    console.log(
+                        `<yellow>[corsProxy]</yellow> Call "<cyan>http://${__SSugarConfig.get(
+                            'frontendServer.hostname',
+                        )}:${finalParams.port}</cyan>" with the "<magenta>${
+                            finalParams.targetUrlHeaderName
+                        }</magenta>" header to use it...`,
+                    );
+                }
+            });
+        });
     }
 
     /**
@@ -550,7 +509,7 @@ export default class SFrontendServer extends __SClass {
      * This method scrap the "pages" folder and register all the routes found inside.
      */
     _registerPagesRoutes() {
-        return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+        return new Promise(async (resolve) => {
             const pagesFolder = __SSugarConfig.get('storage.src.pagesDir');
 
             const pagesFilesPaths: string[] = [];
@@ -608,10 +567,10 @@ export default class SFrontendServer extends __SClass {
                 );
                 if (!pageConfig) {
                     throw new Error(
-                        `[frontendServer] Sorry but the given "<cyan>${finalPagePath}</cyan>" page file seems to be broken. Make sure to export the page config correctly fron this file...`,
+                        `[frontendServer] Sorry but the given "<cyan>${finalPagePath}</cyan>" page file seems to be broken. Make sure to export the page config correctly from this file...`,
                     );
                 }
-                await pipe(this._registerPageConfig(pageConfig, file));
+                await this._registerPageConfig(pageConfig, file);
             });
 
             // wait until our pool is ready
@@ -633,7 +592,7 @@ export default class SFrontendServer extends __SClass {
                 // @ts-ignore
                 const { default: pageConfig } = await import(final404PagePath);
                 _404BuildedFileRes?.remove?.();
-                await pipe(this._registerPageConfig(pageConfig, _404PageFile));
+                await this._registerPageConfig(pageConfig, _404PageFile);
             }
 
             // end of the pages registration
@@ -654,123 +613,111 @@ export default class SFrontendServer extends __SClass {
         pageFile?: any,
         configId?: string,
     ): Promise<void> {
-        return new __SPromise(
-            async ({ resolve, reject, emit, pipe }) => {
-                let slug = '',
-                    slugs: string[] = pageConfig.slugs ?? [];
+        return new Promise(async (resolve) => {
+            let slug = '',
+                slugs: string[] = pageConfig.slugs ?? [];
 
-                // generate path
-                if (
-                    pageFile &&
-                    !pageConfig.slugs &&
-                    pageFile.nameWithoutExt !== 'index'
-                ) {
-                    slug = `/${pageFile.path
-                        .replace(
-                            `${__SSugarConfig.get('storage.src.pagesDir')}/`,
-                            '',
-                        )
-                        .split('/')
-                        .slice(0, -1)
-                        .join('/')
-                        .replace(/\.(t|j)s$/, '')
-                        .replace(/\./g, '/')}`;
-                } else if (
-                    !pageConfig.slugs &&
-                    pageFile.nameWithoutExt === 'index'
-                ) {
-                    slug = '/';
-                }
+            // generate path
+            if (
+                pageFile &&
+                !pageConfig.slugs &&
+                pageFile.nameWithoutExt !== 'index'
+            ) {
+                slug = `/${pageFile.path
+                    .replace(
+                        `${__SSugarConfig.get('storage.src.pagesDir')}/`,
+                        '',
+                    )
+                    .split('/')
+                    .slice(0, -1)
+                    .join('/')
+                    .replace(/\.(t|j)s$/, '')
+                    .replace(/\./g, '/')}`;
+            } else if (
+                !pageConfig.slugs &&
+                pageFile.nameWithoutExt === 'index'
+            ) {
+                slug = '/';
+            }
 
-                if (!pageConfig.slugs) {
-                    if (pageConfig.params) {
-                        let isOptional = false;
-                        for (let [name, requiredOrStr] of Object.entries(
-                            pageConfig.params,
-                        )) {
-                            if (typeof requiredOrStr === 'string') {
-                                slug += `/${requiredOrStr}`;
-                            } else if (requiredOrStr) {
-                                if (isOptional) {
-                                    throw new Error(
-                                        `[SFrontendServer] You cannot have required params after optional onces in the page ${pageFile.path}`,
-                                    );
-                                }
-                                slug += `/:${name}`;
-                            } else {
-                                isOptional = true;
-                                slug += `/:${name}?`;
+            if (!pageConfig.slugs) {
+                if (pageConfig.params) {
+                    let isOptional = false;
+                    for (let [name, requiredOrStr] of Object.entries(
+                        pageConfig.params,
+                    )) {
+                        if (typeof requiredOrStr === 'string') {
+                            slug += `/${requiredOrStr}`;
+                        } else if (requiredOrStr) {
+                            if (isOptional) {
+                                throw new Error(
+                                    `[SFrontendServer] You cannot have required params after optional onces in the page ${pageFile.path}`,
+                                );
                             }
+                            slug += `/:${name}`;
+                        } else {
+                            isOptional = true;
+                            slug += `/:${name}?`;
                         }
                     }
-                    slugs = [slug];
+                }
+                slugs = [slug];
+            }
+
+            slugs.forEach((slug) => {
+                if (__SEnv.is('verbose')) {
+                    console.log(
+                        `<yellow>[route]</yellow> <cyan>${slug}</cyan> route registered <green>successfully</green> from ${
+                            pageFile
+                                ? `<magenta>${pageFile.relPath}</magenta>`
+                                : `<magenta>config.pages.${configId}</magenta>`
+                        }`,
+                    );
                 }
 
-                slugs.forEach((slug) => {
-                    if (__SEnv.is('verbose')) {
-                        emit('log', {
-                            type: __SLog.TYPE_INFO,
-                            value: `<yellow>[route]</yellow> <cyan>${slug}</cyan> route registered <green>successfully</green> from ${
-                                pageFile
-                                    ? `<magenta>${pageFile.relPath}</magenta>`
-                                    : `<magenta>config.pages.${configId}</magenta>`
-                            }`,
-                        });
-                    }
+                // register the route only once by slug
+                if (!this._getPageConfigBySlug(slug)) {
+                    this._express.get(slug, async (req, res, next) => {
+                        const _pageConfig =
+                            this._getPageConfigBySlug(slug) ?? pageConfig;
 
-                    // register the route only once by slug
-                    if (!this._getPageConfigBySlug(slug)) {
-                        this._express.get(slug, async (req, res, next) => {
-                            const _pageConfig =
-                                this._getPageConfigBySlug(slug) ?? pageConfig;
+                        // handler
+                        const handlerFn = await this._getHandlerFn(
+                            _pageConfig.handler ?? 'generic',
+                        );
 
-                            // handler
-                            const handlerFn = await this._getHandlerFn(
-                                _pageConfig.handler ?? 'generic',
-                            );
-
-                            if (_pageConfig.params) {
-                                for (let [key, value] of Object.entries(
-                                    req.params,
-                                )) {
-                                    // do not process non "number" keys
-                                    if (typeof __autoCast(key) !== 'number') {
-                                        continue;
-                                    }
-                                    const paramKey = Object.keys(
-                                        _pageConfig.params,
-                                    )[parseInt(key)];
-                                    delete req.params[key];
-                                    req.params[paramKey] = value;
+                        if (_pageConfig.params) {
+                            for (let [key, value] of Object.entries(
+                                req.params,
+                            )) {
+                                // do not process non "number" keys
+                                if (typeof __autoCast(key) !== 'number') {
+                                    continue;
                                 }
+                                const paramKey = Object.keys(
+                                    _pageConfig.params,
+                                )[parseInt(key)];
+                                delete req.params[key];
+                                req.params[paramKey] = value;
                             }
+                        }
 
-                            const handlerPromise = handlerFn({
-                                req,
-                                res,
-                                next,
-                                pageConfig: _pageConfig,
-                                pageFile,
-                                frontendServerConfig:
-                                    this._frontendServerConfig,
-                            });
-                            handlerPromise.on('log', (value) => {
-                                console.log(value.value ?? value);
-                            });
+                        handlerFn({
+                            req,
+                            res,
+                            next,
+                            pageConfig: _pageConfig,
+                            pageFile,
+                            frontendServerConfig: this._frontendServerConfig,
                         });
-                    }
+                    });
+                }
 
-                    // set the new pageConfig for this slug
-                    this._pagesConfigsBySlug[slug] = pageConfig;
-                });
+                // set the new pageConfig for this slug
+                this._pagesConfigsBySlug[slug] = pageConfig;
+            });
 
-                resolve();
-            },
-            {
-                eventEmitter: {
-                    bind: this,
-                },
-            },
-        );
+            resolve();
+        });
     }
 }

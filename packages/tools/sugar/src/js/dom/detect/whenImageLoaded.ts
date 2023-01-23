@@ -1,7 +1,5 @@
 // @ts-nocheck
 
-import __SPromise from '@coffeekraken/s-promise';
-
 /**
  * @name      whenImageLoaded
  * @namespace            js.dom.detect
@@ -34,39 +32,34 @@ import __SPromise from '@coffeekraken/s-promise';
 export default function __whenImageLoaded(
     $img: HTMLImageElement,
     callback = null,
-): __SPromise<HTMLImageElement> {
+): Promise<HTMLImageElement> {
     let imgLoadedHandler, imgErrorHandler;
 
-    const pro = new __SPromise(
-        ({ resolve, reject }) => {
-            // check if image is already loaded
-            if ($img.hasAttribute('src') && $img.complete) {
-                // resolve promise
+    const pro = new Promise((resolve, reject) => {
+        // check if image is already loaded
+        if ($img.hasAttribute('src') && $img.complete) {
+            // resolve promise
+            resolve($img);
+            // call the callback if exist
+            callback && callback($img);
+        } else {
+            // wait until loaded
+            imgLoadedHandler = (e) => {
+                // resolve the promise
                 resolve($img);
-                // call the callback if exist
+                // callback if exist
                 callback && callback($img);
-            } else {
-                // wait until loaded
-                imgLoadedHandler = (e) => {
-                    // resolve the promise
-                    resolve($img);
-                    // callback if exist
-                    callback && callback($img);
-                };
-                $img.addEventListener('load', imgLoadedHandler);
-                // listen for error
-                imgErrorHandler = (e) => {
-                    // reject
-                    reject(e);
-                };
-                $img.addEventListener('error', imgErrorHandler);
-            }
-        },
-        {
-            id: 'whenImageLoaded',
-        },
-    );
-    pro.on('finally', () => {
+            };
+            $img.addEventListener('load', imgLoadedHandler);
+            // listen for error
+            imgErrorHandler = (e) => {
+                // reject
+                reject(e);
+            };
+            $img.addEventListener('error', imgErrorHandler);
+        }
+    });
+    pro.finally(() => {
         imgLoadedHandler && $img.removeEventListener('load', imgLoadedHandler);
         imgErrorHandler && $img.removeEventListener('error', imgErrorHandler);
     });

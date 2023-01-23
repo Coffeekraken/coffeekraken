@@ -2,7 +2,6 @@
 
 import __SDocblock from '@coffeekraken/s-docblock';
 import __SDocmap from '@coffeekraken/s-docmap';
-import __SPromise from '@coffeekraken/s-promise';
 import { page404 } from '@coffeekraken/s-view-renderer';
 import __scrapeUrl from '@coffeekraken/sugar/node/og/scrapeUrl';
 
@@ -27,7 +26,7 @@ import __scrapeUrl from '@coffeekraken/sugar/node/og/scrapeUrl';
  */
 let _docmapJson;
 export default function doc(req, res, settings = {}) {
-    return new __SPromise(async ({ resolve, reject, pipe }) => {
+    return new Promise(async (resolve) => {
         const docMap = new __SDocmap();
 
         const requestedNamespace = req.params['0'].trim();

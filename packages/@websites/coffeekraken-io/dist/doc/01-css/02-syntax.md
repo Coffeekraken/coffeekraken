@@ -32,7 +32,7 @@ Pleasant syntax is a way to write your classes into your HTML that let you apply
 </div>
 <!-- will be transformed into -->
 <div
-  class="s-font s-font--20 s-font--bold s-font--italic s-p s-p--40 s-typo s-typo--h2 s-typo--h5___tablet"
+  class="s-font s-font--20 s-font--bold s-font--italic s-p s-p--40 s-typo s-typo--h2 s-typo--h5__tablet"
 >
   Hello world
 </div>
@@ -85,5 +85,5 @@ Here's the specification that a transformer MUST integrate in order to be consid
     - To: `s-font s-font--bold s-font--italic`
 3. Support the `@mediaName` syntax like so:
     - From: `s-font:bold @mobile s-font:italic`
-    - To: `s-font s-font--bold s-font--italic___mobile`
+    - To: `s-font s-font--bold s-font--italic__mobile`
 

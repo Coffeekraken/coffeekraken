@@ -1,8 +1,7 @@
-import __SPromise from '@coffeekraken/s-promise';
 import { __dirname } from '@coffeekraken/sugar/fs';
 
 export default function docmap(express, settings, config) {
-    return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+    return new Promise(async (resolve) => {
         // middlewares
         config.middlewares.docmap = {
             description:

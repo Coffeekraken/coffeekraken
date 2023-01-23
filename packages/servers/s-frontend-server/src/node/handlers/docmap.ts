@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 import __SDocmap from '@coffeekraken/s-docmap';
-import __SPromise from '@coffeekraken/s-promise';
 
 /**
  * @name                docmap
@@ -23,7 +22,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default async function docmap(req, res, settings = {}) {
-    return new __SPromise(async ({ resolve, reject, pipe }) => {
+    return new Promise(async (resolve) => {
         const docmap = new __SDocmap();
 
         const json = await docmap.read({

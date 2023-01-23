@@ -1,8 +1,8 @@
 import __SClass from '@coffeekraken/s-class';
-import type { ISLog } from '@coffeekraken/s-log';
+import type { ISLog, ISLogAsk } from '@coffeekraken/s-log';
 
 export interface ISStdioSourceOnLogCallback {
-    (logObj: ISLog): void
+    (logObj: ISLog): void;
 }
 
 export interface ISStdioSource {
@@ -11,8 +11,9 @@ export interface ISStdioSource {
 
 export interface ISStdioSourceSettings {}
 
-export default class SStdioSource extends __SClass implements ISStdioSource {
+const _nativeLog = console.log;
 
+export default class SStdioSource extends __SClass implements ISStdioSource {
     private _callbacks: Record<string, Function[]> = {};
 
     constructor(settings?: ISStdioSourceSettings) {
@@ -20,14 +21,23 @@ export default class SStdioSource extends __SClass implements ISStdioSource {
     }
 
     log(logObj: ISLog) {
-
-        this._callbacks.log?.forEach(callback => {
+        this._callbacks.log?.forEach((callback) => {
             callback(logObj);
         });
     }
 
+    ask(askObj: ISLogAsk) {
+        return new Promise(async (resolve, reject) => {
+            let answer;
+            for (let [key, fn] of this._callbacks.ask.entries()) {
+                answer = await fn(askObj);
+            }
+            resolve(answer);
+        });
+    }
+
     ready(): void {
-        this._callbacks.ready?.forEach(callback => {
+        this._callbacks.ready?.forEach((callback) => {
             callback();
         });
     }
@@ -49,7 +59,8 @@ export default class SStdioSource extends __SClass implements ISStdioSource {
         if (!this._callbacks[event].includes(callback)) {
             return;
         }
-        this._callbacks[event].splice(this._callbacks[event].indexOf(callback, 1));
+        this._callbacks[event].splice(
+            this._callbacks[event].indexOf(callback, 1),
+        );
     }
-
 }

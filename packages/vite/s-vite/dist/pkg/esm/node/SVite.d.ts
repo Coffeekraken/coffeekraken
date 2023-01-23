@@ -44,10 +44,10 @@ export default class SVite extends __SClass {
     
     constructor(settings?: ISViteSettings);
     
-    start(params: Partial<ISViteStartParams>): any;
+    start(params: Partial<ISViteStartParams>): Promise<unknown>;
     
     rebuildTimeoutByPath: {};
-    build(params: ISViteBuildParams | String): any;
+    build(params: ISViteBuildParams | String): Promise<unknown>;
     _handleBuildResult(buildResult: ISViteBuildResult, buildParams: ISViteBuildParamsInternal): Promise<ISViteBuildResult>;
     
     test(params: ISViteTestParams | String): any;

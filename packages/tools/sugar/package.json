@@ -99,6 +99,7 @@
         "striptags": "^3.2.0",
         "tcp-port-used": "^1.0.2",
         "temp-dir": "^2.0.0",
+        "term-size": "^3.0.2",
         "terminal-kit": "^1.49.4",
         "to-regex": "^3.0.2",
         "tunnel": "^0.0.6",
@@ -196,8 +197,14 @@
             "import": "./dist/pkg/esm/shared/datetime/_exports.js"
         },
         "./dev": {
-            "require": "./dist/pkg/cjs/shared/dev/_exports.js",
-            "import": "./dist/pkg/esm/shared/dev/_exports.js"
+            "node": {
+                "require": "./dist/pkg/cjs/node/dev/_exports.js",
+                "import": "./dist/pkg/esm/node/dev/_exports.js"
+            },
+            "default": {
+                "require": "./dist/pkg/cjs/js/dev/_exports.js",
+                "import": "./dist/pkg/esm/js/dev/_exports.js"
+            }
         },
         "./easing": {
             "require": "./dist/pkg/cjs/shared/easing/_exports.js",

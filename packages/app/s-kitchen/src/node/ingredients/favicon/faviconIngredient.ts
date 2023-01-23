@@ -1,6 +1,5 @@
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import { __copySync } from '@coffeekraken/sugar/fs';
-import { __dirname } from '@coffeekraken/sugar/fs';
+import { __copySync, __dirname } from '@coffeekraken/sugar/fs';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __path from 'path';
 import type { ISKitchenIngredient } from '../../SKitchen';
@@ -21,7 +20,7 @@ const faviconIngredient: ISKitchenIngredient = {
     description:
         'Add the base <cyan>favicon.png</cyan> file into your <magenta>sugar</magenta> project',
     projectTypes: ['unknown', 'sugar'],
-    async add({ ask, log, emit }) {
+    async add() {
         // source file path
         const sourceFilePath = __path.resolve(
             __packageRootDir(__dirname()),

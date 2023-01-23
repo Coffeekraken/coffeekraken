@@ -18,8 +18,6 @@ export interface ISKitchenIngredientContext {
 export interface ISKitchenIngredientAddApi {
     ask(askObj: ISLogAsk): Promise<any>;
     log(message: string): void;
-    emit(type: 'log' | 'ask', what: any): void;
-    pipe: Function;
     context: ISKitchenIngredientContext;
 }
 export interface ISKitchenIngredient {
@@ -89,14 +87,14 @@ declare class SKitchen extends __SClass {
     
     constructor(settings?: Partial<ISKitchenSettings>);
     
-    new(params: ISKitchenNewParams | string): any;
+    new(params: ISKitchenNewParams | string): Promise<unknown>;
     
-    run(params: Partial<ISKitchenRunParams> | string): any;
+    run(params: Partial<ISKitchenRunParams> | string): Promise<unknown>;
     
     listRecipes(): Record<string, ISKitchenRecipe>;
     
-    list(params: ISKitchenListParams | string): Promise<any>;
+    list(params: ISKitchenListParams | string): Promise<any | void>;
     
-    add(params: ISKitchenListParams | string): Promise<any>;
+    add(params: ISKitchenListParams | string): Promise<any | void>;
 }
 export default SKitchen;

@@ -1,10 +1,6 @@
 "use strict";
 // @ts-nocheck
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
 const dom_1 = require("@coffeekraken/sugar/dom");
 /**
  * @name      whenAnimationEnd
@@ -17,7 +13,7 @@ const dom_1 = require("@coffeekraken/sugar/dom");
  * Detect when animation ends
  *
  * @param    {HTMLElement}    elm    The element to listen on
- * @return   {SPromise<HTMLElement>}                  A promise that will be resolved once the animation has ended
+ * @return   {Promise<HTMLElement>}                  A promise that will be resolved once the animation has ended
  *
  * @todo      tests
  *
@@ -29,11 +25,11 @@ const dom_1 = require("@coffeekraken/sugar/dom");
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __whenAnimationEnd($elm) {
-    return new s_promise_1.default(({ resolve }) => {
+    return new Promise((resolve) => {
         (0, dom_1.__addEventListenerOnce)($elm, 'animationend', (e) => {
             resolve($elm);
         });
     });
 }
 exports.default = __whenAnimationEnd;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdFQUFpRDtBQUVqRCxpREFBaUU7QUFFakU7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXFCRztBQUNILFNBQXdCLGtCQUFrQixDQUN0QyxJQUFpQjtJQUVqQixPQUFPLElBQUksbUJBQVUsQ0FBQyxDQUFDLEVBQUUsT0FBTyxFQUFFLEVBQUUsRUFBRTtRQUNsQyxJQUFBLDRCQUFzQixFQUFDLElBQUksRUFBRSxjQUFjLEVBQUUsQ0FBQyxDQUFDLEVBQUUsRUFBRTtZQUMvQyxPQUFPLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDbEIsQ0FBQyxDQUFDLENBQUM7SUFDUCxDQUFDLENBQUMsQ0FBQztBQUNQLENBQUM7QUFSRCxxQ0FRQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkLGlEQUFpRTtBQUVqRTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBQ0gsU0FBd0Isa0JBQWtCLENBQ3RDLElBQWlCO0lBRWpCLE9BQU8sSUFBSSxPQUFPLENBQUMsQ0FBQyxPQUFPLEVBQUUsRUFBRTtRQUMzQixJQUFBLDRCQUFzQixFQUFDLElBQUksRUFBRSxjQUFjLEVBQUUsQ0FBQyxDQUFDLEVBQUUsRUFBRTtZQUMvQyxPQUFPLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDbEIsQ0FBQyxDQUFDLENBQUM7SUFDUCxDQUFDLENBQUMsQ0FBQztBQUNQLENBQUM7QUFSRCxxQ0FRQyJ9

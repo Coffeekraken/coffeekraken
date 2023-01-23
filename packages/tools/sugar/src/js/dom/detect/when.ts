@@ -1,5 +1,4 @@
 // @ts-nocheck
-import __SPromise from '@coffeekraken/s-promise';
 
 import type { IWhenEntersViewportSettings } from './whenEntersViewport';
 import type { IWhenInteractSettings } from './whenInteract';
@@ -122,7 +121,7 @@ export default function __when(
         ...(settings ?? {}),
     };
 
-    return new __SPromise(async ({ resolve, reject }) => {
+    return new Promise(async (resolve, reject) => {
         // ensure we work with an array of time(s)
         if (!Array.isArray(trigger))
             trigger = trigger.split(',').map((t) => t.trim());

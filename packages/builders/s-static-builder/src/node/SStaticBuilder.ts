@@ -5,7 +5,6 @@ import __SFile from '@coffeekraken/s-file';
 import __SFrontendServer from '@coffeekraken/s-frontend-server';
 import __SGlob from '@coffeekraken/s-glob';
 import __SLog from '@coffeekraken/s-log';
-import __SPromise from '@coffeekraken/s-promise';
 import __SRequest from '@coffeekraken/s-request';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __formatDuration, __wait } from '@coffeekraken/sugar/datetime';
@@ -129,401 +128,346 @@ export default class SStaticBuilder extends __SBuilder {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    _build(params: ISStaticBuilderBuildParams): Promise<ISStaticBuilderResult> {
-        return new __SPromise(
-            async ({ resolve, reject, pipe, emit }) => {
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>[build]</yellow> Start building your static website`,
-                });
+    _build(
+        params: ISStaticBuilderBuildParams,
+    ): Promise<ISStaticBuilderResult | void> {
+        return new Promise(async (resolve) => {
+            console.log(
+                `<yellow>[build]</yellow> Start building your static website`,
+            );
 
-                // create the temp build directory
-                const cacheBuildDir = `${__packageCacheDir()}/s-static-builder/build`;
+            // create the temp build directory
+            const cacheBuildDir = `${__packageCacheDir()}/s-static-builder/build`;
 
-                const errorFilePath = `${params.outDir}/errors.json`;
+            const errorFilePath = `${params.outDir}/errors.json`;
 
-                let errors: any[] = [];
-                if (__fs.existsSync(errorFilePath)) {
-                    errors = __readJsonSync(errorFilePath);
-                }
+            let errors: any[] = [];
+            if (__fs.existsSync(errorFilePath)) {
+                errors = __readJsonSync(errorFilePath);
+            }
 
-                // init incremental cache
-                let incrementalCache = {};
-                const incrementalCachePath = __path.resolve(
-                    __packageCacheDir(),
-                    's-static-builder/incremental-cache.json',
+            // init incremental cache
+            let incrementalCache = {};
+            const incrementalCachePath = __path.resolve(
+                __packageCacheDir(),
+                's-static-builder/incremental-cache.json',
+            );
+
+            // make use of frontend server
+            let frontendServer;
+            if (params.useFrontendServer) {
+                frontendServer = new __SFrontendServer();
+                await pipe(
+                    frontendServer.start({
+                        listen: false,
+                    }),
+                );
+            }
+
+            console.log(`<yellow>[build]</yellow> Starting Static Build`);
+            console.log(
+                `<yellow>○</yellow> Environment : ${
+                    params.prod
+                        ? '<green>production</green>'
+                        : '<yellow>development</yellow>'
+                }`,
+            );
+            console.log(
+                `<yellow>○</yellow> Host : <cyan>${params.host}</cyan>`,
+            );
+
+            // handle params
+            if (params.clean) {
+                console.log(
+                    `<yellow>[build]</yellow> Cleaning the static builder internal cache (incremental, etc...)`,
                 );
 
-                // make use of frontend server
-                let frontendServer;
-                if (params.useFrontendServer) {
-                    frontendServer = new __SFrontendServer();
-                    await pipe(
-                        frontendServer.start({
-                            listen: false,
-                        }),
-                    );
-                }
+                // reset errors
+                errors = [];
 
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>[build]</yellow> Starting Static Build`,
+                try {
+                    // remove the existing static directory
+                    __removeSync(params.outDir);
+                    // remove the cache build dir
+                    __removeSync(cacheBuildDir);
+                    // delete the integrity cache
+                    __removeSync(incrementalCache);
+                } catch (e) {}
+            }
+
+            // read the "incremental" cache
+            if (params.incremental && __fs.existsSync(incrementalCachePath)) {
+                incrementalCache = __readJsonSync(incrementalCachePath);
+            }
+
+            // ensure input file exists
+            if (!__fs.existsSync(params.input)) {
+                throw new Error(
+                    `Sorry but the specified input file "<cyan>${params.input}</cyan>" does not exists...`,
+                );
+            }
+
+            // reading the file
+            const xmlStr = __fs.readFileSync(params.input, 'utf8').toString();
+
+            // parsing xml
+            let xml = await parseStringPromise(xmlStr);
+
+            // override input xml if want to build from listed errors
+            if (params.fromErrors) {
+                const errorsList = __readJsonSync(errorFilePath);
+                xml = {
+                    urlset: {
+                        url: [],
+                    },
+                };
+                errorsList.forEach((urlLoc) => {
+                    xml.urlset.url.push({
+                        loc: urlLoc,
+                    });
                 });
-                emit('log', {
+            }
+
+            let leftDuration = 0,
+                currentDuration = 0;
+
+            let logsCount = 0;
+
+            if (params.fromErrors) {
+                console.log(
+                    `<yellow>[build]</yellow> Scraping pages using the <cyan>${__path.relative(
+                        __packageRootDir(),
+                        errorFilePath,
+                    )}</cyan>...`,
+                );
+            } else {
+                console.log(
+                    `<yellow>[build]</yellow> Scraping pages using the <cyan>${__path.relative(
+                        __packageRootDir(),
+                        params.input,
+                    )}</cyan>...`,
+                );
+            }
+
+            let genDuration;
+
+            // loop on each urls to get his content
+            for (let i = 0; i < xml.urlset.url.length; i++) {
+                const url = xml.urlset.url[i],
+                    urlIntegrity = Array.isArray(url.integrity)
+                        ? url.integrity[0]
+                        : url.integrity,
+                    urlLoc = Array.isArray(url.loc) ? url.loc[0] : url.loc,
+                    urlLastMod = Array.isArray(url.lastmod)
+                        ? url.lastmod[0]
+                        : url.lastmod;
+
+                // generating the output path for the current file
+                let outPath = `${params.outDir}/${
+                        urlLoc === '/' ? 'index' : urlLoc
+                    }.html`.replace(/\/{2,20}/gm, '/'),
+                    cacheOutPath = `${cacheBuildDir}/${
+                        urlLoc === '/' ? 'index' : urlLoc
+                    }.html`.replace(/\/{2,20}/gm, '/');
+
+                console.log({
+                    clear: __SLog.isTypeEnabled(__SLog.TYPE_VERBOSE)
+                        ? false
+                        : logsCount,
                     type: __SLog.TYPE_INFO,
-                    value: `<yellow>○</yellow> Environment : ${
-                        params.prod
-                            ? '<green>production</green>'
-                            : '<yellow>development</yellow>'
-                    }`,
+                    value: `<yellow>[build]</yellow> Reaching the url "<cyan>${urlLoc}</cyan>"...`,
                 });
-                emit('log', {
+                logsCount = 0;
+
+                console.log({
                     type: __SLog.TYPE_INFO,
-                    value: `<yellow>○</yellow> Host : <cyan>${params.host}</cyan>`,
+                    value: `<yellow>[build]</yellow> <magenta>${
+                        xml.urlset.url.length - i
+                    }</magenta> url(s), <cyan>~${__formatDuration(
+                        leftDuration,
+                    )}</cyan> remaining`,
                 });
+                logsCount++;
 
-                let byItemAverage = 0;
-
-                // handle params
-                if (params.clean) {
-                    emit('log', {
+                if (genDuration) {
+                    console.log({
                         type: __SLog.TYPE_INFO,
-                        value: `<yellow>[build]</yellow> Cleaning the static builder internal cache (incremental, etc...)`,
-                    });
-
-                    // reset errors
-                    errors = [];
-
-                    try {
-                        // remove the existing static directory
-                        __removeSync(params.outDir);
-                        // remove the cache build dir
-                        __removeSync(cacheBuildDir);
-                        // delete the integrity cache
-                        __removeSync(incrementalCache);
-                    } catch (e) {}
-                }
-
-                // read the "incremental" cache
-                if (
-                    params.incremental &&
-                    __fs.existsSync(incrementalCachePath)
-                ) {
-                    incrementalCache = __readJsonSync(incrementalCachePath);
-                }
-
-                // ensure input file exists
-                if (!__fs.existsSync(params.input)) {
-                    throw new Error(
-                        `Sorry but the specified input file "<cyan>${params.input}</cyan>" does not exists...`,
-                    );
-                }
-
-                // reading the file
-                const xmlStr = __fs
-                    .readFileSync(params.input, 'utf8')
-                    .toString();
-
-                // parsing xml
-                let xml = await parseStringPromise(xmlStr);
-
-                // override input xml if want to build from listed errors
-                if (params.fromErrors) {
-                    const errorsList = __readJsonSync(errorFilePath);
-                    xml = {
-                        urlset: {
-                            url: [],
-                        },
-                    };
-                    errorsList.forEach((urlLoc) => {
-                        xml.urlset.url.push({
-                            loc: urlLoc,
-                        });
-                    });
-                }
-
-                // xml = {
-                //     urlset: {
-                //         url: [
-                //             {
-                //                 loc:
-                //                     '/api/@coffeekraken.sugar.shared.module.isSystem',
-                //             },
-                //         ],
-                //     },
-                // };
-
-                let leftDuration = 0,
-                    currentDuration = 0;
-
-                let logsCount = 0;
-
-                if (params.fromErrors) {
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `<yellow>[build]</yellow> Scraping pages using the <cyan>${__path.relative(
-                            __packageRootDir(),
-                            errorFilePath,
-                        )}</cyan>...`,
-                    });
-                } else {
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `<yellow>[build]</yellow> Scraping pages using the <cyan>${__path.relative(
-                            __packageRootDir(),
-                            params.input,
-                        )}</cyan>...`,
-                    });
-                }
-
-                let genDuration;
-
-                // loop on each urls to get his content
-                for (let i = 0; i < xml.urlset.url.length; i++) {
-                    const url = xml.urlset.url[i],
-                        urlIntegrity = Array.isArray(url.integrity)
-                            ? url.integrity[0]
-                            : url.integrity,
-                        urlLoc = Array.isArray(url.loc) ? url.loc[0] : url.loc,
-                        urlLastMod = Array.isArray(url.lastmod)
-                            ? url.lastmod[0]
-                            : url.lastmod;
-
-                    // generating the output path for the current file
-                    let outPath = `${params.outDir}/${
-                            urlLoc === '/' ? 'index' : urlLoc
-                        }.html`.replace(/\/{2,20}/gm, '/'),
-                        cacheOutPath = `${cacheBuildDir}/${
-                            urlLoc === '/' ? 'index' : urlLoc
-                        }.html`.replace(/\/{2,20}/gm, '/');
-
-                    emit('log', {
-                        clear: __SLog.isTypeEnabled(__SLog.TYPE_VERBOSE)
-                            ? false
-                            : logsCount,
-                        type: __SLog.TYPE_INFO,
-                        value: `<yellow>[build]</yellow> Reaching the url "<cyan>${urlLoc}</cyan>"...`,
-                    });
-                    logsCount = 0;
-
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `<yellow>[build]</yellow> <magenta>${
-                            xml.urlset.url.length - i
-                        }</magenta> url(s), <cyan>~${__formatDuration(
-                            leftDuration,
-                        )}</cyan> remaining`,
+                        value: `<yellow>[build]</yellow> Last page generated in <yellow>${
+                            genDuration.end().formatedDuration
+                        }</yellow>`,
                     });
                     logsCount++;
+                }
 
-                    if (genDuration) {
-                        emit('log', {
-                            type: __SLog.TYPE_INFO,
-                            value: `<yellow>[build]</yellow> Last page generated in <yellow>${
-                                genDuration.end().formatedDuration
-                            }</yellow>`,
-                        });
-                        logsCount++;
-                    }
-
-                    // incremental build
-                    if (params.incremental) {
-                        if (
-                            urlIntegrity &&
-                            incrementalCache[urlLoc] == urlIntegrity
-                        ) {
-                            if (__fs.existsSync(cacheOutPath)) {
-                                emit('log', {
-                                    type: __SLog.TYPE_INFO,
-                                    value: `<yellow>[build]</yellow> Incremental build for url <cyan>${urlLoc}</cyan>`,
-                                });
-                                logsCount++;
-
-                                __copySync(cacheOutPath, outPath);
-                                // continue with next url
-                                continue;
-                            }
-                        }
-                    }
-
-                    const start = Date.now();
-
-                    genDuration = new __SDuration();
-
-                    let res,
-                        tries = 0;
-
-                    function castResponse(res) {
-                        let json;
-                        if (!res.data) {
-                            return {
-                                status: 404,
-                            };
-                        }
-                        try {
-                            json = JSON.parse(res.data);
-                            return json;
-                        } catch (e) {
-                            return res.data;
-                        }
-                    }
-
-                    while (
-                        typeof res !== 'string' &&
-                        tries < params.requestRetry
+                // incremental build
+                if (params.incremental) {
+                    if (
+                        urlIntegrity &&
+                        incrementalCache[urlLoc] == urlIntegrity
                     ) {
-                        if (res && res.status === 404) {
-                            break;
-                        }
-                        if (tries > 0) {
-                            emit('log', {
-                                type: __SLog.TYPE_INFO,
-                                value: `<yellow>[build]</yellow> Retry the url <cyan>${urlLoc}</cyan> for the <magenta>${tries}</magenta> time${
-                                    tries > 1 ? 's' : ''
-                                }...`,
-                            });
+                        if (__fs.existsSync(cacheOutPath)) {
+                            console.log(
+                                `<yellow>[build]</yellow> Incremental build for url <cyan>${urlLoc}</cyan>`,
+                            );
                             logsCount++;
-                            await __wait(params.requestRetryTimeout);
-                        }
-                        tries++;
 
-                        if (params.useFrontendServer) {
-                            const reqPromise = frontendServer.request(
-                                urlLoc,
-                                {},
-                            );
-                            res = castResponse(await reqPromise);
-                        } else {
-                            const request = new __SRequest({
-                                url: `${params.host}${urlLoc}`,
-                                timeout: params.requestTimeout,
-                            });
-                            res = castResponse(await request.send());
-                        }
-                    }
-
-                    let isErrors = typeof res !== 'string';
-                    if (isErrors) {
-                        if (!errors.includes(urlLoc)) {
-                            errors.push(urlLoc);
-                        }
-
-                        outPath = outPath.replace(/\.html$/, '.json');
-
-                        emit('log', {
-                            type: __SLog.TYPE_ERROR,
-                            value: `<red>[error]</red> Something goes wrong while rendering the "<cyan>${urlLoc}</cyan>" url. Check out the "<magenta>${
-                                urlLoc === '/' ? 'index' : urlLoc
-                            }.json</magenta>" file for more infos...`,
-                        });
-                        logsCount++;
-
-                        __writeJsonSync(outPath, res);
-                        __writeJsonSync(errorFilePath, errors);
-                    } else {
-                        // remove the item from the list if rendered correctly
-                        errors = errors.filter((e) => e !== urlLoc);
-                        try {
-                            __fs.unlinkSync(
-                                outPath.replace(/\.html$/, '.json'),
-                            );
-                        } catch (e) {}
-                        __writeJsonSync(errorFilePath, errors);
-                    }
-
-                    const end = Date.now();
-
-                    currentDuration += end - start;
-                    leftDuration =
-                        (end - start) * (xml.urlset.url.length - i) -
-                        currentDuration;
-
-                    // @ts-ignore
-                    if (!isErrors) {
-                        __writeFileSync(cacheOutPath, res);
-                        __writeFileSync(outPath, res);
-
-                        // saving the integrity
-                        if (urlIntegrity) {
-                            incrementalCache[urlLoc] = urlIntegrity;
-                            __writeJsonSync(
-                                incrementalCachePath,
-                                incrementalCache,
-                            );
+                            __copySync(cacheOutPath, outPath);
+                            // continue with next url
+                            continue;
                         }
                     }
                 }
 
-                // assets
-                if (params.assets) {
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `<yellow>[build]</yellow> Copying assets:`,
-                    });
-                    for (
-                        let i = 0;
-                        i < Object.keys(params.assets).length;
-                        i++
-                    ) {
-                        const assetObj =
-                            params.assets[Object.keys(params.assets)[i]];
+                const start = Date.now();
 
-                        emit('log', {
-                            type: __SLog.TYPE_INFO,
-                            value: `<yellow>[build]</yellow> - <cyan>${__path.relative(
+                genDuration = new __SDuration();
+
+                let res,
+                    tries = 0;
+
+                function castResponse(res) {
+                    let json;
+                    if (!res.data) {
+                        return {
+                            status: 404,
+                        };
+                    }
+                    try {
+                        json = JSON.parse(res.data);
+                        return json;
+                    } catch (e) {
+                        return res.data;
+                    }
+                }
+
+                while (typeof res !== 'string' && tries < params.requestRetry) {
+                    if (res && res.status === 404) {
+                        break;
+                    }
+                    if (tries > 0) {
+                        console.log(
+                            `<yellow>[build]</yellow> Retry the url <cyan>${urlLoc}</cyan> for the <magenta>${tries}</magenta> time${
+                                tries > 1 ? 's' : ''
+                            }...`,
+                        );
+                        logsCount++;
+                        await __wait(params.requestRetryTimeout);
+                    }
+                    tries++;
+
+                    if (params.useFrontendServer) {
+                        const reqPromise = frontendServer.request(urlLoc, {});
+                        res = castResponse(await reqPromise);
+                    } else {
+                        const request = new __SRequest({
+                            url: `${params.host}${urlLoc}`,
+                            timeout: params.requestTimeout,
+                        });
+                        res = castResponse(await request.send());
+                    }
+                }
+
+                let isErrors = typeof res !== 'string';
+                if (isErrors) {
+                    if (!errors.includes(urlLoc)) {
+                        errors.push(urlLoc);
+                    }
+
+                    outPath = outPath.replace(/\.html$/, '.json');
+
+                    console.log(
+                        `<red>[error]</red> Something goes wrong while rendering the "<cyan>${urlLoc}</cyan>" url. Check out the "<magenta>${
+                            urlLoc === '/' ? 'index' : urlLoc
+                        }.json</magenta>" file for more infos...`,
+                    );
+                    logsCount++;
+
+                    __writeJsonSync(outPath, res);
+                    __writeJsonSync(errorFilePath, errors);
+                } else {
+                    // remove the item from the list if rendered correctly
+                    errors = errors.filter((e) => e !== urlLoc);
+                    try {
+                        __fs.unlinkSync(outPath.replace(/\.html$/, '.json'));
+                    } catch (e) {}
+                    __writeJsonSync(errorFilePath, errors);
+                }
+
+                const end = Date.now();
+
+                currentDuration += end - start;
+                leftDuration =
+                    (end - start) * (xml.urlset.url.length - i) -
+                    currentDuration;
+
+                // @ts-ignore
+                if (!isErrors) {
+                    __writeFileSync(cacheOutPath, res);
+                    __writeFileSync(outPath, res);
+
+                    // saving the integrity
+                    if (urlIntegrity) {
+                        incrementalCache[urlLoc] = urlIntegrity;
+                        __writeJsonSync(incrementalCachePath, incrementalCache);
+                    }
+                }
+            }
+
+            // assets
+            if (params.assets) {
+                console.log(`<yellow>[build]</yellow> Copying assets:`);
+                for (let i = 0; i < Object.keys(params.assets).length; i++) {
+                    const assetObj =
+                        params.assets[Object.keys(params.assets)[i]];
+
+                    console.log(
+                        `<yellow>[build]</yellow> - <cyan>${__path.relative(
+                            __packageRootDir(),
+                            assetObj.from,
+                        )}${
+                            assetObj.glob ? `/${assetObj.glob}` : ''
+                        }</cyan> to <magenta>${__path.relative(
+                            __packageRootDir(),
+                            assetObj.to,
+                        )}</magenta>`,
+                    );
+
+                    // filesystem
+                    if (assetObj.from.match(/^\//)) {
+                        // copy files
+                        __SGlob.copySync(assetObj.glob ?? '', assetObj.to, {
+                            cwd: assetObj.from,
+                        });
+                        // url
+                    } else if (assetObj.from.match(/^https?:\/\//)) {
+                        const req = new __SRequest({
+                            url: assetObj.from,
+                        });
+                        console.log(
+                            `<yellow>[assets]</yellow> Getting asset "<yellow>${__path.relative(
                                 __packageRootDir(),
                                 assetObj.from,
-                            )}${
-                                assetObj.glob ? `/${assetObj.glob}` : ''
-                            }</cyan> to <magenta>${__path.relative(
+                            )}</yellow>" to "<cyan>${__path.relative(
                                 __packageRootDir(),
                                 assetObj.to,
-                            )}</magenta>`,
+                            )}</cyan>"`,
+                        );
+                        const res = await req.send().catch((error) => {
+                            throw new Error(
+                                `<red>[error]</red> The requested asset "<yellow>${assetObj.from}</yellow>" is not reachable...`,
+                            );
                         });
-
-                        // filesystem
-                        if (assetObj.from.match(/^\//)) {
-                            // copy files
-                            __SGlob.copySync(assetObj.glob ?? '', assetObj.to, {
-                                cwd: assetObj.from,
-                            });
-                            // url
-                        } else if (assetObj.from.match(/^https?:\/\//)) {
-                            const req = new __SRequest({
-                                url: assetObj.from,
-                            });
-                            emit('log', {
-                                type: __SLog.TYPE_INFO,
-                                value: `<yellow>[assets]</yellow> Getting asset "<yellow>${__path.relative(
-                                    __packageRootDir(),
-                                    assetObj.from,
-                                )}</yellow>" to "<cyan>${__path.relative(
-                                    __packageRootDir(),
-                                    assetObj.to,
-                                )}</cyan>"`,
-                            });
-                            const res = await req.send().catch((error) => {
-                                throw new Error(
-                                    `<red>[error]</red> The requested asset "<yellow>${assetObj.from}</yellow>" is not reachable...`,
-                                );
-                            });
-                            // @ts-ignore
-                            let data = res.data;
-                            try {
-                                data = JSON.stringify(data);
-                            } catch (e) {}
-                            __writeFileSync(assetObj.to, data);
-                        }
+                        // @ts-ignore
+                        let data = res.data;
+                        try {
+                            data = JSON.stringify(data);
+                        } catch (e) {}
+                        __writeFileSync(assetObj.to, data);
                     }
                 }
+            }
 
-                resolve();
-            },
-            {
-                metas: {
-                    id: this.constructor.name,
-                },
-            },
-        );
+            resolve();
+        });
     }
 }

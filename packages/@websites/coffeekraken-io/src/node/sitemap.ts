@@ -2,7 +2,6 @@ import __SDocmap from '@coffeekraken/s-docmap';
 import __SPromise from '@coffeekraken/s-promise';
 import { __fileHash } from '@coffeekraken/sugar/fs';
 import __fs from 'fs';
-import __SLog from '@coffeekraken/s-log';
 
 export default function sitemap() {
     return new __SPromise(async ({ resolve, reject, emit }) => {
@@ -23,10 +22,9 @@ export default function sitemap() {
             if (!hash) {
                 // @ts-ignore
                 if (!__fs.existsSync(docmapObj.path)) {
-                    emit('log', {
-                        type: __SLog.TYPE_WARN,
-                        value: `<red>[sitemap]</red> The file "<cyan>${docmapObj.path}</cyan>" has been skipped cause it does not exists...`,
-                    });
+                    console.warn(
+                        `<red>[sitemap]</red> The file "<cyan>${docmapObj.path}</cyan>" has been skipped cause it does not exists...`,
+                    );
                 } else {
                     // @ts-ignore
                     hash = __fileHash(docmapObj.path);

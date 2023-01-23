@@ -1,11 +1,11 @@
-import type { ISLog } from '@coffeekraken/s-log';
+import type { ISLog, ISLogAsk } from '@coffeekraken/s-log';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import { __parseHtml } from '@coffeekraken/sugar/console';
+import { __getColorFor } from '@coffeekraken/sugar/dev';
 import { __clone, __deepMerge } from '@coffeekraken/sugar/object';
-import __getColorFor from '@coffeekraken/sugar/shared/dev/color/getColorFor';
 import { __stripAnsi, __upperFirst } from '@coffeekraken/sugar/string';
-import { __countLines } from '@coffeekraken/sugar/terminal';
+import { __countLines, __termSize } from '@coffeekraken/sugar/terminal';
 import * as __Enquirer from 'enquirer';
 import __SStdioAdapter from '../../shared/SStdioAdapter';
 
@@ -39,9 +39,11 @@ const _nativeConsole = {};
 for (let key of ['log', 'error', 'warn', 'verbose']) {
     _nativeConsole[key] = console[key] ?? console.log;
 }
-    
 
-export default class SStdioBasicAdapter extends __SStdioAdapter implements ISBasicStdioAdapter {
+export default class SStdioBasicAdapter
+    extends __SStdioAdapter
+    implements ISBasicStdioAdapter
+{
     /**
      * @name            constructor
      * @type            Function
@@ -52,9 +54,7 @@ export default class SStdioBasicAdapter extends __SStdioAdapter implements ISBas
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(
-        settings?: ISStdioBasicAdapterSettings,
-    ) {
+    constructor(settings?: ISStdioBasicAdapterSettings) {
         super(__deepMerge({}, settings || {}));
     }
 
@@ -106,17 +106,25 @@ export default class SStdioBasicAdapter extends __SStdioAdapter implements ISBas
 
         const groupObj = this._getGroupObj(logObj.group);
 
+        const termSize = __termSize();
+
         if (logObj.group !== this._lastLogObj?.group) {
             logger(groupObj.prefix);
             // @ts-ignore
-            logger(__parseHtml(
-                `<bg${__upperFirst(groupObj.color)}><black> ${
-                    logObj.group
-                } </black></bg${__upperFirst(groupObj.color)}><${
-                    groupObj.color
-                }>${'-'.repeat(
-                    process.stdout.columns - 2 - logObj.group?.length ?? 0,
-                )}</${groupObj.color}>`)
+
+            let repeat = termSize.columns - 2 - (logObj.group?.length ?? 0);
+            if (repeat < 0) {
+                repeat = 0;
+            }
+
+            logger(
+                __parseHtml(
+                    `<bg${__upperFirst(groupObj.color)}><black> ${
+                        logObj.group
+                    } </black></bg${__upperFirst(groupObj.color)}><${
+                        groupObj.color
+                    }>${'-'.repeat(repeat)}</${groupObj.color}>`,
+                ),
             );
             logger(groupObj.prefix);
         }
@@ -154,10 +162,15 @@ export default class SStdioBasicAdapter extends __SStdioAdapter implements ISBas
             logLinesCount += logObj.margin.top;
         }
 
-        const log = __parseHtml(`<${groupObj.color}>█</${groupObj.color}>   ${logObj.value?.value ?? logObj.value ?? logObj.toString()}`);
+        let toLog = logObj.value?.value ?? logObj.value ?? logObj;
+        if (typeof toLog === 'string') {
+            toLog = __parseHtml(
+                `<${groupObj.color}>█</${groupObj.color}>   ${toLog}`,
+            );
+            logLinesCount += __countLines(toLog);
+        }
 
-        logLinesCount += __countLines(log);
-        logger(log);
+        logger(toLog);
 
         if (logObj.margin?.bottom) {
             for (let i = 0; i < logObj.margin.bottom; i++) {
@@ -256,19 +269,9 @@ export default class SStdioBasicAdapter extends __SStdioAdapter implements ISBas
      * @since         2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    _ask(askObj) {
+    ask(askObj: ISLogAsk) {
         return new __SPromise(async ({ resolve, reject, emit }) => {
             let prompt, res;
-
-            if (!askObj.group) {
-                // @ts-ignore
-                if (askObj.metas.id === 'SPromise') {
-                    askObj.group = 'Global';
-                } else {
-                    // @ts-ignore
-                    askObj.group = askObj.metas.id;
-                }
-            }
 
             // transform html in message
             askObj.message = __parseHtml(askObj.message);

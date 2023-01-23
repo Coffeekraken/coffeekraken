@@ -1,11 +1,9 @@
-import __SPromise from '@coffeekraken/s-promise';
 import __SVite from '../node/SVite';
 
 export default function start(stringArgs = '') {
-    return new __SPromise(async ({ resolve, pipe }) => {
+    return new Promise(async (resolve) => {
         const vite = new __SVite();
-        const promise = vite.start(stringArgs);
-        pipe(promise);
-        resolve(await promise);
+        const result = await vite.start(stringArgs);
+        resolve(result);
     });
 }

@@ -1,2 +1,2 @@
-declare const _default: (stringArgs?: string) => Promise<any>;
+declare const _default: (stringArgs?: string) => Promise<unknown>;
 export default _default;

@@ -1,6 +1,5 @@
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import type { ISLog } from '@coffeekraken/s-log';
-import __SPromise from '@coffeekraken/s-promise';
 import { ISCommandProcessParams, ISCommandProcessSettings, ISProcessInternal, ISProcessParams, ISProcessProcessObj, ISProcessSettings } from './ISProcess';
 
 declare class SProcess extends __SEventEmitter implements ISProcessInternal {
@@ -20,9 +19,9 @@ declare class SProcess extends __SEventEmitter implements ISProcessInternal {
     
     initialParams: Record<string, unknown>;
     
-    _processPromise?: __SPromise;
+    _processPromise?: Promise;
     
-    static from(what: string | Function | Promise<any> | __SPromise | SProcess, settings?: Partial<ISProcessSettings>): Promise<SProcess>;
+    static from(what: string | Function | Promise<any> | SProcess, settings?: Partial<ISProcessSettings>): Promise<SProcess>;
     
     static fromCommand(initialParams?: Partial<ISCommandProcessParams>, settings?: Partial<ISCommandProcessSettings>): Promise<SProcess>;
     

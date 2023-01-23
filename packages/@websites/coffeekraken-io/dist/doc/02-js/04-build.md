@@ -59,6 +59,11 @@ export default {
     host: '0.0.0.0',
     port: 3000,
     hostname: 'http://0.0.0.0:3000',
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Cross-Origin-Embedder-Policy': 'credentialless',
+      'Cross-Origin-Opener-Policy': 'same-origin',
+    },
     proxy: {
       '^\\/dist\\/css\\/(partials|lod)\\/.*\\.css(\\?.*)?
 

@@ -1,1 +1,1 @@
-export default function carpenter(app: any, settings: any, config: any): any;
+export default function carpenter(app: any, settings: any, config: any): Promise<unknown>;

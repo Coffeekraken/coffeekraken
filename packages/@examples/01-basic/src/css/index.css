@@ -7,10 +7,6 @@
 body {
   background: sugar.color(base, background);
   overflow-x: hidden;
-
-  &.initial-loading .content {
-    display: none;
-  }
 }
 
 [s-appear] {
@@ -18,6 +14,10 @@ body {
 }
 [s-appear][appear] {
   opacity: 1;
+}
+
+.content {
+  min-height: 100vh;
 }
 
 .content.nude {

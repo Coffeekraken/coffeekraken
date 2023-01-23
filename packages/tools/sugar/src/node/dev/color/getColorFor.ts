@@ -1,12 +1,13 @@
-import __pickRandom from '../../array/pickRandom';
-import __md5 from '../../crypto/md5';
-import __deepMerge from '../../object/deepMerge';
-import type { IAvailableColorsSettings } from './availableColors';
-import __availableColors from './availableColors';
+import { __sharedContext } from '@coffeekraken/sugar/process';
+import __pickRandom from '../../../shared/array/pickRandom';
+import __md5 from '../../../shared/crypto/md5';
+import type { IAvailableColorsSettings } from '../../../shared/dev/color/availableColors';
+import __availableColors from '../../../shared/dev/color/availableColors';
+import __deepMerge from '../../../shared/object/deepMerge';
 
 /**
  * @name            getColorFor
- * @namespace            shared.dev.color
+ * @namespace            node.dev.color
  * @type            Function
  * @platform          js
  * @platform          node
@@ -20,12 +21,12 @@ import __availableColors from './availableColors';
  * @return      {String}                        A color name to use as you want
  *
  * @example         js
- * import getColorFor from '@coffeekraken/sugar/shared/dev/color/getColorFor';
- * getColorFor('something'); // => cyan
- * getColorFor({
+ * import { __getColorFor } from '@coffeekraken/sugar/dev';
+ * __getColorFor('something'); // => cyan
+ * __getColorFor({
  *      else: true
  * }); // => magenta
- * getColorFor('something') // => cyan
+ * __getColorFor('something') // => cyan
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -35,8 +36,8 @@ export interface IGetColorForSettings extends IAvailableColorsSettings {
     scope: string;
 }
 
-const _colorUsedByScope: Record<string, string[]> = {};
-const _colorsStack: Record<string, string> = {};
+let _colorsStack: Record<string, string> = {};
+let _colorUsedByScope: Record<string, string[]> = {};
 
 export default function getColorFor(
     ref: any,
@@ -50,14 +51,20 @@ export default function getColorFor(
         settings ?? {},
     );
 
+    const ctx = __sharedContext();
+    if (ctx.colorUsedByScope) {
+        _colorUsedByScope = ctx.colorUsedByScope;
+    }
+
     const availableColors = __availableColors(settings);
 
     const scopeId = __md5.encrypt(settings.scope);
     const refId = __md5.encrypt(ref);
 
     // get from cache
-    if (_colorsStack[`${scopeId}.${refId}`])
+    if (_colorsStack[`${scopeId}.${refId}`]) {
         return _colorsStack[`${scopeId}.${refId}`];
+    }
 
     // make sure some stack are ok
     if (!_colorUsedByScope[scopeId]) _colorUsedByScope[scopeId] = [];
@@ -74,6 +81,10 @@ export default function getColorFor(
             if (_colorUsedByScope[scopeId].indexOf(availableColors[i]) === -1) {
                 _colorUsedByScope[scopeId].push(availableColors[i]);
                 _colorsStack[`${scopeId}.${refId}`] = availableColors[i];
+                __sharedContext({
+                    ...ctx,
+                    colorUsedByScope: _colorUsedByScope,
+                });
                 return availableColors[i];
             }
         }

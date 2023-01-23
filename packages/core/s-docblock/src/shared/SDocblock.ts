@@ -1,5 +1,4 @@
 import __SClass from '@coffeekraken/s-class';
-import __SPromise from '@coffeekraken/s-promise';
 import { __isPath } from '@coffeekraken/sugar/fs';
 import { __packageJsonSync } from '@coffeekraken/sugar/package';
 import __fs from 'fs';
@@ -200,7 +199,7 @@ class SDocblock extends __SClass implements ISDocblock {
      * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     parse(string = this._source): Promise<any[]> {
-        return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+        return new Promise(async (resolve) => {
             // extract each docblocks
             const regDefault = /(['"`\s]+)?(\/\*{2})([\s\S]+?)(\*\/)/g;
 
@@ -316,7 +315,7 @@ class SDocblock extends __SClass implements ISDocblock {
                     markedOptions: this.settings.markedOptions,
                 });
 
-                await pipe(docblockBlock.parse());
+                await docblockBlock.parse();
                 blocks[i] = docblockBlock;
             }
 

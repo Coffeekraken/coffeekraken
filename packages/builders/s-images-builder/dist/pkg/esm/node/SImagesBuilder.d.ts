@@ -45,5 +45,5 @@ export default class SImagesBuilder extends __SBuilder {
     
     constructor(settings?: Partial<ISImagesBuilderSettings>);
     
-    _build(params: ISImagesBuilderBuildParams, settings?: Partial<ISImagesBuilderSettings>): Promise<ISImagesBuilderResult>;
+    _build(params: ISImagesBuilderBuildParams, settings?: Partial<ISImagesBuilderSettings>): Promise<ISImagesBuilderResult | void>;
 }

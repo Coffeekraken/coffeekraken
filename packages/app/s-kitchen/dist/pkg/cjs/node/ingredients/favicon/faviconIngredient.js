@@ -14,7 +14,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const s_sugar_config_1 = __importDefault(require("@coffeekraken/s-sugar-config"));
 const fs_1 = require("@coffeekraken/sugar/fs");
-const fs_2 = require("@coffeekraken/sugar/fs");
 const path_1 = require("@coffeekraken/sugar/path");
 const path_2 = __importDefault(require("path"));
 /**
@@ -32,10 +31,10 @@ const faviconIngredient = {
     id: 'favicon',
     description: 'Add the base <cyan>favicon.png</cyan> file into your <magenta>sugar</magenta> project',
     projectTypes: ['unknown', 'sugar'],
-    add({ ask, log, emit }) {
+    add() {
         return __awaiter(this, void 0, void 0, function* () {
             // source file path
-            const sourceFilePath = path_2.default.resolve((0, path_1.__packageRootDir)((0, fs_2.__dirname)()), `src/data/favicon/favicon.png`);
+            const sourceFilePath = path_2.default.resolve((0, path_1.__packageRootDir)((0, fs_1.__dirname)()), `src/data/favicon/favicon.png`);
             const output = s_sugar_config_1.default.get('faviconBuilder.input');
             // copy the file to his destination
             (0, fs_1.__copySync)(sourceFilePath, output);
@@ -44,4 +43,4 @@ const faviconIngredient = {
     },
 };
 exports.default = faviconIngredient;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsa0ZBQTBEO0FBQzFELCtDQUFvRDtBQUNwRCwrQ0FBbUQ7QUFDbkQsbURBQTREO0FBQzVELGdEQUEwQjtBQUcxQjs7Ozs7Ozs7OztHQVVHO0FBQ0gsTUFBTSxpQkFBaUIsR0FBd0I7SUFDM0MsRUFBRSxFQUFFLFNBQVM7SUFDYixXQUFXLEVBQ1AsdUZBQXVGO0lBQzNGLFlBQVksRUFBRSxDQUFDLFNBQVMsRUFBRSxPQUFPLENBQUM7SUFDNUIsR0FBRyxDQUFDLEVBQUUsR0FBRyxFQUFFLEdBQUcsRUFBRSxJQUFJLEVBQUU7O1lBQ3hCLG1CQUFtQjtZQUNuQixNQUFNLGNBQWMsR0FBRyxjQUFNLENBQUMsT0FBTyxDQUNqQyxJQUFBLHVCQUFnQixFQUFDLElBQUEsY0FBUyxHQUFFLENBQUMsRUFDN0IsOEJBQThCLENBQ2pDLENBQUM7WUFFRixNQUFNLE1BQU0sR0FBRyx3QkFBYyxDQUFDLEdBQUcsQ0FBQyxzQkFBc0IsQ0FBQyxDQUFDO1lBRTFELG1DQUFtQztZQUNuQyxJQUFBLGVBQVUsRUFBQyxjQUFjLEVBQUUsTUFBTSxDQUFDLENBQUM7WUFFbkMsT0FBTyxJQUFJLENBQUM7UUFDaEIsQ0FBQztLQUFBO0NBQ0osQ0FBQztBQUNGLGtCQUFlLGlCQUFpQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsa0ZBQTBEO0FBQzFELCtDQUErRDtBQUMvRCxtREFBNEQ7QUFDNUQsZ0RBQTBCO0FBRzFCOzs7Ozs7Ozs7O0dBVUc7QUFDSCxNQUFNLGlCQUFpQixHQUF3QjtJQUMzQyxFQUFFLEVBQUUsU0FBUztJQUNiLFdBQVcsRUFDUCx1RkFBdUY7SUFDM0YsWUFBWSxFQUFFLENBQUMsU0FBUyxFQUFFLE9BQU8sQ0FBQztJQUM1QixHQUFHOztZQUNMLG1CQUFtQjtZQUNuQixNQUFNLGNBQWMsR0FBRyxjQUFNLENBQUMsT0FBTyxDQUNqQyxJQUFBLHVCQUFnQixFQUFDLElBQUEsY0FBUyxHQUFFLENBQUMsRUFDN0IsOEJBQThCLENBQ2pDLENBQUM7WUFFRixNQUFNLE1BQU0sR0FBRyx3QkFBYyxDQUFDLEdBQUcsQ0FBQyxzQkFBc0IsQ0FBQyxDQUFDO1lBRTFELG1DQUFtQztZQUNuQyxJQUFBLGVBQVUsRUFBQyxjQUFjLEVBQUUsTUFBTSxDQUFDLENBQUM7WUFFbkMsT0FBTyxJQUFJLENBQUM7UUFDaEIsQ0FBQztLQUFBO0NBQ0osQ0FBQztBQUNGLGtCQUFlLGlCQUFpQixDQUFDIn0=

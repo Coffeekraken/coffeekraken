@@ -1,6 +1,7 @@
 import type { ISClass } from '@coffeekraken/s-class';
 import SClass from '@coffeekraken/s-class';
 import __SLog from '@coffeekraken/s-log';
+import { __getColorFor } from '@coffeekraken/sugar/dev';
 import {
     __isChildProcess,
     __isClass,
@@ -8,7 +9,6 @@ import {
     __isPlainObject,
 } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __getColorFor from '@coffeekraken/sugar/shared/dev/color/getColorFor';
 import __toString from '@coffeekraken/sugar/shared/string/toString';
 import { __uniqid } from '@coffeekraken/sugar/string';
 import __globToRegex from 'glob-to-regexp';

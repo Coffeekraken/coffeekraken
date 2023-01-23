@@ -28,7 +28,7 @@ const postcssIngredient: ISKitchenIngredient = {
     description:
         'Add support for <yellow>postcss</yellow> and the <yellow>@coffeekraken/s-postcss-sugar-plugin</yellow> into your project',
     projectTypes: ['unknown', 'sugar', 'next'],
-    async add({ ask, log, emit, pipe, context }) {
+    async add({ ask, context }) {
         const packageRoot = __packageRootDir();
 
         const sKitchenPackageRoot = __packageRootDir(__dirname());
@@ -73,7 +73,7 @@ const postcssIngredient: ISKitchenIngredient = {
 
         // ask to override if needed
         if (configFile) {
-            const res = await emit('ask', {
+            const res = await ask({
                 type: 'confirm',
                 message: `Do you want to override the current config file with these new config ?\n\n${JSON.stringify(
                     currentConfig,
@@ -86,9 +86,9 @@ const postcssIngredient: ISKitchenIngredient = {
         }
 
         // installing the actual plugin
-        emit('log', {
-            value: `<yellow>[postcss]</yellow> Installing the actual <cyan>@coffeekraken/s-postcss-sugar-plugin</cyan> and other useful ones...`,
-        });
+        console.log(
+            `<yellow>[postcss]</yellow> Installing the actual <cyan>@coffeekraken/s-postcss-sugar-plugin</cyan> and other useful ones...`,
+        );
 
         const plugins = [
             '@coffeekraken/s-postcss-sugar-plugin',
@@ -104,9 +104,9 @@ const postcssIngredient: ISKitchenIngredient = {
         await __npmInstall(['postcss', ...plugins]);
 
         // saving new config
-        emit('log', {
-            value: `<yellow>[postcss]</yellow> Saving new configuration file under <cyan>${configFilePath}</cyan>.`,
-        });
+        console.log(
+            `<yellow>[postcss]</yellow> Saving new configuration file under <cyan>${configFilePath}</cyan>.`,
+        );
 
         // add plugins in config
         if (Array.isArray(currentConfig.plugins)) {
@@ -149,9 +149,9 @@ const postcssIngredient: ISKitchenIngredient = {
         // detecting the package type (next, generic, etc...)
         switch (context.projectType.type) {
             case 'next':
-                emit('log', {
-                    value: '<yellow>[postcss]</yellow> <cyan>Nextjs</cyan> project detected. Adding sugar css files...',
-                });
+                console.log(
+                    `<yellow>[postcss]</yellow> <cyan>Nextjs</cyan> project detected. Adding sugar css files...`,
+                );
 
                 globalCss = __fs
                     .readFileSync(`${packageRoot}/styles/globals.css`)
@@ -171,9 +171,9 @@ const postcssIngredient: ISKitchenIngredient = {
                 }
                 break;
             default:
-                emit('log', {
-                    value: '<yellow>[postcss]</yellow> <cyan>Generic</cyan> project detected. Adding sugar css files...',
-                });
+                console.log(
+                    `<yellow>[postcss]</yellow> <cyan>Generic</cyan> project detected. Adding sugar css files...`,
+                );
 
                 const srcCssDir = __SSugarConfig.get('storage.src.cssDir');
 
@@ -197,9 +197,9 @@ const postcssIngredient: ISKitchenIngredient = {
                 break;
         }
 
-        emit('log', {
-            value: `<yellow>[postcss]</yellow> Added <green>successfully</green> in your project. Have fun!`,
-        });
+        console.log(
+            `<yellow>[postcss]</yellow> Added <green>successfully</green> in your project. Have fun!`,
+        );
 
         return true;
     },

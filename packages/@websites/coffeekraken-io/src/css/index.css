@@ -4,46 +4,45 @@
 @sugar.import ('./generic/**/*.css');
 
 html {
-  overflow-x: hidden;
-  /* content: ''; */
+    overflow-x: hidden;
 }
 
 body {
-  width: 100vw;
-  background-color: sugar.color(main, background);
+    width: 100vw;
+    background-color: sugar.color(main, background);
 
-  @sugar.theme.when (dark) {
-    background-image: radial-gradient(
-      ellipse at top left,
-      sugar.color(main, --darken 25),
-      sugar.color(main, --darken 35)
-    );
-    background-attachment: fixed;
-  }
+    @sugar.theme.when (dark) {
+        background-image: radial-gradient(
+            ellipse at top left,
+            sugar.color(main, --darken 25),
+            sugar.color(main, --darken 35)
+        );
+        background-attachment: fixed;
+    }
 
-  @sugar.media mobile {
-    background-image: none !important;
-  }
+    @sugar.media mobile {
+        background-image: none !important;
+    }
 }
 
 body {
-  @sugar.media dwarf {
-    @sugar.scale.global (0.9);
-  }
+    @sugar.media dwarf {
+        @sugar.scale.global (0.9);
+    }
 }
 
 @sugar.lod.prevent {
-  .bluring {
-    filter: blur(111px);
-  }
+    .bluring {
+        filter: blur(111px);
+    }
 }
 
 .s-lod--3 [s-appear]:not([appear]) {
-  opacity: 0;
+    opacity: 0;
 }
 
 .hljs > * {
-  display: inline-block !important;
+    display: inline-block !important;
 }
 
 /* [class*='s-btn']:not(s-date-picker [class*='s-btn']):not(.preview
@@ -52,36 +51,36 @@ body {
 } */
 
 .s-container {
-  @sugar.media (>=wide) {
-    @sugar.container (wide);
-  }
+    @sugar.media (>=wide) {
+        @sugar.container (wide);
+    }
 }
 
 .s-page-transition.loading * {
-  user-select: none;
-  pointer-events: none !important;
+    user-select: none;
+    pointer-events: none !important;
 }
 
 .sticky {
-  @sugar.media (>=desktop) {
-    position: sticky;
-    top: 100px;
-  }
+    @sugar.media (>=desktop) {
+        position: sticky;
+        top: 100px;
+    }
 }
 
 [s-form-validate][password] {
-  ._levels * {
-    display: none;
-    margin-inline-end: sugar.margin(20);
-  }
+    ._levels * {
+        display: none;
+        margin-inline-end: sugar.margin(20);
+    }
 
-  &.password-weak ._levels ._weak {
-    display: inline-block;
-  }
-  &.password-medium ._levels ._medium {
-    display: inline-block;
-  }
-  &.password-strong ._levels ._strong {
-    display: inline-block;
-  }
+    &.password-weak ._levels ._weak {
+        display: inline-block;
+    }
+    &.password-medium ._levels ._medium {
+        display: inline-block;
+    }
+    &.password-strong ._levels ._strong {
+        display: inline-block;
+    }
 }

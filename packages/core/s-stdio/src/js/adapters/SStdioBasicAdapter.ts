@@ -2,8 +2,8 @@ import type { ISLog } from '@coffeekraken/s-log';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import { __parseHtml } from '@coffeekraken/sugar/console';
+import { __getColorFor } from '@coffeekraken/sugar/dev';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __getColorFor from '@coffeekraken/sugar/shared/dev/color/getColorFor';
 import { __upperFirst } from '@coffeekraken/sugar/string';
 // import { __countLines } from '@coffeekraken/sugar/terminal';
 import __SStdioAdapter from '../../shared/SStdioAdapter';
@@ -38,9 +38,11 @@ const _nativeConsole = {};
 for (let key of ['log', 'error', 'warn', 'verbose']) {
     _nativeConsole[key] = console[key] ?? console.log;
 }
-    
 
-export default class SStdioBasicAdapter extends __SStdioAdapter implements ISBasicStdioAdapter {
+export default class SStdioBasicAdapter
+    extends __SStdioAdapter
+    implements ISBasicStdioAdapter
+{
     /**
      * @name            constructor
      * @type            Function
@@ -51,13 +53,11 @@ export default class SStdioBasicAdapter extends __SStdioAdapter implements ISBas
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(
-        settings?: ISStdioBasicAdapterSettings,
-    ) {
+    constructor(settings?: ISStdioBasicAdapterSettings) {
         super(__deepMerge({}, settings || {}));
     }
 
-    clear() { 
+    clear() {
         console.clear();
     }
 
@@ -106,14 +106,14 @@ export default class SStdioBasicAdapter extends __SStdioAdapter implements ISBas
         if (logObj.group !== this._lastLogObj?.group) {
             logger(groupObj.prefix);
             // @ts-ignore
-            logger(__parseHtml(
-                `<bg${__upperFirst(groupObj.color)}><black> ${
-                    logObj.group
-                } </black></bg${__upperFirst(groupObj.color)}><${
-                    groupObj.color
-                }>${'-'.repeat(
-                    50,
-                )}</${groupObj.color}>`)
+            logger(
+                __parseHtml(
+                    `<bg${__upperFirst(groupObj.color)}><black> ${
+                        logObj.group
+                    } </black></bg${__upperFirst(groupObj.color)}><${
+                        groupObj.color
+                    }>${'-'.repeat(50)}</${groupObj.color}>`,
+                ),
             );
             logger(groupObj.prefix);
         }
@@ -139,7 +139,9 @@ export default class SStdioBasicAdapter extends __SStdioAdapter implements ISBas
 
         let log = logValue;
         if (typeof logValue === 'string') {
-            log = __parseHtml(`<${groupObj.color}>█</${groupObj.color}> ${logValue}`);
+            log = __parseHtml(
+                `<${groupObj.color}>█</${groupObj.color}> ${logValue}`,
+            );
         }
 
         logLinesCount += 1;
@@ -173,9 +175,10 @@ export default class SStdioBasicAdapter extends __SStdioAdapter implements ISBas
      */
     _ask(askObj) {
         return new __SPromise(async ({ resolve, reject, emit }) => {
+            throw new Error(
+                `<red>[SStdioBasicAdapter]</red> The "ask" feature has not been implemented yet in the browser environment...`,
+            );
 
-            throw new Error(`<red>[SStdioBasicAdapter]</red> The "ask" feature has not been implemented yet in the browser environment...`)
-            
             let prompt, res;
 
             if (!askObj.group) {
@@ -192,7 +195,6 @@ export default class SStdioBasicAdapter extends __SStdioAdapter implements ISBas
             askObj.message = __parseHtml(askObj.message);
 
             const groupObj = this._getGroupObj(askObj.group);
-
 
             resolve(res);
         });

@@ -5,7 +5,6 @@ import type { ISFileObject } from '@coffeekraken/s-file';
 // import __page404 from './pages/404';
 import __SDataFileGeneric from '@coffeekraken/s-data-file-generic';
 import type { ISPromise } from '@coffeekraken/s-promise';
-import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __unique } from '@coffeekraken/sugar/array';
 import { __writeJsonSync } from '@coffeekraken/sugar/fs';
@@ -150,20 +149,18 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
         data: any = null,
         settings: Partial<ISViewRendererSettings>,
     ) {
-        return new __SPromise(async ({ resolve, reject, pipe }) => {
+        return new Promise(async (resolve) => {
             const viewInstance = new SViewRenderer(__deepMerge(settings ?? {}));
 
             const finalData = __deepMerge(data ?? {}, {});
 
-            let resPromise;
-
-            resPromise = await viewInstance.render(
+            const result = await viewInstance.render(
                 viewPath,
                 finalData,
                 settings?.viewRenderer ?? {},
             );
 
-            pipe(resPromise);
+            resolve(result);
         });
     }
 
@@ -445,7 +442,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
         data: string | Promise<any> | any = {},
         settings?: Partial<ISViewRendererSettings>,
     ): Promise<ISViewRendererRenderResult> {
-        return new __SPromise(async ({ resolve, reject, pipe }) => {
+        return new Promise(async (resolve, reject) => {
             let finalViewPath, finalViewRelPath;
 
             // ensure all is loaded
@@ -562,7 +559,6 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
                 this._sharedDataFilePath,
                 viewRendererSettings,
             );
-            pipe(renderPromise);
             result = await renderPromise;
 
             // stringify js errors

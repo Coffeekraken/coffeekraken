@@ -1,5 +1,4 @@
 import __getColorFor from '../getColorFor';
-import __availableColors from '../availableColors';
 
 describe('sugar.shared.dev.color.getColorFor', () => {
   it('Should return me a simple color', () => {

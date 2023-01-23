@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-import __SPromise from '@coffeekraken/s-promise';
 import { __whenAnimationEnd } from '@coffeekraken/sugar/dom';
 
 /**
@@ -29,7 +28,7 @@ export default function __removeClassOnAnimationEnd(
     $elm: HTMLElement,
     cls: string | string[],
 ): Promise<HTMLElement> {
-    return new __SPromise(async ({ resolve }) => {
+    return new Promise(async (resolve) => {
         // wait end of animation
         await __whenAnimationEnd($elm);
         // remove class

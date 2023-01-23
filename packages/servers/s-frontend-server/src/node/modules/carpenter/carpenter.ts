@@ -1,11 +1,10 @@
 import __SDataFileGeneric from '@coffeekraken/s-data-file-generic';
-import __SPromise from '@coffeekraken/s-promise';
 import __SSpecs from '@coffeekraken/s-specs';
 import { __dirname } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 
 export default function carpenter(app, settings, config) {
-    return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+    return new Promise(async (resolve) => {
         // handlers
         config.handlers.carpenterJson = {
             description: 'Serve the carpenter data in JSON',

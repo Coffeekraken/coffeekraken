@@ -1,9 +1,8 @@
 import __SBench from '@coffeekraken/s-bench';
 import __SClassmap from '@coffeekraken/s-classmap';
-import __SPromise from '@coffeekraken/s-promise';
 
 export default function classmapJsonHandler({ req, res, pageConfig }) {
-    return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+    return new Promise(async (resolve) => {
         const bench = new __SBench('data.classmapJsonData');
 
         bench.step('beforeClassmapRead');

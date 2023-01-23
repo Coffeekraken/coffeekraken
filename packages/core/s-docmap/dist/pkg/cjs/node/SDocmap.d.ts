@@ -117,7 +117,7 @@ declare class SDocmap extends __SClass implements ISDocmap {
     
     build(params: Partial<ISDocmapBuildParams>): Promise<any>;
     
-    installSnapshot(params: Partial<ISDocmapInstallSnapshotsParams>): Promise<any>;
+    installSnapshot(params: Partial<ISDocmapInstallSnapshotsParams>): Promise<any | void>;
     
     snapshot(params: Partial<ISDocmapSnapshotParams>): Promise<any>;
 }

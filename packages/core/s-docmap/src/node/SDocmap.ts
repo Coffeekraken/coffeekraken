@@ -3,8 +3,6 @@ import __SDocblock from '@coffeekraken/s-docblock';
 import __SDuration from '@coffeekraken/s-duration';
 import __SFile from '@coffeekraken/s-file';
 import __SGlob from '@coffeekraken/s-glob';
-import __SLog from '@coffeekraken/s-log';
-import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import {
     __checkPathWithMultipleExtensions,
@@ -45,8 +43,8 @@ function __toLowerCase(l = '') {
  * @name                SDocmap
  * @namespace           node
  * @type                Class
- * @extends             SPromise
- * @status              wip
+ * @extends             SClass
+ * @status              beta
  *
  * This class represent the ```docmap.json``` file and allows you to build it from some sources (glob pattern(s))
  * and save it inside a directory you choose.
@@ -303,292 +301,270 @@ class SDocmap extends __SClass implements ISDocmap {
      * @todo      integrate the "cache" feature
      *
      * @param       {Object}        [settings={}]       A settings object to override the instance level ones
-     * @return      {SPromise<ISDocmapObj>}                          An SPromise instance that will be resolved once the docmap.json file(s) have been correctly read
+     * @return      {Promise<ISDocmapObj>}                          A promise instance that will be resolved once the docmap.json file(s) have been correctly read
      *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     read(params?: Partial<ISDocmapReadParams>): Promise<ISDocmapObj> {
-        return new __SPromise(
-            async ({ resolve, pipe, emit }) => {
-                const finalParams = <ISDocmapReadParams>(
-                    __deepMerge(
-                        __SDocmapReadParamsInterface.defaults(),
-                        params ?? {},
-                    )
+        return new Promise(async (resolve) => {
+            const finalParams = <ISDocmapReadParams>(
+                __deepMerge(
+                    __SDocmapReadParamsInterface.defaults(),
+                    params ?? {},
+                )
+            );
+
+            const packageJson = __packageJsonSync();
+
+            // snapshot param handling
+            if (finalParams.snapshot) {
+                finalParams.input = __path.resolve(
+                    finalParams.snapshotDir,
+                    finalParams.snapshot,
+                    'docmap.json',
                 );
+            }
 
-                const packageJson = __packageJsonSync();
+            let docmapVersion = finalParams.snapshot ?? 'current';
 
-                // snapshot param handling
-                if (finalParams.snapshot) {
-                    finalParams.input = __path.resolve(
-                        finalParams.snapshotDir,
-                        finalParams.snapshot,
-                        'docmap.json',
-                    );
-                }
+            // @ts-ignore
+            if (this.constructor._cachedDocmapJson[docmapVersion]) {
+                return resolve(
+                    // @ts-ignore
+                    this.constructor._cachedDocmapJson[docmapVersion],
+                );
+            }
 
-                let docmapVersion = finalParams.snapshot ?? 'current';
+            let docmapRootPath = __folderPath(finalParams.input);
 
-                // @ts-ignore
-                if (this.constructor._cachedDocmapJson[docmapVersion]) {
-                    return resolve(
-                        // @ts-ignore
-                        this.constructor._cachedDocmapJson[docmapVersion],
-                    );
-                }
-
-                let docmapRootPath = __folderPath(finalParams.input);
-
-                if (!__fs.existsSync(finalParams.input)) {
-                    return resolve({
-                        metas: {
-                            type: undefined,
-                        },
-                        map: {},
-                        menu: {},
-                        snapshots: [],
-                    });
-                    // throw new Error(
-                    //     `<red>[${this.constructor.name}.${this.metas.id}]</red> Sorry but the file "<cyan>${finalParams.input}</cyan>" does not exists...`,
-                    // );
-                }
-
-                const packageMonoRoot = __packageRootDir(process.cwd(), {
-                    highest: true,
-                });
-
-                const extendedPackages: string[] = [];
-                const finalDocmapJson: Partial<ISDocmapObj> = {
+            if (!__fs.existsSync(finalParams.input)) {
+                return resolve({
                     metas: {
-                        type: finalParams.snapshot ? 'snapshot' : 'current',
-                        snapshot: finalParams.snapshot,
+                        type: undefined,
                     },
                     map: {},
                     menu: {},
                     snapshots: [],
-                };
+                });
+                // throw new Error(
+                //     `<red>[${this.constructor.name}.${this.metas.id}]</red> Sorry but the file "<cyan>${finalParams.input}</cyan>" does not exists...`,
+                // );
+            }
 
-                const loadJson = async (packageNameOrPath, currentPath) => {
-                    // check if package is excluded from the extends
-                    if (
-                        (packageNameOrPath !== packageJson.name,
-                        this._isPackageExtendsExcluded(
-                            packageNameOrPath,
-                            finalParams.excludePackages,
-                        ))
-                    ) {
-                        return;
-                    }
+            const packageMonoRoot = __packageRootDir(process.cwd(), {
+                highest: true,
+            });
 
-                    if (extendedPackages.indexOf(packageNameOrPath) !== -1) {
-                        return;
-                    }
-                    extendedPackages.push(packageNameOrPath);
+            const extendedPackages: string[] = [];
+            const finalDocmapJson: Partial<ISDocmapObj> = {
+                metas: {
+                    type: finalParams.snapshot ? 'snapshot' : 'current',
+                    snapshot: finalParams.snapshot,
+                },
+                map: {},
+                menu: {},
+                snapshots: [],
+            };
 
-                    let currentPathDocmapJsonPath,
-                        potentialPackageDocmapJsonPath = __path.resolve(
-                            docmapRootPath,
-                            'node_modules',
-                            packageNameOrPath,
-                            'docmap.json',
-                        ),
-                        potentialRootPackageDocmapJsonPath = __path.resolve(
-                            packageMonoRoot,
-                            'node_modules',
-                            packageNameOrPath,
-                            'docmap.json',
-                        );
+            const loadJson = async (packageNameOrPath, currentPath) => {
+                // check if package is excluded from the extends
+                if (
+                    (packageNameOrPath !== packageJson.name,
+                    this._isPackageExtendsExcluded(
+                        packageNameOrPath,
+                        finalParams.excludePackages,
+                    ))
+                ) {
+                    return;
+                }
 
-                    if (__fs.existsSync(potentialPackageDocmapJsonPath)) {
-                        currentPathDocmapJsonPath =
-                            potentialPackageDocmapJsonPath;
-                    } else if (
-                        __fs.existsSync(`${packageNameOrPath}/docmap.json`)
-                    ) {
-                        currentPathDocmapJsonPath = `${packageNameOrPath}/docmap.json`;
-                    } else if (
-                        __fs.existsSync(potentialRootPackageDocmapJsonPath)
-                    ) {
-                        currentPathDocmapJsonPath =
-                            potentialRootPackageDocmapJsonPath;
-                    } else {
-                        emit('log', {
-                            type: __SLog.TYPE_WARN,
-                            value: `<red>[read]</red> Sorry but the references docmap path/package "<yellow>${packageNameOrPath}</yellow>" does not exists`,
-                        });
-                    }
+                if (extendedPackages.indexOf(packageNameOrPath) !== -1) {
+                    return;
+                }
+                extendedPackages.push(packageNameOrPath);
 
-                    if (!currentPathDocmapJsonPath) return;
-
-                    const extendsRootPath = currentPathDocmapJsonPath.replace(
-                        '/docmap.json',
-                        '',
+                let currentPathDocmapJsonPath,
+                    potentialPackageDocmapJsonPath = __path.resolve(
+                        docmapRootPath,
+                        'node_modules',
+                        packageNameOrPath,
+                        'docmap.json',
+                    ),
+                    potentialRootPackageDocmapJsonPath = __path.resolve(
+                        packageMonoRoot,
+                        'node_modules',
+                        packageNameOrPath,
+                        'docmap.json',
                     );
 
-                    const packageJsonPath = `${extendsRootPath}/package.json`;
-                    if (!__fs.existsSync(packageJsonPath)) {
-                        emit('log', {
-                            type: __SLog.TYPE_WARN,
-                            value: `<red>[${this.constructor.name}]</red> Sorry but the package "<yellow>${extendsRootPath}</yellow>" does not have any valid "<cyan>package.json</cyan>" file at his root`,
-                        });
-                        return;
-                    }
-
-                    const currentPackageJson = __readJsonSync(packageJsonPath);
-
-                    // check if package is excluded from the extends
-                    if (
-                        currentPackageJson.name !== packageJson.name &&
-                        this._isPackageExtendsExcluded(
-                            currentPackageJson.name,
-                            finalParams.excludePackages,
-                        )
-                    ) {
-                        return;
-                    }
-
-                    const docmapJson = __readJsonSync(
-                        currentPathDocmapJsonPath,
+                if (__fs.existsSync(potentialPackageDocmapJsonPath)) {
+                    currentPathDocmapJsonPath = potentialPackageDocmapJsonPath;
+                } else if (
+                    __fs.existsSync(`${packageNameOrPath}/docmap.json`)
+                ) {
+                    currentPathDocmapJsonPath = `${packageNameOrPath}/docmap.json`;
+                } else if (
+                    __fs.existsSync(potentialRootPackageDocmapJsonPath)
+                ) {
+                    currentPathDocmapJsonPath =
+                        potentialRootPackageDocmapJsonPath;
+                } else {
+                    console.log(
+                        `<red>[read]</red> Sorry but the references docmap path/package "<yellow>${packageNameOrPath}</yellow>" does not exists`,
                     );
+                }
 
-                    Object.keys(docmapJson.map).forEach((namespace) => {
-                        if (docmapJson.map[namespace]) {
-                            docmapJson.map[namespace].package = {
+                if (!currentPathDocmapJsonPath) return;
+
+                const extendsRootPath = currentPathDocmapJsonPath.replace(
+                    '/docmap.json',
+                    '',
+                );
+
+                const packageJsonPath = `${extendsRootPath}/package.json`;
+                if (!__fs.existsSync(packageJsonPath)) {
+                    console.log(
+                        `<red>[${this.constructor.name}]</red> Sorry but the package "<yellow>${extendsRootPath}</yellow>" does not have any valid "<cyan>package.json</cyan>" file at his root`,
+                    );
+                    return;
+                }
+
+                const currentPackageJson = __readJsonSync(packageJsonPath);
+
+                // check if package is excluded from the extends
+                if (
+                    currentPackageJson.name !== packageJson.name &&
+                    this._isPackageExtendsExcluded(
+                        currentPackageJson.name,
+                        finalParams.excludePackages,
+                    )
+                ) {
+                    return;
+                }
+
+                const docmapJson = __readJsonSync(currentPathDocmapJsonPath);
+
+                Object.keys(docmapJson.map).forEach((namespace) => {
+                    if (docmapJson.map[namespace]) {
+                        docmapJson.map[namespace].package = {
+                            name: currentPackageJson.name,
+                            description: currentPackageJson.description,
+                            version: currentPackageJson.version,
+                            license: currentPackageJson.license,
+                        };
+                    }
+                });
+                Object.keys(docmapJson.generated?.map ?? []).forEach(
+                    (namespace) => {
+                        if (docmapJson.generated.map[namespace]) {
+                            docmapJson.generated.map[namespace].package = {
                                 name: currentPackageJson.name,
                                 description: currentPackageJson.description,
                                 version: currentPackageJson.version,
                                 license: currentPackageJson.license,
                             };
                         }
-                    });
-                    Object.keys(docmapJson.generated?.map ?? []).forEach(
-                        (namespace) => {
-                            if (docmapJson.generated.map[namespace]) {
-                                docmapJson.generated.map[namespace].package = {
-                                    name: currentPackageJson.name,
-                                    description: currentPackageJson.description,
-                                    version: currentPackageJson.version,
-                                    license: currentPackageJson.license,
-                                };
-                            }
-                        },
-                    );
+                    },
+                );
 
-                    docmapJson.extends = [
-                        ...(docmapJson.extends ?? []),
-                        ...(docmapJson.generated?.extends ?? []),
-                    ];
-                    docmapJson.map = {
-                        ...(docmapJson.map ?? {}),
-                        ...(docmapJson.generated?.map ?? {}),
-                    };
-
-                    delete docmapJson.generated;
-
-                    for (let i = 0; i < docmapJson.extends.length; i++) {
-                        const extendsPackageName = docmapJson.extends[i];
-                        await loadJson(extendsPackageName, extendsRootPath);
-                    }
-
-                    for (
-                        let i = 0;
-                        i < Object.keys(docmapJson.map).length;
-                        i++
-                    ) {
-                        const namespace = Object.keys(docmapJson.map)[i];
-                        const obj = docmapJson.map[namespace];
-
-                        obj.path = __path.resolve(extendsRootPath, obj.relPath);
-
-                        // checking ".dev...."
-                        let ext = obj.relPath.split('.').pop();
-                        obj.path =
-                            __checkPathWithMultipleExtensions(obj.path, [
-                                `dev.${ext}`,
-                                ext,
-                            ]) ?? obj.path;
-
-                        docmapJson.map[namespace] = obj;
-                    }
-
-                    for (let [namespace, docmapObj] of Object.entries(
-                        docmapJson.map,
-                    )) {
-                        let blockId = namespace;
-                        if (!finalDocmapJson.map[blockId]) {
-                            // assigning an id to the block.
-                            // This id is the string used as map property to store the block
-                            docmapObj.id = blockId;
-                            // saving the block into our final docmap map
-                            finalDocmapJson.map[blockId] = docmapObj;
-                        }
-                    }
+                docmapJson.extends = [
+                    ...(docmapJson.extends ?? []),
+                    ...(docmapJson.generated?.extends ?? []),
+                ];
+                docmapJson.map = {
+                    ...(docmapJson.map ?? {}),
+                    ...(docmapJson.generated?.map ?? {}),
                 };
 
-                const docmapJsonFolderPath = __folderPath(finalParams.input);
-                await loadJson(docmapJsonFolderPath, docmapJsonFolderPath);
+                delete docmapJson.generated;
 
-                // loading available snapshots
-                if (__fs.existsSync(finalParams.snapshotDir)) {
-                    const availableSnapshots = __fs.readdirSync(
-                        finalParams.snapshotDir,
-                    );
-                    finalDocmapJson.snapshots = availableSnapshots;
-                } else {
-                    finalDocmapJson.snapshots = [];
+                for (let i = 0; i < docmapJson.extends.length; i++) {
+                    const extendsPackageName = docmapJson.extends[i];
+                    await loadJson(extendsPackageName, extendsRootPath);
                 }
 
-                // save the docmap json
-                this._docmapJson = finalDocmapJson;
+                for (let i = 0; i < Object.keys(docmapJson.map).length; i++) {
+                    const namespace = Object.keys(docmapJson.map)[i];
+                    const obj = docmapJson.map[namespace];
 
-                // extract the menu
-                finalDocmapJson.menu = this._extractMenu(finalDocmapJson);
+                    obj.path = __path.resolve(extendsRootPath, obj.relPath);
 
-                // cache it in memory
-                // @ts-ignore
-                this.constructor._cachedDocmapJson[docmapVersion] =
-                    finalDocmapJson;
+                    // checking ".dev...."
+                    let ext = obj.relPath.split('.').pop();
+                    obj.path =
+                        __checkPathWithMultipleExtensions(obj.path, [
+                            `dev.${ext}`,
+                            ext,
+                        ]) ?? obj.path;
 
-                // sorting
-                finalParams.sort.forEach((dotPath) => {
-                    const toSort = __get(finalDocmapJson, dotPath);
-                    if (!toSort) return;
-                    __set(
-                        finalDocmapJson,
-                        dotPath,
-                        __sortObject(toSort, (a, b) => {
-                            return a.key.localeCompare(b.key);
-                        }),
-                    );
-                });
-                finalParams.sortDeep.forEach((dotPath) => {
-                    const toSort = __get(finalDocmapJson, dotPath);
-                    if (!toSort) return;
-                    __set(
-                        finalDocmapJson,
-                        dotPath,
-                        __sortObjectDeep(toSort, (a, b) => {
-                            return a.key.localeCompare(b.key);
-                        }),
-                    );
-                });
+                    docmapJson.map[namespace] = obj;
+                }
 
-                // return the final docmap
-                resolve(finalDocmapJson);
-            },
-            {
-                metas: {
-                    id: `read`,
-                },
-            },
-            {
-                eventEmitter: {
-                    bind: this,
-                },
-            },
-        );
+                for (let [namespace, docmapObj] of Object.entries(
+                    docmapJson.map,
+                )) {
+                    let blockId = namespace;
+                    if (!finalDocmapJson.map[blockId]) {
+                        // assigning an id to the block.
+                        // This id is the string used as map property to store the block
+                        docmapObj.id = blockId;
+                        // saving the block into our final docmap map
+                        finalDocmapJson.map[blockId] = docmapObj;
+                    }
+                }
+            };
+
+            const docmapJsonFolderPath = __folderPath(finalParams.input);
+            await loadJson(docmapJsonFolderPath, docmapJsonFolderPath);
+
+            // loading available snapshots
+            if (__fs.existsSync(finalParams.snapshotDir)) {
+                const availableSnapshots = __fs.readdirSync(
+                    finalParams.snapshotDir,
+                );
+                finalDocmapJson.snapshots = availableSnapshots;
+            } else {
+                finalDocmapJson.snapshots = [];
+            }
+
+            // save the docmap json
+            this._docmapJson = finalDocmapJson;
+
+            // extract the menu
+            finalDocmapJson.menu = this._extractMenu(finalDocmapJson);
+
+            // cache it in memory
+            // @ts-ignore
+            this.constructor._cachedDocmapJson[docmapVersion] = finalDocmapJson;
+
+            // sorting
+            finalParams.sort.forEach((dotPath) => {
+                const toSort = __get(finalDocmapJson, dotPath);
+                if (!toSort) return;
+                __set(
+                    finalDocmapJson,
+                    dotPath,
+                    __sortObject(toSort, (a, b) => {
+                        return a.key.localeCompare(b.key);
+                    }),
+                );
+            });
+            finalParams.sortDeep.forEach((dotPath) => {
+                const toSort = __get(finalDocmapJson, dotPath);
+                if (!toSort) return;
+                __set(
+                    finalDocmapJson,
+                    dotPath,
+                    __sortObjectDeep(toSort, (a, b) => {
+                        return a.key.localeCompare(b.key);
+                    }),
+                );
+            });
+
+            // return the final docmap
+            resolve(finalDocmapJson);
+        });
     }
 
     /**
@@ -607,64 +583,54 @@ class SDocmap extends __SClass implements ISDocmap {
     search(
         params?: Partial<ISDocmapSearchParams>,
     ): Promise<ISDocmapSearchResult> {
-        return new __SPromise(
-            async ({ resolve, pipe, emit }) => {
-                const finalParams = <ISDocmapSearchParams>(
-                    __deepMerge(
-                        __SDocmapSearchParamsInterface.defaults(),
-                        params ?? {},
-                    )
-                );
+        return new Promise(async (resolve) => {
+            const finalParams = <ISDocmapSearchParams>(
+                __deepMerge(
+                    __SDocmapSearchParamsInterface.defaults(),
+                    params ?? {},
+                )
+            );
 
-                const docmapJson = await this.read(finalParams);
+            const docmapJson = await this.read(finalParams);
 
-                const result: ISDocmapSearchResult = {
-                    search: finalParams,
-                    items: {},
-                };
+            const result: ISDocmapSearchResult = {
+                search: finalParams,
+                items: {},
+            };
 
-                for (let [key, item] of Object.entries(docmapJson.map)) {
-                    let itemMatch = true;
+            for (let [key, item] of Object.entries(docmapJson.map)) {
+                let itemMatch = true;
 
-                    // slug
-                    if (finalParams.slug) {
-                        if (!item.menu) {
-                            itemMatch = false;
-                        } else if (
-                            !__micromatch.isMatch(
-                                item.menu.slug,
-                                finalParams.slug,
-                            )
-                        ) {
-                            itemMatch = false;
-                        }
-                    }
-
-                    // namespace
-                    if (finalParams.namespace) {
-                        if (
-                            !__micromatch.isMatch(
-                                item.namespace,
-                                finalParams.namespace,
-                            )
-                        ) {
-                            itemMatch = false;
-                        }
-                    }
-
-                    if (itemMatch) {
-                        result.items[item.namespace] = item;
+                // slug
+                if (finalParams.slug) {
+                    if (!item.menu) {
+                        itemMatch = false;
+                    } else if (
+                        !__micromatch.isMatch(item.menu.slug, finalParams.slug)
+                    ) {
+                        itemMatch = false;
                     }
                 }
 
-                resolve(result);
-            },
-            {
-                eventEmitter: {
-                    id: this.constructor.name,
-                },
-            },
-        );
+                // namespace
+                if (finalParams.namespace) {
+                    if (
+                        !__micromatch.isMatch(
+                            item.namespace,
+                            finalParams.namespace,
+                        )
+                    ) {
+                        itemMatch = false;
+                    }
+                }
+
+                if (itemMatch) {
+                    result.items[item.namespace] = item;
+                }
+            }
+
+            resolve(result);
+        });
     }
 
     /**
@@ -855,7 +821,7 @@ class SDocmap extends __SClass implements ISDocmap {
      * and extract all the necessary informations to build the docmap.json file
      *
      * @param         {Partial<ISDocmapBuildParams>}          params        The params to use to build your docmap
-     * @return        {SPromise}                                     A promise resolved once the scan process has been finished
+     * @return        {Promise}                                     A promise resolved once the scan process has been finished
      *
      * @since         2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -864,264 +830,246 @@ class SDocmap extends __SClass implements ISDocmap {
         const finalParams = <ISDocmapBuildParams>(
             __deepMerge(__SDocmapBuildParamsInterface.defaults(), params)
         );
-        return new __SPromise(
-            async ({ resolve, reject, emit, pipe }) => {
-                emit('notification', {
-                    // @ts-ignore
-                    message: `${this.metas.id} build started`,
-                });
-
-                let docmapJson = {
-                    map: {},
+        return new Promise(async (resolve) => {
+            let docmapJson = {
+                map: {},
+                extends: [],
+                generated: {
                     extends: [],
-                    generated: {
-                        extends: [],
-                        map: {},
-                    },
+                    map: {},
+                },
+            };
+
+            const packageRoot = __packageRootDir();
+            const packageMonoRoot = __packageRootDir(process.cwd(), {
+                highest: true,
+            });
+
+            // check if a file already exists
+            if (__fs.existsSync(`${packageRoot}/docmap.json`)) {
+                const currentDocmapJson = __readJsonSync(
+                    `${packageRoot}/docmap.json`,
+                );
+                docmapJson = currentDocmapJson;
+                docmapJson.generated = {
+                    extends: [],
+                    map: {},
                 };
+            }
 
-                const packageRoot = __packageRootDir();
-                const packageMonoRoot = __packageRootDir(process.cwd(), {
-                    highest: true,
-                });
+            // getting package infos
+            const packageJson = __packageJsonSync();
 
-                // check if a file already exists
-                if (__fs.existsSync(`${packageRoot}/docmap.json`)) {
-                    const currentDocmapJson = __readJsonSync(
-                        `${packageRoot}/docmap.json`,
-                    );
-                    docmapJson = currentDocmapJson;
-                    docmapJson.generated = {
-                        extends: [],
-                        map: {},
-                    };
-                }
-
-                // getting package infos
-                const packageJson = __packageJsonSync();
-
-                if (!finalParams.noExtends) {
-                    emit('log', {
-                        value: `<yellow>[build]</yellow> Building extends array from existing docmap compliant packages`,
-                    });
-
-                    const globs: string[] = [
-                        `${packageRoot}/node_modules/*{0,2}/docmap.json`,
-                    ];
-                    if (packageRoot !== packageMonoRoot) {
-                        globs.push(
-                            `${packageMonoRoot}/node_modules/*{0,2}/docmap.json`,
-                        );
-                    }
-
-                    const currentDocmapFiles = __SGlob.resolve(globs, {
-                        defaultExcludes: false,
-                        exclude: finalParams.exclude ?? [],
-                    });
-
-                    emit('log', {
-                        value: `<yellow>[build]</yellow> Found <cyan>${currentDocmapFiles.length}</cyan> docmap.json file(s) in dependencies`,
-                    });
-
-                    let extendsArray: string[] = [];
-                    currentDocmapFiles.forEach((file) => {
-                        if (!__fs.existsSync(`${file.dirPath}/package.json`)) {
-                            return;
-                        }
-
-                        const currentPackageJson = __readJsonSync(
-                            `${file.dirPath}/package.json`,
-                        );
-                        if (currentPackageJson.name === packageJson.name)
-                            return;
-                        extendsArray.push(currentPackageJson.name);
-                    });
-
-                    // filter extends
-                    extendsArray = extendsArray.filter((packageName) => {
-                        return !this._isPackageExtendsExcluded(
-                            packageName,
-                            finalParams.excludePackages,
-                        );
-                    });
-
-                    // @ts-ignore
-                    docmapJson.generated.extends = extendsArray.filter(
-                        (name) => name !== packageJson.name,
-                    );
-                }
-
-                emit('log', {
-                    value: `<yellow>[build]</yellow> Building map by searching for files inside the current package`,
-                });
-
-                // searching inside the current package for docblocks to use
-                const filesInPackage = __SGlob.resolve(
-                    finalParams.globs.map((glob) => {
-                        return `${glob}:\\*\\s@namespace`;
-                    }),
-                    {
-                        cwd: packageRoot,
-                        exclude: finalParams.exclude ?? [],
-                    },
+            if (!finalParams.noExtends) {
+                console.log(
+                    `<yellow>[build]</yellow> Building extends array from existing docmap compliant packages`,
                 );
 
-                emit('log', {
-                    value: `<yellow>[build]</yellow> Found <cyan>${filesInPackage.length}</cyan> file(s) to parse in package`,
-                });
-
-                for (let i = 0; i < filesInPackage.length; i++) {
-                    const file = filesInPackage[i];
-                    const content = (<__SFile>file).raw;
-
-                    emit('log', {
-                        value: `<yellow>[build]</yellow> Parsing file "<cyan>${__path.relative(
-                            __packageRootDir(),
-                            // @ts-ignore
-                            file.path,
-                        )}</cyan>"`,
-                    });
-
-                    const docblocksInstance = new __SDocblock(file.path, {
-                        renderMarkdown: false,
-                        filepath: (<__SFile>file).path,
-                    });
-
-                    await pipe(docblocksInstance.parse());
-
-                    const docblocks = docblocksInstance.toObject();
-
-                    if (!docblocks || !docblocks.length) continue;
-
-                    let docblockObj: any = {};
-                    const children: any = {};
-                    for (let j = 0; j < docblocks.length; j++) {
-                        const docblock = docblocks[j];
-
-                        let matchFilters = true;
-
-                        for (
-                            let k = 0;
-                            // @ts-ignore
-                            k < Object.keys(finalParams.filters).length;
-                            k++
-                        ) {
-                            const key = Object.keys(finalParams.filters)[k];
-                            const filterReg =
-                                // @ts-ignore
-                                finalParams.filters[key];
-                            // @ts-ignore
-                            let value = docblock[key];
-
-                            // do not take care of undefined value
-                            if (value === undefined) continue;
-
-                            // if the "toString" method is a custom one
-                            // calling it to have the proper string value back
-                            if (
-                                value?.toString
-                                    .toString()
-                                    .indexOf('[native code]') === -1
-                            ) {
-                                value = value.toString();
-                            }
-
-                            // check if the value match the filter or not
-                            // if not, we do not take the docblock
-                            if (
-                                typeof value === 'string' &&
-                                !value.match(filterReg)
-                            ) {
-                                matchFilters = false;
-                                break;
-                            }
-                        }
-
-                        if (!matchFilters) {
-                            continue;
-                        }
-
-                        if (docblock.name && docblock.name.slice(0, 1) === '_')
-                            continue;
-                        if (docblock.private) continue;
-
-                        // const path = __path.relative(outputDir, filepath);
-                        const filename = __fileName((<__SFile>file).path);
-
-                        const docblockEntryObj: ISDocmapEntry = {};
-
-                        for (let l = 0; l < finalParams.tags.length; l++) {
-                            const tag = finalParams.tags[l];
-                            if (docblock[tag] === undefined) continue;
-                            // props proxy
-                            if (this.settings.tagsProxy[tag]) {
-                                docblockEntryObj[tag] =
-                                    await this.settings.tagsProxy[tag](
-                                        docblock[tag],
-                                    );
-                            } else {
-                                docblockEntryObj[tag] = docblock[tag];
-                            }
-                        }
-
-                        const dotPath = __namespaceCompliant(
-                            `${docblock.namespace}.${docblock.name}`,
-                        );
-
-                        if (docblock.namespace && !this._entries[dotPath]) {
-                            docblockObj = {
-                                ...docblockEntryObj,
-                                filename,
-                                extension: filename.split('.').slice(1)[0],
-                                relPath: __path.relative(
-                                    __packageRootDir(),
-                                    (<__SFile>file).path,
-                                ),
-                            };
-                            this._entries[dotPath] = docblockObj;
-                        } else if (docblock.name) {
-                            children[__toLowerCase(docblock.name)] =
-                                docblockEntryObj;
-                        }
-                    }
-                    docblockObj.children = children;
-                }
-
-                emit('log', {
-                    value: `<yellow>[build]</yellow> <green>${
-                        Object.keys(this._entries).length
-                    }</green> entries gathered for this docmap`,
-                });
-
-                emit('notification', {
-                    type: 'success',
-                    message: `${this.metas.id} build success`,
-                });
-
-                // save entries inside the json map property
-                docmapJson.generated.map = this._entries;
-
-                if (finalParams.save) {
-                    emit('log', {
-                        value: `<green>[save]</green> File saved <green>successfully</green> under "<cyan>${finalParams.outPath.replace(
-                            __packageRootDir() + '/',
-                            '',
-                        )}</cyan>"`,
-                    });
-                    __fs.writeFileSync(
-                        finalParams.outPath,
-                        JSON.stringify(docmapJson, null, 4),
+                const globs: string[] = [
+                    `${packageRoot}/node_modules/*{0,2}/docmap.json`,
+                ];
+                if (packageRoot !== packageMonoRoot) {
+                    globs.push(
+                        `${packageMonoRoot}/node_modules/*{0,2}/docmap.json`,
                     );
                 }
 
-                resolve(docmapJson);
-            },
-            {
-                eventEmitter: {
-                    id: this.constructor.name,
+                const currentDocmapFiles = __SGlob.resolve(globs, {
+                    defaultExcludes: false,
+                    exclude: finalParams.exclude ?? [],
+                });
+
+                console.log(
+                    `<yellow>[build]</yellow> Found <cyan>${currentDocmapFiles.length}</cyan> docmap.json file(s) in dependencies`,
+                );
+
+                let extendsArray: string[] = [];
+                currentDocmapFiles.forEach((file) => {
+                    if (!__fs.existsSync(`${file.dirPath}/package.json`)) {
+                        return;
+                    }
+
+                    const currentPackageJson = __readJsonSync(
+                        `${file.dirPath}/package.json`,
+                    );
+                    if (currentPackageJson.name === packageJson.name) return;
+                    extendsArray.push(currentPackageJson.name);
+                });
+
+                // filter extends
+                extendsArray = extendsArray.filter((packageName) => {
+                    return !this._isPackageExtendsExcluded(
+                        packageName,
+                        finalParams.excludePackages,
+                    );
+                });
+
+                // @ts-ignore
+                docmapJson.generated.extends = extendsArray.filter(
+                    (name) => name !== packageJson.name,
+                );
+            }
+
+            console.log(
+                `<yellow>[build]</yellow> Building map by searching for files inside the current package`,
+            );
+
+            // searching inside the current package for docblocks to use
+            const filesInPackage = __SGlob.resolve(
+                finalParams.globs.map((glob) => {
+                    return `${glob}:\\*\\s@namespace`;
+                }),
+                {
+                    cwd: packageRoot,
+                    exclude: finalParams.exclude ?? [],
                 },
-            },
-        );
+            );
+
+            console.log(
+                `<yellow>[build]</yellow> Found <cyan>${filesInPackage.length}</cyan> file(s) to parse in package`,
+            );
+
+            for (let i = 0; i < filesInPackage.length; i++) {
+                const file = filesInPackage[i];
+                const content = (<__SFile>file).raw;
+
+                console.log(
+                    `<yellow>[build]</yellow> Parsing file "<cyan>${__path.relative(
+                        __packageRootDir(),
+                        // @ts-ignore
+                        file.path,
+                    )}</cyan>"`,
+                );
+
+                const docblocksInstance = new __SDocblock(file.path, {
+                    renderMarkdown: false,
+                    filepath: (<__SFile>file).path,
+                });
+
+                await docblocksInstance.parse();
+
+                const docblocks = docblocksInstance.toObject();
+
+                if (!docblocks || !docblocks.length) continue;
+
+                let docblockObj: any = {};
+                const children: any = {};
+                for (let j = 0; j < docblocks.length; j++) {
+                    const docblock = docblocks[j];
+
+                    let matchFilters = true;
+
+                    for (
+                        let k = 0;
+                        // @ts-ignore
+                        k < Object.keys(finalParams.filters).length;
+                        k++
+                    ) {
+                        const key = Object.keys(finalParams.filters)[k];
+                        const filterReg =
+                            // @ts-ignore
+                            finalParams.filters[key];
+                        // @ts-ignore
+                        let value = docblock[key];
+
+                        // do not take care of undefined value
+                        if (value === undefined) continue;
+
+                        // if the "toString" method is a custom one
+                        // calling it to have the proper string value back
+                        if (
+                            value?.toString
+                                .toString()
+                                .indexOf('[native code]') === -1
+                        ) {
+                            value = value.toString();
+                        }
+
+                        // check if the value match the filter or not
+                        // if not, we do not take the docblock
+                        if (
+                            typeof value === 'string' &&
+                            !value.match(filterReg)
+                        ) {
+                            matchFilters = false;
+                            break;
+                        }
+                    }
+
+                    if (!matchFilters) {
+                        continue;
+                    }
+
+                    if (docblock.name && docblock.name.slice(0, 1) === '_')
+                        continue;
+                    if (docblock.private) continue;
+
+                    // const path = __path.relative(outputDir, filepath);
+                    const filename = __fileName((<__SFile>file).path);
+
+                    const docblockEntryObj: ISDocmapEntry = {};
+
+                    for (let l = 0; l < finalParams.tags.length; l++) {
+                        const tag = finalParams.tags[l];
+                        if (docblock[tag] === undefined) continue;
+                        // props proxy
+                        if (this.settings.tagsProxy[tag]) {
+                            docblockEntryObj[tag] =
+                                await this.settings.tagsProxy[tag](
+                                    docblock[tag],
+                                );
+                        } else {
+                            docblockEntryObj[tag] = docblock[tag];
+                        }
+                    }
+
+                    const dotPath = __namespaceCompliant(
+                        `${docblock.namespace}.${docblock.name}`,
+                    );
+
+                    if (docblock.namespace && !this._entries[dotPath]) {
+                        docblockObj = {
+                            ...docblockEntryObj,
+                            filename,
+                            extension: filename.split('.').slice(1)[0],
+                            relPath: __path.relative(
+                                __packageRootDir(),
+                                (<__SFile>file).path,
+                            ),
+                        };
+                        this._entries[dotPath] = docblockObj;
+                    } else if (docblock.name) {
+                        children[__toLowerCase(docblock.name)] =
+                            docblockEntryObj;
+                    }
+                }
+                docblockObj.children = children;
+            }
+
+            console.log(
+                `<yellow>[build]</yellow> <green>${
+                    Object.keys(this._entries).length
+                }</green> entries gathered for this docmap`,
+            );
+
+            // save entries inside the json map property
+            docmapJson.generated.map = this._entries;
+
+            if (finalParams.save) {
+                console.log(
+                    `<green>[save]</green> File saved <green>successfully</green> under "<cyan>${finalParams.outPath.replace(
+                        __packageRootDir() + '/',
+                        '',
+                    )}</cyan>"`,
+                );
+                __fs.writeFileSync(
+                    finalParams.outPath,
+                    JSON.stringify(docmapJson, null, 4),
+                );
+            }
+
+            resolve(docmapJson);
+        });
     }
 
     /**
@@ -1140,162 +1088,134 @@ class SDocmap extends __SClass implements ISDocmap {
      */
     installSnapshot(
         params: Partial<ISDocmapInstallSnapshotsParams>,
-    ): Promise<any> {
-        return new __SPromise(
-            async ({ resolve, reject, emit, pipe }) => {
-                const finalParams = <ISDocmapInstallSnapshotsParams>(
-                    __deepMerge(
-                        __SDocmapInstallSnapshotParamsInterface.defaults(),
-                        params ?? {},
-                    )
+    ): Promise<any | void> {
+        return new Promise(async (resolve) => {
+            const finalParams = <ISDocmapInstallSnapshotsParams>(
+                __deepMerge(
+                    __SDocmapInstallSnapshotParamsInterface.defaults(),
+                    params ?? {},
+                )
+            );
+
+            const duration = new __SDuration();
+
+            const folders = __SGlob.resolve(finalParams.glob, {
+                defaultExcludes: false,
+            });
+
+            if (!folders.length) {
+                console.log(
+                    `<cyan>[info]</cyan> It seem's that you don't have any snapshot(s) matching the glob "<cyan>${params.glob}</cyan>". Try generating a snapshot first with the command "<yellow>sugar docmap.snapshot</yellow>"`,
+                );
+                return resolve();
+            }
+
+            for (let i = 0; i < folders.length; i++) {
+                const folderPath = <string>folders[i];
+
+                console.log(
+                    `<yellow>[install]</yellow> Installing snapshot <yellow>${__path.relative(
+                        __packageRootDir(),
+                        folderPath,
+                    )}</yellow>`,
                 );
 
-                const duration = new __SDuration();
-
-                const folders = __SGlob.resolve(finalParams.glob, {
-                    defaultExcludes: false,
+                const packageJson = __packageJsonSync();
+                const packageMonoRootPath = __packageRootDir(process.cwd(), {
+                    highest: true,
                 });
 
-                if (!folders.length) {
-                    emit('log', {
-                        value: `<cyan>[info]</cyan> It seem's that you don't have any snapshot(s) matching the glob "<cyan>${params.glob}</cyan>". Try generating a snapshot first with the command "<yellow>sugar docmap.snapshot</yellow>"`,
-                    });
-                    return resolve();
-                }
-
-                for (let i = 0; i < folders.length; i++) {
-                    const folderPath = <string>folders[i];
-
-                    emit('log', {
-                        value: `<yellow>[install]</yellow> Installing snapshot <yellow>${__path.relative(
-                            __packageRootDir(),
-                            folderPath,
-                        )}</yellow>`,
-                    });
-
-                    const packageJson = __packageJsonSync();
-                    const packageMonoRootPath = __packageRootDir(
-                        process.cwd(),
-                        {
-                            highest: true,
-                        },
+                // symlink repos from monorepo
+                const removedDependencies = {},
+                    removedDevDependencies = {};
+                if (packageMonoRootPath !== __packageRootDir()) {
+                    const packageJsonFiles = __SGlob.resolve(
+                        `${packageMonoRootPath}/**/package.json`,
                     );
 
-                    // symlink repos from monorepo
-                    const removedDependencies = {},
-                        removedDevDependencies = {};
-                    if (packageMonoRootPath !== __packageRootDir()) {
-                        const packageJsonFiles = __SGlob.resolve(
-                            `${packageMonoRootPath}/**/package.json`,
+                    packageJsonFiles.forEach((file) => {
+                        if (file.dirPath === packageMonoRootPath) return;
+                        if (
+                            !packageJson.dependencies?.[file.content.name] &&
+                            !packageJson.devDependencies?.[file.content.name]
+                        )
+                            return;
+
+                        if (packageJson.dependencies?.[file.content.name]) {
+                            removedDependencies[file.content.name] =
+                                packageJson.dependencies[file.content.name];
+                            delete packageJson.dependencies[file.content.name];
+                        }
+                        if (packageJson.devDependencies?.[file.content.name]) {
+                            removedDevDependencies[file.content.name] =
+                                packageJson.devDependencies[file.content.name];
+                            delete packageJson.devDependencies[
+                                file.content.name
+                            ];
+                        }
+
+                        const packageFolderPath = __folderPath(file.path);
+                        const destinationFolderPath = `${folderPath}/node_modules/${file.content.name}`;
+                        __ensureDirSync(
+                            destinationFolderPath
+                                .split('/')
+                                .slice(0, -1)
+                                .join('/'),
                         );
-
-                        packageJsonFiles.forEach((file) => {
-                            if (file.dirPath === packageMonoRootPath) return;
-                            if (
-                                !packageJson.dependencies?.[
-                                    file.content.name
-                                ] &&
-                                !packageJson.devDependencies?.[
-                                    file.content.name
-                                ]
-                            )
-                                return;
-
-                            if (packageJson.dependencies?.[file.content.name]) {
-                                removedDependencies[file.content.name] =
-                                    packageJson.dependencies[file.content.name];
-                                delete packageJson.dependencies[
-                                    file.content.name
-                                ];
-                            }
-                            if (
-                                packageJson.devDependencies?.[file.content.name]
-                            ) {
-                                removedDevDependencies[file.content.name] =
-                                    packageJson.devDependencies[
-                                        file.content.name
-                                    ];
-                                delete packageJson.devDependencies[
-                                    file.content.name
-                                ];
-                            }
-
-                            const packageFolderPath = __folderPath(file.path);
-                            const destinationFolderPath = `${folderPath}/node_modules/${file.content.name}`;
-                            __ensureDirSync(
-                                destinationFolderPath
-                                    .split('/')
-                                    .slice(0, -1)
-                                    .join('/'),
-                            );
-                            try {
-                                __fs.unlinkSync(destinationFolderPath);
-                            } catch (e) {}
-                            __fs.symlinkSync(
-                                packageFolderPath,
-                                destinationFolderPath,
-                            );
-                        });
-                    }
-                    if (
-                        Object.keys(removedDependencies).length ||
-                        Object.keys(removedDevDependencies).length
-                    ) {
-                        __writeJsonSync(
-                            `${folderPath}/package.json`,
-                            packageJson,
+                        try {
+                            __fs.unlinkSync(destinationFolderPath);
+                        } catch (e) {}
+                        __fs.symlinkSync(
+                            packageFolderPath,
+                            destinationFolderPath,
                         );
-                    }
-
-                    // installing dependencies
-                    await pipe(
-                        __npmInstall('', {
-                            cwd: folderPath,
-                            args: {
-                                silent: false,
-                            },
-                        }),
-                    );
-
-                    // restoring package.json
-                    if (
-                        Object.keys(removedDependencies).length ||
-                        Object.keys(removedDevDependencies).length
-                    ) {
-                        packageJson.dependencies = {
-                            ...packageJson.dependencies,
-                            ...removedDependencies,
-                        };
-                        packageJson.devDependencies = {
-                            ...packageJson.devDependencies,
-                            ...removedDevDependencies,
-                        };
-                        __writeJsonSync(
-                            `${folderPath}/package.json`,
-                            packageJson,
-                        );
-                    }
-
-                    emit('log', {
-                        value: `<green>[success]</green> Snapshot "<yellow>${__path.relative(
-                            __packageRootDir(),
-                            folderPath,
-                        )}</yellow>" installed <green>successfully</green>`,
                     });
                 }
+                if (
+                    Object.keys(removedDependencies).length ||
+                    Object.keys(removedDevDependencies).length
+                ) {
+                    __writeJsonSync(`${folderPath}/package.json`, packageJson);
+                }
 
-                emit('log', {
-                    value: `<green>[success]</green> Snapshot(s) installed <green>successfully</green> in <yellow>${
-                        duration.end().formatedDuration
-                    }</yellow>`,
+                // installing dependencies
+                await __npmInstall('', {
+                    cwd: folderPath,
+                    args: {
+                        silent: false,
+                    },
                 });
-            },
-            {
-                eventEmitter: {
-                    id: this.constructor.name,
-                },
-            },
-        );
+
+                // restoring package.json
+                if (
+                    Object.keys(removedDependencies).length ||
+                    Object.keys(removedDevDependencies).length
+                ) {
+                    packageJson.dependencies = {
+                        ...packageJson.dependencies,
+                        ...removedDependencies,
+                    };
+                    packageJson.devDependencies = {
+                        ...packageJson.devDependencies,
+                        ...removedDevDependencies,
+                    };
+                    __writeJsonSync(`${folderPath}/package.json`, packageJson);
+                }
+
+                console.log(
+                    `<green>[success]</green> Snapshot "<yellow>${__path.relative(
+                        __packageRootDir(),
+                        folderPath,
+                    )}</yellow>" installed <green>successfully</green>`,
+                );
+            }
+
+            console.log(
+                `<green>[success]</green> Snapshot(s) installed <green>successfully</green> in <yellow>${
+                    duration.end().formatedDuration
+                }</yellow>`,
+            );
+        });
     }
 
     /**
@@ -1307,116 +1227,106 @@ class SDocmap extends __SClass implements ISDocmap {
      * and store it to have access later. It is usefull to make versions backup for example.
      *
      * @param         {Partial<ISDocmapSnapshotParams>}          params       THe params you want to make your snapshot
-     * @return        {SPromise}                                     A promise resolved once the scan process has been finished
+     * @return        {Promise}                                     A promise resolved once the scan process has been finished
      *
      * @since         2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     snapshot(params: Partial<ISDocmapSnapshotParams>): Promise<any> {
-        return new __SPromise(
-            async ({ resolve, reject, emit, pipe }) => {
-                const finalParams = <ISDocmapSnapshotParams>(
-                    __deepMerge(
-                        __SDocmapSnapshotParamsInterface.defaults(),
-                        params,
-                    )
+        return new Promise(async (resolve) => {
+            const finalParams = <ISDocmapSnapshotParams>(
+                __deepMerge(__SDocmapSnapshotParamsInterface.defaults(), params)
+            );
+
+            const duration = new __SDuration();
+
+            console.log(
+                `<yellow>[snapshot]</yellow> Creating a docmap snapshot. This can take some time so please be patient...`,
+            );
+
+            if (!__fs.existsSync(`${__packageRootDir()}/package.json`)) {
+                throw new Error(
+                    `<red>[${this.constructor.name}.snapshot]</red> Sorry but a package.json file is required in order to create a snapshot...`,
                 );
-
-                const duration = new __SDuration();
-
-                emit('log', {
-                    value: `<yellow>[snapshot]</yellow> Creating a docmap snapshot. This can take some time so please be patient...`,
-                });
-
-                if (!__fs.existsSync(`${__packageRootDir()}/package.json`)) {
-                    throw new Error(
-                        `<red>[${this.constructor.name}.snapshot]</red> Sorry but a package.json file is required in order to create a snapshot...`,
-                    );
-                }
-                if (!__fs.existsSync(`${__packageRootDir()}/docmap.json`)) {
-                    throw new Error(
-                        `<red>[${this.constructor.name}.snapshot]</red> Sorry but a docmap.json file is required in order to create a snapshot...`,
-                    );
-                }
-
-                const packageJson = __packageJsonSync();
-                const docmapJson = __readJsonSync(
-                    `${__packageRootDir()}/docmap.json`,
+            }
+            if (!__fs.existsSync(`${__packageRootDir()}/docmap.json`)) {
+                throw new Error(
+                    `<red>[${this.constructor.name}.snapshot]</red> Sorry but a docmap.json file is required in order to create a snapshot...`,
                 );
+            }
 
-                // write the docmap
-                const outDir = __path.resolve(
-                    finalParams.outDir,
-                    packageJson.version,
-                );
-                __removeSync(outDir);
-                __ensureDirSync(outDir);
+            const packageJson = __packageJsonSync();
+            const docmapJson = __readJsonSync(
+                `${__packageRootDir()}/docmap.json`,
+            );
 
-                // copy package.json file
+            // write the docmap
+            const outDir = __path.resolve(
+                finalParams.outDir,
+                packageJson.version,
+            );
+            __removeSync(outDir);
+            __ensureDirSync(outDir);
+
+            // copy package.json file
+            __copySync(
+                `${__packageRootDir()}/package.json`,
+                `${outDir}/package.json`,
+            );
+            __copySync(
+                `${__packageRootDir()}/docmap.json`,
+                `${outDir}/docmap.json`,
+            );
+            try {
                 __copySync(
-                    `${__packageRootDir()}/package.json`,
-                    `${outDir}/package.json`,
+                    `${__packageRootDir()}/package-lock.json`,
+                    `${outDir}/package-lock.json`,
                 );
                 __copySync(
-                    `${__packageRootDir()}/docmap.json`,
-                    `${outDir}/docmap.json`,
+                    `${__packageRootDir()}/yarn.lock`,
+                    `${outDir}/yarn.lock`,
                 );
-                try {
-                    __copySync(
-                        `${__packageRootDir()}/package-lock.json`,
-                        `${outDir}/package-lock.json`,
-                    );
-                    __copySync(
-                        `${__packageRootDir()}/yarn.lock`,
-                        `${outDir}/yarn.lock`,
-                    );
-                } catch (e) {}
+            } catch (e) {}
 
-                const fullMap = {
-                    ...docmapJson.map,
-                    ...docmapJson.generated.map,
-                };
+            const fullMap = {
+                ...docmapJson.map,
+                ...docmapJson.generated.map,
+            };
 
-                Object.keys(fullMap).forEach((namespace) => {
-                    const docmapObj = fullMap[namespace];
-                    const path = __path.resolve(
-                        __packageRootDir(),
-                        docmapObj.relPath,
-                    );
-                    let content = __fs.readFileSync(path, 'utf8').toString();
-                    if (docmapObj.type === 'markdown') {
-                    } else {
-                        const docblock = new __SDocblock(content, {
-                            renderMarkdown: false,
-                        });
-                        content = docblock.toString();
-                    }
-                    __writeFileSync(
-                        __path.resolve(outDir, docmapObj.relPath),
-                        content,
-                    );
-                });
+            Object.keys(fullMap).forEach((namespace) => {
+                const docmapObj = fullMap[namespace];
+                const path = __path.resolve(
+                    __packageRootDir(),
+                    docmapObj.relPath,
+                );
+                let content = __fs.readFileSync(path, 'utf8').toString();
+                if (docmapObj.type === 'markdown') {
+                } else {
+                    const docblock = new __SDocblock(content, {
+                        renderMarkdown: false,
+                    });
+                    content = docblock.toString();
+                }
+                __writeFileSync(
+                    __path.resolve(outDir, docmapObj.relPath),
+                    content,
+                );
+            });
 
-                emit('log', {
-                    value: `<green>[save]</green> Snapshot saved under "<cyan>${__path.relative(
-                        process.cwd(),
-                        outDir,
-                    )}</cyan>"`,
-                });
-                emit('log', {
-                    value: `<green>[success]</green> Snapshot generated <green>successfully</green> in <yellow>${
-                        duration.end().formatedDuration
-                    }</yellow>`,
-                });
+            console.log(
+                `<green>[save]</green> Snapshot saved under "<cyan>${__path.relative(
+                    process.cwd(),
+                    outDir,
+                )}</cyan>"`,
+            );
+            console.log(
+                `<green>[success]</green> Snapshot generated <green>successfully</green> in <yellow>${
+                    duration.end().formatedDuration
+                }</yellow>`,
+            );
 
-                resolve();
-            },
-            {
-                eventEmitter: {
-                    id: this.constructor.name,
-                },
-            },
-        );
+            resolve();
+        });
     }
 }
 

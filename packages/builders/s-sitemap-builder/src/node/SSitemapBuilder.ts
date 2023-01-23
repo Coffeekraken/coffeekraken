@@ -1,7 +1,6 @@
 import type { ISBuilderSettings } from '@coffeekraken/s-builder';
 import __SBuilder from '@coffeekraken/s-builder';
 import __SDuration from '@coffeekraken/s-duration';
-import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __extension, __writeFileSync } from '@coffeekraken/sugar/fs';
 import { __isClass } from '@coffeekraken/sugar/is';
@@ -107,7 +106,7 @@ export default class SSitemapBuilder extends __SBuilder {
      * and save it to disk, or just returns the result as a promise value
      *
      * @param       {Partial<ISSitemapBuilderBuildParams>}          [params={}]         The params for your build process
-     * @return      {SPromise<ISSitemapBuilderBuildResult>}                    A promise resolved with the sitemap result when success
+     * @return      {Promise<ISSitemapBuilderBuildResult>}                    A promise resolved with the sitemap result when success
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -115,98 +114,87 @@ export default class SSitemapBuilder extends __SBuilder {
     _build(
         params: Partial<ISSitemapBuilderBuildParams> = {},
     ): Promise<ISSitemapBuilderBuildResult> {
-        return new __SPromise(
-            async ({ resolve, reject, emit, pipe }) => {
-                let sitemap: ISSitemapBuilderResultItem[] = [];
+        return new Promise(async (resolve) => {
+            let sitemap: ISSitemapBuilderResultItem[] = [];
 
+            // @ts-ignore
+            const finalParams: ISSitemapBuilderBuildParams =
+                __SSitemapBuilderBuildParamsInterface.apply(params);
+
+            const duration = new __SDuration();
+
+            let sourcesId = finalParams.source.length
+                ? finalParams.source
+                : Object.keys(this.settings.sources);
+
+            for (let i = 0; i < sourcesId.length; i++) {
+                const sourceId = sourcesId[i];
+
+                if (!this.settings.sources[sourceId]) {
+                    throw new Error(
+                        `Sorry but the source "<yellow>${sourceId}</yellow>" is not available. Here's the sources you can use: ${Object.keys(
+                            this.settings.sources,
+                        ).join(',')}`,
+                    );
+                }
+
+                const sourceObj = this.settings.sources[sourceId];
+
+                // skip inactive sources
+                if (!sourceObj.active) continue;
+
+                // load source
                 // @ts-ignore
-                const finalParams: ISSitemapBuilderBuildParams =
-                    __SSitemapBuilderBuildParamsInterface.apply(params);
+                const importedSource = (await import(sourceObj.path)).default;
 
-                const duration = new __SDuration();
+                let buildFn;
 
-                let sourcesId = finalParams.source.length
-                    ? finalParams.source
-                    : Object.keys(this.settings.sources);
-
-                for (let i = 0; i < sourcesId.length; i++) {
-                    const sourceId = sourcesId[i];
-
-                    if (!this.settings.sources[sourceId]) {
-                        throw new Error(
-                            `Sorry but the source "<yellow>${sourceId}</yellow>" is not available. Here's the sources you can use: ${Object.keys(
-                                this.settings.sources,
-                            ).join(',')}`,
-                        );
-                    }
-
-                    const sourceObj = this.settings.sources[sourceId];
-
-                    // skip inactive sources
-                    if (!sourceObj.active) continue;
-
-                    // load source
-                    // @ts-ignore
-                    const importedSource = (await import(sourceObj.path))
-                        .default;
-
-                    let buildFn;
-
-                    if (__isClass(importedSource)) {
-                        // instanciate new source
-                        const sourceInstance = new importedSource({
-                            ...__deepMerge(
-                                sourceObj.settings ?? {},
-                                finalParams.sourcesSettings[sourceId] ?? {},
-                            ),
-                        });
-                        buildFn = sourceInstance.build.bind(sourceInstance);
-                    } else if (typeof importedSource === 'function') {
-                        buildFn = importedSource;
-                    }
-
-                    const sourceDuration = new __SDuration();
-                    // build
-                    const buildResultPromise = buildFn(finalParams);
-                    if (buildResultPromise instanceof __SPromise) {
-                        pipe(buildResultPromise);
-                    }
-                    const buildResult = await buildResultPromise;
-                    sitemap = [...sitemap, ...(buildResult ?? [])];
-                    emit('log', {
-                        value: `<yellow>[build]</yellow> "<magenta>${sourceId}</magenta>" sitemap builded with <magenta>${
-                            buildResult.length
-                        }</magenta> item(s) <green>successfully</green> in <yellow>${
-                            sourceDuration.end().formatedDuration
-                        }</yellow>`,
+                if (__isClass(importedSource)) {
+                    // instanciate new source
+                    const sourceInstance = new importedSource({
+                        ...__deepMerge(
+                            sourceObj.settings ?? {},
+                            finalParams.sourcesSettings[sourceId] ?? {},
+                        ),
                     });
+                    buildFn = sourceInstance.build.bind(sourceInstance);
+                } else if (typeof importedSource === 'function') {
+                    buildFn = importedSource;
                 }
 
-                if (finalParams.save) {
-                    emit('log', {
-                        value: `<yellow>[save]</yellow> Saving your sitemap under "<cyan>${__path.relative(
-                            __packageRootDir(),
-                            finalParams.output,
-                        )}</cyan>"`,
-                    });
-                    this.save(sitemap, finalParams.output);
-                }
-
-                emit('log', {
-                    value: `<yellow>[build]</yellow> Sitemap builded <green>successfully</green> in <yellow>${
-                        duration.end().formatedDuration
+                const sourceDuration = new __SDuration();
+                // build
+                const buildResultPromise = buildFn(finalParams);
+                const buildResult = await buildResultPromise;
+                sitemap = [...sitemap, ...(buildResult ?? [])];
+                console.log(
+                    `<yellow>[build]</yellow> "<magenta>${sourceId}</magenta>" sitemap builded with <magenta>${
+                        buildResult.length
+                    }</magenta> item(s) <green>successfully</green> in <yellow>${
+                        sourceDuration.end().formatedDuration
                     }</yellow>`,
-                });
+                );
+            }
 
-                // resolve the build
-                resolve(sitemap);
-            },
-            {
-                eventEmitter: {
-                    bind: this,
-                },
-            },
-        );
+            if (finalParams.save) {
+                console.log(
+                    `<yellow>[save]</yellow> Saving your sitemap under "<cyan>${__path.relative(
+                        __packageRootDir(),
+                        finalParams.output,
+                    )}</cyan>"`,
+                );
+                this.save(sitemap, finalParams.output);
+            }
+
+            console.log(
+                `<yellow>[build]</yellow> Sitemap builded <green>successfully</green> in <yellow>${
+                    duration.end().formatedDuration
+                }</yellow>`,
+            );
+
+            // resolve the build
+            resolve(sitemap);
+        });
     }
 
     /**

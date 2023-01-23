@@ -1,5 +1,4 @@
-import { __copySync } from '@coffeekraken/sugar/fs';
-import { __dirname } from '@coffeekraken/sugar/fs';
+import { __copySync, __dirname } from '@coffeekraken/sugar/fs';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
 import type { ISKitchenIngredient } from '../../SKitchen';
@@ -23,7 +22,7 @@ const readmeIngredient: ISKitchenIngredient = {
     description:
         'Add the default <cyan>README.md</cyan> file into your project',
     projectTypes: ['unknown', 'sugar'],
-    async add({ ask, log, emit }) {
+    async add({ ask }) {
         const input = __SSugarConfig.get('readme.input'),
             output = __SSugarConfig.get('readme.output');
 
@@ -59,12 +58,12 @@ const readmeIngredient: ISKitchenIngredient = {
         //     outPath: finalParams.path,
         // });
 
-        emit('log', {
-            value: `<green>[readme]</green> <cyan>${__path.relative(
+        console.log(
+            `<green>[readme]</green> <cyan>${__path.relative(
                 __packageRootDir(),
                 input,
             )}</cyan> added <green>successfully</green>`,
-        });
+        );
 
         return true;
     },

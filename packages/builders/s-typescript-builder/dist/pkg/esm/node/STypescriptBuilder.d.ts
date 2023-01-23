@@ -1,7 +1,6 @@
 import type { ISBuilderSettings } from '@coffeekraken/s-builder';
 import __SBuilder from '@coffeekraken/s-builder';
 import __SFile from '@coffeekraken/s-file';
-import __SPromise from '@coffeekraken/s-promise';
 import __ts from 'typescript';
 import * as __tsMorph from 'ts-morph';
 
@@ -53,6 +52,7 @@ export interface ISTypescriptBuilderBuildParams {
     platform: 'node' | 'browser';
     declarationFiles: boolean;
     watch: boolean;
+    silent: boolean;
     buildInitial: boolean;
     customSettings: ISTypescriptBuilderCustomSettings;
     exclude: string[];
@@ -70,6 +70,6 @@ export default class STypescriptBuilder extends __SBuilder {
     _build(params: ISTypescriptBuilderBuildParams): Promise<ISTypescriptBuilderResult>;
     _tsProject: any;
     _createTsProgramIfNeeded(compilerOptions: __ts.CompilerOptions, packageRoot?: any): __tsMorph.Project;
-    _buildDeclarationFile(filePath: string, outputFilePath: string, packageRoot?: any): __SPromise<string>;
+    _buildDeclarationFile(filePath: string, outputFilePath: string, packageRoot?: any): Promise<string>;
     _buildFile(file: ISTypescriptBuilderFileToBuild, params: ISTypescriptBuilderBuildParams): Promise<ISTypescriptBuilderResultFile>;
 }

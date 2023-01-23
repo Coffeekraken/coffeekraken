@@ -1,5 +1,3 @@
-import __SLog from '@coffeekraken/s-log';
-import __SPromise from '@coffeekraken/s-promise';
 import { ISViewRendererSettings } from '@coffeekraken/s-view-renderer';
 import { __unique } from '@coffeekraken/sugar/array';
 import { __execPhp } from '@coffeekraken/sugar/exec';
@@ -40,76 +38,61 @@ export default class SViewRendererEngineTwig {
         sharedDataFilePath: string,
         viewRendererSettings: ISViewRendererSettings,
     ) {
-        return new __SPromise(
-            async ({ resolve, reject, emit, pipe }) => {
-                if (!__fs.existsSync(viewRendererSettings.cacheDir)) {
-                    __fs.mkdirSync(viewRendererSettings.cacheDir, {
-                        recursive: true,
-                    });
-                }
-
-                if (!viewPath.includes('/')) {
-                    viewPath = viewPath.replace(/\.(?!md|twig)/gm, '/');
-                }
-                if (!viewPath.match(/\.twig$/)) {
-                    viewPath += '.twig';
-                }
-
-                __unique([...viewRendererSettings.rootDirs]).forEach((path) => {
-                    viewPath = viewPath.replace(`${path}/`, '');
+        return new Promise(async (resolve) => {
+            if (!__fs.existsSync(viewRendererSettings.cacheDir)) {
+                __fs.mkdirSync(viewRendererSettings.cacheDir, {
+                    recursive: true,
                 });
+            }
 
-                // pass the shared data file path through the data
-                data._sharedDataFilePath = sharedDataFilePath;
+            if (!viewPath.includes('/')) {
+                viewPath = viewPath.replace(/\.(?!md|twig)/gm, '/');
+            }
+            if (!viewPath.match(/\.twig$/)) {
+                viewPath += '.twig';
+            }
 
-                const resPro = pipe(
-                    __execPhp(
-                        __path.resolve(
-                            __packageRootDir(__dirname()),
-                            'src/php/compile.php',
-                        ),
-                        {
-                            rootDirs: __unique([
-                                ...viewRendererSettings.rootDirs,
-                            ]),
-                            viewPath,
-                            data,
-                            cacheDir: viewRendererSettings.cacheDir,
-                        },
-                        {
-                            paramsThroughFile: true,
-                        },
-                    ),
-                );
+            __unique([...viewRendererSettings.rootDirs]).forEach((path) => {
+                viewPath = viewPath.replace(`${path}/`, '');
+            });
 
-                resPro.catch((e) => {
-                    // @TODO            make the 'log' event displayed on the terminal
-                    emit('log', {
-                        type: __SLog.TYPE_ERROR,
-                        value: e,
-                    });
+            // pass the shared data file path through the data
+            data._sharedDataFilePath = sharedDataFilePath;
 
-                    resolve({
-                        error: e,
-                    });
-                });
-                const res = await resPro;
-
-                if (res.match(/^Twig\\Error\\[a-zA-Z]+Error/)) {
-                    resolve({
-                        error: res,
-                    });
-                } else {
-                    resolve({
-                        value: res,
-                    });
-                }
-            },
-            {
-                eventEmitter: {
-                    bind: this,
+            const resPro = __execPhp(
+                __path.resolve(
+                    __packageRootDir(__dirname()),
+                    'src/php/compile.php',
+                ),
+                {
+                    rootDirs: __unique([...viewRendererSettings.rootDirs]),
+                    viewPath,
+                    data,
+                    cacheDir: viewRendererSettings.cacheDir,
                 },
-            },
-        );
+                {
+                    paramsThroughFile: true,
+                },
+            );
+
+            resPro.catch((e) => {
+                console.error(e);
+
+                resolve({
+                    error: e,
+                });
+            });
+            const res = await resPro;
+
+            if (res.match(/^Twig\\Error\\[a-zA-Z]+Error/)) {
+                resolve({
+                    error: res,
+                });
+            } else {
+                resolve({
+                    value: res,
+                });
+            }
+        });
     }
 }

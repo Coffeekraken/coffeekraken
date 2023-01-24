@@ -23,11 +23,6 @@ export default async function ({ root, sharedData, settings }) {
     const fantasticonConfig = __SSugarConfig.get('icons.fantasticon');
     const sourceStr = root.toString();
 
-    // make sure we have icons to generate
-    if (!sourceStr.match(/S-SUGAR-FS-ICON:/)) {
-        return;
-    }
-
     function injectIconsCss() {
         const iconsCss = __fs
             .readFileSync(
@@ -57,6 +52,11 @@ export default async function ({ root, sharedData, settings }) {
                 @import url('${__SSugarConfig.get('icons.fontawesome.url')}');
             `),
         );
+    }
+
+    // make sure we have icons to generate
+    if (!sourceStr.match(/S-SUGAR-FS-ICON:/)) {
+        return;
     }
 
     // prepend the icons import

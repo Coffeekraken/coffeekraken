@@ -190,9 +190,7 @@ export default function ({
 
         `);
 
-        vars.push(`
-        & {
-        } `);
+        vars.push(``);
 
         switch (finalParams.lnf) {
             case 'solid':

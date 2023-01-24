@@ -11,11 +11,6 @@ declare class postcssUiDatetimePickerClassesInterface extends __SInterface {
             values: string[];
             default: any;
         };
-        defaultColor: {
-            type: string;
-            values: string[];
-            default: any;
-        };
         scope: {
             type: {
                 type: string;
@@ -29,7 +24,6 @@ declare class postcssUiDatetimePickerClassesInterface extends __SInterface {
 export interface IPostcssUiDatetimePickerInputClassesParams {
     styles: 'solid'[];
     defaultStyle: 'solid';
-    defaultColor: string;
     scope: ('bare' | 'lnf' | 'vr')[];
 }
 export { postcssUiDatetimePickerClassesInterface as interface };

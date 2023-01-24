@@ -160,7 +160,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
 */
 `).code(`
-    .s-blockquote {
+    .s-blockquote:not(.s-bare) {
         @sugar.ui.blockquote($scope: lnf);
     } `, { type: 'CssClass' });
     if (finalParams.scope.indexOf('tf') !== -1) {

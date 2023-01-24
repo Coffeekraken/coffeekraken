@@ -51,7 +51,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code(`
-            .s-google-map[lnf="default"] .s-google-map-marker {
+            .s-google-map[lnf="default"]:not(.s-bare) .s-google-map-marker:not(.s-bare) {
                 @sugar.ui.googleMapMarker($scope: lnf);
             }`, {
             type: 'CssClass',

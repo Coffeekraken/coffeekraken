@@ -26,16 +26,7 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export type ISLogType =
-    | 'log'
-    | 'info'
-    | 'warn'
-    | 'error'
-    | 'verbose'
-    | 'verboser'
-    | 'decorator'
-    | 'summary'
-    | 'child_process';
+export type ISLogType = 'log' | 'info' | 'warn' | 'error' | 'success';
 
 export interface ISLogMargin {
     top: number;
@@ -55,5 +46,8 @@ export default interface ISLog {
     as?: string;
     value: any;
     active?: boolean;
+    metas?: any;
     logger?: Function;
+    notify?: boolean;
+    verbose?: boolean;
 }

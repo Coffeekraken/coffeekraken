@@ -432,6 +432,7 @@ export default class STypescriptBuilder extends __SBuilder {
         filePath: string,
         outputFilePath: string,
         packageRoot = process.cwd(),
+        silent: boolean = false,
     ): Promise<string> {
         return new Promise(async (resolve) => {
             const compilerOptions = {
@@ -441,12 +442,14 @@ export default class STypescriptBuilder extends __SBuilder {
                 outDir: `${__packageCacheDir()}/s-typescript-builder`,
             };
 
-            console.verbose?.(
-                `<yellow>[d.ts]</yellow> Generating .d.ts file for "<cyan>${__path.relative(
-                    __packageRootDir(),
-                    outputFilePath,
-                )}</cyan>"`,
-            );
+            if (!silent) {
+                console.verbose?.(
+                    `<yellow>[d.ts]</yellow> Generating .d.ts file for "<cyan>${__path.relative(
+                        __packageRootDir(),
+                        outputFilePath,
+                    )}</cyan>"`,
+                );
+            }
 
             const project = this._createTsProgramIfNeeded(
                 compilerOptions,
@@ -476,12 +479,14 @@ export default class STypescriptBuilder extends __SBuilder {
                 .getText()
                 .replace(/\/\*[\s\S]*?\*\/|\/\/.*/g, '');
 
-            console.verbose?.(
-                `<green>[d.ts]</green> .d.ts file generated <green>successfully</green> for "<cyan>${__path.relative(
-                    __packageRootDir(),
-                    outputFilePath,
-                )}</cyan>"`,
-            );
+            if (!silent) {
+                console.verbose?.(
+                    `<green>[d.ts]</green> .d.ts file generated <green>successfully</green> for "<cyan>${__path.relative(
+                        __packageRootDir(),
+                        outputFilePath,
+                    )}</cyan>"`,
+                );
+            }
             resolve(text);
         });
     }
@@ -560,6 +565,7 @@ export default class STypescriptBuilder extends __SBuilder {
                     file.path,
                     outFilePath.replace(/\.js$/, '.d.ts'),
                     params.packageRoot,
+                    params.silent,
                 );
                 declarationPromise.then(async (declarationStr) => {
                     // prevent empty file

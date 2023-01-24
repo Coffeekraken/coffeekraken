@@ -1,3 +1,4 @@
+import __SEnv from '@coffeekraken/s-env';
 import type { ISLog, ISLogAsk } from '@coffeekraken/s-log';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
@@ -10,7 +11,7 @@ import * as __Enquirer from 'enquirer';
 import __SStdioAdapter from '../../shared/SStdioAdapter';
 
 /**
- * @name            SBasicStdio
+ * @name            SStdioBasicAdapter
  * @namespace       node.basic
  * @type            Class
  *
@@ -22,8 +23,8 @@ import __SStdioAdapter from '../../shared/SStdioAdapter';
  * @todo        Integrate notifications
  *
  * @example         js
- * import SBasicStdio from '@coffeekraken/s-stdio';
- * const terminal = new SBasicStdio(mySource);
+ * import { __SStdioBasicAdapter } from '@coffeekraken/s-stdio';
+ * const terminal = new __SStdioBasicAdapter();
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -101,6 +102,11 @@ export default class SStdioBasicAdapter
     log(logObj: ISLog) {
         // handle empty logs
         if (!logObj) return;
+
+        // filter out the verbose logs
+        if (logObj.verbose && !__SEnv.is('verbose')) {
+            return;
+        }
 
         const logger = logObj.logger ?? _nativeConsole.log;
 

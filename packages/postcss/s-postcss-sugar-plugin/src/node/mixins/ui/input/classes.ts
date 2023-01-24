@@ -232,7 +232,7 @@ export default function ({
         */`,
             ).code(
                 [
-                    `${cls} {`,
+                    `${cls}:not(.s-bare) {`,
                     ` @sugar.ui.input($lnf: ${lnf}, $scope: lnf);`,
                     `}`,
                 ].join('\n'),

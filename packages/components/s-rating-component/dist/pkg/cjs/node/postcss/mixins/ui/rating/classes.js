@@ -47,7 +47,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code(`
-            .s-rating[lnf="default"] {
+            .s-rating[lnf="default"]:not(.s-bare) {
                 @sugar.ui.rating($scope: lnf);
             }`, {
             type: 'CssClass',

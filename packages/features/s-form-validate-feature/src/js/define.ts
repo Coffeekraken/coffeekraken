@@ -6,7 +6,7 @@ export default function define(
     name = 's-form-validate',
 ) {
     __SFormValidateFeature.define(name, __SFormValidateFeature, {
-        mountWhen: 'interact',
+        mountWhen: 'inViewport',
         ...props,
     });
 }

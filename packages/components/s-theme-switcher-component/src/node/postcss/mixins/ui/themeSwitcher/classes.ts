@@ -70,7 +70,7 @@ export default function ({
         */`,
         ).code(
             `
-            .s-theme-switcher[lnf="default"] {
+            .s-theme-switcher[lnf="default"]:not(.s-bare) {
                 @sugar.ui.themeSwitcher($scope: lnf);
             }`,
             {

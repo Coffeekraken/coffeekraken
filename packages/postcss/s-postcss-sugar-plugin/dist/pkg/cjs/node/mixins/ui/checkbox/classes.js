@@ -212,7 +212,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `).code(`
-        .${cls} {
+        .${cls}:not(.s-bare) {
             @sugar.ui.checkbox($lnf: ${lnf}, $scope: lnf);
         }
         `, {

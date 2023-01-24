@@ -70,7 +70,7 @@ export default function ({
         */`,
         ).code(
             `
-            .s-slider[lnf*="default"] {
+            .s-slider[lnf*="default"]:not(.s-bare) {
                 @sugar.ui.slider($scope: lnf);
             }
             `,

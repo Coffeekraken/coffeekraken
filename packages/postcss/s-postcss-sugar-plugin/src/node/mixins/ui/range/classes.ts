@@ -276,7 +276,7 @@ export default function ({
        `,
             ).code(
                 `
-            .${cls} {
+            .${cls}:not(.s-bare) {
                 @sugar.ui.range($lnf: ${lnf}, $scope: lnf);
             }
             `,

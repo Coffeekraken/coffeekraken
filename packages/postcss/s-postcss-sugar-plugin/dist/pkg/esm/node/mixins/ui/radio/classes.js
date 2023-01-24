@@ -206,7 +206,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `).code(`
-            .${cls} {
+            .${cls}:not(.s-bare) {
                 @sugar.ui.radio($lnf: ${lnf}, $scope: lnf);
             }
             `, {

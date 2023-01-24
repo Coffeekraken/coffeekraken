@@ -78,7 +78,7 @@ export default function ({
     if (finalParams.scope.includes('bare')) {
         vars.code(
             `
-                .s-menu {
+                .s-menu:not(.s-bare) {
                     @sugar.ui.menu($scope: bare, $type: ${finalParams.defaultType});
                 }
             `,
@@ -112,7 +112,7 @@ export default function ({
         */`,
         ).code(
             `
-            .s-menu {
+            .s-menu:not(.s-bare) {
                 @sugar.ui.menu($scope: lnf, $lnf: ${finalParams.defaultLnf}, $type: ${finalParams.defaultType});
             }`,
             {

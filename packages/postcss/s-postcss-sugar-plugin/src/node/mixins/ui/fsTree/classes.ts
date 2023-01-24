@@ -251,7 +251,7 @@ export default function ({
            `,
         ).code(
             `
-            .s-fs-tree {
+            .s-fs-tree:not(.s-bare) {
                 @sugar.ui.fsTree($scope: lnf);
             }
         `,

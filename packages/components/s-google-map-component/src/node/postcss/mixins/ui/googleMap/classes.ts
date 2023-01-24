@@ -70,7 +70,7 @@ export default function ({
         */`,
         ).code(
             `
-            .s-google-map[lnf="default"] {
+            .s-google-map[lnf="default"]:not(.s-bare) {
                 @sugar.ui.googleMap($scope: lnf);
             }`,
             {

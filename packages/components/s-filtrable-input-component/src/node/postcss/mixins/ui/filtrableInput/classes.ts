@@ -68,7 +68,7 @@ export default function ({
         */`,
     ).code(
         `
-                [lnf="default"] > .s-filtrable-input {
+                [lnf="default"]:not(.s-bare) > .s-filtrable-input {
                     @sugar.ui.filtrableInput($style: solid, $scope: lnf);
                 }`,
         {

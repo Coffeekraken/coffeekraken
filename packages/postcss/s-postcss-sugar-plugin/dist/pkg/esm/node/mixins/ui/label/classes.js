@@ -143,7 +143,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         }
         if (finalParams.scope.includes('lnf')) {
             vars.code(() => `
-                .${cls.replace(':', '--')} {
+                .${cls.replace(':', '--')}:not(.s-bare) {
                     @sugar.ui.label($lnf: ${lnf}, $scope: lnf);
                 } 
             `, {

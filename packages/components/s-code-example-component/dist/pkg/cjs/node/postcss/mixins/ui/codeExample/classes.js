@@ -50,7 +50,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             * 
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-        */`).code(`.s-code-example[lnf="default"] {
+        */`).code(`.s-code-example[lnf="default"]:not(.s-bare) {
                 @sugar.ui.codeExample($scope: lnf);
             }`, {
             type: 'CssClass',
@@ -58,7 +58,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     }
     if (finalParams.scope.includes('theme')) {
         vars.code(`
-            .s-code-example {
+            .s-code-example:not(.s-bare) {
                 @sugar.highlightjs.theme;
             }
         `, {

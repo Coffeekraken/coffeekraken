@@ -15,11 +15,6 @@ class postcssUiDatetimePickerClassesInterface extends __SInterface {
                 default:
                     __STheme.get('ui.datetimePicker.defaultStyle') ?? 'solid',
             },
-            defaultColor: {
-                type: 'String',
-                values: Object.keys(__STheme.get('color')),
-                default: __STheme.get('ui.datetimePicker.defaultColor'),
-            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -35,7 +30,6 @@ class postcssUiDatetimePickerClassesInterface extends __SInterface {
 export interface IPostcssUiDatetimePickerInputClassesParams {
     styles: 'solid'[];
     defaultStyle: 'solid';
-    defaultColor: string;
     scope: ('bare' | 'lnf' | 'vr')[];
 }
 
@@ -55,7 +49,6 @@ export default function ({
     const finalParams: IPostcssUiDatetimePickerInputClassesParams = {
         styles: ['solid'],
         defaultStyle: 'solid',
-        defaultColor: 'main',
         scope: ['bare', 'lnf'],
         ...params,
     };
@@ -94,24 +87,12 @@ export default function ({
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
         ).code(
-            `.s-datetime-picker[lnf="default"] {
+            `.s-datetime-picker[lnf="default"]:not(.s-bare) {
                 @sugar.ui.datetimePicker($style: ${finalParams.defaultStyle}, $scope: lnf);
             }`,
             {
                 type: 'CssClass',
             },
-        );
-    }
-
-    // default color
-    if (finalParams.scope.includes('lnf')) {
-        vars.code(
-            () => `
-            .s-datetime-picker:not(.s-color) {
-                @sugar.color(${finalParams.defaultColor});
-            }
-        `,
-            { type: 'CssClass' },
         );
     }
 

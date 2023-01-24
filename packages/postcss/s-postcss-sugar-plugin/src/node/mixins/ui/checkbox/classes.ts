@@ -254,7 +254,7 @@ export default function ({
      `,
         ).code(
             `
-        .${cls} {
+        .${cls}:not(.s-bare) {
             @sugar.ui.checkbox($lnf: ${lnf}, $scope: lnf);
         }
         `,

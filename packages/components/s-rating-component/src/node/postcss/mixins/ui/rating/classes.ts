@@ -70,7 +70,7 @@ export default function ({
         */`,
         ).code(
             `
-            .s-rating[lnf="default"] {
+            .s-rating[lnf="default"]:not(.s-bare) {
                 @sugar.ui.rating($scope: lnf);
             }`,
             {

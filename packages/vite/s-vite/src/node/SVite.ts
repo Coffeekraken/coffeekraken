@@ -155,16 +155,23 @@ export default class SVite extends __SClass {
 
             // make sure it's the last emitted log for user convinience...
             setTimeout(() => {
-                console.log(
-                    [
+                console.log({
+                    value: [
                         `<yellow>Vite</yellow> server started <green>successfully</green> and is available at:`,
                     ].join('\n'),
-                );
-                console.log(
-                    [
+                });
+                console.log({
+                    type: __SLog.TYPE_SUCCESS,
+                    value: [
                         `<yellow>http://${config.server.host}</yellow>:<cyan>${config.server.port}</cyan>`,
                     ].join('\n'),
-                );
+                    notify: true,
+                    metas: {
+                        title: 'Coffeekraken',
+                        subtitle: 'Server ready at:',
+                        open: `http://${config.server.host}:${config.server.port}`,
+                    },
+                });
             }, 1000);
         });
     }

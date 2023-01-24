@@ -70,6 +70,6 @@ export default class STypescriptBuilder extends __SBuilder {
     _build(params: ISTypescriptBuilderBuildParams): Promise<ISTypescriptBuilderResult>;
     _tsProject: any;
     _createTsProgramIfNeeded(compilerOptions: __ts.CompilerOptions, packageRoot?: any): __tsMorph.Project;
-    _buildDeclarationFile(filePath: string, outputFilePath: string, packageRoot?: any): Promise<string>;
+    _buildDeclarationFile(filePath: string, outputFilePath: string, packageRoot?: any, silent?: boolean): Promise<string>;
     _buildFile(file: ISTypescriptBuilderFileToBuild, params: ISTypescriptBuilderBuildParams): Promise<ISTypescriptBuilderResultFile>;
 }

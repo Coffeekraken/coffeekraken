@@ -240,7 +240,7 @@ export default function ({
         */`,
         ).code(
             `
-        .s-avatar {
+        .s-avatar:not(.s-bare) {
             @sugar.ui.avatar($scope: 'lnf,notifications');
         }
     `,

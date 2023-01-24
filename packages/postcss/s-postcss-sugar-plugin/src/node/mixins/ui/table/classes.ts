@@ -293,7 +293,7 @@ export default function ({
         );
         vars.code(
             () => `
-                .s-table {
+                .s-table:not(.s-bare) {
                     @sugar.ui.table($scope: lnf);
                 }`,
             { type: 'CssClass' },

@@ -221,7 +221,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `).code(`
-            .s-dropdown {
+            .s-dropdown:not(.s-bare) {
                 @sugar.ui.dropdown($scope: lnf);
             }
             `, {

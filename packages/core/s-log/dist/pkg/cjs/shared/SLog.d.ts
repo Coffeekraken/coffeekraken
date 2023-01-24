@@ -11,15 +11,7 @@ export default class SLog {
     
     static TYPE_ERROR: ISLogType;
     
-    static TYPE_VERBOSE: ISLogType;
-    
-    static TYPE_VERBOSER: ISLogType;
-    
-    static TYPE_DECORATOR: ISLogType;
-    
-    static TYPE_SUMMARY: ISLogType;
-    
-    static TYPE_CHILD_PROCESS: ISLogType;
+    static TYPE_SUCCESS: ISLogType;
     
     static TYPES: ISLogType[];
     
@@ -32,8 +24,6 @@ export default class SLog {
     static PRESET_ERROR: ISLogType[];
     
     static PRESET_VERBOSE: ISLogType[];
-    
-    static PRESET_VERBOSER: ISLogType[];
     
     static PRESETS: String[];
     
@@ -54,7 +44,13 @@ export default class SLog {
     get value(): any;
     set value(value: any);
     
+    get metas(): any;
+    set metas(value: any);
+    
     get type(): string;
+    
+    get group(): string;
+    set group(value: string);
     
     get active(): boolean;
     
@@ -72,4 +68,12 @@ export default class SLog {
     get temp(): boolean;
     
     get as(): string;
+    
+    get verbose(): boolean;
+    set verbose(value: boolean);
+    
+    get notify(): boolean;
+    set notify(value: boolean);
+    
+    get logger(): Function;
 }

@@ -204,7 +204,7 @@ export default function ({
         if (finalParams.scope.includes('lnf')) {
             vars.code(
                 () => `
-                .${cls.replace(':', '--')} {
+                .${cls.replace(':', '--')}:not(.s-bare) {
                     @sugar.ui.label($lnf: ${lnf}, $scope: lnf);
                 } 
             `,

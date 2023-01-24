@@ -165,7 +165,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
               * </div>
             */
            `).code(`
-          .s-tabs {
+          .s-tabs:not(.s-bare) {
             @sugar.ui.tabs($scope: lnf);
           }
         `, { type: 'CssClass' });

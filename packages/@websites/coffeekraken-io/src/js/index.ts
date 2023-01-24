@@ -50,7 +50,6 @@ const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
 
 if (import.meta.hot) {
     import.meta.hot.on('sugar.update.css', (data) => {
-        console.log('RELOAD', data);
         // perform custom update
         __reloadStylesheets();
     });

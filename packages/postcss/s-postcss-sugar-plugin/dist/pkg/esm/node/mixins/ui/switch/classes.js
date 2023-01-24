@@ -205,7 +205,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
            `).code(`
-            .${cls.replace('\n', '--')} {
+            .${cls.replace('\n', '--')}:not(.s-bare) {
                 @sugar.ui.switch($lnf: ${lnf}, $scope: lnf);
             }
         `, { type: 'CssClass' });

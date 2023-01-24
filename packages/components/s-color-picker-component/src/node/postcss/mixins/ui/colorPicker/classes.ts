@@ -69,7 +69,7 @@ export default function ({
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
         ).code(
-            `.s-color-picker[lnf="default"] {
+            `.s-color-picker[lnf="default"]:not(.s-bare) {
                 @sugar.ui.colorPicker($scope: lnf);
             }`,
             {

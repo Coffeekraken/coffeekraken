@@ -77,7 +77,7 @@ export default function ({
         */`,
         ).code(
             `
-            .s-specs-editor[lnf="default"] {
+            .s-specs-editor[lnf="default"]:not(.s-bare) {
                 @sugar.ui.specsEditor($style: ${finalParams.defaultStyle}, $scope: lnf);
             }
             `,

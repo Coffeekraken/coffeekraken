@@ -149,7 +149,7 @@ export default function ({
         */`,
         ).code(
             `
-            .s-card {
+            .s-card:not(.s-bare) {
                 @sugar.ui.card($scope: lnf);
             }`,
             {

@@ -41,8 +41,6 @@ import ISLog from './ISLog';
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 
-const _nativeLog = console.log;
-
 export default class SLog {
     /**
      * @name            TYPE_LOG
@@ -93,64 +91,16 @@ export default class SLog {
     static TYPE_ERROR: ISLogType = 'error';
 
     /**
-     * @name            TYPE_VERBOSE
+     * @name           TYPE_SUCCESS
      * @type            ISLogType
      * @static
      *
-     * This static constant tells a log that it is of type "VERBOSE"
+     * This static constant tells a log that it is of type "SUCCESS"
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static TYPE_VERBOSE: ISLogType = 'verbose';
-
-    /**
-     * @name            TYPE_VERBOSER
-     * @type            ISLogType
-     * @static
-     *
-     * This static constant tells a log that it is of type "VERBOSER"
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static TYPE_VERBOSER: ISLogType = 'verboser';
-
-    /**
-     * @name            TYPE_DECORATOR
-     * @type            ISLogType
-     * @static
-     *
-     * This static constant tells a log that it is of type "DECORATOR"
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static TYPE_DECORATOR: ISLogType = 'decorator';
-
-    /**
-     * @name            TYPE_SUMMARY
-     * @type            ISLogType
-     * @static
-     *
-     * This static constant tells a log that it is of type "SUMMARY"
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static TYPE_SUMMARY: ISLogType = 'summary';
-
-    /**
-     * @name            TYPE_CHILD_PROCESS
-     * @type            ISLogType
-     * @static
-     *
-     * This static constant tells a log that it is of type "CHILD_PROCESS"
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static TYPE_CHILD_PROCESS: ISLogType = 'child_process';
+    static TYPE_SUCCESS: ISLogType = 'success';
 
     /**
      * @name            TYPES
@@ -167,11 +117,7 @@ export default class SLog {
         SLog.TYPE_INFO,
         SLog.TYPE_WARN,
         SLog.TYPE_ERROR,
-        SLog.TYPE_VERBOSE,
-        SLog.TYPE_VERBOSER,
-        SLog.TYPE_SUMMARY,
-        SLog.TYPE_DECORATOR,
-        SLog.TYPE_CHILD_PROCESS,
+        SLog.TYPE_SUCCESS,
     ];
 
     /**
@@ -196,8 +142,7 @@ export default class SLog {
      * - INFO
      * - WARN
      * - ERROR
-     * - DECORATOR
-     * - SUMMARY
+     * - SUCCESS
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -207,9 +152,7 @@ export default class SLog {
         SLog.TYPE_INFO,
         SLog.TYPE_WARN,
         SLog.TYPE_ERROR,
-        SLog.TYPE_SUMMARY,
-        SLog.TYPE_DECORATOR,
-        SLog.TYPE_CHILD_PROCESS,
+        SLog.TYPE_SUCCESS,
     ];
 
     /**
@@ -224,11 +167,7 @@ export default class SLog {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static PRESET_WARN: ISLogType[] = [
-        SLog.TYPE_WARN,
-        SLog.TYPE_ERROR,
-        SLog.TYPE_CHILD_PROCESS,
-    ];
+    static PRESET_WARN: ISLogType[] = [SLog.TYPE_WARN, SLog.TYPE_ERROR];
 
     /**
      * @name            PRESET_ERROR
@@ -241,10 +180,7 @@ export default class SLog {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static PRESET_ERROR: ISLogType[] = [
-        SLog.TYPE_ERROR,
-        SLog.TYPE_CHILD_PROCESS,
-    ];
+    static PRESET_ERROR: ISLogType[] = [SLog.TYPE_ERROR];
 
     /**
      * @name            PRESET_VERBOSE
@@ -256,9 +192,7 @@ export default class SLog {
      * - INFO
      * - WARN
      * - ERROR
-     * - VERBOSE
-     * - DECORATOR
-     * - SUMMARY
+     * - SUCCESS
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -268,40 +202,7 @@ export default class SLog {
         SLog.TYPE_INFO,
         SLog.TYPE_WARN,
         SLog.TYPE_ERROR,
-        SLog.TYPE_VERBOSE,
-        SLog.TYPE_DECORATOR,
-        SLog.TYPE_SUMMARY,
-        SLog.TYPE_CHILD_PROCESS,
-    ];
-
-    /**
-     * @name            PRESET_VERBOSER
-     * @type            ISLogType[]
-     * @static
-     *
-     * This static constant define a log preset called "verboser" that display:
-     * - LOG
-     * - INFO
-     * - WARN
-     * - ERROR
-     * - VERBOSE
-     * - VERBOSER
-     * - DECORATOR
-     * - SUMMARY
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static PRESET_VERBOSER: ISLogType[] = [
-        SLog.TYPE_LOG,
-        SLog.TYPE_INFO,
-        SLog.TYPE_WARN,
-        SLog.TYPE_ERROR,
-        SLog.TYPE_VERBOSE,
-        SLog.TYPE_VERBOSER,
-        SLog.TYPE_DECORATOR,
-        SLog.TYPE_SUMMARY,
-        SLog.TYPE_CHILD_PROCESS,
+        SLog.TYPE_SUCCESS,
     ];
 
     /**
@@ -314,14 +215,7 @@ export default class SLog {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static PRESETS: String[] = [
-        'silent',
-        'default',
-        'warn',
-        'error',
-        'verbose',
-        'verboser',
-    ];
+    static PRESETS: String[] = ['silent', 'default', 'warn', 'error'];
 
     /**
      * @name            filter
@@ -442,6 +336,9 @@ export default class SLog {
                 timestamp: Date.now(),
                 decorators: true,
                 time: false,
+                verbose: false,
+                notify: false,
+                metas: {},
             },
             // @ts-ignore
             this.constructor._defaultLogObj,
@@ -466,6 +363,24 @@ export default class SLog {
     }
     public set value(value: any) {
         this._logObj.value = value;
+    }
+
+    /**
+     * @name        metas
+     * @type        Any
+     * @get
+     * @set
+     *
+     * Access the "metas" property of the SLog object
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    public get metas(): any {
+        return this._logObj.metas ?? {};
+    }
+    public set metas(value: any) {
+        this._logObj.metas = value;
     }
 
     /**
@@ -501,7 +416,9 @@ export default class SLog {
     }
     set group(value) {
         if (typeof value !== 'string') {
-            throw new Error(`<red>[SLog]</red> The "<cyan>group</cyan>" property MUST be a string. You've passed a "${typeof value}"...`);
+            throw new Error(
+                `<red>[SLog]</red> The "<cyan>group</cyan>" property MUST be a string. You've passed a "${typeof value}"...`,
+            );
         }
         this._logObj.group = value;
     }
@@ -659,6 +576,42 @@ export default class SLog {
     }
 
     /**
+     * @name        verbose
+     * @type        Boolean
+     * @get
+     *
+     * Access the "verbose" property of the SLog object
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get verbose(): boolean {
+        // @ts-ignore
+        return this._logObj.verbose;
+    }
+    set verbose(value: boolean) {
+        this._logObj.verbose = value;
+    }
+
+    /**
+     * @name        notify
+     * @type        Boolean
+     * @get
+     *
+     * Access the "notify" property of the SLog object
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get notify(): boolean {
+        // @ts-ignore
+        return this._logObj.notify;
+    }
+    set notify(value: boolean) {
+        this._logObj.notify = value;
+    }
+
+    /**
      * @name        logger
      * @type        Function
      * @get
@@ -673,5 +626,4 @@ export default class SLog {
         // @ts-ignore
         return this._logObj.logger;
     }
-
 }

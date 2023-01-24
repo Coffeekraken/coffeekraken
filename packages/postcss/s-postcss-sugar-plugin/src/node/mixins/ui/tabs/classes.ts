@@ -200,7 +200,7 @@ export default function ({
            `,
         ).code(
             `
-          .s-tabs {
+          .s-tabs:not(.s-bare) {
             @sugar.ui.tabs($scope: lnf);
           }
         `,

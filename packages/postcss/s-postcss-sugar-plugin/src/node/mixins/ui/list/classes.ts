@@ -232,7 +232,9 @@ export default function ({
            `,
             ).code(
                 `
-            .s-list${finalParams.defaultLnf === lnf ? '' : `--${lnf}`} {
+            .s-list${
+                finalParams.defaultLnf === lnf ? '' : `--${lnf}`
+            }:not(.s-bare) {
                 @sugar.ui.list($scope: lnf);
             }
         `,

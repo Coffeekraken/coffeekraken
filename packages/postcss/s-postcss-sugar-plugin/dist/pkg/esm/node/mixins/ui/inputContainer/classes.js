@@ -173,7 +173,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     }
     if (finalParams.scope.includes('lnf')) {
         vars.code(`
-        .s-input-container--group {
+        .s-input-container--group:not(.s-bare) {
             @sugar.ui.inputContainer($lnf: group, $scope: lnf);
         }
         `, {
@@ -212,7 +212,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     }
     if (finalParams.scope.includes('lnf')) {
         vars.code(`
-        .s-input-container--addon {
+        .s-input-container--addon:not(.s-bare) {
             @sugar.ui.inputContainer($lnf: addon, $scope: lnf);
         }
         `, {

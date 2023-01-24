@@ -343,7 +343,9 @@ export default function ({
             );
             vars.code(
                 () => `
-                .s-tooltip${finalParams.defaultLnf === lnf ? '' : `--${lnf}`} {
+                .s-tooltip${
+                    finalParams.defaultLnf === lnf ? '' : `--${lnf}`
+                }:not(.s-bare) {
                     @sugar.ui.tooltip($lnf: ${lnf}, $scope: lnf);
                 }
             `,

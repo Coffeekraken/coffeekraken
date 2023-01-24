@@ -73,7 +73,7 @@ export default function ({
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
         ).code(
-            `.s-code-example[lnf="default"] {
+            `.s-code-example[lnf="default"]:not(.s-bare) {
                 @sugar.ui.codeExample($scope: lnf);
             }`,
             {
@@ -85,7 +85,7 @@ export default function ({
     if (finalParams.scope.includes('theme')) {
         vars.code(
             `
-            .s-code-example {
+            .s-code-example:not(.s-bare) {
                 @sugar.highlightjs.theme;
             }
         `,

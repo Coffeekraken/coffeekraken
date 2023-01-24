@@ -256,7 +256,7 @@ export default function ({
        `,
         ).code(
             `
-            .s-dropdown {
+            .s-dropdown:not(.s-bare) {
                 @sugar.ui.dropdown($scope: lnf);
             }
             `,

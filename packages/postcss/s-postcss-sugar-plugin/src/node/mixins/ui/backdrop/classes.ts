@@ -134,7 +134,7 @@ export default function ({
        `,
         ).code(
             `
-            .s-backdrop {
+            .s-backdrop:not(.s-bare) {
                 @sugar.ui.backdrop($scope: lnf);
             } `,
             { type: 'CssClass' },

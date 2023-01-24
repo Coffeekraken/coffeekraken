@@ -19,7 +19,14 @@ export default class SStdioConsoleSource
         super(settings);
 
         const nativeConsole = {};
-        for (let key of ['log', 'error', 'warn', 'verbose']) {
+        for (let key of [
+            'log',
+            'error',
+            'warn',
+            'success',
+            'verbose',
+            'notify',
+        ]) {
             nativeConsole[key] = console[key] ?? nativeConsole.log;
             console[key] = (...args) => {
                 const e = new Error();
@@ -46,9 +53,12 @@ export default class SStdioConsoleSource
                 args = args.map((log) => {
                     if (!log) return;
                     return new __SLog({
-                        type: __SLog[`TYPE_${key.toUpperCase()}`],
+                        type: log.type ?? __SLog.TYPE_LOG,
                         value: log.value ?? log,
                         group: log.group ?? group,
+                        notify: key === 'notify' || log.notify,
+                        verbose: key === 'verbose' || log.verbose,
+                        metas: log.metas ?? {},
                         // @ts-ignore
                         logger: nativeConsole[key],
                     });

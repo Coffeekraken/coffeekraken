@@ -260,7 +260,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`);
         vars.code(() => `
-                .s-table {
+                .s-table:not(.s-bare) {
                     @sugar.ui.table($scope: lnf);
                 }`, { type: 'CssClass' });
     }

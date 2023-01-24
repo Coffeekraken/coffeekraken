@@ -45,7 +45,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code(`
-                [lnf="default"] > .s-filtrable-input {
+                [lnf="default"]:not(.s-bare) > .s-filtrable-input {
                     @sugar.ui.filtrableInput($style: solid, $scope: lnf);
                 }`, {
         type: 'CssClass',

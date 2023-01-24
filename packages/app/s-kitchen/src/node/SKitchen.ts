@@ -385,7 +385,7 @@ class SKitchen extends __SClass {
                         i < recipeObj.requirements.commands.length;
                         i++
                     ) {
-                        console.log(
+                        console.verbose?.(
                             `<yellow>[requirements]</yellow> Checking for the "<magenta>${recipeObj.requirements.commands[i]}</magenta>" command to exists...`,
                         );
                         const version = await __isCommandExists(
@@ -397,7 +397,7 @@ class SKitchen extends __SClass {
                                 `<red>[requirements]</red> Sorry but the command "<yellow>${recipeObj.requirements.commands[i]}</yellow>" is required but it does not exists.`,
                             );
                         } else {
-                            console.log(
+                            console.verbose?.(
                                 `<green>[requirements]</green> Command "<magenta>${
                                     recipeObj.requirements.commands[i]
                                 }</magenta>" available in version <cyan>${__stripAnsi(

@@ -189,7 +189,7 @@ export default function ({
 `,
     ).code(
         `
-    .s-blockquote {
+    .s-blockquote:not(.s-bare) {
         @sugar.ui.blockquote($scope: lnf);
     } `,
         { type: 'CssClass' },

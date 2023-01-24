@@ -316,7 +316,7 @@ export default function ({
             );
             vars.code(
                 () => `
-                ${cls} {
+                ${cls}:not(.s-bare) {
                     @sugar.ui.select($lnf: ${lnf}, $scope: lnf);
                 }`,
                 { type: 'CssClass' },

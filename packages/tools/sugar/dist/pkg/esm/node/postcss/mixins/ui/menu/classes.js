@@ -46,7 +46,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     const vars = new CssVars();
     if (finalParams.scope.includes('bare')) {
         vars.code(`
-                .s-menu {
+                .s-menu:not(.s-bare) {
                     @sugar.ui.menu($scope: bare, $type: ${finalParams.defaultType});
                 }
             `, {
@@ -72,7 +72,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code(`
-            .s-menu {
+            .s-menu:not(.s-bare) {
                 @sugar.ui.menu($scope: lnf, $lnf: ${finalParams.defaultLnf}, $type: ${finalParams.defaultType});
             }`, {
             type: 'CssClass',

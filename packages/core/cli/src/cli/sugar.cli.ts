@@ -9,6 +9,7 @@ import __SStdio, {
     __SStdioBasicAdapter,
     __SStdioConsoleSource,
     __SStdioEventEmitterSource,
+    __SStdioNotificationAdapter,
 } from '@coffeekraken/s-stdio';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
@@ -411,7 +412,10 @@ export default class SSugarCli {
                         new __SStdioEventEmitterSource(this._eventEmitter),
                         new __SStdioConsoleSource(),
                     ],
-                    new __SStdioBasicAdapter(),
+                    [
+                        new __SStdioBasicAdapter(),
+                        new __SStdioNotificationAdapter(),
+                    ],
                 );
             }
         }

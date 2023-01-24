@@ -55,7 +55,7 @@ export default async function ({
 
     if (!sharedData.fontawesomeBaseRule) {
         sharedData.fontawesomeBaseRule = postcssApi.rule({
-            selector: '',
+            selector: '.s-icon--s',
             nodes: postcssApi.parse(`
                 -webkit-font-smoothing: antialiased;
                 display: inline-block;
@@ -156,7 +156,7 @@ export default async function ({
     }
     if (!sharedData.fontawesomeStyleRules[finalParams.style]) {
         sharedData.fontawesomeStyleRules[finalParams.style] = postcssApi.rule({
-            selector: '',
+            selector: '.s-icon--s',
             nodes: postcssApi.parse(`
                 font-family: "${fontFamily}";
                 font-weight: ${fontWeight[finalParams.style]};

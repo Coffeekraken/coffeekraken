@@ -195,7 +195,9 @@ export default function ({
         */`,
             ).code(
                 `
-            .s-badge${lnf === finalParams.defaultLnf ? '' : `--${lnf}`} {
+            .s-badge${
+                lnf === finalParams.defaultLnf ? '' : `--${lnf}`
+            }:not(.s-bare) {
                 @sugar.ui.badge($lnf: ${lnf}, $scope: lnf);
             }
         `,

@@ -213,7 +213,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
            `).code(`
-            .s-fs-tree {
+            .s-fs-tree:not(.s-bare) {
                 @sugar.ui.fsTree($scope: lnf);
             }
         `, {

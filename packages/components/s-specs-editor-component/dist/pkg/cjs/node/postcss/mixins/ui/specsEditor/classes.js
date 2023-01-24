@@ -47,7 +47,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code(`
-            .s-specs-editor[lnf="default"] {
+            .s-specs-editor[lnf="default"]:not(.s-bare) {
                 @sugar.ui.specsEditor($style: ${finalParams.defaultStyle}, $scope: lnf);
             }
             `, {

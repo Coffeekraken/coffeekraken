@@ -215,7 +215,7 @@ export default function ({
        `,
             ).code(
                 `
-        .${cls} {
+        .${cls}:not(.s-bare) {
             @sugar.ui.button($lnf: ${lnf}, $scope: lnf);
         }`,
                 {

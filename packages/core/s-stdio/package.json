@@ -13,7 +13,8 @@
         "@coffeekraken/s-log": "^2.0.0-alpha.20",
         "@coffeekraken/s-promise": "^2.0.0-alpha.20",
         "@coffeekraken/sugar": "^2.0.0-alpha.20",
-        "enquirer": "^2.3.6"
+        "enquirer": "^2.3.6",
+        "node-notifier": "^10.0.1"
     },
     "main": "dist/pkg/cjs/js/exports.js",
     "module": "dist/pkg/esm/js/exports.js",

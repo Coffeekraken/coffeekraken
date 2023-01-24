@@ -122,7 +122,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code(`
-            .s-card {
+            .s-card:not(.s-bare) {
                 @sugar.ui.card($scope: lnf);
             }`, {
             type: 'CssClass',

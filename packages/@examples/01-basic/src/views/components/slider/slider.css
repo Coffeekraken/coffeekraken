@@ -1,6 +1,5 @@
 .section-slider {
-    perspective: 800px;
-    margin-block: -50px;
+    margin-block: -20px;
     position: relative;
     z-index: 10;
 
@@ -11,8 +10,11 @@
     }
 }
 
-.s-slider {
-    transform: rotateY(-3deg);
+.s-slider_root {
+    /* perspective: 800px;
+    .s-slider_slides-wrapper {
+        transform: rotateY(-3deg);
+    } */
 
     .s-slider_slide {
         /* width: 1200px !important; */

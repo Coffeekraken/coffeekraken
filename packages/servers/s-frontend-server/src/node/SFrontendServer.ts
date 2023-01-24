@@ -467,20 +467,18 @@ export default class SFrontendServer extends __SClass {
             app.set('port', finalParams.port);
 
             app.listen(app.get('port'), function () {
-                if (__SEnv.is('verbose')) {
-                    console.log(
-                        `<yellow>[corsProxy]</yellow> Cors proxy server running on port <cyan>${app.get(
-                            'port',
-                        )}</cyan>...`,
-                    );
-                    console.log(
-                        `<yellow>[corsProxy]</yellow> Call "<cyan>http://${__SSugarConfig.get(
-                            'frontendServer.hostname',
-                        )}:${finalParams.port}</cyan>" with the "<magenta>${
-                            finalParams.targetUrlHeaderName
-                        }</magenta>" header to use it...`,
-                    );
-                }
+                console.verbose?.(
+                    `<yellow>[corsProxy]</yellow> Cors proxy server running on port <cyan>${app.get(
+                        'port',
+                    )}</cyan>...`,
+                );
+                console.verbose?.(
+                    `<yellow>[corsProxy]</yellow> Call "<cyan>http://${__SSugarConfig.get(
+                        'frontendServer.hostname',
+                    )}:${finalParams.port}</cyan>" with the "<magenta>${
+                        finalParams.targetUrlHeaderName
+                    }</magenta>" header to use it...`,
+                );
             });
         });
     }
@@ -665,15 +663,13 @@ export default class SFrontendServer extends __SClass {
             }
 
             slugs.forEach((slug) => {
-                if (__SEnv.is('verbose')) {
-                    console.log(
-                        `<yellow>[route]</yellow> <cyan>${slug}</cyan> route registered <green>successfully</green> from ${
-                            pageFile
-                                ? `<magenta>${pageFile.relPath}</magenta>`
-                                : `<magenta>config.pages.${configId}</magenta>`
-                        }`,
-                    );
-                }
+                console.verbose?.(
+                    `<yellow>[route]</yellow> <cyan>${slug}</cyan> route registered <green>successfully</green> from ${
+                        pageFile
+                            ? `<magenta>${pageFile.relPath}</magenta>`
+                            : `<magenta>config.pages.${configId}</magenta>`
+                    }`,
+                );
 
                 // register the route only once by slug
                 if (!this._getPageConfigBySlug(slug)) {

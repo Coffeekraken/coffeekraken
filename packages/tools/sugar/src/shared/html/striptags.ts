@@ -31,5 +31,6 @@ import __stripTags from 'striptags';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function stripTags(html, allowedTags = '', tagReplacement = '') {
-    return __stripTags(html, allowedTags, tagReplacement);
+    let res = __stripTags(html, allowedTags, tagReplacement);
+    return res;
 }

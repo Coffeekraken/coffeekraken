@@ -285,13 +285,18 @@ export default class SActivateFeature extends __SFeature {
         }
 
         // restore the state
-        if (this.props.saveState) {
-            this._restoreState();
-        } else if (this.props.active) {
-            this.activate();
-        } else if (this.props.group && this._$groupElements[0] === this.node) {
-            this.activate();
-        }
+        setTimeout(() => {
+            if (this.props.saveState) {
+                this._restoreState();
+            } else if (this.props.active) {
+                this.activate();
+            } else if (
+                this.props.group &&
+                this._$groupElements[0] === this.node
+            ) {
+                this.activate();
+            }
+        });
     }
 
     /**
@@ -364,7 +369,7 @@ export default class SActivateFeature extends __SFeature {
         // protect from activating multiple times
         if (!finalParams.force && this.isActive()) return;
 
-        setTimeout(() => {
+        const activateFn = () => {
             // history
             if (this.props.history && this._hrefSelector) {
                 document.location.hash = this._hrefSelector;
@@ -426,7 +431,13 @@ export default class SActivateFeature extends __SFeature {
                     }),
                 );
             });
-        }, this.props.activateTimeout);
+        };
+
+        if (this.props.activateTimeout) {
+            setTimeout(activateFn, this.props.activateTimeout);
+        } else {
+            activateFn();
+        }
     }
 
     /**
@@ -449,7 +460,7 @@ export default class SActivateFeature extends __SFeature {
         // protect from unactivating multiple times
         if (!finalParams.force && !this.isActive()) return;
 
-        this._unactivateTimeout = setTimeout(() => {
+        const unActivateFn = () => {
             this.state.active = false;
             this.props.active = false;
 
@@ -469,7 +480,16 @@ export default class SActivateFeature extends __SFeature {
                     }),
                 );
             });
-        }, this.props.unactivateTimeout);
+        };
+
+        if (this.props.unactivateTimeout) {
+            this._unactivateTimeout = setTimeout(
+                unActivateFn,
+                this.props.unactivateTimeout,
+            );
+        } else {
+            unActivateFn();
+        }
     }
 }
 

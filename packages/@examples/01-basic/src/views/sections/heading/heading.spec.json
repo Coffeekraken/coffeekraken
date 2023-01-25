@@ -1,33 +1,33 @@
 {
-    "type": "Section",
-    "title": "Heading",
-    "description": "Heading section",
-    "props": {
-        "bkg": {
-            "type": "Image",
-            "Title": "Background image",
-            "description": "Background image",
-            "required": true
-        },
-        "title": {
-            "type": "Text",
-            "title": "Title",
-            "description": "Heading title",
-            "required": true
-        },
-        "text": {
-            "type": "Wysiwyg",
-            "title": "Text",
-            "description": "Heading text",
-            "required": true
-        },
-        "image": "@sugar.views.props.image",
-        "cta": {
-            "extends": "sugar.views.components.cta",
-            "title": "Heading Cta",
-            "required": true
-        },
-        "margin": "@sugar.views.props.margin",
-        "padding": "@sugar.views.props.padding"
-    }
+  "type": "Section",
+  "title": "Heading",
+  "description": "Heading section",
+  "props": {
+    "bkg": {
+      "type": "Image",
+      "Title": "Background image",
+      "description": "Background image",
+      "required": true
+    },
+    "title": {
+      "type": "Text",
+      "title": "Title",
+      "description": "Heading title",
+      "required": true
+    },
+    "text": {
+      "type": "Wysiwyg",
+      "title": "Text",
+      "description": "Heading text",
+      "required": true
+    },
+    "image": "@sugar.views.props.image",
+    "cta": {
+      "extends": "sugar.views.components.cta",
+      "title": "Heading Cta",
+      "required": true
+    },
+    "margin": "@sugar.views.props.margin",
+    "padding": "@sugar.views.props.padding"
+  }
 }

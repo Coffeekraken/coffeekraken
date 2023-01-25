@@ -17,21 +17,22 @@
                             {{ title|raw }}
                         </h1>
                     {% endif %}
-
                     {% if text %}
-                        <p class="s-typo:p">
+                        <div class="s-rhythm:vertical">
                             {{ text|raw }}
-                        </p>
+                        </div>
                     {% endif %}
                     {% if cta %}
                         <div class="s-mbs:40">
                             {% include 'sugar/components/cta/cta.twig' with cta %}
                         </div>
                     {% endif %}
-                    {# <pre>
-                    {{ readSpec('views.bare.layout') }}
-                    </pre> #}
                 </div>
+
+                {# <pre>
+                {{ dump(readSpec('views.sections.heading')) }}
+                </pre> #}
+                    
             </div>
             <div>
                 <div s-appear in="right" delay="600">

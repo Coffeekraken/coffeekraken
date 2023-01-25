@@ -302,7 +302,7 @@ class SKitchen extends __SClass {
                         value: `Starting <yellow>${actionName}</yellow> action with command:`,
                     });
                     console.log({
-                        group: actionName,
+                        group: 'SKitchen',
                         value: `<grey>$</grey> <cyan>${finalCommand}</cyan>`,
                     });
                     const pro = yield __SProcess.from(finalCommand, {

@@ -228,7 +228,7 @@ export default (api) => {
                 maxWidth: '55ch',
             },
             rhythmVertical: {
-                marginBottom: 50,
+                marginBottom: 40,
             },
         },
         /**
@@ -256,7 +256,7 @@ export default (api) => {
                 },
             },
             rhythmVertical: {
-                marginBottom: 50,
+                marginBottom: 40,
             },
         },
         /**

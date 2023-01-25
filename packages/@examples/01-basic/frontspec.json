@@ -9,7 +9,7 @@
             }
         },
         "metas": {
-            "backgroundColor": "rgba(44,50,50,1)"
+            "backgroundColor": "#2c323a"
         }
     },
     "metas": {
@@ -30,7 +30,7 @@
             "url": "",
             "image": "https://cdnv2.coffeekraken.io/coffeekraken-og.png"
         },
-        "backgroundColor": "rgba(44,50,50,1)"
+        "backgroundColor": "#2c323a"
     },
     "assets": {
         "dev": {
@@ -179,7 +179,7 @@
         "default": "1rem"
     },
     "lod": {
-        "enabled": true,
+        "enabled": false,
         "defaultLevel": 3,
         "botLevel": 1,
         "levels": {

@@ -235,7 +235,7 @@ exports.default = (api) => {
                 maxWidth: '55ch',
             },
             rhythmVertical: {
-                marginBottom: 50,
+                marginBottom: 40,
             },
         },
         /**
@@ -263,7 +263,7 @@ exports.default = (api) => {
                 },
             },
             rhythmVertical: {
-                marginBottom: 50,
+                marginBottom: 40,
             },
         },
         /**
